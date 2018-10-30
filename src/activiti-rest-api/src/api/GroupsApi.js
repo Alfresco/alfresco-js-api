@@ -75,7 +75,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/groups', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -117,7 +117,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/groups/{groupId}/users', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

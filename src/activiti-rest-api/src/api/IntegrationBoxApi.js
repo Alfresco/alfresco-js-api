@@ -71,7 +71,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -119,7 +119,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -161,7 +161,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -196,7 +196,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/status', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -237,7 +237,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/files', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -279,7 +279,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -327,7 +327,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

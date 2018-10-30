@@ -71,7 +71,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -106,7 +106,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -149,7 +149,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -198,7 +198,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -247,7 +247,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

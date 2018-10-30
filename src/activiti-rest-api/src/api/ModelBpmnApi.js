@@ -77,7 +77,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -119,7 +119,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{processModelId}/bpmn20', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

@@ -84,14 +84,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         formParams = formParams || {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json, 'multipart/form-data'];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json', 'multipart/form-data'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -131,14 +131,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/copy', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -169,15 +169,15 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -209,14 +209,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -244,14 +244,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/deleted-nodes', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -285,15 +285,15 @@ export class NodesApi extends BaseApi {
         };
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = 'Binary';
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -329,14 +329,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -370,15 +370,15 @@ export class NodesApi extends BaseApi {
         };
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -424,14 +424,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -472,14 +472,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/parents', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -521,14 +521,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/secondary-children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -563,14 +563,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/sources', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -606,14 +606,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/targets', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -653,14 +653,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/lock', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -693,14 +693,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/unlock', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -739,14 +739,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/move', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -772,15 +772,15 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -807,14 +807,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}/restore', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -859,14 +859,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/octet-stream'];
-        let accepts = [this.apiClient.contentTypes.json];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/content', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -898,14 +898,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/octet-stream'];
-        let accepts = [this.apiClient.contentTypes.json];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}/content', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -944,14 +944,14 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{nodeId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 };

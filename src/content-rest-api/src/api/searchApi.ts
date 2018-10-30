@@ -63,13 +63,13 @@ export class SearchApi extends BaseApi {
         var formParams = {};
 
         var authNames = ['basicAuth'];
-        var contentTypes = [this.apiClient.contentTypes.json];
-        var accepts = [this.apiClient.contentTypes.json];
+        var contentTypes = ['application/json'];
+        var accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/search', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 }

@@ -61,14 +61,14 @@ export class VersionsApi extends BaseApi {
         let formParams = {};
 
         let authNames = [];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/versions/{versionId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -102,13 +102,13 @@ export class VersionsApi extends BaseApi {
         let formParams = {};
 
         let authNames = [];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/versions/{versionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -153,14 +153,14 @@ export class VersionsApi extends BaseApi {
         let formParams = {};
 
         let authNames = [];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/versions/{versionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -198,13 +198,13 @@ export class VersionsApi extends BaseApi {
         let formParams = {};
 
         let authNames = [];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/versions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -249,13 +249,13 @@ export class VersionsApi extends BaseApi {
         let formParams = {};
 
         let authNames = [];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/versions/{versionId}/revert', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 

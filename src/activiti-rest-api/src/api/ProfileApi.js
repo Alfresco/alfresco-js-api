@@ -69,7 +69,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile-password', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -105,7 +105,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile-picture', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -149,7 +149,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -191,7 +191,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -233,7 +233,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile-picture', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

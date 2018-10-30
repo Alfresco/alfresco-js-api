@@ -63,7 +63,7 @@ export class SecurityControlSettingsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = SecurityControlSettingEntry;
@@ -71,7 +71,7 @@ export class SecurityControlSettingsApi {
         return this.apiClient.callApi(
             '/security-control-settings/{securityControlSettingKey}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -103,7 +103,7 @@ export class SecurityControlSettingsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = SecurityControlSettingEntry;
@@ -111,7 +111,7 @@ export class SecurityControlSettingsApi {
         return this.apiClient.callApi(
             '/security-control-settings/{securityControlSettingKey}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 

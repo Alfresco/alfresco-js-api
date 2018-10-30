@@ -82,7 +82,7 @@ export class UnfiledContainersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json', 'multipart/form-data'];
         let accepts = ['application/json'];
         let returnType = UnfiledContainerAssociationPaging;
@@ -90,7 +90,7 @@ export class UnfiledContainersApi {
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -123,7 +123,7 @@ export class UnfiledContainersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = UnfiledContainerEntry;
@@ -131,7 +131,7 @@ export class UnfiledContainersApi {
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -172,7 +172,7 @@ export class UnfiledContainersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = UnfiledContainerAssociationPaging;
@@ -180,7 +180,7 @@ export class UnfiledContainersApi {
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -219,7 +219,7 @@ export class UnfiledContainersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = UnfiledContainerEntry;
@@ -227,7 +227,7 @@ export class UnfiledContainersApi {
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 

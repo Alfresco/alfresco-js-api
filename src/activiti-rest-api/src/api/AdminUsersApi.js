@@ -69,7 +69,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/users', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -111,7 +111,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/users', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -158,7 +158,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/users/{userId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -218,7 +218,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/users', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -266,7 +266,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/users/{userId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

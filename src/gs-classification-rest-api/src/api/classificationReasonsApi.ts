@@ -63,7 +63,7 @@ export class ClassificationReasonsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = ClassificationReasonEntry;
@@ -71,7 +71,7 @@ export class ClassificationReasonsApi {
         return this.apiClient.callApi(
             '/classification-reasons', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -97,7 +97,7 @@ export class ClassificationReasonsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -105,7 +105,7 @@ export class ClassificationReasonsApi {
         return this.apiClient.callApi(
             '/classification-reasons/{classificationReasonId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -132,7 +132,7 @@ export class ClassificationReasonsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = ClassificationReasonsPaging;
@@ -140,7 +140,7 @@ export class ClassificationReasonsApi {
         return this.apiClient.callApi(
             '/classification-reasons', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -167,7 +167,7 @@ export class ClassificationReasonsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = ClassificationReasonEntry;
@@ -175,7 +175,7 @@ export class ClassificationReasonsApi {
         return this.apiClient.callApi(
             '/classification-reasons/{classificationReasonId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -207,7 +207,7 @@ export class ClassificationReasonsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = ClassificationReasonEntry;
@@ -215,7 +215,7 @@ export class ClassificationReasonsApi {
         return this.apiClient.callApi(
             '/classification-reasons/{classificationReasonId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 

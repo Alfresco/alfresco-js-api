@@ -63,7 +63,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/script-files/controllers', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -98,7 +98,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/script-files/libraries', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

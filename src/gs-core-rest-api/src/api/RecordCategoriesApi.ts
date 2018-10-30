@@ -82,7 +82,7 @@ export class RecordCategoriesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json', 'multipart/form-data'];
         let accepts = ['application/json'];
         let returnType = RecordCategoryChildEntry;
@@ -90,7 +90,7 @@ export class RecordCategoriesApi {
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -116,7 +116,7 @@ export class RecordCategoriesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -124,7 +124,7 @@ export class RecordCategoriesApi {
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -159,7 +159,7 @@ export class RecordCategoriesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordCategoryEntry;
@@ -167,7 +167,7 @@ export class RecordCategoriesApi {
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -210,7 +210,7 @@ export class RecordCategoriesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordCategoryChildPaging;
@@ -218,7 +218,7 @@ export class RecordCategoriesApi {
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -257,7 +257,7 @@ export class RecordCategoriesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordCategoryEntry;
@@ -265,7 +265,7 @@ export class RecordCategoriesApi {
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 }

@@ -76,7 +76,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -118,7 +118,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -166,7 +166,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

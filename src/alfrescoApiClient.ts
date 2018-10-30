@@ -18,9 +18,10 @@
 import Emitter = require('event-emitter');
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
+
 let superagent = require('superagent');
 
-export class AlfrescoApiClient  {
+export class AlfrescoApiClient {
 
     storage: Storage;
     host: string;
@@ -28,55 +29,33 @@ export class AlfrescoApiClient  {
     config: AlfrescoApiConfig;
 
     /**
-     * Manages low level client-server communications, parameter marshalling, etc. There should not be any need for an
-     * application to use this class directly - the *Api and model classes provide the public API for the service. The
-     * contents of this file should be regarded as internal but are documented for completeness.
-     * @alias module:ApiClient
-     * @class
-     */
-
-    /**
      * The base URL against which to resolve every API call's (relative) path.
-     * @type {String}
-     * @default https://localhost/alfresco/api/-default-/public/alfresco/versions/1
      */
-    basePath: string = 'https://localhost/alfresco/api/-default-/public/alfresco/versions/1'.replace(/\/+$/, '');
+    basePath: string = '';
 
     /**
      * The authentication methods to be included for all API calls.
-     * @type {string[]}
      */
-    authentications :any = {
+    authentications: any = {
         'basicAuth': { type: 'basic' }
     };
     /**
      * The default HTTP headers to be included for all API calls.
-     * @type {string[]}
-     * @default {}
      */
     defaultHeaders = {};
 
     /**
      * The default HTTP timeout for all API calls.
-     * @type {Number}
-     * @default 60000
      */
     timeout = undefined;
 
-    contentTypes= {
-        json: 'application/json'
-    };
-
-    /**
-     * @param {String} host
-     * */
     constructor(host?: string) {
         this.storage = new Storage();
         this.host = host;
 
         this.on = (new Emitter()).on;
         this.off = (new Emitter()).off;
-        this.once =(new Emitter()).once;
+        this.once = (new Emitter()).once;
         this.emit = (new Emitter()).emit;
 
         Emitter.call(this);
@@ -85,9 +64,9 @@ export class AlfrescoApiClient  {
     /**
      * Returns a string representation for an actual parameter.
      * @param param The actual parameter.
-     * @returns {String} The string representation of <code>param</code>.
+     * @returns The string representation of <code>param</code>.
      */
-    paramToString(param) {
+    paramToString(param: any): string {
         if (param == undefined || param == null) {
             return '';
         }
@@ -100,11 +79,11 @@ export class AlfrescoApiClient  {
     /**
      * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders with parameter values.
      * NOTE: query parameters are not handled here.
-     * @param {String} path The path to append to the base URL.
-     * @param {Object} pathParams The parameter values to append.
-     * @returns {String} The encoded path with parameter values substituted.
+     * @param  path The path to append to the base URL.
+     * @param  pathParams The parameter values to append.
+     * @returns  The encoded path with parameter values substituted.
      */
-    buildUrl(path, pathParams) {
+    buildUrl(path: string, pathParams: any): string {
         if (!path.match(/^\//)) {
             path = '/' + path;
         }
@@ -130,19 +109,19 @@ export class AlfrescoApiClient  {
      * <li>application/json; charset=UTF8</li>
      * <li>APPLICATION/JSON</li>
      * </ul>
-     * @param {String} contentType The MIME content type to check.
-     * @returns {Boolean} <code>true</code> if <code>contentType</code> represents JSON, otherwise <code>false</code>.
+     * @param contentType The MIME content type to check.
+     * @returns <code>true</code> if <code>contentType</code> represents JSON, otherwise <code>false</code>.
      */
-    isJsonMime(contentType) {
+    isJsonMime(contentType: string): boolean {
         return Boolean(contentType != null && contentType.match(/^application\/json(;.*)?$/i));
     }
 
     /**
      * Chooses a content type from the given array, with JSON preferred; i.e. return JSON if included, otherwise return the first.
-     * @param {string[]} contentTypes
-     * @returns {String} The chosen content type, preferring JSON.
+     * @param contentTypes
+     * @returns  The chosen content type, preferring JSON.
      */
-    jsonPreferredMime(contentTypes) {
+    jsonPreferredMime(contentTypes: string[]): string {
         for (let i = 0; i < contentTypes.length; i++) {
             if (this.isJsonMime(contentTypes[i])) {
                 return contentTypes[i];
@@ -154,9 +133,9 @@ export class AlfrescoApiClient  {
     /**
      * Checks whether the given parameter value represents file-like content.
      * @param param The parameter to check.
-     * @returns {Boolean} <code>true</code> if <code>param</code> represents a file.
+     * @returns <code>true</code> if <code>param</code> represents a file.
      */
-    isFileParam(param) {
+    isFileParam(param: any): boolean {
         // fs.ReadStream in Node.js (but not in runtime like browserify)
         if (typeof require('fs').ReadStream) {
             if (typeof window === 'undefined' &&
@@ -212,39 +191,6 @@ export class AlfrescoApiClient  {
     }
 
     /**
-     * Enumeration of collection format separator strategies.
-     * @enum {String}
-     * @readonly
-     */
-    CollectionFormatEnum = {
-        /**
-         * Comma-separated values. Value: <code>csv</code>
-         * @const
-         */
-        CSV: ',',
-        /**
-         * Space-separated values. Value: <code>ssv</code>
-         * @const
-         */
-        SSV: ' ',
-        /**
-         * Tab-separated values. Value: <code>tsv</code>
-         * @const
-         */
-        TSV: '\t',
-        /**
-         * Pipe(|)-separated values. Value: <code>pipes</code>
-         * @const
-         */
-        PIPES: '|',
-        /**
-         * Native array. Value: <code>multi</code>
-         * @const
-         */
-        MULTI: 'multi'
-    };
-
-    /**
      * Builds a string representation of an array-type actual parameter, according to the given collection format.
      * @param {Array} param An array parameter.
      * @param {module:ApiClient.CollectionFormatEnum} collectionFormat The array element separator strategy.
@@ -275,12 +221,10 @@ export class AlfrescoApiClient  {
     /**
      * Applies authentication headers to the request.
      * @param {Object} request The request object created by a <code>superagent()</code> call.
-     * @param {string[]} authNames An array of authentication method names.
      */
-    applyAuthToRequest(request, authNames) {
+    applyAuthToRequest(request) {
         let _this = this;
-        authNames.forEach(function (authName) {
-            let auth = _this.authentications[authName];
+            let auth = _this.authentications.basicAuth;
             switch (auth.type) {
                 case 'basic':
                     if (auth.username || auth.password) {
@@ -288,21 +232,6 @@ export class AlfrescoApiClient  {
                             auth.username ? encodeURI(auth.username) : '',
                             auth.password ? encodeURI(auth.password) : ''
                         );
-                    }
-                    break;
-                case 'apiKey':
-                    if (auth.apiKey) {
-                        let data = {};
-                        if (auth.apiKeyPrefix) {
-                            data[auth.name] = auth.apiKeyPrefix + ' ' + auth.apiKey;
-                        } else {
-                            data[auth.name] = auth.apiKey;
-                        }
-                        if (auth['in'] === 'header') {
-                            request.set(data);
-                        } else {
-                            request.query(data);
-                        }
                     }
                     break;
                 case 'activiti':
@@ -318,7 +247,6 @@ export class AlfrescoApiClient  {
                 default:
                     throw new Error('Unknown authentication type: ' + auth.type);
             }
-        });
     }
 
     /**
@@ -330,7 +258,7 @@ export class AlfrescoApiClient  {
      * all properties on <code>data<code> will be converted to this type.
      * @returns A value of the specified type.
      */
-    deserialize(response, returnType) {
+    deserialize(response: any, returnType: any): any {
         if (response == null || returnType == null) {
             return null;
         }
@@ -347,14 +275,14 @@ export class AlfrescoApiClient  {
 
     /**
      * Parses an ISO-8601 string representation of a date value.
-     * @param {String} str The date value as a string.
-     * @returns {Date} The parsed date object.
+     * @param  dateToConvert The date value as a string.
+     * @returns  The parsed date object.
      */
-    parseDate(str) {
+    parseDate(dateToConvert: string): Date {
         let dateLength = 10;
-        let separatorPos = str.substring(dateLength).search(/[\+\-]/) + dateLength;
-        let dateStr = separatorPos > dateLength ? str.substring(0, separatorPos) : str;
-        let tzStr = separatorPos > dateLength ? str.substring(separatorPos) : '';
+        let separatorPos = dateToConvert.substring(dateLength).search(/[\+\-]/) + dateLength;
+        let dateStr = separatorPos > dateLength ? dateToConvert.substring(0, separatorPos) : dateToConvert;
+        let tzStr = separatorPos > dateLength ? dateToConvert.substring(separatorPos) : '';
         let parsedDate = exports.parseDateTime(dateStr);
         let tzOffsetMins = exports.parseDateTimeZone(tzStr);
         parsedDate.setTime(parsedDate.getTime() + tzOffsetMins * 60000);
@@ -363,16 +291,16 @@ export class AlfrescoApiClient  {
 
     /**
      * Parses the date component of a ISO-8601 string representation of a date value.
-     * @param {String} str The date value as a string.
-     * @returns {Date} The parsed date object.
+     * @param dateToConvert The date value as a string.
+     * @returns The parsed date object.
      */
-    parseDateTime(str) {
+    parseDateTime(dateToConvert: string): Date {
         // TODO: review when Safari 10 is released
         // return new Date(str.replace(/T/i, ' '));
 
         // Compatible with Safari 9.1.2
-        let parts = str.split('+');
-        let dateParts = str.split(/[^0-9]/).map(function (s) {
+        let parts = dateToConvert.split('+');
+        let dateParts = dateToConvert.split(/[^0-9]/).map(function (s) {
             return parseInt(s, 10)
         });
         return new Date(Date.UTC(dateParts[0], dateParts[1] - 1 || 0, dateParts[2] || 1, dateParts[3] || 0, dateParts[4] || 0, dateParts[5] || 0, dateParts[6] || 0));
@@ -380,11 +308,11 @@ export class AlfrescoApiClient  {
 
     /**
      * Parses the timezone component of a ISO-8601 string representation of a date value.
-     * @param {String} str The timezone offset as a string, e.g. '+0000', '+2000' or '-0500'.
-     * @returns {number} The number of minutes offset from UTC.
+     * @param dateToConvert The timezone offset as a string, e.g. '+0000', '+2000' or '-0500'.
+     * @returns The number of minutes offset from UTC.
      */
-    parseDateTimeZone(str) {
-        let match = /([\+\-])(\d{2}):?(\d{2})?/.exec(str);
+    parseDateTimeZone(dateToConvert: string): number {
+        let match = /([\+\-])(\d{2}):?(\d{2})?/.exec(dateToConvert);
         if (match !== null) {
             return (parseInt(match[1] + '1') * -1 * (parseInt(match[2]) * 60) + parseInt(match[3] || '0'))
         } else {
@@ -473,7 +401,6 @@ export class AlfrescoApiClient  {
      * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
      * @param {Object.<String, Object>} formParams A map of form parameters and their values.
      * @param {Object} bodyParam The value to pass as the request body.
-     * @param {String[]} authNames An array of authentication type names.
      * @param {String[]} contentTypes An array of request MIME types.
      * @param {String[]} accepts An array of acceptable response MIME types.
      * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
@@ -485,7 +412,7 @@ export class AlfrescoApiClient  {
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
     callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-            authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
+            contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
 
         let url;
 
@@ -496,7 +423,7 @@ export class AlfrescoApiClient  {
             url = this.buildUrl(path, pathParams);
         }
 
-        return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
+        return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
             contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
@@ -510,7 +437,6 @@ export class AlfrescoApiClient  {
      * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
      * @param {Object.<String, Object>} formParams A map of form parameters and their values.
      * @param {Object} bodyParam The value to pass as the request body.
-     * @param {String[]} authNames An array of authentication type names.
      * @param {String[]} contentTypes An array of request MIME types.
      * @param {String[]} accepts An array of acceptable response MIME types.
      * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
@@ -521,11 +447,11 @@ export class AlfrescoApiClient  {
      *                                   If an empty string is set as the value of responseType, it is assumed as type "text".
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
-    callCustomApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[],
-                  contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string) {
+    callCustomApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
+                  contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
         let url = this.buildUrlCustomBasePath(path, '', pathParams);
 
-        return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames,
+        return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
             contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
@@ -539,7 +465,6 @@ export class AlfrescoApiClient  {
      * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
      * @param {Object.<String, Object>} formParams A map of form parameters and their values.
      * @param {Object} bodyParam The value to pass as the request body.
-     * @param {String[]} authNames An array of authentication type names.
      * @param {String[]} contentTypes An array of request MIME types.
      * @param {String[]} accepts An array of acceptable response MIME types.
      * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
@@ -550,8 +475,8 @@ export class AlfrescoApiClient  {
      *                                   If an empty string is set as the value of responseType, it is assumed as type "text".
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
-    callHostApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[],
-                contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string, url?: string) {
+    callHostApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
+                contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string, url?: string): Promise<any> {
         let eventEmitter: Emitter = {};
         Emitter(eventEmitter); // jshint ignore:line
 
@@ -630,11 +555,11 @@ export class AlfrescoApiClient  {
         return promise;
     }
 
-    isBpmRequest() {
+    isBpmRequest(): boolean {
         return this.className === 'BpmAuth' || this.className === 'BpmClient';
     }
 
-    isCsrfEnabled() {
+    isCsrfEnabled(): boolean {
         if (this.config) {
             return !this.config.disableCsrf;
         } else {
@@ -708,7 +633,7 @@ export class AlfrescoApiClient  {
         let request = superagent(httpMethod, url);
 
         // apply authentications
-        this.applyAuthToRequest(request, ['basicAuth']);
+        this.applyAuthToRequest(request);
 
         // set query parameters
         request.query(this.normalizeParams(queryParams));

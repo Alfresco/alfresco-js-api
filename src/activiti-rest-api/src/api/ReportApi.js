@@ -54,7 +54,7 @@
       return this.apiClient.callApi(
         '/app/rest/reporting/default-reports', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -88,7 +88,7 @@
       return this.apiClient.callApi(
           '/app/rest/reporting/report-params/{reportId}/tasks', 'GET',
           pathParams, queryParams, headerParams, formParams, postBody,
-          authNames, contentTypes, accepts, returnType
+           contentTypes, accepts, returnType
       );
     }
 
@@ -117,7 +117,7 @@
       return this.apiClient.callApi(
           '/app/rest/reporting/report-params/{reportId}', 'POST',
           pathParams, queryParams, headerParams, formParams, postBody,
-          authNames, contentTypes, accepts, returnType
+           contentTypes, accepts, returnType
       );
     }
 
@@ -141,7 +141,7 @@
       return this.apiClient.callApi(
           '/app/rest/reporting/process-definitions', 'GET',
           pathParams, queryParams, headerParams, formParams, postBody,
-          authNames, contentTypes, accepts, returnType
+           contentTypes, accepts, returnType
       );
     }
 
@@ -170,7 +170,7 @@
       return this.apiClient.callApi(
           '/app/rest/reporting/report-params/{reportId}', 'GET',
           pathParams, queryParams, headerParams, formParams, postBody,
-          authNames, contentTypes, accepts, returnType
+           contentTypes, accepts, returnType
       );
     }
 
@@ -194,7 +194,7 @@
       return this.apiClient.callApi(
           '/app/rest/reporting/reports', 'GET',
           pathParams, queryParams, headerParams, formParams, postBody,
-          authNames, contentTypes, accepts, returnType
+           contentTypes, accepts, returnType
       );
     }
 
@@ -225,7 +225,7 @@
       return this.apiClient.callApi(
           '/app/rest/reporting/reports/{reportId}', 'PUT',
           pathParams, queryParams, headerParams, formParams, postBody,
-          authNames, contentTypes, accepts, returnType
+           contentTypes, accepts, returnType
       );
     }
 
@@ -273,7 +273,7 @@
       return this.apiClient.callApi(
         '/app/rest/reporting/reports/{reportId}/export-to-csv', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -321,7 +321,7 @@
       return this.apiClient.callApi(
         '/app/rest/reporting/reports/{reportId}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
     /**
@@ -357,7 +357,7 @@
       return this.apiClient.callApi(
         '/app/rest/reporting/reports/{reportId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 

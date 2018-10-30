@@ -69,7 +69,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/filter', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -110,7 +110,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/query', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

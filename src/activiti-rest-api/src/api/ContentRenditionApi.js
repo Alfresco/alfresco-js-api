@@ -77,7 +77,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/{contentId}/rendition/{renditionType}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

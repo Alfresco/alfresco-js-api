@@ -69,7 +69,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-scopes', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

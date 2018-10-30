@@ -74,7 +74,7 @@ export class RecordsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordEntry;
@@ -82,7 +82,7 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}/complete', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -108,7 +108,7 @@ export class RecordsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -116,7 +116,7 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -155,7 +155,7 @@ export class RecordsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordEntry;
@@ -163,7 +163,7 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}/file', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -196,7 +196,7 @@ export class RecordsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordEntry;
@@ -204,7 +204,7 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -238,7 +238,7 @@ export class RecordsApi {
         };
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -246,7 +246,7 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -285,7 +285,7 @@ export class RecordsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordEntry;
@@ -293,7 +293,7 @@ export class RecordsApi {
         return this.apiClient.callApi(
             '/records/{recordId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 

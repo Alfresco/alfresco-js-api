@@ -74,7 +74,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/history', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -123,7 +123,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/history/{modelHistoryId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

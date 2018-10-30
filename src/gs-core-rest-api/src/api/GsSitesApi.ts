@@ -69,7 +69,7 @@ export class GsSitesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RMSiteEntry;
@@ -77,7 +77,7 @@ export class GsSitesApi {
         return this.apiClient.callApi(
             '/gs-sites', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -95,7 +95,7 @@ export class GsSitesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -103,7 +103,7 @@ export class GsSitesApi {
         return this.apiClient.callApi(
             '/gs-sites/rm', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -126,7 +126,7 @@ export class GsSitesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RMSiteEntry;
@@ -134,7 +134,7 @@ export class GsSitesApi {
         return this.apiClient.callApi(
             '/gs-sites/rm', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -163,7 +163,7 @@ export class GsSitesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RMSiteEntry;
@@ -171,7 +171,7 @@ export class GsSitesApi {
         return this.apiClient.callApi(
             '/gs-sites/rm', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 

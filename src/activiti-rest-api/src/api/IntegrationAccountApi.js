@@ -65,7 +65,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/account/integration', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

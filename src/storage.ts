@@ -37,21 +37,21 @@ export class Storage {
         this._storage = storage;
     }
 
-    setItem(key, value) {
+    setItem(key: string, value: any) {
         if (this.supportsStorage()) {
             this._storage.setItem(key, value);
         }
     }
 
-    removeItem(key) {
+    removeItem(key: string) {
         if (this.supportsStorage()) {
             this._storage.removeItem(key);
         }
     }
 
-    getItem(value) {
+    getItem(key: string) {
         if (this.supportsStorage()) {
-            return this._storage.getItem(value);
+            return this._storage.getItem(key);
         }
     }
 }

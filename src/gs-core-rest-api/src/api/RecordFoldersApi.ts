@@ -80,7 +80,7 @@ export class RecordFoldersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json', 'multipart/form-data'];
         let accepts = ['application/json'];
         let returnType = RecordEntry;
@@ -88,7 +88,7 @@ export class RecordFoldersApi {
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}/records', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -114,7 +114,7 @@ export class RecordFoldersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -122,7 +122,7 @@ export class RecordFoldersApi {
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -155,7 +155,7 @@ export class RecordFoldersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordFolderEntry;
@@ -163,7 +163,7 @@ export class RecordFoldersApi {
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -204,7 +204,7 @@ export class RecordFoldersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordFolderAssociationPaging;
@@ -212,7 +212,7 @@ export class RecordFoldersApi {
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}/records', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -251,7 +251,7 @@ export class RecordFoldersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordFolderEntry;
@@ -259,7 +259,7 @@ export class RecordFoldersApi {
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 

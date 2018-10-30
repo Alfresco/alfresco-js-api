@@ -77,7 +77,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/editor/form-models/{formId}/history/{formHistoryId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -119,7 +119,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/editor/form-models/{formId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -155,7 +155,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/editor/form-models/values', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -203,7 +203,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/editor/form-models/{formId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -251,7 +251,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/editor/form-models/{formId}/validate', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

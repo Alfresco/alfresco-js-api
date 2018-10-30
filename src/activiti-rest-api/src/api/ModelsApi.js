@@ -69,7 +69,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -117,7 +117,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -165,7 +165,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/clone', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -207,7 +207,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/editor/json', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -249,7 +249,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/thumbnail', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -295,7 +295,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -330,7 +330,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models-for-app-definition', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -376,7 +376,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -425,7 +425,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/newversion', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -467,7 +467,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-models/import', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -515,7 +515,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/editor/json', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -563,7 +563,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -608,7 +608,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/models/{modelId}/editor/validate', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

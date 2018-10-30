@@ -71,7 +71,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -113,7 +113,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -156,7 +156,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}/events', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -198,7 +198,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}/logo', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -241,7 +241,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -278,7 +278,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -327,7 +327,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -377,7 +377,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/tenants/{tenantId}/logo', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

@@ -63,7 +63,7 @@ export class DeclassificationExemptionsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = DeclassificationExemptionEntry;
@@ -71,7 +71,7 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/declassification-exemptions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -98,7 +98,7 @@ export class DeclassificationExemptionsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -106,7 +106,7 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -131,7 +131,7 @@ export class DeclassificationExemptionsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = DeclassificationExemptionsPaging;
@@ -139,7 +139,7 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/declassification-exemptions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -166,7 +166,7 @@ export class DeclassificationExemptionsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = DeclassificationExemptionEntry;
@@ -174,7 +174,7 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -206,7 +206,7 @@ export class DeclassificationExemptionsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = DeclassificationExemptionEntry;
@@ -214,7 +214,7 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -240,7 +240,7 @@ export class DeclassificationExemptionsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = DeclassificationDate;
@@ -248,7 +248,7 @@ export class DeclassificationExemptionsApi {
         return this.apiClient.callApi(
             '/default-classification-values/{nodeId}/calculate-declassification-date', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 

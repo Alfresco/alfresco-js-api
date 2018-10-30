@@ -28,24 +28,6 @@ import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
 export class AlfrescoApi {
-    /**
-     * @param {Object} config
-     *
-     *      config = {
-     *        hostEcm:       // hostEcm Your share server IP or DNS name
-     *        hostBpm: // hostBpm Your activiti server IP or DNS name
-     *        authType: // kind of authentication BASIC or OAUTH
-     *        oauth2: {host:'http://127.0.0.1:9191', clientId:'alfrescoexample', secret:'secret'}
-     *        contextRoot: // contextRoot default value alfresco
-     *        contextRootBpm: // contextRoot activiti default value activiti-app
-     *        provider:   // ECM BPM ALL OAUTH, default ECM
-     *        ticketEcm:     // Ticket if you already have a ECM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
-     *        ticketBpm:     // Ticket if you already have a BPM ticket you can pass only the ticket and skip the login, in this case you don't need username and password
-     *        disableCsrf:   // To disable CSRF Token to be submitted. Only for Activiti call, by default is false.
-     *        withCredentials // To allow passing credentials to ECM, for SSO
-     *        domainPrefix: // An optional prefix to append to ticket saved by the storage service.
-     *    };
-     */
 
     storage: Storage;
     config: AlfrescoApiConfig;
@@ -69,11 +51,11 @@ export class AlfrescoApi {
     emit = Emitter.emit;
 
     constructor() {
-      //  this.config = this.configureJsApi(config);
+        //  this.config = this.configureJsApi(config);
 
         this.on = (new Emitter()).on;
         this.off = (new Emitter()).off;
-        this.once =(new Emitter()).once;
+        this.once = (new Emitter()).once;
         this.emit = (new Emitter()).emit;
 
         Emitter.call(this);
@@ -98,16 +80,15 @@ export class AlfrescoApi {
             ticketBpm: config.ticketBpm,
             accessToken: config.accessToken,
             disableCsrf: config.disableCsrf || false,
-            withCredentials: config.withCredentials || false,
             domainPrefix: config.domainPrefix || ''
         };
 
         this.ecmPrivateClient = new EcmClient(this.config, '/api/-default-/private/alfresco/versions/1');
-        this.ecmClient =        new EcmClient(this.config, '/api/-default-/public/alfresco/versions/1');
-        this.searchClient =     new EcmClient(this.config, '/api/-default-/public/search/versions/1');
-        this.discoveryClient =  new EcmClient(this.config, '/api');
-        this.gsClient =         new EcmClient(this.config, '/api/-default-/public/gs/versions/1');
-        this.bpmClient =        new BpmClient(this.config);
+        this.ecmClient = new EcmClient(this.config, '/api/-default-/public/alfresco/versions/1');
+        this.searchClient = new EcmClient(this.config, '/api/-default-/public/search/versions/1');
+        this.discoveryClient = new EcmClient(this.config, '/api');
+        this.gsClient = new EcmClient(this.config, '/api/-default-/public/gs/versions/1');
+        this.bpmClient = new BpmClient(this.config);
 
         this.errorListeners();
 
@@ -136,7 +117,6 @@ export class AlfrescoApi {
         // this.discoveryClient.off('error');
         //
         // this.gsClient.off('error');
-
 
 
         this.ecmClient.on('error', (error) => {
@@ -172,22 +152,18 @@ export class AlfrescoApi {
         this.emit('error', error);
     }
 
-    changeWithCredentialsConfig(withCredentials) {
-        this.config.withCredentials = withCredentials;
-    }
-
-    changeCsrfConfig(disableCsrf) {
+    changeCsrfConfig(disableCsrf: boolean) {
         this.config.disableCsrf = disableCsrf;
         this.bpmAuth.changeCsrfConfig(disableCsrf);
     }
 
-    changeEcmHost(hostEcm) {
+    changeEcmHost(hostEcm: string) {
         this.config.hostEcm = hostEcm;
         this.ecmAuth.changeHost();
         this.ecmClient.changeHost();
     }
 
-    changeBpmHost(hostBpm) {
+    changeBpmHost(hostBpm: string) {
         this.config.hostBpm = hostBpm;
         this.bpmAuth.changeHost();
         this.bpmClient.changeHost();
@@ -195,12 +171,12 @@ export class AlfrescoApi {
 
     /**
      * login Alfresco API
-     * @param  {String} username:   // Username to login
-     * @param  {String} password:   // Password to login
+     * @param  username:   // Username to login
+     * @param  password:   // Password to login
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    login(username, password) {
+    login(username: string, password: string): Promise<any> {
 
         if (username) {
             username = username.trim();
@@ -256,7 +232,7 @@ export class AlfrescoApi {
         }
     }
 
-    implicitLogin() {
+    implicitLogin(): Promise<any> {
         if (!this.isOauthConfiguration()) {
             return Promise.reject('Missing the required oauth2 configuration');
         }
@@ -279,19 +255,17 @@ export class AlfrescoApi {
     /**
      * login Tickets
      *
-     * @param  {String} ticketEcm // alfresco ticket
-     * @param  {String} ticketBpm // alfresco ticket
-     *
-     * @returns {Promise} A promise that returns { authentication ticket} if resolved and {error} if rejected.
+     * @param   ticketEcm // alfresco ticket
+     * @param   ticketBpm // alfresco ticket
      * */
-    loginTicket(ticketEcm, ticketBpm) {
+    loginTicket(ticketEcm: string, ticketBpm: string): Promise<any> {
         this.config.ticketEcm = ticketEcm;
         this.config.ticketBpm = ticketBpm;
 
         return this.ecmAuth.validateTicket();
     }
 
-    _loginBPMECM(username, password) {
+    _loginBPMECM(username: string, password: string): Promise<any> {
         let ecmPromise = this.ecmAuth.login(username, password);
         let bpmPromise = this.bpmAuth.login(username, password);
 
@@ -317,10 +291,8 @@ export class AlfrescoApi {
 
     /**
      * logout Alfresco API
-     *
-     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    logout() {
+    logout(): Promise<any> {
         if (this.isOauthConfiguration()) {
             return this.oauth2Auth.logOut();
         } else {
@@ -340,7 +312,7 @@ export class AlfrescoApi {
         }
     }
 
-    _logoutBPMECM() {
+    _logoutBPMECM(): Promise<any> {
         let ecmPromise = this.ecmAuth.logout();
         let bpmPromise = this.bpmAuth.logout();
 
@@ -367,8 +339,6 @@ export class AlfrescoApi {
 
     /**
      * If the client is logged in retun true
-     *
-     * @returns {Boolean} is logged in
      */
     isLoggedIn(): boolean {
         if (this.isOauthConfiguration()) {
@@ -444,10 +414,10 @@ export class AlfrescoApi {
     /**
      * Set the current Ticket
      *
-     * @param {String} ticketEcm
-     * @param {String} TicketBpm
+     * @param ticketEcm
+     * @param TicketBpm
      * */
-    setTicket(ticketEcm, TicketBpm) {
+    setTicket(ticketEcm: string, TicketBpm: string) {
         if (this.ecmAuth) {
             this.ecmAuth.setTicket(ticketEcm);
         }
@@ -470,8 +440,6 @@ export class AlfrescoApi {
 
     /**
      * Get the current Ticket for the Bpm
-     *
-     * @returns {String} Ticket
      * */
     getTicketBpm(): string {
         return this.bpmAuth && this.bpmAuth.getTicket();
@@ -479,8 +447,6 @@ export class AlfrescoApi {
 
     /**
      * Get the current Ticket for the Ecm
-     *
-     * @returns {String} Ticket
      * */
     getTicketEcm(): string {
         return this.ecmAuth && this.ecmAuth.getTicket();
@@ -488,8 +454,6 @@ export class AlfrescoApi {
 
     /**
      * Get the current Ticket for the Ecm and BPM
-     *
-     * @returns {Array} Ticket
      * */
     getTicket(): string[] {
         return [this.ecmAuth.getTicket(), this.bpmAuth.getTicket()];

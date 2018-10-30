@@ -76,7 +76,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/assign', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -124,7 +124,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/attach-form', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -167,7 +167,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/claim', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -210,7 +210,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/complete', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -258,7 +258,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/involve', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -300,7 +300,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/remove-form', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -348,7 +348,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/remove-involved', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -391,7 +391,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/unclaim', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

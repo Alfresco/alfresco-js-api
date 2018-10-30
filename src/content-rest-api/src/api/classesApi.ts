@@ -67,14 +67,14 @@ export class ClassesApi extends BaseApi {
         let formParams = {};
 
         let authNames = [];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let contextRoot = this.apiClient.config.contextRoot + '/s';
 
         return this.apiClient.callApi(
             this.path + '/{className}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, null, contextRoot
+             contentTypes, accepts, null, contextRoot
         );
     }
 }

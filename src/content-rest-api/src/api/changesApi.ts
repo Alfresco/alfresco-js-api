@@ -81,15 +81,15 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path+'/{sourceId}/targets', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -131,14 +131,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json, 'multipart/form-data'];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json', 'multipart/form-data'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -170,15 +170,15 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path+'/{parentId}/secondary-children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -210,14 +210,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/shared-links', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -257,14 +257,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/copy', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -296,15 +296,15 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/renditions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -336,14 +336,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/sites', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -381,14 +381,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/sites/{siteId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -419,15 +419,15 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -453,15 +453,15 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             '/shared-links/{sharedId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -492,15 +492,15 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             '/sites/{siteId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -532,15 +532,15 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/email', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -568,14 +568,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/shared-links', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -607,14 +607,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -642,14 +642,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/deleted-nodes', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -683,15 +683,15 @@ export class ChangesApi extends BaseApi {
         };
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -727,14 +727,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -780,14 +780,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -821,14 +821,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/renditions/{renditionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -869,15 +869,15 @@ export class ChangesApi extends BaseApi {
         };
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -904,14 +904,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/renditions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -945,14 +945,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/shared-links/{sharedId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -985,15 +985,15 @@ export class ChangesApi extends BaseApi {
         };
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -1034,15 +1034,15 @@ export class ChangesApi extends BaseApi {
         };
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -1069,14 +1069,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/renditions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -1112,14 +1112,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{childId}/parents', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -1157,14 +1157,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{parentId}/secondary-children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -1200,14 +1200,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{targetId}/sources', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -1243,14 +1243,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{sourceId}/targets', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -1293,14 +1293,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/queries/live-search-nodes', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -1341,14 +1341,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/move', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -1374,15 +1374,15 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -1420,15 +1420,15 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path+'/{sourceId}/targets/{targetId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -1466,15 +1466,15 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path+'/{parentId}/secondary-children/{childId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -1502,14 +1502,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}/restore', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -1552,14 +1552,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/octet-stream'];
-        let accepts = [this.apiClient.contentTypes.json];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}/content', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -1598,14 +1598,14 @@ export class ChangesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path+'/{nodeId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 }

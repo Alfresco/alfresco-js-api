@@ -63,15 +63,13 @@ export class AssociationsApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path + '/{sourceId}/targets', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+            pathParams, queryParams, headerParams, formParams, postBody, contentTypes, accepts, returnType
         );
     }
 
@@ -106,14 +104,14 @@ export class AssociationsApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{targetId}/sources', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -148,14 +146,14 @@ export class AssociationsApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             this.path + '/{sourceId}/targets', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts
+             contentTypes, accepts
         );
     }
 
@@ -192,15 +190,15 @@ export class AssociationsApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
         let returnType = null;
 
         return this.apiClient.callApi(
             this.path + '/{sourceId}/targets/{targetId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 }

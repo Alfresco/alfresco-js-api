@@ -70,7 +70,7 @@ export class TransfersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = TransferEntry;
@@ -78,7 +78,7 @@ export class TransfersApi {
         return this.apiClient.callApi(
             '/transfers/{transferId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -117,7 +117,7 @@ export class TransfersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = TransferAssociationPaging;
@@ -125,7 +125,7 @@ export class TransfersApi {
         return this.apiClient.callApi(
             '/transfers/{transferId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 

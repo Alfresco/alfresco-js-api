@@ -55,7 +55,7 @@ export class DiscoveryApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = [];
         let accepts = ['application/json'];
         let returnType = DiscoveryEntry;
@@ -63,7 +63,7 @@ export class DiscoveryApi {
         return this.apiClient.callApi(
             '/discovery', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 }

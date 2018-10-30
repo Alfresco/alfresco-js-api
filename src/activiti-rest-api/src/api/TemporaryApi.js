@@ -77,7 +77,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/temporary/generate-report-data/complete-tasks', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -126,7 +126,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/temporary/generate-report-data/start-process', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -161,7 +161,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/temporary/example-headers', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -196,7 +196,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/temporary/example-options', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

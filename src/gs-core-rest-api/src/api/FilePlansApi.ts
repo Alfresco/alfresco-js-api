@@ -82,7 +82,7 @@ export class FilePlansApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json', 'multipart/form-data'];
         let accepts = ['application/json'];
         let returnType = RecordCategoryEntry;
@@ -90,7 +90,7 @@ export class FilePlansApi {
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}/categories', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -123,7 +123,7 @@ export class FilePlansApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = FilePlanEntry;
@@ -131,7 +131,7 @@ export class FilePlansApi {
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -170,7 +170,7 @@ export class FilePlansApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordCategoryPaging;
@@ -178,7 +178,7 @@ export class FilePlansApi {
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}/categories', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -217,7 +217,7 @@ export class FilePlansApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = FilePlanEntry;
@@ -225,7 +225,7 @@ export class FilePlansApi {
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 }

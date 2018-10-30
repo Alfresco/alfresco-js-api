@@ -65,14 +65,14 @@ export class TagsApi extends BaseApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ['basicAuth'];
-    let contentTypes = [this.apiClient.contentTypes.json];
-    let accepts = [this.apiClient.contentTypes.json];
+
+    let contentTypes = ['application/json'];
+    let accepts = ['application/json'];
 
     return this.apiClient.callApi(
       this.path + '/{nodeId}/tags', 'POST',
       pathParams, queryParams, headerParams, formParams, postBody,
-      authNames, contentTypes, accepts
+       contentTypes, accepts
     );
   }
 
@@ -108,14 +108,14 @@ export class TagsApi extends BaseApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ['basicAuth'];
-    let contentTypes = [this.apiClient.contentTypes.json];
-    let accepts = [this.apiClient.contentTypes.json];
+
+    let contentTypes = ['application/json'];
+    let accepts = ['application/json'];
 
     return this.apiClient.callApi(
       this.path + '/{nodeId}/tags', 'GET',
       pathParams, queryParams, headerParams, formParams, postBody,
-      authNames, contentTypes, accepts
+       contentTypes, accepts
     );
   }
 
@@ -147,14 +147,14 @@ export class TagsApi extends BaseApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ['basicAuth'];
-    let contentTypes = [this.apiClient.contentTypes.json];
-    let accepts = [this.apiClient.contentTypes.json];
+
+    let contentTypes = ['application/json'];
+    let accepts = ['application/json'];
 
     return this.apiClient.callApi(
       '/tags/{tagId}', 'GET',
       pathParams, queryParams, headerParams, formParams, postBody,
-      authNames, contentTypes, accepts,
+       contentTypes, accepts,
     );
   }
 
@@ -182,14 +182,14 @@ export class TagsApi extends BaseApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ['basicAuth'];
-    let contentTypes = [this.apiClient.contentTypes.json];
-    let accepts = [this.apiClient.contentTypes.json];
+
+    let contentTypes = ['application/json'];
+    let accepts = ['application/json'];
 
     return this.apiClient.callApi(
       '/tags', 'GET',
       pathParams, queryParams, headerParams, formParams, postBody,
-      authNames, contentTypes, accepts
+       contentTypes, accepts
     );
   }
 
@@ -222,15 +222,15 @@ export class TagsApi extends BaseApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ['basicAuth'];
-    let contentTypes = [this.apiClient.contentTypes.json];
-    let accepts = [this.apiClient.contentTypes.json];
+
+    let contentTypes = ['application/json'];
+    let accepts = ['application/json'];
     let returnType = null;
 
     return this.apiClient.callApi(
       this.path + '/{nodeId}/tags/{tagId}', 'DELETE',
       pathParams, queryParams, headerParams, formParams, postBody,
-      authNames, contentTypes, accepts, returnType
+       contentTypes, accepts, returnType
     );
   }
 
@@ -263,14 +263,14 @@ export class TagsApi extends BaseApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ['basicAuth'];
-    let contentTypes = [this.apiClient.contentTypes.json];
-    let accepts = [this.apiClient.contentTypes.json];
+
+    let contentTypes = ['application/json'];
+    let accepts = ['application/json'];
 
     return this.apiClient.callApi(
       '/tags/{tagId}', 'PUT',
       pathParams, queryParams, headerParams, formParams, postBody,
-      authNames, contentTypes, accepts
+       contentTypes, accepts
     );
   }
 }

@@ -69,7 +69,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/basic-auths', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -110,7 +110,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/endpoints', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -159,7 +159,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/basic-auths/{basicAuthId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -201,7 +201,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/basic-auths', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -250,7 +250,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -292,7 +292,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/endpoints', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -341,7 +341,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/basic-auths/{basicAuthId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -390,7 +390,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -438,7 +438,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/basic-auths/{basicAuthId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -486,7 +486,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

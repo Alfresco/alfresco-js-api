@@ -30,7 +30,7 @@ export class EcmClient extends AlfrescoApiClient {
     /**
      * @param {Object} config
      */
-    constructor(config, servicePath) {
+    constructor(config: AlfrescoApiConfig, servicePath: string) {
         super();
 
         this.config = config;
@@ -50,7 +50,7 @@ export class EcmClient extends AlfrescoApiClient {
      *
      * @param {Object} authentications
      * */
-    setAuthentications(authentications) {
+    setAuthentications(authentications): any {
         this.authentications = authentications;
     }
 

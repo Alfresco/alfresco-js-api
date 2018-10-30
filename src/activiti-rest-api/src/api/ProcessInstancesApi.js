@@ -76,7 +76,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/comments', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -118,7 +118,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -164,7 +164,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/comments', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -207,7 +207,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/start-form', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -249,7 +249,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

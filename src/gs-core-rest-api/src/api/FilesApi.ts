@@ -73,7 +73,7 @@ export class FilesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = RecordEntry;
@@ -81,7 +81,7 @@ export class FilesApi {
         return this.apiClient.callApi(
             '/files/{fileId}/declare', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 }

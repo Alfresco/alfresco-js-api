@@ -70,7 +70,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -111,7 +111,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/filter', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -154,7 +154,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-definitions/{processDefinitionId}/start-form', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -196,7 +196,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-definitions', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -238,7 +238,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -281,7 +281,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/start-form', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -323,7 +323,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -364,7 +364,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/query', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -398,7 +398,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processId}/audit-log', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -434,7 +434,7 @@
       return this.apiClient.callApi(
         '/app/rest/process-instances/{processId}/audit', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, contextRoot, responseType
+         contentTypes, accepts, returnType, contextRoot, responseType
       );
     }
 
@@ -473,7 +473,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -514,7 +514,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -555,7 +555,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

@@ -64,7 +64,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/system/properties', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

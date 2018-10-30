@@ -70,7 +70,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/action/activate', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -112,7 +112,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/add-all-users', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -160,7 +160,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/capabilities', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -209,7 +209,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/members/{userId}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -265,7 +265,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -307,7 +307,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -356,7 +356,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -405,7 +405,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/members/{userId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -447,7 +447,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -496,7 +496,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -539,7 +539,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/potential-capabilities', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -590,7 +590,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/users', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -639,7 +639,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -683,7 +683,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -726,7 +726,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}/related-groups', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -775,7 +775,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/admin/groups/{groupId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

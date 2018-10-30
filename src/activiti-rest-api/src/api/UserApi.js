@@ -77,7 +77,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users/{userId}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -121,7 +121,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users/{userId}/picture', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, contextRoot, responseType
+         contentTypes, accepts, returnType, contextRoot, responseType
       );
     }
 
@@ -167,7 +167,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users/{userId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -221,7 +221,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -262,7 +262,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/idm/passwords', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -310,7 +310,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users/{userId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

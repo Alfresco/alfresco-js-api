@@ -77,7 +77,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/comments', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -126,7 +126,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/comments', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -173,7 +173,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/comments', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -220,7 +220,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/comments', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

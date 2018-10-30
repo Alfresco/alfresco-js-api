@@ -61,7 +61,7 @@ export class AuthenticationApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = LoginTicketEntry;
@@ -69,7 +69,7 @@ export class AuthenticationApi {
         return this.apiClient.callApi(
             '/tickets', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType, null, 'application/json'
+             contentTypes, accepts, returnType, null, 'application/json'
         );
     }
 
@@ -87,7 +87,7 @@ export class AuthenticationApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -95,7 +95,7 @@ export class AuthenticationApi {
         return this.apiClient.callApi(
             '/tickets/-me-', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -114,7 +114,7 @@ export class AuthenticationApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = ValidateTicketEntry;
@@ -122,7 +122,7 @@ export class AuthenticationApi {
         return this.apiClient.callApi(
             '/tickets/-me-', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 }

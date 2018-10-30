@@ -80,7 +80,7 @@ export class UnfiledRecordFoldersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json', 'multipart/form-data'];
         let accepts = ['application/json'];
         let returnType = UnfiledRecordFolderAssociationPaging;
@@ -88,7 +88,7 @@ export class UnfiledRecordFoldersApi {
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -115,7 +115,7 @@ export class UnfiledRecordFoldersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -123,7 +123,7 @@ export class UnfiledRecordFoldersApi {
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -158,7 +158,7 @@ export class UnfiledRecordFoldersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = UnfiledRecordFolderEntry;
@@ -166,7 +166,7 @@ export class UnfiledRecordFoldersApi {
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -210,7 +210,7 @@ export class UnfiledRecordFoldersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = UnfiledRecordFolderAssociationPaging;
@@ -218,7 +218,7 @@ export class UnfiledRecordFoldersApi {
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -259,7 +259,7 @@ export class UnfiledRecordFoldersApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = UnfiledRecordFolderEntry;
@@ -267,7 +267,7 @@ export class UnfiledRecordFoldersApi {
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 

@@ -71,7 +71,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/app-definitions/{modelId}/export', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -115,7 +115,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/app-definitions/import', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -165,7 +165,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/app-definitions/{modelId}/import', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -214,7 +214,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/app-definitions/{modelId}/publish', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

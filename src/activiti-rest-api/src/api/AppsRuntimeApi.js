@@ -70,7 +70,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/runtime-app-definitions', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -107,7 +107,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/runtime-app-definitions', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

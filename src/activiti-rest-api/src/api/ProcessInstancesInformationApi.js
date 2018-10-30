@@ -70,7 +70,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -111,7 +111,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

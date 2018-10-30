@@ -83,7 +83,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/users', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

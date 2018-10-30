@@ -67,7 +67,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = InstructionEntry;
@@ -75,7 +75,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/combined-instructions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -99,7 +99,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = ClassificationGuideEntry;
@@ -107,7 +107,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -144,7 +144,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = TopicEntry;
@@ -152,7 +152,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/topics/{topicId}/subtopics', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -189,7 +189,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = TopicEntry;
@@ -197,7 +197,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}/topics', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -224,7 +224,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -232,7 +232,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -258,7 +258,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -266,7 +266,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/topics/{topicId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -298,7 +298,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = ClassificationGuidePaging;
@@ -306,7 +306,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -347,7 +347,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = SubtopicPaging;
@@ -355,7 +355,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/topics/{topicId}/subtopics', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -396,7 +396,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = TopicPaging;
@@ -404,7 +404,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}/topics', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -430,7 +430,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = ClassificationGuideEntry;
@@ -438,7 +438,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -469,7 +469,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = TopicEntry;
@@ -477,7 +477,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/topics/{topicId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -510,7 +510,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = ClassificationGuideEntry;
@@ -518,7 +518,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 
@@ -555,7 +555,7 @@ export class ClassificationGuidesApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = TopicEntry;
@@ -563,7 +563,7 @@ export class ClassificationGuidesApi {
         return this.apiClient.callApi(
             '/topics/{topicId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 

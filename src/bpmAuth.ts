@@ -28,10 +28,7 @@ export class BpmAuth extends AlfrescoApiClient {
     ticket: string;
     authentications: any;
 
-    /**
-     * @param {Object} config
-     */
-    constructor(config) {
+    constructor(config: AlfrescoApiConfig) {
         super();
         this.className = 'BpmAuth';
 
@@ -70,12 +67,12 @@ export class BpmAuth extends AlfrescoApiClient {
 
     /**
      * login Activiti API
-     * @param  {String} username:   // Username to login
-     * @param  {String} password:   // Password to login
+     * @param  username:   // Username to login
+     * @param  password:   // Password to login
      *
-     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+     * @returns A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    login(username, password) {
+    login(username: string, password: string): Promise<any> {
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
@@ -100,7 +97,7 @@ export class BpmAuth extends AlfrescoApiClient {
             this.callApi(
                 '/app/authentication', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                authNames, contentTypes, accepts
+                 contentTypes, accepts
             ).then(
                 (data) => {
                     this.saveUsername(username);
@@ -132,7 +129,7 @@ export class BpmAuth extends AlfrescoApiClient {
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    logout() {
+    logout(): Promise<any> {
         this.saveUsername('');
         let postBody = {}, pathParams = {}, queryParams = {}, headerParams = {}, formParams = {};
 
@@ -144,7 +141,7 @@ export class BpmAuth extends AlfrescoApiClient {
             this.callApi(
                 '/app/logout', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                authNames, contentTypes, accepts
+                 contentTypes, accepts
             ).then(
                 () => {
                     promise.emit('logout');
@@ -168,9 +165,9 @@ export class BpmAuth extends AlfrescoApiClient {
     /**
      * Set the current Ticket
      *
-     * @param {String} Ticket
+     * @param  Ticket
      * */
-    setTicket(ticket) {
+    setTicket(ticket: string) {
         this.authentications.basicAuth.ticket = ticket;
         this.authentications.basicAuth.password = null;
         this.storage.setItem('ticket-BPM', ticket);
@@ -186,28 +183,22 @@ export class BpmAuth extends AlfrescoApiClient {
 
     /**
      * Get the current Ticket
-     *
-     * @returns {String} Ticket
      * */
-    getTicket() {
+    getTicket(): string {
         return this.ticket;
     }
 
     /**
      * If the client is logged in retun true
-     *
-     * @returns {Boolean} is logged in
      */
-    isLoggedIn() {
+    isLoggedIn(): boolean {
         return !!this.ticket;
     }
 
     /**
      * return the Authentication
-     *
-     * @returns {Object} authentications
      * */
-    getAuthentication() {
+    getAuthentication(): any {
         return this.authentications;
     }
 }

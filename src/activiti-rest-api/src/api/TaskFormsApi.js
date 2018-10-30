@@ -76,7 +76,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -133,7 +133,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -183,7 +183,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -225,7 +225,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -267,7 +267,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/variables', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -315,7 +315,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/save-form', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

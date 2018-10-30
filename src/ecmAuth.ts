@@ -31,10 +31,7 @@ export class EcmAuth extends AlfrescoApiClient {
     ticket: string;
     authentications: any;
 
-    /**
-     * @param {Object} config
-     */
-    constructor(config) {
+    constructor(config: AlfrescoApiConfig) {
         super();
 
         this.config = config;
@@ -61,7 +58,7 @@ export class EcmAuth extends AlfrescoApiClient {
         this.ticket = undefined;
     }
 
-    saveUsername(username) {
+    saveUsername(username: string) {
         if (this.storage.supportsStorage()) {
             this.storage.setItem('ACS_USERNAME', username);
         }
@@ -69,12 +66,12 @@ export class EcmAuth extends AlfrescoApiClient {
 
     /**
      * login Alfresco API
-     * @param  {String} username:   // Username to login
-     * @param  {String} password:   // Password to login
+     * @param  username:   // Username to login
+     * @param   password:   // Password to login
      *
-     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+     * @returns A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    login(username, password): Promise<any> {
+    login(username: string, password: string): Promise<any> {
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
@@ -112,7 +109,7 @@ export class EcmAuth extends AlfrescoApiClient {
     /**
      * validate the ticket present in this.config.ticket against the server
      *
-     * @returns {Promise} A promise that returns  if resolved and {error} if rejected.
+     * @returns A promise that returns  if resolved and {error} if rejected.
      * */
     validateTicket(): Promise<any> {
         let authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
@@ -171,9 +168,9 @@ export class EcmAuth extends AlfrescoApiClient {
     /**
      * Set the current Ticket
      *
-     * @param {String} Ticket
+     * @param Ticket
      * */
-    setTicket(ticket) {
+    setTicket(ticket: string) {
         this.authentications.basicAuth.username = 'ROLE_TICKET';
         this.authentications.basicAuth.password = ticket;
         this.storage.setItem(this.ticketStorageLabel, ticket);
@@ -183,9 +180,9 @@ export class EcmAuth extends AlfrescoApiClient {
     /**
      * Get the current Ticket
      *
-     * @returns {String} Ticket
+     * @returns Ticket
      * */
-    getTicket() {
+    getTicket(): string {
         return this.ticket;
     }
 
@@ -201,7 +198,7 @@ export class EcmAuth extends AlfrescoApiClient {
      *
      * @returns {Boolean} is logged in
      */
-    isLoggedIn() {
+    isLoggedIn(): boolean {
         return !!this.ticket;
     }
 
@@ -210,7 +207,7 @@ export class EcmAuth extends AlfrescoApiClient {
      *
      * @returns {Object} authentications
      * */
-    getAuthentication() {
+    getAuthentication(): any {
         return this.authentications;
     }
 

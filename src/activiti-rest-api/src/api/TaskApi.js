@@ -76,7 +76,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -124,7 +124,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/comments', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -172,7 +172,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/assign', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -220,7 +220,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/attach-form', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -263,7 +263,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/claim', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -311,7 +311,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -354,7 +354,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/complete', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -396,7 +396,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -448,7 +448,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -501,7 +501,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/raw-content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -543,7 +543,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -585,7 +585,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/filter', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -627,7 +627,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -661,7 +661,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/audit', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -697,7 +697,7 @@
       return this.apiClient.callApi(
         '/app/rest/tasks/{taskId}/audit', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, contextRoot, responseType
+         contentTypes, accepts, returnType, contextRoot, responseType
       );
     }
 
@@ -739,7 +739,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -796,7 +796,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -846,7 +846,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -892,7 +892,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/comments', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -934,7 +934,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -976,7 +976,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -1024,7 +1024,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/involve', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -1060,7 +1060,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/query', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -1108,7 +1108,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/checklist', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -1150,7 +1150,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/remove-form', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -1198,7 +1198,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/remove-involved', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -1246,7 +1246,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/task-forms/{taskId}/save-form', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -1289,7 +1289,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/action/unclaim', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -1339,7 +1339,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

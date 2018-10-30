@@ -70,7 +70,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -112,7 +112,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -154,7 +154,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes/{userFilterId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -196,7 +196,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks/{userFilterId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -239,7 +239,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes/{userFilterId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -279,7 +279,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -322,7 +322,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks/{userFilterId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -362,7 +362,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -403,7 +403,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -444,7 +444,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -493,7 +493,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/processes/{userFilterId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -542,7 +542,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/filters/tasks/{userFilterId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

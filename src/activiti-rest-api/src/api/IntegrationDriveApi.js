@@ -71,7 +71,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/google-drive/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -114,7 +114,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/google-drive/files', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

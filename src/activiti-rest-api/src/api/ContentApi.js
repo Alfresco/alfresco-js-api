@@ -78,7 +78,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -129,7 +129,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/raw-content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -181,7 +181,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -234,7 +234,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/raw-content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -276,7 +276,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/raw', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -317,7 +317,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -359,7 +359,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/{contentId}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -401,7 +401,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/{contentId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -443,7 +443,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -487,7 +487,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/{contentId}/raw', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, contextRoot, responseType
+         contentTypes, accepts, returnType, contextRoot, responseType
       );
     }
 
@@ -520,7 +520,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/{contentId}/rendition/preview', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, contextRoot, responseType
+         contentTypes, accepts, returnType, contextRoot, responseType
       );
     }
 
@@ -566,7 +566,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/content/{contentId}/rendition/thumbnail', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, contextRoot, responseType
+         contentTypes, accepts, returnType, contextRoot, responseType
       );
     }
 
@@ -611,7 +611,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/process-instances/{processInstanceId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -656,7 +656,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/tasks/{taskId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

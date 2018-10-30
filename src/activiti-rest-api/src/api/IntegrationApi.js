@@ -71,7 +71,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -114,7 +114,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -157,7 +157,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/google-drive/confirm-auth-request', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -204,7 +204,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -246,7 +246,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -281,7 +281,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -324,7 +324,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -367,7 +367,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco/{repositoryId}/sites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -402,7 +402,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/status', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -451,7 +451,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -500,7 +500,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -549,7 +549,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -598,7 +598,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -639,7 +639,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/files', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -682,7 +682,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/google-drive/files', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -724,7 +724,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/profile/accounts/alfresco', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -766,7 +766,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
 
@@ -814,7 +814,7 @@
       return this.apiClient.callApi(
         '/api/enterprise/integration/box/{userId}/account', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+         contentTypes, accepts, returnType
       );
     }
   };

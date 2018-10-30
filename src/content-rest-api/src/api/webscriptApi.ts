@@ -66,15 +66,15 @@ export class WebscriptApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = ['basicAuth'];
-        let contentTypes = [this.apiClient.contentTypes.json];
-        let accepts = [this.apiClient.contentTypes.json, 'text/html'];
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json', 'text/html'];
         let returnType = {};
 
         return this.apiClient.callApi(
             '/' + servicePath + '/' + scriptPath, httpMethod,
             pathParams, scriptArgs, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType, contextRoot
+             contentTypes, accepts, returnType, contextRoot
         );
     }
 }

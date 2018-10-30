@@ -77,7 +77,7 @@
             return this.apiClient.callApi(
                 '/app/rest/models/{processModelId}/history/{processModelHistoryId}/model-json', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                authNames, contentTypes, accepts, returnType
+                 contentTypes, accepts, returnType
             );
         }
 
@@ -119,7 +119,7 @@
             return this.apiClient.callApi(
                 '/app/rest/models/{processModelId}/model-json', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                authNames, contentTypes, accepts, returnType
+                 contentTypes, accepts, returnType
             );
         }
 
@@ -158,7 +158,7 @@
             return this.apiClient.callApi(
               '/app/rest/process-definitions/{processDefinitionId}/model-json', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                authNames, contentTypes, accepts, returnType
+                 contentTypes, accepts, returnType
             );
         }
 
@@ -197,7 +197,7 @@
             return this.apiClient.callApi(
               '/app/rest/process-instances/{processInstanceId}/model-json', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                authNames, contentTypes, accepts, returnType
+                 contentTypes, accepts, returnType
             );
         }
     };

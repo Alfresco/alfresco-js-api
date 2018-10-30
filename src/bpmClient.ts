@@ -26,10 +26,7 @@ export class BpmClient extends AlfrescoApiClient {
     host: string;
     basePath: string;
 
-    /**
-     * @param {Object} config
-     */
-    constructor(config) {
+    constructor(config: AlfrescoApiConfig) {
         super();
 
         this.config = config;

@@ -88,7 +88,7 @@ export class AlfrescoUpload extends NodesApi {
         let headerParams = {};
         formParams = formParams || {};
 
-        let authNames = ['basicAuth'];
+
         let contentTypes = ['multipart/form-data'];
         let accepts = ['application/json'];
         let returnType = NodeEntry;
@@ -96,7 +96,7 @@ export class AlfrescoUpload extends NodesApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            authNames, contentTypes, accepts, returnType
+             contentTypes, accepts, returnType
         );
     }
 }
