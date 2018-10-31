@@ -1,5 +1,8 @@
 package com.alfresco.codegen;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -80,7 +83,7 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
             new SupportingFile("models.mustache", modelPackage().replace('.', File.separatorChar), "models.ts"));
         supportingFiles
             .add(new SupportingFile("apis.mustache", apiPackage().replace('.', File.separatorChar), "api.ts"));
-        supportingFiles.add(new SupportingFile("baseApi.mustache",  apiPackage().replace('.', File.separatorChar), "baseApi.ts"));
+        supportingFiles.add(new SupportingFile("base.api.mustache",  apiPackage().replace('.', File.separatorChar), "base.api.ts"));
         supportingFiles.add(new SupportingFile("index.mustache", getIndexDirectory(), "index.ts"));
         supportingFiles.add(new SupportingFile("configuration.mustache", getIndexDirectory(), "configuration.ts"));
         supportingFiles.add(new SupportingFile("gitignore", "", ".gitignore"));
@@ -105,15 +108,38 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
 
     @Override
     public String getTypeDeclaration(Property p) {
+
         if (p instanceof FileProperty) {
             return "Blob";
         } else if (p instanceof ObjectProperty) {
+            return "any";
+        } else if (p instanceof ArrayProperty) {
+            ArrayProperty ap = (ArrayProperty) p;
+            Property inner = ap.getItems();
             return "any";
         } else {
             return super.getTypeDeclaration(p);
         }
     }
 
+    public String escapeText(String input) {
+        if (input == null) {
+            return input;
+        }
+
+        // remove \t, \n, \r
+        // replace \ with \\
+        // replace " with \"
+        // outter unescape to retain the original multi-byte characters
+        // finally escalate characters avoiding code injection
+        return escapeUnsafeCharacters(
+            StringEscapeUtils.unescapeJava(
+                StringEscapeUtils.escapeJava(input)
+                    .replace("`", "")
+                    .replace("\\/", "/"))
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\""));
+    }
 
     @Override
     public String getSwaggerType(Property p) {
@@ -166,7 +192,27 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
             im.put("classname", getModelnameFromModelFilename(im.get("filename").toString()));
         }
 
-        return operations;
+        if (objs != null) {
+            List<CodegenOperation> ops = (List<CodegenOperation>) objs.get("operation");
+            for (CodegenOperation operation : ops) {
+                List<String> argList = new ArrayList<String>();
+                boolean hasOptionalParams = false;
+                for (CodegenParameter p : operation.allParams) {
+                    if (p.required) {
+                        argList.add(p.paramName + ": "+ p.dataType);
+                    } else {
+                        hasOptionalParams = true;
+                    }
+                }
+                if (hasOptionalParams) {
+                    argList.add("opts: any");
+                }
+
+                operation.vendorExtensions.put("x-codegen-argList", StringUtils.join(argList, ", "));
+            }
+        }
+
+        return objs;
     }
 
     /**

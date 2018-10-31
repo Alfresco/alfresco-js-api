@@ -3,58 +3,57 @@
 {{#imports}}
 import { {{classname}} } from '../{{filename}}';
 {{/imports}}
+import { BaseApi } from './base.api';
 
-{{#operations}}
-
-{{#description}}
-/**
- * {{&description}}
- */
-{{/description}}
-{{#operation}}
+{{#operations}}/**
+* {{baseName}} service.
+* @module {{#invokerPackage}}{{&invokerPackage}}/{{/invokerPackage}}{{#apiPackage}}{{&apiPackage}}/{{/apiPackage}}{{classname}}
+*/
 export class {{classname}} extends BaseApi {
+    {{#operation}}/**
+    * {{&summary}}
+    * {{&description}}
+    * {{&notes}}{{#allParams}}
+    * @param {{paramName}} {{&description}}{{/allParams}}
+    */
+    {{nickname}}({{vendorExtensions.x-codegen-argList}}) : Promise<{{#returnType}}{{{returnType}}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}> {
+        {{#hasOptionalParams}}opts = opts || {};{{/hasOptionalParams}}
+        let postBody = {{#bodyParam}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
+        {{#allParams}}{{#required}}
+        if ({{paramName}} === undefined || {{paramName}} === null) {
+            throw new Error("Required param '{{paramName}}' in {{operationId}}");
+        }
+        {{/required}}{{/allParams}}
+        let pathParams = {
+            {{#pathParams}}
+            '{{baseName}}': {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{#hasMore}},{{/hasMore}}{{/pathParams}}
+        };
+        let queryParams = { {{#queryParams}}{{^collectionFormat}}
+            '{{baseName}}': {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}},{{/collectionFormat}}{{/queryParams}}
+        };
+        let collectionQueryParams = { {{#queryParams}}{{#collectionFormat}}
+            '{{baseName}}': {
+                value: {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}},
+                collectionFormat: '{{collectionFormat}}'
+            }{{#hasMore}},{{/hasMore}}{{/collectionFormat}}{{/queryParams}}
+        };
+        let headerParams = {
+            {{#headerParams}}
+            '{{baseName}}': {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{#hasMore}},{{/hasMore}}{{/headerParams}}
+        };
+        let formParams = { {{#formParams}}
+        '{{baseName}}': {{#collectionFormat}}this.apiClient.buildCollectionParam({{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}, '{{collectionFormat}}'){{/collectionFormat}}{{^collectionFormat}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/collectionFormat}}{{#hasMore}},{{/hasMore}}{{/formParams}}
+        };
 
-{{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{#hasMore}}, {{/hasMore}}{{/allParams}}): Promise<{{#returnType}}{{{returnType}}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}> {
+        let contentTypes = [{{#consumes}}'{{& mediaType}}'{{#hasMore}}, {{/hasMore}}{{/consumes}}];
+        let accepts = [{{#produces}}'{{& mediaType}}'{{#hasMore}}, {{/hasMore}}{{/produces}}];
 
-    opts = opts || {};
-    var postBody = <#bodyParam><#required><paramName></required><^required>opts['<paramName>']</required></bodyParam><^bodyParam>null</bodyParam>;
-    <#allParams><#required>
-    // verify the required parameter '<paramName>' is set
-    if (<paramName> === undefined || <paramName> === null) {
-    throw new Error("Missing the required parameter '<paramName>' when calling <operationId>");
+        return this.apiClient.callApi(
+        '{{&path}}', '{{httpMethod}}',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        contentTypes, accepts)
     }
-    </required></allParams>
-
-    var pathParams = {<#pathParams>
-    '<baseName>': <#required><paramName></required><^required>opts['<paramName>']</required><#hasMore>,</hasMore></pathParams>
-    };
-    var queryParams = {<#queryParams><^collectionFormat>
-    '<baseName>': <#required><paramName></required><^required>opts['<paramName>']</required>,</collectionFormat></queryParams>
-    };
-    var collectionQueryParams = {<#queryParams><#collectionFormat>
-    '<baseName>': {
-    value: <#required><paramName></required><^required>opts['<paramName>']</required>,
-    collectionFormat: '<collectionFormat>'
-    },</collectionFormat></queryParams>
-    };
-    var headerParams = {<#headerParams>
-    '<baseName>': <#required><paramName></required><^required>opts['<paramName>']</required><#hasMore>,</hasMore></headerParams>
-    };
-    var formParams = {<#formParams>
-    '<baseName>': <#collectionFormat>this.apiClient.buildCollectionParam(<#required><paramName></required><^required>opts['<paramName>']</required>, '<collectionFormat>')</collectionFormat><^collectionFormat><#required><paramName></required><^required>opts['<paramName>']</required></collectionFormat><#hasMore>,</hasMore></formParams>
-    };
-
-    var contentTypes = [<#consumes>'<& mediaType>'<#hasMore>, </hasMore></consumes>];
-    var accepts = [<#produces>'<& mediaType>'<#hasMore>, </hasMore></produces>];
-    var returnType = <#returnType><&returnType></returnType><^returnType>null</returnType>;
-
-    return this.apiClient.callApi(
-    '<&path>', '<httpMethod>',
-    pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-    contentTypes, accepts, returnType<^usePromises></usePromises>
-    );
-    }
-    <#usePromises>
-}
 {{/operation}}
+
+}
 {{/operations}}
