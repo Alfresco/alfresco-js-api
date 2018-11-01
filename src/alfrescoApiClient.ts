@@ -89,7 +89,7 @@ export class AlfrescoApiClient {
         }
         let url = this.basePath + path;
         let _this = this;
-        url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
+        url = url.replace(/\{([\w-]+)\}/g, function(fullMatch, key) {
             let value;
             if (pathParams.hasOwnProperty(key)) {
                 value = _this.paramToString(pathParams[key]);
@@ -272,7 +272,6 @@ export class AlfrescoApiClient {
         return this.convertToType(data, returnType);
     }
 
-
     /**
      * Parses an ISO-8601 string representation of a date value.
      * @param  dateToConvert The date value as a string.
@@ -300,7 +299,7 @@ export class AlfrescoApiClient {
 
         // Compatible with Safari 9.1.2
         let parts = dateToConvert.split('+');
-        let dateParts = dateToConvert.split(/[^0-9]/).map(function (s) {
+        let dateParts = dateToConvert.split(/[^0-9]/).map(function(s) {
             return parseInt(s, 10);
         });
         return new Date(Date.UTC(dateParts[0], dateParts[1] - 1 || 0, dateParts[2] || 1, dateParts[3] || 0, dateParts[4] || 0, dateParts[5] || 0, dateParts[6] || 0));
@@ -354,7 +353,7 @@ export class AlfrescoApiClient {
                     // for array type like: ['String']
                     let itemType = type[0];
                     if (data) {
-                        return data.map(function (item) {
+                        return data.map(function(item) {
                             return this.convertToType(item, itemType);
                         });
                     } else {
@@ -412,7 +411,7 @@ export class AlfrescoApiClient {
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
     callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-            contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
+        contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
 
         let url;
 
@@ -424,7 +423,7 @@ export class AlfrescoApiClient {
         }
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-                                contentTypes, accepts, returnType, contextRoot, responseType, url);
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -448,11 +447,11 @@ export class AlfrescoApiClient {
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
     callCustomApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-                  contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
+        contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
         let url = this.buildUrlCustomBasePath(path, '', pathParams);
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-                                contentTypes, accepts, returnType, contextRoot, responseType, url);
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -476,12 +475,12 @@ export class AlfrescoApiClient {
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
     callHostApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-                contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string, url?: string): Promise<any> {
+        contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string, url?: string): Promise<any> {
         let eventEmitter: Emitter = {};
         Emitter(eventEmitter); // jshint ignore:line
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-                                        contentTypes, accepts, responseType, eventEmitter, returnType);
+            contentTypes, accepts, responseType, eventEmitter, returnType);
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
@@ -527,27 +526,27 @@ export class AlfrescoApiClient {
             });
         });
 
-        promise.on = function () {
+        promise.on = function() {
             eventEmitter.on.apply(eventEmitter, arguments);
             return this;
         };
 
-        promise.once = function () {
+        promise.once = function() {
             eventEmitter.once.apply(eventEmitter, arguments);
             return this;
         };
 
-        promise.emit = function () {
+        promise.emit = function() {
             eventEmitter.emit.apply(eventEmitter, arguments);
             return this;
         };
 
-        promise.off = function () {
+        promise.off = function() {
             eventEmitter.off.apply(eventEmitter, arguments);
             return this;
         };
 
-        promise.abort = function () {
+        promise.abort = function() {
             request.abort();
             return this;
         };
@@ -616,7 +615,7 @@ export class AlfrescoApiClient {
         }
         let url = basePath + path;
         let _this = this;
-        url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
+        url = url.replace(/\{([\w-]+)\}/g, function(fullMatch, key) {
             let value;
             if (pathParams.hasOwnProperty(key)) {
                 value = _this.paramToString(pathParams[key]);
@@ -629,7 +628,7 @@ export class AlfrescoApiClient {
     }
 
     buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-                 contentTypes, accepts, responseType, eventEmitter, returnType) {
+        contentTypes, accepts, responseType, eventEmitter, returnType) {
         let request = superagent(httpMethod, url);
 
         // apply authentications

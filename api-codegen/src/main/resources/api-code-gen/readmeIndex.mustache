@@ -1,0 +1,22 @@
+{{#appDescription}}
+{{{appDescription}}}
+{{/appDescription}}
+
+{{^hideGenerationTimestamp}}
+- Last Build date: {{generatedDate}}
+{{/hideGenerationTimestamp}}
+
+
+## Documentation for API Endpoints
+
+All URIs are relative to *{{basePath}}*
+
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+{{#apiInfo}}{{#apis}}{{#operations}}{{#operation}}*{{moduleName}}.{{classname}}* | [**{{operationId}}**](docs/{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
+
+## Documentation for Models
+
+{{#models}}{{#model}} - [{{moduleName}}.{{classname}}](docs/{{classname}}.md)
+{{/model}}{{/models}}

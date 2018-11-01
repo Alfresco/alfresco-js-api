@@ -21,6 +21,8 @@ import io.swagger.codegen.CodegenOperation;
 import io.swagger.codegen.SupportingFile;
 import io.swagger.models.ModelImpl;
 import io.swagger.models.properties.*;
+import io.swagger.codegen.SupportingFile;
+import io.swagger.models.Swagger;
 
 public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen implements CodegenConfig {
 
@@ -36,6 +38,8 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
     protected String npmName = null;
     protected String npmVersion = "1.0.0";
     protected String npmRepository = null;
+    protected String apiDocPath = "docs/";
+    protected String modelDocPath = "docs/";
 
     private boolean taggedUnions = false;
 
@@ -51,6 +55,9 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
         apiPackage = "api";
         modelPackage = "model";
 
+        apiDocTemplateFiles.put("api_doc.mustache", ".md");
+        modelDocTemplateFiles.put("model_doc.mustache", ".md");
+
         this.cliOptions.add(new CliOption(NPM_NAME, "The name under which you want to publish generated npm package." +
             " Required to generate a full package"));
         this.cliOptions.add(new CliOption(NPM_VERSION, "The version of your npm package. Default is '1.0.0'"));
@@ -59,7 +66,12 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
         this.cliOptions.add(new CliOption(TAGGED_UNIONS,
             "Use discriminators to create tagged unions instead of extending interfaces.",
             BooleanProperty.TYPE).defaultValue(Boolean.FALSE.toString()));
+    }
 
+    @Override
+    public void preprocessSwagger(Swagger swagger) {
+        super.preprocessSwagger(swagger);
+        supportingFiles.add(new SupportingFile("readmeIndex.mustache", "",  "README.md"));
     }
 
     @Override
@@ -85,10 +97,6 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
             .add(new SupportingFile("apis.mustache", apiPackage().replace('.', File.separatorChar), "api.ts"));
         supportingFiles.add(new SupportingFile("base.api.mustache",  apiPackage().replace('.', File.separatorChar), "base.api.ts"));
         supportingFiles.add(new SupportingFile("index.mustache", getIndexDirectory(), "index.ts"));
-        supportingFiles.add(new SupportingFile("configuration.mustache", getIndexDirectory(), "configuration.ts"));
-        supportingFiles.add(new SupportingFile("gitignore", "", ".gitignore"));
-        supportingFiles.add(new SupportingFile("README.mustache", getIndexDirectory(), "README.md"));
-
 
         if (additionalProperties.containsKey(TAGGED_UNIONS)) {
             taggedUnions = Boolean.parseBoolean(additionalProperties.get(TAGGED_UNIONS).toString());
@@ -283,15 +291,42 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
         if (name.length() == 0) {
             return "DefaultService";
         }
-        return initialCaps(name) + "Service";
+        return initialCaps(name) + "Api";
     }
 
     @Override
     public String toApiFilename(String name) {
         if (name.length() == 0) {
-            return "default.service";
+            return "default.api";
         }
-        return camelize(name, true) + ".service";
+        return camelize(name, true) + ".api";
+    }
+
+    @Override
+    public String apiDocFileFolder() {
+        return createPath(outputFolder, apiDocPath);
+    }
+
+    @Override
+    public String modelDocFileFolder() {
+        return createPath(outputFolder, modelDocPath);
+    }
+
+    private String createPath(String... segments) {
+        StringBuilder buf = new StringBuilder();
+        for (String segment : segments) {
+            if (!StringUtils.isEmpty(segment) && !segment.equals(".")) {
+                if (buf.length() != 0)
+                    buf.append(File.separatorChar);
+                buf.append(segment);
+            }
+        }
+        for (int i = 0; i < buf.length(); i++) {
+            char c = buf.charAt(i);
+            if ((c == '/' || c == '\\') && c != File.separatorChar)
+                buf.setCharAt(i, File.separatorChar);
+        }
+        return buf.toString();
     }
 
     @Override

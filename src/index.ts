@@ -15,12 +15,12 @@
  * limitations under the License.
  */
 
-export * from './content-rest-api/src/index';
-export * from './discovery-rest-api/src/index';
-export * from './gs-classification-rest-api/src/index';
-export * from './gs-core-rest-api/src/index';
-export * from './auth-rest-api/src/index';
-export * from './activiti-rest-api/src/index';
+export * from './api/content-rest-api/src/index';
+export * from './api/discovery-rest-api/src/index';
+export * from './api/gs-classification-rest-api/src/index';
+export * from './api/gs-core-rest-api/src/index';
+export * from './api/auth-rest-api/src/index';
+export * from './api/activiti-rest-api/src/index';
 export * from './alfrescoContent';
 export * from './alfrescoUpload';
 export * from './ecmAuth';

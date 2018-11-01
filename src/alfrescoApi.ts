@@ -118,7 +118,6 @@ export class AlfrescoApi {
         //
         // this.gsClient.off('error');
 
-
         this.ecmClient.on('error', (error) => {
             this.errorHandler(error);
         });
@@ -190,7 +189,7 @@ export class AlfrescoApi {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            },                     () => {
+            }, () => {
             });
 
             return oauth2AuthPromise;
@@ -299,7 +298,7 @@ export class AlfrescoApi {
                 let ecmPromise = this.ecmAuth.logout();
                 ecmPromise.then(() => {
                     this.config.ticket = undefined;
-                },              () => {
+                }, () => {
                 });
 
                 return ecmPromise;

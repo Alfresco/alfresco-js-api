@@ -88,7 +88,6 @@ export class AlfrescoUpload extends NodesApi {
         let headerParams = {};
         formParams = formParams || {};
 
-
         let contentTypes = ['multipart/form-data'];
         let accepts = ['application/json'];
         let returnType = NodeEntry;

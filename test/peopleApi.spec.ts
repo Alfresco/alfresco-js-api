@@ -6,9 +6,9 @@ import { PeopleApi } from '../src/content-rest-api/src/api/PeopleApi';
 
 let PeopleMock = require('../test/mockObjects/mockAlfrescoApi').PeopleApi;
 
-describe('PeopleApi', function () {
+describe('PeopleApi', function() {
 
-    beforeEach(function () {
+    beforeEach(function() {
         this.peopleMock = new PeopleMock();
 
         this.alfrescoApi = new AlfrescoApi();
@@ -17,7 +17,7 @@ describe('PeopleApi', function () {
         });
     });
 
-    it.only('should add a person', function (done) {
+    it.only('should add a person', function(done) {
         let personBodyCreate = new PersonBodyCreate();
         this.peopleMock.get201Response();
 
@@ -28,12 +28,11 @@ describe('PeopleApi', function () {
         personBodyCreate.password = 'Rrrrrrrghghghghgh';
 
         let peopleApiService = new PeopleApi(this.alfrescoApi);
-        peopleApiService.addPerson(personBodyCreate).then(function () {
+        peopleApiService.addPerson(personBodyCreate).then(function() {
             done();
-        },                                                function (error) {
+        }, function(error) {
             console.error(error);
         });
-
 
     });
 

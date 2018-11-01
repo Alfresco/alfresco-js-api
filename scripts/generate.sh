@@ -33,9 +33,15 @@ mvn package
 
 cd $DIR/..
 
+echo "================== Generate files =================="
+
 java -cp api-codegen/target/api-code-gen-swagger-codegen-1.0.0.jar:api-codegen/swagger-codegen-cli.jar \
 io.swagger.codegen.SwaggerCodegen generate \
 -l api-code-gen \
 -i $DEFINTION_FILE \
 -o $OUTPUT_FOLDER
 
+
+echo "================== Format generated files =================="
+
+npm run format-ts --$OUTPUT_FOLDER/*.*
