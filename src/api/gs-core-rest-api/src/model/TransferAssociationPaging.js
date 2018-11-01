@@ -2,10 +2,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', './TransferAssociationPagingList'], factory);
+    define(['../../../../alfrescoApiClient', './TransferAssociationPagingList'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('./TransferAssociationPagingList'));
+    module.exports = factory(require('../../../../alfrescoApiClient'), require('./TransferAssociationPagingList'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoGovernanceServicesRestApi) {

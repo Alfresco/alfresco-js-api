@@ -20,7 +20,7 @@ import { GroupBody } from '../model/GroupBody';
 import { GroupsEntry } from '../model/GroupsEntry';
 import { GroupMemberPaging } from '../model/GroupMemberPaging';
 import { GroupMemberEntry } from '../model/GroupMemberEntry';
-import { GroupMember } from '../../../../.history/index.d_20180627184613';
+import { GroupMember } from '../model/GroupMember';
 import { BaseApi } from './baseApi';
 
 /**

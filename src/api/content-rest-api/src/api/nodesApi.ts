@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+import { AlfrescoApiClient } from '../../../../alfrescoApiClient';
 import { NodeEntry } from '../model/NodeEntry';
 import { NodeBody } from '../model/NodeBody';
 import { CopyBody } from '../model/CopyBody';

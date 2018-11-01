@@ -1,10 +1,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/UserAccountCredentialsRepresentation', '../model/ResultListDataRepresentation', '../model/BoxUserAccountCredentialsRepresentation'], factory);
+    define(['../../../../alfrescoApiClient', '../model/UserAccountCredentialsRepresentation', '../model/ResultListDataRepresentation', '../model/BoxUserAccountCredentialsRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/UserAccountCredentialsRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/BoxUserAccountCredentialsRepresentation'));
+    module.exports = factory(require('../../../../alfrescoApiClient'), require('../model/UserAccountCredentialsRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/BoxUserAccountCredentialsRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

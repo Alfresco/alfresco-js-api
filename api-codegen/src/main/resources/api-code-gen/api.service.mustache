@@ -13,8 +13,12 @@ export class {{classname}} extends BaseApi {
     {{#operation}}/**
     * {{&summary}}
     * {{&description}}
-    * {{&notes}}{{#allParams}}
-    * @param {{paramName}} {{&description}}{{/allParams}}
+    * {{&notes}}
+    * {{#allParams}}{{#required}}
+    * @param {{&vendorExtensions.x-jsdoc-type}} {{paramName}} {{description}}{{/required}}{{/allParams}}{{#hasOptionalParams}}
+    * @param Object opts Optional parameters{{#allParams}}{{^required}}
+    * @param {{&vendorExtensions.x-jsdoc-type}} opts.{{paramName}} {{description}}{{#defaultValue}} (default to {{.}}){{/defaultValue}}{{/required}}{{/allParams}}{{/hasOptionalParams}}
+    * @return Promise<{{#returnType}}{{{returnType}}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}>
     */
     {{nickname}}({{vendorExtensions.x-codegen-argList}}) : Promise<{{#returnType}}{{{returnType}}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}> {
         {{#hasOptionalParams}}opts = opts || {};{{/hasOptionalParams}}
@@ -28,15 +32,11 @@ export class {{classname}} extends BaseApi {
             {{#pathParams}}
             '{{baseName}}': {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{#hasMore}},{{/hasMore}}{{/pathParams}}
         };
-        let queryParams = { {{#queryParams}}{{^collectionFormat}}
-            '{{baseName}}': {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}},{{/collectionFormat}}{{/queryParams}}
+
+        let queryParams = { {{#queryParams}}
+            '{{baseName}}': {{#collectionFormat}}this.apiClient.buildCollectionParam({{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}, '{{collectionFormat}}'){{/collectionFormat}}{{^collectionFormat}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/collectionFormat}}{{#hasMore}},{{/hasMore}}{{/queryParams}}
         };
-        let collectionQueryParams = { {{#queryParams}}{{#collectionFormat}}
-            '{{baseName}}': {
-                value: {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}},
-                collectionFormat: '{{collectionFormat}}'
-            }{{#hasMore}},{{/hasMore}}{{/collectionFormat}}{{/queryParams}}
-        };
+
         let headerParams = {
             {{#headerParams}}
             '{{baseName}}': {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{#hasMore}},{{/hasMore}}{{/headerParams}}
@@ -50,7 +50,7 @@ export class {{classname}} extends BaseApi {
 
         return this.apiClient.callApi(
         '{{&path}}', '{{httpMethod}}',
-        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        pathParams, queryParams, headerParams, formParams, postBody,
         contentTypes, accepts)
     }
 {{/operation}}

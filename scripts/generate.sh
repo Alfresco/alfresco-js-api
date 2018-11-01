@@ -41,6 +41,8 @@ io.swagger.codegen.SwaggerCodegen generate \
 -i $DEFINTION_FILE \
 -o $OUTPUT_FOLDER
 
+rm -rf $OUTPUT_FOLDER/.swagger-codegen-ignore
+rm -rf $OUTPUT_FOLDER/.swagger-codegen
 
 echo "================== Format generated files =================="
 

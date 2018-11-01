@@ -1,10 +1,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', './ReportDateRangeRepresentation'], factory);
+    define(['../../../../alfrescoApiClient', './ReportDateRangeRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('./ReportDateRangeRepresentation'));
+    module.exports = factory(require('../../../../alfrescoApiClient'), require('./ReportDateRangeRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-export * from '../../alfrescoApiClient';
+export * from '../../../alfrescoApiClient';
 export * from './model/ChildAssociationInfo';
 export * from './model/ContentInfo';
 export * from './model/Error';

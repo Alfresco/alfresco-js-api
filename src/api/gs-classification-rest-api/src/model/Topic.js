@@ -3,10 +3,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', './ClassificationGuideInTopic', './Instruction', './Path'], factory);
+    define(['../../../../alfrescoApiClient', './ClassificationGuideInTopic', './Instruction', './Path'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('./ClassificationGuideInTopic'), require('./Instruction'), require('./Path'));
+    module.exports = factory(require('../../../../alfrescoApiClient'), require('./ClassificationGuideInTopic'), require('./Instruction'), require('./Path'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoGovernanceServicesSecurityControls) {

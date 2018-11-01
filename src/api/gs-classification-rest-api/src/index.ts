@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-export * from '../../alfrescoApiClient';
+export * from '../../../alfrescoApiClient';
 export * from './model/ClassificationGuideBody';
 export * from './model/ClassificationGuideEntry';
 export * from './model/ClassificationGuidePaging';

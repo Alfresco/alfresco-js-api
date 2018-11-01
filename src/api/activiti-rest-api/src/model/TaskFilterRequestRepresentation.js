@@ -1,10 +1,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/TaskFilterRepresentation'], factory);
+    define(['../../../../alfrescoApiClient', '../model/TaskFilterRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('./TaskFilterRepresentation'));
+    module.exports = factory(require('../../../../alfrescoApiClient'), require('./TaskFilterRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

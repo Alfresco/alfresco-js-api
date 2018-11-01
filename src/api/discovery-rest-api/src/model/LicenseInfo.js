@@ -1,10 +1,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', './EntitlementsInfo'], factory);
+    define(['../../../../alfrescoApiClient', './EntitlementsInfo'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('./EntitlementsInfo'));
+    module.exports = factory(require('../../../../alfrescoApiClient'), require('./EntitlementsInfo'));
   } else {
     // Browser globals (root is window)
     if (!root.AlfrescoContentServicesRestApi) {

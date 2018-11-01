@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+import { AlfrescoApiClient } from '../../../../alfrescoApiClient';
 import { Error } from '../model/Error';
 import { TransferAssociationPaging } from '../model/TransferAssociationPaging';
 import { TransferEntry } from '../model/TransferEntry';

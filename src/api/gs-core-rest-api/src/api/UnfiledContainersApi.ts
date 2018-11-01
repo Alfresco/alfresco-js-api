@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+import { AlfrescoApiClient } from '../../../../alfrescoApiClient';
 import { Error } from '../model/Error';
 import { RMNodeBodyCreate } from '../model/RMNodeBodyCreate';
 import { UnfiledContainerAssociationPaging } from '../model/UnfiledContainerAssociationPaging';

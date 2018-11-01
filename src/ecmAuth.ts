@@ -15,8 +15,8 @@
  * limitations under the License.
  */
 
-import AlfrescoAuthRestApi = require('./auth-rest-api/src/api/AuthenticationApi');
-import LoginRequest = require('./auth-rest-api/src/model/LoginRequest');
+import AlfrescoAuthRestApi = require('./api/auth-rest-api/src/api/AuthenticationApi');
+import LoginRequest = require('./api/auth-rest-api/src/model/LoginRequest');
 import Emitter = require('event-emitter');
 import { AlfrescoApiClient } from './alfrescoApiClient';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';

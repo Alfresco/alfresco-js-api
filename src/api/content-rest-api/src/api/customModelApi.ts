@@ -16,7 +16,7 @@
 */
 
 import { BaseApi } from './baseApi';
-import { AlfrescoApi } from '../../../alfrescoApi';
+import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
  * Comments service.

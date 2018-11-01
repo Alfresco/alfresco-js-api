@@ -1,10 +1,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/ProcessInstanceFilterRequestRepresentation', '../model/ResultListDataRepresentation', '../model/FormDefinitionRepresentation', '../model/ProcessInstanceRepresentation', '../model/ProcessInstanceAuditRepresentation', '../model/ProcessFilterRequestRepresentation', '../model/FormValueRepresentation', '../model/CreateProcessInstanceRepresentation'], factory);
+    define(['../../../../alfrescoApiClient', '../model/ProcessInstanceFilterRequestRepresentation', '../model/ResultListDataRepresentation', '../model/FormDefinitionRepresentation', '../model/ProcessInstanceRepresentation', '../model/ProcessInstanceAuditRepresentation', '../model/ProcessFilterRequestRepresentation', '../model/FormValueRepresentation', '../model/CreateProcessInstanceRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/ProcessInstanceFilterRequestRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/ProcessInstanceRepresentation'), require('../model/ProcessInstanceAuditRepresentation'), require('../model/ProcessFilterRequestRepresentation'), require('../model/FormValueRepresentation'), require('../model/CreateProcessInstanceRepresentation'));
+    module.exports = factory(require('../../../../alfrescoApiClient'), require('../model/ProcessInstanceFilterRequestRepresentation'), require('../model/ResultListDataRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/ProcessInstanceRepresentation'), require('../model/ProcessInstanceAuditRepresentation'), require('../model/ProcessFilterRequestRepresentation'), require('../model/FormValueRepresentation'), require('../model/CreateProcessInstanceRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

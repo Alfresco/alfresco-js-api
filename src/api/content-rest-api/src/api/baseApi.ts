@@ -15,8 +15,8 @@
 * limitations under the License.
 */
 
-import { AlfrescoApi } from '../../../alfrescoApi';
-import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+import { AlfrescoApi } from '../../../../alfrescoApi';
+import { AlfrescoApiClient } from '../../../../alfrescoApiClient';
 
 export class BaseApi {
 

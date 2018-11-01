@@ -1,10 +1,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/CompleteFormRepresentation', '../model/FormValueRepresentation', '../model/FormDefinitionRepresentation', '../model/SaveFormRepresentation'], factory);
+    define(['../../../../alfrescoApiClient', '../model/CompleteFormRepresentation', '../model/FormValueRepresentation', '../model/FormDefinitionRepresentation', '../model/SaveFormRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('../model/CompleteFormRepresentation'), require('../model/FormValueRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/SaveFormRepresentation'), require('../model/ProcessInstanceVariableRepresentation'));
+    module.exports = factory(require('../../../../alfrescoApiClient'), require('../model/CompleteFormRepresentation'), require('../model/FormValueRepresentation'), require('../model/FormDefinitionRepresentation'), require('../model/SaveFormRepresentation'), require('../model/ProcessInstanceVariableRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {

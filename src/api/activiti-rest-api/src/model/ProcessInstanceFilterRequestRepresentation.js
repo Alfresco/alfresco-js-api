@@ -1,10 +1,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['../../../alfrescoApiClient', '../model/ProcessInstanceFilterRepresentation'], factory);
+    define(['../../../../alfrescoApiClient', '../model/ProcessInstanceFilterRepresentation'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../../../alfrescoApiClient'), require('./ProcessInstanceFilterRepresentation'));
+    module.exports = factory(require('../../../../alfrescoApiClient'), require('./ProcessInstanceFilterRepresentation'));
   } else {
     // Browser globals (root is window)
     if (!root.ActivitiPublicRestApi) {
