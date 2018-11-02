@@ -64,25 +64,23 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import DeclassificationexemptionsApi from 'DeclassificationexemptionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .DeclassificationexemptionsApi();
+let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createDeclassificationExemption(declassificationExemption, callback);
+declassificationexemptionsApi.createDeclassificationExemption(declassificationExemption).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -95,15 +93,6 @@ Name | Type | Description  | Notes
 
 [**DeclassificationExemptionEntry**](DeclassificationExemptionEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteDeclassificationExemption"></a>
 # **deleteDeclassificationExemption**
 > deleteDeclassificationExemption(declassificationExemptionId)
@@ -114,25 +103,23 @@ Deletes the declassification exemption with id **declassificationExemptionId**. 
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import DeclassificationexemptionsApi from 'DeclassificationexemptionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .DeclassificationexemptionsApi();
+let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteDeclassificationExemption(declassificationExemptionId, callback);
+declassificationexemptionsApi.deleteDeclassificationExemption(declassificationExemptionId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -145,15 +132,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listDeclassificationExemptions"></a>
 # **listDeclassificationExemptions**
 > DeclassificationExemptionsPaging listDeclassificationExemptions(opts)
@@ -164,29 +142,27 @@ Gets all declassification exemptions.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import DeclassificationexemptionsApi from 'DeclassificationexemptionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .DeclassificationexemptionsApi();
+let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // number | The maximum number of items to return in the list.
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listDeclassificationExemptions(opts, callback);
+declassificationexemptionsApi.listDeclassificationExemptions(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -200,15 +176,6 @@ Name | Type | Description  | Notes
 
 [**DeclassificationExemptionsPaging**](DeclassificationExemptionsPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="showDeclassificationExemptionById"></a>
 # **showDeclassificationExemptionById**
 > DeclassificationExemptionEntry showDeclassificationExemptionById(declassificationExemptionId)
@@ -219,25 +186,23 @@ Gets the declassification exemption with id **declassificationExemptionId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import DeclassificationexemptionsApi from 'DeclassificationexemptionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .DeclassificationexemptionsApi();
+let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.showDeclassificationExemptionById(declassificationExemptionId, callback);
+declassificationexemptionsApi.showDeclassificationExemptionById(declassificationExemptionId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -250,15 +215,6 @@ Name | Type | Description  | Notes
 
 [**DeclassificationExemptionEntry**](DeclassificationExemptionEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="updateDeclassificationExemption"></a>
 # **updateDeclassificationExemption**
 > DeclassificationExemptionEntry updateDeclassificationExemption(declassificationExemptionIddeclassificationExemption)
@@ -269,25 +225,23 @@ Updates the declassification exemption with id **declassificationExemptionId**. 
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import DeclassificationexemptionsApi from 'DeclassificationexemptionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .DeclassificationexemptionsApi();
+let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateDeclassificationExemption(declassificationExemptionIddeclassificationExemption, callback);
+declassificationexemptionsApi.updateDeclassificationExemption(declassificationExemptionIddeclassificationExemption).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -300,13 +254,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DeclassificationExemptionEntry**](DeclassificationExemptionEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

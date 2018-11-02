@@ -76,21 +76,21 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FavoritesApi from 'FavoritesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FavoritesApi();
+let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about favorites, the following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -104,14 +104,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createFavorite(personIdfavoriteBodyCreateopts, callback);
+favoritesApi.createFavorite(personIdfavoriteBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -136,10 +134,10 @@ JSON
 }
 
  | 
- **include** | [**any**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -155,15 +153,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**FavoriteEntry**](FavoriteEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="createSiteFavorite"></a>
 # **createSiteFavorite**
@@ -222,18 +211,18 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FavoritesApi from 'FavoritesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FavoritesApi();
+let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -247,14 +236,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createSiteFavorite(personIdfavoriteSiteBodyCreateopts, callback);
+favoritesApi.createSiteFavorite(personIdfavoriteSiteBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -263,7 +250,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **favoriteSiteBodyCreate** | [**FavoriteSiteBodyCreate**](FavoriteSiteBodyCreate.md)| The id of the site to favorite. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -280,15 +267,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**FavoriteSiteEntry**](FavoriteSiteEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteFavorite"></a>
 # **deleteFavorite**
 > deleteFavorite(personIdfavoriteId)
@@ -302,25 +280,23 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FavoritesApi from 'FavoritesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FavoritesApi();
+let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteFavorite(personIdfavoriteId, callback);
+favoritesApi.deleteFavorite(personIdfavoriteId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -333,15 +309,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="deleteSiteFavorite"></a>
 # **deleteSiteFavorite**
@@ -359,25 +326,23 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FavoritesApi from 'FavoritesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FavoritesApi();
+let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteSiteFavorite(personIdsiteId, callback);
+favoritesApi.deleteSiteFavorite(personIdsiteId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -390,15 +355,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getFavorite"></a>
 # **getFavorite**
@@ -413,21 +369,21 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FavoritesApi from 'FavoritesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FavoritesApi();
+let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about favorites, the following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -441,14 +397,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFavorite(personIdfavoriteIdopts, callback);
+favoritesApi.getFavorite(personIdfavoriteIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -457,10 +411,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **favoriteId** | **string**| The identifier of a favorite. | 
- **include** | [**any**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -476,15 +430,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**FavoriteEntry**](FavoriteEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getFavoriteSite"></a>
 # **getFavoriteSite**
@@ -502,18 +447,18 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FavoritesApi from 'FavoritesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FavoritesApi();
+let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -527,14 +472,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFavoriteSite(personIdsiteIdopts, callback);
+favoritesApi.getFavoriteSite(personIdsiteIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -543,7 +486,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **siteId** | **string**| The identifier of a site. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -559,15 +502,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**SiteEntry**](SiteEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listFavoriteSitesForPerson"></a>
 # **listFavoriteSitesForPerson**
@@ -585,24 +519,24 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FavoritesApi from 'FavoritesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FavoritesApi();
+let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -616,14 +550,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listFavoriteSitesForPerson(personIdopts, callback);
+favoritesApi.listFavoriteSitesForPerson(personIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -637,7 +569,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -653,15 +585,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**SitePaging**](SitePaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listFavorites"></a>
 # **listFavorites**
@@ -700,17 +623,17 @@ SQL
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FavoritesApi from 'FavoritesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FavoritesApi();
+let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
@@ -718,10 +641,10 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
 
   'where': where_example // string | A string to restrict the returned objects by using a predicate.
-  'include':  // any | Returns additional information about favorites, the following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -735,14 +658,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listFavorites(personIdopts, callback);
+favoritesApi.listFavorites(personIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -757,10 +678,10 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
  **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
- **include** | [**any**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -776,13 +697,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**FavoritePaging**](FavoritePaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

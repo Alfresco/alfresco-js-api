@@ -16,17 +16,17 @@ Query groups
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import GroupsApi from 'GroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .GroupsApi();
+let groupsApi = new GroupsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'filter': filter_example // string | filter
   'groupId': 789 // number | groupId
   'externalId': externalId_example // string | externalId
@@ -34,14 +34,12 @@ var opts = {
   'tenantId': 789 // number | tenantId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getGroupsUsingGET(opts, callback);
+groupsApi.getGroupsUsingGET(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -58,15 +56,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationLightGroupRepresentation**](ResultListDataRepresentationLightGroupRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getUsersForGroupUsingGET"></a>
 # **getUsersForGroupUsingGET**
 > ResultListDataRepresentationLightUserRepresentation getUsersForGroupUsingGET(groupId)
@@ -75,25 +64,23 @@ List members of a group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import GroupsApi from 'GroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .GroupsApi();
+let groupsApi = new GroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUsersForGroupUsingGET(groupId, callback);
+groupsApi.getUsersForGroupUsingGET(groupId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -105,13 +92,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResultListDataRepresentationLightUserRepresentation**](ResultListDataRepresentationLightUserRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

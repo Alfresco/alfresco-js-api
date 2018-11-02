@@ -54,5 +54,5 @@ export class RequestHighlight {
     /**
      * The fields to highlight and field specific configuration properties for each field
      */
-    fields?: any;
+    fields?: Array<RequestHighlightFields>;
 }

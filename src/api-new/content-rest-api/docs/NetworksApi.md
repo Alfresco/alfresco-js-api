@@ -19,18 +19,18 @@ Gets information for a network **networkId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NetworksApi from 'NetworksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NetworksApi();
+let networksApi = new NetworksApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -44,14 +44,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getNetwork(networkIdopts, callback);
+networksApi.getNetwork(networkIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -59,7 +57,7 @@ apiInstance.getNetwork(networkIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **networkId** | **string**| The identifier of a network. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -75,15 +73,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**PersonNetworkEntry**](PersonNetworkEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getNetworkForPerson"></a>
 # **getNetworkForPerson**
@@ -98,18 +87,18 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NetworksApi from 'NetworksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NetworksApi();
+let networksApi = new NetworksApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -123,14 +112,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getNetworkForPerson(personIdnetworkIdopts, callback);
+networksApi.getNetworkForPerson(personIdnetworkIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -139,7 +126,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **networkId** | **string**| The identifier of a network. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -156,15 +143,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**PersonNetworkEntry**](PersonNetworkEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listNetworksForPerson"></a>
 # **listNetworksForPerson**
 > PersonNetworkPaging listNetworksForPerson(personIdopts)
@@ -178,24 +156,24 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NetworksApi from 'NetworksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NetworksApi();
+let networksApi = new NetworksApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -209,14 +187,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listNetworksForPerson(personIdopts, callback);
+networksApi.listNetworksForPerson(personIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -230,7 +206,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -246,13 +222,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**PersonNetworkPaging**](PersonNetworkPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

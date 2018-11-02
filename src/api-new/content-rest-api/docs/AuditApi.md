@@ -37,25 +37,23 @@ You must have admin rights to delete audit information.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AuditApi from 'AuditApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AuditApi();
+let auditApi = new AuditApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteAuditEntriesForAuditApp(auditApplicationIdwhere, callback);
+auditApi.deleteAuditEntriesForAuditApp(auditApplicationIdwhere).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -73,15 +71,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteAuditEntry"></a>
 # **deleteAuditEntry**
 > deleteAuditEntry(auditApplicationIdauditEntryId)
@@ -97,25 +86,23 @@ You must have admin rights to delete audit information.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AuditApi from 'AuditApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AuditApi();
+let auditApi = new AuditApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteAuditEntry(auditApplicationIdauditEntryId, callback);
+auditApi.deleteAuditEntry(auditApplicationIdauditEntryId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -128,15 +115,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getAuditApp"></a>
 # **getAuditApp**
@@ -153,18 +131,18 @@ You must have admin rights to retrieve audit information.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AuditApi from 'AuditApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AuditApi();
+let auditApi = new AuditApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -178,14 +156,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAuditApp(auditApplicationIdopts, callback);
+auditApi.getAuditApp(auditApplicationIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -193,7 +169,7 @@ apiInstance.getAuditApp(auditApplicationIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **auditApplicationId** | **string**| The identifier of an audit application. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -210,15 +186,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**AuditApp**](AuditApp.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getAuditEntry"></a>
 # **getAuditEntry**
 > AuditEntryEntry getAuditEntry(auditApplicationIdauditEntryIdopts)
@@ -234,18 +201,18 @@ You must have admin rights to access audit information.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AuditApi from 'AuditApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AuditApi();
+let auditApi = new AuditApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -259,14 +226,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAuditEntry(auditApplicationIdauditEntryIdopts, callback);
+auditApi.getAuditEntry(auditApplicationIdauditEntryIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -275,7 +240,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **auditApplicationId** | **string**| The identifier of an audit application. | 
  **auditEntryId** | **string**| The identifier of an audit entry. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -291,15 +256,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**AuditEntryEntry**](AuditEntryEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listAuditApps"></a>
 # **listAuditApps**
@@ -323,24 +279,24 @@ You must have admin rights to retrieve audit information.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AuditApi from 'AuditApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AuditApi();
+let auditApi = new AuditApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -354,14 +310,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listAuditApps(opts, callback);
+auditApi.listAuditApps(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -374,7 +328,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -390,15 +344,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**AuditAppPaging**](AuditAppPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listAuditEntriesForAuditApp"></a>
 # **listAuditEntriesForAuditApp**
@@ -429,21 +374,21 @@ You must have admin rights to retrieve audit information.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AuditApi from 'AuditApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AuditApi();
+let auditApi = new AuditApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -468,10 +413,10 @@ If not supplied then the default value is 100.
 
 *   where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')
 
-  'include':  // any | Returns additional information about the audit entry. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the audit entry. The following optional fields can be requested:
 * values
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -485,14 +430,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listAuditEntriesForAuditApp(auditApplicationIdopts, callback);
+auditApi.listAuditEntriesForAuditApp(auditApplicationIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -503,7 +446,7 @@ Name | Type | Description  | Notes
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
  | [optional] [default to 0]
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -528,10 +471,10 @@ If not supplied then the default value is 100.
 
 *   where&#x3D;(valuesKey&#x3D;&#39;/alfresco-access/transaction/action&#39; and valuesValue&#x3D;&#39;DELETE&#39;)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
 * values
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -547,15 +490,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**AuditEntryPaging**](AuditEntryPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listAuditEntriesForNode"></a>
 # **listAuditEntriesForNode**
@@ -579,21 +513,21 @@ This relies on the pre-configured &#39;alfresco-access&#39; audit application.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AuditApi from 'AuditApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AuditApi();
+let auditApi = new AuditApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -612,10 +546,10 @@ If not supplied then the default value is 100.
 
 *   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
 
-  'include':  // any | Returns additional information about the audit entry. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the audit entry. The following optional fields can be requested:
 * values
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -629,14 +563,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listAuditEntriesForNode(nodeIdopts, callback);
+auditApi.listAuditEntriesForNode(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -647,7 +579,7 @@ Name | Type | Description  | Notes
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
  | [optional] [default to 0]
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -666,10 +598,10 @@ If not supplied then the default value is 100.
 
 *   where&#x3D;(createdByUser&#x3D;&#39;jbloggs&#39; and createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
 * values
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -685,15 +617,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**AuditEntryPaging**](AuditEntryPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateAuditApp"></a>
 # **updateAuditApp**
@@ -716,18 +639,18 @@ You must have admin rights to update audit application.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AuditApi from 'AuditApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AuditApi();
+let auditApi = new AuditApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -741,14 +664,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateAuditApp(auditApplicationIdauditAppBodyUpdateopts, callback);
+auditApi.updateAuditApp(auditApplicationIdauditAppBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -757,7 +678,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **auditApplicationId** | **string**| The identifier of an audit application. | 
  **auditAppBodyUpdate** | [**AuditBodyUpdate**](AuditBodyUpdate.md)| The audit application to update. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -773,13 +694,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**AuditApp**](AuditApp.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

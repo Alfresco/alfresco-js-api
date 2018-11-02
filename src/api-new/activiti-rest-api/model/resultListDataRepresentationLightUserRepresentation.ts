@@ -18,7 +18,7 @@
 import { LightUserRepresentation } from './lightUserRepresentation';
 
 export class ResultListDataRepresentationLightUserRepresentation {
-    data?: any;
+    data?: Array<LightUserRepresentation>;
     size?: number;
     start?: number;
     total?: number;

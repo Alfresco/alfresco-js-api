@@ -16,12 +16,12 @@ Name | Type | Description | Notes
 **facetQueries** | [**RequestFacetQueries**](RequestFacetQueries.md) |  | [optional] [default to null]
 **facetFields** | [**RequestFacetFields**](RequestFacetFields.md) |  | [optional] [default to null]
 **facetIntervals** | [**RequestFacetIntervals**](RequestFacetIntervals.md) |  | [optional] [default to null]
-**pivots** | [**any**](RequestPivot.md) |  | [optional] [default to null]
-**stats** | [**any**](RequestStats.md) |  | [optional] [default to null]
+**pivots** | [**Array<RequestPivot>**](RequestPivot.md) |  | [optional] [default to null]
+**stats** | [**Array<RequestStats>**](RequestStats.md) |  | [optional] [default to null]
 **spellcheck** | [**RequestSpellcheck**](RequestSpellcheck.md) |  | [optional] [default to null]
 **scope** | [**RequestScope**](RequestScope.md) |  | [optional] [default to null]
 **limits** | [**RequestLimits**](RequestLimits.md) |  | [optional] [default to null]
 **highlight** | [**RequestHighlight**](RequestHighlight.md) |  | [optional] [default to null]
-**ranges** | [**any**](RequestRange.md) |  | [optional] [default to null]
+**ranges** | [**Array<RequestRange>**](RequestRange.md) |  | [optional] [default to null]
 
 

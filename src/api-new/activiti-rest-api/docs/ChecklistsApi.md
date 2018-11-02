@@ -17,25 +17,23 @@ Create a task checklist
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ChecklistsApi from 'ChecklistsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ChecklistsApi();
+let checklistsApi = new ChecklistsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.addSubtaskUsingPOST(taskIdtaskRepresentation, callback);
+checklistsApi.addSubtaskUsingPOST(taskIdtaskRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -49,15 +47,6 @@ Name | Type | Description  | Notes
 
 [**TaskRepresentation**](TaskRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getChecklistUsingGET"></a>
 # **getChecklistUsingGET**
 > ResultListDataRepresentationTaskRepresentation getChecklistUsingGET(taskId)
@@ -66,25 +55,23 @@ Get checklist for a task
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ChecklistsApi from 'ChecklistsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ChecklistsApi();
+let checklistsApi = new ChecklistsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getChecklistUsingGET(taskId, callback);
+checklistsApi.getChecklistUsingGET(taskId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -97,15 +84,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationTaskRepresentation**](ResultListDataRepresentationTaskRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="orderChecklistUsingPUT"></a>
 # **orderChecklistUsingPUT**
 > orderChecklistUsingPUT(taskIdorderRepresentation)
@@ -114,25 +92,23 @@ Change the order of items on a checklist
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ChecklistsApi from 'ChecklistsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ChecklistsApi();
+let checklistsApi = new ChecklistsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.orderChecklistUsingPUT(taskIdorderRepresentation, callback);
+checklistsApi.orderChecklistUsingPUT(taskIdorderRepresentation).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -145,13 +121,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

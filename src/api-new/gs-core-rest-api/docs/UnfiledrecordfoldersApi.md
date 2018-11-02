@@ -122,24 +122,24 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UnfiledrecordfoldersApi();
+let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'autoRename': true // boolean | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
 
-  'include':  // any | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -153,14 +153,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createUnfiledRecordFolderChildren(unfiledRecordFolderIdnodeBodyCreateopts, callback);
+unfiledrecordfoldersApi.createUnfiledRecordFolderChildren(unfiledRecordFolderIdnodeBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -171,11 +169,11 @@ Name | Type | Description  | Notes
  **nodeBodyCreate** | [**RMNodeBodyCreateWithRelativePath**](RMNodeBodyCreateWithRelativePath.md)| The node information to create. | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -192,15 +190,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**UnfiledRecordFolderAssociationPaging**](UnfiledRecordFolderAssociationPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, multipart/form-data
- - **Accept**: application/json
-
 <a name="deleteUnfiledRecordFolder"></a>
 # **deleteUnfiledRecordFolder**
 > deleteUnfiledRecordFolder(unfiledRecordFolderId)
@@ -212,25 +201,23 @@ Deletes the unfiled record folder **unfiledRecordFolderId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UnfiledrecordfoldersApi();
+let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteUnfiledRecordFolder(unfiledRecordFolderId, callback);
+unfiledrecordfoldersApi.deleteUnfiledRecordFolder(unfiledRecordFolderId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -242,15 +229,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getUnfiledRecordFolder"></a>
 # **getUnfiledRecordFolder**
@@ -267,24 +245,24 @@ You can use the **include** parameter (include&#x3D;allowableOperations) to retu
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UnfiledrecordfoldersApi();
+let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
   'relativePath': relativePath_example // string | Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -298,14 +276,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUnfiledRecordFolder(unfiledRecordFolderIdopts, callback);
+unfiledrecordfoldersApi.getUnfiledRecordFolder(unfiledRecordFolderIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -313,13 +289,13 @@ apiInstance.getUnfiledRecordFolder(unfiledRecordFolderIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **unfiledRecordFolderId** | **string**| The identifier of an unfiled record folder. | 
- **include** | [**any**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
  **relativePath** | **string**| Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -336,15 +312,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**UnfiledRecordFolderEntry**](UnfiledRecordFolderEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listUnfiledRecordFolderChildren"></a>
 # **listUnfiledRecordFolderChildren**
 > UnfiledRecordFolderAssociationPaging listUnfiledRecordFolderChildren(unfiledRecordFolderIdopts)
@@ -360,17 +327,17 @@ You can use the **include** parameter (include&#x3D;allowableOperations) to retu
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UnfiledrecordfoldersApi();
+let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // number | The maximum number of items to return in the list.
   'where': where_example // string | Optionally filter the list. Here are some examples:
@@ -381,7 +348,7 @@ var opts = {
 
 *   where=(nodeType='cm:content INCLUDESUBTYPES')
 
-  'include':  // any | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
@@ -391,7 +358,7 @@ var opts = {
   'relativePath': relativePath_example // string | Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
 
   'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -405,14 +372,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listUnfiledRecordFolderChildren(unfiledRecordFolderIdopts, callback);
+unfiledrecordfoldersApi.listUnfiledRecordFolderChildren(unfiledRecordFolderIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -430,7 +395,7 @@ Name | Type | Description  | Notes
 
 *   where&#x3D;(nodeType&#x3D;&#39;cm:content INCLUDESUBTYPES&#39;)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
@@ -440,7 +405,7 @@ Name | Type | Description  | Notes
  **relativePath** | **string**| Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**. | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -456,15 +421,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**UnfiledRecordFolderAssociationPaging**](UnfiledRecordFolderAssociationPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateUnfiledRecordFolder"></a>
 # **updateUnfiledRecordFolder**
@@ -495,23 +451,23 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UnfiledrecordfoldersApi();
+let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
   'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -525,14 +481,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateUnfiledRecordFolder(unfiledRecordFolderIdunfiledRecordFolderBodyUpdateopts, callback);
+unfiledrecordfoldersApi.updateUnfiledRecordFolder(unfiledRecordFolderIdunfiledRecordFolderBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -541,12 +495,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **unfiledRecordFolderId** | **string**| The identifier of an unfiled record folder. | 
  **unfiledRecordFolderBodyUpdate** | [**UnfiledRecordFolderBodyUpdate**](UnfiledRecordFolderBodyUpdate.md)| The record folder information to update. | 
- **include** | [**any**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**. | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -562,13 +516,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**UnfiledRecordFolderEntry**](UnfiledRecordFolderEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

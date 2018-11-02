@@ -16,25 +16,23 @@ Export a historic version of a process definition as BPMN 2.0 XML
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsbpmnApi from 'ModelsbpmnApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsbpmnApi();
+let modelsbpmnApi = new ModelsbpmnApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getHistoricProcessModelBpmn20XmlUsingGET(processModelIdprocessModelHistoryId, callback);
+modelsbpmnApi.getHistoricProcessModelBpmn20XmlUsingGET(processModelIdprocessModelHistoryId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -48,15 +46,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/xml
-
 <a name="getProcessModelBpmn20XmlUsingGET"></a>
 # **getProcessModelBpmn20XmlUsingGET**
 > getProcessModelBpmn20XmlUsingGET(processModelId)
@@ -65,25 +54,23 @@ Export a process definition as BPMN 2.0 XML
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsbpmnApi from 'ModelsbpmnApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsbpmnApi();
+let modelsbpmnApi = new ModelsbpmnApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getProcessModelBpmn20XmlUsingGET(processModelId, callback);
+modelsbpmnApi.getProcessModelBpmn20XmlUsingGET(processModelId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -95,13 +82,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/xml
 

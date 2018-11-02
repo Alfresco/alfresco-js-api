@@ -75,9 +75,9 @@ export class TaskformsApi extends BaseApi {
         * 
         * 
         * @param  taskId taskId
-        * @return Promise<any>
+        * @return Promise<Array<ProcessInstanceVariableRepresentation>>
         */
-    getProcessInstanceVariablesUsingGET1(taskId: string): Promise<any> {
+    getProcessInstanceVariablesUsingGET1(taskId: string): Promise<Array<ProcessInstanceVariableRepresentation>> {
 
         let postBody = null;
 
@@ -114,9 +114,9 @@ export class TaskformsApi extends BaseApi {
         * @param  taskId taskId
         * @param  field field
         * @param  column column
-        * @return Promise<any>
+        * @return Promise<Array<FormValueRepresentation>>
         */
-    getRestFieldValuesUsingGET1(taskId: string, field: string, column: string): Promise<any> {
+    getRestFieldValuesUsingGET1(taskId: string, field: string, column: string): Promise<Array<FormValueRepresentation>> {
 
         let postBody = null;
 
@@ -160,9 +160,9 @@ export class TaskformsApi extends BaseApi {
         * 
         * @param  taskId taskId
         * @param  field field
-        * @return Promise<any>
+        * @return Promise<Array<FormValueRepresentation>>
         */
-    getRestFieldValuesUsingGET2(taskId: string, field: string): Promise<any> {
+    getRestFieldValuesUsingGET2(taskId: string, field: string): Promise<Array<FormValueRepresentation>> {
 
         let postBody = null;
 

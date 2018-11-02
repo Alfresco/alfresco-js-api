@@ -14,31 +14,29 @@ Method | HTTP request | Description
 
 <a name="createTaskVariableUsingPOST"></a>
 # **createTaskVariableUsingPOST**
-> any createTaskVariableUsingPOST(taskIdrestVariables)
+> Array<RestVariable> createTaskVariableUsingPOST(taskIdrestVariables)
 
 Create variables
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskvariablesApi from 'TaskvariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskvariablesApi();
+let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createTaskVariableUsingPOST(taskIdrestVariables, callback);
+taskvariablesApi.createTaskVariableUsingPOST(taskIdrestVariables).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -46,20 +44,11 @@ apiInstance.createTaskVariableUsingPOST(taskIdrestVariables, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **taskId** | **string**| taskId | 
- **restVariables** | [**any**](RestVariable.md)| restVariables | 
+ **restVariables** | [**Array&lt;RestVariable&gt;**](RestVariable.md)| restVariables | 
 
 ### Return type
 
-[**any**](RestVariable.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;RestVariable&gt;**](RestVariable.md)
 
 <a name="deleteAllLocalTaskVariablesUsingDELETE"></a>
 # **deleteAllLocalTaskVariablesUsingDELETE**
@@ -69,25 +58,23 @@ Create or update variables
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskvariablesApi from 'TaskvariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskvariablesApi();
+let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteAllLocalTaskVariablesUsingDELETE(taskId, callback);
+taskvariablesApi.deleteAllLocalTaskVariablesUsingDELETE(taskId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -100,15 +87,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteVariableUsingDELETE"></a>
 # **deleteVariableUsingDELETE**
 > deleteVariableUsingDELETE(taskIdvariableNameopts)
@@ -117,28 +95,26 @@ Delete a variable
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskvariablesApi from 'TaskvariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskvariablesApi();
+let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'scope': scope_example // string | scope
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteVariableUsingDELETE(taskIdvariableNameopts, callback);
+taskvariablesApi.deleteVariableUsingDELETE(taskIdvariableNameopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -153,15 +129,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getVariableUsingGET"></a>
 # **getVariableUsingGET**
 > RestVariable getVariableUsingGET(taskIdvariableNameopts)
@@ -170,28 +137,26 @@ Get a variable
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskvariablesApi from 'TaskvariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskvariablesApi();
+let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'scope': scope_example // string | scope
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getVariableUsingGET(taskIdvariableNameopts, callback);
+taskvariablesApi.getVariableUsingGET(taskIdvariableNameopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -206,45 +171,34 @@ Name | Type | Description  | Notes
 
 [**RestVariable**](RestVariable.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getVariablesUsingGET"></a>
 # **getVariablesUsingGET**
-> any getVariablesUsingGET(taskIdopts)
+> Array<RestVariable> getVariablesUsingGET(taskIdopts)
 
 List variables
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskvariablesApi from 'TaskvariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskvariablesApi();
+let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'scope': scope_example // string | scope
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getVariablesUsingGET(taskIdopts, callback);
+taskvariablesApi.getVariablesUsingGET(taskIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -256,16 +210,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](RestVariable.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;RestVariable&gt;**](RestVariable.md)
 
 <a name="updateVariableUsingPUT"></a>
 # **updateVariableUsingPUT**
@@ -275,25 +220,23 @@ Update a variable
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskvariablesApi from 'TaskvariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskvariablesApi();
+let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateVariableUsingPUT(taskIdvariableNamerestVariable, callback);
+taskvariablesApi.updateVariableUsingPUT(taskIdvariableNamerestVariable).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -307,13 +250,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RestVariable**](RestVariable.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

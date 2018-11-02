@@ -18,7 +18,7 @@
 import { DecisionAuditRepresentation } from './decisionAuditRepresentation';
 
 export class ResultListDataRepresentationDecisionAuditRepresentation {
-    data?: any;
+    data?: Array<DecisionAuditRepresentation>;
     size?: number;
     start?: number;
     total?: number;

@@ -70,18 +70,18 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TagsApi from 'TagsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TagsApi();
+let tagsApi = new TagsApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -95,14 +95,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createTagForNode(nodeIdtagBodyCreateopts, callback);
+tagsApi.createTagForNode(nodeIdtagBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -111,7 +109,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **tagBodyCreate** | [**TagBody**](TagBody.md)| The new tag | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -128,15 +126,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**TagEntry**](TagEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteTagFromNode"></a>
 # **deleteTagFromNode**
 > deleteTagFromNode(nodeIdtagId)
@@ -147,25 +136,23 @@ Deletes tag **tagId** from node **nodeId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TagsApi from 'TagsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TagsApi();
+let tagsApi = new TagsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteTagFromNode(nodeIdtagId, callback);
+tagsApi.deleteTagFromNode(nodeIdtagId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -179,15 +166,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getTag"></a>
 # **getTag**
 > TagEntry getTag(tagIdopts)
@@ -198,18 +176,18 @@ Get a specific tag with **tagId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TagsApi from 'TagsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TagsApi();
+let tagsApi = new TagsApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -223,14 +201,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTag(tagIdopts, callback);
+tagsApi.getTag(tagIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -238,7 +214,7 @@ apiInstance.getTag(tagIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tagId** | **string**| The identifier of a tag. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -254,15 +230,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**TagEntry**](TagEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listTags"></a>
 # **listTags**
@@ -277,24 +244,24 @@ You can use the **include** parameter to return additional **values** informatio
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TagsApi from 'TagsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TagsApi();
+let tagsApi = new TagsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -306,19 +273,17 @@ If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
 
-  'include':  // any | Returns additional information about the tag. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the tag. The following optional fields can be requested:
 * count
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listTags(opts, callback);
+tagsApi.listTags(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -331,7 +296,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -343,22 +308,13 @@ If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the tag. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the tag. The following optional fields can be requested:
 * count
  | [optional] 
 
 ### Return type
 
 [**TagPaging**](TagPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listTagsForNode"></a>
 # **listTagsForNode**
@@ -370,24 +326,24 @@ Gets a list of tags for node **nodeId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TagsApi from 'TagsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TagsApi();
+let tagsApi = new TagsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -401,14 +357,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listTagsForNode(nodeIdopts, callback);
+tagsApi.listTagsForNode(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -422,7 +376,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -439,15 +393,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**TagPaging**](TagPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="updateTag"></a>
 # **updateTag**
 > TagEntry updateTag(tagIdtagBodyUpdateopts)
@@ -458,18 +403,18 @@ Updates the tag **tagId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TagsApi from 'TagsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TagsApi();
+let tagsApi = new TagsApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -483,14 +428,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateTag(tagIdtagBodyUpdateopts, callback);
+tagsApi.updateTag(tagIdtagBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -499,7 +442,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tagId** | **string**| The identifier of a tag. | 
  **tagBodyUpdate** | [**TagBody**](TagBody.md)| The updated tag | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -515,13 +458,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**TagEntry**](TagEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

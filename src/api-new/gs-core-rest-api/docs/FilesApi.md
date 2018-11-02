@@ -17,25 +17,25 @@ Declares the file **fileId** in the unfiled records container. The original file
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FilesApi from 'FilesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FilesApi();
+let filesApi = new FilesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'hideRecord': true // boolean | Flag to indicate whether the record should be hidden from the current parent folder.
-  'include':  // any | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+  'include':  // Array<string> | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -49,14 +49,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.declareRecord(fileIdopts, callback);
+filesApi.declareRecord(fileIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -65,13 +63,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fileId** | **string**| The identifier of a non-record file. | 
  **hideRecord** | **boolean**| Flag to indicate whether the record should be hidden from the current parent folder. | [optional] [default to false]
- **include** | [**any**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -87,13 +85,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**RecordEntry**](RecordEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

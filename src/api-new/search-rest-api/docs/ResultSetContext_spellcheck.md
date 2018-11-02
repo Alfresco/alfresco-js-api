@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **string** |  | [optional] [default to null]
-**suggestion** | **any** | A suggested alternative query | [optional] [default to null]
+**suggestion** | **Array<string>** | A suggested alternative query | [optional] [default to null]
 
 
 <a name="ResultSetContextSpellcheck.TypeEnum"></a>

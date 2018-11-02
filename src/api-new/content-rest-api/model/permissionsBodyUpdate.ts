@@ -19,5 +19,5 @@ import { PermissionElement } from './permissionElement';
 
 export class PermissionsBodyUpdate {
     isInheritanceEnabled?: boolean;
-    locallySet?: any;
+    locallySet?: Array<PermissionElement>;
 }

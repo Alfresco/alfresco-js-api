@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **path** | **string** |  | [optional] [default to null]
 **port** | **string** |  | [optional] [default to null]
 **protocol** | **string** |  | [optional] [default to null]
-**requestHeaders** | [**any**](EndpointRequestHeaderRepresentation.md) |  | [optional] [default to null]
+**requestHeaders** | [**Array<EndpointRequestHeaderRepresentation>**](EndpointRequestHeaderRepresentation.md) |  | [optional] [default to null]
 **tenantId** | **number** |  | [optional] [default to null]
 
 

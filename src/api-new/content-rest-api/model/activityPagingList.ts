@@ -20,5 +20,5 @@ import { Pagination } from './pagination';
 
 export class ActivityPagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<ActivityEntry>;
 }

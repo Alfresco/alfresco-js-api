@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**textAttributes** | **any** | A list of query fields/properties used to expand TEXT: queries.
+**textAttributes** | **Array<string>** | A list of query fields/properties used to expand TEXT: queries.
 The default is cm:content.
 You could include all content properties using d:content or list all individual content properties or types.
 As more terms are included the query size, complexity, memory impact and query time will increase.

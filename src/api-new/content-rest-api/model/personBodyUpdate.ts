@@ -16,7 +16,7 @@
 */
 
 import { Company } from './company';
-
+import { Map } from './map';
 
 export class PersonBodyUpdate {
     firstName?: string;
@@ -36,6 +36,6 @@ export class PersonBodyUpdate {
     emailNotificationsEnabled?: boolean;
     password?: string;
     oldPassword?: string;
-    aspectNames?: any;
+    aspectNames?: Array<string>;
     properties?: { [key: string]: string; };
 }

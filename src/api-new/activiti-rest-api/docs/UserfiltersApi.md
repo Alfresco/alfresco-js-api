@@ -26,25 +26,23 @@ Create a process instance filter
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createUserProcessInstanceFilterUsingPOST(userProcessInstanceFilterRepresentation, callback);
+userfiltersApi.createUserProcessInstanceFilterUsingPOST(userProcessInstanceFilterRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -57,15 +55,6 @@ Name | Type | Description  | Notes
 
 [**UserProcessInstanceFilterRepresentation**](UserProcessInstanceFilterRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="createUserTaskFilterUsingPOST"></a>
 # **createUserTaskFilterUsingPOST**
 > UserTaskFilterRepresentation createUserTaskFilterUsingPOST(userTaskFilterRepresentation)
@@ -74,25 +63,23 @@ Create a task filter
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createUserTaskFilterUsingPOST(userTaskFilterRepresentation, callback);
+userfiltersApi.createUserTaskFilterUsingPOST(userTaskFilterRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -105,15 +92,6 @@ Name | Type | Description  | Notes
 
 [**UserTaskFilterRepresentation**](UserTaskFilterRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteUserProcessInstanceFilterUsingDELETE"></a>
 # **deleteUserProcessInstanceFilterUsingDELETE**
 > deleteUserProcessInstanceFilterUsingDELETE(userFilterId)
@@ -122,25 +100,23 @@ Delete a process instance filter
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteUserProcessInstanceFilterUsingDELETE(userFilterId, callback);
+userfiltersApi.deleteUserProcessInstanceFilterUsingDELETE(userFilterId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -152,15 +128,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="deleteUserTaskFilterUsingDELETE"></a>
 # **deleteUserTaskFilterUsingDELETE**
@@ -170,25 +137,23 @@ Delete a task filter
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteUserTaskFilterUsingDELETE(userFilterId, callback);
+userfiltersApi.deleteUserTaskFilterUsingDELETE(userFilterId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -201,15 +166,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getUserProcessInstanceFilterUsingGET"></a>
 # **getUserProcessInstanceFilterUsingGET**
 > UserProcessInstanceFilterRepresentation getUserProcessInstanceFilterUsingGET(userFilterId)
@@ -218,25 +174,23 @@ Get a process instance filter
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUserProcessInstanceFilterUsingGET(userFilterId, callback);
+userfiltersApi.getUserProcessInstanceFilterUsingGET(userFilterId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -249,15 +203,6 @@ Name | Type | Description  | Notes
 
 [**UserProcessInstanceFilterRepresentation**](UserProcessInstanceFilterRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getUserProcessInstanceFiltersUsingGET"></a>
 # **getUserProcessInstanceFiltersUsingGET**
 > ResultListDataRepresentationUserProcessInstanceFilterRepresentation getUserProcessInstanceFiltersUsingGET(opts)
@@ -268,28 +213,26 @@ Returns filters for the current user, optionally filtered by *appId*.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'appId': 789 // number | appId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUserProcessInstanceFiltersUsingGET(opts, callback);
+userfiltersApi.getUserProcessInstanceFiltersUsingGET(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -302,15 +245,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationUserProcessInstanceFilterRepresentation**](ResultListDataRepresentationUserProcessInstanceFilterRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getUserTaskFilterUsingGET"></a>
 # **getUserTaskFilterUsingGET**
 > UserTaskFilterRepresentation getUserTaskFilterUsingGET(userFilterId)
@@ -319,25 +253,23 @@ Get a task filter
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUserTaskFilterUsingGET(userFilterId, callback);
+userfiltersApi.getUserTaskFilterUsingGET(userFilterId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -350,15 +282,6 @@ Name | Type | Description  | Notes
 
 [**UserTaskFilterRepresentation**](UserTaskFilterRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getUserTaskFiltersUsingGET"></a>
 # **getUserTaskFiltersUsingGET**
 > ResultListDataRepresentationUserTaskFilterRepresentation getUserTaskFiltersUsingGET(opts)
@@ -369,28 +292,26 @@ Returns filters for the current user, optionally filtered by *appId*.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'appId': 789 // number | appId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUserTaskFiltersUsingGET(opts, callback);
+userfiltersApi.getUserTaskFiltersUsingGET(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -403,15 +324,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationUserTaskFilterRepresentation**](ResultListDataRepresentationUserTaskFilterRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="orderUserProcessInstanceFiltersUsingPUT"></a>
 # **orderUserProcessInstanceFiltersUsingPUT**
 > orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation)
@@ -420,25 +332,23 @@ Re-order the list of user process instance filters
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation, callback);
+userfiltersApi.orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -450,15 +360,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="orderUserTaskFiltersUsingPUT"></a>
 # **orderUserTaskFiltersUsingPUT**
@@ -468,25 +369,23 @@ Re-order the list of user task filters
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.orderUserTaskFiltersUsingPUT(filterOrderRepresentation, callback);
+userfiltersApi.orderUserTaskFiltersUsingPUT(filterOrderRepresentation).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -499,15 +398,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="updateUserProcessInstanceFilterUsingPUT"></a>
 # **updateUserProcessInstanceFilterUsingPUT**
 > UserProcessInstanceFilterRepresentation updateUserProcessInstanceFilterUsingPUT(userFilterIduserProcessInstanceFilterRepresentation)
@@ -516,25 +406,23 @@ Update a process instance filter
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateUserProcessInstanceFilterUsingPUT(userFilterIduserProcessInstanceFilterRepresentation, callback);
+userfiltersApi.updateUserProcessInstanceFilterUsingPUT(userFilterIduserProcessInstanceFilterRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -548,15 +436,6 @@ Name | Type | Description  | Notes
 
 [**UserProcessInstanceFilterRepresentation**](UserProcessInstanceFilterRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="updateUserTaskFilterUsingPUT"></a>
 # **updateUserTaskFilterUsingPUT**
 > UserTaskFilterRepresentation updateUserTaskFilterUsingPUT(userFilterIduserTaskFilterRepresentation)
@@ -565,25 +444,23 @@ Update a task filter
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UserfiltersApi from 'UserfiltersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UserfiltersApi();
+let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateUserTaskFilterUsingPUT(userFilterIduserTaskFilterRepresentation, callback);
+userfiltersApi.updateUserTaskFilterUsingPUT(userFilterIduserTaskFilterRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -596,13 +473,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UserTaskFilterRepresentation**](UserTaskFilterRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

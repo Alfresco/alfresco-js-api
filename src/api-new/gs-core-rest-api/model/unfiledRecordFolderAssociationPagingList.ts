@@ -15,12 +15,12 @@
 * limitations under the License.
 */
 
-import { Pagination } from '../../content-rest-api/model/pagination';
+import { Pagination } from './pagination';
 import { UnfiledRecordFolder } from './unfiledRecordFolder';
 import { UnfiledRecordFolderChildAssociationEntry } from './unfiledRecordFolderChildAssociationEntry';
 
 export class UnfiledRecordFolderAssociationPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<UnfiledRecordFolderChildAssociationEntry>;
     source?: UnfiledRecordFolder;
 }

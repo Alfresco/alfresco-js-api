@@ -78,9 +78,9 @@ export class RequestStats {
     /**
      * A list of filters to exclude
      */
-    excludeFilters?: any;
+    excludeFilters?: Array<string>;
     /**
      * A list of percentile values, e.g. \"1,99,99.9\"
      */
-    percentiles?: any;
+    percentiles?: Array<number>;
 }

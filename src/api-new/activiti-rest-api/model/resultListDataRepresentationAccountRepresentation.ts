@@ -18,7 +18,7 @@
 import { AccountRepresentation } from './accountRepresentation';
 
 export class ResultListDataRepresentationAccountRepresentation {
-    data?: any;
+    data?: Array<AccountRepresentation>;
     size?: number;
     start?: number;
     total?: number;

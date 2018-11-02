@@ -20,9 +20,9 @@ import { FormOutcomeRepresentation } from './formOutcomeRepresentation';
 
 export class FormScopeRepresentation {
     description?: string;
-    fieldVariables?: any;
-    fields?: any;
+    fieldVariables?: Array<FormFieldRepresentation>;
+    fields?: Array<FormFieldRepresentation>;
     id?: number;
     name?: string;
-    outcomes?: any;
+    outcomes?: Array<FormOutcomeRepresentation>;
 }

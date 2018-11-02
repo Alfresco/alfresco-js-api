@@ -20,5 +20,5 @@ import { RatingEntry } from './ratingEntry';
 
 export class RatingPagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<RatingEntry>;
 }

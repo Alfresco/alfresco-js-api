@@ -16,7 +16,7 @@
 */
 
 import { Company } from './company';
-
+import { Map } from './map';
 
 export class PersonBodyCreate {
     id: string;
@@ -36,6 +36,6 @@ export class PersonBodyCreate {
     enabled?: boolean;
     emailNotificationsEnabled?: boolean;
     password: string;
-    aspectNames?: any;
+    aspectNames?: Array<string>;
     properties?: { [key: string]: string; };
 }

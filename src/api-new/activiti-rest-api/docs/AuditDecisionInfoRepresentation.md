@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**appliedRules** | [**any**](AuditDecisionRuleInfoRepresentation.md) |  | [optional] [default to null]
-**calculatedValues** | [**any**](AuditCalculatedValueRepresentation.md) |  | [optional] [default to null]
+**appliedRules** | [**Array<AuditDecisionRuleInfoRepresentation>**](AuditDecisionRuleInfoRepresentation.md) |  | [optional] [default to null]
+**calculatedValues** | [**Array<AuditCalculatedValueRepresentation>**](AuditCalculatedValueRepresentation.md) |  | [optional] [default to null]
 
 

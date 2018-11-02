@@ -24,25 +24,23 @@ Add an endpoint authorization
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdminendpointsApi from 'AdminendpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdminendpointsApi();
+let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createBasicAuthConfigurationUsingPOST(createRepresentation, callback);
+adminendpointsApi.createBasicAuthConfigurationUsingPOST(createRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -54,15 +52,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="createEndpointConfigurationUsingPOST"></a>
 # **createEndpointConfigurationUsingPOST**
@@ -72,25 +61,23 @@ Create an endpoint
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdminendpointsApi from 'AdminendpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdminendpointsApi();
+let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createEndpointConfigurationUsingPOST(representation, callback);
+adminendpointsApi.createEndpointConfigurationUsingPOST(representation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -103,15 +90,6 @@ Name | Type | Description  | Notes
 
 [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getBasicAuthConfigurationUsingGET"></a>
 # **getBasicAuthConfigurationUsingGET**
 > EndpointBasicAuthRepresentation getBasicAuthConfigurationUsingGET(basicAuthIdtenantId)
@@ -120,25 +98,23 @@ Get an endpoint authorization
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdminendpointsApi from 'AdminendpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdminendpointsApi();
+let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getBasicAuthConfigurationUsingGET(basicAuthIdtenantId, callback);
+adminendpointsApi.getBasicAuthConfigurationUsingGET(basicAuthIdtenantId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -152,42 +128,31 @@ Name | Type | Description  | Notes
 
 [**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getBasicAuthConfigurationsUsingGET"></a>
 # **getBasicAuthConfigurationsUsingGET**
-> any getBasicAuthConfigurationsUsingGET(tenantId)
+> Array<EndpointBasicAuthRepresentation> getBasicAuthConfigurationsUsingGET(tenantId)
 
 List endpoint authorizations
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdminendpointsApi from 'AdminendpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdminendpointsApi();
+let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getBasicAuthConfigurationsUsingGET(tenantId, callback);
+adminendpointsApi.getBasicAuthConfigurationsUsingGET(tenantId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -198,16 +163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](EndpointBasicAuthRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;EndpointBasicAuthRepresentation&gt;**](EndpointBasicAuthRepresentation.md)
 
 <a name="getEndpointConfigurationUsingGET1"></a>
 # **getEndpointConfigurationUsingGET1**
@@ -217,25 +173,23 @@ Get an endpoint
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdminendpointsApi from 'AdminendpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdminendpointsApi();
+let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getEndpointConfigurationUsingGET1(endpointConfigurationIdtenantId, callback);
+adminendpointsApi.getEndpointConfigurationUsingGET1(endpointConfigurationIdtenantId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -249,42 +203,31 @@ Name | Type | Description  | Notes
 
 [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getEndpointConfigurationsUsingGET1"></a>
 # **getEndpointConfigurationsUsingGET1**
-> any getEndpointConfigurationsUsingGET1(tenantId)
+> Array<EndpointConfigurationRepresentation> getEndpointConfigurationsUsingGET1(tenantId)
 
 List endpoints
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdminendpointsApi from 'AdminendpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdminendpointsApi();
+let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getEndpointConfigurationsUsingGET1(tenantId, callback);
+adminendpointsApi.getEndpointConfigurationsUsingGET1(tenantId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -295,16 +238,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](EndpointConfigurationRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;EndpointConfigurationRepresentation&gt;**](EndpointConfigurationRepresentation.md)
 
 <a name="removeBasicAuthonfigurationUsingDELETE"></a>
 # **removeBasicAuthonfigurationUsingDELETE**
@@ -314,25 +248,23 @@ Delete an endpoint authorization
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdminendpointsApi from 'AdminendpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdminendpointsApi();
+let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.removeBasicAuthonfigurationUsingDELETE(basicAuthIdtenantId, callback);
+adminendpointsApi.removeBasicAuthonfigurationUsingDELETE(basicAuthIdtenantId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -346,15 +278,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="removeEndpointConfigurationUsingDELETE"></a>
 # **removeEndpointConfigurationUsingDELETE**
 > removeEndpointConfigurationUsingDELETE(endpointConfigurationIdtenantId)
@@ -363,25 +286,23 @@ Delete an endpoint
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdminendpointsApi from 'AdminendpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdminendpointsApi();
+let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.removeEndpointConfigurationUsingDELETE(endpointConfigurationIdtenantId, callback);
+adminendpointsApi.removeEndpointConfigurationUsingDELETE(endpointConfigurationIdtenantId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -395,15 +316,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="updateBasicAuthConfigurationUsingPUT"></a>
 # **updateBasicAuthConfigurationUsingPUT**
 > EndpointBasicAuthRepresentation updateBasicAuthConfigurationUsingPUT(basicAuthIdcreateRepresentation)
@@ -412,25 +324,23 @@ Update an endpoint authorization
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdminendpointsApi from 'AdminendpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdminendpointsApi();
+let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateBasicAuthConfigurationUsingPUT(basicAuthIdcreateRepresentation, callback);
+adminendpointsApi.updateBasicAuthConfigurationUsingPUT(basicAuthIdcreateRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -444,15 +354,6 @@ Name | Type | Description  | Notes
 
 [**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="updateEndpointConfigurationUsingPUT"></a>
 # **updateEndpointConfigurationUsingPUT**
 > EndpointConfigurationRepresentation updateEndpointConfigurationUsingPUT(endpointConfigurationIdrepresentation)
@@ -461,25 +362,23 @@ Update an endpoint
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdminendpointsApi from 'AdminendpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdminendpointsApi();
+let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateEndpointConfigurationUsingPUT(endpointConfigurationIdrepresentation, callback);
+adminendpointsApi.updateEndpointConfigurationUsingPUT(endpointConfigurationIdrepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -492,13 +391,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

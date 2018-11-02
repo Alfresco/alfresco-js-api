@@ -48,18 +48,18 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import PeopleApi from 'PeopleApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .PeopleApi();
+let peopleApi = new PeopleApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -73,14 +73,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createPerson(personBodyCreateopts, callback);
+peopleApi.createPerson(personBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -88,7 +86,7 @@ apiInstance.createPerson(personBodyCreateopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personBodyCreate** | [**PersonBodyCreate**](PersonBodyCreate.md)| The person details. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -104,15 +102,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**PersonEntry**](PersonEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="deleteAvatarImage"></a>
 # **deleteAvatarImage**
@@ -131,25 +120,23 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import PeopleApi from 'PeopleApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .PeopleApi();
+let peopleApi = new PeopleApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteAvatarImage(personId, callback);
+peopleApi.deleteAvatarImage(personId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -161,15 +148,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getAvatarImage"></a>
 # **getAvatarImage**
@@ -187,17 +165,17 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import PeopleApi from 'PeopleApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .PeopleApi();
+let peopleApi = new PeopleApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'attachment': true // boolean | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
@@ -216,14 +194,12 @@ then the placeholder image is returned, rather than a 404 response.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getAvatarImage(personIdopts, callback);
+peopleApi.getAvatarImage(personIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -252,15 +228,6 @@ then the placeholder image is returned, rather than a 404 response.
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getPerson"></a>
 # **getPerson**
 > PersonEntry getPerson(personIdopts)
@@ -274,18 +241,18 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import PeopleApi from 'PeopleApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .PeopleApi();
+let peopleApi = new PeopleApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -299,14 +266,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getPerson(personIdopts, callback);
+peopleApi.getPerson(personIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -314,7 +279,7 @@ apiInstance.getPerson(personIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -330,15 +295,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**PersonEntry**](PersonEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listPeople"></a>
 # **listPeople**
@@ -363,24 +319,24 @@ You can use any of the following fields to order the results:
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import PeopleApi from 'PeopleApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .PeopleApi();
+let peopleApi = new PeopleApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -388,12 +344,12 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'include':  // any | Returns additional information about the person. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the person. The following optional fields can be requested:
 * properties
 * aspectNames
 * capabilities
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -407,14 +363,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listPeople(opts, callback);
+peopleApi.listPeople(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -427,7 +381,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -435,12 +389,12 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the person. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the person. The following optional fields can be requested:
 * properties
 * aspectNames
 * capabilities
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -456,15 +410,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**PersonPaging**](PersonPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="requestPasswordReset"></a>
 # **requestPasswordReset**
@@ -494,25 +439,23 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import PeopleApi from 'PeopleApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .PeopleApi();
+let peopleApi = new PeopleApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.requestPasswordReset(personIdclientBody, callback);
+peopleApi.requestPasswordReset(personIdclientBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -525,15 +468,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="resetPassword"></a>
 # **resetPassword**
@@ -558,25 +492,23 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import PeopleApi from 'PeopleApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .PeopleApi();
+let peopleApi = new PeopleApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.resetPassword(personIdpasswordResetBody, callback);
+peopleApi.resetPassword(personIdpasswordResetBody).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -589,15 +521,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateAvatarImage"></a>
 # **updateAvatarImage**
@@ -619,25 +542,23 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import PeopleApi from 'PeopleApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .PeopleApi();
+let peopleApi = new PeopleApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.updateAvatarImage(personIdcontentBodyUpdate, callback);
+peopleApi.updateAvatarImage(personIdcontentBodyUpdate).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -650,15 +571,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/octet-stream
- - **Accept**: application/json
 
 <a name="updatePerson"></a>
 # **updatePerson**
@@ -698,18 +610,18 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import PeopleApi from 'PeopleApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .PeopleApi();
+let peopleApi = new PeopleApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -723,14 +635,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updatePerson(personIdpersonBodyUpdateopts, callback);
+peopleApi.updatePerson(personIdpersonBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -739,7 +649,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **personBodyUpdate** | [**PersonBodyUpdate**](PersonBodyUpdate.md)| The person details. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -755,13 +665,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**PersonEntry**](PersonEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

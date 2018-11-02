@@ -2,6 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+SKIP_BUILD_CODGEN=false
 show_help() {
     echo "Usage: generate.sh -def definitions/alfresco-core.yaml -o example  "
     echo "-def definition file where to generate the api"
@@ -17,21 +18,33 @@ output() {
    OUTPUT_FOLDER=$1
 }
 
+build_codegen() {
+   SKIP_BUILD_CODGEN=true
+}
+
 while [[ $1 == -* ]]; do
     case "$1" in
       -h|--help|-\?) show_help; exit 0;;
       -def)  defintion $2; shift 2;;
       -o)  output $2; shift 2;;
+      -skip-build-codegen)  build_codegen; shift;;
       -*) echo "invalid option: $1" 1>&2; show_help; exit 1;;
     esac
 done
 
 
-cd $DIR/../api-codegen
 
-mvn package
+if $SKIP_BUILD_CODGEN; then
+   echo "================== skip build gen =================="
+else
+    cd $DIR/../api-codegen
 
-cd $DIR/..
+    mvn package
+
+    cd $DIR/..
+fi
+
+
 
 echo "================== Generate files =================="
 

@@ -15,12 +15,12 @@
 * limitations under the License.
 */
 
-import { Pagination } from '../../content-rest-api/model/pagination';
+import { Pagination } from './pagination';
 import { Transfer } from './transfer';
 import { TransferChildAssociationEntry } from './transferChildAssociationEntry';
 
 export class TransferAssociationPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<TransferChildAssociationEntry>;
     source?: Transfer;
 }

@@ -37,10 +37,10 @@ export class ActionDefinition {
     /**
      * QNames of the types this action applies to
      */
-    applicableTypes: any;
+    applicableTypes: Array<string>;
     /**
      * whether the basic action definition supports action tracking or not
      */
     trackStatus: boolean;
-    parameterDefinitions?: any;
+    parameterDefinitions?: Array<ActionParameterDefinition>;
 }

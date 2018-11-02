@@ -18,7 +18,7 @@
 import { PathElement } from './pathElement';
 
 export class PathInfo {
-    elements?: any;
+    elements?: Array<PathElement>;
     name?: string;
     isCompleted?: boolean;
 }

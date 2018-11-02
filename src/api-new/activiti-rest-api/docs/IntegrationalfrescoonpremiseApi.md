@@ -21,25 +21,23 @@ Returns ALL Sites
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationalfrescoonpremiseApi();
+let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllSitesUsingGET1(repositoryId, callback);
+integrationalfrescoonpremiseApi.getAllSitesUsingGET1(repositoryId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -52,15 +50,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoSiteRepresenation**](ResultListDataRepresentationAlfrescoSiteRepresenation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getContentInFolderPathUsingGET1"></a>
 # **getContentInFolderPathUsingGET1**
 > ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderPathUsingGET1(repositoryIdsiteIdfolderPath)
@@ -69,25 +58,23 @@ List files and folders inside a specific folder identified by folder path
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationalfrescoonpremiseApi();
+let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInFolderPathUsingGET1(repositoryIdsiteIdfolderPath, callback);
+integrationalfrescoonpremiseApi.getContentInFolderPathUsingGET1(repositoryIdsiteIdfolderPath).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -102,15 +89,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getContentInFolderUsingGET1"></a>
 # **getContentInFolderUsingGET1**
 > ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderUsingGET1(repositoryIdfolderId)
@@ -119,25 +97,23 @@ List files and folders inside a specific folder
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationalfrescoonpremiseApi();
+let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInFolderUsingGET1(repositoryIdfolderId, callback);
+integrationalfrescoonpremiseApi.getContentInFolderUsingGET1(repositoryIdfolderId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -151,15 +127,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getContentInSiteUsingGET1"></a>
 # **getContentInSiteUsingGET1**
 > ResultListDataRepresentationAlfrescoContentRepresentation getContentInSiteUsingGET1(repositoryIdsiteId)
@@ -168,25 +135,23 @@ List files and folders inside a specific site
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationalfrescoonpremiseApi();
+let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInSiteUsingGET1(repositoryIdsiteId, callback);
+integrationalfrescoonpremiseApi.getContentInSiteUsingGET1(repositoryIdsiteId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -200,15 +165,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getRepositoriesUsingGET"></a>
 # **getRepositoriesUsingGET**
 > ResultListDataRepresentationAlfrescoEndpointRepresentation getRepositoriesUsingGET(opts)
@@ -219,29 +175,27 @@ A tenant administrator can configure one or more Alfresco repositories to use wh
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationalfrescoonpremiseApi();
+let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'tenantId': 789 // number | tenantId
   'includeAccounts': true // boolean | includeAccounts
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRepositoriesUsingGET(opts, callback);
+integrationalfrescoonpremiseApi.getRepositoriesUsingGET(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -254,13 +208,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResultListDataRepresentationAlfrescoEndpointRepresentation**](ResultListDataRepresentationAlfrescoEndpointRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

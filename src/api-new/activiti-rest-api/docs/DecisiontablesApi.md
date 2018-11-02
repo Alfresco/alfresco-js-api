@@ -17,25 +17,23 @@ Get definition for a decision table
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import DecisiontablesApi from 'DecisiontablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .DecisiontablesApi();
+let decisiontablesApi = new DecisiontablesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getDecisionTableEditorJsonUsingGET(decisionTableId, callback);
+decisiontablesApi.getDecisionTableEditorJsonUsingGET(decisionTableId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -48,15 +46,6 @@ Name | Type | Description  | Notes
 
 [**JsonNode**](JsonNode.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getDecisionTableUsingGET"></a>
 # **getDecisionTableUsingGET**
 > RuntimeDecisionTableRepresentation getDecisionTableUsingGET(decisionTableId)
@@ -65,25 +54,23 @@ Get a decision table
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import DecisiontablesApi from 'DecisiontablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .DecisiontablesApi();
+let decisiontablesApi = new DecisiontablesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getDecisionTableUsingGET(decisionTableId, callback);
+decisiontablesApi.getDecisionTableUsingGET(decisionTableId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -96,15 +83,6 @@ Name | Type | Description  | Notes
 
 [**RuntimeDecisionTableRepresentation**](RuntimeDecisionTableRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getDecisionTablesUsingGET"></a>
 # **getDecisionTablesUsingGET**
 > ResultListDataRepresentationRuntimeDecisionTableRepresentation getDecisionTablesUsingGET(opts)
@@ -113,17 +91,17 @@ Query decision tables
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import DecisiontablesApi from 'DecisiontablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .DecisiontablesApi();
+let decisiontablesApi = new DecisiontablesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'nameLike': nameLike_example // string | nameLike
   'keyLike': keyLike_example // string | keyLike
   'tenantIdLike': tenantIdLike_example // string | tenantIdLike
@@ -134,14 +112,12 @@ var opts = {
   'size': 56 // number | size
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getDecisionTablesUsingGET(opts, callback);
+decisiontablesApi.getDecisionTablesUsingGET(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -160,13 +136,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResultListDataRepresentationRuntimeDecisionTableRepresentation**](ResultListDataRepresentationRuntimeDecisionTableRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

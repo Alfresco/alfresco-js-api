@@ -19,25 +19,23 @@ Remove an app deployment
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RuntimeappdeploymentsApi();
+let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteAppDeploymentUsingDELETE(appDeploymentId, callback);
+runtimeappdeploymentsApi.deleteAppDeploymentUsingDELETE(appDeploymentId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -50,15 +48,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="exportAppDefinitionUsingGET1"></a>
 # **exportAppDefinitionUsingGET1**
 > exportAppDefinitionUsingGET1(deploymentId)
@@ -67,25 +56,23 @@ Export the app archive for a deployment
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RuntimeappdeploymentsApi();
+let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.exportAppDefinitionUsingGET1(deploymentId, callback);
+runtimeappdeploymentsApi.exportAppDefinitionUsingGET1(deploymentId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -98,15 +85,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/zip
-
 <a name="getAppDefinitionsUsingGET1"></a>
 # **getAppDefinitionsUsingGET1**
 > ResultListDataRepresentationAppDeploymentRepresentation getAppDefinitionsUsingGET1(opts)
@@ -115,17 +93,17 @@ Query app deployments
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RuntimeappdeploymentsApi();
+let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'nameLike': nameLike_example // string | nameLike
   'tenantId': 789 // number | tenantId
   'latest': true // boolean | latest
@@ -135,14 +113,12 @@ var opts = {
   'size': 56 // number | size
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAppDefinitionsUsingGET1(opts, callback);
+runtimeappdeploymentsApi.getAppDefinitionsUsingGET1(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -161,15 +137,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAppDeploymentRepresentation**](ResultListDataRepresentationAppDeploymentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getAppDeploymentUsingGET"></a>
 # **getAppDeploymentUsingGET**
 > AppDeploymentRepresentation getAppDeploymentUsingGET(appDeploymentId)
@@ -178,25 +145,23 @@ Get an app deployment
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RuntimeappdeploymentsApi();
+let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAppDeploymentUsingGET(appDeploymentId, callback);
+runtimeappdeploymentsApi.getAppDeploymentUsingGET(appDeploymentId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -209,15 +174,6 @@ Name | Type | Description  | Notes
 
 [**AppDeploymentRepresentation**](AppDeploymentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getRuntimeAppDeploymentByDeploymentUsingGET"></a>
 # **getRuntimeAppDeploymentByDeploymentUsingGET**
 > AppDeploymentRepresentation getRuntimeAppDeploymentByDeploymentUsingGET(opts)
@@ -228,29 +184,27 @@ Either a deploymentId or a dmnDeploymentId must be provided
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RuntimeappdeploymentsApi();
+let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'deploymentId': deploymentId_example // string | deploymentId
   'dmnDeploymentId': 789 // number | dmnDeploymentId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRuntimeAppDeploymentByDeploymentUsingGET(opts, callback);
+runtimeappdeploymentsApi.getRuntimeAppDeploymentByDeploymentUsingGET(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -263,13 +217,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AppDeploymentRepresentation**](AppDeploymentRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

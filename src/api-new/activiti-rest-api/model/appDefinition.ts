@@ -20,7 +20,7 @@ import { PublishIdentityInfoRepresentation } from './publishIdentityInfoRepresen
 
 export class AppDefinition {
     icon?: string;
-    models?: any;
-    publishIdentityInfo?: any;
+    models?: Array<AppModelDefinition>;
+    publishIdentityInfo?: Array<PublishIdentityInfoRepresentation>;
     theme?: string;
 }

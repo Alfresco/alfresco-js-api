@@ -17,5 +17,5 @@
 
 export class UserFilterOrderRepresentation {
     appId?: number;
-    order?: any;
+    order?: Array<number>;
 }

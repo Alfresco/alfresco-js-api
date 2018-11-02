@@ -26,28 +26,26 @@ Attach existing content to a process instance
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'isRelatedContent': true // boolean | isRelatedContent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRelatedContentOnProcessInstanceUsingPOST(processInstanceIdrelatedContentopts, callback);
+contentApi.createRelatedContentOnProcessInstanceUsingPOST(processInstanceIdrelatedContentopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -61,15 +59,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RelatedContentRepresentation**](RelatedContentRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="createRelatedContentOnProcessInstanceUsingPOST1"></a>
 # **createRelatedContentOnProcessInstanceUsingPOST1**
@@ -79,28 +68,26 @@ Upload content and attach to a process instance
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'isRelatedContent': true // boolean | isRelatedContent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRelatedContentOnProcessInstanceUsingPOST1(processInstanceIdfileopts, callback);
+contentApi.createRelatedContentOnProcessInstanceUsingPOST1(processInstanceIdfileopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -115,15 +102,6 @@ Name | Type | Description  | Notes
 
 [**RelatedContentRepresentation**](RelatedContentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
 <a name="createRelatedContentOnTaskUsingPOST"></a>
 # **createRelatedContentOnTaskUsingPOST**
 > RelatedContentRepresentation createRelatedContentOnTaskUsingPOST(taskIdrelatedContentopts)
@@ -132,28 +110,26 @@ Attach existing content to a task
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'isRelatedContent': true // boolean | isRelatedContent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRelatedContentOnTaskUsingPOST(taskIdrelatedContentopts, callback);
+contentApi.createRelatedContentOnTaskUsingPOST(taskIdrelatedContentopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -167,15 +143,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RelatedContentRepresentation**](RelatedContentRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="createRelatedContentOnTaskUsingPOST1"></a>
 # **createRelatedContentOnTaskUsingPOST1**
@@ -185,28 +152,26 @@ Upload content and attach to a task
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'isRelatedContent': true // boolean | isRelatedContent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRelatedContentOnTaskUsingPOST1(taskIdfileopts, callback);
+contentApi.createRelatedContentOnTaskUsingPOST1(taskIdfileopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -221,15 +186,6 @@ Name | Type | Description  | Notes
 
 [**RelatedContentRepresentation**](RelatedContentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
 <a name="createTemporaryRawRelatedContentUsingPOST"></a>
 # **createTemporaryRawRelatedContentUsingPOST**
 > RelatedContentRepresentation createTemporaryRawRelatedContentUsingPOST(file)
@@ -238,25 +194,23 @@ Upload content and create a local representation
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createTemporaryRawRelatedContentUsingPOST(file, callback);
+contentApi.createTemporaryRawRelatedContentUsingPOST(file).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -269,15 +223,6 @@ Name | Type | Description  | Notes
 
 [**RelatedContentRepresentation**](RelatedContentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
 <a name="createTemporaryRelatedContentUsingPOST"></a>
 # **createTemporaryRelatedContentUsingPOST**
 > RelatedContentRepresentation createTemporaryRelatedContentUsingPOST(relatedContent)
@@ -286,25 +231,23 @@ Create a local representation of content from a remote repository
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createTemporaryRelatedContentUsingPOST(relatedContent, callback);
+contentApi.createTemporaryRelatedContentUsingPOST(relatedContent).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -317,15 +260,6 @@ Name | Type | Description  | Notes
 
 [**RelatedContentRepresentation**](RelatedContentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteContentUsingDELETE"></a>
 # **deleteContentUsingDELETE**
 > deleteContentUsingDELETE(contentId)
@@ -334,25 +268,23 @@ Remove a local content representation
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteContentUsingDELETE(contentId, callback);
+contentApi.deleteContentUsingDELETE(contentId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -365,15 +297,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getContentUsingGET"></a>
 # **getContentUsingGET**
 > RelatedContentRepresentation getContentUsingGET(contentId)
@@ -382,25 +305,23 @@ Get a local content representation
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentUsingGET(contentId, callback);
+contentApi.getContentUsingGET(contentId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -413,15 +334,6 @@ Name | Type | Description  | Notes
 
 [**RelatedContentRepresentation**](RelatedContentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getRawContentUsingGET"></a>
 # **getRawContentUsingGET**
 > getRawContentUsingGET(contentIdrenditionType)
@@ -430,25 +342,23 @@ Stream content rendition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getRawContentUsingGET(contentIdrenditionType, callback);
+contentApi.getRawContentUsingGET(contentIdrenditionType).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -462,15 +372,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
-
 <a name="getRawContentUsingGET1"></a>
 # **getRawContentUsingGET1**
 > getRawContentUsingGET1(contentId)
@@ -479,25 +380,23 @@ Stream content from a local content representation
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getRawContentUsingGET1(contentId, callback);
+contentApi.getRawContentUsingGET1(contentId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -510,15 +409,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json, */*
-
 <a name="getRelatedContentForProcessInstanceUsingGET"></a>
 # **getRelatedContentForProcessInstanceUsingGET**
 > ResultListDataRepresentationRelatedContentRepresentation getRelatedContentForProcessInstanceUsingGET(processInstanceIdopts)
@@ -527,28 +417,26 @@ List content attached to a process instance
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'isRelatedContent': true // boolean | isRelatedContent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRelatedContentForProcessInstanceUsingGET(processInstanceIdopts, callback);
+contentApi.getRelatedContentForProcessInstanceUsingGET(processInstanceIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -562,15 +450,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationRelatedContentRepresentation**](ResultListDataRepresentationRelatedContentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getRelatedContentForTaskUsingGET"></a>
 # **getRelatedContentForTaskUsingGET**
 > ResultListDataRepresentationRelatedContentRepresentation getRelatedContentForTaskUsingGET(taskIdopts)
@@ -579,28 +458,26 @@ List content attached to a task
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ContentApi();
+let contentApi = new ContentApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'isRelatedContent': true // boolean | isRelatedContent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRelatedContentForTaskUsingGET(taskIdopts, callback);
+contentApi.getRelatedContentForTaskUsingGET(taskIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -613,13 +490,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResultListDataRepresentationRelatedContentRepresentation**](ResultListDataRepresentationRelatedContentRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

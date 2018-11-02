@@ -32,8 +32,8 @@ export class TaskRepresentation {
     formKey?: string;
     id?: string;
     initiatorCanCompleteTask?: boolean;
-    involvedGroups?: any;
-    involvedPeople?: any;
+    involvedGroups?: Array<LightGroupRepresentation>;
+    involvedPeople?: Array<LightUserRepresentation>;
     managerOfCandidateGroup?: boolean;
     memberOfCandidateGroup?: boolean;
     memberOfCandidateUsers?: boolean;
@@ -52,5 +52,5 @@ export class TaskRepresentation {
     processInstanceName?: string;
     processInstanceStartUserId?: string;
     taskDefinitionKey?: string;
-    variables?: any;
+    variables?: Array<RestVariable>;
 }

@@ -18,7 +18,7 @@
 import { RelatedContentRepresentation } from './relatedContentRepresentation';
 
 export class ResultListDataRepresentationRelatedContentRepresentation {
-    data?: any;
+    data?: Array<RelatedContentRepresentation>;
     size?: number;
     start?: number;
     total?: number;

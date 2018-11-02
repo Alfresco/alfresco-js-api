@@ -24,25 +24,23 @@ Only a tenant manager may access this endpoint
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmintenantsApi from 'AdmintenantsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmintenantsApi();
+let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createTenantUsingPOST(createTenantRepresentation, callback);
+admintenantsApi.createTenantUsingPOST(createTenantRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -55,15 +53,6 @@ Name | Type | Description  | Notes
 
 [**LightTenantRepresentation**](LightTenantRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteTenantUsingDELETE"></a>
 # **deleteTenantUsingDELETE**
 > deleteTenantUsingDELETE(tenantId)
@@ -72,25 +61,23 @@ Delete a tenant
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmintenantsApi from 'AdmintenantsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmintenantsApi();
+let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteTenantUsingDELETE(tenantId, callback);
+admintenantsApi.deleteTenantUsingDELETE(tenantId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -103,42 +90,31 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getTenantEventsUsingGET"></a>
 # **getTenantEventsUsingGET**
-> any getTenantEventsUsingGET(tenantId)
+> Array<TenantEvent> getTenantEventsUsingGET(tenantId)
 
 Get tenant events
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmintenantsApi from 'AdmintenantsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmintenantsApi();
+let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTenantEventsUsingGET(tenantId, callback);
+admintenantsApi.getTenantEventsUsingGET(tenantId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -149,16 +125,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](TenantEvent.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;TenantEvent&gt;**](TenantEvent.md)
 
 <a name="getTenantLogoUsingGET"></a>
 # **getTenantLogoUsingGET**
@@ -168,25 +135,23 @@ Get a tenant&#39;s logo
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmintenantsApi from 'AdmintenantsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmintenantsApi();
+let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getTenantLogoUsingGET(tenantId, callback);
+admintenantsApi.getTenantLogoUsingGET(tenantId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -199,15 +164,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getTenantUsingGET"></a>
 # **getTenantUsingGET**
 > TenantRepresentation getTenantUsingGET(tenantId)
@@ -216,25 +172,23 @@ Get a tenant
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmintenantsApi from 'AdmintenantsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmintenantsApi();
+let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTenantUsingGET(tenantId, callback);
+admintenantsApi.getTenantUsingGET(tenantId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -247,18 +201,9 @@ Name | Type | Description  | Notes
 
 [**TenantRepresentation**](TenantRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getTenantsUsingGET"></a>
 # **getTenantsUsingGET**
-> any getTenantsUsingGET()
+> Array<LightTenantRepresentation> getTenantsUsingGET()
 
 List tenants
 
@@ -266,24 +211,22 @@ Only a tenant manager may access this endpoint
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmintenantsApi from 'AdmintenantsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmintenantsApi();
+let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTenantsUsingGET(callback);
+admintenantsApi.getTenantsUsingGET().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -291,16 +234,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**any**](LightTenantRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;LightTenantRepresentation&gt;**](LightTenantRepresentation.md)
 
 <a name="updateUsingPUT"></a>
 # **updateUsingPUT**
@@ -310,25 +244,23 @@ Update a tenant
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmintenantsApi from 'AdmintenantsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmintenantsApi();
+let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateUsingPUT(tenantIdcreateTenantRepresentation, callback);
+admintenantsApi.updateUsingPUT(tenantIdcreateTenantRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -342,15 +274,6 @@ Name | Type | Description  | Notes
 
 [**TenantRepresentation**](TenantRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="uploadTenantLogoUsingPOST"></a>
 # **uploadTenantLogoUsingPOST**
 > ImageUploadRepresentation uploadTenantLogoUsingPOST(tenantIdfile)
@@ -359,25 +282,23 @@ Update a tenant&#39;s logo
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmintenantsApi from 'AdmintenantsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmintenantsApi();
+let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.uploadTenantLogoUsingPOST(tenantIdfile, callback);
+admintenantsApi.uploadTenantLogoUsingPOST(tenantIdfile).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -390,13 +311,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ImageUploadRepresentation**](ImageUploadRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
 

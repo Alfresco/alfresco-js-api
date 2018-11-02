@@ -24,5 +24,5 @@ export class CreateProcessInstanceRepresentation {
     processDefinitionId?: string;
     processDefinitionKey?: string;
     values?: any;
-    variables?: any;
+    variables?: Array<RestVariable>;
 }

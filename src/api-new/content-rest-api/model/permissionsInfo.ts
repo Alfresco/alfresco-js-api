@@ -19,7 +19,7 @@ import { PermissionElement } from './permissionElement';
 
 export class PermissionsInfo {
     isInheritanceEnabled?: boolean;
-    inherited?: any;
-    locallySet?: any;
-    settable?: any;
+    inherited?: Array<PermissionElement>;
+    locallySet?: Array<PermissionElement>;
+    settable?: Array<string>;
 }

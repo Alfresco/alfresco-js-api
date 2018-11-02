@@ -16,5 +16,5 @@
 */
 
 export class ChecklistOrderRepresentation {
-    order?: any;
+    order?: Array<string>;
 }

@@ -18,7 +18,7 @@
 import { AppDeploymentRepresentation } from './appDeploymentRepresentation';
 
 export class ResultListDataRepresentationAppDeploymentRepresentation {
-    data?: any;
+    data?: Array<AppDeploymentRepresentation>;
     size?: number;
     start?: number;
     total?: number;

@@ -19,9 +19,9 @@ import { GroupCapabilityRepresentation } from './groupCapabilityRepresentation';
 import { UserRepresentation } from './userRepresentation';
 
 export class GroupRepresentation {
-    capabilities?: any;
+    capabilities?: Array<GroupCapabilityRepresentation>;
     externalId?: string;
-    groups?: any;
+    groups?: Array<GroupRepresentation>;
     id?: number;
     lastSyncTimeStamp?: Date;
     manager?: UserRepresentation;
@@ -31,5 +31,5 @@ export class GroupRepresentation {
     tenantId?: number;
     type?: number;
     userCount?: number;
-    users?: any;
+    users?: Array<UserRepresentation>;
 }

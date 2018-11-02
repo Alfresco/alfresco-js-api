@@ -29,5 +29,5 @@ export class GenericFacetResponse {
     /**
      * An array of buckets and values
      */
-    buckets?: any;
+    buckets?: Array<GenericBucket>;
 }

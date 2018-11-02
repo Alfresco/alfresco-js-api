@@ -21,6 +21,6 @@ import { Pagination } from './pagination';
 
 export class NodeAssociationPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<NodeAssociationEntry>;
     source?: Node;
 }

@@ -17,7 +17,7 @@
 
 import { Capabilities } from './capabilities';
 import { Company } from './company';
-
+import { Map } from './map';
 
 export class Person {
     id: string;
@@ -38,7 +38,7 @@ export class Person {
     userStatus?: string;
     enabled: boolean;
     emailNotificationsEnabled?: boolean;
-    aspectNames?: any;
+    aspectNames?: Array<string>;
     properties?: { [key: string]: string; };
     capabilities?: Capabilities;
 }

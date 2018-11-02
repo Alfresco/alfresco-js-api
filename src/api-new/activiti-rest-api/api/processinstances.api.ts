@@ -282,9 +282,9 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * @param  processInstanceId processInstanceId
-        * @return Promise<any>
+        * @return Promise<Array<ProcessInstanceVariableRepresentation>>
         */
-    getHistoricProcessInstanceVariablesUsingGET(processInstanceId: string): Promise<any> {
+    getHistoricProcessInstanceVariablesUsingGET(processInstanceId: string): Promise<Array<ProcessInstanceVariableRepresentation>> {
 
         let postBody = null;
 
@@ -409,9 +409,9 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * @param  processInstanceId processInstanceId
         * @param  family family
-        * @return Promise<any>
+        * @return Promise<Array<IdentityLinkRepresentation>>
         */
-    getIdentityLinksForFamilyUsingGET1(processInstanceId: string, family: string): Promise<any> {
+    getIdentityLinksForFamilyUsingGET1(processInstanceId: string, family: string): Promise<Array<IdentityLinkRepresentation>> {
 
         let postBody = null;
 
@@ -450,9 +450,9 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * @param  processInstanceId processInstanceId
-        * @return Promise<any>
+        * @return Promise<Array<IdentityLinkRepresentation>>
         */
-    getIdentityLinksUsingGET1(processInstanceId: string): Promise<any> {
+    getIdentityLinksUsingGET1(processInstanceId: string): Promise<Array<IdentityLinkRepresentation>> {
 
         let postBody = null;
 
@@ -524,9 +524,9 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * @param  processInstanceId processInstanceId
-        * @return Promise<any>
+        * @return Promise<Array<string>>
         */
-    getProcessInstanceDiagramUsingGET(processInstanceId: string): Promise<any> {
+    getProcessInstanceDiagramUsingGET(processInstanceId: string): Promise<Array<string>> {
 
         let postBody = null;
 

@@ -18,7 +18,7 @@
 import { ModelRepresentation } from './modelRepresentation';
 
 export class ResultListDataRepresentationModelRepresentation {
-    data?: any;
+    data?: Array<ModelRepresentation>;
     size?: number;
     start?: number;
     total?: number;

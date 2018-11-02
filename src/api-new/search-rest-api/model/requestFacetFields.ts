@@ -28,5 +28,5 @@ export class RequestFacetFields {
      * Define specifc fields on which to facet (adds SOLR facet.field and f.<field>.facet.* options)
 
      */
-    facets?: any;
+    facets?: Array<RequestFacetField>;
 }

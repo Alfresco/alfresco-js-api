@@ -36,5 +36,5 @@ export class ProcessInstanceRepresentation {
     startedBy?: LightUserRepresentation;
     suspended?: boolean;
     tenantId?: string;
-    variables?: any;
+    variables?: Array<RestVariable>;
 }

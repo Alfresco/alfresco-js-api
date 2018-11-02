@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-
+import { Map } from './map';
 import { UserInfo } from './userInfo';
 
 export class AuditEntry {

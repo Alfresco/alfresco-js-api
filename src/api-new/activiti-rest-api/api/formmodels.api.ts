@@ -188,9 +188,9 @@ export class FormmodelsApi extends BaseApi {
         * 
         * 
         * @param  formId formId
-        * @return Promise<any>
+        * @return Promise<Array<FormRepresentation>>
         */
-    getFormsUsingGET(formId: any): Promise<any> {
+    getFormsUsingGET(formId: Array & lt; string&gt;): Promise<Array<FormRepresentation>> {
 
         let postBody = null;
 
@@ -348,9 +348,9 @@ export class FormmodelsApi extends BaseApi {
         * 
         * @param  formId formId
         * @param  saveRepresentation saveRepresentation
-        * @return Promise<any>
+        * @return Promise<Array<ValidationErrorRepresentation>>
         */
-    validateModelUsingPUT(formId: number, saveRepresentation: FormSaveRepresentation): Promise<any> {
+    validateModelUsingPUT(formId: number, saveRepresentation: FormSaveRepresentation): Promise<Array<ValidationErrorRepresentation>> {
 
         let postBody = saveRepresentation;
 

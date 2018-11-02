@@ -29,7 +29,7 @@ export class HistoricProcessInstanceQueryRepresentation {
     processDefinitionId?: string;
     processDefinitionKey?: string;
     processInstanceId?: string;
-    processInstanceIds?: any;
+    processInstanceIds?: Array<string>;
     size?: number;
     sort?: string;
     start?: number;
@@ -39,6 +39,6 @@ export class HistoricProcessInstanceQueryRepresentation {
     superProcessInstanceId?: string;
     tenantId?: string;
     tenantIdLike?: string;
-    variables?: any;
+    variables?: Array<QueryVariable>;
     withoutTenantId?: boolean;
 }

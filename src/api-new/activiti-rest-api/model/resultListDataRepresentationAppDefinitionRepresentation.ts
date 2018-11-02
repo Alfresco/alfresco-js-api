@@ -18,7 +18,7 @@
 import { AppDefinitionRepresentation } from './appDefinitionRepresentation';
 
 export class ResultListDataRepresentationAppDefinitionRepresentation {
-    data?: any;
+    data?: Array<AppDefinitionRepresentation>;
     size?: number;
     start?: number;
     total?: number;

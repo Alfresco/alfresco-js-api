@@ -20,5 +20,5 @@ import { Pagination } from './pagination';
 
 export class ActionDefinitionListList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<ActionDefinition>;
 }

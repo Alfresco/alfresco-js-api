@@ -30,9 +30,9 @@ export class ProcessinstancevariablesApi extends BaseApi {
     * 
     * @param  processInstanceId Process instance ID
     * @param  restVariables restVariables
-    * @return Promise<any>
+    * @return Promise<Array<RestVariable>>
     */
-    createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceId: string, restVariables: any): Promise<any> {
+    createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceId: string, restVariables: Array & lt; RestVariable&gt;): Promise<Array<RestVariable>> {
 
         let postBody = restVariables;
 
@@ -72,9 +72,9 @@ export class ProcessinstancevariablesApi extends BaseApi {
         * 
         * @param  processInstanceId Process instance ID
         * @param  restVariables restVariables
-        * @return Promise<any>
+        * @return Promise<Array<RestVariable>>
         */
-    createProcessInstanceVariablesUsingPOST(processInstanceId: string, restVariables: any): Promise<any> {
+    createProcessInstanceVariablesUsingPOST(processInstanceId: string, restVariables: Array & lt; RestVariable&gt;): Promise<Array<RestVariable>> {
 
         let postBody = restVariables;
 
@@ -197,9 +197,9 @@ export class ProcessinstancevariablesApi extends BaseApi {
         * 
         * 
         * @param  processInstanceId Process instance ID
-        * @return Promise<any>
+        * @return Promise<Array<RestVariable>>
         */
-    getProcessInstanceVariablesUsingGET(processInstanceId: string): Promise<any> {
+    getProcessInstanceVariablesUsingGET(processInstanceId: string): Promise<Array<RestVariable>> {
 
         let postBody = null;
 

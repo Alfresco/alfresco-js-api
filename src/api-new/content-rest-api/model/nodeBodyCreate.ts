@@ -17,7 +17,7 @@
 
 import { AssociationBody } from './associationBody';
 import { ChildAssociationBody } from './childAssociationBody';
-
+import { Map } from './map';
 import { NodeBodyCreateAssociation } from './nodeBodyCreateAssociation';
 
 export class NodeBodyCreate {
@@ -28,10 +28,10 @@ The character . must not be used at the end of the name.
      */
     name: string;
     nodeType: string;
-    aspectNames?: any;
+    aspectNames?: Array<string>;
     properties?: { [key: string]: string; };
     relativePath?: string;
     association?: NodeBodyCreateAssociation;
-    secondaryChildren?: any;
-    targets?: any;
+    secondaryChildren?: Array<ChildAssociationBody>;
+    targets?: Array<AssociationBody>;
 }

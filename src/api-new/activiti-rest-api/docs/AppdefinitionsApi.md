@@ -23,25 +23,23 @@ deleteAppDefinition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AppdefinitionsApi from 'AppdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AppdefinitionsApi();
+let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteAppDefinitionUsingDELETE(appDefinitionId, callback);
+appdefinitionsApi.deleteAppDefinitionUsingDELETE(appDefinitionId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -54,15 +52,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="exportAppDefinitionUsingGET"></a>
 # **exportAppDefinitionUsingGET**
 > exportAppDefinitionUsingGET(modelId)
@@ -73,25 +62,23 @@ This will return a zip file containing the app definition model and all related 
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AppdefinitionsApi from 'AppdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AppdefinitionsApi();
+let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.exportAppDefinitionUsingGET(modelId, callback);
+appdefinitionsApi.exportAppDefinitionUsingGET(modelId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -104,15 +91,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json, application/zip
-
 <a name="getAppDefinitionUsingGET"></a>
 # **getAppDefinitionUsingGET**
 > AppDefinitionRepresentation getAppDefinitionUsingGET(modelId)
@@ -121,25 +99,23 @@ Get an app definition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AppdefinitionsApi from 'AppdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AppdefinitionsApi();
+let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAppDefinitionUsingGET(modelId, callback);
+appdefinitionsApi.getAppDefinitionUsingGET(modelId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -152,15 +128,6 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionRepresentation**](AppDefinitionRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="importAndPublishAppUsingPOST"></a>
 # **importAndPublishAppUsingPOST**
 > AppDefinitionUpdateResultRepresentation importAndPublishAppUsingPOST(file)
@@ -169,25 +136,23 @@ importAndPublishApp
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AppdefinitionsApi from 'AppdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AppdefinitionsApi();
+let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.importAndPublishAppUsingPOST(file, callback);
+appdefinitionsApi.importAndPublishAppUsingPOST(file).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -200,15 +165,6 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionUpdateResultRepresentation**](AppDefinitionUpdateResultRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
 <a name="importAndPublishAppUsingPOST1"></a>
 # **importAndPublishAppUsingPOST1**
 > AppDefinitionUpdateResultRepresentation importAndPublishAppUsingPOST1(modelIdfile)
@@ -217,25 +173,23 @@ importAndPublishApp
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AppdefinitionsApi from 'AppdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AppdefinitionsApi();
+let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.importAndPublishAppUsingPOST1(modelIdfile, callback);
+appdefinitionsApi.importAndPublishAppUsingPOST1(modelIdfile).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -249,15 +203,6 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionUpdateResultRepresentation**](AppDefinitionUpdateResultRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
 <a name="importAppDefinitionUsingPOST"></a>
 # **importAppDefinitionUsingPOST**
 > AppDefinitionRepresentation importAppDefinitionUsingPOST(fileopts)
@@ -268,28 +213,26 @@ Allows a zip file to be uploaded containing an app definition and any number of 
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AppdefinitionsApi from 'AppdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AppdefinitionsApi();
+let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'renewIdmEntries': renewIdmEntries_example // string | Whether to renew user and group identifiers
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.importAppDefinitionUsingPOST(fileopts, callback);
+appdefinitionsApi.importAppDefinitionUsingPOST(fileopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -303,15 +246,6 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionRepresentation**](AppDefinitionRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
 <a name="importAppDefinitionUsingPOST1"></a>
 # **importAppDefinitionUsingPOST1**
 > AppDefinitionRepresentation importAppDefinitionUsingPOST1(modelIdfile)
@@ -322,25 +256,23 @@ Imports an app inside an existing app definition and creates a new version&lt;p&
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AppdefinitionsApi from 'AppdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AppdefinitionsApi();
+let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.importAppDefinitionUsingPOST1(modelIdfile, callback);
+appdefinitionsApi.importAppDefinitionUsingPOST1(modelIdfile).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -354,15 +286,6 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionRepresentation**](AppDefinitionRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
 <a name="publishAppDefinitionUsingPOST"></a>
 # **publishAppDefinitionUsingPOST**
 > AppDefinitionUpdateResultRepresentation publishAppDefinitionUsingPOST(modelIdpublishModel)
@@ -373,25 +296,23 @@ Publishing an app definition makes it available for use. The application must no
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AppdefinitionsApi from 'AppdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AppdefinitionsApi();
+let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.publishAppDefinitionUsingPOST(modelIdpublishModel, callback);
+appdefinitionsApi.publishAppDefinitionUsingPOST(modelIdpublishModel).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -405,15 +326,6 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionUpdateResultRepresentation**](AppDefinitionUpdateResultRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="updateAppDefinitionUsingPUT"></a>
 # **updateAppDefinitionUsingPUT**
 > AppDefinitionUpdateResultRepresentation updateAppDefinitionUsingPUT(modelIdupdatedModel)
@@ -422,25 +334,23 @@ Update an app definition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AppdefinitionsApi from 'AppdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AppdefinitionsApi();
+let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateAppDefinitionUsingPUT(modelIdupdatedModel, callback);
+appdefinitionsApi.updateAppDefinitionUsingPUT(modelIdupdatedModel).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -453,13 +363,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AppDefinitionUpdateResultRepresentation**](AppDefinitionUpdateResultRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

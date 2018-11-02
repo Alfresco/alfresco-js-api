@@ -25,5 +25,5 @@ export class RepositoryInfo {
     version: VersionInfo;
     status: StatusInfo;
     license?: LicenseInfo;
-    modules?: any;
+    modules?: Array<ModuleInfo>;
 }

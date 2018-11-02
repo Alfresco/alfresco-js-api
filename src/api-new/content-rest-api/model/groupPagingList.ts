@@ -20,5 +20,5 @@ import { Pagination } from './pagination';
 
 export class GroupPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<GroupEntry>;
 }

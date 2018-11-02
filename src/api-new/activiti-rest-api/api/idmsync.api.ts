@@ -70,9 +70,9 @@ export class IdmsyncApi extends BaseApi {
         * @param  opts.page page
         * @param  opts.start start
         * @param  opts.size size
-        * @return Promise<any>
+        * @return Promise<Array<SyncLogEntryRepresentation>>
         */
-    getSyncLogEntriesUsingGET(opts: any): Promise<any> {
+    getSyncLogEntriesUsingGET(opts: any): Promise<Array<SyncLogEntryRepresentation>> {
         opts = opts || {};
         let postBody = null;
 

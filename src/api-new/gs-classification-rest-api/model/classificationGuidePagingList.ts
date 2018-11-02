@@ -20,5 +20,5 @@ import { Pagination } from './pagination';
 
 export class ClassificationGuidePagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<ClassificationGuidesEntry>;
 }

@@ -107,9 +107,9 @@ export class AdmintenantsApi extends BaseApi {
         * 
         * 
         * @param  tenantId tenantId
-        * @return Promise<any>
+        * @return Promise<Array<TenantEvent>>
         */
-    getTenantEventsUsingGET(tenantId: number): Promise<any> {
+    getTenantEventsUsingGET(tenantId: number): Promise<Array<TenantEvent>> {
 
         let postBody = null;
 
@@ -217,9 +217,9 @@ export class AdmintenantsApi extends BaseApi {
         * 
         * Only a tenant manager may access this endpoint
         * 
-        * @return Promise<any>
+        * @return Promise<Array<LightTenantRepresentation>>
         */
-    getTenantsUsingGET(): Promise<any> {
+    getTenantsUsingGET(): Promise<Array<LightTenantRepresentation>> {
 
         let postBody = null;
 

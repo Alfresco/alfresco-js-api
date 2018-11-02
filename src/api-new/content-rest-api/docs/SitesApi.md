@@ -40,29 +40,27 @@ Approve a site membership request.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'siteMembershipApprovalBody':  // SiteMembershipApprovalBody | Accepting a request to join, optionally, allows assignment of a role to the user.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.approveSiteMembershipRequest(siteIdinviteeIdopts, callback);
+sitesApi.approveSiteMembershipRequest(siteIdinviteeIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -77,15 +75,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="createSite"></a>
 # **createSite**
@@ -122,20 +111,20 @@ This container is the root folder for content stored in the site.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipConfiguration': true // boolean | Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.
   'skipAddToFavorites': true // boolean | Flag to indicate whether the site should not be added to the user's site favorites.
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -149,14 +138,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createSite(siteBodyCreateopts, callback);
+sitesApi.createSite(siteBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -166,7 +153,7 @@ Name | Type | Description  | Notes
  **siteBodyCreate** | [**SiteBodyCreate**](SiteBodyCreate.md)| The site details | 
  **skipConfiguration** | **boolean**| Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. | [optional] [default to false]
  **skipAddToFavorites** | **boolean**| Flag to indicate whether the site should not be added to the user&#39;s site favorites. | [optional] [default to false]
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -182,15 +169,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**SiteEntry**](SiteEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="createSiteMembership"></a>
 # **createSiteMembership**
@@ -253,18 +231,18 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -278,14 +256,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createSiteMembership(siteIdsiteMembershipBodyCreateopts, callback);
+sitesApi.createSiteMembership(siteIdsiteMembershipBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -294,7 +270,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **string**| The identifier of a site. | 
  **siteMembershipBodyCreate** | [**SiteMembershipBodyCreate**](SiteMembershipBodyCreate.md)| The person to add and their role | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -310,15 +286,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**SiteMemberEntry**](SiteMemberEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="createSiteMembershipRequestForPerson"></a>
 # **createSiteMembershipRequestForPerson**
@@ -383,18 +350,18 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -408,14 +375,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createSiteMembershipRequestForPerson(personIdsiteMembershipRequestBodyCreateopts, callback);
+sitesApi.createSiteMembershipRequestForPerson(personIdsiteMembershipRequestBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -424,7 +389,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **siteMembershipRequestBodyCreate** | [**SiteMembershipRequestBodyCreate**](SiteMembershipRequestBodyCreate.md)| Site membership request details | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -441,15 +406,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**SiteMembershipRequestEntry**](SiteMembershipRequestEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteSite"></a>
 # **deleteSite**
 > deleteSite(siteIdopts)
@@ -463,28 +419,26 @@ Deletes the site with **siteId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'permanent': true // boolean | Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan.
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteSite(siteIdopts, callback);
+sitesApi.deleteSite(siteIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -497,15 +451,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="deleteSiteMembership"></a>
 # **deleteSiteMembership**
@@ -520,25 +465,23 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteSiteMembership(siteIdpersonId, callback);
+sitesApi.deleteSiteMembership(siteIdpersonId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -551,15 +494,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="deleteSiteMembershipForPerson"></a>
 # **deleteSiteMembershipForPerson**
@@ -574,25 +508,23 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteSiteMembershipForPerson(personIdsiteId, callback);
+sitesApi.deleteSiteMembershipForPerson(personIdsiteId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -605,15 +537,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="deleteSiteMembershipRequestForPerson"></a>
 # **deleteSiteMembershipRequestForPerson**
@@ -628,25 +551,23 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteSiteMembershipRequestForPerson(personIdsiteId, callback);
+sitesApi.deleteSiteMembershipRequestForPerson(personIdsiteId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -659,15 +580,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getSite"></a>
 # **getSite**
@@ -692,19 +604,19 @@ containers,members
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
-  'relations':  // any | Use the relations parameter to include one or more related entities in a single response.
-  'fields':  // any | A list of field names.
+let opts = { 
+  'relations':  // Array<string> | Use the relations parameter to include one or more related entities in a single response.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -718,14 +630,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSite(siteIdopts, callback);
+sitesApi.getSite(siteIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -733,8 +643,8 @@ apiInstance.getSite(siteIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **string**| The identifier of a site. | 
- **relations** | [**any**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **relations** | [**Array&lt;string&gt;**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -751,15 +661,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**SiteEntry**](SiteEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getSiteContainer"></a>
 # **getSiteContainer**
 > SiteContainerEntry getSiteContainer(siteIdcontainerIdopts)
@@ -770,18 +671,18 @@ Gets information on the container **containerId** in site **siteId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -795,14 +696,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSiteContainer(siteIdcontainerIdopts, callback);
+sitesApi.getSiteContainer(siteIdcontainerIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -811,7 +710,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **string**| The identifier of a site. | 
  **containerId** | **string**| The unique identifier of a site container. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -828,15 +727,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**SiteContainerEntry**](SiteContainerEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getSiteMembership"></a>
 # **getSiteMembership**
 > SiteMemberEntry getSiteMembership(siteIdpersonIdopts)
@@ -850,18 +740,18 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -875,14 +765,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSiteMembership(siteIdpersonIdopts, callback);
+sitesApi.getSiteMembership(siteIdpersonIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -891,7 +779,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **string**| The identifier of a site. | 
  **personId** | **string**| The identifier of a person. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -908,15 +796,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**SiteMemberEntry**](SiteMemberEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getSiteMembershipForPerson"></a>
 # **getSiteMembershipForPerson**
 > SiteRoleEntry getSiteMembershipForPerson(personIdsiteId)
@@ -930,25 +809,23 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSiteMembershipForPerson(personIdsiteId, callback);
+sitesApi.getSiteMembershipForPerson(personIdsiteId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -961,15 +838,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SiteRoleEntry**](SiteRoleEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getSiteMembershipRequestForPerson"></a>
 # **getSiteMembershipRequestForPerson**
@@ -984,18 +852,18 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1009,14 +877,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSiteMembershipRequestForPerson(personIdsiteIdopts, callback);
+sitesApi.getSiteMembershipRequestForPerson(personIdsiteIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1025,7 +891,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **siteId** | **string**| The identifier of a site. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1041,15 +907,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**SiteMembershipRequestEntry**](SiteMembershipRequestEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getSiteMembershipRequests"></a>
 # **getSiteMembershipRequests**
@@ -1080,17 +937,17 @@ where&#x3D;(siteId&#x3D;mySite AND personId&#x3D;person))
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
@@ -1098,7 +955,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
 
   'where': where_example // string | A string to restrict the returned objects by using a predicate.
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1112,14 +969,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSiteMembershipRequests(opts, callback);
+sitesApi.getSiteMembershipRequests(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1133,7 +988,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
  **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1150,15 +1005,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**SiteMembershipRequestWithPersonPaging**](SiteMembershipRequestWithPersonPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listSiteContainers"></a>
 # **listSiteContainers**
 > SiteContainerPaging listSiteContainers(siteIdopts)
@@ -1169,24 +1015,24 @@ Gets a list of containers for the site **siteId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1200,14 +1046,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listSiteContainers(siteIdopts, callback);
+sitesApi.listSiteContainers(siteIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1221,7 +1065,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1238,15 +1082,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**SiteContainerPaging**](SiteContainerPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listSiteMembershipRequestsForPerson"></a>
 # **listSiteMembershipRequestsForPerson**
 > SiteMembershipRequestPaging listSiteMembershipRequestsForPerson(personIdopts)
@@ -1260,24 +1095,24 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1291,14 +1126,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listSiteMembershipRequestsForPerson(personIdopts, callback);
+sitesApi.listSiteMembershipRequestsForPerson(personIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1312,7 +1145,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1329,15 +1162,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**SiteMembershipRequestPaging**](SiteMembershipRequestPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listSiteMemberships"></a>
 # **listSiteMemberships**
 > SiteMemberPaging listSiteMemberships(siteIdopts)
@@ -1348,24 +1172,24 @@ Gets a list of site memberships for site **siteId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1379,14 +1203,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listSiteMemberships(siteIdopts, callback);
+sitesApi.listSiteMemberships(siteIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1400,7 +1222,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1416,15 +1238,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**SiteMemberPaging**](SiteMemberPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listSiteMembershipsForPerson"></a>
 # **listSiteMembershipsForPerson**
@@ -1461,24 +1274,24 @@ You can override the default by using the **orderBy** parameter. You can specify
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1486,8 +1299,8 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'relations':  // any | Use the relations parameter to include one or more related entities in a single response.
-  'fields':  // any | A list of field names.
+  'relations':  // Array<string> | Use the relations parameter to include one or more related entities in a single response.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1502,14 +1315,12 @@ parameter are returned in addition to those specified in the **fields** paramete
   'where': where_example // string | A string to restrict the returned objects by using a predicate.
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listSiteMembershipsForPerson(personIdopts, callback);
+sitesApi.listSiteMembershipsForPerson(personIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1523,7 +1334,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1531,8 +1342,8 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **relations** | [**any**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **relations** | [**Array&lt;string&gt;**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1549,15 +1360,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**SiteRolePaging**](SiteRolePaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listSites"></a>
 # **listSites**
@@ -1604,24 +1406,24 @@ containers,members
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1629,8 +1431,8 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'relations':  // any | Use the relations parameter to include one or more related entities in a single response.
-  'fields':  // any | A list of field names.
+  'relations':  // Array<string> | Use the relations parameter to include one or more related entities in a single response.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1645,14 +1447,12 @@ parameter are returned in addition to those specified in the **fields** paramete
   'where': where_example // string | A string to restrict the returned objects by using a predicate.
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listSites(opts, callback);
+sitesApi.listSites(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1665,7 +1465,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1673,8 +1473,8 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **relations** | [**any**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **relations** | [**Array&lt;string&gt;**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1692,15 +1492,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**SitePaging**](SitePaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="rejectSiteMembershipRequest"></a>
 # **rejectSiteMembershipRequest**
 > rejectSiteMembershipRequest(siteIdinviteeIdopts)
@@ -1712,29 +1503,27 @@ Reject a site membership request.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'siteMembershipRejectionBody':  // SiteMembershipRejectionBody | Rejecting a request to join, optionally, allows the inclusion of comment.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.rejectSiteMembershipRequest(siteIdinviteeIdopts, callback);
+sitesApi.rejectSiteMembershipRequest(siteIdinviteeIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1749,15 +1538,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateSite"></a>
 # **updateSite**
@@ -1775,18 +1555,18 @@ Note: the id of a site cannot be updated once the site has been created.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1800,14 +1580,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateSite(siteIdsiteBodyUpdateopts, callback);
+sitesApi.updateSite(siteIdsiteBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1816,7 +1594,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **string**| The identifier of a site. | 
  **siteBodyUpdate** | [**SiteBodyUpdate**](SiteBodyUpdate.md)| The site information to update. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1832,15 +1610,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**SiteEntry**](SiteEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateSiteMembership"></a>
 # **updateSiteMembership**
@@ -1862,18 +1631,18 @@ You can set the **role** to one of four types:
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1887,14 +1656,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateSiteMembership(siteIdpersonIdsiteMembershipBodyUpdateopts, callback);
+sitesApi.updateSiteMembership(siteIdpersonIdsiteMembershipBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1904,7 +1671,7 @@ Name | Type | Description  | Notes
  **siteId** | **string**| The identifier of a site. | 
  **personId** | **string**| The identifier of a person. | 
  **siteMembershipBodyUpdate** | [**SiteMembershipBodyUpdate**](SiteMembershipBodyUpdate.md)| The persons new role | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1921,15 +1688,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**SiteMemberEntry**](SiteMemberEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="updateSiteMembershipRequestForPerson"></a>
 # **updateSiteMembershipRequestForPerson**
 > SiteMembershipRequestEntry updateSiteMembershipRequestForPerson(personIdsiteIdsiteMembershipRequestBodyUpdateopts)
@@ -1943,18 +1701,18 @@ You can use the -me- string in place of &lt;personId&gt; to specify the currentl
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SitesApi from 'SitesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SitesApi();
+let sitesApi = new SitesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1968,14 +1726,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateSiteMembershipRequestForPerson(personIdsiteIdsiteMembershipRequestBodyUpdateopts, callback);
+sitesApi.updateSiteMembershipRequestForPerson(personIdsiteIdsiteMembershipRequestBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1985,7 +1741,7 @@ Name | Type | Description  | Notes
  **personId** | **string**| The identifier of a person. | 
  **siteId** | **string**| The identifier of a site. | 
  **siteMembershipRequestBodyUpdate** | [**SiteMembershipRequestBodyUpdate**](SiteMembershipRequestBodyUpdate.md)| The new message to display | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -2001,13 +1757,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**SiteMembershipRequestEntry**](SiteMembershipRequestEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

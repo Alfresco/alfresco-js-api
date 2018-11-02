@@ -18,7 +18,7 @@
 import { CommentRepresentation } from './commentRepresentation';
 
 export class ResultListDataRepresentationCommentRepresentation {
-    data?: any;
+    data?: Array<CommentRepresentation>;
     size?: number;
     start?: number;
     total?: number;

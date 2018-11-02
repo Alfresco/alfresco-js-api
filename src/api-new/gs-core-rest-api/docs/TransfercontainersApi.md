@@ -24,22 +24,22 @@ You can use the **include** parameter (include&#x3D;allowableOperations) to retu
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TransfercontainersApi from 'TransfercontainersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TransfercontainersApi();
+let transfercontainersApi = new TransfercontainersApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -53,14 +53,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTransferContainer(transferContainerIdopts, callback);
+transfercontainersApi.getTransferContainer(transferContainerIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -68,11 +66,11 @@ apiInstance.getTransferContainer(transferContainerIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **transferContainerId** | **string**| The identifier of a transfer container. You can also use the -transfers- alias. | 
- **include** | [**any**](string.md)| Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -89,15 +87,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**TransferContainerEntry**](TransferContainerEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listTransfers"></a>
 # **listTransfers**
 > TransferContainerAssociationPaging listTransfers(transferContainerIdopts)
@@ -113,20 +102,20 @@ You can use the **include** parameter (include&#x3D;allowableOperations) to retu
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TransfercontainersApi from 'TransfercontainersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TransfercontainersApi();
+let transfercontainersApi = new TransfercontainersApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // number | The maximum number of items to return in the list.
-  'include':  // any | Returns additional information about the transfer folders. Any optional field from the response model can be requested. For example:
+  'include':  // Array<string> | Returns additional information about the transfer folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * properties
@@ -135,7 +124,7 @@ var opts = {
 * transferAccessionIndicator
 
   'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on the specified parent **transferContainerId**.
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -149,14 +138,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listTransfers(transferContainerIdopts, callback);
+transfercontainersApi.listTransfers(transferContainerIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -166,7 +153,7 @@ Name | Type | Description  | Notes
  **transferContainerId** | **string**| The identifier of a transfer container. You can also use the -transfers- alias. | 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the transfer folders. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the transfer folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * properties
@@ -175,7 +162,7 @@ Name | Type | Description  | Notes
 * transferAccessionIndicator
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the specified parent **transferContainerId**. | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -191,15 +178,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**TransferContainerAssociationPaging**](TransferContainerAssociationPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateTransferContainer"></a>
 # **updateTransferContainer**
@@ -228,22 +206,22 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TransfercontainersApi from 'TransfercontainersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TransfercontainersApi();
+let transfercontainersApi = new TransfercontainersApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -257,14 +235,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateTransferContainer(transferContainerIdnodeBodyUpdateopts, callback);
+transfercontainersApi.updateTransferContainer(transferContainerIdnodeBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -273,11 +249,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **transferContainerId** | **string**| The identifier of a transfer container. You can also use the -transfers- alias. | 
  **nodeBodyUpdate** | [**TransferContainerBodyUpdate**](TransferContainerBodyUpdate.md)| The node information to update. | 
- **include** | [**any**](string.md)| Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -293,13 +269,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**TransferContainerEntry**](TransferContainerEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

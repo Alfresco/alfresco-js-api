@@ -23,24 +23,22 @@ Returns Box OAuth HTML Page
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationboxApi from 'IntegrationboxApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationboxApi();
+let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.confirmAuthorisationUsingGET1(callback);
+integrationboxApi.confirmAuthorisationUsingGET1().then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -50,15 +48,6 @@ This endpoint does not need any parameter.
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: text/html
-
 <a name="createRepositoryAccountUsingPOST"></a>
 # **createRepositoryAccountUsingPOST**
 > createRepositoryAccountUsingPOST(userIdcredentials)
@@ -67,25 +56,23 @@ Add Box account
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationboxApi from 'IntegrationboxApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationboxApi();
+let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.createRepositoryAccountUsingPOST(userIdcredentials, callback);
+integrationboxApi.createRepositoryAccountUsingPOST(userIdcredentials).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -99,15 +86,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
-
 <a name="deleteRepositoryAccountUsingDELETE"></a>
 # **deleteRepositoryAccountUsingDELETE**
 > deleteRepositoryAccountUsingDELETE(userId)
@@ -116,25 +94,23 @@ Delete account information
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationboxApi from 'IntegrationboxApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationboxApi();
+let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteRepositoryAccountUsingDELETE(userId, callback);
+integrationboxApi.deleteRepositoryAccountUsingDELETE(userId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -147,15 +123,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
-
 <a name="getBoxPluginStatusUsingGET"></a>
 # **getBoxPluginStatusUsingGET**
 > boolean getBoxPluginStatusUsingGET()
@@ -164,24 +131,22 @@ Get status information
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationboxApi from 'IntegrationboxApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationboxApi();
+let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getBoxPluginStatusUsingGET(callback);
+integrationboxApi.getBoxPluginStatusUsingGET().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -191,15 +156,6 @@ This endpoint does not need any parameter.
 
 **boolean**
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
-
 <a name="getFilesUsingGET"></a>
 # **getFilesUsingGET**
 > ResultListDataRepresentationBoxContent getFilesUsingGET(opts)
@@ -208,29 +164,27 @@ List file and folders
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationboxApi from 'IntegrationboxApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationboxApi();
+let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'filter': filter_example // string | filter
   'parent': parent_example // string | parent
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFilesUsingGET(opts, callback);
+integrationboxApi.getFilesUsingGET(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -244,15 +198,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationBoxContent**](ResultListDataRepresentationBoxContent.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
-
 <a name="getRepositoryAccountUsingGET"></a>
 # **getRepositoryAccountUsingGET**
 > getRepositoryAccountUsingGET(userId)
@@ -261,25 +206,23 @@ Get account information
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationboxApi from 'IntegrationboxApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationboxApi();
+let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getRepositoryAccountUsingGET(userId, callback);
+integrationboxApi.getRepositoryAccountUsingGET(userId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -292,15 +235,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
-
 <a name="updateRepositoryAccountUsingPUT"></a>
 # **updateRepositoryAccountUsingPUT**
 > updateRepositoryAccountUsingPUT(userIdcredentials)
@@ -309,25 +243,23 @@ Update account information
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationboxApi from 'IntegrationboxApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationboxApi();
+let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.updateRepositoryAccountUsingPUT(userIdcredentials, callback);
+integrationboxApi.updateRepositoryAccountUsingPUT(userIdcredentials).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -340,13 +272,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
 

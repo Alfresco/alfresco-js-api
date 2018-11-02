@@ -34,25 +34,23 @@ params (majorVersion and comment) on a subsequent file content update.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import VersionsApi from 'VersionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .VersionsApi();
+let versionsApi = new VersionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteVersion(nodeIdversionId, callback);
+versionsApi.deleteVersion(nodeIdversionId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -65,15 +63,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getVersion"></a>
 # **getVersion**
@@ -88,25 +77,23 @@ Gets the version information for **versionId** of file node **nodeId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import VersionsApi from 'VersionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .VersionsApi();
+let versionsApi = new VersionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getVersion(nodeIdversionId, callback);
+versionsApi.getVersion(nodeIdversionId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -119,15 +106,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**VersionEntry**](VersionEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getVersionContent"></a>
 # **getVersionContent**
@@ -142,17 +120,17 @@ Gets the version content for **versionId** of file node **nodeId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import VersionsApi from 'VersionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .VersionsApi();
+let versionsApi = new VersionsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'attachment': true // boolean | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
@@ -171,14 +149,12 @@ Single part request supported, for example: bytes=1-10.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getVersionContent(nodeIdversionIdopts, callback);
+versionsApi.getVersionContent(nodeIdversionIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -208,15 +184,6 @@ Single part request supported, for example: bytes&#x3D;1-10.
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listVersionHistory"></a>
 # **listVersionHistory**
 > VersionPaging listVersionHistory(nodeIdopts)
@@ -233,22 +200,22 @@ the original version is last in the list.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import VersionsApi from 'VersionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .VersionsApi();
+let versionsApi = new VersionsApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the version node. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the version node. The following optional fields can be requested:
 * properties
 * aspectNames
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -268,14 +235,12 @@ If not supplied then the default value is 100.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listVersionHistory(nodeIdopts, callback);
+versionsApi.listVersionHistory(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -283,11 +248,11 @@ apiInstance.listVersionHistory(nodeIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
- **include** | [**any**](string.md)| Returns additional information about the version node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the version node. The following optional fields can be requested:
 * properties
 * aspectNames
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -310,15 +275,6 @@ If not supplied then the default value is 100.
 
 [**VersionPaging**](VersionPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="revertVersion"></a>
 # **revertVersion**
 > VersionEntry revertVersion(nodeIdversionIdrevertBodyopts)
@@ -335,18 +291,18 @@ will be promoted to the live node and a new version will appear in the version h
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import VersionsApi from 'VersionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .VersionsApi();
+let versionsApi = new VersionsApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -360,14 +316,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.revertVersion(nodeIdversionIdrevertBodyopts, callback);
+versionsApi.revertVersion(nodeIdversionIdrevertBodyopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -377,7 +331,7 @@ Name | Type | Description  | Notes
  **nodeId** | **string**| The identifier of a node. | 
  **versionId** | **string**| The identifier of a version, ie. version label, within the version history of a node. | 
  **revertBody** | [**RevertBody**](RevertBody.md)| Optionally, specify a version comment and whether this should be a major version, or not. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -393,13 +347,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**VersionEntry**](VersionEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

@@ -22,5 +22,5 @@ export class BulkUserUpdateRepresentation {
     sendNotifications?: boolean;
     status?: string;
     tenantId?: number;
-    users?: any;
+    users?: Array<number>;
 }

@@ -19,5 +19,5 @@ export class SharedLinkBodyEmail {
     client?: string;
     message?: string;
     locale?: string;
-    recipientEmails?: any;
+    recipientEmails?: Array<string>;
 }

@@ -4,6 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pagination** | [**Pagination**](Pagination.md) |  | [default to null]
-**entries** | [**any**](ActivityEntry.md) |  | [default to null]
+**entries** | [**Array<ActivityEntry>**](ActivityEntry.md) |  | [default to null]
 
 

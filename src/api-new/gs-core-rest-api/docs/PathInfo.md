@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**elements** | [**any**](PathElement.md) |  | [optional] [default to null]
+**elements** | [**Array<PathElement>**](PathElement.md) |  | [optional] [default to null]
 **name** | **string** |  | [optional] [default to null]
 **isCompleted** | **boolean** |  | [optional] [default to null]
 

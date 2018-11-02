@@ -32,4 +32,5 @@ export class AlfrescoApiConfig {
     ticketBpm?: string;
     accessToken?: string;
     disableCsrf?: boolean;
+    withCredentials?: boolean;
 }

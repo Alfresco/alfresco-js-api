@@ -20,5 +20,5 @@ import { Pagination } from './pagination';
 
 export class DeclassificationExemptionsPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<DeclassificationExemptionEntry>;
 }

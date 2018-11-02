@@ -24,7 +24,7 @@ export class ProcessDefinitionRepresentation {
     hasStartForm?: boolean;
     id?: string;
     key?: string;
-    metaDataValues?: any;
+    metaDataValues?: Array<ProcessDefinitionMetaDataRepresentation>;
     name?: string;
     tenantId?: string;
     version?: number;

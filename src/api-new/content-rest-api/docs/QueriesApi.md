@@ -38,17 +38,17 @@ You can sort the result list using the **orderBy** parameter. You can specify on
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import QueriesApi from 'QueriesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .QueriesApi();
+let queriesApi = new QueriesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'rootNodeId': rootNodeId_example // string | The id of the node to start the search from.
 
 Supports the aliases -my-, -root- and -shared-.
@@ -61,7 +61,7 @@ If not supplied then the default value is 100.
 
   'nodeType': nodeType_example // string | Restrict the returned results to only those of the given node type and its sub-types
 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -70,7 +70,7 @@ If not supplied then the default value is 100.
 * path
 * properties
 
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -78,7 +78,7 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -92,14 +92,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.findNodes(termopts, callback);
+queriesApi.findNodes(termopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -119,7 +117,7 @@ If not supplied then the default value is 100.
  | [optional] [default to 100]
  **nodeType** | **string**| Restrict the returned results to only those of the given node type and its sub-types
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -128,7 +126,7 @@ If not supplied then the default value is 100.
 * path
 * properties
  | [optional] 
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -136,7 +134,7 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -152,15 +150,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**NodePaging**](NodePaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="findPeople"></a>
 # **findPeople**
@@ -186,24 +175,24 @@ You can sort the result list using the **orderBy** parameter. You can specify on
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import QueriesApi from 'QueriesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .QueriesApi();
+let queriesApi = new QueriesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -215,7 +204,7 @@ If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
 
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -225,14 +214,12 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.findPeople(termopts, callback);
+queriesApi.findPeople(termopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -247,7 +234,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -259,7 +246,7 @@ If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
  | [optional] 
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -271,15 +258,6 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 ### Return type
 
 [**PersonPaging**](PersonPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="findSites"></a>
 # **findSites**
@@ -306,24 +284,24 @@ You can override the default by using the **orderBy** parameter. You can specify
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import QueriesApi from 'QueriesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .QueriesApi();
+let queriesApi = new QueriesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -331,7 +309,7 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -345,14 +323,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.findSites(termopts, callback);
+queriesApi.findSites(termopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -366,7 +342,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -374,7 +350,7 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -390,13 +366,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**SitePaging**](SitePaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

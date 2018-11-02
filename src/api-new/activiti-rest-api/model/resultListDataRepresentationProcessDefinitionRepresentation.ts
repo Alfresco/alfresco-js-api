@@ -18,7 +18,7 @@
 import { ProcessDefinitionRepresentation } from './processDefinitionRepresentation';
 
 export class ResultListDataRepresentationProcessDefinitionRepresentation {
-    data?: any;
+    data?: Array<ProcessDefinitionRepresentation>;
     size?: number;
     start?: number;
     total?: number;

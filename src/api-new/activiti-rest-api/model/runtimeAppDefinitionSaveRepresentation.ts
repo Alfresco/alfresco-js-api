@@ -18,5 +18,5 @@
 import { AppDefinitionRepresentation } from './appDefinitionRepresentation';
 
 export class RuntimeAppDefinitionSaveRepresentation {
-    appDefinitions?: any;
+    appDefinitions?: Array<AppDefinitionRepresentation>;
 }

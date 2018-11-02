@@ -27,25 +27,23 @@ Create a new model
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createModelUsingPOST(modelRepresentation, callback);
+modelsApi.createModelUsingPOST(modelRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -58,15 +56,6 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteModelUsingDELETE"></a>
 # **deleteModelUsingDELETE**
 > deleteModelUsingDELETE(modelIdopts)
@@ -75,29 +64,27 @@ Delete a model
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'cascade': true // boolean | cascade
   'deleteRuntimeApp': true // boolean | deleteRuntimeApp
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteModelUsingDELETE(modelIdopts, callback);
+modelsApi.deleteModelUsingDELETE(modelIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -112,15 +99,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="duplicateModelUsingPOST"></a>
 # **duplicateModelUsingPOST**
 > ModelRepresentation duplicateModelUsingPOST(modelIdmodelRepresentation)
@@ -129,25 +107,23 @@ Duplicate an existing model
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.duplicateModelUsingPOST(modelIdmodelRepresentation, callback);
+modelsApi.duplicateModelUsingPOST(modelIdmodelRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -161,15 +137,6 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getModelJSONUsingGET"></a>
 # **getModelJSONUsingGET**
 > ObjectNode getModelJSONUsingGET(modelId)
@@ -178,25 +145,23 @@ Get model content
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModelJSONUsingGET(modelId, callback);
+modelsApi.getModelJSONUsingGET(modelId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -209,42 +174,31 @@ Name | Type | Description  | Notes
 
 [**ObjectNode**](ObjectNode.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getModelThumbnailUsingGET"></a>
 # **getModelThumbnailUsingGET**
-> any getModelThumbnailUsingGET(modelId)
+> Array<string> getModelThumbnailUsingGET(modelId)
 
 Get a model&#39;s thumbnail image
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModelThumbnailUsingGET(modelId, callback);
+modelsApi.getModelThumbnailUsingGET(modelId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -255,16 +209,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**any**
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: image/png
+**Array<string>**
 
 <a name="getModelUsingGET"></a>
 # **getModelUsingGET**
@@ -276,28 +221,26 @@ Models act as containers for process, form, decision table and app definitions
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'includePermissions': true // boolean | includePermissions
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModelUsingGET(modelIdopts, callback);
+modelsApi.getModelUsingGET(modelIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -311,15 +254,6 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getModelsToIncludeInAppDefinitionUsingGET"></a>
 # **getModelsToIncludeInAppDefinitionUsingGET**
 > ResultListDataRepresentationModelRepresentation getModelsToIncludeInAppDefinitionUsingGET()
@@ -328,24 +262,22 @@ List process definition models shared with the current user
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModelsToIncludeInAppDefinitionUsingGET(callback);
+modelsApi.getModelsToIncludeInAppDefinitionUsingGET().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -355,15 +287,6 @@ This endpoint does not need any parameter.
 
 [**ResultListDataRepresentationModelRepresentation**](ResultListDataRepresentationModelRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getModelsUsingGET"></a>
 # **getModelsUsingGET**
 > ResultListDataRepresentationModelRepresentation getModelsUsingGET(opts)
@@ -372,31 +295,29 @@ List models (process, form, decision rule or app)
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'filter': filter_example // string | filter
   'sort': sort_example // string | sort
   'modelType': 56 // number | modelType
   'referenceId': 789 // number | referenceId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModelsUsingGET(opts, callback);
+modelsApi.getModelsUsingGET(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -412,15 +333,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationModelRepresentation**](ResultListDataRepresentationModelRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="importNewVersionUsingPOST"></a>
 # **importNewVersionUsingPOST**
 > ModelRepresentation importNewVersionUsingPOST(modelIdfile)
@@ -429,25 +341,23 @@ Create a new version of a model
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.importNewVersionUsingPOST(modelIdfile, callback);
+modelsApi.importNewVersionUsingPOST(modelIdfile).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -461,15 +371,6 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
 <a name="importProcessModelUsingPOST"></a>
 # **importProcessModelUsingPOST**
 > ModelRepresentation importProcessModelUsingPOST(file)
@@ -478,25 +379,23 @@ Import a BPMN 2.0 XML file
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.importProcessModelUsingPOST(file, callback);
+modelsApi.importProcessModelUsingPOST(file).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -509,15 +408,6 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
 <a name="saveModelUsingPOST"></a>
 # **saveModelUsingPOST**
 > ModelRepresentation saveModelUsingPOST(modelIdvalues)
@@ -526,25 +416,23 @@ Update model content
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.saveModelUsingPOST(modelIdvalues, callback);
+modelsApi.saveModelUsingPOST(modelIdvalues).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -558,15 +446,6 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="updateModelUsingPUT"></a>
 # **updateModelUsingPUT**
 > ModelRepresentation updateModelUsingPUT(modelIdupdatedModel)
@@ -577,25 +456,23 @@ This method allows you to update the metadata of a model. In order to update the
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateModelUsingPUT(modelIdupdatedModel, callback);
+modelsApi.updateModelUsingPUT(modelIdupdatedModel).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -609,45 +486,34 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="validateModelUsingPOST"></a>
 # **validateModelUsingPOST**
-> any validateModelUsingPOST(modelIdopts)
+> Array<ValidationErrorRepresentation> validateModelUsingPOST(modelIdopts)
 
 Validate model content
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelsApi();
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'values':  // any | values
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.validateModelUsingPOST(modelIdopts, callback);
+modelsApi.validateModelUsingPOST(modelIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -659,14 +525,5 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](ValidationErrorRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/x-www-form-urlencoded
- - **Accept**: application/json
+[**Array&lt;ValidationErrorRepresentation&gt;**](ValidationErrorRepresentation.md)
 

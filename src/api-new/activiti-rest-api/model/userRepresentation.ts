@@ -19,15 +19,15 @@ import { GroupRepresentation } from './groupRepresentation';
 import { LightAppRepresentation } from './lightAppRepresentation';
 
 export class UserRepresentation {
-    apps?: any;
-    capabilities?: any;
+    apps?: Array<LightAppRepresentation>;
+    capabilities?: Array<string>;
     company?: string;
     created?: Date;
     email?: string;
     externalId?: string;
     firstName?: string;
     fullname?: string;
-    groups?: any;
+    groups?: Array<GroupRepresentation>;
     id?: number;
     lastName?: string;
     lastUpdate?: Date;

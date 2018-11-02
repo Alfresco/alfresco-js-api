@@ -18,7 +18,7 @@
 import { RuntimeDecisionTableRepresentation } from './runtimeDecisionTableRepresentation';
 
 export class ResultListDataRepresentationRuntimeDecisionTableRepresentation {
-    data?: any;
+    data?: Array<RuntimeDecisionTableRepresentation>;
     size?: number;
     start?: number;
     total?: number;

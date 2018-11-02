@@ -18,6 +18,6 @@
 import { AuditDecisionExpressionInfoRepresentation } from './auditDecisionExpressionInfoRepresentation';
 
 export class AuditDecisionRuleInfoRepresentation {
-    expressions?: any;
+    expressions?: Array<AuditDecisionExpressionInfoRepresentation>;
     title?: string;
 }

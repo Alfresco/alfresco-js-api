@@ -121,24 +121,24 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UnfiledcontainersApi from 'UnfiledcontainersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UnfiledcontainersApi();
+let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'autoRename': true // boolean | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
 
-  'include':  // any | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -152,14 +152,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createUnfiledContainerChildren(unfiledContainerIdnodeBodyCreateopts, callback);
+unfiledcontainersApi.createUnfiledContainerChildren(unfiledContainerIdnodeBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -170,11 +168,11 @@ Name | Type | Description  | Notes
  **nodeBodyCreate** | [**RMNodeBodyCreate**](RMNodeBodyCreate.md)| The node information to create. | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -191,15 +189,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**UnfiledContainerAssociationPaging**](UnfiledContainerAssociationPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, multipart/form-data
- - **Accept**: application/json
-
 <a name="getUnfiledContainer"></a>
 # **getUnfiledContainer**
 > UnfiledContainerEntry getUnfiledContainer(unfiledContainerIdopts)
@@ -215,22 +204,22 @@ You can use the **include** parameter (include&#x3D;allowableOperations) to retu
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UnfiledcontainersApi from 'UnfiledcontainersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UnfiledcontainersApi();
+let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -244,14 +233,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getUnfiledContainer(unfiledContainerIdopts, callback);
+unfiledcontainersApi.getUnfiledContainer(unfiledContainerIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -259,11 +246,11 @@ apiInstance.getUnfiledContainer(unfiledContainerIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **unfiledContainerId** | **string**| The identifier of an unfiled records container. You can use the **-unfiled-** alias. | 
- **include** | [**any**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -280,15 +267,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**UnfiledContainerEntry**](UnfiledContainerEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listUnfiledContainerChildren"></a>
 # **listUnfiledContainerChildren**
 > UnfiledContainerAssociationPaging listUnfiledContainerChildren(unfiledContainerIdopts)
@@ -304,17 +282,17 @@ You can use the **include** parameter (include&#x3D;allowableOperations) to retu
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UnfiledcontainersApi from 'UnfiledcontainersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UnfiledcontainersApi();
+let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // number | The maximum number of items to return in the list.
   'where': where_example // string | Optionally filter the list. Here are some examples:
@@ -325,7 +303,7 @@ var opts = {
 
 *   where=(nodeType='cm:content INCLUDESUBTYPES')
 
-  'include':  // any | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
@@ -333,7 +311,7 @@ var opts = {
 * properties
 
   'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **unfiledContainerId**
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -347,14 +325,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listUnfiledContainerChildren(unfiledContainerIdopts, callback);
+unfiledcontainersApi.listUnfiledContainerChildren(unfiledContainerIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -372,7 +348,7 @@ Name | Type | Description  | Notes
 
 *   where&#x3D;(nodeType&#x3D;&#39;cm:content INCLUDESUBTYPES&#39;)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
@@ -380,7 +356,7 @@ Name | Type | Description  | Notes
 * properties
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **unfiledContainerId** | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -396,15 +372,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**UnfiledContainerAssociationPaging**](UnfiledContainerAssociationPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateUnfiledContainer"></a>
 # **updateUnfiledContainer**
@@ -434,22 +401,22 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import UnfiledcontainersApi from 'UnfiledcontainersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .UnfiledcontainersApi();
+let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -463,14 +430,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateUnfiledContainer(unfiledContainerIdunfiledContainerBodyUpdateopts, callback);
+unfiledcontainersApi.updateUnfiledContainer(unfiledContainerIdunfiledContainerBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -479,11 +444,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **unfiledContainerId** | **string**| The identifier of an unfiled records container. You can use the **-unfiled-** alias. | 
  **unfiledContainerBodyUpdate** | [**UnfiledRecordContainerBodyUpdate**](UnfiledRecordContainerBodyUpdate.md)| The unfiled record container information to update. | 
- **include** | [**any**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -499,13 +464,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**UnfiledContainerEntry**](UnfiledContainerEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

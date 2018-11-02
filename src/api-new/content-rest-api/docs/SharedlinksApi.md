@@ -77,22 +77,22 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SharedlinksApi from 'SharedlinksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SharedlinksApi();
+let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the shared link, the following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the shared link, the following optional fields can be requested:
 * allowableOperations
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -106,14 +106,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createSharedLink(sharedLinkBodyCreateopts, callback);
+sharedlinksApi.createSharedLink(sharedLinkBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -121,11 +119,11 @@ apiInstance.createSharedLink(sharedLinkBodyCreateopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sharedLinkBodyCreate** | [**SharedLinkBodyCreate**](SharedLinkBodyCreate.md)| The nodeId to create a shared link for. | 
- **include** | [**any**](string.md)| Returns additional information about the shared link, the following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the shared link, the following optional fields can be requested:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -142,15 +140,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**SharedLinkEntry**](SharedLinkEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteSharedLink"></a>
 # **deleteSharedLink**
 > deleteSharedLink(sharedId)
@@ -164,25 +153,23 @@ Deletes the shared link with identifier **sharedId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SharedlinksApi from 'SharedlinksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SharedlinksApi();
+let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteSharedLink(sharedId, callback);
+sharedlinksApi.deleteSharedLink(sharedId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -194,15 +181,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="emailSharedLink"></a>
 # **emailSharedLink**
@@ -244,25 +222,23 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SharedlinksApi from 'SharedlinksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SharedlinksApi();
+let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.emailSharedLink(sharedIdsharedLinkBodyEmail, callback);
+sharedlinksApi.emailSharedLink(sharedIdsharedLinkBodyEmail).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -275,15 +251,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getSharedLink"></a>
 # **getSharedLink**
@@ -300,18 +267,18 @@ Gets minimal information for the file with shared link identifier **sharedId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SharedlinksApi from 'SharedlinksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SharedlinksApi();
+let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -325,14 +292,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSharedLink(sharedIdopts, callback);
+sharedlinksApi.getSharedLink(sharedIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -340,7 +305,7 @@ apiInstance.getSharedLink(sharedIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sharedId** | **string**| The identifier of a shared link to a file. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -357,15 +322,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**SharedLinkEntry**](SharedLinkEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getSharedLinkContent"></a>
 # **getSharedLinkContent**
 > getSharedLinkContent(sharedIdopts)
@@ -381,17 +337,17 @@ Gets the content of the file with shared link identifier **sharedId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SharedlinksApi from 'SharedlinksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SharedlinksApi();
+let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'attachment': true // boolean | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
@@ -410,14 +366,12 @@ Single part request supported, for example: bytes=1-10.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getSharedLinkContent(sharedIdopts, callback);
+sharedlinksApi.getSharedLinkContent(sharedIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -445,15 +399,6 @@ Single part request supported, for example: bytes&#x3D;1-10.
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getSharedLinkRendition"></a>
 # **getSharedLinkRendition**
@@ -473,25 +418,23 @@ which means the rendition is available to view/download.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SharedlinksApi from 'SharedlinksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SharedlinksApi();
+let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSharedLinkRendition(sharedIdrenditionId, callback);
+sharedlinksApi.getSharedLinkRendition(sharedIdrenditionId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -504,15 +447,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RenditionEntry**](RenditionEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getSharedLinkRenditionContent"></a>
 # **getSharedLinkRenditionContent**
@@ -529,17 +463,17 @@ Gets the rendition content for file with shared link identifier **sharedId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SharedlinksApi from 'SharedlinksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SharedlinksApi();
+let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'attachment': true // boolean | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
@@ -558,14 +492,12 @@ Single part request supported, for example: bytes=1-10.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getSharedLinkRenditionContent(sharedIdrenditionIdopts, callback);
+sharedlinksApi.getSharedLinkRenditionContent(sharedIdrenditionIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -595,15 +527,6 @@ Single part request supported, for example: bytes&#x3D;1-10.
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listSharedLinkRenditions"></a>
 # **listSharedLinkRenditions**
 > RenditionPaging listSharedLinkRenditions(sharedId)
@@ -622,25 +545,23 @@ where the rendition status is CREATED, which means the rendition is available to
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SharedlinksApi from 'SharedlinksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SharedlinksApi();
+let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listSharedLinkRenditions(sharedId, callback);
+sharedlinksApi.listSharedLinkRenditions(sharedId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -652,15 +573,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RenditionPaging**](RenditionPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listSharedLinks"></a>
 # **listSharedLinks**
@@ -679,17 +591,17 @@ The list is ordered in descending modified order.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SharedlinksApi from 'SharedlinksApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SharedlinksApi();
+let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
@@ -702,11 +614,11 @@ If not supplied then the default value is 100.
 
 *   where=(sharedByUser='-me-')
 
-  'include':  // any | Returns additional information about the shared link, the following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the shared link, the following optional fields can be requested:
 * allowableOperations
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -720,14 +632,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listSharedLinks(opts, callback);
+sharedlinksApi.listSharedLinks(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -746,11 +656,11 @@ If not supplied then the default value is 100.
 
 *   where&#x3D;(sharedByUser&#x3D;&#39;-me-&#39;)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the shared link, the following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the shared link, the following optional fields can be requested:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -766,13 +676,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**SharedLinkPaging**](SharedLinkPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

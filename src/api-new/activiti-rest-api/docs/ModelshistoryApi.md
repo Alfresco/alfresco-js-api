@@ -16,28 +16,26 @@ List a model&#39;s historic versions
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelshistoryApi from 'ModelshistoryApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelshistoryApi();
+let modelshistoryApi = new ModelshistoryApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'includeLatestVersion': true // boolean | includeLatestVersion
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getModelHistoryCollectionUsingGET(modelIdopts, callback);
+modelshistoryApi.getModelHistoryCollectionUsingGET(modelIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -51,15 +49,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationModelRepresentation**](ResultListDataRepresentationModelRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getProcessModelHistoryUsingGET"></a>
 # **getProcessModelHistoryUsingGET**
 > ModelRepresentation getProcessModelHistoryUsingGET(modelIdmodelHistoryId)
@@ -68,25 +57,23 @@ Get a historic version of a model
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ModelshistoryApi from 'ModelshistoryApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ModelshistoryApi();
+let modelshistoryApi = new ModelshistoryApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessModelHistoryUsingGET(modelIdmodelHistoryId, callback);
+modelshistoryApi.getProcessModelHistoryUsingGET(modelIdmodelHistoryId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -99,13 +86,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ModelRepresentation**](ModelRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

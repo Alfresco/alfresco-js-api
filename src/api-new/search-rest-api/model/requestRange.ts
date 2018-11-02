@@ -42,11 +42,11 @@ export class RequestRange {
     /**
      * before, after, between, non, all
      */
-    other?: any;
+    other?: Array<string>;
     /**
      * lower, upper, edge, outer, all
      */
-    include?: any;
+    include?: Array<string>;
     /**
      * A label to include as a pivot reference
      */
@@ -54,5 +54,5 @@ export class RequestRange {
     /**
      * Filter queries to exclude when calculating statistics
      */
-    excludeFilters?: any;
+    excludeFilters?: Array<string>;
 }

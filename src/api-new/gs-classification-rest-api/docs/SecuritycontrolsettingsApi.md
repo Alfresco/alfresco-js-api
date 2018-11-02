@@ -18,25 +18,23 @@ Gets the value for a selected **securityControlSettingKey**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SecuritycontrolsettingsApi from 'SecuritycontrolsettingsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SecuritycontrolsettingsApi();
+let securitycontrolsettingsApi = new SecuritycontrolsettingsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSecurityControlSetting(securityControlSettingKey, callback);
+securitycontrolsettingsApi.getSecurityControlSetting(securityControlSettingKey).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -51,15 +49,6 @@ Name | Type | Description  | Notes
 
 [**SecurityControlSettingEntry**](SecurityControlSettingEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="updateSecurityControlSetting"></a>
 # **updateSecurityControlSetting**
 > SecurityControlSettingEntry updateSecurityControlSetting(securityControlSettingKeysecurityControlSettingValue)
@@ -70,25 +59,23 @@ Updates the value of a selected **securityControlSettingKey**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SecuritycontrolsettingsApi from 'SecuritycontrolsettingsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SecuritycontrolsettingsApi();
+let securitycontrolsettingsApi = new SecuritycontrolsettingsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateSecurityControlSetting(securityControlSettingKeysecurityControlSettingValue, callback);
+securitycontrolsettingsApi.updateSecurityControlSetting(securityControlSettingKeysecurityControlSettingValue).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -103,13 +90,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SecurityControlSettingEntry**](SecurityControlSettingEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

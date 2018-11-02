@@ -26,5 +26,5 @@ export class SearchEntry {
      * Highlight fragments if requested and available. A match can happen in any of the requested field.
 
      */
-    highlight?: any;
+    highlight?: Array<SearchEntryHighlight>;
 }

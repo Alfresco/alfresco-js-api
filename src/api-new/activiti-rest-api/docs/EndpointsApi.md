@@ -16,25 +16,23 @@ Get an endpoint configuration
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import EndpointsApi from 'EndpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .EndpointsApi();
+let endpointsApi = new EndpointsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getEndpointConfigurationUsingGET(endpointConfigurationId, callback);
+endpointsApi.getEndpointConfigurationUsingGET(endpointConfigurationId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -47,41 +45,30 @@ Name | Type | Description  | Notes
 
 [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getEndpointConfigurationsUsingGET"></a>
 # **getEndpointConfigurationsUsingGET**
-> any getEndpointConfigurationsUsingGET()
+> Array<EndpointConfigurationRepresentation> getEndpointConfigurationsUsingGET()
 
 List endpoint configurations
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import EndpointsApi from 'EndpointsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .EndpointsApi();
+let endpointsApi = new EndpointsApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getEndpointConfigurationsUsingGET(callback);
+endpointsApi.getEndpointConfigurationsUsingGET().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -89,14 +76,5 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**any**](EndpointConfigurationRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;EndpointConfigurationRepresentation&gt;**](EndpointConfigurationRepresentation.md)
 

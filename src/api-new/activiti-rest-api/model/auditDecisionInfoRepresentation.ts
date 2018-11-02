@@ -19,6 +19,6 @@ import { AuditCalculatedValueRepresentation } from './auditCalculatedValueRepres
 import { AuditDecisionRuleInfoRepresentation } from './auditDecisionRuleInfoRepresentation';
 
 export class AuditDecisionInfoRepresentation {
-    appliedRules?: any;
-    calculatedValues?: any;
+    appliedRules?: Array<AuditDecisionRuleInfoRepresentation>;
+    calculatedValues?: Array<AuditCalculatedValueRepresentation>;
 }

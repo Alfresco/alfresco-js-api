@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
+import { ModelError } from '../model/modelError';
 import { RecordEntry } from '../model/recordEntry';
 import { BaseApi } from './base.api';
 
@@ -26,9 +26,9 @@ import { BaseApi } from './base.api';
 export class FilesApi extends BaseApi {
     /**
     * Declare as record
-    *
+    * 
     * Declares the file **fileId** in the unfiled records container. The original file is moved to the Records Management site and a secondary parent association is created in the file's original site.
-    *
+    * 
     * @param  fileId The identifier of a non-record file.
     * @param Object opts Optional parameters
     * @param  opts.hideRecord Flag to indicate whether the record should be hidden from the current parent folder. (default to false)

@@ -42,8 +42,8 @@ The character . must not be used at the end of the name.
     modifiedByUser: UserInfo;
     createdAt: Date;
     createdByUser: UserInfo;
-    aspectNames?: any;
+    aspectNames?: Array<string>;
     properties?: any;
-    allowableOperations?: any;
+    allowableOperations?: Array<string>;
     path?: PathInfo;
 }

@@ -20,6 +20,6 @@ Name | Type | Description | Notes
 **startedBy** | [**LightUserRepresentation**](LightUserRepresentation.md) |  | [optional] [default to null]
 **suspended** | **boolean** |  | [optional] [default to null]
 **tenantId** | **string** |  | [optional] [default to null]
-**variables** | [**any**](RestVariable.md) |  | [optional] [default to null]
+**variables** | [**Array<RestVariable>**](RestVariable.md) |  | [optional] [default to null]
 
 

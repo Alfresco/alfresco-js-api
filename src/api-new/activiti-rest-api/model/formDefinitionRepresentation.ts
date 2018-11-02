@@ -21,29 +21,29 @@ import { FormJavascriptEventRepresentation } from './formJavascriptEventRepresen
 import { FormOutcomeRepresentation } from './formOutcomeRepresentation';
 import { FormTabRepresentation } from './formTabRepresentation';
 import { FormVariableRepresentation } from './formVariableRepresentation';
-
+import { Map } from './map';
 
 export class FormDefinitionRepresentation {
     className?: string;
     customFieldTemplates?: { [key: string]: string; };
     customFieldsValueInfo?: { [key: string]: FieldValueInfo; };
-    fields?: any;
+    fields?: Array<FormFieldRepresentation>;
     globalDateFormat?: string;
     gridsterForm?: boolean;
     id?: number;
-    javascriptEvents?: any;
+    javascriptEvents?: Array<FormJavascriptEventRepresentation>;
     metadata?: { [key: string]: string; };
     name?: string;
     outcomeTarget?: string;
-    outcomes?: any;
+    outcomes?: Array<FormOutcomeRepresentation>;
     processDefinitionId?: string;
     processDefinitionKey?: string;
     processDefinitionName?: string;
     selectedOutcome?: string;
     style?: string;
-    tabs?: any;
+    tabs?: Array<FormTabRepresentation>;
     taskDefinitionKey?: string;
     taskId?: string;
     taskName?: string;
-    variables?: any;
+    variables?: Array<FormVariableRepresentation>;
 }

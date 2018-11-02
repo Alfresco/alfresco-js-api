@@ -18,25 +18,23 @@ Add a comment to a process instance
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import CommentsApi from 'CommentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .CommentsApi();
+let commentsApi = new CommentsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.addProcessInstanceCommentUsingPOST(commentRequestprocessInstanceId, callback);
+commentsApi.addProcessInstanceCommentUsingPOST(commentRequestprocessInstanceId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -49,15 +47,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CommentRepresentation**](CommentRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="addTaskCommentUsingPOST"></a>
 # **addTaskCommentUsingPOST**
@@ -67,25 +56,23 @@ Add a comment to a task
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import CommentsApi from 'CommentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .CommentsApi();
+let commentsApi = new CommentsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.addTaskCommentUsingPOST(commentRequesttaskId, callback);
+commentsApi.addTaskCommentUsingPOST(commentRequesttaskId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -99,15 +86,6 @@ Name | Type | Description  | Notes
 
 [**CommentRepresentation**](CommentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getProcessInstanceCommentsUsingGET"></a>
 # **getProcessInstanceCommentsUsingGET**
 > ResultListDataRepresentationCommentRepresentation getProcessInstanceCommentsUsingGET(processInstanceIdopts)
@@ -116,28 +94,26 @@ Get comments for a process
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import CommentsApi from 'CommentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .CommentsApi();
+let commentsApi = new CommentsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'latestFirst': true // boolean | latestFirst
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstanceCommentsUsingGET(processInstanceIdopts, callback);
+commentsApi.getProcessInstanceCommentsUsingGET(processInstanceIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -151,15 +127,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationCommentRepresentation**](ResultListDataRepresentationCommentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getTaskCommentsUsingGET"></a>
 # **getTaskCommentsUsingGET**
 > ResultListDataRepresentationCommentRepresentation getTaskCommentsUsingGET(taskIdopts)
@@ -168,28 +135,26 @@ Get comments for a task
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import CommentsApi from 'CommentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .CommentsApi();
+let commentsApi = new CommentsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'latestFirst': true // boolean | latestFirst
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTaskCommentsUsingGET(taskIdopts, callback);
+commentsApi.getTaskCommentsUsingGET(taskIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -202,13 +167,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResultListDataRepresentationCommentRepresentation**](ResultListDataRepresentationCommentRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

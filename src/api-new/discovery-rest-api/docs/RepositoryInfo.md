@@ -7,6 +7,6 @@ Name | Type | Description | Notes
 **version** | [**VersionInfo**](VersionInfo.md) |  | [default to null]
 **status** | [**StatusInfo**](StatusInfo.md) |  | [default to null]
 **license** | [**LicenseInfo**](LicenseInfo.md) |  | [optional] [default to null]
-**modules** | [**any**](ModuleInfo.md) |  | [optional] [default to null]
+**modules** | [**Array<ModuleInfo>**](ModuleInfo.md) |  | [optional] [default to null]
 
 

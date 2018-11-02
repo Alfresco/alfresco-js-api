@@ -16,5 +16,5 @@
 */
 
 export class AddGroupCapabilitiesRepresentation {
-    capabilities?: any;
+    capabilities?: Array<string>;
 }

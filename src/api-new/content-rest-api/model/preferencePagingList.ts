@@ -20,5 +20,5 @@ import { PreferenceEntry } from './preferenceEntry';
 
 export class PreferencePagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<PreferenceEntry>;
 }

@@ -20,25 +20,23 @@ Complete a task form
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskformsApi from 'TaskformsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskformsApi();
+let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.completeTaskFormUsingPOST(taskIdcompleteTaskFormRepresentation, callback);
+taskformsApi.completeTaskFormUsingPOST(taskIdcompleteTaskFormRepresentation).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -52,42 +50,31 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getProcessInstanceVariablesUsingGET1"></a>
 # **getProcessInstanceVariablesUsingGET1**
-> any getProcessInstanceVariablesUsingGET1(taskId)
+> Array<ProcessInstanceVariableRepresentation> getProcessInstanceVariablesUsingGET1(taskId)
 
 Get task variables
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskformsApi from 'TaskformsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskformsApi();
+let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstanceVariablesUsingGET1(taskId, callback);
+taskformsApi.getProcessInstanceVariablesUsingGET1(taskId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -98,20 +85,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](ProcessInstanceVariableRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;ProcessInstanceVariableRepresentation&gt;**](ProcessInstanceVariableRepresentation.md)
 
 <a name="getRestFieldValuesUsingGET1"></a>
 # **getRestFieldValuesUsingGET1**
-> any getRestFieldValuesUsingGET1(taskIdfieldcolumn)
+> Array<FormValueRepresentation> getRestFieldValuesUsingGET1(taskIdfieldcolumn)
 
 Retrieve column field values
 
@@ -119,25 +97,23 @@ Specific case to retrieve information on a specific column
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskformsApi from 'TaskformsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskformsApi();
+let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestFieldValuesUsingGET1(taskIdfieldcolumn, callback);
+taskformsApi.getRestFieldValuesUsingGET1(taskIdfieldcolumn).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -150,20 +126,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](FormValueRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;FormValueRepresentation&gt;**](FormValueRepresentation.md)
 
 <a name="getRestFieldValuesUsingGET2"></a>
 # **getRestFieldValuesUsingGET2**
-> any getRestFieldValuesUsingGET2(taskIdfield)
+> Array<FormValueRepresentation> getRestFieldValuesUsingGET2(taskIdfield)
 
 Retrieve populated field values
 
@@ -171,25 +138,23 @@ Form field values that are populated through a REST backend, can be retrieved vi
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskformsApi from 'TaskformsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskformsApi();
+let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestFieldValuesUsingGET2(taskIdfield, callback);
+taskformsApi.getRestFieldValuesUsingGET2(taskIdfield).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -201,16 +166,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](FormValueRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;FormValueRepresentation&gt;**](FormValueRepresentation.md)
 
 <a name="getTaskFormUsingGET"></a>
 # **getTaskFormUsingGET**
@@ -220,25 +176,23 @@ Get a task form
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskformsApi from 'TaskformsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskformsApi();
+let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTaskFormUsingGET(taskId, callback);
+taskformsApi.getTaskFormUsingGET(taskId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -251,15 +205,6 @@ Name | Type | Description  | Notes
 
 [**FormDefinitionRepresentation**](FormDefinitionRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="saveTaskFormUsingPOST"></a>
 # **saveTaskFormUsingPOST**
 > saveTaskFormUsingPOST(taskIdsaveTaskFormRepresentation)
@@ -268,25 +213,23 @@ Save a task form
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TaskformsApi from 'TaskformsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TaskformsApi();
+let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.saveTaskFormUsingPOST(taskIdsaveTaskFormRepresentation, callback);
+taskformsApi.saveTaskFormUsingPOST(taskIdsaveTaskFormRepresentation).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -299,13 +242,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

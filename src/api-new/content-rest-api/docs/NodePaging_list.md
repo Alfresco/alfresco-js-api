@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pagination** | [**Pagination**](Pagination.md) |  | [optional] [default to null]
-**entries** | [**any**](NodeEntry.md) |  | [optional] [default to null]
+**entries** | [**Array<NodeEntry>**](NodeEntry.md) |  | [optional] [default to null]
 **source** | [**Node**](Node.md) |  | [optional] [default to null]
 
 

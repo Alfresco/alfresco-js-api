@@ -1,6 +1,6 @@
 Provides access to classification and security mark related features.
 
-- Last Build date: 2018-11-01T14:49:23.069Z
+- Last Build date: 2018-11-02T12:15:36.267Z
 
 
 ## Documentation for API Endpoints

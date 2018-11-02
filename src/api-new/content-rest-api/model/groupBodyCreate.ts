@@ -18,5 +18,5 @@
 export class GroupBodyCreate {
     id: string;
     displayName: string;
-    parentIds?: any;
+    parentIds?: Array<string>;
 }

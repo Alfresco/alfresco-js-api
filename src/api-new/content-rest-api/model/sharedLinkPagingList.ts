@@ -20,5 +20,5 @@ import { SharedLinkEntry } from './sharedLinkEntry';
 
 export class SharedLinkPagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<SharedLinkEntry>;
 }

@@ -20,5 +20,5 @@ import { TopicEntry } from './topicEntry';
 
 export class TopicPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<TopicEntry>;
 }

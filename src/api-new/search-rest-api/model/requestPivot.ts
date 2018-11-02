@@ -23,5 +23,5 @@ export class RequestPivot {
      * A key corresponding to a matching field facet label or stats.
      */
     key?: string;
-    pivots?: any;
+    pivots?: Array<RequestPivot>;
 }

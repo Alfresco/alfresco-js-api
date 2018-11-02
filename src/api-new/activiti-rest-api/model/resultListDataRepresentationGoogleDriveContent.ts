@@ -18,7 +18,7 @@
 import { GoogleDriveContent } from './googleDriveContent';
 
 export class ResultListDataRepresentationGoogleDriveContent {
-    data?: any;
+    data?: Array<GoogleDriveContent>;
     size?: number;
     start?: number;
     total?: number;

@@ -23,7 +23,7 @@ export class AuditLogEntryRepresentation {
     activityType?: string;
     durationInMillis?: number;
     endTime?: string;
-    formData?: any;
+    formData?: Array<AuditLogFormDataRepresentation>;
     index?: number;
     selectedOutcome?: string;
     startTime?: string;

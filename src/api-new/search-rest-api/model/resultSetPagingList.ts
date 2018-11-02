@@ -22,5 +22,5 @@ import { ResultSetRowEntry } from './resultSetRowEntry';
 export class ResultSetPagingList {
     pagination?: Pagination;
     context?: ResultSetContext;
-    entries?: any;
+    entries?: Array<ResultSetRowEntry>;
 }

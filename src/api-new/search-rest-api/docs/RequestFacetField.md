@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **offset** | **number** |  | [optional] [default to null]
 **mincount** | **number** | The minimum count required for a facet field to be included in the response. | [optional] [default to null]
 **facetEnumCacheMinDf** | **number** |  | [optional] [default to null]
-**excludeFilters** | **any** | Filter Queries with tags listed here will not be included in facet counts.
+**excludeFilters** | **Array<string>** | Filter Queries with tags listed here will not be included in facet counts.
 This is used for multi-select facetting.
  | [optional] [default to null]
 

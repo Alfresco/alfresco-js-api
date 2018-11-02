@@ -18,7 +18,7 @@
 import { LightGroupRepresentation } from './lightGroupRepresentation';
 
 export class ResultListDataRepresentationLightGroupRepresentation {
-    data?: any;
+    data?: Array<LightGroupRepresentation>;
     size?: number;
     start?: number;
     total?: number;

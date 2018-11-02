@@ -16,25 +16,23 @@ Get log file for a sync log entry
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IdmsyncApi from 'IdmsyncApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IdmsyncApi();
+let idmsyncApi = new IdmsyncApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getLogFileUsingGET(syncLogEntryId, callback);
+idmsyncApi.getLogFileUsingGET(syncLogEntryId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -47,48 +45,37 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getSyncLogEntriesUsingGET"></a>
 # **getSyncLogEntriesUsingGET**
-> any getSyncLogEntriesUsingGET(opts)
+> Array<SyncLogEntryRepresentation> getSyncLogEntriesUsingGET(opts)
 
 List sync log entries
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IdmsyncApi from 'IdmsyncApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IdmsyncApi();
+let idmsyncApi = new IdmsyncApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'tenantId': 789 // number | tenantId
   'page': 56 // number | page
   'start': 56 // number | start
   'size': 56 // number | size
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSyncLogEntriesUsingGET(opts, callback);
+idmsyncApi.getSyncLogEntriesUsingGET(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -102,14 +89,5 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](SyncLogEntryRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;SyncLogEntryRepresentation&gt;**](SyncLogEntryRepresentation.md)
 

@@ -148,9 +148,9 @@ export class AdminendpointsApi extends BaseApi {
         * 
         * 
         * @param  tenantId tenantId
-        * @return Promise<any>
+        * @return Promise<Array<EndpointBasicAuthRepresentation>>
         */
-    getBasicAuthConfigurationsUsingGET(tenantId: number): Promise<any> {
+    getBasicAuthConfigurationsUsingGET(tenantId: number): Promise<Array<EndpointBasicAuthRepresentation>> {
 
         let postBody = null;
 
@@ -229,9 +229,9 @@ export class AdminendpointsApi extends BaseApi {
         * 
         * 
         * @param  tenantId tenantId
-        * @return Promise<any>
+        * @return Promise<Array<EndpointConfigurationRepresentation>>
         */
-    getEndpointConfigurationsUsingGET1(tenantId: number): Promise<any> {
+    getEndpointConfigurationsUsingGET1(tenantId: number): Promise<Array<EndpointConfigurationRepresentation>> {
 
         let postBody = null;
 

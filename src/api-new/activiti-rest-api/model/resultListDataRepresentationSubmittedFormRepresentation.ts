@@ -18,7 +18,7 @@
 import { SubmittedFormRepresentation } from './submittedFormRepresentation';
 
 export class ResultListDataRepresentationSubmittedFormRepresentation {
-    data?: any;
+    data?: Array<SubmittedFormRepresentation>;
     size?: number;
     start?: number;
     total?: number;

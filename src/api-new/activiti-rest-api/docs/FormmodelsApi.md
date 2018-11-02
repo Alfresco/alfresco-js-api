@@ -23,25 +23,23 @@ Get form content
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FormmodelsApi from 'FormmodelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FormmodelsApi();
+let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFormEditorJsonUsingGET(formId, callback);
+formmodelsApi.getFormEditorJsonUsingGET(formId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -54,15 +52,6 @@ Name | Type | Description  | Notes
 
 [**FormDefinitionRepresentation**](FormDefinitionRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getFormHistoryUsingGET"></a>
 # **getFormHistoryUsingGET**
 > FormRepresentation getFormHistoryUsingGET(formIdformHistoryId)
@@ -71,25 +60,23 @@ Get form history
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FormmodelsApi from 'FormmodelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FormmodelsApi();
+let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFormHistoryUsingGET(formIdformHistoryId, callback);
+formmodelsApi.getFormHistoryUsingGET(formIdformHistoryId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -103,15 +90,6 @@ Name | Type | Description  | Notes
 
 [**FormRepresentation**](FormRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getFormUsingGET"></a>
 # **getFormUsingGET**
 > FormRepresentation getFormUsingGET(formId)
@@ -120,25 +98,23 @@ Get a form model
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FormmodelsApi from 'FormmodelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FormmodelsApi();
+let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFormUsingGET(formId, callback);
+formmodelsApi.getFormUsingGET(formId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -151,15 +127,6 @@ Name | Type | Description  | Notes
 
 [**FormRepresentation**](FormRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getFormUsingGET1"></a>
 # **getFormUsingGET1**
 > RuntimeFormRepresentation getFormUsingGET1(formId)
@@ -168,25 +135,23 @@ Get a form
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FormmodelsApi from 'FormmodelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FormmodelsApi();
+let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFormUsingGET1(formId, callback);
+formmodelsApi.getFormUsingGET1(formId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -199,62 +164,42 @@ Name | Type | Description  | Notes
 
 [**RuntimeFormRepresentation**](RuntimeFormRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getFormsUsingGET"></a>
 # **getFormsUsingGET**
-> any getFormsUsingGET(formId)
+> Array<FormRepresentation> getFormsUsingGET(formId)
 
 Get forms
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FormmodelsApi from 'FormmodelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FormmodelsApi();
+let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFormsUsingGET(formId, callback);
+formmodelsApi.getFormsUsingGET(formId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **formId** | [**any**](string.md)| formId | 
+ **formId** | [**Array&lt;string&gt;**](string.md)| formId | 
 
 ### Return type
 
-[**any**](FormRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;FormRepresentation&gt;**](FormRepresentation.md)
 
 <a name="getFormsUsingGET1"></a>
 # **getFormsUsingGET1**
@@ -264,24 +209,22 @@ List form models
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FormmodelsApi from 'FormmodelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FormmodelsApi();
+let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFormsUsingGET1(callback);
+formmodelsApi.getFormsUsingGET1().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -291,15 +234,6 @@ This endpoint does not need any parameter.
 
 [**ResultListDataRepresentationFormRepresentation**](ResultListDataRepresentationFormRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getFormsUsingGET2"></a>
 # **getFormsUsingGET2**
 > ResultListDataRepresentationRuntimeFormRepresentation getFormsUsingGET2(opts)
@@ -308,17 +242,17 @@ Query forms
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FormmodelsApi from 'FormmodelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FormmodelsApi();
+let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'nameLike': nameLike_example // string | nameLike
   'appId': 789 // number | appId
   'tenantId': 789 // number | tenantId
@@ -328,14 +262,12 @@ var opts = {
   'size': 56 // number | size
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFormsUsingGET2(opts, callback);
+formmodelsApi.getFormsUsingGET2(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -354,15 +286,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationRuntimeFormRepresentation**](ResultListDataRepresentationRuntimeFormRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="saveFormUsingPUT"></a>
 # **saveFormUsingPUT**
 > FormRepresentation saveFormUsingPUT(formIdsaveRepresentation)
@@ -371,25 +294,23 @@ Update form model content
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FormmodelsApi from 'FormmodelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FormmodelsApi();
+let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.saveFormUsingPUT(formIdsaveRepresentation, callback);
+formmodelsApi.saveFormUsingPUT(formIdsaveRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -403,18 +324,9 @@ Name | Type | Description  | Notes
 
 [**FormRepresentation**](FormRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="validateModelUsingPUT"></a>
 # **validateModelUsingPUT**
-> any validateModelUsingPUT(formIdsaveRepresentation)
+> Array<ValidationErrorRepresentation> validateModelUsingPUT(formIdsaveRepresentation)
 
 Validate form model content
 
@@ -422,25 +334,23 @@ The model content to be validated must be specified in the POST body
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FormmodelsApi from 'FormmodelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FormmodelsApi();
+let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.validateModelUsingPUT(formIdsaveRepresentation, callback);
+formmodelsApi.validateModelUsingPUT(formIdsaveRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -452,14 +362,5 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](ValidationErrorRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;ValidationErrorRepresentation&gt;**](ValidationErrorRepresentation.md)
 

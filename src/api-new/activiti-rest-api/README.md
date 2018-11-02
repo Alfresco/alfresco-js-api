@@ -2,7 +2,7 @@ Provides access to the complete features provided by Alfresco Process Services p
 
 You can use this API to integrate Alfresco Process Services with external applications.
 
-- Last Build date: 2018-11-01T14:48:52.022Z
+- Last Build date: 2018-11-02T12:15:13.625Z
 
 
 ## Documentation for API Endpoints

@@ -18,7 +18,7 @@
 import { AlfrescoNetworkRepresenation } from './alfrescoNetworkRepresenation';
 
 export class ResultListDataRepresentationAlfrescoNetworkRepresenation {
-    data?: any;
+    data?: Array<AlfrescoNetworkRepresenation>;
     size?: number;
     start?: number;
     total?: number;

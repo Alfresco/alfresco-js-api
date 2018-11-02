@@ -19,9 +19,9 @@ The character . must not be used at the end of the name.
 **isLink** | **boolean** |  | [optional] [default to null]
 **isFavorite** | **boolean** |  | [optional] [default to null]
 **content** | [**ContentInfo**](ContentInfo.md) |  | [optional] [default to null]
-**aspectNames** | **any** |  | [optional] [default to null]
+**aspectNames** | **Array<string>** |  | [optional] [default to null]
 **properties** | **any** |  | [optional] [default to null]
-**allowableOperations** | **any** |  | [optional] [default to null]
+**allowableOperations** | **Array<string>** |  | [optional] [default to null]
 **path** | [**PathInfo**](PathInfo.md) |  | [optional] [default to null]
 **permissions** | [**PermissionsInfo**](PermissionsInfo.md) |  | [optional] [default to null]
 

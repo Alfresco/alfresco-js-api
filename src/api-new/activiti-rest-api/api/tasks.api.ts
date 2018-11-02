@@ -294,9 +294,9 @@ export class TasksApi extends BaseApi {
         * 
         * @param  taskId taskId
         * @param  family family
-        * @return Promise<any>
+        * @return Promise<Array<IdentityLinkRepresentation>>
         */
-    getIdentityLinksForFamilyUsingGET2(taskId: string, family: string): Promise<any> {
+    getIdentityLinksForFamilyUsingGET2(taskId: string, family: string): Promise<Array<IdentityLinkRepresentation>> {
 
         let postBody = null;
 
@@ -335,9 +335,9 @@ export class TasksApi extends BaseApi {
         * 
         * 
         * @param  taskId taskId
-        * @return Promise<any>
+        * @return Promise<Array<IdentityLinkRepresentation>>
         */
-    getIdentityLinksUsingGET2(taskId: string): Promise<any> {
+    getIdentityLinksUsingGET2(taskId: string): Promise<Array<IdentityLinkRepresentation>> {
 
         let postBody = null;
 

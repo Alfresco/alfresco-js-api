@@ -18,7 +18,7 @@
 import { FormRepresentation } from './formRepresentation';
 
 export class ResultListDataRepresentationFormRepresentation {
-    data?: any;
+    data?: Array<FormRepresentation>;
     size?: number;
     start?: number;
     total?: number;

@@ -44,18 +44,18 @@ If the source **nodeId** is a file, it&#39;s properties, aspects and tags are co
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -64,7 +64,7 @@ var opts = {
 * path
 * permissions
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -78,14 +78,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.copyNode(nodeIdnodeBodyCopyopts, callback);
+nodesApi.copyNode(nodeIdnodeBodyCopyopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -94,7 +92,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyCopy** | [**NodeBodyCopy**](NodeBodyCopy.md)| The targetParentId and, optionally, a new name which should include the file extension. | 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -103,7 +101,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -119,15 +117,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**NodeEntry**](NodeEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="createAssocation"></a>
 # **createAssocation**
@@ -185,18 +174,18 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -210,14 +199,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createAssocation(nodeIdassociationBodyCreateopts, callback);
+nodesApi.createAssocation(nodeIdassociationBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -226,7 +213,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a source node. | 
  **associationBodyCreate** | [**AssociationBody**](AssociationBody.md)| The target node id and assoc type. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -242,15 +229,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**AssociationEntry**](AssociationEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="createNode"></a>
 # **createNode**
@@ -430,19 +408,19 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'autoRename': true // boolean | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -451,7 +429,7 @@ var opts = {
 * path
 * permissions
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -465,14 +443,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createNode(nodeIdnodeBodyCreateopts, callback);
+nodesApi.createNode(nodeIdnodeBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -486,7 +462,7 @@ Name | Type | Description  | Notes
  | 
  **nodeBodyCreate** | [**NodeBodyCreate**](NodeBodyCreate.md)| The node information to create. | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix. | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -495,7 +471,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -511,15 +487,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**NodeEntry**](NodeEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, multipart/form-data
- - **Accept**: application/json
 
 <a name="createSecondaryChildAssocation"></a>
 # **createSecondaryChildAssocation**
@@ -577,18 +544,18 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -602,14 +569,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createSecondaryChildAssocation(nodeIdsecondaryChildAssociationBodyCreateopts, callback);
+nodesApi.createSecondaryChildAssocation(nodeIdsecondaryChildAssociationBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -618,7 +583,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a parent node. | 
  **secondaryChildAssociationBodyCreate** | [**ChildAssociationBody**](ChildAssociationBody.md)| The child node id and assoc type. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -634,15 +599,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**ChildAssociationEntry**](ChildAssociationEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="deleteAssocation"></a>
 # **deleteAssocation**
@@ -663,28 +619,26 @@ in the other direction.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'assocType': assocType_example // string | Only delete associations of this type.
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteAssocation(nodeIdtargetIdopts, callback);
+nodesApi.deleteAssocation(nodeIdtargetIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -698,15 +652,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="deleteNode"></a>
 # **deleteNode**
@@ -733,30 +678,28 @@ associations were to nodes inside or outside the restored hierarchy.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'permanent': true // boolean | If **true** then the node is deleted permanently, without moving to the trashcan.
 Only the owner of the node or an admin can permanently delete the node.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteNode(nodeIdopts, callback);
+nodesApi.deleteNode(nodeIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -771,15 +714,6 @@ Only the owner of the node or an admin can permanently delete the node.
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="deleteSecondaryChildAssocation"></a>
 # **deleteSecondaryChildAssocation**
@@ -798,28 +732,26 @@ associated as a secondary child with other secondary parents.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'assocType': assocType_example // string | Only delete associations of this type.
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteSecondaryChildAssocation(nodeIdchildIdopts, callback);
+nodesApi.deleteSecondaryChildAssocation(nodeIdchildIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -833,15 +765,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getNode"></a>
 # **getNode**
@@ -858,18 +781,18 @@ You can use the **include** parameter to return additional information.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -881,7 +804,7 @@ var opts = {
   'relativePath': relativePath_example // string | A path relative to the **nodeId**. If you set this,
 information is returned on the node resolved by this path.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -895,14 +818,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getNode(nodeIdopts, callback);
+nodesApi.getNode(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -914,7 +835,7 @@ Name | Type | Description  | Notes
 * -shared-
 * -root-
  | 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -926,7 +847,7 @@ Name | Type | Description  | Notes
  **relativePath** | **string**| A path relative to the **nodeId**. If you set this,
 information is returned on the node resolved by this path.
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -943,15 +864,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**NodeEntry**](NodeEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getNodeContent"></a>
 # **getNodeContent**
 > getNodeContent(nodeIdopts)
@@ -965,17 +877,17 @@ Gets the content of the node with identifier **nodeId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'attachment': true // boolean | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
@@ -994,14 +906,12 @@ Single part request supported, for example: bytes=1-10.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getNodeContent(nodeIdopts, callback);
+nodesApi.getNodeContent(nodeIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1029,15 +939,6 @@ Single part request supported, for example: bytes&#x3D;1-10.
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listNodeChildren"></a>
 # **listNodeChildren**
@@ -1079,24 +980,24 @@ You can use any of the following fields to order the results:
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1120,7 +1021,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
 *   where=(isPrimary=false and assocType='my:specialAssocType')
 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * association
@@ -1133,7 +1034,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
   'relativePath': relativePath_example // string | Return information on children in the folder resolved by this path. The path is relative to **nodeId**.
   'includeSource': true // boolean | Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**.
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1147,14 +1048,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listNodeChildren(nodeIdopts, callback);
+nodesApi.listNodeChildren(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1172,7 +1071,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1196,7 +1095,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
 *   where&#x3D;(isPrimary&#x3D;false and assocType&#x3D;&#39;my:specialAssocType&#39;)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * association
@@ -1209,7 +1108,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
  | [optional] 
  **relativePath** | **string**| Return information on children in the folder resolved by this path. The path is relative to **nodeId**. | [optional] 
  **includeSource** | **boolean**| Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**. | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1226,15 +1125,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**NodeChildAssociationPaging**](NodeChildAssociationPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listParents"></a>
 # **listParents**
 > NodeAssociationPaging listParents(nodeIdopts)
@@ -1250,17 +1140,17 @@ The list includes both the primary parent and any secondary parents.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'where': where_example // string | Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
 
 *   where=(assocType='my:specialAssocType')
@@ -1269,7 +1159,7 @@ var opts = {
 
 *   where=(isPrimary=false and assocType='my:specialAssocType')
 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1285,7 +1175,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
 
   'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on **nodeId**
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1299,14 +1189,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listParents(nodeIdopts, callback);
+nodesApi.listParents(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1326,7 +1214,7 @@ Name | Type | Description  | Notes
 
 *   where&#x3D;(isPrimary&#x3D;false and assocType&#x3D;&#39;my:specialAssocType&#39;)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1342,7 +1230,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on **nodeId** | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1359,15 +1247,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**NodeAssociationPaging**](NodeAssociationPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listSecondaryChildren"></a>
 # **listSecondaryChildren**
 > NodeChildAssociationPaging listSecondaryChildren(nodeIdopts)
@@ -1381,22 +1260,22 @@ Gets a list of secondary child nodes that are associated with the current parent
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'where': where_example // string | Optionally filter the list by assocType. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1412,7 +1291,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
 
   'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on **nodeId**
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1426,14 +1305,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listSecondaryChildren(nodeIdopts, callback);
+nodesApi.listSecondaryChildren(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1449,7 +1326,7 @@ Name | Type | Description  | Notes
 
 *   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1465,7 +1342,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on **nodeId** | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1482,15 +1359,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**NodeChildAssociationPaging**](NodeChildAssociationPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listSourceAssociations"></a>
 # **listSourceAssociations**
 > NodeAssociationPaging listSourceAssociations(nodeIdopts)
@@ -1504,22 +1372,22 @@ Gets a list of source nodes that are associated with the current target **nodeId
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'where': where_example // string | Optionally filter the list by **assocType**. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1528,7 +1396,7 @@ var opts = {
 * path
 * properties
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1542,14 +1410,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listSourceAssociations(nodeIdopts, callback);
+nodesApi.listSourceAssociations(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1561,7 +1427,7 @@ Name | Type | Description  | Notes
 
 *   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1570,7 +1436,7 @@ Name | Type | Description  | Notes
 * path
 * properties
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1586,15 +1452,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**NodeAssociationPaging**](NodeAssociationPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listTargetAssociations"></a>
 # **listTargetAssociations**
@@ -1609,22 +1466,22 @@ Gets a list of target nodes that are associated with the current source **nodeId
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'where': where_example // string | Optionally filter the list by **assocType**. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1633,7 +1490,7 @@ var opts = {
 * path
 * properties
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1647,14 +1504,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listTargetAssociations(nodeIdopts, callback);
+nodesApi.listTargetAssociations(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1666,7 +1521,7 @@ Name | Type | Description  | Notes
 
 *   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1675,7 +1530,7 @@ Name | Type | Description  | Notes
 * path
 * properties
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1691,15 +1546,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**NodeAssociationPaging**](NodeAssociationPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="lockNode"></a>
 # **lockNode**
@@ -1737,18 +1583,18 @@ If a lock on the node cannot be taken, then an error is returned.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1757,7 +1603,7 @@ var opts = {
 * path
 * permissions
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1771,14 +1617,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.lockNode(nodeIdnodeBodyLockopts, callback);
+nodesApi.lockNode(nodeIdnodeBodyLockopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1787,7 +1631,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyLock** | [**NodeBodyLock**](NodeBodyLock.md)| Lock details. | 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1796,7 +1640,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1812,15 +1656,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**NodeEntry**](NodeEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="moveNode"></a>
 # **moveNode**
@@ -1843,18 +1678,18 @@ The move will effectively change the primary parent.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1863,7 +1698,7 @@ var opts = {
 * path
 * permissions
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1877,14 +1712,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.moveNode(nodeIdnodeBodyMoveopts, callback);
+nodesApi.moveNode(nodeIdnodeBodyMoveopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1893,7 +1726,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyMove** | [**NodeBodyMove**](NodeBodyMove.md)| The targetParentId and, optionally, a new name which should include the file extension. | 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1902,7 +1735,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1918,15 +1751,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**NodeEntry**](NodeEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="unlockNode"></a>
 # **unlockNode**
@@ -1945,18 +1769,18 @@ If a lock on the node cannot be released, then an error is returned.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1965,7 +1789,7 @@ var opts = {
 * path
 * permissions
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1979,14 +1803,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.unlockNode(nodeIdopts, callback);
+nodesApi.unlockNode(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -1994,7 +1816,7 @@ apiInstance.unlockNode(nodeIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -2003,7 +1825,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -2019,15 +1841,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**NodeEntry**](NodeEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateNode"></a>
 # **updateNode**
@@ -2078,18 +1891,18 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -2098,7 +1911,7 @@ var opts = {
 * path
 * permissions
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -2112,14 +1925,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateNode(nodeIdnodeBodyUpdateopts, callback);
+nodesApi.updateNode(nodeIdnodeBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -2128,7 +1939,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyUpdate** | [**NodeBodyUpdate**](NodeBodyUpdate.md)| The node information to update. | 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -2137,7 +1948,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -2153,15 +1964,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**NodeEntry**](NodeEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateNodeContent"></a>
 # **updateNodeContent**
@@ -2188,17 +1990,17 @@ tooling to accept an arbitrary file.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import NodesApi from 'NodesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .NodesApi();
+let nodesApi = new NodesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'majorVersion': true // boolean | If **true**, create a major version.
 Setting this parameter also enables versioning of this node, if it is not already versioned.
 
@@ -2209,7 +2011,7 @@ Setting this parameter also enables versioning of this node, if it is not alread
 The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.
 The character . must not be used at the end of the name.
 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -2218,7 +2020,7 @@ The character . must not be used at the end of the name.
 * path
 * permissions
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -2232,14 +2034,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateNodeContent(nodeIdcontentBodyUpdateopts, callback);
+nodesApi.updateNodeContent(nodeIdcontentBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -2258,7 +2058,7 @@ Setting this parameter also enables versioning of this node, if it is not alread
 The name must not contain spaces or the following special characters: * \&quot; &lt; &gt; \\ / ? : and |.
 The character . must not be used at the end of the name.
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -2267,7 +2067,7 @@ The character . must not be used at the end of the name.
 * path
 * permissions
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -2283,13 +2083,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**NodeEntry**](NodeEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/octet-stream
- - **Accept**: application/json
 

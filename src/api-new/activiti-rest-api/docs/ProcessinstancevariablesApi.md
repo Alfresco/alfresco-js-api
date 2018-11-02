@@ -14,31 +14,29 @@ Method | HTTP request | Description
 
 <a name="createOrUpdateProcessInstanceVariablesUsingPUT"></a>
 # **createOrUpdateProcessInstanceVariablesUsingPUT**
-> any createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceIdrestVariables)
+> Array<RestVariable> createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceIdrestVariables)
 
 Create or update variables
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessinstancevariablesApi from 'ProcessinstancevariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessinstancevariablesApi();
+let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceIdrestVariables, callback);
+processinstancevariablesApi.createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceIdrestVariables).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -46,48 +44,37 @@ apiInstance.createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceIdrest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **processInstanceId** | **string**| Process instance ID | 
- **restVariables** | [**any**](RestVariable.md)| restVariables | 
+ **restVariables** | [**Array&lt;RestVariable&gt;**](RestVariable.md)| restVariables | 
 
 ### Return type
 
-[**any**](RestVariable.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;RestVariable&gt;**](RestVariable.md)
 
 <a name="createProcessInstanceVariablesUsingPOST"></a>
 # **createProcessInstanceVariablesUsingPOST**
-> any createProcessInstanceVariablesUsingPOST(processInstanceIdrestVariables)
+> Array<RestVariable> createProcessInstanceVariablesUsingPOST(processInstanceIdrestVariables)
 
 Create variables
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessinstancevariablesApi from 'ProcessinstancevariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessinstancevariablesApi();
+let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createProcessInstanceVariablesUsingPOST(processInstanceIdrestVariables, callback);
+processinstancevariablesApi.createProcessInstanceVariablesUsingPOST(processInstanceIdrestVariables).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -95,20 +82,11 @@ apiInstance.createProcessInstanceVariablesUsingPOST(processInstanceIdrestVariabl
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **processInstanceId** | **string**| Process instance ID | 
- **restVariables** | [**any**](RestVariable.md)| restVariables | 
+ **restVariables** | [**Array&lt;RestVariable&gt;**](RestVariable.md)| restVariables | 
 
 ### Return type
 
-[**any**](RestVariable.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;RestVariable&gt;**](RestVariable.md)
 
 <a name="deleteProcessInstanceVariableUsingDELETE"></a>
 # **deleteProcessInstanceVariableUsingDELETE**
@@ -118,25 +96,23 @@ Delete a variable
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessinstancevariablesApi from 'ProcessinstancevariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessinstancevariablesApi();
+let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteProcessInstanceVariableUsingDELETE(processInstanceIdvariableName, callback);
+processinstancevariablesApi.deleteProcessInstanceVariableUsingDELETE(processInstanceIdvariableName).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -150,15 +126,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getProcessInstanceVariableUsingGET"></a>
 # **getProcessInstanceVariableUsingGET**
 > RestVariable getProcessInstanceVariableUsingGET(processInstanceIdvariableName)
@@ -167,25 +134,23 @@ Get a variable
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessinstancevariablesApi from 'ProcessinstancevariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessinstancevariablesApi();
+let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstanceVariableUsingGET(processInstanceIdvariableName, callback);
+processinstancevariablesApi.getProcessInstanceVariableUsingGET(processInstanceIdvariableName).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -199,42 +164,31 @@ Name | Type | Description  | Notes
 
 [**RestVariable**](RestVariable.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getProcessInstanceVariablesUsingGET"></a>
 # **getProcessInstanceVariablesUsingGET**
-> any getProcessInstanceVariablesUsingGET(processInstanceId)
+> Array<RestVariable> getProcessInstanceVariablesUsingGET(processInstanceId)
 
 List variables
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessinstancevariablesApi from 'ProcessinstancevariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessinstancevariablesApi();
+let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessInstanceVariablesUsingGET(processInstanceId, callback);
+processinstancevariablesApi.getProcessInstanceVariablesUsingGET(processInstanceId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -245,16 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](RestVariable.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;RestVariable&gt;**](RestVariable.md)
 
 <a name="updateProcessInstanceVariableUsingPUT"></a>
 # **updateProcessInstanceVariableUsingPUT**
@@ -264,25 +209,23 @@ Update a variable
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessinstancevariablesApi from 'ProcessinstancevariablesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessinstancevariablesApi();
+let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateProcessInstanceVariableUsingPUT(processInstanceIdvariableNamerestVariable, callback);
+processinstancevariablesApi.updateProcessInstanceVariableUsingPUT(processInstanceIdvariableNamerestVariable).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -296,13 +239,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RestVariable**](RestVariable.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

@@ -25,5 +25,5 @@ export class ResultBuckets {
     /**
      * An array of buckets and values
      */
-    buckets?: any;
+    buckets?: Array<ResultBucketsBuckets>;
 }

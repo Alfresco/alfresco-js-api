@@ -80,7 +80,8 @@ export class AlfrescoApi {
             ticketBpm: config.ticketBpm,
             accessToken: config.accessToken,
             disableCsrf: config.disableCsrf || false,
-            domainPrefix: config.domainPrefix || ''
+            domainPrefix: config.domainPrefix || '',
+            withCredentials: config.withCredentials || false
         };
 
         this.ecmPrivateClient = new EcmClient(this.config, '/api/-default-/private/alfresco/versions/1');
@@ -149,6 +150,10 @@ export class AlfrescoApi {
         }
 
         this.emit('error', error);
+    }
+
+    changeWithCredentialsConfig(withCredentials: boolean) {
+        this.config.withCredentials = withCredentials;
     }
 
     changeCsrfConfig(disableCsrf: boolean) {

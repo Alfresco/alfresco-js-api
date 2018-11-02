@@ -36,7 +36,7 @@ export class HistoricTaskInstanceQueryRepresentation {
     processDefinitionNameLike?: string;
     processFinished?: boolean;
     processInstanceId?: string;
-    processVariables?: any;
+    processVariables?: Array<QueryVariable>;
     size?: number;
     sort?: string;
     start?: number;
@@ -64,7 +64,7 @@ export class HistoricTaskInstanceQueryRepresentation {
     taskOwner?: string;
     taskOwnerLike?: string;
     taskPriority?: number;
-    taskVariables?: any;
+    taskVariables?: Array<QueryVariable>;
     tenantId?: string;
     tenantIdLike?: string;
     withoutDueDate?: boolean;

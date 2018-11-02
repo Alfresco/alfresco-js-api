@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **createdAt** | **Date** |  | [optional] [default to null]
 **paidNetwork** | **boolean** |  | [optional] [default to null]
 **subscriptionLevel** | **string** |  | [optional] [default to null]
-**quotas** | [**any**](NetworkQuota.md) |  | [optional] [default to null]
+**quotas** | [**Array<NetworkQuota>**](NetworkQuota.md) |  | [optional] [default to null]
 
 
 <a name="PersonNetwork.SubscriptionLevelEnum"></a>

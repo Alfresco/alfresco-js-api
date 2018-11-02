@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-
+import { Map } from './map';
 
 export class RMNodeBodyCreate {
     /**
@@ -25,6 +25,6 @@ The character . must not be used at the end of the name.
      */
     name: string;
     nodeType: string;
-    aspectNames?: any;
+    aspectNames?: Array<string>;
     properties?: { [key: string]: string; };
 }

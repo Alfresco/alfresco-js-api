@@ -20,5 +20,5 @@ import { VersionEntry } from './versionEntry';
 
 export class VersionPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<VersionEntry>;
 }

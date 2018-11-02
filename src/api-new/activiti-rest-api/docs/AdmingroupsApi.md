@@ -30,25 +30,23 @@ Activate a group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.activateUsingPOST(groupId, callback);
+admingroupsApi.activateUsingPOST(groupId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -60,15 +58,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="addAllUsersToGroupUsingPOST"></a>
 # **addAllUsersToGroupUsingPOST**
@@ -78,25 +67,23 @@ Add users to a group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.addAllUsersToGroupUsingPOST(groupId, callback);
+admingroupsApi.addAllUsersToGroupUsingPOST(groupId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -109,15 +96,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="addGroupCapabilitiesUsingPOST"></a>
 # **addGroupCapabilitiesUsingPOST**
 > addGroupCapabilitiesUsingPOST(groupIdaddGroupCapabilitiesRepresentation)
@@ -126,25 +104,23 @@ Add capabilities to a group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.addGroupCapabilitiesUsingPOST(groupIdaddGroupCapabilitiesRepresentation, callback);
+admingroupsApi.addGroupCapabilitiesUsingPOST(groupIdaddGroupCapabilitiesRepresentation).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -158,15 +134,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="addGroupMemberUsingPOST"></a>
 # **addGroupMemberUsingPOST**
 > addGroupMemberUsingPOST(groupIduserId)
@@ -175,25 +142,23 @@ Add a user to a group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.addGroupMemberUsingPOST(groupIduserId, callback);
+admingroupsApi.addGroupMemberUsingPOST(groupIduserId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -207,15 +172,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="addRelatedGroupUsingPOST"></a>
 # **addRelatedGroupUsingPOST**
 > addRelatedGroupUsingPOST(groupIdrelatedGroupIdtype)
@@ -224,25 +180,23 @@ Get a related group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.addRelatedGroupUsingPOST(groupIdrelatedGroupIdtype, callback);
+admingroupsApi.addRelatedGroupUsingPOST(groupIdrelatedGroupIdtype).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -257,15 +211,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="createNewGroupUsingPOST"></a>
 # **createNewGroupUsingPOST**
 > GroupRepresentation createNewGroupUsingPOST(groupRepresentation)
@@ -274,25 +219,23 @@ Create a group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createNewGroupUsingPOST(groupRepresentation, callback);
+admingroupsApi.createNewGroupUsingPOST(groupRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -305,15 +248,6 @@ Name | Type | Description  | Notes
 
 [**GroupRepresentation**](GroupRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteGroupCapabilityUsingDELETE"></a>
 # **deleteGroupCapabilityUsingDELETE**
 > deleteGroupCapabilityUsingDELETE(groupIdgroupCapabilityId)
@@ -322,25 +256,23 @@ Remove a capability from a group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteGroupCapabilityUsingDELETE(groupIdgroupCapabilityId, callback);
+admingroupsApi.deleteGroupCapabilityUsingDELETE(groupIdgroupCapabilityId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -354,15 +286,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteGroupMemberUsingDELETE"></a>
 # **deleteGroupMemberUsingDELETE**
 > deleteGroupMemberUsingDELETE(groupIduserId)
@@ -371,25 +294,23 @@ Delete a member from a group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteGroupMemberUsingDELETE(groupIduserId, callback);
+admingroupsApi.deleteGroupMemberUsingDELETE(groupIduserId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -403,15 +324,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteGroupUsingDELETE"></a>
 # **deleteGroupUsingDELETE**
 > deleteGroupUsingDELETE(groupId)
@@ -420,25 +332,23 @@ Delete a group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteGroupUsingDELETE(groupId, callback);
+admingroupsApi.deleteGroupUsingDELETE(groupId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -451,15 +361,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteRelatedGroupUsingDELETE"></a>
 # **deleteRelatedGroupUsingDELETE**
 > deleteRelatedGroupUsingDELETE(groupIdrelatedGroupId)
@@ -468,25 +369,23 @@ Delete a related group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteRelatedGroupUsingDELETE(groupIdrelatedGroupId, callback);
+admingroupsApi.deleteRelatedGroupUsingDELETE(groupIdrelatedGroupId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -500,42 +399,31 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getCapabilitiesUsingGET"></a>
 # **getCapabilitiesUsingGET**
-> any getCapabilitiesUsingGET(groupId)
+> Array<string> getCapabilitiesUsingGET(groupId)
 
 List group capabilities
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getCapabilitiesUsingGET(groupId, callback);
+admingroupsApi.getCapabilitiesUsingGET(groupId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -546,16 +434,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**any**
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+**Array<string>**
 
 <a name="getGroupUsersUsingGET"></a>
 # **getGroupUsersUsingGET**
@@ -565,30 +444,28 @@ Get group members
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'filter': filter_example // string | filter
   'page': 56 // number | page
   'pageSize': 56 // number | pageSize
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getGroupUsersUsingGET(groupIdopts, callback);
+admingroupsApi.getGroupUsersUsingGET(groupIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -604,15 +481,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationLightUserRepresentation**](ResultListDataRepresentationLightUserRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getGroupUsingGET"></a>
 # **getGroupUsingGET**
 > AbstractGroupRepresentation getGroupUsingGET(groupIdopts)
@@ -621,29 +489,27 @@ Get a group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'includeAllUsers': true // boolean | includeAllUsers
   'summary': true // boolean | summary
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getGroupUsingGET(groupIdopts, callback);
+admingroupsApi.getGroupUsingGET(groupIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -658,47 +524,36 @@ Name | Type | Description  | Notes
 
 [**AbstractGroupRepresentation**](AbstractGroupRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getGroupsUsingGET1"></a>
 # **getGroupsUsingGET1**
-> any getGroupsUsingGET1(opts)
+> Array<LightGroupRepresentation> getGroupsUsingGET1(opts)
 
 Query groups
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'tenantId': 789 // number | tenantId
   'functional': true // boolean | functional
   'summary': true // boolean | summary
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getGroupsUsingGET1(opts, callback);
+admingroupsApi.getGroupsUsingGET1(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -711,44 +566,33 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](LightGroupRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;LightGroupRepresentation&gt;**](LightGroupRepresentation.md)
 
 <a name="getRelatedGroupsUsingGET"></a>
 # **getRelatedGroupsUsingGET**
-> any getRelatedGroupsUsingGET(groupId)
+> Array<LightGroupRepresentation> getRelatedGroupsUsingGET(groupId)
 
 Get related groups
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRelatedGroupsUsingGET(groupId, callback);
+admingroupsApi.getRelatedGroupsUsingGET(groupId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -759,16 +603,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](LightGroupRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;LightGroupRepresentation&gt;**](LightGroupRepresentation.md)
 
 <a name="updateGroupUsingPUT"></a>
 # **updateGroupUsingPUT**
@@ -778,25 +613,23 @@ Update a group
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .AdmingroupsApi();
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateGroupUsingPUT(groupIdgroupRepresentation, callback);
+admingroupsApi.updateGroupUsingPUT(groupIdgroupRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -809,13 +642,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GroupRepresentation**](GroupRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

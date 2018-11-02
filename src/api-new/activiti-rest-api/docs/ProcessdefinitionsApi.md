@@ -25,25 +25,23 @@ Add a user or group involvement to a process definition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessdefinitionsApi();
+let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createIdentityLinkUsingPOST(processDefinitionIdidentityLinkRepresentation, callback);
+processdefinitionsApi.createIdentityLinkUsingPOST(processDefinitionIdidentityLinkRepresentation).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -57,15 +55,6 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteIdentityLinkUsingDELETE"></a>
 # **deleteIdentityLinkUsingDELETE**
 > deleteIdentityLinkUsingDELETE(processDefinitionIdfamilyidentityId)
@@ -74,25 +63,23 @@ Remove a user or group involvement from a process definition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessdefinitionsApi();
+let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteIdentityLinkUsingDELETE(processDefinitionIdfamilyidentityId, callback);
+processdefinitionsApi.deleteIdentityLinkUsingDELETE(processDefinitionIdfamilyidentityId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -107,15 +94,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getIdentityLinkTypeUsingGET"></a>
 # **getIdentityLinkTypeUsingGET**
 > IdentityLinkRepresentation getIdentityLinkTypeUsingGET(processDefinitionIdfamilyidentityId)
@@ -124,25 +102,23 @@ Get a user or group involvement with a process definition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessdefinitionsApi();
+let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getIdentityLinkTypeUsingGET(processDefinitionIdfamilyidentityId, callback);
+processdefinitionsApi.getIdentityLinkTypeUsingGET(processDefinitionIdfamilyidentityId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -157,42 +133,31 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getIdentityLinksForFamilyUsingGET"></a>
 # **getIdentityLinksForFamilyUsingGET**
-> any getIdentityLinksForFamilyUsingGET(processDefinitionIdfamily)
+> Array<IdentityLinkRepresentation> getIdentityLinksForFamilyUsingGET(processDefinitionIdfamily)
 
 List either the users or groups involved with a process definition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessdefinitionsApi();
+let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getIdentityLinksForFamilyUsingGET(processDefinitionIdfamily, callback);
+processdefinitionsApi.getIdentityLinksForFamilyUsingGET(processDefinitionIdfamily).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -204,44 +169,33 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](IdentityLinkRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;IdentityLinkRepresentation&gt;**](IdentityLinkRepresentation.md)
 
 <a name="getIdentityLinksUsingGET"></a>
 # **getIdentityLinksUsingGET**
-> any getIdentityLinksUsingGET(processDefinitionId)
+> Array<IdentityLinkRepresentation> getIdentityLinksUsingGET(processDefinitionId)
 
 List the users and groups involved with a process definition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessdefinitionsApi();
+let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getIdentityLinksUsingGET(processDefinitionId, callback);
+processdefinitionsApi.getIdentityLinksUsingGET(processDefinitionId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -252,16 +206,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**any**](IdentityLinkRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;IdentityLinkRepresentation&gt;**](IdentityLinkRepresentation.md)
 
 <a name="getProcessDefinitionDecisionTablesUsingGET"></a>
 # **getProcessDefinitionDecisionTablesUsingGET**
@@ -271,25 +216,23 @@ List the decision tables associated with a process definition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessdefinitionsApi();
+let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessDefinitionDecisionTablesUsingGET(processDefinitionId, callback);
+processdefinitionsApi.getProcessDefinitionDecisionTablesUsingGET(processDefinitionId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -302,15 +245,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationRuntimeDecisionTableRepresentation**](ResultListDataRepresentationRuntimeDecisionTableRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getProcessDefinitionFormsUsingGET"></a>
 # **getProcessDefinitionFormsUsingGET**
 > ResultListDataRepresentationRuntimeFormRepresentation getProcessDefinitionFormsUsingGET(processDefinitionId)
@@ -319,25 +253,23 @@ List the forms associated with a process definition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessdefinitionsApi();
+let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessDefinitionFormsUsingGET(processDefinitionId, callback);
+processdefinitionsApi.getProcessDefinitionFormsUsingGET(processDefinitionId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -350,15 +282,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationRuntimeFormRepresentation**](ResultListDataRepresentationRuntimeFormRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getProcessDefinitionStartFormUsingGET"></a>
 # **getProcessDefinitionStartFormUsingGET**
 > FormDefinitionRepresentation getProcessDefinitionStartFormUsingGET()
@@ -367,24 +290,22 @@ Retrieve the start form for a process definition
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessdefinitionsApi();
+let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessDefinitionStartFormUsingGET(callback);
+processdefinitionsApi.getProcessDefinitionStartFormUsingGET().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -393,15 +314,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**FormDefinitionRepresentation**](FormDefinitionRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getProcessDefinitionsUsingGET"></a>
 # **getProcessDefinitionsUsingGET**
@@ -413,30 +325,28 @@ Get a list of process definitions (visible within the tenant of the user)
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessdefinitionsApi();
+let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'latest': true // boolean | latest
   'appDefinitionId': 789 // number | appDefinitionId
   'deploymentId': deploymentId_example // string | deploymentId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessDefinitionsUsingGET(opts, callback);
+processdefinitionsApi.getProcessDefinitionsUsingGET(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -451,41 +361,30 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationProcessDefinitionRepresentation**](ResultListDataRepresentationProcessDefinitionRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getRestFieldValuesUsingGET"></a>
 # **getRestFieldValuesUsingGET**
-> any getRestFieldValuesUsingGET()
+> Array<FormValueRepresentation> getRestFieldValuesUsingGET()
 
 Retrieve field values (eg. the typeahead field)
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessdefinitionsApi();
+let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestFieldValuesUsingGET(callback);
+processdefinitionsApi.getRestFieldValuesUsingGET().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -493,43 +392,32 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**any**](FormValueRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;FormValueRepresentation&gt;**](FormValueRepresentation.md)
 
 <a name="getRestTableFieldValuesUsingGET"></a>
 # **getRestTableFieldValuesUsingGET**
-> any getRestTableFieldValuesUsingGET()
+> Array<FormValueRepresentation> getRestTableFieldValuesUsingGET()
 
 Retrieve field values (eg. the table field)
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ProcessdefinitionsApi();
+let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRestTableFieldValuesUsingGET(callback);
+processdefinitionsApi.getRestTableFieldValuesUsingGET().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -537,14 +425,5 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**any**](FormValueRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**Array&lt;FormValueRepresentation&gt;**](FormValueRepresentation.md)
 

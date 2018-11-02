@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**capabilities** | **any** |  | [optional] [default to null]
+**capabilities** | **Array<string>** |  | [optional] [default to null]
 
 

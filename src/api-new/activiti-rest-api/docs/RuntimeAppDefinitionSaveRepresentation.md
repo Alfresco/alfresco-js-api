@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**appDefinitions** | [**any**](AppDefinitionRepresentation.md) |  | [optional] [default to null]
+**appDefinitions** | [**Array<AppDefinitionRepresentation>**](AppDefinitionRepresentation.md) |  | [optional] [default to null]
 
 

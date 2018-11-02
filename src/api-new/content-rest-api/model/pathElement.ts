@@ -19,5 +19,5 @@ export class PathElement {
     id?: string;
     name?: string;
     nodeType?: string;
-    aspectNames?: any;
+    aspectNames?: Array<string>;
 }

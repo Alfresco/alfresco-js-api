@@ -20,5 +20,5 @@ import { SiteContainerEntry } from './siteContainerEntry';
 
 export class SiteContainerPagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<SiteContainerEntry>;
 }

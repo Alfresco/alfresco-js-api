@@ -20,5 +20,5 @@ import { RenditionEntry } from './renditionEntry';
 
 export class RenditionPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<RenditionEntry>;
 }

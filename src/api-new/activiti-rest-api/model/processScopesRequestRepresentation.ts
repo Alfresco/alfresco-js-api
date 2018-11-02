@@ -18,6 +18,6 @@
 import { ProcessScopeIdentifierRepresentation } from './processScopeIdentifierRepresentation';
 
 export class ProcessScopesRequestRepresentation {
-    identifiers?: any;
+    identifiers?: Array<ProcessScopeIdentifierRepresentation>;
     overriddenModel?: string;
 }

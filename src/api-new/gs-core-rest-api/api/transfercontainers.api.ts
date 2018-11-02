@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
+import { ModelError } from '../model/modelError';
 import { TransferContainerAssociationPaging } from '../model/transferContainerAssociationPaging';
 import { TransferContainerBodyUpdate } from '../model/transferContainerBodyUpdate';
 import { TransferContainerEntry } from '../model/transferContainerEntry';
@@ -28,14 +28,14 @@ import { BaseApi } from './base.api';
 export class TransfercontainersApi extends BaseApi {
     /**
     * Get a transfer container
-    *
+    * 
     * Gets information for transfer container **transferContainerId**
 
 Mandatory fields and the transfer container's aspects and properties are returned by default.
 
 You can use the **include** parameter (include=allowableOperations) to return additional information.
 
-    *
+    * 
     * @param  transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
     * @param Object opts Optional parameters
     * @param  opts.include Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
@@ -89,14 +89,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List transfer container's children
-        *
+        * 
         * Returns a list of transfers.
-
+    
     Minimal information for each child is returned by default.
-
+    
     You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-        *
+    
+        * 
         * @param  transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
         * @param Object opts Optional parameters
         * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -108,20 +108,20 @@ parameter are returned in addition to those specified in the **fields** paramete
     * transferPDFIndicator
     * transferLocation
     * transferAccessionIndicator
-
+    
         * @param  opts.includeSource Also include **source** (in addition to **entries**) with folder information on the specified parent **transferContainerId**.
         * @param  opts.fields A list of field names.
-
+    
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-
+    
     The list applies to a returned individual
     entity or entries within a collection.
-
+    
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-
+    
         * @return Promise<TransferContainerAssociationPaging>
         */
     listTransfers(transferContainerId: string, opts: any): Promise<TransferContainerAssociationPaging> {
@@ -160,13 +160,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Update transfer container
-        *
+        * 
         * Updates the transfer container **transferContainerId**. For example, you can rename transfer container:
     JSON
     {
       \"name\":\"My new name\"
     }
-
+    
     You can also set or update description and title properties:
     JSON
     {
@@ -176,29 +176,29 @@ parameter are returned in addition to those specified in the **fields** paramete
            \"cm:title\":\"New Title\"
         }
     }
-
+    
     **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
-
-        *
+    
+        * 
         * @param  transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
         * @param  nodeBodyUpdate The node information to update.
         * @param Object opts Optional parameters
         * @param  opts.include Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
-
+    
         * @param  opts.fields A list of field names.
-
+    
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-
+    
     The list applies to a returned individual
     entity or entries within a collection.
-
+    
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-
+    
         * @return Promise<TransferContainerEntry>
         */
     updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts: any): Promise<TransferContainerEntry> {

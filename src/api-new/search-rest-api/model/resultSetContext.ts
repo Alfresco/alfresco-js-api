@@ -31,15 +31,15 @@ export class ResultSetContext {
     /**
      * The counts from facet queries
      */
-    facetQueries?: any;
+    facetQueries?: Array<ResultSetContextFacetQueries>;
     /**
      * The counts from field facets
      */
-    facetsFields?: any;
+    facetsFields?: Array<ResultBuckets>;
     /**
      * The faceted response
      */
-    facets?: any;
+    facets?: Array<GenericFacetResponse>;
     /**
      * Suggested corrections
 
@@ -48,5 +48,5 @@ If alternatives were found that return more results than the original query they
 The highest quality suggestion is first.
 
      */
-    spellcheck?: any;
+    spellcheck?: Array<ResultSetContextSpellcheck>;
 }

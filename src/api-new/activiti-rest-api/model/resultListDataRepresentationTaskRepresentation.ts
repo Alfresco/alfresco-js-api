@@ -18,7 +18,7 @@
 import { TaskRepresentation } from './taskRepresentation';
 
 export class ResultListDataRepresentationTaskRepresentation {
-    data?: any;
+    data?: Array<TaskRepresentation>;
     size?: number;
     start?: number;
     total?: number;

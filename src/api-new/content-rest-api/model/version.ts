@@ -16,7 +16,7 @@
 */
 
 import { ContentInfo } from './contentInfo';
-
+import { Map } from './map';
 import { UserInfo } from './userInfo';
 
 export class Version {
@@ -34,6 +34,6 @@ The character . must not be used at the end of the name.
     modifiedAt: Date;
     modifiedByUser: UserInfo;
     content?: ContentInfo;
-    aspectNames?: any;
+    aspectNames?: Array<string>;
     properties?: { [key: string]: string; };
 }

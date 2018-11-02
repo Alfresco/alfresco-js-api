@@ -18,7 +18,7 @@
 import { DataSourceRepresentation } from './dataSourceRepresentation';
 
 export class ResultListDataRepresentationDataSourceRepresentation {
-    data?: any;
+    data?: Array<DataSourceRepresentation>;
     size?: number;
     start?: number;
     total?: number;

@@ -30,9 +30,9 @@ export class ProcessscopesApi extends BaseApi {
     * 
     * 
     * @param  processScopesRequest processScopesRequest
-    * @return Promise<any>
+    * @return Promise<Array<ProcessScopeRepresentation>>
     */
-    getRuntimeProcessScopesUsingPOST(processScopesRequest: ProcessScopesRequestRepresentation): Promise<any> {
+    getRuntimeProcessScopesUsingPOST(processScopesRequest: ProcessScopesRequestRepresentation): Promise<Array<ProcessScopeRepresentation>> {
 
         let postBody = processScopesRequest;
 

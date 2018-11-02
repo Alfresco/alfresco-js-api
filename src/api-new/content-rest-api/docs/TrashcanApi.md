@@ -27,25 +27,23 @@ Permanently deletes the deleted node **nodeId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TrashcanApi from 'TrashcanApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TrashcanApi();
+let trashcanApi = new TrashcanApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteDeletedNode(nodeId, callback);
+trashcanApi.deleteDeletedNode(nodeId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -57,15 +55,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getArchivedNodeRendition"></a>
 # **getArchivedNodeRendition**
@@ -80,25 +69,23 @@ Gets the rendition information for **renditionId** of file **nodeId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TrashcanApi from 'TrashcanApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TrashcanApi();
+let trashcanApi = new TrashcanApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getArchivedNodeRendition(nodeIdrenditionId, callback);
+trashcanApi.getArchivedNodeRendition(nodeIdrenditionId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -111,15 +98,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RenditionEntry**](RenditionEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getArchivedNodeRenditionContent"></a>
 # **getArchivedNodeRenditionContent**
@@ -134,17 +112,17 @@ Gets the rendition content for **renditionId** of file **nodeId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TrashcanApi from 'TrashcanApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TrashcanApi();
+let trashcanApi = new TrashcanApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'attachment': true // boolean | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
@@ -167,14 +145,12 @@ than a 404 response.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getArchivedNodeRenditionContent(nodeIdrenditionIdopts, callback);
+trashcanApi.getArchivedNodeRenditionContent(nodeIdrenditionIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -208,15 +184,6 @@ than a 404 response.
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getDeletedNode"></a>
 # **getDeletedNode**
 > DeletedNodeEntry getDeletedNode(nodeIdopts)
@@ -230,18 +197,18 @@ Gets the specific deleted node **nodeId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TrashcanApi from 'TrashcanApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TrashcanApi();
+let trashcanApi = new TrashcanApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -252,14 +219,12 @@ var opts = {
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getDeletedNode(nodeIdopts, callback);
+trashcanApi.getDeletedNode(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -267,7 +232,7 @@ apiInstance.getDeletedNode(nodeIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -280,15 +245,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DeletedNodeEntry**](DeletedNodeEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getDeletedNodeContent"></a>
 # **getDeletedNodeContent**
@@ -303,17 +259,17 @@ Gets the content of the deleted node with identifier **nodeId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TrashcanApi from 'TrashcanApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TrashcanApi();
+let trashcanApi = new TrashcanApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'attachment': true // boolean | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
@@ -332,14 +288,12 @@ Single part request supported, for example: bytes=1-10.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.getDeletedNodeContent(nodeIdopts, callback);
+trashcanApi.getDeletedNodeContent(nodeIdopts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -368,15 +322,6 @@ Single part request supported, for example: bytes&#x3D;1-10.
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listDeletedNodeRenditions"></a>
 # **listDeletedNodeRenditions**
 > RenditionPaging listDeletedNodeRenditions(nodeIdopts)
@@ -399,28 +344,26 @@ clause will return just the CREATED renditions:
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TrashcanApi from 'TrashcanApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TrashcanApi();
+let trashcanApi = new TrashcanApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'where': where_example // string | A string to restrict the returned objects by using a predicate.
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listDeletedNodeRenditions(nodeIdopts, callback);
+trashcanApi.listDeletedNodeRenditions(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -433,15 +376,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RenditionPaging**](RenditionPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listDeletedNodes"></a>
 # **listDeletedNodes**
@@ -460,24 +394,24 @@ The list of deleted nodes will be ordered with the most recently deleted node at
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TrashcanApi from 'TrashcanApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TrashcanApi();
+let trashcanApi = new TrashcanApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
   'maxItems': 56 // number | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'include':  // any | Returns additional information about the node. The following optional fields can be requested:
+  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * association
@@ -490,14 +424,12 @@ If not supplied then the default value is 100.
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listDeletedNodes(opts, callback);
+trashcanApi.listDeletedNodes(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -510,7 +442,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **include** | [**any**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * association
@@ -525,15 +457,6 @@ If not supplied then the default value is 100.
 ### Return type
 
 [**DeletedNodesPaging**](DeletedNodesPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="restoreDeletedNode"></a>
 # **restoreDeletedNode**
@@ -558,18 +481,18 @@ of delete of each node.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import TrashcanApi from 'TrashcanApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .TrashcanApi();
+let trashcanApi = new TrashcanApi(this.alfrescoApi);
 
-var opts = { 
-  'fields':  // any | A list of field names.
+let opts = { 
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -584,14 +507,12 @@ parameter are returned in addition to those specified in the **fields** paramete
   'deletedNodeBodyRestore':  // DeletedNodeBodyRestore | The targetParentId if the node is restored to a new location.
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.restoreDeletedNode(nodeIdopts, callback);
+trashcanApi.restoreDeletedNode(nodeIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -599,7 +520,7 @@ apiInstance.restoreDeletedNode(nodeIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -616,13 +537,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**NodeEntry**](NodeEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

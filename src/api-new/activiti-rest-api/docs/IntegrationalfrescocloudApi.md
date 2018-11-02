@@ -22,25 +22,23 @@ Returns Alfresco OAuth HTML Page
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationalfrescocloudApi();
+let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.confirmAuthorisationUsingGET(code, callback);
+integrationalfrescocloudApi.confirmAuthorisationUsingGET(code).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -53,15 +51,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: text/html
-
 <a name="getAllNetworksUsingGET"></a>
 # **getAllNetworksUsingGET**
 > ResultListDataRepresentationAlfrescoNetworkRepresenation getAllNetworksUsingGET()
@@ -70,24 +59,22 @@ List Alfresco networks
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationalfrescocloudApi();
+let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllNetworksUsingGET(callback);
+integrationalfrescocloudApi.getAllNetworksUsingGET().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -96,15 +83,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**ResultListDataRepresentationAlfrescoNetworkRepresenation**](ResultListDataRepresentationAlfrescoNetworkRepresenation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getAllSitesUsingGET"></a>
 # **getAllSitesUsingGET**
@@ -116,25 +94,23 @@ Returns ALL Sites
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationalfrescocloudApi();
+let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAllSitesUsingGET(networkId, callback);
+integrationalfrescocloudApi.getAllSitesUsingGET(networkId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -147,15 +123,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoSiteRepresenation**](ResultListDataRepresentationAlfrescoSiteRepresenation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getContentInFolderPathUsingGET"></a>
 # **getContentInFolderPathUsingGET**
 > ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderPathUsingGET(networkIdopts)
@@ -164,29 +131,27 @@ List files and folders inside a specific folder identified by path
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationalfrescocloudApi();
+let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'siteId': siteId_example // string | siteId
   'path': path_example // string | path
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInFolderPathUsingGET(networkIdopts, callback);
+integrationalfrescocloudApi.getContentInFolderPathUsingGET(networkIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -201,15 +166,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getContentInFolderUsingGET"></a>
 # **getContentInFolderUsingGET**
 > ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderUsingGET(networkIdfolderId)
@@ -218,25 +174,23 @@ List files and folders inside a specific folder
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationalfrescocloudApi();
+let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInFolderUsingGET(networkIdfolderId, callback);
+integrationalfrescocloudApi.getContentInFolderUsingGET(networkIdfolderId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -250,15 +204,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getContentInSiteUsingGET"></a>
 # **getContentInSiteUsingGET**
 > ResultListDataRepresentationAlfrescoContentRepresentation getContentInSiteUsingGET(networkIdsiteId)
@@ -267,25 +212,23 @@ List files and folders inside a specific site
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .IntegrationalfrescocloudApi();
+let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getContentInSiteUsingGET(networkIdsiteId, callback);
+integrationalfrescocloudApi.getContentInSiteUsingGET(networkIdsiteId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -298,13 +241,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

@@ -23,6 +23,6 @@ export class FormSaveRepresentation {
     formImageBase64?: string;
     formRepresentation?: FormRepresentation;
     newVersion?: boolean;
-    processScopeIdentifiers?: any;
+    processScopeIdentifiers?: Array<ProcessScopeIdentifierRepresentation>;
     reusable?: boolean;
 }

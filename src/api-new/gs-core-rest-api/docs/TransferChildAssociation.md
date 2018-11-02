@@ -16,9 +16,9 @@ The character . must not be used at the end of the name.
 **modifiedByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
 **createdAt** | **Date** |  | [default to null]
 **createdByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
-**aspectNames** | **any** |  | [optional] [default to null]
+**aspectNames** | **Array<string>** |  | [optional] [default to null]
 **properties** | **any** |  | [optional] [default to null]
-**allowableOperations** | **any** |  | [optional] [default to null]
+**allowableOperations** | **Array<string>** |  | [optional] [default to null]
 **path** | [**PathInfo**](PathInfo.md) |  | [optional] [default to null]
 **association** | [**ChildAssociationInfo**](ChildAssociationInfo.md) |  | [optional] [default to null]
 

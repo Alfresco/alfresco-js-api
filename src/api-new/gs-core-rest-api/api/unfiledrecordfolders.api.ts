@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
+import { ModelError } from '../model/modelError';
 import { RMNodeBodyCreateWithRelativePath } from '../model/rMNodeBodyCreateWithRelativePath';
 import { UnfiledRecordFolderAssociationPaging } from '../model/unfiledRecordFolderAssociationPaging';
 import { UnfiledRecordFolderBodyUpdate } from '../model/unfiledRecordFolderBodyUpdate';
@@ -29,7 +29,7 @@ import { BaseApi } from './base.api';
 export class UnfiledrecordfoldersApi extends BaseApi {
     /**
     * Create a record or an unfiled record folder
-    *
+    * 
     * Create a record or an unfiled record folder as a primary child of **unfiledRecordFolderId**.
 
 You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then
@@ -128,7 +128,7 @@ JSON
   }
 }
 
-    *
+    * 
     * @param  unfiledRecordFolderId The identifier of an unfiled record folder.
     * @param  nodeBodyCreate The node information to create.
     * @param Object opts Optional parameters
@@ -190,10 +190,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
-        *
+        * 
         * Deletes the unfiled record folder **unfiledRecordFolderId**.
-
-        *
+    
+        * 
         * @param  unfiledRecordFolderId The identifier of an unfiled record folder.
         * @return Promise<{}>
         */
@@ -228,34 +228,34 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Get the unfiled record folder
-        *
+        * 
         * Gets information for unfiled record folder id **unfiledRecordFolderId**
-
+    
     Mandatory fields and the unfiled record folder's aspects and properties are returned by default.
-
+    
     You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-        *
+    
+        * 
         * @param  unfiledRecordFolderId The identifier of an unfiled record folder.
         * @param Object opts Optional parameters
         * @param  opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
-
+    
         * @param  opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
-
+    
         * @param  opts.fields A list of field names.
-
+    
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-
+    
     The list applies to a returned individual
     entity or entries within a collection.
-
+    
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-
+    
         * @return Promise<UnfiledRecordFolderEntry>
         */
     getUnfiledRecordFolder(unfiledRecordFolderId: string, opts: any): Promise<UnfiledRecordFolderEntry> {
@@ -292,48 +292,48 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List unfiled record folder's children
-        *
+        * 
         * Returns a list of records or unfiled record folders.
-
+    
     Minimal information for each child is returned by default.
-
+    
     You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-        *
+    
+        * 
         * @param  unfiledRecordFolderId The identifier of an unfiled record folder.
         * @param Object opts Optional parameters
         * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
         * @param  opts.maxItems The maximum number of items to return in the list.
         * @param  opts.where Optionally filter the list. Here are some examples:
-
+    
     *   where&#x3D;(isRecord&#x3D;true)
-
+    
     *   where&#x3D;(isUnfiledRecordFolder&#x3D;false)
-
+    
     *   where&#x3D;(nodeType&#x3D;&#39;cm:content INCLUDESUBTYPES&#39;)
-
+    
         * @param  opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * aspectNames
     * association
     * path
     * properties
-
+    
         * @param  opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
-
+    
         * @param  opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
         * @param  opts.fields A list of field names.
-
+    
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-
+    
     The list applies to a returned individual
     entity or entries within a collection.
-
+    
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-
+    
         * @return Promise<UnfiledRecordFolderAssociationPaging>
         */
     listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts: any): Promise<UnfiledRecordFolderAssociationPaging> {
@@ -374,13 +374,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Update an unfiled record folder
-        *
+        * 
         * Updates unfiled record folder **unfiledRecordFolderId**. For example, you can rename a record folder:
     JSON
     {
       \"name\":\"My new name\"
     }
-
+    
     You can also set or update one or more properties:
     JSON
     {
@@ -390,32 +390,32 @@ parameter are returned in addition to those specified in the **fields** paramete
            \"cm:description\":\"New description\"
         }
     }
-
+    
     **Note:** if you want to add or remove aspects, then you must use **GET /unfiled-record-folders/{unfiledRecordFolderId}** first to get the complete set of *aspectNames*.
-
+    
     **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
-
-        *
+    
+        * 
         * @param  unfiledRecordFolderId The identifier of an unfiled record folder.
         * @param  unfiledRecordFolderBodyUpdate The record folder information to update.
         * @param Object opts Optional parameters
         * @param  opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
-
+    
         * @param  opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
         * @param  opts.fields A list of field names.
-
+    
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-
+    
     The list applies to a returned individual
     entity or entries within a collection.
-
+    
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-
+    
         * @return Promise<UnfiledRecordFolderEntry>
         */
     updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts: any): Promise<UnfiledRecordFolderEntry> {

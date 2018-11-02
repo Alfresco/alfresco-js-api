@@ -18,25 +18,23 @@ Get global date format
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SystempropertiesApi from 'SystempropertiesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SystempropertiesApi();
+let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getGlobalDateFormatUsingGET(tenantId, callback);
+systempropertiesApi.getGlobalDateFormatUsingGET(tenantId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -49,15 +47,6 @@ Name | Type | Description  | Notes
 
 [**GlobalDateFormatRepresentation**](GlobalDateFormatRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getPasswordValidationConstraintsUsingGET"></a>
 # **getPasswordValidationConstraintsUsingGET**
 > PasswordValidationConstraints getPasswordValidationConstraintsUsingGET(tenantId)
@@ -66,25 +55,23 @@ Get password validation constraints
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SystempropertiesApi from 'SystempropertiesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SystempropertiesApi();
+let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getPasswordValidationConstraintsUsingGET(tenantId, callback);
+systempropertiesApi.getPasswordValidationConstraintsUsingGET(tenantId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -97,15 +84,6 @@ Name | Type | Description  | Notes
 
 [**PasswordValidationConstraints**](PasswordValidationConstraints.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getPropertiesUsingGET"></a>
 # **getPropertiesUsingGET**
 > SystemPropertiesRepresentation getPropertiesUsingGET()
@@ -116,24 +94,22 @@ Typical value is AllowInvolveByEmail
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SystempropertiesApi from 'SystempropertiesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SystempropertiesApi();
+let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getPropertiesUsingGET(callback);
+systempropertiesApi.getPropertiesUsingGET().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -143,15 +119,6 @@ This endpoint does not need any parameter.
 
 [**SystemPropertiesRepresentation**](SystemPropertiesRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="involvedUsersCanEditFormsUsingGET"></a>
 # **involvedUsersCanEditFormsUsingGET**
 > boolean involvedUsersCanEditFormsUsingGET(tenantId)
@@ -160,25 +127,23 @@ Get involved users who can edit forms
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SystempropertiesApi from 'SystempropertiesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SystempropertiesApi();
+let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.involvedUsersCanEditFormsUsingGET(tenantId, callback);
+systempropertiesApi.involvedUsersCanEditFormsUsingGET(tenantId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -190,13 +155,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 **boolean**
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

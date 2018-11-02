@@ -65,9 +65,9 @@ export class EndpointsApi extends BaseApi {
         * 
         * 
         * 
-        * @return Promise<any>
+        * @return Promise<Array<EndpointConfigurationRepresentation>>
         */
-    getEndpointConfigurationsUsingGET(): Promise<any> {
+    getEndpointConfigurationsUsingGET(): Promise<Array<EndpointConfigurationRepresentation>> {
 
         let postBody = null;
 

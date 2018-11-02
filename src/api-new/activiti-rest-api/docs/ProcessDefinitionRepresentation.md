@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **hasStartForm** | **boolean** |  | [optional] [default to null]
 **id** | **string** |  | [optional] [default to null]
 **key** | **string** |  | [optional] [default to null]
-**metaDataValues** | [**any**](ProcessDefinitionMetaDataRepresentation.md) |  | [optional] [default to null]
+**metaDataValues** | [**Array<ProcessDefinitionMetaDataRepresentation>**](ProcessDefinitionMetaDataRepresentation.md) |  | [optional] [default to null]
 **name** | **string** |  | [optional] [default to null]
 **tenantId** | **string** |  | [optional] [default to null]
 **version** | **number** |  | [optional] [default to null]

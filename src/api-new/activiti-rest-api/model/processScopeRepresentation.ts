@@ -17,25 +17,25 @@
 
 import { EntityVariableScopeRepresentation } from './entityVariableScopeRepresentation';
 import { FormScopeRepresentation } from './formScopeRepresentation';
-
+import { Map } from './map';
 import { VariableMappingRepresentation } from './variableMappingRepresentation';
 import { VariableScopeRepresentation } from './variableScopeRepresentation';
 
 export class ProcessScopeRepresentation {
-    activityIds?: any;
-    activityIdsByCollapsedSubProcessIdMap?: { [key: string]: any; };
-    activityIdsByDecisionTableIdMap?: { [key: string]: any; };
-    activityIdsByFormIdMap?: { [key: string]: any; };
-    activityIdsWithExcludedSubProcess?: any;
+    activityIds?: Array<string>;
+    activityIdsByCollapsedSubProcessIdMap?: { [key: string]: Array<string>; };
+    activityIdsByDecisionTableIdMap?: { [key: string]: Array<string>; };
+    activityIdsByFormIdMap?: { [key: string]: Array<string>; };
+    activityIdsWithExcludedSubProcess?: Array<string>;
     activitySidsByActivityIdMap?: { [key: string]: string; };
-    customStencilVariables?: { [key: string]: any; };
-    entityVariables?: { [key: string]: any; };
-    executionVariables?: { [key: string]: any; };
-    fieldToVariableMappings?: { [key: string]: any; };
-    forms?: { [key: string]: any; };
-    metadataVariables?: { [key: string]: any; };
+    customStencilVariables?: { [key: string]: Array<VariableScopeRepresentation>; };
+    entityVariables?: { [key: string]: Array<EntityVariableScopeRepresentation>; };
+    executionVariables?: { [key: string]: Array<VariableScopeRepresentation>; };
+    fieldToVariableMappings?: { [key: string]: Array<VariableScopeRepresentation>; };
+    forms?: { [key: string]: Array<FormScopeRepresentation>; };
+    metadataVariables?: { [key: string]: Array<VariableScopeRepresentation>; };
     modelId?: number;
     processModelType?: number;
-    responseVariables?: { [key: string]: any; };
-    reusableFieldMapping?: { [key: string]: any; };
+    responseVariables?: { [key: string]: Array<VariableScopeRepresentation>; };
+    reusableFieldMapping?: { [key: string]: Array<VariableMappingRepresentation>; };
 }

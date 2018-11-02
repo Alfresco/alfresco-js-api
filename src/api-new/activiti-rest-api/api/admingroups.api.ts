@@ -439,9 +439,9 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * @param  groupId groupId
-        * @return Promise<any>
+        * @return Promise<Array<string>>
         */
-    getCapabilitiesUsingGET(groupId: number): Promise<any> {
+    getCapabilitiesUsingGET(groupId: number): Promise<Array<string>> {
 
         let postBody = null;
 
@@ -565,9 +565,9 @@ export class AdmingroupsApi extends BaseApi {
         * @param  opts.tenantId tenantId
         * @param  opts.functional functional
         * @param  opts.summary summary
-        * @return Promise<any>
+        * @return Promise<Array<LightGroupRepresentation>>
         */
-    getGroupsUsingGET1(opts: any): Promise<any> {
+    getGroupsUsingGET1(opts: any): Promise<Array<LightGroupRepresentation>> {
         opts = opts || {};
         let postBody = null;
 
@@ -601,9 +601,9 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * @param  groupId groupId
-        * @return Promise<any>
+        * @return Promise<Array<LightGroupRepresentation>>
         */
-    getRelatedGroupsUsingGET(groupId: number): Promise<any> {
+    getRelatedGroupsUsingGET(groupId: number): Promise<Array<LightGroupRepresentation>> {
 
         let postBody = null;
 

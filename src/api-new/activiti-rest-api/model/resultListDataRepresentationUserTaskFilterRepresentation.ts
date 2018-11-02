@@ -18,7 +18,7 @@
 import { UserTaskFilterRepresentation } from './userTaskFilterRepresentation';
 
 export class ResultListDataRepresentationUserTaskFilterRepresentation {
-    data?: any;
+    data?: Array<UserTaskFilterRepresentation>;
     size?: number;
     start?: number;
     total?: number;

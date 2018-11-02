@@ -20,5 +20,5 @@ import { Pagination } from './pagination';
 
 export class FavoritePagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<FavoriteEntry>;
 }

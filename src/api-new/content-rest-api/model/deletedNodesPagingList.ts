@@ -20,5 +20,5 @@ import { Pagination } from './pagination';
 
 export class DeletedNodesPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<DeletedNodeEntry>;
 }

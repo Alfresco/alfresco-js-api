@@ -26,6 +26,6 @@ export class EndpointConfigurationRepresentation {
     path?: string;
     port?: string;
     protocol?: string;
-    requestHeaders?: any;
+    requestHeaders?: Array<EndpointRequestHeaderRepresentation>;
     tenantId?: number;
 }

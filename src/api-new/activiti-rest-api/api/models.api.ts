@@ -190,9 +190,9 @@ export class ModelsApi extends BaseApi {
         * 
         * 
         * @param  modelId modelId
-        * @return Promise<any>
+        * @return Promise<Array<string>>
         */
-    getModelThumbnailUsingGET(modelId: number): Promise<any> {
+    getModelThumbnailUsingGET(modelId: number): Promise<Array<string>> {
 
         let postBody = null;
 
@@ -507,9 +507,9 @@ export class ModelsApi extends BaseApi {
         * @param  modelId modelId
         * @param Object opts Optional parameters
         * @param  opts.values values
-        * @return Promise<any>
+        * @return Promise<Array<ValidationErrorRepresentation>>
         */
-    validateModelUsingPOST(modelId: number, opts: any): Promise<any> {
+    validateModelUsingPOST(modelId: number, opts: any): Promise<Array<ValidationErrorRepresentation>> {
         opts = opts || {};
         let postBody = opts['values'];
 

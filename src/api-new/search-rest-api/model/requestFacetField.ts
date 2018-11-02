@@ -49,7 +49,7 @@ export class RequestFacetField {
 This is used for multi-select facetting.
 
      */
-    excludeFilters?: any;
+    excludeFilters?: Array<string>;
 }
 export namespace RequestFacetField {
     export type SortEnum = 'COUNT' | 'INDEX';

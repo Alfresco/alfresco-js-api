@@ -15,28 +15,26 @@ Get data sources
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import DatasourcesApi from 'DatasourcesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .DatasourcesApi();
+let datasourcesApi = new DatasourcesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'tenantId': 789 // number | tenantId
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getDataSourcesUsingGET(opts, callback);
+datasourcesApi.getDataSourcesUsingGET(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -48,13 +46,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResultListDataRepresentationDataSourceRepresentation**](ResultListDataRepresentationDataSourceRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

@@ -18,30 +18,28 @@ List submissions for a form
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SubmittedformsApi from 'SubmittedformsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SubmittedformsApi();
+let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'submittedBy': 789 // number | submittedBy
   'start': 56 // number | start
   'size': 56 // number | size
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFormSubmittedFromsUsingGET(formIdopts, callback);
+submittedformsApi.getFormSubmittedFromsUsingGET(formIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -57,15 +55,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationSubmittedFormRepresentation**](ResultListDataRepresentationSubmittedFormRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getProcessSubmittedFromsUsingGET"></a>
 # **getProcessSubmittedFromsUsingGET**
 > ResultListDataRepresentationSubmittedFormRepresentation getProcessSubmittedFromsUsingGET(processId)
@@ -74,25 +63,23 @@ List submissions for a process instance
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SubmittedformsApi from 'SubmittedformsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SubmittedformsApi();
+let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getProcessSubmittedFromsUsingGET(processId, callback);
+submittedformsApi.getProcessSubmittedFromsUsingGET(processId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -105,15 +92,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationSubmittedFormRepresentation**](ResultListDataRepresentationSubmittedFormRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getSubmittedFromUsingGET"></a>
 # **getSubmittedFromUsingGET**
 > SubmittedFormRepresentation getSubmittedFromUsingGET(submittedFormId)
@@ -122,25 +100,23 @@ Get a form submission
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SubmittedformsApi from 'SubmittedformsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SubmittedformsApi();
+let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getSubmittedFromUsingGET(submittedFormId, callback);
+submittedformsApi.getSubmittedFromUsingGET(submittedFormId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -153,15 +129,6 @@ Name | Type | Description  | Notes
 
 [**SubmittedFormRepresentation**](SubmittedFormRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getTaskSubmittedFromsUsingGET"></a>
 # **getTaskSubmittedFromsUsingGET**
 > SubmittedFormRepresentation getTaskSubmittedFromsUsingGET(taskId)
@@ -170,25 +137,23 @@ Get the submitted form for a task
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import SubmittedformsApi from 'SubmittedformsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .SubmittedformsApi();
+let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getTaskSubmittedFromsUsingGET(taskId, callback);
+submittedformsApi.getTaskSubmittedFromsUsingGET(taskId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -200,13 +165,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SubmittedFormRepresentation**](SubmittedFormRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

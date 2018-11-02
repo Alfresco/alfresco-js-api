@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 The character . must not be used at the end of the name.
  | [default to null]
 **nodeType** | **string** |  | [default to null]
-**aspectNames** | **any** |  | [optional] [default to null]
+**aspectNames** | **Array<string>** |  | [optional] [default to null]
 **properties** | **{ [key: string]: string; }** |  | [optional] [default to null]
 
 

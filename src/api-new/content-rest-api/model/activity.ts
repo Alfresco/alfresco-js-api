@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-
+import { Map } from './map';
 
 /**
  * Activities describe any past activity in a site,

@@ -41,7 +41,7 @@ The character . must not be used at the end of the name.
      * Present only for transfer nodes.
      */
     transferAccessionIndicator?: boolean;
-    aspectNames?: any;
+    aspectNames?: Array<string>;
     properties?: any;
-    allowableOperations?: any;
+    allowableOperations?: Array<string>;
 }

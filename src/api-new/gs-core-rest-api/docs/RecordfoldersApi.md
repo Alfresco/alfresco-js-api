@@ -108,24 +108,24 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RecordfoldersApi from 'RecordfoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RecordfoldersApi();
+let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -139,14 +139,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRecordFolderChild(recordFolderIdrecordBodyCreateopts, callback);
+recordfoldersApi.createRecordFolderChild(recordFolderIdrecordBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -158,13 +156,13 @@ Name | Type | Description  | Notes
 
 This field is ignored for multipart/form-data content uploads.
  | 
- **include** | [**any**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -181,15 +179,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**RecordEntry**](RecordEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, multipart/form-data
- - **Accept**: application/json
-
 <a name="deleteRecordFolder"></a>
 # **deleteRecordFolder**
 > deleteRecordFolder(recordFolderId)
@@ -201,25 +190,23 @@ Deletes record folder **recordFolderId**. Deleted file plan components cannot be
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RecordfoldersApi from 'RecordfoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RecordfoldersApi();
+let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteRecordFolder(recordFolderId, callback);
+recordfoldersApi.deleteRecordFolder(recordFolderId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -231,15 +218,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getRecordFolder"></a>
 # **getRecordFolder**
@@ -256,23 +234,23 @@ You can use the **include** parameter (include&#x3D;allowableOperations) to retu
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RecordfoldersApi from 'RecordfoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RecordfoldersApi();
+let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * isClosed
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -286,14 +264,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRecordFolder(recordFolderIdopts, callback);
+recordfoldersApi.getRecordFolder(recordFolderIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -301,12 +277,12 @@ apiInstance.getRecordFolder(recordFolderIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordFolderId** | **string**| The identifier of a record folder. | 
- **include** | [**any**](string.md)| Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * isClosed
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -322,15 +298,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**RecordFolderEntry**](RecordFolderEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listRecordFolderChildren"></a>
 # **listRecordFolderChildren**
@@ -349,17 +316,17 @@ You can use the **include** parameter (include&#x3D;allowableOperations) to retu
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RecordfoldersApi from 'RecordfoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RecordfoldersApi();
+let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // number | The maximum number of items to return in the list.
   'where': where_example // string | Optionally filter the list. Here are some examples:
@@ -370,7 +337,7 @@ var opts = {
 
 *   where=(isPrimary=true)
 
-  'include':  // any | Returns additional information about the records. Any optional field from the response model can be requested. For example:
+  'include':  // Array<string> | Returns additional information about the records. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
@@ -380,7 +347,7 @@ var opts = {
 * properties
 
   'includeSource': true // boolean | Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId**
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -394,14 +361,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listRecordFolderChildren(recordFolderIdopts, callback);
+recordfoldersApi.listRecordFolderChildren(recordFolderIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -419,7 +384,7 @@ Name | Type | Description  | Notes
 
 *   where&#x3D;(isPrimary&#x3D;true)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the records. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the records. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
@@ -429,7 +394,7 @@ Name | Type | Description  | Notes
 * properties
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId** | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -445,15 +410,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**RecordFolderAssociationPaging**](RecordFolderAssociationPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateRecordFolder"></a>
 # **updateRecordFolder**
@@ -484,23 +440,23 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RecordfoldersApi from 'RecordfoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RecordfoldersApi();
+let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * isClosed
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -514,14 +470,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateRecordFolder(recordFolderIdrecordFolderBodyUpdateopts, callback);
+recordfoldersApi.updateRecordFolder(recordFolderIdrecordFolderBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -530,12 +484,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordFolderId** | **string**| The identifier of a record folder. | 
  **recordFolderBodyUpdate** | [**FilePlanComponentBodyUpdate**](FilePlanComponentBodyUpdate.md)| The record folder information to update. | 
- **include** | [**any**](string.md)| Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * isClosed
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -551,13 +505,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**RecordFolderEntry**](RecordFolderEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

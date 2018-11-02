@@ -71,7 +71,7 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
     @Override
     public void preprocessSwagger(Swagger swagger) {
         super.preprocessSwagger(swagger);
-        supportingFiles.add(new SupportingFile("readmeIndex.mustache", "",  "README.md"));
+        supportingFiles.add(new SupportingFile("readmeIndex.mustache", "", "README.md"));
     }
 
     @Override
@@ -95,7 +95,7 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
             new SupportingFile("models.mustache", modelPackage().replace('.', File.separatorChar), "models.ts"));
         supportingFiles
             .add(new SupportingFile("apis.mustache", apiPackage().replace('.', File.separatorChar), "api.ts"));
-        supportingFiles.add(new SupportingFile("base.api.mustache",  apiPackage().replace('.', File.separatorChar), "base.api.ts"));
+        supportingFiles.add(new SupportingFile("base.api.mustache", apiPackage().replace('.', File.separatorChar), "base.api.ts"));
         supportingFiles.add(new SupportingFile("index.mustache", getIndexDirectory(), "index.ts"));
 
         if (additionalProperties.containsKey(TAGGED_UNIONS)) {
@@ -116,14 +116,9 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
 
     @Override
     public String getTypeDeclaration(Property p) {
-
         if (p instanceof FileProperty) {
             return "Blob";
         } else if (p instanceof ObjectProperty) {
-            return "any";
-        } else if (p instanceof ArrayProperty) {
-            ArrayProperty ap = (ArrayProperty) p;
-            Property inner = ap.getItems();
             return "any";
         } else {
             return super.getTypeDeclaration(p);
@@ -189,6 +184,11 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
     public Map<String, Object> postProcessOperations(Map<String, Object> operations) {
         Map<String, Object> objs = (Map<String, Object>) operations.get("operations");
 
+
+        String nameClass = objs.get("classname").toString();
+        String instanceClassname = Character.toLowerCase(nameClass.charAt(0)) + nameClass.substring(1);
+        objs.put("instanceClassname", instanceClassname);
+
         // Add filename information for api imports
         objs.put("apiFilename", getApiFilenameFromClassname(objs.get("classname").toString()));
 
@@ -202,12 +202,12 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
 
         if (objs != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) objs.get("operation");
-            for (CodegenOperation operation : ops) {
+            for ( CodegenOperation operation : ops ) {
                 List<String> argList = new ArrayList<String>();
                 boolean hasOptionalParams = false;
-                for (CodegenParameter p : operation.allParams) {
+                for ( CodegenParameter p : operation.allParams ) {
                     if (p.required) {
-                        argList.add(p.paramName + ": "+ p.dataType);
+                        argList.add(p.paramName + ": " + p.dataType);
                     } else {
                         hasOptionalParams = true;
                     }
@@ -314,14 +314,14 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
 
     private String createPath(String... segments) {
         StringBuilder buf = new StringBuilder();
-        for (String segment : segments) {
+        for ( String segment : segments ) {
             if (!StringUtils.isEmpty(segment) && !segment.equals(".")) {
                 if (buf.length() != 0)
                     buf.append(File.separatorChar);
                 buf.append(segment);
             }
         }
-        for (int i = 0; i < buf.length(); i++) {
+        for ( int i = 0; i < buf.length(); i++ ) {
             char c = buf.charAt(i);
             if ((c == '/' || c == '\\') && c != File.separatorChar)
                 buf.setCharAt(i, File.separatorChar);

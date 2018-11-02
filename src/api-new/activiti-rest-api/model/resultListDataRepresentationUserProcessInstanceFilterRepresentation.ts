@@ -18,7 +18,7 @@
 import { UserProcessInstanceFilterRepresentation } from './userProcessInstanceFilterRepresentation';
 
 export class ResultListDataRepresentationUserProcessInstanceFilterRepresentation {
-    data?: any;
+    data?: Array<UserProcessInstanceFilterRepresentation>;
     size?: number;
     start?: number;
     total?: number;

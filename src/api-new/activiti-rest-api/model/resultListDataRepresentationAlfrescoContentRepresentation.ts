@@ -18,7 +18,7 @@
 import { AlfrescoContentRepresentation } from './alfrescoContentRepresentation';
 
 export class ResultListDataRepresentationAlfrescoContentRepresentation {
-    data?: any;
+    data?: Array<AlfrescoContentRepresentation>;
     size?: number;
     start?: number;
     total?: number;

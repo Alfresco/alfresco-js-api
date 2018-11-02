@@ -19,25 +19,23 @@ Deploying an app allows the user to see it on his/her landing page. Apps must be
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RuntimeappdefinitionsApi from 'RuntimeappdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RuntimeappdefinitionsApi();
+let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deployAppDefinitionsUsingPOST(saveObject, callback);
+runtimeappdefinitionsApi.deployAppDefinitionsUsingPOST(saveObject).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -50,15 +48,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getAppDefinitionUsingGET1"></a>
 # **getAppDefinitionUsingGET1**
 > AppDefinitionRepresentation getAppDefinitionUsingGET1(appDefinitionId)
@@ -67,25 +56,23 @@ Get a runtime app
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RuntimeappdefinitionsApi from 'RuntimeappdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RuntimeappdefinitionsApi();
+let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAppDefinitionUsingGET1(appDefinitionId, callback);
+runtimeappdefinitionsApi.getAppDefinitionUsingGET1(appDefinitionId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -98,15 +85,6 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionRepresentation**](AppDefinitionRepresentation.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getAppDefinitionsUsingGET"></a>
 # **getAppDefinitionsUsingGET**
 > ResultListDataRepresentationAppDefinitionRepresentation getAppDefinitionsUsingGET()
@@ -117,24 +95,22 @@ When a user logs in into Alfresco Process Services Suite, a landing page is disp
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RuntimeappdefinitionsApi from 'RuntimeappdefinitionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RuntimeappdefinitionsApi();
+let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getAppDefinitionsUsingGET(callback);
+runtimeappdefinitionsApi.getAppDefinitionsUsingGET().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -143,13 +119,4 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**ResultListDataRepresentationAppDefinitionRepresentation**](ResultListDataRepresentationAppDefinitionRepresentation.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

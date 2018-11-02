@@ -171,9 +171,9 @@ export class ProcessdefinitionsApi extends BaseApi {
         * 
         * @param  processDefinitionId processDefinitionId
         * @param  family Identity type
-        * @return Promise<any>
+        * @return Promise<Array<IdentityLinkRepresentation>>
         */
-    getIdentityLinksForFamilyUsingGET(processDefinitionId: string, family: string): Promise<any> {
+    getIdentityLinksForFamilyUsingGET(processDefinitionId: string, family: string): Promise<Array<IdentityLinkRepresentation>> {
 
         let postBody = null;
 
@@ -212,9 +212,9 @@ export class ProcessdefinitionsApi extends BaseApi {
         * 
         * 
         * @param  processDefinitionId processDefinitionId
-        * @return Promise<any>
+        * @return Promise<Array<IdentityLinkRepresentation>>
         */
-    getIdentityLinksUsingGET(processDefinitionId: string): Promise<any> {
+    getIdentityLinksUsingGET(processDefinitionId: string): Promise<Array<IdentityLinkRepresentation>> {
 
         let postBody = null;
 
@@ -393,9 +393,9 @@ export class ProcessdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @return Promise<any>
+        * @return Promise<Array<FormValueRepresentation>>
         */
-    getRestFieldValuesUsingGET(): Promise<any> {
+    getRestFieldValuesUsingGET(): Promise<Array<FormValueRepresentation>> {
 
         let postBody = null;
 
@@ -425,9 +425,9 @@ export class ProcessdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @return Promise<any>
+        * @return Promise<Array<FormValueRepresentation>>
         */
-    getRestTableFieldValuesUsingGET(): Promise<any> {
+    getRestTableFieldValuesUsingGET(): Promise<Array<FormValueRepresentation>> {
 
         let postBody = null;
 

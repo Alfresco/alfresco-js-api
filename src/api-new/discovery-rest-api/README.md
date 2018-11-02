@@ -3,7 +3,7 @@
 Provides access to information about Alfresco Content Services.
 
 
-- Last Build date: 2018-11-01T14:49:08.971Z
+- Last Build date: 2018-11-02T12:15:24.567Z
 
 
 ## Documentation for API Endpoints

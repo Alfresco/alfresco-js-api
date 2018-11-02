@@ -18,7 +18,7 @@
 import { RuntimeFormRepresentation } from './runtimeFormRepresentation';
 
 export class ResultListDataRepresentationRuntimeFormRepresentation {
-    data?: any;
+    data?: Array<RuntimeFormRepresentation>;
     size?: number;
     start?: number;
     total?: number;

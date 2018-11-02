@@ -20,5 +20,5 @@ import { PersonEntry } from './personEntry';
 
 export class PersonPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<PersonEntry>;
 }

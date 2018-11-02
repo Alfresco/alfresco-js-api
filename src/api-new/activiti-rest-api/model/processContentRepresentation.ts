@@ -19,6 +19,6 @@ import { NamedObject } from './namedObject';
 import { RelatedContentRepresentation } from './relatedContentRepresentation';
 
 export class ProcessContentRepresentation {
-    content?: any;
+    content?: Array<RelatedContentRepresentation>;
     field?: NamedObject;
 }

@@ -37,10 +37,10 @@ export class GenericBucket {
     /**
      * An array of buckets and values
      */
-    metrics?: any;
+    metrics?: Array<GenericMetric>;
     /**
      * Additional list of nested facets
      */
-    facets?: any;
+    facets?: Array<any>;
     bucketInfo?: GenericBucketBucketInfo;
 }

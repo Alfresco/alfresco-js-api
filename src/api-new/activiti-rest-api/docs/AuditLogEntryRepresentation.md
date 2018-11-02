@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **activityType** | **string** |  | [optional] [default to null]
 **durationInMillis** | **number** |  | [optional] [default to null]
 **endTime** | **string** |  | [optional] [default to null]
-**formData** | [**any**](AuditLogFormDataRepresentation.md) |  | [optional] [default to null]
+**formData** | [**Array<AuditLogFormDataRepresentation>**](AuditLogFormDataRepresentation.md) |  | [optional] [default to null]
 **index** | **number** |  | [optional] [default to null]
 **selectedOutcome** | **string** |  | [optional] [default to null]
 **startTime** | **string** |  | [optional] [default to null]

@@ -20,9 +20,9 @@ import { CommentAuditInfo } from './commentAuditInfo';
 
 export class TaskAuditInfoRepresentation {
     assignee?: string;
-    comments?: any;
+    comments?: Array<CommentAuditInfo>;
     endTime?: string;
-    formData?: any;
+    formData?: Array<AuditLogFormDataRepresentation>;
     processDefinitionName?: string;
     processDefinitionVersion?: number;
     processInstanceId?: string;

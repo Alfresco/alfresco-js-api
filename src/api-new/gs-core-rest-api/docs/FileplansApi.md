@@ -77,25 +77,25 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FileplansApi from 'FileplansApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FileplansApi();
+let fileplansApi = new FileplansApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'autoRename': true // boolean | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
 
-  'include':  // any | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+  'include':  // Array<string> | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -109,14 +109,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createFilePlanCategories(filePlanIdnodeBodyCreateopts, callback);
+fileplansApi.createFilePlanCategories(filePlanIdnodeBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -127,12 +125,12 @@ Name | Type | Description  | Notes
  **nodeBodyCreate** | [**RootCategoryBodyCreate**](RootCategoryBodyCreate.md)| The node information to create. | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -149,15 +147,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**RecordCategoryEntry**](RecordCategoryEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, multipart/form-data
- - **Accept**: application/json
-
 <a name="getFilePlan"></a>
 # **getFilePlan**
 > FilePlanEntry getFilePlan(filePlanIdopts)
@@ -173,22 +162,22 @@ You can use the **include** parameter (include&#x3D;allowableOperations) to retu
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FileplansApi from 'FileplansApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FileplansApi();
+let fileplansApi = new FileplansApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -202,14 +191,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFilePlan(filePlanIdopts, callback);
+fileplansApi.getFilePlan(filePlanIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -217,11 +204,11 @@ apiInstance.getFilePlan(filePlanIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **filePlanId** | **string**| The identifier of a file plan. You can also use the -filePlan- alias. | 
- **include** | [**any**](string.md)| Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -238,15 +225,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**FilePlanEntry**](FilePlanEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getFilePlanCategories"></a>
 # **getFilePlanCategories**
 > RecordCategoryPaging getFilePlanCategories(filePlanIdopts)
@@ -262,20 +240,20 @@ You can use the **include** parameter (include&#x3D;allowableOperations) to retu
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FileplansApi from 'FileplansApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FileplansApi();
+let fileplansApi = new FileplansApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // number | The maximum number of items to return in the list.
-  'include':  // any | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+  'include':  // Array<string> | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * hasRetentionSchedule
@@ -283,7 +261,7 @@ var opts = {
 * properties
 
   'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId**
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -297,14 +275,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getFilePlanCategories(filePlanIdopts, callback);
+fileplansApi.getFilePlanCategories(filePlanIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -314,7 +290,7 @@ Name | Type | Description  | Notes
  **filePlanId** | **string**| The identifier of a file plan. You can also use the -filePlan- alias. | 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * hasRetentionSchedule
@@ -322,7 +298,7 @@ Name | Type | Description  | Notes
 * properties
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId** | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -338,15 +314,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**RecordCategoryPaging**](RecordCategoryPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateFilePlan"></a>
 # **updateFilePlan**
@@ -371,22 +338,22 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import FileplansApi from 'FileplansApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .FileplansApi();
+let fileplansApi = new FileplansApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -400,14 +367,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateFilePlan(filePlanIdfilePlanBodyUpdateopts, callback);
+fileplansApi.updateFilePlan(filePlanIdfilePlanBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -416,11 +381,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **filePlanId** | **string**| The identifier of a file plan. You can also use the -filePlan- alias. | 
  **filePlanBodyUpdate** | [**FilePlanBodyUpdate**](FilePlanBodyUpdate.md)| The file plan information to update. | 
- **include** | [**any**](string.md)| Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -436,13 +401,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**FilePlanEntry**](FilePlanEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

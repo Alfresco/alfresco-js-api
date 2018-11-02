@@ -52,11 +52,11 @@ export class SearchRequest {
     facetQueries?: RequestFacetQueries;
     facetFields?: RequestFacetFields;
     facetIntervals?: RequestFacetIntervals;
-    pivots?: any;
-    stats?: any;
+    pivots?: Array<RequestPivot>;
+    stats?: Array<RequestStats>;
     spellcheck?: RequestSpellcheck;
     scope?: RequestScope;
     limits?: RequestLimits;
     highlight?: RequestHighlight;
-    ranges?: any;
+    ranges?: Array<RequestRange>;
 }

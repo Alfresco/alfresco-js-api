@@ -20,5 +20,5 @@ import { SiteMembershipRequestEntry } from './siteMembershipRequestEntry';
 
 export class SiteMembershipRequestPagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<SiteMembershipRequestEntry>;
 }

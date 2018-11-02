@@ -20,5 +20,5 @@ import { SiteRoleEntry } from './siteRoleEntry';
 
 export class SiteRolePagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<SiteRoleEntry>;
 }

@@ -39,10 +39,10 @@ The character . must not be used at the end of the name.
 allowable operations pertaining to the linked content node.
 
      */
-    allowableOperations?: any;
+    allowableOperations?: Array<string>;
     /**
      * The allowable operations for the content node being shared.
 
      */
-    allowableOperationsOnTarget?: any;
+    allowableOperationsOnTarget?: Array<string>;
 }

@@ -18,7 +18,7 @@
 import { ClassificationReasonBody } from '../model/classificationReasonBody';
 import { ClassificationReasonEntry } from '../model/classificationReasonEntry';
 import { ClassificationReasonsPaging } from '../model/classificationReasonsPaging';
-import { ModelError } from '../../content-rest-api/model/modelError';
+import { ModelError } from '../model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -28,7 +28,7 @@ import { BaseApi } from './base.api';
 export class ClassificationreasonsApi extends BaseApi {
     /**
     * Create a classification reason
-    *
+    * 
     * Creates a new classification reason.
 
 **Note:** You can create more than one reason by specifying a list of reasons in the JSON body.
@@ -72,7 +72,7 @@ JSON
   }
 }
 
-    *
+    * 
     * @param  classificationReason Classification reason
     * @return Promise<ClassificationReasonEntry>
     */
@@ -107,9 +107,9 @@ JSON
     }
     /**
         * Delete a classification reason
-        *
+        * 
         * Deletes the classification reason  **classificationReasonId**. You can't delete a classification reason that is being used to classify content. There must be at least one classification reason.
-        *
+        * 
         * @param  classificationReasonId The identifier for the classification reason
         * @return Promise<{}>
         */
@@ -144,24 +144,24 @@ JSON
     }
     /**
         * List all classification reasons
-        *
+        * 
         * Gets all classification reasons.
-        *
+        * 
         * @param Object opts Optional parameters
         * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
         * @param  opts.maxItems The maximum number of items to return in the list.
         * @param  opts.fields A list of field names.
-
+    
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-
+    
     The list applies to a returned individual
     entity or entries within a collection.
-
+    
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-
+    
         * @return Promise<ClassificationReasonsPaging>
         */
     listClassificationReasons(opts: any): Promise<ClassificationReasonsPaging> {
@@ -194,9 +194,9 @@ JSON
     }
     /**
         * Get classification reason information
-        *
+        * 
         * Gets the classification reason  **classificationReasonId**.
-        *
+        * 
         * @param  classificationReasonId The identifier for the classification reason
         * @return Promise<ClassificationReasonEntry>
         */
@@ -231,9 +231,9 @@ JSON
     }
     /**
         * Update a classification reason
-        *
+        * 
         * Updates the classification reason with id **classificationReasonId**. For example, you can change a classification reason code or description.
-        *
+        * 
         * @param  classificationReasonId The identifier for the classification reason
         * @param  classificationReason Classification reason
         * @return Promise<ClassificationReasonEntry>

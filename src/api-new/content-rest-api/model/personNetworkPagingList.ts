@@ -20,5 +20,5 @@ import { PersonNetworkEntry } from './personNetworkEntry';
 
 export class PersonNetworkPagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<PersonNetworkEntry>;
 }

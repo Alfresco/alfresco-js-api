@@ -40,9 +40,9 @@ The character . must not be used at the end of the name.
     parentId?: string;
     isLink?: boolean;
     content?: ContentInfo;
-    aspectNames?: any;
+    aspectNames?: Array<string>;
     properties?: any;
-    allowableOperations?: any;
+    allowableOperations?: Array<string>;
     path?: PathInfo;
     search?: SearchEntry;
     archivedByUser?: UserInfo;

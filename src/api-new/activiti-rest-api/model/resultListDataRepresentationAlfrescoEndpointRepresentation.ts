@@ -18,7 +18,7 @@
 import { AlfrescoEndpointRepresentation } from './alfrescoEndpointRepresentation';
 
 export class ResultListDataRepresentationAlfrescoEndpointRepresentation {
-    data?: any;
+    data?: Array<AlfrescoEndpointRepresentation>;
     size?: number;
     start?: number;
     total?: number;

@@ -19,6 +19,6 @@ export class Group {
     id: string;
     displayName: string;
     isRoot: boolean;
-    parentIds?: any;
-    zones?: any;
+    parentIds?: Array<string>;
+    zones?: Array<string>;
 }

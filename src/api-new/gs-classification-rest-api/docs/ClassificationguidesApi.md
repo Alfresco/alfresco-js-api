@@ -29,28 +29,26 @@ Combines instructions from the given topics and the user defined instruction, if
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'instructions':  // CombinedInstructionBody | Instructions
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.combinedInstructions(opts, callback);
+classificationguidesApi.combinedInstructions(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -63,15 +61,6 @@ Name | Type | Description  | Notes
 
 [**InstructionEntry**](InstructionEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="createClassificationGuide"></a>
 # **createClassificationGuide**
 > ClassificationGuideEntry createClassificationGuide(classificationGuide)
@@ -82,25 +71,23 @@ Creates a new classification guide.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createClassificationGuide(classificationGuide, callback);
+classificationguidesApi.createClassificationGuide(classificationGuide).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -113,15 +100,6 @@ Name | Type | Description  | Notes
 
 [**ClassificationGuideEntry**](ClassificationGuideEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="createSubtopic"></a>
 # **createSubtopic**
 > TopicEntry createSubtopic(topicIdtopicopts)
@@ -132,18 +110,18 @@ Creates a new subtopic of a topic.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the topic. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -151,14 +129,12 @@ var opts = {
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createSubtopic(topicIdtopicopts, callback);
+classificationguidesApi.createSubtopic(topicIdtopicopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -167,7 +143,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **string**| The identifier for the topic | 
  **topic** | [**TopicBody**](TopicBody.md)| Subtopic | 
- **include** | [**any**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -177,15 +153,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TopicEntry**](TopicEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="createTopic"></a>
 # **createTopic**
@@ -197,18 +164,18 @@ Creates a new topic.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the topic. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -216,14 +183,12 @@ var opts = {
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createTopic(classificationGuideIdtopicopts, callback);
+classificationguidesApi.createTopic(classificationGuideIdtopicopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -232,7 +197,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **classificationGuideId** | **string**| The identifier for the classification guide | 
  **topic** | [**TopicBody**](TopicBody.md)| Topic | 
- **include** | [**any**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -242,15 +207,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TopicEntry**](TopicEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="deleteClassificationGuide"></a>
 # **deleteClassificationGuide**
@@ -262,25 +218,23 @@ Deletes the classification guide with id **classificationGuideId**, including an
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteClassificationGuide(classificationGuideId, callback);
+classificationguidesApi.deleteClassificationGuide(classificationGuideId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -293,15 +247,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteTopic"></a>
 # **deleteTopic**
 > deleteTopic(topicId)
@@ -312,25 +257,23 @@ Deletes the topic with id  **topicId**, including any subtopics and instructions
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteTopic(topicId, callback);
+classificationguidesApi.deleteTopic(topicId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -343,15 +286,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listClassificationGuides"></a>
 # **listClassificationGuides**
 > ClassificationGuidePaging listClassificationGuides(opts)
@@ -362,23 +296,23 @@ Gets all classification guides.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the guide. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the guide. The following optional fields can be requested:
 * hasTopics - A flag indicating whether the guide already contains any topics.
 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // number | The maximum number of items to return in the list.
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -391,26 +325,24 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listClassificationGuides(opts, callback);
+classificationguidesApi.listClassificationGuides(opts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **include** | [**any**](string.md)| Returns additional information about the guide. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the guide. The following optional fields can be requested:
 * hasTopics - A flag indicating whether the guide already contains any topics.
  | [optional] 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -426,15 +358,6 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
 [**ClassificationGuidePaging**](ClassificationGuidePaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listSubtopics"></a>
 # **listSubtopics**
 > SubtopicPaging listSubtopics(topicIdopts)
@@ -445,18 +368,18 @@ Gets all subtopics of a topic.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the topic. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -464,7 +387,7 @@ var opts = {
 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // number | The maximum number of items to return in the list.
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -479,14 +402,12 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
   'includeSource': true // boolean | Also include **source** in addition to **entries** with folder information on the parent guide/topic
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listSubtopics(topicIdopts, callback);
+classificationguidesApi.listSubtopics(topicIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -494,7 +415,7 @@ apiInstance.listSubtopics(topicIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **string**| The identifier for the topic | 
- **include** | [**any**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -502,7 +423,7 @@ Name | Type | Description  | Notes
  | [optional] 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -520,15 +441,6 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
 [**SubtopicPaging**](SubtopicPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="listTopics"></a>
 # **listTopics**
 > TopicPaging listTopics(classificationGuideIdopts)
@@ -539,18 +451,18 @@ Gets all topics.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the topic. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -558,7 +470,7 @@ var opts = {
 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // number | The maximum number of items to return in the list.
-  'orderBy':  // any | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -573,14 +485,12 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
   'includeSource': true // boolean | Also include **source** in addition to **entries** with folder information on the parent guide/topic
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listTopics(classificationGuideIdopts, callback);
+classificationguidesApi.listTopics(classificationGuideIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -588,7 +498,7 @@ apiInstance.listTopics(classificationGuideIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **classificationGuideId** | **string**| The identifier for the classification guide | 
- **include** | [**any**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -596,7 +506,7 @@ Name | Type | Description  | Notes
  | [optional] 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **orderBy** | [**any**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -614,15 +524,6 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
 [**TopicPaging**](TopicPaging.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="showClassificationGuideById"></a>
 # **showClassificationGuideById**
 > ClassificationGuideEntry showClassificationGuideById(classificationGuideId)
@@ -633,25 +534,23 @@ Gets the classification guide with id **classificationGuideId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.showClassificationGuideById(classificationGuideId, callback);
+classificationguidesApi.showClassificationGuideById(classificationGuideId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -664,15 +563,6 @@ Name | Type | Description  | Notes
 
 [**ClassificationGuideEntry**](ClassificationGuideEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="showTopicById"></a>
 # **showTopicById**
 > TopicEntry showTopicById(topicIdopts)
@@ -683,18 +573,18 @@ Gets the topic with id **topicId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the topic. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -702,14 +592,12 @@ var opts = {
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.showTopicById(topicIdopts, callback);
+classificationguidesApi.showTopicById(topicIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -717,7 +605,7 @@ apiInstance.showTopicById(topicIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **string**| The identifier for the topic | 
- **include** | [**any**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -727,15 +615,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TopicEntry**](TopicEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateClassificationGuide"></a>
 # **updateClassificationGuide**
@@ -747,25 +626,23 @@ Updates the classification guide with id **classificationGuideId**. For example,
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateClassificationGuide(classificationGuideIdclassificationGuide, callback);
+classificationguidesApi.updateClassificationGuide(classificationGuideIdclassificationGuide).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -778,15 +655,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ClassificationGuideEntry**](ClassificationGuideEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateTopic"></a>
 # **updateTopic**
@@ -801,18 +669,18 @@ Use this to rename a topic or to add, edit, or remove the instruction associated
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import ClassificationguidesApi from 'ClassificationguidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .ClassificationguidesApi();
+let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the topic. The following optional fields can be requested:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -820,14 +688,12 @@ var opts = {
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateTopic(topicIdtopicopts, callback);
+classificationguidesApi.updateTopic(topicIdtopicopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -836,7 +702,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **string**| The identifier for the topic | 
  **topic** | [**TopicBody**](TopicBody.md)| Topic | 
- **include** | [**any**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -846,13 +712,4 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TopicEntry**](TopicEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

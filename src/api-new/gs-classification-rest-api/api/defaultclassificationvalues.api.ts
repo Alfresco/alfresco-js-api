@@ -16,7 +16,7 @@
 */
 
 import { DeclassificationDate } from '../model/declassificationDate';
-import { ModelError } from '../../content-rest-api/model/modelError';
+import { ModelError } from '../model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -26,9 +26,9 @@ import { BaseApi } from './base.api';
 export class DefaultclassificationvaluesApi extends BaseApi {
     /**
     * Calculate the default declassification date
-    *
+    * 
     * Calculates the default declassification date for **nodeId** based on the properties of the node and the current declassification time frame.
-    *
+    * 
     * @param  nodeId The identifier of a node.
     * @return Promise<DeclassificationDate>
     */

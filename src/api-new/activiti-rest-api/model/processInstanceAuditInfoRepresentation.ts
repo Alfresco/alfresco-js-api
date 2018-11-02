@@ -20,7 +20,7 @@ import { AuditLogEntryRepresentation } from './auditLogEntryRepresentation';
 
 export class ProcessInstanceAuditInfoRepresentation {
     decisionInfo?: AuditDecisionInfoRepresentation;
-    entries?: any;
+    entries?: Array<AuditLogEntryRepresentation>;
     processDefinitionName?: string;
     processDefinitionVersion?: string;
     processInstanceDurationInMillis?: number;

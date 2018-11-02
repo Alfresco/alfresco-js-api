@@ -33,7 +33,7 @@ export class FormFieldRepresentation {
     minValue?: string;
     name?: string;
     optionType?: string;
-    options?: any;
+    options?: Array<OptionRepresentation>;
     overrideId?: boolean;
     params?: any;
     placeholder?: string;

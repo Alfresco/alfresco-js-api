@@ -20,7 +20,7 @@ export class ResultSetContextSpellcheck {
     /**
      * A suggested alternative query
      */
-    suggestion?: any;
+    suggestion?: Array<string>;
 }
 export namespace ResultSetContextSpellcheck {
     export type TypeEnum = 'searchInsteadFor' | 'didYouMean';

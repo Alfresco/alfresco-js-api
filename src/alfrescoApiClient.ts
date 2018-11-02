@@ -218,6 +218,14 @@ export class AlfrescoApiClient {
         }
     }
 
+    isWithCredentials() {
+        if (this.config) {
+            return this.config.withCredentials;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Applies authentication headers to the request.
      * @param {Object} request The request object created by a <code>superagent()</code> call.
@@ -642,6 +650,10 @@ export class AlfrescoApiClient {
 
         if (this.isBpmRequest() && this.isCsrfEnabled()) {
             this.setCsrfToken(request);
+        }
+
+        if (this.isWithCredentials()) {
+            request.withCredentials();
         }
 
         // add cookie for activiti

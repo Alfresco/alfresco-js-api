@@ -20,5 +20,5 @@ import { SiteMembershipRequestWithPersonEntry } from './siteMembershipRequestWit
 
 export class SiteMembershipRequestWithPersonPagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<SiteMembershipRequestWithPersonEntry>;
 }

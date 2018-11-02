@@ -20,5 +20,5 @@ import { TagEntry } from './tagEntry';
 
 export class TagPagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<TagEntry>;
 }

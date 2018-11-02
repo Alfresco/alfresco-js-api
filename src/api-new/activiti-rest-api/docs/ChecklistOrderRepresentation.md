@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**order** | **any** |  | [optional] [default to null]
+**order** | **Array<string>** |  | [optional] [default to null]
 
 

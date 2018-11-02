@@ -116,25 +116,25 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RecordcategoriesApi from 'RecordcategoriesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RecordcategoriesApi();
+let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'autoRename': true // boolean | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
 
-  'include':  // any | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+  'include':  // Array<string> | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -148,14 +148,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.createRecordCategoryChild(recordCategoryIdnodeBodyCreateopts, callback);
+recordcategoriesApi.createRecordCategoryChild(recordCategoryIdnodeBodyCreateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -167,12 +165,12 @@ Name | Type | Description  | Notes
  | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -189,15 +187,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**RecordCategoryChildEntry**](RecordCategoryChildEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, multipart/form-data
- - **Accept**: application/json
-
 <a name="deleteRecordCategory"></a>
 # **deleteRecordCategory**
 > deleteRecordCategory(recordCategoryId)
@@ -209,25 +198,23 @@ Deletes record category **recordCategoryId**.
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RecordcategoriesApi from 'RecordcategoriesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RecordcategoriesApi();
+let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.deleteRecordCategory(recordCategoryId, callback);
+recordcategoriesApi.deleteRecordCategory(recordCategoryId).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -239,15 +226,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="getRecordCategory"></a>
 # **getRecordCategory**
@@ -264,25 +242,25 @@ You can use the **include** parameter (include&#x3D;allowableOperations) to retu
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RecordcategoriesApi from 'RecordcategoriesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RecordcategoriesApi();
+let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
 
   'relativePath': relativePath_example // string | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -296,14 +274,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getRecordCategory(recordCategoryIdopts, callback);
+recordcategoriesApi.getRecordCategory(recordCategoryIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -311,14 +287,14 @@ apiInstance.getRecordCategory(recordCategoryIdopts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordCategoryId** | **string**| The identifier of a record category. | 
- **include** | [**any**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
  | [optional] 
  **relativePath** | **string**| Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -334,15 +310,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**RecordCategoryEntry**](RecordCategoryEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="listRecordCategoryChildren"></a>
 # **listRecordCategoryChildren**
@@ -361,17 +328,17 @@ The list of child nodes includes primary children and secondary children, if the
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RecordcategoriesApi from 'RecordcategoriesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RecordcategoriesApi();
+let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
-var opts = { 
+let opts = { 
   'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
   'maxItems': 56 // number | The maximum number of items to return in the list.
   'where': where_example // string | Optionally filter the list. Here are some examples:
@@ -382,7 +349,7 @@ var opts = {
 
 *   where=(isRecordFolder=true AND isClosed=false)
 
-  'include':  // any | Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
+  'include':  // Array<string> | Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * hasRetentionSchedule
@@ -395,7 +362,7 @@ var opts = {
   'relativePath': relativePath_example // string | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
 
   'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -409,14 +376,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.listRecordCategoryChildren(recordCategoryIdopts, callback);
+recordcategoriesApi.listRecordCategoryChildren(recordCategoryIdopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -434,7 +399,7 @@ Name | Type | Description  | Notes
 
 *   where&#x3D;(isRecordFolder&#x3D;true AND isClosed&#x3D;false)
  | [optional] 
- **include** | [**any**](string.md)| Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * hasRetentionSchedule
@@ -447,7 +412,7 @@ Name | Type | Description  | Notes
  **relativePath** | **string**| Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**. | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -463,15 +428,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**RecordCategoryChildPaging**](RecordCategoryChildPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="updateRecordCategory"></a>
 # **updateRecordCategory**
@@ -502,23 +458,23 @@ JSON
 
 ### Example
 ```javascript
-var  = require('');
-var defaultClient = .ApiClient.instance;
+import RecordcategoriesApi from 'RecordcategoriesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-// Configure HTTP basic authorization: basicAuth
-var basicAuth = defaultClient.authentications['basicAuth'];
-basicAuth.username = 'YOUR USERNAME';
-basicAuth.password = 'YOUR PASSWORD';
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var apiInstance = new .RecordcategoriesApi();
+let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
-var opts = { 
-  'include':  // any | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+let opts = { 
+  'include':  // Array<string> | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
 
-  'fields':  // any | A list of field names.
+  'fields':  // Array<string> | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -532,14 +488,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.updateRecordCategory(recordCategoryIdrecordCategoryBodyUpdateopts, callback);
+recordcategoriesApi.updateRecordCategory(recordCategoryIdrecordCategoryBodyUpdateopts).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -548,12 +502,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordCategoryId** | **string**| The identifier of a record category. | 
  **recordCategoryBodyUpdate** | [**FilePlanComponentBodyUpdate**](FilePlanComponentBodyUpdate.md)| The record category information to update. | 
- **include** | [**any**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+ **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
  | [optional] 
- **fields** | [**any**](string.md)| A list of field names.
+ **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -569,13 +523,4 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**RecordCategoryEntry**](RecordCategoryEntry.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

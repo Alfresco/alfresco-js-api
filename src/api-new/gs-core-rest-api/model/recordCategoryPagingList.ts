@@ -16,11 +16,11 @@
 */
 
 import { FilePlan } from './filePlan';
-import { Pagination } from '../../content-rest-api/model/pagination';
+import { Pagination } from './pagination';
 import { RecordCategoryEntry } from './recordCategoryEntry';
 
 export class RecordCategoryPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<RecordCategoryEntry>;
     source?: FilePlan;
 }

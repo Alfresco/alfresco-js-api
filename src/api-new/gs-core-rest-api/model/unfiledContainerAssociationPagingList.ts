@@ -15,12 +15,12 @@
 * limitations under the License.
 */
 
-import { Pagination } from '../../content-rest-api/model/pagination';
+import { Pagination } from './pagination';
 import { UnfiledContainer } from './unfiledContainer';
 import { UnfiledContainerChildAssociationEntry } from './unfiledContainerChildAssociationEntry';
 
 export class UnfiledContainerAssociationPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<UnfiledContainerChildAssociationEntry>;
     source?: UnfiledContainer;
 }

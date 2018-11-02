@@ -20,5 +20,5 @@ import { Pagination } from './pagination';
 
 export class CommentPagingList {
     pagination: Pagination;
-    entries: any;
+    entries: Array<CommentEntry>;
 }

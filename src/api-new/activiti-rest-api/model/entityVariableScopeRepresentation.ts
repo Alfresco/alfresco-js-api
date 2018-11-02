@@ -18,7 +18,7 @@
 import { EntityAttributeScopeRepresentation } from './entityAttributeScopeRepresentation';
 
 export class EntityVariableScopeRepresentation {
-    attributes?: any;
+    attributes?: Array<EntityAttributeScopeRepresentation>;
     entityName?: string;
     mappedDataModel?: number;
     mappedVariableName?: string;

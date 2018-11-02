@@ -18,7 +18,7 @@
 import { DecisionTaskRepresentation } from './decisionTaskRepresentation';
 
 export class ResultListDataRepresentationDecisionTaskRepresentation {
-    data?: any;
+    data?: Array<DecisionTaskRepresentation>;
     size?: number;
     start?: number;
     total?: number;

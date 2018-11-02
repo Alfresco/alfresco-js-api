@@ -16,5 +16,5 @@
 */
 
 export class DownloadBodyCreate {
-    nodeIds: any;
+    nodeIds: Array<string>;
 }

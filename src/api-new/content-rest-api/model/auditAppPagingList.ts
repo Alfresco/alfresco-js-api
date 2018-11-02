@@ -20,5 +20,5 @@ import { Pagination } from './pagination';
 
 export class AuditAppPagingList {
     pagination?: Pagination;
-    entries?: any;
+    entries?: Array<AuditAppEntry>;
 }

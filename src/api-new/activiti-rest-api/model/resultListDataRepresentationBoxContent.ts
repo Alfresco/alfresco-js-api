@@ -18,7 +18,7 @@
 import { BoxContent } from './boxContent';
 
 export class ResultListDataRepresentationBoxContent {
-    data?: any;
+    data?: Array<BoxContent>;
     size?: number;
     start?: number;
     total?: number;

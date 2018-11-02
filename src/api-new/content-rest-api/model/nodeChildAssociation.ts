@@ -42,9 +42,9 @@ The character . must not be used at the end of the name.
     isLink?: boolean;
     isFavorite?: boolean;
     content?: ContentInfo;
-    aspectNames?: any;
+    aspectNames?: Array<string>;
     properties?: any;
-    allowableOperations?: any;
+    allowableOperations?: Array<string>;
     path?: PathInfo;
     permissions?: PermissionsInfo;
     association?: ChildAssociationInfo;

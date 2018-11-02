@@ -30,9 +30,9 @@ export class TaskvariablesApi extends BaseApi {
     * 
     * @param  taskId taskId
     * @param  restVariables restVariables
-    * @return Promise<any>
+    * @return Promise<Array<RestVariable>>
     */
-    createTaskVariableUsingPOST(taskId: string, restVariables: any): Promise<any> {
+    createTaskVariableUsingPOST(taskId: string, restVariables: Array & lt; RestVariable&gt;): Promise<Array<RestVariable>> {
 
         let postBody = restVariables;
 
@@ -200,9 +200,9 @@ export class TaskvariablesApi extends BaseApi {
         * @param  taskId taskId
         * @param Object opts Optional parameters
         * @param  opts.scope scope
-        * @return Promise<any>
+        * @return Promise<Array<RestVariable>>
         */
-    getVariablesUsingGET(taskId: string, opts: any): Promise<any> {
+    getVariablesUsingGET(taskId: string, opts: any): Promise<Array<RestVariable>> {
         opts = opts || {};
         let postBody = null;
 

@@ -25,9 +25,9 @@ export class RequestFacetIntervals {
     /**
      * Sets the intervals for all fields.
      */
-    sets?: any;
+    sets?: Array<RequestFacetSet>;
     /**
      * Specifies the fields to facet by interval.
      */
-    intervals?: any;
+    intervals?: Array<RequestFacetIntervalsIntervals>;
 }

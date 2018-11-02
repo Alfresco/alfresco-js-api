@@ -36,7 +36,7 @@ export class PersonNetwork {
     createdAt?: Date;
     paidNetwork?: boolean;
     subscriptionLevel?: PersonNetwork.SubscriptionLevelEnum;
-    quotas?: any;
+    quotas?: Array<NetworkQuota>;
 }
 export namespace PersonNetwork {
     export type SubscriptionLevelEnum = 'Free' | 'Standard' | 'Enterprise';

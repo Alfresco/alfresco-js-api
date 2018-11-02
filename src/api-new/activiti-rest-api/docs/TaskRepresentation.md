@@ -15,8 +15,8 @@ Name | Type | Description | Notes
 **formKey** | **string** |  | [optional] [default to null]
 **id** | **string** |  | [optional] [default to null]
 **initiatorCanCompleteTask** | **boolean** |  | [optional] [default to null]
-**involvedGroups** | [**any**](LightGroupRepresentation.md) |  | [optional] [default to null]
-**involvedPeople** | [**any**](LightUserRepresentation.md) |  | [optional] [default to null]
+**involvedGroups** | [**Array<LightGroupRepresentation>**](LightGroupRepresentation.md) |  | [optional] [default to null]
+**involvedPeople** | [**Array<LightUserRepresentation>**](LightUserRepresentation.md) |  | [optional] [default to null]
 **managerOfCandidateGroup** | **boolean** |  | [optional] [default to null]
 **memberOfCandidateGroup** | **boolean** |  | [optional] [default to null]
 **memberOfCandidateUsers** | **boolean** |  | [optional] [default to null]
@@ -35,6 +35,6 @@ Name | Type | Description | Notes
 **processInstanceName** | **string** |  | [optional] [default to null]
 **processInstanceStartUserId** | **string** |  | [optional] [default to null]
 **taskDefinitionKey** | **string** |  | [optional] [default to null]
-**variables** | [**any**](RestVariable.md) |  | [optional] [default to null]
+**variables** | [**Array<RestVariable>**](RestVariable.md) |  | [optional] [default to null]
 
 

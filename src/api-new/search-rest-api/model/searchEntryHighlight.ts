@@ -23,5 +23,5 @@ export class SearchEntryHighlight {
     /**
      * Any number of snippets for the specified field highlighting the matching text
      */
-    snippets?: any;
+    snippets?: Array<string>;
 }

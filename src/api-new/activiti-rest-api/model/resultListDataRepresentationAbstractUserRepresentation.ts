@@ -18,7 +18,7 @@
 import { AbstractUserRepresentation } from './abstractUserRepresentation';
 
 export class ResultListDataRepresentationAbstractUserRepresentation {
-    data?: any;
+    data?: Array<AbstractUserRepresentation>;
     size?: number;
     start?: number;
     total?: number;

@@ -17,7 +17,7 @@
 
 export class LightGroupRepresentation {
     externalId?: string;
-    groups?: any;
+    groups?: Array<LightGroupRepresentation>;
     id?: number;
     name?: string;
     status?: string;
