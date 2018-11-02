@@ -3,7 +3,7 @@
 Provides access to the authentication features of Alfresco Content Services.
 
 
-- Last Build date: 2018-11-02T12:15:10.600Z
+- Last Build date: 2018-11-02T12:18:01.042Z
 
 
 ## Documentation for API Endpoints
