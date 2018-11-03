@@ -41,7 +41,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.activateUsingPOST(groupId).then(function() {
+admingroupsApi.activateUsingPOST(groupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -78,7 +78,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.addAllUsersToGroupUsingPOST(groupId).then(function() {
+admingroupsApi.addAllUsersToGroupUsingPOST(groupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -115,7 +115,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.addGroupCapabilitiesUsingPOST(groupIdaddGroupCapabilitiesRepresentation).then(function() {
+admingroupsApi.addGroupCapabilitiesUsingPOST(groupIdaddGroupCapabilitiesRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -153,7 +153,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.addGroupMemberUsingPOST(groupIduserId).then(function() {
+admingroupsApi.addGroupMemberUsingPOST(groupIduserId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -191,7 +191,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.addRelatedGroupUsingPOST(groupIdrelatedGroupIdtype).then(function() {
+admingroupsApi.addRelatedGroupUsingPOST(groupIdrelatedGroupIdtype).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -230,7 +230,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.createNewGroupUsingPOST(groupRepresentation).then(function(data) {
+admingroupsApi.createNewGroupUsingPOST(groupRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -267,7 +267,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.deleteGroupCapabilityUsingDELETE(groupIdgroupCapabilityId).then(function() {
+admingroupsApi.deleteGroupCapabilityUsingDELETE(groupIdgroupCapabilityId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -305,7 +305,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.deleteGroupMemberUsingDELETE(groupIduserId).then(function() {
+admingroupsApi.deleteGroupMemberUsingDELETE(groupIduserId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -343,7 +343,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.deleteGroupUsingDELETE(groupId).then(function() {
+admingroupsApi.deleteGroupUsingDELETE(groupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -380,7 +380,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.deleteRelatedGroupUsingDELETE(groupIdrelatedGroupId).then(function() {
+admingroupsApi.deleteRelatedGroupUsingDELETE(groupIdrelatedGroupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -418,7 +418,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.getCapabilitiesUsingGET(groupId).then(function(data) {
+admingroupsApi.getCapabilitiesUsingGET(groupId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -455,12 +455,12 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example // string | filter
-  'page': 56 // number | page
-  'pageSize': 56 // number | pageSize
+  'filter': filter_example //  | filter
+  'page': 56 //  | page
+  'pageSize': 56 //  | pageSize
 };
 
-admingroupsApi.getGroupUsersUsingGET(groupIdopts).then(function(data) {
+admingroupsApi.getGroupUsersUsingGET(groupIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -500,11 +500,11 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'includeAllUsers': true // boolean | includeAllUsers
-  'summary': true // boolean | summary
+  'includeAllUsers': true //  | includeAllUsers
+  'summary': true //  | summary
 };
 
-admingroupsApi.getGroupUsingGET(groupIdopts).then(function(data) {
+admingroupsApi.getGroupUsingGET(groupIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -543,12 +543,12 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'tenantId': 789 // number | tenantId
-  'functional': true // boolean | functional
-  'summary': true // boolean | summary
+  'tenantId': 789 //  | tenantId
+  'functional': true //  | functional
+  'summary': true //  | summary
 };
 
-admingroupsApi.getGroupsUsingGET1(opts).then(function(data) {
+admingroupsApi.getGroupsUsingGET1(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -566,7 +566,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;LightGroupRepresentation&gt;**](LightGroupRepresentation.md)
+[**Array<LightGroupRepresentation>**](LightGroupRepresentation.md)
 
 <a name="getRelatedGroupsUsingGET"></a>
 # **getRelatedGroupsUsingGET**
@@ -587,7 +587,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.getRelatedGroupsUsingGET(groupId).then(function(data) {
+admingroupsApi.getRelatedGroupsUsingGET(groupId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -603,7 +603,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;LightGroupRepresentation&gt;**](LightGroupRepresentation.md)
+[**Array<LightGroupRepresentation>**](LightGroupRepresentation.md)
 
 <a name="updateGroupUsingPUT"></a>
 # **updateGroupUsingPUT**
@@ -624,7 +624,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.updateGroupUsingPUT(groupIdgroupRepresentation).then(function(data) {
+admingroupsApi.updateGroupUsingPUT(groupIdgroupRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

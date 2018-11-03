@@ -44,7 +44,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.activateProcessInstanceUsingPUT(processInstanceId).then(function(data) {
+processinstancesApi.activateProcessInstanceUsingPUT(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -81,7 +81,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.createIdentityLinkUsingPOST1(processInstanceIdidentityLinkRepresentation).then(function(data) {
+processinstancesApi.createIdentityLinkUsingPOST1(processInstanceIdidentityLinkRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -119,7 +119,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.deleteIdentityLinkUsingDELETE1(processInstanceIdfamilyidentityIdtype).then(function() {
+processinstancesApi.deleteIdentityLinkUsingDELETE1(processInstanceIdfamilyidentityIdtype).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -161,7 +161,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.deleteProcessInstanceUsingDELETE(processInstanceId).then(function() {
+processinstancesApi.deleteProcessInstanceUsingDELETE(processInstanceId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -200,7 +200,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.filterProcessInstancesUsingPOST(filterRequest).then(function(data) {
+processinstancesApi.filterProcessInstancesUsingPOST(filterRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -237,7 +237,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getHistoricProcessInstanceDecisionTasksUsingGET(processInstanceId).then(function(data) {
+processinstancesApi.getHistoricProcessInstanceDecisionTasksUsingGET(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -274,7 +274,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getHistoricProcessInstanceVariablesUsingGET(processInstanceId).then(function(data) {
+processinstancesApi.getHistoricProcessInstanceVariablesUsingGET(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;ProcessInstanceVariableRepresentation&gt;**](ProcessInstanceVariableRepresentation.md)
+[**Array<ProcessInstanceVariableRepresentation>**](ProcessInstanceVariableRepresentation.md)
 
 <a name="getHistoricProcessInstancesUsingPOST"></a>
 # **getHistoricProcessInstancesUsingPOST**
@@ -311,7 +311,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getHistoricProcessInstancesUsingPOST(queryRequest).then(function(data) {
+processinstancesApi.getHistoricProcessInstancesUsingPOST(queryRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -348,7 +348,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getIdentityLinkTypeUsingGET1(processInstanceIdfamilyidentityIdtype).then(function(data) {
+processinstancesApi.getIdentityLinkTypeUsingGET1(processInstanceIdfamilyidentityIdtype).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -388,7 +388,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getIdentityLinksForFamilyUsingGET1(processInstanceIdfamily).then(function(data) {
+processinstancesApi.getIdentityLinksForFamilyUsingGET1(processInstanceIdfamily).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -405,7 +405,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;IdentityLinkRepresentation&gt;**](IdentityLinkRepresentation.md)
+[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
 
 <a name="getIdentityLinksUsingGET1"></a>
 # **getIdentityLinksUsingGET1**
@@ -426,7 +426,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getIdentityLinksUsingGET1(processInstanceId).then(function(data) {
+processinstancesApi.getIdentityLinksUsingGET1(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -442,7 +442,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;IdentityLinkRepresentation&gt;**](IdentityLinkRepresentation.md)
+[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
 
 <a name="getProcessInstanceContentUsingGET"></a>
 # **getProcessInstanceContentUsingGET**
@@ -463,7 +463,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getProcessInstanceContentUsingGET(processInstanceId).then(function(data) {
+processinstancesApi.getProcessInstanceContentUsingGET(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -500,7 +500,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getProcessInstanceDiagramUsingGET(processInstanceId).then(function(data) {
+processinstancesApi.getProcessInstanceDiagramUsingGET(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -524,7 +524,7 @@ Name | Type | Description  | Notes
 
 Get a process instance start form
 
-The start form for a process instance can be retrieved when the process definition has a start form defined (hasStartForm &#x3D; true on the process instance)
+The start form for a process instance can be retrieved when the process definition has a start form defined (hasStartForm = true on the process instance)
 
 ### Example
 ```javascript
@@ -539,7 +539,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getProcessInstanceStartFormUsingGET(processInstanceId).then(function(data) {
+processinstancesApi.getProcessInstanceStartFormUsingGET(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -576,7 +576,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getProcessInstanceUsingGET(processInstanceId).then(function(data) {
+processinstancesApi.getProcessInstanceUsingGET(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -613,7 +613,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getProcessInstancesUsingPOST(processInstancesQuery).then(function(data) {
+processinstancesApi.getProcessInstancesUsingPOST(processInstancesQuery).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -650,7 +650,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getTaskAuditLogUsingGET(processInstanceId).then(function(data) {
+processinstancesApi.getTaskAuditLogUsingGET(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -687,7 +687,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.startNewProcessInstanceUsingPOST(startRequest).then(function(data) {
+processinstancesApi.startNewProcessInstanceUsingPOST(startRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -724,7 +724,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.suspendProcessInstanceUsingPUT(processInstanceId).then(function(data) {
+processinstancesApi.suspendProcessInstanceUsingPUT(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

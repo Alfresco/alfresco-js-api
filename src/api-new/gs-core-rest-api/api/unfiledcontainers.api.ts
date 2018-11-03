@@ -134,7 +134,7 @@ JSON
     * @param Object opts Optional parameters
     * @param  opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
 
-    * @param  opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+    * @param  opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
@@ -200,7 +200,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * 
         * @param  unfiledContainerId The identifier of an unfiled records container. You can use the **-unfiled-** alias.
         * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+        * @param  opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
     
@@ -265,13 +265,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param  opts.maxItems The maximum number of items to return in the list.
         * @param  opts.where Optionally filter the list. Here are some examples:
     
-    *   where&#x3D;(isRecord&#x3D;true)
+    *   where=(isRecord=true)
     
-    *   where&#x3D;(isUnfiledRecordFolder&#x3D;false)
+    *   where=(isUnfiledRecordFolder=false)
     
-    *   where&#x3D;(nodeType&#x3D;&#39;cm:content INCLUDESUBTYPES&#39;)
+    *   where=(nodeType='cm:content INCLUDESUBTYPES')
     
-        * @param  opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+        * @param  opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * aspectNames
     * association
@@ -354,7 +354,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param  unfiledContainerId The identifier of an unfiled records container. You can use the **-unfiled-** alias.
         * @param  unfiledContainerBodyUpdate The unfiled record container information to update.
         * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+        * @param  opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
     

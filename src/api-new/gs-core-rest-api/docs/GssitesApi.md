@@ -21,11 +21,11 @@ Creates the RM site with the given details.
 
 **Note:** The default site id is rm and the default site name is Records Management. The id of a site cannot be updated once the site has been created.
 
-For example, to create an RM site named \&quot;Records Management\&quot; with \&quot;Records Management Description\&quot; as description, the following body could be used:
+For example, to create an RM site named \"Records Management\" with \"Records Management Description\" as description, the following body could be used:
 JSON
 {
-  \&quot;title\&quot;: \&quot;Records Management\&quot;,
-  \&quot;description\&quot;: \&quot;Records Management Description\&quot;
+  \"title\": \"Records Management\",
+  \"description\": \"Records Management Description\"
 }
 
 
@@ -47,10 +47,10 @@ this.alfrescoApi.setConfig({
 let gssitesApi = new GssitesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipAddToFavorites': true // boolean | Flag to indicate whether the RM site should not be added to the user's site favorites.
+  'skipAddToFavorites': true //  | Flag to indicate whether the RM site should not be added to the user's site favorites.
 };
 
-gssitesApi.createRMSite(siteBodyCreateopts).then(function(data) {
+gssitesApi.createRMSite(siteBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -63,7 +63,7 @@ gssitesApi.createRMSite(siteBodyCreateopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteBodyCreate** | [**RMSiteBodyCreate**](RMSiteBodyCreate.md)| The site details | 
- **skipAddToFavorites** | **boolean**| Flag to indicate whether the RM site should not be added to the user&#39;s site favorites. | [optional] [default to false]
+ **skipAddToFavorites** | **boolean**| Flag to indicate whether the RM site should not be added to the user's site favorites. | [optional] [default to false]
 
 ### Return type
 
@@ -91,7 +91,7 @@ this.alfrescoApi.setConfig({
 
 let gssitesApi = new GssitesApi(this.alfrescoApi);
 
-gssitesApi.deleteRMSite().then(function() {
+gssitesApi.deleteRMSite().then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -129,7 +129,7 @@ this.alfrescoApi.setConfig({
 let gssitesApi = new GssitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -143,7 +143,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-gssitesApi.getRMSite(opts).then(function(data) {
+gssitesApi.getRMSite(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -155,7 +155,7 @@ gssitesApi.getRMSite(opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -197,7 +197,7 @@ this.alfrescoApi.setConfig({
 let gssitesApi = new GssitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -211,7 +211,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-gssitesApi.updateRMSite(siteBodyUpdateopts).then(function(data) {
+gssitesApi.updateRMSite(siteBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -224,7 +224,7 @@ gssitesApi.updateRMSite(siteBodyUpdateopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteBodyUpdate** | [**RMSiteBodyUpdate**](RMSiteBodyUpdate.md)| The RM site information to update. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

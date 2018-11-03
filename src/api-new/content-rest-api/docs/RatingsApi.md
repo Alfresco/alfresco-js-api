@@ -31,7 +31,7 @@ this.alfrescoApi.setConfig({
 let ratingsApi = new RatingsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -45,7 +45,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-ratingsApi.createRating(nodeIdratingBodyCreateopts).then(function(data) {
+ratingsApi.createRating(nodeIdratingBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -58,18 +58,18 @@ ratingsApi.createRating(nodeIdratingBodyCreateopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
- **ratingBodyCreate** | [**RatingBody**](RatingBody.md)| For \&quot;myRating\&quot; the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
+ **ratingBodyCreate** | [**RatingBody**](RatingBody.md)| For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
 
-For example, to \&quot;like\&quot; a file the following body would be used:
+For example, to \"like\" a file the following body would be used:
 
 JSON
   {
-    \&quot;id\&quot;: \&quot;likes\&quot;,
-    \&quot;myRating\&quot;: true
+    \"id\": \"likes\",
+    \"myRating\": true
   }
 
  | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -107,7 +107,7 @@ this.alfrescoApi.setConfig({
 let ratingsApi = new RatingsApi(this.alfrescoApi);
 
 
-ratingsApi.deleteRating(nodeIdratingId).then(function() {
+ratingsApi.deleteRating(nodeIdratingId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -147,7 +147,7 @@ this.alfrescoApi.setConfig({
 let ratingsApi = new RatingsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -161,7 +161,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-ratingsApi.getRating(nodeIdratingIdopts).then(function(data) {
+ratingsApi.getRating(nodeIdratingIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **ratingId** | **string**| The identifier of a rating. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -213,13 +213,13 @@ this.alfrescoApi.setConfig({
 let ratingsApi = new RatingsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -233,7 +233,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-ratingsApi.listRatings(nodeIdopts).then(function(data) {
+ratingsApi.listRatings(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -252,7 +252,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

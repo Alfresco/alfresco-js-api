@@ -295,11 +295,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param  opts.maxItems The maximum number of items to return in the list.
         * @param  opts.where Optionally filter the list. Here are some examples:
     
-    *   where&#x3D;(nodeType&#x3D;&#39;my:specialNodeType&#39;)
+    *   where=(nodeType='my:specialNodeType')
     
-    *   where&#x3D;(nodeType&#x3D;&#39;my:specialNodeType INCLUDESUBTYPES&#39;)
+    *   where=(nodeType='my:specialNodeType INCLUDESUBTYPES')
     
-    *   where&#x3D;(isPrimary&#x3D;true)
+    *   where=(isPrimary=true)
     
         * @param  opts.include Returns additional information about the records. Any optional field from the response model can be requested. For example:
     * allowableOperations

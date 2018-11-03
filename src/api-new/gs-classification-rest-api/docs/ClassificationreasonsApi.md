@@ -24,12 +24,12 @@ For example, the following JSON body creates two classification reasons:
 JSON
 [
   {
-    \&quot;code\&quot;:\&quot;My Code1\&quot;,
-    \&quot;description\&quot;:\&quot;My Description1\&quot;
+    \"code\":\"My Code1\",
+    \"description\":\"My Description1\"
   },
   {
-    \&quot;code\&quot;:\&quot;My Code2\&quot;,
-    \&quot;description\&quot;:\&quot;My Description2\&quot;
+    \"code\":\"My Code2\",
+    \"description\":\"My Description2\"
   }
 ]
 
@@ -37,22 +37,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -75,7 +75,7 @@ this.alfrescoApi.setConfig({
 let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
 
 
-classificationreasonsApi.createClassificationReason(classificationReason).then(function(data) {
+classificationreasonsApi.createClassificationReason(classificationReason).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 Delete a classification reason
 
-Deletes the classification reason  **classificationReasonId**. You can&#39;t delete a classification reason that is being used to classify content. There must be at least one classification reason.
+Deletes the classification reason  **classificationReasonId**. You can't delete a classification reason that is being used to classify content. There must be at least one classification reason.
 
 ### Example
 ```javascript
@@ -114,7 +114,7 @@ this.alfrescoApi.setConfig({
 let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
 
 
-classificationreasonsApi.deleteClassificationReason(classificationReasonId).then(function() {
+classificationreasonsApi.deleteClassificationReason(classificationReasonId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -153,9 +153,9 @@ this.alfrescoApi.setConfig({
 let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56 // number | The maximum number of items to return in the list.
-  'fields':  // Array<string> | A list of field names.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -169,7 +169,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-classificationreasonsApi.listClassificationReasons(opts).then(function(data) {
+classificationreasonsApi.listClassificationReasons(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -183,7 +183,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -221,7 +221,7 @@ this.alfrescoApi.setConfig({
 let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
 
 
-classificationreasonsApi.showClassificationReasonById(classificationReasonId).then(function(data) {
+classificationreasonsApi.showClassificationReasonById(classificationReasonId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -260,7 +260,7 @@ this.alfrescoApi.setConfig({
 let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
 
 
-classificationreasonsApi.updateClassificationReason(classificationReasonIdclassificationReason).then(function(data) {
+classificationreasonsApi.updateClassificationReason(classificationReasonIdclassificationReason).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

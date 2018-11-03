@@ -30,7 +30,7 @@ this.alfrescoApi.setConfig({
 
 let discoveryApi = new DiscoveryApi(this.alfrescoApi);
 
-discoveryApi.getRepositoryInformation().then(function(data) {
+discoveryApi.getRepositoryInformation().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

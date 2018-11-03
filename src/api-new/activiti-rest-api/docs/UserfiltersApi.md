@@ -37,7 +37,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.createUserProcessInstanceFilterUsingPOST(userProcessInstanceFilterRepresentation).then(function(data) {
+userfiltersApi.createUserProcessInstanceFilterUsingPOST(userProcessInstanceFilterRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -74,7 +74,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.createUserTaskFilterUsingPOST(userTaskFilterRepresentation).then(function(data) {
+userfiltersApi.createUserTaskFilterUsingPOST(userTaskFilterRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -111,7 +111,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.deleteUserProcessInstanceFilterUsingDELETE(userFilterId).then(function() {
+userfiltersApi.deleteUserProcessInstanceFilterUsingDELETE(userFilterId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -148,7 +148,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.deleteUserTaskFilterUsingDELETE(userFilterId).then(function() {
+userfiltersApi.deleteUserTaskFilterUsingDELETE(userFilterId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -185,7 +185,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.getUserProcessInstanceFilterUsingGET(userFilterId).then(function(data) {
+userfiltersApi.getUserProcessInstanceFilterUsingGET(userFilterId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -224,10 +224,10 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 let opts = { 
-  'appId': 789 // number | appId
+  'appId': 789 //  | appId
 };
 
-userfiltersApi.getUserProcessInstanceFiltersUsingGET(opts).then(function(data) {
+userfiltersApi.getUserProcessInstanceFiltersUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -264,7 +264,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.getUserTaskFilterUsingGET(userFilterId).then(function(data) {
+userfiltersApi.getUserTaskFilterUsingGET(userFilterId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -303,10 +303,10 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 let opts = { 
-  'appId': 789 // number | appId
+  'appId': 789 //  | appId
 };
 
-userfiltersApi.getUserTaskFiltersUsingGET(opts).then(function(data) {
+userfiltersApi.getUserTaskFiltersUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -343,7 +343,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation).then(function() {
+userfiltersApi.orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -380,7 +380,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.orderUserTaskFiltersUsingPUT(filterOrderRepresentation).then(function() {
+userfiltersApi.orderUserTaskFiltersUsingPUT(filterOrderRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -417,7 +417,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.updateUserProcessInstanceFilterUsingPUT(userFilterIduserProcessInstanceFilterRepresentation).then(function(data) {
+userfiltersApi.updateUserProcessInstanceFilterUsingPUT(userFilterIduserProcessInstanceFilterRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -455,7 +455,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.updateUserTaskFilterUsingPUT(userFilterIduserTaskFilterRepresentation).then(function(data) {
+userfiltersApi.updateUserTaskFilterUsingPUT(userFilterIduserTaskFilterRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

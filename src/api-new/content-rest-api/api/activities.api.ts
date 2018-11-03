@@ -40,7 +40,7 @@ If not supplied then the default value is 0.
     * @param  opts.maxItems The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  (default to 100)
-    * @param  opts.who A filter to include the user&#39;s activities only me, other user&#39;s activities only others&#39;
+    * @param  opts.who A filter to include the user's activities only me, other user's activities only others'
 
     * @param  opts.siteId Include only activity feed entries relating to this site.
     * @param  opts.fields A list of field names.

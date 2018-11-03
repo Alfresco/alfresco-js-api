@@ -25,9 +25,9 @@ Create a group
 
 Create a group.
 
-The group id must start with \&quot;GROUP\\_\&quot;. If this is omitted it will be added automatically.
+The group id must start with \"GROUP\\_\". If this is omitted it will be added automatically.
 This format is also returned when listing groups or group memberships. It should be noted
-that the other group-related operations also expect the id to start with \&quot;GROUP\\_\&quot;.
+that the other group-related operations also expect the id to start with \"GROUP\\_\".
 
 If one or more parentIds are specified then the group will be created and become a member
 of each of the specified parent groups.
@@ -52,11 +52,11 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the group. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -70,7 +70,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-groupsApi.createGroup(groupBodyCreateopts).then(function(data) {
+groupsApi.createGroup(groupBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -83,11 +83,11 @@ groupsApi.createGroup(groupBodyCreateopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **groupBodyCreate** | [**GroupBodyCreate**](GroupBodyCreate.md)| The group to create. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the group. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -134,7 +134,7 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -148,7 +148,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-groupsApi.createGroupMembership(groupIdgroupMembershipBodyCreateopts).then(function(data) {
+groupsApi.createGroupMembership(groupIdgroupMembershipBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **groupId** | **string**| The identifier of a group. | 
  **groupMembershipBodyCreate** | [**GroupMembershipBodyCreate**](GroupMembershipBodyCreate.md)| The group membership to add (person or sub-group). | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -209,11 +209,11 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'cascade': true // boolean | If **true** then the delete will be applied in cascade to sub-groups.
+  'cascade': true //  | If **true** then the delete will be applied in cascade to sub-groups.
 
 };
 
-groupsApi.deleteGroup(groupIdopts).then(function() {
+groupsApi.deleteGroup(groupIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -263,7 +263,7 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 
-groupsApi.deleteGroupMembership(groupIdgroupMemberId).then(function() {
+groupsApi.deleteGroupMembership(groupIdgroupMemberId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -308,11 +308,11 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the group. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -326,7 +326,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-groupsApi.getGroup(groupIdopts).then(function(data) {
+groupsApi.getGroup(groupIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -339,11 +339,11 @@ groupsApi.getGroup(groupIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **groupId** | **string**| The identifier of a group. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the group. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -375,8 +375,8 @@ You can use the **where** parameter to filter the returned groups by **memberTyp
 Example to filter by **memberType**, use any one of:
 
 
-(memberType&#x3D;&#39;GROUP&#39;)
-(memberType&#x3D;&#39;PERSON&#39;)
+(memberType='GROUP')
+(memberType='PERSON')
 
 
 The default sort order for the returned list is for group members to be sorted by ascending displayName.
@@ -398,13 +398,13 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -412,8 +412,8 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'where': where_example // string | A string to restrict the returned objects by using a predicate.
-  'fields':  // Array<string> | A list of field names.
+  'where': where_example //  | A string to restrict the returned objects by using a predicate.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -427,7 +427,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-groupsApi.listGroupMemberships(groupIdopts).then(function(data) {
+groupsApi.listGroupMemberships(groupIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -446,7 +446,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -455,7 +455,7 @@ above to check if any fields used in this method have a descending default searc
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
  **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -482,7 +482,7 @@ List group memberships
 
  Gets a list of group membership information for person **personId**.
 
- You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+ You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
  You can use the **include** parameter to return additional information.
 
@@ -490,7 +490,7 @@ List group memberships
  clause will return just the root groups:
 
  
- (isRoot&#x3D;true)
+ (isRoot=true)
  
 
  The **where** parameter can also be used to filter by ***zone***. This may be combined with isRoot to narrow
@@ -498,13 +498,13 @@ List group memberships
  MY.ZONE zone.
 
  
- where&#x3D;(zones in (&#39;MY.ZONE&#39;))
+ where=(zones in ('MY.ZONE'))
  
 
  This may be combined with the isRoot filter, as shown below:
 
  
- where&#x3D;(isRoot&#x3D;false AND zones in (&#39;MY.ZONE&#39;))
+ where=(isRoot=false AND zones in ('MY.ZONE'))
  
 
  ***Note:*** restrictions include
@@ -532,13 +532,13 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -546,12 +546,12 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'include':  // Array<string> | Returns additional information about the group. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
 
-  'where': where_example // string | A string to restrict the returned objects by using a predicate.
-  'fields':  // Array<string> | A list of field names.
+  'where': where_example //  | A string to restrict the returned objects by using a predicate.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -565,7 +565,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-groupsApi.listGroupMembershipsForPerson(personIdopts).then(function(data) {
+groupsApi.listGroupMembershipsForPerson(personIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -584,7 +584,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -592,12 +592,12 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the group. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
  | [optional] 
  **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -630,7 +630,7 @@ You can use the **where** parameter to filter the returned groups by **isRoot**.
 clause will return just the root groups:
 
 
-(isRoot&#x3D;true)
+(isRoot=true)
 
 
 The **where** parameter can also be used to filter by ***zone***. This may be combined with isRoot to narrow
@@ -638,13 +638,13 @@ a result set even further. For example, the following where clause will only ret
 MY.ZONE zone.
 
 
-where&#x3D;(zones in (&#39;MY.ZONE&#39;))
+where=(zones in ('MY.ZONE'))
 
 
 This may be combined with the isRoot filter, as shown below:
 
 
-where&#x3D;(isRoot&#x3D;false AND zones in (&#39;MY.ZONE&#39;))
+where=(isRoot=false AND zones in ('MY.ZONE'))
 
 
 ***Note:*** restrictions include
@@ -671,13 +671,13 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -685,12 +685,12 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'include':  // Array<string> | Returns additional information about the group. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
 
-  'where': where_example // string | A string to restrict the returned objects by using a predicate.
-  'fields':  // Array<string> | A list of field names.
+  'where': where_example //  | A string to restrict the returned objects by using a predicate.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -704,7 +704,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-groupsApi.listGroups(opts).then(function(data) {
+groupsApi.listGroups(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -722,7 +722,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -730,12 +730,12 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the group. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
  | [optional] 
  **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -778,11 +778,11 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the group. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -796,7 +796,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-groupsApi.updateGroup(groupIdgroupBodyUpdateopts).then(function(data) {
+groupsApi.updateGroup(groupIdgroupBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -810,11 +810,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **groupId** | **string**| The identifier of a group. | 
  **groupBodyUpdate** | [**GroupBodyUpdate**](GroupBodyUpdate.md)| The group information to update. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the group. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

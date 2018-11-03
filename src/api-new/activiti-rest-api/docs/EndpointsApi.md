@@ -27,7 +27,7 @@ this.alfrescoApi.setConfig({
 let endpointsApi = new EndpointsApi(this.alfrescoApi);
 
 
-endpointsApi.getEndpointConfigurationUsingGET(endpointConfigurationId).then(function(data) {
+endpointsApi.getEndpointConfigurationUsingGET(endpointConfigurationId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -63,7 +63,7 @@ this.alfrescoApi.setConfig({
 
 let endpointsApi = new EndpointsApi(this.alfrescoApi);
 
-endpointsApi.getEndpointConfigurationsUsingGET().then(function(data) {
+endpointsApi.getEndpointConfigurationsUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -76,5 +76,5 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Array&lt;EndpointConfigurationRepresentation&gt;**](EndpointConfigurationRepresentation.md)
+[**Array<EndpointConfigurationRepresentation>**](EndpointConfigurationRepresentation.md)
 

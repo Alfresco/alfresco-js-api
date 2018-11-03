@@ -5,7 +5,7 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/ver
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getTransfer**](TransfersApi.md#getTransfer) | **GET** /transfers/{transferId} | Get a transfer
-[**listTransfersChildren**](TransfersApi.md#listTransfersChildren) | **GET** /transfers/{transferId}/children | List transfer&#39;s children
+[**listTransfersChildren**](TransfersApi.md#listTransfersChildren) | **GET** /transfers/{transferId}/children | List transfer's children
 
 
 <a name="getTransfer"></a>
@@ -16,9 +16,9 @@ Get a transfer
 
 Gets information for transfer **transferId**
 
-Mandatory fields and the transfer&#39;s aspects and properties are returned by default.
+Mandatory fields and the transfer's aspects and properties are returned by default.
 
-You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
+You can use the **include** parameter (include=allowableOperations) to return additional information.
 
 
 ### Example
@@ -34,13 +34,13 @@ this.alfrescoApi.setConfig({
 let transfersApi = new TransfersApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the transfer folder. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the transfer folder. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * transferPDFIndicator
 * transferLocation
 * transferAccessionIndicator
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -54,7 +54,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-transfersApi.getTransfer(transferIdopts).then(function(data) {
+transfersApi.getTransfer(transferIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -67,13 +67,13 @@ transfersApi.getTransfer(transferIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **transferId** | **string**| The identifier of a transfer. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the transfer folder. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the transfer folder. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * transferPDFIndicator
 * transferLocation
 * transferAccessionIndicator
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -94,13 +94,13 @@ parameter are returned in addition to those specified in the **fields** paramete
 # **listTransfersChildren**
 > TransferAssociationPaging listTransfersChildren(transferIdopts)
 
-List transfer&#39;s children
+List transfer's children
 
-Gets a list of transfer&#39;s children.
+Gets a list of transfer's children.
 
 Minimal information for each child is returned by default.
 
-You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
+You can use the **include** parameter (include=allowableOperations) to return additional information.
 
 
 ### Example
@@ -116,9 +116,9 @@ this.alfrescoApi.setConfig({
 let transfersApi = new TransfersApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56 // number | The maximum number of items to return in the list.
-  'include':  // Array<string> | Returns additional information about the transfer's child. Any optional field from the response model can be requested. For example:
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
+  'include':  //  | Returns additional information about the transfer's child. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * isClosed
@@ -127,8 +127,8 @@ let opts = {
 * path
 * properties
 
-  'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on the specified parent **transferId**.
-  'fields':  // Array<string> | A list of field names.
+  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on the specified parent **transferId**.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -142,7 +142,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-transfersApi.listTransfersChildren(transferIdopts).then(function(data) {
+transfersApi.listTransfersChildren(transferIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
  **transferId** | **string**| The identifier of a transfer. | 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the transfer&#39;s child. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the transfer's child. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * isClosed
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 * properties
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the specified parent **transferId**. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

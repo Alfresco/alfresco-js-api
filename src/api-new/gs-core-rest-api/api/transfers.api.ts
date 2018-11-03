@@ -102,7 +102,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param Object opts Optional parameters
         * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
         * @param  opts.maxItems The maximum number of items to return in the list.
-        * @param  opts.include Returns additional information about the transfer&#39;s child. Any optional field from the response model can be requested. For example:
+        * @param  opts.include Returns additional information about the transfer's child. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * aspectNames
     * isClosed

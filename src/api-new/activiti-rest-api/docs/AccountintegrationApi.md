@@ -27,7 +27,7 @@ this.alfrescoApi.setConfig({
 
 let accountintegrationApi = new AccountintegrationApi(this.alfrescoApi);
 
-accountintegrationApi.getAccountsUsingGET().then(function(data) {
+accountintegrationApi.getAccountsUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

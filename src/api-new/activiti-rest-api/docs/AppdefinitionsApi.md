@@ -34,7 +34,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.deleteAppDefinitionUsingDELETE(appDefinitionId).then(function() {
+appdefinitionsApi.deleteAppDefinitionUsingDELETE(appDefinitionId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -73,7 +73,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.exportAppDefinitionUsingGET(modelId).then(function() {
+appdefinitionsApi.exportAppDefinitionUsingGET(modelId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -110,7 +110,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.getAppDefinitionUsingGET(modelId).then(function(data) {
+appdefinitionsApi.getAppDefinitionUsingGET(modelId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -147,7 +147,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.importAndPublishAppUsingPOST(file).then(function(data) {
+appdefinitionsApi.importAndPublishAppUsingPOST(file).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -184,7 +184,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.importAndPublishAppUsingPOST1(modelIdfile).then(function(data) {
+appdefinitionsApi.importAndPublishAppUsingPOST1(modelIdfile).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 
 Import a new app definition
 
-Allows a zip file to be uploaded containing an app definition and any number of included models.&lt;p&gt;This is useful to bootstrap an environment (for users or continuous integration).&lt;p&gt;Before using any processes included in the import the app must be published and deployed.
+Allows a zip file to be uploaded containing an app definition and any number of included models.<p>This is useful to bootstrap an environment (for users or continuous integration).<p>Before using any processes included in the import the app must be published and deployed.
 
 ### Example
 ```javascript
@@ -224,10 +224,10 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 let opts = { 
-  'renewIdmEntries': renewIdmEntries_example // string | Whether to renew user and group identifiers
+  'renewIdmEntries': renewIdmEntries_example //  | Whether to renew user and group identifiers
 };
 
-appdefinitionsApi.importAppDefinitionUsingPOST(fileopts).then(function(data) {
+appdefinitionsApi.importAppDefinitionUsingPOST(fileopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -252,7 +252,7 @@ Name | Type | Description  | Notes
 
 Update the content of an existing app
 
-Imports an app inside an existing app definition and creates a new version&lt;p&gt;Before using any new or updated processes included in the import the app must be (re-)published and deployed.
+Imports an app inside an existing app definition and creates a new version<p>Before using any new or updated processes included in the import the app must be (re-)published and deployed.
 
 ### Example
 ```javascript
@@ -267,7 +267,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.importAppDefinitionUsingPOST1(modelIdfile).then(function(data) {
+appdefinitionsApi.importAppDefinitionUsingPOST1(modelIdfile).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -292,7 +292,7 @@ Name | Type | Description  | Notes
 
 Publish an app definition
 
-Publishing an app definition makes it available for use. The application must not have any validation errors or an error will be returned.&lt;p&gt;Before an app definition can be used by other users, it must also be deployed for their use
+Publishing an app definition makes it available for use. The application must not have any validation errors or an error will be returned.<p>Before an app definition can be used by other users, it must also be deployed for their use
 
 ### Example
 ```javascript
@@ -307,7 +307,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.publishAppDefinitionUsingPOST(modelIdpublishModel).then(function(data) {
+appdefinitionsApi.publishAppDefinitionUsingPOST(modelIdpublishModel).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -345,7 +345,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.updateAppDefinitionUsingPUT(modelIdupdatedModel).then(function(data) {
+appdefinitionsApi.updateAppDefinitionUsingPUT(modelIdupdatedModel).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

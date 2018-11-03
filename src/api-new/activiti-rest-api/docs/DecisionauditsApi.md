@@ -27,7 +27,7 @@ this.alfrescoApi.setConfig({
 let decisionauditsApi = new DecisionauditsApi(this.alfrescoApi);
 
 
-decisionauditsApi.getAuditTrailUsingGET(auditTrailId).then(function(data) {
+decisionauditsApi.getAuditTrailUsingGET(auditTrailId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -64,7 +64,7 @@ this.alfrescoApi.setConfig({
 let decisionauditsApi = new DecisionauditsApi(this.alfrescoApi);
 
 
-decisionauditsApi.getAuditTrailsUsingGET(decisionKeydmnDeploymentId).then(function(data) {
+decisionauditsApi.getAuditTrailsUsingGET(decisionKeydmnDeploymentId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

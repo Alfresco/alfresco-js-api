@@ -39,7 +39,7 @@ The new node has the same name as the source node unless you specify a new **nam
 
 If the source **nodeId** is a folder, then all of its children are also copied.
 
-If the source **nodeId** is a file, it&#39;s properties, aspects and tags are copied, it&#39;s ratings, comments and locks are not.
+If the source **nodeId** is a file, it's properties, aspects and tags are copied, it's ratings, comments and locks are not.
 
 
 ### Example
@@ -55,7 +55,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -64,7 +64,7 @@ let opts = {
 * path
 * permissions
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -78,7 +78,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.copyNode(nodeIdnodeBodyCopyopts).then(function(data) {
+nodesApi.copyNode(nodeIdnodeBodyCopyopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyCopy** | [**NodeBodyCopy**](NodeBodyCopy.md)| The targetParentId and, optionally, a new name which should include the file extension. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -134,12 +134,12 @@ specifying a list of associations in the JSON body like this:
 JSON
 [
   {
-     \&quot;targetId\&quot;: \&quot;string\&quot;,
-     \&quot;assocType\&quot;: \&quot;string\&quot;
+     \"targetId\": \"string\",
+     \"assocType\": \"string\"
   },
   {
-    \&quot;targetId\&quot;: \&quot;string\&quot;,
-    \&quot;assocType\&quot;: \&quot;string\&quot;
+    \"targetId\": \"string\",
+    \"assocType\": \"string\"
   }
 ]
 
@@ -147,22 +147,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -185,7 +185,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -199,7 +199,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.createAssocation(nodeIdassociationBodyCreateopts).then(function(data) {
+nodesApi.createAssocation(nodeIdassociationBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a source node. | 
  **associationBodyCreate** | [**AssociationBody**](AssociationBody.md)| The target node id and assoc type. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -245,9 +245,9 @@ This endpoint supports both JSON and multipart/form-data (file upload).
 **Using multipart/form-data**
 
 Use the **filedata** field to represent the content to upload, for example, the following curl command will
-create a node with the contents of test.txt in the test user&#39;s home folder.
+create a node with the contents of test.txt in the test user's home folder.
 
-curl -utest:test -X POST host:port/alfresco/api/-default-/public/alfresco/versions/1/nodes/-my-/children -F filedata&#x3D;@test.txt
+curl -utest:test -X POST host:port/alfresco/api/-default-/public/alfresco/versions/1/nodes/-my-/children -F filedata=@test.txt
 
 You can use the **name** field to give an alternative name for the new file.
 
@@ -282,16 +282,16 @@ Any other field provided will be treated as a property to set on the newly creat
 You must specify at least a **name** and **nodeType**. For example, to create a folder:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Folder\&quot;,
-  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;
+  \"name\":\"My Folder\",
+  \"nodeType\":\"cm:folder\"
 }
 
 
 You can create an empty file like this:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My text file.txt\&quot;,
-  \&quot;nodeType\&quot;:\&quot;cm:content\&quot;
+  \"name\":\"My text file.txt\",
+  \"nodeType\":\"cm:content\"
 }
 
 You can update binary content using the PUT /nodes/{nodeId} API method.
@@ -299,9 +299,9 @@ You can update binary content using the PUT /nodes/{nodeId} API method.
 You can create a folder, or other node, inside a folder hierarchy:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Special Folder\&quot;,
-  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,
-  \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot;
+  \"name\":\"My Special Folder\",
+  \"nodeType\":\"cm:folder\",
+  \"relativePath\":\"X/Y/Z\"
 }
 
 The **relativePath** specifies the folder structure to create relative to the node **nodeId**. Folders in the
@@ -310,12 +310,12 @@ The **relativePath** specifies the folder structure to create relative to the no
 You can set properties when you create a new node:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Other Folder\&quot;,
-  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,
-  \&quot;properties\&quot;:
+  \"name\":\"My Other Folder\",
+  \"nodeType\":\"cm:folder\",
+  \"properties\":
   {
-    \&quot;cm:title\&quot;:\&quot;Folder title\&quot;,
-    \&quot;cm:description\&quot;:\&quot;This is an important folder\&quot;
+    \"cm:title\":\"Folder title\",
+    \"cm:description\":\"This is an important folder\"
   }
 }
 
@@ -324,15 +324,15 @@ explicitly, if needed, using an **aspectNames** field.
 
 **Note:** setting properties of type d:content and d:category are not supported.
 
-Typically, for files and folders, the primary children are created within the parent folder using the default \&quot;cm:contains\&quot; assocType.
+Typically, for files and folders, the primary children are created within the parent folder using the default \"cm:contains\" assocType.
 If the content model allows then it is also possible to create primary children with a different assoc type. For example:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Node\&quot;,
-  \&quot;nodeType\&quot;:\&quot;my:specialNodeType\&quot;,
-  \&quot;association\&quot;:
+  \"name\":\"My Node\",
+  \"nodeType\":\"my:specialNodeType\",
+  \"association\":
   {
-    \&quot;assocType\&quot;:\&quot;my:specialAssocType\&quot;
+    \"assocType\":\"my:specialAssocType\"
   }
 }
 
@@ -344,19 +344,19 @@ You can optionally specify an array of **targets** to create one or more peer as
 For example, to associate one or more secondary children at time of creation:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Folder\&quot;,
-  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,
-  \&quot;secondaryChildren\&quot;:
-    [ {\&quot;childId\&quot;:\&quot;abcde-01234-...\&quot;, \&quot;assocType\&quot;:\&quot;my:specialChildAssocType\&quot;} ]
+  \"name\":\"My Folder\",
+  \"nodeType\":\"cm:folder\",
+  \"secondaryChildren\":
+    [ {\"childId\":\"abcde-01234-...\", \"assocType\":\"my:specialChildAssocType\"} ]
 }
 
 For example, to associate one or more targets at time of creation:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Folder\&quot;,
-  \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;,
-  \&quot;targets\&quot;:
-    [ {\&quot;targetId\&quot;:\&quot;abcde-01234-...\&quot;, \&quot;assocType\&quot;:\&quot;my:specialPeerAssocType\&quot;} ]
+  \"name\":\"My Folder\",
+  \"nodeType\":\"cm:folder\",
+  \"targets\":
+    [ {\"targetId\":\"abcde-01234-...\", \"assocType\":\"my:specialPeerAssocType\"} ]
 }
 
 
@@ -368,12 +368,12 @@ a folder:
 JSON
 [
   {
-    \&quot;name\&quot;:\&quot;My Folder 1\&quot;,
-    \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;
+    \"name\":\"My Folder 1\",
+    \"nodeType\":\"cm:folder\"
   },
   {
-    \&quot;name\&quot;:\&quot;My Folder 2\&quot;,
-    \&quot;nodeType\&quot;:\&quot;cm:folder\&quot;
+    \"name\":\"My Folder 2\",
+    \"nodeType\":\"cm:folder\"
   }
 ]
 
@@ -381,22 +381,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -419,8 +419,8 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'autoRename': true // boolean | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'autoRename': true //  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -429,7 +429,7 @@ let opts = {
 * path
 * permissions
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -443,7 +443,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.createNode(nodeIdnodeBodyCreateopts).then(function(data) {
+nodesApi.createNode(nodeIdnodeBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -462,7 +462,7 @@ Name | Type | Description  | Notes
  | 
  **nodeBodyCreate** | [**NodeBodyCreate**](NodeBodyCreate.md)| The node information to create. | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix. | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -471,7 +471,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -504,12 +504,12 @@ specifying a list of associations in the JSON body like this:
 JSON
 [
   {
-    \&quot;childId\&quot;: \&quot;string\&quot;,
-    \&quot;assocType\&quot;: \&quot;string\&quot;
+    \"childId\": \"string\",
+    \"assocType\": \"string\"
   },
   {
-    \&quot;childId\&quot;: \&quot;string\&quot;,
-    \&quot;assocType\&quot;: \&quot;string\&quot;
+    \"childId\": \"string\",
+    \"assocType\": \"string\"
   }
 ]
 
@@ -517,22 +517,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -555,7 +555,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -569,7 +569,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.createSecondaryChildAssocation(nodeIdsecondaryChildAssociationBodyCreateopts).then(function(data) {
+nodesApi.createSecondaryChildAssocation(nodeIdsecondaryChildAssociationBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -583,7 +583,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a parent node. | 
  **secondaryChildAssociationBodyCreate** | [**ChildAssociationBody**](ChildAssociationBody.md)| The child node id and assoc type. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -630,10 +630,10 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'assocType': assocType_example // string | Only delete associations of this type.
+  'assocType': assocType_example //  | Only delete associations of this type.
 };
 
-nodesApi.deleteAssocation(nodeIdtargetIdopts).then(function() {
+nodesApi.deleteAssocation(nodeIdtargetIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -689,12 +689,12 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'permanent': true // boolean | If **true** then the node is deleted permanently, without moving to the trashcan.
+  'permanent': true //  | If **true** then the node is deleted permanently, without moving to the trashcan.
 Only the owner of the node or an admin can permanently delete the node.
 
 };
 
-nodesApi.deleteNode(nodeIdopts).then(function() {
+nodesApi.deleteNode(nodeIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -743,10 +743,10 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'assocType': assocType_example // string | Only delete associations of this type.
+  'assocType': assocType_example //  | Only delete associations of this type.
 };
 
-nodesApi.deleteSecondaryChildAssocation(nodeIdchildIdopts).then(function() {
+nodesApi.deleteSecondaryChildAssocation(nodeIdchildIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -792,7 +792,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -801,10 +801,10 @@ let opts = {
 * path
 * permissions
 
-  'relativePath': relativePath_example // string | A path relative to the **nodeId**. If you set this,
+  'relativePath': relativePath_example //  | A path relative to the **nodeId**. If you set this,
 information is returned on the node resolved by this path.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -818,7 +818,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.getNode(nodeIdopts).then(function(data) {
+nodesApi.getNode(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -835,7 +835,7 @@ Name | Type | Description  | Notes
 * -shared-
 * -root-
  | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -847,7 +847,7 @@ Name | Type | Description  | Notes
  **relativePath** | **string**| A path relative to the **nodeId**. If you set this,
 information is returned on the node resolved by this path.
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -888,7 +888,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'attachment': true // boolean | **true** enables a web browser to download the file as an attachment.
+  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -898,15 +898,15 @@ for example, certain image files and PDF files.
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
 
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 // Date | Only returns the content if it has been modified since the date provided.
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
 
-  'range': range_example // string | The Range header indicates the part of a document that the server should return.
+  'range': range_example //  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
 
 };
 
-nodesApi.getNodeContent(nodeIdopts).then(function() {
+nodesApi.getNodeContent(nodeIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -933,7 +933,7 @@ the attachment will be returned in the response.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
  | [optional] 
  **range** | **string**| The Range header indicates the part of a document that the server should return.
-Single part request supported, for example: bytes&#x3D;1-10.
+Single part request supported, for example: bytes=1-10.
  | [optional] 
 
 ### Return type
@@ -956,7 +956,7 @@ You can use the **include** parameter to return additional information.
 
 The list of child nodes includes primary children and secondary children, if there are any.
 
-You can use the **include** parameter (include&#x3D;association) to return child association details
+You can use the **include** parameter (include=association) to return child association details
 for each child, including the **assocTyp**e and the **isPrimary** flag.
 
 The default sort order for the returned list is for folders to be sorted before files, and by ascending name.
@@ -964,7 +964,7 @@ The default sort order for the returned list is for folders to be sorted before 
 You can override the default using **orderBy** to specify one or more fields to sort by. The default order is always ascending, but
 you can use an optional **ASC** or **DESC** modifier to specify an ascending or descending sort order.
 
-For example, specifying orderBy&#x3D;name DESC returns a mixed folder/file list in descending **name** order.
+For example, specifying orderBy=name DESC returns a mixed folder/file list in descending **name** order.
 
 You can use any of the following fields to order the results:
 * isFolder
@@ -991,13 +991,13 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1005,7 +1005,7 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'where': where_example // string | Optionally filter the list. Here are some examples:
+  'where': where_example //  | Optionally filter the list. Here are some examples:
 
 *   where=(isFolder=true)
 
@@ -1021,7 +1021,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
 *   where=(isPrimary=false and assocType='my:specialAssocType')
 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * association
@@ -1032,9 +1032,9 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 * properties
 * permissions
 
-  'relativePath': relativePath_example // string | Return information on children in the folder resolved by this path. The path is relative to **nodeId**.
-  'includeSource': true // boolean | Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**.
-  'fields':  // Array<string> | A list of field names.
+  'relativePath': relativePath_example //  | Return information on children in the folder resolved by this path. The path is relative to **nodeId**.
+  'includeSource': true //  | Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1048,7 +1048,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.listNodeChildren(nodeIdopts).then(function(data) {
+nodesApi.listNodeChildren(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1071,7 +1071,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1081,21 +1081,21 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
  | [optional] 
  **where** | **string**| Optionally filter the list. Here are some examples:
 
-*   where&#x3D;(isFolder&#x3D;true)
+*   where=(isFolder=true)
 
-*   where&#x3D;(isFile&#x3D;true)
+*   where=(isFile=true)
 
-*   where&#x3D;(nodeType&#x3D;&#39;my:specialNodeType&#39;)
+*   where=(nodeType='my:specialNodeType')
 
-*   where&#x3D;(nodeType&#x3D;&#39;my:specialNodeType INCLUDESUBTYPES&#39;)
+*   where=(nodeType='my:specialNodeType INCLUDESUBTYPES')
 
-*   where&#x3D;(isPrimary&#x3D;true)
+*   where=(isPrimary=true)
 
-*   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
+*   where=(assocType='my:specialAssocType')
 
-*   where&#x3D;(isPrimary&#x3D;false and assocType&#x3D;&#39;my:specialAssocType&#39;)
+*   where=(isPrimary=false and assocType='my:specialAssocType')
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * association
@@ -1108,7 +1108,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
  | [optional] 
  **relativePath** | **string**| Return information on children in the folder resolved by this path. The path is relative to **nodeId**. | [optional] 
  **includeSource** | **boolean**| Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1151,7 +1151,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'where': where_example // string | Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
+  'where': where_example //  | Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
 
 *   where=(assocType='my:specialAssocType')
 
@@ -1159,7 +1159,7 @@ let opts = {
 
 *   where=(isPrimary=false and assocType='my:specialAssocType')
 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1168,14 +1168,14 @@ let opts = {
 * path
 * properties
 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on **nodeId**
-  'fields':  // Array<string> | A list of field names.
+  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on **nodeId**
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1189,7 +1189,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.listParents(nodeIdopts).then(function(data) {
+nodesApi.listParents(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1208,13 +1208,13 @@ Name | Type | Description  | Notes
  | 
  **where** | **string**| Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
 
-*   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
+*   where=(assocType='my:specialAssocType')
 
-*   where&#x3D;(isPrimary&#x3D;true)
+*   where=(isPrimary=true)
 
-*   where&#x3D;(isPrimary&#x3D;false and assocType&#x3D;&#39;my:specialAssocType&#39;)
+*   where=(isPrimary=false and assocType='my:specialAssocType')
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1230,7 +1230,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on **nodeId** | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1271,11 +1271,11 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'where': where_example // string | Optionally filter the list by assocType. Here's an example:
+  'where': where_example //  | Optionally filter the list by assocType. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1284,14 +1284,14 @@ let opts = {
 * path
 * properties
 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on **nodeId**
-  'fields':  // Array<string> | A list of field names.
+  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on **nodeId**
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1305,7 +1305,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.listSecondaryChildren(nodeIdopts).then(function(data) {
+nodesApi.listSecondaryChildren(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1322,11 +1322,11 @@ Name | Type | Description  | Notes
 * -shared-
 * -root-
  | 
- **where** | **string**| Optionally filter the list by assocType. Here&#39;s an example:
+ **where** | **string**| Optionally filter the list by assocType. Here's an example:
 
-*   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
+*   where=(assocType='my:specialAssocType')
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1342,7 +1342,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on **nodeId** | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1383,11 +1383,11 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'where': where_example // string | Optionally filter the list by **assocType**. Here's an example:
+  'where': where_example //  | Optionally filter the list by **assocType**. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1396,7 +1396,7 @@ let opts = {
 * path
 * properties
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1410,7 +1410,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.listSourceAssociations(nodeIdopts).then(function(data) {
+nodesApi.listSourceAssociations(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1423,11 +1423,11 @@ nodesApi.listSourceAssociations(nodeIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a target node. | 
- **where** | **string**| Optionally filter the list by **assocType**. Here&#39;s an example:
+ **where** | **string**| Optionally filter the list by **assocType**. Here's an example:
 
-*   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
+*   where=(assocType='my:specialAssocType')
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1436,7 +1436,7 @@ Name | Type | Description  | Notes
 * path
 * properties
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1477,11 +1477,11 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'where': where_example // string | Optionally filter the list by **assocType**. Here's an example:
+  'where': where_example //  | Optionally filter the list by **assocType**. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1490,7 +1490,7 @@ let opts = {
 * path
 * properties
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1504,7 +1504,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.listTargetAssociations(nodeIdopts).then(function(data) {
+nodesApi.listTargetAssociations(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1517,11 +1517,11 @@ nodesApi.listTargetAssociations(nodeIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a source node. | 
- **where** | **string**| Optionally filter the list by **assocType**. Here&#39;s an example:
+ **where** | **string**| Optionally filter the list by **assocType**. Here's an example:
 
-*   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
+*   where=(assocType='my:specialAssocType')
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1530,7 +1530,7 @@ Name | Type | Description  | Notes
 * path
 * properties
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1574,8 +1574,8 @@ You can use **type** to change the lock type to one of the following:
 * **FULL** no changes by any user are allowed. This enum is the same value as the deprecated READ_ONLY_LOCK described in org.alfresco.service.cmr.lock.LockType in the Alfresco Public Java API.
 
 By default, a lock is persisted in the database. You can create a volatile in-memory lock by setting the **lifetime** property to EPHEMERAL.
-You might choose use EPHEMERAL locks, for example, if you are taking frequent short-term locks that you don&#39;t need
-to be kept over a restart of the repository. In this case you don&#39;t need the
+You might choose use EPHEMERAL locks, for example, if you are taking frequent short-term locks that you don't need
+to be kept over a restart of the repository. In this case you don't need the
 overhead of writing the locks to the database.
 
 If a lock on the node cannot be taken, then an error is returned.
@@ -1594,7 +1594,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1603,7 +1603,7 @@ let opts = {
 * path
 * permissions
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1617,7 +1617,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.lockNode(nodeIdnodeBodyLockopts).then(function(data) {
+nodesApi.lockNode(nodeIdnodeBodyLockopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1631,7 +1631,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyLock** | [**NodeBodyLock**](NodeBodyLock.md)| Lock details. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1640,7 +1640,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1689,7 +1689,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1698,7 +1698,7 @@ let opts = {
 * path
 * permissions
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1712,7 +1712,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.moveNode(nodeIdnodeBodyMoveopts).then(function(data) {
+nodesApi.moveNode(nodeIdnodeBodyMoveopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1726,7 +1726,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyMove** | [**NodeBodyMove**](NodeBodyMove.md)| The targetParentId and, optionally, a new name which should include the file extension. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1735,7 +1735,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1780,7 +1780,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1789,7 +1789,7 @@ let opts = {
 * path
 * permissions
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1803,7 +1803,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.unlockNode(nodeIdopts).then(function(data) {
+nodesApi.unlockNode(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1816,7 +1816,7 @@ nodesApi.unlockNode(nodeIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1825,7 +1825,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1853,15 +1853,15 @@ Update a node
 Updates the node **nodeId**. For example, you can rename a file or folder:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My new name\&quot;
+  \"name\":\"My new name\"
 }
 
 You can also set or update one or more properties:
 JSON
 {
-  \&quot;properties\&quot;:
+  \"properties\":
   {
-    \&quot;cm:title\&quot;:\&quot;Folder title\&quot;
+    \"cm:title\":\"Folder title\"
   }
 }
 
@@ -1873,20 +1873,20 @@ You can add (or remove) *locallySet* permissions, if any, in addition to any inh
 You can also optionally disable (or re-enable) inherited permissions via *isInheritanceEnabled* flag:
 JSON
 {
-  \&quot;permissions\&quot;:
+  \"permissions\":
     {
-      \&quot;isInheritanceEnabled\&quot;: false,
-      \&quot;locallySet\&quot;:
+      \"isInheritanceEnabled\": false,
+      \"locallySet\":
         [
-          {\&quot;authorityId\&quot;: \&quot;GROUP_special\&quot;, \&quot;name\&quot;: \&quot;Read\&quot;, \&quot;accessStatus\&quot;:\&quot;DENIED\&quot;},
-          {\&quot;authorityId\&quot;: \&quot;testuser\&quot;, \&quot;name\&quot;: \&quot;Contributor\&quot;, \&quot;accessStatus\&quot;:\&quot;ALLOWED\&quot;}
+          {\"authorityId\": \"GROUP_special\", \"name\": \"Read\", \"accessStatus\":\"DENIED\"},
+          {\"authorityId\": \"testuser\", \"name\": \"Contributor\", \"accessStatus\":\"ALLOWED\"}
         ]
     }
 }
 
 **Note:** if you want to add or remove locally set permissions then you must use **GET /nodes/{nodeId}** first to get the complete set of *locallySet* permissions.
 
-**Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
+**Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
 
 
 ### Example
@@ -1902,7 +1902,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1911,7 +1911,7 @@ let opts = {
 * path
 * permissions
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1925,7 +1925,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.updateNode(nodeIdnodeBodyUpdateopts).then(function(data) {
+nodesApi.updateNode(nodeIdnodeBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1939,7 +1939,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyUpdate** | [**NodeBodyUpdate**](NodeBodyUpdate.md)| The node information to update. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1948,7 +1948,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -2001,17 +2001,17 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'majorVersion': true // boolean | If **true**, create a major version.
+  'majorVersion': true //  | If **true**, create a major version.
 Setting this parameter also enables versioning of this node, if it is not already versioned.
 
-  'comment': comment_example // string | Add a version comment which will appear in version history.
+  'comment': comment_example //  | Add a version comment which will appear in version history.
 Setting this parameter also enables versioning of this node, if it is not already versioned.
 
-  'name': name_example // string | Optional new name. This should include the file extension.
+  'name': name_example //  | Optional new name. This should include the file extension.
 The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.
 The character . must not be used at the end of the name.
 
-  'include':  // Array<string> | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -2020,7 +2020,7 @@ The character . must not be used at the end of the name.
 * path
 * permissions
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -2034,7 +2034,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.updateNodeContent(nodeIdcontentBodyUpdateopts).then(function(data) {
+nodesApi.updateNodeContent(nodeIdcontentBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -2055,10 +2055,10 @@ Setting this parameter also enables versioning of this node, if it is not alread
 Setting this parameter also enables versioning of this node, if it is not already versioned.
  | [optional] 
  **name** | **string**| Optional new name. This should include the file extension.
-The name must not contain spaces or the following special characters: * \&quot; &lt; &gt; \\ / ? : and |.
+The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.
 The character . must not be used at the end of the name.
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -2067,7 +2067,7 @@ The character . must not be used at the end of the name.
 * path
 * permissions
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

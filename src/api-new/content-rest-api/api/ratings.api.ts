@@ -32,14 +32,14 @@ export class RatingsApi extends BaseApi {
     * Create a rating for the node with identifier **nodeId**
     * 
     * @param  nodeId The identifier of a node.
-    * @param  ratingBodyCreate For \&quot;myRating\&quot; the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
+    * @param  ratingBodyCreate For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
 
-For example, to \&quot;like\&quot; a file the following body would be used:
+For example, to \"like\" a file the following body would be used:
 
 JSON
   {
-    \&quot;id\&quot;: \&quot;likes\&quot;,
-    \&quot;myRating\&quot;: true
+    \"id\": \"likes\",
+    \"myRating\": true
   }
 
     * @param Object opts Optional parameters

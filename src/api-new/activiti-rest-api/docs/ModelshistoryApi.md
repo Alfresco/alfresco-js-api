@@ -4,7 +4,7 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getModelHistoryCollectionUsingGET**](ModelshistoryApi.md#getModelHistoryCollectionUsingGET) | **GET** /enterprise/models/{modelId}/history | List a model&#39;s historic versions
+[**getModelHistoryCollectionUsingGET**](ModelshistoryApi.md#getModelHistoryCollectionUsingGET) | **GET** /enterprise/models/{modelId}/history | List a model's historic versions
 [**getProcessModelHistoryUsingGET**](ModelshistoryApi.md#getProcessModelHistoryUsingGET) | **GET** /enterprise/models/{modelId}/history/{modelHistoryId} | Get a historic version of a model
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 # **getModelHistoryCollectionUsingGET**
 > ResultListDataRepresentationModelRepresentation getModelHistoryCollectionUsingGET(modelIdopts)
 
-List a model&#39;s historic versions
+List a model's historic versions
 
 ### Example
 ```javascript
@@ -27,10 +27,10 @@ this.alfrescoApi.setConfig({
 let modelshistoryApi = new ModelshistoryApi(this.alfrescoApi);
 
 let opts = { 
-  'includeLatestVersion': true // boolean | includeLatestVersion
+  'includeLatestVersion': true //  | includeLatestVersion
 };
 
-modelshistoryApi.getModelHistoryCollectionUsingGET(modelIdopts).then(function(data) {
+modelshistoryApi.getModelHistoryCollectionUsingGET(modelIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -68,7 +68,7 @@ this.alfrescoApi.setConfig({
 let modelshistoryApi = new ModelshistoryApi(this.alfrescoApi);
 
 
-modelshistoryApi.getProcessModelHistoryUsingGET(modelIdmodelHistoryId).then(function(data) {
+modelshistoryApi.getProcessModelHistoryUsingGET(modelIdmodelHistoryId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

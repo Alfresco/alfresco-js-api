@@ -34,7 +34,7 @@ this.alfrescoApi.setConfig({
 let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-formmodelsApi.getFormEditorJsonUsingGET(formId).then(function(data) {
+formmodelsApi.getFormEditorJsonUsingGET(formId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -71,7 +71,7 @@ this.alfrescoApi.setConfig({
 let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-formmodelsApi.getFormHistoryUsingGET(formIdformHistoryId).then(function(data) {
+formmodelsApi.getFormHistoryUsingGET(formIdformHistoryId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -109,7 +109,7 @@ this.alfrescoApi.setConfig({
 let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-formmodelsApi.getFormUsingGET(formId).then(function(data) {
+formmodelsApi.getFormUsingGET(formId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -146,7 +146,7 @@ this.alfrescoApi.setConfig({
 let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-formmodelsApi.getFormUsingGET1(formId).then(function(data) {
+formmodelsApi.getFormUsingGET1(formId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -183,7 +183,7 @@ this.alfrescoApi.setConfig({
 let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-formmodelsApi.getFormsUsingGET(formId).then(function(data) {
+formmodelsApi.getFormsUsingGET(formId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -195,11 +195,11 @@ formmodelsApi.getFormsUsingGET(formId).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **formId** | [**Array&lt;string&gt;**](string.md)| formId | 
+ **formId** | [**Array<string>**](string.md)| formId | 
 
 ### Return type
 
-[**Array&lt;FormRepresentation&gt;**](FormRepresentation.md)
+[**Array<FormRepresentation>**](FormRepresentation.md)
 
 <a name="getFormsUsingGET1"></a>
 # **getFormsUsingGET1**
@@ -219,7 +219,7 @@ this.alfrescoApi.setConfig({
 
 let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
-formmodelsApi.getFormsUsingGET1().then(function(data) {
+formmodelsApi.getFormsUsingGET1().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -253,16 +253,16 @@ this.alfrescoApi.setConfig({
 let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 let opts = { 
-  'nameLike': nameLike_example // string | nameLike
-  'appId': 789 // number | appId
-  'tenantId': 789 // number | tenantId
-  'start': 56 // number | start
-  'sort': sort_example // string | sort
-  'order': order_example // string | order
-  'size': 56 // number | size
+  'nameLike': nameLike_example //  | nameLike
+  'appId': 789 //  | appId
+  'tenantId': 789 //  | tenantId
+  'start': 56 //  | start
+  'sort': sort_example //  | sort
+  'order': order_example //  | order
+  'size': 56 //  | size
 };
 
-formmodelsApi.getFormsUsingGET2(opts).then(function(data) {
+formmodelsApi.getFormsUsingGET2(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -305,7 +305,7 @@ this.alfrescoApi.setConfig({
 let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-formmodelsApi.saveFormUsingPUT(formIdsaveRepresentation).then(function(data) {
+formmodelsApi.saveFormUsingPUT(formIdsaveRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -345,7 +345,7 @@ this.alfrescoApi.setConfig({
 let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-formmodelsApi.validateModelUsingPUT(formIdsaveRepresentation).then(function(data) {
+formmodelsApi.validateModelUsingPUT(formIdsaveRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -362,5 +362,5 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;ValidationErrorRepresentation&gt;**](ValidationErrorRepresentation.md)
+[**Array<ValidationErrorRepresentation>**](ValidationErrorRepresentation.md)
 

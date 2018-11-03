@@ -30,7 +30,7 @@ this.alfrescoApi.setConfig({
 let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
 
-userprofileApi.changePasswordUsingPOST(changePasswordRepresentation).then(function() {
+userprofileApi.changePasswordUsingPOST(changePasswordRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -68,7 +68,7 @@ this.alfrescoApi.setConfig({
 
 let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
-userprofileApi.getProfilePictureUsingGET().then(function(data) {
+userprofileApi.getProfilePictureUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -103,7 +103,7 @@ this.alfrescoApi.setConfig({
 
 let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
-userprofileApi.getProfileUsingGET().then(function(data) {
+userprofileApi.getProfileUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -139,7 +139,7 @@ this.alfrescoApi.setConfig({
 let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
 
-userprofileApi.updateProfile(userRepresentation).then(function(data) {
+userprofileApi.updateProfile(userRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -176,7 +176,7 @@ this.alfrescoApi.setConfig({
 let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
 
-userprofileApi.uploadProfilePictureUsingPOST(file).then(function(data) {
+userprofileApi.uploadProfilePictureUsingPOST(file).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -29,12 +29,12 @@ this.alfrescoApi.setConfig({
 let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 let opts = { 
-  'submittedBy': 789 // number | submittedBy
-  'start': 56 // number | start
-  'size': 56 // number | size
+  'submittedBy': 789 //  | submittedBy
+  'start': 56 //  | start
+  'size': 56 //  | size
 };
 
-submittedformsApi.getFormSubmittedFromsUsingGET(formIdopts).then(function(data) {
+submittedformsApi.getFormSubmittedFromsUsingGET(formIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -74,7 +74,7 @@ this.alfrescoApi.setConfig({
 let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
-submittedformsApi.getProcessSubmittedFromsUsingGET(processId).then(function(data) {
+submittedformsApi.getProcessSubmittedFromsUsingGET(processId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -111,7 +111,7 @@ this.alfrescoApi.setConfig({
 let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
-submittedformsApi.getSubmittedFromUsingGET(submittedFormId).then(function(data) {
+submittedformsApi.getSubmittedFromUsingGET(submittedFormId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -148,7 +148,7 @@ this.alfrescoApi.setConfig({
 let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
-submittedformsApi.getTaskSubmittedFromsUsingGET(taskId).then(function(data) {
+submittedformsApi.getTaskSubmittedFromsUsingGET(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

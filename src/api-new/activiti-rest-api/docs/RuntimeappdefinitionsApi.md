@@ -30,7 +30,7 @@ this.alfrescoApi.setConfig({
 let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
 
-runtimeappdefinitionsApi.deployAppDefinitionsUsingPOST(saveObject).then(function() {
+runtimeappdefinitionsApi.deployAppDefinitionsUsingPOST(saveObject).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -67,7 +67,7 @@ this.alfrescoApi.setConfig({
 let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
 
-runtimeappdefinitionsApi.getAppDefinitionUsingGET1(appDefinitionId).then(function(data) {
+runtimeappdefinitionsApi.getAppDefinitionUsingGET1(appDefinitionId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -105,7 +105,7 @@ this.alfrescoApi.setConfig({
 
 let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
-runtimeappdefinitionsApi.getAppDefinitionsUsingGET().then(function(data) {
+runtimeappdefinitionsApi.getAppDefinitionsUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

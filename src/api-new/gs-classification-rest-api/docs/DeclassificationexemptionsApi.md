@@ -24,12 +24,12 @@ For example, the following JSON body creates two declassification exemptions:
 JSON
 [
   {
-    \&quot;code\&quot;:\&quot;My Code1\&quot;,
-    \&quot;description\&quot;:\&quot;My Description1\&quot;
+    \"code\":\"My Code1\",
+    \"description\":\"My Description1\"
   },
   {
-    \&quot;code\&quot;:\&quot;My Code2\&quot;,
-    \&quot;description\&quot;:\&quot;My Description2\&quot;
+    \"code\":\"My Code2\",
+    \"description\":\"My Description2\"
   }
 ]
 
@@ -37,22 +37,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -75,7 +75,7 @@ this.alfrescoApi.setConfig({
 let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
 
 
-declassificationexemptionsApi.createDeclassificationExemption(declassificationExemption).then(function(data) {
+declassificationexemptionsApi.createDeclassificationExemption(declassificationExemption).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 Delete a declassification exemption
 
-Deletes the declassification exemption with id **declassificationExemptionId**. You can&#39;t delete a classification exemption that is being used to classify content.
+Deletes the declassification exemption with id **declassificationExemptionId**. You can't delete a classification exemption that is being used to classify content.
 
 ### Example
 ```javascript
@@ -114,7 +114,7 @@ this.alfrescoApi.setConfig({
 let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
 
 
-declassificationexemptionsApi.deleteDeclassificationExemption(declassificationExemptionId).then(function() {
+declassificationexemptionsApi.deleteDeclassificationExemption(declassificationExemptionId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -153,11 +153,11 @@ this.alfrescoApi.setConfig({
 let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 };
 
-declassificationexemptionsApi.listDeclassificationExemptions(opts).then(function(data) {
+declassificationexemptionsApi.listDeclassificationExemptions(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -197,7 +197,7 @@ this.alfrescoApi.setConfig({
 let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
 
 
-declassificationexemptionsApi.showDeclassificationExemptionById(declassificationExemptionId).then(function(data) {
+declassificationexemptionsApi.showDeclassificationExemptionById(declassificationExemptionId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -236,7 +236,7 @@ this.alfrescoApi.setConfig({
 let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
 
 
-declassificationexemptionsApi.updateDeclassificationExemption(declassificationExemptionIddeclassificationExemption).then(function(data) {
+declassificationexemptionsApi.updateDeclassificationExemption(declassificationExemptionIddeclassificationExemption).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

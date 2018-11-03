@@ -190,7 +190,7 @@ export class FormmodelsApi extends BaseApi {
         * @param  formId formId
         * @return Promise<Array<FormRepresentation>>
         */
-    getFormsUsingGET(formId: Array & lt; string&gt;): Promise<Array<FormRepresentation>> {
+    getFormsUsingGET(formId: Array<string>): Promise<Array<FormRepresentation>> {
 
         let postBody = null;
 

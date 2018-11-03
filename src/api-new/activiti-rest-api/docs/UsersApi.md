@@ -33,7 +33,7 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 
-usersApi.executeActionUsingPOST(userIdactionRequest).then(function() {
+usersApi.executeActionUsingPOST(userIdactionRequest).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -71,7 +71,7 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 
-usersApi.getProfilePictureUsingGET1(userId).then(function() {
+usersApi.getProfilePictureUsingGET1(userId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -108,7 +108,7 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 
-usersApi.getUserUsingGET1(userId).then(function(data) {
+usersApi.getUserUsingGET1(userId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -147,17 +147,17 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example // string | filter
-  'email': email_example // string | email
-  'externalId': externalId_example // string | externalId
-  'externalIdCaseInsensitive': externalIdCaseInsensitive_example // string | externalIdCaseInsensitive
-  'excludeTaskId': excludeTaskId_example // string | excludeTaskId
-  'excludeProcessId': excludeProcessId_example // string | excludeProcessId
-  'groupId': 789 // number | groupId
-  'tenantId': 789 // number | tenantId
+  'filter': filter_example //  | filter
+  'email': email_example //  | email
+  'externalId': externalId_example //  | externalId
+  'externalIdCaseInsensitive': externalIdCaseInsensitive_example //  | externalIdCaseInsensitive
+  'excludeTaskId': excludeTaskId_example //  | excludeTaskId
+  'excludeProcessId': excludeProcessId_example //  | excludeProcessId
+  'groupId': 789 //  | groupId
+  'tenantId': 789 //  | tenantId
 };
 
-usersApi.getUsersUsingGET1(opts).then(function(data) {
+usersApi.getUsersUsingGET1(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -201,7 +201,7 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 
-usersApi.requestPasswordResetUsingPOST(resetPassword).then(function() {
+usersApi.requestPasswordResetUsingPOST(resetPassword).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -238,7 +238,7 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 
-usersApi.updateUserUsingPUT(userIduserRequest).then(function(data) {
+usersApi.updateUserUsingPUT(userIduserRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

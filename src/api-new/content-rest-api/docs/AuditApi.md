@@ -29,8 +29,8 @@ an inclusive range of ids. The delete is within the context of the given audit a
 
 For example:
 
-*   where&#x3D;(createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
-*   where&#x3D;(id BETWEEN (&#39;1234&#39;, &#39;4321&#39;)
+*   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
+*   where=(id BETWEEN ('1234', '4321')
 
 You must have admin rights to delete audit information.
 
@@ -48,7 +48,7 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 
-auditApi.deleteAuditEntriesForAuditApp(auditApplicationIdwhere).then(function() {
+auditApi.deleteAuditEntriesForAuditApp(auditApplicationIdwhere).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -63,8 +63,8 @@ Name | Type | Description  | Notes
  **auditApplicationId** | **string**| The identifier of an audit application. | 
  **where** | **string**| Audit entries to permanently delete for an audit application, given an inclusive time period or range of ids. For example:
 
-*   where&#x3D;(createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
-*   where&#x3D;(id BETWEEN (&#39;1234&#39;, &#39;4321&#39;)
+*   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
+*   where=(id BETWEEN ('1234', '4321')
  | 
 
 ### Return type
@@ -97,7 +97,7 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 
-auditApi.deleteAuditEntry(auditApplicationIdauditEntryId).then(function() {
+auditApi.deleteAuditEntry(auditApplicationIdauditEntryId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -142,7 +142,7 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -156,7 +156,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-auditApi.getAuditApp(auditApplicationIdopts).then(function(data) {
+auditApi.getAuditApp(auditApplicationIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -169,7 +169,7 @@ auditApi.getAuditApp(auditApplicationIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **auditApplicationId** | **string**| The identifier of an audit application. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -212,7 +212,7 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -226,7 +226,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-auditApi.getAuditEntry(auditApplicationIdauditEntryIdopts).then(function(data) {
+auditApi.getAuditEntry(auditApplicationIdauditEntryIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **auditApplicationId** | **string**| The identifier of an audit application. | 
  **auditEntryId** | **string**| The identifier of an audit entry. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -290,13 +290,13 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -310,7 +310,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-auditApi.listAuditApps(opts).then(function(data) {
+auditApi.listAuditApps(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -328,7 +328,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -367,7 +367,7 @@ The list can be filtered by one or more of:
 The default sort order is **createdAt** ascending, but you can use an optional **ASC** or **DESC**
 modifier to specify an ascending or descending sort order.
 
-For example, specifying orderBy&#x3D;createdAt DESC returns audit entries in descending **createdAt** order.
+For example, specifying orderBy=createdAt DESC returns audit entries in descending **createdAt** order.
 
 You must have admin rights to retrieve audit information.
 
@@ -385,10 +385,10 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -396,10 +396,10 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'where': where_example // string | Optionally filter the list. Here are some examples:
+  'where': where_example //  | Optionally filter the list. Here are some examples:
 
 *   where=(createdByUser='jbloggs')
 
@@ -413,10 +413,10 @@ If not supplied then the default value is 100.
 
 *   where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')
 
-  'include':  // Array<string> | Returns additional information about the audit entry. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the audit entry. The following optional fields can be requested:
 * values
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -430,7 +430,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-auditApi.listAuditEntriesForAuditApp(auditApplicationIdopts).then(function(data) {
+auditApi.listAuditEntriesForAuditApp(auditApplicationIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
  | [optional] [default to 0]
- **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -459,22 +459,22 @@ If not supplied then the default value is 100.
  | [optional] [default to 100]
  **where** | **string**| Optionally filter the list. Here are some examples:
 
-*   where&#x3D;(createdByUser&#x3D;&#39;jbloggs&#39;)
+*   where=(createdByUser='jbloggs')
 
-*   where&#x3D;(id BETWEEN (&#39;1234&#39;, &#39;4321&#39;)
+*   where=(id BETWEEN ('1234', '4321')
 
-*   where&#x3D;(createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
+*   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
 
-*   where&#x3D;(createdByUser&#x3D;&#39;jbloggs&#39; and createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
+*   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
 
-*   where&#x3D;(valuesKey&#x3D;&#39;/alfresco-access/login/user&#39;)
+*   where=(valuesKey='/alfresco-access/login/user')
 
-*   where&#x3D;(valuesKey&#x3D;&#39;/alfresco-access/transaction/action&#39; and valuesValue&#x3D;&#39;DELETE&#39;)
+*   where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
 * values
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -506,9 +506,9 @@ The list can be filtered by **createdByUser** and for a given inclusive time per
 The default sort order is **createdAt** ascending, but you can use an optional **ASC** or **DESC**
 modifier to specify an ascending or descending sort order.
 
-For example, specifying orderBy&#x3D;createdAt DESC returns audit entries in descending **createdAt** order.
+For example, specifying orderBy=createdAt DESC returns audit entries in descending **createdAt** order.
 
-This relies on the pre-configured &#39;alfresco-access&#39; audit application.
+This relies on the pre-configured 'alfresco-access' audit application.
 
 
 ### Example
@@ -524,10 +524,10 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -535,10 +535,10 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'where': where_example // string | Optionally filter the list. Here are some examples:
+  'where': where_example //  | Optionally filter the list. Here are some examples:
 
 *   where=(createdByUser='-me-')
 
@@ -546,10 +546,10 @@ If not supplied then the default value is 100.
 
 *   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
 
-  'include':  // Array<string> | Returns additional information about the audit entry. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the audit entry. The following optional fields can be requested:
 * values
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -563,7 +563,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-auditApi.listAuditEntriesForNode(nodeIdopts).then(function(data) {
+auditApi.listAuditEntriesForNode(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -579,7 +579,7 @@ Name | Type | Description  | Notes
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
  | [optional] [default to 0]
- **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -592,16 +592,16 @@ If not supplied then the default value is 100.
  | [optional] [default to 100]
  **where** | **string**| Optionally filter the list. Here are some examples:
 
-*   where&#x3D;(createdByUser&#x3D;&#39;-me-&#39;)
+*   where=(createdByUser='-me-')
 
-*   where&#x3D;(createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
+*   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
 
-*   where&#x3D;(createdByUser&#x3D;&#39;jbloggs&#39; and createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
+*   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
 * values
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -631,7 +631,7 @@ Disable or re-enable the audit application **auditApplicationId**.
 New audit entries will not be created for a disabled audit application until
 it is re-enabled (and system-wide auditing is also enabled).
 
-Note, it is still possible to query &amp;/or delete any existing audit entries even
+Note, it is still possible to query &/or delete any existing audit entries even
 if auditing is disabled for the audit application.
 
 You must have admin rights to update audit application.
@@ -650,7 +650,7 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -664,7 +664,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-auditApi.updateAuditApp(auditApplicationIdauditAppBodyUpdateopts).then(function(data) {
+auditApi.updateAuditApp(auditApplicationIdauditAppBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -678,7 +678,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **auditApplicationId** | **string**| The identifier of an audit application. | 
  **auditAppBodyUpdate** | [**AuditBodyUpdate**](AuditBodyUpdate.md)| The audit application to update. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

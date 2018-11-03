@@ -26,7 +26,7 @@ this.alfrescoApi.setConfig({
 
 let scriptfilesApi = new ScriptfilesApi(this.alfrescoApi);
 
-scriptfilesApi.getControllersUsingGET().then(function(data) {
+scriptfilesApi.getControllersUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -59,7 +59,7 @@ this.alfrescoApi.setConfig({
 
 let scriptfilesApi = new ScriptfilesApi(this.alfrescoApi);
 
-scriptfilesApi.getLibrariesUsingGET().then(function(data) {
+scriptfilesApi.getLibrariesUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

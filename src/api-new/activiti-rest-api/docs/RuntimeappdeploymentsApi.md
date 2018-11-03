@@ -30,7 +30,7 @@ this.alfrescoApi.setConfig({
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
-runtimeappdeploymentsApi.deleteAppDeploymentUsingDELETE(appDeploymentId).then(function() {
+runtimeappdeploymentsApi.deleteAppDeploymentUsingDELETE(appDeploymentId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -67,7 +67,7 @@ this.alfrescoApi.setConfig({
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
-runtimeappdeploymentsApi.exportAppDefinitionUsingGET1(deploymentId).then(function() {
+runtimeappdeploymentsApi.exportAppDefinitionUsingGET1(deploymentId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -104,16 +104,16 @@ this.alfrescoApi.setConfig({
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 let opts = { 
-  'nameLike': nameLike_example // string | nameLike
-  'tenantId': 789 // number | tenantId
-  'latest': true // boolean | latest
-  'start': 56 // number | start
-  'sort': sort_example // string | sort
-  'order': order_example // string | order
-  'size': 56 // number | size
+  'nameLike': nameLike_example //  | nameLike
+  'tenantId': 789 //  | tenantId
+  'latest': true //  | latest
+  'start': 56 //  | start
+  'sort': sort_example //  | sort
+  'order': order_example //  | order
+  'size': 56 //  | size
 };
 
-runtimeappdeploymentsApi.getAppDefinitionsUsingGET1(opts).then(function(data) {
+runtimeappdeploymentsApi.getAppDefinitionsUsingGET1(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -156,7 +156,7 @@ this.alfrescoApi.setConfig({
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
-runtimeappdeploymentsApi.getAppDeploymentUsingGET(appDeploymentId).then(function(data) {
+runtimeappdeploymentsApi.getAppDeploymentUsingGET(appDeploymentId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -195,11 +195,11 @@ this.alfrescoApi.setConfig({
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 let opts = { 
-  'deploymentId': deploymentId_example // string | deploymentId
-  'dmnDeploymentId': 789 // number | dmnDeploymentId
+  'deploymentId': deploymentId_example //  | deploymentId
+  'dmnDeploymentId': 789 //  | dmnDeploymentId
 };
 
-runtimeappdeploymentsApi.getRuntimeAppDeploymentByDeploymentUsingGET(opts).then(function(data) {
+runtimeappdeploymentsApi.getRuntimeAppDeploymentByDeploymentUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

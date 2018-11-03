@@ -28,7 +28,7 @@ this.alfrescoApi.setConfig({
 let defaultclassificationvaluesApi = new DefaultclassificationvaluesApi(this.alfrescoApi);
 
 
-defaultclassificationvaluesApi.calculateDefaultDeclassificationDate(nodeId).then(function(data) {
+defaultclassificationvaluesApi.calculateDefaultDeclassificationDate(nodeId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -26,10 +26,10 @@ this.alfrescoApi.setConfig({
 let datasourcesApi = new DatasourcesApi(this.alfrescoApi);
 
 let opts = { 
-  'tenantId': 789 // number | tenantId
+  'tenantId': 789 //  | tenantId
 };
 
-datasourcesApi.getDataSourcesUsingGET(opts).then(function(data) {
+datasourcesApi.getDataSourcesUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

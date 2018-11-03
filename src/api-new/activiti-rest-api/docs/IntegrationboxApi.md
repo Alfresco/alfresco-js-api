@@ -33,7 +33,7 @@ this.alfrescoApi.setConfig({
 
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
-integrationboxApi.confirmAuthorisationUsingGET1().then(function() {
+integrationboxApi.confirmAuthorisationUsingGET1().then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -67,7 +67,7 @@ this.alfrescoApi.setConfig({
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-integrationboxApi.createRepositoryAccountUsingPOST(userIdcredentials).then(function() {
+integrationboxApi.createRepositoryAccountUsingPOST(userIdcredentials).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -105,7 +105,7 @@ this.alfrescoApi.setConfig({
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-integrationboxApi.deleteRepositoryAccountUsingDELETE(userId).then(function() {
+integrationboxApi.deleteRepositoryAccountUsingDELETE(userId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -141,7 +141,7 @@ this.alfrescoApi.setConfig({
 
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
-integrationboxApi.getBoxPluginStatusUsingGET().then(function(data) {
+integrationboxApi.getBoxPluginStatusUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -175,11 +175,11 @@ this.alfrescoApi.setConfig({
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example // string | filter
-  'parent': parent_example // string | parent
+  'filter': filter_example //  | filter
+  'parent': parent_example //  | parent
 };
 
-integrationboxApi.getFilesUsingGET(opts).then(function(data) {
+integrationboxApi.getFilesUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -217,7 +217,7 @@ this.alfrescoApi.setConfig({
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-integrationboxApi.getRepositoryAccountUsingGET(userId).then(function() {
+integrationboxApi.getRepositoryAccountUsingGET(userId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -254,7 +254,7 @@ this.alfrescoApi.setConfig({
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-integrationboxApi.updateRepositoryAccountUsingPUT(userIdcredentials).then(function() {
+integrationboxApi.updateRepositoryAccountUsingPUT(userIdcredentials).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

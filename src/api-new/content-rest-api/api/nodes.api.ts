@@ -815,7 +815,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
         * @param  opts.range The Range header indicates the part of a document that the server should return.
-    Single part request supported, for example: bytes&#x3D;1-10.
+    Single part request supported, for example: bytes=1-10.
     
         * @return Promise<{}>
         */
@@ -906,19 +906,19 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @param  opts.where Optionally filter the list. Here are some examples:
     
-    *   where&#x3D;(isFolder&#x3D;true)
+    *   where=(isFolder=true)
     
-    *   where&#x3D;(isFile&#x3D;true)
+    *   where=(isFile=true)
     
-    *   where&#x3D;(nodeType&#x3D;&#39;my:specialNodeType&#39;)
+    *   where=(nodeType='my:specialNodeType')
     
-    *   where&#x3D;(nodeType&#x3D;&#39;my:specialNodeType INCLUDESUBTYPES&#39;)
+    *   where=(nodeType='my:specialNodeType INCLUDESUBTYPES')
     
-    *   where&#x3D;(isPrimary&#x3D;true)
+    *   where=(isPrimary=true)
     
-    *   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
+    *   where=(assocType='my:specialAssocType')
     
-    *   where&#x3D;(isPrimary&#x3D;false and assocType&#x3D;&#39;my:specialAssocType&#39;)
+    *   where=(isPrimary=false and assocType='my:specialAssocType')
     
         * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
@@ -1002,11 +1002,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param Object opts Optional parameters
         * @param  opts.where Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
     
-    *   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
+    *   where=(assocType='my:specialAssocType')
     
-    *   where&#x3D;(isPrimary&#x3D;true)
+    *   where=(isPrimary=true)
     
-    *   where&#x3D;(isPrimary&#x3D;false and assocType&#x3D;&#39;my:specialAssocType&#39;)
+    *   where=(isPrimary=false and assocType='my:specialAssocType')
     
         * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
@@ -1087,9 +1087,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * -root-
     
         * @param Object opts Optional parameters
-        * @param  opts.where Optionally filter the list by assocType. Here&#39;s an example:
+        * @param  opts.where Optionally filter the list by assocType. Here's an example:
     
-    *   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
+    *   where=(assocType='my:specialAssocType')
     
         * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
@@ -1166,9 +1166,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         * 
         * @param  nodeId The identifier of a target node.
         * @param Object opts Optional parameters
-        * @param  opts.where Optionally filter the list by **assocType**. Here&#39;s an example:
+        * @param  opts.where Optionally filter the list by **assocType**. Here's an example:
     
-    *   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
+    *   where=(assocType='my:specialAssocType')
     
         * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
@@ -1235,9 +1235,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         * 
         * @param  nodeId The identifier of a source node.
         * @param Object opts Optional parameters
-        * @param  opts.where Optionally filter the list by **assocType**. Here&#39;s an example:
+        * @param  opts.where Optionally filter the list by **assocType**. Here's an example:
     
-    *   where&#x3D;(assocType&#x3D;&#39;my:specialAssocType&#39;)
+    *   where=(assocType='my:specialAssocType')
     
         * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
@@ -1666,7 +1666,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     Setting this parameter also enables versioning of this node, if it is not already versioned.
     
         * @param  opts.name Optional new name. This should include the file extension.
-    The name must not contain spaces or the following special characters: * \&quot; &lt; &gt; \\ / ? : and |.
+    The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.
     The character . must not be used at the end of the name.
     
         * @param  opts.include Returns additional information about the node. The following optional fields can be requested:

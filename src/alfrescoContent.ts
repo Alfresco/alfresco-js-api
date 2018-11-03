@@ -61,7 +61,7 @@ export class AlfrescoContent {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
             '/renditions/imgpreview/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
-            '&alf_ticket=' + (ticket || this.ecmAuth.getTicket() getAccessToken );
+            '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
     }
 
     /**

@@ -28,7 +28,7 @@ this.alfrescoApi.setConfig({
 
 let integrationdriveApi = new IntegrationdriveApi(this.alfrescoApi);
 
-integrationdriveApi.confirmAuthorisationUsingGET2().then(function() {
+integrationdriveApi.confirmAuthorisationUsingGET2().then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -62,12 +62,12 @@ this.alfrescoApi.setConfig({
 let integrationdriveApi = new IntegrationdriveApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example // string | filter
-  'parent': parent_example // string | parent
-  'currentFolderOnly': true // boolean | currentFolderOnly
+  'filter': filter_example //  | filter
+  'parent': parent_example //  | parent
+  'currentFolderOnly': true //  | currentFolderOnly
 };
 
-integrationdriveApi.getFilesUsingGET1(opts).then(function(data) {
+integrationdriveApi.getFilesUsingGET1(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

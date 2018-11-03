@@ -29,7 +29,7 @@ this.alfrescoApi.setConfig({
 let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
 
-systempropertiesApi.getGlobalDateFormatUsingGET(tenantId).then(function(data) {
+systempropertiesApi.getGlobalDateFormatUsingGET(tenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -66,7 +66,7 @@ this.alfrescoApi.setConfig({
 let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
 
-systempropertiesApi.getPasswordValidationConstraintsUsingGET(tenantId).then(function(data) {
+systempropertiesApi.getPasswordValidationConstraintsUsingGET(tenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -104,7 +104,7 @@ this.alfrescoApi.setConfig({
 
 let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
-systempropertiesApi.getPropertiesUsingGET().then(function(data) {
+systempropertiesApi.getPropertiesUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -138,7 +138,7 @@ this.alfrescoApi.setConfig({
 let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
 
-systempropertiesApi.involvedUsersCanEditFormsUsingGET(tenantId).then(function(data) {
+systempropertiesApi.involvedUsersCanEditFormsUsingGET(tenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

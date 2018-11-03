@@ -31,7 +31,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.completeTaskFormUsingPOST(taskIdcompleteTaskFormRepresentation).then(function() {
+taskformsApi.completeTaskFormUsingPOST(taskIdcompleteTaskFormRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -69,7 +69,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.getProcessInstanceVariablesUsingGET1(taskId).then(function(data) {
+taskformsApi.getProcessInstanceVariablesUsingGET1(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;ProcessInstanceVariableRepresentation&gt;**](ProcessInstanceVariableRepresentation.md)
+[**Array<ProcessInstanceVariableRepresentation>**](ProcessInstanceVariableRepresentation.md)
 
 <a name="getRestFieldValuesUsingGET1"></a>
 # **getRestFieldValuesUsingGET1**
@@ -108,7 +108,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.getRestFieldValuesUsingGET1(taskIdfieldcolumn).then(function(data) {
+taskformsApi.getRestFieldValuesUsingGET1(taskIdfieldcolumn).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;FormValueRepresentation&gt;**](FormValueRepresentation.md)
+[**Array<FormValueRepresentation>**](FormValueRepresentation.md)
 
 <a name="getRestFieldValuesUsingGET2"></a>
 # **getRestFieldValuesUsingGET2**
@@ -149,7 +149,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.getRestFieldValuesUsingGET2(taskIdfield).then(function(data) {
+taskformsApi.getRestFieldValuesUsingGET2(taskIdfield).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;FormValueRepresentation&gt;**](FormValueRepresentation.md)
+[**Array<FormValueRepresentation>**](FormValueRepresentation.md)
 
 <a name="getTaskFormUsingGET"></a>
 # **getTaskFormUsingGET**
@@ -187,7 +187,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.getTaskFormUsingGET(taskId).then(function(data) {
+taskformsApi.getTaskFormUsingGET(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -224,7 +224,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.saveTaskFormUsingPOST(taskIdsaveTaskFormRepresentation).then(function() {
+taskformsApi.saveTaskFormUsingPOST(taskIdsaveTaskFormRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

@@ -28,7 +28,7 @@ this.alfrescoApi.setConfig({
 let checklistsApi = new ChecklistsApi(this.alfrescoApi);
 
 
-checklistsApi.addSubtaskUsingPOST(taskIdtaskRepresentation).then(function(data) {
+checklistsApi.addSubtaskUsingPOST(taskIdtaskRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -66,7 +66,7 @@ this.alfrescoApi.setConfig({
 let checklistsApi = new ChecklistsApi(this.alfrescoApi);
 
 
-checklistsApi.getChecklistUsingGET(taskId).then(function(data) {
+checklistsApi.getChecklistUsingGET(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -103,7 +103,7 @@ this.alfrescoApi.setConfig({
 let checklistsApi = new ChecklistsApi(this.alfrescoApi);
 
 
-checklistsApi.orderChecklistUsingPUT(taskIdorderRepresentation).then(function() {
+checklistsApi.orderChecklistUsingPUT(taskIdorderRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

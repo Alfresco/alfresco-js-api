@@ -34,7 +34,7 @@ this.alfrescoApi.setConfig({
 let actionsApi = new ActionsApi(this.alfrescoApi);
 
 
-actionsApi.actionDetails(actionDefinitionId).then(function(data) {
+actionsApi.actionDetails(actionDefinitionId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -66,10 +66,10 @@ An action may be executed against a node specified by **targetId**. For example:
 
 
 {
-  \&quot;actionDefinitionId\&quot;: \&quot;copy\&quot;,
-  \&quot;targetId\&quot;: \&quot;4c4b3c43-f18b-43ff-af84-751f16f1ddfd\&quot;,
-  \&quot;params\&quot;: {
-  	\&quot;destination-folder\&quot;: \&quot;34219f79-66fa-4ebf-b371-118598af898c\&quot;
+  \"actionDefinitionId\": \"copy\",
+  \"targetId\": \"4c4b3c43-f18b-43ff-af84-751f16f1ddfd\",
+  \"params\": {
+  	\"destination-folder\": \"34219f79-66fa-4ebf-b371-118598af898c\"
   }
 }
 
@@ -92,10 +92,10 @@ In this example, we add the aspect cm:versionable to a node using the QName reso
 
 
 {
-  \&quot;actionDefinitionId\&quot;: \&quot;add-features\&quot;,
-  \&quot;targetId\&quot;: \&quot;16349e3f-2977-44d1-93f2-73c12b8083b5\&quot;,
-  \&quot;params\&quot;: {
-  	\&quot;aspect-name\&quot;: \&quot;cm:versionable\&quot;
+  \"actionDefinitionId\": \"add-features\",
+  \"targetId\": \"16349e3f-2977-44d1-93f2-73c12b8083b5\",
+  \"params\": {
+  	\"aspect-name\": \"cm:versionable\"
   }
 }
 
@@ -121,7 +121,7 @@ this.alfrescoApi.setConfig({
 let actionsApi = new ActionsApi(this.alfrescoApi);
 
 
-actionsApi.actionExec(actionBodyExec).then(function(data) {
+actionsApi.actionExec(actionBodyExec).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -170,13 +170,13 @@ this.alfrescoApi.setConfig({
 let actionsApi = new ActionsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -184,7 +184,7 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -198,7 +198,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-actionsApi.listActions(opts).then(function(data) {
+actionsApi.listActions(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -216,7 +216,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -224,7 +224,7 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -272,13 +272,13 @@ this.alfrescoApi.setConfig({
 let actionsApi = new ActionsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -286,7 +286,7 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -300,7 +300,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-actionsApi.nodeActions(nodeIdopts).then(function(data) {
+actionsApi.nodeActions(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -319,7 +319,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -327,7 +327,7 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

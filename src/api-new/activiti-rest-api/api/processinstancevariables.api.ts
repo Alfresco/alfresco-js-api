@@ -32,7 +32,7 @@ export class ProcessinstancevariablesApi extends BaseApi {
     * @param  restVariables restVariables
     * @return Promise<Array<RestVariable>>
     */
-    createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceId: string, restVariables: Array & lt; RestVariable&gt;): Promise<Array<RestVariable>> {
+    createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceId: string, restVariables: Array<RestVariable>): Promise<Array<RestVariable>> {
 
         let postBody = restVariables;
 
@@ -74,7 +74,7 @@ export class ProcessinstancevariablesApi extends BaseApi {
         * @param  restVariables restVariables
         * @return Promise<Array<RestVariable>>
         */
-    createProcessInstanceVariablesUsingPOST(processInstanceId: string, restVariables: Array & lt; RestVariable&gt;): Promise<Array<RestVariable>> {
+    createProcessInstanceVariablesUsingPOST(processInstanceId: string, restVariables: Array<RestVariable>): Promise<Array<RestVariable>> {
 
         let postBody = restVariables;
 

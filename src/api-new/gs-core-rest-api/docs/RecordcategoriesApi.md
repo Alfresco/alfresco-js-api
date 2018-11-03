@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**createRecordCategoryChild**](RecordcategoriesApi.md#createRecordCategoryChild) | **POST** /record-categories/{recordCategoryId}/children | Create a record category or a record folder
 [**deleteRecordCategory**](RecordcategoriesApi.md#deleteRecordCategory) | **DELETE** /record-categories/{recordCategoryId} | Delete a record category
 [**getRecordCategory**](RecordcategoriesApi.md#getRecordCategory) | **GET** /record-categories/{recordCategoryId} | Get a record category
-[**listRecordCategoryChildren**](RecordcategoriesApi.md#listRecordCategoryChildren) | **GET** /record-categories/{recordCategoryId}/children | List record category&#39;s children
+[**listRecordCategoryChildren**](RecordcategoriesApi.md#listRecordCategoryChildren) | **GET** /record-categories/{recordCategoryId}/children | List record category's children
 [**updateRecordCategory**](RecordcategoriesApi.md#updateRecordCategory) | **PUT** /record-categories/{recordCategoryId} | Update a record category
 
 
@@ -30,25 +30,25 @@ You must specify at least a **name** and **nodeType**.
 You can create a category like this:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Record Category\&quot;,
-  \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;
+  \"name\":\"My Record Category\",
+  \"nodeType\":\"rma:recordCategory\"
 }
 
 
 You can create a record folder like this:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Record Folder\&quot;,
-  \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;
+  \"name\":\"My Record Folder\",
+  \"nodeType\":\"rma:recordFolder\"
 }
 
 
 You can create a record folder inside a container hierarchy (applies to record categories as well):
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Fileplan Component\&quot;,
-  \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;,
-  \&quot;relativePath\&quot;:\&quot;X/Y/Z\&quot;
+  \"name\":\"My Fileplan Component\",
+  \"nodeType\":\"rma:recordFolder\",
+  \"relativePath\":\"X/Y/Z\"
 }
 
 The **relativePath** specifies the container structure to create relative to the node (record category or record folder). Containers in the
@@ -58,12 +58,12 @@ the type of the parent container and the type of the node to be created.
 You can set properties when creating a record category (applies to record folders as well):
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Record Category\&quot;,
-  \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;,
-  \&quot;properties\&quot;:
+  \"name\":\"My Record Category\",
+  \"nodeType\":\"rma:recordCategory\",
+  \"properties\":
   {
-    \&quot;rma:vitalRecordIndicator\&quot;:\&quot;true\&quot;,
-    \&quot;rma:reviewPeriod\&quot;:\&quot;month|1\&quot;
+    \"rma:vitalRecordIndicator\":\"true\",
+    \"rma:reviewPeriod\":\"month|1\"
   }
 }
 
@@ -76,12 +76,12 @@ body creates a record category and a record folder inside the specified **catego
 JSON
 [
   {
-    \&quot;name\&quot;:\&quot;My Record Category\&quot;,
-    \&quot;nodeType\&quot;:\&quot;rma:recordCategory\&quot;
+    \"name\":\"My Record Category\",
+    \"nodeType\":\"rma:recordCategory\"
   },
   {
-    \&quot;name\&quot;:\&quot;My Record Folder\&quot;,
-    \&quot;nodeType\&quot;:\&quot;rma:recordFolder\&quot;
+    \"name\":\"My Record Folder\",
+    \"nodeType\":\"rma:recordFolder\"
   }
 ]
 
@@ -89,22 +89,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -127,14 +127,14 @@ this.alfrescoApi.setConfig({
 let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
 let opts = { 
-  'autoRename': true // boolean | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+  'autoRename': true //  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
 
-  'include':  // Array<string> | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -148,7 +148,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-recordcategoriesApi.createRecordCategoryChild(recordCategoryIdnodeBodyCreateopts).then(function(data) {
+recordcategoriesApi.createRecordCategoryChild(recordCategoryIdnodeBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -165,12 +165,12 @@ Name | Type | Description  | Notes
  | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -209,7 +209,7 @@ this.alfrescoApi.setConfig({
 let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
 
-recordcategoriesApi.deleteRecordCategory(recordCategoryId).then(function() {
+recordcategoriesApi.deleteRecordCategory(recordCategoryId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -235,9 +235,9 @@ Get a record category
 
 Gets information for record category **recordCategoryId**
 
-Mandatory fields and the record category&#39;s aspects and properties are returned by default.
+Mandatory fields and the record category's aspects and properties are returned by default.
 
-You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
+You can use the **include** parameter (include=allowableOperations) to return additional information.
 
 
 ### Example
@@ -253,14 +253,14 @@ this.alfrescoApi.setConfig({
 let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
 
-  'relativePath': relativePath_example // string | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+  'relativePath': relativePath_example //  | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -274,7 +274,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-recordcategoriesApi.getRecordCategory(recordCategoryIdopts).then(function(data) {
+recordcategoriesApi.getRecordCategory(recordCategoryIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -287,14 +287,14 @@ recordcategoriesApi.getRecordCategory(recordCategoryIdopts).then(function(data) 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordCategoryId** | **string**| The identifier of a record category. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
  | [optional] 
  **relativePath** | **string**| Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -315,13 +315,13 @@ parameter are returned in addition to those specified in the **fields** paramete
 # **listRecordCategoryChildren**
 > RecordCategoryChildPaging listRecordCategoryChildren(recordCategoryIdopts)
 
-List record category&#39;s children
+List record category's children
 
 Returns a list of record categories and/or record folders.
 
 Minimal information for each child is returned by default.
 
-You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
+You can use the **include** parameter (include=allowableOperations) to return additional information.
 
 The list of child nodes includes primary children and secondary children, if there are any.
 
@@ -339,9 +339,9 @@ this.alfrescoApi.setConfig({
 let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56 // number | The maximum number of items to return in the list.
-  'where': where_example // string | Optionally filter the list. Here are some examples:
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
+  'where': where_example //  | Optionally filter the list. Here are some examples:
 
 *   where=(nodeType='rma:recordFolder')
 
@@ -349,7 +349,7 @@ let opts = {
 
 *   where=(isRecordFolder=true AND isClosed=false)
 
-  'include':  // Array<string> | Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * hasRetentionSchedule
@@ -359,10 +359,10 @@ let opts = {
 * path
 * properties
 
-  'relativePath': relativePath_example // string | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+  'relativePath': relativePath_example //  | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
 
-  'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
-  'fields':  // Array<string> | A list of field names.
+  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -376,7 +376,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-recordcategoriesApi.listRecordCategoryChildren(recordCategoryIdopts).then(function(data) {
+recordcategoriesApi.listRecordCategoryChildren(recordCategoryIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -393,13 +393,13 @@ Name | Type | Description  | Notes
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
  **where** | **string**| Optionally filter the list. Here are some examples:
 
-*   where&#x3D;(nodeType&#x3D;&#39;rma:recordFolder&#39;)
+*   where=(nodeType='rma:recordFolder')
 
-*   where&#x3D;(nodeType&#x3D;&#39;rma:recordCategory&#39;)
+*   where=(nodeType='rma:recordCategory')
 
-*   where&#x3D;(isRecordFolder&#x3D;true AND isClosed&#x3D;false)
+*   where=(isRecordFolder=true AND isClosed=false)
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * hasRetentionSchedule
@@ -412,7 +412,7 @@ Name | Type | Description  | Notes
  **relativePath** | **string**| Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -438,22 +438,22 @@ Update a record category
 Updates record category **recordCategoryId**. For example, you can rename a record category:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My new name\&quot;
+  \"name\":\"My new name\"
 }
 
 You can also set or update one or more properties:
 JSON
 {
-  \&quot;properties\&quot;:
+  \"properties\":
     {
-       \&quot;rma:vitalRecordIndicator\&quot;: true,
-       \&quot;rma:reviewPeriod\&quot;:\&quot;month|6\&quot;
+       \"rma:vitalRecordIndicator\": true,
+       \"rma:reviewPeriod\":\"month|6\"
     }
 }
 
 **Note:** If you want to add or remove aspects, then you must use **GET /record-categories/{recordCategoryId}** first to get the complete set of *aspectNames*.
 
-**Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
+**Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
 
 
 ### Example
@@ -469,12 +469,12 @@ this.alfrescoApi.setConfig({
 let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -488,7 +488,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-recordcategoriesApi.updateRecordCategory(recordCategoryIdrecordCategoryBodyUpdateopts).then(function(data) {
+recordcategoriesApi.updateRecordCategory(recordCategoryIdrecordCategoryBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -502,12 +502,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordCategoryId** | **string**| The identifier of a record category. | 
  **recordCategoryBodyUpdate** | [**FilePlanComponentBodyUpdate**](FilePlanComponentBodyUpdate.md)| The record category information to update. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

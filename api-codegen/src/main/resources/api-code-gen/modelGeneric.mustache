@@ -2,7 +2,7 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{ {{>model
 {{#vars}}
     {{#description}}
     /**
-     * {{{description}}}
+     * {{&description}}
      */
     {{/description}}
     {{#isReadOnly}}readonly {{/isReadOnly}}{{name}}{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}};

@@ -38,7 +38,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.createIdentityLinkUsingPOST2(taskIdidentityLinkRepresentation).then(function(data) {
+tasksApi.createIdentityLinkUsingPOST2(taskIdidentityLinkRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -78,7 +78,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.createNewTaskUsingPOST(taskRepresentation).then(function(data) {
+tasksApi.createNewTaskUsingPOST(taskRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -115,7 +115,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.deleteIdentityLinkUsingDELETE2(taskIdfamilyidentityIdtype).then(function() {
+tasksApi.deleteIdentityLinkUsingDELETE2(taskIdfamilyidentityIdtype).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -155,7 +155,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.deleteTaskUsingDELETE(taskId).then(function() {
+tasksApi.deleteTaskUsingDELETE(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -192,7 +192,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.filterTasksUsingPOST(tasksFilter).then(function(data) {
+tasksApi.filterTasksUsingPOST(tasksFilter).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -229,7 +229,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.getIdentityLinkTypeUsingGET2(taskIdfamilyidentityIdtype).then(function(data) {
+tasksApi.getIdentityLinkTypeUsingGET2(taskIdfamilyidentityIdtype).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -269,7 +269,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.getIdentityLinksForFamilyUsingGET2(taskIdfamily).then(function(data) {
+tasksApi.getIdentityLinksForFamilyUsingGET2(taskIdfamily).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -286,7 +286,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;IdentityLinkRepresentation&gt;**](IdentityLinkRepresentation.md)
+[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
 
 <a name="getIdentityLinksUsingGET2"></a>
 # **getIdentityLinksUsingGET2**
@@ -307,7 +307,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.getIdentityLinksUsingGET2(taskId).then(function(data) {
+tasksApi.getIdentityLinksUsingGET2(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -323,7 +323,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;IdentityLinkRepresentation&gt;**](IdentityLinkRepresentation.md)
+[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
 
 <a name="getTaskAuditLogUsingGET1"></a>
 # **getTaskAuditLogUsingGET1**
@@ -344,7 +344,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.getTaskAuditLogUsingGET1(taskId).then(function(data) {
+tasksApi.getTaskAuditLogUsingGET1(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -381,7 +381,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.getTaskUsingGET(taskId).then(function(data) {
+tasksApi.getTaskUsingGET(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -418,7 +418,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.listHistoricTasksUsingPOST(queryRequest).then(function(data) {
+tasksApi.listHistoricTasksUsingPOST(queryRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -455,7 +455,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.listTasksUsingPOST(tasksQuery).then(function(data) {
+tasksApi.listTasksUsingPOST(tasksQuery).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -494,7 +494,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.updateTaskUsingPUT(taskIdupdated).then(function(data) {
+tasksApi.updateTaskUsingPUT(taskIdupdated).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Declare as record
 
-Declares the file **fileId** in the unfiled records container. The original file is moved to the Records Management site and a secondary parent association is created in the file&#39;s original site.
+Declares the file **fileId** in the unfiled records container. The original file is moved to the Records Management site and a secondary parent association is created in the file's original site.
 
 ### Example
 ```javascript
@@ -28,14 +28,14 @@ this.alfrescoApi.setConfig({
 let filesApi = new FilesApi(this.alfrescoApi);
 
 let opts = { 
-  'hideRecord': true // boolean | Flag to indicate whether the record should be hidden from the current parent folder.
-  'include':  // Array<string> | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+  'hideRecord': true //  | Flag to indicate whether the record should be hidden from the current parent folder.
+  'include':  //  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -49,7 +49,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-filesApi.declareRecord(fileIdopts).then(function(data) {
+filesApi.declareRecord(fileIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -63,13 +63,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fileId** | **string**| The identifier of a non-record file. | 
  **hideRecord** | **boolean**| Flag to indicate whether the record should be hidden from the current parent folder. | [optional] [default to false]
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

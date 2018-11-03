@@ -33,7 +33,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-integrationalfrescocloudApi.confirmAuthorisationUsingGET(code).then(function() {
+integrationalfrescocloudApi.confirmAuthorisationUsingGET(code).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -69,7 +69,7 @@ this.alfrescoApi.setConfig({
 
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
-integrationalfrescocloudApi.getAllNetworksUsingGET().then(function(data) {
+integrationalfrescocloudApi.getAllNetworksUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -105,7 +105,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-integrationalfrescocloudApi.getAllSitesUsingGET(networkId).then(function(data) {
+integrationalfrescocloudApi.getAllSitesUsingGET(networkId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -142,11 +142,11 @@ this.alfrescoApi.setConfig({
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 let opts = { 
-  'siteId': siteId_example // string | siteId
-  'path': path_example // string | path
+  'siteId': siteId_example //  | siteId
+  'path': path_example //  | path
 };
 
-integrationalfrescocloudApi.getContentInFolderPathUsingGET(networkIdopts).then(function(data) {
+integrationalfrescocloudApi.getContentInFolderPathUsingGET(networkIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -185,7 +185,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-integrationalfrescocloudApi.getContentInFolderUsingGET(networkIdfolderId).then(function(data) {
+integrationalfrescocloudApi.getContentInFolderUsingGET(networkIdfolderId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -223,7 +223,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-integrationalfrescocloudApi.getContentInSiteUsingGET(networkIdsiteId).then(function(data) {
+integrationalfrescocloudApi.getContentInSiteUsingGET(networkIdsiteId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -30,7 +30,7 @@ this.alfrescoApi.setConfig({
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 
-adminusersApi.bulkUpdateUsersUsingPUT(update).then(function() {
+adminusersApi.bulkUpdateUsersUsingPUT(update).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -67,7 +67,7 @@ this.alfrescoApi.setConfig({
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 
-adminusersApi.createNewUserUsingPOST(userRepresentation).then(function(data) {
+adminusersApi.createNewUserUsingPOST(userRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -104,10 +104,10 @@ this.alfrescoApi.setConfig({
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 let opts = { 
-  'summary': true // boolean | summary
+  'summary': true //  | summary
 };
 
-adminusersApi.getUserUsingGET(userIdopts).then(function(data) {
+adminusersApi.getUserUsingGET(userIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -145,20 +145,20 @@ this.alfrescoApi.setConfig({
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example // string | filter
-  'status': status_example // string | status
-  'accountType': accountType_example // string | accountType
-  'sort': sort_example // string | sort
-  'company': company_example // string | company
-  'start': 56 // number | start
-  'page': 56 // number | page
-  'size': 56 // number | size
-  'groupId': 789 // number | groupId
-  'tenantId': 789 // number | tenantId
-  'summary': true // boolean | summary
+  'filter': filter_example //  | filter
+  'status': status_example //  | status
+  'accountType': accountType_example //  | accountType
+  'sort': sort_example //  | sort
+  'company': company_example //  | company
+  'start': 56 //  | start
+  'page': 56 //  | page
+  'size': 56 //  | size
+  'groupId': 789 //  | groupId
+  'tenantId': 789 //  | tenantId
+  'summary': true //  | summary
 };
 
-adminusersApi.getUsersUsingGET(opts).then(function(data) {
+adminusersApi.getUsersUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -205,7 +205,7 @@ this.alfrescoApi.setConfig({
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 
-adminusersApi.updateUserDetailsUsingPUT(userIduserRepresentation).then(function() {
+adminusersApi.updateUserDetailsUsingPUT(userIduserRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

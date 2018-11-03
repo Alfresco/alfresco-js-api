@@ -3,7 +3,7 @@
 Provides access to the core features of Alfresco Governance Services.
 
 
-- Last Build date: 2018-11-02T12:18:28.846Z
+- Last Build date: 2018-11-03T00:28:24.306Z
 
 
 ## Documentation for API Endpoints
@@ -14,7 +14,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *.FileplansApi* | [**createFilePlanCategories**](docs/FileplansApi.md#createFilePlanCategories) | **POST** /file-plans/{filePlanId}/categories | Create record categories for a file plan
 *.FileplansApi* | [**getFilePlan**](docs/FileplansApi.md#getFilePlan) | **GET** /file-plans/{filePlanId} | Get a file plan
-*.FileplansApi* | [**getFilePlanCategories**](docs/FileplansApi.md#getFilePlanCategories) | **GET** /file-plans/{filePlanId}/categories | List file plans&#39;s children
+*.FileplansApi* | [**getFilePlanCategories**](docs/FileplansApi.md#getFilePlanCategories) | **GET** /file-plans/{filePlanId}/categories | List file plans's children
 *.FileplansApi* | [**updateFilePlan**](docs/FileplansApi.md#updateFilePlan) | **PUT** /file-plans/{filePlanId} | Update a file plan
 *.FilesApi* | [**declareRecord**](docs/FilesApi.md#declareRecord) | **POST** /files/{fileId}/declare | Declare as record
 *.GssitesApi* | [**createRMSite**](docs/GssitesApi.md#createRMSite) | **POST** /gs-sites | Create the Records Management (RM) site
@@ -24,7 +24,7 @@ Class | Method | HTTP request | Description
 *.RecordcategoriesApi* | [**createRecordCategoryChild**](docs/RecordcategoriesApi.md#createRecordCategoryChild) | **POST** /record-categories/{recordCategoryId}/children | Create a record category or a record folder
 *.RecordcategoriesApi* | [**deleteRecordCategory**](docs/RecordcategoriesApi.md#deleteRecordCategory) | **DELETE** /record-categories/{recordCategoryId} | Delete a record category
 *.RecordcategoriesApi* | [**getRecordCategory**](docs/RecordcategoriesApi.md#getRecordCategory) | **GET** /record-categories/{recordCategoryId} | Get a record category
-*.RecordcategoriesApi* | [**listRecordCategoryChildren**](docs/RecordcategoriesApi.md#listRecordCategoryChildren) | **GET** /record-categories/{recordCategoryId}/children | List record category&#39;s children
+*.RecordcategoriesApi* | [**listRecordCategoryChildren**](docs/RecordcategoriesApi.md#listRecordCategoryChildren) | **GET** /record-categories/{recordCategoryId}/children | List record category's children
 *.RecordcategoriesApi* | [**updateRecordCategory**](docs/RecordcategoriesApi.md#updateRecordCategory) | **PUT** /record-categories/{recordCategoryId} | Update a record category
 *.RecordfoldersApi* | [**createRecordFolderChild**](docs/RecordfoldersApi.md#createRecordFolderChild) | **POST** /record-folders/{recordFolderId}/records | Create a record
 *.RecordfoldersApi* | [**deleteRecordFolder**](docs/RecordfoldersApi.md#deleteRecordFolder) | **DELETE** /record-folders/{recordFolderId} | Delete a record folder
@@ -38,18 +38,18 @@ Class | Method | HTTP request | Description
 *.RecordsApi* | [**getRecordContent**](docs/RecordsApi.md#getRecordContent) | **GET** /records/{recordId}/content | Get record content
 *.RecordsApi* | [**updateRecord**](docs/RecordsApi.md#updateRecord) | **PUT** /records/{recordId} | Update record
 *.TransfercontainersApi* | [**getTransferContainer**](docs/TransfercontainersApi.md#getTransferContainer) | **GET** /transfer-containers/{transferContainerId} | Get a transfer container
-*.TransfercontainersApi* | [**listTransfers**](docs/TransfercontainersApi.md#listTransfers) | **GET** /transfer-containers/{transferContainerId}/transfers | List transfer container&#39;s children
+*.TransfercontainersApi* | [**listTransfers**](docs/TransfercontainersApi.md#listTransfers) | **GET** /transfer-containers/{transferContainerId}/transfers | List transfer container's children
 *.TransfercontainersApi* | [**updateTransferContainer**](docs/TransfercontainersApi.md#updateTransferContainer) | **PUT** /transfer-containers/{transferContainerId} | Update transfer container
 *.TransfersApi* | [**getTransfer**](docs/TransfersApi.md#getTransfer) | **GET** /transfers/{transferId} | Get a transfer
-*.TransfersApi* | [**listTransfersChildren**](docs/TransfersApi.md#listTransfersChildren) | **GET** /transfers/{transferId}/children | List transfer&#39;s children
+*.TransfersApi* | [**listTransfersChildren**](docs/TransfersApi.md#listTransfersChildren) | **GET** /transfers/{transferId}/children | List transfer's children
 *.UnfiledcontainersApi* | [**createUnfiledContainerChildren**](docs/UnfiledcontainersApi.md#createUnfiledContainerChildren) | **POST** /unfiled-containers/{unfiledContainerId}/children | Create a record or an unfiled record folder
 *.UnfiledcontainersApi* | [**getUnfiledContainer**](docs/UnfiledcontainersApi.md#getUnfiledContainer) | **GET** /unfiled-containers/{unfiledContainerId} | Get the unfiled records container
-*.UnfiledcontainersApi* | [**listUnfiledContainerChildren**](docs/UnfiledcontainersApi.md#listUnfiledContainerChildren) | **GET** /unfiled-containers/{unfiledContainerId}/children | List unfiled record container&#39;s children
+*.UnfiledcontainersApi* | [**listUnfiledContainerChildren**](docs/UnfiledcontainersApi.md#listUnfiledContainerChildren) | **GET** /unfiled-containers/{unfiledContainerId}/children | List unfiled record container's children
 *.UnfiledcontainersApi* | [**updateUnfiledContainer**](docs/UnfiledcontainersApi.md#updateUnfiledContainer) | **PUT** /unfiled-containers/{unfiledContainerId} | Update an unfiled record container
 *.UnfiledrecordfoldersApi* | [**createUnfiledRecordFolderChildren**](docs/UnfiledrecordfoldersApi.md#createUnfiledRecordFolderChildren) | **POST** /unfiled-record-folders/{unfiledRecordFolderId}/children | Create a record or an unfiled record folder
 *.UnfiledrecordfoldersApi* | [**deleteUnfiledRecordFolder**](docs/UnfiledrecordfoldersApi.md#deleteUnfiledRecordFolder) | **DELETE** /unfiled-record-folders/{unfiledRecordFolderId} | Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
 *.UnfiledrecordfoldersApi* | [**getUnfiledRecordFolder**](docs/UnfiledrecordfoldersApi.md#getUnfiledRecordFolder) | **GET** /unfiled-record-folders/{unfiledRecordFolderId} | Get the unfiled record folder
-*.UnfiledrecordfoldersApi* | [**listUnfiledRecordFolderChildren**](docs/UnfiledrecordfoldersApi.md#listUnfiledRecordFolderChildren) | **GET** /unfiled-record-folders/{unfiledRecordFolderId}/children | List unfiled record folder&#39;s children
+*.UnfiledrecordfoldersApi* | [**listUnfiledRecordFolderChildren**](docs/UnfiledrecordfoldersApi.md#listUnfiledRecordFolderChildren) | **GET** /unfiled-record-folders/{unfiledRecordFolderId}/children | List unfiled record folder's children
 *.UnfiledrecordfoldersApi* | [**updateUnfiledRecordFolder**](docs/UnfiledrecordfoldersApi.md#updateUnfiledRecordFolder) | **PUT** /unfiled-record-folders/{unfiledRecordFolderId} | Update an unfiled record folder
 
 

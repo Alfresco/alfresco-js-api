@@ -25,21 +25,21 @@ Create person
 
 Create a person.
 
-If applicable, the given person&#39;s login access can also be optionally disabled.
+If applicable, the given person's login access can also be optionally disabled.
 
 You must have admin rights to create a person.
 
 You can set custom properties when you create a person:
 JSON
 {
-  \&quot;id\&quot;: \&quot;abeecher\&quot;,
-  \&quot;firstName\&quot;: \&quot;Alice\&quot;,
-  \&quot;lastName\&quot;: \&quot;Beecher\&quot;,
-  \&quot;email\&quot;: \&quot;abeecher@example.com\&quot;,
-  \&quot;password\&quot;: \&quot;secret\&quot;,
-  \&quot;properties\&quot;:
+  \"id\": \"abeecher\",
+  \"firstName\": \"Alice\",
+  \"lastName\": \"Beecher\",
+  \"email\": \"abeecher@example.com\",
+  \"password\": \"secret\",
+  \"properties\":
   {
-    \&quot;my:property\&quot;: \&quot;The value\&quot;
+    \"my:property\": \"The value\"
   }
 }
 
@@ -59,7 +59,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -73,7 +73,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-peopleApi.createPerson(personBodyCreateopts).then(function(data) {
+peopleApi.createPerson(personBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -86,7 +86,7 @@ peopleApi.createPerson(personBodyCreateopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personBodyCreate** | [**PersonBodyCreate**](PersonBodyCreate.md)| The person details. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -113,9 +113,9 @@ Delete avatar image
 
 Deletes the avatar image related to person **personId**.
 
-You must be the person or have admin rights to update a person&#39;s avatar.
+You must be the person or have admin rights to update a person's avatar.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -131,7 +131,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 
-peopleApi.deleteAvatarImage(personId).then(function() {
+peopleApi.deleteAvatarImage(personId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -160,7 +160,7 @@ Get avatar image
 Gets the avatar image related to the person **personId**. If the person has no related avatar then
 the **placeholder** query parameter can be optionally used to request a placeholder image to be returned.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -176,7 +176,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 let opts = { 
-  'attachment': true // boolean | **true** enables a web browser to download the file as an attachment.
+  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -186,15 +186,15 @@ for example, certain image files and PDF files.
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
 
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 // Date | Only returns the content if it has been modified since the date provided.
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
 
-  'placeholder': true // boolean | If **true** and there is no avatar for this **personId**
+  'placeholder': true //  | If **true** and there is no avatar for this **personId**
 then the placeholder image is returned, rather than a 404 response.
 
 };
 
-peopleApi.getAvatarImage(personIdopts).then(function() {
+peopleApi.getAvatarImage(personIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -236,7 +236,7 @@ Get a person
 
 Gets information for the person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -252,7 +252,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -266,7 +266,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-peopleApi.getPerson(personIdopts).then(function(data) {
+peopleApi.getPerson(personIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -279,7 +279,7 @@ peopleApi.getPerson(personIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -330,13 +330,13 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -344,12 +344,12 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'include':  // Array<string> | Returns additional information about the person. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the person. The following optional fields can be requested:
 * properties
 * aspectNames
 * capabilities
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -363,7 +363,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-peopleApi.listPeople(opts).then(function(data) {
+peopleApi.listPeople(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -381,7 +381,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -389,12 +389,12 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the person. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the person. The following optional fields can be requested:
 * properties
 * aspectNames
 * capabilities
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -419,19 +419,19 @@ Request password reset
 
 **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
-Initiates the reset password workflow to send an email with reset password instruction to the user&#39;s registered email.
+Initiates the reset password workflow to send an email with reset password instruction to the user's registered email.
 
 The client is mandatory in the request body. For example:
 JSON
 {
-  \&quot;client\&quot;: \&quot;myClient\&quot;
+  \"client\": \"myClient\"
 }
 
 **Note:** The client must be registered before this API can send an email. See [server documentation]. However, out-of-the-box
 share is registered as a default client, so you could pass **share** as the client name:
 JSON
 {
-  \&quot;client\&quot;: \&quot;share\&quot;
+  \"client\": \"share\"
 }
 
 **Note:** No authentication is required to call this endpoint.
@@ -450,7 +450,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 
-peopleApi.requestPasswordReset(personIdclientBody).then(function() {
+peopleApi.requestPasswordReset(personIdclientBody).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -477,14 +477,14 @@ Reset password
 
 **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
-Resets user&#39;s password
+Resets user's password
 
 The password, id and key properties are mandatory in the request body. For example:
 JSON
 {
-  \&quot;password\&quot;:\&quot;newPassword\&quot;,
-  \&quot;id\&quot;:\&quot;activiti$10\&quot;,
-  \&quot;key\&quot;:\&quot;4dad6d00-0daf-413a-b200-f64af4e12345\&quot;
+  \"password\":\"newPassword\",
+  \"id\":\"activiti$10\",
+  \"key\":\"4dad6d00-0daf-413a-b200-f64af4e12345\"
 }
 
 **Note:** No authentication is required to call this endpoint.
@@ -503,7 +503,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 
-peopleApi.resetPassword(personIdpasswordResetBody).then(function() {
+peopleApi.resetPassword(personIdpasswordResetBody).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -533,11 +533,11 @@ Update avatar image
 Updates the avatar image related to the person **personId**.
 
 The request body should be the binary stream for the avatar image. The content type of the file
-should be an image file. This will be used to generate an \&quot;avatar\&quot; thumbnail rendition.
+should be an image file. This will be used to generate an \"avatar\" thumbnail rendition.
 
-You must be the person or have admin rights to update a person&#39;s avatar.
+You must be the person or have admin rights to update a person's avatar.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -553,7 +553,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 
-peopleApi.updateAvatarImage(personIdcontentBodyUpdate).then(function() {
+peopleApi.updateAvatarImage(personIdcontentBodyUpdate).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -580,11 +580,11 @@ Update person
 
 **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
-Update the given person&#39;s details.
+Update the given person's details.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-If applicable, the given person&#39;s login access can also be optionally disabled or re-enabled.
+If applicable, the given person's login access can also be optionally disabled or re-enabled.
 
 You must have admin rights to update a person — unless updating your own details.
 
@@ -598,10 +598,10 @@ Non-admin users may not disable themselves.
 You can set custom properties when you update a person:
 JSON
 {
-  \&quot;firstName\&quot;: \&quot;Alice\&quot;,
-  \&quot;properties\&quot;:
+  \"firstName\": \"Alice\",
+  \"properties\":
   {
-    \&quot;my:property\&quot;: \&quot;The value\&quot;
+    \"my:property\": \"The value\"
   }
 }
 
@@ -621,7 +621,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -635,7 +635,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-peopleApi.updatePerson(personIdpersonBodyUpdateopts).then(function(data) {
+peopleApi.updatePerson(personIdpersonBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -649,7 +649,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **personBodyUpdate** | [**PersonBodyUpdate**](PersonBodyUpdate.md)| The person details. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

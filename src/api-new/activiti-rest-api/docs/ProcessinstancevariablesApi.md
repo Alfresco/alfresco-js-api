@@ -31,7 +31,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceIdrestVariables).then(function(data) {
+processinstancevariablesApi.createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceIdrestVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -44,11 +44,11 @@ processinstancevariablesApi.createOrUpdateProcessInstanceVariablesUsingPUT(proce
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **processInstanceId** | **string**| Process instance ID | 
- **restVariables** | [**Array&lt;RestVariable&gt;**](RestVariable.md)| restVariables | 
+ **restVariables** | [**Array<RestVariable>**](RestVariable.md)| restVariables | 
 
 ### Return type
 
-[**Array&lt;RestVariable&gt;**](RestVariable.md)
+[**Array<RestVariable>**](RestVariable.md)
 
 <a name="createProcessInstanceVariablesUsingPOST"></a>
 # **createProcessInstanceVariablesUsingPOST**
@@ -69,7 +69,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.createProcessInstanceVariablesUsingPOST(processInstanceIdrestVariables).then(function(data) {
+processinstancevariablesApi.createProcessInstanceVariablesUsingPOST(processInstanceIdrestVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -82,11 +82,11 @@ processinstancevariablesApi.createProcessInstanceVariablesUsingPOST(processInsta
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **processInstanceId** | **string**| Process instance ID | 
- **restVariables** | [**Array&lt;RestVariable&gt;**](RestVariable.md)| restVariables | 
+ **restVariables** | [**Array<RestVariable>**](RestVariable.md)| restVariables | 
 
 ### Return type
 
-[**Array&lt;RestVariable&gt;**](RestVariable.md)
+[**Array<RestVariable>**](RestVariable.md)
 
 <a name="deleteProcessInstanceVariableUsingDELETE"></a>
 # **deleteProcessInstanceVariableUsingDELETE**
@@ -107,7 +107,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.deleteProcessInstanceVariableUsingDELETE(processInstanceIdvariableName).then(function() {
+processinstancevariablesApi.deleteProcessInstanceVariableUsingDELETE(processInstanceIdvariableName).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -145,7 +145,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.getProcessInstanceVariableUsingGET(processInstanceIdvariableName).then(function(data) {
+processinstancevariablesApi.getProcessInstanceVariableUsingGET(processInstanceIdvariableName).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -183,7 +183,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.getProcessInstanceVariablesUsingGET(processInstanceId).then(function(data) {
+processinstancevariablesApi.getProcessInstanceVariablesUsingGET(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;RestVariable&gt;**](RestVariable.md)
+[**Array<RestVariable>**](RestVariable.md)
 
 <a name="updateProcessInstanceVariableUsingPUT"></a>
 # **updateProcessInstanceVariableUsingPUT**
@@ -220,7 +220,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.updateProcessInstanceVariableUsingPUT(processInstanceIdvariableNamerestVariable).then(function(data) {
+processinstancevariablesApi.updateProcessInstanceVariableUsingPUT(processInstanceIdvariableNamerestVariable).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

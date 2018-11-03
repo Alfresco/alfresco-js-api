@@ -51,11 +51,11 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'siteMembershipApprovalBody':  // SiteMembershipApprovalBody | Accepting a request to join, optionally, allows assignment of a role to the user.
+  'siteMembershipApprovalBody':  //  | Accepting a request to join, optionally, allows assignment of a role to the user.
 
 };
 
-sitesApi.approveSiteMembershipRequest(siteIdinviteeIdopts).then(function() {
+sitesApi.approveSiteMembershipRequest(siteIdinviteeIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -89,11 +89,11 @@ from the site title. The site id must be unique and only contain alphanumeric an
 
 Note: the id of a site cannot be updated once the site has been created.
 
-For example, to create a public site called \&quot;Marketing\&quot; the following body could be used:
+For example, to create a public site called \"Marketing\" the following body could be used:
 JSON
 {
-  \&quot;title\&quot;: \&quot;Marketing\&quot;,
-  \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;
+  \"title\": \"Marketing\",
+  \"visibility\": \"PUBLIC\"
 }
 
 
@@ -101,7 +101,7 @@ The creation of the (surf) configuration files required by Share can be skipped 
 
 **Note:** if skipped then such a site will **not** work within Share.
 
-The addition of the site to the user&#39;s site favorites can be skipped via the **skipAddToFavorites** query parameter.
+The addition of the site to the user's site favorites can be skipped via the **skipAddToFavorites** query parameter.
 
 The creator will be added as a member with Site Manager role.
 
@@ -122,9 +122,9 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipConfiguration': true // boolean | Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.
-  'skipAddToFavorites': true // boolean | Flag to indicate whether the site should not be added to the user's site favorites.
-  'fields':  // Array<string> | A list of field names.
+  'skipConfiguration': true //  | Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.
+  'skipAddToFavorites': true //  | Flag to indicate whether the site should not be added to the user's site favorites.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -138,7 +138,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.createSite(siteBodyCreateopts).then(function(data) {
+sitesApi.createSite(siteBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -152,8 +152,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteBodyCreate** | [**SiteBodyCreate**](SiteBodyCreate.md)| The site details | 
  **skipConfiguration** | **boolean**| Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. | [optional] [default to false]
- **skipAddToFavorites** | **boolean**| Flag to indicate whether the site should not be added to the user&#39;s site favorites. | [optional] [default to false]
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **skipAddToFavorites** | **boolean**| Flag to indicate whether the site should not be added to the user's site favorites. | [optional] [default to false]
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -191,12 +191,12 @@ specifying a list of people in the JSON body like this:
 JSON
 [
   {
-    \&quot;role\&quot;: \&quot;SiteConsumer\&quot;,
-    \&quot;id\&quot;: \&quot;joe\&quot;
+    \"role\": \"SiteConsumer\",
+    \"id\": \"joe\"
   },
   {
-    \&quot;role\&quot;: \&quot;SiteConsumer\&quot;,
-    \&quot;id\&quot;: \&quot;fred\&quot;
+    \"role\": \"SiteConsumer\",
+    \"id\": \"fred\"
   }
 ]
 
@@ -204,22 +204,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -242,7 +242,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -256,7 +256,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.createSiteMembership(siteIdsiteMembershipBodyCreateopts).then(function(data) {
+sitesApi.createSiteMembership(siteIdsiteMembershipBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **string**| The identifier of a site. | 
  **siteMembershipBodyCreate** | [**SiteMembershipBodyCreate**](SiteMembershipBodyCreate.md)| The person to add and their role | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -300,7 +300,7 @@ The result of the request differs depending on the type of site.
 * For a **moderated** site, your request is added to the site membership request list. The request waits for approval from the Site Manager.
 * You cannot request membership of a **private** site. Members are invited by the site administrator.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
  **Note:** You can create site membership requests for more than one site by
 specifying a list of sites in the JSON body like this:
@@ -308,14 +308,14 @@ specifying a list of sites in the JSON body like this:
 JSON
 [
   {
-    \&quot;message\&quot;: \&quot;Please can you add me\&quot;,
-    \&quot;id\&quot;: \&quot;test-site-1\&quot;,
-    \&quot;title\&quot;: \&quot;Request for test site 1\&quot;,
+    \"message\": \"Please can you add me\",
+    \"id\": \"test-site-1\",
+    \"title\": \"Request for test site 1\",
   },
   {
-    \&quot;message\&quot;: \&quot;Please can you add me\&quot;,
-    \&quot;id\&quot;: \&quot;test-site-2\&quot;,
-    \&quot;title\&quot;: \&quot;Request for test site 2\&quot;,
+    \"message\": \"Please can you add me\",
+    \"id\": \"test-site-2\",
+    \"title\": \"Request for test site 2\",
   }
 ]
 
@@ -323,22 +323,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -361,7 +361,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -375,7 +375,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.createSiteMembershipRequestForPerson(personIdsiteMembershipRequestBodyCreateopts).then(function(data) {
+sitesApi.createSiteMembershipRequestForPerson(personIdsiteMembershipRequestBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -389,7 +389,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **siteMembershipRequestBodyCreate** | [**SiteMembershipRequestBodyCreate**](SiteMembershipRequestBodyCreate.md)| Site membership request details | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -430,10 +430,10 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'permanent': true // boolean | Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan.
+  'permanent': true //  | Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan.
 };
 
-sitesApi.deleteSite(siteIdopts).then(function() {
+sitesApi.deleteSite(siteIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -460,7 +460,7 @@ Delete a site membership
 
 Deletes person **personId** as a member of site **siteId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -476,7 +476,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 
-sitesApi.deleteSiteMembership(siteIdpersonId).then(function() {
+sitesApi.deleteSiteMembership(siteIdpersonId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -503,7 +503,7 @@ Delete a site membership
 
 Deletes person **personId** as a member of site **siteId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -519,7 +519,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 
-sitesApi.deleteSiteMembershipForPerson(personIdsiteId).then(function() {
+sitesApi.deleteSiteMembershipForPerson(personIdsiteId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -546,7 +546,7 @@ Delete a site membership request
 
 Deletes the site membership request to site **siteId** for person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -562,7 +562,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 
-sitesApi.deleteSiteMembershipRequestForPerson(personIdsiteId).then(function() {
+sitesApi.deleteSiteMembershipRequestForPerson(personIdsiteId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -615,8 +615,8 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'relations':  // Array<string> | Use the relations parameter to include one or more related entities in a single response.
-  'fields':  // Array<string> | A list of field names.
+  'relations':  //  | Use the relations parameter to include one or more related entities in a single response.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -630,7 +630,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.getSite(siteIdopts).then(function(data) {
+sitesApi.getSite(siteIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -643,8 +643,8 @@ sitesApi.getSite(siteIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **string**| The identifier of a site. | 
- **relations** | [**Array&lt;string&gt;**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **relations** | [**Array<string>**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -682,7 +682,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -696,7 +696,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.getSiteContainer(siteIdcontainerIdopts).then(function(data) {
+sitesApi.getSiteContainer(siteIdcontainerIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -710,7 +710,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **string**| The identifier of a site. | 
  **containerId** | **string**| The unique identifier of a site container. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -735,7 +735,7 @@ Get a site membership
 
 Gets site membership information for person **personId** on site **siteId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -751,7 +751,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -765,7 +765,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.getSiteMembership(siteIdpersonIdopts).then(function(data) {
+sitesApi.getSiteMembership(siteIdpersonIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -779,7 +779,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **string**| The identifier of a site. | 
  **personId** | **string**| The identifier of a person. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -804,7 +804,7 @@ Get a site membership
 
 Gets site membership information for person **personId** on site **siteId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -820,7 +820,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 
-sitesApi.getSiteMembershipForPerson(personIdsiteId).then(function(data) {
+sitesApi.getSiteMembershipForPerson(personIdsiteId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -847,7 +847,7 @@ Get a site membership request
 
 Gets the site membership request for site **siteId** for person **personId**, if one exists.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -863,7 +863,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -877,7 +877,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.getSiteMembershipRequestForPerson(personIdsiteIdopts).then(function(data) {
+sitesApi.getSiteMembershipRequestForPerson(personIdsiteIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -891,7 +891,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **siteId** | **string**| The identifier of a site. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -919,19 +919,19 @@ Get the list of site membership requests the user can action.
 You can use the **where** parameter to filter the returned site membership requests by **siteId**. For example:
 
 
-(siteId&#x3D;mySite)
+(siteId=mySite)
 
 
 The **where** parameter can also be used to filter by ***personId***. For example:
 
 
-where&#x3D;(personId&#x3D;person)
+where=(personId=person)
 
 
 This may be combined with the siteId filter, as shown below:
 
 
-where&#x3D;(siteId&#x3D;mySite AND personId&#x3D;person))
+where=(siteId=mySite AND personId=person))
 
 
 
@@ -948,14 +948,14 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'where': where_example // string | A string to restrict the returned objects by using a predicate.
-  'fields':  // Array<string> | A list of field names.
+  'where': where_example //  | A string to restrict the returned objects by using a predicate.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -969,7 +969,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.getSiteMembershipRequests(opts).then(function(data) {
+sitesApi.getSiteMembershipRequests(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -988,7 +988,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
  **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1026,13 +1026,13 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1046,7 +1046,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.listSiteContainers(siteIdopts).then(function(data) {
+sitesApi.listSiteContainers(siteIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1065,7 +1065,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1090,7 +1090,7 @@ List site membership requests
 
 Gets a list of the current site membership requests for person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -1106,13 +1106,13 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1126,7 +1126,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.listSiteMembershipRequestsForPerson(personIdopts).then(function(data) {
+sitesApi.listSiteMembershipRequestsForPerson(personIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1145,7 +1145,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1183,13 +1183,13 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1203,7 +1203,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.listSiteMemberships(siteIdopts).then(function(data) {
+sitesApi.listSiteMemberships(siteIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1222,7 +1222,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1247,22 +1247,22 @@ List site memberships
 
 Gets a list of site membership information for person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 You can use the **where** parameter to filter the returned sites by **visibility** or site **preset**.
 
 Example to filter by **visibility**, use any one of:
 
 
-(visibility&#x3D;&#39;PRIVATE&#39;)
-(visibility&#x3D;&#39;PUBLIC&#39;)
-(visibility&#x3D;&#39;MODERATED&#39;)
+(visibility='PRIVATE')
+(visibility='PUBLIC')
+(visibility='MODERATED')
 
 
 Example to filter by site **preset**:
 
 
-(preset&#x3D;&#39;site-dashboard&#39;)
+(preset='site-dashboard')
 
 
 The default sort order for the returned list is for sites to be sorted by ascending title.
@@ -1285,13 +1285,13 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1299,8 +1299,8 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'relations':  // Array<string> | Use the relations parameter to include one or more related entities in a single response.
-  'fields':  // Array<string> | A list of field names.
+  'relations':  //  | Use the relations parameter to include one or more related entities in a single response.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1312,10 +1312,10 @@ If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
 
-  'where': where_example // string | A string to restrict the returned objects by using a predicate.
+  'where': where_example //  | A string to restrict the returned objects by using a predicate.
 };
 
-sitesApi.listSiteMembershipsForPerson(personIdopts).then(function(data) {
+sitesApi.listSiteMembershipsForPerson(personIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1334,7 +1334,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1342,8 +1342,8 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **relations** | [**Array&lt;string&gt;**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **relations** | [**Array<string>**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1374,15 +1374,15 @@ You can use the **where** parameter to filter the returned sites by **visibility
 Example to filter by **visibility**, use any one of:
 
 
-(visibility&#x3D;&#39;PRIVATE&#39;)
-(visibility&#x3D;&#39;PUBLIC&#39;)
-(visibility&#x3D;&#39;MODERATED&#39;)
+(visibility='PRIVATE')
+(visibility='PUBLIC')
+(visibility='MODERATED')
 
 
 Example to filter by site **preset**:
 
 
-(preset&#x3D;&#39;site-dashboard&#39;)
+(preset='site-dashboard')
 
 
 The default sort order for the returned list is for sites to be sorted by ascending title.
@@ -1417,13 +1417,13 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'orderBy':  // Array<string> | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1431,8 +1431,8 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-  'relations':  // Array<string> | Use the relations parameter to include one or more related entities in a single response.
-  'fields':  // Array<string> | A list of field names.
+  'relations':  //  | Use the relations parameter to include one or more related entities in a single response.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1444,10 +1444,10 @@ If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
 
-  'where': where_example // string | A string to restrict the returned objects by using a predicate.
+  'where': where_example //  | A string to restrict the returned objects by using a predicate.
 };
 
-sitesApi.listSites(opts).then(function(data) {
+sitesApi.listSites(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1465,7 +1465,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**Array&lt;string&gt;**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1473,8 +1473,8 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
  | [optional] 
- **relations** | [**Array&lt;string&gt;**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **relations** | [**Array<string>**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1514,11 +1514,11 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'siteMembershipRejectionBody':  // SiteMembershipRejectionBody | Rejecting a request to join, optionally, allows the inclusion of comment.
+  'siteMembershipRejectionBody':  //  | Rejecting a request to join, optionally, allows the inclusion of comment.
 
 };
 
-sitesApi.rejectSiteMembershipRequest(siteIdinviteeIdopts).then(function() {
+sitesApi.rejectSiteMembershipRequest(siteIdinviteeIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -1566,7 +1566,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1580,7 +1580,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.updateSite(siteIdsiteBodyUpdateopts).then(function(data) {
+sitesApi.updateSite(siteIdsiteBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1594,7 +1594,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **string**| The identifier of a site. | 
  **siteBodyUpdate** | [**SiteBodyUpdate**](SiteBodyUpdate.md)| The site information to update. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1619,7 +1619,7 @@ Update a site membership
 
 Update the membership of person **personId** in site **siteId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 You can set the **role** to one of four types:
 
@@ -1642,7 +1642,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1656,7 +1656,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.updateSiteMembership(siteIdpersonIdsiteMembershipBodyUpdateopts).then(function(data) {
+sitesApi.updateSiteMembership(siteIdpersonIdsiteMembershipBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1671,7 +1671,7 @@ Name | Type | Description  | Notes
  **siteId** | **string**| The identifier of a site. | 
  **personId** | **string**| The identifier of a person. | 
  **siteMembershipBodyUpdate** | [**SiteMembershipBodyUpdate**](SiteMembershipBodyUpdate.md)| The persons new role | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1696,7 +1696,7 @@ Update a site membership request
 
 Updates the message for the site membership request to site **siteId** for person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -1712,7 +1712,7 @@ this.alfrescoApi.setConfig({
 let sitesApi = new SitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1726,7 +1726,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sitesApi.updateSiteMembershipRequestForPerson(personIdsiteIdsiteMembershipRequestBodyUpdateopts).then(function(data) {
+sitesApi.updateSiteMembershipRequestForPerson(personIdsiteIdsiteMembershipRequestBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -1741,7 +1741,7 @@ Name | Type | Description  | Notes
  **personId** | **string**| The identifier of a person. | 
  **siteId** | **string**| The identifier of a site. | 
  **siteMembershipRequestBodyUpdate** | [**SiteMembershipRequestBodyUpdate**](SiteMembershipRequestBodyUpdate.md)| The new message to display | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

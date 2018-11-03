@@ -30,7 +30,7 @@ this.alfrescoApi.setConfig({
 let networksApi = new NetworksApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -44,7 +44,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-networksApi.getNetwork(networkIdopts).then(function(data) {
+networksApi.getNetwork(networkIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -57,7 +57,7 @@ networksApi.getNetwork(networkIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **networkId** | **string**| The identifier of a network. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -82,7 +82,7 @@ Get network information
 
 Gets network information on a single network specified by **networkId** for **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -98,7 +98,7 @@ this.alfrescoApi.setConfig({
 let networksApi = new NetworksApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -112,7 +112,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-networksApi.getNetworkForPerson(personIdnetworkIdopts).then(function(data) {
+networksApi.getNetworkForPerson(personIdnetworkIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **networkId** | **string**| The identifier of a network. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -151,7 +151,7 @@ List network membership
 
 Gets a list of network memberships for person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -167,13 +167,13 @@ this.alfrescoApi.setConfig({
 let networksApi = new NetworksApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -187,7 +187,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-networksApi.listNetworksForPerson(personIdopts).then(function(data) {
+networksApi.listNetworksForPerson(personIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -206,7 +206,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

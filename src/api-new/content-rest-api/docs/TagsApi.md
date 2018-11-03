@@ -22,7 +22,7 @@ Creates a tag on the node **nodeId**. You specify the tag in a JSON body like th
 
 JSON
 {
-  \&quot;tag\&quot;:\&quot;test-tag-1\&quot;
+  \"tag\":\"test-tag-1\"
 }
 
 
@@ -32,10 +32,10 @@ specifying a list of tags in the JSON body like this:
 JSON
 [
   {
-    \&quot;tag\&quot;:\&quot;test-tag-1\&quot;
+    \"tag\":\"test-tag-1\"
   },
   {
-    \&quot;tag\&quot;:\&quot;test-tag-2\&quot;
+    \"tag\":\"test-tag-2\"
   }
 ]
 
@@ -43,22 +43,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
          ...
         }
       }
@@ -81,7 +81,7 @@ this.alfrescoApi.setConfig({
 let tagsApi = new TagsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -95,7 +95,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-tagsApi.createTagForNode(nodeIdtagBodyCreateopts).then(function(data) {
+tagsApi.createTagForNode(nodeIdtagBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -109,7 +109,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **tagBodyCreate** | [**TagBody**](TagBody.md)| The new tag | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -147,7 +147,7 @@ this.alfrescoApi.setConfig({
 let tagsApi = new TagsApi(this.alfrescoApi);
 
 
-tagsApi.deleteTagFromNode(nodeIdtagId).then(function() {
+tagsApi.deleteTagFromNode(nodeIdtagId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -187,7 +187,7 @@ this.alfrescoApi.setConfig({
 let tagsApi = new TagsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -201,7 +201,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-tagsApi.getTag(tagIdopts).then(function(data) {
+tagsApi.getTag(tagIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -214,7 +214,7 @@ tagsApi.getTag(tagIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tagId** | **string**| The identifier of a tag. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -255,13 +255,13 @@ this.alfrescoApi.setConfig({
 let tagsApi = new TagsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -273,12 +273,12 @@ If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
 
-  'include':  // Array<string> | Returns additional information about the tag. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the tag. The following optional fields can be requested:
 * count
 
 };
 
-tagsApi.listTags(opts).then(function(data) {
+tagsApi.listTags(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -296,7 +296,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -308,7 +308,7 @@ If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the tag. The following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the tag. The following optional fields can be requested:
 * count
  | [optional] 
 
@@ -337,13 +337,13 @@ this.alfrescoApi.setConfig({
 let tagsApi = new TagsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -357,7 +357,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-tagsApi.listTagsForNode(nodeIdopts).then(function(data) {
+tagsApi.listTagsForNode(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -376,7 +376,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -414,7 +414,7 @@ this.alfrescoApi.setConfig({
 let tagsApi = new TagsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -428,7 +428,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-tagsApi.updateTag(tagIdtagBodyUpdateopts).then(function(data) {
+tagsApi.updateTag(tagIdtagBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -442,7 +442,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tagId** | **string**| The identifier of a tag. | 
  **tagBodyUpdate** | [**TagBody**](TagBody.md)| The updated tag | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

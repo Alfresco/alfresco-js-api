@@ -26,7 +26,7 @@ this.alfrescoApi.setConfig({
 let processscopesApi = new ProcessscopesApi(this.alfrescoApi);
 
 
-processscopesApi.getRuntimeProcessScopesUsingPOST(processScopesRequest).then(function(data) {
+processscopesApi.getRuntimeProcessScopesUsingPOST(processScopesRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -42,5 +42,5 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;ProcessScopeRepresentation&gt;**](ProcessScopeRepresentation.md)
+[**Array<ProcessScopeRepresentation>**](ProcessScopeRepresentation.md)
 

@@ -2,7 +2,7 @@ Provides access to the complete features provided by Alfresco Process Services p
 
 You can use this API to integrate Alfresco Process Services with external applications.
 
-- Last Build date: 2018-11-02T12:18:04.298Z
+- Last Build date: 2018-11-03T00:27:58.717Z
 
 
 ## Documentation for API Endpoints
@@ -42,11 +42,11 @@ Class | Method | HTTP request | Description
 *.AdmintenantsApi* | [**createTenantUsingPOST**](docs/AdmintenantsApi.md#createTenantUsingPOST) | **POST** /enterprise/admin/tenants | Create a tenant
 *.AdmintenantsApi* | [**deleteTenantUsingDELETE**](docs/AdmintenantsApi.md#deleteTenantUsingDELETE) | **DELETE** /enterprise/admin/tenants/{tenantId} | Delete a tenant
 *.AdmintenantsApi* | [**getTenantEventsUsingGET**](docs/AdmintenantsApi.md#getTenantEventsUsingGET) | **GET** /enterprise/admin/tenants/{tenantId}/events | Get tenant events
-*.AdmintenantsApi* | [**getTenantLogoUsingGET**](docs/AdmintenantsApi.md#getTenantLogoUsingGET) | **GET** /enterprise/admin/tenants/{tenantId}/logo | Get a tenant&#39;s logo
+*.AdmintenantsApi* | [**getTenantLogoUsingGET**](docs/AdmintenantsApi.md#getTenantLogoUsingGET) | **GET** /enterprise/admin/tenants/{tenantId}/logo | Get a tenant's logo
 *.AdmintenantsApi* | [**getTenantUsingGET**](docs/AdmintenantsApi.md#getTenantUsingGET) | **GET** /enterprise/admin/tenants/{tenantId} | Get a tenant
 *.AdmintenantsApi* | [**getTenantsUsingGET**](docs/AdmintenantsApi.md#getTenantsUsingGET) | **GET** /enterprise/admin/tenants | List tenants
 *.AdmintenantsApi* | [**updateUsingPUT**](docs/AdmintenantsApi.md#updateUsingPUT) | **PUT** /enterprise/admin/tenants/{tenantId} | Update a tenant
-*.AdmintenantsApi* | [**uploadTenantLogoUsingPOST**](docs/AdmintenantsApi.md#uploadTenantLogoUsingPOST) | **POST** /enterprise/admin/tenants/{tenantId}/logo | Update a tenant&#39;s logo
+*.AdmintenantsApi* | [**uploadTenantLogoUsingPOST**](docs/AdmintenantsApi.md#uploadTenantLogoUsingPOST) | **POST** /enterprise/admin/tenants/{tenantId}/logo | Update a tenant's logo
 *.AdminusersApi* | [**bulkUpdateUsersUsingPUT**](docs/AdminusersApi.md#bulkUpdateUsersUsingPUT) | **PUT** /enterprise/admin/users | Bulk update a list of users
 *.AdminusersApi* | [**createNewUserUsingPOST**](docs/AdminusersApi.md#createNewUserUsingPOST) | **POST** /enterprise/admin/users | Create a user
 *.AdminusersApi* | [**getUserUsingGET**](docs/AdminusersApi.md#getUserUsingGET) | **GET** /enterprise/admin/users/{userId} | Get a user
@@ -125,7 +125,7 @@ Class | Method | HTTP request | Description
 *.ModelsApi* | [**deleteModelUsingDELETE**](docs/ModelsApi.md#deleteModelUsingDELETE) | **DELETE** /enterprise/models/{modelId} | Delete a model
 *.ModelsApi* | [**duplicateModelUsingPOST**](docs/ModelsApi.md#duplicateModelUsingPOST) | **POST** /enterprise/models/{modelId}/clone | Duplicate an existing model
 *.ModelsApi* | [**getModelJSONUsingGET**](docs/ModelsApi.md#getModelJSONUsingGET) | **GET** /enterprise/models/{modelId}/editor/json | Get model content
-*.ModelsApi* | [**getModelThumbnailUsingGET**](docs/ModelsApi.md#getModelThumbnailUsingGET) | **GET** /enterprise/models/{modelId}/thumbnail | Get a model&#39;s thumbnail image
+*.ModelsApi* | [**getModelThumbnailUsingGET**](docs/ModelsApi.md#getModelThumbnailUsingGET) | **GET** /enterprise/models/{modelId}/thumbnail | Get a model's thumbnail image
 *.ModelsApi* | [**getModelUsingGET**](docs/ModelsApi.md#getModelUsingGET) | **GET** /enterprise/models/{modelId} | Get a model
 *.ModelsApi* | [**getModelsToIncludeInAppDefinitionUsingGET**](docs/ModelsApi.md#getModelsToIncludeInAppDefinitionUsingGET) | **GET** /enterprise/models-for-app-definition | List process definition models shared with the current user
 *.ModelsApi* | [**getModelsUsingGET**](docs/ModelsApi.md#getModelsUsingGET) | **GET** /enterprise/models | List models (process, form, decision rule or app)
@@ -136,7 +136,7 @@ Class | Method | HTTP request | Description
 *.ModelsApi* | [**validateModelUsingPOST**](docs/ModelsApi.md#validateModelUsingPOST) | **POST** /enterprise/models/{modelId}/editor/validate | Validate model content
 *.ModelsbpmnApi* | [**getHistoricProcessModelBpmn20XmlUsingGET**](docs/ModelsbpmnApi.md#getHistoricProcessModelBpmn20XmlUsingGET) | **GET** /enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20 | Export a historic version of a process definition as BPMN 2.0 XML
 *.ModelsbpmnApi* | [**getProcessModelBpmn20XmlUsingGET**](docs/ModelsbpmnApi.md#getProcessModelBpmn20XmlUsingGET) | **GET** /enterprise/models/{processModelId}/bpmn20 | Export a process definition as BPMN 2.0 XML
-*.ModelshistoryApi* | [**getModelHistoryCollectionUsingGET**](docs/ModelshistoryApi.md#getModelHistoryCollectionUsingGET) | **GET** /enterprise/models/{modelId}/history | List a model&#39;s historic versions
+*.ModelshistoryApi* | [**getModelHistoryCollectionUsingGET**](docs/ModelshistoryApi.md#getModelHistoryCollectionUsingGET) | **GET** /enterprise/models/{modelId}/history | List a model's historic versions
 *.ModelshistoryApi* | [**getProcessModelHistoryUsingGET**](docs/ModelshistoryApi.md#getProcessModelHistoryUsingGET) | **GET** /enterprise/models/{modelId}/history/{modelHistoryId} | Get a historic version of a model
 *.ProcessdefinitionsApi* | [**createIdentityLinkUsingPOST**](docs/ProcessdefinitionsApi.md#createIdentityLinkUsingPOST) | **POST** /enterprise/process-definitions/{processDefinitionId}/identitylinks | Add a user or group involvement to a process definition
 *.ProcessdefinitionsApi* | [**deleteIdentityLinkUsingDELETE**](docs/ProcessdefinitionsApi.md#deleteIdentityLinkUsingDELETE) | **DELETE** /enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId} | Remove a user or group involvement from a process definition

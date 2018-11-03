@@ -121,7 +121,7 @@ export class SitesApi extends BaseApi {
         * @param  siteBodyCreate The site details
         * @param Object opts Optional parameters
         * @param  opts.skipConfiguration Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. (default to false)
-        * @param  opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user&#39;s site favorites. (default to false)
+        * @param  opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user's site favorites. (default to false)
         * @param  opts.fields A list of field names.
     
     You can use this parameter to restrict the fields

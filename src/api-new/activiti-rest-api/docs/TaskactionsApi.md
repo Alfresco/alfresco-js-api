@@ -37,7 +37,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.assignTaskUsingPUT(taskIduserIdentifier).then(function(data) {
+taskactionsApi.assignTaskUsingPUT(taskIduserIdentifier).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -75,7 +75,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.attachFormUsingPUT(taskIdformIdentifier).then(function() {
+taskactionsApi.attachFormUsingPUT(taskIdformIdentifier).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -115,7 +115,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.claimTaskUsingPUT(taskId).then(function() {
+taskactionsApi.claimTaskUsingPUT(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -154,7 +154,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.completeTaskUsingPUT(taskId).then(function() {
+taskactionsApi.completeTaskUsingPUT(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -191,7 +191,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.delegateTaskUsingPUT(taskIduserIdentifier).then(function() {
+taskactionsApi.delegateTaskUsingPUT(taskIduserIdentifier).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -229,7 +229,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.involveGroupUsingPOST(taskIdgroupId).then(function() {
+taskactionsApi.involveGroupUsingPOST(taskIdgroupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -267,7 +267,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.involveUserUsingPUT(taskIduserIdentifier).then(function() {
+taskactionsApi.involveUserUsingPUT(taskIduserIdentifier).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -305,7 +305,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.removeFormUsingDELETE(taskId).then(function() {
+taskactionsApi.removeFormUsingDELETE(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -342,7 +342,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.removeInvolvedUserUsingDELETE(taskIdgroupId).then(function() {
+taskactionsApi.removeInvolvedUserUsingDELETE(taskIdgroupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -380,7 +380,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.removeInvolvedUserUsingPUT(taskIduserIdentifier).then(function() {
+taskactionsApi.removeInvolvedUserUsingPUT(taskIduserIdentifier).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -418,7 +418,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.resolveTaskUsingPUT(taskId).then(function() {
+taskactionsApi.resolveTaskUsingPUT(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -457,7 +457,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.unclaimTaskUsingPUT(taskId).then(function() {
+taskactionsApi.unclaimTaskUsingPUT(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

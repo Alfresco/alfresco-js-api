@@ -96,9 +96,9 @@ For example, to favorite a file the following body would be used:
 
 JSON
 {
-   \&quot;target\&quot;: {
-      \&quot;file\&quot;: {
-         \&quot;guid\&quot;: \&quot;abcde-01234-....\&quot;
+   \"target\": {
+      \"file\": {
+         \"guid\": \"abcde-01234-....\"
       }
    }
 }

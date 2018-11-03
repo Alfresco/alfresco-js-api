@@ -32,7 +32,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-integrationalfrescoonpremiseApi.getAllSitesUsingGET1(repositoryId).then(function(data) {
+integrationalfrescoonpremiseApi.getAllSitesUsingGET1(repositoryId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -69,7 +69,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-integrationalfrescoonpremiseApi.getContentInFolderPathUsingGET1(repositoryIdsiteIdfolderPath).then(function(data) {
+integrationalfrescoonpremiseApi.getContentInFolderPathUsingGET1(repositoryIdsiteIdfolderPath).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -108,7 +108,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-integrationalfrescoonpremiseApi.getContentInFolderUsingGET1(repositoryIdfolderId).then(function(data) {
+integrationalfrescoonpremiseApi.getContentInFolderUsingGET1(repositoryIdfolderId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -146,7 +146,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-integrationalfrescoonpremiseApi.getContentInSiteUsingGET1(repositoryIdsiteId).then(function(data) {
+integrationalfrescoonpremiseApi.getContentInSiteUsingGET1(repositoryIdsiteId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -186,11 +186,11 @@ this.alfrescoApi.setConfig({
 let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 let opts = { 
-  'tenantId': 789 // number | tenantId
-  'includeAccounts': true // boolean | includeAccounts
+  'tenantId': 789 //  | tenantId
+  'includeAccounts': true //  | includeAccounts
 };
 
-integrationalfrescoonpremiseApi.getRepositoriesUsingGET(opts).then(function(data) {
+integrationalfrescoonpremiseApi.getRepositoriesUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

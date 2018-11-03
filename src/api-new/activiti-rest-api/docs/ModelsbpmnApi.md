@@ -27,7 +27,7 @@ this.alfrescoApi.setConfig({
 let modelsbpmnApi = new ModelsbpmnApi(this.alfrescoApi);
 
 
-modelsbpmnApi.getHistoricProcessModelBpmn20XmlUsingGET(processModelIdprocessModelHistoryId).then(function() {
+modelsbpmnApi.getHistoricProcessModelBpmn20XmlUsingGET(processModelIdprocessModelHistoryId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -65,7 +65,7 @@ this.alfrescoApi.setConfig({
 let modelsbpmnApi = new ModelsbpmnApi(this.alfrescoApi);
 
 
-modelsbpmnApi.getProcessModelBpmn20XmlUsingGET(processModelId).then(function() {
+modelsbpmnApi.getProcessModelBpmn20XmlUsingGET(processModelId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

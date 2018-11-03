@@ -3,7 +3,7 @@
 Provides access to the search features of Alfresco Content Services.
 
 
-- Last Build date: 2018-11-02T12:18:19.289Z
+- Last Build date: 2018-11-03T00:28:14.446Z
 
 
 ## Documentation for API Endpoints

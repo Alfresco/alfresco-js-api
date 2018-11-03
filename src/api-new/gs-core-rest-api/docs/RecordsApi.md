@@ -34,13 +34,13 @@ this.alfrescoApi.setConfig({
 let recordsApi = new RecordsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -54,7 +54,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-recordsApi.completeRecord(recordIdopts).then(function(data) {
+recordsApi.completeRecord(recordIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -67,13 +67,13 @@ recordsApi.completeRecord(recordIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordId** | **string**| The identifier of a record. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -112,7 +112,7 @@ this.alfrescoApi.setConfig({
 let recordsApi = new RecordsApi(this.alfrescoApi);
 
 
-recordsApi.deleteRecord(recordId).then(function() {
+recordsApi.deleteRecord(recordId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -142,7 +142,7 @@ You need to specify the target record folder by providing its id **targetParentI
 
 If the record is already filed, a link to the target record folder is created.
 
-You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
+You can use the **include** parameter (include=allowableOperations) to return additional information.
 
 
 ### Example
@@ -158,13 +158,13 @@ this.alfrescoApi.setConfig({
 let recordsApi = new RecordsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -178,7 +178,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-recordsApi.fileRecord(recordIdnodeBodyFileopts).then(function(data) {
+recordsApi.fileRecord(recordIdnodeBodyFileopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -192,13 +192,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordId** | **string**| The identifier of a record. | 
  **nodeBodyFile** | [**RequestBodyFile**](RequestBodyFile.md)| The target record folder id | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -223,9 +223,9 @@ Get a record
 
 Gets information for record **recordId**
 
-Mandatory fields and the record&#39;s aspects and properties are returned by default.
+Mandatory fields and the record's aspects and properties are returned by default.
 
-You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
+You can use the **include** parameter (include=allowableOperations) to return additional information.
 
 
 ### Example
@@ -241,13 +241,13 @@ this.alfrescoApi.setConfig({
 let recordsApi = new RecordsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -261,7 +261,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-recordsApi.getRecord(recordIdopts).then(function(data) {
+recordsApi.getRecord(recordIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -274,13 +274,13 @@ recordsApi.getRecord(recordIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordId** | **string**| The identifier of a record. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -320,7 +320,7 @@ this.alfrescoApi.setConfig({
 let recordsApi = new RecordsApi(this.alfrescoApi);
 
 let opts = { 
-  'attachment': true // boolean | **true** enables a web browser to download the file as an attachment.
+  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -330,12 +330,12 @@ for example, certain image files and PDF files.
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
 
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 // Date | Only returns the content if it has been modified since the date provided.
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
 
 };
 
-recordsApi.getRecordContent(recordIdopts).then(function() {
+recordsApi.getRecordContent(recordIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -375,22 +375,22 @@ Update record
 Updates the record **recordId**. For example, you can rename a record:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My new name\&quot;
+  \"name\":\"My new name\"
 }
 
 You can also set or update one or more properties:
 JSON
 {
-  \&quot;properties\&quot;:
+  \"properties\":
     {
-       \&quot;cm:title\&quot;:\&quot;New title\&quot;,
-       \&quot;cm:description\&quot;:\&quot;New description\&quot;
+       \"cm:title\":\"New title\",
+       \"cm:description\":\"New description\"
     }
 }
 
 **Note:** if you want to add or remove aspects, then you must use **GET /records/{recordId}** first to get the complete set of *aspectNames*.
 
-**Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
+**Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
 
 
 ### Example
@@ -406,13 +406,13 @@ this.alfrescoApi.setConfig({
 let recordsApi = new RecordsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -426,7 +426,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-recordsApi.updateRecord(recordIdrecordBodyUpdateopts).then(function(data) {
+recordsApi.updateRecord(recordIdrecordBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -440,13 +440,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordId** | **string**| The identifier of a record. | 
  **recordBodyUpdate** | [**FilePlanComponentBodyUpdate**](FilePlanComponentBodyUpdate.md)| The record information to update. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**deleteModelUsingDELETE**](ModelsApi.md#deleteModelUsingDELETE) | **DELETE** /enterprise/models/{modelId} | Delete a model
 [**duplicateModelUsingPOST**](ModelsApi.md#duplicateModelUsingPOST) | **POST** /enterprise/models/{modelId}/clone | Duplicate an existing model
 [**getModelJSONUsingGET**](ModelsApi.md#getModelJSONUsingGET) | **GET** /enterprise/models/{modelId}/editor/json | Get model content
-[**getModelThumbnailUsingGET**](ModelsApi.md#getModelThumbnailUsingGET) | **GET** /enterprise/models/{modelId}/thumbnail | Get a model&#39;s thumbnail image
+[**getModelThumbnailUsingGET**](ModelsApi.md#getModelThumbnailUsingGET) | **GET** /enterprise/models/{modelId}/thumbnail | Get a model's thumbnail image
 [**getModelUsingGET**](ModelsApi.md#getModelUsingGET) | **GET** /enterprise/models/{modelId} | Get a model
 [**getModelsToIncludeInAppDefinitionUsingGET**](ModelsApi.md#getModelsToIncludeInAppDefinitionUsingGET) | **GET** /enterprise/models-for-app-definition | List process definition models shared with the current user
 [**getModelsUsingGET**](ModelsApi.md#getModelsUsingGET) | **GET** /enterprise/models | List models (process, form, decision rule or app)
@@ -38,7 +38,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.createModelUsingPOST(modelRepresentation).then(function(data) {
+modelsApi.createModelUsingPOST(modelRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -75,11 +75,11 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 let opts = { 
-  'cascade': true // boolean | cascade
-  'deleteRuntimeApp': true // boolean | deleteRuntimeApp
+  'cascade': true //  | cascade
+  'deleteRuntimeApp': true //  | deleteRuntimeApp
 };
 
-modelsApi.deleteModelUsingDELETE(modelIdopts).then(function() {
+modelsApi.deleteModelUsingDELETE(modelIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -118,7 +118,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.duplicateModelUsingPOST(modelIdmodelRepresentation).then(function(data) {
+modelsApi.duplicateModelUsingPOST(modelIdmodelRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -156,7 +156,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.getModelJSONUsingGET(modelId).then(function(data) {
+modelsApi.getModelJSONUsingGET(modelId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 # **getModelThumbnailUsingGET**
 > Array<string> getModelThumbnailUsingGET(modelId)
 
-Get a model&#39;s thumbnail image
+Get a model's thumbnail image
 
 ### Example
 ```javascript
@@ -193,7 +193,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.getModelThumbnailUsingGET(modelId).then(function(data) {
+modelsApi.getModelThumbnailUsingGET(modelId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -232,10 +232,10 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 let opts = { 
-  'includePermissions': true // boolean | includePermissions
+  'includePermissions': true //  | includePermissions
 };
 
-modelsApi.getModelUsingGET(modelIdopts).then(function(data) {
+modelsApi.getModelUsingGET(modelIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -272,7 +272,7 @@ this.alfrescoApi.setConfig({
 
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
-modelsApi.getModelsToIncludeInAppDefinitionUsingGET().then(function(data) {
+modelsApi.getModelsToIncludeInAppDefinitionUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -306,13 +306,13 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example // string | filter
-  'sort': sort_example // string | sort
-  'modelType': 56 // number | modelType
-  'referenceId': 789 // number | referenceId
+  'filter': filter_example //  | filter
+  'sort': sort_example //  | sort
+  'modelType': 56 //  | modelType
+  'referenceId': 789 //  | referenceId
 };
 
-modelsApi.getModelsUsingGET(opts).then(function(data) {
+modelsApi.getModelsUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -352,7 +352,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.importNewVersionUsingPOST(modelIdfile).then(function(data) {
+modelsApi.importNewVersionUsingPOST(modelIdfile).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -390,7 +390,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.importProcessModelUsingPOST(file).then(function(data) {
+modelsApi.importProcessModelUsingPOST(file).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -427,7 +427,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.saveModelUsingPOST(modelIdvalues).then(function(data) {
+modelsApi.saveModelUsingPOST(modelIdvalues).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -467,7 +467,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.updateModelUsingPUT(modelIdupdatedModel).then(function(data) {
+modelsApi.updateModelUsingPUT(modelIdupdatedModel).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -505,10 +505,10 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 let opts = { 
-  'values':  // any | values
+  'values':  //  | values
 };
 
-modelsApi.validateModelUsingPOST(modelIdopts).then(function(data) {
+modelsApi.validateModelUsingPOST(modelIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -525,5 +525,5 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;ValidationErrorRepresentation&gt;**](ValidationErrorRepresentation.md)
+[**Array<ValidationErrorRepresentation>**](ValidationErrorRepresentation.md)
 

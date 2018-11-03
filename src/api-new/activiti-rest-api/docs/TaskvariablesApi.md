@@ -31,7 +31,7 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
-taskvariablesApi.createTaskVariableUsingPOST(taskIdrestVariables).then(function(data) {
+taskvariablesApi.createTaskVariableUsingPOST(taskIdrestVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -44,11 +44,11 @@ taskvariablesApi.createTaskVariableUsingPOST(taskIdrestVariables).then(function(
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **taskId** | **string**| taskId | 
- **restVariables** | [**Array&lt;RestVariable&gt;**](RestVariable.md)| restVariables | 
+ **restVariables** | [**Array<RestVariable>**](RestVariable.md)| restVariables | 
 
 ### Return type
 
-[**Array&lt;RestVariable&gt;**](RestVariable.md)
+[**Array<RestVariable>**](RestVariable.md)
 
 <a name="deleteAllLocalTaskVariablesUsingDELETE"></a>
 # **deleteAllLocalTaskVariablesUsingDELETE**
@@ -69,7 +69,7 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
-taskvariablesApi.deleteAllLocalTaskVariablesUsingDELETE(taskId).then(function() {
+taskvariablesApi.deleteAllLocalTaskVariablesUsingDELETE(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -106,10 +106,10 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 let opts = { 
-  'scope': scope_example // string | scope
+  'scope': scope_example //  | scope
 };
 
-taskvariablesApi.deleteVariableUsingDELETE(taskIdvariableNameopts).then(function() {
+taskvariablesApi.deleteVariableUsingDELETE(taskIdvariableNameopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -148,10 +148,10 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 let opts = { 
-  'scope': scope_example // string | scope
+  'scope': scope_example //  | scope
 };
 
-taskvariablesApi.getVariableUsingGET(taskIdvariableNameopts).then(function(data) {
+taskvariablesApi.getVariableUsingGET(taskIdvariableNameopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -190,10 +190,10 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 let opts = { 
-  'scope': scope_example // string | scope
+  'scope': scope_example //  | scope
 };
 
-taskvariablesApi.getVariablesUsingGET(taskIdopts).then(function(data) {
+taskvariablesApi.getVariablesUsingGET(taskIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;RestVariable&gt;**](RestVariable.md)
+[**Array<RestVariable>**](RestVariable.md)
 
 <a name="updateVariableUsingPUT"></a>
 # **updateVariableUsingPUT**
@@ -231,7 +231,7 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
-taskvariablesApi.updateVariableUsingPUT(taskIdvariableNamerestVariable).then(function(data) {
+taskvariablesApi.updateVariableUsingPUT(taskIdvariableNamerestVariable).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

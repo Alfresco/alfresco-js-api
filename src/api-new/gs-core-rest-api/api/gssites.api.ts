@@ -48,7 +48,7 @@ When you create the RM site, the **filePlan** structure is also created includin
     * 
     * @param  siteBodyCreate The site details
     * @param Object opts Optional parameters
-    * @param  opts.skipAddToFavorites Flag to indicate whether the RM site should not be added to the user&#39;s site favorites. (default to false)
+    * @param  opts.skipAddToFavorites Flag to indicate whether the RM site should not be added to the user's site favorites. (default to false)
     * @return Promise<RMSiteEntry>
     */
     createRMSite(siteBodyCreate: RMSiteBodyCreate, opts: any): Promise<RMSiteEntry> {

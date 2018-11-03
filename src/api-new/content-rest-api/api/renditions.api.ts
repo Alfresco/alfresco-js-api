@@ -41,7 +41,7 @@ JSON
 
     * 
     * @param  nodeId The identifier of a node.
-    * @param  renditionBodyCreate The rendition \&quot;id\&quot;.
+    * @param  renditionBodyCreate The rendition \"id\".
     * @return Promise<{}>
     */
     createRendition(nodeId: string, renditionBodyCreate: RenditionBodyCreate): Promise<{}> {
@@ -147,7 +147,7 @@ JSON
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
         * @param  opts.range The Range header indicates the part of a document that the server should return.
-    Single part request supported, for example: bytes&#x3D;1-10.
+    Single part request supported, for example: bytes=1-10.
     
         * @param  opts.placeholder If **true** and there is no rendition for this **nodeId** and **renditionId**,
     then the placeholder image for the mime type of this rendition is returned, rather

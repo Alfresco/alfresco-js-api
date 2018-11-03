@@ -32,7 +32,7 @@ export class TaskvariablesApi extends BaseApi {
     * @param  restVariables restVariables
     * @return Promise<Array<RestVariable>>
     */
-    createTaskVariableUsingPOST(taskId: string, restVariables: Array & lt; RestVariable&gt;): Promise<Array<RestVariable>> {
+    createTaskVariableUsingPOST(taskId: string, restVariables: Array<RestVariable>): Promise<Array<RestVariable>> {
 
         let postBody = restVariables;
 

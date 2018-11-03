@@ -27,7 +27,7 @@ this.alfrescoApi.setConfig({
 
 let aboutApi = new AboutApi(this.alfrescoApi);
 
-aboutApi.getAppVersionUsingGET().then(function(data) {
+aboutApi.getAppVersionUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

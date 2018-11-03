@@ -35,7 +35,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.createBasicAuthConfigurationUsingPOST(createRepresentation).then(function(data) {
+adminendpointsApi.createBasicAuthConfigurationUsingPOST(createRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -72,7 +72,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.createEndpointConfigurationUsingPOST(representation).then(function(data) {
+adminendpointsApi.createEndpointConfigurationUsingPOST(representation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -109,7 +109,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.getBasicAuthConfigurationUsingGET(basicAuthIdtenantId).then(function(data) {
+adminendpointsApi.getBasicAuthConfigurationUsingGET(basicAuthIdtenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -147,7 +147,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.getBasicAuthConfigurationsUsingGET(tenantId).then(function(data) {
+adminendpointsApi.getBasicAuthConfigurationsUsingGET(tenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;EndpointBasicAuthRepresentation&gt;**](EndpointBasicAuthRepresentation.md)
+[**Array<EndpointBasicAuthRepresentation>**](EndpointBasicAuthRepresentation.md)
 
 <a name="getEndpointConfigurationUsingGET1"></a>
 # **getEndpointConfigurationUsingGET1**
@@ -184,7 +184,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.getEndpointConfigurationUsingGET1(endpointConfigurationIdtenantId).then(function(data) {
+adminendpointsApi.getEndpointConfigurationUsingGET1(endpointConfigurationIdtenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -222,7 +222,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.getEndpointConfigurationsUsingGET1(tenantId).then(function(data) {
+adminendpointsApi.getEndpointConfigurationsUsingGET1(tenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;EndpointConfigurationRepresentation&gt;**](EndpointConfigurationRepresentation.md)
+[**Array<EndpointConfigurationRepresentation>**](EndpointConfigurationRepresentation.md)
 
 <a name="removeBasicAuthonfigurationUsingDELETE"></a>
 # **removeBasicAuthonfigurationUsingDELETE**
@@ -259,7 +259,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.removeBasicAuthonfigurationUsingDELETE(basicAuthIdtenantId).then(function() {
+adminendpointsApi.removeBasicAuthonfigurationUsingDELETE(basicAuthIdtenantId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -297,7 +297,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.removeEndpointConfigurationUsingDELETE(endpointConfigurationIdtenantId).then(function() {
+adminendpointsApi.removeEndpointConfigurationUsingDELETE(endpointConfigurationIdtenantId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -335,7 +335,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.updateBasicAuthConfigurationUsingPUT(basicAuthIdcreateRepresentation).then(function(data) {
+adminendpointsApi.updateBasicAuthConfigurationUsingPUT(basicAuthIdcreateRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -373,7 +373,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.updateEndpointConfigurationUsingPUT(endpointConfigurationIdrepresentation).then(function(data) {
+adminendpointsApi.updateEndpointConfigurationUsingPUT(endpointConfigurationIdrepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

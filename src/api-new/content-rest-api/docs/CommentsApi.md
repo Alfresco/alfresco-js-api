@@ -20,7 +20,7 @@ Creates a comment on node **nodeId**. You specify the comment in a JSON body lik
 
 JSON
 {
-  \&quot;content\&quot;: \&quot;This is a comment\&quot;
+  \"content\": \"This is a comment\"
 }
 
 
@@ -30,10 +30,10 @@ specifying a list of comments in the JSON body like this:
 JSON
 [
   {
-    \&quot;content\&quot;: \&quot;This is a comment\&quot;
+    \"content\": \"This is a comment\"
   },
   {
-    \&quot;content\&quot;: \&quot;This is another comment\&quot;
+    \"content\": \"This is another comment\"
   }
 ]
 
@@ -41,22 +41,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -79,7 +79,7 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -93,7 +93,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-commentsApi.createComment(nodeIdcommentBodyCreateopts).then(function(data) {
+commentsApi.createComment(nodeIdcommentBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -107,7 +107,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **commentBodyCreate** | [**CommentBody**](CommentBody.md)| The comment text. Note that you can also provide a list of comments. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -145,7 +145,7 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 
-commentsApi.deleteComment(nodeIdcommentId).then(function() {
+commentsApi.deleteComment(nodeIdcommentId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -185,13 +185,13 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -205,7 +205,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-commentsApi.listComments(nodeIdopts).then(function(data) {
+commentsApi.listComments(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -224,7 +224,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -262,7 +262,7 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -276,7 +276,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-commentsApi.updateComment(nodeIdcommentIdcommentBodyUpdateopts).then(function(data) {
+commentsApi.updateComment(nodeIdcommentIdcommentBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
  **nodeId** | **string**| The identifier of a node. | 
  **commentId** | **string**| The identifier of a comment. | 
  **commentBodyUpdate** | [**CommentBody**](CommentBody.md)| The JSON representing the comment to be updated. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

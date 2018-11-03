@@ -329,7 +329,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
         * @param  opts.range The Range header indicates the part of a document that the server should return.
-    Single part request supported, for example: bytes&#x3D;1-10.
+    Single part request supported, for example: bytes=1-10.
     
         * @return Promise<{}>
         */
@@ -440,7 +440,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
         * @param  opts.range The Range header indicates the part of a document that the server should return.
-    Single part request supported, for example: bytes&#x3D;1-10.
+    Single part request supported, for example: bytes=1-10.
     
         * @return Promise<{}>
         */
@@ -542,11 +542,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param  opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.where Optionally filter the list by \&quot;sharedByUser\&quot; userid of person who shared the link (can also use -me-)
+        * @param  opts.where Optionally filter the list by \"sharedByUser\" userid of person who shared the link (can also use -me-)
     
-    *   where&#x3D;(sharedByUser&#x3D;&#39;jbloggs&#39;)
+    *   where=(sharedByUser='jbloggs')
     
-    *   where&#x3D;(sharedByUser&#x3D;&#39;-me-&#39;)
+    *   where=(sharedByUser='-me-')
     
         * @param  opts.include Returns additional information about the shared link, the following optional fields can be requested:
     * allowableOperations

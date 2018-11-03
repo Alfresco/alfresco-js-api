@@ -27,7 +27,7 @@ this.alfrescoApi.setConfig({
 let idmsyncApi = new IdmsyncApi(this.alfrescoApi);
 
 
-idmsyncApi.getLogFileUsingGET(syncLogEntryId).then(function() {
+idmsyncApi.getLogFileUsingGET(syncLogEntryId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -64,13 +64,13 @@ this.alfrescoApi.setConfig({
 let idmsyncApi = new IdmsyncApi(this.alfrescoApi);
 
 let opts = { 
-  'tenantId': 789 // number | tenantId
-  'page': 56 // number | page
-  'start': 56 // number | start
-  'size': 56 // number | size
+  'tenantId': 789 //  | tenantId
+  'page': 56 //  | page
+  'start': 56 //  | start
+  'size': 56 //  | size
 };
 
-idmsyncApi.getSyncLogEntriesUsingGET(opts).then(function(data) {
+idmsyncApi.getSyncLogEntriesUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -89,5 +89,5 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;SyncLogEntryRepresentation&gt;**](SyncLogEntryRepresentation.md)
+[**Array<SyncLogEntryRepresentation>**](SyncLogEntryRepresentation.md)
 

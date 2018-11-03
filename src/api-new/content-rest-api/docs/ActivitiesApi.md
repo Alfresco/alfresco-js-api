@@ -15,7 +15,7 @@ List activities
 
 Gets a list of activities for person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -31,16 +31,16 @@ this.alfrescoApi.setConfig({
 let activitiesApi = new ActivitiesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'who': who_example // string | A filter to include the user's activities only me, other user's activities only others'
+  'who': who_example //  | A filter to include the user's activities only me, other user's activities only others'
 
-  'siteId': siteId_example // string | Include only activity feed entries relating to this site.
-  'fields':  // Array<string> | A list of field names.
+  'siteId': siteId_example //  | Include only activity feed entries relating to this site.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -54,7 +54,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-activitiesApi.listActivitiesForPerson(personIdopts).then(function(data) {
+activitiesApi.listActivitiesForPerson(personIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -73,10 +73,10 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **who** | **string**| A filter to include the user&#39;s activities only me, other user&#39;s activities only others&#39;
+ **who** | **string**| A filter to include the user's activities only me, other user's activities only others'
  | [optional] 
  **siteId** | **string**| Include only activity feed entries relating to this site. | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

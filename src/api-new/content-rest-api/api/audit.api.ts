@@ -49,8 +49,8 @@ You must have admin rights to delete audit information.
     * @param  auditApplicationId The identifier of an audit application.
     * @param  where Audit entries to permanently delete for an audit application, given an inclusive time period or range of ids. For example:
 
-*   where&#x3D;(createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
-*   where&#x3D;(id BETWEEN (&#39;1234&#39;, &#39;4321&#39;)
+*   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
+*   where=(id BETWEEN ('1234', '4321')
 
     * @return Promise<{}>
     */
@@ -360,17 +360,17 @@ You must have admin rights to delete audit information.
      (default to 100)
         * @param  opts.where Optionally filter the list. Here are some examples:
     
-    *   where&#x3D;(createdByUser&#x3D;&#39;jbloggs&#39;)
+    *   where=(createdByUser='jbloggs')
     
-    *   where&#x3D;(id BETWEEN (&#39;1234&#39;, &#39;4321&#39;)
+    *   where=(id BETWEEN ('1234', '4321')
     
-    *   where&#x3D;(createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
+    *   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
     
-    *   where&#x3D;(createdByUser&#x3D;&#39;jbloggs&#39; and createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
+    *   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
     
-    *   where&#x3D;(valuesKey&#x3D;&#39;/alfresco-access/login/user&#39;)
+    *   where=(valuesKey='/alfresco-access/login/user')
     
-    *   where&#x3D;(valuesKey&#x3D;&#39;/alfresco-access/transaction/action&#39; and valuesValue&#x3D;&#39;DELETE&#39;)
+    *   where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')
     
         * @param  opts.include Returns additional information about the audit entry. The following optional fields can be requested:
     * values
@@ -459,11 +459,11 @@ You must have admin rights to delete audit information.
      (default to 100)
         * @param  opts.where Optionally filter the list. Here are some examples:
     
-    *   where&#x3D;(createdByUser&#x3D;&#39;-me-&#39;)
+    *   where=(createdByUser='-me-')
     
-    *   where&#x3D;(createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
+    *   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
     
-    *   where&#x3D;(createdByUser&#x3D;&#39;jbloggs&#39; and createdAt BETWEEN (&#39;2017-06-02T12:13:51.593+01:00&#39; , &#39;2017-06-04T10:05:16.536+01:00&#39;)
+    *   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
     
         * @param  opts.include Returns additional information about the audit entry. The following optional fields can be requested:
     * values

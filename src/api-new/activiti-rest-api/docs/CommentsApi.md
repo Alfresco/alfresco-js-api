@@ -29,7 +29,7 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 
-commentsApi.addProcessInstanceCommentUsingPOST(commentRequestprocessInstanceId).then(function(data) {
+commentsApi.addProcessInstanceCommentUsingPOST(commentRequestprocessInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -67,7 +67,7 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 
-commentsApi.addTaskCommentUsingPOST(commentRequesttaskId).then(function(data) {
+commentsApi.addTaskCommentUsingPOST(commentRequesttaskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -105,10 +105,10 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 let opts = { 
-  'latestFirst': true // boolean | latestFirst
+  'latestFirst': true //  | latestFirst
 };
 
-commentsApi.getProcessInstanceCommentsUsingGET(processInstanceIdopts).then(function(data) {
+commentsApi.getProcessInstanceCommentsUsingGET(processInstanceIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -146,10 +146,10 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 let opts = { 
-  'latestFirst': true // boolean | latestFirst
+  'latestFirst': true //  | latestFirst
 };
 
-commentsApi.getTaskCommentsUsingGET(taskIdopts).then(function(data) {
+commentsApi.getTaskCommentsUsingGET(taskIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

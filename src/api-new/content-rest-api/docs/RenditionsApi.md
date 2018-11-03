@@ -23,7 +23,7 @@ An asynchronous request to create a rendition for file **nodeId**.
 The rendition is specified by name **id** in the request body:
 JSON
 {
-  \&quot;id\&quot;:\&quot;doclib\&quot;
+  \"id\":\"doclib\"
 }
 
 
@@ -41,7 +41,7 @@ this.alfrescoApi.setConfig({
 let renditionsApi = new RenditionsApi(this.alfrescoApi);
 
 
-renditionsApi.createRendition(nodeIdrenditionBodyCreate).then(function() {
+renditionsApi.createRendition(nodeIdrenditionBodyCreate).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -54,7 +54,7 @@ renditionsApi.createRendition(nodeIdrenditionBodyCreate).then(function() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
- **renditionBodyCreate** | [**RenditionBodyCreate**](RenditionBodyCreate.md)| The rendition \&quot;id\&quot;. | 
+ **renditionBodyCreate** | [**RenditionBodyCreate**](RenditionBodyCreate.md)| The rendition \"id\". | 
 
 ### Return type
 
@@ -84,7 +84,7 @@ this.alfrescoApi.setConfig({
 let renditionsApi = new RenditionsApi(this.alfrescoApi);
 
 
-renditionsApi.getRendition(nodeIdrenditionId).then(function(data) {
+renditionsApi.getRendition(nodeIdrenditionId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -127,7 +127,7 @@ this.alfrescoApi.setConfig({
 let renditionsApi = new RenditionsApi(this.alfrescoApi);
 
 let opts = { 
-  'attachment': true // boolean | **true** enables a web browser to download the file as an attachment.
+  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -137,19 +137,19 @@ for example, certain image files and PDF files.
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
 
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 // Date | Only returns the content if it has been modified since the date provided.
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
 
-  'range': range_example // string | The Range header indicates the part of a document that the server should return.
+  'range': range_example //  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
 
-  'placeholder': true // boolean | If **true** and there is no rendition for this **nodeId** and **renditionId**,
+  'placeholder': true //  | If **true** and there is no rendition for this **nodeId** and **renditionId**,
 then the placeholder image for the mime type of this rendition is returned, rather
 than a 404 response.
 
 };
 
-renditionsApi.getRenditionContent(nodeIdrenditionIdopts).then(function() {
+renditionsApi.getRenditionContent(nodeIdrenditionIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -177,7 +177,7 @@ the attachment will be returned in the response.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
  | [optional] 
  **range** | **string**| The Range header indicates the part of a document that the server should return.
-Single part request supported, for example: bytes&#x3D;1-10.
+Single part request supported, for example: bytes=1-10.
  | [optional] 
  **placeholder** | **boolean**| If **true** and there is no rendition for this **nodeId** and **renditionId**,
 then the placeholder image for the mime type of this rendition is returned, rather
@@ -204,7 +204,7 @@ You can use the **where** parameter to filter the returned renditions by **statu
 clause will return just the CREATED renditions:
 
 
-(status&#x3D;&#39;CREATED&#39;)
+(status='CREATED')
 
 
 
@@ -221,10 +221,10 @@ this.alfrescoApi.setConfig({
 let renditionsApi = new RenditionsApi(this.alfrescoApi);
 
 let opts = { 
-  'where': where_example // string | A string to restrict the returned objects by using a predicate.
+  'where': where_example //  | A string to restrict the returned objects by using a predicate.
 };
 
-renditionsApi.listRenditions(nodeIdopts).then(function(data) {
+renditionsApi.listRenditions(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

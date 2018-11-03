@@ -297,7 +297,7 @@ export class ClassificationguidesApi extends BaseApi {
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
         * @param  opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:
-    * enabled - e.g. (enabled &#x3D; true OR enabled &#x3D; false)
+    * enabled - e.g. (enabled = true OR enabled = false)
     
         * @return Promise<ClassificationGuidePaging>
         */
@@ -419,7 +419,7 @@ export class ClassificationguidesApi extends BaseApi {
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction&#x3D;true and hasSubtopics&#x3D;false). Fields to filter on:
+        * @param  opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction=true and hasSubtopics=false). Fields to filter on:
     * hasInstruction
     * hasSubtopics
     

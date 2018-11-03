@@ -27,14 +27,14 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example // string | filter
-  'groupId': 789 // number | groupId
-  'externalId': externalId_example // string | externalId
-  'externalIdCaseInsensitive': externalIdCaseInsensitive_example // string | externalIdCaseInsensitive
-  'tenantId': 789 // number | tenantId
+  'filter': filter_example //  | filter
+  'groupId': 789 //  | groupId
+  'externalId': externalId_example //  | externalId
+  'externalIdCaseInsensitive': externalIdCaseInsensitive_example //  | externalIdCaseInsensitive
+  'tenantId': 789 //  | tenantId
 };
 
-groupsApi.getGroupsUsingGET(opts).then(function(data) {
+groupsApi.getGroupsUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -75,7 +75,7 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 
-groupsApi.getUsersForGroupUsingGET(groupId).then(function(data) {
+groupsApi.getUsersForGroupUsingGET(groupId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -37,7 +37,7 @@ this.alfrescoApi.setConfig({
 let probesApi = new ProbesApi(this.alfrescoApi);
 
 
-probesApi.getProbe(probeId).then(function(data) {
+probesApi.getProbe(probeId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

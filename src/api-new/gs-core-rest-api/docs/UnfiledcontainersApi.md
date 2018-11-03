@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createUnfiledContainerChildren**](UnfiledcontainersApi.md#createUnfiledContainerChildren) | **POST** /unfiled-containers/{unfiledContainerId}/children | Create a record or an unfiled record folder
 [**getUnfiledContainer**](UnfiledcontainersApi.md#getUnfiledContainer) | **GET** /unfiled-containers/{unfiledContainerId} | Get the unfiled records container
-[**listUnfiledContainerChildren**](UnfiledcontainersApi.md#listUnfiledContainerChildren) | **GET** /unfiled-containers/{unfiledContainerId}/children | List unfiled record container&#39;s children
+[**listUnfiledContainerChildren**](UnfiledcontainersApi.md#listUnfiledContainerChildren) | **GET** /unfiled-containers/{unfiledContainerId}/children | List unfiled record container's children
 [**updateUnfiledContainer**](UnfiledcontainersApi.md#updateUnfiledContainer) | **PUT** /unfiled-containers/{unfiledContainerId} | Update an unfiled record container
 
 
@@ -26,9 +26,9 @@ This endpoint supports both JSON and multipart/form-data (file upload).
 **Using multipart/form-data**
 
 Use the **filedata** field to represent the content to upload, for example, the following curl command will
-create a node with the contents of test.txt in the test user&#39;s home folder.
+create a node with the contents of test.txt in the test user's home folder.
 
-curl -utest:test -X POST host:port/alfresco/api/-default-/public/gs/versions/1/unfiled-containers/{unfiledContainerId}/children -F filedata&#x3D;@test.txt
+curl -utest:test -X POST host:port/alfresco/api/-default-/public/gs/versions/1/unfiled-containers/{unfiledContainerId}/children -F filedata=@test.txt
 
 This API method also supports record and unfiled record folder creation using application/json.
 
@@ -37,18 +37,18 @@ You must specify at least a **name** and **nodeType**.
 You can create a non-electronic record like this:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Non-electronic Record\&quot;,
-  \&quot;nodeType\&quot;:\&quot;rma:nonElectronicDocument\&quot;,
-  \&quot;properties\&quot;:
+  \"name\":\"My Non-electronic Record\",
+  \"nodeType\":\"rma:nonElectronicDocument\",
+  \"properties\":
     {
-      \&quot;cm:description\&quot;:\&quot;My Non-electronic Record Description\&quot;,
-      \&quot;cm:title\&quot;:\&quot;My Non-electronic Record Title\&quot;,
-      \&quot;rma:box\&quot;:\&quot;My Non-electronic Record Box\&quot;,
-      \&quot;rma:file\&quot;:\&quot;My Non-electronic Record File\&quot;,
-      \&quot;rma:numberOfCopies\&quot;:1,
-      \&quot;rma:physicalSize\&quot;:30,
-      \&quot;rma:shelf\&quot;:\&quot;My Non-electronic Record Shelf\&quot;,
-      \&quot;rma:storageLocation\&quot;:\&quot;My Non-electronic Record Location\&quot;
+      \"cm:description\":\"My Non-electronic Record Description\",
+      \"cm:title\":\"My Non-electronic Record Title\",
+      \"rma:box\":\"My Non-electronic Record Box\",
+      \"rma:file\":\"My Non-electronic Record File\",
+      \"rma:numberOfCopies\":1,
+      \"rma:physicalSize\":30,
+      \"rma:shelf\":\"My Non-electronic Record Shelf\",
+      \"rma:storageLocation\":\"My Non-electronic Record Location\"
     }
 }
 
@@ -56,19 +56,19 @@ JSON
 You can create an empty electronic record:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My Electronic Record\&quot;,
-  \&quot;nodeType\&quot;:\&quot;cm:content\&quot;
+  \"name\":\"My Electronic Record\",
+  \"nodeType\":\"cm:content\"
 }
 
 
 You can create an unfiled record folder like this:
 JSON
 {
-  \&quot;name\&quot;: \&quot;My Unfiled Record Folder\&quot;,
-  \&quot;nodeType\&quot;: \&quot;rma:unfiledRecordFolder\&quot;,
-  \&quot;properties\&quot;:
+  \"name\": \"My Unfiled Record Folder\",
+  \"nodeType\": \"rma:unfiledRecordFolder\",
+  \"properties\":
   {
-    \&quot;cm:title\&quot;: \&quot;My Unfiled Record Folder Title\&quot;
+    \"cm:title\": \"My Unfiled Record Folder Title\"
   }
 }
 
@@ -81,12 +81,12 @@ body creates a record and an unfiled record folder inside the specified **unfile
 JSON
 [
   {
-    \&quot;name\&quot;:\&quot;My Record\&quot;,
-    \&quot;nodeType\&quot;:\&quot;cm:content\&quot;
+    \"name\":\"My Record\",
+    \"nodeType\":\"cm:content\"
   },
   {
-    \&quot;name\&quot;:\&quot;My Unfiled Record Folder\&quot;,
-    \&quot;nodeType\&quot;:\&quot;rma:unfiledRecordFolder\&quot;
+    \"name\":\"My Unfiled Record Folder\",
+    \"nodeType\":\"rma:unfiledRecordFolder\"
   }
 ]
 
@@ -94,22 +94,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -132,13 +132,13 @@ this.alfrescoApi.setConfig({
 let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
 
 let opts = { 
-  'autoRename': true // boolean | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+  'autoRename': true //  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
 
-  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -152,7 +152,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-unfiledcontainersApi.createUnfiledContainerChildren(unfiledContainerIdnodeBodyCreateopts).then(function(data) {
+unfiledcontainersApi.createUnfiledContainerChildren(unfiledContainerIdnodeBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -168,11 +168,11 @@ Name | Type | Description  | Notes
  **nodeBodyCreate** | [**RMNodeBodyCreate**](RMNodeBodyCreate.md)| The node information to create. | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -197,9 +197,9 @@ Get the unfiled records container
 
 Gets information for unfiled records container **unfiledContainerId**
 
-Mandatory fields and the unfiled records container&#39;s aspects and properties are returned by default.
+Mandatory fields and the unfiled records container's aspects and properties are returned by default.
 
-You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
+You can use the **include** parameter (include=allowableOperations) to return additional information.
 
 
 ### Example
@@ -215,11 +215,11 @@ this.alfrescoApi.setConfig({
 let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -233,7 +233,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-unfiledcontainersApi.getUnfiledContainer(unfiledContainerIdopts).then(function(data) {
+unfiledcontainersApi.getUnfiledContainer(unfiledContainerIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -246,11 +246,11 @@ unfiledcontainersApi.getUnfiledContainer(unfiledContainerIdopts).then(function(d
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **unfiledContainerId** | **string**| The identifier of an unfiled records container. You can use the **-unfiled-** alias. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -271,13 +271,13 @@ parameter are returned in addition to those specified in the **fields** paramete
 # **listUnfiledContainerChildren**
 > UnfiledContainerAssociationPaging listUnfiledContainerChildren(unfiledContainerIdopts)
 
-List unfiled record container&#39;s children
+List unfiled record container's children
 
 Returns a list of records or unfiled record folders.
 
 Minimal information for each child is returned by default.
 
-You can use the **include** parameter (include&#x3D;allowableOperations) to return additional information.
+You can use the **include** parameter (include=allowableOperations) to return additional information.
 
 
 ### Example
@@ -293,9 +293,9 @@ this.alfrescoApi.setConfig({
 let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56 // number | The maximum number of items to return in the list.
-  'where': where_example // string | Optionally filter the list. Here are some examples:
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
+  'where': where_example //  | Optionally filter the list. Here are some examples:
 
 *   where=(isRecord=true)
 
@@ -303,15 +303,15 @@ let opts = {
 
 *   where=(nodeType='cm:content INCLUDESUBTYPES')
 
-  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
 * path
 * properties
 
-  'includeSource': true // boolean | Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **unfiledContainerId**
-  'fields':  // Array<string> | A list of field names.
+  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **unfiledContainerId**
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -325,7 +325,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-unfiledcontainersApi.listUnfiledContainerChildren(unfiledContainerIdopts).then(function(data) {
+unfiledcontainersApi.listUnfiledContainerChildren(unfiledContainerIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -342,13 +342,13 @@ Name | Type | Description  | Notes
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
  **where** | **string**| Optionally filter the list. Here are some examples:
 
-*   where&#x3D;(isRecord&#x3D;true)
+*   where=(isRecord=true)
 
-*   where&#x3D;(isUnfiledRecordFolder&#x3D;false)
+*   where=(isUnfiledRecordFolder=false)
 
-*   where&#x3D;(nodeType&#x3D;&#39;cm:content INCLUDESUBTYPES&#39;)
+*   where=(nodeType='cm:content INCLUDESUBTYPES')
  | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 * properties
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **unfiledContainerId** | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -382,21 +382,21 @@ Update an unfiled record container
 Updates unfiled record container **unfiledContainerId**. For example, you can rename an unfiled record container:
 JSON
 {
-  \&quot;name\&quot;:\&quot;My new name\&quot;
+  \"name\":\"My new name\"
 }
 
 You can also set or update description and title properties:
 JSON
 {
-  \&quot;properties\&quot;:
+  \"properties\":
     {
-       \&quot;cm:description\&quot;: \&quot;New Description\&quot;,
-       \&quot;cm:title\&quot;:\&quot;New Title\&quot;
+       \"cm:description\": \"New Description\",
+       \"cm:title\":\"New Title\"
     }
 }
 
 
-**Note:** Currently there is no optimistic locking for updates, so they are applied in \&quot;last one wins\&quot; order.
+**Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
 
 
 ### Example
@@ -412,11 +412,11 @@ this.alfrescoApi.setConfig({
 let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -430,7 +430,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-unfiledcontainersApi.updateUnfiledContainer(unfiledContainerIdunfiledContainerBodyUpdateopts).then(function(data) {
+unfiledcontainersApi.updateUnfiledContainer(unfiledContainerIdunfiledContainerBodyUpdateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -444,11 +444,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **unfiledContainerId** | **string**| The identifier of an unfiled records container. You can use the **-unfiled-** alias. | 
  **unfiledContainerBodyUpdate** | [**UnfiledRecordContainerBodyUpdate**](UnfiledRecordContainerBodyUpdate.md)| The unfiled record container information to update. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about the unfiled records container&#39;s children. Any optional field from the response model can be requested. For example:
+ **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

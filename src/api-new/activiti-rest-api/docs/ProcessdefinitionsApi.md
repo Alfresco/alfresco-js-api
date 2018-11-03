@@ -36,7 +36,7 @@ this.alfrescoApi.setConfig({
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-processdefinitionsApi.createIdentityLinkUsingPOST(processDefinitionIdidentityLinkRepresentation).then(function(data) {
+processdefinitionsApi.createIdentityLinkUsingPOST(processDefinitionIdidentityLinkRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -74,7 +74,7 @@ this.alfrescoApi.setConfig({
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-processdefinitionsApi.deleteIdentityLinkUsingDELETE(processDefinitionIdfamilyidentityId).then(function() {
+processdefinitionsApi.deleteIdentityLinkUsingDELETE(processDefinitionIdfamilyidentityId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -113,7 +113,7 @@ this.alfrescoApi.setConfig({
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-processdefinitionsApi.getIdentityLinkTypeUsingGET(processDefinitionIdfamilyidentityId).then(function(data) {
+processdefinitionsApi.getIdentityLinkTypeUsingGET(processDefinitionIdfamilyidentityId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -152,7 +152,7 @@ this.alfrescoApi.setConfig({
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-processdefinitionsApi.getIdentityLinksForFamilyUsingGET(processDefinitionIdfamily).then(function(data) {
+processdefinitionsApi.getIdentityLinksForFamilyUsingGET(processDefinitionIdfamily).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -169,7 +169,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;IdentityLinkRepresentation&gt;**](IdentityLinkRepresentation.md)
+[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
 
 <a name="getIdentityLinksUsingGET"></a>
 # **getIdentityLinksUsingGET**
@@ -190,7 +190,7 @@ this.alfrescoApi.setConfig({
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-processdefinitionsApi.getIdentityLinksUsingGET(processDefinitionId).then(function(data) {
+processdefinitionsApi.getIdentityLinksUsingGET(processDefinitionId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;IdentityLinkRepresentation&gt;**](IdentityLinkRepresentation.md)
+[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
 
 <a name="getProcessDefinitionDecisionTablesUsingGET"></a>
 # **getProcessDefinitionDecisionTablesUsingGET**
@@ -227,7 +227,7 @@ this.alfrescoApi.setConfig({
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-processdefinitionsApi.getProcessDefinitionDecisionTablesUsingGET(processDefinitionId).then(function(data) {
+processdefinitionsApi.getProcessDefinitionDecisionTablesUsingGET(processDefinitionId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -264,7 +264,7 @@ this.alfrescoApi.setConfig({
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
-processdefinitionsApi.getProcessDefinitionFormsUsingGET(processDefinitionId).then(function(data) {
+processdefinitionsApi.getProcessDefinitionFormsUsingGET(processDefinitionId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -300,7 +300,7 @@ this.alfrescoApi.setConfig({
 
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
-processdefinitionsApi.getProcessDefinitionStartFormUsingGET().then(function(data) {
+processdefinitionsApi.getProcessDefinitionStartFormUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -336,12 +336,12 @@ this.alfrescoApi.setConfig({
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 let opts = { 
-  'latest': true // boolean | latest
-  'appDefinitionId': 789 // number | appDefinitionId
-  'deploymentId': deploymentId_example // string | deploymentId
+  'latest': true //  | latest
+  'appDefinitionId': 789 //  | appDefinitionId
+  'deploymentId': deploymentId_example //  | deploymentId
 };
 
-processdefinitionsApi.getProcessDefinitionsUsingGET(opts).then(function(data) {
+processdefinitionsApi.getProcessDefinitionsUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -379,7 +379,7 @@ this.alfrescoApi.setConfig({
 
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
-processdefinitionsApi.getRestFieldValuesUsingGET().then(function(data) {
+processdefinitionsApi.getRestFieldValuesUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -392,7 +392,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Array&lt;FormValueRepresentation&gt;**](FormValueRepresentation.md)
+[**Array<FormValueRepresentation>**](FormValueRepresentation.md)
 
 <a name="getRestTableFieldValuesUsingGET"></a>
 # **getRestTableFieldValuesUsingGET**
@@ -412,7 +412,7 @@ this.alfrescoApi.setConfig({
 
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
-processdefinitionsApi.getRestTableFieldValuesUsingGET().then(function(data) {
+processdefinitionsApi.getRestTableFieldValuesUsingGET().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -425,5 +425,5 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Array&lt;FormValueRepresentation&gt;**](FormValueRepresentation.md)
+[**Array<FormValueRepresentation>**](FormValueRepresentation.md)
 

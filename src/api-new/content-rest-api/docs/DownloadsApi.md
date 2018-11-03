@@ -41,7 +41,7 @@ this.alfrescoApi.setConfig({
 let downloadsApi = new DownloadsApi(this.alfrescoApi);
 
 
-downloadsApi.cancelDownload(downloadId).then(function() {
+downloadsApi.cancelDownload(downloadId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -71,10 +71,10 @@ Creates a new download node asynchronously, the content of which will be the zip
 
 JSON
 {
-    \&quot;nodeIds\&quot;:
+    \"nodeIds\":
      [
-       \&quot;c8bb482a-ff3c-4704-a3a3-de1c83ccd84c\&quot;,
-       \&quot;cffa62db-aa01-493d-9594-058bc058eeb1\&quot;
+       \"c8bb482a-ff3c-4704-a3a3-de1c83ccd84c\",
+       \"cffa62db-aa01-493d-9594-058bc058eeb1\"
      ]
 }
 
@@ -95,7 +95,7 @@ this.alfrescoApi.setConfig({
 let downloadsApi = new DownloadsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -109,7 +109,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-downloadsApi.createDownload(downloadBodyCreateopts).then(function(data) {
+downloadsApi.createDownload(downloadBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -122,7 +122,7 @@ downloadsApi.createDownload(downloadBodyCreateopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **downloadBodyCreate** | [**DownloadBodyCreate**](DownloadBodyCreate.md)| The nodeIds the content of which will be zipped, which zip will be set as the content of our download node. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -163,7 +163,7 @@ this.alfrescoApi.setConfig({
 let downloadsApi = new DownloadsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -177,7 +177,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-downloadsApi.getDownload(downloadIdopts).then(function(data) {
+downloadsApi.getDownload(downloadIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -190,7 +190,7 @@ downloadsApi.getDownload(downloadIdopts).then(function(data) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **downloadId** | **string**| The identifier of a download node. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

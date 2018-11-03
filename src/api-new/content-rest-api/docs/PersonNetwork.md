@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | This network&#39;s unique id | [default to null]
+**id** | **string** | This network's unique id | [default to null]
 **homeNetwork** | **boolean** | Is this the home network? | [optional] [default to null]
 **isEnabled** | **boolean** |  | [default to null]
 **createdAt** | **Date** |  | [optional] [default to null]

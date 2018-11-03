@@ -22,7 +22,7 @@ Create a favorite
 
 Favorite a **site**, **file**, or **folder** in the repository.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 **Note:** You can favorite more than one entity by
 specifying a list of objects in the JSON body like this:
@@ -30,16 +30,16 @@ specifying a list of objects in the JSON body like this:
 JSON
 [
   {
-       \&quot;target\&quot;: {
-          \&quot;file\&quot;: {
-             \&quot;guid\&quot;: \&quot;abcde-01234-....\&quot;
+       \"target\": {
+          \"file\": {
+             \"guid\": \"abcde-01234-....\"
           }
        }
    },
    {
-       \&quot;target\&quot;: {
-          \&quot;file\&quot;: {
-             \&quot;guid\&quot;: \&quot;abcde-09863-....\&quot;
+       \"target\": {
+          \"file\": {
+             \"guid\": \"abcde-09863-....\"
           }
        }
    },
@@ -49,22 +49,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -87,10 +87,10 @@ this.alfrescoApi.setConfig({
 let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about favorites, the following optional fields can be requested:
+  'include':  //  | Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -104,7 +104,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-favoritesApi.createFavorite(personIdfavoriteBodyCreateopts).then(function(data) {
+favoritesApi.createFavorite(personIdfavoriteBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -126,18 +126,18 @@ For example, to favorite a file the following body would be used:
 
 JSON
 {
-   \&quot;target\&quot;: {
-      \&quot;file\&quot;: {
-         \&quot;guid\&quot;: \&quot;abcde-01234-....\&quot;
+   \"target\": {
+      \"file\": {
+         \"guid\": \"abcde-01234-....\"
       }
    }
 }
 
  | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -165,7 +165,7 @@ Use /people/{personId}/favorites instead.
 
 Create a site favorite for person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
  **Note:** You can favorite more than one site by
 specifying a list of sites in the JSON body like this:
@@ -173,10 +173,10 @@ specifying a list of sites in the JSON body like this:
 JSON
 [
   {
-    \&quot;id\&quot;: \&quot;test-site-1\&quot;
+    \"id\": \"test-site-1\"
   },
   {
-    \&quot;id\&quot;: \&quot;test-site-2\&quot;
+    \"id\": \"test-site-2\"
   }
 ]
 
@@ -184,22 +184,22 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 JSON
 {
-  \&quot;list\&quot;: {
-    \&quot;pagination\&quot;: {
-      \&quot;count\&quot;: 2,
-      \&quot;hasMoreItems\&quot;: false,
-      \&quot;totalItems\&quot;: 2,
-      \&quot;skipCount\&quot;: 0,
-      \&quot;maxItems\&quot;: 100
+  \"list\": {
+    \"pagination\": {
+      \"count\": 2,
+      \"hasMoreItems\": false,
+      \"totalItems\": 2,
+      \"skipCount\": 0,
+      \"maxItems\": 100
     },
-    \&quot;entries\&quot;: [
+    \"entries\": [
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       },
       {
-        \&quot;entry\&quot;: {
+        \"entry\": {
           ...
         }
       }
@@ -222,7 +222,7 @@ this.alfrescoApi.setConfig({
 let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -236,7 +236,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-favoritesApi.createSiteFavorite(personIdfavoriteSiteBodyCreateopts).then(function(data) {
+favoritesApi.createSiteFavorite(personIdfavoriteSiteBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -250,7 +250,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **favoriteSiteBodyCreate** | [**FavoriteSiteBodyCreate**](FavoriteSiteBodyCreate.md)| The id of the site to favorite. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -275,7 +275,7 @@ Delete a favorite
 
 Deletes **favoriteId** as a favorite of person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -291,7 +291,7 @@ this.alfrescoApi.setConfig({
 let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
 
-favoritesApi.deleteFavorite(personIdfavoriteId).then(function() {
+favoritesApi.deleteFavorite(personIdfavoriteId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -321,7 +321,7 @@ Use /people/{personId}/favorites/{favoriteId} instead.
 
 Deletes site **siteId** from the favorite site list of person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -337,7 +337,7 @@ this.alfrescoApi.setConfig({
 let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
 
-favoritesApi.deleteSiteFavorite(personIdsiteId).then(function() {
+favoritesApi.deleteSiteFavorite(personIdsiteId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -364,7 +364,7 @@ Get a favorite
 
 Gets favorite **favoriteId** for person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -380,10 +380,10 @@ this.alfrescoApi.setConfig({
 let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  // Array<string> | Returns additional information about favorites, the following optional fields can be requested:
+  'include':  //  | Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -397,7 +397,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-favoritesApi.getFavorite(personIdfavoriteIdopts).then(function(data) {
+favoritesApi.getFavorite(personIdfavoriteIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -411,10 +411,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **favoriteId** | **string**| The identifier of a favorite. | 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -442,7 +442,7 @@ Use /people/{personId}/favorites/{favoriteId} instead.
 
 Gets information on favorite site **siteId** of person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -458,7 +458,7 @@ this.alfrescoApi.setConfig({
 let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -472,7 +472,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-favoritesApi.getFavoriteSite(personIdsiteIdopts).then(function(data) {
+favoritesApi.getFavoriteSite(personIdsiteIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -486,7 +486,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **personId** | **string**| The identifier of a person. | 
  **siteId** | **string**| The identifier of a site. | 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -512,9 +512,9 @@ List favorite sites
 **Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
 Use /people/{personId}/favorites instead.
 
-Gets a list of a person&#39;s favorite sites.
+Gets a list of a person's favorite sites.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 
 ### Example
@@ -530,13 +530,13 @@ this.alfrescoApi.setConfig({
 let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -550,7 +550,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-favoritesApi.listFavoriteSitesForPerson(personIdopts).then(function(data) {
+favoritesApi.listFavoriteSitesForPerson(personIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -569,7 +569,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -594,7 +594,7 @@ List favorites
 
 Gets a list of favorites for person **personId**.
 
-You can use the -me- string in place of &lt;personId&gt; to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
 You can use the **where** parameter to restrict the list in the response
 to entries of a specific kind. The **where** parameter takes a value.
@@ -634,17 +634,17 @@ this.alfrescoApi.setConfig({
 let favoritesApi = new FavoritesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 // number | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
 
-  'maxItems': 56 // number | The maximum number of items to return in the list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
 
-  'where': where_example // string | A string to restrict the returned objects by using a predicate.
-  'include':  // Array<string> | Returns additional information about favorites, the following optional fields can be requested:
+  'where': where_example //  | A string to restrict the returned objects by using a predicate.
+  'include':  //  | Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
 
-  'fields':  // Array<string> | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -658,7 +658,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-favoritesApi.listFavorites(personIdopts).then(function(data) {
+favoritesApi.listFavorites(personIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -678,10 +678,10 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
  **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
- **include** | [**Array&lt;string&gt;**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
+ **include** | [**Array<string>**](string.md)| Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
  | [optional] 
- **fields** | [**Array&lt;string&gt;**](string.md)| A list of field names.
+ **fields** | [**Array<string>**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

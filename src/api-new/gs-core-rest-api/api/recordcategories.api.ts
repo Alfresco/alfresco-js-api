@@ -306,11 +306,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param  opts.maxItems The maximum number of items to return in the list.
         * @param  opts.where Optionally filter the list. Here are some examples:
     
-    *   where&#x3D;(nodeType&#x3D;&#39;rma:recordFolder&#39;)
+    *   where=(nodeType='rma:recordFolder')
     
-    *   where&#x3D;(nodeType&#x3D;&#39;rma:recordCategory&#39;)
+    *   where=(nodeType='rma:recordCategory')
     
-    *   where&#x3D;(isRecordFolder&#x3D;true AND isClosed&#x3D;false)
+    *   where=(isRecordFolder=true AND isClosed=false)
     
         * @param  opts.include Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
     * allowableOperations

@@ -37,10 +37,10 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true // boolean | isRelatedContent
+  'isRelatedContent': true //  | isRelatedContent
 };
 
-contentApi.createRelatedContentOnProcessInstanceUsingPOST(processInstanceIdrelatedContentopts).then(function(data) {
+contentApi.createRelatedContentOnProcessInstanceUsingPOST(processInstanceIdrelatedContentopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -79,10 +79,10 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true // boolean | isRelatedContent
+  'isRelatedContent': true //  | isRelatedContent
 };
 
-contentApi.createRelatedContentOnProcessInstanceUsingPOST1(processInstanceIdfileopts).then(function(data) {
+contentApi.createRelatedContentOnProcessInstanceUsingPOST1(processInstanceIdfileopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -121,10 +121,10 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true // boolean | isRelatedContent
+  'isRelatedContent': true //  | isRelatedContent
 };
 
-contentApi.createRelatedContentOnTaskUsingPOST(taskIdrelatedContentopts).then(function(data) {
+contentApi.createRelatedContentOnTaskUsingPOST(taskIdrelatedContentopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -163,10 +163,10 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true // boolean | isRelatedContent
+  'isRelatedContent': true //  | isRelatedContent
 };
 
-contentApi.createRelatedContentOnTaskUsingPOST1(taskIdfileopts).then(function(data) {
+contentApi.createRelatedContentOnTaskUsingPOST1(taskIdfileopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -205,7 +205,7 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 
-contentApi.createTemporaryRawRelatedContentUsingPOST(file).then(function(data) {
+contentApi.createTemporaryRawRelatedContentUsingPOST(file).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -242,7 +242,7 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 
-contentApi.createTemporaryRelatedContentUsingPOST(relatedContent).then(function(data) {
+contentApi.createTemporaryRelatedContentUsingPOST(relatedContent).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -279,7 +279,7 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 
-contentApi.deleteContentUsingDELETE(contentId).then(function() {
+contentApi.deleteContentUsingDELETE(contentId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -316,7 +316,7 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 
-contentApi.getContentUsingGET(contentId).then(function(data) {
+contentApi.getContentUsingGET(contentId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -353,7 +353,7 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 
-contentApi.getRawContentUsingGET(contentIdrenditionType).then(function() {
+contentApi.getRawContentUsingGET(contentIdrenditionType).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -391,7 +391,7 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 
-contentApi.getRawContentUsingGET1(contentId).then(function() {
+contentApi.getRawContentUsingGET1(contentId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -428,10 +428,10 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true // boolean | isRelatedContent
+  'isRelatedContent': true //  | isRelatedContent
 };
 
-contentApi.getRelatedContentForProcessInstanceUsingGET(processInstanceIdopts).then(function(data) {
+contentApi.getRelatedContentForProcessInstanceUsingGET(processInstanceIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -469,10 +469,10 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true // boolean | isRelatedContent
+  'isRelatedContent': true //  | isRelatedContent
 };
 
-contentApi.getRelatedContentForTaskUsingGET(taskIdopts).then(function(data) {
+contentApi.getRelatedContentForTaskUsingGET(taskIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

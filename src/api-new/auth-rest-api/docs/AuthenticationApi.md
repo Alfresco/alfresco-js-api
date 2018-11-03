@@ -22,14 +22,14 @@ Logs in and returns the new authentication ticket.
 The userId and password properties are mandatory in the request body. For example:
 JSON
 {
-    \&quot;userId\&quot;: \&quot;jbloggs\&quot;,
-    \&quot;password\&quot;: \&quot;password\&quot;
+    \"userId\": \"jbloggs\",
+    \"password\": \"password\"
 }
 
 To use the ticket in future requests you should pass it in the request header.
 For example using Javascript:
   Javascript
-    request.setRequestHeader (\&quot;Authorization\&quot;, \&quot;Basic \&quot; + btoa(ticket));
+    request.setRequestHeader (\"Authorization\", \"Basic \" + btoa(ticket));
   
 
 
@@ -46,7 +46,7 @@ this.alfrescoApi.setConfig({
 let authenticationApi = new AuthenticationApi(this.alfrescoApi);
 
 
-authenticationApi.createTicket(ticketBodyCreate).then(function(data) {
+authenticationApi.createTicket(ticketBodyCreate).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -87,7 +87,7 @@ this.alfrescoApi.setConfig({
 
 let authenticationApi = new AuthenticationApi(this.alfrescoApi);
 
-authenticationApi.deleteTicket().then(function() {
+authenticationApi.deleteTicket().then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -114,7 +114,7 @@ Validates the specified ticket (derived from Authorization header) is still vali
 
 For example, you can pass the Authorization request header using Javascript:
   Javascript
-    request.setRequestHeader (\&quot;Authorization\&quot;, \&quot;Basic \&quot; + btoa(ticket));
+    request.setRequestHeader (\"Authorization\", \"Basic \" + btoa(ticket));
   
 
 
@@ -130,7 +130,7 @@ this.alfrescoApi.setConfig({
 
 let authenticationApi = new AuthenticationApi(this.alfrescoApi);
 
-authenticationApi.validateTicket().then(function(data) {
+authenticationApi.validateTicket().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

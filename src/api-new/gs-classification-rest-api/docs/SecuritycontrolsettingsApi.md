@@ -29,7 +29,7 @@ this.alfrescoApi.setConfig({
 let securitycontrolsettingsApi = new SecuritycontrolsettingsApi(this.alfrescoApi);
 
 
-securitycontrolsettingsApi.getSecurityControlSetting(securityControlSettingKey).then(function(data) {
+securitycontrolsettingsApi.getSecurityControlSetting(securityControlSettingKey).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -70,7 +70,7 @@ this.alfrescoApi.setConfig({
 let securitycontrolsettingsApi = new SecuritycontrolsettingsApi(this.alfrescoApi);
 
 
-securitycontrolsettingsApi.updateSecurityControlSetting(securityControlSettingKeysecurityControlSettingValue).then(function(data) {
+securitycontrolsettingsApi.updateSecurityControlSetting(securityControlSettingKeysecurityControlSettingValue).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

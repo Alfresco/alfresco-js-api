@@ -28,7 +28,7 @@ this.alfrescoApi.setConfig({
 let decisiontablesApi = new DecisiontablesApi(this.alfrescoApi);
 
 
-decisiontablesApi.getDecisionTableEditorJsonUsingGET(decisionTableId).then(function(data) {
+decisiontablesApi.getDecisionTableEditorJsonUsingGET(decisionTableId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -65,7 +65,7 @@ this.alfrescoApi.setConfig({
 let decisiontablesApi = new DecisiontablesApi(this.alfrescoApi);
 
 
-decisiontablesApi.getDecisionTableUsingGET(decisionTableId).then(function(data) {
+decisiontablesApi.getDecisionTableUsingGET(decisionTableId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -102,17 +102,17 @@ this.alfrescoApi.setConfig({
 let decisiontablesApi = new DecisiontablesApi(this.alfrescoApi);
 
 let opts = { 
-  'nameLike': nameLike_example // string | nameLike
-  'keyLike': keyLike_example // string | keyLike
-  'tenantIdLike': tenantIdLike_example // string | tenantIdLike
-  'deploymentId': 789 // number | deploymentId
-  'sort': sort_example // string | sort
-  'order': order_example // string | order
-  'start': 56 // number | start
-  'size': 56 // number | size
+  'nameLike': nameLike_example //  | nameLike
+  'keyLike': keyLike_example //  | keyLike
+  'tenantIdLike': tenantIdLike_example //  | tenantIdLike
+  'deploymentId': 789 //  | deploymentId
+  'sort': sort_example //  | sort
+  'order': order_example //  | order
+  'start': 56 //  | start
+  'size': 56 //  | size
 };
 
-decisiontablesApi.getDecisionTablesUsingGET(opts).then(function(data) {
+decisiontablesApi.getDecisionTablesUsingGET(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
