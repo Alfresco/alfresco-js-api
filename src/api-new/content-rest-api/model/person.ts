@@ -17,7 +17,7 @@
 
 import { Capabilities } from './capabilities';
 import { Company } from './company';
-import { Map } from './map';
+
 
 export class Person {
     id: string;

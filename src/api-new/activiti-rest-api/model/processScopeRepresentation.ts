@@ -17,7 +17,7 @@
 
 import { EntityVariableScopeRepresentation } from './entityVariableScopeRepresentation';
 import { FormScopeRepresentation } from './formScopeRepresentation';
-import { Map } from './map';
+
 import { VariableMappingRepresentation } from './variableMappingRepresentation';
 import { VariableScopeRepresentation } from './variableScopeRepresentation';
 

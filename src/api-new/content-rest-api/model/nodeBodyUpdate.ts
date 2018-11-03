@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { Map } from './map';
+
 import { PermissionsBodyUpdate } from './permissionsBodyUpdate';
 
 export class NodeBodyUpdate {

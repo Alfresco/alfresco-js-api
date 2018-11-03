@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
+import { ModelError } from '                                                                                                                                                                                                                                                                                        modelError';
 import { TicketBody } from '../model/ticketBody';
 import { TicketEntry } from '../model/ticketEntry';
 import { ValidTicketEntry } from '../model/validTicketEntry';
@@ -28,7 +28,7 @@ import { BaseApi } from './base.api';
 export class AuthenticationApi extends BaseApi {
     /**
     * Create ticket (login)
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Logs in and returns the new authentication ticket.
@@ -44,9 +44,9 @@ To use the ticket in future requests you should pass it in the request header.
 For example using Javascript:
   Javascript
     request.setRequestHeader (\"Authorization\", \"Basic \" + btoa(ticket));
-  
 
-    * 
+
+    *
     * @param  ticketBodyCreate The user credential.
     * @return Promise<TicketEntry>
     */
@@ -81,12 +81,12 @@ For example using Javascript:
     }
     /**
         * Delete ticket (logout)
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Deletes logged in ticket (logout).
-    
-        * 
+
+        *
         * @return Promise<{}>
         */
     deleteTicket(): Promise<{}> {
@@ -116,17 +116,17 @@ For example using Javascript:
     }
     /**
         * Validate ticket
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Validates the specified ticket (derived from Authorization header) is still valid.
-    
+
     For example, you can pass the Authorization request header using Javascript:
       Javascript
         request.setRequestHeader (\"Authorization\", \"Basic \" + btoa(ticket));
-      
-    
-        * 
+
+
+        *
         * @return Promise<ValidTicketEntry>
         */
     validateTicket(): Promise<ValidTicketEntry> {

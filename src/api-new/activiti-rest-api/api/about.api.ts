@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { Map } from '../model/map';
 import { BaseApi } from './base.api';
 
 /**
@@ -25,9 +24,9 @@ import { BaseApi } from './base.api';
 export class AboutApi extends BaseApi {
     /**
     * Get server type and version
-    * 
+    *
     * Provides information about the running Alfresco Process Services Suite. The response payload object has the properties type, majorVersion, minorVersion, revisionVersion and edition.
-    * 
+    *
     * @return Promise<{ [key: string]: string; }>
     */
     getAppVersionUsingGET(): Promise<{ [key: string]: string; }> {

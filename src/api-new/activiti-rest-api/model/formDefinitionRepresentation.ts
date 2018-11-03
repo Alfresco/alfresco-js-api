@@ -21,7 +21,7 @@ import { FormJavascriptEventRepresentation } from './formJavascriptEventRepresen
 import { FormOutcomeRepresentation } from './formOutcomeRepresentation';
 import { FormTabRepresentation } from './formTabRepresentation';
 import { FormVariableRepresentation } from './formVariableRepresentation';
-import { Map } from './map';
+
 
 export class FormDefinitionRepresentation {
     className?: string;

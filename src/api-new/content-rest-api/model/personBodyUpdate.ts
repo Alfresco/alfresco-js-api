@@ -16,7 +16,7 @@
 */
 
 import { Company } from './company';
-import { Map } from './map';
+
 
 export class PersonBodyUpdate {
     firstName?: string;

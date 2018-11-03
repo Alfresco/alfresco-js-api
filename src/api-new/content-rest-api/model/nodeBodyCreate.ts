@@ -17,7 +17,7 @@
 
 import { AssociationBody } from './associationBody';
 import { ChildAssociationBody } from './childAssociationBody';
-import { Map } from './map';
+
 import { NodeBodyCreateAssociation } from './nodeBodyCreateAssociation';
 
 export class NodeBodyCreate {
