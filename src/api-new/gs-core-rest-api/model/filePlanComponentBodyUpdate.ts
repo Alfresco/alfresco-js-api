@@ -15,8 +15,6 @@
 * limitations under the License.
 */
 
-
-
 export class FilePlanComponentBodyUpdate {
     /**
      * The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.

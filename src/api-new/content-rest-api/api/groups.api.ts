@@ -51,13 +51,13 @@ The group will be created in the **APP.DEFAULT** and **AUTH.ALF** zones.
 You must have admin rights to create a group.
 
     * 
-    * @param  groupBodyCreate The group to create.
-    * @param Object opts Optional parameters
-    * @param  opts.include Returns additional information about the group. The following optional fields can be requested:
+    * @param groupBodyCreate The group to create.
+    * @param opts Optional parameters
+    * @param opts.include Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
 
-    * @param  opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -71,7 +71,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<GroupEntry>
     */
-    createGroup(groupBodyCreate: GroupBodyCreate, opts: any): Promise<GroupEntry> {
+    createGroup(groupBodyCreate: GroupBodyCreate, opts: any): Promise<GroupEntry | ModelError> {
         opts = opts || {};
         let postBody = groupBodyCreate;
 
@@ -116,10 +116,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     You must have admin rights to create a group membership.
     
         * 
-        * @param  groupId The identifier of a group.
-        * @param  groupMembershipBodyCreate The group membership to add (person or sub-group).
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param groupId The identifier of a group.
+        * @param groupMembershipBodyCreate The group membership to add (person or sub-group).
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -133,7 +133,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<GroupMemberEntry>
         */
-    createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts: any): Promise<GroupMemberEntry> {
+    createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts: any): Promise<GroupMemberEntry | ModelError> {
         opts = opts || {};
         let postBody = groupMembershipBodyCreate;
 
@@ -181,13 +181,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     You must have admin rights to delete a group.
     
         * 
-        * @param  groupId The identifier of a group.
-        * @param Object opts Optional parameters
-        * @param  opts.cascade If **true** then the delete will be applied in cascade to sub-groups.
+        * @param groupId The identifier of a group.
+        * @param opts Optional parameters
+        * @param opts.cascade If **true** then the delete will be applied in cascade to sub-groups.
      (default to false)
         * @return Promise<{}>
         */
-    deleteGroup(groupId: string, opts: any): Promise<{}> {
+    deleteGroup(groupId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -231,11 +231,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     You must have admin rights to delete a group membership.
     
         * 
-        * @param  groupId The identifier of a group.
-        * @param  groupMemberId The identifier of a person or group.
+        * @param groupId The identifier of a group.
+        * @param groupMemberId The identifier of a person or group.
         * @return Promise<{}>
         */
-    deleteGroupMembership(groupId: string, groupMemberId: string): Promise<{}> {
+    deleteGroupMembership(groupId: string, groupMemberId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -278,13 +278,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter to return additional information.
     
         * 
-        * @param  groupId The identifier of a group.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the group. The following optional fields can be requested:
+        * @param groupId The identifier of a group.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the group. The following optional fields can be requested:
     * parentIds
     * zones
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -298,7 +298,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<GroupEntry>
         */
-    getGroup(groupId: string, opts: any): Promise<GroupEntry> {
+    getGroup(groupId: string, opts: any): Promise<GroupEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -351,15 +351,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     * displayName
     
         * 
-        * @param  groupId The identifier of a group.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param groupId The identifier of a group.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -367,8 +367,8 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.where A string to restrict the returned objects by using a predicate.
-        * @param  opts.fields A list of field names.
+        * @param opts.where A string to restrict the returned objects by using a predicate.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -382,7 +382,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<GroupMemberPaging>
         */
-    listGroupMemberships(groupId: string, opts: any): Promise<GroupMemberPaging> {
+    listGroupMemberships(groupId: string, opts: any): Promise<GroupMemberPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -460,15 +460,15 @@ parameter are returned in addition to those specified in the **fields** paramete
      * displayName
     
         * 
-        * @param  personId The identifier of a person.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param personId The identifier of a person.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -476,12 +476,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.include Returns additional information about the group. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the group. The following optional fields can be requested:
     * parentIds
     * zones
     
-        * @param  opts.where A string to restrict the returned objects by using a predicate.
-        * @param  opts.fields A list of field names.
+        * @param opts.where A string to restrict the returned objects by using a predicate.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -495,7 +495,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<GroupPaging>
         */
-    listGroupMembershipsForPerson(personId: string, opts: any): Promise<GroupPaging> {
+    listGroupMembershipsForPerson(personId: string, opts: any): Promise<GroupPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -571,14 +571,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     * displayName
     
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -586,12 +586,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.include Returns additional information about the group. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the group. The following optional fields can be requested:
     * parentIds
     * zones
     
-        * @param  opts.where A string to restrict the returned objects by using a predicate.
-        * @param  opts.fields A list of field names.
+        * @param opts.where A string to restrict the returned objects by using a predicate.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -605,7 +605,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<GroupPaging>
         */
-    listGroups(opts: any): Promise<GroupPaging> {
+    listGroups(opts: any): Promise<GroupPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -646,14 +646,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     You must have admin rights to update a group.
     
         * 
-        * @param  groupId The identifier of a group.
-        * @param  groupBodyUpdate The group information to update.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the group. The following optional fields can be requested:
+        * @param groupId The identifier of a group.
+        * @param groupBodyUpdate The group information to update.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the group. The following optional fields can be requested:
     * parentIds
     * zones
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -667,7 +667,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<GroupEntry>
         */
-    updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts: any): Promise<GroupEntry> {
+    updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts: any): Promise<GroupEntry | ModelError> {
         opts = opts || {};
         let postBody = groupBodyUpdate;
 

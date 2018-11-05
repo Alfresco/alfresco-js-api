@@ -60,10 +60,10 @@ export class IntegrationdriveApi extends BaseApi {
         * 
         * 
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.filter filter
-        * @param  opts.parent parent
-        * @param  opts.currentFolderOnly currentFolderOnly
+        * @param opts Optional parameters
+        * @param opts.filter filter
+        * @param opts.parent parent
+        * @param opts.currentFolderOnly currentFolderOnly
         * @return Promise<ResultListDataRepresentationGoogleDriveContent>
         */
     getFilesUsingGET1(opts: any): Promise<ResultListDataRepresentationGoogleDriveContent> {

@@ -46,12 +46,12 @@ The creator will be added as a member with Site Manager role.
 When you create the RM site, the **filePlan** structure is also created including special containers, such as containers for transfers, holds and, unfiled records.
 
     * 
-    * @param  siteBodyCreate The site details
-    * @param Object opts Optional parameters
-    * @param  opts.skipAddToFavorites Flag to indicate whether the RM site should not be added to the user's site favorites. (default to false)
+    * @param siteBodyCreate The site details
+    * @param opts Optional parameters
+    * @param opts.skipAddToFavorites Flag to indicate whether the RM site should not be added to the user's site favorites. (default to false)
     * @return Promise<RMSiteEntry>
     */
-    createRMSite(siteBodyCreate: RMSiteBodyCreate, opts: any): Promise<RMSiteEntry> {
+    createRMSite(siteBodyCreate: RMSiteBodyCreate, opts: any): Promise<RMSiteEntry | ModelError> {
         opts = opts || {};
         let postBody = siteBodyCreate;
 
@@ -90,7 +90,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         * 
         * @return Promise<{}>
         */
-    deleteRMSite(): Promise<{}> {
+    deleteRMSite(): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -122,8 +122,8 @@ When you create the RM site, the **filePlan** structure is also created includin
     Gets information for RM site.
     
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -137,7 +137,7 @@ When you create the RM site, the **filePlan** structure is also created includin
     
         * @return Promise<RMSiteEntry>
         */
-    getRMSite(opts: any): Promise<RMSiteEntry> {
+    getRMSite(opts: any): Promise<RMSiteEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -172,9 +172,9 @@ When you create the RM site, the **filePlan** structure is also created includin
     **Note**: the id, site visibility, or compliance of the RM site cannot be updated once the site has been created.
     
         * 
-        * @param  siteBodyUpdate The RM site information to update.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param siteBodyUpdate The RM site information to update.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -188,7 +188,7 @@ When you create the RM site, the **filePlan** structure is also created includin
     
         * @return Promise<RMSiteEntry>
         */
-    updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts: any): Promise<RMSiteEntry> {
+    updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts: any): Promise<RMSiteEntry | ModelError> {
         opts = opts || {};
         let postBody = siteBodyUpdate;
 

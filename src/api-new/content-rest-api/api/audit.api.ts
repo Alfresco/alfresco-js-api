@@ -46,15 +46,15 @@ For example:
 You must have admin rights to delete audit information.
 
     * 
-    * @param  auditApplicationId The identifier of an audit application.
-    * @param  where Audit entries to permanently delete for an audit application, given an inclusive time period or range of ids. For example:
+    * @param auditApplicationId The identifier of an audit application.
+    * @param where Audit entries to permanently delete for an audit application, given an inclusive time period or range of ids. For example:
 
 *   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
 *   where=(id BETWEEN ('1234', '4321')
 
     * @return Promise<{}>
     */
-    deleteAuditEntriesForAuditApp(auditApplicationId: string, where: string): Promise<{}> {
+    deleteAuditEntriesForAuditApp(auditApplicationId: string, where: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -98,11 +98,11 @@ You must have admin rights to delete audit information.
     You must have admin rights to delete audit information.
     
         * 
-        * @param  auditApplicationId The identifier of an audit application.
-        * @param  auditEntryId The identifier of an audit entry.
+        * @param auditApplicationId The identifier of an audit application.
+        * @param auditEntryId The identifier of an audit entry.
         * @return Promise<{}>
         */
-    deleteAuditEntry(auditApplicationId: string, auditEntryId: string): Promise<{}> {
+    deleteAuditEntry(auditApplicationId: string, auditEntryId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -145,9 +145,9 @@ You must have admin rights to delete audit information.
     You must have admin rights to retrieve audit information.
     
         * 
-        * @param  auditApplicationId The identifier of an audit application.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param auditApplicationId The identifier of an audit application.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -161,7 +161,7 @@ You must have admin rights to delete audit information.
     
         * @return Promise<AuditApp>
         */
-    getAuditApp(auditApplicationId: string, opts: any): Promise<AuditApp> {
+    getAuditApp(auditApplicationId: string, opts: any): Promise<AuditApp | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -201,10 +201,10 @@ You must have admin rights to delete audit information.
     You must have admin rights to access audit information.
     
         * 
-        * @param  auditApplicationId The identifier of an audit application.
-        * @param  auditEntryId The identifier of an audit entry.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param auditApplicationId The identifier of an audit application.
+        * @param auditEntryId The identifier of an audit entry.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -218,7 +218,7 @@ You must have admin rights to delete audit information.
     
         * @return Promise<AuditEntryEntry>
         */
-    getAuditEntry(auditApplicationId: string, auditEntryId: string, opts: any): Promise<AuditEntryEntry> {
+    getAuditEntry(auditApplicationId: string, auditEntryId: string, opts: any): Promise<AuditEntryEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -269,14 +269,14 @@ You must have admin rights to delete audit information.
     You must have admin rights to retrieve audit information.
     
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -290,7 +290,7 @@ You must have admin rights to delete audit information.
     
         * @return Promise<AuditAppPaging>
         */
-    listAuditApps(opts: any): Promise<AuditAppPaging> {
+    listAuditApps(opts: any): Promise<AuditAppPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -342,12 +342,12 @@ You must have admin rights to delete audit information.
     You must have admin rights to retrieve audit information.
     
         * 
-        * @param  auditApplicationId The identifier of an audit application.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param auditApplicationId The identifier of an audit application.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -355,10 +355,10 @@ You must have admin rights to delete audit information.
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.where Optionally filter the list. Here are some examples:
+        * @param opts.where Optionally filter the list. Here are some examples:
     
     *   where=(createdByUser='jbloggs')
     
@@ -372,10 +372,10 @@ You must have admin rights to delete audit information.
     
     *   where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')
     
-        * @param  opts.include Returns additional information about the audit entry. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the audit entry. The following optional fields can be requested:
     * values
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -389,7 +389,7 @@ You must have admin rights to delete audit information.
     
         * @return Promise<AuditEntryPaging>
         */
-    listAuditEntriesForAuditApp(auditApplicationId: string, opts: any): Promise<AuditEntryPaging> {
+    listAuditEntriesForAuditApp(auditApplicationId: string, opts: any): Promise<AuditEntryPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -441,12 +441,12 @@ You must have admin rights to delete audit information.
     This relies on the pre-configured 'alfresco-access' audit application.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -454,10 +454,10 @@ You must have admin rights to delete audit information.
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.where Optionally filter the list. Here are some examples:
+        * @param opts.where Optionally filter the list. Here are some examples:
     
     *   where=(createdByUser='-me-')
     
@@ -465,10 +465,10 @@ You must have admin rights to delete audit information.
     
     *   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
     
-        * @param  opts.include Returns additional information about the audit entry. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the audit entry. The following optional fields can be requested:
     * values
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -482,7 +482,7 @@ You must have admin rights to delete audit information.
     
         * @return Promise<AuditEntryPaging>
         */
-    listAuditEntriesForNode(nodeId: string, opts: any): Promise<AuditEntryPaging> {
+    listAuditEntriesForNode(nodeId: string, opts: any): Promise<AuditEntryPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -533,10 +533,10 @@ You must have admin rights to delete audit information.
     You must have admin rights to update audit application.
     
         * 
-        * @param  auditApplicationId The identifier of an audit application.
-        * @param  auditAppBodyUpdate The audit application to update.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param auditApplicationId The identifier of an audit application.
+        * @param auditAppBodyUpdate The audit application to update.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -550,7 +550,7 @@ You must have admin rights to delete audit information.
     
         * @return Promise<AuditApp>
         */
-    updateAuditApp(auditApplicationId: string, auditAppBodyUpdate: AuditBodyUpdate, opts: any): Promise<AuditApp> {
+    updateAuditApp(auditApplicationId: string, auditAppBodyUpdate: AuditBodyUpdate, opts: any): Promise<AuditApp | ModelError> {
         opts = opts || {};
         let postBody = auditAppBodyUpdate;
 

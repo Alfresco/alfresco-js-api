@@ -40,11 +40,11 @@ JSON
 }
 
     * 
-    * @param  nodeId The identifier of a node.
-    * @param  renditionBodyCreate The rendition \"id\".
+    * @param nodeId The identifier of a node.
+    * @param renditionBodyCreate The rendition \"id\".
     * @return Promise<{}>
     */
-    createRendition(nodeId: string, renditionBodyCreate: RenditionBodyCreate): Promise<{}> {
+    createRendition(nodeId: string, renditionBodyCreate: RenditionBodyCreate): Promise<{} | ModelError> {
 
         let postBody = renditionBodyCreate;
 
@@ -85,11 +85,11 @@ JSON
     Gets the rendition information for **renditionId** of file **nodeId**.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
+        * @param nodeId The identifier of a node.
+        * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
         * @return Promise<RenditionEntry>
         */
-    getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry> {
+    getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry | ModelError> {
 
         let postBody = null;
 
@@ -130,10 +130,10 @@ JSON
     Gets the rendition content for **renditionId** of file **nodeId**.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
-        * @param Object opts Optional parameters
-        * @param  opts.attachment **true** enables a web browser to download the file as an attachment.
+        * @param nodeId The identifier of a node.
+        * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
+        * @param opts Optional parameters
+        * @param opts.attachment **true** enables a web browser to download the file as an attachment.
     **false** means a web browser may preview the file in a new tab or window, but not
     download the file.
     
@@ -143,19 +143,19 @@ JSON
     If the content type is not supported for preview, then a value of **false**  is ignored, and
     the attachment will be returned in the response.
      (default to true)
-        * @param  opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
+        * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
-        * @param  opts.range The Range header indicates the part of a document that the server should return.
+        * @param opts.range The Range header indicates the part of a document that the server should return.
     Single part request supported, for example: bytes=1-10.
     
-        * @param  opts.placeholder If **true** and there is no rendition for this **nodeId** and **renditionId**,
+        * @param opts.placeholder If **true** and there is no rendition for this **nodeId** and **renditionId**,
     then the placeholder image for the mime type of this rendition is returned, rather
     than a 404 response.
      (default to false)
         * @return Promise<{}>
         */
-    getRenditionContent(nodeId: string, renditionId: string, opts: any): Promise<{}> {
+    getRenditionContent(nodeId: string, renditionId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -207,12 +207,12 @@ JSON
     
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.where A string to restrict the returned objects by using a predicate.
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.where A string to restrict the returned objects by using a predicate.
         * @return Promise<RenditionPaging>
         */
-    listRenditions(nodeId: string, opts: any): Promise<RenditionPaging> {
+    listRenditions(nodeId: string, opts: any): Promise<RenditionPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 

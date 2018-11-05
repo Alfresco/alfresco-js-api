@@ -30,7 +30,7 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
     * 
     * Returns ALL Sites
     * 
-    * @param  repositoryId repositoryId
+    * @param repositoryId repositoryId
     * @return Promise<ResultListDataRepresentationAlfrescoSiteRepresenation>
     */
     getAllSitesUsingGET1(repositoryId: string): Promise<ResultListDataRepresentationAlfrescoSiteRepresenation> {
@@ -67,9 +67,9 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         * 
         * 
         * 
-        * @param  repositoryId repositoryId
-        * @param  siteId siteId
-        * @param  folderPath folderPath
+        * @param repositoryId repositoryId
+        * @param siteId siteId
+        * @param folderPath folderPath
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInFolderPathUsingGET1(repositoryId: string, siteId: string, folderPath: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
@@ -114,8 +114,8 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         * 
         * 
         * 
-        * @param  repositoryId repositoryId
-        * @param  folderId folderId
+        * @param repositoryId repositoryId
+        * @param folderId folderId
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInFolderUsingGET1(repositoryId: string, folderId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
@@ -156,8 +156,8 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         * 
         * 
         * 
-        * @param  repositoryId repositoryId
-        * @param  siteId siteId
+        * @param repositoryId repositoryId
+        * @param siteId siteId
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInSiteUsingGET1(repositoryId: string, siteId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
@@ -198,9 +198,9 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         * 
         * A tenant administrator can configure one or more Alfresco repositories to use when working with content.
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.tenantId tenantId
-        * @param  opts.includeAccounts includeAccounts (default to true)
+        * @param opts Optional parameters
+        * @param opts.tenantId tenantId
+        * @param opts.includeAccounts includeAccounts (default to true)
         * @return Promise<ResultListDataRepresentationAlfrescoEndpointRepresentation>
         */
     getRepositoriesUsingGET(opts: any): Promise<ResultListDataRepresentationAlfrescoEndpointRepresentation> {

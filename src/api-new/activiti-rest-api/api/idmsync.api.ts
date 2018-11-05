@@ -28,7 +28,7 @@ export class IdmsyncApi extends BaseApi {
     * 
     * 
     * 
-    * @param  syncLogEntryId syncLogEntryId
+    * @param syncLogEntryId syncLogEntryId
     * @return Promise<{}>
     */
     getLogFileUsingGET(syncLogEntryId: number): Promise<{}> {
@@ -65,11 +65,11 @@ export class IdmsyncApi extends BaseApi {
         * 
         * 
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.tenantId tenantId
-        * @param  opts.page page
-        * @param  opts.start start
-        * @param  opts.size size
+        * @param opts Optional parameters
+        * @param opts.tenantId tenantId
+        * @param opts.page page
+        * @param opts.start start
+        * @param opts.size size
         * @return Promise<Array<SyncLogEntryRepresentation>>
         */
     getSyncLogEntriesUsingGET(opts: any): Promise<Array<SyncLogEntryRepresentation>> {

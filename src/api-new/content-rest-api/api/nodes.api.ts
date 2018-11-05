@@ -49,10 +49,10 @@ If the source **nodeId** is a folder, then all of its children are also copied.
 If the source **nodeId** is a file, it's properties, aspects and tags are copied, it's ratings, comments and locks are not.
 
     * 
-    * @param  nodeId The identifier of a node.
-    * @param  nodeBodyCopy The targetParentId and, optionally, a new name which should include the file extension.
-    * @param Object opts Optional parameters
-    * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+    * @param nodeId The identifier of a node.
+    * @param nodeBodyCopy The targetParentId and, optionally, a new name which should include the file extension.
+    * @param opts Optional parameters
+    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -61,7 +61,7 @@ If the source **nodeId** is a file, it's properties, aspects and tags are copied
 * path
 * permissions
 
-    * @param  opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -75,7 +75,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeEntry>
     */
-    copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts: any): Promise<NodeEntry> {
+    copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts: any): Promise<NodeEntry | ModelError> {
         opts = opts || {};
         let postBody = nodeBodyCopy;
 
@@ -161,10 +161,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     
         * 
-        * @param  nodeId The identifier of a source node.
-        * @param  associationBodyCreate The target node id and assoc type.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param nodeId The identifier of a source node.
+        * @param associationBodyCreate The target node id and assoc type.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -178,7 +178,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<AssociationEntry>
         */
-    createAssocation(nodeId: string, associationBodyCreate: AssociationBody, opts: any): Promise<AssociationEntry> {
+    createAssocation(nodeId: string, associationBodyCreate: AssociationBody, opts: any): Promise<AssociationEntry | ModelError> {
         opts = opts || {};
         let postBody = associationBodyCreate;
 
@@ -385,15 +385,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     
         * 
-        * @param  nodeId The identifier of a node. You can also use one of these well-known aliases:
+        * @param nodeId The identifier of a node. You can also use one of these well-known aliases:
     * -my-
     * -shared-
     * -root-
     
-        * @param  nodeBodyCreate The node information to create.
-        * @param Object opts Optional parameters
-        * @param  opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param nodeBodyCreate The node information to create.
+        * @param opts Optional parameters
+        * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * association
     * isLink
@@ -402,7 +402,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * permissions
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -416,7 +416,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeEntry>
         */
-    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts: any): Promise<NodeEntry> {
+    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts: any): Promise<NodeEntry | ModelError> {
         opts = opts || {};
         let postBody = nodeBodyCreate;
 
@@ -503,10 +503,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     
         * 
-        * @param  nodeId The identifier of a parent node.
-        * @param  secondaryChildAssociationBodyCreate The child node id and assoc type.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param nodeId The identifier of a parent node.
+        * @param secondaryChildAssociationBodyCreate The child node id and assoc type.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -520,7 +520,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<ChildAssociationEntry>
         */
-    createSecondaryChildAssocation(nodeId: string, secondaryChildAssociationBodyCreate: ChildAssociationBody, opts: any): Promise<ChildAssociationEntry> {
+    createSecondaryChildAssocation(nodeId: string, secondaryChildAssociationBodyCreate: ChildAssociationBody, opts: any): Promise<ChildAssociationEntry | ModelError> {
         opts = opts || {};
         let postBody = secondaryChildAssociationBodyCreate;
 
@@ -568,13 +568,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     in the other direction.
     
         * 
-        * @param  nodeId The identifier of a source node.
-        * @param  targetId The identifier of a target node.
-        * @param Object opts Optional parameters
-        * @param  opts.assocType Only delete associations of this type.
+        * @param nodeId The identifier of a source node.
+        * @param targetId The identifier of a target node.
+        * @param opts Optional parameters
+        * @param opts.assocType Only delete associations of this type.
         * @return Promise<{}>
         */
-    deleteAssocation(nodeId: string, targetId: string, opts: any): Promise<{}> {
+    deleteAssocation(nodeId: string, targetId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -628,14 +628,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     associations were to nodes inside or outside the restored hierarchy.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.permanent If **true** then the node is deleted permanently, without moving to the trashcan.
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.permanent If **true** then the node is deleted permanently, without moving to the trashcan.
     Only the owner of the node or an admin can permanently delete the node.
      (default to false)
         * @return Promise<{}>
         */
-    deleteNode(nodeId: string, opts: any): Promise<{}> {
+    deleteNode(nodeId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -677,13 +677,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     associated as a secondary child with other secondary parents.
     
         * 
-        * @param  nodeId The identifier of a parent node.
-        * @param  childId The identifier of a child node.
-        * @param Object opts Optional parameters
-        * @param  opts.assocType Only delete associations of this type.
+        * @param nodeId The identifier of a parent node.
+        * @param childId The identifier of a child node.
+        * @param opts Optional parameters
+        * @param opts.assocType Only delete associations of this type.
         * @return Promise<{}>
         */
-    deleteSecondaryChildAssocation(nodeId: string, childId: string, opts: any): Promise<{}> {
+    deleteSecondaryChildAssocation(nodeId: string, childId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -727,13 +727,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter to return additional information.
     
         * 
-        * @param  nodeId The identifier of a node. You can also use one of these well-known aliases:
+        * @param nodeId The identifier of a node. You can also use one of these well-known aliases:
     * -my-
     * -shared-
     * -root-
     
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * association
     * isLink
@@ -742,10 +742,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * permissions
     
-        * @param  opts.relativePath A path relative to the **nodeId**. If you set this,
+        * @param opts.relativePath A path relative to the **nodeId**. If you set this,
     information is returned on the node resolved by this path.
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -759,7 +759,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeEntry>
         */
-    getNode(nodeId: string, opts: any): Promise<NodeEntry> {
+    getNode(nodeId: string, opts: any): Promise<NodeEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -799,9 +799,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     Gets the content of the node with identifier **nodeId**.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.attachment **true** enables a web browser to download the file as an attachment.
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.attachment **true** enables a web browser to download the file as an attachment.
     **false** means a web browser may preview the file in a new tab or window, but not
     download the file.
     
@@ -811,15 +811,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     If the content type is not supported for preview, then a value of **false**  is ignored, and
     the attachment will be returned in the response.
      (default to true)
-        * @param  opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
+        * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
-        * @param  opts.range The Range header indicates the part of a document that the server should return.
+        * @param opts.range The Range header indicates the part of a document that the server should return.
     Single part request supported, for example: bytes=1-10.
     
         * @return Promise<{}>
         */
-    getNodeContent(nodeId: string, opts: any): Promise<{}> {
+    getNodeContent(nodeId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -884,19 +884,19 @@ parameter are returned in addition to those specified in the **fields** paramete
     * createdByUser
     
         * 
-        * @param  nodeId The identifier of a node. You can also use one of these well-known aliases:
+        * @param nodeId The identifier of a node. You can also use one of these well-known aliases:
     * -my-
     * -shared-
     * -root-
     
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -904,7 +904,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.where Optionally filter the list. Here are some examples:
+        * @param opts.where Optionally filter the list. Here are some examples:
     
     *   where=(isFolder=true)
     
@@ -920,7 +920,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     *   where=(isPrimary=false and assocType='my:specialAssocType')
     
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * aspectNames
     * association
@@ -931,9 +931,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * properties
     * permissions
     
-        * @param  opts.relativePath Return information on children in the folder resolved by this path. The path is relative to **nodeId**.
-        * @param  opts.includeSource Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**.
-        * @param  opts.fields A list of field names.
+        * @param opts.relativePath Return information on children in the folder resolved by this path. The path is relative to **nodeId**.
+        * @param opts.includeSource Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -947,7 +947,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeChildAssociationPaging>
         */
-    listNodeChildren(nodeId: string, opts: any): Promise<NodeChildAssociationPaging> {
+    listNodeChildren(nodeId: string, opts: any): Promise<NodeChildAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -994,13 +994,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     The list includes both the primary parent and any secondary parents.
     
         * 
-        * @param  nodeId The identifier of a child node. You can also use one of these well-known aliases:
+        * @param nodeId The identifier of a child node. You can also use one of these well-known aliases:
     * -my-
     * -shared-
     * -root-
     
-        * @param Object opts Optional parameters
-        * @param  opts.where Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
+        * @param opts Optional parameters
+        * @param opts.where Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
     
     *   where=(assocType='my:specialAssocType')
     
@@ -1008,7 +1008,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     *   where=(isPrimary=false and assocType='my:specialAssocType')
     
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * aspectNames
     * isLink
@@ -1017,14 +1017,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * properties
     
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.includeSource Also include **source** (in addition to **entries**) with folder information on **nodeId**
-        * @param  opts.fields A list of field names.
+        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on **nodeId**
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1038,7 +1038,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeAssociationPaging>
         */
-    listParents(nodeId: string, opts: any): Promise<NodeAssociationPaging> {
+    listParents(nodeId: string, opts: any): Promise<NodeAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1081,17 +1081,17 @@ parameter are returned in addition to those specified in the **fields** paramete
     Gets a list of secondary child nodes that are associated with the current parent **nodeId**, via a secondary child association.
     
         * 
-        * @param  nodeId The identifier of a parent node. You can also use one of these well-known aliases:
+        * @param nodeId The identifier of a parent node. You can also use one of these well-known aliases:
     * -my-
     * -shared-
     * -root-
     
-        * @param Object opts Optional parameters
-        * @param  opts.where Optionally filter the list by assocType. Here's an example:
+        * @param opts Optional parameters
+        * @param opts.where Optionally filter the list by assocType. Here's an example:
     
     *   where=(assocType='my:specialAssocType')
     
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * aspectNames
     * isLink
@@ -1100,14 +1100,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * properties
     
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.includeSource Also include **source** (in addition to **entries**) with folder information on **nodeId**
-        * @param  opts.fields A list of field names.
+        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on **nodeId**
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1121,7 +1121,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeChildAssociationPaging>
         */
-    listSecondaryChildren(nodeId: string, opts: any): Promise<NodeChildAssociationPaging> {
+    listSecondaryChildren(nodeId: string, opts: any): Promise<NodeChildAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1164,13 +1164,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     Gets a list of source nodes that are associated with the current target **nodeId**.
     
         * 
-        * @param  nodeId The identifier of a target node.
-        * @param Object opts Optional parameters
-        * @param  opts.where Optionally filter the list by **assocType**. Here's an example:
+        * @param nodeId The identifier of a target node.
+        * @param opts Optional parameters
+        * @param opts.where Optionally filter the list by **assocType**. Here's an example:
     
     *   where=(assocType='my:specialAssocType')
     
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * aspectNames
     * isLink
@@ -1179,7 +1179,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * properties
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1193,7 +1193,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeAssociationPaging>
         */
-    listSourceAssociations(nodeId: string, opts: any): Promise<NodeAssociationPaging> {
+    listSourceAssociations(nodeId: string, opts: any): Promise<NodeAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1233,13 +1233,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     Gets a list of target nodes that are associated with the current source **nodeId**.
     
         * 
-        * @param  nodeId The identifier of a source node.
-        * @param Object opts Optional parameters
-        * @param  opts.where Optionally filter the list by **assocType**. Here's an example:
+        * @param nodeId The identifier of a source node.
+        * @param opts Optional parameters
+        * @param opts.where Optionally filter the list by **assocType**. Here's an example:
     
     *   where=(assocType='my:specialAssocType')
     
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * aspectNames
     * isLink
@@ -1248,7 +1248,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * properties
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1262,7 +1262,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeAssociationPaging>
         */
-    listTargetAssociations(nodeId: string, opts: any): Promise<NodeAssociationPaging> {
+    listTargetAssociations(nodeId: string, opts: any): Promise<NodeAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1325,10 +1325,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     If a lock on the node cannot be taken, then an error is returned.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  nodeBodyLock Lock details.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param nodeId The identifier of a node.
+        * @param nodeBodyLock Lock details.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * association
     * isLink
@@ -1337,7 +1337,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * permissions
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1351,7 +1351,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeEntry>
         */
-    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts: any): Promise<NodeEntry> {
+    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts: any): Promise<NodeEntry | ModelError> {
         opts = opts || {};
         let postBody = nodeBodyLock;
 
@@ -1402,10 +1402,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     The move will effectively change the primary parent.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  nodeBodyMove The targetParentId and, optionally, a new name which should include the file extension.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param nodeId The identifier of a node.
+        * @param nodeBodyMove The targetParentId and, optionally, a new name which should include the file extension.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * association
     * isLink
@@ -1414,7 +1414,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * permissions
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1428,7 +1428,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeEntry>
         */
-    moveNode(nodeId: string, nodeBodyMove: NodeBodyMove, opts: any): Promise<NodeEntry> {
+    moveNode(nodeId: string, nodeBodyMove: NodeBodyMove, opts: any): Promise<NodeEntry | ModelError> {
         opts = opts || {};
         let postBody = nodeBodyMove;
 
@@ -1475,9 +1475,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     If a lock on the node cannot be released, then an error is returned.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * association
     * isLink
@@ -1486,7 +1486,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * permissions
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1500,7 +1500,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeEntry>
         */
-    unlockNode(nodeId: string, opts: any): Promise<NodeEntry> {
+    unlockNode(nodeId: string, opts: any): Promise<NodeEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1575,10 +1575,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  nodeBodyUpdate The node information to update.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param nodeId The identifier of a node.
+        * @param nodeBodyUpdate The node information to update.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * association
     * isLink
@@ -1587,7 +1587,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * permissions
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1601,7 +1601,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeEntry>
         */
-    updateNode(nodeId: string, nodeBodyUpdate: NodeBodyUpdate, opts: any): Promise<NodeEntry> {
+    updateNode(nodeId: string, nodeBodyUpdate: NodeBodyUpdate, opts: any): Promise<NodeEntry | ModelError> {
         opts = opts || {};
         let postBody = nodeBodyUpdate;
 
@@ -1656,20 +1656,20 @@ parameter are returned in addition to those specified in the **fields** paramete
     tooling to accept an arbitrary file.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  contentBodyUpdate The binary content
-        * @param Object opts Optional parameters
-        * @param  opts.majorVersion If **true**, create a major version.
+        * @param nodeId The identifier of a node.
+        * @param contentBodyUpdate The binary content
+        * @param opts Optional parameters
+        * @param opts.majorVersion If **true**, create a major version.
     Setting this parameter also enables versioning of this node, if it is not already versioned.
      (default to false)
-        * @param  opts.comment Add a version comment which will appear in version history.
+        * @param opts.comment Add a version comment which will appear in version history.
     Setting this parameter also enables versioning of this node, if it is not already versioned.
     
-        * @param  opts.name Optional new name. This should include the file extension.
+        * @param opts.name Optional new name. This should include the file extension.
     The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.
     The character . must not be used at the end of the name.
     
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * association
     * isLink
@@ -1678,7 +1678,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * permissions
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1692,7 +1692,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<NodeEntry>
         */
-    updateNodeContent(nodeId: string, contentBodyUpdate: string, opts: any): Promise<NodeEntry> {
+    updateNodeContent(nodeId: string, contentBodyUpdate: string, opts: any): Promise<NodeEntry | ModelError> {
         opts = opts || {};
         let postBody = contentBodyUpdate;
 

@@ -30,7 +30,7 @@ export class UserprofileApi extends BaseApi {
     * 
     * 
     * 
-    * @param  changePasswordRepresentation changePasswordRepresentation
+    * @param changePasswordRepresentation changePasswordRepresentation
     * @return Promise<{}>
     */
     changePasswordUsingPOST(changePasswordRepresentation: ChangePasswordRepresentation): Promise<{}> {
@@ -131,7 +131,7 @@ export class UserprofileApi extends BaseApi {
         * 
         * Only a first name, last name, email and company can be updated
         * 
-        * @param  userRepresentation userRepresentation
+        * @param userRepresentation userRepresentation
         * @return Promise<UserRepresentation>
         */
     updateProfile(userRepresentation: UserRepresentation): Promise<UserRepresentation> {
@@ -168,7 +168,7 @@ export class UserprofileApi extends BaseApi {
         * 
         * 
         * 
-        * @param  file file
+        * @param file file
         * @return Promise<ImageUploadRepresentation>
         */
     uploadProfilePictureUsingPOST(file: Blob): Promise<ImageUploadRepresentation> {

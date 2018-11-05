@@ -1,3 +1,3 @@
 export * from './authentication.api';
 import { AuthenticationApi } from './authentication.api';
-export const APIS_AUTH = [AuthenticationApi];
+export const APIS = [AuthenticationApi];

@@ -31,7 +31,7 @@ export class AdminusersApi extends BaseApi {
     * 
     * 
     * 
-    * @param  update update
+    * @param update update
     * @return Promise<{}>
     */
     bulkUpdateUsersUsingPUT(update: BulkUserUpdateRepresentation): Promise<{}> {
@@ -68,7 +68,7 @@ export class AdminusersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userRepresentation userRepresentation
+        * @param userRepresentation userRepresentation
         * @return Promise<UserRepresentation>
         */
     createNewUserUsingPOST(userRepresentation: UserRepresentation): Promise<UserRepresentation> {
@@ -105,9 +105,9 @@ export class AdminusersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userId userId
-        * @param Object opts Optional parameters
-        * @param  opts.summary summary
+        * @param userId userId
+        * @param opts Optional parameters
+        * @param opts.summary summary
         * @return Promise<AbstractUserRepresentation>
         */
     getUserUsingGET(userId: number, opts: any): Promise<AbstractUserRepresentation> {
@@ -145,18 +145,18 @@ export class AdminusersApi extends BaseApi {
         * 
         * 
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.filter filter
-        * @param  opts.status status
-        * @param  opts.accountType accountType
-        * @param  opts.sort sort
-        * @param  opts.company company
-        * @param  opts.start start
-        * @param  opts.page page
-        * @param  opts.size size
-        * @param  opts.groupId groupId
-        * @param  opts.tenantId tenantId
-        * @param  opts.summary summary
+        * @param opts Optional parameters
+        * @param opts.filter filter
+        * @param opts.status status
+        * @param opts.accountType accountType
+        * @param opts.sort sort
+        * @param opts.company company
+        * @param opts.start start
+        * @param opts.page page
+        * @param opts.size size
+        * @param opts.groupId groupId
+        * @param opts.tenantId tenantId
+        * @param opts.summary summary
         * @return Promise<ResultListDataRepresentationAbstractUserRepresentation>
         */
     getUsersUsingGET(opts: any): Promise<ResultListDataRepresentationAbstractUserRepresentation> {
@@ -200,8 +200,8 @@ export class AdminusersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userId userId
-        * @param  userRepresentation userRepresentation
+        * @param userId userId
+        * @param userRepresentation userRepresentation
         * @return Promise<{}>
         */
     updateUserDetailsUsingPUT(userId: number, userRepresentation: UserRepresentation): Promise<{}> {

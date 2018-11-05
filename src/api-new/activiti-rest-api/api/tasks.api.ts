@@ -35,8 +35,8 @@ export class TasksApi extends BaseApi {
     * 
     * 
     * 
-    * @param  taskId taskId
-    * @param  identityLinkRepresentation identityLinkRepresentation
+    * @param taskId taskId
+    * @param identityLinkRepresentation identityLinkRepresentation
     * @return Promise<IdentityLinkRepresentation>
     */
     createIdentityLinkUsingPOST2(taskId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
@@ -77,7 +77,7 @@ export class TasksApi extends BaseApi {
         * 
         * A standalone task is one which is not associated with any process instance.
         * 
-        * @param  taskRepresentation taskRepresentation
+        * @param taskRepresentation taskRepresentation
         * @return Promise<TaskRepresentation>
         */
     createNewTaskUsingPOST(taskRepresentation: TaskRepresentation): Promise<TaskRepresentation> {
@@ -114,10 +114,10 @@ export class TasksApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  family family
-        * @param  identityId identityId
-        * @param  type type
+        * @param taskId taskId
+        * @param family family
+        * @param identityId identityId
+        * @param type type
         * @return Promise<{}>
         */
     deleteIdentityLinkUsingDELETE2(taskId: string, family: string, identityId: string, type: string): Promise<{}> {
@@ -166,7 +166,7 @@ export class TasksApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<{}>
         */
     deleteTaskUsingDELETE(taskId: string): Promise<{}> {
@@ -203,7 +203,7 @@ export class TasksApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tasksFilter tasksFilter
+        * @param tasksFilter tasksFilter
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
     filterTasksUsingPOST(tasksFilter: TaskFilterRequestRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
@@ -240,10 +240,10 @@ export class TasksApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  family family
-        * @param  identityId identityId
-        * @param  type type
+        * @param taskId taskId
+        * @param family family
+        * @param identityId identityId
+        * @param type type
         * @return Promise<IdentityLinkRepresentation>
         */
     getIdentityLinkTypeUsingGET2(taskId: string, family: string, identityId: string, type: string): Promise<IdentityLinkRepresentation> {
@@ -292,8 +292,8 @@ export class TasksApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  family family
+        * @param taskId taskId
+        * @param family family
         * @return Promise<Array<IdentityLinkRepresentation>>
         */
     getIdentityLinksForFamilyUsingGET2(taskId: string, family: string): Promise<Array<IdentityLinkRepresentation>> {
@@ -334,7 +334,7 @@ export class TasksApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<Array<IdentityLinkRepresentation>>
         */
     getIdentityLinksUsingGET2(taskId: string): Promise<Array<IdentityLinkRepresentation>> {
@@ -371,7 +371,7 @@ export class TasksApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<TaskAuditInfoRepresentation>
         */
     getTaskAuditLogUsingGET1(taskId: string): Promise<TaskAuditInfoRepresentation> {
@@ -408,7 +408,7 @@ export class TasksApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<TaskRepresentation>
         */
     getTaskUsingGET(taskId: string): Promise<TaskRepresentation> {
@@ -445,7 +445,7 @@ export class TasksApi extends BaseApi {
         * 
         * 
         * 
-        * @param  queryRequest queryRequest
+        * @param queryRequest queryRequest
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
     listHistoricTasksUsingPOST(queryRequest: HistoricTaskInstanceQueryRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
@@ -482,7 +482,7 @@ export class TasksApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tasksQuery tasksQuery
+        * @param tasksQuery tasksQuery
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
     listTasksUsingPOST(tasksQuery: TaskQueryRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
@@ -519,8 +519,8 @@ export class TasksApi extends BaseApi {
         * 
         * You can edit only name, description and dueDate (ISO 8601 string).
         * 
-        * @param  taskId taskId
-        * @param  updated updated
+        * @param taskId taskId
+        * @param updated updated
         * @return Promise<TaskRepresentation>
         */
     updateTaskUsingPUT(taskId: string, updated: TaskUpdateRepresentation): Promise<TaskRepresentation> {

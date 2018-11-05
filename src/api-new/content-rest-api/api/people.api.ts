@@ -57,9 +57,9 @@ JSON
 **Note:** setting properties of type d:content and d:category are not supported.
 
     * 
-    * @param  personBodyCreate The person details.
-    * @param Object opts Optional parameters
-    * @param  opts.fields A list of field names.
+    * @param personBodyCreate The person details.
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -73,7 +73,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonEntry>
     */
-    createPerson(personBodyCreate: PersonBodyCreate, opts: any): Promise<PersonEntry> {
+    createPerson(personBodyCreate: PersonBodyCreate, opts: any): Promise<PersonEntry | ModelError> {
         opts = opts || {};
         let postBody = personBodyCreate;
 
@@ -115,10 +115,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
+        * @param personId The identifier of a person.
         * @return Promise<{}>
         */
-    deleteAvatarImage(personId: string): Promise<{}> {
+    deleteAvatarImage(personId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -158,9 +158,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param Object opts Optional parameters
-        * @param  opts.attachment **true** enables a web browser to download the file as an attachment.
+        * @param personId The identifier of a person.
+        * @param opts Optional parameters
+        * @param opts.attachment **true** enables a web browser to download the file as an attachment.
     **false** means a web browser may preview the file in a new tab or window, but not
     download the file.
     
@@ -170,15 +170,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     If the content type is not supported for preview, then a value of **false**  is ignored, and
     the attachment will be returned in the response.
      (default to true)
-        * @param  opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
+        * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
-        * @param  opts.placeholder If **true** and there is no avatar for this **personId**
+        * @param opts.placeholder If **true** and there is no avatar for this **personId**
     then the placeholder image is returned, rather than a 404 response.
      (default to true)
         * @return Promise<{}>
         */
-    getAvatarImage(personId: string, opts: any): Promise<{}> {
+    getAvatarImage(personId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -217,9 +217,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param personId The identifier of a person.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -233,7 +233,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<PersonEntry>
         */
-    getPerson(personId: string, opts: any): Promise<PersonEntry> {
+    getPerson(personId: string, opts: any): Promise<PersonEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -281,14 +281,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     * lastName
     
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -296,12 +296,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.include Returns additional information about the person. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the person. The following optional fields can be requested:
     * properties
     * aspectNames
     * capabilities
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -315,7 +315,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<PersonPaging>
         */
-    listPeople(opts: any): Promise<PersonPaging> {
+    listPeople(opts: any): Promise<PersonPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -368,11 +368,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** No authentication is required to call this endpoint.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  clientBody The client name to send email with app-specific url.
+        * @param personId The identifier of a person.
+        * @param clientBody The client name to send email with app-specific url.
         * @return Promise<{}>
         */
-    requestPasswordReset(personId: string, clientBody: ClientBody): Promise<{}> {
+    requestPasswordReset(personId: string, clientBody: ClientBody): Promise<{} | ModelError> {
 
         let postBody = clientBody;
 
@@ -423,11 +423,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** No authentication is required to call this endpoint.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  passwordResetBody The reset password details
+        * @param personId The identifier of a person.
+        * @param passwordResetBody The reset password details
         * @return Promise<{}>
         */
-    resetPassword(personId: string, passwordResetBody: PasswordResetBody): Promise<{}> {
+    resetPassword(personId: string, passwordResetBody: PasswordResetBody): Promise<{} | ModelError> {
 
         let postBody = passwordResetBody;
 
@@ -475,11 +475,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  contentBodyUpdate The binary content
+        * @param personId The identifier of a person.
+        * @param contentBodyUpdate The binary content
         * @return Promise<{}>
         */
-    updateAvatarImage(personId: string, contentBodyUpdate: string): Promise<{}> {
+    updateAvatarImage(personId: string, contentBodyUpdate: string): Promise<{} | ModelError> {
 
         let postBody = contentBodyUpdate;
 
@@ -545,10 +545,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** setting properties of type d:content and d:category are not supported.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  personBodyUpdate The person details.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param personId The identifier of a person.
+        * @param personBodyUpdate The person details.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -562,7 +562,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<PersonEntry>
         */
-    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts: any): Promise<PersonEntry> {
+    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts: any): Promise<PersonEntry | ModelError> {
         opts = opts || {};
         let postBody = personBodyUpdate;
 

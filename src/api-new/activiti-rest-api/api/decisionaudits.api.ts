@@ -29,7 +29,7 @@ export class DecisionauditsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  auditTrailId auditTrailId
+    * @param auditTrailId auditTrailId
     * @return Promise<DecisionAuditRepresentation>
     */
     getAuditTrailUsingGET(auditTrailId: number): Promise<DecisionAuditRepresentation> {
@@ -66,8 +66,8 @@ export class DecisionauditsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  decisionKey decisionKey
-        * @param  dmnDeploymentId dmnDeploymentId
+        * @param decisionKey decisionKey
+        * @param dmnDeploymentId dmnDeploymentId
         * @return Promise<ResultListDataRepresentationDecisionAuditRepresentation>
         */
     getAuditTrailsUsingGET(decisionKey: string, dmnDeploymentId: number): Promise<ResultListDataRepresentationDecisionAuditRepresentation> {

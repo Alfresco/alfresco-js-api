@@ -8,4 +8,4 @@ export * from './defaultclassificationvalues.api';
 import { DefaultclassificationvaluesApi } from './defaultclassificationvalues.api';
 export * from './securitycontrolsettings.api';
 import { SecuritycontrolsettingsApi } from './securitycontrolsettings.api';
-export const APIS_GS_CLASSIFICATION = [ClassificationguidesApi, ClassificationreasonsApi, DeclassificationexemptionsApi, DefaultclassificationvaluesApi, SecuritycontrolsettingsApi];
+export const APIS = [ClassificationguidesApi, ClassificationreasonsApi, DeclassificationexemptionsApi, DefaultclassificationvaluesApi, SecuritycontrolsettingsApi];

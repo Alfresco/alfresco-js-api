@@ -28,8 +28,8 @@ export class TaskvariablesApi extends BaseApi {
     * 
     * 
     * 
-    * @param  taskId taskId
-    * @param  restVariables restVariables
+    * @param taskId taskId
+    * @param restVariables restVariables
     * @return Promise<Array<RestVariable>>
     */
     createTaskVariableUsingPOST(taskId: string, restVariables: Array<RestVariable>): Promise<Array<RestVariable>> {
@@ -70,7 +70,7 @@ export class TaskvariablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<{}>
         */
     deleteAllLocalTaskVariablesUsingDELETE(taskId: string): Promise<{}> {
@@ -107,10 +107,10 @@ export class TaskvariablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  variableName variableName
-        * @param Object opts Optional parameters
-        * @param  opts.scope scope
+        * @param taskId taskId
+        * @param variableName variableName
+        * @param opts Optional parameters
+        * @param opts.scope scope
         * @return Promise<{}>
         */
     deleteVariableUsingDELETE(taskId: string, variableName: string, opts: any): Promise<{}> {
@@ -152,10 +152,10 @@ export class TaskvariablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  variableName variableName
-        * @param Object opts Optional parameters
-        * @param  opts.scope scope
+        * @param taskId taskId
+        * @param variableName variableName
+        * @param opts Optional parameters
+        * @param opts.scope scope
         * @return Promise<RestVariable>
         */
     getVariableUsingGET(taskId: string, variableName: string, opts: any): Promise<RestVariable> {
@@ -197,9 +197,9 @@ export class TaskvariablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param Object opts Optional parameters
-        * @param  opts.scope scope
+        * @param taskId taskId
+        * @param opts Optional parameters
+        * @param opts.scope scope
         * @return Promise<Array<RestVariable>>
         */
     getVariablesUsingGET(taskId: string, opts: any): Promise<Array<RestVariable>> {
@@ -237,9 +237,9 @@ export class TaskvariablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  variableName variableName
-        * @param  restVariable restVariable
+        * @param taskId taskId
+        * @param variableName variableName
+        * @param restVariable restVariable
         * @return Promise<RestVariable>
         */
     updateVariableUsingPUT(taskId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {

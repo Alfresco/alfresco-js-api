@@ -37,10 +37,10 @@ export class TrashcanApi extends BaseApi {
 Permanently deletes the deleted node **nodeId**.
 
     * 
-    * @param  nodeId The identifier of a node.
+    * @param nodeId The identifier of a node.
     * @return Promise<{}>
     */
-    deleteDeletedNode(nodeId: string): Promise<{}> {
+    deleteDeletedNode(nodeId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -77,11 +77,11 @@ Permanently deletes the deleted node **nodeId**.
     Gets the rendition information for **renditionId** of file **nodeId**.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
+        * @param nodeId The identifier of a node.
+        * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
         * @return Promise<RenditionEntry>
         */
-    getArchivedNodeRendition(nodeId: string, renditionId: string): Promise<RenditionEntry> {
+    getArchivedNodeRendition(nodeId: string, renditionId: string): Promise<RenditionEntry | ModelError> {
 
         let postBody = null;
 
@@ -122,10 +122,10 @@ Permanently deletes the deleted node **nodeId**.
     Gets the rendition content for **renditionId** of file **nodeId**.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
-        * @param Object opts Optional parameters
-        * @param  opts.attachment **true** enables a web browser to download the file as an attachment.
+        * @param nodeId The identifier of a node.
+        * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
+        * @param opts Optional parameters
+        * @param opts.attachment **true** enables a web browser to download the file as an attachment.
     **false** means a web browser may preview the file in a new tab or window, but not
     download the file.
     
@@ -135,19 +135,19 @@ Permanently deletes the deleted node **nodeId**.
     If the content type is not supported for preview, then a value of **false**  is ignored, and
     the attachment will be returned in the response.
      (default to true)
-        * @param  opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
+        * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
-        * @param  opts.range The Range header indicates the part of a document that the server should return.
+        * @param opts.range The Range header indicates the part of a document that the server should return.
     Single part request supported, for example: bytes=1-10.
     
-        * @param  opts.placeholder If **true** and there is no rendition for this **nodeId** and **renditionId**,
+        * @param opts.placeholder If **true** and there is no rendition for this **nodeId** and **renditionId**,
     then the placeholder image for the mime type of this rendition is returned, rather
     than a 404 response.
      (default to false)
         * @return Promise<{}>
         */
-    getArchivedNodeRenditionContent(nodeId: string, renditionId: string, opts: any): Promise<{}> {
+    getArchivedNodeRenditionContent(nodeId: string, renditionId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -190,9 +190,9 @@ Permanently deletes the deleted node **nodeId**.
     Gets the specific deleted node **nodeId**.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * association
     * isLink
@@ -203,7 +203,7 @@ Permanently deletes the deleted node **nodeId**.
     
         * @return Promise<DeletedNodeEntry>
         */
-    getDeletedNode(nodeId: string, opts: any): Promise<DeletedNodeEntry> {
+    getDeletedNode(nodeId: string, opts: any): Promise<DeletedNodeEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -241,9 +241,9 @@ Permanently deletes the deleted node **nodeId**.
     Gets the content of the deleted node with identifier **nodeId**.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.attachment **true** enables a web browser to download the file as an attachment.
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.attachment **true** enables a web browser to download the file as an attachment.
     **false** means a web browser may preview the file in a new tab or window, but not
     download the file.
     
@@ -253,15 +253,15 @@ Permanently deletes the deleted node **nodeId**.
     If the content type is not supported for preview, then a value of **false**  is ignored, and
     the attachment will be returned in the response.
      (default to true)
-        * @param  opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
+        * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
-        * @param  opts.range The Range header indicates the part of a document that the server should return.
+        * @param opts.range The Range header indicates the part of a document that the server should return.
     Single part request supported, for example: bytes=1-10.
     
         * @return Promise<{}>
         */
-    getDeletedNodeContent(nodeId: string, opts: any): Promise<{}> {
+    getDeletedNodeContent(nodeId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -308,12 +308,12 @@ Permanently deletes the deleted node **nodeId**.
     
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.where A string to restrict the returned objects by using a predicate.
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.where A string to restrict the returned objects by using a predicate.
         * @return Promise<RenditionPaging>
         */
-    listDeletedNodeRenditions(nodeId: string, opts: any): Promise<RenditionPaging> {
+    listDeletedNodeRenditions(nodeId: string, opts: any): Promise<RenditionPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -355,14 +355,14 @@ Permanently deletes the deleted node **nodeId**.
     The list of deleted nodes will be ordered with the most recently deleted node at the top of the list.
     
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the node. The following optional fields can be requested:
     * allowableOperations
     * aspectNames
     * association
@@ -375,7 +375,7 @@ Permanently deletes the deleted node **nodeId**.
     
         * @return Promise<DeletedNodesPaging>
         */
-    listDeletedNodes(opts: any): Promise<DeletedNodesPaging> {
+    listDeletedNodes(opts: any): Promise<DeletedNodesPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -421,9 +421,9 @@ Permanently deletes the deleted node **nodeId**.
     of delete of each node.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -435,10 +435,10 @@ Permanently deletes the deleted node **nodeId**.
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
     
-        * @param  opts.deletedNodeBodyRestore The targetParentId if the node is restored to a new location.
+        * @param opts.deletedNodeBodyRestore The targetParentId if the node is restored to a new location.
         * @return Promise<NodeEntry>
         */
-    restoreDeletedNode(nodeId: string, opts: any): Promise<NodeEntry> {
+    restoreDeletedNode(nodeId: string, opts: any): Promise<NodeEntry | ModelError> {
         opts = opts || {};
         let postBody = opts['deletedNodeBodyRestore'];
 

@@ -29,8 +29,8 @@ export class CommentsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  commentRequest commentRequest
-    * @param  processInstanceId processInstanceId
+    * @param commentRequest commentRequest
+    * @param processInstanceId processInstanceId
     * @return Promise<CommentRepresentation>
     */
     addProcessInstanceCommentUsingPOST(commentRequest: CommentRepresentation, processInstanceId: string): Promise<CommentRepresentation> {
@@ -71,8 +71,8 @@ export class CommentsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  commentRequest commentRequest
-        * @param  taskId taskId
+        * @param commentRequest commentRequest
+        * @param taskId taskId
         * @return Promise<CommentRepresentation>
         */
     addTaskCommentUsingPOST(commentRequest: CommentRepresentation, taskId: string): Promise<CommentRepresentation> {
@@ -113,9 +113,9 @@ export class CommentsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
-        * @param Object opts Optional parameters
-        * @param  opts.latestFirst latestFirst
+        * @param processInstanceId processInstanceId
+        * @param opts Optional parameters
+        * @param opts.latestFirst latestFirst
         * @return Promise<ResultListDataRepresentationCommentRepresentation>
         */
     getProcessInstanceCommentsUsingGET(processInstanceId: string, opts: any): Promise<ResultListDataRepresentationCommentRepresentation> {
@@ -153,9 +153,9 @@ export class CommentsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param Object opts Optional parameters
-        * @param  opts.latestFirst latestFirst
+        * @param taskId taskId
+        * @param opts Optional parameters
+        * @param opts.latestFirst latestFirst
         * @return Promise<ResultListDataRepresentationCommentRepresentation>
         */
     getTaskCommentsUsingGET(taskId: string, opts: any): Promise<ResultListDataRepresentationCommentRepresentation> {

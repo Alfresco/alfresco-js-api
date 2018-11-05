@@ -15,12 +15,12 @@ export class {{classname}} extends BaseApi {
     * {{&description}}
     * {{&notes}}
     * {{#allParams}}{{#required}}
-    * @param {{&vendorExtensions.x-jsdoc-type}} {{paramName}} {{&description}}{{/required}}{{/allParams}}{{#hasOptionalParams}}
-    * @param Object opts Optional parameters{{#allParams}}{{^required}}
-    * @param {{&vendorExtensions.x-jsdoc-type}} opts.{{paramName}} {{&description}}{{#defaultValue}} (default to {{.}}){{/defaultValue}}{{/required}}{{/allParams}}{{/hasOptionalParams}}
+    * @param{{&vendorExtensions.x-jsdoc-type}} {{paramName}} {{&description}}{{/required}}{{/allParams}}{{#hasOptionalParams}}
+    * @param opts Optional parameters{{#allParams}}{{^required}}
+    * @param{{&vendorExtensions.x-jsdoc-type}} opts.{{paramName}} {{&description}}{{#defaultValue}} (default to {{.}}){{/defaultValue}}{{/required}}{{/allParams}}{{/hasOptionalParams}}
     * @return Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}>
     */
-    {{nickname}}({{&vendorExtensions.x-codegen-argList}}) : Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}> {
+    {{nickname}}({{&vendorExtensions.x-codegen-argList}}) : Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}{{#canReturnError}} | {{&canReturnError}}{{/canReturnError}}> {
         {{#hasOptionalParams}}opts = opts || {};{{/hasOptionalParams}}
         let postBody = {{#bodyParam}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
         {{#allParams}}{{#required}}

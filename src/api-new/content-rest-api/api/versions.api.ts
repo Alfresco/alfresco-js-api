@@ -44,11 +44,11 @@ case, you can re-enable versioning by adding back the \"cm:versionable\" aspect 
 params (majorVersion and comment) on a subsequent file content update.
 
     * 
-    * @param  nodeId The identifier of a node.
-    * @param  versionId The identifier of a version, ie. version label, within the version history of a node.
+    * @param nodeId The identifier of a node.
+    * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @return Promise<{}>
     */
-    deleteVersion(nodeId: string, versionId: string): Promise<{}> {
+    deleteVersion(nodeId: string, versionId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -89,11 +89,11 @@ params (majorVersion and comment) on a subsequent file content update.
     Gets the version information for **versionId** of file node **nodeId**.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  versionId The identifier of a version, ie. version label, within the version history of a node.
+        * @param nodeId The identifier of a node.
+        * @param versionId The identifier of a version, ie. version label, within the version history of a node.
         * @return Promise<VersionEntry>
         */
-    getVersion(nodeId: string, versionId: string): Promise<VersionEntry> {
+    getVersion(nodeId: string, versionId: string): Promise<VersionEntry | ModelError> {
 
         let postBody = null;
 
@@ -134,10 +134,10 @@ params (majorVersion and comment) on a subsequent file content update.
     Gets the version content for **versionId** of file node **nodeId**.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  versionId The identifier of a version, ie. version label, within the version history of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.attachment **true** enables a web browser to download the file as an attachment.
+        * @param nodeId The identifier of a node.
+        * @param versionId The identifier of a version, ie. version label, within the version history of a node.
+        * @param opts Optional parameters
+        * @param opts.attachment **true** enables a web browser to download the file as an attachment.
     **false** means a web browser may preview the file in a new tab or window, but not
     download the file.
     
@@ -147,15 +147,15 @@ params (majorVersion and comment) on a subsequent file content update.
     If the content type is not supported for preview, then a value of **false**  is ignored, and
     the attachment will be returned in the response.
      (default to true)
-        * @param  opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
+        * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
-        * @param  opts.range The Range header indicates the part of a document that the server should return.
+        * @param opts.range The Range header indicates the part of a document that the server should return.
     Single part request supported, for example: bytes=1-10.
     
         * @return Promise<{}>
         */
-    getVersionContent(nodeId: string, versionId: string, opts: any): Promise<{}> {
+    getVersionContent(nodeId: string, versionId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -200,13 +200,13 @@ params (majorVersion and comment) on a subsequent file content update.
     the original version is last in the list.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the version node. The following optional fields can be requested:
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the version node. The following optional fields can be requested:
     * properties
     * aspectNames
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -218,15 +218,15 @@ params (majorVersion and comment) on a subsequent file content update.
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
     
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
         * @return Promise<VersionPaging>
         */
-    listVersionHistory(nodeId: string, opts: any): Promise<VersionPaging> {
+    listVersionHistory(nodeId: string, opts: any): Promise<VersionPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -270,11 +270,11 @@ params (majorVersion and comment) on a subsequent file content update.
     will be promoted to the live node and a new version will appear in the version history.
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  versionId The identifier of a version, ie. version label, within the version history of a node.
-        * @param  revertBody Optionally, specify a version comment and whether this should be a major version, or not.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param nodeId The identifier of a node.
+        * @param versionId The identifier of a version, ie. version label, within the version history of a node.
+        * @param revertBody Optionally, specify a version comment and whether this should be a major version, or not.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -288,7 +288,7 @@ params (majorVersion and comment) on a subsequent file content update.
     
         * @return Promise<VersionEntry>
         */
-    revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts: any): Promise<VersionEntry> {
+    revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts: any): Promise<VersionEntry | ModelError> {
         opts = opts || {};
         let postBody = revertBody;
 

@@ -15,8 +15,6 @@
 * limitations under the License.
 */
 
-
-
 /**
  * Activities describe any past activity in a site,
 for example creating an item of content, commenting on a node,

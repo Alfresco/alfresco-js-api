@@ -32,7 +32,7 @@ export class UserfiltersApi extends BaseApi {
     * 
     * 
     * 
-    * @param  userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
+    * @param userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
     * @return Promise<UserProcessInstanceFilterRepresentation>
     */
     createUserProcessInstanceFilterUsingPOST(userProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation> {
@@ -69,7 +69,7 @@ export class UserfiltersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userTaskFilterRepresentation userTaskFilterRepresentation
+        * @param userTaskFilterRepresentation userTaskFilterRepresentation
         * @return Promise<UserTaskFilterRepresentation>
         */
     createUserTaskFilterUsingPOST(userTaskFilterRepresentation: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation> {
@@ -106,7 +106,7 @@ export class UserfiltersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userFilterId userFilterId
+        * @param userFilterId userFilterId
         * @return Promise<{}>
         */
     deleteUserProcessInstanceFilterUsingDELETE(userFilterId: number): Promise<{}> {
@@ -143,7 +143,7 @@ export class UserfiltersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userFilterId userFilterId
+        * @param userFilterId userFilterId
         * @return Promise<{}>
         */
     deleteUserTaskFilterUsingDELETE(userFilterId: number): Promise<{}> {
@@ -180,7 +180,7 @@ export class UserfiltersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userFilterId userFilterId
+        * @param userFilterId userFilterId
         * @return Promise<UserProcessInstanceFilterRepresentation>
         */
     getUserProcessInstanceFilterUsingGET(userFilterId: number): Promise<UserProcessInstanceFilterRepresentation> {
@@ -217,8 +217,8 @@ export class UserfiltersApi extends BaseApi {
         * 
         * Returns filters for the current user, optionally filtered by *appId*.
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.appId appId
+        * @param opts Optional parameters
+        * @param opts.appId appId
         * @return Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation>
         */
     getUserProcessInstanceFiltersUsingGET(opts: any): Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation> {
@@ -252,7 +252,7 @@ export class UserfiltersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userFilterId userFilterId
+        * @param userFilterId userFilterId
         * @return Promise<UserTaskFilterRepresentation>
         */
     getUserTaskFilterUsingGET(userFilterId: number): Promise<UserTaskFilterRepresentation> {
@@ -289,8 +289,8 @@ export class UserfiltersApi extends BaseApi {
         * 
         * Returns filters for the current user, optionally filtered by *appId*.
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.appId appId
+        * @param opts Optional parameters
+        * @param opts.appId appId
         * @return Promise<ResultListDataRepresentationUserTaskFilterRepresentation>
         */
     getUserTaskFiltersUsingGET(opts: any): Promise<ResultListDataRepresentationUserTaskFilterRepresentation> {
@@ -324,7 +324,7 @@ export class UserfiltersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  filterOrderRepresentation filterOrderRepresentation
+        * @param filterOrderRepresentation filterOrderRepresentation
         * @return Promise<{}>
         */
     orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<{}> {
@@ -361,7 +361,7 @@ export class UserfiltersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  filterOrderRepresentation filterOrderRepresentation
+        * @param filterOrderRepresentation filterOrderRepresentation
         * @return Promise<{}>
         */
     orderUserTaskFiltersUsingPUT(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<{}> {
@@ -398,8 +398,8 @@ export class UserfiltersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userFilterId userFilterId
-        * @param  userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
+        * @param userFilterId userFilterId
+        * @param userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
         * @return Promise<UserProcessInstanceFilterRepresentation>
         */
     updateUserProcessInstanceFilterUsingPUT(userFilterId: number, userProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation> {
@@ -440,8 +440,8 @@ export class UserfiltersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userFilterId userFilterId
-        * @param  userTaskFilterRepresentation userTaskFilterRepresentation
+        * @param userFilterId userFilterId
+        * @param userTaskFilterRepresentation userTaskFilterRepresentation
         * @return Promise<UserTaskFilterRepresentation>
         */
     updateUserTaskFilterUsingPUT(userFilterId: number, userTaskFilterRepresentation: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation> {

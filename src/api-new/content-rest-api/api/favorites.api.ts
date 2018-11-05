@@ -86,8 +86,8 @@ JSON
 }
 
     * 
-    * @param  personId The identifier of a person.
-    * @param  favoriteBodyCreate An object identifying the entity to be favorited.
+    * @param personId The identifier of a person.
+    * @param favoriteBodyCreate An object identifying the entity to be favorited.
 
 The object consists of a single property which is an object with the name site, file, or folder.
 The content of that object is the guid of the target entity.
@@ -103,11 +103,11 @@ JSON
    }
 }
 
-    * @param Object opts Optional parameters
-    * @param  opts.include Returns additional information about favorites, the following optional fields can be requested:
+    * @param opts Optional parameters
+    * @param opts.include Returns additional information about favorites, the following optional fields can be requested:
 * path (note, this only applies to files and folders)
 
-    * @param  opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -121,7 +121,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<FavoriteEntry>
     */
-    createFavorite(personId: string, favoriteBodyCreate: FavoriteBodyCreate, opts: any): Promise<FavoriteEntry> {
+    createFavorite(personId: string, favoriteBodyCreate: FavoriteBodyCreate, opts: any): Promise<FavoriteEntry | ModelError> {
         opts = opts || {};
         let postBody = favoriteBodyCreate;
 
@@ -208,10 +208,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  favoriteSiteBodyCreate The id of the site to favorite.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param personId The identifier of a person.
+        * @param favoriteSiteBodyCreate The id of the site to favorite.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -225,7 +225,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<FavoriteSiteEntry>
         */
-    createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts: any): Promise<FavoriteSiteEntry> {
+    createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts: any): Promise<FavoriteSiteEntry | ModelError> {
         opts = opts || {};
         let postBody = favoriteSiteBodyCreate;
 
@@ -267,11 +267,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  favoriteId The identifier of a favorite.
+        * @param personId The identifier of a person.
+        * @param favoriteId The identifier of a favorite.
         * @return Promise<{}>
         */
-    deleteFavorite(personId: string, favoriteId: string): Promise<{}> {
+    deleteFavorite(personId: string, favoriteId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -315,11 +315,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  siteId The identifier of a site.
+        * @param personId The identifier of a person.
+        * @param siteId The identifier of a site.
         * @return Promise<{}>
         */
-    deleteSiteFavorite(personId: string, siteId: string): Promise<{}> {
+    deleteSiteFavorite(personId: string, siteId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -360,13 +360,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  favoriteId The identifier of a favorite.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about favorites, the following optional fields can be requested:
+        * @param personId The identifier of a person.
+        * @param favoriteId The identifier of a favorite.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about favorites, the following optional fields can be requested:
     * path (note, this only applies to files and folders)
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -380,7 +380,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<FavoriteEntry>
         */
-    getFavorite(personId: string, favoriteId: string, opts: any): Promise<FavoriteEntry> {
+    getFavorite(personId: string, favoriteId: string, opts: any): Promise<FavoriteEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -426,10 +426,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  siteId The identifier of a site.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param personId The identifier of a person.
+        * @param siteId The identifier of a site.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -443,7 +443,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<SiteEntry>
         */
-    getFavoriteSite(personId: string, siteId: string, opts: any): Promise<SiteEntry> {
+    getFavoriteSite(personId: string, siteId: string, opts: any): Promise<SiteEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -488,15 +488,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param personId The identifier of a person.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -510,7 +510,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<SitePaging>
         */
-    listFavoriteSitesForPerson(personId: string, opts: any): Promise<SitePaging> {
+    listFavoriteSitesForPerson(personId: string, opts: any): Promise<SitePaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -574,19 +574,19 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     
         * 
-        * @param  personId The identifier of a person.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param personId The identifier of a person.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.where A string to restrict the returned objects by using a predicate.
-        * @param  opts.include Returns additional information about favorites, the following optional fields can be requested:
+        * @param opts.where A string to restrict the returned objects by using a predicate.
+        * @param opts.include Returns additional information about favorites, the following optional fields can be requested:
     * path (note, this only applies to files and folders)
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -600,7 +600,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<FavoritePaging>
         */
-    listFavorites(personId: string, opts: any): Promise<FavoritePaging> {
+    listFavorites(personId: string, opts: any): Promise<FavoritePaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 

@@ -28,8 +28,8 @@ export class DatasourcesApi extends BaseApi {
     * 
     * 
     * 
-    * @param Object opts Optional parameters
-    * @param  opts.tenantId tenantId
+    * @param opts Optional parameters
+    * @param opts.tenantId tenantId
     * @return Promise<ResultListDataRepresentationDataSourceRepresentation>
     */
     getDataSourcesUsingGET(opts: any): Promise<ResultListDataRepresentationDataSourceRepresentation> {

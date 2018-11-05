@@ -34,7 +34,7 @@ export class FormmodelsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  formId formId
+    * @param formId formId
     * @return Promise<FormDefinitionRepresentation>
     */
     getFormEditorJsonUsingGET(formId: number): Promise<FormDefinitionRepresentation> {
@@ -71,8 +71,8 @@ export class FormmodelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  formId formId
-        * @param  formHistoryId formHistoryId
+        * @param formId formId
+        * @param formHistoryId formHistoryId
         * @return Promise<FormRepresentation>
         */
     getFormHistoryUsingGET(formId: number, formHistoryId: number): Promise<FormRepresentation> {
@@ -113,7 +113,7 @@ export class FormmodelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  formId formId
+        * @param formId formId
         * @return Promise<FormRepresentation>
         */
     getFormUsingGET(formId: number): Promise<FormRepresentation> {
@@ -150,7 +150,7 @@ export class FormmodelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  formId formId
+        * @param formId formId
         * @return Promise<RuntimeFormRepresentation>
         */
     getFormUsingGET1(formId: number): Promise<RuntimeFormRepresentation> {
@@ -187,7 +187,7 @@ export class FormmodelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  formId formId
+        * @param formId formId
         * @return Promise<Array<FormRepresentation>>
         */
     getFormsUsingGET(formId: Array<string>): Promise<Array<FormRepresentation>> {
@@ -257,14 +257,14 @@ export class FormmodelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.nameLike nameLike
-        * @param  opts.appId appId
-        * @param  opts.tenantId tenantId
-        * @param  opts.start start
-        * @param  opts.sort sort
-        * @param  opts.order order
-        * @param  opts.size size
+        * @param opts Optional parameters
+        * @param opts.nameLike nameLike
+        * @param opts.appId appId
+        * @param opts.tenantId tenantId
+        * @param opts.start start
+        * @param opts.sort sort
+        * @param opts.order order
+        * @param opts.size size
         * @return Promise<ResultListDataRepresentationRuntimeFormRepresentation>
         */
     getFormsUsingGET2(opts: any): Promise<ResultListDataRepresentationRuntimeFormRepresentation> {
@@ -304,8 +304,8 @@ export class FormmodelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  formId ID of the form to update
-        * @param  saveRepresentation saveRepresentation
+        * @param formId ID of the form to update
+        * @param saveRepresentation saveRepresentation
         * @return Promise<FormRepresentation>
         */
     saveFormUsingPUT(formId: number, saveRepresentation: FormSaveRepresentation): Promise<FormRepresentation> {
@@ -346,8 +346,8 @@ export class FormmodelsApi extends BaseApi {
         * 
         * The model content to be validated must be specified in the POST body
         * 
-        * @param  formId formId
-        * @param  saveRepresentation saveRepresentation
+        * @param formId formId
+        * @param saveRepresentation saveRepresentation
         * @return Promise<Array<ValidationErrorRepresentation>>
         */
     validateModelUsingPUT(formId: number, saveRepresentation: FormSaveRepresentation): Promise<Array<ValidationErrorRepresentation>> {

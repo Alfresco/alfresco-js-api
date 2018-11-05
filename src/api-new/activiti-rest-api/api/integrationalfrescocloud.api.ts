@@ -30,7 +30,7 @@ export class IntegrationalfrescocloudApi extends BaseApi {
     * 
     * Returns Alfresco OAuth HTML Page
     * 
-    * @param  code code
+    * @param code code
     * @return Promise<{}>
     */
     confirmAuthorisationUsingGET(code: string): Promise<{}> {
@@ -100,7 +100,7 @@ export class IntegrationalfrescocloudApi extends BaseApi {
         * 
         * Returns ALL Sites
         * 
-        * @param  networkId networkId
+        * @param networkId networkId
         * @return Promise<ResultListDataRepresentationAlfrescoSiteRepresenation>
         */
     getAllSitesUsingGET(networkId: string): Promise<ResultListDataRepresentationAlfrescoSiteRepresenation> {
@@ -137,10 +137,10 @@ export class IntegrationalfrescocloudApi extends BaseApi {
         * 
         * 
         * 
-        * @param  networkId networkId
-        * @param Object opts Optional parameters
-        * @param  opts.siteId siteId
-        * @param  opts.path path
+        * @param networkId networkId
+        * @param opts Optional parameters
+        * @param opts.siteId siteId
+        * @param opts.path path
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInFolderPathUsingGET(networkId: string, opts: any): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
@@ -179,8 +179,8 @@ export class IntegrationalfrescocloudApi extends BaseApi {
         * 
         * 
         * 
-        * @param  networkId networkId
-        * @param  folderId folderId
+        * @param networkId networkId
+        * @param folderId folderId
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInFolderUsingGET(networkId: string, folderId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
@@ -221,8 +221,8 @@ export class IntegrationalfrescocloudApi extends BaseApi {
         * 
         * 
         * 
-        * @param  networkId networkId
-        * @param  siteId siteId
+        * @param networkId networkId
+        * @param siteId siteId
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInSiteUsingGET(networkId: string, siteId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {

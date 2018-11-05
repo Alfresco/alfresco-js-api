@@ -84,13 +84,13 @@ JSON
 }
 
     * 
-    * @param  sharedLinkBodyCreate The nodeId to create a shared link for.
-    * @param Object opts Optional parameters
-    * @param  opts.include Returns additional information about the shared link, the following optional fields can be requested:
+    * @param sharedLinkBodyCreate The nodeId to create a shared link for.
+    * @param opts Optional parameters
+    * @param opts.include Returns additional information about the shared link, the following optional fields can be requested:
 * allowableOperations
 * path
 
-    * @param  opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -104,7 +104,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SharedLinkEntry>
     */
-    createSharedLink(sharedLinkBodyCreate: SharedLinkBodyCreate, opts: any): Promise<SharedLinkEntry> {
+    createSharedLink(sharedLinkBodyCreate: SharedLinkBodyCreate, opts: any): Promise<SharedLinkEntry | ModelError> {
         opts = opts || {};
         let postBody = sharedLinkBodyCreate;
 
@@ -143,10 +143,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     Deletes the shared link with identifier **sharedId**.
     
         * 
-        * @param  sharedId The identifier of a shared link to a file.
+        * @param sharedId The identifier of a shared link to a file.
         * @return Promise<{}>
         */
-    deleteSharedLink(sharedId: string): Promise<{}> {
+    deleteSharedLink(sharedId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -210,11 +210,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     
         * 
-        * @param  sharedId The identifier of a shared link to a file.
-        * @param  sharedLinkBodyEmail The shared link email to send.
+        * @param sharedId The identifier of a shared link to a file.
+        * @param sharedLinkBodyEmail The shared link email to send.
         * @return Promise<{}>
         */
-    emailSharedLink(sharedId: string, sharedLinkBodyEmail: SharedLinkBodyEmail): Promise<{}> {
+    emailSharedLink(sharedId: string, sharedLinkBodyEmail: SharedLinkBodyEmail): Promise<{} | ModelError> {
 
         let postBody = sharedLinkBodyEmail;
 
@@ -257,9 +257,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** No authentication is required to call this endpoint.
     
         * 
-        * @param  sharedId The identifier of a shared link to a file.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param sharedId The identifier of a shared link to a file.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -273,7 +273,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<SharedLinkEntry>
         */
-    getSharedLink(sharedId: string, opts: any): Promise<SharedLinkEntry> {
+    getSharedLink(sharedId: string, opts: any): Promise<SharedLinkEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -313,9 +313,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** No authentication is required to call this endpoint.
     
         * 
-        * @param  sharedId The identifier of a shared link to a file.
-        * @param Object opts Optional parameters
-        * @param  opts.attachment **true** enables a web browser to download the file as an attachment.
+        * @param sharedId The identifier of a shared link to a file.
+        * @param opts Optional parameters
+        * @param opts.attachment **true** enables a web browser to download the file as an attachment.
     **false** means a web browser may preview the file in a new tab or window, but not
     download the file.
     
@@ -325,15 +325,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     If the content type is not supported for preview, then a value of **false**  is ignored, and
     the attachment will be returned in the response.
      (default to true)
-        * @param  opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
+        * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
-        * @param  opts.range The Range header indicates the part of a document that the server should return.
+        * @param opts.range The Range header indicates the part of a document that the server should return.
     Single part request supported, for example: bytes=1-10.
     
         * @return Promise<{}>
         */
-    getSharedLinkContent(sharedId: string, opts: any): Promise<{}> {
+    getSharedLinkContent(sharedId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -376,11 +376,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** No authentication is required to call this endpoint.
     
         * 
-        * @param  sharedId The identifier of a shared link to a file.
-        * @param  renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
+        * @param sharedId The identifier of a shared link to a file.
+        * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
         * @return Promise<RenditionEntry>
         */
-    getSharedLinkRendition(sharedId: string, renditionId: string): Promise<RenditionEntry> {
+    getSharedLinkRendition(sharedId: string, renditionId: string): Promise<RenditionEntry | ModelError> {
 
         let postBody = null;
 
@@ -423,10 +423,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** No authentication is required to call this endpoint.
     
         * 
-        * @param  sharedId The identifier of a shared link to a file.
-        * @param  renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
-        * @param Object opts Optional parameters
-        * @param  opts.attachment **true** enables a web browser to download the file as an attachment.
+        * @param sharedId The identifier of a shared link to a file.
+        * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
+        * @param opts Optional parameters
+        * @param opts.attachment **true** enables a web browser to download the file as an attachment.
     **false** means a web browser may preview the file in a new tab or window, but not
     download the file.
     
@@ -436,15 +436,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     If the content type is not supported for preview, then a value of **false**  is ignored, and
     the attachment will be returned in the response.
      (default to true)
-        * @param  opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
+        * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
-        * @param  opts.range The Range header indicates the part of a document that the server should return.
+        * @param opts.range The Range header indicates the part of a document that the server should return.
     Single part request supported, for example: bytes=1-10.
     
         * @return Promise<{}>
         */
-    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts: any): Promise<{}> {
+    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -491,10 +491,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** No authentication is required to call this endpoint.
     
         * 
-        * @param  sharedId The identifier of a shared link to a file.
+        * @param sharedId The identifier of a shared link to a file.
         * @return Promise<RenditionPaging>
         */
-    listSharedLinkRenditions(sharedId: string): Promise<RenditionPaging> {
+    listSharedLinkRenditions(sharedId: string): Promise<RenditionPaging | ModelError> {
 
         let postBody = null;
 
@@ -535,24 +535,24 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** The list of links is eventually consistent so newly created shared links may not appear immediately.
     
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.where Optionally filter the list by \"sharedByUser\" userid of person who shared the link (can also use -me-)
+        * @param opts.where Optionally filter the list by \"sharedByUser\" userid of person who shared the link (can also use -me-)
     
     *   where=(sharedByUser='jbloggs')
     
     *   where=(sharedByUser='-me-')
     
-        * @param  opts.include Returns additional information about the shared link, the following optional fields can be requested:
+        * @param opts.include Returns additional information about the shared link, the following optional fields can be requested:
     * allowableOperations
     * path
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -566,7 +566,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<SharedLinkPaging>
         */
-    listSharedLinks(opts: any): Promise<SharedLinkPaging> {
+    listSharedLinks(opts: any): Promise<SharedLinkPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 

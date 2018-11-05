@@ -30,12 +30,12 @@ export class SecuritycontrolsettingsApi extends BaseApi {
     * 
     * Gets the value for a selected **securityControlSettingKey**.
     * 
-    * @param  securityControlSettingKey The key for the security control setting. You can use one of the following settings:
+    * @param securityControlSettingKey The key for the security control setting. You can use one of the following settings:
 * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
 
     * @return Promise<SecurityControlSettingEntry>
     */
-    getSecurityControlSetting(securityControlSettingKey: string): Promise<SecurityControlSettingEntry> {
+    getSecurityControlSetting(securityControlSettingKey: string): Promise<SecurityControlSettingEntry | ModelError> {
 
         let postBody = null;
 
@@ -69,13 +69,13 @@ export class SecuritycontrolsettingsApi extends BaseApi {
         * 
         * Updates the value of a selected **securityControlSettingKey**.
         * 
-        * @param  securityControlSettingKey The key for the security control setting. You can use one of the following settings:
+        * @param securityControlSettingKey The key for the security control setting. You can use one of the following settings:
     * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
     
-        * @param  securityControlSettingValue The new value for the security control setting. This can be a string or number, depending on the setting key.
+        * @param securityControlSettingValue The new value for the security control setting. This can be a string or number, depending on the setting key.
         * @return Promise<SecurityControlSettingEntry>
         */
-    updateSecurityControlSetting(securityControlSettingKey: string, securityControlSettingValue: SecurityControlSettingBody): Promise<SecurityControlSettingEntry> {
+    updateSecurityControlSetting(securityControlSettingKey: string, securityControlSettingValue: SecurityControlSettingBody): Promise<SecurityControlSettingEntry | ModelError> {
 
         let postBody = securityControlSettingValue;
 

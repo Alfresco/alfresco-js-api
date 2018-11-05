@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { UserInfo } from './userInfo';
 
 export class AuditEntry {

@@ -36,13 +36,13 @@ Mandatory fields and the transfer container's aspects and properties are returne
 You can use the **include** parameter (include=allowableOperations) to return additional information.
 
     * 
-    * @param  transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
-    * @param Object opts Optional parameters
-    * @param  opts.include Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
+    * @param transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
+    * @param opts Optional parameters
+    * @param opts.include Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-    * @param  opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -56,7 +56,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TransferContainerEntry>
     */
-    getTransferContainer(transferContainerId: string, opts: any): Promise<TransferContainerEntry> {
+    getTransferContainer(transferContainerId: string, opts: any): Promise<TransferContainerEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -97,11 +97,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter (include=allowableOperations) to return additional information.
     
         * 
-        * @param  transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param  opts.maxItems The maximum number of items to return in the list.
-        * @param  opts.include Returns additional information about the transfer folders. Any optional field from the response model can be requested. For example:
+        * @param transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.maxItems The maximum number of items to return in the list.
+        * @param opts.include Returns additional information about the transfer folders. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * aspectNames
     * properties
@@ -109,8 +109,8 @@ parameter are returned in addition to those specified in the **fields** paramete
     * transferLocation
     * transferAccessionIndicator
     
-        * @param  opts.includeSource Also include **source** (in addition to **entries**) with folder information on the specified parent **transferContainerId**.
-        * @param  opts.fields A list of field names.
+        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the specified parent **transferContainerId**.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -124,7 +124,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<TransferContainerAssociationPaging>
         */
-    listTransfers(transferContainerId: string, opts: any): Promise<TransferContainerAssociationPaging> {
+    listTransfers(transferContainerId: string, opts: any): Promise<TransferContainerAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -180,14 +180,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
     
         * 
-        * @param  transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
-        * @param  nodeBodyUpdate The node information to update.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
+        * @param transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
+        * @param nodeBodyUpdate The node information to update.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -201,7 +201,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<TransferContainerEntry>
         */
-    updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts: any): Promise<TransferContainerEntry> {
+    updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts: any): Promise<TransferContainerEntry | ModelError> {
         opts = opts || {};
         let postBody = nodeBodyUpdate;
 

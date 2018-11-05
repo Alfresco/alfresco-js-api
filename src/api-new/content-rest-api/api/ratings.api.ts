@@ -31,8 +31,8 @@ export class RatingsApi extends BaseApi {
     * 
     * Create a rating for the node with identifier **nodeId**
     * 
-    * @param  nodeId The identifier of a node.
-    * @param  ratingBodyCreate For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
+    * @param nodeId The identifier of a node.
+    * @param ratingBodyCreate For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
 
 For example, to \"like\" a file the following body would be used:
 
@@ -42,8 +42,8 @@ JSON
     \"myRating\": true
   }
 
-    * @param Object opts Optional parameters
-    * @param  opts.fields A list of field names.
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -57,7 +57,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RatingEntry>
     */
-    createRating(nodeId: string, ratingBodyCreate: RatingBody, opts: any): Promise<RatingEntry> {
+    createRating(nodeId: string, ratingBodyCreate: RatingBody, opts: any): Promise<RatingEntry | ModelError> {
         opts = opts || {};
         let postBody = ratingBodyCreate;
 
@@ -96,11 +96,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * 
         * Deletes rating **ratingId** from node **nodeId**.
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  ratingId The identifier of a rating.
+        * @param nodeId The identifier of a node.
+        * @param ratingId The identifier of a rating.
         * @return Promise<{}>
         */
-    deleteRating(nodeId: string, ratingId: string): Promise<{}> {
+    deleteRating(nodeId: string, ratingId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -138,10 +138,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * 
         * Get the specific rating **ratingId** on node **nodeId**.
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  ratingId The identifier of a rating.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param nodeId The identifier of a node.
+        * @param ratingId The identifier of a rating.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -155,7 +155,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<RatingEntry>
         */
-    getRating(nodeId: string, ratingId: string, opts: any): Promise<RatingEntry> {
+    getRating(nodeId: string, ratingId: string, opts: any): Promise<RatingEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -194,15 +194,15 @@ parameter are returned in addition to those specified in the **fields** paramete
         * 
         * Gets a list of ratings for node **nodeId**.
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -216,7 +216,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<RatingPaging>
         */
-    listRatings(nodeId: string, opts: any): Promise<RatingPaging> {
+    listRatings(nodeId: string, opts: any): Promise<RatingPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 

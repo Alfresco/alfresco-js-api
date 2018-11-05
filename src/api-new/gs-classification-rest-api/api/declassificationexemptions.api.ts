@@ -73,10 +73,10 @@ JSON
 }
 
     * 
-    * @param  declassificationExemption Declassification exemption
+    * @param declassificationExemption Declassification exemption
     * @return Promise<DeclassificationExemptionEntry>
     */
-    createDeclassificationExemption(declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry> {
+    createDeclassificationExemption(declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry | ModelError> {
 
         let postBody = declassificationExemption;
 
@@ -110,10 +110,10 @@ JSON
         * 
         * Deletes the declassification exemption with id **declassificationExemptionId**. You can't delete a classification exemption that is being used to classify content.
         * 
-        * @param  declassificationExemptionId The identifier for the declassification exemption
+        * @param declassificationExemptionId The identifier for the declassification exemption
         * @return Promise<{}>
         */
-    deleteDeclassificationExemption(declassificationExemptionId: string): Promise<{}> {
+    deleteDeclassificationExemption(declassificationExemptionId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -147,12 +147,12 @@ JSON
         * 
         * Gets all declassification exemptions.
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.maxItems The maximum number of items to return in the list.
         * @return Promise<DeclassificationExemptionsPaging>
         */
-    listDeclassificationExemptions(opts: any): Promise<DeclassificationExemptionsPaging> {
+    listDeclassificationExemptions(opts: any): Promise<DeclassificationExemptionsPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -184,10 +184,10 @@ JSON
         * 
         * Gets the declassification exemption with id **declassificationExemptionId**.
         * 
-        * @param  declassificationExemptionId The identifier for the declassification exemption
+        * @param declassificationExemptionId The identifier for the declassification exemption
         * @return Promise<DeclassificationExemptionEntry>
         */
-    showDeclassificationExemptionById(declassificationExemptionId: string): Promise<DeclassificationExemptionEntry> {
+    showDeclassificationExemptionById(declassificationExemptionId: string): Promise<DeclassificationExemptionEntry | ModelError> {
 
         let postBody = null;
 
@@ -221,11 +221,11 @@ JSON
         * 
         * Updates the declassification exemption with id **declassificationExemptionId**. For example, you can rename a declassification exemption.
         * 
-        * @param  declassificationExemptionId The identifier for the declassification exemption
-        * @param  declassificationExemption Declassification exemption
+        * @param declassificationExemptionId The identifier for the declassification exemption
+        * @param declassificationExemption Declassification exemption
         * @return Promise<DeclassificationExemptionEntry>
         */
-    updateDeclassificationExemption(declassificationExemptionId: string, declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry> {
+    updateDeclassificationExemption(declassificationExemptionId: string, declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry | ModelError> {
 
         let postBody = declassificationExemption;
 

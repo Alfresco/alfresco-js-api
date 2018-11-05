@@ -18,7 +18,6 @@
 import { Capabilities } from './capabilities';
 import { Company } from './company';
 
-
 export class Person {
     id: string;
     firstName: string;

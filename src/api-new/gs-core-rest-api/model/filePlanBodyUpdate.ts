@@ -15,8 +15,6 @@
 * limitations under the License.
 */
 
-
-
 export class FilePlanBodyUpdate {
     properties?: { [key: string]: string; };
 }

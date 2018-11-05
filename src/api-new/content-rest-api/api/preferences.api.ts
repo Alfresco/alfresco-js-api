@@ -33,10 +33,10 @@ export class PreferencesApi extends BaseApi {
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
     * 
-    * @param  personId The identifier of a person.
-    * @param  preferenceName The name of the preference.
-    * @param Object opts Optional parameters
-    * @param  opts.fields A list of field names.
+    * @param personId The identifier of a person.
+    * @param preferenceName The name of the preference.
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -50,7 +50,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PreferenceEntry>
     */
-    getPreference(personId: string, preferenceName: string, opts: any): Promise<PreferenceEntry> {
+    getPreference(personId: string, preferenceName: string, opts: any): Promise<PreferenceEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -95,15 +95,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     The **value** can be of any JSON type.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param personId The identifier of a person.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -117,7 +117,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<PreferencePaging>
         */
-    listPreferences(personId: string, opts: any): Promise<PreferencePaging> {
+    listPreferences(personId: string, opts: any): Promise<PreferencePaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 

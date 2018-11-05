@@ -77,10 +77,10 @@ JSON
 }
 
     * 
-    * @param  nodeId The identifier of a node.
-    * @param  tagBodyCreate The new tag
-    * @param Object opts Optional parameters
-    * @param  opts.fields A list of field names.
+    * @param nodeId The identifier of a node.
+    * @param tagBodyCreate The new tag
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -94,7 +94,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagEntry>
     */
-    createTagForNode(nodeId: string, tagBodyCreate: TagBody, opts: any): Promise<TagEntry> {
+    createTagForNode(nodeId: string, tagBodyCreate: TagBody, opts: any): Promise<TagEntry | ModelError> {
         opts = opts || {};
         let postBody = tagBodyCreate;
 
@@ -133,11 +133,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * 
         * Deletes tag **tagId** from node **nodeId**.
         * 
-        * @param  nodeId The identifier of a node.
-        * @param  tagId The identifier of a tag.
+        * @param nodeId The identifier of a node.
+        * @param tagId The identifier of a tag.
         * @return Promise<{}>
         */
-    deleteTagFromNode(nodeId: string, tagId: string): Promise<{}> {
+    deleteTagFromNode(nodeId: string, tagId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -175,9 +175,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         * 
         * Get a specific tag with **tagId**.
         * 
-        * @param  tagId The identifier of a tag.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param tagId The identifier of a tag.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -191,7 +191,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<TagEntry>
         */
-    getTag(tagId: string, opts: any): Promise<TagEntry> {
+    getTag(tagId: string, opts: any): Promise<TagEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -229,14 +229,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter to return additional **values** information.
     
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -248,12 +248,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
     
-        * @param  opts.include Returns additional information about the tag. The following optional fields can be requested:
+        * @param opts.include Returns additional information about the tag. The following optional fields can be requested:
     * count
     
         * @return Promise<TagPaging>
         */
-    listTags(opts: any): Promise<TagPaging> {
+    listTags(opts: any): Promise<TagPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -287,15 +287,15 @@ parameter are returned in addition to those specified in the **fields** paramete
         * 
         * Gets a list of tags for node **nodeId**.
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -309,7 +309,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<TagPaging>
         */
-    listTagsForNode(nodeId: string, opts: any): Promise<TagPaging> {
+    listTagsForNode(nodeId: string, opts: any): Promise<TagPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -346,10 +346,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * 
         * Updates the tag **tagId**.
         * 
-        * @param  tagId The identifier of a tag.
-        * @param  tagBodyUpdate The updated tag
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param tagId The identifier of a tag.
+        * @param tagBodyUpdate The updated tag
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -363,7 +363,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<TagEntry>
         */
-    updateTag(tagId: string, tagBodyUpdate: TagBody, opts: any): Promise<TagEntry> {
+    updateTag(tagId: string, tagBodyUpdate: TagBody, opts: any): Promise<TagEntry | ModelError> {
         opts = opts || {};
         let postBody = tagBodyUpdate;
 

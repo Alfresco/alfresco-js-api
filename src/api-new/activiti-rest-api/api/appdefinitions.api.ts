@@ -31,7 +31,7 @@ export class AppdefinitionsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  appDefinitionId appDefinitionId
+    * @param appDefinitionId appDefinitionId
     * @return Promise<{}>
     */
     deleteAppDefinitionUsingDELETE(appDefinitionId: number): Promise<{}> {
@@ -68,7 +68,7 @@ export class AppdefinitionsApi extends BaseApi {
         * 
         * This will return a zip file containing the app definition model and all related models (process definitions and forms).
         * 
-        * @param  modelId modelId from a runtime app or the id of an app definition model
+        * @param modelId modelId from a runtime app or the id of an app definition model
         * @return Promise<{}>
         */
     exportAppDefinitionUsingGET(modelId: number): Promise<{}> {
@@ -105,7 +105,7 @@ export class AppdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  modelId Application definition ID
+        * @param modelId Application definition ID
         * @return Promise<AppDefinitionRepresentation>
         */
     getAppDefinitionUsingGET(modelId: number): Promise<AppDefinitionRepresentation> {
@@ -142,7 +142,7 @@ export class AppdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  file file
+        * @param file file
         * @return Promise<AppDefinitionUpdateResultRepresentation>
         */
     importAndPublishAppUsingPOST(file: Blob): Promise<AppDefinitionUpdateResultRepresentation> {
@@ -180,8 +180,8 @@ export class AppdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  modelId modelId
-        * @param  file file
+        * @param modelId modelId
+        * @param file file
         * @return Promise<AppDefinitionUpdateResultRepresentation>
         */
     importAndPublishAppUsingPOST1(modelId: number, file: Blob): Promise<AppDefinitionUpdateResultRepresentation> {
@@ -223,9 +223,9 @@ export class AppdefinitionsApi extends BaseApi {
         * 
         * Allows a zip file to be uploaded containing an app definition and any number of included models.<p>This is useful to bootstrap an environment (for users or continuous integration).<p>Before using any processes included in the import the app must be published and deployed.
         * 
-        * @param  file file
-        * @param Object opts Optional parameters
-        * @param  opts.renewIdmEntries Whether to renew user and group identifiers (default to false)
+        * @param file file
+        * @param opts Optional parameters
+        * @param opts.renewIdmEntries Whether to renew user and group identifiers (default to false)
         * @return Promise<AppDefinitionRepresentation>
         */
     importAppDefinitionUsingPOST(file: Blob, opts: any): Promise<AppDefinitionRepresentation> {
@@ -264,8 +264,8 @@ export class AppdefinitionsApi extends BaseApi {
         * 
         * Imports an app inside an existing app definition and creates a new version<p>Before using any new or updated processes included in the import the app must be (re-)published and deployed.
         * 
-        * @param  modelId modelId
-        * @param  file file
+        * @param modelId modelId
+        * @param file file
         * @return Promise<AppDefinitionRepresentation>
         */
     importAppDefinitionUsingPOST1(modelId: number, file: Blob): Promise<AppDefinitionRepresentation> {
@@ -307,8 +307,8 @@ export class AppdefinitionsApi extends BaseApi {
         * 
         * Publishing an app definition makes it available for use. The application must not have any validation errors or an error will be returned.<p>Before an app definition can be used by other users, it must also be deployed for their use
         * 
-        * @param  modelId modelId
-        * @param  publishModel publishModel
+        * @param modelId modelId
+        * @param publishModel publishModel
         * @return Promise<AppDefinitionUpdateResultRepresentation>
         */
     publishAppDefinitionUsingPOST(modelId: number, publishModel: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation> {
@@ -349,8 +349,8 @@ export class AppdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  modelId Application definition ID
-        * @param  updatedModel updatedModel
+        * @param modelId Application definition ID
+        * @param updatedModel updatedModel
         * @return Promise<AppDefinitionUpdateResultRepresentation>
         */
     updateAppDefinitionUsingPUT(modelId: number, updatedModel: AppDefinitionSaveRepresentation): Promise<AppDefinitionUpdateResultRepresentation> {

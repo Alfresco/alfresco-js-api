@@ -28,7 +28,7 @@ export class EndpointsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  endpointConfigurationId endpointConfigurationId
+    * @param endpointConfigurationId endpointConfigurationId
     * @return Promise<EndpointConfigurationRepresentation>
     */
     getEndpointConfigurationUsingGET(endpointConfigurationId: number): Promise<EndpointConfigurationRepresentation> {

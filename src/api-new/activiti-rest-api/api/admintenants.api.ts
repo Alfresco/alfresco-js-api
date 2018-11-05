@@ -32,7 +32,7 @@ export class AdmintenantsApi extends BaseApi {
     * 
     * Only a tenant manager may access this endpoint
     * 
-    * @param  createTenantRepresentation createTenantRepresentation
+    * @param createTenantRepresentation createTenantRepresentation
     * @return Promise<LightTenantRepresentation>
     */
     createTenantUsingPOST(createTenantRepresentation: CreateTenantRepresentation): Promise<LightTenantRepresentation> {
@@ -69,7 +69,7 @@ export class AdmintenantsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tenantId tenantId
+        * @param tenantId tenantId
         * @return Promise<{}>
         */
     deleteTenantUsingDELETE(tenantId: number): Promise<{}> {
@@ -106,7 +106,7 @@ export class AdmintenantsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tenantId tenantId
+        * @param tenantId tenantId
         * @return Promise<Array<TenantEvent>>
         */
     getTenantEventsUsingGET(tenantId: number): Promise<Array<TenantEvent>> {
@@ -143,7 +143,7 @@ export class AdmintenantsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tenantId tenantId
+        * @param tenantId tenantId
         * @return Promise<{}>
         */
     getTenantLogoUsingGET(tenantId: number): Promise<{}> {
@@ -180,7 +180,7 @@ export class AdmintenantsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tenantId tenantId
+        * @param tenantId tenantId
         * @return Promise<TenantRepresentation>
         */
     getTenantUsingGET(tenantId: number): Promise<TenantRepresentation> {
@@ -249,8 +249,8 @@ export class AdmintenantsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tenantId tenantId
-        * @param  createTenantRepresentation createTenantRepresentation
+        * @param tenantId tenantId
+        * @param createTenantRepresentation createTenantRepresentation
         * @return Promise<TenantRepresentation>
         */
     updateUsingPUT(tenantId: number, createTenantRepresentation: CreateTenantRepresentation): Promise<TenantRepresentation> {
@@ -291,8 +291,8 @@ export class AdmintenantsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tenantId tenantId
-        * @param  file file
+        * @param tenantId tenantId
+        * @param file file
         * @return Promise<ImageUploadRepresentation>
         */
     uploadTenantLogoUsingPOST(tenantId: number, file: Blob): Promise<ImageUploadRepresentation> {

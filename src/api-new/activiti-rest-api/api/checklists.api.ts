@@ -30,8 +30,8 @@ export class ChecklistsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  taskId taskId
-    * @param  taskRepresentation taskRepresentation
+    * @param taskId taskId
+    * @param taskRepresentation taskRepresentation
     * @return Promise<TaskRepresentation>
     */
     addSubtaskUsingPOST(taskId: string, taskRepresentation: TaskRepresentation): Promise<TaskRepresentation> {
@@ -72,7 +72,7 @@ export class ChecklistsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
     getChecklistUsingGET(taskId: string): Promise<ResultListDataRepresentationTaskRepresentation> {
@@ -109,8 +109,8 @@ export class ChecklistsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  orderRepresentation orderRepresentation
+        * @param taskId taskId
+        * @param orderRepresentation orderRepresentation
         * @return Promise<{}>
         */
     orderChecklistUsingPUT(taskId: string, orderRepresentation: ChecklistOrderRepresentation): Promise<{}> {

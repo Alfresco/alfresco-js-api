@@ -41,10 +41,10 @@ Information about the existing progress at the time of cancelling can be retriev
 The cancel operation is done asynchronously.
 
     * 
-    * @param  downloadId The identifier of a download node.
+    * @param downloadId The identifier of a download node.
     * @return Promise<{}>
     */
-    cancelDownload(downloadId: string): Promise<{}> {
+    cancelDownload(downloadId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -93,9 +93,9 @@ The cancel operation is done asynchronously.
     **Note:** The content of the download node can be obtained using the **GET /nodes/{downloadId}/content** endpoint
     
         * 
-        * @param  downloadBodyCreate The nodeIds the content of which will be zipped, which zip will be set as the content of our download node.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param downloadBodyCreate The nodeIds the content of which will be zipped, which zip will be set as the content of our download node.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -109,7 +109,7 @@ The cancel operation is done asynchronously.
     
         * @return Promise<DownloadEntry>
         */
-    createDownload(downloadBodyCreate: DownloadBodyCreate, opts: any): Promise<DownloadEntry> {
+    createDownload(downloadBodyCreate: DownloadBodyCreate, opts: any): Promise<DownloadEntry | ModelError> {
         opts = opts || {};
         let postBody = downloadBodyCreate;
 
@@ -147,9 +147,9 @@ The cancel operation is done asynchronously.
     Retrieve status information for download node **downloadId**
     
         * 
-        * @param  downloadId The identifier of a download node.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param downloadId The identifier of a download node.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -163,7 +163,7 @@ The cancel operation is done asynchronously.
     
         * @return Promise<DownloadEntry>
         */
-    getDownload(downloadId: string, opts: any): Promise<DownloadEntry> {
+    getDownload(downloadId: string, opts: any): Promise<DownloadEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 

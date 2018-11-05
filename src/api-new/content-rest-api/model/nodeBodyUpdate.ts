@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { PermissionsBodyUpdate } from './permissionsBodyUpdate';
 
 export class NodeBodyUpdate {

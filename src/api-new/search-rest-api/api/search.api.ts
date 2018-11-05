@@ -324,11 +324,11 @@ The example above changes the highlighting prefix and postfix from the
       },
 
     * 
-    * @param  queryBody Generic query API
+    * @param queryBody Generic query API
 
     * @return Promise<ResultSetPaging>
     */
-    search(queryBody: SearchRequest): Promise<ResultSetPaging> {
+    search(queryBody: SearchRequest): Promise<ResultSetPaging | ModelError> {
 
         let postBody = queryBody;
 

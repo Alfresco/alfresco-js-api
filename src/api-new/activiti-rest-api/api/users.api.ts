@@ -31,8 +31,8 @@ export class UsersApi extends BaseApi {
     * 
     * Typical action is updating/reset password
     * 
-    * @param  userId userId
-    * @param  actionRequest actionRequest
+    * @param userId userId
+    * @param actionRequest actionRequest
     * @return Promise<{}>
     */
     executeActionUsingPOST(userId: number, actionRequest: UserActionRepresentation): Promise<{}> {
@@ -73,7 +73,7 @@ export class UsersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userId userId
+        * @param userId userId
         * @return Promise<{}>
         */
     getProfilePictureUsingGET1(userId: number): Promise<{}> {
@@ -110,7 +110,7 @@ export class UsersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userId userId
+        * @param userId userId
         * @return Promise<UserRepresentation>
         */
     getUserUsingGET1(userId: number): Promise<UserRepresentation> {
@@ -147,15 +147,15 @@ export class UsersApi extends BaseApi {
         * 
         * A common use case is that a user wants to select another user (eg. when assigning a task) or group.
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.filter filter
-        * @param  opts.email email
-        * @param  opts.externalId externalId
-        * @param  opts.externalIdCaseInsensitive externalIdCaseInsensitive
-        * @param  opts.excludeTaskId excludeTaskId
-        * @param  opts.excludeProcessId excludeProcessId
-        * @param  opts.groupId groupId
-        * @param  opts.tenantId tenantId
+        * @param opts Optional parameters
+        * @param opts.filter filter
+        * @param opts.email email
+        * @param opts.externalId externalId
+        * @param opts.externalIdCaseInsensitive externalIdCaseInsensitive
+        * @param opts.excludeTaskId excludeTaskId
+        * @param opts.excludeProcessId excludeProcessId
+        * @param opts.groupId groupId
+        * @param opts.tenantId tenantId
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */
     getUsersUsingGET1(opts: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
@@ -196,7 +196,7 @@ export class UsersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  resetPassword resetPassword
+        * @param resetPassword resetPassword
         * @return Promise<{}>
         */
     requestPasswordResetUsingPOST(resetPassword: ResetPasswordRepresentation): Promise<{}> {
@@ -233,8 +233,8 @@ export class UsersApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userId userId
-        * @param  userRequest userRequest
+        * @param userId userId
+        * @param userRequest userRequest
         * @return Promise<UserRepresentation>
         */
     updateUserUsingPUT(userId: number, userRequest: UserRepresentation): Promise<UserRepresentation> {

@@ -17,7 +17,6 @@
 
 import { Company } from './company';
 
-
 export class PersonBodyCreate {
     id: string;
     firstName: string;

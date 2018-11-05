@@ -116,19 +116,19 @@ JSON
 }
 
     * 
-    * @param  recordFolderId The identifier of a record folder.
-    * @param  recordBodyCreate The record information to create.
+    * @param recordFolderId The identifier of a record folder.
+    * @param recordBodyCreate The record information to create.
 
 This field is ignored for multipart/form-data content uploads.
 
-    * @param Object opts Optional parameters
-    * @param  opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
+    * @param opts Optional parameters
+    * @param opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
 
-    * @param  opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -142,7 +142,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordEntry>
     */
-    createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts: any): Promise<RecordEntry> {
+    createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts: any): Promise<RecordEntry | ModelError> {
         opts = opts || {};
         let postBody = recordBodyCreate;
 
@@ -183,10 +183,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * Deletes record folder **recordFolderId**. Deleted file plan components cannot be recovered, they are deleted permanently.
     
         * 
-        * @param  recordFolderId The identifier of a record folder.
+        * @param recordFolderId The identifier of a record folder.
         * @return Promise<{}>
         */
-    deleteRecordFolder(recordFolderId: string): Promise<{}> {
+    deleteRecordFolder(recordFolderId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -225,14 +225,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter (include=allowableOperations) to return additional information.
     
         * 
-        * @param  recordFolderId The identifier of a record folder.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
+        * @param recordFolderId The identifier of a record folder.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * isClosed
     * path
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -246,7 +246,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<RecordFolderEntry>
         */
-    getRecordFolder(recordFolderId: string, opts: any): Promise<RecordFolderEntry> {
+    getRecordFolder(recordFolderId: string, opts: any): Promise<RecordFolderEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -289,11 +289,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter (include=allowableOperations) to return additional information.
     
         * 
-        * @param  recordFolderId The identifier of a record folder.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param  opts.maxItems The maximum number of items to return in the list.
-        * @param  opts.where Optionally filter the list. Here are some examples:
+        * @param recordFolderId The identifier of a record folder.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.maxItems The maximum number of items to return in the list.
+        * @param opts.where Optionally filter the list. Here are some examples:
     
     *   where=(nodeType='my:specialNodeType')
     
@@ -301,7 +301,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     *   where=(isPrimary=true)
     
-        * @param  opts.include Returns additional information about the records. Any optional field from the response model can be requested. For example:
+        * @param opts.include Returns additional information about the records. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * aspectNames
     * association
@@ -310,8 +310,8 @@ parameter are returned in addition to those specified in the **fields** paramete
     * path
     * properties
     
-        * @param  opts.includeSource Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId**
-        * @param  opts.fields A list of field names.
+        * @param opts.includeSource Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId**
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -325,7 +325,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<RecordFolderAssociationPaging>
         */
-    listRecordFolderChildren(recordFolderId: string, opts: any): Promise<RecordFolderAssociationPaging> {
+    listRecordFolderChildren(recordFolderId: string, opts: any): Promise<RecordFolderAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -384,15 +384,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
     
         * 
-        * @param  recordFolderId The identifier of a record folder.
-        * @param  recordFolderBodyUpdate The record folder information to update.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
+        * @param recordFolderId The identifier of a record folder.
+        * @param recordFolderBodyUpdate The record folder information to update.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * isClosed
     * path
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -406,7 +406,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<RecordFolderEntry>
         */
-    updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts: any): Promise<RecordFolderEntry> {
+    updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts: any): Promise<RecordFolderEntry | ModelError> {
         opts = opts || {};
         let postBody = recordFolderBodyUpdate;
 

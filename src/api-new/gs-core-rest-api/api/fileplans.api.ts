@@ -88,17 +88,17 @@ JSON
 }
 
     * 
-    * @param  filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
-    * @param  nodeBodyCreate The node information to create.
-    * @param Object opts Optional parameters
-    * @param  opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+    * @param filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+    * @param nodeBodyCreate The node information to create.
+    * @param opts Optional parameters
+    * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
 
-    * @param  opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+    * @param opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
 
-    * @param  opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -112,7 +112,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordCategoryEntry>
     */
-    createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opts: any): Promise<RecordCategoryEntry> {
+    createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opts: any): Promise<RecordCategoryEntry | ModelError> {
         opts = opts || {};
         let postBody = nodeBodyCreate;
 
@@ -158,13 +158,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter (include=allowableOperations) to return additional information.
     
         * 
-        * @param  filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
+        * @param filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -178,7 +178,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<FilePlanEntry>
         */
-    getFilePlan(filePlanId: string, opts: any): Promise<FilePlanEntry> {
+    getFilePlan(filePlanId: string, opts: any): Promise<FilePlanEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -219,19 +219,19 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter (include=allowableOperations) to return additional information.
     
         * 
-        * @param  filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param  opts.maxItems The maximum number of items to return in the list.
-        * @param  opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+        * @param filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.maxItems The maximum number of items to return in the list.
+        * @param opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * aspectNames
     * hasRetentionSchedule
     * path
     * properties
     
-        * @param  opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId**
-        * @param  opts.fields A list of field names.
+        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId**
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -245,7 +245,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<RecordCategoryPaging>
         */
-    getFilePlanCategories(filePlanId: string, opts: any): Promise<RecordCategoryPaging> {
+    getFilePlanCategories(filePlanId: string, opts: any): Promise<RecordCategoryPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -297,14 +297,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
     
         * 
-        * @param  filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
-        * @param  filePlanBodyUpdate The file plan information to update.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
+        * @param filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+        * @param filePlanBodyUpdate The file plan information to update.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -318,7 +318,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<FilePlanEntry>
         */
-    updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts: any): Promise<FilePlanEntry> {
+    updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts: any): Promise<FilePlanEntry | ModelError> {
         opts = opts || {};
         let postBody = filePlanBodyUpdate;
 

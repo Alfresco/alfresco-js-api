@@ -29,11 +29,11 @@ export class SubmittedformsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  formId formId
-    * @param Object opts Optional parameters
-    * @param  opts.submittedBy submittedBy
-    * @param  opts.start start
-    * @param  opts.size size
+    * @param formId formId
+    * @param opts Optional parameters
+    * @param opts.submittedBy submittedBy
+    * @param opts.start start
+    * @param opts.size size
     * @return Promise<ResultListDataRepresentationSubmittedFormRepresentation>
     */
     getFormSubmittedFromsUsingGET(formId: number, opts: any): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
@@ -73,7 +73,7 @@ export class SubmittedformsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processId processId
+        * @param processId processId
         * @return Promise<ResultListDataRepresentationSubmittedFormRepresentation>
         */
     getProcessSubmittedFromsUsingGET(processId: string): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
@@ -110,7 +110,7 @@ export class SubmittedformsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  submittedFormId submittedFormId
+        * @param submittedFormId submittedFormId
         * @return Promise<SubmittedFormRepresentation>
         */
     getSubmittedFromUsingGET(submittedFormId: number): Promise<SubmittedFormRepresentation> {
@@ -147,7 +147,7 @@ export class SubmittedformsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<SubmittedFormRepresentation>
         */
     getTaskSubmittedFromsUsingGET(taskId: string): Promise<SubmittedFormRepresentation> {

@@ -28,8 +28,8 @@ export class ProcessinstancevariablesApi extends BaseApi {
     * 
     * 
     * 
-    * @param  processInstanceId Process instance ID
-    * @param  restVariables restVariables
+    * @param processInstanceId Process instance ID
+    * @param restVariables restVariables
     * @return Promise<Array<RestVariable>>
     */
     createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceId: string, restVariables: Array<RestVariable>): Promise<Array<RestVariable>> {
@@ -70,8 +70,8 @@ export class ProcessinstancevariablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId Process instance ID
-        * @param  restVariables restVariables
+        * @param processInstanceId Process instance ID
+        * @param restVariables restVariables
         * @return Promise<Array<RestVariable>>
         */
     createProcessInstanceVariablesUsingPOST(processInstanceId: string, restVariables: Array<RestVariable>): Promise<Array<RestVariable>> {
@@ -112,8 +112,8 @@ export class ProcessinstancevariablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
-        * @param  variableName variableName
+        * @param processInstanceId processInstanceId
+        * @param variableName variableName
         * @return Promise<{}>
         */
     deleteProcessInstanceVariableUsingDELETE(processInstanceId: string, variableName: string): Promise<{}> {
@@ -154,8 +154,8 @@ export class ProcessinstancevariablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
-        * @param  variableName variableName
+        * @param processInstanceId processInstanceId
+        * @param variableName variableName
         * @return Promise<RestVariable>
         */
     getProcessInstanceVariableUsingGET(processInstanceId: string, variableName: string): Promise<RestVariable> {
@@ -196,7 +196,7 @@ export class ProcessinstancevariablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId Process instance ID
+        * @param processInstanceId Process instance ID
         * @return Promise<Array<RestVariable>>
         */
     getProcessInstanceVariablesUsingGET(processInstanceId: string): Promise<Array<RestVariable>> {
@@ -233,9 +233,9 @@ export class ProcessinstancevariablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
-        * @param  variableName variableName
-        * @param  restVariable restVariable
+        * @param processInstanceId processInstanceId
+        * @param variableName variableName
+        * @param restVariable restVariable
         * @return Promise<RestVariable>
         */
     updateProcessInstanceVariableUsingPUT(processInstanceId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {

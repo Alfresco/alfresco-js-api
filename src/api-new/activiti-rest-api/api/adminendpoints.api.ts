@@ -30,7 +30,7 @@ export class AdminendpointsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  createRepresentation createRepresentation
+    * @param createRepresentation createRepresentation
     * @return Promise<EndpointBasicAuthRepresentation>
     */
     createBasicAuthConfigurationUsingPOST(createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
@@ -67,7 +67,7 @@ export class AdminendpointsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  representation representation
+        * @param representation representation
         * @return Promise<EndpointConfigurationRepresentation>
         */
     createEndpointConfigurationUsingPOST(representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {
@@ -104,8 +104,8 @@ export class AdminendpointsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  basicAuthId basicAuthId
-        * @param  tenantId tenantId
+        * @param basicAuthId basicAuthId
+        * @param tenantId tenantId
         * @return Promise<EndpointBasicAuthRepresentation>
         */
     getBasicAuthConfigurationUsingGET(basicAuthId: number, tenantId: number): Promise<EndpointBasicAuthRepresentation> {
@@ -147,7 +147,7 @@ export class AdminendpointsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tenantId tenantId
+        * @param tenantId tenantId
         * @return Promise<Array<EndpointBasicAuthRepresentation>>
         */
     getBasicAuthConfigurationsUsingGET(tenantId: number): Promise<Array<EndpointBasicAuthRepresentation>> {
@@ -185,8 +185,8 @@ export class AdminendpointsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  endpointConfigurationId endpointConfigurationId
-        * @param  tenantId tenantId
+        * @param endpointConfigurationId endpointConfigurationId
+        * @param tenantId tenantId
         * @return Promise<EndpointConfigurationRepresentation>
         */
     getEndpointConfigurationUsingGET1(endpointConfigurationId: number, tenantId: number): Promise<EndpointConfigurationRepresentation> {
@@ -228,7 +228,7 @@ export class AdminendpointsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tenantId tenantId
+        * @param tenantId tenantId
         * @return Promise<Array<EndpointConfigurationRepresentation>>
         */
     getEndpointConfigurationsUsingGET1(tenantId: number): Promise<Array<EndpointConfigurationRepresentation>> {
@@ -266,8 +266,8 @@ export class AdminendpointsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  basicAuthId basicAuthId
-        * @param  tenantId tenantId
+        * @param basicAuthId basicAuthId
+        * @param tenantId tenantId
         * @return Promise<{}>
         */
     removeBasicAuthonfigurationUsingDELETE(basicAuthId: number, tenantId: number): Promise<{}> {
@@ -309,8 +309,8 @@ export class AdminendpointsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  endpointConfigurationId endpointConfigurationId
-        * @param  tenantId tenantId
+        * @param endpointConfigurationId endpointConfigurationId
+        * @param tenantId tenantId
         * @return Promise<{}>
         */
     removeEndpointConfigurationUsingDELETE(endpointConfigurationId: number, tenantId: number): Promise<{}> {
@@ -352,8 +352,8 @@ export class AdminendpointsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  basicAuthId basicAuthId
-        * @param  createRepresentation createRepresentation
+        * @param basicAuthId basicAuthId
+        * @param createRepresentation createRepresentation
         * @return Promise<EndpointBasicAuthRepresentation>
         */
     updateBasicAuthConfigurationUsingPUT(basicAuthId: number, createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
@@ -394,8 +394,8 @@ export class AdminendpointsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  endpointConfigurationId endpointConfigurationId
-        * @param  representation representation
+        * @param endpointConfigurationId endpointConfigurationId
+        * @param representation representation
         * @return Promise<EndpointConfigurationRepresentation>
         */
     updateEndpointConfigurationUsingPUT(endpointConfigurationId: number, representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {

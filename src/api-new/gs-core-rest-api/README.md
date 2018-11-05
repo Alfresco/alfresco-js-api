@@ -3,7 +3,7 @@
 Provides access to the core features of Alfresco Governance Services.
 
 
-- Last Build date: 2018-11-03T00:28:24.306Z
+- Last Build date: 2018-11-05T11:25:35.010Z
 
 
 ## Documentation for API Endpoints

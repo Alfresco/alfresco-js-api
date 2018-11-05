@@ -32,7 +32,7 @@ export class AdmingroupsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  groupId groupId
+    * @param groupId groupId
     * @return Promise<{}>
     */
     activateUsingPOST(groupId: number): Promise<{}> {
@@ -69,7 +69,7 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
+        * @param groupId groupId
         * @return Promise<{}>
         */
     addAllUsersToGroupUsingPOST(groupId: number): Promise<{}> {
@@ -106,8 +106,8 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
-        * @param  addGroupCapabilitiesRepresentation addGroupCapabilitiesRepresentation
+        * @param groupId groupId
+        * @param addGroupCapabilitiesRepresentation addGroupCapabilitiesRepresentation
         * @return Promise<{}>
         */
     addGroupCapabilitiesUsingPOST(groupId: number, addGroupCapabilitiesRepresentation: AddGroupCapabilitiesRepresentation): Promise<{}> {
@@ -148,8 +148,8 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
-        * @param  userId userId
+        * @param groupId groupId
+        * @param userId userId
         * @return Promise<{}>
         */
     addGroupMemberUsingPOST(groupId: number, userId: number): Promise<{}> {
@@ -190,9 +190,9 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
-        * @param  relatedGroupId relatedGroupId
-        * @param  type type
+        * @param groupId groupId
+        * @param relatedGroupId relatedGroupId
+        * @param type type
         * @return Promise<{}>
         */
     addRelatedGroupUsingPOST(groupId: number, relatedGroupId: number, type: string): Promise<{}> {
@@ -238,7 +238,7 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupRepresentation groupRepresentation
+        * @param groupRepresentation groupRepresentation
         * @return Promise<GroupRepresentation>
         */
     createNewGroupUsingPOST(groupRepresentation: GroupRepresentation): Promise<GroupRepresentation> {
@@ -275,8 +275,8 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
-        * @param  groupCapabilityId groupCapabilityId
+        * @param groupId groupId
+        * @param groupCapabilityId groupCapabilityId
         * @return Promise<{}>
         */
     deleteGroupCapabilityUsingDELETE(groupId: number, groupCapabilityId: number): Promise<{}> {
@@ -317,8 +317,8 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
-        * @param  userId userId
+        * @param groupId groupId
+        * @param userId userId
         * @return Promise<{}>
         */
     deleteGroupMemberUsingDELETE(groupId: number, userId: number): Promise<{}> {
@@ -359,7 +359,7 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
+        * @param groupId groupId
         * @return Promise<{}>
         */
     deleteGroupUsingDELETE(groupId: number): Promise<{}> {
@@ -396,8 +396,8 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
-        * @param  relatedGroupId relatedGroupId
+        * @param groupId groupId
+        * @param relatedGroupId relatedGroupId
         * @return Promise<{}>
         */
     deleteRelatedGroupUsingDELETE(groupId: number, relatedGroupId: number): Promise<{}> {
@@ -438,7 +438,7 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
+        * @param groupId groupId
         * @return Promise<Array<string>>
         */
     getCapabilitiesUsingGET(groupId: number): Promise<Array<string>> {
@@ -475,11 +475,11 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
-        * @param Object opts Optional parameters
-        * @param  opts.filter filter
-        * @param  opts.page page
-        * @param  opts.pageSize pageSize
+        * @param groupId groupId
+        * @param opts Optional parameters
+        * @param opts.filter filter
+        * @param opts.page page
+        * @param opts.pageSize pageSize
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */
     getGroupUsersUsingGET(groupId: number, opts: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
@@ -519,10 +519,10 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
-        * @param Object opts Optional parameters
-        * @param  opts.includeAllUsers includeAllUsers
-        * @param  opts.summary summary
+        * @param groupId groupId
+        * @param opts Optional parameters
+        * @param opts.includeAllUsers includeAllUsers
+        * @param opts.summary summary
         * @return Promise<AbstractGroupRepresentation>
         */
     getGroupUsingGET(groupId: number, opts: any): Promise<AbstractGroupRepresentation> {
@@ -561,10 +561,10 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.tenantId tenantId
-        * @param  opts.functional functional
-        * @param  opts.summary summary
+        * @param opts Optional parameters
+        * @param opts.tenantId tenantId
+        * @param opts.functional functional
+        * @param opts.summary summary
         * @return Promise<Array<LightGroupRepresentation>>
         */
     getGroupsUsingGET1(opts: any): Promise<Array<LightGroupRepresentation>> {
@@ -600,7 +600,7 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
+        * @param groupId groupId
         * @return Promise<Array<LightGroupRepresentation>>
         */
     getRelatedGroupsUsingGET(groupId: number): Promise<Array<LightGroupRepresentation>> {
@@ -637,8 +637,8 @@ export class AdmingroupsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  groupId groupId
-        * @param  groupRepresentation groupRepresentation
+        * @param groupId groupId
+        * @param groupRepresentation groupRepresentation
         * @return Promise<GroupRepresentation>
         */
     updateGroupUsingPUT(groupId: number, groupRepresentation: GroupRepresentation): Promise<GroupRepresentation> {

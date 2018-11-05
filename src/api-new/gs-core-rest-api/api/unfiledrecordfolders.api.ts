@@ -129,16 +129,16 @@ JSON
 }
 
     * 
-    * @param  unfiledRecordFolderId The identifier of an unfiled record folder.
-    * @param  nodeBodyCreate The node information to create.
-    * @param Object opts Optional parameters
-    * @param  opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+    * @param unfiledRecordFolderId The identifier of an unfiled record folder.
+    * @param nodeBodyCreate The node information to create.
+    * @param opts Optional parameters
+    * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
 
-    * @param  opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+    * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
 
-    * @param  opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -152,7 +152,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<UnfiledRecordFolderAssociationPaging>
     */
-    createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts: any): Promise<UnfiledRecordFolderAssociationPaging> {
+    createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts: any): Promise<UnfiledRecordFolderAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = nodeBodyCreate;
 
@@ -194,10 +194,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * Deletes the unfiled record folder **unfiledRecordFolderId**.
     
         * 
-        * @param  unfiledRecordFolderId The identifier of an unfiled record folder.
+        * @param unfiledRecordFolderId The identifier of an unfiled record folder.
         * @return Promise<{}>
         */
-    deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<{}> {
+    deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -236,15 +236,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter (include=allowableOperations) to return additional information.
     
         * 
-        * @param  unfiledRecordFolderId The identifier of an unfiled record folder.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+        * @param unfiledRecordFolderId The identifier of an unfiled record folder.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
     
-        * @param  opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+        * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -258,7 +258,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<UnfiledRecordFolderEntry>
         */
-    getUnfiledRecordFolder(unfiledRecordFolderId: string, opts: any): Promise<UnfiledRecordFolderEntry> {
+    getUnfiledRecordFolder(unfiledRecordFolderId: string, opts: any): Promise<UnfiledRecordFolderEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -300,11 +300,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter (include=allowableOperations) to return additional information.
     
         * 
-        * @param  unfiledRecordFolderId The identifier of an unfiled record folder.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param  opts.maxItems The maximum number of items to return in the list.
-        * @param  opts.where Optionally filter the list. Here are some examples:
+        * @param unfiledRecordFolderId The identifier of an unfiled record folder.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.maxItems The maximum number of items to return in the list.
+        * @param opts.where Optionally filter the list. Here are some examples:
     
     *   where=(isRecord=true)
     
@@ -312,17 +312,17 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     *   where=(nodeType='cm:content INCLUDESUBTYPES')
     
-        * @param  opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * aspectNames
     * association
     * path
     * properties
     
-        * @param  opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+        * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
     
-        * @param  opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
-        * @param  opts.fields A list of field names.
+        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -336,7 +336,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<UnfiledRecordFolderAssociationPaging>
         */
-    listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts: any): Promise<UnfiledRecordFolderAssociationPaging> {
+    listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts: any): Promise<UnfiledRecordFolderAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -396,15 +396,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
     
         * 
-        * @param  unfiledRecordFolderId The identifier of an unfiled record folder.
-        * @param  unfiledRecordFolderBodyUpdate The record folder information to update.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+        * @param unfiledRecordFolderId The identifier of an unfiled record folder.
+        * @param unfiledRecordFolderBodyUpdate The record folder information to update.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
     
-        * @param  opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
-        * @param  opts.fields A list of field names.
+        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -418,7 +418,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<UnfiledRecordFolderEntry>
         */
-    updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts: any): Promise<UnfiledRecordFolderEntry> {
+    updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts: any): Promise<UnfiledRecordFolderEntry | ModelError> {
         opts = opts || {};
         let postBody = unfiledRecordFolderBodyUpdate;
 

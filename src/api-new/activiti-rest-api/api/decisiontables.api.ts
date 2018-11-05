@@ -30,7 +30,7 @@ export class DecisiontablesApi extends BaseApi {
     * 
     * 
     * 
-    * @param  decisionTableId decisionTableId
+    * @param decisionTableId decisionTableId
     * @return Promise<JsonNode>
     */
     getDecisionTableEditorJsonUsingGET(decisionTableId: number): Promise<JsonNode> {
@@ -67,7 +67,7 @@ export class DecisiontablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  decisionTableId decisionTableId
+        * @param decisionTableId decisionTableId
         * @return Promise<RuntimeDecisionTableRepresentation>
         */
     getDecisionTableUsingGET(decisionTableId: number): Promise<RuntimeDecisionTableRepresentation> {
@@ -104,15 +104,15 @@ export class DecisiontablesApi extends BaseApi {
         * 
         * 
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.nameLike nameLike
-        * @param  opts.keyLike keyLike
-        * @param  opts.tenantIdLike tenantIdLike
-        * @param  opts.deploymentId deploymentId
-        * @param  opts.sort sort
-        * @param  opts.order order
-        * @param  opts.start start
-        * @param  opts.size size
+        * @param opts Optional parameters
+        * @param opts.nameLike nameLike
+        * @param opts.keyLike keyLike
+        * @param opts.tenantIdLike tenantIdLike
+        * @param opts.deploymentId deploymentId
+        * @param opts.sort sort
+        * @param opts.order order
+        * @param opts.start start
+        * @param opts.size size
         * @return Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation>
         */
     getDecisionTablesUsingGET(opts: any): Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation> {

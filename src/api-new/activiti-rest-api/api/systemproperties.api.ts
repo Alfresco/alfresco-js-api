@@ -30,7 +30,7 @@ export class SystempropertiesApi extends BaseApi {
     * 
     * 
     * 
-    * @param  tenantId tenantId
+    * @param tenantId tenantId
     * @return Promise<GlobalDateFormatRepresentation>
     */
     getGlobalDateFormatUsingGET(tenantId: number): Promise<GlobalDateFormatRepresentation> {
@@ -67,7 +67,7 @@ export class SystempropertiesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tenantId tenantId
+        * @param tenantId tenantId
         * @return Promise<PasswordValidationConstraints>
         */
     getPasswordValidationConstraintsUsingGET(tenantId: number): Promise<PasswordValidationConstraints> {
@@ -136,7 +136,7 @@ export class SystempropertiesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  tenantId tenantId
+        * @param tenantId tenantId
         * @return Promise<boolean>
         */
     involvedUsersCanEditFormsUsingGET(tenantId: number): Promise<boolean> {

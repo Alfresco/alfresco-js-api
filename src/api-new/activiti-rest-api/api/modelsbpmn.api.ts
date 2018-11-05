@@ -27,8 +27,8 @@ export class ModelsbpmnApi extends BaseApi {
     * 
     * 
     * 
-    * @param  processModelId processModelId
-    * @param  processModelHistoryId processModelHistoryId
+    * @param processModelId processModelId
+    * @param processModelHistoryId processModelHistoryId
     * @return Promise<{}>
     */
     getHistoricProcessModelBpmn20XmlUsingGET(processModelId: number, processModelHistoryId: number): Promise<{}> {
@@ -69,7 +69,7 @@ export class ModelsbpmnApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processModelId processModelId
+        * @param processModelId processModelId
         * @return Promise<{}>
         */
     getProcessModelBpmn20XmlUsingGET(processModelId: number): Promise<{}> {

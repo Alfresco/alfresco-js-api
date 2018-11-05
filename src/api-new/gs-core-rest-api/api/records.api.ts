@@ -32,15 +32,15 @@ export class RecordsApi extends BaseApi {
     * Completes the record **recordId**.
 
     * 
-    * @param  recordId The identifier of a record.
-    * @param Object opts Optional parameters
-    * @param  opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
+    * @param recordId The identifier of a record.
+    * @param opts Optional parameters
+    * @param opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
 
-    * @param  opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -54,7 +54,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordEntry>
     */
-    completeRecord(recordId: string, opts: any): Promise<RecordEntry> {
+    completeRecord(recordId: string, opts: any): Promise<RecordEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -91,10 +91,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * Deletes the record **recordId**. Deleted file plan components cannot be recovered, they are deleted permanently.
     
         * 
-        * @param  recordId The identifier of a record.
+        * @param recordId The identifier of a record.
         * @return Promise<{}>
         */
-    deleteRecord(recordId: string): Promise<{}> {
+    deleteRecord(recordId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -135,16 +135,16 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter (include=allowableOperations) to return additional information.
     
         * 
-        * @param  recordId The identifier of a record.
-        * @param  nodeBodyFile The target record folder id
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
+        * @param recordId The identifier of a record.
+        * @param nodeBodyFile The target record folder id
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * content
     * isCompleted
     * path
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -158,7 +158,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<RecordEntry>
         */
-    fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts: any): Promise<RecordEntry> {
+    fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts: any): Promise<RecordEntry | ModelError> {
         opts = opts || {};
         let postBody = nodeBodyFile;
 
@@ -203,15 +203,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     You can use the **include** parameter (include=allowableOperations) to return additional information.
     
         * 
-        * @param  recordId The identifier of a record.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
+        * @param recordId The identifier of a record.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * content
     * isCompleted
     * path
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -225,7 +225,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<RecordEntry>
         */
-    getRecord(recordId: string, opts: any): Promise<RecordEntry> {
+    getRecord(recordId: string, opts: any): Promise<RecordEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -263,9 +263,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     Gets the content of the record with identifier **recordId**.
     
         * 
-        * @param  recordId The identifier of a record.
-        * @param Object opts Optional parameters
-        * @param  opts.attachment **true** enables a web browser to download the file as an attachment.
+        * @param recordId The identifier of a record.
+        * @param opts Optional parameters
+        * @param opts.attachment **true** enables a web browser to download the file as an attachment.
     **false** means a web browser may preview the file in a new tab or window, but not
     download the file.
     
@@ -275,12 +275,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     If the content type is not supported for preview, then a value of **false**  is ignored, and
     the attachment will be returned in the response.
      (default to true)
-        * @param  opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
+        * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
     
         * @return Promise<{}>
         */
-    getRecordContent(recordId: string, opts: any): Promise<{}> {
+    getRecordContent(recordId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -334,16 +334,16 @@ parameter are returned in addition to those specified in the **fields** paramete
     **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
     
         * 
-        * @param  recordId The identifier of a record.
-        * @param  recordBodyUpdate The record information to update.
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
+        * @param recordId The identifier of a record.
+        * @param recordBodyUpdate The record information to update.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * content
     * isCompleted
     * path
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -357,7 +357,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<RecordEntry>
         */
-    updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts: any): Promise<RecordEntry> {
+    updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts: any): Promise<RecordEntry | ModelError> {
         opts = opts || {};
         let postBody = recordBodyUpdate;
 

@@ -31,8 +31,8 @@ export class TaskactionsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  taskId taskId
-    * @param  userIdentifier userIdentifier
+    * @param taskId taskId
+    * @param userIdentifier userIdentifier
     * @return Promise<TaskRepresentation>
     */
     assignTaskUsingPUT(taskId: string, userIdentifier: AssigneeIdentifierRepresentation): Promise<TaskRepresentation> {
@@ -73,8 +73,8 @@ export class TaskactionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  formIdentifier formIdentifier
+        * @param taskId taskId
+        * @param formIdentifier formIdentifier
         * @return Promise<{}>
         */
     attachFormUsingPUT(taskId: string, formIdentifier: FormIdentifierRepresentation): Promise<{}> {
@@ -115,7 +115,7 @@ export class TaskactionsApi extends BaseApi {
         * 
         * To claim a task (in case the task is assigned to a group)
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<{}>
         */
     claimTaskUsingPUT(taskId: string): Promise<{}> {
@@ -152,7 +152,7 @@ export class TaskactionsApi extends BaseApi {
         * 
         * Use this endpoint to complete a standalone task or task without a form
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<{}>
         */
     completeTaskUsingPUT(taskId: string): Promise<{}> {
@@ -189,8 +189,8 @@ export class TaskactionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  userIdentifier userIdentifier
+        * @param taskId taskId
+        * @param userIdentifier userIdentifier
         * @return Promise<{}>
         */
     delegateTaskUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<{}> {
@@ -231,8 +231,8 @@ export class TaskactionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  groupId groupId
+        * @param taskId taskId
+        * @param groupId groupId
         * @return Promise<{}>
         */
     involveGroupUsingPOST(taskId: string, groupId: string): Promise<{}> {
@@ -273,8 +273,8 @@ export class TaskactionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  userIdentifier userIdentifier
+        * @param taskId taskId
+        * @param userIdentifier userIdentifier
         * @return Promise<{}>
         */
     involveUserUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<{}> {
@@ -315,7 +315,7 @@ export class TaskactionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<{}>
         */
     removeFormUsingDELETE(taskId: string): Promise<{}> {
@@ -352,8 +352,8 @@ export class TaskactionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  groupId groupId
+        * @param taskId taskId
+        * @param groupId groupId
         * @return Promise<{}>
         */
     removeInvolvedUserUsingDELETE(taskId: string, groupId: string): Promise<{}> {
@@ -394,8 +394,8 @@ export class TaskactionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  userIdentifier userIdentifier
+        * @param taskId taskId
+        * @param userIdentifier userIdentifier
         * @return Promise<{}>
         */
     removeInvolvedUserUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<{}> {
@@ -436,7 +436,7 @@ export class TaskactionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<{}>
         */
     resolveTaskUsingPUT(taskId: string): Promise<{}> {
@@ -473,7 +473,7 @@ export class TaskactionsApi extends BaseApi {
         * 
         * To unclaim a task (in case the task was assigned to a group)
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<{}>
         */
     unclaimTaskUsingPUT(taskId: string): Promise<{}> {

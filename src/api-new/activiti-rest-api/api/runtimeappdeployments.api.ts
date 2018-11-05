@@ -29,7 +29,7 @@ export class RuntimeappdeploymentsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  appDeploymentId appDeploymentId
+    * @param appDeploymentId appDeploymentId
     * @return Promise<{}>
     */
     deleteAppDeploymentUsingDELETE(appDeploymentId: number): Promise<{}> {
@@ -66,7 +66,7 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  deploymentId deploymentId
+        * @param deploymentId deploymentId
         * @return Promise<{}>
         */
     exportAppDefinitionUsingGET1(deploymentId: string): Promise<{}> {
@@ -103,14 +103,14 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         * 
         * 
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.nameLike nameLike
-        * @param  opts.tenantId tenantId
-        * @param  opts.latest latest
-        * @param  opts.start start
-        * @param  opts.sort sort
-        * @param  opts.order order
-        * @param  opts.size size
+        * @param opts Optional parameters
+        * @param opts.nameLike nameLike
+        * @param opts.tenantId tenantId
+        * @param opts.latest latest
+        * @param opts.start start
+        * @param opts.sort sort
+        * @param opts.order order
+        * @param opts.size size
         * @return Promise<ResultListDataRepresentationAppDeploymentRepresentation>
         */
     getAppDefinitionsUsingGET1(opts: any): Promise<ResultListDataRepresentationAppDeploymentRepresentation> {
@@ -150,7 +150,7 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  appDeploymentId appDeploymentId
+        * @param appDeploymentId appDeploymentId
         * @return Promise<AppDeploymentRepresentation>
         */
     getAppDeploymentUsingGET(appDeploymentId: number): Promise<AppDeploymentRepresentation> {
@@ -187,9 +187,9 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         * 
         * Either a deploymentId or a dmnDeploymentId must be provided
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.deploymentId deploymentId
-        * @param  opts.dmnDeploymentId dmnDeploymentId
+        * @param opts Optional parameters
+        * @param opts.deploymentId deploymentId
+        * @param opts.dmnDeploymentId dmnDeploymentId
         * @return Promise<AppDeploymentRepresentation>
         */
     getRuntimeAppDeploymentByDeploymentUsingGET(opts: any): Promise<AppDeploymentRepresentation> {

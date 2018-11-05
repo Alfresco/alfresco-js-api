@@ -37,11 +37,11 @@ export class ClassificationguidesApi extends BaseApi {
     * 
     * Combines instructions from the given topics and the user defined instruction, if any.
     * 
-    * @param Object opts Optional parameters
-    * @param  opts.instructions Instructions
+    * @param opts Optional parameters
+    * @param opts.instructions Instructions
     * @return Promise<InstructionEntry>
     */
-    combinedInstructions(opts: any): Promise<InstructionEntry> {
+    combinedInstructions(opts: any): Promise<InstructionEntry | ModelError> {
         opts = opts || {};
         let postBody = opts['instructions'];
 
@@ -71,10 +71,10 @@ export class ClassificationguidesApi extends BaseApi {
         * 
         * Creates a new classification guide.
         * 
-        * @param  classificationGuide Classification guide
+        * @param classificationGuide Classification guide
         * @return Promise<ClassificationGuideEntry>
         */
-    createClassificationGuide(classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry> {
+    createClassificationGuide(classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry | ModelError> {
 
         let postBody = classificationGuide;
 
@@ -108,10 +108,10 @@ export class ClassificationguidesApi extends BaseApi {
         * 
         * Creates a new subtopic of a topic.
         * 
-        * @param  topicId The identifier for the topic
-        * @param  topic Subtopic
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the topic. The following optional fields can be requested:
+        * @param topicId The identifier for the topic
+        * @param topic Subtopic
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
     * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
     * instruction - Contains details of any instruction in the topic.
     * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -119,7 +119,7 @@ export class ClassificationguidesApi extends BaseApi {
     
         * @return Promise<TopicEntry>
         */
-    createSubtopic(topicId: string, topic: TopicBody, opts: any): Promise<TopicEntry> {
+    createSubtopic(topicId: string, topic: TopicBody, opts: any): Promise<TopicEntry | ModelError> {
         opts = opts || {};
         let postBody = topic;
 
@@ -158,10 +158,10 @@ export class ClassificationguidesApi extends BaseApi {
         * 
         * Creates a new topic.
         * 
-        * @param  classificationGuideId The identifier for the classification guide
-        * @param  topic Topic
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the topic. The following optional fields can be requested:
+        * @param classificationGuideId The identifier for the classification guide
+        * @param topic Topic
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
     * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
     * instruction - Contains details of any instruction in the topic.
     * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -169,7 +169,7 @@ export class ClassificationguidesApi extends BaseApi {
     
         * @return Promise<TopicEntry>
         */
-    createTopic(classificationGuideId: string, topic: TopicBody, opts: any): Promise<TopicEntry> {
+    createTopic(classificationGuideId: string, topic: TopicBody, opts: any): Promise<TopicEntry | ModelError> {
         opts = opts || {};
         let postBody = topic;
 
@@ -208,10 +208,10 @@ export class ClassificationguidesApi extends BaseApi {
         * 
         * Deletes the classification guide with id **classificationGuideId**, including any topics and instructions.
         * 
-        * @param  classificationGuideId The identifier for the classification guide
+        * @param classificationGuideId The identifier for the classification guide
         * @return Promise<{}>
         */
-    deleteClassificationGuide(classificationGuideId: string): Promise<{}> {
+    deleteClassificationGuide(classificationGuideId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -245,10 +245,10 @@ export class ClassificationguidesApi extends BaseApi {
         * 
         * Deletes the topic with id  **topicId**, including any subtopics and instructions.
         * 
-        * @param  topicId The identifier for the topic
+        * @param topicId The identifier for the topic
         * @return Promise<{}>
         */
-    deleteTopic(topicId: string): Promise<{}> {
+    deleteTopic(topicId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -282,13 +282,13 @@ export class ClassificationguidesApi extends BaseApi {
         * 
         * Gets all classification guides.
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the guide. The following optional fields can be requested:
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the guide. The following optional fields can be requested:
     * hasTopics - A flag indicating whether the guide already contains any topics.
     
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param  opts.maxItems The maximum number of items to return in the list.
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.maxItems The maximum number of items to return in the list.
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -296,12 +296,12 @@ export class ClassificationguidesApi extends BaseApi {
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:
+        * @param opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:
     * enabled - e.g. (enabled = true OR enabled = false)
     
         * @return Promise<ClassificationGuidePaging>
         */
-    listClassificationGuides(opts: any): Promise<ClassificationGuidePaging> {
+    listClassificationGuides(opts: any): Promise<ClassificationGuidePaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -336,17 +336,17 @@ export class ClassificationguidesApi extends BaseApi {
         * 
         * Gets all subtopics of a topic.
         * 
-        * @param  topicId The identifier for the topic
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the topic. The following optional fields can be requested:
+        * @param topicId The identifier for the topic
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
     * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
     * instruction - Contains details of any instruction in the topic.
     * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
     * classificationGuide - The classification guide this topic is in.
     
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param  opts.maxItems The maximum number of items to return in the list.
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.maxItems The maximum number of items to return in the list.
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -354,14 +354,14 @@ export class ClassificationguidesApi extends BaseApi {
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:
+        * @param opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:
     * hasInstruction
     * hasSubtopics
     
-        * @param  opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
+        * @param opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
         * @return Promise<SubtopicPaging>
         */
-    listSubtopics(topicId: string, opts: any): Promise<SubtopicPaging> {
+    listSubtopics(topicId: string, opts: any): Promise<SubtopicPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -401,17 +401,17 @@ export class ClassificationguidesApi extends BaseApi {
         * 
         * Gets all topics.
         * 
-        * @param  classificationGuideId The identifier for the classification guide
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the topic. The following optional fields can be requested:
+        * @param classificationGuideId The identifier for the classification guide
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
     * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
     * instruction - Contains details of any instruction in the topic.
     * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
     * classificationGuide - The classification guide this topic is in.
     
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param  opts.maxItems The maximum number of items to return in the list.
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.maxItems The maximum number of items to return in the list.
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -419,14 +419,14 @@ export class ClassificationguidesApi extends BaseApi {
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction=true and hasSubtopics=false). Fields to filter on:
+        * @param opts.where A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction=true and hasSubtopics=false). Fields to filter on:
     * hasInstruction
     * hasSubtopics
     
-        * @param  opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
+        * @param opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
         * @return Promise<TopicPaging>
         */
-    listTopics(classificationGuideId: string, opts: any): Promise<TopicPaging> {
+    listTopics(classificationGuideId: string, opts: any): Promise<TopicPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -466,10 +466,10 @@ export class ClassificationguidesApi extends BaseApi {
         * 
         * Gets the classification guide with id **classificationGuideId**.
         * 
-        * @param  classificationGuideId The identifier for the classification guide
+        * @param classificationGuideId The identifier for the classification guide
         * @return Promise<ClassificationGuideEntry>
         */
-    showClassificationGuideById(classificationGuideId: string): Promise<ClassificationGuideEntry> {
+    showClassificationGuideById(classificationGuideId: string): Promise<ClassificationGuideEntry | ModelError> {
 
         let postBody = null;
 
@@ -503,9 +503,9 @@ export class ClassificationguidesApi extends BaseApi {
         * 
         * Gets the topic with id **topicId**.
         * 
-        * @param  topicId The identifier for the topic
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the topic. The following optional fields can be requested:
+        * @param topicId The identifier for the topic
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
     * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
     * instruction - Contains details of any instruction in the topic.
     * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -513,7 +513,7 @@ export class ClassificationguidesApi extends BaseApi {
     
         * @return Promise<TopicEntry>
         */
-    showTopicById(topicId: string, opts: any): Promise<TopicEntry> {
+    showTopicById(topicId: string, opts: any): Promise<TopicEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -548,11 +548,11 @@ export class ClassificationguidesApi extends BaseApi {
         * 
         * Updates the classification guide with id **classificationGuideId**. For example, you can rename a classification guide.
         * 
-        * @param  classificationGuideId The identifier for the classification guide
-        * @param  classificationGuide Classification guide
+        * @param classificationGuideId The identifier for the classification guide
+        * @param classificationGuide Classification guide
         * @return Promise<ClassificationGuideEntry>
         */
-    updateClassificationGuide(classificationGuideId: string, classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry> {
+    updateClassificationGuide(classificationGuideId: string, classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry | ModelError> {
 
         let postBody = classificationGuide;
 
@@ -593,10 +593,10 @@ export class ClassificationguidesApi extends BaseApi {
     Use this to rename a topic or to add, edit, or remove the instruction associated with it.
     
         * 
-        * @param  topicId The identifier for the topic
-        * @param  topic Topic
-        * @param Object opts Optional parameters
-        * @param  opts.include Returns additional information about the topic. The following optional fields can be requested:
+        * @param topicId The identifier for the topic
+        * @param topic Topic
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
     * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
     * instruction - Contains details of any instruction in the topic.
     * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -604,7 +604,7 @@ export class ClassificationguidesApi extends BaseApi {
     
         * @return Promise<TopicEntry>
         */
-    updateTopic(topicId: string, topic: TopicBody, opts: any): Promise<TopicEntry> {
+    updateTopic(topicId: string, topic: TopicBody, opts: any): Promise<TopicEntry | ModelError> {
         opts = opts || {};
         let postBody = topic;
 

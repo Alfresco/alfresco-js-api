@@ -30,7 +30,7 @@ export class RuntimeappdefinitionsApi extends BaseApi {
     * 
     * Deploying an app allows the user to see it on his/her landing page. Apps must be published before they can be deployed.
     * 
-    * @param  saveObject saveObject
+    * @param saveObject saveObject
     * @return Promise<{}>
     */
     deployAppDefinitionsUsingPOST(saveObject: RuntimeAppDefinitionSaveRepresentation): Promise<{}> {
@@ -67,7 +67,7 @@ export class RuntimeappdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  appDefinitionId appDefinitionId
+        * @param appDefinitionId appDefinitionId
         * @return Promise<AppDefinitionRepresentation>
         */
     getAppDefinitionUsingGET1(appDefinitionId: number): Promise<AppDefinitionRepresentation> {

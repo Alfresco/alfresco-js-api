@@ -50,21 +50,21 @@ You can sort the result list using the **orderBy** parameter. You can specify on
 * createdAt
 
     * 
-    * @param  term The term to search for.
-    * @param Object opts Optional parameters
-    * @param  opts.rootNodeId The id of the node to start the search from.
+    * @param term The term to search for.
+    * @param opts Optional parameters
+    * @param opts.rootNodeId The id of the node to start the search from.
 
 Supports the aliases -my-, -root- and -shared-.
 
-    * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
  (default to 0)
-    * @param  opts.maxItems The maximum number of items to return in the list.
+    * @param opts.maxItems The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  (default to 100)
-    * @param  opts.nodeType Restrict the returned results to only those of the given node type and its sub-types
+    * @param opts.nodeType Restrict the returned results to only those of the given node type and its sub-types
 
-    * @param  opts.include Returns additional information about the node. The following optional fields can be requested:
+    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -73,7 +73,7 @@ If not supplied then the default value is 100.
 * path
 * properties
 
-    * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+    * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -81,7 +81,7 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-    * @param  opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -95,7 +95,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodePaging>
     */
-    findNodes(term: string, opts: any): Promise<NodePaging> {
+    findNodes(term: string, opts: any): Promise<NodePaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -151,16 +151,16 @@ parameter are returned in addition to those specified in the **fields** paramete
     * lastName
     
         * 
-        * @param  term The term to search for.
+        * @param term The term to search for.
     
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -172,7 +172,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
     
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -182,7 +182,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<PersonPaging>
         */
-    findPeople(term: string, opts: any): Promise<PersonPaging> {
+    findPeople(term: string, opts: any): Promise<PersonPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -236,15 +236,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     * description
     
         * 
-        * @param  term The term to search for.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param term The term to search for.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -252,7 +252,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -266,7 +266,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     
         * @return Promise<SitePaging>
         */
-    findSites(term: string, opts: any): Promise<SitePaging> {
+    findSites(term: string, opts: any): Promise<SitePaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 

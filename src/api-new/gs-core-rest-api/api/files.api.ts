@@ -29,16 +29,16 @@ export class FilesApi extends BaseApi {
     * 
     * Declares the file **fileId** in the unfiled records container. The original file is moved to the Records Management site and a secondary parent association is created in the file's original site.
     * 
-    * @param  fileId The identifier of a non-record file.
-    * @param Object opts Optional parameters
-    * @param  opts.hideRecord Flag to indicate whether the record should be hidden from the current parent folder. (default to false)
-    * @param  opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
+    * @param fileId The identifier of a non-record file.
+    * @param opts Optional parameters
+    * @param opts.hideRecord Flag to indicate whether the record should be hidden from the current parent folder. (default to false)
+    * @param opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
 
-    * @param  opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -52,7 +52,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordEntry>
     */
-    declareRecord(fileId: string, opts: any): Promise<RecordEntry> {
+    declareRecord(fileId: string, opts: any): Promise<RecordEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 

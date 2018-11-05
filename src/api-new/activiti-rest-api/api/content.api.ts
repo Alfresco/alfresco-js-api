@@ -29,10 +29,10 @@ export class ContentApi extends BaseApi {
     * 
     * 
     * 
-    * @param  processInstanceId processInstanceId
-    * @param  relatedContent relatedContent
-    * @param Object opts Optional parameters
-    * @param  opts.isRelatedContent isRelatedContent
+    * @param processInstanceId processInstanceId
+    * @param relatedContent relatedContent
+    * @param opts Optional parameters
+    * @param opts.isRelatedContent isRelatedContent
     * @return Promise<RelatedContentRepresentation>
     */
     createRelatedContentOnProcessInstanceUsingPOST(processInstanceId: string, relatedContent: RelatedContentRepresentation, opts: any): Promise<RelatedContentRepresentation> {
@@ -74,10 +74,10 @@ export class ContentApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
-        * @param  file file
-        * @param Object opts Optional parameters
-        * @param  opts.isRelatedContent isRelatedContent
+        * @param processInstanceId processInstanceId
+        * @param file file
+        * @param opts Optional parameters
+        * @param opts.isRelatedContent isRelatedContent
         * @return Promise<RelatedContentRepresentation>
         */
     createRelatedContentOnProcessInstanceUsingPOST1(processInstanceId: string, file: Blob, opts: any): Promise<RelatedContentRepresentation> {
@@ -120,10 +120,10 @@ export class ContentApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  relatedContent relatedContent
-        * @param Object opts Optional parameters
-        * @param  opts.isRelatedContent isRelatedContent
+        * @param taskId taskId
+        * @param relatedContent relatedContent
+        * @param opts Optional parameters
+        * @param opts.isRelatedContent isRelatedContent
         * @return Promise<RelatedContentRepresentation>
         */
     createRelatedContentOnTaskUsingPOST(taskId: string, relatedContent: RelatedContentRepresentation, opts: any): Promise<RelatedContentRepresentation> {
@@ -165,10 +165,10 @@ export class ContentApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  file file
-        * @param Object opts Optional parameters
-        * @param  opts.isRelatedContent isRelatedContent
+        * @param taskId taskId
+        * @param file file
+        * @param opts Optional parameters
+        * @param opts.isRelatedContent isRelatedContent
         * @return Promise<RelatedContentRepresentation>
         */
     createRelatedContentOnTaskUsingPOST1(taskId: string, file: Blob, opts: any): Promise<RelatedContentRepresentation> {
@@ -211,7 +211,7 @@ export class ContentApi extends BaseApi {
         * 
         * 
         * 
-        * @param  file file
+        * @param file file
         * @return Promise<RelatedContentRepresentation>
         */
     createTemporaryRawRelatedContentUsingPOST(file: Blob): Promise<RelatedContentRepresentation> {
@@ -249,7 +249,7 @@ export class ContentApi extends BaseApi {
         * 
         * 
         * 
-        * @param  relatedContent relatedContent
+        * @param relatedContent relatedContent
         * @return Promise<RelatedContentRepresentation>
         */
     createTemporaryRelatedContentUsingPOST(relatedContent: RelatedContentRepresentation): Promise<RelatedContentRepresentation> {
@@ -286,7 +286,7 @@ export class ContentApi extends BaseApi {
         * 
         * 
         * 
-        * @param  contentId contentId
+        * @param contentId contentId
         * @return Promise<{}>
         */
     deleteContentUsingDELETE(contentId: number): Promise<{}> {
@@ -323,7 +323,7 @@ export class ContentApi extends BaseApi {
         * 
         * 
         * 
-        * @param  contentId contentId
+        * @param contentId contentId
         * @return Promise<RelatedContentRepresentation>
         */
     getContentUsingGET(contentId: number): Promise<RelatedContentRepresentation> {
@@ -360,8 +360,8 @@ export class ContentApi extends BaseApi {
         * 
         * 
         * 
-        * @param  contentId contentId
-        * @param  renditionType renditionType
+        * @param contentId contentId
+        * @param renditionType renditionType
         * @return Promise<{}>
         */
     getRawContentUsingGET(contentId: number, renditionType: string): Promise<{}> {
@@ -402,7 +402,7 @@ export class ContentApi extends BaseApi {
         * 
         * 
         * 
-        * @param  contentId contentId
+        * @param contentId contentId
         * @return Promise<{}>
         */
     getRawContentUsingGET1(contentId: number): Promise<{}> {
@@ -439,9 +439,9 @@ export class ContentApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
-        * @param Object opts Optional parameters
-        * @param  opts.isRelatedContent isRelatedContent
+        * @param processInstanceId processInstanceId
+        * @param opts Optional parameters
+        * @param opts.isRelatedContent isRelatedContent
         * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
         */
     getRelatedContentForProcessInstanceUsingGET(processInstanceId: string, opts: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
@@ -479,9 +479,9 @@ export class ContentApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param Object opts Optional parameters
-        * @param  opts.isRelatedContent isRelatedContent
+        * @param taskId taskId
+        * @param opts Optional parameters
+        * @param opts.isRelatedContent isRelatedContent
         * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
         */
     getRelatedContentForTaskUsingGET(taskId: string, opts: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {

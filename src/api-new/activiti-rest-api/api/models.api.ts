@@ -31,7 +31,7 @@ export class ModelsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  modelRepresentation modelRepresentation
+    * @param modelRepresentation modelRepresentation
     * @return Promise<ModelRepresentation>
     */
     createModelUsingPOST(modelRepresentation: ModelRepresentation): Promise<ModelRepresentation> {
@@ -68,10 +68,10 @@ export class ModelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  modelId modelId
-        * @param Object opts Optional parameters
-        * @param  opts.cascade cascade
-        * @param  opts.deleteRuntimeApp deleteRuntimeApp
+        * @param modelId modelId
+        * @param opts Optional parameters
+        * @param opts.cascade cascade
+        * @param opts.deleteRuntimeApp deleteRuntimeApp
         * @return Promise<{}>
         */
     deleteModelUsingDELETE(modelId: number, opts: any): Promise<{}> {
@@ -110,8 +110,8 @@ export class ModelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  modelId modelId
-        * @param  modelRepresentation modelRepresentation
+        * @param modelId modelId
+        * @param modelRepresentation modelRepresentation
         * @return Promise<ModelRepresentation>
         */
     duplicateModelUsingPOST(modelId: number, modelRepresentation: ModelRepresentation): Promise<ModelRepresentation> {
@@ -152,7 +152,7 @@ export class ModelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  modelId modelId
+        * @param modelId modelId
         * @return Promise<ObjectNode>
         */
     getModelJSONUsingGET(modelId: number): Promise<ObjectNode> {
@@ -189,7 +189,7 @@ export class ModelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  modelId modelId
+        * @param modelId modelId
         * @return Promise<Array<string>>
         */
     getModelThumbnailUsingGET(modelId: number): Promise<Array<string>> {
@@ -226,9 +226,9 @@ export class ModelsApi extends BaseApi {
         * 
         * Models act as containers for process, form, decision table and app definitions
         * 
-        * @param  modelId modelId
-        * @param Object opts Optional parameters
-        * @param  opts.includePermissions includePermissions
+        * @param modelId modelId
+        * @param opts Optional parameters
+        * @param opts.includePermissions includePermissions
         * @return Promise<ModelRepresentation>
         */
     getModelUsingGET(modelId: number, opts: any): Promise<ModelRepresentation> {
@@ -298,11 +298,11 @@ export class ModelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.filter filter
-        * @param  opts.sort sort
-        * @param  opts.modelType modelType
-        * @param  opts.referenceId referenceId
+        * @param opts Optional parameters
+        * @param opts.filter filter
+        * @param opts.sort sort
+        * @param opts.modelType modelType
+        * @param opts.referenceId referenceId
         * @return Promise<ResultListDataRepresentationModelRepresentation>
         */
     getModelsUsingGET(opts: any): Promise<ResultListDataRepresentationModelRepresentation> {
@@ -339,8 +339,8 @@ export class ModelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  modelId modelId
-        * @param  file file
+        * @param modelId modelId
+        * @param file file
         * @return Promise<ModelRepresentation>
         */
     importNewVersionUsingPOST(modelId: number, file: Blob): Promise<ModelRepresentation> {
@@ -382,7 +382,7 @@ export class ModelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  file file
+        * @param file file
         * @return Promise<ModelRepresentation>
         */
     importProcessModelUsingPOST(file: Blob): Promise<ModelRepresentation> {
@@ -420,8 +420,8 @@ export class ModelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  modelId modelId
-        * @param  values values
+        * @param modelId modelId
+        * @param values values
         * @return Promise<ModelRepresentation>
         */
     saveModelUsingPOST(modelId: number, values: any): Promise<ModelRepresentation> {
@@ -462,8 +462,8 @@ export class ModelsApi extends BaseApi {
         * 
         * This method allows you to update the metadata of a model. In order to update the content of the model you will need to call the specific endpoint for that model type.
         * 
-        * @param  modelId modelId
-        * @param  updatedModel updatedModel
+        * @param modelId modelId
+        * @param updatedModel updatedModel
         * @return Promise<ModelRepresentation>
         */
     updateModelUsingPUT(modelId: number, updatedModel: ModelRepresentation): Promise<ModelRepresentation> {
@@ -504,9 +504,9 @@ export class ModelsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  modelId modelId
-        * @param Object opts Optional parameters
-        * @param  opts.values values
+        * @param modelId modelId
+        * @param opts Optional parameters
+        * @param opts.values values
         * @return Promise<Array<ValidationErrorRepresentation>>
         */
     validateModelUsingPOST(modelId: number, opts: any): Promise<Array<ValidationErrorRepresentation>> {

@@ -33,8 +33,8 @@ export class ProcessdefinitionsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  processDefinitionId processDefinitionId
-    * @param  identityLinkRepresentation identityLinkRepresentation
+    * @param processDefinitionId processDefinitionId
+    * @param identityLinkRepresentation identityLinkRepresentation
     * @return Promise<IdentityLinkRepresentation>
     */
     createIdentityLinkUsingPOST(processDefinitionId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
@@ -75,9 +75,9 @@ export class ProcessdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processDefinitionId Process definition ID
-        * @param  family Identity type
-        * @param  identityId User or group ID
+        * @param processDefinitionId Process definition ID
+        * @param family Identity type
+        * @param identityId User or group ID
         * @return Promise<{}>
         */
     deleteIdentityLinkUsingDELETE(processDefinitionId: string, family: string, identityId: string): Promise<{}> {
@@ -122,9 +122,9 @@ export class ProcessdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processDefinitionId Process definition ID
-        * @param  family Identity type
-        * @param  identityId User or group ID
+        * @param processDefinitionId Process definition ID
+        * @param family Identity type
+        * @param identityId User or group ID
         * @return Promise<IdentityLinkRepresentation>
         */
     getIdentityLinkTypeUsingGET(processDefinitionId: string, family: string, identityId: string): Promise<IdentityLinkRepresentation> {
@@ -169,8 +169,8 @@ export class ProcessdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processDefinitionId processDefinitionId
-        * @param  family Identity type
+        * @param processDefinitionId processDefinitionId
+        * @param family Identity type
         * @return Promise<Array<IdentityLinkRepresentation>>
         */
     getIdentityLinksForFamilyUsingGET(processDefinitionId: string, family: string): Promise<Array<IdentityLinkRepresentation>> {
@@ -211,7 +211,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processDefinitionId processDefinitionId
+        * @param processDefinitionId processDefinitionId
         * @return Promise<Array<IdentityLinkRepresentation>>
         */
     getIdentityLinksUsingGET(processDefinitionId: string): Promise<Array<IdentityLinkRepresentation>> {
@@ -248,7 +248,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processDefinitionId processDefinitionId
+        * @param processDefinitionId processDefinitionId
         * @return Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation>
         */
     getProcessDefinitionDecisionTablesUsingGET(processDefinitionId: string): Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation> {
@@ -285,7 +285,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processDefinitionId processDefinitionId
+        * @param processDefinitionId processDefinitionId
         * @return Promise<ResultListDataRepresentationRuntimeFormRepresentation>
         */
     getProcessDefinitionFormsUsingGET(processDefinitionId: string): Promise<ResultListDataRepresentationRuntimeFormRepresentation> {
@@ -354,10 +354,10 @@ export class ProcessdefinitionsApi extends BaseApi {
         * 
         * Get a list of process definitions (visible within the tenant of the user)
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.latest latest
-        * @param  opts.appDefinitionId appDefinitionId
-        * @param  opts.deploymentId deploymentId
+        * @param opts Optional parameters
+        * @param opts.latest latest
+        * @param opts.appDefinitionId appDefinitionId
+        * @param opts.deploymentId deploymentId
         * @return Promise<ResultListDataRepresentationProcessDefinitionRepresentation>
         */
     getProcessDefinitionsUsingGET(opts: any): Promise<ResultListDataRepresentationProcessDefinitionRepresentation> {

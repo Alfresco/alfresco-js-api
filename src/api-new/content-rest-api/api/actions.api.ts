@@ -35,10 +35,10 @@ export class ActionsApi extends BaseApi {
 Retrieve the details of the action denoted by **actionDefinitionId**.
 
     * 
-    * @param  actionDefinitionId The identifier of an action definition.
+    * @param actionDefinitionId The identifier of an action definition.
     * @return Promise<ActionDefinitionEntry>
     */
-    actionDetails(actionDefinitionId: string): Promise<ActionDefinitionEntry> {
+    actionDetails(actionDefinitionId: string): Promise<ActionDefinitionEntry | ModelError> {
 
         let postBody = null;
 
@@ -120,10 +120,10 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     pending execution. The ID may be used, for example to correlate an execution with output in the server logs.
     
         * 
-        * @param  actionBodyExec Action execution details
+        * @param actionBodyExec Action execution details
         * @return Promise<ActionExecResultEntry>
         */
-    actionExec(actionBodyExec: ActionBodyExec): Promise<ActionExecResultEntry> {
+    actionExec(actionBodyExec: ActionBodyExec): Promise<ActionExecResultEntry | ModelError> {
 
         let postBody = actionBodyExec;
 
@@ -167,14 +167,14 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     * title
     
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -182,7 +182,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -196,7 +196,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     
         * @return Promise<ActionDefinitionList>
         */
-    listActions(opts: any): Promise<ActionDefinitionList> {
+    listActions(opts: any): Promise<ActionDefinitionList | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -240,15 +240,15 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     * title
     
         * 
-        * @param  nodeId The identifier of a node.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param nodeId The identifier of a node.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -256,7 +256,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -270,7 +270,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     
         * @return Promise<ActionDefinitionList>
         */
-    nodeActions(nodeId: string, opts: any): Promise<ActionDefinitionList> {
+    nodeActions(nodeId: string, opts: any): Promise<ActionDefinitionList | ModelError> {
         opts = opts || {};
         let postBody = null;
 

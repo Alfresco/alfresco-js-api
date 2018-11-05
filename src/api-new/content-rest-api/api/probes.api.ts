@@ -38,13 +38,13 @@ The liveness probe should then be used to check the repository is still respondi
 **Note:** No authentication is required to call this endpoint.
 
     * 
-    * @param  probeId The name of the probe:
+    * @param probeId The name of the probe:
 * -ready-
 * -live-
 
     * @return Promise<ProbeEntry>
     */
-    getProbe(probeId: string): Promise<ProbeEntry> {
+    getProbe(probeId: string): Promise<ProbeEntry | ModelError> {
 
         let postBody = null;
 

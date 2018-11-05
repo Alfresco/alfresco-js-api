@@ -73,10 +73,10 @@ JSON
 }
 
     * 
-    * @param  classificationReason Classification reason
+    * @param classificationReason Classification reason
     * @return Promise<ClassificationReasonEntry>
     */
-    createClassificationReason(classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry> {
+    createClassificationReason(classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry | ModelError> {
 
         let postBody = classificationReason;
 
@@ -110,10 +110,10 @@ JSON
         * 
         * Deletes the classification reason  **classificationReasonId**. You can't delete a classification reason that is being used to classify content. There must be at least one classification reason.
         * 
-        * @param  classificationReasonId The identifier for the classification reason
+        * @param classificationReasonId The identifier for the classification reason
         * @return Promise<{}>
         */
-    deleteClassificationReason(classificationReasonId: string): Promise<{}> {
+    deleteClassificationReason(classificationReasonId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -147,10 +147,10 @@ JSON
         * 
         * Gets all classification reasons.
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param  opts.maxItems The maximum number of items to return in the list.
-        * @param  opts.fields A list of field names.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts.maxItems The maximum number of items to return in the list.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -164,7 +164,7 @@ JSON
     
         * @return Promise<ClassificationReasonsPaging>
         */
-    listClassificationReasons(opts: any): Promise<ClassificationReasonsPaging> {
+    listClassificationReasons(opts: any): Promise<ClassificationReasonsPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -197,10 +197,10 @@ JSON
         * 
         * Gets the classification reason  **classificationReasonId**.
         * 
-        * @param  classificationReasonId The identifier for the classification reason
+        * @param classificationReasonId The identifier for the classification reason
         * @return Promise<ClassificationReasonEntry>
         */
-    showClassificationReasonById(classificationReasonId: string): Promise<ClassificationReasonEntry> {
+    showClassificationReasonById(classificationReasonId: string): Promise<ClassificationReasonEntry | ModelError> {
 
         let postBody = null;
 
@@ -234,11 +234,11 @@ JSON
         * 
         * Updates the classification reason with id **classificationReasonId**. For example, you can change a classification reason code or description.
         * 
-        * @param  classificationReasonId The identifier for the classification reason
-        * @param  classificationReason Classification reason
+        * @param classificationReasonId The identifier for the classification reason
+        * @param classificationReason Classification reason
         * @return Promise<ClassificationReasonEntry>
         */
-    updateClassificationReason(classificationReasonId: string, classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry> {
+    updateClassificationReason(classificationReasonId: string, classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry | ModelError> {
 
         let postBody = classificationReason;
 

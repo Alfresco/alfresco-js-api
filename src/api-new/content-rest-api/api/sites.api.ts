@@ -48,14 +48,14 @@ export class SitesApi extends BaseApi {
     * Approve a site membership request.
 
     * 
-    * @param  siteId The identifier of a site.
-    * @param  inviteeId The invitee user name.
-    * @param Object opts Optional parameters
-    * @param  opts.siteMembershipApprovalBody Accepting a request to join, optionally, allows assignment of a role to the user.
+    * @param siteId The identifier of a site.
+    * @param inviteeId The invitee user name.
+    * @param opts Optional parameters
+    * @param opts.siteMembershipApprovalBody Accepting a request to join, optionally, allows assignment of a role to the user.
 
     * @return Promise<{}>
     */
-    approveSiteMembershipRequest(siteId: string, inviteeId: string, opts: any): Promise<{}> {
+    approveSiteMembershipRequest(siteId: string, inviteeId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = opts['siteMembershipApprovalBody'];
 
@@ -118,11 +118,11 @@ export class SitesApi extends BaseApi {
     This container is the root folder for content stored in the site.
     
         * 
-        * @param  siteBodyCreate The site details
-        * @param Object opts Optional parameters
-        * @param  opts.skipConfiguration Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. (default to false)
-        * @param  opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user's site favorites. (default to false)
-        * @param  opts.fields A list of field names.
+        * @param siteBodyCreate The site details
+        * @param opts Optional parameters
+        * @param opts.skipConfiguration Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. (default to false)
+        * @param opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user's site favorites. (default to false)
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -136,7 +136,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteEntry>
         */
-    createSite(siteBodyCreate: SiteBodyCreate, opts: any): Promise<SiteEntry> {
+    createSite(siteBodyCreate: SiteBodyCreate, opts: any): Promise<SiteEntry | ModelError> {
         opts = opts || {};
         let postBody = siteBodyCreate;
 
@@ -224,10 +224,10 @@ export class SitesApi extends BaseApi {
     
     
         * 
-        * @param  siteId The identifier of a site.
-        * @param  siteMembershipBodyCreate The person to add and their role
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param siteId The identifier of a site.
+        * @param siteMembershipBodyCreate The person to add and their role
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -241,7 +241,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteMemberEntry>
         */
-    createSiteMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts: any): Promise<SiteMemberEntry> {
+    createSiteMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts: any): Promise<SiteMemberEntry | ModelError> {
         opts = opts || {};
         let postBody = siteMembershipBodyCreate;
 
@@ -333,10 +333,10 @@ export class SitesApi extends BaseApi {
     
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  siteMembershipRequestBodyCreate Site membership request details
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param personId The identifier of a person.
+        * @param siteMembershipRequestBodyCreate Site membership request details
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -350,7 +350,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteMembershipRequestEntry>
         */
-    createSiteMembershipRequestForPerson(personId: string, siteMembershipRequestBodyCreate: SiteMembershipRequestBodyCreate, opts: any): Promise<SiteMembershipRequestEntry> {
+    createSiteMembershipRequestForPerson(personId: string, siteMembershipRequestBodyCreate: SiteMembershipRequestBodyCreate, opts: any): Promise<SiteMembershipRequestEntry | ModelError> {
         opts = opts || {};
         let postBody = siteMembershipRequestBodyCreate;
 
@@ -392,12 +392,12 @@ export class SitesApi extends BaseApi {
     Deletes the site with **siteId**.
     
         * 
-        * @param  siteId The identifier of a site.
-        * @param Object opts Optional parameters
-        * @param  opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
+        * @param siteId The identifier of a site.
+        * @param opts Optional parameters
+        * @param opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
         * @return Promise<{}>
         */
-    deleteSite(siteId: string, opts: any): Promise<{}> {
+    deleteSite(siteId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -435,11 +435,11 @@ export class SitesApi extends BaseApi {
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  siteId The identifier of a site.
-        * @param  personId The identifier of a person.
+        * @param siteId The identifier of a site.
+        * @param personId The identifier of a person.
         * @return Promise<{}>
         */
-    deleteSiteMembership(siteId: string, personId: string): Promise<{}> {
+    deleteSiteMembership(siteId: string, personId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -480,11 +480,11 @@ export class SitesApi extends BaseApi {
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  siteId The identifier of a site.
+        * @param personId The identifier of a person.
+        * @param siteId The identifier of a site.
         * @return Promise<{}>
         */
-    deleteSiteMembershipForPerson(personId: string, siteId: string): Promise<{}> {
+    deleteSiteMembershipForPerson(personId: string, siteId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -525,11 +525,11 @@ export class SitesApi extends BaseApi {
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  siteId The identifier of a site.
+        * @param personId The identifier of a person.
+        * @param siteId The identifier of a site.
         * @return Promise<{}>
         */
-    deleteSiteMembershipRequestForPerson(personId: string, siteId: string): Promise<{}> {
+    deleteSiteMembershipRequestForPerson(personId: string, siteId: string): Promise<{} | ModelError> {
 
         let postBody = null;
 
@@ -580,10 +580,10 @@ export class SitesApi extends BaseApi {
     
     
         * 
-        * @param  siteId The identifier of a site.
-        * @param Object opts Optional parameters
-        * @param  opts.relations Use the relations parameter to include one or more related entities in a single response.
-        * @param  opts.fields A list of field names.
+        * @param siteId The identifier of a site.
+        * @param opts Optional parameters
+        * @param opts.relations Use the relations parameter to include one or more related entities in a single response.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -597,7 +597,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteEntry>
         */
-    getSite(siteId: string, opts: any): Promise<SiteEntry> {
+    getSite(siteId: string, opts: any): Promise<SiteEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -633,10 +633,10 @@ export class SitesApi extends BaseApi {
         * 
         * Gets information on the container **containerId** in site **siteId**.
         * 
-        * @param  siteId The identifier of a site.
-        * @param  containerId The unique identifier of a site container.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param siteId The identifier of a site.
+        * @param containerId The unique identifier of a site container.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -650,7 +650,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteContainerEntry>
         */
-    getSiteContainer(siteId: string, containerId: string, opts: any): Promise<SiteContainerEntry> {
+    getSiteContainer(siteId: string, containerId: string, opts: any): Promise<SiteContainerEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -692,10 +692,10 @@ export class SitesApi extends BaseApi {
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  siteId The identifier of a site.
-        * @param  personId The identifier of a person.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param siteId The identifier of a site.
+        * @param personId The identifier of a person.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -709,7 +709,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteMemberEntry>
         */
-    getSiteMembership(siteId: string, personId: string, opts: any): Promise<SiteMemberEntry> {
+    getSiteMembership(siteId: string, personId: string, opts: any): Promise<SiteMemberEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -751,11 +751,11 @@ export class SitesApi extends BaseApi {
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  siteId The identifier of a site.
+        * @param personId The identifier of a person.
+        * @param siteId The identifier of a site.
         * @return Promise<SiteRoleEntry>
         */
-    getSiteMembershipForPerson(personId: string, siteId: string): Promise<SiteRoleEntry> {
+    getSiteMembershipForPerson(personId: string, siteId: string): Promise<SiteRoleEntry | ModelError> {
 
         let postBody = null;
 
@@ -796,10 +796,10 @@ export class SitesApi extends BaseApi {
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  siteId The identifier of a site.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param personId The identifier of a person.
+        * @param siteId The identifier of a site.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -813,7 +813,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteMembershipRequestEntry>
         */
-    getSiteMembershipRequestForPerson(personId: string, siteId: string, opts: any): Promise<SiteMembershipRequestEntry> {
+    getSiteMembershipRequestForPerson(personId: string, siteId: string, opts: any): Promise<SiteMembershipRequestEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -871,15 +871,15 @@ export class SitesApi extends BaseApi {
     
     
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.where A string to restrict the returned objects by using a predicate.
-        * @param  opts.fields A list of field names.
+        * @param opts.where A string to restrict the returned objects by using a predicate.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -893,7 +893,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteMembershipRequestWithPersonPaging>
         */
-    getSiteMembershipRequests(opts: any): Promise<SiteMembershipRequestWithPersonPaging> {
+    getSiteMembershipRequests(opts: any): Promise<SiteMembershipRequestWithPersonPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -927,15 +927,15 @@ export class SitesApi extends BaseApi {
         * 
         * Gets a list of containers for the site **siteId**.
         * 
-        * @param  siteId The identifier of a site.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param siteId The identifier of a site.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -949,7 +949,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteContainerPaging>
         */
-    listSiteContainers(siteId: string, opts: any): Promise<SiteContainerPaging> {
+    listSiteContainers(siteId: string, opts: any): Promise<SiteContainerPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -989,15 +989,15 @@ export class SitesApi extends BaseApi {
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param personId The identifier of a person.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1011,7 +1011,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteMembershipRequestPaging>
         */
-    listSiteMembershipRequestsForPerson(personId: string, opts: any): Promise<SiteMembershipRequestPaging> {
+    listSiteMembershipRequestsForPerson(personId: string, opts: any): Promise<SiteMembershipRequestPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1048,15 +1048,15 @@ export class SitesApi extends BaseApi {
         * 
         * Gets a list of site memberships for site **siteId**.
         * 
-        * @param  siteId The identifier of a site.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param siteId The identifier of a site.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.fields A list of field names.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1070,7 +1070,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteMemberPaging>
         */
-    listSiteMemberships(siteId: string, opts: any): Promise<SiteMemberPaging> {
+    listSiteMemberships(siteId: string, opts: any): Promise<SiteMemberPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1132,15 +1132,15 @@ export class SitesApi extends BaseApi {
     * role
     
         * 
-        * @param  personId The identifier of a person.
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param personId The identifier of a person.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1148,8 +1148,8 @@ export class SitesApi extends BaseApi {
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.relations Use the relations parameter to include one or more related entities in a single response.
-        * @param  opts.fields A list of field names.
+        * @param opts.relations Use the relations parameter to include one or more related entities in a single response.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1161,10 +1161,10 @@ export class SitesApi extends BaseApi {
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
     
-        * @param  opts.where A string to restrict the returned objects by using a predicate.
+        * @param opts.where A string to restrict the returned objects by using a predicate.
         * @return Promise<SiteRolePaging>
         */
-    listSiteMembershipsForPerson(personId: string, opts: any): Promise<SiteRolePaging> {
+    listSiteMembershipsForPerson(personId: string, opts: any): Promise<SiteRolePaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1239,14 +1239,14 @@ export class SitesApi extends BaseApi {
     
     
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.skipCount The number of entities that exist in the collection before those included in this list.
+        * @param opts Optional parameters
+        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
      (default to 0)
-        * @param  opts.maxItems The maximum number of items to return in the list.
+        * @param opts.maxItems The maximum number of items to return in the list.
     If not supplied then the default value is 100.
      (default to 100)
-        * @param  opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
     
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1254,8 +1254,8 @@ export class SitesApi extends BaseApi {
     
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
     
-        * @param  opts.relations Use the relations parameter to include one or more related entities in a single response.
-        * @param  opts.fields A list of field names.
+        * @param opts.relations Use the relations parameter to include one or more related entities in a single response.
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1267,10 +1267,10 @@ export class SitesApi extends BaseApi {
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
     
-        * @param  opts.where A string to restrict the returned objects by using a predicate.
+        * @param opts.where A string to restrict the returned objects by using a predicate.
         * @return Promise<SitePaging>
         */
-    listSites(opts: any): Promise<SitePaging> {
+    listSites(opts: any): Promise<SitePaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1307,14 +1307,14 @@ export class SitesApi extends BaseApi {
         * Reject a site membership request.
     
         * 
-        * @param  siteId The identifier of a site.
-        * @param  inviteeId The invitee user name.
-        * @param Object opts Optional parameters
-        * @param  opts.siteMembershipRejectionBody Rejecting a request to join, optionally, allows the inclusion of comment.
+        * @param siteId The identifier of a site.
+        * @param inviteeId The invitee user name.
+        * @param opts Optional parameters
+        * @param opts.siteMembershipRejectionBody Rejecting a request to join, optionally, allows the inclusion of comment.
     
         * @return Promise<{}>
         */
-    rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts: any): Promise<{}> {
+    rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = opts['siteMembershipRejectionBody'];
 
@@ -1358,10 +1358,10 @@ export class SitesApi extends BaseApi {
     Note: the id of a site cannot be updated once the site has been created.
     
         * 
-        * @param  siteId The identifier of a site.
-        * @param  siteBodyUpdate The site information to update.
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param siteId The identifier of a site.
+        * @param siteBodyUpdate The site information to update.
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1375,7 +1375,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteEntry>
         */
-    updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts: any): Promise<SiteEntry> {
+    updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts: any): Promise<SiteEntry | ModelError> {
         opts = opts || {};
         let postBody = siteBodyUpdate;
 
@@ -1424,11 +1424,11 @@ export class SitesApi extends BaseApi {
     * SiteManager
     
         * 
-        * @param  siteId The identifier of a site.
-        * @param  personId The identifier of a person.
-        * @param  siteMembershipBodyUpdate The persons new role
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param siteId The identifier of a site.
+        * @param personId The identifier of a person.
+        * @param siteMembershipBodyUpdate The persons new role
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1442,7 +1442,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteMemberEntry>
         */
-    updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts: any): Promise<SiteMemberEntry> {
+    updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts: any): Promise<SiteMemberEntry | ModelError> {
         opts = opts || {};
         let postBody = siteMembershipBodyUpdate;
 
@@ -1488,11 +1488,11 @@ export class SitesApi extends BaseApi {
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     
         * 
-        * @param  personId The identifier of a person.
-        * @param  siteId The identifier of a site.
-        * @param  siteMembershipRequestBodyUpdate The new message to display
-        * @param Object opts Optional parameters
-        * @param  opts.fields A list of field names.
+        * @param personId The identifier of a person.
+        * @param siteId The identifier of a site.
+        * @param siteMembershipRequestBodyUpdate The new message to display
+        * @param opts Optional parameters
+        * @param opts.fields A list of field names.
     
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -1506,7 +1506,7 @@ export class SitesApi extends BaseApi {
     
         * @return Promise<SiteMembershipRequestEntry>
         */
-    updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts: any): Promise<SiteMembershipRequestEntry> {
+    updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts: any): Promise<SiteMembershipRequestEntry | ModelError> {
         opts = opts || {};
         let postBody = siteMembershipRequestBodyUpdate;
 

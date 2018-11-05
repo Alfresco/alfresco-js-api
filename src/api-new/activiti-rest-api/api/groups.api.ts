@@ -23,18 +23,18 @@ import { BaseApi } from './base.api';
 * Groups service.
 * @module GroupsApi
 */
-export class GroupsActivitiApi extends BaseApi {
+export class GroupsApi extends BaseApi {
     /**
     * Query groups
-    *
-    *
-    *
-    * @param Object opts Optional parameters
-    * @param  opts.filter filter
-    * @param  opts.groupId groupId
-    * @param  opts.externalId externalId
-    * @param  opts.externalIdCaseInsensitive externalIdCaseInsensitive
-    * @param  opts.tenantId tenantId
+    * 
+    * 
+    * 
+    * @param opts Optional parameters
+    * @param opts.filter filter
+    * @param opts.groupId groupId
+    * @param opts.externalId externalId
+    * @param opts.externalIdCaseInsensitive externalIdCaseInsensitive
+    * @param opts.tenantId tenantId
     * @return Promise<ResultListDataRepresentationLightGroupRepresentation>
     */
     getGroupsUsingGET(opts: any): Promise<ResultListDataRepresentationLightGroupRepresentation> {
@@ -69,10 +69,10 @@ export class GroupsActivitiApi extends BaseApi {
     }
     /**
         * List members of a group
-        *
-        *
-        *
-        * @param  groupId groupId
+        * 
+        * 
+        * 
+        * @param groupId groupId
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */
     getUsersForGroupUsingGET(groupId: number): Promise<ResultListDataRepresentationLightUserRepresentation> {

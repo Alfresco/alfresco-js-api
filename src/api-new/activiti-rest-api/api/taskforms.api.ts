@@ -32,8 +32,8 @@ export class TaskformsApi extends BaseApi {
     * 
     * 
     * 
-    * @param  taskId taskId
-    * @param  completeTaskFormRepresentation completeTaskFormRepresentation
+    * @param taskId taskId
+    * @param completeTaskFormRepresentation completeTaskFormRepresentation
     * @return Promise<{}>
     */
     completeTaskFormUsingPOST(taskId: string, completeTaskFormRepresentation: CompleteFormRepresentation): Promise<{}> {
@@ -74,7 +74,7 @@ export class TaskformsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<Array<ProcessInstanceVariableRepresentation>>
         */
     getProcessInstanceVariablesUsingGET1(taskId: string): Promise<Array<ProcessInstanceVariableRepresentation>> {
@@ -111,9 +111,9 @@ export class TaskformsApi extends BaseApi {
         * 
         * Specific case to retrieve information on a specific column
         * 
-        * @param  taskId taskId
-        * @param  field field
-        * @param  column column
+        * @param taskId taskId
+        * @param field field
+        * @param column column
         * @return Promise<Array<FormValueRepresentation>>
         */
     getRestFieldValuesUsingGET1(taskId: string, field: string, column: string): Promise<Array<FormValueRepresentation>> {
@@ -158,8 +158,8 @@ export class TaskformsApi extends BaseApi {
         * 
         * Form field values that are populated through a REST backend, can be retrieved via this service
         * 
-        * @param  taskId taskId
-        * @param  field field
+        * @param taskId taskId
+        * @param field field
         * @return Promise<Array<FormValueRepresentation>>
         */
     getRestFieldValuesUsingGET2(taskId: string, field: string): Promise<Array<FormValueRepresentation>> {
@@ -200,7 +200,7 @@ export class TaskformsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
+        * @param taskId taskId
         * @return Promise<FormDefinitionRepresentation>
         */
     getTaskFormUsingGET(taskId: string): Promise<FormDefinitionRepresentation> {
@@ -237,8 +237,8 @@ export class TaskformsApi extends BaseApi {
         * 
         * 
         * 
-        * @param  taskId taskId
-        * @param  saveTaskFormRepresentation saveTaskFormRepresentation
+        * @param taskId taskId
+        * @param saveTaskFormRepresentation saveTaskFormRepresentation
         * @return Promise<{}>
         */
     saveTaskFormUsingPOST(taskId: string, saveTaskFormRepresentation: SaveFormRepresentation): Promise<{}> {

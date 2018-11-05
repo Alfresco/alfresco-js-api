@@ -29,10 +29,10 @@ export class DefaultclassificationvaluesApi extends BaseApi {
     * 
     * Calculates the default declassification date for **nodeId** based on the properties of the node and the current declassification time frame.
     * 
-    * @param  nodeId The identifier of a node.
+    * @param nodeId The identifier of a node.
     * @return Promise<DeclassificationDate>
     */
-    calculateDefaultDeclassificationDate(nodeId: string): Promise<DeclassificationDate> {
+    calculateDefaultDeclassificationDate(nodeId: string): Promise<DeclassificationDate | ModelError> {
 
         let postBody = null;
 

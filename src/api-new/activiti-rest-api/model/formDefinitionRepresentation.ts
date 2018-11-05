@@ -22,7 +22,6 @@ import { FormOutcomeRepresentation } from './formOutcomeRepresentation';
 import { FormTabRepresentation } from './formTabRepresentation';
 import { FormVariableRepresentation } from './formVariableRepresentation';
 
-
 export class FormDefinitionRepresentation {
     className?: string;
     customFieldTemplates?: { [key: string]: string; };

@@ -29,7 +29,7 @@ export class ProcessscopesApi extends BaseApi {
     * 
     * 
     * 
-    * @param  processScopesRequest processScopesRequest
+    * @param processScopesRequest processScopesRequest
     * @return Promise<Array<ProcessScopeRepresentation>>
     */
     getRuntimeProcessScopesUsingPOST(processScopesRequest: ProcessScopesRequestRepresentation): Promise<Array<ProcessScopeRepresentation>> {

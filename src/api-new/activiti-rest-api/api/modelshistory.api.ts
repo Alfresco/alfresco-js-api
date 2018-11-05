@@ -29,9 +29,9 @@ export class ModelshistoryApi extends BaseApi {
     * 
     * 
     * 
-    * @param  modelId modelId
-    * @param Object opts Optional parameters
-    * @param  opts.includeLatestVersion includeLatestVersion
+    * @param modelId modelId
+    * @param opts Optional parameters
+    * @param opts.includeLatestVersion includeLatestVersion
     * @return Promise<ResultListDataRepresentationModelRepresentation>
     */
     getModelHistoryCollectionUsingGET(modelId: number, opts: any): Promise<ResultListDataRepresentationModelRepresentation> {
@@ -69,8 +69,8 @@ export class ModelshistoryApi extends BaseApi {
         * 
         * 
         * 
-        * @param  modelId modelId
-        * @param  modelHistoryId modelHistoryId
+        * @param modelId modelId
+        * @param modelHistoryId modelHistoryId
         * @return Promise<ModelRepresentation>
         */
     getProcessModelHistoryUsingGET(modelId: number, modelHistoryId: number): Promise<ModelRepresentation> {

@@ -39,7 +39,7 @@ export class ProcessinstancesApi extends BaseApi {
     * 
     * 
     * 
-    * @param  processInstanceId processInstanceId
+    * @param processInstanceId processInstanceId
     * @return Promise<ProcessInstanceRepresentation>
     */
     activateProcessInstanceUsingPUT(processInstanceId: string): Promise<ProcessInstanceRepresentation> {
@@ -76,8 +76,8 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
-        * @param  identityLinkRepresentation identityLinkRepresentation
+        * @param processInstanceId processInstanceId
+        * @param identityLinkRepresentation identityLinkRepresentation
         * @return Promise<IdentityLinkRepresentation>
         */
     createIdentityLinkUsingPOST1(processInstanceId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
@@ -118,10 +118,10 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
-        * @param  family family
-        * @param  identityId identityId
-        * @param  type type
+        * @param processInstanceId processInstanceId
+        * @param family family
+        * @param identityId identityId
+        * @param type type
         * @return Promise<{}>
         */
     deleteIdentityLinkUsingDELETE1(processInstanceId: string, family: string, identityId: string, type: string): Promise<{}> {
@@ -170,7 +170,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * If the process instance has not yet been completed, it will be cancelled. If it has already finished or been cancelled then the process instance will be removed and will no longer appear in queries.
         * 
-        * @param  processInstanceId processInstanceId
+        * @param processInstanceId processInstanceId
         * @return Promise<{}>
         */
     deleteProcessInstanceUsingDELETE(processInstanceId: string): Promise<{}> {
@@ -207,7 +207,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * The request body provided must define either a valid filterId value or filter object
         * 
-        * @param  filterRequest filterRequest
+        * @param filterRequest filterRequest
         * @return Promise<ResultListDataRepresentationProcessInstanceRepresentation>
         */
     filterProcessInstancesUsingPOST(filterRequest: ProcessInstanceFilterRequestRepresentation): Promise<ResultListDataRepresentationProcessInstanceRepresentation> {
@@ -244,7 +244,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
+        * @param processInstanceId processInstanceId
         * @return Promise<ResultListDataRepresentationDecisionTaskRepresentation>
         */
     getHistoricProcessInstanceDecisionTasksUsingGET(processInstanceId: string): Promise<ResultListDataRepresentationDecisionTaskRepresentation> {
@@ -281,7 +281,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
+        * @param processInstanceId processInstanceId
         * @return Promise<Array<ProcessInstanceVariableRepresentation>>
         */
     getHistoricProcessInstanceVariablesUsingGET(processInstanceId: string): Promise<Array<ProcessInstanceVariableRepresentation>> {
@@ -318,7 +318,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  queryRequest queryRequest
+        * @param queryRequest queryRequest
         * @return Promise<ResultListDataRepresentationProcessInstanceRepresentation>
         */
     getHistoricProcessInstancesUsingPOST(queryRequest: HistoricProcessInstanceQueryRepresentation): Promise<ResultListDataRepresentationProcessInstanceRepresentation> {
@@ -355,10 +355,10 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
-        * @param  family family
-        * @param  identityId identityId
-        * @param  type type
+        * @param processInstanceId processInstanceId
+        * @param family family
+        * @param identityId identityId
+        * @param type type
         * @return Promise<IdentityLinkRepresentation>
         */
     getIdentityLinkTypeUsingGET1(processInstanceId: string, family: string, identityId: string, type: string): Promise<IdentityLinkRepresentation> {
@@ -407,8 +407,8 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
-        * @param  family family
+        * @param processInstanceId processInstanceId
+        * @param family family
         * @return Promise<Array<IdentityLinkRepresentation>>
         */
     getIdentityLinksForFamilyUsingGET1(processInstanceId: string, family: string): Promise<Array<IdentityLinkRepresentation>> {
@@ -449,7 +449,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
+        * @param processInstanceId processInstanceId
         * @return Promise<Array<IdentityLinkRepresentation>>
         */
     getIdentityLinksUsingGET1(processInstanceId: string): Promise<Array<IdentityLinkRepresentation>> {
@@ -486,7 +486,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
+        * @param processInstanceId processInstanceId
         * @return Promise<ResultListDataRepresentationProcessContentRepresentation>
         */
     getProcessInstanceContentUsingGET(processInstanceId: string): Promise<ResultListDataRepresentationProcessContentRepresentation> {
@@ -523,7 +523,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
+        * @param processInstanceId processInstanceId
         * @return Promise<Array<string>>
         */
     getProcessInstanceDiagramUsingGET(processInstanceId: string): Promise<Array<string>> {
@@ -560,7 +560,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * The start form for a process instance can be retrieved when the process definition has a start form defined (hasStartForm = true on the process instance)
         * 
-        * @param  processInstanceId processInstanceId
+        * @param processInstanceId processInstanceId
         * @return Promise<FormDefinitionRepresentation>
         */
     getProcessInstanceStartFormUsingGET(processInstanceId: string): Promise<FormDefinitionRepresentation> {
@@ -597,7 +597,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
+        * @param processInstanceId processInstanceId
         * @return Promise<ProcessInstanceRepresentation>
         */
     getProcessInstanceUsingGET(processInstanceId: string): Promise<ProcessInstanceRepresentation> {
@@ -634,7 +634,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstancesQuery processInstancesQuery
+        * @param processInstancesQuery processInstancesQuery
         * @return Promise<ResultListDataRepresentationProcessInstanceRepresentation>
         */
     getProcessInstancesUsingPOST(processInstancesQuery: ProcessInstanceQueryRepresentation): Promise<ResultListDataRepresentationProcessInstanceRepresentation> {
@@ -671,7 +671,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
+        * @param processInstanceId processInstanceId
         * @return Promise<ProcessInstanceAuditInfoRepresentation>
         */
     getTaskAuditLogUsingGET(processInstanceId: string): Promise<ProcessInstanceAuditInfoRepresentation> {
@@ -708,7 +708,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  startRequest startRequest
+        * @param startRequest startRequest
         * @return Promise<ProcessInstanceRepresentation>
         */
     startNewProcessInstanceUsingPOST(startRequest: CreateProcessInstanceRepresentation): Promise<ProcessInstanceRepresentation> {
@@ -745,7 +745,7 @@ export class ProcessinstancesApi extends BaseApi {
         * 
         * 
         * 
-        * @param  processInstanceId processInstanceId
+        * @param processInstanceId processInstanceId
         * @return Promise<ProcessInstanceRepresentation>
         */
     suspendProcessInstanceUsingPUT(processInstanceId: string): Promise<ProcessInstanceRepresentation> {

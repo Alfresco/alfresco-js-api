@@ -17,7 +17,6 @@
 
 import { Company } from './company';
 
-
 export class PersonBodyUpdate {
     firstName?: string;
     lastName?: string;

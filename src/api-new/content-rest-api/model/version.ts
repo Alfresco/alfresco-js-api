@@ -16,7 +16,6 @@
 */
 
 import { ContentInfo } from './contentInfo';
-
 import { UserInfo } from './userInfo';
 
 export class Version {

@@ -62,8 +62,8 @@ export class IntegrationboxApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userId userId
-        * @param  credentials credentials
+        * @param userId userId
+        * @param credentials credentials
         * @return Promise<{}>
         */
     createRepositoryAccountUsingPOST(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<{}> {
@@ -104,7 +104,7 @@ export class IntegrationboxApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userId userId
+        * @param userId userId
         * @return Promise<{}>
         */
     deleteRepositoryAccountUsingDELETE(userId: number): Promise<{}> {
@@ -173,9 +173,9 @@ export class IntegrationboxApi extends BaseApi {
         * 
         * 
         * 
-        * @param Object opts Optional parameters
-        * @param  opts.filter filter
-        * @param  opts.parent parent
+        * @param opts Optional parameters
+        * @param opts.filter filter
+        * @param opts.parent parent
         * @return Promise<ResultListDataRepresentationBoxContent>
         */
     getFilesUsingGET(opts: any): Promise<ResultListDataRepresentationBoxContent> {
@@ -210,7 +210,7 @@ export class IntegrationboxApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userId userId
+        * @param userId userId
         * @return Promise<{}>
         */
     getRepositoryAccountUsingGET(userId: number): Promise<{}> {
@@ -247,8 +247,8 @@ export class IntegrationboxApi extends BaseApi {
         * 
         * 
         * 
-        * @param  userId userId
-        * @param  credentials credentials
+        * @param userId userId
+        * @param credentials credentials
         * @return Promise<{}>
         */
     updateRepositoryAccountUsingPUT(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<{}> {

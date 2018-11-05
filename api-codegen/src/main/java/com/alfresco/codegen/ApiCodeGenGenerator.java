@@ -196,8 +196,14 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
         // Add additional filename information for model imports in the services
         List<Map<String, Object>> imports = (List<Map<String, Object>>) operations.get("imports");
         for ( Map<String, Object> im : imports ) {
+
             im.put("filename", im.get("import"));
-            im.put("classname", getModelnameFromModelFilename(im.get("filename").toString()));
+            String className = getModelnameFromModelFilename(im.get("filename").toString());
+            im.put("classname", className);
+
+            if (className.equals("ModelError")) {
+                objs.put("canReturnError", className);
+            }
         }
 
         if (objs != null) {
@@ -277,10 +283,14 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
         List<Map<String, String>> tsImports = new ArrayList<>();
         for ( String im : imports ) {
             if (!im.equals(cm.classname)) {
+
                 HashMap<String, String> tsImport = new HashMap<>();
                 tsImport.put("classname", im);
                 tsImport.put("filename", toModelFilename(im));
-                tsImports.add(tsImport);
+
+                if(!im.equals("Map")) {
+                    tsImports.add(tsImport);
+                }
             }
         }
         return tsImports;
