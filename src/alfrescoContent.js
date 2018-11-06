@@ -25,7 +25,7 @@ class AlfrescoContent {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
             '/renditions/doclib/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
-            '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
+            this.getAlfTicket(ticket);
     }
 
     /**
@@ -40,7 +40,7 @@ class AlfrescoContent {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
             '/renditions/imgpreview/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
-            '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
+            this.getAlfTicket(ticket);
     }
 
     /**
@@ -55,7 +55,7 @@ class AlfrescoContent {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
             '/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
-            '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
+            this.getAlfTicket(ticket);
     }
 
     /**
@@ -71,7 +71,7 @@ class AlfrescoContent {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
             '/renditions/' + encoding + '/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
-            '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
+            this.getAlfTicket(ticket);
     }
 
     /**
@@ -99,6 +99,12 @@ class AlfrescoContent {
         return this.ecmClient.basePath + '/shared-links/' + sharedId +
             '/renditions/' + renditionId + '/content' +
             '?attachment=' + (attachment ? 'true' : 'false');
+    }
+
+    getAlfTicket(ticket) {
+        if (this.ecmAuth) {
+            return '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
+        }
     }
 }
 
