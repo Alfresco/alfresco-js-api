@@ -104,7 +104,10 @@ class AlfrescoContent {
     getAlfTicket(ticket) {
         if (this.ecmAuth) {
             return '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
+        } else {
+            return '';
         }
+
     }
 }
 
