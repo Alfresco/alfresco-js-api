@@ -28,7 +28,7 @@ import { BaseApi } from './base.api';
 export class TagsApi extends BaseApi {
     /**
     * Create a tag for a node
-    * 
+    *
     * Creates a tag on the node **nodeId**. You specify the tag in a JSON body like this:
 
 JSON
@@ -76,7 +76,7 @@ JSON
   }
 }
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param tagBodyCreate The new tag
     * @param opts Optional parameters
@@ -94,7 +94,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagEntry>
     */
-    createTagForNode(nodeId: string, tagBodyCreate: TagBody, opts: any): Promise<TagEntry | ModelError> {
+    createTagForNode(nodeId: string, tagBodyCreate: TagBody, opts?: any): Promise<TagEntry | ModelError> {
         opts = opts || {};
         let postBody = tagBodyCreate;
 
@@ -130,9 +130,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Delete a tag from a node
-        * 
+        *
         * Deletes tag **tagId** from node **nodeId**.
-        * 
+        *
         * @param nodeId The identifier of a node.
         * @param tagId The identifier of a tag.
         * @return Promise<{}>
@@ -172,26 +172,26 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Get a tag
-        * 
+        *
         * Get a specific tag with **tagId**.
-        * 
+        *
         * @param tagId The identifier of a tag.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<TagEntry>
         */
-    getTag(tagId: string, opts: any): Promise<TagEntry | ModelError> {
+    getTag(tagId: string, opts?: any): Promise<TagEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -223,12 +223,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List tags
-        * 
+        *
         * Gets a list of tags in this repository.
-    
+
     You can use the **include** parameter to return additional **values** information.
-    
-        * 
+
+        *
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
@@ -237,23 +237,23 @@ parameter are returned in addition to those specified in the **fields** paramete
     If not supplied then the default value is 100.
      (default to 100)
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @param opts.include Returns additional information about the tag. The following optional fields can be requested:
     * count
-    
+
         * @return Promise<TagPaging>
         */
-    listTags(opts: any): Promise<TagPaging | ModelError> {
+    listTags(opts?: any): Promise<TagPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -284,9 +284,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List tags for a node
-        * 
+        *
         * Gets a list of tags for node **nodeId**.
-        * 
+        *
         * @param nodeId The identifier of a node.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -296,20 +296,20 @@ parameter are returned in addition to those specified in the **fields** paramete
     If not supplied then the default value is 100.
      (default to 100)
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<TagPaging>
         */
-    listTagsForNode(nodeId: string, opts: any): Promise<TagPaging | ModelError> {
+    listTagsForNode(nodeId: string, opts?: any): Promise<TagPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -343,27 +343,27 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Update a tag
-        * 
+        *
         * Updates the tag **tagId**.
-        * 
+        *
         * @param tagId The identifier of a tag.
         * @param tagBodyUpdate The updated tag
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<TagEntry>
         */
-    updateTag(tagId: string, tagBodyUpdate: TagBody, opts: any): Promise<TagEntry | ModelError> {
+    updateTag(tagId: string, tagBodyUpdate: TagBody, opts?: any): Promise<TagEntry | ModelError> {
         opts = opts || {};
         let postBody = tagBodyUpdate;
 

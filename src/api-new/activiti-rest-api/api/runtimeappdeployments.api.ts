@@ -26,9 +26,9 @@ import { BaseApi } from './base.api';
 export class RuntimeappdeploymentsApi extends BaseApi {
     /**
     * Remove an app deployment
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param appDeploymentId appDeploymentId
     * @return Promise<{}>
     */
@@ -63,9 +63,9 @@ export class RuntimeappdeploymentsApi extends BaseApi {
     }
     /**
         * Export the app archive for a deployment
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param deploymentId deploymentId
         * @return Promise<{}>
         */
@@ -100,9 +100,9 @@ export class RuntimeappdeploymentsApi extends BaseApi {
     }
     /**
         * Query app deployments
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param opts Optional parameters
         * @param opts.nameLike nameLike
         * @param opts.tenantId tenantId
@@ -113,7 +113,7 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         * @param opts.size size
         * @return Promise<ResultListDataRepresentationAppDeploymentRepresentation>
         */
-    getAppDefinitionsUsingGET1(opts: any): Promise<ResultListDataRepresentationAppDeploymentRepresentation> {
+    getAppDefinitionsUsingGET1(opts?: any): Promise<ResultListDataRepresentationAppDeploymentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -147,9 +147,9 @@ export class RuntimeappdeploymentsApi extends BaseApi {
     }
     /**
         * Get an app deployment
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param appDeploymentId appDeploymentId
         * @return Promise<AppDeploymentRepresentation>
         */
@@ -184,15 +184,15 @@ export class RuntimeappdeploymentsApi extends BaseApi {
     }
     /**
         * Get an app by deployment ID or DMN deployment ID
-        * 
+        *
         * Either a deploymentId or a dmnDeploymentId must be provided
-        * 
+        *
         * @param opts Optional parameters
         * @param opts.deploymentId deploymentId
         * @param opts.dmnDeploymentId dmnDeploymentId
         * @return Promise<AppDeploymentRepresentation>
         */
-    getRuntimeAppDeploymentByDeploymentUsingGET(opts: any): Promise<AppDeploymentRepresentation> {
+    getRuntimeAppDeploymentByDeploymentUsingGET(opts?: any): Promise<AppDeploymentRepresentation> {
         opts = opts || {};
         let postBody = null;
 

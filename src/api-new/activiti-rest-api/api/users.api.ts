@@ -28,9 +28,9 @@ import { BaseApi } from './base.api';
 export class UsersApi extends BaseApi {
     /**
     * Execute an action for a specific user
-    * 
+    *
     * Typical action is updating/reset password
-    * 
+    *
     * @param userId userId
     * @param actionRequest actionRequest
     * @return Promise<{}>
@@ -70,9 +70,9 @@ export class UsersApi extends BaseApi {
     }
     /**
         * Stream user profile picture
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @return Promise<{}>
         */
@@ -107,9 +107,9 @@ export class UsersApi extends BaseApi {
     }
     /**
         * Get a user
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @return Promise<UserRepresentation>
         */
@@ -144,9 +144,9 @@ export class UsersApi extends BaseApi {
     }
     /**
         * Query users
-        * 
+        *
         * A common use case is that a user wants to select another user (eg. when assigning a task) or group.
-        * 
+        *
         * @param opts Optional parameters
         * @param opts.filter filter
         * @param opts.email email
@@ -158,7 +158,7 @@ export class UsersApi extends BaseApi {
         * @param opts.tenantId tenantId
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */
-    getUsersUsingGET1(opts: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
+    getUsersUsingGET1(opts?: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -193,9 +193,9 @@ export class UsersApi extends BaseApi {
     }
     /**
         * Request a password reset
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param resetPassword resetPassword
         * @return Promise<{}>
         */
@@ -230,9 +230,9 @@ export class UsersApi extends BaseApi {
     }
     /**
         * Update a user
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @param userRequest userRequest
         * @return Promise<UserRepresentation>

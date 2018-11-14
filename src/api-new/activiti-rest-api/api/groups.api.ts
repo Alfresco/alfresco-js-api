@@ -26,9 +26,9 @@ import { BaseApi } from './base.api';
 export class GroupsApi extends BaseApi {
     /**
     * Query groups
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param opts Optional parameters
     * @param opts.filter filter
     * @param opts.groupId groupId
@@ -37,7 +37,7 @@ export class GroupsApi extends BaseApi {
     * @param opts.tenantId tenantId
     * @return Promise<ResultListDataRepresentationLightGroupRepresentation>
     */
-    getGroupsUsingGET(opts: any): Promise<ResultListDataRepresentationLightGroupRepresentation> {
+    getGroupsUsingGET(opts?: any): Promise<ResultListDataRepresentationLightGroupRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -69,9 +69,9 @@ export class GroupsApi extends BaseApi {
     }
     /**
         * List members of a group
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param groupId groupId
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */

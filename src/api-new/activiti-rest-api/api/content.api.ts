@@ -26,16 +26,16 @@ import { BaseApi } from './base.api';
 export class ContentApi extends BaseApi {
     /**
     * Attach existing content to a process instance
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param processInstanceId processInstanceId
     * @param relatedContent relatedContent
     * @param opts Optional parameters
     * @param opts.isRelatedContent isRelatedContent
     * @return Promise<RelatedContentRepresentation>
     */
-    createRelatedContentOnProcessInstanceUsingPOST(processInstanceId: string, relatedContent: RelatedContentRepresentation, opts: any): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnProcessInstanceUsingPOST(processInstanceId: string, relatedContent: RelatedContentRepresentation, opts?: any): Promise<RelatedContentRepresentation> {
         opts = opts || {};
         let postBody = relatedContent;
 
@@ -71,16 +71,16 @@ export class ContentApi extends BaseApi {
     }
     /**
         * Upload content and attach to a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @param file file
         * @param opts Optional parameters
         * @param opts.isRelatedContent isRelatedContent
         * @return Promise<RelatedContentRepresentation>
         */
-    createRelatedContentOnProcessInstanceUsingPOST1(processInstanceId: string, file: Blob, opts: any): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnProcessInstanceUsingPOST1(processInstanceId: string, file: Blob, opts?: any): Promise<RelatedContentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -117,16 +117,16 @@ export class ContentApi extends BaseApi {
     }
     /**
         * Attach existing content to a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param relatedContent relatedContent
         * @param opts Optional parameters
         * @param opts.isRelatedContent isRelatedContent
         * @return Promise<RelatedContentRepresentation>
         */
-    createRelatedContentOnTaskUsingPOST(taskId: string, relatedContent: RelatedContentRepresentation, opts: any): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnTaskUsingPOST(taskId: string, relatedContent: RelatedContentRepresentation, opts?: any): Promise<RelatedContentRepresentation> {
         opts = opts || {};
         let postBody = relatedContent;
 
@@ -162,16 +162,16 @@ export class ContentApi extends BaseApi {
     }
     /**
         * Upload content and attach to a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param file file
         * @param opts Optional parameters
         * @param opts.isRelatedContent isRelatedContent
         * @return Promise<RelatedContentRepresentation>
         */
-    createRelatedContentOnTaskUsingPOST1(taskId: string, file: Blob, opts: any): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnTaskUsingPOST1(taskId: string, file: Blob, opts?: any): Promise<RelatedContentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -208,9 +208,9 @@ export class ContentApi extends BaseApi {
     }
     /**
         * Upload content and create a local representation
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param file file
         * @return Promise<RelatedContentRepresentation>
         */
@@ -246,9 +246,9 @@ export class ContentApi extends BaseApi {
     }
     /**
         * Create a local representation of content from a remote repository
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param relatedContent relatedContent
         * @return Promise<RelatedContentRepresentation>
         */
@@ -283,9 +283,9 @@ export class ContentApi extends BaseApi {
     }
     /**
         * Remove a local content representation
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param contentId contentId
         * @return Promise<{}>
         */
@@ -320,9 +320,9 @@ export class ContentApi extends BaseApi {
     }
     /**
         * Get a local content representation
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param contentId contentId
         * @return Promise<RelatedContentRepresentation>
         */
@@ -357,9 +357,9 @@ export class ContentApi extends BaseApi {
     }
     /**
         * Stream content rendition
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param contentId contentId
         * @param renditionType renditionType
         * @return Promise<{}>
@@ -399,9 +399,9 @@ export class ContentApi extends BaseApi {
     }
     /**
         * Stream content from a local content representation
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param contentId contentId
         * @return Promise<{}>
         */
@@ -436,15 +436,15 @@ export class ContentApi extends BaseApi {
     }
     /**
         * List content attached to a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @param opts Optional parameters
         * @param opts.isRelatedContent isRelatedContent
         * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
         */
-    getRelatedContentForProcessInstanceUsingGET(processInstanceId: string, opts: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
+    getRelatedContentForProcessInstanceUsingGET(processInstanceId: string, opts?: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -476,15 +476,15 @@ export class ContentApi extends BaseApi {
     }
     /**
         * List content attached to a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param opts Optional parameters
         * @param opts.isRelatedContent isRelatedContent
         * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
         */
-    getRelatedContentForTaskUsingGET(taskId: string, opts: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
+    getRelatedContentForTaskUsingGET(taskId: string, opts?: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
         opts = opts || {};
         let postBody = null;
 

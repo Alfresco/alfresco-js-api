@@ -28,9 +28,9 @@ import { BaseApi } from './base.api';
 export class RatingsApi extends BaseApi {
     /**
     * Create a rating
-    * 
+    *
     * Create a rating for the node with identifier **nodeId**
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param ratingBodyCreate For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
 
@@ -57,7 +57,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RatingEntry>
     */
-    createRating(nodeId: string, ratingBodyCreate: RatingBody, opts: any): Promise<RatingEntry | ModelError> {
+    createRating(nodeId: string, ratingBodyCreate: RatingBody, opts?: any): Promise<RatingEntry | ModelError> {
         opts = opts || {};
         let postBody = ratingBodyCreate;
 
@@ -93,9 +93,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Delete a rating
-        * 
+        *
         * Deletes rating **ratingId** from node **nodeId**.
-        * 
+        *
         * @param nodeId The identifier of a node.
         * @param ratingId The identifier of a rating.
         * @return Promise<{}>
@@ -135,27 +135,27 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Get a rating
-        * 
+        *
         * Get the specific rating **ratingId** on node **nodeId**.
-        * 
+        *
         * @param nodeId The identifier of a node.
         * @param ratingId The identifier of a rating.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<RatingEntry>
         */
-    getRating(nodeId: string, ratingId: string, opts: any): Promise<RatingEntry | ModelError> {
+    getRating(nodeId: string, ratingId: string, opts?: any): Promise<RatingEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -191,9 +191,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List ratings
-        * 
+        *
         * Gets a list of ratings for node **nodeId**.
-        * 
+        *
         * @param nodeId The identifier of a node.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -203,20 +203,20 @@ parameter are returned in addition to those specified in the **fields** paramete
     If not supplied then the default value is 100.
      (default to 100)
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<RatingPaging>
         */
-    listRatings(nodeId: string, opts: any): Promise<RatingPaging | ModelError> {
+    listRatings(nodeId: string, opts?: any): Promise<RatingPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 

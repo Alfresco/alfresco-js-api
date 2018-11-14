@@ -28,9 +28,9 @@ import { BaseApi } from './base.api';
 export class AppdefinitionsApi extends BaseApi {
     /**
     * deleteAppDefinition
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param appDefinitionId appDefinitionId
     * @return Promise<{}>
     */
@@ -65,9 +65,9 @@ export class AppdefinitionsApi extends BaseApi {
     }
     /**
         * Export an app definition
-        * 
+        *
         * This will return a zip file containing the app definition model and all related models (process definitions and forms).
-        * 
+        *
         * @param modelId modelId from a runtime app or the id of an app definition model
         * @return Promise<{}>
         */
@@ -102,9 +102,9 @@ export class AppdefinitionsApi extends BaseApi {
     }
     /**
         * Get an app definition
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId Application definition ID
         * @return Promise<AppDefinitionRepresentation>
         */
@@ -139,9 +139,9 @@ export class AppdefinitionsApi extends BaseApi {
     }
     /**
         * importAndPublishApp
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param file file
         * @return Promise<AppDefinitionUpdateResultRepresentation>
         */
@@ -177,9 +177,9 @@ export class AppdefinitionsApi extends BaseApi {
     }
     /**
         * importAndPublishApp
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @param file file
         * @return Promise<AppDefinitionUpdateResultRepresentation>
@@ -220,15 +220,15 @@ export class AppdefinitionsApi extends BaseApi {
     }
     /**
         * Import a new app definition
-        * 
+        *
         * Allows a zip file to be uploaded containing an app definition and any number of included models.<p>This is useful to bootstrap an environment (for users or continuous integration).<p>Before using any processes included in the import the app must be published and deployed.
-        * 
+        *
         * @param file file
         * @param opts Optional parameters
         * @param opts.renewIdmEntries Whether to renew user and group identifiers (default to false)
         * @return Promise<AppDefinitionRepresentation>
         */
-    importAppDefinitionUsingPOST(file: Blob, opts: any): Promise<AppDefinitionRepresentation> {
+    importAppDefinitionUsingPOST(file: Blob, opts?: any): Promise<AppDefinitionRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -261,9 +261,9 @@ export class AppdefinitionsApi extends BaseApi {
     }
     /**
         * Update the content of an existing app
-        * 
+        *
         * Imports an app inside an existing app definition and creates a new version<p>Before using any new or updated processes included in the import the app must be (re-)published and deployed.
-        * 
+        *
         * @param modelId modelId
         * @param file file
         * @return Promise<AppDefinitionRepresentation>
@@ -304,9 +304,9 @@ export class AppdefinitionsApi extends BaseApi {
     }
     /**
         * Publish an app definition
-        * 
+        *
         * Publishing an app definition makes it available for use. The application must not have any validation errors or an error will be returned.<p>Before an app definition can be used by other users, it must also be deployed for their use
-        * 
+        *
         * @param modelId modelId
         * @param publishModel publishModel
         * @return Promise<AppDefinitionUpdateResultRepresentation>
@@ -346,9 +346,9 @@ export class AppdefinitionsApi extends BaseApi {
     }
     /**
         * Update an app definition
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId Application definition ID
         * @param updatedModel updatedModel
         * @return Promise<AppDefinitionUpdateResultRepresentation>

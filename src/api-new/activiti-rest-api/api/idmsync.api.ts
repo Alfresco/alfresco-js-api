@@ -25,9 +25,9 @@ import { BaseApi } from './base.api';
 export class IdmsyncApi extends BaseApi {
     /**
     * Get log file for a sync log entry
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param syncLogEntryId syncLogEntryId
     * @return Promise<{}>
     */
@@ -62,9 +62,9 @@ export class IdmsyncApi extends BaseApi {
     }
     /**
         * List sync log entries
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param opts Optional parameters
         * @param opts.tenantId tenantId
         * @param opts.page page
@@ -72,7 +72,7 @@ export class IdmsyncApi extends BaseApi {
         * @param opts.size size
         * @return Promise<Array<SyncLogEntryRepresentation>>
         */
-    getSyncLogEntriesUsingGET(opts: any): Promise<Array<SyncLogEntryRepresentation>> {
+    getSyncLogEntriesUsingGET(opts?: any): Promise<Array<SyncLogEntryRepresentation>> {
         opts = opts || {};
         let postBody = null;
 

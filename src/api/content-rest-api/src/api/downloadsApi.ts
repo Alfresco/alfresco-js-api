@@ -16,8 +16,8 @@
 */
 
 import { DownloadBodyCreate } from '../model/DownloadBodyCreate';
-import { DownloadEntry } from '../model/DownloadEntry';
-import { BaseApi } from './baseApi';
+import { AlfrescoApi } from '../../../../alfrescoApi';
+import { DownloadsApi as NewDownloadsApi } from '../../../../api-new/content-rest-api/api/downloads.api';
 
 /**
  * Downloads service.
@@ -32,9 +32,13 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use,
  * default to {@link module:ApiClient#instance} if unspecified.
  */
-export class DownloadsApi extends BaseApi {
+export class DownloadsApi {
 
-    private path: string = '/downloads';
+    downloadsApi: NewDownloadsApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.downloadsApi = new NewDownloadsApi(alfrescoApi);
+    }
 
     /**
      * Callback function to receive the result of the cancelDownload operation.
@@ -50,30 +54,8 @@ export class DownloadsApi extends BaseApi {
      * @param {String} downloadId The identifier of a download node.
      * @param {module:api/DownloadsApi~cancelDownloadCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    cancelDownload(downloadId: string, callback: any): Promise<any> {
-        let postBody = null;
-
-        // verify the required parameter 'downloadId' is set
-        if (downloadId === undefined || downloadId === null) {
-            throw new Error("Missing param 'downloadId' in cancelDownload");
-        }
-
-        let pathParams = {
-            'downloadId': downloadId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{downloadId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType, callback
-        );
+    cancelDownload(downloadId: string): Promise<any> {
+        return this.downloadsApi.cancelDownload(downloadId);
     }
 
     /**
@@ -93,30 +75,8 @@ export class DownloadsApi extends BaseApi {
      * @param {module:api/DownloadsApi~createDownloadCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/DownloadEntry}
      */
-    createDownload(downloadBodyCreate: DownloadBodyCreate, opts: any, callback: any): Promise<DownloadEntry> {
-        opts = opts || {};
-        let postBody = downloadBodyCreate;
-
-        // verify the required parameter 'downloadBodyCreate' is set
-        if (downloadBodyCreate === undefined || downloadBodyCreate === null) {
-            throw new Error("Missing param 'downloadBodyCreate' in createDownload");
-        }
-
-        let pathParams = {};
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path, 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, null, callback
-        );
+    createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: any): Promise<any> {
+        return this.downloadsApi.createDownload(<any>downloadBodyCreate, opts);
     }
 
     /**
@@ -136,31 +96,7 @@ export class DownloadsApi extends BaseApi {
      * @param {module:api/DownloadsApi~getDownloadCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/DownloadEntry}
      */
-    getDownload(downloadId: string, opts: any, callback: any): Promise<DownloadEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'downloadId' is set
-        if (downloadId === undefined || downloadId === null) {
-            throw new Error("Missing param 'downloadId' in getDownload");
-        }
-
-        let pathParams = {
-            'downloadId': downloadId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{downloadId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, null, callback
-        );
+    getDownload(downloadId: string, opts?: any): Promise<any> {
+        return this.downloadsApi.getDownload(downloadId, opts);
     }
 }

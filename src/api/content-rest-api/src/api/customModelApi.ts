@@ -31,7 +31,7 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class CustomModelApi extends BaseApi {
+export class CustomModelApi  {
 
     private: boolean = true;
 

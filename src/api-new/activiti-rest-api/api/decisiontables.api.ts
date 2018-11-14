@@ -27,9 +27,9 @@ import { BaseApi } from './base.api';
 export class DecisiontablesApi extends BaseApi {
     /**
     * Get definition for a decision table
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param decisionTableId decisionTableId
     * @return Promise<JsonNode>
     */
@@ -64,9 +64,9 @@ export class DecisiontablesApi extends BaseApi {
     }
     /**
         * Get a decision table
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param decisionTableId decisionTableId
         * @return Promise<RuntimeDecisionTableRepresentation>
         */
@@ -101,9 +101,9 @@ export class DecisiontablesApi extends BaseApi {
     }
     /**
         * Query decision tables
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param opts Optional parameters
         * @param opts.nameLike nameLike
         * @param opts.keyLike keyLike
@@ -115,7 +115,7 @@ export class DecisiontablesApi extends BaseApi {
         * @param opts.size size
         * @return Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation>
         */
-    getDecisionTablesUsingGET(opts: any): Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation> {
+    getDecisionTablesUsingGET(opts?: any): Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation> {
         opts = opts || {};
         let postBody = null;
 

@@ -15,8 +15,7 @@
 * limitations under the License.
 */
 
-import { WebscriptApi as NewWebscriptApi } from '../../../../api-new/content-rest-api/api/webscript.api';
-import { AlfrescoApi } from '../../../../alfrescoApi';
+import { BaseApi } from './base.api';
 
 /**
  * Tags service.
@@ -31,14 +30,9 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class WebscriptApi {
+export class WebscriptApi extends BaseApi {
 
-    webscriptApi: NewWebscriptApi;
-
-    public init(alfrescoApi?: AlfrescoApi) {
-        this.webscriptApi = new NewWebscriptApi(alfrescoApi);
-    }
-
+    allowedMethod: string[] = ['GET', 'POST', 'PUT', 'DELETE'];
 
     /**
      * Call a get on a  Web Scripts see https://wiki.alfresco.com/wiki/Web_Scripts for more details about Web Scripts
@@ -55,6 +49,30 @@ export class WebscriptApi {
      * @returns {Promise} A promise that is resolved return the webScript data and {error} if rejected.
      */
     executeWebScript(httpMethod: string, scriptPath: string, scriptArgs: string, contextRoot: string, servicePath: string, postBody: any): Promise<any> {
-        return this.webscriptApi.executeWebScript(httpMethod, scriptPath, scriptArgs, contextRoot, servicePath, postBody);
+        contextRoot = contextRoot || 'alfresco';
+        servicePath = servicePath || 'service';
+        postBody = postBody || null;
+
+        if (!httpMethod || this.allowedMethod.indexOf(httpMethod) === -1) {
+            throw 'method allowed value  GET, POST, PUT and DELETE';
+        }
+
+        if (!scriptPath) {
+            throw 'Missing param scriptPath in executeWebScript';
+        }
+
+        let pathParams = {};
+        let headerParams = {};
+        let formParams = {};
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json', 'text/html'];
+        let returnType = {};
+
+        return this.apiClient.callApi(
+            '/' + servicePath + '/' + scriptPath, httpMethod,
+            pathParams, scriptArgs, headerParams, formParams, postBody,
+            contentTypes, accepts, returnType, contextRoot
+        );
     }
 }

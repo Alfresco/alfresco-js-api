@@ -27,9 +27,9 @@ import { BaseApi } from './base.api';
 export class IntegrationalfrescocloudApi extends BaseApi {
     /**
     * Alfresco Cloud Authorization
-    * 
+    *
     * Returns Alfresco OAuth HTML Page
-    * 
+    *
     * @param code code
     * @return Promise<{}>
     */
@@ -65,9 +65,9 @@ export class IntegrationalfrescocloudApi extends BaseApi {
     }
     /**
         * List Alfresco networks
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @return Promise<ResultListDataRepresentationAlfrescoNetworkRepresenation>
         */
     getAllNetworksUsingGET(): Promise<ResultListDataRepresentationAlfrescoNetworkRepresenation> {
@@ -97,9 +97,9 @@ export class IntegrationalfrescocloudApi extends BaseApi {
     }
     /**
         * List Alfresco sites
-        * 
+        *
         * Returns ALL Sites
-        * 
+        *
         * @param networkId networkId
         * @return Promise<ResultListDataRepresentationAlfrescoSiteRepresenation>
         */
@@ -134,16 +134,16 @@ export class IntegrationalfrescocloudApi extends BaseApi {
     }
     /**
         * List files and folders inside a specific folder identified by path
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param networkId networkId
         * @param opts Optional parameters
         * @param opts.siteId siteId
         * @param opts.path path
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
-    getContentInFolderPathUsingGET(networkId: string, opts: any): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+    getContentInFolderPathUsingGET(networkId: string, opts?: any): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -176,9 +176,9 @@ export class IntegrationalfrescocloudApi extends BaseApi {
     }
     /**
         * List files and folders inside a specific folder
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param networkId networkId
         * @param folderId folderId
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
@@ -218,9 +218,9 @@ export class IntegrationalfrescocloudApi extends BaseApi {
     }
     /**
         * List files and folders inside a specific site
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param networkId networkId
         * @param siteId siteId
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>

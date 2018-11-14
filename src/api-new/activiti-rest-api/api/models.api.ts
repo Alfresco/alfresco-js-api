@@ -28,9 +28,9 @@ import { BaseApi } from './base.api';
 export class ModelsApi extends BaseApi {
     /**
     * Create a new model
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param modelRepresentation modelRepresentation
     * @return Promise<ModelRepresentation>
     */
@@ -65,16 +65,16 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * Delete a model
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @param opts Optional parameters
         * @param opts.cascade cascade
         * @param opts.deleteRuntimeApp deleteRuntimeApp
         * @return Promise<{}>
         */
-    deleteModelUsingDELETE(modelId: number, opts: any): Promise<{}> {
+    deleteModelUsingDELETE(modelId: number, opts?: any): Promise<{}> {
         opts = opts || {};
         let postBody = null;
 
@@ -107,9 +107,9 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * Duplicate an existing model
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @param modelRepresentation modelRepresentation
         * @return Promise<ModelRepresentation>
@@ -149,9 +149,9 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * Get model content
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @return Promise<ObjectNode>
         */
@@ -186,9 +186,9 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * Get a model's thumbnail image
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @return Promise<Array<string>>
         */
@@ -223,15 +223,15 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * Get a model
-        * 
+        *
         * Models act as containers for process, form, decision table and app definitions
-        * 
+        *
         * @param modelId modelId
         * @param opts Optional parameters
         * @param opts.includePermissions includePermissions
         * @return Promise<ModelRepresentation>
         */
-    getModelUsingGET(modelId: number, opts: any): Promise<ModelRepresentation> {
+    getModelUsingGET(modelId: number, opts?: any): Promise<ModelRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -263,9 +263,9 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * List process definition models shared with the current user
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @return Promise<ResultListDataRepresentationModelRepresentation>
         */
     getModelsToIncludeInAppDefinitionUsingGET(): Promise<ResultListDataRepresentationModelRepresentation> {
@@ -295,9 +295,9 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * List models (process, form, decision rule or app)
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param opts Optional parameters
         * @param opts.filter filter
         * @param opts.sort sort
@@ -305,7 +305,7 @@ export class ModelsApi extends BaseApi {
         * @param opts.referenceId referenceId
         * @return Promise<ResultListDataRepresentationModelRepresentation>
         */
-    getModelsUsingGET(opts: any): Promise<ResultListDataRepresentationModelRepresentation> {
+    getModelsUsingGET(opts?: any): Promise<ResultListDataRepresentationModelRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -336,9 +336,9 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * Create a new version of a model
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @param file file
         * @return Promise<ModelRepresentation>
@@ -379,9 +379,9 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * Import a BPMN 2.0 XML file
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param file file
         * @return Promise<ModelRepresentation>
         */
@@ -417,9 +417,9 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * Update model content
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @param values values
         * @return Promise<ModelRepresentation>
@@ -459,9 +459,9 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * Update a model
-        * 
+        *
         * This method allows you to update the metadata of a model. In order to update the content of the model you will need to call the specific endpoint for that model type.
-        * 
+        *
         * @param modelId modelId
         * @param updatedModel updatedModel
         * @return Promise<ModelRepresentation>
@@ -501,15 +501,15 @@ export class ModelsApi extends BaseApi {
     }
     /**
         * Validate model content
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @param opts Optional parameters
         * @param opts.values values
         * @return Promise<Array<ValidationErrorRepresentation>>
         */
-    validateModelUsingPOST(modelId: number, opts: any): Promise<Array<ValidationErrorRepresentation>> {
+    validateModelUsingPOST(modelId: number, opts?: any): Promise<Array<ValidationErrorRepresentation>> {
         opts = opts || {};
         let postBody = opts['values'];
 

@@ -44,10 +44,10 @@ import { BaseApi } from './base.api';
 export class SitesApi extends BaseApi {
     /**
     * Approve a site membership request
-    * 
+    *
     * Approve a site membership request.
 
-    * 
+    *
     * @param siteId The identifier of a site.
     * @param inviteeId The invitee user name.
     * @param opts Optional parameters
@@ -55,7 +55,7 @@ export class SitesApi extends BaseApi {
 
     * @return Promise<{}>
     */
-    approveSiteMembershipRequest(siteId: string, inviteeId: string, opts: any): Promise<{} | ModelError> {
+    approveSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = opts['siteMembershipApprovalBody'];
 
@@ -90,53 +90,53 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Create a site
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Creates a default site with the given details.  Unless explicitly specified, the site id will be generated
     from the site title. The site id must be unique and only contain alphanumeric and/or dash characters.
-    
+
     Note: the id of a site cannot be updated once the site has been created.
-    
+
     For example, to create a public site called \"Marketing\" the following body could be used:
     JSON
     {
       \"title\": \"Marketing\",
       \"visibility\": \"PUBLIC\"
     }
-    
-    
+
+
     The creation of the (surf) configuration files required by Share can be skipped via the **skipConfiguration** query parameter.
-    
+
     **Note:** if skipped then such a site will **not** work within Share.
-    
+
     The addition of the site to the user's site favorites can be skipped via the **skipAddToFavorites** query parameter.
-    
+
     The creator will be added as a member with Site Manager role.
-    
+
     When you create a site, a container called **documentLibrary** is created for you in the new site.
     This container is the root folder for content stored in the site.
-    
-        * 
+
+        *
         * @param siteBodyCreate The site details
         * @param opts Optional parameters
         * @param opts.skipConfiguration Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. (default to false)
         * @param opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user's site favorites. (default to false)
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteEntry>
         */
-    createSite(siteBodyCreate: SiteBodyCreate, opts: any): Promise<SiteEntry | ModelError> {
+    createSite(siteBodyCreate: SiteBodyCreate, opts?: any): Promise<SiteEntry | ModelError> {
         opts = opts || {};
         let postBody = siteBodyCreate;
 
@@ -170,19 +170,19 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Create a site membership
-        * 
+        *
         * Creates a site membership for person **personId** on site **siteId**.
-    
+
     You can set the **role** to one of four types:
-    
+
     * SiteConsumer
     * SiteCollaborator
     * SiteContributor
     * SiteManager
-    
+
     **Note:** You can create more than one site membership by
     specifying a list of people in the JSON body like this:
-    
+
     JSON
     [
       {
@@ -194,9 +194,9 @@ export class SitesApi extends BaseApi {
         \"id\": \"fred\"
       }
     ]
-    
+
     If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
-    
+
     JSON
     {
       \"list\": {
@@ -221,27 +221,27 @@ export class SitesApi extends BaseApi {
         ]
       }
     }
-    
-    
-        * 
+
+
+        *
         * @param siteId The identifier of a site.
         * @param siteMembershipBodyCreate The person to add and their role
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteMemberEntry>
         */
-    createSiteMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts: any): Promise<SiteMemberEntry | ModelError> {
+    createSiteMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: any): Promise<SiteMemberEntry | ModelError> {
         opts = opts || {};
         let postBody = siteMembershipBodyCreate;
 
@@ -277,19 +277,19 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Create a site membership request
-        * 
+        *
         * Create a site membership request for yourself on the site with the identifier of **id**, specified in the JSON body.
     The result of the request differs depending on the type of site.
-    
+
     * For a **public** site, you join the site immediately as a SiteConsumer.
     * For a **moderated** site, your request is added to the site membership request list. The request waits for approval from the Site Manager.
     * You cannot request membership of a **private** site. Members are invited by the site administrator.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
+
      **Note:** You can create site membership requests for more than one site by
     specifying a list of sites in the JSON body like this:
-    
+
     JSON
     [
       {
@@ -303,9 +303,9 @@ export class SitesApi extends BaseApi {
         \"title\": \"Request for test site 2\",
       }
     ]
-    
+
     If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
-    
+
     JSON
     {
       \"list\": {
@@ -330,27 +330,27 @@ export class SitesApi extends BaseApi {
         ]
       }
     }
-    
-    
-        * 
+
+
+        *
         * @param personId The identifier of a person.
         * @param siteMembershipRequestBodyCreate Site membership request details
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteMembershipRequestEntry>
         */
-    createSiteMembershipRequestForPerson(personId: string, siteMembershipRequestBodyCreate: SiteMembershipRequestBodyCreate, opts: any): Promise<SiteMembershipRequestEntry | ModelError> {
+    createSiteMembershipRequestForPerson(personId: string, siteMembershipRequestBodyCreate: SiteMembershipRequestBodyCreate, opts?: any): Promise<SiteMembershipRequestEntry | ModelError> {
         opts = opts || {};
         let postBody = siteMembershipRequestBodyCreate;
 
@@ -386,18 +386,18 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Delete a site
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Deletes the site with **siteId**.
-    
-        * 
+
+        *
         * @param siteId The identifier of a site.
         * @param opts Optional parameters
         * @param opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
         * @return Promise<{}>
         */
-    deleteSite(siteId: string, opts: any): Promise<{} | ModelError> {
+    deleteSite(siteId: string, opts?: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -429,12 +429,12 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Delete a site membership
-        * 
+        *
         * Deletes person **personId** as a member of site **siteId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
-        * 
+
+        *
         * @param siteId The identifier of a site.
         * @param personId The identifier of a person.
         * @return Promise<{}>
@@ -474,12 +474,12 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Delete a site membership
-        * 
+        *
         * Deletes person **personId** as a member of site **siteId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
-        * 
+
+        *
         * @param personId The identifier of a person.
         * @param siteId The identifier of a site.
         * @return Promise<{}>
@@ -519,12 +519,12 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Delete a site membership request
-        * 
+        *
         * Deletes the site membership request to site **siteId** for person **personId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
-        * 
+
+        *
         * @param personId The identifier of a person.
         * @param siteId The identifier of a site.
         * @return Promise<{}>
@@ -564,40 +564,40 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Get a site
-        * 
+        *
         * Gets information for site **siteId**.
-    
+
     You can use the **relations** parameter to include one or more related
     entities in a single response and so reduce network traffic.
-    
+
     The entity types in Alfresco are organized in a tree structure.
     The **sites** entity has two children, **containers** and **members**.
     The following relations parameter returns all the container and member
     objects related to the site **siteId**:
-    
-    
+
+
     containers,members
-    
-    
-        * 
+
+
+        *
         * @param siteId The identifier of a site.
         * @param opts Optional parameters
         * @param opts.relations Use the relations parameter to include one or more related entities in a single response.
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteEntry>
         */
-    getSite(siteId: string, opts: any): Promise<SiteEntry | ModelError> {
+    getSite(siteId: string, opts?: any): Promise<SiteEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -630,27 +630,27 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Get a site container
-        * 
+        *
         * Gets information on the container **containerId** in site **siteId**.
-        * 
+        *
         * @param siteId The identifier of a site.
         * @param containerId The unique identifier of a site container.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteContainerEntry>
         */
-    getSiteContainer(siteId: string, containerId: string, opts: any): Promise<SiteContainerEntry | ModelError> {
+    getSiteContainer(siteId: string, containerId: string, opts?: any): Promise<SiteContainerEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -686,30 +686,30 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Get a site membership
-        * 
+        *
         * Gets site membership information for person **personId** on site **siteId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
-        * 
+
+        *
         * @param siteId The identifier of a site.
         * @param personId The identifier of a person.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteMemberEntry>
         */
-    getSiteMembership(siteId: string, personId: string, opts: any): Promise<SiteMemberEntry | ModelError> {
+    getSiteMembership(siteId: string, personId: string, opts?: any): Promise<SiteMemberEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -745,12 +745,12 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Get a site membership
-        * 
+        *
         * Gets site membership information for person **personId** on site **siteId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
-        * 
+
+        *
         * @param personId The identifier of a person.
         * @param siteId The identifier of a site.
         * @return Promise<SiteRoleEntry>
@@ -790,30 +790,30 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Get a site membership request
-        * 
+        *
         * Gets the site membership request for site **siteId** for person **personId**, if one exists.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
-        * 
+
+        *
         * @param personId The identifier of a person.
         * @param siteId The identifier of a site.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteMembershipRequestEntry>
         */
-    getSiteMembershipRequestForPerson(personId: string, siteId: string, opts: any): Promise<SiteMembershipRequestEntry | ModelError> {
+    getSiteMembershipRequestForPerson(personId: string, siteId: string, opts?: any): Promise<SiteMembershipRequestEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -849,28 +849,28 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Get site membership requests
-        * 
+        *
         * Get the list of site membership requests the user can action.
-    
+
     You can use the **where** parameter to filter the returned site membership requests by **siteId**. For example:
-    
-    
+
+
     (siteId=mySite)
-    
-    
+
+
     The **where** parameter can also be used to filter by ***personId***. For example:
-    
-    
+
+
     where=(personId=person)
-    
-    
+
+
     This may be combined with the siteId filter, as shown below:
-    
-    
+
+
     where=(siteId=mySite AND personId=person))
-    
-    
-        * 
+
+
+        *
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
@@ -880,20 +880,20 @@ export class SitesApi extends BaseApi {
      (default to 100)
         * @param opts.where A string to restrict the returned objects by using a predicate.
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteMembershipRequestWithPersonPaging>
         */
-    getSiteMembershipRequests(opts: any): Promise<SiteMembershipRequestWithPersonPaging | ModelError> {
+    getSiteMembershipRequests(opts?: any): Promise<SiteMembershipRequestWithPersonPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -924,9 +924,9 @@ export class SitesApi extends BaseApi {
     }
     /**
         * List site containers
-        * 
+        *
         * Gets a list of containers for the site **siteId**.
-        * 
+        *
         * @param siteId The identifier of a site.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -936,20 +936,20 @@ export class SitesApi extends BaseApi {
     If not supplied then the default value is 100.
      (default to 100)
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteContainerPaging>
         */
-    listSiteContainers(siteId: string, opts: any): Promise<SiteContainerPaging | ModelError> {
+    listSiteContainers(siteId: string, opts?: any): Promise<SiteContainerPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -983,12 +983,12 @@ export class SitesApi extends BaseApi {
     }
     /**
         * List site membership requests
-        * 
+        *
         * Gets a list of the current site membership requests for person **personId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
-        * 
+
+        *
         * @param personId The identifier of a person.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -998,20 +998,20 @@ export class SitesApi extends BaseApi {
     If not supplied then the default value is 100.
      (default to 100)
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteMembershipRequestPaging>
         */
-    listSiteMembershipRequestsForPerson(personId: string, opts: any): Promise<SiteMembershipRequestPaging | ModelError> {
+    listSiteMembershipRequestsForPerson(personId: string, opts?: any): Promise<SiteMembershipRequestPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1045,9 +1045,9 @@ export class SitesApi extends BaseApi {
     }
     /**
         * List site memberships
-        * 
+        *
         * Gets a list of site memberships for site **siteId**.
-        * 
+        *
         * @param siteId The identifier of a site.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -1057,20 +1057,20 @@ export class SitesApi extends BaseApi {
     If not supplied then the default value is 100.
      (default to 100)
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteMemberPaging>
         */
-    listSiteMemberships(siteId: string, opts: any): Promise<SiteMemberPaging | ModelError> {
+    listSiteMemberships(siteId: string, opts?: any): Promise<SiteMemberPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1104,34 +1104,34 @@ export class SitesApi extends BaseApi {
     }
     /**
         * List site memberships
-        * 
+        *
         * Gets a list of site membership information for person **personId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
+
     You can use the **where** parameter to filter the returned sites by **visibility** or site **preset**.
-    
+
     Example to filter by **visibility**, use any one of:
-    
-    
+
+
     (visibility='PRIVATE')
     (visibility='PUBLIC')
     (visibility='MODERATED')
-    
-    
+
+
     Example to filter by site **preset**:
-    
-    
+
+
     (preset='site-dashboard')
-    
-    
+
+
     The default sort order for the returned list is for sites to be sorted by ascending title.
     You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
     * id
     * title
     * role
-    
-        * 
+
+        *
         * @param personId The identifier of a person.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -1142,29 +1142,29 @@ export class SitesApi extends BaseApi {
      (default to 100)
         * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
-    
+
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
     above to check if any fields used in this method have a descending default search order.
-    
+
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-    
+
         * @param opts.relations Use the relations parameter to include one or more related entities in a single response.
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @param opts.where A string to restrict the returned objects by using a predicate.
         * @return Promise<SiteRolePaging>
         */
-    listSiteMembershipsForPerson(personId: string, opts: any): Promise<SiteRolePaging | ModelError> {
+    listSiteMembershipsForPerson(personId: string, opts?: any): Promise<SiteRolePaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1201,44 +1201,44 @@ export class SitesApi extends BaseApi {
     }
     /**
         * List sites
-        * 
+        *
         * Gets a list of sites in this repository.
-    
+
     You can use the **where** parameter to filter the returned sites by **visibility** or site **preset**.
-    
+
     Example to filter by **visibility**, use any one of:
-    
-    
+
+
     (visibility='PRIVATE')
     (visibility='PUBLIC')
     (visibility='MODERATED')
-    
-    
+
+
     Example to filter by site **preset**:
-    
-    
+
+
     (preset='site-dashboard')
-    
-    
+
+
     The default sort order for the returned list is for sites to be sorted by ascending title.
     You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
     * id
     * title
     * description
-    
+
     You can use the **relations** parameter to include one or more related
     entities in a single response and so reduce network traffic.
-    
+
     The entity types in Alfresco are organized in a tree structure.
     The **sites** entity has two children, **containers** and **members**.
     The following relations parameter returns all the container and member
     objects related to each site:
-    
-    
+
+
     containers,members
-    
-    
-        * 
+
+
+        *
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
@@ -1248,29 +1248,29 @@ export class SitesApi extends BaseApi {
      (default to 100)
         * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
     sort the list by one or more fields.
-    
+
     Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
     above to check if any fields used in this method have a descending default search order.
-    
+
     To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-    
+
         * @param opts.relations Use the relations parameter to include one or more related entities in a single response.
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @param opts.where A string to restrict the returned objects by using a predicate.
         * @return Promise<SitePaging>
         */
-    listSites(opts: any): Promise<SitePaging | ModelError> {
+    listSites(opts?: any): Promise<SitePaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -1303,18 +1303,18 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Reject a site membership request
-        * 
+        *
         * Reject a site membership request.
-    
-        * 
+
+        *
         * @param siteId The identifier of a site.
         * @param inviteeId The invitee user name.
         * @param opts Optional parameters
         * @param opts.siteMembershipRejectionBody Rejecting a request to join, optionally, allows the inclusion of comment.
-    
+
         * @return Promise<{}>
         */
-    rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts: any): Promise<{} | ModelError> {
+    rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = opts['siteMembershipRejectionBody'];
 
@@ -1349,33 +1349,33 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Update a site
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Update the details for the given site **siteId**. Site Manager or otherwise a
     (site) admin can update title, description or visibility.
-    
+
     Note: the id of a site cannot be updated once the site has been created.
-    
-        * 
+
+        *
         * @param siteId The identifier of a site.
         * @param siteBodyUpdate The site information to update.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteEntry>
         */
-    updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts: any): Promise<SiteEntry | ModelError> {
+    updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts?: any): Promise<SiteEntry | ModelError> {
         opts = opts || {};
         let postBody = siteBodyUpdate;
 
@@ -1411,38 +1411,38 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Update a site membership
-        * 
+        *
         * Update the membership of person **personId** in site **siteId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
+
     You can set the **role** to one of four types:
-    
+
     * SiteConsumer
     * SiteCollaborator
     * SiteContributor
     * SiteManager
-    
-        * 
+
+        *
         * @param siteId The identifier of a site.
         * @param personId The identifier of a person.
         * @param siteMembershipBodyUpdate The persons new role
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteMemberEntry>
         */
-    updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts: any): Promise<SiteMemberEntry | ModelError> {
+    updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: any): Promise<SiteMemberEntry | ModelError> {
         opts = opts || {};
         let postBody = siteMembershipBodyUpdate;
 
@@ -1482,31 +1482,31 @@ export class SitesApi extends BaseApi {
     }
     /**
         * Update a site membership request
-        * 
+        *
         * Updates the message for the site membership request to site **siteId** for person **personId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
-        * 
+
+        *
         * @param personId The identifier of a person.
         * @param siteId The identifier of a site.
         * @param siteMembershipRequestBodyUpdate The new message to display
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SiteMembershipRequestEntry>
         */
-    updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts: any): Promise<SiteMembershipRequestEntry | ModelError> {
+    updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts?: any): Promise<SiteMembershipRequestEntry | ModelError> {
         opts = opts || {};
         let postBody = siteMembershipRequestBodyUpdate;
 

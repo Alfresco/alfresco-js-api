@@ -15,10 +15,9 @@
 * limitations under the License.
 */
 
-import { CommentEntry } from '../model/CommentEntry';
-import { CommentPaging } from '../model/CommentPaging';
 import { CommentBody } from '../model/CommentBody';
-import { BaseApi } from './baseApi';
+import { AlfrescoApi } from '../../../../alfrescoApi';
+import { CommentsApi as NewCommentsApi } from '../../../../api-new/content-rest-api/api/comments.api';
 
 /**
  * Comments service.
@@ -33,9 +32,13 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class CommentsApi extends BaseApi {
+export class CommentsApi {
 
-    private path: string = '/nodes';
+    commentsApi: NewCommentsApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.commentsApi = new NewCommentsApi(alfrescoApi);
+    }
 
     /**
      * Add a comment
@@ -47,38 +50,8 @@ export class CommentsApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CommentEntry}
      * data is of type: {module:model/CommentEntry}
      */
-    addComment(nodeId: string, commentBody, opts): Promise<CommentEntry> {
-        opts = opts || {};
-
-        let postBody = commentBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in addComment";
-        }
-
-        // verify the required parameter 'commentBody' is set
-        if (commentBody === undefined || commentBody === null) {
-            throw "Missing param 'commentBody' in addComment";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/comments', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    addComment(nodeId: string, commentBody, opts): Promise<any> {
+        return this.commentsApi.createComment(nodeId, <any>commentBody, opts);
     }
 
     /**
@@ -91,34 +64,8 @@ export class CommentsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/CommentPaging}
      */
-    getComments(nodeId: string, opts: any): Promise<CommentPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getComments";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/comments', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getComments(nodeId: string, opts?: any): Promise<any> {
+        return this.commentsApi.listComments(nodeId, opts);
     }
 
     /**
@@ -128,35 +75,7 @@ export class CommentsApi extends BaseApi {
      * @param {String} commentId The identifier of a comment.
      */
     removeComment(nodeId: string, commentId: string): Promise<any> {
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in removeComment";
-        }
-
-        // verify the required parameter 'commentId' is set
-        if (commentId === undefined || commentId === null) {
-            throw "Missing param 'commentId' in removeComment";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId,
-            'commentId': commentId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/comments/{commentId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.commentsApi.deleteComment(nodeId, commentId);
     }
 
     /**
@@ -169,42 +88,7 @@ export class CommentsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/CommentEntry}
      */
-    updateComment(nodeId: string, commentId: string, commentBody: CommentBody, opts: any): Promise<CommentEntry> {
-        opts = opts || {};
-        let postBody = commentBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in updateComment";
-        }
-
-        // verify the required parameter 'commentId' is set
-        if (commentId === undefined || commentId === null) {
-            throw "Missing param 'commentId' in updateComment";
-        }
-
-        // verify the required parameter 'commentBody' is set
-        if (commentBody === undefined || commentBody === null) {
-            throw "Missing param 'commentBody' in updateComment";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId,
-            'commentId': commentId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/comments/{commentId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    updateComment(nodeId: string, commentId: string, commentBody: CommentBody, opts?: any): Promise<any> {
+        return this.commentsApi.updateComment(nodeId, commentId, <any>commentBody, opts);
     }
 }

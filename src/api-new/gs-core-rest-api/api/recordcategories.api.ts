@@ -30,7 +30,7 @@ import { BaseApi } from './base.api';
 export class RecordcategoriesApi extends BaseApi {
     /**
     * Create a record category or a record folder
-    * 
+    *
     * Create a record category or a record folder as a primary child of **recordCategoryId**.
 
 You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then
@@ -123,7 +123,7 @@ JSON
   }
 }
 
-    * 
+    *
     * @param recordCategoryId The identifier of a record category.
     * @param nodeBodyCreate The node information to create.
 
@@ -149,7 +149,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordCategoryChildEntry>
     */
-    createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts: any): Promise<RecordCategoryChildEntry | ModelError> {
+    createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<RecordCategoryChildEntry | ModelError> {
         opts = opts || {};
         let postBody = nodeBodyCreate;
 
@@ -187,10 +187,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Delete a record category
-        * 
+        *
         * Deletes record category **recordCategoryId**.
-    
-        * 
+
+        *
         * @param recordCategoryId The identifier of a record category.
         * @return Promise<{}>
         */
@@ -225,38 +225,38 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Get a record category
-        * 
+        *
         * Gets information for record category **recordCategoryId**
-    
+
     Mandatory fields and the record category's aspects and properties are returned by default.
-    
+
     You can use the **include** parameter (include=allowableOperations) to return additional information.
-    
-        * 
+
+        *
         * @param recordCategoryId The identifier of a record category.
         * @param opts Optional parameters
         * @param opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * hasRetentionSchedule
     * path
-    
+
         * @param opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
-    
+
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<RecordCategoryEntry>
         */
-    getRecordCategory(recordCategoryId: string, opts: any): Promise<RecordCategoryEntry | ModelError> {
+    getRecordCategory(recordCategoryId: string, opts?: any): Promise<RecordCategoryEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -290,28 +290,28 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List record category's children
-        * 
+        *
         * Returns a list of record categories and/or record folders.
-    
+
     Minimal information for each child is returned by default.
-    
+
     You can use the **include** parameter (include=allowableOperations) to return additional information.
-    
+
     The list of child nodes includes primary children and secondary children, if there are any.
-    
-        * 
+
+        *
         * @param recordCategoryId The identifier of a record category.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
         * @param opts.maxItems The maximum number of items to return in the list.
         * @param opts.where Optionally filter the list. Here are some examples:
-    
+
     *   where=(nodeType='rma:recordFolder')
-    
+
     *   where=(nodeType='rma:recordCategory')
-    
+
     *   where=(isRecordFolder=true AND isClosed=false)
-    
+
         * @param opts.include Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * aspectNames
@@ -321,25 +321,25 @@ parameter are returned in addition to those specified in the **fields** paramete
     * isRecordFolder
     * path
     * properties
-    
+
         * @param opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
-    
+
         * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<RecordCategoryChildPaging>
         */
-    listRecordCategoryChildren(recordCategoryId: string, opts: any): Promise<RecordCategoryChildPaging | ModelError> {
+    listRecordCategoryChildren(recordCategoryId: string, opts?: any): Promise<RecordCategoryChildPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -377,13 +377,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Update a record category
-        * 
+        *
         * Updates record category **recordCategoryId**. For example, you can rename a record category:
     JSON
     {
       \"name\":\"My new name\"
     }
-    
+
     You can also set or update one or more properties:
     JSON
     {
@@ -393,12 +393,12 @@ parameter are returned in addition to those specified in the **fields** paramete
            \"rma:reviewPeriod\":\"month|6\"
         }
     }
-    
+
     **Note:** If you want to add or remove aspects, then you must use **GET /record-categories/{recordCategoryId}** first to get the complete set of *aspectNames*.
-    
+
     **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
-    
-        * 
+
+        *
         * @param recordCategoryId The identifier of a record category.
         * @param recordCategoryBodyUpdate The record category information to update.
         * @param opts Optional parameters
@@ -406,22 +406,22 @@ parameter are returned in addition to those specified in the **fields** paramete
     * allowableOperations
     * hasRetentionSchedule
     * path
-    
+
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<RecordCategoryEntry>
         */
-    updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts: any): Promise<RecordCategoryEntry | ModelError> {
+    updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordCategoryEntry | ModelError> {
         opts = opts || {};
         let postBody = recordCategoryBodyUpdate;
 

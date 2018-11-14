@@ -25,14 +25,14 @@ import { BaseApi } from './base.api';
 export class DatasourcesApi extends BaseApi {
     /**
     * Get data sources
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param opts Optional parameters
     * @param opts.tenantId tenantId
     * @return Promise<ResultListDataRepresentationDataSourceRepresentation>
     */
-    getDataSourcesUsingGET(opts: any): Promise<ResultListDataRepresentationDataSourceRepresentation> {
+    getDataSourcesUsingGET(opts?: any): Promise<ResultListDataRepresentationDataSourceRepresentation> {
         opts = opts || {};
         let postBody = null;
 

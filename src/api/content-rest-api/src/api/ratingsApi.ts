@@ -15,10 +15,9 @@
 * limitations under the License.
 */
 
-import { RatingEntry } from '../model/RatingEntry';
-import { RatingPaging } from '../model/RatingPaging';
 import { RatingBody } from '../model/RatingBody';
-import { BaseApi } from './baseApi';
+import { RatingsApi as NewRatingsApi } from '../../../../api-new/content-rest-api/api/ratings.api';
+import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
  * Ratings service.
@@ -33,9 +32,15 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class RatingsApi extends BaseApi {
+export class RatingsApi  {
 
     private path: string = '/nodes';
+
+    ratingsApi: NewRatingsApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.ratingsApi = new NewRatingsApi(alfrescoApi);
+    }
 
     /**
      * Get a rating
@@ -46,38 +51,8 @@ export class RatingsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/RatingEntry}
      */
-    getRating(nodeId: string, ratingId: string, opts: any): Promise<RatingEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getRating";
-        }
-
-        // verify the required parameter 'ratingId' is set
-        if (ratingId === undefined || ratingId === null) {
-            throw "Missing param 'ratingId' in getRating";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId,
-            'ratingId': ratingId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/ratings/{ratingId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getRating(nodeId: string, ratingId: string, opts?: any): Promise<any> {
+       return this.ratingsApi.getRating(nodeId,ratingId,opts);
     }
 
     /**
@@ -90,34 +65,8 @@ export class RatingsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/RatingPaging}
      */
-    getRatings(nodeId: string, opts: any): Promise<RatingPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getRatings";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/ratings', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getRatings(nodeId: string, opts?: any): Promise<any> {
+        return this.ratingsApi.listRatings(nodeId,opts);
     }
 
     /**
@@ -127,34 +76,8 @@ export class RatingsApi extends BaseApi {
      * @param {module:model/RatingBody} ratingBody For \&quot;myRating\&quot; the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.\n\nFor example, to \&quot;like\&quot; a file the following body would be used:\n\n  &#x60;&#x60;&#x60;JSON\n    {\n      \&quot;id\&quot;: \&quot;likes\&quot;,\n      \&quot;myRating\&quot;: true\n    }\n  &#x60;&#x60;&#x60;\n
      * data is of type: {module:model/RatingEntry}
      */
-    rate(nodeId: string, ratingBody: RatingBody): Promise<RatingEntry> {
-        let postBody = ratingBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in rate";
-        }
-
-        // verify the required parameter 'ratingBody' is set
-        if (ratingBody === undefined || ratingBody === null) {
-            throw "Missing param 'ratingBody' in rate";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/ratings', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    rate(nodeId: string, ratingBody: RatingBody): Promise<any> {
+        return this.ratingsApi.createRating(nodeId,<any>ratingBody);
     }
 
     /**
@@ -164,34 +87,6 @@ export class RatingsApi extends BaseApi {
      * @param {String} ratingId The identifier of a rating.
      */
     removeRating(nodeId: string, ratingId: string): Promise<any> {
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in removeRating";
-        }
-
-        // verify the required parameter 'ratingId' is set
-        if (ratingId === undefined || ratingId === null) {
-            throw "Missing param 'ratingId' in removeRating";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId,
-            'ratingId': ratingId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/ratings/{ratingId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.ratingsApi.deleteRating(nodeId,ratingId);
     }
 }

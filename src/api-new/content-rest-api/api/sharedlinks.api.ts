@@ -31,7 +31,7 @@ import { BaseApi } from './base.api';
 export class SharedlinksApi extends BaseApi {
     /**
     * Create a shared link to a file
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Create a shared link to the file **nodeId** in the request body. Also, an optional expiry date could be set,
@@ -83,7 +83,7 @@ JSON
   }
 }
 
-    * 
+    *
     * @param sharedLinkBodyCreate The nodeId to create a shared link for.
     * @param opts Optional parameters
     * @param opts.include Returns additional information about the shared link, the following optional fields can be requested:
@@ -104,7 +104,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SharedLinkEntry>
     */
-    createSharedLink(sharedLinkBodyCreate: SharedLinkBodyCreate, opts: any): Promise<SharedLinkEntry | ModelError> {
+    createSharedLink(sharedLinkBodyCreate: SharedLinkBodyCreate, opts?: any): Promise<SharedLinkEntry | ModelError> {
         opts = opts || {};
         let postBody = sharedLinkBodyCreate;
 
@@ -137,12 +137,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Deletes a shared link
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Deletes the shared link with identifier **sharedId**.
-    
-        * 
+
+        *
         * @param sharedId The identifier of a shared link to a file.
         * @return Promise<{}>
         */
@@ -177,18 +177,18 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Email shared link
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Sends email with app-specific url including identifier **sharedId**.
-    
+
     The client and recipientEmails properties are mandatory in the request body. For example, to email a shared link with minimum info:
     JSON
     {
         \"client\": \"myClient\",
         \"recipientEmails\": [\"john.doe@acme.com\", \"joe.bloggs@acme.com\"]
     }
-    
+
     A plain text message property can be optionally provided in the request body to customise the sent email.
     Also, a locale property can be optionally provided in the request body to send the emails in a particular language (if the locale is supported by Alfresco).
     For example, to email a shared link with a messages and a locale:
@@ -199,7 +199,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         \"message\": \"myMessage\",
         \"locale\":\"en-GB\"
     }
-    
+
     **Note:** The client must be registered before you can send a shared link email. See [server documentation]. However, out-of-the-box
      share is registered as a default client, so you could pass **share** as the client name:
     JSON
@@ -207,9 +207,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         \"client\": \"share\",
         \"recipientEmails\": [\"john.doe@acme.com\"]
     }
-    
-    
-        * 
+
+
+        *
         * @param sharedId The identifier of a shared link to a file.
         * @param sharedLinkBodyEmail The shared link email to send.
         * @return Promise<{}>
@@ -249,31 +249,31 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Get a shared link
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Gets minimal information for the file with shared link identifier **sharedId**.
-    
+
     **Note:** No authentication is required to call this endpoint.
-    
-        * 
+
+        *
         * @param sharedId The identifier of a shared link to a file.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SharedLinkEntry>
         */
-    getSharedLink(sharedId: string, opts: any): Promise<SharedLinkEntry | ModelError> {
+    getSharedLink(sharedId: string, opts?: any): Promise<SharedLinkEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -305,35 +305,35 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Get shared link content
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Gets the content of the file with shared link identifier **sharedId**.
-    
+
     **Note:** No authentication is required to call this endpoint.
-    
-        * 
+
+        *
         * @param sharedId The identifier of a shared link to a file.
         * @param opts Optional parameters
         * @param opts.attachment **true** enables a web browser to download the file as an attachment.
     **false** means a web browser may preview the file in a new tab or window, but not
     download the file.
-    
+
     You can only set this parameter to **false** if the content type of the file is in the supported list;
     for example, certain image files and PDF files.
-    
+
     If the content type is not supported for preview, then a value of **false**  is ignored, and
     the attachment will be returned in the response.
      (default to true)
         * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
-    
+
         * @param opts.range The Range header indicates the part of a document that the server should return.
     Single part request supported, for example: bytes=1-10.
-    
+
         * @return Promise<{}>
         */
-    getSharedLinkContent(sharedId: string, opts: any): Promise<{} | ModelError> {
+    getSharedLinkContent(sharedId: string, opts?: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -365,17 +365,17 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Get shared link rendition information
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Gets rendition information for the file with shared link identifier **sharedId**.
-    
+
     This API method returns rendition information where the rendition status is CREATED,
     which means the rendition is available to view/download.
-    
+
     **Note:** No authentication is required to call this endpoint.
-    
-        * 
+
+        *
         * @param sharedId The identifier of a shared link to a file.
         * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
         * @return Promise<RenditionEntry>
@@ -415,36 +415,36 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Get shared link rendition content
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Gets the rendition content for file with shared link identifier **sharedId**.
-    
+
     **Note:** No authentication is required to call this endpoint.
-    
-        * 
+
+        *
         * @param sharedId The identifier of a shared link to a file.
         * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
         * @param opts Optional parameters
         * @param opts.attachment **true** enables a web browser to download the file as an attachment.
     **false** means a web browser may preview the file in a new tab or window, but not
     download the file.
-    
+
     You can only set this parameter to **false** if the content type of the file is in the supported list;
     for example, certain image files and PDF files.
-    
+
     If the content type is not supported for preview, then a value of **false**  is ignored, and
     the attachment will be returned in the response.
      (default to true)
         * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
     Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
-    
+
         * @param opts.range The Range header indicates the part of a document that the server should return.
     Single part request supported, for example: bytes=1-10.
-    
+
         * @return Promise<{}>
         */
-    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts: any): Promise<{} | ModelError> {
+    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<{} | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -480,17 +480,17 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List renditions for a shared link
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Gets a list of the rendition information for the file with shared link identifier **sharedId**.
-    
+
     This API method returns rendition information, including the rendition id, for each rendition
     where the rendition status is CREATED, which means the rendition is available to view/download.
-    
+
     **Note:** No authentication is required to call this endpoint.
-    
-        * 
+
+        *
         * @param sharedId The identifier of a shared link to a file.
         * @return Promise<RenditionPaging>
         */
@@ -525,16 +525,16 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List shared links
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    
+
     Get a list of links that the current user has read permission on source node.
-    
+
     The list is ordered in descending modified order.
-    
+
     **Note:** The list of links is eventually consistent so newly created shared links may not appear immediately.
-    
-        * 
+
+        *
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     If not supplied then the default value is 0.
@@ -543,30 +543,30 @@ parameter are returned in addition to those specified in the **fields** paramete
     If not supplied then the default value is 100.
      (default to 100)
         * @param opts.where Optionally filter the list by \"sharedByUser\" userid of person who shared the link (can also use -me-)
-    
+
     *   where=(sharedByUser='jbloggs')
-    
+
     *   where=(sharedByUser='-me-')
-    
+
         * @param opts.include Returns additional information about the shared link, the following optional fields can be requested:
     * allowableOperations
     * path
-    
+
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<SharedLinkPaging>
         */
-    listSharedLinks(opts: any): Promise<SharedLinkPaging | ModelError> {
+    listSharedLinks(opts?: any): Promise<SharedLinkPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 

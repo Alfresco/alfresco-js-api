@@ -15,14 +15,11 @@
 * limitations under the License.
 */
 
-import { NodeEntry } from '../model/NodeEntry';
-import { NodePaging } from '../model/NodePaging';
-import { NodeAssocPaging } from '../model/nodeAssocPaging';
-import { NodeChildAssociationPaging } from '../model/NodeChildAssociationPaging';
 import { AssocChildBody } from '../model/AssocChildBody';
 import { MoveBody } from '../model/MoveBody';
 import { NodeBody } from '../model/NodeBody';
-import { BaseApi } from './baseApi';
+import { AlfrescoApi } from '../../../../alfrescoApi';
+import { NodesApi } from '../../../../api-new/content-rest-api/api/nodes.api';
 
 /**
  * ChildAssociations service.
@@ -37,9 +34,13 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class ChildAssociationsApi extends BaseApi {
+export class ChildAssociationsApi {
 
-    private path: string = '/nodes';
+    nodesApi: NodesApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.nodesApi = new NodesApi(alfrescoApi);
+    }
 
     /**
      * Create a node
@@ -52,39 +53,8 @@ export class ChildAssociationsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    addNode(nodeId: string, nodeBody: NodeBody, opts: any): Promise<NodeEntry> {
-        opts = opts || {};
-        let postBody = nodeBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in addNode";
-        }
-
-        // verify the required parameter 'nodeBody' is set
-        if (nodeBody === undefined || nodeBody === null) {
-            throw "Missing param 'nodeBody' in addNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'autoRename': opts['autoRename'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json', 'multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/children', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    addNode(nodeId: string, nodeBody: NodeBody, opts?: any): Promise<any> {
+        return this.nodesApi.createNode(nodeId, <any>nodeBody, opts);
     }
 
     /**
@@ -94,34 +64,7 @@ export class ChildAssociationsApi extends BaseApi {
      * @param {module:model/AssocChildBody} assocChildBody The child node id and assoc type.
      */
     addSecondaryChildAssoc(parentId: string, assocChildBody: AssocChildBody): Promise<any> {
-        let postBody = assocChildBody;
-
-        // verify the required parameter 'parentId' is set
-        if (parentId === undefined || parentId === null) {
-            throw "Missing param 'parentId' in addSecondaryChildAssoc";
-        }
-
-        // verify the required parameter 'assocChildBody' is set
-        if (assocChildBody === undefined || assocChildBody === null) {
-            throw "Missing param 'assocChildBody' in addSecondaryChildAssoc";
-        }
-
-        let pathParams = {
-            'parentId': parentId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{parentId}/secondary-children', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.nodesApi.createSecondaryChildAssociation(parentId, <any>assocChildBody);
     }
 
     /**
@@ -131,33 +74,8 @@ export class ChildAssociationsApi extends BaseApi {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
      */
-    deleteNode(nodeId: string, opts: any): Promise<any> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in deleteNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'permanent': opts['permanent']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    deleteNode(nodeId: string, opts?: any): Promise<any> {
+        return this.nodesApi.deleteNode(nodeId, opts);
     }
 
     /**
@@ -175,39 +93,8 @@ export class ChildAssociationsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodePaging}
      */
-    getNodeChildren(nodeId: string, opts: any): Promise<NodePaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getNodeChildren";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': opts['orderBy'],
-            'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'relativePath': opts['relativePath'],
-            'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/children', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getNodeChildren(nodeId: string, opts?: any): Promise<any> {
+        return this.nodesApi.listNodeChildren(nodeId, opts);
     }
 
     /**
@@ -220,34 +107,8 @@ export class ChildAssociationsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    listParents(childId: string, opts: any): Promise<NodeAssocPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'childId' is set
-        if (childId === undefined || childId === null) {
-            throw "Missing param 'childId' in listParents";
-        }
-
-        let pathParams = {
-            'childId': childId
-        };
-        let queryParams = {
-            'where': opts['where'],
-            'include': opts['include'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{childId}/parents', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    listParents(childId: string, opts?: any): Promise<any> {
+        return this.nodesApi.listParents(childId, opts);
     }
 
     /**
@@ -261,35 +122,8 @@ export class ChildAssociationsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeChildAssociationPaging}
      */
-    listSecondaryChildAssociations(parentId: string, opts: any): Promise<NodeChildAssociationPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'parentId' is set
-        if (parentId === undefined || parentId === null) {
-            throw "Missing param 'parentId' in listSecondaryChildAssociations";
-        }
-
-        let pathParams = {
-            'parentId': parentId
-        };
-        let queryParams = {
-            'assocType': opts['assocType'],
-            'where': opts['where'],
-            'include': opts['include'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{parentId}/secondary-children', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    listSecondaryChildAssociations(parentId: string, opts?: any): Promise<any> {
+        return this.nodesApi.listSecondaryChildren(parentId, opts);
     }
 
     /**
@@ -302,38 +136,8 @@ export class ChildAssociationsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    moveNode(nodeId: string, moveBody: MoveBody, opts: any): Promise<NodeEntry> {
-        opts = opts || {};
-        let postBody = moveBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in moveNode";
-        }
-
-        // verify the required parameter 'moveBody' is set
-        if (moveBody === undefined || moveBody === null) {
-            throw "Missing param 'moveBody' in moveNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/move', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    moveNode(nodeId: string, moveBody: MoveBody, opts?: any): Promise<any> {
+        return this.nodesApi.moveNode(nodeId, <any> moveBody, opts);
     }
 
     /**
@@ -344,38 +148,7 @@ export class ChildAssociationsApi extends BaseApi {
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
-    removeSecondaryChildAssoc(parentId: string, childId: string, opts: any): Promise<any> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'parentId' is set
-        if (parentId === undefined || parentId === null) {
-            throw "Missing param 'parentId' in removeSecondaryChildAssoc";
-        }
-
-        // verify the required parameter 'childId' is set
-        if (childId === undefined || childId === null) {
-            throw "Missing param 'childId' in removeSecondaryChildAssoc";
-        }
-
-        let pathParams = {
-            'parentId': parentId,
-            'childId': childId
-        };
-        let queryParams = {
-            'assocType': opts['assocType']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{parentId}/secondary-children/{childId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    removeSecondaryChildAssoc(parentId: string, childId: string, opts?: any): Promise<any> {
+        return this.nodesApi.deleteSecondaryChildAssociation(parentId, childId, opts);
     }
 }

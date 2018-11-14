@@ -198,9 +198,10 @@ export class AlfrescoApiClient {
      * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
      */
     buildCollectionParam(param, collectionFormat) {
-        if (param === null) {
+        if (!param) {
             return null;
         }
+
         switch (collectionFormat) {
             case 'csv':
                 return param.map(this.paramToString).join(',');

@@ -27,14 +27,14 @@ import { BaseApi } from './base.api';
 export class TransfersApi extends BaseApi {
     /**
     * Get a transfer
-    * 
+    *
     * Gets information for transfer **transferId**
 
 Mandatory fields and the transfer's aspects and properties are returned by default.
 
 You can use the **include** parameter (include=allowableOperations) to return additional information.
 
-    * 
+    *
     * @param transferId The identifier of a transfer.
     * @param opts Optional parameters
     * @param opts.include Returns additional information about the transfer folder. Any optional field from the response model can be requested. For example:
@@ -57,7 +57,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TransferEntry>
     */
-    getTransfer(transferId: string, opts: any): Promise<TransferEntry | ModelError> {
+    getTransfer(transferId: string, opts?: any): Promise<TransferEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -90,14 +90,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List transfer's children
-        * 
+        *
         * Gets a list of transfer's children.
-    
+
     Minimal information for each child is returned by default.
-    
+
     You can use the **include** parameter (include=allowableOperations) to return additional information.
-    
-        * 
+
+        *
         * @param transferId The identifier of a transfer.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -110,23 +110,23 @@ parameter are returned in addition to those specified in the **fields** paramete
     * isRecordFolder
     * path
     * properties
-    
+
         * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the specified parent **transferId**.
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<TransferAssociationPaging>
         */
-    listTransfersChildren(transferId: string, opts: any): Promise<TransferAssociationPaging | ModelError> {
+    listTransfersChildren(transferId: string, opts?: any): Promise<TransferAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 

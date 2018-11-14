@@ -15,10 +15,9 @@
 * limitations under the License.
 */
 
-import { VersionPaging } from '../model/VersionPaging';
-import { VersionEntry } from '../model/VersionEntry';
 import { RevertBody } from '../model/RevertBody';
-import { BaseApi } from './baseApi';
+import { VersionsApi as NewVersionsApi } from '../../../../api-new/content-rest-api/api/versions.api';
+import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
  * Constructs a new VersionsApi.
@@ -27,9 +26,13 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
  * default to {@link module:ApiClient#instance} if unspecified.
  */
-export class VersionsApi extends BaseApi {
+export class VersionsApi {
 
-    private path: string = '/nodes';
+    versionsApi: NewVersionsApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.versionsApi = new NewVersionsApi(alfrescoApi);
+    }
 
     /**
      * Delete a version
@@ -39,36 +42,7 @@ export class VersionsApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
     deleteVersion(nodeId: string, versionId: string): Promise<any> {
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in deleteVersion");
-        }
-
-        // verify the required parameter 'versionId' is set
-        if (versionId === undefined || versionId === null) {
-            throw new Error("Missing param 'versionId' in deleteVersion");
-        }
-
-        let pathParams = {
-            'nodeId': nodeId,
-            'versionId': versionId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let authNames = [];
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/versions/{versionId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.versionsApi.deleteVersion(nodeId, versionId);
     }
 
     /**
@@ -78,36 +52,8 @@ export class VersionsApi extends BaseApi {
      * @param {String} versionId The identifier of a version, ie. version label, within the version history of a node.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/VersionEntry} and HTTP response
      */
-    getVersion(nodeId: string, versionId: string): Promise<VersionEntry> {
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in getVersion");
-        }
-
-        // verify the required parameter 'versionId' is set
-        if (versionId === undefined || versionId === null) {
-            throw new Error("Missing param 'versionId' in getVersion");
-        }
-
-        let pathParams = {
-            'nodeId': nodeId,
-            'versionId': versionId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let authNames = [];
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/versions/{versionId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getVersion(nodeId: string, versionId: string): Promise<any> {
+        return this.versionsApi.getVersion(nodeId, versionId);
     }
 
     /**
@@ -121,45 +67,8 @@ export class VersionsApi extends BaseApi {
      * @param {String} opts.range The Range header indicates the part of a document that the server should return. Single part request supported, for example: bytes&#x3D;1-10.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    getVersionContent(nodeId: string, versionId: string, opts: any): Promise<any> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in getVersionContent");
-        }
-
-        // verify the required parameter 'versionId' is set
-        if (versionId === undefined || versionId === null) {
-            throw new Error("Missing param 'versionId' in getVersionContent");
-        }
-
-        let queryParams = {
-            'attachment': this.apiClient.buildCollectionParam(opts['attachment'], 'csv')
-        };
-
-        let pathParams = {
-            'nodeId': nodeId,
-            'versionId': versionId
-        };
-
-        let headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],
-            'Range': opts['range']
-        };
-        let formParams = {};
-
-        let authNames = [];
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/versions/{versionId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getVersionContent(nodeId: string, versionId: string, opts?: any): Promise<any> {
+        return this.versionsApi.getVersionContent(nodeId, versionId);
     }
 
     /**
@@ -173,36 +82,8 @@ export class VersionsApi extends BaseApi {
      * @param {Number} opts.maxItems The maximum number of items to return in the list. If not supplied then the default value is 100.  (default to 100)
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/VersionPaging} and HTTP response
      */
-    listVersionHistory(nodeId: string, opts: any): Promise<VersionPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in listVersionHistory");
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let authNames = [];
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/versions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    listVersionHistory(nodeId: string, opts?: any): Promise<any> {
+        return this.versionsApi.listVersionHistory(nodeId, opts);
     }
 
     /**
@@ -215,44 +96,8 @@ export class VersionsApi extends BaseApi {
      * @param {Array.<String>} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/VersionEntry} and HTTP response
      */
-    revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts: any): Promise<VersionEntry> {
-        opts = opts || {};
-        let postBody = revertBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in revertVersion");
-        }
-
-        // verify the required parameter 'versionId' is set
-        if (versionId === undefined || versionId === null) {
-            throw new Error("Missing param 'versionId' in revertVersion");
-        }
-
-        // verify the required parameter 'revertBody' is set
-        if (revertBody === undefined || revertBody === null) {
-            throw new Error("Missing param 'revertBody' in revertVersion");
-        }
-
-        let pathParams = {
-            'nodeId': nodeId,
-            'versionId': versionId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let authNames = [];
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/versions/{versionId}/revert', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: any): Promise<any> {
+        return this.versionsApi.revertVersion(nodeId, versionId, <any>revertBody, opts);
     }
 
 }

@@ -15,10 +15,8 @@
 * limitations under the License.
 */
 
-import { NodePaging } from '../model/NodePaging';
-import { PersonPaging } from '../model/PersonPaging';
-import { SitePaging } from '../model/SitePaging';
-import { BaseApi } from './baseApi';
+import { QueriesApi as NewQueriesApi } from '../../../../api-new/content-rest-api/api/queries.api';
+import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
  * Queries service.
@@ -33,9 +31,13 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use,
  * default to {@link module:ApiClient#instance} if unspecified.
  */
-export class QueriesApi extends BaseApi {
+export class QueriesApi  {
 
-    private path: string = '/queries';
+    queriesApi: NewQueriesApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.queriesApi = new NewQueriesApi(alfrescoApi);
+    }
 
     /**
      * Find nodes
@@ -51,37 +53,8 @@ export class QueriesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodePaging}
      */
-    findNodes(term: string, opts: any): Promise<NodePaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'term' is set
-        if (term === undefined || term === null) {
-            throw "Missing param 'term' in findNodes";
-        }
-
-        let pathParams = {};
-        let queryParams = {
-            'term': term,
-            'rootNodeId': opts['rootNodeId'],
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'nodeType': opts['nodeType'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/nodes', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    findNodes(term: string, opts?: any): Promise<any> {
+        return this.queriesApi.findNodes(term,opts);
     }
 
     /**
@@ -95,34 +68,8 @@ export class QueriesApi extends BaseApi {
      * @param {string[]} opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields.  Each field has a default sort order, which is normally ascending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order.  To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PersonPaging}
      */
-    findPeople(term: string, opts: any): Promise<PersonPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'term' is set
-        if (term === undefined || term === null) {
-            throw new Error("Missing param 'term' in findPeople");
-        }
-
-        let pathParams = {};
-        let queryParams = {
-            'term': term,
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/people', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    findPeople(term: string, opts?: any): Promise<any> {
+        return this.queriesApi.findPeople(term,opts);
     }
 
     /**
@@ -136,33 +83,7 @@ export class QueriesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SitePaging}
      */
-    findSites(term: string, opts: any): Promise<SitePaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'term' is set
-        if (term === undefined || term === null) {
-            throw new Error("Missing param 'term' in findSites");
-        }
-
-        let pathParams = {};
-        let queryParams = {
-            'term': term,
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/sites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    findSites(term: string, opts?: any): Promise<any> {
+        return this.queriesApi.findSites(term,opts);
     }
 }

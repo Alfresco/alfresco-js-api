@@ -30,9 +30,9 @@ import { BaseApi } from './base.api';
 export class ProcessdefinitionsApi extends BaseApi {
     /**
     * Add a user or group involvement to a process definition
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param processDefinitionId processDefinitionId
     * @param identityLinkRepresentation identityLinkRepresentation
     * @return Promise<IdentityLinkRepresentation>
@@ -72,9 +72,9 @@ export class ProcessdefinitionsApi extends BaseApi {
     }
     /**
         * Remove a user or group involvement from a process definition
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processDefinitionId Process definition ID
         * @param family Identity type
         * @param identityId User or group ID
@@ -119,9 +119,9 @@ export class ProcessdefinitionsApi extends BaseApi {
     }
     /**
         * Get a user or group involvement with a process definition
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processDefinitionId Process definition ID
         * @param family Identity type
         * @param identityId User or group ID
@@ -166,9 +166,9 @@ export class ProcessdefinitionsApi extends BaseApi {
     }
     /**
         * List either the users or groups involved with a process definition
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processDefinitionId processDefinitionId
         * @param family Identity type
         * @return Promise<Array<IdentityLinkRepresentation>>
@@ -208,9 +208,9 @@ export class ProcessdefinitionsApi extends BaseApi {
     }
     /**
         * List the users and groups involved with a process definition
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processDefinitionId processDefinitionId
         * @return Promise<Array<IdentityLinkRepresentation>>
         */
@@ -245,9 +245,9 @@ export class ProcessdefinitionsApi extends BaseApi {
     }
     /**
         * List the decision tables associated with a process definition
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processDefinitionId processDefinitionId
         * @return Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation>
         */
@@ -282,9 +282,9 @@ export class ProcessdefinitionsApi extends BaseApi {
     }
     /**
         * List the forms associated with a process definition
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processDefinitionId processDefinitionId
         * @return Promise<ResultListDataRepresentationRuntimeFormRepresentation>
         */
@@ -319,9 +319,9 @@ export class ProcessdefinitionsApi extends BaseApi {
     }
     /**
         * Retrieve the start form for a process definition
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @return Promise<FormDefinitionRepresentation>
         */
     getProcessDefinitionStartFormUsingGET(): Promise<FormDefinitionRepresentation> {
@@ -351,16 +351,16 @@ export class ProcessdefinitionsApi extends BaseApi {
     }
     /**
         * Retrieve a list of process definitions
-        * 
+        *
         * Get a list of process definitions (visible within the tenant of the user)
-        * 
+        *
         * @param opts Optional parameters
         * @param opts.latest latest
         * @param opts.appDefinitionId appDefinitionId
         * @param opts.deploymentId deploymentId
         * @return Promise<ResultListDataRepresentationProcessDefinitionRepresentation>
         */
-    getProcessDefinitionsUsingGET(opts: any): Promise<ResultListDataRepresentationProcessDefinitionRepresentation> {
+    getProcessDefinitionsUsingGET(opts?: any): Promise<ResultListDataRepresentationProcessDefinitionRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -390,9 +390,9 @@ export class ProcessdefinitionsApi extends BaseApi {
     }
     /**
         * Retrieve field values (eg. the typeahead field)
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @return Promise<Array<FormValueRepresentation>>
         */
     getRestFieldValuesUsingGET(): Promise<Array<FormValueRepresentation>> {
@@ -422,9 +422,9 @@ export class ProcessdefinitionsApi extends BaseApi {
     }
     /**
         * Retrieve field values (eg. the table field)
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @return Promise<Array<FormValueRepresentation>>
         */
     getRestTableFieldValuesUsingGET(): Promise<Array<FormValueRepresentation>> {

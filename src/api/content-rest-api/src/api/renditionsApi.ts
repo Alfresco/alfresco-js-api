@@ -16,9 +16,8 @@
 */
 
 import { RenditionBody } from '../model/RenditionBody';
-import { RenditionEntry } from '../model/RenditionEntry';
-import { RenditionPaging } from '../model/RenditionPaging';
-import { BaseApi } from './baseApi';
+import { AlfrescoApi } from '../../../../alfrescoApi';
+import { RenditionsApi as NewRenditionsApi } from '../../../../api-new/content-rest-api/api/renditions.api';
 
 /**
  * Renditions service.
@@ -33,9 +32,13 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class RenditionsApi extends BaseApi {
+export class RenditionsApi {
 
-    private path: string = '/nodes';
+    renditionsApi: NewRenditionsApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.renditionsApi = new NewRenditionsApi(alfrescoApi);
+    }
 
     /**
      * Create rendition
@@ -44,34 +47,7 @@ export class RenditionsApi extends BaseApi {
      * @param {module:model/RenditionBody} renditionBody The rendition \&quot;id\&quot;.
      */
     createRendition(nodeId: string, renditionBody: RenditionBody): Promise<any> {
-        let postBody = renditionBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in createRendition";
-        }
-
-        // verify the required parameter 'renditionBody' is set
-        if (renditionBody === undefined || renditionBody === null) {
-            throw "Missing param 'renditionBody' in createRendition";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/renditions', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.renditionsApi.createRendition(nodeId, <any>renditionBody);
     }
 
     /**
@@ -81,35 +57,8 @@ export class RenditionsApi extends BaseApi {
      * @param {String} renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
      * data is of type: {module:model/RenditionEntry}
      */
-    getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry> {
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getRendition";
-        }
-
-        // verify the required parameter 'renditionId' is set
-        if (renditionId === undefined || renditionId === null) {
-            throw "Missing param 'renditionId' in getRendition";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId,
-            'renditionId': renditionId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/renditions/{renditionId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getRendition(nodeId: string, renditionId: string): Promise<any> {
+        return this.renditionsApi.getRendition(nodeId, renditionId);
     }
 
     /**
@@ -121,41 +70,8 @@ export class RenditionsApi extends BaseApi {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    getRenditionContent(nodeId: string, renditionId: string, opts: any): Promise<any> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getRenditionContent";
-        }
-
-        // verify the required parameter 'renditionId' is set
-        if (renditionId === undefined || renditionId === null) {
-            throw "Missing param 'renditionId' in getRenditionContent";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId,
-            'renditionId': renditionId
-        };
-        let queryParams = {
-            'attachment': opts['attachment']
-        };
-        let headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince']
-        };
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/renditions/{renditionId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any> {
+        return this.renditionsApi.getRenditionContent(nodeId, renditionId);
     }
 
     /**
@@ -164,29 +80,8 @@ export class RenditionsApi extends BaseApi {
      * @param {String} nodeId The identifier of a node.
      * data is of type: {module:model/RenditionPaging}
      */
-    getRenditions(nodeId: string): Promise<RenditionPaging> {
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getRenditions";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/renditions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getRenditions(nodeId: string): Promise<any> {
+        return this.renditionsApi.listRenditions(nodeId);
     }
 
 }

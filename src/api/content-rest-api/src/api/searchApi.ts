@@ -16,8 +16,8 @@
 */
 
 import { SearchRequest } from '../model/SearchRequest';
-import { ResultSetPaging } from '../model/ResultSetPaging';
-import { BaseApi } from './baseApi';
+import { SearchApi as NewSearchApi } from '../../../../api-new/search-rest-api/api/search.api';
+import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
  * Search service.
@@ -32,8 +32,13 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use,
  * default to {@link module:ApiClient#instance} if unspecified.
  */
-export class SearchApi extends BaseApi {
+export class SearchApi  {
 
+    searchApi: NewSearchApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.searchApi = new NewSearchApi(alfrescoApi);
+    }
     /**
      * Callback function to receive the result of the search operation.
      * @callback module:api/SearchApi~searchCallback
@@ -48,27 +53,7 @@ export class SearchApi extends BaseApi {
      * @param {module:api/SearchApi~searchCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/ResultSetPaging}
      */
-    search(searchRequest: SearchRequest): Promise<ResultSetPaging> {
-        let postBody = searchRequest;
-
-        // verify the required parameter 'SearchRequest' is set
-        if (searchRequest === undefined || searchRequest === null) {
-            throw new Error("Missing param 'SearchRequest' in search");
-        }
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let authNames = ['basicAuth'];
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/search', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    search(searchRequest: SearchRequest): Promise<any> {
+        return this.searchApi.search(<any>searchRequest);
     }
 }

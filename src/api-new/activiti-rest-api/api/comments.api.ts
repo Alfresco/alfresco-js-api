@@ -26,9 +26,9 @@ import { BaseApi } from './base.api';
 export class CommentsApi extends BaseApi {
     /**
     * Add a comment to a process instance
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param commentRequest commentRequest
     * @param processInstanceId processInstanceId
     * @return Promise<CommentRepresentation>
@@ -68,9 +68,9 @@ export class CommentsApi extends BaseApi {
     }
     /**
         * Add a comment to a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param commentRequest commentRequest
         * @param taskId taskId
         * @return Promise<CommentRepresentation>
@@ -110,15 +110,15 @@ export class CommentsApi extends BaseApi {
     }
     /**
         * Get comments for a process
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @param opts Optional parameters
         * @param opts.latestFirst latestFirst
         * @return Promise<ResultListDataRepresentationCommentRepresentation>
         */
-    getProcessInstanceCommentsUsingGET(processInstanceId: string, opts: any): Promise<ResultListDataRepresentationCommentRepresentation> {
+    getProcessInstanceCommentsUsingGET(processInstanceId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -150,15 +150,15 @@ export class CommentsApi extends BaseApi {
     }
     /**
         * Get comments for a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param opts Optional parameters
         * @param opts.latestFirst latestFirst
         * @return Promise<ResultListDataRepresentationCommentRepresentation>
         */
-    getTaskCommentsUsingGET(taskId: string, opts: any): Promise<ResultListDataRepresentationCommentRepresentation> {
+    getTaskCommentsUsingGET(taskId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
         opts = opts || {};
         let postBody = null;
 

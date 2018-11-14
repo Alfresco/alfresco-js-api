@@ -28,7 +28,7 @@ import { BaseApi } from './base.api';
 export class CommentsApi extends BaseApi {
     /**
     * Create a comment
-    * 
+    *
     * Creates a comment on node **nodeId**. You specify the comment in a JSON body like this:
 
 JSON
@@ -76,7 +76,7 @@ JSON
   }
 }
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param commentBodyCreate The comment text. Note that you can also provide a list of comments.
     * @param opts Optional parameters
@@ -94,7 +94,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<CommentEntry>
     */
-    createComment(nodeId: string, commentBodyCreate: CommentBody, opts: any): Promise<CommentEntry | ModelError> {
+    createComment(nodeId: string, commentBodyCreate: CommentBody, opts?: any): Promise<CommentEntry | ModelError> {
         opts = opts || {};
         let postBody = commentBodyCreate;
 
@@ -130,9 +130,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Delete a comment
-        * 
+        *
         * Deletes the comment **commentId** from node **nodeId**.
-        * 
+        *
         * @param nodeId The identifier of a node.
         * @param commentId The identifier of a comment.
         * @return Promise<{}>
@@ -172,9 +172,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List comments
-        * 
+        *
         * Gets a list of comments for the node **nodeId**, sorted chronologically with the newest comment first.
-        * 
+        *
         * @param nodeId The identifier of a node.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -184,20 +184,20 @@ parameter are returned in addition to those specified in the **fields** paramete
     If not supplied then the default value is 100.
      (default to 100)
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<CommentPaging>
         */
-    listComments(nodeId: string, opts: any): Promise<CommentPaging | ModelError> {
+    listComments(nodeId: string, opts?: any): Promise<CommentPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -231,28 +231,28 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Update a comment
-        * 
+        *
         * Updates an existing comment **commentId** on node **nodeId**.
-        * 
+        *
         * @param nodeId The identifier of a node.
         * @param commentId The identifier of a comment.
         * @param commentBodyUpdate The JSON representing the comment to be updated.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<CommentEntry>
         */
-    updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts: any): Promise<CommentEntry | ModelError> {
+    updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: any): Promise<CommentEntry | ModelError> {
         opts = opts || {};
         let postBody = commentBodyUpdate;
 

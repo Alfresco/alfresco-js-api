@@ -16,7 +16,6 @@
  */
 
 import { ClassDescription } from '../model/ClassDescription';
-import { BaseApi } from './baseApi';
 
 /**
  * Classes service.
@@ -31,9 +30,10 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use,
  * default to {@link module:ApiClient#instance} if unspecified.
  */
-export class ClassesApi extends BaseApi {
+export class ClassesApi  {
 
     private path: string = '/api/classes';
+
 
     /**
      * Function to receive the result of the getClass operation.
@@ -49,7 +49,7 @@ export class ClassesApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassDescription}
      * data is of type: {module:model/ClassDescription}
      */
-    getClass(className: string, opts: any): Promise<ClassDescription> {
+    getClass(className: string, opts?: any): Promise<ClassDescription> {
         opts = opts || {};
 
         // verify the required parameter 'className' is set

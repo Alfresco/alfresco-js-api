@@ -31,9 +31,9 @@ import { BaseApi } from './base.api';
 export class FormmodelsApi extends BaseApi {
     /**
     * Get form content
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param formId formId
     * @return Promise<FormDefinitionRepresentation>
     */
@@ -68,9 +68,9 @@ export class FormmodelsApi extends BaseApi {
     }
     /**
         * Get form history
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param formId formId
         * @param formHistoryId formHistoryId
         * @return Promise<FormRepresentation>
@@ -110,9 +110,9 @@ export class FormmodelsApi extends BaseApi {
     }
     /**
         * Get a form model
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param formId formId
         * @return Promise<FormRepresentation>
         */
@@ -147,9 +147,9 @@ export class FormmodelsApi extends BaseApi {
     }
     /**
         * Get a form
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param formId formId
         * @return Promise<RuntimeFormRepresentation>
         */
@@ -184,9 +184,9 @@ export class FormmodelsApi extends BaseApi {
     }
     /**
         * Get forms
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param formId formId
         * @return Promise<Array<FormRepresentation>>
         */
@@ -222,9 +222,9 @@ export class FormmodelsApi extends BaseApi {
     }
     /**
         * List form models
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @return Promise<ResultListDataRepresentationFormRepresentation>
         */
     getFormsUsingGET1(): Promise<ResultListDataRepresentationFormRepresentation> {
@@ -254,9 +254,9 @@ export class FormmodelsApi extends BaseApi {
     }
     /**
         * Query forms
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param opts Optional parameters
         * @param opts.nameLike nameLike
         * @param opts.appId appId
@@ -267,7 +267,7 @@ export class FormmodelsApi extends BaseApi {
         * @param opts.size size
         * @return Promise<ResultListDataRepresentationRuntimeFormRepresentation>
         */
-    getFormsUsingGET2(opts: any): Promise<ResultListDataRepresentationRuntimeFormRepresentation> {
+    getFormsUsingGET2(opts?: any): Promise<ResultListDataRepresentationRuntimeFormRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -301,9 +301,9 @@ export class FormmodelsApi extends BaseApi {
     }
     /**
         * Update form model content
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param formId ID of the form to update
         * @param saveRepresentation saveRepresentation
         * @return Promise<FormRepresentation>
@@ -343,9 +343,9 @@ export class FormmodelsApi extends BaseApi {
     }
     /**
         * Validate form model content
-        * 
+        *
         * The model content to be validated must be specified in the POST body
-        * 
+        *
         * @param formId formId
         * @param saveRepresentation saveRepresentation
         * @return Promise<Array<ValidationErrorRepresentation>>

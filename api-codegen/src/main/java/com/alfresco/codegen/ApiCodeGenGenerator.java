@@ -219,7 +219,7 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
                     }
                 }
                 if (hasOptionalParams) {
-                    argList.add("opts: any");
+                    argList.add("opts?: any");
                 }
 
                 operation.vendorExtensions.put("x-codegen-argList", StringUtils.join(argList, ", "));

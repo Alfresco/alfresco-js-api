@@ -28,7 +28,7 @@ import { BaseApi } from './base.api';
 export class DeclassificationexemptionsApi extends BaseApi {
     /**
     * Create a declassification exemption
-    * 
+    *
     * Creates a new declassification exemption.
 
 **Note:** You can create more than one exemption by specifying a list of exemptions in the JSON body.
@@ -72,7 +72,7 @@ JSON
   }
 }
 
-    * 
+    *
     * @param declassificationExemption Declassification exemption
     * @return Promise<DeclassificationExemptionEntry>
     */
@@ -107,9 +107,9 @@ JSON
     }
     /**
         * Delete a declassification exemption
-        * 
+        *
         * Deletes the declassification exemption with id **declassificationExemptionId**. You can't delete a classification exemption that is being used to classify content.
-        * 
+        *
         * @param declassificationExemptionId The identifier for the declassification exemption
         * @return Promise<{}>
         */
@@ -144,15 +144,15 @@ JSON
     }
     /**
         * List all declassification exemptions
-        * 
+        *
         * Gets all declassification exemptions.
-        * 
+        *
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
         * @param opts.maxItems The maximum number of items to return in the list.
         * @return Promise<DeclassificationExemptionsPaging>
         */
-    listDeclassificationExemptions(opts: any): Promise<DeclassificationExemptionsPaging | ModelError> {
+    listDeclassificationExemptions(opts?: any): Promise<DeclassificationExemptionsPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -181,9 +181,9 @@ JSON
     }
     /**
         * Get declassification exemption information
-        * 
+        *
         * Gets the declassification exemption with id **declassificationExemptionId**.
-        * 
+        *
         * @param declassificationExemptionId The identifier for the declassification exemption
         * @return Promise<DeclassificationExemptionEntry>
         */
@@ -218,9 +218,9 @@ JSON
     }
     /**
         * Update a declassification exemption
-        * 
+        *
         * Updates the declassification exemption with id **declassificationExemptionId**. For example, you can rename a declassification exemption.
-        * 
+        *
         * @param declassificationExemptionId The identifier for the declassification exemption
         * @param declassificationExemption Declassification exemption
         * @return Promise<DeclassificationExemptionEntry>

@@ -15,22 +15,24 @@
  * limitations under the License.
  */
 
-import { AlfrescoApiClient } from '../../../../alfrescoApiClient';
-import { NodeEntry } from '../model/NodeEntry';
 import { NodeBody } from '../model/NodeBody';
 import { CopyBody } from '../model/CopyBody';
-import { DeletedNodeEntry } from '../model/DeletedNodeEntry';
-import { DeletedNodesPaging } from '../model/DeletedNodesPaging';
-import { NodePaging } from '../model/NodePaging';
 import { MoveBody } from '../model/MoveBody';
 import { NodeAssociationPaging } from '../model/NodeAssociationPaging';
 import { NodeBodyLock } from '../model/NodeBodyLock';
-import { NodeChildAssociationPaging } from '../model/NodeChildAssociationPaging';
-import { BaseApi } from './baseApi';
+import { AlfrescoApi } from '../../../../alfrescoApi';
+import { NodesApi as NewNodesApi } from '../../../../api-new/content-rest-api/api/nodes.api';
+import { TrashcanApi } from '../../../../api-new/content-rest-api';
 
-export class NodesApi extends BaseApi {
+export class NodesApi {
 
-    private path: string = '/nodes';
+    nodesApi: NewNodesApi;
+    trashcanApi: TrashcanApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.nodesApi = new NewNodesApi(alfrescoApi);
+        this.trashcanApi = new TrashcanApi(alfrescoApi);
+    }
 
     /**
      * Nodes service.
@@ -58,39 +60,8 @@ export class NodesApi extends BaseApi {
      * @param {Object.<String, Object>} formParams A map of form parameters and their values.
      * data is of type: {module:model/NodeEntry}
      */
-    addNode(nodeId: string, nodeBody: NodeBody, opts: any, formParams: any): Promise<NodeEntry> {
-        opts = opts || {};
-        let postBody = nodeBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in addNode";
-        }
-
-        // verify the required parameter 'nodeBody' is set
-        if (nodeBody === undefined || nodeBody === null) {
-            throw "Missing param 'nodeBody' in addNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'autoRename': opts['autoRename'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        formParams = formParams || {};
-
-        let contentTypes = ['application/json', 'multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/children', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    addNode(nodeId: string, nodeBody: NodeBody, opts?: any, formParams: any): Promise<any> {
+        return this.nodesApi.createNode(nodeId, <any>nodeBody, opts, formParams);
     }
 
     /**
@@ -103,38 +74,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    copyNode(nodeId: string, copyBody: CopyBody, opts: any): Promise<NodeEntry> {
-        opts = opts || {};
-        let postBody = copyBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in copyNode";
-        }
-
-        // verify the required parameter 'copyBody' is set
-        if (copyBody === undefined || copyBody === null) {
-            throw "Missing param 'copyBody' in copyNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/copy', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    copyNode(nodeId: string, copyBody: CopyBody, opts?: any): Promise<any> {
+        return this.nodesApi.copyNode(nodeId, <any>copyBody, opts);
     }
 
     /**
@@ -144,33 +85,8 @@ export class NodesApi extends BaseApi {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
      */
-    deleteNode(nodeId: string, opts: any): Promise<any> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in deleteNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'permanent': opts['permanent']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    deleteNode(nodeId: string, opts?: any): Promise<any> {
+        return this.nodesApi.deleteNode(nodeId, opts);
     }
 
     /**
@@ -181,32 +97,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * data is of type: {module:model/DeletedNodeEntry}
      */
-    getDeletedNode(nodeId: string, opts: any): Promise<DeletedNodeEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getDeletedNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getDeletedNode(nodeId: string, opts?: any): Promise<any> {
+        return this.trashcanApi.getDeletedNode(nodeId, opts);
     }
 
     /**
@@ -218,27 +110,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
      * data is of type: {module:model/DeletedNodesPaging}
      */
-    getDeletedNodes(opts: any): Promise<DeletedNodesPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {};
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getDeletedNodes(opts?: any): Promise<any> {
+        return this.trashcanApi.listDeletedNodes(opts);
     }
 
     /**
@@ -249,35 +122,8 @@ export class NodesApi extends BaseApi {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    getFileContent(nodeId: string, opts: any): Promise<any> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getFileContent";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'attachment': opts['attachment']
-        };
-        let headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince']
-        };
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = 'Binary';
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getFileContent(nodeId: string, opts?: any): Promise<any> {
+        return this.nodesApi.getNodeContent(nodeId, opts);
     }
 
     /**
@@ -290,34 +136,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    getNode(nodeId: string, opts: any): Promise<NodeEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'relativePath': opts['relativePath'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getNode(nodeId: string, opts?: any): Promise<any> {
+        return this.nodesApi.getNode(nodeId, opts);
     }
 
     /**
@@ -329,35 +149,8 @@ export class NodesApi extends BaseApi {
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
-    getNodeContent(nodeId: string, opts: any): Promise<any> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in getNodeContent");
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'attachment': opts['attachment']
-        };
-        let headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince']
-        };
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getNodeContent(nodeId: string, opts?: any): Promise<any> {
+        return this.nodesApi.getNodeContent(nodeId, opts);
     }
 
     /**
@@ -375,39 +168,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodePaging}
      */
-    getNodeChildren(nodeId: string, opts: any): Promise<NodePaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getNodeChildren";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': opts['orderBy'],
-            'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'relativePath': opts['relativePath'],
-            'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/children', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getNodeChildren(nodeId: string, opts?: any): Promise<any> {
+        return this.nodesApi.listNodeChildren(nodeId, opts);
     }
 
     /**
@@ -423,37 +185,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeAssociationPaging}
      */
-    getParents(nodeId: string, opts: any): Promise<NodeAssociationPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in listParents");
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/parents', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getParents(nodeId: string, opts?: any): Promise<NodeAssociationPaging> {
+        return this.nodesApi.listParents(nodeId, opts);
     }
 
     /**
@@ -469,37 +202,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeChildAssociationPaging}
      */
-    getSecondaryChildren(nodeId: string, opts: any): Promise<NodeChildAssociationPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in listSecondaryChildren");
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/secondary-children', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getSecondaryChildren(nodeId: string, opts?: any): Promise<any> {
+        return this.nodesApi.listSecondaryChildren(nodeId, opts);
     }
 
     /**
@@ -512,34 +216,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeAssociationPaging}
      */
-    getSourceAssociations(nodeId: string, opts: any): Promise<NodeAssociationPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in listSourceAssociations");
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/sources', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getSourceAssociations(nodeId: string, opts?: any): Promise<any> {
+        return this.nodesApi.listSourceAssociations(nodeId, opts);
     }
 
     /**
@@ -552,34 +230,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeAssociationPaging}
      */
-    getTargetAssociations(nodeId: string, opts: any): Promise<NodeAssociationPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in listTargetAssociations");
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/targets', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getTargetAssociations(nodeId: string, opts?: any): Promise<any> {
+        return this.nodesApi.listTargetAssociations(nodeId, opts);
     }
 
     /**
@@ -592,38 +244,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeEntry}
      */
-    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts: any): Promise<NodeEntry> {
-        opts = opts || {};
-        let postBody = nodeBodyLock;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in lockNode");
-        }
-
-        // verify the required parameter 'nodeBodyLock' is set
-        if (nodeBodyLock === undefined || nodeBodyLock === null) {
-            throw new Error("Missing param 'nodeBodyLock' in lockNode");
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/lock', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: any): Promise<any> {
+        return this.nodesApi.lockNode(nodeId, <any>nodeBodyLock, opts);
     }
 
     /**
@@ -635,33 +257,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeEntry}
      */
-    unlockNode(nodeId: string, opts: any): Promise<NodeEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Missing param 'nodeId' in unlockNode");
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/unlock', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    unlockNode(nodeId: string, opts?: any): Promise<any> {
+        return this.nodesApi.unlockNode(nodeId, opts);
     }
 
     /**
@@ -674,38 +271,8 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    moveNode(nodeId: string, moveBody: MoveBody, opts: any): Promise<NodeEntry> {
-        opts = opts || {};
-        let postBody = moveBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in moveNode";
-        }
-
-        // verify the required parameter 'moveBody' is set
-        if (moveBody === undefined || moveBody === null) {
-            throw "Missing param 'moveBody' in moveNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/move', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    moveNode(nodeId: string, moveBody: MoveBody, opts?: any): Promise<any> {
+        return this.nodesApi.moveNode(nodeId, <any>moveBody, opts);
     }
 
     /**
@@ -714,29 +281,7 @@ export class NodesApi extends BaseApi {
      * @param {String} nodeId The identifier of a node.
      */
     purgeDeletedNode(nodeId: string): Promise<any> {
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in purgeDeletedNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.trashcanApi.deleteDeletedNode(nodeId);
     }
 
     /**
@@ -745,29 +290,8 @@ export class NodesApi extends BaseApi {
      * @param {String} nodeId The identifier of a node.
      * data is of type: {module:model/NodeEntry}
      */
-    restoreNode(nodeId: string): Promise<NodeEntry> {
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in restoreNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}/restore', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    restoreNode(nodeId: string): Promise<any> {
+        return this.trashcanApi.restoreDeletedNode(nodeId);
     }
 
     /**
@@ -782,78 +306,12 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    updateFileContent(nodeId: string, contentBody: string, opts: any): Promise<NodeEntry> {
-        opts = opts || {};
-        let postBody = contentBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in updateFileContent";
-        }
-
-        // verify the required parameter 'contentBody' is set
-        if (contentBody === undefined || contentBody === null) {
-            throw "Missing param 'contentBody' in updateFileContent";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'name': opts['name'],
-            'majorVersion': opts['majorVersion'],
-            'comment': opts['comment'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/octet-stream'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/content', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    updateFileContent(nodeId: string, contentBody: string, opts?: any): Promise<any> {
+        return this.nodesApi.updateNodeContent(nodeId,contentBody,opts);
     }
 
-    updateNodeContent(nodeId: string, contentBody: string, opts: any): Promise<NodeEntry> {
-        opts = opts || {};
-        let postBody = contentBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in updateNodeContent";
-        }
-
-        // verify the required parameter 'contentBody' is set
-        if (contentBody === undefined || contentBody === null) {
-            throw "Missing param 'contentBody' in updateNodeContent";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'majorVersion': opts['majorVersion'],
-            'comment': opts['comment'],
-            'name': opts['name'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/octet-stream'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/content', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    updateNodeContent(nodeId: string, contentBody: string, opts?: any): Promise<any> {
+        return this.nodesApi.updateNodeContent(nodeId,contentBody,opts);
     }
 
     /**
@@ -866,37 +324,7 @@ export class NodesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    updateNode(nodeId: string, nodeBody: NodeBody, opts: any): Promise<NodeEntry> {
-        opts = opts || {};
-        let postBody = nodeBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in updateNode";
-        }
-
-        // verify the required parameter 'nodeBody' is set
-        if (nodeBody === undefined || nodeBody === null) {
-            throw "Missing param 'nodeBody' in updateNode";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    updateNode(nodeId: string, nodeBody: NodeBody, opts?: any): Promise<any> {
+        return this.nodesApi.updateNode(nodeId,nodeBody,opts);
     }
 }

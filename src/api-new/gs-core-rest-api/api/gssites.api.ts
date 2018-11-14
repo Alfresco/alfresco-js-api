@@ -28,8 +28,8 @@ import { BaseApi } from './base.api';
 export class GssitesApi extends BaseApi {
     /**
     * Create the Records Management (RM) site
-    * 
-    * 
+    *
+    *
 Creates the RM site with the given details.
 
 **Note:** The default site id is rm and the default site name is Records Management. The id of a site cannot be updated once the site has been created.
@@ -45,13 +45,13 @@ The creator will be added as a member with Site Manager role.
 
 When you create the RM site, the **filePlan** structure is also created including special containers, such as containers for transfers, holds and, unfiled records.
 
-    * 
+    *
     * @param siteBodyCreate The site details
     * @param opts Optional parameters
     * @param opts.skipAddToFavorites Flag to indicate whether the RM site should not be added to the user's site favorites. (default to false)
     * @return Promise<RMSiteEntry>
     */
-    createRMSite(siteBodyCreate: RMSiteBodyCreate, opts: any): Promise<RMSiteEntry | ModelError> {
+    createRMSite(siteBodyCreate: RMSiteBodyCreate, opts?: any): Promise<RMSiteEntry | ModelError> {
         opts = opts || {};
         let postBody = siteBodyCreate;
 
@@ -83,11 +83,11 @@ When you create the RM site, the **filePlan** structure is also created includin
     }
     /**
         * Delete the Records Management (RM) site
-        * 
-        * 
+        *
+        *
     Deletes the RM site.
-    
-        * 
+
+        *
         * @return Promise<{}>
         */
     deleteRMSite(): Promise<{} | ModelError> {
@@ -117,27 +117,27 @@ When you create the RM site, the **filePlan** structure is also created includin
     }
     /**
         * Get the Records Management (RM) site
-        * 
-        * 
+        *
+        *
     Gets information for RM site.
-    
-        * 
+
+        *
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<RMSiteEntry>
         */
-    getRMSite(opts: any): Promise<RMSiteEntry | ModelError> {
+    getRMSite(opts?: any): Promise<RMSiteEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -165,30 +165,30 @@ When you create the RM site, the **filePlan** structure is also created includin
     }
     /**
         * Update the Records Management (RM) site
-        * 
-        * 
+        *
+        *
     Update the details for the RM site. Site Manager or other (site) admin can update title or description.
-    
+
     **Note**: the id, site visibility, or compliance of the RM site cannot be updated once the site has been created.
-    
-        * 
+
+        *
         * @param siteBodyUpdate The RM site information to update.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<RMSiteEntry>
         */
-    updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts: any): Promise<RMSiteEntry | ModelError> {
+    updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts?: any): Promise<RMSiteEntry | ModelError> {
         opts = opts || {};
         let postBody = siteBodyUpdate;
 

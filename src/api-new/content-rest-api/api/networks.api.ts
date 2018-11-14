@@ -27,9 +27,9 @@ import { BaseApi } from './base.api';
 export class NetworksApi extends BaseApi {
     /**
     * Get a network
-    * 
+    *
     * Gets information for a network **networkId**.
-    * 
+    *
     * @param networkId The identifier of a network.
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -46,7 +46,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonNetworkEntry>
     */
-    getNetwork(networkId: string, opts: any): Promise<PersonNetworkEntry | ModelError> {
+    getNetwork(networkId: string, opts?: any): Promise<PersonNetworkEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -78,30 +78,30 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Get network information
-        * 
+        *
         * Gets network information on a single network specified by **networkId** for **personId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
-        * 
+
+        *
         * @param personId The identifier of a person.
         * @param networkId The identifier of a network.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<PersonNetworkEntry>
         */
-    getNetworkForPerson(personId: string, networkId: string, opts: any): Promise<PersonNetworkEntry | ModelError> {
+    getNetworkForPerson(personId: string, networkId: string, opts?: any): Promise<PersonNetworkEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -137,12 +137,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List network membership
-        * 
+        *
         * Gets a list of network memberships for person **personId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    
-        * 
+
+        *
         * @param personId The identifier of a person.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -152,20 +152,20 @@ parameter are returned in addition to those specified in the **fields** paramete
     If not supplied then the default value is 100.
      (default to 100)
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<PersonNetworkPaging>
         */
-    listNetworksForPerson(personId: string, opts: any): Promise<PersonNetworkPaging | ModelError> {
+    listNetworksForPerson(personId: string, opts?: any): Promise<PersonNetworkPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 

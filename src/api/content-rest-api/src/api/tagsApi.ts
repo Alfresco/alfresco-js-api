@@ -16,9 +16,8 @@
 */
 
 import { TagBody } from '../model/TagBody';
-import { TagEntry } from '../model/TagEntry';
-import { TagPaging } from '../model/TagPaging';
-import { BaseApi } from './baseApi';
+import { AlfrescoApi } from '../../../../alfrescoApi';
+import { TagsApi as NewTagsApi } from '../../../../api-new/content-rest-api/api/tags.api';
 
 /**
  * Tags service.
@@ -33,9 +32,13 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class TagsApi extends BaseApi {
+export class TagsApi  {
 
-    private path: string = '/nodes';
+    tagsApi: NewTagsApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.tagsApi = new NewTagsApi(alfrescoApi);
+    }
 
     /**
      * Add a tag
@@ -44,34 +47,8 @@ export class TagsApi extends BaseApi {
      * @param {module:model/TagBody} tagBody The new tag
      * data is of type: {module:model/TagEntry}
      */
-    addTag(nodeId: string, tagBody: TagBody): Promise<TagEntry> {
-        let postBody = tagBody;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in addTag";
-        }
-
-        // verify the required parameter 'tagBody' is set
-        if (tagBody === undefined || tagBody === null) {
-            throw "Missing param 'tagBody' in addTag";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/tags', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    addTag(nodeId: string, tagBody: TagBody): Promise<any> {
+        return this.tagsApi.createTagForNode(nodeId,<any>tagBody);
     }
 
     /**
@@ -84,34 +61,8 @@ export class TagsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/TagPaging}
      */
-    getNodeTags(nodeId: string, opts: any): Promise<TagPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in getNodeTags";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/tags', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getNodeTags(nodeId: string, opts?: any): Promise<any> {
+        return this.tagsApi.listTagsForNode(nodeId,opts);
     }
 
     /**
@@ -122,32 +73,8 @@ export class TagsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/TagEntry}
      */
-    getTag(tagId: string, opts: any): Promise<TagEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'tagId' is set
-        if (tagId === undefined || tagId === null) {
-            throw "Missing param 'tagId' in getTag";
-        }
-
-        let pathParams = {
-            'tagId': tagId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/tags/{tagId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getTag(tagId: string, opts?: any): Promise<any> {
+        return this.tagsApi.getTag(tagId,opts);
     }
 
     /**
@@ -159,27 +86,8 @@ export class TagsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/TagPaging}
      */
-    getTags(opts: any): Promise<TagPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {};
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/tags', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getTags(opts?: any): Promise<any> {
+        return this.tagsApi.listTags(opts);
     }
 
     /**
@@ -189,35 +97,7 @@ export class TagsApi extends BaseApi {
      * @param {String} tagId The identifier of a tag.
      */
     removeTag(nodeId: string, tagId: string): Promise<any> {
-        let postBody = null;
-
-        // verify the required parameter 'nodeId' is set
-        if (nodeId === undefined || nodeId === null) {
-            throw "Missing param 'nodeId' in removeTag";
-        }
-
-        // verify the required parameter 'tagId' is set
-        if (tagId === undefined || tagId === null) {
-            throw "Missing param 'tagId' in removeTag";
-        }
-
-        let pathParams = {
-            'nodeId': nodeId,
-            'tagId': tagId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{nodeId}/tags/{tagId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.tagsApi.deleteTagFromNode(nodeId,tagId);
     }
 
     /**
@@ -227,33 +107,7 @@ export class TagsApi extends BaseApi {
      * @param {module:model/TagBody1} tagBody The updated tag
      * data is of type: {module:model/TagEntry}
      */
-    updateTag(tagId: string, tagBody: TagBody): Promise<TagEntry> {
-        let postBody = tagBody;
-
-        // verify the required parameter 'tagId' is set
-        if (tagId === undefined || tagId === null) {
-            throw "Missing param 'tagId' in updateTag";
-        }
-
-        // verify the required parameter 'tagBody' is set
-        if (tagBody === undefined || tagBody === null) {
-            throw "Missing param 'tagBody' in updateTag";
-        }
-
-        let pathParams = {
-            'tagId': tagId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/tags/{tagId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    updateTag(tagId: string, tagBody: TagBody): Promise<any> {
+        return this.tagsApi.updateTag(tagId,<any>tagBody);
     }
 }

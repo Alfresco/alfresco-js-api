@@ -27,9 +27,9 @@ import { BaseApi } from './base.api';
 export class IntegrationboxApi extends BaseApi {
     /**
     * Box Authorization
-    * 
+    *
     * Returns Box OAuth HTML Page
-    * 
+    *
     * @return Promise<{}>
     */
     confirmAuthorisationUsingGET1(): Promise<{}> {
@@ -59,9 +59,9 @@ export class IntegrationboxApi extends BaseApi {
     }
     /**
         * Add Box account
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @param credentials credentials
         * @return Promise<{}>
@@ -101,9 +101,9 @@ export class IntegrationboxApi extends BaseApi {
     }
     /**
         * Delete account information
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @return Promise<{}>
         */
@@ -138,9 +138,9 @@ export class IntegrationboxApi extends BaseApi {
     }
     /**
         * Get status information
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @return Promise<boolean>
         */
     getBoxPluginStatusUsingGET(): Promise<boolean> {
@@ -170,15 +170,15 @@ export class IntegrationboxApi extends BaseApi {
     }
     /**
         * List file and folders
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param opts Optional parameters
         * @param opts.filter filter
         * @param opts.parent parent
         * @return Promise<ResultListDataRepresentationBoxContent>
         */
-    getFilesUsingGET(opts: any): Promise<ResultListDataRepresentationBoxContent> {
+    getFilesUsingGET(opts?: any): Promise<ResultListDataRepresentationBoxContent> {
         opts = opts || {};
         let postBody = null;
 
@@ -207,9 +207,9 @@ export class IntegrationboxApi extends BaseApi {
     }
     /**
         * Get account information
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @return Promise<{}>
         */
@@ -244,9 +244,9 @@ export class IntegrationboxApi extends BaseApi {
     }
     /**
         * Update account information
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @param credentials credentials
         * @return Promise<{}>

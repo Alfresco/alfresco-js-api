@@ -15,9 +15,9 @@
 * limitations under the License.
 */
 
-import { NodeAssocPaging } from '../model/nodeAssocPaging';
 import { AssocTargetBody } from '../model/AssocTargetBody';
-import { BaseApi } from './baseApi';
+import { AlfrescoApi } from '../../../../alfrescoApi';
+import { NodesApi } from '../../../../api-new/content-rest-api/api/nodes.api';
 
 /**
  * Associations service.
@@ -32,9 +32,13 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class AssociationsApi extends BaseApi {
+export class AssociationsApi {
 
-    private path: string = '/nodes';
+    nodesApi: NodesApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.nodesApi = new NodesApi(alfrescoApi);
+    }
 
     /**
      * Add node association
@@ -43,33 +47,7 @@ export class AssociationsApi extends BaseApi {
      * @param {module:model/AssocTargetBody} assocTargetBody The target node id and assoc type.
      */
     addAssoc(sourceId: string, assocTargetBody?: AssocTargetBody): Promise<any> {
-        let postBody = assocTargetBody;
-
-        // verify the required parameter 'sourceId' is set
-        if (sourceId === undefined || sourceId === null) {
-            throw this.errorMessage('sourceId', 'addAssoc');
-        }
-
-        // verify the required parameter 'assocTargetBody' is set
-        if (assocTargetBody === undefined || assocTargetBody === null) {
-            throw this.errorMessage('assocTargetBody', 'addAssoc');
-        }
-
-        let pathParams = {
-            'sourceId': sourceId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{sourceId}/targets', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody, contentTypes, accepts, returnType
-        );
+        return this.nodesApi.createAssociation(sourceId, <any>assocTargetBody);
     }
 
     /**
@@ -82,34 +60,8 @@ export class AssociationsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    listSourceNodeAssociations(targetId: string, opts: any): Promise<NodeAssocPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'targetId' is set
-        if (targetId === undefined || targetId === null) {
-            throw this.errorMessage('targetId', 'listSourceNodeAssociations');
-        }
-
-        let pathParams = {
-            'targetId': targetId
-        };
-        let queryParams = {
-            'where': opts['where'],
-            'include': opts['include'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{targetId}/sources', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    listSourceNodeAssociations(targetId: string, opts?: any): Promise<any> {
+        return this.nodesApi.listSourceAssociations(targetId, <any>opts);
     }
 
     /**
@@ -122,34 +74,8 @@ export class AssociationsApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    listTargetAssociations(sourceId: string, opts: any): Promise<NodeAssocPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'sourceId' is set
-        if (sourceId === undefined || sourceId === null) {
-            throw this.errorMessage('sourceId', 'listTargetAssociations');
-        }
-
-        let pathParams = {
-            'sourceId': sourceId
-        };
-        let queryParams = {
-            'where': opts['where'],
-            'include': opts['include'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{sourceId}/targets', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    listTargetAssociations(sourceId: string, opts?: any): Promise<any> {
+        return this.nodesApi.listTargetAssociations(sourceId, <any>opts);
     }
 
     /**
@@ -160,38 +86,7 @@ export class AssociationsApi extends BaseApi {
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
-    removeAssoc(sourceId: string, targetId: string, opts: any): Promise<any> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'sourceId' is set
-        if (sourceId === undefined || sourceId === null) {
-            throw this.errorMessage('sourceId', 'removeAssoc');
-        }
-
-        // verify the required parameter 'targetId' is set
-        if (targetId === undefined || targetId === null) {
-            throw this.errorMessage('targetId', 'removeAssoc');
-        }
-
-        let pathParams = {
-            'sourceId': sourceId,
-            'targetId': targetId
-        };
-        let queryParams = {
-            'assocType': opts['assocType']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{sourceId}/targets/{targetId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    removeAssoc(sourceId: string, targetId: string, opts?: any): Promise<any> {
+        return this.nodesApi.deleteAssociation(sourceId, targetId, <any>opts);
     }
 }

@@ -27,12 +27,12 @@ import { BaseApi } from './base.api';
 export class PreferencesApi extends BaseApi {
     /**
     * Get a preference
-    * 
+    *
     * Gets a specific preference for person **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    * 
+    *
     * @param personId The identifier of a person.
     * @param preferenceName The name of the preference.
     * @param opts Optional parameters
@@ -50,7 +50,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PreferenceEntry>
     */
-    getPreference(personId: string, preferenceName: string, opts: any): Promise<PreferenceEntry | ModelError> {
+    getPreference(personId: string, preferenceName: string, opts?: any): Promise<PreferenceEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -86,15 +86,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List preferences
-        * 
+        *
         * Gets a list of preferences for person **personId**.
-    
+
     You can use the -me- string in place of <personId> to specify the currently authenticated user.
     Note that each preference consists of an **id** and a **value**.
-    
+
     The **value** can be of any JSON type.
-    
-        * 
+
+        *
         * @param personId The identifier of a person.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -104,20 +104,20 @@ parameter are returned in addition to those specified in the **fields** paramete
     If not supplied then the default value is 100.
      (default to 100)
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<PreferencePaging>
         */
-    listPreferences(personId: string, opts: any): Promise<PreferencePaging | ModelError> {
+    listPreferences(personId: string, opts?: any): Promise<PreferencePaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 

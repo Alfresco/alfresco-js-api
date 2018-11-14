@@ -53,12 +53,12 @@ Class | Method | HTTP request | Description
 *.NetworksApi* | [**getNetworkForPerson**](docs/NetworksApi.md#getNetworkForPerson) | **GET** /people/{personId}/networks/{networkId} | Get network information
 *.NetworksApi* | [**listNetworksForPerson**](docs/NetworksApi.md#listNetworksForPerson) | **GET** /people/{personId}/networks | List network membership
 *.NodesApi* | [**copyNode**](docs/NodesApi.md#copyNode) | **POST** /nodes/{nodeId}/copy | Copy a node
-*.NodesApi* | [**createAssocation**](docs/NodesApi.md#createAssocation) | **POST** /nodes/{nodeId}/targets | Create node association
+*.NodesApi* | [**createAssociation**](docs/NodesApi.md#createAssociation) | **POST** /nodes/{nodeId}/targets | Create node association
 *.NodesApi* | [**createNode**](docs/NodesApi.md#createNode) | **POST** /nodes/{nodeId}/children | Create a node
-*.NodesApi* | [**createSecondaryChildAssocation**](docs/NodesApi.md#createSecondaryChildAssocation) | **POST** /nodes/{nodeId}/secondary-children | Create secondary child
-*.NodesApi* | [**deleteAssocation**](docs/NodesApi.md#deleteAssocation) | **DELETE** /nodes/{nodeId}/targets/{targetId} | Delete node association(s)
+*.NodesApi* | [**createSecondaryChildAssociation**](docs/NodesApi.md#createSecondaryChildAssociation) | **POST** /nodes/{nodeId}/secondary-children | Create secondary child
+*.NodesApi* | [**deleteAssociation**](docs/NodesApi.md#deleteAssociation) | **DELETE** /nodes/{nodeId}/targets/{targetId} | Delete node association(s)
 *.NodesApi* | [**deleteNode**](docs/NodesApi.md#deleteNode) | **DELETE** /nodes/{nodeId} | Delete a node
-*.NodesApi* | [**deleteSecondaryChildAssocation**](docs/NodesApi.md#deleteSecondaryChildAssocation) | **DELETE** /nodes/{nodeId}/secondary-children/{childId} | Delete secondary child or children
+*.NodesApi* | [**deleteSecondaryChildAssociation**](docs/NodesApi.md#deleteSecondaryChildAssociation) | **DELETE** /nodes/{nodeId}/secondary-children/{childId} | Delete secondary child or children
 *.NodesApi* | [**getNode**](docs/NodesApi.md#getNode) | **GET** /nodes/{nodeId} | Get a node
 *.NodesApi* | [**getNodeContent**](docs/NodesApi.md#getNodeContent) | **GET** /nodes/{nodeId}/content | Get node content
 *.NodesApi* | [**listNodeChildren**](docs/NodesApi.md#listNodeChildren) | **GET** /nodes/{nodeId}/children | List node children
@@ -145,7 +145,7 @@ Class | Method | HTTP request | Description
 *.VersionsApi* | [**getVersionContent**](docs/VersionsApi.md#getVersionContent) | **GET** /nodes/{nodeId}/versions/{versionId}/content | Get version content
 *.VersionsApi* | [**listVersionHistory**](docs/VersionsApi.md#listVersionHistory) | **GET** /nodes/{nodeId}/versions | List version history
 *.VersionsApi* | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** /nodes/{nodeId}/versions/{versionId}/revert | Revert a version
-
+*.WebscriptApi* | [**executeWebScript**](docs/WebscriptApi.md#executeWebScript) | |  execute WebScript
 
 ## Documentation for Models
 

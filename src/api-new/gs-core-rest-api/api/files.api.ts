@@ -26,9 +26,9 @@ import { BaseApi } from './base.api';
 export class FilesApi extends BaseApi {
     /**
     * Declare as record
-    * 
+    *
     * Declares the file **fileId** in the unfiled records container. The original file is moved to the Records Management site and a secondary parent association is created in the file's original site.
-    * 
+    *
     * @param fileId The identifier of a non-record file.
     * @param opts Optional parameters
     * @param opts.hideRecord Flag to indicate whether the record should be hidden from the current parent folder. (default to false)
@@ -52,7 +52,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordEntry>
     */
-    declareRecord(fileId: string, opts: any): Promise<RecordEntry | ModelError> {
+    declareRecord(fileId: string, opts?: any): Promise<RecordEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 

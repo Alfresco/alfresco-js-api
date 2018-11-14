@@ -2016,7 +2016,7 @@ paths:
           }
         }
         ```
-      operationId: createSecondaryChildAssocation
+      operationId: createSecondaryChildAssociation
       produces:
         - application/json
       parameters:
@@ -2110,7 +2110,7 @@ paths:
         If the association type is **not** specified, then all secondary child associations, of any type in the direction
         from parent to secondary child, will be deleted. The child will still have a primary parent and may still be
         associated as a secondary child with other secondary parents.
-      operationId: deleteSecondaryChildAssocation
+      operationId: deleteSecondaryChildAssociation
       produces:
         - application/json
       parameters:
@@ -2247,7 +2247,7 @@ paths:
           }
         }
         ```
-      operationId: createAssocation
+      operationId: createAssociation
       produces:
         - application/json
       parameters:
@@ -2340,7 +2340,7 @@ paths:
 
         **Note:** After removal of the peer association, or associations, from source to target, the two nodes may still have peer associations
         in the other direction.
-      operationId: deleteAssocation
+      operationId: deleteAssociation
       produces:
         - application/json
       parameters:

@@ -1,7 +1,7 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApi } from '../src/alfrescoApi';
 import { PersonBodyCreate } from '../src/api-new/content-rest-api/model/PersonBodyCreate';
+import { AlfrescoApiCompatibility } from '../src/alfrescoApiCompatibility';
 import { PeopleApi } from '../src/api-new/content-rest-api/api/people.api';
 
 let PeopleMock = require('../test/mockObjects/mockAlfrescoApi').PeopleApi;
@@ -11,8 +11,7 @@ describe('PeopleApi', function() {
     beforeEach(function() {
         this.peopleMock = new PeopleMock();
 
-        this.alfrescoApi = new AlfrescoApi();
-        this.alfrescoApi.setConfig({
+        this.alfrescoApiCompatibility = new AlfrescoApiCompatibility({
             hostEcm: 'http://127.0.0.1:8080'
         });
     });
@@ -27,8 +26,9 @@ describe('PeopleApi', function() {
         personBodyCreate.firstName = 'chewbacca';
         personBodyCreate.password = 'Rrrrrrrghghghghgh';
 
-        let peopleApiService = new PeopleApi(this.alfrescoApi);
-        peopleApiService.createPerson(personBodyCreate).then(function() {
+       // console.log(JSON.stringify(this.alfrescoApiCompatibility.core));
+
+        this.alfrescoApiCompatibility.core.peopleApi.addPerson(personBodyCreate).then(function() {
             done();
         }, function(error) {
             console.error(error);

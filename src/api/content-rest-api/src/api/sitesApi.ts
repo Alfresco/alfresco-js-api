@@ -15,16 +15,11 @@
 * limitations under the License.
 */
 
-import { SiteMemberEntry } from '../model/SiteMemberEntry';
 import { SiteMemberBody } from '../model/SiteMemberBody';
 import { SiteBody } from '../model/SiteBody';
-import { SiteEntry } from '../model/SiteEntry';
-import { SiteContainerEntry } from '../model/SiteContainerEntry';
-import { SiteContainerPaging } from '../model/SiteContainerPaging';
-import { SiteMemberPaging } from '../model/SiteMemberPaging';
-import { SitePaging } from '../model/SitePaging';
 import { SiteMemberRoleBody } from '../model/SiteMemberRoleBody';
-import { BaseApi } from './baseApi';
+import { SitesApi as NewSitesApi } from '../../../../api-new/content-rest-api/api/sites.api';
+import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
  * Sites service.
@@ -39,9 +34,13 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class SitesApi extends BaseApi {
+export class SitesApi {
 
-    private path: string = '/sites';
+    sitesApi: NewSitesApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.sitesApi = new NewSitesApi(alfrescoApi);
+    }
 
     /**
      * Add a person
@@ -50,34 +49,8 @@ export class SitesApi extends BaseApi {
      * @param {module:model/SiteMemberBody} siteMemberBody The person to add and their role
      * data is of type: {module:model/SiteMemberEntry}
      */
-    addSiteMember(siteId: string, siteMemberBody: SiteMemberBody): Promise<SiteMemberEntry> {
-        let postBody = siteMemberBody;
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in addSiteMember";
-        }
-
-        // verify the required parameter 'siteMemberBody' is set
-        if (siteMemberBody === undefined || siteMemberBody === null) {
-            throw "Missing param 'siteMemberBody' in addSiteMember";
-        }
-
-        let pathParams = {
-            'siteId': siteId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{siteId}/members', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    addSiteMember(siteId: string, siteMemberBody: SiteMemberBody): Promise<any> {
+        return this.sitesApi.createSiteMembership(siteId, <any>siteMemberBody);
     }
 
     /**
@@ -89,31 +62,8 @@ export class SitesApi extends BaseApi {
      * @param {Boolean} opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user&#39;s site favorites. (default to false)
      * data is of type: {module:model/SiteEntry}
      */
-    createSite(siteBody: SiteBody, opts: any): Promise<SiteEntry> {
-        opts = opts || {};
-        let postBody = siteBody;
-
-        // verify the required parameter 'siteBody' is set
-        if (siteBody === undefined || siteBody === null) {
-            throw "Missing param 'siteBody' in createSite";
-        }
-
-        let pathParams = {};
-        let queryParams = {
-            'skipConfiguration': opts['skipConfiguration'],
-            'skipAddToFavorites': opts['skipAddToFavorites']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    createSite(siteBody: SiteBody, opts?: any): Promise<any> {
+        return this.sitesApi.createSite(<any>siteBody, opts);
     }
 
     /**
@@ -125,39 +75,8 @@ export class SitesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    updateSite(siteId: string, siteBody: SiteBody, opts: any): Promise<SiteEntry> {
-        opts = opts || {};
-        let postBody = siteBody;
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in updateSite";
-        }
-
-        // verify the required parameter 'siteBody' is set
-        if (siteBody === undefined || siteBody === null) {
-            throw "Missing param 'siteBody' in updateSite";
-        }
-
-        let pathParams = {
-            'siteId': siteId,
-            'siteBodyUpdate': siteBody
-        };
-
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{siteId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    updateSite(siteId: string, siteBody: SiteBody, opts?: any): Promise<any> {
+        return this.sitesApi.updateSite(siteId, <any>siteBody, opts);
     }
 
     /**
@@ -167,33 +86,8 @@ export class SitesApi extends BaseApi {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
      */
-    deleteSite(siteId: string, opts: any): Promise<any> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in deleteSite";
-        }
-
-        let pathParams = {
-            'siteId': siteId
-        };
-        let queryParams = {
-            'permanent': opts['permanent']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{siteId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    deleteSite(siteId: string, opts?: any): Promise<any> {
+        return this.sitesApi.deleteSite(siteId, opts);
     }
 
     /**
@@ -205,33 +99,8 @@ export class SitesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    getSite(siteId: string, opts: any): Promise<SiteEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in getSite";
-        }
-
-        let pathParams = {
-            'siteId': siteId
-        };
-        let queryParams = {
-            'relations': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{siteId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getSite(siteId: string, opts?: any): Promise<any> {
+        return this.sitesApi.getSite(siteId, opts);
     }
 
     /**
@@ -243,38 +112,8 @@ export class SitesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteContainerEntry}
      */
-    getSiteContainer(siteId: string, containerId: string, opts: any): Promise<SiteContainerEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in getSiteContainer";
-        }
-
-        // verify the required parameter 'containerId' is set
-        if (containerId === undefined || containerId === null) {
-            throw "Missing param 'containerId' in getSiteContainer";
-        }
-
-        let pathParams = {
-            'siteId': siteId,
-            'containerId': containerId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{siteId}/containers/{containerId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getSiteContainer(siteId: string, containerId: string, opts?: any): Promise<any> {
+        return this.sitesApi.getSiteContainer(siteId, containerId, opts);
     }
 
     /**
@@ -287,34 +126,8 @@ export class SitesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteContainerPaging}
      */
-    getSiteContainers(siteId: string, opts: any): Promise<SiteContainerPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in getSiteContainers";
-        }
-
-        let pathParams = {
-            'siteId': siteId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{siteId}/containers', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getSiteContainers(siteId: string, opts?: any): Promise<any> {
+        return this.sitesApi.listSiteContainers(siteId, opts);
     }
 
     /**
@@ -326,38 +139,8 @@ export class SitesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMemberEntry}
      */
-    getSiteMember(siteId: string, personId: string, opts: any): Promise<SiteMemberEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in getSiteMember";
-        }
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getSiteMember";
-        }
-
-        let pathParams = {
-            'siteId': siteId,
-            'personId': personId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{siteId}/members/{personId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getSiteMember(siteId: string, personId: string, opts?: any): Promise<any> {
+        return this.sitesApi.getSiteMembership(siteId, personId, opts);
     }
 
     /**
@@ -370,34 +153,8 @@ export class SitesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMemberPaging}
      */
-    getSiteMembers(siteId: string, opts: any): Promise<SiteMemberPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in getSiteMembers";
-        }
-
-        let pathParams = {
-            'siteId': siteId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{siteId}/members', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getSiteMembers(siteId: string, opts?: any): Promise<any> {
+        return this.sitesApi.listSiteMemberships(siteId, opts);
     }
 
     /**
@@ -411,29 +168,8 @@ export class SitesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SitePaging}
      */
-    getSites(opts: any): Promise<SitePaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {};
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': opts['orderBy'],
-            'relations': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getSites(opts?: any): Promise<any> {
+        return this.sitesApi.listSites(opts);
     }
 
     /**
@@ -443,35 +179,7 @@ export class SitesApi extends BaseApi {
      * @param {String} personId The identifier of a person.
      */
     removeSiteMember(siteId: string, personId: string): Promise<any> {
-        let postBody = null;
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in removeSiteMember";
-        }
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in removeSiteMember";
-        }
-
-        let pathParams = {
-            'siteId': siteId,
-            'personId': personId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{siteId}/members/{personId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.sitesApi.deleteSiteMembership(siteId, personId);
     }
 
     /**
@@ -482,39 +190,7 @@ export class SitesApi extends BaseApi {
      * @param {module:model/SiteMemberRoleBody} siteMemberRoleBody The persons new role
      * data is of type: {module:model/SiteMemberEntry}
      */
-    updateSiteMember(siteId: string, personId: string, siteMemberRoleBody: SiteMemberRoleBody): Promise<SiteMemberEntry> {
-        let postBody = siteMemberRoleBody;
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in updateSiteMember";
-        }
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in updateSiteMember";
-        }
-
-        // verify the required parameter 'siteMemberRoleBody' is set
-        if (siteMemberRoleBody === undefined || siteMemberRoleBody === null) {
-            throw "Missing param 'siteMemberRoleBody' in updateSiteMember";
-        }
-
-        let pathParams = {
-            'siteId': siteId,
-            'personId': personId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{siteId}/members/{personId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    updateSiteMember(siteId: string, personId: string, siteMemberRoleBody: SiteMemberRoleBody): Promise<any> {
+        return this.sitesApi.updateSiteMembership(siteId, personId, <any> siteMemberRoleBody);
     }
 }

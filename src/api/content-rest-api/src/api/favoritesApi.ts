@@ -15,10 +15,9 @@
 * limitations under the License.
 */
 
-import { FavoriteEntry } from '../model/FavoriteEntry';
-import { FavoritePaging } from '../model/FavoritePaging';
 import { FavoriteBody } from '../model/FavoriteBody';
-import { BaseApi } from './baseApi';
+import { AlfrescoApi } from '../../../../alfrescoApi';
+import { FavoritesApi as NewFavoritesApi } from '../../../../api-new/content-rest-api/api/favorites.api';
 
 /**
  * Favorites service.
@@ -33,9 +32,13 @@ import { BaseApi } from './baseApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class FavoritesApi extends BaseApi {
+export class FavoritesApi {
 
-    private path: string = '/people';
+    favoritesApi: NewFavoritesApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.favoritesApi = new NewFavoritesApi(alfrescoApi);
+    }
 
     /**
      * Add a favorite
@@ -44,34 +47,8 @@ export class FavoritesApi extends BaseApi {
      * @param {module:model/FavoriteBody} favoriteBody An object identifying the entity to be favorited. \n\nThe object consists of a single property which is an object with the name &#x60;site&#x60;, &#x60;file&#x60;, or &#x60;folder&#x60;. \nThe content of that object is the &#x60;guid&#x60; of the target entity.\n\nFor example, to favorite a file the following body would be used:\n\n&#x60;&#x60;&#x60;JSON\n{\n   \&quot;target\&quot;: {\n      \&quot;file\&quot;: {\n         \&quot;guid\&quot;: \&quot;abcde-01234\&quot;\n      }\n   }\n}\n&#x60;&#x60;&#x60;\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    addFavorite(personId: string, favoriteBody: FavoriteBody): Promise<FavoriteEntry> {
-        let postBody = favoriteBody;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in addFavorite";
-        }
-
-        // verify the required parameter 'favoriteBody' is set
-        if (favoriteBody === undefined || favoriteBody === null) {
-            throw "Missing param 'favoriteBody' in addFavorite";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorites', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    addFavorite(personId: string, favoriteBody: FavoriteBody): Promise<any> {
+        return this.favoritesApi.createFavorite(personId, <any>favoriteBody);
     }
 
     /**
@@ -83,38 +60,8 @@ export class FavoritesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    getFavorite(personId: string, favoriteId: string, opts: any): Promise<FavoriteEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getFavorite";
-        }
-
-        // verify the required parameter 'favoriteId' is set
-        if (favoriteId === undefined || favoriteId === null) {
-            throw "Missing param 'favoriteId' in getFavorite";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'favoriteId': favoriteId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorites/{favoriteId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getFavorite(personId: string, favoriteId: string, opts?: any): Promise<any> {
+        return this.favoritesApi.getFavorite(personId, favoriteId, opts);
     }
 
     /**
@@ -128,36 +75,8 @@ export class FavoritesApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoritePaging}
      */
-    getFavorites(personId: string, opts: any): Promise<FavoritePaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getFavorites";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getFavorites(personId: string, opts?: any): Promise<any> {
+        return this.favoritesApi.listFavorites(personId, opts);
     }
 
     /**
@@ -167,34 +86,6 @@ export class FavoritesApi extends BaseApi {
      * @param {String} favoriteId The identifier of a favorite.
      */
     removeFavoriteSite(personId: string, favoriteId: string): Promise<any> {
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in removeFavoriteSite";
-        }
-
-        // verify the required parameter 'favoriteId' is set
-        if (favoriteId === undefined || favoriteId === null) {
-            throw "Missing param 'favoriteId' in removeFavoriteSite";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'favoriteId': favoriteId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorites/{favoriteId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.favoritesApi.deleteSiteFavorite(personId, favoriteId);
     }
 }

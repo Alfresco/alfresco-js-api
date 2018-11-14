@@ -15,30 +15,38 @@
  * limitations under the License.
  */
 
-import { FavoriteEntry } from '../model/FavoriteEntry';
-import { InlineResponse201 } from '../model/InlineResponse201';
-import { GroupsPaging } from '../model/GroupsPaging';
-import { FavoritePaging } from '../model/FavoritePaging';
 import { PersonBodyCreate } from '../model/PersonBodyCreate';
-import { PersonEntry } from '../model/PersonEntry';
-import { PersonNetworkEntry } from '../model/PersonNetworkEntry';
-import { PersonNetworkPaging } from '../model/PersonNetworkPaging';
-import { PreferenceEntry } from '../model/PreferenceEntry';
-import { PreferencePaging } from '../model/PreferencePaging';
-import { SiteMembershipRequestPaging } from '../model/SiteMembershipRequestPaging';
-import { ActivityPaging } from '../model/ActivityPaging';
-import { SiteMembershipRequestEntry } from '../model/SiteMembershipRequestEntry';
-import { SiteEntry } from '../model/SiteEntry';
-import { SitePaging } from '../model/SitePaging';
 import { PersonBodyUpdate } from '../model/PersonBodyUpdate';
 import { FavoriteSiteBody } from '../model/FavoriteSiteBody';
 import { FavoriteBody } from '../model/FavoriteBody';
 import { SiteMembershipBody } from '../model/SiteMembershipBody';
-import { BaseApi } from './baseApi';
+import { PeopleApi as PeopleApiNew } from '../../../../api-new/content-rest-api/api/people.api';
+import { NetworksApi } from '../../../../api-new/content-rest-api/api/networks.api';
+import { FavoritesApi } from '../../../../api-new/content-rest-api/api/favorites.api';
+import { SitesApi } from '../../../../api-new/content-rest-api/api/sites.api';
+import { PreferencesApi } from '../../../../api-new/content-rest-api/api/preferences.api';
+import { ActivitiesApi } from '../../../../api-new/content-rest-api/api/activities.api';
+import { AlfrescoApi } from '../../../../alfrescoApi';
+import { GroupsApi } from '../../../../api-new/content-rest-api/api/groups.api';
 
-export class PeopleApi extends BaseApi {
+export class PeopleApi {
 
-    private path: string = '/people';
+    networksApi: NetworksApi;
+    peopleApiNew: PeopleApiNew;
+    favoritesApi: FavoritesApi;
+    sitesApi: SitesApi;
+    activitiesApi: ActivitiesApi;
+    preferencesApi: PreferencesApi;
+    groupsApi: GroupsApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.networksApi = new NetworksApi(alfrescoApi);
+        this.peopleApiNew = new PeopleApiNew(alfrescoApi);
+        this.favoritesApi = new FavoritesApi(alfrescoApi);
+        this.sitesApi = new SitesApi(alfrescoApi);
+        this.activitiesApi = new ActivitiesApi(alfrescoApi);
+        this.preferencesApi = new PreferencesApi(alfrescoApi);
+    }
 
     /**
      * People service.
@@ -53,34 +61,8 @@ export class PeopleApi extends BaseApi {
      * @param {module:model/FavoriteBody} favoriteBody An object identifying the entity to be favorited. \n\nThe object consists of a single property which is an object with the name &#x60;site&#x60;, &#x60;file&#x60;, or &#x60;folder&#x60;. \nThe content of that object is the &#x60;guid&#x60; of the target entity.\n\nFor example, to favorite a file the following body would be used:\n\n&#x60;&#x60;&#x60;JSON\n{\n   \&quot;target\&quot;: {\n      \&quot;file\&quot;: {\n         \&quot;guid\&quot;: \&quot;abcde-01234\&quot;\n      }\n   }\n}\n&#x60;&#x60;&#x60;\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    addFavorite(personId: string, favoriteBody: FavoriteBody): Promise<FavoriteEntry> {
-        let postBody = favoriteBody;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in addFavorite";
-        }
-
-        // verify the required parameter 'favoriteBody' is set
-        if (favoriteBody === undefined || favoriteBody === null) {
-            throw "Missing param 'favoriteBody' in addFavorite";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorites', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    addFavorite(personId: string, favoriteBody: FavoriteBody): Promise<any> {
+        return this.favoritesApi.createFavorite(personId, <any>favoriteBody)
     }
 
     /**
@@ -90,34 +72,8 @@ export class PeopleApi extends BaseApi {
      * @param {module:model/SiteMembershipBody} siteMembershipBody Site membership request details
      * data is of type: {module:model/SiteMembershipRequestEntry}
      */
-    addSiteMembershipRequest(personId: string, siteMembershipBody: SiteMembershipBody): Promise<SiteMembershipRequestEntry> {
-        let postBody = siteMembershipBody;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in addSiteMembershipRequest";
-        }
-
-        // verify the required parameter 'siteMembershipBody' is set
-        if (siteMembershipBody === undefined || siteMembershipBody === null) {
-            throw "Missing param 'siteMembershipBody' in addSiteMembershipRequest";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/site-membership-requests', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    addSiteMembershipRequest(personId: string, siteMembershipBody: SiteMembershipBody): Promise<any> {
+        return this.sitesApi.createSiteMembershipRequestForPerson(personId, <any>siteMembershipBody);
     }
 
     /**
@@ -127,35 +83,7 @@ export class PeopleApi extends BaseApi {
      * @param {String} siteId The identifier of a site.
      */
     deleteFavoriteSite(personId: string, siteId: string): Promise<any> {
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in deleteFavoriteSite";
-        }
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in deleteFavoriteSite";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'siteId': siteId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorite-sites/{siteId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.favoritesApi.deleteSiteFavorite(personId, siteId)
     }
 
     /**
@@ -165,34 +93,8 @@ export class PeopleApi extends BaseApi {
      * @param {module:model/FavoriteSiteBody} favoriteSiteBody The id of the site to favorite.
      * data is of type: {module:model/InlineResponse201}
      */
-    favoriteSite(personId: string, favoriteSiteBody: FavoriteSiteBody): Promise<InlineResponse201> {
-        let postBody = favoriteSiteBody;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in favoriteSite";
-        }
-
-        // verify the required parameter 'favoriteSiteBody' is set
-        if (favoriteSiteBody === undefined || favoriteSiteBody === null) {
-            throw "Missing param 'favoriteSiteBody' in favoriteSite";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorite-sites', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    favoriteSite(personId: string, favoriteSiteBody: FavoriteSiteBody): Promise<any> {
+        return this.favoritesApi.createFavorite(personId, <any>favoriteSiteBody);
     }
 
     /**
@@ -207,36 +109,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/ActivityPaging}
      */
-    getActivities(personId: string, opts: any): Promise<ActivityPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getActivities";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'who': opts['who'],
-            'siteId': opts['siteId'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/activities', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getActivities(personId: string, opts?: any): Promise<any> {
+        return this.activitiesApi.listActivitiesForPerson(personId, opts);
     }
 
     /**
@@ -248,38 +122,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    getFavorite(personId: string, favoriteId: string, opts: any): Promise<FavoriteEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getFavorite";
-        }
-
-        // verify the required parameter 'favoriteId' is set
-        if (favoriteId === undefined || favoriteId === null) {
-            throw "Missing param 'favoriteId' in getFavorite";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'favoriteId': favoriteId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorites/{favoriteId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getFavorite(personId: string, favoriteId: string, opts?: any): Promise<any> {
+        return this.favoritesApi.getFavorite(personId, favoriteId, opts);
     }
 
     /**
@@ -291,38 +135,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    getFavoriteSite(personId: string, siteId: string, opts: any): Promise<SiteEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getFavoriteSite";
-        }
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in getFavoriteSite";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'siteId': siteId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorite-sites/{siteId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getFavoriteSite(personId: string, siteId: string, opts?: any): Promise<any> {
+        return this.favoritesApi.getFavoriteSite(personId, siteId, opts);
     }
 
     /**
@@ -335,34 +149,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SitePaging}
      */
-    getFavoriteSites(personId: string, opts: any): Promise<SitePaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getFavoriteSites";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorite-sites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getFavoriteSites(personId: string, opts?: any): Promise<any> {
+        return this.favoritesApi.listFavoriteSitesForPerson(personId, opts);
     }
 
     /**
@@ -376,35 +164,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoritePaging}
      */
-    getFavorites(personId: string, opts: any): Promise<FavoritePaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getFavorites";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getFavorites(personId: string, opts?: any): Promise<any> {
+        return this.favoritesApi.listFavorites(personId, opts);
     }
 
     /**
@@ -415,32 +176,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonEntry}
      */
-    getPerson(personId: string, opts: any): Promise<PersonEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getPerson";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getPerson(personId: string, opts?: any): Promise<any> {
+        return this.peopleApiNew.getPerson(personId, opts);
     }
 
     /**
@@ -450,28 +187,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonEntry}
      */
-    getPersons(opts: any): Promise<PersonEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {};
-        let headerParams = {};
-        let formParams = {};
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getPersons(opts?: any): Promise<any> {
+        return this.peopleApiNew.listPeople(opts);
     }
 
     /**
@@ -481,28 +198,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonEntry}
      */
-    addPerson(person: PersonBodyCreate): Promise<PersonEntry> {
-        // verify the required parameter 'personId' is set
-        if (person === undefined || person === null) {
-            throw "Missing param 'person' in addPerson";
-        }
-
-        let pathParams = {};
-
-        let postBody = person;
-
-        let headerParams = {};
-        let formParams = {};
-        let queryParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    addPerson(person: PersonBodyCreate): Promise<any> {
+        return this.peopleApiNew.createPerson(person);
     }
 
     /**
@@ -513,39 +210,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the include parameter, then the fields specified in the include parameter are returned in addition to those specified in the fields parameter\n
      * data is of type: {module:model/PersonEntry}
      */
-    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts: any): Promise<PersonEntry> {
-        opts = opts || {};
-        let postBody = personBodyUpdate;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in updatePerson";
-        }
-
-        // verify the required parameter 'personBodyUpdate' is set
-        if (personBodyUpdate === undefined || personBodyUpdate === null) {
-            throw "Missing param 'personBodyUpdate' in updatePerson";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'personBodyUpdate': personBodyUpdate
-        };
-
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts?: any): Promise<any> {
+        return this.peopleApiNew.updatePerson(personId, personBodyUpdate, opts);
     }
 
     /**
@@ -557,38 +223,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonNetworkEntry}
      */
-    getPersonNetwork(personId: string, networkId: string, opts: any): Promise<PersonNetworkEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getPersonNetwork";
-        }
-
-        // verify the required parameter 'networkId' is set
-        if (networkId === undefined || networkId === null) {
-            throw "Missing param 'networkId' in getPersonNetwork";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'networkId': networkId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/networks/{networkId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getPersonNetwork(personId: string, networkId: string, opts?: any): Promise<any> {
+        return this.networksApi.getNetworkForPerson(personId, networkId, opts);
     }
 
     /**
@@ -601,34 +237,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonNetworkPaging}
      */
-    getPersonNetworks(personId: string, opts: any): Promise<PersonNetworkPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getPersonNetworks";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/networks', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getPersonNetworks(personId: string, opts?: any): Promise<any> {
+        return this.networksApi.listNetworksForPerson(personId, opts);
     }
 
     /**
@@ -640,38 +250,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PreferenceEntry}
      */
-    getPreference(personId: string, preferenceName: string, opts: any): Promise<PreferenceEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getPreference";
-        }
-
-        // verify the required parameter 'preferenceName' is set
-        if (preferenceName === undefined || preferenceName === null) {
-            throw "Missing param 'preferenceName' in getPreference";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'preferenceName': preferenceName
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/preferences/{preferenceName}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getPreference(personId: string, preferenceName: string, opts?: any): Promise<any> {
+        return this.preferencesApi.getPreference(personId, preferenceName, opts);
     }
 
     /**
@@ -684,34 +264,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PreferencePaging}
      */
-    getPreferences(personId: string, opts: any): Promise<PreferencePaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getPreferences";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/preferences', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getPreferences(personId: string, opts?: any): Promise<any> {
+        return this.preferencesApi.listPreferences(personId, opts);
     }
 
     /**
@@ -726,36 +280,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SitePaging}
      */
-    getSiteMembership(personId: string, opts: any): Promise<SitePaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getSiteMembership";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': opts['orderBy'],
-            'relations': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/sites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getSiteMembership(personId: string, opts?: any): Promise<any> {
+        return this.sitesApi.getSiteMembership(personId, opts);
     }
 
     /**
@@ -771,37 +297,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/GroupsPaging}
      */
-    getGroupsMembership(personId: string, opts: any): Promise<GroupsPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getSiteMembership";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': opts['orderBy'],
-            'include': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
-            'where': opts['where']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/groups', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getGroupsMembership(personId: string, opts?: any): Promise<any> {
+        return this.groupsApi.listGroupMemberships(personId, opts);
     }
 
     /**
@@ -813,38 +310,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMembershipRequestEntry}
      */
-    getSiteMembershipRequest(personId: string, siteId: string, opts: any): Promise<SiteMembershipRequestEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getSiteMembershipRequest";
-        }
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in getSiteMembershipRequest";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'siteId': siteId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/site-membership-requests/{siteId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getSiteMembershipRequest(personId: string, siteId: string, opts?: any): Promise<any> {
+        return this.sitesApi.getSiteMembershipRequestForPerson(personId, siteId, opts);
     }
 
     /**
@@ -857,34 +324,8 @@ export class PeopleApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMembershipRequestPaging}
      */
-    getSiteMembershipRequests(personId: string, opts: any): Promise<SiteMembershipRequestPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in getSiteMembershipRequests";
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/site-membership-requests', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getSiteMembershipRequests(personId: string, opts?: any): Promise<any> {
+        return this.sitesApi.listSiteMembershipRequestsForPerson(personId, opts);
     }
 
     /**
@@ -894,35 +335,7 @@ export class PeopleApi extends BaseApi {
      * @param {String} favoriteId The identifier of a favorite.
      */
     removeFavoriteSite(personId: string, favoriteId: string): Promise<any> {
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in removeFavoriteSite";
-        }
-
-        // verify the required parameter 'favoriteId' is set
-        if (favoriteId === undefined || favoriteId === null) {
-            throw "Missing param 'favoriteId' in removeFavoriteSite";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'favoriteId': favoriteId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/favorites/{favoriteId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.favoritesApi.deleteSiteFavorite(personId, favoriteId);
     }
 
     /**
@@ -932,35 +345,7 @@ export class PeopleApi extends BaseApi {
      * @param {String} siteId The identifier of a site.
      */
     removeSiteMembershipRequest(personId: string, siteId: string): Promise<any> {
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in removeSiteMembershipRequest";
-        }
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in removeSiteMembershipRequest";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'siteId': siteId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/site-membership-requests/{siteId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.sitesApi.deleteSiteMembershipRequestForPerson(personId, siteId);
     }
 
     /**
@@ -971,39 +356,6 @@ export class PeopleApi extends BaseApi {
      * @param {module:model/SiteMembershipBody1} siteMembershipBody The new message to display
      */
     updateSiteMembershipRequest(personId: string, siteId: string, siteMembershipBody: SiteMembershipBody): Promise<any> {
-        let postBody = siteMembershipBody;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw "Missing param 'personId' in updateSiteMembershipRequest";
-        }
-
-        // verify the required parameter 'siteId' is set
-        if (siteId === undefined || siteId === null) {
-            throw "Missing param 'siteId' in updateSiteMembershipRequest";
-        }
-
-        // verify the required parameter 'siteMembershipBody' is set
-        if (siteMembershipBody === undefined || siteMembershipBody === null) {
-            throw "Missing param 'siteMembershipBody' in updateSiteMembershipRequest";
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'siteId': siteId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            this.path + '/{personId}/site-membership-requests/{siteId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.sitesApi, this.updateSiteMembershipRequest(personId, siteId, siteMembershipBody);
     }
 }

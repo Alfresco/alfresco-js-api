@@ -18,4 +18,4 @@ export * from './unfiledcontainers.api';
 import { UnfiledcontainersApi } from './unfiledcontainers.api';
 export * from './unfiledrecordfolders.api';
 import { UnfiledrecordfoldersApi } from './unfiledrecordfolders.api';
-export const APIS = [FileplansApi, FilesApi, GssitesApi, RecordcategoriesApi, RecordfoldersApi, RecordsApi, TransfercontainersApi, TransfersApi, UnfiledcontainersApi, UnfiledrecordfoldersApi];
+export const GS_CORE_APIS = [FileplansApi, FilesApi, GssitesApi, RecordcategoriesApi, RecordfoldersApi, RecordsApi, TransfercontainersApi, TransfersApi, UnfiledcontainersApi, UnfiledrecordfoldersApi];

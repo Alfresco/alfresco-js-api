@@ -15,9 +15,8 @@
  * limitations under the License.
  */
 
-import { PersonNetworkEntry } from '../model/PersonNetworkEntry';
-import { PersonNetworkPaging } from '../model/PersonNetworkPaging';
-import { BaseApi } from './baseApi';
+import { AlfrescoApi } from '../../../../alfrescoApi';
+import { NetworksApi as NewNetworksApi } from '../../../../api-new/content-rest-api/api/networks.api';
 
 /**
  * Networks service.
@@ -33,9 +32,13 @@ import { BaseApi } from './baseApi';
  * if unspecified.
  */
 
-export class NetworksApi extends BaseApi {
+export class NetworksApi {
 
-    private path: string = '/networks';
+    networksApi: NewNetworksApi;
+
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.networksApi = new NewNetworksApi(alfrescoApi);
+    }
 
     /**
      * Get a network
@@ -45,32 +48,8 @@ export class NetworksApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonNetworkEntry}
      */
-    getNetwork(networkId: string, opts: any): Promise<PersonNetworkEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'networkId' is set
-        if (networkId === undefined || networkId === null) {
-            throw "Missing param 'networkId' in getNetwork";
-        }
-
-        let pathParams = {
-            'networkId': networkId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            this.path + '/{networkId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getNetwork(networkId: string, opts?: any): Promise<any> {
+        return this.networksApi.getNetwork(networkId, opts);
     }
 
     /**
@@ -82,38 +61,8 @@ export class NetworksApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PersonNetworkEntry}
      */
-    getNetworkForPerson(personId: string, networkId: string, opts: any): Promise<PersonNetworkEntry> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw new Error("Missing param 'personId' in getNetworkForPerson");
-        }
-
-        // verify the required parameter 'networkId' is set
-        if (networkId === undefined || networkId === null) {
-            throw new Error("Missing param 'networkId' in getNetworkForPerson");
-        }
-
-        let pathParams = {
-            'personId': personId,
-            'networkId': networkId
-        };
-        let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/networks/{networkId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    getNetworkForPerson(personId: string, networkId: string, opts?: any): Promise<any> {
+        return this.networksApi.getNetworkForPerson(personId, networkId, opts);
     }
 
     /**
@@ -126,33 +75,7 @@ export class NetworksApi extends BaseApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PersonNetworkPaging}
      */
-    listNetworksForPerson(personId: string, opts: any): Promise<PersonNetworkPaging> {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'personId' is set
-        if (personId === undefined || personId === null) {
-            throw new Error("Missing param 'personId' in listNetworksForPerson");
-        }
-
-        let pathParams = {
-            'personId': personId
-        };
-        let queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/networks', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+    listNetworksForPerson(personId: string, opts?: any): Promise<any> {
+        return this.networksApi.listNetworksForPerson(personId, opts);
     }
 }

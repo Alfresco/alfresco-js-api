@@ -28,9 +28,9 @@ import { BaseApi } from './base.api';
 export class AdminusersApi extends BaseApi {
     /**
     * Bulk update a list of users
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param update update
     * @return Promise<{}>
     */
@@ -65,9 +65,9 @@ export class AdminusersApi extends BaseApi {
     }
     /**
         * Create a user
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userRepresentation userRepresentation
         * @return Promise<UserRepresentation>
         */
@@ -102,15 +102,15 @@ export class AdminusersApi extends BaseApi {
     }
     /**
         * Get a user
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @param opts Optional parameters
         * @param opts.summary summary
         * @return Promise<AbstractUserRepresentation>
         */
-    getUserUsingGET(userId: number, opts: any): Promise<AbstractUserRepresentation> {
+    getUserUsingGET(userId: number, opts?: any): Promise<AbstractUserRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -142,9 +142,9 @@ export class AdminusersApi extends BaseApi {
     }
     /**
         * Query users
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param opts Optional parameters
         * @param opts.filter filter
         * @param opts.status status
@@ -159,7 +159,7 @@ export class AdminusersApi extends BaseApi {
         * @param opts.summary summary
         * @return Promise<ResultListDataRepresentationAbstractUserRepresentation>
         */
-    getUsersUsingGET(opts: any): Promise<ResultListDataRepresentationAbstractUserRepresentation> {
+    getUsersUsingGET(opts?: any): Promise<ResultListDataRepresentationAbstractUserRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -197,9 +197,9 @@ export class AdminusersApi extends BaseApi {
     }
     /**
         * Update a user
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @param userRepresentation userRepresentation
         * @return Promise<{}>

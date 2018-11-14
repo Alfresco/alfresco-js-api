@@ -29,7 +29,7 @@ import { BaseApi } from './base.api';
 export class UnfiledcontainersApi extends BaseApi {
     /**
     * Create a record or an unfiled record folder
-    * 
+    *
     * Creates a record or an unfiled record folder as a primary child of **unfiledContainerId**.
 
 You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then
@@ -128,7 +128,7 @@ JSON
   }
 }
 
-    * 
+    *
     * @param unfiledContainerId The identifier of an unfiled records container. You can use the **-unfiled-** alias.
     * @param nodeBodyCreate The node information to create.
     * @param opts Optional parameters
@@ -152,7 +152,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<UnfiledContainerAssociationPaging>
     */
-    createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts: any): Promise<UnfiledContainerAssociationPaging | ModelError> {
+    createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: any): Promise<UnfiledContainerAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = nodeBodyCreate;
 
@@ -190,35 +190,35 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Get the unfiled records container
-        * 
+        *
         * Gets information for unfiled records container **unfiledContainerId**
-    
+
     Mandatory fields and the unfiled records container's aspects and properties are returned by default.
-    
+
     You can use the **include** parameter (include=allowableOperations) to return additional information.
-    
-        * 
+
+        *
         * @param unfiledContainerId The identifier of an unfiled records container. You can use the **-unfiled-** alias.
         * @param opts Optional parameters
         * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
-    
+
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<UnfiledContainerEntry>
         */
-    getUnfiledContainer(unfiledContainerId: string, opts: any): Promise<UnfiledContainerEntry | ModelError> {
+    getUnfiledContainer(unfiledContainerId: string, opts?: any): Promise<UnfiledContainerEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -251,49 +251,49 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * List unfiled record container's children
-        * 
+        *
         * Returns a list of records or unfiled record folders.
-    
+
     Minimal information for each child is returned by default.
-    
+
     You can use the **include** parameter (include=allowableOperations) to return additional information.
-    
-        * 
+
+        *
         * @param unfiledContainerId The identifier of an unfiled records container. You can use the **-unfiled-** alias.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
         * @param opts.maxItems The maximum number of items to return in the list.
         * @param opts.where Optionally filter the list. Here are some examples:
-    
+
     *   where=(isRecord=true)
-    
+
     *   where=(isUnfiledRecordFolder=false)
-    
+
     *   where=(nodeType='cm:content INCLUDESUBTYPES')
-    
+
         * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * aspectNames
     * association
     * path
     * properties
-    
+
         * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **unfiledContainerId**
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<UnfiledContainerAssociationPaging>
         */
-    listUnfiledContainerChildren(unfiledContainerId: string, opts: any): Promise<UnfiledContainerAssociationPaging | ModelError> {
+    listUnfiledContainerChildren(unfiledContainerId: string, opts?: any): Promise<UnfiledContainerAssociationPaging | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -330,13 +330,13 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
     /**
         * Update an unfiled record container
-        * 
+        *
         * Updates unfiled record container **unfiledContainerId**. For example, you can rename an unfiled record container:
     JSON
     {
       \"name\":\"My new name\"
     }
-    
+
     You can also set or update description and title properties:
     JSON
     {
@@ -346,33 +346,33 @@ parameter are returned in addition to those specified in the **fields** paramete
            \"cm:title\":\"New Title\"
         }
     }
-    
-    
+
+
     **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
-    
-        * 
+
+        *
         * @param unfiledContainerId The identifier of an unfiled records container. You can use the **-unfiled-** alias.
         * @param unfiledContainerBodyUpdate The unfiled record container information to update.
         * @param opts Optional parameters
         * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * path
-    
+
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<UnfiledContainerEntry>
         */
-    updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts: any): Promise<UnfiledContainerEntry | ModelError> {
+    updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: any): Promise<UnfiledContainerEntry | ModelError> {
         opts = opts || {};
         let postBody = unfiledContainerBodyUpdate;
 

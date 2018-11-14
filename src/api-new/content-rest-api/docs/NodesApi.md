@@ -5,12 +5,12 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfres
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**copyNode**](NodesApi.md#copyNode) | **POST** /nodes/{nodeId}/copy | Copy a node
-[**createAssocation**](NodesApi.md#createAssocation) | **POST** /nodes/{nodeId}/targets | Create node association
+[**createAssociation**](NodesApi.md#createAssociation) | **POST** /nodes/{nodeId}/targets | Create node association
 [**createNode**](NodesApi.md#createNode) | **POST** /nodes/{nodeId}/children | Create a node
-[**createSecondaryChildAssocation**](NodesApi.md#createSecondaryChildAssocation) | **POST** /nodes/{nodeId}/secondary-children | Create secondary child
-[**deleteAssocation**](NodesApi.md#deleteAssocation) | **DELETE** /nodes/{nodeId}/targets/{targetId} | Delete node association(s)
+[**createSecondaryChildAssociation**](NodesApi.md#createSecondaryChildAssociation) | **POST** /nodes/{nodeId}/secondary-children | Create secondary child
+[**deleteAssociation**](NodesApi.md#deleteAssociation) | **DELETE** /nodes/{nodeId}/targets/{targetId} | Delete node association(s)
 [**deleteNode**](NodesApi.md#deleteNode) | **DELETE** /nodes/{nodeId} | Delete a node
-[**deleteSecondaryChildAssocation**](NodesApi.md#deleteSecondaryChildAssocation) | **DELETE** /nodes/{nodeId}/secondary-children/{childId} | Delete secondary child or children
+[**deleteSecondaryChildAssociation**](NodesApi.md#deleteSecondaryChildAssociation) | **DELETE** /nodes/{nodeId}/secondary-children/{childId} | Delete secondary child or children
 [**getNode**](NodesApi.md#getNode) | **GET** /nodes/{nodeId} | Get a node
 [**getNodeContent**](NodesApi.md#getNodeContent) | **GET** /nodes/{nodeId}/content | Get node content
 [**listNodeChildren**](NodesApi.md#listNodeChildren) | **GET** /nodes/{nodeId}/children | List node children
@@ -118,9 +118,9 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**NodeEntry**](NodeEntry.md)
 
-<a name="createAssocation"></a>
-# **createAssocation**
-> AssociationEntry createAssocation(nodeIdassociationBodyCreateopts)
+<a name="createAssociation"></a>
+# **createAssociation**
+> AssociationEntry createAssociation(nodeIdassociationBodyCreateopts)
 
 Create node association
 
@@ -199,7 +199,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.createAssocation(nodeIdassociationBodyCreateopts).then((data) => {
+nodesApi.createAssociation(nodeIdassociationBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -488,9 +488,9 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**NodeEntry**](NodeEntry.md)
 
-<a name="createSecondaryChildAssocation"></a>
-# **createSecondaryChildAssocation**
-> ChildAssociationEntry createSecondaryChildAssocation(nodeIdsecondaryChildAssociationBodyCreateopts)
+<a name="createSecondaryChildAssociation"></a>
+# **createSecondaryChildAssociation**
+> ChildAssociationEntry createSecondaryChildAssociation(nodeIdsecondaryChildAssociationBodyCreateopts)
 
 Create secondary child
 
@@ -569,7 +569,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-nodesApi.createSecondaryChildAssocation(nodeIdsecondaryChildAssociationBodyCreateopts).then((data) => {
+nodesApi.createSecondaryChildAssociation(nodeIdsecondaryChildAssociationBodyCreateopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -600,9 +600,9 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**ChildAssociationEntry**](ChildAssociationEntry.md)
 
-<a name="deleteAssocation"></a>
-# **deleteAssocation**
-> deleteAssocation(nodeIdtargetIdopts)
+<a name="deleteAssociation"></a>
+# **deleteAssociation**
+> deleteAssociation(nodeIdtargetIdopts)
 
 Delete node association(s)
 
@@ -633,7 +633,7 @@ let opts = {
   'assocType': assocType_example //  | Only delete associations of this type.
 };
 
-nodesApi.deleteAssocation(nodeIdtargetIdopts).then(() => {
+nodesApi.deleteAssociation(nodeIdtargetIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -715,9 +715,9 @@ Only the owner of the node or an admin can permanently delete the node.
 
 null (empty response body)
 
-<a name="deleteSecondaryChildAssocation"></a>
-# **deleteSecondaryChildAssocation**
-> deleteSecondaryChildAssocation(nodeIdchildIdopts)
+<a name="deleteSecondaryChildAssociation"></a>
+# **deleteSecondaryChildAssociation**
+> deleteSecondaryChildAssociation(nodeIdchildIdopts)
 
 Delete secondary child or children
 
@@ -746,7 +746,7 @@ let opts = {
   'assocType': assocType_example //  | Only delete associations of this type.
 };
 
-nodesApi.deleteSecondaryChildAssocation(nodeIdchildIdopts).then(() => {
+nodesApi.deleteSecondaryChildAssociation(nodeIdchildIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

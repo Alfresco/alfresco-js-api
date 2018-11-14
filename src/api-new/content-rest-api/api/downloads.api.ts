@@ -27,7 +27,7 @@ import { BaseApi } from './base.api';
 export class DownloadsApi extends BaseApi {
     /**
     * Cancel a download
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Cancels the creation of a download request.
@@ -40,7 +40,7 @@ Information about the existing progress at the time of cancelling can be retriev
 
 The cancel operation is done asynchronously.
 
-    * 
+    *
     * @param downloadId The identifier of a download node.
     * @return Promise<{}>
     */
@@ -75,11 +75,11 @@ The cancel operation is done asynchronously.
     }
     /**
         * Create a new download
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
-    
+
     Creates a new download node asynchronously, the content of which will be the zipped content of the **nodeIds** specified in the JSON body like this:
-    
+
     JSON
     {
         \"nodeIds\":
@@ -88,28 +88,28 @@ The cancel operation is done asynchronously.
            \"cffa62db-aa01-493d-9594-058bc058eeb1\"
          ]
     }
-    
-    
+
+
     **Note:** The content of the download node can be obtained using the **GET /nodes/{downloadId}/content** endpoint
-    
-        * 
+
+        *
         * @param downloadBodyCreate The nodeIds the content of which will be zipped, which zip will be set as the content of our download node.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<DownloadEntry>
         */
-    createDownload(downloadBodyCreate: DownloadBodyCreate, opts: any): Promise<DownloadEntry | ModelError> {
+    createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: any): Promise<DownloadEntry | ModelError> {
         opts = opts || {};
         let postBody = downloadBodyCreate;
 
@@ -141,29 +141,29 @@ The cancel operation is done asynchronously.
     }
     /**
         * Get a download
-        * 
+        *
         * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
-    
+
     Retrieve status information for download node **downloadId**
-    
-        * 
+
+        *
         * @param downloadId The identifier of a download node.
         * @param opts Optional parameters
         * @param opts.fields A list of field names.
-    
+
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
-    
+
     The list applies to a returned individual
     entity or entries within a collection.
-    
+
     If the API method also supports the **include**
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
-    
+
         * @return Promise<DownloadEntry>
         */
-    getDownload(downloadId: string, opts: any): Promise<DownloadEntry | ModelError> {
+    getDownload(downloadId: string, opts?: any): Promise<DownloadEntry | ModelError> {
         opts = opts || {};
         let postBody = null;
 
