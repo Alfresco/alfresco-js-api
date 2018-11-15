@@ -39,4 +39,5 @@ import { TrashcanApi } from './trashcan.api';
 export * from './versions.api';
 import { VersionsApi } from './versions.api';
 import { WebscriptApi } from './webscript.api';
-export const CONTENT_APIS = [ActionsApi, ActivitiesApi, AuditApi, CommentsApi, DownloadsApi, FavoritesApi, GroupsApi, NetworksApi, NodesApi, PeopleApi, PreferencesApi, ProbesApi, QueriesApi, RatingsApi, RenditionsApi, SharedlinksApi, SitesApi, TagsApi, TrashcanApi, VersionsApi, WebscriptApi];
+import { ClassesApi } from './classes.api';
+export const CONTENT_APIS = [ActionsApi, ActivitiesApi, AuditApi, CommentsApi, DownloadsApi, FavoritesApi, GroupsApi, NetworksApi, NodesApi, PeopleApi, PreferencesApi, ProbesApi, QueriesApi, RatingsApi, RenditionsApi, SharedlinksApi, SitesApi, TagsApi, TrashcanApi, VersionsApi, WebscriptApi, ClassesApi];

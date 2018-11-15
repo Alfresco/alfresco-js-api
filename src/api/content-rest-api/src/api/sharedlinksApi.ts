@@ -32,7 +32,7 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class SharedlinksApi  {
+export class SharedlinksApi {
 
     sharedlinksApi: NewSharedlinksApi;
 
@@ -50,7 +50,7 @@ export class SharedlinksApi  {
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
     addSharedLink(sharedLinkBody: SharedLinkBody, opts?: any): Promise<any> {
-       return this.sharedlinksApi.createSharedLink(sharedLinkBody,opts);
+        return this.sharedlinksApi.createSharedLink(<any>sharedLinkBody, opts);
     }
 
     /**
@@ -69,7 +69,7 @@ export class SharedlinksApi  {
      * @param {module:model/EmailSharedLinkBody} emailSharedLinkBody The shared link email to send.
      */
     emailSharedLink(sharedId: string, emailSharedLinkBody: EmailSharedLinkBody): Promise<any> {
-        return this.sharedlinksApi.emailSharedLink(sharedId,<any>emailSharedLinkBody);
+        return this.sharedlinksApi.emailSharedLink(sharedId, <any>emailSharedLinkBody);
     }
 
     /**
@@ -122,7 +122,7 @@ export class SharedlinksApi  {
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
     getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any> {
-        return this.sharedlinksApi.getSharedLinkRenditionContent(sharedId,renditionId, opts);
+        return this.sharedlinksApi.getSharedLinkRenditionContent(sharedId, renditionId, opts);
     }
 
     /**
@@ -132,7 +132,7 @@ export class SharedlinksApi  {
      * data is of type: {module:model/RenditionPaging}
      */
     getSharedLinkRenditions(sharedId: string): Promise<any> {
-        return this.sharedlinksApi.getSharedLinkRenditions(sharedId);
+        return this.sharedlinksApi.listSharedLinkRenditions(sharedId);
     }
 
     /**
@@ -142,6 +142,6 @@ export class SharedlinksApi  {
      * data is of type: {module:model/RenditionEntry}
      */
     getSharedLinkRendition(sharedId: string, renditionId: string): Promise<any> {
-        return this.sharedlinksApi.getSharedLinkRendition(sharedId,renditionId);
+        return this.sharedlinksApi.getSharedLinkRendition(sharedId, renditionId);
     }
 }

@@ -16,8 +16,7 @@
  */
 
 import { ClassDescription } from '../model/ClassDescription';
-import { ClassesApi as NewClassesApi } from '../../../../api-new/content-rest-api/api/classes.api';
-import { AlfrescoApi } from '../../../../alfrescoApi';
+import { BaseApi } from './base.api';
 
 /**
  * Classes service.
@@ -32,13 +31,10 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use,
  * default to {@link module:ApiClient#instance} if unspecified.
  */
-export class ClassesApi  {
+export class ClassesApi extends BaseApi {
 
-    classesApi: NewClassesApi;
+    private path: string = '/api/classes';
 
-    public init(alfrescoApi?: AlfrescoApi) {
-        this.classesApi = new NewClassesApi(alfrescoApi);
-    }
 
     /**
      * Function to receive the result of the getClass operation.
@@ -55,6 +51,29 @@ export class ClassesApi  {
      * data is of type: {module:model/ClassDescription}
      */
     getClass(className: string, opts?: any): Promise<ClassDescription> {
-       return this.classesApi.getClass(className,opts);
+        opts = opts || {};
+
+        // verify the required parameter 'className' is set
+        if (className === undefined || className === null) {
+            throw "Missing param 'className' in getClass";
+        }
+
+        let postBody = null;
+        let pathParams = {
+            'className': className
+        };
+        let queryParams = {};
+        let headerParams = {};
+        let formParams = {};
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let contextRoot = this.apiClient.config.contextRoot + '/s';
+
+        return this.apiClient.callApi(
+            this.path + '/{className}', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts, null, contextRoot
+        );
     }
 }

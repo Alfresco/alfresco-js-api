@@ -60,8 +60,8 @@ export class NodesApi {
      * @param {Object.<String, Object>} formParams A map of form parameters and their values.
      * data is of type: {module:model/NodeEntry}
      */
-    addNode(nodeId: string, nodeBody: NodeBody, opts?: any, formParams: any): Promise<any> {
-        return this.nodesApi.createNode(nodeId, <any>nodeBody, opts, formParams);
+    addNode(nodeId: string, nodeBody: NodeBody, opts?: any): Promise<any> {
+        return this.nodesApi.createNode(nodeId, <any>nodeBody, opts);
     }
 
     /**
@@ -185,7 +185,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeAssociationPaging}
      */
-    getParents(nodeId: string, opts?: any): Promise<NodeAssociationPaging> {
+    getParents(nodeId: string, opts?: any): Promise<any> {
         return this.nodesApi.listParents(nodeId, opts);
     }
 

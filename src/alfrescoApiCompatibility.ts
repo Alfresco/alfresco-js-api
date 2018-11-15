@@ -22,7 +22,7 @@ import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { AlfrescoContent } from './alfrescoContent';
 import { AlfrescoUpload } from './alfrescoUpload';
 
-const AlfrescoCoreRestApi  = require( './api/content-rest-api/src/index');
+const AlfrescoCoreRestApi = require('./api/content-rest-api/src/index');
 // let AlfrescoPrivateRestApi = require('./alfresco-private-rest-api/src/index.js');
 // let AlfrescoSearchRestApi = require('./alfresco-search-rest-api/src/index.js');
 // let AlfrescoDiscoveryRestApi = require('./alfresco-discovery-rest-api/src/index.js');
@@ -34,15 +34,22 @@ const AlfrescoCoreRestApi  = require( './api/content-rest-api/src/index');
 // import { APS_APIS  } from './api-new/activiti-rest-api/api/api';
 // import { AUTH_APIS  } from './api-new/auth-rest-api/api/api';
 // import { CONTENT_APIS  } from './api-new/content-rest-api/api/api';
-// import { DISCOVERY_APIS  } from './api-new/discovery-rest-api/api/api';
-// import { GS_CLASSIFICATION_APIS  } from './api-new/gs-classification-rest-api/api/api';
-// import { GS_CORE_APIS  } from './api-new/gs-core-rest-api/api/api';
-// import { SEARCH_APIS  } from './api-new/search-rest-api/api/api';
+import { DISCOVERY_APIS  } from './api-new/discovery-rest-api/api/api';
+import { GS_CLASSIFICATION_APIS } from './api-new/gs-classification-rest-api/api/api';
+import { GS_CORE_APIS } from './api-new/gs-core-rest-api/api/api';
+import { SEARCH_APIS } from './api-new/search-rest-api/api/api';
+import { AUTH_APIS } from './api-new/auth-rest-api/api/api';
 
 export class AlfrescoApiCompatibility extends AlfrescoApi {
 
     core: any;
     coreStore: any;
+
+    auth ={};
+    search ={};
+    gsCore ={};
+    gsClassification={};
+    discovery ={};
 
     constructor(config: AlfrescoApiConfig) {
         super();
@@ -59,69 +66,46 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
         // this._instantiateObjects(this.activitiStore, this.activiti);
 
         //ECM
-        //AlfrescoCoreRestApi.ApiClient.instance = this.ecmClient;
         this.core = {};
         this.coreStore = AlfrescoCoreRestApi.CONTENT_APIS;
 
-        this._instantiateObjects(this.coreStore, this.core);
+        this._instantiateOldObjects(this.coreStore, this.core);
 
-        console.log('====== peopleApi ' + this.core.peopleApi);
         // //ECM-Private
         // //AlfrescoPrivateRestApi.ApiClient.instance = this.ecmPrivateClient;
         // this.corePrivateStore = AlfrescoPrivateRestApi;
         // this._instantiateObjects(this.corePrivateStore, this.core);
         //
-        // //SEARCH
-        // this.search = {};
-        // //AlfrescoSearchRestApi.ApiClient.instance = this.searchClient;
-        // this.searchStore = AlfrescoSearchRestApi;
-        // this._instantiateObjects(this.searchStore, this.search);
-        //
-        // //Discovery
-        // this.discovery = {};
-        // //AlfrescoDiscoveryRestApi.ApiClient.instance = this.discoveryClient;
-        // this.discoveryStore = AlfrescoDiscoveryRestApi;
-        // this._instantiateObjects(this.discoveryStore, this.discovery);
-        //
-        // //Governance CORE
-        // this.gsCore = {};
-        // //AlfrescoGsCoreRestApi.ApiClient.instance = this.gsClient;
-        // this.gsCoreStore = AlfrescoGsCoreRestApi;
-        // this._instantiateObjects(this.gsCoreStore, this.gsCore);
-        //
-        // //Governance Classification
-        // this.gsClassification = {};
-        // //AlfrescoGsClassificationRestApi.ApiClient.instance = this.gsClient;
-        // this.gsClassificationStore = AlfrescoGsClassificationRestApi;
-        // this._instantiateObjects(this.gsClassificationStore, this.gsClassification);
 
-       // this.nodes = this.node = new AlfrescoNode();
+        this._instantiateNewObjects(AUTH_APIS, this.auth);
+        this._instantiateNewObjects(SEARCH_APIS, this.search);
+        this._instantiateNewObjects(DISCOVERY_APIS, this.discovery);
+        this._instantiateNewObjects(GS_CORE_APIS, this.gsCore);
+        this._instantiateNewObjects(GS_CLASSIFICATION_APIS, this.gsClassification);
+
+        //this.nodes = this.node = new AlfrescoNode();
         //this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
         //this.upload = new AlfrescoUpload();
         //this.webScript = this.core.webscriptApi;
     }
 
-    _instantiateObjects(module, moduleCopy) {
+    _instantiateOldObjects(module, moduleCopy) {
 
         module.forEach((currentClass) => {
-           // moduleCopy[currentClass] = module[currentClass];
-            //let obj = this._stringToObject(currentClass, module);
             let nameObj = this._lowerFirst(currentClass.name);
-
-            console.log('currentClass '+  currentClass.name);
 
             moduleCopy[nameObj] = new currentClass();
             moduleCopy[nameObj].init(this);
-           // / console.log('obj '+obj);
-           //
-           //  if(obj) {
-           //      moduleCopy[nameObj] = obj.init(this);
-           //
-           //      console.log(' moduleCopy[nameObj]  '+ moduleCopy[nameObj] );
-           //
-           //  }
-           //
-           //  moduleCopy[nameObj] = obj;
+        });
+    }
+
+    _instantiateNewObjects(module, moduleCopy) {
+
+        module.forEach((currentClass) => {
+            let nameObj = this._lowerFirst(currentClass.name);
+
+            moduleCopy[nameObj] = new currentClass(this);
+           // moduleCopy[nameObj].init(this);
         });
     }
 
