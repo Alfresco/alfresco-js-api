@@ -19,3 +19,9 @@
 /webpack-bundle-test.js
 /.github/
 /.babelrc
+/api-codegen
+/.history
+/.vscode
+/definitions
+/performance
+/scripts
