@@ -58,7 +58,7 @@ export class IdmsyncApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List sync log entries
@@ -99,7 +99,7 @@ export class IdmsyncApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/idm-sync-log-entries', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

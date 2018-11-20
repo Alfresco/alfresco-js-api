@@ -25,9 +25,9 @@ import { BaseApi } from './base.api';
 export class AccountintegrationApi extends BaseApi {
     /**
     * Retrieve external account information
-    * 
+    *
     * Accounts are used to integrate with third party apps and clients
-    * 
+    *
     * @return Promise<ResultListDataRepresentationAccountRepresentation>
     */
     getAccountsUsingGET(): Promise<ResultListDataRepresentationAccountRepresentation> {
@@ -53,7 +53,7 @@ export class AccountintegrationApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/account/integration', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

@@ -133,7 +133,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/shared-links', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Deletes a shared link
@@ -173,7 +173,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/shared-links/{sharedId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Email shared link
@@ -245,7 +245,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/email', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a shared link
@@ -301,7 +301,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/shared-links/{sharedId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get shared link content
@@ -361,7 +361,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get shared link rendition information
@@ -411,7 +411,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/renditions/{renditionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get shared link rendition content
@@ -476,7 +476,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List renditions for a shared link
@@ -521,7 +521,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/renditions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List shared links
@@ -594,7 +594,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/shared-links', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

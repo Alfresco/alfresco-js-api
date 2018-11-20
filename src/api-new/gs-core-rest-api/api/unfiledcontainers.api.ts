@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
+import { ModelError } from '../../content-rest-api/model/modelError';
 import { RMNodeBodyCreate } from '../model/rMNodeBodyCreate';
 import { UnfiledContainerAssociationPaging } from '../model/unfiledContainerAssociationPaging';
 import { UnfiledContainerEntry } from '../model/unfiledContainerEntry';
@@ -186,7 +186,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get the unfiled records container
@@ -247,7 +247,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List unfiled record container's children
@@ -326,7 +326,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update an unfiled record container
@@ -405,7 +405,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

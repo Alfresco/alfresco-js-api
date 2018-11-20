@@ -24,9 +24,9 @@ import { BaseApi } from './base.api';
 export class ModelsbpmnApi extends BaseApi {
     /**
     * Export a historic version of a process definition as BPMN 2.0 XML
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param processModelId processModelId
     * @param processModelHistoryId processModelHistoryId
     * @return Promise<{}>
@@ -62,13 +62,13 @@ export class ModelsbpmnApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Export a process definition as BPMN 2.0 XML
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processModelId processModelId
         * @return Promise<{}>
         */
@@ -99,7 +99,7 @@ export class ModelsbpmnApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{processModelId}/bpmn20', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

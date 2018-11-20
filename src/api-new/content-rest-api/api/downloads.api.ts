@@ -71,7 +71,7 @@ The cancel operation is done asynchronously.
         return this.apiClient.callApi(
             '/downloads/{downloadId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Create a new download
@@ -137,7 +137,7 @@ The cancel operation is done asynchronously.
         return this.apiClient.callApi(
             '/downloads', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a download
@@ -191,7 +191,7 @@ The cancel operation is done asynchronously.
         return this.apiClient.callApi(
             '/downloads/{downloadId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

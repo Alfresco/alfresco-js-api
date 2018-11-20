@@ -29,9 +29,9 @@ import { BaseApi } from './base.api';
 export class TaskformsApi extends BaseApi {
     /**
     * Complete a task form
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param taskId taskId
     * @param completeTaskFormRepresentation completeTaskFormRepresentation
     * @return Promise<{}>
@@ -67,13 +67,13 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get task variables
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @return Promise<Array<ProcessInstanceVariableRepresentation>>
         */
@@ -104,13 +104,13 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}/variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Retrieve column field values
-        * 
+        *
         * Specific case to retrieve information on a specific column
-        * 
+        *
         * @param taskId taskId
         * @param field field
         * @param column column
@@ -151,13 +151,13 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Retrieve populated field values
-        * 
+        *
         * Form field values that are populated through a REST backend, can be retrieved via this service
-        * 
+        *
         * @param taskId taskId
         * @param field field
         * @return Promise<Array<FormValueRepresentation>>
@@ -193,13 +193,13 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}/form-values/{field}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a task form
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @return Promise<FormDefinitionRepresentation>
         */
@@ -230,13 +230,13 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Save a task form
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param saveTaskFormRepresentation saveTaskFormRepresentation
         * @return Promise<{}>
@@ -272,7 +272,7 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}/save-form', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

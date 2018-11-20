@@ -17,7 +17,7 @@
 
 import { FilePlanBodyUpdate } from '../model/filePlanBodyUpdate';
 import { FilePlanEntry } from '../model/filePlanEntry';
-import { ModelError } from '../model/modelError';
+import { ModelError } from '../../content-rest-api/model/modelError';
 import { RecordCategoryEntry } from '../model/recordCategoryEntry';
 import { RecordCategoryPaging } from '../model/recordCategoryPaging';
 import { RootCategoryBodyCreate } from '../model/rootCategoryBodyCreate';
@@ -146,7 +146,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}/categories', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a file plan
@@ -207,7 +207,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List file plans's children
@@ -277,7 +277,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}/categories', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a file plan
@@ -351,7 +351,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

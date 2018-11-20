@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
+import { ModelError } from '../../content-rest-api/model/modelError';
 import { TransferAssociationPaging } from '../model/transferAssociationPaging';
 import { TransferEntry } from '../model/transferEntry';
 import { BaseApi } from './base.api';
@@ -86,7 +86,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/transfers/{transferId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List transfer's children
@@ -158,7 +158,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/transfers/{transferId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

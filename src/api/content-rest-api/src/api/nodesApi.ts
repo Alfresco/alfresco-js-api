@@ -307,11 +307,11 @@ export class NodesApi {
      * data is of type: {module:model/NodeEntry}
      */
     updateFileContent(nodeId: string, contentBody: string, opts?: any): Promise<any> {
-        return this.nodesApi.updateNodeContent(nodeId,contentBody,opts);
+        return this.nodesApi.updateNodeContent(nodeId, contentBody, opts);
     }
 
     updateNodeContent(nodeId: string, contentBody: string, opts?: any): Promise<any> {
-        return this.nodesApi.updateNodeContent(nodeId,contentBody,opts);
+        return this.nodesApi.updateNodeContent(nodeId, contentBody, opts);
     }
 
     /**
@@ -325,6 +325,6 @@ export class NodesApi {
      * data is of type: {module:model/NodeEntry}
      */
     updateNode(nodeId: string, nodeBody: NodeBody, opts?: any): Promise<any> {
-        return this.nodesApi.updateNode(nodeId,nodeBody,opts);
+        return this.nodesApi.updateNode(nodeId, nodeBody, opts);
     }
 }

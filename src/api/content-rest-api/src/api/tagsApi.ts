@@ -48,7 +48,7 @@ export class TagsApi  {
      * data is of type: {module:model/TagEntry}
      */
     addTag(nodeId: string, tagBody: TagBody): Promise<any> {
-        return this.tagsApi.createTagForNode(nodeId,<any>tagBody);
+        return this.tagsApi.createTagForNode(nodeId, <any>tagBody);
     }
 
     /**
@@ -62,7 +62,7 @@ export class TagsApi  {
      * data is of type: {module:model/TagPaging}
      */
     getNodeTags(nodeId: string, opts?: any): Promise<any> {
-        return this.tagsApi.listTagsForNode(nodeId,opts);
+        return this.tagsApi.listTagsForNode(nodeId, opts);
     }
 
     /**
@@ -74,7 +74,7 @@ export class TagsApi  {
      * data is of type: {module:model/TagEntry}
      */
     getTag(tagId: string, opts?: any): Promise<any> {
-        return this.tagsApi.getTag(tagId,opts);
+        return this.tagsApi.getTag(tagId, opts);
     }
 
     /**
@@ -97,7 +97,7 @@ export class TagsApi  {
      * @param {String} tagId The identifier of a tag.
      */
     removeTag(nodeId: string, tagId: string): Promise<any> {
-        return this.tagsApi.deleteTagFromNode(nodeId,tagId);
+        return this.tagsApi.deleteTagFromNode(nodeId, tagId);
     }
 
     /**
@@ -108,6 +108,6 @@ export class TagsApi  {
      * data is of type: {module:model/TagEntry}
      */
     updateTag(tagId: string, tagBody: TagBody): Promise<any> {
-        return this.tagsApi.updateTag(tagId,<any>tagBody);
+        return this.tagsApi.updateTag(tagId, <any>tagBody);
     }
 }

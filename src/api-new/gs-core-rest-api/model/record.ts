@@ -15,9 +15,9 @@
 * limitations under the License.
 */
 
-import { ContentInfo } from './contentInfo';
-import { PathInfo } from './pathInfo';
-import { UserInfo } from './userInfo';
+import { ContentInfo } from '../../content-rest-api/model/contentInfo';
+import { PathInfo } from '../../content-rest-api/model/pathInfo';
+import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class Record {
     id: string;

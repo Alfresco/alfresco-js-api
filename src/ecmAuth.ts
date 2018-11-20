@@ -15,9 +15,8 @@
  * limitations under the License.
  */
 
-import AlfrescoAuthRestApi = require('./api/auth-rest-api/src/api/AuthenticationApi');
-import LoginRequest = require('./api/auth-rest-api/src/model/LoginRequest');
-import Emitter = require('event-emitter');
+import * as Emitter from 'event-emitter';
+import { AuthenticationApi } from './api-new/auth-rest-api/api/authentication.api';
 import { AlfrescoApiClient } from './alfrescoApiClient';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Storage } from './storage';
@@ -75,15 +74,15 @@ export class EcmAuth extends AlfrescoApiClient {
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
-        let authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
-        let loginRequest = new LoginRequest();
+        let authApi = new AuthenticationApi(<any>this);
+        let loginRequest: any;
 
         loginRequest.userId = this.authentications.basicAuth.username;
         loginRequest.password = this.authentications.basicAuth.password;
 
         let promise: any = new Promise((resolve, reject) => {
             authApi.createTicket(loginRequest)
-                .then((data) => {
+                .then((data: any) => {
                     this.saveUsername(username);
                     this.setTicket(data.entry.id);
                     promise.emit('success');
@@ -112,18 +111,17 @@ export class EcmAuth extends AlfrescoApiClient {
      * @returns A promise that returns  if resolved and {error} if rejected.
      * */
     validateTicket(): Promise<any> {
-        let authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
+        let authApi = new AuthenticationApi(<any>this);
 
         this.setTicket(this.config.ticketEcm);
 
         let promise: any = new Promise((resolve, reject) => {
-            authApi.validateTicket().then(
-                (data) => {
+            authApi.validateTicket().then((data: any) => {
                     this.setTicket(data.entry.id);
                     promise.emit('success');
                     resolve(data.entry.id);
                 },
-                (error) => {
+                                          (error) => {
                     if (error.status === 401) {
                         promise.emit('unauthorized');
                     }
@@ -143,7 +141,7 @@ export class EcmAuth extends AlfrescoApiClient {
      * */
     logout(): Promise<any> {
         this.saveUsername('');
-        let authApi = new AlfrescoAuthRestApi.AuthenticationApi(this);
+        let authApi = new AuthenticationApi(<any>this);
 
         let promise: any = new Promise((resolve, reject) => {
             authApi.deleteTicket().then(

@@ -75,7 +75,7 @@ JSON
         return this.apiClient.callApi(
             '/nodes/{nodeId}/renditions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get rendition information
@@ -120,7 +120,7 @@ JSON
         return this.apiClient.callApi(
             '/nodes/{nodeId}/renditions/{renditionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get rendition content
@@ -188,7 +188,7 @@ JSON
         return this.apiClient.callApi(
             '/nodes/{nodeId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List renditions
@@ -240,7 +240,7 @@ JSON
         return this.apiClient.callApi(
             '/nodes/{nodeId}/renditions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

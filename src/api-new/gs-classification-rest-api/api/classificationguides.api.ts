@@ -18,9 +18,8 @@
 import { ClassificationGuideBody } from '../model/classificationGuideBody';
 import { ClassificationGuideEntry } from '../model/classificationGuideEntry';
 import { ClassificationGuidePaging } from '../model/classificationGuidePaging';
-import { CombinedInstructionBody } from '../model/combinedInstructionBody';
 import { InstructionEntry } from '../model/instructionEntry';
-import { ModelError } from '../model/modelError';
+import { ModelError } from '../../content-rest-api/model/modelError';
 import { SubtopicPaging } from '../model/subtopicPaging';
 import { TopicBody } from '../model/topicBody';
 import { TopicEntry } from '../model/topicEntry';
@@ -64,7 +63,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/combined-instructions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Create a classification guide
@@ -101,7 +100,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Create a subtopic
@@ -151,7 +150,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/topics/{topicId}/subtopics', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Create a topic
@@ -201,7 +200,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}/topics', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete a classification guide
@@ -238,7 +237,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete a topic
@@ -275,7 +274,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/topics/{topicId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List all classification guides
@@ -329,7 +328,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List all subtopics
@@ -394,7 +393,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/topics/{topicId}/subtopics', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List all topics
@@ -459,7 +458,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}/topics', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get classification guide information
@@ -496,7 +495,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get topic information
@@ -541,7 +540,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/topics/{topicId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a classification guide
@@ -583,7 +582,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a topic
@@ -636,7 +635,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/topics/{topicId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

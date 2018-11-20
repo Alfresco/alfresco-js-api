@@ -79,7 +79,7 @@ params (majorVersion and comment) on a subsequent file content update.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/versions/{versionId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get version information
@@ -124,7 +124,7 @@ params (majorVersion and comment) on a subsequent file content update.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/versions/{versionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get version content
@@ -187,7 +187,7 @@ params (majorVersion and comment) on a subsequent file content update.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/versions/{versionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List version history
@@ -257,7 +257,7 @@ params (majorVersion and comment) on a subsequent file content update.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/versions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Revert a version
@@ -324,7 +324,7 @@ params (majorVersion and comment) on a subsequent file content update.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/versions/{versionId}/revert', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

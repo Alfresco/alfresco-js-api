@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
+import { ModelError } from '../../content-rest-api/model/modelError';
 import { SecurityControlSettingBody } from '../model/securityControlSettingBody';
 import { SecurityControlSettingEntry } from '../model/securityControlSettingEntry';
 import { BaseApi } from './base.api';
@@ -27,9 +27,9 @@ import { BaseApi } from './base.api';
 export class SecuritycontrolsettingsApi extends BaseApi {
     /**
     * Get security control setting value
-    * 
+    *
     * Gets the value for a selected **securityControlSettingKey**.
-    * 
+    *
     * @param securityControlSettingKey The key for the security control setting. You can use one of the following settings:
 * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
 
@@ -62,16 +62,16 @@ export class SecuritycontrolsettingsApi extends BaseApi {
         return this.apiClient.callApi(
             '/security-control-settings/{securityControlSettingKey}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update security control setting value
-        * 
+        *
         * Updates the value of a selected **securityControlSettingKey**.
-        * 
+        *
         * @param securityControlSettingKey The key for the security control setting. You can use one of the following settings:
     * -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
-    
+
         * @param securityControlSettingValue The new value for the security control setting. This can be a string or number, depending on the setting key.
         * @return Promise<SecurityControlSettingEntry>
         */
@@ -106,7 +106,7 @@ export class SecuritycontrolsettingsApi extends BaseApi {
         return this.apiClient.callApi(
             '/security-control-settings/{securityControlSettingKey}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

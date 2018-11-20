@@ -28,9 +28,9 @@ import { BaseApi } from './base.api';
 export class TaskactionsApi extends BaseApi {
     /**
     * Assign a task to a user
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param taskId taskId
     * @param userIdentifier userIdentifier
     * @return Promise<TaskRepresentation>
@@ -66,13 +66,13 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/assign', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Attach a form to a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param formIdentifier formIdentifier
         * @return Promise<{}>
@@ -108,13 +108,13 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/attach-form', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Claim a task
-        * 
+        *
         * To claim a task (in case the task is assigned to a group)
-        * 
+        *
         * @param taskId taskId
         * @return Promise<{}>
         */
@@ -145,13 +145,13 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/claim', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Complete a task
-        * 
+        *
         * Use this endpoint to complete a standalone task or task without a form
-        * 
+        *
         * @param taskId taskId
         * @return Promise<{}>
         */
@@ -182,13 +182,13 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/complete', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delegate a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param userIdentifier userIdentifier
         * @return Promise<{}>
@@ -224,13 +224,13 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/delegate', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Involve a group with a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param groupId groupId
         * @return Promise<{}>
@@ -266,13 +266,13 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/groups/{groupId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Involve a user with a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param userIdentifier userIdentifier
         * @return Promise<{}>
@@ -308,13 +308,13 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/involve', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Remove a form from a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @return Promise<{}>
         */
@@ -345,13 +345,13 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/remove-form', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Remove an involved group from a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param groupId groupId
         * @return Promise<{}>
@@ -387,13 +387,13 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/groups/{groupId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Remove an involved user from a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param userIdentifier userIdentifier
         * @return Promise<{}>
@@ -429,13 +429,13 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/remove-involved', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Resolve a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @return Promise<{}>
         */
@@ -466,13 +466,13 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/resolve', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Unclaim a task
-        * 
+        *
         * To unclaim a task (in case the task was assigned to a group)
-        * 
+        *
         * @param taskId taskId
         * @return Promise<{}>
         */
@@ -503,7 +503,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/unclaim', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

@@ -63,7 +63,7 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Create or update variables
@@ -100,7 +100,7 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete a variable
@@ -145,7 +145,7 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables/{variableName}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a variable
@@ -190,7 +190,7 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables/{variableName}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List variables
@@ -230,7 +230,7 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a variable
@@ -277,7 +277,7 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables/{variableName}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

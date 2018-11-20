@@ -60,7 +60,7 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco/{repositoryId}/sites', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List files and folders inside a specific folder identified by folder path
@@ -107,7 +107,7 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/rest/integration/alfresco/{repositoryId}/sites/{siteId}/folderpath/{folderPath}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List files and folders inside a specific folder
@@ -149,7 +149,7 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List files and folders inside a specific site
@@ -191,7 +191,7 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List Alfresco repositories
@@ -228,7 +228,7 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/profile/accounts/alfresco', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

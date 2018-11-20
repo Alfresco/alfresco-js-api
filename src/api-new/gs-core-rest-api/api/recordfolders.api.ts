@@ -16,7 +16,7 @@
 */
 
 import { FilePlanComponentBodyUpdate } from '../model/filePlanComponentBodyUpdate';
-import { ModelError } from '../model/modelError';
+import { ModelError } from '../../content-rest-api/model/modelError';
 import { RMNodeBodyCreate } from '../model/rMNodeBodyCreate';
 import { RecordEntry } from '../model/recordEntry';
 import { RecordFolderAssociationPaging } from '../model/recordFolderAssociationPaging';
@@ -175,7 +175,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}/records', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete a record folder
@@ -213,7 +213,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a record folder
@@ -275,7 +275,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List records
@@ -358,7 +358,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}/records', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a record folder
@@ -439,7 +439,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

@@ -61,7 +61,7 @@ export class AdminusersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/users', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Create a user
@@ -98,7 +98,7 @@ export class AdminusersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/users', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a user
@@ -138,7 +138,7 @@ export class AdminusersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/users/{userId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Query users
@@ -193,7 +193,7 @@ export class AdminusersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a user
@@ -235,7 +235,7 @@ export class AdminusersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/users/{userId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

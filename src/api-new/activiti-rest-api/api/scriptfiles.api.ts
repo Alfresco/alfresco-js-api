@@ -24,9 +24,9 @@ import { BaseApi } from './base.api';
 export class ScriptfilesApi extends BaseApi {
     /**
     * getControllers
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @return Promise<string>
     */
     getControllersUsingGET(): Promise<string> {
@@ -52,13 +52,13 @@ export class ScriptfilesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/script-files/controllers', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * getLibraries
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @return Promise<string>
         */
     getLibrariesUsingGET(): Promise<string> {
@@ -84,7 +84,7 @@ export class ScriptfilesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/script-files/libraries', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

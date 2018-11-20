@@ -68,7 +68,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/identitylinks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Remove a user or group involvement from a process definition
@@ -115,7 +115,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a user or group involvement with a process definition
@@ -162,7 +162,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List either the users or groups involved with a process definition
@@ -204,7 +204,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List the users and groups involved with a process definition
@@ -241,7 +241,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/identitylinks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List the decision tables associated with a process definition
@@ -278,7 +278,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/decision-tables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List the forms associated with a process definition
@@ -315,7 +315,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/forms', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Retrieve the start form for a process definition
@@ -347,7 +347,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/start-form', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Retrieve a list of process definitions
@@ -386,7 +386,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Retrieve field values (eg. the typeahead field)
@@ -418,7 +418,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Retrieve field values (eg. the table field)
@@ -450,7 +450,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

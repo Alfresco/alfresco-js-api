@@ -420,7 +420,7 @@ export class AlfrescoApiClient {
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
     callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-        contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
+            contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
 
         let url;
 
@@ -432,7 +432,7 @@ export class AlfrescoApiClient {
         }
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, returnType, contextRoot, responseType, url);
+                                contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -456,11 +456,11 @@ export class AlfrescoApiClient {
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
     callCustomApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-        contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
+                  contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
         let url = this.buildUrlCustomBasePath(path, '', pathParams);
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, returnType, contextRoot, responseType, url);
+                                contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -484,12 +484,12 @@ export class AlfrescoApiClient {
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
     callHostApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-        contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string, url?: string): Promise<any> {
+                contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string, url?: string): Promise<any> {
         let eventEmitter: Emitter = {};
         Emitter(eventEmitter); // jshint ignore:line
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, responseType, eventEmitter, returnType);
+                                        contentTypes, accepts, responseType, eventEmitter, returnType);
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
@@ -637,7 +637,7 @@ export class AlfrescoApiClient {
     }
 
     buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-        contentTypes, accepts, responseType, eventEmitter, returnType) {
+                 contentTypes, accepts, responseType, eventEmitter, returnType) {
         let request = superagent(httpMethod, url);
 
         // apply authentications

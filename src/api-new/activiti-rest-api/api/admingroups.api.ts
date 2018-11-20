@@ -62,7 +62,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/action/activate', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Add users to a group
@@ -99,7 +99,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/add-all-users', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Add capabilities to a group
@@ -141,7 +141,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/capabilities', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Add a user to a group
@@ -183,7 +183,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/members/{userId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a related group
@@ -231,7 +231,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Create a group
@@ -268,7 +268,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Remove a capability from a group
@@ -310,7 +310,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete a member from a group
@@ -352,7 +352,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/members/{userId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete a group
@@ -389,7 +389,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete a related group
@@ -431,7 +431,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List group capabilities
@@ -468,7 +468,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/potential-capabilities', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get group members
@@ -512,7 +512,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a group
@@ -554,7 +554,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Query groups
@@ -593,7 +593,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get related groups
@@ -630,7 +630,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/related-groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a group
@@ -672,7 +672,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

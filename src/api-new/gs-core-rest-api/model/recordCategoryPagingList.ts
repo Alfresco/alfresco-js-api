@@ -16,7 +16,7 @@
 */
 
 import { FilePlan } from './filePlan';
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 import { RecordCategoryEntry } from './recordCategoryEntry';
 
 export class RecordCategoryPagingList {

@@ -15,10 +15,10 @@
 * limitations under the License.
 */
 
-import { ChildAssociationInfo } from './childAssociationInfo';
-import { PathInfo } from './pathInfo';
+import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociationInfo';
+import { PathInfo } from '../../content-rest-api/model/pathInfo';
 import { UnfiledContainerChild } from './unfiledContainerChild';
-import { UserInfo } from './userInfo';
+import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class UnfiledContainerChildAssociation {
     id: string;

@@ -18,7 +18,7 @@
 import { DeclassificationExemptionBody } from '../model/declassificationExemptionBody';
 import { DeclassificationExemptionEntry } from '../model/declassificationExemptionEntry';
 import { DeclassificationExemptionsPaging } from '../model/declassificationExemptionsPaging';
-import { ModelError } from '../model/modelError';
+import { ModelError } from '../../content-rest-api/model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -103,7 +103,7 @@ JSON
         return this.apiClient.callApi(
             '/declassification-exemptions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete a declassification exemption
@@ -140,7 +140,7 @@ JSON
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List all declassification exemptions
@@ -177,7 +177,7 @@ JSON
         return this.apiClient.callApi(
             '/declassification-exemptions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get declassification exemption information
@@ -214,7 +214,7 @@ JSON
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a declassification exemption
@@ -256,7 +256,7 @@ JSON
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

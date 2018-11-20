@@ -27,9 +27,9 @@ import { BaseApi } from './base.api';
 export class ChecklistsApi extends BaseApi {
     /**
     * Create a task checklist
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param taskId taskId
     * @param taskRepresentation taskRepresentation
     * @return Promise<TaskRepresentation>
@@ -65,13 +65,13 @@ export class ChecklistsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/checklist', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get checklist for a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
@@ -102,13 +102,13 @@ export class ChecklistsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/checklist', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Change the order of items on a checklist
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param orderRepresentation orderRepresentation
         * @return Promise<{}>
@@ -144,7 +144,7 @@ export class ChecklistsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/checklist', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

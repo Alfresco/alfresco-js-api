@@ -65,7 +65,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
         return this.apiClient.callApi(
             '/action-definitions/{actionDefinitionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Execute an action
@@ -150,7 +150,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
         return this.apiClient.callApi(
             '/action-executions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Retrieve list of available actions
@@ -223,7 +223,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
         return this.apiClient.callApi(
             '/action-definitions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Retrieve actions for a node
@@ -301,7 +301,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/action-definitions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
+import { ModelError } from '../../content-rest-api/model/modelError';
 import { TransferContainerAssociationPaging } from '../model/transferContainerAssociationPaging';
 import { TransferContainerBodyUpdate } from '../model/transferContainerBodyUpdate';
 import { TransferContainerEntry } from '../model/transferContainerEntry';
@@ -85,7 +85,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/transfer-containers/{transferContainerId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List transfer container's children
@@ -156,7 +156,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/transfer-containers/{transferContainerId}/transfers', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update transfer container
@@ -234,7 +234,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/transfer-containers/{transferContainerId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

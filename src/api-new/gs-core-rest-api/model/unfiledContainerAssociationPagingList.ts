@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 import { UnfiledContainer } from './unfiledContainer';
 import { UnfiledContainerChildAssociationEntry } from './unfiledContainerChildAssociationEntry';
 

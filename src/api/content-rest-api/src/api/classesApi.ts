@@ -55,6 +55,6 @@ export class ClassesApi  {
      * data is of type: {module:model/ClassDescription}
      */
     getClass(className: string, opts?: any): Promise<ClassDescription> {
-       return this.classesApi.getClass(className,opts);
+       return this.classesApi.getClass(className, opts);
     }
 }

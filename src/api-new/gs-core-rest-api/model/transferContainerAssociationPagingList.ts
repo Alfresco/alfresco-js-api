@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 import { TransferContainer } from './transferContainer';
 import { TransferContainerChildAssociationEntry } from './transferContainerChildAssociationEntry';
 

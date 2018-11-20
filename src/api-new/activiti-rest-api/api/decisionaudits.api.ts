@@ -26,9 +26,9 @@ import { BaseApi } from './base.api';
 export class DecisionauditsApi extends BaseApi {
     /**
     * Get an audit trail
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param auditTrailId auditTrailId
     * @return Promise<DecisionAuditRepresentation>
     */
@@ -59,13 +59,13 @@ export class DecisionauditsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/decisions/audits/{auditTrailId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Query decision table audit trails
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param decisionKey decisionKey
         * @param dmnDeploymentId dmnDeploymentId
         * @return Promise<ResultListDataRepresentationDecisionAuditRepresentation>
@@ -103,7 +103,7 @@ export class DecisionauditsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/decisions/audits', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

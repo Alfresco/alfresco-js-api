@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
+import { ModelError } from '../../content-rest-api/model/modelError';
 import { ResultSetPaging } from '../model/resultSetPaging';
 import { SearchRequest } from '../model/searchRequest';
 import { BaseApi } from './base.api';
@@ -27,7 +27,7 @@ import { BaseApi } from './base.api';
 export class SearchApi extends BaseApi {
     /**
     * Searches Alfresco
-    * 
+    *
     * **Note**: this endpoint is available in Alfresco 5.2 and newer versions.
 
 **You specify all the parameters in this API in a JSON body**, URL parameters are not supported.
@@ -323,7 +323,7 @@ The example above changes the highlighting prefix and postfix from the
           ]
       },
 
-    * 
+    *
     * @param queryBody Generic query API
 
     * @return Promise<ResultSetPaging>
@@ -355,7 +355,7 @@ The example above changes the highlighting prefix and postfix from the
         return this.apiClient.callApi(
             '/search', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

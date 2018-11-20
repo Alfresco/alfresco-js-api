@@ -54,7 +54,7 @@ export class QueriesApi  {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodePaging}
      */
     findNodes(term: string, opts?: any): Promise<any> {
-        return this.queriesApi.findNodes(term,opts);
+        return this.queriesApi.findNodes(term, opts);
     }
 
     /**
@@ -69,7 +69,7 @@ export class QueriesApi  {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PersonPaging}
      */
     findPeople(term: string, opts?: any): Promise<any> {
-        return this.queriesApi.findPeople(term,opts);
+        return this.queriesApi.findPeople(term, opts);
     }
 
     /**
@@ -84,6 +84,6 @@ export class QueriesApi  {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SitePaging}
      */
     findSites(term: string, opts?: any): Promise<any> {
-        return this.queriesApi.findSites(term,opts);
+        return this.queriesApi.findSites(term, opts);
     }
 }

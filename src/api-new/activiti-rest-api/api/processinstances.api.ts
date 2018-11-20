@@ -36,9 +36,9 @@ import { BaseApi } from './base.api';
 export class ProcessinstancesApi extends BaseApi {
     /**
     * Activate a process instance
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param processInstanceId processInstanceId
     * @return Promise<ProcessInstanceRepresentation>
     */
@@ -69,13 +69,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/activate', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Add a user or group involvement to a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @param identityLinkRepresentation identityLinkRepresentation
         * @return Promise<IdentityLinkRepresentation>
@@ -111,13 +111,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/identitylinks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Remove a user or group involvement from a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @param family family
         * @param identityId identityId
@@ -163,13 +163,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Cancel or remove a process instance
-        * 
+        *
         * If the process instance has not yet been completed, it will be cancelled. If it has already finished or been cancelled then the process instance will be removed and will no longer appear in queries.
-        * 
+        *
         * @param processInstanceId processInstanceId
         * @return Promise<{}>
         */
@@ -200,13 +200,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List process instances using a filter
-        * 
+        *
         * The request body provided must define either a valid filterId value or filter object
-        * 
+        *
         * @param filterRequest filterRequest
         * @return Promise<ResultListDataRepresentationProcessInstanceRepresentation>
         */
@@ -237,13 +237,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/filter', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get decision tasks in a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @return Promise<ResultListDataRepresentationDecisionTaskRepresentation>
         */
@@ -274,13 +274,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/decision-tasks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get historic variables for a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @return Promise<Array<ProcessInstanceVariableRepresentation>>
         */
@@ -311,13 +311,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/historic-variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Query historic process instances
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param queryRequest queryRequest
         * @return Promise<ResultListDataRepresentationProcessInstanceRepresentation>
         */
@@ -348,13 +348,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/historic-process-instances/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a user or group involvement with a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @param family family
         * @param identityId identityId
@@ -400,13 +400,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List either the users or groups involved with a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @param family family
         * @return Promise<Array<IdentityLinkRepresentation>>
@@ -442,13 +442,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/identitylinks/{family}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List the users and groups involved with a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @return Promise<Array<IdentityLinkRepresentation>>
         */
@@ -479,13 +479,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/identitylinks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List content attached to process instance fields
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @return Promise<ResultListDataRepresentationProcessContentRepresentation>
         */
@@ -516,13 +516,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/field-content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get the process diagram for the process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @return Promise<Array<string>>
         */
@@ -553,13 +553,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/diagram', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a process instance start form
-        * 
+        *
         * The start form for a process instance can be retrieved when the process definition has a start form defined (hasStartForm = true on the process instance)
-        * 
+        *
         * @param processInstanceId processInstanceId
         * @return Promise<FormDefinitionRepresentation>
         */
@@ -590,13 +590,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/start-form', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @return Promise<ProcessInstanceRepresentation>
         */
@@ -627,13 +627,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Query process instances
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstancesQuery processInstancesQuery
         * @return Promise<ResultListDataRepresentationProcessInstanceRepresentation>
         */
@@ -664,13 +664,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get the audit log for a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @return Promise<ProcessInstanceAuditInfoRepresentation>
         */
@@ -701,13 +701,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/audit-log', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Start a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param startRequest startRequest
         * @return Promise<ProcessInstanceRepresentation>
         */
@@ -738,13 +738,13 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Suspend a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param processInstanceId processInstanceId
         * @return Promise<ProcessInstanceRepresentation>
         */
@@ -775,7 +775,7 @@ export class ProcessinstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/suspend', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

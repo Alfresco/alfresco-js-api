@@ -30,7 +30,7 @@ describe('PeopleApi', function() {
 
         this.alfrescoApiCompatibility.core.peopleApi.addPerson(personBodyCreate).then(function() {
             done();
-        }, function(error) {
+        },                                                                            function(error) {
             console.error(error);
         });
 

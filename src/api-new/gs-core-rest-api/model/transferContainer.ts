@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { UserInfo } from './userInfo';
+import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class TransferContainer {
     id: string;

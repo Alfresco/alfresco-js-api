@@ -15,10 +15,9 @@
 * limitations under the License.
 */
 
-import { ChildAssociationInfo } from './childAssociationInfo';
-import { PathInfo } from './pathInfo';
-import { UnfiledRecordFolderChild } from './unfiledRecordFolderChild';
-import { UserInfo } from './userInfo';
+import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociationInfo';
+import { PathInfo } from '../../content-rest-api/model/pathInfo';
+import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class UnfiledRecordFolderChildAssociation {
     id: string;

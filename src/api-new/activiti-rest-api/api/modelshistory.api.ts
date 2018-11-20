@@ -62,7 +62,7 @@ export class ModelshistoryApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}/history', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a historic version of a model
@@ -104,7 +104,7 @@ export class ModelshistoryApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}/history/{modelHistoryId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

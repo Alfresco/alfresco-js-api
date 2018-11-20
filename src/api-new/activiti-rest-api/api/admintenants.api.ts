@@ -29,9 +29,9 @@ import { BaseApi } from './base.api';
 export class AdmintenantsApi extends BaseApi {
     /**
     * Create a tenant
-    * 
+    *
     * Only a tenant manager may access this endpoint
-    * 
+    *
     * @param createTenantRepresentation createTenantRepresentation
     * @return Promise<LightTenantRepresentation>
     */
@@ -62,13 +62,13 @@ export class AdmintenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/tenants', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete a tenant
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param tenantId tenantId
         * @return Promise<{}>
         */
@@ -99,13 +99,13 @@ export class AdmintenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/tenants/{tenantId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get tenant events
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param tenantId tenantId
         * @return Promise<Array<TenantEvent>>
         */
@@ -136,13 +136,13 @@ export class AdmintenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/tenants/{tenantId}/events', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a tenant's logo
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param tenantId tenantId
         * @return Promise<{}>
         */
@@ -173,13 +173,13 @@ export class AdmintenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/tenants/{tenantId}/logo', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a tenant
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param tenantId tenantId
         * @return Promise<TenantRepresentation>
         */
@@ -210,13 +210,13 @@ export class AdmintenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/tenants/{tenantId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List tenants
-        * 
+        *
         * Only a tenant manager may access this endpoint
-        * 
+        *
         * @return Promise<Array<LightTenantRepresentation>>
         */
     getTenantsUsingGET(): Promise<Array<LightTenantRepresentation>> {
@@ -242,13 +242,13 @@ export class AdmintenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/tenants', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a tenant
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param tenantId tenantId
         * @param createTenantRepresentation createTenantRepresentation
         * @return Promise<TenantRepresentation>
@@ -284,13 +284,13 @@ export class AdmintenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/tenants/{tenantId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a tenant's logo
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param tenantId tenantId
         * @param file file
         * @return Promise<ImageUploadRepresentation>
@@ -327,7 +327,7 @@ export class AdmintenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/tenants/{tenantId}/logo', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

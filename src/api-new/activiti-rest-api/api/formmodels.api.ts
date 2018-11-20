@@ -64,7 +64,7 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/forms/{formId}/editorJson', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get form history
@@ -106,7 +106,7 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models/{formId}/history/{formHistoryId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a form model
@@ -143,7 +143,7 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models/{formId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a form
@@ -180,7 +180,7 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/forms/{formId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get forms
@@ -218,7 +218,7 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models/values', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List form models
@@ -250,7 +250,7 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Query forms
@@ -297,7 +297,7 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/forms', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update form model content
@@ -339,7 +339,7 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models/{formId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Validate form model content
@@ -381,7 +381,7 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models/{formId}/validate', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

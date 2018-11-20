@@ -27,9 +27,9 @@ import { BaseApi } from './base.api';
 export class SystempropertiesApi extends BaseApi {
     /**
     * Get global date format
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param tenantId tenantId
     * @return Promise<GlobalDateFormatRepresentation>
     */
@@ -60,13 +60,13 @@ export class SystempropertiesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/system/properties/global-date-format/{tenantId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get password validation constraints
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param tenantId tenantId
         * @return Promise<PasswordValidationConstraints>
         */
@@ -97,13 +97,13 @@ export class SystempropertiesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/system/properties/password-validation-constraints/{tenantId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Retrieve system properties
-        * 
+        *
         * Typical value is AllowInvolveByEmail
-        * 
+        *
         * @return Promise<SystemPropertiesRepresentation>
         */
     getPropertiesUsingGET(): Promise<SystemPropertiesRepresentation> {
@@ -129,13 +129,13 @@ export class SystempropertiesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/system/properties', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get involved users who can edit forms
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param tenantId tenantId
         * @return Promise<boolean>
         */
@@ -166,7 +166,7 @@ export class SystempropertiesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/system/properties/involved-users-can-edit-forms/{tenantId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

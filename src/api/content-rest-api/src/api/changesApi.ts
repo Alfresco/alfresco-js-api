@@ -486,7 +486,7 @@ export class ChangesApi {
      */
 
     moveNode(nodeId: string, moveBody: MoveBody, opts?: any): Promise<any> {
-        return this.nodesApi.moveNode(nodeId,<any>moveBody,opts);
+        return this.nodesApi.moveNode(nodeId, <any>moveBody, opts);
     }
 
     /**
@@ -507,7 +507,7 @@ export class ChangesApi {
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
     removeAssoc(sourceId: string, targetId: string, opts?: any): Promise<any> {
-        return this.nodesApi.deleteAssociation(sourceId,targetId,opts);
+        return this.nodesApi.deleteAssociation(sourceId, targetId, opts);
     }
 
     /**
@@ -519,7 +519,7 @@ export class ChangesApi {
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
     removeSecondaryChildAssoc(parentId: string, childId: string, opts?: any): Promise<any> {
-        return this.nodesApi.deleteSecondaryChildAssociation(parentId,childId,opts);
+        return this.nodesApi.deleteSecondaryChildAssociation(parentId, childId, opts);
     }
 
     /**
@@ -546,7 +546,7 @@ export class ChangesApi {
      * data is of type: {module:model/NodeEntry}
      */
     updateFileContent(nodeId: string, contentBody: string, opts?: any): Promise<any> {
-        return this.nodesApi.updateNodeContent(nodeId,contentBody,opts);
+        return this.nodesApi.updateNodeContent(nodeId, contentBody, opts);
     }
 
     /**
@@ -560,6 +560,6 @@ export class ChangesApi {
      * data is of type: {module:model/NodeEntry}
      */
     updateNode(nodeId: string, nodeBody: NodeBody, opts?: any): Promise<any> {
-        return this.nodesApi.updateNode(nodeId,nodeBody,opts);
+        return this.nodesApi.updateNode(nodeId, nodeBody, opts);
     }
 }

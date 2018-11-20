@@ -16,7 +16,7 @@
 */
 
 import { ClassificationReasonEntry } from './classificationReasonEntry';
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 
 export class ClassificationReasonsPagingList {
     pagination?: Pagination;

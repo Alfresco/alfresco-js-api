@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import Emitter = require('event-emitter');
+import * as Emitter from 'event-emitter';
 import { AlfrescoApiClient } from './alfrescoApiClient';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';

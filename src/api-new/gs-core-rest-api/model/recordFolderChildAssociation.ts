@@ -15,11 +15,11 @@
 * limitations under the License.
 */
 
-import { ChildAssociationInfo } from './childAssociationInfo';
-import { ContentInfo } from './contentInfo';
-import { PathInfo } from './pathInfo';
+import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociationInfo';
+import { ContentInfo } from '../../content-rest-api/model/contentInfo';
+import { PathInfo } from '../../content-rest-api/model/pathInfo';
 import { Record } from './record';
-import { UserInfo } from './userInfo';
+import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class RecordFolderChildAssociation {
     id: string;

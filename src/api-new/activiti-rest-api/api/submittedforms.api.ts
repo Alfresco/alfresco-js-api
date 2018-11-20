@@ -66,7 +66,7 @@ export class SubmittedformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/form-submitted-forms/{formId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List submissions for a process instance
@@ -103,7 +103,7 @@ export class SubmittedformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-submitted-forms/{processId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a form submission
@@ -140,7 +140,7 @@ export class SubmittedformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/submitted-forms/{submittedFormId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get the submitted form for a task
@@ -177,7 +177,7 @@ export class SubmittedformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-submitted-form/{taskId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

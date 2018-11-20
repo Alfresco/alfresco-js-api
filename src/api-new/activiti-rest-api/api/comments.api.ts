@@ -23,7 +23,7 @@ import { BaseApi } from './base.api';
 * Comments service.
 * @module CommentsApi
 */
-export class CommentsApi extends BaseApi {
+export class ActivitiCommentsApi extends BaseApi {
     /**
     * Add a comment to a process instance
     *
@@ -64,7 +64,7 @@ export class CommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/comments', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Add a comment to a task
@@ -106,7 +106,7 @@ export class CommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/comments', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get comments for a process
@@ -146,7 +146,7 @@ export class CommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/comments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get comments for a task
@@ -186,7 +186,7 @@ export class CommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/comments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { PathElement } from './pathElement';
+import { PathElement } from '../../content-rest-api/model/pathElement';
 
 /**
  * An ordered list of ancestors starting with the classification guide and ending with the parent of this topic.

@@ -67,7 +67,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/content', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Upload content and attach to a process instance
@@ -113,7 +113,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/raw-content', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Attach existing content to a task
@@ -158,7 +158,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/content', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Upload content and attach to a task
@@ -204,7 +204,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/raw-content', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Upload content and create a local representation
@@ -242,7 +242,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/content/raw', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Create a local representation of content from a remote repository
@@ -279,7 +279,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/content', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Remove a local content representation
@@ -316,7 +316,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/content/{contentId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a local content representation
@@ -353,7 +353,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/content/{contentId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Stream content rendition
@@ -395,7 +395,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/content/{contentId}/rendition/{renditionType}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Stream content from a local content representation
@@ -432,7 +432,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/content/{contentId}/raw', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List content attached to a process instance
@@ -472,7 +472,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List content attached to a task
@@ -512,7 +512,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

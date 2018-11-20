@@ -111,26 +111,58 @@
 
 
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.ts',
+    mode : 'production',
+    entry: './index.ts',
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
-                exclude: [ /node_modules/,'test']
+                exclude: [/node_modules/, 'test', '/performance/']
             }
         ]
     },
     resolve: {
-        extensions: [ '.tsx', '.ts', '.js' ]
+        extensions: ['.tsx', '.ts', '.js']
     },
     output: {
-        filename: 'bundle.js',
+        filename: 'alfresco-js-api.js',
         path: path.resolve(__dirname, 'dist')
     },
-
+    optimization: {
+        minimizer: [new UglifyJsPlugin({
+            uglifyOptions: {
+                output: {
+                    comments: false
+                },
+                compress: {
+                    unsafe_comps: true,
+                    properties: true,
+                    keep_fargs: false,
+                    pure_getters: true,
+                    collapse_vars: true,
+                    unsafe: true,
+                    warnings: false,
+                    sequences: true,
+                    dead_code: true,
+                    drop_debugger: true,
+                    comparisons: true,
+                    conditionals: true,
+                    evaluate: true,
+                    booleans: true,
+                    loops: true,
+                    unused: true,
+                    hoist_funs: true,
+                    if_return: true,
+                    join_vars: true,
+                    drop_console: true
+                }
+            }
+        })]
+    },
     node: {
         console: 'mock',
         fs: 'empty',

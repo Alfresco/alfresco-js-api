@@ -16,7 +16,7 @@
 */
 
 import { DiscoveryEntry } from '../model/discoveryEntry';
-import { ModelError } from '../model/modelError';
+import { ModelError } from '../../content-rest-api/model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -26,12 +26,12 @@ import { BaseApi } from './base.api';
 export class DiscoveryApi extends BaseApi {
     /**
     * Get repository information
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Retrieves the capabilities and detailed version information from the repository.
 
-    * 
+    *
     * @return Promise<DiscoveryEntry>
     */
     getRepositoryInformation(): Promise<DiscoveryEntry | ModelError> {
@@ -57,7 +57,7 @@ Retrieves the capabilities and detailed version information from the repository.
         return this.apiClient.callApi(
             '/discovery', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

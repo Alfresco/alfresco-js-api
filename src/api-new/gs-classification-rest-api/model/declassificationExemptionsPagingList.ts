@@ -16,7 +16,7 @@
 */
 
 import { DeclassificationExemptionEntry } from './declassificationExemptionEntry';
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 
 export class DeclassificationExemptionsPagingList {
     pagination?: Pagination;

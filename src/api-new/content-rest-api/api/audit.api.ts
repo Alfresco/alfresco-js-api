@@ -86,7 +86,7 @@ You must have admin rights to delete audit information.
         return this.apiClient.callApi(
             '/audit-applications/{auditApplicationId}/audit-entries', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Permanently delete an audit entry
@@ -133,7 +133,7 @@ You must have admin rights to delete audit information.
         return this.apiClient.callApi(
             '/audit-applications/{auditApplicationId}/audit-entries/{auditEntryId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get audit application info
@@ -189,7 +189,7 @@ You must have admin rights to delete audit information.
         return this.apiClient.callApi(
             '/audit-applications/{auditApplicationId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get audit entry
@@ -250,7 +250,7 @@ You must have admin rights to delete audit information.
         return this.apiClient.callApi(
             '/audit-applications/{auditApplicationId}/audit-entries/{auditEntryId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List audit applications
@@ -316,7 +316,7 @@ You must have admin rights to delete audit information.
         return this.apiClient.callApi(
             '/audit-applications', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List audit entries for an audit application
@@ -422,7 +422,7 @@ You must have admin rights to delete audit information.
         return this.apiClient.callApi(
             '/audit-applications/{auditApplicationId}/audit-entries', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List audit entries for a node
@@ -515,7 +515,7 @@ You must have admin rights to delete audit information.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/audit-entries', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update audit application info
@@ -582,7 +582,7 @@ You must have admin rights to delete audit information.
         return this.apiClient.callApi(
             '/audit-applications/{auditApplicationId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

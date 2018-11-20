@@ -16,7 +16,7 @@
 */
 
 import { ClassificationGuidesEntry } from './classificationGuidesEntry';
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 
 export class ClassificationGuidePagingList {
     pagination?: Pagination;

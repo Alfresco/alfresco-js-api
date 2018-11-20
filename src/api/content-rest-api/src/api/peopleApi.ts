@@ -62,7 +62,7 @@ export class PeopleApi {
      * data is of type: {module:model/FavoriteEntry}
      */
     addFavorite(personId: string, favoriteBody: FavoriteBody): Promise<any> {
-        return this.favoritesApi.createFavorite(personId, <any>favoriteBody)
+        return this.favoritesApi.createFavorite(personId, <any>favoriteBody);
     }
 
     /**
@@ -83,7 +83,7 @@ export class PeopleApi {
      * @param {String} siteId The identifier of a site.
      */
     deleteFavoriteSite(personId: string, siteId: string): Promise<any> {
-        return this.favoritesApi.deleteSiteFavorite(personId, siteId)
+        return this.favoritesApi.deleteSiteFavorite(personId, siteId);
     }
 
     /**

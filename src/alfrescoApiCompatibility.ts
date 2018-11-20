@@ -45,11 +45,11 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
     core: any;
     coreStore: any;
 
-    auth ={};
-    search ={};
-    gsCore ={};
-    gsClassification={};
-    discovery ={};
+    auth = {};
+    search = {};
+    gsCore = {};
+    gsClassification= {};
+    discovery = {};
 
     constructor(config: AlfrescoApiConfig) {
         super();

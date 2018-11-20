@@ -18,12 +18,13 @@
 import { ResultListDataRepresentationLightGroupRepresentation } from '../model/resultListDataRepresentationLightGroupRepresentation';
 import { ResultListDataRepresentationLightUserRepresentation } from '../model/resultListDataRepresentationLightUserRepresentation';
 import { BaseApi } from './base.api';
+import { ActivitiCommentsApi } from './api';
 
 /**
 * Groups service.
 * @module GroupsApi
 */
-export class GroupsApi extends BaseApi {
+export class ActivitiGroupsApi extends BaseApi {
     /**
     * Query groups
     *
@@ -65,7 +66,7 @@ export class GroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List members of a group
@@ -102,7 +103,7 @@ export class GroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/groups/{groupId}/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

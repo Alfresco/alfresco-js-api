@@ -1,0 +1,21 @@
+{
+  "name": "alfresco-js-api",
+  "version": "2.6.0",
+  "description": "JavaScript client library for the Alfresco REST API",
+  "author": "Alfresco Software, Ltd.",
+  "main": "dist/alfresco-js-api.js",
+  "typings": "index.d.ts",
+  "scripts": {
+    "clean": "rimraf node_modules && npm run clean-build",
+    "webpack": "webpack --display-error-details"
+  },
+  "dependencies": {
+    "event-emitter": "0.3.4",
+    "superagent": "3.8.2"
+  },
+  "devDependencies": {
+  },
+  "keywords": [
+    "alfresco"
+  ]
+}

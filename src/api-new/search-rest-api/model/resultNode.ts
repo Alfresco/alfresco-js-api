@@ -15,11 +15,11 @@
 * limitations under the License.
 */
 
-import { ContentInfo } from './contentInfo';
+import { ContentInfo } from '../../content-rest-api/model/contentInfo';
 import { Node } from './node';
-import { PathInfo } from './pathInfo';
+import { PathInfo } from '../../content-rest-api/model/pathInfo';
 import { SearchEntry } from './searchEntry';
-import { UserInfo } from './userInfo';
+import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class ResultNode {
     id: string;

@@ -52,7 +52,7 @@ export class RatingsApi  {
      * data is of type: {module:model/RatingEntry}
      */
     getRating(nodeId: string, ratingId: string, opts?: any): Promise<any> {
-       return this.ratingsApi.getRating(nodeId,ratingId,opts);
+       return this.ratingsApi.getRating(nodeId, ratingId, opts);
     }
 
     /**
@@ -66,7 +66,7 @@ export class RatingsApi  {
      * data is of type: {module:model/RatingPaging}
      */
     getRatings(nodeId: string, opts?: any): Promise<any> {
-        return this.ratingsApi.listRatings(nodeId,opts);
+        return this.ratingsApi.listRatings(nodeId, opts);
     }
 
     /**
@@ -77,7 +77,7 @@ export class RatingsApi  {
      * data is of type: {module:model/RatingEntry}
      */
     rate(nodeId: string, ratingBody: RatingBody): Promise<any> {
-        return this.ratingsApi.createRating(nodeId,<any>ratingBody);
+        return this.ratingsApi.createRating(nodeId, <any>ratingBody);
     }
 
     /**
@@ -87,6 +87,6 @@ export class RatingsApi  {
      * @param {String} ratingId The identifier of a rating.
      */
     removeRating(nodeId: string, ratingId: string): Promise<any> {
-        return this.ratingsApi.deleteRating(nodeId,ratingId);
+        return this.ratingsApi.deleteRating(nodeId, ratingId);
     }
 }

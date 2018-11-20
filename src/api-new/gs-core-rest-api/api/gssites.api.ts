@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
+import { ModelError } from '../../content-rest-api/model/modelError';
 import { RMSiteBodyCreate } from '../model/rMSiteBodyCreate';
 import { RMSiteBodyUpdate } from '../model/rMSiteBodyUpdate';
 import { RMSiteEntry } from '../model/rMSiteEntry';
@@ -79,7 +79,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         return this.apiClient.callApi(
             '/gs-sites', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete the Records Management (RM) site
@@ -113,7 +113,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         return this.apiClient.callApi(
             '/gs-sites/rm', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get the Records Management (RM) site
@@ -161,7 +161,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         return this.apiClient.callApi(
             '/gs-sites/rm', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update the Records Management (RM) site
@@ -216,7 +216,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         return this.apiClient.callApi(
             '/gs-sites/rm', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

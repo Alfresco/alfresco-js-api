@@ -15,9 +15,9 @@
 * limitations under the License.
 */
 
-import { ChildAssociationInfo } from './childAssociationInfo';
+import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociationInfo';
 import { TransferContainerChild } from './transferContainerChild';
-import { UserInfo } from './userInfo';
+import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class TransferContainerChildAssociation {
     id: string;

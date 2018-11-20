@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 import { UnfiledRecordFolder } from './unfiledRecordFolder';
 import { UnfiledRecordFolderChildAssociationEntry } from './unfiledRecordFolderChildAssociationEntry';
 
