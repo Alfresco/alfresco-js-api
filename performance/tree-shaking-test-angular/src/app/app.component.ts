@@ -1,34 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { AlfrescoApi, DiscoveryApi } from '../../../dist/alfresco-js-api';
+import { AlfrescoApi, DiscoveryApi, DiscoveryEntry } from 'alfresco-js-api';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
 
-  alfrescoApi: AlfrescoApi;
+    alfrescoApi: AlfrescoApi;
 
-  constructor() {
+    constructor() {
 
-    this.alfrescoApi = new AlfrescoApi();
-    this.alfrescoApi.setConfig({
-      provider: 'ECM',
-      hostEcm: 'http://adfdev.envalfresco.com',
-      authType: "BASIC"
-    });
+        this.alfrescoApi = new AlfrescoApi();
+        this.alfrescoApi.setConfig({
+            provider: 'ECM',
+            hostEcm: 'http://adfdev.envalfresco.com',
+            authType: 'BASIC'
+        });
 
-  }
+    }
 
-  ngOnInit() {
-
-    let discovery: DiscoveryApi = new DiscoveryApi(this.alfrescoApi);
-    discovery.getEcmProductInfo().subscribe((ecmVers) => {
-      console.log('ecmVers');
-
-    });
-
-  }
+    ngOnInit() {
+        let discovery: DiscoveryApi = new DiscoveryApi(this.alfrescoApi);
+        discovery.getRepositoryInformation().then((ecmVers: DiscoveryEntry) => {
+            console.log(`ecmVers ${ecmVers}`);
+        });
+    }
 
 }

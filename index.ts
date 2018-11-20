@@ -30,3 +30,5 @@ export * from './src/oauth2Auth';
 export * from './src/ecmClient';
 export * from './src/bpmClient';
 export * from './src/storage';
+export * from './src/alfrescoApiCompatibility';
+export * from './src/alfrescoApi';

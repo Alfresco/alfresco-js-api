@@ -16,7 +16,7 @@
  */
 
 
-import { AlfrescoApi } from './AlfrescoApi';
+import { AlfrescoApi } from './alfrescoApi';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
 import { AlfrescoContent } from './alfrescoContent';

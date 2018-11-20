@@ -16,7 +16,7 @@
         "noFallthroughCasesInSwitch": true,
         "removeComments": true,
         "declaration": true,
-        "outDir": "./dist",
+        "outDir": "./",
         "lib": [
             "es2015",
             "dom"
@@ -29,6 +29,7 @@
         "performance",
         "coverage",
         "node_modules",
+        "package",
         "dist"
     ],
     "angularCompilerOptions": {

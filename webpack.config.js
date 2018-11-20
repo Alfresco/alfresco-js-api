@@ -114,6 +114,8 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
+    devtool: 'source-map',
+
     mode : 'production',
     entry: './index.ts',
     module: {
@@ -129,8 +131,9 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js']
     },
     output: {
-        filename: 'alfresco-js-api.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: 'alfresco-js-api.umd.js',
+        path: path.resolve(__dirname, 'bundles'),
+        libraryTarget: 'umd'
     },
     optimization: {
         minimizer: [new UglifyJsPlugin({
