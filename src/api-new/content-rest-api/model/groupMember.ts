@@ -20,10 +20,10 @@ export class GroupMember {
     displayName: string;
     memberType: GroupMember.MemberTypeEnum;
 }
+
 export namespace GroupMember {
-    export type MemberTypeEnum = 'GROUP' | 'PERSON';
-    export const MemberTypeEnum = {
-        GROUP: 'GROUP' as MemberTypeEnum,
-        PERSON: 'PERSON' as MemberTypeEnum
-    };
+    export enum MemberTypeEnum {
+        GROUP = 'GROUP',
+        PERSON = 'PERSON'
+    }
 }

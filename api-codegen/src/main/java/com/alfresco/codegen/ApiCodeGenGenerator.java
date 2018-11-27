@@ -92,9 +92,9 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
     public void processOpts() {
         super.processOpts();
         supportingFiles.add(
-            new SupportingFile("models.mustache", modelPackage().replace('.', File.separatorChar), "models.ts"));
+            new SupportingFile("models.mustache", modelPackage().replace('.', File.separatorChar), "index.ts"));
         supportingFiles
-            .add(new SupportingFile("apis.mustache", apiPackage().replace('.', File.separatorChar), "api.ts"));
+            .add(new SupportingFile("apis.mustache", apiPackage().replace('.', File.separatorChar), "index.ts"));
         supportingFiles.add(new SupportingFile("base.api.mustache", apiPackage().replace('.', File.separatorChar), "base.api.ts"));
         supportingFiles.add(new SupportingFile("index.mustache", getIndexDirectory(), "index.ts"));
 

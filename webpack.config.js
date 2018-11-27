@@ -133,7 +133,7 @@ module.exports = {
     output: {
         filename: 'alfresco-js-api.umd.js',
         path: path.resolve(__dirname, 'bundles'),
-        libraryTarget: 'umd'
+        libraryTarget: 'commonjs'
     },
     optimization: {
         minimizer: [new UglifyJsPlugin({

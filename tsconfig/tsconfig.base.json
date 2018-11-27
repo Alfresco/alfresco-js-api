@@ -1,0 +1,29 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "noEmit": false,
+        "baseUrl": "../src",
+        "sourceRoot": "../src",
+        "paths": {
+            "@alfresco/js-api": ["./"],
+            "@alfresco/js-api/*": ["./*"]
+        }
+    },
+    "files": [
+        // entry-points
+        "../index.ts",
+        "../src/api-new/activiti-rest-api/index.ts",
+        "../src/api-new/auth-rest-api/index.ts",
+        "../src/api-new/content-rest-api/index.ts",
+        "../src/api-new/discovery-rest-api/index.ts",
+        "../src/api-new/gs-classification-rest-api/index.ts",
+        "../src/api-new/gs-core-rest-api/index.ts",
+        "../src/api-new/search-rest-api/index.ts",
+
+        // compatibility
+        "../src/alfrescoApiCompatibility.ts",
+
+        // umd entry-point
+        "../src/internal/umd.ts"
+    ]
+}

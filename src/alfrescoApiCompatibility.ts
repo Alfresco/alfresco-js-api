@@ -34,11 +34,11 @@ const AlfrescoCoreRestApi = require('./api/content-rest-api/src/index');
 // import { APS_APIS  } from './api-new/activiti-rest-api/api/api';
 // import { AUTH_APIS  } from './api-new/auth-rest-api/api/api';
 // import { CONTENT_APIS  } from './api-new/content-rest-api/api/api';
-import { DISCOVERY_APIS  } from './api-new/discovery-rest-api/api/api';
-import { GS_CLASSIFICATION_APIS } from './api-new/gs-classification-rest-api/api/api';
-import { GS_CORE_APIS } from './api-new/gs-core-rest-api/api/api';
-import { SEARCH_APIS } from './api-new/search-rest-api/api/api';
-import { AUTH_APIS } from './api-new/auth-rest-api/api/api';
+import { DISCOVERY_APIS } from './api-new/discovery-rest-api/api';
+import { GS_CLASSIFICATION_APIS } from './api-new/gs-classification-rest-api/api';
+import { GS_CORE_APIS } from './api-new/gs-core-rest-api/api';
+import { SEARCH_APIS } from './api-new/search-rest-api/api';
+import { AUTH_APIS } from './api-new/auth-rest-api/api';
 
 export class AlfrescoApiCompatibility extends AlfrescoApi {
 
@@ -48,7 +48,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
     auth = {};
     search = {};
     gsCore = {};
-    gsClassification= {};
+    gsClassification = {};
     discovery = {};
 
     constructor(config: AlfrescoApiConfig) {
@@ -105,12 +105,12 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
             let nameObj = this._lowerFirst(currentClass.name);
 
             moduleCopy[nameObj] = new currentClass(this);
-           // moduleCopy[nameObj].init(this);
+            // moduleCopy[nameObj].init(this);
         });
     }
 
-    _lowerFirst(string) {
-        return string.charAt(0).toLowerCase() + string.slice(1);
+    _lowerFirst(text: string) {
+        return text.charAt(0).toLowerCase() + text.slice(1);
     }
 
     _stringToObject(nameClass, module) {

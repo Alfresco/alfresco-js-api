@@ -18,7 +18,6 @@
 import { ResultListDataRepresentationLightGroupRepresentation } from '../model/resultListDataRepresentationLightGroupRepresentation';
 import { ResultListDataRepresentationLightUserRepresentation } from '../model/resultListDataRepresentationLightUserRepresentation';
 import { BaseApi } from './base.api';
-import { ActivitiCommentsApi } from './api';
 
 /**
 * Groups service.

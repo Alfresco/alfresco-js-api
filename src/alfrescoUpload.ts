@@ -16,7 +16,9 @@
  */
 
 import { NodesApi } from './api/content-rest-api/src/api/NodesApi';
-import * as Emitter from 'event-emitter';
+import * as Emitter_ from 'event-emitter';
+
+const Emitter = Emitter_;
 
 export class AlfrescoUpload extends NodesApi {
 

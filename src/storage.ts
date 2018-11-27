@@ -33,7 +33,7 @@ export class Storage {
         }
     }
 
-    setStorage(storage) {
+    setStorage(storage: any) {
         this._storage = storage;
     }
 

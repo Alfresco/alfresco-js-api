@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import * as  Emitter from 'event-emitter';
+import * as  Emitter_ from 'event-emitter';
 
 import { AlfrescoContent } from './alfrescoContent';
 import { AlfrescoUpload } from './alfrescoUpload';
@@ -26,6 +26,8 @@ import { EcmClient } from './ecmClient';
 import { BpmClient } from './bpmClient';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
+
+const Emitter = Emitter_;
 
 export class AlfrescoApi {
 
@@ -61,7 +63,7 @@ export class AlfrescoApi {
         Emitter.call(this);
     }
 
-    setConfig(config) {
+    setConfig(config: AlfrescoApiConfig) {
         if (!config) {
             config = {};
         }
@@ -119,23 +121,23 @@ export class AlfrescoApi {
         //
         // this.gsClient.off('error');
 
-        this.ecmClient.on('error', (error) => {
+        this.ecmClient.on('error', (error: any) => {
             this.errorHandler(error);
         });
 
-        this.ecmPrivateClient.on('error', (error) => {
+        this.ecmPrivateClient.on('error', (error: any) => {
             this.errorHandler(error);
         });
 
-        this.bpmClient.on('error', (error) => {
+        this.bpmClient.on('error', (error: any) => {
             this.errorHandler(error);
         });
 
-        this.searchClient.on('error', (error) => {
+        this.searchClient.on('error', (error: any) => {
             this.errorHandler(error);
         });
 
-        this.discoveryClient.on('error', (error) => {
+        this.discoveryClient.on('error', (error: any) => {
             this.errorHandler(error);
         });
 
@@ -194,7 +196,7 @@ export class AlfrescoApi {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            },                     () => {
+            }, () => {
             });
 
             return oauth2AuthPromise;
@@ -238,12 +240,12 @@ export class AlfrescoApi {
             return Promise.reject('Missing the required oauth2 configuration');
         }
 
-        return new Promise((resolve, reject) => {
+        return new Promise(() => {
             this.oauth2Auth.implicitLogin();
         });
     }
 
-    setAuthenticationClientECMBPM(authECM, authBPM) {
+    setAuthenticationClientECMBPM(authECM: any, authBPM: any) {
         this.ecmClient.setAuthentications(authECM);
         this.searchClient.setAuthentications(authECM);
         this.ecmPrivateClient.setAuthentications(authECM);
@@ -303,7 +305,7 @@ export class AlfrescoApi {
                 let ecmPromise = this.ecmAuth.logout();
                 ecmPromise.then(() => {
                     this.config.ticket = undefined;
-                },              () => {
+                }, () => {
                 });
 
                 return ecmPromise;

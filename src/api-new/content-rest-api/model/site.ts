@@ -24,18 +24,18 @@ export class Site {
     preset?: string;
     role?: Site.RoleEnum;
 }
+
 export namespace Site {
-    export type VisibilityEnum = 'PRIVATE' | 'MODERATED' | 'PUBLIC';
-    export const VisibilityEnum = {
-        PRIVATE: 'PRIVATE' as VisibilityEnum,
-        MODERATED: 'MODERATED' as VisibilityEnum,
-        PUBLIC: 'PUBLIC' as VisibilityEnum
-    };
-    export type RoleEnum = 'SiteConsumer' | 'SiteCollaborator' | 'SiteContributor' | 'SiteManager';
-    export const RoleEnum = {
-        SiteConsumer: 'SiteConsumer' as RoleEnum,
-        SiteCollaborator: 'SiteCollaborator' as RoleEnum,
-        SiteContributor: 'SiteContributor' as RoleEnum,
-        SiteManager: 'SiteManager' as RoleEnum
-    };
+    export enum VisibilityEnum {
+        PRIVATE = 'PRIVATE',
+        MODERATED = 'MODERATED',
+        PUBLIC = 'PUBLIC'
+    }
+
+    export enum RoleEnum {
+        SiteConsumer = 'SiteConsumer',
+        SiteCollaborator = 'SiteCollaborator',
+        SiteContributor = 'SiteContributor',
+        SiteManager = 'SiteManager'
+    }
 }

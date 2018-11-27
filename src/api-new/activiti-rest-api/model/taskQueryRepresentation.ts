@@ -31,18 +31,18 @@ export class TaskQueryRepresentation {
     taskId?: string;
     text?: string;
 }
+
 export namespace TaskQueryRepresentation {
-    export type SortEnum = 'created-desc' | 'created-asc' | 'due-desc' | 'due-asc';
-    export const SortEnum = {
-        CreatedDesc: 'created-desc' as SortEnum,
-        CreatedAsc: 'created-asc' as SortEnum,
-        DueDesc: 'due-desc' as SortEnum,
-        DueAsc: 'due-asc' as SortEnum
-    };
-    export type StateEnum = 'active' | 'completed' | 'all';
-    export const StateEnum = {
-        Active: 'active' as StateEnum,
-        Completed: 'completed' as StateEnum,
-        All: 'all' as StateEnum
-    };
+    export enum SortEnum {
+        CreatedDesc = 'created-desc',
+        CreatedAsc = 'created-asc',
+        DueDesc = 'due-desc',
+        DueAsc = 'due-asc'
+    }
+
+    export enum StateEnum {
+        Active = 'active',
+        Completed = 'completed',
+        All = 'all'
+    }
 }

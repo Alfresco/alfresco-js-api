@@ -18,12 +18,12 @@
 export class SiteMembershipBodyUpdate {
     role: SiteMembershipBodyUpdate.RoleEnum;
 }
+
 export namespace SiteMembershipBodyUpdate {
-    export type RoleEnum = 'SiteConsumer' | 'SiteCollaborator' | 'SiteContributor' | 'SiteManager';
-    export const RoleEnum = {
-        SiteConsumer: 'SiteConsumer' as RoleEnum,
-        SiteCollaborator: 'SiteCollaborator' as RoleEnum,
-        SiteContributor: 'SiteContributor' as RoleEnum,
-        SiteManager: 'SiteManager' as RoleEnum
-    };
+    export enum RoleEnum {
+        SiteConsumer = 'SiteConsumer',
+        SiteCollaborator = 'SiteCollaborator',
+        SiteContributor = 'SiteContributor',
+        SiteManager = 'SiteManager'
+    }
 }

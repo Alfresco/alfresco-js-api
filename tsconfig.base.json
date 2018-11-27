@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "strictFunctionTypes": true,
+//        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "allowSyntheticDefaultImports": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "moduleResolution": "node",
+        "stripInternal": false,
+        "target": "es2015",
+        "outDir": "./.out",
+        "lib": [
+            "es5",
+            "es2015",
+            "dom"
+        ]
+    },
+    "exclude": [
+        "*/node_modules",
+        "config",
+        "performance",
+        "coverage",
+        "node_modules",
+        "package",
+        "dist"
+    ],
+    "angularCompilerOptions": {
+        "strictMetadataEmit": false,
+        "skipTemplateCodegen": true
+    }
+}

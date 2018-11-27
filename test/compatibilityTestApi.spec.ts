@@ -26,11 +26,11 @@ describe('PeopleApi', function() {
         personBodyCreate.firstName = 'chewbacca';
         personBodyCreate.password = 'Rrrrrrrghghghghgh';
 
-       // console.log(JSON.stringify(this.alfrescoApiCompatibility.core));
+        // console.log(JSON.stringify(this.alfrescoApiCompatibility.core));
 
         this.alfrescoApiCompatibility.core.peopleApi.addPerson(personBodyCreate).then(function() {
             done();
-        },                                                                            function(error) {
+        }, function(error) {
             console.error(error);
         });
 

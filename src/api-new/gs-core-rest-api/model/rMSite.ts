@@ -24,23 +24,23 @@ export class RMSite {
     compliance: RMSite.ComplianceEnum;
     role?: RMSite.RoleEnum;
 }
+
 export namespace RMSite {
-    export type VisibilityEnum = 'PRIVATE' | 'MODERATED' | 'PUBLIC';
-    export const VisibilityEnum = {
-        PRIVATE: 'PRIVATE' as VisibilityEnum,
-        MODERATED: 'MODERATED' as VisibilityEnum,
-        PUBLIC: 'PUBLIC' as VisibilityEnum
-    };
-    export type ComplianceEnum = 'STANDARD' | 'DOD5015';
-    export const ComplianceEnum = {
-        STANDARD: 'STANDARD' as ComplianceEnum,
-        DOD5015: 'DOD5015' as ComplianceEnum
-    };
-    export type RoleEnum = 'SiteConsumer' | 'SiteCollaborator' | 'SiteContributor' | 'SiteManager';
-    export const RoleEnum = {
-        SiteConsumer: 'SiteConsumer' as RoleEnum,
-        SiteCollaborator: 'SiteCollaborator' as RoleEnum,
-        SiteContributor: 'SiteContributor' as RoleEnum,
-        SiteManager: 'SiteManager' as RoleEnum
-    };
+    export enum VisibilityEnum {
+        PRIVATE = 'PRIVATE',
+        MODERATED = 'MODERATED',
+        PUBLIC = 'PUBLIC'
+    }
+
+    export enum ComplianceEnum {
+        STANDARD = 'STANDARD',
+        DOD5015 = 'DOD5015'
+    }
+
+    export enum RoleEnum {
+        SiteConsumer = 'SiteConsumer',
+        SiteCollaborator = 'SiteCollaborator',
+        SiteContributor = 'SiteContributor',
+        SiteManager = 'SiteManager'
+    }
 }

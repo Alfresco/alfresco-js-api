@@ -22,10 +22,9 @@ export class SiteBodyCreate {
     visibility: SiteBodyCreate.VisibilityEnum;
 }
 export namespace SiteBodyCreate {
-    export type VisibilityEnum = 'PUBLIC' | 'PRIVATE' | 'MODERATED';
-    export const VisibilityEnum = {
-        PUBLIC: 'PUBLIC' as VisibilityEnum,
-        PRIVATE: 'PRIVATE' as VisibilityEnum,
-        MODERATED: 'MODERATED' as VisibilityEnum
-    };
+    export enum VisibilityEnum  {
+        PUBLIC= 'PUBLIC',
+        PRIVATE= 'PRIVATE',
+        MODERATED= 'MODERATED'
+    }
 }

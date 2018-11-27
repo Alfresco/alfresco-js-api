@@ -15,11 +15,15 @@
  * limitations under the License.
  */
 
-import * as  Emitter from 'event-emitter';
+import * as  Emitter_ from 'event-emitter';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
-import * as  superagent from 'superagent';
+import * as  superagent_ from 'superagent';
+
+const Emitter = Emitter_;
+const superagent = superagent_;
+const process: any = {};
 
 export class AlfrescoApiClient {
 
@@ -27,7 +31,7 @@ export class AlfrescoApiClient {
     host: string;
     className: string;
     config: AlfrescoApiConfig;
-
+    url: string;
     /**
      * The base URL against which to resolve every API call's (relative) path.
      */
@@ -89,7 +93,7 @@ export class AlfrescoApiClient {
         }
         let url = this.basePath + path;
         let _this = this;
-        url = url.replace(/\{([\w-]+)\}/g, function(fullMatch, key) {
+        url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
             let value;
             if (pathParams.hasOwnProperty(key)) {
                 value = _this.paramToString(pathParams[key]);
@@ -137,14 +141,14 @@ export class AlfrescoApiClient {
      */
     isFileParam(param: any): boolean {
         // fs.ReadStream in Node.js (but not in runtime like browserify)
-        if (typeof require('fs').ReadStream) {
-            if (typeof window === 'undefined' &&
-                typeof require === 'function' &&
-                require('fs') &&
-                param instanceof require('fs').ReadStream) {
-                return true;
-            }
-        }
+        // if (this.isNodeEnv()) {
+        //     if (typeof window === 'undefined' &&
+        //         typeof require === 'function' &&
+        //         require('fs') &&
+        //         param instanceof require('fs').ReadStream) {
+        //         return true;
+        //     }
+        // }
 
         // Buffer in Node.js
         if (typeof Buffer === 'function' && param instanceof Buffer) {
@@ -175,7 +179,7 @@ export class AlfrescoApiClient {
      * @param {Object.<String, Object>} params The parameters as object properties.
      * @returns {Object.<String, Object>} normalized parameters.
      */
-    normalizeParams(params) {
+    normalizeParams(params: any) {
         let newParams = {};
         for (let key in params) {
             if (params.hasOwnProperty(key) && params[key] !== undefined && params[key] !== null) {
@@ -231,7 +235,7 @@ export class AlfrescoApiClient {
      * Applies authentication headers to the request.
      * @param {Object} request The request object created by a <code>superagent()</code> call.
      */
-    applyAuthToRequest(request) {
+    applyAuthToRequest(request: any) {
         let _this = this;
         let auth = _this.authentications.basicAuth;
         switch (auth.type) {
@@ -308,7 +312,7 @@ export class AlfrescoApiClient {
 
         // Compatible with Safari 9.1.2
         let parts = dateToConvert.split('+');
-        let dateParts = dateToConvert.split(/[^0-9]/).map(function(s) {
+        let dateParts = dateToConvert.split(/[^0-9]/).map(function (s) {
             return parseInt(s, 10);
         });
         return new Date(Date.UTC(dateParts[0], dateParts[1] - 1 || 0, dateParts[2] || 1, dateParts[3] || 0, dateParts[4] || 0, dateParts[5] || 0, dateParts[6] || 0));
@@ -337,7 +341,7 @@ export class AlfrescoApiClient {
      * all properties on <code>data<code> will be converted to this type.
      * @returns An instance of the specified type.
      */
-    convertToType(data, type) {
+    convertToType(data: any, type: any): any {
         switch (type) {
             case 'Binary':
                 return data;
@@ -362,7 +366,7 @@ export class AlfrescoApiClient {
                     // for array type like: ['String']
                     let itemType = type[0];
                     if (data) {
-                        return data.map(function(item) {
+                        return data.map((item: any) => {
                             return this.convertToType(item, itemType);
                         });
                     } else {
@@ -432,7 +436,7 @@ export class AlfrescoApiClient {
         }
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-                                contentTypes, accepts, returnType, contextRoot, responseType, url);
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -460,7 +464,7 @@ export class AlfrescoApiClient {
         let url = this.buildUrlCustomBasePath(path, '', pathParams);
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-                                contentTypes, accepts, returnType, contextRoot, responseType, url);
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -485,11 +489,11 @@ export class AlfrescoApiClient {
      */
     callHostApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
                 contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string, url?: string): Promise<any> {
-        let eventEmitter: Emitter = {};
+        let eventEmitter: Emitter_ = {};
         Emitter(eventEmitter); // jshint ignore:line
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-                                        contentTypes, accepts, responseType, eventEmitter, returnType);
+            contentTypes, accepts, responseType, eventEmitter, returnType);
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
@@ -535,27 +539,27 @@ export class AlfrescoApiClient {
             });
         });
 
-        promise.on = function() {
+        promise.on = function () {
             eventEmitter.on.apply(eventEmitter, arguments);
             return this;
         };
 
-        promise.once = function() {
+        promise.once = function () {
             eventEmitter.once.apply(eventEmitter, arguments);
             return this;
         };
 
-        promise.emit = function() {
+        promise.emit = function () {
             eventEmitter.emit.apply(eventEmitter, arguments);
             return this;
         };
 
-        promise.off = function() {
+        promise.off = function () {
             eventEmitter.off.apply(eventEmitter, arguments);
             return this;
         };
 
-        promise.abort = function() {
+        promise.abort = function () {
             request.abort();
             return this;
         };
@@ -575,7 +579,7 @@ export class AlfrescoApiClient {
         }
     }
 
-    setCsrfToken(request) {
+    setCsrfToken(request: any) {
         let token = this.createCSRFToken();
         request.set('X-CSRF-TOKEN', token);
 
@@ -597,7 +601,7 @@ export class AlfrescoApiClient {
         return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + (1e16).toString()).replace(/[01]/g, this.createCSRFToken);
     }
 
-    progress(event, eventEmitter) {
+    progress(event: any, eventEmitter: Emitter_) {
         if (event.lengthComputable) {
             let percent = Math.round(event.loaded / event.total * 100);
 
@@ -611,20 +615,15 @@ export class AlfrescoApiClient {
 
     /**
      * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders
-     * with parameter values.
-     *
-     * @param {String} basePath the base path
-     * @param {String} path The path to append to the base URL.
-     * @param {Object} pathParams The parameter values to append.
-     * @returns {String} The encoded path with parameter values substituted.
+     * with parameter values
      */
-    buildUrlCustomBasePath(basePath, path, pathParams): string {
+    buildUrlCustomBasePath(basePath: string, path: string, pathParams: any): string {
         if (!path.match(/^\//)) {
             path = '/' + path;
         }
         let url = basePath + path;
         let _this = this;
-        url = url.replace(/\{([\w-]+)\}/g, function(fullMatch, key) {
+        url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
             let value;
             if (pathParams.hasOwnProperty(key)) {
                 value = _this.paramToString(pathParams[key]);
@@ -636,9 +635,9 @@ export class AlfrescoApiClient {
         return url;
     }
 
-    buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-                 contentTypes, accepts, responseType, eventEmitter, returnType) {
-        let request = superagent(httpMethod, url);
+    buildRequest(httpMethod: string, url: string, queryParams, headerParams, formParams, bodyParam,
+                 contentTypes, accepts, responseType, eventEmitter: Emitter_, returnType) {
+        let request: any = superagent(httpMethod, url);
 
         // apply authentications
         this.applyAuthToRequest(request);
