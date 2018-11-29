@@ -1,8 +1,8 @@
 /*global describe, it, beforeEach */
 
-var expect = require('chai').expect;
-var Oauth2Auth = require('../src/oauth2Auth');
-var Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
+let expect = require('chai').expect;
+let Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
+import { Oauth2Auth } from 'alfresco-js-api';
 
 describe('Oauth2 Implicit flow test', function () {
 
@@ -36,7 +36,7 @@ describe('Oauth2 Implicit flow test', function () {
     it('should throw an error if redirectUri is not present', function (done) {
 
         try {
-            this.oauth2Auth = new Oauth2Auth({
+            this.oauth2Auth = new Oauth2Auth(<any>{
                 oauth2: {
                     host: this.hostOauth2,
                     clientId: 'activiti',
@@ -52,7 +52,7 @@ describe('Oauth2 Implicit flow test', function () {
     });
 
     it('should redirect to login if access token is not valid', function (done) {
-        window = {location: {}};
+        (window as any) = { location: {} };
         this.oauth2Mock.get200Discovery();
 
         this.oauth2Auth = new Oauth2Auth({
@@ -67,7 +67,7 @@ describe('Oauth2 Implicit flow test', function () {
         });
 
         this.oauth2Auth.on('implicit_redirect', (url) => {
-            expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
+            expect((window as any).location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
                 'openid-connect/auth?');
             done();
         });
@@ -76,7 +76,7 @@ describe('Oauth2 Implicit flow test', function () {
     });
 
     it('should not redirect to login if access token is valid', function (done) {
-        window = {location: {}};
+        (window as any) = { location: {} };
         this.oauth2Mock.get200Discovery();
 
         this.oauth2Auth = new Oauth2Auth({
@@ -98,7 +98,7 @@ describe('Oauth2 Implicit flow test', function () {
         };
 
         this.oauth2Auth.on('token_issued', (url) => {
-            expect(window.location.url).to.be.equal(undefined);
+            expect((window as any).location.url).to.be.equal(undefined);
             done();
         });
 

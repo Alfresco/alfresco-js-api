@@ -1,11 +1,11 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../main');
-var expect = require('chai').expect;
-var AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var NodeMock = require('../test/mockObjects/mockAlfrescoApi').Node;
-var ProfileMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Profile;
+import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
+let expect = require('chai').expect;
+let AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+let AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+let NodeMock = require('../test/mockObjects/mockAlfrescoApi').Node;
+let ProfileMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Profile;
 
 describe('Auth', function () {
 
@@ -113,7 +113,7 @@ describe('Auth', function () {
                         hostEcm: this.host
                     });
 
-                    var authPromise = this.alfrescoJsApi.login('wrong', 'name');
+                    let authPromise = this.alfrescoJsApi.login('wrong', 'name');
 
                     authPromise.catch(() => {
                     });
@@ -129,7 +129,7 @@ describe('Auth', function () {
                         hostEcm: this.host
                     });
 
-                    var authPromise = this.alfrescoJsApi.login('admin', 'admin');
+                    let authPromise = this.alfrescoJsApi.login('admin', 'admin');
 
                     authPromise.catch(() => {
                     });
@@ -149,7 +149,7 @@ describe('Auth', function () {
 
                     this.authResponseEcmMock.get204ResponseLogout();
 
-                    var authPromise = this.alfrescoJsApi.logout();
+                    let authPromise = this.alfrescoJsApi.logout();
 
                     authPromise.catch(() => {
                     });
@@ -173,7 +173,7 @@ describe('Auth', function () {
                 });
 
                 it('should Ticket login be validate against the server if is valid', function (done) {
-                    var ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+                    let ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
                     this.authResponseEcmMock.get200ValidTicket(ticket);
 
@@ -189,7 +189,7 @@ describe('Auth', function () {
                 });
 
                 it('should Ticket login  be validate against the server d is NOT valid', function (done) {
-                    var ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+                    let ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
                     this.authResponseEcmMock.get400Response();
 
@@ -400,7 +400,7 @@ describe('Auth', function () {
 
                     });
 
-                    var authPromise = this.alfrescoJsApi.login('wrong', 'name');
+                    let authPromise = this.alfrescoJsApi.login('wrong', 'name');
 
                     authPromise.catch(() => {
                     });
@@ -419,7 +419,7 @@ describe('Auth', function () {
 
                     });
 
-                    var authPromise = this.alfrescoJsApi.login('admin', 'admin');
+                    let authPromise = this.alfrescoJsApi.login('admin', 'admin');
 
                     authPromise.catch(() => {
                     });
@@ -441,7 +441,7 @@ describe('Auth', function () {
 
                     this.authResponseBpmMock.get200ResponseLogout();
 
-                    var authPromise = this.alfrescoJsApi.logout();
+                    let authPromise = this.alfrescoJsApi.logout();
 
                     authPromise.catch(() => {
                     });
@@ -675,7 +675,7 @@ describe('Auth', function () {
                         provider: 'ALL'
                     });
 
-                    var authPromise = this.alfrescoJsApi.login('wrong', 'name');
+                    let authPromise = this.alfrescoJsApi.login('wrong', 'name');
 
                     authPromise.catch(() => {
                     });
@@ -694,7 +694,7 @@ describe('Auth', function () {
                         provider: 'ALL'
                     });
 
-                    var authPromise = this.alfrescoJsApi.login('admin', 'admin');
+                    let authPromise = this.alfrescoJsApi.login('admin', 'admin');
 
                     authPromise.catch(() => {
                     });

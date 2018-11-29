@@ -1,8 +1,8 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../../main');
-var AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-var CustomModelMock = require('../../test/mockObjects/mockAlfrescoApi').CustomModel;
+import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
+let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+let CustomModelMock = require('../../test/mockObjects/mockAlfrescoApi').CustomModel;
 
 describe('Custom Model Api', function () {
     beforeEach(function (done) {
@@ -42,11 +42,11 @@ describe('Custom Model Api', function () {
         it('createCustomModel', function (done) {
             this.customModelMock.create201CustomModel();
 
-            var status = 'DRAFT';
-            var description = 'Test model description';
-            var name = 'testModel';
-            var namespaceUri = 'http://www.alfresco.org/model/testNamespace/1.0';
-            var namespacePrefix = 'test';
+            let status = 'DRAFT';
+            let description = 'Test model description';
+            let name = 'testModel';
+            let namespaceUri = 'http://www.alfresco.org/model/testNamespace/1.0';
+            let namespacePrefix = 'test';
 
             this.alfrescoJsApi.core.customModelApi.createCustomModel(status, description, name, namespaceUri, namespacePrefix).then(function () {
                 done();
@@ -61,7 +61,7 @@ describe('Custom Model Api', function () {
 
         it('activateCustomModel', function (done) {
             this.customModelMock.activateCustomModel200();
-            var name = 'testModel';
+            let name = 'testModel';
 
             this.alfrescoJsApi.core.customModelApi.activateCustomModel(name).then(function () {
                 done();

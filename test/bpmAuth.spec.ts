@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach, afterEach */
 
-var BpmAuth = require('../src/bpmAuth');
-var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var expect = require('chai').expect;
-var sinon = require('sinon');
+import { BpmAuth } from 'alfresco-js-api';
+let AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+let expect = require('chai').expect;
+let sinon = require('sinon');
 
 describe('Bpm Auth test', function () {
 
@@ -15,17 +15,17 @@ describe('Bpm Auth test', function () {
     it('should remember username on login', () => {
         const auth = new BpmAuth({});
         auth.login('johndoe', 'password');
-        expect(auth.username).to.be.equal('johndoe');
+        expect(auth.authentications.username).to.be.equal('johndoe');
     });
 
     it('should forget username on logout', () => {
         const auth = new BpmAuth({});
 
         auth.login('johndoe', 'password');
-        expect(auth.username).to.be.equal('johndoe');
+        expect(auth.authentications.username).to.be.equal('johndoe');
 
         auth.logout();
-        expect(auth.username).to.be.equal('');
+        expect(auth.authentications.username).to.be.equal('');
     });
 
     describe('With Authentication', function () {
@@ -145,12 +145,12 @@ describe('Bpm Auth test', function () {
                     contextRootBpm: 'activiti-app'
                 });
 
-                var loginPromise = this.bpmAuth.login('wrong', 'name');
+                let loginPromise = this.bpmAuth.login('wrong', 'name');
 
-                loginPromise.catch(()=> {
+                loginPromise.catch(() => {
                 });
 
-                loginPromise.on('unauthorized', ()=> {
+                loginPromise.on('unauthorized', () => {
                     done();
                 });
             });
@@ -163,12 +163,12 @@ describe('Bpm Auth test', function () {
                     contextRootBpm: 'activiti-app'
                 });
 
-                var loginPromise = this.bpmAuth.login('wrong', 'name');
+                let loginPromise = this.bpmAuth.login('wrong', 'name');
 
-                loginPromise.catch(()=> {
+                loginPromise.catch(() => {
                 });
 
-                loginPromise.on('forbidden', ()=> {
+                loginPromise.on('forbidden', () => {
                     done();
                 });
             });
@@ -181,12 +181,12 @@ describe('Bpm Auth test', function () {
                     contextRootBpm: 'activiti-app'
                 });
 
-                var loginPromise = this.bpmAuth.login('admin', 'admin');
+                let loginPromise = this.bpmAuth.login('admin', 'admin');
 
-                loginPromise.catch(()=> {
+                loginPromise.catch(() => {
                 });
 
-                loginPromise.on('success', ()=> {
+                loginPromise.on('success', () => {
                     done();
                 });
             });
@@ -203,7 +203,7 @@ describe('Bpm Auth test', function () {
 
                 this.authBpmMock.get200ResponseLogout();
 
-                this.bpmAuth.logout().on('logout', ()=> {
+                this.bpmAuth.logout().on('logout', () => {
                     done();
                 });
             });
@@ -240,7 +240,7 @@ describe('Bpm Auth test', function () {
             it('Ticket should be absent in the client and the resolve promise should be called', function (done) {
                 this.authBpmMock.get200ResponseLogout();
 
-                this.bpmAuth.logout().then((data)=> {
+                this.bpmAuth.logout().then((data) => {
                     expect(this.bpmAuth.getTicket()).to.be.equal(null);
                     expect(data).to.be.equal('logout');
                     done();

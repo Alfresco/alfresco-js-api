@@ -1,7 +1,7 @@
 'use strict';
 
-var nock = require('nock');
-var BaseMock = require('../baseMock');
+let nock = require('nock');
+let BaseMock = require('../baseMock');
 
 class PeopleMock extends BaseMock {
 

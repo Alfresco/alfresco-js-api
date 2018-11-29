@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../../main');
-var expect = require('chai').expect;
-var AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var ProcessMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Process;
+let AlfrescoApi = require('../../main');
+let expect = require('chai').expect;
+let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+let ProcessMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Process;
 
 describe('Activiti Process Api', function () {
     beforeEach(function (done) {
@@ -27,7 +27,7 @@ describe('Activiti Process Api', function () {
     it('get activiti Process list filtered', function (done) {
         this.processMock.get200Response();
 
-        var requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
+        let requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
 
         requestNode.page = 0;
         requestNode.sort = 'created-desc';
@@ -44,7 +44,7 @@ describe('Activiti Process Api', function () {
     it('get activiti Process list', function (done) {
         this.processMock.get200Response();
 
-        var requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
+        let requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
 
         this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then((data)=> {
             expect(data.data[0].name).equal('Process Test Api - July 26th 2016');
@@ -55,7 +55,7 @@ describe('Activiti Process Api', function () {
 
     it('get process definition startForm', function (done) {
         this.processMock.get200getProcessDefinitionStartForm();
-        var processDefinitionId = 'testProcess:1:7504';
+        let processDefinitionId = 'testProcess:1:7504';
 
         this.alfrescoJsApi.activiti.processApi.getProcessDefinitionStartForm(processDefinitionId).then((data)=> {
             expect(data.processDefinitionId).equal('testProcess:1:7504');

@@ -28,7 +28,7 @@ export class BpmAuth extends AlfrescoApiClient {
     basePath: string;
     storage: Storage;
     ticket: string;
-    authentications: any;
+    authentications: any = {};
 
     constructor(config: AlfrescoApiConfig) {
         super();
@@ -91,7 +91,6 @@ export class BpmAuth extends AlfrescoApiClient {
             submit: 'Login'
         };
 
-        let authNames = [];
         let contentTypes = ['application/x-www-form-urlencoded'];
         let accepts = ['application/json'];
 

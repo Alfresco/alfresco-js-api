@@ -1,7 +1,7 @@
 'use strict';
 
-var nock = require('nock');
-var BaseMock = require('../baseMock');
+let nock = require('nock');
+let BaseMock = require('../baseMock');
 
 class AuthResponseMock extends BaseMock {
 
@@ -13,7 +13,7 @@ class AuthResponseMock extends BaseMock {
 
     get201Response(forceTicket) {
 
-        var returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+        let returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
         nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
@@ -24,7 +24,7 @@ class AuthResponseMock extends BaseMock {
     }
 
     get200ValidTicket(forceTicket) {
-        var returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+        let returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
         nock(this.host, {'encodedQueryParams': true})
             .get('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-')

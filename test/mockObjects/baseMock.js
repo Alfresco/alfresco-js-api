@@ -1,6 +1,6 @@
 'use strict';
 
-var nock = require('nock');
+let nock = require('nock');
 
 class
 BaseMock {

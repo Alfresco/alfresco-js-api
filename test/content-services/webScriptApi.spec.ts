@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../../main');
-var expect = require('chai').expect;
-var AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-var WebScriptMock = require('../../test/mockObjects/mockAlfrescoApi').WebScript;
+import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
+let expect = require('chai').expect;
+let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+let WebScriptMock = require('../../test/mockObjects/mockAlfrescoApi').WebScript;
 
 describe('WebScript', function () {
 
@@ -73,7 +73,7 @@ describe('WebScript', function () {
         it('WebScript should fire success event at the end', function (done) {
             this.webScriptMock.get200Response();
 
-            var webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
+            let webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
 
             webscriptPormise.catch(()=> {
             });
@@ -86,7 +86,7 @@ describe('WebScript', function () {
         it('WebScript should fire error event if something go wrong', function (done) {
             this.webScriptMock.get404Response();
 
-            var webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
+            let webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
 
             webscriptPormise.catch(()=> {
             });
@@ -99,7 +99,7 @@ describe('WebScript', function () {
         it('WebScript should fire unauthorized event if get 401', function (done) {
             this.webScriptMock.get401Response();
 
-            var webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
+            let webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
 
             webscriptPormise.catch(()=> {
             });

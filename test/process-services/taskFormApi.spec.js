@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../../main');
-var expect = require('chai').expect;
-var AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var TaskFormMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.TaskFormMock;
+let AlfrescoApi = require('../../main');
+let expect = require('chai').expect;
+let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+let TaskFormMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.TaskFormMock;
 
 describe('Activiti Task Api', function () {
     beforeEach(function (done) {
@@ -27,7 +27,7 @@ describe('Activiti Task Api', function () {
     it('get Task Form variables list', function (done) {
         this.taskFormMock.get200getTaskFormVariables();
 
-        var taskId = 5028;
+        let taskId = 5028;
         this.alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId).then((data)=> {
             expect(data[0].id).equal('initiator');
             done();
@@ -37,7 +37,7 @@ describe('Activiti Task Api', function () {
     it('Check cookie settings', function (done) {
         this.taskFormMock.get200getTaskFormVariables();
 
-        var taskId = 5028;
+        let taskId = 5028;
         this.alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId).then((data)=> {
             expect(this.alfrescoJsApi.activiti.taskFormsApi.apiClient.authentications.cookie).equal('ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ');
             done();

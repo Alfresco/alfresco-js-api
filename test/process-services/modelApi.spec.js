@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../../main');
-var expect = require('chai').expect;
-var AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var ModelsMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Models;
+let AlfrescoApi = require('../../main');
+let expect = require('chai').expect;
+let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+let ModelsMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Models;
 
 describe('Activiti Models Api', function () {
     beforeEach(function (done) {
@@ -27,7 +27,7 @@ describe('Activiti Models Api', function () {
     it('get activiti model', function (done) {
         this.modelsMock.get200getModels();
 
-        var opts = {
+        let opts = {
             'filter': 'myReusableForms',
             'modelType': 2
         };

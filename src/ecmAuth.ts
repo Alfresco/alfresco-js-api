@@ -34,7 +34,7 @@ export class EcmAuth extends AlfrescoApiClient {
     authentications: any;
     authApi: AuthenticationApi;
 
-    constructor(config: AlfrescoApiConfig,alfrescoApi: AlfrescoApi) {
+    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         super();
 
         this.config = config;

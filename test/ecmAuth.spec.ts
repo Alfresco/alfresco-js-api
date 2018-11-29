@@ -1,8 +1,8 @@
 /*global describe, it, beforeEach */
 
-var expect = require('chai').expect;
-var AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-var EcmAuth = require('../src/ecmAuth');
+let expect = require('chai').expect;
+let AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+import { EcmAuth } from 'alfresco-js-api';
 
 describe('Ecm Auth test', function () {
 
@@ -12,19 +12,19 @@ describe('Ecm Auth test', function () {
     });
 
     it('should remember username on login', () => {
-        const auth = new EcmAuth({});
+        const auth = new EcmAuth({}, null);
         auth.login('johndoe', 'password');
-        expect(auth.username).to.be.equal('johndoe');
+        expect(auth.authentications.uusername).to.be.equal('johndoe');
     });
 
     it('should forget username on logout', () => {
-        const auth = new EcmAuth({});
+        const auth = new EcmAuth({}, null);
 
         auth.login('johndoe', 'password');
-        expect(auth.username).to.be.equal('johndoe');
+        expect(auth.authentications.username).to.be.equal('johndoe');
 
         auth.logout();
-        expect(auth.username).to.be.equal('');
+        expect(auth.authentications.username).to.be.equal('');
     });
 
     describe('With Authentication', function () {
@@ -36,12 +36,11 @@ describe('Ecm Auth test', function () {
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            });
-
+            }, null);
             this.ecmAuth.login('admin', 'admin').then((data) => {
                 expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                 done();
-            }, ()=> {
+            }, () => {
             });
 
         });
@@ -53,12 +52,11 @@ describe('Ecm Auth test', function () {
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            });
-
+            }, null);
             this.ecmAuth.login('admin', 'admin').then((data) => {
                 expect(this.ecmAuth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
-            }, ()=> {
+            }, () => {
             });
 
         });
@@ -70,8 +68,7 @@ describe('Ecm Auth test', function () {
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            });
-
+            }, null);
             this.ecmAuth.login('admin', 'admin').then(() => {
                 expect(this.ecmAuth.isLoggedIn()).to.be.equal(true);
                 done();
@@ -86,8 +83,7 @@ describe('Ecm Auth test', function () {
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            });
-
+            }, null);
             this.ecmAuth.login('admin', 'admin').then(() => {
                 expect(this.ecmAuth.isLoggedIn()).to.be.equal(true);
                 this.ecmAuth.changeHost('anyhost');
@@ -105,8 +101,7 @@ describe('Ecm Auth test', function () {
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            });
-
+            }, null);
             this.ecmAuth.login('admin', 'admin');
 
             this.authEcmMock.get204ResponseLogout();
@@ -114,7 +109,7 @@ describe('Ecm Auth test', function () {
             this.ecmAuth.logout().then(() => {
                 expect(this.ecmAuth.isLoggedIn()).to.be.equal(false);
                 done();
-            }, ()=> {
+            }, () => {
             });
         });
 
@@ -124,11 +119,10 @@ describe('Ecm Auth test', function () {
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            });
-
+            }, null);
             this.ecmAuth.login('wrong', 'name').then(function () {
 
-            }, (error)=> {
+            }, (error) => {
                 expect(error.status).to.be.equal(403);
                 done();
             });
@@ -140,11 +134,10 @@ describe('Ecm Auth test', function () {
             this.ecmAuth = new EcmAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            });
-
+            }, null);
             this.ecmAuth.login(null, null).then(function () {
 
-            }, (error)=> {
+            }, (error) => {
                 expect(error.status).to.be.equal(400);
                 done();
             });
@@ -157,14 +150,14 @@ describe('Ecm Auth test', function () {
                 this.ecmAuth = new EcmAuth({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
+                }, null);
+
+                let loginPromise = this.ecmAuth.login('wrong', 'name');
+
+                loginPromise.catch(() => {
                 });
 
-                var loginPromise = this.ecmAuth.login('wrong', 'name');
-
-                loginPromise.catch(()=> {
-                });
-
-                loginPromise.on('unauthorized', ()=> {
+                loginPromise.on('unauthorized', () => {
                     done();
                 });
             });
@@ -175,14 +168,14 @@ describe('Ecm Auth test', function () {
                 this.ecmAuth = new EcmAuth({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
+                }, null);
+
+                let loginPromise = this.ecmAuth.login('wrong', 'name');
+
+                loginPromise.catch(() => {
                 });
 
-                var loginPromise = this.ecmAuth.login('wrong', 'name');
-
-                loginPromise.catch(()=> {
-                });
-
-                loginPromise.on('forbidden', ()=> {
+                loginPromise.on('forbidden', () => {
                     done();
                 });
             });
@@ -193,14 +186,14 @@ describe('Ecm Auth test', function () {
                 this.ecmAuth = new EcmAuth({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
+                }, null);
+
+                let loginPromise = this.ecmAuth.login('admin', 'admin');
+
+                loginPromise.catch(() => {
                 });
 
-                var loginPromise = this.ecmAuth.login('admin', 'admin');
-
-                loginPromise.catch(()=> {
-                });
-
-                loginPromise.on('success', ()=> {
+                loginPromise.on('success', () => {
                     done();
                 });
             });
@@ -211,13 +204,13 @@ describe('Ecm Auth test', function () {
                 this.ecmAuth = new EcmAuth({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                });
+                }, null);
 
                 this.ecmAuth.login('admin', 'admin');
 
                 this.authEcmMock.get204ResponseLogout();
 
-                this.ecmAuth.logout().on('logout', ()=> {
+                this.ecmAuth.logout().on('logout', () => {
                     done();
                 });
             });
@@ -231,7 +224,7 @@ describe('Ecm Auth test', function () {
                 this.ecmAuth = new EcmAuth({
                     ticketEcm: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
                     hostEcm: this.hostEcm
-                });
+                }, null);
 
                 expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.ecmAuth.authentications.basicAuth.password);
             });
@@ -244,7 +237,7 @@ describe('Ecm Auth test', function () {
                 this.ecmAuth = new EcmAuth({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                });
+                }, null);
 
                 this.ecmAuth.login('admin', 'admin').then(() => {
                     done();
@@ -254,7 +247,7 @@ describe('Ecm Auth test', function () {
             it('Ticket should be absent in the client and the resolve promise should be called', function (done) {
                 this.authEcmMock.get204ResponseLogout();
 
-                this.ecmAuth.logout().then((data)=> {
+                this.ecmAuth.logout().then((data) => {
                     expect(this.ecmAuth.config.ticket).to.be.equal(undefined);
                     expect(data).to.be.equal('logout');
                     done();

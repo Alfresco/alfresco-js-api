@@ -1,8 +1,8 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../../main');
-var PeopleMock = require('../../test/mockObjects/mockAlfrescoApi').PeopleApi;
-var AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
+let PeopleMock = require('../../test/mockObjects/mockAlfrescoApi').PeopleApi;
+let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 
 describe('PeopleApi', function () {
 
@@ -23,7 +23,7 @@ describe('PeopleApi', function () {
 
     it('should add a person', function (done) {
         this.peopleMock.get201Response();
-        var personBodyCreate = new this.alfrescoJsApi.core.PersonBodyCreate();
+        let personBodyCreate = new this.alfrescoJsApi.core.PersonBodyCreate();
 
         personBodyCreate.id = 'chewbe';
         personBodyCreate.email = 'chewbe@millenniumfalcon.com';

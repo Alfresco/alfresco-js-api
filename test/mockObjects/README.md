@@ -35,14 +35,14 @@ Alfresco Mock API use [Nock](https://github.com/node-nock/nock) which is an HTTP
 # Basic usage For node projects
 
 ```javascript
-var AlfrescoMockJsApi = require('alfresco-js-api').Mock;
+let AlfrescoMockJsApi = require('alfresco-js-api').Mock;
 ```
 
 # ECM
 
 ## Mock Auth Api
 
-var AuthResponseMock = require('alfresco-js-api').Mock.Auth
+let AuthResponseMock = require('alfresco-js-api').Mock.Auth
 
 authResponseMock = new AuthResponseMock(host, username, password);
 Property | default value| 
@@ -65,16 +65,16 @@ authResponseMock.cleanAll()| |
 ### Example 
 
 ```javascript
-var AlfrescoApi = require('alfresco-js-api');
-var expect = require('chai').expect;
-var AuthResponseMock = require('alfresco-js-api').Mock.Auth;
+let AlfrescoApi = require('alfresco-js-api');
+let expect = require('chai').expect;
+let AuthResponseMock = require('alfresco-js-api').Mock.Auth;
 
-var host = 'http://127.0.0.1:8080';
-var authResponseMock = new AuthResponseMock(host);
+let host = 'http://127.0.0.1:8080';
+let authResponseMock = new AuthResponseMock(host);
 
 authResponseMock.get201Response('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
 
-var alfrescoJsApi = new AlfrescoApi({
+let alfrescoJsApi = new AlfrescoApi({
     username: 'admin',
     password: 'admin',
     hostEcm: host
@@ -88,7 +88,7 @@ alfrescoJsApi.login().then((data) => {
 
 ## Mock Node Api
 
-var NodeMock = require('alfresco-js-api').Mock.Node
+let NodeMock = require('alfresco-js-api').Mock.Node
 
 nodeMock = new NodeMock(host);
 
@@ -112,19 +112,19 @@ nodeMock.cleanAll()| |
 ### Example 
 
 ```javascript
-var AlfrescoApi = require('alfresco-js-api');
-var expect = require('chai').expect;
-var AuthResponseMock = require('alfresco-js-api').Mock.Auth;
-var NodeMock = require('alfresco-js-api').Mock.Node;
+let AlfrescoApi = require('alfresco-js-api');
+let expect = require('chai').expect;
+let AuthResponseMock = require('alfresco-js-api').Mock.Auth;
+let NodeMock = require('alfresco-js-api').Mock.Node;
 
 
-var host = 'http://127.0.0.1:8080';
-var authResponseMock = new AuthResponseMock(host);
-var nodeMock = new NodeMock(host);
+let host = 'http://127.0.0.1:8080';
+let authResponseMock = new AuthResponseMock(host);
+let nodeMock = new NodeMock(host);
 
 authResponseMock.get201Response();
 
-var alfrescoJsApi = new AlfrescoApi({
+let alfrescoJsApi = new AlfrescoApi({
     username: 'admin',
     password: 'admin',
     hostEcm: this.host
@@ -143,7 +143,7 @@ alfrescoJsApi.node.createFolder('newFolder').then(function (data) {
 
 ## Mock Upload Api
 
-var UploadMock = require('alfresco-js-api').Mock.Upload
+let UploadMock = require('alfresco-js-api').Mock.Upload
 
 uploadMock = new UploadMock(host);
 
@@ -160,19 +160,19 @@ uploadMock.cleanAll()| |
 ### Example 
 
 ```javascript
-var AlfrescoApi = require('alfresco-js-api');
-var expect = require('chai').expect;
-var AuthResponseMock = require('alfresco-js-api').Mock.Auth;
-var UploadMock = require('alfresco-js-api').Mock.Upload;
+let AlfrescoApi = require('alfresco-js-api');
+let expect = require('chai').expect;
+let AuthResponseMock = require('alfresco-js-api').Mock.Auth;
+let UploadMock = require('alfresco-js-api').Mock.Upload;
 
 
-var host = 'http://127.0.0.1:8080';
-var authResponseMock = new AuthResponseMock(host);
-var uploadMock = new UploadMock(host);
+let host = 'http://127.0.0.1:8080';
+let authResponseMock = new AuthResponseMock(host);
+let uploadMock = new UploadMock(host);
 
 authResponseMock.get201Response();
 
-var alfrescoJsApi = new AlfrescoApi({
+let alfrescoJsApi = new AlfrescoApi({
     username: 'admin',
     password: 'admin',
     hostEcm: this.host
@@ -182,7 +182,7 @@ alfrescoJsApi.login();
 
 uploadMock.get201CreationFile();
 
-var file = fs.createReadStream('./test/mockObjects/testFile.txt');
+let file = fs.createReadStream('./test/mockObjects/testFile.txt');
 
 alfrescoJsApi.upload.uploadFile(file).then(function (data) {
     expect(data.entry.isFile).to.be.equal(true);
@@ -195,7 +195,7 @@ alfrescoJsApi.upload.uploadFile(file).then(function (data) {
 
 ## Mock WebScript Api
 
-var WebScriptMock = require('alfresco-js-api').Mock.WebScript
+let WebScriptMock = require('alfresco-js-api').Mock.WebScript
 
 webScriptMock = new WebScriptMock(host);
 
@@ -211,27 +211,27 @@ webScriptMock.cleanAll()| |
 ### Example 
 
 ```javascript
-var AlfrescoApi = require('alfresco-js-api');
-var expect = require('chai').expect;
-var AuthResponseMock = require('alfresco-js-api').Mock.Auth;
-var WebScriptMock = require('alfresco-js-api').Mock.WebScript;
+let AlfrescoApi = require('alfresco-js-api');
+let expect = require('chai').expect;
+let AuthResponseMock = require('alfresco-js-api').Mock.Auth;
+let WebScriptMock = require('alfresco-js-api').Mock.WebScript;
 
-var host = 'http://127.0.0.1:8080';
-var contextRoot = 'script';
-var servicePath = 'alfresco';
-var scriptPath = 'testWebScript';
+let host = 'http://127.0.0.1:8080';
+let contextRoot = 'script';
+let servicePath = 'alfresco';
+let scriptPath = 'testWebScript';
 
-var authResponseMock = new AuthResponseMock(host);
+let authResponseMock = new AuthResponseMock(host);
 
 authResponseMock.get201Response();
 
-var alfrescoJsApi = new AlfrescoApi({
+let alfrescoJsApi = new AlfrescoApi({
     username: 'admin',
     password: 'admin',
     hostEcm: this.host
 });
 
-var webScriptMock = new WebScriptMock(host, contextRoot, servicePath, scriptPath);
+let webScriptMock = new WebScriptMock(host, contextRoot, servicePath, scriptPath);
 
 webScriptMock.get200Response();
 
@@ -245,7 +245,7 @@ alfrescoJsApi.webScript.executeWebScript('GET', scriptPath, null, contextRoot, s
 
 ## Mock Tags Api
 
-var TagMock = require('alfresco-js-api').Mock.Tag
+let TagMock = require('alfresco-js-api').Mock.Tag
 
 tagMock = new TagMock(host);
 
@@ -261,24 +261,24 @@ tagMock.cleanAll()| |
 ### Example 
 
 ```javascript
-var AlfrescoApi = require('alfresco-js-api');
-var expect = require('chai').expect;
-var AuthResponseMock = require('alfresco-js-api').Mock.Auth;
-var TagMock = require('alfresco-js-api').Mock.Tag;
+let AlfrescoApi = require('alfresco-js-api');
+let expect = require('chai').expect;
+let AuthResponseMock = require('alfresco-js-api').Mock.Auth;
+let TagMock = require('alfresco-js-api').Mock.Tag;
 
-var host = 'http://127.0.0.1:8080';
+let host = 'http://127.0.0.1:8080';
 
-var authResponseMock = new AuthResponseMock(host);
+let authResponseMock = new AuthResponseMock(host);
 
 authResponseMock.get201Response();
 
-var alfrescoJsApi = new AlfrescoApi({
+let alfrescoJsApi = new AlfrescoApi({
     username: 'admin',
     password: 'admin',
     hostEcm: this.host
 });
 
-var tagMock = new TagMock(host);
+let tagMock = new TagMock(host);
 
 tagMock.get200Response();
 
@@ -292,7 +292,7 @@ this.alfrescoJsApi.core.tagsApi.getTags().then((data)=> {
 
 ## Mock Auth Api
 
-var AuthResponseMock = require('alfresco-js-api').Mock.Activiti.Auth
+let AuthResponseMock = require('alfresco-js-api').Mock.Activiti.Auth
 
 authResponseMock = new AuthResponseMock(host);
 
@@ -308,7 +308,7 @@ authResponseMock.cleanAll()| |
 
 ## Mock Process Api
 
-var ProcessMock = require('alfresco-js-api').Mock.Activiti.Process
+let ProcessMock = require('alfresco-js-api').Mock.Activiti.Process
 
 processMock = new ProcessMock(host);
 
@@ -321,7 +321,7 @@ processMock.cleanAll()| |
 
 ## Mock Tasks Api
 
-var TasksMock = require('alfresco-js-api').Mock.Activiti.Tasks
+let TasksMock = require('alfresco-js-api').Mock.Activiti.Tasks
 
 tasksMock = new TasksMock(host);
 
@@ -340,7 +340,7 @@ tasksMock.cleanAll()| |
 
 ## Mock Models Api
 
-var ModelsMock = require('alfresco-js-api').Mock.Activiti.Models
+let ModelsMock = require('alfresco-js-api').Mock.Activiti.Models
 
 modelsMock = new ModelsMock(host);
 
@@ -354,7 +354,7 @@ modelsMock.cleanAll()| |
 
 ## Mock User Filter Api
 
-var UserFilters = require('alfresco-js-api').Mock.Activiti.UserFilters
+let UserFilters = require('alfresco-js-api').Mock.Activiti.UserFilters
 
 userFilters = new UserFilters(host);
 

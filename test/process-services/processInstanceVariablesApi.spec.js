@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../../main');
-var expect = require('chai').expect;
-var AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var ProcessInstanceVariablesMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.ProcessInstanceVariables;
+let AlfrescoApi = require('../../main');
+let expect = require('chai').expect;
+let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+let ProcessInstanceVariablesMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.ProcessInstanceVariables;
 
 describe('Activiti Process Instance Variables Api', function () {
 
@@ -29,7 +29,7 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should return all variables for a process instance', function (done) {
 
-            var processInstanceId = '111';
+            let processInstanceId = '111';
             this.variablesMock.addListProcessInstanceVariables200Response(processInstanceId);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariables(processInstanceId).then(function (data) {
@@ -40,7 +40,7 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should raise an error when API returns an error response', function (done) {
 
-            var processInstanceId = '111';
+            let processInstanceId = '111';
             this.variablesMock.addListProcessInstanceVariables500Response(processInstanceId);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariables(processInstanceId).then(function () {
@@ -57,7 +57,7 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should return all variables for a process instance', function (done) {
 
-            var processInstanceId = '111';
+            let processInstanceId = '111';
             this.variablesMock.addPostProcessInstanceVariables200Response(processInstanceId);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.createProcessInstanceVariables(processInstanceId, []).then(function (data) {
@@ -68,7 +68,7 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should raise an error when API returns an error response', function (done) {
 
-            var processInstanceId = '111';
+            let processInstanceId = '111';
             this.variablesMock.addPostProcessInstanceVariables500Response(processInstanceId);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.createProcessInstanceVariables(processInstanceId, []).then(function () {
@@ -85,7 +85,7 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should return all variables for a process instance', function (done) {
 
-            var processInstanceId = '111';
+            let processInstanceId = '111';
             this.variablesMock.addPutProcessInstanceVariables200Response(processInstanceId);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.createOrUpdateProcessInstanceVariables(processInstanceId, []).then(function (data) {
@@ -96,7 +96,7 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should raise an error when API returns an error response', function (done) {
 
-            var processInstanceId = '111';
+            let processInstanceId = '111';
             this.variablesMock.addPutProcessInstanceVariables500Response(processInstanceId);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.createOrUpdateProcessInstanceVariables(processInstanceId, []).then(function () {
@@ -113,8 +113,8 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should call API to get variable', function (done) {
 
-            var processInstanceId = '111';
-            var variableName = 'var1';
+            let processInstanceId = '111';
+            let variableName = 'var1';
             this.variablesMock.addGetProcessInstanceVariable200Response(processInstanceId, variableName);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariable(processInstanceId, variableName).then(function (data) {
@@ -128,8 +128,8 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should raise an error when API returns an error response', function (done) {
 
-            var processInstanceId = '111';
-            var variableName = 'var1';
+            let processInstanceId = '111';
+            let variableName = 'var1';
             this.variablesMock.addGetProcessInstanceVariable500Response(processInstanceId, variableName);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariable(processInstanceId, variableName).then(function () {
@@ -146,8 +146,8 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should call API to update variable', function (done) {
 
-            var processInstanceId = '111';
-            var variableName = 'var1';
+            let processInstanceId = '111';
+            let variableName = 'var1';
             this.variablesMock.addUpdateProcessInstanceVariable200Response(processInstanceId, variableName);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.updateProcessInstanceVariable(processInstanceId, variableName, {}).then(function () {
@@ -157,8 +157,8 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should raise an error when API returns an error response', function (done) {
 
-            var processInstanceId = '111';
-            var variableName = 'var1';
+            let processInstanceId = '111';
+            let variableName = 'var1';
             this.variablesMock.addUpdateProcessInstanceVariable500Response(processInstanceId, variableName);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.updateProcessInstanceVariable(processInstanceId, variableName, {}).then(function () {
@@ -175,8 +175,8 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should call API to delete variables', function (done) {
 
-            var processInstanceId = '111';
-            var variableName = 'var1';
+            let processInstanceId = '111';
+            let variableName = 'var1';
             this.variablesMock.addDeleteProcessInstanceVariable200Response(processInstanceId, variableName);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.deleteProcessInstanceVariable(processInstanceId, variableName).then(function () {
@@ -186,8 +186,8 @@ describe('Activiti Process Instance Variables Api', function () {
 
         it('should raise an error when API returns an error response', function (done) {
 
-            var processInstanceId = '111';
-            var variableName = 'var1';
+            let processInstanceId = '111';
+            let variableName = 'var1';
             this.variablesMock.addDeleteProcessInstanceVariable500Response(processInstanceId, variableName);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.deleteProcessInstanceVariable(processInstanceId, variableName).then(function () {

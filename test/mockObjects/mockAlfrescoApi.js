@@ -1,4 +1,4 @@
-var mockAlfrescoApi = {};
+let mockAlfrescoApi = {};
 
 //Content service Mock
 mockAlfrescoApi.Auth = require('./content-services/authResponseMock.js');

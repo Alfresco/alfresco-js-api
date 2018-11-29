@@ -14,7 +14,7 @@ describe('Compatibility test§', function () {
         });
     });
 
-    it.only('should add a person', function (done) {
+    it('should add a person', function (done) {
         let personBodyCreate = new PersonBodyCreate();
         this.peopleMock.get201Response();
 
@@ -23,8 +23,6 @@ describe('Compatibility test§', function () {
         personBodyCreate.lastName = 'Chewbe';
         personBodyCreate.firstName = 'chewbacca';
         personBodyCreate.password = 'Rrrrrrrghghghghgh';
-
-        // console.log(JSON.stringify(this.alfrescoApiCompatibility.core));
 
         this.alfrescoApiCompatibility.core.peopleApi.addPerson(personBodyCreate).then(function () {
             done();

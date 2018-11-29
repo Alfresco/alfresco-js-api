@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../../main');
-var expect = require('chai').expect;
-var AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var TasksMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Tasks;
+let AlfrescoApi = require('../../main');
+let expect = require('chai').expect;
+let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+let TasksMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Tasks;
 
 describe('Activiti Task Api', function () {
     beforeEach(function (done) {
@@ -27,7 +27,7 @@ describe('Activiti Task Api', function () {
     it('get Task list', function (done) {
         this.tasksMock.get200Response();
 
-        var requestNode = new this.alfrescoJsApi.activiti.TaskQueryRequestRepresentation();
+        let requestNode = new this.alfrescoJsApi.activiti.TaskQueryRequestRepresentation();
 
         this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode).then((data)=> {
             expect(data.data[0].processDefinitionName).equal('Process Test Api');
@@ -49,7 +49,7 @@ describe('Activiti Task Api', function () {
     it('bad filter Tasks', function (done) {
         this.tasksMock.get400TaskFilter();
 
-        var requestNode = new this.alfrescoJsApi.activiti.TaskFilterRequestRepresentation();
+        let requestNode = new this.alfrescoJsApi.activiti.TaskFilterRequestRepresentation();
 
         this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then((data)=> {
         }, ()=> {
@@ -60,7 +60,7 @@ describe('Activiti Task Api', function () {
     it('filter Tasks', function (done) {
         this.tasksMock.get200TaskFilter();
 
-        var requestNode = new this.alfrescoJsApi.activiti.TaskFilterRequestRepresentation();
+        let requestNode = new this.alfrescoJsApi.activiti.TaskFilterRequestRepresentation();
         requestNode.appDefinitionId = 1;
 
         this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then((data)=> {
@@ -71,7 +71,7 @@ describe('Activiti Task Api', function () {
     });
 
     it('complete Task not found', function (done) {
-        var taskId = 200;
+        let taskId = 200;
         this.tasksMock.get404CompleteTask(taskId);
 
         this.alfrescoJsApi.activiti.taskApi.completeTask(taskId).then((data)=> {
@@ -82,7 +82,7 @@ describe('Activiti Task Api', function () {
     });
 
     it('complete Task ', function (done) {
-        var taskId = 5006;
+        let taskId = 5006;
 
         this.tasksMock.put200GenericResponse('/activiti-app/api/enterprise/tasks/5006/action/complete');
 
@@ -92,11 +92,11 @@ describe('Activiti Task Api', function () {
     });
 
     it.skip('Complete a Task Form', function (done) {
-        var taskId = 2518;
+        let taskId = 2518;
 
         this.tasksMock.rec();
 
-        var completeTaskFormRepresentation = new this.alfrescoJsApi.activiti.CompleteFormRepresentation();
+        let completeTaskFormRepresentation = new this.alfrescoJsApi.activiti.CompleteFormRepresentation();
         this.alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRepresentation).then((data)=> {
             done();
         });
@@ -105,11 +105,11 @@ describe('Activiti Task Api', function () {
 
     it('Create a Task', function (done) {
 
-        var taskName = 'test-name';
+        let taskName = 'test-name';
 
         this.tasksMock.get200CreateTask(taskName);
 
-        var taskRepresentation = new this.alfrescoJsApi.activiti.TaskRepresentation(); // TaskRepresentation | taskRepresentation
+        let taskRepresentation = new this.alfrescoJsApi.activiti.TaskRepresentation(); // TaskRepresentation | taskRepresentation
 
         taskRepresentation.name = taskName;
 
@@ -120,9 +120,9 @@ describe('Activiti Task Api', function () {
 
     it.skip('Save task form', function (done) {
 
-        var taskId = 5006;
+        let taskId = 5006;
 
-        var saveTaskFormRepresentation = new this.alfrescoJsApi.activiti.SaveFormRepresentation();
+        let saveTaskFormRepresentation = new this.alfrescoJsApi.activiti.SaveFormRepresentation();
 
         this.alfrescoJsApi.activiti.taskApi.saveTaskForm(taskId, saveTaskFormRepresentation).then((data)=> {
             done();
@@ -132,7 +132,7 @@ describe('Activiti Task Api', function () {
     it('Get task form', function (done) {
         this.tasksMock.get200getTaskForm();
 
-        var taskId = 2518;
+        let taskId = 2518;
 
         this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data)=> {
             expect(data.name).equal('Metadata');
@@ -145,7 +145,7 @@ describe('Activiti Task Api', function () {
     it('Get getRestFieldValuesColumn ', function (done) {
         this.tasksMock.get200getTaskForm();
 
-        var taskId = 2518;
+        let taskId = 2518;
 
         this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data)=> {
             expect(data.name).equal('Metadata');
@@ -158,9 +158,9 @@ describe('Activiti Task Api', function () {
     it('get form field values that are populated through a REST backend', function (done) {
         this.tasksMock.get200getRestFieldValuesColumn();
 
-        var taskId = '1'; // String | taskId
-        var field = 'label'; // String | field
-        var column = 'user'; // String | column
+        let taskId = '1'; // String | taskId
+        let field = 'label'; // String | field
+        let column = 'user'; // String | column
 
         this.alfrescoJsApi.activiti.taskApi.getRestFieldValuesColumn(taskId, field, column).then((data)=> {
             done();
@@ -172,8 +172,8 @@ describe('Activiti Task Api', function () {
     it('get form field values that are populated through a REST backend Specific case to retrieve information on a specific column', function (done) {
         this.tasksMock.get200getRestFieldValues();
 
-        var taskId = '2'; // String | taskId
-        var field = 'label'; // String | field
+        let taskId = '2'; // String | taskId
+        let field = 'label'; // String | field
 
         this.alfrescoJsApi.activiti.taskApi.getRestFieldValues(taskId, field).then((data)=> {
             done();

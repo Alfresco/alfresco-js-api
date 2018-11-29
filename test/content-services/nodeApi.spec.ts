@@ -1,11 +1,11 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../../main');
-var chai = require('chai');
-var expect = chai.expect;
-var AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-var NodeMock = require('../../test/mockObjects/mockAlfrescoApi').Node;
-var fs = require('fs');
+import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
+let chai = require('chai');
+let expect = chai.expect;
+let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+let NodeMock = require('../../test/mockObjects/mockAlfrescoApi').Node;
+let fs = require('fs');
 
 chai.use(require('chai-datetime'));
 
@@ -190,7 +190,7 @@ describe('Node', function () {
     describe('Content', function () {
         it.skip('getFileContent', function (done) {
 
-            var nodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
+            let nodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
             this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId).then(function (data) {
                 fs.writeFile('./test/grass.jpg', data, function (err) {

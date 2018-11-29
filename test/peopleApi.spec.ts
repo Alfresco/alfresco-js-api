@@ -17,7 +17,7 @@ describe('PeopleApi', function() {
         });
     });
 
-    it.only('should add a person', function(done) {
+    it('should add a person', function(done) {
         let personBodyCreate = new PersonBodyCreate();
         this.peopleMock.get201Response();
 

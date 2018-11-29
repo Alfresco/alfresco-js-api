@@ -32,7 +32,7 @@
     "prepublish": "shx rm -rf ./typings && npm run build_all",
     "bundlesize-check": "bundlesize",
     "format-ts": "tsfmt -r",
-    "test": "mocha -r ts-node/register test/**/*.spec.ts",
+    "test": "mocha -r ts-node/register test/**/*.ts",
     "generate": "mvn clean generate-sources",
     "tslint": "tslint --fix --type-check -c tslint.json --project tsconfig.base.json",
     "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md",

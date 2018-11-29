@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach, assert */
 
-var AlfrescoApi = require('../../main');
-var AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-var FindNodesMock = require('../../test/mockObjects/mockAlfrescoApi').FindNodes;
-var expect = require('chai').expect;
+import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
+let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+let FindNodesMock = require('../../test/mockObjects/mockAlfrescoApi').FindNodes;
+let expect = require('chai').expect;
 
 describe('Queries', function () {
 
@@ -25,10 +25,10 @@ describe('Queries', function () {
 
     describe('nodes', function () {
 
-        var searchTerm = 'test';
+        let searchTerm = 'test';
 
         it('should throw exception if no search term is provided', function() {
-            var badCall = function () {
+            let badCall = function () {
                 this.alfrescoJsApi.core.queriesApi.findNodes();
             }.bind(this);
             expect(badCall).to.throw('Missing the required parameter \'term\' when calling findNodes');
@@ -52,7 +52,6 @@ describe('Queries', function () {
                 expect(data.list.entries[1].entry.name).to.be.equal('coins2.JPG');
                 done();
             }, function () {
-                assert.fail('promise rejected');
             });
         });
 

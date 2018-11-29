@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../../main');
-var expect = require('chai').expect;
-var AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var FiltersMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.UserFilters;
+let AlfrescoApi = require('../../main');
+let expect = require('chai').expect;
+let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+let FiltersMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.UserFilters;
 
 describe('Activiti User Filter Api', function () {
     beforeEach(function (done) {
@@ -27,7 +27,7 @@ describe('Activiti User Filter Api', function () {
     it('get filter user', function (done) {
         this.filtersMock.get200getUserTaskFilters();
 
-        var opts = {
+        let opts = {
             'appId': 1 // Integer | appId
         };
 

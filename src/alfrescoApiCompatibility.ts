@@ -38,7 +38,7 @@ import { AUTH_APIS } from './api-new/auth-rest-api/api';
 
 import { AlfrescoContent } from './alfrescoContent';
 import { AlfrescoNode } from './api/alfrescoNode';
-import { AlfrescoUpload } from './alfrescoUpload';
+import { AlfrescoUpload } from './api/alfrescoUpload';
 
 export class AlfrescoApiCompatibility extends AlfrescoApi {
 
@@ -89,7 +89,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
 
         this.nodes = this.node = new AlfrescoNode();
         this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
-        this.upload = new AlfrescoUpload();
+        this.upload = new AlfrescoUpload(this);
         this.webScript = this.core.webscriptApi;
     }
 
@@ -126,6 +126,4 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
             console.log(nameClass + '  ' + error);
         }
     }
-
-
 }

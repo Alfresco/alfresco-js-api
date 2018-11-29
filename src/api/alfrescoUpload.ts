@@ -15,15 +15,17 @@
 * limitations under the License.
 */
 
-import { NodesApi } from './api/content-rest-api/src/api/NodesApi';
+import { NodesApi } from './content-rest-api/src/api/nodesApi';
 import * as Emitter_ from 'event-emitter';
+import { AlfrescoApi } from '../alfrescoApi';
 
 const Emitter = Emitter_;
 
 export class AlfrescoUpload extends NodesApi {
 
-    constructor() {
+    constructor(alfrescoApi: AlfrescoApi) {
         super();
+        this.init(alfrescoApi);
         Emitter.call(this);
     }
 

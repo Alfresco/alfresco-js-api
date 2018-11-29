@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../../main');
-var expect = require('chai').expect;
-var AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var ReportsMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Reports;
+let AlfrescoApi = require('../../main');
+let expect = require('chai').expect;
+let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+let ReportsMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Reports;
 
 describe('Activiti Report Api', function () {
     beforeEach(function (done) {
@@ -33,8 +33,8 @@ describe('Activiti Report Api', function () {
 
     it('should return the tasks referring to the process id', function (done) {
 
-        var reportId = '11015'; // String | reportId
-        var processDefinitionId = 'Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004'; // String | processDefinitionId
+        let reportId = '11015'; // String | reportId
+        let processDefinitionId = 'Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004'; // String | processDefinitionId
 
         this.reportsMock.get200ResponseTasksByProcessDefinitionId(reportId, processDefinitionId);
 
@@ -49,8 +49,8 @@ describe('Activiti Report Api', function () {
 
     it('should return the chart reports', function (done) {
 
-        var reportId = '11015'; // String | reportId
-        var paramsQuery = { status: 'All' };
+        let reportId = '11015'; // String | reportId
+        let paramsQuery = { status: 'All' };
 
         this.reportsMock.get200ResponseReportsByParams(reportId, paramsQuery);
 
@@ -118,11 +118,11 @@ describe('Activiti Report Api', function () {
 
     it('should return the report parameters', function (done) {
 
-        var reportId = '11013'; // String | reportId
+        let reportId = '11013'; // String | reportId
         this.reportsMock.get200ResponseReportParams(reportId);
 
         this.alfrescoJsApi.activiti.reportApi.getReportParams(reportId).then((res) => {
-            var paramsDefinition = JSON.parse(res.definition);
+            let paramsDefinition = JSON.parse(res.definition);
 
             expect(res.id).equal(11013);
             expect(res.name).equal('Process instances overview');
@@ -150,8 +150,8 @@ describe('Activiti Report Api', function () {
 
     it('should update the report', function (done) {
 
-        var reportId = '11015'; // String | reportId
-        var name = 'New Fake Name'; // String | reportId
+        let reportId = '11015'; // String | reportId
+        let name = 'New Fake Name'; // String | reportId
         this.reportsMock.get200ResponseUpdateReport(reportId);
 
         this.alfrescoJsApi.activiti.reportApi.updateReport(reportId, name).then(function () {
@@ -161,8 +161,8 @@ describe('Activiti Report Api', function () {
 
     it('should export the report', function (done) {
 
-        var reportId = '11015'; // String | reportId
-        var queryParms = {
+        let reportId = '11015'; // String | reportId
+        let queryParms = {
             'processDefinitionId': 'TEST:99:999',
             'dateRange': {
                 'startDate': '2017-01-01T00:00:00.000Z',
@@ -184,8 +184,8 @@ describe('Activiti Report Api', function () {
 
     it('should save the report', function (done) {
 
-        var reportId = '11015'; // String | reportId
-        var queryParms = {
+        let reportId = '11015'; // String | reportId
+        let queryParms = {
             'processDefinitionId': 'TEST:99:999',
             'dateRange': {
                 'startDate': '2017-01-01T00:00:00.000Z',
@@ -205,7 +205,7 @@ describe('Activiti Report Api', function () {
 
     it('should delete a report', function (done) {
 
-        var reportId = '11015'; // String | reportId
+        let reportId = '11015'; // String | reportId
         this.reportsMock.get200ResponseDeleteReport(reportId);
 
         this.alfrescoJsApi.activiti.reportApi.deleteReport(reportId).then(function () {

@@ -1,9 +1,9 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../main');
-var expect = require('chai').expect;
-var AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
+let expect = require('chai').expect;
+let AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+let AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 
 describe('Change config', function () {
     beforeEach(function (done) {
