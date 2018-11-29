@@ -74,7 +74,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Create a custom type
      */
-    createCustomType(modelName:string, name:string, parentName:string, title:string, description:string): Promise<any> {
+    createCustomType(modelName: string, name: string, parentName: string, title: string, description: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in createCustomType";
@@ -112,7 +112,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Create a custom aspect
      */
-    createCustomAspect(modelName:string, name:string, parentName:string, title:string, description:string): Promise<any> {
+    createCustomAspect(modelName: string, name: string, parentName: string, title: string, description: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in createCustomAspect";
@@ -150,7 +150,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Create a custom constraint
      */
-    createCustomConstraint(modelName:string, name:string, type:string, parameters:any): Promise<any> {
+    createCustomConstraint(modelName: string, name: string, type: string, parameters: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in createCustomConstraint";
@@ -189,7 +189,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Activate the custom model
      */
-    activateCustomModel(modelName:string): Promise<any> {
+    activateCustomModel(modelName: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in activateCustomModel";
@@ -220,7 +220,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Deactivate the custom model
      */
-    deactivateCustomModel(modelName:string): Promise<any> {
+    deactivateCustomModel(modelName: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in deactivateCustomModel";
@@ -251,7 +251,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Add property into an existing aspect
      */
-    addPropertyToAspect(modelName:string, aspectName:string, properties:any): Promise<any> {
+    addPropertyToAspect(modelName: string, aspectName: string, properties: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in addPropertyToAspect";
@@ -288,7 +288,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Add Property into an existing type
      */
-    addPropertyToType(modelName:string, typeName:string, properties:any, aspectName:string): Promise<any> {
+    addPropertyToType(modelName: string, typeName: string, properties: any, aspectName: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in addPropertyToType";
@@ -325,7 +325,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Edit an existing custom model
      */
-    updateCustomModel(modelName:string, description:string, namespaceUri:string, namespacePrefix:string): Promise<any> {
+    updateCustomModel(modelName: string, description: string, namespaceUri: string, namespacePrefix: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in updateCustomModel";
@@ -359,7 +359,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Edit an existing custom model type
      */
-    updateCustomType(modelName:string, typeName:string, description:string, parentName:string, title:string): Promise<any> {
+    updateCustomType(modelName: string, typeName: string, description: string, parentName: string, title: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in UpdateCustomType";
@@ -398,7 +398,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Edit an existing custom model aspect
      */
-    updateCustomAspect(modelName:string, aspectName:string, description:string, parentName:string, title:string): Promise<any> {
+    updateCustomAspect(modelName: string, aspectName: string, description: string, parentName: string, title: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in updateCustomAspect";
@@ -460,7 +460,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Get custom model
      */
-    getCustomModel(modelName:string, queryParamsInput:any): Promise<any> {
+    getCustomModel(modelName: string, queryParamsInput: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomModel";
@@ -491,7 +491,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Get all custom model types
      */
-    getAllCustomType(modelName:string): Promise<any> {
+    getAllCustomType(modelName: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getAllCustomType";
@@ -522,7 +522,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Get custom model type
      */
-    getCustomType(modelName:string, typeName:string, queryParamsInput:any): Promise<any> {
+    getCustomType(modelName: string, typeName: string, queryParamsInput: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomType";
@@ -558,7 +558,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Get all custom model aspect
      */
-    getAllCustomAspect(modelName:string, queryParamsInput:any): Promise<any> {
+    getAllCustomAspect(modelName: string, queryParamsInput: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getAllCustomAspect";
@@ -589,7 +589,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Get custom model aspect
      */
-    getCustomAspect(modelName:string, aspectName:string, queryParamsInput:any): Promise<any> {
+    getCustomAspect(modelName: string, aspectName: string, queryParamsInput: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomAspect";
@@ -625,7 +625,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Get all custom model defined constraints
      */
-    getAllCustomConstraints(modelName:string, queryParamsInput:any): Promise<any> {
+    getAllCustomConstraints(modelName: string, queryParamsInput: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getAllCustomConstraints";
@@ -656,7 +656,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Get custom model defined constraints
      */
-    getCustomConstraints(modelName:string, constraintName:string, queryParamsInput:any): Promise<any> {
+    getCustomConstraints(modelName: string, constraintName: string, queryParamsInput: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomConstraints";
@@ -692,7 +692,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Delete the given custom model
      */
-    deleteCustomModel(modelName:string): Promise<any> {
+    deleteCustomModel(modelName: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in deleteCustomModel";
@@ -723,7 +723,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Delete the given custom type
      */
-    deleteCustomType(modelName:string, typeName:string): Promise<any> {
+    deleteCustomType(modelName: string, typeName: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomConstraints";

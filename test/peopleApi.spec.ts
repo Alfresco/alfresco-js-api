@@ -30,7 +30,7 @@ describe('PeopleApi', function() {
         let peopleApiService = new PeopleApi(this.alfrescoApi);
         peopleApiService.createPerson(personBodyCreate).then(function() {
             done();
-        }, function(error) {
+        },                                                   function(error) {
             console.error(error);
         });
 

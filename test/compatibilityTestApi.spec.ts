@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility, PersonBodyCreate, PeopleApi } from 'alfresco-js-api';
+import { AlfrescoApiCompatibility, PersonBodyCreate } from 'alfresco-js-api';
 
 let PeopleMock = require('../test/mockObjects/mockAlfrescoApi').PeopleApi;
 
@@ -28,7 +28,7 @@ describe('Compatibility test§', function () {
 
         this.alfrescoApiCompatibility.core.peopleApi.addPerson(personBodyCreate).then(function () {
             done();
-        }, function (error) {
+        },                                                                            function (error) {
             console.error(error);
         });
 

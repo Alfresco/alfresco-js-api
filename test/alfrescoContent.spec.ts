@@ -1,8 +1,8 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
-var expect = require('chai').expect;
-var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+let expect = require('chai').expect;
+let AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 
 describe('AlfrescoContent', function () {
     beforeEach(function (done) {
@@ -25,7 +25,7 @@ describe('AlfrescoContent', function () {
     });
 
     it('outputs thumbnail url', function () {
-        var thumbnailUrl = this.content.getDocumentThumbnailUrl(this.nodeId);
+        let thumbnailUrl = this.content.getDocumentThumbnailUrl(this.nodeId);
 
         expect(thumbnailUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/renditions/doclib/content?attachment=false&' +
@@ -33,7 +33,7 @@ describe('AlfrescoContent', function () {
     });
 
     it('outputs thumbnail url as attachment', function () {
-        var thumbnailUrl = this.content.getDocumentThumbnailUrl(this.nodeId, true);
+        let thumbnailUrl = this.content.getDocumentThumbnailUrl(this.nodeId, true);
 
         expect(thumbnailUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/renditions/doclib/content?attachment=true&' +
@@ -41,7 +41,7 @@ describe('AlfrescoContent', function () {
     });
 
     it('outputs thumbnail url with custom ticket', function () {
-        var thumbnailUrl = this.content.getDocumentThumbnailUrl(this.nodeId, true, 'custom_ticket');
+        let thumbnailUrl = this.content.getDocumentThumbnailUrl(this.nodeId, true, 'custom_ticket');
 
         expect(thumbnailUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/renditions/doclib/content?attachment=true&' +
@@ -49,7 +49,7 @@ describe('AlfrescoContent', function () {
     });
 
     it('outputs preview url', function () {
-        var thumbnailUrl = this.content.getDocumentPreviewUrl(this.nodeId);
+        let thumbnailUrl = this.content.getDocumentPreviewUrl(this.nodeId);
 
         expect(thumbnailUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/renditions/imgpreview/content?attachment=false&' +
@@ -57,7 +57,7 @@ describe('AlfrescoContent', function () {
     });
 
     it('outputs preview url as attachment', function () {
-        var thumbnailUrl = this.content.getDocumentPreviewUrl(this.nodeId, true);
+        let thumbnailUrl = this.content.getDocumentPreviewUrl(this.nodeId, true);
 
         expect(thumbnailUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/renditions/imgpreview/content?attachment=true&' +
@@ -65,7 +65,7 @@ describe('AlfrescoContent', function () {
     });
 
     it('outputs preview url with custom ticket', function () {
-        var thumbnailUrl = this.content.getDocumentPreviewUrl(this.nodeId, true, 'custom_ticket');
+        let thumbnailUrl = this.content.getDocumentPreviewUrl(this.nodeId, true, 'custom_ticket');
 
         expect(thumbnailUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/renditions/imgpreview/content?attachment=true&' +
@@ -73,7 +73,7 @@ describe('AlfrescoContent', function () {
     });
 
     it('outputs content url', function () {
-        var contentUrl = this.content.getContentUrl(this.nodeId);
+        let contentUrl = this.content.getContentUrl(this.nodeId);
 
         expect(contentUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/content?attachment=false' +
@@ -81,7 +81,7 @@ describe('AlfrescoContent', function () {
     });
 
     it('outputs content url as attachment', function () {
-        var contentUrl = this.content.getContentUrl(this.nodeId, true);
+        let contentUrl = this.content.getContentUrl(this.nodeId, true);
 
         expect(contentUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/content?attachment=true' +
@@ -89,7 +89,7 @@ describe('AlfrescoContent', function () {
     });
 
     it('outputs content url with custom ticket', function () {
-        var contentUrl = this.content.getContentUrl(this.nodeId, true, 'custom_ticket');
+        let contentUrl = this.content.getContentUrl(this.nodeId, true, 'custom_ticket');
 
         expect(contentUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/content?attachment=true' +
@@ -98,7 +98,7 @@ describe('AlfrescoContent', function () {
 
     it('outputs rendition url', function () {
         const encoding = 'pdf';
-        var contentUrl = this.content.getRenditionUrl(this.nodeId, encoding);
+        let contentUrl = this.content.getRenditionUrl(this.nodeId, encoding);
 
         expect(contentUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/renditions/' + encoding +
@@ -108,7 +108,7 @@ describe('AlfrescoContent', function () {
 
     it('outputs rendition url as attachment', function () {
         const encoding = 'pdf';
-        var contentUrl = this.content.getRenditionUrl(this.nodeId, encoding, true);
+        let contentUrl = this.content.getRenditionUrl(this.nodeId, encoding, true);
 
         expect(contentUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/renditions/' + encoding +
@@ -118,7 +118,7 @@ describe('AlfrescoContent', function () {
 
     it('outputs rendition url with custom ticket', function () {
         const encoding = 'pdf';
-        var contentUrl = this.content.getRenditionUrl(this.nodeId, encoding, true, 'custom_ticket');
+        let contentUrl = this.content.getRenditionUrl(this.nodeId, encoding, true, 'custom_ticket');
 
         expect(contentUrl).to.be.equal(this.nodesUrl + this.nodeId +
             '/renditions/' + encoding +
