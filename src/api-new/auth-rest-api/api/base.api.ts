@@ -23,7 +23,7 @@ export class BaseApi {
     apiClient: AlfrescoApiClient;
 
     constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.ecmClient;
+        this.apiClient = alfrescoApi.authClient;
     }
 
     errorMessage(param, methodName) {

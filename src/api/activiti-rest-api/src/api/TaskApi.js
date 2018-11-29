@@ -563,7 +563,6 @@
 
       // verify the required parameter 'requestNode' is set
       if (requestNode === undefined || requestNode === null) {
-          console.log('a');
           postBody = new TaskFilterRequestRepresentation();
       }
 

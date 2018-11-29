@@ -39,6 +39,7 @@ export class AlfrescoApi {
     searchClient: EcmClient;
     discoveryClient: EcmClient;
     gsClient: EcmClient;
+    authClient: EcmClient;
     oauth2Auth: Oauth2Auth;
     bpmAuth: BpmAuth;
     ecmAuth: EcmAuth;
@@ -88,6 +89,7 @@ export class AlfrescoApi {
 
         this.ecmPrivateClient = new EcmClient(this.config, '/api/-default-/private/alfresco/versions/1');
         this.ecmClient = new EcmClient(this.config, '/api/-default-/public/alfresco/versions/1');
+        this.authClient = new EcmClient(this.config, '/api/-default-/public/authentication/versions/1');
         this.searchClient = new EcmClient(this.config, '/api/-default-/public/search/versions/1');
         this.discoveryClient = new EcmClient(this.config, '/api');
         this.gsClient = new EcmClient(this.config, '/api/-default-/public/gs/versions/1');
@@ -100,7 +102,7 @@ export class AlfrescoApi {
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
             this.bpmAuth = new BpmAuth(this.config);
-            this.ecmAuth = new EcmAuth(this.config);
+            this.ecmAuth = new EcmAuth(this.config, this);
             this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
         }
 
@@ -196,7 +198,8 @@ export class AlfrescoApi {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            },                     () => {
+            },()=>{
+                console.log('login OAUTH error');
             });
 
             return oauth2AuthPromise;
@@ -208,6 +211,8 @@ export class AlfrescoApi {
 
                 bpmPromise.then((ticketBpm) => {
                     this.config.ticketBpm = ticketBpm;
+                },()=>{
+                    console.log('login BPM error');
                 });
 
                 return bpmPromise;
@@ -218,6 +223,8 @@ export class AlfrescoApi {
                     this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), null);
 
                     this.config.ticketEcm = ticketEcm;
+                },()=>{
+                    console.log('login ECM error');
                 });
 
                 return ecmPromise;
@@ -305,7 +312,7 @@ export class AlfrescoApi {
                 let ecmPromise = this.ecmAuth.logout();
                 ecmPromise.then(() => {
                     this.config.ticket = undefined;
-                },              () => {
+                }, () => {
                 });
 
                 return ecmPromise;

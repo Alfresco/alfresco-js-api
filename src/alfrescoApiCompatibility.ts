@@ -18,9 +18,6 @@
 import { AlfrescoApi } from './alfrescoApi';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
-import { AlfrescoContent } from './alfrescoContent';
-import { AlfrescoUpload } from './alfrescoUpload';
-
 const AlfrescoCoreRestApi = require('./api/content-rest-api/src/index');
 // let AlfrescoPrivateRestApi = require('./alfresco-private-rest-api/src/index.js');
 // let AlfrescoSearchRestApi = require('./alfresco-search-rest-api/src/index.js');
@@ -39,6 +36,10 @@ import { GS_CORE_APIS } from './api-new/gs-core-rest-api/api';
 import { SEARCH_APIS } from './api-new/search-rest-api/api';
 import { AUTH_APIS } from './api-new/auth-rest-api/api';
 
+import { AlfrescoContent } from './alfrescoContent';
+import { AlfrescoNode } from './api/alfrescoNode';
+import { AlfrescoUpload } from './alfrescoUpload';
+
 export class AlfrescoApiCompatibility extends AlfrescoApi {
 
     core: any;
@@ -49,6 +50,10 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
     gsCore = {};
     gsClassification = {};
     discovery = {};
+
+    content:AlfrescoContent;
+    node:AlfrescoNode;
+    nodes:AlfrescoNode;
 
     constructor(config: AlfrescoApiConfig) {
         super();
@@ -70,7 +75,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
 
         this._instantiateOldObjects(this.coreStore, this.core);
 
-        // //ECM-Private
+        // //ECM-Private //rrestore
         // //AlfrescoPrivateRestApi.ApiClient.instance = this.ecmPrivateClient;
         // this.corePrivateStore = AlfrescoPrivateRestApi;
         // this._instantiateObjects(this.corePrivateStore, this.core);
@@ -82,10 +87,10 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
         this._instantiateNewObjects(GS_CORE_APIS, this.gsCore);
         this._instantiateNewObjects(GS_CLASSIFICATION_APIS, this.gsClassification);
 
-        //this.nodes = this.node = new AlfrescoNode();
-        //this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
-        //this.upload = new AlfrescoUpload();
-        //this.webScript = this.core.webscriptApi;
+        this.nodes = this.node = new AlfrescoNode();
+        this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
+        this.upload = new AlfrescoUpload();
+        this.webScript = this.core.webscriptApi;
     }
 
     _instantiateOldObjects(module, moduleCopy) {

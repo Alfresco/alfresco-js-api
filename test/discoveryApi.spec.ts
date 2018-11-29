@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
 
-var AlfrescoApi = require('../main');
+import { AlfrescoApiCompatibility } from 'alfresco-js-api';
 var AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 var DiscoveryMock = require('../test/mockObjects/mockAlfrescoApi').Discovery;
 var expect = require('chai').expect;
@@ -14,7 +14,7 @@ describe('Discovery', function () {
         this.discoveryMock = new DiscoveryMock();
 
         this.authResponseMock.get201Response();
-        this.alfrescoJsApi = new AlfrescoApi({
+        this.alfrescoJsApi = new AlfrescoApiCompatibility({
             hostEcm: this.hostEcm
         });
 
