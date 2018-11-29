@@ -31,3 +31,4 @@ export { EcmClient } from './src/ecmClient';
 export { BpmClient } from './src/bpmClient';
 export { Storage } from './src/storage';
 export { AlfrescoApi } from './src/alfrescoApi';
+export { AlfrescoApiCompatibility } from './src/alfrescoApiCompatibility';

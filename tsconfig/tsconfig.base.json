@@ -20,6 +20,9 @@
         "../src/api-new/gs-core-rest-api/index.ts",
         "../src/api-new/search-rest-api/index.ts",
 
+        "../src/api/content-rest-api/src/index.ts",
+        "../src/api/activiti-rest-api/src/index.ts",
+
         // compatibility
         "../src/alfrescoApiCompatibility.ts",
 

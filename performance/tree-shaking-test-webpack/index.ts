@@ -15,13 +15,26 @@
  * limitations under the License.
  */
 
-import { AlfrescoApi } from '../dist/bundle.js'
+import { AlfrescoApi, DiscoveryEntry, DiscoveryApi } from 'alfresco-js-api';
 
 export class SingleApiTest {
 
-    constructor(){
-        let exampleOne = new AlfrescoApi();
+    constructor() {
+        let alfrescoApi = new AlfrescoApi();
+        alfrescoApi.setConfig({
+            provider: 'ECM',
+            hostEcm: 'http://localhost:3000',
+            authType: 'BASIC',
+            contextRoot: ''
+        });
 
-        console.log(exampleOne.ecmClient);
+        let discovery = new DiscoveryApi(alfrescoApi);
+        discovery.getRepositoryInformation().then(
+            (ecmVers) => {
+                console.log('ecmVers' + ecmVers);
+            },
+            (ecmVers) => {
+                console.log('error ecmvers' + ecmVers);
+            });
     }
 }

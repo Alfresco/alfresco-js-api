@@ -47,8 +47,6 @@ import { QueriesApi } from '../../../../api-new/content-rest-api/api/queries.api
  */
 export class ChangesApi {
 
-    private path: string = '/nodes';
-
     nodesApi: NodesApi;
     sharedlinksApi: SharedlinksApi;
     renditionsApi: RenditionsApi;

@@ -4154,6 +4154,7 @@ declare namespace AlfrescoApi {
     //  ======= Governance Core Start ======
     export interface GsCore {
         filePlansApi: FilePlansApi;
+        filesApi: FilesApi
         gsSitesApi: GsSitesApi;
         recordCategoriesApi: RecordCategoriesApi;
         recordFoldersApi: RecordFoldersApi;

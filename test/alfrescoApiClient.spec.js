@@ -1,6 +1,8 @@
 /*global describe, it */
 
-var ApiClient = require('../src/alfrescoApiClient');
+import { AlfrescoApiCompatibility } from 'alfresco-js-api';
+
+var ApiClient = require('alfresco-js-api');
 var chai = require('chai');
 var expect = chai.expect;
 

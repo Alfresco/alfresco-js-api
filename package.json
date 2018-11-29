@@ -5,15 +5,8 @@
   "author": "Alfresco Software, Ltd.",
   "main": "index.js",
   "typings": "index.d.ts",
-  "lint-staged": {
-    "*.@(ts)": [
-      "tslint --fix",
-      "git add"
-    ]
-  },
   "scripts": {
-    "precommit": "lint-staged",
-    "build_all": "npm-run-all clean_dist copy_sources build_cjs build_esm5 build_esm2015 build_esm5_for_rollup build_umd build_types generate_packages",
+    "build_all": "npm-run-all clean_dist copy_sources build_cjs build_esm5 build_esm2015 build_esm5_for_rollup build_umd build_types generate_packages bundlesize-check",
     "build_cjs": "npm-run-all clean_dist_cjs compile_dist_cjs",
     "build_esm5": "npm-run-all clean_dist_esm5 compile_dist_esm5",
     "build_esm5_for_rollup": "npm-run-all clean_dist_esm5_for_rollup compile_dist_esm5_for_rollup && mkdirp dist/esm5_for_rollup/node_modules",
@@ -37,12 +30,11 @@
     "copy_sources": "mkdirp dist && shx cp -r ./src/ ./dist/src",
     "generate_packages": "node .make-packages.js",
     "prepublish": "shx rm -rf ./typings && npm run build_all",
-
-
+    "bundlesize-check": "bundlesize",
     "format-ts": "tsfmt -r",
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
     "generate": "mvn clean generate-sources",
-    "tslint": "tslint --fix --type-check -c tslint.json --project tsconfig.json ",
+    "tslint": "tslint --fix --type-check -c tslint.json --project tsconfig.base.json",
     "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md",
     "generate-ts": "jsdoc -c config.json .",
     "generate-api": "mvn install"
@@ -64,6 +56,7 @@
     "@types/mocha": "^5.2.5",
     "@types/node": "^10.12.0",
     "@types/superagent": "3.8.2",
+    "adf-tslint-rules": "0.0.5",
     "bundlesize": "^0.15.3",
     "chai": "^3.5.0",
     "chai-datetime": "^1.4.1",
@@ -71,9 +64,8 @@
     "fs-extra": "5.0.0",
     "google-closure-compiler-js": "20170218.0.0",
     "klaw-sync": "3.0.2",
-    "lint-staged": "7.1.1",
-    "minimist": "1.2.0",
     "markdown-toc": "^0.12.14",
+    "minimist": "1.2.0",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.2.0",
     "nock": "8.1.0",
@@ -87,15 +79,10 @@
     "shx": "^0.3.2",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
-    "ts-loader": "^5.2.2",
     "ts-node": "^7.0.1",
-    "tsd-jsdoc": "^2.0.0-beta.3",
     "tslint": "5.7.0",
     "typescript": "^2.4.0",
-    "typescript-formatter": "^7.2.2",
-    "uglifyjs-webpack-plugin": "^1.2.3",
-    "webpack": "4.1.1",
-    "webpack-cli": "2.0.12"
+    "typescript-formatter": "^7.2.2"
   },
   "license": "Apache-2.0",
   "contributors": [
@@ -114,6 +101,12 @@
     {
       "name": "Mario Romano",
       "email": "mario.romano83@gmail.com"
+    }
+  ],
+  "bundlesize": [
+    {
+      "path": "./dist/global/alfresco-js-api.umd.js",
+      "maxSize": "70 kb"
     }
   ],
   "keywords": [

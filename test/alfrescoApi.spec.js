@@ -1,16 +1,16 @@
 /*global describe, it */
 
-var AlfrescoApi = require('../main');
+import AlfrescoApiCompatibility from 'alfresco-js-api';
 var expect = require('chai').expect;
 
-describe('Basic configuration test', function () {
+fdescribe('Basic configuration test', function () {
 
     describe('config parameter ', function () {
 
         it('Should basePath have a default value', function () {
             var config = {};
 
-            this.alfrescoJsApi = new AlfrescoApi(config);
+            this.alfrescoJsApi = new AlfrescoApiCompatibility(config);
 
             expect(this.alfrescoJsApi.ecmClient.basePath)
                 .equal('http://127.0.0.1:8080/alfresco/api/-default-/public/alfresco/versions/1');
@@ -22,7 +22,7 @@ describe('Basic configuration test', function () {
                 contextRoot: 'strangeContextRoot'
             };
 
-            this.alfrescoJsApi = new AlfrescoApi(config);
+            this.alfrescoJsApi = new AlfrescoApiCompatibility(config);
 
             expect(this.alfrescoJsApi.ecmClient.basePath)
                 .equal('http://testServer.com:1616/strangeContextRoot/api/-default-/public/alfresco/versions/1');
@@ -38,7 +38,7 @@ describe('Basic configuration test', function () {
                 disableCsrf: true
             };
 
-            this.alfrescoJsApi = new AlfrescoApi(config);
+            this.alfrescoJsApi = new AlfrescoApiCompatibility(config);
 
             expect(this.alfrescoJsApi.ecmClient.isCsrfEnabled())
                 .equal(false);
@@ -53,7 +53,7 @@ describe('Basic configuration test', function () {
                 disableCsrf: false
             };
 
-            this.alfrescoJsApi = new AlfrescoApi(config);
+            this.alfrescoJsApi = new AlfrescoApiCompatibility(config);
 
             expect(this.alfrescoJsApi.ecmClient.isCsrfEnabled())
                 .equal(true);
@@ -63,14 +63,14 @@ describe('Basic configuration test', function () {
     });
 
     describe('WithCredentials', function () {
-        
+
         it('should withCredentials true parameter should be reflected in the clients', function () {
             var config = {
                 hostEcm: 'http://testServer.com:1616',
                 contextRoot: 'strangeContextRoot',
                 withCredentials: true
             };
-            this.alfrescoJsApi = new AlfrescoApi(config);
+            this.alfrescoJsApi = new AlfrescoApiCompatibility(config);
             expect(this.alfrescoJsApi.ecmClient.isWithCredentials())
                 .equal(true);
             expect(this.alfrescoJsApi.bpmClient.isWithCredentials())
@@ -83,7 +83,7 @@ describe('Basic configuration test', function () {
                 contextRoot: 'strangeContextRoot',
                 withCredentials: false
             };
-            this.alfrescoJsApi = new AlfrescoApi(config);
+            this.alfrescoJsApi = new AlfrescoApiCompatibility(config);
             expect(this.alfrescoJsApi.ecmClient.isWithCredentials())
                 .equal(false);
             expect(this.alfrescoJsApi.bpmClient.isWithCredentials())

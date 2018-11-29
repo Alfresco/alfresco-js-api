@@ -1,14 +1,12 @@
 /*global describe, it, beforeEach */
 
-import { PersonBodyCreate } from '../src/api-new/content-rest-api/model/PersonBodyCreate';
-import { AlfrescoApiCompatibility } from '../src/alfrescoApiCompatibility';
-import { PeopleApi } from '../src/api-new/content-rest-api/api/people.api';
+import { AlfrescoApiCompatibility, PersonBodyCreate, PeopleApi } from 'alfresco-js-api';
 
 let PeopleMock = require('../test/mockObjects/mockAlfrescoApi').PeopleApi;
 
-describe('PeopleApi', function() {
+describe('Compatibility test§', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
         this.peopleMock = new PeopleMock();
 
         this.alfrescoApiCompatibility = new AlfrescoApiCompatibility({
@@ -16,7 +14,7 @@ describe('PeopleApi', function() {
         });
     });
 
-    it.only('should add a person', function(done) {
+    it.only('should add a person', function (done) {
         let personBodyCreate = new PersonBodyCreate();
         this.peopleMock.get201Response();
 
@@ -28,9 +26,9 @@ describe('PeopleApi', function() {
 
         // console.log(JSON.stringify(this.alfrescoApiCompatibility.core));
 
-        this.alfrescoApiCompatibility.core.peopleApi.addPerson(personBodyCreate).then(function() {
+        this.alfrescoApiCompatibility.core.peopleApi.addPerson(personBodyCreate).then(function () {
             done();
-        }, function(error) {
+        }, function (error) {
             console.error(error);
         });
 
