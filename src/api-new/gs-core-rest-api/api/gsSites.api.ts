@@ -25,7 +25,7 @@ import { BaseApi } from './base.api';
 * Gssites service.
 * @module GssitesApi
 */
-export class GssitesApi extends BaseApi {
+export class GsSitesApi extends BaseApi {
     /**
     * Create the Records Management (RM) site
     *

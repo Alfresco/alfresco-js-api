@@ -36,7 +36,6 @@
 import { NodeBody } from '../model/NodeBody';
 import { CopyBody } from '../model/CopyBody';
 import { MoveBody } from '../model/MoveBody';
-import { NodeAssociationPaging } from '../model/NodeAssociationPaging';
 import { NodeBodyLock } from '../model/NodeBodyLock';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { NodesApi as NewNodesApi } from '../../../../api-new/content-rest-api/api/nodes.api';

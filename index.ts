@@ -23,7 +23,7 @@ export * from './src/api-new/auth-rest-api/index';
 export * from './src/api-new/activiti-rest-api/index';
 
 export { AlfrescoContent } from './src/alfrescoContent';
-export { AlfrescoUpload } from './src/alfrescoUpload';
+export { AlfrescoUpload } from './src/api/alfrescoUpload';
 export { EcmAuth } from './src/ecmAuth';
 export { BpmAuth } from './src/bpmAuth';
 export { Oauth2Auth } from './src/oauth2Auth';

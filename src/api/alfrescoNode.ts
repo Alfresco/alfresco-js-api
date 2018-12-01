@@ -1,9 +1,15 @@
 'use strict';
 
 import { NodesApi } from './content-rest-api/src/api/nodesApi';
+import { AlfrescoApi } from '../alfrescoApi';
 
 // @deprecated 2.3.0
 export class AlfrescoNode extends NodesApi {
+
+    constructor(alfrescoApi: AlfrescoApi) {
+        super();
+        this.init(alfrescoApi);
+    }
 
     /**
      * Get Info about file or folder by given nodeId

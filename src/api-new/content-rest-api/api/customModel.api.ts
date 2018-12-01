@@ -16,6 +16,8 @@
 */
 
 import { BaseApi } from './base.api';
+import { AlfrescoApi } from '../../../alfrescoApi';
+import { AlfrescoApiClient } from '../../../alfrescoApiClient';
 
 /**
  * Comments service.
@@ -30,9 +32,15 @@ import { BaseApi } from './base.api';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class CustomModelApi extends BaseApi {
+export class CustomModelApi {
 
     private: boolean = true;
+
+    apiClient: AlfrescoApiClient;
+
+    constructor(alfrescoApi?: AlfrescoApi) {
+        this.apiClient = alfrescoApi.ecmPrivateClient;
+    }
 
     /**
      * create Custom Model

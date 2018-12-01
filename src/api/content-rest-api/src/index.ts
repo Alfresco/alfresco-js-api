@@ -34,5 +34,6 @@ import { DownloadsApi } from './api/downloadsApi';
 import { VersionsApi } from './api/versionsApi';
 import { ClassesApi } from './api/classesApi';
 import { GroupsApi } from './api/groupsApi';
+import { CustomModelApi } from './api/customModelApi';
 
-export const CONTENT_APIS = [ChangesApi, ChildAssociationsApi, FavoritesApi, NetworksApi, NodesApi, CommentsApi, PeopleApi, RatingsApi, RenditionsApi, QueriesApi, SharedlinksApi, SitesApi, TagsApi, WebscriptApi, DownloadsApi, VersionsApi, ClassesApi, GroupsApi];
+export const CONTENT_APIS = [ChangesApi, ChildAssociationsApi, FavoritesApi, NetworksApi, NodesApi, CommentsApi, PeopleApi, RatingsApi, RenditionsApi, QueriesApi, SharedlinksApi, SitesApi, TagsApi, WebscriptApi, DownloadsApi, VersionsApi, ClassesApi, GroupsApi, CustomModelApi];

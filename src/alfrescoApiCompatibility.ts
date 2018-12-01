@@ -19,16 +19,8 @@ import { AlfrescoApi } from './alfrescoApi';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
 const AlfrescoCoreRestApi = require('./api/content-rest-api/src/index');
-// let AlfrescoPrivateRestApi = require('./alfresco-private-rest-api/src/index.js');
-// let AlfrescoSearchRestApi = require('./alfresco-search-rest-api/src/index.js');
-// let AlfrescoDiscoveryRestApi = require('./alfresco-discovery-rest-api/src/index.js');
-// let AlfrescoGsClassificationRestApi = require('./alfresco-gs-classification-rest-api/src/index.js');
-// let AlfrescoGsCoreRestApi = require('./alfresco-gs-core-rest-api/src/index.js');
-// let AlfrescoAuthRestApi = require('./alfresco-auth-rest-api/src/index');
-// let AlfrescoActivitiApi = require('./alfresco-activiti-rest-api/src/index');
-//
+
 // import { APS_APIS  } from './api-new/activiti-rest-api/api/api';
-// import { AUTH_APIS  } from './api-new/auth-rest-api/api/api';
 // import { CONTENT_APIS  } from './api-new/content-rest-api/api/api';
 import { DISCOVERY_APIS } from './api-new/discovery-rest-api/api';
 import { GS_CLASSIFICATION_APIS } from './api-new/gs-classification-rest-api/api';
@@ -54,6 +46,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
     content:AlfrescoContent;
     node:AlfrescoNode;
     nodes:AlfrescoNode;
+    upload:AlfrescoUpload;
 
     constructor(config: AlfrescoApiConfig) {
         super();
@@ -74,20 +67,13 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
         this.coreStore = AlfrescoCoreRestApi.CONTENT_APIS;
 
         this._instantiateOldObjects(this.coreStore, this.core);
-
-        // //ECM-Private //rrestore
-        // //AlfrescoPrivateRestApi.ApiClient.instance = this.ecmPrivateClient;
-        // this.corePrivateStore = AlfrescoPrivateRestApi;
-        // this._instantiateObjects(this.corePrivateStore, this.core);
-        //
-
         this._instantiateNewObjects(AUTH_APIS, this.auth);
         this._instantiateNewObjects(SEARCH_APIS, this.search);
         this._instantiateNewObjects(DISCOVERY_APIS, this.discovery);
         this._instantiateNewObjects(GS_CORE_APIS, this.gsCore);
         this._instantiateNewObjects(GS_CLASSIFICATION_APIS, this.gsClassification);
 
-        this.nodes = this.node = new AlfrescoNode();
+        this.nodes = this.node = new AlfrescoNode(this);
         this.content = new AlfrescoContent(this.ecmAuth, this.ecmClient);
         this.upload = new AlfrescoUpload(this);
         this.webScript = this.core.webscriptApi;

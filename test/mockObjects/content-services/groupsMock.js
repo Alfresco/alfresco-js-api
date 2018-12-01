@@ -44,8 +44,11 @@ class TagMock extends BaseMock {
 
     getDeleteGroupSuccessfulResponse(groupName){
         nock(this.host, {'encodedQueryParams': true})
-            .delete('/alfresco/api/-default-/public/alfresco/versions/1/groups/'+groupName+'?cascade=false')
+            .delete('/alfresco/api/-default-/public/alfresco/versions/1/groups/'+groupName)
+            .query({"cascade":"false"})
             .reply(200);
+
+        "http://adfdev.envalfresco.com/alfresco/api/-default-/public/alfresco/versions/1/groups/group_test"
     }
 
     getDeleteMemberForGroupSuccessfulResponse(groupName, memberName){

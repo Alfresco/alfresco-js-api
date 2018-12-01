@@ -195,12 +195,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             throw new Error("Required param 'groupId' in deleteGroup");
         }
 
+        let cascadeDelete = opts['cascade'] ? opts['cascade'] : false;
+
         let pathParams = {
             'groupId': groupId
         };
 
         let queryParams = {
-            'cascade': opts['cascade']
+            'cascade': cascadeDelete
         };
 
         let headerParams = {

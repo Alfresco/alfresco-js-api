@@ -194,6 +194,7 @@ export class AlfrescoApiClient {
         return newParams;
     }
 
+
     /**
      * Builds a string representation of an array-type actual parameter, according to the given collection format.
      * @param {Array} param An array parameter.

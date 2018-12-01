@@ -1,6 +1,8 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
+import { NodeChildAssociationPaging } from '../../src/api-new/content-rest-api/model/nodeChildAssociationPaging';
+
 let chai = require('chai');
 let expect = chai.expect;
 let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
@@ -115,13 +117,22 @@ describe('Node', function () {
             });
         });
 
-        it('should return dates as timezone-aware', function (done) {
+        it.only('should return dates as timezone-aware', function (done) {
             this.nodeMock.get200ResponseChildrenNonUTCTimes();
 
-            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1320').then(function (data) {
+            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1320').then(function (data: NodeChildAssociationPaging) {
+
+                if ( data.list.entries[0].entry.createdAt instanceof Date){
+                    console.log('tipo');
+                }else{
+                    console.log('altro tipo' + data.list.entries[0].entry.createdAt);
+
+                }
                 expect(data.list.entries.length).to.be.equal(1);
                 expect(data.list.entries[0].entry.createdAt).to.equalTime(new Date(Date.UTC(2011, 2, 15, 17, 4, 54, 290)));
                 done();
+            }, (error) => {
+                console.log('error' + JSON.stringify(error));
             });
 
         });

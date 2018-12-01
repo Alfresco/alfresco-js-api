@@ -18,7 +18,6 @@
 import * as  Emitter_ from 'event-emitter';
 
 import { AlfrescoContent } from './alfrescoContent';
-import { AlfrescoUpload } from './alfrescoUpload';
 import { EcmAuth } from './ecmAuth';
 import { BpmAuth } from './bpmAuth';
 import { Oauth2Auth } from './oauth2Auth';
@@ -45,7 +44,6 @@ export class AlfrescoApi {
     ecmAuth: EcmAuth;
 
     content: AlfrescoContent;
-    upload: AlfrescoUpload;
     webScript: any;
 
     on = Emitter.on;

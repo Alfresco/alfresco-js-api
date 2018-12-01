@@ -1,6 +1,8 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
+import { PersonBodyCreate } from '../../src/api/content-rest-api/src/model/PersonBodyCreate';
+
 let PeopleMock = require('../../test/mockObjects/mockAlfrescoApi').PeopleApi;
 let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 
@@ -16,14 +18,14 @@ describe('PeopleApi', function () {
             hostEcm: this.hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(function() {
+        this.alfrescoJsApi.login('admin', 'admin').then(function () {
             done();
         });
     });
 
     it('should add a person', function (done) {
         this.peopleMock.get201Response();
-        let personBodyCreate = new this.alfrescoJsApi.core.PersonBodyCreate();
+        let personBodyCreate: PersonBodyCreate = new PersonBodyCreate();
 
         personBodyCreate.id = 'chewbe';
         personBodyCreate.email = 'chewbe@millenniumfalcon.com';
