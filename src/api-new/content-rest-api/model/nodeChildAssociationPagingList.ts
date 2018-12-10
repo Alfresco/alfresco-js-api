@@ -23,4 +23,19 @@ export class NodeChildAssociationPagingList {
     pagination?: Pagination;
     entries?: Array<NodeChildAssociationEntry>;
     source?: Node;
+
+    constructor(input?: any) {
+        Object.assign(this, input);
+
+        this.entries = input.entries.map((item: any) => {
+            return new NodeChildAssociationEntry(item);
+        });
+
+
+
+        //   this.pagination =  new Pagination(input.pagination);
+        // this.entries =  new NodeChildAssociationEntry(input.entries);
+        //  this.source =  new Node(input.source);
+
+    }
 }

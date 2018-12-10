@@ -2,6 +2,7 @@
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
 import { NodeChildAssociationPaging } from '../../src/api-new/content-rest-api/model/nodeChildAssociationPaging';
+import { DateAlfresco } from '../../dist/package/src/api-new/content-rest-api/model/dateAlfresco';
 
 let chai = require('chai');
 let expect = chai.expect;
@@ -122,12 +123,16 @@ describe('Node', function () {
 
             this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1320').then(function (data: NodeChildAssociationPaging) {
 
-                if ( data.list.entries[0].entry.createdAt instanceof Date){
-                    console.log('tipo');
+                if ( data.list.entries[0].entry.createdAt instanceof DateAlfresco){
+                    console.log('tipo DateAlfresco');
                 }else{
                     console.log('altro tipo' + data.list.entries[0].entry.createdAt);
 
                 }
+
+                    console.log(typeof data.list.entries[0].entry.createdAt );
+                    console.log(typeof data.list.entries[0].entry.modifiedByUser );
+
                 expect(data.list.entries.length).to.be.equal(1);
                 expect(data.list.entries[0].entry.createdAt).to.equalTime(new Date(Date.UTC(2011, 2, 15, 17, 4, 54, 290)));
                 done();

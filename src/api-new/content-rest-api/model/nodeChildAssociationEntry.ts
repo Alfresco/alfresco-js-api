@@ -19,4 +19,9 @@ import { NodeChildAssociation } from './nodeChildAssociation';
 
 export class NodeChildAssociationEntry {
     entry: NodeChildAssociation;
+
+    constructor(input?: any) {
+        Object.assign(this, input);
+        this.entry =  new NodeChildAssociation(input.entry);
+    }
 }

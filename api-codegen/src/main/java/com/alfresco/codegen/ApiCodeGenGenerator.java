@@ -288,9 +288,7 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
                 tsImport.put("classname", im);
                 tsImport.put("filename", toModelFilename(im));
 
-                if(!im.equals("Map")) {
-                    tsImports.add(tsImport);
-                }
+
             }
         }
         return tsImports;

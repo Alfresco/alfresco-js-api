@@ -7,4 +7,10 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{ {{>model
     {{/description}}
     {{#isReadOnly}}readonly {{/isReadOnly}}{{name}}{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}};
 {{/vars}}
+
+    constructor(input?: any) {
+        Object.assign(this, input);
+
+    }
+
 }{{>modelGenericEnums}}

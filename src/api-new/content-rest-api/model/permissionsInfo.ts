@@ -22,4 +22,8 @@ export class PermissionsInfo {
     inherited?: Array<PermissionElement>;
     locallySet?: Array<PermissionElement>;
     settable?: Array<string>;
+
+    constructor(obj?: any) {
+        Object.assign(this, obj);
+    }
 }

@@ -17,10 +17,10 @@
 
 import { ChildAssociationInfo } from './childAssociationInfo';
 import { ContentInfo } from './contentInfo';
-import { Node } from './node';
 import { PathInfo } from './pathInfo';
 import { PermissionsInfo } from './permissionsInfo';
 import { UserInfo } from './userInfo';
+import { DateAlfresco } from './dateAlfresco';
 
 export class NodeChildAssociation {
     id: string;
@@ -34,9 +34,9 @@ The character . must not be used at the end of the name.
     isFolder: boolean;
     isFile: boolean;
     isLocked?: boolean;
-    modifiedAt: Date;
+    modifiedAt: DateAlfresco;
     modifiedByUser: UserInfo;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     createdByUser: UserInfo;
     parentId?: string;
     isLink?: boolean;
@@ -48,4 +48,10 @@ The character . must not be used at the end of the name.
     path?: PathInfo;
     permissions?: PermissionsInfo;
     association?: ChildAssociationInfo;
+
+    constructor(input?: any) {
+        Object.assign(this, input);
+        this.modifiedAt =  new DateAlfresco(input.modifiedAt);
+        this.createdAt =  new DateAlfresco(input.createdAt);
+    }
 }

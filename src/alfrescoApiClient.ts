@@ -287,53 +287,6 @@ export class AlfrescoApiClient {
     }
 
     /**
-     * Parses an ISO-8601 string representation of a date value.
-     * @param  dateToConvert The date value as a string.
-     * @returns  The parsed date object.
-     */
-    parseDate(dateToConvert: string): Date {
-        let dateLength = 10;
-        let separatorPos = dateToConvert.substring(dateLength).search(/[\+\-]/) + dateLength;
-        let dateStr = separatorPos > dateLength ? dateToConvert.substring(0, separatorPos) : dateToConvert;
-        let tzStr = separatorPos > dateLength ? dateToConvert.substring(separatorPos) : '';
-        let parsedDate = this.parseDateTime(dateStr);
-        let tzOffsetMins = this.parseDateTimeZone(tzStr);
-        parsedDate.setTime(parsedDate.getTime() + tzOffsetMins * 60000);
-        return parsedDate;
-    }
-
-    /**
-     * Parses the date component of a ISO-8601 string representation of a date value.
-     * @param dateToConvert The date value as a string.
-     * @returns The parsed date object.
-     */
-    parseDateTime(dateToConvert: string): Date {
-        // TODO: review when Safari 10 is released
-        // return new Date(str.replace(/T/i, ' '));
-
-        // Compatible with Safari 9.1.2
-        let parts = dateToConvert.split('+');
-        let dateParts = dateToConvert.split(/[^0-9]/).map(function (s) {
-            return parseInt(s, 10);
-        });
-        return new Date(Date.UTC(dateParts[0], dateParts[1] - 1 || 0, dateParts[2] || 1, dateParts[3] || 0, dateParts[4] || 0, dateParts[5] || 0, dateParts[6] || 0));
-    }
-
-    /**
-     * Parses the timezone component of a ISO-8601 string representation of a date value.
-     * @param dateToConvert The timezone offset as a string, e.g. '+0000', '+2000' or '-0500'.
-     * @returns The number of minutes offset from UTC.
-     */
-    parseDateTimeZone(dateToConvert: string): number {
-        let match = /([\+\-])(\d{2}):?(\d{2})?/.exec(dateToConvert);
-        if (match !== null) {
-            return (parseInt(match[1] + '1') * -1 * (parseInt(match[2]) * 60) + parseInt(match[3] || '0'));
-        } else {
-            return 0;
-        }
-    }
-
-    /**
      * Converts a value to the specified type.
      * @param {(String|Object)} data The data to convert, as a string or object.
      * @param {(String|string[]|Object.<String, Object>|Function)} type The type to return. Pass a string for simple types
@@ -354,15 +307,13 @@ export class AlfrescoApiClient {
                 return parseFloat(data);
             case 'String':
                 return data !== null && data !== undefined ? String(data) : data;
-            case 'Date':
-                return data ? this.parseDate(String(data)) : null;
             default:
                 if (type === Object) {
                     // generic object, return directly
-                    return data;
+                    return new type(data);
                 } else if (typeof type === 'function') {
                     // for model type like: User
-                    return type.constructFromObject(data);
+                    return new type(data);
                 } else if (Array.isArray(type)) {
                     // for array type like: ['String']
                     let itemType = type[0];
