@@ -18,4 +18,10 @@
 export class GroupCapabilityRepresentation {
     id?: number;
     name?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

@@ -24,4 +24,12 @@ import { SecurityMarkInformation } from './securityMarkInformation';
 export class Instruction {
     classificationInformation?: ClassificationInformation;
     securityMarkInformation?: SecurityMarkInformation;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.classificationInformation = new ClassificationInformation(input.classificationInformation);
+        this.securityMarkInformation = new SecurityMarkInformation(input.securityMarkInformation);
+    }
+
 }

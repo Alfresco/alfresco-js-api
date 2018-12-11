@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **contentAvailable** | **boolean** |  | [optional] [default to null]
-**created** | **Date** |  | [optional] [default to null]
+**created** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **createdBy** | [**LightUserRepresentation**](LightUserRepresentation.md) |  | [optional] [default to null]
 **id** | **number** |  | [optional] [default to null]
 **link** | **boolean** |  | [optional] [default to null]

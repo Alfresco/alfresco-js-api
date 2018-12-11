@@ -19,4 +19,10 @@ export class DeclassificationExemption {
     id: string;
     code: string;
     description: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

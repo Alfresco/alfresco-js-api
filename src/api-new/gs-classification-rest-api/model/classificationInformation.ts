@@ -25,4 +25,10 @@ export class ClassificationInformation {
     declassifyOn?: Date;
     declassificationEvent?: string;
     exemptionIds?: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

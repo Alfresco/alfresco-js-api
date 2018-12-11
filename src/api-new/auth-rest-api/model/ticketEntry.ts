@@ -19,4 +19,11 @@ import { Ticket } from './ticket';
 
 export class TicketEntry {
     entry: Ticket;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Ticket(input.entry);
+    }
+
 }

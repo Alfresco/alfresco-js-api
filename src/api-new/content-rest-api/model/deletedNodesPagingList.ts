@@ -21,4 +21,14 @@ import { Pagination } from './pagination';
 export class DeletedNodesPagingList {
     pagination?: Pagination;
     entries?: Array<DeletedNodeEntry>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<DeletedNodeEntry>(item);
+        });
+    }
+
 }

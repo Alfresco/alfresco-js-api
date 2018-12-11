@@ -19,4 +19,11 @@ import { RecordFolderAssociationPagingList } from './recordFolderAssociationPagi
 
 export class RecordFolderAssociationPaging {
     list?: RecordFolderAssociationPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new RecordFolderAssociationPagingList(input.list);
+    }
+
 }

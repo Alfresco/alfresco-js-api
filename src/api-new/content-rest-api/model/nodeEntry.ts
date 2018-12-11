@@ -19,4 +19,11 @@ import { Node } from './node';
 
 export class NodeEntry {
     entry: Node;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Node(input.entry);
+    }
+
 }

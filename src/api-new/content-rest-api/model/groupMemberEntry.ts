@@ -19,4 +19,11 @@ import { GroupMember } from './groupMember';
 
 export class GroupMemberEntry {
     entry: GroupMember;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new GroupMember(input.entry);
+    }
+
 }

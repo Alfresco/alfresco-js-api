@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { DeletedNodeMinimalEntry } from './DeletedNodeMinimalEntry';
 
 export class DeletedNodeEntity {

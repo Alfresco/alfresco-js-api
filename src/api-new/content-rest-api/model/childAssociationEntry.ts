@@ -19,4 +19,11 @@ import { ChildAssociation } from './childAssociation';
 
 export class ChildAssociationEntry {
     entry: ChildAssociation;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new ChildAssociation(input.entry);
+    }
+
 }

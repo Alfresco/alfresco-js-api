@@ -17,4 +17,10 @@
 
 export class AuditBodyUpdate {
     isEnabled?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

@@ -19,4 +19,10 @@ export class LayoutRepresentation {
     colspan?: number;
     column?: number;
     row?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

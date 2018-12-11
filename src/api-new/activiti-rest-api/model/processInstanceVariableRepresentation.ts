@@ -19,4 +19,10 @@ export class ProcessInstanceVariableRepresentation {
     id?: string;
     type?: string;
     value?: any;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

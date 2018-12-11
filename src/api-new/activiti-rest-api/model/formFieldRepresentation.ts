@@ -51,4 +51,15 @@ export class FormFieldRepresentation {
     type?: string;
     value?: any;
     visibilityCondition?: ConditionRepresentation;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.layout = new LayoutRepresentation(input.layout);
+        this.options = input.options.map((item: any) => {
+            return new Array<OptionRepresentation>(item);
+        });
+        this.visibilityCondition = new ConditionRepresentation(input.visibilityCondition);
+    }
+
 }

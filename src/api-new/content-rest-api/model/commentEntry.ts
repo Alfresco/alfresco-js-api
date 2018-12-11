@@ -19,4 +19,11 @@ import { Comment } from './comment';
 
 export class CommentEntry {
     entry: Comment;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Comment(input.entry);
+    }
+
 }

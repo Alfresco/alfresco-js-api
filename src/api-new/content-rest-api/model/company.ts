@@ -24,4 +24,10 @@ export class Company {
     telephone?: string;
     fax?: string;
     email?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

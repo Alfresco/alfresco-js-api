@@ -15,6 +15,8 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class ModelRepresentation {
     comment?: string;
     createdBy?: number;
@@ -22,7 +24,7 @@ export class ModelRepresentation {
     description?: string;
     favorite?: boolean;
     id?: number;
-    lastUpdated?: Date;
+    lastUpdated?: DateAlfresco;
     lastUpdatedBy?: number;
     lastUpdatedByFullName?: string;
     latestVersion?: boolean;
@@ -33,4 +35,11 @@ export class ModelRepresentation {
     stencilSet?: number;
     tenantId?: number;
     version?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.lastUpdated = new DateAlfresco(input.lastUpdated);
+    }
+
 }

@@ -21,4 +21,14 @@ import { Pagination } from './pagination';
 export class AuditAppPagingList {
     pagination?: Pagination;
     entries?: Array<AuditAppEntry>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<AuditAppEntry>(item);
+        });
+    }
+
 }

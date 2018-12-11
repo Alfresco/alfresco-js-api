@@ -15,12 +15,21 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from './dateAlfresco';
 import { UserInfo } from './userInfo';
 
 export class AuditEntry {
     id: string;
     auditApplicationId: string;
     createdByUser: UserInfo;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     values?: { [key: string]: string; };
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.createdByUser = new UserInfo(input.createdByUser);
+        this.createdAt = new DateAlfresco(input.createdAt);
+    }
+
 }

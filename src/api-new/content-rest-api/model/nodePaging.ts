@@ -19,4 +19,11 @@ import { NodePagingList } from './nodePagingList';
 
 export class NodePaging {
     list?: NodePagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new NodePagingList(input.list);
+    }
+
 }

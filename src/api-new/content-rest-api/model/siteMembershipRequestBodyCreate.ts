@@ -19,4 +19,10 @@ export class SiteMembershipRequestBodyCreate {
     message?: string;
     id: string;
     title?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

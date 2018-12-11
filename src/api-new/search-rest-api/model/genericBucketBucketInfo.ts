@@ -35,4 +35,10 @@ export class GenericBucketBucketInfo {
      * Includes values less than or equal to \"end\"
      */
     endInclusive?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

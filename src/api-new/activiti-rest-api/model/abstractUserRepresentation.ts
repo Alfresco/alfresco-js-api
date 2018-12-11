@@ -23,4 +23,10 @@ export class AbstractUserRepresentation {
     id?: number;
     lastName?: string;
     pictureId?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

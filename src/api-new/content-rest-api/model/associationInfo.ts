@@ -17,4 +17,10 @@
 
 export class AssociationInfo {
     assocType: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

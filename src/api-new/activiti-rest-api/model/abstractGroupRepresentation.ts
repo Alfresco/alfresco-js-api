@@ -20,4 +20,10 @@ export class AbstractGroupRepresentation {
     id?: number;
     name?: string;
     status?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

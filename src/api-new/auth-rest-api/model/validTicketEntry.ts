@@ -19,4 +19,11 @@ import { ValidTicket } from './validTicket';
 
 export class ValidTicketEntry {
     entry: ValidTicket;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new ValidTicket(input.entry);
+    }
+
 }

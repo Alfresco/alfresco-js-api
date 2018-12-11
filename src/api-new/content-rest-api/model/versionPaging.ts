@@ -19,4 +19,11 @@ import { VersionPagingList } from './versionPagingList';
 
 export class VersionPaging {
     list?: VersionPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new VersionPagingList(input.list);
+    }
+
 }

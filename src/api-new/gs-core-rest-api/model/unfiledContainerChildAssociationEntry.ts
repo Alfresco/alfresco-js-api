@@ -19,4 +19,11 @@ import { UnfiledContainerChildAssociation } from './unfiledContainerChildAssocia
 
 export class UnfiledContainerChildAssociationEntry {
     entry: UnfiledContainerChildAssociation;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new UnfiledContainerChildAssociation(input.entry);
+    }
+
 }

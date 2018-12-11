@@ -28,4 +28,13 @@ export class EndpointConfigurationRepresentation {
     protocol?: string;
     requestHeaders?: Array<EndpointRequestHeaderRepresentation>;
     tenantId?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.requestHeaders = input.requestHeaders.map((item: any) => {
+            return new Array<EndpointRequestHeaderRepresentation>(item);
+        });
+    }
+
 }

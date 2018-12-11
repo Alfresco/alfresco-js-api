@@ -22,4 +22,11 @@ import { ResultSetPagingList } from './resultSetPagingList';
  */
 export class ResultSetPaging {
     list?: ResultSetPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new ResultSetPagingList(input.list);
+    }
+
 }

@@ -18,4 +18,10 @@
 export class EndpointRequestHeaderRepresentation {
     name?: string;
     value?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

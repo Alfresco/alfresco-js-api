@@ -15,11 +15,21 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class EndpointBasicAuthRepresentation {
-    created?: Date;
+    created?: DateAlfresco;
     id?: number;
-    lastUpdated?: Date;
+    lastUpdated?: DateAlfresco;
     name?: string;
     tenantId?: number;
     username?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.created = new DateAlfresco(input.created);
+        this.lastUpdated = new DateAlfresco(input.lastUpdated);
+    }
+
 }

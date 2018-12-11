@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { PathElement } from '../../content-rest-api/model/pathElement';
+import { PathElement } from '../../content-rest-api/model/pathElement';;
 
 /**
  * An ordered list of ancestors starting with the classification guide and ending with the parent of this topic.
@@ -23,4 +23,10 @@ This field is only returned when requested.
 
  */
 export class Path extends Array<PathElement> {
+
+    constructor(input?: any) {
+        super();
+        Object.assign(this, input);
+    }
+
 }

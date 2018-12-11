@@ -26,4 +26,10 @@ cm:name:example cm:name:example
 
  */
 export class RequestTemplates extends Array<RequestTemplatesInner> {
+
+    constructor(input?: any) {
+        super();
+        Object.assign(this, input);
+    }
+
 }

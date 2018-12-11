@@ -15,9 +15,18 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class ImageUploadRepresentation {
-    created?: Date;
+    created?: DateAlfresco;
     id?: number;
     name?: string;
     userId?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.created = new DateAlfresco(input.created);
+    }
+
 }

@@ -22,4 +22,12 @@ export class PublishIdentityInfoRepresentation {
     group?: LightGroupRepresentation;
     person?: LightUserRepresentation;
     type?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.group = new LightGroupRepresentation(input.group);
+        this.person = new LightUserRepresentation(input.person);
+    }
+
 }

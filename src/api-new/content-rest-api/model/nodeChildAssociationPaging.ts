@@ -21,7 +21,9 @@ export class NodeChildAssociationPaging {
     list?: NodeChildAssociationPagingList;
 
     constructor(input?: any) {
+
         Object.assign(this, input);
-        this.list =  new NodeChildAssociationPagingList(input.list);
+        this.list = new NodeChildAssociationPagingList(input.list);
     }
+
 }

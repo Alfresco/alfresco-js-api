@@ -17,4 +17,10 @@
 
 export class ValidTicket {
     id?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

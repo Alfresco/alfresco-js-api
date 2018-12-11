@@ -19,4 +19,10 @@ export class FormVariableRepresentation {
     name?: string;
     type?: string;
     value?: any;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

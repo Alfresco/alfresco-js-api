@@ -22,4 +22,13 @@ export class ResultListDataRepresentationAlfrescoEndpointRepresentation {
     size?: number;
     start?: number;
     total?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.data = input.data.map((item: any) => {
+            return new Array<AlfrescoEndpointRepresentation>(item);
+        });
+    }
+
 }

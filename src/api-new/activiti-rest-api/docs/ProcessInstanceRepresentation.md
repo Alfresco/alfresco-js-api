@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **businessKey** | **string** |  | [optional] [default to null]
-**ended** | **Date** |  | [optional] [default to null]
+**ended** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **graphicalNotationDefined** | **boolean** |  | [optional] [default to null]
 **id** | **string** |  | [optional] [default to null]
 **name** | **string** |  | [optional] [default to null]
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **processDefinitionName** | **string** |  | [optional] [default to null]
 **processDefinitionVersion** | **number** |  | [optional] [default to null]
 **startFormDefined** | **boolean** |  | [optional] [default to null]
-**started** | **Date** |  | [optional] [default to null]
+**started** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **startedBy** | [**LightUserRepresentation**](LightUserRepresentation.md) |  | [optional] [default to null]
 **suspended** | **boolean** |  | [optional] [default to null]
 **tenantId** | **string** |  | [optional] [default to null]

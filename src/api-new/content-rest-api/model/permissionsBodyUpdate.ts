@@ -20,4 +20,13 @@ import { PermissionElement } from './permissionElement';
 export class PermissionsBodyUpdate {
     isInheritanceEnabled?: boolean;
     locallySet?: Array<PermissionElement>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.locallySet = input.locallySet.map((item: any) => {
+            return new Array<PermissionElement>(item);
+        });
+    }
+
 }

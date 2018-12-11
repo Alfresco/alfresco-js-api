@@ -15,11 +15,13 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class TaskQueryRepresentation {
     appDefinitionId?: number;
     assignment?: string;
-    dueAfter?: Date;
-    dueBefore?: Date;
+    dueAfter?: DateAlfresco;
+    dueBefore?: DateAlfresco;
     includeProcessInstance?: boolean;
     page?: number;
     processDefinitionId?: string;
@@ -30,19 +32,27 @@ export class TaskQueryRepresentation {
     state?: TaskQueryRepresentation.StateEnum;
     taskId?: string;
     text?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.dueAfter = new DateAlfresco(input.dueAfter);
+        this.dueBefore = new DateAlfresco(input.dueBefore);
+    }
+
 }
-
 export namespace TaskQueryRepresentation {
-    export enum SortEnum {
-        CreatedDesc = 'created-desc',
-        CreatedAsc = 'created-asc',
-        DueDesc = 'due-desc',
-        DueAsc = 'due-asc'
-    }
-
-    export enum StateEnum {
-        Active = 'active',
-        Completed = 'completed',
-        All = 'all'
-    }
+    export type SortEnum = 'created-desc' | 'created-asc' | 'due-desc' | 'due-asc';
+    export const SortEnum = {
+        CreatedDesc: 'created-desc' as SortEnum,
+        CreatedAsc: 'created-asc' as SortEnum,
+        DueDesc: 'due-desc' as SortEnum,
+        DueAsc: 'due-asc' as SortEnum
+    };
+    export type StateEnum = 'active' | 'completed' | 'all';
+    export const StateEnum = {
+        Active: 'active' as StateEnum,
+        Completed: 'completed' as StateEnum,
+        All: 'all' as StateEnum
+    };
 }

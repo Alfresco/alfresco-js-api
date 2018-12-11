@@ -15,12 +15,13 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { LightUserRepresentation } from './lightUserRepresentation';
 import { RestVariable } from './restVariable';
 
 export class ProcessInstanceRepresentation {
     businessKey?: string;
-    ended?: Date;
+    ended?: DateAlfresco;
     graphicalNotationDefined?: boolean;
     id?: string;
     name?: string;
@@ -32,9 +33,21 @@ export class ProcessInstanceRepresentation {
     processDefinitionName?: string;
     processDefinitionVersion?: number;
     startFormDefined?: boolean;
-    started?: Date;
+    started?: DateAlfresco;
     startedBy?: LightUserRepresentation;
     suspended?: boolean;
     tenantId?: string;
     variables?: Array<RestVariable>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.ended = new DateAlfresco(input.ended);
+        this.started = new DateAlfresco(input.started);
+        this.startedBy = new LightUserRepresentation(input.startedBy);
+        this.variables = input.variables.map((item: any) => {
+            return new Array<RestVariable>(item);
+        });
+    }
+
 }

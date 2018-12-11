@@ -83,4 +83,10 @@ export class RequestStats {
      * A list of percentile values, e.g. \"1,99,99.9\"
      */
     percentiles?: Array<number>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

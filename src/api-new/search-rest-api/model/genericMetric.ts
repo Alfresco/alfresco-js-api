@@ -28,4 +28,10 @@ export class GenericMetric {
 
      */
     value?: any;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

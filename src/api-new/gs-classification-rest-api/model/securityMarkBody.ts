@@ -18,4 +18,10 @@
 export class SecurityMarkBody {
     id: string;
     groupId: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

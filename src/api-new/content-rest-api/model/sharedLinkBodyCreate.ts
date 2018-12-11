@@ -15,7 +15,16 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from './dateAlfresco';
+
 export class SharedLinkBodyCreate {
     nodeId: string;
-    expiresAt?: Date;
+    expiresAt?: DateAlfresco;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.expiresAt = new DateAlfresco(input.expiresAt);
+    }
+
 }

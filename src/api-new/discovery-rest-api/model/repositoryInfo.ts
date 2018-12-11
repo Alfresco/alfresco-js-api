@@ -26,4 +26,16 @@ export class RepositoryInfo {
     status: StatusInfo;
     license?: LicenseInfo;
     modules?: Array<ModuleInfo>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.version = new VersionInfo(input.version);
+        this.status = new StatusInfo(input.status);
+        this.license = new LicenseInfo(input.license);
+        this.modules = input.modules.map((item: any) => {
+            return new Array<ModuleInfo>(item);
+        });
+    }
+
 }

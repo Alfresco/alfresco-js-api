@@ -22,4 +22,11 @@ export class DataSourceRepresentation {
     id?: number;
     name?: string;
     tenantId?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.config = new DataSourceConfigRepresentation(input.config);
+    }
+
 }

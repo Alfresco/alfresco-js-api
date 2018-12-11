@@ -33,4 +33,17 @@ The character . must not be used at the end of the name.
     association?: NodeBodyCreateAssociation;
     secondaryChildren?: Array<ChildAssociationBody>;
     targets?: Array<AssociationBody>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.association = new NodeBodyCreateAssociation(input.association);
+        this.secondaryChildren = input.secondaryChildren.map((item: any) => {
+            return new Array<ChildAssociationBody>(item);
+        });
+        this.targets = input.targets.map((item: any) => {
+            return new Array<AssociationBody>(item);
+        });
+    }
+
 }

@@ -16,6 +16,7 @@
 */
 
 import { ClassificationGuideInTopic } from './classificationGuideInTopic';
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { Instruction } from './instruction';
 import { Path } from './path';
 
@@ -28,11 +29,21 @@ export class Topic {
      */
     hasInstruction: boolean;
     instruction?: Instruction;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     /**
      * Flag indicating whether the topic has subtopics. This field is only included when requested.
      */
     hasSubtopics?: boolean;
     path?: Path;
     classificationGuide?: ClassificationGuideInTopic;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.instruction = new Instruction(input.instruction);
+        this.createdAt = new DateAlfresco(input.createdAt);
+        this.path = new Path(input.path);
+        this.classificationGuide = new ClassificationGuideInTopic(input.classificationGuide);
+    }
+
 }

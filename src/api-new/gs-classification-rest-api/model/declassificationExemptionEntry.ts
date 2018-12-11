@@ -19,4 +19,11 @@ import { DeclassificationExemption } from './declassificationExemption';
 
 export class DeclassificationExemptionEntry {
     entry: DeclassificationExemption;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new DeclassificationExemption(input.entry);
+    }
+
 }

@@ -19,4 +19,11 @@ import { ProbeEntryEntry } from './probeEntryEntry';
 
 export class ProbeEntry {
     entry?: ProbeEntryEntry;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new ProbeEntryEntry(input.entry);
+    }
+
 }

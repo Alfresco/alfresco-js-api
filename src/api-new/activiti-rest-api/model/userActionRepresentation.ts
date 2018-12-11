@@ -19,4 +19,10 @@ export class UserActionRepresentation {
     action?: string;
     newPassword?: string;
     oldPassword?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

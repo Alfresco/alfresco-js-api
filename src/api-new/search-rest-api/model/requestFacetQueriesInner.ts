@@ -24,4 +24,10 @@ export class RequestFacetQueriesInner {
      * A label to include in place of the facet query
      */
     label?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

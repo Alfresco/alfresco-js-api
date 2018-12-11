@@ -15,12 +15,14 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class TaskUpdateRepresentation {
     category?: string;
     categorySet?: boolean;
     description?: string;
     descriptionSet?: boolean;
-    dueDate?: Date;
+    dueDate?: DateAlfresco;
     dueDateSet?: boolean;
     formKey?: string;
     formKeySet?: boolean;
@@ -30,4 +32,11 @@ export class TaskUpdateRepresentation {
     parentTaskIdSet?: boolean;
     priority?: number;
     prioritySet?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.dueDate = new DateAlfresco(input.dueDate);
+    }
+
 }

@@ -18,6 +18,12 @@
 export class GroupMembershipBodyCreate {
     id: string;
     memberType: GroupMembershipBodyCreate.MemberTypeEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace GroupMembershipBodyCreate {
     export type MemberTypeEnum = 'GROUP' | 'PERSON';

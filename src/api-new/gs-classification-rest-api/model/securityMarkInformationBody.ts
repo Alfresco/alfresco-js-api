@@ -19,4 +19,11 @@ import { SecurityMarksBody } from './securityMarksBody';
 
 export class SecurityMarkInformationBody {
     add: SecurityMarksBody;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.add = new SecurityMarksBody(input.add);
+    }
+
 }

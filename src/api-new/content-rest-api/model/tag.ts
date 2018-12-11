@@ -18,4 +18,10 @@
 export class Tag {
     id: string;
     tag: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

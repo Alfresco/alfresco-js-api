@@ -19,4 +19,11 @@ import { DeclassificationExemptionsPagingList } from './declassificationExemptio
 
 export class DeclassificationExemptionsPaging {
     list?: DeclassificationExemptionsPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new DeclassificationExemptionsPagingList(input.list);
+    }
+
 }

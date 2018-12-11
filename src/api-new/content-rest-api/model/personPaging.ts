@@ -19,4 +19,11 @@ import { PersonPagingList } from './personPagingList';
 
 export class PersonPaging {
     list?: PersonPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new PersonPagingList(input.list);
+    }
+
 }

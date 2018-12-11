@@ -19,4 +19,11 @@ import { SharedLinkPagingList } from './sharedLinkPagingList';
 
 export class SharedLinkPaging {
     list?: SharedLinkPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new SharedLinkPagingList(input.list);
+    }
+
 }

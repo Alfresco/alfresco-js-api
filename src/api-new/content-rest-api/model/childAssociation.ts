@@ -18,4 +18,10 @@
 export class ChildAssociation {
     childId: string;
     assocType: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

@@ -19,4 +19,11 @@ import { ActionDefinitionListList } from './actionDefinitionListList';
 
 export class ActionDefinitionList {
     list?: ActionDefinitionListList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new ActionDefinitionListList(input.list);
+    }
+
 }

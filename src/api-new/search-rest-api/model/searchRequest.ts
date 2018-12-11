@@ -59,4 +59,35 @@ export class SearchRequest {
     limits?: RequestLimits;
     highlight?: RequestHighlight;
     ranges?: Array<RequestRange>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.query = new RequestQuery(input.query);
+        this.paging = new RequestPagination(input.paging);
+        this.include = new RequestInclude(input.include);
+        this.fields = new RequestFields(input.fields);
+        this.sort = new RequestSortDefinition(input.sort);
+        this.templates = new RequestTemplates(input.templates);
+        this.defaults = new RequestDefaults(input.defaults);
+        this.localization = new RequestLocalization(input.localization);
+        this.filterQueries = new RequestFilterQueries(input.filterQueries);
+        this.facetQueries = new RequestFacetQueries(input.facetQueries);
+        this.facetFields = new RequestFacetFields(input.facetFields);
+        this.facetIntervals = new RequestFacetIntervals(input.facetIntervals);
+        this.pivots = input.pivots.map((item: any) => {
+            return new Array<RequestPivot>(item);
+        });
+        this.stats = input.stats.map((item: any) => {
+            return new Array<RequestStats>(item);
+        });
+        this.spellcheck = new RequestSpellcheck(input.spellcheck);
+        this.scope = new RequestScope(input.scope);
+        this.limits = new RequestLimits(input.limits);
+        this.highlight = new RequestHighlight(input.highlight);
+        this.ranges = input.ranges.map((item: any) => {
+            return new Array<RequestRange>(item);
+        });
+    }
+
 }

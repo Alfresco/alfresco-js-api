@@ -18,4 +18,10 @@
 export class AppDefinitionPublishRepresentation {
     comment?: string;
     force?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

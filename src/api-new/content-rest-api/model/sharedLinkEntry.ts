@@ -19,4 +19,11 @@ import { SharedLink } from './sharedLink';
 
 export class SharedLinkEntry {
     entry: SharedLink;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new SharedLink(input.entry);
+    }
+
 }

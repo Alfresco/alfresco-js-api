@@ -15,17 +15,26 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { FormDefinitionRepresentation } from './formDefinitionRepresentation';
 
 export class FormRepresentation {
     description?: string;
     formDefinition?: FormDefinitionRepresentation;
     id?: number;
-    lastUpdated?: Date;
+    lastUpdated?: DateAlfresco;
     lastUpdatedBy?: number;
     lastUpdatedByFullName?: string;
     name?: string;
     referenceId?: number;
     stencilSetId?: number;
     version?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.formDefinition = new FormDefinitionRepresentation(input.formDefinition);
+        this.lastUpdated = new DateAlfresco(input.lastUpdated);
+    }
+
 }

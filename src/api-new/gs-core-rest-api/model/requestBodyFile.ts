@@ -17,4 +17,10 @@
 
 export class RequestBodyFile {
     targetParentId: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

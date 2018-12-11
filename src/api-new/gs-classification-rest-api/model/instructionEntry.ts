@@ -19,4 +19,11 @@ import { Instruction } from './instruction';
 
 export class InstructionEntry {
     entry: Instruction;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Instruction(input.entry);
+    }
+
 }

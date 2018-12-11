@@ -20,4 +20,10 @@ export class SharedLinkBodyEmail {
     message?: string;
     locale?: string;
     recipientEmails?: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

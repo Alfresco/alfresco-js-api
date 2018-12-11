@@ -29,4 +29,13 @@ export class RequestFacetFields {
 
      */
     facets?: Array<RequestFacetField>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.facets = input.facets.map((item: any) => {
+            return new Array<RequestFacetField>(item);
+        });
+    }
+
 }

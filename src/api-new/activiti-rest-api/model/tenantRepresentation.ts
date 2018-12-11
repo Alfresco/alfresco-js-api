@@ -15,13 +15,23 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class TenantRepresentation {
     active?: boolean;
-    created?: Date;
+    created?: DateAlfresco;
     domain?: string;
     id?: number;
-    lastUpdate?: Date;
+    lastUpdate?: DateAlfresco;
     logoId?: number;
     maxUsers?: number;
     name?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.created = new DateAlfresco(input.created);
+        this.lastUpdate = new DateAlfresco(input.lastUpdate);
+    }
+
 }

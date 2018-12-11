@@ -18,4 +18,10 @@
 export class UserFilterOrderRepresentation {
     appId?: number;
     order?: Array<number>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

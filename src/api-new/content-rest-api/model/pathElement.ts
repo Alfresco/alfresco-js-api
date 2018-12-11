@@ -20,4 +20,10 @@ export class PathElement {
     name?: string;
     nodeType?: string;
     aspectNames?: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

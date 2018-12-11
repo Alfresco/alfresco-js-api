@@ -21,4 +21,14 @@ import { RenditionEntry } from './renditionEntry';
 export class RenditionPagingList {
     pagination?: Pagination;
     entries?: Array<RenditionEntry>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<RenditionEntry>(item);
+        });
+    }
+
 }

@@ -15,6 +15,8 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from './dateAlfresco';
+
 /**
  * Activities describe any past activity in a site,
 for example creating an item of content, commenting on a node,
@@ -37,7 +39,7 @@ export class Activity {
     /**
      * The date time at which the activity was performed
      */
-    postedAt?: Date;
+    postedAt?: DateAlfresco;
     /**
      * The feed on which this activity was posted
      */
@@ -50,4 +52,11 @@ export class Activity {
      * The type of the activity posted
      */
     activityType: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.postedAt = new DateAlfresco(input.postedAt);
+    }
+
 }

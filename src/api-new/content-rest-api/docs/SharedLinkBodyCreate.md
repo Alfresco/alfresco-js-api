@@ -4,6 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **nodeId** | **string** |  | [default to null]
-**expiresAt** | **Date** |  | [optional] [default to null]
+**expiresAt** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 
 

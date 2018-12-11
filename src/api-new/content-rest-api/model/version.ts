@@ -16,6 +16,7 @@
 */
 
 import { ContentInfo } from './contentInfo';
+import { DateAlfresco } from './dateAlfresco';
 import { UserInfo } from './userInfo';
 
 export class Version {
@@ -30,9 +31,18 @@ The character . must not be used at the end of the name.
     nodeType: string;
     isFolder: boolean;
     isFile: boolean;
-    modifiedAt: Date;
+    modifiedAt: DateAlfresco;
     modifiedByUser: UserInfo;
     content?: ContentInfo;
     aspectNames?: Array<string>;
     properties?: { [key: string]: string; };
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.modifiedAt = new DateAlfresco(input.modifiedAt);
+        this.modifiedByUser = new UserInfo(input.modifiedByUser);
+        this.content = new ContentInfo(input.content);
+    }
+
 }

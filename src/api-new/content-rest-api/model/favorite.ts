@@ -15,6 +15,8 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from './dateAlfresco';
+
 /**
  * A favorite describes an Alfresco entity that a person has marked as a favorite.
 The target can be a site, file or folder.
@@ -28,6 +30,13 @@ export class Favorite {
     /**
      * The time the object was made a favorite.
      */
-    createdAt?: Date;
+    createdAt?: DateAlfresco;
     target: any;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.createdAt = new DateAlfresco(input.createdAt);
+    }
+
 }

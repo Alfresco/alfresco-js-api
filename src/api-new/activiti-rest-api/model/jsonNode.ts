@@ -37,18 +37,24 @@ export class JsonNode {
     short?: boolean;
     textual?: boolean;
     valueNode?: boolean;
-}
 
-export namespace JsonNode {
-    export enum NodeTypeEnum {
-        ARRAY = 'ARRAY',
-        BINARY = 'BINARY',
-        BOOLEAN = 'BOOLEAN',
-        MISSING = 'MISSING',
-        NULL = 'NULL',
-        NUMBER = 'NUMBER',
-        OBJECT = 'OBJECT',
-        POJO = 'POJO',
-        STRING = 'STRING'
+    constructor(input?: any) {
+
+        Object.assign(this, input);
     }
+
+}
+export namespace JsonNode {
+    export type NodeTypeEnum = 'ARRAY' | 'BINARY' | 'BOOLEAN' | 'MISSING' | 'NULL' | 'NUMBER' | 'OBJECT' | 'POJO' | 'STRING';
+    export const NodeTypeEnum = {
+        ARRAY: 'ARRAY' as NodeTypeEnum,
+        BINARY: 'BINARY' as NodeTypeEnum,
+        BOOLEAN: 'BOOLEAN' as NodeTypeEnum,
+        MISSING: 'MISSING' as NodeTypeEnum,
+        NULL: 'NULL' as NodeTypeEnum,
+        NUMBER: 'NUMBER' as NodeTypeEnum,
+        OBJECT: 'OBJECT' as NodeTypeEnum,
+        POJO: 'POJO' as NodeTypeEnum,
+        STRING: 'STRING' as NodeTypeEnum
+    };
 }

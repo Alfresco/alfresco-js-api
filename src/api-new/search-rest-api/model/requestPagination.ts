@@ -24,4 +24,10 @@ export class RequestPagination {
      * The number of items to skip from the start of the query set
      */
     skipCount?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

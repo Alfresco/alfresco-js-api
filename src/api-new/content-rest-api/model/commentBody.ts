@@ -17,4 +17,10 @@
 
 export class CommentBody {
     content: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

@@ -19,4 +19,11 @@ import { UnfiledRecordFolderAssociationPagingList } from './unfiledRecordFolderA
 
 export class UnfiledRecordFolderAssociationPaging {
     list?: UnfiledRecordFolderAssociationPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new UnfiledRecordFolderAssociationPagingList(input.list);
+    }
+
 }

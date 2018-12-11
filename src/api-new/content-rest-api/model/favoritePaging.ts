@@ -19,4 +19,11 @@ import { FavoritePagingList } from './favoritePagingList';
 
 export class FavoritePaging {
     list?: FavoritePagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new FavoritePagingList(input.list);
+    }
+
 }

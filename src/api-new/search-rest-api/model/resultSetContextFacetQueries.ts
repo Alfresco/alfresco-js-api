@@ -22,4 +22,10 @@ export class ResultSetContextFacetQueries {
      */
     filterQuery?: string;
     count?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

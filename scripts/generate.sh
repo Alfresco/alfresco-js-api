@@ -7,6 +7,7 @@ show_help() {
     echo "Usage: generate.sh -def definitions/alfresco-core.yaml -o example  "
     echo "-def definition file where to generate the api"
     echo "-o output folder of the generated code"
+    echo "-skip-build-codegen skip code generation build"
     echo ""
 }
 

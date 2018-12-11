@@ -24,6 +24,12 @@ export class RequestScope {
 
      */
     locations?: RequestScope.LocationsEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace RequestScope {
     export type LocationsEnum = 'nodes' | 'versions' | 'deleted-nodes';

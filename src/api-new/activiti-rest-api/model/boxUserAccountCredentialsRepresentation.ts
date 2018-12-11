@@ -15,8 +15,17 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class BoxUserAccountCredentialsRepresentation {
     authenticationURL?: string;
-    expireDate?: Date;
+    expireDate?: DateAlfresco;
     ownerEmail?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.expireDate = new DateAlfresco(input.expireDate);
+    }
+
 }

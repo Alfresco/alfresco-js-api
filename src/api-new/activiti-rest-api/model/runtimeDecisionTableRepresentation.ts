@@ -25,4 +25,10 @@ export class RuntimeDecisionTableRepresentation {
     resourceName?: string;
     tenantId?: string;
     version?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

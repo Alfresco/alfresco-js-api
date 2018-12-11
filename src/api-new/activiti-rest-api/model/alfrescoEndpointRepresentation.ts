@@ -15,12 +15,14 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class AlfrescoEndpointRepresentation {
     accountUsername?: string;
     alfrescoTenantId?: string;
-    created?: Date;
+    created?: DateAlfresco;
     id?: number;
-    lastUpdated?: Date;
+    lastUpdated?: DateAlfresco;
     name?: string;
     repositoryUrl?: string;
     secret?: string;
@@ -28,4 +30,12 @@ export class AlfrescoEndpointRepresentation {
     tenantId?: number;
     useShareConnector?: boolean;
     version?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.created = new DateAlfresco(input.created);
+        this.lastUpdated = new DateAlfresco(input.lastUpdated);
+    }
+
 }

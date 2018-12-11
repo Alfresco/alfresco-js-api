@@ -18,4 +18,10 @@
 export class ClassificationReasonBody {
     code: string;
     description: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

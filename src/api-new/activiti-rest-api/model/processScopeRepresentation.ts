@@ -37,4 +37,10 @@ export class ProcessScopeRepresentation {
     processModelType?: number;
     responseVariables?: { [key: string]: Array<VariableScopeRepresentation>; };
     reusableFieldMapping?: { [key: string]: Array<VariableMappingRepresentation>; };
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

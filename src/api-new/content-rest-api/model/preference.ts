@@ -28,4 +28,10 @@ export class Preference {
      * The value of the preference. Note that this can be of any JSON type.
      */
     value?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

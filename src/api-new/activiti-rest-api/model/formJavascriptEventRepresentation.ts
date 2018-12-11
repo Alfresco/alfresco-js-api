@@ -18,4 +18,10 @@
 export class FormJavascriptEventRepresentation {
     event?: string;
     javascriptLogic?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

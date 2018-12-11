@@ -25,4 +25,19 @@ export class FormScopeRepresentation {
     id?: number;
     name?: string;
     outcomes?: Array<FormOutcomeRepresentation>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.fieldVariables = input.fieldVariables.map((item: any) => {
+            return new Array<FormFieldRepresentation>(item);
+        });
+        this.fields = input.fields.map((item: any) => {
+            return new Array<FormFieldRepresentation>(item);
+        });
+        this.outcomes = input.outcomes.map((item: any) => {
+            return new Array<FormOutcomeRepresentation>(item);
+        });
+    }
+
 }

@@ -17,4 +17,10 @@
 
 export class FormIdentifierRepresentation {
     formId?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

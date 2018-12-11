@@ -19,4 +19,10 @@ export class Capabilities {
     isAdmin?: boolean;
     isGuest?: boolean;
     isMutable?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

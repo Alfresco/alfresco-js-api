@@ -19,4 +19,11 @@ import { GroupMemberPagingList } from './groupMemberPagingList';
 
 export class GroupMemberPaging {
     list?: GroupMemberPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new GroupMemberPagingList(input.list);
+    }
+
 }

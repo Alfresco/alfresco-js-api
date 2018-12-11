@@ -21,4 +21,13 @@ export class PathInfo {
     elements?: Array<PathElement>;
     name?: string;
     isComplete?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.elements = input.elements.map((item: any) => {
+            return new Array<PathElement>(item);
+        });
+    }
+
 }

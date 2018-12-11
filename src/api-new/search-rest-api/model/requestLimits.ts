@@ -27,4 +27,10 @@ export class RequestLimits {
      * Maximum count of post query permission evaluations
      */
     permissionEvaluationCount?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

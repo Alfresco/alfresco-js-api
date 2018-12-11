@@ -28,4 +28,10 @@ export class PasswordResetBody {
      * the workflow key provided in the reset password email
      */
     key: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

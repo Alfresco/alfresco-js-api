@@ -25,4 +25,10 @@ export class RequestHighlightFields {
     mergeContiguous?: boolean;
     prefix?: string;
     postfix?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

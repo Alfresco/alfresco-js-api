@@ -19,4 +19,10 @@ export class PasswordValidationConstraints {
     minLength?: number;
     passwordCriteriaMessage?: string;
     regularExpression?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

@@ -22,4 +22,10 @@ The list applies to a returned individual entity or entries within a collection.
 If the **include** parameter is used aswell then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
  */
 export class RequestFields extends Array<string> {
+
+    constructor(input?: any) {
+        super();
+        Object.assign(this, input);
+    }
+
 }

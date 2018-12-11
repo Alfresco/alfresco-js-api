@@ -19,4 +19,11 @@ import { RecordFolder } from './recordFolder';
 
 export class RecordFolderEntry {
     entry: RecordFolder;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new RecordFolder(input.entry);
+    }
+
 }

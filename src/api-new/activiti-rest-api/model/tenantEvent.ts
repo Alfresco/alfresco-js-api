@@ -15,12 +15,21 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class TenantEvent {
-    eventTime?: Date;
+    eventTime?: DateAlfresco;
     eventType?: string;
     extraInfo?: string;
     id?: number;
     tenantId?: number;
     userId?: number;
     userName?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.eventTime = new DateAlfresco(input.eventTime);
+    }
+
 }

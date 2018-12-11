@@ -18,4 +18,10 @@
 import { SecurityMarkBody } from './securityMarkBody';
 
 export class SecurityMarksBody extends Array<SecurityMarkBody> {
+
+    constructor(input?: any) {
+        super();
+        Object.assign(this, input);
+    }
+
 }

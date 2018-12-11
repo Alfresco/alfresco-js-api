@@ -19,4 +19,11 @@ import { SecurityControlSetting } from './securityControlSetting';
 
 export class SecurityControlSettingEntry {
     entry: SecurityControlSetting;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new SecurityControlSetting(input.entry);
+    }
+
 }

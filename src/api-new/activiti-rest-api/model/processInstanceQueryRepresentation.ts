@@ -24,6 +24,12 @@ export class ProcessInstanceQueryRepresentation {
     sort?: ProcessInstanceQueryRepresentation.SortEnum;
     start?: number;
     state?: ProcessInstanceQueryRepresentation.StateEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace ProcessInstanceQueryRepresentation {
     export type SortEnum = 'created-desc' | 'created-asc' | 'ended-desc' | 'ended-asc';

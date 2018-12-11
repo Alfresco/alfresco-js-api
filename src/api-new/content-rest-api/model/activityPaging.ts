@@ -19,4 +19,11 @@ import { ActivityPagingList } from './activityPagingList';
 
 export class ActivityPaging {
     list?: ActivityPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new ActivityPagingList(input.list);
+    }
+
 }

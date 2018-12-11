@@ -19,4 +19,11 @@ import { UnfiledRecordFolderChildAssociation } from './unfiledRecordFolderChildA
 
 export class UnfiledRecordFolderChildAssociationEntry {
     entry: UnfiledRecordFolderChildAssociation;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new UnfiledRecordFolderChildAssociation(input.entry);
+    }
+
 }

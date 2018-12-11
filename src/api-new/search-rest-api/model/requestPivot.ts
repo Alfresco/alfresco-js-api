@@ -24,4 +24,13 @@ export class RequestPivot {
      */
     key?: string;
     pivots?: Array<RequestPivot>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pivots = input.pivots.map((item: any) => {
+            return new Array<RequestPivot>(item);
+        });
+    }
+
 }

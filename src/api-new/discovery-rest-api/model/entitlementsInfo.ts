@@ -20,4 +20,10 @@ export class EntitlementsInfo {
     maxDocs?: number;
     isClusterEnabled?: boolean;
     isCryptodocEnabled?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from './dateAlfresco';
 import { RatingAggregate } from './ratingAggregate';
 
 /**
@@ -26,9 +27,17 @@ ratings and to add a new rating.
 export class Rating {
     id: string;
     aggregate?: RatingAggregate;
-    ratedAt?: Date;
+    ratedAt?: DateAlfresco;
     /**
      * The rating. The type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
      */
     myRating?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.aggregate = new RatingAggregate(input.aggregate);
+        this.ratedAt = new DateAlfresco(input.ratedAt);
+    }
+
 }

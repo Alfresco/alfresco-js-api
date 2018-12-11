@@ -19,4 +19,11 @@ import { ActionExecResult } from './actionExecResult';
 
 export class ActionExecResultEntry {
     entry: ActionExecResult;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new ActionExecResult(input.entry);
+    }
+
 }

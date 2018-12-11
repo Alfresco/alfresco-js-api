@@ -22,6 +22,13 @@ export class SiteRole {
     id: string;
     guid: string;
     role: SiteRole.RoleEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.site = new Site(input.site);
+    }
+
 }
 export namespace SiteRole {
     export type RoleEnum = 'SiteConsumer' | 'SiteCollaborator' | 'SiteContributor' | 'SiteManager';

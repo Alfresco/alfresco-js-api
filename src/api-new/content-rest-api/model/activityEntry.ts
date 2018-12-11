@@ -19,4 +19,11 @@ import { Activity } from './activity';
 
 export class ActivityEntry {
     entry: Activity;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Activity(input.entry);
+    }
+
 }

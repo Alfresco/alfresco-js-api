@@ -19,4 +19,11 @@ import { AuditAppPagingList } from './auditAppPagingList';
 
 export class AuditAppPaging {
     list?: AuditAppPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new AuditAppPagingList(input.list);
+    }
+
 }

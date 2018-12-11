@@ -21,4 +21,14 @@ import { RatingEntry } from './ratingEntry';
 export class RatingPagingList {
     pagination: Pagination;
     entries: Array<RatingEntry>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<RatingEntry>(item);
+        });
+    }
+
 }

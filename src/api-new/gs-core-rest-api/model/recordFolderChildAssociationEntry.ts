@@ -19,4 +19,11 @@ import { RecordFolderChildAssociation } from './recordFolderChildAssociation';
 
 export class RecordFolderChildAssociationEntry {
     entry: RecordFolderChildAssociation;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new RecordFolderChildAssociation(input.entry);
+    }
+
 }

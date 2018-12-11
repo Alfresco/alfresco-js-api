@@ -21,4 +21,10 @@ export class ClassificationGuidesBody {
     publishedOn: Date;
     enabled?: boolean;
     hasTopics?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

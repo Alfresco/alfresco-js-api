@@ -20,4 +20,10 @@ export class CreateEndpointBasicAuthRepresentation {
     password?: string;
     tenantId?: number;
     username?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

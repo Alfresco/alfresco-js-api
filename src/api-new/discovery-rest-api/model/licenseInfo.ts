@@ -15,13 +15,23 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { EntitlementsInfo } from './entitlementsInfo';
 
 export class LicenseInfo {
-    issuedAt: Date;
-    expiresAt: Date;
+    issuedAt: DateAlfresco;
+    expiresAt: DateAlfresco;
     remainingDays: number;
     holder: string;
     mode: string;
     entitlements?: EntitlementsInfo;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.issuedAt = new DateAlfresco(input.issuedAt);
+        this.expiresAt = new DateAlfresco(input.expiresAt);
+        this.entitlements = new EntitlementsInfo(input.entitlements);
+    }
+
 }

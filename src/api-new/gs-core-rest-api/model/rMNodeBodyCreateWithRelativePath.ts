@@ -26,4 +26,10 @@ The character . must not be used at the end of the name.
     aspectNames?: Array<string>;
     properties?: { [key: string]: string; };
     relativePath?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

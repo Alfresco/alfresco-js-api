@@ -21,4 +21,11 @@ export class AppDefinitionSaveRepresentation {
     appDefinition?: AppDefinitionRepresentation;
     force?: boolean;
     publish?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.appDefinition = new AppDefinitionRepresentation(input.appDefinition);
+    }
+
 }

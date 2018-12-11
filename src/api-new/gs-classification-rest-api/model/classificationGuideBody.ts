@@ -20,4 +20,10 @@ export class ClassificationGuideBody {
     originatingOrganization: string;
     publishedOn: Date;
     enabled?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

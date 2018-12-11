@@ -23,4 +23,15 @@ export class ResultSetPagingList {
     pagination?: Pagination;
     context?: ResultSetContext;
     entries?: Array<ResultSetRowEntry>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.context = new ResultSetContext(input.context);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<ResultSetRowEntry>(item);
+        });
+    }
+
 }

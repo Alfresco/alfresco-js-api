@@ -19,4 +19,11 @@ import { ClassificationGuidePagingList } from './classificationGuidePagingList';
 
 export class ClassificationGuidePaging {
     list?: ClassificationGuidePagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new ClassificationGuidePagingList(input.list);
+    }
+
 }

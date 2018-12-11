@@ -48,4 +48,10 @@ If there was no **maxItems** parameter then the default value is 100.
 
      */
     maxItems: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

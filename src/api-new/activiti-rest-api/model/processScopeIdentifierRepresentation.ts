@@ -18,4 +18,10 @@
 export class ProcessScopeIdentifierRepresentation {
     processActivityId?: string;
     processModelId?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

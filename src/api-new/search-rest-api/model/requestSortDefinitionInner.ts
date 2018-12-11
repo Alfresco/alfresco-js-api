@@ -28,6 +28,12 @@ export class RequestSortDefinitionInner {
      * The sort order. (The ordering of nulls is determined by the SOLR configuration)
      */
     ascending?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace RequestSortDefinitionInner {
     export type TypeEnum = 'FIELD' | 'DOCUMENT' | 'SCORE';

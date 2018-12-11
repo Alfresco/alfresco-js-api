@@ -23,4 +23,10 @@ export class BulkUserUpdateRepresentation {
     status?: string;
     tenantId?: number;
     users?: Array<number>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

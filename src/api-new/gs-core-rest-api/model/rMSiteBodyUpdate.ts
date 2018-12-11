@@ -18,4 +18,10 @@
 export class RMSiteBodyUpdate {
     title?: string;
     description?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

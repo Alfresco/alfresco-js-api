@@ -19,4 +19,10 @@ export class IdentityLinkRepresentation {
     group?: string;
     type?: string;
     user?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

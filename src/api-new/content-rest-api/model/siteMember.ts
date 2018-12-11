@@ -21,13 +21,20 @@ export class SiteMember {
     id: string;
     person: Person;
     role: SiteMember.RoleEnum;
-}
 
-export namespace SiteMember {
-    export enum RoleEnum {
-        SiteConsumer = 'SiteConsumer',
-        SiteCollaborator = 'SiteCollaborator',
-        SiteContributor = 'SiteContributor',
-        SiteManager = 'SiteManager'
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.person = new Person(input.person);
     }
+
+}
+export namespace SiteMember {
+    export type RoleEnum = 'SiteConsumer' | 'SiteCollaborator' | 'SiteContributor' | 'SiteManager';
+    export const RoleEnum = {
+        SiteConsumer: 'SiteConsumer' as RoleEnum,
+        SiteCollaborator: 'SiteCollaborator' as RoleEnum,
+        SiteContributor: 'SiteContributor' as RoleEnum,
+        SiteManager: 'SiteManager' as RoleEnum
+    };
 }

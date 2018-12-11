@@ -19,4 +19,11 @@ import { NodeAssociationPagingList } from './nodeAssociationPagingList';
 
 export class NodeAssociationPaging {
     list?: NodeAssociationPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new NodeAssociationPagingList(input.list);
+    }
+
 }

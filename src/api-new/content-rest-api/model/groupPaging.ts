@@ -19,4 +19,11 @@ import { GroupPagingList } from './groupPagingList';
 
 export class GroupPaging {
     list?: GroupPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new GroupPagingList(input.list);
+    }
+
 }

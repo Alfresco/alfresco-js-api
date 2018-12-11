@@ -19,4 +19,11 @@ import { TagPagingList } from './tagPagingList';
 
 export class TagPaging {
     list?: TagPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new TagPagingList(input.list);
+    }
+
 }

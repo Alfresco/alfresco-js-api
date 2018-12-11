@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **id** | **number** |  | [optional] [default to null]
 **name** | **string** |  | [optional] [default to null]
 **processId** | **string** |  | [optional] [default to null]
-**submitted** | **Date** |  | [optional] [default to null]
+**submitted** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **submittedBy** | [**LightUserRepresentation**](LightUserRepresentation.md) |  | [optional] [default to null]
 **taskId** | **string** |  | [optional] [default to null]
 

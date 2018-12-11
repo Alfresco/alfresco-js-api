@@ -23,4 +23,15 @@ export class RecordFolderAssociationPagingList {
     pagination?: Pagination;
     entries?: Array<RecordFolderChildAssociationEntry>;
     source?: RecordFolder;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<RecordFolderChildAssociationEntry>(item);
+        });
+        this.source = new RecordFolder(input.source);
+    }
+
 }

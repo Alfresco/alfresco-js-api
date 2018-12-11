@@ -23,4 +23,10 @@ export class ResponseConsistency {
      * The id of the last indexed transaction
      */
     lastTxId?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

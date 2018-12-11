@@ -20,4 +20,10 @@ export class StatusInfo {
     isAuditEnabled: boolean;
     isQuickShareEnabled: boolean;
     isThumbnailGenerationEnabled: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

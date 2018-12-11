@@ -19,4 +19,11 @@ import { Rendition } from './rendition';
 
 export class RenditionEntry {
     entry: Rendition;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Rendition(input.entry);
+    }
+
 }

@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { ChangesApi } from './api/changesApi';
 import { ChildAssociationsApi } from './api/childAssociationsApi';
 import { CommentsApi } from './api/commentsApi';

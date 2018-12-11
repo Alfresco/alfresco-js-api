@@ -15,10 +15,12 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class DecisionTaskRepresentation {
     activityId?: string;
     activityName?: string;
-    decisionExecutionEnded?: Date;
+    decisionExecutionEnded?: DateAlfresco;
     decisionExecutionFailed?: boolean;
     decisionKey?: string;
     decisionName?: string;
@@ -28,4 +30,11 @@ export class DecisionTaskRepresentation {
     processDefinitionId?: string;
     processDefinitionKey?: string;
     processInstanceId?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.decisionExecutionEnded = new DateAlfresco(input.decisionExecutionEnded);
+    }
+
 }

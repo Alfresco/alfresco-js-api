@@ -23,7 +23,15 @@ export class PermissionsInfo {
     locallySet?: Array<PermissionElement>;
     settable?: Array<string>;
 
-    constructor(obj?: any) {
-        Object.assign(this, obj);
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.inherited = input.inherited.map((item: any) => {
+            return new Array<PermissionElement>(item);
+        });
+        this.locallySet = input.locallySet.map((item: any) => {
+            return new Array<PermissionElement>(item);
+        });
     }
+
 }

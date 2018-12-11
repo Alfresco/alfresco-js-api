@@ -19,4 +19,11 @@ import { SiteRolePagingList } from './siteRolePagingList';
 
 export class SiteRolePaging {
     list?: SiteRolePagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new SiteRolePagingList(input.list);
+    }
+
 }

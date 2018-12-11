@@ -55,4 +55,10 @@ export class RequestRange {
      * Filter queries to exclude when calculating statistics
      */
     excludeFilters?: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

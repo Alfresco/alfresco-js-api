@@ -19,4 +19,11 @@ import { Site } from './site';
 
 export class SiteEntry {
     entry: Site;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Site(input.entry);
+    }
+
 }

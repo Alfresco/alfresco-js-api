@@ -25,4 +25,11 @@ export class AppDefinitionUpdateResultRepresentation {
     errorType?: number;
     message?: string;
     messageKey?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.appDefinition = new AppDefinitionRepresentation(input.appDefinition);
+    }
+
 }

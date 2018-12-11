@@ -45,6 +45,12 @@ FIELD:(one two three)
      */
     namespace?: string;
     defaultFieldName?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace RequestDefaults {
     export type DefaultFTSOperatorEnum = 'AND' | 'OR';

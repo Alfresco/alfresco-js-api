@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export enum LifetimeEnum {
     PERSISTENT = 'PERSISTENT',
     EPHEMERAL = 'EPHEMERAL'

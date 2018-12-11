@@ -18,4 +18,10 @@
 export class EntityAttributeScopeRepresentation {
     name?: string;
     type?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

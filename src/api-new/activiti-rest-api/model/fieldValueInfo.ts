@@ -18,4 +18,10 @@
 export class FieldValueInfo {
     type?: string;
     value?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

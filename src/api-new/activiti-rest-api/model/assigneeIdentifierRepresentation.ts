@@ -18,4 +18,10 @@
 export class AssigneeIdentifierRepresentation {
     assignee?: string;
     email?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

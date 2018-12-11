@@ -16,6 +16,7 @@
 */
 
 import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociationInfo';
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { TransferContainerChild } from './transferContainerChild';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
 
@@ -29,7 +30,7 @@ The character . must not be used at the end of the name.
      */
     name: string;
     nodeType: string;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     createdByUser: UserInfo;
     /**
      * Present only for transfer nodes.
@@ -47,4 +48,13 @@ The character . must not be used at the end of the name.
     properties?: any;
     allowableOperations?: Array<string>;
     association?: ChildAssociationInfo;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.createdAt = new DateAlfresco(input.createdAt);
+        this.createdByUser = new UserInfo(input.createdByUser);
+        this.association = new ChildAssociationInfo(input.association);
+    }
+
 }

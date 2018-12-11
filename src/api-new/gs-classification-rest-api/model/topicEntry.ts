@@ -19,4 +19,11 @@ import { Topic } from './topic';
 
 export class TopicEntry {
     entry: Topic;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Topic(input.entry);
+    }
+
 }

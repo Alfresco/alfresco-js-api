@@ -43,4 +43,14 @@ export class GenericBucket {
      */
     facets?: Array<any>;
     bucketInfo?: GenericBucketBucketInfo;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.metrics = input.metrics.map((item: any) => {
+            return new Array<GenericMetric>(item);
+        });
+        this.bucketInfo = new GenericBucketBucketInfo(input.bucketInfo);
+    }
+
 }

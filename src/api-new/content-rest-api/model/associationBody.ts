@@ -18,4 +18,10 @@
 export class AssociationBody {
     targetId: string;
     assocType: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

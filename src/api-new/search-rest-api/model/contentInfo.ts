@@ -21,4 +21,10 @@ export class ContentInfo {
     sizeInBytes: number;
     encoding?: string;
     mimeTypeGroup?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

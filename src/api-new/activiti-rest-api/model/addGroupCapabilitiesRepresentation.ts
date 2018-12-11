@@ -17,4 +17,10 @@
 
 export class AddGroupCapabilitiesRepresentation {
     capabilities?: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

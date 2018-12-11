@@ -22,4 +22,11 @@ import { ResultNode } from './resultNode';
  */
 export class ResultSetRowEntry {
     entry: ResultNode;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new ResultNode(input.entry);
+    }
+
 }

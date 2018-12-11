@@ -18,4 +18,10 @@
 export class SiteContainer {
     id: string;
     folderId: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

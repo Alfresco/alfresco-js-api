@@ -22,4 +22,10 @@ export class ProcessInstanceFilterRepresentation {
     processDefinitionKey?: string;
     sort?: string;
     state?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

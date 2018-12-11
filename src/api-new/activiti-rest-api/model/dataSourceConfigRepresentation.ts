@@ -20,4 +20,10 @@ export class DataSourceConfigRepresentation {
     jdbcUrl?: string;
     password?: string;
     username?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

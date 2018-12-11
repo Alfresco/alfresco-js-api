@@ -18,4 +18,10 @@
 export class UserInfo {
     displayName: string;
     id: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

@@ -15,13 +15,22 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class ModuleInfo {
     id?: string;
     title?: string;
     description?: string;
     version?: string;
-    installDate?: Date;
+    installDate?: DateAlfresco;
     installState?: string;
     versionMin?: string;
     versionMax?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.installDate = new DateAlfresco(input.installDate);
+    }
+
 }

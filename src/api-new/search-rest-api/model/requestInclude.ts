@@ -26,4 +26,10 @@
 
  */
 export class RequestInclude extends Array<string> {
+
+    constructor(input?: any) {
+        super();
+        Object.assign(this, input);
+    }
+
 }

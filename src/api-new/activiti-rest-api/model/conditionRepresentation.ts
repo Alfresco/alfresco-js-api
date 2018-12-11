@@ -25,4 +25,11 @@ export class ConditionRepresentation {
     rightRestResponseId?: string;
     rightType?: string;
     rightValue?: any;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.nextCondition = new ConditionRepresentation(input.nextCondition);
+    }
+
 }

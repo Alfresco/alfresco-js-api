@@ -19,4 +19,11 @@ import { SiteMembershipRequest } from './siteMembershipRequest';
 
 export class SiteMembershipRequestEntry {
     entry: SiteMembershipRequest;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new SiteMembershipRequest(input.entry);
+    }
+
 }

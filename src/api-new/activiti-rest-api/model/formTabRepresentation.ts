@@ -21,4 +21,11 @@ export class FormTabRepresentation {
     id?: string;
     title?: string;
     visibilityCondition?: ConditionRepresentation;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.visibilityCondition = new ConditionRepresentation(input.visibilityCondition);
+    }
+
 }

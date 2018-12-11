@@ -19,6 +19,12 @@ export class PermissionElement {
     authorityId?: string;
     name?: string;
     accessStatus?: PermissionElement.AccessStatusEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace PermissionElement {
     export type AccessStatusEnum = 'ALLOWED' | 'DENIED';

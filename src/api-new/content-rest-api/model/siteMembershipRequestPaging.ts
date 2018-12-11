@@ -19,4 +19,11 @@ import { SiteMembershipRequestPagingList } from './siteMembershipRequestPagingLi
 
 export class SiteMembershipRequestPaging {
     list?: SiteMembershipRequestPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new SiteMembershipRequestPagingList(input.list);
+    }
+
 }

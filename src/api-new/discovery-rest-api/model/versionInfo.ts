@@ -23,4 +23,10 @@ export class VersionInfo {
     schema: number;
     label: string;
     display: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

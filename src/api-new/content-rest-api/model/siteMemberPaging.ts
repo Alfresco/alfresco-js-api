@@ -19,4 +19,11 @@ import { SiteMemberPagingList } from './siteMemberPagingList';
 
 export class SiteMemberPaging {
     list?: SiteMemberPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new SiteMemberPagingList(input.list);
+    }
+
 }

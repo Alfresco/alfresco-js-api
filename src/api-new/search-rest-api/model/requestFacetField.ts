@@ -50,6 +50,12 @@ This is used for multi-select facetting.
 
      */
     excludeFilters?: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace RequestFacetField {
     export type SortEnum = 'COUNT' | 'INDEX';

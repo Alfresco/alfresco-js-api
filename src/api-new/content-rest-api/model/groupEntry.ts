@@ -19,4 +19,11 @@ import { Group } from './group';
 
 export class GroupEntry {
     entry: Group;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Group(input.entry);
+    }
+
 }

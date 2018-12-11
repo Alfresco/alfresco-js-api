@@ -19,4 +19,11 @@ import { UnfiledContainerAssociationPagingList } from './unfiledContainerAssocia
 
 export class UnfiledContainerAssociationPaging {
     list?: UnfiledContainerAssociationPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new UnfiledContainerAssociationPagingList(input.list);
+    }
+
 }

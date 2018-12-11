@@ -19,4 +19,11 @@ import { Download } from './download';
 
 export class DownloadEntry {
     entry: Download;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Download(input.entry);
+    }
+
 }

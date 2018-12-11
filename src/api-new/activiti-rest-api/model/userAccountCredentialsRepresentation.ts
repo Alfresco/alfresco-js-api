@@ -18,4 +18,10 @@
 export class UserAccountCredentialsRepresentation {
     password?: string;
     username?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

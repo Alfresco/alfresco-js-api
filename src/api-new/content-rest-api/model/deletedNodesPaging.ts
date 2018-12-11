@@ -19,4 +19,11 @@ import { DeletedNodesPagingList } from './deletedNodesPagingList';
 
 export class DeletedNodesPaging {
     list?: DeletedNodesPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new DeletedNodesPagingList(input.list);
+    }
+
 }

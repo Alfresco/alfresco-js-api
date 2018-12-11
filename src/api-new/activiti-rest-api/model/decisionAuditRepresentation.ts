@@ -15,11 +15,13 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class DecisionAuditRepresentation {
     activityId?: string;
     activityName?: string;
     auditTrailJson?: string;
-    created?: Date;
+    created?: DateAlfresco;
     decisionExecutionFailed?: boolean;
     decisionKey?: string;
     decisionModelJson?: string;
@@ -30,4 +32,11 @@ export class DecisionAuditRepresentation {
     processDefinitionId?: string;
     processInstanceId?: string;
     renderedVariables?: any;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.created = new DateAlfresco(input.created);
+    }
+
 }

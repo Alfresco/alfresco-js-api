@@ -19,4 +19,11 @@ import { SecurityMarks } from './securityMarks';
 
 export class SecurityMarkInformation {
     add: SecurityMarks;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.add = new SecurityMarks(input.add);
+    }
+
 }

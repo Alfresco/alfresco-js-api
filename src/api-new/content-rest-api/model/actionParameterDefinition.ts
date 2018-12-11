@@ -21,4 +21,10 @@ export class ActionParameterDefinition {
     multiValued?: boolean;
     mandatory?: boolean;
     displayLabel?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

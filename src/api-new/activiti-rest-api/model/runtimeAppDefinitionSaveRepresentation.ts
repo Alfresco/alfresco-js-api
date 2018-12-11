@@ -19,4 +19,13 @@ import { AppDefinitionRepresentation } from './appDefinitionRepresentation';
 
 export class RuntimeAppDefinitionSaveRepresentation {
     appDefinitions?: Array<AppDefinitionRepresentation>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.appDefinitions = input.appDefinitions.map((item: any) => {
+            return new Array<AppDefinitionRepresentation>(item);
+        });
+    }
+
 }

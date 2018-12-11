@@ -19,4 +19,11 @@ import { RecordCategoryChild } from './recordCategoryChild';
 
 export class RecordCategoryChildEntry {
     entry: RecordCategoryChild;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new RecordCategoryChild(input.entry);
+    }
+
 }

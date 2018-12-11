@@ -21,4 +21,14 @@ import { VersionEntry } from './versionEntry';
 export class VersionPagingList {
     pagination?: Pagination;
     entries?: Array<VersionEntry>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<VersionEntry>(item);
+        });
+    }
+
 }

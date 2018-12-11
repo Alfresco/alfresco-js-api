@@ -21,4 +21,10 @@ export class Group {
     isRoot: boolean;
     parentIds?: Array<string>;
     zones?: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

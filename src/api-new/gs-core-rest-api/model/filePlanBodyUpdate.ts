@@ -17,4 +17,10 @@
 
 export class FilePlanBodyUpdate {
     properties?: { [key: string]: string; };
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

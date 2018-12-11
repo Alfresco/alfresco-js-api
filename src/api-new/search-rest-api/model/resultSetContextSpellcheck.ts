@@ -21,6 +21,12 @@ export class ResultSetContextSpellcheck {
      * A suggested alternative query
      */
     suggestion?: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace ResultSetContextSpellcheck {
     export type TypeEnum = 'searchInsteadFor' | 'didYouMean';

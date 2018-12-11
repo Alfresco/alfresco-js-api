@@ -19,4 +19,11 @@ import { ActionDefinition } from './actionDefinition';
 
 export class ActionDefinitionEntry {
     entry: ActionDefinition;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new ActionDefinition(input.entry);
+    }
+
 }

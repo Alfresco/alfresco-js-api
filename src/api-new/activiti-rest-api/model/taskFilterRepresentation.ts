@@ -15,16 +15,26 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class TaskFilterRepresentation {
     asc?: boolean;
     assignment?: string;
-    dueAfter?: Date;
-    dueBefore?: Date;
+    dueAfter?: DateAlfresco;
+    dueBefore?: DateAlfresco;
     name?: string;
     processDefinitionId?: string;
     processDefinitionKey?: string;
     sort?: string;
     state?: TaskFilterRepresentation.StateEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.dueAfter = new DateAlfresco(input.dueAfter);
+        this.dueBefore = new DateAlfresco(input.dueBefore);
+    }
+
 }
 export namespace TaskFilterRepresentation {
     export type StateEnum = 'active' | 'completed' | 'all';

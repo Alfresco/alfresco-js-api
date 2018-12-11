@@ -19,4 +19,11 @@ import { PersonNetwork } from './personNetwork';
 
 export class PersonNetworkEntry {
     entry: PersonNetwork;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new PersonNetwork(input.entry);
+    }
+
 }

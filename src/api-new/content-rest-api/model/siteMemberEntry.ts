@@ -19,4 +19,11 @@ import { SiteMember } from './siteMember';
 
 export class SiteMemberEntry {
     entry: SiteMember;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new SiteMember(input.entry);
+    }
+
 }

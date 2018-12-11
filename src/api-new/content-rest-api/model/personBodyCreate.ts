@@ -37,4 +37,11 @@ export class PersonBodyCreate {
     password: string;
     aspectNames?: Array<string>;
     properties?: { [key: string]: string; };
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.company = new Company(input.company);
+    }
+
 }

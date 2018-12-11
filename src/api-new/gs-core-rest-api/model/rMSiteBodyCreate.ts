@@ -19,6 +19,12 @@ export class RMSiteBodyCreate {
     title: string;
     description?: string;
     compliance?: RMSiteBodyCreate.ComplianceEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace RMSiteBodyCreate {
     export type ComplianceEnum = 'STANDARD' | 'DOD5015';

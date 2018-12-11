@@ -19,4 +19,10 @@ export class AuditApp {
     id: string;
     name?: string;
     isEnabled?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

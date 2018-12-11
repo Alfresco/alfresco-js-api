@@ -15,11 +15,12 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { LightUserRepresentation } from './lightUserRepresentation';
 
 export class RelatedContentRepresentation {
     contentAvailable?: boolean;
-    created?: Date;
+    created?: DateAlfresco;
     createdBy?: LightUserRepresentation;
     id?: number;
     link?: boolean;
@@ -32,4 +33,12 @@ export class RelatedContentRepresentation {
     source?: string;
     sourceId?: string;
     thumbnailStatus?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.created = new DateAlfresco(input.created);
+        this.createdBy = new LightUserRepresentation(input.createdBy);
+    }
+
 }

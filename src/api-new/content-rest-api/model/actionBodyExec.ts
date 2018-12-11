@@ -22,4 +22,10 @@ export class ActionBodyExec {
      */
     targetId?: string;
     params?: any;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

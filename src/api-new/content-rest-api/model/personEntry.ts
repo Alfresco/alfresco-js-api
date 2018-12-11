@@ -19,4 +19,11 @@ import { Person } from './person';
 
 export class PersonEntry {
     entry: Person;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Person(input.entry);
+    }
+
 }

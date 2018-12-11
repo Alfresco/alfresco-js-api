@@ -29,4 +29,14 @@ export class ProcessInstanceAuditInfoRepresentation {
     processInstanceInitiator?: string;
     processInstanceName?: string;
     processInstanceStartTime?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.decisionInfo = new AuditDecisionInfoRepresentation(input.decisionInfo);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<AuditLogEntryRepresentation>(item);
+        });
+    }
+
 }

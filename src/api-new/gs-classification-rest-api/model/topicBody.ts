@@ -21,4 +21,11 @@ export class TopicBody {
     name: string;
     description?: string;
     instruction?: InstructionBody;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.instruction = new InstructionBody(input.instruction);
+    }
+
 }

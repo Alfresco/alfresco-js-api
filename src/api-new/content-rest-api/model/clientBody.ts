@@ -20,4 +20,10 @@ export class ClientBody {
      * the client name
      */
     client: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

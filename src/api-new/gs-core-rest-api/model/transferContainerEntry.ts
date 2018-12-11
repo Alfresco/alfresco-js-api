@@ -19,4 +19,11 @@ import { TransferContainer } from './transferContainer';
 
 export class TransferContainerEntry {
     entry: TransferContainer;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new TransferContainer(input.entry);
+    }
+
 }

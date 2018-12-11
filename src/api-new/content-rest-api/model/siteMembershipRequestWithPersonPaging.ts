@@ -19,4 +19,11 @@ import { SiteMembershipRequestWithPersonPagingList } from './siteMembershipReque
 
 export class SiteMembershipRequestWithPersonPaging {
     list?: SiteMembershipRequestWithPersonPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new SiteMembershipRequestWithPersonPagingList(input.list);
+    }
+
 }

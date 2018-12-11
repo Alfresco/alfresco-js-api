@@ -23,4 +23,15 @@ export class TransferContainerAssociationPagingList {
     pagination?: Pagination;
     entries?: Array<TransferContainerChildAssociationEntry>;
     source?: TransferContainer;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<TransferContainerChildAssociationEntry>(item);
+        });
+        this.source = new TransferContainer(input.source);
+    }
+
 }

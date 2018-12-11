@@ -18,4 +18,10 @@
 export class Ticket {
     id?: string;
     userId?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

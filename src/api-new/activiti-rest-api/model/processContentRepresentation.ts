@@ -21,4 +21,14 @@ import { RelatedContentRepresentation } from './relatedContentRepresentation';
 export class ProcessContentRepresentation {
     content?: Array<RelatedContentRepresentation>;
     field?: NamedObject;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.content = input.content.map((item: any) => {
+            return new Array<RelatedContentRepresentation>(item);
+        });
+        this.field = new NamedObject(input.field);
+    }
+
 }

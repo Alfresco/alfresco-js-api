@@ -21,4 +21,10 @@ export class AccountRepresentation {
     metaDataAllowed?: boolean;
     name?: string;
     serviceId?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

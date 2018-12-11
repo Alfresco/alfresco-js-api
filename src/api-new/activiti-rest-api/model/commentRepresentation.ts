@@ -15,11 +15,20 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { LightUserRepresentation } from './lightUserRepresentation';
 
 export class CommentRepresentation {
-    created?: Date;
+    created?: DateAlfresco;
     createdBy?: LightUserRepresentation;
     id?: number;
     message?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.created = new DateAlfresco(input.created);
+        this.createdBy = new LightUserRepresentation(input.createdBy);
+    }
+
 }

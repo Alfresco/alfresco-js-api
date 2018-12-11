@@ -15,16 +15,25 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+
 export class AppModelDefinition {
     createdBy?: number;
     createdByFullName?: string;
     description?: string;
     id?: number;
-    lastUpdated?: Date;
+    lastUpdated?: DateAlfresco;
     lastUpdatedBy?: number;
     lastUpdatedByFullName?: string;
     modelType?: number;
     name?: string;
     stencilSetId?: number;
     version?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.lastUpdated = new DateAlfresco(input.lastUpdated);
+    }
+
 }

@@ -17,6 +17,7 @@
 
 import { Capabilities } from './capabilities';
 import { Company } from './company';
+import { DateAlfresco } from './dateAlfresco';
 
 export class Person {
     id: string;
@@ -33,11 +34,20 @@ export class Person {
     company?: Company;
     mobile?: string;
     telephone?: string;
-    statusUpdatedAt?: Date;
+    statusUpdatedAt?: DateAlfresco;
     userStatus?: string;
     enabled: boolean;
     emailNotificationsEnabled?: boolean;
     aspectNames?: Array<string>;
     properties?: { [key: string]: string; };
     capabilities?: Capabilities;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.company = new Company(input.company);
+        this.statusUpdatedAt = new DateAlfresco(input.statusUpdatedAt);
+        this.capabilities = new Capabilities(input.capabilities);
+    }
+
 }

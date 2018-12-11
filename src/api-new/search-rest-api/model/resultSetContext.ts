@@ -49,4 +49,24 @@ The highest quality suggestion is first.
 
      */
     spellcheck?: Array<ResultSetContextSpellcheck>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.consistency = new ResponseConsistency(input.consistency);
+        this.request = new SearchRequest(input.request);
+        this.facetQueries = input.facetQueries.map((item: any) => {
+            return new Array<ResultSetContextFacetQueries>(item);
+        });
+        this.facetsFields = input.facetsFields.map((item: any) => {
+            return new Array<ResultBuckets>(item);
+        });
+        this.facets = input.facets.map((item: any) => {
+            return new Array<GenericFacetResponse>(item);
+        });
+        this.spellcheck = input.spellcheck.map((item: any) => {
+            return new Array<ResultSetContextSpellcheck>(item);
+        });
+    }
+
 }

@@ -25,4 +25,14 @@ export class FormSaveRepresentation {
     newVersion?: boolean;
     processScopeIdentifiers?: Array<ProcessScopeIdentifierRepresentation>;
     reusable?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.formRepresentation = new FormRepresentation(input.formRepresentation);
+        this.processScopeIdentifiers = input.processScopeIdentifiers.map((item: any) => {
+            return new Array<ProcessScopeIdentifierRepresentation>(item);
+        });
+    }
+
 }

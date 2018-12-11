@@ -21,4 +21,14 @@ import { SiteMemberEntry } from './siteMemberEntry';
 export class SiteMemberPagingList {
     pagination: Pagination;
     entries: Array<SiteMemberEntry>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<SiteMemberEntry>(item);
+        });
+    }
+
 }

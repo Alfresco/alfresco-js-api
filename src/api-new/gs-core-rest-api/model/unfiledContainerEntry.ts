@@ -19,4 +19,11 @@ import { UnfiledContainer } from './unfiledContainer';
 
 export class UnfiledContainerEntry {
     entry: UnfiledContainer;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new UnfiledContainer(input.entry);
+    }
+
 }

@@ -21,4 +21,10 @@ export class CreateTenantRepresentation {
     domain?: string;
     maxUsers?: number;
     name?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

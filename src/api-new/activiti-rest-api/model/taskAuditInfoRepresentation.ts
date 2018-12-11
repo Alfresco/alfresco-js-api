@@ -30,4 +30,16 @@ export class TaskAuditInfoRepresentation {
     startTime?: string;
     taskId?: string;
     taskName?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.comments = input.comments.map((item: any) => {
+            return new Array<CommentAuditInfo>(item);
+        });
+        this.formData = input.formData.map((item: any) => {
+            return new Array<AuditLogFormDataRepresentation>(item);
+        });
+    }
+
 }

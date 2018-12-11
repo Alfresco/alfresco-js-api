@@ -45,4 +45,26 @@ export class FormDefinitionRepresentation {
     taskId?: string;
     taskName?: string;
     variables?: Array<FormVariableRepresentation>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.customFieldsValueInfo = new (input.customFieldsValueInfo);
+        this.fields = input.fields.map((item: any) => {
+            return new Array<FormFieldRepresentation>(item);
+        });
+        this.javascriptEvents = input.javascriptEvents.map((item: any) => {
+            return new Array<FormJavascriptEventRepresentation>(item);
+        });
+        this.outcomes = input.outcomes.map((item: any) => {
+            return new Array<FormOutcomeRepresentation>(item);
+        });
+        this.tabs = input.tabs.map((item: any) => {
+            return new Array<FormTabRepresentation>(item);
+        });
+        this.variables = input.variables.map((item: any) => {
+            return new Array<FormVariableRepresentation>(item);
+        });
+    }
+
 }

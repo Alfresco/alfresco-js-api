@@ -19,4 +19,11 @@ import { Record } from './record';
 
 export class RecordEntry {
     entry: Record;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Record(input.entry);
+    }
+
 }

@@ -18,4 +18,10 @@
 export class CompleteFormRepresentation {
     outcome?: string;
     values?: any;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

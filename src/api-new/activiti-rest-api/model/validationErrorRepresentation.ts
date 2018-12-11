@@ -23,4 +23,10 @@ export class ValidationErrorRepresentation {
     problemReference?: string;
     validatorSetName?: string;
     warning?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

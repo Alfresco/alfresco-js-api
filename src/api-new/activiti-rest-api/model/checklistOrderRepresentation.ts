@@ -17,4 +17,10 @@
 
 export class ChecklistOrderRepresentation {
     order?: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

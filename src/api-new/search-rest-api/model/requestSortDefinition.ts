@@ -21,4 +21,10 @@ import { RequestSortDefinitionInner } from './requestSortDefinitionInner';
  * How to sort the rows? An array of sort specifications. The array order defines the ordering precedence.
  */
 export class RequestSortDefinition extends Array<RequestSortDefinitionInner> {
+
+    constructor(input?: any) {
+        super();
+        Object.assign(this, input);
+    }
+
 }

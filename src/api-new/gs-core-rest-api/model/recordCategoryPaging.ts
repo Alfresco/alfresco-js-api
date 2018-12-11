@@ -19,4 +19,11 @@ import { RecordCategoryPagingList } from './recordCategoryPagingList';
 
 export class RecordCategoryPaging {
     list?: RecordCategoryPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new RecordCategoryPagingList(input.list);
+    }
+
 }

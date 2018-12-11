@@ -31,4 +31,10 @@ export class File {
     path?: string;
     totalSpace?: number;
     usableSpace?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

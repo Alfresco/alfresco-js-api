@@ -18,4 +18,10 @@
 export class AuditCalculatedValueRepresentation {
     name?: string;
     value?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

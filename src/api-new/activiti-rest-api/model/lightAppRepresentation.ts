@@ -21,4 +21,10 @@ export class LightAppRepresentation {
     id?: number;
     name?: string;
     theme?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

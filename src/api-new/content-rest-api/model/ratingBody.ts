@@ -24,6 +24,12 @@ export class RatingBody {
      * The rating. The type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar
      */
     myRating: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace RatingBody {
     export type IdEnum = 'likes' | 'fiveStar';

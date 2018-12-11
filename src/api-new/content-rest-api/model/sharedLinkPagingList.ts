@@ -21,4 +21,14 @@ import { SharedLinkEntry } from './sharedLinkEntry';
 export class SharedLinkPagingList {
     pagination: Pagination;
     entries: Array<SharedLinkEntry>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<SharedLinkEntry>(item);
+        });
+    }
+
 }

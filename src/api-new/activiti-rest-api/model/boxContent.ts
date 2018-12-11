@@ -21,4 +21,10 @@ export class BoxContent {
     mimeType?: string;
     simpleType?: string;
     title?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

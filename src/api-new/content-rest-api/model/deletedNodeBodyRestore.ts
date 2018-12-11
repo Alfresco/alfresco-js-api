@@ -18,4 +18,10 @@
 export class DeletedNodeBodyRestore {
     targetParentId?: string;
     assocType?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

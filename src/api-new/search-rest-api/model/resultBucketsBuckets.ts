@@ -32,4 +32,10 @@ export class ResultBucketsBuckets {
      * An optional field for additional display information
      */
     display?: any;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

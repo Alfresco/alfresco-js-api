@@ -15,13 +15,23 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from './dateAlfresco';
 import { Person } from './person';
 import { Site } from './site';
 
 export class SiteMembershipRequestWithPerson {
     id: string;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     site: Site;
     person: Person;
     message?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.createdAt = new DateAlfresco(input.createdAt);
+        this.site = new Site(input.site);
+        this.person = new Person(input.person);
+    }
+
 }

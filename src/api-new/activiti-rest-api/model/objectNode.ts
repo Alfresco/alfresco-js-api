@@ -37,6 +37,12 @@ export class ObjectNode {
     short?: boolean;
     textual?: boolean;
     valueNode?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace ObjectNode {
     export type NodeTypeEnum = 'ARRAY' | 'BINARY' | 'BOOLEAN' | 'MISSING' | 'NULL' | 'NUMBER' | 'OBJECT' | 'POJO' | 'STRING';

@@ -23,4 +23,15 @@ export class UnfiledContainerAssociationPagingList {
     pagination?: Pagination;
     entries?: Array<UnfiledContainerChildAssociationEntry>;
     source?: UnfiledContainer;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<UnfiledContainerChildAssociationEntry>(item);
+        });
+        this.source = new UnfiledContainer(input.source);
+    }
+
 }

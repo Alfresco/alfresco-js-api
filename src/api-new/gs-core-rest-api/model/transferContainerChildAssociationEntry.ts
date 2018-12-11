@@ -19,4 +19,11 @@ import { TransferContainerChildAssociation } from './transferContainerChildAssoc
 
 export class TransferContainerChildAssociationEntry {
     entry: TransferContainerChildAssociation;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new TransferContainerChildAssociation(input.entry);
+    }
+
 }

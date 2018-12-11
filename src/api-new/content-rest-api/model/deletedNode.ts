@@ -16,8 +16,9 @@
 */
 
 import { ContentInfo } from './contentInfo';
+import { DateAlfresco } from './dateAlfresco';
 import { Node } from './node';
-import { PathInfo } from './pathInfo';
+import { PathInfo } from '../../content-rest-api/model/pathInfo';
 import { PermissionsInfo } from './permissionsInfo';
 import { UserInfo } from './userInfo';
 
@@ -33,9 +34,9 @@ The character . must not be used at the end of the name.
     isFolder: boolean;
     isFile: boolean;
     isLocked?: boolean;
-    modifiedAt: Date;
+    modifiedAt: DateAlfresco;
     modifiedByUser: UserInfo;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     createdByUser: UserInfo;
     parentId?: string;
     isLink?: boolean;
@@ -47,5 +48,20 @@ The character . must not be used at the end of the name.
     path?: PathInfo;
     permissions?: PermissionsInfo;
     archivedByUser: UserInfo;
-    archivedAt: Date;
+    archivedAt: DateAlfresco;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.modifiedAt = new DateAlfresco(input.modifiedAt);
+        this.modifiedByUser = new UserInfo(input.modifiedByUser);
+        this.createdAt = new DateAlfresco(input.createdAt);
+        this.createdByUser = new UserInfo(input.createdByUser);
+        this.content = new ContentInfo(input.content);
+        this.path = new PathInfo(input.path);
+        this.permissions = new PermissionsInfo(input.permissions);
+        this.archivedByUser = new UserInfo(input.archivedByUser);
+        this.archivedAt = new DateAlfresco(input.archivedAt);
+    }
+
 }

@@ -19,11 +19,17 @@ export class GroupMember {
     id: string;
     displayName: string;
     memberType: GroupMember.MemberTypeEnum;
-}
 
-export namespace GroupMember {
-    export enum MemberTypeEnum {
-        GROUP = 'GROUP',
-        PERSON = 'PERSON'
+    constructor(input?: any) {
+
+        Object.assign(this, input);
     }
+
+}
+export namespace GroupMember {
+    export type MemberTypeEnum = 'GROUP' | 'PERSON';
+    export const MemberTypeEnum = {
+        GROUP: 'GROUP' as MemberTypeEnum,
+        PERSON: 'PERSON' as MemberTypeEnum
+    };
 }

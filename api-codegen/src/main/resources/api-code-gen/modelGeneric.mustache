@@ -9,8 +9,20 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{ {{>model
 {{/vars}}
 
     constructor(input?: any) {
+{{#parent}}super();{{/parent}}
         Object.assign(this, input);
-
+    {{#vars}}
+        {{^isPrimitiveType}}
+            {{^isListContainer}}
+            this.{{name}} = new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(input.{{name}});
+            {{/isListContainer}}
+            {{#isListContainer}}
+            this.{{name}} = input.{{name}}.map((item: any) => {
+                return new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(item);
+            });
+            {{/isListContainer}}
+        {{/isPrimitiveType}}
+    {{/vars}}
     }
 
 }{{>modelGenericEnums}}

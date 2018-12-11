@@ -19,4 +19,11 @@ import { TopicPagingList } from './topicPagingList';
 
 export class SubtopicPaging {
     list?: TopicPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new TopicPagingList(input.list);
+    }
+
 }

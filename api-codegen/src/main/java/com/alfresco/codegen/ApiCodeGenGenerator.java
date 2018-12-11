@@ -66,6 +66,8 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
         this.cliOptions.add(new CliOption(TAGGED_UNIONS,
             "Use discriminators to create tagged unions instead of extending interfaces.",
             BooleanProperty.TYPE).defaultValue(Boolean.FALSE.toString()));
+
+        typeMapping.put("DateTime", "DateAlfresco");
     }
 
     @Override
@@ -288,7 +290,9 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
                 tsImport.put("classname", im);
                 tsImport.put("filename", toModelFilename(im));
 
-
+                if(!im.equals("Map")) {
+                    tsImports.add(tsImport);
+                }
             }
         }
         return tsImports;

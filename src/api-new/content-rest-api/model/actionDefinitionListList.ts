@@ -21,4 +21,14 @@ import { Pagination } from './pagination';
 export class ActionDefinitionListList {
     pagination?: Pagination;
     entries?: Array<ActionDefinition>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<ActionDefinition>(item);
+        });
+    }
+
 }

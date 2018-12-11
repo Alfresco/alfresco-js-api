@@ -24,4 +24,10 @@ export class RequestTemplatesInner {
      * The template
      */
     template?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

@@ -19,6 +19,12 @@ export class SiteBodyUpdate {
     title?: string;
     description?: string;
     visibility?: SiteBodyUpdate.VisibilityEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace SiteBodyUpdate {
     export type VisibilityEnum = 'PRIVATE' | 'MODERATED' | 'PUBLIC';

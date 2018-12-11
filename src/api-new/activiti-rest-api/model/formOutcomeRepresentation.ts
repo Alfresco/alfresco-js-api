@@ -18,4 +18,10 @@
 export class FormOutcomeRepresentation {
     id?: string;
     name?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

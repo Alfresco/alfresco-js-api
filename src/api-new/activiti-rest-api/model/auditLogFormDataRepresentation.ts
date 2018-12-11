@@ -19,4 +19,10 @@ export class AuditLogFormDataRepresentation {
     fieldId?: string;
     fieldName?: string;
     value?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

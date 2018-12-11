@@ -18,4 +18,10 @@
 export class UserIdentifierRepresentation {
     email?: string;
     userId?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

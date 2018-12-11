@@ -19,4 +19,11 @@ import { SiteRole } from './siteRole';
 
 export class SiteRoleEntry {
     entry: SiteRole;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new SiteRole(input.entry);
+    }
+
 }

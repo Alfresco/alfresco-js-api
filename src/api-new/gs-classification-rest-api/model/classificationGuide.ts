@@ -25,4 +25,10 @@ export class ClassificationGuide {
     originatingOrganization: string;
     publishedOn: Date;
     enabled?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class TransferContainerChild {
@@ -27,7 +28,7 @@ The character . must not be used at the end of the name.
      */
     name: string;
     nodeType: string;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     createdByUser: UserInfo;
     /**
      * Present only for transfer nodes.
@@ -44,4 +45,12 @@ The character . must not be used at the end of the name.
     aspectNames?: Array<string>;
     properties?: any;
     allowableOperations?: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.createdAt = new DateAlfresco(input.createdAt);
+        this.createdByUser = new UserInfo(input.createdByUser);
+    }
+
 }

@@ -19,4 +19,11 @@ import { RepositoryInfo } from './repositoryInfo';
 
 export class RepositoryEntry {
     repository: RepositoryInfo;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.repository = new RepositoryInfo(input.repository);
+    }
+
 }

@@ -28,4 +28,13 @@ export class ProcessDefinitionRepresentation {
     name?: string;
     tenantId?: string;
     version?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.metaDataValues = input.metaDataValues.map((item: any) => {
+            return new Array<ProcessDefinitionMetaDataRepresentation>(item);
+        });
+    }
+
 }

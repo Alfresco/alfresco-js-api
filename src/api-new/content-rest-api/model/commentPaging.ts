@@ -19,4 +19,11 @@ import { CommentPagingList } from './commentPagingList';
 
 export class CommentPaging {
     list?: CommentPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new CommentPagingList(input.list);
+    }
+
 }

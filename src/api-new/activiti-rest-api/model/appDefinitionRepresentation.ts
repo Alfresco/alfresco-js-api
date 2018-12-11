@@ -25,4 +25,10 @@ export class AppDefinitionRepresentation {
     name?: string;
     tenantId?: number;
     theme?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

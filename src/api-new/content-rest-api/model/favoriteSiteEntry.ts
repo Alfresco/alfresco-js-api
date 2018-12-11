@@ -19,4 +19,11 @@ import { FavoriteSite } from './favoriteSite';
 
 export class FavoriteSiteEntry {
     entry: FavoriteSite;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new FavoriteSite(input.entry);
+    }
+
 }

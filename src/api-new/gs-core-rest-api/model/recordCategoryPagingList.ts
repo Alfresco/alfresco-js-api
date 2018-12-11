@@ -23,4 +23,15 @@ export class RecordCategoryPagingList {
     pagination?: Pagination;
     entries?: Array<RecordCategoryEntry>;
     source?: FilePlan;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<RecordCategoryEntry>(item);
+        });
+        this.source = new FilePlan(input.source);
+    }
+
 }

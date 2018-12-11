@@ -25,4 +25,10 @@ export class NetworkQuota {
     id: string;
     limit: number;
     usage: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

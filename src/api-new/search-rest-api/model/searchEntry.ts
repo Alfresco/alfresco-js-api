@@ -27,4 +27,13 @@ export class SearchEntry {
 
      */
     highlight?: Array<SearchEntryHighlight>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.highlight = input.highlight.map((item: any) => {
+            return new Array<SearchEntryHighlight>(item);
+        });
+    }
+
 }

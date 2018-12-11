@@ -19,4 +19,10 @@ export class AuditDecisionExpressionInfoRepresentation {
     type?: string;
     value?: any;
     variable?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

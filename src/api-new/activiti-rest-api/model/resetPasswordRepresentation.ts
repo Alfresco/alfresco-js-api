@@ -17,4 +17,10 @@
 
 export class ResetPasswordRepresentation {
     email?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

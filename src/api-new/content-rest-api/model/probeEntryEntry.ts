@@ -17,4 +17,10 @@
 
 export class ProbeEntryEntry {
     message: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

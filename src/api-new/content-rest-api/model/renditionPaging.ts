@@ -19,4 +19,11 @@ import { RenditionPagingList } from './renditionPagingList';
 
 export class RenditionPaging {
     list?: RenditionPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new RenditionPagingList(input.list);
+    }
+
 }

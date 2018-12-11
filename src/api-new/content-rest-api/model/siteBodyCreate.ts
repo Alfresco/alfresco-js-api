@@ -20,11 +20,18 @@ export class SiteBodyCreate {
     title: string;
     description?: string;
     visibility: SiteBodyCreate.VisibilityEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace SiteBodyCreate {
-    export enum VisibilityEnum  {
-        PUBLIC= 'PUBLIC',
-        PRIVATE= 'PRIVATE',
-        MODERATED= 'MODERATED'
-    }
+    export type VisibilityEnum = 'PUBLIC' | 'PRIVATE' | 'MODERATED';
+    export const VisibilityEnum = {
+        PUBLIC: 'PUBLIC' as VisibilityEnum,
+        PRIVATE: 'PRIVATE' as VisibilityEnum,
+        MODERATED: 'MODERATED' as VisibilityEnum
+    };
 }

@@ -17,4 +17,10 @@
 
 export class GroupBodyUpdate {
     displayName: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

@@ -19,4 +19,11 @@ import { PreferencePagingList } from './preferencePagingList';
 
 export class PreferencePaging {
     list?: PreferencePagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new PreferencePagingList(input.list);
+    }
+
 }

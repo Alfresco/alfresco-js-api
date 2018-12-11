@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from './dateAlfresco';
 import { NetworkQuota } from './networkQuota';
 
 /**
@@ -33,10 +34,20 @@ export class PersonNetwork {
      */
     homeNetwork?: boolean;
     isEnabled: boolean;
-    createdAt?: Date;
+    createdAt?: DateAlfresco;
     paidNetwork?: boolean;
     subscriptionLevel?: PersonNetwork.SubscriptionLevelEnum;
     quotas?: Array<NetworkQuota>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.createdAt = new DateAlfresco(input.createdAt);
+        this.quotas = input.quotas.map((item: any) => {
+            return new Array<NetworkQuota>(item);
+        });
+    }
+
 }
 export namespace PersonNetwork {
     export type SubscriptionLevelEnum = 'Free' | 'Standard' | 'Enterprise';

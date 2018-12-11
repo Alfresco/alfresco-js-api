@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export * from './actionBodyExec';
 export * from './actionDefinition';
 export * from './actionDefinitionEntry';
@@ -185,3 +184,4 @@ export * from './versionPagingList';
 export * from './deletedNode';
 export * from './nodeAssociation';
 export * from './nodeChildAssociation';
+export * from './dateAlfresco';

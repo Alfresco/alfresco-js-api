@@ -25,4 +25,11 @@ export class UserProcessInstanceFilterRepresentation {
     index?: number;
     name?: string;
     recent?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.filter = new ProcessInstanceFilterRepresentation(input.filter);
+    }
+
 }

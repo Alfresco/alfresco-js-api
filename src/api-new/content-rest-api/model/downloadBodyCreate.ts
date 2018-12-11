@@ -17,4 +17,10 @@
 
 export class DownloadBodyCreate {
     nodeIds: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

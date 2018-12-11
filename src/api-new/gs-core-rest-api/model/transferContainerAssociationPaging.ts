@@ -19,4 +19,11 @@ import { TransferContainerAssociationPagingList } from './transferContainerAssoc
 
 export class TransferContainerAssociationPaging {
     list?: TransferContainerAssociationPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new TransferContainerAssociationPagingList(input.list);
+    }
+
 }

@@ -19,4 +19,11 @@ import { Association } from './association';
 
 export class AssociationEntry {
     entry: Association;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Association(input.entry);
+    }
+
 }

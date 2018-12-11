@@ -17,4 +17,10 @@
 
 export class SiteMembershipRejectionBody {
     comment?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

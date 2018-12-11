@@ -30,4 +30,13 @@ export class AuditLogEntryRepresentation {
     taskAssignee?: string;
     taskName?: string;
     type?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.formData = input.formData.map((item: any) => {
+            return new Array<AuditLogFormDataRepresentation>(item);
+        });
+    }
+
 }

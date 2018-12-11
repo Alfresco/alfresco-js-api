@@ -19,4 +19,11 @@ import { PersonNetworkPagingList } from './personNetworkPagingList';
 
 export class PersonNetworkPaging {
     list?: PersonNetworkPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new PersonNetworkPagingList(input.list);
+    }
+
 }

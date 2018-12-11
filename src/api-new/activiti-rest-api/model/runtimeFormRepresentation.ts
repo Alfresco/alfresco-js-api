@@ -23,4 +23,10 @@ export class RuntimeFormRepresentation {
     modelId?: number;
     name?: string;
     tenantId?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

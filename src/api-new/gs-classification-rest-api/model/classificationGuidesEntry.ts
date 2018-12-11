@@ -19,4 +19,11 @@ import { ClassificationGuides } from './classificationGuides';
 
 export class ClassificationGuidesEntry {
     entry: ClassificationGuides;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new ClassificationGuides(input.entry);
+    }
+
 }

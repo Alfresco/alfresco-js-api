@@ -17,4 +17,10 @@
 
 export class SiteMembershipApprovalBody {
     role?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

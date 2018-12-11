@@ -39,4 +39,10 @@ export class RequestFacetSet {
      * When true, the set will include values less than or equal to \"end\"
      */
     endInclusive?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

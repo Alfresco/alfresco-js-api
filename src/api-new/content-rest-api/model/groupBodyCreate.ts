@@ -19,4 +19,10 @@ export class GroupBodyCreate {
     id: string;
     displayName: string;
     parentIds?: Array<string>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

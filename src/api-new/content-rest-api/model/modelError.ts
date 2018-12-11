@@ -19,4 +19,11 @@ import { ErrorError } from './errorError';
 
 export class ModelError {
     error?: ErrorError;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.error = new ErrorError(input.error);
+    }
+
 }

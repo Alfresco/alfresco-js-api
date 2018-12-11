@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { FormDefinitionRepresentation } from './formDefinitionRepresentation';
 import { LightUserRepresentation } from './lightUserRepresentation';
 
@@ -24,7 +25,16 @@ export class SubmittedFormRepresentation {
     id?: number;
     name?: string;
     processId?: string;
-    submitted?: Date;
+    submitted?: DateAlfresco;
     submittedBy?: LightUserRepresentation;
     taskId?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.form = new FormDefinitionRepresentation(input.form);
+        this.submitted = new DateAlfresco(input.submitted);
+        this.submittedBy = new LightUserRepresentation(input.submittedBy);
+    }
+
 }

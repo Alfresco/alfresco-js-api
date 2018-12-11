@@ -18,4 +18,10 @@
 export class CommentAuditInfo {
     author?: string;
     message?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

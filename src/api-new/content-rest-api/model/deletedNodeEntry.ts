@@ -19,4 +19,11 @@ import { DeletedNode } from './deletedNode';
 
 export class DeletedNodeEntry {
     entry?: DeletedNode;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new DeletedNode(input.entry);
+    }
+
 }

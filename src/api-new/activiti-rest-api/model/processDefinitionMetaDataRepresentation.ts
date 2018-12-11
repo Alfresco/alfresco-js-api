@@ -18,4 +18,10 @@
 export class ProcessDefinitionMetaDataRepresentation {
     key?: string;
     value?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

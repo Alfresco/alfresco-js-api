@@ -19,4 +19,11 @@ import { RMSite } from './rMSite';
 
 export class RMSiteEntry {
     entry: RMSite;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new RMSite(input.entry);
+    }
+
 }

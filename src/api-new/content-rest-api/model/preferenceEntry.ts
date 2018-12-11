@@ -19,4 +19,11 @@ import { Preference } from './preference';
 
 export class PreferenceEntry {
     entry: Preference;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Preference(input.entry);
+    }
+
 }

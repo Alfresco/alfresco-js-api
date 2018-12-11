@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **id** | **string** |  | [default to null]
 **auditApplicationId** | **string** |  | [default to null]
 **createdByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
-**createdAt** | **Date** |  | [default to null]
+**createdAt** | [**DateAlfresco**](DateAlfresco.md) |  | [default to null]
 **values** | **{ [key: string]: string; }** |  | [optional] [default to null]
 
 

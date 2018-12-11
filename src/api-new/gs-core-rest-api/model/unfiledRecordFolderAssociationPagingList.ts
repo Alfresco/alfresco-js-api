@@ -23,4 +23,15 @@ export class UnfiledRecordFolderAssociationPagingList {
     pagination?: Pagination;
     entries?: Array<UnfiledRecordFolderChildAssociationEntry>;
     source?: UnfiledRecordFolder;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<UnfiledRecordFolderChildAssociationEntry>(item);
+        });
+        this.source = new UnfiledRecordFolder(input.source);
+    }
+
 }

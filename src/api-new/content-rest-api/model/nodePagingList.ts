@@ -23,4 +23,15 @@ export class NodePagingList {
     pagination?: Pagination;
     entries?: Array<NodeEntry>;
     source?: Node;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<NodeEntry>(item);
+        });
+        this.source = new Node(input.source);
+    }
+
 }

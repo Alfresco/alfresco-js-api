@@ -19,4 +19,11 @@ import { Rating } from './rating';
 
 export class RatingEntry {
     entry: Rating;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Rating(input.entry);
+    }
+
 }

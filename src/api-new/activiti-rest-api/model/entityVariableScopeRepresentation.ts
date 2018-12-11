@@ -22,4 +22,13 @@ export class EntityVariableScopeRepresentation {
     entityName?: string;
     mappedDataModel?: number;
     mappedVariableName?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.attributes = input.attributes.map((item: any) => {
+            return new Array<EntityAttributeScopeRepresentation>(item);
+        });
+    }
+
 }

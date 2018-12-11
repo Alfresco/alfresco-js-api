@@ -19,4 +19,11 @@ import { Version } from './version';
 
 export class VersionEntry {
     entry?: Version;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Version(input.entry);
+    }
+
 }

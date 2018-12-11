@@ -19,6 +19,12 @@ export class NodeBodyLock {
     timeToExpire?: number;
     type?: NodeBodyLock.TypeEnum;
     lifetime?: NodeBodyLock.LifetimeEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace NodeBodyLock {
     export type TypeEnum = 'ALLOW_OWNER_CHANGES' | 'FULL';

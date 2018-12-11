@@ -21,4 +21,14 @@ import { PersonNetworkEntry } from './personNetworkEntry';
 export class PersonNetworkPagingList {
     pagination: Pagination;
     entries: Array<PersonNetworkEntry>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<PersonNetworkEntry>(item);
+        });
+    }
+
 }

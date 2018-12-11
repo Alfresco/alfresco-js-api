@@ -18,4 +18,10 @@
 export class SystemPropertiesRepresentation {
     allowInvolveByEmail?: boolean;
     disableJavaScriptEventsInFormEditor?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

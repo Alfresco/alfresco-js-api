@@ -25,4 +25,13 @@ export class CreateProcessInstanceRepresentation {
     processDefinitionKey?: string;
     values?: any;
     variables?: Array<RestVariable>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.variables = input.variables.map((item: any) => {
+            return new Array<RestVariable>(item);
+        });
+    }
+
 }

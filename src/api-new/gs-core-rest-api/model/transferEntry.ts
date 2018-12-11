@@ -19,4 +19,11 @@ import { Transfer } from './transfer';
 
 export class TransferEntry {
     entry: Transfer;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Transfer(input.entry);
+    }
+
 }

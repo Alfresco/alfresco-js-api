@@ -19,4 +19,11 @@ import { ClassificationReasonsPagingList } from './classificationReasonsPagingLi
 
 export class ClassificationReasonsPaging {
     list?: ClassificationReasonsPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new ClassificationReasonsPagingList(input.list);
+    }
+
 }

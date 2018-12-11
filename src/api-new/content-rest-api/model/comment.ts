@@ -15,16 +15,27 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from './dateAlfresco';
 import { Person } from './person';
 
 export class Comment {
     id: string;
     content: string;
     createdBy: Person;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     edited: boolean;
     modifiedBy: Person;
-    modifiedAt: Date;
+    modifiedAt: DateAlfresco;
     canEdit: boolean;
     canDelete: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.createdBy = new Person(input.createdBy);
+        this.createdAt = new DateAlfresco(input.createdAt);
+        this.modifiedBy = new Person(input.modifiedBy);
+        this.modifiedAt = new DateAlfresco(input.modifiedAt);
+    }
+
 }

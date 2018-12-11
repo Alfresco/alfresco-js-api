@@ -31,6 +31,12 @@ export class RequestQuery {
      * The query which may have been generated in some way from the userQuery
      */
     query: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace RequestQuery {
     export type LanguageEnum = 'afts' | 'lucene' | 'cmis';

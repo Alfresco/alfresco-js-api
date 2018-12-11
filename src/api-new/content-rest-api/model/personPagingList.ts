@@ -21,4 +21,14 @@ import { PersonEntry } from './personEntry';
 export class PersonPagingList {
     pagination?: Pagination;
     entries?: Array<PersonEntry>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<PersonEntry>(item);
+        });
+    }
+
 }

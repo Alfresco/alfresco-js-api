@@ -22,4 +22,10 @@ export class VariableMappingRepresentation {
     outProcessVariable?: string;
     outVariableType?: string;
     typeOfMapping?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

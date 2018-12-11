@@ -21,6 +21,13 @@ export class Rendition {
     id?: string;
     content?: ContentInfo;
     status?: Rendition.StatusEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.content = new ContentInfo(input.content);
+    }
+
 }
 export namespace Rendition {
     export type StatusEnum = 'CREATED' | 'NOT_CREATED';

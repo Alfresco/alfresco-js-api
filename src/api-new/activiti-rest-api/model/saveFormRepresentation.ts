@@ -17,4 +17,10 @@
 
 export class SaveFormRepresentation {
     values?: any;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

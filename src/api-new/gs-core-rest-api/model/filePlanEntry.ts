@@ -19,4 +19,11 @@ import { FilePlan } from './filePlan';
 
 export class FilePlanEntry {
     entry: FilePlan;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new FilePlan(input.entry);
+    }
+
 }

@@ -20,4 +20,10 @@ export class ActionExecResult {
      * The unique identifier of the action pending execution
      */
     id: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

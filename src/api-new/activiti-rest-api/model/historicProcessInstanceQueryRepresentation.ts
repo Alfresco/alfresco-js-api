@@ -15,13 +15,14 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { QueryVariable } from './queryVariable';
 
 export class HistoricProcessInstanceQueryRepresentation {
     excludeSubprocesses?: boolean;
     finished?: boolean;
-    finishedAfter?: Date;
-    finishedBefore?: Date;
+    finishedAfter?: DateAlfresco;
+    finishedBefore?: DateAlfresco;
     includeProcessVariables?: boolean;
     involvedUser?: string;
     order?: string;
@@ -33,12 +34,25 @@ export class HistoricProcessInstanceQueryRepresentation {
     size?: number;
     sort?: string;
     start?: number;
-    startedAfter?: Date;
-    startedBefore?: Date;
+    startedAfter?: DateAlfresco;
+    startedBefore?: DateAlfresco;
     startedBy?: string;
     superProcessInstanceId?: string;
     tenantId?: string;
     tenantIdLike?: string;
     variables?: Array<QueryVariable>;
     withoutTenantId?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.finishedAfter = new DateAlfresco(input.finishedAfter);
+        this.finishedBefore = new DateAlfresco(input.finishedBefore);
+        this.startedAfter = new DateAlfresco(input.startedAfter);
+        this.startedBefore = new DateAlfresco(input.startedBefore);
+        this.variables = input.variables.map((item: any) => {
+            return new Array<QueryVariable>(item);
+        });
+    }
+
 }

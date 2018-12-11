@@ -30,4 +30,13 @@ export class RequestFacetIntervalsIntervals {
      * Sets the intervals for all fields.
      */
     sets?: Array<RequestFacetSet>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.sets = input.sets.map((item: any) => {
+            return new Array<RequestFacetSet>(item);
+        });
+    }
+
 }

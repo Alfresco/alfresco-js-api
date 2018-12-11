@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { GroupCapabilityRepresentation } from './groupCapabilityRepresentation';
 import { UserRepresentation } from './userRepresentation';
 
@@ -23,7 +24,7 @@ export class GroupRepresentation {
     externalId?: string;
     groups?: Array<GroupRepresentation>;
     id?: number;
-    lastSyncTimeStamp?: Date;
+    lastSyncTimeStamp?: DateAlfresco;
     manager?: UserRepresentation;
     name?: string;
     parentGroupId?: number;
@@ -32,4 +33,21 @@ export class GroupRepresentation {
     type?: number;
     userCount?: number;
     users?: Array<UserRepresentation>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.capabilities = input.capabilities.map((item: any) => {
+            return new Array<GroupCapabilityRepresentation>(item);
+        });
+        this.groups = input.groups.map((item: any) => {
+            return new Array<GroupRepresentation>(item);
+        });
+        this.lastSyncTimeStamp = new DateAlfresco(input.lastSyncTimeStamp);
+        this.manager = new UserRepresentation(input.manager);
+        this.users = input.users.map((item: any) => {
+            return new Array<UserRepresentation>(item);
+        });
+    }
+
 }

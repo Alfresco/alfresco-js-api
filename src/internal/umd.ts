@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export * from '../api-new/content-rest-api/index';
 export * from '../api-new/discovery-rest-api/index';
 export * from '../api-new/gs-classification-rest-api/index';

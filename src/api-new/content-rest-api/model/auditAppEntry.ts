@@ -19,4 +19,11 @@ import { AuditApp } from './auditApp';
 
 export class AuditAppEntry {
     entry?: AuditApp;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new AuditApp(input.entry);
+    }
+
 }

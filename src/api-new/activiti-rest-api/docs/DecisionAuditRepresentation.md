@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **activityId** | **string** |  | [optional] [default to null]
 **activityName** | **string** |  | [optional] [default to null]
 **auditTrailJson** | **string** |  | [optional] [default to null]
-**created** | **Date** |  | [optional] [default to null]
+**created** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **decisionExecutionFailed** | **boolean** |  | [optional] [default to null]
 **decisionKey** | **string** |  | [optional] [default to null]
 **decisionModelJson** | **string** |  | [optional] [default to null]

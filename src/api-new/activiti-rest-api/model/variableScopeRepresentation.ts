@@ -23,4 +23,10 @@ export class VariableScopeRepresentation {
     mappedVariableName?: string;
     processVariableName?: string;
     processVariableType?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

@@ -15,12 +15,13 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { QueryVariable } from './queryVariable';
 
 export class HistoricTaskInstanceQueryRepresentation {
-    dueDate?: Date;
-    dueDateAfter?: Date;
-    dueDateBefore?: Date;
+    dueDate?: DateAlfresco;
+    dueDateAfter?: DateAlfresco;
+    dueDateBefore?: DateAlfresco;
     executionId?: string;
     finished?: boolean;
     includeProcessVariables?: boolean;
@@ -43,12 +44,12 @@ export class HistoricTaskInstanceQueryRepresentation {
     taskAssignee?: string;
     taskAssigneeLike?: string;
     taskCandidateGroup?: string;
-    taskCompletedAfter?: Date;
-    taskCompletedBefore?: Date;
-    taskCompletedOn?: Date;
-    taskCreatedAfter?: Date;
-    taskCreatedBefore?: Date;
-    taskCreatedOn?: Date;
+    taskCompletedAfter?: DateAlfresco;
+    taskCompletedBefore?: DateAlfresco;
+    taskCompletedOn?: DateAlfresco;
+    taskCreatedAfter?: DateAlfresco;
+    taskCreatedBefore?: DateAlfresco;
+    taskCreatedOn?: DateAlfresco;
     taskDefinitionKey?: string;
     taskDefinitionKeyLike?: string;
     taskDeleteReason?: string;
@@ -69,4 +70,25 @@ export class HistoricTaskInstanceQueryRepresentation {
     tenantIdLike?: string;
     withoutDueDate?: boolean;
     withoutTenantId?: boolean;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.dueDate = new DateAlfresco(input.dueDate);
+        this.dueDateAfter = new DateAlfresco(input.dueDateAfter);
+        this.dueDateBefore = new DateAlfresco(input.dueDateBefore);
+        this.processVariables = input.processVariables.map((item: any) => {
+            return new Array<QueryVariable>(item);
+        });
+        this.taskCompletedAfter = new DateAlfresco(input.taskCompletedAfter);
+        this.taskCompletedBefore = new DateAlfresco(input.taskCompletedBefore);
+        this.taskCompletedOn = new DateAlfresco(input.taskCompletedOn);
+        this.taskCreatedAfter = new DateAlfresco(input.taskCreatedAfter);
+        this.taskCreatedBefore = new DateAlfresco(input.taskCreatedBefore);
+        this.taskCreatedOn = new DateAlfresco(input.taskCreatedOn);
+        this.taskVariables = input.taskVariables.map((item: any) => {
+            return new Array<QueryVariable>(item);
+        });
+    }
+
 }

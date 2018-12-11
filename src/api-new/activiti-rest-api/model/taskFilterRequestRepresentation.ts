@@ -23,4 +23,11 @@ export class TaskFilterRequestRepresentation {
     filterId?: number;
     page?: number;
     size?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.filter = new TaskFilterRepresentation(input.filter);
+    }
+
 }

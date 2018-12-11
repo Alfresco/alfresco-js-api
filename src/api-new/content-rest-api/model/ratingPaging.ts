@@ -19,4 +19,11 @@ import { RatingPagingList } from './ratingPagingList';
 
 export class RatingPaging {
     list?: RatingPagingList;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.list = new RatingPagingList(input.list);
+    }
+
 }

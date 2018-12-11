@@ -21,4 +21,10 @@ export class SecurityMark {
     groupId: string;
     groupName: string;
     groupType: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

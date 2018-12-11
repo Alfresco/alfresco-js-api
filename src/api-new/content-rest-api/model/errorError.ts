@@ -22,4 +22,10 @@ export class ErrorError {
     stackTrace: string;
     descriptionURL: string;
     logId?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

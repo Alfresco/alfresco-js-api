@@ -18,4 +18,10 @@
 export class SecurityControlSetting {
     key: string;
     value: any;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

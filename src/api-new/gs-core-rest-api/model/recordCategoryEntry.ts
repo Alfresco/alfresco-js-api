@@ -19,4 +19,11 @@ import { RecordCategory } from './recordCategory';
 
 export class RecordCategoryEntry {
     entry: RecordCategory;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new RecordCategory(input.entry);
+    }
+
 }

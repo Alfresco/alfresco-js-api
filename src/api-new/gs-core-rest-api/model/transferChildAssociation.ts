@@ -16,8 +16,8 @@
 */
 
 import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociationInfo';
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { PathInfo } from '../../content-rest-api/model/pathInfo';
-import { TransferChild } from './transferChild';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class TransferChildAssociation {
@@ -36,13 +36,25 @@ The character . must not be used at the end of the name.
      * Indicates if the record folder is closed
      */
     isClosed?: boolean;
-    modifiedAt: Date;
+    modifiedAt: DateAlfresco;
     modifiedByUser: UserInfo;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     createdByUser: UserInfo;
     aspectNames?: Array<string>;
     properties?: any;
     allowableOperations?: Array<string>;
     path?: PathInfo;
     association?: ChildAssociationInfo;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.modifiedAt = new DateAlfresco(input.modifiedAt);
+        this.modifiedByUser = new UserInfo(input.modifiedByUser);
+        this.createdAt = new DateAlfresco(input.createdAt);
+        this.createdByUser = new UserInfo(input.createdByUser);
+        this.path = new PathInfo(input.path);
+        this.association = new ChildAssociationInfo(input.association);
+    }
+
 }

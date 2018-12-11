@@ -19,4 +19,11 @@ import { UnfiledRecordFolder } from './unfiledRecordFolder';
 
 export class UnfiledRecordFolderEntry {
     entry: UnfiledRecordFolder;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new UnfiledRecordFolder(input.entry);
+    }
+
 }

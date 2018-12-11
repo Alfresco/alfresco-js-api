@@ -19,4 +19,11 @@ import { Tag } from './tag';
 
 export class TagEntry {
     entry: Tag;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new Tag(input.entry);
+    }
+
 }

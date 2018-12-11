@@ -23,4 +23,16 @@ export class AppDefinition {
     models?: Array<AppModelDefinition>;
     publishIdentityInfo?: Array<PublishIdentityInfoRepresentation>;
     theme?: string;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.models = input.models.map((item: any) => {
+            return new Array<AppModelDefinition>(item);
+        });
+        this.publishIdentityInfo = input.publishIdentityInfo.map((item: any) => {
+            return new Array<PublishIdentityInfoRepresentation>(item);
+        });
+    }
+
 }

@@ -21,4 +21,14 @@ import { Pagination } from './pagination';
 export class GroupPagingList {
     pagination?: Pagination;
     entries?: Array<GroupEntry>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.pagination = new Pagination(input.pagination);
+        this.entries = input.entries.map((item: any) => {
+            return new Array<GroupEntry>(item);
+        });
+    }
+
 }

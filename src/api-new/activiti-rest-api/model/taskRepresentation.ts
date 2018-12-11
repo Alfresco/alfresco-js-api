@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { LightGroupRepresentation } from './lightGroupRepresentation';
 import { LightUserRepresentation } from './lightUserRepresentation';
 import { RestVariable } from './restVariable';
@@ -23,11 +24,11 @@ export class TaskRepresentation {
     adhocTaskCanBeReassigned?: boolean;
     assignee?: LightUserRepresentation;
     category?: string;
-    created?: Date;
+    created?: DateAlfresco;
     description?: string;
-    dueDate?: Date;
+    dueDate?: DateAlfresco;
     duration?: number;
-    endDate?: Date;
+    endDate?: DateAlfresco;
     executionId?: string;
     formKey?: string;
     id?: string;
@@ -53,4 +54,23 @@ export class TaskRepresentation {
     processInstanceStartUserId?: string;
     taskDefinitionKey?: string;
     variables?: Array<RestVariable>;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.assignee = new LightUserRepresentation(input.assignee);
+        this.created = new DateAlfresco(input.created);
+        this.dueDate = new DateAlfresco(input.dueDate);
+        this.endDate = new DateAlfresco(input.endDate);
+        this.involvedGroups = input.involvedGroups.map((item: any) => {
+            return new Array<LightGroupRepresentation>(item);
+        });
+        this.involvedPeople = input.involvedPeople.map((item: any) => {
+            return new Array<LightUserRepresentation>(item);
+        });
+        this.variables = input.variables.map((item: any) => {
+            return new Array<RestVariable>(item);
+        });
+    }
+
 }

@@ -40,6 +40,12 @@ export class Download {
      * the current status of the download node creation
      */
     status?: Download.StatusEnum;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }
 export namespace Download {
     export type StatusEnum = 'PENDING' | 'CANCELLED' | 'IN_PROGRESS' | 'DONE' | 'MAX_CONTENT_SIZE_EXCEEDED';

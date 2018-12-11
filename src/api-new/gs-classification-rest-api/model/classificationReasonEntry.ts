@@ -19,4 +19,11 @@ import { ClassificationReason } from './classificationReason';
 
 export class ClassificationReasonEntry {
     entry: ClassificationReason;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new ClassificationReason(input.entry);
+    }
+
 }

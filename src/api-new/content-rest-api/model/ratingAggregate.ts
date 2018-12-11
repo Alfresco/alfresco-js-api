@@ -18,4 +18,10 @@
 export class RatingAggregate {
     numberOfRatings: number;
     average?: number;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+    }
+
 }

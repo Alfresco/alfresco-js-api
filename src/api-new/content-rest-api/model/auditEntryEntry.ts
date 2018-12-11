@@ -19,4 +19,11 @@ import { AuditEntry } from './auditEntry';
 
 export class AuditEntryEntry {
     entry?: AuditEntry;
+
+    constructor(input?: any) {
+
+        Object.assign(this, input);
+        this.entry = new AuditEntry(input.entry);
+    }
+
 }
