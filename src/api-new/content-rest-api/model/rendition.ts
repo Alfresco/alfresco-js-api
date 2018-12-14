@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ContentInfo } from './contentInfo';
+import { ContentInfo } from '../../content-rest-api/model/contentInfo';
 
 export class Rendition {
     id?: string;
@@ -25,7 +25,7 @@ export class Rendition {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.content = new ContentInfo(input.content);
+        this.content = input.content ? new ContentInfo(input.content) : undefined;
     }
 
 }

@@ -119,11 +119,11 @@ sharedlinksApi.createSharedLink(sharedLinkBodyCreateopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sharedLinkBodyCreate** | [**SharedLinkBodyCreate**](SharedLinkBodyCreate.md)| The nodeId to create a shared link for. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the shared link, the following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the shared link, the following optional fields can be requested:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -305,7 +305,7 @@ sharedlinksApi.getSharedLink(sharedIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sharedId** | **string**| The identifier of a shared link to a file. | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -656,11 +656,11 @@ If not supplied then the default value is 100.
 
 *   where=(sharedByUser='-me-')
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the shared link, the following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the shared link, the following optional fields can be requested:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

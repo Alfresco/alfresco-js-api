@@ -18,7 +18,7 @@
 import { AppDeploymentRepresentation } from './appDeploymentRepresentation';
 
 export class ResultListDataRepresentationAppDeploymentRepresentation {
-    data?: Array<AppDeploymentRepresentation>;
+    data?: AppDeploymentRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationAppDeploymentRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<AppDeploymentRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new AppDeploymentRepresentation(item);
+            });
+        }
     }
 
 }

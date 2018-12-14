@@ -29,7 +29,7 @@ export class TenantEvent {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.eventTime = new DateAlfresco(input.eventTime);
+        this.eventTime = input.eventTime ? new DateAlfresco(input.eventTime) : undefined;
     }
 
 }

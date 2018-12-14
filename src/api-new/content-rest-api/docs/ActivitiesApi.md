@@ -76,7 +76,7 @@ If not supplied then the default value is 100.
  **who** | **string**| A filter to include the user's activities only me, other user's activities only others'
  | [optional] 
  **siteId** | **string**| Include only activity feed entries relating to this site. | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

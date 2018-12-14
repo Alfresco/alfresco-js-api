@@ -18,15 +18,17 @@
 import { ProcessScopeIdentifierRepresentation } from './processScopeIdentifierRepresentation';
 
 export class ProcessScopesRequestRepresentation {
-    identifiers?: Array<ProcessScopeIdentifierRepresentation>;
+    identifiers?: ProcessScopeIdentifierRepresentation[];
     overriddenModel?: string;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.identifiers = input.identifiers.map((item: any) => {
-            return new Array<ProcessScopeIdentifierRepresentation>(item);
-        });
+        if (input.identifiers) {
+            this.identifiers = input.identifiers.map((item: any) => {
+                return new ProcessScopeIdentifierRepresentation(item);
+            });
+        }
     }
 
 }

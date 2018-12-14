@@ -23,7 +23,7 @@ export class ClassificationReasonsPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new ClassificationReasonsPagingList(input.list);
+        this.list = input.list ? new ClassificationReasonsPagingList(input.list) : undefined;
     }
 
 }

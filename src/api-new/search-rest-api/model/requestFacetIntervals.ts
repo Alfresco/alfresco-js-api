@@ -25,21 +25,25 @@ export class RequestFacetIntervals {
     /**
      * Sets the intervals for all fields.
      */
-    sets?: Array<RequestFacetSet>;
+    sets?: RequestFacetSet[];
     /**
      * Specifies the fields to facet by interval.
      */
-    intervals?: Array<RequestFacetIntervalsIntervals>;
+    intervals?: RequestFacetIntervalsIntervals[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.sets = input.sets.map((item: any) => {
-            return new Array<RequestFacetSet>(item);
-        });
-        this.intervals = input.intervals.map((item: any) => {
-            return new Array<RequestFacetIntervalsIntervals>(item);
-        });
+        if (input.sets) {
+            this.sets = input.sets.map((item: any) => {
+                return new RequestFacetSet(item);
+            });
+        }
+        if (input.intervals) {
+            this.intervals = input.intervals.map((item: any) => {
+                return new RequestFacetIntervalsIntervals(item);
+            });
+        }
     }
 
 }

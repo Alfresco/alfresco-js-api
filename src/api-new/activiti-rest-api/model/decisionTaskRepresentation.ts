@@ -34,7 +34,7 @@ export class DecisionTaskRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.decisionExecutionEnded = new DateAlfresco(input.decisionExecutionEnded);
+        this.decisionExecutionEnded = input.decisionExecutionEnded ? new DateAlfresco(input.decisionExecutionEnded) : undefined;
     }
 
 }

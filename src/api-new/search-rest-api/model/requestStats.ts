@@ -78,11 +78,11 @@ export class RequestStats {
     /**
      * A list of filters to exclude
      */
-    excludeFilters?: Array<string>;
+    excludeFilters?: string[];
     /**
      * A list of percentile values, e.g. \"1,99,99.9\"
      */
-    percentiles?: Array<number>;
+    percentiles?: number[];
 
     constructor(input?: any) {
 

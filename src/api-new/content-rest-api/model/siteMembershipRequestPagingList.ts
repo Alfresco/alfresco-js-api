@@ -15,20 +15,22 @@
 * limitations under the License.
 */
 
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 import { SiteMembershipRequestEntry } from './siteMembershipRequestEntry';
 
 export class SiteMembershipRequestPagingList {
     pagination: Pagination;
-    entries: Array<SiteMembershipRequestEntry>;
+    entries: SiteMembershipRequestEntry[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<SiteMembershipRequestEntry>(item);
-        });
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new SiteMembershipRequestEntry(item);
+            });
+        }
     }
 
 }

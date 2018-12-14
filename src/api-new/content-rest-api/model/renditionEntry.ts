@@ -23,7 +23,7 @@ export class RenditionEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new Rendition(input.entry);
+        this.entry = input.entry ? new Rendition(input.entry) : undefined;
     }
 
 }

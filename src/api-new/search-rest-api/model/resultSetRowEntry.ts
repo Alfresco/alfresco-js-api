@@ -26,7 +26,7 @@ export class ResultSetRowEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new ResultNode(input.entry);
+        this.entry = input.entry ? new ResultNode(input.entry) : undefined;
     }
 
 }

@@ -18,7 +18,7 @@
 import { DataSourceRepresentation } from './dataSourceRepresentation';
 
 export class ResultListDataRepresentationDataSourceRepresentation {
-    data?: Array<DataSourceRepresentation>;
+    data?: DataSourceRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationDataSourceRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<DataSourceRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new DataSourceRepresentation(item);
+            });
+        }
     }
 
 }

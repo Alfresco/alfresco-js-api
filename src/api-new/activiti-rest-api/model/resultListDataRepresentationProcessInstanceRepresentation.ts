@@ -18,7 +18,7 @@
 import { ProcessInstanceRepresentation } from './processInstanceRepresentation';
 
 export class ResultListDataRepresentationProcessInstanceRepresentation {
-    data?: Array<ProcessInstanceRepresentation>;
+    data?: ProcessInstanceRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationProcessInstanceRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<ProcessInstanceRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new ProcessInstanceRepresentation(item);
+            });
+        }
     }
 
 }

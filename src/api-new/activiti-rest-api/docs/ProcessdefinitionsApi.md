@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 <a name="getIdentityLinksForFamilyUsingGET"></a>
 # **getIdentityLinksForFamilyUsingGET**
-> Array<IdentityLinkRepresentation> getIdentityLinksForFamilyUsingGET(processDefinitionIdfamily)
+> IdentityLinkRepresentation getIdentityLinksForFamilyUsingGET(processDefinitionIdfamily)
 
 List either the users or groups involved with a process definition
 
@@ -169,11 +169,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
+[**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
 <a name="getIdentityLinksUsingGET"></a>
 # **getIdentityLinksUsingGET**
-> Array<IdentityLinkRepresentation> getIdentityLinksUsingGET(processDefinitionId)
+> IdentityLinkRepresentation getIdentityLinksUsingGET(processDefinitionId)
 
 List the users and groups involved with a process definition
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
+[**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
 <a name="getProcessDefinitionDecisionTablesUsingGET"></a>
 # **getProcessDefinitionDecisionTablesUsingGET**
@@ -363,7 +363,7 @@ Name | Type | Description  | Notes
 
 <a name="getRestFieldValuesUsingGET"></a>
 # **getRestFieldValuesUsingGET**
-> Array<FormValueRepresentation> getRestFieldValuesUsingGET()
+> FormValueRepresentation getRestFieldValuesUsingGET()
 
 Retrieve field values (eg. the typeahead field)
 
@@ -392,11 +392,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Array<FormValueRepresentation>**](FormValueRepresentation.md)
+[**FormValueRepresentation**](FormValueRepresentation.md)
 
 <a name="getRestTableFieldValuesUsingGET"></a>
 # **getRestTableFieldValuesUsingGET**
-> Array<FormValueRepresentation> getRestTableFieldValuesUsingGET()
+> FormValueRepresentation getRestTableFieldValuesUsingGET()
 
 Retrieve field values (eg. the table field)
 
@@ -425,5 +425,5 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Array<FormValueRepresentation>**](FormValueRepresentation.md)
+[**FormValueRepresentation**](FormValueRepresentation.md)
 

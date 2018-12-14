@@ -17,7 +17,7 @@
 
 export class LightGroupRepresentation {
     externalId?: string;
-    groups?: Array<LightGroupRepresentation>;
+    groups?: LightGroupRepresentation[];
     id?: number;
     name?: string;
     status?: string;
@@ -25,9 +25,11 @@ export class LightGroupRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.groups = input.groups.map((item: any) => {
-            return new Array<LightGroupRepresentation>(item);
-        });
+        if (input.groups) {
+            this.groups = input.groups.map((item: any) => {
+                return new LightGroupRepresentation(item);
+            });
+        }
     }
 
 }

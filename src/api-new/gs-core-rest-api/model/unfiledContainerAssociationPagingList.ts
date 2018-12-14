@@ -21,17 +21,19 @@ import { UnfiledContainerChildAssociationEntry } from './unfiledContainerChildAs
 
 export class UnfiledContainerAssociationPagingList {
     pagination?: Pagination;
-    entries?: Array<UnfiledContainerChildAssociationEntry>;
+    entries?: UnfiledContainerChildAssociationEntry[];
     source?: UnfiledContainer;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<UnfiledContainerChildAssociationEntry>(item);
-        });
-        this.source = new UnfiledContainer(input.source);
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new UnfiledContainerChildAssociationEntry(item);
+            });
+        }
+        this.source = input.source ? new UnfiledContainer(input.source) : undefined;
     }
 
 }

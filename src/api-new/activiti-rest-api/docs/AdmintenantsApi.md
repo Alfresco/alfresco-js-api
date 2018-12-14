@@ -92,7 +92,7 @@ null (empty response body)
 
 <a name="getTenantEventsUsingGET"></a>
 # **getTenantEventsUsingGET**
-> Array<TenantEvent> getTenantEventsUsingGET(tenantId)
+> TenantEvent getTenantEventsUsingGET(tenantId)
 
 Get tenant events
 
@@ -125,7 +125,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<TenantEvent>**](TenantEvent.md)
+[**TenantEvent**](TenantEvent.md)
 
 <a name="getTenantLogoUsingGET"></a>
 # **getTenantLogoUsingGET**
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 <a name="getTenantsUsingGET"></a>
 # **getTenantsUsingGET**
-> Array<LightTenantRepresentation> getTenantsUsingGET()
+> LightTenantRepresentation getTenantsUsingGET()
 
 List tenants
 
@@ -234,7 +234,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Array<LightTenantRepresentation>**](LightTenantRepresentation.md)
+[**LightTenantRepresentation**](LightTenantRepresentation.md)
 
 <a name="updateUsingPUT"></a>
 # **updateUsingPUT**

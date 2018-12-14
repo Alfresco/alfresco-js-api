@@ -16,7 +16,7 @@
 */
 
 export class DownloadBodyCreate {
-    nodeIds: Array<string>;
+    nodeIds: string[];
 
     constructor(input?: any) {
 

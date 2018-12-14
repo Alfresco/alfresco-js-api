@@ -31,15 +31,15 @@ export class ResultSetContext {
     /**
      * The counts from facet queries
      */
-    facetQueries?: Array<ResultSetContextFacetQueries>;
+    facetQueries?: ResultSetContextFacetQueries[];
     /**
      * The counts from field facets
      */
-    facetsFields?: Array<ResultBuckets>;
+    facetsFields?: ResultBuckets[];
     /**
      * The faceted response
      */
-    facets?: Array<GenericFacetResponse>;
+    facets?: GenericFacetResponse[];
     /**
      * Suggested corrections
 
@@ -48,25 +48,33 @@ If alternatives were found that return more results than the original query they
 The highest quality suggestion is first.
 
      */
-    spellcheck?: Array<ResultSetContextSpellcheck>;
+    spellcheck?: ResultSetContextSpellcheck[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.consistency = new ResponseConsistency(input.consistency);
-        this.request = new SearchRequest(input.request);
-        this.facetQueries = input.facetQueries.map((item: any) => {
-            return new Array<ResultSetContextFacetQueries>(item);
-        });
-        this.facetsFields = input.facetsFields.map((item: any) => {
-            return new Array<ResultBuckets>(item);
-        });
-        this.facets = input.facets.map((item: any) => {
-            return new Array<GenericFacetResponse>(item);
-        });
-        this.spellcheck = input.spellcheck.map((item: any) => {
-            return new Array<ResultSetContextSpellcheck>(item);
-        });
+        this.consistency = input.consistency ? new ResponseConsistency(input.consistency) : undefined;
+        this.request = input.request ? new SearchRequest(input.request) : undefined;
+        if (input.facetQueries) {
+            this.facetQueries = input.facetQueries.map((item: any) => {
+                return new ResultSetContextFacetQueries(item);
+            });
+        }
+        if (input.facetsFields) {
+            this.facetsFields = input.facetsFields.map((item: any) => {
+                return new ResultBuckets(item);
+            });
+        }
+        if (input.facets) {
+            this.facets = input.facets.map((item: any) => {
+                return new GenericFacetResponse(item);
+            });
+        }
+        if (input.spellcheck) {
+            this.spellcheck = input.spellcheck.map((item: any) => {
+                return new ResultSetContextSpellcheck(item);
+            });
+        }
     }
 
 }

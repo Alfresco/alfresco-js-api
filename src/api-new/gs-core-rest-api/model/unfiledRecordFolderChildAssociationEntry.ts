@@ -23,7 +23,7 @@ export class UnfiledRecordFolderChildAssociationEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new UnfiledRecordFolderChildAssociation(input.entry);
+        this.entry = input.entry ? new UnfiledRecordFolderChildAssociation(input.entry) : undefined;
     }
 
 }

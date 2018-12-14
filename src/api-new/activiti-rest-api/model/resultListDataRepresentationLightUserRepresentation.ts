@@ -18,7 +18,7 @@
 import { LightUserRepresentation } from './lightUserRepresentation';
 
 export class ResultListDataRepresentationLightUserRepresentation {
-    data?: Array<LightUserRepresentation>;
+    data?: LightUserRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationLightUserRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<LightUserRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new LightUserRepresentation(item);
+            });
+        }
     }
 
 }

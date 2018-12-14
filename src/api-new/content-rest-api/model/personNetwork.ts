@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { DateAlfresco } from './dateAlfresco';
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { NetworkQuota } from './networkQuota';
 
 /**
@@ -37,15 +37,17 @@ export class PersonNetwork {
     createdAt?: DateAlfresco;
     paidNetwork?: boolean;
     subscriptionLevel?: PersonNetwork.SubscriptionLevelEnum;
-    quotas?: Array<NetworkQuota>;
+    quotas?: NetworkQuota[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.createdAt = new DateAlfresco(input.createdAt);
-        this.quotas = input.quotas.map((item: any) => {
-            return new Array<NetworkQuota>(item);
-        });
+        this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+        if (input.quotas) {
+            this.quotas = input.quotas.map((item: any) => {
+                return new NetworkQuota(item);
+            });
+        }
     }
 
 }

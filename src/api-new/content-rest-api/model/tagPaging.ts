@@ -23,7 +23,7 @@ export class TagPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new TagPagingList(input.list);
+        this.list = input.list ? new TagPagingList(input.list) : undefined;
     }
 
 }

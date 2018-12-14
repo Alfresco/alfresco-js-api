@@ -47,7 +47,7 @@ Name | Type | Description  | Notes
 
 <a name="getEndpointConfigurationsUsingGET"></a>
 # **getEndpointConfigurationsUsingGET**
-> Array<EndpointConfigurationRepresentation> getEndpointConfigurationsUsingGET()
+> EndpointConfigurationRepresentation getEndpointConfigurationsUsingGET()
 
 List endpoint configurations
 
@@ -76,5 +76,5 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Array<EndpointConfigurationRepresentation>**](EndpointConfigurationRepresentation.md)
+[**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
 

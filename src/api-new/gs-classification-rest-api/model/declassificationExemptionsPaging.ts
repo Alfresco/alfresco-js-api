@@ -23,7 +23,7 @@ export class DeclassificationExemptionsPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new DeclassificationExemptionsPagingList(input.list);
+        this.list = input.list ? new DeclassificationExemptionsPagingList(input.list) : undefined;
     }
 
 }

@@ -23,7 +23,7 @@ export class AuditLogEntryRepresentation {
     activityType?: string;
     durationInMillis?: number;
     endTime?: string;
-    formData?: Array<AuditLogFormDataRepresentation>;
+    formData?: AuditLogFormDataRepresentation[];
     index?: number;
     selectedOutcome?: string;
     startTime?: string;
@@ -34,9 +34,11 @@ export class AuditLogEntryRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.formData = input.formData.map((item: any) => {
-            return new Array<AuditLogFormDataRepresentation>(item);
-        });
+        if (input.formData) {
+            this.formData = input.formData.map((item: any) => {
+                return new AuditLogFormDataRepresentation(item);
+            });
+        }
     }
 
 }

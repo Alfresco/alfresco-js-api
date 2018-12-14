@@ -23,7 +23,7 @@ export class DeletedNodeEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new DeletedNode(input.entry);
+        this.entry = input.entry ? new DeletedNode(input.entry) : undefined;
     }
 
 }

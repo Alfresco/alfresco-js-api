@@ -20,24 +20,30 @@ import { FormOutcomeRepresentation } from './formOutcomeRepresentation';
 
 export class FormScopeRepresentation {
     description?: string;
-    fieldVariables?: Array<FormFieldRepresentation>;
-    fields?: Array<FormFieldRepresentation>;
+    fieldVariables?: FormFieldRepresentation[];
+    fields?: FormFieldRepresentation[];
     id?: number;
     name?: string;
-    outcomes?: Array<FormOutcomeRepresentation>;
+    outcomes?: FormOutcomeRepresentation[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.fieldVariables = input.fieldVariables.map((item: any) => {
-            return new Array<FormFieldRepresentation>(item);
-        });
-        this.fields = input.fields.map((item: any) => {
-            return new Array<FormFieldRepresentation>(item);
-        });
-        this.outcomes = input.outcomes.map((item: any) => {
-            return new Array<FormOutcomeRepresentation>(item);
-        });
+        if (input.fieldVariables) {
+            this.fieldVariables = input.fieldVariables.map((item: any) => {
+                return new FormFieldRepresentation(item);
+            });
+        }
+        if (input.fields) {
+            this.fields = input.fields.map((item: any) => {
+                return new FormFieldRepresentation(item);
+            });
+        }
+        if (input.outcomes) {
+            this.outcomes = input.outcomes.map((item: any) => {
+                return new FormOutcomeRepresentation(item);
+            });
+        }
     }
 
 }

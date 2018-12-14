@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 
 <a name="getModelThumbnailUsingGET"></a>
 # **getModelThumbnailUsingGET**
-> Array<string> getModelThumbnailUsingGET(modelId)
+> string getModelThumbnailUsingGET(modelId)
 
 Get a model's thumbnail image
 
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Array<string>**
+**string**
 
 <a name="getModelUsingGET"></a>
 # **getModelUsingGET**
@@ -488,7 +488,7 @@ Name | Type | Description  | Notes
 
 <a name="validateModelUsingPOST"></a>
 # **validateModelUsingPOST**
-> Array<ValidationErrorRepresentation> validateModelUsingPOST(modelIdopts)
+> ValidationErrorRepresentation validateModelUsingPOST(modelIdopts)
 
 Validate model content
 
@@ -525,5 +525,5 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<ValidationErrorRepresentation>**](ValidationErrorRepresentation.md)
+[**ValidationErrorRepresentation**](ValidationErrorRepresentation.md)
 

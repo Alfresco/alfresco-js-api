@@ -18,7 +18,7 @@
 import { RuntimeDecisionTableRepresentation } from './runtimeDecisionTableRepresentation';
 
 export class ResultListDataRepresentationRuntimeDecisionTableRepresentation {
-    data?: Array<RuntimeDecisionTableRepresentation>;
+    data?: RuntimeDecisionTableRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationRuntimeDecisionTableRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<RuntimeDecisionTableRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new RuntimeDecisionTableRepresentation(item);
+            });
+        }
     }
 
 }

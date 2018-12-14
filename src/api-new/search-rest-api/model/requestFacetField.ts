@@ -49,7 +49,7 @@ export class RequestFacetField {
 This is used for multi-select facetting.
 
      */
-    excludeFilters?: Array<string>;
+    excludeFilters?: string[];
 
     constructor(input?: any) {
 

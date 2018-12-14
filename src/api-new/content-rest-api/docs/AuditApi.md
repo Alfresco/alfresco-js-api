@@ -169,7 +169,7 @@ auditApi.getAuditApp(auditApplicationIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **auditApplicationId** | **string**| The identifier of an audit application. | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **auditApplicationId** | **string**| The identifier of an audit application. | 
  **auditEntryId** | **string**| The identifier of an audit entry. | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -328,7 +328,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
  | [optional] [default to 0]
- **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**string**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -471,10 +471,10 @@ If not supplied then the default value is 100.
 
 *   where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
 * values
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -579,7 +579,7 @@ Name | Type | Description  | Notes
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
  | [optional] [default to 0]
- **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**string**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -598,10 +598,10 @@ If not supplied then the default value is 100.
 
 *   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
 * values
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -678,7 +678,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **auditApplicationId** | **string**| The identifier of an audit application. | 
  **auditAppBodyUpdate** | [**AuditBodyUpdate**](AuditBodyUpdate.md)| The audit application to update. | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

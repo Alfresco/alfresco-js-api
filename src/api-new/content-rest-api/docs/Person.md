@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **userStatus** | **string** |  | [optional] [default to null]
 **enabled** | **boolean** |  | [default to null]
 **emailNotificationsEnabled** | **boolean** |  | [optional] [default to null]
-**aspectNames** | **Array<string>** |  | [optional] [default to null]
+**aspectNames** | **string[]** |  | [optional] [default to null]
 **properties** | **{ [key: string]: string; }** |  | [optional] [default to null]
 **capabilities** | [**Capabilities**](Capabilities.md) |  | [optional] [default to null]
 

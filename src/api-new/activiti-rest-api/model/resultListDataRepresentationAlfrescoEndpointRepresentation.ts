@@ -18,7 +18,7 @@
 import { AlfrescoEndpointRepresentation } from './alfrescoEndpointRepresentation';
 
 export class ResultListDataRepresentationAlfrescoEndpointRepresentation {
-    data?: Array<AlfrescoEndpointRepresentation>;
+    data?: AlfrescoEndpointRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationAlfrescoEndpointRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<AlfrescoEndpointRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new AlfrescoEndpointRepresentation(item);
+            });
+        }
     }
 
 }

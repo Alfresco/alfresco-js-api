@@ -23,7 +23,7 @@ export class RenditionPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new RenditionPagingList(input.list);
+        this.list = input.list ? new RenditionPagingList(input.list) : undefined;
     }
 
 }

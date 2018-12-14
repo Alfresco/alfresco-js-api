@@ -109,7 +109,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **tagBodyCreate** | [**TagBody**](TagBody.md)| The new tag | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -214,7 +214,7 @@ tagsApi.getTag(tagIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tagId** | **string**| The identifier of a tag. | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -296,7 +296,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -308,7 +308,7 @@ If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the tag. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the tag. The following optional fields can be requested:
 * count
  | [optional] 
 
@@ -376,7 +376,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -442,7 +442,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tagId** | **string**| The identifier of a tag. | 
  **tagBodyUpdate** | [**TagBody**](TagBody.md)| The updated tag | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

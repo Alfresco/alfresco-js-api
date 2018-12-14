@@ -29,7 +29,7 @@ export class AppDefinitionUpdateResultRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.appDefinition = new AppDefinitionRepresentation(input.appDefinition);
+        this.appDefinition = input.appDefinition ? new AppDefinitionRepresentation(input.appDefinition) : undefined;
     }
 
 }

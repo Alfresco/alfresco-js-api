@@ -69,7 +69,7 @@ JSON
   }
 
  | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **ratingId** | **string**| The identifier of a rating. | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -252,7 +252,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

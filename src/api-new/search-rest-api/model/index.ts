@@ -16,12 +16,10 @@
 */
 
 
-export * from './contentInfo';
 export * from './genericBucket';
 export * from './genericBucketBucketInfo';
 export * from './genericFacetResponse';
 export * from './genericMetric';
-export * from './node';
 export * from './requestDefaults';
 export * from './requestFacetField';
 export * from './requestFacetFields';

@@ -401,7 +401,7 @@ null (empty response body)
 
 <a name="getCapabilitiesUsingGET"></a>
 # **getCapabilitiesUsingGET**
-> Array<string> getCapabilitiesUsingGET(groupId)
+> string getCapabilitiesUsingGET(groupId)
 
 List group capabilities
 
@@ -434,7 +434,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Array<string>**
+**string**
 
 <a name="getGroupUsersUsingGET"></a>
 # **getGroupUsersUsingGET**
@@ -526,7 +526,7 @@ Name | Type | Description  | Notes
 
 <a name="getGroupsUsingGET1"></a>
 # **getGroupsUsingGET1**
-> Array<LightGroupRepresentation> getGroupsUsingGET1(opts)
+> LightGroupRepresentation getGroupsUsingGET1(opts)
 
 Query groups
 
@@ -566,11 +566,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<LightGroupRepresentation>**](LightGroupRepresentation.md)
+[**LightGroupRepresentation**](LightGroupRepresentation.md)
 
 <a name="getRelatedGroupsUsingGET"></a>
 # **getRelatedGroupsUsingGET**
-> Array<LightGroupRepresentation> getRelatedGroupsUsingGET(groupId)
+> LightGroupRepresentation getRelatedGroupsUsingGET(groupId)
 
 Get related groups
 
@@ -603,7 +603,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<LightGroupRepresentation>**](LightGroupRepresentation.md)
+[**LightGroupRepresentation**](LightGroupRepresentation.md)
 
 <a name="updateGroupUsingPUT"></a>
 # **updateGroupUsingPUT**

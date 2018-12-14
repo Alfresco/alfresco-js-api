@@ -26,14 +26,16 @@ export class SearchEntry {
      * Highlight fragments if requested and available. A match can happen in any of the requested field.
 
      */
-    highlight?: Array<SearchEntryHighlight>;
+    highlight?: SearchEntryHighlight[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.highlight = input.highlight.map((item: any) => {
-            return new Array<SearchEntryHighlight>(item);
-        });
+        if (input.highlight) {
+            this.highlight = input.highlight.map((item: any) => {
+                return new SearchEntryHighlight(item);
+            });
+        }
     }
 
 }

@@ -23,7 +23,7 @@ export class SiteMembershipRequestWithPersonPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new SiteMembershipRequestWithPersonPagingList(input.list);
+        this.list = input.list ? new SiteMembershipRequestWithPersonPagingList(input.list) : undefined;
     }
 
 }

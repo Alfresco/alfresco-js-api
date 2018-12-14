@@ -23,7 +23,7 @@ export class RecordFolderEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new RecordFolder(input.entry);
+        this.entry = input.entry ? new RecordFolder(input.entry) : undefined;
     }
 
 }

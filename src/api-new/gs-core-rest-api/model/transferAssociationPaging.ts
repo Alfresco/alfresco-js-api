@@ -23,7 +23,7 @@ export class TransferAssociationPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new TransferAssociationPagingList(input.list);
+        this.list = input.list ? new TransferAssociationPagingList(input.list) : undefined;
     }
 
 }

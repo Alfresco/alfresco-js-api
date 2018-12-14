@@ -25,14 +25,14 @@ The character . must not be used at the end of the name.
      */
     name?: string;
     nodeType?: string;
-    aspectNames?: Array<string>;
+    aspectNames?: string[];
     properties?: { [key: string]: string; };
     permissions?: PermissionsBodyUpdate;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.permissions = new PermissionsBodyUpdate(input.permissions);
+        this.permissions = input.permissions ? new PermissionsBodyUpdate(input.permissions) : undefined;
     }
 
 }

@@ -25,17 +25,19 @@ export class RepositoryInfo {
     version: VersionInfo;
     status: StatusInfo;
     license?: LicenseInfo;
-    modules?: Array<ModuleInfo>;
+    modules?: ModuleInfo[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.version = new VersionInfo(input.version);
-        this.status = new StatusInfo(input.status);
-        this.license = new LicenseInfo(input.license);
-        this.modules = input.modules.map((item: any) => {
-            return new Array<ModuleInfo>(item);
-        });
+        this.version = input.version ? new VersionInfo(input.version) : undefined;
+        this.status = input.status ? new StatusInfo(input.status) : undefined;
+        this.license = input.license ? new LicenseInfo(input.license) : undefined;
+        if (input.modules) {
+            this.modules = input.modules.map((item: any) => {
+                return new ModuleInfo(item);
+            });
+        }
     }
 
 }

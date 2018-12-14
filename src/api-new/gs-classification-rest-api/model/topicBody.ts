@@ -25,7 +25,7 @@ export class TopicBody {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.instruction = new InstructionBody(input.instruction);
+        this.instruction = input.instruction ? new InstructionBody(input.instruction) : undefined;
     }
 
 }

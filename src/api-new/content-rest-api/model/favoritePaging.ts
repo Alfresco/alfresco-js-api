@@ -23,7 +23,7 @@ export class FavoritePaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new FavoritePagingList(input.list);
+        this.list = input.list ? new FavoritePagingList(input.list) : undefined;
     }
 
 }

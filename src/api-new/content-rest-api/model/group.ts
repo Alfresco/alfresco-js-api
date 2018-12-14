@@ -19,8 +19,8 @@ export class Group {
     id: string;
     displayName: string;
     isRoot: boolean;
-    parentIds?: Array<string>;
-    zones?: Array<string>;
+    parentIds?: string[];
+    zones?: string[];
 
     constructor(input?: any) {
 

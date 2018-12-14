@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **emailNotificationsEnabled** | **boolean** |  | [optional] [default to null]
 **password** | **string** |  | [optional] [default to null]
 **oldPassword** | **string** |  | [optional] [default to null]
-**aspectNames** | **Array<string>** |  | [optional] [default to null]
+**aspectNames** | **string[]** |  | [optional] [default to null]
 **properties** | **{ [key: string]: string; }** |  | [optional] [default to null]
 
 

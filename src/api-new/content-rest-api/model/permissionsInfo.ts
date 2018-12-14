@@ -19,19 +19,23 @@ import { PermissionElement } from './permissionElement';
 
 export class PermissionsInfo {
     isInheritanceEnabled?: boolean;
-    inherited?: Array<PermissionElement>;
-    locallySet?: Array<PermissionElement>;
-    settable?: Array<string>;
+    inherited?: PermissionElement[];
+    locallySet?: PermissionElement[];
+    settable?: string[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.inherited = input.inherited.map((item: any) => {
-            return new Array<PermissionElement>(item);
-        });
-        this.locallySet = input.locallySet.map((item: any) => {
-            return new Array<PermissionElement>(item);
-        });
+        if (input.inherited) {
+            this.inherited = input.inherited.map((item: any) => {
+                return new PermissionElement(item);
+            });
+        }
+        if (input.locallySet) {
+            this.locallySet = input.locallySet.map((item: any) => {
+                return new PermissionElement(item);
+            });
+        }
     }
 
 }

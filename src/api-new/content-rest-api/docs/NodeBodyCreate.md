@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 The character . must not be used at the end of the name.
  | [default to null]
 **nodeType** | **string** |  | [default to null]
-**aspectNames** | **Array<string>** |  | [optional] [default to null]
+**aspectNames** | **string[]** |  | [optional] [default to null]
 **properties** | **{ [key: string]: string; }** |  | [optional] [default to null]
 **relativePath** | **string** |  | [optional] [default to null]
 **association** | [**NodeBodyCreateAssociation**](NodeBodyCreateAssociation.md) |  | [optional] [default to null]
-**secondaryChildren** | [**Array<ChildAssociationBody>**](ChildAssociationBody.md) |  | [optional] [default to null]
-**targets** | [**Array<AssociationBody>**](AssociationBody.md) |  | [optional] [default to null]
+**secondaryChildren** | [**ChildAssociationBody[]**](ChildAssociationBody.md) |  | [optional] [default to null]
+**targets** | [**AssociationBody[]**](AssociationBody.md) |  | [optional] [default to null]
 
 

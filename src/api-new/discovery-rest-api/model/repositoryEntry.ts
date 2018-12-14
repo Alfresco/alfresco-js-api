@@ -23,7 +23,7 @@ export class RepositoryEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.repository = new RepositoryInfo(input.repository);
+        this.repository = input.repository ? new RepositoryInfo(input.repository) : undefined;
     }
 
 }

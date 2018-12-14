@@ -23,7 +23,7 @@ export class DeclassificationExemptionEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new DeclassificationExemption(input.entry);
+        this.entry = input.entry ? new DeclassificationExemption(input.entry) : undefined;
     }
 
 }

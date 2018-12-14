@@ -17,7 +17,7 @@
 
 import { Capabilities } from './capabilities';
 import { Company } from './company';
-import { DateAlfresco } from './dateAlfresco';
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 
 export class Person {
     id: string;
@@ -38,16 +38,16 @@ export class Person {
     userStatus?: string;
     enabled: boolean;
     emailNotificationsEnabled?: boolean;
-    aspectNames?: Array<string>;
+    aspectNames?: string[];
     properties?: { [key: string]: string; };
     capabilities?: Capabilities;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.company = new Company(input.company);
-        this.statusUpdatedAt = new DateAlfresco(input.statusUpdatedAt);
-        this.capabilities = new Capabilities(input.capabilities);
+        this.company = input.company ? new Company(input.company) : undefined;
+        this.statusUpdatedAt = input.statusUpdatedAt ? new DateAlfresco(input.statusUpdatedAt) : undefined;
+        this.capabilities = input.capabilities ? new Capabilities(input.capabilities) : undefined;
     }
 
 }

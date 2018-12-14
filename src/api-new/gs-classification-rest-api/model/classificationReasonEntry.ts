@@ -23,7 +23,7 @@ export class ClassificationReasonEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new ClassificationReason(input.entry);
+        this.entry = input.entry ? new ClassificationReason(input.entry) : undefined;
     }
 
 }

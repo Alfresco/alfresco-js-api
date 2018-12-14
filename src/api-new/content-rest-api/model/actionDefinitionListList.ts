@@ -16,19 +16,21 @@
 */
 
 import { ActionDefinition } from './actionDefinition';
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 
 export class ActionDefinitionListList {
     pagination?: Pagination;
-    entries?: Array<ActionDefinition>;
+    entries?: ActionDefinition[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<ActionDefinition>(item);
-        });
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new ActionDefinition(item);
+            });
+        }
     }
 
 }

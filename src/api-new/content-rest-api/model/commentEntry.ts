@@ -23,7 +23,7 @@ export class CommentEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new Comment(input.entry);
+        this.entry = input.entry ? new Comment(input.entry) : undefined;
     }
 
 }

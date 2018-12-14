@@ -23,7 +23,7 @@ export class AuditEntryEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new AuditEntry(input.entry);
+        this.entry = input.entry ? new AuditEntry(input.entry) : undefined;
     }
 
 }

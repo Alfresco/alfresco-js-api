@@ -18,7 +18,7 @@
 import { EntityAttributeScopeRepresentation } from './entityAttributeScopeRepresentation';
 
 export class EntityVariableScopeRepresentation {
-    attributes?: Array<EntityAttributeScopeRepresentation>;
+    attributes?: EntityAttributeScopeRepresentation[];
     entityName?: string;
     mappedDataModel?: number;
     mappedVariableName?: string;
@@ -26,9 +26,11 @@ export class EntityVariableScopeRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.attributes = input.attributes.map((item: any) => {
-            return new Array<EntityAttributeScopeRepresentation>(item);
-        });
+        if (input.attributes) {
+            this.attributes = input.attributes.map((item: any) => {
+                return new EntityAttributeScopeRepresentation(item);
+            });
+        }
     }
 
 }

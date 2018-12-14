@@ -18,7 +18,7 @@
 import { AlfrescoContentRepresentation } from './alfrescoContentRepresentation';
 
 export class ResultListDataRepresentationAlfrescoContentRepresentation {
-    data?: Array<AlfrescoContentRepresentation>;
+    data?: AlfrescoContentRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationAlfrescoContentRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<AlfrescoContentRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new AlfrescoContentRepresentation(item);
+            });
+        }
     }
 
 }

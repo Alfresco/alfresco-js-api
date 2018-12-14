@@ -26,15 +26,17 @@ export class EndpointConfigurationRepresentation {
     path?: string;
     port?: string;
     protocol?: string;
-    requestHeaders?: Array<EndpointRequestHeaderRepresentation>;
+    requestHeaders?: EndpointRequestHeaderRepresentation[];
     tenantId?: number;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.requestHeaders = input.requestHeaders.map((item: any) => {
-            return new Array<EndpointRequestHeaderRepresentation>(item);
-        });
+        if (input.requestHeaders) {
+            this.requestHeaders = input.requestHeaders.map((item: any) => {
+                return new EndpointRequestHeaderRepresentation(item);
+            });
+        }
     }
 
 }

@@ -14,9 +14,9 @@ The character . must not be used at the end of the name.
 **transferPDFIndicator** | **boolean** | Present only for transfer nodes. | [optional] [default to null]
 **transferLocation** | **string** | Present only for transfer nodes. | [optional] [default to null]
 **transferAccessionIndicator** | **boolean** | Present only for transfer nodes. | [optional] [default to null]
-**aspectNames** | **Array<string>** |  | [optional] [default to null]
+**aspectNames** | **string[]** |  | [optional] [default to null]
 **properties** | **any** |  | [optional] [default to null]
-**allowableOperations** | **Array<string>** |  | [optional] [default to null]
+**allowableOperations** | **string[]** |  | [optional] [default to null]
 **association** | [**ChildAssociationInfo**](ChildAssociationInfo.md) |  | [optional] [default to null]
 
 

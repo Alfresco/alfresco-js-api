@@ -63,13 +63,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fileId** | **string**| The identifier of a non-record file. | 
  **hideRecord** | **boolean**| Flag to indicate whether the record should be hidden from the current parent folder. | [optional] [default to false]
- **include** | [**Array<string>**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

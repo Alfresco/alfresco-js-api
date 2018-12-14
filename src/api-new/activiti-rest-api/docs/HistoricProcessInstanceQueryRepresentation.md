@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **processDefinitionId** | **string** |  | [optional] [default to null]
 **processDefinitionKey** | **string** |  | [optional] [default to null]
 **processInstanceId** | **string** |  | [optional] [default to null]
-**processInstanceIds** | **Array<string>** |  | [optional] [default to null]
+**processInstanceIds** | **string[]** |  | [optional] [default to null]
 **size** | **number** |  | [optional] [default to null]
 **sort** | **string** |  | [optional] [default to null]
 **start** | **number** |  | [optional] [default to null]
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **superProcessInstanceId** | **string** |  | [optional] [default to null]
 **tenantId** | **string** |  | [optional] [default to null]
 **tenantIdLike** | **string** |  | [optional] [default to null]
-**variables** | [**Array<QueryVariable>**](QueryVariable.md) |  | [optional] [default to null]
+**variables** | [**QueryVariable[]**](QueryVariable.md) |  | [optional] [default to null]
 **withoutTenantId** | **boolean** |  | [optional] [default to null]
 
 

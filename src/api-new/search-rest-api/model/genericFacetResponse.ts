@@ -29,14 +29,16 @@ export class GenericFacetResponse {
     /**
      * An array of buckets and values
      */
-    buckets?: Array<GenericBucket>;
+    buckets?: GenericBucket[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.buckets = input.buckets.map((item: any) => {
-            return new Array<GenericBucket>(item);
-        });
+        if (input.buckets) {
+            this.buckets = input.buckets.map((item: any) => {
+                return new GenericBucket(item);
+            });
+        }
     }
 
 }

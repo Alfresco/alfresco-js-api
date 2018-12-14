@@ -168,11 +168,11 @@ Name | Type | Description  | Notes
  **nodeBodyCreate** | [**RMNodeBodyCreate**](RMNodeBodyCreate.md)| The node information to create. | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -246,11 +246,11 @@ unfiledcontainersApi.getUnfiledContainer(unfiledContainerIdopts).then((data) => 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **unfiledContainerId** | **string**| The identifier of an unfiled records container. You can use the **-unfiled-** alias. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 
 *   where=(nodeType='cm:content INCLUDESUBTYPES')
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 * properties
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **unfiledContainerId** | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -444,11 +444,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **unfiledContainerId** | **string**| The identifier of an unfiled records container. You can use the **-unfiled-** alias. | 
  **unfiledContainerBodyUpdate** | [**UnfiledRecordContainerBodyUpdate**](UnfiledRecordContainerBodyUpdate.md)| The unfiled record container information to update. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

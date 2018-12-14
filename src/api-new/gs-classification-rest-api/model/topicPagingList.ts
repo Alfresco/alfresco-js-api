@@ -20,15 +20,17 @@ import { TopicEntry } from './topicEntry';
 
 export class TopicPagingList {
     pagination?: Pagination;
-    entries?: Array<TopicEntry>;
+    entries?: TopicEntry[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<TopicEntry>(item);
-        });
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new TopicEntry(item);
+            });
+        }
     }
 
 }

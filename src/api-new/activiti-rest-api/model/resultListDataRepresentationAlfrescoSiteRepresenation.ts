@@ -18,7 +18,7 @@
 import { AlfrescoSiteRepresenation } from './alfrescoSiteRepresenation';
 
 export class ResultListDataRepresentationAlfrescoSiteRepresenation {
-    data?: Array<AlfrescoSiteRepresenation>;
+    data?: AlfrescoSiteRepresenation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationAlfrescoSiteRepresenation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<AlfrescoSiteRepresenation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new AlfrescoSiteRepresenation(item);
+            });
+        }
     }
 
 }

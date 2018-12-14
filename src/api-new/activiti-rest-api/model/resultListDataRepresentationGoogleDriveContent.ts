@@ -18,7 +18,7 @@
 import { GoogleDriveContent } from './googleDriveContent';
 
 export class ResultListDataRepresentationGoogleDriveContent {
-    data?: Array<GoogleDriveContent>;
+    data?: GoogleDriveContent[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationGoogleDriveContent {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<GoogleDriveContent>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new GoogleDriveContent(item);
+            });
+        }
     }
 
 }

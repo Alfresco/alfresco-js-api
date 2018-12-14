@@ -18,7 +18,7 @@
 import { AccountRepresentation } from './accountRepresentation';
 
 export class ResultListDataRepresentationAccountRepresentation {
-    data?: Array<AccountRepresentation>;
+    data?: AccountRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationAccountRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<AccountRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new AccountRepresentation(item);
+            });
+        }
     }
 
 }

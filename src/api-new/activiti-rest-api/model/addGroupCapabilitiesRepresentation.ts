@@ -16,7 +16,7 @@
 */
 
 export class AddGroupCapabilitiesRepresentation {
-    capabilities?: Array<string>;
+    capabilities?: string[];
 
     constructor(input?: any) {
 

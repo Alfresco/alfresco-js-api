@@ -23,7 +23,7 @@ export class TopicPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new TopicPagingList(input.list);
+        this.list = input.list ? new TopicPagingList(input.list) : undefined;
     }
 
 }

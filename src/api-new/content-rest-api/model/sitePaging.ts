@@ -23,7 +23,7 @@ export class SitePaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new SitePagingList(input.list);
+        this.list = input.list ? new SitePagingList(input.list) : undefined;
     }
 
 }

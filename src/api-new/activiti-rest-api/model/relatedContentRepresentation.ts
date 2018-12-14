@@ -37,8 +37,8 @@ export class RelatedContentRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.created = new DateAlfresco(input.created);
-        this.createdBy = new LightUserRepresentation(input.createdBy);
+        this.created = input.created ? new DateAlfresco(input.created) : undefined;
+        this.createdBy = input.createdBy ? new LightUserRepresentation(input.createdBy) : undefined;
     }
 
 }

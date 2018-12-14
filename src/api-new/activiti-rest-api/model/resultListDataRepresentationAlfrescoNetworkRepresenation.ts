@@ -18,7 +18,7 @@
 import { AlfrescoNetworkRepresenation } from './alfrescoNetworkRepresenation';
 
 export class ResultListDataRepresentationAlfrescoNetworkRepresenation {
-    data?: Array<AlfrescoNetworkRepresenation>;
+    data?: AlfrescoNetworkRepresenation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationAlfrescoNetworkRepresenation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<AlfrescoNetworkRepresenation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new AlfrescoNetworkRepresenation(item);
+            });
+        }
     }
 
 }

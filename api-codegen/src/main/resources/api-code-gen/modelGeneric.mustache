@@ -5,7 +5,7 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{ {{>model
      * {{&description}}
      */
     {{/description}}
-    {{#isReadOnly}}readonly {{/isReadOnly}}{{name}}{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}};
+    {{#isReadOnly}}readonly {{/isReadOnly}}{{name}}{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}{{#isListContainer}}[]{{/isListContainer}};
 {{/vars}}
 
     constructor(input?: any) {
@@ -14,12 +14,16 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{ {{>model
     {{#vars}}
         {{^isPrimitiveType}}
             {{^isListContainer}}
-            this.{{name}} = new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(input.{{name}});
+                {{^isMapContainer}}
+                    this.{{name}} = input.{{name}} ? new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(input.{{name}}) : undefined;
+                {{/isMapContainer}}
             {{/isListContainer}}
             {{#isListContainer}}
-            this.{{name}} = input.{{name}}.map((item: any) => {
-                return new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(item);
-            });
+            if(input.{{name}}) {
+                this.{{name}} = input.{{name}}.map((item: any) => {
+                    return new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(item);
+                });
+            }
             {{/isListContainer}}
         {{/isPrimitiveType}}
     {{/vars}}

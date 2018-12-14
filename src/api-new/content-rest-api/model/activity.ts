@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { DateAlfresco } from './dateAlfresco';
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 
 /**
  * Activities describe any past activity in a site,
@@ -56,7 +56,7 @@ export class Activity {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.postedAt = new DateAlfresco(input.postedAt);
+        this.postedAt = input.postedAt ? new DateAlfresco(input.postedAt) : undefined;
     }
 
 }

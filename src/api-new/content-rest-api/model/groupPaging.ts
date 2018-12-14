@@ -23,7 +23,7 @@ export class GroupPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new GroupPagingList(input.list);
+        this.list = input.list ? new GroupPagingList(input.list) : undefined;
     }
 
 }

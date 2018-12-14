@@ -130,7 +130,7 @@ Name | Type | Description  | Notes
 
 <a name="getBasicAuthConfigurationsUsingGET"></a>
 # **getBasicAuthConfigurationsUsingGET**
-> Array<EndpointBasicAuthRepresentation> getBasicAuthConfigurationsUsingGET(tenantId)
+> EndpointBasicAuthRepresentation getBasicAuthConfigurationsUsingGET(tenantId)
 
 List endpoint authorizations
 
@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<EndpointBasicAuthRepresentation>**](EndpointBasicAuthRepresentation.md)
+[**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
 
 <a name="getEndpointConfigurationUsingGET1"></a>
 # **getEndpointConfigurationUsingGET1**
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 <a name="getEndpointConfigurationsUsingGET1"></a>
 # **getEndpointConfigurationsUsingGET1**
-> Array<EndpointConfigurationRepresentation> getEndpointConfigurationsUsingGET1(tenantId)
+> EndpointConfigurationRepresentation getEndpointConfigurationsUsingGET1(tenantId)
 
 List endpoints
 
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<EndpointConfigurationRepresentation>**](EndpointConfigurationRepresentation.md)
+[**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
 
 <a name="removeBasicAuthonfigurationUsingDELETE"></a>
 # **removeBasicAuthonfigurationUsingDELETE**

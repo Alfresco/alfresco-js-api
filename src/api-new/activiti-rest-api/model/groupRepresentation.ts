@@ -20,9 +20,9 @@ import { GroupCapabilityRepresentation } from './groupCapabilityRepresentation';
 import { UserRepresentation } from './userRepresentation';
 
 export class GroupRepresentation {
-    capabilities?: Array<GroupCapabilityRepresentation>;
+    capabilities?: GroupCapabilityRepresentation[];
     externalId?: string;
-    groups?: Array<GroupRepresentation>;
+    groups?: GroupRepresentation[];
     id?: number;
     lastSyncTimeStamp?: DateAlfresco;
     manager?: UserRepresentation;
@@ -32,22 +32,28 @@ export class GroupRepresentation {
     tenantId?: number;
     type?: number;
     userCount?: number;
-    users?: Array<UserRepresentation>;
+    users?: UserRepresentation[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.capabilities = input.capabilities.map((item: any) => {
-            return new Array<GroupCapabilityRepresentation>(item);
-        });
-        this.groups = input.groups.map((item: any) => {
-            return new Array<GroupRepresentation>(item);
-        });
-        this.lastSyncTimeStamp = new DateAlfresco(input.lastSyncTimeStamp);
-        this.manager = new UserRepresentation(input.manager);
-        this.users = input.users.map((item: any) => {
-            return new Array<UserRepresentation>(item);
-        });
+        if (input.capabilities) {
+            this.capabilities = input.capabilities.map((item: any) => {
+                return new GroupCapabilityRepresentation(item);
+            });
+        }
+        if (input.groups) {
+            this.groups = input.groups.map((item: any) => {
+                return new GroupRepresentation(item);
+            });
+        }
+        this.lastSyncTimeStamp = input.lastSyncTimeStamp ? new DateAlfresco(input.lastSyncTimeStamp) : undefined;
+        this.manager = input.manager ? new UserRepresentation(input.manager) : undefined;
+        if (input.users) {
+            this.users = input.users.map((item: any) => {
+                return new UserRepresentation(item);
+            });
+        }
     }
 
 }

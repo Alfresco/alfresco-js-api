@@ -26,45 +26,54 @@ export class FormDefinitionRepresentation {
     className?: string;
     customFieldTemplates?: { [key: string]: string; };
     customFieldsValueInfo?: { [key: string]: FieldValueInfo; };
-    fields?: Array<FormFieldRepresentation>;
+    fields?: FormFieldRepresentation[];
     globalDateFormat?: string;
     gridsterForm?: boolean;
     id?: number;
-    javascriptEvents?: Array<FormJavascriptEventRepresentation>;
+    javascriptEvents?: FormJavascriptEventRepresentation[];
     metadata?: { [key: string]: string; };
     name?: string;
     outcomeTarget?: string;
-    outcomes?: Array<FormOutcomeRepresentation>;
+    outcomes?: FormOutcomeRepresentation[];
     processDefinitionId?: string;
     processDefinitionKey?: string;
     processDefinitionName?: string;
     selectedOutcome?: string;
     style?: string;
-    tabs?: Array<FormTabRepresentation>;
+    tabs?: FormTabRepresentation[];
     taskDefinitionKey?: string;
     taskId?: string;
     taskName?: string;
-    variables?: Array<FormVariableRepresentation>;
+    variables?: FormVariableRepresentation[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.customFieldsValueInfo = new (input.customFieldsValueInfo);
-        this.fields = input.fields.map((item: any) => {
-            return new Array<FormFieldRepresentation>(item);
-        });
-        this.javascriptEvents = input.javascriptEvents.map((item: any) => {
-            return new Array<FormJavascriptEventRepresentation>(item);
-        });
-        this.outcomes = input.outcomes.map((item: any) => {
-            return new Array<FormOutcomeRepresentation>(item);
-        });
-        this.tabs = input.tabs.map((item: any) => {
-            return new Array<FormTabRepresentation>(item);
-        });
-        this.variables = input.variables.map((item: any) => {
-            return new Array<FormVariableRepresentation>(item);
-        });
+        if (input.fields) {
+            this.fields = input.fields.map((item: any) => {
+                return new FormFieldRepresentation(item);
+            });
+        }
+        if (input.javascriptEvents) {
+            this.javascriptEvents = input.javascriptEvents.map((item: any) => {
+                return new FormJavascriptEventRepresentation(item);
+            });
+        }
+        if (input.outcomes) {
+            this.outcomes = input.outcomes.map((item: any) => {
+                return new FormOutcomeRepresentation(item);
+            });
+        }
+        if (input.tabs) {
+            this.tabs = input.tabs.map((item: any) => {
+                return new FormTabRepresentation(item);
+            });
+        }
+        if (input.variables) {
+            this.variables = input.variables.map((item: any) => {
+                return new FormVariableRepresentation(item);
+            });
+        }
     }
 
 }

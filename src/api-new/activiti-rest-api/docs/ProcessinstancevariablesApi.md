@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 <a name="createOrUpdateProcessInstanceVariablesUsingPUT"></a>
 # **createOrUpdateProcessInstanceVariablesUsingPUT**
-> Array<RestVariable> createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceIdrestVariables)
+> RestVariable createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceIdrestVariables)
 
 Create or update variables
 
@@ -44,15 +44,15 @@ processinstancevariablesApi.createOrUpdateProcessInstanceVariablesUsingPUT(proce
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **processInstanceId** | **string**| Process instance ID | 
- **restVariables** | [**Array<RestVariable>**](RestVariable.md)| restVariables | 
+ **restVariables** | [**RestVariable**](RestVariable.md)| restVariables | 
 
 ### Return type
 
-[**Array<RestVariable>**](RestVariable.md)
+[**RestVariable**](RestVariable.md)
 
 <a name="createProcessInstanceVariablesUsingPOST"></a>
 # **createProcessInstanceVariablesUsingPOST**
-> Array<RestVariable> createProcessInstanceVariablesUsingPOST(processInstanceIdrestVariables)
+> RestVariable createProcessInstanceVariablesUsingPOST(processInstanceIdrestVariables)
 
 Create variables
 
@@ -82,11 +82,11 @@ processinstancevariablesApi.createProcessInstanceVariablesUsingPOST(processInsta
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **processInstanceId** | **string**| Process instance ID | 
- **restVariables** | [**Array<RestVariable>**](RestVariable.md)| restVariables | 
+ **restVariables** | [**RestVariable**](RestVariable.md)| restVariables | 
 
 ### Return type
 
-[**Array<RestVariable>**](RestVariable.md)
+[**RestVariable**](RestVariable.md)
 
 <a name="deleteProcessInstanceVariableUsingDELETE"></a>
 # **deleteProcessInstanceVariableUsingDELETE**
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 <a name="getProcessInstanceVariablesUsingGET"></a>
 # **getProcessInstanceVariablesUsingGET**
-> Array<RestVariable> getProcessInstanceVariablesUsingGET(processInstanceId)
+> RestVariable getProcessInstanceVariablesUsingGET(processInstanceId)
 
 List variables
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<RestVariable>**](RestVariable.md)
+[**RestVariable**](RestVariable.md)
 
 <a name="updateProcessInstanceVariableUsingPUT"></a>
 # **updateProcessInstanceVariableUsingPUT**

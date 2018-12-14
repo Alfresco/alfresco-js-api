@@ -18,7 +18,7 @@
 import { AppDefinitionRepresentation } from './appDefinitionRepresentation';
 
 export class ResultListDataRepresentationAppDefinitionRepresentation {
-    data?: Array<AppDefinitionRepresentation>;
+    data?: AppDefinitionRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationAppDefinitionRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<AppDefinitionRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new AppDefinitionRepresentation(item);
+            });
+        }
     }
 
 }

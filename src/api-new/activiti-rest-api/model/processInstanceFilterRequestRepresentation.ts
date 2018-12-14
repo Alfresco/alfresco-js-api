@@ -27,7 +27,7 @@ export class ProcessInstanceFilterRequestRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.filter = new ProcessInstanceFilterRepresentation(input.filter);
+        this.filter = input.filter ? new ProcessInstanceFilterRepresentation(input.filter) : undefined;
     }
 
 }

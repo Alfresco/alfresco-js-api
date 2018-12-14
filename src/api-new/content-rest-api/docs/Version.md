@@ -14,7 +14,7 @@ The character . must not be used at the end of the name.
 **modifiedAt** | [**DateAlfresco**](DateAlfresco.md) |  | [default to null]
 **modifiedByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
 **content** | [**ContentInfo**](ContentInfo.md) |  | [optional] [default to null]
-**aspectNames** | **Array<string>** |  | [optional] [default to null]
+**aspectNames** | **string[]** |  | [optional] [default to null]
 **properties** | **{ [key: string]: string; }** |  | [optional] [default to null]
 
 

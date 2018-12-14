@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="getRuntimeProcessScopesUsingPOST"></a>
 # **getRuntimeProcessScopesUsingPOST**
-> Array<ProcessScopeRepresentation> getRuntimeProcessScopesUsingPOST(processScopesRequest)
+> ProcessScopeRepresentation getRuntimeProcessScopesUsingPOST(processScopesRequest)
 
 List runtime process scopes
 
@@ -42,5 +42,5 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<ProcessScopeRepresentation>**](ProcessScopeRepresentation.md)
+[**ProcessScopeRepresentation**](ProcessScopeRepresentation.md)
 

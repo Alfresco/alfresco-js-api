@@ -30,8 +30,8 @@ export class TenantRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.created = new DateAlfresco(input.created);
-        this.lastUpdate = new DateAlfresco(input.lastUpdate);
+        this.created = input.created ? new DateAlfresco(input.created) : undefined;
+        this.lastUpdate = input.lastUpdate ? new DateAlfresco(input.lastUpdate) : undefined;
     }
 
 }

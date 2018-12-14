@@ -15,9 +15,9 @@
 * limitations under the License.
 */
 
-import { ContentInfo } from './contentInfo';
-import { DateAlfresco } from './dateAlfresco';
-import { UserInfo } from './userInfo';
+import { ContentInfo } from '../../content-rest-api/model/contentInfo';
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class SharedLink {
     id?: string;
@@ -40,21 +40,21 @@ The character . must not be used at the end of the name.
 allowable operations pertaining to the linked content node.
 
      */
-    allowableOperations?: Array<string>;
+    allowableOperations?: string[];
     /**
      * The allowable operations for the content node being shared.
 
      */
-    allowableOperationsOnTarget?: Array<string>;
+    allowableOperationsOnTarget?: string[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.expiresAt = new DateAlfresco(input.expiresAt);
-        this.modifiedAt = new DateAlfresco(input.modifiedAt);
-        this.modifiedByUser = new UserInfo(input.modifiedByUser);
-        this.sharedByUser = new UserInfo(input.sharedByUser);
-        this.content = new ContentInfo(input.content);
+        this.expiresAt = input.expiresAt ? new DateAlfresco(input.expiresAt) : undefined;
+        this.modifiedAt = input.modifiedAt ? new DateAlfresco(input.modifiedAt) : undefined;
+        this.modifiedByUser = input.modifiedByUser ? new UserInfo(input.modifiedByUser) : undefined;
+        this.sharedByUser = input.sharedByUser ? new UserInfo(input.sharedByUser) : undefined;
+        this.content = input.content ? new ContentInfo(input.content) : undefined;
     }
 
 }

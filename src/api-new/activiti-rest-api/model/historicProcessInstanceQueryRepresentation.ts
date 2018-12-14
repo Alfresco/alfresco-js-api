@@ -30,7 +30,7 @@ export class HistoricProcessInstanceQueryRepresentation {
     processDefinitionId?: string;
     processDefinitionKey?: string;
     processInstanceId?: string;
-    processInstanceIds?: Array<string>;
+    processInstanceIds?: string[];
     size?: number;
     sort?: string;
     start?: number;
@@ -40,19 +40,21 @@ export class HistoricProcessInstanceQueryRepresentation {
     superProcessInstanceId?: string;
     tenantId?: string;
     tenantIdLike?: string;
-    variables?: Array<QueryVariable>;
+    variables?: QueryVariable[];
     withoutTenantId?: boolean;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.finishedAfter = new DateAlfresco(input.finishedAfter);
-        this.finishedBefore = new DateAlfresco(input.finishedBefore);
-        this.startedAfter = new DateAlfresco(input.startedAfter);
-        this.startedBefore = new DateAlfresco(input.startedBefore);
-        this.variables = input.variables.map((item: any) => {
-            return new Array<QueryVariable>(item);
-        });
+        this.finishedAfter = input.finishedAfter ? new DateAlfresco(input.finishedAfter) : undefined;
+        this.finishedBefore = input.finishedBefore ? new DateAlfresco(input.finishedBefore) : undefined;
+        this.startedAfter = input.startedAfter ? new DateAlfresco(input.startedAfter) : undefined;
+        this.startedBefore = input.startedBefore ? new DateAlfresco(input.startedBefore) : undefined;
+        if (input.variables) {
+            this.variables = input.variables.map((item: any) => {
+                return new QueryVariable(item);
+            });
+        }
     }
 
 }

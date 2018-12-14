@@ -66,11 +66,11 @@ transfercontainersApi.getTransferContainer(transferContainerIdopts).then((data) 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **transferContainerId** | **string**| The identifier of a transfer container. You can also use the -transfers- alias. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
  **transferContainerId** | **string**| The identifier of a transfer container. You can also use the -transfers- alias. | 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the transfer folders. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the transfer folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * properties
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 * transferAccessionIndicator
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the specified parent **transferContainerId**. | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -249,11 +249,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **transferContainerId** | **string**| The identifier of a transfer container. You can also use the -transfers- alias. | 
  **nodeBodyUpdate** | [**TransferContainerBodyUpdate**](TransferContainerBodyUpdate.md)| The node information to update. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

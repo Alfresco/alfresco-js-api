@@ -18,7 +18,7 @@
 import { RelatedContentRepresentation } from './relatedContentRepresentation';
 
 export class ResultListDataRepresentationRelatedContentRepresentation {
-    data?: Array<RelatedContentRepresentation>;
+    data?: RelatedContentRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationRelatedContentRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<RelatedContentRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new RelatedContentRepresentation(item);
+            });
+        }
     }
 
 }

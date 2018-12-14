@@ -23,14 +23,16 @@ export class RequestPivot {
      * A key corresponding to a matching field facet label or stats.
      */
     key?: string;
-    pivots?: Array<RequestPivot>;
+    pivots?: RequestPivot[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pivots = input.pivots.map((item: any) => {
-            return new Array<RequestPivot>(item);
-        });
+        if (input.pivots) {
+            this.pivots = input.pivots.map((item: any) => {
+                return new RequestPivot(item);
+            });
+        }
     }
 
 }

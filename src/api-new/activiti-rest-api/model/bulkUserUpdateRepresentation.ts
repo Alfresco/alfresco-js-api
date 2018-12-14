@@ -22,7 +22,7 @@ export class BulkUserUpdateRepresentation {
     sendNotifications?: boolean;
     status?: string;
     tenantId?: number;
-    users?: Array<number>;
+    users?: number[];
 
     constructor(input?: any) {
 

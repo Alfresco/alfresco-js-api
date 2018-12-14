@@ -26,7 +26,7 @@ You could include all content properties using d:content or list all individual 
 As more terms are included the query size, complexity, memory impact and query time will increase.
 
      */
-    textAttributes?: Array<string>;
+    textAttributes?: string[];
     /**
      * The default way to combine query parts when AND or OR is not explicitly stated - includes ! - +
 one two three

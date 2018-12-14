@@ -17,7 +17,7 @@
 
 export class UserFilterOrderRepresentation {
     appId?: number;
-    order?: Array<number>;
+    order?: number[];
 
     constructor(input?: any) {
 

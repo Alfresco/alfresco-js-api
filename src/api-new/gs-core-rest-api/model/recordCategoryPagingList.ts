@@ -21,17 +21,19 @@ import { RecordCategoryEntry } from './recordCategoryEntry';
 
 export class RecordCategoryPagingList {
     pagination?: Pagination;
-    entries?: Array<RecordCategoryEntry>;
+    entries?: RecordCategoryEntry[];
     source?: FilePlan;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<RecordCategoryEntry>(item);
-        });
-        this.source = new FilePlan(input.source);
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new RecordCategoryEntry(item);
+            });
+        }
+        this.source = input.source ? new FilePlan(input.source) : undefined;
     }
 
 }

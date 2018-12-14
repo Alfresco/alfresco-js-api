@@ -36,8 +36,8 @@ export class TaskQueryRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.dueAfter = new DateAlfresco(input.dueAfter);
-        this.dueBefore = new DateAlfresco(input.dueBefore);
+        this.dueAfter = input.dueAfter ? new DateAlfresco(input.dueAfter) : undefined;
+        this.dueBefore = input.dueBefore ? new DateAlfresco(input.dueBefore) : undefined;
     }
 
 }

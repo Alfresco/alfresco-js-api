@@ -18,7 +18,7 @@
 import { UserTaskFilterRepresentation } from './userTaskFilterRepresentation';
 
 export class ResultListDataRepresentationUserTaskFilterRepresentation {
-    data?: Array<UserTaskFilterRepresentation>;
+    data?: UserTaskFilterRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationUserTaskFilterRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<UserTaskFilterRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new UserTaskFilterRepresentation(item);
+            });
+        }
     }
 
 }

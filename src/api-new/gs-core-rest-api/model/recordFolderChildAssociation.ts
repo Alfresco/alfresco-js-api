@@ -19,6 +19,7 @@ import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociat
 import { ContentInfo } from '../../content-rest-api/model/contentInfo';
 import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { PathInfo } from '../../content-rest-api/model/pathInfo';
+import { Record } from './record';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class RecordFolderChildAssociation {
@@ -39,9 +40,9 @@ The character . must not be used at the end of the name.
     modifiedByUser: UserInfo;
     createdAt: DateAlfresco;
     createdByUser: UserInfo;
-    aspectNames?: Array<string>;
+    aspectNames?: string[];
     properties?: any;
-    allowableOperations?: Array<string>;
+    allowableOperations?: string[];
     content?: ContentInfo;
     path?: PathInfo;
     association?: ChildAssociationInfo;
@@ -49,13 +50,13 @@ The character . must not be used at the end of the name.
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.modifiedAt = new DateAlfresco(input.modifiedAt);
-        this.modifiedByUser = new UserInfo(input.modifiedByUser);
-        this.createdAt = new DateAlfresco(input.createdAt);
-        this.createdByUser = new UserInfo(input.createdByUser);
-        this.content = new ContentInfo(input.content);
-        this.path = new PathInfo(input.path);
-        this.association = new ChildAssociationInfo(input.association);
+        this.modifiedAt = input.modifiedAt ? new DateAlfresco(input.modifiedAt) : undefined;
+        this.modifiedByUser = input.modifiedByUser ? new UserInfo(input.modifiedByUser) : undefined;
+        this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+        this.createdByUser = input.createdByUser ? new UserInfo(input.createdByUser) : undefined;
+        this.content = input.content ? new ContentInfo(input.content) : undefined;
+        this.path = input.path ? new PathInfo(input.path) : undefined;
+        this.association = input.association ? new ChildAssociationInfo(input.association) : undefined;
     }
 
 }

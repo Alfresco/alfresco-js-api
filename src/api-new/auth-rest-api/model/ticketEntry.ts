@@ -23,7 +23,7 @@ export class TicketEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new Ticket(input.entry);
+        this.entry = input.entry ? new Ticket(input.entry) : undefined;
     }
 
 }

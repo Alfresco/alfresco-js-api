@@ -23,7 +23,7 @@ export class PreferenceEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new Preference(input.entry);
+        this.entry = input.entry ? new Preference(input.entry) : undefined;
     }
 
 }

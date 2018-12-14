@@ -9,6 +9,6 @@ Name | Type | Description | Notes
 **sendNotifications** | **boolean** |  | [optional] [default to null]
 **status** | **string** |  | [optional] [default to null]
 **tenantId** | **number** |  | [optional] [default to null]
-**users** | **Array<number>** |  | [optional] [default to null]
+**users** | **number[]** |  | [optional] [default to null]
 
 

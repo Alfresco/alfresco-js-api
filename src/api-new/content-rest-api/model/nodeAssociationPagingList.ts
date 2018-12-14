@@ -17,21 +17,23 @@
 
 import { Node } from './node';
 import { NodeAssociationEntry } from './nodeAssociationEntry';
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 
 export class NodeAssociationPagingList {
     pagination?: Pagination;
-    entries?: Array<NodeAssociationEntry>;
+    entries?: NodeAssociationEntry[];
     source?: Node;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<NodeAssociationEntry>(item);
-        });
-        this.source = new Node(input.source);
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new NodeAssociationEntry(item);
+            });
+        }
+        this.source = input.source ? new Node(input.source) : undefined;
     }
 
 }

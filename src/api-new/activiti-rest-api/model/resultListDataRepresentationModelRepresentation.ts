@@ -18,7 +18,7 @@
 import { ModelRepresentation } from './modelRepresentation';
 
 export class ResultListDataRepresentationModelRepresentation {
-    data?: Array<ModelRepresentation>;
+    data?: ModelRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationModelRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<ModelRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new ModelRepresentation(item);
+            });
+        }
     }
 
 }

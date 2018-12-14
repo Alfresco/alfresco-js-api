@@ -24,7 +24,7 @@ export class ProcessDefinitionRepresentation {
     hasStartForm?: boolean;
     id?: string;
     key?: string;
-    metaDataValues?: Array<ProcessDefinitionMetaDataRepresentation>;
+    metaDataValues?: ProcessDefinitionMetaDataRepresentation[];
     name?: string;
     tenantId?: string;
     version?: number;
@@ -32,9 +32,11 @@ export class ProcessDefinitionRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.metaDataValues = input.metaDataValues.map((item: any) => {
-            return new Array<ProcessDefinitionMetaDataRepresentation>(item);
-        });
+        if (input.metaDataValues) {
+            this.metaDataValues = input.metaDataValues.map((item: any) => {
+                return new ProcessDefinitionMetaDataRepresentation(item);
+            });
+        }
     }
 
 }

@@ -18,7 +18,7 @@
 import { TaskRepresentation } from './taskRepresentation';
 
 export class ResultListDataRepresentationTaskRepresentation {
-    data?: Array<TaskRepresentation>;
+    data?: TaskRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationTaskRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<TaskRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new TaskRepresentation(item);
+            });
+        }
     }
 
 }

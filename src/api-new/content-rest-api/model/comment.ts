@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { DateAlfresco } from './dateAlfresco';
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { Person } from './person';
 
 export class Comment {
@@ -32,10 +32,10 @@ export class Comment {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.createdBy = new Person(input.createdBy);
-        this.createdAt = new DateAlfresco(input.createdAt);
-        this.modifiedBy = new Person(input.modifiedBy);
-        this.modifiedAt = new DateAlfresco(input.modifiedAt);
+        this.createdBy = input.createdBy ? new Person(input.createdBy) : undefined;
+        this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+        this.modifiedBy = input.modifiedBy ? new Person(input.modifiedBy) : undefined;
+        this.modifiedAt = input.modifiedAt ? new DateAlfresco(input.modifiedAt) : undefined;
     }
 
 }

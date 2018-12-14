@@ -16,19 +16,21 @@
 */
 
 import { GroupEntry } from './groupEntry';
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 
 export class GroupPagingList {
     pagination?: Pagination;
-    entries?: Array<GroupEntry>;
+    entries?: GroupEntry[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<GroupEntry>(item);
-        });
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new GroupEntry(item);
+            });
+        }
     }
 
 }

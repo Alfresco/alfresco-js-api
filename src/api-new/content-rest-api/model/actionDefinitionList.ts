@@ -23,7 +23,7 @@ export class ActionDefinitionList {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new ActionDefinitionListList(input.list);
+        this.list = input.list ? new ActionDefinitionListList(input.list) : undefined;
     }
 
 }

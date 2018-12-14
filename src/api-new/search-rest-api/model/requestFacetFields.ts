@@ -28,14 +28,16 @@ export class RequestFacetFields {
      * Define specifc fields on which to facet (adds SOLR facet.field and f.<field>.facet.* options)
 
      */
-    facets?: Array<RequestFacetField>;
+    facets?: RequestFacetField[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.facets = input.facets.map((item: any) => {
-            return new Array<RequestFacetField>(item);
-        });
+        if (input.facets) {
+            this.facets = input.facets.map((item: any) => {
+                return new RequestFacetField(item);
+            });
+        }
     }
 
 }

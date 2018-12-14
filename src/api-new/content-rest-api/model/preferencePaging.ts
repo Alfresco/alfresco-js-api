@@ -23,7 +23,7 @@ export class PreferencePaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new PreferencePagingList(input.list);
+        this.list = input.list ? new PreferencePagingList(input.list) : undefined;
     }
 
 }

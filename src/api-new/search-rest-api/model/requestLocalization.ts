@@ -26,7 +26,7 @@ export class RequestLocalization {
     /**
      * A list of Locales definied by IETF BCP 47.  The ordering is significant.  The first locale (leftmost) is used for sort and query localization, whereas the remaining locales are used for query only.
      */
-    locales?: Array<string>;
+    locales?: string[];
 
     constructor(input?: any) {
 

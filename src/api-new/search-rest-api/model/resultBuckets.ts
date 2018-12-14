@@ -25,14 +25,16 @@ export class ResultBuckets {
     /**
      * An array of buckets and values
      */
-    buckets?: Array<ResultBucketsBuckets>;
+    buckets?: ResultBucketsBuckets[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.buckets = input.buckets.map((item: any) => {
-            return new Array<ResultBucketsBuckets>(item);
-        });
+        if (input.buckets) {
+            this.buckets = input.buckets.map((item: any) => {
+                return new ResultBucketsBuckets(item);
+            });
+        }
     }
 
 }

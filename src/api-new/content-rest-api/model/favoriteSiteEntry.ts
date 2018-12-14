@@ -23,7 +23,7 @@ export class FavoriteSiteEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new FavoriteSite(input.entry);
+        this.entry = input.entry ? new FavoriteSite(input.entry) : undefined;
     }
 
 }

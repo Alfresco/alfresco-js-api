@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**nodeIds** | **Array<string>** |  | [default to null]
+**nodeIds** | **string[]** |  | [default to null]
 
 

@@ -18,7 +18,7 @@
 import { EcmAuth } from './ecmAuth';
 import { EcmClient } from './ecmClient';
 
-export class AlfrescoContent {
+export class ContentApi {
 
     ecmAuth: EcmAuth;
     ecmClient: EcmClient;

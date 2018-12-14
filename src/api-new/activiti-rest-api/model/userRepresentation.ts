@@ -20,15 +20,15 @@ import { GroupRepresentation } from './groupRepresentation';
 import { LightAppRepresentation } from './lightAppRepresentation';
 
 export class UserRepresentation {
-    apps?: Array<LightAppRepresentation>;
-    capabilities?: Array<string>;
+    apps?: LightAppRepresentation[];
+    capabilities?: string[];
     company?: string;
     created?: DateAlfresco;
     email?: string;
     externalId?: string;
     firstName?: string;
     fullname?: string;
-    groups?: Array<GroupRepresentation>;
+    groups?: GroupRepresentation[];
     id?: number;
     lastName?: string;
     lastUpdate?: DateAlfresco;
@@ -45,16 +45,20 @@ export class UserRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.apps = input.apps.map((item: any) => {
-            return new Array<LightAppRepresentation>(item);
-        });
-        this.created = new DateAlfresco(input.created);
-        this.groups = input.groups.map((item: any) => {
-            return new Array<GroupRepresentation>(item);
-        });
-        this.lastUpdate = new DateAlfresco(input.lastUpdate);
-        this.latestSyncTimeStamp = new DateAlfresco(input.latestSyncTimeStamp);
-        this.primaryGroup = new GroupRepresentation(input.primaryGroup);
+        if (input.apps) {
+            this.apps = input.apps.map((item: any) => {
+                return new LightAppRepresentation(item);
+            });
+        }
+        this.created = input.created ? new DateAlfresco(input.created) : undefined;
+        if (input.groups) {
+            this.groups = input.groups.map((item: any) => {
+                return new GroupRepresentation(item);
+            });
+        }
+        this.lastUpdate = input.lastUpdate ? new DateAlfresco(input.lastUpdate) : undefined;
+        this.latestSyncTimeStamp = input.latestSyncTimeStamp ? new DateAlfresco(input.latestSyncTimeStamp) : undefined;
+        this.primaryGroup = input.primaryGroup ? new GroupRepresentation(input.primaryGroup) : undefined;
     }
 
 }

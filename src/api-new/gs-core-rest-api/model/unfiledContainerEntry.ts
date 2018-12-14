@@ -23,7 +23,7 @@ export class UnfiledContainerEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new UnfiledContainer(input.entry);
+        this.entry = input.entry ? new UnfiledContainer(input.entry) : undefined;
     }
 
 }

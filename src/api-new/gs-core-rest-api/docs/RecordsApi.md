@@ -67,13 +67,13 @@ recordsApi.completeRecord(recordIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordId** | **string**| The identifier of a record. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -192,13 +192,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordId** | **string**| The identifier of a record. | 
  **nodeBodyFile** | [**RequestBodyFile**](RequestBodyFile.md)| The target record folder id | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -274,13 +274,13 @@ recordsApi.getRecord(recordIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordId** | **string**| The identifier of a record. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -440,13 +440,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordId** | **string**| The identifier of a record. | 
  **recordBodyUpdate** | [**FilePlanComponentBodyUpdate**](FilePlanComponentBodyUpdate.md)| The record information to update. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

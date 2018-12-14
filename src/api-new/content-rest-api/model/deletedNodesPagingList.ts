@@ -16,19 +16,21 @@
 */
 
 import { DeletedNodeEntry } from './deletedNodeEntry';
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 
 export class DeletedNodesPagingList {
     pagination?: Pagination;
-    entries?: Array<DeletedNodeEntry>;
+    entries?: DeletedNodeEntry[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<DeletedNodeEntry>(item);
-        });
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new DeletedNodeEntry(item);
+            });
+        }
     }
 
 }

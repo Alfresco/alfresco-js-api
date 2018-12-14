@@ -248,11 +248,11 @@ versionsApi.listVersionHistory(nodeIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the version node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the version node. The following optional fields can be requested:
 * properties
 * aspectNames
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -331,7 +331,7 @@ Name | Type | Description  | Notes
  **nodeId** | **string**| The identifier of a node. | 
  **versionId** | **string**| The identifier of a version, ie. version label, within the version history of a node. | 
  **revertBody** | [**RevertBody**](RevertBody.md)| Optionally, specify a version comment and whether this should be a major version, or not. | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

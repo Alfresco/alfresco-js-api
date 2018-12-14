@@ -25,7 +25,7 @@ export class FormTabRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.visibilityCondition = new ConditionRepresentation(input.visibilityCondition);
+        this.visibilityCondition = input.visibilityCondition ? new ConditionRepresentation(input.visibilityCondition) : undefined;
     }
 
 }

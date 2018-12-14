@@ -25,7 +25,7 @@ For multi-select facets selected facets must be order together
     /**
      * Tags used exclude the filters from facet evaluation for multi-select facet support
      */
-    tags?: Array<string>;
+    tags?: string[];
 
     constructor(input?: any) {
 

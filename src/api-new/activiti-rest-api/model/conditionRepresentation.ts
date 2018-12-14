@@ -29,7 +29,7 @@ export class ConditionRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.nextCondition = new ConditionRepresentation(input.nextCondition);
+        this.nextCondition = input.nextCondition ? new ConditionRepresentation(input.nextCondition) : undefined;
     }
 
 }

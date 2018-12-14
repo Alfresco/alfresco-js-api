@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **string**| The identifier for the topic | 
  **topic** | [**TopicBody**](TopicBody.md)| Subtopic | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -197,7 +197,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **classificationGuideId** | **string**| The identifier for the classification guide | 
  **topic** | [**TopicBody**](TopicBody.md)| Topic | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -337,12 +337,12 @@ classificationguidesApi.listClassificationGuides(opts).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **include** | [**Array<string>**](string.md)| Returns additional information about the guide. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the guide. The following optional fields can be requested:
 * hasTopics - A flag indicating whether the guide already contains any topics.
  | [optional] 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**string**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -415,7 +415,7 @@ classificationguidesApi.listSubtopics(topicIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **string**| The identifier for the topic | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -423,7 +423,7 @@ Name | Type | Description  | Notes
  | [optional] 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**string**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -498,7 +498,7 @@ classificationguidesApi.listTopics(classificationGuideIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **classificationGuideId** | **string**| The identifier for the classification guide | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -506,7 +506,7 @@ Name | Type | Description  | Notes
  | [optional] 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**string**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
@@ -605,7 +605,7 @@ classificationguidesApi.showTopicById(topicIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **string**| The identifier for the topic | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -702,7 +702,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topicId** | **string**| The identifier for the topic | 
  **topic** | [**TopicBody**](TopicBody.md)| Topic | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.

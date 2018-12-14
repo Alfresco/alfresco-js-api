@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { DateAlfresco } from './dateAlfresco';
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { Site } from './site';
 
 export class SiteMembershipRequest {
@@ -27,8 +27,8 @@ export class SiteMembershipRequest {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.createdAt = new DateAlfresco(input.createdAt);
-        this.site = new Site(input.site);
+        this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+        this.site = input.site ? new Site(input.site) : undefined;
     }
 
 }

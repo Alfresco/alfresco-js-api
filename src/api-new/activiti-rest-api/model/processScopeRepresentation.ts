@@ -21,22 +21,22 @@ import { VariableMappingRepresentation } from './variableMappingRepresentation';
 import { VariableScopeRepresentation } from './variableScopeRepresentation';
 
 export class ProcessScopeRepresentation {
-    activityIds?: Array<string>;
-    activityIdsByCollapsedSubProcessIdMap?: { [key: string]: Array<string>; };
-    activityIdsByDecisionTableIdMap?: { [key: string]: Array<string>; };
-    activityIdsByFormIdMap?: { [key: string]: Array<string>; };
-    activityIdsWithExcludedSubProcess?: Array<string>;
+    activityIds?: string[];
+    activityIdsByCollapsedSubProcessIdMap?: { [key: string]: string; };
+    activityIdsByDecisionTableIdMap?: { [key: string]: string; };
+    activityIdsByFormIdMap?: { [key: string]: string; };
+    activityIdsWithExcludedSubProcess?: string[];
     activitySidsByActivityIdMap?: { [key: string]: string; };
-    customStencilVariables?: { [key: string]: Array<VariableScopeRepresentation>; };
-    entityVariables?: { [key: string]: Array<EntityVariableScopeRepresentation>; };
-    executionVariables?: { [key: string]: Array<VariableScopeRepresentation>; };
-    fieldToVariableMappings?: { [key: string]: Array<VariableScopeRepresentation>; };
-    forms?: { [key: string]: Array<FormScopeRepresentation>; };
-    metadataVariables?: { [key: string]: Array<VariableScopeRepresentation>; };
+    customStencilVariables?: { [key: string]: VariableScopeRepresentation; };
+    entityVariables?: { [key: string]: EntityVariableScopeRepresentation; };
+    executionVariables?: { [key: string]: VariableScopeRepresentation; };
+    fieldToVariableMappings?: { [key: string]: VariableScopeRepresentation; };
+    forms?: { [key: string]: FormScopeRepresentation; };
+    metadataVariables?: { [key: string]: VariableScopeRepresentation; };
     modelId?: number;
     processModelType?: number;
-    responseVariables?: { [key: string]: Array<VariableScopeRepresentation>; };
-    reusableFieldMapping?: { [key: string]: Array<VariableMappingRepresentation>; };
+    responseVariables?: { [key: string]: VariableScopeRepresentation; };
+    reusableFieldMapping?: { [key: string]: VariableMappingRepresentation; };
 
     constructor(input?: any) {
 

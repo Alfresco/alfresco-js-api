@@ -23,7 +23,7 @@ export class TransferEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new Transfer(input.entry);
+        this.entry = input.entry ? new Transfer(input.entry) : undefined;
     }
 
 }

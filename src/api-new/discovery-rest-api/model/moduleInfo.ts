@@ -30,7 +30,7 @@ export class ModuleInfo {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.installDate = new DateAlfresco(input.installDate);
+        this.installDate = input.installDate ? new DateAlfresco(input.installDate) : undefined;
     }
 
 }

@@ -23,7 +23,7 @@ export class PersonNetworkEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new PersonNetwork(input.entry);
+        this.entry = input.entry ? new PersonNetwork(input.entry) : undefined;
     }
 
 }

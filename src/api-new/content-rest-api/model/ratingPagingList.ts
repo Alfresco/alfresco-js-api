@@ -15,20 +15,22 @@
 * limitations under the License.
 */
 
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 import { RatingEntry } from './ratingEntry';
 
 export class RatingPagingList {
     pagination: Pagination;
-    entries: Array<RatingEntry>;
+    entries: RatingEntry[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<RatingEntry>(item);
-        });
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new RatingEntry(item);
+            });
+        }
     }
 
 }

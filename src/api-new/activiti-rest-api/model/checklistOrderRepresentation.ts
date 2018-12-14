@@ -16,7 +16,7 @@
 */
 
 export class ChecklistOrderRepresentation {
-    order?: Array<string>;
+    order?: string[];
 
     constructor(input?: any) {
 

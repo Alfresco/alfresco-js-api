@@ -23,7 +23,7 @@ export class SecurityMarkInformationBody {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.add = new SecurityMarksBody(input.add);
+        this.add = input.add ? new SecurityMarksBody(input.add) : undefined;
     }
 
 }

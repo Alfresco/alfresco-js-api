@@ -18,7 +18,7 @@
 import { LightGroupRepresentation } from './lightGroupRepresentation';
 
 export class ResultListDataRepresentationLightGroupRepresentation {
-    data?: Array<LightGroupRepresentation>;
+    data?: LightGroupRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationLightGroupRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<LightGroupRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new LightGroupRepresentation(item);
+            });
+        }
     }
 
 }

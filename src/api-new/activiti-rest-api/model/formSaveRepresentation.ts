@@ -23,16 +23,18 @@ export class FormSaveRepresentation {
     formImageBase64?: string;
     formRepresentation?: FormRepresentation;
     newVersion?: boolean;
-    processScopeIdentifiers?: Array<ProcessScopeIdentifierRepresentation>;
+    processScopeIdentifiers?: ProcessScopeIdentifierRepresentation[];
     reusable?: boolean;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.formRepresentation = new FormRepresentation(input.formRepresentation);
-        this.processScopeIdentifiers = input.processScopeIdentifiers.map((item: any) => {
-            return new Array<ProcessScopeIdentifierRepresentation>(item);
-        });
+        this.formRepresentation = input.formRepresentation ? new FormRepresentation(input.formRepresentation) : undefined;
+        if (input.processScopeIdentifiers) {
+            this.processScopeIdentifiers = input.processScopeIdentifiers.map((item: any) => {
+                return new ProcessScopeIdentifierRepresentation(item);
+            });
+        }
     }
 
 }

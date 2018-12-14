@@ -23,7 +23,7 @@ export class AuditAppPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new AuditAppPagingList(input.list);
+        this.list = input.list ? new AuditAppPagingList(input.list) : undefined;
     }
 
 }

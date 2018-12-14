@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **createdAt** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **paidNetwork** | **boolean** |  | [optional] [default to null]
 **subscriptionLevel** | **string** |  | [optional] [default to null]
-**quotas** | [**Array<NetworkQuota>**](NetworkQuota.md) |  | [optional] [default to null]
+**quotas** | [**NetworkQuota[]**](NetworkQuota.md) |  | [optional] [default to null]
 
 
 <a name="PersonNetwork.SubscriptionLevelEnum"></a>

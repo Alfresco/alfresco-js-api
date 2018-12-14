@@ -15,10 +15,10 @@ The character . must not be used at the end of the name.
 **modifiedByUser** | [**UserInfo**](UserInfo.md) |  | [optional] [default to null]
 **sharedByUser** | [**UserInfo**](UserInfo.md) |  | [optional] [default to null]
 **content** | [**ContentInfo**](ContentInfo.md) |  | [optional] [default to null]
-**allowableOperations** | **Array<string>** | The allowable operations for the Quickshare link itself. See allowableOperationsOnTarget for the
+**allowableOperations** | **string[]** | The allowable operations for the Quickshare link itself. See allowableOperationsOnTarget for the
 allowable operations pertaining to the linked content node.
  | [optional] [default to null]
-**allowableOperationsOnTarget** | **Array<string>** | The allowable operations for the content node being shared.
+**allowableOperationsOnTarget** | **string[]** | The allowable operations for the content node being shared.
  | [optional] [default to null]
 
 

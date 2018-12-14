@@ -36,7 +36,7 @@ export class TaskUpdateRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.dueDate = new DateAlfresco(input.dueDate);
+        this.dueDate = input.dueDate ? new DateAlfresco(input.dueDate) : undefined;
     }
 
 }

@@ -23,7 +23,7 @@ export class NodeChildAssociationPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new NodeChildAssociationPagingList(input.list);
+        this.list = input.list ? new NodeChildAssociationPagingList(input.list) : undefined;
     }
 
 }

@@ -54,14 +54,16 @@ export class RequestHighlight {
     /**
      * The fields to highlight and field specific configuration properties for each field
      */
-    fields?: Array<RequestHighlightFields>;
+    fields?: RequestHighlightFields[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.fields = input.fields.map((item: any) => {
-            return new Array<RequestHighlightFields>(item);
-        });
+        if (input.fields) {
+            this.fields = input.fields.map((item: any) => {
+                return new RequestHighlightFields(item);
+            });
+        }
     }
 
 }

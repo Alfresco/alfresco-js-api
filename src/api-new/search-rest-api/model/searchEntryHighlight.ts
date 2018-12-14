@@ -23,7 +23,7 @@ export class SearchEntryHighlight {
     /**
      * Any number of snippets for the specified field highlighting the matching text
      */
-    snippets?: Array<string>;
+    snippets?: string[];
 
     constructor(input?: any) {
 

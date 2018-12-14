@@ -23,7 +23,7 @@ export class SiteMemberEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new SiteMember(input.entry);
+        this.entry = input.entry ? new SiteMember(input.entry) : undefined;
     }
 
 }

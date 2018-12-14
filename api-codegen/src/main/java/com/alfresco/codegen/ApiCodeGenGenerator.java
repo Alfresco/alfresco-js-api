@@ -68,6 +68,8 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
             BooleanProperty.TYPE).defaultValue(Boolean.FALSE.toString()));
 
         typeMapping.put("DateTime", "DateAlfresco");
+        typeMapping.put("array", "");
+        typeMapping.put("List", "");
     }
 
     @Override
@@ -118,7 +120,11 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
 
     @Override
     public String getTypeDeclaration(Property p) {
-        if (p instanceof FileProperty) {
+        if (p instanceof ArrayProperty) {
+            ArrayProperty ap = (ArrayProperty) p;
+            Property inner = ap.getItems();
+            return getTypeDeclaration(inner);
+        } else if (p instanceof FileProperty) {
             return "Blob";
         } else if (p instanceof ObjectProperty) {
             return "any";
@@ -206,6 +212,11 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
             if (className.equals("ModelError")) {
                 objs.put("canReturnError", className);
             }
+
+            if (im.equals("Map") || im.equals("")) {
+                imports.remove(im);
+            }
+
         }
 
         if (objs != null) {
@@ -288,9 +299,16 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
 
                 HashMap<String, String> tsImport = new HashMap<>();
                 tsImport.put("classname", im);
-                tsImport.put("filename", toModelFilename(im));
 
-                if(!im.equals("Map")) {
+                if (im.equals("DateAlfresco") || im.equals("PathInfo") || im.equals("UserInfo")
+                    || im.equals("Pagination") || im.equals("ContentInfo") || im.equals("ChildAssociationInfo")
+                    || im.equals("PathElement")) {
+                    tsImport.put("filename", "../../content-rest-api/model/" + toModelFilename(im));
+                } else {
+                    tsImport.put("filename", "./" + toModelFilename(im));
+                }
+
+                if (!im.equals("Map") && !im.trim().equals("")) {
                     tsImports.add(tsImport);
                 }
             }

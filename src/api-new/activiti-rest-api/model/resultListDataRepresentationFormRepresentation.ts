@@ -18,7 +18,7 @@
 import { FormRepresentation } from './formRepresentation';
 
 export class ResultListDataRepresentationFormRepresentation {
-    data?: Array<FormRepresentation>;
+    data?: FormRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationFormRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<FormRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new FormRepresentation(item);
+            });
+        }
     }
 
 }

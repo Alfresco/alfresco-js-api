@@ -23,7 +23,7 @@ export class PersonNetworkPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new PersonNetworkPagingList(input.list);
+        this.list = input.list ? new PersonNetworkPagingList(input.list) : undefined;
     }
 
 }

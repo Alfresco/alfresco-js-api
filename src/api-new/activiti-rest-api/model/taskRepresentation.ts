@@ -33,8 +33,8 @@ export class TaskRepresentation {
     formKey?: string;
     id?: string;
     initiatorCanCompleteTask?: boolean;
-    involvedGroups?: Array<LightGroupRepresentation>;
-    involvedPeople?: Array<LightUserRepresentation>;
+    involvedGroups?: LightGroupRepresentation[];
+    involvedPeople?: LightUserRepresentation[];
     managerOfCandidateGroup?: boolean;
     memberOfCandidateGroup?: boolean;
     memberOfCandidateUsers?: boolean;
@@ -53,24 +53,30 @@ export class TaskRepresentation {
     processInstanceName?: string;
     processInstanceStartUserId?: string;
     taskDefinitionKey?: string;
-    variables?: Array<RestVariable>;
+    variables?: RestVariable[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.assignee = new LightUserRepresentation(input.assignee);
-        this.created = new DateAlfresco(input.created);
-        this.dueDate = new DateAlfresco(input.dueDate);
-        this.endDate = new DateAlfresco(input.endDate);
-        this.involvedGroups = input.involvedGroups.map((item: any) => {
-            return new Array<LightGroupRepresentation>(item);
-        });
-        this.involvedPeople = input.involvedPeople.map((item: any) => {
-            return new Array<LightUserRepresentation>(item);
-        });
-        this.variables = input.variables.map((item: any) => {
-            return new Array<RestVariable>(item);
-        });
+        this.assignee = input.assignee ? new LightUserRepresentation(input.assignee) : undefined;
+        this.created = input.created ? new DateAlfresco(input.created) : undefined;
+        this.dueDate = input.dueDate ? new DateAlfresco(input.dueDate) : undefined;
+        this.endDate = input.endDate ? new DateAlfresco(input.endDate) : undefined;
+        if (input.involvedGroups) {
+            this.involvedGroups = input.involvedGroups.map((item: any) => {
+                return new LightGroupRepresentation(item);
+            });
+        }
+        if (input.involvedPeople) {
+            this.involvedPeople = input.involvedPeople.map((item: any) => {
+                return new LightUserRepresentation(item);
+            });
+        }
+        if (input.variables) {
+            this.variables = input.variables.map((item: any) => {
+                return new RestVariable(item);
+            });
+        }
     }
 
 }

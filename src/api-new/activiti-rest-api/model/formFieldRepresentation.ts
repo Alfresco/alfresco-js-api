@@ -33,7 +33,7 @@ export class FormFieldRepresentation {
     minValue?: string;
     name?: string;
     optionType?: string;
-    options?: Array<OptionRepresentation>;
+    options?: OptionRepresentation[];
     overrideId?: boolean;
     params?: any;
     placeholder?: string;
@@ -55,11 +55,13 @@ export class FormFieldRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.layout = new LayoutRepresentation(input.layout);
-        this.options = input.options.map((item: any) => {
-            return new Array<OptionRepresentation>(item);
-        });
-        this.visibilityCondition = new ConditionRepresentation(input.visibilityCondition);
+        this.layout = input.layout ? new LayoutRepresentation(input.layout) : undefined;
+        if (input.options) {
+            this.options = input.options.map((item: any) => {
+                return new OptionRepresentation(item);
+            });
+        }
+        this.visibilityCondition = input.visibilityCondition ? new ConditionRepresentation(input.visibilityCondition) : undefined;
     }
 
 }

@@ -26,7 +26,7 @@ export class ImageUploadRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.created = new DateAlfresco(input.created);
+        this.created = input.created ? new DateAlfresco(input.created) : undefined;
     }
 
 }

@@ -52,7 +52,7 @@ null (empty response body)
 
 <a name="getProcessInstanceVariablesUsingGET1"></a>
 # **getProcessInstanceVariablesUsingGET1**
-> Array<ProcessInstanceVariableRepresentation> getProcessInstanceVariablesUsingGET1(taskId)
+> ProcessInstanceVariableRepresentation getProcessInstanceVariablesUsingGET1(taskId)
 
 Get task variables
 
@@ -85,11 +85,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<ProcessInstanceVariableRepresentation>**](ProcessInstanceVariableRepresentation.md)
+[**ProcessInstanceVariableRepresentation**](ProcessInstanceVariableRepresentation.md)
 
 <a name="getRestFieldValuesUsingGET1"></a>
 # **getRestFieldValuesUsingGET1**
-> Array<FormValueRepresentation> getRestFieldValuesUsingGET1(taskIdfieldcolumn)
+> FormValueRepresentation getRestFieldValuesUsingGET1(taskIdfieldcolumn)
 
 Retrieve column field values
 
@@ -126,11 +126,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<FormValueRepresentation>**](FormValueRepresentation.md)
+[**FormValueRepresentation**](FormValueRepresentation.md)
 
 <a name="getRestFieldValuesUsingGET2"></a>
 # **getRestFieldValuesUsingGET2**
-> Array<FormValueRepresentation> getRestFieldValuesUsingGET2(taskIdfield)
+> FormValueRepresentation getRestFieldValuesUsingGET2(taskIdfield)
 
 Retrieve populated field values
 
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<FormValueRepresentation>**](FormValueRepresentation.md)
+[**FormValueRepresentation**](FormValueRepresentation.md)
 
 <a name="getTaskFormUsingGET"></a>
 # **getTaskFormUsingGET**

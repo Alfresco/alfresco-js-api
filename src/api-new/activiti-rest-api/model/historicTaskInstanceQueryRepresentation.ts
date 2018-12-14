@@ -37,7 +37,7 @@ export class HistoricTaskInstanceQueryRepresentation {
     processDefinitionNameLike?: string;
     processFinished?: boolean;
     processInstanceId?: string;
-    processVariables?: Array<QueryVariable>;
+    processVariables?: QueryVariable[];
     size?: number;
     sort?: string;
     start?: number;
@@ -65,7 +65,7 @@ export class HistoricTaskInstanceQueryRepresentation {
     taskOwner?: string;
     taskOwnerLike?: string;
     taskPriority?: number;
-    taskVariables?: Array<QueryVariable>;
+    taskVariables?: QueryVariable[];
     tenantId?: string;
     tenantIdLike?: string;
     withoutDueDate?: boolean;
@@ -74,21 +74,25 @@ export class HistoricTaskInstanceQueryRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.dueDate = new DateAlfresco(input.dueDate);
-        this.dueDateAfter = new DateAlfresco(input.dueDateAfter);
-        this.dueDateBefore = new DateAlfresco(input.dueDateBefore);
-        this.processVariables = input.processVariables.map((item: any) => {
-            return new Array<QueryVariable>(item);
-        });
-        this.taskCompletedAfter = new DateAlfresco(input.taskCompletedAfter);
-        this.taskCompletedBefore = new DateAlfresco(input.taskCompletedBefore);
-        this.taskCompletedOn = new DateAlfresco(input.taskCompletedOn);
-        this.taskCreatedAfter = new DateAlfresco(input.taskCreatedAfter);
-        this.taskCreatedBefore = new DateAlfresco(input.taskCreatedBefore);
-        this.taskCreatedOn = new DateAlfresco(input.taskCreatedOn);
-        this.taskVariables = input.taskVariables.map((item: any) => {
-            return new Array<QueryVariable>(item);
-        });
+        this.dueDate = input.dueDate ? new DateAlfresco(input.dueDate) : undefined;
+        this.dueDateAfter = input.dueDateAfter ? new DateAlfresco(input.dueDateAfter) : undefined;
+        this.dueDateBefore = input.dueDateBefore ? new DateAlfresco(input.dueDateBefore) : undefined;
+        if (input.processVariables) {
+            this.processVariables = input.processVariables.map((item: any) => {
+                return new QueryVariable(item);
+            });
+        }
+        this.taskCompletedAfter = input.taskCompletedAfter ? new DateAlfresco(input.taskCompletedAfter) : undefined;
+        this.taskCompletedBefore = input.taskCompletedBefore ? new DateAlfresco(input.taskCompletedBefore) : undefined;
+        this.taskCompletedOn = input.taskCompletedOn ? new DateAlfresco(input.taskCompletedOn) : undefined;
+        this.taskCreatedAfter = input.taskCreatedAfter ? new DateAlfresco(input.taskCreatedAfter) : undefined;
+        this.taskCreatedBefore = input.taskCreatedBefore ? new DateAlfresco(input.taskCreatedBefore) : undefined;
+        this.taskCreatedOn = input.taskCreatedOn ? new DateAlfresco(input.taskCreatedOn) : undefined;
+        if (input.taskVariables) {
+            this.taskVariables = input.taskVariables.map((item: any) => {
+                return new QueryVariable(item);
+            });
+        }
     }
 
 }

@@ -18,7 +18,7 @@
 import { RuntimeFormRepresentation } from './runtimeFormRepresentation';
 
 export class ResultListDataRepresentationRuntimeFormRepresentation {
-    data?: Array<RuntimeFormRepresentation>;
+    data?: RuntimeFormRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationRuntimeFormRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<RuntimeFormRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new RuntimeFormRepresentation(item);
+            });
+        }
     }
 
 }

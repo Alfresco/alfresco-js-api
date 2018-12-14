@@ -23,7 +23,7 @@ export class NodeEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new Node(input.entry);
+        this.entry = input.entry ? new Node(input.entry) : undefined;
     }
 
 }

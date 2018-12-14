@@ -18,7 +18,7 @@
 import { ProcessContentRepresentation } from './processContentRepresentation';
 
 export class ResultListDataRepresentationProcessContentRepresentation {
-    data?: Array<ProcessContentRepresentation>;
+    data?: ProcessContentRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationProcessContentRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<ProcessContentRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new ProcessContentRepresentation(item);
+            });
+        }
     }
 
 }

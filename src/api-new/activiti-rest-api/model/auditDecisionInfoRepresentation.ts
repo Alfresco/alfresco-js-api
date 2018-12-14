@@ -19,18 +19,22 @@ import { AuditCalculatedValueRepresentation } from './auditCalculatedValueRepres
 import { AuditDecisionRuleInfoRepresentation } from './auditDecisionRuleInfoRepresentation';
 
 export class AuditDecisionInfoRepresentation {
-    appliedRules?: Array<AuditDecisionRuleInfoRepresentation>;
-    calculatedValues?: Array<AuditCalculatedValueRepresentation>;
+    appliedRules?: AuditDecisionRuleInfoRepresentation[];
+    calculatedValues?: AuditCalculatedValueRepresentation[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.appliedRules = input.appliedRules.map((item: any) => {
-            return new Array<AuditDecisionRuleInfoRepresentation>(item);
-        });
-        this.calculatedValues = input.calculatedValues.map((item: any) => {
-            return new Array<AuditCalculatedValueRepresentation>(item);
-        });
+        if (input.appliedRules) {
+            this.appliedRules = input.appliedRules.map((item: any) => {
+                return new AuditDecisionRuleInfoRepresentation(item);
+            });
+        }
+        if (input.calculatedValues) {
+            this.calculatedValues = input.calculatedValues.map((item: any) => {
+                return new AuditCalculatedValueRepresentation(item);
+            });
+        }
     }
 
 }

@@ -47,7 +47,7 @@ null (empty response body)
 
 <a name="getSyncLogEntriesUsingGET"></a>
 # **getSyncLogEntriesUsingGET**
-> Array<SyncLogEntryRepresentation> getSyncLogEntriesUsingGET(opts)
+> SyncLogEntryRepresentation getSyncLogEntriesUsingGET(opts)
 
 List sync log entries
 
@@ -89,5 +89,5 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<SyncLogEntryRepresentation>**](SyncLogEntryRepresentation.md)
+[**SyncLogEntryRepresentation**](SyncLogEntryRepresentation.md)
 

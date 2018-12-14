@@ -21,17 +21,19 @@ import { UnfiledRecordFolderChildAssociationEntry } from './unfiledRecordFolderC
 
 export class UnfiledRecordFolderAssociationPagingList {
     pagination?: Pagination;
-    entries?: Array<UnfiledRecordFolderChildAssociationEntry>;
+    entries?: UnfiledRecordFolderChildAssociationEntry[];
     source?: UnfiledRecordFolder;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<UnfiledRecordFolderChildAssociationEntry>(item);
-        });
-        this.source = new UnfiledRecordFolder(input.source);
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new UnfiledRecordFolderChildAssociationEntry(item);
+            });
+        }
+        this.source = input.source ? new UnfiledRecordFolder(input.source) : undefined;
     }
 
 }

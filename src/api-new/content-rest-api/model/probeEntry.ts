@@ -23,7 +23,7 @@ export class ProbeEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new ProbeEntryEntry(input.entry);
+        this.entry = input.entry ? new ProbeEntryEntry(input.entry) : undefined;
     }
 
 }

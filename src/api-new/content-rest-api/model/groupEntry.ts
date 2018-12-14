@@ -23,7 +23,7 @@ export class GroupEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new Group(input.entry);
+        this.entry = input.entry ? new Group(input.entry) : undefined;
     }
 
 }

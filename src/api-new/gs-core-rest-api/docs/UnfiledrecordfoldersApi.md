@@ -169,11 +169,11 @@ Name | Type | Description  | Notes
  **nodeBodyCreate** | [**RMNodeBodyCreateWithRelativePath**](RMNodeBodyCreateWithRelativePath.md)| The node information to create. | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -289,13 +289,13 @@ unfiledrecordfoldersApi.getUnfiledRecordFolder(unfiledRecordFolderIdopts).then((
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **unfiledRecordFolderId** | **string**| The identifier of an unfiled record folder. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
  **relativePath** | **string**| Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -395,7 +395,7 @@ Name | Type | Description  | Notes
 
 *   where=(nodeType='cm:content INCLUDESUBTYPES')
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
@@ -405,7 +405,7 @@ Name | Type | Description  | Notes
  **relativePath** | **string**| Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**. | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -495,12 +495,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **unfiledRecordFolderId** | **string**| The identifier of an unfiled record folder. | 
  **unfiledRecordFolderBodyUpdate** | [**UnfiledRecordFolderBodyUpdate**](UnfiledRecordFolderBodyUpdate.md)| The record folder information to update. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**. | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

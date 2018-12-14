@@ -156,13 +156,13 @@ Name | Type | Description  | Notes
 
 This field is ignored for multipart/form-data content uploads.
  | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -277,12 +277,12 @@ recordfoldersApi.getRecordFolder(recordFolderIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordFolderId** | **string**| The identifier of a record folder. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * isClosed
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -384,7 +384,7 @@ Name | Type | Description  | Notes
 
 *   where=(isPrimary=true)
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the records. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the records. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
@@ -394,7 +394,7 @@ Name | Type | Description  | Notes
 * properties
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId** | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -484,12 +484,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordFolderId** | **string**| The identifier of a record folder. | 
  **recordFolderBodyUpdate** | [**FilePlanComponentBodyUpdate**](FilePlanComponentBodyUpdate.md)| The record folder information to update. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * isClosed
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

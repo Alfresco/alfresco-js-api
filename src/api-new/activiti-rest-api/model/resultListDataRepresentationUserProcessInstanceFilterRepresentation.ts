@@ -18,7 +18,7 @@
 import { UserProcessInstanceFilterRepresentation } from './userProcessInstanceFilterRepresentation';
 
 export class ResultListDataRepresentationUserProcessInstanceFilterRepresentation {
-    data?: Array<UserProcessInstanceFilterRepresentation>;
+    data?: UserProcessInstanceFilterRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationUserProcessInstanceFilterRepresentation
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<UserProcessInstanceFilterRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new UserProcessInstanceFilterRepresentation(item);
+            });
+        }
     }
 
 }

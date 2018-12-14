@@ -23,7 +23,7 @@ export class NodeAssociationEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new NodeAssociation(input.entry);
+        this.entry = input.entry ? new NodeAssociation(input.entry) : undefined;
     }
 
 }

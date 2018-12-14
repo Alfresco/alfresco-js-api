@@ -34,8 +34,8 @@ export class AlfrescoEndpointRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.created = new DateAlfresco(input.created);
-        this.lastUpdated = new DateAlfresco(input.lastUpdated);
+        this.created = input.created ? new DateAlfresco(input.created) : undefined;
+        this.lastUpdated = input.lastUpdated ? new DateAlfresco(input.lastUpdated) : undefined;
     }
 
 }

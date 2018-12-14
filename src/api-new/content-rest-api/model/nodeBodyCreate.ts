@@ -27,23 +27,27 @@ The character . must not be used at the end of the name.
      */
     name: string;
     nodeType: string;
-    aspectNames?: Array<string>;
+    aspectNames?: string[];
     properties?: { [key: string]: string; };
     relativePath?: string;
     association?: NodeBodyCreateAssociation;
-    secondaryChildren?: Array<ChildAssociationBody>;
-    targets?: Array<AssociationBody>;
+    secondaryChildren?: ChildAssociationBody[];
+    targets?: AssociationBody[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.association = new NodeBodyCreateAssociation(input.association);
-        this.secondaryChildren = input.secondaryChildren.map((item: any) => {
-            return new Array<ChildAssociationBody>(item);
-        });
-        this.targets = input.targets.map((item: any) => {
-            return new Array<AssociationBody>(item);
-        });
+        this.association = input.association ? new NodeBodyCreateAssociation(input.association) : undefined;
+        if (input.secondaryChildren) {
+            this.secondaryChildren = input.secondaryChildren.map((item: any) => {
+                return new ChildAssociationBody(item);
+            });
+        }
+        if (input.targets) {
+            this.targets = input.targets.map((item: any) => {
+                return new AssociationBody(item);
+            });
+        }
     }
 
 }

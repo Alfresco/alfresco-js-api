@@ -15,10 +15,10 @@
 * limitations under the License.
 */
 
-export class DateAlfresco {
+export class DateAlfresco extends Date {
 
     constructor(obj?: string) {
-        Object.assign(this, this.parseDate(obj));
+        super(DateAlfresco.parseDate(obj));
     }
 
     /**
@@ -26,7 +26,7 @@ export class DateAlfresco {
      * @param  dateToConvert The date value as a string.
      * @returns  The parsed date object.
      */
-    parseDate(dateToConvert: string): Date {
+    static parseDate(dateToConvert: string): Date {
         let dateLength = 10;
         let separatorPos = dateToConvert.substring(dateLength).search(/[\+\-]/) + dateLength;
         let dateStr = separatorPos > dateLength ? dateToConvert.substring(0, separatorPos) : dateToConvert;
@@ -42,7 +42,7 @@ export class DateAlfresco {
      * @param dateToConvert The date value as a string.
      * @returns The parsed date object.
      */
-    parseDateTime(dateToConvert: string): Date {
+    static parseDateTime(dateToConvert: string): Date {
         // TODO: review when Safari 10 is released
         // return new Date(str.replace(/T/i, ' '));
 
@@ -59,7 +59,7 @@ export class DateAlfresco {
      * @param dateToConvert The timezone offset as a string, e.g. '+0000', '+2000' or '-0500'.
      * @returns The number of minutes offset from UTC.
      */
-    parseDateTimeZone(dateToConvert: string): number {
+    static parseDateTimeZone(dateToConvert: string): number {
         let match = /([\+\-])(\d{2}):?(\d{2})?/.exec(dateToConvert);
         if (match !== null) {
             return (parseInt(match[1] + '1') * -1 * (parseInt(match[2]) * 60) + parseInt(match[3] || '0'));

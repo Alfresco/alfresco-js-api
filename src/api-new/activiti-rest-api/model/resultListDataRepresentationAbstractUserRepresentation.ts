@@ -18,7 +18,7 @@
 import { AbstractUserRepresentation } from './abstractUserRepresentation';
 
 export class ResultListDataRepresentationAbstractUserRepresentation {
-    data?: Array<AbstractUserRepresentation>;
+    data?: AbstractUserRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationAbstractUserRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<AbstractUserRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new AbstractUserRepresentation(item);
+            });
+        }
     }
 
 }

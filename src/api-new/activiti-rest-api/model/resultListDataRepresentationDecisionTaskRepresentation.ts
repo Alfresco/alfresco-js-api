@@ -18,7 +18,7 @@
 import { DecisionTaskRepresentation } from './decisionTaskRepresentation';
 
 export class ResultListDataRepresentationDecisionTaskRepresentation {
-    data?: Array<DecisionTaskRepresentation>;
+    data?: DecisionTaskRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationDecisionTaskRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<DecisionTaskRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new DecisionTaskRepresentation(item);
+            });
+        }
     }
 
 }

@@ -23,7 +23,7 @@ export class SiteContainerEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new SiteContainer(input.entry);
+        this.entry = input.entry ? new SiteContainer(input.entry) : undefined;
     }
 
 }

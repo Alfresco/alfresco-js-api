@@ -9,6 +9,6 @@ Name | Type | Description | Notes
 **processDefinitionId** | **string** |  | [optional] [default to null]
 **processDefinitionKey** | **string** |  | [optional] [default to null]
 **values** | **any** |  | [optional] [default to null]
-**variables** | [**Array<RestVariable>**](RestVariable.md) |  | [optional] [default to null]
+**variables** | [**RestVariable[]**](RestVariable.md) |  | [optional] [default to null]
 
 

@@ -23,7 +23,7 @@ export class DeletedNodesPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new DeletedNodesPagingList(input.list);
+        this.list = input.list ? new DeletedNodesPagingList(input.list) : undefined;
     }
 
 }

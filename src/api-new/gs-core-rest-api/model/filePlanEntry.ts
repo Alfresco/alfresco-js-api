@@ -23,7 +23,7 @@ export class FilePlanEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new FilePlan(input.entry);
+        this.entry = input.entry ? new FilePlan(input.entry) : undefined;
     }
 
 }

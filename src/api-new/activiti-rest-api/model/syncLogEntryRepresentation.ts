@@ -25,7 +25,7 @@ export class SyncLogEntryRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.timeStamp = new DateAlfresco(input.timeStamp);
+        this.timeStamp = input.timeStamp ? new DateAlfresco(input.timeStamp) : undefined;
     }
 
 }

@@ -31,7 +31,7 @@ describe('Queries', function () {
             let badCall = function () {
                 this.alfrescoJsApi.core.queriesApi.findNodes();
             }.bind(this);
-            expect(badCall).to.throw('Missing the required parameter \'term\' when calling findNodes');
+            expect(badCall).to.throw('Required param \'term\' in findNodes');
         });
 
         it('should invoke error handler on a server error', function (done) {

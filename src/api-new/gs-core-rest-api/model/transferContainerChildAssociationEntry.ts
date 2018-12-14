@@ -23,7 +23,7 @@ export class TransferContainerChildAssociationEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new TransferContainerChildAssociation(input.entry);
+        this.entry = input.entry ? new TransferContainerChildAssociation(input.entry) : undefined;
     }
 
 }

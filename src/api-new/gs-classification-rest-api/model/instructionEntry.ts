@@ -23,7 +23,7 @@ export class InstructionEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new Instruction(input.entry);
+        this.entry = input.entry ? new Instruction(input.entry) : undefined;
     }
 
 }

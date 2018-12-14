@@ -37,20 +37,22 @@ export class GenericBucket {
     /**
      * An array of buckets and values
      */
-    metrics?: Array<GenericMetric>;
+    metrics?: GenericMetric[];
     /**
      * Additional list of nested facets
      */
-    facets?: Array<any>;
+    facets?: any[];
     bucketInfo?: GenericBucketBucketInfo;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.metrics = input.metrics.map((item: any) => {
-            return new Array<GenericMetric>(item);
-        });
-        this.bucketInfo = new GenericBucketBucketInfo(input.bucketInfo);
+        if (input.metrics) {
+            this.metrics = input.metrics.map((item: any) => {
+                return new GenericMetric(item);
+            });
+        }
+        this.bucketInfo = input.bucketInfo ? new GenericBucketBucketInfo(input.bucketInfo) : undefined;
     }
 
 }

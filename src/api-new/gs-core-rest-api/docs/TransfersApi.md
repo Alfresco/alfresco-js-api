@@ -67,13 +67,13 @@ transfersApi.getTransfer(transferIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **transferId** | **string**| The identifier of a transfer. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the transfer folder. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the transfer folder. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * transferPDFIndicator
 * transferLocation
 * transferAccessionIndicator
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
  **transferId** | **string**| The identifier of a transfer. | 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list. | [optional] 
  **maxItems** | **number**| The maximum number of items to return in the list. | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the transfer's child. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the transfer's child. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * isClosed
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 * properties
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the specified parent **transferId**. | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

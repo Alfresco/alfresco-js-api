@@ -23,7 +23,7 @@ export class ClassificationGuideEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new ClassificationGuide(input.entry);
+        this.entry = input.entry ? new ClassificationGuide(input.entry) : undefined;
     }
 
 }

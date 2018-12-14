@@ -25,8 +25,8 @@ export class InstructionBody {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.classificationInformation = new ClassificationInformation(input.classificationInformation);
-        this.securityMarkInformation = new SecurityMarkInformationBody(input.securityMarkInformation);
+        this.classificationInformation = input.classificationInformation ? new ClassificationInformation(input.classificationInformation) : undefined;
+        this.securityMarkInformation = input.securityMarkInformation ? new SecurityMarkInformationBody(input.securityMarkInformation) : undefined;
     }
 
 }

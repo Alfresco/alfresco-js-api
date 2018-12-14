@@ -25,7 +25,7 @@ export class BoxUserAccountCredentialsRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.expireDate = new DateAlfresco(input.expireDate);
+        this.expireDate = input.expireDate ? new DateAlfresco(input.expireDate) : undefined;
     }
 
 }

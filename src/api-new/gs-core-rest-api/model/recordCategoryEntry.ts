@@ -23,7 +23,7 @@ export class RecordCategoryEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new RecordCategory(input.entry);
+        this.entry = input.entry ? new RecordCategory(input.entry) : undefined;
     }
 
 }

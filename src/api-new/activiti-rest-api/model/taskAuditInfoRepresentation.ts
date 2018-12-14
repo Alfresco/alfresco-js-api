@@ -20,9 +20,9 @@ import { CommentAuditInfo } from './commentAuditInfo';
 
 export class TaskAuditInfoRepresentation {
     assignee?: string;
-    comments?: Array<CommentAuditInfo>;
+    comments?: CommentAuditInfo[];
     endTime?: string;
-    formData?: Array<AuditLogFormDataRepresentation>;
+    formData?: AuditLogFormDataRepresentation[];
     processDefinitionName?: string;
     processDefinitionVersion?: number;
     processInstanceId?: string;
@@ -34,12 +34,16 @@ export class TaskAuditInfoRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.comments = input.comments.map((item: any) => {
-            return new Array<CommentAuditInfo>(item);
-        });
-        this.formData = input.formData.map((item: any) => {
-            return new Array<AuditLogFormDataRepresentation>(item);
-        });
+        if (input.comments) {
+            this.comments = input.comments.map((item: any) => {
+                return new CommentAuditInfo(item);
+            });
+        }
+        if (input.formData) {
+            this.formData = input.formData.map((item: any) => {
+                return new AuditLogFormDataRepresentation(item);
+            });
+        }
     }
 
 }

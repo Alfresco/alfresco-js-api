@@ -15,11 +15,11 @@
 * limitations under the License.
 */
 
-import { ContentInfo } from './contentInfo';
-import { DateAlfresco } from './dateAlfresco';
+import { ContentInfo } from '../../content-rest-api/model/contentInfo';
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { PathInfo } from '../../content-rest-api/model/pathInfo';
 import { PermissionsInfo } from './permissionsInfo';
-import { UserInfo } from './userInfo';
+import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class Node {
     id: string;
@@ -41,24 +41,22 @@ The character . must not be used at the end of the name.
     isLink?: boolean;
     isFavorite?: boolean;
     content?: ContentInfo;
-    aspectNames?: Array<string>;
+    aspectNames?: string[];
     properties?: any;
-    allowableOperations?: Array<string>;
+    allowableOperations?: string[];
     path?: PathInfo;
     permissions?: PermissionsInfo;
 
     constructor(input?: any) {
 
-        if(input) {
-            Object.assign(this, input);
-            this.modifiedAt = new DateAlfresco(input.modifiedAt);
-            this.modifiedByUser = new UserInfo(input.modifiedByUser);
-            this.createdAt = new DateAlfresco(input.createdAt);
-            this.createdByUser = new UserInfo(input.createdByUser);
-            this.content = new ContentInfo(input.content);
-            this.path = new PathInfo(input.path);
-            this.permissions = new PermissionsInfo(input.permissions);
-        }
+        Object.assign(this, input);
+        this.modifiedAt = input.modifiedAt ? new DateAlfresco(input.modifiedAt) : undefined;
+        this.modifiedByUser = input.modifiedByUser ? new UserInfo(input.modifiedByUser) : undefined;
+        this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+        this.createdByUser = input.createdByUser ? new UserInfo(input.createdByUser) : undefined;
+        this.content = input.content ? new ContentInfo(input.content) : undefined;
+        this.path = input.path ? new PathInfo(input.path) : undefined;
+        this.permissions = input.permissions ? new PermissionsInfo(input.permissions) : undefined;
     }
 
 }

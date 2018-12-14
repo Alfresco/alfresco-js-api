@@ -33,8 +33,8 @@ export class FormRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.formDefinition = new FormDefinitionRepresentation(input.formDefinition);
-        this.lastUpdated = new DateAlfresco(input.lastUpdated);
+        this.formDefinition = input.formDefinition ? new FormDefinitionRepresentation(input.formDefinition) : undefined;
+        this.lastUpdated = input.lastUpdated ? new DateAlfresco(input.lastUpdated) : undefined;
     }
 
 }

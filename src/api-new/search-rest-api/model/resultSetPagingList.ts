@@ -22,16 +22,18 @@ import { ResultSetRowEntry } from './resultSetRowEntry';
 export class ResultSetPagingList {
     pagination?: Pagination;
     context?: ResultSetContext;
-    entries?: Array<ResultSetRowEntry>;
+    entries?: ResultSetRowEntry[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.context = new ResultSetContext(input.context);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<ResultSetRowEntry>(item);
-        });
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        this.context = input.context ? new ResultSetContext(input.context) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new ResultSetRowEntry(item);
+            });
+        }
     }
 
 }

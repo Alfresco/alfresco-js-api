@@ -29,9 +29,9 @@ export class LicenseInfo {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.issuedAt = new DateAlfresco(input.issuedAt);
-        this.expiresAt = new DateAlfresco(input.expiresAt);
-        this.entitlements = new EntitlementsInfo(input.entitlements);
+        this.issuedAt = input.issuedAt ? new DateAlfresco(input.issuedAt) : undefined;
+        this.expiresAt = input.expiresAt ? new DateAlfresco(input.expiresAt) : undefined;
+        this.entitlements = input.entitlements ? new EntitlementsInfo(input.entitlements) : undefined;
     }
 
 }

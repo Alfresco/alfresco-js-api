@@ -23,7 +23,7 @@ export class RecordCategoryPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new RecordCategoryPagingList(input.list);
+        this.list = input.list ? new RecordCategoryPagingList(input.list) : undefined;
     }
 
 }

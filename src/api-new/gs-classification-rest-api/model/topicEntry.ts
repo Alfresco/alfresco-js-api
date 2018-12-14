@@ -23,7 +23,7 @@ export class TopicEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new Topic(input.entry);
+        this.entry = input.entry ? new Topic(input.entry) : undefined;
     }
 
 }

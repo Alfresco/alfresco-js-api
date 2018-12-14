@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 <a name="getFormsUsingGET"></a>
 # **getFormsUsingGET**
-> Array<FormRepresentation> getFormsUsingGET(formId)
+> FormRepresentation getFormsUsingGET(formId)
 
 Get forms
 
@@ -195,11 +195,11 @@ formmodelsApi.getFormsUsingGET(formId).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **formId** | [**Array<string>**](string.md)| formId | 
+ **formId** | [**string**](string.md)| formId | 
 
 ### Return type
 
-[**Array<FormRepresentation>**](FormRepresentation.md)
+[**FormRepresentation**](FormRepresentation.md)
 
 <a name="getFormsUsingGET1"></a>
 # **getFormsUsingGET1**
@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 
 <a name="validateModelUsingPUT"></a>
 # **validateModelUsingPUT**
-> Array<ValidationErrorRepresentation> validateModelUsingPUT(formIdsaveRepresentation)
+> ValidationErrorRepresentation validateModelUsingPUT(formIdsaveRepresentation)
 
 Validate form model content
 
@@ -362,5 +362,5 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<ValidationErrorRepresentation>**](ValidationErrorRepresentation.md)
+[**ValidationErrorRepresentation**](ValidationErrorRepresentation.md)
 

@@ -40,10 +40,10 @@ export class Topic {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.instruction = new Instruction(input.instruction);
-        this.createdAt = new DateAlfresco(input.createdAt);
-        this.path = new Path(input.path);
-        this.classificationGuide = new ClassificationGuideInTopic(input.classificationGuide);
+        this.instruction = input.instruction ? new Instruction(input.instruction) : undefined;
+        this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+        this.path = input.path ? new Path(input.path) : undefined;
+        this.classificationGuide = input.classificationGuide ? new ClassificationGuideInTopic(input.classificationGuide) : undefined;
     }
 
 }

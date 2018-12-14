@@ -257,7 +257,7 @@ Name | Type | Description  | Notes
 
 <a name="getHistoricProcessInstanceVariablesUsingGET"></a>
 # **getHistoricProcessInstanceVariablesUsingGET**
-> Array<ProcessInstanceVariableRepresentation> getHistoricProcessInstanceVariablesUsingGET(processInstanceId)
+> ProcessInstanceVariableRepresentation getHistoricProcessInstanceVariablesUsingGET(processInstanceId)
 
 Get historic variables for a process instance
 
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<ProcessInstanceVariableRepresentation>**](ProcessInstanceVariableRepresentation.md)
+[**ProcessInstanceVariableRepresentation**](ProcessInstanceVariableRepresentation.md)
 
 <a name="getHistoricProcessInstancesUsingPOST"></a>
 # **getHistoricProcessInstancesUsingPOST**
@@ -371,7 +371,7 @@ Name | Type | Description  | Notes
 
 <a name="getIdentityLinksForFamilyUsingGET1"></a>
 # **getIdentityLinksForFamilyUsingGET1**
-> Array<IdentityLinkRepresentation> getIdentityLinksForFamilyUsingGET1(processInstanceIdfamily)
+> IdentityLinkRepresentation getIdentityLinksForFamilyUsingGET1(processInstanceIdfamily)
 
 List either the users or groups involved with a process instance
 
@@ -405,11 +405,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
+[**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
 <a name="getIdentityLinksUsingGET1"></a>
 # **getIdentityLinksUsingGET1**
-> Array<IdentityLinkRepresentation> getIdentityLinksUsingGET1(processInstanceId)
+> IdentityLinkRepresentation getIdentityLinksUsingGET1(processInstanceId)
 
 List the users and groups involved with a process instance
 
@@ -442,7 +442,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
+[**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
 <a name="getProcessInstanceContentUsingGET"></a>
 # **getProcessInstanceContentUsingGET**
@@ -483,7 +483,7 @@ Name | Type | Description  | Notes
 
 <a name="getProcessInstanceDiagramUsingGET"></a>
 # **getProcessInstanceDiagramUsingGET**
-> Array<string> getProcessInstanceDiagramUsingGET(processInstanceId)
+> string getProcessInstanceDiagramUsingGET(processInstanceId)
 
 Get the process diagram for the process instance
 
@@ -516,7 +516,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Array<string>**
+**string**
 
 <a name="getProcessInstanceStartFormUsingGET"></a>
 # **getProcessInstanceStartFormUsingGET**

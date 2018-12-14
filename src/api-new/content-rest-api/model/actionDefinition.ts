@@ -37,19 +37,21 @@ export class ActionDefinition {
     /**
      * QNames of the types this action applies to
      */
-    applicableTypes: Array<string>;
+    applicableTypes: string[];
     /**
      * whether the basic action definition supports action tracking or not
      */
     trackStatus: boolean;
-    parameterDefinitions?: Array<ActionParameterDefinition>;
+    parameterDefinitions?: ActionParameterDefinition[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.parameterDefinitions = input.parameterDefinitions.map((item: any) => {
-            return new Array<ActionParameterDefinition>(item);
-        });
+        if (input.parameterDefinitions) {
+            this.parameterDefinitions = input.parameterDefinitions.map((item: any) => {
+                return new ActionParameterDefinition(item);
+            });
+        }
     }
 
 }

@@ -23,7 +23,7 @@ export class RatingEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new Rating(input.entry);
+        this.entry = input.entry ? new Rating(input.entry) : undefined;
     }
 
 }

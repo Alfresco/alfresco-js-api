@@ -15,14 +15,18 @@
  * limitations under the License.
  */
 
+//legacy export
+export * from './src/api/content-rest-api/src/index';
+
 export * from './src/api-new/content-rest-api/index';
 export * from './src/api-new/discovery-rest-api/index';
 export * from './src/api-new/gs-classification-rest-api/index';
 export * from './src/api-new/gs-core-rest-api/index';
 export * from './src/api-new/auth-rest-api/index';
 export * from './src/api-new/activiti-rest-api/index';
+export * from './src/api-new/search-rest-api/index';
 
-export { AlfrescoContent } from './src/alfrescoContent';
+export { ContentApi } from './src/contentApi';
 export { AlfrescoUpload } from './src/api/alfrescoUpload';
 export { EcmAuth } from './src/ecmAuth';
 export { BpmAuth } from './src/bpmAuth';

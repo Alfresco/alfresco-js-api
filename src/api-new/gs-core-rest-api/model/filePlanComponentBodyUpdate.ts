@@ -22,7 +22,7 @@ The character . must not be used at the end of the name.
 
      */
     name?: string;
-    aspectNames?: Array<string>;
+    aspectNames?: string[];
     properties?: { [key: string]: string; };
 
     constructor(input?: any) {

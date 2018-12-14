@@ -19,7 +19,7 @@ export class PathElement {
     id?: string;
     name?: string;
     nodeType?: string;
-    aspectNames?: Array<string>;
+    aspectNames?: string[];
 
     constructor(input?: any) {
 

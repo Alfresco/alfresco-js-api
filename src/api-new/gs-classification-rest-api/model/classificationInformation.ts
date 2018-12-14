@@ -18,13 +18,13 @@
 export class ClassificationInformation {
     level: string;
     classificationAgency?: string;
-    reasonIds: Array<string>;
+    reasonIds: string[];
     downgradeOn?: Date;
     downgradeEvent?: string;
     downgradeInstructions?: string;
     declassifyOn?: Date;
     declassificationEvent?: string;
-    exemptionIds?: Array<string>;
+    exemptionIds?: string[];
 
     constructor(input?: any) {
 

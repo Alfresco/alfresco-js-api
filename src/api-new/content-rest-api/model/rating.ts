@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { DateAlfresco } from './dateAlfresco';
+import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { RatingAggregate } from './ratingAggregate';
 
 /**
@@ -36,8 +36,8 @@ export class Rating {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.aggregate = new RatingAggregate(input.aggregate);
-        this.ratedAt = new DateAlfresco(input.ratedAt);
+        this.aggregate = input.aggregate ? new RatingAggregate(input.aggregate) : undefined;
+        this.ratedAt = input.ratedAt ? new DateAlfresco(input.ratedAt) : undefined;
     }
 
 }

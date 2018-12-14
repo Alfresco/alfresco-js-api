@@ -23,7 +23,7 @@ export class RatingPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new RatingPagingList(input.list);
+        this.list = input.list ? new RatingPagingList(input.list) : undefined;
     }
 
 }

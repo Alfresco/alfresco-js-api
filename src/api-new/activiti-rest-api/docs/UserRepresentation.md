@@ -3,15 +3,15 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**apps** | [**Array<LightAppRepresentation>**](LightAppRepresentation.md) |  | [optional] [default to null]
-**capabilities** | **Array<string>** |  | [optional] [default to null]
+**apps** | [**LightAppRepresentation[]**](LightAppRepresentation.md) |  | [optional] [default to null]
+**capabilities** | **string[]** |  | [optional] [default to null]
 **company** | **string** |  | [optional] [default to null]
 **created** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **email** | **string** |  | [optional] [default to null]
 **externalId** | **string** |  | [optional] [default to null]
 **firstName** | **string** |  | [optional] [default to null]
 **fullname** | **string** |  | [optional] [default to null]
-**groups** | [**Array<GroupRepresentation>**](GroupRepresentation.md) |  | [optional] [default to null]
+**groups** | [**GroupRepresentation[]**](GroupRepresentation.md) |  | [optional] [default to null]
 **id** | **number** |  | [optional] [default to null]
 **lastName** | **string** |  | [optional] [default to null]
 **lastUpdate** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]

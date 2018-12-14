@@ -18,15 +18,17 @@
 import { AuditDecisionExpressionInfoRepresentation } from './auditDecisionExpressionInfoRepresentation';
 
 export class AuditDecisionRuleInfoRepresentation {
-    expressions?: Array<AuditDecisionExpressionInfoRepresentation>;
+    expressions?: AuditDecisionExpressionInfoRepresentation[];
     title?: string;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.expressions = input.expressions.map((item: any) => {
-            return new Array<AuditDecisionExpressionInfoRepresentation>(item);
-        });
+        if (input.expressions) {
+            this.expressions = input.expressions.map((item: any) => {
+                return new AuditDecisionExpressionInfoRepresentation(item);
+            });
+        }
     }
 
 }

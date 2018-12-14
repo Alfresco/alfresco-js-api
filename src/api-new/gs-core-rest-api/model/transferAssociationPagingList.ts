@@ -21,17 +21,19 @@ import { TransferChildAssociationEntry } from './transferChildAssociationEntry';
 
 export class TransferAssociationPagingList {
     pagination?: Pagination;
-    entries?: Array<TransferChildAssociationEntry>;
+    entries?: TransferChildAssociationEntry[];
     source?: Transfer;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<TransferChildAssociationEntry>(item);
-        });
-        this.source = new Transfer(input.source);
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new TransferChildAssociationEntry(item);
+            });
+        }
+        this.source = input.source ? new Transfer(input.source) : undefined;
     }
 
 }

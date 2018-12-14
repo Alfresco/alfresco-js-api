@@ -23,7 +23,7 @@ export class VersionPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new VersionPagingList(input.list);
+        this.list = input.list ? new VersionPagingList(input.list) : undefined;
     }
 
 }

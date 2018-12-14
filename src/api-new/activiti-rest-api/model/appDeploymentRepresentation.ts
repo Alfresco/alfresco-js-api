@@ -30,9 +30,9 @@ export class AppDeploymentRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.appDefinition = new AppDefinitionRepresentation(input.appDefinition);
-        this.created = new DateAlfresco(input.created);
-        this.createdBy = new LightUserRepresentation(input.createdBy);
+        this.appDefinition = input.appDefinition ? new AppDefinitionRepresentation(input.appDefinition) : undefined;
+        this.created = input.created ? new DateAlfresco(input.created) : undefined;
+        this.createdBy = input.createdBy ? new LightUserRepresentation(input.createdBy) : undefined;
     }
 
 }

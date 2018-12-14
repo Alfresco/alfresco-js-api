@@ -23,7 +23,7 @@ export class TagEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new Tag(input.entry);
+        this.entry = input.entry ? new Tag(input.entry) : undefined;
     }
 
 }

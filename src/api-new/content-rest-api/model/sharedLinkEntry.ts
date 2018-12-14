@@ -23,7 +23,7 @@ export class SharedLinkEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new SharedLink(input.entry);
+        this.entry = input.entry ? new SharedLink(input.entry) : undefined;
     }
 
 }

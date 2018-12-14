@@ -19,16 +19,18 @@ import { NamedObject } from './namedObject';
 import { RelatedContentRepresentation } from './relatedContentRepresentation';
 
 export class ProcessContentRepresentation {
-    content?: Array<RelatedContentRepresentation>;
+    content?: RelatedContentRepresentation[];
     field?: NamedObject;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.content = input.content.map((item: any) => {
-            return new Array<RelatedContentRepresentation>(item);
-        });
-        this.field = new NamedObject(input.field);
+        if (input.content) {
+            this.content = input.content.map((item: any) => {
+                return new RelatedContentRepresentation(item);
+            });
+        }
+        this.field = input.field ? new NamedObject(input.field) : undefined;
     }
 
 }

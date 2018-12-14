@@ -165,12 +165,12 @@ Name | Type | Description  | Notes
  | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -287,14 +287,14 @@ recordcategoriesApi.getRecordCategory(recordCategoryIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordCategoryId** | **string**| The identifier of a record category. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
  | [optional] 
  **relativePath** | **string**| Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -399,7 +399,7 @@ Name | Type | Description  | Notes
 
 *   where=(isRecordFolder=true AND isClosed=false)
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * hasRetentionSchedule
@@ -412,7 +412,7 @@ Name | Type | Description  | Notes
  **relativePath** | **string**| Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
  | [optional] 
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**. | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -502,12 +502,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recordCategoryId** | **string**| The identifier of a record category. | 
  **recordCategoryBodyUpdate** | [**FilePlanComponentBodyUpdate**](FilePlanComponentBodyUpdate.md)| The record category information to update. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+ **include** | [**string**](string.md)| Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

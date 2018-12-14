@@ -39,20 +39,20 @@ The character . must not be used at the end of the name.
     parentId?: string;
     isLink?: boolean;
     content?: ContentInfo;
-    aspectNames?: Array<string>;
+    aspectNames?: string[];
     properties?: any;
-    allowableOperations?: Array<string>;
+    allowableOperations?: string[];
     path?: PathInfo;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.modifiedAt = new DateAlfresco(input.modifiedAt);
-        this.modifiedByUser = new UserInfo(input.modifiedByUser);
-        this.createdAt = new DateAlfresco(input.createdAt);
-        this.createdByUser = new UserInfo(input.createdByUser);
-        this.content = new ContentInfo(input.content);
-        this.path = new PathInfo(input.path);
+        this.modifiedAt = input.modifiedAt ? new DateAlfresco(input.modifiedAt) : undefined;
+        this.modifiedByUser = input.modifiedByUser ? new UserInfo(input.modifiedByUser) : undefined;
+        this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+        this.createdByUser = input.createdByUser ? new UserInfo(input.createdByUser) : undefined;
+        this.content = input.content ? new ContentInfo(input.content) : undefined;
+        this.path = input.path ? new PathInfo(input.path) : undefined;
     }
 
 }

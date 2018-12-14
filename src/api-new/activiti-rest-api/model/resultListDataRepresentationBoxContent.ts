@@ -18,7 +18,7 @@
 import { BoxContent } from './boxContent';
 
 export class ResultListDataRepresentationBoxContent {
-    data?: Array<BoxContent>;
+    data?: BoxContent[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationBoxContent {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<BoxContent>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new BoxContent(item);
+            });
+        }
     }
 
 }

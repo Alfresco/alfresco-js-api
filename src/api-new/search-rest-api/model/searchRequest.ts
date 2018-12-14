@@ -52,42 +52,48 @@ export class SearchRequest {
     facetQueries?: RequestFacetQueries;
     facetFields?: RequestFacetFields;
     facetIntervals?: RequestFacetIntervals;
-    pivots?: Array<RequestPivot>;
-    stats?: Array<RequestStats>;
+    pivots?: RequestPivot[];
+    stats?: RequestStats[];
     spellcheck?: RequestSpellcheck;
     scope?: RequestScope;
     limits?: RequestLimits;
     highlight?: RequestHighlight;
-    ranges?: Array<RequestRange>;
+    ranges?: RequestRange[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.query = new RequestQuery(input.query);
-        this.paging = new RequestPagination(input.paging);
-        this.include = new RequestInclude(input.include);
-        this.fields = new RequestFields(input.fields);
-        this.sort = new RequestSortDefinition(input.sort);
-        this.templates = new RequestTemplates(input.templates);
-        this.defaults = new RequestDefaults(input.defaults);
-        this.localization = new RequestLocalization(input.localization);
-        this.filterQueries = new RequestFilterQueries(input.filterQueries);
-        this.facetQueries = new RequestFacetQueries(input.facetQueries);
-        this.facetFields = new RequestFacetFields(input.facetFields);
-        this.facetIntervals = new RequestFacetIntervals(input.facetIntervals);
-        this.pivots = input.pivots.map((item: any) => {
-            return new Array<RequestPivot>(item);
-        });
-        this.stats = input.stats.map((item: any) => {
-            return new Array<RequestStats>(item);
-        });
-        this.spellcheck = new RequestSpellcheck(input.spellcheck);
-        this.scope = new RequestScope(input.scope);
-        this.limits = new RequestLimits(input.limits);
-        this.highlight = new RequestHighlight(input.highlight);
-        this.ranges = input.ranges.map((item: any) => {
-            return new Array<RequestRange>(item);
-        });
+        this.query = input.query ? new RequestQuery(input.query) : undefined;
+        this.paging = input.paging ? new RequestPagination(input.paging) : undefined;
+        this.include = input.include ? new RequestInclude(input.include) : undefined;
+        this.fields = input.fields ? new RequestFields(input.fields) : undefined;
+        this.sort = input.sort ? new RequestSortDefinition(input.sort) : undefined;
+        this.templates = input.templates ? new RequestTemplates(input.templates) : undefined;
+        this.defaults = input.defaults ? new RequestDefaults(input.defaults) : undefined;
+        this.localization = input.localization ? new RequestLocalization(input.localization) : undefined;
+        this.filterQueries = input.filterQueries ? new RequestFilterQueries(input.filterQueries) : undefined;
+        this.facetQueries = input.facetQueries ? new RequestFacetQueries(input.facetQueries) : undefined;
+        this.facetFields = input.facetFields ? new RequestFacetFields(input.facetFields) : undefined;
+        this.facetIntervals = input.facetIntervals ? new RequestFacetIntervals(input.facetIntervals) : undefined;
+        if (input.pivots) {
+            this.pivots = input.pivots.map((item: any) => {
+                return new RequestPivot(item);
+            });
+        }
+        if (input.stats) {
+            this.stats = input.stats.map((item: any) => {
+                return new RequestStats(item);
+            });
+        }
+        this.spellcheck = input.spellcheck ? new RequestSpellcheck(input.spellcheck) : undefined;
+        this.scope = input.scope ? new RequestScope(input.scope) : undefined;
+        this.limits = input.limits ? new RequestLimits(input.limits) : undefined;
+        this.highlight = input.highlight ? new RequestHighlight(input.highlight) : undefined;
+        if (input.ranges) {
+            this.ranges = input.ranges.map((item: any) => {
+                return new RequestRange(item);
+            });
+        }
     }
 
 }

@@ -20,19 +20,23 @@ import { PublishIdentityInfoRepresentation } from './publishIdentityInfoRepresen
 
 export class AppDefinition {
     icon?: string;
-    models?: Array<AppModelDefinition>;
-    publishIdentityInfo?: Array<PublishIdentityInfoRepresentation>;
+    models?: AppModelDefinition[];
+    publishIdentityInfo?: PublishIdentityInfoRepresentation[];
     theme?: string;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.models = input.models.map((item: any) => {
-            return new Array<AppModelDefinition>(item);
-        });
-        this.publishIdentityInfo = input.publishIdentityInfo.map((item: any) => {
-            return new Array<PublishIdentityInfoRepresentation>(item);
-        });
+        if (input.models) {
+            this.models = input.models.map((item: any) => {
+                return new AppModelDefinition(item);
+            });
+        }
+        if (input.publishIdentityInfo) {
+            this.publishIdentityInfo = input.publishIdentityInfo.map((item: any) => {
+                return new PublishIdentityInfoRepresentation(item);
+            });
+        }
     }
 
 }

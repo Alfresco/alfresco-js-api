@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **countDistinct** | **boolean** | The number of distinct values  (This can be very expensive to calculate) | [optional] [default to null]
 **cardinality** | **boolean** | A statistical approximation of the number of distinct values | [optional] [default to null]
 **cardinalityAccuracy** | **number** | Number between 0.0 and 1.0 indicating how aggressively the algorithm should try to be accurate. Used with boolean cardinality flag. | [optional] [default to 0.3]
-**excludeFilters** | **Array<string>** | A list of filters to exclude | [optional] [default to null]
-**percentiles** | **Array<number>** | A list of percentile values, e.g. \"1,99,99.9\" | [optional] [default to null]
+**excludeFilters** | **string[]** | A list of filters to exclude | [optional] [default to null]
+**percentiles** | **number[]** | A list of percentile values, e.g. \"1,99,99.9\" | [optional] [default to null]
 
 

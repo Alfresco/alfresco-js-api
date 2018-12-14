@@ -23,7 +23,7 @@ export class ActionExecResultEntry {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.entry = new ActionExecResult(input.entry);
+        this.entry = input.entry ? new ActionExecResult(input.entry) : undefined;
     }
 
 }

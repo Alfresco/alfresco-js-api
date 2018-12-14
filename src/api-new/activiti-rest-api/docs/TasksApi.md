@@ -252,7 +252,7 @@ Name | Type | Description  | Notes
 
 <a name="getIdentityLinksForFamilyUsingGET2"></a>
 # **getIdentityLinksForFamilyUsingGET2**
-> Array<IdentityLinkRepresentation> getIdentityLinksForFamilyUsingGET2(taskIdfamily)
+> IdentityLinkRepresentation getIdentityLinksForFamilyUsingGET2(taskIdfamily)
 
 List either the users or groups involved with a process instance
 
@@ -286,11 +286,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
+[**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
 <a name="getIdentityLinksUsingGET2"></a>
 # **getIdentityLinksUsingGET2**
-> Array<IdentityLinkRepresentation> getIdentityLinksUsingGET2(taskId)
+> IdentityLinkRepresentation getIdentityLinksUsingGET2(taskId)
 
 getIdentityLinks
 
@@ -323,7 +323,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<IdentityLinkRepresentation>**](IdentityLinkRepresentation.md)
+[**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
 <a name="getTaskAuditLogUsingGET1"></a>
 # **getTaskAuditLogUsingGET1**

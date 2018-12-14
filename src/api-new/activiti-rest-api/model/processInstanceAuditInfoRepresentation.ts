@@ -20,7 +20,7 @@ import { AuditLogEntryRepresentation } from './auditLogEntryRepresentation';
 
 export class ProcessInstanceAuditInfoRepresentation {
     decisionInfo?: AuditDecisionInfoRepresentation;
-    entries?: Array<AuditLogEntryRepresentation>;
+    entries?: AuditLogEntryRepresentation[];
     processDefinitionName?: string;
     processDefinitionVersion?: string;
     processInstanceDurationInMillis?: number;
@@ -33,10 +33,12 @@ export class ProcessInstanceAuditInfoRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.decisionInfo = new AuditDecisionInfoRepresentation(input.decisionInfo);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<AuditLogEntryRepresentation>(item);
-        });
+        this.decisionInfo = input.decisionInfo ? new AuditDecisionInfoRepresentation(input.decisionInfo) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new AuditLogEntryRepresentation(item);
+            });
+        }
     }
 
 }

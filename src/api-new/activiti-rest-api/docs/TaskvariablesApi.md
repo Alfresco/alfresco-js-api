@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 <a name="createTaskVariableUsingPOST"></a>
 # **createTaskVariableUsingPOST**
-> Array<RestVariable> createTaskVariableUsingPOST(taskIdrestVariables)
+> RestVariable createTaskVariableUsingPOST(taskIdrestVariables)
 
 Create variables
 
@@ -44,11 +44,11 @@ taskvariablesApi.createTaskVariableUsingPOST(taskIdrestVariables).then((data) =>
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **taskId** | **string**| taskId | 
- **restVariables** | [**Array<RestVariable>**](RestVariable.md)| restVariables | 
+ **restVariables** | [**RestVariable**](RestVariable.md)| restVariables | 
 
 ### Return type
 
-[**Array<RestVariable>**](RestVariable.md)
+[**RestVariable**](RestVariable.md)
 
 <a name="deleteAllLocalTaskVariablesUsingDELETE"></a>
 # **deleteAllLocalTaskVariablesUsingDELETE**
@@ -173,7 +173,7 @@ Name | Type | Description  | Notes
 
 <a name="getVariablesUsingGET"></a>
 # **getVariablesUsingGET**
-> Array<RestVariable> getVariablesUsingGET(taskIdopts)
+> RestVariable getVariablesUsingGET(taskIdopts)
 
 List variables
 
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array<RestVariable>**](RestVariable.md)
+[**RestVariable**](RestVariable.md)
 
 <a name="updateVariableUsingPUT"></a>
 # **updateVariableUsingPUT**

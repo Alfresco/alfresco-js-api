@@ -21,17 +21,19 @@ import { RecordFolderChildAssociationEntry } from './recordFolderChildAssociatio
 
 export class RecordFolderAssociationPagingList {
     pagination?: Pagination;
-    entries?: Array<RecordFolderChildAssociationEntry>;
+    entries?: RecordFolderChildAssociationEntry[];
     source?: RecordFolder;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<RecordFolderChildAssociationEntry>(item);
-        });
-        this.source = new RecordFolder(input.source);
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new RecordFolderChildAssociationEntry(item);
+            });
+        }
+        this.source = input.source ? new RecordFolder(input.source) : undefined;
     }
 
 }

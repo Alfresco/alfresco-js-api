@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyCopy** | [**NodeBodyCopy**](NodeBodyCopy.md)| The targetParentId and, optionally, a new name which should include the file extension. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a source node. | 
  **associationBodyCreate** | [**AssociationBody**](AssociationBody.md)| The target node id and assoc type. | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -462,7 +462,7 @@ Name | Type | Description  | Notes
  | 
  **nodeBodyCreate** | [**NodeBodyCreate**](NodeBodyCreate.md)| The node information to create. | 
  **autoRename** | **boolean**| If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix. | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -471,7 +471,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -583,7 +583,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a parent node. | 
  **secondaryChildAssociationBodyCreate** | [**ChildAssociationBody**](ChildAssociationBody.md)| The child node id and assoc type. | 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -835,7 +835,7 @@ Name | Type | Description  | Notes
 * -shared-
 * -root-
  | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -847,7 +847,7 @@ Name | Type | Description  | Notes
  **relativePath** | **string**| A path relative to the **nodeId**. If you set this,
 information is returned on the node resolved by this path.
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1071,7 +1071,7 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
- **orderBy** | [**Array<string>**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ **orderBy** | [**string**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
@@ -1095,7 +1095,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
 *   where=(isPrimary=false and assocType='my:specialAssocType')
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * association
@@ -1108,7 +1108,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
  | [optional] 
  **relativePath** | **string**| Return information on children in the folder resolved by this path. The path is relative to **nodeId**. | [optional] 
  **includeSource** | **boolean**| Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**. | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1214,7 +1214,7 @@ Name | Type | Description  | Notes
 
 *   where=(isPrimary=false and assocType='my:specialAssocType')
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1230,7 +1230,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on **nodeId** | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1326,7 +1326,7 @@ Name | Type | Description  | Notes
 
 *   where=(assocType='my:specialAssocType')
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1342,7 +1342,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
  **includeSource** | **boolean**| Also include **source** (in addition to **entries**) with folder information on **nodeId** | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1427,7 +1427,7 @@ Name | Type | Description  | Notes
 
 *   where=(assocType='my:specialAssocType')
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1436,7 +1436,7 @@ Name | Type | Description  | Notes
 * path
 * properties
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1521,7 +1521,7 @@ Name | Type | Description  | Notes
 
 *   where=(assocType='my:specialAssocType')
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1530,7 +1530,7 @@ Name | Type | Description  | Notes
 * path
 * properties
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1631,7 +1631,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyLock** | [**NodeBodyLock**](NodeBodyLock.md)| Lock details. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1640,7 +1640,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1726,7 +1726,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyMove** | [**NodeBodyMove**](NodeBodyMove.md)| The targetParentId and, optionally, a new name which should include the file extension. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1735,7 +1735,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1816,7 +1816,7 @@ nodesApi.unlockNode(nodeIdopts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1825,7 +1825,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1939,7 +1939,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **nodeId** | **string**| The identifier of a node. | 
  **nodeBodyUpdate** | [**NodeBodyUpdate**](NodeBodyUpdate.md)| The node information to update. | 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1948,7 +1948,7 @@ Name | Type | Description  | Notes
 * path
 * permissions
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -2058,7 +2058,7 @@ Setting this parameter also enables versioning of this node, if it is not alread
 The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.
 The character . must not be used at the end of the name.
  | [optional] 
- **include** | [**Array<string>**](string.md)| Returns additional information about the node. The following optional fields can be requested:
+ **include** | [**string**](string.md)| Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -2067,7 +2067,7 @@ The character . must not be used at the end of the name.
 * path
 * permissions
  | [optional] 
- **fields** | [**Array<string>**](string.md)| A list of field names.
+ **fields** | [**string**](string.md)| A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.

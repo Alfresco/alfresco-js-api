@@ -20,7 +20,7 @@ export class ResultSetContextSpellcheck {
     /**
      * A suggested alternative query
      */
-    suggestion?: Array<string>;
+    suggestion?: string[];
 
     constructor(input?: any) {
 

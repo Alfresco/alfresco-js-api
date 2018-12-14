@@ -18,7 +18,7 @@
 import { DecisionAuditRepresentation } from './decisionAuditRepresentation';
 
 export class ResultListDataRepresentationDecisionAuditRepresentation {
-    data?: Array<DecisionAuditRepresentation>;
+    data?: DecisionAuditRepresentation[];
     size?: number;
     start?: number;
     total?: number;
@@ -26,9 +26,11 @@ export class ResultListDataRepresentationDecisionAuditRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.data = input.data.map((item: any) => {
-            return new Array<DecisionAuditRepresentation>(item);
-        });
+        if (input.data) {
+            this.data = input.data.map((item: any) => {
+                return new DecisionAuditRepresentation(item);
+            });
+        }
     }
 
 }

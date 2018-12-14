@@ -24,14 +24,16 @@ export class CreateProcessInstanceRepresentation {
     processDefinitionId?: string;
     processDefinitionKey?: string;
     values?: any;
-    variables?: Array<RestVariable>;
+    variables?: RestVariable[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.variables = input.variables.map((item: any) => {
-            return new Array<RestVariable>(item);
-        });
+        if (input.variables) {
+            this.variables = input.variables.map((item: any) => {
+                return new RestVariable(item);
+            });
+        }
     }
 
 }

@@ -15,20 +15,22 @@
 * limitations under the License.
 */
 
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 import { TagEntry } from './tagEntry';
 
 export class TagPagingList {
     pagination: Pagination;
-    entries: Array<TagEntry>;
+    entries: TagEntry[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<TagEntry>(item);
-        });
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new TagEntry(item);
+            });
+        }
     }
 
 }

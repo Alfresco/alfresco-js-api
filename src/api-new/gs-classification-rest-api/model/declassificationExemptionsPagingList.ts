@@ -20,15 +20,17 @@ import { Pagination } from '../../content-rest-api/model/pagination';
 
 export class DeclassificationExemptionsPagingList {
     pagination?: Pagination;
-    entries?: Array<DeclassificationExemptionEntry>;
+    entries?: DeclassificationExemptionEntry[];
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.pagination = new Pagination(input.pagination);
-        this.entries = input.entries.map((item: any) => {
-            return new Array<DeclassificationExemptionEntry>(item);
-        });
+        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+        if (input.entries) {
+            this.entries = input.entries.map((item: any) => {
+                return new DeclassificationExemptionEntry(item);
+            });
+        }
     }
 
 }

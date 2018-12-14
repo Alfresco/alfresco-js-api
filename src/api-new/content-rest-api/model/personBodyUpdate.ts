@@ -35,13 +35,13 @@ export class PersonBodyUpdate {
     emailNotificationsEnabled?: boolean;
     password?: string;
     oldPassword?: string;
-    aspectNames?: Array<string>;
+    aspectNames?: string[];
     properties?: { [key: string]: string; };
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.company = new Company(input.company);
+        this.company = input.company ? new Company(input.company) : undefined;
     }
 
 }

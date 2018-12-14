@@ -23,7 +23,7 @@ export class SharedLinkPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new SharedLinkPagingList(input.list);
+        this.list = input.list ? new SharedLinkPagingList(input.list) : undefined;
     }
 
 }

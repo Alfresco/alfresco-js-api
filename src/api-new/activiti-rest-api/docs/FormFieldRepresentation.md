@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **minValue** | **string** |  | [optional] [default to null]
 **name** | **string** |  | [optional] [default to null]
 **optionType** | **string** |  | [optional] [default to null]
-**options** | [**Array<OptionRepresentation>**](OptionRepresentation.md) |  | [optional] [default to null]
+**options** | [**OptionRepresentation[]**](OptionRepresentation.md) |  | [optional] [default to null]
 **overrideId** | **boolean** |  | [optional] [default to null]
 **params** | **any** |  | [optional] [default to null]
 **placeholder** | **string** |  | [optional] [default to null]

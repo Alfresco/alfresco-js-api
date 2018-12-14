@@ -23,7 +23,7 @@ export class CommentPaging {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.list = new CommentPagingList(input.list);
+        this.list = input.list ? new CommentPagingList(input.list) : undefined;
     }
 
 }
