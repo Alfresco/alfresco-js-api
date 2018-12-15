@@ -35,7 +35,7 @@ export class AdmingroupsApi extends BaseApi {
     * @param groupId groupId
     * @return Promise<{}>
     */
-    activateUsingPOST(groupId: number): Promise<{}> {
+    activateUsingPOST(groupId: number): Promise<any> {
 
         let postBody = null;
 
@@ -72,7 +72,7 @@ export class AdmingroupsApi extends BaseApi {
         * @param groupId groupId
         * @return Promise<{}>
         */
-    addAllUsersToGroupUsingPOST(groupId: number): Promise<{}> {
+    addAllUsersToGroupUsingPOST(groupId: number): Promise<any> {
 
         let postBody = null;
 
@@ -110,7 +110,7 @@ export class AdmingroupsApi extends BaseApi {
         * @param addGroupCapabilitiesRepresentation addGroupCapabilitiesRepresentation
         * @return Promise<{}>
         */
-    addGroupCapabilitiesUsingPOST(groupId: number, addGroupCapabilitiesRepresentation: AddGroupCapabilitiesRepresentation): Promise<{}> {
+    addGroupCapabilitiesUsingPOST(groupId: number, addGroupCapabilitiesRepresentation: AddGroupCapabilitiesRepresentation): Promise<any> {
 
         let postBody = addGroupCapabilitiesRepresentation;
 
@@ -152,7 +152,7 @@ export class AdmingroupsApi extends BaseApi {
         * @param userId userId
         * @return Promise<{}>
         */
-    addGroupMemberUsingPOST(groupId: number, userId: number): Promise<{}> {
+    addGroupMemberUsingPOST(groupId: number, userId: number): Promise<any> {
 
         let postBody = null;
 
@@ -195,7 +195,7 @@ export class AdmingroupsApi extends BaseApi {
         * @param type type
         * @return Promise<{}>
         */
-    addRelatedGroupUsingPOST(groupId: number, relatedGroupId: number, type: string): Promise<{}> {
+    addRelatedGroupUsingPOST(groupId: number, relatedGroupId: number, type: string): Promise<any> {
 
         let postBody = null;
 
@@ -279,7 +279,7 @@ export class AdmingroupsApi extends BaseApi {
         * @param groupCapabilityId groupCapabilityId
         * @return Promise<{}>
         */
-    deleteGroupCapabilityUsingDELETE(groupId: number, groupCapabilityId: number): Promise<{}> {
+    deleteGroupCapabilityUsingDELETE(groupId: number, groupCapabilityId: number): Promise<any> {
 
         let postBody = null;
 
@@ -321,7 +321,7 @@ export class AdmingroupsApi extends BaseApi {
         * @param userId userId
         * @return Promise<{}>
         */
-    deleteGroupMemberUsingDELETE(groupId: number, userId: number): Promise<{}> {
+    deleteGroupMemberUsingDELETE(groupId: number, userId: number): Promise<any> {
 
         let postBody = null;
 
@@ -362,7 +362,7 @@ export class AdmingroupsApi extends BaseApi {
         * @param groupId groupId
         * @return Promise<{}>
         */
-    deleteGroupUsingDELETE(groupId: number): Promise<{}> {
+    deleteGroupUsingDELETE(groupId: number): Promise<any> {
 
         let postBody = null;
 
@@ -400,7 +400,7 @@ export class AdmingroupsApi extends BaseApi {
         * @param relatedGroupId relatedGroupId
         * @return Promise<{}>
         */
-    deleteRelatedGroupUsingDELETE(groupId: number, relatedGroupId: number): Promise<{}> {
+    deleteRelatedGroupUsingDELETE(groupId: number, relatedGroupId: number): Promise<any> {
 
         let postBody = null;
 

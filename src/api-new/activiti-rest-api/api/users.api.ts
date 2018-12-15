@@ -35,7 +35,7 @@ export class UsersApi extends BaseApi {
     * @param actionRequest actionRequest
     * @return Promise<{}>
     */
-    executeActionUsingPOST(userId: number, actionRequest: UserActionRepresentation): Promise<{}> {
+    executeActionUsingPOST(userId: number, actionRequest: UserActionRepresentation): Promise<any> {
 
         let postBody = actionRequest;
 
@@ -76,7 +76,7 @@ export class UsersApi extends BaseApi {
         * @param userId userId
         * @return Promise<{}>
         */
-    getProfilePictureUsingGET1(userId: number): Promise<{}> {
+    getProfilePictureUsingGET1(userId: number): Promise<any> {
 
         let postBody = null;
 
@@ -199,7 +199,7 @@ export class UsersApi extends BaseApi {
         * @param resetPassword resetPassword
         * @return Promise<{}>
         */
-    requestPasswordResetUsingPOST(resetPassword: ResetPasswordRepresentation): Promise<{}> {
+    requestPasswordResetUsingPOST(resetPassword: ResetPasswordRepresentation): Promise<any> {
 
         let postBody = resetPassword;
 

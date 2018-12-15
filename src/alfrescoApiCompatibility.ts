@@ -21,7 +21,7 @@ import { AlfrescoApiConfig } from './alfrescoApiConfig';
 const AlfrescoCoreRestApi = require('./api/content-rest-api/src/index');
 
 // import { APS_APIS  } from './api-new/activiti-rest-api/api/api';
-import { Core } from './api/content-rest-api/src/core';
+import { Legacy } from './api/content-rest-api/src';
 import { DISCOVERY_APIS } from './api-new/discovery-rest-api/api';
 import { GS_CLASSIFICATION_APIS } from './api-new/gs-classification-rest-api/api';
 import { GS_CORE_APIS } from './api-new/gs-core-rest-api/api';
@@ -34,7 +34,7 @@ import { AlfrescoUpload } from './api/alfrescoUpload';
 
 export class AlfrescoApiCompatibility extends AlfrescoApi {
 
-    core: Core = <Core> {};
+    core: Legacy.Core = <Legacy.Core> {};
     coreStore: any;
 
     auth: any = {};
@@ -68,7 +68,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
         // this._instantiateObjects(this.activitiStore, this.activiti);
 
         //ECM
-        this.coreStore = AlfrescoCoreRestApi.CONTENT_APIS;
+        this.coreStore = AlfrescoCoreRestApi.CONTENT_LEGACY_APIS;
 
         this._instantiateOldObjects(this.coreStore, this.core);
         this._instantiateNewObjects(AUTH_APIS, this.auth);

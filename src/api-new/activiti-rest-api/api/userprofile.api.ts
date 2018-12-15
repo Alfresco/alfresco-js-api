@@ -33,7 +33,7 @@ export class UserprofileApi extends BaseApi {
     * @param changePasswordRepresentation changePasswordRepresentation
     * @return Promise<{}>
     */
-    changePasswordUsingPOST(changePasswordRepresentation: ChangePasswordRepresentation): Promise<{}> {
+    changePasswordUsingPOST(changePasswordRepresentation: ChangePasswordRepresentation): Promise<any> {
 
         let postBody = changePasswordRepresentation;
 

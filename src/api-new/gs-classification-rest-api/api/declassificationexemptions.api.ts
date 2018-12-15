@@ -113,7 +113,7 @@ JSON
         * @param declassificationExemptionId The identifier for the declassification exemption
         * @return Promise<{}>
         */
-    deleteDeclassificationExemption(declassificationExemptionId: string): Promise<{} | ModelError> {
+    deleteDeclassificationExemption(declassificationExemptionId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

@@ -50,7 +50,7 @@ export class CommentsApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CommentEntry}
      * data is of type: {module:model/CommentEntry}
      */
-    addComment(nodeId: string, commentBody, opts): Promise<any> {
+    addComment(nodeId: string, commentBody, opts?: any): Promise<any> {
         return this.commentsApi.createComment(nodeId, <any>commentBody, opts);
     }
 

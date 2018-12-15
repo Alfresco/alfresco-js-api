@@ -44,7 +44,7 @@ The cancel operation is done asynchronously.
     * @param downloadId The identifier of a download node.
     * @return Promise<{}>
     */
-    cancelDownload(downloadId: string): Promise<{} | ModelError> {
+    cancelDownload(downloadId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

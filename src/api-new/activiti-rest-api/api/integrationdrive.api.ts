@@ -30,7 +30,7 @@ export class IntegrationdriveApi extends BaseApi {
     *
     * @return Promise<{}>
     */
-    confirmAuthorisationUsingGET2(): Promise<{}> {
+    confirmAuthorisationUsingGET2(): Promise<any> {
 
         let postBody = null;
 

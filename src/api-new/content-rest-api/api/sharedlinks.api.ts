@@ -146,7 +146,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param sharedId The identifier of a shared link to a file.
         * @return Promise<{}>
         */
-    deleteSharedLink(sharedId: string): Promise<{} | ModelError> {
+    deleteSharedLink(sharedId: string): Promise<any | ModelError> {
 
         let postBody = null;
 
@@ -214,7 +214,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param sharedLinkBodyEmail The shared link email to send.
         * @return Promise<{}>
         */
-    emailSharedLink(sharedId: string, sharedLinkBodyEmail: SharedLinkBodyEmail): Promise<{} | ModelError> {
+    emailSharedLink(sharedId: string, sharedLinkBodyEmail: SharedLinkBodyEmail): Promise<any | ModelError> {
 
         let postBody = sharedLinkBodyEmail;
 
@@ -333,7 +333,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<{}>
         */
-    getSharedLinkContent(sharedId: string, opts?: any): Promise<{} | ModelError> {
+    getSharedLinkContent(sharedId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -444,7 +444,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<{}>
         */
-    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<{} | ModelError> {
+    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = null;
 

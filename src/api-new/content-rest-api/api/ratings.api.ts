@@ -100,7 +100,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param ratingId The identifier of a rating.
         * @return Promise<{}>
         */
-    deleteRating(nodeId: string, ratingId: string): Promise<{} | ModelError> {
+    deleteRating(nodeId: string, ratingId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

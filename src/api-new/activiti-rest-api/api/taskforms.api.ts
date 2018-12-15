@@ -36,7 +36,7 @@ export class TaskformsApi extends BaseApi {
     * @param completeTaskFormRepresentation completeTaskFormRepresentation
     * @return Promise<{}>
     */
-    completeTaskFormUsingPOST(taskId: string, completeTaskFormRepresentation: CompleteFormRepresentation): Promise<{}> {
+    completeTaskFormUsingPOST(taskId: string, completeTaskFormRepresentation: CompleteFormRepresentation): Promise<any> {
 
         let postBody = completeTaskFormRepresentation;
 
@@ -241,7 +241,7 @@ export class TaskformsApi extends BaseApi {
         * @param saveTaskFormRepresentation saveTaskFormRepresentation
         * @return Promise<{}>
         */
-    saveTaskFormUsingPOST(taskId: string, saveTaskFormRepresentation: SaveFormRepresentation): Promise<{}> {
+    saveTaskFormUsingPOST(taskId: string, saveTaskFormRepresentation: SaveFormRepresentation): Promise<any> {
 
         let postBody = saveTaskFormRepresentation;
 

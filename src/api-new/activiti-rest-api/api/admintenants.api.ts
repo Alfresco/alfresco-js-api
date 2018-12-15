@@ -72,7 +72,7 @@ export class AdmintenantsApi extends BaseApi {
         * @param tenantId tenantId
         * @return Promise<{}>
         */
-    deleteTenantUsingDELETE(tenantId: number): Promise<{}> {
+    deleteTenantUsingDELETE(tenantId: number): Promise<any> {
 
         let postBody = null;
 
@@ -146,7 +146,7 @@ export class AdmintenantsApi extends BaseApi {
         * @param tenantId tenantId
         * @return Promise<{}>
         */
-    getTenantLogoUsingGET(tenantId: number): Promise<{}> {
+    getTenantLogoUsingGET(tenantId: number): Promise<any> {
 
         let postBody = null;
 

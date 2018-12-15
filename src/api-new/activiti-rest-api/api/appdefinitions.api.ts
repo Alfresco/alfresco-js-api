@@ -34,7 +34,7 @@ export class AppdefinitionsApi extends BaseApi {
     * @param appDefinitionId appDefinitionId
     * @return Promise<{}>
     */
-    deleteAppDefinitionUsingDELETE(appDefinitionId: number): Promise<{}> {
+    deleteAppDefinitionUsingDELETE(appDefinitionId: number): Promise<any> {
 
         let postBody = null;
 
@@ -71,7 +71,7 @@ export class AppdefinitionsApi extends BaseApi {
         * @param modelId modelId from a runtime app or the id of an app definition model
         * @return Promise<{}>
         */
-    exportAppDefinitionUsingGET(modelId: number): Promise<{}> {
+    exportAppDefinitionUsingGET(modelId: number): Promise<any> {
 
         let postBody = null;
 

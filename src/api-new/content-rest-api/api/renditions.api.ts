@@ -44,7 +44,7 @@ JSON
     * @param renditionBodyCreate The rendition \"id\".
     * @return Promise<{}>
     */
-    createRendition(nodeId: string, renditionBodyCreate: RenditionBodyCreate): Promise<{} | ModelError> {
+    createRendition(nodeId: string, renditionBodyCreate: RenditionBodyCreate): Promise<any | ModelError> {
 
         let postBody = renditionBodyCreate;
 
@@ -155,7 +155,7 @@ JSON
      (default to false)
         * @return Promise<{}>
         */
-    getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<{} | ModelError> {
+    getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = null;
 

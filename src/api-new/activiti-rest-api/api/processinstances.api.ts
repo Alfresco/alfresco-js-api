@@ -124,7 +124,7 @@ export class ProcessinstancesApi extends BaseApi {
         * @param type type
         * @return Promise<{}>
         */
-    deleteIdentityLinkUsingDELETE1(processInstanceId: string, family: string, identityId: string, type: string): Promise<{}> {
+    deleteIdentityLinkUsingDELETE1(processInstanceId: string, family: string, identityId: string, type: string): Promise<any> {
 
         let postBody = null;
 
@@ -173,7 +173,7 @@ export class ProcessinstancesApi extends BaseApi {
         * @param processInstanceId processInstanceId
         * @return Promise<{}>
         */
-    deleteProcessInstanceUsingDELETE(processInstanceId: string): Promise<{}> {
+    deleteProcessInstanceUsingDELETE(processInstanceId: string): Promise<any> {
 
         let postBody = null;
 

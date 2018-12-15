@@ -289,7 +289,7 @@ export class ContentApi extends BaseApi {
         * @param contentId contentId
         * @return Promise<{}>
         */
-    deleteContentUsingDELETE(contentId: number): Promise<{}> {
+    deleteContentUsingDELETE(contentId: number): Promise<any> {
 
         let postBody = null;
 
@@ -364,7 +364,7 @@ export class ContentApi extends BaseApi {
         * @param renditionType renditionType
         * @return Promise<{}>
         */
-    getRawContentUsingGET(contentId: number, renditionType: string): Promise<{}> {
+    getRawContentUsingGET(contentId: number, renditionType: string): Promise<any> {
 
         let postBody = null;
 
@@ -405,7 +405,7 @@ export class ContentApi extends BaseApi {
         * @param contentId contentId
         * @return Promise<{}>
         */
-    getRawContentUsingGET1(contentId: number): Promise<{}> {
+    getRawContentUsingGET1(contentId: number): Promise<any> {
 
         let postBody = null;
 

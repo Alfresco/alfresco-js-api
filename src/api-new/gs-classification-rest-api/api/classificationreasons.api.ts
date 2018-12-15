@@ -113,7 +113,7 @@ JSON
         * @param classificationReasonId The identifier for the classification reason
         * @return Promise<{}>
         */
-    deleteClassificationReason(classificationReasonId: string): Promise<{} | ModelError> {
+    deleteClassificationReason(classificationReasonId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

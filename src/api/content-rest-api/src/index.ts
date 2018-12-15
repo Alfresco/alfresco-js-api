@@ -20,7 +20,7 @@ import { ChildAssociationsApi } from './api/childAssociationsApi';
 import { CommentsApi } from './api/commentsApi';
 import { FavoritesApi } from './api/favoritesApi';
 import { NetworksApi } from './api/networksApi';
-import { NodesApi } from './api/nodesApi';
+import { AlfrescoNode } from '../../alfrescoNode';
 import { RatingsApi } from './api/ratingsApi';
 import { PeopleApi } from './api/peopleApi';
 import { RenditionsApi } from './api/renditionsApi';
@@ -35,29 +35,89 @@ import { ClassesApi } from './api/classesApi';
 import { GroupsApi } from './api/groupsApi';
 import { CustomModelApi } from './api/customModelApi';
 
+import { ChangesApi as _ChangesApi } from './api/changesApi';
+import { ChildAssociationsApi as _ChildAssociationsApi } from './api/childAssociationsApi';
+import { CommentsApi as _CommentsApi } from './api/commentsApi';
+import { FavoritesApi as _FavoritesApi } from './api/favoritesApi';
+import { NetworksApi as  _NetworksApi } from './api/networksApi';
+import { AlfrescoNode as NodesApi } from '../../alfrescoNode';
+import { AlfrescoNode as _AlfrescoNode } from '../../alfrescoNode';
+import { RatingsApi as _RatingsApi } from './api/ratingsApi';
+import { PeopleApi as _PeopleApi } from './api/peopleApi';
+import { RenditionsApi as _RenditionsApi } from './api/renditionsApi';
+import { QueriesApi as _QueriesApi } from './api/queriesApi';
+import { SharedlinksApi as _SharedlinksApi } from './api/sharedlinksApi';
+import { SitesApi as _SitesApi } from './api/sitesApi';
+import { TagsApi as _TagsApi } from './api/tagsApi';
+import { WebscriptApi as _WebscriptApi } from './api/webscriptApi';
+import { DownloadsApi as _DownloadsApi } from './api/downloadsApi';
+import { VersionsApi as _VersionsApi } from './api/versionsApi';
+import { ClassesApi as _ClassesApi } from './api/classesApi';
+import { GroupsApi as _GroupsApi } from './api/groupsApi';
+import { CustomModelApi as _CustomModelApi } from './api/customModelApi';
+import { ChildAssociationBody } from '../../../api-new/content-rest-api/model/childAssociationBody';
+
 export const CONTENT_LEGACY_APIS = [ChangesApi, ChildAssociationsApi, FavoritesApi, NetworksApi, NodesApi, CommentsApi, PeopleApi, RatingsApi, RenditionsApi, QueriesApi, SharedlinksApi, SitesApi, TagsApi, WebscriptApi, DownloadsApi, VersionsApi, ClassesApi, GroupsApi, CustomModelApi];
 
-export const Core = {
-    ChangesApi: ChangesApi,
-    ChildAssociationsApi: ChildAssociationsApi,
-    FavoriFavoritesApites: FavoritesApi,
-    NetworksApi: NetworksApi,
-    NodesApi: NodesApi,
-    CommentsApi: CommentsApi,
-    PeopleApi: PeopleApi,
-    RatingsApi: RatingsApi,
-    RenditionsApi: RenditionsApi,
-    QueriesApi: QueriesApi,
-    SharedlinksApi: SharedlinksApi,
-    SitesApi: SitesApi,
-    TagsApi: TagsApi,
-    WebscriptApi: WebscriptApi,
-    DownloadsApi: DownloadsApi,
-    VersionsApi: VersionsApi,
-    ClassesApi: ClassesApi,
-    GroupsApi: GroupsApi,
-    CustomModelApi: CustomModelApi,
-};
+export namespace Core {
+    export class ChangesApi extends _ChangesApi {
+    }
+
+    export class ChildAssociationsApi extends _ChildAssociationsApi {
+    }
+
+    export class FavoritesApi extends _FavoritesApi {
+    }
+
+    export class NetworksApi extends _NetworksApi {
+    }
+
+    export class NodesApi extends _AlfrescoNode {
+    }
+
+    export class CommentsApi extends _CommentsApi {
+    }
+
+    export class PeopleApi extends _PeopleApi {
+    }
+
+    export class RatingsApi extends _RatingsApi {
+    }
+
+    export class RenditionsApi extends _RenditionsApi {
+    }
+
+    export class QueriesApi extends _QueriesApi {
+    }
+
+    export class SharedlinksApi extends _SharedlinksApi {
+    }
+
+    export class SitesApi extends _SitesApi {
+    }
+
+    export class TagsApi extends _TagsApi {
+    }
+
+    export class WebscriptApi extends _WebscriptApi {
+    }
+
+    export class DownloadsApi extends _DownloadsApi {
+    }
+
+    export class VersionsApi extends _VersionsApi {
+    }
+
+    export class ClassesApi extends _ClassesApi {
+    }
+
+    export class GroupsApi extends _GroupsApi {
+    }
+
+    export class CustomModelApi extends _CustomModelApi {
+    }
+}
+
 
 export namespace Legacy {
     export interface Core {
@@ -65,7 +125,7 @@ export namespace Legacy {
         childAssociationsApi: ChildAssociationsApi;
         favoritesApi: FavoritesApi;
         networksApi: NetworksApi;
-        nodesApi: NodesApi;
+        nodesApi: AlfrescoNode;
         commentsApi: CommentsApi;
         peopleApi: PeopleApi;
         ratingsApi: RatingsApi;
@@ -83,61 +143,13 @@ export namespace Legacy {
 
     }
 }
-export * from './model/AccessStatusEnum';
-export * from './model/ErrorResponse';
-export * from './model/NodeAssocMinimal';
-export * from './model/ActivityActivitySummary';
-export * from './model/NodeAssocMinimalEntry';
-export * from './model/FavoriteBody';
-export * from './model/NodeAssocPaging';
-export * from './model/NodeAssocPagingList';
-export * from './model/AssocChildBody';
-export * from './model/SiteMemberBody';
-export * from './model/AssocTargetBody';
-export * from './model/FavoriteSiteBody';
-export * from './model/NodeBody';
-export * from './model/FavoriteSitePaging';
-export * from './model/NodeBodyAssociation';
-export * from './model/SiteMemberRoleBody';
-export * from './model/FavoriteSitePagingList';
-export * from './model/SiteMembershipBody';
-export * from './model/ClassDescription';
-export * from './model/FavoriteTarget';
-export * from './model/RequestTemplate';
-export * from './model/ClassPropertyDescription';
-export * from './model/FavoriteTargetSite';
-export * from './model/NodeMinimal';
-export * from './model/NodeMinimalEntry';
-export * from './model/StatusEnum';
-export * from './model/GroupBody';
-export * from './model/RenditionBody';
-export * from './model/SubscriptionLevelEnum';
-export * from './model/CopyBody';
-export * from './model/NodeSharedLink';
-export * from './model/DefaultFTSFieldOperatorEnum';
-export * from './model/NodeSharedLinkEntry';
-export * from './model/ResultSetContextSpellcheckEnum';
-export * from './model/DefaultFTSOperatorEnum';
-export * from './model/NodeSharedLinkPaging';
-export * from './model/GroupsEntry';
-export * from './model/NodeSharedLinkPagingList';
-export * from './model/GroupsPaging';
-export * from './model/NodesnodeIdchildrenContent';
-export * from './model/RequestFacetFieldEnum';
-export * from './model/TypeEnum';
-export * from './model/GroupsPagingList';
-export * from './model/DeletedNodeMinimalEntry';
-export * from './model/IdEnum';
-export * from './model/RequestFacetInterval';
-export * from './model/RoleEnum';
-export * from './model/InlineResponse201';
-export * from './model/InlineResponse201Entry';
-export * from './model/LifetimeEnum';
-export * from './model/MinimalNode';
-export * from './model/RequestFacetQuery';
-export * from './model/SharedLinkBody';
-export * from './model/VisibilityEnum';
-export * from './model/MoveBody';
-export * from './model/EmailSharedLinkBody';
-export * from './model/RequestFilterQuery';
-export * from './model/SiteBody';
+
+export { ChildAssociationBody as AssocChildBody } from '../../../api-new/content-rest-api/model/childAssociationBody';
+export { ChildAssociationBody as AssocTargetBody } from '../../../api-new/content-rest-api/model/childAssociationBody';
+export { FavoriteBodyCreate as FavoriteBody } from '../../../api-new/content-rest-api/model/favoriteBodyCreate';
+export { SearchRequest as QueryBody } from '../../../api-new/search-rest-api/model/searchRequest';
+export { PathInfo as PathInfoEntity } from '../../../api-new/content-rest-api/model/pathInfo';
+export { NodeEntry as MinimalNodeEntity } from '../../../api-new/content-rest-api/model/nodeEntry';
+export { DeletedNodeEntry as DeletedNodeEntity } from '../../../api-new/content-rest-api/model/deletedNodeEntry';
+export { Node as MinimalNode } from '../../../api-new/content-rest-api/model/node';
+export { Node as MinimalNodeEntryEntity } from '../../../api-new/content-rest-api/model/node';

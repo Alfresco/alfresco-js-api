@@ -16,8 +16,9 @@
  */
 
 //legacy export
-export * from './src/api/content-rest-api/src/index';
+import * as  _Emitter from 'event-emitter';
 
+export * from './src/api/content-rest-api/src/index';
 export * from './src/api-new/content-rest-api/index';
 export * from './src/api-new/discovery-rest-api/index';
 export * from './src/api-new/gs-classification-rest-api/index';
@@ -25,6 +26,9 @@ export * from './src/api-new/gs-core-rest-api/index';
 export * from './src/api-new/auth-rest-api/index';
 export * from './src/api-new/activiti-rest-api/index';
 export * from './src/api-new/search-rest-api/index';
+
+export class Emitter extends _Emitter {
+}
 
 export { ContentApi } from './src/contentApi';
 export { AlfrescoUpload } from './src/api/alfrescoUpload';

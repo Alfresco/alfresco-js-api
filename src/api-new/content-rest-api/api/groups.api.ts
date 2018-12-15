@@ -187,7 +187,7 @@ parameter are returned in addition to those specified in the **fields** paramete
      (default to false)
         * @return Promise<{}>
         */
-    deleteGroup(groupId: string, opts?: any): Promise<{} | ModelError> {
+    deleteGroup(groupId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -237,7 +237,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param groupMemberId The identifier of a person or group.
         * @return Promise<{}>
         */
-    deleteGroupMembership(groupId: string, groupMemberId: string): Promise<{} | ModelError> {
+    deleteGroupMembership(groupId: string, groupMemberId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

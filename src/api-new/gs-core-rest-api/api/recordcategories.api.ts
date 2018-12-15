@@ -194,7 +194,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param recordCategoryId The identifier of a record category.
         * @return Promise<{}>
         */
-    deleteRecordCategory(recordCategoryId: string): Promise<{} | ModelError> {
+    deleteRecordCategory(recordCategoryId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

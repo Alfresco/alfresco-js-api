@@ -80,7 +80,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         * @param identityId User or group ID
         * @return Promise<{}>
         */
-    deleteIdentityLinkUsingDELETE(processDefinitionId: string, family: string, identityId: string): Promise<{}> {
+    deleteIdentityLinkUsingDELETE(processDefinitionId: string, family: string, identityId: string): Promise<any> {
 
         let postBody = null;
 

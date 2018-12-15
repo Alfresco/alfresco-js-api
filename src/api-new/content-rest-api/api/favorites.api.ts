@@ -271,7 +271,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param favoriteId The identifier of a favorite.
         * @return Promise<{}>
         */
-    deleteFavorite(personId: string, favoriteId: string): Promise<{} | ModelError> {
+    deleteFavorite(personId: string, favoriteId: string): Promise<any | ModelError> {
 
         let postBody = null;
 
@@ -319,7 +319,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param siteId The identifier of a site.
         * @return Promise<{}>
         */
-    deleteSiteFavorite(personId: string, siteId: string): Promise<{} | ModelError> {
+    deleteSiteFavorite(personId: string, siteId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

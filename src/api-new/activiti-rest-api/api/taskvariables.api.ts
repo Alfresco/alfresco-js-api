@@ -73,7 +73,7 @@ export class TaskvariablesApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    deleteAllLocalTaskVariablesUsingDELETE(taskId: string): Promise<{}> {
+    deleteAllLocalTaskVariablesUsingDELETE(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -113,7 +113,7 @@ export class TaskvariablesApi extends BaseApi {
         * @param opts.scope scope
         * @return Promise<{}>
         */
-    deleteVariableUsingDELETE(taskId: string, variableName: string, opts?: any): Promise<{}> {
+    deleteVariableUsingDELETE(taskId: string, variableName: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 

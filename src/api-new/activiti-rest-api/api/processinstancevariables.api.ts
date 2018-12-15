@@ -116,7 +116,7 @@ export class ProcessinstancevariablesApi extends BaseApi {
         * @param variableName variableName
         * @return Promise<{}>
         */
-    deleteProcessInstanceVariableUsingDELETE(processInstanceId: string, variableName: string): Promise<{}> {
+    deleteProcessInstanceVariableUsingDELETE(processInstanceId: string, variableName: string): Promise<any> {
 
         let postBody = null;
 

@@ -185,3 +185,5 @@ export * from './deletedNode';
 export * from './nodeAssociation';
 export * from './nodeChildAssociation';
 export * from './dateAlfresco';
+export * from './classDescription';
+export * from './classPropertyDescription';

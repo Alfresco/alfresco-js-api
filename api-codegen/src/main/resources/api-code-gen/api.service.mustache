@@ -20,7 +20,7 @@ export class {{classname}} extends BaseApi {
     * @param{{&vendorExtensions.x-jsdoc-type}} opts.{{paramName}} {{&description}}{{#defaultValue}} (default to {{.}}){{/defaultValue}}{{/required}}{{/allParams}}{{/hasOptionalParams}}
     * @return Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}>
     */
-    {{nickname}}({{&vendorExtensions.x-codegen-argList}}) : Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}{{#canReturnError}} | {{&canReturnError}}{{/canReturnError}}> {
+    {{nickname}}({{&vendorExtensions.x-codegen-argList}}) : Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}any{{/returnType}}{{#canReturnError}} | {{&canReturnError}}{{/canReturnError}}> {
         {{#hasOptionalParams}}opts = opts || {};{{/hasOptionalParams}}
         let postBody = {{#bodyParam}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
         {{#allParams}}{{#required}}

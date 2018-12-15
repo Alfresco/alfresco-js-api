@@ -186,7 +186,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param recordFolderId The identifier of a record folder.
         * @return Promise<{}>
         */
-    deleteRecordFolder(recordFolderId: string): Promise<{} | ModelError> {
+    deleteRecordFolder(recordFolderId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

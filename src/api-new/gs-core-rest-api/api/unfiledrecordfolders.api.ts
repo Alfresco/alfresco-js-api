@@ -197,7 +197,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param unfiledRecordFolderId The identifier of an unfiled record folder.
         * @return Promise<{}>
         */
-    deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<{} | ModelError> {
+    deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

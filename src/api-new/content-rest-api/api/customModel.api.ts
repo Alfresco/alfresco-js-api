@@ -82,7 +82,7 @@ export class CustomModelApi {
     /**
      * Create a custom type
      */
-    createCustomType(modelName: string, name: string, parentName: string, title: string, description: string): Promise<any> {
+    createCustomType(modelName: string, name: string, parentName?: string, title?: string, description?: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in createCustomType";
@@ -120,7 +120,7 @@ export class CustomModelApi {
     /**
      * Create a custom aspect
      */
-    createCustomAspect(modelName: string, name: string, parentName: string, title: string, description: string): Promise<any> {
+    createCustomAspect(modelName: string, name: string, parentName?: string, title?: string, description?: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in createCustomAspect";
@@ -158,7 +158,7 @@ export class CustomModelApi {
     /**
      * Create a custom constraint
      */
-    createCustomConstraint(modelName: string, name: string, type: string, parameters: any): Promise<any> {
+    createCustomConstraint(modelName: string, name: string, type: string, parameters?: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in createCustomConstraint";
@@ -259,7 +259,7 @@ export class CustomModelApi {
     /**
      * Add property into an existing aspect
      */
-    addPropertyToAspect(modelName: string, aspectName: string, properties: any): Promise<any> {
+    addPropertyToAspect(modelName: string, aspectName: string, properties?: any[]): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in addPropertyToAspect";
@@ -296,7 +296,7 @@ export class CustomModelApi {
     /**
      * Add Property into an existing type
      */
-    addPropertyToType(modelName: string, typeName: string, properties: any, aspectName: string): Promise<any> {
+    addPropertyToType(modelName: string, typeName: string, properties?: any[], aspectName?: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in addPropertyToType";
@@ -333,7 +333,7 @@ export class CustomModelApi {
     /**
      * Edit an existing custom model
      */
-    updateCustomModel(modelName: string, description: string, namespaceUri: string, namespacePrefix: string): Promise<any> {
+    updateCustomModel(modelName: string, description?: string, namespaceUri?: string, namespacePrefix?: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in updateCustomModel";
@@ -367,7 +367,7 @@ export class CustomModelApi {
     /**
      * Edit an existing custom model type
      */
-    updateCustomType(modelName: string, typeName: string, description: string, parentName: string, title: string): Promise<any> {
+    updateCustomType(modelName: string, typeName: string, description?: string, parentName?: string, title?: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in UpdateCustomType";
@@ -406,7 +406,7 @@ export class CustomModelApi {
     /**
      * Edit an existing custom model aspect
      */
-    updateCustomAspect(modelName: string, aspectName: string, description: string, parentName: string, title: string): Promise<any> {
+    updateCustomAspect(modelName: string, aspectName: string, description?: string, parentName?: string, title?: string): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in updateCustomAspect";
@@ -468,7 +468,7 @@ export class CustomModelApi {
     /**
      * Get custom model
      */
-    getCustomModel(modelName: string, queryParamsInput: any): Promise<any> {
+    getCustomModel(modelName: string, queryParamsInput?: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomModel";
@@ -530,7 +530,7 @@ export class CustomModelApi {
     /**
      * Get custom model type
      */
-    getCustomType(modelName: string, typeName: string, queryParamsInput: any): Promise<any> {
+    getCustomType(modelName: string, typeName?: string, queryParamsInput?: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomType";
@@ -566,7 +566,7 @@ export class CustomModelApi {
     /**
      * Get all custom model aspect
      */
-    getAllCustomAspect(modelName: string, queryParamsInput: any): Promise<any> {
+    getAllCustomAspect(modelName: string, queryParamsInput?: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getAllCustomAspect";
@@ -597,7 +597,7 @@ export class CustomModelApi {
     /**
      * Get custom model aspect
      */
-    getCustomAspect(modelName: string, aspectName: string, queryParamsInput: any): Promise<any> {
+    getCustomAspect(modelName: string, aspectName: string, queryParamsInput?: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomAspect";
@@ -633,7 +633,7 @@ export class CustomModelApi {
     /**
      * Get all custom model defined constraints
      */
-    getAllCustomConstraints(modelName: string, queryParamsInput: any): Promise<any> {
+    getAllCustomConstraints(modelName: string, queryParamsInput?: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getAllCustomConstraints";
@@ -664,7 +664,7 @@ export class CustomModelApi {
     /**
      * Get custom model defined constraints
      */
-    getCustomConstraints(modelName: string, constraintName: string, queryParamsInput: any): Promise<any> {
+    getCustomConstraints(modelName: string, constraintName: string, queryParamsInput?: any): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in getCustomConstraints";

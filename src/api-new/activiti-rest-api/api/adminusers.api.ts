@@ -34,7 +34,7 @@ export class AdminusersApi extends BaseApi {
     * @param update update
     * @return Promise<{}>
     */
-    bulkUpdateUsersUsingPUT(update: BulkUserUpdateRepresentation): Promise<{}> {
+    bulkUpdateUsersUsingPUT(update: BulkUserUpdateRepresentation): Promise<any> {
 
         let postBody = update;
 
@@ -204,7 +204,7 @@ export class AdminusersApi extends BaseApi {
         * @param userRepresentation userRepresentation
         * @return Promise<{}>
         */
-    updateUserDetailsUsingPUT(userId: number, userRepresentation: UserRepresentation): Promise<{}> {
+    updateUserDetailsUsingPUT(userId: number, userRepresentation: UserRepresentation): Promise<any> {
 
         let postBody = userRepresentation;
 

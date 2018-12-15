@@ -94,7 +94,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param recordId The identifier of a record.
         * @return Promise<{}>
         */
-    deleteRecord(recordId: string): Promise<{} | ModelError> {
+    deleteRecord(recordId: string): Promise<any | ModelError> {
 
         let postBody = null;
 
@@ -280,7 +280,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<{}>
         */
-    getRecordContent(recordId: string, opts?: any): Promise<{} | ModelError> {
+    getRecordContent(recordId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = null;
 

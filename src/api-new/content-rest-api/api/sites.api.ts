@@ -55,7 +55,7 @@ export class SitesApi extends BaseApi {
 
     * @return Promise<{}>
     */
-    approveSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<{} | ModelError> {
+    approveSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = opts['siteMembershipApprovalBody'];
 
@@ -397,7 +397,7 @@ export class SitesApi extends BaseApi {
         * @param opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
         * @return Promise<{}>
         */
-    deleteSite(siteId: string, opts?: any): Promise<{} | ModelError> {
+    deleteSite(siteId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -439,7 +439,7 @@ export class SitesApi extends BaseApi {
         * @param personId The identifier of a person.
         * @return Promise<{}>
         */
-    deleteSiteMembership(siteId: string, personId: string): Promise<{} | ModelError> {
+    deleteSiteMembership(siteId: string, personId: string): Promise<any | ModelError> {
 
         let postBody = null;
 
@@ -484,7 +484,7 @@ export class SitesApi extends BaseApi {
         * @param siteId The identifier of a site.
         * @return Promise<{}>
         */
-    deleteSiteMembershipForPerson(personId: string, siteId: string): Promise<{} | ModelError> {
+    deleteSiteMembershipForPerson(personId: string, siteId: string): Promise<any | ModelError> {
 
         let postBody = null;
 
@@ -529,7 +529,7 @@ export class SitesApi extends BaseApi {
         * @param siteId The identifier of a site.
         * @return Promise<{}>
         */
-    deleteSiteMembershipRequestForPerson(personId: string, siteId: string): Promise<{} | ModelError> {
+    deleteSiteMembershipRequestForPerson(personId: string, siteId: string): Promise<any | ModelError> {
 
         let postBody = null;
 
@@ -1314,7 +1314,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<{}>
         */
-    rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<{} | ModelError> {
+    rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = opts['siteMembershipRejectionBody'];
 

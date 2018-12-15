@@ -37,12 +37,12 @@ export class ContentApi {
     /**
      * Get thumbnail URL for the given nodeId
      *
-     * @param {String} nodeId The ID of the document node
-     * @param {Boolean} [attachment=false] Retrieve content as an attachment for download
-     * @param {String} [ticket] Custom ticket to use for authentication
-     * @returns {String} The URL address pointing to the content.
+     * @param nodeId The ID of the document node
+     * @param [attachment=false] Retrieve content as an attachment for download
+     * @param [ticket] Custom ticket to use for authentication
+     * @returns The URL address pointing to the content.
      */
-    getDocumentThumbnailUrl(nodeId, attachment, ticket) {
+    getDocumentThumbnailUrl(nodeId: string, attachment?: boolean, ticket?: string): string {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
             '/renditions/doclib/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
@@ -52,12 +52,12 @@ export class ContentApi {
     /**
      * Get preview URL for the given nodeId
      *
-     * @param {String} nodeId The ID of the document node
-     * @param {Boolean} [attachment=false] Retrieve content as an attachment for download
-     * @param {String} [ticket] Custom ticket to use for authentication
-     * @returns {String} The URL address pointing to the content.
+     * @param nodeId The ID of the document node
+     * @param  [attachment=false] Retrieve content as an attachment for download
+     * @param [ticket] Custom ticket to use for authentication
+     * @returns  The URL address pointing to the content.
      */
-    getDocumentPreviewUrl(nodeId, attachment, ticket) {
+    getDocumentPreviewUrl(nodeId: string, attachment?: boolean, ticket?: string): string {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
             '/renditions/imgpreview/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
@@ -67,12 +67,12 @@ export class ContentApi {
     /**
      * Get content URL for the given nodeId
      *
-     * @param {String} nodeId The ID of the document node
-     * @param {Boolean} [attachment=false] Retrieve content as an attachment for download
-     * @param {String} [ticket] Custom ticket to use for authentication
-     * @returns {String} The URL address pointing to the content.
+     * @param  nodeId The ID of the document node
+     * @param  [attachment=false] Retrieve content as an attachment for download
+     * @param  [ticket] Custom ticket to use for authentication
+     * @returns The URL address pointing to the content.
      */
-    getContentUrl(nodeId, attachment, ticket) {
+    getContentUrl(nodeId: string, attachment?: boolean, ticket?: string): string {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
             '/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
@@ -82,13 +82,13 @@ export class ContentApi {
     /**
      * Get rendition URL for the given nodeId
      *
-     * @param {String} nodeId The ID of the document node
-     * @param {String} encoding of the document
-     * @param {Boolean} [attachment=false] retrieve content as an attachment for download
-     * @param {String} [ticket] Custom ticket to use for authentication
-     * @returns {String} The URL address pointing to the content.
+     * @param nodeId The ID of the document node
+     * @param encoding of the document
+     * @param [attachment=false] retrieve content as an attachment for download
+     * @param [ticket] Custom ticket to use for authentication
+     * @returns The URL address pointing to the content.
      */
-    getRenditionUrl(nodeId, encoding, attachment, ticket) {
+    getRenditionUrl(nodeId: string, encoding: string, attachment?: boolean, ticket?: string): string {
         return this.ecmClient.basePath + '/nodes/' + nodeId +
             '/renditions/' + encoding + '/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
@@ -98,11 +98,11 @@ export class ContentApi {
     /**
      * Get content url for the given shared link id
      *
-     * @param {String} linkId - The ID of the shared link
-     * @param {Boolean} [attachment=false] Retrieve content as an attachment for download
-     * @returns {String} The URL address pointing to the content.
+     * @param linkId - The ID of the shared link
+     * @param  [attachment=false] Retrieve content as an attachment for download
+     * @returns  The URL address pointing to the content.
      */
-    getSharedLinkContentUrl(linkId, attachment) {
+    getSharedLinkContentUrl(linkId: string, attachment?: boolean): string {
         return this.ecmClient.basePath + '/shared-links/' + linkId +
             '/content' +
             '?attachment=' + (attachment ? 'true' : 'false');
@@ -111,18 +111,18 @@ export class ContentApi {
     /**
      * Gets the rendition content for file with shared link identifier sharedId.
      *
-     * @param {String} sharedId - The identifier of a shared link to a file.
-     * @param {String} renditionId - The name of a thumbnail rendition, for example doclib, or pdf.
-     * @param {Boolean} [attachment=false] Retrieve content as an attachment for download
-     * @returns {String} The URL address pointing to the content.
+     * @param  sharedId - The identifier of a shared link to a file.
+     * @param  renditionId - The name of a thumbnail rendition, for example doclib, or pdf.
+     * @param [attachment=false] Retrieve content as an attachment for download
+     * @returns The URL address pointing to the content.
      */
-    getSharedLinkRenditionUrl(sharedId, renditionId, attachment) {
+    getSharedLinkRenditionUrl(sharedId: string, renditionId: string, attachment?: boolean): string {
         return this.ecmClient.basePath + '/shared-links/' + sharedId +
             '/renditions/' + renditionId + '/content' +
             '?attachment=' + (attachment ? 'true' : 'false');
     }
 
-    getAlfTicket(ticket) {
+    getAlfTicket(ticket: string): string {
         if (this.ecmAuth) {
             return '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
         } else {

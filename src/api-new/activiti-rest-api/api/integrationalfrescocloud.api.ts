@@ -33,7 +33,7 @@ export class IntegrationalfrescocloudApi extends BaseApi {
     * @param code code
     * @return Promise<{}>
     */
-    confirmAuthorisationUsingGET(code: string): Promise<{}> {
+    confirmAuthorisationUsingGET(code: string): Promise<any> {
 
         let postBody = null;
 

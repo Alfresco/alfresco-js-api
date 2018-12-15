@@ -15,13 +15,13 @@
 * limitations under the License.
 */
 
-import * as  Emitter_ from 'event-emitter';
+import * as  _Emitter from 'event-emitter';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
 import * as  superagent_ from 'superagent';
 
-const Emitter = Emitter_;
+const Emitter = _Emitter;
 const superagent = superagent_;
 const process: any = {};
 
@@ -441,7 +441,7 @@ export class AlfrescoApiClient {
      */
     callHostApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
                 contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string, url?: string): Promise<any> {
-        let eventEmitter: Emitter_ = {};
+        let eventEmitter: _Emitter = {};
         Emitter(eventEmitter); // jshint ignore:line
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
@@ -553,7 +553,7 @@ export class AlfrescoApiClient {
         return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + (1e16).toString()).replace(/[01]/g, this.createCSRFToken);
     }
 
-    progress(event: any, eventEmitter: Emitter_) {
+    progress(event: any, eventEmitter: _Emitter) {
         if (event.lengthComputable) {
             let percent = Math.round(event.loaded / event.total * 100);
 
@@ -588,7 +588,7 @@ export class AlfrescoApiClient {
     }
 
     buildRequest(httpMethod: string, url: string, queryParams, headerParams, formParams, bodyParam,
-                 contentTypes, accepts, responseType, eventEmitter: Emitter_, returnType) {
+                 contentTypes, accepts, responseType, eventEmitter: _Emitter, returnType) {
         let request: any = superagent(httpMethod, url);
 
         // apply authentications

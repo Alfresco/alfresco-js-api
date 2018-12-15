@@ -31,7 +31,7 @@ export class IdmsyncApi extends BaseApi {
     * @param syncLogEntryId syncLogEntryId
     * @return Promise<{}>
     */
-    getLogFileUsingGET(syncLogEntryId: number): Promise<{}> {
+    getLogFileUsingGET(syncLogEntryId: number): Promise<any> {
 
         let postBody = null;
 

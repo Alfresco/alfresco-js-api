@@ -323,11 +323,11 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    updateFileContent(nodeId: string, contentBody: string, opts?: any): Promise<any> {
+    updateFileContent(nodeId: string, contentBody: any, opts?: any): Promise<any> {
         return this.nodesApi.updateNodeContent(nodeId, contentBody, opts);
     }
 
-    updateNodeContent(nodeId: string, contentBody: string, opts?: any): Promise<any> {
+    updateNodeContent(nodeId: string, contentBody: any, opts?: any): Promise<any> {
         return this.nodesApi.updateNodeContent(nodeId, contentBody, opts);
     }
 

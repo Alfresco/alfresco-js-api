@@ -33,7 +33,7 @@ export class RuntimeappdefinitionsApi extends BaseApi {
     * @param saveObject saveObject
     * @return Promise<{}>
     */
-    deployAppDefinitionsUsingPOST(saveObject: RuntimeAppDefinitionSaveRepresentation): Promise<{}> {
+    deployAppDefinitionsUsingPOST(saveObject: RuntimeAppDefinitionSaveRepresentation): Promise<any> {
 
         let postBody = saveObject;
 

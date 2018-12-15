@@ -15,12 +15,12 @@
 * limitations under the License.
 */
 
-import * as Emitter_ from 'event-emitter';
+import * as _Emitter from 'event-emitter';
 import { AlfrescoApiClient } from './alfrescoApiClient';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
-const Emitter = Emitter_;
+const Emitter = _Emitter;
 
 export class Oauth2Auth extends AlfrescoApiClient {
 

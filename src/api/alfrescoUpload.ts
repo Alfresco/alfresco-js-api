@@ -16,10 +16,12 @@
 */
 
 import { NodesApi } from './content-rest-api/src/api/nodesApi';
-import * as Emitter_ from 'event-emitter';
+import * as _Emitter from 'event-emitter';
 import { AlfrescoApi } from '../alfrescoApi';
+import { NodeEntry } from '../api-new/content-rest-api/model/nodeEntry';
+import { ModelError } from '../api-new/content-rest-api/model/modelError';
 
-const Emitter = Emitter_;
+const Emitter = _Emitter;
 
 export class AlfrescoUpload extends NodesApi {
 
@@ -29,7 +31,7 @@ export class AlfrescoUpload extends NodesApi {
         Emitter.call(this);
     }
 
-    uploadFile(fileDefinition, relativePath, rootFolderId, nodeBody, opts) {
+    uploadFile(fileDefinition, relativePath: string, rootFolderId: string, nodeBody: any, opts?: any): Promise<NodeEntry | ModelError | _Emitter> {
         rootFolderId = rootFolderId || '-root-';
         opts = opts || {};
 
@@ -50,24 +52,6 @@ export class AlfrescoUpload extends NodesApi {
 
         formParam = Object.assign(formParam, opts);
 
-        return this.addNodeUpload(rootFolderId, nodeBody, opts, formParam);
-    }
-
-    updateFile(fileDefinition, relativePath, nodeId, nodeBody, opts) {
-        opts = opts || {};
-        return this.updateNodeContent(nodeId, nodeBody, opts);
-    }
-
-    /**
-     * Create a node
-     *
-     * @param {String} rootFolderId The identifier of a node. You can also use one of these well-known aliases: -my-\ -shared- -root-\n
-     * @param {module:model/NodeBody1} nodeBody The node information to create.
-     * @param {Object} opts Optional parameters
-     * @param {Object.<String, Object>} formParams A map of form parameters and their values.
-     */
-    //@deprecated in 2.4.0 use addNode in NodesApi
-    addNodeUpload(nodeId, nodeBody, opts, formParams) {
-        return this.nodesApi.createNode(nodeId, <any>nodeBody, opts);
+        return this.nodesApi.createNode(rootFolderId, nodeBody, opts, formParam);
     }
 }

@@ -270,7 +270,7 @@ export class AdminendpointsApi extends BaseApi {
         * @param tenantId tenantId
         * @return Promise<{}>
         */
-    removeBasicAuthonfigurationUsingDELETE(basicAuthId: number, tenantId: number): Promise<{}> {
+    removeBasicAuthonfigurationUsingDELETE(basicAuthId: number, tenantId: number): Promise<any> {
 
         let postBody = null;
 
@@ -313,7 +313,7 @@ export class AdminendpointsApi extends BaseApi {
         * @param tenantId tenantId
         * @return Promise<{}>
         */
-    removeEndpointConfigurationUsingDELETE(endpointConfigurationId: number, tenantId: number): Promise<{}> {
+    removeEndpointConfigurationUsingDELETE(endpointConfigurationId: number, tenantId: number): Promise<any> {
 
         let postBody = null;
 

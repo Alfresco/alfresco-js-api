@@ -74,7 +74,7 @@ export class ModelsApi extends BaseApi {
         * @param opts.deleteRuntimeApp deleteRuntimeApp
         * @return Promise<{}>
         */
-    deleteModelUsingDELETE(modelId: number, opts?: any): Promise<{}> {
+    deleteModelUsingDELETE(modelId: number, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 

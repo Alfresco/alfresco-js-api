@@ -118,7 +118,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param personId The identifier of a person.
         * @return Promise<{}>
         */
-    deleteAvatarImage(personId: string): Promise<{} | ModelError> {
+    deleteAvatarImage(personId: string): Promise<any | ModelError> {
 
         let postBody = null;
 
@@ -178,7 +178,7 @@ parameter are returned in addition to those specified in the **fields** paramete
      (default to true)
         * @return Promise<{}>
         */
-    getAvatarImage(personId: string, opts?: any): Promise<{} | ModelError> {
+    getAvatarImage(personId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -372,7 +372,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param clientBody The client name to send email with app-specific url.
         * @return Promise<{}>
         */
-    requestPasswordReset(personId: string, clientBody: ClientBody): Promise<{} | ModelError> {
+    requestPasswordReset(personId: string, clientBody: ClientBody): Promise<any | ModelError> {
 
         let postBody = clientBody;
 
@@ -427,7 +427,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param passwordResetBody The reset password details
         * @return Promise<{}>
         */
-    resetPassword(personId: string, passwordResetBody: PasswordResetBody): Promise<{} | ModelError> {
+    resetPassword(personId: string, passwordResetBody: PasswordResetBody): Promise<any | ModelError> {
 
         let postBody = passwordResetBody;
 
@@ -479,7 +479,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param contentBodyUpdate The binary content
         * @return Promise<{}>
         */
-    updateAvatarImage(personId: string, contentBodyUpdate: string): Promise<{} | ModelError> {
+    updateAvatarImage(personId: string, contentBodyUpdate: string): Promise<any | ModelError> {
 
         let postBody = contentBodyUpdate;
 

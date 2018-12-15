@@ -109,7 +109,7 @@ export class UserfiltersApi extends BaseApi {
         * @param userFilterId userFilterId
         * @return Promise<{}>
         */
-    deleteUserProcessInstanceFilterUsingDELETE(userFilterId: number): Promise<{}> {
+    deleteUserProcessInstanceFilterUsingDELETE(userFilterId: number): Promise<any> {
 
         let postBody = null;
 
@@ -146,7 +146,7 @@ export class UserfiltersApi extends BaseApi {
         * @param userFilterId userFilterId
         * @return Promise<{}>
         */
-    deleteUserTaskFilterUsingDELETE(userFilterId: number): Promise<{}> {
+    deleteUserTaskFilterUsingDELETE(userFilterId: number): Promise<any> {
 
         let postBody = null;
 
@@ -327,7 +327,7 @@ export class UserfiltersApi extends BaseApi {
         * @param filterOrderRepresentation filterOrderRepresentation
         * @return Promise<{}>
         */
-    orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<{}> {
+    orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<any> {
 
         let postBody = filterOrderRepresentation;
 
@@ -364,7 +364,7 @@ export class UserfiltersApi extends BaseApi {
         * @param filterOrderRepresentation filterOrderRepresentation
         * @return Promise<{}>
         */
-    orderUserTaskFiltersUsingPUT(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<{}> {
+    orderUserTaskFiltersUsingPUT(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<any> {
 
         let postBody = filterOrderRepresentation;
 

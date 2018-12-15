@@ -113,7 +113,7 @@ export class ChecklistsApi extends BaseApi {
         * @param orderRepresentation orderRepresentation
         * @return Promise<{}>
         */
-    orderChecklistUsingPUT(taskId: string, orderRepresentation: ChecklistOrderRepresentation): Promise<{}> {
+    orderChecklistUsingPUT(taskId: string, orderRepresentation: ChecklistOrderRepresentation): Promise<any> {
 
         let postBody = orderRepresentation;
 

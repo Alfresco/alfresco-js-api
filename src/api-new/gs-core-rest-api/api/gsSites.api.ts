@@ -90,7 +90,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         *
         * @return Promise<{}>
         */
-    deleteRMSite(): Promise<{} | ModelError> {
+    deleteRMSite(): Promise<any | ModelError> {
 
         let postBody = null;
 

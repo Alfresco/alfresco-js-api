@@ -89,7 +89,7 @@ For example using Javascript:
         *
         * @return Promise<{}>
         */
-    deleteTicket(): Promise<{} | ModelError> {
+    deleteTicket(): Promise<any | ModelError> {
 
         let postBody = null;
 

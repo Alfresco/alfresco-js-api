@@ -32,7 +32,7 @@ export class RuntimeappdeploymentsApi extends BaseApi {
     * @param appDeploymentId appDeploymentId
     * @return Promise<{}>
     */
-    deleteAppDeploymentUsingDELETE(appDeploymentId: number): Promise<{}> {
+    deleteAppDeploymentUsingDELETE(appDeploymentId: number): Promise<any> {
 
         let postBody = null;
 
@@ -69,7 +69,7 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         * @param deploymentId deploymentId
         * @return Promise<{}>
         */
-    exportAppDefinitionUsingGET1(deploymentId: string): Promise<{}> {
+    exportAppDefinitionUsingGET1(deploymentId: string): Promise<any> {
 
         let postBody = null;
 

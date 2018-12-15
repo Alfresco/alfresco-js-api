@@ -54,7 +54,7 @@ You must have admin rights to delete audit information.
 
     * @return Promise<{}>
     */
-    deleteAuditEntriesForAuditApp(auditApplicationId: string, where: string): Promise<{} | ModelError> {
+    deleteAuditEntriesForAuditApp(auditApplicationId: string, where: string): Promise<any | ModelError> {
 
         let postBody = null;
 
@@ -102,7 +102,7 @@ You must have admin rights to delete audit information.
         * @param auditEntryId The identifier of an audit entry.
         * @return Promise<{}>
         */
-    deleteAuditEntry(auditApplicationId: string, auditEntryId: string): Promise<{} | ModelError> {
+    deleteAuditEntry(auditApplicationId: string, auditEntryId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

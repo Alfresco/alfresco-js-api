@@ -48,7 +48,7 @@ params (majorVersion and comment) on a subsequent file content update.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @return Promise<{}>
     */
-    deleteVersion(nodeId: string, versionId: string): Promise<{} | ModelError> {
+    deleteVersion(nodeId: string, versionId: string): Promise<any | ModelError> {
 
         let postBody = null;
 
@@ -155,7 +155,7 @@ params (majorVersion and comment) on a subsequent file content update.
 
         * @return Promise<{}>
         */
-    getVersionContent(nodeId: string, versionId: string, opts?: any): Promise<{} | ModelError> {
+    getVersionContent(nodeId: string, versionId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = null;
 

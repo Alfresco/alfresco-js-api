@@ -77,7 +77,7 @@ export class TaskactionsApi extends BaseApi {
         * @param formIdentifier formIdentifier
         * @return Promise<{}>
         */
-    attachFormUsingPUT(taskId: string, formIdentifier: FormIdentifierRepresentation): Promise<{}> {
+    attachFormUsingPUT(taskId: string, formIdentifier: FormIdentifierRepresentation): Promise<any> {
 
         let postBody = formIdentifier;
 
@@ -118,7 +118,7 @@ export class TaskactionsApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    claimTaskUsingPUT(taskId: string): Promise<{}> {
+    claimTaskUsingPUT(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -155,7 +155,7 @@ export class TaskactionsApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    completeTaskUsingPUT(taskId: string): Promise<{}> {
+    completeTaskUsingPUT(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -193,7 +193,7 @@ export class TaskactionsApi extends BaseApi {
         * @param userIdentifier userIdentifier
         * @return Promise<{}>
         */
-    delegateTaskUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<{}> {
+    delegateTaskUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
 
         let postBody = userIdentifier;
 
@@ -235,7 +235,7 @@ export class TaskactionsApi extends BaseApi {
         * @param groupId groupId
         * @return Promise<{}>
         */
-    involveGroupUsingPOST(taskId: string, groupId: string): Promise<{}> {
+    involveGroupUsingPOST(taskId: string, groupId: string): Promise<any> {
 
         let postBody = null;
 
@@ -277,7 +277,7 @@ export class TaskactionsApi extends BaseApi {
         * @param userIdentifier userIdentifier
         * @return Promise<{}>
         */
-    involveUserUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<{}> {
+    involveUserUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
 
         let postBody = userIdentifier;
 
@@ -318,7 +318,7 @@ export class TaskactionsApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    removeFormUsingDELETE(taskId: string): Promise<{}> {
+    removeFormUsingDELETE(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -356,7 +356,7 @@ export class TaskactionsApi extends BaseApi {
         * @param groupId groupId
         * @return Promise<{}>
         */
-    removeInvolvedUserUsingDELETE(taskId: string, groupId: string): Promise<{}> {
+    removeInvolvedUserUsingDELETE(taskId: string, groupId: string): Promise<any> {
 
         let postBody = null;
 
@@ -398,7 +398,7 @@ export class TaskactionsApi extends BaseApi {
         * @param userIdentifier userIdentifier
         * @return Promise<{}>
         */
-    removeInvolvedUserUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<{}> {
+    removeInvolvedUserUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
 
         let postBody = userIdentifier;
 
@@ -439,7 +439,7 @@ export class TaskactionsApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    resolveTaskUsingPUT(taskId: string): Promise<{}> {
+    resolveTaskUsingPUT(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -476,7 +476,7 @@ export class TaskactionsApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    unclaimTaskUsingPUT(taskId: string): Promise<{}> {
+    unclaimTaskUsingPUT(taskId: string): Promise<any> {
 
         let postBody = null;
 

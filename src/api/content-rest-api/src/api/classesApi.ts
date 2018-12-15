@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ClassDescription } from '../model/ClassDescription';
+import { ClassDescription } from '../model/classDescription';
 import { ClassesApi as NewClassesApi } from '../../../../api-new/content-rest-api/api/classes.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 

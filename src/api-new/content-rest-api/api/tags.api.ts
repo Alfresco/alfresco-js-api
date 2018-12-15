@@ -137,7 +137,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param tagId The identifier of a tag.
         * @return Promise<{}>
         */
-    deleteTagFromNode(nodeId: string, tagId: string): Promise<{} | ModelError> {
+    deleteTagFromNode(nodeId: string, tagId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

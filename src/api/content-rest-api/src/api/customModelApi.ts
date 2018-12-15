@@ -28,10 +28,10 @@ import { CustomModelApi as NewCustomModelApi } from '../../../../api-new/content
  * Constructs a new CustomModelApi.
  * @alias module:api/CustomModelApi
  * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
+ * @param {module:ApiClient} apiClient Optional API client implementation to use:string, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class CustomModelApi  {
+export class CustomModelApi {
 
     private: boolean = true;
 
@@ -44,7 +44,7 @@ export class CustomModelApi  {
     /**
      * create Custom Model
      */
-    createCustomModel(status, description, name, namespaceUri, namespacePrefix): Promise<any> {
+    createCustomModel(status: string, description: string, name: string, namespaceUri: string, namespacePrefix: string): Promise<any> {
         return this.customModelApi.createCustomModel(status, description, name, namespaceUri, namespacePrefix);
     }
 
@@ -55,7 +55,7 @@ export class CustomModelApi  {
      * @param {String} parentName
      * @param {String} description
      */
-    createCustomType(modelName, name, parentName, title, description): Promise<any> {
+    createCustomType(modelName: string, name: string, parentName: string, title: string, description: string): Promise<any> {
         return this.customModelApi.createCustomType(modelName, name, parentName, title, description);
     }
 
@@ -66,7 +66,7 @@ export class CustomModelApi  {
      * @param {String} parentName
      * @param {String} description
      */
-    createCustomAspect(modelName, name, parentName, title, description): Promise<any> {
+    createCustomAspect(modelName: string, name: string, parentName: string, title: string, description: string): Promise<any> {
         return this.customModelApi.createCustomAspect(modelName, name, parentName, title, description);
     }
 
@@ -77,7 +77,7 @@ export class CustomModelApi  {
      * @param {String} type
      * @param {Object} parameters
      */
-    createCustomConstraint(modelName, name, type, parameters): Promise<any> {
+    createCustomConstraint(modelName: string, name: string, type: string, parameters: string): Promise<any> {
         return this.customModelApi.createCustomConstraint(modelName, name, type, parameters);
     }
 
@@ -85,7 +85,7 @@ export class CustomModelApi  {
      * Activate the custom model
      * @param {String} modelName
      */
-    activateCustomModel(modelName): Promise<any> {
+    activateCustomModel(modelName: string): Promise<any> {
         return this.customModelApi.activateCustomModel(modelName);
     }
 
@@ -93,7 +93,7 @@ export class CustomModelApi  {
      * Deactivate the custom model
      * @param {String} modelName
      */
-    deactivateCustomModel(modelName): Promise<any> {
+    deactivateCustomModel(modelName: string): Promise<any> {
         return this.customModelApi.deactivateCustomModel(modelName);
     }
 
@@ -103,7 +103,7 @@ export class CustomModelApi  {
      * @param {String} aspectName
      * @param {Object} properties
      */
-    addPropertyToAspect(modelName, aspectName, properties): Promise<any> {
+    addPropertyToAspect(modelName: string, aspectName: string, properties: any[]): Promise<any> {
         return this.customModelApi.addPropertyToAspect(modelName, aspectName, properties);
     }
 
@@ -114,7 +114,7 @@ export class CustomModelApi  {
      * @param {Object} properties
      * @param {String} aspectName
      */
-    addPropertyToType(modelName, typeName, properties, aspectName): Promise<any> {
+    addPropertyToType(modelName: string, typeName: string, properties?: any[], aspectName?: string): Promise<any> {
         return this.customModelApi.addPropertyToType(modelName, typeName, properties, aspectName);
     }
 
@@ -125,7 +125,7 @@ export class CustomModelApi  {
      * @param {String} namespaceUri
      * @param {String} namespacePrefix
      */
-    updateCustomModel(modelName, description, namespaceUri, namespacePrefix): Promise<any> {
+    updateCustomModel(modelName: string, description?: string, namespaceUri?: string, namespacePrefix?: string): Promise<any> {
         return this.customModelApi.updateCustomModel(modelName, description, namespaceUri, namespacePrefix);
     }
 
@@ -137,7 +137,7 @@ export class CustomModelApi  {
      * @param {String} parentName
      * @param {String} title
      */
-    updateCustomType(modelName, typeName, description, parentName, title): Promise<any> {
+    updateCustomType(modelName: string, typeName: string, description: string, parentName: string, title: string): Promise<any> {
         return this.customModelApi.updateCustomType(modelName, typeName, description, parentName, title);
     }
 
@@ -149,7 +149,7 @@ export class CustomModelApi  {
      * @param {String} parentName
      * @param {String} title
      */
-    updateCustomAspect(modelName, aspectName, description, parentName, title): Promise<any> {
+    updateCustomAspect(modelName: string, aspectName: string, description: string, parentName: string, title: string): Promise<any> {
         return this.customModelApi.updateCustomAspect(modelName, aspectName, description, parentName, title);
     }
 
@@ -165,7 +165,7 @@ export class CustomModelApi  {
      * @param {String} modelName
      * @param {Object} queryParams
      */
-    getCustomModel(modelName, queryParamsInput): Promise<any> {
+    getCustomModel(modelName: string, queryParamsInput?:any): Promise<any> {
         return this.customModelApi.getCustomModel(modelName, queryParamsInput);
     }
 
@@ -173,7 +173,7 @@ export class CustomModelApi  {
      * Get all custom model types
      * @param {String} modelName
      */
-    getAllCustomType(modelName): Promise<any> {
+    getAllCustomType(modelName: string): Promise<any> {
         return this.customModelApi.getAllCustomType(modelName);
     }
 
@@ -183,8 +183,8 @@ export class CustomModelApi  {
      * @param {String} typeName
      * @param {Object} queryParams
      */
-    getCustomType(modelName, typeName, queryParamsInput): Promise<any> {
-        return this.customModelApi.getCustomType(modelName, typeName, queryParamsInput);
+    getCustomType(modelName: string, typeName:string, queryParamsInpu?:any): Promise<any> {
+        return this.customModelApi.getCustomType(modelName, typeName, queryParamsInpu);
     }
 
     /**
@@ -192,7 +192,7 @@ export class CustomModelApi  {
      * @param {String} modelName
      * @param {Object} queryParamsInput
      */
-    getAllCustomAspect(modelName, queryParamsInput): Promise<any> {
+    getAllCustomAspect(modelName: string, queryParamsInput?: any): Promise<any> {
         return this.customModelApi.getAllCustomAspect(modelName, queryParamsInput);
     }
 
@@ -202,7 +202,7 @@ export class CustomModelApi  {
      * @param {String} aspectName
      * @param {Object} queryParamsInput
      */
-    getCustomAspect(modelName, aspectName, queryParamsInput): Promise<any> {
+    getCustomAspect(modelName: string, aspectName: string, queryParamsInput?:any): Promise<any> {
         return this.customModelApi.getCustomAspect(modelName, aspectName, queryParamsInput);
     }
 
@@ -211,8 +211,8 @@ export class CustomModelApi  {
      * @param {String} modelName
      * @param {Object} queryParams
      */
-    getAllCustomConstraints(modelName, queryParamsInput): Promise<any> {
-        return this.customModelApi. getAllCustomConstraints(modelName, queryParamsInput);
+    getAllCustomConstraints(modelName: string, queryParamsInput?:any): Promise<any> {
+        return this.customModelApi.getAllCustomConstraints(modelName, queryParamsInput);
     }
 
     /**
@@ -221,7 +221,7 @@ export class CustomModelApi  {
      * @param {String} constraintName
      * @param {Object} queryParams
      */
-    getCustomConstraints(modelName, constraintName, queryParamsInput): Promise<any> {
+    getCustomConstraints(modelName: string, constraintName: string, queryParamsInput?:any): Promise<any> {
         return this.customModelApi.getCustomConstraints(modelName, constraintName, queryParamsInput);
     }
 
@@ -229,7 +229,7 @@ export class CustomModelApi  {
      * Delete the given custom model
      * @param {String} modelName
      */
-    deleteCustomModel(modelName): Promise<any> {
+    deleteCustomModel(modelName: string): Promise<any> {
         return this.customModelApi.deleteCustomModel(modelName);
     }
 
@@ -238,7 +238,7 @@ export class CustomModelApi  {
      * @param {String} modelName
      * @param {String} typeName
      */
-    deleteCustomType(modelName, typeName): Promise<any> {
+    deleteCustomType(modelName: string, typeName: string): Promise<any> {
         return this.customModelApi.deleteCustomType(modelName, typeName);
     }
 

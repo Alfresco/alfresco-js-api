@@ -21,7 +21,7 @@ export class AlfrescoNode extends NodesApi {
      *
      * @returns {Promise} A promise with the file/folder data if resolved and {error} if rejected.
      */
-    getNodeInfo(nodeId, opts) {
+    getNodeInfo(nodeId, opts?: any) {
         return new Promise((resolve, reject) => {
             this.getNode(nodeId, opts).then(function (data) {
                 resolve(data.entry);
@@ -53,7 +53,7 @@ export class AlfrescoNode extends NodesApi {
      *
      * @returns {Promise} A promise that is resolved if the folder is created and {error} if rejected.
      */
-    createFolder(name, relativePath, nodeId, opts) {
+    createFolder(name, relativePath, nodeId, opts?: any) {
         nodeId = nodeId || '-root-';
         let nodeBody = {
             'name': name,
@@ -74,7 +74,7 @@ export class AlfrescoNode extends NodesApi {
      *
      * @returns {Promise} A promise that is resolved if the folder is created and {error} if rejected.
      */
-    createFolderAutoRename(name, relativePath, nodeId, opts) {
+    createFolderAutoRename(name, relativePath, nodeId, opts?: any) {
         let optAutoRename = { autoRename: true };
         opts = opts || {};
         opts = Object.assign(opts, optAutoRename);

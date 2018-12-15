@@ -18,6 +18,9 @@
 import { RenditionBody } from '../model/RenditionBody';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { RenditionsApi as NewRenditionsApi } from '../../../../api-new/content-rest-api/api/renditions.api';
+import { SharedlinksApi } from '../../../../api-new/content-rest-api/api/sharedlinks.api';
+import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
+import { RenditionEntry } from '../../../../api-new/content-rest-api/model/renditionEntry';
 
 /**
  * Renditions service.
@@ -35,9 +38,11 @@ import { RenditionsApi as NewRenditionsApi } from '../../../../api-new/content-r
 export class RenditionsApi {
 
     renditionsApi: NewRenditionsApi;
+    sharedlinksApi: SharedlinksApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.renditionsApi = new NewRenditionsApi(alfrescoApi);
+        this.sharedlinksApi = new SharedlinksApi(alfrescoApi);
     }
 
     /**
@@ -82,6 +87,18 @@ export class RenditionsApi {
      */
     getRenditions(nodeId: string): Promise<any> {
         return this.renditionsApi.listRenditions(nodeId);
+    }
+
+    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any> {
+        return this.sharedlinksApi.getSharedLinkRenditionContent(sharedId, renditionId, opts);
+    }
+
+    getSharedLinkRenditions(sharedId: string): Promise<any> {
+        return this.sharedlinksApi.listSharedLinkRenditions(sharedId);
+    }
+
+    getSharedLinkRendition(sharedId: string, renditionId: string): Promise<any> {
+        return this.sharedlinksApi.getSharedLinkRendition(sharedId, renditionId);
     }
 
 }

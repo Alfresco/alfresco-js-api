@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ClassPropertyDescription } from './ClassPropertyDescription';
+import { ClassPropertyDescription } from './classPropertyDescription';
 
 export class ClassDescription {
 

@@ -16,8 +16,9 @@
 */
 
 import { UserInfo } from './UserInfo';
+import { MinimalNode } from './MinimalNode';
 
-export class DeletedNode {
+export class DeletedNode  extends MinimalNode {
     archivedByUser?: UserInfo;
     archivedAt?: Date;
 }

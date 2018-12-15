@@ -210,7 +210,7 @@ export class ClassificationguidesApi extends BaseApi {
         * @param classificationGuideId The identifier for the classification guide
         * @return Promise<{}>
         */
-    deleteClassificationGuide(classificationGuideId: string): Promise<{} | ModelError> {
+    deleteClassificationGuide(classificationGuideId: string): Promise<any | ModelError> {
 
         let postBody = null;
 
@@ -247,7 +247,7 @@ export class ClassificationguidesApi extends BaseApi {
         * @param topicId The identifier for the topic
         * @return Promise<{}>
         */
-    deleteTopic(topicId: string): Promise<{} | ModelError> {
+    deleteTopic(topicId: string): Promise<any | ModelError> {
 
         let postBody = null;
 

@@ -120,7 +120,7 @@ export class TasksApi extends BaseApi {
         * @param type type
         * @return Promise<{}>
         */
-    deleteIdentityLinkUsingDELETE2(taskId: string, family: string, identityId: string, type: string): Promise<{}> {
+    deleteIdentityLinkUsingDELETE2(taskId: string, family: string, identityId: string, type: string): Promise<any> {
 
         let postBody = null;
 
@@ -169,7 +169,7 @@ export class TasksApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    deleteTaskUsingDELETE(taskId: string): Promise<{}> {
+    deleteTaskUsingDELETE(taskId: string): Promise<any> {
 
         let postBody = null;
 

@@ -32,7 +32,7 @@ export class IntegrationboxApi extends BaseApi {
     *
     * @return Promise<{}>
     */
-    confirmAuthorisationUsingGET1(): Promise<{}> {
+    confirmAuthorisationUsingGET1(): Promise<any> {
 
         let postBody = null;
 
@@ -66,7 +66,7 @@ export class IntegrationboxApi extends BaseApi {
         * @param credentials credentials
         * @return Promise<{}>
         */
-    createRepositoryAccountUsingPOST(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<{}> {
+    createRepositoryAccountUsingPOST(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
 
         let postBody = credentials;
 
@@ -107,7 +107,7 @@ export class IntegrationboxApi extends BaseApi {
         * @param userId userId
         * @return Promise<{}>
         */
-    deleteRepositoryAccountUsingDELETE(userId: number): Promise<{}> {
+    deleteRepositoryAccountUsingDELETE(userId: number): Promise<any> {
 
         let postBody = null;
 
@@ -213,7 +213,7 @@ export class IntegrationboxApi extends BaseApi {
         * @param userId userId
         * @return Promise<{}>
         */
-    getRepositoryAccountUsingGET(userId: number): Promise<{}> {
+    getRepositoryAccountUsingGET(userId: number): Promise<any> {
 
         let postBody = null;
 
@@ -251,7 +251,7 @@ export class IntegrationboxApi extends BaseApi {
         * @param credentials credentials
         * @return Promise<{}>
         */
-    updateRepositoryAccountUsingPUT(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<{}> {
+    updateRepositoryAccountUsingPUT(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
 
         let postBody = credentials;
 

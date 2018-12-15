@@ -40,7 +40,7 @@ Permanently deletes the deleted node **nodeId**.
     * @param nodeId The identifier of a node.
     * @return Promise<{}>
     */
-    deleteDeletedNode(nodeId: string): Promise<{} | ModelError> {
+    deleteDeletedNode(nodeId: string): Promise<any | ModelError> {
 
         let postBody = null;
 
@@ -147,7 +147,7 @@ Permanently deletes the deleted node **nodeId**.
      (default to false)
         * @return Promise<{}>
         */
-    getArchivedNodeRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<{} | ModelError> {
+    getArchivedNodeRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = null;
 
@@ -261,7 +261,7 @@ Permanently deletes the deleted node **nodeId**.
 
         * @return Promise<{}>
         */
-    getDeletedNodeContent(nodeId: string, opts?: any): Promise<{} | ModelError> {
+    getDeletedNodeContent(nodeId: string, opts?: any): Promise<any | ModelError> {
         opts = opts || {};
         let postBody = null;
 

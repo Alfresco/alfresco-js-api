@@ -137,7 +137,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param commentId The identifier of a comment.
         * @return Promise<{}>
         */
-    deleteComment(nodeId: string, commentId: string): Promise<{} | ModelError> {
+    deleteComment(nodeId: string, commentId: string): Promise<any | ModelError> {
 
         let postBody = null;
 
