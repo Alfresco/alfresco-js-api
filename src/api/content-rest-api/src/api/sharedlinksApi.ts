@@ -14,6 +14,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+
 import { SharedLinkBody } from '../model/SharedLinkBody';
 import { EmailSharedLinkBody } from '../model/EmailSharedLinkBody';
 import { SharedlinksApi as NewSharedlinksApi } from '../../../../api-new/content-rest-api/api/sharedlinks.api';

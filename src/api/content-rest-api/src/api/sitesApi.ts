@@ -16,7 +16,8 @@
 */
 
 import { SiteMemberBody } from '../model/SiteMemberBody';
-import { SiteBody } from '../model/SiteBody';
+import { SiteBodyUpdate } from '../../../../api-new/content-rest-api/model/siteBodyUpdate';
+import { SiteBodyCreate } from '../../../../api-new/content-rest-api/model/siteBodyCreate';
 import { SiteMemberRoleBody } from '../model/SiteMemberRoleBody';
 import { SitesApi as NewSitesApi } from '../../../../api-new/content-rest-api/api/sites.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
@@ -62,8 +63,8 @@ export class SitesApi {
      * @param {Boolean} opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user&#39;s site favorites. (default to false)
      * data is of type: {module:model/SiteEntry}
      */
-    createSite(siteBody: SiteBody, opts?: any): Promise<any> {
-        return this.sitesApi.createSite(<any>siteBody, opts);
+    createSite(siteBody: SiteBodyCreate, opts?: any): Promise<any> {
+        return this.sitesApi.createSite(<any>SiteBodyCreate, opts);
     }
 
     /**
@@ -75,8 +76,8 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    updateSite(siteId: string, siteBody: SiteBody, opts?: any): Promise<any> {
-        return this.sitesApi.updateSite(siteId, <any>siteBody, opts);
+    updateSite(siteId: string, siteBody: SiteBodyUpdate, opts?: any): Promise<any> {
+        return this.sitesApi.updateSite(siteId, <any>SiteBodyUpdate, opts);
     }
 
     /**

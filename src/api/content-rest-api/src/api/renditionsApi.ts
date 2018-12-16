@@ -19,8 +19,6 @@ import { RenditionBody } from '../model/RenditionBody';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { RenditionsApi as NewRenditionsApi } from '../../../../api-new/content-rest-api/api/renditions.api';
 import { SharedlinksApi } from '../../../../api-new/content-rest-api/api/sharedlinks.api';
-import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
-import { RenditionEntry } from '../../../../api-new/content-rest-api/model/renditionEntry';
 
 /**
  * Renditions service.

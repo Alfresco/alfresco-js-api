@@ -29,8 +29,8 @@ import { SEARCH_APIS } from './api-new/search-rest-api/api';
 import { AUTH_APIS } from './api-new/auth-rest-api/api';
 
 import { ContentApi } from './contentApi';
-import { AlfrescoNode } from './api/alfrescoNode';
 import { AlfrescoUpload } from './api/alfrescoUpload';
+import { NodesApi } from './api/content-rest-api/src/api/nodesApi';
 
 export class AlfrescoApiCompatibility extends AlfrescoApi {
 
@@ -45,8 +45,8 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
     activiti: any = {};
 
     content: ContentApi;
-    node: AlfrescoNode;
-    nodes: AlfrescoNode;
+    node: NodesApi;
+    nodes: NodesApi;
     upload: AlfrescoUpload;
 
     constructor(config: AlfrescoApiConfig) {
@@ -77,7 +77,8 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
         this._instantiateNewObjects(GS_CORE_APIS, this.gsCore);
         this._instantiateNewObjects(GS_CLASSIFICATION_APIS, this.gsClassification);
 
-        this.nodes = this.node = new AlfrescoNode(this);
+        this.nodes = this.node = this.core.nodesApi;
+
         this.content = new ContentApi(this.ecmAuth, this.ecmClient);
         this.upload = new AlfrescoUpload(this);
         this.webScript = this.core.webscriptApi;

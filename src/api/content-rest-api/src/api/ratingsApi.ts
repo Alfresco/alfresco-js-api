@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { RatingBody } from '../model/RatingBody';
 import { RatingsApi as NewRatingsApi } from '../../../../api-new/content-rest-api/api/ratings.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
@@ -76,8 +75,8 @@ export class RatingsApi  {
      * @param {module:model/RatingBody} ratingBody For \&quot;myRating\&quot; the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.\n\nFor example, to \&quot;like\&quot; a file the following body would be used:\n\n  &#x60;&#x60;&#x60;JSON\n    {\n      \&quot;id\&quot;: \&quot;likes\&quot;,\n      \&quot;myRating\&quot;: true\n    }\n  &#x60;&#x60;&#x60;\n
      * data is of type: {module:model/RatingEntry}
      */
-    rate(nodeId: string, ratingBody: RatingBody): Promise<any> {
-        return this.ratingsApi.createRating(nodeId, <any>ratingBody);
+    rate(nodeId: string, ratingBody: any): Promise<any> {
+        return this.ratingsApi.createRating(nodeId, ratingBody);
     }
 
     /**

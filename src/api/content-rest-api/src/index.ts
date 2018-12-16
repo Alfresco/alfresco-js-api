@@ -19,8 +19,8 @@ import { ChangesApi } from './api/changesApi';
 import { ChildAssociationsApi } from './api/childAssociationsApi';
 import { CommentsApi } from './api/commentsApi';
 import { FavoritesApi } from './api/favoritesApi';
+import { NodesApi } from './api/nodesApi';
 import { NetworksApi } from './api/networksApi';
-import { AlfrescoNode } from '../../alfrescoNode';
 import { RatingsApi } from './api/ratingsApi';
 import { PeopleApi } from './api/peopleApi';
 import { RenditionsApi } from './api/renditionsApi';
@@ -30,18 +30,17 @@ import { SitesApi } from './api/sitesApi';
 import { TagsApi } from './api/tagsApi';
 import { WebscriptApi } from './api/webscriptApi';
 import { DownloadsApi } from './api/downloadsApi';
-import { VersionsApi } from './api/versionsApi';
+import { VersionsApi } from './api/versionsApi'
 import { ClassesApi } from './api/classesApi';
 import { GroupsApi } from './api/groupsApi';
 import { CustomModelApi } from './api/customModelApi';
 
+import { NodesApi as _NodesApi } from './api/nodesApi';
 import { ChangesApi as _ChangesApi } from './api/changesApi';
 import { ChildAssociationsApi as _ChildAssociationsApi } from './api/childAssociationsApi';
 import { CommentsApi as _CommentsApi } from './api/commentsApi';
 import { FavoritesApi as _FavoritesApi } from './api/favoritesApi';
 import { NetworksApi as  _NetworksApi } from './api/networksApi';
-import { AlfrescoNode as NodesApi } from '../../alfrescoNode';
-import { AlfrescoNode as _AlfrescoNode } from '../../alfrescoNode';
 import { RatingsApi as _RatingsApi } from './api/ratingsApi';
 import { PeopleApi as _PeopleApi } from './api/peopleApi';
 import { RenditionsApi as _RenditionsApi } from './api/renditionsApi';
@@ -51,11 +50,12 @@ import { SitesApi as _SitesApi } from './api/sitesApi';
 import { TagsApi as _TagsApi } from './api/tagsApi';
 import { WebscriptApi as _WebscriptApi } from './api/webscriptApi';
 import { DownloadsApi as _DownloadsApi } from './api/downloadsApi';
-import { VersionsApi as _VersionsApi } from './api/versionsApi';
+import { VersionsApi as _VersionsApi } from './api/versionsApi'
 import { ClassesApi as _ClassesApi } from './api/classesApi';
 import { GroupsApi as _GroupsApi } from './api/groupsApi';
 import { CustomModelApi as _CustomModelApi } from './api/customModelApi';
 import { ChildAssociationBody } from '../../../api-new/content-rest-api/model/childAssociationBody';
+import { PathElement } from '../../../api-new/content-rest-api/model/pathElement';
 
 export const CONTENT_LEGACY_APIS = [ChangesApi, ChildAssociationsApi, FavoritesApi, NetworksApi, NodesApi, CommentsApi, PeopleApi, RatingsApi, RenditionsApi, QueriesApi, SharedlinksApi, SitesApi, TagsApi, WebscriptApi, DownloadsApi, VersionsApi, ClassesApi, GroupsApi, CustomModelApi];
 
@@ -72,7 +72,7 @@ export namespace Core {
     export class NetworksApi extends _NetworksApi {
     }
 
-    export class NodesApi extends _AlfrescoNode {
+    export class NodesApi extends _NodesApi {
     }
 
     export class CommentsApi extends _CommentsApi {
@@ -125,7 +125,7 @@ export namespace Legacy {
         childAssociationsApi: ChildAssociationsApi;
         favoritesApi: FavoritesApi;
         networksApi: NetworksApi;
-        nodesApi: AlfrescoNode;
+        nodesApi: NodesApi;
         commentsApi: CommentsApi;
         peopleApi: PeopleApi;
         ratingsApi: RatingsApi;
@@ -153,3 +153,6 @@ export { NodeEntry as MinimalNodeEntity } from '../../../api-new/content-rest-ap
 export { DeletedNodeEntry as DeletedNodeEntity } from '../../../api-new/content-rest-api/model/deletedNodeEntry';
 export { Node as MinimalNode } from '../../../api-new/content-rest-api/model/node';
 export { Node as MinimalNodeEntryEntity } from '../../../api-new/content-rest-api/model/node';
+export { PathElement as PathElementEntity } from '../../../api-new/content-rest-api/model/pathElement';
+export { SiteBodyCreate as SiteBody } from '../../../api-new/content-rest-api/model/siteBodyCreate';
+export { GroupPaging as GroupsPaging } from '../../../api-new/content-rest-api/model/groupPaging';
