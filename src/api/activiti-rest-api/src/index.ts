@@ -15,131 +15,233 @@
 * limitations under the License.
 */
 
-export * from '../../../alfrescoApiClient';
-export * from './model/AbstractGroupRepresentation';
-export * from './model/AbstractRepresentation';
-export * from './model/AbstractUserRepresentation';
-export * from './model/AddGroupCapabilitiesRepresentation';
-export * from './model/AppDefinition';
-export * from './model/AppDefinitionPublishRepresentation';
-export * from './model/AppDefinitionRepresentation';
-export * from './model/AppDefinitionUpdateResultRepresentation';
-export * from './model/AppModelDefinition';
-export * from './model/ArrayNode';
-export * from './model/BoxUserAccountCredentialsRepresentation';
-export * from './model/BulkUserUpdateRepresentation';
-export * from './model/ChangePasswordRepresentation';
-export * from './model/ChecklistOrderRepresentation';
-export * from './model/CommentRepresentation';
-export * from './model/CompleteFormRepresentation';
-export * from './model/ConditionRepresentation';
-export * from './model/CreateEndpointBasicAuthRepresentation';
-export * from './model/CreateProcessInstanceRepresentation';
-export * from './model/CreateTenantRepresentation';
-export * from './model/EndpointBasicAuthRepresentation';
-export * from './model/EndpointConfigurationRepresentation';
-export * from './model/EndpointRequestHeaderRepresentation';
-export * from './model/EntityAttributeScopeRepresentation';
-export * from './model/EntityVariableScopeRepresentation';
-export * from './model/File';
-export * from './model/FormDefinitionRepresentation';
-export * from './model/FormFieldRepresentation';
-export * from './model/FormJavascriptEventRepresentation';
-export * from './model/FormOutcomeRepresentation';
-export * from './model/FormRepresentation';
-export * from './model/FormSaveRepresentation';
-export * from './model/FormScopeRepresentation';
-export * from './model/FormTabRepresentation';
-export * from './model/FormValueRepresentation';
-export * from './model/GroupCapabilityRepresentation';
-export * from './model/GroupRepresentation';
-export * from './model/ImageUploadRepresentation';
-export * from './model/LayoutRepresentation';
-export * from './model/LightAppRepresentation';
-export * from './model/LightGroupRepresentation';
-export * from './model/LightTenantRepresentation';
-export * from './model/LightUserRepresentation';
-export * from './model/MaplongListstring';
-export * from './model/MapstringListEntityVariableScopeRepresentation';
-export * from './model/MapstringListVariableScopeRepresentation';
-export * from './model/Mapstringstring';
-export * from './model/ModelRepresentation';
-export * from './model/ObjectNode';
-export * from './model/OptionRepresentation';
-export * from './model/ProcessFilterRequestRepresentation';
-export * from './model/ProcessInstanceFilterRepresentation';
-export * from './model/ProcessInstanceFilterRequestRepresentation';
-export * from './model/ProcessInstanceRepresentation';
-export * from './model/ProcessInstanceVariableRepresentation';
-export * from './model/ProcessScopeIdentifierRepresentation';
-export * from './model/ProcessScopeRepresentation';
-export * from './model/ProcessScopesRequestRepresentation';
-export * from './model/PublishIdentityInfoRepresentation';
-export * from './model/RelatedContentRepresentation';
-export * from './model/ResetPasswordRepresentation';
-export * from './model/RestVariable';
-export * from './model/ResultListDataRepresentation';
-export * from './model/RuntimeAppDefinitionSaveRepresentation';
-export * from './model/SaveFormRepresentation';
-export * from './model/SyncLogEntryRepresentation';
-export * from './model/SystemPropertiesRepresentation';
-export * from './model/TaskFilterRepresentation';
-export * from './model/TaskFilterRequestRepresentation';
-export * from './model/TaskQueryRequestRepresentation';
-export * from './model/TaskRepresentation';
-export * from './model/TaskUpdateRepresentation';
-export * from './model/TenantEvent';
-export * from './model/TenantRepresentation';
-export * from './model/UserAccountCredentialsRepresentation';
-export * from './model/UserActionRepresentation';
-export * from './model/UserFilterOrderRepresentation';
-export * from './model/UserProcessInstanceFilterRepresentation';
-export * from './model/UserRepresentation';
-export * from './model/UserTaskFilterRepresentation';
-export * from './model/ValidationErrorRepresentation';
-export * from './model/VariableScopeRepresentation';
-export * from './api/AboutApi';
-export * from './api/AdminEndpointsApi';
-export * from './api/AdminGroupsApi';
-export * from './api/AdminTenantsApi';
-export * from './api/AdminUsersApi';
-export * from './api/AlfrescoApi';
-export * from './api/AppsApi';
-export * from './api/AppsDefinitionApi';
-export * from './api/AppsRuntimeApi';
-export * from './api/CommentsApi';
-export * from './api/ContentApi';
-export * from './api/ContentRenditionApi';
-export * from './api/EditorApi';
-export * from './api/GroupsApi';
-export * from './api/IDMSyncApi';
-export * from './api/IntegrationApi';
-export * from './api/IntegrationAccountApi';
-export * from './api/IntegrationAlfrescoCloudApi';
-export * from './api/IntegrationAlfrescoOnPremiseApi';
-export * from './api/IntegrationBoxApi';
-export * from './api/IntegrationDriveApi';
-export * from './api/ModelBpmnApi';
-export * from './api/ModelJsonBpmnApi';
-export * from './api/ModelsApi';
-export * from './api/ModelsHistoryApi';
-export * from './api/ProcessApi';
-export * from './api/ProcessDefinitionsApi';
-export * from './api/ProcessDefinitionsFormApi';
-export * from './api/ProcessInstancesApi';
-export * from './api/ProcessInstancesInformationApi';
-export * from './api/ProcessInstancesListingApi';
-export * from './api/ProcessInstanceVariablesApi';
-export * from './api/ProcessScopeApi';
-export * from './api/ProfileApi';
-export * from './api/ScriptFileApi';
-export * from './api/SystemPropertiesApi';
-export * from './api/TaskApi';
-export * from './api/TaskActionsApi';
-export * from './api/TaskCheckListApi';
-export * from './api/TaskFormsApi';
-export * from './api/TemporaryApi';
-export * from './api/UserApi';
-export * from './api/UserFiltersApi';
-export * from './api/UsersWorkflowApi';
-export * from './api/ReportApi';
+import { AboutApi } from './api/AboutApi';
+import { AlfrescoApiActiviti  as AlfrescoApi } from './api/AlfrescoApi';
+import { AdminEndpointsApi } from './api/AdminEndpointsApi';
+import { AdminGroupsApi } from './api/AdminGroupsApi';
+import { AdminTenantsApi } from './api/AdminTenantsApi';
+import { AdminUsersApi } from './api/AdminUsersApi';
+import { AppsApi } from './api/AppsApi';
+import { AppsDefinitionApi } from './api/AppsDefinitionApi';
+import { AppsRuntimeApi } from './api/AppsRuntimeApi';
+import { CommentsApi } from './api/CommentsApi';
+import { ContentApi } from './api/ContentApi';
+import { ContentRenditionApi } from './api/ContentRenditionApi';
+import { EditorApi } from './api/EditorApi';
+import { GroupsApi } from './api/GroupsApi';
+import { IDMSyncApi } from './api/IDMSyncApi';
+import { IntegrationAccountApi } from './api/IntegrationAccountApi';
+import { IntegrationAlfrescoCloudApi } from './api/IntegrationAlfrescoCloudApi';
+import { IntegrationAlfrescoOnPremiseApi } from './api/IntegrationAlfrescoOnPremiseApi';
+import { IntegrationBoxApi } from './api/IntegrationBoxApi';
+import { IntegrationDriveApi } from './api/IntegrationDriveApi';
+import { ModelBpmnApi } from './api/ModelBpmnApi';
+import { ModelJsonBpmnApi } from './api/ModelJsonBpmnApi';
+import { ModelsApi } from './api/ModelsApi';
+import { ModelsHistoryApi } from './api/ModelsHistoryApi';
+import { ProcessApi } from './api/ProcessApi';
+import { ProcessDefinitionsApi } from './api/ProcessDefinitionsApi';
+import { ProcessDefinitionsFormApi } from './api/ProcessDefinitionsFormApi';
+import { ProcessInstancesApi } from './api/ProcessInstancesApi';
+import { ProcessInstancesInformationApi } from './api/ProcessInstancesInformationApi';
+import { ProcessInstancesListingApi } from './api/ProcessInstancesListingApi';
+import { ProcessInstanceVariablesApi } from './api/ProcessInstanceVariablesApi';
+import { ProcessScopeApi } from './api/ProcessScopeApi';
+import { ProfileApi } from './api/ProfileApi';
+import { ScriptFileApi } from './api/ScriptFileApi';
+import { SystemPropertiesApi } from './api/SystemPropertiesApi';
+import { TaskApi } from './api/TaskApi';
+import { TaskActionsApi } from './api/TaskActionsApi';
+import { TaskCheckListApi } from './api/TaskCheckListApi';
+import { TaskFormsApi } from './api/TaskFormsApi';
+import { TemporaryApi } from './api/TemporaryApi';
+import { UserApi } from './api/UserApi';
+import { UserFiltersApi } from './api/UserFiltersApi';
+import { UsersWorkflowApi } from './api/UsersWorkflowApi';
+import { ReportApi } from './api/ReportApi';
+
+import { AlfrescoApiActiviti as _AlfrescoApi } from './api/AlfrescoApi';
+import { AboutApi as _AboutApi } from './api/AboutApi';
+import { AdminEndpointsApi as _AdminEndpointsApi } from './api/AdminEndpointsApi';
+import { AdminGroupsApi as _AdminGroupsApi } from './api/AdminGroupsApi';
+import { AdminTenantsApi as _AdminTenantsApi } from './api/AdminTenantsApi';
+import { AdminUsersApi as _AdminUsersApi } from './api/AdminUsersApi';
+import { AppsApi as _AppsApi } from './api/AppsApi';
+import { AppsDefinitionApi as _AppsDefinitionApi } from './api/AppsDefinitionApi';
+import { AppsRuntimeApi as _AppsRuntimeApi } from './api/AppsRuntimeApi';
+import { CommentsApi as _CommentsApi } from './api/CommentsApi';
+import { ContentApi as _ContentApi } from './api/ContentApi';
+import { ContentRenditionApi as _ContentRenditionApi } from './api/ContentRenditionApi';
+import { EditorApi as _EditorApi } from './api/EditorApi';
+import { GroupsApi as _GroupsApi } from './api/GroupsApi';
+import { IDMSyncApi as _IDMSyncApi } from './api/IDMSyncApi';
+import { IntegrationAccountApi as _IntegrationAccountApi } from './api/IntegrationAccountApi';
+import { IntegrationAlfrescoCloudApi as _IntegrationAlfrescoCloudApi } from './api/IntegrationAlfrescoCloudApi';
+import { IntegrationAlfrescoOnPremiseApi as _IntegrationAlfrescoOnPremiseApi } from './api/IntegrationAlfrescoOnPremiseApi';
+import { IntegrationBoxApi as _IntegrationBoxApi } from './api/IntegrationBoxApi';
+import { IntegrationDriveApi as _IntegrationDriveApi } from './api/IntegrationDriveApi';
+import { ModelBpmnApi as _ModelBpmnApi } from './api/ModelBpmnApi';
+import { ModelJsonBpmnApi as _ModelJsonBpmnApi } from './api/ModelJsonBpmnApi';
+import { ModelsApi as _ModelsApi } from './api/ModelsApi';
+import { ModelsHistoryApi as _ModelsHistoryApi } from './api/ModelsHistoryApi';
+import { ProcessApi as _ProcessApi } from './api/ProcessApi';
+import { ProcessDefinitionsApi as _ProcessDefinitionsApi } from './api/ProcessDefinitionsApi';
+import { ProcessDefinitionsFormApi as _ProcessDefinitionsFormApi } from './api/ProcessDefinitionsFormApi';
+import { ProcessInstancesApi as _ProcessInstancesApi } from './api/ProcessInstancesApi';
+import { ProcessInstancesInformationApi as _ProcessInstancesInformationApi } from './api/ProcessInstancesInformationApi';
+import { ProcessInstancesListingApi as _ProcessInstancesListingApi } from './api/ProcessInstancesListingApi';
+import { ProcessInstanceVariablesApi as _ProcessInstanceVariablesApi } from './api/ProcessInstanceVariablesApi';
+import { ProcessScopeApi as _ProcessScopeApi } from './api/ProcessScopeApi';
+import { ProfileApi as _ProfileApi } from './api/ProfileApi';
+import { ScriptFileApi as _ScriptFileApi } from './api/ScriptFileApi';
+import { SystemPropertiesApi as _SystemPropertiesApi } from './api/SystemPropertiesApi';
+import { TaskApi as _TaskApi } from './api/TaskApi';
+import { TaskActionsApi as _TaskActionsApi } from './api/TaskActionsApi';
+import { TaskCheckListApi as _TaskCheckListApi } from './api/TaskCheckListApi';
+import { TaskFormsApi as _TaskFormsApi } from './api/TaskFormsApi';
+import { TemporaryApi as _TemporaryApi } from './api/TemporaryApi';
+import { UserApi as _UserApi } from './api/UserApi';
+import { UserFiltersApi as _UserFiltersApi } from './api/UserFiltersApi';
+import { UsersWorkflowApi as _UsersWorkflowApi } from './api/UsersWorkflowApi';
+import { ReportApi as _ReportApi } from './api/ReportApi';
+
+export const APS_LEGACY_APIS = [AlfrescoApi, AboutApi, AdminEndpointsApi, AdminGroupsApi, AdminTenantsApi,
+    AdminUsersApi, AppsApi, AppsDefinitionApi, AppsRuntimeApi, CommentsApi, ContentApi,
+    ContentRenditionApi, EditorApi, GroupsApi, IDMSyncApi, IntegrationAccountApi, IntegrationAlfrescoCloudApi, IntegrationAlfrescoOnPremiseApi,
+    IntegrationBoxApi, IntegrationDriveApi, ModelBpmnApi, ModelJsonBpmnApi,
+    ModelsApi, ModelsHistoryApi, ProcessApi, ProcessDefinitionsApi, ProcessDefinitionsFormApi, ProcessInstancesApi, ProcessInstancesInformationApi, ProcessInstancesListingApi, ProcessInstanceVariablesApi, ProcessScopeApi, ProfileApi, ScriptFileApi, SystemPropertiesApi, TaskApi,
+    TaskActionsApi, TaskCheckListApi, TaskFormsApi, TemporaryApi, UserApi, UserFiltersApi, UsersWorkflowApi, ReportApi];
+
+export namespace Activiti {
+    export class AlfrescoApi extends _AlfrescoApi {
+    }
+
+    export class AboutApi extends _AboutApi {
+    }
+
+    export class AdminEndpointsApi extends _AdminEndpointsApi {
+    }
+
+    export class AdminGroupsApi extends _AdminGroupsApi {
+    }
+
+    export class AdminTenantsApi extends _AdminTenantsApi {
+    }
+
+    export class AdminUsersApi extends _AdminUsersApi {
+    }
+
+    export class AppsApi extends _AppsApi {
+    }
+
+    export class AppsDefinitionApi extends _AppsDefinitionApi {
+    }
+
+    export class AppsRuntimeApi extends _AppsRuntimeApi {
+    }
+
+    export class CommentsApi extends _CommentsApi {
+    }
+
+    export class ContentApi extends _ContentApi {
+    }
+
+    export class ContentRenditionApi extends _ContentRenditionApi {
+    }
+
+    export class EditorApi extends _EditorApi {
+    }
+
+    export class GroupsApi extends _GroupsApi {
+    }
+
+    export class IDMSyncApi extends _IDMSyncApi {
+    }
+
+    export class IntegrationAccountApi extends _IntegrationAccountApi {
+    }
+
+    export class IntegrationAlfrescoCloudApi extends _IntegrationAlfrescoCloudApi {
+    }
+
+    export class IntegrationAlfrescoOnPremiseApi extends _IntegrationAlfrescoOnPremiseApi {
+    }
+
+    export class IntegrationBoxApi extends _IntegrationBoxApi {
+    }
+
+    export class IntegrationDriveApi extends _IntegrationDriveApi {
+    }
+
+    export class ModelBpmnApi extends _ModelBpmnApi {
+    }
+
+    export class ModelJsonBpmnApi extends _ModelJsonBpmnApi {
+    }
+
+    export class ModelsApi extends _ModelsApi {
+    }
+
+    export class ModelsHistoryApi extends _ModelsHistoryApi {
+    }
+
+    export class ProcessApi extends _ProcessApi {
+    }
+
+    export class ProcessDefinitionsApi extends _ProcessDefinitionsApi {
+    }
+
+    export class ProcessDefinitionsFormApi extends _ProcessDefinitionsFormApi {
+    }
+
+    export class ProcessInstancesApi extends _ProcessInstancesApi {
+    }
+
+    export class ProcessInstancesInformationApi extends _ProcessInstancesInformationApi {
+    }
+
+    export class ProcessInstancesListingApi extends _ProcessInstancesListingApi {
+    }
+
+    export class ProcessInstanceVariablesApi extends _ProcessInstanceVariablesApi {
+    }
+
+    export class ProcessScopeApi extends _ProcessScopeApi {
+    }
+
+    export class ProfileApi extends _ProfileApi {
+    }
+
+    export class ScriptFileApi extends _ScriptFileApi {
+    }
+
+    export class SystemPropertiesApi extends _SystemPropertiesApi {
+    }
+
+    export class TaskApi extends _TaskApi {
+    }
+
+    export class TaskActionsApi extends _TaskActionsApi {
+    }
+
+    export class TaskCheckListApi extends _TaskCheckListApi {
+    }
+
+    export class TaskFormsApi extends _TaskFormsApi {
+    }
+
+    export class TemporaryApi extends _TemporaryApi {
+    }
+
+    export class UserApi extends _UserApi {
+    }
+
+    export class UserFiltersApi extends _UserFiltersApi {
+    }
+
+    export class UsersWorkflowApi extends _UsersWorkflowApi {
+    }
+
+    export class ReportApi extends _ReportApi {
+    }
+}

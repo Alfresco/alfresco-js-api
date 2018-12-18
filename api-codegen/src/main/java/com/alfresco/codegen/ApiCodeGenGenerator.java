@@ -222,6 +222,14 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
         if (objs != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) objs.get("operation");
             for ( CodegenOperation operation : ops ) {
+
+                operation.nickname = operation.nickname.replace("UsingPOST", "").replace("UsingPOST_1", "");
+                operation.nickname = operation.nickname.replace("UsingGET", "").replace("UsingGET_1", "");
+                operation.nickname = operation.nickname.replace("UsingDELETE", "").replace("UsingDELETE_1", "");
+                operation.nickname = operation.nickname.replace("UsingPUT", "").replace("UsingPUT_1", "");
+                System.out.println("operation.nickname  " + operation.nickname);
+
+
                 List<String> argList = new ArrayList<String>();
                 boolean hasOptionalParams = false;
                 for ( CodegenParameter p : operation.allParams ) {

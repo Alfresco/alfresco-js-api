@@ -106,7 +106,7 @@
   "bundlesize": [
     {
       "path": "./dist/global/alfresco-js-api.umd.js",
-      "maxSize": "75 kb"
+      "maxSize": "85 kb"
     }
   ],
   "keywords": [

@@ -31,30 +31,9 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
  * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
  * if unspecified.
  */
-export class WebscriptApi {
-
-    webscriptApi: NewWebscriptApi;
+export class WebscriptApi  extends NewWebscriptApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.webscriptApi = new NewWebscriptApi(alfrescoApi);
-    }
-
-
-    /**
-     * Call a get on a  Web Scripts see https://wiki.alfresco.com/wiki/Web_Scripts for more details about Web Scripts
-     * Url syntax definition : http[s]://<host>:<port>/[<contextPath>/]/<servicePath>[/<scriptPath>][?<scriptArgs>]
-     * example: http://localhost:8081/share/service/mytasks?priority=1
-     *
-     * @param {String} httpMethod  GET, POST, PUT and DELETE
-     * @param {String} scriptPath
-     * @param {Object} scriptArgs
-     * @param {String} contextRoot default value alfresco
-     * @param {String} servicePath default value service
-     * @param {String} postBody
-     *
-     * @returns {Promise} A promise that is resolved return the webScript data and {error} if rejected.
-     */
-    executeWebScript(httpMethod: string, scriptPath: string, scriptArgs: string, contextRoot: string, servicePath: string, postBody: any): Promise<any> {
-        return this.webscriptApi.executeWebScript(httpMethod, scriptPath, scriptArgs, contextRoot, servicePath, postBody);
+        this.apiClient = alfrescoApi.ecmClient;
     }
 }

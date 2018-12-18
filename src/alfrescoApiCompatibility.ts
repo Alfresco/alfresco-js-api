@@ -18,10 +18,10 @@
 import { AlfrescoApi } from './alfrescoApi';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
-const AlfrescoCoreRestApi = require('./api/content-rest-api/src/index');
 
-// import { APS_APIS  } from './api-new/activiti-rest-api/api/api';
-import { Legacy } from './api/content-rest-api/src';
+import { Legacy } from './api/legacy';
+import { CONTENT_LEGACY_APIS } from './api/content-rest-api/src';
+import { APS_LEGACY_APIS } from './api/activiti-rest-api/src';
 import { DISCOVERY_APIS } from './api-new/discovery-rest-api/api';
 import { GS_CLASSIFICATION_APIS } from './api-new/gs-classification-rest-api/api';
 import { GS_CORE_APIS } from './api-new/gs-core-rest-api/api';
@@ -29,25 +29,25 @@ import { SEARCH_APIS } from './api-new/search-rest-api/api';
 import { AUTH_APIS } from './api-new/auth-rest-api/api';
 
 import { ContentApi } from './contentApi';
+import { WebscriptApi } from './api-new/content-rest-api/api/webscript.api';
 import { AlfrescoUpload } from './api/alfrescoUpload';
 import { NodesApi } from './api/content-rest-api/src/api/nodesApi';
 
 export class AlfrescoApiCompatibility extends AlfrescoApi {
 
     core: Legacy.Core = <Legacy.Core> {};
-    coreStore: any;
-
+    activiti: Legacy.Activiti = <Legacy.Activiti> {};
     auth: any = {};
     search: any = {};
     gsCore: any = {};
     gsClassification: any = {};
     discovery: any = {};
-    activiti: any = {};
 
     content: ContentApi;
     node: NodesApi;
     nodes: NodesApi;
     upload: AlfrescoUpload;
+    webScript: WebscriptApi;
 
     constructor(config: AlfrescoApiConfig) {
         super();
@@ -61,16 +61,8 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
     }
 
     initObjects() {
-        //BPM
-        //AlfrescoActivitiApi.ApiClient.instance = this.bpmClient;
-        // this.activiti = {};
-        // this.activitiStore = AlfrescoActivitiApi;
-        // this._instantiateObjects(this.activitiStore, this.activiti);
-
-        //ECM
-        this.coreStore = AlfrescoCoreRestApi.CONTENT_LEGACY_APIS;
-
-        this._instantiateOldObjects(this.coreStore, this.core);
+        this._instantiateOldObjects(CONTENT_LEGACY_APIS, this.core);
+        this._instantiateNewObjects(APS_LEGACY_APIS, this.activiti);
         this._instantiateNewObjects(AUTH_APIS, this.auth);
         this._instantiateNewObjects(SEARCH_APIS, this.search);
         this._instantiateNewObjects(DISCOVERY_APIS, this.discovery);
@@ -100,7 +92,6 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
             let nameObj = this._lowerFirst(currentClass.name);
 
             moduleCopy[nameObj] = new currentClass(this);
-            // moduleCopy[nameObj].init(this);
         });
     }
 
@@ -108,13 +99,4 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
         return text.charAt(0).toLowerCase() + text.slice(1);
     }
 
-    _stringToObject(nameClass, module) {
-        try {
-            if (typeof module[nameClass] === 'function') {
-                return new module[nameClass]();
-            }
-        } catch (error) {
-            console.log(nameClass + '  ' + error);
-        }
-    }
 }

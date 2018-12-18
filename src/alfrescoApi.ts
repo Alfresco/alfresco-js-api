@@ -17,7 +17,6 @@
 
 import * as  _Emitter from 'event-emitter';
 
-import { ContentApi } from './contentApi';
 import { EcmAuth } from './ecmAuth';
 import { BpmAuth } from './bpmAuth';
 import { Oauth2Auth } from './oauth2Auth';
@@ -42,9 +41,6 @@ export class AlfrescoApi {
     oauth2Auth: Oauth2Auth;
     bpmAuth: BpmAuth;
     ecmAuth: EcmAuth;
-
-    content: ContentApi;
-    webScript: any;
 
     on = Emitter.on;
     off = Emitter.off;

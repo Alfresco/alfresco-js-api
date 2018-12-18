@@ -48,7 +48,7 @@ export class WebscriptApi extends BaseApi {
      *
      * @returns {Promise} A promise that is resolved return the webScript data and {error} if rejected.
      */
-    executeWebScript(httpMethod: string, scriptPath: string, scriptArgs: string, contextRoot: string, servicePath: string, postBody: any): Promise<any> {
+    executeWebScript(httpMethod: string, scriptPath: string, scriptArgs: string, contextRoot: string, servicePath: string, postBody?: any): Promise<any> {
         contextRoot = contextRoot || 'alfresco';
         servicePath = servicePath || 'service';
         postBody = postBody || null;
