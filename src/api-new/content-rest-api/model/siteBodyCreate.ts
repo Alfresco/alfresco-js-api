@@ -19,7 +19,7 @@ export class SiteBodyCreate {
     id?: string;
     title: string;
     description?: string;
-    visibility: SiteBodyCreate.VisibilityEnum;
+    visibility: SiteBodyCreate.VisibilityEnum | string;
 
     constructor(input?: any) {
 

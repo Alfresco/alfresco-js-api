@@ -26,9 +26,9 @@ import { BaseApi } from './base.api';
 export class SubmittedformsApi extends BaseApi {
     /**
     * List submissions for a form
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param formId formId
     * @param opts Optional parameters
     * @param opts.submittedBy submittedBy
@@ -36,7 +36,7 @@ export class SubmittedformsApi extends BaseApi {
     * @param opts.size size
     * @return Promise<ResultListDataRepresentationSubmittedFormRepresentation>
     */
-    getFormSubmittedFromsUsingGET(formId: number, opts?: any): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
+    getFormSubmittedFroms(formId: number, opts?: any): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -66,17 +66,17 @@ export class SubmittedformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/form-submitted-forms/{formId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List submissions for a process instance
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processId processId
         * @return Promise<ResultListDataRepresentationSubmittedFormRepresentation>
         */
-    getProcessSubmittedFromsUsingGET(processId: string): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
+    getProcessSubmittedFroms(processId: string): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
 
         let postBody = null;
 
@@ -103,17 +103,17 @@ export class SubmittedformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-submitted-forms/{processId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a form submission
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param submittedFormId submittedFormId
         * @return Promise<SubmittedFormRepresentation>
         */
-    getSubmittedFromUsingGET(submittedFormId: number): Promise<SubmittedFormRepresentation> {
+    getSubmittedFrom(submittedFormId: number): Promise<SubmittedFormRepresentation> {
 
         let postBody = null;
 
@@ -140,17 +140,17 @@ export class SubmittedformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/submitted-forms/{submittedFormId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get the submitted form for a task
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @return Promise<SubmittedFormRepresentation>
         */
-    getTaskSubmittedFromsUsingGET(taskId: string): Promise<SubmittedFormRepresentation> {
+    getTaskSubmittedFroms(taskId: string): Promise<SubmittedFormRepresentation> {
 
         let postBody = null;
 
@@ -177,7 +177,7 @@ export class SubmittedformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-submitted-form/{taskId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

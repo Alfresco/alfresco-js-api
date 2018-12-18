@@ -29,7 +29,7 @@ export class AboutApi extends BaseApi {
     *
     * @return Promise<{ [key: string]: string; }>
     */
-    getAppVersionUsingGET(): Promise<{ [key: string]: string; }> {
+    getAppVersion(): Promise<{ [key: string]: string; }> {
 
         let postBody = null;
 
@@ -52,7 +52,7 @@ export class AboutApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/app-version', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

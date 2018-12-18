@@ -29,13 +29,13 @@ import { BaseApi } from './base.api';
 export class UserfiltersApi extends BaseApi {
     /**
     * Create a process instance filter
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
     * @return Promise<UserProcessInstanceFilterRepresentation>
     */
-    createUserProcessInstanceFilterUsingPOST(userProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation> {
+    createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation> {
 
         let postBody = userProcessInstanceFilterRepresentation;
 
@@ -62,17 +62,17 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/processes', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Create a task filter
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userTaskFilterRepresentation userTaskFilterRepresentation
         * @return Promise<UserTaskFilterRepresentation>
         */
-    createUserTaskFilterUsingPOST(userTaskFilterRepresentation: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation> {
+    createUserTaskFilter(userTaskFilterRepresentation: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation> {
 
         let postBody = userTaskFilterRepresentation;
 
@@ -99,17 +99,17 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/tasks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete a process instance filter
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userFilterId userFilterId
         * @return Promise<{}>
         */
-    deleteUserProcessInstanceFilterUsingDELETE(userFilterId: number): Promise<any> {
+    deleteUserProcessInstanceFilter(userFilterId: number): Promise<any> {
 
         let postBody = null;
 
@@ -136,17 +136,17 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/processes/{userFilterId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete a task filter
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userFilterId userFilterId
         * @return Promise<{}>
         */
-    deleteUserTaskFilterUsingDELETE(userFilterId: number): Promise<any> {
+    deleteUserTaskFilter(userFilterId: number): Promise<any> {
 
         let postBody = null;
 
@@ -173,17 +173,17 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/tasks/{userFilterId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a process instance filter
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userFilterId userFilterId
         * @return Promise<UserProcessInstanceFilterRepresentation>
         */
-    getUserProcessInstanceFilterUsingGET(userFilterId: number): Promise<UserProcessInstanceFilterRepresentation> {
+    getUserProcessInstanceFilter(userFilterId: number): Promise<UserProcessInstanceFilterRepresentation> {
 
         let postBody = null;
 
@@ -210,18 +210,18 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/processes/{userFilterId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List process instance filters
-        *
+        * 
         * Returns filters for the current user, optionally filtered by *appId*.
-        *
+        * 
         * @param opts Optional parameters
         * @param opts.appId appId
         * @return Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation>
         */
-    getUserProcessInstanceFiltersUsingGET(opts?: any): Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation> {
+    getUserProcessInstanceFilters(opts?: any): Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -245,17 +245,17 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/processes', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a task filter
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userFilterId userFilterId
         * @return Promise<UserTaskFilterRepresentation>
         */
-    getUserTaskFilterUsingGET(userFilterId: number): Promise<UserTaskFilterRepresentation> {
+    getUserTaskFilter(userFilterId: number): Promise<UserTaskFilterRepresentation> {
 
         let postBody = null;
 
@@ -282,18 +282,18 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/tasks/{userFilterId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List task filters
-        *
+        * 
         * Returns filters for the current user, optionally filtered by *appId*.
-        *
+        * 
         * @param opts Optional parameters
         * @param opts.appId appId
         * @return Promise<ResultListDataRepresentationUserTaskFilterRepresentation>
         */
-    getUserTaskFiltersUsingGET(opts?: any): Promise<ResultListDataRepresentationUserTaskFilterRepresentation> {
+    getUserTaskFilters(opts?: any): Promise<ResultListDataRepresentationUserTaskFilterRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -317,17 +317,17 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/tasks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Re-order the list of user process instance filters
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param filterOrderRepresentation filterOrderRepresentation
         * @return Promise<{}>
         */
-    orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<any> {
+    orderUserProcessInstanceFilters(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<any> {
 
         let postBody = filterOrderRepresentation;
 
@@ -354,17 +354,17 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/processes', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Re-order the list of user task filters
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param filterOrderRepresentation filterOrderRepresentation
         * @return Promise<{}>
         */
-    orderUserTaskFiltersUsingPUT(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<any> {
+    orderUserTaskFilters(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<any> {
 
         let postBody = filterOrderRepresentation;
 
@@ -391,18 +391,18 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/tasks', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update a process instance filter
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userFilterId userFilterId
         * @param userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
         * @return Promise<UserProcessInstanceFilterRepresentation>
         */
-    updateUserProcessInstanceFilterUsingPUT(userFilterId: number, userProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation> {
+    updateUserProcessInstanceFilter(userFilterId: number, userProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation> {
 
         let postBody = userProcessInstanceFilterRepresentation;
 
@@ -433,18 +433,18 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/processes/{userFilterId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update a task filter
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userFilterId userFilterId
         * @param userTaskFilterRepresentation userTaskFilterRepresentation
         * @return Promise<UserTaskFilterRepresentation>
         */
-    updateUserTaskFilterUsingPUT(userFilterId: number, userTaskFilterRepresentation: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation> {
+    updateUserTaskFilter(userFilterId: number, userTaskFilterRepresentation: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation> {
 
         let postBody = userTaskFilterRepresentation;
 
@@ -475,7 +475,7 @@ export class UserfiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/filters/tasks/{userFilterId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

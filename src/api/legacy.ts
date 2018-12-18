@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { AlfrescoApiActiviti } from './activiti-rest-api/src/api/AlfrescoApi';
 import { ReportApi } from './activiti-rest-api/src/api/ReportApi';
 import { TaskActionsApi } from './activiti-rest-api/src/api/TaskActionsApi';
@@ -81,6 +80,7 @@ import { ChangesApi } from './content-rest-api/src/api/changesApi';
 import { SitesApi } from './content-rest-api/src/api/sitesApi';
 import { GroupsApi as GroupsApiCS } from './content-rest-api/src/api/groupsApi';
 import { ProcessInstanceQueryRepresentation } from '../api-new/activiti-rest-api/model/processInstanceQueryRepresentation';
+import { TaskQueryRepresentation } from '../api-new/activiti-rest-api/model/taskQueryRepresentation';
 
 export namespace Legacy {
     export interface Activiti {
@@ -168,4 +168,4 @@ export { SiteBodyCreate as SiteBody } from '../api-new/content-rest-api/model/si
 export { GroupPaging as GroupsPaging } from '../api-new/content-rest-api/model/groupPaging';
 
 export { ProcessInstanceQueryRepresentation as ProcessFilterRequestRepresentation } from '../api-new/activiti-rest-api/model/processInstanceQueryRepresentation'
-export { TaskFilterRepresentation as UserTaskFilterRepresentation } from '../api-new/activiti-rest-api/model/taskFilterRepresentation'
+export { TaskQueryRepresentation as TaskQueryRequestRepresentation } from '../api-new/activiti-rest-api/model/taskQueryRepresentation'

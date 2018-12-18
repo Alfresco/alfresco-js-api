@@ -29,14 +29,14 @@ import { BaseApi } from './base.api';
 export class TaskformsApi extends BaseApi {
     /**
     * Complete a task form
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param taskId taskId
     * @param completeTaskFormRepresentation completeTaskFormRepresentation
     * @return Promise<{}>
     */
-    completeTaskFormUsingPOST(taskId: string, completeTaskFormRepresentation: CompleteFormRepresentation): Promise<any> {
+    completeTaskForm(taskId: string, completeTaskFormRepresentation: CompleteFormRepresentation): Promise<any> {
 
         let postBody = completeTaskFormRepresentation;
 
@@ -67,17 +67,17 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get task variables
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
-        * @return Promise<Array<ProcessInstanceVariableRepresentation>>
+        * @return Promise<ProcessInstanceVariableRepresentation>
         */
-    getProcessInstanceVariablesUsingGET1(taskId: string): Promise<Array<ProcessInstanceVariableRepresentation>> {
+    getProcessInstanceVariables1(taskId: string): Promise<ProcessInstanceVariableRepresentation> {
 
         let postBody = null;
 
@@ -104,19 +104,19 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}/variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Retrieve column field values
-        *
+        * 
         * Specific case to retrieve information on a specific column
-        *
+        * 
         * @param taskId taskId
         * @param field field
         * @param column column
-        * @return Promise<Array<FormValueRepresentation>>
+        * @return Promise<FormValueRepresentation>
         */
-    getRestFieldValuesUsingGET1(taskId: string, field: string, column: string): Promise<Array<FormValueRepresentation>> {
+    getRestFieldValues1(taskId: string, field: string, column: string): Promise<FormValueRepresentation> {
 
         let postBody = null;
 
@@ -151,18 +151,18 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Retrieve populated field values
-        *
+        * 
         * Form field values that are populated through a REST backend, can be retrieved via this service
-        *
+        * 
         * @param taskId taskId
         * @param field field
-        * @return Promise<Array<FormValueRepresentation>>
+        * @return Promise<FormValueRepresentation>
         */
-    getRestFieldValuesUsingGET2(taskId: string, field: string): Promise<Array<FormValueRepresentation>> {
+    getRestFieldValues2(taskId: string, field: string): Promise<FormValueRepresentation> {
 
         let postBody = null;
 
@@ -193,17 +193,17 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}/form-values/{field}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a task form
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @return Promise<FormDefinitionRepresentation>
         */
-    getTaskFormUsingGET(taskId: string): Promise<FormDefinitionRepresentation> {
+    getTaskForm(taskId: string): Promise<FormDefinitionRepresentation> {
 
         let postBody = null;
 
@@ -230,18 +230,18 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Save a task form
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @param saveTaskFormRepresentation saveTaskFormRepresentation
         * @return Promise<{}>
         */
-    saveTaskFormUsingPOST(taskId: string, saveTaskFormRepresentation: SaveFormRepresentation): Promise<any> {
+    saveTaskForm(taskId: string, saveTaskFormRepresentation: SaveFormRepresentation): Promise<any> {
 
         let postBody = saveTaskFormRepresentation;
 
@@ -272,7 +272,7 @@ export class TaskformsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/task-forms/{taskId}/save-form', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

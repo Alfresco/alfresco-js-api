@@ -28,14 +28,14 @@ import { BaseApi } from './base.api';
 export class UsersApi extends BaseApi {
     /**
     * Execute an action for a specific user
-    *
+    * 
     * Typical action is updating/reset password
-    *
+    * 
     * @param userId userId
     * @param actionRequest actionRequest
     * @return Promise<{}>
     */
-    executeActionUsingPOST(userId: number, actionRequest: UserActionRepresentation): Promise<any> {
+    executeAction(userId: number, actionRequest: UserActionRepresentation): Promise<any> {
 
         let postBody = actionRequest;
 
@@ -66,17 +66,17 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/users/{userId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Stream user profile picture
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userId userId
         * @return Promise<{}>
         */
-    getProfilePictureUsingGET1(userId: number): Promise<any> {
+    getProfilePicture1(userId: number): Promise<any> {
 
         let postBody = null;
 
@@ -103,17 +103,17 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/users/{userId}/picture', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a user
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userId userId
         * @return Promise<UserRepresentation>
         */
-    getUserUsingGET1(userId: number): Promise<UserRepresentation> {
+    getUser1(userId: number): Promise<UserRepresentation> {
 
         let postBody = null;
 
@@ -140,13 +140,13 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/users/{userId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Query users
-        *
+        * 
         * A common use case is that a user wants to select another user (eg. when assigning a task) or group.
-        *
+        * 
         * @param opts Optional parameters
         * @param opts.filter filter
         * @param opts.email email
@@ -158,7 +158,7 @@ export class UsersApi extends BaseApi {
         * @param opts.tenantId tenantId
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */
-    getUsersUsingGET1(opts?: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
+    getUsers1(opts?: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -189,17 +189,17 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Request a password reset
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param resetPassword resetPassword
         * @return Promise<{}>
         */
-    requestPasswordResetUsingPOST(resetPassword: ResetPasswordRepresentation): Promise<any> {
+    requestPasswordReset(resetPassword: ResetPasswordRepresentation): Promise<any> {
 
         let postBody = resetPassword;
 
@@ -226,18 +226,18 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/idm/passwords', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update a user
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userId userId
         * @param userRequest userRequest
         * @return Promise<UserRepresentation>
         */
-    updateUserUsingPUT(userId: number, userRequest: UserRepresentation): Promise<UserRepresentation> {
+    updateUser(userId: number, userRequest: UserRepresentation): Promise<UserRepresentation> {
 
         let postBody = userRequest;
 
@@ -268,7 +268,7 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/users/{userId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

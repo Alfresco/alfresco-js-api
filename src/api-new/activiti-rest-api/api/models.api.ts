@@ -28,13 +28,13 @@ import { BaseApi } from './base.api';
 export class ModelsApi extends BaseApi {
     /**
     * Create a new model
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param modelRepresentation modelRepresentation
     * @return Promise<ModelRepresentation>
     */
-    createModelUsingPOST(modelRepresentation: ModelRepresentation): Promise<ModelRepresentation> {
+    createModel(modelRepresentation: ModelRepresentation): Promise<ModelRepresentation> {
 
         let postBody = modelRepresentation;
 
@@ -61,20 +61,20 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete a model
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param modelId modelId
         * @param opts Optional parameters
         * @param opts.cascade cascade
         * @param opts.deleteRuntimeApp deleteRuntimeApp
         * @return Promise<{}>
         */
-    deleteModelUsingDELETE(modelId: number, opts?: any): Promise<any> {
+    deleteModel(modelId: number, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -103,18 +103,18 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Duplicate an existing model
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param modelId modelId
         * @param modelRepresentation modelRepresentation
         * @return Promise<ModelRepresentation>
         */
-    duplicateModelUsingPOST(modelId: number, modelRepresentation: ModelRepresentation): Promise<ModelRepresentation> {
+    duplicateModel(modelId: number, modelRepresentation: ModelRepresentation): Promise<ModelRepresentation> {
 
         let postBody = modelRepresentation;
 
@@ -145,17 +145,17 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}/clone', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get model content
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param modelId modelId
         * @return Promise<ObjectNode>
         */
-    getModelJSONUsingGET(modelId: number): Promise<ObjectNode> {
+    getModelJSON(modelId: number): Promise<ObjectNode> {
 
         let postBody = null;
 
@@ -182,17 +182,17 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}/editor/json', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a model's thumbnail image
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param modelId modelId
-        * @return Promise<Array<string>>
+        * @return Promise<string>
         */
-    getModelThumbnailUsingGET(modelId: number): Promise<Array<string>> {
+    getModelThumbnail(modelId: number): Promise<string> {
 
         let postBody = null;
 
@@ -219,19 +219,19 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}/thumbnail', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a model
-        *
+        * 
         * Models act as containers for process, form, decision table and app definitions
-        *
+        * 
         * @param modelId modelId
         * @param opts Optional parameters
         * @param opts.includePermissions includePermissions
         * @return Promise<ModelRepresentation>
         */
-    getModelUsingGET(modelId: number, opts?: any): Promise<ModelRepresentation> {
+    getModel(modelId: number, opts?: any): Promise<ModelRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -259,16 +259,16 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List process definition models shared with the current user
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @return Promise<ResultListDataRepresentationModelRepresentation>
         */
-    getModelsToIncludeInAppDefinitionUsingGET(): Promise<ResultListDataRepresentationModelRepresentation> {
+    getModelsToIncludeInAppDefinition(): Promise<ResultListDataRepresentationModelRepresentation> {
 
         let postBody = null;
 
@@ -291,13 +291,13 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models-for-app-definition', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List models (process, form, decision rule or app)
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param opts Optional parameters
         * @param opts.filter filter
         * @param opts.sort sort
@@ -305,7 +305,7 @@ export class ModelsApi extends BaseApi {
         * @param opts.referenceId referenceId
         * @return Promise<ResultListDataRepresentationModelRepresentation>
         */
-    getModelsUsingGET(opts?: any): Promise<ResultListDataRepresentationModelRepresentation> {
+    getModels(opts?: any): Promise<ResultListDataRepresentationModelRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -332,18 +332,18 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Create a new version of a model
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param modelId modelId
         * @param file file
         * @return Promise<ModelRepresentation>
         */
-    importNewVersionUsingPOST(modelId: number, file: Blob): Promise<ModelRepresentation> {
+    importNewVersion(modelId: number, file: Blob): Promise<ModelRepresentation> {
 
         let postBody = null;
 
@@ -375,17 +375,17 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}/newversion', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Import a BPMN 2.0 XML file
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param file file
         * @return Promise<ModelRepresentation>
         */
-    importProcessModelUsingPOST(file: Blob): Promise<ModelRepresentation> {
+    importProcessModel(file: Blob): Promise<ModelRepresentation> {
 
         let postBody = null;
 
@@ -413,18 +413,18 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-models/import', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update model content
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param modelId modelId
         * @param values values
         * @return Promise<ModelRepresentation>
         */
-    saveModelUsingPOST(modelId: number, values: any): Promise<ModelRepresentation> {
+    saveModel(modelId: number, values: any): Promise<ModelRepresentation> {
 
         let postBody = values;
 
@@ -455,18 +455,18 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}/editor/json', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update a model
-        *
+        * 
         * This method allows you to update the metadata of a model. In order to update the content of the model you will need to call the specific endpoint for that model type.
-        *
+        * 
         * @param modelId modelId
         * @param updatedModel updatedModel
         * @return Promise<ModelRepresentation>
         */
-    updateModelUsingPUT(modelId: number, updatedModel: ModelRepresentation): Promise<ModelRepresentation> {
+    updateModel(modelId: number, updatedModel: ModelRepresentation): Promise<ModelRepresentation> {
 
         let postBody = updatedModel;
 
@@ -497,19 +497,19 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Validate model content
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param modelId modelId
         * @param opts Optional parameters
         * @param opts.values values
-        * @return Promise<Array<ValidationErrorRepresentation>>
+        * @return Promise<ValidationErrorRepresentation>
         */
-    validateModelUsingPOST(modelId: number, opts?: any): Promise<Array<ValidationErrorRepresentation>> {
+    validateModel(modelId: number, opts?: any): Promise<ValidationErrorRepresentation> {
         opts = opts || {};
         let postBody = opts['values'];
 
@@ -536,7 +536,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}/editor/validate', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

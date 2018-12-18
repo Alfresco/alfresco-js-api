@@ -31,8 +31,8 @@ export class RequestFacetField {
      * Restricts the possible constraints to only indexed values with a specified prefix.
      */
     prefix?: string;
-    sort?: RequestFacetField.SortEnum;
-    method?: RequestFacetField.MethodEnum;
+    sort?: RequestFacetField.SortEnum | string;
+    method?: RequestFacetField.MethodEnum | string;
     /**
      * When true, count results that match the query but which have no facet value for the field (in addition to the Term-based constraints).
      */

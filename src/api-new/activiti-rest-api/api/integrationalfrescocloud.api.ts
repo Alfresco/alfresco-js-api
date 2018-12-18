@@ -27,13 +27,13 @@ import { BaseApi } from './base.api';
 export class IntegrationalfrescocloudApi extends BaseApi {
     /**
     * Alfresco Cloud Authorization
-    *
+    * 
     * Returns Alfresco OAuth HTML Page
-    *
+    * 
     * @param code code
     * @return Promise<{}>
     */
-    confirmAuthorisationUsingGET(code: string): Promise<any> {
+    confirmAuthorisation(code: string): Promise<any> {
 
         let postBody = null;
 
@@ -61,16 +61,16 @@ export class IntegrationalfrescocloudApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List Alfresco networks
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @return Promise<ResultListDataRepresentationAlfrescoNetworkRepresenation>
         */
-    getAllNetworksUsingGET(): Promise<ResultListDataRepresentationAlfrescoNetworkRepresenation> {
+    getAllNetworks(): Promise<ResultListDataRepresentationAlfrescoNetworkRepresenation> {
 
         let postBody = null;
 
@@ -93,17 +93,17 @@ export class IntegrationalfrescocloudApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco-cloud/networks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List Alfresco sites
-        *
+        * 
         * Returns ALL Sites
-        *
+        * 
         * @param networkId networkId
         * @return Promise<ResultListDataRepresentationAlfrescoSiteRepresenation>
         */
-    getAllSitesUsingGET(networkId: string): Promise<ResultListDataRepresentationAlfrescoSiteRepresenation> {
+    getAllSites(networkId: string): Promise<ResultListDataRepresentationAlfrescoSiteRepresenation> {
 
         let postBody = null;
 
@@ -130,20 +130,20 @@ export class IntegrationalfrescocloudApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List files and folders inside a specific folder identified by path
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param networkId networkId
         * @param opts Optional parameters
         * @param opts.siteId siteId
         * @param opts.path path
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
-    getContentInFolderPathUsingGET(networkId: string, opts?: any): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+    getContentInFolderPath(networkId: string, opts?: any): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -172,18 +172,18 @@ export class IntegrationalfrescocloudApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/folderpath/{folderPath}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List files and folders inside a specific folder
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param networkId networkId
         * @param folderId folderId
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
-    getContentInFolderUsingGET(networkId: string, folderId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+    getContentInFolder(networkId: string, folderId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
 
         let postBody = null;
 
@@ -214,18 +214,18 @@ export class IntegrationalfrescocloudApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List files and folders inside a specific site
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param networkId networkId
         * @param siteId siteId
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
-    getContentInSiteUsingGET(networkId: string, siteId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+    getContentInSite(networkId: string, siteId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
 
         let postBody = null;
 
@@ -256,7 +256,7 @@ export class IntegrationalfrescocloudApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

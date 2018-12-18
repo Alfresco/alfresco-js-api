@@ -27,13 +27,13 @@ import { BaseApi } from './base.api';
 export class IntegrationalfrescoonpremiseApi extends BaseApi {
     /**
     * List Alfresco sites
-    *
+    * 
     * Returns ALL Sites
-    *
+    * 
     * @param repositoryId repositoryId
     * @return Promise<ResultListDataRepresentationAlfrescoSiteRepresenation>
     */
-    getAllSitesUsingGET1(repositoryId: string): Promise<ResultListDataRepresentationAlfrescoSiteRepresenation> {
+    getAllSites1(repositoryId: string): Promise<ResultListDataRepresentationAlfrescoSiteRepresenation> {
 
         let postBody = null;
 
@@ -60,19 +60,19 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco/{repositoryId}/sites', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List files and folders inside a specific folder identified by folder path
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param repositoryId repositoryId
         * @param siteId siteId
         * @param folderPath folderPath
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
-    getContentInFolderPathUsingGET1(repositoryId: string, siteId: string, folderPath: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+    getContentInFolderPath1(repositoryId: string, siteId: string, folderPath: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
 
         let postBody = null;
 
@@ -107,18 +107,18 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/rest/integration/alfresco/{repositoryId}/sites/{siteId}/folderpath/{folderPath}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List files and folders inside a specific folder
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param repositoryId repositoryId
         * @param folderId folderId
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
-    getContentInFolderUsingGET1(repositoryId: string, folderId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+    getContentInFolder1(repositoryId: string, folderId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
 
         let postBody = null;
 
@@ -149,18 +149,18 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List files and folders inside a specific site
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param repositoryId repositoryId
         * @param siteId siteId
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
-    getContentInSiteUsingGET1(repositoryId: string, siteId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+    getContentInSite1(repositoryId: string, siteId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
 
         let postBody = null;
 
@@ -191,19 +191,19 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List Alfresco repositories
-        *
+        * 
         * A tenant administrator can configure one or more Alfresco repositories to use when working with content.
-        *
+        * 
         * @param opts Optional parameters
         * @param opts.tenantId tenantId
         * @param opts.includeAccounts includeAccounts (default to true)
         * @return Promise<ResultListDataRepresentationAlfrescoEndpointRepresentation>
         */
-    getRepositoriesUsingGET(opts?: any): Promise<ResultListDataRepresentationAlfrescoEndpointRepresentation> {
+    getRepositories(opts?: any): Promise<ResultListDataRepresentationAlfrescoEndpointRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -228,7 +228,7 @@ export class IntegrationalfrescoonpremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/profile/accounts/alfresco', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

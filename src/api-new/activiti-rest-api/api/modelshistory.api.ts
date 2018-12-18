@@ -26,15 +26,15 @@ import { BaseApi } from './base.api';
 export class ModelshistoryApi extends BaseApi {
     /**
     * List a model's historic versions
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param modelId modelId
     * @param opts Optional parameters
     * @param opts.includeLatestVersion includeLatestVersion
     * @return Promise<ResultListDataRepresentationModelRepresentation>
     */
-    getModelHistoryCollectionUsingGET(modelId: number, opts?: any): Promise<ResultListDataRepresentationModelRepresentation> {
+    getModelHistoryCollection(modelId: number, opts?: any): Promise<ResultListDataRepresentationModelRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -62,18 +62,18 @@ export class ModelshistoryApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}/history', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a historic version of a model
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param modelId modelId
         * @param modelHistoryId modelHistoryId
         * @return Promise<ModelRepresentation>
         */
-    getProcessModelHistoryUsingGET(modelId: number, modelHistoryId: number): Promise<ModelRepresentation> {
+    getProcessModelHistory(modelId: number, modelHistoryId: number): Promise<ModelRepresentation> {
 
         let postBody = null;
 
@@ -104,7 +104,7 @@ export class ModelshistoryApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/models/{modelId}/history/{modelHistoryId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

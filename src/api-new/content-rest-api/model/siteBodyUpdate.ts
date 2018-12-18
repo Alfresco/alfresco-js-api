@@ -18,7 +18,7 @@
 export class SiteBodyUpdate {
     title?: string;
     description?: string;
-    visibility?: SiteBodyUpdate.VisibilityEnum;
+    visibility?: SiteBodyUpdate.VisibilityEnum | string;
 
     constructor(input?: any) {
 

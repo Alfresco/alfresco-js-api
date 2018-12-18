@@ -27,12 +27,12 @@ import { BaseApi } from './base.api';
 export class IntegrationboxApi extends BaseApi {
     /**
     * Box Authorization
-    *
+    * 
     * Returns Box OAuth HTML Page
-    *
+    * 
     * @return Promise<{}>
     */
-    confirmAuthorisationUsingGET1(): Promise<any> {
+    confirmAuthorisation1(): Promise<any> {
 
         let postBody = null;
 
@@ -55,18 +55,18 @@ export class IntegrationboxApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/box/confirm-auth-request', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Add Box account
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userId userId
         * @param credentials credentials
         * @return Promise<{}>
         */
-    createRepositoryAccountUsingPOST(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
+    createRepositoryAccount(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
 
         let postBody = credentials;
 
@@ -97,17 +97,17 @@ export class IntegrationboxApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/box/{userId}/account', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete account information
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userId userId
         * @return Promise<{}>
         */
-    deleteRepositoryAccountUsingDELETE(userId: number): Promise<any> {
+    deleteRepositoryAccount(userId: number): Promise<any> {
 
         let postBody = null;
 
@@ -134,16 +134,16 @@ export class IntegrationboxApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/box/{userId}/account', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get status information
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @return Promise<boolean>
         */
-    getBoxPluginStatusUsingGET(): Promise<boolean> {
+    getBoxPluginStatus(): Promise<boolean> {
 
         let postBody = null;
 
@@ -166,19 +166,19 @@ export class IntegrationboxApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/box/status', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List file and folders
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param opts Optional parameters
         * @param opts.filter filter
         * @param opts.parent parent
         * @return Promise<ResultListDataRepresentationBoxContent>
         */
-    getFilesUsingGET(opts?: any): Promise<ResultListDataRepresentationBoxContent> {
+    getFiles(opts?: any): Promise<ResultListDataRepresentationBoxContent> {
         opts = opts || {};
         let postBody = null;
 
@@ -203,17 +203,17 @@ export class IntegrationboxApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/box/files', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get account information
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userId userId
         * @return Promise<{}>
         */
-    getRepositoryAccountUsingGET(userId: number): Promise<any> {
+    getRepositoryAccount(userId: number): Promise<any> {
 
         let postBody = null;
 
@@ -240,18 +240,18 @@ export class IntegrationboxApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/box/{userId}/account', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update account information
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userId userId
         * @param credentials credentials
         * @return Promise<{}>
         */
-    updateRepositoryAccountUsingPUT(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
+    updateRepositoryAccount(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
 
         let postBody = credentials;
 
@@ -282,7 +282,7 @@ export class IntegrationboxApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/box/{userId}/account', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

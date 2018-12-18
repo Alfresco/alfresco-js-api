@@ -16,7 +16,7 @@
 */
 
 export class SiteMembershipBodyUpdate {
-    role: SiteMembershipBodyUpdate.RoleEnum;
+    role: SiteMembershipBodyUpdate.RoleEnum | string;
 
     constructor(input?: any) {
 

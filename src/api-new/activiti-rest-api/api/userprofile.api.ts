@@ -27,13 +27,13 @@ import { BaseApi } from './base.api';
 export class UserprofileApi extends BaseApi {
     /**
     * Change user password
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param changePasswordRepresentation changePasswordRepresentation
     * @return Promise<{}>
     */
-    changePasswordUsingPOST(changePasswordRepresentation: ChangePasswordRepresentation): Promise<any> {
+    changePassword(changePasswordRepresentation: ChangePasswordRepresentation): Promise<any> {
 
         let postBody = changePasswordRepresentation;
 
@@ -60,16 +60,16 @@ export class UserprofileApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/profile-password', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Retrieve user profile picture
-        *
+        * 
         * Generally returns an image file
-        *
+        * 
         * @return Promise<Blob>
         */
-    getProfilePictureUsingGET(): Promise<Blob> {
+    getProfilePicture(): Promise<Blob> {
 
         let postBody = null;
 
@@ -92,16 +92,16 @@ export class UserprofileApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/profile-picture', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get user profile
-        *
+        * 
         * This operation returns account information for the current user. This is useful to get the name, email, the groups that the user is part of, the user picture, etc.
-        *
+        * 
         * @return Promise<UserRepresentation>
         */
-    getProfileUsingGET(): Promise<UserRepresentation> {
+    getProfile(): Promise<UserRepresentation> {
 
         let postBody = null;
 
@@ -124,13 +124,13 @@ export class UserprofileApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/profile', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update user profile
-        *
+        * 
         * Only a first name, last name, email and company can be updated
-        *
+        * 
         * @param userRepresentation userRepresentation
         * @return Promise<UserRepresentation>
         */
@@ -161,17 +161,17 @@ export class UserprofileApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/profile', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Change user profile picture
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param file file
         * @return Promise<ImageUploadRepresentation>
         */
-    uploadProfilePictureUsingPOST(file: Blob): Promise<ImageUploadRepresentation> {
+    uploadProfilePicture(file: Blob): Promise<ImageUploadRepresentation> {
 
         let postBody = null;
 
@@ -199,7 +199,7 @@ export class UserprofileApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/profile-picture', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

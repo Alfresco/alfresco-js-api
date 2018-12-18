@@ -23,12 +23,12 @@ import { BaseApi } from './base.api';
 * Groups service.
 * @module GroupsApi
 */
-export class ActivitiGroupsApi extends BaseApi {
+export class GroupsApi extends BaseApi {
     /**
     * Query groups
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param opts Optional parameters
     * @param opts.filter filter
     * @param opts.groupId groupId
@@ -37,7 +37,7 @@ export class ActivitiGroupsApi extends BaseApi {
     * @param opts.tenantId tenantId
     * @return Promise<ResultListDataRepresentationLightGroupRepresentation>
     */
-    getGroupsUsingGET(opts?: any): Promise<ResultListDataRepresentationLightGroupRepresentation> {
+    getGroups(opts?: any): Promise<ResultListDataRepresentationLightGroupRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -65,17 +65,17 @@ export class ActivitiGroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List members of a group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */
-    getUsersForGroupUsingGET(groupId: number): Promise<ResultListDataRepresentationLightUserRepresentation> {
+    getUsersForGroup(groupId: number): Promise<ResultListDataRepresentationLightUserRepresentation> {
 
         let postBody = null;
 
@@ -102,7 +102,7 @@ export class ActivitiGroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/groups/{groupId}/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

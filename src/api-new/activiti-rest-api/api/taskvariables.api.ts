@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+import { } from '../model/';
 import { RestVariable } from '../model/restVariable';
 import { BaseApi } from './base.api';
 
@@ -25,14 +26,14 @@ import { BaseApi } from './base.api';
 export class TaskvariablesApi extends BaseApi {
     /**
     * Create variables
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param taskId taskId
     * @param restVariables restVariables
-    * @return Promise<Array<RestVariable>>
+    * @return Promise<RestVariable>
     */
-    createTaskVariableUsingPOST(taskId: string, restVariables: Array<RestVariable>): Promise<Array<RestVariable>> {
+    createTaskVariable(taskId: string, restVariables: RestVariable): Promise<RestVariable> {
 
         let postBody = restVariables;
 
@@ -63,17 +64,17 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Create or update variables
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @return Promise<{}>
         */
-    deleteAllLocalTaskVariablesUsingDELETE(taskId: string): Promise<any> {
+    deleteAllLocalTaskVariables(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -100,20 +101,20 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete a variable
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @param variableName variableName
         * @param opts Optional parameters
         * @param opts.scope scope
         * @return Promise<{}>
         */
-    deleteVariableUsingDELETE(taskId: string, variableName: string, opts?: any): Promise<any> {
+    deleteVariable(taskId: string, variableName: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -145,20 +146,20 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables/{variableName}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a variable
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @param variableName variableName
         * @param opts Optional parameters
         * @param opts.scope scope
         * @return Promise<RestVariable>
         */
-    getVariableUsingGET(taskId: string, variableName: string, opts?: any): Promise<RestVariable> {
+    getVariable(taskId: string, variableName: string, opts?: any): Promise<RestVariable> {
         opts = opts || {};
         let postBody = null;
 
@@ -190,19 +191,19 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables/{variableName}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List variables
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @param opts Optional parameters
         * @param opts.scope scope
-        * @return Promise<Array<RestVariable>>
+        * @return Promise<RestVariable>
         */
-    getVariablesUsingGET(taskId: string, opts?: any): Promise<Array<RestVariable>> {
+    getVariables(taskId: string, opts?: any): Promise<RestVariable> {
         opts = opts || {};
         let postBody = null;
 
@@ -230,19 +231,19 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update a variable
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @param variableName variableName
         * @param restVariable restVariable
         * @return Promise<RestVariable>
         */
-    updateVariableUsingPUT(taskId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {
+    updateVariable(taskId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {
 
         let postBody = restVariable;
 
@@ -277,7 +278,7 @@ export class TaskvariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/variables/{variableName}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+import { } from '../model/';
 import { RestVariable } from '../model/restVariable';
 import { BaseApi } from './base.api';
 
@@ -25,14 +26,14 @@ import { BaseApi } from './base.api';
 export class ProcessinstancevariablesApi extends BaseApi {
     /**
     * Create or update variables
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param processInstanceId Process instance ID
     * @param restVariables restVariables
-    * @return Promise<Array<RestVariable>>
+    * @return Promise<RestVariable>
     */
-    createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceId: string, restVariables: Array<RestVariable>): Promise<Array<RestVariable>> {
+    createOrUpdateProcessInstanceVariables(processInstanceId: string, restVariables: RestVariable): Promise<RestVariable> {
 
         let postBody = restVariables;
 
@@ -63,18 +64,18 @@ export class ProcessinstancevariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/variables', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Create variables
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processInstanceId Process instance ID
         * @param restVariables restVariables
-        * @return Promise<Array<RestVariable>>
+        * @return Promise<RestVariable>
         */
-    createProcessInstanceVariablesUsingPOST(processInstanceId: string, restVariables: Array<RestVariable>): Promise<Array<RestVariable>> {
+    createProcessInstanceVariables(processInstanceId: string, restVariables: RestVariable): Promise<RestVariable> {
 
         let postBody = restVariables;
 
@@ -105,18 +106,18 @@ export class ProcessinstancevariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/variables', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete a variable
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processInstanceId processInstanceId
         * @param variableName variableName
         * @return Promise<{}>
         */
-    deleteProcessInstanceVariableUsingDELETE(processInstanceId: string, variableName: string): Promise<any> {
+    deleteProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<any> {
 
         let postBody = null;
 
@@ -147,18 +148,18 @@ export class ProcessinstancevariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a variable
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processInstanceId processInstanceId
         * @param variableName variableName
         * @return Promise<RestVariable>
         */
-    getProcessInstanceVariableUsingGET(processInstanceId: string, variableName: string): Promise<RestVariable> {
+    getProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<RestVariable> {
 
         let postBody = null;
 
@@ -189,17 +190,17 @@ export class ProcessinstancevariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List variables
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processInstanceId Process instance ID
-        * @return Promise<Array<RestVariable>>
+        * @return Promise<RestVariable>
         */
-    getProcessInstanceVariablesUsingGET(processInstanceId: string): Promise<Array<RestVariable>> {
+    getProcessInstanceVariables(processInstanceId: string): Promise<RestVariable> {
 
         let postBody = null;
 
@@ -226,19 +227,19 @@ export class ProcessinstancevariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update a variable
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processInstanceId processInstanceId
         * @param variableName variableName
         * @param restVariable restVariable
         * @return Promise<RestVariable>
         */
-    updateProcessInstanceVariableUsingPUT(processInstanceId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {
+    updateProcessInstanceVariable(processInstanceId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {
 
         let postBody = restVariable;
 
@@ -273,7 +274,7 @@ export class ProcessinstancevariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

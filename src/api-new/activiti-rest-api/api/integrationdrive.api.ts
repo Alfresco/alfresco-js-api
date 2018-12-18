@@ -25,12 +25,12 @@ import { BaseApi } from './base.api';
 export class IntegrationdriveApi extends BaseApi {
     /**
     * Drive Authorization
-    *
+    * 
     * Returns Drive OAuth HTML Page
-    *
+    * 
     * @return Promise<{}>
     */
-    confirmAuthorisationUsingGET2(): Promise<any> {
+    confirmAuthorisation2(): Promise<any> {
 
         let postBody = null;
 
@@ -53,20 +53,20 @@ export class IntegrationdriveApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/google-drive/confirm-auth-request', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List files and folders
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param opts Optional parameters
         * @param opts.filter filter
         * @param opts.parent parent
         * @param opts.currentFolderOnly currentFolderOnly
         * @return Promise<ResultListDataRepresentationGoogleDriveContent>
         */
-    getFilesUsingGET1(opts?: any): Promise<ResultListDataRepresentationGoogleDriveContent> {
+    getFiles1(opts?: any): Promise<ResultListDataRepresentationGoogleDriveContent> {
         opts = opts || {};
         let postBody = null;
 
@@ -92,7 +92,7 @@ export class IntegrationdriveApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/integration/google-drive/files', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

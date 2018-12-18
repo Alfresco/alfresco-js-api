@@ -29,7 +29,7 @@ export class ObjectNode {
     integralNumber?: boolean;
     long?: boolean;
     missingNode?: boolean;
-    nodeType?: ObjectNode.NodeTypeEnum;
+    nodeType?: ObjectNode.NodeTypeEnum | string;
     null?: boolean;
     number?: boolean;
     object?: boolean;

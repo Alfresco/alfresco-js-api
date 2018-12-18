@@ -17,8 +17,8 @@
 
 export class NodeBodyLock {
     timeToExpire?: number;
-    type?: NodeBodyLock.TypeEnum;
-    lifetime?: NodeBodyLock.LifetimeEnum;
+    type?: NodeBodyLock.TypeEnum | string;
+    lifetime?: NodeBodyLock.LifetimeEnum | string;
 
     constructor(input?: any) {
 

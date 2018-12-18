@@ -23,17 +23,17 @@ import { BaseApi } from './base.api';
 * Comments service.
 * @module CommentsApi
 */
-export class ActivitiCommentsApi extends BaseApi {
+export class CommentsApi extends BaseApi {
     /**
     * Add a comment to a process instance
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param commentRequest commentRequest
     * @param processInstanceId processInstanceId
     * @return Promise<CommentRepresentation>
     */
-    addProcessInstanceCommentUsingPOST(commentRequest: CommentRepresentation, processInstanceId: string): Promise<CommentRepresentation> {
+    addProcessInstanceComment(commentRequest: CommentRepresentation, processInstanceId: string): Promise<CommentRepresentation> {
 
         let postBody = commentRequest;
 
@@ -64,18 +64,18 @@ export class ActivitiCommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/comments', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Add a comment to a task
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param commentRequest commentRequest
         * @param taskId taskId
         * @return Promise<CommentRepresentation>
         */
-    addTaskCommentUsingPOST(commentRequest: CommentRepresentation, taskId: string): Promise<CommentRepresentation> {
+    addTaskComment(commentRequest: CommentRepresentation, taskId: string): Promise<CommentRepresentation> {
 
         let postBody = commentRequest;
 
@@ -106,19 +106,19 @@ export class ActivitiCommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/comments', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get comments for a process
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processInstanceId processInstanceId
         * @param opts Optional parameters
         * @param opts.latestFirst latestFirst
         * @return Promise<ResultListDataRepresentationCommentRepresentation>
         */
-    getProcessInstanceCommentsUsingGET(processInstanceId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
+    getProcessInstanceComments(processInstanceId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -146,19 +146,19 @@ export class ActivitiCommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-instances/{processInstanceId}/comments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get comments for a task
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @param opts Optional parameters
         * @param opts.latestFirst latestFirst
         * @return Promise<ResultListDataRepresentationCommentRepresentation>
         */
-    getTaskCommentsUsingGET(taskId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
+    getTaskComments(taskId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -186,7 +186,7 @@ export class ActivitiCommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/comments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

@@ -16,7 +16,7 @@
 */
 
 export class ResultSetContextSpellcheck {
-    type?: ResultSetContextSpellcheck.TypeEnum;
+    type?: ResultSetContextSpellcheck.TypeEnum | string;
     /**
      * A suggested alternative query
      */

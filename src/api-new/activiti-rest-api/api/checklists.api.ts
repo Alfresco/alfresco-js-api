@@ -27,14 +27,14 @@ import { BaseApi } from './base.api';
 export class ChecklistsApi extends BaseApi {
     /**
     * Create a task checklist
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param taskId taskId
     * @param taskRepresentation taskRepresentation
     * @return Promise<TaskRepresentation>
     */
-    addSubtaskUsingPOST(taskId: string, taskRepresentation: TaskRepresentation): Promise<TaskRepresentation> {
+    addSubtask(taskId: string, taskRepresentation: TaskRepresentation): Promise<TaskRepresentation> {
 
         let postBody = taskRepresentation;
 
@@ -65,17 +65,17 @@ export class ChecklistsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/checklist', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get checklist for a task
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
-    getChecklistUsingGET(taskId: string): Promise<ResultListDataRepresentationTaskRepresentation> {
+    getChecklist(taskId: string): Promise<ResultListDataRepresentationTaskRepresentation> {
 
         let postBody = null;
 
@@ -102,18 +102,18 @@ export class ChecklistsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/checklist', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Change the order of items on a checklist
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @param orderRepresentation orderRepresentation
         * @return Promise<{}>
         */
-    orderChecklistUsingPUT(taskId: string, orderRepresentation: ChecklistOrderRepresentation): Promise<any> {
+    orderChecklist(taskId: string, orderRepresentation: ChecklistOrderRepresentation): Promise<any> {
 
         let postBody = orderRepresentation;
 
@@ -144,7 +144,7 @@ export class ChecklistsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/checklist', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

@@ -31,13 +31,13 @@ import { BaseApi } from './base.api';
 export class FormmodelsApi extends BaseApi {
     /**
     * Get form content
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param formId formId
     * @return Promise<FormDefinitionRepresentation>
     */
-    getFormEditorJsonUsingGET(formId: number): Promise<FormDefinitionRepresentation> {
+    getFormEditorJson(formId: number): Promise<FormDefinitionRepresentation> {
 
         let postBody = null;
 
@@ -64,18 +64,18 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/forms/{formId}/editorJson', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get form history
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param formId formId
         * @param formHistoryId formHistoryId
         * @return Promise<FormRepresentation>
         */
-    getFormHistoryUsingGET(formId: number, formHistoryId: number): Promise<FormRepresentation> {
+    getFormHistory(formId: number, formHistoryId: number): Promise<FormRepresentation> {
 
         let postBody = null;
 
@@ -106,17 +106,17 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models/{formId}/history/{formHistoryId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a form model
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param formId formId
         * @return Promise<FormRepresentation>
         */
-    getFormUsingGET(formId: number): Promise<FormRepresentation> {
+    getForm(formId: number): Promise<FormRepresentation> {
 
         let postBody = null;
 
@@ -143,17 +143,17 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models/{formId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a form
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param formId formId
         * @return Promise<RuntimeFormRepresentation>
         */
-    getFormUsingGET1(formId: number): Promise<RuntimeFormRepresentation> {
+    getForm1(formId: number): Promise<RuntimeFormRepresentation> {
 
         let postBody = null;
 
@@ -180,17 +180,17 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/forms/{formId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get forms
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param formId formId
-        * @return Promise<Array<FormRepresentation>>
+        * @return Promise<FormRepresentation>
         */
-    getFormsUsingGET(formId: Array<string>): Promise<Array<FormRepresentation>> {
+    getForms(formId: string): Promise<FormRepresentation> {
 
         let postBody = null;
 
@@ -218,16 +218,16 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models/values', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List form models
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @return Promise<ResultListDataRepresentationFormRepresentation>
         */
-    getFormsUsingGET1(): Promise<ResultListDataRepresentationFormRepresentation> {
+    getForms1(): Promise<ResultListDataRepresentationFormRepresentation> {
 
         let postBody = null;
 
@@ -250,13 +250,13 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Query forms
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param opts Optional parameters
         * @param opts.nameLike nameLike
         * @param opts.appId appId
@@ -267,7 +267,7 @@ export class FormmodelsApi extends BaseApi {
         * @param opts.size size
         * @return Promise<ResultListDataRepresentationRuntimeFormRepresentation>
         */
-    getFormsUsingGET2(opts?: any): Promise<ResultListDataRepresentationRuntimeFormRepresentation> {
+    getForms2(opts?: any): Promise<ResultListDataRepresentationRuntimeFormRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -297,18 +297,18 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/forms', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update form model content
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param formId ID of the form to update
         * @param saveRepresentation saveRepresentation
         * @return Promise<FormRepresentation>
         */
-    saveFormUsingPUT(formId: number, saveRepresentation: FormSaveRepresentation): Promise<FormRepresentation> {
+    saveForm(formId: number, saveRepresentation: FormSaveRepresentation): Promise<FormRepresentation> {
 
         let postBody = saveRepresentation;
 
@@ -339,18 +339,18 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models/{formId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Validate form model content
-        *
+        * 
         * The model content to be validated must be specified in the POST body
-        *
+        * 
         * @param formId formId
         * @param saveRepresentation saveRepresentation
-        * @return Promise<Array<ValidationErrorRepresentation>>
+        * @return Promise<ValidationErrorRepresentation>
         */
-    validateModelUsingPUT(formId: number, saveRepresentation: FormSaveRepresentation): Promise<Array<ValidationErrorRepresentation>> {
+    validateModel(formId: number, saveRepresentation: FormSaveRepresentation): Promise<ValidationErrorRepresentation> {
 
         let postBody = saveRepresentation;
 
@@ -381,7 +381,7 @@ export class FormmodelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/form-models/{formId}/validate', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

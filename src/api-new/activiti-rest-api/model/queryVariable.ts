@@ -20,7 +20,7 @@ export class QueryVariable {
     operation?: string;
     type?: string;
     value?: any;
-    variableOperation?: QueryVariable.VariableOperationEnum;
+    variableOperation?: QueryVariable.VariableOperationEnum | string;
 
     constructor(input?: any) {
 

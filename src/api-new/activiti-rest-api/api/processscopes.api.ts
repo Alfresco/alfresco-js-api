@@ -26,13 +26,13 @@ import { BaseApi } from './base.api';
 export class ProcessscopesApi extends BaseApi {
     /**
     * List runtime process scopes
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param processScopesRequest processScopesRequest
-    * @return Promise<Array<ProcessScopeRepresentation>>
+    * @return Promise<ProcessScopeRepresentation>
     */
-    getRuntimeProcessScopesUsingPOST(processScopesRequest: ProcessScopesRequestRepresentation): Promise<Array<ProcessScopeRepresentation>> {
+    getRuntimeProcessScopes(processScopesRequest: ProcessScopesRequestRepresentation): Promise<ProcessScopeRepresentation> {
 
         let postBody = processScopesRequest;
 
@@ -59,7 +59,7 @@ export class ProcessscopesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-scopes', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

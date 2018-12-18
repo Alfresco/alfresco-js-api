@@ -16,7 +16,7 @@
 */
 
 export class SiteMembershipBodyCreate {
-    role: SiteMembershipBodyCreate.RoleEnum;
+    role: SiteMembershipBodyCreate.RoleEnum | string;
     id: string;
 
     constructor(input?: any) {

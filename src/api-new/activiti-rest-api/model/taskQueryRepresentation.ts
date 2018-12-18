@@ -27,9 +27,9 @@ export class TaskQueryRepresentation {
     processDefinitionId?: string;
     processInstanceId?: string;
     size?: number;
-    sort?: TaskQueryRepresentation.SortEnum;
+    sort?: TaskQueryRepresentation.SortEnum | string;
     start?: number;
-    state?: TaskQueryRepresentation.StateEnum;
+    state?: TaskQueryRepresentation.StateEnum | string;
     taskId?: string;
     text?: string;
 

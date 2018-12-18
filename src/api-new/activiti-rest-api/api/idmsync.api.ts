@@ -25,13 +25,13 @@ import { BaseApi } from './base.api';
 export class IdmsyncApi extends BaseApi {
     /**
     * Get log file for a sync log entry
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param syncLogEntryId syncLogEntryId
     * @return Promise<{}>
     */
-    getLogFileUsingGET(syncLogEntryId: number): Promise<any> {
+    getLogFile(syncLogEntryId: number): Promise<any> {
 
         let postBody = null;
 
@@ -58,21 +58,21 @@ export class IdmsyncApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List sync log entries
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param opts Optional parameters
         * @param opts.tenantId tenantId
         * @param opts.page page
         * @param opts.start start
         * @param opts.size size
-        * @return Promise<Array<SyncLogEntryRepresentation>>
+        * @return Promise<SyncLogEntryRepresentation>
         */
-    getSyncLogEntriesUsingGET(opts?: any): Promise<Array<SyncLogEntryRepresentation>> {
+    getSyncLogEntries(opts?: any): Promise<SyncLogEntryRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -99,7 +99,7 @@ export class IdmsyncApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/idm-sync-log-entries', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

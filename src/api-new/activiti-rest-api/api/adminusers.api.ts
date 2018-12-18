@@ -28,13 +28,13 @@ import { BaseApi } from './base.api';
 export class AdminusersApi extends BaseApi {
     /**
     * Bulk update a list of users
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param update update
     * @return Promise<{}>
     */
-    bulkUpdateUsersUsingPUT(update: BulkUserUpdateRepresentation): Promise<any> {
+    bulkUpdateUsers(update: BulkUserUpdateRepresentation): Promise<any> {
 
         let postBody = update;
 
@@ -61,17 +61,17 @@ export class AdminusersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/users', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Create a user
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userRepresentation userRepresentation
         * @return Promise<UserRepresentation>
         */
-    createNewUserUsingPOST(userRepresentation: UserRepresentation): Promise<UserRepresentation> {
+    createNewUser(userRepresentation: UserRepresentation): Promise<UserRepresentation> {
 
         let postBody = userRepresentation;
 
@@ -98,19 +98,19 @@ export class AdminusersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/users', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a user
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userId userId
         * @param opts Optional parameters
         * @param opts.summary summary
         * @return Promise<AbstractUserRepresentation>
         */
-    getUserUsingGET(userId: number, opts?: any): Promise<AbstractUserRepresentation> {
+    getUser(userId: number, opts?: any): Promise<AbstractUserRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -138,13 +138,13 @@ export class AdminusersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/users/{userId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Query users
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param opts Optional parameters
         * @param opts.filter filter
         * @param opts.status status
@@ -159,7 +159,7 @@ export class AdminusersApi extends BaseApi {
         * @param opts.summary summary
         * @return Promise<ResultListDataRepresentationAbstractUserRepresentation>
         */
-    getUsersUsingGET(opts?: any): Promise<ResultListDataRepresentationAbstractUserRepresentation> {
+    getUsers(opts?: any): Promise<ResultListDataRepresentationAbstractUserRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -193,18 +193,18 @@ export class AdminusersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update a user
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param userId userId
         * @param userRepresentation userRepresentation
         * @return Promise<{}>
         */
-    updateUserDetailsUsingPUT(userId: number, userRepresentation: UserRepresentation): Promise<any> {
+    updateUserDetails(userId: number, userRepresentation: UserRepresentation): Promise<any> {
 
         let postBody = userRepresentation;
 
@@ -235,7 +235,7 @@ export class AdminusersApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/users/{userId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

@@ -18,7 +18,7 @@
 export class GroupMember {
     id: string;
     displayName: string;
-    memberType: GroupMember.MemberTypeEnum;
+    memberType: GroupMember.MemberTypeEnum | string;
 
     constructor(input?: any) {
 

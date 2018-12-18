@@ -20,9 +20,9 @@ export class RMSite {
     guid: string;
     title: string;
     description?: string;
-    visibility: RMSite.VisibilityEnum;
-    compliance: RMSite.ComplianceEnum;
-    role?: RMSite.RoleEnum;
+    visibility: RMSite.VisibilityEnum | string;
+    compliance: RMSite.ComplianceEnum | string;
+    role?: RMSite.RoleEnum | string;
 
     constructor(input?: any) {
 

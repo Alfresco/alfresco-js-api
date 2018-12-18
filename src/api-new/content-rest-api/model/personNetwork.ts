@@ -36,7 +36,7 @@ export class PersonNetwork {
     isEnabled: boolean;
     createdAt?: DateAlfresco;
     paidNetwork?: boolean;
-    subscriptionLevel?: PersonNetwork.SubscriptionLevelEnum;
+    subscriptionLevel?: PersonNetwork.SubscriptionLevelEnum | string;
     quotas?: NetworkQuota[];
 
     constructor(input?: any) {

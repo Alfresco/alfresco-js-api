@@ -33,13 +33,13 @@ one two three
 (one two three)
 
      */
-    defaultFTSOperator?: RequestDefaults.DefaultFTSOperatorEnum;
+    defaultFTSOperator?: RequestDefaults.DefaultFTSOperatorEnum | string;
     /**
      * The default way to combine query parts in field query groups when AND or OR is not explicitly stated - includes ! - +
 FIELD:(one two three)
 
      */
-    defaultFTSFieldOperator?: RequestDefaults.DefaultFTSFieldOperatorEnum;
+    defaultFTSFieldOperator?: RequestDefaults.DefaultFTSFieldOperatorEnum | string;
     /**
      * The default name space to use if one is not provided
      */

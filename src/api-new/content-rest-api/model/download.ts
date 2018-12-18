@@ -39,7 +39,7 @@ export class Download {
     /**
      * the current status of the download node creation
      */
-    status?: Download.StatusEnum;
+    status?: Download.StatusEnum | string;
 
     constructor(input?: any) {
 

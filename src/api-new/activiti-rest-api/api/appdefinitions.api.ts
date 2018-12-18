@@ -28,13 +28,13 @@ import { BaseApi } from './base.api';
 export class AppdefinitionsApi extends BaseApi {
     /**
     * deleteAppDefinition
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param appDefinitionId appDefinitionId
     * @return Promise<{}>
     */
-    deleteAppDefinitionUsingDELETE(appDefinitionId: number): Promise<any> {
+    deleteAppDefinition(appDefinitionId: number): Promise<any> {
 
         let postBody = null;
 
@@ -61,17 +61,17 @@ export class AppdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/app-definitions/{appDefinitionId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Export an app definition
-        *
+        * 
         * This will return a zip file containing the app definition model and all related models (process definitions and forms).
-        *
+        * 
         * @param modelId modelId from a runtime app or the id of an app definition model
         * @return Promise<{}>
         */
-    exportAppDefinitionUsingGET(modelId: number): Promise<any> {
+    exportAppDefinition(modelId: number): Promise<any> {
 
         let postBody = null;
 
@@ -98,17 +98,17 @@ export class AppdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/app-definitions/{modelId}/export', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get an app definition
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param modelId Application definition ID
         * @return Promise<AppDefinitionRepresentation>
         */
-    getAppDefinitionUsingGET(modelId: number): Promise<AppDefinitionRepresentation> {
+    getAppDefinition(modelId: number): Promise<AppDefinitionRepresentation> {
 
         let postBody = null;
 
@@ -135,17 +135,17 @@ export class AppdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/app-definitions/{modelId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * importAndPublishApp
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param file file
         * @return Promise<AppDefinitionUpdateResultRepresentation>
         */
-    importAndPublishAppUsingPOST(file: Blob): Promise<AppDefinitionUpdateResultRepresentation> {
+    importAndPublishApp(file: Blob): Promise<AppDefinitionUpdateResultRepresentation> {
 
         let postBody = null;
 
@@ -173,18 +173,18 @@ export class AppdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/app-definitions/publish-app', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * importAndPublishApp
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param modelId modelId
         * @param file file
         * @return Promise<AppDefinitionUpdateResultRepresentation>
         */
-    importAndPublishAppUsingPOST1(modelId: number, file: Blob): Promise<AppDefinitionUpdateResultRepresentation> {
+    importAndPublishApp1(modelId: number, file: Blob): Promise<AppDefinitionUpdateResultRepresentation> {
 
         let postBody = null;
 
@@ -216,19 +216,19 @@ export class AppdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/app-definitions/{modelId}/publish-app', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Import a new app definition
-        *
+        * 
         * Allows a zip file to be uploaded containing an app definition and any number of included models.<p>This is useful to bootstrap an environment (for users or continuous integration).<p>Before using any processes included in the import the app must be published and deployed.
-        *
+        * 
         * @param file file
         * @param opts Optional parameters
         * @param opts.renewIdmEntries Whether to renew user and group identifiers (default to false)
         * @return Promise<AppDefinitionRepresentation>
         */
-    importAppDefinitionUsingPOST(file: Blob, opts?: any): Promise<AppDefinitionRepresentation> {
+    importAppDefinition(file: Blob, opts?: any): Promise<AppDefinitionRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -257,18 +257,18 @@ export class AppdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/app-definitions/import', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update the content of an existing app
-        *
+        * 
         * Imports an app inside an existing app definition and creates a new version<p>Before using any new or updated processes included in the import the app must be (re-)published and deployed.
-        *
+        * 
         * @param modelId modelId
         * @param file file
         * @return Promise<AppDefinitionRepresentation>
         */
-    importAppDefinitionUsingPOST1(modelId: number, file: Blob): Promise<AppDefinitionRepresentation> {
+    importAppDefinition1(modelId: number, file: Blob): Promise<AppDefinitionRepresentation> {
 
         let postBody = null;
 
@@ -300,18 +300,18 @@ export class AppdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/app-definitions/{modelId}/import', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Publish an app definition
-        *
+        * 
         * Publishing an app definition makes it available for use. The application must not have any validation errors or an error will be returned.<p>Before an app definition can be used by other users, it must also be deployed for their use
-        *
+        * 
         * @param modelId modelId
         * @param publishModel publishModel
         * @return Promise<AppDefinitionUpdateResultRepresentation>
         */
-    publishAppDefinitionUsingPOST(modelId: number, publishModel: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation> {
+    publishAppDefinition(modelId: number, publishModel: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation> {
 
         let postBody = publishModel;
 
@@ -342,18 +342,18 @@ export class AppdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/app-definitions/{modelId}/publish', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update an app definition
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param modelId Application definition ID
         * @param updatedModel updatedModel
         * @return Promise<AppDefinitionUpdateResultRepresentation>
         */
-    updateAppDefinitionUsingPUT(modelId: number, updatedModel: AppDefinitionSaveRepresentation): Promise<AppDefinitionUpdateResultRepresentation> {
+    updateAppDefinition(modelId: number, updatedModel: AppDefinitionSaveRepresentation): Promise<AppDefinitionUpdateResultRepresentation> {
 
         let postBody = updatedModel;
 
@@ -384,7 +384,7 @@ export class AppdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/app-definitions/{modelId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

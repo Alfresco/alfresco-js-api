@@ -27,13 +27,13 @@ import { BaseApi } from './base.api';
 export class DecisiontablesApi extends BaseApi {
     /**
     * Get definition for a decision table
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param decisionTableId decisionTableId
     * @return Promise<JsonNode>
     */
-    getDecisionTableEditorJsonUsingGET(decisionTableId: number): Promise<JsonNode> {
+    getDecisionTableEditorJson(decisionTableId: number): Promise<JsonNode> {
 
         let postBody = null;
 
@@ -60,17 +60,17 @@ export class DecisiontablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/decisions/decision-tables/{decisionTableId}/editorJson', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a decision table
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param decisionTableId decisionTableId
         * @return Promise<RuntimeDecisionTableRepresentation>
         */
-    getDecisionTableUsingGET(decisionTableId: number): Promise<RuntimeDecisionTableRepresentation> {
+    getDecisionTable(decisionTableId: number): Promise<RuntimeDecisionTableRepresentation> {
 
         let postBody = null;
 
@@ -97,13 +97,13 @@ export class DecisiontablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/decisions/decision-tables/{decisionTableId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Query decision tables
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param opts Optional parameters
         * @param opts.nameLike nameLike
         * @param opts.keyLike keyLike
@@ -115,7 +115,7 @@ export class DecisiontablesApi extends BaseApi {
         * @param opts.size size
         * @return Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation>
         */
-    getDecisionTablesUsingGET(opts?: any): Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation> {
+    getDecisionTables(opts?: any): Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -146,7 +146,7 @@ export class DecisiontablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/decisions/decision-tables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

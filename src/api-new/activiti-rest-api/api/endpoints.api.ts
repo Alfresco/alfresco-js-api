@@ -25,13 +25,13 @@ import { BaseApi } from './base.api';
 export class EndpointsApi extends BaseApi {
     /**
     * Get an endpoint configuration
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param endpointConfigurationId endpointConfigurationId
     * @return Promise<EndpointConfigurationRepresentation>
     */
-    getEndpointConfigurationUsingGET(endpointConfigurationId: number): Promise<EndpointConfigurationRepresentation> {
+    getEndpointConfiguration(endpointConfigurationId: number): Promise<EndpointConfigurationRepresentation> {
 
         let postBody = null;
 
@@ -58,16 +58,16 @@ export class EndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/endpoints/{endpointConfigurationId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List endpoint configurations
-        *
-        *
-        *
-        * @return Promise<Array<EndpointConfigurationRepresentation>>
+        * 
+        * 
+        * 
+        * @return Promise<EndpointConfigurationRepresentation>
         */
-    getEndpointConfigurationsUsingGET(): Promise<Array<EndpointConfigurationRepresentation>> {
+    getEndpointConfigurations(): Promise<EndpointConfigurationRepresentation> {
 
         let postBody = null;
 
@@ -90,7 +90,7 @@ export class EndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/editor/endpoints', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

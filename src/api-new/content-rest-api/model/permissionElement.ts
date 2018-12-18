@@ -18,7 +18,7 @@
 export class PermissionElement {
     authorityId?: string;
     name?: string;
-    accessStatus?: PermissionElement.AccessStatusEnum;
+    accessStatus?: PermissionElement.AccessStatusEnum | string;
 
     constructor(input?: any) {
 

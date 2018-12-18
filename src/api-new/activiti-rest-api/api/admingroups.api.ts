@@ -29,13 +29,13 @@ import { BaseApi } from './base.api';
 export class AdmingroupsApi extends BaseApi {
     /**
     * Activate a group
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param groupId groupId
     * @return Promise<{}>
     */
-    activateUsingPOST(groupId: number): Promise<any> {
+    activate(groupId: number): Promise<any> {
 
         let postBody = null;
 
@@ -62,17 +62,17 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/action/activate', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Add users to a group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @return Promise<{}>
         */
-    addAllUsersToGroupUsingPOST(groupId: number): Promise<any> {
+    addAllUsersToGroup(groupId: number): Promise<any> {
 
         let postBody = null;
 
@@ -99,18 +99,18 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/add-all-users', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Add capabilities to a group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @param addGroupCapabilitiesRepresentation addGroupCapabilitiesRepresentation
         * @return Promise<{}>
         */
-    addGroupCapabilitiesUsingPOST(groupId: number, addGroupCapabilitiesRepresentation: AddGroupCapabilitiesRepresentation): Promise<any> {
+    addGroupCapabilities(groupId: number, addGroupCapabilitiesRepresentation: AddGroupCapabilitiesRepresentation): Promise<any> {
 
         let postBody = addGroupCapabilitiesRepresentation;
 
@@ -141,18 +141,18 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/capabilities', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Add a user to a group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @param userId userId
         * @return Promise<{}>
         */
-    addGroupMemberUsingPOST(groupId: number, userId: number): Promise<any> {
+    addGroupMember(groupId: number, userId: number): Promise<any> {
 
         let postBody = null;
 
@@ -183,19 +183,19 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/members/{userId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a related group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @param relatedGroupId relatedGroupId
         * @param type type
         * @return Promise<{}>
         */
-    addRelatedGroupUsingPOST(groupId: number, relatedGroupId: number, type: string): Promise<any> {
+    addRelatedGroup(groupId: number, relatedGroupId: number, type: string): Promise<any> {
 
         let postBody = null;
 
@@ -231,17 +231,17 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Create a group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupRepresentation groupRepresentation
         * @return Promise<GroupRepresentation>
         */
-    createNewGroupUsingPOST(groupRepresentation: GroupRepresentation): Promise<GroupRepresentation> {
+    createNewGroup(groupRepresentation: GroupRepresentation): Promise<GroupRepresentation> {
 
         let postBody = groupRepresentation;
 
@@ -268,18 +268,18 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Remove a capability from a group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @param groupCapabilityId groupCapabilityId
         * @return Promise<{}>
         */
-    deleteGroupCapabilityUsingDELETE(groupId: number, groupCapabilityId: number): Promise<any> {
+    deleteGroupCapability(groupId: number, groupCapabilityId: number): Promise<any> {
 
         let postBody = null;
 
@@ -310,18 +310,18 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete a member from a group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @param userId userId
         * @return Promise<{}>
         */
-    deleteGroupMemberUsingDELETE(groupId: number, userId: number): Promise<any> {
+    deleteGroupMember(groupId: number, userId: number): Promise<any> {
 
         let postBody = null;
 
@@ -352,17 +352,17 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/members/{userId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete a group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @return Promise<{}>
         */
-    deleteGroupUsingDELETE(groupId: number): Promise<any> {
+    deleteGroup(groupId: number): Promise<any> {
 
         let postBody = null;
 
@@ -389,18 +389,18 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete a related group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @param relatedGroupId relatedGroupId
         * @return Promise<{}>
         */
-    deleteRelatedGroupUsingDELETE(groupId: number, relatedGroupId: number): Promise<any> {
+    deleteRelatedGroup(groupId: number, relatedGroupId: number): Promise<any> {
 
         let postBody = null;
 
@@ -431,17 +431,17 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List group capabilities
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
-        * @return Promise<Array<string>>
+        * @return Promise<string>
         */
-    getCapabilitiesUsingGET(groupId: number): Promise<Array<string>> {
+    getCapabilities(groupId: number): Promise<string> {
 
         let postBody = null;
 
@@ -468,13 +468,13 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/potential-capabilities', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get group members
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @param opts Optional parameters
         * @param opts.filter filter
@@ -482,7 +482,7 @@ export class AdmingroupsApi extends BaseApi {
         * @param opts.pageSize pageSize
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */
-    getGroupUsersUsingGET(groupId: number, opts?: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
+    getGroupUsers(groupId: number, opts?: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -512,20 +512,20 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @param opts Optional parameters
         * @param opts.includeAllUsers includeAllUsers
         * @param opts.summary summary
         * @return Promise<AbstractGroupRepresentation>
         */
-    getGroupUsingGET(groupId: number, opts?: any): Promise<AbstractGroupRepresentation> {
+    getGroup(groupId: number, opts?: any): Promise<AbstractGroupRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -554,20 +554,20 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Query groups
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param opts Optional parameters
         * @param opts.tenantId tenantId
         * @param opts.functional functional
         * @param opts.summary summary
-        * @return Promise<Array<LightGroupRepresentation>>
+        * @return Promise<LightGroupRepresentation>
         */
-    getGroupsUsingGET1(opts?: any): Promise<Array<LightGroupRepresentation>> {
+    getGroups1(opts?: any): Promise<LightGroupRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -593,17 +593,17 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get related groups
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
-        * @return Promise<Array<LightGroupRepresentation>>
+        * @return Promise<LightGroupRepresentation>
         */
-    getRelatedGroupsUsingGET(groupId: number): Promise<Array<LightGroupRepresentation>> {
+    getRelatedGroups(groupId: number): Promise<LightGroupRepresentation> {
 
         let postBody = null;
 
@@ -630,18 +630,18 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}/related-groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update a group
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param groupId groupId
         * @param groupRepresentation groupRepresentation
         * @return Promise<GroupRepresentation>
         */
-    updateGroupUsingPUT(groupId: number, groupRepresentation: GroupRepresentation): Promise<GroupRepresentation> {
+    updateGroup(groupId: number, groupRepresentation: GroupRepresentation): Promise<GroupRepresentation> {
 
         let postBody = groupRepresentation;
 
@@ -672,7 +672,7 @@ export class AdmingroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/groups/{groupId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

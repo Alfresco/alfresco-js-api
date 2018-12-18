@@ -26,7 +26,7 @@ export class TaskFilterRepresentation {
     processDefinitionId?: string;
     processDefinitionKey?: string;
     sort?: string;
-    state?: TaskFilterRepresentation.StateEnum;
+    state?: TaskFilterRepresentation.StateEnum | string;
 
     constructor(input?: any) {
 

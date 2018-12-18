@@ -21,7 +21,7 @@ export class SiteRole {
     site: Site;
     id: string;
     guid: string;
-    role: SiteRole.RoleEnum;
+    role: SiteRole.RoleEnum | string;
 
     constructor(input?: any) {
 

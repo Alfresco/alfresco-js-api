@@ -22,7 +22,7 @@ export class RequestQuery {
     /**
      * The query language in which the query is written.
      */
-    language?: RequestQuery.LanguageEnum;
+    language?: RequestQuery.LanguageEnum | string;
     /**
      * The exact search request typed in by the user
      */

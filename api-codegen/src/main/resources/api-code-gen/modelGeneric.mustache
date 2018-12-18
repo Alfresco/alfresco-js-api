@@ -5,7 +5,7 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{ {{>model
      * {{&description}}
      */
     {{/description}}
-    {{#isReadOnly}}readonly {{/isReadOnly}}{{name}}{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}{{#isListContainer}}[]{{/isListContainer}};
+    {{#isReadOnly}}readonly {{/isReadOnly}}{{name}}{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}} | string{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}{{#isListContainer}}[]{{/isListContainer}};
 {{/vars}}
 
     constructor(input?: any) {

@@ -26,13 +26,13 @@ import { BaseApi } from './base.api';
 export class RuntimeappdeploymentsApi extends BaseApi {
     /**
     * Remove an app deployment
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param appDeploymentId appDeploymentId
     * @return Promise<{}>
     */
-    deleteAppDeploymentUsingDELETE(appDeploymentId: number): Promise<any> {
+    deleteAppDeployment(appDeploymentId: number): Promise<any> {
 
         let postBody = null;
 
@@ -59,17 +59,17 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/runtime-app-deployments/{appDeploymentId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Export the app archive for a deployment
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param deploymentId deploymentId
         * @return Promise<{}>
         */
-    exportAppDefinitionUsingGET1(deploymentId: string): Promise<any> {
+    exportAppDefinition1(deploymentId: string): Promise<any> {
 
         let postBody = null;
 
@@ -96,13 +96,13 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/export-app-deployment/{deploymentId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Query app deployments
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param opts Optional parameters
         * @param opts.nameLike nameLike
         * @param opts.tenantId tenantId
@@ -113,7 +113,7 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         * @param opts.size size
         * @return Promise<ResultListDataRepresentationAppDeploymentRepresentation>
         */
-    getAppDefinitionsUsingGET1(opts?: any): Promise<ResultListDataRepresentationAppDeploymentRepresentation> {
+    getAppDefinitions1(opts?: any): Promise<ResultListDataRepresentationAppDeploymentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -143,17 +143,17 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/runtime-app-deployments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get an app deployment
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param appDeploymentId appDeploymentId
         * @return Promise<AppDeploymentRepresentation>
         */
-    getAppDeploymentUsingGET(appDeploymentId: number): Promise<AppDeploymentRepresentation> {
+    getAppDeployment(appDeploymentId: number): Promise<AppDeploymentRepresentation> {
 
         let postBody = null;
 
@@ -180,19 +180,19 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/runtime-app-deployments/{appDeploymentId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get an app by deployment ID or DMN deployment ID
-        *
+        * 
         * Either a deploymentId or a dmnDeploymentId must be provided
-        *
+        * 
         * @param opts Optional parameters
         * @param opts.deploymentId deploymentId
         * @param opts.dmnDeploymentId dmnDeploymentId
         * @return Promise<AppDeploymentRepresentation>
         */
-    getRuntimeAppDeploymentByDeploymentUsingGET(opts?: any): Promise<AppDeploymentRepresentation> {
+    getRuntimeAppDeploymentByDeployment(opts?: any): Promise<AppDeploymentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -217,7 +217,7 @@ export class RuntimeappdeploymentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/runtime-app-deployment', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

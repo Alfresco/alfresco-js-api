@@ -23,7 +23,7 @@ export class RequestScope {
      * The locations to include in the query
 
      */
-    locations?: RequestScope.LocationsEnum;
+    locations?: RequestScope.LocationsEnum | string;
 
     constructor(input?: any) {
 

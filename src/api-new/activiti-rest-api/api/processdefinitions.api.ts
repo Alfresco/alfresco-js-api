@@ -30,14 +30,14 @@ import { BaseApi } from './base.api';
 export class ProcessdefinitionsApi extends BaseApi {
     /**
     * Add a user or group involvement to a process definition
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param processDefinitionId processDefinitionId
     * @param identityLinkRepresentation identityLinkRepresentation
     * @return Promise<IdentityLinkRepresentation>
     */
-    createIdentityLinkUsingPOST(processDefinitionId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
+    createIdentityLink(processDefinitionId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
 
         let postBody = identityLinkRepresentation;
 
@@ -68,19 +68,19 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/identitylinks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Remove a user or group involvement from a process definition
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processDefinitionId Process definition ID
         * @param family Identity type
         * @param identityId User or group ID
         * @return Promise<{}>
         */
-    deleteIdentityLinkUsingDELETE(processDefinitionId: string, family: string, identityId: string): Promise<any> {
+    deleteIdentityLink(processDefinitionId: string, family: string, identityId: string): Promise<any> {
 
         let postBody = null;
 
@@ -115,19 +115,19 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a user or group involvement with a process definition
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processDefinitionId Process definition ID
         * @param family Identity type
         * @param identityId User or group ID
         * @return Promise<IdentityLinkRepresentation>
         */
-    getIdentityLinkTypeUsingGET(processDefinitionId: string, family: string, identityId: string): Promise<IdentityLinkRepresentation> {
+    getIdentityLinkType(processDefinitionId: string, family: string, identityId: string): Promise<IdentityLinkRepresentation> {
 
         let postBody = null;
 
@@ -162,18 +162,18 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List either the users or groups involved with a process definition
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processDefinitionId processDefinitionId
         * @param family Identity type
-        * @return Promise<Array<IdentityLinkRepresentation>>
+        * @return Promise<IdentityLinkRepresentation>
         */
-    getIdentityLinksForFamilyUsingGET(processDefinitionId: string, family: string): Promise<Array<IdentityLinkRepresentation>> {
+    getIdentityLinksForFamily(processDefinitionId: string, family: string): Promise<IdentityLinkRepresentation> {
 
         let postBody = null;
 
@@ -204,17 +204,17 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List the users and groups involved with a process definition
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processDefinitionId processDefinitionId
-        * @return Promise<Array<IdentityLinkRepresentation>>
+        * @return Promise<IdentityLinkRepresentation>
         */
-    getIdentityLinksUsingGET(processDefinitionId: string): Promise<Array<IdentityLinkRepresentation>> {
+    getIdentityLinks(processDefinitionId: string): Promise<IdentityLinkRepresentation> {
 
         let postBody = null;
 
@@ -241,17 +241,17 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/identitylinks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List the decision tables associated with a process definition
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processDefinitionId processDefinitionId
         * @return Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation>
         */
-    getProcessDefinitionDecisionTablesUsingGET(processDefinitionId: string): Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation> {
+    getProcessDefinitionDecisionTables(processDefinitionId: string): Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation> {
 
         let postBody = null;
 
@@ -278,17 +278,17 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/decision-tables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List the forms associated with a process definition
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param processDefinitionId processDefinitionId
         * @return Promise<ResultListDataRepresentationRuntimeFormRepresentation>
         */
-    getProcessDefinitionFormsUsingGET(processDefinitionId: string): Promise<ResultListDataRepresentationRuntimeFormRepresentation> {
+    getProcessDefinitionForms(processDefinitionId: string): Promise<ResultListDataRepresentationRuntimeFormRepresentation> {
 
         let postBody = null;
 
@@ -315,16 +315,16 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/forms', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Retrieve the start form for a process definition
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @return Promise<FormDefinitionRepresentation>
         */
-    getProcessDefinitionStartFormUsingGET(): Promise<FormDefinitionRepresentation> {
+    getProcessDefinitionStartForm(): Promise<FormDefinitionRepresentation> {
 
         let postBody = null;
 
@@ -347,20 +347,20 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/start-form', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Retrieve a list of process definitions
-        *
+        * 
         * Get a list of process definitions (visible within the tenant of the user)
-        *
+        * 
         * @param opts Optional parameters
         * @param opts.latest latest
         * @param opts.appDefinitionId appDefinitionId
         * @param opts.deploymentId deploymentId
         * @return Promise<ResultListDataRepresentationProcessDefinitionRepresentation>
         */
-    getProcessDefinitionsUsingGET(opts?: any): Promise<ResultListDataRepresentationProcessDefinitionRepresentation> {
+    getProcessDefinitions(opts?: any): Promise<ResultListDataRepresentationProcessDefinitionRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -386,16 +386,16 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Retrieve field values (eg. the typeahead field)
-        *
-        *
-        *
-        * @return Promise<Array<FormValueRepresentation>>
+        * 
+        * 
+        * 
+        * @return Promise<FormValueRepresentation>
         */
-    getRestFieldValuesUsingGET(): Promise<Array<FormValueRepresentation>> {
+    getRestFieldValues(): Promise<FormValueRepresentation> {
 
         let postBody = null;
 
@@ -418,16 +418,16 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Retrieve field values (eg. the table field)
-        *
-        *
-        *
-        * @return Promise<Array<FormValueRepresentation>>
+        * 
+        * 
+        * 
+        * @return Promise<FormValueRepresentation>
         */
-    getRestTableFieldValuesUsingGET(): Promise<Array<FormValueRepresentation>> {
+    getRestTableFieldValues(): Promise<FormValueRepresentation> {
 
         let postBody = null;
 
@@ -450,7 +450,7 @@ export class ProcessdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

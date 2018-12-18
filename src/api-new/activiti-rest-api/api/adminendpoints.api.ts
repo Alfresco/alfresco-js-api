@@ -27,13 +27,13 @@ import { BaseApi } from './base.api';
 export class AdminendpointsApi extends BaseApi {
     /**
     * Add an endpoint authorization
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param createRepresentation createRepresentation
     * @return Promise<EndpointBasicAuthRepresentation>
     */
-    createBasicAuthConfigurationUsingPOST(createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
+    createBasicAuthConfiguration(createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
 
         let postBody = createRepresentation;
 
@@ -60,17 +60,17 @@ export class AdminendpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/basic-auths', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Create an endpoint
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param representation representation
         * @return Promise<EndpointConfigurationRepresentation>
         */
-    createEndpointConfigurationUsingPOST(representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {
+    createEndpointConfiguration(representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {
 
         let postBody = representation;
 
@@ -97,18 +97,18 @@ export class AdminendpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/endpoints', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get an endpoint authorization
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param basicAuthId basicAuthId
         * @param tenantId tenantId
         * @return Promise<EndpointBasicAuthRepresentation>
         */
-    getBasicAuthConfigurationUsingGET(basicAuthId: number, tenantId: number): Promise<EndpointBasicAuthRepresentation> {
+    getBasicAuthConfiguration(basicAuthId: number, tenantId: number): Promise<EndpointBasicAuthRepresentation> {
 
         let postBody = null;
 
@@ -140,17 +140,17 @@ export class AdminendpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/basic-auths/{basicAuthId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List endpoint authorizations
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param tenantId tenantId
-        * @return Promise<Array<EndpointBasicAuthRepresentation>>
+        * @return Promise<EndpointBasicAuthRepresentation>
         */
-    getBasicAuthConfigurationsUsingGET(tenantId: number): Promise<Array<EndpointBasicAuthRepresentation>> {
+    getBasicAuthConfigurations(tenantId: number): Promise<EndpointBasicAuthRepresentation> {
 
         let postBody = null;
 
@@ -178,18 +178,18 @@ export class AdminendpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/basic-auths', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get an endpoint
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param endpointConfigurationId endpointConfigurationId
         * @param tenantId tenantId
         * @return Promise<EndpointConfigurationRepresentation>
         */
-    getEndpointConfigurationUsingGET1(endpointConfigurationId: number, tenantId: number): Promise<EndpointConfigurationRepresentation> {
+    getEndpointConfiguration1(endpointConfigurationId: number, tenantId: number): Promise<EndpointConfigurationRepresentation> {
 
         let postBody = null;
 
@@ -221,17 +221,17 @@ export class AdminendpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/endpoints/{endpointConfigurationId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List endpoints
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param tenantId tenantId
-        * @return Promise<Array<EndpointConfigurationRepresentation>>
+        * @return Promise<EndpointConfigurationRepresentation>
         */
-    getEndpointConfigurationsUsingGET1(tenantId: number): Promise<Array<EndpointConfigurationRepresentation>> {
+    getEndpointConfigurations1(tenantId: number): Promise<EndpointConfigurationRepresentation> {
 
         let postBody = null;
 
@@ -259,18 +259,18 @@ export class AdminendpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/endpoints', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete an endpoint authorization
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param basicAuthId basicAuthId
         * @param tenantId tenantId
         * @return Promise<{}>
         */
-    removeBasicAuthonfigurationUsingDELETE(basicAuthId: number, tenantId: number): Promise<any> {
+    removeBasicAuthonfiguration(basicAuthId: number, tenantId: number): Promise<any> {
 
         let postBody = null;
 
@@ -302,18 +302,18 @@ export class AdminendpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/basic-auths/{basicAuthId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete an endpoint
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param endpointConfigurationId endpointConfigurationId
         * @param tenantId tenantId
         * @return Promise<{}>
         */
-    removeEndpointConfigurationUsingDELETE(endpointConfigurationId: number, tenantId: number): Promise<any> {
+    removeEndpointConfiguration(endpointConfigurationId: number, tenantId: number): Promise<any> {
 
         let postBody = null;
 
@@ -345,18 +345,18 @@ export class AdminendpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/endpoints/{endpointConfigurationId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update an endpoint authorization
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param basicAuthId basicAuthId
         * @param createRepresentation createRepresentation
         * @return Promise<EndpointBasicAuthRepresentation>
         */
-    updateBasicAuthConfigurationUsingPUT(basicAuthId: number, createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
+    updateBasicAuthConfiguration(basicAuthId: number, createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
 
         let postBody = createRepresentation;
 
@@ -387,18 +387,18 @@ export class AdminendpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/basic-auths/{basicAuthId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update an endpoint
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param endpointConfigurationId endpointConfigurationId
         * @param representation representation
         * @return Promise<EndpointConfigurationRepresentation>
         */
-    updateEndpointConfigurationUsingPUT(endpointConfigurationId: number, representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {
+    updateEndpointConfiguration(endpointConfigurationId: number, representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {
 
         let postBody = representation;
 
@@ -429,7 +429,7 @@ export class AdminendpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/admin/endpoints/{endpointConfigurationId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

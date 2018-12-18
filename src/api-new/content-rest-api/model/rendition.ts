@@ -20,7 +20,7 @@ import { ContentInfo } from '../../content-rest-api/model/contentInfo';
 export class Rendition {
     id?: string;
     content?: ContentInfo;
-    status?: Rendition.StatusEnum;
+    status?: Rendition.StatusEnum | string;
 
     constructor(input?: any) {
 

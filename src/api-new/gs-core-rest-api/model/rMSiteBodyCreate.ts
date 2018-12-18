@@ -18,7 +18,7 @@
 export class RMSiteBodyCreate {
     title: string;
     description?: string;
-    compliance?: RMSiteBodyCreate.ComplianceEnum;
+    compliance?: RMSiteBodyCreate.ComplianceEnum | string;
 
     constructor(input?: any) {
 

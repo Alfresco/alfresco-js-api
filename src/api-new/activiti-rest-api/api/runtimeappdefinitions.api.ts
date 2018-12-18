@@ -27,13 +27,13 @@ import { BaseApi } from './base.api';
 export class RuntimeappdefinitionsApi extends BaseApi {
     /**
     * Deploy a published app
-    *
+    * 
     * Deploying an app allows the user to see it on his/her landing page. Apps must be published before they can be deployed.
-    *
+    * 
     * @param saveObject saveObject
     * @return Promise<{}>
     */
-    deployAppDefinitionsUsingPOST(saveObject: RuntimeAppDefinitionSaveRepresentation): Promise<any> {
+    deployAppDefinitions(saveObject: RuntimeAppDefinitionSaveRepresentation): Promise<any> {
 
         let postBody = saveObject;
 
@@ -60,17 +60,17 @@ export class RuntimeappdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/runtime-app-definitions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a runtime app
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param appDefinitionId appDefinitionId
         * @return Promise<AppDefinitionRepresentation>
         */
-    getAppDefinitionUsingGET1(appDefinitionId: number): Promise<AppDefinitionRepresentation> {
+    getAppDefinition1(appDefinitionId: number): Promise<AppDefinitionRepresentation> {
 
         let postBody = null;
 
@@ -97,16 +97,16 @@ export class RuntimeappdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/runtime-app-definitions/{appDefinitionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List runtime apps
-        *
+        * 
         * When a user logs in into Alfresco Process Services Suite, a landing page is displayed containing all the apps that the user is allowed to see and use. These are referred to as runtime apps.
-        *
+        * 
         * @return Promise<ResultListDataRepresentationAppDefinitionRepresentation>
         */
-    getAppDefinitionsUsingGET(): Promise<ResultListDataRepresentationAppDefinitionRepresentation> {
+    getAppDefinitions(): Promise<ResultListDataRepresentationAppDefinitionRepresentation> {
 
         let postBody = null;
 
@@ -129,7 +129,7 @@ export class RuntimeappdefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/runtime-app-definitions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

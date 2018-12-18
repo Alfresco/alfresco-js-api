@@ -20,9 +20,9 @@ export class Site {
     guid: string;
     title: string;
     description?: string;
-    visibility: Site.VisibilityEnum;
+    visibility: Site.VisibilityEnum | string;
     preset?: string;
-    role?: Site.RoleEnum;
+    role?: Site.RoleEnum | string;
 
     constructor(input?: any) {
 

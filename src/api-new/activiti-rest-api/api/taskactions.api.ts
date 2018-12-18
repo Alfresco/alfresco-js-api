@@ -35,7 +35,7 @@ export class TaskactionsApi extends BaseApi {
     * @param userIdentifier userIdentifier
     * @return Promise<TaskRepresentation>
     */
-    assignTaskUsingPUT(taskId: string, userIdentifier: AssigneeIdentifierRepresentation): Promise<TaskRepresentation> {
+    assignTask(taskId: string, userIdentifier: AssigneeIdentifierRepresentation): Promise<TaskRepresentation> {
 
         let postBody = userIdentifier;
 
@@ -66,7 +66,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/assign', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Attach a form to a task
@@ -77,7 +77,7 @@ export class TaskactionsApi extends BaseApi {
         * @param formIdentifier formIdentifier
         * @return Promise<{}>
         */
-    attachFormUsingPUT(taskId: string, formIdentifier: FormIdentifierRepresentation): Promise<any> {
+    attachForm(taskId: string, formIdentifier: FormIdentifierRepresentation): Promise<any> {
 
         let postBody = formIdentifier;
 
@@ -108,7 +108,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/attach-form', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Claim a task
@@ -118,7 +118,7 @@ export class TaskactionsApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    claimTaskUsingPUT(taskId: string): Promise<any> {
+    claimTask(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -145,7 +145,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/claim', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Complete a task
@@ -155,7 +155,7 @@ export class TaskactionsApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    completeTaskUsingPUT(taskId: string): Promise<any> {
+    completeTask(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -182,7 +182,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/complete', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delegate a task
@@ -193,7 +193,7 @@ export class TaskactionsApi extends BaseApi {
         * @param userIdentifier userIdentifier
         * @return Promise<{}>
         */
-    delegateTaskUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
+    delegateTask(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
 
         let postBody = userIdentifier;
 
@@ -224,7 +224,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/delegate', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Involve a group with a task
@@ -235,7 +235,7 @@ export class TaskactionsApi extends BaseApi {
         * @param groupId groupId
         * @return Promise<{}>
         */
-    involveGroupUsingPOST(taskId: string, groupId: string): Promise<any> {
+    involveGroup(taskId: string, groupId: string): Promise<any> {
 
         let postBody = null;
 
@@ -266,7 +266,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/groups/{groupId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Involve a user with a task
@@ -277,7 +277,7 @@ export class TaskactionsApi extends BaseApi {
         * @param userIdentifier userIdentifier
         * @return Promise<{}>
         */
-    involveUserUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
+    involveUser(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
 
         let postBody = userIdentifier;
 
@@ -308,7 +308,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/involve', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Remove a form from a task
@@ -318,7 +318,7 @@ export class TaskactionsApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    removeFormUsingDELETE(taskId: string): Promise<any> {
+    removeForm(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -345,7 +345,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/remove-form', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Remove an involved group from a task
@@ -356,7 +356,7 @@ export class TaskactionsApi extends BaseApi {
         * @param groupId groupId
         * @return Promise<{}>
         */
-    removeInvolvedUserUsingDELETE(taskId: string, groupId: string): Promise<any> {
+    removeInvolvedUser(taskId: string, groupId: string): Promise<any> {
 
         let postBody = null;
 
@@ -387,7 +387,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/groups/{groupId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Remove an involved user from a task
@@ -398,7 +398,7 @@ export class TaskactionsApi extends BaseApi {
         * @param userIdentifier userIdentifier
         * @return Promise<{}>
         */
-    removeInvolvedUserUsingPUT(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
+    removeInvolvedUserByUserIdentifierRepresentation(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
 
         let postBody = userIdentifier;
 
@@ -429,7 +429,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/remove-involved', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Resolve a task
@@ -439,7 +439,7 @@ export class TaskactionsApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    resolveTaskUsingPUT(taskId: string): Promise<any> {
+    resolveTask(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -466,7 +466,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/resolve', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Unclaim a task
@@ -476,7 +476,7 @@ export class TaskactionsApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<{}>
         */
-    unclaimTaskUsingPUT(taskId: string): Promise<any> {
+    unclaimTask(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -503,7 +503,7 @@ export class TaskactionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/action/unclaim', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

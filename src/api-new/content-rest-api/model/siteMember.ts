@@ -20,7 +20,7 @@ import { Person } from './person';
 export class SiteMember {
     id: string;
     person: Person;
-    role: SiteMember.RoleEnum;
+    role: SiteMember.RoleEnum | string;
 
     constructor(input?: any) {
 

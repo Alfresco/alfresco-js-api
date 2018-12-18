@@ -29,7 +29,7 @@ export class JsonNode {
     integralNumber?: boolean;
     long?: boolean;
     missingNode?: boolean;
-    nodeType?: JsonNode.NodeTypeEnum;
+    nodeType?: JsonNode.NodeTypeEnum | string;
     null?: boolean;
     number?: boolean;
     object?: boolean;

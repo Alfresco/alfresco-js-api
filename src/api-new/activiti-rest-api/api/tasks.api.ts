@@ -32,14 +32,14 @@ import { BaseApi } from './base.api';
 export class TasksApi extends BaseApi {
     /**
     * List the users and groups involved with a task
-    *
-    *
-    *
+    * 
+    * 
+    * 
     * @param taskId taskId
     * @param identityLinkRepresentation identityLinkRepresentation
     * @return Promise<IdentityLinkRepresentation>
     */
-    createIdentityLinkUsingPOST2(taskId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
+    createIdentityLink2(taskId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
 
         let postBody = identityLinkRepresentation;
 
@@ -70,17 +70,17 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/identitylinks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Create a standalone task
-        *
+        * 
         * A standalone task is one which is not associated with any process instance.
-        *
+        * 
         * @param taskRepresentation taskRepresentation
         * @return Promise<TaskRepresentation>
         */
-    createNewTaskUsingPOST(taskRepresentation: TaskRepresentation): Promise<TaskRepresentation> {
+    createNewTask(taskRepresentation: TaskRepresentation): Promise<TaskRepresentation> {
 
         let postBody = taskRepresentation;
 
@@ -107,20 +107,20 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Remove a user or group involvement from a task
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @param family family
         * @param identityId identityId
         * @param type type
         * @return Promise<{}>
         */
-    deleteIdentityLinkUsingDELETE2(taskId: string, family: string, identityId: string, type: string): Promise<any> {
+    deleteIdentityLink2(taskId: string, family: string, identityId: string, type: string): Promise<any> {
 
         let postBody = null;
 
@@ -159,17 +159,17 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Delete a task
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @return Promise<{}>
         */
-    deleteTaskUsingDELETE(taskId: string): Promise<any> {
+    deleteTask(taskId: string): Promise<any> {
 
         let postBody = null;
 
@@ -196,17 +196,17 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Filter a list of tasks
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param tasksFilter tasksFilter
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
-    filterTasksUsingPOST(tasksFilter: TaskFilterRequestRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
+    filterTasks(tasksFilter: TaskFilterRequestRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
 
         let postBody = tasksFilter;
 
@@ -233,20 +233,20 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/filter', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a user or group involvement with a task
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @param family family
         * @param identityId identityId
         * @param type type
         * @return Promise<IdentityLinkRepresentation>
         */
-    getIdentityLinkTypeUsingGET2(taskId: string, family: string, identityId: string, type: string): Promise<IdentityLinkRepresentation> {
+    getIdentityLinkType2(taskId: string, family: string, identityId: string, type: string): Promise<IdentityLinkRepresentation> {
 
         let postBody = null;
 
@@ -285,18 +285,18 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List either the users or groups involved with a process instance
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @param family family
-        * @return Promise<Array<IdentityLinkRepresentation>>
+        * @return Promise<IdentityLinkRepresentation>
         */
-    getIdentityLinksForFamilyUsingGET2(taskId: string, family: string): Promise<Array<IdentityLinkRepresentation>> {
+    getIdentityLinksForFamily2(taskId: string, family: string): Promise<IdentityLinkRepresentation> {
 
         let postBody = null;
 
@@ -327,17 +327,17 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/identitylinks/{family}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * getIdentityLinks
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
-        * @return Promise<Array<IdentityLinkRepresentation>>
+        * @return Promise<IdentityLinkRepresentation>
         */
-    getIdentityLinksUsingGET2(taskId: string): Promise<Array<IdentityLinkRepresentation>> {
+    getIdentityLinks2(taskId: string): Promise<IdentityLinkRepresentation> {
 
         let postBody = null;
 
@@ -364,17 +364,17 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/identitylinks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get the audit log for a task
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @return Promise<TaskAuditInfoRepresentation>
         */
-    getTaskAuditLogUsingGET1(taskId: string): Promise<TaskAuditInfoRepresentation> {
+    getTaskAuditLog1(taskId: string): Promise<TaskAuditInfoRepresentation> {
 
         let postBody = null;
 
@@ -401,17 +401,17 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}/audit', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Get a task
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param taskId taskId
         * @return Promise<TaskRepresentation>
         */
-    getTaskUsingGET(taskId: string): Promise<TaskRepresentation> {
+    getTask(taskId: string): Promise<TaskRepresentation> {
 
         let postBody = null;
 
@@ -438,17 +438,17 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Query historic tasks
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param queryRequest queryRequest
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
-    listHistoricTasksUsingPOST(queryRequest: HistoricTaskInstanceQueryRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
+    listHistoricTasks(queryRequest: HistoricTaskInstanceQueryRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
 
         let postBody = queryRequest;
 
@@ -475,17 +475,17 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/historic-tasks/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * List tasks
-        *
-        *
-        *
+        * 
+        * 
+        * 
         * @param tasksQuery tasksQuery
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
-    listTasksUsingPOST(tasksQuery: TaskQueryRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
+    listTasks(tasksQuery: TaskQueryRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
 
         let postBody = tasksQuery;
 
@@ -512,18 +512,18 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
     /**
         * Update a task
-        *
+        * 
         * You can edit only name, description and dueDate (ISO 8601 string).
-        *
+        * 
         * @param taskId taskId
         * @param updated updated
         * @return Promise<TaskRepresentation>
         */
-    updateTaskUsingPUT(taskId: string, updated: TaskUpdateRepresentation): Promise<TaskRepresentation> {
+    updateTask(taskId: string, updated: TaskUpdateRepresentation): Promise<TaskRepresentation> {
 
         let postBody = updated;
 
@@ -554,7 +554,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/enterprise/tasks/{taskId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts)
     }
 
 }

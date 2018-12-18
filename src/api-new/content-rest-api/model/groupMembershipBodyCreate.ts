@@ -17,7 +17,7 @@
 
 export class GroupMembershipBodyCreate {
     id: string;
-    memberType: GroupMembershipBodyCreate.MemberTypeEnum;
+    memberType: GroupMembershipBodyCreate.MemberTypeEnum | string;
 
     constructor(input?: any) {
 

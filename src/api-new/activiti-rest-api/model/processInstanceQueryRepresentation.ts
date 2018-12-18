@@ -21,9 +21,9 @@ export class ProcessInstanceQueryRepresentation {
     processDefinitionId?: string;
     processInstanceId?: string;
     size?: number;
-    sort?: ProcessInstanceQueryRepresentation.SortEnum;
+    sort?: ProcessInstanceQueryRepresentation.SortEnum | string;
     start?: number;
-    state?: ProcessInstanceQueryRepresentation.StateEnum;
+    state?: ProcessInstanceQueryRepresentation.StateEnum | string;
 
     constructor(input?: any) {
 

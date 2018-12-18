@@ -19,7 +19,7 @@ export class RatingBody {
     /**
      * The rating scheme type. Possible values are likes and fiveStar.
      */
-    id: RatingBody.IdEnum;
+    id: RatingBody.IdEnum | string;
     /**
      * The rating. The type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar
      */
