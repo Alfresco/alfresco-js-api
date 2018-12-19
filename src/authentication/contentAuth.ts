@@ -16,27 +16,49 @@
 */
 
 import * as _Emitter from 'event-emitter';
-import { AuthenticationApi } from './api-new/auth-rest-api/api/authentication.api';
-import { AlfrescoApiClient } from './alfrescoApiClient';
-import { AlfrescoApiConfig } from './alfrescoApiConfig';
-import { Storage } from './storage';
-import { AlfrescoApi } from './alfrescoApi';
+import { AuthenticationApi } from '../api-new/auth-rest-api/api/authentication.api';
+import { AlfrescoApiClient } from '../alfrescoApiClient';
+import { AlfrescoApiConfig } from '../alfrescoApiConfig';
+import { Storage } from '../storage';
+import { AlfrescoApi } from '../alfrescoApi';
+import { Authentication } from './authentication';
 
 const Emitter = _Emitter;
 
-export class EcmAuth extends AlfrescoApiClient {
+export class ContentAuth extends AlfrescoApiClient {
+
+    private static instance: ContentAuth;
 
     config: AlfrescoApiConfig;
     basePath: string;
     ticketStorageLabel: string;
     storage: Storage;
     ticket: string;
-    authentications: any;
+    authentications: Authentication;
     authApi: AuthenticationApi;
 
-    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
-        super();
+    static getInstance(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi): ContentAuth {
+        if (!ContentAuth.instance) {
+            ContentAuth.instance = new ContentAuth(config, alfrescoApi);
+        }else{
+            ContentAuth.instance.setConfig(config);
+        }
 
+        return ContentAuth.instance;
+    }
+
+    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
+        console.log('authentication ECM');
+        super();
+        this.className = 'ContentAuth';
+
+        this.setConfig(config);
+        this.authApi = new AuthenticationApi(alfrescoApi);
+
+        Emitter.call(this);
+    }
+
+    setConfig(config: AlfrescoApiConfig) {
         this.config = config;
 
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
@@ -53,9 +75,6 @@ export class EcmAuth extends AlfrescoApiClient {
             this.setTicket(this.storage.getItem(this.ticketStorageLabel));
         }
 
-        this.authApi = new AuthenticationApi(alfrescoApi);
-
-        Emitter.call(this);
     }
 
     changeHost() {
@@ -212,4 +231,4 @@ export class EcmAuth extends AlfrescoApiClient {
 
 }
 
-Emitter(EcmAuth.prototype); // jshint ignore:line
+Emitter(ContentAuth.prototype); // jshint ignore:line

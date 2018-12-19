@@ -79,8 +79,6 @@ import { WebscriptApi } from './content-rest-api/src/api/webscriptApi';
 import { ChangesApi } from './content-rest-api/src/api/changesApi';
 import { SitesApi } from './content-rest-api/src/api/sitesApi';
 import { GroupsApi as GroupsApiCS } from './content-rest-api/src/api/groupsApi';
-import { ProcessInstanceQueryRepresentation } from '../api-new/activiti-rest-api/model/processInstanceQueryRepresentation';
-import { TaskQueryRepresentation } from '../api-new/activiti-rest-api/model/taskQueryRepresentation';
 
 export namespace Legacy {
     export interface Activiti {
@@ -167,5 +165,13 @@ export { PathElement as PathElementEntity } from '../api-new/content-rest-api/mo
 export { SiteBodyCreate as SiteBody } from '../api-new/content-rest-api/model/siteBodyCreate';
 export { GroupPaging as GroupsPaging } from '../api-new/content-rest-api/model/groupPaging';
 
-export { ProcessInstanceQueryRepresentation as ProcessFilterRequestRepresentation } from '../api-new/activiti-rest-api/model/processInstanceQueryRepresentation'
-export { TaskQueryRepresentation as TaskQueryRequestRepresentation } from '../api-new/activiti-rest-api/model/taskQueryRepresentation'
+export {
+    ProcessInstanceQueryRepresentation as ProcessFilterRequestRepresentation
+}from '../api-new/activiti-rest-api/model/processInstanceQueryRepresentation'
+export {
+    TaskQueryRepresentation as TaskQueryRequestRepresentation
+}from '../api-new/activiti-rest-api/model/taskQueryRepresentation'
+
+
+export { ContentClient as EcmClient } from '../contentClient';
+export { ProcessClient as BpmClient } from '../processClient';

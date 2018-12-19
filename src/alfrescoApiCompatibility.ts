@@ -71,7 +71,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
 
         this.nodes = this.node = this.core.nodesApi;
 
-        this.content = new ContentApi(this.ecmAuth, this.ecmClient);
+        this.content = new ContentApi(this.contentAuth, this.contentClient);
         this.upload = new AlfrescoUpload(this);
         this.webScript = this.core.webscriptApi;
     }

@@ -16,14 +16,14 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { BpmClient } from '../../../../bpmClient';
+import { ProcessClient } from '../../../../processClient';
 
 export class ContentApi {
 
-    apiClient: BpmClient;
+    apiClient: ProcessClient;
 
     constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.bpmClient;
+        this.apiClient = alfrescoApi.processClient;
     }
 
     /**
@@ -62,7 +62,7 @@ export class ContentApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -112,7 +112,7 @@ export class ContentApi {
             'file': file
         };
 
-        let authNames = [];
+
         let contentTypes = ['multipart/form-data'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -162,7 +162,7 @@ export class ContentApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -214,7 +214,7 @@ export class ContentApi {
             'file': file
         };
 
-        let authNames = [];
+
         let contentTypes = ['multipart/form-data'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -253,7 +253,7 @@ export class ContentApi {
             'file': file
         };
 
-        let authNames = [];
+
         let contentTypes = ['multipart/form-data'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -290,7 +290,7 @@ export class ContentApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -329,7 +329,7 @@ export class ContentApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -368,7 +368,7 @@ export class ContentApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -407,7 +407,7 @@ export class ContentApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -446,7 +446,7 @@ export class ContentApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = Object;
@@ -476,7 +476,7 @@ export class ContentApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = Object;
@@ -519,7 +519,7 @@ export class ContentApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = Object;
@@ -564,7 +564,7 @@ export class ContentApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -607,7 +607,7 @@ export class ContentApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;

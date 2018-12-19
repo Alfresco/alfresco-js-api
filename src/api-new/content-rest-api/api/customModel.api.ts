@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { BaseApi } from './base.api';
 import { AlfrescoApi } from '../../../alfrescoApi';
 import { AlfrescoApiClient } from '../../../alfrescoApiClient';
 
@@ -39,7 +38,7 @@ export class CustomModelApi {
     apiClient: AlfrescoApiClient;
 
     constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.ecmPrivateClient;
+        this.apiClient = alfrescoApi.contentPrivateClient;
     }
 
     /**

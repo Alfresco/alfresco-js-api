@@ -33,8 +33,6 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
  */
 export class RatingsApi  {
 
-    private path: string = '/nodes';
-
     ratingsApi: NewRatingsApi;
 
     public init(alfrescoApi?: AlfrescoApi) {

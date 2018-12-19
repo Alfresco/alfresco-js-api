@@ -34,6 +34,6 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
 export class WebscriptApi  extends NewWebscriptApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.ecmClient;
+        this.apiClient = alfrescoApi.contentClient;
     }
 }

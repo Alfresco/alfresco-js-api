@@ -17,12 +17,13 @@
 
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { AlfrescoApiClient } from './alfrescoApiClient';
+import { Authentication } from './authentication/authentication';
 
-export class BpmClient extends AlfrescoApiClient {
+export class ProcessClient extends AlfrescoApiClient {
 
     config: AlfrescoApiConfig;
-    className = 'BpmClient';
-    authentications: any;
+    className = 'ProcessClient';
+    authentications: Authentication;
     host: string;
     basePath: string;
 

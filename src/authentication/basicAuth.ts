@@ -15,18 +15,8 @@
 * limitations under the License.
 */
 
-import { AlfrescoApi } from '../../../alfrescoApi';
-import { AlfrescoApiClient } from '../../../alfrescoApiClient';
-
-export class BaseApi {
-
-    apiClient: AlfrescoApiClient;
-
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.contentClient;
-    }
-
-    errorMessage(param, methodName) {
-        return `Missing param ${param} in ${methodName}`;
-    }
+export class BasicAuth {
+    username: string;
+    password: string;
+    ticket: string;
 }

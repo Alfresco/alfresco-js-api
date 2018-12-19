@@ -28,11 +28,11 @@ export * from './src/api-new/search-rest-api/index';
 
 export { ContentApi } from './src/contentApi';
 export { AlfrescoUpload } from './src/api/alfrescoUpload';
-export { EcmAuth } from './src/ecmAuth';
-export { BpmAuth } from './src/bpmAuth';
-export { Oauth2Auth } from './src/oauth2Auth';
-export { EcmClient } from './src/ecmClient';
-export { BpmClient } from './src/bpmClient';
+export { ContentAuth } from './src/authentication/contentAuth';
+export { ProcessAuth } from './src/authentication/processAuth';
+export { Oauth2Auth } from './src/authentication/oauth2Auth';
+export { ContentClient } from './src/contentClient';
+export { ProcessClient } from './src/processClient';
 export { Storage } from './src/storage';
 export { AlfrescoApi } from './src/alfrescoApi';
 export { AlfrescoApiCompatibility } from './src/alfrescoApiCompatibility';

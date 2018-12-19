@@ -23,12 +23,12 @@ import { BaseApi } from './base.api';
 * Groups service.
 * @module GroupsApi
 */
-export class GroupsApi extends BaseApi {
+export class ActivitiGroupsApi extends BaseApi {
     /**
     * Query groups
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param opts Optional parameters
     * @param opts.filter filter
     * @param opts.groupId groupId
@@ -69,9 +69,9 @@ export class GroupsApi extends BaseApi {
     }
     /**
         * List members of a group
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param groupId groupId
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */

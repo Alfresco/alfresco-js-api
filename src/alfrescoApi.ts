@@ -17,11 +17,11 @@
 
 import * as  _Emitter from 'event-emitter';
 
-import { EcmAuth } from './ecmAuth';
-import { BpmAuth } from './bpmAuth';
-import { Oauth2Auth } from './oauth2Auth';
-import { EcmClient } from './ecmClient';
-import { BpmClient } from './bpmClient';
+import { ContentAuth } from './authentication/contentAuth';
+import { ProcessAuth } from './authentication/processAuth';
+import { Oauth2Auth } from './authentication/oauth2Auth';
+import { ContentClient } from './contentClient';
+import { ProcessClient } from './processClient';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
@@ -31,16 +31,16 @@ export class AlfrescoApi {
 
     storage: Storage;
     config: AlfrescoApiConfig;
-    ecmClient: EcmClient;
-    ecmPrivateClient: EcmClient;
-    bpmClient: BpmClient;
-    searchClient: EcmClient;
-    discoveryClient: EcmClient;
-    gsClient: EcmClient;
-    authClient: EcmClient;
+    contentClient: ContentClient;
+    contentPrivateClient: ContentClient;
+    processClient: ProcessClient;
+    searchClient: ContentClient;
+    discoveryClient: ContentClient;
+    gsClient: ContentClient;
+    authClient: ContentClient;
     oauth2Auth: Oauth2Auth;
-    bpmAuth: BpmAuth;
-    ecmAuth: EcmAuth;
+    processAuth: ProcessAuth;
+    contentAuth: ContentAuth;
 
     on = Emitter.on;
     off = Emitter.off;
@@ -48,8 +48,6 @@ export class AlfrescoApi {
     emit = Emitter.emit;
 
     constructor() {
-        //  this.config = this.configureJsApi(config);
-
         this.on = (new Emitter()).on;
         this.off = (new Emitter()).off;
         this.once = (new Emitter()).once;
@@ -81,13 +79,13 @@ export class AlfrescoApi {
             withCredentials: config.withCredentials || false
         };
 
-        this.ecmPrivateClient = new EcmClient(this.config, '/api/-default-/private/alfresco/versions/1');
-        this.ecmClient = new EcmClient(this.config, '/api/-default-/public/alfresco/versions/1');
-        this.authClient = new EcmClient(this.config, '/api/-default-/public/authentication/versions/1');
-        this.searchClient = new EcmClient(this.config, '/api/-default-/public/search/versions/1');
-        this.discoveryClient = new EcmClient(this.config, '/api');
-        this.gsClient = new EcmClient(this.config, '/api/-default-/public/gs/versions/1');
-        this.bpmClient = new BpmClient(this.config);
+        this.contentPrivateClient = new ContentClient(this.config, '/api/-default-/private/alfresco/versions/1');
+        this.contentClient = new ContentClient(this.config, '/api/-default-/public/alfresco/versions/1');
+        this.authClient = new ContentClient(this.config, '/api/-default-/public/authentication/versions/1');
+        this.searchClient = new ContentClient(this.config, '/api/-default-/public/search/versions/1');
+        this.discoveryClient = new ContentClient(this.config, '/api');
+        this.gsClient = new ContentClient(this.config, '/api/-default-/public/gs/versions/1');
+        this.processClient = new ProcessClient(this.config);
 
         this.errorListeners();
 
@@ -95,9 +93,9 @@ export class AlfrescoApi {
             this.oauth2Auth = new Oauth2Auth(this.config);
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
-            this.bpmAuth = new BpmAuth(this.config);
-            this.ecmAuth = new EcmAuth(this.config, this);
-            this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), this.bpmAuth.getAuthentication());
+            this.processAuth = ProcessAuth.getInstance(this.config);
+            this.contentAuth = ContentAuth.getInstance(this.config, this);
+            this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), this.processAuth.getAuthentication());
         }
 
         return config;
@@ -105,11 +103,11 @@ export class AlfrescoApi {
 
     errorListeners() {
 
-        // this.ecmClient.off('error');
+        // this.contentClient.off('error');
         //
-        // this.ecmPrivateClient.off('error');
+        // this.contentPrivateClient.off('error');
         //
-        // this.bpmClient.off('error');
+        // this.processClient.off('error');
         //
         // this.searchClient.off('error');
         //
@@ -117,15 +115,15 @@ export class AlfrescoApi {
         //
         // this.gsClient.off('error');
 
-        this.ecmClient.on('error', (error: any) => {
+        this.contentClient.on('error', (error: any) => {
             this.errorHandler(error);
         });
 
-        this.ecmPrivateClient.on('error', (error: any) => {
+        this.contentPrivateClient.on('error', (error: any) => {
             this.errorHandler(error);
         });
 
-        this.bpmClient.on('error', (error: any) => {
+        this.processClient.on('error', (error: any) => {
             this.errorHandler(error);
         });
 
@@ -156,19 +154,19 @@ export class AlfrescoApi {
 
     changeCsrfConfig(disableCsrf: boolean) {
         this.config.disableCsrf = disableCsrf;
-        this.bpmAuth.changeCsrfConfig(disableCsrf);
+        this.processAuth.changeCsrfConfig(disableCsrf);
     }
 
     changeEcmHost(hostEcm: string) {
         this.config.hostEcm = hostEcm;
-        this.ecmAuth.changeHost();
-        this.ecmClient.changeHost();
+        this.contentAuth.changeHost();
+        this.contentClient.changeHost();
     }
 
     changeBpmHost(hostBpm: string) {
         this.config.hostBpm = hostBpm;
-        this.bpmAuth.changeHost();
-        this.bpmClient.changeHost();
+        this.processAuth.changeHost();
+        this.processClient.changeHost();
     }
 
     /**
@@ -201,37 +199,37 @@ export class AlfrescoApi {
         } else {
 
             if (this.isBpmConfiguration()) {
-                let bpmPromise = this.bpmAuth.login(username, password);
+                let processPromise = this.processAuth.login(username, password);
 
-                bpmPromise.then((ticketBpm) => {
+                processPromise.then((ticketBpm) => {
                     this.config.ticketBpm = ticketBpm;
                 },()=>{
                     console.log('login BPM error');
                 });
 
-                return bpmPromise;
+                return processPromise;
             } else if (this.isEcmConfiguration()) {
-                let ecmPromise = this.ecmAuth.login(username, password);
+                let contentPromise = this.contentAuth.login(username, password);
 
-                ecmPromise.then((ticketEcm) => {
-                    this.setAuthenticationClientECMBPM(this.ecmAuth.getAuthentication(), null);
+                contentPromise.then((ticketEcm) => {
+                    this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
 
                     this.config.ticketEcm = ticketEcm;
                 },()=>{
                     console.log('login ECM error');
                 });
 
-                return ecmPromise;
+                return contentPromise;
 
             } else if (this.isEcmBpmConfiguration()) {
-                let bpmEcmPromise = this._loginBPMECM(username, password);
+                let contentProcessPromise = this._loginBPMECM(username, password);
 
-                bpmEcmPromise.then((data) => {
+                contentProcessPromise.then((data) => {
                     this.config.ticketEcm = data[0];
                     this.config.ticketBpm = data[1];
                 });
 
-                return bpmEcmPromise;
+                return contentProcessPromise;
             }
         }
     }
@@ -247,10 +245,10 @@ export class AlfrescoApi {
     }
 
     setAuthenticationClientECMBPM(authECM: any, authBPM: any) {
-        this.ecmClient.setAuthentications(authECM);
+        this.contentClient.setAuthentications(authECM);
         this.searchClient.setAuthentications(authECM);
-        this.ecmPrivateClient.setAuthentications(authECM);
-        this.bpmClient.setAuthentications(authBPM);
+        this.contentPrivateClient.setAuthentications(authECM);
+        this.processClient.setAuthentications(authBPM);
         this.searchClient.setAuthentications(authECM);
         this.discoveryClient.setAuthentications(authECM);
         this.gsClient.setAuthentications(authECM);
@@ -266,15 +264,15 @@ export class AlfrescoApi {
         this.config.ticketEcm = ticketEcm;
         this.config.ticketBpm = ticketBpm;
 
-        return this.ecmAuth.validateTicket();
+        return this.contentAuth.validateTicket();
     }
 
     _loginBPMECM(username: string, password: string): Promise<any> {
-        let ecmPromise = this.ecmAuth.login(username, password);
-        let bpmPromise = this.bpmAuth.login(username, password);
+        let contentPromise = this.contentAuth.login(username, password);
+        let processPromise = this.processAuth.login(username, password);
 
         let promise: any = new Promise((resolve, reject) => {
-            Promise.all([ecmPromise, bpmPromise]).then(
+            Promise.all([contentPromise, processPromise]).then(
                 (data) => {
                     promise.emit('success');
                     resolve(data);
@@ -301,15 +299,15 @@ export class AlfrescoApi {
             return this.oauth2Auth.logOut();
         } else {
             if (this.isBpmConfiguration()) {
-                return this.bpmAuth.logout();
+                return this.processAuth.logout();
             } else if (this.isEcmConfiguration()) {
-                let ecmPromise = this.ecmAuth.logout();
-                ecmPromise.then(() => {
+                let contentPromise = this.contentAuth.logout();
+                contentPromise.then(() => {
                     this.config.ticket = undefined;
                 }, () => {
                 });
 
-                return ecmPromise;
+                return contentPromise;
             } else if (this.isEcmBpmConfiguration()) {
                 return this._logoutBPMECM();
             }
@@ -317,11 +315,11 @@ export class AlfrescoApi {
     }
 
     _logoutBPMECM(): Promise<any> {
-        let ecmPromise = this.ecmAuth.logout();
-        let bpmPromise = this.bpmAuth.logout();
+        let contentPromise = this.contentAuth.logout();
+        let processPromise = this.processAuth.logout();
 
         let promise: any = new Promise((resolve, reject) => {
-            Promise.all([ecmPromise, bpmPromise]).then(
+            Promise.all([contentPromise, processPromise]).then(
                 (data) => {
                     this.config.ticket = undefined;
                     promise.emit('logout');
@@ -349,11 +347,11 @@ export class AlfrescoApi {
             return this.oauth2Auth.isLoggedIn();
         } else {
             if (this.isBpmConfiguration()) {
-                return this.bpmAuth.isLoggedIn();
+                return this.processAuth.isLoggedIn();
             } else if (this.isEcmConfiguration()) {
-                return this.ecmAuth.isLoggedIn();
+                return this.contentAuth.isLoggedIn();
             } else if (this.isEcmBpmConfiguration()) {
-                return this.ecmAuth.isLoggedIn() && this.bpmAuth.isLoggedIn();
+                return this.contentAuth.isLoggedIn() && this.processAuth.isLoggedIn();
             }
         }
     }
@@ -363,7 +361,7 @@ export class AlfrescoApi {
             if (this.isOauthConfiguration()) {
                 return this.oauth2Auth.isLoggedIn();
             } else {
-                return this.bpmAuth.isLoggedIn();
+                return this.processAuth.isLoggedIn();
             }
         }
         return false;
@@ -374,7 +372,7 @@ export class AlfrescoApi {
             if (this.isOauthConfiguration()) {
                 return this.oauth2Auth.isLoggedIn();
             } else {
-                return this.ecmAuth.isLoggedIn();
+                return this.contentAuth.isLoggedIn();
             }
         }
         return false;
@@ -384,7 +382,7 @@ export class AlfrescoApi {
         if (this.isOauthConfiguration()) {
             return this.oauth2Auth.storage.getItem('USERNAME');
         } else {
-            return this.bpmAuth.storage.getItem('APS_USERNAME');
+            return this.processAuth.storage.getItem('APS_USERNAME');
         }
     }
 
@@ -392,7 +390,7 @@ export class AlfrescoApi {
         if (this.isOauthConfiguration()) {
             return this.oauth2Auth.storage.getItem('USERNAME');
         } else {
-            return this.ecmAuth.storage.getItem('ACS_USERNAME');
+            return this.contentAuth.storage.getItem('ACS_USERNAME');
         }
     }
 
@@ -422,11 +420,11 @@ export class AlfrescoApi {
      * @param TicketBpm
      * */
     setTicket(ticketEcm: string, TicketBpm: string) {
-        if (this.ecmAuth) {
-            this.ecmAuth.setTicket(ticketEcm);
+        if (this.contentAuth) {
+            this.contentAuth.setTicket(ticketEcm);
         }
-        if (this.bpmAuth) {
-            this.bpmAuth.setTicket(TicketBpm);
+        if (this.processAuth) {
+            this.processAuth.setTicket(TicketBpm);
         }
     }
 
@@ -437,8 +435,8 @@ export class AlfrescoApi {
         if (this.oauth2Auth) {
             this.oauth2Auth.invalidateSession();
         } else {
-            this.ecmAuth.invalidateSession();
-            this.bpmAuth.invalidateSession();
+            this.contentAuth.invalidateSession();
+            this.processAuth.invalidateSession();
         }
     }
 
@@ -446,21 +444,21 @@ export class AlfrescoApi {
      * Get the current Ticket for the Bpm
      * */
     getTicketBpm(): string {
-        return this.bpmAuth && this.bpmAuth.getTicket();
+        return this.processAuth && this.processAuth.getTicket();
     }
 
     /**
      * Get the current Ticket for the Ecm
      * */
     getTicketEcm(): string {
-        return this.ecmAuth && this.ecmAuth.getTicket();
+        return this.contentAuth && this.contentAuth.getTicket();
     }
 
     /**
      * Get the current Ticket for the Ecm and BPM
      * */
     getTicket(): string[] {
-        return [this.ecmAuth.getTicket(), this.bpmAuth.getTicket()];
+        return [this.contentAuth.getTicket(), this.processAuth.getTicket()];
     }
 
     isBpmConfiguration(): boolean {

@@ -522,8 +522,8 @@ this.alfrescoJsApi.logout().on('logout', function(){
 
 Content service and process service has two different clients:
 
--  this.alfrescoJsApi.bpmClient
--  this.alfrescoJsApi.ecmClient
+-  this.alfrescoJsApi.ProcessClient
+-  this.alfrescoJsApi.ContentClient
 
 Both client expose a method ***callApi**
 

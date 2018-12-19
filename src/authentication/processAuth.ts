@@ -16,32 +16,52 @@
 */
 
 import * as _Emitter from 'event-emitter';
-import { AlfrescoApiClient } from './alfrescoApiClient';
-import { Storage } from './storage';
-import { AlfrescoApiConfig } from './alfrescoApiConfig';
+import { AlfrescoApiClient } from '../alfrescoApiClient';
+import { Storage } from '../storage';
+import { AlfrescoApiConfig } from '../alfrescoApiConfig';
+import { Authentication } from './authentication';
+import { AlfrescoApi } from '../alfrescoApi';
+import { ContentAuth } from './contentAuth';
 
 const Emitter = _Emitter;
 
-export class BpmAuth extends AlfrescoApiClient {
+export class ProcessAuth extends AlfrescoApiClient {
 
+    private static instance: ProcessAuth;
     config: AlfrescoApiConfig;
     basePath: string;
     storage: Storage;
     ticket: string;
-    authentications: any = {};
+    authentications: Authentication;
+
+    static getInstance(config: AlfrescoApiConfig): ProcessAuth {
+        if (!ProcessAuth.instance) {
+            ProcessAuth.instance = new ProcessAuth(config);
+        } else {
+            ProcessAuth.instance.setConfig(config);
+        }
+
+        return ProcessAuth.instance;
+    }
 
     constructor(config: AlfrescoApiConfig) {
         super();
-        this.className = 'BpmAuth';
+        this.className = 'ProcessAuth';
 
+        this.setConfig(config);
+
+        Emitter.call(this);
+    }
+
+    setConfig(config: AlfrescoApiConfig) {
         this.config = config;
         this.ticket = undefined;
 
         this.basePath = config.hostBpm + '/' + this.config.contextRootBpm;   //Activiti Call
 
-        this.authentications = {
-            'basicAuth': { type: 'activiti', ticket: '' }
-        };
+        this.authentications = new Authentication({
+            'basicAuth': { ticket: '' }, type: 'activiti'
+        });
 
         if (this.config.ticketBpm) {
             this.setTicket(config.ticketBpm);
@@ -49,7 +69,6 @@ export class BpmAuth extends AlfrescoApiClient {
             this.setTicket(this.storage.getItem('ticket-BPM'));
         }
 
-        Emitter.call(this);
     }
 
     changeHost() {
@@ -102,7 +121,7 @@ export class BpmAuth extends AlfrescoApiClient {
             ).then(
                 (data) => {
                     this.saveUsername(username);
-                    let ticket = 'Basic ' + new Buffer(this.authentications.basicAuth.username + ':' + this.authentications.basicAuth.password).toString('base64');
+                    let ticket = 'Basic ' + btoa(this.authentications.basicAuth.username + ':' + this.authentications.basicAuth.password);
                     this.setTicket(ticket);
                     promise.emit('success');
                     resolve(ticket);
@@ -134,7 +153,6 @@ export class BpmAuth extends AlfrescoApiClient {
         this.saveUsername('');
         let postBody = {}, pathParams = {}, queryParams = {}, headerParams = {}, formParams = {};
 
-        let authNames = [];
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
@@ -204,4 +222,4 @@ export class BpmAuth extends AlfrescoApiClient {
     }
 }
 
-Emitter(BpmAuth.prototype); // jshint ignore:line
+Emitter(ProcessAuth.prototype); // jshint ignore:line

@@ -47,7 +47,6 @@ export class DateAlfresco extends Date {
         // return new Date(str.replace(/T/i, ' '));
 
         // Compatible with Safari 9.1.2
-        let parts = dateToConvert.split('+');
         let dateParts = dateToConvert.split(/[^0-9]/).map(function (s) {
             return parseInt(s, 10);
         });

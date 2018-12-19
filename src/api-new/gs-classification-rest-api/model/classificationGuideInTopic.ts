@@ -15,8 +15,6 @@
 * limitations under the License.
 */
 
-import { ClassificationGuideBody } from './classificationGuideBody';
-
 /**
  * The classification guide which the topic is contained in. This field is only returned when requested.
  */

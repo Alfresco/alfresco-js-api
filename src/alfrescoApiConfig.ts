@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { Oauth2Config } from './oauth2Config';
+import { Oauth2Config } from './authentication/oauth2Config';
 
 export class AlfrescoApiConfig {
     ticket?: string;

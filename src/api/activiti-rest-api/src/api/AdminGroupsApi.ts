@@ -16,14 +16,14 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { BpmClient } from '../../../../bpmClient';
+import { ProcessClient } from '../../../../processClient';
 
 export class AdminGroupsApi {
 
-    apiClient: BpmClient;
+    apiClient: ProcessClient;
 
     constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.bpmClient;
+        this.apiClient = alfrescoApi.processClient;
     }
 
     /**
@@ -53,7 +53,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -92,7 +92,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -137,7 +137,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -183,7 +183,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -237,7 +237,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -275,7 +275,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -321,7 +321,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -367,7 +367,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -406,7 +406,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -452,7 +452,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -492,7 +492,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -541,7 +541,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -588,7 +588,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -629,7 +629,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -669,7 +669,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;
@@ -715,7 +715,7 @@ export class AdminGroupsApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         let returnType = null;

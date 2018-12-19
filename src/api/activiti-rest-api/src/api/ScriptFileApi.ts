@@ -16,14 +16,14 @@
     */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { BpmClient } from '../../../../bpmClient';
+import { ProcessClient } from '../../../../processClient';
 
 export class ScriptFileApi {
 
-    apiClient: BpmClient;
+    apiClient: ProcessClient;
 
     constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.bpmClient;
+        this.apiClient = alfrescoApi.processClient;
     }
 
     /**
@@ -45,7 +45,7 @@ export class ScriptFileApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['text/javascript'];
         let accepts = [];
         let returnType = 'String';
@@ -76,7 +76,7 @@ export class ScriptFileApi {
         let headerParams = {};
         let formParams = {};
 
-        let authNames = [];
+
         let contentTypes = ['application/json'];
         let accepts = ['application/json', 'application/javascript'];
         let returnType = 'String';

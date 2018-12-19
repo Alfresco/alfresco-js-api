@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { DeletedNodeBodyRestore } from '../model/deletedNodeBodyRestore';
 import { DeletedNodeEntry } from '../model/deletedNodeEntry';
 import { DeletedNodesPaging } from '../model/deletedNodesPaging';
 import { ModelError } from '../model/modelError';

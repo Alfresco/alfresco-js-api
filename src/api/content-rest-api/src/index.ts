@@ -54,8 +54,6 @@ import { VersionsApi as _VersionsApi } from './api/versionsApi'
 import { ClassesApi as _ClassesApi } from './api/classesApi';
 import { GroupsApi as _GroupsApi } from './api/groupsApi';
 import { CustomModelApi as _CustomModelApi } from './api/customModelApi';
-import { ChildAssociationBody } from '../../../api-new/content-rest-api/model/childAssociationBody';
-import { PathElement } from '../../../api-new/content-rest-api/model/pathElement';
 
 export const CONTENT_LEGACY_APIS = [ChangesApi, ChildAssociationsApi, FavoritesApi, NetworksApi, NodesApi, CommentsApi, PeopleApi, RatingsApi, RenditionsApi, QueriesApi, SharedlinksApi, SitesApi, TagsApi, WebscriptApi, DownloadsApi, VersionsApi, ClassesApi, GroupsApi, CustomModelApi];
 

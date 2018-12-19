@@ -28,6 +28,6 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
 export class VersionsApi extends NewVersionsApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.ecmClient;
+        this.apiClient = alfrescoApi.contentClient;
     }
 }

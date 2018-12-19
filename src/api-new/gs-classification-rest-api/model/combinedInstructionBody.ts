@@ -16,7 +16,6 @@
 */
 
 import { ClassificationInformation } from './classificationInformation';
-import { InstructionBody } from './instructionBody';
 import { SecurityMarkInformationBody } from './securityMarkInformationBody';
 
 export class CombinedInstructionBody {

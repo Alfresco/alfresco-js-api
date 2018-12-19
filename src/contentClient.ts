@@ -17,15 +17,16 @@
 
 import { AlfrescoApiClient } from './alfrescoApiClient';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
+import { Authentication } from './authentication/authentication';
 
-export class EcmClient extends AlfrescoApiClient {
+export class ContentClient extends AlfrescoApiClient {
 
     config: AlfrescoApiConfig;
-    className = 'EcmClient';
+    className = 'ContentClient';
     servicePath: string;
     host: string;
     basePath: string;
-    authentications: any;
+    authentications: Authentication;
 
     /**
      * @param {Object} config

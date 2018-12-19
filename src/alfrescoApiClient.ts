@@ -20,10 +20,15 @@ import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
 import * as  superagent_ from 'superagent';
+import { Authentication } from './authentication/authentication';
+import { BasicAuth } from './authentication/basicAuth';
+import { Oauth2 } from './authentication/oauth2';
 
 const Emitter = _Emitter;
 const superagent = superagent_;
 const process: any = {};
+
+declare const Buffer;
 
 export class AlfrescoApiClient {
 
@@ -40,9 +45,9 @@ export class AlfrescoApiClient {
     /**
      * The authentication methods to be included for all API calls.
      */
-    authentications: any = {
-        'basicAuth': { type: 'basic' }
-    };
+    authentications: Authentication = new Authentication({
+        'basicAuth': {}, type: 'basic'
+    });
     /**
      * The default HTTP headers to be included for all API calls.
      */
@@ -140,16 +145,6 @@ export class AlfrescoApiClient {
      * @returns <code>true</code> if <code>param</code> represents a file.
      */
     isFileParam(param: any): boolean {
-        // fs.ReadStream in Node.js (but not in runtime like browserify)
-        // if (this.isNodeEnv()) {
-        //     if (typeof window === 'undefined' &&
-        //         typeof require === 'function' &&
-        //         require('fs') &&
-        //         param instanceof require('fs').ReadStream) {
-        //         return true;
-        //     }
-        // }
-
         // Buffer in Node.js
         if (typeof Buffer === 'function' && param instanceof Buffer) {
             return true;
@@ -237,29 +232,31 @@ export class AlfrescoApiClient {
      * @param {Object} request The request object created by a <code>superagent()</code> call.
      */
     applyAuthToRequest(request: any) {
-        let _this = this;
-        let auth = _this.authentications.basicAuth;
-        switch (auth.type) {
-            case 'basic':
-                if (auth.username || auth.password) {
-                    request.auth(
-                        auth.username ? encodeURI(auth.username) : '',
-                        auth.password ? encodeURI(auth.password) : ''
-                    );
-                }
-                break;
-            case 'activiti':
-                if (auth.ticket) {
-                    request.set({ 'Authorization': auth.ticket });
-                }
-                break;
-            case 'oauth2':
-                if (auth.accessToken) {
-                    request.set({ 'Authorization': 'Bearer ' + auth.accessToken });
-                }
-                break;
-            default:
-                throw new Error('Unknown authentication type: ' + auth.type);
+        if (this.authentications) {
+            switch (this.authentications.type) {
+                case 'basic':
+                    let basicAuth: BasicAuth = this.authentications.basicAuth;
+                    if (basicAuth.username || basicAuth.password) {
+                        request.auth(
+                            basicAuth.username ? encodeURI(basicAuth.username) : '',
+                            basicAuth.password ? encodeURI(basicAuth.password) : ''
+                        );
+                    }
+                    break;
+                case 'activiti':
+                    if (this.authentications.basicAuth.ticket) {
+                        request.set({ 'Authorization': this.authentications.basicAuth.ticket });
+                    }
+                    break;
+                case 'oauth2':
+                    let oauth2: Oauth2 = this.authentications.oauth2;
+                    if (oauth2.accessToken) {
+                        request.set({ 'Authorization': 'Bearer ' + oauth2.accessToken });
+                    }
+                    break;
+                default:
+                    throw new Error('Unknown authentication type: ' + this.authentications.type);
+            }
         }
     }
 
@@ -388,7 +385,7 @@ export class AlfrescoApiClient {
         }
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-                                contentTypes, accepts, returnType, contextRoot, responseType, url);
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -416,7 +413,7 @@ export class AlfrescoApiClient {
         let url = this.buildUrlCustomBasePath(path, '', pathParams);
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-                                contentTypes, accepts, returnType, contextRoot, responseType, url);
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -431,7 +428,7 @@ export class AlfrescoApiClient {
      * @param {Object} bodyParam The value to pass as the request body.
      * @param {String[]} contentTypes An array of request MIME types.
      * @param {String[]} accepts An array of acceptable response MIME types.
-     * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
+     * @param {(String|Array|any)} returnType The required type to return; can be a string for simple types or the
      * @param {(String)} contextRoot alternative contextRoot
      * @param {(String)} responseType  is an enumerated value that returns the type of the response.
      *                                  It also lets the author change the response type to one "arraybuffer", "blob", "document",
@@ -445,7 +442,7 @@ export class AlfrescoApiClient {
         Emitter(eventEmitter); // jshint ignore:line
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-                                        contentTypes, accepts, responseType, eventEmitter, returnType);
+            contentTypes, accepts, responseType, eventEmitter, returnType);
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
@@ -520,7 +517,7 @@ export class AlfrescoApiClient {
     }
 
     isBpmRequest(): boolean {
-        return this.className === 'BpmAuth' || this.className === 'BpmClient';
+        return this.className === 'ProcessAuth' || this.className === 'ProcessClient';
     }
 
     isCsrfEnabled(): boolean {

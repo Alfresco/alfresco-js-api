@@ -15,18 +15,19 @@
 * limitations under the License.
 */
 
-import { AlfrescoApi } from '../../../alfrescoApi';
-import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+import { BasicAuth } from './basicAuth';
+import { Oauth2 } from './oauth2';
 
-export class BaseApi {
+export class Authentication {
 
-    apiClient: AlfrescoApiClient;
+    basicAuth: BasicAuth;
+    oauth2: Oauth2;
+    cookie?: string;
+    type: string;
 
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.contentClient;
+    constructor(input?: any) {
+
+        Object.assign(this, input);
     }
 
-    errorMessage(param, methodName) {
-        return `Missing param ${param} in ${methodName}`;
-    }
 }

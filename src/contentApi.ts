@@ -15,23 +15,23 @@
 * limitations under the License.
 */
 
-import { EcmAuth } from './ecmAuth';
-import { EcmClient } from './ecmClient';
+import { ContentAuth } from './authentication/contentAuth';
+import { ContentClient } from './contentClient';
 
 export class ContentApi {
 
-    ecmAuth: EcmAuth;
-    ecmClient: EcmClient;
+    contentAuth: ContentAuth;
+    contentClient: ContentClient;
 
     /**
      * Creates an instance of AlfrescoContent.
      *
-     * @param {EcmAuth} ecmAuth
-     * @param {EcmClient} ecmClient
+     * @param {ContentAuth} contentAuth
+     * @param {ContentClient} contentClient
      */
-    constructor(ecmAuth, ecmClient) {
-        this.ecmAuth = ecmAuth;
-        this.ecmClient = ecmClient;
+    constructor(contentAuth, contentClient) {
+        this.contentAuth = contentAuth;
+        this.contentClient = contentClient;
     }
 
     /**
@@ -43,7 +43,7 @@ export class ContentApi {
      * @returns The URL address pointing to the content.
      */
     getDocumentThumbnailUrl(nodeId: string, attachment?: boolean, ticket?: string): string {
-        return this.ecmClient.basePath + '/nodes/' + nodeId +
+        return this.contentClient.basePath + '/nodes/' + nodeId +
             '/renditions/doclib/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
             this.getAlfTicket(ticket);
@@ -58,7 +58,7 @@ export class ContentApi {
      * @returns  The URL address pointing to the content.
      */
     getDocumentPreviewUrl(nodeId: string, attachment?: boolean, ticket?: string): string {
-        return this.ecmClient.basePath + '/nodes/' + nodeId +
+        return this.contentClient.basePath + '/nodes/' + nodeId +
             '/renditions/imgpreview/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
             this.getAlfTicket(ticket);
@@ -73,7 +73,7 @@ export class ContentApi {
      * @returns The URL address pointing to the content.
      */
     getContentUrl(nodeId: string, attachment?: boolean, ticket?: string): string {
-        return this.ecmClient.basePath + '/nodes/' + nodeId +
+        return this.contentClient.basePath + '/nodes/' + nodeId +
             '/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
             this.getAlfTicket(ticket);
@@ -89,7 +89,7 @@ export class ContentApi {
      * @returns The URL address pointing to the content.
      */
     getRenditionUrl(nodeId: string, encoding: string, attachment?: boolean, ticket?: string): string {
-        return this.ecmClient.basePath + '/nodes/' + nodeId +
+        return this.contentClient.basePath + '/nodes/' + nodeId +
             '/renditions/' + encoding + '/content' +
             '?attachment=' + (attachment ? 'true' : 'false') +
             this.getAlfTicket(ticket);
@@ -103,7 +103,7 @@ export class ContentApi {
      * @returns  The URL address pointing to the content.
      */
     getSharedLinkContentUrl(linkId: string, attachment?: boolean): string {
-        return this.ecmClient.basePath + '/shared-links/' + linkId +
+        return this.contentClient.basePath + '/shared-links/' + linkId +
             '/content' +
             '?attachment=' + (attachment ? 'true' : 'false');
     }
@@ -117,14 +117,14 @@ export class ContentApi {
      * @returns The URL address pointing to the content.
      */
     getSharedLinkRenditionUrl(sharedId: string, renditionId: string, attachment?: boolean): string {
-        return this.ecmClient.basePath + '/shared-links/' + sharedId +
+        return this.contentClient.basePath + '/shared-links/' + sharedId +
             '/renditions/' + renditionId + '/content' +
             '?attachment=' + (attachment ? 'true' : 'false');
     }
 
     getAlfTicket(ticket: string): string {
-        if (this.ecmAuth) {
-            return '&alf_ticket=' + (ticket || this.ecmAuth.getTicket());
+        if (this.contentAuth) {
+            return '&alf_ticket=' + (ticket || this.contentAuth.getTicket());
         } else {
             return '';
         }

@@ -15,18 +15,14 @@
 * limitations under the License.
 */
 
-import { AlfrescoApi } from '../../../alfrescoApi';
-import { AlfrescoApiClient } from '../../../alfrescoApiClient';
+export class Oauth2 {
 
-export class BaseApi {
+    refreshToken: string;
+    accessToken: string;
 
-    apiClient: AlfrescoApiClient;
+    constructor(input?: any) {
 
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.contentClient;
+        Object.assign(this, input);
     }
 
-    errorMessage(param, methodName) {
-        return `Missing param ${param} in ${methodName}`;
-    }
 }
