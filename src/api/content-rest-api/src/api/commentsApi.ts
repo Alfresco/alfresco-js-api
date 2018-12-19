@@ -20,17 +20,7 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
 import { CommentsApi as NewCommentsApi } from '../../../../api-new/content-rest-api/api/comments.api';
 
 /**
- * Comments service.
- * @module api/CommentsApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new CommentsApi.
- * @alias module:api/CommentsApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
- * if unspecified.
+ * @deprecated 3.0.0
  */
 export class CommentsApi {
 

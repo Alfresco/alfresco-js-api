@@ -48,7 +48,6 @@ export class ContentAuth extends AlfrescoApiClient {
     }
 
     constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
-        console.log('authentication ECM');
         super();
         this.className = 'ContentAuth';
 

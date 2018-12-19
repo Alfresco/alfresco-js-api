@@ -19,17 +19,7 @@ import { WebscriptApi as NewWebscriptApi } from '../../../../api-new/content-res
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
- * Tags service.
- * @module api/WebscriptApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new WebscriptApi.
- * @alias module:api/WebscriptApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
- * if unspecified.
+ * @deprecated 3.0.0
  */
 export class WebscriptApi  extends NewWebscriptApi {
 

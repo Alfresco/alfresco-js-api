@@ -18,12 +18,9 @@
 import { VersionsApi as NewVersionsApi } from '../../../../api-new/content-rest-api/api/versions.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
+
 /**
- * Constructs a new VersionsApi.
- * @alias module:api/VersionsApi
- * @class
- * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
- * default to {@link module:ApiClient#instance} if unspecified.
+ * @deprecated 3.0.0
  */
 export class VersionsApi extends NewVersionsApi {
 

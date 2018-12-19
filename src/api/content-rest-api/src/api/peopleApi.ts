@@ -29,6 +29,9 @@ import { ActivitiesApi } from '../../../../api-new/content-rest-api/api/activiti
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { GroupsApi } from '../../../../api-new/content-rest-api/api/groups.api';
 
+/**
+ * @deprecated 3.0.0
+ */
 export class PeopleApi {
 
     networksApi: NetworksApi;

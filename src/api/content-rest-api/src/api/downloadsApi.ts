@@ -19,18 +19,9 @@ import { DownloadBodyCreate } from '../model/DownloadBodyCreate';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { DownloadsApi as NewDownloadsApi } from '../../../../api-new/content-rest-api/api/downloads.api';
 
-/**
- * Downloads service.
- * @module api/DownloadsApi
- * @version 0.1.0
- */
 
 /**
- * Constructs a new DownloadsApi.
- * @alias module:api/DownloadsApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use,
- * default to {@link module:ApiClient#instance} if unspecified.
+ * @deprecated 3.0.0
  */
 export class DownloadsApi {
 

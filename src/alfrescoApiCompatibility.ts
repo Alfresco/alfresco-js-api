@@ -33,20 +33,64 @@ import { WebscriptApi } from './api-new/content-rest-api/api/webscript.api';
 import { AlfrescoUpload } from './api/alfrescoUpload';
 import { NodesApi } from './api/content-rest-api/src/api/nodesApi';
 
+/**
+ * @deprecated 3.0.0
+ */
 export class AlfrescoApiCompatibility extends AlfrescoApi {
-
+    /**
+     * @deprecated 3.0.0
+     */
     core: Legacy.Core = <Legacy.Core> {};
+
+    /**
+     * @deprecated 3.0.0
+     */
     activiti: Legacy.Activiti = <Legacy.Activiti> {};
     auth: any = {};
+
+    /**
+     * @deprecated 3.0.0
+     */
     search: any = {};
+
+    /**
+     * @deprecated 3.0.0
+     */
     gsCore: any = {};
+
+    /**
+     * @deprecated 3.0.0
+     */
     gsClassification: any = {};
+
+    /**
+     * @deprecated 3.0.0
+     */
     discovery: any = {};
 
+    /**
+     * @deprecated 3.0.0
+     */
     content: ContentApi;
+
+    /**
+     * @deprecated 3.0.0
+     */
     node: NodesApi;
+
+    /**
+     * @deprecated 3.0.0
+     */
     nodes: NodesApi;
+
+    /**
+     * @deprecated 3.0.0
+     */
     upload: AlfrescoUpload;
+
+    /**
+     * @deprecated 3.0.0
+     */
     webScript: WebscriptApi;
 
     constructor(config: AlfrescoApiConfig) {

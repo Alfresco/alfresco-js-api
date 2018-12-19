@@ -21,17 +21,7 @@ import { RenditionsApi as NewRenditionsApi } from '../../../../api-new/content-r
 import { SharedlinksApi } from '../../../../api-new/content-rest-api/api/sharedlinks.api';
 
 /**
- * Renditions service.
- * @module api/RenditionsApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new RenditionsApi.
- * @alias module:api/RenditionsApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
- * if unspecified.
+ * @deprecated 3.0.0
  */
 export class RenditionsApi {
 

@@ -20,17 +20,7 @@ import { ClassesApi as NewClassesApi } from '../../../../api-new/content-rest-ap
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
- * Classes service.
- * @module api/ClassesApi
- * @version 1.4.0
- */
-
-/**
- * Constructs a new ClassesApi.
- * @alias module:api/ClassesApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use,
- * default to {@link module:ApiClient#instance} if unspecified.
+ * @deprecated 3.0.0
  */
 export class ClassesApi  {
 

@@ -21,17 +21,7 @@ import { SharedlinksApi as NewSharedlinksApi } from '../../../../api-new/content
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
- * Sharedlinks service.
- * @module api/SharedlinksApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new SharedlinksApi.
- * @alias module:api/SharedlinksApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
- * if unspecified.
+ * @deprecated 3.0.0
  */
 export class SharedlinksApi {
 

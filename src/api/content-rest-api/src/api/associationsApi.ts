@@ -20,17 +20,7 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
 import { NodesApi } from '../../../../api-new/content-rest-api/api/nodes.api';
 
 /**
- * Associations service.
- * @module api/AssociationsApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new AssociationsApi.
- * @alias module:api/AssociationsApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
- * if unspecified.
+ * @deprecated 3.0.0
  */
 export class AssociationsApi {
 

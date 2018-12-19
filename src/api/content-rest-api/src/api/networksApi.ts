@@ -19,19 +19,8 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
 import { NetworksApi as NewNetworksApi } from '../../../../api-new/content-rest-api/api/networks.api';
 
 /**
- * Networks service.
- * @module api/NetworksApi
- * @version 0.1.0
+ * @deprecated 3.0.0
  */
-
-/**
- * Constructs a new NetworksApi.
- * @alias module:api/NetworksApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
- * if unspecified.
- */
-
 export class NetworksApi {
 
     networksApi: NewNetworksApi;

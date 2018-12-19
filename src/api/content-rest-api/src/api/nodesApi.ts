@@ -22,7 +22,16 @@ import { NodeBodyLock } from '../model/NodeBodyLock';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { NodesApi as NewNodesApi } from '../../../../api-new/content-rest-api/api/nodes.api';
 import { TrashcanApi } from '../../../../api-new/content-rest-api';
+import { NodeEntry } from '../../../../api-new/content-rest-api/model/nodeEntry';
+import { DeletedNodeEntry } from '../../../../api-new/content-rest-api/model/deletedNodeEntry';
+import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
+import { DeletedNodesPaging } from '../../../../api-new/content-rest-api/model/deletedNodesPaging';
+import { NodeChildAssociationPaging } from '../../../../api-new/content-rest-api/model/nodeChildAssociationPaging';
+import { NodeAssociationPaging } from '../../../../api-new/content-rest-api/model/nodeAssociationPaging';
 
+/**
+ * @deprecated 3.0.0
+ */
 export class NodesApi {
 
     nodesApi: NewNodesApi;
@@ -59,7 +68,7 @@ export class NodesApi {
      * @param {Object.<String, Object>} formParams A map of form parameters and their values.
      * data is of type: {module:model/NodeEntry}
      */
-    addNode(nodeId: string, nodeBody: NodeBody, opts?: any): Promise<any> {
+    addNode(nodeId: string, nodeBody: NodeBody, opts?: any): Promise<NodeEntry | ModelError> {
         return this.nodesApi.createNode(nodeId, <any>nodeBody, opts);
     }
 
@@ -73,7 +82,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    copyNode(nodeId: string, copyBody: CopyBody, opts?: any): Promise<any> {
+    copyNode(nodeId: string, copyBody: CopyBody, opts?: any): Promise<NodeEntry | ModelError> {
         return this.nodesApi.copyNode(nodeId, <any>copyBody, opts);
     }
 
@@ -96,7 +105,7 @@ export class NodesApi {
      * @param {string[]} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * data is of type: {module:model/DeletedNodeEntry}
      */
-    getDeletedNode(nodeId: string, opts?: any): Promise<any> {
+    getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntry | ModelError> {
         return this.trashcanApi.getDeletedNode(nodeId, opts);
     }
 
@@ -109,7 +118,7 @@ export class NodesApi {
      * @param {string[]} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
      * data is of type: {module:model/DeletedNodesPaging}
      */
-    getDeletedNodes(opts?: any): Promise<any> {
+    getDeletedNodes(opts?: any): Promise<DeletedNodesPaging | ModelError> {
         return this.trashcanApi.listDeletedNodes(opts);
     }
 
@@ -121,7 +130,7 @@ export class NodesApi {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    getFileContent(nodeId: string, opts?: any): Promise<any> {
+    getFileContent(nodeId: string, opts?: any): Promise<any | ModelError> {
         return this.nodesApi.getNodeContent(nodeId, opts);
     }
 
@@ -135,7 +144,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    getNode(nodeId: string, opts?: any): Promise<any> {
+    getNode(nodeId: string, opts?: any): Promise<NodeEntry | ModelError> {
         return this.nodesApi.getNode(nodeId, opts);
     }
 
@@ -148,7 +157,7 @@ export class NodesApi {
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
-    getNodeContent(nodeId: string, opts?: any): Promise<any> {
+    getNodeContent(nodeId: string, opts?: any): Promise<any | ModelError> {
         return this.nodesApi.getNodeContent(nodeId, opts);
     }
 
@@ -167,7 +176,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodePaging}
      */
-    getNodeChildren(nodeId: string, opts?: any): Promise<any> {
+    getNodeChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging | ModelError> {
         return this.nodesApi.listNodeChildren(nodeId, opts);
     }
 
@@ -184,7 +193,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeAssociationPaging}
      */
-    getParents(nodeId: string, opts?: any): Promise<any> {
+    getParents(nodeId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
         return this.nodesApi.listParents(nodeId, opts);
     }
 
@@ -201,7 +210,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeChildAssociationPaging}
      */
-    getSecondaryChildren(nodeId: string, opts?: any): Promise<any> {
+    getSecondaryChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging | ModelError> {
         return this.nodesApi.listSecondaryChildren(nodeId, opts);
     }
 
@@ -215,7 +224,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeAssociationPaging}
      */
-    getSourceAssociations(nodeId: string, opts?: any): Promise<any> {
+    getSourceAssociations(nodeId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
         return this.nodesApi.listSourceAssociations(nodeId, opts);
     }
 
@@ -229,7 +238,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeAssociationPaging}
      */
-    getTargetAssociations(nodeId: string, opts?: any): Promise<any> {
+    getTargetAssociations(nodeId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
         return this.nodesApi.listTargetAssociations(nodeId, opts);
     }
 
@@ -243,7 +252,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeEntry}
      */
-    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: any): Promise<any> {
+    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: any): Promise<NodeEntry | ModelError> {
         return this.nodesApi.lockNode(nodeId, <any>nodeBodyLock, opts);
     }
 
@@ -256,7 +265,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeEntry}
      */
-    unlockNode(nodeId: string, opts?: any): Promise<any> {
+    unlockNode(nodeId: string, opts?: any): Promise<NodeEntry | ModelError> {
         return this.nodesApi.unlockNode(nodeId, opts);
     }
 
@@ -270,7 +279,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    moveNode(nodeId: string, moveBody: MoveBody, opts?: any): Promise<any> {
+    moveNode(nodeId: string, moveBody: MoveBody, opts?: any): Promise<NodeEntry | ModelError> {
         return this.nodesApi.moveNode(nodeId, <any>moveBody, opts);
     }
 
@@ -279,7 +288,7 @@ export class NodesApi {
      * Permanently removes the deleted node identified by **nodeId**.\n
      * @param {String} nodeId The identifier of a node.
      */
-    purgeDeletedNode(nodeId: string): Promise<any> {
+    purgeDeletedNode(nodeId: string): Promise<any | ModelError> {
         return this.trashcanApi.deleteDeletedNode(nodeId);
     }
 
@@ -289,7 +298,7 @@ export class NodesApi {
      * @param {String} nodeId The identifier of a node.
      * data is of type: {module:model/NodeEntry}
      */
-    restoreNode(nodeId: string): Promise<any> {
+    restoreNode(nodeId: string): Promise<NodeEntry | ModelError> {
         return this.trashcanApi.restoreDeletedNode(nodeId);
     }
 
@@ -305,11 +314,11 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    updateFileContent(nodeId: string, contentBody: any, opts?: any): Promise<any> {
+    updateFileContent(nodeId: string, contentBody: any, opts?: any): Promise<NodeEntry | ModelError> {
         return this.nodesApi.updateNodeContent(nodeId, contentBody, opts);
     }
 
-    updateNodeContent(nodeId: string, contentBody: any, opts?: any): Promise<any> {
+    updateNodeContent(nodeId: string, contentBody: any, opts?: any): Promise<NodeEntry | ModelError> {
         return this.nodesApi.updateNodeContent(nodeId, contentBody, opts);
     }
 
@@ -323,7 +332,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    updateNode(nodeId: string, nodeBody: NodeBody, opts?: any): Promise<any> {
+    updateNode(nodeId: string, nodeBody: NodeBody, opts?: any): Promise<NodeEntry | ModelError> {
         return this.nodesApi.updateNode(nodeId, nodeBody, opts);
     }
 }

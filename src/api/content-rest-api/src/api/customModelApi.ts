@@ -19,17 +19,7 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
 import { CustomModelApi as NewCustomModelApi } from '../../../../api-new/content-rest-api/api/customModel.api';
 
 /**
- * Comments service.
- * @module api/CustomModelApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new CustomModelApi.
- * @alias module:api/CustomModelApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use:string, default to {@link module:ApiClient#instance}
- * if unspecified.
+ * @deprecated 3.0.0
  */
 export class CustomModelApi {
 

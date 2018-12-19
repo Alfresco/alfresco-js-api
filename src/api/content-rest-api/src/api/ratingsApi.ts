@@ -19,17 +19,7 @@ import { RatingsApi as NewRatingsApi } from '../../../../api-new/content-rest-ap
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
- * Ratings service.
- * @module api/RatingsApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new RatingsApi.
- * @alias module:api/RatingsApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
- * if unspecified.
+ * @deprecated 3.0.0
  */
 export class RatingsApi  {
 

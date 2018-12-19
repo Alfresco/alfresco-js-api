@@ -21,17 +21,7 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
 import { GroupsApi as NewGroupsApi } from '../../../../api-new/content-rest-api/api/groups.api';
 
 /**
- * Tags service.
- * @module api/GroupsApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new GroupsApi.
- * @alias module:api/GroupsApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
- * if unspecified.
+ * @deprecated 3.0.0
  */
 export class GroupsApi {
 

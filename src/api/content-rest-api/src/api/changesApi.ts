@@ -33,17 +33,7 @@ import { TrashcanApi } from '../../../../api-new/content-rest-api/api/trashcan.a
 import { QueriesApi } from '../../../../api-new/content-rest-api/api/queries.api';
 
 /**
- * Changes service.
- * @module api/ChangesApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new ChangesApi.
- * @alias module:api/ChangesApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
- * if unspecified.
+ * @deprecated 3.0.0
  */
 export class ChangesApi {
 

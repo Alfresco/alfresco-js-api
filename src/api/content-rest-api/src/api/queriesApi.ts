@@ -19,17 +19,7 @@ import { QueriesApi as NewQueriesApi } from '../../../../api-new/content-rest-ap
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
- * Queries service.
- * @module api/QueriesApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new QueriesApi.
- * @alias module:api/QueriesApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use,
- * default to {@link module:ApiClient#instance} if unspecified.
+ * @deprecated 3.0.0
  */
 export class QueriesApi  {
 

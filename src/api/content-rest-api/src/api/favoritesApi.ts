@@ -20,17 +20,7 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
 import { FavoritesApi as NewFavoritesApi } from '../../../../api-new/content-rest-api/api/favorites.api';
 
 /**
- * Favorites service.
- * @module api/FavoritesApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new FavoritesApi.
- * @alias module:api/FavoritesApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
- * if unspecified.
+ * @deprecated 3.0.0
  */
 export class FavoritesApi {
 

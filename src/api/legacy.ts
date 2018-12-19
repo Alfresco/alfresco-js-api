@@ -80,6 +80,9 @@ import { ChangesApi } from './content-rest-api/src/api/changesApi';
 import { SitesApi } from './content-rest-api/src/api/sitesApi';
 import { GroupsApi as GroupsApiCS } from './content-rest-api/src/api/groupsApi';
 
+/**
+ * @deprecated 3.0.0
+ */
 export namespace Legacy {
     export interface Activiti {
         alfrescoApi: AlfrescoApiActiviti;

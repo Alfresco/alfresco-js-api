@@ -18,6 +18,9 @@
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { ProcessClient } from '../../../../processClient';
 
+/**
+ * @deprecated 3.0.0
+ */
 export class ProcessDefinitionsApi {
 
     apiClient: ProcessClient;

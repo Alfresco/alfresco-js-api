@@ -23,17 +23,7 @@ import { SitesApi as NewSitesApi } from '../../../../api-new/content-rest-api/ap
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
- * Sites service.
- * @module api/SitesApi
- * @version 0.1.0
- */
-
-/**
- * Constructs a new SitesApi.
- * @alias module:api/SitesApi
- * @class
- * @param {module:ApiClient} apiClient Optional API client implementation to use, default to {@link module:ApiClient#instance}
- * if unspecified.
+ * @deprecated 3.0.0
  */
 export class SitesApi {
 
