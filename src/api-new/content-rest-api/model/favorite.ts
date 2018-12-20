@@ -30,13 +30,13 @@ export class Favorite {
     /**
      * The time the object was made a favorite.
      */
-    createdAt?: DateAlfresco;
+    createdAt?: Date;
     target: any;
 
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+        this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
     }
 
 }

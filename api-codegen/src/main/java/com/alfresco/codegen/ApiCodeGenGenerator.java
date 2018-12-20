@@ -67,7 +67,7 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
             "Use discriminators to create tagged unions instead of extending interfaces.",
             BooleanProperty.TYPE).defaultValue(Boolean.FALSE.toString()));
 
-        typeMapping.put("DateTime", "DateAlfresco");
+        typeMapping.put("DateTime", "Date");
         typeMapping.put("array", "");
         typeMapping.put("List", "");
     }

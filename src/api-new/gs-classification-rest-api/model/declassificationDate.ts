@@ -17,4 +17,4 @@
 
 import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 
-export type DeclassificationDate = DateAlfresco;
+export type DeclassificationDate = Date;

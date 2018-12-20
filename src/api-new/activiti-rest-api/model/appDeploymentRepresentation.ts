@@ -21,7 +21,7 @@ import { LightUserRepresentation } from './lightUserRepresentation';
 
 export class AppDeploymentRepresentation {
     appDefinition?: AppDefinitionRepresentation;
-    created?: DateAlfresco;
+    created?: Date;
     createdBy?: LightUserRepresentation;
     deploymentId?: string;
     dmnDeploymentId?: number;
@@ -31,7 +31,7 @@ export class AppDeploymentRepresentation {
 
         Object.assign(this, input);
         this.appDefinition = input.appDefinition ? new AppDefinitionRepresentation(input.appDefinition) : undefined;
-        this.created = input.created ? new DateAlfresco(input.created) : undefined;
+        this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
         this.createdBy = input.createdBy ? new LightUserRepresentation(input.createdBy) : undefined;
     }
 

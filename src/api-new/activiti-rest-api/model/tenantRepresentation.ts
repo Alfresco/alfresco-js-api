@@ -19,10 +19,10 @@ import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 
 export class TenantRepresentation {
     active?: boolean;
-    created?: DateAlfresco;
+    created?: Date;
     domain?: string;
     id?: number;
-    lastUpdate?: DateAlfresco;
+    lastUpdate?: Date;
     logoId?: number;
     maxUsers?: number;
     name?: string;
@@ -30,8 +30,8 @@ export class TenantRepresentation {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.created = input.created ? new DateAlfresco(input.created) : undefined;
-        this.lastUpdate = input.lastUpdate ? new DateAlfresco(input.lastUpdate) : undefined;
+        this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
+        this.lastUpdate = input.lastUpdate ? DateAlfresco.parseDate(input.lastUpdate) : undefined;
     }
 
 }

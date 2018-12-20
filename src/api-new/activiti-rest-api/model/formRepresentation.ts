@@ -22,7 +22,7 @@ export class FormRepresentation {
     description?: string;
     formDefinition?: FormDefinitionRepresentation;
     id?: number;
-    lastUpdated?: DateAlfresco;
+    lastUpdated?: Date;
     lastUpdatedBy?: number;
     lastUpdatedByFullName?: string;
     name?: string;
@@ -34,7 +34,7 @@ export class FormRepresentation {
 
         Object.assign(this, input);
         this.formDefinition = input.formDefinition ? new FormDefinitionRepresentation(input.formDefinition) : undefined;
-        this.lastUpdated = input.lastUpdated ? new DateAlfresco(input.lastUpdated) : undefined;
+        this.lastUpdated = input.lastUpdated ? DateAlfresco.parseDate(input.lastUpdated) : undefined;
     }
 
 }

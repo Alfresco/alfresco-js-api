@@ -34,7 +34,7 @@ export class Person {
     company?: Company;
     mobile?: string;
     telephone?: string;
-    statusUpdatedAt?: DateAlfresco;
+    statusUpdatedAt?: Date;
     userStatus?: string;
     enabled: boolean;
     emailNotificationsEnabled?: boolean;
@@ -46,7 +46,7 @@ export class Person {
 
         Object.assign(this, input);
         this.company = input.company ? new Company(input.company) : undefined;
-        this.statusUpdatedAt = input.statusUpdatedAt ? new DateAlfresco(input.statusUpdatedAt) : undefined;
+        this.statusUpdatedAt = input.statusUpdatedAt ? DateAlfresco.parseDate(input.statusUpdatedAt) : undefined;
         this.capabilities = input.capabilities ? new Capabilities(input.capabilities) : undefined;
     }
 

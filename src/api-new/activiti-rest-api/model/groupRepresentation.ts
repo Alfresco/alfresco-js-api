@@ -24,7 +24,7 @@ export class GroupRepresentation {
     externalId?: string;
     groups?: GroupRepresentation[];
     id?: number;
-    lastSyncTimeStamp?: DateAlfresco;
+    lastSyncTimeStamp?: Date;
     manager?: UserRepresentation;
     name?: string;
     parentGroupId?: number;
@@ -47,7 +47,7 @@ export class GroupRepresentation {
                 return new GroupRepresentation(item);
             });
         }
-        this.lastSyncTimeStamp = input.lastSyncTimeStamp ? new DateAlfresco(input.lastSyncTimeStamp) : undefined;
+        this.lastSyncTimeStamp = input.lastSyncTimeStamp ? DateAlfresco.parseDate(input.lastSyncTimeStamp) : undefined;
         this.manager = input.manager ? new UserRepresentation(input.manager) : undefined;
         if (input.users) {
             this.users = input.users.map((item: any) => {

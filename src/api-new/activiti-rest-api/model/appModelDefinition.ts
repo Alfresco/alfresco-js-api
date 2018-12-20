@@ -22,7 +22,7 @@ export class AppModelDefinition {
     createdByFullName?: string;
     description?: string;
     id?: number;
-    lastUpdated?: DateAlfresco;
+    lastUpdated?: Date;
     lastUpdatedBy?: number;
     lastUpdatedByFullName?: string;
     modelType?: number;
@@ -33,7 +33,7 @@ export class AppModelDefinition {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.lastUpdated = input.lastUpdated ? new DateAlfresco(input.lastUpdated) : undefined;
+        this.lastUpdated = input.lastUpdated ? DateAlfresco.parseDate(input.lastUpdated) : undefined;
     }
 
 }

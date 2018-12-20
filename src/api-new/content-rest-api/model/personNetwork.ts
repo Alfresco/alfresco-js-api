@@ -34,7 +34,7 @@ export class PersonNetwork {
      */
     homeNetwork?: boolean;
     isEnabled: boolean;
-    createdAt?: DateAlfresco;
+    createdAt?: Date;
     paidNetwork?: boolean;
     subscriptionLevel?: PersonNetwork.SubscriptionLevelEnum | string;
     quotas?: NetworkQuota[];
@@ -42,7 +42,7 @@ export class PersonNetwork {
     constructor(input?: any) {
 
         Object.assign(this, input);
-        this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+        this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
         if (input.quotas) {
             this.quotas = input.quotas.map((item: any) => {
                 return new NetworkQuota(item);

@@ -22,14 +22,14 @@ export class AuditEntry {
     id: string;
     auditApplicationId: string;
     createdByUser: UserInfo;
-    createdAt: DateAlfresco;
+    createdAt: Date;
     values?: { [key: string]: string; };
 
     constructor(input?: any) {
 
         Object.assign(this, input);
         this.createdByUser = input.createdByUser ? new UserInfo(input.createdByUser) : undefined;
-        this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+        this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
     }
 
 }
