@@ -30,7 +30,9 @@ export class ProcessAuth extends AlfrescoApiClient {
     basePath: string;
     storage: Storage;
     ticket: string;
-    authentications: Authentication;
+    static authentications: Authentication = new Authentication({
+        'basicAuth': { ticket: '' }, type: 'activiti'
+    });
 
     static getInstance(config: AlfrescoApiConfig): ProcessAuth {
         if (!ProcessAuth.instance) {
@@ -56,10 +58,6 @@ export class ProcessAuth extends AlfrescoApiClient {
         this.ticket = undefined;
 
         this.basePath = config.hostBpm + '/' + this.config.contextRootBpm;   //Activiti Call
-
-        this.authentications = new Authentication({
-            'basicAuth': { ticket: '' }, type: 'activiti'
-        });
 
         if (this.config.ticketBpm) {
             this.setTicket(config.ticketBpm);
@@ -92,8 +90,8 @@ export class ProcessAuth extends AlfrescoApiClient {
      * @returns A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     login(username: string, password: string): Promise<any> {
-        this.authentications.basicAuth.username = username;
-        this.authentications.basicAuth.password = password;
+        ProcessAuth.authentications.basicAuth.username = username;
+        ProcessAuth.authentications.basicAuth.password = password;
 
         let postBody = {}, pathParams = {}, queryParams = {};
 
@@ -102,8 +100,8 @@ export class ProcessAuth extends AlfrescoApiClient {
             'Cache-Control': 'no-cache'
         };
         let formParams = {
-            j_username: this.authentications.basicAuth.username,
-            j_password: this.authentications.basicAuth.password,
+            j_username: ProcessAuth.authentications.basicAuth.username,
+            j_password: ProcessAuth.authentications.basicAuth.password,
             _spring_security_remember_me: true,
             submit: 'Login'
         };
@@ -119,7 +117,7 @@ export class ProcessAuth extends AlfrescoApiClient {
             ).then(
                 (data) => {
                     this.saveUsername(username);
-                    let ticket = 'Basic ' + btoa(this.authentications.basicAuth.username + ':' + this.authentications.basicAuth.password);
+                    let ticket = 'Basic ' + btoa(ProcessAuth.authentications.basicAuth.username + ':' + ProcessAuth.authentications.basicAuth.password);
                     this.setTicket(ticket);
                     promise.emit('success');
                     resolve(ticket);
@@ -185,16 +183,16 @@ export class ProcessAuth extends AlfrescoApiClient {
      * @param  Ticket
      * */
     setTicket(ticket: string) {
-        this.authentications.basicAuth.ticket = ticket;
-        this.authentications.basicAuth.password = null;
+        ProcessAuth.authentications.basicAuth.ticket = ticket;
+        ProcessAuth.authentications.basicAuth.password = null;
         this.storage.setItem('ticket-BPM', ticket);
         this.ticket = ticket;
     }
 
     invalidateSession() {
         this.storage.removeItem('ticket-BPM');
-        this.authentications.basicAuth.ticket = null;
-        this.authentications.basicAuth.password = null;
+        ProcessAuth.authentications.basicAuth.ticket = null;
+        ProcessAuth.authentications.basicAuth.password = null;
         this.ticket = null;
     }
 
@@ -216,7 +214,7 @@ export class ProcessAuth extends AlfrescoApiClient {
      * return the Authentication
      * */
     getAuthentication(): any {
-        return this.authentications;
+        return ProcessAuth.authentications;
     }
 }
 

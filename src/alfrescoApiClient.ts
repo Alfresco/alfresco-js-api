@@ -1,4 +1,5 @@
 /*!
+
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
 *
@@ -270,7 +271,7 @@ export class AlfrescoApiClient {
      * @returns A value of the specified type.
      */
     deserialize(response: any, returnType: any): any {
-        if (response === null || returnType === null) {
+        if (response === null) {
             return null;
         }
         // Rely on SuperAgent for parsing response body.
@@ -280,77 +281,77 @@ export class AlfrescoApiClient {
             // SuperAgent does not always produce a body; use the unparsed response as a fallback
             data = response.text;
         }
-        return this.convertToType(data, returnType);
+        return data;
     }
 
-    /**
-     * Converts a value to the specified type.
-     * @param {(String|Object)} data The data to convert, as a string or object.
-     * @param {(String|string[]|Object.<String, Object>|Function)} type The type to return. Pass a string for simple types
-     * or the constructor function for a complex type. Pass an array containing the type name to return an array of that type. To
-     * return an object, pass an object with one property whose name is the key type and whose value is the corresponding value type:
-     * all properties on <code>data<code> will be converted to this type.
-     * @returns An instance of the specified type.
-     */
-    convertToType(data: any, type: any): any {
-        switch (type) {
-            case 'Binary':
-                return data;
-            case 'Boolean':
-                return Boolean(data);
-            case 'Integer':
-                return parseInt(data, 10);
-            case 'Number':
-                return parseFloat(data);
-            case 'String':
-                return data !== null && data !== undefined ? String(data) : data;
-            default:
-                if (type === Object) {
-                    // generic object, return directly
-                    return new type(data);
-                } else if (typeof type === 'function') {
-                    // for model type like: User
-                    return new type(data);
-                } else if (Array.isArray(type)) {
-                    // for array type like: ['String']
-                    let itemType = type[0];
-                    if (data) {
-                        return data.map((item: any) => {
-                            return this.convertToType(item, itemType);
-                        });
-                    } else {
-                        return null;
-                    }
-
-                } else if (typeof type === 'object') {
-                    // for plain object type like: {'String': 'Integer'}
-                    let keyType, valueType;
-                    for (let k in type) {
-                        if (type.hasOwnProperty(k)) {
-                            keyType = k;
-                            valueType = type[k];
-                            break;
-                        }
-                    }
-                    let result = {};
-                    for (let k in data) {
-                        if (data.hasOwnProperty(k)) {
-                            let key = this.convertToType(k, keyType);
-                            let rawValue = data[k];
-                            let value = typeof rawValue === 'object'
-                                ? rawValue
-                                : this.convertToType(rawValue, valueType);
-
-                            result[key] = value;
-                        }
-                    }
-                    return result;
-                } else {
-                    // for unknown type, return the data directly
-                    return data;
-                }
-        }
-    }
+    // /**
+    //  * Converts a value to the specified type.
+    //  * @param {(String|Object)} data The data to convert, as a string or object.
+    //  * @param {(String|string[]|Object.<String, Object>|Function)} type The type to return. Pass a string for simple types
+    //  * or the constructor function for a complex type. Pass an array containing the type name to return an array of that type. To
+    //  * return an object, pass an object with one property whose name is the key type and whose value is the corresponding value type:
+    //  * all properties on <code>data<code> will be converted to this type.
+    //  * @returns An instance of the specified type.
+    //  */
+    // convertToType(data: any, type: any): any {
+    //     switch (type) {
+    //         case 'Binary':
+    //             return data;
+    //         case 'Boolean':
+    //             return Boolean(data);
+    //         case 'Integer':
+    //             return parseInt(data, 10);
+    //         case 'Number':
+    //             return parseFloat(data);
+    //         case 'String':
+    //             return data !== null && data !== undefined ? String(data) : data;
+    //         default:
+    //             if (type === Object) {
+    //                 // generic object, return directly
+    //                 return new type(data);
+    //             } else if (typeof type === 'function') {
+    //                 // for model type like: User
+    //                 return new type(data);
+    //             } else if (Array.isArray(type)) {
+    //                 // for array type like: ['String']
+    //                 let itemType = type[0];
+    //                 if (data) {
+    //                     return data.map((item: any) => {
+    //                         return this.convertToType(item, itemType);
+    //                     });
+    //                 } else {
+    //                     return null;
+    //                 }
+    //
+    //             } else if (typeof type === 'object') {
+    //                 // for plain object type like: {'String': 'Integer'}
+    //                 let keyType, valueType;
+    //                 for (let k in type) {
+    //                     if (type.hasOwnProperty(k)) {
+    //                         keyType = k;
+    //                         valueType = type[k];
+    //                         break;
+    //                     }
+    //                 }
+    //                 let result = {};
+    //                 for (let k in data) {
+    //                     if (data.hasOwnProperty(k)) {
+    //                         let key = this.convertToType(k, keyType);
+    //                         let rawValue = data[k];
+    //                         let value = typeof rawValue === 'object'
+    //                             ? rawValue
+    //                             : this.convertToType(rawValue, valueType);
+    //
+    //                         result[key] = value;
+    //                     }
+    //                 }
+    //                 return result;
+    //             } else {
+    //                 // for unknown type, return the data directly
+    //                 return data;
+    //             }
+    //     }
+    //}
 
     /**
      * Invokes the REST service using the supplied settings and parameters.

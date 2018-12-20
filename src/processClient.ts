@@ -45,7 +45,7 @@ export class ProcessClient extends AlfrescoApiClient {
      *
      * @param {Object} authentications
      * */
-    setAuthentications(authentications) {
+    setAuthentications(authentications: Authentication) {
         this.authentications = authentications;
     }
 

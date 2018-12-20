@@ -24,6 +24,7 @@ import { ContentClient } from './contentClient';
 import { ProcessClient } from './processClient';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
+import { Authentication } from './authentication/authentication';
 
 const Emitter = _Emitter;
 
@@ -244,7 +245,7 @@ export class AlfrescoApi {
         });
     }
 
-    setAuthenticationClientECMBPM(authECM: any, authBPM: any) {
+    setAuthenticationClientECMBPM(authECM: Authentication, authBPM: Authentication) {
         this.contentClient.setAuthentications(authECM);
         this.searchClient.setAuthentications(authECM);
         this.contentPrivateClient.setAuthentications(authECM);

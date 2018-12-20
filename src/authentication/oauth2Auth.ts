@@ -34,7 +34,10 @@ export class Oauth2Auth extends AlfrescoApiClient {
     token: string;
     discovery: any;
     jwks: any;
-    authentications: Authentication;
+    authentications: Authentication = new Authentication({
+        'oauth2': { accessToken: '' }, type: 'oauth2'
+    });
+
     iFameHashListner: any;
 
     constructor(config: AlfrescoApiConfig) {
@@ -76,10 +79,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
             }
 
             this.basePath = this.config.oauth2.host; //Auth Call
-
-            this.authentications = new Authentication({
-                'oauth2': { accessToken: '' }, type: 'oauth2'
-            });
 
             this.host = this.config.oauth2.host;
 
@@ -669,7 +668,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
      *
      * @returns {Object} authentications
      * */
-    getAuthentication() {
+    getAuthentication(): Authentication {
         return this.authentications;
     }
 

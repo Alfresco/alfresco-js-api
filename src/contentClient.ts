@@ -51,7 +51,7 @@ export class ContentClient extends AlfrescoApiClient {
      *
      * @param {Object} authentications
      * */
-    setAuthentications(authentications): any {
+    setAuthentications(authentications: Authentication): any {
         this.authentications = authentications;
     }
 
