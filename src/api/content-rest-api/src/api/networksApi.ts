@@ -18,7 +18,6 @@
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { NetworksApi as NewNetworksApi } from '../../../../api-new/content-rest-api/api/networks.api';
 import { PersonNetworkEntry } from '../../../../api-new/content-rest-api/model/personNetworkEntry';
-import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
 import { PersonNetworkPaging } from '../../../../api-new/content-rest-api/model/personNetworkPaging';
 
 /**
@@ -40,7 +39,7 @@ export class NetworksApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonNetworkEntry}
      */
-    getNetwork(networkId: string, opts?: any): Promise<PersonNetworkEntry | ModelError> {
+    getNetwork(networkId: string, opts?: any): Promise<PersonNetworkEntry> {
         return this.networksApi.getNetwork(networkId, opts);
     }
 
@@ -53,7 +52,7 @@ export class NetworksApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PersonNetworkEntry}
      */
-    getNetworkForPerson(personId: string, networkId: string, opts?: any): Promise<PersonNetworkEntry | ModelError> {
+    getNetworkForPerson(personId: string, networkId: string, opts?: any): Promise<PersonNetworkEntry> {
         return this.networksApi.getNetworkForPerson(personId, networkId, opts);
     }
 
@@ -67,7 +66,7 @@ export class NetworksApi {
      * @param {string[]} opts.fields A list of field names.  You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.  The list applies to a returned individual entity or entries within a collection.  If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PersonNetworkPaging}
      */
-    listNetworksForPerson(personId: string, opts?: any): Promise<PersonNetworkPaging | ModelError> {
+    listNetworksForPerson(personId: string, opts?: any): Promise<PersonNetworkPaging> {
         return this.networksApi.listNetworksForPerson(personId, opts);
     }
 }

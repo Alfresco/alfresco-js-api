@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
 import { RevertBody } from '../model/revertBody';
 import { VersionEntry } from '../model/versionEntry';
 import { VersionPaging } from '../model/versionPaging';
@@ -48,7 +47,7 @@ params (majorVersion and comment) on a subsequent file content update.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @return Promise<{}>
     */
-    deleteVersion(nodeId: string, versionId: string): Promise<any | ModelError> {
+    deleteVersion(nodeId: string, versionId: string): Promise<any> {
 
         let postBody = null;
 
@@ -93,7 +92,7 @@ params (majorVersion and comment) on a subsequent file content update.
         * @param versionId The identifier of a version, ie. version label, within the version history of a node.
         * @return Promise<VersionEntry>
         */
-    getVersion(nodeId: string, versionId: string): Promise<VersionEntry | ModelError> {
+    getVersion(nodeId: string, versionId: string): Promise<VersionEntry> {
 
         let postBody = null;
 
@@ -155,7 +154,7 @@ params (majorVersion and comment) on a subsequent file content update.
 
         * @return Promise<{}>
         */
-    getVersionContent(nodeId: string, versionId: string, opts?: any): Promise<any | ModelError> {
+    getVersionContent(nodeId: string, versionId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -226,7 +225,7 @@ params (majorVersion and comment) on a subsequent file content update.
      (default to 100)
         * @return Promise<VersionPaging>
         */
-    listVersionHistory(nodeId: string, opts?: any): Promise<VersionPaging | ModelError> {
+    listVersionHistory(nodeId: string, opts?: any): Promise<VersionPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -288,7 +287,7 @@ params (majorVersion and comment) on a subsequent file content update.
 
         * @return Promise<VersionEntry>
         */
-    revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: any): Promise<VersionEntry | ModelError> {
+    revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: any): Promise<VersionEntry> {
         opts = opts || {};
         let postBody = revertBody;
 

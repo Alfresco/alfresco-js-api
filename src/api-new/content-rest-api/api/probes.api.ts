@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
 import { ProbeEntry } from '../model/probeEntry';
 import { BaseApi } from './base.api';
 
@@ -44,7 +43,7 @@ The liveness probe should then be used to check the repository is still respondi
 
     * @return Promise<ProbeEntry>
     */
-    getProbe(probeId: string): Promise<ProbeEntry | ModelError> {
+    getProbe(probeId: string): Promise<ProbeEntry> {
 
         let postBody = null;
 

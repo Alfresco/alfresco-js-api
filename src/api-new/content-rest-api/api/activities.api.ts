@@ -16,7 +16,6 @@
 */
 
 import { ActivityPaging } from '../model/activityPaging';
-import { ModelError } from '../model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -57,7 +56,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<ActivityPaging>
     */
-    listActivitiesForPerson(personId: string, opts?: any): Promise<ActivityPaging | ModelError> {
+    listActivitiesForPerson(personId: string, opts?: any): Promise<ActivityPaging> {
         opts = opts || {};
         let postBody = null;
 

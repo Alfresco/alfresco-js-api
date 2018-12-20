@@ -209,10 +209,6 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
             String className = getModelnameFromModelFilename(im.get("filename").toString());
             im.put("classname", className);
 
-            if (className.equals("ModelError")) {
-                objs.put("canReturnError", className);
-            }
-
             if (im.equals("Map") || im.equals("")) {
                 imports.remove(im);
             }

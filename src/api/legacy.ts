@@ -79,17 +79,7 @@ import { WebscriptApi } from './content-rest-api/src/api/webscriptApi';
 import { ChangesApi } from './content-rest-api/src/api/changesApi';
 import { SitesApi } from './content-rest-api/src/api/sitesApi';
 import { GroupsApi as GroupsApiCS } from './content-rest-api/src/api/groupsApi';
-import { FavoriteBodyCreate } from '../api-new/content-rest-api/model/favoriteBodyCreate';
-import { SiteMembershipBodyUpdate } from '../api-new/content-rest-api/model/siteMembershipBodyUpdate';
-import { SharedLinkBodyCreate } from '../api-new/content-rest-api/model/sharedLinkBodyCreate';
-import { SharedLinkBodyEmail } from '../api-new/content-rest-api/model/sharedLinkBodyEmail';
-import { SiteMembershipRequestBodyCreate } from '../api-new/content-rest-api/model/siteMembershipRequestBodyCreate';
-import { FavoriteSiteBodyCreate } from '../api-new/content-rest-api/model/favoriteSiteBodyCreate';
-import { GroupPaging } from '../api-new/content-rest-api/model/groupPaging';
-import { SiteMembershipRequestBodyUpdate } from '../api-new/content-rest-api/model/siteMembershipRequestBodyUpdate';
-import { NodeBodyCreate } from '../api-new/content-rest-api/model/nodeBodyCreate';
-import { NodeBodyCopy } from '../api-new/content-rest-api/model/nodeBodyCopy';
-import { ChildAssociationBody } from '../api-new/content-rest-api/model/childAssociationBody';
+
 
 /**
  * @deprecated 3.0.0

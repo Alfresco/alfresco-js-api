@@ -18,7 +18,6 @@
 import { DeclassificationExemptionBody } from '../model/declassificationExemptionBody';
 import { DeclassificationExemptionEntry } from '../model/declassificationExemptionEntry';
 import { DeclassificationExemptionsPaging } from '../model/declassificationExemptionsPaging';
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -76,7 +75,7 @@ JSON
     * @param declassificationExemption Declassification exemption
     * @return Promise<DeclassificationExemptionEntry>
     */
-    createDeclassificationExemption(declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry | ModelError> {
+    createDeclassificationExemption(declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry> {
 
         let postBody = declassificationExemption;
 
@@ -113,7 +112,7 @@ JSON
         * @param declassificationExemptionId The identifier for the declassification exemption
         * @return Promise<{}>
         */
-    deleteDeclassificationExemption(declassificationExemptionId: string): Promise<any | ModelError> {
+    deleteDeclassificationExemption(declassificationExemptionId: string): Promise<any> {
 
         let postBody = null;
 
@@ -152,7 +151,7 @@ JSON
         * @param opts.maxItems The maximum number of items to return in the list.
         * @return Promise<DeclassificationExemptionsPaging>
         */
-    listDeclassificationExemptions(opts?: any): Promise<DeclassificationExemptionsPaging | ModelError> {
+    listDeclassificationExemptions(opts?: any): Promise<DeclassificationExemptionsPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -187,7 +186,7 @@ JSON
         * @param declassificationExemptionId The identifier for the declassification exemption
         * @return Promise<DeclassificationExemptionEntry>
         */
-    showDeclassificationExemptionById(declassificationExemptionId: string): Promise<DeclassificationExemptionEntry | ModelError> {
+    showDeclassificationExemptionById(declassificationExemptionId: string): Promise<DeclassificationExemptionEntry> {
 
         let postBody = null;
 
@@ -225,7 +224,7 @@ JSON
         * @param declassificationExemption Declassification exemption
         * @return Promise<DeclassificationExemptionEntry>
         */
-    updateDeclassificationExemption(declassificationExemptionId: string, declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry | ModelError> {
+    updateDeclassificationExemption(declassificationExemptionId: string, declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry> {
 
         let postBody = declassificationExemption;
 

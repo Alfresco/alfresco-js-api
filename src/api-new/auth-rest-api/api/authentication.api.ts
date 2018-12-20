@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { TicketBody } from '../model/ticketBody';
 import { TicketEntry } from '../model/ticketEntry';
 import { ValidTicketEntry } from '../model/validTicketEntry';
@@ -50,7 +49,7 @@ For example using Javascript:
     * @param ticketBodyCreate The user credential.
     * @return Promise<TicketEntry>
     */
-    createTicket(ticketBodyCreate: TicketBody): Promise<TicketEntry | ModelError> {
+    createTicket(ticketBodyCreate: TicketBody): Promise<TicketEntry> {
 
         let postBody = ticketBodyCreate;
 
@@ -89,7 +88,7 @@ For example using Javascript:
         *
         * @return Promise<{}>
         */
-    deleteTicket(): Promise<any | ModelError> {
+    deleteTicket(): Promise<any> {
 
         let postBody = null;
 
@@ -129,7 +128,7 @@ For example using Javascript:
         *
         * @return Promise<ValidTicketEntry>
         */
-    validateTicket(): Promise<ValidTicketEntry | ModelError> {
+    validateTicket(): Promise<ValidTicketEntry> {
 
         let postBody = null;
 

@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
 import { SiteBodyCreate } from '../model/siteBodyCreate';
 import { SiteBodyUpdate } from '../model/siteBodyUpdate';
 import { SiteContainerEntry } from '../model/siteContainerEntry';
@@ -53,7 +52,7 @@ export class SitesApi extends BaseApi {
 
     * @return Promise<{}>
     */
-    approveSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<any | ModelError> {
+    approveSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = opts['siteMembershipApprovalBody'];
 
@@ -134,7 +133,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteEntry>
         */
-    createSite(siteBodyCreate: SiteBodyCreate, opts?: any): Promise<SiteEntry | ModelError> {
+    createSite(siteBodyCreate: SiteBodyCreate, opts?: any): Promise<SiteEntry> {
         opts = opts || {};
         let postBody = siteBodyCreate;
 
@@ -239,7 +238,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteMemberEntry>
         */
-    createSiteMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: any): Promise<SiteMemberEntry | ModelError> {
+    createSiteMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: any): Promise<SiteMemberEntry> {
         opts = opts || {};
         let postBody = siteMembershipBodyCreate;
 
@@ -348,7 +347,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteMembershipRequestEntry>
         */
-    createSiteMembershipRequestForPerson(personId: string, siteMembershipRequestBodyCreate: SiteMembershipRequestBodyCreate, opts?: any): Promise<SiteMembershipRequestEntry | ModelError> {
+    createSiteMembershipRequestForPerson(personId: string, siteMembershipRequestBodyCreate: SiteMembershipRequestBodyCreate, opts?: any): Promise<SiteMembershipRequestEntry> {
         opts = opts || {};
         let postBody = siteMembershipRequestBodyCreate;
 
@@ -395,7 +394,7 @@ export class SitesApi extends BaseApi {
         * @param opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
         * @return Promise<{}>
         */
-    deleteSite(siteId: string, opts?: any): Promise<any | ModelError> {
+    deleteSite(siteId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -437,7 +436,7 @@ export class SitesApi extends BaseApi {
         * @param personId The identifier of a person.
         * @return Promise<{}>
         */
-    deleteSiteMembership(siteId: string, personId: string): Promise<any | ModelError> {
+    deleteSiteMembership(siteId: string, personId: string): Promise<any> {
 
         let postBody = null;
 
@@ -482,7 +481,7 @@ export class SitesApi extends BaseApi {
         * @param siteId The identifier of a site.
         * @return Promise<{}>
         */
-    deleteSiteMembershipForPerson(personId: string, siteId: string): Promise<any | ModelError> {
+    deleteSiteMembershipForPerson(personId: string, siteId: string): Promise<any> {
 
         let postBody = null;
 
@@ -527,7 +526,7 @@ export class SitesApi extends BaseApi {
         * @param siteId The identifier of a site.
         * @return Promise<{}>
         */
-    deleteSiteMembershipRequestForPerson(personId: string, siteId: string): Promise<any | ModelError> {
+    deleteSiteMembershipRequestForPerson(personId: string, siteId: string): Promise<any> {
 
         let postBody = null;
 
@@ -595,7 +594,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteEntry>
         */
-    getSite(siteId: string, opts?: any): Promise<SiteEntry | ModelError> {
+    getSite(siteId: string, opts?: any): Promise<SiteEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -648,7 +647,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteContainerEntry>
         */
-    getSiteContainer(siteId: string, containerId: string, opts?: any): Promise<SiteContainerEntry | ModelError> {
+    getSiteContainer(siteId: string, containerId: string, opts?: any): Promise<SiteContainerEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -707,7 +706,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteMemberEntry>
         */
-    getSiteMembership(siteId: string, personId: string, opts?: any): Promise<SiteMemberEntry | ModelError> {
+    getSiteMembership(siteId: string, personId: string, opts?: any): Promise<SiteMemberEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -753,7 +752,7 @@ export class SitesApi extends BaseApi {
         * @param siteId The identifier of a site.
         * @return Promise<SiteRoleEntry>
         */
-    getSiteMembershipForPerson(personId: string, siteId: string): Promise<SiteRoleEntry | ModelError> {
+    getSiteMembershipForPerson(personId: string, siteId: string): Promise<SiteRoleEntry> {
 
         let postBody = null;
 
@@ -811,7 +810,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteMembershipRequestEntry>
         */
-    getSiteMembershipRequestForPerson(personId: string, siteId: string, opts?: any): Promise<SiteMembershipRequestEntry | ModelError> {
+    getSiteMembershipRequestForPerson(personId: string, siteId: string, opts?: any): Promise<SiteMembershipRequestEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -891,7 +890,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteMembershipRequestWithPersonPaging>
         */
-    getSiteMembershipRequests(opts?: any): Promise<SiteMembershipRequestWithPersonPaging | ModelError> {
+    getSiteMembershipRequests(opts?: any): Promise<SiteMembershipRequestWithPersonPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -947,7 +946,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteContainerPaging>
         */
-    listSiteContainers(siteId: string, opts?: any): Promise<SiteContainerPaging | ModelError> {
+    listSiteContainers(siteId: string, opts?: any): Promise<SiteContainerPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -1009,7 +1008,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteMembershipRequestPaging>
         */
-    listSiteMembershipRequestsForPerson(personId: string, opts?: any): Promise<SiteMembershipRequestPaging | ModelError> {
+    listSiteMembershipRequestsForPerson(personId: string, opts?: any): Promise<SiteMembershipRequestPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -1068,7 +1067,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteMemberPaging>
         */
-    listSiteMemberships(siteId: string, opts?: any): Promise<SiteMemberPaging | ModelError> {
+    listSiteMemberships(siteId: string, opts?: any): Promise<SiteMemberPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -1162,7 +1161,7 @@ export class SitesApi extends BaseApi {
         * @param opts.where A string to restrict the returned objects by using a predicate.
         * @return Promise<SiteRolePaging>
         */
-    listSiteMembershipsForPerson(personId: string, opts?: any): Promise<SiteRolePaging | ModelError> {
+    listSiteMembershipsForPerson(personId: string, opts?: any): Promise<SiteRolePaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -1268,7 +1267,7 @@ export class SitesApi extends BaseApi {
         * @param opts.where A string to restrict the returned objects by using a predicate.
         * @return Promise<SitePaging>
         */
-    listSites(opts?: any): Promise<SitePaging | ModelError> {
+    listSites(opts?: any): Promise<SitePaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -1312,7 +1311,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<{}>
         */
-    rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<any | ModelError> {
+    rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = opts['siteMembershipRejectionBody'];
 
@@ -1373,7 +1372,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteEntry>
         */
-    updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts?: any): Promise<SiteEntry | ModelError> {
+    updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts?: any): Promise<SiteEntry> {
         opts = opts || {};
         let postBody = siteBodyUpdate;
 
@@ -1440,7 +1439,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteMemberEntry>
         */
-    updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: any): Promise<SiteMemberEntry | ModelError> {
+    updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: any): Promise<SiteMemberEntry> {
         opts = opts || {};
         let postBody = siteMembershipBodyUpdate;
 
@@ -1504,7 +1503,7 @@ export class SitesApi extends BaseApi {
 
         * @return Promise<SiteMembershipRequestEntry>
         */
-    updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts?: any): Promise<SiteMembershipRequestEntry | ModelError> {
+    updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts?: any): Promise<SiteMembershipRequestEntry> {
         opts = opts || {};
         let postBody = siteMembershipRequestBodyUpdate;
 

@@ -16,7 +16,6 @@
 */
 
 import { ClientBody } from '../model/clientBody';
-import { ModelError } from '../model/modelError';
 import { PasswordResetBody } from '../model/passwordResetBody';
 import { PersonBodyCreate } from '../model/personBodyCreate';
 import { PersonBodyUpdate } from '../model/personBodyUpdate';
@@ -73,7 +72,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonEntry>
     */
-    createPerson(personBodyCreate: PersonBodyCreate, opts?: any): Promise<PersonEntry | ModelError> {
+    createPerson(personBodyCreate: PersonBodyCreate, opts?: any): Promise<PersonEntry> {
         opts = opts || {};
         let postBody = personBodyCreate;
 
@@ -118,7 +117,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param personId The identifier of a person.
         * @return Promise<{}>
         */
-    deleteAvatarImage(personId: string): Promise<any | ModelError> {
+    deleteAvatarImage(personId: string): Promise<any> {
 
         let postBody = null;
 
@@ -178,7 +177,7 @@ parameter are returned in addition to those specified in the **fields** paramete
      (default to true)
         * @return Promise<{}>
         */
-    getAvatarImage(personId: string, opts?: any): Promise<any | ModelError> {
+    getAvatarImage(personId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -233,7 +232,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<PersonEntry>
         */
-    getPerson(personId: string, opts?: any): Promise<PersonEntry | ModelError> {
+    getPerson(personId: string, opts?: any): Promise<PersonEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -315,7 +314,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<PersonPaging>
         */
-    listPeople(opts?: any): Promise<PersonPaging | ModelError> {
+    listPeople(opts?: any): Promise<PersonPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -372,7 +371,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param clientBody The client name to send email with app-specific url.
         * @return Promise<{}>
         */
-    requestPasswordReset(personId: string, clientBody: ClientBody): Promise<any | ModelError> {
+    requestPasswordReset(personId: string, clientBody: ClientBody): Promise<any> {
 
         let postBody = clientBody;
 
@@ -427,7 +426,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param passwordResetBody The reset password details
         * @return Promise<{}>
         */
-    resetPassword(personId: string, passwordResetBody: PasswordResetBody): Promise<any | ModelError> {
+    resetPassword(personId: string, passwordResetBody: PasswordResetBody): Promise<any> {
 
         let postBody = passwordResetBody;
 
@@ -479,7 +478,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param contentBodyUpdate The binary content
         * @return Promise<{}>
         */
-    updateAvatarImage(personId: string, contentBodyUpdate: string): Promise<any | ModelError> {
+    updateAvatarImage(personId: string, contentBodyUpdate: string): Promise<any> {
 
         let postBody = contentBodyUpdate;
 
@@ -562,7 +561,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<PersonEntry>
         */
-    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts?: any): Promise<PersonEntry | ModelError> {
+    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts?: any): Promise<PersonEntry> {
         opts = opts || {};
         let postBody = personBodyUpdate;
 

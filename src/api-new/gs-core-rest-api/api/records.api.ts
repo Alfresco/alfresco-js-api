@@ -16,7 +16,6 @@
 */
 
 import { FilePlanComponentBodyUpdate } from '../model/filePlanComponentBodyUpdate';
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { RecordEntry } from '../model/recordEntry';
 import { RequestBodyFile } from '../model/requestBodyFile';
 import { BaseApi } from './base.api';
@@ -54,7 +53,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordEntry>
     */
-    completeRecord(recordId: string, opts?: any): Promise<RecordEntry | ModelError> {
+    completeRecord(recordId: string, opts?: any): Promise<RecordEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -94,7 +93,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param recordId The identifier of a record.
         * @return Promise<{}>
         */
-    deleteRecord(recordId: string): Promise<any | ModelError> {
+    deleteRecord(recordId: string): Promise<any> {
 
         let postBody = null;
 
@@ -158,7 +157,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordEntry>
         */
-    fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts?: any): Promise<RecordEntry | ModelError> {
+    fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts?: any): Promise<RecordEntry> {
         opts = opts || {};
         let postBody = nodeBodyFile;
 
@@ -225,7 +224,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordEntry>
         */
-    getRecord(recordId: string, opts?: any): Promise<RecordEntry | ModelError> {
+    getRecord(recordId: string, opts?: any): Promise<RecordEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -280,7 +279,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<{}>
         */
-    getRecordContent(recordId: string, opts?: any): Promise<any | ModelError> {
+    getRecordContent(recordId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -357,7 +356,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordEntry>
         */
-    updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordEntry | ModelError> {
+    updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordEntry> {
         opts = opts || {};
         let postBody = recordBodyUpdate;
 

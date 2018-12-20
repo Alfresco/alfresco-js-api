@@ -17,7 +17,6 @@
 
 import { DownloadBodyCreate } from '../model/downloadBodyCreate';
 import { DownloadEntry } from '../model/downloadEntry';
-import { ModelError } from '../model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -44,7 +43,7 @@ The cancel operation is done asynchronously.
     * @param downloadId The identifier of a download node.
     * @return Promise<{}>
     */
-    cancelDownload(downloadId: string): Promise<any | ModelError> {
+    cancelDownload(downloadId: string): Promise<any> {
 
         let postBody = null;
 
@@ -109,7 +108,7 @@ The cancel operation is done asynchronously.
 
         * @return Promise<DownloadEntry>
         */
-    createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: any): Promise<DownloadEntry | ModelError> {
+    createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: any): Promise<DownloadEntry> {
         opts = opts || {};
         let postBody = downloadBodyCreate;
 
@@ -163,7 +162,7 @@ The cancel operation is done asynchronously.
 
         * @return Promise<DownloadEntry>
         */
-    getDownload(downloadId: string, opts?: any): Promise<DownloadEntry | ModelError> {
+    getDownload(downloadId: string, opts?: any): Promise<DownloadEntry> {
         opts = opts || {};
         let postBody = null;
 

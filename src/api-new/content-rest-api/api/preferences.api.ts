@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
 import { PreferenceEntry } from '../model/preferenceEntry';
 import { PreferencePaging } from '../model/preferencePaging';
 import { BaseApi } from './base.api';
@@ -50,7 +49,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PreferenceEntry>
     */
-    getPreference(personId: string, preferenceName: string, opts?: any): Promise<PreferenceEntry | ModelError> {
+    getPreference(personId: string, preferenceName: string, opts?: any): Promise<PreferenceEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -117,7 +116,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<PreferencePaging>
         */
-    listPreferences(personId: string, opts?: any): Promise<PreferencePaging | ModelError> {
+    listPreferences(personId: string, opts?: any): Promise<PreferencePaging> {
         opts = opts || {};
         let postBody = null;
 

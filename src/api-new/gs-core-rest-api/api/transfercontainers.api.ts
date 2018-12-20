@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { TransferContainerAssociationPaging } from '../model/transferContainerAssociationPaging';
 import { TransferContainerBodyUpdate } from '../model/transferContainerBodyUpdate';
 import { TransferContainerEntry } from '../model/transferContainerEntry';
@@ -56,7 +55,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TransferContainerEntry>
     */
-    getTransferContainer(transferContainerId: string, opts?: any): Promise<TransferContainerEntry | ModelError> {
+    getTransferContainer(transferContainerId: string, opts?: any): Promise<TransferContainerEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -124,7 +123,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<TransferContainerAssociationPaging>
         */
-    listTransfers(transferContainerId: string, opts?: any): Promise<TransferContainerAssociationPaging | ModelError> {
+    listTransfers(transferContainerId: string, opts?: any): Promise<TransferContainerAssociationPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -201,7 +200,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<TransferContainerEntry>
         */
-    updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: any): Promise<TransferContainerEntry | ModelError> {
+    updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: any): Promise<TransferContainerEntry> {
         opts = opts || {};
         let postBody = nodeBodyUpdate;
 

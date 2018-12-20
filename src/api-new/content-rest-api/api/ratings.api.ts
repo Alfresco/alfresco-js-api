@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
 import { RatingBody } from '../model/ratingBody';
 import { RatingEntry } from '../model/ratingEntry';
 import { RatingPaging } from '../model/ratingPaging';
@@ -57,7 +56,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RatingEntry>
     */
-    createRating(nodeId: string, ratingBodyCreate: RatingBody, opts?: any): Promise<RatingEntry | ModelError> {
+    createRating(nodeId: string, ratingBodyCreate: RatingBody, opts?: any): Promise<RatingEntry> {
         opts = opts || {};
         let postBody = ratingBodyCreate;
 
@@ -100,7 +99,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param ratingId The identifier of a rating.
         * @return Promise<{}>
         */
-    deleteRating(nodeId: string, ratingId: string): Promise<any | ModelError> {
+    deleteRating(nodeId: string, ratingId: string): Promise<any> {
 
         let postBody = null;
 
@@ -155,7 +154,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RatingEntry>
         */
-    getRating(nodeId: string, ratingId: string, opts?: any): Promise<RatingEntry | ModelError> {
+    getRating(nodeId: string, ratingId: string, opts?: any): Promise<RatingEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -216,7 +215,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RatingPaging>
         */
-    listRatings(nodeId: string, opts?: any): Promise<RatingPaging | ModelError> {
+    listRatings(nodeId: string, opts?: any): Promise<RatingPaging> {
         opts = opts || {};
         let postBody = null;
 

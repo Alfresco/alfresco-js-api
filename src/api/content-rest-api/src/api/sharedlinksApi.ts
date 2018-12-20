@@ -18,7 +18,6 @@
 import { SharedlinksApi as NewSharedlinksApi } from '../../../../api-new/content-rest-api/api/sharedlinks.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { SharedLinkEntry } from '../../../../api-new/content-rest-api/model/sharedLinkEntry';
-import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
 import { SharedLinkBodyCreate } from '../../../../api-new/content-rest-api/model/sharedLinkBodyCreate';
 import { SharedLinkBodyEmail } from '../../../../api-new/content-rest-api/model/sharedLinkBodyEmail';
 import { SharedLinkPaging } from '../../../../api-new/content-rest-api/model/sharedLinkPaging';
@@ -45,7 +44,7 @@ export class SharedlinksApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
-    addSharedLink(sharedLinkBody: SharedLinkBodyCreate, opts?: any): Promise<SharedLinkEntry | ModelError> {
+    addSharedLink(sharedLinkBody: SharedLinkBodyCreate, opts?: any): Promise<SharedLinkEntry> {
         return this.sharedlinksApi.createSharedLink(sharedLinkBody, opts);
     }
 
@@ -54,7 +53,7 @@ export class SharedlinksApi {
      * Deletes the shared link with identifier **sharedId**.
      * @param {String} sharedId The identifier of a shared link to a file.
      */
-    deleteSharedLink(sharedId: string): Promise<any | ModelError> {
+    deleteSharedLink(sharedId: string): Promise<any> {
         return this.sharedlinksApi.deleteSharedLink(sharedId);
     }
 
@@ -64,7 +63,7 @@ export class SharedlinksApi {
      * @param {String} sharedId The identifier of a shared link to a file.
      * @param {module:model/EmailSharedLinkBody} emailSharedLinkBody The shared link email to send.
      */
-    emailSharedLink(sharedId: string, emailSharedLinkBody:  SharedLinkBodyEmail): Promise<any | ModelError> {
+    emailSharedLink(sharedId: string, emailSharedLinkBody:  SharedLinkBodyEmail): Promise<any> {
         return this.sharedlinksApi.emailSharedLink(sharedId, <any>emailSharedLinkBody);
     }
 
@@ -79,7 +78,7 @@ export class SharedlinksApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkPaging}
      */
-    findSharedLinks(opts?: any): Promise<SharedLinkPaging | ModelError> {
+    findSharedLinks(opts?: any): Promise<SharedLinkPaging> {
         return this.sharedlinksApi.listSharedLinks(opts);
     }
 
@@ -92,7 +91,7 @@ export class SharedlinksApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
-    getSharedLink(sharedId: string, opts?: any): Promise<SharedLinkEntry | ModelError> {
+    getSharedLink(sharedId: string, opts?: any): Promise<SharedLinkEntry> {
         return this.sharedlinksApi.getSharedLink(sharedId, opts);
     }
 
@@ -104,7 +103,7 @@ export class SharedlinksApi {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    getSharedLinkContent(sharedId: string, opts?: any): Promise<any | ModelError> {
+    getSharedLinkContent(sharedId: string, opts?: any): Promise<any> {
         return this.sharedlinksApi.getSharedLinkContent(sharedId, opts);
     }
 
@@ -117,7 +116,7 @@ export class SharedlinksApi {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any | ModelError> {
+    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any> {
         return this.sharedlinksApi.getSharedLinkRenditionContent(sharedId, renditionId, opts);
     }
 
@@ -127,7 +126,7 @@ export class SharedlinksApi {
      * @param {String} sharedId The identifier of a shared link to a file.
      * data is of type: {module:model/RenditionPaging}
      */
-    getSharedLinkRenditions(sharedId: string): Promise<RenditionPaging | ModelError> {
+    getSharedLinkRenditions(sharedId: string): Promise<RenditionPaging> {
         return this.sharedlinksApi.listSharedLinkRenditions(sharedId);
     }
 
@@ -137,7 +136,7 @@ export class SharedlinksApi {
      * @param {String} renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
      * data is of type: {module:model/RenditionEntry}
      */
-    getSharedLinkRendition(sharedId: string, renditionId: string): Promise<RenditionEntry | ModelError> {
+    getSharedLinkRendition(sharedId: string, renditionId: string): Promise<RenditionEntry> {
         return this.sharedlinksApi.getSharedLinkRendition(sharedId, renditionId);
     }
 }

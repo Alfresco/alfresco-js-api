@@ -20,7 +20,6 @@ import { FavoriteEntry } from '../model/favoriteEntry';
 import { FavoritePaging } from '../model/favoritePaging';
 import { FavoriteSiteBodyCreate } from '../model/favoriteSiteBodyCreate';
 import { FavoriteSiteEntry } from '../model/favoriteSiteEntry';
-import { ModelError } from '../model/modelError';
 import { SiteEntry } from '../model/siteEntry';
 import { SitePaging } from '../model/sitePaging';
 import { BaseApi } from './base.api';
@@ -121,7 +120,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<FavoriteEntry>
     */
-    createFavorite(personId: string, favoriteBodyCreate: FavoriteBodyCreate, opts?: any): Promise<FavoriteEntry | ModelError> {
+    createFavorite(personId: string, favoriteBodyCreate: FavoriteBodyCreate, opts?: any): Promise<FavoriteEntry> {
         opts = opts || {};
         let postBody = favoriteBodyCreate;
 
@@ -225,7 +224,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<FavoriteSiteEntry>
         */
-    createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts?: any): Promise<FavoriteSiteEntry | ModelError> {
+    createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts?: any): Promise<FavoriteSiteEntry> {
         opts = opts || {};
         let postBody = favoriteSiteBodyCreate;
 
@@ -271,7 +270,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param favoriteId The identifier of a favorite.
         * @return Promise<{}>
         */
-    deleteFavorite(personId: string, favoriteId: string): Promise<any | ModelError> {
+    deleteFavorite(personId: string, favoriteId: string): Promise<any> {
 
         let postBody = null;
 
@@ -319,7 +318,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param siteId The identifier of a site.
         * @return Promise<{}>
         */
-    deleteSiteFavorite(personId: string, siteId: string): Promise<any | ModelError> {
+    deleteSiteFavorite(personId: string, siteId: string): Promise<any> {
 
         let postBody = null;
 
@@ -380,7 +379,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<FavoriteEntry>
         */
-    getFavorite(personId: string, favoriteId: string, opts?: any): Promise<FavoriteEntry | ModelError> {
+    getFavorite(personId: string, favoriteId: string, opts?: any): Promise<FavoriteEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -443,7 +442,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<SiteEntry>
         */
-    getFavoriteSite(personId: string, siteId: string, opts?: any): Promise<SiteEntry | ModelError> {
+    getFavoriteSite(personId: string, siteId: string, opts?: any): Promise<SiteEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -510,7 +509,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<SitePaging>
         */
-    listFavoriteSitesForPerson(personId: string, opts?: any): Promise<SitePaging | ModelError> {
+    listFavoriteSitesForPerson(personId: string, opts?: any): Promise<SitePaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -600,7 +599,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<FavoritePaging>
         */
-    listFavorites(personId: string, opts?: any): Promise<FavoritePaging | ModelError> {
+    listFavorites(personId: string, opts?: any): Promise<FavoritePaging> {
         opts = opts || {};
         let postBody = null;
 

@@ -16,7 +16,6 @@
 */
 
 import { FilePlanComponentBodyUpdate } from '../model/filePlanComponentBodyUpdate';
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { RMNodeBodyCreateWithRelativePath } from '../model/rMNodeBodyCreateWithRelativePath';
 import { RecordCategoryChildEntry } from '../model/recordCategoryChildEntry';
 import { RecordCategoryChildPaging } from '../model/recordCategoryChildPaging';
@@ -149,7 +148,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordCategoryChildEntry>
     */
-    createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<RecordCategoryChildEntry | ModelError> {
+    createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<RecordCategoryChildEntry> {
         opts = opts || {};
         let postBody = nodeBodyCreate;
 
@@ -194,7 +193,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param recordCategoryId The identifier of a record category.
         * @return Promise<{}>
         */
-    deleteRecordCategory(recordCategoryId: string): Promise<any | ModelError> {
+    deleteRecordCategory(recordCategoryId: string): Promise<any> {
 
         let postBody = null;
 
@@ -256,7 +255,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordCategoryEntry>
         */
-    getRecordCategory(recordCategoryId: string, opts?: any): Promise<RecordCategoryEntry | ModelError> {
+    getRecordCategory(recordCategoryId: string, opts?: any): Promise<RecordCategoryEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -339,7 +338,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordCategoryChildPaging>
         */
-    listRecordCategoryChildren(recordCategoryId: string, opts?: any): Promise<RecordCategoryChildPaging | ModelError> {
+    listRecordCategoryChildren(recordCategoryId: string, opts?: any): Promise<RecordCategoryChildPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -421,7 +420,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordCategoryEntry>
         */
-    updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordCategoryEntry | ModelError> {
+    updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordCategoryEntry> {
         opts = opts || {};
         let postBody = recordCategoryBodyUpdate;
 

@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { RMSiteBodyCreate } from '../model/rMSiteBodyCreate';
 import { RMSiteBodyUpdate } from '../model/rMSiteBodyUpdate';
 import { RMSiteEntry } from '../model/rMSiteEntry';
@@ -51,7 +50,7 @@ When you create the RM site, the **filePlan** structure is also created includin
     * @param opts.skipAddToFavorites Flag to indicate whether the RM site should not be added to the user's site favorites. (default to false)
     * @return Promise<RMSiteEntry>
     */
-    createRMSite(siteBodyCreate: RMSiteBodyCreate, opts?: any): Promise<RMSiteEntry | ModelError> {
+    createRMSite(siteBodyCreate: RMSiteBodyCreate, opts?: any): Promise<RMSiteEntry> {
         opts = opts || {};
         let postBody = siteBodyCreate;
 
@@ -90,7 +89,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         *
         * @return Promise<{}>
         */
-    deleteRMSite(): Promise<any | ModelError> {
+    deleteRMSite(): Promise<any> {
 
         let postBody = null;
 
@@ -137,7 +136,7 @@ When you create the RM site, the **filePlan** structure is also created includin
 
         * @return Promise<RMSiteEntry>
         */
-    getRMSite(opts?: any): Promise<RMSiteEntry | ModelError> {
+    getRMSite(opts?: any): Promise<RMSiteEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -188,7 +187,7 @@ When you create the RM site, the **filePlan** structure is also created includin
 
         * @return Promise<RMSiteEntry>
         */
-    updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts?: any): Promise<RMSiteEntry | ModelError> {
+    updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts?: any): Promise<RMSiteEntry> {
         opts = opts || {};
         let postBody = siteBodyUpdate;
 

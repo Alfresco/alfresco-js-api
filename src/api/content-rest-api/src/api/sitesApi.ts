@@ -20,7 +20,6 @@ import { SiteBodyCreate } from '../../../../api-new/content-rest-api/model/siteB
 import { SitesApi as NewSitesApi } from '../../../../api-new/content-rest-api/api/sites.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { SiteMemberEntry } from '../../../../api-new/content-rest-api/model/siteMemberEntry';
-import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
 import { SiteMembershipBodyCreate } from '../../../../api-new/content-rest-api/model/siteMembershipBodyCreate';
 import { SiteEntry } from '../../../../api-new/content-rest-api/model/siteEntry';
 import { SiteContainerEntry } from '../../../../api-new/content-rest-api/model/siteContainerEntry';
@@ -47,7 +46,7 @@ export class SitesApi {
      * @param {module:model/SiteMemberBody} siteMemberBody The person to add and their role
      * data is of type: {module:model/SiteMemberEntry}
      */
-    addSiteMember(siteId: string, siteMemberBody: SiteMembershipBodyCreate): Promise<SiteMemberEntry | ModelError> {
+    addSiteMember(siteId: string, siteMemberBody: SiteMembershipBodyCreate): Promise<SiteMemberEntry> {
         return this.sitesApi.createSiteMembership(siteId, siteMemberBody);
     }
 
@@ -60,7 +59,7 @@ export class SitesApi {
      * @param {Boolean} opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user&#39;s site favorites. (default to false)
      * data is of type: {module:model/SiteEntry}
      */
-    createSite(siteBody: SiteBodyCreate, opts?: any): Promise<SiteEntry | ModelError> {
+    createSite(siteBody: SiteBodyCreate, opts?: any): Promise<SiteEntry> {
         return this.sitesApi.createSite(siteBody, opts);
     }
 
@@ -73,7 +72,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    updateSite(siteId: string, siteBody: SiteBodyUpdate, opts?: any): Promise<SiteEntry | ModelError> {
+    updateSite(siteId: string, siteBody: SiteBodyUpdate, opts?: any): Promise<SiteEntry> {
         return this.sitesApi.updateSite(siteId, siteBody, opts);
     }
 
@@ -84,7 +83,7 @@ export class SitesApi {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
      */
-    deleteSite(siteId: string, opts?: any): Promise<any | ModelError> {
+    deleteSite(siteId: string, opts?: any): Promise<any> {
         return this.sitesApi.deleteSite(siteId, opts);
     }
 
@@ -97,7 +96,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    getSite(siteId: string, opts?: any): Promise<SiteEntry | ModelError> {
+    getSite(siteId: string, opts?: any): Promise<SiteEntry> {
         return this.sitesApi.getSite(siteId, opts);
     }
 
@@ -110,7 +109,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteContainerEntry}
      */
-    getSiteContainer(siteId: string, containerId: string, opts?: any): Promise<SiteContainerEntry | ModelError> {
+    getSiteContainer(siteId: string, containerId: string, opts?: any): Promise<SiteContainerEntry> {
         return this.sitesApi.getSiteContainer(siteId, containerId, opts);
     }
 
@@ -124,7 +123,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteContainerPaging}
      */
-    getSiteContainers(siteId: string, opts?: any): Promise<SiteContainerPaging | ModelError> {
+    getSiteContainers(siteId: string, opts?: any): Promise<SiteContainerPaging> {
         return this.sitesApi.listSiteContainers(siteId, opts);
     }
 
@@ -137,7 +136,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMemberEntry}
      */
-    getSiteMember(siteId: string, personId: string, opts?: any): Promise<SiteMemberEntry | ModelError> {
+    getSiteMember(siteId: string, personId: string, opts?: any): Promise<SiteMemberEntry> {
         return this.sitesApi.getSiteMembership(siteId, personId, opts);
     }
 
@@ -151,7 +150,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMemberPaging}
      */
-    getSiteMembers(siteId: string, opts?: any): Promise<SiteMemberPaging | ModelError> {
+    getSiteMembers(siteId: string, opts?: any): Promise<SiteMemberPaging> {
         return this.sitesApi.listSiteMemberships(siteId, opts);
     }
 
@@ -166,7 +165,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SitePaging}
      */
-    getSites(opts?: any): Promise<SitePaging | ModelError> {
+    getSites(opts?: any): Promise<SitePaging> {
         return this.sitesApi.listSites(opts);
     }
 
@@ -176,7 +175,7 @@ export class SitesApi {
      * @param {String} siteId The identifier of a site.
      * @param {String} personId The identifier of a person.
      */
-    removeSiteMember(siteId: string, personId: string): Promise<any | ModelError> {
+    removeSiteMember(siteId: string, personId: string): Promise<any> {
         return this.sitesApi.deleteSiteMembership(siteId, personId);
     }
 
@@ -188,7 +187,7 @@ export class SitesApi {
      * @param {module:model/SiteMemberRoleBody} siteMemberRoleBody The persons new role
      * data is of type: {module:model/SiteMemberEntry}
      */
-    updateSiteMember(siteId: string, personId: string, siteMemberRoleBody: SiteMembershipBodyUpdate): Promise<SiteMemberEntry | ModelError> {
+    updateSiteMember(siteId: string, personId: string, siteMemberRoleBody: SiteMembershipBodyUpdate): Promise<SiteMemberEntry> {
         return this.sitesApi.updateSiteMembership(siteId, personId, siteMemberRoleBody);
     }
 }

@@ -22,7 +22,6 @@ import { GroupMemberEntry } from '../model/groupMemberEntry';
 import { GroupMemberPaging } from '../model/groupMemberPaging';
 import { GroupMembershipBodyCreate } from '../model/groupMembershipBodyCreate';
 import { GroupPaging } from '../model/groupPaging';
-import { ModelError } from '../model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -71,7 +70,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<GroupEntry>
     */
-    createGroup(groupBodyCreate: GroupBodyCreate, opts?: any): Promise<GroupEntry | ModelError> {
+    createGroup(groupBodyCreate: GroupBodyCreate, opts?: any): Promise<GroupEntry> {
         opts = opts || {};
         let postBody = groupBodyCreate;
 
@@ -133,7 +132,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<GroupMemberEntry>
         */
-    createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts?: any): Promise<GroupMemberEntry | ModelError> {
+    createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts?: any): Promise<GroupMemberEntry> {
         opts = opts || {};
         let postBody = groupMembershipBodyCreate;
 
@@ -187,7 +186,7 @@ parameter are returned in addition to those specified in the **fields** paramete
      (default to false)
         * @return Promise<{}>
         */
-    deleteGroup(groupId: string, opts?: any): Promise<any | ModelError> {
+    deleteGroup(groupId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -237,7 +236,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param groupMemberId The identifier of a person or group.
         * @return Promise<{}>
         */
-    deleteGroupMembership(groupId: string, groupMemberId: string): Promise<any | ModelError> {
+    deleteGroupMembership(groupId: string, groupMemberId: string): Promise<any> {
 
         let postBody = null;
 
@@ -300,7 +299,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<GroupEntry>
         */
-    getGroup(groupId: string, opts?: any): Promise<GroupEntry | ModelError> {
+    getGroup(groupId: string, opts?: any): Promise<GroupEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -384,7 +383,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<GroupMemberPaging>
         */
-    listGroupMemberships(groupId: string, opts?: any): Promise<GroupMemberPaging | ModelError> {
+    listGroupMemberships(groupId: string, opts?: any): Promise<GroupMemberPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -497,7 +496,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<GroupPaging>
         */
-    listGroupMembershipsForPerson(personId: string, opts?: any): Promise<GroupPaging | ModelError> {
+    listGroupMembershipsForPerson(personId: string, opts?: any): Promise<GroupPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -607,7 +606,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<GroupPaging>
         */
-    listGroups(opts?: any): Promise<GroupPaging | ModelError> {
+    listGroups(opts?: any): Promise<GroupPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -669,7 +668,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<GroupEntry>
         */
-    updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts?: any): Promise<GroupEntry | ModelError> {
+    updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts?: any): Promise<GroupEntry> {
         opts = opts || {};
         let postBody = groupBodyUpdate;
 

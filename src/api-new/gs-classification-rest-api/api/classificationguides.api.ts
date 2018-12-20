@@ -19,7 +19,6 @@ import { ClassificationGuideBody } from '../model/classificationGuideBody';
 import { ClassificationGuideEntry } from '../model/classificationGuideEntry';
 import { ClassificationGuidePaging } from '../model/classificationGuidePaging';
 import { InstructionEntry } from '../model/instructionEntry';
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { SubtopicPaging } from '../model/subtopicPaging';
 import { TopicBody } from '../model/topicBody';
 import { TopicEntry } from '../model/topicEntry';
@@ -40,7 +39,7 @@ export class ClassificationguidesApi extends BaseApi {
     * @param opts.instructions Instructions
     * @return Promise<InstructionEntry>
     */
-    combinedInstructions(opts?: any): Promise<InstructionEntry | ModelError> {
+    combinedInstructions(opts?: any): Promise<InstructionEntry> {
         opts = opts || {};
         let postBody = opts['instructions'];
 
@@ -73,7 +72,7 @@ export class ClassificationguidesApi extends BaseApi {
         * @param classificationGuide Classification guide
         * @return Promise<ClassificationGuideEntry>
         */
-    createClassificationGuide(classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry | ModelError> {
+    createClassificationGuide(classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry> {
 
         let postBody = classificationGuide;
 
@@ -118,7 +117,7 @@ export class ClassificationguidesApi extends BaseApi {
 
         * @return Promise<TopicEntry>
         */
-    createSubtopic(topicId: string, topic: TopicBody, opts?: any): Promise<TopicEntry | ModelError> {
+    createSubtopic(topicId: string, topic: TopicBody, opts?: any): Promise<TopicEntry> {
         opts = opts || {};
         let postBody = topic;
 
@@ -168,7 +167,7 @@ export class ClassificationguidesApi extends BaseApi {
 
         * @return Promise<TopicEntry>
         */
-    createTopic(classificationGuideId: string, topic: TopicBody, opts?: any): Promise<TopicEntry | ModelError> {
+    createTopic(classificationGuideId: string, topic: TopicBody, opts?: any): Promise<TopicEntry> {
         opts = opts || {};
         let postBody = topic;
 
@@ -210,7 +209,7 @@ export class ClassificationguidesApi extends BaseApi {
         * @param classificationGuideId The identifier for the classification guide
         * @return Promise<{}>
         */
-    deleteClassificationGuide(classificationGuideId: string): Promise<any | ModelError> {
+    deleteClassificationGuide(classificationGuideId: string): Promise<any> {
 
         let postBody = null;
 
@@ -247,7 +246,7 @@ export class ClassificationguidesApi extends BaseApi {
         * @param topicId The identifier for the topic
         * @return Promise<{}>
         */
-    deleteTopic(topicId: string): Promise<any | ModelError> {
+    deleteTopic(topicId: string): Promise<any> {
 
         let postBody = null;
 
@@ -300,7 +299,7 @@ export class ClassificationguidesApi extends BaseApi {
 
         * @return Promise<ClassificationGuidePaging>
         */
-    listClassificationGuides(opts?: any): Promise<ClassificationGuidePaging | ModelError> {
+    listClassificationGuides(opts?: any): Promise<ClassificationGuidePaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -360,7 +359,7 @@ export class ClassificationguidesApi extends BaseApi {
         * @param opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
         * @return Promise<SubtopicPaging>
         */
-    listSubtopics(topicId: string, opts?: any): Promise<SubtopicPaging | ModelError> {
+    listSubtopics(topicId: string, opts?: any): Promise<SubtopicPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -425,7 +424,7 @@ export class ClassificationguidesApi extends BaseApi {
         * @param opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
         * @return Promise<TopicPaging>
         */
-    listTopics(classificationGuideId: string, opts?: any): Promise<TopicPaging | ModelError> {
+    listTopics(classificationGuideId: string, opts?: any): Promise<TopicPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -468,7 +467,7 @@ export class ClassificationguidesApi extends BaseApi {
         * @param classificationGuideId The identifier for the classification guide
         * @return Promise<ClassificationGuideEntry>
         */
-    showClassificationGuideById(classificationGuideId: string): Promise<ClassificationGuideEntry | ModelError> {
+    showClassificationGuideById(classificationGuideId: string): Promise<ClassificationGuideEntry> {
 
         let postBody = null;
 
@@ -512,7 +511,7 @@ export class ClassificationguidesApi extends BaseApi {
 
         * @return Promise<TopicEntry>
         */
-    showTopicById(topicId: string, opts?: any): Promise<TopicEntry | ModelError> {
+    showTopicById(topicId: string, opts?: any): Promise<TopicEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -551,7 +550,7 @@ export class ClassificationguidesApi extends BaseApi {
         * @param classificationGuide Classification guide
         * @return Promise<ClassificationGuideEntry>
         */
-    updateClassificationGuide(classificationGuideId: string, classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry | ModelError> {
+    updateClassificationGuide(classificationGuideId: string, classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry> {
 
         let postBody = classificationGuide;
 
@@ -603,7 +602,7 @@ export class ClassificationguidesApi extends BaseApi {
 
         * @return Promise<TopicEntry>
         */
-    updateTopic(topicId: string, topic: TopicBody, opts?: any): Promise<TopicEntry | ModelError> {
+    updateTopic(topicId: string, topic: TopicBody, opts?: any): Promise<TopicEntry> {
         opts = opts || {};
         let postBody = topic;
 

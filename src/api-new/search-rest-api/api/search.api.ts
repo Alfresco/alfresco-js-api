@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { ResultSetPaging } from '../model/resultSetPaging';
 import { SearchRequest } from '../model/searchRequest';
 import { BaseApi } from './base.api';
@@ -328,7 +327,7 @@ The example above changes the highlighting prefix and postfix from the
 
     * @return Promise<ResultSetPaging>
     */
-    search(queryBody: SearchRequest): Promise<ResultSetPaging | ModelError> {
+    search(queryBody: SearchRequest): Promise<ResultSetPaging> {
 
         let postBody = queryBody;
 

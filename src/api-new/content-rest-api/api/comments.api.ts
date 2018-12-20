@@ -18,7 +18,6 @@
 import { CommentBody } from '../model/commentBody';
 import { CommentEntry } from '../model/commentEntry';
 import { CommentPaging } from '../model/commentPaging';
-import { ModelError } from '../model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -94,7 +93,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<CommentEntry>
     */
-    createComment(nodeId: string, commentBodyCreate: CommentBody, opts?: any): Promise<CommentEntry | ModelError> {
+    createComment(nodeId: string, commentBodyCreate: CommentBody, opts?: any): Promise<CommentEntry> {
         opts = opts || {};
         let postBody = commentBodyCreate;
 
@@ -137,7 +136,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param commentId The identifier of a comment.
         * @return Promise<{}>
         */
-    deleteComment(nodeId: string, commentId: string): Promise<any | ModelError> {
+    deleteComment(nodeId: string, commentId: string): Promise<any> {
 
         let postBody = null;
 
@@ -197,7 +196,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<CommentPaging>
         */
-    listComments(nodeId: string, opts?: any): Promise<CommentPaging | ModelError> {
+    listComments(nodeId: string, opts?: any): Promise<CommentPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -252,7 +251,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<CommentEntry>
         */
-    updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: any): Promise<CommentEntry | ModelError> {
+    updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: any): Promise<CommentEntry> {
         opts = opts || {};
         let postBody = commentBodyUpdate;
 

@@ -18,7 +18,6 @@
 import { ClassificationReasonBody } from '../model/classificationReasonBody';
 import { ClassificationReasonEntry } from '../model/classificationReasonEntry';
 import { ClassificationReasonsPaging } from '../model/classificationReasonsPaging';
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -76,7 +75,7 @@ JSON
     * @param classificationReason Classification reason
     * @return Promise<ClassificationReasonEntry>
     */
-    createClassificationReason(classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry | ModelError> {
+    createClassificationReason(classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry> {
 
         let postBody = classificationReason;
 
@@ -113,7 +112,7 @@ JSON
         * @param classificationReasonId The identifier for the classification reason
         * @return Promise<{}>
         */
-    deleteClassificationReason(classificationReasonId: string): Promise<any | ModelError> {
+    deleteClassificationReason(classificationReasonId: string): Promise<any> {
 
         let postBody = null;
 
@@ -164,7 +163,7 @@ JSON
 
         * @return Promise<ClassificationReasonsPaging>
         */
-    listClassificationReasons(opts?: any): Promise<ClassificationReasonsPaging | ModelError> {
+    listClassificationReasons(opts?: any): Promise<ClassificationReasonsPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -200,7 +199,7 @@ JSON
         * @param classificationReasonId The identifier for the classification reason
         * @return Promise<ClassificationReasonEntry>
         */
-    showClassificationReasonById(classificationReasonId: string): Promise<ClassificationReasonEntry | ModelError> {
+    showClassificationReasonById(classificationReasonId: string): Promise<ClassificationReasonEntry> {
 
         let postBody = null;
 
@@ -238,7 +237,7 @@ JSON
         * @param classificationReason Classification reason
         * @return Promise<ClassificationReasonEntry>
         */
-    updateClassificationReason(classificationReasonId: string, classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry | ModelError> {
+    updateClassificationReason(classificationReasonId: string, classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry> {
 
         let postBody = classificationReason;
 

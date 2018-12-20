@@ -20,7 +20,6 @@ import { AuditAppPaging } from '../model/auditAppPaging';
 import { AuditBodyUpdate } from '../model/auditBodyUpdate';
 import { AuditEntryEntry } from '../model/auditEntryEntry';
 import { AuditEntryPaging } from '../model/auditEntryPaging';
-import { ModelError } from '../model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -54,7 +53,7 @@ You must have admin rights to delete audit information.
 
     * @return Promise<{}>
     */
-    deleteAuditEntriesForAuditApp(auditApplicationId: string, where: string): Promise<any | ModelError> {
+    deleteAuditEntriesForAuditApp(auditApplicationId: string, where: string): Promise<any> {
 
         let postBody = null;
 
@@ -102,7 +101,7 @@ You must have admin rights to delete audit information.
         * @param auditEntryId The identifier of an audit entry.
         * @return Promise<{}>
         */
-    deleteAuditEntry(auditApplicationId: string, auditEntryId: string): Promise<any | ModelError> {
+    deleteAuditEntry(auditApplicationId: string, auditEntryId: string): Promise<any> {
 
         let postBody = null;
 
@@ -161,7 +160,7 @@ You must have admin rights to delete audit information.
 
         * @return Promise<AuditApp>
         */
-    getAuditApp(auditApplicationId: string, opts?: any): Promise<AuditApp | ModelError> {
+    getAuditApp(auditApplicationId: string, opts?: any): Promise<AuditApp> {
         opts = opts || {};
         let postBody = null;
 
@@ -218,7 +217,7 @@ You must have admin rights to delete audit information.
 
         * @return Promise<AuditEntryEntry>
         */
-    getAuditEntry(auditApplicationId: string, auditEntryId: string, opts?: any): Promise<AuditEntryEntry | ModelError> {
+    getAuditEntry(auditApplicationId: string, auditEntryId: string, opts?: any): Promise<AuditEntryEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -290,7 +289,7 @@ You must have admin rights to delete audit information.
 
         * @return Promise<AuditAppPaging>
         */
-    listAuditApps(opts?: any): Promise<AuditAppPaging | ModelError> {
+    listAuditApps(opts?: any): Promise<AuditAppPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -389,7 +388,7 @@ You must have admin rights to delete audit information.
 
         * @return Promise<AuditEntryPaging>
         */
-    listAuditEntriesForAuditApp(auditApplicationId: string, opts?: any): Promise<AuditEntryPaging | ModelError> {
+    listAuditEntriesForAuditApp(auditApplicationId: string, opts?: any): Promise<AuditEntryPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -482,7 +481,7 @@ You must have admin rights to delete audit information.
 
         * @return Promise<AuditEntryPaging>
         */
-    listAuditEntriesForNode(nodeId: string, opts?: any): Promise<AuditEntryPaging | ModelError> {
+    listAuditEntriesForNode(nodeId: string, opts?: any): Promise<AuditEntryPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -550,7 +549,7 @@ You must have admin rights to delete audit information.
 
         * @return Promise<AuditApp>
         */
-    updateAuditApp(auditApplicationId: string, auditAppBodyUpdate: AuditBodyUpdate, opts?: any): Promise<AuditApp | ModelError> {
+    updateAuditApp(auditApplicationId: string, auditAppBodyUpdate: AuditBodyUpdate, opts?: any): Promise<AuditApp> {
         opts = opts || {};
         let postBody = auditAppBodyUpdate;
 

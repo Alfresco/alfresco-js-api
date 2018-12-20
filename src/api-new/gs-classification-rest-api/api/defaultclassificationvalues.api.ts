@@ -16,7 +16,6 @@
 */
 
 import { DeclassificationDate } from '../model/declassificationDate';
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -32,7 +31,7 @@ export class DefaultclassificationvaluesApi extends BaseApi {
     * @param nodeId The identifier of a node.
     * @return Promise<DeclassificationDate>
     */
-    calculateDefaultDeclassificationDate(nodeId: string): Promise<DeclassificationDate | ModelError> {
+    calculateDefaultDeclassificationDate(nodeId: string): Promise<DeclassificationDate> {
 
         let postBody = null;
 

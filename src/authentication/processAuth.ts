@@ -20,8 +20,6 @@ import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { Storage } from '../storage';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
-import { AlfrescoApi } from '../alfrescoApi';
-import { ContentAuth } from './contentAuth';
 
 const Emitter = _Emitter;
 

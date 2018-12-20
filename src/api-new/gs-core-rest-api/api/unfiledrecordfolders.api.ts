@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { RMNodeBodyCreateWithRelativePath } from '../model/rMNodeBodyCreateWithRelativePath';
 import { UnfiledRecordFolderAssociationPaging } from '../model/unfiledRecordFolderAssociationPaging';
 import { UnfiledRecordFolderBodyUpdate } from '../model/unfiledRecordFolderBodyUpdate';
@@ -152,7 +151,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<UnfiledRecordFolderAssociationPaging>
     */
-    createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<UnfiledRecordFolderAssociationPaging | ModelError> {
+    createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<UnfiledRecordFolderAssociationPaging> {
         opts = opts || {};
         let postBody = nodeBodyCreate;
 
@@ -197,7 +196,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param unfiledRecordFolderId The identifier of an unfiled record folder.
         * @return Promise<{}>
         */
-    deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<any | ModelError> {
+    deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<any> {
 
         let postBody = null;
 
@@ -258,7 +257,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledRecordFolderEntry>
         */
-    getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderEntry | ModelError> {
+    getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -336,7 +335,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledRecordFolderAssociationPaging>
         */
-    listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderAssociationPaging | ModelError> {
+    listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderAssociationPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -418,7 +417,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledRecordFolderEntry>
         */
-    updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: any): Promise<UnfiledRecordFolderEntry | ModelError> {
+    updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: any): Promise<UnfiledRecordFolderEntry> {
         opts = opts || {};
         let postBody = unfiledRecordFolderBodyUpdate;
 

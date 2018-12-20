@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
 import { TagBody } from '../model/tagBody';
 import { TagEntry } from '../model/tagEntry';
 import { TagPaging } from '../model/tagPaging';
@@ -94,7 +93,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagEntry>
     */
-    createTagForNode(nodeId: string, tagBodyCreate: TagBody, opts?: any): Promise<TagEntry | ModelError> {
+    createTagForNode(nodeId: string, tagBodyCreate: TagBody, opts?: any): Promise<TagEntry> {
         opts = opts || {};
         let postBody = tagBodyCreate;
 
@@ -137,7 +136,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param tagId The identifier of a tag.
         * @return Promise<{}>
         */
-    deleteTagFromNode(nodeId: string, tagId: string): Promise<any | ModelError> {
+    deleteTagFromNode(nodeId: string, tagId: string): Promise<any> {
 
         let postBody = null;
 
@@ -191,7 +190,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<TagEntry>
         */
-    getTag(tagId: string, opts?: any): Promise<TagEntry | ModelError> {
+    getTag(tagId: string, opts?: any): Promise<TagEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -253,7 +252,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<TagPaging>
         */
-    listTags(opts?: any): Promise<TagPaging | ModelError> {
+    listTags(opts?: any): Promise<TagPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -309,7 +308,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<TagPaging>
         */
-    listTagsForNode(nodeId: string, opts?: any): Promise<TagPaging | ModelError> {
+    listTagsForNode(nodeId: string, opts?: any): Promise<TagPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -363,7 +362,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<TagEntry>
         */
-    updateTag(tagId: string, tagBodyUpdate: TagBody, opts?: any): Promise<TagEntry | ModelError> {
+    updateTag(tagId: string, tagBodyUpdate: TagBody, opts?: any): Promise<TagEntry> {
         opts = opts || {};
         let postBody = tagBodyUpdate;
 

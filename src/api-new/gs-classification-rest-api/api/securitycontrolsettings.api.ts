@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { SecurityControlSettingBody } from '../model/securityControlSettingBody';
 import { SecurityControlSettingEntry } from '../model/securityControlSettingEntry';
 import { BaseApi } from './base.api';
@@ -35,7 +34,7 @@ export class SecuritycontrolsettingsApi extends BaseApi {
 
     * @return Promise<SecurityControlSettingEntry>
     */
-    getSecurityControlSetting(securityControlSettingKey: string): Promise<SecurityControlSettingEntry | ModelError> {
+    getSecurityControlSetting(securityControlSettingKey: string): Promise<SecurityControlSettingEntry> {
 
         let postBody = null;
 
@@ -75,7 +74,7 @@ export class SecuritycontrolsettingsApi extends BaseApi {
         * @param securityControlSettingValue The new value for the security control setting. This can be a string or number, depending on the setting key.
         * @return Promise<SecurityControlSettingEntry>
         */
-    updateSecurityControlSetting(securityControlSettingKey: string, securityControlSettingValue: SecurityControlSettingBody): Promise<SecurityControlSettingEntry | ModelError> {
+    updateSecurityControlSetting(securityControlSettingKey: string, securityControlSettingValue: SecurityControlSettingBody): Promise<SecurityControlSettingEntry> {
 
         let postBody = securityControlSettingValue;
 

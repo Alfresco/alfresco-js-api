@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
 import { NodePaging } from '../model/nodePaging';
 import { PersonPaging } from '../model/personPaging';
 import { SitePaging } from '../model/sitePaging';
@@ -95,7 +94,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodePaging>
     */
-    findNodes(term: string, opts?: any): Promise<NodePaging | ModelError> {
+    findNodes(term: string, opts?: any): Promise<NodePaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -182,7 +181,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<PersonPaging>
         */
-    findPeople(term: string, opts?: any): Promise<PersonPaging | ModelError> {
+    findPeople(term: string, opts?: any): Promise<PersonPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -266,7 +265,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<SitePaging>
         */
-    findSites(term: string, opts?: any): Promise<SitePaging | ModelError> {
+    findSites(term: string, opts?: any): Promise<SitePaging> {
         opts = opts || {};
         let postBody = null;
 

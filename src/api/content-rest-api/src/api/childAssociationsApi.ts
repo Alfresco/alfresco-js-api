@@ -20,7 +20,6 @@ import { NodesApi } from '../../../../api-new/content-rest-api/api/nodes.api';
 import { NodeBodyCreate } from '../../../../api-new/content-rest-api/model/nodeBodyCreate';
 import { ChildAssociationBody } from '../../../../api-new/content-rest-api/model/childAssociationBody';
 import { NodeEntry } from '../../../../api-new/content-rest-api/model/nodeEntry';
-import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
 import { ChildAssociationEntry } from '../../../../api-new/content-rest-api/model/childAssociationEntry';
 import { NodeChildAssociationPaging } from '../../../../api-new/content-rest-api/model/nodeChildAssociationPaging';
 import { NodeAssociationPaging } from '../../../../api-new/content-rest-api/model/nodeAssociationPaging';
@@ -48,7 +47,7 @@ export class ChildAssociationsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    addNode(nodeId: string, nodeBody: NodeBodyCreate, opts?: any): Promise<NodeEntry | ModelError> {
+    addNode(nodeId: string, nodeBody: NodeBodyCreate, opts?: any): Promise<NodeEntry> {
         return this.nodesApi.createNode(nodeId, nodeBody, opts);
     }
 
@@ -58,7 +57,7 @@ export class ChildAssociationsApi {
      * @param {String} parentId The identifier of a node.
      * @param {module:model/AssocChildBody} assocChildBody The child node id and assoc type.
      */
-    addSecondaryChildAssoc(parentId: string, assocChildBody: ChildAssociationBody): Promise<ChildAssociationEntry | ModelError> {
+    addSecondaryChildAssoc(parentId: string, assocChildBody: ChildAssociationBody): Promise<ChildAssociationEntry> {
         return this.nodesApi.createSecondaryChildAssociation(parentId, <any>assocChildBody);
     }
 
@@ -69,7 +68,7 @@ export class ChildAssociationsApi {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
      */
-    deleteNode(nodeId: string, opts?: any): Promise<any | ModelError> {
+    deleteNode(nodeId: string, opts?: any): Promise<any> {
         return this.nodesApi.deleteNode(nodeId, opts);
     }
 
@@ -88,7 +87,7 @@ export class ChildAssociationsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodePaging}
      */
-    getNodeChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging | ModelError> {
+    getNodeChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging> {
         return this.nodesApi.listNodeChildren(nodeId, opts);
     }
 
@@ -102,7 +101,7 @@ export class ChildAssociationsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    listParents(childId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+    listParents(childId: string, opts?: any): Promise<NodeAssociationPaging> {
         return this.nodesApi.listParents(childId, opts);
     }
 
@@ -117,7 +116,7 @@ export class ChildAssociationsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeChildAssociationPaging}
      */
-    listSecondaryChildAssociations(parentId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+    listSecondaryChildAssociations(parentId: string, opts?: any): Promise<NodeAssociationPaging> {
         return this.nodesApi.listSecondaryChildren(parentId, opts);
     }
 
@@ -131,7 +130,7 @@ export class ChildAssociationsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    moveNode(nodeId: string, moveBody: NodeBodyMove, opts?: any): Promise<NodeEntry | ModelError> {
+    moveNode(nodeId: string, moveBody: NodeBodyMove, opts?: any): Promise<NodeEntry> {
         return this.nodesApi.moveNode(nodeId, moveBody, opts);
     }
 
@@ -143,7 +142,7 @@ export class ChildAssociationsApi {
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
-    removeSecondaryChildAssoc(parentId: string, childId: string, opts?: any): Promise<any | ModelError> {
+    removeSecondaryChildAssoc(parentId: string, childId: string, opts?: any): Promise<any> {
         return this.nodesApi.deleteSecondaryChildAssociation(parentId, childId, opts);
     }
 }

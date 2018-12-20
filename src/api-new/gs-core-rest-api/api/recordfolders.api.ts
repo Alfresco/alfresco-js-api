@@ -16,7 +16,6 @@
 */
 
 import { FilePlanComponentBodyUpdate } from '../model/filePlanComponentBodyUpdate';
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { RMNodeBodyCreate } from '../model/rMNodeBodyCreate';
 import { RecordEntry } from '../model/recordEntry';
 import { RecordFolderAssociationPaging } from '../model/recordFolderAssociationPaging';
@@ -142,7 +141,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordEntry>
     */
-    createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: any): Promise<RecordEntry | ModelError> {
+    createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: any): Promise<RecordEntry> {
         opts = opts || {};
         let postBody = recordBodyCreate;
 
@@ -186,7 +185,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param recordFolderId The identifier of a record folder.
         * @return Promise<{}>
         */
-    deleteRecordFolder(recordFolderId: string): Promise<any | ModelError> {
+    deleteRecordFolder(recordFolderId: string): Promise<any> {
 
         let postBody = null;
 
@@ -246,7 +245,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordFolderEntry>
         */
-    getRecordFolder(recordFolderId: string, opts?: any): Promise<RecordFolderEntry | ModelError> {
+    getRecordFolder(recordFolderId: string, opts?: any): Promise<RecordFolderEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -325,7 +324,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordFolderAssociationPaging>
         */
-    listRecordFolderChildren(recordFolderId: string, opts?: any): Promise<RecordFolderAssociationPaging | ModelError> {
+    listRecordFolderChildren(recordFolderId: string, opts?: any): Promise<RecordFolderAssociationPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -406,7 +405,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordFolderEntry>
         */
-    updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordFolderEntry | ModelError> {
+    updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordFolderEntry> {
         opts = opts || {};
         let postBody = recordFolderBodyUpdate;
 

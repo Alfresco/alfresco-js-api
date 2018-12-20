@@ -19,7 +19,6 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
 import { NodesApi } from '../../../../api-new/content-rest-api/api/nodes.api';
 import { AssociationBody } from '../../../../api-new/content-rest-api/model/associationBody';
 import { AssociationEntry } from '../../../../api-new/content-rest-api/model/associationEntry';
-import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
 import { NodeAssociationPaging } from '../../../../api-new/content-rest-api/model/nodeAssociationPaging';
 
 /**
@@ -39,7 +38,7 @@ export class AssociationsApi {
      * @param {String} sourceId The identifier of a node.
      * @param {module:model/AssocTargetBody} assocTargetBody The target node id and assoc type.
      */
-    addAssoc(sourceId: string, assocTargetBody?:AssociationBody): Promise<AssociationEntry | ModelError> {
+    addAssoc(sourceId: string, assocTargetBody?:AssociationBody): Promise<AssociationEntry> {
         return this.nodesApi.createAssociation(sourceId, assocTargetBody);
     }
 
@@ -53,7 +52,7 @@ export class AssociationsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    listSourceNodeAssociations(targetId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+    listSourceNodeAssociations(targetId: string, opts?: any): Promise<NodeAssociationPaging> {
         return this.nodesApi.listSourceAssociations(targetId, opts);
     }
 
@@ -67,7 +66,7 @@ export class AssociationsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    listTargetAssociations(sourceId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+    listTargetAssociations(sourceId: string, opts?: any): Promise<NodeAssociationPaging> {
         return this.nodesApi.listTargetAssociations(sourceId, opts);
     }
 
@@ -79,7 +78,7 @@ export class AssociationsApi {
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
-    removeAssoc(sourceId: string, targetId: string, opts?: any): Promise<any | ModelError> {
+    removeAssoc(sourceId: string, targetId: string, opts?: any): Promise<any> {
         return this.nodesApi.deleteAssociation(sourceId, targetId, opts);
     }
 }

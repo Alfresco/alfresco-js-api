@@ -19,7 +19,6 @@ import { ActionBodyExec } from '../model/actionBodyExec';
 import { ActionDefinitionEntry } from '../model/actionDefinitionEntry';
 import { ActionDefinitionList } from '../model/actionDefinitionList';
 import { ActionExecResultEntry } from '../model/actionExecResultEntry';
-import { ModelError } from '../model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -38,7 +37,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     * @param actionDefinitionId The identifier of an action definition.
     * @return Promise<ActionDefinitionEntry>
     */
-    actionDetails(actionDefinitionId: string): Promise<ActionDefinitionEntry | ModelError> {
+    actionDetails(actionDefinitionId: string): Promise<ActionDefinitionEntry> {
 
         let postBody = null;
 
@@ -123,7 +122,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
         * @param actionBodyExec Action execution details
         * @return Promise<ActionExecResultEntry>
         */
-    actionExec(actionBodyExec: ActionBodyExec): Promise<ActionExecResultEntry | ModelError> {
+    actionExec(actionBodyExec: ActionBodyExec): Promise<ActionExecResultEntry> {
 
         let postBody = actionBodyExec;
 
@@ -196,7 +195,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
 
         * @return Promise<ActionDefinitionList>
         */
-    listActions(opts?: any): Promise<ActionDefinitionList | ModelError> {
+    listActions(opts?: any): Promise<ActionDefinitionList> {
         opts = opts || {};
         let postBody = null;
 
@@ -270,7 +269,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
 
         * @return Promise<ActionDefinitionList>
         */
-    nodeActions(nodeId: string, opts?: any): Promise<ActionDefinitionList | ModelError> {
+    nodeActions(nodeId: string, opts?: any): Promise<ActionDefinitionList> {
         opts = opts || {};
         let postBody = null;
 

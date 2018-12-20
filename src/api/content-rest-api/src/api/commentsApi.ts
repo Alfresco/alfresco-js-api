@@ -18,7 +18,6 @@
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { CommentsApi as NewCommentsApi } from '../../../../api-new/content-rest-api/api/comments.api';
 import { CommentEntry } from '../../../../api-new/content-rest-api/model/commentEntry';
-import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
 import { CommentPaging } from '../../../../api-new/content-rest-api/model/commentPaging';
 import { CommentBody } from '../../../../api-new/content-rest-api/model/commentBody';
 
@@ -43,7 +42,7 @@ export class CommentsApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CommentEntry}
      * data is of type: {module:model/CommentEntry}
      */
-    addComment(nodeId: string, commentBody: CommentBody, opts?: any): Promise<CommentEntry | ModelError> {
+    addComment(nodeId: string, commentBody: CommentBody, opts?: any): Promise<CommentEntry> {
         return this.commentsApi.createComment(nodeId, commentBody, opts);
     }
 
@@ -57,7 +56,7 @@ export class CommentsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/CommentPaging}
      */
-    getComments(nodeId: string, opts?: any): Promise<CommentPaging | ModelError> {
+    getComments(nodeId: string, opts?: any): Promise<CommentPaging> {
         return this.commentsApi.listComments(nodeId, opts);
     }
 
@@ -67,7 +66,7 @@ export class CommentsApi {
      * @param {String} nodeId The identifier of a node.
      * @param {String} commentId The identifier of a comment.
      */
-    removeComment(nodeId: string, commentId: string): Promise<any | ModelError> {
+    removeComment(nodeId: string, commentId: string): Promise<any> {
         return this.commentsApi.deleteComment(nodeId, commentId);
     }
 

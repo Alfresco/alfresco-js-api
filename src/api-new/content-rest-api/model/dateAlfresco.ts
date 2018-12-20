@@ -17,10 +17,6 @@
 
 export class DateAlfresco extends Date {
 
-    constructor(obj?: string) {
-        super(DateAlfresco.parseDate(obj));
-    }
-
     /**
      * Parses an ISO-8601 string representation of a date value.
      * @param  dateToConvert The date value as a string.

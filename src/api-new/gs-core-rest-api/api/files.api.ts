@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { RecordEntry } from '../model/recordEntry';
 import { BaseApi } from './base.api';
 
@@ -52,7 +51,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordEntry>
     */
-    declareRecord(fileId: string, opts?: any): Promise<RecordEntry | ModelError> {
+    declareRecord(fileId: string, opts?: any): Promise<RecordEntry> {
         opts = opts || {};
         let postBody = null;
 

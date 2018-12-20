@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { TransferAssociationPaging } from '../model/transferAssociationPaging';
 import { TransferEntry } from '../model/transferEntry';
 import { BaseApi } from './base.api';
@@ -57,7 +56,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TransferEntry>
     */
-    getTransfer(transferId: string, opts?: any): Promise<TransferEntry | ModelError> {
+    getTransfer(transferId: string, opts?: any): Promise<TransferEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -126,7 +125,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<TransferAssociationPaging>
         */
-    listTransfersChildren(transferId: string, opts?: any): Promise<TransferAssociationPaging | ModelError> {
+    listTransfersChildren(transferId: string, opts?: any): Promise<TransferAssociationPaging> {
         opts = opts || {};
         let postBody = null;
 

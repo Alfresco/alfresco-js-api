@@ -19,7 +19,6 @@ import { NodesApi } from './content-rest-api/src/api/nodesApi';
 import * as _Emitter from 'event-emitter';
 import { AlfrescoApi } from '../alfrescoApi';
 import { NodeEntry } from '../api-new/content-rest-api/model/nodeEntry';
-import { ModelError } from '../api-new/content-rest-api/model/modelError';
 
 const Emitter = _Emitter;
 
@@ -31,7 +30,7 @@ export class AlfrescoUpload extends NodesApi {
         Emitter.call(this);
     }
 
-    uploadFile(fileDefinition, relativePath: string, rootFolderId: string, nodeBody: any, opts?: any): Promise<NodeEntry | ModelError | _Emitter> {
+    uploadFile(fileDefinition, relativePath: string, rootFolderId: string, nodeBody: any, opts?: any): Promise<NodeEntry | _Emitter> {
         rootFolderId = rootFolderId || '-root-';
         opts = opts || {};
 

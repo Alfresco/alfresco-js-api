@@ -19,7 +19,6 @@ import { AssociationBody } from '../model/associationBody';
 import { AssociationEntry } from '../model/associationEntry';
 import { ChildAssociationBody } from '../model/childAssociationBody';
 import { ChildAssociationEntry } from '../model/childAssociationEntry';
-import { ModelError } from '../model/modelError';
 import { NodeAssociationPaging } from '../model/nodeAssociationPaging';
 import { NodeBodyCopy } from '../model/nodeBodyCopy';
 import { NodeBodyCreate } from '../model/nodeBodyCreate';
@@ -75,7 +74,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeEntry>
      */
-    copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts?: any): Promise<NodeEntry | ModelError> {
+    copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts?: any): Promise<NodeEntry> {
         opts = opts || {};
         let postBody = nodeBodyCopy;
 
@@ -176,7 +175,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<AssociationEntry>
      */
-    createAssociation(nodeId: string, associationBodyCreate: AssociationBody, opts?: any): Promise<AssociationEntry | ModelError> {
+    createAssociation(nodeId: string, associationBodyCreate: AssociationBody, opts?: any): Promise<AssociationEntry> {
         opts = opts || {};
         let postBody = associationBodyCreate;
 
@@ -412,7 +411,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeEntry>
      */
-    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: any, formParams?: any): Promise<NodeEntry | ModelError> {
+    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: any, formParams?: any): Promise<NodeEntry> {
         opts = opts || {};
         let postBody = nodeBodyCreate;
 
@@ -515,7 +514,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<ChildAssociationEntry>
      */
-    createSecondaryChildAssociation(nodeId: string, secondaryChildAssociationBodyCreate: ChildAssociationBody, opts?: any): Promise<ChildAssociationEntry | ModelError> {
+    createSecondaryChildAssociation(nodeId: string, secondaryChildAssociationBodyCreate: ChildAssociationBody, opts?: any): Promise<ChildAssociationEntry> {
         opts = opts || {};
         let postBody = secondaryChildAssociationBodyCreate;
 
@@ -567,7 +566,7 @@ export class NodesApi extends BaseApi {
      * @param opts.assocType Only delete associations of this type.
      * @return Promise<{}>
      */
-    deleteAssociation(nodeId: string, targetId: string, opts?: any): Promise<any | ModelError> {
+    deleteAssociation(nodeId: string, targetId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -626,7 +625,7 @@ export class NodesApi extends BaseApi {
      (default to false)
      * @return Promise<{}>
      */
-    deleteNode(nodeId: string, opts?: any): Promise<any | ModelError> {
+    deleteNode(nodeId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -672,7 +671,7 @@ export class NodesApi extends BaseApi {
      * @param opts.assocType Only delete associations of this type.
      * @return Promise<{}>
      */
-    deleteSecondaryChildAssociation(nodeId: string, childId: string, opts?: any): Promise<any | ModelError> {
+    deleteSecondaryChildAssociation(nodeId: string, childId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -746,7 +745,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeEntry>
      */
-    getNode(nodeId: string, opts?: any): Promise<NodeEntry | ModelError> {
+    getNode(nodeId: string, opts?: any): Promise<NodeEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -804,7 +803,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<{}>
      */
-    getNodeContent(nodeId: string, opts?: any): Promise<any | ModelError> {
+    getNodeContent(nodeId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -932,7 +931,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeChildAssociationPaging>
      */
-    listNodeChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging | ModelError> {
+    listNodeChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -1021,7 +1020,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeAssociationPaging>
      */
-    listParents(nodeId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+    listParents(nodeId: string, opts?: any): Promise<NodeAssociationPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -1102,7 +1101,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeChildAssociationPaging>
      */
-    listSecondaryChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging | ModelError> {
+    listSecondaryChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -1172,7 +1171,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeAssociationPaging>
      */
-    listSourceAssociations(nodeId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+    listSourceAssociations(nodeId: string, opts?: any): Promise<NodeAssociationPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -1239,7 +1238,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeAssociationPaging>
      */
-    listTargetAssociations(nodeId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+    listTargetAssociations(nodeId: string, opts?: any): Promise<NodeAssociationPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -1326,7 +1325,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeEntry>
      */
-    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: any): Promise<NodeEntry | ModelError> {
+    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: any): Promise<NodeEntry> {
         opts = opts || {};
         let postBody = nodeBodyLock;
 
@@ -1401,7 +1400,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeEntry>
      */
-    moveNode(nodeId: string, nodeBodyMove: NodeBodyMove, opts?: any): Promise<NodeEntry | ModelError> {
+    moveNode(nodeId: string, nodeBodyMove: NodeBodyMove, opts?: any): Promise<NodeEntry> {
         opts = opts || {};
         let postBody = nodeBodyMove;
 
@@ -1471,7 +1470,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeEntry>
      */
-    unlockNode(nodeId: string, opts?: any): Promise<NodeEntry | ModelError> {
+    unlockNode(nodeId: string, opts?: any): Promise<NodeEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -1570,7 +1569,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeEntry>
      */
-    updateNode(nodeId: string, nodeBodyUpdate: NodeBodyUpdate, opts?: any): Promise<NodeEntry | ModelError> {
+    updateNode(nodeId: string, nodeBodyUpdate: NodeBodyUpdate, opts?: any): Promise<NodeEntry> {
         opts = opts || {};
         let postBody = nodeBodyUpdate;
 
@@ -1659,7 +1658,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeEntry>
      */
-    updateNodeContent(nodeId: string, contentBodyUpdate: any, opts?: any): Promise<NodeEntry | ModelError> {
+    updateNodeContent(nodeId: string, contentBodyUpdate: any, opts?: any): Promise<NodeEntry> {
         opts = opts || {};
         let postBody = contentBodyUpdate;
 

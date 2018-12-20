@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
 import { SharedLinkBodyCreate } from '../model/sharedLinkBodyCreate';
@@ -104,7 +103,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SharedLinkEntry>
     */
-    createSharedLink(sharedLinkBodyCreate: SharedLinkBodyCreate, opts?: any): Promise<SharedLinkEntry | ModelError> {
+    createSharedLink(sharedLinkBodyCreate: SharedLinkBodyCreate, opts?: any): Promise<SharedLinkEntry> {
         opts = opts || {};
         let postBody = sharedLinkBodyCreate;
 
@@ -146,7 +145,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param sharedId The identifier of a shared link to a file.
         * @return Promise<{}>
         */
-    deleteSharedLink(sharedId: string): Promise<any | ModelError> {
+    deleteSharedLink(sharedId: string): Promise<any> {
 
         let postBody = null;
 
@@ -214,7 +213,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param sharedLinkBodyEmail The shared link email to send.
         * @return Promise<{}>
         */
-    emailSharedLink(sharedId: string, sharedLinkBodyEmail: SharedLinkBodyEmail): Promise<any | ModelError> {
+    emailSharedLink(sharedId: string, sharedLinkBodyEmail: SharedLinkBodyEmail): Promise<any> {
 
         let postBody = sharedLinkBodyEmail;
 
@@ -273,7 +272,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<SharedLinkEntry>
         */
-    getSharedLink(sharedId: string, opts?: any): Promise<SharedLinkEntry | ModelError> {
+    getSharedLink(sharedId: string, opts?: any): Promise<SharedLinkEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -333,7 +332,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<{}>
         */
-    getSharedLinkContent(sharedId: string, opts?: any): Promise<any | ModelError> {
+    getSharedLinkContent(sharedId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -380,7 +379,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
         * @return Promise<RenditionEntry>
         */
-    getSharedLinkRendition(sharedId: string, renditionId: string): Promise<RenditionEntry | ModelError> {
+    getSharedLinkRendition(sharedId: string, renditionId: string): Promise<RenditionEntry> {
 
         let postBody = null;
 
@@ -444,7 +443,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<{}>
         */
-    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any | ModelError> {
+    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -494,7 +493,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param sharedId The identifier of a shared link to a file.
         * @return Promise<RenditionPaging>
         */
-    listSharedLinkRenditions(sharedId: string): Promise<RenditionPaging | ModelError> {
+    listSharedLinkRenditions(sharedId: string): Promise<RenditionPaging> {
 
         let postBody = null;
 
@@ -566,7 +565,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<SharedLinkPaging>
         */
-    listSharedLinks(opts?: any): Promise<SharedLinkPaging | ModelError> {
+    listSharedLinks(opts?: any): Promise<SharedLinkPaging> {
         opts = opts || {};
         let postBody = null;
 

@@ -17,7 +17,6 @@
 
 import { DeletedNodeEntry } from '../model/deletedNodeEntry';
 import { DeletedNodesPaging } from '../model/deletedNodesPaging';
-import { ModelError } from '../model/modelError';
 import { NodeEntry } from '../model/nodeEntry';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
@@ -39,7 +38,7 @@ Permanently deletes the deleted node **nodeId**.
     * @param nodeId The identifier of a node.
     * @return Promise<{}>
     */
-    deleteDeletedNode(nodeId: string): Promise<any | ModelError> {
+    deleteDeletedNode(nodeId: string): Promise<any> {
 
         let postBody = null;
 
@@ -80,7 +79,7 @@ Permanently deletes the deleted node **nodeId**.
         * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
         * @return Promise<RenditionEntry>
         */
-    getArchivedNodeRendition(nodeId: string, renditionId: string): Promise<RenditionEntry | ModelError> {
+    getArchivedNodeRendition(nodeId: string, renditionId: string): Promise<RenditionEntry> {
 
         let postBody = null;
 
@@ -146,7 +145,7 @@ Permanently deletes the deleted node **nodeId**.
      (default to false)
         * @return Promise<{}>
         */
-    getArchivedNodeRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any | ModelError> {
+    getArchivedNodeRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -202,7 +201,7 @@ Permanently deletes the deleted node **nodeId**.
 
         * @return Promise<DeletedNodeEntry>
         */
-    getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntry | ModelError> {
+    getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -260,7 +259,7 @@ Permanently deletes the deleted node **nodeId**.
 
         * @return Promise<{}>
         */
-    getDeletedNodeContent(nodeId: string, opts?: any): Promise<any | ModelError> {
+    getDeletedNodeContent(nodeId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -312,7 +311,7 @@ Permanently deletes the deleted node **nodeId**.
         * @param opts.where A string to restrict the returned objects by using a predicate.
         * @return Promise<RenditionPaging>
         */
-    listDeletedNodeRenditions(nodeId: string, opts?: any): Promise<RenditionPaging | ModelError> {
+    listDeletedNodeRenditions(nodeId: string, opts?: any): Promise<RenditionPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -374,7 +373,7 @@ Permanently deletes the deleted node **nodeId**.
 
         * @return Promise<DeletedNodesPaging>
         */
-    listDeletedNodes(opts?: any): Promise<DeletedNodesPaging | ModelError> {
+    listDeletedNodes(opts?: any): Promise<DeletedNodesPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -437,7 +436,7 @@ Permanently deletes the deleted node **nodeId**.
         * @param opts.deletedNodeBodyRestore The targetParentId if the node is restored to a new location.
         * @return Promise<NodeEntry>
         */
-    restoreDeletedNode(nodeId: string, opts?: any): Promise<NodeEntry | ModelError> {
+    restoreDeletedNode(nodeId: string, opts?: any): Promise<NodeEntry> {
         opts = opts || {};
         let postBody = opts['deletedNodeBodyRestore'];
 

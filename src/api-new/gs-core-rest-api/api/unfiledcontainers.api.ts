@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { RMNodeBodyCreate } from '../model/rMNodeBodyCreate';
 import { UnfiledContainerAssociationPaging } from '../model/unfiledContainerAssociationPaging';
 import { UnfiledContainerEntry } from '../model/unfiledContainerEntry';
@@ -152,7 +151,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<UnfiledContainerAssociationPaging>
     */
-    createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: any): Promise<UnfiledContainerAssociationPaging | ModelError> {
+    createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: any): Promise<UnfiledContainerAssociationPaging> {
         opts = opts || {};
         let postBody = nodeBodyCreate;
 
@@ -218,7 +217,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledContainerEntry>
         */
-    getUnfiledContainer(unfiledContainerId: string, opts?: any): Promise<UnfiledContainerEntry | ModelError> {
+    getUnfiledContainer(unfiledContainerId: string, opts?: any): Promise<UnfiledContainerEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -293,7 +292,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledContainerAssociationPaging>
         */
-    listUnfiledContainerChildren(unfiledContainerId: string, opts?: any): Promise<UnfiledContainerAssociationPaging | ModelError> {
+    listUnfiledContainerChildren(unfiledContainerId: string, opts?: any): Promise<UnfiledContainerAssociationPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -372,7 +371,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledContainerEntry>
         */
-    updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: any): Promise<UnfiledContainerEntry | ModelError> {
+    updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: any): Promise<UnfiledContainerEntry> {
         opts = opts || {};
         let postBody = unfiledContainerBodyUpdate;
 

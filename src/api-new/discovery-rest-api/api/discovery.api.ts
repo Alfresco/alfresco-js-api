@@ -16,7 +16,6 @@
 */
 
 import { DiscoveryEntry } from '../model/discoveryEntry';
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { BaseApi } from './base.api';
 
 /**
@@ -34,7 +33,7 @@ Retrieves the capabilities and detailed version information from the repository.
     *
     * @return Promise<DiscoveryEntry>
     */
-    getRepositoryInformation(): Promise<DiscoveryEntry | ModelError> {
+    getRepositoryInformation(): Promise<DiscoveryEntry> {
 
         let postBody = null;
 

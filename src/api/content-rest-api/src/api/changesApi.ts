@@ -24,7 +24,6 @@ import { TrashcanApi } from '../../../../api-new/content-rest-api/api/trashcan.a
 import { QueriesApi } from '../../../../api-new/content-rest-api/api/queries.api';
 import { AssociationBody } from '../../../../api-new/content-rest-api/model/associationBody';
 import { AssociationEntry } from '../../../../api-new/content-rest-api/model/associationEntry';
-import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
 import { NodeEntry } from '../../../../api-new/content-rest-api/model/nodeEntry';
 import { NodeBodyCreate } from '../../../../api-new/content-rest-api/model/nodeBodyCreate';
 import { ChildAssociationEntry } from '../../../../api-new/content-rest-api/model/childAssociationEntry';
@@ -73,7 +72,7 @@ export class ChangesApi {
      * @param {String} sourceId The identifier of a node.
      * @param {module:model/AssocTargetBody} assocTargetBody The target node id and assoc type.
      */
-    addAssoc(sourceId: string, assocTargetBody: AssociationBody): Promise<AssociationEntry | ModelError> {
+    addAssoc(sourceId: string, assocTargetBody: AssociationBody): Promise<AssociationEntry> {
         return this.nodesApi.createAssociation(sourceId, assocTargetBody);
     }
 
@@ -88,7 +87,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    addNode(nodeId: string, nodeBody: NodeBodyCreate, opts?: any): Promise<NodeEntry | ModelError> {
+    addNode(nodeId: string, nodeBody: NodeBodyCreate, opts?: any): Promise<NodeEntry> {
         return this.nodesApi.createNode(nodeId, nodeBody, opts);
     }
 
@@ -98,7 +97,7 @@ export class ChangesApi {
      * @param {String} parentId The identifier of a node.
      * @param {module:model/AssocChildBody} assocChildBody The child node id and assoc type.
      */
-    addSecondaryChildAssoc(parentId: string, assocChildBody: ChildAssociationBody, opts?: any): Promise<ChildAssociationEntry | ModelError> {
+    addSecondaryChildAssoc(parentId: string, assocChildBody: ChildAssociationBody, opts?: any): Promise<ChildAssociationEntry> {
         return this.nodesApi.createSecondaryChildAssociation(parentId, assocChildBody, opts);
     }
 
@@ -111,7 +110,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
-    addSharedLink(sharedLinkBody: SharedLinkBodyCreate, opts?: any): Promise<SharedLinkEntry | ModelError> {
+    addSharedLink(sharedLinkBody: SharedLinkBodyCreate, opts?: any): Promise<SharedLinkEntry> {
         return this.sharedlinksApi.createSharedLink(sharedLinkBody, opts);
     }
 
@@ -125,7 +124,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    copyNode(nodeId: string, copyBody: NodeBodyCopy, opts?: any): Promise<NodeEntry | ModelError> {
+    copyNode(nodeId: string, copyBody: NodeBodyCopy, opts?: any): Promise<NodeEntry> {
         return this.nodesApi.copyNode(nodeId, copyBody, opts);
     }
 
@@ -135,7 +134,7 @@ export class ChangesApi {
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {module:model/RenditionBody} renditionBody The rendition \&quot;id\&quot;.
      */
-    createRendition(nodeId: string, renditionBody: RenditionBodyCreate): Promise<any | ModelError> {
+    createRendition(nodeId: string, renditionBody: RenditionBodyCreate): Promise<any> {
         return this.renditionsApi.createRendition(nodeId, renditionBody);
     }
 
@@ -148,7 +147,7 @@ export class ChangesApi {
      * @param {Boolean} opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user&#39;s site favorites. (default to false)
      * data is of type: {module:model/SiteEntry}
      */
-    createSite(siteBody: SiteBodyCreate, opts?: any): Promise<SiteEntry | ModelError> {
+    createSite(siteBody: SiteBodyCreate, opts?: any): Promise<SiteEntry> {
         return this.sitesApi.createSite(siteBody, opts);
     }
 
@@ -161,7 +160,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    updateSite(siteId: any, siteBody: SiteBodyUpdate, opts?: any): Promise<SiteEntry | ModelError> {
+    updateSite(siteId: any, siteBody: SiteBodyUpdate, opts?: any): Promise<SiteEntry> {
         return this.sitesApi.updateSite(siteId, siteBody, opts);
     }
 
@@ -172,7 +171,7 @@ export class ChangesApi {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
      */
-    deleteNode(nodeId: string, opts?: any): Promise<any | ModelError> {
+    deleteNode(nodeId: string, opts?: any): Promise<any> {
         return this.nodesApi.deleteNode(nodeId, opts);
     }
 
@@ -181,7 +180,7 @@ export class ChangesApi {
      * Deletes the shared link with identifier **sharedId**.
      * @param {String} sharedId The identifier of a shared link to a file.
      */
-    deleteSharedLink(sharedId: string): Promise<any | ModelError> {
+    deleteSharedLink(sharedId: string): Promise<any> {
         return this.sharedlinksApi.deleteSharedLink(sharedId);
     }
 
@@ -192,7 +191,7 @@ export class ChangesApi {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
      */
-    deleteSite(siteId: string, opts?: any): Promise<any | ModelError> {
+    deleteSite(siteId: string, opts?: any): Promise<any> {
         return this.sitesApi.deleteSite(siteId, opts);
     }
 
@@ -202,7 +201,7 @@ export class ChangesApi {
      * @param {String} sharedId The identifier of a shared link to a file.
      * @param {module:model/EmailSharedLinkBody} emailSharedLinkBody The shared link email to send.
      */
-    emailSharedLink(sharedId: string, emailSharedLinkBody: SharedLinkBodyEmail): Promise<any | ModelError> {
+    emailSharedLink(sharedId: string, emailSharedLinkBody: SharedLinkBodyEmail): Promise<any> {
         return this.sharedlinksApi.emailSharedLink(sharedId, emailSharedLinkBody);
     }
 
@@ -227,7 +226,7 @@ export class ChangesApi {
      * @param {string[]} opts.include Returns additional information about the node. The following optional fields can be requested:\n* path\n* isLink\n* allowableOperations\n
      * data is of type: {module:model/DeletedNodeEntry}
      */
-    getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntry | ModelError> {
+    getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntry> {
         return this.trashcanApi.getDeletedNode(nodeId, opts);
     }
 
@@ -240,7 +239,7 @@ export class ChangesApi {
      * @param {string[]} opts.include Returns additional information about the node. The following optional fields can be requested:\n* properties\n* aspectNames\n* path\n* isLink\n* allowableOperations\n* association\n
      * data is of type: {module:model/DeletedNodesPaging}
      */
-    getDeletedNodes(opts?: any): Promise<DeletedNodesPaging | ModelError> {
+    getDeletedNodes(opts?: any): Promise<DeletedNodesPaging> {
         return this.trashcanApi.listDeletedNodes(opts);
     }
 
@@ -252,7 +251,7 @@ export class ChangesApi {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    getFileContent(nodeId: string, opts?: any): Promise<any | ModelError> {
+    getFileContent(nodeId: string, opts?: any): Promise<any> {
         return this.nodesApi.getNodeContent(opts);
     }
 
@@ -266,7 +265,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    getNode(nodeId: string, opts?: any): Promise<NodeEntry | ModelError> {
+    getNode(nodeId: string, opts?: any): Promise<NodeEntry> {
         return this.nodesApi.getNode(nodeId, opts);
     }
 
@@ -285,7 +284,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodePaging}
      */
-    getNodeChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging | ModelError> {
+    getNodeChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging> {
         return this.nodesApi.listNodeChildren(nodeId, opts);
     }
 
@@ -296,7 +295,7 @@ export class ChangesApi {
      * @param {String} renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
      * data is of type: {module:model/RenditionEntry}
      */
-    getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry | ModelError> {
+    getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry> {
         return this.renditionsApi.getRendition(nodeId, renditionId);
     }
 
@@ -309,7 +308,7 @@ export class ChangesApi {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any | ModelError> {
+    getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any> {
         return this.renditionsApi.getRenditionContent(nodeId, renditionId);
     }
 
@@ -319,7 +318,7 @@ export class ChangesApi {
      * @param {String} nodeId The identifier of a node.
      * data is of type: {module:model/RenditionPaging}
      */
-    getRenditions(nodeId: string): Promise<RenditionPaging | ModelError> {
+    getRenditions(nodeId: string): Promise<RenditionPaging> {
         return this.renditionsApi.listRenditions(nodeId);
     }
 
@@ -332,7 +331,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeSharedLinkEntry}
      */
-    getSharedLink(sharedId: string, opts?: any): Promise<SharedLinkEntry | ModelError> {
+    getSharedLink(sharedId: string, opts?: any): Promise<SharedLinkEntry> {
         return this.sharedlinksApi.getSharedLink(sharedId, opts);
     }
 
@@ -344,7 +343,7 @@ export class ChangesApi {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    getSharedLinkContent(sharedId: string, opts?: any): Promise<any | ModelError> {
+    getSharedLinkContent(sharedId: string, opts?: any): Promise<any> {
         return this.sharedlinksApi.getSharedLinkContent(sharedId, opts);
     }
 
@@ -357,7 +356,7 @@ export class ChangesApi {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any | ModelError> {
+    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any> {
         return this.sharedlinksApi.getSharedLinkRenditionContent(sharedId, renditionId, opts);
     }
 
@@ -367,7 +366,7 @@ export class ChangesApi {
      * @param {String} sharedId The identifier of a shared link to a file.
      * data is of type: {module:model/RenditionPaging}
      */
-    getSharedLinkRenditions(sharedId: string): Promise<RenditionPaging | ModelError> {
+    getSharedLinkRenditions(sharedId: string): Promise<RenditionPaging> {
         return this.sharedlinksApi.listSharedLinkRenditions(sharedId);
     }
 
@@ -381,7 +380,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    listParents(childId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+    listParents(childId: string, opts?: any): Promise<NodeAssociationPaging> {
         return this.nodesApi.listParents(childId, opts);
     }
 
@@ -396,7 +395,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeChildAssocPaging}
      */
-    listSecondaryChildAssociations(parentId: string, opts?: any): Promise<NodeChildAssociationPaging | ModelError> {
+    listSecondaryChildAssociations(parentId: string, opts?: any): Promise<NodeChildAssociationPaging> {
         return this.nodesApi.listSecondaryChildren(parentId, opts);
     }
 
@@ -410,7 +409,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    listSourceNodeAssociations(targetId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+    listSourceNodeAssociations(targetId: string, opts?: any): Promise<NodeAssociationPaging> {
         return this.nodesApi.listSourceAssociations(targetId, opts);
     }
 
@@ -424,7 +423,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    listTargetAssociations(sourceId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+    listTargetAssociations(sourceId: string, opts?: any): Promise<NodeAssociationPaging> {
         return this.nodesApi.listTargetAssociations(sourceId, opts);
     }
 
@@ -439,7 +438,7 @@ export class ChangesApi {
      * data is of type: {module:model/NodeEntry}
      */
 
-    moveNode(nodeId: string, moveBody: NodeBodyMove, opts?: any): Promise<NodeEntry | ModelError> {
+    moveNode(nodeId: string, moveBody: NodeBodyMove, opts?: any): Promise<NodeEntry> {
         return this.nodesApi.moveNode(nodeId, moveBody, opts);
     }
 
@@ -448,7 +447,7 @@ export class ChangesApi {
      * Permanently removes the deleted node identified by **nodeId**.\n
      * @param {String} nodeId The identifier of a node.
      */
-    purgeDeletedNode(nodeId: string): Promise<any | ModelError> {
+    purgeDeletedNode(nodeId: string): Promise<any> {
         return this.trashcanApi.deleteDeletedNode(nodeId);
     }
 
@@ -460,7 +459,7 @@ export class ChangesApi {
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
-    removeAssoc(sourceId: string, targetId: string, opts?: any): Promise<any | ModelError> {
+    removeAssoc(sourceId: string, targetId: string, opts?: any): Promise<any> {
         return this.nodesApi.deleteAssociation(sourceId, targetId, opts);
     }
 
@@ -472,7 +471,7 @@ export class ChangesApi {
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
-    removeSecondaryChildAssoc(parentId: string, childId: string, opts?: any): Promise<any | ModelError> {
+    removeSecondaryChildAssoc(parentId: string, childId: string, opts?: any): Promise<any> {
         return this.nodesApi.deleteSecondaryChildAssociation(parentId, childId, opts);
     }
 
@@ -483,7 +482,7 @@ export class ChangesApi {
      * data is of type: {module:model/NodeEntry}
      */
 
-    restoreNode(nodeId: string): Promise<NodeEntry | ModelError> {
+    restoreNode(nodeId: string): Promise<NodeEntry> {
         return this.trashcanApi.restoreDeletedNode(nodeId);
     }
 
@@ -499,7 +498,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    updateFileContent(nodeId: string, contentBody: string, opts?: any): Promise<NodeEntry | ModelError> {
+    updateFileContent(nodeId: string, contentBody: string, opts?: any): Promise<NodeEntry> {
         return this.nodesApi.updateNodeContent(nodeId, contentBody, opts);
     }
 
@@ -513,7 +512,7 @@ export class ChangesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    updateNode(nodeId: string, nodeBody: NodeBodyUpdate, opts?: any): Promise<NodeEntry | ModelError> {
+    updateNode(nodeId: string, nodeBody: NodeBodyUpdate, opts?: any): Promise<NodeEntry> {
         return this.nodesApi.updateNode(nodeId, nodeBody, opts);
     }
 }

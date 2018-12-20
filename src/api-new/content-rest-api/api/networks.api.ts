@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
 import { PersonNetworkEntry } from '../model/personNetworkEntry';
 import { PersonNetworkPaging } from '../model/personNetworkPaging';
 import { BaseApi } from './base.api';
@@ -46,7 +45,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonNetworkEntry>
     */
-    getNetwork(networkId: string, opts?: any): Promise<PersonNetworkEntry | ModelError> {
+    getNetwork(networkId: string, opts?: any): Promise<PersonNetworkEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -101,7 +100,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<PersonNetworkEntry>
         */
-    getNetworkForPerson(personId: string, networkId: string, opts?: any): Promise<PersonNetworkEntry | ModelError> {
+    getNetworkForPerson(personId: string, networkId: string, opts?: any): Promise<PersonNetworkEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -165,7 +164,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<PersonNetworkPaging>
         */
-    listNetworksForPerson(personId: string, opts?: any): Promise<PersonNetworkPaging | ModelError> {
+    listNetworksForPerson(personId: string, opts?: any): Promise<PersonNetworkPaging> {
         opts = opts || {};
         let postBody = null;
 

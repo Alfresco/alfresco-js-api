@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { ModelError } from '../model/modelError';
 import { RenditionBodyCreate } from '../model/renditionBodyCreate';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
@@ -44,7 +43,7 @@ JSON
     * @param renditionBodyCreate The rendition \"id\".
     * @return Promise<{}>
     */
-    createRendition(nodeId: string, renditionBodyCreate: RenditionBodyCreate): Promise<any | ModelError> {
+    createRendition(nodeId: string, renditionBodyCreate: RenditionBodyCreate): Promise<any> {
 
         let postBody = renditionBodyCreate;
 
@@ -89,7 +88,7 @@ JSON
         * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
         * @return Promise<RenditionEntry>
         */
-    getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry | ModelError> {
+    getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry> {
 
         let postBody = null;
 
@@ -155,7 +154,7 @@ JSON
      (default to false)
         * @return Promise<{}>
         */
-    getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any | ModelError> {
+    getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any> {
         opts = opts || {};
         let postBody = null;
 
@@ -212,7 +211,7 @@ JSON
         * @param opts.where A string to restrict the returned objects by using a predicate.
         * @return Promise<RenditionPaging>
         */
-    listRenditions(nodeId: string, opts?: any): Promise<RenditionPaging | ModelError> {
+    listRenditions(nodeId: string, opts?: any): Promise<RenditionPaging> {
         opts = opts || {};
         let postBody = null;
 

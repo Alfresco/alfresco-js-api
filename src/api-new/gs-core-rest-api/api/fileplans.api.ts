@@ -17,7 +17,6 @@
 
 import { FilePlanBodyUpdate } from '../model/filePlanBodyUpdate';
 import { FilePlanEntry } from '../model/filePlanEntry';
-import { ModelError } from '../../content-rest-api/model/modelError';
 import { RecordCategoryEntry } from '../model/recordCategoryEntry';
 import { RecordCategoryPaging } from '../model/recordCategoryPaging';
 import { RootCategoryBodyCreate } from '../model/rootCategoryBodyCreate';
@@ -112,7 +111,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordCategoryEntry>
     */
-    createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opts?: any): Promise<RecordCategoryEntry | ModelError> {
+    createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opts?: any): Promise<RecordCategoryEntry> {
         opts = opts || {};
         let postBody = nodeBodyCreate;
 
@@ -178,7 +177,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<FilePlanEntry>
         */
-    getFilePlan(filePlanId: string, opts?: any): Promise<FilePlanEntry | ModelError> {
+    getFilePlan(filePlanId: string, opts?: any): Promise<FilePlanEntry> {
         opts = opts || {};
         let postBody = null;
 
@@ -245,7 +244,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordCategoryPaging>
         */
-    getFilePlanCategories(filePlanId: string, opts?: any): Promise<RecordCategoryPaging | ModelError> {
+    getFilePlanCategories(filePlanId: string, opts?: any): Promise<RecordCategoryPaging> {
         opts = opts || {};
         let postBody = null;
 
@@ -318,7 +317,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<FilePlanEntry>
         */
-    updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: any): Promise<FilePlanEntry | ModelError> {
+    updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: any): Promise<FilePlanEntry> {
         opts = opts || {};
         let postBody = filePlanBodyUpdate;
 
