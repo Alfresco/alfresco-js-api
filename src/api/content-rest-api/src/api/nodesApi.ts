@@ -15,10 +15,6 @@
 * limitations under the License.
 */
 
-import { NodeBody } from '../model/NodeBody';
-import { CopyBody } from '../model/CopyBody';
-import { MoveBody } from '../model/MoveBody';
-import { NodeBodyLock } from '../model/NodeBodyLock';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { NodesApi as NewNodesApi } from '../../../../api-new/content-rest-api/api/nodes.api';
 import { TrashcanApi } from '../../../../api-new/content-rest-api';
@@ -28,6 +24,11 @@ import { ModelError } from '../../../../api-new/content-rest-api/model/modelErro
 import { DeletedNodesPaging } from '../../../../api-new/content-rest-api/model/deletedNodesPaging';
 import { NodeChildAssociationPaging } from '../../../../api-new/content-rest-api/model/nodeChildAssociationPaging';
 import { NodeAssociationPaging } from '../../../../api-new/content-rest-api/model/nodeAssociationPaging';
+import { NodeBodyMove } from '../../../../api-new/content-rest-api/model/nodeBodyMove';
+import { NodeBodyUpdate } from '../../../../api-new/content-rest-api/model/nodeBodyUpdate';
+import { NodeBodyCreate } from '../../../../api-new/content-rest-api/model/nodeBodyCreate';
+import { NodeBodyCopy } from '../../../../api-new/content-rest-api/model/nodeBodyCopy';
+import { NodeBodyLock } from '../../../../api-new/content-rest-api/model/nodeBodyLock';
 
 /**
  * @deprecated 3.0.0
@@ -68,8 +69,8 @@ export class NodesApi {
      * @param {Object.<String, Object>} formParams A map of form parameters and their values.
      * data is of type: {module:model/NodeEntry}
      */
-    addNode(nodeId: string, nodeBody: NodeBody, opts?: any): Promise<NodeEntry | ModelError> {
-        return this.nodesApi.createNode(nodeId, <any>nodeBody, opts);
+    addNode(nodeId: string, nodeBody: NodeBodyCreate, opts?: any): Promise<NodeEntry | ModelError> {
+        return this.nodesApi.createNode(nodeId, nodeBody, opts);
     }
 
     /**
@@ -82,8 +83,8 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    copyNode(nodeId: string, copyBody: CopyBody, opts?: any): Promise<NodeEntry | ModelError> {
-        return this.nodesApi.copyNode(nodeId, <any>copyBody, opts);
+    copyNode(nodeId: string, copyBody: NodeBodyCopy, opts?: any): Promise<NodeEntry | ModelError> {
+        return this.nodesApi.copyNode(nodeId, copyBody, opts);
     }
 
     /**
@@ -93,7 +94,7 @@ export class NodesApi {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent If **true** then the node is deleted permanently, without it moving to the trashcan.\nYou must be the owner or an admin to permanently delete the node.\n (default to false)
      */
-    deleteNode(nodeId: string, opts?: any): Promise<any> {
+    deleteNode(nodeId: string, opts?: any): Promise<any | ModelError> {
         return this.nodesApi.deleteNode(nodeId, opts);
     }
 
@@ -253,7 +254,7 @@ export class NodesApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NodeEntry}
      */
     lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: any): Promise<NodeEntry | ModelError> {
-        return this.nodesApi.lockNode(nodeId, <any>nodeBodyLock, opts);
+        return this.nodesApi.lockNode(nodeId, nodeBodyLock, opts);
     }
 
     /**
@@ -279,8 +280,8 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    moveNode(nodeId: string, moveBody: MoveBody, opts?: any): Promise<NodeEntry | ModelError> {
-        return this.nodesApi.moveNode(nodeId, <any>moveBody, opts);
+    moveNode(nodeId: string, moveBody: NodeBodyMove, opts?: any): Promise<NodeEntry | ModelError> {
+        return this.nodesApi.moveNode(nodeId, moveBody, opts);
     }
 
     /**
@@ -332,7 +333,7 @@ export class NodesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeEntry}
      */
-    updateNode(nodeId: string, nodeBody: NodeBody, opts?: any): Promise<NodeEntry | ModelError> {
+    updateNode(nodeId: string, nodeBody: NodeBodyUpdate, opts?: any): Promise<NodeEntry | ModelError> {
         return this.nodesApi.updateNode(nodeId, nodeBody, opts);
     }
 }

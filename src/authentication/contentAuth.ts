@@ -27,7 +27,7 @@ const Emitter = _Emitter;
 
 export class ContentAuth extends AlfrescoApiClient {
 
-    private static instance: ContentAuth;
+    private static instance: ContentAuth = null;
 
     config: AlfrescoApiConfig;
     basePath: string;
@@ -40,7 +40,7 @@ export class ContentAuth extends AlfrescoApiClient {
     static getInstance(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi): ContentAuth {
         if (!ContentAuth.instance) {
             ContentAuth.instance = new ContentAuth(config, alfrescoApi);
-        }else{
+        } else {
             ContentAuth.instance.setConfig(config);
         }
 
@@ -184,8 +184,6 @@ export class ContentAuth extends AlfrescoApiClient {
 
     /**
      * Set the current Ticket
-     *
-     * @param Ticket
      * */
     setTicket(ticket: string) {
         this.authentications.basicAuth.username = 'ROLE_TICKET';
@@ -196,8 +194,6 @@ export class ContentAuth extends AlfrescoApiClient {
 
     /**
      * Get the current Ticket
-     *
-     * @returns Ticket
      * */
     getTicket(): string {
         return this.ticket;
@@ -212,8 +208,6 @@ export class ContentAuth extends AlfrescoApiClient {
 
     /**
      * If the client is logged in retun true
-     *
-     * @returns {Boolean} is logged in
      */
     isLoggedIn(): boolean {
         return !!this.ticket;
@@ -221,10 +215,8 @@ export class ContentAuth extends AlfrescoApiClient {
 
     /**
      * return the Authentication
-     *
-     * @returns {Object} authentications
      * */
-    getAuthentication(): any {
+    getAuthentication(): Authentication {
         return this.authentications;
     }
 

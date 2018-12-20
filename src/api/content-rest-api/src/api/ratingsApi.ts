@@ -15,8 +15,12 @@
 * limitations under the License.
 */
 
-import { RatingsApi as NewRatingsApi } from '../../../../api-new/content-rest-api/api/ratings.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
+import { RatingsApi as NewRatingsApi } from '../../../../api-new/content-rest-api/api/ratings.api';
+import { RatingEntry } from '../../../../api-new/content-rest-api/model/ratingEntry';
+import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
+import { RatingPaging } from '../../../../api-new/content-rest-api/model/ratingPaging';
+import { RatingBody } from '../../../../api-new/content-rest-api/model/ratingBody';
 
 /**
  * @deprecated 3.0.0
@@ -38,7 +42,7 @@ export class RatingsApi  {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/RatingEntry}
      */
-    getRating(nodeId: string, ratingId: string, opts?: any): Promise<any> {
+    getRating(nodeId: string, ratingId: string, opts?: any): Promise<RatingEntry | ModelError> {
        return this.ratingsApi.getRating(nodeId, ratingId, opts);
     }
 
@@ -52,7 +56,7 @@ export class RatingsApi  {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/RatingPaging}
      */
-    getRatings(nodeId: string, opts?: any): Promise<any> {
+    getRatings(nodeId: string, opts?: any): Promise<RatingPaging | ModelError> {
         return this.ratingsApi.listRatings(nodeId, opts);
     }
 
@@ -63,7 +67,7 @@ export class RatingsApi  {
      * @param {module:model/RatingBody} ratingBody For \&quot;myRating\&quot; the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.\n\nFor example, to \&quot;like\&quot; a file the following body would be used:\n\n  &#x60;&#x60;&#x60;JSON\n    {\n      \&quot;id\&quot;: \&quot;likes\&quot;,\n      \&quot;myRating\&quot;: true\n    }\n  &#x60;&#x60;&#x60;\n
      * data is of type: {module:model/RatingEntry}
      */
-    rate(nodeId: string, ratingBody: any): Promise<any> {
+    rate(nodeId: string, ratingBody: RatingBody): Promise<RatingEntry | ModelError> {
         return this.ratingsApi.createRating(nodeId, ratingBody);
     }
 
@@ -73,7 +77,7 @@ export class RatingsApi  {
      * @param {String} nodeId The identifier of a node.
      * @param {String} ratingId The identifier of a rating.
      */
-    removeRating(nodeId: string, ratingId: string): Promise<any> {
+    removeRating(nodeId: string, ratingId: string): Promise<any | ModelError> {
         return this.ratingsApi.deleteRating(nodeId, ratingId);
     }
 }

@@ -79,6 +79,17 @@ import { WebscriptApi } from './content-rest-api/src/api/webscriptApi';
 import { ChangesApi } from './content-rest-api/src/api/changesApi';
 import { SitesApi } from './content-rest-api/src/api/sitesApi';
 import { GroupsApi as GroupsApiCS } from './content-rest-api/src/api/groupsApi';
+import { FavoriteBodyCreate } from '../api-new/content-rest-api/model/favoriteBodyCreate';
+import { SiteMembershipBodyUpdate } from '../api-new/content-rest-api/model/siteMembershipBodyUpdate';
+import { SharedLinkBodyCreate } from '../api-new/content-rest-api/model/sharedLinkBodyCreate';
+import { SharedLinkBodyEmail } from '../api-new/content-rest-api/model/sharedLinkBodyEmail';
+import { SiteMembershipRequestBodyCreate } from '../api-new/content-rest-api/model/siteMembershipRequestBodyCreate';
+import { FavoriteSiteBodyCreate } from '../api-new/content-rest-api/model/favoriteSiteBodyCreate';
+import { GroupPaging } from '../api-new/content-rest-api/model/groupPaging';
+import { SiteMembershipRequestBodyUpdate } from '../api-new/content-rest-api/model/siteMembershipRequestBodyUpdate';
+import { NodeBodyCreate } from '../api-new/content-rest-api/model/nodeBodyCreate';
+import { NodeBodyCopy } from '../api-new/content-rest-api/model/nodeBodyCopy';
+import { ChildAssociationBody } from '../api-new/content-rest-api/model/childAssociationBody';
 
 /**
  * @deprecated 3.0.0
@@ -175,6 +186,25 @@ export {
     TaskQueryRepresentation as TaskQueryRequestRepresentation
 }from '../api-new/activiti-rest-api/model/taskQueryRepresentation'
 
-
 export { ContentClient as EcmClient } from '../contentClient';
 export { ProcessClient as BpmClient } from '../processClient';
+export { SiteMembershipBodyCreate as SiteMemberBody } from '../api-new/content-rest-api/model/siteMembershipBodyCreate';
+export {
+    SiteMembershipBodyUpdate as SiteMemberRoleBody
+}from '../api-new/content-rest-api/model/siteMembershipBodyUpdate';
+export { SharedLinkBodyCreate as SharedLinkBody } from '../api-new/content-rest-api/model/sharedLinkBodyCreate';
+export { SharedLinkBodyEmail  as EmailSharedLinkBody } from '../api-new/content-rest-api/model/sharedLinkBodyEmail';
+export { RenditionBodyCreate as RenditionBody } from '../api-new/content-rest-api/model/renditionBodyCreate';
+export {
+    SiteMembershipRequestBodyCreate as SiteMembershipRequestBody
+}from '../api-new/content-rest-api/model/siteMembershipRequestBodyCreate';
+export { FavoriteSiteBodyCreate as FavoriteSiteBody } from '../api-new/content-rest-api/model/favoriteSiteBodyCreate';
+export { SiteMembershipRequestBodyUpdate as SiteMembershipBody } from '../api-new/content-rest-api/model/siteMembershipRequestBodyUpdate';
+export { NodeBodyCreate as NodeBody } from '../api-new/content-rest-api/model/nodeBodyCreate';
+export { NodeBodyCopy as CopyBody } from '../api-new/content-rest-api/model/nodeBodyCopy';
+export { NodeBodyMove as MoveBody } from '../api-new/content-rest-api/model/nodeBodyMove';
+export { GroupBodyCreate as GroupBody } from '../api-new/content-rest-api/model/groupBodyCreate';
+
+
+
+

@@ -15,11 +15,6 @@
 * limitations under the License.
 */
 
-import { PersonBodyCreate } from '../model/PersonBodyCreate';
-import { PersonBodyUpdate } from '../model/PersonBodyUpdate';
-import { FavoriteSiteBody } from '../model/FavoriteSiteBody';
-import { FavoriteBody } from '../model/FavoriteBody';
-import { SiteMembershipBody } from '../model/SiteMembershipBody';
 import { PeopleApi as PeopleApiNew } from '../../../../api-new/content-rest-api/api/people.api';
 import { NetworksApi } from '../../../../api-new/content-rest-api/api/networks.api';
 import { FavoritesApi } from '../../../../api-new/content-rest-api/api/favorites.api';
@@ -28,6 +23,29 @@ import { PreferencesApi } from '../../../../api-new/content-rest-api/api/prefere
 import { ActivitiesApi } from '../../../../api-new/content-rest-api/api/activities.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { GroupsApi } from '../../../../api-new/content-rest-api/api/groups.api';
+import { FavoriteEntry } from '../../../../api-new/content-rest-api/model/favoriteEntry';
+import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
+import { FavoriteBodyCreate } from '../../../../api-new/content-rest-api/model/favoriteBodyCreate';
+import { SiteMembershipRequestBodyCreate } from '../../../../api-new/content-rest-api/model/siteMembershipRequestBodyCreate';
+import { SiteMembershipRequestEntry } from '../../../../api-new/content-rest-api/model/siteMembershipRequestEntry';
+import { FavoriteSiteBodyCreate } from '../../../../api-new/content-rest-api/model/favoriteSiteBodyCreate';
+import { FavoriteSiteEntry } from '../../../../api-new/content-rest-api/model/favoriteSiteEntry';
+import { ActivityPaging } from '../../../../api-new/content-rest-api/model/activityPaging';
+import { SiteEntry } from '../../../../api-new/content-rest-api/model/siteEntry';
+import { SitePaging } from '../../../../api-new/content-rest-api/model/sitePaging';
+import { FavoritePaging } from '../../../../api-new/content-rest-api/model/favoritePaging';
+import { PersonEntry } from '../../../../api-new/content-rest-api/model/personEntry';
+import { PersonPaging } from '../../../../api-new/content-rest-api/model/personPaging';
+import { PersonNetworkEntry } from '../../../../api-new/content-rest-api/model/personNetworkEntry';
+import { PersonNetworkPaging } from '../../../../api-new/content-rest-api/model/personNetworkPaging';
+import { PreferenceEntry } from '../../../../api-new/content-rest-api/model/preferenceEntry';
+import { PreferencePaging } from '../../../../api-new/content-rest-api/model/preferencePaging';
+import { SiteMemberEntry } from '../../../../api-new/content-rest-api/model/siteMemberEntry';
+import { GroupPaging } from '../../../../api-new/content-rest-api/model/groupPaging';
+import { SiteMembershipRequestPaging } from '../../../../api-new/content-rest-api/model/siteMembershipRequestPaging';
+import { SiteMembershipRequestBodyUpdate } from '../../../../api-new/content-rest-api/model/siteMembershipRequestBodyUpdate';
+import { PersonBodyCreate } from '../../../../api-new/content-rest-api/model/personBodyCreate';
+import { PersonBodyUpdate } from '../../../../api-new/content-rest-api/model/personBodyUpdate';
 
 /**
  * @deprecated 3.0.0
@@ -64,8 +82,8 @@ export class PeopleApi {
      * @param {module:model/FavoriteBody} favoriteBody An object identifying the entity to be favorited. \n\nThe object consists of a single property which is an object with the name &#x60;site&#x60;, &#x60;file&#x60;, or &#x60;folder&#x60;. \nThe content of that object is the &#x60;guid&#x60; of the target entity.\n\nFor example, to favorite a file the following body would be used:\n\n&#x60;&#x60;&#x60;JSON\n{\n   \&quot;target\&quot;: {\n      \&quot;file\&quot;: {\n         \&quot;guid\&quot;: \&quot;abcde-01234\&quot;\n      }\n   }\n}\n&#x60;&#x60;&#x60;\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    addFavorite(personId: string, favoriteBody: FavoriteBody): Promise<any> {
-        return this.favoritesApi.createFavorite(personId, <any>favoriteBody);
+    addFavorite(personId: string, favoriteBody: FavoriteBodyCreate): Promise<FavoriteEntry | ModelError> {
+        return this.favoritesApi.createFavorite(personId, favoriteBody);
     }
 
     /**
@@ -75,8 +93,8 @@ export class PeopleApi {
      * @param {module:model/SiteMembershipBody} siteMembershipBody Site membership request details
      * data is of type: {module:model/SiteMembershipRequestEntry}
      */
-    addSiteMembershipRequest(personId: string, siteMembershipBody: SiteMembershipBody): Promise<any> {
-        return this.sitesApi.createSiteMembershipRequestForPerson(personId, <any>siteMembershipBody);
+    addSiteMembershipRequest(personId: string, siteMembershipBody: SiteMembershipRequestBodyCreate): Promise<SiteMembershipRequestEntry | ModelError> {
+        return this.sitesApi.createSiteMembershipRequestForPerson(personId, siteMembershipBody);
     }
 
     /**
@@ -96,8 +114,8 @@ export class PeopleApi {
      * @param {module:model/FavoriteSiteBody} favoriteSiteBody The id of the site to favorite.
      * data is of type: {module:model/InlineResponse201}
      */
-    favoriteSite(personId: string, favoriteSiteBody: FavoriteSiteBody): Promise<any> {
-        return this.favoritesApi.createFavorite(personId, <any>favoriteSiteBody);
+    favoriteSite(personId: string, favoriteSiteBody: FavoriteSiteBodyCreate): Promise<FavoriteSiteEntry | ModelError> {
+        return this.favoritesApi.createSiteFavorite(personId, favoriteSiteBody);
     }
 
     /**
@@ -112,7 +130,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/ActivityPaging}
      */
-    getActivities(personId: string, opts?: any): Promise<any> {
+    getActivities(personId: string, opts?: any): Promise<ActivityPaging | ModelError> {
         return this.activitiesApi.listActivitiesForPerson(personId, opts);
     }
 
@@ -125,7 +143,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    getFavorite(personId: string, favoriteId: string, opts?: any): Promise<any> {
+    getFavorite(personId: string, favoriteId: string, opts?: any): Promise<FavoriteEntry | ModelError> {
         return this.favoritesApi.getFavorite(personId, favoriteId, opts);
     }
 
@@ -138,7 +156,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    getFavoriteSite(personId: string, siteId: string, opts?: any): Promise<any> {
+    getFavoriteSite(personId: string, siteId: string, opts?: any): Promise<SiteEntry | ModelError> {
         return this.favoritesApi.getFavoriteSite(personId, siteId, opts);
     }
 
@@ -152,7 +170,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SitePaging}
      */
-    getFavoriteSites(personId: string, opts?: any): Promise<any> {
+    getFavoriteSites(personId: string, opts?: any): Promise<SitePaging | ModelError> {
         return this.favoritesApi.listFavoriteSitesForPerson(personId, opts);
     }
 
@@ -167,7 +185,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoritePaging}
      */
-    getFavorites(personId: string, opts?: any): Promise<any> {
+    getFavorites(personId: string, opts?: any): Promise<FavoritePaging | ModelError> {
         return this.favoritesApi.listFavorites(personId, opts);
     }
 
@@ -179,7 +197,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonEntry}
      */
-    getPerson(personId: string, opts?: any): Promise<any> {
+    getPerson(personId: string, opts?: any): Promise<PersonEntry | ModelError> {
         return this.peopleApiNew.getPerson(personId, opts);
     }
 
@@ -190,7 +208,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonEntry}
      */
-    getPersons(opts?: any): Promise<any> {
+    getPersons(opts?: any): Promise<PersonPaging | ModelError> {
         return this.peopleApiNew.listPeople(opts);
     }
 
@@ -201,7 +219,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonEntry}
      */
-    addPerson(person: PersonBodyCreate): Promise<any> {
+    addPerson(person: PersonBodyCreate): Promise<PersonEntry | ModelError> {
         return this.peopleApiNew.createPerson(person);
     }
 
@@ -213,7 +231,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the include parameter, then the fields specified in the include parameter are returned in addition to those specified in the fields parameter\n
      * data is of type: {module:model/PersonEntry}
      */
-    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts?: any): Promise<any> {
+    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts?: any): Promise<PersonEntry | ModelError> {
         return this.peopleApiNew.updatePerson(personId, personBodyUpdate, opts);
     }
 
@@ -226,7 +244,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonNetworkEntry}
      */
-    getPersonNetwork(personId: string, networkId: string, opts?: any): Promise<any> {
+    getPersonNetwork(personId: string, networkId: string, opts?: any): Promise<PersonNetworkEntry | ModelError> {
         return this.networksApi.getNetworkForPerson(personId, networkId, opts);
     }
 
@@ -240,7 +258,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PersonNetworkPaging}
      */
-    getPersonNetworks(personId: string, opts?: any): Promise<any> {
+    getPersonNetworks(personId: string, opts?: any): Promise<PersonNetworkPaging | ModelError> {
         return this.networksApi.listNetworksForPerson(personId, opts);
     }
 
@@ -253,7 +271,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PreferenceEntry}
      */
-    getPreference(personId: string, preferenceName: string, opts?: any): Promise<any> {
+    getPreference(personId: string, preferenceName: string, opts?: any): Promise<PreferenceEntry | ModelError> {
         return this.preferencesApi.getPreference(personId, preferenceName, opts);
     }
 
@@ -267,7 +285,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/PreferencePaging}
      */
-    getPreferences(personId: string, opts?: any): Promise<any> {
+    getPreferences(personId: string, opts?: any): Promise<PreferencePaging | ModelError> {
         return this.preferencesApi.listPreferences(personId, opts);
     }
 
@@ -283,7 +301,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SitePaging}
      */
-    getSiteMembership(personId: string, opts?: any): Promise<any> {
+    getSiteMembership(personId: string, opts?: any): Promise<SiteMemberEntry | ModelError> {
         return this.sitesApi.getSiteMembership(personId, opts);
     }
 
@@ -300,8 +318,8 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/GroupsPaging}
      */
-    getGroupsMembership(personId: string, opts?: any): Promise<any> {
-        return this.groupsApi.listGroupMemberships(personId, opts);
+    getGroupsMembership(personId: string, opts?: any): Promise<GroupPaging | ModelError> {
+        return this.groupsApi.listGroupMembershipsForPerson(personId, opts);
     }
 
     /**
@@ -313,7 +331,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMembershipRequestEntry}
      */
-    getSiteMembershipRequest(personId: string, siteId: string, opts?: any): Promise<any> {
+    getSiteMembershipRequest(personId: string, siteId: string, opts?: any): Promise<SiteMembershipRequestEntry | ModelError> {
         return this.sitesApi.getSiteMembershipRequestForPerson(personId, siteId, opts);
     }
 
@@ -327,7 +345,7 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMembershipRequestPaging}
      */
-    getSiteMembershipRequests(personId: string, opts?: any): Promise<any> {
+    getSiteMembershipRequests(personId: string, opts?: any): Promise<SiteMembershipRequestPaging | ModelError> {
         return this.sitesApi.listSiteMembershipRequestsForPerson(personId, opts);
     }
 
@@ -337,7 +355,7 @@ export class PeopleApi {
      * @param {String} personId The identifier of a person.
      * @param {String} favoriteId The identifier of a favorite.
      */
-    removeFavoriteSite(personId: string, favoriteId: string): Promise<any> {
+    removeFavoriteSite(personId: string, favoriteId: string): Promise<any | ModelError> {
         return this.favoritesApi.deleteSiteFavorite(personId, favoriteId);
     }
 
@@ -347,7 +365,7 @@ export class PeopleApi {
      * @param {String} personId The identifier of a person.
      * @param {String} siteId The identifier of a site.
      */
-    removeSiteMembershipRequest(personId: string, siteId: string): Promise<any> {
+    removeSiteMembershipRequest(personId: string, siteId: string): Promise<any | ModelError> {
         return this.sitesApi.deleteSiteMembershipRequestForPerson(personId, siteId);
     }
 
@@ -358,7 +376,7 @@ export class PeopleApi {
      * @param {String} siteId The identifier of a site.
      * @param {module:model/SiteMembershipBody1} siteMembershipBody The new message to display
      */
-    updateSiteMembershipRequest(personId: string, siteId: string, siteMembershipBody: SiteMembershipBody): Promise<any> {
-        return this.sitesApi, this.updateSiteMembershipRequest(personId, siteId, siteMembershipBody);
+    updateSiteMembershipRequest(personId: string, siteId: string, siteMembershipBody: SiteMembershipRequestBodyUpdate): Promise<SiteMembershipRequestEntry | ModelError> {
+        return this.sitesApi.updateSiteMembershipRequestForPerson(personId, siteId, siteMembershipBody);
     }
 }

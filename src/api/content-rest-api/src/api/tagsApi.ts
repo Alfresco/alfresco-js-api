@@ -15,9 +15,12 @@
 * limitations under the License.
 */
 
-import { TagBody } from '../model/TagBody';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { TagsApi as NewTagsApi } from '../../../../api-new/content-rest-api/api/tags.api';
+import { TagEntry } from '../../../../api-new/content-rest-api/model/tagEntry';
+import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
+import { TagPaging } from '../../../../api-new/content-rest-api/model/tagPaging';
+import { TagBody } from '../../../../api-new/content-rest-api/model/tagBody';
 
 /**
  * @deprecated 3.0.0
@@ -37,8 +40,8 @@ export class TagsApi  {
      * @param {module:model/TagBody} tagBody The new tag
      * data is of type: {module:model/TagEntry}
      */
-    addTag(nodeId: string, tagBody: TagBody): Promise<any> {
-        return this.tagsApi.createTagForNode(nodeId, <any>tagBody);
+    addTag(nodeId: string, tagBody: TagBody): Promise<TagEntry | ModelError> {
+        return this.tagsApi.createTagForNode(nodeId, tagBody);
     }
 
     /**
@@ -51,7 +54,7 @@ export class TagsApi  {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/TagPaging}
      */
-    getNodeTags(nodeId: string, opts?: any): Promise<any> {
+    getNodeTags(nodeId: string, opts?: any): Promise<TagPaging | ModelError> {
         return this.tagsApi.listTagsForNode(nodeId, opts);
     }
 
@@ -63,7 +66,7 @@ export class TagsApi  {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/TagEntry}
      */
-    getTag(tagId: string, opts?: any): Promise<any> {
+    getTag(tagId: string, opts?: any): Promise<TagEntry | ModelError> {
         return this.tagsApi.getTag(tagId, opts);
     }
 
@@ -76,7 +79,7 @@ export class TagsApi  {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/TagPaging}
      */
-    getTags(opts?: any): Promise<any> {
+    getTags(opts?: any): Promise<TagPaging | ModelError> {
         return this.tagsApi.listTags(opts);
     }
 
@@ -86,7 +89,7 @@ export class TagsApi  {
      * @param {String} nodeId The identifier of a node.
      * @param {String} tagId The identifier of a tag.
      */
-    removeTag(nodeId: string, tagId: string): Promise<any> {
+    removeTag(nodeId: string, tagId: string): Promise<any | ModelError> {
         return this.tagsApi.deleteTagFromNode(nodeId, tagId);
     }
 
@@ -97,7 +100,7 @@ export class TagsApi  {
      * @param {module:model/TagBody1} tagBody The updated tag
      * data is of type: {module:model/TagEntry}
      */
-    updateTag(tagId: string, tagBody: TagBody): Promise<any> {
-        return this.tagsApi.updateTag(tagId, <any>tagBody);
+    updateTag(tagId: string, tagBody: TagBody): Promise<TagEntry | ModelError> {
+        return this.tagsApi.updateTag(tagId, tagBody);
     }
 }

@@ -15,9 +15,12 @@
 * limitations under the License.
 */
 
-import { AssocTargetBody } from '../model/AssocTargetBody';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { NodesApi } from '../../../../api-new/content-rest-api/api/nodes.api';
+import { AssociationBody } from '../../../../api-new/content-rest-api/model/associationBody';
+import { AssociationEntry } from '../../../../api-new/content-rest-api/model/associationEntry';
+import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
+import { NodeAssociationPaging } from '../../../../api-new/content-rest-api/model/nodeAssociationPaging';
 
 /**
  * @deprecated 3.0.0
@@ -36,8 +39,8 @@ export class AssociationsApi {
      * @param {String} sourceId The identifier of a node.
      * @param {module:model/AssocTargetBody} assocTargetBody The target node id and assoc type.
      */
-    addAssoc(sourceId: string, assocTargetBody?: AssocTargetBody): Promise<any> {
-        return this.nodesApi.createAssociation(sourceId, <any>assocTargetBody);
+    addAssoc(sourceId: string, assocTargetBody?:AssociationBody): Promise<AssociationEntry | ModelError> {
+        return this.nodesApi.createAssociation(sourceId, assocTargetBody);
     }
 
     /**
@@ -50,8 +53,8 @@ export class AssociationsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    listSourceNodeAssociations(targetId: string, opts?: any): Promise<any> {
-        return this.nodesApi.listSourceAssociations(targetId, <any>opts);
+    listSourceNodeAssociations(targetId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+        return this.nodesApi.listSourceAssociations(targetId, opts);
     }
 
     /**
@@ -64,8 +67,8 @@ export class AssociationsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/NodeAssocPaging}
      */
-    listTargetAssociations(sourceId: string, opts?: any): Promise<any> {
-        return this.nodesApi.listTargetAssociations(sourceId, <any>opts);
+    listTargetAssociations(sourceId: string, opts?: any): Promise<NodeAssociationPaging | ModelError> {
+        return this.nodesApi.listTargetAssociations(sourceId, opts);
     }
 
     /**
@@ -76,7 +79,7 @@ export class AssociationsApi {
      * @param {Object} opts Optional parameters
      * @param {String} opts.assocType Restrict the delete to only those of the given association type
      */
-    removeAssoc(sourceId: string, targetId: string, opts?: any): Promise<any> {
-        return this.nodesApi.deleteAssociation(sourceId, targetId, <any>opts);
+    removeAssoc(sourceId: string, targetId: string, opts?: any): Promise<any | ModelError> {
+        return this.nodesApi.deleteAssociation(sourceId, targetId, opts);
     }
 }

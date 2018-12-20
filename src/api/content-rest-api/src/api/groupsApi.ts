@@ -15,10 +15,16 @@
 * limitations under the License.
 */
 
-import { GroupBody } from '../model/GroupBody';
-import { GroupMember } from '../model/GroupMember';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { GroupsApi as NewGroupsApi } from '../../../../api-new/content-rest-api/api/groups.api';
+import { GroupEntry } from '../../../../api-new/content-rest-api/model/groupEntry';
+import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
+import { GroupPaging } from '../../../../api-new/content-rest-api/model/groupPaging';
+import { GroupMemberPaging } from '../../../../api-new/content-rest-api/model/groupMemberPaging';
+import { GroupMembershipBodyCreate } from '../../../../api-new/content-rest-api/model/groupMembershipBodyCreate';
+import { GroupMemberEntry } from '../../../../api-new/content-rest-api/model/groupMemberEntry';
+import { GroupBodyUpdate } from '../../../../api-new/content-rest-api/model/groupBodyUpdate';
+import { GroupBodyCreate } from '../../../../api-new/content-rest-api/model/groupBodyCreate';
 
 /**
  * @deprecated 3.0.0
@@ -40,8 +46,8 @@ export class GroupsApi {
      * data is of type: {module:model/GroupsEntry}
      */
 
-    createGroup(groupBody: GroupBody, opts?: any): Promise<any> {
-        return this.groupsApi.createGroup(<any>groupBody, opts);
+    createGroup(groupBody: GroupBodyCreate, opts?: any): Promise<GroupEntry | ModelError> {
+        return this.groupsApi.createGroup(groupBody, opts);
     }
 
     /**
@@ -56,7 +62,7 @@ export class GroupsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/GroupsPaging}
      */
-    getGroups(opts?: any): Promise<any> {
+    getGroups(opts?: any): Promise<GroupPaging | ModelError> {
         return this.groupsApi.listGroups(opts);
     }
 
@@ -66,7 +72,7 @@ export class GroupsApi {
      * @param {String} groupId The identifier of a site.
      * @param {Boolean} opts.cascade If true then the delete will be applied in cascade to sub-groups.
      */
-    deleteGroup(groupId: string, opts?: any): Promise<any> {
+    deleteGroup(groupId: string, opts?: any): Promise<any | ModelError> {
         return this.groupsApi.deleteGroup(groupId, opts);
     }
 
@@ -79,7 +85,7 @@ export class GroupsApi {
      * @param {string[]} opts.fields A list of field names.You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.The list applies to a returned individual entity or entries within a collection.If the API method also supports the include parameter, then the fields specified in the include parameter are returned in addition to those specified in the fields parameter.
      * data is of type: {module:model/GroupsEntry}
      */
-    getGroup(groupId: string, opts?: any): Promise<any> {
+    getGroup(groupId: string, opts?: any): Promise<GroupEntry | ModelError> {
         return this.groupsApi.getGroup(groupId, opts);
     }
 
@@ -93,8 +99,8 @@ export class GroupsApi {
      * @param {string[]} opts.fields A list of field names.You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.The list applies to a returned individual entity or entries within a collection.If the API method also supports the include parameter, then the fields specified in the include parameter are returned in addition to those specified in the fields parameter.
      * data is of type: {module:model/GroupsEntry}
      */
-    updateGroup(groupId: string, groupBody: GroupBody, opts?: any): Promise<any> {
-        return this.groupsApi.updateGroup(groupId, <any>groupBody, opts);
+    updateGroup(groupId: string, groupBody: GroupBodyUpdate, opts?: any): Promise<GroupEntry | ModelError> {
+        return this.groupsApi.updateGroup(groupId, groupBody, opts);
     }
 
     /**
@@ -109,7 +115,7 @@ export class GroupsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/GroupMemberPaging}
      */
-    getGroupMembers(groupId: string, opts?: any): Promise<any> {
+    getGroupMembers(groupId: string, opts?: any): Promise<GroupMemberPaging | ModelError> {
         return this.groupsApi.listGroupMemberships(groupId, opts);
     }
 
@@ -122,8 +128,8 @@ export class GroupsApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/GroupMemberEntry}
      */
-    addGroupMember(groupId: string, groupMemberBody: GroupMember, opts?: any): Promise<any> {
-        return this.groupsApi.createGroupMembership(groupId, <any>groupMemberBody, opts);
+    addGroupMember(groupId: string, groupMemberBody: GroupMembershipBodyCreate, opts?: any): Promise<GroupMemberEntry | ModelError> {
+        return this.groupsApi.createGroupMembership(groupId, groupMemberBody, opts);
     }
 
     /**
@@ -132,7 +138,7 @@ export class GroupsApi {
      * @param {String} groupId The identifier of a group.
      * @param {String} groupMemberId The identifier of a group membership.
      */
-    deleteGroupMember(groupId: string, groupMemberId: string): Promise<any> {
+    deleteGroupMember(groupId: string, groupMemberId: string): Promise<any | ModelError> {
         return this.groupsApi.deleteGroupMembership(groupId, groupMemberId);
     }
 

@@ -15,9 +15,12 @@
 * limitations under the License.
 */
 
-import { FavoriteBody } from '../model/FavoriteBody';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { FavoritesApi as NewFavoritesApi } from '../../../../api-new/content-rest-api/api/favorites.api';
+import { FavoriteEntry } from '../../../../api-new/content-rest-api/model/favoriteEntry';
+import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
+import { FavoriteBodyCreate } from '../../../../api-new/content-rest-api/model/favoriteBodyCreate';
+import { FavoritePaging } from '../../../../api-new/content-rest-api/model/favoritePaging';
 
 /**
  * @deprecated 3.0.0
@@ -37,8 +40,8 @@ export class FavoritesApi {
      * @param {module:model/FavoriteBody} favoriteBody An object identifying the entity to be favorited. \n\nThe object consists of a single property which is an object with the name &#x60;site&#x60;, &#x60;file&#x60;, or &#x60;folder&#x60;. \nThe content of that object is the &#x60;guid&#x60; of the target entity.\n\nFor example, to favorite a file the following body would be used:\n\n&#x60;&#x60;&#x60;JSON\n{\n   \&quot;target\&quot;: {\n      \&quot;file\&quot;: {\n         \&quot;guid\&quot;: \&quot;abcde-01234\&quot;\n      }\n   }\n}\n&#x60;&#x60;&#x60;\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    addFavorite(personId: string, favoriteBody: FavoriteBody): Promise<any> {
-        return this.favoritesApi.createFavorite(personId, <any>favoriteBody);
+    addFavorite(personId: string, favoriteBody: FavoriteBodyCreate): Promise<FavoriteEntry | ModelError> {
+        return this.favoritesApi.createFavorite(personId, favoriteBody);
     }
 
     /**
@@ -50,7 +53,7 @@ export class FavoritesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoriteEntry}
      */
-    getFavorite(personId: string, favoriteId: string, opts?: any): Promise<any> {
+    getFavorite(personId: string, favoriteId: string, opts?: any): Promise<FavoriteEntry | ModelError> {
         return this.favoritesApi.getFavorite(personId, favoriteId, opts);
     }
 
@@ -65,7 +68,7 @@ export class FavoritesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/FavoritePaging}
      */
-    getFavorites(personId: string, opts?: any): Promise<any> {
+    getFavorites(personId: string, opts?: any): Promise<FavoritePaging | ModelError> {
         return this.favoritesApi.listFavorites(personId, opts);
     }
 
@@ -75,7 +78,7 @@ export class FavoritesApi {
      * @param {String} personId The identifier of a person.
      * @param {String} favoriteId The identifier of a favorite.
      */
-    removeFavoriteSite(personId: string, favoriteId: string): Promise<any> {
+    removeFavoriteSite(personId: string, favoriteId: string): Promise<any | ModelError> {
         return this.favoritesApi.deleteSiteFavorite(personId, favoriteId);
     }
 }

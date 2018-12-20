@@ -15,12 +15,19 @@
 * limitations under the License.
 */
 
-import { SiteMemberBody } from '../model/SiteMemberBody';
 import { SiteBodyUpdate } from '../../../../api-new/content-rest-api/model/siteBodyUpdate';
 import { SiteBodyCreate } from '../../../../api-new/content-rest-api/model/siteBodyCreate';
-import { SiteMemberRoleBody } from '../model/SiteMemberRoleBody';
 import { SitesApi as NewSitesApi } from '../../../../api-new/content-rest-api/api/sites.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
+import { SiteMemberEntry } from '../../../../api-new/content-rest-api/model/siteMemberEntry';
+import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
+import { SiteMembershipBodyCreate } from '../../../../api-new/content-rest-api/model/siteMembershipBodyCreate';
+import { SiteEntry } from '../../../../api-new/content-rest-api/model/siteEntry';
+import { SiteContainerEntry } from '../../../../api-new/content-rest-api/model/siteContainerEntry';
+import { SiteContainerPaging } from '../../../../api-new/content-rest-api/model/siteContainerPaging';
+import { SiteMemberPaging } from '../../../../api-new/content-rest-api/model/siteMemberPaging';
+import { SitePaging } from '../../../../api-new/content-rest-api/model/sitePaging';
+import { SiteMembershipBodyUpdate } from '../../../../api-new/content-rest-api/model/siteMembershipBodyUpdate';
 
 /**
  * @deprecated 3.0.0
@@ -40,8 +47,8 @@ export class SitesApi {
      * @param {module:model/SiteMemberBody} siteMemberBody The person to add and their role
      * data is of type: {module:model/SiteMemberEntry}
      */
-    addSiteMember(siteId: string, siteMemberBody: SiteMemberBody): Promise<any> {
-        return this.sitesApi.createSiteMembership(siteId, <any>siteMemberBody);
+    addSiteMember(siteId: string, siteMemberBody: SiteMembershipBodyCreate): Promise<SiteMemberEntry | ModelError> {
+        return this.sitesApi.createSiteMembership(siteId, siteMemberBody);
     }
 
     /**
@@ -53,8 +60,8 @@ export class SitesApi {
      * @param {Boolean} opts.skipAddToFavorites Flag to indicate whether the site should not be added to the user&#39;s site favorites. (default to false)
      * data is of type: {module:model/SiteEntry}
      */
-    createSite(siteBody: SiteBodyCreate, opts?: any): Promise<any> {
-        return this.sitesApi.createSite(<any>SiteBodyCreate, opts);
+    createSite(siteBody: SiteBodyCreate, opts?: any): Promise<SiteEntry | ModelError> {
+        return this.sitesApi.createSite(siteBody, opts);
     }
 
     /**
@@ -66,8 +73,8 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    updateSite(siteId: string, siteBody: SiteBodyUpdate, opts?: any): Promise<any> {
-        return this.sitesApi.updateSite(siteId, <any>SiteBodyUpdate, opts);
+    updateSite(siteId: string, siteBody: SiteBodyUpdate, opts?: any): Promise<SiteEntry | ModelError> {
+        return this.sitesApi.updateSite(siteId, siteBody, opts);
     }
 
     /**
@@ -77,7 +84,7 @@ export class SitesApi {
      * @param {Object} opts Optional parameters
      * @param {Boolean} opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
      */
-    deleteSite(siteId: string, opts?: any): Promise<any> {
+    deleteSite(siteId: string, opts?: any): Promise<any | ModelError> {
         return this.sitesApi.deleteSite(siteId, opts);
     }
 
@@ -90,7 +97,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteEntry}
      */
-    getSite(siteId: string, opts?: any): Promise<any> {
+    getSite(siteId: string, opts?: any): Promise<SiteEntry | ModelError> {
         return this.sitesApi.getSite(siteId, opts);
     }
 
@@ -103,7 +110,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteContainerEntry}
      */
-    getSiteContainer(siteId: string, containerId: string, opts?: any): Promise<any> {
+    getSiteContainer(siteId: string, containerId: string, opts?: any): Promise<SiteContainerEntry | ModelError> {
         return this.sitesApi.getSiteContainer(siteId, containerId, opts);
     }
 
@@ -117,7 +124,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteContainerPaging}
      */
-    getSiteContainers(siteId: string, opts?: any): Promise<any> {
+    getSiteContainers(siteId: string, opts?: any): Promise<SiteContainerPaging | ModelError> {
         return this.sitesApi.listSiteContainers(siteId, opts);
     }
 
@@ -130,7 +137,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMemberEntry}
      */
-    getSiteMember(siteId: string, personId: string, opts?: any): Promise<any> {
+    getSiteMember(siteId: string, personId: string, opts?: any): Promise<SiteMemberEntry | ModelError> {
         return this.sitesApi.getSiteMembership(siteId, personId, opts);
     }
 
@@ -144,7 +151,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SiteMemberPaging}
      */
-    getSiteMembers(siteId: string, opts?: any): Promise<any> {
+    getSiteMembers(siteId: string, opts?: any): Promise<SiteMemberPaging | ModelError> {
         return this.sitesApi.listSiteMemberships(siteId, opts);
     }
 
@@ -159,7 +166,7 @@ export class SitesApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SitePaging}
      */
-    getSites(opts?: any): Promise<any> {
+    getSites(opts?: any): Promise<SitePaging | ModelError> {
         return this.sitesApi.listSites(opts);
     }
 
@@ -169,7 +176,7 @@ export class SitesApi {
      * @param {String} siteId The identifier of a site.
      * @param {String} personId The identifier of a person.
      */
-    removeSiteMember(siteId: string, personId: string): Promise<any> {
+    removeSiteMember(siteId: string, personId: string): Promise<any | ModelError> {
         return this.sitesApi.deleteSiteMembership(siteId, personId);
     }
 
@@ -181,7 +188,7 @@ export class SitesApi {
      * @param {module:model/SiteMemberRoleBody} siteMemberRoleBody The persons new role
      * data is of type: {module:model/SiteMemberEntry}
      */
-    updateSiteMember(siteId: string, personId: string, siteMemberRoleBody: SiteMemberRoleBody): Promise<any> {
-        return this.sitesApi.updateSiteMembership(siteId, personId, <any> siteMemberRoleBody);
+    updateSiteMember(siteId: string, personId: string, siteMemberRoleBody: SiteMembershipBodyUpdate): Promise<SiteMemberEntry | ModelError> {
+        return this.sitesApi.updateSiteMembership(siteId, personId, siteMemberRoleBody);
     }
 }

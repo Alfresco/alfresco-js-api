@@ -15,36 +15,15 @@
 * limitations under the License.
 */
 
-import { ClassDescription } from '../model/classDescription';
 import { ClassesApi as NewClassesApi } from '../../../../api-new/content-rest-api/api/classes.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**
  * @deprecated 3.0.0
  */
-export class ClassesApi  {
-
-    classesApi: NewClassesApi;
+export class ClassesApi extends NewClassesApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.classesApi = new NewClassesApi(alfrescoApi);
-    }
-
-    /**
-     * Function to receive the result of the getClass operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ClassDescription} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Gets the class information for the specified className.
-     * @param {String} className The identifier of the class.
-     * @param {Object} opts Optional parameters
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassDescription}
-     * data is of type: {module:model/ClassDescription}
-     */
-    getClass(className: string, opts?: any): Promise<ClassDescription> {
-       return this.classesApi.getClass(className, opts);
+        this.apiClient = alfrescoApi.contentPrivateClient;
     }
 }

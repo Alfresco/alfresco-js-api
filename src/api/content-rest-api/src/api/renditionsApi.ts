@@ -15,10 +15,13 @@
 * limitations under the License.
 */
 
-import { RenditionBody } from '../model/RenditionBody';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { RenditionsApi as NewRenditionsApi } from '../../../../api-new/content-rest-api/api/renditions.api';
 import { SharedlinksApi } from '../../../../api-new/content-rest-api/api/sharedlinks.api';
+import { ModelError } from '../../../../api-new/content-rest-api/model/modelError';
+import { RenditionBodyCreate } from '../../../../api-new/content-rest-api/model/renditionBodyCreate';
+import { RenditionEntry } from '../../../../api-new/content-rest-api/model/renditionEntry';
+import { RenditionPaging } from '../../../../api-new/content-rest-api/model/renditionPaging';
 
 /**
  * @deprecated 3.0.0
@@ -39,8 +42,8 @@ export class RenditionsApi {
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {module:model/RenditionBody} renditionBody The rendition \&quot;id\&quot;.
      */
-    createRendition(nodeId: string, renditionBody: RenditionBody): Promise<any> {
-        return this.renditionsApi.createRendition(nodeId, <any>renditionBody);
+    createRendition(nodeId: string, renditionBody: RenditionBodyCreate): Promise<any | ModelError> {
+        return this.renditionsApi.createRendition(nodeId, renditionBody);
     }
 
     /**
@@ -50,7 +53,7 @@ export class RenditionsApi {
      * @param {String} renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
      * data is of type: {module:model/RenditionEntry}
      */
-    getRendition(nodeId: string, renditionId: string): Promise<any> {
+    getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry | ModelError> {
         return this.renditionsApi.getRendition(nodeId, renditionId);
     }
 
@@ -63,7 +66,7 @@ export class RenditionsApi {
      * @param {Boolean} opts.attachment **true** enables a web browser to download the file as an attachment.\n**false** means a web browser may preview the file in a new tab or window, but not\ndownload the file.\n\nYou can only set this parameter to **false** if the content type of the file is in the supported list;\nfor example, certain image files and PDF files.\n\nIf the content type is not supported for preview, then a value of **false**  is ignored, and\nthe attachment will be returned in the response.\n (default to true)
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
-    getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any> {
+    getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any | ModelError> {
         return this.renditionsApi.getRenditionContent(nodeId, renditionId);
     }
 
@@ -73,19 +76,19 @@ export class RenditionsApi {
      * @param {String} nodeId The identifier of a node.
      * data is of type: {module:model/RenditionPaging}
      */
-    getRenditions(nodeId: string): Promise<any> {
+    getRenditions(nodeId: string): Promise<RenditionPaging | ModelError> {
         return this.renditionsApi.listRenditions(nodeId);
     }
 
-    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any> {
+    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any | ModelError> {
         return this.sharedlinksApi.getSharedLinkRenditionContent(sharedId, renditionId, opts);
     }
 
-    getSharedLinkRenditions(sharedId: string): Promise<any> {
+    getSharedLinkRenditions(sharedId: string): Promise<RenditionPaging | ModelError> {
         return this.sharedlinksApi.listSharedLinkRenditions(sharedId);
     }
 
-    getSharedLinkRendition(sharedId: string, renditionId: string): Promise<any> {
+    getSharedLinkRendition(sharedId: string, renditionId: string): Promise<RenditionEntry | ModelError> {
         return this.sharedlinksApi.getSharedLinkRendition(sharedId, renditionId);
     }
 

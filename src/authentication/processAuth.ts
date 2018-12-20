@@ -27,7 +27,7 @@ const Emitter = _Emitter;
 
 export class ProcessAuth extends AlfrescoApiClient {
 
-    private static instance: ProcessAuth;
+    private static instance: ProcessAuth = null;
     config: AlfrescoApiConfig;
     basePath: string;
     storage: Storage;
