@@ -24,6 +24,7 @@ import * as  superagent_ from 'superagent';
 import { Authentication } from './authentication/authentication';
 import { BasicAuth } from './authentication/basicAuth';
 import { Oauth2 } from './authentication/oauth2';
+import { ProcessAuth } from './authentication/processAuth';
 
 const Emitter = _Emitter;
 const superagent = superagent_;
@@ -284,74 +285,11 @@ export class AlfrescoApiClient {
         return data;
     }
 
-    // /**
-    //  * Converts a value to the specified type.
-    //  * @param {(String|Object)} data The data to convert, as a string or object.
-    //  * @param {(String|string[]|Object.<String, Object>|Function)} type The type to return. Pass a string for simple types
-    //  * or the constructor function for a complex type. Pass an array containing the type name to return an array of that type. To
-    //  * return an object, pass an object with one property whose name is the key type and whose value is the corresponding value type:
-    //  * all properties on <code>data<code> will be converted to this type.
-    //  * @returns An instance of the specified type.
-    //  */
-    // convertToType(data: any, type: any): any {
-    //     switch (type) {
-    //         case 'Binary':
-    //             return data;
-    //         case 'Boolean':
-    //             return Boolean(data);
-    //         case 'Integer':
-    //             return parseInt(data, 10);
-    //         case 'Number':
-    //             return parseFloat(data);
-    //         case 'String':
-    //             return data !== null && data !== undefined ? String(data) : data;
-    //         default:
-    //             if (type === Object) {
-    //                 // generic object, return directly
-    //                 return new type(data);
-    //             } else if (typeof type === 'function') {
-    //                 // for model type like: User
-    //                 return new type(data);
-    //             } else if (Array.isArray(type)) {
-    //                 // for array type like: ['String']
-    //                 let itemType = type[0];
-    //                 if (data) {
-    //                     return data.map((item: any) => {
-    //                         return this.convertToType(item, itemType);
-    //                     });
-    //                 } else {
-    //                     return null;
-    //                 }
-    //
-    //             } else if (typeof type === 'object') {
-    //                 // for plain object type like: {'String': 'Integer'}
-    //                 let keyType, valueType;
-    //                 for (let k in type) {
-    //                     if (type.hasOwnProperty(k)) {
-    //                         keyType = k;
-    //                         valueType = type[k];
-    //                         break;
-    //                     }
-    //                 }
-    //                 let result = {};
-    //                 for (let k in data) {
-    //                     if (data.hasOwnProperty(k)) {
-    //                         let key = this.convertToType(k, keyType);
-    //                         let rawValue = data[k];
-    //                         let value = typeof rawValue === 'object'
-    //                             ? rawValue
-    //                             : this.convertToType(rawValue, valueType);
-    //
-    //                         result[key] = value;
-    //                     }
-    //                 }
-    //                 return result;
-    //             } else {
-    //                 // for unknown type, return the data directly
-    //                 return data;
-    //             }
-    //     }
-    //}
+    basicAuth(username: string, password: string): string {
+        let str: any = username + ':' + password;
+        let buffer = Buffer.from(str.toString(), 'binary');
+        return 'Basic ' + buffer.toString('base64');
+    }
 
     /**
      * Invokes the REST service using the supplied settings and parameters.

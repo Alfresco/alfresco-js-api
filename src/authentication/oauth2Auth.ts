@@ -20,6 +20,7 @@ import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { Storage } from '../storage';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
+import { ProcessAuth } from './processAuth';
 
 const Emitter = _Emitter;
 
@@ -559,11 +560,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
     grantPasswordLogin(username: string, password: string, resolve: any, reject: any) {
         let postBody = {}, pathParams = {}, queryParams = {};
 
-        let auth = 'Basic ' + btoa(this.config.oauth2.clientId + ':' + this.config.oauth2.secret);
+        let authHeader = this.basicAuth(ProcessAuth.authentications.basicAuth.username, ProcessAuth.authentications.basicAuth.password);
 
         let headerParams = {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': auth
+            'Authorization': authHeader
         };
 
         let formParams = {

@@ -16,50 +16,14 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { AboutApi as NewAboutApi } from '../../../../api-new/activiti-rest-api/api/about.api';
 
 /**
  * @deprecated 3.0.0
  */
-export class AboutApi {
+export class AboutApi extends NewAboutApi {
 
-    apiClient: ProcessClient;
-
-    constructor(alfrescoApi?: AlfrescoApi) {
+    public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;
     }
-
-    /**
-     * Function to receive the result of the getAppVersion operation.
-     * @param {String} error Error message, if any.
-     * @param {Object.<String, {'String': 'String'}>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Server Information
-     * Retrieve information about the Activiti BPM Suite version
-     * data is of type: {Object.<String, {'String': 'String'}>}
-     */
-    getAppVersion() {
-        let postBody = null;
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = { 'String': 'String' };
-
-        return this.apiClient.callApi(
-            '/api/enterprise/app-version', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
-    }
-};
-
+}
