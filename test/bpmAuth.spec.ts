@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach, afterEach */
 
-import { BpmAuth } from 'alfresco-js-api';
+import { BpmAuth } from '@alfresco/js-api';
 let AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 let expect = require('chai').expect;
 let sinon = require('sinon');

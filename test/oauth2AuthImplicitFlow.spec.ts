@@ -2,7 +2,7 @@
 
 let expect = require('chai').expect;
 let Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
-import { Oauth2Auth } from 'alfresco-js-api';
+import { Oauth2Auth } from '@alfresco/js-api';
 
 describe('Oauth2 Implicit flow test', function () {
 

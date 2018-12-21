@@ -1,6 +1,6 @@
 /*global describe, it */
 
-import { AlfrescoApiClient, DateAlfresco } from 'alfresco-js-api';
+import { AlfrescoApiClient, DateAlfresco } from '@alfresco/js-api';
 
 let expect = require('chai').expect;
 

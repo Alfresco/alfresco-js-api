@@ -31,9 +31,9 @@ module.exports = function rollupBundle(options) {
     }).then(function (bundle) {
         return bundle.generate({
             format: 'umd',
-            name: 'alfresco-js-api',
+            name: '@alfresco/js-api',
             amd: {
-                id: 'alfresco-js-api'
+                id: '@alfresco/js-api'
             },
             sourcemap: true,
         });

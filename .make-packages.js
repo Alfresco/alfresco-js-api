@@ -44,7 +44,7 @@ delete pkg.scripts;
 fs.removeSync(PKG_ROOT);
 
 let rootPackageJson = Object.assign({}, pkg, {
-    name: 'alfresco-js-api',
+    name: '@alfresco/js-api',
     main: './index.js',
     typings: './index.d.ts',
     module: './_esm5/index.js',

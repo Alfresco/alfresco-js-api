@@ -2,7 +2,7 @@
 
 let expect = require('chai').expect;
 let AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-import { EcmAuth } from 'alfresco-js-api';
+import { EcmAuth } from '@alfresco/js-api';
 
 describe('Ecm Auth test', function () {
 

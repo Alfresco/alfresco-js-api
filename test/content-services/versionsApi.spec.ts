@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
 let VersionMock = require('../../test/mockObjects/mockAlfrescoApi').Version;
 let expect = require('chai').expect;
 
