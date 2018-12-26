@@ -20,7 +20,6 @@ import { FormRepresentation } from '../model/formRepresentation';
 import { FormSaveRepresentation } from '../model/formSaveRepresentation';
 import { ResultListDataRepresentationFormRepresentation } from '../model/resultListDataRepresentationFormRepresentation';
 import { ResultListDataRepresentationRuntimeFormRepresentation } from '../model/resultListDataRepresentationRuntimeFormRepresentation';
-import { RuntimeFormRepresentation } from '../model/runtimeFormRepresentation';
 import { ValidationErrorRepresentation } from '../model/validationErrorRepresentation';
 import { BaseApi } from './base.api';
 

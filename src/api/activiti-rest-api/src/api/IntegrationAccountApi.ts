@@ -16,7 +16,6 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
 import { AccountIntegrationApi } from '../../../../api-new/activiti-rest-api/api/accountIntegration.api';
 
 /**

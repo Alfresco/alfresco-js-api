@@ -6,6 +6,7 @@
         "strictFunctionTypes": true,
 //        "noImplicitAny": true,
         "noImplicitThis": true,
+        "noUnusedLocals": true,
         "allowSyntheticDefaultImports": true,
         "suppressImplicitAnyIndexErrors": true,
         "moduleResolution": "node",

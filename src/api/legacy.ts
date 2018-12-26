@@ -79,8 +79,6 @@ import { WebscriptApi } from './content-rest-api/src/api/webscriptApi';
 import { ChangesApi } from './content-rest-api/src/api/changesApi';
 import { SitesApi } from './content-rest-api/src/api/sitesApi';
 import { GroupsApi as GroupsApiCS } from './content-rest-api/src/api/groupsApi';
-import { AssociationBody } from '../api-new/content-rest-api/model/associationBody';
-
 
 /**
  * @deprecated 3.0.0

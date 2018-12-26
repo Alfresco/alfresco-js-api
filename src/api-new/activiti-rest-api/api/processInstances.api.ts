@@ -24,7 +24,6 @@ import { ProcessInstanceFilterRequestRepresentation } from '../model/processInst
 import { ProcessInstanceQueryRepresentation } from '../model/processInstanceQueryRepresentation';
 import { ProcessInstanceRepresentation } from '../model/processInstanceRepresentation';
 import { ProcessInstanceVariableRepresentation } from '../model/processInstanceVariableRepresentation';
-import { ResultListDataRepresentationDecisionTaskRepresentation } from '../model/resultListDataRepresentationDecisionTaskRepresentation';
 import { ResultListDataRepresentationProcessContentRepresentation } from '../model/resultListDataRepresentationProcessContentRepresentation';
 import { ResultListDataRepresentationProcessInstanceRepresentation } from '../model/resultListDataRepresentationProcessInstanceRepresentation';
 import { BaseApi } from './base.api';

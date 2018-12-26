@@ -16,9 +16,7 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
 import { IntegrationAlfrescoCloudApi } from '../../../../api-new/activiti-rest-api/api/integrationAlfrescoCloud.api';
-import { FormModelsApi } from '../../../../api-new/activiti-rest-api/api/formModels.api';
 import { ResultListDataRepresentationAlfrescoNetworkRepresenation } from '../../../../api-new/activiti-rest-api/model/resultListDataRepresentationAlfrescoNetworkRepresenation';
 import { ResultListDataRepresentationAlfrescoSiteRepresenation } from '../../../../api-new/activiti-rest-api/model/resultListDataRepresentationAlfrescoSiteRepresenation';
 import { IntegrationAlfrescoOnPremiseApi } from '../../../../api-new/activiti-rest-api/api/integrationAlfrescoOnPremise.api';
