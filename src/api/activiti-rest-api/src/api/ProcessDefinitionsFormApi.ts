@@ -16,124 +16,30 @@
     */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { ProcessDefinitionsApi } from '../../../../api-new/activiti-rest-api/api/processDefinitions.api';
+import { FormDefinitionRepresentation } from '../../../../api-new/activiti-rest-api/model/formDefinitionRepresentation';
+import { FormValueRepresentation } from '../../../../api-new/activiti-rest-api/model/formValueRepresentation';
 
 /**
  * @deprecated 3.0.0
  */
 export class ProcessDefinitionsFormApi {
 
-    apiClient: ProcessClient;
+    processDefinitionsApi: ProcessDefinitionsApi;
 
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.processDefinitionsApi = new ProcessDefinitionsApi(alfrescoApi);
     }
 
-    /**
-     * Function to receive the result of the getProcessDefinitionStartForm operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Retrieve the start form for a process definition
-     *  @param {String} processDefinitionId
-     *  @param {String} field
-     */
-    getProcessDefinitionStartForm(processDefinitionId) {
-        let postBody = null;
-
-
-        let pathParams = {
-            'processDefinitionId': processDefinitionId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-definitions/{processDefinitionId}/start-form', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getProcessDefinitionStartForm(processDefinitionId: string): Promise<FormDefinitionRepresentation> {
+        return this.processDefinitionsApi.getProcessDefinitionStartForm(processDefinitionId);
     }
 
-    /**
-     * Function to receive the result of the getRestFieldValues operation.
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Retrieve field values (eg. the typeahead field)
-     *  @param {String} processDefinitionId
-     *  @param {String} field
-     */
-    getRestFieldValues(processDefinitionId, field) {
-        let postBody = null;
-
-
-        let pathParams = {
-            'processDefinitionId': processDefinitionId,
-            'field': field
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getRestFieldValues(processDefinitionId: string, field: string): Promise<FormValueRepresentation> {
+        return this.processDefinitionsApi.getRestFieldValues(processDefinitionId, field);
     }
 
-    /**
-     * Function to receive the result of the getRestTableFieldValues operation.
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/FormValueRepresentation>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Retrieve field values (eg. the table field)
-     *  @param {String} processDefinitionId
-     *  @param {String} field
-     *  @param {String} column
-     */
-    getRestTableFieldValues(processDefinitionId, field, column) {
-        let postBody = null;
-
-        let pathParams = {
-            'processDefinitionId': processDefinitionId,
-            'field': field,
-            'column': column
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getRestTableFieldValues(processDefinitionId: string, field: string, column: string): Promise<FormValueRepresentation> {
+        return this.processDefinitionsApi.getRestTableFieldValues(processDefinitionId, field, column);
     }
 }

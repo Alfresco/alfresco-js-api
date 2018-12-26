@@ -4,23 +4,23 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**assignTaskUsingPUT**](TaskactionsApi.md#assignTaskUsingPUT) | **PUT** /enterprise/tasks/{taskId}/action/assign | Assign a task to a user
-[**attachFormUsingPUT**](TaskactionsApi.md#attachFormUsingPUT) | **PUT** /enterprise/tasks/{taskId}/action/attach-form | Attach a form to a task
-[**claimTaskUsingPUT**](TaskactionsApi.md#claimTaskUsingPUT) | **PUT** /enterprise/tasks/{taskId}/action/claim | Claim a task
-[**completeTaskUsingPUT**](TaskactionsApi.md#completeTaskUsingPUT) | **PUT** /enterprise/tasks/{taskId}/action/complete | Complete a task
-[**delegateTaskUsingPUT**](TaskactionsApi.md#delegateTaskUsingPUT) | **PUT** /enterprise/tasks/{taskId}/action/delegate | Delegate a task
-[**involveGroupUsingPOST**](TaskactionsApi.md#involveGroupUsingPOST) | **POST** /enterprise/tasks/{taskId}/groups/{groupId} | Involve a group with a task
-[**involveUserUsingPUT**](TaskactionsApi.md#involveUserUsingPUT) | **PUT** /enterprise/tasks/{taskId}/action/involve | Involve a user with a task
-[**removeFormUsingDELETE**](TaskactionsApi.md#removeFormUsingDELETE) | **DELETE** /enterprise/tasks/{taskId}/action/remove-form | Remove a form from a task
-[**removeInvolvedUserUsingDELETE**](TaskactionsApi.md#removeInvolvedUserUsingDELETE) | **DELETE** /enterprise/tasks/{taskId}/groups/{groupId} | Remove an involved group from a task
-[**removeInvolvedUserUsingPUT**](TaskactionsApi.md#removeInvolvedUserUsingPUT) | **PUT** /enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
-[**resolveTaskUsingPUT**](TaskactionsApi.md#resolveTaskUsingPUT) | **PUT** /enterprise/tasks/{taskId}/action/resolve | Resolve a task
-[**unclaimTaskUsingPUT**](TaskactionsApi.md#unclaimTaskUsingPUT) | **PUT** /enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
+[**assignTask**](TaskactionsApi.md#assignTask) | **PUT** /enterprise/tasks/{taskId}/action/assign | Assign a task to a user
+[**attachForm**](TaskactionsApi.md#attachForm) | **PUT** /enterprise/tasks/{taskId}/action/attach-form | Attach a form to a task
+[**claimTask**](TaskactionsApi.md#claimTask) | **PUT** /enterprise/tasks/{taskId}/action/claim | Claim a task
+[**completeTask**](TaskactionsApi.md#completeTask) | **PUT** /enterprise/tasks/{taskId}/action/complete | Complete a task
+[**delegateTask**](TaskactionsApi.md#delegateTask) | **PUT** /enterprise/tasks/{taskId}/action/delegate | Delegate a task
+[**involveGroup**](TaskactionsApi.md#involveGroup) | **POST** /enterprise/tasks/{taskId}/groups/{groupId} | Involve a group with a task
+[**involveUser**](TaskactionsApi.md#involveUser) | **PUT** /enterprise/tasks/{taskId}/action/involve | Involve a user with a task
+[**removeForm**](TaskactionsApi.md#removeForm) | **DELETE** /enterprise/tasks/{taskId}/action/remove-form | Remove a form from a task
+[**removeInvolvedUser**](TaskactionsApi.md#removeInvolvedUser) | **DELETE** /enterprise/tasks/{taskId}/groups/{groupId} | Remove an involved group from a task
+[**removeInvolvedUser**](TaskactionsApi.md#removeInvolvedUser) | **PUT** /enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
+[**resolveTask**](TaskactionsApi.md#resolveTask) | **PUT** /enterprise/tasks/{taskId}/action/resolve | Resolve a task
+[**unclaimTask**](TaskactionsApi.md#unclaimTask) | **PUT** /enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
 
 
-<a name="assignTaskUsingPUT"></a>
-# **assignTaskUsingPUT**
-> TaskRepresentation assignTaskUsingPUT(taskIduserIdentifier)
+<a name="assignTask"></a>
+# **assignTask**
+> TaskRepresentation assignTask(taskIduserIdentifier)
 
 Assign a task to a user
 
@@ -37,7 +37,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.assignTaskUsingPUT(taskIduserIdentifier).then((data) => {
+taskactionsApi.assignTask(taskIduserIdentifier).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -56,9 +56,9 @@ Name | Type | Description  | Notes
 
 [**TaskRepresentation**](TaskRepresentation.md)
 
-<a name="attachFormUsingPUT"></a>
-# **attachFormUsingPUT**
-> attachFormUsingPUT(taskIdformIdentifier)
+<a name="attachForm"></a>
+# **attachForm**
+> attachForm(taskIdformIdentifier)
 
 Attach a form to a task
 
@@ -75,7 +75,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.attachFormUsingPUT(taskIdformIdentifier).then(() => {
+taskactionsApi.attachForm(taskIdformIdentifier).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -94,9 +94,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="claimTaskUsingPUT"></a>
-# **claimTaskUsingPUT**
-> claimTaskUsingPUT(taskId)
+<a name="claimTask"></a>
+# **claimTask**
+> claimTask(taskId)
 
 Claim a task
 
@@ -115,7 +115,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.claimTaskUsingPUT(taskId).then(() => {
+taskactionsApi.claimTask(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -133,9 +133,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="completeTaskUsingPUT"></a>
-# **completeTaskUsingPUT**
-> completeTaskUsingPUT(taskId)
+<a name="completeTask"></a>
+# **completeTask**
+> completeTask(taskId)
 
 Complete a task
 
@@ -154,7 +154,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.completeTaskUsingPUT(taskId).then(() => {
+taskactionsApi.completeTask(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -172,9 +172,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="delegateTaskUsingPUT"></a>
-# **delegateTaskUsingPUT**
-> delegateTaskUsingPUT(taskIduserIdentifier)
+<a name="delegateTask"></a>
+# **delegateTask**
+> delegateTask(taskIduserIdentifier)
 
 Delegate a task
 
@@ -191,7 +191,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.delegateTaskUsingPUT(taskIduserIdentifier).then(() => {
+taskactionsApi.delegateTask(taskIduserIdentifier).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -210,9 +210,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="involveGroupUsingPOST"></a>
-# **involveGroupUsingPOST**
-> involveGroupUsingPOST(taskIdgroupId)
+<a name="involveGroup"></a>
+# **involveGroup**
+> involveGroup(taskIdgroupId)
 
 Involve a group with a task
 
@@ -229,7 +229,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.involveGroupUsingPOST(taskIdgroupId).then(() => {
+taskactionsApi.involveGroup(taskIdgroupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -248,9 +248,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="involveUserUsingPUT"></a>
-# **involveUserUsingPUT**
-> involveUserUsingPUT(taskIduserIdentifier)
+<a name="involveUser"></a>
+# **involveUser**
+> involveUser(taskIduserIdentifier)
 
 Involve a user with a task
 
@@ -267,7 +267,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.involveUserUsingPUT(taskIduserIdentifier).then(() => {
+taskactionsApi.involveUser(taskIduserIdentifier).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -286,9 +286,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="removeFormUsingDELETE"></a>
-# **removeFormUsingDELETE**
-> removeFormUsingDELETE(taskId)
+<a name="removeForm"></a>
+# **removeForm**
+> removeForm(taskId)
 
 Remove a form from a task
 
@@ -305,7 +305,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.removeFormUsingDELETE(taskId).then(() => {
+taskactionsApi.removeForm(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -323,9 +323,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="removeInvolvedUserUsingDELETE"></a>
-# **removeInvolvedUserUsingDELETE**
-> removeInvolvedUserUsingDELETE(taskIdgroupId)
+<a name="removeInvolvedUser"></a>
+# **removeInvolvedUser**
+> removeInvolvedUser(taskIdgroupId)
 
 Remove an involved group from a task
 
@@ -342,7 +342,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.removeInvolvedUserUsingDELETE(taskIdgroupId).then(() => {
+taskactionsApi.removeInvolvedUser(taskIdgroupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -361,9 +361,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="removeInvolvedUserUsingPUT"></a>
-# **removeInvolvedUserUsingPUT**
-> removeInvolvedUserUsingPUT(taskIduserIdentifier)
+<a name="removeInvolvedUser"></a>
+# **removeInvolvedUser**
+> removeInvolvedUser(taskIduserIdentifier)
 
 Remove an involved user from a task
 
@@ -380,7 +380,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.removeInvolvedUserUsingPUT(taskIduserIdentifier).then(() => {
+taskactionsApi.removeInvolvedUser(taskIduserIdentifier).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -399,9 +399,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="resolveTaskUsingPUT"></a>
-# **resolveTaskUsingPUT**
-> resolveTaskUsingPUT(taskId)
+<a name="resolveTask"></a>
+# **resolveTask**
+> resolveTask(taskId)
 
 Resolve a task
 
@@ -418,7 +418,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.resolveTaskUsingPUT(taskId).then(() => {
+taskactionsApi.resolveTask(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -436,9 +436,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="unclaimTaskUsingPUT"></a>
-# **unclaimTaskUsingPUT**
-> unclaimTaskUsingPUT(taskId)
+<a name="unclaimTask"></a>
+# **unclaimTask**
+> unclaimTask(taskId)
 
 Unclaim a task
 
@@ -457,7 +457,7 @@ this.alfrescoApi.setConfig({
 let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
-taskactionsApi.unclaimTaskUsingPUT(taskId).then(() => {
+taskactionsApi.unclaimTask(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

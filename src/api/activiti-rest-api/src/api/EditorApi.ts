@@ -16,223 +16,41 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { FormModelsApi } from '../../../../api-new/activiti-rest-api/api/formModels.api';
+import { FormRepresentation } from '../../../../api-new/activiti-rest-api/model/formRepresentation';
+import { FormSaveRepresentation } from '../../../../api-new/activiti-rest-api/model/formSaveRepresentation';
+import { ValidationErrorRepresentation } from '../../../../api-new/activiti-rest-api/model/validationErrorRepresentation';
+import { ResultListDataRepresentationFormRepresentation } from '../../../../api-new/activiti-rest-api/model/resultListDataRepresentationFormRepresentation';
+import { ResultListDataRepresentationRuntimeFormRepresentation } from '../../../../api-new/activiti-rest-api/model/resultListDataRepresentationRuntimeFormRepresentation';
 
 /**
  * @deprecated 3.0.0
  */
 export class EditorApi {
 
-    apiClient: ProcessClient;
+    formModelsApi: FormModelsApi;
 
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.formModelsApi = new FormModelsApi(alfrescoApi);
     }
 
-    /**
-     * Function to receive the result of the getFormHistory operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/FormRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * getFormHistory
-     * @param {Integer} formId formId
-     * @param {Integer} formHistoryId formHistoryId
-     */
-    getFormHistory(formId, formHistoryId) {
-        let postBody = null;
-
-        // verify the required parameter 'formId' is set
-        if (formId === undefined || formId === null) {
-            throw "Missing param 'formId' in getFormHistory";
-        }
-
-        // verify the required parameter 'formHistoryId' is set
-        if (formHistoryId === undefined || formHistoryId === null) {
-            throw "Missing param 'formHistoryId' in getFormHistory";
-        }
-
-
-        let pathParams = {
-            'formId': formId,
-            'formHistoryId': formHistoryId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/form-models/{formId}/history/{formHistoryId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getFormHistory(formId: number, formHistoryId: number): Promise<FormRepresentation> {
+        return this.formModelsApi.getFormHistory(formId, formHistoryId);
     }
 
-    /**
-     * Function to receive the result of the getForm operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/FormRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * getForm
-     * @param {Integer} formId formId
-     */
-    getForm(formId) {
-        let postBody = null;
-
-        // verify the required parameter 'formId' is set
-        if (formId === undefined || formId === null) {
-            throw "Missing param 'formId' in getForm";
-        }
-
-
-        let pathParams = {
-            'formId': formId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/form-models/{formId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getForm(formId: number): Promise<FormRepresentation> {
+        return this.formModelsApi.getForm(formId);
     }
 
-    /**
-     * Function to receive the result of the getForms operation.
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/FormRepresentation>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * getForms
-     * data is of type: {Array.<module:model/FormRepresentation>}
-     */
-    getForms() {
-        let postBody = null;
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/form-models/values', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getForms(input: any): Promise<FormRepresentation | ResultListDataRepresentationFormRepresentation | ResultListDataRepresentationRuntimeFormRepresentation> {
+        return this.formModelsApi.getForms(input);
     }
 
-    /**
-     * Function to receive the result of the saveForm operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/FormRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * saveForm
-     * @param {Integer} formId formId
-     * @param {module:model/FormSaveRepresentation} saveRepresentation saveRepresentation
-     */
-    saveForm(formId, saveRepresentation) {
-        let postBody = saveRepresentation;
-
-        // verify the required parameter 'formId' is set
-        if (formId === undefined || formId === null) {
-            throw "Missing param 'formId' in saveForm";
-        }
-
-        // verify the required parameter 'saveRepresentation' is set
-        if (saveRepresentation === undefined || saveRepresentation === null) {
-            throw "Missing param 'saveRepresentation' in saveForm";
-        }
-
-
-        let pathParams = {
-            'formId': formId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/form-models/{formId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    saveForm(formId: number, saveRepresentation: FormSaveRepresentation): Promise<FormRepresentation> {
+        return this.formModelsApi.saveForm(formId, saveRepresentation);
     }
 
-    /**
-     * Function to receive the result of the validateModel operation.
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/ValidationErrorRepresentation>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * validateModel
-     * @param {Integer} formId formId
-     * @param {module:model/FormSaveRepresentation} saveRepresentation saveRepresentation
-     */
-    validateModel(formId, saveRepresentation) {
-        let postBody = saveRepresentation;
-
-        // verify the required parameter 'formId' is set
-        if (formId === undefined || formId === null) {
-            throw "Missing param 'formId' in validateModel";
-        }
-
-        // verify the required parameter 'saveRepresentation' is set
-        if (saveRepresentation === undefined || saveRepresentation === null) {
-            throw "Missing param 'saveRepresentation' in validateModel";
-        }
-
-
-        let pathParams = {
-            'formId': formId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/form-models/{formId}/validate', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    validateModel(formId: number, saveRepresentation: FormSaveRepresentation): Promise<ValidationErrorRepresentation> {
+        return this.formModelsApi.validateModel(formId, saveRepresentation);
     }
 }

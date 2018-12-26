@@ -16,78 +16,14 @@
     */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { ScriptFilesApi as NewScriptFileApi} from '../../../../api-new/activiti-rest-api/api/scriptFiles.api';
 
 /**
  * @deprecated 3.0.0
  */
-export class ScriptFileApi {
+export class ScriptFileApi extends NewScriptFileApi {
 
-    apiClient: ProcessClient;
-
-    constructor(alfrescoApi?: AlfrescoApi) {
+    public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;
-    }
-
-    /**
-     * Function to receive the result of the getControllers operation.
-     * @param {String} error Error message, if any.
-     * @param {'String'} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * getControllers
-     */
-    getControllers() {
-        let postBody = null;
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['text/javascript'];
-        let accepts = [];
-        let returnType = 'String';
-
-        return this.apiClient.callApi(
-            '/api/enterprise/script-files/controllers', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
-    }
-
-    /**
-     * Function to receive the result of the getLibraries operation.
-     * @param {String} error Error message, if any.
-     * @param {'String'} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * getLibraries
-     */
-    getLibraries() {
-        let postBody = null;
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json', 'application/javascript'];
-        let returnType = 'String';
-
-        return this.apiClient.callApi(
-            '/api/enterprise/script-files/libraries', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
     }
 }

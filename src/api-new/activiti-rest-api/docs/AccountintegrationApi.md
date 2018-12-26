@@ -4,12 +4,12 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAccountsUsingGET**](AccountintegrationApi.md#getAccountsUsingGET) | **GET** /enterprise/account/integration | Retrieve external account information
+[**getAccounts**](AccountintegrationApi.md#getAccounts) | **GET** /enterprise/account/integration | Retrieve external account information
 
 
-<a name="getAccountsUsingGET"></a>
-# **getAccountsUsingGET**
-> ResultListDataRepresentationAccountRepresentation getAccountsUsingGET()
+<a name="getAccounts"></a>
+# **getAccounts**
+> ResultListDataRepresentationAccountRepresentation getAccounts()
 
 Retrieve external account information
 
@@ -27,7 +27,7 @@ this.alfrescoApi.setConfig({
 
 let accountintegrationApi = new AccountintegrationApi(this.alfrescoApi);
 
-accountintegrationApi.getAccountsUsingGET().then((data) => {
+accountintegrationApi.getAccounts().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

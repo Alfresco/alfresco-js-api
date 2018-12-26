@@ -4,14 +4,14 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**addSubtaskUsingPOST**](ChecklistsApi.md#addSubtaskUsingPOST) | **POST** /enterprise/tasks/{taskId}/checklist | Create a task checklist
-[**getChecklistUsingGET**](ChecklistsApi.md#getChecklistUsingGET) | **GET** /enterprise/tasks/{taskId}/checklist | Get checklist for a task
-[**orderChecklistUsingPUT**](ChecklistsApi.md#orderChecklistUsingPUT) | **PUT** /enterprise/tasks/{taskId}/checklist | Change the order of items on a checklist
+[**addSubtask**](ChecklistsApi.md#addSubtask) | **POST** /enterprise/tasks/{taskId}/checklist | Create a task checklist
+[**getChecklist**](ChecklistsApi.md#getChecklist) | **GET** /enterprise/tasks/{taskId}/checklist | Get checklist for a task
+[**orderChecklist**](ChecklistsApi.md#orderChecklist) | **PUT** /enterprise/tasks/{taskId}/checklist | Change the order of items on a checklist
 
 
-<a name="addSubtaskUsingPOST"></a>
-# **addSubtaskUsingPOST**
-> TaskRepresentation addSubtaskUsingPOST(taskIdtaskRepresentation)
+<a name="addSubtask"></a>
+# **addSubtask**
+> TaskRepresentation addSubtask(taskIdtaskRepresentation)
 
 Create a task checklist
 
@@ -28,7 +28,7 @@ this.alfrescoApi.setConfig({
 let checklistsApi = new ChecklistsApi(this.alfrescoApi);
 
 
-checklistsApi.addSubtaskUsingPOST(taskIdtaskRepresentation).then((data) => {
+checklistsApi.addSubtask(taskIdtaskRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -47,9 +47,9 @@ Name | Type | Description  | Notes
 
 [**TaskRepresentation**](TaskRepresentation.md)
 
-<a name="getChecklistUsingGET"></a>
-# **getChecklistUsingGET**
-> ResultListDataRepresentationTaskRepresentation getChecklistUsingGET(taskId)
+<a name="getChecklist"></a>
+# **getChecklist**
+> ResultListDataRepresentationTaskRepresentation getChecklist(taskId)
 
 Get checklist for a task
 
@@ -66,7 +66,7 @@ this.alfrescoApi.setConfig({
 let checklistsApi = new ChecklistsApi(this.alfrescoApi);
 
 
-checklistsApi.getChecklistUsingGET(taskId).then((data) => {
+checklistsApi.getChecklist(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -84,9 +84,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationTaskRepresentation**](ResultListDataRepresentationTaskRepresentation.md)
 
-<a name="orderChecklistUsingPUT"></a>
-# **orderChecklistUsingPUT**
-> orderChecklistUsingPUT(taskIdorderRepresentation)
+<a name="orderChecklist"></a>
+# **orderChecklist**
+> orderChecklist(taskIdorderRepresentation)
 
 Change the order of items on a checklist
 
@@ -103,7 +103,7 @@ this.alfrescoApi.setConfig({
 let checklistsApi = new ChecklistsApi(this.alfrescoApi);
 
 
-checklistsApi.orderChecklistUsingPUT(taskIdorderRepresentation).then(() => {
+checklistsApi.orderChecklist(taskIdorderRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

@@ -27,9 +27,9 @@ import { BaseApi } from './base.api';
 export class ChecklistsApi extends BaseApi {
     /**
     * Create a task checklist
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param taskId taskId
     * @param taskRepresentation taskRepresentation
     * @return Promise<TaskRepresentation>
@@ -39,11 +39,11 @@ export class ChecklistsApi extends BaseApi {
         let postBody = taskRepresentation;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in addSubtaskUsingPOST");
+            throw new Error("Required param 'taskId' in addSubtask");
         }
 
         if (taskRepresentation === undefined || taskRepresentation === null) {
-            throw new Error("Required param 'taskRepresentation' in addSubtaskUsingPOST");
+            throw new Error("Required param 'taskRepresentation' in addSubtask");
         }
 
         let pathParams = {
@@ -63,15 +63,15 @@ export class ChecklistsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/checklist', 'POST',
+            '/api/enterprise/tasks/{taskId}/checklist', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Get checklist for a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
@@ -80,7 +80,7 @@ export class ChecklistsApi extends BaseApi {
         let postBody = null;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getChecklistUsingGET");
+            throw new Error("Required param 'taskId' in getChecklist");
         }
 
         let pathParams = {
@@ -100,15 +100,15 @@ export class ChecklistsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/checklist', 'GET',
+            '/api/enterprise/tasks/{taskId}/checklist', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Change the order of items on a checklist
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param orderRepresentation orderRepresentation
         * @return Promise<{}>
@@ -118,11 +118,11 @@ export class ChecklistsApi extends BaseApi {
         let postBody = orderRepresentation;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in orderChecklistUsingPUT");
+            throw new Error("Required param 'taskId' in orderChecklist");
         }
 
         if (orderRepresentation === undefined || orderRepresentation === null) {
-            throw new Error("Required param 'orderRepresentation' in orderChecklistUsingPUT");
+            throw new Error("Required param 'orderRepresentation' in orderChecklist");
         }
 
         let pathParams = {
@@ -142,7 +142,7 @@ export class ChecklistsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/checklist', 'PUT',
+            '/api/enterprise/tasks/{taskId}/checklist', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }

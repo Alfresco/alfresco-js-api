@@ -79,6 +79,7 @@ import { WebscriptApi } from './content-rest-api/src/api/webscriptApi';
 import { ChangesApi } from './content-rest-api/src/api/changesApi';
 import { SitesApi } from './content-rest-api/src/api/sitesApi';
 import { GroupsApi as GroupsApiCS } from './content-rest-api/src/api/groupsApi';
+import { AssociationBody } from '../api-new/content-rest-api/model/associationBody';
 
 
 /**
@@ -157,7 +158,7 @@ export namespace Legacy {
 }
 
 export { ChildAssociationBody as AssocChildBody } from '../api-new/content-rest-api/model/childAssociationBody';
-export { ChildAssociationBody as AssocTargetBody } from '../api-new/content-rest-api/model/childAssociationBody';
+export { AssociationBody as AssocTargetBody } from '../api-new/content-rest-api/model/associationBody';
 export { FavoriteBodyCreate as FavoriteBody } from '../api-new/content-rest-api/model/favoriteBodyCreate';
 export { SearchRequest as QueryBody } from '../api-new/search-rest-api/model/searchRequest';
 export { PathInfo as PathInfoEntity } from '../api-new/content-rest-api/model/pathInfo';

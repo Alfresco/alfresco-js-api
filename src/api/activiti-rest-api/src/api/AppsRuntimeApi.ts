@@ -16,87 +16,25 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { RuntimeAppDefinitionsApi } from '../../../../api-new/activiti-rest-api/api/runtimeAppDefinitions.api';
+import { RuntimeAppDefinitionSaveRepresentation } from '../../../../api-new/activiti-rest-api/model/runtimeAppDefinitionSaveRepresentation';
 
 /**
  * @deprecated 3.0.0
  */
 export class AppsRuntimeApi {
 
-    apiClient: ProcessClient;
+    runtimeAppDefinitionsApi: RuntimeAppDefinitionsApi;
 
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.runtimeAppDefinitionsApi = new RuntimeAppDefinitionsApi(alfrescoApi);
     }
 
-    /**
-     * Function to receive the result of the deployAppDefinitions operation.
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Deploy published app
-     * After creating and puclished an app the user can add it to his/her landing page.
-     * @param {module:model/RuntimeAppDefinitionSaveRepresentation} saveObject saveObject
-     */
-    deployAppDefinitions(saveObject) {
-        let postBody = saveObject;
-
-        // verify the required parameter 'saveObject' is set
-        if (saveObject === undefined || saveObject === null) {
-            throw "Missing param 'saveObject' in deployAppDefinitions";
-        }
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/runtime-app-definitions', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    deployAppDefinitions(saveObject: RuntimeAppDefinitionSaveRepresentation): Promise<any> {
+        return this.runtimeAppDefinitionsApi.deployAppDefinitions(saveObject);
     }
 
-    /**
-     * Function to receive the result of the getAppDefinitions operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * List runtime apps
-     * When a user logs in into the Alfresco Activiti BPM Suite, the landing page is displayed containing all the apps that the user is allowed to see and use.
-     * data is of type: {module:model/ResultListDataRepresentation}
-     */
     getAppDefinitions() {
-        let postBody = null;
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/runtime-app-definitions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+        return this.runtimeAppDefinitionsApi.getAppDefinitions();
     }
 }

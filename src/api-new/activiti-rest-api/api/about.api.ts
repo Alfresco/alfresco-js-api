@@ -50,7 +50,7 @@ export class AboutApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/app-version', 'GET',
+            '/api/enterprise/app-version', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }

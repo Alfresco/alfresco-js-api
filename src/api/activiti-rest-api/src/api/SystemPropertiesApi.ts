@@ -16,49 +16,14 @@
     */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { SystemPropertiesApi as NewSystemPropertiesApi } from '../../../../api-new/activiti-rest-api/api/systemProperties.api';
 
 /**
  * @deprecated 3.0.0
  */
-export class SystemPropertiesApi {
+export class SystemPropertiesApi extends NewSystemPropertiesApi {
 
-    apiClient: ProcessClient;
-
-    constructor(alfrescoApi?: AlfrescoApi) {
+    public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;
     }
-
-    /**
-     * Function to receive the result of the getProperties operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/SystemPropertiesRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Retrieve System Properties
-     * Typical value is AllowInvolveByEmail
-     */
-    getProperties() {
-        let postBody = null;
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/system/properties', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
-    }
-
 }

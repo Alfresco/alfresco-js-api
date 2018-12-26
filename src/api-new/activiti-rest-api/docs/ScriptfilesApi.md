@@ -4,13 +4,13 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getControllersUsingGET**](ScriptfilesApi.md#getControllersUsingGET) | **GET** /enterprise/script-files/controllers | getControllers
-[**getLibrariesUsingGET**](ScriptfilesApi.md#getLibrariesUsingGET) | **GET** /enterprise/script-files/libraries | getLibraries
+[**getControllers**](ScriptfilesApi.md#getControllers) | **GET** /enterprise/script-files/controllers | getControllers
+[**getLibraries**](ScriptfilesApi.md#getLibraries) | **GET** /enterprise/script-files/libraries | getLibraries
 
 
-<a name="getControllersUsingGET"></a>
-# **getControllersUsingGET**
-> string getControllersUsingGET()
+<a name="getControllers"></a>
+# **getControllers**
+> string getControllers()
 
 getControllers
 
@@ -26,7 +26,7 @@ this.alfrescoApi.setConfig({
 
 let scriptfilesApi = new ScriptfilesApi(this.alfrescoApi);
 
-scriptfilesApi.getControllersUsingGET().then((data) => {
+scriptfilesApi.getControllers().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -41,9 +41,9 @@ This endpoint does not need any parameter.
 
 **string**
 
-<a name="getLibrariesUsingGET"></a>
-# **getLibrariesUsingGET**
-> string getLibrariesUsingGET()
+<a name="getLibraries"></a>
+# **getLibraries**
+> string getLibraries()
 
 getLibraries
 
@@ -59,7 +59,7 @@ this.alfrescoApi.setConfig({
 
 let scriptfilesApi = new ScriptfilesApi(this.alfrescoApi);
 
-scriptfilesApi.getLibrariesUsingGET().then((data) => {
+scriptfilesApi.getLibraries().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -16,223 +16,43 @@
     */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { ProcessInstancesApi as NewProcessInstancesApi } from '../../../../api-new/activiti-rest-api/api';
+import { ActivitiCommentsApi } from '../../../../api-new/activiti-rest-api/api/comments.api';
+import { CommentRepresentation } from '../../../../api-new/activiti-rest-api/model/commentRepresentation';
+import { ResultListDataRepresentationCommentRepresentation } from '../../../../api-new/activiti-rest-api/model/resultListDataRepresentationCommentRepresentation';
+import { FormDefinitionRepresentation } from '../../../../api-new/activiti-rest-api/model/formDefinitionRepresentation';
+import { ProcessInstanceRepresentation } from '../../../../api-new/activiti-rest-api/model/processInstanceRepresentation';
 
 /**
  * @deprecated 3.0.0
  */
 export class ProcessInstancesApi {
 
-    apiClient: ProcessClient;
+    processInstancesApi: NewProcessInstancesApi;
+    activitiCommentsApi: ActivitiCommentsApi;
 
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.processInstancesApi = new NewProcessInstancesApi(alfrescoApi);
+        this.activitiCommentsApi = new ActivitiCommentsApi(alfrescoApi);
     }
 
-    /**
-     * Function to receive the result of the addProcessInstanceComment operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/CommentRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Add a comment to a Process
-     * @param {module:model/CommentRepresentation} commentRequest commentRequest
-     * @param {String} processInstanceId processInstanceId
-     */
-    addProcessInstanceComment(commentRequest, processInstanceId) {
-        let postBody = commentRequest;
-
-        // verify the required parameter 'commentRequest' is set
-        if (commentRequest === undefined || commentRequest === null) {
-            throw "Missing param 'commentRequest' in addProcessInstanceComment";
-        }
-
-        // verify the required parameter 'processInstanceId' is set
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw "Missing param 'processInstanceId' in addProcessInstanceComment";
-        }
-
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/comments', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    addProcessInstanceComment(commentRequest: CommentRepresentation, processInstanceId: string): Promise<CommentRepresentation> {
+        return this.activitiCommentsApi.addProcessInstanceComment(commentRequest, processInstanceId);
     }
 
-    /**
-     * Function to receive the result of the deleteProcessInstance operation.
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Delete a process instance
-     * @param {String} processInstanceId processInstanceId
-     */
-    deleteProcessInstance(processInstanceId) {
-        let postBody = null;
-
-        // verify the required parameter 'processInstanceId' is set
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw "Missing param 'processInstanceId' in deleteProcessInstance";
-        }
-
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    deleteProcessInstance(processInstanceId: string): Promise<any> {
+        return this.processInstancesApi.deleteProcessInstance(processInstanceId);
     }
 
-    /**
-     * Function to receive the result of the getProcessInstanceComments operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Comment list added to Process
-     * @param {String} processInstanceId processInstanceId
-     * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.latestFirst latestFirst
-     */
-    getProcessInstanceComments(processInstanceId, opts?: any) {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'processInstanceId' is set
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw "Missing param 'processInstanceId' in getProcessInstanceComments";
-        }
-
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-        let queryParams = {
-            'latestFirst': opts['latestFirst']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/comments', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getProcessInstanceComments(processInstanceId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
+        return this.activitiCommentsApi.getProcessInstanceComments(processInstanceId, opts);
     }
 
-    /**
-     * Function to receive the result of the getProcessInstanceStartForm operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/FormDefinitionRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Get process start form
-     * When a process definitions has a start form (hasStartForm is true in the call above), the start form can be retrieved
-     * @param {String} processInstanceId processInstanceId
-     */
-    getProcessInstanceStartForm(processInstanceId) {
-        let postBody = null;
-
-        // verify the required parameter 'processInstanceId' is set
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw "Missing param 'processInstanceId' in getProcessInstanceStartForm";
-        }
-
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/start-form', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getProcessInstanceStartForm(processInstanceId: string): Promise<FormDefinitionRepresentation> {
+        return this.processInstancesApi.getProcessInstanceStartForm(processInstanceId);
     }
 
-    /**
-     * Function to receive the result of the getProcessInstance operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Retrieve a process instance information
-     * @param {String} processInstanceId processInstanceId
-     */
-    getProcessInstance(processInstanceId) {
-        let postBody = null;
-
-        // verify the required parameter 'processInstanceId' is set
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw "Missing param 'processInstanceId' in getProcessInstance";
-        }
-
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getProcessInstance(processInstanceId: string): Promise<ProcessInstanceRepresentation> {
+        return this.processInstancesApi.getProcessInstance(processInstanceId);
     }
 }

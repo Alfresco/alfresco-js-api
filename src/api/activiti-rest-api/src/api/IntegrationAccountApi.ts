@@ -17,48 +17,14 @@
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { ProcessClient } from '../../../../processClient';
+import { AccountIntegrationApi } from '../../../../api-new/activiti-rest-api/api/accountIntegration.api';
 
 /**
  * @deprecated 3.0.0
  */
-export class IntegrationAccountApi {
+export class IntegrationAccountApi extends AccountIntegrationApi {
 
-    apiClient: ProcessClient;
-
-    constructor(alfrescoApi?: AlfrescoApi) {
+    public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;
-    }
-
-    /**
-     * Function to receive the result of the getAccounts operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Retrieve Alfresco account information
-     * Ideal to map accounts &amp; integrate with 3rd party app/client
-     * data is of type: {module:model/ResultListDataRepresentation}
-     */
-    getAccounts() {
-        let postBody = null;
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/account/integration', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
     }
 }

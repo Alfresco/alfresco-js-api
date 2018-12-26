@@ -4,23 +4,23 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createUserProcessInstanceFilterUsingPOST**](UserfiltersApi.md#createUserProcessInstanceFilterUsingPOST) | **POST** /enterprise/filters/processes | Create a process instance filter
-[**createUserTaskFilterUsingPOST**](UserfiltersApi.md#createUserTaskFilterUsingPOST) | **POST** /enterprise/filters/tasks | Create a task filter
-[**deleteUserProcessInstanceFilterUsingDELETE**](UserfiltersApi.md#deleteUserProcessInstanceFilterUsingDELETE) | **DELETE** /enterprise/filters/processes/{userFilterId} | Delete a process instance filter
-[**deleteUserTaskFilterUsingDELETE**](UserfiltersApi.md#deleteUserTaskFilterUsingDELETE) | **DELETE** /enterprise/filters/tasks/{userFilterId} | Delete a task filter
-[**getUserProcessInstanceFilterUsingGET**](UserfiltersApi.md#getUserProcessInstanceFilterUsingGET) | **GET** /enterprise/filters/processes/{userFilterId} | Get a process instance filter
-[**getUserProcessInstanceFiltersUsingGET**](UserfiltersApi.md#getUserProcessInstanceFiltersUsingGET) | **GET** /enterprise/filters/processes | List process instance filters
-[**getUserTaskFilterUsingGET**](UserfiltersApi.md#getUserTaskFilterUsingGET) | **GET** /enterprise/filters/tasks/{userFilterId} | Get a task filter
-[**getUserTaskFiltersUsingGET**](UserfiltersApi.md#getUserTaskFiltersUsingGET) | **GET** /enterprise/filters/tasks | List task filters
-[**orderUserProcessInstanceFiltersUsingPUT**](UserfiltersApi.md#orderUserProcessInstanceFiltersUsingPUT) | **PUT** /enterprise/filters/processes | Re-order the list of user process instance filters
-[**orderUserTaskFiltersUsingPUT**](UserfiltersApi.md#orderUserTaskFiltersUsingPUT) | **PUT** /enterprise/filters/tasks | Re-order the list of user task filters
-[**updateUserProcessInstanceFilterUsingPUT**](UserfiltersApi.md#updateUserProcessInstanceFilterUsingPUT) | **PUT** /enterprise/filters/processes/{userFilterId} | Update a process instance filter
-[**updateUserTaskFilterUsingPUT**](UserfiltersApi.md#updateUserTaskFilterUsingPUT) | **PUT** /enterprise/filters/tasks/{userFilterId} | Update a task filter
+[**createUserProcessInstanceFilter**](UserfiltersApi.md#createUserProcessInstanceFilter) | **POST** /enterprise/filters/processes | Create a process instance filter
+[**createUserTaskFilter**](UserfiltersApi.md#createUserTaskFilter) | **POST** /enterprise/filters/tasks | Create a task filter
+[**deleteUserProcessInstanceFilter**](UserfiltersApi.md#deleteUserProcessInstanceFilter) | **DELETE** /enterprise/filters/processes/{userFilterId} | Delete a process instance filter
+[**deleteUserTaskFilter**](UserfiltersApi.md#deleteUserTaskFilter) | **DELETE** /enterprise/filters/tasks/{userFilterId} | Delete a task filter
+[**getUserProcessInstanceFilter**](UserfiltersApi.md#getUserProcessInstanceFilter) | **GET** /enterprise/filters/processes/{userFilterId} | Get a process instance filter
+[**getUserProcessInstanceFilters**](UserfiltersApi.md#getUserProcessInstanceFilters) | **GET** /enterprise/filters/processes | List process instance filters
+[**getUserTaskFilter**](UserfiltersApi.md#getUserTaskFilter) | **GET** /enterprise/filters/tasks/{userFilterId} | Get a task filter
+[**getUserTaskFilters**](UserfiltersApi.md#getUserTaskFilters) | **GET** /enterprise/filters/tasks | List task filters
+[**orderUserProcessInstanceFilters**](UserfiltersApi.md#orderUserProcessInstanceFilters) | **PUT** /enterprise/filters/processes | Re-order the list of user process instance filters
+[**orderUserTaskFilters**](UserfiltersApi.md#orderUserTaskFilters) | **PUT** /enterprise/filters/tasks | Re-order the list of user task filters
+[**updateUserProcessInstanceFilter**](UserfiltersApi.md#updateUserProcessInstanceFilter) | **PUT** /enterprise/filters/processes/{userFilterId} | Update a process instance filter
+[**updateUserTaskFilter**](UserfiltersApi.md#updateUserTaskFilter) | **PUT** /enterprise/filters/tasks/{userFilterId} | Update a task filter
 
 
-<a name="createUserProcessInstanceFilterUsingPOST"></a>
-# **createUserProcessInstanceFilterUsingPOST**
-> UserProcessInstanceFilterRepresentation createUserProcessInstanceFilterUsingPOST(userProcessInstanceFilterRepresentation)
+<a name="createUserProcessInstanceFilter"></a>
+# **createUserProcessInstanceFilter**
+> UserProcessInstanceFilterRepresentation createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation)
 
 Create a process instance filter
 
@@ -37,7 +37,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.createUserProcessInstanceFilterUsingPOST(userProcessInstanceFilterRepresentation).then((data) => {
+userfiltersApi.createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -55,9 +55,9 @@ Name | Type | Description  | Notes
 
 [**UserProcessInstanceFilterRepresentation**](UserProcessInstanceFilterRepresentation.md)
 
-<a name="createUserTaskFilterUsingPOST"></a>
-# **createUserTaskFilterUsingPOST**
-> UserTaskFilterRepresentation createUserTaskFilterUsingPOST(userTaskFilterRepresentation)
+<a name="createUserTaskFilter"></a>
+# **createUserTaskFilter**
+> UserTaskFilterRepresentation createUserTaskFilter(userTaskFilterRepresentation)
 
 Create a task filter
 
@@ -74,7 +74,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.createUserTaskFilterUsingPOST(userTaskFilterRepresentation).then((data) => {
+userfiltersApi.createUserTaskFilter(userTaskFilterRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -92,9 +92,9 @@ Name | Type | Description  | Notes
 
 [**UserTaskFilterRepresentation**](UserTaskFilterRepresentation.md)
 
-<a name="deleteUserProcessInstanceFilterUsingDELETE"></a>
-# **deleteUserProcessInstanceFilterUsingDELETE**
-> deleteUserProcessInstanceFilterUsingDELETE(userFilterId)
+<a name="deleteUserProcessInstanceFilter"></a>
+# **deleteUserProcessInstanceFilter**
+> deleteUserProcessInstanceFilter(userFilterId)
 
 Delete a process instance filter
 
@@ -111,7 +111,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.deleteUserProcessInstanceFilterUsingDELETE(userFilterId).then(() => {
+userfiltersApi.deleteUserProcessInstanceFilter(userFilterId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -129,9 +129,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="deleteUserTaskFilterUsingDELETE"></a>
-# **deleteUserTaskFilterUsingDELETE**
-> deleteUserTaskFilterUsingDELETE(userFilterId)
+<a name="deleteUserTaskFilter"></a>
+# **deleteUserTaskFilter**
+> deleteUserTaskFilter(userFilterId)
 
 Delete a task filter
 
@@ -148,7 +148,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.deleteUserTaskFilterUsingDELETE(userFilterId).then(() => {
+userfiltersApi.deleteUserTaskFilter(userFilterId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -166,9 +166,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getUserProcessInstanceFilterUsingGET"></a>
-# **getUserProcessInstanceFilterUsingGET**
-> UserProcessInstanceFilterRepresentation getUserProcessInstanceFilterUsingGET(userFilterId)
+<a name="getUserProcessInstanceFilter"></a>
+# **getUserProcessInstanceFilter**
+> UserProcessInstanceFilterRepresentation getUserProcessInstanceFilter(userFilterId)
 
 Get a process instance filter
 
@@ -185,7 +185,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.getUserProcessInstanceFilterUsingGET(userFilterId).then((data) => {
+userfiltersApi.getUserProcessInstanceFilter(userFilterId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -203,9 +203,9 @@ Name | Type | Description  | Notes
 
 [**UserProcessInstanceFilterRepresentation**](UserProcessInstanceFilterRepresentation.md)
 
-<a name="getUserProcessInstanceFiltersUsingGET"></a>
-# **getUserProcessInstanceFiltersUsingGET**
-> ResultListDataRepresentationUserProcessInstanceFilterRepresentation getUserProcessInstanceFiltersUsingGET(opts)
+<a name="getUserProcessInstanceFilters"></a>
+# **getUserProcessInstanceFilters**
+> ResultListDataRepresentationUserProcessInstanceFilterRepresentation getUserProcessInstanceFilters(opts)
 
 List process instance filters
 
@@ -227,7 +227,7 @@ let opts = {
   'appId': 789 //  | appId
 };
 
-userfiltersApi.getUserProcessInstanceFiltersUsingGET(opts).then((data) => {
+userfiltersApi.getUserProcessInstanceFilters(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -245,9 +245,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationUserProcessInstanceFilterRepresentation**](ResultListDataRepresentationUserProcessInstanceFilterRepresentation.md)
 
-<a name="getUserTaskFilterUsingGET"></a>
-# **getUserTaskFilterUsingGET**
-> UserTaskFilterRepresentation getUserTaskFilterUsingGET(userFilterId)
+<a name="getUserTaskFilter"></a>
+# **getUserTaskFilter**
+> UserTaskFilterRepresentation getUserTaskFilter(userFilterId)
 
 Get a task filter
 
@@ -264,7 +264,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.getUserTaskFilterUsingGET(userFilterId).then((data) => {
+userfiltersApi.getUserTaskFilter(userFilterId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -282,9 +282,9 @@ Name | Type | Description  | Notes
 
 [**UserTaskFilterRepresentation**](UserTaskFilterRepresentation.md)
 
-<a name="getUserTaskFiltersUsingGET"></a>
-# **getUserTaskFiltersUsingGET**
-> ResultListDataRepresentationUserTaskFilterRepresentation getUserTaskFiltersUsingGET(opts)
+<a name="getUserTaskFilters"></a>
+# **getUserTaskFilters**
+> ResultListDataRepresentationUserTaskFilterRepresentation getUserTaskFilters(opts)
 
 List task filters
 
@@ -306,7 +306,7 @@ let opts = {
   'appId': 789 //  | appId
 };
 
-userfiltersApi.getUserTaskFiltersUsingGET(opts).then((data) => {
+userfiltersApi.getUserTaskFilters(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -324,9 +324,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationUserTaskFilterRepresentation**](ResultListDataRepresentationUserTaskFilterRepresentation.md)
 
-<a name="orderUserProcessInstanceFiltersUsingPUT"></a>
-# **orderUserProcessInstanceFiltersUsingPUT**
-> orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation)
+<a name="orderUserProcessInstanceFilters"></a>
+# **orderUserProcessInstanceFilters**
+> orderUserProcessInstanceFilters(filterOrderRepresentation)
 
 Re-order the list of user process instance filters
 
@@ -343,7 +343,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.orderUserProcessInstanceFiltersUsingPUT(filterOrderRepresentation).then(() => {
+userfiltersApi.orderUserProcessInstanceFilters(filterOrderRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -361,9 +361,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="orderUserTaskFiltersUsingPUT"></a>
-# **orderUserTaskFiltersUsingPUT**
-> orderUserTaskFiltersUsingPUT(filterOrderRepresentation)
+<a name="orderUserTaskFilters"></a>
+# **orderUserTaskFilters**
+> orderUserTaskFilters(filterOrderRepresentation)
 
 Re-order the list of user task filters
 
@@ -380,7 +380,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.orderUserTaskFiltersUsingPUT(filterOrderRepresentation).then(() => {
+userfiltersApi.orderUserTaskFilters(filterOrderRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -398,9 +398,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="updateUserProcessInstanceFilterUsingPUT"></a>
-# **updateUserProcessInstanceFilterUsingPUT**
-> UserProcessInstanceFilterRepresentation updateUserProcessInstanceFilterUsingPUT(userFilterIduserProcessInstanceFilterRepresentation)
+<a name="updateUserProcessInstanceFilter"></a>
+# **updateUserProcessInstanceFilter**
+> UserProcessInstanceFilterRepresentation updateUserProcessInstanceFilter(userFilterIduserProcessInstanceFilterRepresentation)
 
 Update a process instance filter
 
@@ -417,7 +417,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.updateUserProcessInstanceFilterUsingPUT(userFilterIduserProcessInstanceFilterRepresentation).then((data) => {
+userfiltersApi.updateUserProcessInstanceFilter(userFilterIduserProcessInstanceFilterRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -436,9 +436,9 @@ Name | Type | Description  | Notes
 
 [**UserProcessInstanceFilterRepresentation**](UserProcessInstanceFilterRepresentation.md)
 
-<a name="updateUserTaskFilterUsingPUT"></a>
-# **updateUserTaskFilterUsingPUT**
-> UserTaskFilterRepresentation updateUserTaskFilterUsingPUT(userFilterIduserTaskFilterRepresentation)
+<a name="updateUserTaskFilter"></a>
+# **updateUserTaskFilter**
+> UserTaskFilterRepresentation updateUserTaskFilter(userFilterIduserTaskFilterRepresentation)
 
 Update a task filter
 
@@ -455,7 +455,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
-userfiltersApi.updateUserTaskFilterUsingPUT(userFilterIduserTaskFilterRepresentation).then((data) => {
+userfiltersApi.updateUserTaskFilter(userFilterIduserTaskFilterRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

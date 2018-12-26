@@ -4,12 +4,12 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getRuntimeProcessScopesUsingPOST**](ProcessscopesApi.md#getRuntimeProcessScopesUsingPOST) | **POST** /enterprise/process-scopes | List runtime process scopes
+[**getRuntimeProcessScopes**](ProcessscopesApi.md#getRuntimeProcessScopes) | **POST** /enterprise/process-scopes | List runtime process scopes
 
 
-<a name="getRuntimeProcessScopesUsingPOST"></a>
-# **getRuntimeProcessScopesUsingPOST**
-> ProcessScopeRepresentation getRuntimeProcessScopesUsingPOST(processScopesRequest)
+<a name="getRuntimeProcessScopes"></a>
+# **getRuntimeProcessScopes**
+> ProcessScopeRepresentation getRuntimeProcessScopes(processScopesRequest)
 
 List runtime process scopes
 
@@ -26,7 +26,7 @@ this.alfrescoApi.setConfig({
 let processscopesApi = new ProcessscopesApi(this.alfrescoApi);
 
 
-processscopesApi.getRuntimeProcessScopesUsingPOST(processScopesRequest).then((data) => {
+processscopesApi.getRuntimeProcessScopes(processScopesRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

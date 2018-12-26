@@ -24,7 +24,6 @@ import * as  superagent_ from 'superagent';
 import { Authentication } from './authentication/authentication';
 import { BasicAuth } from './authentication/basicAuth';
 import { Oauth2 } from './authentication/oauth2';
-import { ProcessAuth } from './authentication/processAuth';
 
 const Emitter = _Emitter;
 const superagent = superagent_;
@@ -317,7 +316,7 @@ export class AlfrescoApiClient {
         let url;
 
         if (contextRoot) {
-            let basePath = this.host + '/' + contextRoot;
+            let basePath = `${this.host}/${contextRoot}`;
             url = this.buildUrlCustomBasePath(basePath, path, pathParams);
         } else {
             url = this.buildUrl(path, pathParams);

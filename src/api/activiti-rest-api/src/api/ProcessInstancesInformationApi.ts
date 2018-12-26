@@ -16,92 +16,27 @@
     */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { ProcessInstancesApi } from '../../../../api-new/activiti-rest-api/api';
+import { ResultListDataRepresentationProcessContentRepresentation } from '../../../../api-new/activiti-rest-api/model/resultListDataRepresentationProcessContentRepresentation';
+import { CreateProcessInstanceRepresentation } from '../../../../api-new/activiti-rest-api/model/createProcessInstanceRepresentation';
+import { ProcessInstanceRepresentation } from '../../../../api-new/activiti-rest-api/model/processInstanceRepresentation';
 
 /**
  * @deprecated 3.0.0
  */
 export class ProcessInstancesInformationApi {
 
-    apiClient: ProcessClient;
+    processInstancesApi: ProcessInstancesApi;
 
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.processInstancesApi = new ProcessInstancesApi(alfrescoApi);
     }
 
-    /**
-     * Function to receive the result of the getProcessInstanceContent operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Retrieve content attached to process instance fields
-     * @param {String} processInstanceId processInstanceId
-     */
-    getProcessInstanceContent(processInstanceId) {
-        let postBody = null;
-
-        // verify the required parameter 'processInstanceId' is set
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw "Missing param 'processInstanceId' in getProcessInstanceContent";
-        }
-
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getProcessInstanceContent(processInstanceId: string): Promise<ResultListDataRepresentationProcessContentRepresentation> {
+        return this.processInstancesApi.getProcessInstanceContent(processInstanceId)
     }
 
-    /**
-     * Function to receive the result of the startNewProcessInstance operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ProcessInstanceRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Start a process instance
-     * @param {module:model/CreateProcessInstanceRepresentation} startRequest startRequest
-     */
-    startNewProcessInstance(startRequest) {
-        let postBody = startRequest;
-
-        // verify the required parameter 'startRequest' is set
-        if (startRequest === undefined || startRequest === null) {
-            throw "Missing param 'startRequest' in startNewProcessInstance";
-        }
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    startNewProcessInstance(startRequest: CreateProcessInstanceRepresentation): Promise<ProcessInstanceRepresentation> {
+        return this.processInstancesApi.startNewProcessInstance(startRequest);
     }
 }

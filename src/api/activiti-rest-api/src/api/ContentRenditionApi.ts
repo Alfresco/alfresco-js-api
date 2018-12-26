@@ -16,62 +16,20 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { ContentApi } from '../../../../api-new/activiti-rest-api/api/content.api';
 
 /**
  * @deprecated 3.0.0
  */
 export class ContentRenditionApi {
 
-    apiClient: ProcessClient;
+    contentApi: ContentApi;
 
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.contentApi = new ContentApi(alfrescoApi);
     }
 
-    /**
-     * Function to receive the result of the getRawContent operation.
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Retrieve Raw Content
-     * @param {Integer} contentId contentId
-     * @param {String} renditionType renditionType
-     */
     getRawContent(contentId, renditionType) {
-        let postBody = null;
-
-        // verify the required parameter 'contentId' is set
-        if (contentId === undefined || contentId === null) {
-            throw "Missing param 'contentId' in getRawContent";
-        }
-
-        // verify the required parameter 'renditionType' is set
-        if (renditionType === undefined || renditionType === null) {
-            throw "Missing param 'renditionType' in getRawContent";
-        }
-
-
-        let pathParams = {
-            'contentId': contentId,
-            'renditionType': renditionType
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content/{contentId}/rendition/{renditionType}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+       return this.contentApi.getRawContent(contentId,renditionType);
     }
 }

@@ -4,17 +4,17 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**executeActionUsingPOST**](UsersApi.md#executeActionUsingPOST) | **POST** /enterprise/users/{userId} | Execute an action for a specific user
-[**getProfilePictureUsingGET1**](UsersApi.md#getProfilePictureUsingGET1) | **GET** /enterprise/users/{userId}/picture | Stream user profile picture
-[**getUserUsingGET1**](UsersApi.md#getUserUsingGET1) | **GET** /enterprise/users/{userId} | Get a user
-[**getUsersUsingGET1**](UsersApi.md#getUsersUsingGET1) | **GET** /enterprise/users | Query users
-[**requestPasswordResetUsingPOST**](UsersApi.md#requestPasswordResetUsingPOST) | **POST** /enterprise/idm/passwords | Request a password reset
-[**updateUserUsingPUT**](UsersApi.md#updateUserUsingPUT) | **PUT** /enterprise/users/{userId} | Update a user
+[**executeAction**](UsersApi.md#executeAction) | **POST** /enterprise/users/{userId} | Execute an action for a specific user
+[**getProfilePicture**](UsersApi.md#getProfilePicture) | **GET** /enterprise/users/{userId}/picture | Stream user profile picture
+[**getUser**](UsersApi.md#getUser) | **GET** /enterprise/users/{userId} | Get a user
+[**getUsers**](UsersApi.md#getUsers) | **GET** /enterprise/users | Query users
+[**requestPasswordReset**](UsersApi.md#requestPasswordReset) | **POST** /enterprise/idm/passwords | Request a password reset
+[**updateUser**](UsersApi.md#updateUser) | **PUT** /enterprise/users/{userId} | Update a user
 
 
-<a name="executeActionUsingPOST"></a>
-# **executeActionUsingPOST**
-> executeActionUsingPOST(userIdactionRequest)
+<a name="executeAction"></a>
+# **executeAction**
+> executeAction(userIdactionRequest)
 
 Execute an action for a specific user
 
@@ -33,7 +33,7 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 
-usersApi.executeActionUsingPOST(userIdactionRequest).then(() => {
+usersApi.executeAction(userIdactionRequest).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -52,9 +52,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getProfilePictureUsingGET1"></a>
-# **getProfilePictureUsingGET1**
-> getProfilePictureUsingGET1(userId)
+<a name="getProfilePicture"></a>
+# **getProfilePicture**
+> getProfilePicture(userId)
 
 Stream user profile picture
 
@@ -71,7 +71,7 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 
-usersApi.getProfilePictureUsingGET1(userId).then(() => {
+usersApi.getProfilePicture(userId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -89,9 +89,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getUserUsingGET1"></a>
-# **getUserUsingGET1**
-> UserRepresentation getUserUsingGET1(userId)
+<a name="getUser"></a>
+# **getUser**
+> UserRepresentation getUser(userId)
 
 Get a user
 
@@ -108,7 +108,7 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 
-usersApi.getUserUsingGET1(userId).then((data) => {
+usersApi.getUser(userId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -126,9 +126,9 @@ Name | Type | Description  | Notes
 
 [**UserRepresentation**](UserRepresentation.md)
 
-<a name="getUsersUsingGET1"></a>
-# **getUsersUsingGET1**
-> ResultListDataRepresentationLightUserRepresentation getUsersUsingGET1(opts)
+<a name="getUsers"></a>
+# **getUsers**
+> ResultListDataRepresentationLightUserRepresentation getUsers(opts)
 
 Query users
 
@@ -157,7 +157,7 @@ let opts = {
   'tenantId': 789 //  | tenantId
 };
 
-usersApi.getUsersUsingGET1(opts).then((data) => {
+usersApi.getUsers(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -182,9 +182,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationLightUserRepresentation**](ResultListDataRepresentationLightUserRepresentation.md)
 
-<a name="requestPasswordResetUsingPOST"></a>
-# **requestPasswordResetUsingPOST**
-> requestPasswordResetUsingPOST(resetPassword)
+<a name="requestPasswordReset"></a>
+# **requestPasswordReset**
+> requestPasswordReset(resetPassword)
 
 Request a password reset
 
@@ -201,7 +201,7 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 
-usersApi.requestPasswordResetUsingPOST(resetPassword).then(() => {
+usersApi.requestPasswordReset(resetPassword).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -219,9 +219,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="updateUserUsingPUT"></a>
-# **updateUserUsingPUT**
-> UserRepresentation updateUserUsingPUT(userIduserRequest)
+<a name="updateUser"></a>
+# **updateUser**
+> UserRepresentation updateUser(userIduserRequest)
 
 Update a user
 
@@ -238,7 +238,7 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 
-usersApi.updateUserUsingPUT(userIduserRequest).then((data) => {
+usersApi.updateUser(userIduserRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

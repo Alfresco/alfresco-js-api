@@ -16,106 +16,14 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { ModelsHistoryApi as NewModelsHistoryApi } from '../../../../api-new/activiti-rest-api/api/modelsHistory.api';
 
 /**
  * @deprecated 3.0.0
  */
-export class ModelsHistoryApi {
+export class ModelsHistoryApi extends NewModelsHistoryApi {
 
-    apiClient: ProcessClient;
-
-    constructor(alfrescoApi?: AlfrescoApi) {
+    public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;
-    }
-
-    /**
-     * Function to receive the result of the getModelHistoryCollection operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * To get the version information for a model
-     * @param {Integer} modelId modelId
-     * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.includeLatestVersion includeLatestVersion
-     */
-    getModelHistoryCollection(modelId, opts?: any) {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'modelId' is set
-        if (modelId === undefined || modelId === null) {
-            throw "Missing param 'modelId' in getModelHistoryCollection";
-        }
-
-
-        let pathParams = {
-            'modelId': modelId
-        };
-        let queryParams = {
-            'includeLatestVersion': opts['includeLatestVersion']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/models/{modelId}/history', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
-    }
-
-    /**
-     * Function to receive the result of the getProcessModelHistory operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ModelRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * To get a particular older version of a model
-     * @param {Integer} modelId modelId
-     * @param {Integer} modelHistoryId modelHistoryId
-     */
-    getProcessModelHistory(modelId, modelHistoryId) {
-        let postBody = null;
-
-        // verify the required parameter 'modelId' is set
-        if (modelId === undefined || modelId === null) {
-            throw "Missing param 'modelId' in getProcessModelHistory";
-        }
-
-        // verify the required parameter 'modelHistoryId' is set
-        if (modelHistoryId === undefined || modelHistoryId === null) {
-            throw "Missing param 'modelHistoryId' in getProcessModelHistory";
-        }
-
-
-        let pathParams = {
-            'modelId': modelId,
-            'modelHistoryId': modelHistoryId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/models/{modelId}/history/{modelHistoryId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
     }
 }

@@ -4,19 +4,19 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createTenantUsingPOST**](AdmintenantsApi.md#createTenantUsingPOST) | **POST** /enterprise/admin/tenants | Create a tenant
-[**deleteTenantUsingDELETE**](AdmintenantsApi.md#deleteTenantUsingDELETE) | **DELETE** /enterprise/admin/tenants/{tenantId} | Delete a tenant
-[**getTenantEventsUsingGET**](AdmintenantsApi.md#getTenantEventsUsingGET) | **GET** /enterprise/admin/tenants/{tenantId}/events | Get tenant events
-[**getTenantLogoUsingGET**](AdmintenantsApi.md#getTenantLogoUsingGET) | **GET** /enterprise/admin/tenants/{tenantId}/logo | Get a tenant's logo
-[**getTenantUsingGET**](AdmintenantsApi.md#getTenantUsingGET) | **GET** /enterprise/admin/tenants/{tenantId} | Get a tenant
-[**getTenantsUsingGET**](AdmintenantsApi.md#getTenantsUsingGET) | **GET** /enterprise/admin/tenants | List tenants
-[**updateUsingPUT**](AdmintenantsApi.md#updateUsingPUT) | **PUT** /enterprise/admin/tenants/{tenantId} | Update a tenant
-[**uploadTenantLogoUsingPOST**](AdmintenantsApi.md#uploadTenantLogoUsingPOST) | **POST** /enterprise/admin/tenants/{tenantId}/logo | Update a tenant's logo
+[**createTenant**](AdmintenantsApi.md#createTenant) | **POST** /enterprise/admin/tenants | Create a tenant
+[**deleteTenant**](AdmintenantsApi.md#deleteTenant) | **DELETE** /enterprise/admin/tenants/{tenantId} | Delete a tenant
+[**getTenantEvents**](AdmintenantsApi.md#getTenantEvents) | **GET** /enterprise/admin/tenants/{tenantId}/events | Get tenant events
+[**getTenantLogo**](AdmintenantsApi.md#getTenantLogo) | **GET** /enterprise/admin/tenants/{tenantId}/logo | Get a tenant's logo
+[**getTenant**](AdmintenantsApi.md#getTenant) | **GET** /enterprise/admin/tenants/{tenantId} | Get a tenant
+[**getTenants**](AdmintenantsApi.md#getTenants) | **GET** /enterprise/admin/tenants | List tenants
+[**update**](AdmintenantsApi.md#update) | **PUT** /enterprise/admin/tenants/{tenantId} | Update a tenant
+[**uploadTenantLogo**](AdmintenantsApi.md#uploadTenantLogo) | **POST** /enterprise/admin/tenants/{tenantId}/logo | Update a tenant's logo
 
 
-<a name="createTenantUsingPOST"></a>
-# **createTenantUsingPOST**
-> LightTenantRepresentation createTenantUsingPOST(createTenantRepresentation)
+<a name="createTenant"></a>
+# **createTenant**
+> LightTenantRepresentation createTenant(createTenantRepresentation)
 
 Create a tenant
 
@@ -35,7 +35,7 @@ this.alfrescoApi.setConfig({
 let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-admintenantsApi.createTenantUsingPOST(createTenantRepresentation).then((data) => {
+admintenantsApi.createTenant(createTenantRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -53,9 +53,9 @@ Name | Type | Description  | Notes
 
 [**LightTenantRepresentation**](LightTenantRepresentation.md)
 
-<a name="deleteTenantUsingDELETE"></a>
-# **deleteTenantUsingDELETE**
-> deleteTenantUsingDELETE(tenantId)
+<a name="deleteTenant"></a>
+# **deleteTenant**
+> deleteTenant(tenantId)
 
 Delete a tenant
 
@@ -72,7 +72,7 @@ this.alfrescoApi.setConfig({
 let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-admintenantsApi.deleteTenantUsingDELETE(tenantId).then(() => {
+admintenantsApi.deleteTenant(tenantId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -90,9 +90,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getTenantEventsUsingGET"></a>
-# **getTenantEventsUsingGET**
-> TenantEvent getTenantEventsUsingGET(tenantId)
+<a name="getTenantEvents"></a>
+# **getTenantEvents**
+> TenantEvent getTenantEvents(tenantId)
 
 Get tenant events
 
@@ -109,7 +109,7 @@ this.alfrescoApi.setConfig({
 let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-admintenantsApi.getTenantEventsUsingGET(tenantId).then((data) => {
+admintenantsApi.getTenantEvents(tenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -127,9 +127,9 @@ Name | Type | Description  | Notes
 
 [**TenantEvent**](TenantEvent.md)
 
-<a name="getTenantLogoUsingGET"></a>
-# **getTenantLogoUsingGET**
-> getTenantLogoUsingGET(tenantId)
+<a name="getTenantLogo"></a>
+# **getTenantLogo**
+> getTenantLogo(tenantId)
 
 Get a tenant's logo
 
@@ -146,7 +146,7 @@ this.alfrescoApi.setConfig({
 let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-admintenantsApi.getTenantLogoUsingGET(tenantId).then(() => {
+admintenantsApi.getTenantLogo(tenantId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -164,9 +164,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getTenantUsingGET"></a>
-# **getTenantUsingGET**
-> TenantRepresentation getTenantUsingGET(tenantId)
+<a name="getTenant"></a>
+# **getTenant**
+> TenantRepresentation getTenant(tenantId)
 
 Get a tenant
 
@@ -183,7 +183,7 @@ this.alfrescoApi.setConfig({
 let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-admintenantsApi.getTenantUsingGET(tenantId).then((data) => {
+admintenantsApi.getTenant(tenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -201,9 +201,9 @@ Name | Type | Description  | Notes
 
 [**TenantRepresentation**](TenantRepresentation.md)
 
-<a name="getTenantsUsingGET"></a>
-# **getTenantsUsingGET**
-> LightTenantRepresentation getTenantsUsingGET()
+<a name="getTenants"></a>
+# **getTenants**
+> LightTenantRepresentation getTenants()
 
 List tenants
 
@@ -221,7 +221,7 @@ this.alfrescoApi.setConfig({
 
 let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
-admintenantsApi.getTenantsUsingGET().then((data) => {
+admintenantsApi.getTenants().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -236,9 +236,9 @@ This endpoint does not need any parameter.
 
 [**LightTenantRepresentation**](LightTenantRepresentation.md)
 
-<a name="updateUsingPUT"></a>
-# **updateUsingPUT**
-> TenantRepresentation updateUsingPUT(tenantIdcreateTenantRepresentation)
+<a name="update"></a>
+# **update**
+> TenantRepresentation update(tenantIdcreateTenantRepresentation)
 
 Update a tenant
 
@@ -255,7 +255,7 @@ this.alfrescoApi.setConfig({
 let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-admintenantsApi.updateUsingPUT(tenantIdcreateTenantRepresentation).then((data) => {
+admintenantsApi.update(tenantIdcreateTenantRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -274,9 +274,9 @@ Name | Type | Description  | Notes
 
 [**TenantRepresentation**](TenantRepresentation.md)
 
-<a name="uploadTenantLogoUsingPOST"></a>
-# **uploadTenantLogoUsingPOST**
-> ImageUploadRepresentation uploadTenantLogoUsingPOST(tenantIdfile)
+<a name="uploadTenantLogo"></a>
+# **uploadTenantLogo**
+> ImageUploadRepresentation uploadTenantLogo(tenantIdfile)
 
 Update a tenant's logo
 
@@ -293,7 +293,7 @@ this.alfrescoApi.setConfig({
 let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
-admintenantsApi.uploadTenantLogoUsingPOST(tenantIdfile).then((data) => {
+admintenantsApi.uploadTenantLogo(tenantIdfile).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

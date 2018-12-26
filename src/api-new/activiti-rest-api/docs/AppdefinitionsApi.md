@@ -4,20 +4,20 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**deleteAppDefinitionUsingDELETE**](AppdefinitionsApi.md#deleteAppDefinitionUsingDELETE) | **DELETE** /enterprise/app-definitions/{appDefinitionId} | deleteAppDefinition
-[**exportAppDefinitionUsingGET**](AppdefinitionsApi.md#exportAppDefinitionUsingGET) | **GET** /enterprise/app-definitions/{modelId}/export | Export an app definition
-[**getAppDefinitionUsingGET**](AppdefinitionsApi.md#getAppDefinitionUsingGET) | **GET** /enterprise/app-definitions/{modelId} | Get an app definition
-[**importAndPublishAppUsingPOST**](AppdefinitionsApi.md#importAndPublishAppUsingPOST) | **POST** /enterprise/app-definitions/publish-app | importAndPublishApp
-[**importAndPublishAppUsingPOST1**](AppdefinitionsApi.md#importAndPublishAppUsingPOST1) | **POST** /enterprise/app-definitions/{modelId}/publish-app | importAndPublishApp
-[**importAppDefinitionUsingPOST**](AppdefinitionsApi.md#importAppDefinitionUsingPOST) | **POST** /enterprise/app-definitions/import | Import a new app definition
-[**importAppDefinitionUsingPOST1**](AppdefinitionsApi.md#importAppDefinitionUsingPOST1) | **POST** /enterprise/app-definitions/{modelId}/import | Update the content of an existing app
-[**publishAppDefinitionUsingPOST**](AppdefinitionsApi.md#publishAppDefinitionUsingPOST) | **POST** /enterprise/app-definitions/{modelId}/publish | Publish an app definition
-[**updateAppDefinitionUsingPUT**](AppdefinitionsApi.md#updateAppDefinitionUsingPUT) | **PUT** /enterprise/app-definitions/{modelId} | Update an app definition
+[**deleteAppDefinition**](AppdefinitionsApi.md#deleteAppDefinition) | **DELETE** /enterprise/app-definitions/{appDefinitionId} | deleteAppDefinition
+[**exportAppDefinition**](AppdefinitionsApi.md#exportAppDefinition) | **GET** /enterprise/app-definitions/{modelId}/export | Export an app definition
+[**getAppDefinition**](AppdefinitionsApi.md#getAppDefinition) | **GET** /enterprise/app-definitions/{modelId} | Get an app definition
+[**importAndPublishApp**](AppdefinitionsApi.md#importAndPublishApp) | **POST** /enterprise/app-definitions/publish-app | importAndPublishApp
+[**importAndPublishApp**](AppdefinitionsApi.md#importAndPublishApp) | **POST** /enterprise/app-definitions/{modelId}/publish-app | importAndPublishApp
+[**importAppDefinition**](AppdefinitionsApi.md#importAppDefinition) | **POST** /enterprise/app-definitions/import | Import a new app definition
+[**updateAppDefinition**](AppdefinitionsApi.md#importAppDefinition) | **POST** /enterprise/app-definitions/{modelId}/import | Update the content of an existing app
+[**publishAppDefinition**](AppdefinitionsApi.md#publishAppDefinition) | **POST** /enterprise/app-definitions/{modelId}/publish | Publish an app definition
+[**updateAppDefinition**](AppdefinitionsApi.md#updateAppDefinition) | **PUT** /enterprise/app-definitions/{modelId} | Update an app definition
 
 
-<a name="deleteAppDefinitionUsingDELETE"></a>
-# **deleteAppDefinitionUsingDELETE**
-> deleteAppDefinitionUsingDELETE(appDefinitionId)
+<a name="deleteAppDefinition"></a>
+# **deleteAppDefinition**
+> deleteAppDefinition(appDefinitionId)
 
 deleteAppDefinition
 
@@ -34,7 +34,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.deleteAppDefinitionUsingDELETE(appDefinitionId).then(() => {
+appdefinitionsApi.deleteAppDefinition(appDefinitionId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -52,9 +52,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="exportAppDefinitionUsingGET"></a>
-# **exportAppDefinitionUsingGET**
-> exportAppDefinitionUsingGET(modelId)
+<a name="exportAppDefinition"></a>
+# **exportAppDefinition**
+> exportAppDefinition(modelId)
 
 Export an app definition
 
@@ -73,7 +73,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.exportAppDefinitionUsingGET(modelId).then(() => {
+appdefinitionsApi.exportAppDefinition(modelId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -91,9 +91,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getAppDefinitionUsingGET"></a>
-# **getAppDefinitionUsingGET**
-> AppDefinitionRepresentation getAppDefinitionUsingGET(modelId)
+<a name="getAppDefinition"></a>
+# **getAppDefinition**
+> AppDefinitionRepresentation getAppDefinition(modelId)
 
 Get an app definition
 
@@ -110,7 +110,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.getAppDefinitionUsingGET(modelId).then((data) => {
+appdefinitionsApi.getAppDefinition(modelId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -128,9 +128,9 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionRepresentation**](AppDefinitionRepresentation.md)
 
-<a name="importAndPublishAppUsingPOST"></a>
-# **importAndPublishAppUsingPOST**
-> AppDefinitionUpdateResultRepresentation importAndPublishAppUsingPOST(file)
+<a name="importAndPublishApp"></a>
+# **importAndPublishApp**
+> AppDefinitionUpdateResultRepresentation importAndPublishApp(file)
 
 importAndPublishApp
 
@@ -147,7 +147,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.importAndPublishAppUsingPOST(file).then((data) => {
+appdefinitionsApi.importAndPublishApp(file).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -165,9 +165,9 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionUpdateResultRepresentation**](AppDefinitionUpdateResultRepresentation.md)
 
-<a name="importAndPublishAppUsingPOST1"></a>
-# **importAndPublishAppUsingPOST1**
-> AppDefinitionUpdateResultRepresentation importAndPublishAppUsingPOST1(modelIdfile)
+<a name="importAndPublishApp"></a>
+# **importAndPublishApp**
+> AppDefinitionUpdateResultRepresentation importAndPublishApp(modelIdfile)
 
 importAndPublishApp
 
@@ -184,7 +184,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.importAndPublishAppUsingPOST1(modelIdfile).then((data) => {
+appdefinitionsApi.importAndPublishApp(modelIdfile).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -203,9 +203,9 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionUpdateResultRepresentation**](AppDefinitionUpdateResultRepresentation.md)
 
-<a name="importAppDefinitionUsingPOST"></a>
-# **importAppDefinitionUsingPOST**
-> AppDefinitionRepresentation importAppDefinitionUsingPOST(fileopts)
+<a name="importAppDefinition"></a>
+# **importAppDefinition**
+> AppDefinitionRepresentation importAppDefinition(fileopts)
 
 Import a new app definition
 
@@ -227,7 +227,7 @@ let opts = {
   'renewIdmEntries': renewIdmEntries_example //  | Whether to renew user and group identifiers
 };
 
-appdefinitionsApi.importAppDefinitionUsingPOST(fileopts).then((data) => {
+appdefinitionsApi.importAppDefinition(fileopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -246,9 +246,9 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionRepresentation**](AppDefinitionRepresentation.md)
 
-<a name="importAppDefinitionUsingPOST1"></a>
-# **importAppDefinitionUsingPOST1**
-> AppDefinitionRepresentation importAppDefinitionUsingPOST1(modelIdfile)
+<a name="updateAppDefinition"></a>
+# **importAppDefinition**
+> updateAppDefinition importAppDefinition(modelIdfile)
 
 Update the content of an existing app
 
@@ -267,7 +267,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.importAppDefinitionUsingPOST1(modelIdfile).then((data) => {
+appdefinitionsApi.updateAppDefinition(modelIdfile).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -286,9 +286,9 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionRepresentation**](AppDefinitionRepresentation.md)
 
-<a name="publishAppDefinitionUsingPOST"></a>
-# **publishAppDefinitionUsingPOST**
-> AppDefinitionUpdateResultRepresentation publishAppDefinitionUsingPOST(modelIdpublishModel)
+<a name="publishAppDefinition"></a>
+# **publishAppDefinition**
+> AppDefinitionUpdateResultRepresentation publishAppDefinition(modelIdpublishModel)
 
 Publish an app definition
 
@@ -307,7 +307,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.publishAppDefinitionUsingPOST(modelIdpublishModel).then((data) => {
+appdefinitionsApi.publishAppDefinition(modelIdpublishModel).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -326,9 +326,9 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionUpdateResultRepresentation**](AppDefinitionUpdateResultRepresentation.md)
 
-<a name="updateAppDefinitionUsingPUT"></a>
-# **updateAppDefinitionUsingPUT**
-> AppDefinitionUpdateResultRepresentation updateAppDefinitionUsingPUT(modelIdupdatedModel)
+<a name="updateAppDefinition"></a>
+# **updateAppDefinition**
+> AppDefinitionUpdateResultRepresentation updateAppDefinition(modelIdupdatedModel)
 
 Update an app definition
 
@@ -345,7 +345,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.updateAppDefinitionUsingPUT(modelIdupdatedModel).then((data) => {
+appdefinitionsApi.updateAppDefinition(modelIdupdatedModel).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

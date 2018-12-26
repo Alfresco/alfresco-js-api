@@ -4,13 +4,13 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getGroupsUsingGET**](GroupsApi.md#getGroupsUsingGET) | **GET** /enterprise/groups | Query groups
-[**getUsersForGroupUsingGET**](GroupsApi.md#getUsersForGroupUsingGET) | **GET** /enterprise/groups/{groupId}/users | List members of a group
+[**getGroups**](GroupsApi.md#getGroups) | **GET** /enterprise/groups | Query groups
+[**getUsersForGroup**](GroupsApi.md#getUsersForGroup) | **GET** /enterprise/groups/{groupId}/users | List members of a group
 
 
-<a name="getGroupsUsingGET"></a>
-# **getGroupsUsingGET**
-> ResultListDataRepresentationLightGroupRepresentation getGroupsUsingGET(opts)
+<a name="getGroups"></a>
+# **getGroups**
+> ResultListDataRepresentationLightGroupRepresentation getGroups(opts)
 
 Query groups
 
@@ -34,7 +34,7 @@ let opts = {
   'tenantId': 789 //  | tenantId
 };
 
-groupsApi.getGroupsUsingGET(opts).then((data) => {
+groupsApi.getGroups(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -56,9 +56,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationLightGroupRepresentation**](ResultListDataRepresentationLightGroupRepresentation.md)
 
-<a name="getUsersForGroupUsingGET"></a>
-# **getUsersForGroupUsingGET**
-> ResultListDataRepresentationLightUserRepresentation getUsersForGroupUsingGET(groupId)
+<a name="getUsersForGroup"></a>
+# **getUsersForGroup**
+> ResultListDataRepresentationLightUserRepresentation getUsersForGroup(groupId)
 
 List members of a group
 
@@ -75,7 +75,7 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 
-groupsApi.getUsersForGroupUsingGET(groupId).then((data) => {
+groupsApi.getUsersForGroup(groupId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

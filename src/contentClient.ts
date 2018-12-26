@@ -42,8 +42,7 @@ export class ContentClient extends AlfrescoApiClient {
 
     changeHost() {
         this.host = this.config.hostEcm;
-
-        this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + this.servicePath;
+        this.basePath = `${this.config.hostEcm}/${this.config.contextRoot}${this.servicePath}`;
     }
 
     /**

@@ -20,31 +20,31 @@ import { ResultListDataRepresentationRelatedContentRepresentation } from '../mod
 import { BaseApi } from './base.api';
 
 /**
-* Content service.
-* @module ContentApi
-*/
+ * Content service.
+ * @module ContentApi
+ */
 export class ContentApi extends BaseApi {
     /**
-    * Attach existing content to a process instance
-    * 
-    * 
-    * 
-    * @param processInstanceId processInstanceId
-    * @param relatedContent relatedContent
-    * @param opts Optional parameters
-    * @param opts.isRelatedContent isRelatedContent
-    * @return Promise<RelatedContentRepresentation>
-    */
-    createRelatedContentOnProcessInstance(processInstanceId: string, relatedContent: RelatedContentRepresentation, opts?: any): Promise<RelatedContentRepresentation> {
+     * Attach existing content to a process instance
+     *
+     *
+     *
+     * @param processInstanceId processInstanceId
+     * @param relatedContent relatedContent
+     * @param opts Optional parameters
+     * @param opts.isRelatedContent isRelatedContent
+     * @return Promise<RelatedContentRepresentation>
+     */
+    createRelatedContentOnProcessInstance(processInstanceId: string, relatedContent: RelatedContentRepresentation | Blob, opts?: any): Promise<RelatedContentRepresentation> {
         opts = opts || {};
         let postBody = relatedContent;
 
         if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in createRelatedContentOnProcessInstanceUsingPOST");
+            throw new Error("Required param 'processInstanceId' in createRelatedContentOnProcessInstance");
         }
 
         if (relatedContent === undefined || relatedContent === null) {
-            throw new Error("Required param 'relatedContent' in createRelatedContentOnProcessInstanceUsingPOST");
+            throw new Error("Required param 'relatedContent' in createRelatedContentOnProcessInstance");
         }
 
         let pathParams = {
@@ -55,87 +55,46 @@ export class ContentApi extends BaseApi {
             'isRelatedContent': opts['isRelatedContent']
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
+        let headerParams = {};
+        let formParams = {};
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
-        return this.apiClient.callApi(
-            '/enterprise/process-instances/{processInstanceId}/content', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
-    }
-    /**
-        * Upload content and attach to a process instance
-        * 
-        * 
-        * 
-        * @param processInstanceId processInstanceId
-        * @param file file
-        * @param opts Optional parameters
-        * @param opts.isRelatedContent isRelatedContent
-        * @return Promise<RelatedContentRepresentation>
-        */
-    createRelatedContentOnProcessInstance1(processInstanceId: string, file: Blob, opts?: any): Promise<RelatedContentRepresentation> {
-        opts = opts || {};
-        let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in createRelatedContentOnProcessInstanceUsingPOST1");
+        if (relatedContent instanceof RelatedContentRepresentation) {
+            return this.apiClient.callApi(
+                '/api/enterprise/process-instances/{processInstanceId}/content', 'POST',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                contentTypes, accepts)
+        } else {
+            return this.apiClient.callApi(
+                '/api/enterprise/process-instances/{processInstanceId}/raw-content', 'POST',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                contentTypes, accepts)
         }
-
-        if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in createRelatedContentOnProcessInstanceUsingPOST1");
-        }
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-
-        let queryParams = {
-            'isRelatedContent': opts['isRelatedContent']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-            'file': file
-        };
-
-        let contentTypes = ['multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/enterprise/process-instances/{processInstanceId}/raw-content', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
     }
+
     /**
-        * Attach existing content to a task
-        * 
-        * 
-        * 
-        * @param taskId taskId
-        * @param relatedContent relatedContent
-        * @param opts Optional parameters
-        * @param opts.isRelatedContent isRelatedContent
-        * @return Promise<RelatedContentRepresentation>
-        */
-    createRelatedContentOnTask(taskId: string, relatedContent: RelatedContentRepresentation, opts?: any): Promise<RelatedContentRepresentation> {
+     * Attach existing content to a task
+     *
+     *
+     *
+     * @param taskId taskId
+     * @param relatedContent relatedContent
+     * @param opts Optional parameters
+     * @param opts.isRelatedContent isRelatedContent
+     * @return Promise<RelatedContentRepresentation>
+     */
+    createRelatedContentOnTask(taskId: string, relatedContent: RelatedContentRepresentation | Blob, opts?: any): Promise<RelatedContentRepresentation> {
         opts = opts || {};
         let postBody = relatedContent;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in createRelatedContentOnTaskUsingPOST");
+            throw new Error("Required param 'taskId' in createRelatedContentOnTask");
         }
 
         if (relatedContent === undefined || relatedContent === null) {
-            throw new Error("Required param 'relatedContent' in createRelatedContentOnTaskUsingPOST");
+            throw new Error("Required param 'relatedContent' in createRelatedContentOnTask");
         }
 
         let pathParams = {
@@ -146,92 +105,49 @@ export class ContentApi extends BaseApi {
             'isRelatedContent': opts['isRelatedContent']
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
+        let headerParams = {};
+        let formParams = {};
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
-        return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/content', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
-    }
-    /**
-        * Upload content and attach to a task
-        * 
-        * 
-        * 
-        * @param taskId taskId
-        * @param file file
-        * @param opts Optional parameters
-        * @param opts.isRelatedContent isRelatedContent
-        * @return Promise<RelatedContentRepresentation>
-        */
-    createRelatedContentOnTask1(taskId: string, file: Blob, opts?: any): Promise<RelatedContentRepresentation> {
-        opts = opts || {};
-        let postBody = null;
+        if (relatedContent instanceof RelatedContentRepresentation) {
 
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in createRelatedContentOnTaskUsingPOST1");
+            return this.apiClient.callApi(
+                '/api/enterprise/tasks/{taskId}/content', 'POST',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                contentTypes, accepts)
+
+        } else {
+
+            return this.apiClient.callApi(
+                '/api/enterprise/tasks/{taskId}/raw-content', 'POST',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                contentTypes, accepts)
         }
-
-        if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in createRelatedContentOnTaskUsingPOST1");
-        }
-
-        let pathParams = {
-            'taskId': taskId
-        };
-
-        let queryParams = {
-            'isRelatedContent': opts['isRelatedContent']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-            'file': file
-        };
-
-        let contentTypes = ['multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/raw-content', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
     }
+
     /**
-        * Upload content and create a local representation
-        * 
-        * 
-        * 
-        * @param file file
-        * @return Promise<RelatedContentRepresentation>
-        */
+     * Upload content and create a local representation
+     *
+     *
+     *
+     * @param file file
+     * @return Promise<RelatedContentRepresentation>
+     */
     createTemporaryRawRelatedContent(file: Blob): Promise<RelatedContentRepresentation> {
 
         let postBody = null;
 
         if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in createTemporaryRawRelatedContentUsingPOST");
+            throw new Error("Required param 'file' in createTemporaryRawRelatedContent");
         }
 
-        let pathParams = {
+        let pathParams = {};
 
-        };
+        let queryParams = {};
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
+        let headerParams = {};
         let formParams = {
             'file': file
         };
@@ -240,216 +156,178 @@ export class ContentApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/content/raw', 'POST',
+            '/api/enterprise/content/raw', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
+
     /**
-        * Create a local representation of content from a remote repository
-        * 
-        * 
-        * 
-        * @param relatedContent relatedContent
-        * @return Promise<RelatedContentRepresentation>
-        */
+     * Create a local representation of content from a remote repository
+     *
+     *
+     *
+     * @param relatedContent relatedContent
+     * @return Promise<RelatedContentRepresentation>
+     */
     createTemporaryRelatedContent(relatedContent: RelatedContentRepresentation): Promise<RelatedContentRepresentation> {
 
         let postBody = relatedContent;
 
         if (relatedContent === undefined || relatedContent === null) {
-            throw new Error("Required param 'relatedContent' in createTemporaryRelatedContentUsingPOST");
+            throw new Error("Required param 'relatedContent' in createTemporaryRelatedContent");
         }
 
-        let pathParams = {
+        let pathParams = {};
 
-        };
+        let queryParams = {};
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
+        let headerParams = {};
+        let formParams = {};
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/content', 'POST',
+            '/api/enterprise/content', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
+
     /**
-        * Remove a local content representation
-        * 
-        * 
-        * 
-        * @param contentId contentId
-        * @return Promise<{}>
-        */
+     * Remove a local content representation
+     *
+     *
+     *
+     * @param contentId contentId
+     * @return Promise<{}>
+     */
     deleteContent(contentId: number): Promise<any> {
 
         let postBody = null;
 
         if (contentId === undefined || contentId === null) {
-            throw new Error("Required param 'contentId' in deleteContentUsingDELETE");
+            throw new Error("Required param 'contentId' in deleteContent");
         }
 
         let pathParams = {
             'contentId': contentId
         };
 
-        let queryParams = {
-        };
+        let queryParams = {};
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
+        let headerParams = {};
+        let formParams = {};
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/content/{contentId}', 'DELETE',
+            '/api/enterprise/content/{contentId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
+
     /**
-        * Get a local content representation
-        * 
-        * 
-        * 
-        * @param contentId contentId
-        * @return Promise<RelatedContentRepresentation>
-        */
+     * Get a local content representation
+     *
+     *
+     *
+     * @param contentId contentId
+     * @return Promise<RelatedContentRepresentation>
+     */
     getContent(contentId: number): Promise<RelatedContentRepresentation> {
 
         let postBody = null;
 
         if (contentId === undefined || contentId === null) {
-            throw new Error("Required param 'contentId' in getContentUsingGET");
+            throw new Error("Required param 'contentId' in getContent");
         }
 
         let pathParams = {
             'contentId': contentId
         };
 
-        let queryParams = {
-        };
+        let queryParams = {};
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
+        let headerParams = {};
+        let formParams = {};
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/content/{contentId}', 'GET',
+            '/api/enterprise/content/{contentId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
+
     /**
-        * Stream content rendition
-        * 
-        * 
-        * 
-        * @param contentId contentId
-        * @param renditionType renditionType
-        * @return Promise<{}>
-        */
-    getRawContent(contentId: number, renditionType: string): Promise<any> {
-
-        let postBody = null;
-
-        if (contentId === undefined || contentId === null) {
-            throw new Error("Required param 'contentId' in getRawContentUsingGET");
-        }
-
-        if (renditionType === undefined || renditionType === null) {
-            throw new Error("Required param 'renditionType' in getRawContentUsingGET");
-        }
-
-        let pathParams = {
-            'contentId': contentId, 'renditionType': renditionType
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['*/*'];
-
-        return this.apiClient.callApi(
-            '/enterprise/content/{contentId}/rendition/{renditionType}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+     * Get content Raw URL for the given contentId
+     * @param contentId contentId
+     */
+    getRawContentUrl(contentId: number) {
+        return `${this.apiClient.basePath}/api/enterprise/content/${contentId}/raw`;
     }
-    /**
-        * Stream content from a local content representation
-        * 
-        * 
-        * 
-        * @param contentId contentId
-        * @return Promise<{}>
-        */
-    getRawContent1(contentId: number): Promise<any> {
 
+    /**
+     * Stream content rendition
+     *
+     *
+     *
+     * @param contentId contentId
+     * @param renditionType renditionType
+     * @return Promise<{}>
+     */
+    getRawContent(contentId: number): Promise<any>;
+    getRawContent(contentId: number, renditionType: string): Promise<any>;
+    getRawContent(contentId: number, renditionType?: string): Promise<any> {
         let postBody = null;
 
         if (contentId === undefined || contentId === null) {
-            throw new Error("Required param 'contentId' in getRawContentUsingGET1");
+            throw new Error("Required param 'contentId' in getRawContent");
         }
 
         let pathParams = {
             'contentId': contentId
         };
 
-        let queryParams = {
-        };
+        let queryParams = {};
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
+        let headerParams = {};
+        let formParams = {};
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json', '*/*'];
 
-        return this.apiClient.callApi(
-            '/enterprise/content/{contentId}/raw', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+        if (renditionType) {
+            return this.apiClient.callApi(
+                '/api/enterprise/content/{contentId}/rendition/{renditionType}', 'GET',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                contentTypes, accepts)
+        } else {
+            return this.apiClient.callApi(
+                '/api/enterprise/content/{contentId}/raw', 'GET',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                contentTypes, accepts)
+        }
     }
+
     /**
-        * List content attached to a process instance
-        * 
-        * 
-        * 
-        * @param processInstanceId processInstanceId
-        * @param opts Optional parameters
-        * @param opts.isRelatedContent isRelatedContent
-        * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
-        */
+     * List content attached to a process instance
+     *
+     *
+     *
+     * @param processInstanceId processInstanceId
+     * @param opts Optional parameters
+     * @param opts.isRelatedContent isRelatedContent
+     * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
+     */
     getRelatedContentForProcessInstance(processInstanceId: string, opts?: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
         if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getRelatedContentForProcessInstanceUsingGET");
+            throw new Error("Required param 'processInstanceId' in getRelatedContentForProcessInstance");
         }
 
         let pathParams = {
@@ -460,36 +338,34 @@ export class ContentApi extends BaseApi {
             'isRelatedContent': opts['isRelatedContent']
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
+        let headerParams = {};
+        let formParams = {};
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/process-instances/{processInstanceId}/content', 'GET',
+            '/api/enterprise/process-instances/{processInstanceId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
+
     /**
-        * List content attached to a task
-        * 
-        * 
-        * 
-        * @param taskId taskId
-        * @param opts Optional parameters
-        * @param opts.isRelatedContent isRelatedContent
-        * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
-        */
+     * List content attached to a task
+     *
+     *
+     *
+     * @param taskId taskId
+     * @param opts Optional parameters
+     * @param opts.isRelatedContent isRelatedContent
+     * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
+     */
     getRelatedContentForTask(taskId: string, opts?: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
         opts = opts || {};
         let postBody = null;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getRelatedContentForTaskUsingGET");
+            throw new Error("Required param 'taskId' in getRelatedContentForTask");
         }
 
         let pathParams = {
@@ -500,17 +376,14 @@ export class ContentApi extends BaseApi {
             'isRelatedContent': opts['isRelatedContent']
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
+        let headerParams = {};
+        let formParams = {};
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/content', 'GET',
+            '/api/enterprise/tasks/{taskId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }

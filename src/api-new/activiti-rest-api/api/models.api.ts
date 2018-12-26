@@ -28,9 +28,9 @@ import { BaseApi } from './base.api';
 export class ModelsApi extends BaseApi {
     /**
     * Create a new model
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param modelRepresentation modelRepresentation
     * @return Promise<ModelRepresentation>
     */
@@ -39,7 +39,7 @@ export class ModelsApi extends BaseApi {
         let postBody = modelRepresentation;
 
         if (modelRepresentation === undefined || modelRepresentation === null) {
-            throw new Error("Required param 'modelRepresentation' in createModelUsingPOST");
+            throw new Error("Required param 'modelRepresentation' in createModel");
         }
 
         let pathParams = {
@@ -59,15 +59,15 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/models', 'POST',
+            '/api/enterprise/models', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Delete a model
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @param opts Optional parameters
         * @param opts.cascade cascade
@@ -79,7 +79,7 @@ export class ModelsApi extends BaseApi {
         let postBody = null;
 
         if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in deleteModelUsingDELETE");
+            throw new Error("Required param 'modelId' in deleteModel");
         }
 
         let pathParams = {
@@ -101,15 +101,15 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/models/{modelId}', 'DELETE',
+            '/api/enterprise/models/{modelId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Duplicate an existing model
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @param modelRepresentation modelRepresentation
         * @return Promise<ModelRepresentation>
@@ -119,11 +119,11 @@ export class ModelsApi extends BaseApi {
         let postBody = modelRepresentation;
 
         if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in duplicateModelUsingPOST");
+            throw new Error("Required param 'modelId' in duplicateModel");
         }
 
         if (modelRepresentation === undefined || modelRepresentation === null) {
-            throw new Error("Required param 'modelRepresentation' in duplicateModelUsingPOST");
+            throw new Error("Required param 'modelRepresentation' in duplicateModel");
         }
 
         let pathParams = {
@@ -143,15 +143,15 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/models/{modelId}/clone', 'POST',
+            '/api/enterprise/models/{modelId}/clone', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Get model content
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @return Promise<ObjectNode>
         */
@@ -160,7 +160,7 @@ export class ModelsApi extends BaseApi {
         let postBody = null;
 
         if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in getModelJSONUsingGET");
+            throw new Error("Required param 'modelId' in getModelJSON");
         }
 
         let pathParams = {
@@ -180,15 +180,15 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/models/{modelId}/editor/json', 'GET',
+            '/api/enterprise/models/{modelId}/editor/json', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Get a model's thumbnail image
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @return Promise<string>
         */
@@ -197,7 +197,7 @@ export class ModelsApi extends BaseApi {
         let postBody = null;
 
         if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in getModelThumbnailUsingGET");
+            throw new Error("Required param 'modelId' in getModelThumbnail");
         }
 
         let pathParams = {
@@ -217,15 +217,15 @@ export class ModelsApi extends BaseApi {
         let accepts = ['image/png'];
 
         return this.apiClient.callApi(
-            '/enterprise/models/{modelId}/thumbnail', 'GET',
+            '/api/enterprise/models/{modelId}/thumbnail', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Get a model
-        * 
+        *
         * Models act as containers for process, form, decision table and app definitions
-        * 
+        *
         * @param modelId modelId
         * @param opts Optional parameters
         * @param opts.includePermissions includePermissions
@@ -236,7 +236,7 @@ export class ModelsApi extends BaseApi {
         let postBody = null;
 
         if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in getModelUsingGET");
+            throw new Error("Required param 'modelId' in getModel");
         }
 
         let pathParams = {
@@ -257,15 +257,17 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/models/{modelId}', 'GET',
+            '/api/enterprise/models/{modelId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
+
+
     /**
         * List process definition models shared with the current user
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @return Promise<ResultListDataRepresentationModelRepresentation>
         */
     getModelsToIncludeInAppDefinition(): Promise<ResultListDataRepresentationModelRepresentation> {
@@ -289,15 +291,15 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/models-for-app-definition', 'GET',
+            '/api/enterprise/models-for-app-definition', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * List models (process, form, decision rule or app)
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param opts Optional parameters
         * @param opts.filter filter
         * @param opts.sort sort
@@ -330,15 +332,15 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/models', 'GET',
+            '/api/enterprise/models', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Create a new version of a model
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @param file file
         * @return Promise<ModelRepresentation>
@@ -348,11 +350,11 @@ export class ModelsApi extends BaseApi {
         let postBody = null;
 
         if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in importNewVersionUsingPOST");
+            throw new Error("Required param 'modelId' in importNewVersion");
         }
 
         if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in importNewVersionUsingPOST");
+            throw new Error("Required param 'file' in importNewVersion");
         }
 
         let pathParams = {
@@ -373,15 +375,15 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/models/{modelId}/newversion', 'POST',
+            '/api/enterprise/models/{modelId}/newversion', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Import a BPMN 2.0 XML file
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param file file
         * @return Promise<ModelRepresentation>
         */
@@ -390,7 +392,7 @@ export class ModelsApi extends BaseApi {
         let postBody = null;
 
         if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in importProcessModelUsingPOST");
+            throw new Error("Required param 'file' in importProcessModel");
         }
 
         let pathParams = {
@@ -411,15 +413,15 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/process-models/import', 'POST',
+            '/api/enterprise/process-models/import', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Update model content
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @param values values
         * @return Promise<ModelRepresentation>
@@ -429,11 +431,11 @@ export class ModelsApi extends BaseApi {
         let postBody = values;
 
         if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in saveModelUsingPOST");
+            throw new Error("Required param 'modelId' in saveModel");
         }
 
         if (values === undefined || values === null) {
-            throw new Error("Required param 'values' in saveModelUsingPOST");
+            throw new Error("Required param 'values' in saveModel");
         }
 
         let pathParams = {
@@ -453,15 +455,15 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/models/{modelId}/editor/json', 'POST',
+            '/api/enterprise/models/{modelId}/editor/json', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Update a model
-        * 
+        *
         * This method allows you to update the metadata of a model. In order to update the content of the model you will need to call the specific endpoint for that model type.
-        * 
+        *
         * @param modelId modelId
         * @param updatedModel updatedModel
         * @return Promise<ModelRepresentation>
@@ -471,11 +473,11 @@ export class ModelsApi extends BaseApi {
         let postBody = updatedModel;
 
         if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in updateModelUsingPUT");
+            throw new Error("Required param 'modelId' in updateModel");
         }
 
         if (updatedModel === undefined || updatedModel === null) {
-            throw new Error("Required param 'updatedModel' in updateModelUsingPUT");
+            throw new Error("Required param 'updatedModel' in updateModel");
         }
 
         let pathParams = {
@@ -495,15 +497,15 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/models/{modelId}', 'PUT',
+            '/api/enterprise/models/{modelId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Validate model content
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param modelId modelId
         * @param opts Optional parameters
         * @param opts.values values
@@ -514,7 +516,7 @@ export class ModelsApi extends BaseApi {
         let postBody = opts['values'];
 
         if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in validateModelUsingPOST");
+            throw new Error("Required param 'modelId' in validateModel");
         }
 
         let pathParams = {
@@ -534,7 +536,7 @@ export class ModelsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/models/{modelId}/editor/validate', 'POST',
+            '/api/enterprise/models/{modelId}/editor/validate', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }

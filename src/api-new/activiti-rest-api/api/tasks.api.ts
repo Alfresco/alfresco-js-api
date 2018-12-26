@@ -32,23 +32,23 @@ import { BaseApi } from './base.api';
 export class TasksApi extends BaseApi {
     /**
     * List the users and groups involved with a task
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param taskId taskId
     * @param identityLinkRepresentation identityLinkRepresentation
     * @return Promise<IdentityLinkRepresentation>
     */
-    createIdentityLink2(taskId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
+    createIdentityLink(taskId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
 
         let postBody = identityLinkRepresentation;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in createIdentityLinkUsingPOST2");
+            throw new Error("Required param 'taskId' in createIdentityLink");
         }
 
         if (identityLinkRepresentation === undefined || identityLinkRepresentation === null) {
-            throw new Error("Required param 'identityLinkRepresentation' in createIdentityLinkUsingPOST2");
+            throw new Error("Required param 'identityLinkRepresentation' in createIdentityLink");
         }
 
         let pathParams = {
@@ -68,15 +68,15 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/identitylinks', 'POST',
+            '/api/enterprise/tasks/{taskId}/identitylinks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Create a standalone task
-        * 
+        *
         * A standalone task is one which is not associated with any process instance.
-        * 
+        *
         * @param taskRepresentation taskRepresentation
         * @return Promise<TaskRepresentation>
         */
@@ -85,7 +85,7 @@ export class TasksApi extends BaseApi {
         let postBody = taskRepresentation;
 
         if (taskRepresentation === undefined || taskRepresentation === null) {
-            throw new Error("Required param 'taskRepresentation' in createNewTaskUsingPOST");
+            throw new Error("Required param 'taskRepresentation' in createNewTask");
         }
 
         let pathParams = {
@@ -105,39 +105,39 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks', 'POST',
+            '/api/enterprise/tasks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Remove a user or group involvement from a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param family family
         * @param identityId identityId
         * @param type type
         * @return Promise<{}>
         */
-    deleteIdentityLink2(taskId: string, family: string, identityId: string, type: string): Promise<any> {
+    deleteIdentityLink(taskId: string, family: string, identityId: string, type: string): Promise<any> {
 
         let postBody = null;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in deleteIdentityLinkUsingDELETE2");
+            throw new Error("Required param 'taskId' in deleteIdentityLink");
         }
 
         if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in deleteIdentityLinkUsingDELETE2");
+            throw new Error("Required param 'family' in deleteIdentityLink");
         }
 
         if (identityId === undefined || identityId === null) {
-            throw new Error("Required param 'identityId' in deleteIdentityLinkUsingDELETE2");
+            throw new Error("Required param 'identityId' in deleteIdentityLink");
         }
 
         if (type === undefined || type === null) {
-            throw new Error("Required param 'type' in deleteIdentityLinkUsingDELETE2");
+            throw new Error("Required param 'type' in deleteIdentityLink");
         }
 
         let pathParams = {
@@ -157,15 +157,15 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}', 'DELETE',
+            '/api/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Delete a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @return Promise<{}>
         */
@@ -174,7 +174,7 @@ export class TasksApi extends BaseApi {
         let postBody = null;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in deleteTaskUsingDELETE");
+            throw new Error("Required param 'taskId' in deleteTask");
         }
 
         let pathParams = {
@@ -194,15 +194,15 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}', 'DELETE',
+            '/api/enterprise/tasks/{taskId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Filter a list of tasks
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param tasksFilter tasksFilter
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
@@ -211,7 +211,7 @@ export class TasksApi extends BaseApi {
         let postBody = tasksFilter;
 
         if (tasksFilter === undefined || tasksFilter === null) {
-            throw new Error("Required param 'tasksFilter' in filterTasksUsingPOST");
+            throw new Error("Required param 'tasksFilter' in filterTasks");
         }
 
         let pathParams = {
@@ -231,39 +231,39 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/filter', 'POST',
+            '/api/enterprise/tasks/filter', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Get a user or group involvement with a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param family family
         * @param identityId identityId
         * @param type type
         * @return Promise<IdentityLinkRepresentation>
         */
-    getIdentityLinkType2(taskId: string, family: string, identityId: string, type: string): Promise<IdentityLinkRepresentation> {
+    getIdentityLinkType(taskId: string, family: string, identityId: string, type: string): Promise<IdentityLinkRepresentation> {
 
         let postBody = null;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getIdentityLinkTypeUsingGET2");
+            throw new Error("Required param 'taskId' in getIdentityLinkType");
         }
 
         if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in getIdentityLinkTypeUsingGET2");
+            throw new Error("Required param 'family' in getIdentityLinkType");
         }
 
         if (identityId === undefined || identityId === null) {
-            throw new Error("Required param 'identityId' in getIdentityLinkTypeUsingGET2");
+            throw new Error("Required param 'identityId' in getIdentityLinkType");
         }
 
         if (type === undefined || type === null) {
-            throw new Error("Required param 'type' in getIdentityLinkTypeUsingGET2");
+            throw new Error("Required param 'type' in getIdentityLinkType");
         }
 
         let pathParams = {
@@ -283,29 +283,29 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}', 'GET',
+            '/api/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * List either the users or groups involved with a process instance
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @param family family
         * @return Promise<IdentityLinkRepresentation>
         */
-    getIdentityLinksForFamily2(taskId: string, family: string): Promise<IdentityLinkRepresentation> {
+    getIdentityLinksForFamily(taskId: string, family: string): Promise<IdentityLinkRepresentation> {
 
         let postBody = null;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getIdentityLinksForFamilyUsingGET2");
+            throw new Error("Required param 'taskId' in getIdentityLinksForFamily");
         }
 
         if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in getIdentityLinksForFamilyUsingGET2");
+            throw new Error("Required param 'family' in getIdentityLinksForFamily");
         }
 
         let pathParams = {
@@ -325,24 +325,24 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/identitylinks/{family}', 'GET',
+            '/api/enterprise/tasks/{taskId}/identitylinks/{family}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * getIdentityLinks
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @return Promise<IdentityLinkRepresentation>
         */
-    getIdentityLinks2(taskId: string): Promise<IdentityLinkRepresentation> {
+    getIdentityLinks(taskId: string): Promise<IdentityLinkRepresentation> {
 
         let postBody = null;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getIdentityLinksUsingGET2");
+            throw new Error("Required param 'taskId' in getIdentityLinks");
         }
 
         let pathParams = {
@@ -362,24 +362,24 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/identitylinks', 'GET',
+            '/api/enterprise/tasks/{taskId}/identitylinks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Get the audit log for a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @return Promise<TaskAuditInfoRepresentation>
         */
-    getTaskAuditLog1(taskId: string): Promise<TaskAuditInfoRepresentation> {
+    getTaskAuditLog(taskId: string): Promise<TaskAuditInfoRepresentation> {
 
         let postBody = null;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getTaskAuditLogUsingGET1");
+            throw new Error("Required param 'taskId' in getTaskAuditLog");
         }
 
         let pathParams = {
@@ -399,15 +399,15 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/audit', 'GET',
+            '/api/enterprise/tasks/{taskId}/audit', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Get a task
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param taskId taskId
         * @return Promise<TaskRepresentation>
         */
@@ -416,7 +416,7 @@ export class TasksApi extends BaseApi {
         let postBody = null;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getTaskUsingGET");
+            throw new Error("Required param 'taskId' in getTask");
         }
 
         let pathParams = {
@@ -436,15 +436,15 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}', 'GET',
+            '/api/enterprise/tasks/{taskId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Query historic tasks
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param queryRequest queryRequest
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
@@ -453,7 +453,7 @@ export class TasksApi extends BaseApi {
         let postBody = queryRequest;
 
         if (queryRequest === undefined || queryRequest === null) {
-            throw new Error("Required param 'queryRequest' in listHistoricTasksUsingPOST");
+            throw new Error("Required param 'queryRequest' in listHistoricTasks");
         }
 
         let pathParams = {
@@ -473,15 +473,15 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/historic-tasks/query', 'POST',
+            '/api/enterprise/historic-tasks/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * List tasks
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param tasksQuery tasksQuery
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
@@ -490,7 +490,7 @@ export class TasksApi extends BaseApi {
         let postBody = tasksQuery;
 
         if (tasksQuery === undefined || tasksQuery === null) {
-            throw new Error("Required param 'tasksQuery' in listTasksUsingPOST");
+            throw new Error("Required param 'tasksQuery' in listTasks");
         }
 
         let pathParams = {
@@ -510,15 +510,15 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/query', 'POST',
+            '/api/enterprise/tasks/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Update a task
-        * 
+        *
         * You can edit only name, description and dueDate (ISO 8601 string).
-        * 
+        *
         * @param taskId taskId
         * @param updated updated
         * @return Promise<TaskRepresentation>
@@ -528,11 +528,11 @@ export class TasksApi extends BaseApi {
         let postBody = updated;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in updateTaskUsingPUT");
+            throw new Error("Required param 'taskId' in updateTask");
         }
 
         if (updated === undefined || updated === null) {
-            throw new Error("Required param 'updated' in updateTaskUsingPUT");
+            throw new Error("Required param 'updated' in updateTask");
         }
 
         let pathParams = {
@@ -552,7 +552,7 @@ export class TasksApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}', 'PUT',
+            '/api/enterprise/tasks/{taskId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }

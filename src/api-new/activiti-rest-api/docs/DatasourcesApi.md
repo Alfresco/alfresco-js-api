@@ -4,12 +4,12 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getDataSourcesUsingGET**](DatasourcesApi.md#getDataSourcesUsingGET) | **GET** /enterprise/editor/data-sources | Get data sources
+[**getDataSources**](DatasourcesApi.md#getDataSources) | **GET** /enterprise/editor/data-sources | Get data sources
 
 
-<a name="getDataSourcesUsingGET"></a>
-# **getDataSourcesUsingGET**
-> ResultListDataRepresentationDataSourceRepresentation getDataSourcesUsingGET(opts)
+<a name="getDataSources"></a>
+# **getDataSources**
+> ResultListDataRepresentationDataSourceRepresentation getDataSources(opts)
 
 Get data sources
 
@@ -29,7 +29,7 @@ let opts = {
   'tenantId': 789 //  | tenantId
 };
 
-datasourcesApi.getDataSourcesUsingGET(opts).then((data) => {
+datasourcesApi.getDataSources(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

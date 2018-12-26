@@ -63,7 +63,7 @@ export class ActivitiGroupsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/groups', 'GET',
+            '/api/enterprise/groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
@@ -80,7 +80,7 @@ export class ActivitiGroupsApi extends BaseApi {
         let postBody = null;
 
         if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in getUsersForGroupUsingGET");
+            throw new Error("Required param 'groupId' in getUsersForGroup");
         }
 
         let pathParams = {
@@ -100,7 +100,7 @@ export class ActivitiGroupsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/groups/{groupId}/users', 'GET',
+            '/api/enterprise/groups/{groupId}/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }

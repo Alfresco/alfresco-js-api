@@ -37,7 +37,7 @@ export class ProcessClient extends AlfrescoApiClient {
 
     changeHost() {
         this.host = this.config.hostBpm;
-        this.basePath = this.config.hostBpm + '/' + this.config.contextRootBpm;
+        this.basePath = `${this.config.hostBpm}/${this.config.contextRootBpm}`;
     }
 
     /**

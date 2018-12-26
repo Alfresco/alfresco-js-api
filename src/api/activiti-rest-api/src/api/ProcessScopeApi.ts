@@ -16,53 +16,15 @@
     */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { ProcessScopesApi as NewProcessScopeApi } from '../../../../api-new/activiti-rest-api/api/processScopes.api';
 
 /**
  * @deprecated 3.0.0
  */
-export class ProcessScopeApi {
+export class ProcessScopeApi extends NewProcessScopeApi {
 
-    apiClient: ProcessClient;
-
-    constructor(alfrescoApi?: AlfrescoApi) {
+    public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;
     }
-
-    /**
-     * Function to receive the result of the getRuntimeProcessScopes operation.
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/ProcessScopeRepresentation>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * getRuntimeProcessScopes
-     * @param {module:model/ProcessScopesRequestRepresentation} processScopesRequest processScopesRequest
-     */
-    getRuntimeProcessScopes(processScopesRequest) {
-        let postBody = processScopesRequest;
-
-        // verify the required parameter 'processScopesRequest' is set
-        if (processScopesRequest === undefined || processScopesRequest === null) {
-            throw "Missing param 'processScopesRequest' in getRuntimeProcessScopes";
-        }
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-scopes', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
-    }
 }
+

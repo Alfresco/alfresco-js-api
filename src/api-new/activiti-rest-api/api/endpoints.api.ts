@@ -25,9 +25,9 @@ import { BaseApi } from './base.api';
 export class EndpointsApi extends BaseApi {
     /**
     * Get an endpoint configuration
-    * 
-    * 
-    * 
+    *
+    *
+    *
     * @param endpointConfigurationId endpointConfigurationId
     * @return Promise<EndpointConfigurationRepresentation>
     */
@@ -36,7 +36,7 @@ export class EndpointsApi extends BaseApi {
         let postBody = null;
 
         if (endpointConfigurationId === undefined || endpointConfigurationId === null) {
-            throw new Error("Required param 'endpointConfigurationId' in getEndpointConfigurationUsingGET");
+            throw new Error("Required param 'endpointConfigurationId' in getEndpointConfiguration");
         }
 
         let pathParams = {
@@ -56,15 +56,15 @@ export class EndpointsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/editor/endpoints/{endpointConfigurationId}', 'GET',
+            '/api/enterprise/editor/endpoints/{endpointConfigurationId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * List endpoint configurations
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @return Promise<EndpointConfigurationRepresentation>
         */
     getEndpointConfigurations(): Promise<EndpointConfigurationRepresentation> {
@@ -88,7 +88,7 @@ export class EndpointsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/editor/endpoints', 'GET',
+            '/api/enterprise/editor/endpoints', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }

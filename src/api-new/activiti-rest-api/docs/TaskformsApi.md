@@ -4,17 +4,17 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**completeTaskFormUsingPOST**](TaskformsApi.md#completeTaskFormUsingPOST) | **POST** /enterprise/task-forms/{taskId} | Complete a task form
-[**getProcessInstanceVariablesUsingGET1**](TaskformsApi.md#getProcessInstanceVariablesUsingGET1) | **GET** /enterprise/task-forms/{taskId}/variables | Get task variables
-[**getRestFieldValuesUsingGET1**](TaskformsApi.md#getRestFieldValuesUsingGET1) | **GET** /enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve column field values
-[**getRestFieldValuesUsingGET2**](TaskformsApi.md#getRestFieldValuesUsingGET2) | **GET** /enterprise/task-forms/{taskId}/form-values/{field} | Retrieve populated field values
-[**getTaskFormUsingGET**](TaskformsApi.md#getTaskFormUsingGET) | **GET** /enterprise/task-forms/{taskId} | Get a task form
-[**saveTaskFormUsingPOST**](TaskformsApi.md#saveTaskFormUsingPOST) | **POST** /enterprise/task-forms/{taskId}/save-form | Save a task form
+[**completeTaskForm**](TaskformsApi.md#completeTaskForm) | **POST** /enterprise/task-forms/{taskId} | Complete a task form
+[**getProcessInstanceVariables**](TaskformsApi.md#getProcessInstanceVariables) | **GET** /enterprise/task-forms/{taskId}/variables | Get task variables
+[**getRestFieldValues**](TaskformsApi.md#getRestFieldValues) | **GET** /enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve column field values
+[**getRestFieldValues**](TaskformsApi.md#getRestFieldValues) | **GET** /enterprise/task-forms/{taskId}/form-values/{field} | Retrieve populated field values
+[**getTaskForm**](TaskformsApi.md#getTaskForm) | **GET** /enterprise/task-forms/{taskId} | Get a task form
+[**saveTaskForm**](TaskformsApi.md#saveTaskForm) | **POST** /enterprise/task-forms/{taskId}/save-form | Save a task form
 
 
-<a name="completeTaskFormUsingPOST"></a>
-# **completeTaskFormUsingPOST**
-> completeTaskFormUsingPOST(taskIdcompleteTaskFormRepresentation)
+<a name="completeTaskForm"></a>
+# **completeTaskForm**
+> completeTaskForm(taskIdcompleteTaskFormRepresentation)
 
 Complete a task form
 
@@ -31,7 +31,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.completeTaskFormUsingPOST(taskIdcompleteTaskFormRepresentation).then(() => {
+taskformsApi.completeTaskForm(taskIdcompleteTaskFormRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -50,9 +50,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getProcessInstanceVariablesUsingGET1"></a>
-# **getProcessInstanceVariablesUsingGET1**
-> ProcessInstanceVariableRepresentation getProcessInstanceVariablesUsingGET1(taskId)
+<a name="getProcessInstanceVariables"></a>
+# **getProcessInstanceVariables**
+> ProcessInstanceVariableRepresentation getProcessInstanceVariables(taskId)
 
 Get task variables
 
@@ -69,7 +69,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.getProcessInstanceVariablesUsingGET1(taskId).then((data) => {
+taskformsApi.getProcessInstanceVariables(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -87,9 +87,9 @@ Name | Type | Description  | Notes
 
 [**ProcessInstanceVariableRepresentation**](ProcessInstanceVariableRepresentation.md)
 
-<a name="getRestFieldValuesUsingGET1"></a>
-# **getRestFieldValuesUsingGET1**
-> FormValueRepresentation getRestFieldValuesUsingGET1(taskIdfieldcolumn)
+<a name="getRestFieldValues"></a>
+# **getRestFieldValues**
+> FormValueRepresentation getRestFieldValues(taskIdfieldcolumn)
 
 Retrieve column field values
 
@@ -108,7 +108,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.getRestFieldValuesUsingGET1(taskIdfieldcolumn).then((data) => {
+taskformsApi.getRestFieldValues(taskIdfieldcolumn).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -128,9 +128,9 @@ Name | Type | Description  | Notes
 
 [**FormValueRepresentation**](FormValueRepresentation.md)
 
-<a name="getRestFieldValuesUsingGET2"></a>
-# **getRestFieldValuesUsingGET2**
-> FormValueRepresentation getRestFieldValuesUsingGET2(taskIdfield)
+<a name="getRestFieldValues"></a>
+# **getRestFieldValues**
+> FormValueRepresentation getRestFieldValues(taskIdfield)
 
 Retrieve populated field values
 
@@ -149,7 +149,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.getRestFieldValuesUsingGET2(taskIdfield).then((data) => {
+taskformsApi.getRestFieldValues(taskIdfield).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -168,9 +168,9 @@ Name | Type | Description  | Notes
 
 [**FormValueRepresentation**](FormValueRepresentation.md)
 
-<a name="getTaskFormUsingGET"></a>
-# **getTaskFormUsingGET**
-> FormDefinitionRepresentation getTaskFormUsingGET(taskId)
+<a name="getTaskForm"></a>
+# **getTaskForm**
+> FormDefinitionRepresentation getTaskForm(taskId)
 
 Get a task form
 
@@ -187,7 +187,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.getTaskFormUsingGET(taskId).then((data) => {
+taskformsApi.getTaskForm(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -205,9 +205,9 @@ Name | Type | Description  | Notes
 
 [**FormDefinitionRepresentation**](FormDefinitionRepresentation.md)
 
-<a name="saveTaskFormUsingPOST"></a>
-# **saveTaskFormUsingPOST**
-> saveTaskFormUsingPOST(taskIdsaveTaskFormRepresentation)
+<a name="saveTaskForm"></a>
+# **saveTaskForm**
+> saveTaskForm(taskIdsaveTaskFormRepresentation)
 
 Save a task form
 
@@ -224,7 +224,7 @@ this.alfrescoApi.setConfig({
 let taskformsApi = new TaskformsApi(this.alfrescoApi);
 
 
-taskformsApi.saveTaskFormUsingPOST(taskIdsaveTaskFormRepresentation).then(() => {
+taskformsApi.saveTaskForm(taskIdsaveTaskFormRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

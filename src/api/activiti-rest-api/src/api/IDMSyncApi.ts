@@ -16,95 +16,14 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { IDMSyncApi as NewIDMSyncApi } from '../../../../api-new/activiti-rest-api/api/iDMSync.api';
 
 /**
  * @deprecated 3.0.0
  */
-export class IDMSyncApi {
+export class IDMSyncApi extends NewIDMSyncApi{
 
-    apiClient: ProcessClient;
-
-    constructor(alfrescoApi?: AlfrescoApi) {
+    public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;
-    }
-
-    /**
-     * Function to receive the result of the getLogFile operation.
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * getLogFile
-     * @param {Integer} syncLogEntryId syncLogEntryId
-     */
-    getLogFile(syncLogEntryId) {
-        let postBody = null;
-
-        // verify the required parameter 'syncLogEntryId' is set
-        if (syncLogEntryId === undefined || syncLogEntryId === null) {
-            throw "Missing param 'syncLogEntryId' in getLogFile";
-        }
-
-
-        let pathParams = {
-            'syncLogEntryId': syncLogEntryId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
-    }
-
-    /**
-     * Function to receive the result of the getSyncLogEntries operation.
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/SyncLogEntryRepresentation>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * getSyncLogEntries
-     * @param {Object} opts Optional parameters
-     * @param {Integer} opts.tenantId tenantId
-     * @param {Integer} opts.page page
-     * @param {Integer} opts.size size
-     */
-    getSyncLogEntries(opts?: any) {
-        opts = opts || {};
-        let postBody = null;
-
-
-        let pathParams = {};
-        let queryParams = {
-            'tenantId': opts['tenantId'],
-            'page': opts['page'],
-            'size': opts['size']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/idm-sync-log-entries', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
     }
 }

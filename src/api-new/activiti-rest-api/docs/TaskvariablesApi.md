@@ -4,17 +4,17 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createTaskVariableUsingPOST**](TaskvariablesApi.md#createTaskVariableUsingPOST) | **POST** /enterprise/tasks/{taskId}/variables | Create variables
-[**deleteAllLocalTaskVariablesUsingDELETE**](TaskvariablesApi.md#deleteAllLocalTaskVariablesUsingDELETE) | **DELETE** /enterprise/tasks/{taskId}/variables | Create or update variables
-[**deleteVariableUsingDELETE**](TaskvariablesApi.md#deleteVariableUsingDELETE) | **DELETE** /enterprise/tasks/{taskId}/variables/{variableName} | Delete a variable
-[**getVariableUsingGET**](TaskvariablesApi.md#getVariableUsingGET) | **GET** /enterprise/tasks/{taskId}/variables/{variableName} | Get a variable
-[**getVariablesUsingGET**](TaskvariablesApi.md#getVariablesUsingGET) | **GET** /enterprise/tasks/{taskId}/variables | List variables
-[**updateVariableUsingPUT**](TaskvariablesApi.md#updateVariableUsingPUT) | **PUT** /enterprise/tasks/{taskId}/variables/{variableName} | Update a variable
+[**createTaskVariable**](TaskvariablesApi.md#createTaskVariable) | **POST** /enterprise/tasks/{taskId}/variables | Create variables
+[**deleteAllLocalTaskVariables**](TaskvariablesApi.md#deleteAllLocalTaskVariables) | **DELETE** /enterprise/tasks/{taskId}/variables | Create or update variables
+[**deleteVariable**](TaskvariablesApi.md#deleteVariable) | **DELETE** /enterprise/tasks/{taskId}/variables/{variableName} | Delete a variable
+[**getVariable**](TaskvariablesApi.md#getVariable) | **GET** /enterprise/tasks/{taskId}/variables/{variableName} | Get a variable
+[**getVariables**](TaskvariablesApi.md#getVariables) | **GET** /enterprise/tasks/{taskId}/variables | List variables
+[**updateVariable**](TaskvariablesApi.md#updateVariable) | **PUT** /enterprise/tasks/{taskId}/variables/{variableName} | Update a variable
 
 
-<a name="createTaskVariableUsingPOST"></a>
-# **createTaskVariableUsingPOST**
-> RestVariable createTaskVariableUsingPOST(taskIdrestVariables)
+<a name="createTaskVariable"></a>
+# **createTaskVariable**
+> RestVariable createTaskVariable(taskIdrestVariables)
 
 Create variables
 
@@ -31,7 +31,7 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
-taskvariablesApi.createTaskVariableUsingPOST(taskIdrestVariables).then((data) => {
+taskvariablesApi.createTaskVariable(taskIdrestVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -50,9 +50,9 @@ Name | Type | Description  | Notes
 
 [**RestVariable**](RestVariable.md)
 
-<a name="deleteAllLocalTaskVariablesUsingDELETE"></a>
-# **deleteAllLocalTaskVariablesUsingDELETE**
-> deleteAllLocalTaskVariablesUsingDELETE(taskId)
+<a name="deleteAllLocalTaskVariables"></a>
+# **deleteAllLocalTaskVariables**
+> deleteAllLocalTaskVariables(taskId)
 
 Create or update variables
 
@@ -69,7 +69,7 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
-taskvariablesApi.deleteAllLocalTaskVariablesUsingDELETE(taskId).then(() => {
+taskvariablesApi.deleteAllLocalTaskVariables(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -87,9 +87,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="deleteVariableUsingDELETE"></a>
-# **deleteVariableUsingDELETE**
-> deleteVariableUsingDELETE(taskIdvariableNameopts)
+<a name="deleteVariable"></a>
+# **deleteVariable**
+> deleteVariable(taskIdvariableNameopts)
 
 Delete a variable
 
@@ -109,7 +109,7 @@ let opts = {
   'scope': scope_example //  | scope
 };
 
-taskvariablesApi.deleteVariableUsingDELETE(taskIdvariableNameopts).then(() => {
+taskvariablesApi.deleteVariable(taskIdvariableNameopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -129,9 +129,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getVariableUsingGET"></a>
-# **getVariableUsingGET**
-> RestVariable getVariableUsingGET(taskIdvariableNameopts)
+<a name="getVariable"></a>
+# **getVariable**
+> RestVariable getVariable(taskIdvariableNameopts)
 
 Get a variable
 
@@ -151,7 +151,7 @@ let opts = {
   'scope': scope_example //  | scope
 };
 
-taskvariablesApi.getVariableUsingGET(taskIdvariableNameopts).then((data) => {
+taskvariablesApi.getVariable(taskIdvariableNameopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -171,9 +171,9 @@ Name | Type | Description  | Notes
 
 [**RestVariable**](RestVariable.md)
 
-<a name="getVariablesUsingGET"></a>
-# **getVariablesUsingGET**
-> RestVariable getVariablesUsingGET(taskIdopts)
+<a name="getVariables"></a>
+# **getVariables**
+> RestVariable getVariables(taskIdopts)
 
 List variables
 
@@ -193,7 +193,7 @@ let opts = {
   'scope': scope_example //  | scope
 };
 
-taskvariablesApi.getVariablesUsingGET(taskIdopts).then((data) => {
+taskvariablesApi.getVariables(taskIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -212,9 +212,9 @@ Name | Type | Description  | Notes
 
 [**RestVariable**](RestVariable.md)
 
-<a name="updateVariableUsingPUT"></a>
-# **updateVariableUsingPUT**
-> RestVariable updateVariableUsingPUT(taskIdvariableNamerestVariable)
+<a name="updateVariable"></a>
+# **updateVariable**
+> RestVariable updateVariable(taskIdvariableNamerestVariable)
 
 Update a variable
 
@@ -231,7 +231,7 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
-taskvariablesApi.updateVariableUsingPUT(taskIdvariableNamerestVariable).then((data) => {
+taskvariablesApi.updateVariable(taskIdvariableNamerestVariable).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

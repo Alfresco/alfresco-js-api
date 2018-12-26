@@ -4,17 +4,17 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createOrUpdateProcessInstanceVariablesUsingPUT**](ProcessinstancevariablesApi.md#createOrUpdateProcessInstanceVariablesUsingPUT) | **PUT** /enterprise/process-instances/{processInstanceId}/variables | Create or update variables
-[**createProcessInstanceVariablesUsingPOST**](ProcessinstancevariablesApi.md#createProcessInstanceVariablesUsingPOST) | **POST** /enterprise/process-instances/{processInstanceId}/variables | Create variables
-[**deleteProcessInstanceVariableUsingDELETE**](ProcessinstancevariablesApi.md#deleteProcessInstanceVariableUsingDELETE) | **DELETE** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Delete a variable
-[**getProcessInstanceVariableUsingGET**](ProcessinstancevariablesApi.md#getProcessInstanceVariableUsingGET) | **GET** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Get a variable
-[**getProcessInstanceVariablesUsingGET**](ProcessinstancevariablesApi.md#getProcessInstanceVariablesUsingGET) | **GET** /enterprise/process-instances/{processInstanceId}/variables | List variables
-[**updateProcessInstanceVariableUsingPUT**](ProcessinstancevariablesApi.md#updateProcessInstanceVariableUsingPUT) | **PUT** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Update a variable
+[**createOrUpdateProcessInstanceVariables**](ProcessinstancevariablesApi.md#createOrUpdateProcessInstanceVariables) | **PUT** /enterprise/process-instances/{processInstanceId}/variables | Create or update variables
+[**createProcessInstanceVariables**](ProcessinstancevariablesApi.md#createProcessInstanceVariables) | **POST** /enterprise/process-instances/{processInstanceId}/variables | Create variables
+[**deleteProcessInstanceVariable**](ProcessinstancevariablesApi.md#deleteProcessInstanceVariable) | **DELETE** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Delete a variable
+[**getProcessInstanceVariable**](ProcessinstancevariablesApi.md#getProcessInstanceVariable) | **GET** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Get a variable
+[**getProcessInstanceVariables**](ProcessinstancevariablesApi.md#getProcessInstanceVariables) | **GET** /enterprise/process-instances/{processInstanceId}/variables | List variables
+[**updateProcessInstanceVariable**](ProcessinstancevariablesApi.md#updateProcessInstanceVariable) | **PUT** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Update a variable
 
 
-<a name="createOrUpdateProcessInstanceVariablesUsingPUT"></a>
-# **createOrUpdateProcessInstanceVariablesUsingPUT**
-> RestVariable createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceIdrestVariables)
+<a name="createOrUpdateProcessInstanceVariables"></a>
+# **createOrUpdateProcessInstanceVariables**
+> RestVariable createOrUpdateProcessInstanceVariables(processInstanceIdrestVariables)
 
 Create or update variables
 
@@ -31,7 +31,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.createOrUpdateProcessInstanceVariablesUsingPUT(processInstanceIdrestVariables).then((data) => {
+processinstancevariablesApi.createOrUpdateProcessInstanceVariables(processInstanceIdrestVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -50,9 +50,9 @@ Name | Type | Description  | Notes
 
 [**RestVariable**](RestVariable.md)
 
-<a name="createProcessInstanceVariablesUsingPOST"></a>
-# **createProcessInstanceVariablesUsingPOST**
-> RestVariable createProcessInstanceVariablesUsingPOST(processInstanceIdrestVariables)
+<a name="createProcessInstanceVariables"></a>
+# **createProcessInstanceVariables**
+> RestVariable createProcessInstanceVariables(processInstanceIdrestVariables)
 
 Create variables
 
@@ -69,7 +69,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.createProcessInstanceVariablesUsingPOST(processInstanceIdrestVariables).then((data) => {
+processinstancevariablesApi.createProcessInstanceVariables(processInstanceIdrestVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -88,9 +88,9 @@ Name | Type | Description  | Notes
 
 [**RestVariable**](RestVariable.md)
 
-<a name="deleteProcessInstanceVariableUsingDELETE"></a>
-# **deleteProcessInstanceVariableUsingDELETE**
-> deleteProcessInstanceVariableUsingDELETE(processInstanceIdvariableName)
+<a name="deleteProcessInstanceVariable"></a>
+# **deleteProcessInstanceVariable**
+> deleteProcessInstanceVariable(processInstanceIdvariableName)
 
 Delete a variable
 
@@ -107,7 +107,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.deleteProcessInstanceVariableUsingDELETE(processInstanceIdvariableName).then(() => {
+processinstancevariablesApi.deleteProcessInstanceVariable(processInstanceIdvariableName).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -126,9 +126,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getProcessInstanceVariableUsingGET"></a>
-# **getProcessInstanceVariableUsingGET**
-> RestVariable getProcessInstanceVariableUsingGET(processInstanceIdvariableName)
+<a name="getProcessInstanceVariable"></a>
+# **getProcessInstanceVariable**
+> RestVariable getProcessInstanceVariable(processInstanceIdvariableName)
 
 Get a variable
 
@@ -145,7 +145,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.getProcessInstanceVariableUsingGET(processInstanceIdvariableName).then((data) => {
+processinstancevariablesApi.getProcessInstanceVariable(processInstanceIdvariableName).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -164,9 +164,9 @@ Name | Type | Description  | Notes
 
 [**RestVariable**](RestVariable.md)
 
-<a name="getProcessInstanceVariablesUsingGET"></a>
-# **getProcessInstanceVariablesUsingGET**
-> RestVariable getProcessInstanceVariablesUsingGET(processInstanceId)
+<a name="getProcessInstanceVariables"></a>
+# **getProcessInstanceVariables**
+> RestVariable getProcessInstanceVariables(processInstanceId)
 
 List variables
 
@@ -183,7 +183,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.getProcessInstanceVariablesUsingGET(processInstanceId).then((data) => {
+processinstancevariablesApi.getProcessInstanceVariables(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -201,9 +201,9 @@ Name | Type | Description  | Notes
 
 [**RestVariable**](RestVariable.md)
 
-<a name="updateProcessInstanceVariableUsingPUT"></a>
-# **updateProcessInstanceVariableUsingPUT**
-> RestVariable updateProcessInstanceVariableUsingPUT(processInstanceIdvariableNamerestVariable)
+<a name="updateProcessInstanceVariable"></a>
+# **updateProcessInstanceVariable**
+> RestVariable updateProcessInstanceVariable(processInstanceIdvariableNamerestVariable)
 
 Update a variable
 
@@ -220,7 +220,7 @@ this.alfrescoApi.setConfig({
 let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoApi);
 
 
-processinstancevariablesApi.updateProcessInstanceVariableUsingPUT(processInstanceIdvariableNamerestVariable).then((data) => {
+processinstancevariablesApi.updateProcessInstanceVariable(processInstanceIdvariableNamerestVariable).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

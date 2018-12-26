@@ -4,27 +4,27 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activateUsingPOST**](AdmingroupsApi.md#activateUsingPOST) | **POST** /enterprise/admin/groups/{groupId}/action/activate | Activate a group
-[**addAllUsersToGroupUsingPOST**](AdmingroupsApi.md#addAllUsersToGroupUsingPOST) | **POST** /enterprise/admin/groups/{groupId}/add-all-users | Add users to a group
-[**addGroupCapabilitiesUsingPOST**](AdmingroupsApi.md#addGroupCapabilitiesUsingPOST) | **POST** /enterprise/admin/groups/{groupId}/capabilities | Add capabilities to a group
-[**addGroupMemberUsingPOST**](AdmingroupsApi.md#addGroupMemberUsingPOST) | **POST** /enterprise/admin/groups/{groupId}/members/{userId} | Add a user to a group
-[**addRelatedGroupUsingPOST**](AdmingroupsApi.md#addRelatedGroupUsingPOST) | **POST** /enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | Get a related group
-[**createNewGroupUsingPOST**](AdmingroupsApi.md#createNewGroupUsingPOST) | **POST** /enterprise/admin/groups | Create a group
-[**deleteGroupCapabilityUsingDELETE**](AdmingroupsApi.md#deleteGroupCapabilityUsingDELETE) | **DELETE** /enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId} | Remove a capability from a group
-[**deleteGroupMemberUsingDELETE**](AdmingroupsApi.md#deleteGroupMemberUsingDELETE) | **DELETE** /enterprise/admin/groups/{groupId}/members/{userId} | Delete a member from a group
-[**deleteGroupUsingDELETE**](AdmingroupsApi.md#deleteGroupUsingDELETE) | **DELETE** /enterprise/admin/groups/{groupId} | Delete a group
-[**deleteRelatedGroupUsingDELETE**](AdmingroupsApi.md#deleteRelatedGroupUsingDELETE) | **DELETE** /enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | Delete a related group
-[**getCapabilitiesUsingGET**](AdmingroupsApi.md#getCapabilitiesUsingGET) | **GET** /enterprise/admin/groups/{groupId}/potential-capabilities | List group capabilities
-[**getGroupUsersUsingGET**](AdmingroupsApi.md#getGroupUsersUsingGET) | **GET** /enterprise/admin/groups/{groupId}/users | Get group members
-[**getGroupUsingGET**](AdmingroupsApi.md#getGroupUsingGET) | **GET** /enterprise/admin/groups/{groupId} | Get a group
-[**getGroupsUsingGET1**](AdmingroupsApi.md#getGroupsUsingGET1) | **GET** /enterprise/admin/groups | Query groups
-[**getRelatedGroupsUsingGET**](AdmingroupsApi.md#getRelatedGroupsUsingGET) | **GET** /enterprise/admin/groups/{groupId}/related-groups | Get related groups
-[**updateGroupUsingPUT**](AdmingroupsApi.md#updateGroupUsingPUT) | **PUT** /enterprise/admin/groups/{groupId} | Update a group
+[**activate**](AdmingroupsApi.md#activate) | **POST** /enterprise/admin/groups/{groupId}/action/activate | Activate a group
+[**addAllUsersToGroup**](AdmingroupsApi.md#addAllUsersToGroup) | **POST** /enterprise/admin/groups/{groupId}/add-all-users | Add users to a group
+[**addGroupCapabilities**](AdmingroupsApi.md#addGroupCapabilities) | **POST** /enterprise/admin/groups/{groupId}/capabilities | Add capabilities to a group
+[**addGroupMember**](AdmingroupsApi.md#addGroupMember) | **POST** /enterprise/admin/groups/{groupId}/members/{userId} | Add a user to a group
+[**addRelatedGroup**](AdmingroupsApi.md#addRelatedGroup) | **POST** /enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | Get a related group
+[**createNewGroup**](AdmingroupsApi.md#createNewGroup) | **POST** /enterprise/admin/groups | Create a group
+[**deleteGroupCapability**](AdmingroupsApi.md#deleteGroupCapability) | **DELETE** /enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId} | Remove a capability from a group
+[**deleteGroupMember**](AdmingroupsApi.md#deleteGroupMember) | **DELETE** /enterprise/admin/groups/{groupId}/members/{userId} | Delete a member from a group
+[**deleteGroup**](AdmingroupsApi.md#deleteGroup) | **DELETE** /enterprise/admin/groups/{groupId} | Delete a group
+[**deleteRelatedGroup**](AdmingroupsApi.md#deleteRelatedGroup) | **DELETE** /enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | Delete a related group
+[**getCapabilities**](AdmingroupsApi.md#getCapabilities) | **GET** /enterprise/admin/groups/{groupId}/potential-capabilities | List group capabilities
+[**getGroupUsers**](AdmingroupsApi.md#getGroupUsers) | **GET** /enterprise/admin/groups/{groupId}/users | Get group members
+[**getGroup**](AdmingroupsApi.md#getGroup) | **GET** /enterprise/admin/groups/{groupId} | Get a group
+[**getGroups**](AdmingroupsApi.md#getGroups) | **GET** /enterprise/admin/groups | Query groups
+[**getRelatedGroups**](AdmingroupsApi.md#getRelatedGroups) | **GET** /enterprise/admin/groups/{groupId}/related-groups | Get related groups
+[**updateGroup**](AdmingroupsApi.md#updateGroup) | **PUT** /enterprise/admin/groups/{groupId} | Update a group
 
 
-<a name="activateUsingPOST"></a>
-# **activateUsingPOST**
-> activateUsingPOST(groupId)
+<a name="activate"></a>
+# **activate**
+> activate(groupId)
 
 Activate a group
 
@@ -41,7 +41,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.activateUsingPOST(groupId).then(() => {
+admingroupsApi.activate(groupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -59,9 +59,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="addAllUsersToGroupUsingPOST"></a>
-# **addAllUsersToGroupUsingPOST**
-> addAllUsersToGroupUsingPOST(groupId)
+<a name="addAllUsersToGroup"></a>
+# **addAllUsersToGroup**
+> addAllUsersToGroup(groupId)
 
 Add users to a group
 
@@ -78,7 +78,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.addAllUsersToGroupUsingPOST(groupId).then(() => {
+admingroupsApi.addAllUsersToGroup(groupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -96,9 +96,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="addGroupCapabilitiesUsingPOST"></a>
-# **addGroupCapabilitiesUsingPOST**
-> addGroupCapabilitiesUsingPOST(groupIdaddGroupCapabilitiesRepresentation)
+<a name="addGroupCapabilities"></a>
+# **addGroupCapabilities**
+> addGroupCapabilities(groupIdaddGroupCapabilitiesRepresentation)
 
 Add capabilities to a group
 
@@ -115,7 +115,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.addGroupCapabilitiesUsingPOST(groupIdaddGroupCapabilitiesRepresentation).then(() => {
+admingroupsApi.addGroupCapabilities(groupIdaddGroupCapabilitiesRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -134,9 +134,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="addGroupMemberUsingPOST"></a>
-# **addGroupMemberUsingPOST**
-> addGroupMemberUsingPOST(groupIduserId)
+<a name="addGroupMember"></a>
+# **addGroupMember**
+> addGroupMember(groupIduserId)
 
 Add a user to a group
 
@@ -153,7 +153,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.addGroupMemberUsingPOST(groupIduserId).then(() => {
+admingroupsApi.addGroupMember(groupIduserId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -172,9 +172,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="addRelatedGroupUsingPOST"></a>
-# **addRelatedGroupUsingPOST**
-> addRelatedGroupUsingPOST(groupIdrelatedGroupIdtype)
+<a name="addRelatedGroup"></a>
+# **addRelatedGroup**
+> addRelatedGroup(groupIdrelatedGroupIdtype)
 
 Get a related group
 
@@ -191,7 +191,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.addRelatedGroupUsingPOST(groupIdrelatedGroupIdtype).then(() => {
+admingroupsApi.addRelatedGroup(groupIdrelatedGroupIdtype).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -211,9 +211,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="createNewGroupUsingPOST"></a>
-# **createNewGroupUsingPOST**
-> GroupRepresentation createNewGroupUsingPOST(groupRepresentation)
+<a name="createNewGroup"></a>
+# **createNewGroup**
+> GroupRepresentation createNewGroup(groupRepresentation)
 
 Create a group
 
@@ -230,7 +230,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.createNewGroupUsingPOST(groupRepresentation).then((data) => {
+admingroupsApi.createNewGroup(groupRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -248,9 +248,9 @@ Name | Type | Description  | Notes
 
 [**GroupRepresentation**](GroupRepresentation.md)
 
-<a name="deleteGroupCapabilityUsingDELETE"></a>
-# **deleteGroupCapabilityUsingDELETE**
-> deleteGroupCapabilityUsingDELETE(groupIdgroupCapabilityId)
+<a name="deleteGroupCapability"></a>
+# **deleteGroupCapability**
+> deleteGroupCapability(groupIdgroupCapabilityId)
 
 Remove a capability from a group
 
@@ -267,7 +267,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.deleteGroupCapabilityUsingDELETE(groupIdgroupCapabilityId).then(() => {
+admingroupsApi.deleteGroupCapability(groupIdgroupCapabilityId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -286,9 +286,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="deleteGroupMemberUsingDELETE"></a>
-# **deleteGroupMemberUsingDELETE**
-> deleteGroupMemberUsingDELETE(groupIduserId)
+<a name="deleteGroupMember"></a>
+# **deleteGroupMember**
+> deleteGroupMember(groupIduserId)
 
 Delete a member from a group
 
@@ -305,7 +305,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.deleteGroupMemberUsingDELETE(groupIduserId).then(() => {
+admingroupsApi.deleteGroupMember(groupIduserId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -324,9 +324,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="deleteGroupUsingDELETE"></a>
-# **deleteGroupUsingDELETE**
-> deleteGroupUsingDELETE(groupId)
+<a name="deleteGroup"></a>
+# **deleteGroup**
+> deleteGroup(groupId)
 
 Delete a group
 
@@ -343,7 +343,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.deleteGroupUsingDELETE(groupId).then(() => {
+admingroupsApi.deleteGroup(groupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -361,9 +361,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="deleteRelatedGroupUsingDELETE"></a>
-# **deleteRelatedGroupUsingDELETE**
-> deleteRelatedGroupUsingDELETE(groupIdrelatedGroupId)
+<a name="deleteRelatedGroup"></a>
+# **deleteRelatedGroup**
+> deleteRelatedGroup(groupIdrelatedGroupId)
 
 Delete a related group
 
@@ -380,7 +380,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.deleteRelatedGroupUsingDELETE(groupIdrelatedGroupId).then(() => {
+admingroupsApi.deleteRelatedGroup(groupIdrelatedGroupId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -399,9 +399,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getCapabilitiesUsingGET"></a>
-# **getCapabilitiesUsingGET**
-> string getCapabilitiesUsingGET(groupId)
+<a name="getCapabilities"></a>
+# **getCapabilities**
+> string getCapabilities(groupId)
 
 List group capabilities
 
@@ -418,7 +418,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.getCapabilitiesUsingGET(groupId).then((data) => {
+admingroupsApi.getCapabilities(groupId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -436,9 +436,9 @@ Name | Type | Description  | Notes
 
 **string**
 
-<a name="getGroupUsersUsingGET"></a>
-# **getGroupUsersUsingGET**
-> ResultListDataRepresentationLightUserRepresentation getGroupUsersUsingGET(groupIdopts)
+<a name="getGroupUsers"></a>
+# **getGroupUsers**
+> ResultListDataRepresentationLightUserRepresentation getGroupUsers(groupIdopts)
 
 Get group members
 
@@ -460,7 +460,7 @@ let opts = {
   'pageSize': 56 //  | pageSize
 };
 
-admingroupsApi.getGroupUsersUsingGET(groupIdopts).then((data) => {
+admingroupsApi.getGroupUsers(groupIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -481,9 +481,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationLightUserRepresentation**](ResultListDataRepresentationLightUserRepresentation.md)
 
-<a name="getGroupUsingGET"></a>
-# **getGroupUsingGET**
-> AbstractGroupRepresentation getGroupUsingGET(groupIdopts)
+<a name="getGroup"></a>
+# **getGroup**
+> AbstractGroupRepresentation getGroup(groupIdopts)
 
 Get a group
 
@@ -504,7 +504,7 @@ let opts = {
   'summary': true //  | summary
 };
 
-admingroupsApi.getGroupUsingGET(groupIdopts).then((data) => {
+admingroupsApi.getGroup(groupIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -524,9 +524,9 @@ Name | Type | Description  | Notes
 
 [**AbstractGroupRepresentation**](AbstractGroupRepresentation.md)
 
-<a name="getGroupsUsingGET1"></a>
-# **getGroupsUsingGET1**
-> LightGroupRepresentation getGroupsUsingGET1(opts)
+<a name="getGroups"></a>
+# **getGroups**
+> LightGroupRepresentation getGroups(opts)
 
 Query groups
 
@@ -548,7 +548,7 @@ let opts = {
   'summary': true //  | summary
 };
 
-admingroupsApi.getGroupsUsingGET1(opts).then((data) => {
+admingroupsApi.getGroups(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -568,9 +568,9 @@ Name | Type | Description  | Notes
 
 [**LightGroupRepresentation**](LightGroupRepresentation.md)
 
-<a name="getRelatedGroupsUsingGET"></a>
-# **getRelatedGroupsUsingGET**
-> LightGroupRepresentation getRelatedGroupsUsingGET(groupId)
+<a name="getRelatedGroups"></a>
+# **getRelatedGroups**
+> LightGroupRepresentation getRelatedGroups(groupId)
 
 Get related groups
 
@@ -587,7 +587,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.getRelatedGroupsUsingGET(groupId).then((data) => {
+admingroupsApi.getRelatedGroups(groupId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -605,9 +605,9 @@ Name | Type | Description  | Notes
 
 [**LightGroupRepresentation**](LightGroupRepresentation.md)
 
-<a name="updateGroupUsingPUT"></a>
-# **updateGroupUsingPUT**
-> GroupRepresentation updateGroupUsingPUT(groupIdgroupRepresentation)
+<a name="updateGroup"></a>
+# **updateGroup**
+> GroupRepresentation updateGroup(groupIdgroupRepresentation)
 
 Update a group
 
@@ -624,7 +624,7 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 
-admingroupsApi.updateGroupUsingPUT(groupIdgroupRepresentation).then((data) => {
+admingroupsApi.updateGroup(groupIdgroupRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

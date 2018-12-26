@@ -279,6 +279,9 @@ export class AlfrescoApi {
                     resolve(data);
                 },
                 (error) => {
+                    this.contentAuth.invalidateSession();
+                    this.processAuth.invalidateSession();
+
                     if (error.status === 401) {
                         promise.emit('unauthorized');
                     }

@@ -4,13 +4,13 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getEndpointConfigurationUsingGET**](EndpointsApi.md#getEndpointConfigurationUsingGET) | **GET** /enterprise/editor/endpoints/{endpointConfigurationId} | Get an endpoint configuration
-[**getEndpointConfigurationsUsingGET**](EndpointsApi.md#getEndpointConfigurationsUsingGET) | **GET** /enterprise/editor/endpoints | List endpoint configurations
+[**getEndpointConfiguration**](EndpointsApi.md#getEndpointConfiguration) | **GET** /enterprise/editor/endpoints/{endpointConfigurationId} | Get an endpoint configuration
+[**getEndpointConfigurations**](EndpointsApi.md#getEndpointConfigurations) | **GET** /enterprise/editor/endpoints | List endpoint configurations
 
 
-<a name="getEndpointConfigurationUsingGET"></a>
-# **getEndpointConfigurationUsingGET**
-> EndpointConfigurationRepresentation getEndpointConfigurationUsingGET(endpointConfigurationId)
+<a name="getEndpointConfiguration"></a>
+# **getEndpointConfiguration**
+> EndpointConfigurationRepresentation getEndpointConfiguration(endpointConfigurationId)
 
 Get an endpoint configuration
 
@@ -27,7 +27,7 @@ this.alfrescoApi.setConfig({
 let endpointsApi = new EndpointsApi(this.alfrescoApi);
 
 
-endpointsApi.getEndpointConfigurationUsingGET(endpointConfigurationId).then((data) => {
+endpointsApi.getEndpointConfiguration(endpointConfigurationId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -45,9 +45,9 @@ Name | Type | Description  | Notes
 
 [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
 
-<a name="getEndpointConfigurationsUsingGET"></a>
-# **getEndpointConfigurationsUsingGET**
-> EndpointConfigurationRepresentation getEndpointConfigurationsUsingGET()
+<a name="getEndpointConfigurations"></a>
+# **getEndpointConfigurations**
+> EndpointConfigurationRepresentation getEndpointConfigurations()
 
 List endpoint configurations
 
@@ -63,7 +63,7 @@ this.alfrescoApi.setConfig({
 
 let endpointsApi = new EndpointsApi(this.alfrescoApi);
 
-endpointsApi.getEndpointConfigurationsUsingGET().then((data) => {
+endpointsApi.getEndpointConfigurations().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -16,609 +16,85 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { ContentApi as NewContentApi } from '../../../../api-new/activiti-rest-api/api/content.api';
+import { RelatedContentRepresentation } from '../../../../api-new/activiti-rest-api/model/relatedContentRepresentation';
+import { ProcessInstancesApi } from '../../../../api-new/activiti-rest-api/api/processInstances.api';
+import { ResultListDataRepresentationProcessContentRepresentation } from '../../../../api-new/activiti-rest-api/model/resultListDataRepresentationProcessContentRepresentation';
 
 /**
  * @deprecated 3.0.0
  */
 export class ContentApi {
 
-    apiClient: ProcessClient;
+    contentApi: NewContentApi;
+    processInstancesApi: ProcessInstancesApi;
 
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.contentApi = new NewContentApi(alfrescoApi);
+        this.processInstancesApi = new ProcessInstancesApi(alfrescoApi);
     }
 
-    /**
-     * Function to receive the result of the createRelatedContentOnProcessInstance operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * createRelatedContentOnProcessInstance
-     * @param {String} processInstanceId processInstanceId
-     * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
-     */
-    createRelatedContentOnProcessInstancePostBody(processInstanceId, relatedContent, opts?: any) {
-        let postBody = relatedContent;
-        opts = opts || {};
-
-        // verify the required parameter 'processInstanceId' is set
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw "Missing param 'processInstanceId' in createRelatedContentOnProcessInstance";
-        }
-
-        // verify the required parameter 'relatedContent' is set
-        if (relatedContent === undefined || relatedContent === null) {
-            throw "Missing param 'relatedContent' in createRelatedContentOnProcessInstance";
-        }
-
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-        let queryParams = {
-            'isRelatedContent': opts['isRelatedContent']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/content', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    createRelatedContentOnProcessInstancePostBody(processInstanceId: string, relatedContent: RelatedContentRepresentation, opts?: any): Promise<RelatedContentRepresentation> {
+        return this.contentApi.createRelatedContentOnProcessInstance(processInstanceId, relatedContent, opts);
     }
 
-    /**
-     * Function to receive the result of the createRelatedContentOnProcessInstance operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * createRelatedContentOnProcessInstance
-     * @param {String} processInstanceId processInstanceId
-     * @param {File} file file
-     */
-    createRelatedContentOnProcessInstance(processInstanceId, file, opts?: any) {
-        let postBody = null;
-        opts = opts || {};
-
-        // verify the required parameter 'processInstanceId' is set
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw "Missing param 'processInstanceId' in createRelatedContentOnProcessInstance";
-        }
-
-        // verify the required parameter 'file' is set
-        if (file === undefined || file === null) {
-            throw "Missing param 'file' in createRelatedContentOnProcessInstance";
-        }
-
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-        let queryParams = {
-            'isRelatedContent': opts['isRelatedContent']
-        };
-        let headerParams = {};
-        let formParams = {
-            'file': file
-        };
-
-
-        let contentTypes = ['multipart/form-data'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/raw-content', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    createRelatedContentOnProcessInstance(processInstanceId: string, file: Blob, opts?: any): Promise<RelatedContentRepresentation> {
+        return this.contentApi.createRelatedContentOnProcessInstance(processInstanceId, file, opts);
     }
 
-    /**
-     * Function to receive the result of the createRelatedContentOnTask operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * To relate content (eg from Alfresco) to a task
-     * @param {String} taskId taskId
-     * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
-     * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.isRelatedContent isRelatedContent
-     */
-    createRelatedContentOnTaskPostBody(taskId, relatedContent, opts?: any) {
-        opts = opts || {};
-        let postBody = relatedContent;
-
-        // verify the required parameter 'taskId' is set
-        if (taskId === undefined || taskId === null) {
-            throw "Missing param 'taskId' in createRelatedContentOnTask";
-        }
-
-        // verify the required parameter 'relatedContent' is set
-        if (relatedContent === undefined || relatedContent === null) {
-            throw "Missing param 'relatedContent' in createRelatedContentOnTask";
-        }
-
-
-        let pathParams = {
-            'taskId': taskId
-        };
-        let queryParams = {
-            'isRelatedContent': opts['isRelatedContent']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/content', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    createRelatedContentOnTaskPostBody(taskId: string, relatedContent: Blob, opts?: any): Promise<RelatedContentRepresentation> {
+        return this.contentApi.createRelatedContentOnTask(taskId, relatedContent, opts);
     }
 
-    /**
-     * Function to receive the result of the createRelatedContentOnTask operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Upload content to a task
-     * @param {String} taskId taskId
-     * @param {File} file file
-     * @param {Object} opts Optional parameters
-     * @param {Boolean} opts.isRelatedContent isRelatedContent
-     */
-    createRelatedContentOnTask(taskId, file, opts?: any) {
-        opts = opts || {};
-        let postBody = null;
-
-        // verify the required parameter 'taskId' is set
-        if (taskId === undefined || taskId === null) {
-            throw "Missing param 'taskId' in createRelatedContentOnTask";
-        }
-
-        // verify the required parameter 'file' is set
-        if (file === undefined || file === null) {
-            throw "Missing param 'file' in createRelatedContentOnTask";
-        }
-
-
-        let pathParams = {
-            'taskId': taskId
-        };
-        let queryParams = {
-            'isRelatedContent': opts['isRelatedContent']
-        };
-        let headerParams = {};
-        let formParams = {
-            'file': file
-        };
-
-
-        let contentTypes = ['multipart/form-data'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/raw-content', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    createRelatedContentOnTask(taskId: string, file: Blob, opts?: any): Promise<RelatedContentRepresentation> {
+        return this.contentApi.createRelatedContentOnTask(taskId, file, opts);
     }
 
-    /**
-     * Function to receive the result of the createTemporaryRawRelatedContent operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * createTemporaryRawRelatedContent
-     * @param {File} file file
-     */
-    createTemporaryRawRelatedContent(file) {
-        let postBody = null;
-
-        // verify the required parameter 'file' is set
-        if (file === undefined || file === null) {
-            throw "Missing param 'file' in createTemporaryRawRelatedContent";
-        }
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {
-            'file': file
-        };
-
-
-        let contentTypes = ['multipart/form-data'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content/raw', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    createTemporaryRawRelatedContent(file: Blob): Promise<RelatedContentRepresentation> {
+        return this.contentApi.createTemporaryRawRelatedContent(file);
     }
 
-    /**
-     * Function to receive the result of the createTemporaryRelatedContent operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * createTemporaryRelatedContent
-     * @param {module:model/RelatedContentRepresentation} relatedContent relatedContent
-     */
-    createTemporaryRelatedContent(relatedContent) {
-        let postBody = relatedContent;
-
-        // verify the required parameter 'relatedContent' is set
-        if (relatedContent === undefined || relatedContent === null) {
-            throw "Missing param 'relatedContent' in createTemporaryRelatedContent";
-        }
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    createTemporaryRelatedContent(relatedContent: RelatedContentRepresentation): Promise<RelatedContentRepresentation> {
+        return this.contentApi.createTemporaryRelatedContent(relatedContent);
     }
 
-    /**
-     * Function to receive the result of the deleteContent operation.
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * deleteContent
-     * @param {Integer} contentId contentId
-     */
-    deleteContent(contentId) {
-        let postBody = null;
-
-        // verify the required parameter 'contentId' is set
-        if (contentId === undefined || contentId === null) {
-            throw "Missing param 'contentId' in deleteContent";
-        }
-
-
-        let pathParams = {
-            'contentId': contentId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content/{contentId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    deleteContent(contentId: number): Promise<any> {
+        return this.contentApi.deleteContent(contentId);
     }
 
-    /**
-     * Function to receive the result of the getContent operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/RelatedContentRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * getContent
-     * @param {Integer} contentId contentId
-     */
-    getContent(contentId) {
-        let postBody = null;
-
-        // verify the required parameter 'contentId' is set
-        if (contentId === undefined || contentId === null) {
-            throw "Missing param 'contentId' in getContent";
-        }
-
-
-        let pathParams = {
-            'contentId': contentId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content/{contentId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getContent(contentId: number): Promise<RelatedContentRepresentation> {
+        return this.contentApi.getContent(contentId);
     }
 
-    /**
-     * Function to receive the result of the getProcessInstanceContent operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Retrieve content attached to process instance fields
-     * @param {String} processInstanceId processInstanceId
-     */
-    getProcessInstanceContent(processInstanceId) {
-        let postBody = null;
-
-        // verify the required parameter 'processInstanceId' is set
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw "Missing param 'processInstanceId' in getProcessInstanceContent";
-        }
-
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getProcessInstanceContent(processInstanceId: string): Promise<ResultListDataRepresentationProcessContentRepresentation> {
+        return this.processInstancesApi.getProcessInstanceContent(processInstanceId);
     }
 
-    /**
-     * Function to receive the result of the getRawContent operation.
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * getRawContent
-     * @param {Integer} contentId contentId
-     */
-    getRawContent(contentId) {
-        let postBody = null;
-
-        // verify the required parameter 'contentId' is set
-        if (contentId === undefined || contentId === null) {
-            throw "Missing param 'contentId' in getRawContent";
-        }
-
-
-        let pathParams = {
-            'contentId': contentId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = Object;
-        let contextRoot = null;
-        let responseType = 'blob';
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content/{contentId}/raw', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType, contextRoot, responseType
-        );
+    getRawContent(contentId: number): Promise<any> {
+        return this.contentApi.getRawContent(contentId);
     }
 
     getContentPreview(contentId) {
-        let postBody = null;
-
-        // verify the required parameter 'contentId' is set
-        if (contentId === undefined || contentId === null) {
-            throw "Missing param 'contentId' in getRawContent";
-        }
-
-
-        let pathParams = {
-            'contentId': contentId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = Object;
-        let contextRoot = null;
-        let responseType = 'blob';
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content/{contentId}/rendition/preview', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType, contextRoot, responseType
-        );
+        return this.contentApi.getRawContent(contentId, 'preview');
     }
-
 
     /**
      * Get content Raw URL for the given contentId
-     * @param {Integer} contentId contentId
+     * @param {Number} contentId contentId
      */
-    getRawContentUrl(contentId) {
-        return this.apiClient.basePath + '/api/enterprise/content/' + contentId + '/raw';
+    getRawContentUrl(contentId: number) {
+        return this.contentApi.getRawContentUrl(contentId);
     }
 
-    /**
-     * Get thumbnail for the given contentId
-     * @param {Integer} contentId contentId
-     */
-    getContentThumbnail(contentId) {
-        let postBody = null;
-
-        // verify the required parameter 'contentId' is set
-        if (contentId === undefined || contentId === null) {
-            throw "Missing param 'contentId' in getRawContent";
-        }
-
-
-        let pathParams = {
-            'contentId': contentId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = Object;
-        let contextRoot = null;
-        let responseType = 'blob';
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content/{contentId}/rendition/thumbnail', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType, contextRoot, responseType
-        );
+    getContentThumbnail(contentId: number) {
+        return this.contentApi.getRawContent(contentId, 'thumbnail');
     }
 
-    /**
-     * Function to receive the result of the getRelatedContentForProcessInstance operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * getRelatedContentForProcessInstance
-     * @param {String} processInstanceId processInstanceId
-     * @param {Boolean} isRelated isRelated optional
-     */
-    getRelatedContentForProcessInstance(processInstanceId, isRelated) {
-        isRelated = isRelated || true;
-        let postBody = null;
-
-        // verify the required parameter 'processInstanceId' is set
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw "Missing param 'processInstanceId' in getRelatedContentForProcessInstance";
-        }
-
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-        let queryParams = {
-            'isRelatedContent': isRelated
-        };
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getRelatedContentForProcessInstance(processInstanceId: string, isRelated) {
+        return this.contentApi.getRelatedContentForProcessInstance(processInstanceId, { isRelatedContent: isRelated });
     }
 
-    /**
-     * Function to receive the result of the getRelatedContentForTask operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     * @param {Boolean} isRelated isRelated optional
-     */
-
-    /**
-     * Retrieve which content is attached to a task
-     * @param {String} taskId taskId
-     */
-    getRelatedContentForTask(taskId, isRelated) {
-        isRelated = isRelated || true;
-        let postBody = null;
-
-        // verify the required parameter 'taskId' is set
-        if (taskId === undefined || taskId === null) {
-            throw "Missing param 'taskId' in getRelatedContentForTask";
-        }
-
-
-        let pathParams = {
-            'taskId': taskId
-        };
-        let queryParams = {
-            'isRelatedContent': isRelated
-        };
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getRelatedContentForTask(taskId: string, isRelated) {
+        return this.contentApi.getRelatedContentForTask(taskId, { isRelatedContent: isRelated });
     }
 }

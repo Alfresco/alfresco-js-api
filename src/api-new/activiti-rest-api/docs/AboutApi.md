@@ -4,12 +4,12 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAppVersionUsingGET**](AboutApi.md#getAppVersionUsingGET) | **GET** /enterprise/app-version | Get server type and version
+[**getAppVersion**](AboutApi.md#getAppVersion) | **GET** /enterprise/app-version | Get server type and version
 
 
-<a name="getAppVersionUsingGET"></a>
-# **getAppVersionUsingGET**
-> { [key: string]: string; } getAppVersionUsingGET()
+<a name="getAppVersion"></a>
+# **getAppVersion**
+> { [key: string]: string; } getAppVersion()
 
 Get server type and version
 
@@ -27,7 +27,7 @@ this.alfrescoApi.setConfig({
 
 let aboutApi = new AboutApi(this.alfrescoApi);
 
-aboutApi.getAppVersionUsingGET().then((data) => {
+aboutApi.getAppVersion().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -4,13 +4,13 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getModelHistoryCollectionUsingGET**](ModelshistoryApi.md#getModelHistoryCollectionUsingGET) | **GET** /enterprise/models/{modelId}/history | List a model's historic versions
-[**getProcessModelHistoryUsingGET**](ModelshistoryApi.md#getProcessModelHistoryUsingGET) | **GET** /enterprise/models/{modelId}/history/{modelHistoryId} | Get a historic version of a model
+[**getModelHistoryCollection**](ModelshistoryApi.md#getModelHistoryCollection) | **GET** /enterprise/models/{modelId}/history | List a model's historic versions
+[**getProcessModelHistory**](ModelshistoryApi.md#getProcessModelHistory) | **GET** /enterprise/models/{modelId}/history/{modelHistoryId} | Get a historic version of a model
 
 
-<a name="getModelHistoryCollectionUsingGET"></a>
-# **getModelHistoryCollectionUsingGET**
-> ResultListDataRepresentationModelRepresentation getModelHistoryCollectionUsingGET(modelIdopts)
+<a name="getModelHistoryCollection"></a>
+# **getModelHistoryCollection**
+> ResultListDataRepresentationModelRepresentation getModelHistoryCollection(modelIdopts)
 
 List a model's historic versions
 
@@ -30,7 +30,7 @@ let opts = {
   'includeLatestVersion': true //  | includeLatestVersion
 };
 
-modelshistoryApi.getModelHistoryCollectionUsingGET(modelIdopts).then((data) => {
+modelshistoryApi.getModelHistoryCollection(modelIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -49,9 +49,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationModelRepresentation**](ResultListDataRepresentationModelRepresentation.md)
 
-<a name="getProcessModelHistoryUsingGET"></a>
-# **getProcessModelHistoryUsingGET**
-> ModelRepresentation getProcessModelHistoryUsingGET(modelIdmodelHistoryId)
+<a name="getProcessModelHistory"></a>
+# **getProcessModelHistory**
+> ModelRepresentation getProcessModelHistory(modelIdmodelHistoryId)
 
 Get a historic version of a model
 
@@ -68,7 +68,7 @@ this.alfrescoApi.setConfig({
 let modelshistoryApi = new ModelshistoryApi(this.alfrescoApi);
 
 
-modelshistoryApi.getProcessModelHistoryUsingGET(modelIdmodelHistoryId).then((data) => {
+modelshistoryApi.getProcessModelHistory(modelIdmodelHistoryId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

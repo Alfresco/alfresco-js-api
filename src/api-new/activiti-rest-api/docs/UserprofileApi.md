@@ -4,16 +4,17 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**changePasswordUsingPOST**](UserprofileApi.md#changePasswordUsingPOST) | **POST** /enterprise/profile-password | Change user password
-[**getProfilePictureUsingGET**](UserprofileApi.md#getProfilePictureUsingGET) | **GET** /enterprise/profile-picture | Retrieve user profile picture
-[**getProfileUsingGET**](UserprofileApi.md#getProfileUsingGET) | **GET** /enterprise/profile | Get user profile
+[**changePassword**](UserprofileApi.md#changePassword) | **POST** /enterprise/profile-password | Change user password
+[**getProfilePicture**](UserprofileApi.md#getProfilePicture) | **GET** /enterprise/profile-picture | Retrieve user profile picture
+[**getProfile**](UserprofileApi.md#getProfile) | **GET** /enterprise/profile | Get user profile
 [**updateProfile**](UserprofileApi.md#updateProfile) | **POST** /enterprise/profile | Update user profile
-[**uploadProfilePictureUsingPOST**](UserprofileApi.md#uploadProfilePictureUsingPOST) | **POST** /enterprise/profile-picture | Change user profile picture
+[**uploadProfilePicture**](UserprofileApi.md#uploadProfilePicture) | **POST** /enterprise/profile-picture | Change user profile picture
+[**getProfilePictureUrl**](ProfileApi.md#getProfile) | **GET** /app/rest/admin/profile-picture | Retrieve Url user profile picture
 
 
-<a name="changePasswordUsingPOST"></a>
-# **changePasswordUsingPOST**
-> changePasswordUsingPOST(changePasswordRepresentation)
+<a name="changePassword"></a>
+# **changePassword**
+> changePassword(changePasswordRepresentation)
 
 Change user password
 
@@ -30,7 +31,7 @@ this.alfrescoApi.setConfig({
 let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
 
-userprofileApi.changePasswordUsingPOST(changePasswordRepresentation).then(() => {
+userprofileApi.changePassword(changePasswordRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -48,9 +49,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getProfilePictureUsingGET"></a>
-# **getProfilePictureUsingGET**
-> Blob getProfilePictureUsingGET()
+<a name="getProfilePicture"></a>
+# **getProfilePicture**
+> Blob getProfilePicture()
 
 Retrieve user profile picture
 
@@ -68,7 +69,7 @@ this.alfrescoApi.setConfig({
 
 let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
-userprofileApi.getProfilePictureUsingGET().then((data) => {
+userprofileApi.getProfilePicture().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -83,9 +84,9 @@ This endpoint does not need any parameter.
 
 **Blob**
 
-<a name="getProfileUsingGET"></a>
-# **getProfileUsingGET**
-> UserRepresentation getProfileUsingGET()
+<a name="getProfile"></a>
+# **getProfile**
+> UserRepresentation getProfile()
 
 Get user profile
 
@@ -103,7 +104,7 @@ this.alfrescoApi.setConfig({
 
 let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
-userprofileApi.getProfileUsingGET().then((data) => {
+userprofileApi.getProfile().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -157,9 +158,9 @@ Name | Type | Description  | Notes
 
 [**UserRepresentation**](UserRepresentation.md)
 
-<a name="uploadProfilePictureUsingPOST"></a>
-# **uploadProfilePictureUsingPOST**
-> ImageUploadRepresentation uploadProfilePictureUsingPOST(file)
+<a name="uploadProfilePicture"></a>
+# **uploadProfilePicture**
+> ImageUploadRepresentation uploadProfilePicture(file)
 
 Change user profile picture
 
@@ -176,7 +177,7 @@ this.alfrescoApi.setConfig({
 let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
 
-userprofileApi.uploadProfilePictureUsingPOST(file).then((data) => {
+userprofileApi.uploadProfilePicture(file).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -194,3 +195,43 @@ Name | Type | Description  | Notes
 
 [**ImageUploadRepresentation**](ImageUploadRepresentation.md)
 
+
+<a name="getProfilePictureUrl"></a>
+# **getProfilePictureUrl**
+> File getProfilePictureUrl()
+
+Retrieve user url profile picture
+
+Generally returns an URL image file
+
+### Example
+```javascript
+import UserprofileApi from 'UserprofileApi';
+import { AlfrescoApi } from 'alfresco-js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let userprofileApi = new UserprofileApi(this.alfrescoApi);
+
+userprofileApi.getProfilePictureUrl();
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**String**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+ 

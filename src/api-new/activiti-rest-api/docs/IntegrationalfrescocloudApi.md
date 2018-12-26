@@ -4,17 +4,17 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**confirmAuthorisationUsingGET**](IntegrationalfrescocloudApi.md#confirmAuthorisationUsingGET) | **GET** /enterprise/integration/alfresco-cloud/confirm-auth-request | Alfresco Cloud Authorization
-[**getAllNetworksUsingGET**](IntegrationalfrescocloudApi.md#getAllNetworksUsingGET) | **GET** /enterprise/integration/alfresco-cloud/networks | List Alfresco networks
-[**getAllSitesUsingGET**](IntegrationalfrescocloudApi.md#getAllSitesUsingGET) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites | List Alfresco sites
-[**getContentInFolderPathUsingGET**](IntegrationalfrescocloudApi.md#getContentInFolderPathUsingGET) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/folderpath/{folderPath}/content | List files and folders inside a specific folder identified by path
-[**getContentInFolderUsingGET**](IntegrationalfrescocloudApi.md#getContentInFolderUsingGET) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List files and folders inside a specific folder
-[**getContentInSiteUsingGET**](IntegrationalfrescocloudApi.md#getContentInSiteUsingGET) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content | List files and folders inside a specific site
+[**confirmAuthorisation**](IntegrationalfrescocloudApi.md#confirmAuthorisation) | **GET** /enterprise/integration/alfresco-cloud/confirm-auth-request | Alfresco Cloud Authorization
+[**getAllNetworks**](IntegrationalfrescocloudApi.md#getAllNetworks) | **GET** /enterprise/integration/alfresco-cloud/networks | List Alfresco networks
+[**getAllSites**](IntegrationalfrescocloudApi.md#getAllSites) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites | List Alfresco sites
+[**getContentInFolderPath**](IntegrationalfrescocloudApi.md#getContentInFolderPath) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/folderpath/{folderPath}/content | List files and folders inside a specific folder identified by path
+[**getContentInFolder**](IntegrationalfrescocloudApi.md#getContentInFolder) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List files and folders inside a specific folder
+[**getContentInSite**](IntegrationalfrescocloudApi.md#getContentInSite) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content | List files and folders inside a specific site
 
 
-<a name="confirmAuthorisationUsingGET"></a>
-# **confirmAuthorisationUsingGET**
-> confirmAuthorisationUsingGET(code)
+<a name="confirmAuthorisation"></a>
+# **confirmAuthorisation**
+> confirmAuthorisation(code)
 
 Alfresco Cloud Authorization
 
@@ -33,7 +33,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-integrationalfrescocloudApi.confirmAuthorisationUsingGET(code).then(() => {
+integrationalfrescocloudApi.confirmAuthorisation(code).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -51,9 +51,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getAllNetworksUsingGET"></a>
-# **getAllNetworksUsingGET**
-> ResultListDataRepresentationAlfrescoNetworkRepresenation getAllNetworksUsingGET()
+<a name="getAllNetworks"></a>
+# **getAllNetworks**
+> ResultListDataRepresentationAlfrescoNetworkRepresenation getAllNetworks()
 
 List Alfresco networks
 
@@ -69,7 +69,7 @@ this.alfrescoApi.setConfig({
 
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
-integrationalfrescocloudApi.getAllNetworksUsingGET().then((data) => {
+integrationalfrescocloudApi.getAllNetworks().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -84,9 +84,9 @@ This endpoint does not need any parameter.
 
 [**ResultListDataRepresentationAlfrescoNetworkRepresenation**](ResultListDataRepresentationAlfrescoNetworkRepresenation.md)
 
-<a name="getAllSitesUsingGET"></a>
-# **getAllSitesUsingGET**
-> ResultListDataRepresentationAlfrescoSiteRepresenation getAllSitesUsingGET(networkId)
+<a name="getAllSites"></a>
+# **getAllSites**
+> ResultListDataRepresentationAlfrescoSiteRepresenation getAllSites(networkId)
 
 List Alfresco sites
 
@@ -105,7 +105,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-integrationalfrescocloudApi.getAllSitesUsingGET(networkId).then((data) => {
+integrationalfrescocloudApi.getAllSites(networkId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -123,9 +123,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoSiteRepresenation**](ResultListDataRepresentationAlfrescoSiteRepresenation.md)
 
-<a name="getContentInFolderPathUsingGET"></a>
-# **getContentInFolderPathUsingGET**
-> ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderPathUsingGET(networkIdopts)
+<a name="getContentInFolderPath"></a>
+# **getContentInFolderPath**
+> ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderPath(networkIdopts)
 
 List files and folders inside a specific folder identified by path
 
@@ -146,7 +146,7 @@ let opts = {
   'path': path_example //  | path
 };
 
-integrationalfrescocloudApi.getContentInFolderPathUsingGET(networkIdopts).then((data) => {
+integrationalfrescocloudApi.getContentInFolderPath(networkIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -166,9 +166,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
 
-<a name="getContentInFolderUsingGET"></a>
-# **getContentInFolderUsingGET**
-> ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderUsingGET(networkIdfolderId)
+<a name="getContentInFolder"></a>
+# **getContentInFolder**
+> ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolder(networkIdfolderId)
 
 List files and folders inside a specific folder
 
@@ -185,7 +185,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-integrationalfrescocloudApi.getContentInFolderUsingGET(networkIdfolderId).then((data) => {
+integrationalfrescocloudApi.getContentInFolder(networkIdfolderId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -204,9 +204,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
 
-<a name="getContentInSiteUsingGET"></a>
-# **getContentInSiteUsingGET**
-> ResultListDataRepresentationAlfrescoContentRepresentation getContentInSiteUsingGET(networkIdsiteId)
+<a name="getContentInSite"></a>
+# **getContentInSite**
+> ResultListDataRepresentationAlfrescoContentRepresentation getContentInSite(networkIdsiteId)
 
 List files and folders inside a specific site
 
@@ -223,7 +223,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 
-integrationalfrescocloudApi.getContentInSiteUsingGET(networkIdsiteId).then((data) => {
+integrationalfrescocloudApi.getContentInSite(networkIdsiteId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

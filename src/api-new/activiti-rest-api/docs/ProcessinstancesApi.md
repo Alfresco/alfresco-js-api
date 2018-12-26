@@ -4,30 +4,31 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activateProcessInstanceUsingPUT**](ProcessinstancesApi.md#activateProcessInstanceUsingPUT) | **PUT** /enterprise/process-instances/{processInstanceId}/activate | Activate a process instance
-[**createIdentityLinkUsingPOST1**](ProcessinstancesApi.md#createIdentityLinkUsingPOST1) | **POST** /enterprise/process-instances/{processInstanceId}/identitylinks | Add a user or group involvement to a process instance
-[**deleteIdentityLinkUsingDELETE1**](ProcessinstancesApi.md#deleteIdentityLinkUsingDELETE1) | **DELETE** /enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type} | Remove a user or group involvement from a process instance
-[**deleteProcessInstanceUsingDELETE**](ProcessinstancesApi.md#deleteProcessInstanceUsingDELETE) | **DELETE** /enterprise/process-instances/{processInstanceId} | Cancel or remove a process instance
-[**filterProcessInstancesUsingPOST**](ProcessinstancesApi.md#filterProcessInstancesUsingPOST) | **POST** /enterprise/process-instances/filter | List process instances using a filter
-[**getHistoricProcessInstanceDecisionTasksUsingGET**](ProcessinstancesApi.md#getHistoricProcessInstanceDecisionTasksUsingGET) | **GET** /enterprise/process-instances/{processInstanceId}/decision-tasks | Get decision tasks in a process instance
-[**getHistoricProcessInstanceVariablesUsingGET**](ProcessinstancesApi.md#getHistoricProcessInstanceVariablesUsingGET) | **GET** /enterprise/process-instances/{processInstanceId}/historic-variables | Get historic variables for a process instance
-[**getHistoricProcessInstancesUsingPOST**](ProcessinstancesApi.md#getHistoricProcessInstancesUsingPOST) | **POST** /enterprise/historic-process-instances/query | Query historic process instances
-[**getIdentityLinkTypeUsingGET1**](ProcessinstancesApi.md#getIdentityLinkTypeUsingGET1) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type} | Get a user or group involvement with a process instance
-[**getIdentityLinksForFamilyUsingGET1**](ProcessinstancesApi.md#getIdentityLinksForFamilyUsingGET1) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks/{family} | List either the users or groups involved with a process instance
-[**getIdentityLinksUsingGET1**](ProcessinstancesApi.md#getIdentityLinksUsingGET1) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks | List the users and groups involved with a process instance
-[**getProcessInstanceContentUsingGET**](ProcessinstancesApi.md#getProcessInstanceContentUsingGET) | **GET** /enterprise/process-instances/{processInstanceId}/field-content | List content attached to process instance fields
-[**getProcessInstanceDiagramUsingGET**](ProcessinstancesApi.md#getProcessInstanceDiagramUsingGET) | **GET** /enterprise/process-instances/{processInstanceId}/diagram | Get the process diagram for the process instance
-[**getProcessInstanceStartFormUsingGET**](ProcessinstancesApi.md#getProcessInstanceStartFormUsingGET) | **GET** /enterprise/process-instances/{processInstanceId}/start-form | Get a process instance start form
-[**getProcessInstanceUsingGET**](ProcessinstancesApi.md#getProcessInstanceUsingGET) | **GET** /enterprise/process-instances/{processInstanceId} | Get a process instance
-[**getProcessInstancesUsingPOST**](ProcessinstancesApi.md#getProcessInstancesUsingPOST) | **POST** /enterprise/process-instances/query | Query process instances
-[**getTaskAuditLogUsingGET**](ProcessinstancesApi.md#getTaskAuditLogUsingGET) | **GET** /enterprise/process-instances/{processInstanceId}/audit-log | Get the audit log for a process instance
-[**startNewProcessInstanceUsingPOST**](ProcessinstancesApi.md#startNewProcessInstanceUsingPOST) | **POST** /enterprise/process-instances | Start a process instance
-[**suspendProcessInstanceUsingPUT**](ProcessinstancesApi.md#suspendProcessInstanceUsingPUT) | **PUT** /enterprise/process-instances/{processInstanceId}/suspend | Suspend a process instance
+[**activateProcessInstance**](ProcessinstancesApi.md#activateProcessInstance) | **PUT** /enterprise/process-instances/{processInstanceId}/activate | Activate a process instance
+[**createIdentityLink**](ProcessinstancesApi.md#createIdentityLink) | **POST** /enterprise/process-instances/{processInstanceId}/identitylinks | Add a user or group involvement to a process instance
+[**deleteIdentityLink**](ProcessinstancesApi.md#deleteIdentityLink) | **DELETE** /enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type} | Remove a user or group involvement from a process instance
+[**deleteProcessInstance**](ProcessinstancesApi.md#deleteProcessInstance) | **DELETE** /enterprise/process-instances/{processInstanceId} | Cancel or remove a process instance
+[**filterProcessInstances**](ProcessinstancesApi.md#filterProcessInstances) | **POST** /enterprise/process-instances/filter | List process instances using a filter
+[**getHistoricProcessInstanceDecisionTasks**](ProcessinstancesApi.md#getHistoricProcessInstanceDecisionTasks) | **GET** /enterprise/process-instances/{processInstanceId}/decision-tasks | Get decision tasks in a process instance
+[**getHistoricProcessInstanceVariables**](ProcessinstancesApi.md#getHistoricProcessInstanceVariables) | **GET** /enterprise/process-instances/{processInstanceId}/historic-variables | Get historic variables for a process instance
+[**getHistoricProcessInstances**](ProcessinstancesApi.md#getHistoricProcessInstances) | **POST** /enterprise/historic-process-instances/query | Query historic process instances
+[**getIdentityLinkType**](ProcessinstancesApi.md#getIdentityLinkType) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type} | Get a user or group involvement with a process instance
+[**getIdentityLinksForFamily**](ProcessinstancesApi.md#getIdentityLinksForFamily) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks/{family} | List either the users or groups involved with a process instance
+[**getIdentityLinks**](ProcessinstancesApi.md#getIdentityLinks) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks | List the users and groups involved with a process instance
+[**getProcessInstanceContent**](ProcessinstancesApi.md#getProcessInstanceContent) | **GET** /enterprise/process-instances/{processInstanceId}/field-content | List content attached to process instance fields
+[**getProcessInstanceDiagram**](ProcessinstancesApi.md#getProcessInstanceDiagram) | **GET** /enterprise/process-instances/{processInstanceId}/diagram | Get the process diagram for the process instance
+[**getProcessInstanceStartForm**](ProcessinstancesApi.md#getProcessInstanceStartForm) | **GET** /enterprise/process-instances/{processInstanceId}/start-form | Get a process instance start form
+[**getProcessInstance**](ProcessinstancesApi.md#getProcessInstance) | **GET** /enterprise/process-instances/{processInstanceId} | Get a process instance
+[**getProcessInstances**](ProcessinstancesApi.md#getProcessInstances) | **POST** /enterprise/process-instances/query | Query process instances
+[**getTaskAuditLog**](ProcessinstancesApi.md#getTaskAuditLog) | **GET** /enterprise/process-instances/{processInstanceId}/audit-log | Get the audit log for a process instance
+[**startNewProcessInstance**](ProcessinstancesApi.md#startNewProcessInstance) | **POST** /enterprise/process-instances | Start a process instance
+[**suspendProcessInstance**](ProcessinstancesApi.md#suspendProcessInstance) | **PUT** /enterprise/process-instances/{processInstanceId}/suspend | Suspend a process instance
+[**getProcessAuditPdf**](ProcessApi.md#getProcessAuditPdf) | **GET** /app/rest/process-instances/{processId}/audit | Retrieve the process audit infromation in pdf format
 
 
-<a name="activateProcessInstanceUsingPUT"></a>
-# **activateProcessInstanceUsingPUT**
-> ProcessInstanceRepresentation activateProcessInstanceUsingPUT(processInstanceId)
+<a name="activateProcessInstance"></a>
+# **activateProcessInstance**
+> ProcessInstanceRepresentation activateProcessInstance(processInstanceId)
 
 Activate a process instance
 
@@ -44,7 +45,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.activateProcessInstanceUsingPUT(processInstanceId).then((data) => {
+processinstancesApi.activateProcessInstance(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -62,9 +63,9 @@ Name | Type | Description  | Notes
 
 [**ProcessInstanceRepresentation**](ProcessInstanceRepresentation.md)
 
-<a name="createIdentityLinkUsingPOST1"></a>
-# **createIdentityLinkUsingPOST1**
-> IdentityLinkRepresentation createIdentityLinkUsingPOST1(processInstanceIdidentityLinkRepresentation)
+<a name="createIdentityLink"></a>
+# **createIdentityLink**
+> IdentityLinkRepresentation createIdentityLink(processInstanceIdidentityLinkRepresentation)
 
 Add a user or group involvement to a process instance
 
@@ -81,7 +82,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.createIdentityLinkUsingPOST1(processInstanceIdidentityLinkRepresentation).then((data) => {
+processinstancesApi.createIdentityLink(processInstanceIdidentityLinkRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -100,9 +101,9 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
-<a name="deleteIdentityLinkUsingDELETE1"></a>
-# **deleteIdentityLinkUsingDELETE1**
-> deleteIdentityLinkUsingDELETE1(processInstanceIdfamilyidentityIdtype)
+<a name="deleteIdentityLink"></a>
+# **deleteIdentityLink**
+> deleteIdentityLink(processInstanceIdfamilyidentityIdtype)
 
 Remove a user or group involvement from a process instance
 
@@ -119,7 +120,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.deleteIdentityLinkUsingDELETE1(processInstanceIdfamilyidentityIdtype).then(() => {
+processinstancesApi.deleteIdentityLink(processInstanceIdfamilyidentityIdtype).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -140,9 +141,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="deleteProcessInstanceUsingDELETE"></a>
-# **deleteProcessInstanceUsingDELETE**
-> deleteProcessInstanceUsingDELETE(processInstanceId)
+<a name="deleteProcessInstance"></a>
+# **deleteProcessInstance**
+> deleteProcessInstance(processInstanceId)
 
 Cancel or remove a process instance
 
@@ -161,7 +162,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.deleteProcessInstanceUsingDELETE(processInstanceId).then(() => {
+processinstancesApi.deleteProcessInstance(processInstanceId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -179,9 +180,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="filterProcessInstancesUsingPOST"></a>
-# **filterProcessInstancesUsingPOST**
-> ResultListDataRepresentationProcessInstanceRepresentation filterProcessInstancesUsingPOST(filterRequest)
+<a name="filterProcessInstances"></a>
+# **filterProcessInstances**
+> ResultListDataRepresentationProcessInstanceRepresentation filterProcessInstances(filterRequest)
 
 List process instances using a filter
 
@@ -200,7 +201,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.filterProcessInstancesUsingPOST(filterRequest).then((data) => {
+processinstancesApi.filterProcessInstances(filterRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -218,9 +219,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationProcessInstanceRepresentation**](ResultListDataRepresentationProcessInstanceRepresentation.md)
 
-<a name="getHistoricProcessInstanceDecisionTasksUsingGET"></a>
-# **getHistoricProcessInstanceDecisionTasksUsingGET**
-> ResultListDataRepresentationDecisionTaskRepresentation getHistoricProcessInstanceDecisionTasksUsingGET(processInstanceId)
+<a name="getHistoricProcessInstanceDecisionTasks"></a>
+# **getHistoricProcessInstanceDecisionTasks**
+> ResultListDataRepresentationDecisionTaskRepresentation getHistoricProcessInstanceDecisionTasks(processInstanceId)
 
 Get decision tasks in a process instance
 
@@ -237,7 +238,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getHistoricProcessInstanceDecisionTasksUsingGET(processInstanceId).then((data) => {
+processinstancesApi.getHistoricProcessInstanceDecisionTasks(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -255,9 +256,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationDecisionTaskRepresentation**](ResultListDataRepresentationDecisionTaskRepresentation.md)
 
-<a name="getHistoricProcessInstanceVariablesUsingGET"></a>
-# **getHistoricProcessInstanceVariablesUsingGET**
-> ProcessInstanceVariableRepresentation getHistoricProcessInstanceVariablesUsingGET(processInstanceId)
+<a name="getHistoricProcessInstanceVariables"></a>
+# **getHistoricProcessInstanceVariables**
+> ProcessInstanceVariableRepresentation getHistoricProcessInstanceVariables(processInstanceId)
 
 Get historic variables for a process instance
 
@@ -274,7 +275,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getHistoricProcessInstanceVariablesUsingGET(processInstanceId).then((data) => {
+processinstancesApi.getHistoricProcessInstanceVariables(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -292,9 +293,9 @@ Name | Type | Description  | Notes
 
 [**ProcessInstanceVariableRepresentation**](ProcessInstanceVariableRepresentation.md)
 
-<a name="getHistoricProcessInstancesUsingPOST"></a>
-# **getHistoricProcessInstancesUsingPOST**
-> ResultListDataRepresentationProcessInstanceRepresentation getHistoricProcessInstancesUsingPOST(queryRequest)
+<a name="getHistoricProcessInstances"></a>
+# **getHistoricProcessInstances**
+> ResultListDataRepresentationProcessInstanceRepresentation getHistoricProcessInstances(queryRequest)
 
 Query historic process instances
 
@@ -311,7 +312,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getHistoricProcessInstancesUsingPOST(queryRequest).then((data) => {
+processinstancesApi.getHistoricProcessInstances(queryRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -329,9 +330,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationProcessInstanceRepresentation**](ResultListDataRepresentationProcessInstanceRepresentation.md)
 
-<a name="getIdentityLinkTypeUsingGET1"></a>
-# **getIdentityLinkTypeUsingGET1**
-> IdentityLinkRepresentation getIdentityLinkTypeUsingGET1(processInstanceIdfamilyidentityIdtype)
+<a name="getIdentityLinkType"></a>
+# **getIdentityLinkType**
+> IdentityLinkRepresentation getIdentityLinkType(processInstanceIdfamilyidentityIdtype)
 
 Get a user or group involvement with a process instance
 
@@ -348,7 +349,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getIdentityLinkTypeUsingGET1(processInstanceIdfamilyidentityIdtype).then((data) => {
+processinstancesApi.getIdentityLinkType(processInstanceIdfamilyidentityIdtype).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -369,9 +370,9 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
-<a name="getIdentityLinksForFamilyUsingGET1"></a>
-# **getIdentityLinksForFamilyUsingGET1**
-> IdentityLinkRepresentation getIdentityLinksForFamilyUsingGET1(processInstanceIdfamily)
+<a name="getIdentityLinksForFamily"></a>
+# **getIdentityLinksForFamily**
+> IdentityLinkRepresentation getIdentityLinksForFamily(processInstanceIdfamily)
 
 List either the users or groups involved with a process instance
 
@@ -388,7 +389,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getIdentityLinksForFamilyUsingGET1(processInstanceIdfamily).then((data) => {
+processinstancesApi.getIdentityLinksForFamily(processInstanceIdfamily).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -407,9 +408,9 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
-<a name="getIdentityLinksUsingGET1"></a>
-# **getIdentityLinksUsingGET1**
-> IdentityLinkRepresentation getIdentityLinksUsingGET1(processInstanceId)
+<a name="getIdentityLinks"></a>
+# **getIdentityLinks**
+> IdentityLinkRepresentation getIdentityLinks(processInstanceId)
 
 List the users and groups involved with a process instance
 
@@ -426,7 +427,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getIdentityLinksUsingGET1(processInstanceId).then((data) => {
+processinstancesApi.getIdentityLinks(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -444,9 +445,9 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
-<a name="getProcessInstanceContentUsingGET"></a>
-# **getProcessInstanceContentUsingGET**
-> ResultListDataRepresentationProcessContentRepresentation getProcessInstanceContentUsingGET(processInstanceId)
+<a name="getProcessInstanceContent"></a>
+# **getProcessInstanceContent**
+> ResultListDataRepresentationProcessContentRepresentation getProcessInstanceContent(processInstanceId)
 
 List content attached to process instance fields
 
@@ -463,7 +464,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getProcessInstanceContentUsingGET(processInstanceId).then((data) => {
+processinstancesApi.getProcessInstanceContent(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -481,9 +482,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationProcessContentRepresentation**](ResultListDataRepresentationProcessContentRepresentation.md)
 
-<a name="getProcessInstanceDiagramUsingGET"></a>
-# **getProcessInstanceDiagramUsingGET**
-> string getProcessInstanceDiagramUsingGET(processInstanceId)
+<a name="getProcessInstanceDiagram"></a>
+# **getProcessInstanceDiagram**
+> string getProcessInstanceDiagram(processInstanceId)
 
 Get the process diagram for the process instance
 
@@ -500,7 +501,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getProcessInstanceDiagramUsingGET(processInstanceId).then((data) => {
+processinstancesApi.getProcessInstanceDiagram(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -518,9 +519,9 @@ Name | Type | Description  | Notes
 
 **string**
 
-<a name="getProcessInstanceStartFormUsingGET"></a>
-# **getProcessInstanceStartFormUsingGET**
-> FormDefinitionRepresentation getProcessInstanceStartFormUsingGET(processInstanceId)
+<a name="getProcessInstanceStartForm"></a>
+# **getProcessInstanceStartForm**
+> FormDefinitionRepresentation getProcessInstanceStartForm(processInstanceId)
 
 Get a process instance start form
 
@@ -539,7 +540,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getProcessInstanceStartFormUsingGET(processInstanceId).then((data) => {
+processinstancesApi.getProcessInstanceStartForm(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -557,9 +558,9 @@ Name | Type | Description  | Notes
 
 [**FormDefinitionRepresentation**](FormDefinitionRepresentation.md)
 
-<a name="getProcessInstanceUsingGET"></a>
-# **getProcessInstanceUsingGET**
-> ProcessInstanceRepresentation getProcessInstanceUsingGET(processInstanceId)
+<a name="getProcessInstance"></a>
+# **getProcessInstance**
+> ProcessInstanceRepresentation getProcessInstance(processInstanceId)
 
 Get a process instance
 
@@ -576,7 +577,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getProcessInstanceUsingGET(processInstanceId).then((data) => {
+processinstancesApi.getProcessInstance(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -594,9 +595,9 @@ Name | Type | Description  | Notes
 
 [**ProcessInstanceRepresentation**](ProcessInstanceRepresentation.md)
 
-<a name="getProcessInstancesUsingPOST"></a>
-# **getProcessInstancesUsingPOST**
-> ResultListDataRepresentationProcessInstanceRepresentation getProcessInstancesUsingPOST(processInstancesQuery)
+<a name="getProcessInstances"></a>
+# **getProcessInstances**
+> ResultListDataRepresentationProcessInstanceRepresentation getProcessInstances(processInstancesQuery)
 
 Query process instances
 
@@ -613,7 +614,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getProcessInstancesUsingPOST(processInstancesQuery).then((data) => {
+processinstancesApi.getProcessInstances(processInstancesQuery).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -631,9 +632,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationProcessInstanceRepresentation**](ResultListDataRepresentationProcessInstanceRepresentation.md)
 
-<a name="getTaskAuditLogUsingGET"></a>
-# **getTaskAuditLogUsingGET**
-> ProcessInstanceAuditInfoRepresentation getTaskAuditLogUsingGET(processInstanceId)
+<a name="getTaskAuditLog"></a>
+# **getTaskAuditLog**
+> ProcessInstanceAuditInfoRepresentation getTaskAuditLog(processInstanceId)
 
 Get the audit log for a process instance
 
@@ -650,7 +651,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.getTaskAuditLogUsingGET(processInstanceId).then((data) => {
+processinstancesApi.getTaskAuditLog(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -668,9 +669,9 @@ Name | Type | Description  | Notes
 
 [**ProcessInstanceAuditInfoRepresentation**](ProcessInstanceAuditInfoRepresentation.md)
 
-<a name="startNewProcessInstanceUsingPOST"></a>
-# **startNewProcessInstanceUsingPOST**
-> ProcessInstanceRepresentation startNewProcessInstanceUsingPOST(startRequest)
+<a name="startNewProcessInstance"></a>
+# **startNewProcessInstance**
+> ProcessInstanceRepresentation startNewProcessInstance(startRequest)
 
 Start a process instance
 
@@ -687,7 +688,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.startNewProcessInstanceUsingPOST(startRequest).then((data) => {
+processinstancesApi.startNewProcessInstance(startRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -705,9 +706,9 @@ Name | Type | Description  | Notes
 
 [**ProcessInstanceRepresentation**](ProcessInstanceRepresentation.md)
 
-<a name="suspendProcessInstanceUsingPUT"></a>
-# **suspendProcessInstanceUsingPUT**
-> ProcessInstanceRepresentation suspendProcessInstanceUsingPUT(processInstanceId)
+<a name="suspendProcessInstance"></a>
+# **suspendProcessInstance**
+> ProcessInstanceRepresentation suspendProcessInstance(processInstanceId)
 
 Suspend a process instance
 
@@ -724,7 +725,7 @@ this.alfrescoApi.setConfig({
 let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
 
 
-processinstancesApi.suspendProcessInstanceUsingPUT(processInstanceId).then((data) => {
+processinstancesApi.suspendProcessInstance(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -742,3 +743,26 @@ Name | Type | Description  | Notes
 
 [**ProcessInstanceRepresentation**](ProcessInstanceRepresentation.md)
 
+<a name="getProcessAuditPdf"></a>
+# **getProcessAuditPdf**
+> Blob getProcessAuditPdf(processId)
+
+Retrieve process audit infromation in pdf format
+
+### Example
+```javascript
+
+var processId = "processId_example"; // String | processId
+
+this.alfrescoJsApi.activiti.processApi.getProcessAuditPdf(processId);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **processId** | **String**| processId | 
+
+### Return type
+
+[Blob]

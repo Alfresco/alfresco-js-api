@@ -38,11 +38,11 @@ export class ActivitiCommentsApi extends BaseApi {
         let postBody = commentRequest;
 
         if (commentRequest === undefined || commentRequest === null) {
-            throw new Error("Required param 'commentRequest' in addProcessInstanceCommentUsingPOST");
+            throw new Error("Required param 'commentRequest' in addProcessInstanceComment");
         }
 
         if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in addProcessInstanceCommentUsingPOST");
+            throw new Error("Required param 'processInstanceId' in addProcessInstanceComment");
         }
 
         let pathParams = {
@@ -62,7 +62,7 @@ export class ActivitiCommentsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/process-instances/{processInstanceId}/comments', 'POST',
+            '/api/enterprise/process-instances/{processInstanceId}/comments', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
@@ -80,11 +80,11 @@ export class ActivitiCommentsApi extends BaseApi {
         let postBody = commentRequest;
 
         if (commentRequest === undefined || commentRequest === null) {
-            throw new Error("Required param 'commentRequest' in addTaskCommentUsingPOST");
+            throw new Error("Required param 'commentRequest' in addTaskComment");
         }
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in addTaskCommentUsingPOST");
+            throw new Error("Required param 'taskId' in addTaskComment");
         }
 
         let pathParams = {
@@ -104,7 +104,7 @@ export class ActivitiCommentsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/comments', 'POST',
+            '/api/enterprise/tasks/{taskId}/comments', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
@@ -123,7 +123,7 @@ export class ActivitiCommentsApi extends BaseApi {
         let postBody = null;
 
         if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getProcessInstanceCommentsUsingGET");
+            throw new Error("Required param 'processInstanceId' in getProcessInstanceComments");
         }
 
         let pathParams = {
@@ -144,7 +144,7 @@ export class ActivitiCommentsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/process-instances/{processInstanceId}/comments', 'GET',
+            '/api/enterprise/process-instances/{processInstanceId}/comments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
@@ -163,7 +163,7 @@ export class ActivitiCommentsApi extends BaseApi {
         let postBody = null;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getTaskCommentsUsingGET");
+            throw new Error("Required param 'taskId' in getTaskComments");
         }
 
         let pathParams = {
@@ -184,7 +184,7 @@ export class ActivitiCommentsApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/tasks/{taskId}/comments', 'GET',
+            '/api/enterprise/tasks/{taskId}/comments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }

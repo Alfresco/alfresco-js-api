@@ -4,14 +4,14 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getDecisionTableEditorJsonUsingGET**](DecisiontablesApi.md#getDecisionTableEditorJsonUsingGET) | **GET** /enterprise/decisions/decision-tables/{decisionTableId}/editorJson | Get definition for a decision table
-[**getDecisionTableUsingGET**](DecisiontablesApi.md#getDecisionTableUsingGET) | **GET** /enterprise/decisions/decision-tables/{decisionTableId} | Get a decision table
-[**getDecisionTablesUsingGET**](DecisiontablesApi.md#getDecisionTablesUsingGET) | **GET** /enterprise/decisions/decision-tables | Query decision tables
+[**getDecisionTableEditorJson**](DecisiontablesApi.md#getDecisionTableEditorJson) | **GET** /enterprise/decisions/decision-tables/{decisionTableId}/editorJson | Get definition for a decision table
+[**getDecisionTable**](DecisiontablesApi.md#getDecisionTable) | **GET** /enterprise/decisions/decision-tables/{decisionTableId} | Get a decision table
+[**getDecisionTables**](DecisiontablesApi.md#getDecisionTables) | **GET** /enterprise/decisions/decision-tables | Query decision tables
 
 
-<a name="getDecisionTableEditorJsonUsingGET"></a>
-# **getDecisionTableEditorJsonUsingGET**
-> JsonNode getDecisionTableEditorJsonUsingGET(decisionTableId)
+<a name="getDecisionTableEditorJson"></a>
+# **getDecisionTableEditorJson**
+> JsonNode getDecisionTableEditorJson(decisionTableId)
 
 Get definition for a decision table
 
@@ -28,7 +28,7 @@ this.alfrescoApi.setConfig({
 let decisiontablesApi = new DecisiontablesApi(this.alfrescoApi);
 
 
-decisiontablesApi.getDecisionTableEditorJsonUsingGET(decisionTableId).then((data) => {
+decisiontablesApi.getDecisionTableEditorJson(decisionTableId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -46,9 +46,9 @@ Name | Type | Description  | Notes
 
 [**JsonNode**](JsonNode.md)
 
-<a name="getDecisionTableUsingGET"></a>
-# **getDecisionTableUsingGET**
-> RuntimeDecisionTableRepresentation getDecisionTableUsingGET(decisionTableId)
+<a name="getDecisionTable"></a>
+# **getDecisionTable**
+> RuntimeDecisionTableRepresentation getDecisionTable(decisionTableId)
 
 Get a decision table
 
@@ -65,7 +65,7 @@ this.alfrescoApi.setConfig({
 let decisiontablesApi = new DecisiontablesApi(this.alfrescoApi);
 
 
-decisiontablesApi.getDecisionTableUsingGET(decisionTableId).then((data) => {
+decisiontablesApi.getDecisionTable(decisionTableId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -83,9 +83,9 @@ Name | Type | Description  | Notes
 
 [**RuntimeDecisionTableRepresentation**](RuntimeDecisionTableRepresentation.md)
 
-<a name="getDecisionTablesUsingGET"></a>
-# **getDecisionTablesUsingGET**
-> ResultListDataRepresentationRuntimeDecisionTableRepresentation getDecisionTablesUsingGET(opts)
+<a name="getDecisionTables"></a>
+# **getDecisionTables**
+> ResultListDataRepresentationRuntimeDecisionTableRepresentation getDecisionTables(opts)
 
 Query decision tables
 
@@ -112,7 +112,7 @@ let opts = {
   'size': 56 //  | size
 };
 
-decisiontablesApi.getDecisionTablesUsingGET(opts).then((data) => {
+decisiontablesApi.getDecisionTables(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

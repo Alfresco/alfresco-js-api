@@ -4,16 +4,16 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**bulkUpdateUsersUsingPUT**](AdminusersApi.md#bulkUpdateUsersUsingPUT) | **PUT** /enterprise/admin/users | Bulk update a list of users
-[**createNewUserUsingPOST**](AdminusersApi.md#createNewUserUsingPOST) | **POST** /enterprise/admin/users | Create a user
-[**getUserUsingGET**](AdminusersApi.md#getUserUsingGET) | **GET** /enterprise/admin/users/{userId} | Get a user
-[**getUsersUsingGET**](AdminusersApi.md#getUsersUsingGET) | **GET** /enterprise/admin/users | Query users
-[**updateUserDetailsUsingPUT**](AdminusersApi.md#updateUserDetailsUsingPUT) | **PUT** /enterprise/admin/users/{userId} | Update a user
+[**bulkUpdateUsers**](AdminusersApi.md#bulkUpdateUsers) | **PUT** /enterprise/admin/users | Bulk update a list of users
+[**createNewUser**](AdminusersApi.md#createNewUser) | **POST** /enterprise/admin/users | Create a user
+[**getUser**](AdminusersApi.md#getUser) | **GET** /enterprise/admin/users/{userId} | Get a user
+[**getUsers**](AdminusersApi.md#getUsers) | **GET** /enterprise/admin/users | Query users
+[**updateUserDetails**](AdminusersApi.md#updateUserDetails) | **PUT** /enterprise/admin/users/{userId} | Update a user
 
 
-<a name="bulkUpdateUsersUsingPUT"></a>
-# **bulkUpdateUsersUsingPUT**
-> bulkUpdateUsersUsingPUT(update)
+<a name="bulkUpdateUsers"></a>
+# **bulkUpdateUsers**
+> bulkUpdateUsers(update)
 
 Bulk update a list of users
 
@@ -30,7 +30,7 @@ this.alfrescoApi.setConfig({
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 
-adminusersApi.bulkUpdateUsersUsingPUT(update).then(() => {
+adminusersApi.bulkUpdateUsers(update).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -48,9 +48,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="createNewUserUsingPOST"></a>
-# **createNewUserUsingPOST**
-> UserRepresentation createNewUserUsingPOST(userRepresentation)
+<a name="createNewUser"></a>
+# **createNewUser**
+> UserRepresentation createNewUser(userRepresentation)
 
 Create a user
 
@@ -67,7 +67,7 @@ this.alfrescoApi.setConfig({
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 
-adminusersApi.createNewUserUsingPOST(userRepresentation).then((data) => {
+adminusersApi.createNewUser(userRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -85,9 +85,9 @@ Name | Type | Description  | Notes
 
 [**UserRepresentation**](UserRepresentation.md)
 
-<a name="getUserUsingGET"></a>
-# **getUserUsingGET**
-> AbstractUserRepresentation getUserUsingGET(userIdopts)
+<a name="getUser"></a>
+# **getUser**
+> AbstractUserRepresentation getUser(userIdopts)
 
 Get a user
 
@@ -107,7 +107,7 @@ let opts = {
   'summary': true //  | summary
 };
 
-adminusersApi.getUserUsingGET(userIdopts).then((data) => {
+adminusersApi.getUser(userIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -126,9 +126,9 @@ Name | Type | Description  | Notes
 
 [**AbstractUserRepresentation**](AbstractUserRepresentation.md)
 
-<a name="getUsersUsingGET"></a>
-# **getUsersUsingGET**
-> ResultListDataRepresentationAbstractUserRepresentation getUsersUsingGET(opts)
+<a name="getUsers"></a>
+# **getUsers**
+> ResultListDataRepresentationAbstractUserRepresentation getUsers(opts)
 
 Query users
 
@@ -158,7 +158,7 @@ let opts = {
   'summary': true //  | summary
 };
 
-adminusersApi.getUsersUsingGET(opts).then((data) => {
+adminusersApi.getUsers(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -186,9 +186,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAbstractUserRepresentation**](ResultListDataRepresentationAbstractUserRepresentation.md)
 
-<a name="updateUserDetailsUsingPUT"></a>
-# **updateUserDetailsUsingPUT**
-> updateUserDetailsUsingPUT(userIduserRepresentation)
+<a name="updateUserDetails"></a>
+# **updateUserDetails**
+> updateUserDetails(userIduserRepresentation)
 
 Update a user
 
@@ -205,7 +205,7 @@ this.alfrescoApi.setConfig({
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 
-adminusersApi.updateUserDetailsUsingPUT(userIduserRepresentation).then(() => {
+adminusersApi.updateUserDetails(userIduserRepresentation).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

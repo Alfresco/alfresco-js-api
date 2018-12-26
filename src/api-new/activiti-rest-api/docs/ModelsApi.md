@@ -4,24 +4,24 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createModelUsingPOST**](ModelsApi.md#createModelUsingPOST) | **POST** /enterprise/models | Create a new model
-[**deleteModelUsingDELETE**](ModelsApi.md#deleteModelUsingDELETE) | **DELETE** /enterprise/models/{modelId} | Delete a model
-[**duplicateModelUsingPOST**](ModelsApi.md#duplicateModelUsingPOST) | **POST** /enterprise/models/{modelId}/clone | Duplicate an existing model
-[**getModelJSONUsingGET**](ModelsApi.md#getModelJSONUsingGET) | **GET** /enterprise/models/{modelId}/editor/json | Get model content
-[**getModelThumbnailUsingGET**](ModelsApi.md#getModelThumbnailUsingGET) | **GET** /enterprise/models/{modelId}/thumbnail | Get a model's thumbnail image
-[**getModelUsingGET**](ModelsApi.md#getModelUsingGET) | **GET** /enterprise/models/{modelId} | Get a model
-[**getModelsToIncludeInAppDefinitionUsingGET**](ModelsApi.md#getModelsToIncludeInAppDefinitionUsingGET) | **GET** /enterprise/models-for-app-definition | List process definition models shared with the current user
-[**getModelsUsingGET**](ModelsApi.md#getModelsUsingGET) | **GET** /enterprise/models | List models (process, form, decision rule or app)
-[**importNewVersionUsingPOST**](ModelsApi.md#importNewVersionUsingPOST) | **POST** /enterprise/models/{modelId}/newversion | Create a new version of a model
-[**importProcessModelUsingPOST**](ModelsApi.md#importProcessModelUsingPOST) | **POST** /enterprise/process-models/import | Import a BPMN 2.0 XML file
-[**saveModelUsingPOST**](ModelsApi.md#saveModelUsingPOST) | **POST** /enterprise/models/{modelId}/editor/json | Update model content
-[**updateModelUsingPUT**](ModelsApi.md#updateModelUsingPUT) | **PUT** /enterprise/models/{modelId} | Update a model
-[**validateModelUsingPOST**](ModelsApi.md#validateModelUsingPOST) | **POST** /enterprise/models/{modelId}/editor/validate | Validate model content
+[**createModel**](ModelsApi.md#createModel) | **POST** /enterprise/models | Create a new model
+[**deleteModel**](ModelsApi.md#deleteModel) | **DELETE** /enterprise/models/{modelId} | Delete a model
+[**duplicateModel**](ModelsApi.md#duplicateModel) | **POST** /enterprise/models/{modelId}/clone | Duplicate an existing model
+[**getModelJSON**](ModelsApi.md#getModelJSON) | **GET** /enterprise/models/{modelId}/editor/json | Get model content
+[**getModelThumbnail**](ModelsApi.md#getModelThumbnail) | **GET** /enterprise/models/{modelId}/thumbnail | Get a model's thumbnail image
+[**getModel**](ModelsApi.md#getModel) | **GET** /enterprise/models/{modelId} | Get a model
+[**getModelsToIncludeInAppDefinition**](ModelsApi.md#getModelsToIncludeInAppDefinition) | **GET** /enterprise/models-for-app-definition | List process definition models shared with the current user
+[**getModels**](ModelsApi.md#getModels) | **GET** /enterprise/models | List models (process, form, decision rule or app)
+[**importNewVersion**](ModelsApi.md#importNewVersion) | **POST** /enterprise/models/{modelId}/newversion | Create a new version of a model
+[**importProcessModel**](ModelsApi.md#importProcessModel) | **POST** /enterprise/process-models/import | Import a BPMN 2.0 XML file
+[**saveModel**](ModelsApi.md#saveModel) | **POST** /enterprise/models/{modelId}/editor/json | Update model content
+[**updateModel**](ModelsApi.md#updateModel) | **PUT** /enterprise/models/{modelId} | Update a model
+[**validateModel**](ModelsApi.md#validateModel) | **POST** /enterprise/models/{modelId}/editor/validate | Validate model content
 
 
-<a name="createModelUsingPOST"></a>
-# **createModelUsingPOST**
-> ModelRepresentation createModelUsingPOST(modelRepresentation)
+<a name="createModel"></a>
+# **createModel**
+> ModelRepresentation createModel(modelRepresentation)
 
 Create a new model
 
@@ -38,7 +38,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.createModelUsingPOST(modelRepresentation).then((data) => {
+modelsApi.createModel(modelRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -56,9 +56,9 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-<a name="deleteModelUsingDELETE"></a>
-# **deleteModelUsingDELETE**
-> deleteModelUsingDELETE(modelIdopts)
+<a name="deleteModel"></a>
+# **deleteModel**
+> deleteModel(modelIdopts)
 
 Delete a model
 
@@ -79,7 +79,7 @@ let opts = {
   'deleteRuntimeApp': true //  | deleteRuntimeApp
 };
 
-modelsApi.deleteModelUsingDELETE(modelIdopts).then(() => {
+modelsApi.deleteModel(modelIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -99,9 +99,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="duplicateModelUsingPOST"></a>
-# **duplicateModelUsingPOST**
-> ModelRepresentation duplicateModelUsingPOST(modelIdmodelRepresentation)
+<a name="duplicateModel"></a>
+# **duplicateModel**
+> ModelRepresentation duplicateModel(modelIdmodelRepresentation)
 
 Duplicate an existing model
 
@@ -118,7 +118,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.duplicateModelUsingPOST(modelIdmodelRepresentation).then((data) => {
+modelsApi.duplicateModel(modelIdmodelRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -137,9 +137,9 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-<a name="getModelJSONUsingGET"></a>
-# **getModelJSONUsingGET**
-> ObjectNode getModelJSONUsingGET(modelId)
+<a name="getModelJSON"></a>
+# **getModelJSON**
+> ObjectNode getModelJSON(modelId)
 
 Get model content
 
@@ -156,7 +156,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.getModelJSONUsingGET(modelId).then((data) => {
+modelsApi.getModelJSON(modelId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -174,9 +174,9 @@ Name | Type | Description  | Notes
 
 [**ObjectNode**](ObjectNode.md)
 
-<a name="getModelThumbnailUsingGET"></a>
-# **getModelThumbnailUsingGET**
-> string getModelThumbnailUsingGET(modelId)
+<a name="getModelThumbnail"></a>
+# **getModelThumbnail**
+> string getModelThumbnail(modelId)
 
 Get a model's thumbnail image
 
@@ -193,7 +193,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.getModelThumbnailUsingGET(modelId).then((data) => {
+modelsApi.getModelThumbnail(modelId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -211,9 +211,9 @@ Name | Type | Description  | Notes
 
 **string**
 
-<a name="getModelUsingGET"></a>
-# **getModelUsingGET**
-> ModelRepresentation getModelUsingGET(modelIdopts)
+<a name="getModel"></a>
+# **getModel**
+> ModelRepresentation getModel(modelIdopts)
 
 Get a model
 
@@ -235,7 +235,7 @@ let opts = {
   'includePermissions': true //  | includePermissions
 };
 
-modelsApi.getModelUsingGET(modelIdopts).then((data) => {
+modelsApi.getModel(modelIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -254,9 +254,9 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-<a name="getModelsToIncludeInAppDefinitionUsingGET"></a>
-# **getModelsToIncludeInAppDefinitionUsingGET**
-> ResultListDataRepresentationModelRepresentation getModelsToIncludeInAppDefinitionUsingGET()
+<a name="getModelsToIncludeInAppDefinition"></a>
+# **getModelsToIncludeInAppDefinition**
+> ResultListDataRepresentationModelRepresentation getModelsToIncludeInAppDefinition()
 
 List process definition models shared with the current user
 
@@ -272,7 +272,7 @@ this.alfrescoApi.setConfig({
 
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
-modelsApi.getModelsToIncludeInAppDefinitionUsingGET().then((data) => {
+modelsApi.getModelsToIncludeInAppDefinition().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -287,9 +287,9 @@ This endpoint does not need any parameter.
 
 [**ResultListDataRepresentationModelRepresentation**](ResultListDataRepresentationModelRepresentation.md)
 
-<a name="getModelsUsingGET"></a>
-# **getModelsUsingGET**
-> ResultListDataRepresentationModelRepresentation getModelsUsingGET(opts)
+<a name="getModels"></a>
+# **getModels**
+> ResultListDataRepresentationModelRepresentation getModels(opts)
 
 List models (process, form, decision rule or app)
 
@@ -312,7 +312,7 @@ let opts = {
   'referenceId': 789 //  | referenceId
 };
 
-modelsApi.getModelsUsingGET(opts).then((data) => {
+modelsApi.getModels(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -333,9 +333,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationModelRepresentation**](ResultListDataRepresentationModelRepresentation.md)
 
-<a name="importNewVersionUsingPOST"></a>
-# **importNewVersionUsingPOST**
-> ModelRepresentation importNewVersionUsingPOST(modelIdfile)
+<a name="importNewVersion"></a>
+# **importNewVersion**
+> ModelRepresentation importNewVersion(modelIdfile)
 
 Create a new version of a model
 
@@ -352,7 +352,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.importNewVersionUsingPOST(modelIdfile).then((data) => {
+modelsApi.importNewVersion(modelIdfile).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -371,9 +371,9 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-<a name="importProcessModelUsingPOST"></a>
-# **importProcessModelUsingPOST**
-> ModelRepresentation importProcessModelUsingPOST(file)
+<a name="importProcessModel"></a>
+# **importProcessModel**
+> ModelRepresentation importProcessModel(file)
 
 Import a BPMN 2.0 XML file
 
@@ -390,7 +390,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.importProcessModelUsingPOST(file).then((data) => {
+modelsApi.importProcessModel(file).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -408,9 +408,9 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-<a name="saveModelUsingPOST"></a>
-# **saveModelUsingPOST**
-> ModelRepresentation saveModelUsingPOST(modelIdvalues)
+<a name="saveModel"></a>
+# **saveModel**
+> ModelRepresentation saveModel(modelIdvalues)
 
 Update model content
 
@@ -427,7 +427,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.saveModelUsingPOST(modelIdvalues).then((data) => {
+modelsApi.saveModel(modelIdvalues).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -446,9 +446,9 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-<a name="updateModelUsingPUT"></a>
-# **updateModelUsingPUT**
-> ModelRepresentation updateModelUsingPUT(modelIdupdatedModel)
+<a name="updateModel"></a>
+# **updateModel**
+> ModelRepresentation updateModel(modelIdupdatedModel)
 
 Update a model
 
@@ -467,7 +467,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-modelsApi.updateModelUsingPUT(modelIdupdatedModel).then((data) => {
+modelsApi.updateModel(modelIdupdatedModel).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -486,9 +486,9 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-<a name="validateModelUsingPOST"></a>
-# **validateModelUsingPOST**
-> ValidationErrorRepresentation validateModelUsingPOST(modelIdopts)
+<a name="validateModel"></a>
+# **validateModel**
+> ValidationErrorRepresentation validateModel(modelIdopts)
 
 Validate model content
 
@@ -508,7 +508,7 @@ let opts = {
   'values':  //  | values
 };
 
-modelsApi.validateModelUsingPOST(modelIdopts).then((data) => {
+modelsApi.validateModel(modelIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

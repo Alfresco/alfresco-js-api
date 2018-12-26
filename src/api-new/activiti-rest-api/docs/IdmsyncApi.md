@@ -4,13 +4,13 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getLogFileUsingGET**](IdmsyncApi.md#getLogFileUsingGET) | **GET** /enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile | Get log file for a sync log entry
-[**getSyncLogEntriesUsingGET**](IdmsyncApi.md#getSyncLogEntriesUsingGET) | **GET** /enterprise/idm-sync-log-entries | List sync log entries
+[**getLogFile**](IdmsyncApi.md#getLogFile) | **GET** /enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile | Get log file for a sync log entry
+[**getSyncLogEntries**](IdmsyncApi.md#getSyncLogEntries) | **GET** /enterprise/idm-sync-log-entries | List sync log entries
 
 
-<a name="getLogFileUsingGET"></a>
-# **getLogFileUsingGET**
-> getLogFileUsingGET(syncLogEntryId)
+<a name="getLogFile"></a>
+# **getLogFile**
+> getLogFile(syncLogEntryId)
 
 Get log file for a sync log entry
 
@@ -27,7 +27,7 @@ this.alfrescoApi.setConfig({
 let idmsyncApi = new IdmsyncApi(this.alfrescoApi);
 
 
-idmsyncApi.getLogFileUsingGET(syncLogEntryId).then(() => {
+idmsyncApi.getLogFile(syncLogEntryId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -45,9 +45,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getSyncLogEntriesUsingGET"></a>
-# **getSyncLogEntriesUsingGET**
-> SyncLogEntryRepresentation getSyncLogEntriesUsingGET(opts)
+<a name="getSyncLogEntries"></a>
+# **getSyncLogEntries**
+> SyncLogEntryRepresentation getSyncLogEntries(opts)
 
 List sync log entries
 
@@ -70,7 +70,7 @@ let opts = {
   'size': 56 //  | size
 };
 
-idmsyncApi.getSyncLogEntriesUsingGET(opts).then((data) => {
+idmsyncApi.getSyncLogEntries(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

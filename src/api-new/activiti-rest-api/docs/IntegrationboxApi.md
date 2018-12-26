@@ -4,18 +4,18 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**confirmAuthorisationUsingGET1**](IntegrationboxApi.md#confirmAuthorisationUsingGET1) | **GET** /enterprise/integration/box/confirm-auth-request | Box Authorization
-[**createRepositoryAccountUsingPOST**](IntegrationboxApi.md#createRepositoryAccountUsingPOST) | **POST** /enterprise/integration/box/{userId}/account | Add Box account
-[**deleteRepositoryAccountUsingDELETE**](IntegrationboxApi.md#deleteRepositoryAccountUsingDELETE) | **DELETE** /enterprise/integration/box/{userId}/account | Delete account information
-[**getBoxPluginStatusUsingGET**](IntegrationboxApi.md#getBoxPluginStatusUsingGET) | **GET** /enterprise/integration/box/status | Get status information
-[**getFilesUsingGET**](IntegrationboxApi.md#getFilesUsingGET) | **GET** /enterprise/integration/box/files | List file and folders
-[**getRepositoryAccountUsingGET**](IntegrationboxApi.md#getRepositoryAccountUsingGET) | **GET** /enterprise/integration/box/{userId}/account | Get account information
-[**updateRepositoryAccountUsingPUT**](IntegrationboxApi.md#updateRepositoryAccountUsingPUT) | **PUT** /enterprise/integration/box/{userId}/account | Update account information
+[**confirmAuthorisation**](IntegrationboxApi.md#confirmAuthorisation) | **GET** /enterprise/integration/box/confirm-auth-request | Box Authorization
+[**createRepositoryAccount**](IntegrationboxApi.md#createRepositoryAccount) | **POST** /enterprise/integration/box/{userId}/account | Add Box account
+[**deleteRepositoryAccount**](IntegrationboxApi.md#deleteRepositoryAccount) | **DELETE** /enterprise/integration/box/{userId}/account | Delete account information
+[**getBoxPluginStatus**](IntegrationboxApi.md#getBoxPluginStatus) | **GET** /enterprise/integration/box/status | Get status information
+[**getFiles**](IntegrationboxApi.md#getFiles) | **GET** /enterprise/integration/box/files | List file and folders
+[**getRepositoryAccount**](IntegrationboxApi.md#getRepositoryAccount) | **GET** /enterprise/integration/box/{userId}/account | Get account information
+[**updateRepositoryAccount**](IntegrationboxApi.md#updateRepositoryAccount) | **PUT** /enterprise/integration/box/{userId}/account | Update account information
 
 
-<a name="confirmAuthorisationUsingGET1"></a>
-# **confirmAuthorisationUsingGET1**
-> confirmAuthorisationUsingGET1()
+<a name="confirmAuthorisation"></a>
+# **confirmAuthorisation**
+> confirmAuthorisation()
 
 Box Authorization
 
@@ -33,7 +33,7 @@ this.alfrescoApi.setConfig({
 
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
-integrationboxApi.confirmAuthorisationUsingGET1().then(() => {
+integrationboxApi.confirmAuthorisation().then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -48,9 +48,9 @@ This endpoint does not need any parameter.
 
 null (empty response body)
 
-<a name="createRepositoryAccountUsingPOST"></a>
-# **createRepositoryAccountUsingPOST**
-> createRepositoryAccountUsingPOST(userIdcredentials)
+<a name="createRepositoryAccount"></a>
+# **createRepositoryAccount**
+> createRepositoryAccount(userIdcredentials)
 
 Add Box account
 
@@ -67,7 +67,7 @@ this.alfrescoApi.setConfig({
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-integrationboxApi.createRepositoryAccountUsingPOST(userIdcredentials).then(() => {
+integrationboxApi.createRepositoryAccount(userIdcredentials).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -86,9 +86,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="deleteRepositoryAccountUsingDELETE"></a>
-# **deleteRepositoryAccountUsingDELETE**
-> deleteRepositoryAccountUsingDELETE(userId)
+<a name="deleteRepositoryAccount"></a>
+# **deleteRepositoryAccount**
+> deleteRepositoryAccount(userId)
 
 Delete account information
 
@@ -105,7 +105,7 @@ this.alfrescoApi.setConfig({
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-integrationboxApi.deleteRepositoryAccountUsingDELETE(userId).then(() => {
+integrationboxApi.deleteRepositoryAccount(userId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -123,9 +123,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getBoxPluginStatusUsingGET"></a>
-# **getBoxPluginStatusUsingGET**
-> boolean getBoxPluginStatusUsingGET()
+<a name="getBoxPluginStatus"></a>
+# **getBoxPluginStatus**
+> boolean getBoxPluginStatus()
 
 Get status information
 
@@ -141,7 +141,7 @@ this.alfrescoApi.setConfig({
 
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
-integrationboxApi.getBoxPluginStatusUsingGET().then((data) => {
+integrationboxApi.getBoxPluginStatus().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -156,9 +156,9 @@ This endpoint does not need any parameter.
 
 **boolean**
 
-<a name="getFilesUsingGET"></a>
-# **getFilesUsingGET**
-> ResultListDataRepresentationBoxContent getFilesUsingGET(opts)
+<a name="getFiles"></a>
+# **getFiles**
+> ResultListDataRepresentationBoxContent getFiles(opts)
 
 List file and folders
 
@@ -179,7 +179,7 @@ let opts = {
   'parent': parent_example //  | parent
 };
 
-integrationboxApi.getFilesUsingGET(opts).then((data) => {
+integrationboxApi.getFiles(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -198,9 +198,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationBoxContent**](ResultListDataRepresentationBoxContent.md)
 
-<a name="getRepositoryAccountUsingGET"></a>
-# **getRepositoryAccountUsingGET**
-> getRepositoryAccountUsingGET(userId)
+<a name="getRepositoryAccount"></a>
+# **getRepositoryAccount**
+> getRepositoryAccount(userId)
 
 Get account information
 
@@ -217,7 +217,7 @@ this.alfrescoApi.setConfig({
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-integrationboxApi.getRepositoryAccountUsingGET(userId).then(() => {
+integrationboxApi.getRepositoryAccount(userId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -235,9 +235,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="updateRepositoryAccountUsingPUT"></a>
-# **updateRepositoryAccountUsingPUT**
-> updateRepositoryAccountUsingPUT(userIdcredentials)
+<a name="updateRepositoryAccount"></a>
+# **updateRepositoryAccount**
+> updateRepositoryAccount(userIdcredentials)
 
 Update account information
 
@@ -254,7 +254,7 @@ this.alfrescoApi.setConfig({
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
-integrationboxApi.updateRepositoryAccountUsingPUT(userIdcredentials).then(() => {
+integrationboxApi.updateRepositoryAccount(userIdcredentials).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);

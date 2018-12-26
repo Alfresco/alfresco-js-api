@@ -4,21 +4,21 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createBasicAuthConfigurationUsingPOST**](AdminendpointsApi.md#createBasicAuthConfigurationUsingPOST) | **POST** /enterprise/admin/basic-auths | Add an endpoint authorization
-[**createEndpointConfigurationUsingPOST**](AdminendpointsApi.md#createEndpointConfigurationUsingPOST) | **POST** /enterprise/admin/endpoints | Create an endpoint
-[**getBasicAuthConfigurationUsingGET**](AdminendpointsApi.md#getBasicAuthConfigurationUsingGET) | **GET** /enterprise/admin/basic-auths/{basicAuthId} | Get an endpoint authorization
-[**getBasicAuthConfigurationsUsingGET**](AdminendpointsApi.md#getBasicAuthConfigurationsUsingGET) | **GET** /enterprise/admin/basic-auths | List endpoint authorizations
-[**getEndpointConfigurationUsingGET1**](AdminendpointsApi.md#getEndpointConfigurationUsingGET1) | **GET** /enterprise/admin/endpoints/{endpointConfigurationId} | Get an endpoint
-[**getEndpointConfigurationsUsingGET1**](AdminendpointsApi.md#getEndpointConfigurationsUsingGET1) | **GET** /enterprise/admin/endpoints | List endpoints
-[**removeBasicAuthonfigurationUsingDELETE**](AdminendpointsApi.md#removeBasicAuthonfigurationUsingDELETE) | **DELETE** /enterprise/admin/basic-auths/{basicAuthId} | Delete an endpoint authorization
-[**removeEndpointConfigurationUsingDELETE**](AdminendpointsApi.md#removeEndpointConfigurationUsingDELETE) | **DELETE** /enterprise/admin/endpoints/{endpointConfigurationId} | Delete an endpoint
-[**updateBasicAuthConfigurationUsingPUT**](AdminendpointsApi.md#updateBasicAuthConfigurationUsingPUT) | **PUT** /enterprise/admin/basic-auths/{basicAuthId} | Update an endpoint authorization
-[**updateEndpointConfigurationUsingPUT**](AdminendpointsApi.md#updateEndpointConfigurationUsingPUT) | **PUT** /enterprise/admin/endpoints/{endpointConfigurationId} | Update an endpoint
+[**createBasicAuthConfiguration**](AdminendpointsApi.md#createBasicAuthConfiguration) | **POST** /enterprise/admin/basic-auths | Add an endpoint authorization
+[**createEndpointConfiguration**](AdminendpointsApi.md#createEndpointConfiguration) | **POST** /enterprise/admin/endpoints | Create an endpoint
+[**getBasicAuthConfiguration**](AdminendpointsApi.md#getBasicAuthConfiguration) | **GET** /enterprise/admin/basic-auths/{basicAuthId} | Get an endpoint authorization
+[**getBasicAuthConfigurations**](AdminendpointsApi.md#getBasicAuthConfigurations) | **GET** /enterprise/admin/basic-auths | List endpoint authorizations
+[**getEndpointConfiguration**](AdminendpointsApi.md#getEndpointConfiguration) | **GET** /enterprise/admin/endpoints/{endpointConfigurationId} | Get an endpoint
+[**getEndpointConfigurations**](AdminendpointsApi.md#getEndpointConfigurations) | **GET** /enterprise/admin/endpoints | List endpoints
+[**removeBasicAuthonfiguration**](AdminendpointsApi.md#removeBasicAuthonfiguration) | **DELETE** /enterprise/admin/basic-auths/{basicAuthId} | Delete an endpoint authorization
+[**removeEndpointConfiguration**](AdminendpointsApi.md#removeEndpointConfiguration) | **DELETE** /enterprise/admin/endpoints/{endpointConfigurationId} | Delete an endpoint
+[**updateBasicAuthConfiguration**](AdminendpointsApi.md#updateBasicAuthConfiguration) | **PUT** /enterprise/admin/basic-auths/{basicAuthId} | Update an endpoint authorization
+[**updateEndpointConfiguration**](AdminendpointsApi.md#updateEndpointConfiguration) | **PUT** /enterprise/admin/endpoints/{endpointConfigurationId} | Update an endpoint
 
 
-<a name="createBasicAuthConfigurationUsingPOST"></a>
-# **createBasicAuthConfigurationUsingPOST**
-> EndpointBasicAuthRepresentation createBasicAuthConfigurationUsingPOST(createRepresentation)
+<a name="createBasicAuthConfiguration"></a>
+# **createBasicAuthConfiguration**
+> EndpointBasicAuthRepresentation createBasicAuthConfiguration(createRepresentation)
 
 Add an endpoint authorization
 
@@ -35,7 +35,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.createBasicAuthConfigurationUsingPOST(createRepresentation).then((data) => {
+adminendpointsApi.createBasicAuthConfiguration(createRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -53,9 +53,9 @@ Name | Type | Description  | Notes
 
 [**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
 
-<a name="createEndpointConfigurationUsingPOST"></a>
-# **createEndpointConfigurationUsingPOST**
-> EndpointConfigurationRepresentation createEndpointConfigurationUsingPOST(representation)
+<a name="createEndpointConfiguration"></a>
+# **createEndpointConfiguration**
+> EndpointConfigurationRepresentation createEndpointConfiguration(representation)
 
 Create an endpoint
 
@@ -72,7 +72,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.createEndpointConfigurationUsingPOST(representation).then((data) => {
+adminendpointsApi.createEndpointConfiguration(representation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -90,9 +90,9 @@ Name | Type | Description  | Notes
 
 [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
 
-<a name="getBasicAuthConfigurationUsingGET"></a>
-# **getBasicAuthConfigurationUsingGET**
-> EndpointBasicAuthRepresentation getBasicAuthConfigurationUsingGET(basicAuthIdtenantId)
+<a name="getBasicAuthConfiguration"></a>
+# **getBasicAuthConfiguration**
+> EndpointBasicAuthRepresentation getBasicAuthConfiguration(basicAuthIdtenantId)
 
 Get an endpoint authorization
 
@@ -109,7 +109,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.getBasicAuthConfigurationUsingGET(basicAuthIdtenantId).then((data) => {
+adminendpointsApi.getBasicAuthConfiguration(basicAuthIdtenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -128,9 +128,9 @@ Name | Type | Description  | Notes
 
 [**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
 
-<a name="getBasicAuthConfigurationsUsingGET"></a>
-# **getBasicAuthConfigurationsUsingGET**
-> EndpointBasicAuthRepresentation getBasicAuthConfigurationsUsingGET(tenantId)
+<a name="getBasicAuthConfigurations"></a>
+# **getBasicAuthConfigurations**
+> EndpointBasicAuthRepresentation getBasicAuthConfigurations(tenantId)
 
 List endpoint authorizations
 
@@ -147,7 +147,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.getBasicAuthConfigurationsUsingGET(tenantId).then((data) => {
+adminendpointsApi.getBasicAuthConfigurations(tenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -165,9 +165,9 @@ Name | Type | Description  | Notes
 
 [**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
 
-<a name="getEndpointConfigurationUsingGET1"></a>
-# **getEndpointConfigurationUsingGET1**
-> EndpointConfigurationRepresentation getEndpointConfigurationUsingGET1(endpointConfigurationIdtenantId)
+<a name="getEndpointConfiguration"></a>
+# **getEndpointConfiguration**
+> EndpointConfigurationRepresentation getEndpointConfiguration(endpointConfigurationIdtenantId)
 
 Get an endpoint
 
@@ -184,7 +184,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.getEndpointConfigurationUsingGET1(endpointConfigurationIdtenantId).then((data) => {
+adminendpointsApi.getEndpointConfiguration(endpointConfigurationIdtenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -203,9 +203,9 @@ Name | Type | Description  | Notes
 
 [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
 
-<a name="getEndpointConfigurationsUsingGET1"></a>
-# **getEndpointConfigurationsUsingGET1**
-> EndpointConfigurationRepresentation getEndpointConfigurationsUsingGET1(tenantId)
+<a name="getEndpointConfigurations"></a>
+# **getEndpointConfigurations**
+> EndpointConfigurationRepresentation getEndpointConfigurations(tenantId)
 
 List endpoints
 
@@ -222,7 +222,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.getEndpointConfigurationsUsingGET1(tenantId).then((data) => {
+adminendpointsApi.getEndpointConfigurations(tenantId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -240,9 +240,9 @@ Name | Type | Description  | Notes
 
 [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
 
-<a name="removeBasicAuthonfigurationUsingDELETE"></a>
-# **removeBasicAuthonfigurationUsingDELETE**
-> removeBasicAuthonfigurationUsingDELETE(basicAuthIdtenantId)
+<a name="removeBasicAuthonfiguration"></a>
+# **removeBasicAuthonfiguration**
+> removeBasicAuthonfiguration(basicAuthIdtenantId)
 
 Delete an endpoint authorization
 
@@ -259,7 +259,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.removeBasicAuthonfigurationUsingDELETE(basicAuthIdtenantId).then(() => {
+adminendpointsApi.removeBasicAuthonfiguration(basicAuthIdtenantId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -278,9 +278,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="removeEndpointConfigurationUsingDELETE"></a>
-# **removeEndpointConfigurationUsingDELETE**
-> removeEndpointConfigurationUsingDELETE(endpointConfigurationIdtenantId)
+<a name="removeEndpointConfiguration"></a>
+# **removeEndpointConfiguration**
+> removeEndpointConfiguration(endpointConfigurationIdtenantId)
 
 Delete an endpoint
 
@@ -297,7 +297,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.removeEndpointConfigurationUsingDELETE(endpointConfigurationIdtenantId).then(() => {
+adminendpointsApi.removeEndpointConfiguration(endpointConfigurationIdtenantId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -316,9 +316,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="updateBasicAuthConfigurationUsingPUT"></a>
-# **updateBasicAuthConfigurationUsingPUT**
-> EndpointBasicAuthRepresentation updateBasicAuthConfigurationUsingPUT(basicAuthIdcreateRepresentation)
+<a name="updateBasicAuthConfiguration"></a>
+# **updateBasicAuthConfiguration**
+> EndpointBasicAuthRepresentation updateBasicAuthConfiguration(basicAuthIdcreateRepresentation)
 
 Update an endpoint authorization
 
@@ -335,7 +335,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.updateBasicAuthConfigurationUsingPUT(basicAuthIdcreateRepresentation).then((data) => {
+adminendpointsApi.updateBasicAuthConfiguration(basicAuthIdcreateRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -354,9 +354,9 @@ Name | Type | Description  | Notes
 
 [**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
 
-<a name="updateEndpointConfigurationUsingPUT"></a>
-# **updateEndpointConfigurationUsingPUT**
-> EndpointConfigurationRepresentation updateEndpointConfigurationUsingPUT(endpointConfigurationIdrepresentation)
+<a name="updateEndpointConfiguration"></a>
+# **updateEndpointConfiguration**
+> EndpointConfigurationRepresentation updateEndpointConfiguration(endpointConfigurationIdrepresentation)
 
 Update an endpoint
 
@@ -373,7 +373,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.updateEndpointConfigurationUsingPUT(endpointConfigurationIdrepresentation).then((data) => {
+adminendpointsApi.updateEndpointConfiguration(endpointConfigurationIdrepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

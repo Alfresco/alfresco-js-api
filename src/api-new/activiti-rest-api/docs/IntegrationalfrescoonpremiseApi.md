@@ -4,16 +4,16 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAllSitesUsingGET1**](IntegrationalfrescoonpremiseApi.md#getAllSitesUsingGET1) | **GET** /enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
-[**getContentInFolderPathUsingGET1**](IntegrationalfrescoonpremiseApi.md#getContentInFolderPathUsingGET1) | **GET** /enterprise/rest/integration/alfresco/{repositoryId}/sites/{siteId}/folderpath/{folderPath}/content | List files and folders inside a specific folder identified by folder path
-[**getContentInFolderUsingGET1**](IntegrationalfrescoonpremiseApi.md#getContentInFolderUsingGET1) | **GET** /enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List files and folders inside a specific folder
-[**getContentInSiteUsingGET1**](IntegrationalfrescoonpremiseApi.md#getContentInSiteUsingGET1) | **GET** /enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List files and folders inside a specific site
-[**getRepositoriesUsingGET**](IntegrationalfrescoonpremiseApi.md#getRepositoriesUsingGET) | **GET** /enterprise/profile/accounts/alfresco | List Alfresco repositories
+[**getAllSites**](IntegrationalfrescoonpremiseApi.md#getAllSites) | **GET** /enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
+[**getContentInFolderPath**](IntegrationalfrescoonpremiseApi.md#getContentInFolderPath) | **GET** /enterprise/rest/integration/alfresco/{repositoryId}/sites/{siteId}/folderpath/{folderPath}/content | List files and folders inside a specific folder identified by folder path
+[**getContentInFolder**](IntegrationalfrescoonpremiseApi.md#getContentInFolder) | **GET** /enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List files and folders inside a specific folder
+[**getContentInSite**](IntegrationalfrescoonpremiseApi.md#getContentInSite) | **GET** /enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List files and folders inside a specific site
+[**getRepositories**](IntegrationalfrescoonpremiseApi.md#getRepositories) | **GET** /enterprise/profile/accounts/alfresco | List Alfresco repositories
 
 
-<a name="getAllSitesUsingGET1"></a>
-# **getAllSitesUsingGET1**
-> ResultListDataRepresentationAlfrescoSiteRepresenation getAllSitesUsingGET1(repositoryId)
+<a name="getAllSites"></a>
+# **getAllSites**
+> ResultListDataRepresentationAlfrescoSiteRepresenation getAllSites(repositoryId)
 
 List Alfresco sites
 
@@ -32,7 +32,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-integrationalfrescoonpremiseApi.getAllSitesUsingGET1(repositoryId).then((data) => {
+integrationalfrescoonpremiseApi.getAllSites(repositoryId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -50,9 +50,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoSiteRepresenation**](ResultListDataRepresentationAlfrescoSiteRepresenation.md)
 
-<a name="getContentInFolderPathUsingGET1"></a>
-# **getContentInFolderPathUsingGET1**
-> ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderPathUsingGET1(repositoryIdsiteIdfolderPath)
+<a name="getContentInFolderPath"></a>
+# **getContentInFolderPath**
+> ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderPath(repositoryIdsiteIdfolderPath)
 
 List files and folders inside a specific folder identified by folder path
 
@@ -69,7 +69,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-integrationalfrescoonpremiseApi.getContentInFolderPathUsingGET1(repositoryIdsiteIdfolderPath).then((data) => {
+integrationalfrescoonpremiseApi.getContentInFolderPath(repositoryIdsiteIdfolderPath).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -89,9 +89,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
 
-<a name="getContentInFolderUsingGET1"></a>
-# **getContentInFolderUsingGET1**
-> ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderUsingGET1(repositoryIdfolderId)
+<a name="getContentInFolder"></a>
+# **getContentInFolder**
+> ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolder(repositoryIdfolderId)
 
 List files and folders inside a specific folder
 
@@ -108,7 +108,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-integrationalfrescoonpremiseApi.getContentInFolderUsingGET1(repositoryIdfolderId).then((data) => {
+integrationalfrescoonpremiseApi.getContentInFolder(repositoryIdfolderId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -127,9 +127,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
 
-<a name="getContentInSiteUsingGET1"></a>
-# **getContentInSiteUsingGET1**
-> ResultListDataRepresentationAlfrescoContentRepresentation getContentInSiteUsingGET1(repositoryIdsiteId)
+<a name="getContentInSite"></a>
+# **getContentInSite**
+> ResultListDataRepresentationAlfrescoContentRepresentation getContentInSite(repositoryIdsiteId)
 
 List files and folders inside a specific site
 
@@ -146,7 +146,7 @@ this.alfrescoApi.setConfig({
 let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
 
-integrationalfrescoonpremiseApi.getContentInSiteUsingGET1(repositoryIdsiteId).then((data) => {
+integrationalfrescoonpremiseApi.getContentInSite(repositoryIdsiteId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -165,9 +165,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
 
-<a name="getRepositoriesUsingGET"></a>
-# **getRepositoriesUsingGET**
-> ResultListDataRepresentationAlfrescoEndpointRepresentation getRepositoriesUsingGET(opts)
+<a name="getRepositories"></a>
+# **getRepositories**
+> ResultListDataRepresentationAlfrescoEndpointRepresentation getRepositories(opts)
 
 List Alfresco repositories
 
@@ -190,7 +190,7 @@ let opts = {
   'includeAccounts': true //  | includeAccounts
 };
 
-integrationalfrescoonpremiseApi.getRepositoriesUsingGET(opts).then((data) => {
+integrationalfrescoonpremiseApi.getRepositories(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

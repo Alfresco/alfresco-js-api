@@ -4,24 +4,24 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createIdentityLinkUsingPOST2**](TasksApi.md#createIdentityLinkUsingPOST2) | **POST** /enterprise/tasks/{taskId}/identitylinks | List the users and groups involved with a task
-[**createNewTaskUsingPOST**](TasksApi.md#createNewTaskUsingPOST) | **POST** /enterprise/tasks | Create a standalone task
-[**deleteIdentityLinkUsingDELETE2**](TasksApi.md#deleteIdentityLinkUsingDELETE2) | **DELETE** /enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type} | Remove a user or group involvement from a task
-[**deleteTaskUsingDELETE**](TasksApi.md#deleteTaskUsingDELETE) | **DELETE** /enterprise/tasks/{taskId} | Delete a task
-[**filterTasksUsingPOST**](TasksApi.md#filterTasksUsingPOST) | **POST** /enterprise/tasks/filter | Filter a list of tasks
-[**getIdentityLinkTypeUsingGET2**](TasksApi.md#getIdentityLinkTypeUsingGET2) | **GET** /enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type} | Get a user or group involvement with a task
-[**getIdentityLinksForFamilyUsingGET2**](TasksApi.md#getIdentityLinksForFamilyUsingGET2) | **GET** /enterprise/tasks/{taskId}/identitylinks/{family} | List either the users or groups involved with a process instance
-[**getIdentityLinksUsingGET2**](TasksApi.md#getIdentityLinksUsingGET2) | **GET** /enterprise/tasks/{taskId}/identitylinks | getIdentityLinks
-[**getTaskAuditLogUsingGET1**](TasksApi.md#getTaskAuditLogUsingGET1) | **GET** /enterprise/tasks/{taskId}/audit | Get the audit log for a task
-[**getTaskUsingGET**](TasksApi.md#getTaskUsingGET) | **GET** /enterprise/tasks/{taskId} | Get a task
-[**listHistoricTasksUsingPOST**](TasksApi.md#listHistoricTasksUsingPOST) | **POST** /enterprise/historic-tasks/query | Query historic tasks
-[**listTasksUsingPOST**](TasksApi.md#listTasksUsingPOST) | **POST** /enterprise/tasks/query | List tasks
-[**updateTaskUsingPUT**](TasksApi.md#updateTaskUsingPUT) | **PUT** /enterprise/tasks/{taskId} | Update a task
+[**createIdentityLink**](TasksApi.md#createIdentityLink) | **POST** /enterprise/tasks/{taskId}/identitylinks | List the users and groups involved with a task
+[**createNewTask**](TasksApi.md#createNewTask) | **POST** /enterprise/tasks | Create a standalone task
+[**deleteIdentityLink**](TasksApi.md#deleteIdentityLink) | **DELETE** /enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type} | Remove a user or group involvement from a task
+[**deleteTask**](TasksApi.md#deleteTask) | **DELETE** /enterprise/tasks/{taskId} | Delete a task
+[**filterTasks**](TasksApi.md#filterTasks) | **POST** /enterprise/tasks/filter | Filter a list of tasks
+[**getIdentityLinkType**](TasksApi.md#getIdentityLinkType) | **GET** /enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type} | Get a user or group involvement with a task
+[**getIdentityLinksForFamily**](TasksApi.md#getIdentityLinksForFamily) | **GET** /enterprise/tasks/{taskId}/identitylinks/{family} | List either the users or groups involved with a process instance
+[**getIdentityLinks**](TasksApi.md#getIdentityLinks) | **GET** /enterprise/tasks/{taskId}/identitylinks | getIdentityLinks
+[**getTaskAuditLog**](TasksApi.md#getTaskAuditLog) | **GET** /enterprise/tasks/{taskId}/audit | Get the audit log for a task
+[**getTask**](TasksApi.md#getTask) | **GET** /enterprise/tasks/{taskId} | Get a task
+[**listHistoricTasks**](TasksApi.md#listHistoricTasks) | **POST** /enterprise/historic-tasks/query | Query historic tasks
+[**listTasks**](TasksApi.md#listTasks) | **POST** /enterprise/tasks/query | List tasks
+[**updateTask**](TasksApi.md#updateTask) | **PUT** /enterprise/tasks/{taskId} | Update a task
 
 
-<a name="createIdentityLinkUsingPOST2"></a>
-# **createIdentityLinkUsingPOST2**
-> IdentityLinkRepresentation createIdentityLinkUsingPOST2(taskIdidentityLinkRepresentation)
+<a name="createIdentityLink"></a>
+# **createIdentityLink**
+> IdentityLinkRepresentation createIdentityLink(taskIdidentityLinkRepresentation)
 
 List the users and groups involved with a task
 
@@ -38,7 +38,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.createIdentityLinkUsingPOST2(taskIdidentityLinkRepresentation).then((data) => {
+tasksApi.createIdentityLink(taskIdidentityLinkRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -57,9 +57,9 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
-<a name="createNewTaskUsingPOST"></a>
-# **createNewTaskUsingPOST**
-> TaskRepresentation createNewTaskUsingPOST(taskRepresentation)
+<a name="createNewTask"></a>
+# **createNewTask**
+> TaskRepresentation createNewTask(taskRepresentation)
 
 Create a standalone task
 
@@ -78,7 +78,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.createNewTaskUsingPOST(taskRepresentation).then((data) => {
+tasksApi.createNewTask(taskRepresentation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -96,9 +96,9 @@ Name | Type | Description  | Notes
 
 [**TaskRepresentation**](TaskRepresentation.md)
 
-<a name="deleteIdentityLinkUsingDELETE2"></a>
-# **deleteIdentityLinkUsingDELETE2**
-> deleteIdentityLinkUsingDELETE2(taskIdfamilyidentityIdtype)
+<a name="deleteIdentityLink"></a>
+# **deleteIdentityLink**
+> deleteIdentityLink(taskIdfamilyidentityIdtype)
 
 Remove a user or group involvement from a task
 
@@ -115,7 +115,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.deleteIdentityLinkUsingDELETE2(taskIdfamilyidentityIdtype).then(() => {
+tasksApi.deleteIdentityLink(taskIdfamilyidentityIdtype).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -136,9 +136,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="deleteTaskUsingDELETE"></a>
-# **deleteTaskUsingDELETE**
-> deleteTaskUsingDELETE(taskId)
+<a name="deleteTask"></a>
+# **deleteTask**
+> deleteTask(taskId)
 
 Delete a task
 
@@ -155,7 +155,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.deleteTaskUsingDELETE(taskId).then(() => {
+tasksApi.deleteTask(taskId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -173,9 +173,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="filterTasksUsingPOST"></a>
-# **filterTasksUsingPOST**
-> ResultListDataRepresentationTaskRepresentation filterTasksUsingPOST(tasksFilter)
+<a name="filterTasks"></a>
+# **filterTasks**
+> ResultListDataRepresentationTaskRepresentation filterTasks(tasksFilter)
 
 Filter a list of tasks
 
@@ -192,7 +192,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.filterTasksUsingPOST(tasksFilter).then((data) => {
+tasksApi.filterTasks(tasksFilter).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -210,9 +210,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationTaskRepresentation**](ResultListDataRepresentationTaskRepresentation.md)
 
-<a name="getIdentityLinkTypeUsingGET2"></a>
-# **getIdentityLinkTypeUsingGET2**
-> IdentityLinkRepresentation getIdentityLinkTypeUsingGET2(taskIdfamilyidentityIdtype)
+<a name="getIdentityLinkType"></a>
+# **getIdentityLinkType**
+> IdentityLinkRepresentation getIdentityLinkType(taskIdfamilyidentityIdtype)
 
 Get a user or group involvement with a task
 
@@ -229,7 +229,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.getIdentityLinkTypeUsingGET2(taskIdfamilyidentityIdtype).then((data) => {
+tasksApi.getIdentityLinkType(taskIdfamilyidentityIdtype).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -250,9 +250,9 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
-<a name="getIdentityLinksForFamilyUsingGET2"></a>
-# **getIdentityLinksForFamilyUsingGET2**
-> IdentityLinkRepresentation getIdentityLinksForFamilyUsingGET2(taskIdfamily)
+<a name="getIdentityLinksForFamily"></a>
+# **getIdentityLinksForFamily**
+> IdentityLinkRepresentation getIdentityLinksForFamily(taskIdfamily)
 
 List either the users or groups involved with a process instance
 
@@ -269,7 +269,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.getIdentityLinksForFamilyUsingGET2(taskIdfamily).then((data) => {
+tasksApi.getIdentityLinksForFamily(taskIdfamily).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -288,9 +288,9 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
-<a name="getIdentityLinksUsingGET2"></a>
-# **getIdentityLinksUsingGET2**
-> IdentityLinkRepresentation getIdentityLinksUsingGET2(taskId)
+<a name="getIdentityLinks"></a>
+# **getIdentityLinks**
+> IdentityLinkRepresentation getIdentityLinks(taskId)
 
 getIdentityLinks
 
@@ -307,7 +307,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.getIdentityLinksUsingGET2(taskId).then((data) => {
+tasksApi.getIdentityLinks(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -325,9 +325,9 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
-<a name="getTaskAuditLogUsingGET1"></a>
-# **getTaskAuditLogUsingGET1**
-> TaskAuditInfoRepresentation getTaskAuditLogUsingGET1(taskId)
+<a name="getTaskAuditLog"></a>
+# **getTaskAuditLog**
+> TaskAuditInfoRepresentation getTaskAuditLog(taskId)
 
 Get the audit log for a task
 
@@ -344,7 +344,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.getTaskAuditLogUsingGET1(taskId).then((data) => {
+tasksApi.getTaskAuditLog(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -362,9 +362,9 @@ Name | Type | Description  | Notes
 
 [**TaskAuditInfoRepresentation**](TaskAuditInfoRepresentation.md)
 
-<a name="getTaskUsingGET"></a>
-# **getTaskUsingGET**
-> TaskRepresentation getTaskUsingGET(taskId)
+<a name="getTask"></a>
+# **getTask**
+> TaskRepresentation getTask(taskId)
 
 Get a task
 
@@ -381,7 +381,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.getTaskUsingGET(taskId).then((data) => {
+tasksApi.getTask(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -399,9 +399,9 @@ Name | Type | Description  | Notes
 
 [**TaskRepresentation**](TaskRepresentation.md)
 
-<a name="listHistoricTasksUsingPOST"></a>
-# **listHistoricTasksUsingPOST**
-> ResultListDataRepresentationTaskRepresentation listHistoricTasksUsingPOST(queryRequest)
+<a name="listHistoricTasks"></a>
+# **listHistoricTasks**
+> ResultListDataRepresentationTaskRepresentation listHistoricTasks(queryRequest)
 
 Query historic tasks
 
@@ -418,7 +418,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.listHistoricTasksUsingPOST(queryRequest).then((data) => {
+tasksApi.listHistoricTasks(queryRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -436,9 +436,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationTaskRepresentation**](ResultListDataRepresentationTaskRepresentation.md)
 
-<a name="listTasksUsingPOST"></a>
-# **listTasksUsingPOST**
-> ResultListDataRepresentationTaskRepresentation listTasksUsingPOST(tasksQuery)
+<a name="listTasks"></a>
+# **listTasks**
+> ResultListDataRepresentationTaskRepresentation listTasks(tasksQuery)
 
 List tasks
 
@@ -455,7 +455,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.listTasksUsingPOST(tasksQuery).then((data) => {
+tasksApi.listTasks(tasksQuery).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -473,9 +473,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationTaskRepresentation**](ResultListDataRepresentationTaskRepresentation.md)
 
-<a name="updateTaskUsingPUT"></a>
-# **updateTaskUsingPUT**
-> TaskRepresentation updateTaskUsingPUT(taskIdupdated)
+<a name="updateTask"></a>
+# **updateTask**
+> TaskRepresentation updateTask(taskIdupdated)
 
 Update a task
 
@@ -494,7 +494,7 @@ this.alfrescoApi.setConfig({
 let tasksApi = new TasksApi(this.alfrescoApi);
 
 
-tasksApi.updateTaskUsingPUT(taskIdupdated).then((data) => {
+tasksApi.updateTask(taskIdupdated).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

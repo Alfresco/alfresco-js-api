@@ -16,99 +16,14 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { ActivitiGroupsApi as NewGroupsApi } from '../../../../api-new/activiti-rest-api/api/groups.api';
 
 /**
  * @deprecated 3.0.0
  */
-export class GroupsApi {
+export class GroupsApi extends NewGroupsApi {
 
-    apiClient: ProcessClient;
-
-    constructor(alfrescoApi?: AlfrescoApi) {
+    public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;
-    }
-
-    /**
-     * Function to receive the result of the getGroups operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * List groups
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.filter filter
-     * @param {Integer} opts.groupId groupId
-     * @param {String} opts.externalId externalId
-     * @param {String} opts.externalIdCaseInsensitive externalIdCaseInsensitive
-     * @param {Integer} opts.tenantId tenantId
-     */
-    getGroups(opts?: any) {
-        opts = opts || {};
-        let postBody = null;
-
-
-        let pathParams = {};
-        let queryParams = {
-            'filter': opts['filter'],
-            'groupId': opts['groupId'],
-            'externalId': opts['externalId'],
-            'externalIdCaseInsensitive': opts['externalIdCaseInsensitive'],
-            'tenantId': opts['tenantId']
-        };
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/groups', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
-    }
-
-    /**
-     * Function to receive the result of the getUsersForGroup operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * List users member of a specific group
-     * @param {Integer} groupId groupId
-     */
-    getUsersForGroup(groupId) {
-        let postBody = null;
-
-        // verify the required parameter 'groupId' is set
-        if (groupId === undefined || groupId === null) {
-            throw "Missing param 'groupId' in getUsersForGroup";
-        }
-
-
-        let pathParams = {
-            'groupId': groupId
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/groups/{groupId}/users', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
     }
 }

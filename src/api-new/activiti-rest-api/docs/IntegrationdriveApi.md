@@ -4,13 +4,13 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**confirmAuthorisationUsingGET2**](IntegrationdriveApi.md#confirmAuthorisationUsingGET2) | **GET** /enterprise/integration/google-drive/confirm-auth-request | Drive Authorization
-[**getFilesUsingGET1**](IntegrationdriveApi.md#getFilesUsingGET1) | **GET** /enterprise/integration/google-drive/files | List files and folders
+[**confirmAuthorisation**](IntegrationdriveApi.md#confirmAuthorisation) | **GET** /enterprise/integration/google-drive/confirm-auth-request | Drive Authorization
+[**getFiles**](IntegrationdriveApi.md#getFiles) | **GET** /enterprise/integration/google-drive/files | List files and folders
 
 
-<a name="confirmAuthorisationUsingGET2"></a>
-# **confirmAuthorisationUsingGET2**
-> confirmAuthorisationUsingGET2()
+<a name="confirmAuthorisation"></a>
+# **confirmAuthorisation**
+> confirmAuthorisation()
 
 Drive Authorization
 
@@ -28,7 +28,7 @@ this.alfrescoApi.setConfig({
 
 let integrationdriveApi = new IntegrationdriveApi(this.alfrescoApi);
 
-integrationdriveApi.confirmAuthorisationUsingGET2().then(() => {
+integrationdriveApi.confirmAuthorisation().then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -43,9 +43,9 @@ This endpoint does not need any parameter.
 
 null (empty response body)
 
-<a name="getFilesUsingGET1"></a>
-# **getFilesUsingGET1**
-> ResultListDataRepresentationGoogleDriveContent getFilesUsingGET1(opts)
+<a name="getFiles"></a>
+# **getFiles**
+> ResultListDataRepresentationGoogleDriveContent getFiles(opts)
 
 List files and folders
 
@@ -67,7 +67,7 @@ let opts = {
   'currentFolderOnly': true //  | currentFolderOnly
 };
 
-integrationdriveApi.getFilesUsingGET1(opts).then((data) => {
+integrationdriveApi.getFiles(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

@@ -4,14 +4,14 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**deployAppDefinitionsUsingPOST**](RuntimeappdefinitionsApi.md#deployAppDefinitionsUsingPOST) | **POST** /enterprise/runtime-app-definitions | Deploy a published app
-[**getAppDefinitionUsingGET1**](RuntimeappdefinitionsApi.md#getAppDefinitionUsingGET1) | **GET** /enterprise/runtime-app-definitions/{appDefinitionId} | Get a runtime app
-[**getAppDefinitionsUsingGET**](RuntimeappdefinitionsApi.md#getAppDefinitionsUsingGET) | **GET** /enterprise/runtime-app-definitions | List runtime apps
+[**deployAppDefinitions**](RuntimeappdefinitionsApi.md#deployAppDefinitions) | **POST** /enterprise/runtime-app-definitions | Deploy a published app
+[**getAppDefinition**](RuntimeappdefinitionsApi.md#getAppDefinition) | **GET** /enterprise/runtime-app-definitions/{appDefinitionId} | Get a runtime app
+[**getAppDefinitions**](RuntimeappdefinitionsApi.md#getAppDefinitions) | **GET** /enterprise/runtime-app-definitions | List runtime apps
 
 
-<a name="deployAppDefinitionsUsingPOST"></a>
-# **deployAppDefinitionsUsingPOST**
-> deployAppDefinitionsUsingPOST(saveObject)
+<a name="deployAppDefinitions"></a>
+# **deployAppDefinitions**
+> deployAppDefinitions(saveObject)
 
 Deploy a published app
 
@@ -30,7 +30,7 @@ this.alfrescoApi.setConfig({
 let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
 
-runtimeappdefinitionsApi.deployAppDefinitionsUsingPOST(saveObject).then(() => {
+runtimeappdefinitionsApi.deployAppDefinitions(saveObject).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -48,9 +48,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getAppDefinitionUsingGET1"></a>
-# **getAppDefinitionUsingGET1**
-> AppDefinitionRepresentation getAppDefinitionUsingGET1(appDefinitionId)
+<a name="getAppDefinition"></a>
+# **getAppDefinition**
+> AppDefinitionRepresentation getAppDefinition(appDefinitionId)
 
 Get a runtime app
 
@@ -67,7 +67,7 @@ this.alfrescoApi.setConfig({
 let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
 
-runtimeappdefinitionsApi.getAppDefinitionUsingGET1(appDefinitionId).then((data) => {
+runtimeappdefinitionsApi.getAppDefinition(appDefinitionId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -85,9 +85,9 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionRepresentation**](AppDefinitionRepresentation.md)
 
-<a name="getAppDefinitionsUsingGET"></a>
-# **getAppDefinitionsUsingGET**
-> ResultListDataRepresentationAppDefinitionRepresentation getAppDefinitionsUsingGET()
+<a name="getAppDefinitions"></a>
+# **getAppDefinitions**
+> ResultListDataRepresentationAppDefinitionRepresentation getAppDefinitions()
 
 List runtime apps
 
@@ -105,7 +105,7 @@ this.alfrescoApi.setConfig({
 
 let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
-runtimeappdefinitionsApi.getAppDefinitionsUsingGET().then((data) => {
+runtimeappdefinitionsApi.getAppDefinitions().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

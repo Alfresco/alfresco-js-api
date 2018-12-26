@@ -4,13 +4,13 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAuditTrailUsingGET**](DecisionauditsApi.md#getAuditTrailUsingGET) | **GET** /enterprise/decisions/audits/{auditTrailId} | Get an audit trail
-[**getAuditTrailsUsingGET**](DecisionauditsApi.md#getAuditTrailsUsingGET) | **GET** /enterprise/decisions/audits | Query decision table audit trails
+[**getAuditTrail**](DecisionauditsApi.md#getAuditTrail) | **GET** /enterprise/decisions/audits/{auditTrailId} | Get an audit trail
+[**getAuditTrails**](DecisionauditsApi.md#getAuditTrails) | **GET** /enterprise/decisions/audits | Query decision table audit trails
 
 
-<a name="getAuditTrailUsingGET"></a>
-# **getAuditTrailUsingGET**
-> DecisionAuditRepresentation getAuditTrailUsingGET(auditTrailId)
+<a name="getAuditTrail"></a>
+# **getAuditTrail**
+> DecisionAuditRepresentation getAuditTrail(auditTrailId)
 
 Get an audit trail
 
@@ -27,7 +27,7 @@ this.alfrescoApi.setConfig({
 let decisionauditsApi = new DecisionauditsApi(this.alfrescoApi);
 
 
-decisionauditsApi.getAuditTrailUsingGET(auditTrailId).then((data) => {
+decisionauditsApi.getAuditTrail(auditTrailId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -45,9 +45,9 @@ Name | Type | Description  | Notes
 
 [**DecisionAuditRepresentation**](DecisionAuditRepresentation.md)
 
-<a name="getAuditTrailsUsingGET"></a>
-# **getAuditTrailsUsingGET**
-> ResultListDataRepresentationDecisionAuditRepresentation getAuditTrailsUsingGET(decisionKeydmnDeploymentId)
+<a name="getAuditTrails"></a>
+# **getAuditTrails**
+> ResultListDataRepresentationDecisionAuditRepresentation getAuditTrails(decisionKeydmnDeploymentId)
 
 Query decision table audit trails
 
@@ -64,7 +64,7 @@ this.alfrescoApi.setConfig({
 let decisionauditsApi = new DecisionauditsApi(this.alfrescoApi);
 
 
-decisionauditsApi.getAuditTrailsUsingGET(decisionKeydmnDeploymentId).then((data) => {
+decisionauditsApi.getAuditTrails(decisionKeydmnDeploymentId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

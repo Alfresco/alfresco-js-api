@@ -4,15 +4,15 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getFormSubmittedFromsUsingGET**](SubmittedformsApi.md#getFormSubmittedFromsUsingGET) | **GET** /enterprise/form-submitted-forms/{formId} | List submissions for a form
-[**getProcessSubmittedFromsUsingGET**](SubmittedformsApi.md#getProcessSubmittedFromsUsingGET) | **GET** /enterprise/process-submitted-forms/{processId} | List submissions for a process instance
-[**getSubmittedFromUsingGET**](SubmittedformsApi.md#getSubmittedFromUsingGET) | **GET** /enterprise/submitted-forms/{submittedFormId} | Get a form submission
-[**getTaskSubmittedFromsUsingGET**](SubmittedformsApi.md#getTaskSubmittedFromsUsingGET) | **GET** /enterprise/task-submitted-form/{taskId} | Get the submitted form for a task
+[**getFormSubmittedFroms**](SubmittedformsApi.md#getFormSubmittedFroms) | **GET** /enterprise/form-submitted-forms/{formId} | List submissions for a form
+[**getProcessSubmittedFroms**](SubmittedformsApi.md#getProcessSubmittedFroms) | **GET** /enterprise/process-submitted-forms/{processId} | List submissions for a process instance
+[**getSubmittedFrom**](SubmittedformsApi.md#getSubmittedFrom) | **GET** /enterprise/submitted-forms/{submittedFormId} | Get a form submission
+[**getTaskSubmittedFroms**](SubmittedformsApi.md#getTaskSubmittedFroms) | **GET** /enterprise/task-submitted-form/{taskId} | Get the submitted form for a task
 
 
-<a name="getFormSubmittedFromsUsingGET"></a>
-# **getFormSubmittedFromsUsingGET**
-> ResultListDataRepresentationSubmittedFormRepresentation getFormSubmittedFromsUsingGET(formIdopts)
+<a name="getFormSubmittedFroms"></a>
+# **getFormSubmittedFroms**
+> ResultListDataRepresentationSubmittedFormRepresentation getFormSubmittedFroms(formIdopts)
 
 List submissions for a form
 
@@ -34,7 +34,7 @@ let opts = {
   'size': 56 //  | size
 };
 
-submittedformsApi.getFormSubmittedFromsUsingGET(formIdopts).then((data) => {
+submittedformsApi.getFormSubmittedFroms(formIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -55,9 +55,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationSubmittedFormRepresentation**](ResultListDataRepresentationSubmittedFormRepresentation.md)
 
-<a name="getProcessSubmittedFromsUsingGET"></a>
-# **getProcessSubmittedFromsUsingGET**
-> ResultListDataRepresentationSubmittedFormRepresentation getProcessSubmittedFromsUsingGET(processId)
+<a name="getProcessSubmittedFroms"></a>
+# **getProcessSubmittedFroms**
+> ResultListDataRepresentationSubmittedFormRepresentation getProcessSubmittedFroms(processId)
 
 List submissions for a process instance
 
@@ -74,7 +74,7 @@ this.alfrescoApi.setConfig({
 let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
-submittedformsApi.getProcessSubmittedFromsUsingGET(processId).then((data) => {
+submittedformsApi.getProcessSubmittedFroms(processId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -92,9 +92,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationSubmittedFormRepresentation**](ResultListDataRepresentationSubmittedFormRepresentation.md)
 
-<a name="getSubmittedFromUsingGET"></a>
-# **getSubmittedFromUsingGET**
-> SubmittedFormRepresentation getSubmittedFromUsingGET(submittedFormId)
+<a name="getSubmittedFrom"></a>
+# **getSubmittedFrom**
+> SubmittedFormRepresentation getSubmittedFrom(submittedFormId)
 
 Get a form submission
 
@@ -111,7 +111,7 @@ this.alfrescoApi.setConfig({
 let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
-submittedformsApi.getSubmittedFromUsingGET(submittedFormId).then((data) => {
+submittedformsApi.getSubmittedFrom(submittedFormId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -129,9 +129,9 @@ Name | Type | Description  | Notes
 
 [**SubmittedFormRepresentation**](SubmittedFormRepresentation.md)
 
-<a name="getTaskSubmittedFromsUsingGET"></a>
-# **getTaskSubmittedFromsUsingGET**
-> SubmittedFormRepresentation getTaskSubmittedFromsUsingGET(taskId)
+<a name="getTaskSubmittedFroms"></a>
+# **getTaskSubmittedFroms**
+> SubmittedFormRepresentation getTaskSubmittedFroms(taskId)
 
 Get the submitted form for a task
 
@@ -148,7 +148,7 @@ this.alfrescoApi.setConfig({
 let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
-submittedformsApi.getTaskSubmittedFromsUsingGET(taskId).then((data) => {
+submittedformsApi.getTaskSubmittedFroms(taskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

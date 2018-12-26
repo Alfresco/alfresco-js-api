@@ -16,90 +16,27 @@
     */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ProcessClient } from '../../../../processClient';
+import { ProcessInstancesApi } from '../../../../api-new/activiti-rest-api/api';
+import { ProcessInstanceFilterRequestRepresentation } from '../../../../api-new/activiti-rest-api/model/processInstanceFilterRequestRepresentation';
+import { ResultListDataRepresentationProcessInstanceRepresentation } from '../../../../api-new/activiti-rest-api/model/resultListDataRepresentationProcessInstanceRepresentation';
+import { ProcessInstanceQueryRepresentation } from '../../../../api-new/activiti-rest-api/model/processInstanceQueryRepresentation';
 
 /**
  * @deprecated 3.0.0
  */
 export class ProcessInstancesListingApi {
 
-    apiClient: ProcessClient;
+    processInstancesApi: ProcessInstancesApi;
 
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.processInstancesApi = new ProcessInstancesApi(alfrescoApi);
     }
 
-    /**
-     * Function to receive the result of the filterProcessInstances operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Filter a list of process instances
-     * @param {module:model/ProcessInstanceFilterRequestRepresentation} filterRequest filterRequest
-     */
-    filterProcessInstances(filterRequest) {
-        let postBody = filterRequest;
-
-        // verify the required parameter 'filterRequest' is set
-        if (filterRequest === undefined || filterRequest === null) {
-            throw "Missing param 'filterRequest' in filterProcessInstances";
-        }
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/filter', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    filterProcessInstances(filterRequest: ProcessInstanceFilterRequestRepresentation): Promise<ResultListDataRepresentationProcessInstanceRepresentation> {
+        return this.processInstancesApi.filterProcessInstances(filterRequest);
     }
 
-    /**
-     * Function to receive the result of the getProcessInstances operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ResultListDataRepresentation} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Retrieve a list of process instances
-     * @param {module:model/ObjectNode} requestNode requestNode
-     */
-    getProcessInstances(requestNode) {
-        let postBody = requestNode;
-
-        // verify the required parameter 'requestNode' is set
-        if (requestNode === undefined || requestNode === null) {
-            throw "Missing param 'requestNode' in getProcessInstances";
-        }
-
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let returnType = null;
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/query', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
-        );
+    getProcessInstances(processInstancesQuery: ProcessInstanceQueryRepresentation): Promise<ResultListDataRepresentationProcessInstanceRepresentation> {
+        return this.processInstancesApi.getProcessInstances(processInstancesQuery);
     }
 }

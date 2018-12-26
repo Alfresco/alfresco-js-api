@@ -28,9 +28,9 @@ import { BaseApi } from './base.api';
 export class UsersApi extends BaseApi {
     /**
     * Execute an action for a specific user
-    * 
+    *
     * Typical action is updating/reset password
-    * 
+    *
     * @param userId userId
     * @param actionRequest actionRequest
     * @return Promise<{}>
@@ -40,11 +40,11 @@ export class UsersApi extends BaseApi {
         let postBody = actionRequest;
 
         if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in executeActionUsingPOST");
+            throw new Error("Required param 'userId' in executeAction");
         }
 
         if (actionRequest === undefined || actionRequest === null) {
-            throw new Error("Required param 'actionRequest' in executeActionUsingPOST");
+            throw new Error("Required param 'actionRequest' in executeAction");
         }
 
         let pathParams = {
@@ -64,61 +64,36 @@ export class UsersApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/users/{userId}', 'POST',
+            '/api/enterprise/users/{userId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Stream user profile picture
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @return Promise<{}>
         */
-    getProfilePicture1(userId: number): Promise<any> {
-
-        let postBody = null;
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in getProfilePictureUsingGET1");
-        }
-
-        let pathParams = {
-            'userId': userId
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['*/*'];
-
-        return this.apiClient.callApi(
-            '/enterprise/users/{userId}/picture', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+    getUserProfilePictureUrl(userId) {
+        return this.apiClient.basePath + '/app/rest/users/' + userId + '/picture';
     }
+
     /**
         * Get a user
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @return Promise<UserRepresentation>
         */
-    getUser1(userId: number): Promise<UserRepresentation> {
+    getUser(userId: number): Promise<UserRepresentation> {
 
         let postBody = null;
 
         if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in getUserUsingGET1");
+            throw new Error("Required param 'userId' in getUser");
         }
 
         let pathParams = {
@@ -138,15 +113,15 @@ export class UsersApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/users/{userId}', 'GET',
+            '/api/enterprise/users/{userId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Query users
-        * 
+        *
         * A common use case is that a user wants to select another user (eg. when assigning a task) or group.
-        * 
+        *
         * @param opts Optional parameters
         * @param opts.filter filter
         * @param opts.email email
@@ -158,7 +133,7 @@ export class UsersApi extends BaseApi {
         * @param opts.tenantId tenantId
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */
-    getUsers1(opts?: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
+    getUsers(opts?: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -187,15 +162,15 @@ export class UsersApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/users', 'GET',
+            '/api/enterprise/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Request a password reset
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param resetPassword resetPassword
         * @return Promise<{}>
         */
@@ -204,7 +179,7 @@ export class UsersApi extends BaseApi {
         let postBody = resetPassword;
 
         if (resetPassword === undefined || resetPassword === null) {
-            throw new Error("Required param 'resetPassword' in requestPasswordResetUsingPOST");
+            throw new Error("Required param 'resetPassword' in requestPasswordReset");
         }
 
         let pathParams = {
@@ -224,15 +199,15 @@ export class UsersApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/idm/passwords', 'POST',
+            '/api/enterprise/idm/passwords', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }
     /**
         * Update a user
-        * 
-        * 
-        * 
+        *
+        *
+        *
         * @param userId userId
         * @param userRequest userRequest
         * @return Promise<UserRepresentation>
@@ -242,11 +217,11 @@ export class UsersApi extends BaseApi {
         let postBody = userRequest;
 
         if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in updateUserUsingPUT");
+            throw new Error("Required param 'userId' in updateUser");
         }
 
         if (userRequest === undefined || userRequest === null) {
-            throw new Error("Required param 'userRequest' in updateUserUsingPUT");
+            throw new Error("Required param 'userRequest' in updateUser");
         }
 
         let pathParams = {
@@ -266,7 +241,7 @@ export class UsersApi extends BaseApi {
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/enterprise/users/{userId}', 'PUT',
+            '/api/enterprise/users/{userId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts)
     }

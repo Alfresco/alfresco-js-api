@@ -181,7 +181,7 @@
                 ],
                 "summary": "Retrieve external account information",
                 "description": "Accounts are used to integrate with third party apps and clients",
-                "operationId": "getAccountsUsingGET",
+                "operationId": "getAccounts",
                 "consumes": [
                     "application/json"
                 ],
@@ -211,7 +211,7 @@
                     "admin-endpoints"
                 ],
                 "summary": "List endpoint authorizations",
-                "operationId": "getBasicAuthConfigurationsUsingGET",
+                "operationId": "getBasicAuthConfigurations",
                 "consumes": [
                     "application/json"
                 ],
@@ -252,7 +252,7 @@
                     "admin-endpoints"
                 ],
                 "summary": "Add an endpoint authorization",
-                "operationId": "createBasicAuthConfigurationUsingPOST",
+                "operationId": "createBasicAuthConfiguration",
                 "consumes": [
                     "application/json"
                 ],
@@ -293,7 +293,7 @@
                     "admin-endpoints"
                 ],
                 "summary": "Get an endpoint authorization",
-                "operationId": "getBasicAuthConfigurationUsingGET",
+                "operationId": "getBasicAuthConfiguration",
                 "consumes": [
                     "application/json"
                 ],
@@ -339,7 +339,7 @@
                     "admin-endpoints"
                 ],
                 "summary": "Update an endpoint authorization",
-                "operationId": "updateBasicAuthConfigurationUsingPUT",
+                "operationId": "updateBasicAuthConfiguration",
                 "consumes": [
                     "application/json"
                 ],
@@ -386,7 +386,7 @@
                     "admin-endpoints"
                 ],
                 "summary": "Delete an endpoint authorization",
-                "operationId": "removeBasicAuthonfigurationUsingDELETE",
+                "operationId": "removeBasicAuthConfiguration",
                 "consumes": [
                     "application/json"
                 ],
@@ -431,7 +431,7 @@
                     "admin-endpoints"
                 ],
                 "summary": "List endpoints",
-                "operationId": "getEndpointConfigurationsUsingGET_1",
+                "operationId": "getEndpointConfigurations",
                 "consumes": [
                     "application/json"
                 ],
@@ -472,7 +472,7 @@
                     "admin-endpoints"
                 ],
                 "summary": "Create an endpoint",
-                "operationId": "createEndpointConfigurationUsingPOST",
+                "operationId": "createEndpointConfiguration",
                 "consumes": [
                     "application/json"
                 ],
@@ -513,7 +513,7 @@
                     "admin-endpoints"
                 ],
                 "summary": "Get an endpoint",
-                "operationId": "getEndpointConfigurationUsingGET_1",
+                "operationId": "getEndpointConfiguration",
                 "consumes": [
                     "application/json"
                 ],
@@ -559,7 +559,7 @@
                     "admin-endpoints"
                 ],
                 "summary": "Update an endpoint",
-                "operationId": "updateEndpointConfigurationUsingPUT",
+                "operationId": "updateEndpointConfiguration",
                 "consumes": [
                     "application/json"
                 ],
@@ -606,7 +606,7 @@
                     "admin-endpoints"
                 ],
                 "summary": "Delete an endpoint",
-                "operationId": "removeEndpointConfigurationUsingDELETE",
+                "operationId": "removeEndpointConfiguration",
                 "consumes": [
                     "application/json"
                 ],
@@ -651,7 +651,7 @@
                     "admin-groups"
                 ],
                 "summary": "Query groups",
-                "operationId": "getGroupsUsingGET_1",
+                "operationId": "getGroups",
                 "consumes": [
                     "application/json"
                 ],
@@ -706,7 +706,7 @@
                     "admin-groups"
                 ],
                 "summary": "Create a group",
-                "operationId": "createNewGroupUsingPOST",
+                "operationId": "createNewGroup",
                 "consumes": [
                     "application/json"
                 ],
@@ -747,7 +747,7 @@
                     "admin-groups"
                 ],
                 "summary": "Get a group",
-                "operationId": "getGroupUsingGET",
+                "operationId": "getGroup",
                 "consumes": [
                     "application/json"
                 ],
@@ -799,7 +799,7 @@
                     "admin-groups"
                 ],
                 "summary": "Update a group",
-                "operationId": "updateGroupUsingPUT",
+                "operationId": "updateGroup",
                 "consumes": [
                     "application/json"
                 ],
@@ -846,7 +846,7 @@
                     "admin-groups"
                 ],
                 "summary": "Delete a group",
-                "operationId": "deleteGroupUsingDELETE",
+                "operationId": "deleteGroup",
                 "consumes": [
                     "application/json"
                 ],
@@ -883,7 +883,7 @@
                     "admin-groups"
                 ],
                 "summary": "Activate a group",
-                "operationId": "activateUsingPOST",
+                "operationId": "activate",
                 "consumes": [
                     "application/json"
                 ],
@@ -920,7 +920,7 @@
                     "admin-groups"
                 ],
                 "summary": "Add users to a group",
-                "operationId": "addAllUsersToGroupUsingPOST",
+                "operationId": "addAllUsersToGroup",
                 "consumes": [
                     "application/json"
                 ],
@@ -957,7 +957,7 @@
                     "admin-groups"
                 ],
                 "summary": "Add capabilities to a group",
-                "operationId": "addGroupCapabilitiesUsingPOST",
+                "operationId": "addGroupCapabilities",
                 "consumes": [
                     "application/json"
                 ],
@@ -1003,7 +1003,7 @@
                     "admin-groups"
                 ],
                 "summary": "Remove a capability from a group",
-                "operationId": "deleteGroupCapabilityUsingDELETE",
+                "operationId": "deleteGroupCapability",
                 "consumes": [
                     "application/json"
                 ],
@@ -1048,7 +1048,7 @@
                     "admin-groups"
                 ],
                 "summary": "Add a user to a group",
-                "operationId": "addGroupMemberUsingPOST",
+                "operationId": "addGroupMember",
                 "consumes": [
                     "application/json"
                 ],
@@ -1091,7 +1091,7 @@
                     "admin-groups"
                 ],
                 "summary": "Delete a member from a group",
-                "operationId": "deleteGroupMemberUsingDELETE",
+                "operationId": "deleteGroupMember",
                 "consumes": [
                     "application/json"
                 ],
@@ -1136,7 +1136,7 @@
                     "admin-groups"
                 ],
                 "summary": "List group capabilities",
-                "operationId": "getCapabilitiesUsingGET",
+                "operationId": "getCapabilities",
                 "consumes": [
                     "application/json"
                 ],
@@ -1179,7 +1179,7 @@
                     "admin-groups"
                 ],
                 "summary": "Get related groups",
-                "operationId": "getRelatedGroupsUsingGET",
+                "operationId": "getRelatedGroups",
                 "consumes": [
                     "application/json"
                 ],
@@ -1222,7 +1222,7 @@
                     "admin-groups"
                 ],
                 "summary": "Get a related group",
-                "operationId": "addRelatedGroupUsingPOST",
+                "operationId": "addRelatedGroup",
                 "consumes": [
                     "application/json"
                 ],
@@ -1272,7 +1272,7 @@
                     "admin-groups"
                 ],
                 "summary": "Delete a related group",
-                "operationId": "deleteRelatedGroupUsingDELETE",
+                "operationId": "deleteRelatedGroup",
                 "consumes": [
                     "application/json"
                 ],
@@ -1317,7 +1317,7 @@
                     "admin-groups"
                 ],
                 "summary": "Get group members",
-                "operationId": "getGroupUsersUsingGET",
+                "operationId": "getGroupUsers",
                 "consumes": [
                     "application/json"
                 ],
@@ -1381,7 +1381,7 @@
                 ],
                 "summary": "List tenants",
                 "description": "Only a tenant manager may access this endpoint",
-                "operationId": "getTenantsUsingGET",
+                "operationId": "getTenants",
                 "consumes": [
                     "application/json"
                 ],
@@ -1413,7 +1413,7 @@
                 ],
                 "summary": "Create a tenant",
                 "description": "Only a tenant manager may access this endpoint",
-                "operationId": "createTenantUsingPOST",
+                "operationId": "createTenant",
                 "consumes": [
                     "application/json"
                 ],
@@ -1454,7 +1454,7 @@
                     "admin-tenants"
                 ],
                 "summary": "Get a tenant",
-                "operationId": "getTenantUsingGET",
+                "operationId": "getTenant",
                 "consumes": [
                     "application/json"
                 ],
@@ -1492,7 +1492,7 @@
                     "admin-tenants"
                 ],
                 "summary": "Update a tenant",
-                "operationId": "updateUsingPUT",
+                "operationId": "update",
                 "consumes": [
                     "application/json"
                 ],
@@ -1539,7 +1539,7 @@
                     "admin-tenants"
                 ],
                 "summary": "Delete a tenant",
-                "operationId": "deleteTenantUsingDELETE",
+                "operationId": "deleteTenant",
                 "consumes": [
                     "application/json"
                 ],
@@ -1576,7 +1576,7 @@
                     "admin-tenants"
                 ],
                 "summary": "Get tenant events",
-                "operationId": "getTenantEventsUsingGET",
+                "operationId": "getTenantEvents",
                 "consumes": [
                     "application/json"
                 ],
@@ -1619,7 +1619,7 @@
                     "admin-tenants"
                 ],
                 "summary": "Get a tenant's logo",
-                "operationId": "getTenantLogoUsingGET",
+                "operationId": "getTenantLogo",
                 "consumes": [
                     "application/json"
                 ],
@@ -1654,7 +1654,7 @@
                     "admin-tenants"
                 ],
                 "summary": "Update a tenant's logo",
-                "operationId": "uploadTenantLogoUsingPOST",
+                "operationId": "uploadTenantLogo",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -1701,7 +1701,7 @@
                     "admin-users"
                 ],
                 "summary": "Query users",
-                "operationId": "getUsersUsingGET",
+                "operationId": "getUsers",
                 "consumes": [
                     "application/json"
                 ],
@@ -1813,7 +1813,7 @@
                     "admin-users"
                 ],
                 "summary": "Create a user",
-                "operationId": "createNewUserUsingPOST",
+                "operationId": "createNewUser",
                 "consumes": [
                     "application/json"
                 ],
@@ -1852,7 +1852,7 @@
                     "admin-users"
                 ],
                 "summary": "Bulk update a list of users",
-                "operationId": "bulkUpdateUsersUsingPUT",
+                "operationId": "bulkUpdateUsers",
                 "consumes": [
                     "application/json"
                 ],
@@ -1890,7 +1890,7 @@
                     "admin-users"
                 ],
                 "summary": "Get a user",
-                "operationId": "getUserUsingGET",
+                "operationId": "getUser",
                 "consumes": [
                     "application/json"
                 ],
@@ -1935,7 +1935,7 @@
                     "admin-users"
                 ],
                 "summary": "Update a user",
-                "operationId": "updateUserDetailsUsingPUT",
+                "operationId": "updateUserDetails",
                 "consumes": [
                     "application/json"
                 ],
@@ -1982,7 +1982,7 @@
                 ],
                 "summary": "Import a new app definition",
                 "description": "Allows a zip file to be uploaded containing an app definition and any number of included models.<p>This is useful to bootstrap an environment (for users or continuous integration).<p>Before using any processes included in the import the app must be published and deployed.",
-                "operationId": "importAppDefinitionUsingPOST",
+                "operationId": "importAppDefinition",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -2029,7 +2029,7 @@
                     "app-definitions"
                 ],
                 "summary": "importAndPublishApp",
-                "operationId": "importAndPublishAppUsingPOST",
+                "operationId": "importAndPublishApp",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -2068,7 +2068,7 @@
                     "app-definitions"
                 ],
                 "summary": "deleteAppDefinition",
-                "operationId": "deleteAppDefinitionUsingDELETE",
+                "operationId": "deleteAppDefinition",
                 "consumes": [
                     "application/json"
                 ],
@@ -2105,7 +2105,7 @@
                     "app-definitions"
                 ],
                 "summary": "Get an app definition",
-                "operationId": "getAppDefinitionUsingGET",
+                "operationId": "getAppDefinition",
                 "consumes": [
                     "application/json"
                 ],
@@ -2143,7 +2143,7 @@
                     "app-definitions"
                 ],
                 "summary": "Update an app definition",
-                "operationId": "updateAppDefinitionUsingPUT",
+                "operationId": "updateAppDefinition",
                 "consumes": [
                     "application/json"
                 ],
@@ -2193,7 +2193,7 @@
                 ],
                 "summary": "Export an app definition",
                 "description": "This will return a zip file containing the app definition model and all related models (process definitions and forms).",
-                "operationId": "exportAppDefinitionUsingGET",
+                "operationId": "exportAppDefinition",
                 "consumes": [
                     "application/json"
                 ],
@@ -2241,7 +2241,7 @@
                 ],
                 "summary": "Update the content of an existing app",
                 "description": "Imports an app inside an existing app definition and creates a new version<p>Before using any new or updated processes included in the import the app must be (re-)published and deployed.",
-                "operationId": "importAppDefinitionUsingPOST_1",
+                "operationId": "importAppDefinition",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -2289,7 +2289,7 @@
                 ],
                 "summary": "Publish an app definition",
                 "description": "Publishing an app definition makes it available for use. The application must not have any validation errors or an error will be returned.<p>Before an app definition can be used by other users, it must also be deployed for their use",
-                "operationId": "publishAppDefinitionUsingPOST",
+                "operationId": "publishAppDefinition",
                 "consumes": [
                     "application/json"
                 ],
@@ -2338,7 +2338,7 @@
                     "app-definitions"
                 ],
                 "summary": "importAndPublishApp",
-                "operationId": "importAndPublishAppUsingPOST_1",
+                "operationId": "importAndPublishApp",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -2386,7 +2386,7 @@
                 ],
                 "summary": "Get server type and version",
                 "description": "Provides information about the running Alfresco Process Services Suite. The response payload object has the properties `type`, `majorVersion`, `minorVersion`, `revisionVersion` and `edition`.",
-                "operationId": "getAppVersionUsingGET",
+                "operationId": "getAppVersion",
                 "consumes": [
                     "application/json"
                 ],
@@ -2419,7 +2419,7 @@
                     "content"
                 ],
                 "summary": "Create a local representation of content from a remote repository",
-                "operationId": "createTemporaryRelatedContentUsingPOST",
+                "operationId": "createTemporaryRelatedContent",
                 "consumes": [
                     "application/json"
                 ],
@@ -2460,7 +2460,7 @@
                     "content"
                 ],
                 "summary": "Upload content and create a local representation",
-                "operationId": "createTemporaryRawRelatedContentUsingPOST",
+                "operationId": "createTemporaryRawRelatedContent",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -2499,7 +2499,7 @@
                     "content"
                 ],
                 "summary": "Get a local content representation",
-                "operationId": "getContentUsingGET",
+                "operationId": "getContent",
                 "consumes": [
                     "application/json"
                 ],
@@ -2537,7 +2537,7 @@
                     "content"
                 ],
                 "summary": "Remove a local content representation",
-                "operationId": "deleteContentUsingDELETE",
+                "operationId": "deleteContent",
                 "consumes": [
                     "application/json"
                 ],
@@ -2574,7 +2574,7 @@
                     "content"
                 ],
                 "summary": "Stream content from a local content representation",
-                "operationId": "getRawContentUsingGET_1",
+                "operationId": "getRawContent",
                 "consumes": [
                     "application/json"
                 ],
@@ -2612,7 +2612,7 @@
                     "content"
                 ],
                 "summary": "Stream content rendition",
-                "operationId": "getRawContentUsingGET",
+                "operationId": "getRawContent",
                 "consumes": [
                     "application/json"
                 ],
@@ -2656,7 +2656,7 @@
                     "decision-audits"
                 ],
                 "summary": "Query decision table audit trails",
-                "operationId": "getAuditTrailsUsingGET",
+                "operationId": "getAuditTrails",
                 "consumes": [
                     "application/json"
                 ],
@@ -2703,7 +2703,7 @@
                     "decision-audits"
                 ],
                 "summary": "Get an audit trail",
-                "operationId": "getAuditTrailUsingGET",
+                "operationId": "getAuditTrail",
                 "consumes": [
                     "application/json"
                 ],
@@ -2743,7 +2743,7 @@
                     "decision-tables"
                 ],
                 "summary": "Query decision tables",
-                "operationId": "getDecisionTablesUsingGET",
+                "operationId": "getDecisionTables",
                 "consumes": [
                     "application/json"
                 ],
@@ -2834,7 +2834,7 @@
                     "decision-tables"
                 ],
                 "summary": "Get a decision table",
-                "operationId": "getDecisionTableUsingGET",
+                "operationId": "getDecisionTable",
                 "consumes": [
                     "application/json"
                 ],
@@ -2874,7 +2874,7 @@
                     "decision-tables"
                 ],
                 "summary": "Get definition for a decision table",
-                "operationId": "getDecisionTableEditorJsonUsingGET",
+                "operationId": "getDecisionTableEditorJson",
                 "consumes": [
                     "application/json"
                 ],
@@ -2914,7 +2914,7 @@
                     "data-sources"
                 ],
                 "summary": "Get data sources",
-                "operationId": "getDataSourcesUsingGET",
+                "operationId": "getDataSources",
                 "consumes": [
                     "application/json"
                 ],
@@ -2954,7 +2954,7 @@
                     "endpoints"
                 ],
                 "summary": "List endpoint configurations",
-                "operationId": "getEndpointConfigurationsUsingGET",
+                "operationId": "getEndpointConfigurations",
                 "consumes": [
                     "application/json"
                 ],
@@ -2987,7 +2987,7 @@
                     "endpoints"
                 ],
                 "summary": "Get an endpoint configuration",
-                "operationId": "getEndpointConfigurationUsingGET",
+                "operationId": "getEndpointConfiguration",
                 "consumes": [
                     "application/json"
                 ],
@@ -3027,7 +3027,7 @@
                     "form-models"
                 ],
                 "summary": "List form models",
-                "operationId": "getFormsUsingGET_1",
+                "operationId": "getForms",
                 "consumes": [
                     "application/json"
                 ],
@@ -3057,7 +3057,7 @@
                     "form-models"
                 ],
                 "summary": "Get forms",
-                "operationId": "getFormsUsingGET",
+                "operationId": "getForms",
                 "consumes": [
                     "application/json"
                 ],
@@ -3103,7 +3103,7 @@
                     "form-models"
                 ],
                 "summary": "Get a form model",
-                "operationId": "getFormUsingGET",
+                "operationId": "getForm",
                 "consumes": [
                     "application/json"
                 ],
@@ -3141,7 +3141,7 @@
                     "form-models"
                 ],
                 "summary": "Update form model content",
-                "operationId": "saveFormUsingPUT",
+                "operationId": "saveForm",
                 "consumes": [
                     "application/json"
                 ],
@@ -3190,7 +3190,7 @@
                     "form-models"
                 ],
                 "summary": "Get form history",
-                "operationId": "getFormHistoryUsingGET",
+                "operationId": "getFormHistory",
                 "consumes": [
                     "application/json"
                 ],
@@ -3239,7 +3239,7 @@
                 ],
                 "summary": "Validate form model content",
                 "description": "The model content to be validated must be specified in the POST body",
-                "operationId": "validateModelUsingPUT",
+                "operationId": "validateModel",
                 "consumes": [
                     "application/json"
                 ],
@@ -3291,7 +3291,7 @@
                     "runtime-app-deployments"
                 ],
                 "summary": "Export the app archive for a deployment",
-                "operationId": "exportAppDefinitionUsingGET_1",
+                "operationId": "exportAppDefinition",
                 "consumes": [
                     "application/json"
                 ],
@@ -3328,7 +3328,7 @@
                 ],
                 "summary": "List process instance filters",
                 "description": "Returns filters for the current user, optionally filtered by *appId*.",
-                "operationId": "getUserProcessInstanceFiltersUsingGET",
+                "operationId": "getUserProcessInstanceFilters",
                 "consumes": [
                     "application/json"
                 ],
@@ -3366,7 +3366,7 @@
                     "user-filters"
                 ],
                 "summary": "Create a process instance filter",
-                "operationId": "createUserProcessInstanceFilterUsingPOST",
+                "operationId": "createUserProcessInstanceFilter",
                 "consumes": [
                     "application/json"
                 ],
@@ -3405,7 +3405,7 @@
                     "user-filters"
                 ],
                 "summary": "Re-order the list of user process instance filters",
-                "operationId": "orderUserProcessInstanceFiltersUsingPUT",
+                "operationId": "orderUserProcessInstanceFilters",
                 "consumes": [
                     "application/json"
                 ],
@@ -3443,7 +3443,7 @@
                     "user-filters"
                 ],
                 "summary": "Get a process instance filter",
-                "operationId": "getUserProcessInstanceFilterUsingGET",
+                "operationId": "getUserProcessInstanceFilter",
                 "consumes": [
                     "application/json"
                 ],
@@ -3481,7 +3481,7 @@
                     "user-filters"
                 ],
                 "summary": "Update a process instance filter",
-                "operationId": "updateUserProcessInstanceFilterUsingPUT",
+                "operationId": "updateUserProcessInstanceFilter",
                 "consumes": [
                     "application/json"
                 ],
@@ -3528,7 +3528,7 @@
                     "user-filters"
                 ],
                 "summary": "Delete a process instance filter",
-                "operationId": "deleteUserProcessInstanceFilterUsingDELETE",
+                "operationId": "deleteUserProcessInstanceFilter",
                 "consumes": [
                     "application/json"
                 ],
@@ -3566,7 +3566,7 @@
                 ],
                 "summary": "List task filters",
                 "description": "Returns filters for the current user, optionally filtered by *appId*.",
-                "operationId": "getUserTaskFiltersUsingGET",
+                "operationId": "getUserTaskFilters",
                 "consumes": [
                     "application/json"
                 ],
@@ -3604,7 +3604,7 @@
                     "user-filters"
                 ],
                 "summary": "Create a task filter",
-                "operationId": "createUserTaskFilterUsingPOST",
+                "operationId": "createUserTaskFilter",
                 "consumes": [
                     "application/json"
                 ],
@@ -3643,7 +3643,7 @@
                     "user-filters"
                 ],
                 "summary": "Re-order the list of user task filters",
-                "operationId": "orderUserTaskFiltersUsingPUT",
+                "operationId": "orderUserTaskFilters",
                 "consumes": [
                     "application/json"
                 ],
@@ -3681,7 +3681,7 @@
                     "user-filters"
                 ],
                 "summary": "Get a task filter",
-                "operationId": "getUserTaskFilterUsingGET",
+                "operationId": "getUserTaskFilter",
                 "consumes": [
                     "application/json"
                 ],
@@ -3719,7 +3719,7 @@
                     "user-filters"
                 ],
                 "summary": "Update a task filter",
-                "operationId": "updateUserTaskFilterUsingPUT",
+                "operationId": "updateUserTaskFilter",
                 "consumes": [
                     "application/json"
                 ],
@@ -3766,7 +3766,7 @@
                     "user-filters"
                 ],
                 "summary": "Delete a task filter",
-                "operationId": "deleteUserTaskFilterUsingDELETE",
+                "operationId": "deleteUserTaskFilter",
                 "consumes": [
                     "application/json"
                 ],
@@ -3803,7 +3803,7 @@
                     "submitted-forms"
                 ],
                 "summary": "List submissions for a form",
-                "operationId": "getFormSubmittedFromsUsingGET",
+                "operationId": "getFormSubmittedFroms",
                 "consumes": [
                     "application/json"
                 ],
@@ -3867,7 +3867,7 @@
                     "form-models"
                 ],
                 "summary": "Query forms",
-                "operationId": "getFormsUsingGET_2",
+                "operationId": "getForms",
                 "consumes": [
                     "application/json"
                 ],
@@ -3952,7 +3952,7 @@
                     "form-models"
                 ],
                 "summary": "Get a form",
-                "operationId": "getFormUsingGET_1",
+                "operationId": "getForm",
                 "consumes": [
                     "application/json"
                 ],
@@ -3992,7 +3992,7 @@
                     "form-models"
                 ],
                 "summary": "Get form content",
-                "operationId": "getFormEditorJsonUsingGET",
+                "operationId": "getFormEditorJson",
                 "consumes": [
                     "application/json"
                 ],
@@ -4032,7 +4032,7 @@
                     "groups"
                 ],
                 "summary": "Query groups",
-                "operationId": "getGroupsUsingGET",
+                "operationId": "getGroups",
                 "consumes": [
                     "application/json"
                 ],
@@ -4101,7 +4101,7 @@
                     "groups"
                 ],
                 "summary": "List members of a group",
-                "operationId": "getUsersForGroupUsingGET",
+                "operationId": "getUsersForGroup",
                 "consumes": [
                     "application/json"
                 ],
@@ -4141,7 +4141,7 @@
                     "process-instances"
                 ],
                 "summary": "Query historic process instances",
-                "operationId": "getHistoricProcessInstancesUsingPOST",
+                "operationId": "getHistoricProcessInstances",
                 "consumes": [
                     "application/json"
                 ],
@@ -4182,7 +4182,7 @@
                     "tasks"
                 ],
                 "summary": "Query historic tasks",
-                "operationId": "listHistoricTasksUsingPOST",
+                "operationId": "listHistoricTasks",
                 "consumes": [
                     "application/json"
                 ],
@@ -4223,7 +4223,7 @@
                     "idm-sync"
                 ],
                 "summary": "List sync log entries",
-                "operationId": "getSyncLogEntriesUsingGET",
+                "operationId": "getSyncLogEntries",
                 "consumes": [
                     "application/json"
                 ],
@@ -4290,7 +4290,7 @@
                     "idm-sync"
                 ],
                 "summary": "Get log file for a sync log entry",
-                "operationId": "getLogFileUsingGET",
+                "operationId": "getLogFile",
                 "consumes": [
                     "application/json"
                 ],
@@ -4327,7 +4327,7 @@
                     "users"
                 ],
                 "summary": "Request a password reset",
-                "operationId": "requestPasswordResetUsingPOST",
+                "operationId": "requestPasswordReset",
                 "consumes": [
                     "application/json"
                 ],
@@ -4366,7 +4366,7 @@
                 ],
                 "summary": "Alfresco Cloud Authorization",
                 "description": "Returns Alfresco OAuth HTML Page",
-                "operationId": "confirmAuthorisationUsingGET",
+                "operationId": "confirmAuthorisation",
                 "consumes": [
                     "application/json"
                 ],
@@ -4402,7 +4402,7 @@
                     "integration-alfresco-cloud"
                 ],
                 "summary": "List Alfresco networks",
-                "operationId": "getAllNetworksUsingGET",
+                "operationId": "getAllNetworks",
                 "consumes": [
                     "application/json"
                 ],
@@ -4432,7 +4432,7 @@
                     "integration-alfresco-cloud"
                 ],
                 "summary": "List files and folders inside a specific folder",
-                "operationId": "getContentInFolderUsingGET",
+                "operationId": "getContentInFolder",
                 "consumes": [
                     "application/json"
                 ],
@@ -4479,7 +4479,7 @@
                 ],
                 "summary": "List Alfresco sites",
                 "description": "Returns ALL Sites",
-                "operationId": "getAllSitesUsingGET",
+                "operationId": "getAllSites",
                 "consumes": [
                     "application/json"
                 ],
@@ -4518,7 +4518,7 @@
                     "integration-alfresco-cloud"
                 ],
                 "summary": "List files and folders inside a specific site",
-                "operationId": "getContentInSiteUsingGET",
+                "operationId": "getContentInSite",
                 "consumes": [
                     "application/json"
                 ],
@@ -4564,7 +4564,7 @@
                     "integration-alfresco-cloud"
                 ],
                 "summary": "List files and folders inside a specific folder identified by path",
-                "operationId": "getContentInFolderPathUsingGET",
+                "operationId": "getContentInFolderPath",
                 "consumes": [
                     "application/json"
                 ],
@@ -4617,7 +4617,7 @@
                     "integration-alfresco-onpremise"
                 ],
                 "summary": "List files and folders inside a specific folder",
-                "operationId": "getContentInFolderUsingGET_1",
+                "operationId": "getContentInFolder",
                 "consumes": [
                     "application/json"
                 ],
@@ -4664,7 +4664,7 @@
                 ],
                 "summary": "List Alfresco sites",
                 "description": "Returns ALL Sites",
-                "operationId": "getAllSitesUsingGET_1",
+                "operationId": "getAllSites",
                 "consumes": [
                     "application/json"
                 ],
@@ -4703,7 +4703,7 @@
                     "integration-alfresco-onpremise"
                 ],
                 "summary": "List files and folders inside a specific site",
-                "operationId": "getContentInSiteUsingGET_1",
+                "operationId": "getContentInSite",
                 "consumes": [
                     "application/json"
                 ],
@@ -4750,7 +4750,7 @@
                 ],
                 "summary": "Box Authorization",
                 "description": "Returns Box OAuth HTML Page",
-                "operationId": "confirmAuthorisationUsingGET_1",
+                "operationId": "confirmAuthorisation",
                 "consumes": [
                     "application/json"
                 ],
@@ -4786,7 +4786,7 @@
                     "integration-box"
                 ],
                 "summary": "List file and folders",
-                "operationId": "getFilesUsingGET",
+                "operationId": "getFiles",
                 "consumes": [
                     "application/json"
                 ],
@@ -4841,7 +4841,7 @@
                     "integration-box"
                 ],
                 "summary": "Get status information",
-                "operationId": "getBoxPluginStatusUsingGET",
+                "operationId": "getBoxPluginStatus",
                 "consumes": [
                     "application/json"
                 ],
@@ -4871,7 +4871,7 @@
                     "integration-box"
                 ],
                 "summary": "Get account information",
-                "operationId": "getRepositoryAccountUsingGET",
+                "operationId": "getRepositoryAccount",
                 "consumes": [
                     "application/json"
                 ],
@@ -4912,7 +4912,7 @@
                     "integration-box"
                 ],
                 "summary": "Add Box account",
-                "operationId": "createRepositoryAccountUsingPOST",
+                "operationId": "createRepositoryAccount",
                 "consumes": [
                     "application/json"
                 ],
@@ -4959,7 +4959,7 @@
                     "integration-box"
                 ],
                 "summary": "Update account information",
-                "operationId": "updateRepositoryAccountUsingPUT",
+                "operationId": "updateRepositoryAccount",
                 "consumes": [
                     "application/json"
                 ],
@@ -5009,7 +5009,7 @@
                     "integration-box"
                 ],
                 "summary": "Delete account information",
-                "operationId": "deleteRepositoryAccountUsingDELETE",
+                "operationId": "deleteRepositoryAccount",
                 "consumes": [
                     "application/json"
                 ],
@@ -5053,7 +5053,7 @@
                 ],
                 "summary": "Drive Authorization",
                 "description": "Returns Drive OAuth HTML Page",
-                "operationId": "confirmAuthorisationUsingGET_2",
+                "operationId": "confirmAuthorisation",
                 "consumes": [
                     "application/json"
                 ],
@@ -5080,7 +5080,7 @@
                     "integration-drive"
                 ],
                 "summary": "List files and folders",
-                "operationId": "getFilesUsingGET_1",
+                "operationId": "getFiles",
                 "consumes": [
                     "application/json"
                 ],
@@ -5133,7 +5133,7 @@
                     "models"
                 ],
                 "summary": "List models (process, form, decision rule or app)",
-                "operationId": "getModelsUsingGET",
+                "operationId": "getModels",
                 "consumes": [
                     "application/json"
                 ],
@@ -5193,7 +5193,7 @@
                     "models"
                 ],
                 "summary": "Create a new model",
-                "operationId": "createModelUsingPOST",
+                "operationId": "createModel",
                 "consumes": [
                     "application/json"
                 ],
@@ -5234,7 +5234,7 @@
                     "models"
                 ],
                 "summary": "List process definition models shared with the current user",
-                "operationId": "getModelsToIncludeInAppDefinitionUsingGET",
+                "operationId": "getModelsToIncludeInAppDefinition",
                 "consumes": [
                     "application/json"
                 ],
@@ -5265,7 +5265,7 @@
                 ],
                 "summary": "Get a model",
                 "description": "Models act as containers for process, form, decision table and app definitions",
-                "operationId": "getModelUsingGET",
+                "operationId": "getModel",
                 "consumes": [
                     "application/json"
                 ],
@@ -5311,7 +5311,7 @@
                 ],
                 "summary": "Update a model",
                 "description": "This method allows you to update the metadata of a model. In order to update the content of the model you will need to call the specific endpoint for that model type.",
-                "operationId": "updateModelUsingPUT",
+                "operationId": "updateModel",
                 "consumes": [
                     "application/json"
                 ],
@@ -5358,7 +5358,7 @@
                     "models"
                 ],
                 "summary": "Delete a model",
-                "operationId": "deleteModelUsingDELETE",
+                "operationId": "deleteModel",
                 "consumes": [
                     "application/json"
                 ],
@@ -5409,7 +5409,7 @@
                     "models"
                 ],
                 "summary": "Duplicate an existing model",
-                "operationId": "duplicateModelUsingPOST",
+                "operationId": "duplicateModel",
                 "consumes": [
                     "application/json"
                 ],
@@ -5458,7 +5458,7 @@
                     "models"
                 ],
                 "summary": "Get model content",
-                "operationId": "getModelJSONUsingGET",
+                "operationId": "getModelJSON",
                 "consumes": [
                     "application/json"
                 ],
@@ -5496,7 +5496,7 @@
                     "models"
                 ],
                 "summary": "Update model content",
-                "operationId": "saveModelUsingPOST",
+                "operationId": "saveModel",
                 "consumes": [
                     "application/json"
                 ],
@@ -5551,7 +5551,7 @@
                     "models"
                 ],
                 "summary": "Validate model content",
-                "operationId": "validateModelUsingPOST",
+                "operationId": "validateModel",
                 "consumes": [
                     "application/x-www-form-urlencoded"
                 ],
@@ -5609,7 +5609,7 @@
                     "models-history"
                 ],
                 "summary": "List a model's historic versions",
-                "operationId": "getModelHistoryCollectionUsingGET",
+                "operationId": "getModelHistoryCollection",
                 "consumes": [
                     "application/json"
                 ],
@@ -5656,7 +5656,7 @@
                     "models-history"
                 ],
                 "summary": "Get a historic version of a model",
-                "operationId": "getProcessModelHistoryUsingGET",
+                "operationId": "getProcessModelHistory",
                 "consumes": [
                     "application/json"
                 ],
@@ -5704,7 +5704,7 @@
                     "models"
                 ],
                 "summary": "Create a new version of a model",
-                "operationId": "importNewVersionUsingPOST",
+                "operationId": "importNewVersion",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -5751,7 +5751,7 @@
                     "models"
                 ],
                 "summary": "Get a model's thumbnail image",
-                "operationId": "getModelThumbnailUsingGET",
+                "operationId": "getModelThumbnail",
                 "consumes": [
                     "application/json"
                 ],
@@ -5795,7 +5795,7 @@
                     "models-bpmn"
                 ],
                 "summary": "Export a process definition as BPMN 2.0 XML",
-                "operationId": "getProcessModelBpmn20XmlUsingGET",
+                "operationId": "getProcessModelBpmn20Xml",
                 "consumes": [
                     "application/json"
                 ],
@@ -5832,7 +5832,7 @@
                     "models-bpmn"
                 ],
                 "summary": "Export a historic version of a process definition as BPMN 2.0 XML",
-                "operationId": "getHistoricProcessModelBpmn20XmlUsingGET",
+                "operationId": "getHistoricProcessModelBpmn20Xml",
                 "consumes": [
                     "application/json"
                 ],
@@ -5878,7 +5878,7 @@
                 ],
                 "summary": "Retrieve a list of process definitions",
                 "description": "Get a list of process definitions (visible within the tenant of the user)",
-                "operationId": "getProcessDefinitionsUsingGET",
+                "operationId": "getProcessDefinitions",
                 "consumes": [
                     "application/json"
                 ],
@@ -5932,7 +5932,7 @@
                     "process-definitions"
                 ],
                 "summary": "List the decision tables associated with a process definition",
-                "operationId": "getProcessDefinitionDecisionTablesUsingGET",
+                "operationId": "getProcessDefinitionDecisionTables",
                 "consumes": [
                     "application/json"
                 ],
@@ -5971,7 +5971,7 @@
                     "process-definitions"
                 ],
                 "summary": "List the forms associated with a process definition",
-                "operationId": "getProcessDefinitionFormsUsingGET",
+                "operationId": "getProcessDefinitionForms",
                 "consumes": [
                     "application/json"
                 ],
@@ -6010,7 +6010,7 @@
                     "process-definitions"
                 ],
                 "summary": "List the users and groups involved with a process definition",
-                "operationId": "getIdentityLinksUsingGET",
+                "operationId": "getIdentityLinks",
                 "consumes": [
                     "application/json"
                 ],
@@ -6050,7 +6050,7 @@
                     "process-definitions"
                 ],
                 "summary": "Add a user or group involvement to a process definition",
-                "operationId": "createIdentityLinkUsingPOST",
+                "operationId": "createIdentityLink",
                 "consumes": [
                     "application/json"
                 ],
@@ -6098,7 +6098,7 @@
                     "process-definitions"
                 ],
                 "summary": "List either the users or groups involved with a process definition",
-                "operationId": "getIdentityLinksForFamilyUsingGET",
+                "operationId": "getIdentityLinksForFamily",
                 "consumes": [
                     "application/json"
                 ],
@@ -6151,7 +6151,7 @@
                     "process-definitions"
                 ],
                 "summary": "Get a user or group involvement with a process definition",
-                "operationId": "getIdentityLinkTypeUsingGET",
+                "operationId": "getIdentityLinkType",
                 "consumes": [
                     "application/json"
                 ],
@@ -6206,7 +6206,7 @@
                     "process-definitions"
                 ],
                 "summary": "Remove a user or group involvement from a process definition",
-                "operationId": "deleteIdentityLinkUsingDELETE",
+                "operationId": "deleteIdentityLink",
                 "consumes": [
                     "application/json"
                 ],
@@ -6260,7 +6260,7 @@
                     "process-definitions"
                 ],
                 "summary": "Retrieve the start form for a process definition",
-                "operationId": "getProcessDefinitionStartFormUsingGET",
+                "operationId": "getProcessDefinitionStartForm",
                 "consumes": [
                     "application/json"
                 ],
@@ -6290,7 +6290,7 @@
                     "process-definitions"
                 ],
                 "summary": "Retrieve field values (eg. the typeahead field)",
-                "operationId": "getRestFieldValuesUsingGET",
+                "operationId": "getRestFieldValues",
                 "consumes": [
                     "application/json"
                 ],
@@ -6323,7 +6323,7 @@
                     "process-definitions"
                 ],
                 "summary": "Retrieve field values (eg. the table field)",
-                "operationId": "getRestTableFieldValuesUsingGET",
+                "operationId": "getRestTableFieldValues",
                 "consumes": [
                     "application/json"
                 ],
@@ -6356,7 +6356,7 @@
                     "process-instances"
                 ],
                 "summary": "Start a process instance",
-                "operationId": "startNewProcessInstanceUsingPOST",
+                "operationId": "startNewProcessInstance",
                 "consumes": [
                     "application/json"
                 ],
@@ -6398,7 +6398,7 @@
                 ],
                 "summary": "List process instances using a filter",
                 "description": "The request body provided must define either a valid filterId value or filter object",
-                "operationId": "filterProcessInstancesUsingPOST",
+                "operationId": "filterProcessInstances",
                 "consumes": [
                     "application/json"
                 ],
@@ -6439,7 +6439,7 @@
                     "process-instances"
                 ],
                 "summary": "Query process instances",
-                "operationId": "getProcessInstancesUsingPOST",
+                "operationId": "getProcessInstances",
                 "consumes": [
                     "application/json"
                 ],
@@ -6480,7 +6480,7 @@
                     "process-instances"
                 ],
                 "summary": "Get a process instance",
-                "operationId": "getProcessInstanceUsingGET",
+                "operationId": "getProcessInstance",
                 "consumes": [
                     "application/json"
                 ],
@@ -6518,7 +6518,7 @@
                 ],
                 "summary": "Cancel or remove a process instance",
                 "description": "If the process instance has not yet been completed, it will be cancelled. If it has already finished or been cancelled then the process instance will be removed and will no longer appear in queries.",
-                "operationId": "deleteProcessInstanceUsingDELETE",
+                "operationId": "deleteProcessInstance",
                 "consumes": [
                     "application/json"
                 ],
@@ -6560,7 +6560,7 @@
                     "process-instances"
                 ],
                 "summary": "Activate a process instance",
-                "operationId": "activateProcessInstanceUsingPUT",
+                "operationId": "activateProcessInstance",
                 "consumes": [
                     "application/json"
                 ],
@@ -6599,7 +6599,7 @@
                     "process-instances"
                 ],
                 "summary": "Get the audit log for a process instance",
-                "operationId": "getTaskAuditLogUsingGET",
+                "operationId": "getTaskAuditLog",
                 "consumes": [
                     "application/json"
                 ],
@@ -6638,7 +6638,7 @@
                     "comments"
                 ],
                 "summary": "Get comments for a process",
-                "operationId": "getProcessInstanceCommentsUsingGET",
+                "operationId": "getProcessInstanceComments",
                 "consumes": [
                     "application/json"
                 ],
@@ -6682,7 +6682,7 @@
                     "comments"
                 ],
                 "summary": "Add a comment to a process instance",
-                "operationId": "addProcessInstanceCommentUsingPOST",
+                "operationId": "addProcessInstanceComment",
                 "consumes": [
                     "application/json"
                 ],
@@ -6730,7 +6730,7 @@
                     "content"
                 ],
                 "summary": "List content attached to a process instance",
-                "operationId": "getRelatedContentForProcessInstanceUsingGET",
+                "operationId": "getRelatedContentForProcessInstance",
                 "consumes": [
                     "application/json"
                 ],
@@ -6774,7 +6774,7 @@
                     "content"
                 ],
                 "summary": "Attach existing content to a process instance",
-                "operationId": "createRelatedContentOnProcessInstanceUsingPOST",
+                "operationId": "createRelatedContentOnProcessInstance",
                 "consumes": [
                     "application/json"
                 ],
@@ -6829,7 +6829,7 @@
                     "process-instances"
                 ],
                 "summary": "Get decision tasks in a process instance",
-                "operationId": "getHistoricProcessInstanceDecisionTasksUsingGET",
+                "operationId": "getHistoricProcessInstanceDecisionTasks",
                 "consumes": [
                     "application/json"
                 ],
@@ -6868,7 +6868,7 @@
                     "process-instances"
                 ],
                 "summary": "Get the process diagram for the process instance",
-                "operationId": "getProcessInstanceDiagramUsingGET",
+                "operationId": "getProcessInstanceDiagram",
                 "consumes": [
                     "application/json"
                 ],
@@ -6911,7 +6911,7 @@
                     "process-instances"
                 ],
                 "summary": "List content attached to process instance fields",
-                "operationId": "getProcessInstanceContentUsingGET",
+                "operationId": "getProcessInstanceContent",
                 "consumes": [
                     "application/json"
                 ],
@@ -6950,7 +6950,7 @@
                     "process-instances"
                 ],
                 "summary": "Get historic variables for a process instance",
-                "operationId": "getHistoricProcessInstanceVariablesUsingGET",
+                "operationId": "getHistoricProcessInstanceVariables",
                 "consumes": [
                     "application/json"
                 ],
@@ -6992,7 +6992,7 @@
                     "process-instances"
                 ],
                 "summary": "List the users and groups involved with a process instance",
-                "operationId": "getIdentityLinksUsingGET_1",
+                "operationId": "getIdentityLinks",
                 "consumes": [
                     "application/json"
                 ],
@@ -7032,7 +7032,7 @@
                     "process-instances"
                 ],
                 "summary": "Add a user or group involvement to a process instance",
-                "operationId": "createIdentityLinkUsingPOST_1",
+                "operationId": "createIdentityLink",
                 "consumes": [
                     "application/json"
                 ],
@@ -7080,7 +7080,7 @@
                     "process-instances"
                 ],
                 "summary": "List either the users or groups involved with a process instance",
-                "operationId": "getIdentityLinksForFamilyUsingGET_1",
+                "operationId": "getIdentityLinksForFamily",
                 "consumes": [
                     "application/json"
                 ],
@@ -7129,7 +7129,7 @@
                     "process-instances"
                 ],
                 "summary": "Get a user or group involvement with a process instance",
-                "operationId": "getIdentityLinkTypeUsingGET_1",
+                "operationId": "getIdentityLinkType",
                 "consumes": [
                     "application/json"
                 ],
@@ -7187,7 +7187,7 @@
                     "process-instances"
                 ],
                 "summary": "Remove a user or group involvement from a process instance",
-                "operationId": "deleteIdentityLinkUsingDELETE_1",
+                "operationId": "deleteIdentityLink",
                 "consumes": [
                     "application/json"
                 ],
@@ -7244,7 +7244,7 @@
                     "content"
                 ],
                 "summary": "Upload content and attach to a process instance",
-                "operationId": "createRelatedContentOnProcessInstanceUsingPOST_1",
+                "operationId": "createRelatedContentOnProcessInstance",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -7298,7 +7298,7 @@
                 ],
                 "summary": "Get a process instance start form",
                 "description": "The start form for a process instance can be retrieved when the process definition has a start form defined (hasStartForm = true on the process instance)",
-                "operationId": "getProcessInstanceStartFormUsingGET",
+                "operationId": "getProcessInstanceStartForm",
                 "consumes": [
                     "application/json"
                 ],
@@ -7337,7 +7337,7 @@
                     "process-instances"
                 ],
                 "summary": "Suspend a process instance",
-                "operationId": "suspendProcessInstanceUsingPUT",
+                "operationId": "suspendProcessInstance",
                 "consumes": [
                     "application/json"
                 ],
@@ -7376,7 +7376,7 @@
                     "process-instance-variables"
                 ],
                 "summary": "List variables",
-                "operationId": "getProcessInstanceVariablesUsingGET",
+                "operationId": "getProcessInstanceVariables",
                 "consumes": [
                     "application/json"
                 ],
@@ -7416,7 +7416,7 @@
                     "process-instance-variables"
                 ],
                 "summary": "Create variables",
-                "operationId": "createProcessInstanceVariablesUsingPOST",
+                "operationId": "createProcessInstanceVariables",
                 "consumes": [
                     "application/json"
                 ],
@@ -7468,7 +7468,7 @@
                     "process-instance-variables"
                 ],
                 "summary": "Create or update variables",
-                "operationId": "createOrUpdateProcessInstanceVariablesUsingPUT",
+                "operationId": "createOrUpdateProcessInstanceVariables",
                 "consumes": [
                     "application/json"
                 ],
@@ -7522,7 +7522,7 @@
                     "process-instance-variables"
                 ],
                 "summary": "Get a variable",
-                "operationId": "getProcessInstanceVariableUsingGET",
+                "operationId": "getProcessInstanceVariable",
                 "consumes": [
                     "application/json"
                 ],
@@ -7566,7 +7566,7 @@
                     "process-instance-variables"
                 ],
                 "summary": "Update a variable",
-                "operationId": "updateProcessInstanceVariableUsingPUT",
+                "operationId": "updateProcessInstanceVariable",
                 "consumes": [
                     "application/json"
                 ],
@@ -7619,7 +7619,7 @@
                     "process-instance-variables"
                 ],
                 "summary": "Delete a variable",
-                "operationId": "deleteProcessInstanceVariableUsingDELETE",
+                "operationId": "deleteProcessInstanceVariable",
                 "consumes": [
                     "application/json"
                 ],
@@ -7662,7 +7662,7 @@
                     "models"
                 ],
                 "summary": "Import a BPMN 2.0 XML file",
-                "operationId": "importProcessModelUsingPOST",
+                "operationId": "importProcessModel",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -7701,7 +7701,7 @@
                     "process-scopes"
                 ],
                 "summary": "List runtime process scopes",
-                "operationId": "getRuntimeProcessScopesUsingPOST",
+                "operationId": "getRuntimeProcessScopes",
                 "consumes": [
                     "application/json"
                 ],
@@ -7745,7 +7745,7 @@
                     "submitted-forms"
                 ],
                 "summary": "List submissions for a process instance",
-                "operationId": "getProcessSubmittedFromsUsingGET",
+                "operationId": "getProcessSubmittedFroms",
                 "consumes": [
                     "application/json"
                 ],
@@ -7785,7 +7785,7 @@
                 ],
                 "summary": "Get user profile",
                 "description": "This operation returns account information for the current user. This is useful to get the name, email, the groups that the user is part of, the user picture, etc.",
-                "operationId": "getProfileUsingGET",
+                "operationId": "getProfile",
                 "consumes": [
                     "application/json"
                 ],
@@ -7855,7 +7855,7 @@
                     "user-profile"
                 ],
                 "summary": "Change user password",
-                "operationId": "changePasswordUsingPOST",
+                "operationId": "changePassword",
                 "consumes": [
                     "application/json"
                 ],
@@ -7894,7 +7894,7 @@
                 ],
                 "summary": "Retrieve user profile picture",
                 "description": "Generally returns an image file",
-                "operationId": "getProfilePictureUsingGET",
+                "operationId": "getProfilePicture",
                 "consumes": [
                     "application/json"
                 ],
@@ -7923,7 +7923,7 @@
                     "user-profile"
                 ],
                 "summary": "Change user profile picture",
-                "operationId": "uploadProfilePictureUsingPOST",
+                "operationId": "uploadProfilePicture",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -7963,7 +7963,7 @@
                 ],
                 "summary": "List Alfresco repositories",
                 "description": "A tenant administrator can configure one or more Alfresco repositories to use when working with content.",
-                "operationId": "getRepositoriesUsingGET",
+                "operationId": "getRepositories",
                 "consumes": [
                     "application/json"
                 ],
@@ -8011,7 +8011,7 @@
                     "integration-alfresco-onpremise"
                 ],
                 "summary": "List files and folders inside a specific folder identified by folder path",
-                "operationId": "getContentInFolderPathUsingGET_1",
+                "operationId": "getContentInFolderPath",
                 "consumes": [
                     "application/json"
                 ],
@@ -8065,7 +8065,7 @@
                 ],
                 "summary": "List runtime apps",
                 "description": "When a user logs in into Alfresco Process Services Suite, a landing page is displayed containing all the apps that the user is allowed to see and use. These are referred to as runtime apps.",
-                "operationId": "getAppDefinitionsUsingGET",
+                "operationId": "getAppDefinitions",
                 "consumes": [
                     "application/json"
                 ],
@@ -8094,7 +8094,7 @@
                 ],
                 "summary": "Deploy a published app",
                 "description": "Deploying an app allows the user to see it on his/her landing page. Apps must be published before they can be deployed.",
-                "operationId": "deployAppDefinitionsUsingPOST",
+                "operationId": "deployAppDefinitions",
                 "consumes": [
                     "application/json"
                 ],
@@ -8132,7 +8132,7 @@
                     "runtime-app-definitions"
                 ],
                 "summary": "Get a runtime app",
-                "operationId": "getAppDefinitionUsingGET_1",
+                "operationId": "getAppDefinition",
                 "consumes": [
                     "application/json"
                 ],
@@ -8173,7 +8173,7 @@
                 ],
                 "summary": "Get an app by deployment ID or DMN deployment ID",
                 "description": "Either a deploymentId or a dmnDeploymentId must be provided",
-                "operationId": "getRuntimeAppDeploymentByDeploymentUsingGET",
+                "operationId": "getRuntimeAppDeploymentByDeployment",
                 "consumes": [
                     "application/json"
                 ],
@@ -8220,7 +8220,7 @@
                     "runtime-app-deployments"
                 ],
                 "summary": "Query app deployments",
-                "operationId": "getAppDefinitionsUsingGET_1",
+                "operationId": "getAppDefinitions",
                 "consumes": [
                     "application/json"
                 ],
@@ -8304,7 +8304,7 @@
                     "runtime-app-deployments"
                 ],
                 "summary": "Get an app deployment",
-                "operationId": "getAppDeploymentUsingGET",
+                "operationId": "getAppDeployment",
                 "consumes": [
                     "application/json"
                 ],
@@ -8342,7 +8342,7 @@
                     "runtime-app-deployments"
                 ],
                 "summary": "Remove an app deployment",
-                "operationId": "deleteAppDeploymentUsingDELETE",
+                "operationId": "deleteAppDeployment",
                 "consumes": [
                     "application/json"
                 ],
@@ -8379,7 +8379,7 @@
                     "script-files"
                 ],
                 "summary": "getControllers",
-                "operationId": "getControllersUsingGET",
+                "operationId": "getControllers",
                 "consumes": [
                     "application/json"
                 ],
@@ -8409,7 +8409,7 @@
                     "script-files"
                 ],
                 "summary": "getLibraries",
-                "operationId": "getLibrariesUsingGET",
+                "operationId": "getLibraries",
                 "consumes": [
                     "application/json"
                 ],
@@ -8439,7 +8439,7 @@
                     "submitted-forms"
                 ],
                 "summary": "Get a form submission",
-                "operationId": "getSubmittedFromUsingGET",
+                "operationId": "getSubmittedFrom",
                 "consumes": [
                     "application/json"
                 ],
@@ -8480,7 +8480,7 @@
                 ],
                 "summary": "Retrieve system properties",
                 "description": "Typical value is AllowInvolveByEmail",
-                "operationId": "getPropertiesUsingGET",
+                "operationId": "getProperties",
                 "consumes": [
                     "application/json"
                 ],
@@ -8510,7 +8510,7 @@
                     "system-properties"
                 ],
                 "summary": "Get global date format",
-                "operationId": "getGlobalDateFormatUsingGET",
+                "operationId": "getGlobalDateFormat",
                 "consumes": [
                     "application/json"
                 ],
@@ -8550,7 +8550,7 @@
                     "system-properties"
                 ],
                 "summary": "Get involved users who can edit forms",
-                "operationId": "involvedUsersCanEditFormsUsingGET",
+                "operationId": "involvedUsersCanEditForms",
                 "consumes": [
                     "application/json"
                 ],
@@ -8590,7 +8590,7 @@
                     "system-properties"
                 ],
                 "summary": "Get password validation constraints",
-                "operationId": "getPasswordValidationConstraintsUsingGET",
+                "operationId": "getPasswordValidationConstraints",
                 "consumes": [
                     "application/json"
                 ],
@@ -8630,7 +8630,7 @@
                     "task-forms"
                 ],
                 "summary": "Get a task form",
-                "operationId": "getTaskFormUsingGET",
+                "operationId": "getTaskForm",
                 "consumes": [
                     "application/json"
                 ],
@@ -8667,7 +8667,7 @@
                     "task-forms"
                 ],
                 "summary": "Complete a task form",
-                "operationId": "completeTaskFormUsingPOST",
+                "operationId": "completeTaskForm",
                 "consumes": [
                     "application/json"
                 ],
@@ -8713,7 +8713,7 @@
                 ],
                 "summary": "Retrieve populated field values",
                 "description": "Form field values that are populated through a REST backend, can be retrieved via this service",
-                "operationId": "getRestFieldValuesUsingGET_2",
+                "operationId": "getRestFieldValues",
                 "consumes": [
                     "application/json"
                 ],
@@ -8763,7 +8763,7 @@
                 ],
                 "summary": "Retrieve column field values",
                 "description": "Specific case to retrieve information on a specific column",
-                "operationId": "getRestFieldValuesUsingGET_1",
+                "operationId": "getRestFieldValues",
                 "consumes": [
                     "application/json"
                 ],
@@ -8819,7 +8819,7 @@
                     "task-forms"
                 ],
                 "summary": "Save a task form",
-                "operationId": "saveTaskFormUsingPOST",
+                "operationId": "saveTaskForm",
                 "consumes": [
                     "application/json"
                 ],
@@ -8864,7 +8864,7 @@
                     "task-forms"
                 ],
                 "summary": "Get task variables",
-                "operationId": "getProcessInstanceVariablesUsingGET_1",
+                "operationId": "getProcessInstanceVariables",
                 "consumes": [
                     "application/json"
                 ],
@@ -8906,7 +8906,7 @@
                     "submitted-forms"
                 ],
                 "summary": "Get the submitted form for a task",
-                "operationId": "getTaskSubmittedFromsUsingGET",
+                "operationId": "getTaskSubmittedFroms",
                 "consumes": [
                     "application/json"
                 ],
@@ -8946,7 +8946,7 @@
                 ],
                 "summary": "Create a standalone task",
                 "description": "A standalone task is one which is not associated with any process instance.",
-                "operationId": "createNewTaskUsingPOST",
+                "operationId": "createNewTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -8987,7 +8987,7 @@
                     "tasks"
                 ],
                 "summary": "Filter a list of tasks",
-                "operationId": "filterTasksUsingPOST",
+                "operationId": "filterTasks",
                 "consumes": [
                     "application/json"
                 ],
@@ -9028,7 +9028,7 @@
                     "tasks"
                 ],
                 "summary": "List tasks",
-                "operationId": "listTasksUsingPOST",
+                "operationId": "listTasks",
                 "consumes": [
                     "application/json"
                 ],
@@ -9069,7 +9069,7 @@
                     "tasks"
                 ],
                 "summary": "Get a task",
-                "operationId": "getTaskUsingGET",
+                "operationId": "getTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9107,7 +9107,7 @@
                 ],
                 "summary": "Update a task",
                 "description": "You can edit only name, description and dueDate (ISO 8601 string).",
-                "operationId": "updateTaskUsingPUT",
+                "operationId": "updateTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9153,7 +9153,7 @@
                     "tasks"
                 ],
                 "summary": "Delete a task",
-                "operationId": "deleteTaskUsingDELETE",
+                "operationId": "deleteTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9189,7 +9189,7 @@
                     "task-actions"
                 ],
                 "summary": "Assign a task to a user",
-                "operationId": "assignTaskUsingPUT",
+                "operationId": "assignTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9237,7 +9237,7 @@
                     "task-actions"
                 ],
                 "summary": "Attach a form to a task",
-                "operationId": "attachFormUsingPUT",
+                "operationId": "attachForm",
                 "consumes": [
                     "application/json"
                 ],
@@ -9283,7 +9283,7 @@
                 ],
                 "summary": "Claim a task",
                 "description": "To claim a task (in case the task is assigned to a group)",
-                "operationId": "claimTaskUsingPUT",
+                "operationId": "claimTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9320,7 +9320,7 @@
                 ],
                 "summary": "Complete a task",
                 "description": "Use this endpoint to complete a standalone task or task without a form",
-                "operationId": "completeTaskUsingPUT",
+                "operationId": "completeTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9356,7 +9356,7 @@
                     "task-actions"
                 ],
                 "summary": "Delegate a task",
-                "operationId": "delegateTaskUsingPUT",
+                "operationId": "delegateTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9401,7 +9401,7 @@
                     "task-actions"
                 ],
                 "summary": "Involve a user with a task",
-                "operationId": "involveUserUsingPUT",
+                "operationId": "involveUser",
                 "consumes": [
                     "application/json"
                 ],
@@ -9446,7 +9446,7 @@
                     "task-actions"
                 ],
                 "summary": "Remove a form from a task",
-                "operationId": "removeFormUsingDELETE",
+                "operationId": "removeForm",
                 "consumes": [
                     "application/json"
                 ],
@@ -9482,7 +9482,7 @@
                     "task-actions"
                 ],
                 "summary": "Remove an involved user from a task",
-                "operationId": "removeInvolvedUserUsingPUT",
+                "operationId": "removeInvolvedUser",
                 "consumes": [
                     "application/json"
                 ],
@@ -9527,7 +9527,7 @@
                     "task-actions"
                 ],
                 "summary": "Resolve a task",
-                "operationId": "resolveTaskUsingPUT",
+                "operationId": "resolveTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9564,7 +9564,7 @@
                 ],
                 "summary": "Unclaim a task",
                 "description": "To unclaim a task (in case the task was assigned to a group)",
-                "operationId": "unclaimTaskUsingPUT",
+                "operationId": "unclaimTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9600,7 +9600,7 @@
                     "tasks"
                 ],
                 "summary": "Get the audit log for a task",
-                "operationId": "getTaskAuditLogUsingGET_1",
+                "operationId": "getTaskAuditLog",
                 "consumes": [
                     "application/json"
                 ],
@@ -9639,7 +9639,7 @@
                     "checklists"
                 ],
                 "summary": "Get checklist for a task",
-                "operationId": "getChecklistUsingGET",
+                "operationId": "getChecklist",
                 "consumes": [
                     "application/json"
                 ],
@@ -9676,7 +9676,7 @@
                     "checklists"
                 ],
                 "summary": "Create a task checklist",
-                "operationId": "addSubtaskUsingPOST",
+                "operationId": "addSubtask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9722,7 +9722,7 @@
                     "checklists"
                 ],
                 "summary": "Change the order of items on a checklist",
-                "operationId": "orderChecklistUsingPUT",
+                "operationId": "orderChecklist",
                 "consumes": [
                     "application/json"
                 ],
@@ -9767,7 +9767,7 @@
                     "comments"
                 ],
                 "summary": "Get comments for a task",
-                "operationId": "getTaskCommentsUsingGET",
+                "operationId": "getTaskComments",
                 "consumes": [
                     "application/json"
                 ],
@@ -9811,7 +9811,7 @@
                     "comments"
                 ],
                 "summary": "Add a comment to a task",
-                "operationId": "addTaskCommentUsingPOST",
+                "operationId": "addTaskComment",
                 "consumes": [
                     "application/json"
                 ],
@@ -9859,7 +9859,7 @@
                     "content"
                 ],
                 "summary": "List content attached to a task",
-                "operationId": "getRelatedContentForTaskUsingGET",
+                "operationId": "getRelatedContentForTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9903,7 +9903,7 @@
                     "content"
                 ],
                 "summary": "Attach existing content to a task",
-                "operationId": "createRelatedContentOnTaskUsingPOST",
+                "operationId": "createRelatedContentOnTask",
                 "consumes": [
                     "application/json"
                 ],
@@ -9958,7 +9958,7 @@
                     "task-actions"
                 ],
                 "summary": "Involve a group with a task",
-                "operationId": "involveGroupUsingPOST",
+                "operationId": "involveGroup",
                 "consumes": [
                     "application/json"
                 ],
@@ -9999,7 +9999,7 @@
                     "task-actions"
                 ],
                 "summary": "Remove an involved group from a task",
-                "operationId": "removeInvolvedUserUsingDELETE",
+                "operationId": "removeInvolvedUser",
                 "consumes": [
                     "application/json"
                 ],
@@ -10042,7 +10042,7 @@
                     "tasks"
                 ],
                 "summary": "getIdentityLinks",
-                "operationId": "getIdentityLinksUsingGET_2",
+                "operationId": "getIdentityLinks",
                 "consumes": [
                     "application/json"
                 ],
@@ -10082,7 +10082,7 @@
                     "tasks"
                 ],
                 "summary": "List the users and groups involved with a task",
-                "operationId": "createIdentityLinkUsingPOST_2",
+                "operationId": "createIdentityLink",
                 "consumes": [
                     "application/json"
                 ],
@@ -10130,7 +10130,7 @@
                     "tasks"
                 ],
                 "summary": "List either the users or groups involved with a process instance",
-                "operationId": "getIdentityLinksForFamilyUsingGET_2",
+                "operationId": "getIdentityLinksForFamily",
                 "consumes": [
                     "application/json"
                 ],
@@ -10179,7 +10179,7 @@
                     "tasks"
                 ],
                 "summary": "Get a user or group involvement with a task",
-                "operationId": "getIdentityLinkTypeUsingGET_2",
+                "operationId": "getIdentityLinkType",
                 "consumes": [
                     "application/json"
                 ],
@@ -10237,7 +10237,7 @@
                     "tasks"
                 ],
                 "summary": "Remove a user or group involvement from a task",
-                "operationId": "deleteIdentityLinkUsingDELETE_2",
+                "operationId": "deleteIdentityLink",
                 "consumes": [
                     "application/json"
                 ],
@@ -10294,7 +10294,7 @@
                     "content"
                 ],
                 "summary": "Upload content and attach to a task",
-                "operationId": "createRelatedContentOnTaskUsingPOST_1",
+                "operationId": "createRelatedContentOnTask",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -10347,7 +10347,7 @@
                     "task-variables"
                 ],
                 "summary": "List variables",
-                "operationId": "getVariablesUsingGET",
+                "operationId": "getVariables",
                 "consumes": [
                     "application/json"
                 ],
@@ -10394,7 +10394,7 @@
                     "task-variables"
                 ],
                 "summary": "Create variables",
-                "operationId": "createTaskVariableUsingPOST",
+                "operationId": "createTaskVariable",
                 "consumes": [
                     "application/json"
                 ],
@@ -10446,7 +10446,7 @@
                     "task-variables"
                 ],
                 "summary": "Create or update variables",
-                "operationId": "deleteAllLocalTaskVariablesUsingDELETE",
+                "operationId": "deleteAllLocalTaskVariables",
                 "consumes": [
                     "application/json"
                 ],
@@ -10482,7 +10482,7 @@
                     "task-variables"
                 ],
                 "summary": "Get a variable",
-                "operationId": "getVariableUsingGET",
+                "operationId": "getVariable",
                 "consumes": [
                     "application/json"
                 ],
@@ -10533,7 +10533,7 @@
                     "task-variables"
                 ],
                 "summary": "Update a variable",
-                "operationId": "updateVariableUsingPUT",
+                "operationId": "updateVariable",
                 "consumes": [
                     "application/json"
                 ],
@@ -10586,7 +10586,7 @@
                     "task-variables"
                 ],
                 "summary": "Delete a variable",
-                "operationId": "deleteVariableUsingDELETE",
+                "operationId": "deleteVariable",
                 "consumes": [
                     "application/json"
                 ],
@@ -10637,7 +10637,7 @@
                 ],
                 "summary": "Query users",
                 "description": "A common use case is that a user wants to select another user (eg. when assigning a task) or group.",
-                "operationId": "getUsersUsingGET_1",
+                "operationId": "getUsers",
                 "consumes": [
                     "application/json"
                 ],
@@ -10727,7 +10727,7 @@
                     "users"
                 ],
                 "summary": "Get a user",
-                "operationId": "getUserUsingGET_1",
+                "operationId": "getUser",
                 "consumes": [
                     "application/json"
                 ],
@@ -10766,7 +10766,7 @@
                 ],
                 "summary": "Execute an action for a specific user",
                 "description": "Typical action is updating/reset password",
-                "operationId": "executeActionUsingPOST",
+                "operationId": "executeAction",
                 "consumes": [
                     "application/json"
                 ],
@@ -10810,7 +10810,7 @@
                     "users"
                 ],
                 "summary": "Update a user",
-                "operationId": "updateUserUsingPUT",
+                "operationId": "updateUser",
                 "consumes": [
                     "application/json"
                 ],
@@ -10859,7 +10859,7 @@
                     "users"
                 ],
                 "summary": "Stream user profile picture",
-                "operationId": "getProfilePictureUsingGET_1",
+                "operationId": "getProfilePicture",
                 "consumes": [
                     "application/json"
                 ],

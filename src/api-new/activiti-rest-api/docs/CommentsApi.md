@@ -4,15 +4,15 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**addProcessInstanceCommentUsingPOST**](CommentsApi.md#addProcessInstanceCommentUsingPOST) | **POST** /enterprise/process-instances/{processInstanceId}/comments | Add a comment to a process instance
-[**addTaskCommentUsingPOST**](CommentsApi.md#addTaskCommentUsingPOST) | **POST** /enterprise/tasks/{taskId}/comments | Add a comment to a task
-[**getProcessInstanceCommentsUsingGET**](CommentsApi.md#getProcessInstanceCommentsUsingGET) | **GET** /enterprise/process-instances/{processInstanceId}/comments | Get comments for a process
-[**getTaskCommentsUsingGET**](CommentsApi.md#getTaskCommentsUsingGET) | **GET** /enterprise/tasks/{taskId}/comments | Get comments for a task
+[**addProcessInstanceComment**](CommentsApi.md#addProcessInstanceComment) | **POST** /enterprise/process-instances/{processInstanceId}/comments | Add a comment to a process instance
+[**addTaskComment**](CommentsApi.md#addTaskComment) | **POST** /enterprise/tasks/{taskId}/comments | Add a comment to a task
+[**getProcessInstanceComments**](CommentsApi.md#getProcessInstanceComments) | **GET** /enterprise/process-instances/{processInstanceId}/comments | Get comments for a process
+[**getTaskComments**](CommentsApi.md#getTaskComments) | **GET** /enterprise/tasks/{taskId}/comments | Get comments for a task
 
 
-<a name="addProcessInstanceCommentUsingPOST"></a>
-# **addProcessInstanceCommentUsingPOST**
-> CommentRepresentation addProcessInstanceCommentUsingPOST(commentRequestprocessInstanceId)
+<a name="addProcessInstanceComment"></a>
+# **addProcessInstanceComment**
+> CommentRepresentation addProcessInstanceComment(commentRequestprocessInstanceId)
 
 Add a comment to a process instance
 
@@ -29,7 +29,7 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 
-commentsApi.addProcessInstanceCommentUsingPOST(commentRequestprocessInstanceId).then((data) => {
+commentsApi.addProcessInstanceComment(commentRequestprocessInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -48,9 +48,9 @@ Name | Type | Description  | Notes
 
 [**CommentRepresentation**](CommentRepresentation.md)
 
-<a name="addTaskCommentUsingPOST"></a>
-# **addTaskCommentUsingPOST**
-> CommentRepresentation addTaskCommentUsingPOST(commentRequesttaskId)
+<a name="addTaskComment"></a>
+# **addTaskComment**
+> CommentRepresentation addTaskComment(commentRequesttaskId)
 
 Add a comment to a task
 
@@ -67,7 +67,7 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 
-commentsApi.addTaskCommentUsingPOST(commentRequesttaskId).then((data) => {
+commentsApi.addTaskComment(commentRequesttaskId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -86,9 +86,9 @@ Name | Type | Description  | Notes
 
 [**CommentRepresentation**](CommentRepresentation.md)
 
-<a name="getProcessInstanceCommentsUsingGET"></a>
-# **getProcessInstanceCommentsUsingGET**
-> ResultListDataRepresentationCommentRepresentation getProcessInstanceCommentsUsingGET(processInstanceIdopts)
+<a name="getProcessInstanceComments"></a>
+# **getProcessInstanceComments**
+> ResultListDataRepresentationCommentRepresentation getProcessInstanceComments(processInstanceIdopts)
 
 Get comments for a process
 
@@ -108,7 +108,7 @@ let opts = {
   'latestFirst': true //  | latestFirst
 };
 
-commentsApi.getProcessInstanceCommentsUsingGET(processInstanceIdopts).then((data) => {
+commentsApi.getProcessInstanceComments(processInstanceIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -127,9 +127,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationCommentRepresentation**](ResultListDataRepresentationCommentRepresentation.md)
 
-<a name="getTaskCommentsUsingGET"></a>
-# **getTaskCommentsUsingGET**
-> ResultListDataRepresentationCommentRepresentation getTaskCommentsUsingGET(taskIdopts)
+<a name="getTaskComments"></a>
+# **getTaskComments**
+> ResultListDataRepresentationCommentRepresentation getTaskComments(taskIdopts)
 
 Get comments for a task
 
@@ -149,7 +149,7 @@ let opts = {
   'latestFirst': true //  | latestFirst
 };
 
-commentsApi.getTaskCommentsUsingGET(taskIdopts).then((data) => {
+commentsApi.getTaskComments(taskIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

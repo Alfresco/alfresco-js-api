@@ -4,16 +4,16 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**deleteAppDeploymentUsingDELETE**](RuntimeappdeploymentsApi.md#deleteAppDeploymentUsingDELETE) | **DELETE** /enterprise/runtime-app-deployments/{appDeploymentId} | Remove an app deployment
-[**exportAppDefinitionUsingGET1**](RuntimeappdeploymentsApi.md#exportAppDefinitionUsingGET1) | **GET** /enterprise/export-app-deployment/{deploymentId} | Export the app archive for a deployment
-[**getAppDefinitionsUsingGET1**](RuntimeappdeploymentsApi.md#getAppDefinitionsUsingGET1) | **GET** /enterprise/runtime-app-deployments | Query app deployments
-[**getAppDeploymentUsingGET**](RuntimeappdeploymentsApi.md#getAppDeploymentUsingGET) | **GET** /enterprise/runtime-app-deployments/{appDeploymentId} | Get an app deployment
-[**getRuntimeAppDeploymentByDeploymentUsingGET**](RuntimeappdeploymentsApi.md#getRuntimeAppDeploymentByDeploymentUsingGET) | **GET** /enterprise/runtime-app-deployment | Get an app by deployment ID or DMN deployment ID
+[**deleteAppDeployment**](RuntimeappdeploymentsApi.md#deleteAppDeployment) | **DELETE** /enterprise/runtime-app-deployments/{appDeploymentId} | Remove an app deployment
+[**exportAppDefinition**](RuntimeappdeploymentsApi.md#exportAppDefinition) | **GET** /enterprise/export-app-deployment/{deploymentId} | Export the app archive for a deployment
+[**getAppDefinitions**](RuntimeappdeploymentsApi.md#getAppDefinitions) | **GET** /enterprise/runtime-app-deployments | Query app deployments
+[**getAppDeployment**](RuntimeappdeploymentsApi.md#getAppDeployment) | **GET** /enterprise/runtime-app-deployments/{appDeploymentId} | Get an app deployment
+[**getRuntimeAppDeploymentByDeployment**](RuntimeappdeploymentsApi.md#getRuntimeAppDeploymentByDeployment) | **GET** /enterprise/runtime-app-deployment | Get an app by deployment ID or DMN deployment ID
 
 
-<a name="deleteAppDeploymentUsingDELETE"></a>
-# **deleteAppDeploymentUsingDELETE**
-> deleteAppDeploymentUsingDELETE(appDeploymentId)
+<a name="deleteAppDeployment"></a>
+# **deleteAppDeployment**
+> deleteAppDeployment(appDeploymentId)
 
 Remove an app deployment
 
@@ -30,7 +30,7 @@ this.alfrescoApi.setConfig({
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
-runtimeappdeploymentsApi.deleteAppDeploymentUsingDELETE(appDeploymentId).then(() => {
+runtimeappdeploymentsApi.deleteAppDeployment(appDeploymentId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -48,9 +48,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="exportAppDefinitionUsingGET1"></a>
-# **exportAppDefinitionUsingGET1**
-> exportAppDefinitionUsingGET1(deploymentId)
+<a name="exportAppDefinition"></a>
+# **exportAppDefinition**
+> exportAppDefinition(deploymentId)
 
 Export the app archive for a deployment
 
@@ -67,7 +67,7 @@ this.alfrescoApi.setConfig({
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
-runtimeappdeploymentsApi.exportAppDefinitionUsingGET1(deploymentId).then(() => {
+runtimeappdeploymentsApi.exportAppDefinition(deploymentId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -85,9 +85,9 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getAppDefinitionsUsingGET1"></a>
-# **getAppDefinitionsUsingGET1**
-> ResultListDataRepresentationAppDeploymentRepresentation getAppDefinitionsUsingGET1(opts)
+<a name="getAppDefinitions"></a>
+# **getAppDefinitions**
+> ResultListDataRepresentationAppDeploymentRepresentation getAppDefinitions(opts)
 
 Query app deployments
 
@@ -113,7 +113,7 @@ let opts = {
   'size': 56 //  | size
 };
 
-runtimeappdeploymentsApi.getAppDefinitionsUsingGET1(opts).then((data) => {
+runtimeappdeploymentsApi.getAppDefinitions(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -137,9 +137,9 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAppDeploymentRepresentation**](ResultListDataRepresentationAppDeploymentRepresentation.md)
 
-<a name="getAppDeploymentUsingGET"></a>
-# **getAppDeploymentUsingGET**
-> AppDeploymentRepresentation getAppDeploymentUsingGET(appDeploymentId)
+<a name="getAppDeployment"></a>
+# **getAppDeployment**
+> AppDeploymentRepresentation getAppDeployment(appDeploymentId)
 
 Get an app deployment
 
@@ -156,7 +156,7 @@ this.alfrescoApi.setConfig({
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
-runtimeappdeploymentsApi.getAppDeploymentUsingGET(appDeploymentId).then((data) => {
+runtimeappdeploymentsApi.getAppDeployment(appDeploymentId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -174,9 +174,9 @@ Name | Type | Description  | Notes
 
 [**AppDeploymentRepresentation**](AppDeploymentRepresentation.md)
 
-<a name="getRuntimeAppDeploymentByDeploymentUsingGET"></a>
-# **getRuntimeAppDeploymentByDeploymentUsingGET**
-> AppDeploymentRepresentation getRuntimeAppDeploymentByDeploymentUsingGET(opts)
+<a name="getRuntimeAppDeploymentByDeployment"></a>
+# **getRuntimeAppDeploymentByDeployment**
+> AppDeploymentRepresentation getRuntimeAppDeploymentByDeployment(opts)
 
 Get an app by deployment ID or DMN deployment ID
 
@@ -199,7 +199,7 @@ let opts = {
   'dmnDeploymentId': 789 //  | dmnDeploymentId
 };
 
-runtimeappdeploymentsApi.getRuntimeAppDeploymentByDeploymentUsingGET(opts).then((data) => {
+runtimeappdeploymentsApi.getRuntimeAppDeploymentByDeployment(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
