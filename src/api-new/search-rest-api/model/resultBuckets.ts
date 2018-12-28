@@ -29,11 +29,13 @@ export class ResultBuckets {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.buckets) {
-            this.buckets = input.buckets.map((item: any) => {
-                return new ResultBucketsBuckets(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.buckets) {
+                this.buckets = input.buckets.map((item: any) => {
+                    return new ResultBucketsBuckets(item);
+                });
+            }
         }
     }
 

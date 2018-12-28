@@ -22,8 +22,10 @@ export class UnfiledContainerAssociationPaging {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.list = input.list ? new UnfiledContainerAssociationPagingList(input.list) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new UnfiledContainerAssociationPagingList(input.list) : undefined;
+        }
     }
 
 }

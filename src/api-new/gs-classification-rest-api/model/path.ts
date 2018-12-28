@@ -26,7 +26,9 @@ export class Path extends Array<PathElement> {
 
     constructor(input?: any) {
         super();
-        Object.assign(this, input);
+        if (input) {
+            Object.assign(this, input);
+        }
     }
 
 }

@@ -24,7 +24,9 @@ export class RequestFilterQueries extends Array<RequestFilterQueriesInner> {
 
     constructor(input?: any) {
         super();
-        Object.assign(this, input);
+        if (input) {
+            Object.assign(this, input);
+        }
     }
 
 }

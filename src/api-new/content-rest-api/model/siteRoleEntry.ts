@@ -22,8 +22,10 @@ export class SiteRoleEntry {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.entry = input.entry ? new SiteRole(input.entry) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.entry = input.entry ? new SiteRole(input.entry) : undefined;
+        }
     }
 
 }

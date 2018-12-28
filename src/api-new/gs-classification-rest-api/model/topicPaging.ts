@@ -22,8 +22,10 @@ export class TopicPaging {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.list = input.list ? new TopicPagingList(input.list) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new TopicPagingList(input.list) : undefined;
+        }
     }
 
 }

@@ -23,11 +23,13 @@ export class AuditDecisionRuleInfoRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.expressions) {
-            this.expressions = input.expressions.map((item: any) => {
-                return new AuditDecisionExpressionInfoRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.expressions) {
+                this.expressions = input.expressions.map((item: any) => {
+                    return new AuditDecisionExpressionInfoRepresentation(item);
+                });
+            }
         }
     }
 

@@ -21,7 +21,7 @@ import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class SharedLink {
     id?: string;
-    expiresAt?: Date;
+    expiresAt?: DateAlfresco;
     nodeId?: string;
     /**
      * The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.
@@ -31,7 +31,7 @@ The character . must not be used at the end of the name.
     name?: string;
     title?: string;
     description?: string;
-    modifiedAt?: Date;
+    modifiedAt?: DateAlfresco;
     modifiedByUser?: UserInfo;
     sharedByUser?: UserInfo;
     content?: ContentInfo;
@@ -49,12 +49,14 @@ allowable operations pertaining to the linked content node.
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.expiresAt = input.expiresAt ? DateAlfresco.parseDate(input.expiresAt) : undefined;
-        this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;
-        this.modifiedByUser = input.modifiedByUser ? new UserInfo(input.modifiedByUser) : undefined;
-        this.sharedByUser = input.sharedByUser ? new UserInfo(input.sharedByUser) : undefined;
-        this.content = input.content ? new ContentInfo(input.content) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.expiresAt = input.expiresAt ? new DateAlfresco(input.expiresAt) : undefined;
+            this.modifiedAt = input.modifiedAt ? new DateAlfresco(input.modifiedAt) : undefined;
+            this.modifiedByUser = input.modifiedByUser ? new UserInfo(input.modifiedByUser) : undefined;
+            this.sharedByUser = input.sharedByUser ? new UserInfo(input.sharedByUser) : undefined;
+            this.content = input.content ? new ContentInfo(input.content) : undefined;
+        }
     }
 
 }

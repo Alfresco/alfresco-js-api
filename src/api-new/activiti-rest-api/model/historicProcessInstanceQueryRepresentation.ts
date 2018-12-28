@@ -21,8 +21,8 @@ import { QueryVariable } from './queryVariable';
 export class HistoricProcessInstanceQueryRepresentation {
     excludeSubprocesses?: boolean;
     finished?: boolean;
-    finishedAfter?: Date;
-    finishedBefore?: Date;
+    finishedAfter?: DateAlfresco;
+    finishedBefore?: DateAlfresco;
     includeProcessVariables?: boolean;
     involvedUser?: string;
     order?: string;
@@ -34,8 +34,8 @@ export class HistoricProcessInstanceQueryRepresentation {
     size?: number;
     sort?: string;
     start?: number;
-    startedAfter?: Date;
-    startedBefore?: Date;
+    startedAfter?: DateAlfresco;
+    startedBefore?: DateAlfresco;
     startedBy?: string;
     superProcessInstanceId?: string;
     tenantId?: string;
@@ -45,15 +45,17 @@ export class HistoricProcessInstanceQueryRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.finishedAfter = input.finishedAfter ? DateAlfresco.parseDate(input.finishedAfter) : undefined;
-        this.finishedBefore = input.finishedBefore ? DateAlfresco.parseDate(input.finishedBefore) : undefined;
-        this.startedAfter = input.startedAfter ? DateAlfresco.parseDate(input.startedAfter) : undefined;
-        this.startedBefore = input.startedBefore ? DateAlfresco.parseDate(input.startedBefore) : undefined;
-        if (input.variables) {
-            this.variables = input.variables.map((item: any) => {
-                return new QueryVariable(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            this.finishedAfter = input.finishedAfter ? new DateAlfresco(input.finishedAfter) : undefined;
+            this.finishedBefore = input.finishedBefore ? new DateAlfresco(input.finishedBefore) : undefined;
+            this.startedAfter = input.startedAfter ? new DateAlfresco(input.startedAfter) : undefined;
+            this.startedBefore = input.startedBefore ? new DateAlfresco(input.startedBefore) : undefined;
+            if (input.variables) {
+                this.variables = input.variables.map((item: any) => {
+                    return new QueryVariable(item);
+                });
+            }
         }
     }
 

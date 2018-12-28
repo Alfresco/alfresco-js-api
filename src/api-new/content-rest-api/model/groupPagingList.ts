@@ -24,12 +24,14 @@ export class GroupPagingList {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
-        if (input.entries) {
-            this.entries = input.entries.map((item: any) => {
-                return new GroupEntry(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+            if (input.entries) {
+                this.entries = input.entries.map((item: any) => {
+                    return new GroupEntry(item);
+                });
+            }
         }
     }
 

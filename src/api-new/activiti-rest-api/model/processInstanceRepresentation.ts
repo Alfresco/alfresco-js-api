@@ -21,7 +21,7 @@ import { RestVariable } from './restVariable';
 
 export class ProcessInstanceRepresentation {
     businessKey?: string;
-    ended?: Date;
+    ended?: DateAlfresco;
     graphicalNotationDefined?: boolean;
     id?: string;
     name?: string;
@@ -33,7 +33,7 @@ export class ProcessInstanceRepresentation {
     processDefinitionName?: string;
     processDefinitionVersion?: number;
     startFormDefined?: boolean;
-    started?: Date;
+    started?: DateAlfresco;
     startedBy?: LightUserRepresentation;
     suspended?: boolean;
     tenantId?: string;
@@ -41,14 +41,16 @@ export class ProcessInstanceRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.ended = input.ended ? DateAlfresco.parseDate(input.ended) : undefined;
-        this.started = input.started ? DateAlfresco.parseDate(input.started) : undefined;
-        this.startedBy = input.startedBy ? new LightUserRepresentation(input.startedBy) : undefined;
-        if (input.variables) {
-            this.variables = input.variables.map((item: any) => {
-                return new RestVariable(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            this.ended = input.ended ? new DateAlfresco(input.ended) : undefined;
+            this.started = input.started ? new DateAlfresco(input.started) : undefined;
+            this.startedBy = input.startedBy ? new LightUserRepresentation(input.startedBy) : undefined;
+            if (input.variables) {
+                this.variables = input.variables.map((item: any) => {
+                    return new RestVariable(item);
+                });
+            }
         }
     }
 

@@ -31,7 +31,7 @@ The character . must not be used at the end of the name.
     nodeType: string;
     isFolder: boolean;
     isFile: boolean;
-    modifiedAt: Date;
+    modifiedAt: DateAlfresco;
     modifiedByUser: UserInfo;
     content?: ContentInfo;
     aspectNames?: string[];
@@ -39,10 +39,12 @@ The character . must not be used at the end of the name.
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;
-        this.modifiedByUser = input.modifiedByUser ? new UserInfo(input.modifiedByUser) : undefined;
-        this.content = input.content ? new ContentInfo(input.content) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.modifiedAt = input.modifiedAt ? new DateAlfresco(input.modifiedAt) : undefined;
+            this.modifiedByUser = input.modifiedByUser ? new UserInfo(input.modifiedByUser) : undefined;
+            this.content = input.content ? new ContentInfo(input.content) : undefined;
+        }
     }
 
 }

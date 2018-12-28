@@ -22,8 +22,10 @@ export class UnfiledRecordFolderEntry {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.entry = input.entry ? new UnfiledRecordFolder(input.entry) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.entry = input.entry ? new UnfiledRecordFolder(input.entry) : undefined;
+        }
     }
 
 }

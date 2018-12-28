@@ -25,11 +25,13 @@ export class ResultListDataRepresentationFormRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.data) {
-            this.data = input.data.map((item: any) => {
-                return new FormRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.data) {
+                this.data = input.data.map((item: any) => {
+                    return new FormRepresentation(item);
+                });
+            }
         }
     }
 

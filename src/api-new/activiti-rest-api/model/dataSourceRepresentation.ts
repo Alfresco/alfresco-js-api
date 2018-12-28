@@ -25,8 +25,10 @@ export class DataSourceRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.config = input.config ? new DataSourceConfigRepresentation(input.config) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.config = input.config ? new DataSourceConfigRepresentation(input.config) : undefined;
+        }
     }
 
 }

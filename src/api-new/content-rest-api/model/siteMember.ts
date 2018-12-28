@@ -24,8 +24,10 @@ export class SiteMember {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.person = input.person ? new Person(input.person) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.person = input.person ? new Person(input.person) : undefined;
+        }
     }
 
 }

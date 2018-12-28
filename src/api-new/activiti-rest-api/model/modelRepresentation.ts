@@ -24,7 +24,7 @@ export class ModelRepresentation {
     description?: string;
     favorite?: boolean;
     id?: number;
-    lastUpdated?: Date;
+    lastUpdated?: DateAlfresco;
     lastUpdatedBy?: number;
     lastUpdatedByFullName?: string;
     latestVersion?: boolean;
@@ -38,8 +38,10 @@ export class ModelRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.lastUpdated = input.lastUpdated ? DateAlfresco.parseDate(input.lastUpdated) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.lastUpdated = input.lastUpdated ? new DateAlfresco(input.lastUpdated) : undefined;
+        }
     }
 
 }

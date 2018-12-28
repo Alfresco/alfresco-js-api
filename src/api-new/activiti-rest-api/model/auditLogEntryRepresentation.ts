@@ -33,11 +33,13 @@ export class AuditLogEntryRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.formData) {
-            this.formData = input.formData.map((item: any) => {
-                return new AuditLogFormDataRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.formData) {
+                this.formData = input.formData.map((item: any) => {
+                    return new AuditLogFormDataRepresentation(item);
+                });
+            }
         }
     }
 

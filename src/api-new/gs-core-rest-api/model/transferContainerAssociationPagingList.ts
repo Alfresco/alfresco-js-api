@@ -26,14 +26,16 @@ export class TransferContainerAssociationPagingList {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
-        if (input.entries) {
-            this.entries = input.entries.map((item: any) => {
-                return new TransferContainerChildAssociationEntry(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+            if (input.entries) {
+                this.entries = input.entries.map((item: any) => {
+                    return new TransferContainerChildAssociationEntry(item);
+                });
+            }
+            this.source = input.source ? new TransferContainer(input.source) : undefined;
         }
-        this.source = input.source ? new TransferContainer(input.source) : undefined;
     }
 
 }

@@ -26,16 +26,18 @@ export class AppDefinition {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.models) {
-            this.models = input.models.map((item: any) => {
-                return new AppModelDefinition(item);
-            });
-        }
-        if (input.publishIdentityInfo) {
-            this.publishIdentityInfo = input.publishIdentityInfo.map((item: any) => {
-                return new PublishIdentityInfoRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.models) {
+                this.models = input.models.map((item: any) => {
+                    return new AppModelDefinition(item);
+                });
+            }
+            if (input.publishIdentityInfo) {
+                this.publishIdentityInfo = input.publishIdentityInfo.map((item: any) => {
+                    return new PublishIdentityInfoRepresentation(item);
+                });
+            }
         }
     }
 

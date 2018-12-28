@@ -25,11 +25,13 @@ export class ResultListDataRepresentationLightUserRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.data) {
-            this.data = input.data.map((item: any) => {
-                return new LightUserRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.data) {
+                this.data = input.data.map((item: any) => {
+                    return new LightUserRepresentation(item);
+                });
+            }
         }
     }
 

@@ -31,7 +31,9 @@ export class RequestSortDefinitionInner {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
+        if (input) {
+            Object.assign(this, input);
+        }
     }
 
 }

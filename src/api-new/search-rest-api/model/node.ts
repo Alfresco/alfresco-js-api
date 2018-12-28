@@ -32,9 +32,9 @@ The character . must not be used at the end of the name.
     isFolder: boolean;
     isFile: boolean;
     isLocked?: boolean;
-    modifiedAt: Date;
+    modifiedAt: DateAlfresco;
     modifiedByUser: UserInfo;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     createdByUser: UserInfo;
     parentId?: string;
     isLink?: boolean;
@@ -46,13 +46,15 @@ The character . must not be used at the end of the name.
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;
-        this.modifiedByUser = input.modifiedByUser ? new UserInfo(input.modifiedByUser) : undefined;
-        this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
-        this.createdByUser = input.createdByUser ? new UserInfo(input.createdByUser) : undefined;
-        this.content = input.content ? new ContentInfo(input.content) : undefined;
-        this.path = input.path ? new PathInfo(input.path) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.modifiedAt = input.modifiedAt ? new DateAlfresco(input.modifiedAt) : undefined;
+            this.modifiedByUser = input.modifiedByUser ? new UserInfo(input.modifiedByUser) : undefined;
+            this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+            this.createdByUser = input.createdByUser ? new UserInfo(input.createdByUser) : undefined;
+            this.content = input.content ? new ContentInfo(input.content) : undefined;
+            this.path = input.path ? new PathInfo(input.path) : undefined;
+        }
     }
 
 }

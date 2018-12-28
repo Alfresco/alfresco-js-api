@@ -18,7 +18,7 @@
 import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 
 export class TenantEvent {
-    eventTime?: Date;
+    eventTime?: DateAlfresco;
     eventType?: string;
     extraInfo?: string;
     id?: number;
@@ -28,8 +28,10 @@ export class TenantEvent {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.eventTime = input.eventTime ? DateAlfresco.parseDate(input.eventTime) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.eventTime = input.eventTime ? new DateAlfresco(input.eventTime) : undefined;
+        }
     }
 
 }

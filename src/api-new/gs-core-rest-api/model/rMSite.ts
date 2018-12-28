@@ -26,7 +26,9 @@ export class RMSite {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
+        if (input) {
+            Object.assign(this, input);
+        }
     }
 
 }

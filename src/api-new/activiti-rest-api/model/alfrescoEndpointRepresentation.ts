@@ -20,9 +20,9 @@ import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 export class AlfrescoEndpointRepresentation {
     accountUsername?: string;
     alfrescoTenantId?: string;
-    created?: Date;
+    created?: DateAlfresco;
     id?: number;
-    lastUpdated?: Date;
+    lastUpdated?: DateAlfresco;
     name?: string;
     repositoryUrl?: string;
     secret?: string;
@@ -33,9 +33,11 @@ export class AlfrescoEndpointRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
-        this.lastUpdated = input.lastUpdated ? DateAlfresco.parseDate(input.lastUpdated) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.created = input.created ? new DateAlfresco(input.created) : undefined;
+            this.lastUpdated = input.lastUpdated ? new DateAlfresco(input.lastUpdated) : undefined;
+        }
     }
 
 }

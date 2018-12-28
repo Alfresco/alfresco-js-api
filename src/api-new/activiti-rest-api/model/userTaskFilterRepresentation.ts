@@ -28,8 +28,10 @@ export class UserTaskFilterRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.filter = input.filter ? new TaskFilterRepresentation(input.filter) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.filter = input.filter ? new TaskFilterRepresentation(input.filter) : undefined;
+        }
     }
 
 }

@@ -31,11 +31,13 @@ export class EndpointConfigurationRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.requestHeaders) {
-            this.requestHeaders = input.requestHeaders.map((item: any) => {
-                return new EndpointRequestHeaderRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.requestHeaders) {
+                this.requestHeaders = input.requestHeaders.map((item: any) => {
+                    return new EndpointRequestHeaderRepresentation(item);
+                });
+            }
         }
     }
 

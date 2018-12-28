@@ -24,8 +24,10 @@ export class TopicBody {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.instruction = input.instruction ? new InstructionBody(input.instruction) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.instruction = input.instruction ? new InstructionBody(input.instruction) : undefined;
+        }
     }
 
 }

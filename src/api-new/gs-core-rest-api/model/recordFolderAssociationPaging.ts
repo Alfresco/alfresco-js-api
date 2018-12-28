@@ -22,8 +22,10 @@ export class RecordFolderAssociationPaging {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.list = input.list ? new RecordFolderAssociationPagingList(input.list) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new RecordFolderAssociationPagingList(input.list) : undefined;
+        }
     }
 
 }

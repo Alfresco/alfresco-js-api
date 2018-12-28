@@ -26,14 +26,16 @@ export class NodeAssociationPagingList {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
-        if (input.entries) {
-            this.entries = input.entries.map((item: any) => {
-                return new NodeAssociationEntry(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+            if (input.entries) {
+                this.entries = input.entries.map((item: any) => {
+                    return new NodeAssociationEntry(item);
+                });
+            }
+            this.source = input.source ? new Node(input.source) : undefined;
         }
-        this.source = input.source ? new Node(input.source) : undefined;
     }
 
 }

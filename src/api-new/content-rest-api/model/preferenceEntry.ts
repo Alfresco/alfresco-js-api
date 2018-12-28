@@ -22,8 +22,10 @@ export class PreferenceEntry {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.entry = input.entry ? new Preference(input.entry) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.entry = input.entry ? new Preference(input.entry) : undefined;
+        }
     }
 
 }

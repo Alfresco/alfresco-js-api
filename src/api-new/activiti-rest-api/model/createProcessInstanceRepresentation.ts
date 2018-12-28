@@ -28,11 +28,13 @@ export class CreateProcessInstanceRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.variables) {
-            this.variables = input.variables.map((item: any) => {
-                return new RestVariable(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.variables) {
+                this.variables = input.variables.map((item: any) => {
+                    return new RestVariable(item);
+                });
+            }
         }
     }
 

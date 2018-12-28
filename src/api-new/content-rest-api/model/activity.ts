@@ -39,7 +39,7 @@ export class Activity {
     /**
      * The date time at which the activity was performed
      */
-    postedAt?: Date;
+    postedAt?: DateAlfresco;
     /**
      * The feed on which this activity was posted
      */
@@ -55,8 +55,10 @@ export class Activity {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.postedAt = input.postedAt ? DateAlfresco.parseDate(input.postedAt) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.postedAt = input.postedAt ? new DateAlfresco(input.postedAt) : undefined;
+        }
     }
 
 }

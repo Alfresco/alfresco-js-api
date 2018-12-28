@@ -46,11 +46,13 @@ export class ActionDefinition {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.parameterDefinitions) {
-            this.parameterDefinitions = input.parameterDefinitions.map((item: any) => {
-                return new ActionParameterDefinition(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.parameterDefinitions) {
+                this.parameterDefinitions = input.parameterDefinitions.map((item: any) => {
+                    return new ActionParameterDefinition(item);
+                });
+            }
         }
     }
 

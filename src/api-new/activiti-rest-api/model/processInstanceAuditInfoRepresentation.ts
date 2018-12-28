@@ -32,12 +32,14 @@ export class ProcessInstanceAuditInfoRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.decisionInfo = input.decisionInfo ? new AuditDecisionInfoRepresentation(input.decisionInfo) : undefined;
-        if (input.entries) {
-            this.entries = input.entries.map((item: any) => {
-                return new AuditLogEntryRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            this.decisionInfo = input.decisionInfo ? new AuditDecisionInfoRepresentation(input.decisionInfo) : undefined;
+            if (input.entries) {
+                this.entries = input.entries.map((item: any) => {
+                    return new AuditLogEntryRepresentation(item);
+                });
+            }
         }
     }
 

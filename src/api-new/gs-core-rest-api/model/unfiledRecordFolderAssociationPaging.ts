@@ -22,8 +22,10 @@ export class UnfiledRecordFolderAssociationPaging {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.list = input.list ? new UnfiledRecordFolderAssociationPagingList(input.list) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new UnfiledRecordFolderAssociationPagingList(input.list) : undefined;
+        }
     }
 
 }

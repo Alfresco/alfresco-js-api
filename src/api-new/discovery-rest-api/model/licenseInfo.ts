@@ -19,8 +19,8 @@ import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { EntitlementsInfo } from './entitlementsInfo';
 
 export class LicenseInfo {
-    issuedAt: Date;
-    expiresAt: Date;
+    issuedAt: DateAlfresco;
+    expiresAt: DateAlfresco;
     remainingDays: number;
     holder: string;
     mode: string;
@@ -28,10 +28,12 @@ export class LicenseInfo {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.issuedAt = input.issuedAt ? DateAlfresco.parseDate(input.issuedAt) : undefined;
-        this.expiresAt = input.expiresAt ? DateAlfresco.parseDate(input.expiresAt) : undefined;
-        this.entitlements = input.entitlements ? new EntitlementsInfo(input.entitlements) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.issuedAt = input.issuedAt ? new DateAlfresco(input.issuedAt) : undefined;
+            this.expiresAt = input.expiresAt ? new DateAlfresco(input.expiresAt) : undefined;
+            this.entitlements = input.entitlements ? new EntitlementsInfo(input.entitlements) : undefined;
+        }
     }
 
 }

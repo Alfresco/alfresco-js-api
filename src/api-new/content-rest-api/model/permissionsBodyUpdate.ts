@@ -23,11 +23,13 @@ export class PermissionsBodyUpdate {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.locallySet) {
-            this.locallySet = input.locallySet.map((item: any) => {
-                return new PermissionElement(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.locallySet) {
+                this.locallySet = input.locallySet.map((item: any) => {
+                    return new PermissionElement(item);
+                });
+            }
         }
     }
 

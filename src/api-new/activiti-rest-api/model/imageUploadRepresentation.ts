@@ -18,15 +18,17 @@
 import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 
 export class ImageUploadRepresentation {
-    created?: Date;
+    created?: DateAlfresco;
     id?: number;
     name?: string;
     userId?: number;
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.created = input.created ? new DateAlfresco(input.created) : undefined;
+        }
     }
 
 }

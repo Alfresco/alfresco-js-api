@@ -48,31 +48,33 @@ export class FormDefinitionRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.fields) {
-            this.fields = input.fields.map((item: any) => {
-                return new FormFieldRepresentation(item);
-            });
-        }
-        if (input.javascriptEvents) {
-            this.javascriptEvents = input.javascriptEvents.map((item: any) => {
-                return new FormJavascriptEventRepresentation(item);
-            });
-        }
-        if (input.outcomes) {
-            this.outcomes = input.outcomes.map((item: any) => {
-                return new FormOutcomeRepresentation(item);
-            });
-        }
-        if (input.tabs) {
-            this.tabs = input.tabs.map((item: any) => {
-                return new FormTabRepresentation(item);
-            });
-        }
-        if (input.variables) {
-            this.variables = input.variables.map((item: any) => {
-                return new FormVariableRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.fields) {
+                this.fields = input.fields.map((item: any) => {
+                    return new FormFieldRepresentation(item);
+                });
+            }
+            if (input.javascriptEvents) {
+                this.javascriptEvents = input.javascriptEvents.map((item: any) => {
+                    return new FormJavascriptEventRepresentation(item);
+                });
+            }
+            if (input.outcomes) {
+                this.outcomes = input.outcomes.map((item: any) => {
+                    return new FormOutcomeRepresentation(item);
+                });
+            }
+            if (input.tabs) {
+                this.tabs = input.tabs.map((item: any) => {
+                    return new FormTabRepresentation(item);
+                });
+            }
+            if (input.variables) {
+                this.variables = input.variables.map((item: any) => {
+                    return new FormVariableRepresentation(item);
+                });
+            }
         }
     }
 

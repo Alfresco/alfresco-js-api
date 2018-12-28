@@ -27,7 +27,7 @@ ratings and to add a new rating.
 export class Rating {
     id: string;
     aggregate?: RatingAggregate;
-    ratedAt?: Date;
+    ratedAt?: DateAlfresco;
     /**
      * The rating. The type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
      */
@@ -35,9 +35,11 @@ export class Rating {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.aggregate = input.aggregate ? new RatingAggregate(input.aggregate) : undefined;
-        this.ratedAt = input.ratedAt ? DateAlfresco.parseDate(input.ratedAt) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.aggregate = input.aggregate ? new RatingAggregate(input.aggregate) : undefined;
+            this.ratedAt = input.ratedAt ? new DateAlfresco(input.ratedAt) : undefined;
+        }
     }
 
 }

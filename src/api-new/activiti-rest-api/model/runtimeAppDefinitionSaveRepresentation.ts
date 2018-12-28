@@ -22,11 +22,13 @@ export class RuntimeAppDefinitionSaveRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.appDefinitions) {
-            this.appDefinitions = input.appDefinitions.map((item: any) => {
-                return new AppDefinitionRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.appDefinitions) {
+                this.appDefinitions = input.appDefinitions.map((item: any) => {
+                    return new AppDefinitionRepresentation(item);
+                });
+            }
         }
     }
 

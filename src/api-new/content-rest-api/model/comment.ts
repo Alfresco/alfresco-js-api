@@ -22,20 +22,22 @@ export class Comment {
     id: string;
     content: string;
     createdBy: Person;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     edited: boolean;
     modifiedBy: Person;
-    modifiedAt: Date;
+    modifiedAt: DateAlfresco;
     canEdit: boolean;
     canDelete: boolean;
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.createdBy = input.createdBy ? new Person(input.createdBy) : undefined;
-        this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
-        this.modifiedBy = input.modifiedBy ? new Person(input.modifiedBy) : undefined;
-        this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.createdBy = input.createdBy ? new Person(input.createdBy) : undefined;
+            this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+            this.modifiedBy = input.modifiedBy ? new Person(input.modifiedBy) : undefined;
+            this.modifiedAt = input.modifiedAt ? new DateAlfresco(input.modifiedAt) : undefined;
+        }
     }
 
 }

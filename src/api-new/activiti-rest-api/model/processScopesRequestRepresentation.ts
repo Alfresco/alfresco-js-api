@@ -23,11 +23,13 @@ export class ProcessScopesRequestRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.identifiers) {
-            this.identifiers = input.identifiers.map((item: any) => {
-                return new ProcessScopeIdentifierRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.identifiers) {
+                this.identifiers = input.identifiers.map((item: any) => {
+                    return new ProcessScopeIdentifierRepresentation(item);
+                });
+            }
         }
     }
 

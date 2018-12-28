@@ -19,13 +19,15 @@ import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 
 export class SyncLogEntryRepresentation {
     id?: number;
-    timeStamp?: Date;
+    timeStamp?: DateAlfresco;
     type?: string;
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.timeStamp = input.timeStamp ? DateAlfresco.parseDate(input.timeStamp) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.timeStamp = input.timeStamp ? new DateAlfresco(input.timeStamp) : undefined;
+        }
     }
 
 }

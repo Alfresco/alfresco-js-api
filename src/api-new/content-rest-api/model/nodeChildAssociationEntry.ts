@@ -22,8 +22,10 @@ export class NodeChildAssociationEntry {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.entry = input.entry ? new NodeChildAssociation(input.entry) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.entry = input.entry ? new NodeChildAssociation(input.entry) : undefined;
+        }
     }
 
 }

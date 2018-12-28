@@ -16,6 +16,7 @@
 */
 
 import { ClassificationInformation } from './classificationInformation';
+import { InstructionBody } from './instructionBody';
 import { SecurityMarkInformationBody } from './securityMarkInformationBody';
 
 export class CombinedInstructionBody {
@@ -24,9 +25,11 @@ export class CombinedInstructionBody {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.classificationInformation = input.classificationInformation ? new ClassificationInformation(input.classificationInformation) : undefined;
-        this.securityMarkInformation = input.securityMarkInformation ? new SecurityMarkInformationBody(input.securityMarkInformation) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.classificationInformation = input.classificationInformation ? new ClassificationInformation(input.classificationInformation) : undefined;
+            this.securityMarkInformation = input.securityMarkInformation ? new SecurityMarkInformationBody(input.securityMarkInformation) : undefined;
+        }
     }
 
 }

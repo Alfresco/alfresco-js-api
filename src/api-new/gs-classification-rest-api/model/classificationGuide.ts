@@ -15,6 +15,8 @@
 * limitations under the License.
 */
 
+import { ClassificationGuideInTopic } from './classificationGuideInTopic';
+
 /**
  * A classification guide.
  */
@@ -26,7 +28,9 @@ export class ClassificationGuide {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
+        if (input) {
+            Object.assign(this, input);
+        }
     }
 
 }

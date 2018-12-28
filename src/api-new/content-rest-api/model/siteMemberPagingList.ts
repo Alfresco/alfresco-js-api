@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { Pagination } from './pagination';
+import { Pagination } from '../../content-rest-api/model/pagination';
 import { SiteMemberEntry } from './siteMemberEntry';
 
 export class SiteMemberPagingList {
@@ -24,12 +24,14 @@ export class SiteMemberPagingList {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
-        if (input.entries) {
-            this.entries = input.entries.map((item: any) => {
-                return new SiteMemberEntry(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+            if (input.entries) {
+                this.entries = input.entries.map((item: any) => {
+                    return new SiteMemberEntry(item);
+                });
+            }
         }
     }
 

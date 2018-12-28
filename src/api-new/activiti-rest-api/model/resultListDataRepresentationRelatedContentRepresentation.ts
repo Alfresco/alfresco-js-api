@@ -25,11 +25,13 @@ export class ResultListDataRepresentationRelatedContentRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.data) {
-            this.data = input.data.map((item: any) => {
-                return new RelatedContentRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.data) {
+                this.data = input.data.map((item: any) => {
+                    return new RelatedContentRepresentation(item);
+                });
+            }
         }
     }
 

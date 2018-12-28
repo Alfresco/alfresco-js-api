@@ -25,11 +25,13 @@ export class ResultListDataRepresentationAlfrescoContentRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.data) {
-            this.data = input.data.map((item: any) => {
-                return new AlfrescoContentRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.data) {
+                this.data = input.data.map((item: any) => {
+                    return new AlfrescoContentRepresentation(item);
+                });
+            }
         }
     }
 

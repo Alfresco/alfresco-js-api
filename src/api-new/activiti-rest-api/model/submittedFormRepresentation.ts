@@ -25,16 +25,18 @@ export class SubmittedFormRepresentation {
     id?: number;
     name?: string;
     processId?: string;
-    submitted?: Date;
+    submitted?: DateAlfresco;
     submittedBy?: LightUserRepresentation;
     taskId?: string;
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.form = input.form ? new FormDefinitionRepresentation(input.form) : undefined;
-        this.submitted = input.submitted ? DateAlfresco.parseDate(input.submitted) : undefined;
-        this.submittedBy = input.submittedBy ? new LightUserRepresentation(input.submittedBy) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.form = input.form ? new FormDefinitionRepresentation(input.form) : undefined;
+            this.submitted = input.submitted ? new DateAlfresco(input.submitted) : undefined;
+            this.submittedBy = input.submittedBy ? new LightUserRepresentation(input.submittedBy) : undefined;
+        }
     }
 
 }

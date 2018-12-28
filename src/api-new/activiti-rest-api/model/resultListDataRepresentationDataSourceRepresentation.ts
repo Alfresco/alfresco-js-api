@@ -25,11 +25,13 @@ export class ResultListDataRepresentationDataSourceRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.data) {
-            this.data = input.data.map((item: any) => {
-                return new DataSourceRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.data) {
+                this.data = input.data.map((item: any) => {
+                    return new DataSourceRepresentation(item);
+                });
+            }
         }
     }
 

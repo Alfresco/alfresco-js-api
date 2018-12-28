@@ -62,37 +62,39 @@ export class SearchRequest {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.query = input.query ? new RequestQuery(input.query) : undefined;
-        this.paging = input.paging ? new RequestPagination(input.paging) : undefined;
-        this.include = input.include ? new RequestInclude(input.include) : undefined;
-        this.fields = input.fields ? new RequestFields(input.fields) : undefined;
-        this.sort = input.sort ? new RequestSortDefinition(input.sort) : undefined;
-        this.templates = input.templates ? new RequestTemplates(input.templates) : undefined;
-        this.defaults = input.defaults ? new RequestDefaults(input.defaults) : undefined;
-        this.localization = input.localization ? new RequestLocalization(input.localization) : undefined;
-        this.filterQueries = input.filterQueries ? new RequestFilterQueries(input.filterQueries) : undefined;
-        this.facetQueries = input.facetQueries ? new RequestFacetQueries(input.facetQueries) : undefined;
-        this.facetFields = input.facetFields ? new RequestFacetFields(input.facetFields) : undefined;
-        this.facetIntervals = input.facetIntervals ? new RequestFacetIntervals(input.facetIntervals) : undefined;
-        if (input.pivots) {
-            this.pivots = input.pivots.map((item: any) => {
-                return new RequestPivot(item);
-            });
-        }
-        if (input.stats) {
-            this.stats = input.stats.map((item: any) => {
-                return new RequestStats(item);
-            });
-        }
-        this.spellcheck = input.spellcheck ? new RequestSpellcheck(input.spellcheck) : undefined;
-        this.scope = input.scope ? new RequestScope(input.scope) : undefined;
-        this.limits = input.limits ? new RequestLimits(input.limits) : undefined;
-        this.highlight = input.highlight ? new RequestHighlight(input.highlight) : undefined;
-        if (input.ranges) {
-            this.ranges = input.ranges.map((item: any) => {
-                return new RequestRange(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            this.query = input.query ? new RequestQuery(input.query) : undefined;
+            this.paging = input.paging ? new RequestPagination(input.paging) : undefined;
+            this.include = input.include ? new RequestInclude(input.include) : undefined;
+            this.fields = input.fields ? new RequestFields(input.fields) : undefined;
+            this.sort = input.sort ? new RequestSortDefinition(input.sort) : undefined;
+            this.templates = input.templates ? new RequestTemplates(input.templates) : undefined;
+            this.defaults = input.defaults ? new RequestDefaults(input.defaults) : undefined;
+            this.localization = input.localization ? new RequestLocalization(input.localization) : undefined;
+            this.filterQueries = input.filterQueries ? new RequestFilterQueries(input.filterQueries) : undefined;
+            this.facetQueries = input.facetQueries ? new RequestFacetQueries(input.facetQueries) : undefined;
+            this.facetFields = input.facetFields ? new RequestFacetFields(input.facetFields) : undefined;
+            this.facetIntervals = input.facetIntervals ? new RequestFacetIntervals(input.facetIntervals) : undefined;
+            if (input.pivots) {
+                this.pivots = input.pivots.map((item: any) => {
+                    return new RequestPivot(item);
+                });
+            }
+            if (input.stats) {
+                this.stats = input.stats.map((item: any) => {
+                    return new RequestStats(item);
+                });
+            }
+            this.spellcheck = input.spellcheck ? new RequestSpellcheck(input.spellcheck) : undefined;
+            this.scope = input.scope ? new RequestScope(input.scope) : undefined;
+            this.limits = input.limits ? new RequestLimits(input.limits) : undefined;
+            this.highlight = input.highlight ? new RequestHighlight(input.highlight) : undefined;
+            if (input.ranges) {
+                this.ranges = input.ranges.map((item: any) => {
+                    return new RequestRange(item);
+                });
+            }
         }
     }
 

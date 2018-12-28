@@ -24,9 +24,11 @@ export class InstructionBody {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.classificationInformation = input.classificationInformation ? new ClassificationInformation(input.classificationInformation) : undefined;
-        this.securityMarkInformation = input.securityMarkInformation ? new SecurityMarkInformationBody(input.securityMarkInformation) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.classificationInformation = input.classificationInformation ? new ClassificationInformation(input.classificationInformation) : undefined;
+            this.securityMarkInformation = input.securityMarkInformation ? new SecurityMarkInformationBody(input.securityMarkInformation) : undefined;
+        }
     }
 
 }

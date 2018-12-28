@@ -28,7 +28,7 @@ The character . must not be used at the end of the name.
      */
     name: string;
     nodeType: string;
-    createdAt: Date;
+    createdAt: DateAlfresco;
     createdByUser: UserInfo;
     /**
      * Present only for transfer nodes.
@@ -48,9 +48,11 @@ The character . must not be used at the end of the name.
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
-        this.createdByUser = input.createdByUser ? new UserInfo(input.createdByUser) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+            this.createdByUser = input.createdByUser ? new UserInfo(input.createdByUser) : undefined;
+        }
     }
 
 }

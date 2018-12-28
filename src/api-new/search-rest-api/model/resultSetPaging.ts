@@ -25,8 +25,10 @@ export class ResultSetPaging {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.list = input.list ? new ResultSetPagingList(input.list) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new ResultSetPagingList(input.list) : undefined;
+        }
     }
 
 }

@@ -22,8 +22,10 @@ export class ClassificationReasonsPaging {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.list = input.list ? new ClassificationReasonsPagingList(input.list) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new ClassificationReasonsPagingList(input.list) : undefined;
+        }
     }
 
 }

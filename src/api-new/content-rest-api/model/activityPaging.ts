@@ -22,8 +22,10 @@ export class ActivityPaging {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.list = input.list ? new ActivityPagingList(input.list) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new ActivityPagingList(input.list) : undefined;
+        }
     }
 
 }

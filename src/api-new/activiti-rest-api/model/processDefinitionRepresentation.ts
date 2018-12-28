@@ -31,11 +31,13 @@ export class ProcessDefinitionRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.metaDataValues) {
-            this.metaDataValues = input.metaDataValues.map((item: any) => {
-                return new ProcessDefinitionMetaDataRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.metaDataValues) {
+                this.metaDataValues = input.metaDataValues.map((item: any) => {
+                    return new ProcessDefinitionMetaDataRepresentation(item);
+                });
+            }
         }
     }
 

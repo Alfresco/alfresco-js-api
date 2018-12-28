@@ -25,9 +25,11 @@ export class PublishIdentityInfoRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.group = input.group ? new LightGroupRepresentation(input.group) : undefined;
-        this.person = input.person ? new LightUserRepresentation(input.person) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.group = input.group ? new LightGroupRepresentation(input.group) : undefined;
+            this.person = input.person ? new LightUserRepresentation(input.person) : undefined;
+        }
     }
 
 }

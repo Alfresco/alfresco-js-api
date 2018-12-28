@@ -24,7 +24,9 @@ export class RequestFacetQueries extends Array<RequestFacetQueriesInner> {
 
     constructor(input?: any) {
         super();
-        Object.assign(this, input);
+        if (input) {
+            Object.assign(this, input);
+        }
     }
 
 }

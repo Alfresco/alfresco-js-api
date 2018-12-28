@@ -29,14 +29,16 @@ export class RepositoryInfo {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.version = input.version ? new VersionInfo(input.version) : undefined;
-        this.status = input.status ? new StatusInfo(input.status) : undefined;
-        this.license = input.license ? new LicenseInfo(input.license) : undefined;
-        if (input.modules) {
-            this.modules = input.modules.map((item: any) => {
-                return new ModuleInfo(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            this.version = input.version ? new VersionInfo(input.version) : undefined;
+            this.status = input.status ? new StatusInfo(input.status) : undefined;
+            this.license = input.license ? new LicenseInfo(input.license) : undefined;
+            if (input.modules) {
+                this.modules = input.modules.map((item: any) => {
+                    return new ModuleInfo(item);
+                });
+            }
         }
     }
 

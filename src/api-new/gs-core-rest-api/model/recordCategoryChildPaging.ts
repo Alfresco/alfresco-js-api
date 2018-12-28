@@ -22,8 +22,10 @@ export class RecordCategoryChildPaging {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.list = input.list ? new RecordCategoryChildPagingList(input.list) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new RecordCategoryChildPagingList(input.list) : undefined;
+        }
     }
 
 }

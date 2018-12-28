@@ -15,4 +15,4 @@
 * limitations under the License.
 */
 
-export type DeclassificationDate = Date;
+export type DeclassificationDate = DateAlfresco;

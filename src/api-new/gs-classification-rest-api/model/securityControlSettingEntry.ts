@@ -22,8 +22,10 @@ export class SecurityControlSettingEntry {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.entry = input.entry ? new SecurityControlSetting(input.entry) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.entry = input.entry ? new SecurityControlSetting(input.entry) : undefined;
+        }
     }
 
 }

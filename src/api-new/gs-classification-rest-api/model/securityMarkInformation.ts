@@ -22,8 +22,10 @@ export class SecurityMarkInformation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.add = input.add ? new SecurityMarks(input.add) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.add = input.add ? new SecurityMarks(input.add) : undefined;
+        }
     }
 
 }

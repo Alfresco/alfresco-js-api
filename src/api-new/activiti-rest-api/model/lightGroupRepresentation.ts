@@ -24,11 +24,13 @@ export class LightGroupRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.groups) {
-            this.groups = input.groups.map((item: any) => {
-                return new LightGroupRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.groups) {
+                this.groups = input.groups.map((item: any) => {
+                    return new LightGroupRepresentation(item);
+                });
+            }
         }
     }
 

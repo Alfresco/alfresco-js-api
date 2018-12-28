@@ -22,8 +22,10 @@ export class NodePaging {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.list = input.list ? new NodePagingList(input.list) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new NodePagingList(input.list) : undefined;
+        }
     }
 
 }

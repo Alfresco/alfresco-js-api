@@ -22,8 +22,10 @@ export class ActionExecResultEntry {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.entry = input.entry ? new ActionExecResult(input.entry) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.entry = input.entry ? new ActionExecResult(input.entry) : undefined;
+        }
     }
 
 }

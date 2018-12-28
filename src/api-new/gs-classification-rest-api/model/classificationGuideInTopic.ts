@@ -15,6 +15,8 @@
 * limitations under the License.
 */
 
+import { ClassificationGuideBody } from './classificationGuideBody';
+
 /**
  * The classification guide which the topic is contained in. This field is only returned when requested.
  */
@@ -26,7 +28,9 @@ export class ClassificationGuideInTopic {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
+        if (input) {
+            Object.assign(this, input);
+        }
     }
 
 }

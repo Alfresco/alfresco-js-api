@@ -31,8 +31,10 @@ The character . must not be used at the end of the name.
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.permissions = input.permissions ? new PermissionsBodyUpdate(input.permissions) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.permissions = input.permissions ? new PermissionsBodyUpdate(input.permissions) : undefined;
+        }
     }
 
 }

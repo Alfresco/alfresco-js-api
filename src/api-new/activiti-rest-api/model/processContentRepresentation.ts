@@ -24,13 +24,15 @@ export class ProcessContentRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.content) {
-            this.content = input.content.map((item: any) => {
-                return new RelatedContentRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.content) {
+                this.content = input.content.map((item: any) => {
+                    return new RelatedContentRepresentation(item);
+                });
+            }
+            this.field = input.field ? new NamedObject(input.field) : undefined;
         }
-        this.field = input.field ? new NamedObject(input.field) : undefined;
     }
 
 }

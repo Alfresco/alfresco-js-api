@@ -23,7 +23,7 @@ export class UserRepresentation {
     apps?: LightAppRepresentation[];
     capabilities?: string[];
     company?: string;
-    created?: Date;
+    created?: DateAlfresco;
     email?: string;
     externalId?: string;
     firstName?: string;
@@ -31,8 +31,8 @@ export class UserRepresentation {
     groups?: GroupRepresentation[];
     id?: number;
     lastName?: string;
-    lastUpdate?: Date;
-    latestSyncTimeStamp?: Date;
+    lastUpdate?: DateAlfresco;
+    latestSyncTimeStamp?: DateAlfresco;
     password?: string;
     pictureId?: number;
     primaryGroup?: GroupRepresentation;
@@ -44,21 +44,23 @@ export class UserRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.apps) {
-            this.apps = input.apps.map((item: any) => {
-                return new LightAppRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.apps) {
+                this.apps = input.apps.map((item: any) => {
+                    return new LightAppRepresentation(item);
+                });
+            }
+            this.created = input.created ? new DateAlfresco(input.created) : undefined;
+            if (input.groups) {
+                this.groups = input.groups.map((item: any) => {
+                    return new GroupRepresentation(item);
+                });
+            }
+            this.lastUpdate = input.lastUpdate ? new DateAlfresco(input.lastUpdate) : undefined;
+            this.latestSyncTimeStamp = input.latestSyncTimeStamp ? new DateAlfresco(input.latestSyncTimeStamp) : undefined;
+            this.primaryGroup = input.primaryGroup ? new GroupRepresentation(input.primaryGroup) : undefined;
         }
-        this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
-        if (input.groups) {
-            this.groups = input.groups.map((item: any) => {
-                return new GroupRepresentation(item);
-            });
-        }
-        this.lastUpdate = input.lastUpdate ? DateAlfresco.parseDate(input.lastUpdate) : undefined;
-        this.latestSyncTimeStamp = input.latestSyncTimeStamp ? DateAlfresco.parseDate(input.latestSyncTimeStamp) : undefined;
-        this.primaryGroup = input.primaryGroup ? new GroupRepresentation(input.primaryGroup) : undefined;
     }
 
 }

@@ -22,8 +22,10 @@ export class RMSiteEntry {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.entry = input.entry ? new RMSite(input.entry) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.entry = input.entry ? new RMSite(input.entry) : undefined;
+        }
     }
 
 }

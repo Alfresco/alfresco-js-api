@@ -33,16 +33,18 @@ export class RequestFacetIntervals {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.sets) {
-            this.sets = input.sets.map((item: any) => {
-                return new RequestFacetSet(item);
-            });
-        }
-        if (input.intervals) {
-            this.intervals = input.intervals.map((item: any) => {
-                return new RequestFacetIntervalsIntervals(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.sets) {
+                this.sets = input.sets.map((item: any) => {
+                    return new RequestFacetSet(item);
+                });
+            }
+            if (input.intervals) {
+                this.intervals = input.intervals.map((item: any) => {
+                    return new RequestFacetIntervalsIntervals(item);
+                });
+            }
         }
     }
 

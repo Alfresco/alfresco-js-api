@@ -32,11 +32,13 @@ export class RequestFacetFields {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.facets) {
-            this.facets = input.facets.map((item: any) => {
-                return new RequestFacetField(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.facets) {
+                this.facets = input.facets.map((item: any) => {
+                    return new RequestFacetField(item);
+                });
+            }
         }
     }
 

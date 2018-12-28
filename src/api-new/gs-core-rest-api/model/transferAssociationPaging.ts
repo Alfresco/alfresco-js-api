@@ -22,8 +22,10 @@ export class TransferAssociationPaging {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.list = input.list ? new TransferAssociationPagingList(input.list) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new TransferAssociationPagingList(input.list) : undefined;
+        }
     }
 
 }

@@ -40,8 +40,10 @@ export class PersonBodyUpdate {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.company = input.company ? new Company(input.company) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.company = input.company ? new Company(input.company) : undefined;
+        }
     }
 
 }

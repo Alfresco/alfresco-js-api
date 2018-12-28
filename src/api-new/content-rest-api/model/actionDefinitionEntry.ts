@@ -22,8 +22,10 @@ export class ActionDefinitionEntry {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.entry = input.entry ? new ActionDefinition(input.entry) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.entry = input.entry ? new ActionDefinition(input.entry) : undefined;
+        }
     }
 
 }

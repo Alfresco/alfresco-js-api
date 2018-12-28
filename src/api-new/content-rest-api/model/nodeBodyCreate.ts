@@ -36,17 +36,19 @@ The character . must not be used at the end of the name.
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.association = input.association ? new NodeBodyCreateAssociation(input.association) : undefined;
-        if (input.secondaryChildren) {
-            this.secondaryChildren = input.secondaryChildren.map((item: any) => {
-                return new ChildAssociationBody(item);
-            });
-        }
-        if (input.targets) {
-            this.targets = input.targets.map((item: any) => {
-                return new AssociationBody(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            this.association = input.association ? new NodeBodyCreateAssociation(input.association) : undefined;
+            if (input.secondaryChildren) {
+                this.secondaryChildren = input.secondaryChildren.map((item: any) => {
+                    return new ChildAssociationBody(item);
+                });
+            }
+            if (input.targets) {
+                this.targets = input.targets.map((item: any) => {
+                    return new AssociationBody(item);
+                });
+            }
         }
     }
 

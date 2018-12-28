@@ -25,11 +25,13 @@ export class EntityVariableScopeRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.attributes) {
-            this.attributes = input.attributes.map((item: any) => {
-                return new EntityAttributeScopeRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.attributes) {
+                this.attributes = input.attributes.map((item: any) => {
+                    return new EntityAttributeScopeRepresentation(item);
+                });
+            }
         }
     }
 

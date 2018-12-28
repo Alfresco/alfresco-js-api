@@ -25,7 +25,9 @@ export class RequestFields extends Array<string> {
 
     constructor(input?: any) {
         super();
-        Object.assign(this, input);
+        if (input) {
+            Object.assign(this, input);
+        }
     }
 
 }

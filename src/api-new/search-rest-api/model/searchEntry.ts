@@ -30,11 +30,13 @@ export class SearchEntry {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.highlight) {
-            this.highlight = input.highlight.map((item: any) => {
-                return new SearchEntryHighlight(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.highlight) {
+                this.highlight = input.highlight.map((item: any) => {
+                    return new SearchEntryHighlight(item);
+                });
+            }
         }
     }
 

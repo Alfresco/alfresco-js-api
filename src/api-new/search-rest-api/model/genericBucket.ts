@@ -46,13 +46,15 @@ export class GenericBucket {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.metrics) {
-            this.metrics = input.metrics.map((item: any) => {
-                return new GenericMetric(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.metrics) {
+                this.metrics = input.metrics.map((item: any) => {
+                    return new GenericMetric(item);
+                });
+            }
+            this.bucketInfo = input.bucketInfo ? new GenericBucketBucketInfo(input.bucketInfo) : undefined;
         }
-        this.bucketInfo = input.bucketInfo ? new GenericBucketBucketInfo(input.bucketInfo) : undefined;
     }
 
 }

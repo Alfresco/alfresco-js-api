@@ -24,11 +24,13 @@ export class PathInfo {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.elements) {
-            this.elements = input.elements.map((item: any) => {
-                return new PathElement(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.elements) {
+                this.elements = input.elements.map((item: any) => {
+                    return new PathElement(item);
+                });
+            }
         }
     }
 

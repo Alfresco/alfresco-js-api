@@ -22,8 +22,10 @@ export class AuditEntryPaging {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.list = input.list ? new AuditEntryPagingList(input.list) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new AuditEntryPagingList(input.list) : undefined;
+        }
     }
 
 }

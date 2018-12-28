@@ -25,11 +25,13 @@ export class ResultListDataRepresentationTaskRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.data) {
-            this.data = input.data.map((item: any) => {
-                return new TaskRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.data) {
+                this.data = input.data.map((item: any) => {
+                    return new TaskRepresentation(item);
+                });
+            }
         }
     }
 

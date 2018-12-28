@@ -25,11 +25,13 @@ export class ResultListDataRepresentationRuntimeFormRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.data) {
-            this.data = input.data.map((item: any) => {
-                return new RuntimeFormRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.data) {
+                this.data = input.data.map((item: any) => {
+                    return new RuntimeFormRepresentation(item);
+                });
+            }
         }
     }
 

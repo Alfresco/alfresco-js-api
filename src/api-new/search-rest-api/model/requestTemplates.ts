@@ -29,7 +29,9 @@ export class RequestTemplates extends Array<RequestTemplatesInner> {
 
     constructor(input?: any) {
         super();
-        Object.assign(this, input);
+        if (input) {
+            Object.assign(this, input);
+        }
     }
 
 }

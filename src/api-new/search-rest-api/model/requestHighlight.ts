@@ -58,11 +58,13 @@ export class RequestHighlight {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.fields) {
-            this.fields = input.fields.map((item: any) => {
-                return new RequestHighlightFields(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.fields) {
+                this.fields = input.fields.map((item: any) => {
+                    return new RequestHighlightFields(item);
+                });
+            }
         }
     }
 

@@ -24,16 +24,18 @@ export class AuditDecisionInfoRepresentation {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.appliedRules) {
-            this.appliedRules = input.appliedRules.map((item: any) => {
-                return new AuditDecisionRuleInfoRepresentation(item);
-            });
-        }
-        if (input.calculatedValues) {
-            this.calculatedValues = input.calculatedValues.map((item: any) => {
-                return new AuditCalculatedValueRepresentation(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.appliedRules) {
+                this.appliedRules = input.appliedRules.map((item: any) => {
+                    return new AuditDecisionRuleInfoRepresentation(item);
+                });
+            }
+            if (input.calculatedValues) {
+                this.calculatedValues = input.calculatedValues.map((item: any) => {
+                    return new AuditCalculatedValueRepresentation(item);
+                });
+            }
         }
     }
 

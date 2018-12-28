@@ -24,8 +24,10 @@ export class Rendition {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.content = input.content ? new ContentInfo(input.content) : undefined;
+        if (input) {
+            Object.assign(this, input);
+            this.content = input.content ? new ContentInfo(input.content) : undefined;
+        }
     }
 
 }

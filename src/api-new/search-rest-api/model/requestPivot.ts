@@ -27,11 +27,13 @@ export class RequestPivot {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        if (input.pivots) {
-            this.pivots = input.pivots.map((item: any) => {
-                return new RequestPivot(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            if (input.pivots) {
+                this.pivots = input.pivots.map((item: any) => {
+                    return new RequestPivot(item);
+                });
+            }
         }
     }
 

@@ -24,7 +24,9 @@ export class RequestSortDefinition extends Array<RequestSortDefinitionInner> {
 
     constructor(input?: any) {
         super();
-        Object.assign(this, input);
+        if (input) {
+            Object.assign(this, input);
+        }
     }
 
 }

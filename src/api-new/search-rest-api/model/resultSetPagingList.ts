@@ -26,13 +26,15 @@ export class ResultSetPagingList {
 
     constructor(input?: any) {
 
-        Object.assign(this, input);
-        this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
-        this.context = input.context ? new ResultSetContext(input.context) : undefined;
-        if (input.entries) {
-            this.entries = input.entries.map((item: any) => {
-                return new ResultSetRowEntry(item);
-            });
+        if (input) {
+            Object.assign(this, input);
+            this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+            this.context = input.context ? new ResultSetContext(input.context) : undefined;
+            if (input.entries) {
+                this.entries = input.entries.map((item: any) => {
+                    return new ResultSetRowEntry(item);
+                });
+            }
         }
     }
 
