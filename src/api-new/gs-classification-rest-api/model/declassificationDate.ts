@@ -15,4 +15,6 @@
 * limitations under the License.
 */
 
+import { DateAlfresco } from '../../../../dist/src/api-new/content-rest-api/model/dateAlfresco';
+
 export type DeclassificationDate = DateAlfresco;

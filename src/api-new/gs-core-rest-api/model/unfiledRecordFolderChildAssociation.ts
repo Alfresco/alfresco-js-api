@@ -18,7 +18,6 @@
 import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociationInfo';
 import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { PathInfo } from '../../content-rest-api/model/pathInfo';
-import { UnfiledRecordFolderChild } from './unfiledRecordFolderChild';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class UnfiledRecordFolderChildAssociation {

@@ -19,7 +19,6 @@ import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociat
 import { ContentInfo } from '../../content-rest-api/model/contentInfo';
 import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { PathInfo } from '../../content-rest-api/model/pathInfo';
-import { Record } from './record';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class RecordFolderChildAssociation {

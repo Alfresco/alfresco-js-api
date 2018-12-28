@@ -15,8 +15,6 @@
 * limitations under the License.
 */
 
-import { ClassificationGuidesInTopic } from './classificationGuidesInTopic';
-
 /**
  * A classification guide in a list.
  */

@@ -17,7 +17,6 @@
 
 import { ContentInfo } from '../../content-rest-api/model/contentInfo';
 import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
-import { Node } from './node';
 import { PathInfo } from '../../content-rest-api/model/pathInfo';
 import { SearchEntry } from './searchEntry';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
