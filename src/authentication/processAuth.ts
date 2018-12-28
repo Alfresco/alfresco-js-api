@@ -27,7 +27,7 @@ export class ProcessAuth extends AlfrescoApiClient {
 
     private static instance: ProcessAuth = null;
     config: AlfrescoApiConfig;
-    basePath: string;
+    static basePath: string;
     storage: Storage;
     ticket: string;
     static authentications: Authentication = new Authentication({
@@ -57,7 +57,7 @@ export class ProcessAuth extends AlfrescoApiClient {
         this.config = config;
         this.ticket = undefined;
 
-        this.basePath = config.hostBpm + '/' + this.config.contextRootBpm;   //Activiti Call
+        ProcessAuth.basePath = config.hostBpm + '/' + this.config.contextRootBpm;   //Activiti Call
 
         if (this.config.ticketBpm) {
             this.setTicket(config.ticketBpm);

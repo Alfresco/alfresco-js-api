@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach, afterEach */
 
-import { BpmAuth } from '@alfresco/js-api';
+import { ProcessAuth } from '@alfresco/js-api';
 let AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 let expect = require('chai').expect;
 let sinon = require('sinon');
@@ -13,19 +13,19 @@ describe('Bpm Auth test', function () {
     });
 
     it('should remember username on login', () => {
-        const auth = new BpmAuth({});
+        const auth = new ProcessAuth({});
         auth.login('johndoe', 'password');
-        expect(auth.authentications.username).to.be.equal('johndoe');
+        expect(auth.authentications.basicAuth.username).to.be.equal('johndoe');
     });
 
     it('should forget username on logout', () => {
-        const auth = new BpmAuth({});
+        const auth = new ProcessAuth({});
 
         auth.login('johndoe', 'password');
-        expect(auth.authentications.username).to.be.equal('johndoe');
+        expect(auth.authentications.basicAuth.username).to.be.equal('johndoe');
 
         auth.logout();
-        expect(auth.authentications.username).to.be.equal('');
+        expect(auth.authentications.basicAuth.username).to.be.equal('');
     });
 
     describe('With Authentication', function () {
@@ -34,12 +34,12 @@ describe('Bpm Auth test', function () {
 
             this.authBpmMock.get200Response();
 
-            this.bpmAuth = new BpmAuth({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
 
-            this.bpmAuth.login('admin', 'admin').then((data) => {
+            this.processAuth.login('admin', 'admin').then((data) => {
                 expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                 done();
             }, function () {
@@ -51,14 +51,14 @@ describe('Bpm Auth test', function () {
 
             this.authBpmMock.get200Response();
 
-            this.bpmAuth = new BpmAuth({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
 
-            this.bpmAuth.login('admin', 'admin').then((data) => {
+            this.processAuth.login('admin', 'admin').then((data) => {
                 expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
-                expect(this.bpmAuth.authentications.basicAuth.password).to.be.not.equal('admin');
+                expect(this.processAuth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
             }, function () {
             });
@@ -69,13 +69,13 @@ describe('Bpm Auth test', function () {
 
             this.authBpmMock.get200Response();
 
-            this.bpmAuth = new BpmAuth({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
 
-            this.bpmAuth.login('admin', 'admin').then(() => {
-                expect(this.bpmAuth.isLoggedIn()).to.be.equal(true);
+            this.processAuth.login('admin', 'admin').then(() => {
+                expect(this.processAuth.isLoggedIn()).to.be.equal(true);
                 done();
             }, function () {
             });
@@ -85,16 +85,16 @@ describe('Bpm Auth test', function () {
 
             this.authBpmMock.get200Response();
 
-            this.bpmAuth = new BpmAuth({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
-            this.bpmAuth.login('admin', 'admin');
+            this.processAuth.login('admin', 'admin');
 
             this.authBpmMock.get200ResponseLogout();
 
-            this.bpmAuth.logout().then(() => {
-                expect(this.bpmAuth.isLoggedIn()).to.be.equal(false);
+            this.processAuth.logout().then(() => {
+                expect(this.processAuth.isLoggedIn()).to.be.equal(false);
                 done();
             }, function () {
             });
@@ -105,15 +105,15 @@ describe('Bpm Auth test', function () {
 
             this.authBpmMock.get200Response();
 
-            this.bpmAuth = new BpmAuth({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
 
-            this.bpmAuth.login('admin', 'admin').then(() => {
-                expect(this.bpmAuth.isLoggedIn()).to.be.equal(true);
-                this.bpmAuth.changeHost('anyhost');
-                expect(this.bpmAuth.isLoggedIn()).to.be.equal(false);
+            this.processAuth.login('admin', 'admin').then(() => {
+                expect(this.processAuth.isLoggedIn()).to.be.equal(true);
+                this.processAuth.changeHost('anyhost');
+                expect(this.processAuth.isLoggedIn()).to.be.equal(false);
                 done();
             }, function () {
             });
@@ -123,12 +123,12 @@ describe('Bpm Auth test', function () {
         it('login should return an error if wrong credential are used 401 the login fails', function (done) {
             this.authBpmMock.get401Response();
 
-            this.bpmAuth = new BpmAuth({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
 
-            this.bpmAuth.login('wrong', 'name').then(function () {
+            this.processAuth.login('wrong', 'name').then(function () {
             }, function (error) {
                 expect(error.status).to.be.equal(401);
                 done();
@@ -140,12 +140,12 @@ describe('Bpm Auth test', function () {
             it('login should fire an event if is unauthorized  401', function (done) {
                 this.authBpmMock.get401Response();
 
-                this.bpmAuth = new BpmAuth({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
 
-                let loginPromise = this.bpmAuth.login('wrong', 'name');
+                let loginPromise = this.processAuth.login('wrong', 'name');
 
                 loginPromise.catch(() => {
                 });
@@ -158,12 +158,12 @@ describe('Bpm Auth test', function () {
             it('login should fire an event if is forbidden 403', function (done) {
                 this.authBpmMock.get403Response();
 
-                this.bpmAuth = new BpmAuth({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
 
-                let loginPromise = this.bpmAuth.login('wrong', 'name');
+                let loginPromise = this.processAuth.login('wrong', 'name');
 
                 loginPromise.catch(() => {
                 });
@@ -176,12 +176,12 @@ describe('Bpm Auth test', function () {
             it('The Api Should fire success event if is all ok 201', function (done) {
                 this.authBpmMock.get200Response();
 
-                this.bpmAuth = new BpmAuth({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
 
-                let loginPromise = this.bpmAuth.login('admin', 'admin');
+                let loginPromise = this.processAuth.login('admin', 'admin');
 
                 loginPromise.catch(() => {
                 });
@@ -194,16 +194,16 @@ describe('Bpm Auth test', function () {
             it('The Api Should fire logout event if the logout is successfull', function (done) {
                 this.authBpmMock.get200Response();
 
-                this.bpmAuth = new BpmAuth({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
 
-                this.bpmAuth.login('admin', 'admin');
+                this.processAuth.login('admin', 'admin');
 
                 this.authBpmMock.get200ResponseLogout();
 
-                this.bpmAuth.logout().on('logout', () => {
+                this.processAuth.logout().on('logout', () => {
                     done();
                 });
             });
@@ -213,13 +213,13 @@ describe('Bpm Auth test', function () {
 
             it('Ticket should be present in the client', function () {
 
-                this.bpmAuth = new BpmAuth({
+                this.processAuth = new ProcessAuth({
                     ticketBpm: 'Basic YWRtaW46YWRtaW4=',
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
 
-                expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.bpmAuth.authentications.basicAuth.ticket);
+                expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.processAuth.authentications.basicAuth.ticket);
             });
         });
 
@@ -227,12 +227,12 @@ describe('Bpm Auth test', function () {
 
             beforeEach(function (done) {
                 this.authBpmMock.get200Response();
-                this.bpmAuth = new BpmAuth({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
 
-                this.bpmAuth.login('admin', 'admin').then(() => {
+                this.processAuth.login('admin', 'admin').then(() => {
                     done();
                 });
             });
@@ -240,8 +240,8 @@ describe('Bpm Auth test', function () {
             it('Ticket should be absent in the client and the resolve promise should be called', function (done) {
                 this.authBpmMock.get200ResponseLogout();
 
-                this.bpmAuth.logout().then((data) => {
-                    expect(this.bpmAuth.getTicket()).to.be.equal(null);
+                this.processAuth.logout().then((data) => {
+                    expect(this.processAuth.getTicket()).to.be.equal(null);
                     expect(data).to.be.equal('logout');
                     done();
                 }, function () {
@@ -253,7 +253,7 @@ describe('Bpm Auth test', function () {
         describe('CSRF Token', function () {
 
             beforeEach(function () {
-                this.setCsrfTokenStub = sinon.stub(BpmAuth.prototype, 'setCsrfToken');
+                this.setCsrfTokenStub = sinon.stub(ProcessAuth.prototype, 'setCsrfToken');
             });
 
             afterEach(function () {
@@ -263,12 +263,12 @@ describe('Bpm Auth test', function () {
             it('should be enabled by default', function (done) {
                 this.authBpmMock.get200Response();
 
-                this.bpmAuth = new BpmAuth({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
 
-                this.bpmAuth.login('admin', 'admin').then(() => {
+                this.processAuth.login('admin', 'admin').then(() => {
                     expect(this.setCsrfTokenStub.called).to.be.equal(true);
                     done();
                 });
@@ -277,13 +277,13 @@ describe('Bpm Auth test', function () {
             it('should be disabled if disableCsrf is true', function (done) {
                 this.authBpmMock.get200Response();
 
-                this.bpmAuth = new BpmAuth({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app',
                     disableCsrf: true
                 });
 
-                this.bpmAuth.login('admin', 'admin').then(() => {
+                this.processAuth.login('admin', 'admin').then(() => {
                     expect(this.setCsrfTokenStub.called).to.be.equal(false);
                     done();
                 });

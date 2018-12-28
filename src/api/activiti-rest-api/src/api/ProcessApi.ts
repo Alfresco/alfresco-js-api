@@ -39,6 +39,7 @@ export class ProcessApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.processInstancesApi = new ProcessInstancesApi(alfrescoApi);
+        this.processDefinitionsApi = new ProcessDefinitionsApi(alfrescoApi);
     }
 
     deleteProcessInstance(processInstanceId: string): Promise<any> {

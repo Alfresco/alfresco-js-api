@@ -16,7 +16,7 @@
     */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { UserFiltersApi as NewUserfiltersApi } from '../../../../api-new/activiti-rest-api/api/userfilters.api';
+import { UserFiltersApi as NewUserfiltersApi } from '../../../../api-new/activiti-rest-api/api/userFilters.api';
 
 /**
  * @deprecated 3.0.0

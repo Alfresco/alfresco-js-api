@@ -12,7 +12,7 @@ describe('Basic configuration test', function () {
 
             this.alfrescoJsApi = new AlfrescoApi(config);
 
-            expect(this.alfrescoJsApi.ecmClient.basePath)
+            expect(this.alfrescoJsApi.contentClient.basePath)
                 .equal('http://127.0.0.1:8080/alfresco/api/-default-/public/alfresco/versions/1');
         });
 
@@ -24,8 +24,33 @@ describe('Basic configuration test', function () {
 
             this.alfrescoJsApi = new AlfrescoApi(config);
 
-            expect(this.alfrescoJsApi.ecmClient.basePath)
+            expect(this.alfrescoJsApi.contentClient.basePath)
                 .equal('http://testServer.com:1616/strangeContextRoot/api/-default-/public/alfresco/versions/1');
+        });
+    });
+
+    describe('setconfig parameter ', function () {
+
+        it('should be possible change the host in the client', function () {
+            let config = {
+                hostEcm: 'http://testServer.com:1616',
+                contextRoot: 'strangeContextRoot'
+            };
+
+            this.alfrescoJsApi = new AlfrescoApi(config);
+
+            expect(this.alfrescoJsApi.contentClient.basePath)
+                .equal('http://testServer.com:1616/strangeContextRoot/api/-default-/public/alfresco/versions/1');
+
+            let newConfig = {
+                hostEcm: 'http://testServer.com:2616',
+                contextRoot: 'strangeContextRoot'
+            };
+
+            this.alfrescoJsApi.configureJsApi(newConfig);
+
+            expect(this.alfrescoJsApi.contentClient.basePath)
+                .equal('http://testServer.com:2616/strangeContextRoot/api/-default-/public/alfresco/versions/1');
         });
     });
 
@@ -40,9 +65,9 @@ describe('Basic configuration test', function () {
 
             this.alfrescoJsApi = new AlfrescoApi(config);
 
-            expect(this.alfrescoJsApi.ecmClient.isCsrfEnabled())
+            expect(this.alfrescoJsApi.contentClient.isCsrfEnabled())
                 .equal(false);
-            expect(this.alfrescoJsApi.bpmClient.isCsrfEnabled())
+            expect(this.alfrescoJsApi.processClient.isCsrfEnabled())
                 .equal(false);
         });
 
@@ -55,9 +80,9 @@ describe('Basic configuration test', function () {
 
             this.alfrescoJsApi = new AlfrescoApi(config);
 
-            expect(this.alfrescoJsApi.ecmClient.isCsrfEnabled())
+            expect(this.alfrescoJsApi.contentClient.isCsrfEnabled())
                 .equal(true);
-            expect(this.alfrescoJsApi.bpmClient.isCsrfEnabled())
+            expect(this.alfrescoJsApi.processClient.isCsrfEnabled())
                 .equal(true);
         });
     });
@@ -71,9 +96,9 @@ describe('Basic configuration test', function () {
                 withCredentials: true
             };
             this.alfrescoJsApi = new AlfrescoApi(config);
-            expect(this.alfrescoJsApi.ecmClient.isWithCredentials())
+            expect(this.alfrescoJsApi.contentClient.isWithCredentials())
                 .equal(true);
-            expect(this.alfrescoJsApi.bpmClient.isWithCredentials())
+            expect(this.alfrescoJsApi.processClient.isWithCredentials())
                 .equal(true);
         });
 
@@ -84,9 +109,9 @@ describe('Basic configuration test', function () {
                 withCredentials: false
             };
             this.alfrescoJsApi = new AlfrescoApi(config);
-            expect(this.alfrescoJsApi.ecmClient.isWithCredentials())
+            expect(this.alfrescoJsApi.contentClient.isWithCredentials())
                 .equal(false);
-            expect(this.alfrescoJsApi.bpmClient.isWithCredentials())
+            expect(this.alfrescoJsApi.processClient.isWithCredentials())
                 .equal(false);
         });
     });

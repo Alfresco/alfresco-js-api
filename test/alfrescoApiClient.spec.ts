@@ -1,8 +1,10 @@
 /*global describe, it */
 
 import { AlfrescoApiClient, DateAlfresco } from '@alfresco/js-api';
+let chai = require('chai');
 
 let expect = require('chai').expect;
+chai.use(require('chai-datetime'));
 
 describe('Alfresco Core API Client', function () {
 
@@ -32,37 +34,6 @@ describe('Alfresco Core API Client', function () {
             expect(response.header['Content-Type']).equal('application/json');
             expect(response._responseType).equal('blob');
         });
-
-        it('should return strings as a string', function () {
-            let testData = 'Example String';
-            expect(client.convertToType(testData, 'String')).equal(testData);
-        });
-
-        it('should return null strings as null', function () {
-            expect(client.convertToType(null, 'String')).to.be.equal(null);
-        });
-
-        it('should return undefined strings as undefined', function () {
-            expect(client.convertToType(undefined, 'String')).to.be.equal(undefined);
-        });
-
-        it('should return dates as a date instance', function () {
-            let testData = '2015-11-17T03:33:17Z';
-            expect(client.convertToType(testData, 'Date')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 3, 33, 17)));
-        });
-
-        it('should return null dates as null', function () {
-            expect(client.convertToType(null, 'Date')).to.be.equal(null);
-        });
-
-        it('should return undefined dates as null', function () {
-            expect(client.convertToType(undefined, 'Date')).to.be.equal(null);
-        });
-
-        it('should return empty-string dates as null', function () {
-            expect(client.convertToType('', 'Date')).to.be.equal(null);
-        });
-
     });
 
     describe('date parsing', function () {

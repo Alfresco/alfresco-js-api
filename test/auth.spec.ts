@@ -169,7 +169,7 @@ describe('Auth', function () {
                         hostEcm: this.host
                     });
 
-                    expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.ecmClient.authentications.basicAuth.password);
+                    expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.contentClient.authentications.basicAuth.password);
                 });
 
                 it('should Ticket login be validate against the server if is valid', function (done) {
@@ -182,7 +182,7 @@ describe('Auth', function () {
                     });
 
                     this.alfrescoJsApi.loginTicket(ticket).then((data) => {
-                        expect(this.alfrescoJsApi.ecmAuth.authentications.basicAuth.password).to.be.equal(ticket);
+                        expect(this.alfrescoJsApi.contentAuth.authentications.basicAuth.password).to.be.equal(ticket);
                         expect(data).to.be.equal(ticket);
                         done();
                     });
@@ -258,7 +258,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.nodes.createFolder('newFolder').then(() => {
                     }, () => {
-                        expect(this.alfrescoJsApi.ecmAuth.authentications.basicAuth.password).to.be.equal(null);
+                        expect(this.alfrescoJsApi.contentAuth.authentications.basicAuth.password).to.be.equal(null);
                         done();
                     });
 
@@ -472,7 +472,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.activiti.profileApi.getProfile().then((data) => {
                     }, () => {
-                        expect(this.alfrescoJsApi.bpmAuth.authentications.basicAuth.ticket).to.be.equal(null);
+                        expect(this.alfrescoJsApi.processAuth.authentications.basicAuth.ticket).to.be.equal(null);
                         done();
                     });
 
@@ -517,8 +517,8 @@ describe('Auth', function () {
                     provider: 'ALL'
                 });
 
-                expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.alfrescoJsApi.bpmClient.authentications.basicAuth.ticket);
-                expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.ecmClient.authentications.basicAuth.password);
+                expect('Basic YWRtaW46YWRtaW4=').to.be.equal(this.alfrescoJsApi.processClient.authentications.basicAuth.ticket);
+                expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.alfrescoJsApi.contentClient.authentications.basicAuth.password);
             });
 
             describe('login', function () {

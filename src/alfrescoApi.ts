@@ -191,7 +191,7 @@ export class AlfrescoApi {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            },()=>{
+            }, () => {
                 console.log('login OAUTH error');
             });
 
@@ -204,7 +204,7 @@ export class AlfrescoApi {
 
                 processPromise.then((ticketBpm) => {
                     this.config.ticketBpm = ticketBpm;
-                },()=>{
+                }, () => {
                     console.log('login BPM error');
                 });
 
@@ -216,7 +216,7 @@ export class AlfrescoApi {
                     this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
 
                     this.config.ticketEcm = ticketEcm;
-                },()=>{
+                }, () => {
                     console.log('login ECM error');
                 });
 

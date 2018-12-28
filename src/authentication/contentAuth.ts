@@ -30,7 +30,7 @@ export class ContentAuth extends AlfrescoApiClient {
     private static instance: ContentAuth = null;
 
     config: AlfrescoApiConfig;
-    basePath: string;
+    static basePath: string;
     ticketStorageLabel: string;
     storage: Storage;
     ticket: string;
@@ -62,7 +62,7 @@ export class ContentAuth extends AlfrescoApiClient {
     setConfig(config: AlfrescoApiConfig) {
         this.config = config;
 
-        this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
+        ContentAuth.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
 
         if (this.config.domainPrefix) {
             this.ticketStorageLabel = this.config.domainPrefix.concat('-ticket-ECM');
@@ -79,7 +79,7 @@ export class ContentAuth extends AlfrescoApiClient {
     }
 
     changeHost() {
-        this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
+        ContentAuth.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
         this.ticket = undefined;
     }
 

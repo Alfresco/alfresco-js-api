@@ -20,7 +20,6 @@ import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { Storage } from '../storage';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
-import { ProcessAuth } from './processAuth';
 
 const Emitter = _Emitter;
 
@@ -30,12 +29,12 @@ export class Oauth2Auth extends AlfrescoApiClient {
     config: AlfrescoApiConfig;
     init: boolean;
     hashFragmentParams: any;
-    basePath: string;
+    static basePath: string;
     host: string;
     token: string;
     discovery: any;
     jwks: any;
-    authentications: Authentication = new Authentication({
+    private static authentications: Authentication = new Authentication({
         'oauth2': { accessToken: '' }, type: 'oauth2'
     });
 
@@ -79,7 +78,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 this.config.oauth2.redirectSilentIframeUri = context + '/assets/silent-refresh.html';
             }
 
-            this.basePath = this.config.oauth2.host; //Auth Call
+            Oauth2Auth.basePath = this.config.oauth2.host; //Auth Call
 
             this.host = this.config.oauth2.host;
 
@@ -214,7 +213,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                     if (jwt) {
                         this.storeIdToken(idToken, jwt.payload.exp);
                         this.storeAccessToken(accessToken, expiresIn);
-                        this.authentications.basicAuth.username = jwt.payload.preferred_username;
+                        Oauth2Auth.authentications.basicAuth.username = jwt.payload.preferred_username;
                         this.saveUsername(jwt.payload.preferred_username);
                         this.silentRefresh();
                         resolve(accessToken);
@@ -560,7 +559,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     grantPasswordLogin(username: string, password: string, resolve: any, reject: any) {
         let postBody = {}, pathParams = {}, queryParams = {};
 
-        let authHeader = this.basicAuth(ProcessAuth.authentications.basicAuth.username, ProcessAuth.authentications.basicAuth.password);
+        let authHeader = this.basicAuth(Oauth2Auth.authentications.basicAuth.username, Oauth2Auth.authentications.basicAuth.password);
 
         let headerParams = {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -614,7 +613,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         };
 
         queryParams = {
-            refresh_token: this.authentications.oauth2.refreshToken,
+            refresh_token: Oauth2Auth.authentications.oauth2.refreshToken,
             grant_type: 'refresh_token'
         };
 
@@ -649,9 +648,9 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * Set the current Token
      * */
     setToken(token: string, refreshToken: string) {
-        this.authentications.oauth2.accessToken = token;
-        this.authentications.oauth2.refreshToken = refreshToken;
-        this.authentications.basicAuth.password = null;
+        Oauth2Auth.authentications.oauth2.accessToken = token;
+        Oauth2Auth.authentications.oauth2.refreshToken = refreshToken;
+        Oauth2Auth.authentications.basicAuth.password = null;
         this.token = token;
         this.emit('token_issued');
     }
@@ -670,7 +669,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * @returns {Object} authentications
      * */
     getAuthentication(): Authentication {
-        return this.authentications;
+        return Oauth2Auth.authentications;
     }
 
     /**
@@ -686,7 +685,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * @returns {Boolean} is logged in
      */
     isLoggedIn(): boolean {
-        return !!this.authentications.oauth2.accessToken;
+        return !!Oauth2Auth.authentications.oauth2.accessToken;
     }
 
     /**

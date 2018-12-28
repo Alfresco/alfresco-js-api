@@ -2,7 +2,6 @@
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
 import { NodeChildAssociationPaging } from '../../src/api-new/content-rest-api/model/nodeChildAssociationPaging';
-import { DateAlfresco } from '../../dist/package/src/api-new/content-rest-api/model/dateAlfresco';
 
 let chai = require('chai');
 let expect = chai.expect;

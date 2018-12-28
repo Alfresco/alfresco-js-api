@@ -33,6 +33,7 @@ export class AlfrescoApiActiviti {
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.integrationAlfrescoCloudApi = new IntegrationAlfrescoCloudApi(alfrescoApi);
+        this.IntegrationAlfrescoOnPremiseApi = new IntegrationAlfrescoOnPremiseApi(alfrescoApi);
     }
 
     confirmAuthorisation(code: string): Promise<any> {
