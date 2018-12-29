@@ -132,7 +132,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 this.callApi(
                     url, 'GET',
                     pathParams, queryParams, headerParams, formParams, postBody,
-                    contentTypes, accepts, {}
+                    contentTypes, accepts
                 ).then((discovery) => {
                     this.discovery = {};
                     this.discovery.loginUrl = discovery.authorization_endpoint;

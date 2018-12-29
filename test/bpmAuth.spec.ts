@@ -1,12 +1,13 @@
 /*global describe, it, beforeEach, afterEach */
 
-import { ProcessAuth } from '@alfresco/js-api';
+import { ProcessAuth } from '../src/authentication/processAuth';
 
 let AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 let expect = require('chai').expect;
 let sinon = require('sinon');
 
 describe('Bpm Auth test', function () {
+
     beforeEach(function () {
         this.hostBpm = 'http://127.0.0.1:9999';
         this.authBpmMock = new AuthBpmMock(this.hostBpm);
@@ -19,19 +20,25 @@ describe('Bpm Auth test', function () {
     });
 
     it('should forget username on logout', function (done) {
-        const auth = new ProcessAuth({});
+        this.processAuth = new ProcessAuth({
+            hostBpm: this.hostBpm,
+            contextRootBpm: 'activiti-app'
+        });
 
         this.authBpmMock.get200Response();
 
-        auth.login('johndoe', 'password');
-        expect(auth.authentications.basicAuth.username).to.be.equal('johndoe');
+        this.processAuth.login('admin', 'admin').then((data) => {
+            expect(this.processAuth.authentications.basicAuth.username).to.be.equal('admin');
 
-        this.authBpmMock.get200ResponseLogout();
+            this.authBpmMock.get200ResponseLogout();
 
-        auth.logout().then(() => {
-            expect(auth.authentications.basicAuth.username).to.be.equal(null);
-            done();
-        }, function () {
+            this.processAuth.logout().then(() => {
+                expect(this.processAuth.authentications.basicAuth.username).to.be.equal(null);
+                done();
+            }, function () {
+            });
+        }, (error) => {
+            console.log('error' + JSON.stringify(error));
         });
     });
 

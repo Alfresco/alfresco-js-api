@@ -2,7 +2,10 @@
 
 let expect = require('chai').expect;
 let Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
-import { Oauth2Auth } from '@alfresco/js-api';
+import { Oauth2Auth } from '../src/authentication/oauth2Auth';
+
+declare let window:any;
+const globalAny:any = global;
 
 describe('Oauth2 Implicit flow test', function () {
 
@@ -52,7 +55,8 @@ describe('Oauth2 Implicit flow test', function () {
     });
 
     it('should redirect to login if access token is not valid', function (done) {
-        (window as any) = { location: {} };
+        window = globalAny.window = { location: {} };
+
         this.oauth2Mock.get200Discovery();
 
         this.oauth2Auth = new Oauth2Auth({
@@ -67,7 +71,7 @@ describe('Oauth2 Implicit flow test', function () {
         });
 
         this.oauth2Auth.on('implicit_redirect', (url) => {
-            expect((window as any).location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
+            expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
                 'openid-connect/auth?');
             done();
         });
@@ -76,7 +80,7 @@ describe('Oauth2 Implicit flow test', function () {
     });
 
     it('should not redirect to login if access token is valid', function (done) {
-        (window as any) = { location: {} };
+        window = globalAny.window = { location: {} };
         this.oauth2Mock.get200Discovery();
 
         this.oauth2Auth = new Oauth2Auth({
@@ -98,7 +102,7 @@ describe('Oauth2 Implicit flow test', function () {
         };
 
         this.oauth2Auth.on('token_issued', (url) => {
-            expect((window as any).location.url).to.be.equal(undefined);
+            expect(window.location.url).to.be.equal(undefined);
             done();
         });
 
