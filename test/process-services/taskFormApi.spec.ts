@@ -38,9 +38,11 @@ describe('Activiti Task Api', function () {
         this.taskFormMock.get200getTaskFormVariables();
 
         let taskId = 5028;
-        this.alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId).then((data)=> {
+        this.alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId).then(()=> {
             expect(this.alfrescoJsApi.activiti.taskFormsApi.apiClient.authentications.cookie).equal('ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ');
             done();
+        },(error)=>{
+            console.log('error'+error);
         });
     });
 

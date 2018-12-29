@@ -67,6 +67,8 @@ describe('Activiti Task Api', function () {
             expect(data.size).equal(2);
             expect(data.data[0].id).equal('7506');
             done();
+        },(error)=>{
+            console.log(JSON.stringify(error));
         });
     });
 

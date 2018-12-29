@@ -18,9 +18,9 @@
 import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 
 export class EndpointBasicAuthRepresentation {
-    created?: DateAlfresco;
+    created?: Date;
     id?: number;
-    lastUpdated?: DateAlfresco;
+    lastUpdated?: Date;
     name?: string;
     tenantId?: number;
     username?: string;
@@ -29,8 +29,8 @@ export class EndpointBasicAuthRepresentation {
 
         if (input) {
             Object.assign(this, input);
-            this.created = input.created ? new DateAlfresco(input.created) : undefined;
-            this.lastUpdated = input.lastUpdated ? new DateAlfresco(input.lastUpdated) : undefined;
+            this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
+            this.lastUpdated = input.lastUpdated ? DateAlfresco.parseDate(input.lastUpdated) : undefined;
         }
     }
 

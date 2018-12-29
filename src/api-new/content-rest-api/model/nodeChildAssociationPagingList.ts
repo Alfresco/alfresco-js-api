@@ -26,6 +26,7 @@ export class NodeChildAssociationPagingList {
 
     constructor(input?: any) {
 
+        console.log('input' + input);
         if (input) {
             Object.assign(this, input);
             this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;

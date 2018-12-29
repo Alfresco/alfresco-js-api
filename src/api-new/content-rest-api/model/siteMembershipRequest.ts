@@ -20,7 +20,7 @@ import { Site } from './site';
 
 export class SiteMembershipRequest {
     id: string;
-    createdAt: DateAlfresco;
+    createdAt: Date;
     site: Site;
     message?: string;
 
@@ -28,7 +28,7 @@ export class SiteMembershipRequest {
 
         if (input) {
             Object.assign(this, input);
-            this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+            this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
             this.site = input.site ? new Site(input.site) : undefined;
         }
     }

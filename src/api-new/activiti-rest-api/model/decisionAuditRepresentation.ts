@@ -21,7 +21,7 @@ export class DecisionAuditRepresentation {
     activityId?: string;
     activityName?: string;
     auditTrailJson?: string;
-    created?: DateAlfresco;
+    created?: Date;
     decisionExecutionFailed?: boolean;
     decisionKey?: string;
     decisionModelJson?: string;
@@ -37,7 +37,7 @@ export class DecisionAuditRepresentation {
 
         if (input) {
             Object.assign(this, input);
-            this.created = input.created ? new DateAlfresco(input.created) : undefined;
+            this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
         }
     }
 

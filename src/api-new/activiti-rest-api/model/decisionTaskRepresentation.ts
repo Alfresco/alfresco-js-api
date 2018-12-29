@@ -20,7 +20,7 @@ import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 export class DecisionTaskRepresentation {
     activityId?: string;
     activityName?: string;
-    decisionExecutionEnded?: DateAlfresco;
+    decisionExecutionEnded?: Date;
     decisionExecutionFailed?: boolean;
     decisionKey?: string;
     decisionName?: string;
@@ -35,7 +35,7 @@ export class DecisionTaskRepresentation {
 
         if (input) {
             Object.assign(this, input);
-            this.decisionExecutionEnded = input.decisionExecutionEnded ? new DateAlfresco(input.decisionExecutionEnded) : undefined;
+            this.decisionExecutionEnded = input.decisionExecutionEnded ? DateAlfresco.parseDate(input.decisionExecutionEnded) : undefined;
         }
     }
 

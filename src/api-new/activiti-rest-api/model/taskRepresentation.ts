@@ -24,11 +24,11 @@ export class TaskRepresentation {
     adhocTaskCanBeReassigned?: boolean;
     assignee?: LightUserRepresentation;
     category?: string;
-    created?: DateAlfresco;
+    created?: Date;
     description?: string;
-    dueDate?: DateAlfresco;
+    dueDate?: Date;
     duration?: number;
-    endDate?: DateAlfresco;
+    endDate?: Date;
     executionId?: string;
     formKey?: string;
     id?: string;
@@ -54,15 +54,16 @@ export class TaskRepresentation {
     processInstanceStartUserId?: string;
     taskDefinitionKey?: string;
     variables?: RestVariable[];
+    parentName?: string;
 
     constructor(input?: any) {
 
         if (input) {
             Object.assign(this, input);
             this.assignee = input.assignee ? new LightUserRepresentation(input.assignee) : undefined;
-            this.created = input.created ? new DateAlfresco(input.created) : undefined;
-            this.dueDate = input.dueDate ? new DateAlfresco(input.dueDate) : undefined;
-            this.endDate = input.endDate ? new DateAlfresco(input.endDate) : undefined;
+            this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
+            this.dueDate = input.dueDate ? DateAlfresco.parseDate(input.dueDate) : undefined;
+            this.endDate = input.endDate ? DateAlfresco.parseDate(input.endDate) : undefined;
             if (input.involvedGroups) {
                 this.involvedGroups = input.involvedGroups.map((item: any) => {
                     return new LightGroupRepresentation(item);
@@ -79,6 +80,22 @@ export class TaskRepresentation {
                 });
             }
         }
+    }
+
+    getFullName(): string {
+        let fullName: string = '';
+
+        if (this.assignee) {
+            let firstName: string = this.assignee.firstName ? this.assignee.firstName : '';
+            let lastName: string = this.assignee.lastName ? this.assignee.lastName : '';
+            fullName = `${firstName} ${lastName}`;
+        }
+
+        return fullName.trim();
+    }
+
+    isCompleted(): boolean {
+        return !!this.endDate;
     }
 
 }

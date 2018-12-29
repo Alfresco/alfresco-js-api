@@ -20,7 +20,7 @@ import { LightUserRepresentation } from './lightUserRepresentation';
 
 export class RelatedContentRepresentation {
     contentAvailable?: boolean;
-    created?: DateAlfresco;
+    created?: Date;
     createdBy?: LightUserRepresentation;
     id?: number;
     link?: boolean;
@@ -38,7 +38,7 @@ export class RelatedContentRepresentation {
 
         if (input) {
             Object.assign(this, input);
-            this.created = input.created ? new DateAlfresco(input.created) : undefined;
+            this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
             this.createdBy = input.createdBy ? new LightUserRepresentation(input.createdBy) : undefined;
         }
     }

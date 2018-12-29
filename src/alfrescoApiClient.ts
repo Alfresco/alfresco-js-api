@@ -286,8 +286,16 @@ export class AlfrescoApiClient {
 
     basicAuth(username: string, password: string): string {
         let str: any = username + ':' + password;
-        let buffer = Buffer.from(str.toString(), 'binary');
-        return 'Basic ' + buffer.toString('base64');
+
+        let base64;
+
+        if (typeof Buffer === 'function') {
+            base64 = Buffer.from(str.toString(), 'binary').toString('base64');
+        } else {
+            base64 = btoa(str);
+        }
+
+        return 'Basic ' + base64;
     }
 
     /**
@@ -321,7 +329,6 @@ export class AlfrescoApiClient {
         } else {
             url = this.buildUrl(path, pathParams);
         }
-
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
             contentTypes, accepts, returnType, contextRoot, responseType, url);
     }

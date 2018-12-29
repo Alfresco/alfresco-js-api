@@ -19,13 +19,13 @@ import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 
 export class SharedLinkBodyCreate {
     nodeId: string;
-    expiresAt?: DateAlfresco;
+    expiresAt?: Date;
 
     constructor(input?: any) {
 
         if (input) {
             Object.assign(this, input);
-            this.expiresAt = input.expiresAt ? new DateAlfresco(input.expiresAt) : undefined;
+            this.expiresAt = input.expiresAt ? DateAlfresco.parseDate(input.expiresAt) : undefined;
         }
     }
 

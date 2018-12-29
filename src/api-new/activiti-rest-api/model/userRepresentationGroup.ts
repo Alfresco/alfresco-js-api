@@ -16,23 +16,43 @@
 */
 
 import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { LightAppRepresentation } from './lightAppRepresentation';
 
-export class TenantRepresentation {
-    active?: boolean;
+export class UserRepresentationGroup {
+    apps?: LightAppRepresentation[];
+    capabilities?: string[];
+    company?: string;
     created?: Date;
-    domain?: string;
+    email?: string;
+    externalId?: string;
+    firstName?: string;
+    fullname?: string;
+    groups?: any[];
     id?: number;
+    lastName?: string;
     lastUpdate?: Date;
-    logoId?: number;
-    maxUsers?: number;
-    name?: string;
+    latestSyncTimeStamp?: Date;
+    password?: string;
+    pictureId?: number;
+    primaryGroup?: any;
+    status?: string;
+    tenantId?: number;
+    tenantName?: string;
+    tenantPictureId?: number;
+    type?: string;
 
     constructor(input?: any) {
 
         if (input) {
             Object.assign(this, input);
+            if (input.apps) {
+                this.apps = input.apps.map((item: any) => {
+                    return new LightAppRepresentation(item);
+                });
+            }
             this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
             this.lastUpdate = input.lastUpdate ? DateAlfresco.parseDate(input.lastUpdate) : undefined;
+            this.latestSyncTimeStamp = input.latestSyncTimeStamp ? DateAlfresco.parseDate(input.latestSyncTimeStamp) : undefined;
         }
     }
 

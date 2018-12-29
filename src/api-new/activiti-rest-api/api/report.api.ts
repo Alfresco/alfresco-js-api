@@ -218,14 +218,12 @@ export class ReportApi extends BaseApi {
             throw "Missing param 'reportName' in exportToCsv";
         }
 
-        queryParams.__reportName = queryParams.reportName;
-
         let pathParams = {
             'reportId': reportId
         };
         let headerParams = {};
         let formParams = {};
-
+        queryParams = {};
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
@@ -262,14 +260,13 @@ export class ReportApi extends BaseApi {
             throw "Missing param 'reportName' in exportToCsv";
         }
 
-        queryParams.__reportName = queryParams.reportName;
-
         let pathParams = {
             'reportId': reportId
         };
         let headerParams = {};
         let formParams = {};
-
+        queryParams = {
+        };
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];

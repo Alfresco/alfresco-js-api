@@ -33,7 +33,7 @@ export class ProcessInstanceVariablesApi extends BaseApi {
     * @param restVariables restVariables
     * @return Promise<RestVariable>
     */
-    createOrUpdateProcessInstanceVariables(processInstanceId: string, restVariables: RestVariable[]): Promise<RestVariable> {
+    createOrUpdateProcessInstanceVariables(processInstanceId: string, restVariables: RestVariable[]): Promise<RestVariable[]> {
 
         let postBody = restVariables;
 
@@ -75,7 +75,7 @@ export class ProcessInstanceVariablesApi extends BaseApi {
         * @param restVariables restVariables
         * @return Promise<RestVariable>
         */
-    createProcessInstanceVariables(processInstanceId: string, restVariables: RestVariable[]): Promise<RestVariable> {
+    createProcessInstanceVariables(processInstanceId: string, restVariables: RestVariable[]): Promise<RestVariable[]> {
 
         let postBody = restVariables;
 
@@ -200,7 +200,7 @@ export class ProcessInstanceVariablesApi extends BaseApi {
         * @param processInstanceId Process instance ID
         * @return Promise<RestVariable>
         */
-    getProcessInstanceVariables(processInstanceId: string): Promise<RestVariable> {
+    getProcessInstanceVariables(processInstanceId: string): Promise<RestVariable[]> {
 
         let postBody = null;
 

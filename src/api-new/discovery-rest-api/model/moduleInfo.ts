@@ -22,7 +22,7 @@ export class ModuleInfo {
     title?: string;
     description?: string;
     version?: string;
-    installDate?: DateAlfresco;
+    installDate?: Date;
     installState?: string;
     versionMin?: string;
     versionMax?: string;
@@ -31,7 +31,7 @@ export class ModuleInfo {
 
         if (input) {
             Object.assign(this, input);
-            this.installDate = input.installDate ? new DateAlfresco(input.installDate) : undefined;
+            this.installDate = input.installDate ? DateAlfresco.parseDate(input.installDate) : undefined;
         }
     }
 

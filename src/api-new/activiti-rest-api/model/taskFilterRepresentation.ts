@@ -20,8 +20,8 @@ import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 export class TaskFilterRepresentation {
     asc?: boolean;
     assignment?: string;
-    dueAfter?: DateAlfresco;
-    dueBefore?: DateAlfresco;
+    dueAfter?: Date;
+    dueBefore?: Date;
     name?: string;
     processDefinitionId?: string;
     processDefinitionKey?: string;
@@ -32,8 +32,8 @@ export class TaskFilterRepresentation {
 
         if (input) {
             Object.assign(this, input);
-            this.dueAfter = input.dueAfter ? new DateAlfresco(input.dueAfter) : undefined;
-            this.dueBefore = input.dueBefore ? new DateAlfresco(input.dueBefore) : undefined;
+            this.dueAfter = input.dueAfter ? DateAlfresco.parseDate(input.dueAfter) : undefined;
+            this.dueBefore = input.dueBefore ? DateAlfresco.parseDate(input.dueBefore) : undefined;
         }
     }
 

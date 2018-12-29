@@ -22,6 +22,7 @@ export class ResultListDataRepresentationTaskRepresentation {
     size?: number;
     start?: number;
     total?: number;
+    length?: number;
 
     constructor(input?: any) {
 

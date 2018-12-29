@@ -19,14 +19,14 @@ import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 
 export class BoxUserAccountCredentialsRepresentation {
     authenticationURL?: string;
-    expireDate?: DateAlfresco;
+    expireDate?: Date;
     ownerEmail?: string;
 
     constructor(input?: any) {
 
         if (input) {
             Object.assign(this, input);
-            this.expireDate = input.expireDate ? new DateAlfresco(input.expireDate) : undefined;
+            this.expireDate = input.expireDate ? DateAlfresco.parseDate(input.expireDate) : undefined;
         }
     }
 

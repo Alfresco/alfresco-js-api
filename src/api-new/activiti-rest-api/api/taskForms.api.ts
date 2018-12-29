@@ -148,7 +148,7 @@ export class TaskFormsApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            '/api/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET',
+            '/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts, returnType
         );
@@ -302,7 +302,7 @@ export class TaskFormsApi extends BaseApi {
         let returnType = null;
 
         return this.apiClient.callApi(
-            '/api/api/enterprise/task-forms/{taskId}/variables', 'GET',
+            '/api/enterprise/task-forms/{taskId}/variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts, returnType
         );

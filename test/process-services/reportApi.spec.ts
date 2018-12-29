@@ -5,25 +5,22 @@ let expect = require('chai').expect;
 let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 let ReportsMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Reports;
 
-describe.only('Activiti Report Api', function () {
+describe('Activiti Report Api', function () {
     beforeEach(function (done) {
-        this.hostBpm = 'http://adfdev.envalfresco.com';
+        this.hostBpm = 'http://127.0.0.1:9999';
 
         this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
         this.reportsMock = new ReportsMock(this.hostBpm);
 
-      //  this.authResponseBpmMock.get200Response();
+        this.authResponseBpmMock.get200Response();
 
         this.alfrescoJsApi = new AlfrescoApi({
             hostBpm: this.hostBpm,
             provider: 'BPM'
         });
 
-        this.alfrescoJsApi.login('admin.adf@alfresco.com', 'adf$2018IloveAngular').then(()=> {
-            console.log('done');
+        this.alfrescoJsApi.login('admin', 'admin').then(()=> {
             done();
-        },(error)=>{
-            console.log('error' +JSON.stringify(error));
         });
     });
 
@@ -162,10 +159,10 @@ describe.only('Activiti Report Api', function () {
         });
     });
 
-    it.only('should export the report', function (done) {
+    it('should export the report', function (done) {
 
         let reportId = '11015'; // String | reportId
-        let queryParms = {
+        let queryParams = {
             'processDefinitionId': 'TEST:99:999',
             'dateRange': {
                 'startDate': '2017-01-01T00:00:00.000Z',
@@ -176,18 +173,13 @@ describe.only('Activiti Report Api', function () {
             'status': 'All',
             'reportName': 'FAKE_REPORT_NAME'
         };
-        this.reportsMock.rec();
+        this.reportsMock.get200ResponseExportReport(reportId);
 
-        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms).then(function (response) {
-            expect(response).not.equal(null);
-            expect(response).not.equal(undefined);
+        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParams).then(function (respo) {
+            expect(respo).not.equal(null);
+            expect(respo).not.equal(undefined);
             done();
-        },(error)=>{
-            console.log('error' +JSON.stringify(error));
         });
-
-        this.reportsMock.play();
-
     });
 
     it('should save the report', function (done) {

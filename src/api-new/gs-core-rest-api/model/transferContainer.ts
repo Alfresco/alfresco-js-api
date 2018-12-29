@@ -28,9 +28,9 @@ The character . must not be used at the end of the name.
      */
     name: string;
     nodeType: string;
-    modifiedAt: DateAlfresco;
+    modifiedAt: Date;
     modifiedByUser: UserInfo;
-    createdAt: DateAlfresco;
+    createdAt: Date;
     createdByUser: UserInfo;
     aspectNames?: string[];
     properties?: any;
@@ -40,9 +40,9 @@ The character . must not be used at the end of the name.
 
         if (input) {
             Object.assign(this, input);
-            this.modifiedAt = input.modifiedAt ? new DateAlfresco(input.modifiedAt) : undefined;
+            this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;
             this.modifiedByUser = input.modifiedByUser ? new UserInfo(input.modifiedByUser) : undefined;
-            this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+            this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
             this.createdByUser = input.createdByUser ? new UserInfo(input.createdByUser) : undefined;
         }
     }

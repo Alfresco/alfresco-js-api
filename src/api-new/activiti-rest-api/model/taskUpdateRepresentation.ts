@@ -22,7 +22,7 @@ export class TaskUpdateRepresentation {
     categorySet?: boolean;
     description?: string;
     descriptionSet?: boolean;
-    dueDate?: DateAlfresco;
+    dueDate?: Date;
     dueDateSet?: boolean;
     formKey?: string;
     formKeySet?: boolean;
@@ -37,7 +37,7 @@ export class TaskUpdateRepresentation {
 
         if (input) {
             Object.assign(this, input);
-            this.dueDate = input.dueDate ? new DateAlfresco(input.dueDate) : undefined;
+            this.dueDate = input.dueDate ? DateAlfresco.parseDate(input.dueDate) : undefined;
         }
     }
 

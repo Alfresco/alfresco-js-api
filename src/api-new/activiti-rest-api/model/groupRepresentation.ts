@@ -17,22 +17,22 @@
 
 import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
 import { GroupCapabilityRepresentation } from './groupCapabilityRepresentation';
-import { UserRepresentation } from './userRepresentation';
+import { UserRepresentationGroup } from './userRepresentationGroup';
 
 export class GroupRepresentation {
     capabilities?: GroupCapabilityRepresentation[];
     externalId?: string;
-    groups?: GroupRepresentation[];
+    groups?: any[];
     id?: number;
-    lastSyncTimeStamp?: DateAlfresco;
-    manager?: UserRepresentation;
+    lastSyncTimeStamp?: Date;
+    manager?: UserRepresentationGroup;
     name?: string;
     parentGroupId?: number;
     status?: string;
     tenantId?: number;
     type?: number;
     userCount?: number;
-    users?: UserRepresentation[];
+    users?: UserRepresentationGroup[];
 
     constructor(input?: any) {
 
@@ -48,11 +48,11 @@ export class GroupRepresentation {
                     return new GroupRepresentation(item);
                 });
             }
-            this.lastSyncTimeStamp = input.lastSyncTimeStamp ? new DateAlfresco(input.lastSyncTimeStamp) : undefined;
-            this.manager = input.manager ? new UserRepresentation(input.manager) : undefined;
+            this.lastSyncTimeStamp = input.lastSyncTimeStamp ? DateAlfresco.parseDate(input.lastSyncTimeStamp) : undefined;
+            this.manager = input.manager ? new UserRepresentationGroup(input.manager) : undefined;
             if (input.users) {
                 this.users = input.users.map((item: any) => {
-                    return new UserRepresentation(item);
+                    return new UserRepresentationGroup(item);
                 });
             }
         }

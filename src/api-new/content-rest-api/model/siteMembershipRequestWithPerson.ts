@@ -21,7 +21,7 @@ import { Site } from './site';
 
 export class SiteMembershipRequestWithPerson {
     id: string;
-    createdAt: DateAlfresco;
+    createdAt: Date;
     site: Site;
     person: Person;
     message?: string;
@@ -30,7 +30,7 @@ export class SiteMembershipRequestWithPerson {
 
         if (input) {
             Object.assign(this, input);
-            this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+            this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
             this.site = input.site ? new Site(input.site) : undefined;
             this.person = input.person ? new Person(input.person) : undefined;
         }

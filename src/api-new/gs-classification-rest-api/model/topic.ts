@@ -29,7 +29,7 @@ export class Topic {
      */
     hasInstruction: boolean;
     instruction?: Instruction;
-    createdAt: DateAlfresco;
+    createdAt: Date;
     /**
      * Flag indicating whether the topic has subtopics. This field is only included when requested.
      */
@@ -42,7 +42,7 @@ export class Topic {
         if (input) {
             Object.assign(this, input);
             this.instruction = input.instruction ? new Instruction(input.instruction) : undefined;
-            this.createdAt = input.createdAt ? new DateAlfresco(input.createdAt) : undefined;
+            this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
             this.path = input.path ? new Path(input.path) : undefined;
             this.classificationGuide = input.classificationGuide ? new ClassificationGuideInTopic(input.classificationGuide) : undefined;
         }
