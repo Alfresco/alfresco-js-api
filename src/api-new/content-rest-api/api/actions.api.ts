@@ -64,7 +64,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
         return this.apiClient.callApi(
             '/action-definitions/{actionDefinitionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ActionDefinitionEntry);
     }
     /**
         * Execute an action

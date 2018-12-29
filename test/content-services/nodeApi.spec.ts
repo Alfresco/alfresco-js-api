@@ -66,7 +66,6 @@ describe('Node', function () {
 
             this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1320').then(function (data: NodeChildAssociationPaging) {
                 expect(data.list.entries.length).to.be.equal(1);
-                console.log(data.list.entries[0].entry.createdAt instanceof Date);
                 expect(data.list.entries[0].entry.createdAt).to.equalTime(new Date(Date.UTC(2011, 2, 15, 17, 4, 54, 290)));
                 done();
             }, (error) => {

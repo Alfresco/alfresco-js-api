@@ -1050,7 +1050,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/parents', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeAssociationPaging);
     }
 
     /**

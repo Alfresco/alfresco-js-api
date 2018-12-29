@@ -274,13 +274,16 @@ export class AlfrescoApiClient {
         if (response === null) {
             return null;
         }
-        // Rely on SuperAgent for parsing response body.
-        // See http://visionmedia.github.io/superagent/#parsing-response-bodies
+
         let data = response.body;
         if (data === null) {
-            // SuperAgent does not always produce a body; use the unparsed response as a fallback
             data = response.text;
         }
+
+        if(returnType){
+            data = new returnType(data);
+        }
+
         return data;
     }
 
