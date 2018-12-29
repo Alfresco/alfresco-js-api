@@ -314,7 +314,8 @@ describe('Auth', function () {
                     this.alfrescoJsApi.login('admin', 'admin').then((data) => {
                         expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                         done();
-                    }, function () {
+                    }, function (error) {
+                        console.log('error' + JSON.stringify(error));
                     });
                 });
 

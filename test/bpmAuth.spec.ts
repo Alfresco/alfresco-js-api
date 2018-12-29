@@ -1,12 +1,12 @@
 /*global describe, it, beforeEach, afterEach */
 
 import { ProcessAuth } from '@alfresco/js-api';
+
 let AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 let expect = require('chai').expect;
 let sinon = require('sinon');
 
 describe('Bpm Auth test', function () {
-
     beforeEach(function () {
         this.hostBpm = 'http://127.0.0.1:9999';
         this.authBpmMock = new AuthBpmMock(this.hostBpm);
@@ -18,14 +18,21 @@ describe('Bpm Auth test', function () {
         expect(auth.authentications.basicAuth.username).to.be.equal('johndoe');
     });
 
-    it('should forget username on logout', () => {
+    it('should forget username on logout', function (done) {
         const auth = new ProcessAuth({});
+
+        this.authBpmMock.get200Response();
 
         auth.login('johndoe', 'password');
         expect(auth.authentications.basicAuth.username).to.be.equal('johndoe');
 
-        auth.logout();
-        expect(auth.authentications.basicAuth.username).to.be.equal('');
+        this.authBpmMock.get200ResponseLogout();
+
+        auth.logout().then(() => {
+            expect(auth.authentications.basicAuth.username).to.be.equal(null);
+            done();
+        }, function () {
+        });
     });
 
     describe('With Authentication', function () {

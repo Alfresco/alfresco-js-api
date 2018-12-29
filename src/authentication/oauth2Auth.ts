@@ -22,28 +22,36 @@ import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 
 const Emitter = _Emitter;
+declare let window;
 
 export class Oauth2Auth extends AlfrescoApiClient {
 
     storage: Storage;
     config: AlfrescoApiConfig;
-    init: boolean;
     hashFragmentParams: any;
-    static basePath: string;
+    basePath: string;
     host: string;
     token: string;
     discovery: any;
     jwks: any;
-    private static authentications: Authentication = new Authentication({
-        'oauth2': { accessToken: '' }, type: 'oauth2'
+    authentications: Authentication = new Authentication({
+        'oauth2': { accessToken: '' }, type: 'oauth2',  'basicAuth':{}
     });
 
     iFameHashListner: any;
 
     constructor(config: AlfrescoApiConfig) {
         super();
+
+        this.className = 'Oauth2Auth';
+
+        this.setConfig(config);
+
+        Emitter.call(this);
+    }
+
+    setConfig(config: AlfrescoApiConfig) {
         this.config = config;
-        this.init = false;
 
         if (this.config.oauth2) {
             if (this.config.oauth2.host === undefined || this.config.oauth2.host === null) {
@@ -78,15 +86,13 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 this.config.oauth2.redirectSilentIframeUri = context + '/assets/silent-refresh.html';
             }
 
-            Oauth2Auth.basePath = this.config.oauth2.host; //Auth Call
+            this.basePath = this.config.oauth2.host; //Auth Call
 
             this.host = this.config.oauth2.host;
 
             this.initOauth(); // jshint ignore:line
 
         }
-
-        Emitter.call(this);
     }
 
     initOauth() {
@@ -213,7 +219,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                     if (jwt) {
                         this.storeIdToken(idToken, jwt.payload.exp);
                         this.storeAccessToken(accessToken, expiresIn);
-                        Oauth2Auth.authentications.basicAuth.username = jwt.payload.preferred_username;
+                        this.authentications.basicAuth.username = jwt.payload.preferred_username;
                         this.saveUsername(jwt.payload.preferred_username);
                         this.silentRefresh();
                         resolve(accessToken);
@@ -559,7 +565,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     grantPasswordLogin(username: string, password: string, resolve: any, reject: any) {
         let postBody = {}, pathParams = {}, queryParams = {};
 
-        let authHeader = this.basicAuth(Oauth2Auth.authentications.basicAuth.username, Oauth2Auth.authentications.basicAuth.password);
+        let authHeader = this.basicAuth(this.authentications.basicAuth.username, this.authentications.basicAuth.password);
 
         let headerParams = {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -613,7 +619,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         };
 
         queryParams = {
-            refresh_token: Oauth2Auth.authentications.oauth2.refreshToken,
+            refresh_token: this.authentications.oauth2.refreshToken,
             grant_type: 'refresh_token'
         };
 
@@ -648,9 +654,9 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * Set the current Token
      * */
     setToken(token: string, refreshToken: string) {
-        Oauth2Auth.authentications.oauth2.accessToken = token;
-        Oauth2Auth.authentications.oauth2.refreshToken = refreshToken;
-        Oauth2Auth.authentications.basicAuth.password = null;
+        this.authentications.oauth2.accessToken = token;
+        this.authentications.oauth2.refreshToken = refreshToken;
+        this.authentications.basicAuth.password = null;
         this.token = token;
         this.emit('token_issued');
     }
@@ -669,7 +675,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * @returns {Object} authentications
      * */
     getAuthentication(): Authentication {
-        return Oauth2Auth.authentications;
+        return this.authentications;
     }
 
     /**
@@ -685,7 +691,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * @returns {Boolean} is logged in
      */
     isLoggedIn(): boolean {
-        return !!Oauth2Auth.authentications.oauth2.accessToken;
+        return !!this.authentications.oauth2.accessToken;
     }
 
     /**

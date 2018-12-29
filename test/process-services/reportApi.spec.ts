@@ -5,22 +5,25 @@ let expect = require('chai').expect;
 let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 let ReportsMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Reports;
 
-describe('Activiti Report Api', function () {
+describe.only('Activiti Report Api', function () {
     beforeEach(function (done) {
-        this.hostBpm = 'http://127.0.0.1:9999';
+        this.hostBpm = 'http://adfdev.envalfresco.com';
 
         this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
         this.reportsMock = new ReportsMock(this.hostBpm);
 
-        this.authResponseBpmMock.get200Response();
+      //  this.authResponseBpmMock.get200Response();
 
         this.alfrescoJsApi = new AlfrescoApi({
             hostBpm: this.hostBpm,
             provider: 'BPM'
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(()=> {
+        this.alfrescoJsApi.login('admin.adf@alfresco.com', 'adf$2018IloveAngular').then(()=> {
+            console.log('done');
             done();
+        },(error)=>{
+            console.log('error' +JSON.stringify(error));
         });
     });
 
@@ -159,7 +162,7 @@ describe('Activiti Report Api', function () {
         });
     });
 
-    it('should export the report', function (done) {
+    it.only('should export the report', function (done) {
 
         let reportId = '11015'; // String | reportId
         let queryParms = {
@@ -173,13 +176,18 @@ describe('Activiti Report Api', function () {
             'status': 'All',
             'reportName': 'FAKE_REPORT_NAME'
         };
-        this.reportsMock.get200ResponseExportReport(reportId);
+        this.reportsMock.rec();
 
-        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms).then(function (respo) {
-            expect(respo).not.equal(null);
-            expect(respo).not.equal(undefined);
+        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms).then(function (response) {
+            expect(response).not.equal(null);
+            expect(response).not.equal(undefined);
             done();
+        },(error)=>{
+            console.log('error' +JSON.stringify(error));
         });
+
+        this.reportsMock.play();
+
     });
 
     it('should save the report', function (done) {

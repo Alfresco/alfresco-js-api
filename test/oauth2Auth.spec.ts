@@ -1,5 +1,7 @@
 /*global describe, it, beforeEach */
 
+import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
+
 let expect = require('chai').expect;
 let Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
 import { Oauth2Auth } from '@alfresco/js-api';
@@ -18,7 +20,7 @@ describe('Oauth2  test', function () {
             this.oauth2Mock.get200Response();
             this.oauth2Mock.get200Discovery();
 
-            this.oauth2Auth = new Oauth2Auth(<any>{
+            this.oauth2Auth = new Oauth2Auth(<AlfrescoApiConfig>{
                 oauth2: {
                     'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                     'clientId': 'activiti',
@@ -43,7 +45,7 @@ describe('Oauth2  test', function () {
             this.oauth2Mock.get200Response();
             this.oauth2Mock.get200Discovery();
 
-            this.oauth2Auth = new Oauth2Auth(<any>{
+            this.oauth2Auth = new Oauth2Auth(<AlfrescoApiConfig>{
                 oauth2: {
                     'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                     'clientId': 'activiti',
@@ -67,7 +69,7 @@ describe('Oauth2  test', function () {
             this.oauth2Mock.get200Response();
             this.oauth2Mock.get200Discovery();
 
-            this.oauth2Auth = new Oauth2Auth(<any>{
+            this.oauth2Auth = new Oauth2Auth(<AlfrescoApiConfig>{
                 oauth2: {
                     'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                     'clientId': 'activiti',

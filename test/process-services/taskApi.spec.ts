@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApiCompatibility as AlfrescoApi, SaveFormRepresentation, TaskFilterRequestRepresentation, TaskRepresentation, CompleteFormRepresentation, TaskQueryRequestRepresentation } from '@alfresco/js-api';
 let expect = require('chai').expect;
 let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 let TasksMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Tasks;
@@ -27,7 +27,7 @@ describe('Activiti Task Api', function () {
     it('get Task list', function (done) {
         this.tasksMock.get200Response();
 
-        let requestNode = new this.alfrescoJsApi.activiti.TaskQueryRequestRepresentation();
+        let requestNode = new TaskQueryRequestRepresentation();
 
         this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode).then((data)=> {
             expect(data.data[0].processDefinitionName).equal('Process Test Api');
@@ -49,7 +49,7 @@ describe('Activiti Task Api', function () {
     it('bad filter Tasks', function (done) {
         this.tasksMock.get400TaskFilter();
 
-        let requestNode = new this.alfrescoJsApi.activiti.TaskFilterRequestRepresentation();
+        let requestNode = new TaskFilterRequestRepresentation();
 
         this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then((data)=> {
         }, ()=> {
@@ -60,7 +60,7 @@ describe('Activiti Task Api', function () {
     it('filter Tasks', function (done) {
         this.tasksMock.get200TaskFilter();
 
-        let requestNode = new this.alfrescoJsApi.activiti.TaskFilterRequestRepresentation();
+        let requestNode = new TaskFilterRequestRepresentation();
         requestNode.appDefinitionId = 1;
 
         this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then((data)=> {
@@ -96,7 +96,7 @@ describe('Activiti Task Api', function () {
 
         this.tasksMock.rec();
 
-        let completeTaskFormRepresentation = new this.alfrescoJsApi.activiti.CompleteFormRepresentation();
+        let completeTaskFormRepresentation = new CompleteFormRepresentation();
         this.alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRepresentation).then((data)=> {
             done();
         });
@@ -109,7 +109,7 @@ describe('Activiti Task Api', function () {
 
         this.tasksMock.get200CreateTask(taskName);
 
-        let taskRepresentation = new this.alfrescoJsApi.activiti.TaskRepresentation(); // TaskRepresentation | taskRepresentation
+        let taskRepresentation = new TaskRepresentation(); // TaskRepresentation | taskRepresentation
 
         taskRepresentation.name = taskName;
 
@@ -122,7 +122,7 @@ describe('Activiti Task Api', function () {
 
         let taskId = 5006;
 
-        let saveTaskFormRepresentation = new this.alfrescoJsApi.activiti.SaveFormRepresentation();
+        let saveTaskFormRepresentation = new SaveFormRepresentation();
 
         this.alfrescoJsApi.activiti.taskApi.saveTaskForm(taskId, saveTaskFormRepresentation).then((data)=> {
             done();

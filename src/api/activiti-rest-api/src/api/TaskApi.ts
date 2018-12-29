@@ -113,6 +113,10 @@ export class TaskApi {
         return this.tasksApi.getTaskAuditLog(taskId);
     }
 
+    getTaskAuditJson(taskId) {
+        return this.tasksApi.getTaskAuditLog(taskId);
+    }
+
     getTaskAuditPdf(taskId) {
         return this.tasksApi.getTaskAuditLog(taskId);
     }

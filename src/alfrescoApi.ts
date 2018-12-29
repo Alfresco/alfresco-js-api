@@ -94,8 +94,8 @@ export class AlfrescoApi {
             this.oauth2Auth = new Oauth2Auth(this.config);
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
-            this.processAuth = ProcessAuth.getInstance(this.config);
-            this.contentAuth = ContentAuth.getInstance(this.config, this);
+            this.processAuth = new ProcessAuth(this.config);
+            this.contentAuth = new ContentAuth(this.config, this);
             this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), this.processAuth.getAuthentication());
         }
 

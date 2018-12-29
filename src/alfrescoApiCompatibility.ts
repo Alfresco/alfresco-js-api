@@ -106,7 +106,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
 
     initObjects() {
         this._instantiateOldObjects(CONTENT_LEGACY_APIS, this.core);
-        this._instantiateNewObjects(APS_LEGACY_APIS, this.activiti);
+        this._instantiateOldObjects(APS_LEGACY_APIS, this.activiti);
         this._instantiateNewObjects(AUTH_APIS, this.auth);
         this._instantiateNewObjects(SEARCH_APIS, this.search);
         this._instantiateNewObjects(DISCOVERY_APIS, this.discovery);

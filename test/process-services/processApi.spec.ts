@@ -1,6 +1,8 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
+import { ProcessFilterRequestRepresentation } from '../../.history/index.d_20180627184613';
+import { ProcessInstanceQueryRepresentation } from '../../src/api-new/activiti-rest-api/model/processInstanceQueryRepresentation';
 let expect = require('chai').expect;
 let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 let ProcessMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Process;
@@ -27,7 +29,7 @@ describe('Activiti Process Api', function () {
     it('get activiti Process list filtered', function (done) {
         this.processMock.get200Response();
 
-        let requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
+        let requestNode = new ProcessInstanceQueryRepresentation();
 
         requestNode.page = 0;
         requestNode.sort = 'created-desc';
@@ -44,7 +46,7 @@ describe('Activiti Process Api', function () {
     it('get activiti Process list', function (done) {
         this.processMock.get200Response();
 
-        let requestNode = new this.alfrescoJsApi.activiti.ProcessFilterRequestRepresentation();
+        let requestNode = new ProcessInstanceQueryRepresentation();
 
         this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then((data)=> {
             expect(data.data[0].name).equal('Process Test Api - July 26th 2016');

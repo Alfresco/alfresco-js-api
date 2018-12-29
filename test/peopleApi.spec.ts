@@ -6,7 +6,7 @@ import { PeopleApi } from '@alfresco/js-api';
 
 let PeopleMock = require('../test/mockObjects/mockAlfrescoApi').PeopleApi;
 
-describe.only('PeopleApi', function() {
+describe('PeopleApi', function() {
 
     beforeEach(function() {
         this.peopleMock = new PeopleMock();
