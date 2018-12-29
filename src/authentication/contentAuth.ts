@@ -27,6 +27,8 @@ const Emitter = _Emitter;
 
 export class ContentAuth extends AlfrescoApiClient {
 
+    private static instance: ContentAuth = null;
+
     config: AlfrescoApiConfig;
     static basePath: string;
     ticketStorageLabel: string;
@@ -41,10 +43,20 @@ export class ContentAuth extends AlfrescoApiClient {
         super();
         this.className = 'ContentAuth';
 
-        this.authApi = new AuthenticationApi(alfrescoApi);
         this.setConfig(config);
 
         Emitter.call(this);
+    }
+
+    static getInstance(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi): ContentAuth {
+        if (!ContentAuth.instance) {
+            ContentAuth.instance = new ContentAuth(config, alfrescoApi);
+        } else {
+            ContentAuth.instance.setConfig(config);
+        }
+        ContentAuth.instance.authApi = new AuthenticationApi(alfrescoApi);
+
+        return ContentAuth.instance;
     }
 
     setConfig(config: AlfrescoApiConfig) {

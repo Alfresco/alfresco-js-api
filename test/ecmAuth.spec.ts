@@ -2,8 +2,9 @@
 
 let expect = require('chai').expect;
 let AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-import { ContentAuth } from '@alfresco/js-api';
-import { AlfrescoApiCompatibility, AlfrescoApi } from '@alfresco/js-api';
+import { ContentAuth } from '../src/authentication/contentAuth';
+import { AlfrescoApiCompatibility } from '../src/alfrescoApiCompatibility';
+import { AlfrescoApi } from '../src/alfrescoApi';
 
 describe('Ecm Auth test', function () {
 
@@ -18,13 +19,13 @@ describe('Ecm Auth test', function () {
     });
 
     it('should remember username on login', () => {
-        const auth = new ContentAuth({}, alfrescoJsApi);
+        const auth = ContentAuth.getInstance({}, alfrescoJsApi);
         auth.login('johndoe', 'password');
         expect(auth.authentications.basicAuth.username).to.be.equal('johndoe');
     });
 
     it('should forget username on logout', (done) => {
-        const auth = new ContentAuth({}, alfrescoJsApi);
+        const auth = ContentAuth.getInstance({}, alfrescoJsApi);
 
         authEcmMock.get201Response();
 
@@ -47,7 +48,7 @@ describe('Ecm Auth test', function () {
 
             authEcmMock.get201Response();
 
-            this.contentAuth = new ContentAuth({
+            this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
             }, alfrescoJsApi);
@@ -63,7 +64,7 @@ describe('Ecm Auth test', function () {
 
             authEcmMock.get201Response();
 
-            this.contentAuth = new ContentAuth({
+            this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
             }, alfrescoJsApi);
@@ -79,7 +80,7 @@ describe('Ecm Auth test', function () {
 
             authEcmMock.get201Response();
 
-            this.contentAuth = new ContentAuth({
+            this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
             }, alfrescoJsApi);
@@ -94,7 +95,7 @@ describe('Ecm Auth test', function () {
 
             authEcmMock.get201Response();
 
-            this.contentAuth = new ContentAuth({
+            this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
             }, alfrescoJsApi);
@@ -112,7 +113,7 @@ describe('Ecm Auth test', function () {
 
             authEcmMock.get201Response();
 
-            this.contentAuth = new ContentAuth({
+            this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
             }, alfrescoJsApi);
@@ -130,7 +131,7 @@ describe('Ecm Auth test', function () {
         it('login should return an error if wrong credential are used 403 the login fails', function (done) {
             authEcmMock.get403Response();
 
-            this.contentAuth = new ContentAuth({
+            this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
             }, alfrescoJsApi);
@@ -145,7 +146,7 @@ describe('Ecm Auth test', function () {
         it('login should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
             authEcmMock.get400Response();
 
-            this.contentAuth = new ContentAuth({
+            this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
             }, alfrescoJsApi);
@@ -161,7 +162,7 @@ describe('Ecm Auth test', function () {
             it('login should fire an event if is unauthorized  401', function (done) {
                 authEcmMock.get401Response();
 
-                this.contentAuth = new ContentAuth({
+                this.contentAuth = ContentAuth.getInstance({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
                 }, alfrescoJsApi);
@@ -179,7 +180,7 @@ describe('Ecm Auth test', function () {
             it('login should fire an event if is forbidden 403', function (done) {
                 authEcmMock.get403Response();
 
-                this.contentAuth = new ContentAuth({
+                this.contentAuth = ContentAuth.getInstance({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
                 }, alfrescoJsApi);
@@ -197,7 +198,7 @@ describe('Ecm Auth test', function () {
             it('The Api Should fire success event if is all ok 201', function (done) {
                 authEcmMock.get201Response();
 
-                this.contentAuth = new ContentAuth({
+                this.contentAuth = ContentAuth.getInstance({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
                 }, alfrescoJsApi);
@@ -215,7 +216,7 @@ describe('Ecm Auth test', function () {
             it('The Api Should fire logout event if the logout is successfull', function (done) {
                 authEcmMock.get201Response();
 
-                this.contentAuth = new ContentAuth({
+                this.contentAuth = ContentAuth.getInstance({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
                 }, alfrescoJsApi);
@@ -235,7 +236,7 @@ describe('Ecm Auth test', function () {
             it('Ticket should be present in the client', function () {
                 authEcmMock.get400Response();
 
-                this.contentAuth = new ContentAuth({
+                this.contentAuth = ContentAuth.getInstance({
                     ticketEcm: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
                     hostEcm: this.hostEcm
                 }, alfrescoJsApi);
@@ -248,7 +249,7 @@ describe('Ecm Auth test', function () {
 
             beforeEach(function (done) {
                 authEcmMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
-                this.contentAuth = new ContentAuth({
+                this.contentAuth = ContentAuth.getInstance({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
                 }, alfrescoJsApi);

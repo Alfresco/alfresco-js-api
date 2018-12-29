@@ -91,11 +91,11 @@ export class AlfrescoApi {
         this.errorListeners();
 
         if (this.isOauthConfiguration()) {
-            this.oauth2Auth = new Oauth2Auth(this.config);
+            this.oauth2Auth =  Oauth2Auth.getInstance(this.config);
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
-            this.processAuth = new ProcessAuth(this.config);
-            this.contentAuth = new ContentAuth(this.config, this);
+            this.processAuth = ProcessAuth.getInstance(this.config);
+            this.contentAuth = ContentAuth.getInstance(this.config, this);
             this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), this.processAuth.getAuthentication());
         }
 
@@ -104,17 +104,17 @@ export class AlfrescoApi {
 
     errorListeners() {
 
-        // this.contentClient.off('error');
-        //
-        // this.contentPrivateClient.off('error');
-        //
-        // this.processClient.off('error');
-        //
-        // this.searchClient.off('error');
-        //
-        // this.discoveryClient.off('error');
-        //
-        // this.gsClient.off('error');
+        this.contentClient.off('error', ()=>{});
+
+        this.contentPrivateClient.off('error', ()=>{});
+
+        this.processClient.off('error', ()=>{});
+
+        this.searchClient.off('error', ()=>{});
+
+        this.discoveryClient.off('error', ()=>{});
+
+        this.gsClient.off('error', ()=>{});
 
         this.contentClient.on('error', (error: any) => {
             this.errorHandler(error);

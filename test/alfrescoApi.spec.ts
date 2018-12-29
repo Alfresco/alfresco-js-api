@@ -1,6 +1,6 @@
 /*global describe, it */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 let expect = require('chai').expect;
 
 describe('Basic configuration test', function () {

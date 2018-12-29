@@ -17,7 +17,7 @@ describe('Oauth2 Implicit flow test', function () {
     it('should discovery URL', function (done) {
         this.oauth2Mock.get200Discovery();
 
-        this.oauth2Auth = new Oauth2Auth({
+        this.oauth2Auth = Oauth2Auth.getInstance({
             oauth2: {
                 host: this.hostOauth2,
                 clientId: 'activiti',
@@ -39,7 +39,7 @@ describe('Oauth2 Implicit flow test', function () {
     it('should throw an error if redirectUri is not present', function (done) {
 
         try {
-            this.oauth2Auth = new Oauth2Auth(<any>{
+            this.oauth2Auth = Oauth2Auth.getInstance(<any>{
                 oauth2: {
                     host: this.hostOauth2,
                     clientId: 'activiti',
@@ -59,7 +59,7 @@ describe('Oauth2 Implicit flow test', function () {
 
         this.oauth2Mock.get200Discovery();
 
-        this.oauth2Auth = new Oauth2Auth({
+        this.oauth2Auth = Oauth2Auth.getInstance({
             oauth2: {
                 host: this.hostOauth2,
                 clientId: 'activiti',
@@ -83,7 +83,7 @@ describe('Oauth2 Implicit flow test', function () {
         window = globalAny.window = { location: {} };
         this.oauth2Mock.get200Discovery();
 
-        this.oauth2Auth = new Oauth2Auth({
+        this.oauth2Auth = Oauth2Auth.getInstance({
             oauth2: {
                 host: this.hostOauth2,
                 clientId: 'activiti',
