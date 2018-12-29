@@ -136,7 +136,7 @@ The cancel operation is done asynchronously.
         return this.apiClient.callApi(
             '/downloads', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, DownloadEntry);
     }
     /**
         * Get a download
@@ -190,7 +190,7 @@ The cancel operation is done asynchronously.
         return this.apiClient.callApi(
             '/downloads/{downloadId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, DownloadEntry);
     }
 
 }

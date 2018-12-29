@@ -99,7 +99,7 @@ export class IDMSyncApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/idm-sync-log-entries', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, SyncLogEntryRepresentation)
     }
 
 }

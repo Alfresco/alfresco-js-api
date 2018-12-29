@@ -62,7 +62,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/combined-instructions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, InstructionEntry);
     }
     /**
         * Create a classification guide
@@ -99,7 +99,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ClassificationGuideEntry);
     }
     /**
         * Create a subtopic
@@ -149,7 +149,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/topics/{topicId}/subtopics', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, TopicEntry);
     }
     /**
         * Create a topic
@@ -199,7 +199,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}/topics', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, TopicEntry);
     }
     /**
         * Delete a classification guide
@@ -327,7 +327,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ClassificationGuidePaging);
     }
     /**
         * List all subtopics
@@ -392,7 +392,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/topics/{topicId}/subtopics', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SubtopicPaging);
     }
     /**
         * List all topics
@@ -457,7 +457,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}/topics', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, TopicPaging);
     }
     /**
         * Get classification guide information
@@ -494,7 +494,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ClassificationGuideEntry);
     }
     /**
         * Get topic information
@@ -539,7 +539,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/topics/{topicId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, TopicEntry);
     }
     /**
         * Update a classification guide
@@ -581,7 +581,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ClassificationGuideEntry);
     }
     /**
         * Update a topic
@@ -634,7 +634,7 @@ export class ClassificationguidesApi extends BaseApi {
         return this.apiClient.callApi(
             '/topics/{topicId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, TopicEntry);
     }
 
 }

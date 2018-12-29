@@ -354,7 +354,7 @@ The example above changes the highlighting prefix and postfix from the
         return this.apiClient.callApi(
             '/search', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ResultSetPaging);
     }
 
 }

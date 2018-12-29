@@ -62,12 +62,12 @@ export class TemporaryApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let returnType = null;
+
 
         return this.apiClient.callApi(
             '/api/enterprise/temporary/generate-report-data/complete-tasks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
+            contentTypes, accepts
         );
     }
 
@@ -108,12 +108,12 @@ export class TemporaryApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let returnType = null;
+
 
         return this.apiClient.callApi(
             '/api/enterprise/temporary/generate-report-data/start-process', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
+            contentTypes, accepts
         );
     }
 
@@ -139,12 +139,12 @@ export class TemporaryApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let returnType = null;
+
 
         return this.apiClient.callApi(
             '/api/enterprise/temporary/example-headers', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
+            contentTypes, accepts
         );
     }
 
@@ -170,12 +170,12 @@ export class TemporaryApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let returnType = null;
+
 
         return this.apiClient.callApi(
             '/api/enterprise/temporary/example-options', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
+            contentTypes, accepts
         );
     }
 }

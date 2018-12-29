@@ -145,7 +145,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}/categories', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RecordCategoryEntry);
     }
     /**
         * Get a file plan
@@ -206,7 +206,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, FilePlanEntry);
     }
     /**
         * List file plans's children
@@ -276,7 +276,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}/categories', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RecordCategoryPaging);
     }
     /**
         * Update a file plan
@@ -350,7 +350,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/file-plans/{filePlanId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, FilePlanEntry);
     }
 
 }

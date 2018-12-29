@@ -53,7 +53,7 @@ export class AccountIntegrationApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/account/integration', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationAccountRepresentation)
     }
 
 }

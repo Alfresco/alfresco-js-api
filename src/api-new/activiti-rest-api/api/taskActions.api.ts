@@ -66,7 +66,7 @@ export class TaskActionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/action/assign', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, TaskRepresentation)
     }
     /**
         * Attach a form to a task

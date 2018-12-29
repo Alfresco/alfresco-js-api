@@ -185,7 +185,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, UnfiledRecordFolderAssociationPaging);
     }
     /**
         * Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
@@ -287,7 +287,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, UnfiledRecordFolderEntry);
     }
     /**
         * List unfiled record folder's children
@@ -369,7 +369,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, UnfiledRecordFolderAssociationPaging);
     }
     /**
         * Update an unfiled record folder
@@ -451,7 +451,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, UnfiledRecordFolderEntry);
     }
 
 }

@@ -163,7 +163,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteEntry);
     }
     /**
         * Create a site membership
@@ -270,7 +270,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites/{siteId}/members', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteMemberEntry);
     }
     /**
         * Create a site membership request
@@ -379,7 +379,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/people/{personId}/site-membership-requests', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteMembershipRequestEntry);
     }
     /**
         * Delete a site
@@ -623,7 +623,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites/{siteId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteEntry);
     }
     /**
         * Get a site container
@@ -679,7 +679,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites/{siteId}/containers/{containerId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteContainerEntry);
     }
     /**
         * Get a site membership
@@ -738,7 +738,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites/{siteId}/members/{personId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteMemberEntry);
     }
     /**
         * Get a site membership
@@ -783,7 +783,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/people/{personId}/sites/{siteId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteRoleEntry);
     }
     /**
         * Get a site membership request
@@ -842,7 +842,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/people/{personId}/site-membership-requests/{siteId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteMembershipRequestEntry);
     }
     /**
         * Get site membership requests
@@ -917,7 +917,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/site-membership-requests', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteMembershipRequestWithPersonPaging);
     }
     /**
         * List site containers
@@ -976,7 +976,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites/{siteId}/containers', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteContainerPaging);
     }
     /**
         * List site membership requests
@@ -1038,7 +1038,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/people/{personId}/site-membership-requests', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteMembershipRequestPaging);
     }
     /**
         * List site memberships
@@ -1097,7 +1097,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites/{siteId}/members', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteMemberPaging);
     }
     /**
         * List site memberships
@@ -1194,7 +1194,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/people/{personId}/sites', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteRolePaging);
     }
     /**
         * List sites
@@ -1296,7 +1296,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SitePaging);
     }
     /**
         * Reject a site membership request
@@ -1404,7 +1404,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites/{siteId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteEntry);
     }
     /**
         * Update a site membership
@@ -1475,7 +1475,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/sites/{siteId}/members/{personId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteMemberEntry);
     }
     /**
         * Update a site membership request
@@ -1539,7 +1539,7 @@ export class SitesApi extends BaseApi {
         return this.apiClient.callApi(
             '/people/{personId}/site-membership-requests/{siteId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SiteMembershipRequestEntry);
     }
 
 }

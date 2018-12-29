@@ -76,7 +76,7 @@ For example using Javascript:
         return this.apiClient.callApi(
             '/tickets', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, TicketEntry);
     }
     /**
         * Delete ticket (logout)
@@ -151,7 +151,7 @@ For example using Javascript:
         return this.apiClient.callApi(
             '/tickets/-me-', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ValidTicketEntry);
     }
 
 }

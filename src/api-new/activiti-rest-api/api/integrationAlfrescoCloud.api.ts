@@ -93,7 +93,7 @@ export class IntegrationAlfrescoCloudApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/alfresco-cloud/networks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationAlfrescoNetworkRepresenation)
     }
     /**
         * List Alfresco sites
@@ -130,7 +130,7 @@ export class IntegrationAlfrescoCloudApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationAlfrescoSiteRepresenation)
     }
     /**
         * List files and folders inside a specific folder identified by path
@@ -172,7 +172,7 @@ export class IntegrationAlfrescoCloudApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/folderpath/{folderPath}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation)
     }
     /**
         * List files and folders inside a specific folder
@@ -214,7 +214,7 @@ export class IntegrationAlfrescoCloudApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation)
     }
     /**
         * List files and folders inside a specific site
@@ -256,7 +256,7 @@ export class IntegrationAlfrescoCloudApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation)
     }
 
 }

@@ -56,7 +56,7 @@ Retrieves the capabilities and detailed version information from the repository.
         return this.apiClient.callApi(
             '/discovery', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, DiscoveryEntry);
     }
 
 }

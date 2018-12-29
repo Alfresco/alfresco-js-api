@@ -123,7 +123,7 @@ params (majorVersion and comment) on a subsequent file content update.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/versions/{versionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, VersionEntry);
     }
     /**
         * Get version content
@@ -256,7 +256,7 @@ params (majorVersion and comment) on a subsequent file content update.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/versions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, VersionPaging);
     }
     /**
         * Revert a version
@@ -323,7 +323,7 @@ params (majorVersion and comment) on a subsequent file content update.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/versions/{versionId}/revert', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, VersionEntry);
     }
 
 }

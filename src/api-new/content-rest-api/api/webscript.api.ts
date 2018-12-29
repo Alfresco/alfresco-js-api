@@ -67,12 +67,11 @@ export class WebscriptApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json', 'text/html'];
-        let returnType = {};
 
         return this.apiClient.callApi(
             '/' + servicePath + '/' + scriptPath, httpMethod,
             pathParams, scriptArgs, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType, contextRoot
+            contentTypes, accepts, null, contextRoot
         );
     }
 }

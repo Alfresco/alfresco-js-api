@@ -61,7 +61,7 @@ describe('Node', function () {
             });
         });
 
-        it.only('should return dates as timezone-aware', function (done) {
+        it('should return dates as timezone-aware', function (done) {
             this.nodeMock.get200ResponseChildrenNonUTCTimes();
 
             this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1320').then(function (data: NodeChildAssociationPaging) {

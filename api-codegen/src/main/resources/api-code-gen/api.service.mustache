@@ -51,7 +51,7 @@ export class {{classname}} extends BaseApi {
         return this.apiClient.callApi(
         '{{&path}}', '{{httpMethod}}',
         pathParams, queryParams, headerParams, formParams, postBody,
-        contentTypes, accepts, {{#returnType}}{{&returnType}}{{/returnType}})
+        contentTypes, accepts {{#returnType}},{{&returnType}}{{/returnType}})
     }
 {{/operation}}
 

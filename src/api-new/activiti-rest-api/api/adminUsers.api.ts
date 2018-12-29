@@ -98,7 +98,7 @@ export class AdminUsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/users', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, UserRepresentation)
     }
     /**
         * Get a user
@@ -138,7 +138,7 @@ export class AdminUsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/users/{userId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, AbstractUserRepresentation)
     }
     /**
         * Query users
@@ -193,7 +193,7 @@ export class AdminUsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationAbstractUserRepresentation)
     }
     /**
         * Update a user

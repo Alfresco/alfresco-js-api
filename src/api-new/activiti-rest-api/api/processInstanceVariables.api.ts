@@ -190,7 +190,7 @@ export class ProcessInstanceVariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, RestVariable)
     }
     /**
         * List variables
@@ -274,7 +274,7 @@ export class ProcessInstanceVariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, RestVariable)
     }
 
 }

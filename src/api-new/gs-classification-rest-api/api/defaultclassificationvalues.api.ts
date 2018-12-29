@@ -17,6 +17,7 @@
 
 import { DeclassificationDate } from '../model/declassificationDate';
 import { BaseApi } from './base.api';
+import { DateAlfresco } from '../../../../dist/src/api-new/content-rest-api/model/dateAlfresco';
 
 /**
 * Defaultclassificationvalues service.
@@ -58,7 +59,7 @@ export class DefaultclassificationvaluesApi extends BaseApi {
         return this.apiClient.callApi(
             '/default-classification-values/{nodeId}/calculate-declassification-date', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, DateAlfresco);
     }
 
 }

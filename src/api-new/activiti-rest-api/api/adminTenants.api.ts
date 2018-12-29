@@ -62,7 +62,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, LightTenantRepresentation)
     }
     /**
         * Delete a tenant
@@ -136,7 +136,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants/{tenantId}/events', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, TenantEvent)
     }
     /**
         * Get a tenant's logo
@@ -210,7 +210,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants/{tenantId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, TenantRepresentation)
     }
     /**
         * List tenants
@@ -242,7 +242,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, LightTenantRepresentation)
     }
     /**
         * Update a tenant
@@ -284,7 +284,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants/{tenantId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, TenantRepresentation)
     }
     /**
         * Update a tenant's logo
@@ -327,7 +327,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants/{tenantId}/logo', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ImageUploadRepresentation)
     }
 
 }

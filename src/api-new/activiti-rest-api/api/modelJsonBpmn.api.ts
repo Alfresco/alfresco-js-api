@@ -56,12 +56,12 @@ export class ModelJsonBpmnApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let returnType = null;
+
 
         return this.apiClient.callApi(
             '/app/rest/models/{processModelId}/history/{processModelHistoryId}/model-json', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
+            contentTypes, accepts
         );
     }
 
@@ -95,12 +95,12 @@ export class ModelJsonBpmnApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let returnType = null;
+
 
         return this.apiClient.callApi(
             '/app/rest/models/{processModelId}/model-json', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
+            contentTypes, accepts
         );
     }
 
@@ -131,12 +131,12 @@ export class ModelJsonBpmnApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let returnType = null;
+
 
         return this.apiClient.callApi(
             '/app/rest/process-definitions/{processDefinitionId}/model-json', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
+            contentTypes, accepts
         );
     }
 
@@ -167,12 +167,12 @@ export class ModelJsonBpmnApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let returnType = null;
+
 
         return this.apiClient.callApi(
             '/app/rest/process-instances/{processInstanceId}/model-json', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
+            contentTypes, accepts
         );
     }
 }

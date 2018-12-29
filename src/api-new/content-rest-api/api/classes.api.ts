@@ -73,7 +73,7 @@ export class ClassesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{className}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, null, contextRoot
+            contentTypes, accepts, ClassDescription, contextRoot
         );
     }
 }

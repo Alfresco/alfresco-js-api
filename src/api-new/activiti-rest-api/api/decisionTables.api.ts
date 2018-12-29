@@ -60,7 +60,7 @@ export class DecisionTablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/decisions/decision-tables/{decisionTableId}/editorJson', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, JsonNode)
     }
     /**
         * Get a decision table
@@ -97,7 +97,7 @@ export class DecisionTablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/decisions/decision-tables/{decisionTableId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, RuntimeDecisionTableRepresentation)
     }
     /**
         * Query decision tables
@@ -146,7 +146,7 @@ export class DecisionTablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/decisions/decision-tables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationRuntimeDecisionTableRepresentation)
     }
 
 }

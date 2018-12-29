@@ -125,7 +125,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/comments', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, CommentEntry);
     }
     /**
         * Delete a comment
@@ -226,7 +226,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/comments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, CommentPaging);
     }
     /**
         * Update a comment
@@ -287,7 +287,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/comments/{commentId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, CommentEntry);
     }
 
 }

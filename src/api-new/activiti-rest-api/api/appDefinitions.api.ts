@@ -125,7 +125,7 @@ export class AppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/{modelId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, AppDefinitionRepresentation)
     }
 
     /**
@@ -160,7 +160,7 @@ export class AppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/publish-app', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, AppDefinitionUpdateResultRepresentation)
     }
 
     /**
@@ -198,7 +198,7 @@ export class AppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/import', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, AppDefinitionRepresentation)
     }
 
     /**
@@ -237,7 +237,7 @@ export class AppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/{modelId}/publish', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, AppDefinitionUpdateResultRepresentation)
     }
 
     /**

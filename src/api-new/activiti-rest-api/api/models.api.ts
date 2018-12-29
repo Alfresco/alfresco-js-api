@@ -61,7 +61,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ModelRepresentation)
     }
     /**
         * Delete a model
@@ -145,7 +145,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models/{modelId}/clone', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ModelRepresentation)
     }
     /**
         * Get model content
@@ -182,7 +182,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models/{modelId}/editor/json', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ObjectNode)
     }
     /**
         * Get a model's thumbnail image
@@ -259,7 +259,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models/{modelId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ModelRepresentation)
     }
 
 
@@ -293,7 +293,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models-for-app-definition', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationModelRepresentation)
     }
     /**
         * List models (process, form, decision rule or app)
@@ -334,7 +334,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationModelRepresentation)
     }
     /**
         * Create a new version of a model
@@ -377,7 +377,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models/{modelId}/newversion', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ModelRepresentation)
     }
     /**
         * Import a BPMN 2.0 XML file
@@ -415,7 +415,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-models/import', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ModelRepresentation)
     }
     /**
         * Update model content
@@ -457,7 +457,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models/{modelId}/editor/json', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ModelRepresentation)
     }
     /**
         * Update a model
@@ -499,7 +499,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models/{modelId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ModelRepresentation)
     }
     /**
         * Validate model content
@@ -538,7 +538,7 @@ export class ModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models/{modelId}/editor/validate', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ValidationErrorRepresentation)
     }
 
 }

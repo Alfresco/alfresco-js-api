@@ -133,7 +133,7 @@ export class UserProfileApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/profile', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, UserRepresentation)
     }
     /**
         * Update user profile
@@ -170,7 +170,7 @@ export class UserProfileApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/profile', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, UserRepresentation)
     }
     /**
         * Change user profile picture
@@ -208,7 +208,7 @@ export class UserProfileApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/profile-picture', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ImageUploadRepresentation)
     }
 
 }

@@ -202,7 +202,7 @@ export class IntegrationBoxApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/box/files', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationBoxContent)
     }
     /**
         * Get account information

@@ -64,7 +64,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/activate', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ProcessInstanceRepresentation)
     }
 
     /**
@@ -103,7 +103,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/identitylinks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
 
     /**
@@ -218,7 +218,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/filter', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation)
     }
 
     /**
@@ -288,7 +288,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/historic-variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ProcessInstanceVariableRepresentation)
     }
 
     /**
@@ -320,7 +320,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/historic-process-instances/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation)
     }
 
     /**
@@ -369,7 +369,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
 
     /**
@@ -408,7 +408,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
 
     /**
@@ -442,7 +442,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/identitylinks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
 
     /**
@@ -476,7 +476,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationProcessContentRepresentation)
     }
 
     /**
@@ -544,7 +544,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/start-form', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, FormDefinitionRepresentation)
     }
 
     /**
@@ -578,7 +578,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ProcessInstanceRepresentation)
     }
 
     /**
@@ -610,7 +610,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation)
     }
 
     /**
@@ -644,7 +644,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/audit-log', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ProcessInstanceAuditInfoRepresentation)
     }
 
     /**
@@ -669,14 +669,14 @@ export class ProcessInstancesApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let returnType = Object;
+
         let contextRoot = null;
         let responseType = null;
 
         return this.apiClient.callApi(
             '/app/rest/process-instances/{processInstanceId}/audit', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType, contextRoot, responseType
+            contentTypes, accepts, null, contextRoot, responseType
         );
     }
 
@@ -709,7 +709,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ProcessInstanceRepresentation)
     }
 
     /**
@@ -743,7 +743,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/suspend', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ProcessInstanceRepresentation)
     }
 
 }

@@ -115,7 +115,7 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/users/{userId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, UserRepresentation)
     }
     /**
         * Query users
@@ -164,7 +164,7 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationLightUserRepresentation)
     }
     /**
         * Request a password reset
@@ -243,7 +243,7 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/users/{userId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, UserRepresentation)
     }
 
 }

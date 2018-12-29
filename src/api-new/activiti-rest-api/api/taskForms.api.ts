@@ -104,7 +104,7 @@ export class TaskFormsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}/variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ProcessInstanceVariableRepresentation)
     }
 
     /**
@@ -145,12 +145,12 @@ export class TaskFormsApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let returnType = null;
+
 
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
+            contentTypes, accepts
         );
     }
 
@@ -194,7 +194,7 @@ export class TaskFormsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, FormValueRepresentation)
     }
     /**
         * Get a task form
@@ -231,7 +231,7 @@ export class TaskFormsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, FormDefinitionRepresentation)
     }
     /**
         * Save a task form
@@ -299,12 +299,12 @@ export class TaskFormsApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let returnType = null;
+
 
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}/variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, returnType
+            contentTypes, accepts
         );
     }
 

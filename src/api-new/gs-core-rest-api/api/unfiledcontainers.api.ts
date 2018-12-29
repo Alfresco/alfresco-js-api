@@ -185,7 +185,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, UnfiledContainerAssociationPaging);
     }
     /**
         * Get the unfiled records container
@@ -246,7 +246,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, UnfiledContainerEntry);
     }
     /**
         * List unfiled record container's children
@@ -325,7 +325,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, UnfiledContainerAssociationPaging);
     }
     /**
         * Update an unfiled record container
@@ -404,7 +404,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, UnfiledContainerEntry);
     }
 
 }

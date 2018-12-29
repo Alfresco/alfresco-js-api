@@ -174,7 +174,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                     this.callCustomApi(
                         this.discovery.jwksUri, 'GET',
                         pathParams, queryParams, headerParams, formParams, postBody,
-                        contentTypes, accepts, {}
+                        contentTypes, accepts
                     ).then((jwks) => {
                         this.jwks = jwks;
                         this.emit('jwks', jwks);
@@ -585,7 +585,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         let promise = this.callCustomApi(
             this.discovery.tokenEndpoint, 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, {}
+            contentTypes, accepts
         ).then(
             (data: any) => {
                 this.saveUsername(username);
@@ -630,7 +630,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             this.callCustomApi(
                 this.discovery.tokenEndpoint, 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, {}
+                contentTypes, accepts
             ).then(
                 (data: any) => {
                     this.setToken(data.access_token, data.refresh_token);

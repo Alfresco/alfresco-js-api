@@ -59,7 +59,7 @@ export class DecisionAuditsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/decisions/audits/{auditTrailId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, DecisionAuditRepresentation)
     }
     /**
         * Query decision table audit trails
@@ -103,7 +103,7 @@ export class DecisionAuditsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/decisions/audits', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationDecisionAuditRepresentation)
     }
 
 }

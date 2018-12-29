@@ -102,7 +102,7 @@ JSON
         return this.apiClient.callApi(
             '/declassification-exemptions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, DeclassificationExemptionEntry);
     }
     /**
         * Delete a declassification exemption
@@ -176,7 +176,7 @@ JSON
         return this.apiClient.callApi(
             '/declassification-exemptions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, DeclassificationExemptionsPaging);
     }
     /**
         * Get declassification exemption information
@@ -213,7 +213,7 @@ JSON
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, DeclassificationExemptionEntry);
     }
     /**
         * Update a declassification exemption
@@ -255,7 +255,7 @@ JSON
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, DeclassificationExemptionEntry);
     }
 
 }

@@ -78,7 +78,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         return this.apiClient.callApi(
             '/gs-sites', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RMSiteEntry);
     }
     /**
         * Delete the Records Management (RM) site
@@ -160,7 +160,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         return this.apiClient.callApi(
             '/gs-sites/rm', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RMSiteEntry);
     }
     /**
         * Update the Records Management (RM) site
@@ -215,7 +215,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         return this.apiClient.callApi(
             '/gs-sites/rm', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RMSiteEntry);
     }
 
 }

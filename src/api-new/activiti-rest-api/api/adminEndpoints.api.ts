@@ -60,7 +60,7 @@ export class AdminEndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/basic-auths', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, EndpointBasicAuthRepresentation)
     }
     /**
         * Create an endpoint
@@ -97,7 +97,7 @@ export class AdminEndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/endpoints', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, EndpointConfigurationRepresentation)
     }
     /**
         * Get an endpoint authorization
@@ -140,7 +140,7 @@ export class AdminEndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/basic-auths/{basicAuthId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, EndpointBasicAuthRepresentation)
     }
     /**
         * List endpoint authorizations
@@ -178,7 +178,7 @@ export class AdminEndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/basic-auths', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, EndpointBasicAuthRepresentation)
     }
     /**
         * Get an endpoint
@@ -221,7 +221,7 @@ export class AdminEndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, EndpointConfigurationRepresentation)
     }
     /**
         * List endpoints
@@ -259,7 +259,7 @@ export class AdminEndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/endpoints', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, EndpointConfigurationRepresentation)
     }
     /**
         * Delete an endpoint authorization
@@ -387,7 +387,7 @@ export class AdminEndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/basic-auths/{basicAuthId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, EndpointBasicAuthRepresentation)
     }
     /**
         * Update an endpoint
@@ -429,7 +429,7 @@ export class AdminEndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, EndpointConfigurationRepresentation)
     }
 
 }

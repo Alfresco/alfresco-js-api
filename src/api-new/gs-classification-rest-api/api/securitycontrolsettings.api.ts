@@ -61,7 +61,7 @@ export class SecuritycontrolsettingsApi extends BaseApi {
         return this.apiClient.callApi(
             '/security-control-settings/{securityControlSettingKey}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SecurityControlSettingEntry);
     }
     /**
         * Update security control setting value
@@ -105,7 +105,7 @@ export class SecuritycontrolsettingsApi extends BaseApi {
         return this.apiClient.callApi(
             '/security-control-settings/{securityControlSettingKey}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, SecurityControlSettingEntry);
     }
 
 }

@@ -70,7 +70,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/identitylinks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
     /**
         * Create a standalone task
@@ -107,7 +107,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, TaskRepresentation)
     }
     /**
         * Remove a user or group involvement from a task
@@ -233,7 +233,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/filter', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationTaskRepresentation)
     }
     /**
         * Get a user or group involvement with a task
@@ -285,7 +285,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
     /**
         * List either the users or groups involved with a process instance
@@ -327,7 +327,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/identitylinks/{family}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
     /**
         * getIdentityLinks
@@ -364,7 +364,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/identitylinks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
     /**
         * Get the audit log for a task
@@ -401,7 +401,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/audit', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, TaskAuditInfoRepresentation)
     }
     /**
         * Get a task
@@ -438,7 +438,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, TaskRepresentation)
     }
     /**
         * Query historic tasks
@@ -475,7 +475,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/historic-tasks/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationTaskRepresentation)
     }
     /**
         * List tasks
@@ -512,7 +512,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationTaskRepresentation)
     }
     /**
         * Update a task
@@ -554,7 +554,7 @@ export class TasksApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, TaskRepresentation)
     }
 
 }

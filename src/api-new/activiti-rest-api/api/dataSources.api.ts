@@ -56,7 +56,7 @@ export class DataSourcesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/editor/data-sources', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationDataSourceRepresentation)
     }
 
 }

@@ -84,7 +84,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/transfer-containers/{transferContainerId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, TransferContainerEntry);
     }
     /**
         * List transfer container's children
@@ -155,7 +155,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/transfer-containers/{transferContainerId}/transfers', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, TransferContainerAssociationPaging);
     }
     /**
         * Update transfer container
@@ -233,7 +233,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/transfer-containers/{transferContainerId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, TransferContainerEntry);
     }
 
 }

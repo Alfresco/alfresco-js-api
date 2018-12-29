@@ -119,7 +119,7 @@ JSON
         return this.apiClient.callApi(
             '/nodes/{nodeId}/renditions/{renditionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RenditionEntry);
     }
     /**
         * Get rendition content
@@ -239,7 +239,7 @@ JSON
         return this.apiClient.callApi(
             '/nodes/{nodeId}/renditions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RenditionPaging);
     }
 
 }

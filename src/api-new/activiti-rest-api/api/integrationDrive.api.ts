@@ -92,7 +92,7 @@ export class IntegrationDriveApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/google-drive/files', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationGoogleDriveContent)
     }
 
 }

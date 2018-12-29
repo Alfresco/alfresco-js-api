@@ -70,7 +70,7 @@ The liveness probe should then be used to check the repository is still respondi
         return this.apiClient.callApi(
             '/probes/{probeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ProbeEntry);
     }
 
 }

@@ -88,7 +88,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/ratings', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RatingEntry);
     }
     /**
         * Delete a rating
@@ -186,7 +186,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/ratings/{ratingId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RatingEntry);
     }
     /**
         * List ratings
@@ -245,7 +245,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/ratings', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RatingPaging);
     }
 
 }

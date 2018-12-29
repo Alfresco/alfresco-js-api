@@ -110,7 +110,7 @@ Permanently deletes the deleted node **nodeId**.
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}/renditions/{renditionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RenditionEntry);
     }
     /**
         * Get rendition content of a deleted node
@@ -229,7 +229,7 @@ Permanently deletes the deleted node **nodeId**.
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, DeletedNodeEntry);
     }
     /**
         * Get deleted node content
@@ -339,7 +339,7 @@ Permanently deletes the deleted node **nodeId**.
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}/renditions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RenditionPaging);
     }
     /**
         * List deleted nodes
@@ -399,7 +399,7 @@ Permanently deletes the deleted node **nodeId**.
         return this.apiClient.callApi(
             '/deleted-nodes', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, DeletedNodesPaging);
     }
     /**
         * Restore a deleted node
@@ -464,7 +464,7 @@ Permanently deletes the deleted node **nodeId**.
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}/restore', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeEntry);
     }
 
 }

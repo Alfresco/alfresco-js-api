@@ -102,7 +102,7 @@ JSON
         return this.apiClient.callApi(
             '/classification-reasons', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ClassificationReasonEntry);
     }
     /**
         * Delete a classification reason
@@ -189,7 +189,7 @@ JSON
         return this.apiClient.callApi(
             '/classification-reasons', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ClassificationReasonsPaging);
     }
     /**
         * Get classification reason information
@@ -226,7 +226,7 @@ JSON
         return this.apiClient.callApi(
             '/classification-reasons/{classificationReasonId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ClassificationReasonEntry);
     }
     /**
         * Update a classification reason
@@ -268,7 +268,7 @@ JSON
         return this.apiClient.callApi(
             '/classification-reasons/{classificationReasonId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ClassificationReasonEntry);
     }
 
 }

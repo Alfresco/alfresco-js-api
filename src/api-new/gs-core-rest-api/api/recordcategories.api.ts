@@ -182,7 +182,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RecordCategoryChildEntry);
     }
     /**
         * Delete a record category
@@ -285,7 +285,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RecordCategoryEntry);
     }
     /**
         * List record category's children
@@ -372,7 +372,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}/children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RecordCategoryChildPaging);
     }
     /**
         * Update a record category
@@ -453,7 +453,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, RecordCategoryEntry);
     }
 
 }

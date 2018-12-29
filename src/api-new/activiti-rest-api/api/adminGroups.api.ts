@@ -268,7 +268,7 @@ export class AdminGroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/groups', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, GroupRepresentation)
     }
     /**
         * Remove a capability from a group
@@ -512,7 +512,7 @@ export class AdminGroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/groups/{groupId}/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationLightUserRepresentation)
     }
     /**
         * Get a group
@@ -554,7 +554,7 @@ export class AdminGroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/groups/{groupId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, AbstractGroupRepresentation)
     }
     /**
         * Query groups
@@ -593,7 +593,7 @@ export class AdminGroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, LightGroupRepresentation)
     }
     /**
         * Get related groups
@@ -630,7 +630,7 @@ export class AdminGroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/groups/{groupId}/related-groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, LightGroupRepresentation)
     }
     /**
         * Update a group
@@ -672,7 +672,7 @@ export class AdminGroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/groups/{groupId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, GroupRepresentation)
     }
 
 }

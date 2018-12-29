@@ -104,7 +104,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/copy', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeEntry);
     }
 
     /**
@@ -204,7 +204,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/targets', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, AssociationEntry);
     }
 
     /**
@@ -443,7 +443,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeEntry);
     }
 
     /**
@@ -543,7 +543,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/secondary-children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, ChildAssociationEntry);
     }
 
     /**
@@ -772,7 +772,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeEntry);
     }
 
     /**
@@ -1131,7 +1131,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/secondary-children', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeChildAssociationPaging);
     }
 
     /**
@@ -1198,7 +1198,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/sources', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeAssociationPaging);
     }
 
     /**
@@ -1265,7 +1265,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/targets', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeAssociationPaging);
     }
 
     /**
@@ -1355,7 +1355,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/lock', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeEntry);
     }
 
     /**
@@ -1430,7 +1430,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/move', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeEntry);
     }
 
     /**
@@ -1496,7 +1496,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/unlock', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeEntry);
     }
 
     /**
@@ -1599,7 +1599,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeEntry);
     }
 
     /**
@@ -1691,7 +1691,7 @@ export class NodesApi extends BaseApi {
         return this.apiClient.callApi(
             '/nodes/{nodeId}/content', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts, NodeEntry);
     }
 
 }

@@ -64,7 +64,7 @@ export class ProcessDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-definitions/{processDefinitionId}/identitylinks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
 
     /**
@@ -152,7 +152,7 @@ export class ProcessDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
 
     /**
@@ -191,7 +191,7 @@ export class ProcessDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
 
     /**
@@ -225,7 +225,7 @@ export class ProcessDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-definitions/{processDefinitionId}/identitylinks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, IdentityLinkRepresentation)
     }
 
     /**
@@ -259,7 +259,7 @@ export class ProcessDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-definitions/{processDefinitionId}/decision-tables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationRuntimeDecisionTableRepresentation)
     }
 
     /**
@@ -293,7 +293,7 @@ export class ProcessDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-definitions/{processDefinitionId}/forms', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationRuntimeFormRepresentation)
     }
 
     /**
@@ -322,7 +322,7 @@ export class ProcessDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-definitions/{processDefinitionId}/start-form', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, FormDefinitionRepresentation)
     }
 
     /**
@@ -357,7 +357,7 @@ export class ProcessDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-definitions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, ResultListDataRepresentationProcessDefinitionRepresentation)
     }
 
     /**
@@ -387,7 +387,7 @@ export class ProcessDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, FormValueRepresentation)
     }
 
     /**
@@ -418,7 +418,7 @@ export class ProcessDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts, FormValueRepresentation)
     }
 
 }
