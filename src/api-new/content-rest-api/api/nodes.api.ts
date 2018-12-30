@@ -436,8 +436,7 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         formParams = formParams || {};
 
-
-        let contentTypes = ['application/json', 'multipart/form-data'];
+        let contentTypes = ['multipart/form-data'];
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(

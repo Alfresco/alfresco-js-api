@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 let expect = require('chai').expect;
 let AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 let AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
@@ -255,7 +255,6 @@ describe('Auth', function () {
 
                 it('should 401 invalidate the ticket', function (done) {
                     this.nodeMock.get401CreationFolder();
-
                     this.alfrescoJsApi.nodes.createFolder('newFolder').then(() => {
                     }, () => {
                         expect(this.alfrescoJsApi.contentAuth.authentications.basicAuth.password).to.be.equal(null);

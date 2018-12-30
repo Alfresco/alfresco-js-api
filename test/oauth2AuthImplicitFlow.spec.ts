@@ -10,6 +10,8 @@ const globalAny:any = global;
 describe('Oauth2 Implicit flow test', function () {
 
     beforeEach(function () {
+        Oauth2Auth.instance = null;
+        delete this.oauth2Auth;
         this.hostOauth2 = 'http://127.0.0.1:9191/auth/realms/springboot';
         this.oauth2Mock = new Oauth2Mock(this.hostOauth2);
     });
@@ -28,9 +30,7 @@ describe('Oauth2 Implicit flow test', function () {
             }
         });
 
-        this.oauth2Auth.on('discovery', (discovery) => {
-            console.log('discovery' + discovery);
-
+        this.oauth2Auth.on('discovery', () => {
             expect(this.oauth2Auth.discovery.loginUrl).to.be.equal('http://myOauthUrl:30081/auth/realms/springboot/protocol/openid-connect/auth');
             done();
         });

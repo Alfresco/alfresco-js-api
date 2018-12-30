@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 
 let expect = require('chai').expect;
 let AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
@@ -123,10 +123,13 @@ describe('Upload', function () {
 
             let uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
 
-            uploadPromise.catch(() => {
+            uploadPromise.catch((error) => {
+                console.log('error'+error);
             });
             uploadPromise.once('progress', () => {
                 done();
+            },(error)=>{
+                console.log('error'+error);
             });
         });
 

@@ -34,7 +34,7 @@ jobs:
         - stage: Lint
           script: npm run tslint || exit 1; grunt || exit 1
         - stage: Build
-          script: npm run webpack || exit 1
+          script: ./scripts/test-build.sh || exit 1
         - stage: Test
           script: npm run test || exit 1
         - stage: Check demo shell e2e test

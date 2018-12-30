@@ -26,7 +26,7 @@ declare let window;
 
 export class Oauth2Auth extends AlfrescoApiClient {
 
-    private static instance: Oauth2Auth = null;
+    static instance: Oauth2Auth = null;
 
     storage: Storage;
     config: AlfrescoApiConfig;
