@@ -22,7 +22,11 @@ export class DateAlfresco extends Date {
      * @param  dateToConvert The date value as a string.
      * @returns  The parsed date object.
      */
-    static parseDate(dateToConvert: string): Date {
+    static parseDate(dateToConvert: any): Date {
+        if(dateToConvert instanceof Date){
+            return dateToConvert;
+        }
+
         let dateLength = 10;
         let separatorPos = dateToConvert.substring(dateLength).search(/[\+\-]/) + dateLength;
         let dateStr = separatorPos > dateLength ? dateToConvert.substring(0, separatorPos) : dateToConvert;

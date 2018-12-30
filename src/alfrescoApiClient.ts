@@ -270,7 +270,7 @@ export class AlfrescoApiClient {
      * all properties on <code>data<code> will be converted to this type.
      * @returns A value of the specified type.
      */
-    deserialize(response: any, returnType: any): any {
+    deserialize(response: any, returnType?: any): any {
         if (response === null) {
             return null;
         }
@@ -280,7 +280,7 @@ export class AlfrescoApiClient {
             data = response.text;
         }
 
-        if(returnType){
+        if (returnType) {
             data = new returnType(data);
         }
 
@@ -423,7 +423,7 @@ export class AlfrescoApiClient {
                     }
                     let data = {};
                     if (response.type === 'text/html') {
-                        data = this.deserialize(response, 'String');
+                        data = this.deserialize(response);
                     } else {
                         data = this.deserialize(response, returnType);
                     }
