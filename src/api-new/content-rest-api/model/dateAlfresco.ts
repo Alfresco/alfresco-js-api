@@ -23,8 +23,10 @@ export class DateAlfresco extends Date {
      * @returns  The parsed date object.
      */
     static parseDate(dateToConvert: any): Date {
-        if(dateToConvert instanceof Date){
+        if (dateToConvert instanceof Date) {
             return dateToConvert;
+        } else if (typeof dateToConvert === 'number') {
+            return new Date(dateToConvert);
         }
 
         let dateLength = 10;

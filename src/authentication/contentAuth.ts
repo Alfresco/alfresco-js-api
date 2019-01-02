@@ -30,7 +30,7 @@ export class ContentAuth extends AlfrescoApiClient {
     private static instance: ContentAuth = null;
 
     config: AlfrescoApiConfig;
-    static basePath: string;
+    basePath: string;
     ticketStorageLabel: string;
     storage: Storage;
     ticket: string;

@@ -317,6 +317,7 @@ export class ModelsApi extends BaseApi {
 
         let queryParams = {
             'filter': opts['filter'],
+            'filterText': opts['filterText'],
             'sort': opts['sort'],
             'modelType': opts['modelType'],
             'referenceId': opts['referenceId']

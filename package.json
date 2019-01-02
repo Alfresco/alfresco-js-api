@@ -1,6 +1,6 @@
 {
   "name": "@alfresco/js-api",
-  "version": "3.0.0-delta8",
+  "version": "3.0.0-delta12",
   "description": "JavaScript client library for the Alfresco REST API",
   "author": "Alfresco Software, Ltd.",
   "main": "index.js",

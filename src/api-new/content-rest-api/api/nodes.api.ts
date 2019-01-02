@@ -411,7 +411,7 @@ export class NodesApi extends BaseApi {
 
      * @return Promise<NodeEntry>
      */
-    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: any, formParams?: any): Promise<NodeEntry> {
+    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: any, formParams?: any): Promise<NodeEntry| any> {
         opts = opts || {};
         let postBody = nodeBodyCreate;
 
@@ -436,13 +436,21 @@ export class NodesApi extends BaseApi {
         let headerParams = {};
         formParams = formParams || {};
 
-        let contentTypes = ['multipart/form-data'];
+        let contentTypes, returnType = null;
+
+        if (formParams.filedata) {
+            contentTypes = ['multipart/form-data'];
+        } else {
+            contentTypes = ['application/json'];
+            returnType = NodeEntry;
+        }
+
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, NodeEntry);
+            contentTypes, accepts, returnType);
     }
 
     /**

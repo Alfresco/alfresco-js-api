@@ -39,7 +39,6 @@ import { PersonNetworkEntry } from '../../../../api-new/content-rest-api/model/p
 import { PersonNetworkPaging } from '../../../../api-new/content-rest-api/model/personNetworkPaging';
 import { PreferenceEntry } from '../../../../api-new/content-rest-api/model/preferenceEntry';
 import { PreferencePaging } from '../../../../api-new/content-rest-api/model/preferencePaging';
-import { SiteMemberEntry } from '../../../../api-new/content-rest-api/model/siteMemberEntry';
 import { GroupPaging } from '../../../../api-new/content-rest-api/model/groupPaging';
 import { SiteMembershipRequestPaging } from '../../../../api-new/content-rest-api/model/siteMembershipRequestPaging';
 import { SiteMembershipRequestBodyUpdate } from '../../../../api-new/content-rest-api/model/siteMembershipRequestBodyUpdate';
@@ -301,8 +300,8 @@ export class PeopleApi {
      * @param {string[]} opts.fields A list of field names.\n\nYou can use this parameter to restrict the fields\nreturned within a response if, for example, you want to save on overall bandwidth.\n\nThe list applies to a returned individual\nentity or entries within a collection.\n\nIf the API method also supports the **include**\nparameter, then the fields specified in the **include**\nparameter are returned in addition to those specified in the **fields** parameter.\n
      * data is of type: {module:model/SitePaging}
      */
-    getSiteMembership(personId: string, opts?: any): Promise<SiteMemberEntry> {
-        return this.sitesApi.getSiteMembership(personId, opts);
+    getSiteMembership(personId: string, opts?: any): Promise<SiteRolePaging> {
+        return this.sitesApi.listSiteMembershipsForPerson(personId, opts);
     }
 
     /**
