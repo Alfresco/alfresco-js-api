@@ -55,7 +55,27 @@ import { ClassesApi as _ClassesApi } from './api/classesApi';
 import { GroupsApi as _GroupsApi } from './api/groupsApi';
 import { CustomModelApi as _CustomModelApi } from './api/customModelApi';
 
-export const CONTENT_LEGACY_APIS = [ChangesApi, ChildAssociationsApi, FavoritesApi, NetworksApi, NodesApi, CommentsApi, PeopleApi, RatingsApi, RenditionsApi, QueriesApi, SharedlinksApi, SitesApi, TagsApi, WebscriptApi, DownloadsApi, VersionsApi, ClassesApi, GroupsApi, CustomModelApi];
+export const CONTENT_LEGACY_APIS = {
+    ChangesApi: ChangesApi,
+    ChildAssociationsApi: ChildAssociationsApi,
+    FavoritesApi: FavoritesApi,
+    NetworksApi: NetworksApi,
+    NodesApi: NodesApi,
+    CommentsApi: CommentsApi,
+    PeopleApi: PeopleApi,
+    RatingsApi: RatingsApi,
+    RenditionsApi: RenditionsApi,
+    QueriesApi: QueriesApi,
+    SharedlinksApi: SharedlinksApi,
+    SitesApi: SitesApi,
+    TagsApi: TagsApi,
+    WebscriptApi: WebscriptApi,
+    DownloadsApi: DownloadsApi,
+    VersionsApi: VersionsApi,
+    ClassesApi: ClassesApi,
+    GroupsApi: GroupsApi,
+    CustomModelApi: CustomModelApi
+};
 
 export namespace Core {
     export class ChangesApi extends _ChangesApi {

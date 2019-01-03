@@ -46,27 +46,31 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
      * @deprecated 3.0.0
      */
     activiti: Legacy.Activiti = <Legacy.Activiti> {};
-    auth: any = {};
 
     /**
      * @deprecated 3.0.0
      */
-    search: any = {};
+    auth: Legacy.Auth = <Legacy.Auth> {};
 
     /**
      * @deprecated 3.0.0
      */
-    gsCore: any = {};
+    search: Legacy.Search = <Legacy.Search> {};
 
     /**
      * @deprecated 3.0.0
      */
-    gsClassification: any = {};
+    gsCore: Legacy.GsCore = <Legacy.GsCore> {};
 
     /**
      * @deprecated 3.0.0
      */
-    discovery: any = {};
+    gsClassification: Legacy.GsClassification = <Legacy.GsClassification> {};
+
+    /**
+     * @deprecated 3.0.0
+     */
+    discovery: Legacy.Discovery = <Legacy.Discovery> {};
 
     /**
      * @deprecated 3.0.0
@@ -121,21 +125,34 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
     }
 
     _instantiateOldObjects(module, moduleCopy) {
+        let classArray = Object.keys(module);
 
-        module.forEach((currentClass) => {
-            let nameObj = this._lowerFirst(currentClass.name);
-
-            moduleCopy[nameObj] = new currentClass();
-            moduleCopy[nameObj].init(this);
+        classArray.forEach((currentClass) => {
+            moduleCopy[currentClass] = module[currentClass];
+            let obj = this._stringToObject(currentClass, module);
+            let nameObj = this._lowerFirst(currentClass);
+            obj.init(this);
+            moduleCopy[nameObj] = obj;
         });
     }
 
+    _stringToObject(nameClass, module) {
+        try {
+            if (typeof module[nameClass] === 'function') {
+                return new module[nameClass]();
+            }
+        } catch (error) {
+            console.log(nameClass + '  ' + error);
+        }
+    }
+
     _instantiateNewObjects(module, moduleCopy) {
+        let classArray = Object.keys(module);
 
-        module.forEach((currentClass) => {
-            let nameObj = this._lowerFirst(currentClass.name);
-
-            moduleCopy[nameObj] = new currentClass(this);
+        classArray.forEach((currentClass: any) => {
+            moduleCopy[currentClass] = module[currentClass];
+            let nameObj = this._lowerFirst(currentClass);
+            moduleCopy[nameObj] = new module[currentClass](this);
         });
     }
 

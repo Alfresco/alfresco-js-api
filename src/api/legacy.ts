@@ -79,6 +79,24 @@ import { WebscriptApi } from './content-rest-api/src/api/webscriptApi';
 import { ChangesApi } from './content-rest-api/src/api/changesApi';
 import { SitesApi } from './content-rest-api/src/api/sitesApi';
 import { GroupsApi as GroupsApiCS } from './content-rest-api/src/api/groupsApi';
+import { SearchApi } from '../api-new/search-rest-api/api';
+import { GsSitesApi } from '../api-new/gs-core-rest-api/api/gsSites.api';
+import { FilesApi } from '../api-new/gs-core-rest-api/api/files.api';
+import { FileplansApi } from '../api-new/gs-core-rest-api/api/fileplans.api';
+import { RecordfoldersApi } from '../api-new/gs-core-rest-api/api/recordfolders.api';
+import { UnfiledcontainersApi } from '../api-new/gs-core-rest-api/api/unfiledcontainers.api';
+import { TransfercontainersApi } from '../api-new/gs-core-rest-api/api/transfercontainers.api';
+import { UnfiledrecordfoldersApi } from '../api-new/gs-core-rest-api/api/unfiledrecordfolders.api';
+import { RecordcategoriesApi } from '../api-new/gs-core-rest-api/api/recordcategories.api';
+import { TransfersApi } from '../api-new/gs-core-rest-api/api/transfers.api';
+import { RecordsApi } from '../api-new/gs-core-rest-api/api/records.api';
+import { ClassificationreasonsApi } from '../api-new/gs-classification-rest-api/api/classificationreasons.api';
+import { SecuritycontrolsettingsApi } from '../api-new/gs-classification-rest-api/api/securitycontrolsettings.api';
+import { DeclassificationexemptionsApi } from '../api-new/gs-classification-rest-api/api/declassificationexemptions.api';
+import { DefaultclassificationvaluesApi } from '../api-new/gs-classification-rest-api/api/defaultclassificationvalues.api';
+import { ClassificationguidesApi } from '../api-new/gs-classification-rest-api/api/classificationguides.api';
+import { DiscoveryApi } from '../api-new/discovery-rest-api/api';
+import { AuthenticationApi } from '../api-new/auth-rest-api/api';
 
 /**
  * @deprecated 3.0.0
@@ -152,6 +170,39 @@ export namespace Legacy {
         groupsApi: GroupsApiCS;
         customModelApi: CustomModelApi;
 
+    }
+
+    export interface Search {
+        SearchApi: SearchApi;
+    }
+
+    export interface Auth {
+        AuthenticationApi: AuthenticationApi;
+    }
+
+    export interface Discovery {
+        DiscoveryApi: DiscoveryApi;
+    }
+
+    export interface GsCore {
+        FileplansApi: FileplansApi;
+        FilesApi: FilesApi;
+        GsSitesApi: GsSitesApi;
+        RecordcategoriesApi: RecordcategoriesApi;
+        RecordfoldersApi: RecordfoldersApi;
+        RecordsApi: RecordsApi;
+        TransfercontainersApi: TransfercontainersApi;
+        TransfersApi: TransfersApi;
+        UnfiledcontainersApi: UnfiledcontainersApi;
+        UnfiledrecordfoldersApi: UnfiledrecordfoldersApi;
+    }
+
+    export interface GsClassification {
+        ClassificationguidesApi: ClassificationguidesApi;
+        ClassificationreasonsApi: ClassificationreasonsApi;
+        DeclassificationexemptionsApi: DeclassificationexemptionsApi;
+        DefaultclassificationvaluesApi: DefaultclassificationvaluesApi;
+        SecuritycontrolsettingsApi: SecuritycontrolsettingsApi;
     }
 }
 

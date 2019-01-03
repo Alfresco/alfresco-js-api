@@ -18,12 +18,23 @@
 
 export * from './classificationguides.api';
 import { ClassificationguidesApi } from './classificationguides.api';
+
 export * from './classificationreasons.api';
 import { ClassificationreasonsApi } from './classificationreasons.api';
+
 export * from './declassificationexemptions.api';
 import { DeclassificationexemptionsApi } from './declassificationexemptions.api';
+
 export * from './defaultclassificationvalues.api';
 import { DefaultclassificationvaluesApi } from './defaultclassificationvalues.api';
+
 export * from './securitycontrolsettings.api';
 import { SecuritycontrolsettingsApi } from './securitycontrolsettings.api';
-export const GS_CLASSIFICATION_APIS = [ClassificationguidesApi, ClassificationreasonsApi, DeclassificationexemptionsApi, DefaultclassificationvaluesApi, SecuritycontrolsettingsApi];
+
+export const GS_CLASSIFICATION_APIS = {
+    ClassificationguidesApi: ClassificationguidesApi,
+    ClassificationreasonsApi: ClassificationreasonsApi,
+    DeclassificationexemptionsApi: DeclassificationexemptionsApi,
+    DefaultclassificationvaluesApi: DefaultclassificationvaluesApi,
+    SecuritycontrolsettingsApi: SecuritycontrolsettingsApi
+};

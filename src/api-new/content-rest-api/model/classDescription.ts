@@ -32,4 +32,11 @@ export class ClassDescription {
     };
     title?: string;
     url?: string;
+
+    constructor(input?: any) {
+
+        if (input) {
+            Object.assign(this, input);
+        }
+    }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlfrescoApi, DiscoveryEntry, DiscoveryApi } from 'alfresco-js-api';
+import { AlfrescoApi, DiscoveryEntry, DiscoveryApi } from '@alfresco/js-api';
 
 @Component({
   selector: 'app-root',

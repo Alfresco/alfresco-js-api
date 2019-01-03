@@ -105,12 +105,52 @@ import { UserFiltersApi as _UserFiltersApi } from './api/UserFiltersApi';
 import { UsersWorkflowApi as _UsersWorkflowApi } from './api/UsersWorkflowApi';
 import { ReportApi as _ReportApi } from './api/ReportApi';
 
-export const APS_LEGACY_APIS = [AlfrescoApi, AboutApi, AdminEndpointsApi, AdminGroupsApi, AdminTenantsApi,
-    AdminUsersApi, AppsApi, AppsDefinitionApi, AppsRuntimeApi, CommentsApi, ContentApi,
-    ContentRenditionApi, EditorApi, GroupsApi, IDMSyncApi, IntegrationAccountApi, IntegrationAlfrescoCloudApi, IntegrationAlfrescoOnPremiseApi,
-    IntegrationBoxApi, IntegrationDriveApi, ModelBpmnApi, ModelJsonBpmnApi,
-    ModelsApi, ModelsHistoryApi, ProcessApi, ProcessDefinitionsApi, ProcessDefinitionsFormApi, ProcessInstancesApi, ProcessInstancesInformationApi, ProcessInstancesListingApi, ProcessInstanceVariablesApi, ProcessScopeApi, ProfileApi, ScriptFileApi, SystemPropertiesApi, TaskApi,
-    TaskActionsApi, TaskCheckListApi, TaskFormsApi, TemporaryApi, UserApi, UserFiltersApi, UsersWorkflowApi, ReportApi];
+export const APS_LEGACY_APIS = {
+    AlfrescoApi: AlfrescoApi,
+    AboutApi: AboutApi,
+    AdminEndpointsApi: AdminEndpointsApi,
+    AdminGroupsApi: AdminGroupsApi,
+    AdminTenantsApi: AdminTenantsApi,
+    AdminUsersApi: AdminUsersApi,
+    AppsApi: AppsApi,
+    AppsDefinitionApi: AppsDefinitionApi,
+    AppsRuntimeApi: AppsRuntimeApi,
+    CommentsApi: CommentsApi,
+    ContentApi: ContentApi,
+    ContentRenditionApi: ContentRenditionApi,
+    EditorApi: EditorApi,
+    GroupsApi: GroupsApi,
+    IDMSyncApi: IDMSyncApi,
+    IntegrationAccountApi: IntegrationAccountApi,
+    IntegrationAlfrescoCloudApi: IntegrationAlfrescoCloudApi,
+    IntegrationAlfrescoOnPremiseApi: IntegrationAlfrescoOnPremiseApi,
+    IntegrationBoxApi: IntegrationBoxApi,
+    IntegrationDriveApi: IntegrationDriveApi,
+    ModelBpmnApi: ModelBpmnApi,
+    ModelJsonBpmnApi: ModelJsonBpmnApi,
+    ModelsApi: ModelsApi,
+    ModelsHistoryApi: ModelsHistoryApi,
+    ProcessApi: ProcessApi,
+    ProcessDefinitionsApi: ProcessDefinitionsApi,
+    ProcessDefinitionsFormApi: ProcessDefinitionsFormApi,
+    ProcessInstancesApi: ProcessInstancesApi,
+    ProcessInstancesInformationApi: ProcessInstancesInformationApi,
+    ProcessInstancesListingApi: ProcessInstancesListingApi,
+    ProcessInstanceVariablesApi: ProcessInstanceVariablesApi,
+    ProcessScopeApi: ProcessScopeApi,
+    ProfileApi: ProfileApi,
+    ScriptFileApi: ScriptFileApi,
+    SystemPropertiesApi: SystemPropertiesApi,
+    TaskApi: TaskApi,
+    TaskActionsApi: TaskActionsApi,
+    TaskCheckListApi: TaskCheckListApi,
+    TaskFormsApi: TaskFormsApi,
+    TemporaryApi: TemporaryApi,
+    UserApi: UserApi,
+    UserFiltersApi: UserFiltersApi,
+    UsersWorkflowApi: UsersWorkflowApi,
+    ReportApi: ReportApi
+};
 
 export namespace Activiti {
     export class AlfrescoApi extends _AlfrescoApi {

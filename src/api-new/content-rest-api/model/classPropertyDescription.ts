@@ -28,4 +28,11 @@ export class ClassPropertyDescription {
     protected?: boolean;
     title?: string;
     url?: string;
+
+    constructor(input?: any) {
+
+        if (input) {
+            Object.assign(this, input);
+        }
+    }
 }

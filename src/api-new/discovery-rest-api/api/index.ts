@@ -18,4 +18,5 @@
 
 export { DiscoveryApi }  from './discovery.api';
 import { DiscoveryApi } from './discovery.api';
-export const DISCOVERY_APIS = [DiscoveryApi];
+
+export const DISCOVERY_APIS = { DiscoveryApi: DiscoveryApi };
