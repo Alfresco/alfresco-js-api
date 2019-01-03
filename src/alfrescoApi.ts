@@ -106,6 +106,8 @@ export class AlfrescoApi {
 
         this.contentClient.off('error', ()=>{});
 
+        this.authClient.off('error', ()=>{});
+
         this.contentPrivateClient.off('error', ()=>{});
 
         this.processClient.off('error', ()=>{});
@@ -117,6 +119,10 @@ export class AlfrescoApi {
         this.gsClient.off('error', ()=>{});
 
         this.contentClient.on('error', (error: any) => {
+            this.errorHandler(error);
+        });
+
+        this.authClient.on('error', (error: any) => {
             this.errorHandler(error);
         });
 
@@ -162,6 +168,7 @@ export class AlfrescoApi {
         this.config.hostEcm = hostEcm;
         this.contentAuth.changeHost();
         this.contentClient.changeHost();
+        this.authClient.changeHost();
     }
 
     changeBpmHost(hostBpm: string) {
@@ -247,6 +254,7 @@ export class AlfrescoApi {
 
     setAuthenticationClientECMBPM(authECM: Authentication, authBPM: Authentication) {
         this.contentClient.setAuthentications(authECM);
+        this.authClient.setAuthentications(authECM);
         this.searchClient.setAuthentications(authECM);
         this.contentPrivateClient.setAuthentications(authECM);
         this.processClient.setAuthentications(authBPM);

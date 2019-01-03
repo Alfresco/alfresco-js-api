@@ -173,36 +173,36 @@ export namespace Legacy {
     }
 
     export interface Search {
-        SearchApi: SearchApi;
+        searchApi: SearchApi;
     }
 
     export interface Auth {
-        AuthenticationApi: AuthenticationApi;
+        authenticationApi: AuthenticationApi;
     }
 
     export interface Discovery {
-        DiscoveryApi: DiscoveryApi;
+        discoveryApi: DiscoveryApi;
     }
 
     export interface GsCore {
-        FileplansApi: FileplansApi;
-        FilesApi: FilesApi;
-        GsSitesApi: GsSitesApi;
-        RecordcategoriesApi: RecordcategoriesApi;
-        RecordfoldersApi: RecordfoldersApi;
-        RecordsApi: RecordsApi;
-        TransfercontainersApi: TransfercontainersApi;
-        TransfersApi: TransfersApi;
-        UnfiledcontainersApi: UnfiledcontainersApi;
-        UnfiledrecordfoldersApi: UnfiledrecordfoldersApi;
+        fileplansApi: FileplansApi;
+        filesApi: FilesApi;
+        gsSitesApi: GsSitesApi;
+        recordcategoriesApi: RecordcategoriesApi;
+        recordfoldersApi: RecordfoldersApi;
+        recordsApi: RecordsApi;
+        transfercontainersApi: TransfercontainersApi;
+        transfersApi: TransfersApi;
+        unfiledcontainersApi: UnfiledcontainersApi;
+        unfiledrecordfoldersApi: UnfiledrecordfoldersApi;
     }
 
     export interface GsClassification {
-        ClassificationguidesApi: ClassificationguidesApi;
-        ClassificationreasonsApi: ClassificationreasonsApi;
-        DeclassificationexemptionsApi: DeclassificationexemptionsApi;
-        DefaultclassificationvaluesApi: DefaultclassificationvaluesApi;
-        SecuritycontrolsettingsApi: SecuritycontrolsettingsApi;
+        classificationguidesApi: ClassificationguidesApi;
+        classificationreasonsApi: ClassificationreasonsApi;
+        declassificationexemptionsApi: DeclassificationexemptionsApi;
+        defaultclassificationvaluesApi: DefaultclassificationvaluesApi;
+        securitycontrolsettingsApi: SecuritycontrolsettingsApi;
     }
 }
 

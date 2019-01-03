@@ -37,8 +37,6 @@ export class ContentApi extends BaseApi {
      */
     createRelatedContentOnProcessInstance(processInstanceId: string, relatedContent: RelatedContentRepresentation | Blob, opts?: any): Promise<RelatedContentRepresentation> {
         opts = opts || {};
-        let postBody = relatedContent;
-
         if (processInstanceId === undefined || processInstanceId === null) {
             throw new Error("Required param 'processInstanceId' in createRelatedContentOnProcessInstance");
         }
@@ -58,15 +56,21 @@ export class ContentApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
         if (relatedContent instanceof RelatedContentRepresentation) {
+            let postBody = relatedContent;
+            let contentTypes = ['application/json'];
             return this.apiClient.callApi(
                 '/api/enterprise/process-instances/{processInstanceId}/content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
                 contentTypes, accepts, RelatedContentRepresentation)
         } else {
+            let postBody = null;
+            formParams = {
+                'file': relatedContent
+            };
+            let contentTypes = [ 'multipart/form-data'];
             return this.apiClient.callApi(
                 '/api/enterprise/process-instances/{processInstanceId}/raw-content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
@@ -87,8 +91,6 @@ export class ContentApi extends BaseApi {
      */
     createRelatedContentOnTask(taskId: string, relatedContent: RelatedContentRepresentation | Blob, opts?: any): Promise<RelatedContentRepresentation> {
         opts = opts || {};
-        let postBody = relatedContent;
-
         if (taskId === undefined || taskId === null) {
             throw new Error("Required param 'taskId' in createRelatedContentOnTask");
         }
@@ -108,18 +110,22 @@ export class ContentApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-        let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
         if (relatedContent instanceof RelatedContentRepresentation) {
-
+            let postBody = relatedContent;
+            let contentTypes = ['application/json'];
             return this.apiClient.callApi(
                 '/api/enterprise/tasks/{taskId}/content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
                 contentTypes, accepts, RelatedContentRepresentation)
 
         } else {
-
+            let postBody = null;
+            formParams = {
+                'file': relatedContent
+            };
+            let contentTypes = [ 'multipart/form-data'];
             return this.apiClient.callApi(
                 '/api/enterprise/tasks/{taskId}/raw-content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
