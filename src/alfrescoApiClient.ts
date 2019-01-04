@@ -515,7 +515,7 @@ export class AlfrescoApiClient {
      * with parameter values
      */
     buildUrlCustomBasePath(basePath: string, path: string, pathParams: any): string {
-        if (!path.match(/^\//)) {
+        if (path && path != '' && !path.match(/^\//)) {
             path = '/' + path;
         }
         let url = basePath + path;
