@@ -1,7 +1,8 @@
 /*global describe, it */
 
-import { AlfrescoApiClient, DateAlfresco } from '@alfresco/js-api';
-import chai from 'chai';
+import { AlfrescoApiClient } from  '../index';
+import { DateAlfresco } from  '../index';
+let chai = require('chai');
 
 let expect = require('chai').expect;
 chai.use(require('chai-datetime'));

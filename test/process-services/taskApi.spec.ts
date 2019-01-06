@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
+import { AlfrescoApiCompatibility as AlfrescoApi, SaveFormRepresentation, TaskFilterRequestRepresentation, TaskRepresentation, CompleteFormRepresentation, TaskQueryRequestRepresentation } from  '../../index';
 
-import { AlfrescoApiCompatibility as AlfrescoApi, SaveFormRepresentation, TaskFilterRequestRepresentation, TaskRepresentation, CompleteFormRepresentation, TaskQueryRequestRepresentation } from '@alfresco/js-api';
 let expect = require('chai').expect;
 let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 let TasksMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Tasks;

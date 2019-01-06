@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
 import { NodeChildAssociationPaging } from '../../src/api-new/content-rest-api/model/nodeChildAssociationPaging';
 
 let chai = require('chai');

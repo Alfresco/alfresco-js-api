@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach, assert */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
 
 let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 let FindNodesMock = require('../../test/mockObjects/mockAlfrescoApi').FindNodes;

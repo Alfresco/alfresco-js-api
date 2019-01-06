@@ -4,12 +4,12 @@ import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 
 let expect = require('chai').expect;
 let Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
-import { Oauth2Auth } from '@alfresco/js-api';
+import { Oauth2Auth } from '../src/authentication/oauth2Auth';
 
 describe('Oauth2  test', function () {
 
     beforeEach(function () {
-        this.hostOauth2 = 'http://myOauthUrl:30081/auth/realms/springboot';
+        this.hostOauth2 = 'http://myOauthUrl:30081';
         this.oauth2Mock = new Oauth2Mock(this.hostOauth2);
     });
 
@@ -35,7 +35,8 @@ describe('Oauth2  test', function () {
             this.oauth2Auth.login('admin', 'admin').then((data) => {
                 expect(data.access_token).to.be.equal('test-token');
                 done();
-            },                                           function () {
+            },                                           function (e) {
+                console.log('e' + e);
             });
 
         });

@@ -12,8 +12,8 @@ class AuthResponseMock extends BaseMock {
     }
 
     get200Response() {
-        nock('http://myOauthUrl:30081', {'encodedQueryParams': true})
-            .post('/auth/realms/springboot/protocol/openid-connect/token/')
+        nock(this.host, {'encodedQueryParams': true})
+            .post('/auth/realms/springboot/protocol/openid-connect/token')
             .reply(200, {
                 'access_token': 'test-token',
                 'expires_in': 300,
@@ -27,7 +27,7 @@ class AuthResponseMock extends BaseMock {
     }
 
     get200CustomResponse(path) {
-        nock('http://myOauthUrl:30081/auth/realms/springboot/protocol/', {'encodedQueryParams': true})
+        nock(this.host + '/auth/realms/springboot/protocol/', {'encodedQueryParams': true})
             .post(path)
             .query({
                 'username': this.username,
@@ -46,7 +46,7 @@ class AuthResponseMock extends BaseMock {
     }
 
     get200RefreshTokenResponse(refreshToken) {
-        nock('http://myOauthUrl:30081', {'encodedQueryParams': true})
+        nock(this.host, {'encodedQueryParams': true})
             .post('/auth/realms/springboot/protocol/openid-connect/token/')
             .query({
                 refresh_token: refreshToken,
@@ -63,7 +63,7 @@ class AuthResponseMock extends BaseMock {
 
     get200Discovery() {
         nock(this.host, {'encodedQueryParams': true})
-            .get('/.well-known/openid-configuration')
+            .get('/auth/realms/springboot/.well-known/openid-configuration')
             .reply(200, {
                 'issuer': 'http://myOauthUrl:30081/auth/realms/springboot',
                 'authorization_endpoint': 'http://myOauthUrl:30081/auth/realms/springboot/protocol/openid-connect/auth',

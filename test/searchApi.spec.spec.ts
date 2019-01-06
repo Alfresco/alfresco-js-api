@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 let AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 let SearchMock = require('../test/mockObjects/mockAlfrescoApi').Search;
 let expect = require('chai').expect;

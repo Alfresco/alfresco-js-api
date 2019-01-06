@@ -12,7 +12,7 @@ describe('Oauth2 Implicit flow test', function () {
     beforeEach(function () {
         Oauth2Auth.instance = null;
         delete this.oauth2Auth;
-        this.hostOauth2 = 'http://127.0.0.1:9191/auth/realms/springboot';
+        this.hostOauth2 = 'http://myOauthUrl:30081';
         this.oauth2Mock = new Oauth2Mock(this.hostOauth2);
     });
 
@@ -21,10 +21,10 @@ describe('Oauth2 Implicit flow test', function () {
 
         this.oauth2Auth = Oauth2Auth.getInstance({
             oauth2: {
-                host: this.hostOauth2,
-                clientId: 'activiti',
-                secret: '',
-                scope: 'openid',
+                host: 'http://myOauthUrl:30081/auth/realms/springboot',
+                'clientId': 'activiti',
+                'scope': 'openid',
+                'secret': '',
                 implicitFlow: true,
                 redirectUri: 'redirectUri'
             }
@@ -41,7 +41,7 @@ describe('Oauth2 Implicit flow test', function () {
         try {
             this.oauth2Auth = Oauth2Auth.getInstance(<any>{
                 oauth2: {
-                    host: this.hostOauth2,
+                    host: 'http://myOauthUrl:30081/auth/realms/springboot',
                     clientId: 'activiti',
                     secret: '',
                     scope: 'openid',
@@ -61,7 +61,7 @@ describe('Oauth2 Implicit flow test', function () {
 
         this.oauth2Auth = Oauth2Auth.getInstance({
             oauth2: {
-                host: this.hostOauth2,
+                host: 'http://myOauthUrl:30081/auth/realms/springboot',
                 clientId: 'activiti',
                 secret: '',
                 scope: 'openid',
@@ -85,7 +85,7 @@ describe('Oauth2 Implicit flow test', function () {
 
         this.oauth2Auth = Oauth2Auth.getInstance({
             oauth2: {
-                host: this.hostOauth2,
+                host: 'http://myOauthUrl:30081/auth/realms/springboot',
                 clientId: 'activiti',
                 secret: '',
                 scope: 'openid',

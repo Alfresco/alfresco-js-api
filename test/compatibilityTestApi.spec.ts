@@ -1,6 +1,7 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility, PersonBodyCreate } from '@alfresco/js-api';
+import { AlfrescoApiCompatibility } from '../src/alfrescoApiCompatibility';
+import { PersonBodyCreate } from '../src/api-new/content-rest-api/model/personBodyCreate';
 
 let PeopleMock = require('../test/mockObjects/mockAlfrescoApi').PeopleApi;
 
