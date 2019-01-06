@@ -1,4 +1,22 @@
 /*!
+* @license
+* Copyright 2018 Alfresco Software, Ltd.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
+
+/*!
     * @license
     * Copyright 2018 Alfresco Software, Ltd.
     *
@@ -82,7 +100,7 @@ export class TaskApi {
     }
 
     completeTaskForm(taskId: string, completeTaskFormRepresentation: CompleteFormRepresentation): Promise<any> {
-        return this.taskFormsApi.completeTaskForm(taskId,completeTaskFormRepresentation);
+        return this.taskFormsApi.completeTaskForm(taskId, completeTaskFormRepresentation);
     }
 
     completeTask(taskId: string): Promise<any> {
@@ -134,7 +152,7 @@ export class TaskApi {
     }
 
     getTaskComments(taskId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
-        return this.activitiCommentsApi.getTaskComments(taskId,opts);
+        return this.activitiCommentsApi.getTaskComments(taskId, opts);
     }
 
     getTaskForm(taskId: string): Promise<FormDefinitionRepresentation> {
@@ -146,7 +164,7 @@ export class TaskApi {
     }
 
     involveUser(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
-        return this.taskactionsApi.involveUser(taskId,userIdentifier);
+        return this.taskactionsApi.involveUser(taskId, userIdentifier);
     }
 
     listTasks(tasksQuery: TaskQueryRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
@@ -154,7 +172,7 @@ export class TaskApi {
     }
 
     orderChecklist(taskId: string, orderRepresentation: ChecklistOrderRepresentation): Promise<any> {
-        return this.checklistsApi.orderChecklist(taskId,orderRepresentation);
+        return this.checklistsApi.orderChecklist(taskId, orderRepresentation);
     }
 
     removeForm(taskId: string): Promise<any> {
@@ -162,11 +180,11 @@ export class TaskApi {
     }
 
     removeInvolvedUser(taskId: string, groupId: string): Promise<any> {
-        return this.taskactionsApi.removeInvolvedUser(taskId,groupId);
+        return this.taskactionsApi.removeInvolvedUser(taskId, groupId);
     }
 
     saveTaskForm(taskId: string, saveTaskFormRepresentation: SaveFormRepresentation): Promise<any> {
-        return this.taskFormsApi.saveTaskForm(taskId,saveTaskFormRepresentation);
+        return this.taskFormsApi.saveTaskForm(taskId, saveTaskFormRepresentation);
     }
 
     unclaimTask(taskId: string): Promise<any> {
@@ -174,6 +192,6 @@ export class TaskApi {
     }
 
     updateTask(taskId: string, updated: TaskUpdateRepresentation): Promise<TaskRepresentation> {
-        return this.tasksApi.updateTask(taskId,updated);
+        return this.tasksApi.updateTask(taskId, updated);
     }
 }

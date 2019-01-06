@@ -50,7 +50,7 @@ export class Pagination {
     maxItems?: number;
 
     constructor(input?: any) {
-        if(input) {
+        if (input) {
             Object.assign(this, input);
         }
     }

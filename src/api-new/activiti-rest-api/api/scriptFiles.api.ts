@@ -52,7 +52,7 @@ export class ScriptFilesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/script-files/controllers', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * getLibraries
@@ -84,7 +84,7 @@ export class ScriptFilesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/script-files/libraries', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

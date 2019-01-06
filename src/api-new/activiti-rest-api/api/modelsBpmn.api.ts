@@ -62,7 +62,7 @@ export class ModelsBpmnApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Export a process definition as BPMN 2.0 XML
@@ -99,7 +99,7 @@ export class ModelsBpmnApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/models/{processModelId}/bpmn20', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

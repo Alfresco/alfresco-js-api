@@ -21,7 +21,7 @@ import { IntegrationBoxApi as NewIntegrationBoxApi } from '../../../../api-new/a
 /**
  * @deprecated 3.0.0
  */
-export class IntegrationBoxApi extends NewIntegrationBoxApi{
+export class IntegrationBoxApi extends NewIntegrationBoxApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;

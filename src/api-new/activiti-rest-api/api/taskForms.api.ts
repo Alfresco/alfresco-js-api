@@ -67,7 +67,7 @@ export class TaskFormsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get task variables
@@ -104,7 +104,7 @@ export class TaskFormsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}/variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceVariableRepresentation)
+            contentTypes, accepts, ProcessInstanceVariableRepresentation);
     }
 
     /**
@@ -194,7 +194,7 @@ export class TaskFormsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormValueRepresentation)
+            contentTypes, accepts, FormValueRepresentation);
     }
     /**
         * Get a task form
@@ -231,7 +231,7 @@ export class TaskFormsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormDefinitionRepresentation)
+            contentTypes, accepts, FormDefinitionRepresentation);
     }
     /**
         * Save a task form
@@ -273,7 +273,7 @@ export class TaskFormsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}/save-form', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**

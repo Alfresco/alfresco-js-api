@@ -31,7 +31,7 @@ describe('Activiti User Filter Api', function () {
             'appId': 1 // Integer | appId
         };
 
-        this.alfrescoJsApi.activiti.userFiltersApi.getUserTaskFilters(opts).then((data)=> {
+        this.alfrescoJsApi.activiti.userFiltersApi.getUserTaskFilters(opts).then((data) => {
             expect(data.data[0].name).equal('Involved Tasks');
             done();
         });

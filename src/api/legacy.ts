@@ -221,10 +221,10 @@ export { GroupPaging as GroupsPaging } from '../api-new/content-rest-api/model/g
 
 export {
     ProcessInstanceQueryRepresentation as ProcessFilterRequestRepresentation
-}from '../api-new/activiti-rest-api/model/processInstanceQueryRepresentation'
+}from '../api-new/activiti-rest-api/model/processInstanceQueryRepresentation';
 export {
     TaskQueryRepresentation as TaskQueryRequestRepresentation
-}from '../api-new/activiti-rest-api/model/taskQueryRepresentation'
+}from '../api-new/activiti-rest-api/model/taskQueryRepresentation';
 
 export { ContentClient as EcmClient } from '../contentClient';
 export { ProcessClient as BpmClient } from '../processClient';

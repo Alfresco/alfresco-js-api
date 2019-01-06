@@ -60,7 +60,7 @@ export class RuntimeAppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/runtime-app-definitions', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a runtime app
@@ -97,7 +97,7 @@ export class RuntimeAppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/runtime-app-definitions/{appDefinitionId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDefinitionRepresentation)
+            contentTypes, accepts, AppDefinitionRepresentation);
     }
     /**
         * List runtime apps
@@ -129,7 +129,7 @@ export class RuntimeAppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/runtime-app-definitions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAppDefinitionRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationAppDefinitionRepresentation);
     }
 
 }

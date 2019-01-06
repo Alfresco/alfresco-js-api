@@ -62,7 +62,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/processes', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserProcessInstanceFilterRepresentation)
+            contentTypes, accepts, UserProcessInstanceFilterRepresentation);
     }
     /**
         * Create a task filter
@@ -99,7 +99,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/tasks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserTaskFilterRepresentation)
+            contentTypes, accepts, UserTaskFilterRepresentation);
     }
     /**
         * Delete a process instance filter
@@ -136,7 +136,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/processes/{userFilterId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete a task filter
@@ -173,7 +173,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/tasks/{userFilterId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a process instance filter
@@ -210,7 +210,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/processes/{userFilterId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserProcessInstanceFilterRepresentation)
+            contentTypes, accepts, UserProcessInstanceFilterRepresentation);
     }
     /**
         * List process instance filters
@@ -245,7 +245,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/processes', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationUserProcessInstanceFilterRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationUserProcessInstanceFilterRepresentation);
     }
     /**
         * Get a task filter
@@ -282,7 +282,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/tasks/{userFilterId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserTaskFilterRepresentation)
+            contentTypes, accepts, UserTaskFilterRepresentation);
     }
     /**
         * List task filters
@@ -317,7 +317,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/tasks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationUserTaskFilterRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationUserTaskFilterRepresentation);
     }
     /**
         * Re-order the list of user process instance filters
@@ -354,7 +354,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/processes', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Re-order the list of user task filters
@@ -391,7 +391,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/tasks', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a process instance filter
@@ -433,7 +433,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/processes/{userFilterId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserProcessInstanceFilterRepresentation)
+            contentTypes, accepts, UserProcessInstanceFilterRepresentation);
     }
     /**
         * Update a task filter
@@ -475,7 +475,7 @@ export class UserFiltersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/filters/tasks/{userFilterId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserTaskFilterRepresentation)
+            contentTypes, accepts, UserTaskFilterRepresentation);
     }
 
 }

@@ -52,7 +52,7 @@ export class AboutApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/app-version', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

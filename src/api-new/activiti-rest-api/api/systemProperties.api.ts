@@ -60,7 +60,7 @@ export class SystemPropertiesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/system/properties/global-date-format/{tenantId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, GlobalDateFormatRepresentation)
+            contentTypes, accepts, GlobalDateFormatRepresentation);
     }
     /**
         * Get password validation constraints
@@ -97,7 +97,7 @@ export class SystemPropertiesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/system/properties/password-validation-constraints/{tenantId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, PasswordValidationConstraints)
+            contentTypes, accepts, PasswordValidationConstraints);
     }
     /**
         * Retrieve system properties
@@ -129,7 +129,7 @@ export class SystemPropertiesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/system/properties', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, SystemPropertiesRepresentation)
+            contentTypes, accepts, SystemPropertiesRepresentation);
     }
     /**
         * Get involved users who can edit forms
@@ -166,7 +166,7 @@ export class SystemPropertiesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/system/properties/involved-users-can-edit-forms/{tenantId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

@@ -64,7 +64,7 @@ export class ActivitiCommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/comments', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, CommentRepresentation)
+            contentTypes, accepts, CommentRepresentation);
     }
     /**
         * Add a comment to a task
@@ -106,7 +106,7 @@ export class ActivitiCommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/comments', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, CommentRepresentation)
+            contentTypes, accepts, CommentRepresentation);
     }
     /**
         * Get comments for a process
@@ -146,7 +146,7 @@ export class ActivitiCommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/comments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationCommentRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationCommentRepresentation);
     }
     /**
         * Get comments for a task
@@ -186,7 +186,7 @@ export class ActivitiCommentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/comments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationCommentRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationCommentRepresentation);
     }
 
 }

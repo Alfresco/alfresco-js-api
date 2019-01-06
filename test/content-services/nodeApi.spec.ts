@@ -25,7 +25,7 @@ describe('Node', function () {
 
         this.alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
-        }, (error) => {
+        },                                              (error) => {
             console.log('error ' + JSON.stringify(error));
         });
     });
@@ -46,7 +46,7 @@ describe('Node', function () {
             this.nodeMock.get404ChildrenNotExist();
 
             this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function () {
-            }, function (error) {
+            },                                                                                    function (error) {
                 expect(error.status).to.be.equal(404);
                 done();
             });
@@ -68,7 +68,7 @@ describe('Node', function () {
                 expect(data.list.entries.length).to.be.equal(1);
                 expect(data.list.entries[0].entry.createdAt).to.equalTime(new Date(Date.UTC(2011, 2, 15, 17, 4, 54, 290)));
                 done();
-            }, (error) => {
+            },                                                                                    (error) => {
                 console.log('error' + JSON.stringify(error));
             });
         });
@@ -80,7 +80,7 @@ describe('Node', function () {
 
             this.alfrescoJsApi.nodes.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
                 done();
-            }, function () {
+            },                                                                               function () {
             });
         });
 
@@ -88,7 +88,7 @@ describe('Node', function () {
             this.nodeMock.get404DeleteNotFound();
 
             this.alfrescoJsApi.nodes.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
-            }, function (error) {
+            },                                                                               function (error) {
                 expect(error.status).to.be.equal(404);
                 done();
             });
@@ -98,7 +98,7 @@ describe('Node', function () {
             this.nodeMock.get403DeletePermissionDenied();
 
             this.alfrescoJsApi.nodes.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
-            }, function () {
+            },                                                                               function () {
                 done();
             });
         });
@@ -119,7 +119,7 @@ describe('Node', function () {
                     done();
                 });
 
-            }, function (error) {
+            },                                                           function (error) {
                 console.error(error);
             });
 

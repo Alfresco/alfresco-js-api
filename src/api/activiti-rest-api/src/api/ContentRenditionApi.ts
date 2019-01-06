@@ -30,6 +30,6 @@ export class ContentRenditionApi {
     }
 
     getRawContent(contentId, renditionType) {
-       return this.contentApi.getRawContent(contentId,renditionType);
+       return this.contentApi.getRawContent(contentId, renditionType);
     }
 }

@@ -64,7 +64,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/activate', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceRepresentation)
+            contentTypes, accepts, ProcessInstanceRepresentation);
     }
 
     /**
@@ -103,7 +103,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/identitylinks', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation)
+            contentTypes, accepts, IdentityLinkRepresentation);
     }
 
     /**
@@ -152,7 +152,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -186,7 +186,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -218,7 +218,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/filter', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation);
     }
 
     /**
@@ -288,7 +288,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/historic-variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceVariableRepresentation)
+            contentTypes, accepts, ProcessInstanceVariableRepresentation);
     }
 
     /**
@@ -320,7 +320,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/historic-process-instances/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation);
     }
 
     /**
@@ -369,7 +369,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation)
+            contentTypes, accepts, IdentityLinkRepresentation);
     }
 
     /**
@@ -408,7 +408,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation)
+            contentTypes, accepts, IdentityLinkRepresentation);
     }
 
     /**
@@ -442,7 +442,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/identitylinks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation)
+            contentTypes, accepts, IdentityLinkRepresentation);
     }
 
     /**
@@ -476,7 +476,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationProcessContentRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationProcessContentRepresentation);
     }
 
     /**
@@ -510,7 +510,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/diagram', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -544,7 +544,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/start-form', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormDefinitionRepresentation)
+            contentTypes, accepts, FormDefinitionRepresentation);
     }
 
     /**
@@ -578,7 +578,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceRepresentation)
+            contentTypes, accepts, ProcessInstanceRepresentation);
     }
 
     /**
@@ -610,7 +610,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/query', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation);
     }
 
     /**
@@ -644,14 +644,14 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/audit-log', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceAuditInfoRepresentation)
+            contentTypes, accepts, ProcessInstanceAuditInfoRepresentation);
     }
 
     /**
      * Retrieve the process audit in the PDF format
      * @param {String} processInstanceId processId
      */
-    getProcessAuditPdf(processInstanceId: string) :Promise<Blob> {
+    getProcessAuditPdf(processInstanceId: string): Promise<Blob> {
         let postBody = null;
 
         // verify the required parameter 'processId' is set
@@ -709,7 +709,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceRepresentation)
+            contentTypes, accepts, ProcessInstanceRepresentation);
     }
 
     /**
@@ -743,7 +743,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/suspend', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceRepresentation)
+            contentTypes, accepts, ProcessInstanceRepresentation);
     }
 
 }

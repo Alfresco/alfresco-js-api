@@ -53,7 +53,7 @@ export class IntegrationDriveApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/google-drive/confirm-auth-request', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List files and folders
@@ -92,7 +92,7 @@ export class IntegrationDriveApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/google-drive/files', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationGoogleDriveContent)
+            contentTypes, accepts, ResultListDataRepresentationGoogleDriveContent);
     }
 
 }

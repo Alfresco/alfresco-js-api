@@ -59,7 +59,7 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/runtime-app-deployments/{appDeploymentId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Export the app archive for a deployment
@@ -96,7 +96,7 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/export-app-deployment/{deploymentId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Query app deployments
@@ -143,7 +143,7 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/runtime-app-deployments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAppDeploymentRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationAppDeploymentRepresentation);
     }
     /**
         * Get an app deployment
@@ -180,7 +180,7 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/runtime-app-deployments/{appDeploymentId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDeploymentRepresentation)
+            contentTypes, accepts, AppDeploymentRepresentation);
     }
     /**
         * Get an app by deployment ID or DMN deployment ID
@@ -217,7 +217,7 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/runtime-app-deployment', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDeploymentRepresentation)
+            contentTypes, accepts, AppDeploymentRepresentation);
     }
 
 }

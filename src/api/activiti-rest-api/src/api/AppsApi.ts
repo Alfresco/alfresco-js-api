@@ -50,18 +50,18 @@ export class AppsApi {
     }
 
     importAppDefinition(file) {
-        return this.appDefinitionsApi.importAppDefinition(file)
+        return this.appDefinitionsApi.importAppDefinition(file);
     }
 
     importNewAppDefinition(modelId: number, file: Blob): Promise<any> {
-        return this.appDefinitionsApi.updateAppDefinition(modelId, file)
+        return this.appDefinitionsApi.updateAppDefinition(modelId, file);
     }
 
     publishAppDefinition(modelId: number, publishModel: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation> {
-        return this.appDefinitionsApi.publishAppDefinition(modelId, publishModel)
+        return this.appDefinitionsApi.publishAppDefinition(modelId, publishModel);
     }
 
     updateAppDefinition(modelId: number, updatedModel: AppDefinitionSaveRepresentation): Promise<any> {
-        return this.appDefinitionsApi.updateAppDefinition(modelId, updatedModel)
+        return this.appDefinitionsApi.updateAppDefinition(modelId, updatedModel);
     }
 }

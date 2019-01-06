@@ -19,7 +19,7 @@ describe('Activiti Report Api', function () {
             provider: 'BPM'
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(()=> {
+        this.alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
     });

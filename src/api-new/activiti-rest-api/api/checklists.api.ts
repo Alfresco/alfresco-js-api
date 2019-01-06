@@ -65,7 +65,7 @@ export class ChecklistsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/checklist', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TaskRepresentation)
+            contentTypes, accepts, TaskRepresentation);
     }
     /**
         * Get checklist for a task
@@ -102,7 +102,7 @@ export class ChecklistsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/checklist', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationTaskRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationTaskRepresentation);
     }
     /**
         * Change the order of items on a checklist
@@ -144,7 +144,7 @@ export class ChecklistsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/checklist', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

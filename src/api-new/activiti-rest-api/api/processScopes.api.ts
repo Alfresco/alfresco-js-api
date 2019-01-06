@@ -59,7 +59,7 @@ export class ProcessScopesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-scopes', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessScopeRepresentation)
+            contentTypes, accepts, ProcessScopeRepresentation);
     }
 
 }

@@ -54,7 +54,7 @@ export class IntegrationBoxApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/box/confirm-auth-request', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Add Box account
@@ -96,7 +96,7 @@ export class IntegrationBoxApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/box/{userId}/account', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete account information
@@ -133,7 +133,7 @@ export class IntegrationBoxApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/box/{userId}/account', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get status information
@@ -165,7 +165,7 @@ export class IntegrationBoxApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/box/status', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * List file and folders
@@ -202,7 +202,7 @@ export class IntegrationBoxApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/box/files', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationBoxContent)
+            contentTypes, accepts, ResultListDataRepresentationBoxContent);
     }
     /**
         * Get account information
@@ -239,7 +239,7 @@ export class IntegrationBoxApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/box/{userId}/account', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update account information
@@ -281,7 +281,7 @@ export class IntegrationBoxApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/box/{userId}/account', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

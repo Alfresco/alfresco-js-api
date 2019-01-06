@@ -38,7 +38,7 @@ export class CustomModelApi {
     apiClient: AlfrescoApiClient;
 
     constructor(alfrescoApi?: AlfrescoApi) {
-        if(alfrescoApi) {
+        if (alfrescoApi) {
             this.apiClient = alfrescoApi.contentPrivateClient;
         }
     }

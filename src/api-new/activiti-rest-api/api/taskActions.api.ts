@@ -62,7 +62,7 @@ export class TaskActionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/action/assign', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TaskRepresentation)
+            contentTypes, accepts, TaskRepresentation);
     }
 
     /**
@@ -101,7 +101,7 @@ export class TaskActionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/action/attach-form', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -135,7 +135,7 @@ export class TaskActionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/action/claim', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -169,7 +169,7 @@ export class TaskActionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/action/complete', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -208,7 +208,7 @@ export class TaskActionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/action/delegate', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -247,7 +247,7 @@ export class TaskActionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/groups/{groupId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -286,7 +286,7 @@ export class TaskActionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/action/involve', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -320,7 +320,7 @@ export class TaskActionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/action/remove-form', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -359,7 +359,7 @@ export class TaskActionsApi extends BaseApi {
             return this.apiClient.callApi(
                 '/api/enterprise/tasks/{taskId}/groups/{groupId}', 'DELETE',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts)
+                contentTypes, accepts);
         } else {
 
             let postBody = identifier;
@@ -367,7 +367,7 @@ export class TaskActionsApi extends BaseApi {
             return this.apiClient.callApi(
                 '/api/enterprise/tasks/{taskId}/action/remove-involved', 'PUT',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts)
+                contentTypes, accepts);
         }
     }
 
@@ -402,7 +402,7 @@ export class TaskActionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/action/resolve', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -436,7 +436,7 @@ export class TaskActionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/action/unclaim', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
 }

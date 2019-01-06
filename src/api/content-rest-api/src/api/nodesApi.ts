@@ -340,7 +340,7 @@ export class NodesApi {
         return new Promise((resolve, reject) => {
             this.getNode(nodeId, opts).then(function (data) {
                 resolve(data.entry);
-            }, function (error) {
+            },                              function (error) {
                 reject(error);
             });
         });

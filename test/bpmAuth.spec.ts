@@ -35,9 +35,9 @@ describe('Bpm Auth test', function () {
             this.processAuth.logout().then(() => {
                 expect(this.processAuth.authentications.basicAuth.username).to.be.equal(null);
                 done();
-            }, function () {
+            },                             function () {
             });
-        }, (error) => {
+        },                                            (error) => {
             console.log('error' + JSON.stringify(error));
         });
     });
@@ -56,7 +56,7 @@ describe('Bpm Auth test', function () {
             this.processAuth.login('admin', 'admin').then((data) => {
                 expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                 done();
-            }, function () {
+            },                                            function () {
             });
 
         });
@@ -74,7 +74,7 @@ describe('Bpm Auth test', function () {
                 expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                 expect(this.processAuth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
-            }, function () {
+            },                                            function () {
             });
 
         });
@@ -91,7 +91,7 @@ describe('Bpm Auth test', function () {
             this.processAuth.login('admin', 'admin').then(() => {
                 expect(this.processAuth.isLoggedIn()).to.be.equal(true);
                 done();
-            }, function () {
+            },                                            function () {
             });
         });
 
@@ -110,7 +110,7 @@ describe('Bpm Auth test', function () {
             this.processAuth.logout().then(() => {
                 expect(this.processAuth.isLoggedIn()).to.be.equal(false);
                 done();
-            }, function () {
+            },                             function () {
             });
 
         });
@@ -129,7 +129,7 @@ describe('Bpm Auth test', function () {
                 this.processAuth.changeHost('anyhost');
                 expect(this.processAuth.isLoggedIn()).to.be.equal(false);
                 done();
-            }, function () {
+            },                                            function () {
             });
 
         });
@@ -143,7 +143,7 @@ describe('Bpm Auth test', function () {
             });
 
             this.processAuth.login('wrong', 'name').then(function () {
-            }, function (error) {
+            },                                           function (error) {
                 expect(error.status).to.be.equal(401);
                 done();
             });
@@ -258,7 +258,7 @@ describe('Bpm Auth test', function () {
                     expect(this.processAuth.getTicket()).to.be.equal(null);
                     expect(data).to.be.equal('logout');
                     done();
-                }, function () {
+                },                             function () {
                 });
             });
 

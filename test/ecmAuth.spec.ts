@@ -8,7 +8,7 @@ import { AlfrescoApi } from '../src/alfrescoApi';
 
 describe('Ecm Auth test', function () {
 
-    let alfrescoJsApi:AlfrescoApi, authEcmMock;
+    let alfrescoJsApi: AlfrescoApi, authEcmMock;
 
     beforeEach(function () {
         this.hostEcm = 'http://127.0.0.1:8080';
@@ -37,7 +37,7 @@ describe('Ecm Auth test', function () {
         auth.logout().then(() => {
             expect(auth.authentications.basicAuth.username).to.be.equal(null);
             done();
-        }, (error) => {
+        },                 (error) => {
             console.log(JSON.stringify(error));
         });
     });
@@ -51,11 +51,11 @@ describe('Ecm Auth test', function () {
             this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            }, alfrescoJsApi);
+            },                                         alfrescoJsApi);
             this.contentAuth.login('admin', 'admin').then((data) => {
                 expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                 done();
-            }, () => {
+            },                                            () => {
             });
 
         });
@@ -67,11 +67,11 @@ describe('Ecm Auth test', function () {
             this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            }, alfrescoJsApi);
+            },                                         alfrescoJsApi);
             this.contentAuth.login('admin', 'admin').then((data) => {
                 expect(this.contentAuth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
-            }, () => {
+            },                                            () => {
             });
 
         });
@@ -83,11 +83,11 @@ describe('Ecm Auth test', function () {
             this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            }, alfrescoJsApi);
+            },                                         alfrescoJsApi);
             this.contentAuth.login('admin', 'admin').then(() => {
                 expect(this.contentAuth.isLoggedIn()).to.be.equal(true);
                 done();
-            }, function () {
+            },                                            function () {
             });
         });
 
@@ -98,13 +98,13 @@ describe('Ecm Auth test', function () {
             this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            }, alfrescoJsApi);
+            },                                         alfrescoJsApi);
             this.contentAuth.login('admin', 'admin').then(() => {
                 expect(this.contentAuth.isLoggedIn()).to.be.equal(true);
                 this.contentAuth.changeHost('anyhost');
                 expect(this.contentAuth.isLoggedIn()).to.be.equal(false);
                 done();
-            }, () => {
+            },                                            () => {
             });
 
         });
@@ -116,7 +116,7 @@ describe('Ecm Auth test', function () {
             this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            }, alfrescoJsApi);
+            },                                         alfrescoJsApi);
             this.contentAuth.login('admin', 'admin');
 
             authEcmMock.get204ResponseLogout();
@@ -124,7 +124,7 @@ describe('Ecm Auth test', function () {
             this.contentAuth.logout().then(() => {
                 expect(this.contentAuth.isLoggedIn()).to.be.equal(false);
                 done();
-            }, () => {
+            },                             () => {
             });
         });
 
@@ -134,10 +134,10 @@ describe('Ecm Auth test', function () {
             this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            }, alfrescoJsApi);
+            },                                         alfrescoJsApi);
             this.contentAuth.login('wrong', 'name').then(function () {
 
-            }, (error) => {
+            },                                           (error) => {
                 expect(error.status).to.be.equal(403);
                 done();
             });
@@ -149,10 +149,10 @@ describe('Ecm Auth test', function () {
             this.contentAuth = ContentAuth.getInstance({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            }, alfrescoJsApi);
+            },                                         alfrescoJsApi);
             this.contentAuth.login(null, null).then(function () {
 
-            }, (error) => {
+            },                                      (error) => {
                 expect(error.status).to.be.equal(400);
                 done();
             });
@@ -165,7 +165,7 @@ describe('Ecm Auth test', function () {
                 this.contentAuth = ContentAuth.getInstance({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                }, alfrescoJsApi);
+                },                                         alfrescoJsApi);
 
                 let loginPromise = this.contentAuth.login('wrong', 'name');
 
@@ -183,7 +183,7 @@ describe('Ecm Auth test', function () {
                 this.contentAuth = ContentAuth.getInstance({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                }, alfrescoJsApi);
+                },                                         alfrescoJsApi);
 
                 let loginPromise = this.contentAuth.login('wrong', 'name');
 
@@ -201,7 +201,7 @@ describe('Ecm Auth test', function () {
                 this.contentAuth = ContentAuth.getInstance({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                }, alfrescoJsApi);
+                },                                         alfrescoJsApi);
 
                 let loginPromise = this.contentAuth.login('admin', 'admin');
 
@@ -219,7 +219,7 @@ describe('Ecm Auth test', function () {
                 this.contentAuth = ContentAuth.getInstance({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                }, alfrescoJsApi);
+                },                                         alfrescoJsApi);
 
                 this.contentAuth.login('admin', 'admin');
 
@@ -239,7 +239,7 @@ describe('Ecm Auth test', function () {
                 this.contentAuth = ContentAuth.getInstance({
                     ticketEcm: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
                     hostEcm: this.hostEcm
-                }, alfrescoJsApi);
+                },                                         alfrescoJsApi);
 
                 expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.contentAuth.authentications.basicAuth.password);
             });
@@ -252,7 +252,7 @@ describe('Ecm Auth test', function () {
                 this.contentAuth = ContentAuth.getInstance({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                }, alfrescoJsApi);
+                },                                         alfrescoJsApi);
 
                 this.contentAuth.login('admin', 'admin').then(() => {
                     done();
@@ -266,14 +266,14 @@ describe('Ecm Auth test', function () {
                     expect(this.contentAuth.config.ticket).to.be.equal(undefined);
                     expect(data).to.be.equal('logout');
                     done();
-                }, function () {
+                },                             function () {
                 });
             });
 
             it('Logout should be rejected if the Ticket is already expired', function (done) {
                 authEcmMock.get404ResponseLogout();
                 this.contentAuth.logout().then(() => {
-                }, (error) => {
+                },                             (error) => {
                     expect(error.error.toString()).to.be.equal('Error: Not Found');
                     done();
                 });

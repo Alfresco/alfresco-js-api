@@ -21,7 +21,7 @@ import { IDMSyncApi as NewIDMSyncApi } from '../../../../api-new/activiti-rest-a
 /**
  * @deprecated 3.0.0
  */
-export class IDMSyncApi extends NewIDMSyncApi{
+export class IDMSyncApi extends NewIDMSyncApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;

@@ -21,7 +21,7 @@ import { IntegrationDriveApi as NewIntegrationDriveApi } from '../../../../api-n
 /**
  * @deprecated 3.0.0
  */
-export class IntegrationDriveApi extends NewIntegrationDriveApi{
+export class IntegrationDriveApi extends NewIntegrationDriveApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;

@@ -58,7 +58,7 @@ export class EndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/editor/endpoints/{endpointConfigurationId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointConfigurationRepresentation)
+            contentTypes, accepts, EndpointConfigurationRepresentation);
     }
     /**
         * List endpoint configurations
@@ -90,7 +90,7 @@ export class EndpointsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/editor/endpoints', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointConfigurationRepresentation)
+            contentTypes, accepts, EndpointConfigurationRepresentation);
     }
 
 }

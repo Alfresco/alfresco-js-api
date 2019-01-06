@@ -36,7 +36,7 @@ describe('Comments', function () {
         ]).then(function (data) {
             expect(data.list.entries[0].entry.content).to.be.equal('This is a comment');
             done();
-        }, function () {
+        },      function () {
         });
     });
 
@@ -46,7 +46,7 @@ describe('Comments', function () {
         this.alfrescoJsApi.core.commentsApi.getComments('74cd8a96-8a21-47e5-9b3b-a1b3e296787d').then(function (data) {
             expect(data.list.entries[0].entry.content).to.be.equal('This is another comment');
             done();
-        }, function () {
+        },                                                                                           function () {
         });
     });
 

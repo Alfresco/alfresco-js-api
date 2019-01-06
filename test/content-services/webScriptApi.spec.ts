@@ -1,6 +1,7 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
+
 let expect = require('chai').expect;
 let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 let WebScriptMock = require('../../test/mockObjects/mockAlfrescoApi').WebScript;
@@ -23,7 +24,7 @@ describe('WebScript', function () {
 
         this.alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
-        }, ()=> {
+        },                                              () => {
 
         });
     });
@@ -31,10 +32,10 @@ describe('WebScript', function () {
     it('execute webScript return 400 error if is not present on the server should be handled by reject promise', function (done) {
         this.webScriptMock.get404Response();
 
-        this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath).then(()=> {
-            console.log('success');
-        },
-            (error) => {
+        this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath).then(() => {
+                console.log('success');
+            },
+                                                                                                                                     (error) => {
                 expect(error.status).to.be.equal(404);
                 done();
             }
@@ -48,7 +49,7 @@ describe('WebScript', function () {
             () => {
                 done();
             },
-            (error)=> {
+            (error) => {
                 console.log('error' + JSON.stringify(error));
             }
         );
@@ -57,16 +58,15 @@ describe('WebScript', function () {
     it('execute webScript that return HTML should not return it as Object', function (done) {
         this.webScriptMock.get200ResponseHTMLFormat();
 
-        this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'sample/folder/Company%20Home').then(
-            (data) => {
-                try {
-                    JSON.parse(data);
-                } catch (e) {
-                    done();
-                }
-            }, ()=> {
-                console.log('error');
-            });
+        this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'sample/folder/Company%20Home').then((data) => {
+            try {
+                JSON.parse(data);
+            } catch (e) {
+                done();
+            }
+        },                                                                                                () => {
+            console.log('error');
+        });
     });
 
     describe('Events', function () {
@@ -75,10 +75,10 @@ describe('WebScript', function () {
 
             let webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
 
-            webscriptPormise.catch(()=> {
+            webscriptPormise.catch(() => {
             });
 
-            webscriptPormise.on('success', ()=> {
+            webscriptPormise.on('success', () => {
                 done();
             });
         });
@@ -88,10 +88,10 @@ describe('WebScript', function () {
 
             let webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
 
-            webscriptPormise.catch(()=> {
+            webscriptPormise.catch(() => {
             });
 
-            webscriptPormise.on('error', ()=> {
+            webscriptPormise.on('error', () => {
                 done();
             });
         });
@@ -101,10 +101,10 @@ describe('WebScript', function () {
 
             let webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
 
-            webscriptPormise.catch(()=> {
+            webscriptPormise.catch(() => {
             });
 
-            webscriptPormise.on('unauthorized', ()=> {
+            webscriptPormise.on('unauthorized', () => {
                 done();
             });
         });

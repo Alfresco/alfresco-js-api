@@ -60,7 +60,7 @@ export class UserProfileApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/profile-password', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Retrieve user profile picture
@@ -92,7 +92,7 @@ export class UserProfileApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/profile-picture', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -133,7 +133,7 @@ export class UserProfileApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/profile', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserRepresentation)
+            contentTypes, accepts, UserRepresentation);
     }
     /**
         * Update user profile
@@ -170,7 +170,7 @@ export class UserProfileApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/profile', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserRepresentation)
+            contentTypes, accepts, UserRepresentation);
     }
     /**
         * Change user profile picture
@@ -208,7 +208,7 @@ export class UserProfileApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/profile-picture', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ImageUploadRepresentation)
+            contentTypes, accepts, ImageUploadRepresentation);
     }
 
 }

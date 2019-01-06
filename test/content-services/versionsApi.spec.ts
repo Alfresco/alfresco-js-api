@@ -34,7 +34,7 @@ describe('Versions', function () {
         this.versionsApi.revertVersion(nodeId, versionId, { majorVersion: true, comment: ''}).then(function (data) {
             expect(data.entry.id).to.be.equal('3.0');
             done();
-        }, function () {
+        },                                                                                         function () {
         });
     });
 });

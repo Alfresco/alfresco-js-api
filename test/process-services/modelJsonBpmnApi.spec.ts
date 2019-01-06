@@ -26,20 +26,20 @@ describe('Activiti Model JsonBpmn Api', function () {
 
     it('get Model JsonBpmn', function (done) {
         this.modelJsonBpmMock.get200EditorDisplayJsonClient();
-        this.alfrescoJsApi.activiti.modelJsonBpmnApi.getEditorDisplayJsonClient(1).then((data)=> {
+        this.alfrescoJsApi.activiti.modelJsonBpmnApi.getEditorDisplayJsonClient(1).then((data) => {
             expect(data).not.equal(null);
             done();
-        }, (error)=> {
+        },                                                                              (error) => {
             console.log('error' + error);
         });
     });
 
     it('get Model JsonBpmn history', function (done) {
         this.modelJsonBpmMock.get200HistoricEditorDisplayJsonClient();
-        this.alfrescoJsApi.activiti.modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(1,1).then((data)=> {
+        this.alfrescoJsApi.activiti.modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(1, 1).then((data) => {
             expect(data).not.equal(null);
             done();
-        }, (error)=> {
+        },                                                                                         (error) => {
             console.log('error' + error);
         });
     });

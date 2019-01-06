@@ -104,19 +104,19 @@ export class AlfrescoApi {
 
     errorListeners() {
 
-        this.contentClient.off('error', ()=>{});
+        this.contentClient.off('error', () => {});
 
-        this.authClient.off('error', ()=>{});
+        this.authClient.off('error', () => {});
 
-        this.contentPrivateClient.off('error', ()=>{});
+        this.contentPrivateClient.off('error', () => {});
 
-        this.processClient.off('error', ()=>{});
+        this.processClient.off('error', () => {});
 
-        this.searchClient.off('error', ()=>{});
+        this.searchClient.off('error', () => {});
 
-        this.discoveryClient.off('error', ()=>{});
+        this.discoveryClient.off('error', () => {});
 
-        this.gsClient.off('error', ()=>{});
+        this.gsClient.off('error', () => {});
 
         this.contentClient.on('error', (error: any) => {
             this.errorHandler(error);
@@ -198,7 +198,7 @@ export class AlfrescoApi {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            }, () => {
+            },                     () => {
                 console.log('login OAUTH error');
             });
 
@@ -211,7 +211,7 @@ export class AlfrescoApi {
 
                 processPromise.then((ticketBpm) => {
                     this.config.ticketBpm = ticketBpm;
-                }, () => {
+                },                  () => {
                     console.log('login BPM error');
                 });
 
@@ -223,7 +223,7 @@ export class AlfrescoApi {
                     this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
 
                     this.config.ticketEcm = ticketEcm;
-                }, () => {
+                },                  () => {
                     console.log('login ECM error');
                 });
 
@@ -316,7 +316,7 @@ export class AlfrescoApi {
                 let contentPromise = this.contentAuth.logout();
                 contentPromise.then(() => {
                     this.config.ticket = undefined;
-                }, () => {
+                },                  () => {
                 });
 
                 return contentPromise;

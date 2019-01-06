@@ -1,7 +1,7 @@
 /*global describe, it */
 
 import { AlfrescoApiClient, DateAlfresco } from '@alfresco/js-api';
-let chai = require('chai');
+import chai from 'chai';
 
 let expect = require('chai').expect;
 chai.use(require('chai-datetime'));
@@ -27,7 +27,7 @@ describe('Alfresco Core API Client', function () {
             let httpMethod = 'GET';
 
             let response = client.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-                contentTypes, accepts, responseType, null, null);
+                                               contentTypes, accepts, responseType, null, null);
 
             expect(response.url).equal('/fake-api/enterprise/process-instances/');
             expect(response.header.Accept).equal('application/json');
@@ -37,8 +37,6 @@ describe('Alfresco Core API Client', function () {
     });
 
     describe('date parsing', function () {
-
-        let client = new AlfrescoApiClient();
 
         it('should convert dates falling in GMT without a timezone', function () {
             expect(DateAlfresco.parseDate('2015-11-17T03:33:17')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 3, 33, 17)));

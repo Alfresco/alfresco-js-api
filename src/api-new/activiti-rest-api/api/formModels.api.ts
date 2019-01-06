@@ -59,7 +59,7 @@ export class FormModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/forms/{formId}/editorJson', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormDefinitionRepresentation)
+            contentTypes, accepts, FormDefinitionRepresentation);
     }
 
     /**
@@ -98,7 +98,7 @@ export class FormModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/editor/form-models/{formId}/history/{formHistoryId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormRepresentation)
+            contentTypes, accepts, FormRepresentation);
     }
 
     /**
@@ -132,7 +132,7 @@ export class FormModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/editor/form-models/{formId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormRepresentation)
+            contentTypes, accepts, FormRepresentation);
     }
 
     /**
@@ -159,7 +159,7 @@ export class FormModelsApi extends BaseApi {
             return this.apiClient.callApi(
                 '/api/enterprise/editor/form-models/values', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, FormRepresentation)
+                contentTypes, accepts, FormRepresentation);
         } else if (input instanceof Object) {
             input = input || {};
             let queryParams = {
@@ -175,14 +175,14 @@ export class FormModelsApi extends BaseApi {
             return this.apiClient.callApi(
                 '/api/enterprise/forms', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, ResultListDataRepresentationRuntimeFormRepresentation)
+                contentTypes, accepts, ResultListDataRepresentationRuntimeFormRepresentation);
         } else {
             let queryParams = {};
 
             return this.apiClient.callApi(
                 '/api/enterprise/editor/form-models', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, ResultListDataRepresentationFormRepresentation)
+                contentTypes, accepts, ResultListDataRepresentationFormRepresentation);
         }
     }
 
@@ -222,7 +222,7 @@ export class FormModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/editor/form-models/{formId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormRepresentation)
+            contentTypes, accepts, FormRepresentation);
     }
 
     /**
@@ -261,7 +261,7 @@ export class FormModelsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/editor/form-models/{formId}/validate', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ValidationErrorRepresentation)
+            contentTypes, accepts, ValidationErrorRepresentation);
     }
 
 }

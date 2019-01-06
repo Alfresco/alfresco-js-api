@@ -66,7 +66,7 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/users/{userId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Stream user profile picture
@@ -115,7 +115,7 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/users/{userId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserRepresentation)
+            contentTypes, accepts, UserRepresentation);
     }
     /**
         * Query users
@@ -164,7 +164,7 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationLightUserRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationLightUserRepresentation);
     }
     /**
         * Request a password reset
@@ -201,7 +201,7 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/idm/passwords', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Update a user
@@ -243,7 +243,7 @@ export class UsersApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/users/{userId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserRepresentation)
+            contentTypes, accepts, UserRepresentation);
     }
 
 }

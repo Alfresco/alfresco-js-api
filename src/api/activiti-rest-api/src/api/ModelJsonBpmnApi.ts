@@ -21,7 +21,7 @@ import { ModelJsonBpmnApi as NewModelJsonBpmnApi } from '../../../../api-new/act
 /**
  * @deprecated 3.0.0
  */
-export class ModelJsonBpmnApi extends NewModelJsonBpmnApi{
+export class ModelJsonBpmnApi extends NewModelJsonBpmnApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;

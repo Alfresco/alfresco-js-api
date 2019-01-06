@@ -34,7 +34,7 @@ describe('PeopleApi', function () {
 
         this.alfrescoJsApi.core.peopleApi.addPerson(personBodyCreate).then(function () {
             done();
-        }, function (error) {
+        },                                                                 function (error) {
             console.error(error);
         });
 
@@ -47,7 +47,7 @@ describe('PeopleApi', function () {
             this.peopleMock.play();
 
             done();
-        }, (error) => {
+        },                                                  (error) => {
             console.error(error);
         });
 

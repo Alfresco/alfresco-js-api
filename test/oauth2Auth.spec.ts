@@ -35,7 +35,7 @@ describe('Oauth2  test', function () {
             this.oauth2Auth.login('admin', 'admin').then((data) => {
                 expect(data.access_token).to.be.equal('test-token');
                 done();
-            }, function () {
+            },                                           function () {
             });
 
         });
@@ -60,7 +60,7 @@ describe('Oauth2  test', function () {
             this.oauth2Auth.login('admin', 'admin').then((data) => {
                 expect(this.oauth2Auth.isLoggedIn()).to.be.equal(true);
                 done();
-            }, function () {
+            },                                           function () {
             });
         });
 
@@ -84,7 +84,7 @@ describe('Oauth2  test', function () {
             this.oauth2Auth.login('admin', 'admin').then(() => {
                 expect(this.oauth2Auth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
-            }, () => {
+            },                                           () => {
             });
 
         });

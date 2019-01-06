@@ -1,6 +1,7 @@
 /*global describe, it, beforeEach, assert */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
+
 let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 let FindNodesMock = require('../../test/mockObjects/mockAlfrescoApi').FindNodes;
 let expect = require('chai').expect;
@@ -18,7 +19,7 @@ describe('Queries', function () {
             hostEcm: this.hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(function() {
+        this.alfrescoJsApi.login('admin', 'admin').then(function () {
             done();
         });
     });
@@ -27,10 +28,10 @@ describe('Queries', function () {
 
         let searchTerm = 'test';
 
-        it('should throw exception if no search term is provided', function() {
-            let badCall = function () {
+        it('should throw exception if no search term is provided', function () {
+            let badCall = () => {
                 this.alfrescoJsApi.core.queriesApi.findNodes();
-            }.bind(this);
+            };
             expect(badCall).to.throw('Required param \'term\' in findNodes');
         });
 
@@ -38,7 +39,7 @@ describe('Queries', function () {
             this.nodesMock.get401Response();
 
             this.alfrescoJsApi.core.queriesApi.findNodes(searchTerm).then(function () {
-            }, function () {
+            },                                                            function () {
                 done();
             });
         });
@@ -51,7 +52,7 @@ describe('Queries', function () {
                 expect(data.list.entries[0].entry.name).to.be.equal('coins1.JPG');
                 expect(data.list.entries[1].entry.name).to.be.equal('coins2.JPG');
                 done();
-            }, function () {
+            },                                                            function () {
             });
         });
 

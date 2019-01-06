@@ -65,7 +65,7 @@ export class ActivitiGroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationLightGroupRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationLightGroupRepresentation);
     }
     /**
         * List members of a group
@@ -102,7 +102,7 @@ export class ActivitiGroupsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/groups/{groupId}/users', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationLightUserRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationLightUserRepresentation);
     }
 
 }

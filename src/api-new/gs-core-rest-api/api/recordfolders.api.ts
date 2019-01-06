@@ -174,7 +174,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}/records', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, );
+            contentTypes, accepts );
     }
     /**
         * Delete a record folder

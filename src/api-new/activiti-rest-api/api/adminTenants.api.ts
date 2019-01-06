@@ -62,7 +62,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, LightTenantRepresentation)
+            contentTypes, accepts, LightTenantRepresentation);
     }
     /**
         * Delete a tenant
@@ -99,7 +99,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants/{tenantId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get tenant events
@@ -136,7 +136,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants/{tenantId}/events', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TenantEvent)
+            contentTypes, accepts, TenantEvent);
     }
     /**
         * Get a tenant's logo
@@ -173,7 +173,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants/{tenantId}/logo', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a tenant
@@ -210,7 +210,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants/{tenantId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TenantRepresentation)
+            contentTypes, accepts, TenantRepresentation);
     }
     /**
         * List tenants
@@ -242,7 +242,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, LightTenantRepresentation)
+            contentTypes, accepts, LightTenantRepresentation);
     }
     /**
         * Update a tenant
@@ -284,7 +284,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants/{tenantId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TenantRepresentation)
+            contentTypes, accepts, TenantRepresentation);
     }
     /**
         * Update a tenant's logo
@@ -327,7 +327,7 @@ export class AdminTenantsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants/{tenantId}/logo', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ImageUploadRepresentation)
+            contentTypes, accepts, ImageUploadRepresentation);
     }
 
 }

@@ -31,7 +31,7 @@ describe('Tags', function () {
             expect(data.list.entries[0].entry.tag).to.be.equal('tag-test-1');
             expect(data.list.entries[1].entry.tag).to.be.equal('tag-test-2');
             done();
-        }, function () {
+        },                                             function () {
         });
     });
 
@@ -39,7 +39,7 @@ describe('Tags', function () {
         this.tagMock.get401Response();
 
         this.alfrescoJsApi.core.tagsApi.getTags().then(function () {
-        }, function () {
+        },                                             function () {
             done();
         });
     });

@@ -57,7 +57,7 @@ export class AppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/{appDefinitionId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -91,7 +91,7 @@ export class AppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/{modelId}/export', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -125,7 +125,7 @@ export class AppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/{modelId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDefinitionRepresentation)
+            contentTypes, accepts, AppDefinitionRepresentation);
     }
 
     /**
@@ -160,7 +160,7 @@ export class AppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/publish-app', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDefinitionUpdateResultRepresentation)
+            contentTypes, accepts, AppDefinitionUpdateResultRepresentation);
     }
 
     /**
@@ -198,7 +198,7 @@ export class AppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/import', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDefinitionRepresentation)
+            contentTypes, accepts, AppDefinitionRepresentation);
     }
 
     /**
@@ -237,7 +237,7 @@ export class AppDefinitionsApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/{modelId}/publish', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDefinitionUpdateResultRepresentation)
+            contentTypes, accepts, AppDefinitionUpdateResultRepresentation);
     }
 
     /**
@@ -280,14 +280,14 @@ export class AppDefinitionsApi extends BaseApi {
             return this.apiClient.callApi(
                 '/api/enterprise/app-definitions/{modelId}/import', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts)
+                contentTypes, accepts);
         } else {
             let formParams = {};
 
             return this.apiClient.callApi(
                 '/api/enterprise/app-definitions/{modelId}', 'PUT',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts)
+                contentTypes, accepts);
         }
 
     }

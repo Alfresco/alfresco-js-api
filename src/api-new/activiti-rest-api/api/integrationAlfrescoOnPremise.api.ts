@@ -60,7 +60,7 @@ export class IntegrationAlfrescoOnPremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/alfresco/{repositoryId}/sites', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoSiteRepresenation)
+            contentTypes, accepts, ResultListDataRepresentationAlfrescoSiteRepresenation);
     }
     /**
         * List files and folders inside a specific folder identified by folder path
@@ -107,7 +107,7 @@ export class IntegrationAlfrescoOnPremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/rest/integration/alfresco/{repositoryId}/sites/{siteId}/folderpath/{folderPath}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation);
     }
     /**
         * List files and folders inside a specific folder
@@ -149,7 +149,7 @@ export class IntegrationAlfrescoOnPremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation);
     }
     /**
         * List files and folders inside a specific site
@@ -191,7 +191,7 @@ export class IntegrationAlfrescoOnPremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation);
     }
     /**
         * List Alfresco repositories
@@ -228,7 +228,7 @@ export class IntegrationAlfrescoOnPremiseApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/profile/accounts/alfresco', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoEndpointRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationAlfrescoEndpointRepresentation);
     }
 
 }

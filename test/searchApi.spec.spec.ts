@@ -34,7 +34,7 @@ describe('Search', function () {
         }).then(function (data) {
             expect(data.list.entries[0].entry.name).to.be.equal('user');
             done();
-        }, function (error) {
+        },      function (error) {
             console.error(error);
         });
     });

@@ -23,7 +23,7 @@ export class BaseApi {
     apiClient: AlfrescoApiClient;
 
     constructor(alfrescoApi?: AlfrescoApi) {
-        if(alfrescoApi) {
+        if (alfrescoApi) {
             this.apiClient = alfrescoApi.processClient;
         }
     }

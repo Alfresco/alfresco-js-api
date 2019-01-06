@@ -63,7 +63,7 @@ export class DateAlfresco extends Date {
     static parseDateTimeZone(dateToConvert: string): number {
         let match = /([\+\-])(\d{2}):?(\d{2})?/.exec(dateToConvert);
         if (match !== null) {
-            return (parseInt(match[1] + '1') * -1 * (parseInt(match[2]) * 60) + parseInt(match[3] || '0'));
+            return (parseInt(match[1] + '1', 10) * -1 * (parseInt(match[2], 10) * 60) + parseInt(match[3] || '0', 10));
         } else {
             return 0;
         }

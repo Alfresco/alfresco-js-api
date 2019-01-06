@@ -30,7 +30,7 @@ import { SitesApi } from './api/sitesApi';
 import { TagsApi } from './api/tagsApi';
 import { WebscriptApi } from './api/webscriptApi';
 import { DownloadsApi } from './api/downloadsApi';
-import { VersionsApi } from './api/versionsApi'
+import { VersionsApi } from './api/versionsApi';
 import { ClassesApi } from './api/classesApi';
 import { GroupsApi } from './api/groupsApi';
 import { CustomModelApi } from './api/customModelApi';
@@ -50,7 +50,7 @@ import { SitesApi as _SitesApi } from './api/sitesApi';
 import { TagsApi as _TagsApi } from './api/tagsApi';
 import { WebscriptApi as _WebscriptApi } from './api/webscriptApi';
 import { DownloadsApi as _DownloadsApi } from './api/downloadsApi';
-import { VersionsApi as _VersionsApi } from './api/versionsApi'
+import { VersionsApi as _VersionsApi } from './api/versionsApi';
 import { ClassesApi as _ClassesApi } from './api/classesApi';
 import { GroupsApi as _GroupsApi } from './api/groupsApi';
 import { CustomModelApi as _CustomModelApi } from './api/customModelApi';

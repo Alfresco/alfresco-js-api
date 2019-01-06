@@ -20,13 +20,15 @@
         ]
     },
     "exclude": [
+        ".history",
         "*/node_modules",
         "config",
         "performance",
         "coverage",
         "node_modules",
         "package",
-        "dist"
+        "dist",
+        "test"
     ],
     "angularCompilerOptions": {
         "strictMetadataEmit": false,

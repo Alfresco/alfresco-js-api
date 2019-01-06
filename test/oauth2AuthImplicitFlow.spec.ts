@@ -4,8 +4,8 @@ let expect = require('chai').expect;
 let Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
 import { Oauth2Auth } from '../src/authentication/oauth2Auth';
 
-declare let window:any;
-const globalAny:any = global;
+declare let window: any;
+const globalAny: any = global;
 
 describe('Oauth2 Implicit flow test', function () {
 

@@ -64,7 +64,7 @@ export class TaskVariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/variables', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RestVariable)
+            contentTypes, accepts, RestVariable);
     }
     /**
         * Create or update variables
@@ -101,7 +101,7 @@ export class TaskVariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/variables', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Delete a variable
@@ -146,7 +146,7 @@ export class TaskVariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/variables/{variableName}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
     /**
         * Get a variable
@@ -191,7 +191,7 @@ export class TaskVariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/variables/{variableName}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RestVariable)
+            contentTypes, accepts, RestVariable);
     }
     /**
         * List variables
@@ -231,7 +231,7 @@ export class TaskVariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/variables', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RestVariable)
+            contentTypes, accepts, RestVariable);
     }
     /**
         * Update a variable
@@ -278,7 +278,7 @@ export class TaskVariablesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/variables/{variableName}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RestVariable)
+            contentTypes, accepts, RestVariable);
     }
 
 }

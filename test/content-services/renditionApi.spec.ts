@@ -29,7 +29,7 @@ describe('Rendition', function () {
         this.alfrescoJsApi.core.renditionsApi.getRendition('97a29e9c-1e4f-4d9d-bb02-1ec920dda045', 'pdf').then(function (data) {
             expect(data.entry.id).to.be.equal('pdf');
             done();
-        }, function () {
+        },                                                                                                     function () {
         });
     });
 
@@ -38,7 +38,7 @@ describe('Rendition', function () {
 
         this.alfrescoJsApi.core.renditionsApi.createRendition('97a29e9c-1e4f-4d9d-bb02-1ec920dda045', {id: 'pdf'}).then(function () {
             done();
-        }, function () {
+        },                                                                                                              function () {
         });
     });
 
@@ -49,7 +49,7 @@ describe('Rendition', function () {
             expect(data.list.pagination.count).to.be.equal(6);
             expect(data.list.entries[0].entry.id).to.be.equal('avatar');
             done();
-        }, function () {
+        },                                                                                               function () {
         });
     });
 });

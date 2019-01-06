@@ -1,7 +1,6 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '@alfresco/js-api';
-import { ProcessFilterRequestRepresentation } from '../../.history/index.d_20180627184613';
 import { ProcessInstanceQueryRepresentation } from '../../src/api-new/activiti-rest-api/model/processInstanceQueryRepresentation';
 let expect = require('chai').expect;
 let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
@@ -35,7 +34,7 @@ describe('Activiti Process Api', function () {
         requestNode.sort = 'created-desc';
         requestNode.state = 'completed';
 
-        this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then((data)=> {
+        this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then((data) => {
             expect(data.data[0].name).equal('Process Test Api - July 26th 2016');
             expect(data.data[1].name).equal('Process Test Api - July 26th 2016');
             expect(data.size).equal(2);
@@ -48,7 +47,7 @@ describe('Activiti Process Api', function () {
 
         let requestNode = new ProcessInstanceQueryRepresentation();
 
-        this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then((data)=> {
+        this.alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then((data) => {
             expect(data.data[0].name).equal('Process Test Api - July 26th 2016');
             expect(data.data[1].name).equal('Process Test Api - July 26th 2016');
             done();
@@ -59,7 +58,7 @@ describe('Activiti Process Api', function () {
         this.processMock.get200getProcessDefinitionStartForm();
         let processDefinitionId = 'testProcess:1:7504';
 
-        this.alfrescoJsApi.activiti.processApi.getProcessDefinitionStartForm(processDefinitionId).then((data)=> {
+        this.alfrescoJsApi.activiti.processApi.getProcessDefinitionStartForm(processDefinitionId).then((data) => {
             expect(data.processDefinitionId).equal('testProcess:1:7504');
             done();
         });

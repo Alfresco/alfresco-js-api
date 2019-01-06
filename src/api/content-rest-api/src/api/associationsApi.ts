@@ -38,7 +38,7 @@ export class AssociationsApi {
      * @param {String} sourceId The identifier of a node.
      * @param {module:model/AssocTargetBody} assocTargetBody The target node id and assoc type.
      */
-    addAssoc(sourceId: string, assocTargetBody?:AssociationBody): Promise<AssociationEntry> {
+    addAssoc(sourceId: string, assocTargetBody?: AssociationBody): Promise<AssociationEntry> {
         return this.nodesApi.createAssociation(sourceId, assocTargetBody);
     }
 

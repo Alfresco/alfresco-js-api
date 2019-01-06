@@ -1,4 +1,22 @@
 /*!
+* @license
+* Copyright 2018 Alfresco Software, Ltd.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
+
+/*!
 
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -333,7 +351,7 @@ export class AlfrescoApiClient {
             url = this.buildUrl(path, pathParams);
         }
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, returnType, contextRoot, responseType, url);
+                                contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -361,7 +379,7 @@ export class AlfrescoApiClient {
         let url = this.buildUrlCustomBasePath(path, '', pathParams);
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, returnType, contextRoot, responseType, url);
+                                contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -390,7 +408,7 @@ export class AlfrescoApiClient {
         Emitter(eventEmitter); // jshint ignore:line
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, responseType, eventEmitter, returnType);
+                                        contentTypes, accepts, responseType, eventEmitter, returnType);
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
@@ -515,7 +533,7 @@ export class AlfrescoApiClient {
      * with parameter values
      */
     buildUrlCustomBasePath(basePath: string, path: string, pathParams: any): string {
-        if (path && path != '' && !path.match(/^\//)) {
+        if (path && path !== '' && !path.match(/^\//)) {
             path = '/' + path;
         }
         let url = basePath + path;

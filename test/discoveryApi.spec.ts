@@ -29,7 +29,7 @@ describe('Discovery', function () {
         this.alfrescoJsApi.discovery.discoveryApi.getRepositoryInformation().then(function (data) {
             expect(data.entry.repository.edition).to.be.equal('Enterprise');
             done();
-        }, function (error) {
+        },                                                                        function (error) {
             console.error(error);
         });
 

@@ -64,7 +64,7 @@ export class ContentApi extends BaseApi {
             return this.apiClient.callApi(
                 '/api/enterprise/process-instances/{processInstanceId}/content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, RelatedContentRepresentation)
+                contentTypes, accepts, RelatedContentRepresentation);
         } else {
             let postBody = null;
             formParams = {
@@ -74,7 +74,7 @@ export class ContentApi extends BaseApi {
             return this.apiClient.callApi(
                 '/api/enterprise/process-instances/{processInstanceId}/raw-content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, RelatedContentRepresentation)
+                contentTypes, accepts, RelatedContentRepresentation);
         }
     }
 
@@ -118,7 +118,7 @@ export class ContentApi extends BaseApi {
             return this.apiClient.callApi(
                 '/api/enterprise/tasks/{taskId}/content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, RelatedContentRepresentation)
+                contentTypes, accepts, RelatedContentRepresentation);
 
         } else {
             let postBody = null;
@@ -129,7 +129,7 @@ export class ContentApi extends BaseApi {
             return this.apiClient.callApi(
                 '/api/enterprise/tasks/{taskId}/raw-content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, RelatedContentRepresentation)
+                contentTypes, accepts, RelatedContentRepresentation);
         }
     }
 
@@ -164,7 +164,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/content/raw', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RelatedContentRepresentation)
+            contentTypes, accepts, RelatedContentRepresentation);
     }
 
     /**
@@ -196,7 +196,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/content', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RelatedContentRepresentation)
+            contentTypes, accepts, RelatedContentRepresentation);
     }
 
     /**
@@ -230,7 +230,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/content/{contentId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
 
     /**
@@ -264,7 +264,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/content/{contentId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RelatedContentRepresentation)
+            contentTypes, accepts, RelatedContentRepresentation);
     }
 
     /**
@@ -309,12 +309,12 @@ export class ContentApi extends BaseApi {
             return this.apiClient.callApi(
                 '/api/enterprise/content/{contentId}/rendition/{renditionType}', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts)
+                contentTypes, accepts);
         } else {
             return this.apiClient.callApi(
                 '/api/enterprise/content/{contentId}/raw', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts)
+                contentTypes, accepts);
         }
     }
 
@@ -353,7 +353,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationRelatedContentRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationRelatedContentRepresentation);
     }
 
     /**
@@ -391,7 +391,7 @@ export class ContentApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationRelatedContentRepresentation)
+            contentTypes, accepts, ResultListDataRepresentationRelatedContentRepresentation);
     }
 
 }

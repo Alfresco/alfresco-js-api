@@ -31,7 +31,7 @@ describe('Groups', function () {
             expect(data.list.entries[0].entry.id).to.be.equal('GROUP_alfalfa');
             expect(data.list.entries[1].entry.id).to.be.equal('GROUP_CallCenterAA');
             done();
-        }, function () {
+        },                                                 function () {
         });
     });
 
@@ -46,7 +46,7 @@ describe('Groups', function () {
         this.alfrescoJsApi.core.groupsApi.createGroup(groupBody).then(function (data) {
             expect(data.entry.id).to.be.equal('GROUP_TEST');
             done();
-        }, function () {
+        },                                                            function () {
         });
     });
 
@@ -54,7 +54,7 @@ describe('Groups', function () {
         this.groupsMock.getDeleteGroupSuccessfulResponse('group_test');
         this.alfrescoJsApi.core.groupsApi.deleteGroup('group_test').then(function (data) {
             done();
-        }, function () {
+        },                                                               function () {
         });
     });
 
@@ -65,7 +65,7 @@ describe('Groups', function () {
             expect(data.entry.id).to.be.equal('GROUP_TEST');
             expect(data.entry.displayName).to.be.equal('SAMPLE');
             done();
-        }, function () {
+        },                                                            function () {
         });
     });
 
@@ -80,7 +80,7 @@ describe('Groups', function () {
             expect(data.entry.id).to.be.equal('GROUP_TEST');
             expect(data.entry.displayName).to.be.equal('CHANGED');
             done();
-        }, function () {
+        },                                                                          function () {
         });
     });
 
@@ -92,7 +92,7 @@ describe('Groups', function () {
             expect(data.list.entries[0].entry.id).to.be.equal('GROUP_SUB_TEST');
             expect(data.list.entries[0].entry.displayName).to.be.equal('SAMPLE');
             done();
-        }, function () {
+        },                                                                   function () {
         });
     });
 
@@ -108,7 +108,7 @@ describe('Groups', function () {
             expect(data.entry.id).to.be.equal('GROUP_SUB_TEST');
             expect(data.entry.displayName).to.be.equal('SAMPLE');
             done();
-        }, function () {
+        },                                                                             function () {
         });
     });
 
@@ -117,7 +117,7 @@ describe('Groups', function () {
 
         this.alfrescoJsApi.core.groupsApi.deleteGroupMember('GROUP_TEST', 'GROUP_SUB_TEST').then(function (data) {
             done();
-        }, function () {
+        },                                                                                       function () {
         });
     });
 

@@ -29,7 +29,7 @@ describe('Activiti Task Api', function () {
 
         let requestNode = new TaskQueryRequestRepresentation();
 
-        this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode).then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode).then((data) => {
             expect(data.data[0].processDefinitionName).equal('Process Test Api');
             expect(data.data[1].processDefinitionName).equal('Process Test Api');
             expect(data.size).equal(2);
@@ -40,7 +40,7 @@ describe('Activiti Task Api', function () {
     it('get Task', function (done) {
         this.tasksMock.get200ResponseGetTask(10);
 
-        this.alfrescoJsApi.activiti.taskApi.getTask(10).then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.getTask(10).then((data) => {
             expect(data.name).equal('Upload Document');
             done();
         });
@@ -51,8 +51,8 @@ describe('Activiti Task Api', function () {
 
         let requestNode = new TaskFilterRequestRepresentation();
 
-        this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then((data)=> {
-        }, ()=> {
+        this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then((data) => {
+        },                                                                () => {
             done();
         });
     });
@@ -63,11 +63,11 @@ describe('Activiti Task Api', function () {
         let requestNode = new TaskFilterRequestRepresentation();
         requestNode.appDefinitionId = 1;
 
-        this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then((data) => {
             expect(data.size).equal(2);
             expect(data.data[0].id).equal('7506');
             done();
-        },(error)=>{
+        },                                                                (error) => {
             console.log(JSON.stringify(error));
         });
     });
@@ -76,8 +76,8 @@ describe('Activiti Task Api', function () {
         let taskId = 200;
         this.tasksMock.get404CompleteTask(taskId);
 
-        this.alfrescoJsApi.activiti.taskApi.completeTask(taskId).then((data)=> {
-        }, ()=> {
+        this.alfrescoJsApi.activiti.taskApi.completeTask(taskId).then((data) => {
+        },                                                            () => {
             done();
         });
 
@@ -88,7 +88,7 @@ describe('Activiti Task Api', function () {
 
         this.tasksMock.put200GenericResponse('/activiti-app/api/enterprise/tasks/5006/action/complete');
 
-        this.alfrescoJsApi.activiti.taskApi.completeTask(taskId).then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.completeTask(taskId).then((data) => {
             done();
         });
     });
@@ -99,7 +99,7 @@ describe('Activiti Task Api', function () {
         this.tasksMock.rec();
 
         let completeTaskFormRepresentation = new CompleteFormRepresentation();
-        this.alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRepresentation).then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRepresentation).then((data) => {
             done();
         });
         this.tasksMock.play();
@@ -115,7 +115,7 @@ describe('Activiti Task Api', function () {
 
         taskRepresentation.name = taskName;
 
-        this.alfrescoJsApi.activiti.taskApi.createNewTask(taskRepresentation).then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.createNewTask(taskRepresentation).then((data) => {
             done();
         });
     });
@@ -126,7 +126,7 @@ describe('Activiti Task Api', function () {
 
         let saveTaskFormRepresentation = new SaveFormRepresentation();
 
-        this.alfrescoJsApi.activiti.taskApi.saveTaskForm(taskId, saveTaskFormRepresentation).then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.saveTaskForm(taskId, saveTaskFormRepresentation).then((data) => {
             done();
         });
     });
@@ -136,7 +136,7 @@ describe('Activiti Task Api', function () {
 
         let taskId = 2518;
 
-        this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data) => {
             expect(data.name).equal('Metadata');
             expect(data.fields[0].name).equal('Label');
             expect(data.fields[0].fieldType).equal('ContainerRepresentation');
@@ -149,7 +149,7 @@ describe('Activiti Task Api', function () {
 
         let taskId = 2518;
 
-        this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data) => {
             expect(data.name).equal('Metadata');
             expect(data.fields[0].name).equal('Label');
             expect(data.fields[0].fieldType).equal('ContainerRepresentation');
@@ -164,9 +164,9 @@ describe('Activiti Task Api', function () {
         let field = 'label'; // String | field
         let column = 'user'; // String | column
 
-        this.alfrescoJsApi.activiti.taskApi.getRestFieldValuesColumn(taskId, field, column).then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.getRestFieldValuesColumn(taskId, field, column).then((data) => {
             done();
-        },(error)=> {
+        },                                                                                       (error) => {
             console.log(error);
         });
     });
@@ -177,9 +177,9 @@ describe('Activiti Task Api', function () {
         let taskId = '2'; // String | taskId
         let field = 'label'; // String | field
 
-        this.alfrescoJsApi.activiti.taskApi.getRestFieldValues(taskId, field).then((data)=> {
+        this.alfrescoJsApi.activiti.taskApi.getRestFieldValues(taskId, field).then((data) => {
             done();
-        },(error)=> {
+        },                                                                         (error) => {
             console.log(error);
         });
     });
