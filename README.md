@@ -529,7 +529,7 @@ Both client expose a method ***callApi**
 
 
 ```javascript
-    callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, authNames?: string[], contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
+    callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
 ```
 
 If you want call your custom rest point in one of those two service use the corrispondin client. 
@@ -540,8 +540,7 @@ If you want call your custom rest point in one of those two service use the corr
 
     this.alfrescoJsApi.bpmClient.callApi(
         '/api/enterprise/app-version', 'GET',
-        {}, {}, {}, {}, {},
-        [],  ['application/json'], ['application/json'], {'String': 'String'}
+        {}, {}, {}, {}, {}, ['application/json'], ['application/json'], {'String': 'String'}
     )
 
  ```
