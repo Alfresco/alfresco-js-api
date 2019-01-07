@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { AlfrescoApi, DiscoveryEntry, DiscoveryApi } from 'alfresco-js-api';
+import { AlfrescoApi, DiscoveryApi } from '@alfresco/js-api';
 
 export class SingleApiTest {
 

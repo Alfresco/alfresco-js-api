@@ -23,11 +23,6 @@ env:
 install:
     - npm install
 
-script:
-    - npm run test || exit 1
-    - npm run webpack
-
-
 jobs:
     include:
         - stage: Lint
@@ -38,6 +33,8 @@ jobs:
           script: ./scripts/test-build.sh || exit 1
         - stage: Test
           script: npm run test || exit 1
+        - stage: Perfomance
+          script: ./scripts/test-performance.sh || exit 1
 
 after_success:
   - npm run coverage --force

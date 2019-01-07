@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { AlfrescoApiActiviti } from './activiti-rest-api/src/api/AlfrescoApi';
+import { AlfrescoApiActiviti } from './activiti-rest-api/src/api/AlfrescoApiActiviti';
 import { ReportApi } from './activiti-rest-api/src/api/ReportApi';
 import { TaskActionsApi } from './activiti-rest-api/src/api/TaskActionsApi';
 import { TemporaryApi } from './activiti-rest-api/src/api/TemporaryApi';

@@ -16,7 +16,7 @@
 */
 
 import { AboutApi } from './api/AboutApi';
-import { AlfrescoApiActiviti  as AlfrescoApi } from './api/AlfrescoApi';
+import { AlfrescoApiActiviti } from './api/AlfrescoApiActiviti';
 import { AdminEndpointsApi } from './api/AdminEndpointsApi';
 import { AdminGroupsApi } from './api/AdminGroupsApi';
 import { AdminTenantsApi } from './api/AdminTenantsApi';
@@ -60,7 +60,7 @@ import { UserFiltersApi } from './api/UserFiltersApi';
 import { UsersWorkflowApi } from './api/UsersWorkflowApi';
 import { ReportApi } from './api/ReportApi';
 
-import { AlfrescoApiActiviti as _AlfrescoApi } from './api/AlfrescoApi';
+import { AlfrescoApiActiviti as _AlfrescoApiActiviti } from './api/AlfrescoApiActiviti';
 import { AboutApi as _AboutApi } from './api/AboutApi';
 import { AdminEndpointsApi as _AdminEndpointsApi } from './api/AdminEndpointsApi';
 import { AdminGroupsApi as _AdminGroupsApi } from './api/AdminGroupsApi';
@@ -106,7 +106,7 @@ import { UsersWorkflowApi as _UsersWorkflowApi } from './api/UsersWorkflowApi';
 import { ReportApi as _ReportApi } from './api/ReportApi';
 
 export const APS_LEGACY_APIS = {
-    AlfrescoApi: AlfrescoApi,
+    AlfrescoApi: AlfrescoApiActiviti,
     AboutApi: AboutApi,
     AdminEndpointsApi: AdminEndpointsApi,
     AdminGroupsApi: AdminGroupsApi,
@@ -153,7 +153,7 @@ export const APS_LEGACY_APIS = {
 };
 
 export namespace Activiti {
-    export class AlfrescoApi extends _AlfrescoApi {
+    export class AlfrescoApi extends _AlfrescoApiActiviti {
     }
 
     export class AboutApi extends _AboutApi {
