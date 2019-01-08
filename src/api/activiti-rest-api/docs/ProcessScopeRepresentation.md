@@ -1,21 +1,23 @@
-# ActivitiPublicRestApi.ProcessScopeRepresentation
+# ProcessScopeRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**activityIds** | **[String]** |  | [optional] 
-**activityIdsByCollapsedSubProcessIdMap** | **{String: Array}** |  | [optional] 
-**activityIdsByDecisionTableIdMap** | **{String: Array}** |  | [optional] 
-**activityIdsByFormIdMap** | **{String: Array}** |  | [optional] 
-**activityIdsWithExcludedSubProcess** | **[String]** |  | [optional] 
-**customStencilVariables** | **{String: Array}** |  | [optional] 
-**entityVariables** | **{String: Array}** |  | [optional] 
-**executionVariables** | **{String: Array}** |  | [optional] 
-**fieldToVariableMappings** | **{String: Array}** |  | [optional] 
-**forms** | [**[FormScopeRepresentation]**](FormScopeRepresentation.md) |  | [optional] 
-**metadataVariables** | **{String: Array}** |  | [optional] 
-**modelId** | **Integer** |  | [optional] 
-**processModelType** | **Integer** |  | [optional] 
-**responseVariables** | **{String: Array}** |  | [optional] 
+**activityIds** | **string[]** |  | [optional] [default to null]
+**activityIdsByCollapsedSubProcessIdMap** | [**{ [key: string]: string; }**](.md) |  | [optional] [default to null]
+**activityIdsByDecisionTableIdMap** | [**{ [key: string]: string; }**](.md) |  | [optional] [default to null]
+**activityIdsByFormIdMap** | [**{ [key: string]: string; }**](.md) |  | [optional] [default to null]
+**activityIdsWithExcludedSubProcess** | **string[]** |  | [optional] [default to null]
+**activitySidsByActivityIdMap** | **{ [key: string]: string; }** |  | [optional] [default to null]
+**customStencilVariables** | [**{ [key: string]: VariableScopeRepresentation; }**](.md) |  | [optional] [default to null]
+**entityVariables** | [**{ [key: string]: EntityVariableScopeRepresentation; }**](.md) |  | [optional] [default to null]
+**executionVariables** | [**{ [key: string]: VariableScopeRepresentation; }**](.md) |  | [optional] [default to null]
+**fieldToVariableMappings** | [**{ [key: string]: VariableScopeRepresentation; }**](.md) |  | [optional] [default to null]
+**forms** | [**{ [key: string]: FormScopeRepresentation; }**](.md) |  | [optional] [default to null]
+**metadataVariables** | [**{ [key: string]: VariableScopeRepresentation; }**](.md) |  | [optional] [default to null]
+**modelId** | **number** |  | [optional] [default to null]
+**processModelType** | **number** |  | [optional] [default to null]
+**responseVariables** | [**{ [key: string]: VariableScopeRepresentation; }**](.md) |  | [optional] [default to null]
+**reusableFieldMapping** | [**{ [key: string]: VariableMappingRepresentation; }**](.md) |  | [optional] [default to null]
 
 

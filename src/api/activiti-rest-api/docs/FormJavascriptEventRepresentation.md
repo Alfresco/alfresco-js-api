@@ -1,9 +1,9 @@
-# ActivitiPublicRestApi.FormJavascriptEventRepresentation
+# FormJavascriptEventRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**event** | **String** |  | [optional] 
-**javascriptLogic** | **String** |  | [optional] 
+**event** | **string** |  | [optional] [default to null]
+**javascriptLogic** | **string** |  | [optional] [default to null]
 
 

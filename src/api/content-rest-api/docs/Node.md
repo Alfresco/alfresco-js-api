@@ -1,24 +1,28 @@
-# AlfrescoContentServicesRestApi.Node
+# Node
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**name** | **String** | The name must not contain spaces or the following special characters: * \&quot; &lt; &gt; \\ / ? : and |. The character . must not be used at the end of the name.  | 
-**nodeType** | **String** |  | 
-**isFolder** | **Boolean** |  | 
-**isFile** | **Boolean** |  | 
-**isLocked** | **Boolean** |  | [optional] [default to false]
-**modifiedAt** | **Date** |  | 
-**modifiedByUser** | [**UserInfo**](UserInfo.md) |  | 
-**createdAt** | **Date** |  | 
-**createdByUser** | [**UserInfo**](UserInfo.md) |  | 
-**parentId** | **String** |  | [optional] 
-**isLink** | **Boolean** |  | [optional] 
-**content** | [**ContentInfo**](ContentInfo.md) |  | [optional] 
-**aspectNames** | **[String]** |  | [optional] 
-**properties** | **Object** |  | [optional] 
-**allowableOperations** | **[String]** |  | [optional] 
-**path** | [**PathInfo**](PathInfo.md) |  | [optional] 
+**id** | **string** |  | [default to null]
+**name** | **string** | The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.
+The character . must not be used at the end of the name.
+ | [default to null]
+**nodeType** | **string** |  | [default to null]
+**isFolder** | **boolean** |  | [default to null]
+**isFile** | **boolean** |  | [default to null]
+**isLocked** | **boolean** |  | [optional] [default to null]
+**modifiedAt** | [**Date**](Date.md) |  | [default to null]
+**modifiedByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
+**createdAt** | [**Date**](Date.md) |  | [default to null]
+**createdByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
+**parentId** | **string** |  | [optional] [default to null]
+**isLink** | **boolean** |  | [optional] [default to null]
+**isFavorite** | **boolean** |  | [optional] [default to null]
+**content** | [**ContentInfo**](ContentInfo.md) |  | [optional] [default to null]
+**aspectNames** | **string[]** |  | [optional] [default to null]
+**properties** | **any** |  | [optional] [default to null]
+**allowableOperations** | **string[]** |  | [optional] [default to null]
+**path** | [**PathInfo**](PathInfo.md) |  | [optional] [default to null]
+**permissions** | [**PermissionsInfo**](PermissionsInfo.md) |  | [optional] [default to null]
 
 

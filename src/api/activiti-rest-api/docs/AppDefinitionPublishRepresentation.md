@@ -1,9 +1,9 @@
-# ActivitiPublicRestApi.AppDefinitionPublishRepresentation
+# AppDefinitionPublishRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**comment** | **String** |  | [optional] 
-**force** | **Boolean** |  | [optional] 
+**comment** | **string** |  | [optional] [default to null]
+**force** | **boolean** |  | [optional] [default to null]
 
 

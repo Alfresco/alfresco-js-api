@@ -1,12 +1,12 @@
-# ActivitiPublicRestApi.LightGroupRepresentation
+# LightGroupRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**externalId** | **String** |  | [optional] 
-**groups** | [**[LightGroupRepresentation]**](LightGroupRepresentation.md) |  | [optional] 
-**id** | **Integer** |  | [optional] 
-**name** | **String** |  | [optional] 
-**status** | **String** |  | [optional] 
+**externalId** | **string** |  | [optional] [default to null]
+**groups** | [**LightGroupRepresentation[]**](LightGroupRepresentation.md) |  | [optional] [default to null]
+**id** | **number** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**status** | **string** |  | [optional] [default to null]
 
 

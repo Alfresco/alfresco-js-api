@@ -1869,7 +1869,7 @@ function __importDefault(mod) {
     return (mod && mod.__esModule) ? mod : { default: mod };
 }
 
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/auth-rest-api/model/ticket.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/auth-rest-api/model/ticket.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -1896,7 +1896,7 @@ var Ticket = (function () {
 }());
 
 //# sourceMappingURL=ticket.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/auth-rest-api/model/ticketEntry.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/auth-rest-api/model/ticketEntry.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -1925,7 +1925,7 @@ var ticketEntry_TicketEntry = (function () {
 }());
 
 //# sourceMappingURL=ticketEntry.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/auth-rest-api/model/validTicket.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/auth-rest-api/model/validTicket.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -1952,7 +1952,7 @@ var ValidTicket = (function () {
 }());
 
 //# sourceMappingURL=validTicket.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/auth-rest-api/model/validTicketEntry.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/auth-rest-api/model/validTicketEntry.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -1981,7 +1981,7 @@ var validTicketEntry_ValidTicketEntry = (function () {
 }());
 
 //# sourceMappingURL=validTicketEntry.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/auth-rest-api/api/base.api.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/auth-rest-api/api/base.api.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -2011,7 +2011,7 @@ var BaseApi = (function () {
 }());
 
 //# sourceMappingURL=base.api.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/auth-rest-api/api/authentication.api.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/auth-rest-api/api/authentication.api.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -3443,7 +3443,7 @@ var alfrescoApi_AlfrescoApi = (function () {
 }());
 
 //# sourceMappingURL=alfrescoApi.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/content-rest-api/model/dateAlfresco.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/content-rest-api/model/dateAlfresco.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -3501,7 +3501,7 @@ var dateAlfresco_DateAlfresco = (function (_super) {
 }(Date));
 
 //# sourceMappingURL=dateAlfresco.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/discovery-rest-api/model/entitlementsInfo.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/discovery-rest-api/model/entitlementsInfo.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -3528,7 +3528,7 @@ var EntitlementsInfo = (function () {
 }());
 
 //# sourceMappingURL=entitlementsInfo.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/discovery-rest-api/model/licenseInfo.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/discovery-rest-api/model/licenseInfo.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -3560,7 +3560,7 @@ var licenseInfo_LicenseInfo = (function () {
 }());
 
 //# sourceMappingURL=licenseInfo.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/discovery-rest-api/model/moduleInfo.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/discovery-rest-api/model/moduleInfo.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -3589,7 +3589,7 @@ var moduleInfo_ModuleInfo = (function () {
 }());
 
 //# sourceMappingURL=moduleInfo.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/discovery-rest-api/model/statusInfo.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/discovery-rest-api/model/statusInfo.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -3616,7 +3616,7 @@ var StatusInfo = (function () {
 }());
 
 //# sourceMappingURL=statusInfo.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/discovery-rest-api/model/versionInfo.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/discovery-rest-api/model/versionInfo.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -3643,7 +3643,7 @@ var VersionInfo = (function () {
 }());
 
 //# sourceMappingURL=versionInfo.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/discovery-rest-api/model/repositoryInfo.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/discovery-rest-api/model/repositoryInfo.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -3682,7 +3682,7 @@ var repositoryInfo_RepositoryInfo = (function () {
 }());
 
 //# sourceMappingURL=repositoryInfo.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/discovery-rest-api/model/repositoryEntry.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/discovery-rest-api/model/repositoryEntry.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -3711,7 +3711,7 @@ var repositoryEntry_RepositoryEntry = (function () {
 }());
 
 //# sourceMappingURL=repositoryEntry.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/discovery-rest-api/model/discoveryEntry.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/discovery-rest-api/model/discoveryEntry.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -3740,7 +3740,7 @@ var discoveryEntry_DiscoveryEntry = (function () {
 }());
 
 //# sourceMappingURL=discoveryEntry.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/discovery-rest-api/api/base.api.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/discovery-rest-api/api/base.api.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.
@@ -3768,7 +3768,7 @@ var base_api_BaseApi = (function () {
 }());
 
 //# sourceMappingURL=base.api.js.map
-// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api-new/discovery-rest-api/api/discovery.api.js
+// CONCATENATED MODULE: /Users/eromano/Projects/dev-platform-js-api/node_modules/@alfresco/js-api/_esm5/src/api/discovery-rest-api/api/discovery.api.js
 /*!
 * @license
 * Copyright 2018 Alfresco Software, Ltd.

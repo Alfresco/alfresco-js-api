@@ -1,9 +1,9 @@
-# ActivitiPublicRestApi.GroupCapabilityRepresentation
+# GroupCapabilityRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** |  | [optional] 
-**name** | **String** |  | [optional] 
+**id** | **number** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
 
 

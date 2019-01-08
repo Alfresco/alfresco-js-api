@@ -1,31 +1,31 @@
-# AlfrescoCoreRestApi.NodeBodyLock
+# NodeBodyLock
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**timeToExpire** | **Number** |  | [optional] 
-**type** | **String** |  | [optional] [default to &#39;ALLOW_OWNER_CHANGES&#39;]
-**lifetime** | **String** |  | [optional] [default to &#39;PERSISTENT&#39;]
+**timeToExpire** | **number** |  | [optional] [default to null]
+**type** | **string** |  | [optional] [default to null]
+**lifetime** | **string** |  | [optional] [default to null]
 
 
-<a name="TypeEnum"></a>
-## Enum: TypeEnum
+<a name="NodeBodyLock.TypeEnum"></a>
+## Enum: NodeBodyLock.TypeEnum
 
 
-* `ALLOW_OWNER_CHANGES` (value: `"ALLOW_OWNER_CHANGES"`)
+* `ALLOWOWNERCHANGES` (value: `'ALLOW_OWNER_CHANGES'`)
 
-* `FULL` (value: `"FULL"`)
-
-
+* `FULL` (value: `'FULL'`)
 
 
-<a name="LifetimeEnum"></a>
-## Enum: LifetimeEnum
 
 
-* `PERSISTENT` (value: `"PERSISTENT"`)
+<a name="NodeBodyLock.LifetimeEnum"></a>
+## Enum: NodeBodyLock.LifetimeEnum
 
-* `EPHEMERAL` (value: `"EPHEMERAL"`)
+
+* `PERSISTENT` (value: `'PERSISTENT'`)
+
+* `EPHEMERAL` (value: `'EPHEMERAL'`)
 
 
 

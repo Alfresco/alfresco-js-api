@@ -1,8 +1,8 @@
-# ActivitiPublicRestApi.SaveFormRepresentation
+# SaveFormRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | **Object** |  | [optional] 
+**values** | **any** |  | [optional] [default to null]
 
 

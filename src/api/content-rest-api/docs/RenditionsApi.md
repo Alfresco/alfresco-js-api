@@ -1,4 +1,4 @@
-# AlfrescoCoreRestApi.RenditionsApi
+# RenditionsApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
@@ -7,33 +7,41 @@ Method | HTTP request | Description
 [**createRendition**](RenditionsApi.md#createRendition) | **POST** /nodes/{nodeId}/renditions | Create rendition
 [**getRendition**](RenditionsApi.md#getRendition) | **GET** /nodes/{nodeId}/renditions/{renditionId} | Get rendition information
 [**getRenditionContent**](RenditionsApi.md#getRenditionContent) | **GET** /nodes/{nodeId}/renditions/{renditionId}/content | Get rendition content
-[**getRenditions**](RenditionsApi.md#getRenditions) | **GET** /nodes/{nodeId}/renditions | List information for renditions
-[**getSharedLinkRenditionContent**](RenditionsApi.md#getSharedLinkRenditionContent) | **GET** /shared-links/{sharedId}/renditions/{renditionId}/content | Get shared link rendition content
-[**getSharedLinkRenditions**](RenditionsApi.md#getSharedLinkRenditions) | **GET** /shared-links/{sharedId}/renditions | List information for created renditions
+[**listRenditions**](RenditionsApi.md#listRenditions) | **GET** /nodes/{nodeId}/renditions | List renditions
 
 
 <a name="createRendition"></a>
 # **createRendition**
-> createRendition(nodeId, renditionBody)
+> createRendition(nodeIdrenditionBodyCreate)
 
 Create rendition
 
-Async request to create a rendition for file with identifier
-**nodeId**. The rendition is specified by name "id" in the request body:
-```JSON
+**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+
+An asynchronous request to create a rendition for file **nodeId**.
+
+The rendition is specified by name **id** in the request body:
+JSON
 {
-  "id":"doclib"
+  \"id\":\"doclib\"
 }
-```
+
 
 
 ### Example
 ```javascript
-var nodeId = "nodeId_example"; // {String} The identifier of a node. You can also use one of these well-known aliases:  -my-,  -shared- , -root-
+import RenditionsApi from 'RenditionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var renditionBody = new this.alfrescoJsApi.core.RenditionBody(); // {RenditionBody} The rendition "id".
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-this.alfrescoJsApi.core.renditionsApi.createRendition(nodeId, renditionBody).then(function() {
+let renditionsApi = new RenditionsApi(this.alfrescoApi);
+
+
+renditionsApi.createRendition(nodeIdrenditionBodyCreate).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -45,37 +53,38 @@ this.alfrescoJsApi.core.renditionsApi.createRendition(nodeId, renditionBody).the
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. You can also use one of these well-known aliases: -my-   ,  -shared-   or   -root-  |
- **renditionBody** | [**RenditionBody**](RenditionBody.md)| The rendition "id". |
+ **nodeId** | **string**| The identifier of a node. | 
+ **renditionBodyCreate** | [**RenditionBodyCreate**](RenditionBodyCreate.md)| The rendition \"id\". | 
 
 ### Return type
 
 null (empty response body)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getRendition"></a>
 # **getRendition**
-> RenditionEntry getRendition(nodeId, renditionId)
+> RenditionEntry getRendition(nodeIdrenditionId)
 
 Get rendition information
 
-Returns the rendition information for file node with identifier **nodeId**.
+**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+
+Gets the rendition information for **renditionId** of file **nodeId**.
+
 
 ### Example
 ```javascript
-var nodeId = "nodeId_example"; // {String} The identifier of a node.
+import RenditionsApi from 'RenditionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-this.alfrescoJsApi.core.renditionsApi.getRendition(nodeId, renditionId).then(function(data) {
+let renditionsApi = new RenditionsApi(this.alfrescoApi);
+
+
+renditionsApi.getRendition(nodeIdrenditionId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -87,51 +96,60 @@ this.alfrescoJsApi.core.renditionsApi.getRendition(nodeId, renditionId).then(fun
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. |
- **renditionId** | **String**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. |
+ **nodeId** | **string**| The identifier of a node. | 
+ **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
 
 ### Return type
 
 [**RenditionEntry**](RenditionEntry.md)
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getRenditionContent"></a>
 # **getRenditionContent**
-> getRenditionContent(nodeId, renditionId, opts)
+> getRenditionContent(nodeIdrenditionIdopts)
 
 Get rendition content
 
-Returns the rendition content for file node with identifier **nodeId**.
+**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+
+Gets the rendition content for **renditionId** of file **nodeId**.
+
 
 ### Example
 ```javascript
-var nodeId = "nodeId_example"; // {String} The identifier of a node.
+import RenditionsApi from 'RenditionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var opts = {
-  'attachment': true, /* {Boolean} **true** enables a web browser to download the file as an attachment.
-                        **false** means a web browser may preview the file in a new tab or window, but not
-                        download the file.
+let renditionsApi = new RenditionsApi(this.alfrescoApi);
 
-                        You can only set this parameter to **false** if the content type of the file is in the supported list;
-                        for example, certain image files and PDF files.
+let opts = { 
+  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
+**false** means a web browser may preview the file in a new tab or window, but not
+download the file.
 
-                        If the content type is not supported for preview, then a value of **false**  is ignored, and
-                        the attachment will be returned in the response. */
+You can only set this parameter to **false** if the content type of the file is in the supported list;
+for example, certain image files and PDF files.
 
-'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
+If the content type is not supported for preview, then a value of **false**  is ignored, and
+the attachment will be returned in the response.
+
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
+Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
+
+  'range': range_example //  | The Range header indicates the part of a document that the server should return.
+Single part request supported, for example: bytes=1-10.
+
+  'placeholder': true //  | If **true** and there is no rendition for this **nodeId** and **renditionId**,
+then the placeholder image for the mime type of this rendition is returned, rather
+than a 404 response.
 
 };
-this.alfrescoJsApi.core.renditionsApi.getRenditionContent(nodeId, renditionId, opts).then(function() {
+
+renditionsApi.getRenditionContent(nodeIdrenditionIdopts).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -143,143 +161,70 @@ this.alfrescoJsApi.core.renditionsApi.getRenditionContent(nodeId, renditionId, o
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. |
- **renditionId** | **String**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. |
- **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file. You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files.  If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.  | [optional]
+ **nodeId** | **string**| The identifier of a node. | 
+ **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
+ **attachment** | **boolean**| **true** enables a web browser to download the file as an attachment.
+**false** means a web browser may preview the file in a new tab or window, but not
+download the file.
+
+You can only set this parameter to **false** if the content type of the file is in the supported list;
+for example, certain image files and PDF files.
+
+If the content type is not supported for preview, then a value of **false**  is ignored, and
+the attachment will be returned in the response.
+ | [optional] [default to true]
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
+Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
+ | [optional] 
+ **range** | **string**| The Range header indicates the part of a document that the server should return.
+Single part request supported, for example: bytes=1-10.
+ | [optional] 
+ **placeholder** | **boolean**| If **true** and there is no rendition for this **nodeId** and **renditionId**,
+then the placeholder image for the mime type of this rendition is returned, rather
+than a 404 response.
+ | [optional] [default to false]
 
 ### Return type
 
 null (empty response body)
 
-### Authorization
+<a name="listRenditions"></a>
+# **listRenditions**
+> RenditionPaging listRenditions(nodeIdopts)
 
-[basicAuth](../README.md#basicAuth)
+List renditions
 
-### HTTP request headers
+**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+Gets a list of the rendition information for each rendition of the the file **nodeId**, including the rendition id.
 
-<a name="getRenditions"></a>
-# **getRenditions**
-> RenditionPaging getRenditions(nodeId)
+Each rendition returned has a **status**: CREATED means it is available to view or download, NOT_CREATED means the rendition can be requested.
 
-List information for renditions
+You can use the **where** parameter to filter the returned renditions by **status**. For example, the following **where**
+clause will return just the CREATED renditions:
 
-Returns the rendition information for the file node with identifier **nodeId**.
-This will return rendition information, including the rendition id, for each rendition. The\u00A0rendition status is CREATED (ie. available\u00A0to view/download) or NOT_CREATED (ie. rendition can be requested).
+
+(status='CREATED')
+
+
 
 ### Example
 ```javascript
-var nodeId = "nodeId_example"; // {String} The identifier of a node.
+import RenditionsApi from 'RenditionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-this.alfrescoJsApi.core.renditionsApi.getRenditions(nodeId).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
 });
 
-```
+let renditionsApi = new RenditionsApi(this.alfrescoApi);
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nodeId** | **String**| The identifier of a node. |
-
-### Return type
-
-[**RenditionPaging**](RenditionPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="getSharedLinkRenditionContent"></a>
-# **getSharedLinkRenditionContent**
-> getSharedLinkRenditionContent(sharedId, renditionId, opts)
-
-Get shared link rendition content
-
-Returns the rendition content for file with shared link identifier **sharedId**.
-
-**Note:** No authentication is required to call this endpoint.
-
-
-### Example
-```javascript
-var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
-
-var renditionId = "renditionId_example"; // {String} The name of a thumbnail rendition, for example *doclib*, or *pdf*.
-
-var opts = {
-  'attachment': true, /* {Boolean} **true** enables a web browser to download the file as an attachment.
-                        **false** means a web browser may preview the file in a new tab or window, but not
-                        download the file.
-
-                        You can only set this parameter to **false** if the content type of the file is in the supported list;
-                        for example, certain image files and PDF files.
-
-                        If the content type is not supported for preview, then a value of **false**  is ignored, and
-                        the attachment will be returned in the response.*/
-
-  'ifModifiedSince': new Date("2013-10-20T19:20:30+01:00") // {Date} Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.
+let opts = { 
+  'where': where_example //  | A string to restrict the returned objects by using a predicate.
 };
-this.alfrescoJsApi.core.renditionsApi.getSharedLinkRenditionContent(sharedId, renditionId, opts).then(function() {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
 
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sharedId** | **String**| The identifier of a shared link to a file. |
- **renditionId** | **String**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. |
- **attachment** | **Boolean**| **true** enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file. You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files.  If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.  | [optional]
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="getSharedLinkRenditions"></a>
-# **getSharedLinkRenditions**
-> RenditionPaging getSharedLinkRenditions(sharedId)
-
-List information for created renditions
-
-Returns the rendition information for the file with shared link identifier **sharedId**.
-
-This will only return rendition information, including the rendition id, for each rendition
-where the rendition status is CREATED (ie. available\u00A0to view/download).
-
-**Note:** No authentication is required to call this endpoint.
-
-
-### Example
-```javascript
-var sharedId = "sharedId_example"; // {String} The identifier of a shared link to a file.
-
-this.alfrescoJsApi.core.renditionsApi.getSharedLinkRenditions(sharedId).then(function(data) {
+renditionsApi.listRenditions(nodeIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -291,18 +236,10 @@ this.alfrescoJsApi.core.renditionsApi.getSharedLinkRenditions(sharedId).then(fun
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sharedId** | **String**| The identifier of a shared link to a file. |
+ **nodeId** | **string**| The identifier of a node. | 
+ **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
 
 ### Return type
 
 [**RenditionPaging**](RenditionPaging.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 

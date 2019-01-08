@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.DeletedNodeEntry
+# DeletedNodeEntry
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**DeletedNode**](DeletedNode.md) |  | [optional] 
+**entry** | [**DeletedNode**](DeletedNode.md) |  | [optional] [default to null]
 
 

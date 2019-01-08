@@ -1,9 +1,9 @@
-# AlfrescoCoreRestApi.Tag
+# Tag
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**tag** | **String** |  | 
+**id** | **string** |  | [default to null]
+**tag** | **string** |  | [default to null]
 
 

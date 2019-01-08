@@ -1,8 +1,9 @@
-# ActivitiPublicRestApi.SystemPropertiesRepresentation
+# SystemPropertiesRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allowInvolveByEmail** | **Boolean** |  | [optional] 
+**allowInvolveByEmail** | **boolean** |  | [optional] [default to null]
+**disableJavaScriptEventsInFormEditor** | **boolean** |  | [optional] [default to null]
 
 

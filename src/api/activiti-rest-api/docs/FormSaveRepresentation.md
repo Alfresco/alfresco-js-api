@@ -1,13 +1,13 @@
-# ActivitiPublicRestApi.FormSaveRepresentation
+# FormSaveRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**comment** | **String** |  | [optional] 
-**formImageBase64** | **String** |  | [optional] 
-**formRepresentation** | [**FormRepresentation**](FormRepresentation.md) |  | [optional] 
-**newVersion** | **Boolean** |  | [optional] 
-**processScopeIdentifiers** | [**[ProcessScopeIdentifierRepresentation]**](ProcessScopeIdentifierRepresentation.md) |  | [optional] 
-**reusable** | **Boolean** |  | [optional] 
+**comment** | **string** |  | [optional] [default to null]
+**formImageBase64** | **string** |  | [optional] [default to null]
+**formRepresentation** | [**FormRepresentation**](FormRepresentation.md) |  | [optional] [default to null]
+**newVersion** | **boolean** |  | [optional] [default to null]
+**processScopeIdentifiers** | [**ProcessScopeIdentifierRepresentation[]**](ProcessScopeIdentifierRepresentation.md) |  | [optional] [default to null]
+**reusable** | **boolean** |  | [optional] [default to null]
 
 

@@ -1,14 +1,14 @@
-# ActivitiPublicRestApi.ValidationErrorRepresentation
+# ValidationErrorRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**defaultDescription** | **String** |  | [optional] 
-**id** | **String** |  | [optional] 
-**name** | **String** |  | [optional] 
-**problem** | **String** |  | [optional] 
-**problemReference** | **String** |  | [optional] 
-**validatorSetName** | **String** |  | [optional] 
-**warning** | **Boolean** |  | [optional] 
+**defaultDescription** | **string** |  | [optional] [default to null]
+**id** | **string** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**problem** | **string** |  | [optional] [default to null]
+**problemReference** | **string** |  | [optional] [default to null]
+**validatorSetName** | **string** |  | [optional] [default to null]
+**warning** | **boolean** |  | [optional] [default to null]
 
 

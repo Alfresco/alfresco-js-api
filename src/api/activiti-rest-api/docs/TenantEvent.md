@@ -1,14 +1,14 @@
-# ActivitiPublicRestApi.TenantEvent
+# TenantEvent
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**eventTime** | **Date** |  | [optional] 
-**eventType** | **String** |  | [optional] 
-**extraInfo** | **String** |  | [optional] 
-**id** | **Integer** |  | [optional] 
-**tenantId** | **Integer** |  | [optional] 
-**userId** | **Integer** |  | [optional] 
-**userName** | **String** |  | [optional] 
+**eventTime** | [**Date**](Date.md) |  | [optional] [default to null]
+**eventType** | **string** |  | [optional] [default to null]
+**extraInfo** | **string** |  | [optional] [default to null]
+**id** | **number** |  | [optional] [default to null]
+**tenantId** | **number** |  | [optional] [default to null]
+**userId** | **number** |  | [optional] [default to null]
+**userName** | **string** |  | [optional] [default to null]
 
 

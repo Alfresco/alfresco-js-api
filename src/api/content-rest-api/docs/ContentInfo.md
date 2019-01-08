@@ -1,12 +1,11 @@
-# AlfrescoContentServicesRestApi.ContentInfo
+# ContentInfo
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**mimeType** | **String** |  | 
-**mimeTypeName** | **String** |  | 
-**sizeInBytes** | **Number** |  | 
-**encoding** | **String** |  | [optional] 
-**mimeTypeGroup** | **String** |  | [optional] 
+**mimeType** | **string** |  | [default to null]
+**mimeTypeName** | **string** |  | [default to null]
+**sizeInBytes** | **number** |  | [default to null]
+**encoding** | **string** |  | [optional] [default to null]
 
 

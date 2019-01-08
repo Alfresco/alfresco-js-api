@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.NodeAssociationPaging
+# NodeAssociationPaging
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**list** | [**NodeAssociationPagingList**](NodeAssociationPagingList.md) |  | [optional] 
+**list** | [**NodeAssociationPagingList**](NodeAssociationPagingList.md) |  | [optional] [default to null]
 
 

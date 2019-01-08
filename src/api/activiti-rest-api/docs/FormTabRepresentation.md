@@ -1,10 +1,10 @@
-# ActivitiPublicRestApi.FormTabRepresentation
+# FormTabRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | [optional] 
-**title** | **String** |  | [optional] 
-**visibilityCondition** | [**ConditionRepresentation**](ConditionRepresentation.md) |  | [optional] 
+**id** | **string** |  | [optional] [default to null]
+**title** | **string** |  | [optional] [default to null]
+**visibilityCondition** | [**ConditionRepresentation**](ConditionRepresentation.md) |  | [optional] [default to null]
 
 

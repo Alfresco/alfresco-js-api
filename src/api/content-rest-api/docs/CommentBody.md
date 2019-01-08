@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.CommentBody
+# CommentBody
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**content** | **String** |  | 
+**content** | **string** |  | [default to null]
 
 

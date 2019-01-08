@@ -1,8 +1,8 @@
-# ActivitiPublicRestApi.ChecklistOrderRepresentation
+# ChecklistOrderRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**order** | **[String]** |  | [optional] 
+**order** | **string[]** |  | [optional] [default to null]
 
 

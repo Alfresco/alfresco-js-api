@@ -1,29 +1,40 @@
-# ActivitiPublicRestApi.CommentsApi
+# CommentsApi
 
-All URIs are relative to *https://localhost:8080/activiti-app*
+All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**addProcessInstanceComment**](CommentsApi.md#addProcessInstanceComment) | **POST** /api/enterprise/process-instances/{processInstanceId}/comments | Add a comment to a Process
-[**addTaskComment**](CommentsApi.md#addTaskComment) | **POST** /api/enterprise/tasks/{taskId}/comments | Add a comment to a Task
-[**getProcessInstanceComments**](CommentsApi.md#getProcessInstanceComments) | **GET** /api/enterprise/process-instances/{processInstanceId}/comments | Comment list added to Process
-[**getTaskComments**](CommentsApi.md#getTaskComments) | **GET** /api/enterprise/tasks/{taskId}/comments | Comment list added to Task
+[**addProcessInstanceComment**](CommentsApi.md#addProcessInstanceComment) | **POST** /enterprise/process-instances/{processInstanceId}/comments | Add a comment to a process instance
+[**addTaskComment**](CommentsApi.md#addTaskComment) | **POST** /enterprise/tasks/{taskId}/comments | Add a comment to a task
+[**getProcessInstanceComments**](CommentsApi.md#getProcessInstanceComments) | **GET** /enterprise/process-instances/{processInstanceId}/comments | Get comments for a process
+[**getTaskComments**](CommentsApi.md#getTaskComments) | **GET** /enterprise/tasks/{taskId}/comments | Get comments for a task
 
 
 <a name="addProcessInstanceComment"></a>
 # **addProcessInstanceComment**
-> CommentRepresentation addProcessInstanceComment(commentRequest, processInstanceId)
+> CommentRepresentation addProcessInstanceComment(commentRequestprocessInstanceId)
 
-Add a comment to a Process
+Add a comment to a process instance
 
 ### Example
 ```javascript
+import CommentsApi from 'CommentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var commentRequest = new this.alfrescoJsApi.activiti.CommentRepresentation(); // CommentRepresentation | commentRequest
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var processInstanceId = "processInstanceId_example"; // String | processInstanceId
+let commentsApi = new CommentsApi(this.alfrescoApi);
 
-this.alfrescoJsApi.activiti.commentsApi.addProcessInstanceComment(commentRequest, processInstanceId);
+
+commentsApi.addProcessInstanceComment(commentRequestprocessInstanceId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -31,35 +42,37 @@ this.alfrescoJsApi.activiti.commentsApi.addProcessInstanceComment(commentRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **commentRequest** | [**CommentRepresentation**](CommentRepresentation.md)| commentRequest | 
- **processInstanceId** | **String**| processInstanceId | 
+ **processInstanceId** | **string**| processInstanceId | 
 
 ### Return type
 
 [**CommentRepresentation**](CommentRepresentation.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 <a name="addTaskComment"></a>
 # **addTaskComment**
-> CommentRepresentation addTaskComment(commentRequest, taskId)
+> CommentRepresentation addTaskComment(commentRequesttaskId)
 
-Add a comment to a Task
+Add a comment to a task
 
 ### Example
 ```javascript
+import CommentsApi from 'CommentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var commentRequest = new this.alfrescoJsApi.activiti.CommentRepresentation(); // CommentRepresentation | commentRequest
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var taskId = "taskId_example"; // String | taskId
+let commentsApi = new CommentsApi(this.alfrescoApi);
 
-this.alfrescoJsApi.activiti.commentsApi.addTaskComment(commentRequest, taskId);
+
+commentsApi.addTaskComment(commentRequesttaskId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -67,94 +80,91 @@ this.alfrescoJsApi.activiti.commentsApi.addTaskComment(commentRequest, taskId);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **commentRequest** | [**CommentRepresentation**](CommentRepresentation.md)| commentRequest | 
- **taskId** | **String**| taskId | 
+ **taskId** | **string**| taskId | 
 
 ### Return type
 
 [**CommentRepresentation**](CommentRepresentation.md)
 
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getProcessInstanceComments"></a>
 # **getProcessInstanceComments**
-> ResultListDataRepresentation getProcessInstanceComments(processInstanceId, opts)
+> ResultListDataRepresentationCommentRepresentation getProcessInstanceComments(processInstanceIdopts)
 
-Comment list added to Process
+Get comments for a process
 
 ### Example
 ```javascript
+import CommentsApi from 'CommentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var processInstanceId = "processInstanceId_example"; // String | processInstanceId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var opts = { 
-  'latestFirst': true // Boolean | latestFirst
+let commentsApi = new CommentsApi(this.alfrescoApi);
+
+let opts = { 
+  'latestFirst': true //  | latestFirst
 };
 
-this.alfrescoJsApi.activiti.commentsApi.getProcessInstanceComments(processInstanceId, opts);
+commentsApi.getProcessInstanceComments(processInstanceIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **processInstanceId** | **String**| processInstanceId | 
- **latestFirst** | **Boolean**| latestFirst | [optional] 
+ **processInstanceId** | **string**| processInstanceId | 
+ **latestFirst** | **boolean**| latestFirst | [optional] 
 
 ### Return type
 
-[**ResultListDataRepresentation**](ResultListDataRepresentation.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**ResultListDataRepresentationCommentRepresentation**](ResultListDataRepresentationCommentRepresentation.md)
 
 <a name="getTaskComments"></a>
 # **getTaskComments**
-> ResultListDataRepresentation getTaskComments(taskId, opts)
+> ResultListDataRepresentationCommentRepresentation getTaskComments(taskIdopts)
 
-Comment list added to Task
+Get comments for a task
 
 ### Example
 ```javascript
+import CommentsApi from 'CommentsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var taskId = "taskId_example"; // String | taskId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var opts = { 
-  'latestFirst': true // Boolean | latestFirst
+let commentsApi = new CommentsApi(this.alfrescoApi);
+
+let opts = { 
+  'latestFirst': true //  | latestFirst
 };
 
-this.alfrescoJsApi.activiti.commentsApi.getTaskComments(taskId, opts);
+commentsApi.getTaskComments(taskIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **taskId** | **String**| taskId | 
- **latestFirst** | **Boolean**| latestFirst | [optional] 
+ **taskId** | **string**| taskId | 
+ **latestFirst** | **boolean**| latestFirst | [optional] 
 
 ### Return type
 
-[**ResultListDataRepresentation**](ResultListDataRepresentation.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**ResultListDataRepresentationCommentRepresentation**](ResultListDataRepresentationCommentRepresentation.md)
 

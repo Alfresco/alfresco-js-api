@@ -1,9 +1,9 @@
-# ActivitiPublicRestApi.EntityAttributeScopeRepresentation
+# EntityAttributeScopeRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** |  | [optional] 
-**type** | **String** |  | [optional] 
+**name** | **string** |  | [optional] [default to null]
+**type** | **string** |  | [optional] [default to null]
 
 

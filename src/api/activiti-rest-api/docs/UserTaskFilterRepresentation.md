@@ -1,14 +1,14 @@
-# ActivitiPublicRestApi.UserTaskFilterRepresentation
+# UserTaskFilterRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**appId** | **Integer** |  | [optional] 
-**filter** | [**TaskFilterRepresentation**](TaskFilterRepresentation.md) |  | [optional] 
-**icon** | **String** |  | [optional] 
-**id** | **Integer** |  | [optional] 
-**index** | **Integer** |  | [optional] 
-**name** | **String** |  | [optional] 
-**recent** | **Boolean** |  | [optional] 
+**appId** | **number** |  | [optional] [default to null]
+**filter** | [**TaskFilterRepresentation**](TaskFilterRepresentation.md) |  | [optional] [default to null]
+**icon** | **string** |  | [optional] [default to null]
+**id** | **number** |  | [optional] [default to null]
+**index** | **number** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**recent** | **boolean** |  | [optional] [default to null]
 
 

@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.RatingPaging
+# RatingPaging
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**list** | [**RatingPagingList**](RatingPagingList.md) |  | [optional] 
+**list** | [**RatingPagingList**](RatingPagingList.md) |  | [optional] [default to null]
 
 

@@ -1,86 +1,95 @@
-# ActivitiPublicRestApi.GroupsApi
+# GroupsApi
 
-All URIs are relative to *https://localhost:8080/activiti-app*
+All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getGroups**](GroupsApi.md#getGroups) | **GET** /api/enterprise/groups | List groups
-[**getUsersForGroup**](GroupsApi.md#getUsersForGroup) | **GET** /api/enterprise/groups/{groupId}/users | List users member of a specific group
+[**getGroups**](GroupsApi.md#getGroups) | **GET** /enterprise/groups | Query groups
+[**getUsersForGroup**](GroupsApi.md#getUsersForGroup) | **GET** /enterprise/groups/{groupId}/users | List members of a group
 
 
 <a name="getGroups"></a>
 # **getGroups**
-> ResultListDataRepresentation getGroups(opts)
+> ResultListDataRepresentationLightGroupRepresentation getGroups(opts)
 
-List groups
+Query groups
 
 ### Example
 ```javascript
+import GroupsApi from 'GroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var opts = { 
-  'filter': "filter_example", // String | filter
-  'groupId': 789, // Integer | groupId
-  'externalId': "externalId_example", // String | externalId
-  'externalIdCaseInsensitive': "externalIdCaseInsensitive_example", // String | externalIdCaseInsensitive
-  'tenantId': 789 // Integer | tenantId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let groupsApi = new GroupsApi(this.alfrescoApi);
+
+let opts = { 
+  'filter': filter_example //  | filter
+  'groupId': 789 //  | groupId
+  'externalId': externalId_example //  | externalId
+  'externalIdCaseInsensitive': externalIdCaseInsensitive_example //  | externalIdCaseInsensitive
+  'tenantId': 789 //  | tenantId
 };
 
-this.alfrescoJsApi.activiti.groupsApi.getGroups(opts);
+groupsApi.getGroups(opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filter** | **String**| filter | [optional] 
- **groupId** | **Integer**| groupId | [optional] 
- **externalId** | **String**| externalId | [optional] 
- **externalIdCaseInsensitive** | **String**| externalIdCaseInsensitive | [optional] 
- **tenantId** | **Integer**| tenantId | [optional] 
+ **filter** | **string**| filter | [optional] 
+ **groupId** | **number**| groupId | [optional] 
+ **externalId** | **string**| externalId | [optional] 
+ **externalIdCaseInsensitive** | **string**| externalIdCaseInsensitive | [optional] 
+ **tenantId** | **number**| tenantId | [optional] 
 
 ### Return type
 
-[**ResultListDataRepresentation**](ResultListDataRepresentation.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**ResultListDataRepresentationLightGroupRepresentation**](ResultListDataRepresentationLightGroupRepresentation.md)
 
 <a name="getUsersForGroup"></a>
 # **getUsersForGroup**
-> ResultListDataRepresentation getUsersForGroup(groupId)
+> ResultListDataRepresentationLightUserRepresentation getUsersForGroup(groupId)
 
-List users member of a specific group
+List members of a group
 
 ### Example
 ```javascript
+import GroupsApi from 'GroupsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var groupId = 789; // Integer | groupId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-this.alfrescoJsApi.activiti.groupsApi.getUsersForGroup(groupId);
+let groupsApi = new GroupsApi(this.alfrescoApi);
+
+
+groupsApi.getUsersForGroup(groupId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupId** | **Integer**| groupId | 
+ **groupId** | **number**| groupId | 
 
 ### Return type
 
-[**ResultListDataRepresentation**](ResultListDataRepresentation.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**ResultListDataRepresentationLightUserRepresentation**](ResultListDataRepresentationLightUserRepresentation.md)
 

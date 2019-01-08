@@ -1,14 +1,14 @@
-# ActivitiPublicRestApi.CreateProcessInstanceRepresentation
+# CreateProcessInstanceRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** |  | [optional]
-**outcome** | **String** |  | [optional]
-**businessKey** | **String** |  | [optional]
-**processDefinitionKey** | **String** |  | [optional] 
-**processDefinitionId** | **String** |  | [optional] 
-**variables** [**[RestVariable]**](RestVariable.md) | | [optional] 
-**values** | **Object** |  | [optional] 
+**businessKey** | **string** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**outcome** | **string** |  | [optional] [default to null]
+**processDefinitionId** | **string** |  | [optional] [default to null]
+**processDefinitionKey** | **string** |  | [optional] [default to null]
+**values** | **any** |  | [optional] [default to null]
+**variables** | [**RestVariable[]**](RestVariable.md) |  | [optional] [default to null]
 
 

@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.SiteMemberPaging
+# SiteMemberPaging
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**list** | [**SitePagingList**](SitePagingList.md) |  | [optional] 
+**list** | [**SiteMemberPagingList**](SiteMemberPagingList.md) |  | [optional] [default to null]
 
 

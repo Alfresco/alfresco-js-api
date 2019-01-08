@@ -1,8 +1,8 @@
-# ActivitiPublicRestApi.AddGroupCapabilitiesRepresentation
+# AddGroupCapabilitiesRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**capabilities** | **[String]** |  | [optional] 
+**capabilities** | **string[]** |  | [optional] [default to null]
 
 

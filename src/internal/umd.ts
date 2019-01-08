@@ -15,11 +15,11 @@
 * limitations under the License.
 */
 
-export * from '../api-new/content-rest-api/index';
-export * from '../api-new/discovery-rest-api/index';
-export * from '../api-new/gs-classification-rest-api/index';
-export * from '../api-new/gs-core-rest-api/index';
-export * from '../api-new/auth-rest-api/index';
-export * from '../api-new/activiti-rest-api/index';
+export * from '../api/content-rest-api/index';
+export * from '../api/discovery-rest-api/index';
+export * from '../api/gs-classification-rest-api/index';
+export * from '../api/gs-core-rest-api/index';
+export * from '../api/auth-rest-api/index';
+export * from '../api/activiti-rest-api/index';
 
 export * from '../../index';

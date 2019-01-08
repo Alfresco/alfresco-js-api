@@ -1,9 +1,9 @@
-# ActivitiPublicRestApi.UserAccountCredentialsRepresentation
+# UserAccountCredentialsRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**password** | **String** |  | [optional] 
-**username** | **String** |  | [optional] 
+**password** | **string** |  | [optional] [default to null]
+**username** | **string** |  | [optional] [default to null]
 
 

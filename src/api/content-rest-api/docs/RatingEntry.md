@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.RatingEntry
+# RatingEntry
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**Rating**](Rating.md) |  | 
+**entry** | [**Rating**](Rating.md) |  | [default to null]
 
 

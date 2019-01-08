@@ -1,9 +1,9 @@
-# ActivitiPublicRestApi.FormOutcomeRepresentation
+# FormOutcomeRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | [optional] 
-**name** | **String** |  | [optional] 
+**id** | **string** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
 
 

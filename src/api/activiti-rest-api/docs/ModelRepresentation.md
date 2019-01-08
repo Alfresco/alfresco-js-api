@@ -1,23 +1,24 @@
-# ActivitiPublicRestApi.ModelRepresentation
+# ModelRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**comment** | **String** |  | [optional] 
-**createdBy** | **Integer** |  | [optional] 
-**createdByFullName** | **String** |  | [optional] 
-**description** | **String** |  | [optional] 
-**favorite** | **Boolean** |  | [optional] 
-**id** | **Integer** |  | [optional] 
-**lastUpdated** | **Date** |  | [optional] 
-**lastUpdatedBy** | **Integer** |  | [optional] 
-**lastUpdatedByFullName** | **String** |  | [optional] 
-**latestVersion** | **Boolean** |  | [optional] 
-**modelType** | **Integer** |  | [optional] 
-**name** | **String** |  | [optional] 
-**permission** | **String** |  | [optional] 
-**referenceId** | **Integer** |  | [optional] 
-**stencilSet** | **Integer** |  | [optional] 
-**version** | **Integer** |  | [optional] 
+**comment** | **string** |  | [optional] [default to null]
+**createdBy** | **number** |  | [optional] [default to null]
+**createdByFullName** | **string** |  | [optional] [default to null]
+**description** | **string** |  | [optional] [default to null]
+**favorite** | **boolean** |  | [optional] [default to null]
+**id** | **number** |  | [optional] [default to null]
+**lastUpdated** | [**Date**](Date.md) |  | [optional] [default to null]
+**lastUpdatedBy** | **number** |  | [optional] [default to null]
+**lastUpdatedByFullName** | **string** |  | [optional] [default to null]
+**latestVersion** | **boolean** |  | [optional] [default to null]
+**modelType** | **number** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**permission** | **string** |  | [optional] [default to null]
+**referenceId** | **number** |  | [optional] [default to null]
+**stencilSet** | **number** |  | [optional] [default to null]
+**tenantId** | **number** |  | [optional] [default to null]
+**version** | **number** |  | [optional] [default to null]
 
 

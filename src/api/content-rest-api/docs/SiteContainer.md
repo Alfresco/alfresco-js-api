@@ -1,9 +1,9 @@
-# AlfrescoCoreRestApi.SiteContainer
+# SiteContainer
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**folderId** | **String** |  | 
+**id** | **string** |  | [default to null]
+**folderId** | **string** |  | [default to null]
 
 

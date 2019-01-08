@@ -1,11 +1,11 @@
-# ActivitiPublicRestApi.AppDefinition
+# AppDefinition
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**icon** | **String** |  | [optional] 
-**models** | [**[AppModelDefinition]**](AppModelDefinition.md) |  | [optional] 
-**publishIdentityInfo** | [**[PublishIdentityInfoRepresentation]**](PublishIdentityInfoRepresentation.md) |  | [optional] 
-**theme** | **String** |  | [optional] 
+**icon** | **string** |  | [optional] [default to null]
+**models** | [**AppModelDefinition[]**](AppModelDefinition.md) |  | [optional] [default to null]
+**publishIdentityInfo** | [**PublishIdentityInfoRepresentation[]**](PublishIdentityInfoRepresentation.md) |  | [optional] [default to null]
+**theme** | **string** |  | [optional] [default to null]
 
 

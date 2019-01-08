@@ -1,10 +1,10 @@
-# AlfrescoCoreRestApi.NetworkQuota
+# NetworkQuota
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**limit** | **Integer** |  | 
-**usage** | **Integer** |  | 
+**id** | **string** |  | [default to null]
+**limit** | **number** |  | [default to null]
+**usage** | **number** |  | [default to null]
 
 

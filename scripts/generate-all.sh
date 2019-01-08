@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-FOLDEROUT=src/api-new
+FOLDEROUT=src/api
 
 rm -rf $FOLDEROUT
 

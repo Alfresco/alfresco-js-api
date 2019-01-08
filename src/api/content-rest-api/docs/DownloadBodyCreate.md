@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.DownloadBodyCreate
+# DownloadBodyCreate
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**nodeIds** | **[String]** |  | 
+**nodeIds** | **string[]** |  | [default to null]
 
 

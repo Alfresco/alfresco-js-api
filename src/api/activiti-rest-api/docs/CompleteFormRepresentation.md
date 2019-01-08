@@ -1,9 +1,9 @@
-# ActivitiPublicRestApi.CompleteFormRepresentation
+# CompleteFormRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**outcome** | **String** |  | [optional] 
-**values** | **Object** |  | [optional] 
+**outcome** | **string** |  | [optional] [default to null]
+**values** | **any** |  | [optional] [default to null]
 
 

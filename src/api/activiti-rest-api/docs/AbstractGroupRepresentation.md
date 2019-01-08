@@ -1,11 +1,11 @@
-# ActivitiPublicRestApi.AbstractGroupRepresentation
+# AbstractGroupRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**externalId** | **String** |  | [optional] 
-**id** | **Integer** |  | [optional] 
-**name** | **String** |  | [optional] 
-**status** | **String** |  | [optional] 
+**externalId** | **string** |  | [optional] [default to null]
+**id** | **number** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**status** | **string** |  | [optional] [default to null]
 
 

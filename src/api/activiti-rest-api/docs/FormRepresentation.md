@@ -1,17 +1,17 @@
-# ActivitiPublicRestApi.FormRepresentation
+# FormRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **String** |  | [optional] 
-**formDefinition** | [**FormDefinitionRepresentation**](FormDefinitionRepresentation.md) |  | [optional] 
-**id** | **Integer** |  | [optional] 
-**lastUpdated** | **Date** |  | [optional] 
-**lastUpdatedBy** | **Integer** |  | [optional] 
-**lastUpdatedByFullName** | **String** |  | [optional] 
-**name** | **String** |  | [optional] 
-**referenceId** | **Integer** |  | [optional] 
-**stencilSetId** | **Integer** |  | [optional] 
-**version** | **Integer** |  | [optional] 
+**description** | **string** |  | [optional] [default to null]
+**formDefinition** | [**FormDefinitionRepresentation**](FormDefinitionRepresentation.md) |  | [optional] [default to null]
+**id** | **number** |  | [optional] [default to null]
+**lastUpdated** | [**Date**](Date.md) |  | [optional] [default to null]
+**lastUpdatedBy** | **number** |  | [optional] [default to null]
+**lastUpdatedByFullName** | **string** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**referenceId** | **number** |  | [optional] [default to null]
+**stencilSetId** | **number** |  | [optional] [default to null]
+**version** | **number** |  | [optional] [default to null]
 
 

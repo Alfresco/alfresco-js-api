@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.PreferencePaging
+# PreferencePaging
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**list** | [**PreferencePagingList**](PreferencePagingList.md) |  | [optional] 
+**list** | [**PreferencePagingList**](PreferencePagingList.md) |  | [optional] [default to null]
 
 

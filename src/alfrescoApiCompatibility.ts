@@ -19,19 +19,19 @@ import { AlfrescoApi } from './alfrescoApi';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
 
-import { Legacy } from './api/legacy';
-import { CONTENT_LEGACY_APIS } from './api/content-rest-api/src';
-import { APS_LEGACY_APIS } from './api/activiti-rest-api/src';
-import { DISCOVERY_APIS } from './api-new/discovery-rest-api/api';
-import { GS_CLASSIFICATION_APIS } from './api-new/gs-classification-rest-api/api';
-import { GS_CORE_APIS } from './api-new/gs-core-rest-api/api';
-import { SEARCH_APIS } from './api-new/search-rest-api/api';
-import { AUTH_APIS } from './api-new/auth-rest-api/api';
+import { Legacy } from './api-legacy/legacy';
+import { CONTENT_LEGACY_APIS } from './api-legacy/content-rest-api/src';
+import { APS_LEGACY_APIS } from './api-legacy/activiti-rest-api/src';
+import { DISCOVERY_APIS } from './api/discovery-rest-api/api';
+import { GS_CLASSIFICATION_APIS } from './api/gs-classification-rest-api/api';
+import { GS_CORE_APIS } from './api/gs-core-rest-api/api';
+import { SEARCH_APIS } from './api/search-rest-api/api';
+import { AUTH_APIS } from './api/auth-rest-api/api';
 
 import { ContentApi } from './contentApi';
-import { WebscriptApi } from './api-new/content-rest-api/api/webscript.api';
-import { AlfrescoUpload } from './api/alfrescoUpload';
-import { NodesApi } from './api/content-rest-api/src/api/nodesApi';
+import { WebscriptApi } from './api/content-rest-api/api/webscript.api';
+import { AlfrescoUpload } from './api-legacy/alfrescoUpload';
+import { NodesApi } from './api-legacy/content-rest-api/src/api/nodesApi';
 
 /**
  * @deprecated 3.0.0

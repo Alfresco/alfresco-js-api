@@ -1,16 +1,16 @@
-# AlfrescoCoreRestApi.Comment
+# Comment
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**content** | **String** |  | 
-**createdBy** | [**Person**](Person.md) |  | 
-**createdAt** | **Date** |  | 
-**edited** | **Boolean** |  | 
-**modifiedBy** | [**Person**](Person.md) |  | 
-**modifiedAt** | **Date** |  | 
-**canEdit** | **Boolean** |  | 
-**canDelete** | **Boolean** |  | 
+**id** | **string** |  | [default to null]
+**content** | **string** |  | [default to null]
+**createdBy** | [**Person**](Person.md) |  | [default to null]
+**createdAt** | [**Date**](Date.md) |  | [default to null]
+**edited** | **boolean** |  | [default to null]
+**modifiedBy** | [**Person**](Person.md) |  | [default to null]
+**modifiedAt** | [**Date**](Date.md) |  | [default to null]
+**canEdit** | **boolean** |  | [default to null]
+**canDelete** | **boolean** |  | [default to null]
 
 

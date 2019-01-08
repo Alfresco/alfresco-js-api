@@ -1,9 +1,9 @@
-# ActivitiPublicRestApi.ChangePasswordRepresentation
+# ChangePasswordRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**newPassword** | **String** |  | [optional] 
-**oldPassword** | **String** |  | [optional] 
+**newPassword** | **string** |  | [optional] [default to null]
+**oldPassword** | **string** |  | [optional] [default to null]
 
 

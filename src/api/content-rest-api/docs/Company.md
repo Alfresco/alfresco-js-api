@@ -1,15 +1,15 @@
-# AlfrescoCoreRestApi.Company
+# Company
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization** | **String** |  | [optional] 
-**address1** | **String** |  | [optional] 
-**address2** | **String** |  | [optional] 
-**address3** | **String** |  | [optional] 
-**postcode** | **String** |  | [optional] 
-**telephone** | **String** |  | [optional] 
-**fax** | **String** |  | [optional] 
-**email** | **String** |  | [optional] 
+**organization** | **string** |  | [optional] [default to null]
+**address1** | **string** |  | [optional] [default to null]
+**address2** | **string** |  | [optional] [default to null]
+**address3** | **string** |  | [optional] [default to null]
+**postcode** | **string** |  | [optional] [default to null]
+**telephone** | **string** |  | [optional] [default to null]
+**fax** | **string** |  | [optional] [default to null]
+**email** | **string** |  | [optional] [default to null]
 
 

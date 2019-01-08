@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.TagBody
+# TagBody
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tag** | **String** |  | 
+**tag** | **string** |  | [default to null]
 
 

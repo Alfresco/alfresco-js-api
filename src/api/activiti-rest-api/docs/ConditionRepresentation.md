@@ -1,15 +1,16 @@
-# ActivitiPublicRestApi.ConditionRepresentation
+# ConditionRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**leftFormFieldId** | **String** |  | [optional] 
-**leftRestResponseId** | **String** |  | [optional] 
-**nextConditionOperator** | **String** |  | [optional] 
-**operator** | **String** |  | [optional] 
-**rightFormFieldId** | **String** |  | [optional] 
-**rightRestResponseId** | **String** |  | [optional] 
-**rightType** | **String** |  | [optional] 
-**rightValue** | **Object** |  | [optional] 
+**leftFormFieldId** | **string** |  | [optional] [default to null]
+**leftRestResponseId** | **string** |  | [optional] [default to null]
+**nextCondition** | [**ConditionRepresentation**](ConditionRepresentation.md) |  | [optional] [default to null]
+**nextConditionOperator** | **string** |  | [optional] [default to null]
+**operator** | **string** |  | [optional] [default to null]
+**rightFormFieldId** | **string** |  | [optional] [default to null]
+**rightRestResponseId** | **string** |  | [optional] [default to null]
+**rightType** | **string** |  | [optional] [default to null]
+**rightValue** | **any** |  | [optional] [default to null]
 
 

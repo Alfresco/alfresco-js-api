@@ -1,9 +1,9 @@
-# ActivitiPublicRestApi.UserFilterOrderRepresentation
+# UserFilterOrderRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**appId** | **Integer** |  | [optional] 
-**order** | **[Integer]** |  | [optional] 
+**appId** | **number** |  | [optional] [default to null]
+**order** | **number[]** |  | [optional] [default to null]
 
 

@@ -1,13 +1,13 @@
-# ActivitiPublicRestApi.EndpointBasicAuthRepresentation
+# EndpointBasicAuthRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **Date** |  | [optional] 
-**id** | **Integer** |  | [optional] 
-**lastUpdated** | **Date** |  | [optional] 
-**name** | **String** |  | [optional] 
-**tenantId** | **Integer** |  | [optional] 
-**username** | **String** |  | [optional] 
+**created** | [**Date**](Date.md) |  | [optional] [default to null]
+**id** | **number** |  | [optional] [default to null]
+**lastUpdated** | [**Date**](Date.md) |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**tenantId** | **number** |  | [optional] [default to null]
+**username** | **string** |  | [optional] [default to null]
 
 

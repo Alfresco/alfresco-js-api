@@ -1,9 +1,9 @@
-# AlfrescoCoreRestApi.ChildAssociationInfo
+# ChildAssociationInfo
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**assocType** | **String** |  | 
-**isPrimary** | **Boolean** |  | 
+**assocType** | **string** |  | [default to null]
+**isPrimary** | **boolean** |  | [default to null]
 
 

@@ -1,13 +1,13 @@
-# ActivitiPublicRestApi.ProcessInstanceFilterRepresentation
+# ProcessInstanceFilterRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**asc** | **Boolean** |  | [optional] 
-**name** | **String** |  | [optional] 
-**processDefinitionId** | **String** |  | [optional] 
-**processDefinitionKey** | **String** |  | [optional] 
-**sort** | **String** |  | [optional] 
-**state** | **String** |  | [optional] 
+**asc** | **boolean** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**processDefinitionId** | **string** |  | [optional] [default to null]
+**processDefinitionKey** | **string** |  | [optional] [default to null]
+**sort** | **string** |  | [optional] [default to null]
+**state** | **string** |  | [optional] [default to null]
 
 

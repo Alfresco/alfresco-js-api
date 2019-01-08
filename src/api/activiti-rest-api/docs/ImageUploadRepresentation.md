@@ -1,11 +1,11 @@
-# ActivitiPublicRestApi.ImageUploadRepresentation
+# ImageUploadRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **Date** |  | [optional] 
-**id** | **Integer** |  | [optional] 
-**name** | **String** |  | [optional] 
-**userId** | **Integer** |  | [optional] 
+**created** | [**Date**](Date.md) |  | [optional] [default to null]
+**id** | **number** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**userId** | **number** |  | [optional] [default to null]
 
 

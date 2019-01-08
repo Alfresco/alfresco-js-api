@@ -1,358 +1,418 @@
-# Alfresco Activiti Rest Api
+Provides access to the complete features provided by Alfresco Process Services powered by Activiti.
 
-ActivitiPublicRestApi - JavaScript client for activiti-public-rest-api
-The Alfresco Activiti BPM Suite comes with a REST API. It includes both an Enterprise equivalent of the Activiti Open Source REST API exposing the generic Activiti Engine operations, and a dedicated set op REST API endpoints specific for the functionality in the Alfresco Activiti BPM Suite.      
+You can use this API to integrate Alfresco Process Services with external applications.
 
-- API version: 1.4.0
-- Package version: 1.4.0
+- Last Build date: 2018-12-18T01:16:06.816Z
 
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://localhost:8080/activiti-app*
+All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ActivitiPublicRestApi.AboutApi* | [**getAppVersion**](docs/AboutApi.md#getAppVersion) | **GET** /api/enterprise/app-version | Server Information
-*ActivitiPublicRestApi.AdminEndpointsApi* | [**createBasicAuthConfiguration**](docs/AdminEndpointsApi.md#createBasicAuthConfiguration) | **POST** /api/enterprise/admin/basic-auths | createBasicAuthConfiguration
-*ActivitiPublicRestApi.AdminEndpointsApi* | [**createEndpointConfiguration**](docs/AdminEndpointsApi.md#createEndpointConfiguration) | **POST** /api/enterprise/admin/endpoints | createEndpointConfiguration
-*ActivitiPublicRestApi.AdminEndpointsApi* | [**getBasicAuthConfiguration**](docs/AdminEndpointsApi.md#getBasicAuthConfiguration) | **GET** /api/enterprise/admin/basic-auths/{basicAuthId} | getBasicAuthConfiguration
-*ActivitiPublicRestApi.AdminEndpointsApi* | [**getBasicAuthConfigurations**](docs/AdminEndpointsApi.md#getBasicAuthConfigurations) | **GET** /api/enterprise/admin/basic-auths | getBasicAuthConfigurations
-*ActivitiPublicRestApi.AdminEndpointsApi* | [**getEndpointConfiguration**](docs/AdminEndpointsApi.md#getEndpointConfiguration) | **GET** /api/enterprise/admin/endpoints/{endpointConfigurationId} | getEndpointConfiguration
-*ActivitiPublicRestApi.AdminEndpointsApi* | [**getEndpointConfigurations**](docs/AdminEndpointsApi.md#getEndpointConfigurations) | **GET** /api/enterprise/admin/endpoints | getEndpointConfigurations
-*ActivitiPublicRestApi.AdminEndpointsApi* | [**removeBasicAuthonfiguration**](docs/AdminEndpointsApi.md#removeBasicAuthonfiguration) | **DELETE** /api/enterprise/admin/basic-auths/{basicAuthId} | removeBasicAuthonfiguration
-*ActivitiPublicRestApi.AdminEndpointsApi* | [**removeEndpointConfiguration**](docs/AdminEndpointsApi.md#removeEndpointConfiguration) | **DELETE** /api/enterprise/admin/endpoints/{endpointConfigurationId} | removeEndpointConfiguration
-*ActivitiPublicRestApi.AdminEndpointsApi* | [**updateBasicAuthConfiguration**](docs/AdminEndpointsApi.md#updateBasicAuthConfiguration) | **PUT** /api/enterprise/admin/basic-auths/{basicAuthId} | updateBasicAuthConfiguration
-*ActivitiPublicRestApi.AdminEndpointsApi* | [**updateEndpointConfiguration**](docs/AdminEndpointsApi.md#updateEndpointConfiguration) | **PUT** /api/enterprise/admin/endpoints/{endpointConfigurationId} | updateEndpointConfiguration
-*ActivitiPublicRestApi.AdminGroupsApi* | [**activate**](docs/AdminGroupsApi.md#activate) | **POST** /api/enterprise/admin/groups/{groupId}/action/activate | activate
-*ActivitiPublicRestApi.AdminGroupsApi* | [**addAllUsersToGroup**](docs/AdminGroupsApi.md#addAllUsersToGroup) | **POST** /api/enterprise/admin/groups/{groupId}/add-all-users | addAllUsersToGroup
-*ActivitiPublicRestApi.AdminGroupsApi* | [**addGroupCapabilities**](docs/AdminGroupsApi.md#addGroupCapabilities) | **POST** /api/enterprise/admin/groups/{groupId}/capabilities | addGroupCapabilities
-*ActivitiPublicRestApi.AdminGroupsApi* | [**addGroupMember**](docs/AdminGroupsApi.md#addGroupMember) | **POST** /api/enterprise/admin/groups/{groupId}/members/{userId} | addGroupMember
-*ActivitiPublicRestApi.AdminGroupsApi* | [**addRelatedGroup**](docs/AdminGroupsApi.md#addRelatedGroup) | **POST** /api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | addRelatedGroup
-*ActivitiPublicRestApi.AdminGroupsApi* | [**createNewGroup**](docs/AdminGroupsApi.md#createNewGroup) | **POST** /api/enterprise/admin/groups | createNewGroup
-*ActivitiPublicRestApi.AdminGroupsApi* | [**deleteGroupCapability**](docs/AdminGroupsApi.md#deleteGroupCapability) | **DELETE** /api/enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId} | deleteGroupCapability
-*ActivitiPublicRestApi.AdminGroupsApi* | [**deleteGroupMember**](docs/AdminGroupsApi.md#deleteGroupMember) | **DELETE** /api/enterprise/admin/groups/{groupId}/members/{userId} | deleteGroupMember
-*ActivitiPublicRestApi.AdminGroupsApi* | [**deleteGroup**](docs/AdminGroupsApi.md#deleteGroup) | **DELETE** /api/enterprise/admin/groups/{groupId} | deleteGroup
-*ActivitiPublicRestApi.AdminGroupsApi* | [**deleteRelatedGroup**](docs/AdminGroupsApi.md#deleteRelatedGroup) | **DELETE** /api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | deleteRelatedGroup
-*ActivitiPublicRestApi.AdminGroupsApi* | [**getCapabilities**](docs/AdminGroupsApi.md#getCapabilities) | **GET** /api/enterprise/admin/groups/{groupId}/potential-capabilities | getCapabilities
-*ActivitiPublicRestApi.AdminGroupsApi* | [**getGroupUsers**](docs/AdminGroupsApi.md#getGroupUsers) | **GET** /api/enterprise/admin/groups/{groupId}/users | getGroupUsers
-*ActivitiPublicRestApi.AdminGroupsApi* | [**getGroup**](docs/AdminGroupsApi.md#getGroup) | **GET** /api/enterprise/admin/groups/{groupId} | getGroup
-*ActivitiPublicRestApi.AdminGroupsApi* | [**getGroups**](docs/AdminGroupsApi.md#getGroups) | **GET** /api/enterprise/admin/groups | getGroups
-*ActivitiPublicRestApi.AdminGroupsApi* | [**getRelatedGroups**](docs/AdminGroupsApi.md#getRelatedGroups) | **GET** /api/enterprise/admin/groups/{groupId}/related-groups | getRelatedGroups
-*ActivitiPublicRestApi.AdminGroupsApi* | [**updateGroup**](docs/AdminGroupsApi.md#updateGroup) | **PUT** /api/enterprise/admin/groups/{groupId} | updateGroup
-*ActivitiPublicRestApi.AdminTenantsApi* | [**createTenant**](docs/AdminTenantsApi.md#createTenant) | **POST** /api/enterprise/admin/tenants | Create a new tenant
-*ActivitiPublicRestApi.AdminTenantsApi* | [**deleteTenant**](docs/AdminTenantsApi.md#deleteTenant) | **DELETE** /api/enterprise/admin/tenants/{tenantId} | Delete a tenant
-*ActivitiPublicRestApi.AdminTenantsApi* | [**getTenantEvents**](docs/AdminTenantsApi.md#getTenantEvents) | **GET** /api/enterprise/admin/tenants/{tenantId}/events | Get tenant events
-*ActivitiPublicRestApi.AdminTenantsApi* | [**getTenantLogo**](docs/AdminTenantsApi.md#getTenantLogo) | **GET** /api/enterprise/admin/tenants/{tenantId}/logo | Get tenant logo
-*ActivitiPublicRestApi.AdminTenantsApi* | [**getTenant**](docs/AdminTenantsApi.md#getTenant) | **GET** /api/enterprise/admin/tenants/{tenantId} | Get tenant details
-*ActivitiPublicRestApi.AdminTenantsApi* | [**getTenants**](docs/AdminTenantsApi.md#getTenants) | **GET** /api/enterprise/admin/tenants | Get all tenants
-*ActivitiPublicRestApi.AdminTenantsApi* | [**update**](docs/AdminTenantsApi.md#update) | **PUT** /api/enterprise/admin/tenants/{tenantId} | Update a tenant
-*ActivitiPublicRestApi.AdminTenantsApi* | [**uploadTenantLogo**](docs/AdminTenantsApi.md#uploadTenantLogo) | **POST** /api/enterprise/admin/tenants/{tenantId}/logo | Update tenant logo
-*ActivitiPublicRestApi.AdminUsersApi* | [**bulkUpdateUsers**](docs/AdminUsersApi.md#bulkUpdateUsers) | **PUT** /api/enterprise/admin/users | Bulk Update a list of users
-*ActivitiPublicRestApi.AdminUsersApi* | [**createNewUser**](docs/AdminUsersApi.md#createNewUser) | **POST** /api/enterprise/admin/users | Create a new user
-*ActivitiPublicRestApi.AdminUsersApi* | [**getUser**](docs/AdminUsersApi.md#getUser) | **GET** /api/enterprise/admin/users/{userId} | Retrieve user information
-*ActivitiPublicRestApi.AdminUsersApi* | [**getUsers**](docs/AdminUsersApi.md#getUsers) | **GET** /api/enterprise/admin/users | Get a list of users
-*ActivitiPublicRestApi.AdminUsersApi* | [**updateUserDetails**](docs/AdminUsersApi.md#updateUserDetails) | **PUT** /api/enterprise/admin/users/{userId} | Update user details
-*ActivitiPublicRestApi.AlfrescoApi* | [**confirmAuthorisation**](docs/AlfrescoApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/alfresco-cloud/confirm-auth-request | Alfresco Cloud Authorization
-*ActivitiPublicRestApi.AlfrescoApi* | [**getAllNetworks**](docs/AlfrescoApi.md#getAllNetworks) | **GET** /api/enterprise/integration/alfresco-cloud/networks | List Alfresco networks
-*ActivitiPublicRestApi.AlfrescoApi* | [**getAllSites**](docs/AlfrescoApi.md#getAllSites) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites | List Alfresco sites
-*ActivitiPublicRestApi.AlfrescoApi* | [**getAllSites**](docs/AlfrescoApi.md#getAllSites) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
-*ActivitiPublicRestApi.AlfrescoApi* | [**getContentInFolder**](docs/AlfrescoApi.md#getContentInFolder) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
-*ActivitiPublicRestApi.AlfrescoApi* | [**getContentInFolder**](docs/AlfrescoApi.md#getContentInFolder) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
-*ActivitiPublicRestApi.AlfrescoApi* | [**getContentInSite**](docs/AlfrescoApi.md#getContentInSite) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content | List file &amp; folders inside a specific site
-*ActivitiPublicRestApi.AlfrescoApi* | [**getContentInSite**](docs/AlfrescoApi.md#getContentInSite) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List file &amp; folders inside a specific site
-*ActivitiPublicRestApi.AlfrescoApi* | [**getRepositories**](docs/AlfrescoApi.md#getRepositories) | **GET** /api/enterprise/profile/accounts/alfresco | List Alfresco repositories
-*ActivitiPublicRestApi.AppsApi* | [**deployAppDefinitions**](docs/AppsApi.md#deployAppDefinitions) | **POST** /api/enterprise/runtime-app-definitions | Deploy published app
-*ActivitiPublicRestApi.AppsApi* | [**exportAppDefinition**](docs/AppsApi.md#exportAppDefinition) | **GET** /api/enterprise/app-definitions/{modelId}/export | Export App Definition
-*ActivitiPublicRestApi.AppsApi* | [**getAppDefinitions**](docs/AppsApi.md#getAppDefinitions) | **GET** /api/enterprise/runtime-app-definitions | List runtime apps
-*ActivitiPublicRestApi.AppsApi* | [**importAppDefinition**](docs/AppsApi.md#importAppDefinition) | **POST** /api/enterprise/app-definitions/import | Import App Definition
-*ActivitiPublicRestApi.AppsApi* | [**importAppDefinition**](docs/AppsApi.md#importAppDefinition) | **POST** /api/enterprise/app-definitions/{modelId}/import | Import App
-*ActivitiPublicRestApi.AppsApi* | [**publishAppDefinition**](docs/AppsApi.md#publishAppDefinition) | **POST** /api/enterprise/app-definitions/{modelId}/publish | Publish App
-*ActivitiPublicRestApi.AppsDefinitionApi* | [**exportAppDefinition**](docs/AppsDefinitionApi.md#exportAppDefinition) | **GET** /api/enterprise/app-definitions/{modelId}/export | Export App Definition
-*ActivitiPublicRestApi.AppsDefinitionApi* | [**importAppDefinition**](docs/AppsDefinitionApi.md#importAppDefinition) | **POST** /api/enterprise/app-definitions/import | Import App Definition
-*ActivitiPublicRestApi.AppsDefinitionApi* | [**importAppDefinition**](docs/AppsDefinitionApi.md#importAppDefinition) | **POST** /api/enterprise/app-definitions/{modelId}/import | Import App
-*ActivitiPublicRestApi.AppsDefinitionApi* | [**publishAppDefinition**](docs/AppsDefinitionApi.md#publishAppDefinition) | **POST** /api/enterprise/app-definitions/{modelId}/publish | Publish App
-*ActivitiPublicRestApi.AppsRuntimeApi* | [**deployAppDefinitions**](docs/AppsRuntimeApi.md#deployAppDefinitions) | **POST** /api/enterprise/runtime-app-definitions | Deploy published app
-*ActivitiPublicRestApi.AppsRuntimeApi* | [**getAppDefinitions**](docs/AppsRuntimeApi.md#getAppDefinitions) | **GET** /api/enterprise/runtime-app-definitions | List runtime apps
-*ActivitiPublicRestApi.CommentsApi* | [**addProcessInstanceComment**](docs/CommentsApi.md#addProcessInstanceComment) | **POST** /api/enterprise/process-instances/{processInstanceId}/comments | Add a comment to a Process
-*ActivitiPublicRestApi.CommentsApi* | [**addTaskComment**](docs/CommentsApi.md#addTaskComment) | **POST** /api/enterprise/tasks/{taskId}/comments | Add a comment to a Task
-*ActivitiPublicRestApi.CommentsApi* | [**getProcessInstanceComments**](docs/CommentsApi.md#getProcessInstanceComments) | **GET** /api/enterprise/process-instances/{processInstanceId}/comments | Comment list added to Process
-*ActivitiPublicRestApi.CommentsApi* | [**getTaskComments**](docs/CommentsApi.md#getTaskComments) | **GET** /api/enterprise/tasks/{taskId}/comments | Comment list added to Task
-*ActivitiPublicRestApi.ContentApi* | [**createRelatedContentOnProcessInstance**](docs/ContentApi.md#createRelatedContentOnProcessInstance) | **POST** /api/enterprise/process-instances/{processInstanceId}/content | createRelatedContentOnProcessInstance
-*ActivitiPublicRestApi.ContentApi* | [**createRelatedContentOnProcessInstance**](docs/ContentApi.md#createRelatedContentOnProcessInstance) | **POST** /api/enterprise/process-instances/{processInstanceId}/raw-content | createRelatedContentOnProcessInstance
-*ActivitiPublicRestApi.ContentApi* | [**createRelatedContentOnTask**](docs/ContentApi.md#createRelatedContentOnTask) | **POST** /api/enterprise/tasks/{taskId}/content | To relate content (eg from Alfresco) to a task
-*ActivitiPublicRestApi.ContentApi* | [**createRelatedContentOnTask**](docs/ContentApi.md#createRelatedContentOnTask) | **POST** /api/enterprise/tasks/{taskId}/raw-content | Upload content to a task
-*ActivitiPublicRestApi.ContentApi* | [**createTemporaryRawRelatedContent**](docs/ContentApi.md#createTemporaryRawRelatedContent) | **POST** /api/enterprise/content/raw | createTemporaryRawRelatedContent
-*ActivitiPublicRestApi.ContentApi* | [**createTemporaryRelatedContent**](docs/ContentApi.md#createTemporaryRelatedContent) | **POST** /api/enterprise/content | createTemporaryRelatedContent
-*ActivitiPublicRestApi.ContentApi* | [**deleteContent**](docs/ContentApi.md#deleteContent) | **DELETE** /api/enterprise/content/{contentId} | deleteContent
-*ActivitiPublicRestApi.ContentApi* | [**getContent**](docs/ContentApi.md#getContent) | **GET** /api/enterprise/content/{contentId} | getContent
-*ActivitiPublicRestApi.ContentApi* | [**getProcessInstanceContent**](docs/ContentApi.md#getProcessInstanceContent) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
-*ActivitiPublicRestApi.ContentApi* | [**getRawContent**](docs/ContentApi.md#getRawContent) | **GET** /api/enterprise/content/{contentId}/raw | getRawContent
-*ActivitiPublicRestApi.ContentApi* | [**getRelatedContentForProcessInstance**](docs/ContentApi.md#getRelatedContentForProcessInstance) | **GET** /api/enterprise/process-instances/{processInstanceId}/content | getRelatedContentForProcessInstance
-*ActivitiPublicRestApi.ContentApi* | [**getRelatedContentForTask**](docs/ContentApi.md#getRelatedContentForTask) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
-*ActivitiPublicRestApi.ContentRenditionApi* | [**getRawContent**](docs/ContentRenditionApi.md#getRawContent) | **GET** /api/enterprise/content/{contentId}/rendition/{renditionType} | Retrieve Raw Content
-*ActivitiPublicRestApi.EditorApi* | [**getFormHistory**](docs/EditorApi.md#getFormHistory) | **GET** /api/enterprise/editor/form-models/{formId}/history/{formHistoryId} | getFormHistory
-*ActivitiPublicRestApi.EditorApi* | [**getForm**](docs/EditorApi.md#getForm) | **GET** /api/enterprise/editor/form-models/{formId} | getForm
-*ActivitiPublicRestApi.EditorApi* | [**getForms**](docs/EditorApi.md#getForms) | **GET** /api/enterprise/editor/form-models/values | getForms
-*ActivitiPublicRestApi.EditorApi* | [**saveForm**](docs/EditorApi.md#saveForm) | **PUT** /api/enterprise/editor/form-models/{formId} | saveForm
-*ActivitiPublicRestApi.EditorApi* | [**validateModel**](docs/EditorApi.md#validateModel) | **PUT** /api/enterprise/editor/form-models/{formId}/validate | validateModel
-*ActivitiPublicRestApi.GroupsApi* | [**getGroups**](docs/GroupsApi.md#getGroups) | **GET** /api/enterprise/groups | List groups
-*ActivitiPublicRestApi.GroupsApi* | [**getUsersForGroup**](docs/GroupsApi.md#getUsersForGroup) | **GET** /api/enterprise/groups/{groupId}/users | List users member of a specific group
-*ActivitiPublicRestApi.IDMSyncApi* | [**getLogFile**](docs/IDMSyncApi.md#getLogFile) | **GET** /api/enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile | getLogFile
-*ActivitiPublicRestApi.IDMSyncApi* | [**getSyncLogEntries**](docs/IDMSyncApi.md#getSyncLogEntries) | **GET** /api/enterprise/idm-sync-log-entries | getSyncLogEntries
-*ActivitiPublicRestApi.IntegrationApi* | [**confirmAuthorisation**](docs/IntegrationApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/alfresco-cloud/confirm-auth-request | Alfresco Cloud Authorization
-*ActivitiPublicRestApi.IntegrationApi* | [**confirmAuthorisation**](docs/IntegrationApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/box/confirm-auth-request | Box Authorization
-*ActivitiPublicRestApi.IntegrationApi* | [**confirmAuthorisation**](docs/IntegrationApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/google-drive/confirm-auth-request | Drive Authorization
-*ActivitiPublicRestApi.IntegrationApi* | [**createRepositoryAccount**](docs/IntegrationApi.md#createRepositoryAccount) | **POST** /api/enterprise/integration/box/{userId}/account | Create Box account
-*ActivitiPublicRestApi.IntegrationApi* | [**deleteRepositoryAccount**](docs/IntegrationApi.md#deleteRepositoryAccount) | **DELETE** /api/enterprise/integration/box/{userId}/account | Delete Box account
-*ActivitiPublicRestApi.IntegrationApi* | [**getAllNetworks**](docs/IntegrationApi.md#getAllNetworks) | **GET** /api/enterprise/integration/alfresco-cloud/networks | List Alfresco networks
-*ActivitiPublicRestApi.IntegrationApi* | [**getAllSites**](docs/IntegrationApi.md#getAllSites) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites | List Alfresco sites
-*ActivitiPublicRestApi.IntegrationApi* | [**getAllSites**](docs/IntegrationApi.md#getAllSites) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
-*ActivitiPublicRestApi.IntegrationApi* | [**getBoxPluginStatus**](docs/IntegrationApi.md#getBoxPluginStatus) | **GET** /api/enterprise/integration/box/status | Retrieve if Box Integration is enabled
-*ActivitiPublicRestApi.IntegrationApi* | [**getContentInFolder**](docs/IntegrationApi.md#getContentInFolder) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
-*ActivitiPublicRestApi.IntegrationApi* | [**getContentInFolder**](docs/IntegrationApi.md#getContentInFolder) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
-*ActivitiPublicRestApi.IntegrationApi* | [**getContentInSite**](docs/IntegrationApi.md#getContentInSite) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content | List file &amp; folders inside a specific site
-*ActivitiPublicRestApi.IntegrationApi* | [**getContentInSite**](docs/IntegrationApi.md#getContentInSite) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List file &amp; folders inside a specific site
-*ActivitiPublicRestApi.IntegrationApi* | [**getFiles**](docs/IntegrationApi.md#getFiles) | **GET** /api/enterprise/integration/box/files | List file &amp; folders
-*ActivitiPublicRestApi.IntegrationApi* | [**getFiles**](docs/IntegrationApi.md#getFiles) | **GET** /api/enterprise/integration/google-drive/files | List file &amp; folders
-*ActivitiPublicRestApi.IntegrationApi* | [**getRepositories**](docs/IntegrationApi.md#getRepositories) | **GET** /api/enterprise/profile/accounts/alfresco | List Alfresco repositories
-*ActivitiPublicRestApi.IntegrationApi* | [**getRepositoryAccount**](docs/IntegrationApi.md#getRepositoryAccount) | **GET** /api/enterprise/integration/box/{userId}/account | List Box Account
-*ActivitiPublicRestApi.IntegrationApi* | [**updateRepositoryAccount**](docs/IntegrationApi.md#updateRepositoryAccount) | **PUT** /api/enterprise/integration/box/{userId}/account | Update Box account
-*ActivitiPublicRestApi.IntegrationAccountApi* | [**getAccounts**](docs/IntegrationAccountApi.md#getAccounts) | **GET** /api/enterprise/account/integration | Retrieve Alfresco account information
-*ActivitiPublicRestApi.IntegrationAlfrescoCloudApi* | [**confirmAuthorisation**](docs/IntegrationAlfrescoCloudApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/alfresco-cloud/confirm-auth-request | Alfresco Cloud Authorization
-*ActivitiPublicRestApi.IntegrationAlfrescoCloudApi* | [**getAllNetworks**](docs/IntegrationAlfrescoCloudApi.md#getAllNetworks) | **GET** /api/enterprise/integration/alfresco-cloud/networks | List Alfresco networks
-*ActivitiPublicRestApi.IntegrationAlfrescoCloudApi* | [**getAllSites**](docs/IntegrationAlfrescoCloudApi.md#getAllSites) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites | List Alfresco sites
-*ActivitiPublicRestApi.IntegrationAlfrescoCloudApi* | [**getContentInFolder**](docs/IntegrationAlfrescoCloudApi.md#getContentInFolder) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
-*ActivitiPublicRestApi.IntegrationAlfrescoCloudApi* | [**getContentInSite**](docs/IntegrationAlfrescoCloudApi.md#getContentInSite) | **GET** /api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content | List file &amp; folders inside a specific site
-*ActivitiPublicRestApi.IntegrationAlfrescoOnPremiseApi* | [**getAllSites**](docs/IntegrationAlfrescoOnPremiseApi.md#getAllSites) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
-*ActivitiPublicRestApi.IntegrationAlfrescoOnPremiseApi* | [**getContentInFolder**](docs/IntegrationAlfrescoOnPremiseApi.md#getContentInFolder) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List file &amp; folders inside a specific folder
-*ActivitiPublicRestApi.IntegrationAlfrescoOnPremiseApi* | [**getContentInSite**](docs/IntegrationAlfrescoOnPremiseApi.md#getContentInSite) | **GET** /api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List file &amp; folders inside a specific site
-*ActivitiPublicRestApi.IntegrationAlfrescoOnPremiseApi* | [**getRepositories**](docs/IntegrationAlfrescoOnPremiseApi.md#getRepositories) | **GET** /api/enterprise/profile/accounts/alfresco | List Alfresco repositories
-*ActivitiPublicRestApi.IntegrationBoxApi* | [**confirmAuthorisation**](docs/IntegrationBoxApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/box/confirm-auth-request | Box Authorization
-*ActivitiPublicRestApi.IntegrationBoxApi* | [**createRepositoryAccount**](docs/IntegrationBoxApi.md#createRepositoryAccount) | **POST** /api/enterprise/integration/box/{userId}/account | Create Box account
-*ActivitiPublicRestApi.IntegrationBoxApi* | [**deleteRepositoryAccount**](docs/IntegrationBoxApi.md#deleteRepositoryAccount) | **DELETE** /api/enterprise/integration/box/{userId}/account | Delete Box account
-*ActivitiPublicRestApi.IntegrationBoxApi* | [**getBoxPluginStatus**](docs/IntegrationBoxApi.md#getBoxPluginStatus) | **GET** /api/enterprise/integration/box/status | Retrieve if Box Integration is enabled
-*ActivitiPublicRestApi.IntegrationBoxApi* | [**getFiles**](docs/IntegrationBoxApi.md#getFiles) | **GET** /api/enterprise/integration/box/files | List file &amp; folders
-*ActivitiPublicRestApi.IntegrationBoxApi* | [**getRepositoryAccount**](docs/IntegrationBoxApi.md#getRepositoryAccount) | **GET** /api/enterprise/integration/box/{userId}/account | List Box Account
-*ActivitiPublicRestApi.IntegrationBoxApi* | [**updateRepositoryAccount**](docs/IntegrationBoxApi.md#updateRepositoryAccount) | **PUT** /api/enterprise/integration/box/{userId}/account | Update Box account
-*ActivitiPublicRestApi.IntegrationDriveApi* | [**confirmAuthorisation**](docs/IntegrationDriveApi.md#confirmAuthorisation) | **GET** /api/enterprise/integration/google-drive/confirm-auth-request | Drive Authorization
-*ActivitiPublicRestApi.IntegrationDriveApi* | [**getFiles**](docs/IntegrationDriveApi.md#getFiles) | **GET** /api/enterprise/integration/google-drive/files | List file &amp; folders
-*ActivitiPublicRestApi.ModelBpmnApi* | [**getHistoricProcessModelBpmn20Xml**](docs/ModelBpmnApi.md#getHistoricProcessModelBpmn20Xml) | **GET** /api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20 | Export a previous process definition model to a BPMN 2.0 xml file
-*ActivitiPublicRestApi.ModelBpmnApi* | [**getProcessModelBpmn20Xml**](docs/ModelBpmnApi.md#getProcessModelBpmn20Xml) | **GET** /api/enterprise/models/{processModelId}/bpmn20 | Export a process definition model to a BPMN 2.0 xml file
-*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getHistoricEditorDisplayJsonClient**](docs/ModelJsonBpmnApi.md#getHistoricEditorDisplayJsonClient) | **GET** /api/enterprise/models/{processModelId}/history/{processModelHistoryId}/model-json | Export a previous process definition model to JSON
-*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getEditorDisplayJsonClient**](docs/ModelJsonBpmnApi.md#getEditorDisplayJsonClient) | **GET** /api/enterprise/models/{processModelId}/model-json | Export a process definition model to JSON
-*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getModelJSON**](docs/ModelJsonBpmnApi.md#getModelJSON) | **GET** /app/rest/process-definitions/{processDefinitionId}/model-json| Export a process definition model to JSON
-*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getModelJSONForProcessDefinition**](docs/ModelJsonBpmnApi.md#getModelJSONForProcessDefinition) | **GET** /app/rest/process-instances/{processInstanceId}/model-json | Export a process instances model to JSON
-*ActivitiPublicRestApi.ModelsApi* | [**createModel**](docs/ModelsApi.md#createModel) | **POST** /api/enterprise/models | To create a new model
-*ActivitiPublicRestApi.ModelsApi* | [**deleteModel**](docs/ModelsApi.md#deleteModel) | **DELETE** /api/enterprise/models/{modelId} | Delete a model
-*ActivitiPublicRestApi.ModelsApi* | [**duplicateModel**](docs/ModelsApi.md#duplicateModel) | **POST** /api/enterprise/models/{modelId}/clone | To duplicate an existing model
-*ActivitiPublicRestApi.ModelsApi* | [**getModelJSON**](docs/ModelsApi.md#getModelJSON) | **GET** /api/enterprise/models/{modelId}/editor/json | Get the JSON model
-*ActivitiPublicRestApi.ModelsApi* | [**getModelThumbnail**](docs/ModelsApi.md#getModelThumbnail) | **GET** /api/enterprise/models/{modelId}/thumbnail | Get Model thumbnail
-*ActivitiPublicRestApi.ModelsApi* | [**getModel**](docs/ModelsApi.md#getModel) | **GET** /api/enterprise/models/{modelId} | To retrieve details about a particular model (process, form, decision rule or app)
-*ActivitiPublicRestApi.ModelsApi* | [**getModelsToIncludeInAppDefinition**](docs/ModelsApi.md#getModelsToIncludeInAppDefinition) | **GET** /api/enterprise/models-for-app-definition | TODO
-*ActivitiPublicRestApi.ModelsApi* | [**getModels**](docs/ModelsApi.md#getModels) | **GET** /api/enterprise/models | List models (process, form, decision rule or app)
-*ActivitiPublicRestApi.ModelsApi* | [**importNewVersion**](docs/ModelsApi.md#importNewVersion) | **POST** /api/enterprise/models/{modelId}/newversion | Create a new model version
-*ActivitiPublicRestApi.ModelsApi* | [**importProcessModel**](docs/ModelsApi.md#importProcessModel) | **POST** /api/enterprise/process-models/import | To import a BPMN 2.0 xml file
-*ActivitiPublicRestApi.ModelsApi* | [**saveModel**](docs/ModelsApi.md#saveModel) | **POST** /api/enterprise/models/{modelId}/editor/json | Save the JSON model
-*ActivitiPublicRestApi.ModelsApi* | [**updateModel**](docs/ModelsApi.md#updateModel) | **PUT** /api/enterprise/models/{modelId} | Edit a specific model
-*ActivitiPublicRestApi.ModelsApi* | [**validateModel**](docs/ModelsApi.md#validateModel) | **POST** /api/enterprise/models/{modelId}/editor/validate | Validate the JSON model
-*ActivitiPublicRestApi.ModelsHistoryApi* | [**getModelHistoryCollection**](docs/ModelsHistoryApi.md#getModelHistoryCollection) | **GET** /api/enterprise/models/{modelId}/history | To get the version information for a model
-*ActivitiPublicRestApi.ModelsHistoryApi* | [**getProcessModelHistory**](docs/ModelsHistoryApi.md#getProcessModelHistory) | **GET** /api/enterprise/models/{modelId}/history/{modelHistoryId} | To get a particular older version of a model
-*ActivitiPublicRestApi.ProcessApi* | [**deleteProcessInstance**](docs/ProcessApi.md#deleteProcessInstance) | **DELETE** /api/enterprise/process-instances/{processInstanceId} | Delete a process instance
-*ActivitiPublicRestApi.ProcessApi* | [**filterProcessInstances**](docs/ProcessApi.md#filterProcessInstances) | **POST** /api/enterprise/process-instances/filter | Filter a list of process instances
-*ActivitiPublicRestApi.ProcessApi* | [**getProcessDefinitionStartForm**](docs/ProcessApi.md#getProcessDefinitionStartForm) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form | Retrieve the start form for a process definition
-*ActivitiPublicRestApi.ProcessApi* | [**getProcessDefinitions**](docs/ProcessApi.md#getProcessDefinitions) | **GET** /api/enterprise/process-definitions | Retrieve a list of process definitions
-*ActivitiPublicRestApi.ProcessApi* | [**getProcessInstanceContent**](docs/ProcessApi.md#getProcessInstanceContent) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
-*ActivitiPublicRestApi.ProcessApi* | [**getProcessInstanceStartForm**](docs/ProcessApi.md#getProcessInstanceStartForm) | **GET** /api/enterprise/process-instances/{processInstanceId}/start-form | Get process start form
-*ActivitiPublicRestApi.ProcessApi* | [**getProcessInstance**](docs/ProcessApi.md#getProcessInstance) | **GET** /api/enterprise/process-instances/{processInstanceId} | Retrieve a process instance information
-*ActivitiPublicRestApi.ProcessApi* | [**getProcessInstances**](docs/ProcessApi.md#getProcessInstances) | **POST** /api/enterprise/process-instances/query | Retrieve a list of process instances
-*ActivitiPublicRestApi.ProcessApi* | [**getRestFieldValues**](docs/ProcessApi.md#getRestFieldValues) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field} | Retrieve field values (eg. the typeahead field)
-*ActivitiPublicRestApi.ProcessApi* | [**getRestTableFieldValues**](docs/ProcessApi.md#getRestTableFieldValues) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column} | Retrieve field values (eg. the table field)
-*ActivitiPublicRestApi.ProcessApi* | [**startNewProcessInstance**](docs/ProcessApi.md#startNewProcessInstance) | **POST** /api/enterprise/process-instances | Start a process instance
-*ActivitiPublicRestApi.ProcessDefinitionsApi* | [**getProcessDefinitions**](docs/ProcessDefinitionsApi.md#getProcessDefinitions) | **GET** /api/enterprise/process-definitions | Retrieve a list of process definitions
-*ActivitiPublicRestApi.ProcessDefinitionsFormApi* | [**getProcessDefinitionStartForm**](docs/ProcessDefinitionsFormApi.md#getProcessDefinitionStartForm) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form | Retrieve the start form for a process definition
-*ActivitiPublicRestApi.ProcessDefinitionsFormApi* | [**getRestFieldValues**](docs/ProcessDefinitionsFormApi.md#getRestFieldValues) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field} | Retrieve field values (eg. the typeahead field)
-*ActivitiPublicRestApi.ProcessDefinitionsFormApi* | [**getRestTableFieldValues**](docs/ProcessDefinitionsFormApi.md#getRestTableFieldValues) | **GET** /api/enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column} | Retrieve field values (eg. the table field)
-*ActivitiPublicRestApi.ProcessInstancesApi* | [**addProcessInstanceComment**](docs/ProcessInstancesApi.md#addProcessInstanceComment) | **POST** /api/enterprise/process-instances/{processInstanceId}/comments | Add a comment to a Process
-*ActivitiPublicRestApi.ProcessInstancesApi* | [**deleteProcessInstance**](docs/ProcessInstancesApi.md#deleteProcessInstance) | **DELETE** /api/enterprise/process-instances/{processInstanceId} | Delete a process instance
-*ActivitiPublicRestApi.ProcessInstancesApi* | [**getProcessInstanceComments**](docs/ProcessInstancesApi.md#getProcessInstanceComments) | **GET** /api/enterprise/process-instances/{processInstanceId}/comments | Comment list added to Process
-*ActivitiPublicRestApi.ProcessInstancesApi* | [**getProcessInstanceStartForm**](docs/ProcessInstancesApi.md#getProcessInstanceStartForm) | **GET** /api/enterprise/process-instances/{processInstanceId}/start-form | Get process start form
-*ActivitiPublicRestApi.ProcessInstancesApi* | [**getProcessInstance**](docs/ProcessInstancesApi.md#getProcessInstance) | **GET** /api/enterprise/process-instances/{processInstanceId} | Retrieve a process instance information
-*ActivitiPublicRestApi.ProcessInstancesInformationApi* | [**getProcessInstanceContent**](docs/ProcessInstancesInformationApi.md#getProcessInstanceContent) | **GET** /api/enterprise/process-instances/{processInstanceId}/field-content | Retrieve content attached to process instance fields
-*ActivitiPublicRestApi.ProcessInstancesInformationApi* | [**startNewProcessInstance**](docs/ProcessInstancesInformationApi.md#startNewProcessInstance) | **POST** /api/enterprise/process-instances | Start a process instance
-*ActivitiPublicRestApi.ProcessInstancesListingApi* | [**filterProcessInstances**](docs/ProcessInstancesListingApi.md#filterProcessInstances) | **POST** /api/enterprise/process-instances/filter | Filter a list of process instances
-*ActivitiPublicRestApi.ProcessInstancesListingApi* | [**getProcessInstances**](docs/ProcessInstancesListingApi.md#getProcessInstances) | **POST** /api/enterprise/process-instances/query | Retrieve a list of process instances
-*ActivitiPublicRestApi.ProcessScopeApi* | [**getRuntimeProcessScopes**](docs/ProcessScopeApi.md#getRuntimeProcessScopes) | **POST** /api/enterprise/process-scopes | getRuntimeProcessScopes
-*ActivitiPublicRestApi.ProfileApi* | [**changePassword**](docs/ProfileApi.md#changePassword) | **POST** /api/enterprise/profile-password | Change user password
-*ActivitiPublicRestApi.ProfileApi* | [**getProfilePicture**](docs/ProfileApi.md#getProfilePicture) | **GET** /api/enterprise/profile-picture |Retrieve user profile buffered array picture
-*ActivitiPublicRestApi.ProfileApi* | [**getProfilePictureUrl**](docs/ProfileApi.md#getProfilePictureUrl) | **GET** /app/rest/admin/profile-picture | Retrieve Url user profile picture
-*ActivitiPublicRestApi.ProfileApi* | [**getProfile**](docs/ProfileApi.md#getProfile) | **GET** /api/enterprise/profile | Retrieve user information
-*ActivitiPublicRestApi.ProfileApi* | [**updateProfile**](docs/ProfileApi.md#updateProfile) | **POST** /api/enterprise/profile | Update user information
-*ActivitiPublicRestApi.ProfileApi* | [**uploadProfilePicture**](docs/ProfileApi.md#uploadProfilePicture) | **POST** /api/enterprise/profile-picture | Change user profile picture
-*ActivitiPublicRestApi.ScriptFileApi* | [**getControllers**](docs/ScriptFileApi.md#getControllers) | **GET** /api/enterprise/script-files/controllers | getControllers
-*ActivitiPublicRestApi.ScriptFileApi* | [**getLibraries**](docs/ScriptFileApi.md#getLibraries) | **GET** /api/enterprise/script-files/libraries | getLibraries
-*ActivitiPublicRestApi.SystemPropertiesApi* | [**getProperties**](docs/SystemPropertiesApi.md#getProperties) | **GET** /api/enterprise/system/properties | Retrieve System Properties
-*ActivitiPublicRestApi.TaskApi* | [**addSubtask**](docs/TaskApi.md#addSubtask) | **POST** /api/enterprise/tasks/{taskId}/checklist | Create a task checklist
-*ActivitiPublicRestApi.TaskApi* | [**addTaskComment**](docs/TaskApi.md#addTaskComment) | **POST** /api/enterprise/tasks/{taskId}/comments | Add a comment to a Task
-*ActivitiPublicRestApi.TaskApi* | [**assignTask**](docs/TaskApi.md#assignTask) | **PUT** /api/enterprise/tasks/{taskId}/action/assign | Assign a task to a user
-*ActivitiPublicRestApi.TaskApi* | [**attachForm**](docs/TaskApi.md#attachForm) | **PUT** /api/enterprise/tasks/{taskId}/action/attach-form | Attach a form to a task
-*ActivitiPublicRestApi.TaskApi* | [**claimTask**](docs/TaskApi.md#claimTask) | **PUT** /api/enterprise/tasks/{taskId}/action/claim | Claim a task
-*ActivitiPublicRestApi.TaskApi* | [**completeTaskForm**](docs/TaskApi.md#completeTaskForm) | **POST** /api/enterprise/task-forms/{taskId} | Complete a Task Form
-*ActivitiPublicRestApi.TaskApi* | [**completeTask**](docs/TaskApi.md#completeTask) | **PUT** /api/enterprise/tasks/{taskId}/action/complete | Complete Task
-*ActivitiPublicRestApi.TaskApi* | [**createNewTask**](docs/TaskApi.md#createNewTask) | **POST** /api/enterprise/tasks | Create a Standalone Task
-*ActivitiPublicRestApi.TaskApi* | [**createRelatedContentOnTask**](docs/TaskApi.md#createRelatedContentOnTask) | **POST** /api/enterprise/tasks/{taskId}/content | To relate content (eg from Alfresco) to a task
-*ActivitiPublicRestApi.TaskApi* | [**createRelatedContentOnTask**](docs/TaskApi.md#createRelatedContentOnTask) | **POST** /api/enterprise/tasks/{taskId}/raw-content | Upload content to a task
-*ActivitiPublicRestApi.TaskApi* | [**deleteTask**](docs/TaskApi.md#deleteTask) | **DELETE** /api/enterprise/tasks/{taskId} | Delete a Task
-*ActivitiPublicRestApi.TaskApi* | [**filterTasks**](docs/TaskApi.md#filterTasks) | **POST** /api/enterprise/tasks/filter | Filter list of Task
-*ActivitiPublicRestApi.TaskApi* | [**getChecklist**](docs/TaskApi.md#getChecklist) | **GET** /api/enterprise/tasks/{taskId}/checklist | Retrieve Checklist added to a task
-*ActivitiPublicRestApi.TaskApi* | [**getTaskAuditJson**](docs/TaskApi.md#getTaskAuditJson) | **GET** /api/enterprise/tasks/{taskId}/audit | Retrieve audit infromation in json format
-*ActivitiPublicRestApi.TaskApi* | [**getTaskAuditPdf**](docs/TaskApi.md#getTaskAuditPdf) | **GET** /app/rest/tasks/{taskId}/audit | Retrieve the task audit infromation in pdf format
-*ActivitiPublicRestApi.TaskApi* | [**getRelatedContentForTask**](docs/TaskApi.md#getRelatedContentForTask) | **GET** /api/enterprise/tasks/{taskId}/content | Retrieve which content is attached to a task
-*ActivitiPublicRestApi.TaskApi* | [**getRestFieldValuesColumn**](docs/TaskApi.md#getRestFieldValuesColumn) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
-*ActivitiPublicRestApi.TaskApi* | [**getRestFieldValues**](docs/TaskApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
-*ActivitiPublicRestApi.TaskApi* | [**getTaskComments**](docs/TaskApi.md#getTaskComments) | **GET** /api/enterprise/tasks/{taskId}/comments | Comment list added to Task
-*ActivitiPublicRestApi.TaskApi* | [**getTaskForm**](docs/TaskApi.md#getTaskForm) | **GET** /api/enterprise/task-forms/{taskId} | Retrieve Task Form
-*ActivitiPublicRestApi.TaskApi* | [**getTask**](docs/TaskApi.md#getTask) | **GET** /api/enterprise/tasks/{taskId} | Task Details
-*ActivitiPublicRestApi.TaskApi* | [**involveUser**](docs/TaskApi.md#involveUser) | **PUT** /api/enterprise/tasks/{taskId}/action/involve | To involve a user with a task
-*ActivitiPublicRestApi.TaskApi* | [**listTasks**](docs/TaskApi.md#listTasks) | **POST** /api/enterprise/tasks/query | List Task
-*ActivitiPublicRestApi.TaskApi* | [**orderChecklist**](docs/TaskApi.md#orderChecklist) | **PUT** /api/enterprise/tasks/{taskId}/checklist | Change the order of items on a checklist
-*ActivitiPublicRestApi.TaskApi* | [**removeForm**](docs/TaskApi.md#removeForm) | **DELETE** /api/enterprise/tasks/{taskId}/action/remove-form | Remove a form to a task
-*ActivitiPublicRestApi.TaskApi* | [**removeInvolvedUser**](docs/TaskApi.md#removeInvolvedUser) | **PUT** /api/enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
-*ActivitiPublicRestApi.TaskApi* | [**saveTaskForm**](docs/TaskApi.md#saveTaskForm) | **POST** /api/enterprise/task-forms/{taskId}/save-form | Save Task Form
-*ActivitiPublicRestApi.TaskApi* | [**unclaimTask**](docs/TaskApi.md#unclaimTask) | **PUT** /api/enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
-*ActivitiPublicRestApi.TaskApi* | [**updateTask**](docs/TaskApi.md#updateTask) | **PUT** /api/enterprise/tasks/{taskId} | Update Task Details
-*ActivitiPublicRestApi.TaskActionsApi* | [**assignTask**](docs/TaskActionsApi.md#assignTask) | **PUT** /api/enterprise/tasks/{taskId}/action/assign | Assign a task to a user
-*ActivitiPublicRestApi.TaskActionsApi* | [**attachForm**](docs/TaskActionsApi.md#attachForm) | **PUT** /api/enterprise/tasks/{taskId}/action/attach-form | Attach a form to a task
-*ActivitiPublicRestApi.TaskActionsApi* | [**claimTask**](docs/TaskActionsApi.md#claimTask) | **PUT** /api/enterprise/tasks/{taskId}/action/claim | Claim a task
-*ActivitiPublicRestApi.TaskActionsApi* | [**completeTask**](docs/TaskActionsApi.md#completeTask) | **PUT** /api/enterprise/tasks/{taskId}/action/complete | Complete Task
-*ActivitiPublicRestApi.TaskActionsApi* | [**involveUser**](docs/TaskActionsApi.md#involveUser) | **PUT** /api/enterprise/tasks/{taskId}/action/involve | To involve a user with a task
-*ActivitiPublicRestApi.TaskActionsApi* | [**removeForm**](docs/TaskActionsApi.md#removeForm) | **DELETE** /api/enterprise/tasks/{taskId}/action/remove-form | Remove a form to a task
-*ActivitiPublicRestApi.TaskActionsApi* | [**removeInvolvedUser**](docs/TaskActionsApi.md#removeInvolvedUser) | **PUT** /api/enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
-*ActivitiPublicRestApi.TaskActionsApi* | [**unclaimTask**](docs/TaskActionsApi.md#unclaimTask) | **PUT** /api/enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
-*ActivitiPublicRestApi.TaskCheckListApi* | [**addSubtask**](docs/TaskCheckListApi.md#addSubtask) | **POST** /api/enterprise/tasks/{taskId}/checklist | Create a task checklist
-*ActivitiPublicRestApi.TaskCheckListApi* | [**getChecklist**](docs/TaskCheckListApi.md#getChecklist) | **GET** /api/enterprise/tasks/{taskId}/checklist | Retrieve Checklist added to a task
-*ActivitiPublicRestApi.TaskCheckListApi* | [**orderChecklist**](docs/TaskCheckListApi.md#orderChecklist) | **PUT** /api/enterprise/tasks/{taskId}/checklist | Change the order of items on a checklist
-*ActivitiPublicRestApi.TaskFormsApi* | [**completeTaskForm**](docs/TaskFormsApi.md#completeTaskForm) | **POST** /api/enterprise/task-forms/{taskId} | Complete a Task Form
-*ActivitiPublicRestApi.TaskFormsApi* | [**getRestFieldValues**](docs/TaskFormsApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve Column Field Values
-*ActivitiPublicRestApi.TaskFormsApi* | [**getRestFieldValues**](docs/TaskFormsApi.md#getRestFieldValues) | **GET** /api/enterprise/task-forms/{taskId}/form-values/{field} | Retrieve Populated Field Values
-*ActivitiPublicRestApi.TaskFormsApi* | [**getTaskForm**](docs/TaskFormsApi.md#getTaskForm) | **GET** /api/enterprise/task-forms/{taskId} | Retrieve Task Form
-*ActivitiPublicRestApi.TaskFormsApi* | [**saveTaskForm**](docs/TaskFormsApi.md#saveTaskForm) | **POST** /api/enterprise/task-forms/{taskId}/save-form | Save Task Form
-*ActivitiPublicRestApi.TemporaryApi* | [**completeTasks**](docs/TemporaryApi.md#completeTasks) | **GET** /api/enterprise/temporary/generate-report-data/complete-tasks | completeTasks
-*ActivitiPublicRestApi.TemporaryApi* | [**generateData**](docs/TemporaryApi.md#generateData) | **GET** /api/enterprise/temporary/generate-report-data/start-process | generateData
-*ActivitiPublicRestApi.TemporaryApi* | [**getHeaders**](docs/TemporaryApi.md#getHeaders) | **GET** /api/enterprise/temporary/example-headers | getHeaders
-*ActivitiPublicRestApi.TemporaryApi* | [**getOptions**](docs/TemporaryApi.md#getOptions) | **GET** /api/enterprise/temporary/example-options | getOptions
-*ActivitiPublicRestApi.UserApi* | [**executeAction**](docs/UserApi.md#executeAction) | **POST** /api/enterprise/users/{userId} | Execute an action for a specific user
-*ActivitiPublicRestApi.UserApi* | [**getProfilePicture**](docs/UserApi.md#getProfilePicture) | **GET** /api/enterprise/users/{userId}/picture | Retrieve user profile picture
-*ActivitiPublicRestApi.UserApi* | [**getUser**](docs/UserApi.md#getUser) | **GET** /api/enterprise/users/{userId} | Retrieve user information
-*ActivitiPublicRestApi.UserApi* | [**getUsers**](docs/UserApi.md#getUsers) | **GET** /api/enterprise/users | List users
-*ActivitiPublicRestApi.UserApi* | [**requestPasswordReset**](docs/UserApi.md#requestPasswordReset) | **POST** /api/enterprise/idm/passwords | Request password reset 
-*ActivitiPublicRestApi.UserApi* | [**updateUser**](docs/UserApi.md#updateUser) | **PUT** /api/enterprise/users/{userId} | Update user information
-*ActivitiPublicRestApi.UserFiltersApi* | [**createUserProcessInstanceFilter**](docs/UserFiltersApi.md#createUserProcessInstanceFilter) | **POST** /api/enterprise/filters/processes | Create a user process instance task filter
-*ActivitiPublicRestApi.UserFiltersApi* | [**createUserTaskFilter**](docs/UserFiltersApi.md#createUserTaskFilter) | **POST** /api/enterprise/filters/tasks | Create a new task filter
-*ActivitiPublicRestApi.UserFiltersApi* | [**deleteUserProcessInstanceFilter**](docs/UserFiltersApi.md#deleteUserProcessInstanceFilter) | **DELETE** /api/enterprise/filters/processes/{userFilterId} | Delete a user process instance task filter
-*ActivitiPublicRestApi.UserFiltersApi* | [**deleteUserTaskFilter**](docs/UserFiltersApi.md#deleteUserTaskFilter) | **DELETE** /api/enterprise/filters/tasks/{userFilterId} | Delete a task filter
-*ActivitiPublicRestApi.UserFiltersApi* | [**getUserProcessInstanceFilter**](docs/UserFiltersApi.md#getUserProcessInstanceFilter) | **GET** /api/enterprise/filters/processes/{userFilterId} | Get a specific user process instance task filter
-*ActivitiPublicRestApi.UserFiltersApi* | [**getUserProcessInstanceFilters**](docs/UserFiltersApi.md#getUserProcessInstanceFilters) | **GET** /api/enterprise/filters/processes | Retrieve list of taks filters
-*ActivitiPublicRestApi.UserFiltersApi* | [**getUserTaskFilter**](docs/UserFiltersApi.md#getUserTaskFilter) | **GET** /api/enterprise/filters/tasks/{userFilterId} | Get a specific task filter
-*ActivitiPublicRestApi.UserFiltersApi* | [**getUserTaskFilters**](docs/UserFiltersApi.md#getUserTaskFilters) | **GET** /api/enterprise/filters/tasks | Retrieve list of task filters
-*ActivitiPublicRestApi.UserFiltersApi* | [**orderUserProcessInstanceFilters**](docs/UserFiltersApi.md#orderUserProcessInstanceFilters) | **PUT** /api/enterprise/filters/processes | To order the list of user process instance filters
-*ActivitiPublicRestApi.UserFiltersApi* | [**orderUserTaskFilters**](docs/UserFiltersApi.md#orderUserTaskFilters) | **PUT** /api/enterprise/filters/tasks | To order the list of user task filters
-*ActivitiPublicRestApi.UserFiltersApi* | [**updateUserProcessInstanceFilter**](docs/UserFiltersApi.md#updateUserProcessInstanceFilter) | **PUT** /api/enterprise/filters/processes/{userFilterId} | Update a user process instance task filter
-*ActivitiPublicRestApi.UserFiltersApi* | [**updateUserTaskFilter**](docs/UserFiltersApi.md#updateUserTaskFilter) | **PUT** /api/enterprise/filters/tasks/{userFilterId} | Update a specific task filter
-*ActivitiPublicRestApi.UsersWorkflowApi* | [**getUsers**](docs/UsersWorkflowApi.md#getUsers) | **GET** /api/enterprise/users | List users
+*.AboutApi* | [**getAppVersion**](docs/AboutApi.md#getAppVersion) | **GET** /enterprise/app-version | Get server type and version
+*.AccountintegrationApi* | [**getAccounts**](docs/AccountintegrationApi.md#getAccounts) | **GET** /enterprise/account/integration | Retrieve external account information
+*.AdminendpointsApi* | [**createBasicAuthConfiguration**](docs/AdminendpointsApi.md#createBasicAuthConfiguration) | **POST** /enterprise/admin/basic-auths | Add an endpoint authorization
+*.AdminendpointsApi* | [**createEndpointConfiguration**](docs/AdminendpointsApi.md#createEndpointConfiguration) | **POST** /enterprise/admin/endpoints | Create an endpoint
+*.AdminendpointsApi* | [**getBasicAuthConfiguration**](docs/AdminendpointsApi.md#getBasicAuthConfiguration) | **GET** /enterprise/admin/basic-auths/{basicAuthId} | Get an endpoint authorization
+*.AdminendpointsApi* | [**getBasicAuthConfigurations**](docs/AdminendpointsApi.md#getBasicAuthConfigurations) | **GET** /enterprise/admin/basic-auths | List endpoint authorizations
+*.AdminendpointsApi* | [**getEndpointConfiguration**](docs/AdminendpointsApi.md#getEndpointConfiguration) | **GET** /enterprise/admin/endpoints/{endpointConfigurationId} | Get an endpoint
+*.AdminendpointsApi* | [**getEndpointConfigurations**](docs/AdminendpointsApi.md#getEndpointConfigurations) | **GET** /enterprise/admin/endpoints | List endpoints
+*.AdminendpointsApi* | [**removeBasicAuthonfiguration**](docs/AdminendpointsApi.md#removeBasicAuthonfiguration) | **DELETE** /enterprise/admin/basic-auths/{basicAuthId} | Delete an endpoint authorization
+*.AdminendpointsApi* | [**removeEndpointConfiguration**](docs/AdminendpointsApi.md#removeEndpointConfiguration) | **DELETE** /enterprise/admin/endpoints/{endpointConfigurationId} | Delete an endpoint
+*.AdminendpointsApi* | [**updateBasicAuthConfiguration**](docs/AdminendpointsApi.md#updateBasicAuthConfiguration) | **PUT** /enterprise/admin/basic-auths/{basicAuthId} | Update an endpoint authorization
+*.AdminendpointsApi* | [**updateEndpointConfiguration**](docs/AdminendpointsApi.md#updateEndpointConfiguration) | **PUT** /enterprise/admin/endpoints/{endpointConfigurationId} | Update an endpoint
+*.AdmingroupsApi* | [**activate**](docs/AdmingroupsApi.md#activate) | **POST** /enterprise/admin/groups/{groupId}/action/activate | Activate a group
+*.AdmingroupsApi* | [**addAllUsersToGroup**](docs/AdmingroupsApi.md#addAllUsersToGroup) | **POST** /enterprise/admin/groups/{groupId}/add-all-users | Add users to a group
+*.AdmingroupsApi* | [**addGroupCapabilities**](docs/AdmingroupsApi.md#addGroupCapabilities) | **POST** /enterprise/admin/groups/{groupId}/capabilities | Add capabilities to a group
+*.AdmingroupsApi* | [**addGroupMember**](docs/AdmingroupsApi.md#addGroupMember) | **POST** /enterprise/admin/groups/{groupId}/members/{userId} | Add a user to a group
+*.AdmingroupsApi* | [**addRelatedGroup**](docs/AdmingroupsApi.md#addRelatedGroup) | **POST** /enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | Get a related group
+*.AdmingroupsApi* | [**createNewGroup**](docs/AdmingroupsApi.md#createNewGroup) | **POST** /enterprise/admin/groups | Create a group
+*.AdmingroupsApi* | [**deleteGroupCapability**](docs/AdmingroupsApi.md#deleteGroupCapability) | **DELETE** /enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId} | Remove a capability from a group
+*.AdmingroupsApi* | [**deleteGroupMember**](docs/AdmingroupsApi.md#deleteGroupMember) | **DELETE** /enterprise/admin/groups/{groupId}/members/{userId} | Delete a member from a group
+*.AdmingroupsApi* | [**deleteGroup**](docs/AdmingroupsApi.md#deleteGroup) | **DELETE** /enterprise/admin/groups/{groupId} | Delete a group
+*.AdmingroupsApi* | [**deleteRelatedGroup**](docs/AdmingroupsApi.md#deleteRelatedGroup) | **DELETE** /enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | Delete a related group
+*.AdmingroupsApi* | [**getCapabilities**](docs/AdmingroupsApi.md#getCapabilities) | **GET** /enterprise/admin/groups/{groupId}/potential-capabilities | List group capabilities
+*.AdmingroupsApi* | [**getGroupUsers**](docs/AdmingroupsApi.md#getGroupUsers) | **GET** /enterprise/admin/groups/{groupId}/users | Get group members
+*.AdmingroupsApi* | [**getGroup**](docs/AdmingroupsApi.md#getGroup) | **GET** /enterprise/admin/groups/{groupId} | Get a group
+*.AdmingroupsApi* | [**getGroups**](docs/AdmingroupsApi.md#getGroups) | **GET** /enterprise/admin/groups | Query groups
+*.AdmingroupsApi* | [**getRelatedGroups**](docs/AdmingroupsApi.md#getRelatedGroups) | **GET** /enterprise/admin/groups/{groupId}/related-groups | Get related groups
+*.AdmingroupsApi* | [**updateGroup**](docs/AdmingroupsApi.md#updateGroup) | **PUT** /enterprise/admin/groups/{groupId} | Update a group
+*.AdmintenantsApi* | [**createTenant**](docs/AdmintenantsApi.md#createTenant) | **POST** /enterprise/admin/tenants | Create a tenant
+*.AdmintenantsApi* | [**deleteTenant**](docs/AdmintenantsApi.md#deleteTenant) | **DELETE** /enterprise/admin/tenants/{tenantId} | Delete a tenant
+*.AdmintenantsApi* | [**getTenantEvents**](docs/AdmintenantsApi.md#getTenantEvents) | **GET** /enterprise/admin/tenants/{tenantId}/events | Get tenant events
+*.AdmintenantsApi* | [**getTenantLogo**](docs/AdmintenantsApi.md#getTenantLogo) | **GET** /enterprise/admin/tenants/{tenantId}/logo | Get a tenant's logo
+*.AdmintenantsApi* | [**getTenant**](docs/AdmintenantsApi.md#getTenant) | **GET** /enterprise/admin/tenants/{tenantId} | Get a tenant
+*.AdmintenantsApi* | [**getTenants**](docs/AdmintenantsApi.md#getTenants) | **GET** /enterprise/admin/tenants | List tenants
+*.AdmintenantsApi* | [**update**](docs/AdmintenantsApi.md#update) | **PUT** /enterprise/admin/tenants/{tenantId} | Update a tenant
+*.AdmintenantsApi* | [**uploadTenantLogo**](docs/AdmintenantsApi.md#uploadTenantLogo) | **POST** /enterprise/admin/tenants/{tenantId}/logo | Update a tenant's logo
+*.AdminusersApi* | [**bulkUpdateUsers**](docs/AdminusersApi.md#bulkUpdateUsers) | **PUT** /enterprise/admin/users | Bulk update a list of users
+*.AdminusersApi* | [**createNewUser**](docs/AdminusersApi.md#createNewUser) | **POST** /enterprise/admin/users | Create a user
+*.AdminusersApi* | [**getUser**](docs/AdminusersApi.md#getUser) | **GET** /enterprise/admin/users/{userId} | Get a user
+*.AdminusersApi* | [**getUsers**](docs/AdminusersApi.md#getUsers) | **GET** /enterprise/admin/users | Query users
+*.AdminusersApi* | [**updateUserDetails**](docs/AdminusersApi.md#updateUserDetails) | **PUT** /enterprise/admin/users/{userId} | Update a user
+*.AppdefinitionsApi* | [**deleteAppDefinition**](docs/AppdefinitionsApi.md#deleteAppDefinition) | **DELETE** /enterprise/app-definitions/{appDefinitionId} | deleteAppDefinition
+*.AppdefinitionsApi* | [**exportAppDefinition**](docs/AppdefinitionsApi.md#exportAppDefinition) | **GET** /enterprise/app-definitions/{modelId}/export | Export an app definition
+*.AppdefinitionsApi* | [**getAppDefinition**](docs/AppdefinitionsApi.md#getAppDefinition) | **GET** /enterprise/app-definitions/{modelId} | Get an app definition
+*.AppdefinitionsApi* | [**importAndPublishApp**](docs/AppdefinitionsApi.md#importAndPublishApp) | **POST** /enterprise/app-definitions/publish-app | importAndPublishApp
+*.AppdefinitionsApi* | [**importAndPublishApp**](docs/AppdefinitionsApi.md#importAndPublishApp) | **POST** /enterprise/app-definitions/{modelId}/publish-app | importAndPublishApp
+*.AppdefinitionsApi* | [**importAppDefinition**](docs/AppdefinitionsApi.md#importAppDefinition) | **POST** /enterprise/app-definitions/import | Import a new app definition
+*.AppdefinitionsApi* | [**importAppDefinition**](docs/AppdefinitionsApi.md#importAppDefinition) | **POST** /enterprise/app-definitions/{modelId}/import | Update the content of an existing app
+*.AppdefinitionsApi* | [**publishAppDefinition**](docs/AppdefinitionsApi.md#publishAppDefinition) | **POST** /enterprise/app-definitions/{modelId}/publish | Publish an app definition
+*.AppdefinitionsApi* | [**updateAppDefinition**](docs/AppdefinitionsApi.md#updateAppDefinition) | **PUT** /enterprise/app-definitions/{modelId} | Update an app definition
+*.ChecklistsApi* | [**addSubtask**](docs/ChecklistsApi.md#addSubtask) | **POST** /enterprise/tasks/{taskId}/checklist | Create a task checklist
+*.ChecklistsApi* | [**getChecklist**](docs/ChecklistsApi.md#getChecklist) | **GET** /enterprise/tasks/{taskId}/checklist | Get checklist for a task
+*.ChecklistsApi* | [**orderChecklist**](docs/ChecklistsApi.md#orderChecklist) | **PUT** /enterprise/tasks/{taskId}/checklist | Change the order of items on a checklist
+*.CommentsApi* | [**addProcessInstanceComment**](docs/CommentsApi.md#addProcessInstanceComment) | **POST** /enterprise/process-instances/{processInstanceId}/comments | Add a comment to a process instance
+*.CommentsApi* | [**addTaskComment**](docs/CommentsApi.md#addTaskComment) | **POST** /enterprise/tasks/{taskId}/comments | Add a comment to a task
+*.CommentsApi* | [**getProcessInstanceComments**](docs/CommentsApi.md#getProcessInstanceComments) | **GET** /enterprise/process-instances/{processInstanceId}/comments | Get comments for a process
+*.CommentsApi* | [**getTaskComments**](docs/CommentsApi.md#getTaskComments) | **GET** /enterprise/tasks/{taskId}/comments | Get comments for a task
+*.ContentApi* | [**createRelatedContentOnProcessInstance**](docs/ContentApi.md#createRelatedContentOnProcessInstance) | **POST** /enterprise/process-instances/{processInstanceId}/content | Attach existing content to a process instance
+*.ContentApi* | [**createRelatedContentOnProcessInstance**](docs/ContentApi.md#createRelatedContentOnProcessInstance) | **POST** /enterprise/process-instances/{processInstanceId}/raw-content | Upload content and attach to a process instance
+*.ContentApi* | [**createRelatedContentOnTask**](docs/ContentApi.md#createRelatedContentOnTask) | **POST** /enterprise/tasks/{taskId}/content | Attach existing content to a task
+*.ContentApi* | [**createRelatedContentOnTask**](docs/ContentApi.md#createRelatedContentOnTask) | **POST** /enterprise/tasks/{taskId}/raw-content | Upload content and attach to a task
+*.ContentApi* | [**createTemporaryRawRelatedContent**](docs/ContentApi.md#createTemporaryRawRelatedContent) | **POST** /enterprise/content/raw | Upload content and create a local representation
+*.ContentApi* | [**createTemporaryRelatedContent**](docs/ContentApi.md#createTemporaryRelatedContent) | **POST** /enterprise/content | Create a local representation of content from a remote repository
+*.ContentApi* | [**deleteContent**](docs/ContentApi.md#deleteContent) | **DELETE** /enterprise/content/{contentId} | Remove a local content representation
+*.ContentApi* | [**getContent**](docs/ContentApi.md#getContent) | **GET** /enterprise/content/{contentId} | Get a local content representation
+*.ContentApi* | [**getRawContent**](docs/ContentApi.md#getRawContent) | **GET** /enterprise/content/{contentId}/rendition/{renditionType} | Stream content rendition
+*.ContentApi* | [**getRawContent**](docs/ContentApi.md#getRawContent) | **GET** /enterprise/content/{contentId}/raw | Stream content from a local content representation
+*.ContentApi* | [**getRelatedContentForProcessInstance**](docs/ContentApi.md#getRelatedContentForProcessInstance) | **GET** /enterprise/process-instances/{processInstanceId}/content | List content attached to a process instance
+*.ContentApi* | [**getRelatedContentForTask**](docs/ContentApi.md#getRelatedContentForTask) | **GET** /enterprise/tasks/{taskId}/content | List content attached to a task
+*.DatasourcesApi* | [**getDataSources**](docs/DatasourcesApi.md#getDataSources) | **GET** /enterprise/editor/data-sources | Get data sources
+*.DecisionauditsApi* | [**getAuditTrail**](docs/DecisionauditsApi.md#getAuditTrail) | **GET** /enterprise/decisions/audits/{auditTrailId} | Get an audit trail
+*.DecisionauditsApi* | [**getAuditTrails**](docs/DecisionauditsApi.md#getAuditTrails) | **GET** /enterprise/decisions/audits | Query decision table audit trails
+*.DecisiontablesApi* | [**getDecisionTableEditorJson**](docs/DecisiontablesApi.md#getDecisionTableEditorJson) | **GET** /enterprise/decisions/decision-tables/{decisionTableId}/editorJson | Get definition for a decision table
+*.DecisiontablesApi* | [**getDecisionTable**](docs/DecisiontablesApi.md#getDecisionTable) | **GET** /enterprise/decisions/decision-tables/{decisionTableId} | Get a decision table
+*.DecisiontablesApi* | [**getDecisionTables**](docs/DecisiontablesApi.md#getDecisionTables) | **GET** /enterprise/decisions/decision-tables | Query decision tables
+*.EndpointsApi* | [**getEndpointConfiguration**](docs/EndpointsApi.md#getEndpointConfiguration) | **GET** /enterprise/editor/endpoints/{endpointConfigurationId} | Get an endpoint configuration
+*.EndpointsApi* | [**getEndpointConfigurations**](docs/EndpointsApi.md#getEndpointConfigurations) | **GET** /enterprise/editor/endpoints | List endpoint configurations
+*.FormmodelsApi* | [**getFormEditorJson**](docs/FormmodelsApi.md#getFormEditorJson) | **GET** /enterprise/forms/{formId}/editorJson | Get form content
+*.FormmodelsApi* | [**getFormHistory**](docs/FormmodelsApi.md#getFormHistory) | **GET** /enterprise/editor/form-models/{formId}/history/{formHistoryId} | Get form history
+*.FormmodelsApi* | [**getForm**](docs/FormmodelsApi.md#getForm) | **GET** /enterprise/editor/form-models/{formId} | Get a form model
+*.FormmodelsApi* | [**getForm**](docs/FormmodelsApi.md#getForm) | **GET** /enterprise/forms/{formId} | Get a form
+*.FormmodelsApi* | [**getForms**](docs/FormmodelsApi.md#getForms) | **GET** /enterprise/editor/form-models/values | Get forms
+*.FormmodelsApi* | [**getForms**](docs/FormmodelsApi.md#getForms) | **GET** /enterprise/editor/form-models | List form models
+*.FormmodelsApi* | [**getForms**](docs/FormmodelsApi.md#getForms) | **GET** /enterprise/forms | Query forms
+*.FormmodelsApi* | [**saveForm**](docs/FormmodelsApi.md#saveForm) | **PUT** /enterprise/editor/form-models/{formId} | Update form model content
+*.FormmodelsApi* | [**validateModel**](docs/FormmodelsApi.md#validateModel) | **PUT** /enterprise/editor/form-models/{formId}/validate | Validate form model content
+*.GroupsApi* | [**getGroups**](docs/GroupsApi.md#getGroups) | **GET** /enterprise/groups | Query groups
+*.GroupsApi* | [**getUsersForGroup**](docs/GroupsApi.md#getUsersForGroup) | **GET** /enterprise/groups/{groupId}/users | List members of a group
+*.IdmsyncApi* | [**getLogFile**](docs/IdmsyncApi.md#getLogFile) | **GET** /enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile | Get log file for a sync log entry
+*.IdmsyncApi* | [**getSyncLogEntries**](docs/IdmsyncApi.md#getSyncLogEntries) | **GET** /enterprise/idm-sync-log-entries | List sync log entries
+*.IntegrationalfrescocloudApi* | [**confirmAuthorisation**](docs/IntegrationalfrescocloudApi.md#confirmAuthorisation) | **GET** /enterprise/integration/alfresco-cloud/confirm-auth-request | Alfresco Cloud Authorization
+*.IntegrationalfrescocloudApi* | [**getAllNetworks**](docs/IntegrationalfrescocloudApi.md#getAllNetworks) | **GET** /enterprise/integration/alfresco-cloud/networks | List Alfresco networks
+*.IntegrationalfrescocloudApi* | [**getAllSites**](docs/IntegrationalfrescocloudApi.md#getAllSites) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites | List Alfresco sites
+*.IntegrationalfrescocloudApi* | [**getContentInFolderPath**](docs/IntegrationalfrescocloudApi.md#getContentInFolderPath) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/folderpath/{folderPath}/content | List files and folders inside a specific folder identified by path
+*.IntegrationalfrescocloudApi* | [**getContentInFolder**](docs/IntegrationalfrescocloudApi.md#getContentInFolder) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List files and folders inside a specific folder
+*.IntegrationalfrescocloudApi* | [**getContentInSite**](docs/IntegrationalfrescocloudApi.md#getContentInSite) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content | List files and folders inside a specific site
+*.IntegrationalfrescoonpremiseApi* | [**getAllSites**](docs/IntegrationalfrescoonpremiseApi.md#getAllSites) | **GET** /enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
+*.IntegrationalfrescoonpremiseApi* | [**getContentInFolderPath**](docs/IntegrationalfrescoonpremiseApi.md#getContentInFolderPath) | **GET** /enterprise/rest/integration/alfresco/{repositoryId}/sites/{siteId}/folderpath/{folderPath}/content | List files and folders inside a specific folder identified by folder path
+*.IntegrationalfrescoonpremiseApi* | [**getContentInFolder**](docs/IntegrationalfrescoonpremiseApi.md#getContentInFolder) | **GET** /enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List files and folders inside a specific folder
+*.IntegrationalfrescoonpremiseApi* | [**getContentInSite**](docs/IntegrationalfrescoonpremiseApi.md#getContentInSite) | **GET** /enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List files and folders inside a specific site
+*.IntegrationalfrescoonpremiseApi* | [**getRepositories**](docs/IntegrationalfrescoonpremiseApi.md#getRepositories) | **GET** /enterprise/profile/accounts/alfresco | List Alfresco repositories
+*.IntegrationboxApi* | [**confirmAuthorisation**](docs/IntegrationboxApi.md#confirmAuthorisation) | **GET** /enterprise/integration/box/confirm-auth-request | Box Authorization
+*.IntegrationboxApi* | [**createRepositoryAccount**](docs/IntegrationboxApi.md#createRepositoryAccount) | **POST** /enterprise/integration/box/{userId}/account | Add Box account
+*.IntegrationboxApi* | [**deleteRepositoryAccount**](docs/IntegrationboxApi.md#deleteRepositoryAccount) | **DELETE** /enterprise/integration/box/{userId}/account | Delete account information
+*.IntegrationboxApi* | [**getBoxPluginStatus**](docs/IntegrationboxApi.md#getBoxPluginStatus) | **GET** /enterprise/integration/box/status | Get status information
+*.IntegrationboxApi* | [**getFiles**](docs/IntegrationboxApi.md#getFiles) | **GET** /enterprise/integration/box/files | List file and folders
+*.IntegrationboxApi* | [**getRepositoryAccount**](docs/IntegrationboxApi.md#getRepositoryAccount) | **GET** /enterprise/integration/box/{userId}/account | Get account information
+*.IntegrationboxApi* | [**updateRepositoryAccount**](docs/IntegrationboxApi.md#updateRepositoryAccount) | **PUT** /enterprise/integration/box/{userId}/account | Update account information
+*.IntegrationdriveApi* | [**confirmAuthorisation**](docs/IntegrationdriveApi.md#confirmAuthorisation) | **GET** /enterprise/integration/google-drive/confirm-auth-request | Drive Authorization
+*.IntegrationdriveApi* | [**getFiles**](docs/IntegrationdriveApi.md#getFiles) | **GET** /enterprise/integration/google-drive/files | List files and folders
+*.ModelsApi* | [**createModel**](docs/ModelsApi.md#createModel) | **POST** /enterprise/models | Create a new model
+*.ModelsApi* | [**deleteModel**](docs/ModelsApi.md#deleteModel) | **DELETE** /enterprise/models/{modelId} | Delete a model
+*.ModelsApi* | [**duplicateModel**](docs/ModelsApi.md#duplicateModel) | **POST** /enterprise/models/{modelId}/clone | Duplicate an existing model
+*.ModelsApi* | [**getModelJSON**](docs/ModelsApi.md#getModelJSON) | **GET** /enterprise/models/{modelId}/editor/json | Get model content
+*.ModelsApi* | [**getModelThumbnail**](docs/ModelsApi.md#getModelThumbnail) | **GET** /enterprise/models/{modelId}/thumbnail | Get a model's thumbnail image
+*.ModelsApi* | [**getModel**](docs/ModelsApi.md#getModel) | **GET** /enterprise/models/{modelId} | Get a model
+*.ModelsApi* | [**getModelsToIncludeInAppDefinition**](docs/ModelsApi.md#getModelsToIncludeInAppDefinition) | **GET** /enterprise/models-for-app-definition | List process definition models shared with the current user
+*.ModelsApi* | [**getModels**](docs/ModelsApi.md#getModels) | **GET** /enterprise/models | List models (process, form, decision rule or app)
+*.ModelsApi* | [**importNewVersion**](docs/ModelsApi.md#importNewVersion) | **POST** /enterprise/models/{modelId}/newversion | Create a new version of a model
+*.ModelsApi* | [**importProcessModel**](docs/ModelsApi.md#importProcessModel) | **POST** /enterprise/process-models/import | Import a BPMN 2.0 XML file
+*.ModelsApi* | [**saveModel**](docs/ModelsApi.md#saveModel) | **POST** /enterprise/models/{modelId}/editor/json | Update model content
+*.ModelsApi* | [**updateModel**](docs/ModelsApi.md#updateModel) | **PUT** /enterprise/models/{modelId} | Update a model
+*.ModelsApi* | [**validateModel**](docs/ModelsApi.md#validateModel) | **POST** /enterprise/models/{modelId}/editor/validate | Validate model content
+*.ModelsbpmnApi* | [**getHistoricProcessModelBpmn20Xml**](docs/ModelsbpmnApi.md#getHistoricProcessModelBpmn20Xml) | **GET** /enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20 | Export a historic version of a process definition as BPMN 2.0 XML
+*.ModelsbpmnApi* | [**getProcessModelBpmn20Xml**](docs/ModelsbpmnApi.md#getProcessModelBpmn20Xml) | **GET** /enterprise/models/{processModelId}/bpmn20 | Export a process definition as BPMN 2.0 XML
+*.ModelshistoryApi* | [**getModelHistoryCollection**](docs/ModelshistoryApi.md#getModelHistoryCollection) | **GET** /enterprise/models/{modelId}/history | List a model's historic versions
+*.ModelshistoryApi* | [**getProcessModelHistory**](docs/ModelshistoryApi.md#getProcessModelHistory) | **GET** /enterprise/models/{modelId}/history/{modelHistoryId} | Get a historic version of a model
+*.ProcessdefinitionsApi* | [**createIdentityLink**](docs/ProcessdefinitionsApi.md#createIdentityLink) | **POST** /enterprise/process-definitions/{processDefinitionId}/identitylinks | Add a user or group involvement to a process definition
+*.ProcessdefinitionsApi* | [**deleteIdentityLink**](docs/ProcessdefinitionsApi.md#deleteIdentityLink) | **DELETE** /enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId} | Remove a user or group involvement from a process definition
+*.ProcessdefinitionsApi* | [**getIdentityLinkType**](docs/ProcessdefinitionsApi.md#getIdentityLinkType) | **GET** /enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId} | Get a user or group involvement with a process definition
+*.ProcessdefinitionsApi* | [**getIdentityLinksForFamily**](docs/ProcessdefinitionsApi.md#getIdentityLinksForFamily) | **GET** /enterprise/process-definitions/{processDefinitionId}/identitylinks/{family} | List either the users or groups involved with a process definition
+*.ProcessdefinitionsApi* | [**getIdentityLinks**](docs/ProcessdefinitionsApi.md#getIdentityLinks) | **GET** /enterprise/process-definitions/{processDefinitionId}/identitylinks | List the users and groups involved with a process definition
+*.ProcessdefinitionsApi* | [**getProcessDefinitionDecisionTables**](docs/ProcessdefinitionsApi.md#getProcessDefinitionDecisionTables) | **GET** /enterprise/process-definitions/{processDefinitionId}/decision-tables | List the decision tables associated with a process definition
+*.ProcessdefinitionsApi* | [**getProcessDefinitionForms**](docs/ProcessdefinitionsApi.md#getProcessDefinitionForms) | **GET** /enterprise/process-definitions/{processDefinitionId}/forms | List the forms associated with a process definition
+*.ProcessdefinitionsApi* | [**getProcessDefinitionStartForm**](docs/ProcessdefinitionsApi.md#getProcessDefinitionStartForm) | **GET** /enterprise/process-definitions/{processDefinitionId}/start-form | Retrieve the start form for a process definition
+*.ProcessdefinitionsApi* | [**getProcessDefinitions**](docs/ProcessdefinitionsApi.md#getProcessDefinitions) | **GET** /enterprise/process-definitions | Retrieve a list of process definitions
+*.ProcessdefinitionsApi* | [**getRestFieldValues**](docs/ProcessdefinitionsApi.md#getRestFieldValues) | **GET** /enterprise/process-definitions/{processDefinitionId}/start-form-values/{field} | Retrieve field values (eg. the typeahead field)
+*.ProcessdefinitionsApi* | [**getRestTableFieldValues**](docs/ProcessdefinitionsApi.md#getRestTableFieldValues) | **GET** /enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column} | Retrieve field values (eg. the table field)
+*.ProcessinstancesApi* | [**activateProcessInstance**](docs/ProcessinstancesApi.md#activateProcessInstance) | **PUT** /enterprise/process-instances/{processInstanceId}/activate | Activate a process instance
+*.ProcessinstancesApi* | [**createIdentityLink**](docs/ProcessinstancesApi.md#createIdentityLink) | **POST** /enterprise/process-instances/{processInstanceId}/identitylinks | Add a user or group involvement to a process instance
+*.ProcessinstancesApi* | [**deleteIdentityLink**](docs/ProcessinstancesApi.md#deleteIdentityLink) | **DELETE** /enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type} | Remove a user or group involvement from a process instance
+*.ProcessinstancesApi* | [**deleteProcessInstance**](docs/ProcessinstancesApi.md#deleteProcessInstance) | **DELETE** /enterprise/process-instances/{processInstanceId} | Cancel or remove a process instance
+*.ProcessinstancesApi* | [**filterProcessInstances**](docs/ProcessinstancesApi.md#filterProcessInstances) | **POST** /enterprise/process-instances/filter | List process instances using a filter
+*.ProcessinstancesApi* | [**getHistoricProcessInstanceDecisionTasks**](docs/ProcessinstancesApi.md#getHistoricProcessInstanceDecisionTasks) | **GET** /enterprise/process-instances/{processInstanceId}/decision-tasks | Get decision tasks in a process instance
+*.ProcessinstancesApi* | [**getHistoricProcessInstanceVariables**](docs/ProcessinstancesApi.md#getHistoricProcessInstanceVariables) | **GET** /enterprise/process-instances/{processInstanceId}/historic-variables | Get historic variables for a process instance
+*.ProcessinstancesApi* | [**getHistoricProcessInstances**](docs/ProcessinstancesApi.md#getHistoricProcessInstances) | **POST** /enterprise/historic-process-instances/query | Query historic process instances
+*.ProcessinstancesApi* | [**getIdentityLinkType**](docs/ProcessinstancesApi.md#getIdentityLinkType) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type} | Get a user or group involvement with a process instance
+*.ProcessinstancesApi* | [**getIdentityLinksForFamily**](docs/ProcessinstancesApi.md#getIdentityLinksForFamily) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks/{family} | List either the users or groups involved with a process instance
+*.ProcessinstancesApi* | [**getIdentityLinks**](docs/ProcessinstancesApi.md#getIdentityLinks) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks | List the users and groups involved with a process instance
+*.ProcessinstancesApi* | [**getProcessInstanceContent**](docs/ProcessinstancesApi.md#getProcessInstanceContent) | **GET** /enterprise/process-instances/{processInstanceId}/field-content | List content attached to process instance fields
+*.ProcessinstancesApi* | [**getProcessInstanceDiagram**](docs/ProcessinstancesApi.md#getProcessInstanceDiagram) | **GET** /enterprise/process-instances/{processInstanceId}/diagram | Get the process diagram for the process instance
+*.ProcessinstancesApi* | [**getProcessInstanceStartForm**](docs/ProcessinstancesApi.md#getProcessInstanceStartForm) | **GET** /enterprise/process-instances/{processInstanceId}/start-form | Get a process instance start form
+*.ProcessinstancesApi* | [**getProcessInstance**](docs/ProcessinstancesApi.md#getProcessInstance) | **GET** /enterprise/process-instances/{processInstanceId} | Get a process instance
+*.ProcessinstancesApi* | [**getProcessInstances**](docs/ProcessinstancesApi.md#getProcessInstances) | **POST** /enterprise/process-instances/query | Query process instances
+*.ProcessinstancesApi* | [**getTaskAuditLog**](docs/ProcessinstancesApi.md#getTaskAuditLog) | **GET** /enterprise/process-instances/{processInstanceId}/audit-log | Get the audit log for a process instance
+*.ProcessinstancesApi* | [**startNewProcessInstance**](docs/ProcessinstancesApi.md#startNewProcessInstance) | **POST** /enterprise/process-instances | Start a process instance
+*.ProcessinstancesApi* | [**suspendProcessInstance**](docs/ProcessinstancesApi.md#suspendProcessInstance) | **PUT** /enterprise/process-instances/{processInstanceId}/suspend | Suspend a process instance
+*.ProcessinstancevariablesApi* | [**createOrUpdateProcessInstanceVariables**](docs/ProcessinstancevariablesApi.md#createOrUpdateProcessInstanceVariables) | **PUT** /enterprise/process-instances/{processInstanceId}/variables | Create or update variables
+*.ProcessinstancevariablesApi* | [**createProcessInstanceVariables**](docs/ProcessinstancevariablesApi.md#createProcessInstanceVariables) | **POST** /enterprise/process-instances/{processInstanceId}/variables | Create variables
+*.ProcessinstancevariablesApi* | [**deleteProcessInstanceVariable**](docs/ProcessinstancevariablesApi.md#deleteProcessInstanceVariable) | **DELETE** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Delete a variable
+*.ProcessinstancevariablesApi* | [**getProcessInstanceVariable**](docs/ProcessinstancevariablesApi.md#getProcessInstanceVariable) | **GET** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Get a variable
+*.ProcessinstancevariablesApi* | [**getProcessInstanceVariables**](docs/ProcessinstancevariablesApi.md#getProcessInstanceVariables) | **GET** /enterprise/process-instances/{processInstanceId}/variables | List variables
+*.ProcessinstancevariablesApi* | [**updateProcessInstanceVariable**](docs/ProcessinstancevariablesApi.md#updateProcessInstanceVariable) | **PUT** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Update a variable
+*.ProcessscopesApi* | [**getRuntimeProcessScopes**](docs/ProcessscopesApi.md#getRuntimeProcessScopes) | **POST** /enterprise/process-scopes | List runtime process scopes
+*.RuntimeappdefinitionsApi* | [**deployAppDefinitions**](docs/RuntimeappdefinitionsApi.md#deployAppDefinitions) | **POST** /enterprise/runtime-app-definitions | Deploy a published app
+*.RuntimeappdefinitionsApi* | [**getAppDefinition**](docs/RuntimeappdefinitionsApi.md#getAppDefinition) | **GET** /enterprise/runtime-app-definitions/{appDefinitionId} | Get a runtime app
+*.RuntimeappdefinitionsApi* | [**getAppDefinitions**](docs/RuntimeappdefinitionsApi.md#getAppDefinitions) | **GET** /enterprise/runtime-app-definitions | List runtime apps
+*.RuntimeappdeploymentsApi* | [**deleteAppDeployment**](docs/RuntimeappdeploymentsApi.md#deleteAppDeployment) | **DELETE** /enterprise/runtime-app-deployments/{appDeploymentId} | Remove an app deployment
+*.RuntimeappdeploymentsApi* | [**exportAppDefinition**](docs/RuntimeappdeploymentsApi.md#exportAppDefinition) | **GET** /enterprise/export-app-deployment/{deploymentId} | Export the app archive for a deployment
+*.RuntimeappdeploymentsApi* | [**getAppDefinitions**](docs/RuntimeappdeploymentsApi.md#getAppDefinitions) | **GET** /enterprise/runtime-app-deployments | Query app deployments
+*.RuntimeappdeploymentsApi* | [**getAppDeployment**](docs/RuntimeappdeploymentsApi.md#getAppDeployment) | **GET** /enterprise/runtime-app-deployments/{appDeploymentId} | Get an app deployment
+*.RuntimeappdeploymentsApi* | [**getRuntimeAppDeploymentByDeployment**](docs/RuntimeappdeploymentsApi.md#getRuntimeAppDeploymentByDeployment) | **GET** /enterprise/runtime-app-deployment | Get an app by deployment ID or DMN deployment ID
+*.ScriptfilesApi* | [**getControllers**](docs/ScriptfilesApi.md#getControllers) | **GET** /enterprise/script-files/controllers | getControllers
+*.ScriptfilesApi* | [**getLibraries**](docs/ScriptfilesApi.md#getLibraries) | **GET** /enterprise/script-files/libraries | getLibraries
+*.SubmittedformsApi* | [**getFormSubmittedFroms**](docs/SubmittedformsApi.md#getFormSubmittedFroms) | **GET** /enterprise/form-submitted-forms/{formId} | List submissions for a form
+*.SubmittedformsApi* | [**getProcessSubmittedFroms**](docs/SubmittedformsApi.md#getProcessSubmittedFroms) | **GET** /enterprise/process-submitted-forms/{processId} | List submissions for a process instance
+*.SubmittedformsApi* | [**getSubmittedFrom**](docs/SubmittedformsApi.md#getSubmittedFrom) | **GET** /enterprise/submitted-forms/{submittedFormId} | Get a form submission
+*.SubmittedformsApi* | [**getTaskSubmittedFroms**](docs/SubmittedformsApi.md#getTaskSubmittedFroms) | **GET** /enterprise/task-submitted-form/{taskId} | Get the submitted form for a task
+*.SystempropertiesApi* | [**getGlobalDateFormat**](docs/SystempropertiesApi.md#getGlobalDateFormat) | **GET** /enterprise/system/properties/global-date-format/{tenantId} | Get global date format
+*.SystempropertiesApi* | [**getPasswordValidationConstraints**](docs/SystempropertiesApi.md#getPasswordValidationConstraints) | **GET** /enterprise/system/properties/password-validation-constraints/{tenantId} | Get password validation constraints
+*.SystempropertiesApi* | [**getProperties**](docs/SystempropertiesApi.md#getProperties) | **GET** /enterprise/system/properties | Retrieve system properties
+*.SystempropertiesApi* | [**involvedUsersCanEditForms**](docs/SystempropertiesApi.md#involvedUsersCanEditForms) | **GET** /enterprise/system/properties/involved-users-can-edit-forms/{tenantId} | Get involved users who can edit forms
+*.TaskactionsApi* | [**assignTask**](docs/TaskactionsApi.md#assignTask) | **PUT** /enterprise/tasks/{taskId}/action/assign | Assign a task to a user
+*.TaskactionsApi* | [**attachForm**](docs/TaskactionsApi.md#attachForm) | **PUT** /enterprise/tasks/{taskId}/action/attach-form | Attach a form to a task
+*.TaskactionsApi* | [**claimTask**](docs/TaskactionsApi.md#claimTask) | **PUT** /enterprise/tasks/{taskId}/action/claim | Claim a task
+*.TaskactionsApi* | [**completeTask**](docs/TaskactionsApi.md#completeTask) | **PUT** /enterprise/tasks/{taskId}/action/complete | Complete a task
+*.TaskactionsApi* | [**delegateTask**](docs/TaskactionsApi.md#delegateTask) | **PUT** /enterprise/tasks/{taskId}/action/delegate | Delegate a task
+*.TaskactionsApi* | [**involveGroup**](docs/TaskactionsApi.md#involveGroup) | **POST** /enterprise/tasks/{taskId}/groups/{groupId} | Involve a group with a task
+*.TaskactionsApi* | [**involveUser**](docs/TaskactionsApi.md#involveUser) | **PUT** /enterprise/tasks/{taskId}/action/involve | Involve a user with a task
+*.TaskactionsApi* | [**removeForm**](docs/TaskactionsApi.md#removeForm) | **DELETE** /enterprise/tasks/{taskId}/action/remove-form | Remove a form from a task
+*.TaskactionsApi* | [**removeInvolvedUser**](docs/TaskactionsApi.md#removeInvolvedUser) | **DELETE** /enterprise/tasks/{taskId}/groups/{groupId} | Remove an involved group from a task
+*.TaskactionsApi* | [**removeInvolvedUser**](docs/TaskactionsApi.md#removeInvolvedUser) | **PUT** /enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
+*.TaskactionsApi* | [**resolveTask**](docs/TaskactionsApi.md#resolveTask) | **PUT** /enterprise/tasks/{taskId}/action/resolve | Resolve a task
+*.TaskactionsApi* | [**unclaimTask**](docs/TaskactionsApi.md#unclaimTask) | **PUT** /enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
+*.TaskformsApi* | [**completeTaskForm**](docs/TaskformsApi.md#completeTaskForm) | **POST** /enterprise/task-forms/{taskId} | Complete a task form
+*.TaskformsApi* | [**getProcessInstanceVariables**](docs/TaskformsApi.md#getProcessInstanceVariables) | **GET** /enterprise/task-forms/{taskId}/variables | Get task variables
+*.TaskformsApi* | [**getRestFieldValues**](docs/TaskformsApi.md#getRestFieldValues) | **GET** /enterprise/task-forms/{taskId}/form-values/{field}/{column} | Retrieve column field values
+*.TaskformsApi* | [**getRestFieldValues**](docs/TaskformsApi.md#getRestFieldValues) | **GET** /enterprise/task-forms/{taskId}/form-values/{field} | Retrieve populated field values
+*.TaskformsApi* | [**getTaskForm**](docs/TaskformsApi.md#getTaskForm) | **GET** /enterprise/task-forms/{taskId} | Get a task form
+*.TaskformsApi* | [**saveTaskForm**](docs/TaskformsApi.md#saveTaskForm) | **POST** /enterprise/task-forms/{taskId}/save-form | Save a task form
+*.TasksApi* | [**createIdentityLink**](docs/TasksApi.md#createIdentityLink) | **POST** /enterprise/tasks/{taskId}/identitylinks | List the users and groups involved with a task
+*.TasksApi* | [**createNewTask**](docs/TasksApi.md#createNewTask) | **POST** /enterprise/tasks | Create a standalone task
+*.TasksApi* | [**deleteIdentityLink**](docs/TasksApi.md#deleteIdentityLink) | **DELETE** /enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type} | Remove a user or group involvement from a task
+*.TasksApi* | [**deleteTask**](docs/TasksApi.md#deleteTask) | **DELETE** /enterprise/tasks/{taskId} | Delete a task
+*.TasksApi* | [**filterTasks**](docs/TasksApi.md#filterTasks) | **POST** /enterprise/tasks/filter | Filter a list of tasks
+*.TasksApi* | [**getIdentityLinkType**](docs/TasksApi.md#getIdentityLinkType) | **GET** /enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type} | Get a user or group involvement with a task
+*.TasksApi* | [**getIdentityLinksForFamily**](docs/TasksApi.md#getIdentityLinksForFamily) | **GET** /enterprise/tasks/{taskId}/identitylinks/{family} | List either the users or groups involved with a process instance
+*.TasksApi* | [**getIdentityLinks**](docs/TasksApi.md#getIdentityLinks) | **GET** /enterprise/tasks/{taskId}/identitylinks | getIdentityLinks
+*.TasksApi* | [**getTaskAuditLog**](docs/TasksApi.md#getTaskAuditLog) | **GET** /enterprise/tasks/{taskId}/audit | Get the audit log for a task
+*.TasksApi* | [**getTask**](docs/TasksApi.md#getTask) | **GET** /enterprise/tasks/{taskId} | Get a task
+*.TasksApi* | [**listHistoricTasks**](docs/TasksApi.md#listHistoricTasks) | **POST** /enterprise/historic-tasks/query | Query historic tasks
+*.TasksApi* | [**listTasks**](docs/TasksApi.md#listTasks) | **POST** /enterprise/tasks/query | List tasks
+*.TasksApi* | [**updateTask**](docs/TasksApi.md#updateTask) | **PUT** /enterprise/tasks/{taskId} | Update a task
+*.TaskvariablesApi* | [**createTaskVariable**](docs/TaskvariablesApi.md#createTaskVariable) | **POST** /enterprise/tasks/{taskId}/variables | Create variables
+*.TaskvariablesApi* | [**deleteAllLocalTaskVariables**](docs/TaskvariablesApi.md#deleteAllLocalTaskVariables) | **DELETE** /enterprise/tasks/{taskId}/variables | Create or update variables
+*.TaskvariablesApi* | [**deleteVariable**](docs/TaskvariablesApi.md#deleteVariable) | **DELETE** /enterprise/tasks/{taskId}/variables/{variableName} | Delete a variable
+*.TaskvariablesApi* | [**getVariable**](docs/TaskvariablesApi.md#getVariable) | **GET** /enterprise/tasks/{taskId}/variables/{variableName} | Get a variable
+*.TaskvariablesApi* | [**getVariables**](docs/TaskvariablesApi.md#getVariables) | **GET** /enterprise/tasks/{taskId}/variables | List variables
+*.TaskvariablesApi* | [**updateVariable**](docs/TaskvariablesApi.md#updateVariable) | **PUT** /enterprise/tasks/{taskId}/variables/{variableName} | Update a variable
+*.UserfiltersApi* | [**createUserProcessInstanceFilter**](docs/UserfiltersApi.md#createUserProcessInstanceFilter) | **POST** /enterprise/filters/processes | Create a process instance filter
+*.UserfiltersApi* | [**createUserTaskFilter**](docs/UserfiltersApi.md#createUserTaskFilter) | **POST** /enterprise/filters/tasks | Create a task filter
+*.UserfiltersApi* | [**deleteUserProcessInstanceFilter**](docs/UserfiltersApi.md#deleteUserProcessInstanceFilter) | **DELETE** /enterprise/filters/processes/{userFilterId} | Delete a process instance filter
+*.UserfiltersApi* | [**deleteUserTaskFilter**](docs/UserfiltersApi.md#deleteUserTaskFilter) | **DELETE** /enterprise/filters/tasks/{userFilterId} | Delete a task filter
+*.UserfiltersApi* | [**getUserProcessInstanceFilter**](docs/UserfiltersApi.md#getUserProcessInstanceFilter) | **GET** /enterprise/filters/processes/{userFilterId} | Get a process instance filter
+*.UserfiltersApi* | [**getUserProcessInstanceFilters**](docs/UserfiltersApi.md#getUserProcessInstanceFilters) | **GET** /enterprise/filters/processes | List process instance filters
+*.UserfiltersApi* | [**getUserTaskFilter**](docs/UserfiltersApi.md#getUserTaskFilter) | **GET** /enterprise/filters/tasks/{userFilterId} | Get a task filter
+*.UserfiltersApi* | [**getUserTaskFilters**](docs/UserfiltersApi.md#getUserTaskFilters) | **GET** /enterprise/filters/tasks | List task filters
+*.UserfiltersApi* | [**orderUserProcessInstanceFilters**](docs/UserfiltersApi.md#orderUserProcessInstanceFilters) | **PUT** /enterprise/filters/processes | Re-order the list of user process instance filters
+*.UserfiltersApi* | [**orderUserTaskFilters**](docs/UserfiltersApi.md#orderUserTaskFilters) | **PUT** /enterprise/filters/tasks | Re-order the list of user task filters
+*.UserfiltersApi* | [**updateUserProcessInstanceFilter**](docs/UserfiltersApi.md#updateUserProcessInstanceFilter) | **PUT** /enterprise/filters/processes/{userFilterId} | Update a process instance filter
+*.UserfiltersApi* | [**updateUserTaskFilter**](docs/UserfiltersApi.md#updateUserTaskFilter) | **PUT** /enterprise/filters/tasks/{userFilterId} | Update a task filter
+*.UserprofileApi* | [**changePassword**](docs/UserprofileApi.md#changePassword) | **POST** /enterprise/profile-password | Change user password
+*.UserprofileApi* | [**getProfilePicture**](docs/UserprofileApi.md#getProfilePicture) | **GET** /enterprise/profile-picture | Retrieve user profile picture
+*.UserprofileApi* | [**getProfile**](docs/UserprofileApi.md#getProfile) | **GET** /enterprise/profile | Get user profile
+*.UserprofileApi* | [**updateProfile**](docs/UserprofileApi.md#updateProfile) | **POST** /enterprise/profile | Update user profile
+*.UserprofileApi* | [**uploadProfilePicture**](docs/UserprofileApi.md#uploadProfilePicture) | **POST** /enterprise/profile-picture | Change user profile picture
+*.UsersApi* | [**executeAction**](docs/UsersApi.md#executeAction) | **POST** /enterprise/users/{userId} | Execute an action for a specific user
+*.UsersApi* | [**getProfilePicture**](docs/UsersApi.md#getProfilePicture) | **GET** /enterprise/users/{userId}/picture | Stream user profile picture
+*.UsersApi* | [**getUser**](docs/UsersApi.md#getUser) | **GET** /enterprise/users/{userId} | Get a user
+*.UsersApi* | [**getUsers**](docs/UsersApi.md#getUsers) | **GET** /enterprise/users | Query users
+*.UsersApi* | [**requestPasswordReset**](docs/UsersApi.md#requestPasswordReset) | **POST** /enterprise/idm/passwords | Request a password reset
+*.UsersApi* | [**updateUser**](docs/UsersApi.md#updateUser) | **PUT** /enterprise/users/{userId} | Update a user
 *ActivitiPublicRestApi.ReportApi* | [**createDefaultReports**](docs/ReportApi.md#createDefaultReports) |   **POST** /app/rest/reporting/default-reports | Create the default reports
 *ActivitiPublicRestApi.ReportApi* | [**getReportList**](docs/ReportApi.md#getReportList) | **GET** /app/rest/reporting/reports |  Retrieve the available report list
 *ActivitiPublicRestApi.ReportApi* | [**getReportParams**](docs/ReportApi.md#getReportParams) | **GET** /app/rest/reporting/report-params/{reportId} |  Retrieve the parameters referring to the reportId
 *ActivitiPublicRestApi.ReportApi* | [**getProcessDefinitions**](docs/ReportApi.md#getProcessDefinitions) | **GET** /app/rest/reporting/process-definitions |  Retrieve the process definition list for all the apps.
 *ActivitiPublicRestApi.ReportApi* | [**getTasksByProcessDefinitionId**](docs/ReportApi.md#getTasksByProcessDefinitionId) | **GET** /app/rest/reporting/report-params/{reportId}/tasks | Retrieves all tasks that refer to the processDefinitionId
 *ActivitiPublicRestApi.ReportApi* | [**getReportsByParams**](docs/ReportApi.md#getReportsByParams) | **GET** /app/rest/reporting/report-params/{reportId} | Generate the reports
-
+*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getHistoricEditorDisplayJsonClient**](docs/ModelJsonBpmnApi.md#getHistoricEditorDisplayJsonClient) | **GET** /api/enterprise/models/{processModelId}/history/{processModelHistoryId}/model-json | Export a previous process definition model to JSON
+*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getEditorDisplayJsonClient**](docs/ModelJsonBpmnApi.md#getEditorDisplayJsonClient) | **GET** /api/enterprise/models/{processModelId}/model-json | Export a process definition model to JSON
+*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getModelJSON**](docs/ModelJsonBpmnApi.md#getModelJSON) | **GET** /app/rest/process-definitions/{processDefinitionId}/model-json| Export a process definition model to JSON
+*ActivitiPublicRestApi.modelJsonBpmnApi* | [**getModelJSONForProcessDefinition**](docs/ModelJsonBpmnApi.md#getModelJSONForProcessDefinition) | **GET** /app/rest/process-instances/{processInstanceId}/model-json | Export a process instances model to JSON
+*ActivitiPublicRestApi.TemporaryApi* | [**completeTasks**](docs/TemporaryApi.md#completeTasks) | **GET** /api/enterprise/temporary/generate-report-data/complete-tasks | completeTasks
+*ActivitiPublicRestApi.TemporaryApi* | [**generateData**](docs/TemporaryApi.md#generateData) | **GET** /api/enterprise/temporary/generate-report-data/start-process | generateData
+*ActivitiPublicRestApi.TemporaryApi* | [**getHeaders**](docs/TemporaryApi.md#getHeaders) | **GET** /api/enterprise/temporary/example-headers | getHeaders
+*ActivitiPublicRestApi.TemporaryApi* | [**getOptions**](docs/TemporaryApi.md#getOptions) | **GET** /api/enterprise/temporary/example-options | getOptions
 
 ## Documentation for Models
 
- - [ActivitiPublicRestApi.AbstractGroupRepresentation](docs/AbstractGroupRepresentation.md)
- - [ActivitiPublicRestApi.AbstractRepresentation](docs/AbstractRepresentation.md)
- - [ActivitiPublicRestApi.AbstractUserRepresentation](docs/AbstractUserRepresentation.md)
- - [ActivitiPublicRestApi.AddGroupCapabilitiesRepresentation](docs/AddGroupCapabilitiesRepresentation.md)
- - [ActivitiPublicRestApi.AppDefinition](docs/AppDefinition.md)
- - [ActivitiPublicRestApi.AppDefinitionPublishRepresentation](docs/AppDefinitionPublishRepresentation.md)
- - [ActivitiPublicRestApi.AppDefinitionRepresentation](docs/AppDefinitionRepresentation.md)
- - [ActivitiPublicRestApi.AppDefinitionUpdateResultRepresentation](docs/AppDefinitionUpdateResultRepresentation.md)
- - [ActivitiPublicRestApi.AppModelDefinition](docs/AppModelDefinition.md)
- - [ActivitiPublicRestApi.ArrayNode](docs/ArrayNode.md)
- - [ActivitiPublicRestApi.BoxUserAccountCredentialsRepresentation](docs/BoxUserAccountCredentialsRepresentation.md)
- - [ActivitiPublicRestApi.BulkUserUpdateRepresentation](docs/BulkUserUpdateRepresentation.md)
- - [ActivitiPublicRestApi.ChangePasswordRepresentation](docs/ChangePasswordRepresentation.md)
- - [ActivitiPublicRestApi.ChecklistOrderRepresentation](docs/ChecklistOrderRepresentation.md)
- - [ActivitiPublicRestApi.CommentRepresentation](docs/CommentRepresentation.md)
- - [ActivitiPublicRestApi.CompleteFormRepresentation](docs/CompleteFormRepresentation.md)
- - [ActivitiPublicRestApi.ConditionRepresentation](docs/ConditionRepresentation.md)
- - [ActivitiPublicRestApi.CreateEndpointBasicAuthRepresentation](docs/CreateEndpointBasicAuthRepresentation.md)
- - [ActivitiPublicRestApi.CreateProcessInstanceRepresentation](docs/CreateProcessInstanceRepresentation.md)
- - [ActivitiPublicRestApi.CreateTenantRepresentation](docs/CreateTenantRepresentation.md)
- - [ActivitiPublicRestApi.EndpointBasicAuthRepresentation](docs/EndpointBasicAuthRepresentation.md)
- - [ActivitiPublicRestApi.EndpointConfigurationRepresentation](docs/EndpointConfigurationRepresentation.md)
- - [ActivitiPublicRestApi.EndpointRequestHeaderRepresentation](docs/EndpointRequestHeaderRepresentation.md)
- - [ActivitiPublicRestApi.EntityAttributeScopeRepresentation](docs/EntityAttributeScopeRepresentation.md)
- - [ActivitiPublicRestApi.EntityVariableScopeRepresentation](docs/EntityVariableScopeRepresentation.md)
- - [ActivitiPublicRestApi.File](docs/File.md)
- - [ActivitiPublicRestApi.FormDefinitionRepresentation](docs/FormDefinitionRepresentation.md)
- - [ActivitiPublicRestApi.FormFieldRepresentation](docs/FormFieldRepresentation.md)
- - [ActivitiPublicRestApi.FormJavascriptEventRepresentation](docs/FormJavascriptEventRepresentation.md)
- - [ActivitiPublicRestApi.FormOutcomeRepresentation](docs/FormOutcomeRepresentation.md)
- - [ActivitiPublicRestApi.FormRepresentation](docs/FormRepresentation.md)
- - [ActivitiPublicRestApi.FormSaveRepresentation](docs/FormSaveRepresentation.md)
- - [ActivitiPublicRestApi.FormScopeRepresentation](docs/FormScopeRepresentation.md)
- - [ActivitiPublicRestApi.FormTabRepresentation](docs/FormTabRepresentation.md)
- - [ActivitiPublicRestApi.FormValueRepresentation](docs/FormValueRepresentation.md)
- - [ActivitiPublicRestApi.GroupCapabilityRepresentation](docs/GroupCapabilityRepresentation.md)
- - [ActivitiPublicRestApi.GroupRepresentation](docs/GroupRepresentation.md)
- - [ActivitiPublicRestApi.ImageUploadRepresentation](docs/ImageUploadRepresentation.md)
- - [ActivitiPublicRestApi.LayoutRepresentation](docs/LayoutRepresentation.md)
- - [ActivitiPublicRestApi.LightAppRepresentation](docs/LightAppRepresentation.md)
- - [ActivitiPublicRestApi.LightGroupRepresentation](docs/LightGroupRepresentation.md)
- - [ActivitiPublicRestApi.LightTenantRepresentation](docs/LightTenantRepresentation.md)
- - [ActivitiPublicRestApi.LightUserRepresentation](docs/LightUserRepresentation.md)
- - [ActivitiPublicRestApi.MaplongListstring](docs/MaplongListstring.md)
- - [ActivitiPublicRestApi.MapstringListEntityVariableScopeRepresentation](docs/MapstringListEntityVariableScopeRepresentation.md)
- - [ActivitiPublicRestApi.MapstringListVariableScopeRepresentation](docs/MapstringListVariableScopeRepresentation.md)
- - [ActivitiPublicRestApi.Mapstringstring](docs/Mapstringstring.md)
- - [ActivitiPublicRestApi.ModelRepresentation](docs/ModelRepresentation.md)
- - [ActivitiPublicRestApi.ObjectNode](docs/ObjectNode.md)
- - [ActivitiPublicRestApi.OptionRepresentation](docs/OptionRepresentation.md)
- - [ActivitiPublicRestApi.ProcessInstanceFilterRepresentation](docs/ProcessInstanceFilterRepresentation.md)
- - [ActivitiPublicRestApi.ProcessInstanceFilterRequestRepresentation](docs/ProcessInstanceFilterRequestRepresentation.md)
- - [ActivitiPublicRestApi.ProcessInstanceRepresentation](docs/ProcessInstanceRepresentation.md)
- - [ActivitiPublicRestApi.ProcessInstanceVariableRepresentation](docs/ProcessInstanceVariableRepresentation.md)
- - [ActivitiPublicRestApi.ProcessScopeIdentifierRepresentation](docs/ProcessScopeIdentifierRepresentation.md)
- - [ActivitiPublicRestApi.ProcessScopeRepresentation](docs/ProcessScopeRepresentation.md)
- - [ActivitiPublicRestApi.ProcessScopesRequestRepresentation](docs/ProcessScopesRequestRepresentation.md)
- - [ActivitiPublicRestApi.PublishIdentityInfoRepresentation](docs/PublishIdentityInfoRepresentation.md)
- - [ActivitiPublicRestApi.RelatedContentRepresentation](docs/RelatedContentRepresentation.md)
- - [ActivitiPublicRestApi.ResetPasswordRepresentation](docs/ResetPasswordRepresentation.md)
- - [ActivitiPublicRestApi.RestVariable](docs/RestVariable.md)
- - [ActivitiPublicRestApi.ResultListDataRepresentation](docs/ResultListDataRepresentation.md)
- - [ActivitiPublicRestApi.RuntimeAppDefinitionSaveRepresentation](docs/RuntimeAppDefinitionSaveRepresentation.md)
- - [ActivitiPublicRestApi.SaveFormRepresentation](docs/SaveFormRepresentation.md)
- - [ActivitiPublicRestApi.SyncLogEntryRepresentation](docs/SyncLogEntryRepresentation.md)
- - [ActivitiPublicRestApi.SystemPropertiesRepresentation](docs/SystemPropertiesRepresentation.md)
- - [ActivitiPublicRestApi.TaskFilterRepresentation](docs/TaskFilterRepresentation.md)
- - [ActivitiPublicRestApi.TaskFilterRequestRepresentation](docs/TaskFilterRequestRepresentation.md)
- - [ActivitiPublicRestApi.TaskRepresentation](docs/TaskRepresentation.md)
- - [ActivitiPublicRestApi.TaskUpdateRepresentation](docs/TaskUpdateRepresentation.md)
- - [ActivitiPublicRestApi.TenantEvent](docs/TenantEvent.md)
- - [ActivitiPublicRestApi.TenantRepresentation](docs/TenantRepresentation.md)
- - [ActivitiPublicRestApi.UserAccountCredentialsRepresentation](docs/UserAccountCredentialsRepresentation.md)
- - [ActivitiPublicRestApi.UserActionRepresentation](docs/UserActionRepresentation.md)
- - [ActivitiPublicRestApi.UserFilterOrderRepresentation](docs/UserFilterOrderRepresentation.md)
- - [ActivitiPublicRestApi.UserProcessInstanceFilterRepresentation](docs/UserProcessInstanceFilterRepresentation.md)
- - [ActivitiPublicRestApi.UserRepresentation](docs/UserRepresentation.md)
- - [ActivitiPublicRestApi.UserTaskFilterRepresentation](docs/UserTaskFilterRepresentation.md)
- - [ActivitiPublicRestApi.ValidationErrorRepresentation](docs/ValidationErrorRepresentation.md)
- - [ActivitiPublicRestApi.VariableScopeRepresentation](docs/VariableScopeRepresentation.md)
-
-
-## Documentation for Authorization
-
- All endpoints do not require authorization.
+ - [.AbstractGroupRepresentation](docs/AbstractGroupRepresentation.md)
+ - [.AbstractUserRepresentation](docs/AbstractUserRepresentation.md)
+ - [.AccountRepresentation](docs/AccountRepresentation.md)
+ - [.AddGroupCapabilitiesRepresentation](docs/AddGroupCapabilitiesRepresentation.md)
+ - [.AlfrescoContentRepresentation](docs/AlfrescoContentRepresentation.md)
+ - [.AlfrescoEndpointRepresentation](docs/AlfrescoEndpointRepresentation.md)
+ - [.AlfrescoNetworkRepresenation](docs/AlfrescoNetworkRepresenation.md)
+ - [.AlfrescoSiteRepresenation](docs/AlfrescoSiteRepresenation.md)
+ - [.AppDefinition](docs/AppDefinition.md)
+ - [.AppDefinitionPublishRepresentation](docs/AppDefinitionPublishRepresentation.md)
+ - [.AppDefinitionRepresentation](docs/AppDefinitionRepresentation.md)
+ - [.AppDefinitionSaveRepresentation](docs/AppDefinitionSaveRepresentation.md)
+ - [.AppDefinitionUpdateResultRepresentation](docs/AppDefinitionUpdateResultRepresentation.md)
+ - [.AppDeploymentRepresentation](docs/AppDeploymentRepresentation.md)
+ - [.AppModelDefinition](docs/AppModelDefinition.md)
+ - [.AssigneeIdentifierRepresentation](docs/AssigneeIdentifierRepresentation.md)
+ - [.AuditCalculatedValueRepresentation](docs/AuditCalculatedValueRepresentation.md)
+ - [.AuditDecisionExpressionInfoRepresentation](docs/AuditDecisionExpressionInfoRepresentation.md)
+ - [.AuditDecisionInfoRepresentation](docs/AuditDecisionInfoRepresentation.md)
+ - [.AuditDecisionRuleInfoRepresentation](docs/AuditDecisionRuleInfoRepresentation.md)
+ - [.AuditLogEntryRepresentation](docs/AuditLogEntryRepresentation.md)
+ - [.AuditLogFormDataRepresentation](docs/AuditLogFormDataRepresentation.md)
+ - [.BoxContent](docs/BoxContent.md)
+ - [.BoxUserAccountCredentialsRepresentation](docs/BoxUserAccountCredentialsRepresentation.md)
+ - [.BulkUserUpdateRepresentation](docs/BulkUserUpdateRepresentation.md)
+ - [.ChangePasswordRepresentation](docs/ChangePasswordRepresentation.md)
+ - [.ChecklistOrderRepresentation](docs/ChecklistOrderRepresentation.md)
+ - [.CommentAuditInfo](docs/CommentAuditInfo.md)
+ - [.CommentRepresentation](docs/CommentRepresentation.md)
+ - [.CompleteFormRepresentation](docs/CompleteFormRepresentation.md)
+ - [.ConditionRepresentation](docs/ConditionRepresentation.md)
+ - [.CreateEndpointBasicAuthRepresentation](docs/CreateEndpointBasicAuthRepresentation.md)
+ - [.CreateProcessInstanceRepresentation](docs/CreateProcessInstanceRepresentation.md)
+ - [.CreateTenantRepresentation](docs/CreateTenantRepresentation.md)
+ - [.DataSourceConfigRepresentation](docs/DataSourceConfigRepresentation.md)
+ - [.DataSourceRepresentation](docs/DataSourceRepresentation.md)
+ - [.DecisionAuditRepresentation](docs/DecisionAuditRepresentation.md)
+ - [.DecisionTaskRepresentation](docs/DecisionTaskRepresentation.md)
+ - [.EndpointBasicAuthRepresentation](docs/EndpointBasicAuthRepresentation.md)
+ - [.EndpointConfigurationRepresentation](docs/EndpointConfigurationRepresentation.md)
+ - [.EndpointRequestHeaderRepresentation](docs/EndpointRequestHeaderRepresentation.md)
+ - [.EntityAttributeScopeRepresentation](docs/EntityAttributeScopeRepresentation.md)
+ - [.EntityVariableScopeRepresentation](docs/EntityVariableScopeRepresentation.md)
+ - [.FieldValueInfo](docs/FieldValueInfo.md)
+ - [.File](docs/File.md)
+ - [.FormDefinitionRepresentation](docs/FormDefinitionRepresentation.md)
+ - [.FormFieldRepresentation](docs/FormFieldRepresentation.md)
+ - [.FormIdentifierRepresentation](docs/FormIdentifierRepresentation.md)
+ - [.FormJavascriptEventRepresentation](docs/FormJavascriptEventRepresentation.md)
+ - [.FormOutcomeRepresentation](docs/FormOutcomeRepresentation.md)
+ - [.FormRepresentation](docs/FormRepresentation.md)
+ - [.FormSaveRepresentation](docs/FormSaveRepresentation.md)
+ - [.FormScopeRepresentation](docs/FormScopeRepresentation.md)
+ - [.FormTabRepresentation](docs/FormTabRepresentation.md)
+ - [.FormValueRepresentation](docs/FormValueRepresentation.md)
+ - [.FormVariableRepresentation](docs/FormVariableRepresentation.md)
+ - [.GlobalDateFormatRepresentation](docs/GlobalDateFormatRepresentation.md)
+ - [.GoogleDriveContent](docs/GoogleDriveContent.md)
+ - [.GroupCapabilityRepresentation](docs/GroupCapabilityRepresentation.md)
+ - [.GroupRepresentation](docs/GroupRepresentation.md)
+ - [.HistoricProcessInstanceQueryRepresentation](docs/HistoricProcessInstanceQueryRepresentation.md)
+ - [.HistoricTaskInstanceQueryRepresentation](docs/HistoricTaskInstanceQueryRepresentation.md)
+ - [.IdentityLinkRepresentation](docs/IdentityLinkRepresentation.md)
+ - [.ImageUploadRepresentation](docs/ImageUploadRepresentation.md)
+ - [.JsonNode](docs/JsonNode.md)
+ - [.LayoutRepresentation](docs/LayoutRepresentation.md)
+ - [.LightAppRepresentation](docs/LightAppRepresentation.md)
+ - [.LightGroupRepresentation](docs/LightGroupRepresentation.md)
+ - [.LightTenantRepresentation](docs/LightTenantRepresentation.md)
+ - [.LightUserRepresentation](docs/LightUserRepresentation.md)
+ - [.ModelRepresentation](docs/ModelRepresentation.md)
+ - [.NamedObject](docs/NamedObject.md)
+ - [.ObjectNode](docs/ObjectNode.md)
+ - [.OptionRepresentation](docs/OptionRepresentation.md)
+ - [.PasswordValidationConstraints](docs/PasswordValidationConstraints.md)
+ - [.ProcessContentRepresentation](docs/ProcessContentRepresentation.md)
+ - [.ProcessDefinitionMetaDataRepresentation](docs/ProcessDefinitionMetaDataRepresentation.md)
+ - [.ProcessDefinitionRepresentation](docs/ProcessDefinitionRepresentation.md)
+ - [.ProcessInstanceAuditInfoRepresentation](docs/ProcessInstanceAuditInfoRepresentation.md)
+ - [.ProcessInstanceFilterRepresentation](docs/ProcessInstanceFilterRepresentation.md)
+ - [.ProcessInstanceFilterRequestRepresentation](docs/ProcessInstanceFilterRequestRepresentation.md)
+ - [.ProcessInstanceQueryRepresentation](docs/ProcessInstanceQueryRepresentation.md)
+ - [.ProcessInstanceRepresentation](docs/ProcessInstanceRepresentation.md)
+ - [.ProcessInstanceVariableRepresentation](docs/ProcessInstanceVariableRepresentation.md)
+ - [.ProcessScopeIdentifierRepresentation](docs/ProcessScopeIdentifierRepresentation.md)
+ - [.ProcessScopeRepresentation](docs/ProcessScopeRepresentation.md)
+ - [.ProcessScopesRequestRepresentation](docs/ProcessScopesRequestRepresentation.md)
+ - [.PublishIdentityInfoRepresentation](docs/PublishIdentityInfoRepresentation.md)
+ - [.QueryVariable](docs/QueryVariable.md)
+ - [.RelatedContentRepresentation](docs/RelatedContentRepresentation.md)
+ - [.ResetPasswordRepresentation](docs/ResetPasswordRepresentation.md)
+ - [.RestVariable](docs/RestVariable.md)
+ - [.ResultListDataRepresentationAbstractUserRepresentation](docs/ResultListDataRepresentationAbstractUserRepresentation.md)
+ - [.ResultListDataRepresentationAccountRepresentation](docs/ResultListDataRepresentationAccountRepresentation.md)
+ - [.ResultListDataRepresentationAlfrescoContentRepresentation](docs/ResultListDataRepresentationAlfrescoContentRepresentation.md)
+ - [.ResultListDataRepresentationAlfrescoEndpointRepresentation](docs/ResultListDataRepresentationAlfrescoEndpointRepresentation.md)
+ - [.ResultListDataRepresentationAlfrescoNetworkRepresenation](docs/ResultListDataRepresentationAlfrescoNetworkRepresenation.md)
+ - [.ResultListDataRepresentationAlfrescoSiteRepresenation](docs/ResultListDataRepresentationAlfrescoSiteRepresenation.md)
+ - [.ResultListDataRepresentationAppDefinitionRepresentation](docs/ResultListDataRepresentationAppDefinitionRepresentation.md)
+ - [.ResultListDataRepresentationAppDeploymentRepresentation](docs/ResultListDataRepresentationAppDeploymentRepresentation.md)
+ - [.ResultListDataRepresentationBoxContent](docs/ResultListDataRepresentationBoxContent.md)
+ - [.ResultListDataRepresentationCommentRepresentation](docs/ResultListDataRepresentationCommentRepresentation.md)
+ - [.ResultListDataRepresentationDataSourceRepresentation](docs/ResultListDataRepresentationDataSourceRepresentation.md)
+ - [.ResultListDataRepresentationDecisionAuditRepresentation](docs/ResultListDataRepresentationDecisionAuditRepresentation.md)
+ - [.ResultListDataRepresentationDecisionTaskRepresentation](docs/ResultListDataRepresentationDecisionTaskRepresentation.md)
+ - [.ResultListDataRepresentationFormRepresentation](docs/ResultListDataRepresentationFormRepresentation.md)
+ - [.ResultListDataRepresentationGoogleDriveContent](docs/ResultListDataRepresentationGoogleDriveContent.md)
+ - [.ResultListDataRepresentationLightGroupRepresentation](docs/ResultListDataRepresentationLightGroupRepresentation.md)
+ - [.ResultListDataRepresentationLightUserRepresentation](docs/ResultListDataRepresentationLightUserRepresentation.md)
+ - [.ResultListDataRepresentationModelRepresentation](docs/ResultListDataRepresentationModelRepresentation.md)
+ - [.ResultListDataRepresentationProcessContentRepresentation](docs/ResultListDataRepresentationProcessContentRepresentation.md)
+ - [.ResultListDataRepresentationProcessDefinitionRepresentation](docs/ResultListDataRepresentationProcessDefinitionRepresentation.md)
+ - [.ResultListDataRepresentationProcessInstanceRepresentation](docs/ResultListDataRepresentationProcessInstanceRepresentation.md)
+ - [.ResultListDataRepresentationRelatedContentRepresentation](docs/ResultListDataRepresentationRelatedContentRepresentation.md)
+ - [.ResultListDataRepresentationRuntimeDecisionTableRepresentation](docs/ResultListDataRepresentationRuntimeDecisionTableRepresentation.md)
+ - [.ResultListDataRepresentationRuntimeFormRepresentation](docs/ResultListDataRepresentationRuntimeFormRepresentation.md)
+ - [.ResultListDataRepresentationSubmittedFormRepresentation](docs/ResultListDataRepresentationSubmittedFormRepresentation.md)
+ - [.ResultListDataRepresentationTaskRepresentation](docs/ResultListDataRepresentationTaskRepresentation.md)
+ - [.ResultListDataRepresentationUserProcessInstanceFilterRepresentation](docs/ResultListDataRepresentationUserProcessInstanceFilterRepresentation.md)
+ - [.ResultListDataRepresentationUserTaskFilterRepresentation](docs/ResultListDataRepresentationUserTaskFilterRepresentation.md)
+ - [.RuntimeAppDefinitionSaveRepresentation](docs/RuntimeAppDefinitionSaveRepresentation.md)
+ - [.RuntimeDecisionTableRepresentation](docs/RuntimeDecisionTableRepresentation.md)
+ - [.RuntimeFormRepresentation](docs/RuntimeFormRepresentation.md)
+ - [.SaveFormRepresentation](docs/SaveFormRepresentation.md)
+ - [.SubmittedFormRepresentation](docs/SubmittedFormRepresentation.md)
+ - [.SyncLogEntryRepresentation](docs/SyncLogEntryRepresentation.md)
+ - [.SystemPropertiesRepresentation](docs/SystemPropertiesRepresentation.md)
+ - [.TaskAuditInfoRepresentation](docs/TaskAuditInfoRepresentation.md)
+ - [.TaskFilterRepresentation](docs/TaskFilterRepresentation.md)
+ - [.TaskFilterRequestRepresentation](docs/TaskFilterRequestRepresentation.md)
+ - [.TaskQueryRepresentation](docs/TaskQueryRepresentation.md)
+ - [.TaskRepresentation](docs/TaskRepresentation.md)
+ - [.TaskUpdateRepresentation](docs/TaskUpdateRepresentation.md)
+ - [.TenantEvent](docs/TenantEvent.md)
+ - [.TenantRepresentation](docs/TenantRepresentation.md)
+ - [.UserAccountCredentialsRepresentation](docs/UserAccountCredentialsRepresentation.md)
+ - [.UserActionRepresentation](docs/UserActionRepresentation.md)
+ - [.UserFilterOrderRepresentation](docs/UserFilterOrderRepresentation.md)
+ - [.UserIdentifierRepresentation](docs/UserIdentifierRepresentation.md)
+ - [.UserProcessInstanceFilterRepresentation](docs/UserProcessInstanceFilterRepresentation.md)
+ - [.UserRepresentation](docs/UserRepresentation.md)
+ - [.UserTaskFilterRepresentation](docs/UserTaskFilterRepresentation.md)
+ - [.ValidationErrorRepresentation](docs/ValidationErrorRepresentation.md)
+ - [.VariableMappingRepresentation](docs/VariableMappingRepresentation.md)
+ - [.VariableScopeRepresentation](docs/VariableScopeRepresentation.md)
 

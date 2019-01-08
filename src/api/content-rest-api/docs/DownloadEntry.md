@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.DownloadEntry
+# DownloadEntry
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**Download**](Download.md) |  | 
+**entry** | [**Download**](Download.md) |  | [default to null]
 
 

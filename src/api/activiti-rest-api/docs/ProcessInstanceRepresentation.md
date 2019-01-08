@@ -1,24 +1,25 @@
-# ActivitiPublicRestApi.ProcessInstanceRepresentation
+# ProcessInstanceRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**businessKey** | **String** |  | [optional] 
-**ended** | **Date** |  | [optional] 
-**graphicalNotationDefined** | **Boolean** |  | [optional] 
-**id** | **String** |  | [optional] 
-**name** | **String** |  | [optional] 
-**processDefinitionCategory** | **String** |  | [optional] 
-**processDefinitionDeploymentId** | **String** |  | [optional] 
-**processDefinitionDescription** | **String** |  | [optional] 
-**processDefinitionId** | **String** |  | [optional] 
-**processDefinitionKey** | **String** |  | [optional] 
-**processDefinitionName** | **String** |  | [optional] 
-**processDefinitionVersion** | **Integer** |  | [optional] 
-**startFormDefined** | **Boolean** |  | [optional] 
-**started** | **Date** |  | [optional] 
-**startedBy** | [**LightUserRepresentation**](LightUserRepresentation.md) |  | [optional] 
-**tenantId** | **String** |  | [optional] 
-**variables** | [**[RestVariable]**](RestVariable.md) |  | [optional] 
+**businessKey** | **string** |  | [optional] [default to null]
+**ended** | [**Date**](Date.md) |  | [optional] [default to null]
+**graphicalNotationDefined** | **boolean** |  | [optional] [default to null]
+**id** | **string** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**processDefinitionCategory** | **string** |  | [optional] [default to null]
+**processDefinitionDeploymentId** | **string** |  | [optional] [default to null]
+**processDefinitionDescription** | **string** |  | [optional] [default to null]
+**processDefinitionId** | **string** |  | [optional] [default to null]
+**processDefinitionKey** | **string** |  | [optional] [default to null]
+**processDefinitionName** | **string** |  | [optional] [default to null]
+**processDefinitionVersion** | **number** |  | [optional] [default to null]
+**startFormDefined** | **boolean** |  | [optional] [default to null]
+**started** | [**Date**](Date.md) |  | [optional] [default to null]
+**startedBy** | [**LightUserRepresentation**](LightUserRepresentation.md) |  | [optional] [default to null]
+**suspended** | **boolean** |  | [optional] [default to null]
+**tenantId** | **string** |  | [optional] [default to null]
+**variables** | [**RestVariable[]**](RestVariable.md) |  | [optional] [default to null]
 
 

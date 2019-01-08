@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.CommentPaging
+# CommentPaging
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**list** | [**CommentPagingList**](CommentPagingList.md) |  | [optional] 
+**list** | [**CommentPagingList**](CommentPagingList.md) |  | [optional] [default to null]
 
 

@@ -1,9 +1,9 @@
-# AlfrescoContentServicesRestApi.UserInfo
+# UserInfo
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**displayName** | **String** |  | 
-**id** | **String** |  | 
+**displayName** | **string** |  | [default to null]
+**id** | **string** |  | [default to null]
 
 

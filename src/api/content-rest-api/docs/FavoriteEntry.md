@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.FavoriteEntry
+# FavoriteEntry
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**Favorite**](Favorite.md) |  | 
+**entry** | [**Favorite**](Favorite.md) |  | [default to null]
 
 

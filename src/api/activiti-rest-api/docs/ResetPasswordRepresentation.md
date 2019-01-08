@@ -1,8 +1,8 @@
-# ActivitiPublicRestApi.ResetPasswordRepresentation
+# ResetPasswordRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | **String** |  | [optional] 
+**email** | **string** |  | [optional] [default to null]
 
 

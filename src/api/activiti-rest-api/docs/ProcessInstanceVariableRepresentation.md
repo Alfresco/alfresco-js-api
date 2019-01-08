@@ -1,8 +1,10 @@
-# ActivitiPublicRestApi.ProcessInstanceVariableRepresentation
+# ProcessInstanceVariableRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | [optional] 
-**type** | **String** |  | [optional] 
-**value** | **Object** |  | [optional] 
+**id** | **string** |  | [optional] [default to null]
+**type** | **string** |  | [optional] [default to null]
+**value** | **any** |  | [optional] [default to null]
+
+

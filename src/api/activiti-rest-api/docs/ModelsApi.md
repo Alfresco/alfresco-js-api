@@ -1,36 +1,49 @@
-# ActivitiPublicRestApi.ModelsApi
+# ModelsApi
 
-All URIs are relative to *https://localhost:8080/activiti-app*
+All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createModel**](ModelsApi.md#createModel) | **POST** /api/enterprise/models | To create a new model
-[**deleteModel**](ModelsApi.md#deleteModel) | **DELETE** /api/enterprise/models/{modelId} | Delete a model
-[**duplicateModel**](ModelsApi.md#duplicateModel) | **POST** /api/enterprise/models/{modelId}/clone | To duplicate an existing model
-[**getModelJSON**](ModelsApi.md#getModelJSON) | **GET** /api/enterprise/models/{modelId}/editor/json | Get the JSON model
-[**getModelThumbnail**](ModelsApi.md#getModelThumbnail) | **GET** /api/enterprise/models/{modelId}/thumbnail | Get Model thumbnail
-[**getModel**](ModelsApi.md#getModel) | **GET** /api/enterprise/models/{modelId} | To retrieve details about a particular model (process, form, decision rule or app)
-[**getModelsToIncludeInAppDefinition**](ModelsApi.md#getModelsToIncludeInAppDefinition) | **GET** /api/enterprise/models-for-app-definition | TODO
-[**getModels**](ModelsApi.md#getModels) | **GET** /api/enterprise/models | List models (process, form, decision rule or app)
-[**importNewVersion**](ModelsApi.md#importNewVersion) | **POST** /api/enterprise/models/{modelId}/newversion | Create a new model version
-[**importProcessModel**](ModelsApi.md#importProcessModel) | **POST** /api/enterprise/process-models/import | To import a BPMN 2.0 xml file
-[**saveModel**](ModelsApi.md#saveModel) | **POST** /api/enterprise/models/{modelId}/editor/json | Save the JSON model
-[**updateModel**](ModelsApi.md#updateModel) | **PUT** /api/enterprise/models/{modelId} | Edit a specific model
-[**validateModel**](ModelsApi.md#validateModel) | **POST** /api/enterprise/models/{modelId}/editor/validate | Validate the JSON model
+[**createModel**](ModelsApi.md#createModel) | **POST** /enterprise/models | Create a new model
+[**deleteModel**](ModelsApi.md#deleteModel) | **DELETE** /enterprise/models/{modelId} | Delete a model
+[**duplicateModel**](ModelsApi.md#duplicateModel) | **POST** /enterprise/models/{modelId}/clone | Duplicate an existing model
+[**getModelJSON**](ModelsApi.md#getModelJSON) | **GET** /enterprise/models/{modelId}/editor/json | Get model content
+[**getModelThumbnail**](ModelsApi.md#getModelThumbnail) | **GET** /enterprise/models/{modelId}/thumbnail | Get a model's thumbnail image
+[**getModel**](ModelsApi.md#getModel) | **GET** /enterprise/models/{modelId} | Get a model
+[**getModelsToIncludeInAppDefinition**](ModelsApi.md#getModelsToIncludeInAppDefinition) | **GET** /enterprise/models-for-app-definition | List process definition models shared with the current user
+[**getModels**](ModelsApi.md#getModels) | **GET** /enterprise/models | List models (process, form, decision rule or app)
+[**importNewVersion**](ModelsApi.md#importNewVersion) | **POST** /enterprise/models/{modelId}/newversion | Create a new version of a model
+[**importProcessModel**](ModelsApi.md#importProcessModel) | **POST** /enterprise/process-models/import | Import a BPMN 2.0 XML file
+[**saveModel**](ModelsApi.md#saveModel) | **POST** /enterprise/models/{modelId}/editor/json | Update model content
+[**updateModel**](ModelsApi.md#updateModel) | **PUT** /enterprise/models/{modelId} | Update a model
+[**validateModel**](ModelsApi.md#validateModel) | **POST** /enterprise/models/{modelId}/editor/validate | Validate model content
 
 
 <a name="createModel"></a>
 # **createModel**
 > ModelRepresentation createModel(modelRepresentation)
 
-To create a new model
+Create a new model
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var modelRepresentation = new this.alfrescoJsApi.activiti.ModelRepresentation(); // ModelRepresentation | modelRepresentation
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-this.alfrescoJsApi.activiti.modelsApi.createModel(modelRepresentation);
+let modelsApi = new ModelsApi(this.alfrescoApi);
+
+
+modelsApi.createModel(modelRepresentation).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -43,207 +56,228 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="deleteModel"></a>
 # **deleteModel**
-> deleteModel(modelId, opts)
+> deleteModel(modelIdopts)
 
 Delete a model
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var modelId = 789; // Integer | modelId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var opts = { 
-  'cascade': true, // Boolean | cascade
-  'deleteRuntimeApp': true // Boolean | deleteRuntimeApp
+let modelsApi = new ModelsApi(this.alfrescoApi);
+
+let opts = { 
+  'cascade': true //  | cascade
+  'deleteRuntimeApp': true //  | deleteRuntimeApp
 };
 
-this.alfrescoJsApi.activiti.modelsApi.deleteModel(modelId, opts);
+modelsApi.deleteModel(modelIdopts).then(() => {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **Integer**| modelId | 
- **cascade** | **Boolean**| cascade | [optional] 
- **deleteRuntimeApp** | **Boolean**| deleteRuntimeApp | [optional] 
+ **modelId** | **number**| modelId | 
+ **cascade** | **boolean**| cascade | [optional] 
+ **deleteRuntimeApp** | **boolean**| deleteRuntimeApp | [optional] 
 
 ### Return type
 
 null (empty response body)
 
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="duplicateModel"></a>
 # **duplicateModel**
-> ModelRepresentation duplicateModel(modelId, modelRepresentation)
+> ModelRepresentation duplicateModel(modelIdmodelRepresentation)
 
-To duplicate an existing model
+Duplicate an existing model
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var modelId = 789; // Integer | modelId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var modelRepresentation = new this.alfrescoJsApi.activiti.ModelRepresentation(); // ModelRepresentation | modelRepresentation
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-this.alfrescoJsApi.activiti.modelsApi.duplicateModel(modelId, modelRepresentation);
+modelsApi.duplicateModel(modelIdmodelRepresentation).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **Integer**| modelId | 
+ **modelId** | **number**| modelId | 
  **modelRepresentation** | [**ModelRepresentation**](ModelRepresentation.md)| modelRepresentation | 
 
 ### Return type
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getModelJSON"></a>
 # **getModelJSON**
 > ObjectNode getModelJSON(modelId)
 
-Get the JSON model
+Get model content
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var modelId = 789; // Integer | modelId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
 
-this.alfrescoJsApi.activiti.modelsApi.getModelJSON(modelId);
+modelsApi.getModelJSON(modelId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **Integer**| modelId | 
+ **modelId** | **number**| modelId | 
 
 ### Return type
 
 [**ObjectNode**](ObjectNode.md)
 
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getModelThumbnail"></a>
 # **getModelThumbnail**
-> [&#39;String&#39;] getModelThumbnail(modelId)
+> string getModelThumbnail(modelId)
 
-Get Model thumbnail
+Get a model's thumbnail image
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var modelId = 789; // Integer | modelId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-this.alfrescoJsApi.activiti.modelsApi.getModelThumbnail(modelId);
+let modelsApi = new ModelsApi(this.alfrescoApi);
+
+
+modelsApi.getModelThumbnail(modelId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **Integer**| modelId | 
+ **modelId** | **number**| modelId | 
 
 ### Return type
 
-**[&#39;String&#39;]**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: image/png, application/json
+**string**
 
 <a name="getModel"></a>
 # **getModel**
-> ModelRepresentation getModel(modelId, opts)
+> ModelRepresentation getModel(modelIdopts)
 
-To retrieve details about a particular model (process, form, decision rule or app)
+Get a model
+
+Models act as containers for process, form, decision table and app definitions
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var modelId = 789; // Integer | modelId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var opts = { 
-  'includePermissions': true // Boolean | includePermissions
+let modelsApi = new ModelsApi(this.alfrescoApi);
+
+let opts = { 
+  'includePermissions': true //  | includePermissions
 };
 
-this.alfrescoJsApi.activiti.modelsApi.getModel(modelId, opts);
+modelsApi.getModel(modelIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **Integer**| modelId | 
- **includePermissions** | **Boolean**| includePermissions | [optional] 
+ **modelId** | **number**| modelId | 
+ **includePermissions** | **boolean**| includePermissions | [optional] 
 
 ### Return type
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getModelsToIncludeInAppDefinition"></a>
 # **getModelsToIncludeInAppDefinition**
-> ResultListDataRepresentation getModelsToIncludeInAppDefinition()
+> ResultListDataRepresentationModelRepresentation getModelsToIncludeInAppDefinition()
 
-TODO
+List process definition models shared with the current user
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-this.alfrescoJsApi.activiti.modelsApi.getModelsToIncludeInAppDefinition();
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let modelsApi = new ModelsApi(this.alfrescoApi);
+
+modelsApi.getModelsToIncludeInAppDefinition().then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
@@ -251,235 +285,245 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ResultListDataRepresentation**](ResultListDataRepresentation.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**ResultListDataRepresentationModelRepresentation**](ResultListDataRepresentationModelRepresentation.md)
 
 <a name="getModels"></a>
 # **getModels**
-> ResultListDataRepresentation getModels(opts)
+> ResultListDataRepresentationModelRepresentation getModels(opts)
 
 List models (process, form, decision rule or app)
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var opts = { 
-  'filter': "filter_example", // String | filter
-  'filterText': "filterText", // String | filterText
-  'sort': "sort_example", // String | sort
-  'modelType': 56, // Integer | modelType
-  'referenceId': 789 // Integer | referenceId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let modelsApi = new ModelsApi(this.alfrescoApi);
+
+let opts = { 
+  'filter': filter_example //  | filter
+  'sort': sort_example //  | sort
+  'modelType': 56 //  | modelType
+  'referenceId': 789 //  | referenceId
 };
 
-this.alfrescoJsApi.activiti.modelsApi.getModels(opts);
+modelsApi.getModels(opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filter** | **String**| filter | [optional] 
- **sort** | **String**| sort | [optional] 
- **modelType** | **Integer**| modelType | [optional] 
- **referenceId** | **Integer**| referenceId | [optional] 
+ **filter** | **string**| filter | [optional] 
+ **sort** | **string**| sort | [optional] 
+ **modelType** | **number**| modelType | [optional] 
+ **referenceId** | **number**| referenceId | [optional] 
 
 ### Return type
 
-[**ResultListDataRepresentation**](ResultListDataRepresentation.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**ResultListDataRepresentationModelRepresentation**](ResultListDataRepresentationModelRepresentation.md)
 
 <a name="importNewVersion"></a>
 # **importNewVersion**
-> ModelRepresentation importNewVersion(modelId, file)
+> ModelRepresentation importNewVersion(modelIdfile)
 
-Create a new model version
+Create a new version of a model
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var modelId = 789; // Integer | modelId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var file = "/path/to/file.txt"; // File | file
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
-this.alfrescoJsApi.activiti.modelsApi.importNewVersion(modelId, file);
+
+modelsApi.importNewVersion(modelIdfile).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **Integer**| modelId | 
- **file** | **File**| file | 
+ **modelId** | **number**| modelId | 
+ **file** | **Blob**| file | 
 
 ### Return type
 
 [**ModelRepresentation**](ModelRepresentation.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
 
 <a name="importProcessModel"></a>
 # **importProcessModel**
 > ModelRepresentation importProcessModel(file)
 
-To import a BPMN 2.0 xml file
+Import a BPMN 2.0 XML file
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var file = "/path/to/file.txt"; // File | file
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-this.alfrescoJsApi.activiti.modelsApi.importProcessModel(file);
+let modelsApi = new ModelsApi(this.alfrescoApi);
+
+
+modelsApi.importProcessModel(file).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | **File**| file | 
+ **file** | **Blob**| file | 
 
 ### Return type
 
 [**ModelRepresentation**](ModelRepresentation.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
 
 <a name="saveModel"></a>
 # **saveModel**
-> ModelRepresentation saveModel(modelId, values)
+> ModelRepresentation saveModel(modelIdvalues)
 
-Save the JSON model
+Update model content
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var modelId = 789; // Integer | modelId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var values = null; // Object | values
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
-this.alfrescoJsApi.activiti.modelsApi.saveModel(modelId, values);
+
+modelsApi.saveModel(modelIdvalues).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **Integer**| modelId | 
- **values** | **Object**| values | 
+ **modelId** | **number**| modelId | 
+ **values** | **any**| values | 
 
 ### Return type
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="updateModel"></a>
 # **updateModel**
-> ModelRepresentation updateModel(modelId, updatedModel)
+> ModelRepresentation updateModel(modelIdupdatedModel)
 
-Edit a specific model
+Update a model
+
+This method allows you to update the metadata of a model. In order to update the content of the model you will need to call the specific endpoint for that model type.
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var modelId = 789; // Integer | modelId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var updatedModel = new this.alfrescoJsApi.activiti.ModelRepresentation(); // ModelRepresentation | updatedModel
+let modelsApi = new ModelsApi(this.alfrescoApi);
 
-this.alfrescoJsApi.activiti.modelsApi.updateModel(modelId, updatedModel);
+
+modelsApi.updateModel(modelIdupdatedModel).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **Integer**| modelId | 
+ **modelId** | **number**| modelId | 
  **updatedModel** | [**ModelRepresentation**](ModelRepresentation.md)| updatedModel | 
 
 ### Return type
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="validateModel"></a>
 # **validateModel**
-> [ValidationErrorRepresentation] validateModel(modelId, opts)
+> ValidationErrorRepresentation validateModel(modelIdopts)
 
-Validate the JSON model
+Validate model content
 
 ### Example
 ```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
-var modelId = 789; // Integer | modelId
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
 
-var opts = { 
-  'values': null // Object | values
+let modelsApi = new ModelsApi(this.alfrescoApi);
+
+let opts = { 
+  'values':  //  | values
 };
 
-this.alfrescoJsApi.activiti.modelsApi.validateModel(modelId, opts);
+modelsApi.validateModel(modelIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **modelId** | **Integer**| modelId | 
- **values** | **Object**| values | [optional] 
+ **modelId** | **number**| modelId | 
+ **values** | **any**| values | [optional] 
 
 ### Return type
 
-[**[ValidationErrorRepresentation]**](ValidationErrorRepresentation.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
+[**ValidationErrorRepresentation**](ValidationErrorRepresentation.md)
 

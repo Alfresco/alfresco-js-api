@@ -1,9 +1,9 @@
-# ActivitiPublicRestApi.ProcessScopeIdentifierRepresentation
+# ProcessScopeIdentifierRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**processActivityId** | **String** |  | [optional] 
-**processModelId** | **Integer** |  | [optional] 
+**processActivityId** | **string** |  | [optional] [default to null]
+**processModelId** | **number** |  | [optional] [default to null]
 
 

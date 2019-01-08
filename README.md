@@ -195,7 +195,7 @@ To correctly use the alfresco-js-api in node check that on your machine is runni
 Installer for browser versions:
 
 ```sh
-npm install --save alfresco-js-api
+npm install --save @alfresco/js-api
 ```
 
 Installer for node versions:

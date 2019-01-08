@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.NodeEntry
+# NodeEntry
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**NodeFull**](NodeFull.md) |  | 
+**entry** | [**Node**](Node.md) |  | [default to null]
 
 

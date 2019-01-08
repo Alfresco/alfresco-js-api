@@ -1,20 +1,20 @@
-# AlfrescoCoreRestApi.PermissionElement
+# PermissionElement
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**authorityId** | **String** |  | [optional] 
-**name** | **String** |  | [optional] 
-**accessStatus** | **String** |  | [optional] [default to &#39;ALLOWED&#39;]
+**authorityId** | **string** |  | [optional] [default to null]
+**name** | **string** |  | [optional] [default to null]
+**accessStatus** | **string** |  | [optional] [default to null]
 
 
-<a name="AccessStatusEnum"></a>
-## Enum: AccessStatusEnum
+<a name="PermissionElement.AccessStatusEnum"></a>
+## Enum: PermissionElement.AccessStatusEnum
 
 
-* `ALLOWED` (value: `"ALLOWED"`)
+* `ALLOWED` (value: `'ALLOWED'`)
 
-* `DENIED` (value: `"DENIED"`)
+* `DENIED` (value: `'DENIED'`)
 
 
 

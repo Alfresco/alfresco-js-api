@@ -1,25 +1,28 @@
-# AlfrescoCoreRestApi.Person
+# Person
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**firstName** | **String** |  | 
-**lastName** | **String** |  | 
-**description** | **String** |  | [optional] 
-**avatarId** | **String** |  | [optional] 
-**email** | **String** |  | 
-**skypeId** | **String** |  | [optional] 
-**googleId** | **String** |  | [optional] 
-**instantMessageId** | **String** |  | [optional] 
-**jobTitle** | **String** |  | [optional] 
-**location** | **String** |  | [optional] 
-**company** | [**Company**](Company.md) |  | [optional] 
-**mobile** | **String** |  | [optional] 
-**telephone** | **String** |  | [optional] 
-**statusUpdatedAt** | **Date** |  | [optional] 
-**userStatus** | **String** |  | [optional] 
-**enabled** | **Boolean** |  | [default to true]
-**emailNotificationsEnabled** | **Boolean** |  | [optional] 
+**id** | **string** |  | [default to null]
+**firstName** | **string** |  | [default to null]
+**lastName** | **string** |  | [optional] [default to null]
+**description** | **string** |  | [optional] [default to null]
+**avatarId** | **string** |  | [optional] [default to null]
+**email** | **string** |  | [default to null]
+**skypeId** | **string** |  | [optional] [default to null]
+**googleId** | **string** |  | [optional] [default to null]
+**instantMessageId** | **string** |  | [optional] [default to null]
+**jobTitle** | **string** |  | [optional] [default to null]
+**location** | **string** |  | [optional] [default to null]
+**company** | [**Company**](Company.md) |  | [optional] [default to null]
+**mobile** | **string** |  | [optional] [default to null]
+**telephone** | **string** |  | [optional] [default to null]
+**statusUpdatedAt** | [**Date**](Date.md) |  | [optional] [default to null]
+**userStatus** | **string** |  | [optional] [default to null]
+**enabled** | **boolean** |  | [default to null]
+**emailNotificationsEnabled** | **boolean** |  | [optional] [default to null]
+**aspectNames** | **string[]** |  | [optional] [default to null]
+**properties** | **{ [key: string]: string; }** |  | [optional] [default to null]
+**capabilities** | [**Capabilities**](Capabilities.md) |  | [optional] [default to null]
 
 

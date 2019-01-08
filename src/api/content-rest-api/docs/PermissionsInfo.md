@@ -1,11 +1,11 @@
-# AlfrescoCoreRestApi.PermissionsInfo
+# PermissionsInfo
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**isInheritanceEnabled** | **Boolean** |  | [optional] 
-**inherited** | [**[PermissionElement]**](PermissionElement.md) |  | [optional] 
-**locallySet** | [**[PermissionElement]**](PermissionElement.md) |  | [optional] 
-**settable** | **[String]** |  | [optional] 
+**isInheritanceEnabled** | **boolean** |  | [optional] [default to null]
+**inherited** | [**PermissionElement[]**](PermissionElement.md) |  | [optional] [default to null]
+**locallySet** | [**PermissionElement[]**](PermissionElement.md) |  | [optional] [default to null]
+**settable** | **string[]** |  | [optional] [default to null]
 
 

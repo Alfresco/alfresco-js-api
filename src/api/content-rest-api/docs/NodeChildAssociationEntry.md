@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.NodeChildAssociationEntry
+# NodeChildAssociationEntry
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**NodeChildAssociation**](NodeChildAssociation.md) |  | 
+**entry** | [**NodeChildAssociation**](NodeChildAssociation.md) |  | [default to null]
 
 

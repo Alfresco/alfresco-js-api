@@ -15,19 +15,19 @@
  * limitations under the License.
  */
 
-export * from './src/api/legacy';
-export * from './src/api/content-rest-api/src/index';
-export * from './src/api/activiti-rest-api/src/index';
-export * from './src/api-new/content-rest-api/index';
-export * from './src/api-new/discovery-rest-api/index';
-export * from './src/api-new/gs-classification-rest-api/index';
-export * from './src/api-new/gs-core-rest-api/index';
-export * from './src/api-new/auth-rest-api/index';
-export * from './src/api-new/activiti-rest-api/index';
-export * from './src/api-new/search-rest-api/index';
+export * from './src/api-legacy/legacy';
+export * from './src/api-legacy/content-rest-api/src/index';
+export * from './src/api-legacy/activiti-rest-api/src/index';
+export * from './src/api/content-rest-api/index';
+export * from './src/api/discovery-rest-api/index';
+export * from './src/api/gs-classification-rest-api/index';
+export * from './src/api/gs-core-rest-api/index';
+export * from './src/api/auth-rest-api/index';
+export * from './src/api/activiti-rest-api/index';
+export * from './src/api/search-rest-api/index';
 
 export { ContentApi } from './src/contentApi';
-export { AlfrescoUpload } from './src/api/alfrescoUpload';
+export { AlfrescoUpload } from './src/api-legacy/alfrescoUpload';
 export { ContentAuth } from './src/authentication/contentAuth';
 export { ProcessAuth } from './src/authentication/processAuth';
 export { Oauth2Auth } from './src/authentication/oauth2Auth';

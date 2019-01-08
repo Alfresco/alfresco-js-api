@@ -1,14 +1,14 @@
-# ActivitiPublicRestApi.AppDefinitionUpdateResultRepresentation
+# AppDefinitionUpdateResultRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**appDefinition** | [**AppDefinitionRepresentation**](AppDefinitionRepresentation.md) |  | [optional] 
-**customData** | **Object** |  | [optional] 
-**error** | **Boolean** |  | [optional] 
-**errorDescription** | **String** |  | [optional] 
-**errorType** | **Integer** |  | [optional] 
-**message** | **String** |  | [optional] 
-**messageKey** | **String** |  | [optional] 
+**appDefinition** | [**AppDefinitionRepresentation**](AppDefinitionRepresentation.md) |  | [optional] [default to null]
+**customData** | **any** |  | [optional] [default to null]
+**error** | **boolean** |  | [optional] [default to null]
+**errorDescription** | **string** |  | [optional] [default to null]
+**errorType** | **number** |  | [optional] [default to null]
+**message** | **string** |  | [optional] [default to null]
+**messageKey** | **string** |  | [optional] [default to null]
 
 

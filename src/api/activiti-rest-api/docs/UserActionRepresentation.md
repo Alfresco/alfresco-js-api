@@ -1,10 +1,10 @@
-# ActivitiPublicRestApi.UserActionRepresentation
+# UserActionRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | **String** |  | [optional] 
-**newPassword** | **String** |  | [optional] 
-**oldPassword** | **String** |  | [optional] 
+**action** | **string** |  | [optional] [default to null]
+**newPassword** | **string** |  | [optional] [default to null]
+**oldPassword** | **string** |  | [optional] [default to null]
 
 

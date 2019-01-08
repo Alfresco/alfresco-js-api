@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.AssociationInfo
+# AssociationInfo
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**assocType** | **String** |  | 
+**assocType** | **string** |  | [default to null]
 
 

@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.SiteEntry
+# SiteEntry
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**Site**](Site.md) |  | 
+**entry** | [**Site**](Site.md) |  | [default to null]
 
 

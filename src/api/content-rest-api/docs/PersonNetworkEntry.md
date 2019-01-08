@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.PersonNetworkEntry
+# PersonNetworkEntry
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entry** | [**PersonNetwork**](PersonNetwork.md) |  | 
+**entry** | [**PersonNetwork**](PersonNetwork.md) |  | [default to null]
 
 

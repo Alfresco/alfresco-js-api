@@ -1,8 +1,8 @@
-# AlfrescoCoreRestApi.PersonPaging
+# PersonPaging
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**list** | [**PersonPagingList**](PersonPagingList.md) |  | [optional] 
+**list** | [**PersonPagingList**](PersonPagingList.md) |  | [optional] [default to null]
 
 

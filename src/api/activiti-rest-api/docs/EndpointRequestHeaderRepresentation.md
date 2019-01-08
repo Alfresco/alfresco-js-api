@@ -1,9 +1,9 @@
-# ActivitiPublicRestApi.EndpointRequestHeaderRepresentation
+# EndpointRequestHeaderRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** |  | [optional] 
-**value** | **String** |  | [optional] 
+**name** | **string** |  | [optional] [default to null]
+**value** | **string** |  | [optional] [default to null]
 
 
