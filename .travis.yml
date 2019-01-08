@@ -37,7 +37,7 @@ jobs:
           script: ./scripts/test-build.sh && ./scripts/test-performance.sh || exit 1
         - stage: Integration
           script:
-          - ts-node index.ts --host $HOST -u "$USERNAME" -p "$PASSWORD"
+          - ts-node ./test/integration/test-node/index.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" || exit 1
 
 after_success:
   - npm run coverage --force
