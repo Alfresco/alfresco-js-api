@@ -34,7 +34,7 @@ jobs:
         - stage: Test
           script: npm run test || exit 1
         - stage: Perfomance
-          script: ./scripts/test-build.sh && ./scripts/test-performance.sh || exit 1
+          script: ./scripts/test-performance.sh || exit 1
         - stage: Integration
           script:
           - ts-node ./test/integration/test-node/index.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" || exit 1
@@ -42,3 +42,8 @@ jobs:
 after_success:
   - npm run coverage --force
   - bash <(curl -s https://codecov.io/bash)
+
+cache:
+  directories:
+  - node_modules
+  - dist
