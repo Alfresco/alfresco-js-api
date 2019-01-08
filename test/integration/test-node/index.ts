@@ -17,21 +17,39 @@
 
 import { AlfrescoApi, DiscoveryApi } from '@alfresco/js-api';
 
-let alfrescoApi: AlfrescoApi = new AlfrescoApi();
-alfrescoApi.setConfig({
-    provider: 'ECM',
-    hostEcm: 'http://adfdev.envalfresco.com',
-    authType: 'BASIC',
-    contextRoot: ''
-});
+let program = require('commander');
 
-alfrescoApi.login('admin','adf$2018IloveAngular');
+async function main() {
 
-let discovery = new DiscoveryApi(alfrescoApi);
-discovery.getRepositoryInformation().then(
-    (ecmVers) => {
-        console.log('ecmVers' + JSON.stringify(ecmVers));
-    },
-    (ecmVers) => {
-        console.log('error ecmvers' + ecmVers);
+    program
+        .version('0.1.0')
+        .option('--host  [type]', '')
+        .option('-p, --password [type]', 'password ')
+        .option('-u, --username [type]', 'username ')
+        .parse(process.argv);
+
+    let alfrescoApi: AlfrescoApi = new AlfrescoApi();
+
+    alfrescoApi.setConfig({
+        provider: 'ECM',
+        hostEcm: program.host,
+        authType: 'BASIC',
+        contextRoot: ''
     });
+
+    alfrescoApi.login(program.username, program.password).then(() => {
+        let discovery = new DiscoveryApi(alfrescoApi);
+        discovery.getRepositoryInformation().then(
+            (ecmVers) => {
+                console.log('ecmVers' + JSON.stringify(ecmVers));
+            },
+            () => {
+                process.exit(1);
+            });
+    }, () => {
+        process.exit(1);
+    });
+
+}
+
+main();
