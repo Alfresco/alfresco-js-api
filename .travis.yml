@@ -34,7 +34,7 @@ jobs:
         - stage: Test
           script: npm run test || exit 1
         - stage: Perfomance
-          script: ./scripts/test-performance.sh || exit 1
+          script: ./scripts/test-build.sh && ./scripts/test-performance.sh || exit 1
 
 after_success:
   - npm run coverage --force
