@@ -1,4 +1,4 @@
-# .ActionParameterDefinition
+# ActionParameterDefinition
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .ResultListDataRepresentationRuntimeFormRepresentation
+# ResultListDataRepresentationRuntimeFormRepresentation
 
 ## Properties
 Name | Type | Description | Notes

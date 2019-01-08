@@ -1,4 +1,4 @@
-# .RecordFolderAssociationPagingList
+# RecordFolderAssociationPagingList
 
 ## Properties
 Name | Type | Description | Notes

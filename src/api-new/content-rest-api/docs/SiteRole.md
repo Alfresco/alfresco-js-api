@@ -1,4 +1,4 @@
-# .SiteRole
+# SiteRole
 
 ## Properties
 Name | Type | Description | Notes

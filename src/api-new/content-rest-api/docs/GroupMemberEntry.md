@@ -1,4 +1,4 @@
-# .GroupMemberEntry
+# GroupMemberEntry
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .UnfiledRecordFolderAssociationPaging
+# UnfiledRecordFolderAssociationPaging
 
 ## Properties
 Name | Type | Description | Notes

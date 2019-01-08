@@ -1,4 +1,4 @@
-# .TransferChild
+# TransferChild
 
 ## Properties
 Name | Type | Description | Notes

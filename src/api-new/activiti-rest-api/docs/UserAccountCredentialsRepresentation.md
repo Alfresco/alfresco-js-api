@@ -1,4 +1,4 @@
-# .UserAccountCredentialsRepresentation
+# UserAccountCredentialsRepresentation
 
 ## Properties
 Name | Type | Description | Notes

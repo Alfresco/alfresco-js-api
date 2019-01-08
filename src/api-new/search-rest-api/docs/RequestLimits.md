@@ -1,4 +1,4 @@
-# .RequestLimits
+# RequestLimits
 
 ## Properties
 Name | Type | Description | Notes

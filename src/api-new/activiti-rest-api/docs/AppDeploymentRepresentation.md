@@ -1,4 +1,4 @@
-# .AppDeploymentRepresentation
+# AppDeploymentRepresentation
 
 ## Properties
 Name | Type | Description | Notes

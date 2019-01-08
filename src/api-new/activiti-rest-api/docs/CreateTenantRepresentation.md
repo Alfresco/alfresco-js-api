@@ -1,4 +1,4 @@
-# .CreateTenantRepresentation
+# CreateTenantRepresentation
 
 ## Properties
 Name | Type | Description | Notes

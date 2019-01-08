@@ -1,4 +1,4 @@
-# .SearchEntry
+# SearchEntry
 
 ## Properties
 Name | Type | Description | Notes

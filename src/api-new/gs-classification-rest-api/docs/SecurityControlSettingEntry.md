@@ -1,4 +1,4 @@
-# .SecurityControlSettingEntry
+# SecurityControlSettingEntry
 
 ## Properties
 Name | Type | Description | Notes

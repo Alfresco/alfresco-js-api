@@ -1,4 +1,4 @@
-# .RMNodeBodyCreate
+# RMNodeBodyCreate
 
 ## Properties
 Name | Type | Description | Notes

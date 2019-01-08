@@ -1,4 +1,4 @@
-# .AppDefinition
+# AppDefinition
 
 ## Properties
 Name | Type | Description | Notes

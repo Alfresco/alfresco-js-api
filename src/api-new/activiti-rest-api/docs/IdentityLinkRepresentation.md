@@ -1,4 +1,4 @@
-# .IdentityLinkRepresentation
+# IdentityLinkRepresentation
 
 ## Properties
 Name | Type | Description | Notes

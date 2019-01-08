@@ -1,4 +1,4 @@
-# .FormJavascriptEventRepresentation
+# FormJavascriptEventRepresentation
 
 ## Properties
 Name | Type | Description | Notes

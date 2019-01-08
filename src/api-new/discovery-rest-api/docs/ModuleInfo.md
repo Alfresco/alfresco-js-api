@@ -1,4 +1,4 @@
-# .ModuleInfo
+# ModuleInfo
 
 ## Properties
 Name | Type | Description | Notes

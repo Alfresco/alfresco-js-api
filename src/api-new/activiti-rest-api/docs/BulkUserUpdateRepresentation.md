@@ -1,4 +1,4 @@
-# .BulkUserUpdateRepresentation
+# BulkUserUpdateRepresentation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .UserFilterOrderRepresentation
+# UserFilterOrderRepresentation
 
 ## Properties
 Name | Type | Description | Notes

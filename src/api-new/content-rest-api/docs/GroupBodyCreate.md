@@ -1,4 +1,4 @@
-# .GroupBodyCreate
+# GroupBodyCreate
 
 ## Properties
 Name | Type | Description | Notes

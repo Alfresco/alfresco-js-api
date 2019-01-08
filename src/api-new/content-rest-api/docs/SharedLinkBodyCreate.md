@@ -1,4 +1,4 @@
-# .SharedLinkBodyCreate
+# SharedLinkBodyCreate
 
 ## Properties
 Name | Type | Description | Notes

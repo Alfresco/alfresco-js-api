@@ -1,4 +1,4 @@
-# .RMSiteBodyCreate
+# RMSiteBodyCreate
 
 ## Properties
 Name | Type | Description | Notes

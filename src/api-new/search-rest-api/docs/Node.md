@@ -1,4 +1,4 @@
-# .Node
+# Node
 
 ## Properties
 Name | Type | Description | Notes

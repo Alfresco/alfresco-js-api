@@ -1,4 +1,4 @@
-# .FormScopeRepresentation
+# FormScopeRepresentation
 
 ## Properties
 Name | Type | Description | Notes

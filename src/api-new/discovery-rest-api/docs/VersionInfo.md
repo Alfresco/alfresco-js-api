@@ -1,4 +1,4 @@
-# .VersionInfo
+# VersionInfo
 
 ## Properties
 Name | Type | Description | Notes

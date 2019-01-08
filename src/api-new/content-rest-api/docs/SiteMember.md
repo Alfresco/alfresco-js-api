@@ -1,4 +1,4 @@
-# .SiteMember
+# SiteMember
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .ActionDefinitionEntry
+# ActionDefinitionEntry
 
 ## Properties
 Name | Type | Description | Notes

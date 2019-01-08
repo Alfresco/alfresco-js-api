@@ -1,4 +1,4 @@
-# .ResultListDataRepresentationGoogleDriveContent
+# ResultListDataRepresentationGoogleDriveContent
 
 ## Properties
 Name | Type | Description | Notes

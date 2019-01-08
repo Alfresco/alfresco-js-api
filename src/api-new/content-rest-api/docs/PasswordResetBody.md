@@ -1,4 +1,4 @@
-# .PasswordResetBody
+# PasswordResetBody
 
 ## Properties
 Name | Type | Description | Notes

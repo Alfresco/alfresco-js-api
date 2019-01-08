@@ -1,4 +1,4 @@
-# .Activity
+# Activity
 
 ## Properties
 Name | Type | Description | Notes

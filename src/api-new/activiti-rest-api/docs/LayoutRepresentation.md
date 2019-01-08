@@ -1,4 +1,4 @@
-# .LayoutRepresentation
+# LayoutRepresentation
 
 ## Properties
 Name | Type | Description | Notes

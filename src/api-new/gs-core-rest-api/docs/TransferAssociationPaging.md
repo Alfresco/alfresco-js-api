@@ -1,4 +1,4 @@
-# .TransferAssociationPaging
+# TransferAssociationPaging
 
 ## Properties
 Name | Type | Description | Notes

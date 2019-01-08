@@ -1,4 +1,4 @@
-# .AuditAppEntry
+# AuditAppEntry
 
 ## Properties
 Name | Type | Description | Notes

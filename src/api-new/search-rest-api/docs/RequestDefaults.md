@@ -1,4 +1,4 @@
-# .RequestDefaults
+# RequestDefaults
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .HistoricTaskInstanceQueryRepresentation
+# HistoricTaskInstanceQueryRepresentation
 
 ## Properties
 Name | Type | Description | Notes

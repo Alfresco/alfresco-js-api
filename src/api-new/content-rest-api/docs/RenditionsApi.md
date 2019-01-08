@@ -1,4 +1,4 @@
-# .RenditionsApi
+# RenditionsApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 

@@ -1,4 +1,4 @@
-# .ResultBuckets
+# ResultBuckets
 
 ## Properties
 Name | Type | Description | Notes

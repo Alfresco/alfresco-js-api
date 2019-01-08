@@ -1,4 +1,4 @@
-# .RequestFacetIntervals
+# RequestFacetIntervals
 
 ## Properties
 Name | Type | Description | Notes

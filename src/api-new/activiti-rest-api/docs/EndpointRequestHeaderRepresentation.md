@@ -1,4 +1,4 @@
-# .EndpointRequestHeaderRepresentation
+# EndpointRequestHeaderRepresentation
 
 ## Properties
 Name | Type | Description | Notes

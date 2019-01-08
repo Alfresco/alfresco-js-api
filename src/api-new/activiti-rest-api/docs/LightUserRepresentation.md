@@ -1,4 +1,4 @@
-# .LightUserRepresentation
+# LightUserRepresentation
 
 ## Properties
 Name | Type | Description | Notes

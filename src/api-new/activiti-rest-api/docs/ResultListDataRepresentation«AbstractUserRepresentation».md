@@ -1,4 +1,4 @@
-# .ResultListDataRepresentationAbstractUserRepresentation
+# ResultListDataRepresentationAbstractUserRepresentation
 
 ## Properties
 Name | Type | Description | Notes

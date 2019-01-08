@@ -1,4 +1,4 @@
-# .PreferencePagingList
+# PreferencePagingList
 
 ## Properties
 Name | Type | Description | Notes

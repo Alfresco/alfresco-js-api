@@ -1,4 +1,4 @@
-# .SearchEntryHighlight
+# SearchEntryHighlight
 
 ## Properties
 Name | Type | Description | Notes

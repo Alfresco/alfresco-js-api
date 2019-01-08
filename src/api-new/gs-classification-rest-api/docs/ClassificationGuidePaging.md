@@ -1,4 +1,4 @@
-# .ClassificationGuidePaging
+# ClassificationGuidePaging
 
 ## Properties
 Name | Type | Description | Notes

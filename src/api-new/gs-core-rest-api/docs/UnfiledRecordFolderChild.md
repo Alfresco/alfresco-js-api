@@ -1,4 +1,4 @@
-# .UnfiledRecordFolderChild
+# UnfiledRecordFolderChild
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .ProcessInstanceQueryRepresentation
+# ProcessInstanceQueryRepresentation
 
 ## Properties
 Name | Type | Description | Notes

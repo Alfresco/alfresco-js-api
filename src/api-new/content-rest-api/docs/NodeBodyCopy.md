@@ -1,4 +1,4 @@
-# .NodeBodyCopy
+# NodeBodyCopy
 
 ## Properties
 Name | Type | Description | Notes

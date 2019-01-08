@@ -1,4 +1,4 @@
-# .PathInfo
+# PathInfo
 
 ## Properties
 Name | Type | Description | Notes

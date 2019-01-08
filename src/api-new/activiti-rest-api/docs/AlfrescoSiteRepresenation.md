@@ -1,4 +1,4 @@
-# .AlfrescoSiteRepresenation
+# AlfrescoSiteRepresenation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .PasswordValidationConstraints
+# PasswordValidationConstraints
 
 ## Properties
 Name | Type | Description | Notes

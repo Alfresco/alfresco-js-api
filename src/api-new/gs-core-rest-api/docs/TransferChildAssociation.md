@@ -1,4 +1,4 @@
-# .TransferChildAssociation
+# TransferChildAssociation
 
 ## Properties
 Name | Type | Description | Notes

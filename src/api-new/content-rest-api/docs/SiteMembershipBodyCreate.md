@@ -1,4 +1,4 @@
-# .SiteMembershipBodyCreate
+# SiteMembershipBodyCreate
 
 ## Properties
 Name | Type | Description | Notes

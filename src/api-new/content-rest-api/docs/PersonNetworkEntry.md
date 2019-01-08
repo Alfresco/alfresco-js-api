@@ -1,4 +1,4 @@
-# .PersonNetworkEntry
+# PersonNetworkEntry
 
 ## Properties
 Name | Type | Description | Notes

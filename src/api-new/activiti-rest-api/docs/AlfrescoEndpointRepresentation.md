@@ -1,4 +1,4 @@
-# .AlfrescoEndpointRepresentation
+# AlfrescoEndpointRepresentation
 
 ## Properties
 Name | Type | Description | Notes

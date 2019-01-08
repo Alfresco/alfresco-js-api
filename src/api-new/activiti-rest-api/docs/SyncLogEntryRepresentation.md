@@ -1,4 +1,4 @@
-# .SyncLogEntryRepresentation
+# SyncLogEntryRepresentation
 
 ## Properties
 Name | Type | Description | Notes

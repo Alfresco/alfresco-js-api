@@ -1,4 +1,4 @@
-# .FormDefinitionRepresentation
+# FormDefinitionRepresentation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .PersonNetwork
+# PersonNetwork
 
 ## Properties
 Name | Type | Description | Notes

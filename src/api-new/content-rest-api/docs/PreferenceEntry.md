@@ -1,4 +1,4 @@
-# .PreferenceEntry
+# PreferenceEntry
 
 ## Properties
 Name | Type | Description | Notes

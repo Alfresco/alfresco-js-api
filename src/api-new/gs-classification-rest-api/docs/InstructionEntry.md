@@ -1,4 +1,4 @@
-# .InstructionEntry
+# InstructionEntry
 
 ## Properties
 Name | Type | Description | Notes

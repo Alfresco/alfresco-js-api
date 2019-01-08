@@ -1,4 +1,4 @@
-# .FilePlan
+# FilePlan
 
 ## Properties
 Name | Type | Description | Notes

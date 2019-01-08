@@ -1,4 +1,4 @@
-# .DeclassificationExemptionEntry
+# DeclassificationExemptionEntry
 
 ## Properties
 Name | Type | Description | Notes

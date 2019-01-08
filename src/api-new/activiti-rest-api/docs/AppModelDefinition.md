@@ -1,4 +1,4 @@
-# .AppModelDefinition
+# AppModelDefinition
 
 ## Properties
 Name | Type | Description | Notes

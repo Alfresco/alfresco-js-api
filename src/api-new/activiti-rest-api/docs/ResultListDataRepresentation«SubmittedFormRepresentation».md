@@ -1,4 +1,4 @@
-# .ResultListDataRepresentationSubmittedFormRepresentation
+# ResultListDataRepresentationSubmittedFormRepresentation
 
 ## Properties
 Name | Type | Description | Notes

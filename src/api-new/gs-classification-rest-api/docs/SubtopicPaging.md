@@ -1,4 +1,4 @@
-# .SubtopicPaging
+# SubtopicPaging
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .Record
+# Record
 
 ## Properties
 Name | Type | Description | Notes

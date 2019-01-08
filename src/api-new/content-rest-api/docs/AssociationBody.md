@@ -1,4 +1,4 @@
-# .AssociationBody
+# AssociationBody
 
 ## Properties
 Name | Type | Description | Notes

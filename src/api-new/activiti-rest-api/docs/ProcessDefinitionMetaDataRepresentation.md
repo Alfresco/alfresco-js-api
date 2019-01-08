@@ -1,4 +1,4 @@
-# .ProcessDefinitionMetaDataRepresentation
+# ProcessDefinitionMetaDataRepresentation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .VersionPaging
+# VersionPaging
 
 ## Properties
 Name | Type | Description | Notes

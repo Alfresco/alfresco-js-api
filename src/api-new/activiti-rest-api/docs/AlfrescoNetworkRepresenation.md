@@ -1,4 +1,4 @@
-# .AlfrescoNetworkRepresenation
+# AlfrescoNetworkRepresenation
 
 ## Properties
 Name | Type | Description | Notes

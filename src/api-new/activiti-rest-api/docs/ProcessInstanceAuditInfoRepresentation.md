@@ -1,4 +1,4 @@
-# .ProcessInstanceAuditInfoRepresentation
+# ProcessInstanceAuditInfoRepresentation
 
 ## Properties
 Name | Type | Description | Notes

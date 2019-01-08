@@ -1,4 +1,4 @@
-# .TaskQueryRepresentation
+# TaskQueryRepresentation
 
 ## Properties
 Name | Type | Description | Notes

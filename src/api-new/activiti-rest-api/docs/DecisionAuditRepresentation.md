@@ -1,4 +1,4 @@
-# .DecisionAuditRepresentation
+# DecisionAuditRepresentation
 
 ## Properties
 Name | Type | Description | Notes

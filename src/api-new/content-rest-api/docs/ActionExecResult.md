@@ -1,4 +1,4 @@
-# .ActionExecResult
+# ActionExecResult
 
 ## Properties
 Name | Type | Description | Notes

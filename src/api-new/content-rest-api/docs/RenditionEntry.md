@@ -1,4 +1,4 @@
-# .RenditionEntry
+# RenditionEntry
 
 ## Properties
 Name | Type | Description | Notes

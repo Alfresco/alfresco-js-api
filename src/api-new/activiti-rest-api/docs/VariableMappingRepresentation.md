@@ -1,4 +1,4 @@
-# .VariableMappingRepresentation
+# VariableMappingRepresentation
 
 ## Properties
 Name | Type | Description | Notes

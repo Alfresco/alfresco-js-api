@@ -1,4 +1,4 @@
-# .TransferContainerChildAssociation
+# TransferContainerChildAssociation
 
 ## Properties
 Name | Type | Description | Notes

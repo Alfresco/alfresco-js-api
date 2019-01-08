@@ -1,4 +1,4 @@
-# .RequestSpellcheck
+# RequestSpellcheck
 
 ## Properties
 Name | Type | Description | Notes

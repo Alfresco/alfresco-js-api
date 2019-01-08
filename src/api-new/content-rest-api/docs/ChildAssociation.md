@@ -1,4 +1,4 @@
-# .ChildAssociation
+# ChildAssociation
 
 ## Properties
 Name | Type | Description | Notes

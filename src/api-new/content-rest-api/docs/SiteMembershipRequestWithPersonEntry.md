@@ -1,4 +1,4 @@
-# .SiteMembershipRequestWithPersonEntry
+# SiteMembershipRequestWithPersonEntry
 
 ## Properties
 Name | Type | Description | Notes

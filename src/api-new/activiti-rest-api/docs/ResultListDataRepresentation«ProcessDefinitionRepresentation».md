@@ -1,4 +1,4 @@
-# .ResultListDataRepresentationProcessDefinitionRepresentation
+# ResultListDataRepresentationProcessDefinitionRepresentation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .PermissionElement
+# PermissionElement
 
 ## Properties
 Name | Type | Description | Notes

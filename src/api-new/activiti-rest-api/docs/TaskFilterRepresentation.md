@@ -1,4 +1,4 @@
-# .TaskFilterRepresentation
+# TaskFilterRepresentation
 
 ## Properties
 Name | Type | Description | Notes

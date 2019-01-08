@@ -1,4 +1,4 @@
-# .AddGroupCapabilitiesRepresentation
+# AddGroupCapabilitiesRepresentation
 
 ## Properties
 Name | Type | Description | Notes

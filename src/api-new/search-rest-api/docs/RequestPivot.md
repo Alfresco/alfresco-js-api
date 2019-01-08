@@ -1,4 +1,4 @@
-# .RequestPivot
+# RequestPivot
 
 ## Properties
 Name | Type | Description | Notes

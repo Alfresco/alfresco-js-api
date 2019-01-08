@@ -1,4 +1,4 @@
-# .TaskUpdateRepresentation
+# TaskUpdateRepresentation
 
 ## Properties
 Name | Type | Description | Notes

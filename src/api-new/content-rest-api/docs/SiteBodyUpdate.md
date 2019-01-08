@@ -1,4 +1,4 @@
-# .SiteBodyUpdate
+# SiteBodyUpdate
 
 ## Properties
 Name | Type | Description | Notes

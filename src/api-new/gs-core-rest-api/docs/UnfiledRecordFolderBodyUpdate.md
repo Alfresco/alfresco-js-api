@@ -1,4 +1,4 @@
-# .UnfiledRecordFolderBodyUpdate
+# UnfiledRecordFolderBodyUpdate
 
 ## Properties
 Name | Type | Description | Notes

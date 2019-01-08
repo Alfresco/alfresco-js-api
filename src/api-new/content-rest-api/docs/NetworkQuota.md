@@ -1,4 +1,4 @@
-# .NetworkQuota
+# NetworkQuota
 
 ## Properties
 Name | Type | Description | Notes

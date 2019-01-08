@@ -1,4 +1,4 @@
-# .SiteMembershipRequestPaging
+# SiteMembershipRequestPaging
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .PersonBodyCreate
+# PersonBodyCreate
 
 ## Properties
 Name | Type | Description | Notes
