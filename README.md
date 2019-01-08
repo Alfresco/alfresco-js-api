@@ -14,7 +14,6 @@
   <a href='https://raw.githubusercontent.com/Alfresco/dev-platform-js-api/master/LICENSE'>
      <img src='https://img.shields.io/hexpm/l/plug.svg' alt='license' />
   </a>
-
 </p>
 
 <p align="center">
