@@ -1,6 +1,6 @@
 {
   "name": "@alfresco/js-api",
-  "version": "3.0.0-delta19",
+  "version": "3.0.0-delta20",
   "description": "JavaScript client library for the Alfresco REST API",
   "author": "Alfresco Software, Ltd.",
   "main": "index.js",
@@ -36,7 +36,7 @@
     "generate": "mvn clean generate-sources",
     "tslint": "tslint --fix --type-check -c tslint.json --project tsconfig.base.json",
     "tslint-test": "tslint --fix --type-check -c ./test/tslint.json --project test/tsconfig.json",
-    "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md",
+    "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md && markdown-toc -i bpm-example.md && markdown-toc -i ecm-example.md",
     "generate-ts": "jsdoc -c config.json .",
     "generate-api": "mvn install"
   },
