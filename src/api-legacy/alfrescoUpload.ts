@@ -15,41 +15,15 @@
 * limitations under the License.
 */
 
-import { NodesApi } from './content-rest-api/src/api/nodesApi';
-import * as _Emitter from 'event-emitter';
 import { AlfrescoApi } from '../alfrescoApi';
+import { UploadApi } from '../api/content-rest-api/api/upload.api';
 
-const Emitter = _Emitter;
+/**
+ * @deprecated 3.0.0
+ */
+export class AlfrescoUpload extends UploadApi {
 
-export class AlfrescoUpload extends NodesApi {
-
-    constructor(alfrescoApi: AlfrescoApi) {
-        super();
-        this.init(alfrescoApi);
-        Emitter.call(this);
-    }
-
-    uploadFile(fileDefinition, relativePath: string, rootFolderId: string, nodeBody: any, opts?: any): Promise<any | _Emitter> {
-        rootFolderId = rootFolderId || '-root-';
-        opts = opts || {};
-
-        let nodeBodyRequired = {
-            'name': fileDefinition.name,
-            'nodeType': 'cm:content',
-            'relativePath': relativePath
-        };
-
-        nodeBody = Object.assign(nodeBodyRequired, nodeBody);
-
-        let formParam = Object.assign({}, nodeBody.properties || {});
-        formParam.filedata = fileDefinition;
-        formParam.relativePath = relativePath;
-        if (opts.name) {
-            formParam.name = opts.name;
-        }
-
-        formParam = Object.assign(formParam, opts);
-
-        return this.nodesApi.createNode(rootFolderId, nodeBody, opts, formParam);
+    public init(alfrescoApi?: AlfrescoApi) {
+        this.apiClient = alfrescoApi.contentClient;
     }
 }

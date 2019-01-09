@@ -221,7 +221,8 @@ let fs = require('fs');
 
 let fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
 
-this.alfrescoJsApi.upload.uploadFile(fileToUpload)
+let uploadApi = new UploadApi(this.alfrescoApi);
+uploadApi.uploadFile(fileToUpload)
     .then(function () {
         console.log('File Uploaded in the root');
     }, function (error) {
@@ -229,7 +230,7 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload)
     });
 
 
-this.alfrescoJsApi.upload.uploadFile(fileToUpload, null, null, null, {autoRename: true})
+uploadApi.uploadFile(fileToUpload, null, null, null, {autoRename: true})
     .then(function () {
         console.log('File Uploaded in the root');
     }, function (error) {
@@ -237,7 +238,7 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload, null, null, null, {autoRename
     });
 
 
-this.alfrescoJsApi.upload.uploadFile(fileToUpload, 'folderX/folderY/folderZ')
+uploadApi.uploadFile(fileToUpload, 'folderX/folderY/folderZ')
     .then(function () {
         console.log('File Uploaded in the from root folderX/folderY/folderZ');
     }, function (error) {
@@ -247,7 +248,7 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload, 'folderX/folderY/folderZ')
 
 let parentFolder = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-this.alfrescoJsApi.upload.uploadFile(fileToUpload, 'folderX/folderY/folderZ', parentFolder )
+uploadApi.uploadFile(fileToUpload, 'folderX/folderY/folderZ', parentFolder )
     .then(function () {
         console.log('File Uploaded in the from parentFolder ' + parentFolder + ' n folderX/folderY/folderZ');
     }, function (error) {
@@ -268,8 +269,9 @@ For more information about the Rendition API :
 let fs = require('fs');
 
 let fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
+let uploadApi = new UploadApi(this.alfrescoApi);
 
-this.alfrescoJsApi.upload.uploadFile(fileToUpload, null, null, null, {renditions: 'doclib'})
+uploadApi.uploadFile(fileToUpload, null, null, null, {renditions: 'doclib'})
     .then(function () {
         console.log('File Uploaded in the root');
     }, function (error) {
@@ -286,8 +288,9 @@ this.alfrescoJsApi.upload.uploadFile(fileToUpload, null, null, null, {renditions
 let fs = require('fs');
 
 let fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
+let uploadApi = new UploadApi(this.alfrescoApi);
 
-let promiseUpload = this.alfrescoJsApi.upload.uploadFile(fileToUpload)
+let promiseUpload = uploadApi.uploadFile(fileToUpload)
     .once('abort', function () {
         console.log('File Uploaded aborted');
     });
@@ -311,8 +314,9 @@ promiseUpload.abort();
 let fs = require('fs');
 
 let fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
+let uploadApi = new UploadApi(this.alfrescoApi);
 
-this.alfrescoJsApi.upload.uploadFile(fileToUpload)
+uploadApi.uploadFile(fileToUpload)
     .on('progress', (progress) => {
         console.log( 'Total :' + progress.total );
         console.log( 'Loaded :' + progress.loaded );
@@ -345,7 +349,8 @@ Deleted nodes move to the trash bin is still possible to recover it
 
 let fileOrFolderId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-this.alfrescoJsApi.nodes.deleteNode(fileOrFolderId).then(function (data) {
+let nodesApi = new NodesApi(this.alfrescoApi);
+nodesApi.deleteNode(fileOrFolderId).then(function (data) {
     console.log('The file/folder is deleted');
 }, function (error) {
     console.log('This node does not exist');

@@ -146,6 +146,7 @@ Class | Method | HTTP request | Description
 *.VersionsApi* | [**listVersionHistory**](docs/VersionsApi.md#listVersionHistory) | **GET** /nodes/{nodeId}/versions | List version history
 *.VersionsApi* | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** /nodes/{nodeId}/versions/{versionId}/revert | Revert a version
 *.WebscriptApi* | [**executeWebScript**](docs/WebscriptApi.md#executeWebScript) | |  execute WebScript
+*.UploadApi* | [**uploadFile**](docs/UploadApi.md#uploadFile) | |  execute WebScript
 
 ## Documentation for Models
 

@@ -1,4 +1,4 @@
-# AlfrescoCoreRestApi.WebscriptApi
+# WebscriptApi
 
 
 Method | HTTP request | Description
@@ -56,6 +56,3 @@ this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'mytasks', null, 's
         
 ```
 
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
