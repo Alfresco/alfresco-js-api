@@ -15,22 +15,24 @@
 * limitations under the License.
 */
 
-import { FilePlanComponentBodyUpdate } from '../model/filePlanComponentBodyUpdate';
-import { RMNodeBodyCreate } from '../model/rMNodeBodyCreate';
-import { RecordEntry } from '../model/recordEntry';
-import { RecordFolderAssociationPaging } from '../model/recordFolderAssociationPaging';
-import { RecordFolderEntry } from '../model/recordFolderEntry';
+import { RMNodeBodyCreateWithRelativePath } from '../model/rMNodeBodyCreateWithRelativePath';
+import { UnfiledRecordFolderAssociationPaging } from '../model/unfiledRecordFolderAssociationPaging';
+import { UnfiledRecordFolderBodyUpdate } from '../model/unfiledRecordFolderBodyUpdate';
+import { UnfiledRecordFolderEntry } from '../model/unfiledRecordFolderEntry';
 import { BaseApi } from './base.api';
 
 /**
-* Recordfolders service.
-* @module RecordfoldersApi
+* Unfiledrecordfolders service.
+* @module UnfiledRecordFoldersApi
 */
-export class RecordfoldersApi extends BaseApi {
+export class UnfiledRecordFoldersApi extends BaseApi {
     /**
-    * Create a record
+    * Create a record or an unfiled record folder
     *
-    * Create a record as a primary child of **recordFolderId**.
+    * Create a record or an unfiled record folder as a primary child of **unfiledRecordFolderId**.
+
+You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then
+the API method tries to create a unique name using an integer suffix.
 
 This endpoint supports both JSON and multipart/form-data (file upload).
 
@@ -39,9 +41,9 @@ This endpoint supports both JSON and multipart/form-data (file upload).
 Use the **filedata** field to represent the content to upload, for example, the following curl command will
 create a node with the contents of test.txt in the test user's home folder.
 
-curl -utest:test -X POST host:port/alfresco/api/-default-/public/gs/versions/1/record-folders/{recordFolderId}/records -F filedata=@test.txt
+curl -utest:test -X POST host:port/alfresco/api/-default-/public/gs/versions/1/unfiled-record-folders/{unfiledRecordFolderId}/children -F filedata=@test.txt
 
-This API method also supports record creation using application/json.
+This API method also supports record and unfiled record folder creation using application/json.
 
 You must specify at least a **name** and **nodeType**.
 
@@ -63,27 +65,38 @@ JSON
     }
 }
 
-You can create an empty electronic record:
+You can create an empty electronic record like this:
 JSON
 {
   \"name\":\"My Electronic Record\",
   \"nodeType\":\"cm:content\"
 }
 
+You can create an unfiled record folder like this:
+JSON
+{
+  \"name\": \"My Unfiled Record Folder\",
+  \"nodeType\": \"rma:unfiledRecordFolder\",
+  \"properties\":
+  {
+    \"cm:title\": \"My Unfiled Record Folder Title\"
+  }
+}
+
 Any missing aspects are applied automatically. You can set aspects explicitly, if needed, using an **aspectNames** field.
 
 **Note:** You can create more than one child by
 specifying a list of nodes in the JSON body. For example, the following JSON
-body creates a record category and a record folder inside the specified **categoryId**:
+body creates a record and an unfiled record folder inside the specified **unfiledRecordFolderId**:
 JSON
 [
   {
-    \"name\":\"Record 1\",
+    \"name\":\"My Record\",
     \"nodeType\":\"cm:content\"
   },
   {
-    \"name\":\"Record 2\",
-    \"nodeType\":\"cm:content\"
+    \"name\":\"My Unfiled Record Folder\",
+    \"nodeType\":\"rma:unfiledRecordFolder\"
   }
 ]
 
@@ -115,16 +128,13 @@ JSON
 }
 
     *
-    * @param recordFolderId The identifier of a record folder.
-    * @param recordBodyCreate The record information to create.
-
-This field is ignored for multipart/form-data content uploads.
-
+    * @param unfiledRecordFolderId The identifier of an unfiled record folder.
+    * @param nodeBodyCreate The node information to create.
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
+    * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+
+    * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
-* content
-* isCompleted
 * path
 
     * @param opts.fields A list of field names.
@@ -139,25 +149,26 @@ If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
 
-    * @return Promise<RecordEntry>
+    * @return Promise<UnfiledRecordFolderAssociationPaging>
     */
-    createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: any): Promise<RecordEntry> {
+    createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<UnfiledRecordFolderAssociationPaging> {
         opts = opts || {};
-        let postBody = recordBodyCreate;
+        let postBody = nodeBodyCreate;
 
-        if (recordFolderId === undefined || recordFolderId === null) {
-            throw new Error("Required param 'recordFolderId' in createRecordFolderChild");
+        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
+            throw new Error("Required param 'unfiledRecordFolderId' in createUnfiledRecordFolderChildren");
         }
 
-        if (recordBodyCreate === undefined || recordBodyCreate === null) {
-            throw new Error("Required param 'recordBodyCreate' in createRecordFolderChild");
+        if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
+            throw new Error("Required param 'nodeBodyCreate' in createUnfiledRecordFolderChildren");
         }
 
         let pathParams = {
-            'recordFolderId': recordFolderId
+            'unfiledRecordFolderId': unfiledRecordFolderId
         };
 
         let queryParams = {
+            'autoRename': opts['autoRename'],
             'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
             'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
         };
@@ -172,29 +183,29 @@ parameter are returned in addition to those specified in the **fields** paramete
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/record-folders/{recordFolderId}/records', 'POST',
+            '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+            contentTypes, accepts, UnfiledRecordFolderAssociationPaging);
     }
     /**
-        * Delete a record folder
+        * Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
         *
-        * Deletes record folder **recordFolderId**. Deleted file plan components cannot be recovered, they are deleted permanently.
+        * Deletes the unfiled record folder **unfiledRecordFolderId**.
 
         *
-        * @param recordFolderId The identifier of a record folder.
+        * @param unfiledRecordFolderId The identifier of an unfiled record folder.
         * @return Promise<{}>
         */
-    deleteRecordFolder(recordFolderId: string): Promise<any> {
+    deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<any> {
 
         let postBody = null;
 
-        if (recordFolderId === undefined || recordFolderId === null) {
-            throw new Error("Required param 'recordFolderId' in deleteRecordFolder");
+        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
+            throw new Error("Required param 'unfiledRecordFolderId' in deleteUnfiledRecordFolder");
         }
 
         let pathParams = {
-            'recordFolderId': recordFolderId
+            'unfiledRecordFolderId': unfiledRecordFolderId
         };
 
         let queryParams = {
@@ -210,26 +221,27 @@ parameter are returned in addition to those specified in the **fields** paramete
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/record-folders/{recordFolderId}', 'DELETE',
+            '/unfiled-record-folders/{unfiledRecordFolderId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts);
     }
     /**
-        * Get a record folder
+        * Get the unfiled record folder
         *
-        * Gets information for record folder **recordFolderId**
+        * Gets information for unfiled record folder id **unfiledRecordFolderId**
 
-    Mandatory fields and the record folder's aspects and properties are returned by default.
+    Mandatory fields and the unfiled record folder's aspects and properties are returned by default.
 
     You can use the **include** parameter (include=allowableOperations) to return additional information.
 
         *
-        * @param recordFolderId The identifier of a record folder.
+        * @param unfiledRecordFolderId The identifier of an unfiled record folder.
         * @param opts Optional parameters
-        * @param opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
+        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
     * allowableOperations
-    * isClosed
     * path
+
+        * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
 
         * @param opts.fields A list of field names.
 
@@ -243,22 +255,23 @@ parameter are returned in addition to those specified in the **fields** paramete
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<RecordFolderEntry>
+        * @return Promise<UnfiledRecordFolderEntry>
         */
-    getRecordFolder(recordFolderId: string, opts?: any): Promise<RecordFolderEntry> {
+    getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderEntry> {
         opts = opts || {};
         let postBody = null;
 
-        if (recordFolderId === undefined || recordFolderId === null) {
-            throw new Error("Required param 'recordFolderId' in getRecordFolder");
+        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
+            throw new Error("Required param 'unfiledRecordFolderId' in getUnfiledRecordFolder");
         }
 
         let pathParams = {
-            'recordFolderId': recordFolderId
+            'unfiledRecordFolderId': unfiledRecordFolderId
         };
 
         let queryParams = {
             'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'relativePath': opts['relativePath'],
             'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
         };
 
@@ -272,44 +285,42 @@ parameter are returned in addition to those specified in the **fields** paramete
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/record-folders/{recordFolderId}', 'GET',
+            '/unfiled-record-folders/{unfiledRecordFolderId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordFolderEntry);
+            contentTypes, accepts, UnfiledRecordFolderEntry);
     }
     /**
-        * List records
+        * List unfiled record folder's children
         *
-        * Gets a list of records.
+        * Returns a list of records or unfiled record folders.
 
-    Minimal information for each record is returned by default.
-
-    The list of records includes primary children and secondary children, if there are any.
+    Minimal information for each child is returned by default.
 
     You can use the **include** parameter (include=allowableOperations) to return additional information.
 
         *
-        * @param recordFolderId The identifier of a record folder.
+        * @param unfiledRecordFolderId The identifier of an unfiled record folder.
         * @param opts Optional parameters
         * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
         * @param opts.maxItems The maximum number of items to return in the list.
         * @param opts.where Optionally filter the list. Here are some examples:
 
-    *   where=(nodeType='my:specialNodeType')
+    *   where=(isRecord=true)
 
-    *   where=(nodeType='my:specialNodeType INCLUDESUBTYPES')
+    *   where=(isUnfiledRecordFolder=false)
 
-    *   where=(isPrimary=true)
+    *   where=(nodeType='cm:content INCLUDESUBTYPES')
 
-        * @param opts.include Returns additional information about the records. Any optional field from the response model can be requested. For example:
+        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
     * allowableOperations
     * aspectNames
     * association
-    * content
-    * isCompleted
     * path
     * properties
 
-        * @param opts.includeSource Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId**
+        * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+
+        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
         * @param opts.fields A list of field names.
 
     You can use this parameter to restrict the fields
@@ -322,24 +333,107 @@ parameter are returned in addition to those specified in the **fields** paramete
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<RecordFolderAssociationPaging>
+        * @return Promise<UnfiledRecordFolderAssociationPaging>
         */
-    listRecordFolderChildren(recordFolderId: string, opts?: any): Promise<RecordFolderAssociationPaging> {
+    listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderAssociationPaging> {
         opts = opts || {};
         let postBody = null;
 
-        if (recordFolderId === undefined || recordFolderId === null) {
-            throw new Error("Required param 'recordFolderId' in listRecordFolderChildren");
+        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
+            throw new Error("Required param 'unfiledRecordFolderId' in listUnfiledRecordFolderChildren");
         }
 
         let pathParams = {
-            'recordFolderId': recordFolderId
+            'unfiledRecordFolderId': unfiledRecordFolderId
         };
 
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
+            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'relativePath': opts['relativePath'],
+            'includeSource': opts['includeSource'],
+            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+        };
+
+        let headerParams = {
+
+        };
+        let formParams = {
+        };
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts, UnfiledRecordFolderAssociationPaging);
+    }
+    /**
+        * Update an unfiled record folder
+        *
+        * Updates unfiled record folder **unfiledRecordFolderId**. For example, you can rename a record folder:
+    JSON
+    {
+      \"name\":\"My new name\"
+    }
+
+    You can also set or update one or more properties:
+    JSON
+    {
+      \"properties\":
+        {
+           \"cm:title\":\"New title\",
+           \"cm:description\":\"New description\"
+        }
+    }
+
+    **Note:** if you want to add or remove aspects, then you must use **GET /unfiled-record-folders/{unfiledRecordFolderId}** first to get the complete set of *aspectNames*.
+
+    **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
+
+        *
+        * @param unfiledRecordFolderId The identifier of an unfiled record folder.
+        * @param unfiledRecordFolderBodyUpdate The record folder information to update.
+        * @param opts Optional parameters
+        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+    * allowableOperations
+    * path
+
+        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
+        * @param opts.fields A list of field names.
+
+    You can use this parameter to restrict the fields
+    returned within a response if, for example, you want to save on overall bandwidth.
+
+    The list applies to a returned individual
+    entity or entries within a collection.
+
+    If the API method also supports the **include**
+    parameter, then the fields specified in the **include**
+    parameter are returned in addition to those specified in the **fields** parameter.
+
+        * @return Promise<UnfiledRecordFolderEntry>
+        */
+    updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: any): Promise<UnfiledRecordFolderEntry> {
+        opts = opts || {};
+        let postBody = unfiledRecordFolderBodyUpdate;
+
+        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
+            throw new Error("Required param 'unfiledRecordFolderId' in updateUnfiledRecordFolder");
+        }
+
+        if (unfiledRecordFolderBodyUpdate === undefined || unfiledRecordFolderBodyUpdate === null) {
+            throw new Error("Required param 'unfiledRecordFolderBodyUpdate' in updateUnfiledRecordFolder");
+        }
+
+        let pathParams = {
+            'unfiledRecordFolderId': unfiledRecordFolderId
+        };
+
+        let queryParams = {
             'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
             'includeSource': opts['includeSource'],
             'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
@@ -355,90 +449,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/record-folders/{recordFolderId}/records', 'GET',
+            '/unfiled-record-folders/{unfiledRecordFolderId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordFolderAssociationPaging);
-    }
-    /**
-        * Update a record folder
-        *
-        * Updates record folder **recordFolderId**. For example, you can rename a record folder:
-    JSON
-    {
-      \"name\":\"My new name\"
-    }
-
-    You can also set or update one or more properties:
-    JSON
-    {
-      \"properties\":
-        {
-           \"rma:vitalRecordIndicator\": true,
-           \"rma:reviewPeriod\":\"month|6\"
-        }
-    }
-
-    **Note:** if you want to add or remove aspects, then you must use **GET /record-folders/{recordFolderId}** first to get the complete set of *aspectNames*.
-
-    **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
-
-        *
-        * @param recordFolderId The identifier of a record folder.
-        * @param recordFolderBodyUpdate The record folder information to update.
-        * @param opts Optional parameters
-        * @param opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * isClosed
-    * path
-
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-        * @return Promise<RecordFolderEntry>
-        */
-    updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordFolderEntry> {
-        opts = opts || {};
-        let postBody = recordFolderBodyUpdate;
-
-        if (recordFolderId === undefined || recordFolderId === null) {
-            throw new Error("Required param 'recordFolderId' in updateRecordFolder");
-        }
-
-        if (recordFolderBodyUpdate === undefined || recordFolderBodyUpdate === null) {
-            throw new Error("Required param 'recordFolderBodyUpdate' in updateRecordFolder");
-        }
-
-        let pathParams = {
-            'recordFolderId': recordFolderId
-        };
-
-        let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/record-folders/{recordFolderId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordFolderEntry);
+            contentTypes, accepts, UnfiledRecordFolderEntry);
     }
 
 }

@@ -21,9 +21,9 @@ import { BaseApi } from './base.api';
 
 /**
 * Securitycontrolsettings service.
-* @module SecuritycontrolsettingsApi
+* @module SecurityControlSettingsApi
 */
-export class SecuritycontrolsettingsApi extends BaseApi {
+export class SecurityControlSettingsApi extends BaseApi {
     /**
     * Get security control setting value
     *

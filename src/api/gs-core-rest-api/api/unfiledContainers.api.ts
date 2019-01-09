@@ -23,9 +23,9 @@ import { BaseApi } from './base.api';
 
 /**
 * Unfiledcontainers service.
-* @module UnfiledcontainersApi
+* @module UnfiledContainersApi
 */
-export class UnfiledcontainersApi extends BaseApi {
+export class UnfiledContainersApi extends BaseApi {
     /**
     * Create a record or an unfiled record folder
     *

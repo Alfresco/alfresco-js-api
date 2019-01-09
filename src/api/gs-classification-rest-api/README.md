@@ -9,32 +9,32 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/ver
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*.ClassificationguidesApi* | [**combinedInstructions**](docs/ClassificationguidesApi.md#combinedInstructions) | **POST** /combined-instructions | Combined instructions
-*.ClassificationguidesApi* | [**createClassificationGuide**](docs/ClassificationguidesApi.md#createClassificationGuide) | **POST** /classification-guides | Create a classification guide
-*.ClassificationguidesApi* | [**createSubtopic**](docs/ClassificationguidesApi.md#createSubtopic) | **POST** /topics/{topicId}/subtopics | Create a subtopic
-*.ClassificationguidesApi* | [**createTopic**](docs/ClassificationguidesApi.md#createTopic) | **POST** /classification-guides/{classificationGuideId}/topics | Create a topic
-*.ClassificationguidesApi* | [**deleteClassificationGuide**](docs/ClassificationguidesApi.md#deleteClassificationGuide) | **DELETE** /classification-guides/{classificationGuideId} | Delete a classification guide
-*.ClassificationguidesApi* | [**deleteTopic**](docs/ClassificationguidesApi.md#deleteTopic) | **DELETE** /topics/{topicId} | Delete a topic
-*.ClassificationguidesApi* | [**listClassificationGuides**](docs/ClassificationguidesApi.md#listClassificationGuides) | **GET** /classification-guides | List all classification guides
-*.ClassificationguidesApi* | [**listSubtopics**](docs/ClassificationguidesApi.md#listSubtopics) | **GET** /topics/{topicId}/subtopics | List all subtopics
-*.ClassificationguidesApi* | [**listTopics**](docs/ClassificationguidesApi.md#listTopics) | **GET** /classification-guides/{classificationGuideId}/topics | List all topics
-*.ClassificationguidesApi* | [**showClassificationGuideById**](docs/ClassificationguidesApi.md#showClassificationGuideById) | **GET** /classification-guides/{classificationGuideId} | Get classification guide information
-*.ClassificationguidesApi* | [**showTopicById**](docs/ClassificationguidesApi.md#showTopicById) | **GET** /topics/{topicId} | Get topic information
-*.ClassificationguidesApi* | [**updateClassificationGuide**](docs/ClassificationguidesApi.md#updateClassificationGuide) | **PUT** /classification-guides/{classificationGuideId} | Update a classification guide
-*.ClassificationguidesApi* | [**updateTopic**](docs/ClassificationguidesApi.md#updateTopic) | **PUT** /topics/{topicId} | Update a topic
-*.ClassificationreasonsApi* | [**createClassificationReason**](docs/ClassificationreasonsApi.md#createClassificationReason) | **POST** /classification-reasons | Create a classification reason
-*.ClassificationreasonsApi* | [**deleteClassificationReason**](docs/ClassificationreasonsApi.md#deleteClassificationReason) | **DELETE** /classification-reasons/{classificationReasonId} | Delete a classification reason
-*.ClassificationreasonsApi* | [**listClassificationReasons**](docs/ClassificationreasonsApi.md#listClassificationReasons) | **GET** /classification-reasons | List all classification reasons
-*.ClassificationreasonsApi* | [**showClassificationReasonById**](docs/ClassificationreasonsApi.md#showClassificationReasonById) | **GET** /classification-reasons/{classificationReasonId} | Get classification reason information
-*.ClassificationreasonsApi* | [**updateClassificationReason**](docs/ClassificationreasonsApi.md#updateClassificationReason) | **PUT** /classification-reasons/{classificationReasonId} | Update a classification reason
-*.DeclassificationexemptionsApi* | [**createDeclassificationExemption**](docs/DeclassificationexemptionsApi.md#createDeclassificationExemption) | **POST** /declassification-exemptions | Create a declassification exemption
-*.DeclassificationexemptionsApi* | [**deleteDeclassificationExemption**](docs/DeclassificationexemptionsApi.md#deleteDeclassificationExemption) | **DELETE** /declassification-exemptions/{declassificationExemptionId} | Delete a declassification exemption
-*.DeclassificationexemptionsApi* | [**listDeclassificationExemptions**](docs/DeclassificationexemptionsApi.md#listDeclassificationExemptions) | **GET** /declassification-exemptions | List all declassification exemptions
-*.DeclassificationexemptionsApi* | [**showDeclassificationExemptionById**](docs/DeclassificationexemptionsApi.md#showDeclassificationExemptionById) | **GET** /declassification-exemptions/{declassificationExemptionId} | Get declassification exemption information
-*.DeclassificationexemptionsApi* | [**updateDeclassificationExemption**](docs/DeclassificationexemptionsApi.md#updateDeclassificationExemption) | **PUT** /declassification-exemptions/{declassificationExemptionId} | Update a declassification exemption
-*.DefaultclassificationvaluesApi* | [**calculateDefaultDeclassificationDate**](docs/DefaultclassificationvaluesApi.md#calculateDefaultDeclassificationDate) | **POST** /default-classification-values/{nodeId}/calculate-declassification-date | Calculate the default declassification date
-*.SecuritycontrolsettingsApi* | [**getSecurityControlSetting**](docs/SecuritycontrolsettingsApi.md#getSecurityControlSetting) | **GET** /security-control-settings/{securityControlSettingKey} | Get security control setting value
-*.SecuritycontrolsettingsApi* | [**updateSecurityControlSetting**](docs/SecuritycontrolsettingsApi.md#updateSecurityControlSetting) | **PUT** /security-control-settings/{securityControlSettingKey} | Update security control setting value
+*.ClassificationGuidesApi* | [**combinedInstructions**](docs/ClassificationGuidesApi.md#combinedInstructions) | **POST** /combined-instructions | Combined instructions
+*.ClassificationGuidesApi* | [**createClassificationGuide**](docs/ClassificationGuidesApi.md#createClassificationGuide) | **POST** /classification-guides | Create a classification guide
+*.ClassificationGuidesApi* | [**createSubtopic**](docs/ClassificationGuidesApi.md#createSubtopic) | **POST** /topics/{topicId}/subtopics | Create a subtopic
+*.ClassificationGuidesApi* | [**createTopic**](docs/ClassificationGuidesApi.md#createTopic) | **POST** /classification-guides/{classificationGuideId}/topics | Create a topic
+*.ClassificationGuidesApi* | [**deleteClassificationGuide**](docs/ClassificationGuidesApi.md#deleteClassificationGuide) | **DELETE** /classification-guides/{classificationGuideId} | Delete a classification guide
+*.ClassificationGuidesApi* | [**deleteTopic**](docs/ClassificationGuidesApi.md#deleteTopic) | **DELETE** /topics/{topicId} | Delete a topic
+*.ClassificationGuidesApi* | [**listClassificationGuides**](docs/ClassificationGuidesApi.md#listClassificationGuides) | **GET** /classification-guides | List all classification guides
+*.ClassificationGuidesApi* | [**listSubtopics**](docs/ClassificationGuidesApi.md#listSubtopics) | **GET** /topics/{topicId}/subtopics | List all subtopics
+*.ClassificationGuidesApi* | [**listTopics**](docs/ClassificationGuidesApi.md#listTopics) | **GET** /classification-guides/{classificationGuideId}/topics | List all topics
+*.ClassificationGuidesApi* | [**showClassificationGuideById**](docs/ClassificationGuidesApi.md#showClassificationGuideById) | **GET** /classification-guides/{classificationGuideId} | Get classification guide information
+*.ClassificationGuidesApi* | [**showTopicById**](docs/ClassificationGuidesApi.md#showTopicById) | **GET** /topics/{topicId} | Get topic information
+*.ClassificationGuidesApi* | [**updateClassificationGuide**](docs/ClassificationGuidesApi.md#updateClassificationGuide) | **PUT** /classification-guides/{classificationGuideId} | Update a classification guide
+*.ClassificationGuidesApi* | [**updateTopic**](docs/ClassificationGuidesApi.md#updateTopic) | **PUT** /topics/{topicId} | Update a topic
+*.ClassificationReasonsApi* | [**createClassificationReason**](docs/ClassificationReasonsApi.md#createClassificationReason) | **POST** /classification-reasons | Create a classification reason
+*.ClassificationReasonsApi* | [**deleteClassificationReason**](docs/ClassificationReasonsApi.md#deleteClassificationReason) | **DELETE** /classification-reasons/{classificationReasonId} | Delete a classification reason
+*.ClassificationReasonsApi* | [**listClassificationReasons**](docs/ClassificationReasonsApi.md#listClassificationReasons) | **GET** /classification-reasons | List all classification reasons
+*.ClassificationReasonsApi* | [**showClassificationReasonById**](docs/ClassificationReasonsApi.md#showClassificationReasonById) | **GET** /classification-reasons/{classificationReasonId} | Get classification reason information
+*.ClassificationReasonsApi* | [**updateClassificationReason**](docs/ClassificationReasonsApi.md#updateClassificationReason) | **PUT** /classification-reasons/{classificationReasonId} | Update a classification reason
+*.DeclassificationExemptionsApi* | [**createDeclassificationExemption**](docs/DeclassificationExemptionsApi.md#createDeclassificationExemption) | **POST** /declassification-exemptions | Create a declassification exemption
+*.DeclassificationExemptionsApi* | [**deleteDeclassificationExemption**](docs/DeclassificationExemptionsApi.md#deleteDeclassificationExemption) | **DELETE** /declassification-exemptions/{declassificationExemptionId} | Delete a declassification exemption
+*.DeclassificationExemptionsApi* | [**listDeclassificationExemptions**](docs/DeclassificationExemptionsApi.md#listDeclassificationExemptions) | **GET** /declassification-exemptions | List all declassification exemptions
+*.DeclassificationExemptionsApi* | [**showDeclassificationExemptionById**](docs/DeclassificationExemptionsApi.md#showDeclassificationExemptionById) | **GET** /declassification-exemptions/{declassificationExemptionId} | Get declassification exemption information
+*.DeclassificationExemptionsApi* | [**updateDeclassificationExemption**](docs/DeclassificationExemptionsApi.md#updateDeclassificationExemption) | **PUT** /declassification-exemptions/{declassificationExemptionId} | Update a declassification exemption
+*.DefaultClassificationValuesApi* | [**calculateDefaultDeclassificationDate**](docs/DefaultClassificationValuesApi.md#calculateDefaultDeclassificationDate) | **POST** /default-classification-values/{nodeId}/calculate-declassification-date | Calculate the default declassification date
+*.SecurityControlSettingsApi* | [**getSecurityControlSetting**](docs/SecurityControlSettingsApi.md#getSecurityControlSetting) | **GET** /security-control-settings/{securityControlSettingKey} | Get security control setting value
+*.SecurityControlSettingsApi* | [**updateSecurityControlSetting**](docs/SecurityControlSettingsApi.md#updateSecurityControlSetting) | **PUT** /security-control-settings/{securityControlSettingKey} | Update security control setting value
 
 
 ## Documentation for Models

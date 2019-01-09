@@ -22,9 +22,9 @@ import { BaseApi } from './base.api';
 
 /**
 * Transfercontainers service.
-* @module TransfercontainersApi
+* @module TransferContainersApi
 */
-export class TransfercontainersApi extends BaseApi {
+export class TransferContainersApi extends BaseApi {
     /**
     * Get a transfer container
     *

@@ -26,9 +26,7 @@ install:
 jobs:
     include:
         - stage: Lint
-          script:
-          - npm run tslint || exit 1;
-          - npm run tslint-test || exit 1;
+          script: ./scripts/lint.sh
         - stage: Build
           script: ./scripts/test-build.sh || exit 1
         - stage: Test
@@ -36,9 +34,7 @@ jobs:
         - stage: Perfomance
           script: ./scripts/test-performance.sh || exit 1
         - stage: Integration
-          script:
-          - ts-node ./test/integration/test-node/index.ts --host $HOST -u "$USERNAME" -p '$PASSWORD' || exit 1
-          - ts-node ./test/integration/test-node/upload-file.ts --host $HOST -u "$USERNAME" -p '$PASSWORD' || exit 1
+          script: ./scripts/test-integration.sh || exit 1
 
 after_success:
   - npm run coverage --force

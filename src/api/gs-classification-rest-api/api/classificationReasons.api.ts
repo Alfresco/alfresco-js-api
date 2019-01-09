@@ -22,9 +22,9 @@ import { BaseApi } from './base.api';
 
 /**
 * Classificationreasons service.
-* @module ClassificationreasonsApi
+* @module ClassificationReasonsApi
 */
-export class ClassificationreasonsApi extends BaseApi {
+export class ClassificationReasonsApi extends BaseApi {
     /**
     * Create a classification reason
     *

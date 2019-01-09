@@ -1,11 +1,11 @@
-# SecuritycontrolsettingsApi
+# SecurityControlSettingsApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getSecurityControlSetting**](SecuritycontrolsettingsApi.md#getSecurityControlSetting) | **GET** /security-control-settings/{securityControlSettingKey} | Get security control setting value
-[**updateSecurityControlSetting**](SecuritycontrolsettingsApi.md#updateSecurityControlSetting) | **PUT** /security-control-settings/{securityControlSettingKey} | Update security control setting value
+[**getSecurityControlSetting**](SecurityControlSettingsApi.md#getSecurityControlSetting) | **GET** /security-control-settings/{securityControlSettingKey} | Get security control setting value
+[**updateSecurityControlSetting**](SecurityControlSettingsApi.md#updateSecurityControlSetting) | **PUT** /security-control-settings/{securityControlSettingKey} | Update security control setting value
 
 
 <a name="getSecurityControlSetting"></a>
@@ -18,7 +18,7 @@ Gets the value for a selected **securityControlSettingKey**.
 
 ### Example
 ```javascript
-import SecuritycontrolsettingsApi from 'SecuritycontrolsettingsApi';
+import SecurityControlSettingsApi from 'SecurityControlSettingsApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -26,7 +26,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let securitycontrolsettingsApi = new SecuritycontrolsettingsApi(this.alfrescoApi);
+let securitycontrolsettingsApi = new SecurityControlSettingsApi(this.alfrescoApi);
 
 
 securitycontrolsettingsApi.getSecurityControlSetting(securityControlSettingKey).then((data) => {
@@ -59,7 +59,7 @@ Updates the value of a selected **securityControlSettingKey**.
 
 ### Example
 ```javascript
-import SecuritycontrolsettingsApi from 'SecuritycontrolsettingsApi';
+import SecurityControlSettingsApi from 'SecurityControlSettingsApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -67,7 +67,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let securitycontrolsettingsApi = new SecuritycontrolsettingsApi(this.alfrescoApi);
+let securitycontrolsettingsApi = new SecurityControlSettingsApi(this.alfrescoApi);
 
 
 securitycontrolsettingsApi.updateSecurityControlSetting(securityControlSettingKeysecurityControlSettingValue).then((data) => {

@@ -1,14 +1,14 @@
-# RecordfoldersApi
+# RecordFoldersApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createRecordFolderChild**](RecordfoldersApi.md#createRecordFolderChild) | **POST** /record-folders/{recordFolderId}/records | Create a record
-[**deleteRecordFolder**](RecordfoldersApi.md#deleteRecordFolder) | **DELETE** /record-folders/{recordFolderId} | Delete a record folder
-[**getRecordFolder**](RecordfoldersApi.md#getRecordFolder) | **GET** /record-folders/{recordFolderId} | Get a record folder
-[**listRecordFolderChildren**](RecordfoldersApi.md#listRecordFolderChildren) | **GET** /record-folders/{recordFolderId}/records | List records
-[**updateRecordFolder**](RecordfoldersApi.md#updateRecordFolder) | **PUT** /record-folders/{recordFolderId} | Update a record folder
+[**createRecordFolderChild**](RecordFoldersApi.md#createRecordFolderChild) | **POST** /record-folders/{recordFolderId}/records | Create a record
+[**deleteRecordFolder**](RecordFoldersApi.md#deleteRecordFolder) | **DELETE** /record-folders/{recordFolderId} | Delete a record folder
+[**getRecordFolder**](RecordFoldersApi.md#getRecordFolder) | **GET** /record-folders/{recordFolderId} | Get a record folder
+[**listRecordFolderChildren**](RecordFoldersApi.md#listRecordFolderChildren) | **GET** /record-folders/{recordFolderId}/records | List records
+[**updateRecordFolder**](RecordFoldersApi.md#updateRecordFolder) | **PUT** /record-folders/{recordFolderId} | Update a record folder
 
 
 <a name="createRecordFolderChild"></a>
@@ -108,7 +108,7 @@ JSON
 
 ### Example
 ```javascript
-import RecordfoldersApi from 'RecordfoldersApi';
+import RecordFoldersApi from 'RecordFoldersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -116,7 +116,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
+let recordfoldersApi = new RecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
   'include':  //  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
@@ -190,7 +190,7 @@ Deletes record folder **recordFolderId**. Deleted file plan components cannot be
 
 ### Example
 ```javascript
-import RecordfoldersApi from 'RecordfoldersApi';
+import RecordFoldersApi from 'RecordFoldersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -198,7 +198,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
+let recordfoldersApi = new RecordFoldersApi(this.alfrescoApi);
 
 
 recordfoldersApi.deleteRecordFolder(recordFolderId).then(() => {
@@ -234,7 +234,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import RecordfoldersApi from 'RecordfoldersApi';
+import RecordFoldersApi from 'RecordFoldersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -242,7 +242,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
+let recordfoldersApi = new RecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
   'include':  //  | Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
@@ -316,7 +316,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import RecordfoldersApi from 'RecordfoldersApi';
+import RecordFoldersApi from 'RecordFoldersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -324,7 +324,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
+let recordfoldersApi = new RecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
   'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
@@ -440,7 +440,7 @@ JSON
 
 ### Example
 ```javascript
-import RecordfoldersApi from 'RecordfoldersApi';
+import RecordFoldersApi from 'RecordFoldersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -448,7 +448,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
+let recordfoldersApi = new RecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
   'include':  //  | Returns additional information about the record folders. Any optional field from the response model can be requested. For example:

@@ -82,19 +82,19 @@ import { GroupsApi as GroupsApiCS } from './content-rest-api/src/api/groupsApi';
 import { SearchApi } from '../api/search-rest-api/api';
 import { GsSitesApi } from '../api/gs-core-rest-api/api/gsSites.api';
 import { FilesApi } from '../api/gs-core-rest-api/api/files.api';
-import { FileplansApi } from '../api/gs-core-rest-api/api/fileplans.api';
-import { RecordfoldersApi } from '../api/gs-core-rest-api/api/recordfolders.api';
-import { UnfiledcontainersApi } from '../api/gs-core-rest-api/api/unfiledcontainers.api';
-import { TransfercontainersApi } from '../api/gs-core-rest-api/api/transfercontainers.api';
-import { UnfiledrecordfoldersApi } from '../api/gs-core-rest-api/api/unfiledrecordfolders.api';
-import { RecordcategoriesApi } from '../api/gs-core-rest-api/api/recordcategories.api';
+import { FilePlansApi } from '../api/gs-core-rest-api/api/filePlans.api';
+import { RecordFoldersApi } from '../api/gs-core-rest-api/api/recordFolders.api';
+import { UnfiledContainersApi } from '../api/gs-core-rest-api/api/unfiledContainers.api';
+import { TransferContainersApi } from '../api/gs-core-rest-api/api/transferContainers.api';
+import { UnfiledRecordFoldersApi } from '../api/gs-core-rest-api/api/unfiledRecordFolders.api';
+import { RecordCategoriesApi } from '../api/gs-core-rest-api/api/recordCategories.api';
 import { TransfersApi } from '../api/gs-core-rest-api/api/transfers.api';
 import { RecordsApi } from '../api/gs-core-rest-api/api/records.api';
-import { ClassificationreasonsApi } from '../api/gs-classification-rest-api/api/classificationreasons.api';
-import { SecuritycontrolsettingsApi } from '../api/gs-classification-rest-api/api/securitycontrolsettings.api';
-import { DeclassificationexemptionsApi } from '../api/gs-classification-rest-api/api/declassificationexemptions.api';
-import { DefaultclassificationvaluesApi } from '../api/gs-classification-rest-api/api/defaultclassificationvalues.api';
-import { ClassificationguidesApi } from '../api/gs-classification-rest-api/api/classificationguides.api';
+import { ClassificationReasonsApi } from '../api/gs-classification-rest-api/api/classificationReasons.api';
+import { SecurityControlSettingsApi } from '../api/gs-classification-rest-api/api/securityControlSettings.api';
+import { DeclassificationExemptionsApi } from '../api/gs-classification-rest-api/api/declassificationExemptions.api';
+import { DefaultClassificationValuesApi } from '../api/gs-classification-rest-api/api/defaultClassificationValues.api';
+import { ClassificationGuidesApi } from '../api/gs-classification-rest-api/api/classificationGuides.api';
 import { DiscoveryApi } from '../api/discovery-rest-api/api';
 import { AuthenticationApi } from '../api/auth-rest-api/api';
 
@@ -185,24 +185,24 @@ export namespace Legacy {
     }
 
     export interface GsCore {
-        fileplansApi: FileplansApi;
+        fileplansApi: FilePlansApi;
         filesApi: FilesApi;
         gsSitesApi: GsSitesApi;
-        recordcategoriesApi: RecordcategoriesApi;
-        recordfoldersApi: RecordfoldersApi;
+        recordcategoriesApi: RecordCategoriesApi;
+        recordfoldersApi: RecordFoldersApi;
         recordsApi: RecordsApi;
-        transfercontainersApi: TransfercontainersApi;
+        transfercontainersApi: TransferContainersApi;
         transfersApi: TransfersApi;
-        unfiledcontainersApi: UnfiledcontainersApi;
-        unfiledrecordfoldersApi: UnfiledrecordfoldersApi;
+        unfiledcontainersApi: UnfiledContainersApi;
+        unfiledrecordfoldersApi: UnfiledRecordFoldersApi;
     }
 
     export interface GsClassification {
-        classificationguidesApi: ClassificationguidesApi;
-        classificationreasonsApi: ClassificationreasonsApi;
-        declassificationexemptionsApi: DeclassificationexemptionsApi;
-        defaultclassificationvaluesApi: DefaultclassificationvaluesApi;
-        securitycontrolsettingsApi: SecuritycontrolsettingsApi;
+        classificationguidesApi: ClassificationGuidesApi;
+        classificationreasonsApi: ClassificationReasonsApi;
+        declassificationexemptionsApi: DeclassificationExemptionsApi;
+        defaultclassificationvaluesApi: DefaultClassificationValuesApi;
+        securitycontrolsettingsApi: SecurityControlSettingsApi;
     }
 }
 

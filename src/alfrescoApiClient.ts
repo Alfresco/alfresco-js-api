@@ -29,7 +29,6 @@ const superagent = superagent_;
 const process: any = {};
 
 declare const Buffer;
-declare const ReadStream;
 
 export class AlfrescoApiClient {
 
@@ -334,7 +333,7 @@ export class AlfrescoApiClient {
             url = this.buildUrl(path, pathParams);
         }
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, returnType, contextRoot, responseType, url);
+                                contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -362,7 +361,7 @@ export class AlfrescoApiClient {
         let url = this.buildUrlCustomBasePath(path, '', pathParams);
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, returnType, contextRoot, responseType, url);
+                                contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -391,7 +390,7 @@ export class AlfrescoApiClient {
         Emitter(eventEmitter); // jshint ignore:line
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, responseType, eventEmitter, returnType);
+                                        contentTypes, accepts, responseType, eventEmitter, returnType);
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);

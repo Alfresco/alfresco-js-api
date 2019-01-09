@@ -16,25 +16,25 @@
 */
 
 
-export * from './classificationguides.api';
-import { ClassificationguidesApi } from './classificationguides.api';
+export * from './classificationGuides.api';
+import { ClassificationGuidesApi } from './classificationGuides.api';
 
-export * from './classificationreasons.api';
-import { ClassificationreasonsApi } from './classificationreasons.api';
+export * from './classificationReasons.api';
+import { ClassificationReasonsApi } from './classificationReasons.api';
 
-export * from './declassificationexemptions.api';
-import { DeclassificationexemptionsApi } from './declassificationexemptions.api';
+export * from './declassificationExemptions.api';
+import { DeclassificationExemptionsApi } from './declassificationExemptions.api';
 
-export * from './defaultclassificationvalues.api';
-import { DefaultclassificationvaluesApi } from './defaultclassificationvalues.api';
+export * from './defaultClassificationValues.api';
+import { DefaultClassificationValuesApi } from './defaultClassificationValues.api';
 
-export * from './securitycontrolsettings.api';
-import { SecuritycontrolsettingsApi } from './securitycontrolsettings.api';
+export * from './securityControlSettings.api';
+import { SecurityControlSettingsApi } from './securityControlSettings.api';
 
 export const GS_CLASSIFICATION_APIS = {
-    ClassificationguidesApi: ClassificationguidesApi,
-    ClassificationreasonsApi: ClassificationreasonsApi,
-    DeclassificationexemptionsApi: DeclassificationexemptionsApi,
-    DefaultclassificationvaluesApi: DefaultclassificationvaluesApi,
-    SecuritycontrolsettingsApi: SecuritycontrolsettingsApi
+    ClassificationGuidesApi: ClassificationGuidesApi,
+    ClassificationReasonsApi: ClassificationReasonsApi,
+    DeclassificationExemptionsApi: DeclassificationExemptionsApi,
+    DefaultClassificationValuesApi: DefaultClassificationValuesApi,
+    SecurityControlSettingsApi: SecurityControlSettingsApi
 };

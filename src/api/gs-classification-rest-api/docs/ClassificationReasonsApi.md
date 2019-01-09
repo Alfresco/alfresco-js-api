@@ -1,14 +1,14 @@
-# ClassificationreasonsApi
+# ClassificationReasonsApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createClassificationReason**](ClassificationreasonsApi.md#createClassificationReason) | **POST** /classification-reasons | Create a classification reason
-[**deleteClassificationReason**](ClassificationreasonsApi.md#deleteClassificationReason) | **DELETE** /classification-reasons/{classificationReasonId} | Delete a classification reason
-[**listClassificationReasons**](ClassificationreasonsApi.md#listClassificationReasons) | **GET** /classification-reasons | List all classification reasons
-[**showClassificationReasonById**](ClassificationreasonsApi.md#showClassificationReasonById) | **GET** /classification-reasons/{classificationReasonId} | Get classification reason information
-[**updateClassificationReason**](ClassificationreasonsApi.md#updateClassificationReason) | **PUT** /classification-reasons/{classificationReasonId} | Update a classification reason
+[**createClassificationReason**](ClassificationReasonsApi.md#createClassificationReason) | **POST** /classification-reasons | Create a classification reason
+[**deleteClassificationReason**](ClassificationReasonsApi.md#deleteClassificationReason) | **DELETE** /classification-reasons/{classificationReasonId} | Delete a classification reason
+[**listClassificationReasons**](ClassificationReasonsApi.md#listClassificationReasons) | **GET** /classification-reasons | List all classification reasons
+[**showClassificationReasonById**](ClassificationReasonsApi.md#showClassificationReasonById) | **GET** /classification-reasons/{classificationReasonId} | Get classification reason information
+[**updateClassificationReason**](ClassificationReasonsApi.md#updateClassificationReason) | **PUT** /classification-reasons/{classificationReasonId} | Update a classification reason
 
 
 <a name="createClassificationReason"></a>
@@ -64,7 +64,7 @@ JSON
 
 ### Example
 ```javascript
-import ClassificationreasonsApi from 'ClassificationreasonsApi';
+import ClassificationReasonsApi from 'ClassificationReasonsApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -72,7 +72,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
+let classificationreasonsApi = new ClassificationReasonsApi(this.alfrescoApi);
 
 
 classificationreasonsApi.createClassificationReason(classificationReason).then((data) => {
@@ -103,7 +103,7 @@ Deletes the classification reason  **classificationReasonId**. You can't delete 
 
 ### Example
 ```javascript
-import ClassificationreasonsApi from 'ClassificationreasonsApi';
+import ClassificationReasonsApi from 'ClassificationReasonsApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -111,7 +111,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
+let classificationreasonsApi = new ClassificationReasonsApi(this.alfrescoApi);
 
 
 classificationreasonsApi.deleteClassificationReason(classificationReasonId).then(() => {
@@ -142,7 +142,7 @@ Gets all classification reasons.
 
 ### Example
 ```javascript
-import ClassificationreasonsApi from 'ClassificationreasonsApi';
+import ClassificationReasonsApi from 'ClassificationReasonsApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -150,7 +150,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
+let classificationreasonsApi = new ClassificationReasonsApi(this.alfrescoApi);
 
 let opts = { 
   'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
@@ -210,7 +210,7 @@ Gets the classification reason  **classificationReasonId**.
 
 ### Example
 ```javascript
-import ClassificationreasonsApi from 'ClassificationreasonsApi';
+import ClassificationReasonsApi from 'ClassificationReasonsApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -218,7 +218,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
+let classificationreasonsApi = new ClassificationReasonsApi(this.alfrescoApi);
 
 
 classificationreasonsApi.showClassificationReasonById(classificationReasonId).then((data) => {
@@ -249,7 +249,7 @@ Updates the classification reason with id **classificationReasonId**. For exampl
 
 ### Example
 ```javascript
-import ClassificationreasonsApi from 'ClassificationreasonsApi';
+import ClassificationReasonsApi from 'ClassificationReasonsApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -257,7 +257,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
+let classificationreasonsApi = new ClassificationReasonsApi(this.alfrescoApi);
 
 
 classificationreasonsApi.updateClassificationReason(classificationReasonIdclassificationReason).then((data) => {

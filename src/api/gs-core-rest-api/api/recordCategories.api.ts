@@ -24,9 +24,9 @@ import { BaseApi } from './base.api';
 
 /**
 * Recordcategories service.
-* @module RecordcategoriesApi
+* @module RecordCategoriesApi
 */
-export class RecordcategoriesApi extends BaseApi {
+export class RecordCategoriesApi extends BaseApi {
     /**
     * Create a record category or a record folder
     *

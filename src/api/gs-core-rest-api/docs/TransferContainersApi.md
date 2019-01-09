@@ -1,12 +1,12 @@
-# TransfercontainersApi
+# TransferContainersApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getTransferContainer**](TransfercontainersApi.md#getTransferContainer) | **GET** /transfer-containers/{transferContainerId} | Get a transfer container
-[**listTransfers**](TransfercontainersApi.md#listTransfers) | **GET** /transfer-containers/{transferContainerId}/transfers | List transfer container's children
-[**updateTransferContainer**](TransfercontainersApi.md#updateTransferContainer) | **PUT** /transfer-containers/{transferContainerId} | Update transfer container
+[**getTransferContainer**](TransferContainersApi.md#getTransferContainer) | **GET** /transfer-containers/{transferContainerId} | Get a transfer container
+[**listTransfers**](TransferContainersApi.md#listTransfers) | **GET** /transfer-containers/{transferContainerId}/transfers | List transfer container's children
+[**updateTransferContainer**](TransferContainersApi.md#updateTransferContainer) | **PUT** /transfer-containers/{transferContainerId} | Update transfer container
 
 
 <a name="getTransferContainer"></a>
@@ -24,7 +24,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import TransfercontainersApi from 'TransfercontainersApi';
+import TransferContainersApi from 'TransferContainersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -32,7 +32,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let transfercontainersApi = new TransfercontainersApi(this.alfrescoApi);
+let transfercontainersApi = new TransferContainersApi(this.alfrescoApi);
 
 let opts = { 
   'include':  //  | Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
@@ -102,7 +102,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import TransfercontainersApi from 'TransfercontainersApi';
+import TransferContainersApi from 'TransferContainersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -110,7 +110,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let transfercontainersApi = new TransfercontainersApi(this.alfrescoApi);
+let transfercontainersApi = new TransferContainersApi(this.alfrescoApi);
 
 let opts = { 
   'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
@@ -206,7 +206,7 @@ JSON
 
 ### Example
 ```javascript
-import TransfercontainersApi from 'TransfercontainersApi';
+import TransferContainersApi from 'TransferContainersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -214,7 +214,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let transfercontainersApi = new TransfercontainersApi(this.alfrescoApi);
+let transfercontainersApi = new TransferContainersApi(this.alfrescoApi);
 
 let opts = { 
   'include':  //  | Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:

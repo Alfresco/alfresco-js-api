@@ -21,9 +21,9 @@ import { DateAlfresco } from '../../../../dist/src/api/content-rest-api/model/da
 
 /**
 * Defaultclassificationvalues service.
-* @module DefaultclassificationvaluesApi
+* @module DefaultClassificationValuesApi
 */
-export class DefaultclassificationvaluesApi extends BaseApi {
+export class DefaultClassificationValuesApi extends BaseApi {
     /**
     * Calculate the default declassification date
     *

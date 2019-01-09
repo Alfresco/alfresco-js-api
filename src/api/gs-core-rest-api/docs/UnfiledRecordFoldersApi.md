@@ -1,14 +1,14 @@
-# UnfiledrecordfoldersApi
+# UnfiledRecordFoldersApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createUnfiledRecordFolderChildren**](UnfiledrecordfoldersApi.md#createUnfiledRecordFolderChildren) | **POST** /unfiled-record-folders/{unfiledRecordFolderId}/children | Create a record or an unfiled record folder
-[**deleteUnfiledRecordFolder**](UnfiledrecordfoldersApi.md#deleteUnfiledRecordFolder) | **DELETE** /unfiled-record-folders/{unfiledRecordFolderId} | Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
-[**getUnfiledRecordFolder**](UnfiledrecordfoldersApi.md#getUnfiledRecordFolder) | **GET** /unfiled-record-folders/{unfiledRecordFolderId} | Get the unfiled record folder
-[**listUnfiledRecordFolderChildren**](UnfiledrecordfoldersApi.md#listUnfiledRecordFolderChildren) | **GET** /unfiled-record-folders/{unfiledRecordFolderId}/children | List unfiled record folder's children
-[**updateUnfiledRecordFolder**](UnfiledrecordfoldersApi.md#updateUnfiledRecordFolder) | **PUT** /unfiled-record-folders/{unfiledRecordFolderId} | Update an unfiled record folder
+[**createUnfiledRecordFolderChildren**](UnfiledRecordFoldersApi.md#createUnfiledRecordFolderChildren) | **POST** /unfiled-record-folders/{unfiledRecordFolderId}/children | Create a record or an unfiled record folder
+[**deleteUnfiledRecordFolder**](UnfiledRecordFoldersApi.md#deleteUnfiledRecordFolder) | **DELETE** /unfiled-record-folders/{unfiledRecordFolderId} | Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
+[**getUnfiledRecordFolder**](UnfiledRecordFoldersApi.md#getUnfiledRecordFolder) | **GET** /unfiled-record-folders/{unfiledRecordFolderId} | Get the unfiled record folder
+[**listUnfiledRecordFolderChildren**](UnfiledRecordFoldersApi.md#listUnfiledRecordFolderChildren) | **GET** /unfiled-record-folders/{unfiledRecordFolderId}/children | List unfiled record folder's children
+[**updateUnfiledRecordFolder**](UnfiledRecordFoldersApi.md#updateUnfiledRecordFolder) | **PUT** /unfiled-record-folders/{unfiledRecordFolderId} | Update an unfiled record folder
 
 
 <a name="createUnfiledRecordFolderChildren"></a>
@@ -122,7 +122,7 @@ JSON
 
 ### Example
 ```javascript
-import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
+import UnfiledRecordFoldersApi from 'UnfiledRecordFoldersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -130,7 +130,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
+let unfiledrecordfoldersApi = new UnfiledRecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
   'autoRename': true //  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
@@ -201,7 +201,7 @@ Deletes the unfiled record folder **unfiledRecordFolderId**.
 
 ### Example
 ```javascript
-import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
+import UnfiledRecordFoldersApi from 'UnfiledRecordFoldersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -209,7 +209,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
+let unfiledrecordfoldersApi = new UnfiledRecordFoldersApi(this.alfrescoApi);
 
 
 unfiledrecordfoldersApi.deleteUnfiledRecordFolder(unfiledRecordFolderId).then(() => {
@@ -245,7 +245,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
+import UnfiledRecordFoldersApi from 'UnfiledRecordFoldersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -253,7 +253,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
+let unfiledrecordfoldersApi = new UnfiledRecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
   'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
@@ -327,7 +327,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
+import UnfiledRecordFoldersApi from 'UnfiledRecordFoldersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -335,7 +335,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
+let unfiledrecordfoldersApi = new UnfiledRecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
   'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
@@ -451,7 +451,7 @@ JSON
 
 ### Example
 ```javascript
-import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
+import UnfiledRecordFoldersApi from 'UnfiledRecordFoldersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -459,7 +459,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
+let unfiledrecordfoldersApi = new UnfiledRecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
   'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:

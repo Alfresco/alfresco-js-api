@@ -27,9 +27,9 @@ import { BaseApi } from './base.api';
 
 /**
 * Classificationguides service.
-* @module ClassificationguidesApi
+* @module ClassificationGuidesApi
 */
-export class ClassificationguidesApi extends BaseApi {
+export class ClassificationGuidesApi extends BaseApi {
     /**
     * Combined instructions
     *

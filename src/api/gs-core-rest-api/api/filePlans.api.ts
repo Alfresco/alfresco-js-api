@@ -24,9 +24,9 @@ import { BaseApi } from './base.api';
 
 /**
 * Fileplans service.
-* @module FileplansApi
+* @module FilePlansApi
 */
-export class FileplansApi extends BaseApi {
+export class FilePlansApi extends BaseApi {
     /**
     * Create record categories for a file plan
     *

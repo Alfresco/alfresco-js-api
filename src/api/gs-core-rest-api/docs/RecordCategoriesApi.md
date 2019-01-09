@@ -1,14 +1,14 @@
-# RecordcategoriesApi
+# RecordCategoriesApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createRecordCategoryChild**](RecordcategoriesApi.md#createRecordCategoryChild) | **POST** /record-categories/{recordCategoryId}/children | Create a record category or a record folder
-[**deleteRecordCategory**](RecordcategoriesApi.md#deleteRecordCategory) | **DELETE** /record-categories/{recordCategoryId} | Delete a record category
-[**getRecordCategory**](RecordcategoriesApi.md#getRecordCategory) | **GET** /record-categories/{recordCategoryId} | Get a record category
-[**listRecordCategoryChildren**](RecordcategoriesApi.md#listRecordCategoryChildren) | **GET** /record-categories/{recordCategoryId}/children | List record category's children
-[**updateRecordCategory**](RecordcategoriesApi.md#updateRecordCategory) | **PUT** /record-categories/{recordCategoryId} | Update a record category
+[**createRecordCategoryChild**](RecordCategoriesApi.md#createRecordCategoryChild) | **POST** /record-categories/{recordCategoryId}/children | Create a record category or a record folder
+[**deleteRecordCategory**](RecordCategoriesApi.md#deleteRecordCategory) | **DELETE** /record-categories/{recordCategoryId} | Delete a record category
+[**getRecordCategory**](RecordCategoriesApi.md#getRecordCategory) | **GET** /record-categories/{recordCategoryId} | Get a record category
+[**listRecordCategoryChildren**](RecordCategoriesApi.md#listRecordCategoryChildren) | **GET** /record-categories/{recordCategoryId}/children | List record category's children
+[**updateRecordCategory**](RecordCategoriesApi.md#updateRecordCategory) | **PUT** /record-categories/{recordCategoryId} | Update a record category
 
 
 <a name="createRecordCategoryChild"></a>
@@ -116,7 +116,7 @@ JSON
 
 ### Example
 ```javascript
-import RecordcategoriesApi from 'RecordcategoriesApi';
+import RecordCategoriesApi from 'RecordCategoriesApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -124,7 +124,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
+let recordcategoriesApi = new RecordCategoriesApi(this.alfrescoApi);
 
 let opts = { 
   'autoRename': true //  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
@@ -198,7 +198,7 @@ Deletes record category **recordCategoryId**.
 
 ### Example
 ```javascript
-import RecordcategoriesApi from 'RecordcategoriesApi';
+import RecordCategoriesApi from 'RecordCategoriesApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -206,7 +206,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
+let recordcategoriesApi = new RecordCategoriesApi(this.alfrescoApi);
 
 
 recordcategoriesApi.deleteRecordCategory(recordCategoryId).then(() => {
@@ -242,7 +242,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import RecordcategoriesApi from 'RecordcategoriesApi';
+import RecordCategoriesApi from 'RecordCategoriesApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -250,7 +250,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
+let recordcategoriesApi = new RecordCategoriesApi(this.alfrescoApi);
 
 let opts = { 
   'include':  //  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
@@ -328,7 +328,7 @@ The list of child nodes includes primary children and secondary children, if the
 
 ### Example
 ```javascript
-import RecordcategoriesApi from 'RecordcategoriesApi';
+import RecordCategoriesApi from 'RecordCategoriesApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -336,7 +336,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
+let recordcategoriesApi = new RecordCategoriesApi(this.alfrescoApi);
 
 let opts = { 
   'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
@@ -458,7 +458,7 @@ JSON
 
 ### Example
 ```javascript
-import RecordcategoriesApi from 'RecordcategoriesApi';
+import RecordCategoriesApi from 'RecordCategoriesApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -466,7 +466,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
+let recordcategoriesApi = new RecordCategoriesApi(this.alfrescoApi);
 
 let opts = { 
   'include':  //  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:

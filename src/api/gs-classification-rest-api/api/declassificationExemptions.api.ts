@@ -22,9 +22,9 @@ import { BaseApi } from './base.api';
 
 /**
 * Declassificationexemptions service.
-* @module DeclassificationexemptionsApi
+* @module DeclassificationExemptionsApi
 */
-export class DeclassificationexemptionsApi extends BaseApi {
+export class DeclassificationExemptionsApi extends BaseApi {
     /**
     * Create a declassification exemption
     *

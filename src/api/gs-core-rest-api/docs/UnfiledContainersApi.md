@@ -1,13 +1,13 @@
-# UnfiledcontainersApi
+# UnfiledContainersApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createUnfiledContainerChildren**](UnfiledcontainersApi.md#createUnfiledContainerChildren) | **POST** /unfiled-containers/{unfiledContainerId}/children | Create a record or an unfiled record folder
-[**getUnfiledContainer**](UnfiledcontainersApi.md#getUnfiledContainer) | **GET** /unfiled-containers/{unfiledContainerId} | Get the unfiled records container
-[**listUnfiledContainerChildren**](UnfiledcontainersApi.md#listUnfiledContainerChildren) | **GET** /unfiled-containers/{unfiledContainerId}/children | List unfiled record container's children
-[**updateUnfiledContainer**](UnfiledcontainersApi.md#updateUnfiledContainer) | **PUT** /unfiled-containers/{unfiledContainerId} | Update an unfiled record container
+[**createUnfiledContainerChildren**](UnfiledContainersApi.md#createUnfiledContainerChildren) | **POST** /unfiled-containers/{unfiledContainerId}/children | Create a record or an unfiled record folder
+[**getUnfiledContainer**](UnfiledContainersApi.md#getUnfiledContainer) | **GET** /unfiled-containers/{unfiledContainerId} | Get the unfiled records container
+[**listUnfiledContainerChildren**](UnfiledContainersApi.md#listUnfiledContainerChildren) | **GET** /unfiled-containers/{unfiledContainerId}/children | List unfiled record container's children
+[**updateUnfiledContainer**](UnfiledContainersApi.md#updateUnfiledContainer) | **PUT** /unfiled-containers/{unfiledContainerId} | Update an unfiled record container
 
 
 <a name="createUnfiledContainerChildren"></a>
@@ -121,7 +121,7 @@ JSON
 
 ### Example
 ```javascript
-import UnfiledcontainersApi from 'UnfiledcontainersApi';
+import UnfiledContainersApi from 'UnfiledContainersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -129,7 +129,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
+let unfiledcontainersApi = new UnfiledContainersApi(this.alfrescoApi);
 
 let opts = { 
   'autoRename': true //  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
@@ -204,7 +204,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import UnfiledcontainersApi from 'UnfiledcontainersApi';
+import UnfiledContainersApi from 'UnfiledContainersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -212,7 +212,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
+let unfiledcontainersApi = new UnfiledContainersApi(this.alfrescoApi);
 
 let opts = { 
   'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
@@ -282,7 +282,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import UnfiledcontainersApi from 'UnfiledcontainersApi';
+import UnfiledContainersApi from 'UnfiledContainersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -290,7 +290,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
+let unfiledcontainersApi = new UnfiledContainersApi(this.alfrescoApi);
 
 let opts = { 
   'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
@@ -401,7 +401,7 @@ JSON
 
 ### Example
 ```javascript
-import UnfiledcontainersApi from 'UnfiledcontainersApi';
+import UnfiledContainersApi from 'UnfiledContainersApi';
 import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
@@ -409,7 +409,7 @@ this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledcontainersApi = new UnfiledcontainersApi(this.alfrescoApi);
+let unfiledcontainersApi = new UnfiledContainersApi(this.alfrescoApi);
 
 let opts = { 
   'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
