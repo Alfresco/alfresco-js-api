@@ -53,7 +53,7 @@ done
 
 if [[ "${EXEC_MINOR}" == true ]]
 then
-    JS_VERSION=$(npm view alfresco-js-api version)
+    JS_VERSION=$(npm view @alfresco/js-api version)
     NEXT_VERSION=( ${JS_VERSION//./ } )
     ((NEXT_VERSION[1]++))
     NEXT_VERSION[2]=0
@@ -62,7 +62,7 @@ fi
 
 if [[ "${EXEC_MAJOR}" == true ]]
 then
-    JS_VERSION=$(npm view alfresco-js-api version)
+    JS_VERSION=$(npm view @alfresco/js-api version)
     NEXT_VERSION=( ${JS_VERSION//./ } )
     ((NEXT_VERSION[0]++))
     NEXT_VERSION[1]=0
@@ -72,7 +72,7 @@ fi
 
 if [[ "${EXEC_PATCH}" == true ]]
 then
-    JS_VERSION=$(npm view alfresco-js-api version)
+    JS_VERSION=$(npm view @alfresco/js-api version)
     NEXT_VERSION=( ${JS_VERSION//./ } )
     ((NEXT_VERSION[2]++))
     NEXT_VERSION="${NEXT_VERSION[0]}.${NEXT_VERSION[1]}.${NEXT_VERSION[2]}"
@@ -86,7 +86,7 @@ fi
 
 if [[ "${EXEC_BETA}" == true ]]
 then
-	BETA_VERSION=$(npm view alfresco-js-api@beta version)
+	BETA_VERSION=$(npm view @alfresco/js-api@beta version)
 
 	if [[  $BETA_VERSION == "" ]]; then
 	    NEXT_BETA_VERSION=1
