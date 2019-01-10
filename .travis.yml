@@ -28,7 +28,7 @@ jobs:
         - stage: Lint
           script: ./scripts/lint.sh
         - stage: Build
-          script: ./scripts/test-build.sh || exit 1
+          script: ./scripts/build.sh || exit 1
         - stage: Test
           script: npm run test || exit 1
         - stage: Perfomance
