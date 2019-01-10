@@ -1,7 +1,7 @@
 'use strict';
 
-var nock = require('nock');
-var BaseMock = require('../baseMock');
+let nock = require('nock');
+let BaseMock = require('../baseMock');
 
 class TasksMock extends BaseMock {
 
@@ -141,7 +141,7 @@ class TasksMock extends BaseMock {
 
     get200TaskFilter() {
         nock(this.host, {'encodedQueryParams': true})
-            .post('/activiti-app/api/enterprise/tasks/filter', {'filter': {}, 'appDefinitionId': 1})
+            .post('/activiti-app/api/enterprise/tasks/filter', {'appDefinitionId': 1})
             .reply(200, {
                 'size': 2,
                 'total': 2,

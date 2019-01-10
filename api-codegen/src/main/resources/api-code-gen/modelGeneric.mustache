@@ -1,0 +1,34 @@
+export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{ {{>modelGenericAdditionalProperties}}
+{{#vars}}
+    {{#description}}
+    /**
+     * {{&description}}
+     */
+    {{/description}}
+    {{#isReadOnly}}readonly {{/isReadOnly}}{{name}}{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}} | string{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}{{#isListContainer}}[]{{/isListContainer}};
+{{/vars}}
+
+    constructor(input?: any) {
+{{#parent}}super();{{/parent}}
+        if(input) {
+            Object.assign(this, input);
+        {{#vars}}
+            {{^isPrimitiveType}}
+                {{^isListContainer}}
+                    {{^isMapContainer}}
+                        this.{{name}} = input.{{name}} ? new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(input.{{name}}) : undefined;
+                    {{/isMapContainer}}
+                {{/isListContainer}}
+                {{#isListContainer}}
+                if(input.{{name}}) {
+                    this.{{name}} = input.{{name}}.map((item: any) => {
+                        return new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(item);
+                    });
+                }
+                {{/isListContainer}}
+            {{/isPrimitiveType}}
+        {{/vars}}
+        }
+    }
+
+}{{>modelGenericEnums}}

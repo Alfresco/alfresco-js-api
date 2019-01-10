@@ -13,4 +13,6 @@ target
 /package/
 /dist/
 .history
-package-lock.json
+/target
+*.d.ts
+/bundles/

@@ -63,6 +63,8 @@ paths:
             **userId** or **password** is not provided
         '403':
           description: Login failed
+        '501':
+          description: SAML is enabled and enforced
         default:
           description: Unexpected error
           schema:

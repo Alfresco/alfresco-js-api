@@ -1,18 +1,18 @@
 'use strict';
 
-var nock = require('nock');
-var BaseMock = require('../baseMock');
-var fakeVariable1 = {
+let nock = require('nock');
+let BaseMock = require('../baseMock');
+let fakeVariable1 = {
     name: 'variable1',
     value: 'Value 123',
     scope: 'global'
 };
-var fakeVariable2 = {
+let fakeVariable2 = {
     name: 'variable2',
     value: 'Value 456',
     scope: 'local'
 };
-var fakeVariablesList = [
+let fakeVariablesList = [
     fakeVariable1,
     fakeVariable2
 ];

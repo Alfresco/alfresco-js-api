@@ -1,9 +1,9 @@
 'use strict';
 
-var nock = require('nock');
-var BaseMock = require('../baseMock');
+let nock = require('nock');
+let BaseMock = require('../baseMock');
 
-var fakeReportList = [
+let fakeReportList = [
     {'id': 11011, 'name': 'Process definition heat map'},
     {'id': 11012, 'name': 'Process definition overview'},
     {'id': 11013, 'name': 'Process instances overview'},
@@ -11,7 +11,7 @@ var fakeReportList = [
     {'id': 11015, 'name': 'Task service level agreement'}
 ];
 
-var fakeReportParams = {
+let fakeReportParams = {
     'id': 11013,
     'name': 'Process instances overview',
     'created': '2016-12-07T13:26:40.095+0000',
@@ -23,7 +23,7 @@ var fakeReportParams = {
     ']}'
 };
 
-var fakeChartReports = {
+let fakeChartReports = {
         'elements': [{
             'id': 'id10889073739455',
             'type': 'table',
@@ -60,7 +60,7 @@ var fakeChartReports = {
         }]
     };
 
-var fakeProcessDefinitionsNoApp = [{
+let fakeProcessDefinitionsNoApp = [{
     'id': 'Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004',
     'name': 'Fake Process Name 1',
     'description': null,

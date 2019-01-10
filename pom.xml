@@ -19,86 +19,7 @@
                 <version>${swagger-codegen-version}</version>
                 <executions>
 
-                    <!--SEARCH START-->
-
-                    <!--<execution>-->
-                        <!--<id>generate-search-rest-api</id>-->
-                        <!--<goals>-->
-                            <!--<goal>generate</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<inputSpec>${api-defs-dir}/alfresco-search.yaml</inputSpec>-->
-                            <!--<language>javascript</language>-->
-                            <!--<output>${srcdir}/alfresco-search-new-rest-api</output>-->
-                            <!--<configOptions>-->
-                                <!--<projectVersion>0.1.0</projectVersion>-->
-                                <!--<usePromises>true</usePromises>-->
-                                <!--&lt;!&ndash;<useES6>true</useES6>&ndash;&gt;-->
-                            <!--</configOptions>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-
-                    <!--SEARCH END-->
-
-                    <!--GS START-->
-
-                    <!--<execution>-->
-                        <!--<id>generate-gs-classification-api</id>-->
-                        <!--<goals>-->
-                            <!--<goal>generate</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<inputSpec>${api-defs-dir}/gs-classification-api.yaml</inputSpec>-->
-                            <!--<language>javascript</language>-->
-                            <!--<output>${srcdir}/alfresco-gs-classification-rest-api</output>-->
-                            <!--<configOptions>-->
-                                <!--<projectVersion>0.1.0</projectVersion>-->
-                                <!--<usePromises>true</usePromises>-->
-                            <!--</configOptions>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-
-                    <!--<execution>-->
-                        <!--<id>generate-gs-core-api</id>-->
-                        <!--<goals>-->
-                            <!--<goal>generate</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<inputSpec>${api-defs-dir}/gs-core-api.yaml</inputSpec>-->
-                            <!--<language>javascript</language>-->
-                            <!--<output>${srcdir}/alfresco-gs-core-rest-api</output>-->
-                            <!--<configOptions>-->
-                                <!--<projectVersion>0.1.0</projectVersion>-->
-                                <!--<usePromises>true</usePromises>-->
-                            <!--</configOptions>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-
-                    <!--GS END-->
-
-
-                    <!--AUTH START-->
-
-                    <!--<execution>-->
-                        <!--<id>generate-auth-api</id>-->
-                        <!--<goals>-->
-                            <!--<goal>generate</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<inputSpec>${api-defs-dir}/alfresco-auth.yaml</inputSpec>-->
-                            <!--<language>javascript</language>-->
-                            <!--<output>${srcdir}/alfresco-auth-rest-api</output>-->
-                            <!--<configOptions>-->
-                                <!--<projectVersion>0.1.0</projectVersion>-->
-                                <!--<usePromises>true</usePromises>-->
-                            <!--</configOptions>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-
-                    <!--AUTH END-->
-
-
-                    <!--CORE START-->
+                    <!--CONTENT START-->
 
                     <execution>
                         <id>generate-core-api</id>
@@ -107,8 +28,8 @@
                         </goals>
                         <configuration>
                             <inputSpec>${api-defs-dir}/alfresco-core.yaml</inputSpec>
-                            <language>javascript</language>
-                            <output>${srcdir}/alfresco-core-rest-api</output>
+                            <language>typescript-node</language>
+                            <output>${srcdir}/content-rest-api</output>
                             <configOptions>
                                 <projectVersion>0.1.0</projectVersion>
                                 <usePromises>true</usePromises>
@@ -116,11 +37,21 @@
                         </configuration>
                     </execution>
 
-                    <!--CORE END-->
+                    <!--CONTENT END-->
 
                 </executions>
 
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-codegen-cli</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
+    </dependencies>
+
 </project>
