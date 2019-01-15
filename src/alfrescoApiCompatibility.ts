@@ -32,6 +32,8 @@ import { ContentApi } from './contentApi';
 import { WebscriptApi } from './api/content-rest-api/api/webscript.api';
 import { AlfrescoUpload } from './api-legacy/alfrescoUpload';
 import { NodesApi } from './api-legacy/content-rest-api/src/api/nodesApi';
+import { ProcessClient } from './processClient';
+import { ContentClient } from './contentClient';
 
 /**
  * @deprecated 3.0.0
@@ -96,6 +98,14 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
      * @deprecated 3.0.0
      */
     webScript: WebscriptApi;
+    /**
+     * @deprecated 3.0.0
+     */
+    bpmClient: ProcessClient;
+    /**
+     * @deprecated 3.0.0
+     */
+    ecmClient: ContentClient;
 
     constructor(config: AlfrescoApiConfig) {
         super();
@@ -122,6 +132,8 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
         this.content = new ContentApi(this.contentAuth, this.contentClient);
         this.upload = new AlfrescoUpload(this);
         this.webScript = this.core.webscriptApi;
+        this.bpmClient = this.processClient;
+        this.ecmClient = this.contentClient;
     }
 
     _instantiateOldObjects(module, moduleCopy) {
