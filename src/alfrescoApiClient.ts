@@ -614,6 +614,17 @@ export class AlfrescoApiClient {
         return request;
     }
 
+    getAlfTicket(ticket: string): string {
+        let alfTicketFragment = '';
+        if (ticket) {
+            alfTicketFragment = '&alf_ticket=' + ticket;
+        } else if (this.config.ticketEcm) {
+            alfTicketFragment = '&alf_ticket=' + this.config.ticketEcm;
+        }
+
+        return alfTicketFragment;
+    }
+
     on = Emitter.on;
     off = Emitter.off;
     once = Emitter.once;

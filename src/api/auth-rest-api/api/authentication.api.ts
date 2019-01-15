@@ -78,6 +78,41 @@ For example using Javascript:
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts, TicketEntry);
     }
+
+    /**
+     * Get ticket (login)
+     *
+
+     Logs in and returns the new authentication ticket.
+     *
+     * @return Promise<TicketEntry>
+     */
+    getTicket(): Promise<TicketEntry> {
+
+        let postBody = null;
+
+        let pathParams = {
+
+        };
+
+        let queryParams = {
+        };
+
+        let headerParams = {
+
+        };
+        let formParams = {
+        };
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/tickets', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts, TicketEntry);
+    }
+
     /**
         * Delete ticket (logout)
         *

@@ -26,7 +26,7 @@ export * from './src/api/auth-rest-api/index';
 export * from './src/api/activiti-rest-api/index';
 export * from './src/api/search-rest-api/index';
 
-export { ContentApi } from './src/contentApi';
+export { ContentApi } from './src/api/content-rest-api/api/content.api';
 export { AlfrescoUpload } from './src/api-legacy/alfrescoUpload';
 export { ContentAuth } from './src/authentication/contentAuth';
 export { ProcessAuth } from './src/authentication/processAuth';

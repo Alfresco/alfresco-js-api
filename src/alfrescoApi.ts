@@ -25,6 +25,8 @@ import { ProcessClient } from './processClient';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
+import { AuthenticationApi } from './api/auth-rest-api/api/authentication.api';
+import { TicketEntry } from './api/auth-rest-api/model/ticketEntry';
 
 const Emitter = _Emitter;
 
@@ -91,7 +93,17 @@ export class AlfrescoApi {
         this.errorListeners();
 
         if (this.isOauthConfiguration()) {
-            this.oauth2Auth =  Oauth2Auth.getInstance(this.config);
+            this.oauth2Auth = Oauth2Auth.getInstance(this.config);
+
+            this.oauth2Auth.on('token_issued', () => {
+                if (this.config.provider === 'ALL' || this.config.provider == 'ECM') {
+                    let authContentApi: AuthenticationApi = new AuthenticationApi(this);
+                    authContentApi.getTicket().then((ticketEntry: TicketEntry) => {
+                        this.config.ticketEcm = ticketEntry.entry.id;
+                    });
+                }
+            });
+
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
             this.processAuth = ProcessAuth.getInstance(this.config);
@@ -103,20 +115,26 @@ export class AlfrescoApi {
     }
 
     errorListeners() {
+        this.contentClient.off('error', () => {
+        });
 
-        this.contentClient.off('error', () => {});
+        this.authClient.off('error', () => {
+        });
 
-        this.authClient.off('error', () => {});
+        this.contentPrivateClient.off('error', () => {
+        });
 
-        this.contentPrivateClient.off('error', () => {});
+        this.processClient.off('error', () => {
+        });
 
-        this.processClient.off('error', () => {});
+        this.searchClient.off('error', () => {
+        });
 
-        this.searchClient.off('error', () => {});
+        this.discoveryClient.off('error', () => {
+        });
 
-        this.discoveryClient.off('error', () => {});
-
-        this.gsClient.off('error', () => {});
+        this.gsClient.off('error', () => {
+        });
 
         this.contentClient.on('error', (error: any) => {
             this.errorHandler(error);
@@ -198,7 +216,7 @@ export class AlfrescoApi {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            },                     () => {
+            }, () => {
                 console.log('login OAUTH error');
             });
 
@@ -211,7 +229,7 @@ export class AlfrescoApi {
 
                 processPromise.then((ticketBpm) => {
                     this.config.ticketBpm = ticketBpm;
-                },                  () => {
+                }, () => {
                     console.log('login BPM error');
                 });
 
@@ -223,7 +241,7 @@ export class AlfrescoApi {
                     this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
 
                     this.config.ticketEcm = ticketEcm;
-                },                  () => {
+                }, () => {
                     console.log('login ECM error');
                 });
 
@@ -316,7 +334,7 @@ export class AlfrescoApi {
                 let contentPromise = this.contentAuth.logout();
                 contentPromise.then(() => {
                     this.config.ticket = undefined;
-                },                  () => {
+                }, () => {
                 });
 
                 return contentPromise;
