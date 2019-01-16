@@ -358,7 +358,7 @@ export class AlfrescoApiClient {
      */
     callCustomApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
                   contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
-        let url = this.buildUrlCustomBasePath(path, '', pathParams);
+        let url = this.buildUrlCustomBasePath('', path, pathParams);
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
                                 contentTypes, accepts, returnType, contextRoot, responseType, url);
