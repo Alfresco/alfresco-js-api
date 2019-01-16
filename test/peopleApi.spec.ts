@@ -31,7 +31,7 @@ describe('PeopleApi', function () {
         peopleApiService.createPerson(personBodyCreate).then(function () {
                 done();
             },
-            function (error) {
+                                                             function (error) {
                 console.error(error);
             });
 

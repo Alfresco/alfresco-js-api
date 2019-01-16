@@ -144,7 +144,7 @@ export class ContentAuth extends AlfrescoApiClient {
                     promise.emit('success');
                     resolve(data.entry.id);
                 },
-                (error) => {
+                                               (error) => {
                     if (error.status === 401) {
                         promise.emit('unauthorized');
                     }
