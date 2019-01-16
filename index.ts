@@ -37,3 +37,4 @@ export { Storage } from './src/storage';
 export { AlfrescoApi } from './src/alfrescoApi';
 export { AlfrescoApiCompatibility } from './src/alfrescoApiCompatibility';
 export { AlfrescoApiClient } from './src/alfrescoApiClient';
+export { AlfrescoApiConfig } from './src/alfrescoApiConfig';
