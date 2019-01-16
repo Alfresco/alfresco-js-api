@@ -37,7 +37,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     discovery: any;
     jwks: any;
     authentications: Authentication = new Authentication({
-        'oauth2': { accessToken: '' }, type: 'oauth2',  'basicAuth': {}
+        'oauth2': { accessToken: '' }, type: 'oauth2', 'basicAuth': {}
     });
 
     iFameHashListner: any;
@@ -159,7 +159,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                     this.emit('discovery', this.discovery);
                     this.storage.setItem('discovery', JSON.stringify(this.discovery));
                     resolve(discovery);
-                },     (error) => {
+                }, (error) => {
                     reject(error.error);
                 });
             } else {
@@ -192,7 +192,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                         this.emit('jwks', jwks);
                         this.storage.setItem('jwks', JSON.stringify(jwks));
                         resolve(jwks);
-                    },     (error) => {
+                    }, (error) => {
                         reject(error.error);
                     });
                 } else {
@@ -236,7 +236,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                         this.silentRefresh();
                         resolve(accessToken);
                     }
-                },                                 (error) => {
+                }, (error) => {
                     reject('Validation JWT error' + error);
                 });
             } else {
@@ -307,7 +307,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.storage.setItem('id_token_stored_at', Date.now().toString());
     }
 
-    storeAccessToken(accessToken: string, expiresIn: number) {
+    storeAccessToken(accessToken: string, expiresIn: number, refreshToken?: string) {
         this.storage.setItem('access_token', accessToken);
 
         const expiresInMilliSeconds = expiresIn * 1000;
@@ -316,7 +316,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
         this.storage.setItem('access_token_expires_in', expiresAt);
         this.storage.setItem('access_token_stored_at', Date.now().toString());
-        this.setToken(accessToken, null);
+        this.setToken(accessToken, refreshToken);
     }
 
     saveUsername(username: string) {
@@ -520,7 +520,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
-        },         this.config.oauth2.refreshTokenTimeout);
+        }, this.config.oauth2.refreshTokenTimeout);
     }
 
     removeHashFromSilentIframe() {
@@ -601,8 +601,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         ).then(
             (data: any) => {
                 this.saveUsername(username);
-                this.setToken(data.access_token, data.refresh_token);
-                this.storeAccessToken(data.access_token, data.expires_in);
+                this.storeAccessToken(data.access_token, data.expires_in, data.refresh_token);
                 resolve(data);
             },
             (error) => {
@@ -670,6 +669,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.authentications.oauth2.refreshToken = refreshToken;
         this.authentications.basicAuth.password = null;
         this.token = token;
+
         this.emit('token_issued');
     }
 

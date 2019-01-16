@@ -186,6 +186,7 @@ export class ProcessAuth extends AlfrescoApiClient {
     setTicket(ticket: string) {
         this.authentications.basicAuth.ticket = ticket;
         this.authentications.basicAuth.password = null;
+        this.config.ticketBpm = ticket;
         this.storage.setItem('ticket-BPM', ticket);
         this.ticket = ticket;
     }
@@ -195,6 +196,7 @@ export class ProcessAuth extends AlfrescoApiClient {
         this.authentications.basicAuth.ticket = null;
         this.authentications.basicAuth.password = null;
         this.authentications.basicAuth.username = null;
+        this.config.ticketBpm = null;
         this.ticket = null;
     }
 

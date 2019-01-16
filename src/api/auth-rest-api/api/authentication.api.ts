@@ -108,7 +108,7 @@ For example using Javascript:
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/tickets', 'GET',
+            '/tickets/-me-', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts, TicketEntry);
     }

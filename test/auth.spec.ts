@@ -271,7 +271,7 @@ describe('Auth', function () {
                     });
                 });
 
-                it('should rais an error event if a failin call is executed', function (done) {
+                it('should emit an error event if a failing call is executed', function (done) {
                     this.alfrescoJsApi.on('error', () => {
                         done();
                     });

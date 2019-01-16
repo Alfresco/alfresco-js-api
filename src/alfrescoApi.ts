@@ -65,44 +65,16 @@ export class AlfrescoApi {
         }
 
         this.storage = new Storage();
+        this.config = new AlfrescoApiConfig(config);
+        this.clientsFactory();
 
-        this.config = {
-            hostEcm: config.hostEcm || 'http://127.0.0.1:8080',
-            hostBpm: config.hostBpm || 'http://127.0.0.1:9999',
-            oauth2: config.oauth2,
-            authType: config.authType || 'BASIC',
-            contextRoot: config.contextRoot || 'alfresco',
-            contextRootBpm: config.contextRootBpm || 'activiti-app',
-            provider: config.provider || 'ECM',
-            ticketEcm: config.ticketEcm,
-            ticketBpm: config.ticketBpm,
-            accessToken: config.accessToken,
-            disableCsrf: config.disableCsrf || false,
-            domainPrefix: config.domainPrefix || '',
-            withCredentials: config.withCredentials || false
-        };
-
-        this.contentPrivateClient = new ContentClient(this.config, '/api/-default-/private/alfresco/versions/1');
-        this.contentClient = new ContentClient(this.config, '/api/-default-/public/alfresco/versions/1');
-        this.authClient = new ContentClient(this.config, '/api/-default-/public/authentication/versions/1');
-        this.searchClient = new ContentClient(this.config, '/api/-default-/public/search/versions/1');
-        this.discoveryClient = new ContentClient(this.config, '/api');
-        this.gsClient = new ContentClient(this.config, '/api/-default-/public/gs/versions/1');
         this.processClient = new ProcessClient(this.config);
 
         this.errorListeners();
 
         if (this.isOauthConfiguration()) {
             this.oauth2Auth = Oauth2Auth.getInstance(this.config);
-
-            this.oauth2Auth.on('token_issued', () => {
-                if (this.config.provider === 'ALL' || this.config.provider == 'ECM') {
-                    let authContentApi: AuthenticationApi = new AuthenticationApi(this);
-                    authContentApi.getTicket().then((ticketEntry: TicketEntry) => {
-                        this.config.ticketEcm = ticketEntry.entry.id;
-                    });
-                }
-            });
+            this.exchangeTokenForAlfTicket();
 
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
@@ -112,6 +84,62 @@ export class AlfrescoApi {
         }
 
         return config;
+    }
+
+    private clientsFactory() {
+        if (!this.contentClient) {
+            this.contentPrivateClient = new ContentClient(this.config, '/api/-default-/private/alfresco/versions/1');
+        } else {
+            this.contentPrivateClient.setConfig(this.config, '/api/-default-/private/alfresco/versions/1');
+        }
+
+        if (!this.contentClient) {
+            this.contentClient = new ContentClient(this.config, '/api/-default-/public/alfresco/versions/1');
+        } else {
+            this.contentClient.setConfig(this.config, '/api/-default-/public/alfresco/versions/1');
+        }
+
+        if (!this.authClient) {
+            this.authClient = new ContentClient(this.config, '/api/-default-/public/authentication/versions/1');
+        } else {
+            this.authClient.setConfig(this.config, '/api/-default-/public/alfresco/versions/1');
+        }
+
+        if (!this.searchClient) {
+            this.searchClient = new ContentClient(this.config, '/api/-default-/public/search/versions/1');
+        } else {
+            this.searchClient.setConfig(this.config, '/api/-default-/public/search/versions/1');
+        }
+
+        if (!this.discoveryClient) {
+            this.discoveryClient = new ContentClient(this.config, '/api');
+        } else {
+            this.discoveryClient.setConfig(this.config, '/api');
+        }
+
+        if (!this.gsClient) {
+            this.gsClient = new ContentClient(this.config, '/api/-default-/public/gs/versions/1');
+        } else {
+            this.gsClient.setConfig(this.config, '/api/-default-/public/gs/versions/1');
+        }
+
+        if (!this.processClient) {
+            this.processClient = new ProcessClient(this.config);
+        } else {
+            this.processClient.setConfig(this.config);
+        }
+    }
+
+    private exchangeTokenForAlfTicket() {
+        this.oauth2Auth.once('token_issued', () => {
+            if (this.config.provider === 'ALL' || this.config.provider == 'ECM') {
+                let authContentApi: AuthenticationApi = new AuthenticationApi(this);
+                authContentApi.getTicket().then((ticketEntry: TicketEntry) => {
+                    this.oauth2Auth.config.ticketEcm = ticketEntry.entry.id;
+                    this.emit('ticket_exchanged');
+                });
+            }
+        });
     }
 
     errorListeners() {

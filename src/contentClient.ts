@@ -28,12 +28,13 @@ export class ContentClient extends AlfrescoApiClient {
     basePath: string;
     authentications: Authentication;
 
-    /**
-     * @param {Object} config
-     */
     constructor(config: AlfrescoApiConfig, servicePath: string) {
         super();
 
+        this.setConfig(config, servicePath);
+    }
+
+    setConfig(config: AlfrescoApiConfig, servicePath: string) {
         this.config = config;
         this.servicePath = servicePath;
 
@@ -48,7 +49,7 @@ export class ContentClient extends AlfrescoApiClient {
     /**
      * set the Authentications
      *
-     * @param {Object} authentications
+     * @param authentications
      * */
     setAuthentications(authentications: Authentication): any {
         this.authentications = authentications;

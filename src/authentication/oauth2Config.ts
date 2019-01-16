@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-export interface Oauth2Config {
+export class Oauth2Config {
     clientId: string;
     secret?: string;
     host: string;
@@ -26,4 +26,8 @@ export interface Oauth2Config {
     silentLogin?: boolean;
     redirectUriLogout?: string;
     redirectSilentIframeUri?: string;
+
+    constructor(input?: any) {
+        Object.assign(this, input);
+    }
 }

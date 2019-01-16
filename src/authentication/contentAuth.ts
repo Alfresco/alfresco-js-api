@@ -144,7 +144,7 @@ export class ContentAuth extends AlfrescoApiClient {
                     promise.emit('success');
                     resolve(data.entry.id);
                 },
-                                               (error) => {
+                (error) => {
                     if (error.status === 401) {
                         promise.emit('unauthorized');
                     }
@@ -190,6 +190,7 @@ export class ContentAuth extends AlfrescoApiClient {
     setTicket(ticket: string) {
         this.authentications.basicAuth.username = 'ROLE_TICKET';
         this.authentications.basicAuth.password = ticket;
+        this.config.ticketEcm = ticket;
         this.storage.setItem(this.ticketStorageLabel, ticket);
         this.ticket = ticket;
     }
@@ -205,6 +206,7 @@ export class ContentAuth extends AlfrescoApiClient {
         this.storage.removeItem(this.ticketStorageLabel);
         this.authentications.basicAuth.username = null;
         this.authentications.basicAuth.password = null;
+        this.config.ticketEcm = null;
         this.ticket = null;
     }
 
@@ -223,4 +225,5 @@ export class ContentAuth extends AlfrescoApiClient {
     }
 
 }
+
 Emitter(ContentAuth.prototype); // jshint ignore:line
