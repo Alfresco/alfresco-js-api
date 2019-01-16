@@ -38,7 +38,7 @@ describe('Activiti Process Instance Variables Api', function () {
             });
         });
 
-        it('should raise an error when API returns an error response', function (done) {
+        it('should emit an error when API returns an error response', function (done) {
 
             let processInstanceId = '111';
             this.variablesMock.addListProcessInstanceVariables500Response(processInstanceId);
@@ -66,7 +66,7 @@ describe('Activiti Process Instance Variables Api', function () {
             });
         });
 
-        it('should raise an error when API returns an error response', function (done) {
+        it('should emit an error when API returns an error response', function (done) {
 
             let processInstanceId = '111';
             this.variablesMock.addPostProcessInstanceVariables500Response(processInstanceId);
@@ -94,7 +94,7 @@ describe('Activiti Process Instance Variables Api', function () {
             });
         });
 
-        it('should raise an error when API returns an error response', function (done) {
+        it('should emit an error when API returns an error response', function (done) {
 
             let processInstanceId = '111';
             this.variablesMock.addPutProcessInstanceVariables500Response(processInstanceId);
@@ -126,7 +126,7 @@ describe('Activiti Process Instance Variables Api', function () {
             });
         });
 
-        it('should raise an error when API returns an error response', function (done) {
+        it('should emit an error when API returns an error response', function (done) {
 
             let processInstanceId = '111';
             let variableName = 'var1';
@@ -155,7 +155,7 @@ describe('Activiti Process Instance Variables Api', function () {
             });
         });
 
-        it('should raise an error when API returns an error response', function (done) {
+        it('should emit an error when API returns an error response', function (done) {
 
             let processInstanceId = '111';
             let variableName = 'var1';
@@ -184,7 +184,7 @@ describe('Activiti Process Instance Variables Api', function () {
             });
         });
 
-        it('should raise an error when API returns an error response', function (done) {
+        it('should emit an error when API returns an error response', function (done) {
 
             let processInstanceId = '111';
             let variableName = 'var1';

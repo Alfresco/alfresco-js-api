@@ -1,6 +1,7 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+
 let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 let CustomModelMock = require('../../test/mockObjects/mockAlfrescoApi').CustomModel;
 
@@ -29,10 +30,11 @@ describe('Custom Model Api', function () {
             this.customModelMock.get200AllCustomModel();
 
             this.alfrescoJsApi.core.customModelApi.getAllCustomModel().then(function () {
-                done();
-            },                                                              function (error) {
-                console.log('error' + error);
-            });
+                    done();
+                },
+                                                                            function (error) {
+                    console.log('error' + error);
+                });
         });
 
     });

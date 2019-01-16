@@ -336,11 +336,11 @@ export class NodesApi {
         return this.nodesApi.updateNode(nodeId, nodeBody, opts);
     }
 
-    getNodeInfo(nodeId, opts) {
+    getNodeInfo(nodeId: string, opts?: any): Promise<Node> {
         return new Promise((resolve, reject) => {
-            this.getNode(nodeId, opts).then(function (data) {
-                resolve(data.entry);
-            },                              function (error) {
+            this.getNode(nodeId, opts).then((nodeEntry: NodeEntry) => {
+                resolve(<any>nodeEntry.entry);
+            },                              (error) => {
                 reject(error);
             });
         });
@@ -350,25 +350,25 @@ export class NodesApi {
      * Delete node by ID, If the nodeId is a folder, then its children are also
      * Deleted permanent will not be possible recover it
      *
-     * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
+     * @param  nodeId The identifier of a node. You can also use one of these well-known aliases: -my- | -shared- | -root-
      *
-     * @returns {Promise} A promise that is resolved if the file is deleted and {error} if rejected.
+     * @returns A promise that is resolved if the file is deleted and {error} if rejected.
      */
-    deleteNodePermanent(nodeId) {
+    deleteNodePermanent(nodeId: string): Promise<any> {
         return this.deleteNode(nodeId, { permanent: true });
     }
 
     /**
      * Create a folder
      *
-     * @param {String} name - folder name
-     * @param {String} relativePath - The relativePath specifies the folder structure to create relative to the node identified by nodeId.
-     * @param {String} nodeId default value root.The identifier of a node where add the folder. You can also use one of these well-known aliases: -my- | -shared- | -root-
-     * @param {Object} opts Optional parameters
+     * @param name - folder name
+     * @param  relativePath - The relativePath specifies the folder structure to create relative to the node identified by nodeId.
+     * @param  nodeId default value root.The identifier of a node where add the folder. You can also use one of these well-known aliases: -my- | -shared- | -root-
+     * @param opts Optional parameters
      *
-     * @returns {Promise} A promise that is resolved if the folder is created and {error} if rejected.
+     * @returns  A promise that is resolved if the folder is created and {error} if rejected.
      */
-    createFolder(name, relativePath, nodeId, opts) {
+    createFolder(name: string, relativePath: string, nodeId: string, opts?: any): Promise<NodeEntry> {
         nodeId = nodeId || '-root-';
         let nodeBody = {
             'name': name,
@@ -389,7 +389,7 @@ export class NodesApi {
      *
      * @returns {Promise} A promise that is resolved if the folder is created and {error} if rejected.
      */
-    createFolderAutoRename(name, relativePath, nodeId, opts) {
+    createFolderAutoRename(name: string, relativePath: string, nodeId: string, opts?: any): Promise<NodeEntry> {
         let optAutoRename = { autoRename: true };
         opts = opts || {};
         opts = Object.assign(opts, optAutoRename);

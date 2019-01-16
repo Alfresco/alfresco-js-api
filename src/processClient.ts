@@ -30,6 +30,10 @@ export class ProcessClient extends AlfrescoApiClient {
     constructor(config: AlfrescoApiConfig) {
         super();
 
+        this.setConfig(config);
+    }
+
+    setConfig(config: AlfrescoApiConfig) {
         this.config = config;
 
         this.changeHost();

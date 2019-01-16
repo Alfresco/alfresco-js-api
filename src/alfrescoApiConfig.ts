@@ -19,18 +19,33 @@ import { Oauth2Config } from './authentication/oauth2Config';
 
 export class AlfrescoApiConfig {
     ticket?: string;
-    hostEcm?: string;
-    hostBpm?: string;
+    hostEcm?: string = 'http://127.0.0.1:8080';
+    hostBpm?: string = 'http://127.0.0.1:9999';
     hostOauth2?: string;
-    authType?: string;
+    authType?: string = 'BASIC';
     oauth2?: Oauth2Config;
-    contextRoot?: string;
-    contextRootBpm?: string;
-    domainPrefix?: string;
-    provider?: string;
+    contextRoot?: string = 'alfresco';
+    contextRootBpm?: string = 'activiti-app';
+    domainPrefix?: string = '';
+    provider?: string = 'ECM';
     ticketEcm?: string;
     ticketBpm?: string;
     accessToken?: string;
-    disableCsrf?: boolean;
-    withCredentials?: boolean;
+    disableCsrf?: boolean = false;
+    withCredentials?: boolean = false;
+
+    constructor(input?: any) {
+        Object.assign(this, input);
+
+        this.hostEcm = input.hostEcm ? input.hostEcm : 'http://127.0.0.1:8080';
+        this.hostBpm = input.hostBpm ? input.hostBpm : 'http://127.0.0.1:9999';
+        this.authType = input.authType ? input.authType : 'BASIC';
+        this.contextRoot = input.contextRoot ? input.contextRoot : 'alfresco';
+        this.contextRootBpm = input.contextRootBpm ? input.contextRootBpm : 'activiti-app';
+        this.provider = input.provider ? input.provider : 'ECM';
+        this.disableCsrf = input.disableCsrf ? input.disableCsrf : false;
+        this.domainPrefix = input.domainPrefix ? input.domainPrefix : '';
+        this.withCredentials = input.withCredentials ? input.withCredentials : false;
+        this.oauth2 = input.oauth2 ? new Oauth2Config(input.oauth2) : undefined;
+    }
 }

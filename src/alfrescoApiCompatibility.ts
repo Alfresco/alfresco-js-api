@@ -28,7 +28,7 @@ import { GS_CORE_APIS } from './api/gs-core-rest-api/api';
 import { SEARCH_APIS } from './api/search-rest-api/api';
 import { AUTH_APIS } from './api/auth-rest-api/api';
 
-import { ContentApi } from './contentApi';
+import { ContentApi } from './api/content-rest-api/api/content.api';
 import { WebscriptApi } from './api/content-rest-api/api/webscript.api';
 import { AlfrescoUpload } from './api-legacy/alfrescoUpload';
 import { NodesApi } from './api-legacy/content-rest-api/src/api/nodesApi';
@@ -129,7 +129,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
 
         this.nodes = this.node = this.core.nodesApi;
 
-        this.content = new ContentApi(this.contentAuth, this.contentClient);
+        this.content = new ContentApi(this);
         this.upload = new AlfrescoUpload(this);
         this.webScript = this.core.webscriptApi;
         this.bpmClient = this.processClient;
