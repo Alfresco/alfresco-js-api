@@ -514,7 +514,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     silentRefresh() {
         if (typeof document === 'undefined') {
-            throw new Error('Silent refresh supported only on browsers');
+            return;
         }
 
         setTimeout(() => {
