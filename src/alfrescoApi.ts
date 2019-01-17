@@ -87,7 +87,7 @@ export class AlfrescoApi {
     }
 
     private clientsFactory() {
-        if (!this.contentClient) {
+        if (!this.contentPrivateClient) {
             this.contentPrivateClient = new ContentClient(this.config, '/api/-default-/private/alfresco/versions/1');
         } else {
             this.contentPrivateClient.setConfig(this.config, '/api/-default-/private/alfresco/versions/1');
@@ -102,7 +102,7 @@ export class AlfrescoApi {
         if (!this.authClient) {
             this.authClient = new ContentClient(this.config, '/api/-default-/public/authentication/versions/1');
         } else {
-            this.authClient.setConfig(this.config, '/api/-default-/public/alfresco/versions/1');
+            this.authClient.setConfig(this.config, '/api/-default-/public/authentication/versions/1');
         }
 
         if (!this.searchClient) {
