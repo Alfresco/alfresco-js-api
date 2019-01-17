@@ -30,7 +30,7 @@ import { NodeBodyMove } from '../../../../api/content-rest-api/model/nodeBodyMov
  */
 export class ChildAssociationsApi {
 
-    nodesApi: NodesApi;
+    private nodesApi: NodesApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.nodesApi = new NodesApi(alfrescoApi);

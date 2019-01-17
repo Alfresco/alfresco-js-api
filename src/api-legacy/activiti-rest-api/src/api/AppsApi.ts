@@ -29,8 +29,8 @@ import { AppDefinitionPublishRepresentation } from '../../../../api/activiti-res
  */
 export class AppsApi {
 
-    runtimeAppDefinitionsApi: RuntimeAppDefinitionsApi;
-    appDefinitionsApi: AppDefinitionsApi;
+    private runtimeAppDefinitionsApi: RuntimeAppDefinitionsApi;
+    private appDefinitionsApi: AppDefinitionsApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.runtimeAppDefinitionsApi = new RuntimeAppDefinitionsApi(alfrescoApi);

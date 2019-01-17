@@ -26,7 +26,7 @@ import { ProcessInstanceQueryRepresentation } from '../../../../api/activiti-res
  */
 export class ProcessInstancesListingApi {
 
-    processInstancesApi: ProcessInstancesApi;
+    private processInstancesApi: ProcessInstancesApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.processInstancesApi = new ProcessInstancesApi(alfrescoApi);

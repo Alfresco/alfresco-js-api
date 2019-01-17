@@ -26,7 +26,7 @@ import { FavoritePaging } from '../../../../api/content-rest-api/model/favoriteP
  */
 export class FavoritesApi {
 
-    favoritesApi: NewFavoritesApi;
+    private favoritesApi: NewFavoritesApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.favoritesApi = new NewFavoritesApi(alfrescoApi);

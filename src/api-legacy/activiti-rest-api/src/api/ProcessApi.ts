@@ -34,8 +34,8 @@ import { ProcessInstanceAuditInfoRepresentation } from '../../../../api/activiti
  */
 export class ProcessApi {
 
-    processInstancesApi: ProcessInstancesApi;
-    processDefinitionsApi: ProcessDefinitionsApi;
+    private processInstancesApi: ProcessInstancesApi;
+    private processDefinitionsApi: ProcessDefinitionsApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.processInstancesApi = new ProcessInstancesApi(alfrescoApi);

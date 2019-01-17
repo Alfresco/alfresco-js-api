@@ -45,12 +45,12 @@ import { TaskUpdateRepresentation } from '../../../../api/activiti-rest-api/mode
  */
 export class TaskApi {
 
-    taskactionsApi: TaskActionsApi;
-    activitiCommentsApi: ActivitiCommentsApi;
-    checklistsApi: ChecklistsApi;
-    taskFormsApi: TaskFormsApi;
-    tasksApi: TasksApi;
-    contentApi: ContentApi;
+    private taskactionsApi: TaskActionsApi;
+    private activitiCommentsApi: ActivitiCommentsApi;
+    private checklistsApi: ChecklistsApi;
+    private taskFormsApi: TaskFormsApi;
+    private tasksApi: TasksApi;
+    private contentApi: ContentApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.taskactionsApi = new TaskActionsApi(alfrescoApi);

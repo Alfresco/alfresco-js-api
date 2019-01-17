@@ -26,8 +26,8 @@ import { ResultListDataRepresentationProcessContentRepresentation } from '../../
  */
 export class ContentApi {
 
-    contentApi: NewContentApi;
-    processInstancesApi: ProcessInstancesApi;
+    private contentApi: NewContentApi;
+    private processInstancesApi: ProcessInstancesApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.contentApi = new NewContentApi(alfrescoApi);

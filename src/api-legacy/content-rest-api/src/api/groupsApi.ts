@@ -30,7 +30,7 @@ import { GroupBodyCreate } from '../../../../api/content-rest-api/model/groupBod
  */
 export class GroupsApi {
 
-    groupsApi: NewGroupsApi;
+    private groupsApi: NewGroupsApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.groupsApi = new NewGroupsApi(alfrescoApi);

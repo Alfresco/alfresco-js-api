@@ -24,7 +24,7 @@ import { ResultListDataRepresentationLightUserRepresentation } from '../../../..
  */
 export class UsersWorkflowApi {
 
-    usersApi: UsersApi;
+    private usersApi: UsersApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.usersApi = new UsersApi(alfrescoApi);

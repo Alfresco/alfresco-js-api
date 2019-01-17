@@ -16,7 +16,6 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { RuntimeAppDefinitionsApi } from '../../../../api/activiti-rest-api/api/runtimeAppDefinitions.api';
 import { AppDefinitionsApi } from '../../../../api/activiti-rest-api/api/appDefinitions.api';
 import { AppDefinitionRepresentation } from '../../../../api/activiti-rest-api/model/appDefinitionRepresentation';
 import { AppDefinitionPublishRepresentation } from '../../../../api/activiti-rest-api/model/appDefinitionPublishRepresentation';
@@ -27,11 +26,9 @@ import { AppDefinitionUpdateResultRepresentation } from '../../../../api/activit
  */
 export class AppsDefinitionApi {
 
-    runtimeAppDefinitionsApi: RuntimeAppDefinitionsApi;
-    appDefinitionsApi: AppDefinitionsApi;
+    private appDefinitionsApi: AppDefinitionsApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.runtimeAppDefinitionsApi = new RuntimeAppDefinitionsApi(alfrescoApi);
         this.appDefinitionsApi = new AppDefinitionsApi(alfrescoApi);
     }
 

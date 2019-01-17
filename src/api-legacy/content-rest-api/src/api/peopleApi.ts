@@ -51,13 +51,13 @@ import { SiteRolePaging } from '../../../../api/content-rest-api/model/siteRoleP
  */
 export class PeopleApi {
 
-    networksApi: NetworksApi;
-    peopleApiNew: PeopleApiNew;
-    favoritesApi: FavoritesApi;
-    sitesApi: SitesApi;
-    activitiesApi: ActivitiesApi;
-    preferencesApi: PreferencesApi;
-    groupsApi: GroupsApi;
+    private networksApi: NetworksApi;
+    private peopleApiNew: PeopleApiNew;
+    private favoritesApi: FavoritesApi;
+    private sitesApi: SitesApi;
+    private activitiesApi: ActivitiesApi;
+    private preferencesApi: PreferencesApi;
+    private groupsApi: GroupsApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.networksApi = new NetworksApi(alfrescoApi);

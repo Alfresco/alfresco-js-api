@@ -33,7 +33,7 @@ import { SiteMembershipBodyUpdate } from '../../../../api/content-rest-api/model
  */
 export class SitesApi {
 
-    sitesApi: NewSitesApi;
+    private sitesApi: NewSitesApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.sitesApi = new NewSitesApi(alfrescoApi);

@@ -26,7 +26,7 @@ import { CommentBody } from '../../../../api/content-rest-api/model/commentBody'
  */
 export class CommentsApi {
 
-    commentsApi: NewCommentsApi;
+    private commentsApi: NewCommentsApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.commentsApi = new NewCommentsApi(alfrescoApi);

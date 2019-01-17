@@ -26,7 +26,7 @@ import { TagBody } from '../../../../api/content-rest-api/model/tagBody';
  */
 export class TagsApi  {
 
-    tagsApi: NewTagsApi;
+    private tagsApi: NewTagsApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.tagsApi = new NewTagsApi(alfrescoApi);

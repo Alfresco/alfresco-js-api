@@ -23,7 +23,7 @@ import { ContentApi } from '../../../../api/activiti-rest-api/api/content.api';
  */
 export class ContentRenditionApi {
 
-    contentApi: ContentApi;
+    private contentApi: ContentApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.contentApi = new ContentApi(alfrescoApi);

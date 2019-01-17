@@ -20,8 +20,8 @@ import { NodesApi } from '../../../../api/content-rest-api/api/nodes.api';
 import { SharedlinksApi } from '../../../../api/content-rest-api/api/sharedlinks.api';
 import { RenditionsApi } from '../../../../api/content-rest-api/api/renditions.api';
 import { SitesApi } from '../../../../api/content-rest-api/api/sites.api';
+
 import { TrashcanApi } from '../../../../api/content-rest-api/api/trashcan.api';
-import { QueriesApi } from '../../../../api/content-rest-api/api/queries.api';
 import { AssociationBody } from '../../../../api/content-rest-api/model/associationBody';
 import { AssociationEntry } from '../../../../api/content-rest-api/model/associationEntry';
 import { NodeEntry } from '../../../../api/content-rest-api/model/nodeEntry';
@@ -50,12 +50,11 @@ import { ChildAssociationBody } from '../../../../api/content-rest-api/model/chi
  */
 export class ChangesApi {
 
-    nodesApi: NodesApi;
-    sharedlinksApi: SharedlinksApi;
-    renditionsApi: RenditionsApi;
-    sitesApi: SitesApi;
-    trashcanApi: TrashcanApi;
-    queriesApi: QueriesApi;
+    private nodesApi: NodesApi;
+    private sharedlinksApi: SharedlinksApi;
+    private renditionsApi: RenditionsApi;
+    private sitesApi: SitesApi;
+    private trashcanApi: TrashcanApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.nodesApi = new NodesApi(alfrescoApi);
@@ -63,7 +62,6 @@ export class ChangesApi {
         this.renditionsApi = new RenditionsApi(alfrescoApi);
         this.sitesApi = new SitesApi(alfrescoApi);
         this.trashcanApi = new TrashcanApi(alfrescoApi);
-        this.queriesApi = new QueriesApi(alfrescoApi);
     }
 
     /**

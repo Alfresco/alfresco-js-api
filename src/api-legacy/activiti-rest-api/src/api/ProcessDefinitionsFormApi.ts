@@ -25,7 +25,7 @@ import { FormValueRepresentation } from '../../../../api/activiti-rest-api/model
  */
 export class ProcessDefinitionsFormApi {
 
-    processDefinitionsApi: ProcessDefinitionsApi;
+    private processDefinitionsApi: ProcessDefinitionsApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.processDefinitionsApi = new ProcessDefinitionsApi(alfrescoApi);

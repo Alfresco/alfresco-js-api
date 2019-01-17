@@ -26,7 +26,7 @@ import { RatingBody } from '../../../../api/content-rest-api/model/ratingBody';
  */
 export class RatingsApi  {
 
-    ratingsApi: NewRatingsApi;
+    private ratingsApi: NewRatingsApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.ratingsApi = new NewRatingsApi(alfrescoApi);

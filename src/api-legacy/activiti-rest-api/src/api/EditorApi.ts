@@ -28,7 +28,7 @@ import { ResultListDataRepresentationRuntimeFormRepresentation } from '../../../
  */
 export class EditorApi {
 
-    formModelsApi: FormModelsApi;
+    private formModelsApi: FormModelsApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.formModelsApi = new FormModelsApi(alfrescoApi);

@@ -28,8 +28,8 @@ import { ResultListDataRepresentationAlfrescoEndpointRepresentation } from '../.
  */
 export class AlfrescoApiActiviti {
 
-    integrationAlfrescoCloudApi: IntegrationAlfrescoCloudApi;
-    IntegrationAlfrescoOnPremiseApi: IntegrationAlfrescoOnPremiseApi;
+    private integrationAlfrescoCloudApi: IntegrationAlfrescoCloudApi;
+    private IntegrationAlfrescoOnPremiseApi: IntegrationAlfrescoOnPremiseApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.integrationAlfrescoCloudApi = new IntegrationAlfrescoCloudApi(alfrescoApi);

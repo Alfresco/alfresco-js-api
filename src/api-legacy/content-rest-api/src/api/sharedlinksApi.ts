@@ -29,7 +29,7 @@ import { RenditionEntry } from '../../../../api/content-rest-api/model/rendition
  */
 export class SharedlinksApi {
 
-    sharedlinksApi: NewSharedlinksApi;
+    private sharedlinksApi: NewSharedlinksApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.sharedlinksApi = new NewSharedlinksApi(alfrescoApi);

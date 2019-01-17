@@ -34,8 +34,8 @@ import { NodeBodyLock } from '../../../../api/content-rest-api/model/nodeBodyLoc
  */
 export class NodesApi {
 
-    nodesApi: NewNodesApi;
-    trashcanApi: TrashcanApi;
+    private nodesApi: NewNodesApi;
+    private trashcanApi: TrashcanApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.nodesApi = new NewNodesApi(alfrescoApi);

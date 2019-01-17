@@ -25,7 +25,7 @@ import { PersonNetworkPaging } from '../../../../api/content-rest-api/model/pers
  */
 export class NetworksApi {
 
-    networksApi: NewNetworksApi;
+    private networksApi: NewNetworksApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.networksApi = new NewNetworksApi(alfrescoApi);

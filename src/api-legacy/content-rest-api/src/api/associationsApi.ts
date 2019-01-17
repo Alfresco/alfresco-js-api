@@ -26,7 +26,7 @@ import { NodeAssociationPaging } from '../../../../api/content-rest-api/model/no
  */
 export class AssociationsApi {
 
-    nodesApi: NodesApi;
+    private nodesApi: NodesApi;
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.nodesApi = new NodesApi(alfrescoApi);
