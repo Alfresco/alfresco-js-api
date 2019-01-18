@@ -78,6 +78,6 @@ export class FavoritesApi {
      * @param {String} favoriteId The identifier of a favorite.
      */
     removeFavoriteSite(personId: string, favoriteId: string): Promise<any> {
-        return this.favoritesApi.deleteSiteFavorite(personId, favoriteId);
+        return this.favoritesApi.deleteFavorite(personId, favoriteId);
     }
 }
