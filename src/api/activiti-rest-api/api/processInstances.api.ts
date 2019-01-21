@@ -651,7 +651,7 @@ export class ProcessInstancesApi extends BaseApi {
      * Retrieve the process audit in the PDF format
      * @param {String} processInstanceId processId
      */
-    getProcessAuditPdf(processInstanceId: string): Promise<Blob> {
+    getProcessAuditPdf(processInstanceId: string): Promise<any> {
         let postBody = null;
 
         // verify the required parameter 'processId' is set

@@ -17,9 +17,9 @@
 
 export class File {
     absolute?: boolean;
-    absoluteFile?: Blob;
+    absoluteFile?: any;
     absolutePath?: string;
-    canonicalFile?: Blob;
+    canonicalFile?: any;
     canonicalPath?: string;
     directory?: boolean;
     file?: boolean;
@@ -27,7 +27,7 @@ export class File {
     hidden?: boolean;
     name?: string;
     parent?: string;
-    parentFile?: Blob;
+    parentFile?: any;
     path?: string;
     totalSpace?: number;
     usableSpace?: number;

@@ -136,7 +136,7 @@ export class AppDefinitionsApi extends BaseApi {
      * @param file file
      * @return Promise<AppDefinitionUpdateResultRepresentation>
      */
-    importAndPublishApp(file: Blob): Promise<AppDefinitionUpdateResultRepresentation> {
+    importAndPublishApp(file: any): Promise<AppDefinitionUpdateResultRepresentation> {
 
         let postBody = null;
 
@@ -173,7 +173,7 @@ export class AppDefinitionsApi extends BaseApi {
      * @param opts.renewIdmEntries Whether to renew user and group identifiers (default to false)
      * @return Promise<AppDefinitionRepresentation>
      */
-    importAppDefinition(file: Blob, opts?: any): Promise<AppDefinitionRepresentation> {
+    importAppDefinition(file: any, opts?: any): Promise<AppDefinitionRepresentation> {
         opts = opts || {};
         let postBody = null;
 
@@ -249,7 +249,7 @@ export class AppDefinitionsApi extends BaseApi {
      * @param updatedModel updatedModel |
      * @return Promise<AppDefinitionUpdateResultRepresentation>
      */
-    updateAppDefinition(modelId: number, updatedModel: AppDefinitionSaveRepresentation | Blob): Promise<any> {
+    updateAppDefinition(modelId: number, updatedModel: AppDefinitionSaveRepresentation | any): Promise<any> {
 
         let postBody = updatedModel;
 
@@ -272,7 +272,10 @@ export class AppDefinitionsApi extends BaseApi {
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
-        if (updatedModel instanceof Blob) {
+
+        if (!updatedModel['appDefinition']) {
+            contentTypes = ['multipart/form-data'];
+
             let formParams = {
                 'file': updatedModel
             };

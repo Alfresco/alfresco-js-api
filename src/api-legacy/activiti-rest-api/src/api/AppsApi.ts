@@ -53,7 +53,7 @@ export class AppsApi {
         return this.appDefinitionsApi.importAppDefinition(file);
     }
 
-    importNewAppDefinition(modelId: number, file: Blob): Promise<any> {
+    importNewAppDefinition(modelId: number, file: any): Promise<any> {
         return this.appDefinitionsApi.updateAppDefinition(modelId, file);
     }
 

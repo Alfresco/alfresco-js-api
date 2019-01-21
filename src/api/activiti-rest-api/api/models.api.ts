@@ -346,7 +346,7 @@ export class ModelsApi extends BaseApi {
         * @param file file
         * @return Promise<ModelRepresentation>
         */
-    importNewVersion(modelId: number, file: Blob): Promise<ModelRepresentation> {
+    importNewVersion(modelId: number, file: any): Promise<ModelRepresentation> {
 
         let postBody = null;
 
@@ -388,7 +388,7 @@ export class ModelsApi extends BaseApi {
         * @param file file
         * @return Promise<ModelRepresentation>
         */
-    importProcessModel(file: Blob): Promise<ModelRepresentation> {
+    importProcessModel(file: any): Promise<ModelRepresentation> {
 
         let postBody = null;
 

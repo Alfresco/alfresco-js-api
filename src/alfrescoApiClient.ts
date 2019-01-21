@@ -29,6 +29,7 @@ const superagent = superagent_;
 const process: any = {};
 
 declare const Buffer;
+declare const Blob;
 
 export class AlfrescoApiClient {
 

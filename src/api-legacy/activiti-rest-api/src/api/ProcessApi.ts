@@ -79,7 +79,7 @@ export class ProcessApi {
         return this.processInstancesApi.getTaskAuditLog(processInstanceId);
     }
 
-    getProcessAuditPdf(processInstanceId): Promise<Blob> {
+    getProcessAuditPdf(processInstanceId): Promise<any> {
         return this.processInstancesApi.getProcessAuditPdf(processInstanceId);
     }
 

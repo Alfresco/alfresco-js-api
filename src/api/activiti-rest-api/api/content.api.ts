@@ -35,7 +35,7 @@ export class ContentApi extends BaseApi {
      * @param opts.isRelatedContent isRelatedContent
      * @return Promise<RelatedContentRepresentation>
      */
-    createRelatedContentOnProcessInstance(processInstanceId: string, relatedContent: RelatedContentRepresentation | Blob, opts?: any): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnProcessInstance(processInstanceId: string, relatedContent: RelatedContentRepresentation | any, opts?: any): Promise<RelatedContentRepresentation> {
         opts = opts || {};
         if (processInstanceId === undefined || processInstanceId === null) {
             throw new Error("Required param 'processInstanceId' in createRelatedContentOnProcessInstance");
@@ -89,7 +89,7 @@ export class ContentApi extends BaseApi {
      * @param opts.isRelatedContent isRelatedContent
      * @return Promise<RelatedContentRepresentation>
      */
-    createRelatedContentOnTask(taskId: string, relatedContent: RelatedContentRepresentation | Blob, opts?: any): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnTask(taskId: string, relatedContent: RelatedContentRepresentation | any, opts?: any): Promise<RelatedContentRepresentation> {
         opts = opts || {};
         if (taskId === undefined || taskId === null) {
             throw new Error("Required param 'taskId' in createRelatedContentOnTask");
@@ -141,7 +141,7 @@ export class ContentApi extends BaseApi {
      * @param file file
      * @return Promise<RelatedContentRepresentation>
      */
-    createTemporaryRawRelatedContent(file: Blob): Promise<RelatedContentRepresentation> {
+    createTemporaryRawRelatedContent(file: any): Promise<RelatedContentRepresentation> {
 
         let postBody = null;
 

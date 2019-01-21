@@ -295,7 +295,7 @@ export class AdminTenantsApi extends BaseApi {
         * @param file file
         * @return Promise<ImageUploadRepresentation>
         */
-    uploadTenantLogo(tenantId: number, file: Blob): Promise<ImageUploadRepresentation> {
+    uploadTenantLogo(tenantId: number, file: any): Promise<ImageUploadRepresentation> {
 
         let postBody = null;
 

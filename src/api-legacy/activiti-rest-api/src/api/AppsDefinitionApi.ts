@@ -36,11 +36,11 @@ export class AppsDefinitionApi {
         return this.appDefinitionsApi.exportAppDefinition(modelId);
     }
 
-    importAppDefinition(file: Blob, opts?: any): Promise<AppDefinitionRepresentation> {
+    importAppDefinition(file: any, opts?: any): Promise<AppDefinitionRepresentation> {
         return this.appDefinitionsApi.importAppDefinition(file, opts);
     }
 
-    importNewAppDefinition(modelId: number, file: Blob): Promise<AppDefinitionRepresentation> {
+    importNewAppDefinition(modelId: number, file: any): Promise<AppDefinitionRepresentation> {
         return this.appDefinitionsApi.updateAppDefinition(modelId, file);
     }
 

@@ -69,7 +69,7 @@ export class UserProfileApi extends BaseApi {
         *
         * @return Promise<Blob>
         */
-    getProfilePicture(): Promise<Blob> {
+    getProfilePicture(): Promise<any> {
 
         let postBody = null;
 
@@ -180,7 +180,7 @@ export class UserProfileApi extends BaseApi {
         * @param file file
         * @return Promise<ImageUploadRepresentation>
         */
-    uploadProfilePicture(file: Blob): Promise<ImageUploadRepresentation> {
+    uploadProfilePicture(file: any): Promise<ImageUploadRepresentation> {
 
         let postBody = null;
 

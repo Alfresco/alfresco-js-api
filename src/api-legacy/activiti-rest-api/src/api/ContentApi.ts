@@ -38,19 +38,19 @@ export class ContentApi {
         return this.contentApi.createRelatedContentOnProcessInstance(processInstanceId, relatedContent, opts);
     }
 
-    createRelatedContentOnProcessInstance(processInstanceId: string, file: Blob, opts?: any): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnProcessInstance(processInstanceId: string, file: any, opts?: any): Promise<RelatedContentRepresentation> {
         return this.contentApi.createRelatedContentOnProcessInstance(processInstanceId, file, opts);
     }
 
-    createRelatedContentOnTaskPostBody(taskId: string, relatedContent: Blob, opts?: any): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnTaskPostBody(taskId: string, relatedContent: any, opts?: any): Promise<RelatedContentRepresentation> {
         return this.contentApi.createRelatedContentOnTask(taskId, relatedContent, opts);
     }
 
-    createRelatedContentOnTask(taskId: string, file: Blob, opts?: any): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnTask(taskId: string, file: any, opts?: any): Promise<RelatedContentRepresentation> {
         return this.contentApi.createRelatedContentOnTask(taskId, file, opts);
     }
 
-    createTemporaryRawRelatedContent(file: Blob): Promise<RelatedContentRepresentation> {
+    createTemporaryRawRelatedContent(file: any): Promise<RelatedContentRepresentation> {
         return this.contentApi.createTemporaryRawRelatedContent(file);
     }
 
