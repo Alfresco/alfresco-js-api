@@ -50,13 +50,17 @@ export class AlfrescoApi {
     once = Emitter.once;
     emit = Emitter.emit;
 
-    constructor() {
+    constructor(config?: AlfrescoApiConfig) {
         this.on = (new Emitter()).on;
         this.off = (new Emitter()).off;
         this.once = (new Emitter()).once;
         this.emit = (new Emitter()).emit;
 
         Emitter.call(this);
+
+        if(config){
+            this.setConfig(config);
+        }
     }
 
     setConfig(config: AlfrescoApiConfig) {

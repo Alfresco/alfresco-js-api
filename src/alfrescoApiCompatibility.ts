@@ -108,9 +108,8 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
     ecmClient: ContentClient;
 
     constructor(config: AlfrescoApiConfig) {
-        super();
+        super(config);
 
-        this.setConfig(config);
         this.initObjects();
     }
 

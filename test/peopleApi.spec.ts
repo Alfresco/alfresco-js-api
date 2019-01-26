@@ -11,8 +11,7 @@ describe('PeopleApi', function () {
     beforeEach(function () {
         this.peopleMock = new PeopleMock();
 
-        this.alfrescoApi = new AlfrescoApi();
-        this.alfrescoApi.setConfig({
+        this.alfrescoApi = new AlfrescoApi({
             hostEcm: 'http://127.0.0.1:8080'
         });
     });
