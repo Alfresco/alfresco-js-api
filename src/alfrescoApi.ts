@@ -50,13 +50,17 @@ export class AlfrescoApi {
     once = Emitter.once;
     emit = Emitter.emit;
 
-    constructor() {
+    constructor(config?: AlfrescoApiConfig) {
         this.on = (new Emitter()).on;
         this.off = (new Emitter()).off;
         this.once = (new Emitter()).once;
         this.emit = (new Emitter()).emit;
 
         Emitter.call(this);
+
+        if (config) {
+            this.setConfig(config);
+        }
     }
 
     setConfig(config: AlfrescoApiConfig) {
@@ -244,7 +248,7 @@ export class AlfrescoApi {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            },                     () => {
+            }, () => {
                 console.log('login OAUTH error');
             });
 
@@ -257,7 +261,7 @@ export class AlfrescoApi {
 
                 processPromise.then((ticketBpm) => {
                     this.config.ticketBpm = ticketBpm;
-                },                  () => {
+                }, () => {
                     console.log('login BPM error');
                 });
 
@@ -269,7 +273,7 @@ export class AlfrescoApi {
                     this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
 
                     this.config.ticketEcm = ticketEcm;
-                },                  () => {
+                }, () => {
                     console.log('login ECM error');
                 });
 
@@ -362,7 +366,7 @@ export class AlfrescoApi {
                 let contentPromise = this.contentAuth.logout();
                 contentPromise.then(() => {
                     this.config.ticket = undefined;
-                },                  () => {
+                }, () => {
                 });
 
                 return contentPromise;

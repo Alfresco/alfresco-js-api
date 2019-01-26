@@ -125,8 +125,7 @@ withCredentials| (Optional configuration for SSO, requires CORS on ECM) |false
 
 #### Example
 ```javascript
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({ provider:'ALL' });
+this.alfrescoApi = new AlfrescoApi({ provider:'ALL' });
         
 this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
     console.log('API called successfully Login in  BPM and ECM performed ');
@@ -180,24 +179,20 @@ With this authentication the ticket is not validated against the server
 ```javascript
 
 //Login ticket ECM
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',  hostEcm:'http://127.0.0.1:8080'});
+this.alfrescoApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',  hostEcm:'http://127.0.0.1:8080'});
 
 //Login ticket BPM
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({ ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostBpm:'http://127.0.0.1:9999'});
+this.alfrescoApi = new AlfrescoApi({ ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostBpm:'http://127.0.0.1:9999'});
 
 //Login ticket ECM and BPM
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostEcm:'http://127.0.0.1:8080',  hostBpm:'http://127.0.0.1:9999'});
+this.alfrescoApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostEcm:'http://127.0.0.1:8080',  hostBpm:'http://127.0.0.1:9999'});
 ```
 
 ### Login with Username and Password BPM
 
 #### Example
 ```javascript
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({ provider:'BPM' });
+this.alfrescoApi = new AlfrescoApi({ provider:'BPM' });
 
 this.alfrescoJsApi.login('admin', 'admin').then(function () {
     console.log('API called successfully Login in Activiti BPM performed ');
@@ -244,8 +239,7 @@ The api/js-api will automatically redirect you to the login page anf refresh the
 ##### Example
 
 ```javascript
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+this.alfrescoApi = new AlfrescoApi({
         oauth2: {
             host: 'HOST_OAUTH2_SERVER',
             clientId: 'YOUR_CLIENT_ID',
@@ -266,8 +260,7 @@ this.alfrescoJsApi.implicitLogin();
 ##### Example skip login form (implicitFlow)
 
 ```javascript
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+this.alfrescoApi = new AlfrescoApi({
         oauth2: {
             host: 'HOST_OAUTH2_SERVER',
             clientId: 'YOUR_CLIENT_ID',
@@ -291,8 +284,7 @@ If your auth endpoint is different from the standard one "/oauth/token" you can 
 
 ##### Example
 ```javascript
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+this.alfrescoApi = new AlfrescoApi({
         oauth2: {
             host: 'HOST_OAUTH2_SERVER',
             clientId: 'YOUR_CLIENT_ID',

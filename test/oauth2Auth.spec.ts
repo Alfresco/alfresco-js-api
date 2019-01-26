@@ -76,9 +76,7 @@ describe('Oauth2  test', function () {
             this.oauth2Mock.get200Response();
             this.oauth2Mock.get200Discovery();
             this.authResponseMock.get200ValidTicket();
-            let alfrescoApi = new AlfrescoApi();
-
-            alfrescoApi.setConfig(<AlfrescoApiConfig>{
+            let alfrescoApi = new AlfrescoApi(<AlfrescoApiConfig>{
                 hostEcm: 'http://myOauthUrl:30081',
                 oauth2: {
                     'host': 'http://myOauthUrl:30081/auth/realms/springboot',
