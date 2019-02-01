@@ -341,7 +341,7 @@ export class NodesApi {
         return new Promise((resolve, reject) => {
             this.getNode(nodeId, opts).then(
                 (nodeEntry: NodeEntry) => {
-                    resolve(<any>nodeEntry.entry);
+                    resolve(nodeEntry.entry);
                 },
                 (error) => {
                     reject(error);
