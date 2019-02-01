@@ -19,6 +19,7 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
 import { NodesApi as NewNodesApi } from '../../../../api/content-rest-api/api/nodes.api';
 import { TrashcanApi } from '../../../../api/content-rest-api';
 import { NodeEntry } from '../../../../api/content-rest-api/model/nodeEntry';
+import { Node } from '../../../../api/content-rest-api/model/node';
 import { DeletedNodeEntry } from '../../../../api/content-rest-api/model/deletedNodeEntry';
 import { DeletedNodesPaging } from '../../../../api/content-rest-api/model/deletedNodesPaging';
 import { NodeChildAssociationPaging } from '../../../../api/content-rest-api/model/nodeChildAssociationPaging';
@@ -338,11 +339,14 @@ export class NodesApi {
 
     getNodeInfo(nodeId: string, opts?: any): Promise<Node> {
         return new Promise((resolve, reject) => {
-            this.getNode(nodeId, opts).then((nodeEntry: NodeEntry) => {
-                resolve(<any>nodeEntry.entry);
-            },                              (error) => {
-                reject(error);
-            });
+            this.getNode(nodeId, opts).then(
+                (nodeEntry: NodeEntry) => {
+                    resolve(nodeEntry.entry);
+                },
+                (error) => {
+                    reject(error);
+                }
+            );
         });
     }
 
