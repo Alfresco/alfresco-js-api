@@ -33,7 +33,7 @@ export class RelatedContentRepresentation {
     source?: string;
     sourceId?: string;
     thumbnailStatus?: string;
-    contentBlob: Blob;
+    contentBlob?: Blob;
 
     constructor(input?: any) {
 
