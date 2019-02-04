@@ -305,6 +305,7 @@ export class ContentApi extends BaseApi {
         let contentTypes = ['application/json'];
         let accepts = ['application/json', '*/*'];
 
+
         if (renditionType) {
             return this.apiClient.callApi(
                 '/api/enterprise/content/{contentId}/rendition/{renditionType}', 'GET',
@@ -312,9 +313,9 @@ export class ContentApi extends BaseApi {
                 contentTypes, accepts);
         } else {
             return this.apiClient.callApi(
-                '/api/enterprise/content/{contentId}/raw', 'GET',
+            '/api/enterprise/content/{contentId}/raw', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts);
+                contentTypes, accepts,undefined, undefined,  'blob');
         }
     }
 
