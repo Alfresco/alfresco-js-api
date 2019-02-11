@@ -1,4 +1,4 @@
-# PermissionsInfo
+# .PermissionsInfo
 
 ## Properties
 Name | Type | Description | Notes

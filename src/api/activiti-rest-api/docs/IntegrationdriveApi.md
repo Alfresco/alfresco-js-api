@@ -1,4 +1,4 @@
-# IntegrationdriveApi
+# .IntegrationdriveApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -19,7 +19,7 @@ Returns Drive OAuth HTML Page
 ### Example
 ```javascript
 import IntegrationdriveApi from 'IntegrationdriveApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -52,7 +52,7 @@ List files and folders
 ### Example
 ```javascript
 import IntegrationdriveApi from 'IntegrationdriveApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -62,9 +62,9 @@ this.alfrescoApi.setConfig({
 let integrationdriveApi = new IntegrationdriveApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example //  | filter
-  'parent': parent_example //  | parent
-  'currentFolderOnly': true //  | currentFolderOnly
+  'filter': filter_example /*  | filter */
+  'parent': parent_example /*  | parent */
+  'currentFolderOnly': true /*  | currentFolderOnly */
 };
 
 integrationdriveApi.getFiles(opts).then((data) => {

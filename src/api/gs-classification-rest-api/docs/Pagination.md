@@ -1,4 +1,4 @@
-# Pagination
+# .Pagination
 
 ## Properties
 Name | Type | Description | Notes

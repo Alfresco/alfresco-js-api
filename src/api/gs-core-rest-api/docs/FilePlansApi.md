@@ -1,13 +1,13 @@
-# FilePlansApi
+# .FileplansApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createFilePlanCategories**](FilePlansApi.md#createFilePlanCategories) | **POST** /file-plans/{filePlanId}/categories | Create record categories for a file plan
-[**getFilePlan**](FilePlansApi.md#getFilePlan) | **GET** /file-plans/{filePlanId} | Get a file plan
-[**getFilePlanCategories**](FilePlansApi.md#getFilePlanCategories) | **GET** /file-plans/{filePlanId}/categories | List file plans's children
-[**updateFilePlan**](FilePlansApi.md#updateFilePlan) | **PUT** /file-plans/{filePlanId} | Update a file plan
+[**createFilePlanCategories**](FileplansApi.md#createFilePlanCategories) | **POST** /file-plans/{filePlanId}/categories | Create record categories for a file plan
+[**getFilePlan**](FileplansApi.md#getFilePlan) | **GET** /file-plans/{filePlanId} | Get a file plan
+[**getFilePlanCategories**](FileplansApi.md#getFilePlanCategories) | **GET** /file-plans/{filePlanId}/categories | List file plans's children
+[**updateFilePlan**](FileplansApi.md#updateFilePlan) | **PUT** /file-plans/{filePlanId} | Update a file plan
 
 
 <a name="createFilePlanCategories"></a>
@@ -77,25 +77,25 @@ JSON
 
 ### Example
 ```javascript
-import FilePlansApi from 'FilePlansApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import FileplansApi from 'FileplansApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let fileplansApi = new FilePlansApi(this.alfrescoApi);
+let fileplansApi = new FileplansApi(this.alfrescoApi);
 
 let opts = { 
-  'autoRename': true //  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-
-  'include':  //  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+  'autoRename': true /*  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+ */
+  'include':  /*  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -106,7 +106,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 fileplansApi.createFilePlanCategories(filePlanIdnodeBodyCreateopts).then((data) => {
@@ -162,22 +162,22 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import FilePlansApi from 'FilePlansApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import FileplansApi from 'FileplansApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let fileplansApi = new FilePlansApi(this.alfrescoApi);
+let fileplansApi = new FileplansApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  //  | Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
+  'include':  /*  | Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -188,7 +188,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 fileplansApi.getFilePlan(filePlanIdopts).then((data) => {
@@ -240,28 +240,28 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import FilePlansApi from 'FilePlansApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import FileplansApi from 'FileplansApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let fileplansApi = new FilePlansApi(this.alfrescoApi);
+let fileplansApi = new FileplansApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56 //  | The maximum number of items to return in the list.
-  'include':  //  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list. */
+  'maxItems': 56 /*  | The maximum number of items to return in the list. */
+  'include':  /*  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * hasRetentionSchedule
 * path
 * properties
-
-  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId**
-  'fields':  //  | A list of field names.
+ */
+  'includeSource': true /*  | Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId** */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -272,7 +272,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 fileplansApi.getFilePlanCategories(filePlanIdopts).then((data) => {
@@ -338,22 +338,22 @@ JSON
 
 ### Example
 ```javascript
-import FilePlansApi from 'FilePlansApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import FileplansApi from 'FileplansApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let fileplansApi = new FilePlansApi(this.alfrescoApi);
+let fileplansApi = new FileplansApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  //  | Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
+  'include':  /*  | Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -364,7 +364,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 fileplansApi.updateFilePlan(filePlanIdfilePlanBodyUpdateopts).then((data) => {

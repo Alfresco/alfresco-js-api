@@ -1,4 +1,4 @@
-# RecordCategory
+# .RecordCategory
 
 ## Properties
 Name | Type | Description | Notes
@@ -10,9 +10,9 @@ The character . must not be used at the end of the name.
  | [default to null]
 **nodeType** | **string** |  | [default to null]
 **hasRetentionSchedule** | **boolean** | Indicates if the record category has a retention schedule defined | [optional] [default to null]
-**modifiedAt** | [**Date**](Date.md) |  | [default to null]
+**modifiedAt** | [**DateAlfresco**](DateAlfresco.md) |  | [default to null]
 **modifiedByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
-**createdAt** | [**Date**](Date.md) |  | [default to null]
+**createdAt** | [**DateAlfresco**](DateAlfresco.md) |  | [default to null]
 **createdByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
 **aspectNames** | **string[]** |  | [optional] [default to null]
 **properties** | **any** |  | [optional] [default to null]

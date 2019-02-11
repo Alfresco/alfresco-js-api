@@ -1,4 +1,4 @@
-# UserIdentifierRepresentation
+# .UserIdentifierRepresentation
 
 ## Properties
 Name | Type | Description | Notes

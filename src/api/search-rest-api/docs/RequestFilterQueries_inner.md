@@ -1,4 +1,4 @@
-# RequestFilterQueriesInner
+# .RequestFilterQueriesInner
 
 ## Properties
 Name | Type | Description | Notes

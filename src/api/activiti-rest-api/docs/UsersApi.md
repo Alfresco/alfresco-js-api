@@ -1,4 +1,4 @@
-# UsersApi
+# .UsersApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -23,7 +23,7 @@ Typical action is updating/reset password
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -61,7 +61,7 @@ Stream user profile picture
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -98,7 +98,7 @@ Get a user
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -137,7 +137,7 @@ A common use case is that a user wants to select another user (eg. when assignin
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -147,14 +147,14 @@ this.alfrescoApi.setConfig({
 let usersApi = new UsersApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example //  | filter
-  'email': email_example //  | email
-  'externalId': externalId_example //  | externalId
-  'externalIdCaseInsensitive': externalIdCaseInsensitive_example //  | externalIdCaseInsensitive
-  'excludeTaskId': excludeTaskId_example //  | excludeTaskId
-  'excludeProcessId': excludeProcessId_example //  | excludeProcessId
-  'groupId': 789 //  | groupId
-  'tenantId': 789 //  | tenantId
+  'filter': filter_example /*  | filter */
+  'email': email_example /*  | email */
+  'externalId': externalId_example /*  | externalId */
+  'externalIdCaseInsensitive': externalIdCaseInsensitive_example /*  | externalIdCaseInsensitive */
+  'excludeTaskId': excludeTaskId_example /*  | excludeTaskId */
+  'excludeProcessId': excludeProcessId_example /*  | excludeProcessId */
+  'groupId': 789 /*  | groupId */
+  'tenantId': 789 /*  | tenantId */
 };
 
 usersApi.getUsers(opts).then((data) => {
@@ -191,7 +191,7 @@ Request a password reset
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -228,7 +228,7 @@ Update a user
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

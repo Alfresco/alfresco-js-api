@@ -1,14 +1,14 @@
-# ClassificationReasonsApi
+# .ClassificationreasonsApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createClassificationReason**](ClassificationReasonsApi.md#createClassificationReason) | **POST** /classification-reasons | Create a classification reason
-[**deleteClassificationReason**](ClassificationReasonsApi.md#deleteClassificationReason) | **DELETE** /classification-reasons/{classificationReasonId} | Delete a classification reason
-[**listClassificationReasons**](ClassificationReasonsApi.md#listClassificationReasons) | **GET** /classification-reasons | List all classification reasons
-[**showClassificationReasonById**](ClassificationReasonsApi.md#showClassificationReasonById) | **GET** /classification-reasons/{classificationReasonId} | Get classification reason information
-[**updateClassificationReason**](ClassificationReasonsApi.md#updateClassificationReason) | **PUT** /classification-reasons/{classificationReasonId} | Update a classification reason
+[**createClassificationReason**](ClassificationreasonsApi.md#createClassificationReason) | **POST** /classification-reasons | Create a classification reason
+[**deleteClassificationReason**](ClassificationreasonsApi.md#deleteClassificationReason) | **DELETE** /classification-reasons/{classificationReasonId} | Delete a classification reason
+[**listClassificationReasons**](ClassificationreasonsApi.md#listClassificationReasons) | **GET** /classification-reasons | List all classification reasons
+[**showClassificationReasonById**](ClassificationreasonsApi.md#showClassificationReasonById) | **GET** /classification-reasons/{classificationReasonId} | Get classification reason information
+[**updateClassificationReason**](ClassificationreasonsApi.md#updateClassificationReason) | **PUT** /classification-reasons/{classificationReasonId} | Update a classification reason
 
 
 <a name="createClassificationReason"></a>
@@ -64,15 +64,15 @@ JSON
 
 ### Example
 ```javascript
-import ClassificationReasonsApi from 'ClassificationReasonsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import ClassificationreasonsApi from 'ClassificationreasonsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationreasonsApi = new ClassificationReasonsApi(this.alfrescoApi);
+let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
 
 
 classificationreasonsApi.createClassificationReason(classificationReason).then((data) => {
@@ -103,15 +103,15 @@ Deletes the classification reason  **classificationReasonId**. You can't delete 
 
 ### Example
 ```javascript
-import ClassificationReasonsApi from 'ClassificationReasonsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import ClassificationreasonsApi from 'ClassificationreasonsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationreasonsApi = new ClassificationReasonsApi(this.alfrescoApi);
+let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
 
 
 classificationreasonsApi.deleteClassificationReason(classificationReasonId).then(() => {
@@ -142,20 +142,20 @@ Gets all classification reasons.
 
 ### Example
 ```javascript
-import ClassificationReasonsApi from 'ClassificationReasonsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import ClassificationreasonsApi from 'ClassificationreasonsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationreasonsApi = new ClassificationReasonsApi(this.alfrescoApi);
+let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56 //  | The maximum number of items to return in the list.
-  'fields':  //  | A list of field names.
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list. */
+  'maxItems': 56 /*  | The maximum number of items to return in the list. */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -166,7 +166,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 classificationreasonsApi.listClassificationReasons(opts).then((data) => {
@@ -210,15 +210,15 @@ Gets the classification reason  **classificationReasonId**.
 
 ### Example
 ```javascript
-import ClassificationReasonsApi from 'ClassificationReasonsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import ClassificationreasonsApi from 'ClassificationreasonsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationreasonsApi = new ClassificationReasonsApi(this.alfrescoApi);
+let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
 
 
 classificationreasonsApi.showClassificationReasonById(classificationReasonId).then((data) => {
@@ -249,15 +249,15 @@ Updates the classification reason with id **classificationReasonId**. For exampl
 
 ### Example
 ```javascript
-import ClassificationReasonsApi from 'ClassificationReasonsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import ClassificationreasonsApi from 'ClassificationreasonsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationreasonsApi = new ClassificationReasonsApi(this.alfrescoApi);
+let classificationreasonsApi = new ClassificationreasonsApi(this.alfrescoApi);
 
 
 classificationreasonsApi.updateClassificationReason(classificationReasonIdclassificationReason).then((data) => {

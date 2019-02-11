@@ -1,4 +1,4 @@
-# Person
+# .Person
 
 ## Properties
 Name | Type | Description | Notes
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **company** | [**Company**](Company.md) |  | [optional] [default to null]
 **mobile** | **string** |  | [optional] [default to null]
 **telephone** | **string** |  | [optional] [default to null]
-**statusUpdatedAt** | [**Date**](Date.md) |  | [optional] [default to null]
+**statusUpdatedAt** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **userStatus** | **string** |  | [optional] [default to null]
 **enabled** | **boolean** |  | [default to null]
 **emailNotificationsEnabled** | **boolean** |  | [optional] [default to null]

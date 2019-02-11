@@ -1,4 +1,4 @@
-# RuntimeappdefinitionsApi
+# .RuntimeappdefinitionsApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -20,7 +20,7 @@ Deploying an app allows the user to see it on his/her landing page. Apps must be
 ### Example
 ```javascript
 import RuntimeappdefinitionsApi from 'RuntimeappdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -57,7 +57,7 @@ Get a runtime app
 ### Example
 ```javascript
 import RuntimeappdefinitionsApi from 'RuntimeappdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -96,7 +96,7 @@ When a user logs in into Alfresco Process Services Suite, a landing page is disp
 ### Example
 ```javascript
 import RuntimeappdefinitionsApi from 'RuntimeappdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

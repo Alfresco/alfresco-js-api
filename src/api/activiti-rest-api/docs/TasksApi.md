@@ -1,4 +1,4 @@
-# TasksApi
+# .TasksApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -10,10 +10,10 @@ Method | HTTP request | Description
 [**deleteTask**](TasksApi.md#deleteTask) | **DELETE** /enterprise/tasks/{taskId} | Delete a task
 [**filterTasks**](TasksApi.md#filterTasks) | **POST** /enterprise/tasks/filter | Filter a list of tasks
 [**getIdentityLinkType**](TasksApi.md#getIdentityLinkType) | **GET** /enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type} | Get a user or group involvement with a task
-[**getIdentityLinksForFamily**](TasksApi.md#getIdentityLinksForFamily) | **GET** /enterprise/tasks/{taskId}/identitylinks/{family} | List either the users or groups involved with a process instance
 [**getIdentityLinks**](TasksApi.md#getIdentityLinks) | **GET** /enterprise/tasks/{taskId}/identitylinks | getIdentityLinks
-[**getTaskAuditLog**](TasksApi.md#getTaskAuditLog) | **GET** /enterprise/tasks/{taskId}/audit | Get the audit log for a task
+[**getIdentityLinksForFamily**](TasksApi.md#getIdentityLinksForFamily) | **GET** /enterprise/tasks/{taskId}/identitylinks/{family} | List either the users or groups involved with a process instance
 [**getTask**](TasksApi.md#getTask) | **GET** /enterprise/tasks/{taskId} | Get a task
+[**getTaskAuditLog**](TasksApi.md#getTaskAuditLog) | **GET** /enterprise/tasks/{taskId}/audit | Get the audit log for a task
 [**listHistoricTasks**](TasksApi.md#listHistoricTasks) | **POST** /enterprise/historic-tasks/query | Query historic tasks
 [**listTasks**](TasksApi.md#listTasks) | **POST** /enterprise/tasks/query | List tasks
 [**updateTask**](TasksApi.md#updateTask) | **PUT** /enterprise/tasks/{taskId} | Update a task
@@ -28,7 +28,7 @@ List the users and groups involved with a task
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -68,7 +68,7 @@ A standalone task is one which is not associated with any process instance.
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -105,7 +105,7 @@ Remove a user or group involvement from a task
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -145,7 +145,7 @@ Delete a task
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -182,7 +182,7 @@ Filter a list of tasks
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -219,7 +219,7 @@ Get a user or group involvement with a task
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -250,6 +250,43 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
+<a name="getIdentityLinks"></a>
+# **getIdentityLinks**
+> IdentityLinkRepresentation getIdentityLinks(taskId)
+
+getIdentityLinks
+
+### Example
+```javascript
+import TasksApi from 'TasksApi';
+import { AlfrescoApi } from '@alfresco/js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let tasksApi = new TasksApi(this.alfrescoApi);
+
+
+tasksApi.getIdentityLinks(taskId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **taskId** | **string**| taskId | 
+
+### Return type
+
+[**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
+
 <a name="getIdentityLinksForFamily"></a>
 # **getIdentityLinksForFamily**
 > IdentityLinkRepresentation getIdentityLinksForFamily(taskIdfamily)
@@ -259,7 +296,7 @@ List either the users or groups involved with a process instance
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -288,80 +325,6 @@ Name | Type | Description  | Notes
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
-<a name="getIdentityLinks"></a>
-# **getIdentityLinks**
-> IdentityLinkRepresentation getIdentityLinks(taskId)
-
-getIdentityLinks
-
-### Example
-```javascript
-import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let tasksApi = new TasksApi(this.alfrescoApi);
-
-
-tasksApi.getIdentityLinks(taskId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **taskId** | **string**| taskId | 
-
-### Return type
-
-[**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
-
-<a name="getTaskAuditLog"></a>
-# **getTaskAuditLog**
-> TaskAuditInfoRepresentation getTaskAuditLog(taskId)
-
-Get the audit log for a task
-
-### Example
-```javascript
-import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let tasksApi = new TasksApi(this.alfrescoApi);
-
-
-tasksApi.getTaskAuditLog(taskId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **taskId** | **string**| taskId | 
-
-### Return type
-
-[**TaskAuditInfoRepresentation**](TaskAuditInfoRepresentation.md)
-
 <a name="getTask"></a>
 # **getTask**
 > TaskRepresentation getTask(taskId)
@@ -371,7 +334,7 @@ Get a task
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -399,6 +362,43 @@ Name | Type | Description  | Notes
 
 [**TaskRepresentation**](TaskRepresentation.md)
 
+<a name="getTaskAuditLog"></a>
+# **getTaskAuditLog**
+> TaskAuditInfoRepresentation getTaskAuditLog(taskId)
+
+Get the audit log for a task
+
+### Example
+```javascript
+import TasksApi from 'TasksApi';
+import { AlfrescoApi } from '@alfresco/js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let tasksApi = new TasksApi(this.alfrescoApi);
+
+
+tasksApi.getTaskAuditLog(taskId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **taskId** | **string**| taskId | 
+
+### Return type
+
+[**TaskAuditInfoRepresentation**](TaskAuditInfoRepresentation.md)
+
 <a name="listHistoricTasks"></a>
 # **listHistoricTasks**
 > ResultListDataRepresentationTaskRepresentation listHistoricTasks(queryRequest)
@@ -408,7 +408,7 @@ Query historic tasks
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -445,7 +445,7 @@ List tasks
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -484,7 +484,7 @@ You can edit only name, description and dueDate (ISO 8601 string).
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

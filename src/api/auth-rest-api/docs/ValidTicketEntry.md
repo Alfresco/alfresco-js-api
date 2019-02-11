@@ -1,4 +1,4 @@
-# ValidTicketEntry
+# .ValidTicketEntry
 
 ## Properties
 Name | Type | Description | Notes

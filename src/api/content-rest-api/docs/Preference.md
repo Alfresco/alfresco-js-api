@@ -1,4 +1,4 @@
-# Preference
+# .Preference
 
 ## Properties
 Name | Type | Description | Notes

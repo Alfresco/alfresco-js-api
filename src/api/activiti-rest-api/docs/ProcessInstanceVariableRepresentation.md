@@ -1,4 +1,4 @@
-# ProcessInstanceVariableRepresentation
+# .ProcessInstanceVariableRepresentation
 
 ## Properties
 Name | Type | Description | Notes

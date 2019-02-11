@@ -1,4 +1,4 @@
-# AccountRepresentation
+# .AccountRepresentation
 
 ## Properties
 Name | Type | Description | Notes

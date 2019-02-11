@@ -1,4 +1,4 @@
-# GlobalDateFormatRepresentation
+# .GlobalDateFormatRepresentation
 
 ## Properties
 Name | Type | Description | Notes

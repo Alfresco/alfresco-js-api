@@ -1,4 +1,4 @@
-# RecordCategoryChildPagingList
+# .RecordCategoryChildPagingList
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# RequestFacetQueriesInner
+# .RequestFacetQueriesInner
 
 ## Properties
 Name | Type | Description | Notes

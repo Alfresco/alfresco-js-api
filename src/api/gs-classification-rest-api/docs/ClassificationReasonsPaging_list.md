@@ -1,4 +1,4 @@
-# ClassificationReasonsPagingList
+# .ClassificationReasonsPagingList
 
 ## Properties
 Name | Type | Description | Notes

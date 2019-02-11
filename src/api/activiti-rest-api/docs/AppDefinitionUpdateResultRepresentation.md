@@ -1,4 +1,4 @@
-# AppDefinitionUpdateResultRepresentation
+# .AppDefinitionUpdateResultRepresentation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# AlfrescoContentRepresentation
+# .AlfrescoContentRepresentation
 
 ## Properties
 Name | Type | Description | Notes

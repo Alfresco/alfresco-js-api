@@ -1,4 +1,4 @@
-# RatingPagingList
+# .RatingPagingList
 
 ## Properties
 Name | Type | Description | Notes

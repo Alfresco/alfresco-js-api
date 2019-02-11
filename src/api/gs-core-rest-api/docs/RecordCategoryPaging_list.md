@@ -1,4 +1,4 @@
-# RecordCategoryPagingList
+# .RecordCategoryPagingList
 
 ## Properties
 Name | Type | Description | Notes

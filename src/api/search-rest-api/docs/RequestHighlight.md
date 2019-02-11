@@ -1,4 +1,4 @@
-# RequestHighlight
+# .RequestHighlight
 
 ## Properties
 Name | Type | Description | Notes

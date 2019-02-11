@@ -1,4 +1,4 @@
-# TaskvariablesApi
+# .TaskvariablesApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -21,7 +21,7 @@ Create variables
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -59,7 +59,7 @@ Create or update variables
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -96,7 +96,7 @@ Delete a variable
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -106,7 +106,7 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 let opts = { 
-  'scope': scope_example //  | scope
+  'scope': scope_example /*  | scope */
 };
 
 taskvariablesApi.deleteVariable(taskIdvariableNameopts).then(() => {
@@ -138,7 +138,7 @@ Get a variable
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -148,7 +148,7 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 let opts = { 
-  'scope': scope_example //  | scope
+  'scope': scope_example /*  | scope */
 };
 
 taskvariablesApi.getVariable(taskIdvariableNameopts).then((data) => {
@@ -180,7 +180,7 @@ List variables
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -190,7 +190,7 @@ this.alfrescoApi.setConfig({
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 let opts = { 
-  'scope': scope_example //  | scope
+  'scope': scope_example /*  | scope */
 };
 
 taskvariablesApi.getVariables(taskIdopts).then((data) => {
@@ -221,7 +221,7 @@ Update a variable
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

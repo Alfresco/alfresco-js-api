@@ -1,4 +1,4 @@
-# ProcessInstanceFilterRequestRepresentation
+# .ProcessInstanceFilterRequestRepresentation
 
 ## Properties
 Name | Type | Description | Notes

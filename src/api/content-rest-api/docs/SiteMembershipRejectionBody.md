@@ -1,4 +1,4 @@
-# SiteMembershipRejectionBody
+# .SiteMembershipRejectionBody
 
 ## Properties
 Name | Type | Description | Notes

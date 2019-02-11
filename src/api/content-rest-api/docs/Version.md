@@ -1,4 +1,4 @@
-# Version
+# .Version
 
 ## Properties
 Name | Type | Description | Notes
@@ -11,7 +11,7 @@ The character . must not be used at the end of the name.
 **nodeType** | **string** |  | [default to null]
 **isFolder** | **boolean** |  | [default to null]
 **isFile** | **boolean** |  | [default to null]
-**modifiedAt** | [**Date**](Date.md) |  | [default to null]
+**modifiedAt** | [**DateAlfresco**](DateAlfresco.md) |  | [default to null]
 **modifiedByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
 **content** | [**ContentInfo**](ContentInfo.md) |  | [optional] [default to null]
 **aspectNames** | **string[]** |  | [optional] [default to null]

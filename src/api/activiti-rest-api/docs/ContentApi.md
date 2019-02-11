@@ -1,19 +1,19 @@
-# ContentApi
+# .ContentApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createRelatedContentOnProcessInstance**](ContentApi.md#createRelatedContentOnProcessInstance) | **POST** /enterprise/process-instances/{processInstanceId}/content | Attach existing content to a process instance
-[**createRelatedContentOnProcessInstance**](ContentApi.md#createRelatedContentOnProcessInstance) | **POST** /enterprise/process-instances/{processInstanceId}/raw-content | Upload content and attach to a process instance
+[**createRelatedContentOnProcessInstance_0**](ContentApi.md#createRelatedContentOnProcessInstance_0) | **POST** /enterprise/process-instances/{processInstanceId}/raw-content | Upload content and attach to a process instance
 [**createRelatedContentOnTask**](ContentApi.md#createRelatedContentOnTask) | **POST** /enterprise/tasks/{taskId}/content | Attach existing content to a task
-[**createRelatedContentOnTask**](ContentApi.md#createRelatedContentOnTask) | **POST** /enterprise/tasks/{taskId}/raw-content | Upload content and attach to a task
+[**createRelatedContentOnTask_0**](ContentApi.md#createRelatedContentOnTask_0) | **POST** /enterprise/tasks/{taskId}/raw-content | Upload content and attach to a task
 [**createTemporaryRawRelatedContent**](ContentApi.md#createTemporaryRawRelatedContent) | **POST** /enterprise/content/raw | Upload content and create a local representation
 [**createTemporaryRelatedContent**](ContentApi.md#createTemporaryRelatedContent) | **POST** /enterprise/content | Create a local representation of content from a remote repository
 [**deleteContent**](ContentApi.md#deleteContent) | **DELETE** /enterprise/content/{contentId} | Remove a local content representation
 [**getContent**](ContentApi.md#getContent) | **GET** /enterprise/content/{contentId} | Get a local content representation
-[**getRawContent**](ContentApi.md#getRawContent) | **GET** /enterprise/content/{contentId}/rendition/{renditionType} | Stream content rendition
 [**getRawContent**](ContentApi.md#getRawContent) | **GET** /enterprise/content/{contentId}/raw | Stream content from a local content representation
+[**getRawContent_0**](ContentApi.md#getRawContent_0) | **GET** /enterprise/content/{contentId}/rendition/{renditionType} | Stream content rendition
 [**getRelatedContentForProcessInstance**](ContentApi.md#getRelatedContentForProcessInstance) | **GET** /enterprise/process-instances/{processInstanceId}/content | List content attached to a process instance
 [**getRelatedContentForTask**](ContentApi.md#getRelatedContentForTask) | **GET** /enterprise/tasks/{taskId}/content | List content attached to a task
 
@@ -27,7 +27,7 @@ Attach existing content to a process instance
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -37,7 +37,7 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true //  | isRelatedContent
+  'isRelatedContent': true /*  | isRelatedContent */
 };
 
 contentApi.createRelatedContentOnProcessInstance(processInstanceIdrelatedContentopts).then((data) => {
@@ -60,16 +60,16 @@ Name | Type | Description  | Notes
 
 [**RelatedContentRepresentation**](RelatedContentRepresentation.md)
 
-<a name="createRelatedContentOnProcessInstance"></a>
-# **createRelatedContentOnProcessInstance**
-> RelatedContentRepresentation createRelatedContentOnProcessInstance(processInstanceIdfileopts)
+<a name="createRelatedContentOnProcessInstance_0"></a>
+# **createRelatedContentOnProcessInstance_0**
+> RelatedContentRepresentation createRelatedContentOnProcessInstance_0(processInstanceIdfileopts)
 
 Upload content and attach to a process instance
 
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -79,10 +79,10 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true //  | isRelatedContent
+  'isRelatedContent': true /*  | isRelatedContent */
 };
 
-contentApi.createRelatedContentOnProcessInstance(processInstanceIdfileopts).then((data) => {
+contentApi.createRelatedContentOnProcessInstance_0(processInstanceIdfileopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -111,7 +111,7 @@ Attach existing content to a task
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -121,7 +121,7 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true //  | isRelatedContent
+  'isRelatedContent': true /*  | isRelatedContent */
 };
 
 contentApi.createRelatedContentOnTask(taskIdrelatedContentopts).then((data) => {
@@ -144,16 +144,16 @@ Name | Type | Description  | Notes
 
 [**RelatedContentRepresentation**](RelatedContentRepresentation.md)
 
-<a name="createRelatedContentOnTask"></a>
-# **createRelatedContentOnTask**
-> RelatedContentRepresentation createRelatedContentOnTask(taskIdfileopts)
+<a name="createRelatedContentOnTask_0"></a>
+# **createRelatedContentOnTask_0**
+> RelatedContentRepresentation createRelatedContentOnTask_0(taskIdfileopts)
 
 Upload content and attach to a task
 
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -163,10 +163,10 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true //  | isRelatedContent
+  'isRelatedContent': true /*  | isRelatedContent */
 };
 
-contentApi.createRelatedContentOnTask(taskIdfileopts).then((data) => {
+contentApi.createRelatedContentOnTask_0(taskIdfileopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -195,7 +195,7 @@ Upload content and create a local representation
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -232,7 +232,7 @@ Create a local representation of content from a remote repository
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -269,7 +269,7 @@ Remove a local content representation
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -306,7 +306,7 @@ Get a local content representation
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -336,44 +336,6 @@ Name | Type | Description  | Notes
 
 <a name="getRawContent"></a>
 # **getRawContent**
-> getRawContent(contentIdrenditionType)
-
-Stream content rendition
-
-### Example
-```javascript
-import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let contentApi = new ContentApi(this.alfrescoApi);
-
-
-contentApi.getRawContent(contentIdrenditionType).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **contentId** | **number**| contentId | 
- **renditionType** | **string**| renditionType | 
-
-### Return type
-
-null (empty response body)
-
-<a name="getRawContent"></a>
-# **getRawContent**
 > getRawContent(contentId)
 
 Stream content from a local content representation
@@ -381,7 +343,7 @@ Stream content from a local content representation
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -409,6 +371,44 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
+<a name="getRawContent_0"></a>
+# **getRawContent_0**
+> getRawContent_0(contentIdrenditionType)
+
+Stream content rendition
+
+### Example
+```javascript
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from '@alfresco/js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let contentApi = new ContentApi(this.alfrescoApi);
+
+
+contentApi.getRawContent_0(contentIdrenditionType).then(() => {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **contentId** | **number**| contentId | 
+ **renditionType** | **string**| renditionType | 
+
+### Return type
+
+null (empty response body)
+
 <a name="getRelatedContentForProcessInstance"></a>
 # **getRelatedContentForProcessInstance**
 > ResultListDataRepresentationRelatedContentRepresentation getRelatedContentForProcessInstance(processInstanceIdopts)
@@ -418,7 +418,7 @@ List content attached to a process instance
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -428,7 +428,7 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true //  | isRelatedContent
+  'isRelatedContent': true /*  | isRelatedContent */
 };
 
 contentApi.getRelatedContentForProcessInstance(processInstanceIdopts).then((data) => {
@@ -459,7 +459,7 @@ List content attached to a task
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -469,7 +469,7 @@ this.alfrescoApi.setConfig({
 let contentApi = new ContentApi(this.alfrescoApi);
 
 let opts = { 
-  'isRelatedContent': true //  | isRelatedContent
+  'isRelatedContent': true /*  | isRelatedContent */
 };
 
 contentApi.getRelatedContentForTask(taskIdopts).then((data) => {

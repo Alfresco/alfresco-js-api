@@ -1,4 +1,4 @@
-# ResetPasswordRepresentation
+# .ResetPasswordRepresentation
 
 ## Properties
 Name | Type | Description | Notes

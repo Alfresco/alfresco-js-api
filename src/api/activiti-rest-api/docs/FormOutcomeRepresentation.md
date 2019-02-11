@@ -1,4 +1,4 @@
-# FormOutcomeRepresentation
+# .FormOutcomeRepresentation
 
 ## Properties
 Name | Type | Description | Notes

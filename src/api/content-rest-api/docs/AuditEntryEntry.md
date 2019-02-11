@@ -1,4 +1,4 @@
-# AuditEntryEntry
+# .AuditEntryEntry
 
 ## Properties
 Name | Type | Description | Notes

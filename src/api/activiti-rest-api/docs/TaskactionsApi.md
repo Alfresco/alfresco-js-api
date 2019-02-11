@@ -1,4 +1,4 @@
-# TaskactionsApi
+# .TaskactionsApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -12,8 +12,8 @@ Method | HTTP request | Description
 [**involveGroup**](TaskactionsApi.md#involveGroup) | **POST** /enterprise/tasks/{taskId}/groups/{groupId} | Involve a group with a task
 [**involveUser**](TaskactionsApi.md#involveUser) | **PUT** /enterprise/tasks/{taskId}/action/involve | Involve a user with a task
 [**removeForm**](TaskactionsApi.md#removeForm) | **DELETE** /enterprise/tasks/{taskId}/action/remove-form | Remove a form from a task
-[**removeInvolvedUser**](TaskactionsApi.md#removeInvolvedUser) | **DELETE** /enterprise/tasks/{taskId}/groups/{groupId} | Remove an involved group from a task
 [**removeInvolvedUser**](TaskactionsApi.md#removeInvolvedUser) | **PUT** /enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
+[**removeInvolvedUser_0**](TaskactionsApi.md#removeInvolvedUser_0) | **DELETE** /enterprise/tasks/{taskId}/groups/{groupId} | Remove an involved group from a task
 [**resolveTask**](TaskactionsApi.md#resolveTask) | **PUT** /enterprise/tasks/{taskId}/action/resolve | Resolve a task
 [**unclaimTask**](TaskactionsApi.md#unclaimTask) | **PUT** /enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
 
@@ -27,7 +27,7 @@ Assign a task to a user
 ### Example
 ```javascript
 import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -65,7 +65,7 @@ Attach a form to a task
 ### Example
 ```javascript
 import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -105,7 +105,7 @@ To claim a task (in case the task is assigned to a group)
 ### Example
 ```javascript
 import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -144,7 +144,7 @@ Use this endpoint to complete a standalone task or task without a form
 ### Example
 ```javascript
 import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -181,7 +181,7 @@ Delegate a task
 ### Example
 ```javascript
 import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -219,7 +219,7 @@ Involve a group with a task
 ### Example
 ```javascript
 import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -257,7 +257,7 @@ Involve a user with a task
 ### Example
 ```javascript
 import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -295,7 +295,7 @@ Remove a form from a task
 ### Example
 ```javascript
 import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -325,44 +325,6 @@ null (empty response body)
 
 <a name="removeInvolvedUser"></a>
 # **removeInvolvedUser**
-> removeInvolvedUser(taskIdgroupId)
-
-Remove an involved group from a task
-
-### Example
-```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
-
-
-taskactionsApi.removeInvolvedUser(taskIdgroupId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **taskId** | **string**| taskId | 
- **groupId** | **string**| groupId | 
-
-### Return type
-
-null (empty response body)
-
-<a name="removeInvolvedUser"></a>
-# **removeInvolvedUser**
 > removeInvolvedUser(taskIduserIdentifier)
 
 Remove an involved user from a task
@@ -370,7 +332,7 @@ Remove an involved user from a task
 ### Example
 ```javascript
 import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -399,6 +361,44 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
+<a name="removeInvolvedUser_0"></a>
+# **removeInvolvedUser_0**
+> removeInvolvedUser_0(taskIdgroupId)
+
+Remove an involved group from a task
+
+### Example
+```javascript
+import TaskactionsApi from 'TaskactionsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
+
+
+taskactionsApi.removeInvolvedUser_0(taskIdgroupId).then(() => {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **taskId** | **string**| taskId | 
+ **groupId** | **string**| groupId | 
+
+### Return type
+
+null (empty response body)
+
 <a name="resolveTask"></a>
 # **resolveTask**
 > resolveTask(taskId)
@@ -408,7 +408,7 @@ Resolve a task
 ### Example
 ```javascript
 import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -447,7 +447,7 @@ To unclaim a task (in case the task was assigned to a group)
 ### Example
 ```javascript
 import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

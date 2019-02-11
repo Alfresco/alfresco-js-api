@@ -1,4 +1,4 @@
-# AssociationInfo
+# .AssociationInfo
 
 ## Properties
 Name | Type | Description | Notes

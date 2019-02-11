@@ -1,4 +1,4 @@
-# AppdefinitionsApi
+# .AppdefinitionsApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -8,9 +8,9 @@ Method | HTTP request | Description
 [**exportAppDefinition**](AppdefinitionsApi.md#exportAppDefinition) | **GET** /enterprise/app-definitions/{modelId}/export | Export an app definition
 [**getAppDefinition**](AppdefinitionsApi.md#getAppDefinition) | **GET** /enterprise/app-definitions/{modelId} | Get an app definition
 [**importAndPublishApp**](AppdefinitionsApi.md#importAndPublishApp) | **POST** /enterprise/app-definitions/publish-app | importAndPublishApp
-[**importAndPublishApp**](AppdefinitionsApi.md#importAndPublishApp) | **POST** /enterprise/app-definitions/{modelId}/publish-app | importAndPublishApp
+[**importAndPublishApp_0**](AppdefinitionsApi.md#importAndPublishApp_0) | **POST** /enterprise/app-definitions/{modelId}/publish-app | importAndPublishApp
 [**importAppDefinition**](AppdefinitionsApi.md#importAppDefinition) | **POST** /enterprise/app-definitions/import | Import a new app definition
-[**updateAppDefinition**](AppdefinitionsApi.md#importAppDefinition) | **POST** /enterprise/app-definitions/{modelId}/import | Update the content of an existing app
+[**importAppDefinition_0**](AppdefinitionsApi.md#importAppDefinition_0) | **POST** /enterprise/app-definitions/{modelId}/import | Update the content of an existing app
 [**publishAppDefinition**](AppdefinitionsApi.md#publishAppDefinition) | **POST** /enterprise/app-definitions/{modelId}/publish | Publish an app definition
 [**updateAppDefinition**](AppdefinitionsApi.md#updateAppDefinition) | **PUT** /enterprise/app-definitions/{modelId} | Update an app definition
 
@@ -24,7 +24,7 @@ deleteAppDefinition
 ### Example
 ```javascript
 import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -63,7 +63,7 @@ This will return a zip file containing the app definition model and all related 
 ### Example
 ```javascript
 import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -100,7 +100,7 @@ Get an app definition
 ### Example
 ```javascript
 import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -137,7 +137,7 @@ importAndPublishApp
 ### Example
 ```javascript
 import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -165,16 +165,16 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionUpdateResultRepresentation**](AppDefinitionUpdateResultRepresentation.md)
 
-<a name="importAndPublishApp"></a>
-# **importAndPublishApp**
-> AppDefinitionUpdateResultRepresentation importAndPublishApp(modelIdfile)
+<a name="importAndPublishApp_0"></a>
+# **importAndPublishApp_0**
+> AppDefinitionUpdateResultRepresentation importAndPublishApp_0(modelIdfile)
 
 importAndPublishApp
 
 ### Example
 ```javascript
 import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -184,7 +184,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.importAndPublishApp(modelIdfile).then((data) => {
+appdefinitionsApi.importAndPublishApp_0(modelIdfile).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -214,7 +214,7 @@ Allows a zip file to be uploaded containing an app definition and any number of 
 ### Example
 ```javascript
 import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -224,7 +224,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 let opts = { 
-  'renewIdmEntries': renewIdmEntries_example //  | Whether to renew user and group identifiers
+  'renewIdmEntries': renewIdmEntries_example /*  | Whether to renew user and group identifiers */
 };
 
 appdefinitionsApi.importAppDefinition(fileopts).then((data) => {
@@ -246,9 +246,9 @@ Name | Type | Description  | Notes
 
 [**AppDefinitionRepresentation**](AppDefinitionRepresentation.md)
 
-<a name="updateAppDefinition"></a>
-# **importAppDefinition**
-> updateAppDefinition importAppDefinition(modelIdfile)
+<a name="importAppDefinition_0"></a>
+# **importAppDefinition_0**
+> AppDefinitionRepresentation importAppDefinition_0(modelIdfile)
 
 Update the content of an existing app
 
@@ -257,7 +257,7 @@ Imports an app inside an existing app definition and creates a new version<p>Bef
 ### Example
 ```javascript
 import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -267,7 +267,7 @@ this.alfrescoApi.setConfig({
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
-appdefinitionsApi.updateAppDefinition(modelIdfile).then((data) => {
+appdefinitionsApi.importAppDefinition_0(modelIdfile).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -297,7 +297,7 @@ Publishing an app definition makes it available for use. The application must no
 ### Example
 ```javascript
 import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -335,7 +335,7 @@ Update an app definition
 ### Example
 ```javascript
 import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

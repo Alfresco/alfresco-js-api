@@ -1,4 +1,4 @@
-# RMSiteEntry
+# .RMSiteEntry
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# ResultListDataRepresentationDecisionTaskRepresentation
+# .ResultListDataRepresentationDecisionTaskRepresentation
 
 ## Properties
 Name | Type | Description | Notes

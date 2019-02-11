@@ -1,4 +1,4 @@
-# PublishIdentityInfoRepresentation
+# .PublishIdentityInfoRepresentation
 
 ## Properties
 Name | Type | Description | Notes

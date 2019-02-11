@@ -1,4 +1,4 @@
-# ResultListDataRepresentationBoxContent
+# .ResultListDataRepresentationBoxContent
 
 ## Properties
 Name | Type | Description | Notes

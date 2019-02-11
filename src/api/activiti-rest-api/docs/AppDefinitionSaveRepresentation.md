@@ -1,4 +1,4 @@
-# AppDefinitionSaveRepresentation
+# .AppDefinitionSaveRepresentation
 
 ## Properties
 Name | Type | Description | Notes

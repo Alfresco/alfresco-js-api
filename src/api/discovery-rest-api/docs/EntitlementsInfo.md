@@ -1,4 +1,4 @@
-# EntitlementsInfo
+# .EntitlementsInfo
 
 ## Properties
 Name | Type | Description | Notes

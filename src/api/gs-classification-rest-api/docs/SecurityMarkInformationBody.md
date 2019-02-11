@@ -1,4 +1,4 @@
-# SecurityMarkInformationBody
+# .SecurityMarkInformationBody
 
 ## Properties
 Name | Type | Description | Notes

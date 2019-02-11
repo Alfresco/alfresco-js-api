@@ -1,4 +1,4 @@
-# PeopleApi
+# .PeopleApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
@@ -49,7 +49,7 @@ JSON
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -59,7 +59,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  //  | A list of field names.
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -70,7 +70,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 peopleApi.createPerson(personBodyCreateopts).then((data) => {
@@ -121,7 +121,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -166,7 +166,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -176,7 +176,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 let opts = { 
-  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
+  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -185,13 +185,13 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
-
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
+ */
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
-
-  'placeholder': true //  | If **true** and there is no avatar for this **personId**
+ */
+  'placeholder': true /*  | If **true** and there is no avatar for this **personId**
 then the placeholder image is returned, rather than a 404 response.
-
+ */
 };
 
 peopleApi.getAvatarImage(personIdopts).then(() => {
@@ -217,7 +217,7 @@ for example, certain image files and PDF files.
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
  | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
+ **ifModifiedSince** | **DateAlfresco**| Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
  | [optional] 
  **placeholder** | **boolean**| If **true** and there is no avatar for this **personId**
@@ -242,7 +242,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -252,7 +252,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  //  | A list of field names.
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -263,7 +263,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 peopleApi.getPerson(personIdopts).then((data) => {
@@ -320,7 +320,7 @@ You can use any of the following fields to order the results:
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -330,26 +330,26 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ */
+  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-  'include':  //  | Returns additional information about the person. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the person. The following optional fields can be requested:
 * properties
 * aspectNames
 * capabilities
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -360,7 +360,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 peopleApi.listPeople(opts).then((data) => {
@@ -440,7 +440,7 @@ JSON
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -493,7 +493,7 @@ JSON
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -543,7 +543,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -611,7 +611,7 @@ JSON
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -621,7 +621,7 @@ this.alfrescoApi.setConfig({
 let peopleApi = new PeopleApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  //  | A list of field names.
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -632,7 +632,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 peopleApi.updatePerson(personIdpersonBodyUpdateopts).then((data) => {

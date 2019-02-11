@@ -1,4 +1,4 @@
-# RuntimeDecisionTableRepresentation
+# .RuntimeDecisionTableRepresentation
 
 ## Properties
 Name | Type | Description | Notes

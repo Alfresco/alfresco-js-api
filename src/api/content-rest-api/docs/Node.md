@@ -1,4 +1,4 @@
-# Node
+# .Node
 
 ## Properties
 Name | Type | Description | Notes
@@ -11,9 +11,9 @@ The character . must not be used at the end of the name.
 **isFolder** | **boolean** |  | [default to null]
 **isFile** | **boolean** |  | [default to null]
 **isLocked** | **boolean** |  | [optional] [default to null]
-**modifiedAt** | [**Date**](Date.md) |  | [default to null]
+**modifiedAt** | [**DateAlfresco**](DateAlfresco.md) |  | [default to null]
 **modifiedByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
-**createdAt** | [**Date**](Date.md) |  | [default to null]
+**createdAt** | [**DateAlfresco**](DateAlfresco.md) |  | [default to null]
 **createdByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
 **parentId** | **string** |  | [optional] [default to null]
 **isLink** | **boolean** |  | [optional] [default to null]

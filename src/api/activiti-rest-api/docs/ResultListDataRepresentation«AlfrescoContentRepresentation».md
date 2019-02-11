@@ -1,4 +1,4 @@
-# ResultListDataRepresentationAlfrescoContentRepresentation
+# .ResultListDataRepresentationAlfrescoContentRepresentation
 
 ## Properties
 Name | Type | Description | Notes

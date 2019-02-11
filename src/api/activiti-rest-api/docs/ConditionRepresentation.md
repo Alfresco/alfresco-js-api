@@ -1,4 +1,4 @@
-# ConditionRepresentation
+# .ConditionRepresentation
 
 ## Properties
 Name | Type | Description | Notes

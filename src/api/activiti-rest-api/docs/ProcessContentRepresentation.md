@@ -1,4 +1,4 @@
-# ProcessContentRepresentation
+# .ProcessContentRepresentation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# SharedLinkEntry
+# .SharedLinkEntry
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# GroupMemberPaging
+# .GroupMemberPaging
 
 ## Properties
 Name | Type | Description | Notes

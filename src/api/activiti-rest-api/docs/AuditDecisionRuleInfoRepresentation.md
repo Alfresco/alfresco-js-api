@@ -1,4 +1,4 @@
-# AuditDecisionRuleInfoRepresentation
+# .AuditDecisionRuleInfoRepresentation
 
 ## Properties
 Name | Type | Description | Notes

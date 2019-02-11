@@ -1,4 +1,4 @@
-# ResultListDataRepresentationAppDeploymentRepresentation
+# .ResultListDataRepresentationAppDeploymentRepresentation
 
 ## Properties
 Name | Type | Description | Notes

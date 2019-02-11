@@ -1,4 +1,4 @@
-# RenditionsApi
+# .RenditionsApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
@@ -31,7 +31,7 @@ JSON
 ### Example
 ```javascript
 import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -74,7 +74,7 @@ Gets the rendition information for **renditionId** of file **nodeId**.
 ### Example
 ```javascript
 import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -117,7 +117,7 @@ Gets the rendition content for **renditionId** of file **nodeId**.
 ### Example
 ```javascript
 import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -127,7 +127,7 @@ this.alfrescoApi.setConfig({
 let renditionsApi = new RenditionsApi(this.alfrescoApi);
 
 let opts = { 
-  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
+  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -136,17 +136,17 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
-
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
+ */
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
-
-  'range': range_example //  | The Range header indicates the part of a document that the server should return.
+ */
+  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
-
-  'placeholder': true //  | If **true** and there is no rendition for this **nodeId** and **renditionId**,
+ */
+  'placeholder': true /*  | If **true** and there is no rendition for this **nodeId** and **renditionId**,
 then the placeholder image for the mime type of this rendition is returned, rather
 than a 404 response.
-
+ */
 };
 
 renditionsApi.getRenditionContent(nodeIdrenditionIdopts).then(() => {
@@ -173,7 +173,7 @@ for example, certain image files and PDF files.
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
  | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
+ **ifModifiedSince** | **DateAlfresco**| Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
  | [optional] 
  **range** | **string**| The Range header indicates the part of a document that the server should return.
@@ -211,7 +211,7 @@ clause will return just the CREATED renditions:
 ### Example
 ```javascript
 import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -221,7 +221,7 @@ this.alfrescoApi.setConfig({
 let renditionsApi = new RenditionsApi(this.alfrescoApi);
 
 let opts = { 
-  'where': where_example //  | A string to restrict the returned objects by using a predicate.
+  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
 };
 
 renditionsApi.listRenditions(nodeIdopts).then((data) => {

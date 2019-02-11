@@ -1,4 +1,4 @@
-# DeletedNodesPagingList
+# .DeletedNodesPagingList
 
 ## Properties
 Name | Type | Description | Notes

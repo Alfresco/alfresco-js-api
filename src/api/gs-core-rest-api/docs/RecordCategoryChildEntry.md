@@ -1,4 +1,4 @@
-# RecordCategoryChildEntry
+# .RecordCategoryChildEntry
 
 ## Properties
 Name | Type | Description | Notes

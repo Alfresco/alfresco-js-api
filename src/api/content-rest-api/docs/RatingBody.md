@@ -1,4 +1,4 @@
-# RatingBody
+# .RatingBody
 
 ## Properties
 Name | Type | Description | Notes

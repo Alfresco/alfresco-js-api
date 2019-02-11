@@ -1,4 +1,4 @@
-# AbstractGroupRepresentation
+# .AbstractGroupRepresentation
 
 ## Properties
 Name | Type | Description | Notes

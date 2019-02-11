@@ -1,4 +1,4 @@
-# ChecklistsApi
+# .ChecklistsApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -18,7 +18,7 @@ Create a task checklist
 ### Example
 ```javascript
 import ChecklistsApi from 'ChecklistsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -56,7 +56,7 @@ Get checklist for a task
 ### Example
 ```javascript
 import ChecklistsApi from 'ChecklistsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -93,7 +93,7 @@ Change the order of items on a checklist
 ### Example
 ```javascript
 import ChecklistsApi from 'ChecklistsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

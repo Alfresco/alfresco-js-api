@@ -1,4 +1,4 @@
-# RuntimeappdeploymentsApi
+# .RuntimeappdeploymentsApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -20,7 +20,7 @@ Remove an app deployment
 ### Example
 ```javascript
 import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -57,7 +57,7 @@ Export the app archive for a deployment
 ### Example
 ```javascript
 import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -94,7 +94,7 @@ Query app deployments
 ### Example
 ```javascript
 import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -104,13 +104,13 @@ this.alfrescoApi.setConfig({
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 let opts = { 
-  'nameLike': nameLike_example //  | nameLike
-  'tenantId': 789 //  | tenantId
-  'latest': true //  | latest
-  'start': 56 //  | start
-  'sort': sort_example //  | sort
-  'order': order_example //  | order
-  'size': 56 //  | size
+  'nameLike': nameLike_example /*  | nameLike */
+  'tenantId': 789 /*  | tenantId */
+  'latest': true /*  | latest */
+  'start': 56 /*  | start */
+  'sort': sort_example /*  | sort */
+  'order': order_example /*  | order */
+  'size': 56 /*  | size */
 };
 
 runtimeappdeploymentsApi.getAppDefinitions(opts).then((data) => {
@@ -146,7 +146,7 @@ Get an app deployment
 ### Example
 ```javascript
 import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -185,7 +185,7 @@ Either a deploymentId or a dmnDeploymentId must be provided
 ### Example
 ```javascript
 import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -195,8 +195,8 @@ this.alfrescoApi.setConfig({
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 let opts = { 
-  'deploymentId': deploymentId_example //  | deploymentId
-  'dmnDeploymentId': 789 //  | dmnDeploymentId
+  'deploymentId': deploymentId_example /*  | deploymentId */
+  'dmnDeploymentId': 789 /*  | dmnDeploymentId */
 };
 
 runtimeappdeploymentsApi.getRuntimeAppDeploymentByDeployment(opts).then((data) => {

@@ -1,4 +1,4 @@
-# DatasourcesApi
+# .DatasourcesApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -16,7 +16,7 @@ Get data sources
 ### Example
 ```javascript
 import DatasourcesApi from 'DatasourcesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -26,7 +26,7 @@ this.alfrescoApi.setConfig({
 let datasourcesApi = new DatasourcesApi(this.alfrescoApi);
 
 let opts = { 
-  'tenantId': 789 //  | tenantId
+  'tenantId': 789 /*  | tenantId */
 };
 
 datasourcesApi.getDataSources(opts).then((data) => {

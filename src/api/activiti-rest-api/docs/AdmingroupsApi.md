@@ -1,4 +1,4 @@
-# AdmingroupsApi
+# .AdmingroupsApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -10,13 +10,13 @@ Method | HTTP request | Description
 [**addGroupMember**](AdmingroupsApi.md#addGroupMember) | **POST** /enterprise/admin/groups/{groupId}/members/{userId} | Add a user to a group
 [**addRelatedGroup**](AdmingroupsApi.md#addRelatedGroup) | **POST** /enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | Get a related group
 [**createNewGroup**](AdmingroupsApi.md#createNewGroup) | **POST** /enterprise/admin/groups | Create a group
+[**deleteGroup**](AdmingroupsApi.md#deleteGroup) | **DELETE** /enterprise/admin/groups/{groupId} | Delete a group
 [**deleteGroupCapability**](AdmingroupsApi.md#deleteGroupCapability) | **DELETE** /enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId} | Remove a capability from a group
 [**deleteGroupMember**](AdmingroupsApi.md#deleteGroupMember) | **DELETE** /enterprise/admin/groups/{groupId}/members/{userId} | Delete a member from a group
-[**deleteGroup**](AdmingroupsApi.md#deleteGroup) | **DELETE** /enterprise/admin/groups/{groupId} | Delete a group
 [**deleteRelatedGroup**](AdmingroupsApi.md#deleteRelatedGroup) | **DELETE** /enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId} | Delete a related group
 [**getCapabilities**](AdmingroupsApi.md#getCapabilities) | **GET** /enterprise/admin/groups/{groupId}/potential-capabilities | List group capabilities
-[**getGroupUsers**](AdmingroupsApi.md#getGroupUsers) | **GET** /enterprise/admin/groups/{groupId}/users | Get group members
 [**getGroup**](AdmingroupsApi.md#getGroup) | **GET** /enterprise/admin/groups/{groupId} | Get a group
+[**getGroupUsers**](AdmingroupsApi.md#getGroupUsers) | **GET** /enterprise/admin/groups/{groupId}/users | Get group members
 [**getGroups**](AdmingroupsApi.md#getGroups) | **GET** /enterprise/admin/groups | Query groups
 [**getRelatedGroups**](AdmingroupsApi.md#getRelatedGroups) | **GET** /enterprise/admin/groups/{groupId}/related-groups | Get related groups
 [**updateGroup**](AdmingroupsApi.md#updateGroup) | **PUT** /enterprise/admin/groups/{groupId} | Update a group
@@ -31,7 +31,7 @@ Activate a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -68,7 +68,7 @@ Add users to a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -105,7 +105,7 @@ Add capabilities to a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -143,7 +143,7 @@ Add a user to a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -181,7 +181,7 @@ Get a related group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -220,7 +220,7 @@ Create a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -248,6 +248,43 @@ Name | Type | Description  | Notes
 
 [**GroupRepresentation**](GroupRepresentation.md)
 
+<a name="deleteGroup"></a>
+# **deleteGroup**
+> deleteGroup(groupId)
+
+Delete a group
+
+### Example
+```javascript
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
+
+
+admingroupsApi.deleteGroup(groupId).then(() => {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **groupId** | **number**| groupId | 
+
+### Return type
+
+null (empty response body)
+
 <a name="deleteGroupCapability"></a>
 # **deleteGroupCapability**
 > deleteGroupCapability(groupIdgroupCapabilityId)
@@ -257,7 +294,7 @@ Remove a capability from a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -295,7 +332,7 @@ Delete a member from a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -324,43 +361,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="deleteGroup"></a>
-# **deleteGroup**
-> deleteGroup(groupId)
-
-Delete a group
-
-### Example
-```javascript
-import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
-
-
-admingroupsApi.deleteGroup(groupId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupId** | **number**| groupId | 
-
-### Return type
-
-null (empty response body)
-
 <a name="deleteRelatedGroup"></a>
 # **deleteRelatedGroup**
 > deleteRelatedGroup(groupIdrelatedGroupId)
@@ -370,7 +370,7 @@ Delete a related group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -408,7 +408,7 @@ List group capabilities
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -436,16 +436,16 @@ Name | Type | Description  | Notes
 
 **string**
 
-<a name="getGroupUsers"></a>
-# **getGroupUsers**
-> ResultListDataRepresentationLightUserRepresentation getGroupUsers(groupIdopts)
+<a name="getGroup"></a>
+# **getGroup**
+> AbstractGroupRepresentation getGroup(groupIdopts)
 
-Get group members
+Get a group
 
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -455,9 +455,52 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example //  | filter
-  'page': 56 //  | page
-  'pageSize': 56 //  | pageSize
+  'includeAllUsers': true /*  | includeAllUsers */
+  'summary': true /*  | summary */
+};
+
+admingroupsApi.getGroup(groupIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **groupId** | **number**| groupId | 
+ **includeAllUsers** | **boolean**| includeAllUsers | [optional] 
+ **summary** | **boolean**| summary | [optional] 
+
+### Return type
+
+[**AbstractGroupRepresentation**](AbstractGroupRepresentation.md)
+
+<a name="getGroupUsers"></a>
+# **getGroupUsers**
+> ResultListDataRepresentationLightUserRepresentation getGroupUsers(groupIdopts)
+
+Get group members
+
+### Example
+```javascript
+import AdmingroupsApi from 'AdmingroupsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
+
+let opts = { 
+  'filter': filter_example /*  | filter */
+  'page': 56 /*  | page */
+  'pageSize': 56 /*  | pageSize */
 };
 
 admingroupsApi.getGroupUsers(groupIdopts).then((data) => {
@@ -481,49 +524,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationLightUserRepresentation**](ResultListDataRepresentationLightUserRepresentation.md)
 
-<a name="getGroup"></a>
-# **getGroup**
-> AbstractGroupRepresentation getGroup(groupIdopts)
-
-Get a group
-
-### Example
-```javascript
-import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
-
-let opts = { 
-  'includeAllUsers': true //  | includeAllUsers
-  'summary': true //  | summary
-};
-
-admingroupsApi.getGroup(groupIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupId** | **number**| groupId | 
- **includeAllUsers** | **boolean**| includeAllUsers | [optional] 
- **summary** | **boolean**| summary | [optional] 
-
-### Return type
-
-[**AbstractGroupRepresentation**](AbstractGroupRepresentation.md)
-
 <a name="getGroups"></a>
 # **getGroups**
 > LightGroupRepresentation getGroups(opts)
@@ -533,7 +533,7 @@ Query groups
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -543,9 +543,9 @@ this.alfrescoApi.setConfig({
 let admingroupsApi = new AdmingroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'tenantId': 789 //  | tenantId
-  'functional': true //  | functional
-  'summary': true //  | summary
+  'tenantId': 789 /*  | tenantId */
+  'functional': true /*  | functional */
+  'summary': true /*  | summary */
 };
 
 admingroupsApi.getGroups(opts).then((data) => {
@@ -577,7 +577,7 @@ Get related groups
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -614,7 +614,7 @@ Update a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

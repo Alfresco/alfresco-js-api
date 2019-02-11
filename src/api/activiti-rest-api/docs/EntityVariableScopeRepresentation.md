@@ -1,4 +1,4 @@
-# EntityVariableScopeRepresentation
+# .EntityVariableScopeRepresentation
 
 ## Properties
 Name | Type | Description | Notes

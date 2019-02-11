@@ -1,4 +1,4 @@
-# CommentPagingList
+# .CommentPagingList
 
 ## Properties
 Name | Type | Description | Notes

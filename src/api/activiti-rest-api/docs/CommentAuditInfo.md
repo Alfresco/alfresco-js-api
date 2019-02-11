@@ -1,4 +1,4 @@
-# CommentAuditInfo
+# .CommentAuditInfo
 
 ## Properties
 Name | Type | Description | Notes

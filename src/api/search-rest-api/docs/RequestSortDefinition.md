@@ -1,4 +1,4 @@
-# RequestSortDefinition
+# .RequestSortDefinition
 
 ## Properties
 Name | Type | Description | Notes

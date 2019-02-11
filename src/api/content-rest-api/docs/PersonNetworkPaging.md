@@ -1,4 +1,4 @@
-# PersonNetworkPaging
+# .PersonNetworkPaging
 
 ## Properties
 Name | Type | Description | Notes

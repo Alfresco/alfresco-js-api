@@ -1,4 +1,4 @@
-# Capabilities
+# .Capabilities
 
 ## Properties
 Name | Type | Description | Notes

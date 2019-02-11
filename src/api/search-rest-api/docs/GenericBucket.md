@@ -1,4 +1,4 @@
-# GenericBucket
+# .GenericBucket
 
 ## Properties
 Name | Type | Description | Notes

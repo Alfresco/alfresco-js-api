@@ -1,4 +1,4 @@
-# DataSourceRepresentation
+# .DataSourceRepresentation
 
 ## Properties
 Name | Type | Description | Notes

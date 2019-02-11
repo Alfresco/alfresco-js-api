@@ -1,4 +1,4 @@
-# AssociationEntry
+# .AssociationEntry
 
 ## Properties
 Name | Type | Description | Notes

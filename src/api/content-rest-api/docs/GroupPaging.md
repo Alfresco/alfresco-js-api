@@ -1,4 +1,4 @@
-# GroupPaging
+# .GroupPaging
 
 ## Properties
 Name | Type | Description | Notes

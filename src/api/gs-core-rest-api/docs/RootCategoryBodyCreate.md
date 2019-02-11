@@ -1,4 +1,4 @@
-# RootCategoryBodyCreate
+# .RootCategoryBodyCreate
 
 ## Properties
 Name | Type | Description | Notes

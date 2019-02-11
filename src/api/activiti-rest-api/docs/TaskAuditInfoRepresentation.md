@@ -1,4 +1,4 @@
-# TaskAuditInfoRepresentation
+# .TaskAuditInfoRepresentation
 
 ## Properties
 Name | Type | Description | Notes

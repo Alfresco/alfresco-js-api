@@ -1,4 +1,4 @@
-# NodeBodyUpdate
+# .NodeBodyUpdate
 
 ## Properties
 Name | Type | Description | Notes

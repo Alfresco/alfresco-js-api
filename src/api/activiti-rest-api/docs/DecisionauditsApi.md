@@ -1,4 +1,4 @@
-# DecisionauditsApi
+# .DecisionauditsApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -17,7 +17,7 @@ Get an audit trail
 ### Example
 ```javascript
 import DecisionauditsApi from 'DecisionauditsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -54,7 +54,7 @@ Query decision table audit trails
 ### Example
 ```javascript
 import DecisionauditsApi from 'DecisionauditsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

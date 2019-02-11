@@ -1,4 +1,4 @@
-# SecurityControlSettingBody
+# .SecurityControlSettingBody
 
 ## Properties
 Name | Type | Description | Notes

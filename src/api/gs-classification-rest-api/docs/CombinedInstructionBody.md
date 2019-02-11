@@ -1,4 +1,4 @@
-# CombinedInstructionBody
+# .CombinedInstructionBody
 
 ## Properties
 Name | Type | Description | Notes

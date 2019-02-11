@@ -1,4 +1,4 @@
-# ResultSetContext
+# .ResultSetContext
 
 ## Properties
 Name | Type | Description | Notes

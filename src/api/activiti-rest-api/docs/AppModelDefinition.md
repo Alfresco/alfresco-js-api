@@ -1,4 +1,4 @@
-# AppModelDefinition
+# .AppModelDefinition
 
 ## Properties
 Name | Type | Description | Notes
@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **createdByFullName** | **string** |  | [optional] [default to null]
 **description** | **string** |  | [optional] [default to null]
 **id** | **number** |  | [optional] [default to null]
-**lastUpdated** | [**Date**](Date.md) |  | [optional] [default to null]
+**lastUpdated** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **lastUpdatedBy** | **number** |  | [optional] [default to null]
 **lastUpdatedByFullName** | **string** |  | [optional] [default to null]
 **modelType** | **number** |  | [optional] [default to null]

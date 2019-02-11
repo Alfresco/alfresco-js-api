@@ -1,4 +1,4 @@
-# EndpointConfigurationRepresentation
+# .EndpointConfigurationRepresentation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# RenditionPaging
+# .RenditionPaging
 
 ## Properties
 Name | Type | Description | Notes

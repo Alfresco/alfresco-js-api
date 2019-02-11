@@ -1,4 +1,4 @@
-# AuditEntryPaging
+# .AuditEntryPaging
 
 ## Properties
 Name | Type | Description | Notes

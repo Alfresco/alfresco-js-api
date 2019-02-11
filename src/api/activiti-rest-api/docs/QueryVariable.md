@@ -1,4 +1,4 @@
-# QueryVariable
+# .QueryVariable
 
 ## Properties
 Name | Type | Description | Notes

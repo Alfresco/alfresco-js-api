@@ -1,4 +1,4 @@
-# SitePagingList
+# .SitePagingList
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# GenericMetric
+# .GenericMetric
 
 ## Properties
 Name | Type | Description | Notes

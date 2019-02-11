@@ -1,4 +1,4 @@
-# EntityAttributeScopeRepresentation
+# .EntityAttributeScopeRepresentation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# ResultListDataRepresentationDecisionAuditRepresentation
+# .ResultListDataRepresentationDecisionAuditRepresentation
 
 ## Properties
 Name | Type | Description | Notes

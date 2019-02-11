@@ -1,4 +1,4 @@
-# TopicEntry
+# .TopicEntry
 
 ## Properties
 Name | Type | Description | Notes

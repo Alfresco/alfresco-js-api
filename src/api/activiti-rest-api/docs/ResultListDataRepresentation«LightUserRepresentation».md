@@ -1,4 +1,4 @@
-# ResultListDataRepresentationLightUserRepresentation
+# .ResultListDataRepresentationLightUserRepresentation
 
 ## Properties
 Name | Type | Description | Notes

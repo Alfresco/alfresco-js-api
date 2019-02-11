@@ -1,4 +1,4 @@
-# ChangePasswordRepresentation
+# .ChangePasswordRepresentation
 
 ## Properties
 Name | Type | Description | Notes

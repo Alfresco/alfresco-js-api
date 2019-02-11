@@ -1,10 +1,10 @@
-# DefaultClassificationValuesApi
+# .DefaultclassificationvaluesApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**calculateDefaultDeclassificationDate**](DefaultClassificationValuesApi.md#calculateDefaultDeclassificationDate) | **POST** /default-classification-values/{nodeId}/calculate-declassification-date | Calculate the default declassification date
+[**calculateDefaultDeclassificationDate**](DefaultclassificationvaluesApi.md#calculateDefaultDeclassificationDate) | **POST** /default-classification-values/{nodeId}/calculate-declassification-date | Calculate the default declassification date
 
 
 <a name="calculateDefaultDeclassificationDate"></a>
@@ -17,15 +17,15 @@ Calculates the default declassification date for **nodeId** based on the propert
 
 ### Example
 ```javascript
-import DefaultClassificationValuesApi from 'DefaultClassificationValuesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import DefaultclassificationvaluesApi from 'DefaultclassificationvaluesApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let defaultclassificationvaluesApi = new DefaultClassificationValuesApi(this.alfrescoApi);
+let defaultclassificationvaluesApi = new DefaultclassificationvaluesApi(this.alfrescoApi);
 
 
 defaultclassificationvaluesApi.calculateDefaultDeclassificationDate(nodeId).then((data) => {

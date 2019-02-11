@@ -1,4 +1,4 @@
-# AccountintegrationApi
+# .AccountintegrationApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -18,7 +18,7 @@ Accounts are used to integrate with third party apps and clients
 ### Example
 ```javascript
 import AccountintegrationApi from 'AccountintegrationApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

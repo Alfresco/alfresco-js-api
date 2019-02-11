@@ -1,4 +1,4 @@
-# Association
+# .Association
 
 ## Properties
 Name | Type | Description | Notes

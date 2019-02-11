@@ -1,4 +1,4 @@
-# GroupRepresentation
+# .GroupRepresentation
 
 ## Properties
 Name | Type | Description | Notes
@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **externalId** | **string** |  | [optional] [default to null]
 **groups** | [**GroupRepresentation[]**](GroupRepresentation.md) |  | [optional] [default to null]
 **id** | **number** |  | [optional] [default to null]
-**lastSyncTimeStamp** | [**Date**](Date.md) |  | [optional] [default to null]
+**lastSyncTimeStamp** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **manager** | [**UserRepresentation**](UserRepresentation.md) |  | [optional] [default to null]
 **name** | **string** |  | [optional] [default to null]
 **parentGroupId** | **number** |  | [optional] [default to null]

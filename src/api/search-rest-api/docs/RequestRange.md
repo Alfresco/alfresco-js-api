@@ -1,4 +1,4 @@
-# RequestRange
+# .RequestRange
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# PreferencesApi
+# .PreferencesApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
@@ -22,7 +22,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
 ### Example
 ```javascript
 import PreferencesApi from 'PreferencesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -32,7 +32,7 @@ this.alfrescoApi.setConfig({
 let preferencesApi = new PreferencesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  //  | A list of field names.
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -43,7 +43,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 preferencesApi.getPreference(personIdpreferenceNameopts).then((data) => {
@@ -94,7 +94,7 @@ The **value** can be of any JSON type.
 ### Example
 ```javascript
 import PreferencesApi from 'PreferencesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -104,13 +104,13 @@ this.alfrescoApi.setConfig({
 let preferencesApi = new PreferencesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -121,7 +121,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 preferencesApi.listPreferences(personIdopts).then((data) => {

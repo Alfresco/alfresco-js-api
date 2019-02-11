@@ -1,4 +1,4 @@
-# ResultListDataRepresentationDataSourceRepresentation
+# .ResultListDataRepresentationDataSourceRepresentation
 
 ## Properties
 Name | Type | Description | Notes

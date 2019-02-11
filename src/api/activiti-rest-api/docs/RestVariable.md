@@ -1,4 +1,4 @@
-# RestVariable
+# .RestVariable
 
 ## Properties
 Name | Type | Description | Notes

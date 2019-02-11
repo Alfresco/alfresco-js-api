@@ -1,4 +1,4 @@
-# SystemPropertiesRepresentation
+# .SystemPropertiesRepresentation
 
 ## Properties
 Name | Type | Description | Notes

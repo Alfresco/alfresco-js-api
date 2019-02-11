@@ -1,4 +1,4 @@
-# IdmsyncApi
+# .IdmsyncApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -17,7 +17,7 @@ Get log file for a sync log entry
 ### Example
 ```javascript
 import IdmsyncApi from 'IdmsyncApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -54,7 +54,7 @@ List sync log entries
 ### Example
 ```javascript
 import IdmsyncApi from 'IdmsyncApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -64,10 +64,10 @@ this.alfrescoApi.setConfig({
 let idmsyncApi = new IdmsyncApi(this.alfrescoApi);
 
 let opts = { 
-  'tenantId': 789 //  | tenantId
-  'page': 56 //  | page
-  'start': 56 //  | start
-  'size': 56 //  | size
+  'tenantId': 789 /*  | tenantId */
+  'page': 56 /*  | page */
+  'start': 56 /*  | start */
+  'size': 56 /*  | size */
 };
 
 idmsyncApi.getSyncLogEntries(opts).then((data) => {

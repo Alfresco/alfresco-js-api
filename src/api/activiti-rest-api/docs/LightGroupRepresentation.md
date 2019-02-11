@@ -1,4 +1,4 @@
-# LightGroupRepresentation
+# .LightGroupRepresentation
 
 ## Properties
 Name | Type | Description | Notes

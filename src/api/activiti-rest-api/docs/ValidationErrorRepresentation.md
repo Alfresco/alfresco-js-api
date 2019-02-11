@@ -1,4 +1,4 @@
-# ValidationErrorRepresentation
+# .ValidationErrorRepresentation
 
 ## Properties
 Name | Type | Description | Notes

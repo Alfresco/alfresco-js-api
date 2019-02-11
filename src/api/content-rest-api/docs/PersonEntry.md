@@ -1,4 +1,4 @@
-# PersonEntry
+# .PersonEntry
 
 ## Properties
 Name | Type | Description | Notes

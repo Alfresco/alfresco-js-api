@@ -1,13 +1,13 @@
-# AlfrescoEndpointRepresentation
+# .AlfrescoEndpointRepresentation
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **accountUsername** | **string** |  | [optional] [default to null]
 **alfrescoTenantId** | **string** |  | [optional] [default to null]
-**created** | [**Date**](Date.md) |  | [optional] [default to null]
+**created** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **id** | **number** |  | [optional] [default to null]
-**lastUpdated** | [**Date**](Date.md) |  | [optional] [default to null]
+**lastUpdated** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **name** | **string** |  | [optional] [default to null]
 **repositoryUrl** | **string** |  | [optional] [default to null]
 **secret** | **string** |  | [optional] [default to null]

@@ -1,4 +1,4 @@
-# AuditLogEntryRepresentation
+# .AuditLogEntryRepresentation
 
 ## Properties
 Name | Type | Description | Notes

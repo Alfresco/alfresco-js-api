@@ -1,14 +1,14 @@
-# RecordCategoriesApi
+# .RecordcategoriesApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createRecordCategoryChild**](RecordCategoriesApi.md#createRecordCategoryChild) | **POST** /record-categories/{recordCategoryId}/children | Create a record category or a record folder
-[**deleteRecordCategory**](RecordCategoriesApi.md#deleteRecordCategory) | **DELETE** /record-categories/{recordCategoryId} | Delete a record category
-[**getRecordCategory**](RecordCategoriesApi.md#getRecordCategory) | **GET** /record-categories/{recordCategoryId} | Get a record category
-[**listRecordCategoryChildren**](RecordCategoriesApi.md#listRecordCategoryChildren) | **GET** /record-categories/{recordCategoryId}/children | List record category's children
-[**updateRecordCategory**](RecordCategoriesApi.md#updateRecordCategory) | **PUT** /record-categories/{recordCategoryId} | Update a record category
+[**createRecordCategoryChild**](RecordcategoriesApi.md#createRecordCategoryChild) | **POST** /record-categories/{recordCategoryId}/children | Create a record category or a record folder
+[**deleteRecordCategory**](RecordcategoriesApi.md#deleteRecordCategory) | **DELETE** /record-categories/{recordCategoryId} | Delete a record category
+[**getRecordCategory**](RecordcategoriesApi.md#getRecordCategory) | **GET** /record-categories/{recordCategoryId} | Get a record category
+[**listRecordCategoryChildren**](RecordcategoriesApi.md#listRecordCategoryChildren) | **GET** /record-categories/{recordCategoryId}/children | List record category's children
+[**updateRecordCategory**](RecordcategoriesApi.md#updateRecordCategory) | **PUT** /record-categories/{recordCategoryId} | Update a record category
 
 
 <a name="createRecordCategoryChild"></a>
@@ -116,25 +116,25 @@ JSON
 
 ### Example
 ```javascript
-import RecordCategoriesApi from 'RecordCategoriesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import RecordcategoriesApi from 'RecordcategoriesApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordcategoriesApi = new RecordCategoriesApi(this.alfrescoApi);
+let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
 let opts = { 
-  'autoRename': true //  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-
-  'include':  //  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+  'autoRename': true /*  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+ */
+  'include':  /*  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -145,7 +145,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 recordcategoriesApi.createRecordCategoryChild(recordCategoryIdnodeBodyCreateopts).then((data) => {
@@ -198,15 +198,15 @@ Deletes record category **recordCategoryId**.
 
 ### Example
 ```javascript
-import RecordCategoriesApi from 'RecordCategoriesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import RecordcategoriesApi from 'RecordcategoriesApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordcategoriesApi = new RecordCategoriesApi(this.alfrescoApi);
+let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
 
 recordcategoriesApi.deleteRecordCategory(recordCategoryId).then(() => {
@@ -242,25 +242,25 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import RecordCategoriesApi from 'RecordCategoriesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import RecordcategoriesApi from 'RecordcategoriesApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordcategoriesApi = new RecordCategoriesApi(this.alfrescoApi);
+let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  //  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+  'include':  /*  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
-
-  'relativePath': relativePath_example //  | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
-
-  'fields':  //  | A list of field names.
+ */
+  'relativePath': relativePath_example /*  | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -271,7 +271,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 recordcategoriesApi.getRecordCategory(recordCategoryIdopts).then((data) => {
@@ -328,28 +328,28 @@ The list of child nodes includes primary children and secondary children, if the
 
 ### Example
 ```javascript
-import RecordCategoriesApi from 'RecordCategoriesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import RecordcategoriesApi from 'RecordcategoriesApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordcategoriesApi = new RecordCategoriesApi(this.alfrescoApi);
+let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56 //  | The maximum number of items to return in the list.
-  'where': where_example //  | Optionally filter the list. Here are some examples:
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list. */
+  'maxItems': 56 /*  | The maximum number of items to return in the list. */
+  'where': where_example /*  | Optionally filter the list. Here are some examples:
 
 *   where=(nodeType='rma:recordFolder')
 
 *   where=(nodeType='rma:recordCategory')
 
 *   where=(isRecordFolder=true AND isClosed=false)
-
-  'include':  //  | Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
+ */
+  'include':  /*  | Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * hasRetentionSchedule
@@ -358,11 +358,11 @@ let opts = {
 * isRecordFolder
 * path
 * properties
-
-  'relativePath': relativePath_example //  | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
-
-  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
-  'fields':  //  | A list of field names.
+ */
+  'relativePath': relativePath_example /*  | Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+ */
+  'includeSource': true /*  | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**. */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -373,7 +373,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 recordcategoriesApi.listRecordCategoryChildren(recordCategoryIdopts).then((data) => {
@@ -458,23 +458,23 @@ JSON
 
 ### Example
 ```javascript
-import RecordCategoriesApi from 'RecordCategoriesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import RecordcategoriesApi from 'RecordcategoriesApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordcategoriesApi = new RecordCategoriesApi(this.alfrescoApi);
+let recordcategoriesApi = new RecordcategoriesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  //  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
+  'include':  /*  | Returns additional information about the record category. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * hasRetentionSchedule
 * path
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -485,7 +485,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 recordcategoriesApi.updateRecordCategory(recordCategoryIdrecordCategoryBodyUpdateopts).then((data) => {

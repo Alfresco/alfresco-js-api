@@ -1,4 +1,4 @@
-# ProbesApi
+# .ProbesApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
@@ -27,7 +27,7 @@ The liveness probe should then be used to check the repository is still respondi
 ### Example
 ```javascript
 import ProbesApi from 'ProbesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

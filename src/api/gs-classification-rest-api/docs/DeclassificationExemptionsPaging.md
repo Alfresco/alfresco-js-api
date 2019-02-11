@@ -1,4 +1,4 @@
-# DeclassificationExemptionsPaging
+# .DeclassificationExemptionsPaging
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# TransferContainerChildAssociation
+# .TransferContainerChildAssociation
 
 ## Properties
 Name | Type | Description | Notes
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 The character . must not be used at the end of the name.
  | [default to null]
 **nodeType** | **string** |  | [default to null]
-**createdAt** | [**Date**](Date.md) |  | [default to null]
+**createdAt** | [**DateAlfresco**](DateAlfresco.md) |  | [default to null]
 **createdByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
 **transferPDFIndicator** | **boolean** | Present only for transfer nodes. | [optional] [default to null]
 **transferLocation** | **string** | Present only for transfer nodes. | [optional] [default to null]

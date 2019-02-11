@@ -1,4 +1,4 @@
-# SharedLinkPagingList
+# .SharedLinkPagingList
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# AdminendpointsApi
+# .AdminendpointsApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**getBasicAuthConfigurations**](AdminendpointsApi.md#getBasicAuthConfigurations) | **GET** /enterprise/admin/basic-auths | List endpoint authorizations
 [**getEndpointConfiguration**](AdminendpointsApi.md#getEndpointConfiguration) | **GET** /enterprise/admin/endpoints/{endpointConfigurationId} | Get an endpoint
 [**getEndpointConfigurations**](AdminendpointsApi.md#getEndpointConfigurations) | **GET** /enterprise/admin/endpoints | List endpoints
-[**removeBasicAuthonfiguration**](AdminendpointsApi.md#removeBasicAuthonfiguration) | **DELETE** /enterprise/admin/basic-auths/{basicAuthId} | Delete an endpoint authorization
+[**removeBasicAuthConfiguration**](AdminendpointsApi.md#removeBasicAuthConfiguration) | **DELETE** /enterprise/admin/basic-auths/{basicAuthId} | Delete an endpoint authorization
 [**removeEndpointConfiguration**](AdminendpointsApi.md#removeEndpointConfiguration) | **DELETE** /enterprise/admin/endpoints/{endpointConfigurationId} | Delete an endpoint
 [**updateBasicAuthConfiguration**](AdminendpointsApi.md#updateBasicAuthConfiguration) | **PUT** /enterprise/admin/basic-auths/{basicAuthId} | Update an endpoint authorization
 [**updateEndpointConfiguration**](AdminendpointsApi.md#updateEndpointConfiguration) | **PUT** /enterprise/admin/endpoints/{endpointConfigurationId} | Update an endpoint
@@ -25,7 +25,7 @@ Add an endpoint authorization
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -62,7 +62,7 @@ Create an endpoint
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -99,7 +99,7 @@ Get an endpoint authorization
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -137,7 +137,7 @@ List endpoint authorizations
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -174,7 +174,7 @@ Get an endpoint
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -212,7 +212,7 @@ List endpoints
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -240,16 +240,16 @@ Name | Type | Description  | Notes
 
 [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
 
-<a name="removeBasicAuthonfiguration"></a>
-# **removeBasicAuthonfiguration**
-> removeBasicAuthonfiguration(basicAuthIdtenantId)
+<a name="removeBasicAuthConfiguration"></a>
+# **removeBasicAuthConfiguration**
+> removeBasicAuthConfiguration(basicAuthIdtenantId)
 
 Delete an endpoint authorization
 
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -259,7 +259,7 @@ this.alfrescoApi.setConfig({
 let adminendpointsApi = new AdminendpointsApi(this.alfrescoApi);
 
 
-adminendpointsApi.removeBasicAuthonfiguration(basicAuthIdtenantId).then(() => {
+adminendpointsApi.removeBasicAuthConfiguration(basicAuthIdtenantId).then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -287,7 +287,7 @@ Delete an endpoint
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -325,7 +325,7 @@ Update an endpoint authorization
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -363,7 +363,7 @@ Update an endpoint
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

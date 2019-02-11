@@ -21,7 +21,7 @@ Method | HTTP request | Description
 ### Example
 ```javascript
 import {{{classname}}} from '{{{classname}}}';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -30,10 +30,10 @@ this.alfrescoApi.setConfig({
 
 let {{instanceClassname}} = new {{{classname}}}(this.alfrescoApi);{{#hasParams}}
 {{#vendorExtensions.x-codegen-hasRequiredParams}}{{#allParams}}{{#required}}
-let {{{paramName}}} = {{{example}}}; // {{{&dataType}}} | {{&description}}
+let {{{paramName}}} = {{{example}}}; /*  {{{&dataType}}} | {{&description}} */
 {{/required}}{{/allParams}}{{/vendorExtensions.x-codegen-hasRequiredParams}}{{#hasOptionalParams}}
 let opts = { {{#allParams}}{{^required}}
-  '{{{paramName}}}': {{{example}}}{{#vendorExtensions.x-codegen-hasMoreOptional}},{{/vendorExtensions.x-codegen-hasMoreOptional}} // {{{&dataType}}} | {{&description}}{{/required}}{{/allParams}}
+  '{{{paramName}}}': {{{example}}}{{#vendorExtensions.x-codegen-hasMoreOptional}},{{/vendorExtensions.x-codegen-hasMoreOptional}} /* {{{&dataType}}} | {{&description}} */{{/required}}{{/allParams}}
 };{{/hasOptionalParams}}{{/hasParams}}
 
 {{instanceClassname}}.{{{operationId}}}({{#allParams}}{{#required}}{{{paramName}}}{{#vendorExtensions.x-codegen-hasMoreRequired}}, {{/vendorExtensions.x-codegen-hasMoreRequired}}{{/required}}{{/allParams}}{{#hasOptionalParams}}{{#vendorExtensions.x-codegen-hasRequiredParams}}, {{/vendorExtensions.x-codegen-hasRequiredParams}}opts{{/hasOptionalParams}}).then(({{#returnType}}data{{/returnType}}) => {

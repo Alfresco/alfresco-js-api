@@ -1,4 +1,4 @@
-# FavoriteSiteBodyCreate
+# .FavoriteSiteBodyCreate
 
 ## Properties
 Name | Type | Description | Notes

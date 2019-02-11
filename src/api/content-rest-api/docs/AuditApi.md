@@ -1,4 +1,4 @@
-# AuditApi
+# .AuditApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
@@ -38,7 +38,7 @@ You must have admin rights to delete audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -87,7 +87,7 @@ You must have admin rights to delete audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -132,7 +132,7 @@ You must have admin rights to retrieve audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -142,7 +142,7 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  //  | A list of field names.
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -153,7 +153,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 auditApi.getAuditApp(auditApplicationIdopts).then((data) => {
@@ -202,7 +202,7 @@ You must have admin rights to access audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -212,7 +212,7 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  //  | A list of field names.
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -223,7 +223,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 auditApi.getAuditEntry(auditApplicationIdauditEntryIdopts).then((data) => {
@@ -280,7 +280,7 @@ You must have admin rights to retrieve audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -290,13 +290,13 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -307,7 +307,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 auditApi.listAuditApps(opts).then((data) => {
@@ -375,7 +375,7 @@ You must have admin rights to retrieve audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -385,21 +385,21 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ */
+  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'where': where_example //  | Optionally filter the list. Here are some examples:
+ */
+  'where': where_example /*  | Optionally filter the list. Here are some examples:
 
 *   where=(createdByUser='jbloggs')
 
@@ -412,11 +412,11 @@ If not supplied then the default value is 100.
 *   where=(valuesKey='/alfresco-access/login/user')
 
 *   where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')
-
-  'include':  //  | Returns additional information about the audit entry. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the audit entry. The following optional fields can be requested:
 * values
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -427,7 +427,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 auditApi.listAuditEntriesForAuditApp(auditApplicationIdopts).then((data) => {
@@ -514,7 +514,7 @@ This relies on the pre-configured 'alfresco-access' audit application.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -524,32 +524,32 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ */
+  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'where': where_example //  | Optionally filter the list. Here are some examples:
+ */
+  'where': where_example /*  | Optionally filter the list. Here are some examples:
 
 *   where=(createdByUser='-me-')
 
 *   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
 
 *   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
-
-  'include':  //  | Returns additional information about the audit entry. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the audit entry. The following optional fields can be requested:
 * values
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -560,7 +560,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 auditApi.listAuditEntriesForNode(nodeIdopts).then((data) => {
@@ -640,7 +640,7 @@ You must have admin rights to update audit application.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -650,7 +650,7 @@ this.alfrescoApi.setConfig({
 let auditApi = new AuditApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  //  | A list of field names.
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -661,7 +661,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 auditApi.updateAuditApp(auditApplicationIdauditAppBodyUpdateopts).then((data) => {

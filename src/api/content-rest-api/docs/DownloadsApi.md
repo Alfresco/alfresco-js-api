@@ -1,4 +1,4 @@
-# DownloadsApi
+# .DownloadsApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
@@ -31,7 +31,7 @@ The cancel operation is done asynchronously.
 ### Example
 ```javascript
 import DownloadsApi from 'DownloadsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -85,7 +85,7 @@ JSON
 ### Example
 ```javascript
 import DownloadsApi from 'DownloadsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -95,7 +95,7 @@ this.alfrescoApi.setConfig({
 let downloadsApi = new DownloadsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  //  | A list of field names.
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -106,7 +106,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 downloadsApi.createDownload(downloadBodyCreateopts).then((data) => {
@@ -153,7 +153,7 @@ Retrieve status information for download node **downloadId**
 ### Example
 ```javascript
 import DownloadsApi from 'DownloadsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -163,7 +163,7 @@ this.alfrescoApi.setConfig({
 let downloadsApi = new DownloadsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  //  | A list of field names.
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -174,7 +174,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 downloadsApi.getDownload(downloadIdopts).then((data) => {

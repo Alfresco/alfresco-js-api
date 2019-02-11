@@ -1,4 +1,4 @@
-# FavoritePaging
+# .FavoritePaging
 
 ## Properties
 Name | Type | Description | Notes

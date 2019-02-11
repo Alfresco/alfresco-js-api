@@ -1,4 +1,4 @@
-# CreateEndpointBasicAuthRepresentation
+# .CreateEndpointBasicAuthRepresentation
 
 ## Properties
 Name | Type | Description | Notes

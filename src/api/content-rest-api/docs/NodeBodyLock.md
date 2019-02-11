@@ -1,4 +1,4 @@
-# NodeBodyLock
+# .NodeBodyLock
 
 ## Properties
 Name | Type | Description | Notes

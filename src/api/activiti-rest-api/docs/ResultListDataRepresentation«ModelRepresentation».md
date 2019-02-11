@@ -1,4 +1,4 @@
-# ResultListDataRepresentationModelRepresentation
+# .ResultListDataRepresentationModelRepresentation
 
 ## Properties
 Name | Type | Description | Notes

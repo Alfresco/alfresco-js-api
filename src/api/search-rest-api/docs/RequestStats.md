@@ -1,4 +1,4 @@
-# RequestStats
+# .RequestStats
 
 ## Properties
 Name | Type | Description | Notes

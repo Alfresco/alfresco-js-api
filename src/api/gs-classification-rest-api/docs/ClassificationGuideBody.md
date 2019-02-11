@@ -1,4 +1,4 @@
-# ClassificationGuideBody
+# .ClassificationGuideBody
 
 ## Properties
 Name | Type | Description | Notes

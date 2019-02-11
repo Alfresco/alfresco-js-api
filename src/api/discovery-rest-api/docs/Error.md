@@ -1,4 +1,4 @@
-# ModelError
+# .ModelError
 
 ## Properties
 Name | Type | Description | Notes

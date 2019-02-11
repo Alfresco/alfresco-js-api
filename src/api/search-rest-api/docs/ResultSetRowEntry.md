@@ -1,4 +1,4 @@
-# ResultSetRowEntry
+# .ResultSetRowEntry
 
 ## Properties
 Name | Type | Description | Notes

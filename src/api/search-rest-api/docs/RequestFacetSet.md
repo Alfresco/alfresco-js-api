@@ -1,4 +1,4 @@
-# RequestFacetSet
+# .RequestFacetSet
 
 ## Properties
 Name | Type | Description | Notes

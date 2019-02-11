@@ -1,4 +1,4 @@
-# ClassificationReasonBody
+# .ClassificationReasonBody
 
 ## Properties
 Name | Type | Description | Notes

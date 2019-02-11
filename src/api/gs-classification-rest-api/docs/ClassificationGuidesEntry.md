@@ -1,4 +1,4 @@
-# ClassificationGuidesEntry
+# .ClassificationGuidesEntry
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# DiscoveryEntry
+# .DiscoveryEntry
 
 ## Properties
 Name | Type | Description | Notes

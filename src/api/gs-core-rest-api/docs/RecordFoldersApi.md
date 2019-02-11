@@ -1,14 +1,14 @@
-# RecordFoldersApi
+# .RecordfoldersApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createRecordFolderChild**](RecordFoldersApi.md#createRecordFolderChild) | **POST** /record-folders/{recordFolderId}/records | Create a record
-[**deleteRecordFolder**](RecordFoldersApi.md#deleteRecordFolder) | **DELETE** /record-folders/{recordFolderId} | Delete a record folder
-[**getRecordFolder**](RecordFoldersApi.md#getRecordFolder) | **GET** /record-folders/{recordFolderId} | Get a record folder
-[**listRecordFolderChildren**](RecordFoldersApi.md#listRecordFolderChildren) | **GET** /record-folders/{recordFolderId}/records | List records
-[**updateRecordFolder**](RecordFoldersApi.md#updateRecordFolder) | **PUT** /record-folders/{recordFolderId} | Update a record folder
+[**createRecordFolderChild**](RecordfoldersApi.md#createRecordFolderChild) | **POST** /record-folders/{recordFolderId}/records | Create a record
+[**deleteRecordFolder**](RecordfoldersApi.md#deleteRecordFolder) | **DELETE** /record-folders/{recordFolderId} | Delete a record folder
+[**getRecordFolder**](RecordfoldersApi.md#getRecordFolder) | **GET** /record-folders/{recordFolderId} | Get a record folder
+[**listRecordFolderChildren**](RecordfoldersApi.md#listRecordFolderChildren) | **GET** /record-folders/{recordFolderId}/records | List records
+[**updateRecordFolder**](RecordfoldersApi.md#updateRecordFolder) | **PUT** /record-folders/{recordFolderId} | Update a record folder
 
 
 <a name="createRecordFolderChild"></a>
@@ -108,24 +108,24 @@ JSON
 
 ### Example
 ```javascript
-import RecordFoldersApi from 'RecordFoldersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import RecordfoldersApi from 'RecordfoldersApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordfoldersApi = new RecordFoldersApi(this.alfrescoApi);
+let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  //  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+  'include':  /*  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -136,7 +136,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 recordfoldersApi.createRecordFolderChild(recordFolderIdrecordBodyCreateopts).then((data) => {
@@ -190,15 +190,15 @@ Deletes record folder **recordFolderId**. Deleted file plan components cannot be
 
 ### Example
 ```javascript
-import RecordFoldersApi from 'RecordFoldersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import RecordfoldersApi from 'RecordfoldersApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordfoldersApi = new RecordFoldersApi(this.alfrescoApi);
+let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
 
 
 recordfoldersApi.deleteRecordFolder(recordFolderId).then(() => {
@@ -234,23 +234,23 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import RecordFoldersApi from 'RecordFoldersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import RecordfoldersApi from 'RecordfoldersApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordfoldersApi = new RecordFoldersApi(this.alfrescoApi);
+let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  //  | Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
+  'include':  /*  | Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * isClosed
 * path
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -261,7 +261,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 recordfoldersApi.getRecordFolder(recordFolderIdopts).then((data) => {
@@ -316,28 +316,28 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import RecordFoldersApi from 'RecordFoldersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import RecordfoldersApi from 'RecordfoldersApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordfoldersApi = new RecordFoldersApi(this.alfrescoApi);
+let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
-  'maxItems': 56 //  | The maximum number of items to return in the list.
-  'where': where_example //  | Optionally filter the list. Here are some examples:
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list. */
+  'maxItems': 56 /*  | The maximum number of items to return in the list. */
+  'where': where_example /*  | Optionally filter the list. Here are some examples:
 
 *   where=(nodeType='my:specialNodeType')
 
 *   where=(nodeType='my:specialNodeType INCLUDESUBTYPES')
 
 *   where=(isPrimary=true)
-
-  'include':  //  | Returns additional information about the records. Any optional field from the response model can be requested. For example:
+ */
+  'include':  /*  | Returns additional information about the records. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
@@ -345,9 +345,9 @@ let opts = {
 * isCompleted
 * path
 * properties
-
-  'includeSource': true //  | Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId**
-  'fields':  //  | A list of field names.
+ */
+  'includeSource': true /*  | Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId** */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -358,7 +358,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 recordfoldersApi.listRecordFolderChildren(recordFolderIdopts).then((data) => {
@@ -440,23 +440,23 @@ JSON
 
 ### Example
 ```javascript
-import RecordFoldersApi from 'RecordFoldersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import RecordfoldersApi from 'RecordfoldersApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let recordfoldersApi = new RecordFoldersApi(this.alfrescoApi);
+let recordfoldersApi = new RecordfoldersApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  //  | Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
+  'include':  /*  | Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * isClosed
 * path
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -467,7 +467,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 recordfoldersApi.updateRecordFolder(recordFolderIdrecordFolderBodyUpdateopts).then((data) => {

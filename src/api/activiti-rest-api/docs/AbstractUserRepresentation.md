@@ -1,4 +1,4 @@
-# AbstractUserRepresentation
+# .AbstractUserRepresentation
 
 ## Properties
 Name | Type | Description | Notes

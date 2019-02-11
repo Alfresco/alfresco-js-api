@@ -1,4 +1,4 @@
-# ClassificationInformation
+# .ClassificationInformation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# SiteMembershipBodyUpdate
+# .SiteMembershipBodyUpdate
 
 ## Properties
 Name | Type | Description | Notes

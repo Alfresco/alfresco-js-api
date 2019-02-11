@@ -1,4 +1,4 @@
-# ResponseConsistency
+# .ResponseConsistency
 
 ## Properties
 Name | Type | Description | Notes

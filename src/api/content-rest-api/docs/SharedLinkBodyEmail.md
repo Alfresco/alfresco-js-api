@@ -1,4 +1,4 @@
-# SharedLinkBodyEmail
+# .SharedLinkBodyEmail
 
 ## Properties
 Name | Type | Description | Notes

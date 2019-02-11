@@ -1,4 +1,4 @@
-# ModelRepresentation
+# .ModelRepresentation
 
 ## Properties
 Name | Type | Description | Notes
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **description** | **string** |  | [optional] [default to null]
 **favorite** | **boolean** |  | [optional] [default to null]
 **id** | **number** |  | [optional] [default to null]
-**lastUpdated** | [**Date**](Date.md) |  | [optional] [default to null]
+**lastUpdated** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **lastUpdatedBy** | **number** |  | [optional] [default to null]
 **lastUpdatedByFullName** | **string** |  | [optional] [default to null]
 **latestVersion** | **boolean** |  | [optional] [default to null]

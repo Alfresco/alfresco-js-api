@@ -1,4 +1,4 @@
-# UserRepresentation
+# .UserRepresentation
 
 ## Properties
 Name | Type | Description | Notes
@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **apps** | [**LightAppRepresentation[]**](LightAppRepresentation.md) |  | [optional] [default to null]
 **capabilities** | **string[]** |  | [optional] [default to null]
 **company** | **string** |  | [optional] [default to null]
-**created** | [**Date**](Date.md) |  | [optional] [default to null]
+**created** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **email** | **string** |  | [optional] [default to null]
 **externalId** | **string** |  | [optional] [default to null]
 **firstName** | **string** |  | [optional] [default to null]
@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **groups** | [**GroupRepresentation[]**](GroupRepresentation.md) |  | [optional] [default to null]
 **id** | **number** |  | [optional] [default to null]
 **lastName** | **string** |  | [optional] [default to null]
-**lastUpdate** | [**Date**](Date.md) |  | [optional] [default to null]
-**latestSyncTimeStamp** | [**Date**](Date.md) |  | [optional] [default to null]
+**lastUpdate** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
+**latestSyncTimeStamp** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
 **password** | **string** |  | [optional] [default to null]
 **pictureId** | **number** |  | [optional] [default to null]
 **primaryGroup** | [**GroupRepresentation**](GroupRepresentation.md) |  | [optional] [default to null]

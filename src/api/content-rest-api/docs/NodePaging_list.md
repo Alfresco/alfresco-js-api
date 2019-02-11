@@ -1,4 +1,4 @@
-# NodePagingList
+# .NodePagingList
 
 ## Properties
 Name | Type | Description | Notes

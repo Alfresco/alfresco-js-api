@@ -1,4 +1,4 @@
-# OptionRepresentation
+# .OptionRepresentation
 
 ## Properties
 Name | Type | Description | Notes
