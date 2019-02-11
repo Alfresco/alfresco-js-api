@@ -7,11 +7,11 @@ Method | HTTP request | Description
 [**createModel**](ModelsApi.md#createModel) | **POST** /enterprise/models | Create a new model
 [**deleteModel**](ModelsApi.md#deleteModel) | **DELETE** /enterprise/models/{modelId} | Delete a model
 [**duplicateModel**](ModelsApi.md#duplicateModel) | **POST** /enterprise/models/{modelId}/clone | Duplicate an existing model
-[**getModel**](ModelsApi.md#getModel) | **GET** /enterprise/models/{modelId} | Get a model
 [**getModelJSON**](ModelsApi.md#getModelJSON) | **GET** /enterprise/models/{modelId}/editor/json | Get model content
 [**getModelThumbnail**](ModelsApi.md#getModelThumbnail) | **GET** /enterprise/models/{modelId}/thumbnail | Get a model's thumbnail image
-[**getModels**](ModelsApi.md#getModels) | **GET** /enterprise/models | List models (process, form, decision rule or app)
+[**getModel**](ModelsApi.md#getModel) | **GET** /enterprise/models/{modelId} | Get a model
 [**getModelsToIncludeInAppDefinition**](ModelsApi.md#getModelsToIncludeInAppDefinition) | **GET** /enterprise/models-for-app-definition | List process definition models shared with the current user
+[**getModels**](ModelsApi.md#getModels) | **GET** /enterprise/models | List models (process, form, decision rule or app)
 [**importNewVersion**](ModelsApi.md#importNewVersion) | **POST** /enterprise/models/{modelId}/newversion | Create a new version of a model
 [**importProcessModel**](ModelsApi.md#importProcessModel) | **POST** /enterprise/process-models/import | Import a BPMN 2.0 XML file
 [**saveModel**](ModelsApi.md#saveModel) | **POST** /enterprise/models/{modelId}/editor/json | Update model content
@@ -28,7 +28,7 @@ Create a new model
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -65,7 +65,7 @@ Delete a model
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -75,8 +75,8 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 let opts = { 
-  'cascade': true /*  | cascade */
-  'deleteRuntimeApp': true /*  | deleteRuntimeApp */
+  'cascade': true //  | cascade
+  'deleteRuntimeApp': true //  | deleteRuntimeApp
 };
 
 modelsApi.deleteModel(modelIdopts).then(() => {
@@ -108,7 +108,7 @@ Duplicate an existing model
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -137,49 +137,6 @@ Name | Type | Description  | Notes
 
 [**ModelRepresentation**](ModelRepresentation.md)
 
-<a name="getModel"></a>
-# **getModel**
-> ModelRepresentation getModel(modelIdopts)
-
-Get a model
-
-Models act as containers for process, form, decision table and app definitions
-
-### Example
-```javascript
-import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let modelsApi = new ModelsApi(this.alfrescoApi);
-
-let opts = { 
-  'includePermissions': true /*  | includePermissions */
-};
-
-modelsApi.getModel(modelIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **modelId** | **number**| modelId | 
- **includePermissions** | **boolean**| includePermissions | [optional] 
-
-### Return type
-
-[**ModelRepresentation**](ModelRepresentation.md)
-
 <a name="getModelJSON"></a>
 # **getModelJSON**
 > ObjectNode getModelJSON(modelId)
@@ -189,7 +146,7 @@ Get model content
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -226,7 +183,7 @@ Get a model's thumbnail image
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -254,16 +211,18 @@ Name | Type | Description  | Notes
 
 **string**
 
-<a name="getModels"></a>
-# **getModels**
-> ResultListDataRepresentationModelRepresentation getModels(opts)
+<a name="getModel"></a>
+# **getModel**
+> ModelRepresentation getModel(modelIdopts)
 
-List models (process, form, decision rule or app)
+Get a model
+
+Models act as containers for process, form, decision table and app definitions
 
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -273,13 +232,10 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example /*  | filter */
-  'sort': sort_example /*  | sort */
-  'modelType': 56 /*  | modelType */
-  'referenceId': 789 /*  | referenceId */
+  'includePermissions': true //  | includePermissions
 };
 
-modelsApi.getModels(opts).then((data) => {
+modelsApi.getModel(modelIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -291,14 +247,12 @@ modelsApi.getModels(opts).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filter** | **string**| filter | [optional] 
- **sort** | **string**| sort | [optional] 
- **modelType** | **number**| modelType | [optional] 
- **referenceId** | **number**| referenceId | [optional] 
+ **modelId** | **number**| modelId | 
+ **includePermissions** | **boolean**| includePermissions | [optional] 
 
 ### Return type
 
-[**ResultListDataRepresentationModelRepresentation**](ResultListDataRepresentationModelRepresentation.md)
+[**ModelRepresentation**](ModelRepresentation.md)
 
 <a name="getModelsToIncludeInAppDefinition"></a>
 # **getModelsToIncludeInAppDefinition**
@@ -309,7 +263,7 @@ List process definition models shared with the current user
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -333,6 +287,52 @@ This endpoint does not need any parameter.
 
 [**ResultListDataRepresentationModelRepresentation**](ResultListDataRepresentationModelRepresentation.md)
 
+<a name="getModels"></a>
+# **getModels**
+> ResultListDataRepresentationModelRepresentation getModels(opts)
+
+List models (process, form, decision rule or app)
+
+### Example
+```javascript
+import ModelsApi from 'ModelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let modelsApi = new ModelsApi(this.alfrescoApi);
+
+let opts = { 
+  'filter': filter_example //  | filter
+  'sort': sort_example //  | sort
+  'modelType': 56 //  | modelType
+  'referenceId': 789 //  | referenceId
+};
+
+modelsApi.getModels(opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string**| filter | [optional] 
+ **sort** | **string**| sort | [optional] 
+ **modelType** | **number**| modelType | [optional] 
+ **referenceId** | **number**| referenceId | [optional] 
+
+### Return type
+
+[**ResultListDataRepresentationModelRepresentation**](ResultListDataRepresentationModelRepresentation.md)
+
 <a name="importNewVersion"></a>
 # **importNewVersion**
 > ModelRepresentation importNewVersion(modelIdfile)
@@ -342,7 +342,7 @@ Create a new version of a model
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -380,7 +380,7 @@ Import a BPMN 2.0 XML file
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -417,7 +417,7 @@ Update model content
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -457,7 +457,7 @@ This method allows you to update the metadata of a model. In order to update the
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -495,7 +495,7 @@ Validate model content
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -505,7 +505,7 @@ this.alfrescoApi.setConfig({
 let modelsApi = new ModelsApi(this.alfrescoApi);
 
 let opts = { 
-  'values':  /*  | values */
+  'values':  //  | values
 };
 
 modelsApi.validateModel(modelIdopts).then((data) => {

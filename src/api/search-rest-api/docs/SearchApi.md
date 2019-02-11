@@ -328,7 +328,7 @@ The example above changes the highlighting prefix and postfix from the
 ### Example
 ```javascript
 import SearchApi from 'SearchApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

@@ -17,7 +17,7 @@ Query groups
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -27,11 +27,11 @@ this.alfrescoApi.setConfig({
 let groupsApi = new GroupsApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example /*  | filter */
-  'groupId': 789 /*  | groupId */
-  'externalId': externalId_example /*  | externalId */
-  'externalIdCaseInsensitive': externalIdCaseInsensitive_example /*  | externalIdCaseInsensitive */
-  'tenantId': 789 /*  | tenantId */
+  'filter': filter_example //  | filter
+  'groupId': 789 //  | groupId
+  'externalId': externalId_example //  | externalId
+  'externalIdCaseInsensitive': externalIdCaseInsensitive_example //  | externalIdCaseInsensitive
+  'tenantId': 789 //  | tenantId
 };
 
 groupsApi.getGroups(opts).then((data) => {
@@ -65,7 +65,7 @@ List members of a group
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

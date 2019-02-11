@@ -1,12 +1,12 @@
-# TransfercontainersApi
+# TransferContainersApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getTransferContainer**](TransfercontainersApi.md#getTransferContainer) | **GET** /transfer-containers/{transferContainerId} | Get a transfer container
-[**listTransfers**](TransfercontainersApi.md#listTransfers) | **GET** /transfer-containers/{transferContainerId}/transfers | List transfer container's children
-[**updateTransferContainer**](TransfercontainersApi.md#updateTransferContainer) | **PUT** /transfer-containers/{transferContainerId} | Update transfer container
+[**getTransferContainer**](TransferContainersApi.md#getTransferContainer) | **GET** /transfer-containers/{transferContainerId} | Get a transfer container
+[**listTransfers**](TransferContainersApi.md#listTransfers) | **GET** /transfer-containers/{transferContainerId}/transfers | List transfer container's children
+[**updateTransferContainer**](TransferContainersApi.md#updateTransferContainer) | **PUT** /transfer-containers/{transferContainerId} | Update transfer container
 
 
 <a name="getTransferContainer"></a>
@@ -24,22 +24,22 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import TransfercontainersApi from 'TransfercontainersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TransferContainersApi from 'TransferContainersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let transfercontainersApi = new TransfercontainersApi(this.alfrescoApi);
+let transfercontainersApi = new TransferContainersApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -50,7 +50,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 transfercontainersApi.getTransferContainer(transferContainerIdopts).then((data) => {
@@ -102,29 +102,29 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import TransfercontainersApi from 'TransfercontainersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TransferContainersApi from 'TransferContainersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let transfercontainersApi = new TransfercontainersApi(this.alfrescoApi);
+let transfercontainersApi = new TransferContainersApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list. */
-  'maxItems': 56 /*  | The maximum number of items to return in the list. */
-  'include':  /*  | Returns additional information about the transfer folders. Any optional field from the response model can be requested. For example:
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
+  'include':  //  | Returns additional information about the transfer folders. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * properties
 * transferPDFIndicator
 * transferLocation
 * transferAccessionIndicator
- */
-  'includeSource': true /*  | Also include **source** (in addition to **entries**) with folder information on the specified parent **transferContainerId**. */
-  'fields':  /*  | A list of field names.
+
+  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on the specified parent **transferContainerId**.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -135,7 +135,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 transfercontainersApi.listTransfers(transferContainerIdopts).then((data) => {
@@ -206,22 +206,22 @@ JSON
 
 ### Example
 ```javascript
-import TransfercontainersApi from 'TransfercontainersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TransferContainersApi from 'TransferContainersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let transfercontainersApi = new TransfercontainersApi(this.alfrescoApi);
+let transfercontainersApi = new TransferContainersApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -232,7 +232,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 transfercontainersApi.updateTransferContainer(transferContainerIdnodeBodyUpdateopts).then((data) => {

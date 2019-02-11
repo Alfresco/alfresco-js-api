@@ -37,7 +37,7 @@ When you create the RM site, the **filePlan** structure is also created includin
 ### Example
 ```javascript
 import GssitesApi from 'GssitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -47,7 +47,7 @@ this.alfrescoApi.setConfig({
 let gssitesApi = new GssitesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipAddToFavorites': true /*  | Flag to indicate whether the RM site should not be added to the user's site favorites. */
+  'skipAddToFavorites': true //  | Flag to indicate whether the RM site should not be added to the user's site favorites.
 };
 
 gssitesApi.createRMSite(siteBodyCreateopts).then((data) => {
@@ -82,7 +82,7 @@ Deletes the RM site.
 ### Example
 ```javascript
 import GssitesApi from 'GssitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -119,7 +119,7 @@ Gets information for RM site.
 ### Example
 ```javascript
 import GssitesApi from 'GssitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -129,7 +129,7 @@ this.alfrescoApi.setConfig({
 let gssitesApi = new GssitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  /*  | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -140,7 +140,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 gssitesApi.getRMSite(opts).then((data) => {
@@ -187,7 +187,7 @@ Update the details for the RM site. Site Manager or other (site) admin can updat
 ### Example
 ```javascript
 import GssitesApi from 'GssitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -197,7 +197,7 @@ this.alfrescoApi.setConfig({
 let gssitesApi = new GssitesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  /*  | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -208,7 +208,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 gssitesApi.updateRMSite(siteBodyUpdateopts).then((data) => {

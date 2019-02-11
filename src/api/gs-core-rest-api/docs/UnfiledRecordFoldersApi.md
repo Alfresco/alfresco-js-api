@@ -1,14 +1,14 @@
-# UnfiledrecordfoldersApi
+# UnfiledRecordFoldersApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createUnfiledRecordFolderChildren**](UnfiledrecordfoldersApi.md#createUnfiledRecordFolderChildren) | **POST** /unfiled-record-folders/{unfiledRecordFolderId}/children | Create a record or an unfiled record folder
-[**deleteUnfiledRecordFolder**](UnfiledrecordfoldersApi.md#deleteUnfiledRecordFolder) | **DELETE** /unfiled-record-folders/{unfiledRecordFolderId} | Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
-[**getUnfiledRecordFolder**](UnfiledrecordfoldersApi.md#getUnfiledRecordFolder) | **GET** /unfiled-record-folders/{unfiledRecordFolderId} | Get the unfiled record folder
-[**listUnfiledRecordFolderChildren**](UnfiledrecordfoldersApi.md#listUnfiledRecordFolderChildren) | **GET** /unfiled-record-folders/{unfiledRecordFolderId}/children | List unfiled record folder's children
-[**updateUnfiledRecordFolder**](UnfiledrecordfoldersApi.md#updateUnfiledRecordFolder) | **PUT** /unfiled-record-folders/{unfiledRecordFolderId} | Update an unfiled record folder
+[**createUnfiledRecordFolderChildren**](UnfiledRecordFoldersApi.md#createUnfiledRecordFolderChildren) | **POST** /unfiled-record-folders/{unfiledRecordFolderId}/children | Create a record or an unfiled record folder
+[**deleteUnfiledRecordFolder**](UnfiledRecordFoldersApi.md#deleteUnfiledRecordFolder) | **DELETE** /unfiled-record-folders/{unfiledRecordFolderId} | Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
+[**getUnfiledRecordFolder**](UnfiledRecordFoldersApi.md#getUnfiledRecordFolder) | **GET** /unfiled-record-folders/{unfiledRecordFolderId} | Get the unfiled record folder
+[**listUnfiledRecordFolderChildren**](UnfiledRecordFoldersApi.md#listUnfiledRecordFolderChildren) | **GET** /unfiled-record-folders/{unfiledRecordFolderId}/children | List unfiled record folder's children
+[**updateUnfiledRecordFolder**](UnfiledRecordFoldersApi.md#updateUnfiledRecordFolder) | **PUT** /unfiled-record-folders/{unfiledRecordFolderId} | Update an unfiled record folder
 
 
 <a name="createUnfiledRecordFolderChildren"></a>
@@ -122,24 +122,24 @@ JSON
 
 ### Example
 ```javascript
-import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UnfiledRecordFoldersApi from 'UnfiledRecordFoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
+let unfiledrecordfoldersApi = new UnfiledRecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
-  'autoRename': true /*  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
- */
-  'include':  /*  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+  'autoRename': true //  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+
+  'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -150,7 +150,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 unfiledrecordfoldersApi.createUnfiledRecordFolderChildren(unfiledRecordFolderIdnodeBodyCreateopts).then((data) => {
@@ -201,15 +201,15 @@ Deletes the unfiled record folder **unfiledRecordFolderId**.
 
 ### Example
 ```javascript
-import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UnfiledRecordFoldersApi from 'UnfiledRecordFoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
+let unfiledrecordfoldersApi = new UnfiledRecordFoldersApi(this.alfrescoApi);
 
 
 unfiledrecordfoldersApi.deleteUnfiledRecordFolder(unfiledRecordFolderId).then(() => {
@@ -245,24 +245,24 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UnfiledRecordFoldersApi from 'UnfiledRecordFoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
+let unfiledrecordfoldersApi = new UnfiledRecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
- */
-  'relativePath': relativePath_example /*  | Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
- */
-  'fields':  /*  | A list of field names.
+
+  'relativePath': relativePath_example //  | Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -273,7 +273,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 unfiledrecordfoldersApi.getUnfiledRecordFolder(unfiledRecordFolderIdopts).then((data) => {
@@ -327,38 +327,38 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 
 ### Example
 ```javascript
-import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UnfiledRecordFoldersApi from 'UnfiledRecordFoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
+let unfiledrecordfoldersApi = new UnfiledRecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list. */
-  'maxItems': 56 /*  | The maximum number of items to return in the list. */
-  'where': where_example /*  | Optionally filter the list. Here are some examples:
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
+  'where': where_example //  | Optionally filter the list. Here are some examples:
 
 *   where=(isRecord=true)
 
 *   where=(isUnfiledRecordFolder=false)
 
 *   where=(nodeType='cm:content INCLUDESUBTYPES')
- */
-  'include':  /*  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+
+  'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * aspectNames
 * association
 * path
 * properties
- */
-  'relativePath': relativePath_example /*  | Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
- */
-  'includeSource': true /*  | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**. */
-  'fields':  /*  | A list of field names.
+
+  'relativePath': relativePath_example //  | Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+
+  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -369,7 +369,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 unfiledrecordfoldersApi.listUnfiledRecordFolderChildren(unfiledRecordFolderIdopts).then((data) => {
@@ -451,23 +451,23 @@ JSON
 
 ### Example
 ```javascript
-import UnfiledrecordfoldersApi from 'UnfiledrecordfoldersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UnfiledRecordFoldersApi from 'UnfiledRecordFoldersApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let unfiledrecordfoldersApi = new UnfiledrecordfoldersApi(this.alfrescoApi);
+let unfiledrecordfoldersApi = new UnfiledRecordFoldersApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * path
- */
-  'includeSource': true /*  | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**. */
-  'fields':  /*  | A list of field names.
+
+  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -478,7 +478,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 unfiledrecordfoldersApi.updateUnfiledRecordFolder(unfiledRecordFolderIdunfiledRecordFolderBodyUpdateopts).then((data) => {

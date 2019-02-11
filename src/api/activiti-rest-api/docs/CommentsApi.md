@@ -19,7 +19,7 @@ Add a comment to a process instance
 ### Example
 ```javascript
 import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -57,7 +57,7 @@ Add a comment to a task
 ### Example
 ```javascript
 import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -95,7 +95,7 @@ Get comments for a process
 ### Example
 ```javascript
 import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -105,7 +105,7 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 let opts = { 
-  'latestFirst': true /*  | latestFirst */
+  'latestFirst': true //  | latestFirst
 };
 
 commentsApi.getProcessInstanceComments(processInstanceIdopts).then((data) => {
@@ -136,7 +136,7 @@ Get comments for a task
 ### Example
 ```javascript
 import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -146,7 +146,7 @@ this.alfrescoApi.setConfig({
 let commentsApi = new CommentsApi(this.alfrescoApi);
 
 let opts = { 
-  'latestFirst': true /*  | latestFirst */
+  'latestFirst': true //  | latestFirst
 };
 
 commentsApi.getTaskComments(taskIdopts).then((data) => {

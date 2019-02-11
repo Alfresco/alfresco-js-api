@@ -19,7 +19,7 @@ List submissions for a form
 ### Example
 ```javascript
 import SubmittedformsApi from 'SubmittedformsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -29,9 +29,9 @@ this.alfrescoApi.setConfig({
 let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 let opts = { 
-  'submittedBy': 789 /*  | submittedBy */
-  'start': 56 /*  | start */
-  'size': 56 /*  | size */
+  'submittedBy': 789 //  | submittedBy
+  'start': 56 //  | start
+  'size': 56 //  | size
 };
 
 submittedformsApi.getFormSubmittedFroms(formIdopts).then((data) => {
@@ -64,7 +64,7 @@ List submissions for a process instance
 ### Example
 ```javascript
 import SubmittedformsApi from 'SubmittedformsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -101,7 +101,7 @@ Get a form submission
 ### Example
 ```javascript
 import SubmittedformsApi from 'SubmittedformsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -138,7 +138,7 @@ Get the submitted form for a task
 ### Example
 ```javascript
 import SubmittedformsApi from 'SubmittedformsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

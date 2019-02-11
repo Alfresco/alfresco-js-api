@@ -24,7 +24,7 @@ Completes the record **recordId**.
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -34,13 +34,13 @@ this.alfrescoApi.setConfig({
 let recordsApi = new RecordsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -51,7 +51,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 recordsApi.completeRecord(recordIdopts).then((data) => {
@@ -102,7 +102,7 @@ Deletes the record **recordId**. Deleted file plan components cannot be recovere
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -148,7 +148,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -158,13 +158,13 @@ this.alfrescoApi.setConfig({
 let recordsApi = new RecordsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -175,7 +175,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 recordsApi.fileRecord(recordIdnodeBodyFileopts).then((data) => {
@@ -231,7 +231,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -241,13 +241,13 @@ this.alfrescoApi.setConfig({
 let recordsApi = new RecordsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -258,7 +258,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 recordsApi.getRecord(recordIdopts).then((data) => {
@@ -310,7 +310,7 @@ Gets the content of the record with identifier **recordId**.
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -320,7 +320,7 @@ this.alfrescoApi.setConfig({
 let recordsApi = new RecordsApi(this.alfrescoApi);
 
 let opts = { 
-  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
+  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -329,10 +329,10 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
- */
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
+
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
- */
+
 };
 
 recordsApi.getRecordContent(recordIdopts).then(() => {
@@ -358,7 +358,7 @@ for example, certain image files and PDF files.
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
  | [optional] [default to true]
- **ifModifiedSince** | **DateAlfresco**| Only returns the content if it has been modified since the date provided.
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
  | [optional] 
 
@@ -396,7 +396,7 @@ JSON
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -406,13 +406,13 @@ this.alfrescoApi.setConfig({
 let recordsApi = new RecordsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
+  'include':  //  | Returns additional information about the record. Any optional field from the response model can be requested. For example:
 * allowableOperations
 * content
 * isCompleted
 * path
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -423,7 +423,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 recordsApi.updateRecord(recordIdrecordBodyUpdateopts).then((data) => {

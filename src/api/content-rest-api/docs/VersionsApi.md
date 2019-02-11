@@ -35,7 +35,7 @@ params (majorVersion and comment) on a subsequent file content update.
 ### Example
 ```javascript
 import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -78,7 +78,7 @@ Gets the version information for **versionId** of file node **nodeId**.
 ### Example
 ```javascript
 import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -121,7 +121,7 @@ Gets the version content for **versionId** of file node **nodeId**.
 ### Example
 ```javascript
 import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -131,7 +131,7 @@ this.alfrescoApi.setConfig({
 let versionsApi = new VersionsApi(this.alfrescoApi);
 
 let opts = { 
-  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
+  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -140,13 +140,13 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
- */
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
+
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
- */
-  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
+
+  'range': range_example //  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
- */
+
 };
 
 versionsApi.getVersionContent(nodeIdversionIdopts).then(() => {
@@ -173,7 +173,7 @@ for example, certain image files and PDF files.
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
  | [optional] [default to true]
- **ifModifiedSince** | **DateAlfresco**| Only returns the content if it has been modified since the date provided.
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
  | [optional] 
  **range** | **string**| The Range header indicates the part of a document that the server should return.
@@ -201,7 +201,7 @@ the original version is last in the list.
 ### Example
 ```javascript
 import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -211,11 +211,11 @@ this.alfrescoApi.setConfig({
 let versionsApi = new VersionsApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the version node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the version node. The following optional fields can be requested:
 * properties
 * aspectNames
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -226,13 +226,13 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
+
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
+
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
- */
+
 };
 
 versionsApi.listVersionHistory(nodeIdopts).then((data) => {
@@ -292,7 +292,7 @@ will be promoted to the live node and a new version will appear in the version h
 ### Example
 ```javascript
 import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -302,7 +302,7 @@ this.alfrescoApi.setConfig({
 let versionsApi = new VersionsApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  /*  | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -313,7 +313,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 versionsApi.revertVersion(nodeIdversionIdrevertBodyopts).then((data) => {

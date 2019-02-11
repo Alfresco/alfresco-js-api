@@ -5,8 +5,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **appDefinitionId** | **number** |  | [optional] [default to null]
 **assignment** | **string** |  | [optional] [default to null]
-**dueAfter** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
-**dueBefore** | [**DateAlfresco**](DateAlfresco.md) |  | [optional] [default to null]
+**dueAfter** | [**Date**](Date.md) |  | [optional] [default to null]
+**dueBefore** | [**Date**](Date.md) |  | [optional] [default to null]
 **includeProcessInstance** | **boolean** |  | [optional] [default to null]
 **page** | **number** |  | [optional] [default to null]
 **processDefinitionId** | **string** |  | [optional] [default to null]

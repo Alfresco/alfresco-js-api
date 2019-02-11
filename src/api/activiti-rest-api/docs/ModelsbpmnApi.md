@@ -17,7 +17,7 @@ Export a historic version of a process definition as BPMN 2.0 XML
 ### Example
 ```javascript
 import ModelsbpmnApi from 'ModelsbpmnApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -55,7 +55,7 @@ Export a process definition as BPMN 2.0 XML
 ### Example
 ```javascript
 import ModelsbpmnApi from 'ModelsbpmnApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

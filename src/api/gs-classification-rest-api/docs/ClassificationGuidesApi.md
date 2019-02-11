@@ -1,22 +1,22 @@
-# ClassificationguidesApi
+# ClassificationGuidesApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**combinedInstructions**](ClassificationguidesApi.md#combinedInstructions) | **POST** /combined-instructions | Combined instructions
-[**createClassificationGuide**](ClassificationguidesApi.md#createClassificationGuide) | **POST** /classification-guides | Create a classification guide
-[**createSubtopic**](ClassificationguidesApi.md#createSubtopic) | **POST** /topics/{topicId}/subtopics | Create a subtopic
-[**createTopic**](ClassificationguidesApi.md#createTopic) | **POST** /classification-guides/{classificationGuideId}/topics | Create a topic
-[**deleteClassificationGuide**](ClassificationguidesApi.md#deleteClassificationGuide) | **DELETE** /classification-guides/{classificationGuideId} | Delete a classification guide
-[**deleteTopic**](ClassificationguidesApi.md#deleteTopic) | **DELETE** /topics/{topicId} | Delete a topic
-[**listClassificationGuides**](ClassificationguidesApi.md#listClassificationGuides) | **GET** /classification-guides | List all classification guides
-[**listSubtopics**](ClassificationguidesApi.md#listSubtopics) | **GET** /topics/{topicId}/subtopics | List all subtopics
-[**listTopics**](ClassificationguidesApi.md#listTopics) | **GET** /classification-guides/{classificationGuideId}/topics | List all topics
-[**showClassificationGuideById**](ClassificationguidesApi.md#showClassificationGuideById) | **GET** /classification-guides/{classificationGuideId} | Get classification guide information
-[**showTopicById**](ClassificationguidesApi.md#showTopicById) | **GET** /topics/{topicId} | Get topic information
-[**updateClassificationGuide**](ClassificationguidesApi.md#updateClassificationGuide) | **PUT** /classification-guides/{classificationGuideId} | Update a classification guide
-[**updateTopic**](ClassificationguidesApi.md#updateTopic) | **PUT** /topics/{topicId} | Update a topic
+[**combinedInstructions**](ClassificationGuidesApi.md#combinedInstructions) | **POST** /combined-instructions | Combined instructions
+[**createClassificationGuide**](ClassificationGuidesApi.md#createClassificationGuide) | **POST** /classification-guides | Create a classification guide
+[**createSubtopic**](ClassificationGuidesApi.md#createSubtopic) | **POST** /topics/{topicId}/subtopics | Create a subtopic
+[**createTopic**](ClassificationGuidesApi.md#createTopic) | **POST** /classification-guides/{classificationGuideId}/topics | Create a topic
+[**deleteClassificationGuide**](ClassificationGuidesApi.md#deleteClassificationGuide) | **DELETE** /classification-guides/{classificationGuideId} | Delete a classification guide
+[**deleteTopic**](ClassificationGuidesApi.md#deleteTopic) | **DELETE** /topics/{topicId} | Delete a topic
+[**listClassificationGuides**](ClassificationGuidesApi.md#listClassificationGuides) | **GET** /classification-guides | List all classification guides
+[**listSubtopics**](ClassificationGuidesApi.md#listSubtopics) | **GET** /topics/{topicId}/subtopics | List all subtopics
+[**listTopics**](ClassificationGuidesApi.md#listTopics) | **GET** /classification-guides/{classificationGuideId}/topics | List all topics
+[**showClassificationGuideById**](ClassificationGuidesApi.md#showClassificationGuideById) | **GET** /classification-guides/{classificationGuideId} | Get classification guide information
+[**showTopicById**](ClassificationGuidesApi.md#showTopicById) | **GET** /topics/{topicId} | Get topic information
+[**updateClassificationGuide**](ClassificationGuidesApi.md#updateClassificationGuide) | **PUT** /classification-guides/{classificationGuideId} | Update a classification guide
+[**updateTopic**](ClassificationGuidesApi.md#updateTopic) | **PUT** /topics/{topicId} | Update a topic
 
 
 <a name="combinedInstructions"></a>
@@ -29,18 +29,18 @@ Combines instructions from the given topics and the user defined instruction, if
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 let opts = { 
-  'instructions':  /*  | Instructions */
+  'instructions':  //  | Instructions
 };
 
 classificationguidesApi.combinedInstructions(opts).then((data) => {
@@ -71,15 +71,15 @@ Creates a new classification guide.
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 
 classificationguidesApi.createClassificationGuide(classificationGuide).then((data) => {
@@ -110,23 +110,23 @@ Creates a new subtopic of a topic.
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the topic. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
 * classificationGuide - The classification guide this topic is in.
- */
+
 };
 
 classificationguidesApi.createSubtopic(topicIdtopicopts).then((data) => {
@@ -164,23 +164,23 @@ Creates a new topic.
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the topic. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
 * classificationGuide - The classification guide this topic is in.
- */
+
 };
 
 classificationguidesApi.createTopic(classificationGuideIdtopicopts).then((data) => {
@@ -218,15 +218,15 @@ Deletes the classification guide with id **classificationGuideId**, including an
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 
 classificationguidesApi.deleteClassificationGuide(classificationGuideId).then(() => {
@@ -257,15 +257,15 @@ Deletes the topic with id  **topicId**, including any subtopics and instructions
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 
 classificationguidesApi.deleteTopic(topicId).then(() => {
@@ -296,33 +296,33 @@ Gets all classification guides.
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the guide. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the guide. The following optional fields can be requested:
 * hasTopics - A flag indicating whether the guide already contains any topics.
- */
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list. */
-  'maxItems': 56 /*  | The maximum number of items to return in the list. */
-  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- */
-  'where': where_example /*  | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:
+
+  'where': where_example //  | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:
 * enabled - e.g. (enabled = true OR enabled = false)
- */
+
 };
 
 classificationguidesApi.listClassificationGuides(opts).then((data) => {
@@ -368,38 +368,38 @@ Gets all subtopics of a topic.
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the topic. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
 * classificationGuide - The classification guide this topic is in.
- */
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list. */
-  'maxItems': 56 /*  | The maximum number of items to return in the list. */
-  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- */
-  'where': where_example /*  | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:
+
+  'where': where_example //  | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR. Fields to filter on:
 * hasInstruction
 * hasSubtopics
- */
-  'includeSource': true /*  | Also include **source** in addition to **entries** with folder information on the parent guide/topic */
+
+  'includeSource': true //  | Also include **source** in addition to **entries** with folder information on the parent guide/topic
 };
 
 classificationguidesApi.listSubtopics(topicIdopts).then((data) => {
@@ -451,38 +451,38 @@ Gets all topics.
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the topic. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
 * classificationGuide - The classification guide this topic is in.
- */
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list. */
-  'maxItems': 56 /*  | The maximum number of items to return in the list. */
-  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally acending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- */
-  'where': where_example /*  | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction=true and hasSubtopics=false). Fields to filter on:
+
+  'where': where_example //  | A string to restrict the returned objects by using a predicate. Supported operations are AND, NOT, and OR e.g. (instruction=true and hasSubtopics=false). Fields to filter on:
 * hasInstruction
 * hasSubtopics
- */
-  'includeSource': true /*  | Also include **source** in addition to **entries** with folder information on the parent guide/topic */
+
+  'includeSource': true //  | Also include **source** in addition to **entries** with folder information on the parent guide/topic
 };
 
 classificationguidesApi.listTopics(classificationGuideIdopts).then((data) => {
@@ -534,15 +534,15 @@ Gets the classification guide with id **classificationGuideId**.
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 
 classificationguidesApi.showClassificationGuideById(classificationGuideId).then((data) => {
@@ -573,23 +573,23 @@ Gets the topic with id **topicId**.
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the topic. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
 * classificationGuide - The classification guide this topic is in.
- */
+
 };
 
 classificationguidesApi.showTopicById(topicIdopts).then((data) => {
@@ -626,15 +626,15 @@ Updates the classification guide with id **classificationGuideId**. For example,
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 
 classificationguidesApi.updateClassificationGuide(classificationGuideIdclassificationGuide).then((data) => {
@@ -669,23 +669,23 @@ Use this to rename a topic or to add, edit, or remove the instruction associated
 
 ### Example
 ```javascript
-import ClassificationguidesApi from 'ClassificationguidesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ClassificationGuidesApi from 'ClassificationGuidesApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let classificationguidesApi = new ClassificationguidesApi(this.alfrescoApi);
+let classificationguidesApi = new ClassificationGuidesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the topic. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the topic. The following optional fields can be requested:
 * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
 * instruction - Contains details of any instruction in the topic.
 * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
 * classificationGuide - The classification guide this topic is in.
- */
+
 };
 
 classificationguidesApi.updateTopic(topicIdtopicopts).then((data) => {

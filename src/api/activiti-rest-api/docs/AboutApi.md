@@ -18,7 +18,7 @@ Provides information about the running Alfresco Process Services Suite. The resp
 ### Example
 ```javascript
 import AboutApi from 'AboutApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

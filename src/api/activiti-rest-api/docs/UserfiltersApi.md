@@ -27,7 +27,7 @@ Create a process instance filter
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -64,7 +64,7 @@ Create a task filter
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -101,7 +101,7 @@ Delete a process instance filter
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -138,7 +138,7 @@ Delete a task filter
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -175,7 +175,7 @@ Get a process instance filter
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -214,7 +214,7 @@ Returns filters for the current user, optionally filtered by *appId*.
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -224,7 +224,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 let opts = { 
-  'appId': 789 /*  | appId */
+  'appId': 789 //  | appId
 };
 
 userfiltersApi.getUserProcessInstanceFilters(opts).then((data) => {
@@ -254,7 +254,7 @@ Get a task filter
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -293,7 +293,7 @@ Returns filters for the current user, optionally filtered by *appId*.
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -303,7 +303,7 @@ this.alfrescoApi.setConfig({
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 let opts = { 
-  'appId': 789 /*  | appId */
+  'appId': 789 //  | appId
 };
 
 userfiltersApi.getUserTaskFilters(opts).then((data) => {
@@ -333,7 +333,7 @@ Re-order the list of user process instance filters
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -370,7 +370,7 @@ Re-order the list of user task filters
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -407,7 +407,7 @@ Update a process instance filter
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -445,7 +445,7 @@ Update a task filter
 ### Example
 ```javascript
 import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

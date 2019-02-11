@@ -78,7 +78,7 @@ JSON
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -88,11 +88,11 @@ this.alfrescoApi.setConfig({
 let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the shared link, the following optional fields can be requested:
+  'include':  //  | Returns additional information about the shared link, the following optional fields can be requested:
 * allowableOperations
 * path
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -103,7 +103,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 sharedlinksApi.createSharedLink(sharedLinkBodyCreateopts).then((data) => {
@@ -154,7 +154,7 @@ Deletes the shared link with identifier **sharedId**.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -223,7 +223,7 @@ JSON
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -268,7 +268,7 @@ Gets minimal information for the file with shared link identifier **sharedId**.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -278,7 +278,7 @@ this.alfrescoApi.setConfig({
 let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  /*  | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -289,7 +289,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 sharedlinksApi.getSharedLink(sharedIdopts).then((data) => {
@@ -338,7 +338,7 @@ Gets the content of the file with shared link identifier **sharedId**.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -348,7 +348,7 @@ this.alfrescoApi.setConfig({
 let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
 let opts = { 
-  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
+  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -357,13 +357,13 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
- */
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
+
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
- */
-  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
+
+  'range': range_example //  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
- */
+
 };
 
 sharedlinksApi.getSharedLinkContent(sharedIdopts).then(() => {
@@ -389,7 +389,7 @@ for example, certain image files and PDF files.
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
  | [optional] [default to true]
- **ifModifiedSince** | **DateAlfresco**| Only returns the content if it has been modified since the date provided.
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
  | [optional] 
  **range** | **string**| The Range header indicates the part of a document that the server should return.
@@ -419,7 +419,7 @@ which means the rendition is available to view/download.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -464,7 +464,7 @@ Gets the rendition content for file with shared link identifier **sharedId**.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -474,7 +474,7 @@ this.alfrescoApi.setConfig({
 let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
 let opts = { 
-  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
+  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -483,13 +483,13 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
- */
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
+
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
- */
-  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
+
+  'range': range_example //  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
- */
+
 };
 
 sharedlinksApi.getSharedLinkRenditionContent(sharedIdrenditionIdopts).then(() => {
@@ -516,7 +516,7 @@ for example, certain image files and PDF files.
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
  | [optional] [default to true]
- **ifModifiedSince** | **DateAlfresco**| Only returns the content if it has been modified since the date provided.
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
  | [optional] 
  **range** | **string**| The Range header indicates the part of a document that the server should return.
@@ -546,7 +546,7 @@ where the rendition status is CREATED, which means the rendition is available to
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -592,7 +592,7 @@ The list is ordered in descending modified order.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -602,23 +602,23 @@ this.alfrescoApi.setConfig({
 let sharedlinksApi = new SharedlinksApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
+
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
- */
-  'where': where_example /*  | Optionally filter the list by \"sharedByUser\" userid of person who shared the link (can also use -me-)
+
+  'where': where_example //  | Optionally filter the list by \"sharedByUser\" userid of person who shared the link (can also use -me-)
 
 *   where=(sharedByUser='jbloggs')
 
 *   where=(sharedByUser='-me-')
- */
-  'include':  /*  | Returns additional information about the shared link, the following optional fields can be requested:
+
+  'include':  //  | Returns additional information about the shared link, the following optional fields can be requested:
 * allowableOperations
 * path
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -629,7 +629,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 sharedlinksApi.listSharedLinks(opts).then((data) => {

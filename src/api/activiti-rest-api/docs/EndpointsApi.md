@@ -17,7 +17,7 @@ Get an endpoint configuration
 ### Example
 ```javascript
 import EndpointsApi from 'EndpointsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -54,7 +54,7 @@ List endpoint configurations
 ### Example
 ```javascript
 import EndpointsApi from 'EndpointsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

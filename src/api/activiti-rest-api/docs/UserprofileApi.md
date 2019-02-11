@@ -5,10 +5,11 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**changePassword**](UserprofileApi.md#changePassword) | **POST** /enterprise/profile-password | Change user password
-[**getProfile**](UserprofileApi.md#getProfile) | **GET** /enterprise/profile | Get user profile
 [**getProfilePicture**](UserprofileApi.md#getProfilePicture) | **GET** /enterprise/profile-picture | Retrieve user profile picture
+[**getProfile**](UserprofileApi.md#getProfile) | **GET** /enterprise/profile | Get user profile
 [**updateProfile**](UserprofileApi.md#updateProfile) | **POST** /enterprise/profile | Update user profile
 [**uploadProfilePicture**](UserprofileApi.md#uploadProfilePicture) | **POST** /enterprise/profile-picture | Change user profile picture
+[**getProfilePictureUrl**](ProfileApi.md#getProfile) | **GET** /app/rest/admin/profile-picture | Retrieve Url user profile picture
 
 
 <a name="changePassword"></a>
@@ -20,7 +21,7 @@ Change user password
 ### Example
 ```javascript
 import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -48,41 +49,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getProfile"></a>
-# **getProfile**
-> UserRepresentation getProfile()
-
-Get user profile
-
-This operation returns account information for the current user. This is useful to get the name, email, the groups that the user is part of, the user picture, etc.
-
-### Example
-```javascript
-import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from '@alfresco/js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let userprofileApi = new UserprofileApi(this.alfrescoApi);
-
-userprofileApi.getProfile().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-[**UserRepresentation**](UserRepresentation.md)
-
 <a name="getProfilePicture"></a>
 # **getProfilePicture**
 > Blob getProfilePicture()
@@ -94,7 +60,7 @@ Generally returns an image file
 ### Example
 ```javascript
 import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -118,6 +84,41 @@ This endpoint does not need any parameter.
 
 **Blob**
 
+<a name="getProfile"></a>
+# **getProfile**
+> UserRepresentation getProfile()
+
+Get user profile
+
+This operation returns account information for the current user. This is useful to get the name, email, the groups that the user is part of, the user picture, etc.
+
+### Example
+```javascript
+import UserprofileApi from 'UserprofileApi';
+import { AlfrescoApi } from 'alfresco-js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let userprofileApi = new UserprofileApi(this.alfrescoApi);
+
+userprofileApi.getProfile().then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**UserRepresentation**](UserRepresentation.md)
+
 <a name="updateProfile"></a>
 # **updateProfile**
 > UserRepresentation updateProfile(userRepresentation)
@@ -129,7 +130,7 @@ Only a first name, last name, email and company can be updated
 ### Example
 ```javascript
 import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -166,7 +167,7 @@ Change user profile picture
 ### Example
 ```javascript
 import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -194,3 +195,43 @@ Name | Type | Description  | Notes
 
 [**ImageUploadRepresentation**](ImageUploadRepresentation.md)
 
+
+<a name="getProfilePictureUrl"></a>
+# **getProfilePictureUrl**
+> File getProfilePictureUrl()
+
+Retrieve user url profile picture
+
+Generally returns an URL image file
+
+### Example
+```javascript
+import UserprofileApi from 'UserprofileApi';
+import { AlfrescoApi } from 'alfresco-js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let userprofileApi = new UserprofileApi(this.alfrescoApi);
+
+userprofileApi.getProfilePictureUrl();
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**String**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+ 

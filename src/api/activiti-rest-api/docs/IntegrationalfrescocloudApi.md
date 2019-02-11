@@ -7,8 +7,8 @@ Method | HTTP request | Description
 [**confirmAuthorisation**](IntegrationalfrescocloudApi.md#confirmAuthorisation) | **GET** /enterprise/integration/alfresco-cloud/confirm-auth-request | Alfresco Cloud Authorization
 [**getAllNetworks**](IntegrationalfrescocloudApi.md#getAllNetworks) | **GET** /enterprise/integration/alfresco-cloud/networks | List Alfresco networks
 [**getAllSites**](IntegrationalfrescocloudApi.md#getAllSites) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites | List Alfresco sites
-[**getContentInFolder**](IntegrationalfrescocloudApi.md#getContentInFolder) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List files and folders inside a specific folder
 [**getContentInFolderPath**](IntegrationalfrescocloudApi.md#getContentInFolderPath) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/folderpath/{folderPath}/content | List files and folders inside a specific folder identified by path
+[**getContentInFolder**](IntegrationalfrescocloudApi.md#getContentInFolder) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List files and folders inside a specific folder
 [**getContentInSite**](IntegrationalfrescocloudApi.md#getContentInSite) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content | List files and folders inside a specific site
 
 
@@ -23,7 +23,7 @@ Returns Alfresco OAuth HTML Page
 ### Example
 ```javascript
 import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -60,7 +60,7 @@ List Alfresco networks
 ### Example
 ```javascript
 import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -95,7 +95,7 @@ Returns ALL Sites
 ### Example
 ```javascript
 import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -123,6 +123,49 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoSiteRepresenation**](ResultListDataRepresentationAlfrescoSiteRepresenation.md)
 
+<a name="getContentInFolderPath"></a>
+# **getContentInFolderPath**
+> ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderPath(networkIdopts)
+
+List files and folders inside a specific folder identified by path
+
+### Example
+```javascript
+import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
+import { AlfrescoApi } from 'alfresco-js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
+
+let opts = { 
+  'siteId': siteId_example //  | siteId
+  'path': path_example //  | path
+};
+
+integrationalfrescocloudApi.getContentInFolderPath(networkIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **networkId** | **string**| networkId | 
+ **siteId** | **string**| siteId | [optional] 
+ **path** | **string**| path | [optional] 
+
+### Return type
+
+[**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
+
 <a name="getContentInFolder"></a>
 # **getContentInFolder**
 > ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolder(networkIdfolderId)
@@ -132,7 +175,7 @@ List files and folders inside a specific folder
 ### Example
 ```javascript
 import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -161,49 +204,6 @@ Name | Type | Description  | Notes
 
 [**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
 
-<a name="getContentInFolderPath"></a>
-# **getContentInFolderPath**
-> ResultListDataRepresentationAlfrescoContentRepresentation getContentInFolderPath(networkIdopts)
-
-List files and folders inside a specific folder identified by path
-
-### Example
-```javascript
-import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
-
-let opts = { 
-  'siteId': siteId_example /*  | siteId */
-  'path': path_example /*  | path */
-};
-
-integrationalfrescocloudApi.getContentInFolderPath(networkIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **networkId** | **string**| networkId | 
- **siteId** | **string**| siteId | [optional] 
- **path** | **string**| path | [optional] 
-
-### Return type
-
-[**ResultListDataRepresentationAlfrescoContentRepresentation**](ResultListDataRepresentationAlfrescoContentRepresentation.md)
-
 <a name="getContentInSite"></a>
 # **getContentInSite**
 > ResultListDataRepresentationAlfrescoContentRepresentation getContentInSite(networkIdsiteId)
@@ -213,7 +213,7 @@ List files and folders inside a specific site
 ### Example
 ```javascript
 import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

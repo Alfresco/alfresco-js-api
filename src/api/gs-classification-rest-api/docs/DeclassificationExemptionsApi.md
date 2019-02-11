@@ -1,14 +1,14 @@
-# DeclassificationexemptionsApi
+# DeclassificationExemptionsApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/gs/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createDeclassificationExemption**](DeclassificationexemptionsApi.md#createDeclassificationExemption) | **POST** /declassification-exemptions | Create a declassification exemption
-[**deleteDeclassificationExemption**](DeclassificationexemptionsApi.md#deleteDeclassificationExemption) | **DELETE** /declassification-exemptions/{declassificationExemptionId} | Delete a declassification exemption
-[**listDeclassificationExemptions**](DeclassificationexemptionsApi.md#listDeclassificationExemptions) | **GET** /declassification-exemptions | List all declassification exemptions
-[**showDeclassificationExemptionById**](DeclassificationexemptionsApi.md#showDeclassificationExemptionById) | **GET** /declassification-exemptions/{declassificationExemptionId} | Get declassification exemption information
-[**updateDeclassificationExemption**](DeclassificationexemptionsApi.md#updateDeclassificationExemption) | **PUT** /declassification-exemptions/{declassificationExemptionId} | Update a declassification exemption
+[**createDeclassificationExemption**](DeclassificationExemptionsApi.md#createDeclassificationExemption) | **POST** /declassification-exemptions | Create a declassification exemption
+[**deleteDeclassificationExemption**](DeclassificationExemptionsApi.md#deleteDeclassificationExemption) | **DELETE** /declassification-exemptions/{declassificationExemptionId} | Delete a declassification exemption
+[**listDeclassificationExemptions**](DeclassificationExemptionsApi.md#listDeclassificationExemptions) | **GET** /declassification-exemptions | List all declassification exemptions
+[**showDeclassificationExemptionById**](DeclassificationExemptionsApi.md#showDeclassificationExemptionById) | **GET** /declassification-exemptions/{declassificationExemptionId} | Get declassification exemption information
+[**updateDeclassificationExemption**](DeclassificationExemptionsApi.md#updateDeclassificationExemption) | **PUT** /declassification-exemptions/{declassificationExemptionId} | Update a declassification exemption
 
 
 <a name="createDeclassificationExemption"></a>
@@ -64,15 +64,15 @@ JSON
 
 ### Example
 ```javascript
-import DeclassificationexemptionsApi from 'DeclassificationexemptionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import DeclassificationExemptionsApi from 'DeclassificationExemptionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
+let declassificationexemptionsApi = new DeclassificationExemptionsApi(this.alfrescoApi);
 
 
 declassificationexemptionsApi.createDeclassificationExemption(declassificationExemption).then((data) => {
@@ -103,15 +103,15 @@ Deletes the declassification exemption with id **declassificationExemptionId**. 
 
 ### Example
 ```javascript
-import DeclassificationexemptionsApi from 'DeclassificationexemptionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import DeclassificationExemptionsApi from 'DeclassificationExemptionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
+let declassificationexemptionsApi = new DeclassificationExemptionsApi(this.alfrescoApi);
 
 
 declassificationexemptionsApi.deleteDeclassificationExemption(declassificationExemptionId).then(() => {
@@ -142,19 +142,19 @@ Gets all declassification exemptions.
 
 ### Example
 ```javascript
-import DeclassificationexemptionsApi from 'DeclassificationexemptionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import DeclassificationExemptionsApi from 'DeclassificationExemptionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
+let declassificationexemptionsApi = new DeclassificationExemptionsApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list. */
-  'maxItems': 56 /*  | The maximum number of items to return in the list. */
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 };
 
 declassificationexemptionsApi.listDeclassificationExemptions(opts).then((data) => {
@@ -186,15 +186,15 @@ Gets the declassification exemption with id **declassificationExemptionId**.
 
 ### Example
 ```javascript
-import DeclassificationexemptionsApi from 'DeclassificationexemptionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import DeclassificationExemptionsApi from 'DeclassificationExemptionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
+let declassificationexemptionsApi = new DeclassificationExemptionsApi(this.alfrescoApi);
 
 
 declassificationexemptionsApi.showDeclassificationExemptionById(declassificationExemptionId).then((data) => {
@@ -225,15 +225,15 @@ Updates the declassification exemption with id **declassificationExemptionId**. 
 
 ### Example
 ```javascript
-import DeclassificationexemptionsApi from 'DeclassificationexemptionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import DeclassificationExemptionsApi from 'DeclassificationExemptionsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let declassificationexemptionsApi = new DeclassificationexemptionsApi(this.alfrescoApi);
+let declassificationexemptionsApi = new DeclassificationExemptionsApi(this.alfrescoApi);
 
 
 declassificationexemptionsApi.updateDeclassificationExemption(declassificationExemptionIddeclassificationExemption).then((data) => {

@@ -45,7 +45,7 @@ If the source **nodeId** is a file, it's properties, aspects and tags are copied
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -55,7 +55,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -63,8 +63,8 @@ let opts = {
 * isLocked
 * path
 * permissions
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -75,7 +75,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.copyNode(nodeIdnodeBodyCopyopts).then((data) => {
@@ -175,7 +175,7 @@ JSON
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -185,7 +185,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  /*  | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -196,7 +196,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.createAssociation(nodeIdassociationBodyCreateopts).then((data) => {
@@ -409,7 +409,7 @@ JSON
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -419,8 +419,8 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'autoRename': true /*  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix. */
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+  'autoRename': true //  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -428,8 +428,8 @@ let opts = {
 * isLocked
 * path
 * permissions
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -440,7 +440,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.createNode(nodeIdnodeBodyCreateopts).then((data) => {
@@ -545,7 +545,7 @@ JSON
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -555,7 +555,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'fields':  /*  | A list of field names.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -566,7 +566,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.createSecondaryChildAssociation(nodeIdsecondaryChildAssociationBodyCreateopts).then((data) => {
@@ -620,7 +620,7 @@ in the other direction.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -630,7 +630,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'assocType': assocType_example /*  | Only delete associations of this type. */
+  'assocType': assocType_example //  | Only delete associations of this type.
 };
 
 nodesApi.deleteAssociation(nodeIdtargetIdopts).then(() => {
@@ -679,7 +679,7 @@ associations were to nodes inside or outside the restored hierarchy.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -689,9 +689,9 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'permanent': true /*  | If **true** then the node is deleted permanently, without moving to the trashcan.
+  'permanent': true //  | If **true** then the node is deleted permanently, without moving to the trashcan.
 Only the owner of the node or an admin can permanently delete the node.
- */
+
 };
 
 nodesApi.deleteNode(nodeIdopts).then(() => {
@@ -733,7 +733,7 @@ associated as a secondary child with other secondary parents.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -743,7 +743,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'assocType': assocType_example /*  | Only delete associations of this type. */
+  'assocType': assocType_example //  | Only delete associations of this type.
 };
 
 nodesApi.deleteSecondaryChildAssociation(nodeIdchildIdopts).then(() => {
@@ -782,7 +782,7 @@ You can use the **include** parameter to return additional information.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -792,7 +792,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -800,11 +800,11 @@ let opts = {
 * isLocked
 * path
 * permissions
- */
-  'relativePath': relativePath_example /*  | A path relative to the **nodeId**. If you set this,
+
+  'relativePath': relativePath_example //  | A path relative to the **nodeId**. If you set this,
 information is returned on the node resolved by this path.
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -815,7 +815,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.getNode(nodeIdopts).then((data) => {
@@ -878,7 +878,7 @@ Gets the content of the node with identifier **nodeId**.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -888,7 +888,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
+  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -897,13 +897,13 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
- */
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
+
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
- */
-  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
+
+  'range': range_example //  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
- */
+
 };
 
 nodesApi.getNodeContent(nodeIdopts).then(() => {
@@ -929,7 +929,7 @@ for example, certain image files and PDF files.
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
  | [optional] [default to true]
- **ifModifiedSince** | **DateAlfresco**| Only returns the content if it has been modified since the date provided.
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
  | [optional] 
  **range** | **string**| The Range header indicates the part of a document that the server should return.
@@ -981,7 +981,7 @@ You can use any of the following fields to order the results:
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -991,21 +991,21 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
+
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
- */
-  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- */
-  'where': where_example /*  | Optionally filter the list. Here are some examples:
+
+  'where': where_example //  | Optionally filter the list. Here are some examples:
 
 *   where=(isFolder=true)
 
@@ -1020,8 +1020,8 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 *   where=(assocType='my:specialAssocType')
 
 *   where=(isPrimary=false and assocType='my:specialAssocType')
- */
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * association
@@ -1031,10 +1031,10 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 * path
 * properties
 * permissions
- */
-  'relativePath': relativePath_example /*  | Return information on children in the folder resolved by this path. The path is relative to **nodeId**. */
-  'includeSource': true /*  | Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**. */
-  'fields':  /*  | A list of field names.
+
+  'relativePath': relativePath_example //  | Return information on children in the folder resolved by this path. The path is relative to **nodeId**.
+  'includeSource': true //  | Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**.
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1045,7 +1045,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.listNodeChildren(nodeIdopts).then((data) => {
@@ -1141,7 +1141,7 @@ The list includes both the primary parent and any secondary parents.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1151,15 +1151,15 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'where': where_example /*  | Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
+  'where': where_example //  | Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
 
 *   where=(assocType='my:specialAssocType')
 
 *   where=(isPrimary=true)
 
 *   where=(isPrimary=false and assocType='my:specialAssocType')
- */
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1167,15 +1167,15 @@ let opts = {
 * isLocked
 * path
 * properties
- */
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
+
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
+
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
- */
-  'includeSource': true /*  | Also include **source** (in addition to **entries**) with folder information on **nodeId** */
-  'fields':  /*  | A list of field names.
+
+  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on **nodeId**
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1186,7 +1186,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.listParents(nodeIdopts).then((data) => {
@@ -1261,7 +1261,7 @@ Gets a list of secondary child nodes that are associated with the current parent
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1271,11 +1271,11 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'where': where_example /*  | Optionally filter the list by assocType. Here's an example:
+  'where': where_example //  | Optionally filter the list by assocType. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
- */
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1283,15 +1283,15 @@ let opts = {
 * isLocked
 * path
 * properties
- */
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
+
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
+
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
- */
-  'includeSource': true /*  | Also include **source** (in addition to **entries**) with folder information on **nodeId** */
-  'fields':  /*  | A list of field names.
+
+  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on **nodeId**
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1302,7 +1302,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.listSecondaryChildren(nodeIdopts).then((data) => {
@@ -1373,7 +1373,7 @@ Gets a list of source nodes that are associated with the current target **nodeId
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1383,11 +1383,11 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'where': where_example /*  | Optionally filter the list by **assocType**. Here's an example:
+  'where': where_example //  | Optionally filter the list by **assocType**. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
- */
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1395,8 +1395,8 @@ let opts = {
 * isLocked
 * path
 * properties
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1407,7 +1407,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.listSourceAssociations(nodeIdopts).then((data) => {
@@ -1467,7 +1467,7 @@ Gets a list of target nodes that are associated with the current source **nodeId
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1477,11 +1477,11 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'where': where_example /*  | Optionally filter the list by **assocType**. Here's an example:
+  'where': where_example //  | Optionally filter the list by **assocType**. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
- */
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1489,8 +1489,8 @@ let opts = {
 * isLocked
 * path
 * properties
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1501,7 +1501,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.listTargetAssociations(nodeIdopts).then((data) => {
@@ -1584,7 +1584,7 @@ If a lock on the node cannot be taken, then an error is returned.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1594,7 +1594,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1602,8 +1602,8 @@ let opts = {
 * isLocked
 * path
 * permissions
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1614,7 +1614,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.lockNode(nodeIdnodeBodyLockopts).then((data) => {
@@ -1679,7 +1679,7 @@ The move will effectively change the primary parent.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1689,7 +1689,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1697,8 +1697,8 @@ let opts = {
 * isLocked
 * path
 * permissions
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1709,7 +1709,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.moveNode(nodeIdnodeBodyMoveopts).then((data) => {
@@ -1770,7 +1770,7 @@ If a lock on the node cannot be released, then an error is returned.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1780,7 +1780,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1788,8 +1788,8 @@ let opts = {
 * isLocked
 * path
 * permissions
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1800,7 +1800,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.unlockNode(nodeIdopts).then((data) => {
@@ -1892,7 +1892,7 @@ JSON
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1902,7 +1902,7 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1910,8 +1910,8 @@ let opts = {
 * isLocked
 * path
 * permissions
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1922,7 +1922,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.updateNode(nodeIdnodeBodyUpdateopts).then((data) => {
@@ -1991,7 +1991,7 @@ tooling to accept an arbitrary file.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -2001,17 +2001,17 @@ this.alfrescoApi.setConfig({
 let nodesApi = new NodesApi(this.alfrescoApi);
 
 let opts = { 
-  'majorVersion': true /*  | If **true**, create a major version.
+  'majorVersion': true //  | If **true**, create a major version.
 Setting this parameter also enables versioning of this node, if it is not already versioned.
- */
-  'comment': comment_example /*  | Add a version comment which will appear in version history.
+
+  'comment': comment_example //  | Add a version comment which will appear in version history.
 Setting this parameter also enables versioning of this node, if it is not already versioned.
- */
-  'name': name_example /*  | Optional new name. This should include the file extension.
+
+  'name': name_example //  | Optional new name. This should include the file extension.
 The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.
 The character . must not be used at the end of the name.
- */
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -2019,8 +2019,8 @@ The character . must not be used at the end of the name.
 * isLocked
 * path
 * permissions
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -2031,7 +2031,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 nodesApi.updateNodeContent(nodeIdcontentBodyUpdateopts).then((data) => {

@@ -4,53 +4,16 @@ All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getForm**](FormmodelsApi.md#getForm) | **GET** /enterprise/editor/form-models/{formId} | Get a form model
 [**getFormEditorJson**](FormmodelsApi.md#getFormEditorJson) | **GET** /enterprise/forms/{formId}/editorJson | Get form content
 [**getFormHistory**](FormmodelsApi.md#getFormHistory) | **GET** /enterprise/editor/form-models/{formId}/history/{formHistoryId} | Get form history
-[**getForm_0**](FormmodelsApi.md#getForm_0) | **GET** /enterprise/forms/{formId} | Get a form
+[**getForm**](FormmodelsApi.md#getForm) | **GET** /enterprise/editor/form-models/{formId} | Get a form model
+[**getForm**](FormmodelsApi.md#getForm) | **GET** /enterprise/forms/{formId} | Get a form
+[**getForms**](FormmodelsApi.md#getForms) | **GET** /enterprise/editor/form-models/values | Get forms
 [**getForms**](FormmodelsApi.md#getForms) | **GET** /enterprise/editor/form-models | List form models
-[**getForms_0**](FormmodelsApi.md#getForms_0) | **GET** /enterprise/editor/form-models/values | Get forms
-[**getForms_1**](FormmodelsApi.md#getForms_1) | **GET** /enterprise/forms | Query forms
+[**getForms**](FormmodelsApi.md#getForms) | **GET** /enterprise/forms | Query forms
 [**saveForm**](FormmodelsApi.md#saveForm) | **PUT** /enterprise/editor/form-models/{formId} | Update form model content
 [**validateModel**](FormmodelsApi.md#validateModel) | **PUT** /enterprise/editor/form-models/{formId}/validate | Validate form model content
 
-
-<a name="getForm"></a>
-# **getForm**
-> FormRepresentation getForm(formId)
-
-Get a form model
-
-### Example
-```javascript
-import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
-
-
-formmodelsApi.getForm(formId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **formId** | **number**| formId | 
-
-### Return type
-
-[**FormRepresentation**](FormRepresentation.md)
 
 <a name="getFormEditorJson"></a>
 # **getFormEditorJson**
@@ -61,7 +24,7 @@ Get form content
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -98,7 +61,7 @@ Get form history
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -127,16 +90,16 @@ Name | Type | Description  | Notes
 
 [**FormRepresentation**](FormRepresentation.md)
 
-<a name="getForm_0"></a>
-# **getForm_0**
-> RuntimeFormRepresentation getForm_0(formId)
+<a name="getForm"></a>
+# **getForm**
+> FormRepresentation getForm(formId)
 
-Get a form
+Get a form model
 
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -146,7 +109,7 @@ this.alfrescoApi.setConfig({
 let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 
-formmodelsApi.getForm_0(formId).then((data) => {
+formmodelsApi.getForm(formId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -162,7 +125,44 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RuntimeFormRepresentation**](RuntimeFormRepresentation.md)
+[**FormRepresentation**](FormRepresentation.md)
+
+<a name="getForms"></a>
+# **getForms**
+> FormRepresentation getForms(formId)
+
+Get forms
+
+### Example
+```javascript
+import FormmodelsApi from 'FormmodelsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
+
+
+formmodelsApi.getForms(formId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **formId** | [**string**](string.md)| formId | 
+
+### Return type
+
+[**FormRepresentation**](FormRepresentation.md)
 
 <a name="getForms"></a>
 # **getForms**
@@ -173,7 +173,7 @@ List form models
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -197,53 +197,16 @@ This endpoint does not need any parameter.
 
 [**ResultListDataRepresentationFormRepresentation**](ResultListDataRepresentationFormRepresentation.md)
 
-<a name="getForms_0"></a>
-# **getForms_0**
-> FormRepresentation getForms_0(formId)
-
-Get forms
-
-### Example
-```javascript
-import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
-
-
-formmodelsApi.getForms_0(formId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **formId** | [**string**](string.md)| formId | 
-
-### Return type
-
-[**FormRepresentation**](FormRepresentation.md)
-
-<a name="getForms_1"></a>
-# **getForms_1**
-> ResultListDataRepresentationRuntimeFormRepresentation getForms_1(opts)
+<a name="getForms"></a>
+# **getForms**
+> ResultListDataRepresentationRuntimeFormRepresentation getForms(opts)
 
 Query forms
 
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -253,16 +216,16 @@ this.alfrescoApi.setConfig({
 let formmodelsApi = new FormmodelsApi(this.alfrescoApi);
 
 let opts = { 
-  'nameLike': nameLike_example /*  | nameLike */
-  'appId': 789 /*  | appId */
-  'tenantId': 789 /*  | tenantId */
-  'start': 56 /*  | start */
-  'sort': sort_example /*  | sort */
-  'order': order_example /*  | order */
-  'size': 56 /*  | size */
+  'nameLike': nameLike_example //  | nameLike
+  'appId': 789 //  | appId
+  'tenantId': 789 //  | tenantId
+  'start': 56 //  | start
+  'sort': sort_example //  | sort
+  'order': order_example //  | order
+  'size': 56 //  | size
 };
 
-formmodelsApi.getForms_1(opts).then((data) => {
+formmodelsApi.getForms(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -295,7 +258,7 @@ Update form model content
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -335,7 +298,7 @@ The model content to be validated must be specified in the POST body
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

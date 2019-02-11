@@ -39,7 +39,7 @@ You can sort the result list using the **orderBy** parameter. You can specify on
 ### Example
 ```javascript
 import QueriesApi from 'QueriesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -49,19 +49,19 @@ this.alfrescoApi.setConfig({
 let queriesApi = new QueriesApi(this.alfrescoApi);
 
 let opts = { 
-  'rootNodeId': rootNodeId_example /*  | The id of the node to start the search from.
+  'rootNodeId': rootNodeId_example //  | The id of the node to start the search from.
 
 Supports the aliases -my-, -root- and -shared-.
- */
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
+
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
+
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
- */
-  'nodeType': nodeType_example /*  | Restrict the returned results to only those of the given node type and its sub-types
- */
-  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
+
+  'nodeType': nodeType_example //  | Restrict the returned results to only those of the given node type and its sub-types
+
+  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -69,16 +69,16 @@ If not supplied then the default value is 100.
 * isLocked
 * path
 * properties
- */
-  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -89,7 +89,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 queriesApi.findNodes(termopts).then((data) => {
@@ -176,7 +176,7 @@ You can sort the result list using the **orderBy** parameter. You can specify on
 ### Example
 ```javascript
 import QueriesApi from 'QueriesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -186,13 +186,13 @@ this.alfrescoApi.setConfig({
 let queriesApi = new QueriesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
+
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -203,15 +203,15 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
-  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- */
+
 };
 
 queriesApi.findPeople(termopts).then((data) => {
@@ -285,7 +285,7 @@ You can override the default by using the **orderBy** parameter. You can specify
 ### Example
 ```javascript
 import QueriesApi from 'QueriesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -295,21 +295,21 @@ this.alfrescoApi.setConfig({
 let queriesApi = new QueriesApi(this.alfrescoApi);
 
 let opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
+  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
+
+  'maxItems': 56 //  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
- */
-  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+
+  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- */
-  'fields':  /*  | A list of field names.
+
+  'fields':  //  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -320,7 +320,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
- */
+
 };
 
 queriesApi.findSites(termopts).then((data) => {

@@ -20,7 +20,7 @@ Bulk update a list of users
 ### Example
 ```javascript
 import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -57,7 +57,7 @@ Create a user
 ### Example
 ```javascript
 import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -94,7 +94,7 @@ Get a user
 ### Example
 ```javascript
 import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -104,7 +104,7 @@ this.alfrescoApi.setConfig({
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 let opts = { 
-  'summary': true /*  | summary */
+  'summary': true //  | summary
 };
 
 adminusersApi.getUser(userIdopts).then((data) => {
@@ -135,7 +135,7 @@ Query users
 ### Example
 ```javascript
 import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -145,17 +145,17 @@ this.alfrescoApi.setConfig({
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 let opts = { 
-  'filter': filter_example /*  | filter */
-  'status': status_example /*  | status */
-  'accountType': accountType_example /*  | accountType */
-  'sort': sort_example /*  | sort */
-  'company': company_example /*  | company */
-  'start': 56 /*  | start */
-  'page': 56 /*  | page */
-  'size': 56 /*  | size */
-  'groupId': 789 /*  | groupId */
-  'tenantId': 789 /*  | tenantId */
-  'summary': true /*  | summary */
+  'filter': filter_example //  | filter
+  'status': status_example //  | status
+  'accountType': accountType_example //  | accountType
+  'sort': sort_example //  | sort
+  'company': company_example //  | company
+  'start': 56 //  | start
+  'page': 56 //  | page
+  'size': 56 //  | size
+  'groupId': 789 //  | groupId
+  'tenantId': 789 //  | tenantId
+  'summary': true //  | summary
 };
 
 adminusersApi.getUsers(opts).then((data) => {
@@ -195,7 +195,7 @@ Update a user
 ### Example
 ```javascript
 import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

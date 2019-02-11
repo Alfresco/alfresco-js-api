@@ -6,9 +6,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createTenant**](AdmintenantsApi.md#createTenant) | **POST** /enterprise/admin/tenants | Create a tenant
 [**deleteTenant**](AdmintenantsApi.md#deleteTenant) | **DELETE** /enterprise/admin/tenants/{tenantId} | Delete a tenant
-[**getTenant**](AdmintenantsApi.md#getTenant) | **GET** /enterprise/admin/tenants/{tenantId} | Get a tenant
 [**getTenantEvents**](AdmintenantsApi.md#getTenantEvents) | **GET** /enterprise/admin/tenants/{tenantId}/events | Get tenant events
 [**getTenantLogo**](AdmintenantsApi.md#getTenantLogo) | **GET** /enterprise/admin/tenants/{tenantId}/logo | Get a tenant's logo
+[**getTenant**](AdmintenantsApi.md#getTenant) | **GET** /enterprise/admin/tenants/{tenantId} | Get a tenant
 [**getTenants**](AdmintenantsApi.md#getTenants) | **GET** /enterprise/admin/tenants | List tenants
 [**update**](AdmintenantsApi.md#update) | **PUT** /enterprise/admin/tenants/{tenantId} | Update a tenant
 [**uploadTenantLogo**](AdmintenantsApi.md#uploadTenantLogo) | **POST** /enterprise/admin/tenants/{tenantId}/logo | Update a tenant's logo
@@ -25,7 +25,7 @@ Only a tenant manager may access this endpoint
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -62,7 +62,7 @@ Delete a tenant
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -90,43 +90,6 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
-<a name="getTenant"></a>
-# **getTenant**
-> TenantRepresentation getTenant(tenantId)
-
-Get a tenant
-
-### Example
-```javascript
-import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
-
-
-admintenantsApi.getTenant(tenantId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **tenantId** | **number**| tenantId | 
-
-### Return type
-
-[**TenantRepresentation**](TenantRepresentation.md)
-
 <a name="getTenantEvents"></a>
 # **getTenantEvents**
 > TenantEvent getTenantEvents(tenantId)
@@ -136,7 +99,7 @@ Get tenant events
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -173,7 +136,7 @@ Get a tenant's logo
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -201,6 +164,43 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
+<a name="getTenant"></a>
+# **getTenant**
+> TenantRepresentation getTenant(tenantId)
+
+Get a tenant
+
+### Example
+```javascript
+import AdmintenantsApi from 'AdmintenantsApi';
+import { AlfrescoApi } from 'alfresco-js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
+
+
+admintenantsApi.getTenant(tenantId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenantId** | **number**| tenantId | 
+
+### Return type
+
+[**TenantRepresentation**](TenantRepresentation.md)
+
 <a name="getTenants"></a>
 # **getTenants**
 > LightTenantRepresentation getTenants()
@@ -212,7 +212,7 @@ Only a tenant manager may access this endpoint
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -245,7 +245,7 @@ Update a tenant
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -283,7 +283,7 @@ Update a tenant's logo
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

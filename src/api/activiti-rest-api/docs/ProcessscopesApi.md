@@ -16,7 +16,7 @@ List runtime process scopes
 ### Example
 ```javascript
 import ProcessscopesApi from 'ProcessscopesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi } from 'alfresco-js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
