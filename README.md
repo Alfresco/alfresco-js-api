@@ -439,7 +439,7 @@ If you want call your custom rest point in one of those two service use the corr
 A complete list of all the ECM methods is available here : [Content API](/src/api/content-rest-api) here you can find some common [Example](/ecm-example.md) 
 
 # BPM Example
-A complete list of all the ECM methods is available here : [APS 2.X API](/src/api/activiti-rest-api) here you can find some common [Example](/bpm-example.md) 
+A complete list of all the BPM methods is available here : [APS 2.X API](/src/api/activiti-rest-api) here you can find some common [Example](/bpm-example.md) 
 
 # Legacy Endpoint porting (ver 2.x.x)
 Since version 3.0.0 in order to support tree shaking the JS-API has been radically redesigned.
