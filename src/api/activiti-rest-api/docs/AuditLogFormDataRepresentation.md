@@ -1,4 +1,4 @@
-# .AuditLogFormDataRepresentation
+# AuditLogFormDataRepresentation
 
 ## Properties
 Name | Type | Description | Notes

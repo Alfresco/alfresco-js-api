@@ -1,4 +1,4 @@
-# .StatusInfo
+# StatusInfo
 
 ## Properties
 Name | Type | Description | Notes

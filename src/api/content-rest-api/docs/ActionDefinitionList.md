@@ -1,4 +1,4 @@
-# .ActionDefinitionList
+# ActionDefinitionList
 
 ## Properties
 Name | Type | Description | Notes

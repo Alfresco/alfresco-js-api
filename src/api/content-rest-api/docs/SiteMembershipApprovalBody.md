@@ -1,4 +1,4 @@
-# .SiteMembershipApprovalBody
+# SiteMembershipApprovalBody
 
 ## Properties
 Name | Type | Description | Notes

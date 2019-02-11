@@ -1,4 +1,4 @@
-# .TaskRepresentation
+# TaskRepresentation
 
 ## Properties
 Name | Type | Description | Notes

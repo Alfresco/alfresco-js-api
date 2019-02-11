@@ -1,4 +1,4 @@
-# .GenericFacetResponse
+# GenericFacetResponse
 
 ## Properties
 Name | Type | Description | Notes

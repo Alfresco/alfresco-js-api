@@ -1,4 +1,4 @@
-# .SiteMembershipRequestWithPersonPagingList
+# SiteMembershipRequestWithPersonPagingList
 
 ## Properties
 Name | Type | Description | Notes

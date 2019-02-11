@@ -1,4 +1,4 @@
-# .HistoricProcessInstanceQueryRepresentation
+# HistoricProcessInstanceQueryRepresentation
 
 ## Properties
 Name | Type | Description | Notes

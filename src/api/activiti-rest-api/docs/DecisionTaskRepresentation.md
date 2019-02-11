@@ -1,4 +1,4 @@
-# .DecisionTaskRepresentation
+# DecisionTaskRepresentation
 
 ## Properties
 Name | Type | Description | Notes

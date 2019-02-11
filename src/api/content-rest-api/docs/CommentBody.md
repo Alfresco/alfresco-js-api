@@ -1,4 +1,4 @@
-# .CommentBody
+# CommentBody
 
 ## Properties
 Name | Type | Description | Notes

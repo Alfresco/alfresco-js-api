@@ -1,4 +1,4 @@
-# .TopicPagingList
+# TopicPagingList
 
 ## Properties
 Name | Type | Description | Notes

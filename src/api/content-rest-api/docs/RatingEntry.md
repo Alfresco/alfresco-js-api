@@ -1,4 +1,4 @@
-# .RatingEntry
+# RatingEntry
 
 ## Properties
 Name | Type | Description | Notes

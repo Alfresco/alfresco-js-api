@@ -1,4 +1,4 @@
-# .ChecklistOrderRepresentation
+# ChecklistOrderRepresentation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .ResultListDataRepresentationUserProcessInstanceFilterRepresentation
+# ResultListDataRepresentationUserProcessInstanceFilterRepresentation
 
 ## Properties
 Name | Type | Description | Notes

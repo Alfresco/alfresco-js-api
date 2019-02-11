@@ -1,4 +1,4 @@
-# .FavoriteSite
+# FavoriteSite
 
 ## Properties
 Name | Type | Description | Notes

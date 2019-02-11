@@ -1,4 +1,4 @@
-# .RuntimeappdefinitionsApi
+# RuntimeappdefinitionsApi
 
 All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
 

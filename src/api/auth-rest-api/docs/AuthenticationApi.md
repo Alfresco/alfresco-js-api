@@ -1,4 +1,4 @@
-# .AuthenticationApi
+# AuthenticationApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/authentication/versions/1*
 

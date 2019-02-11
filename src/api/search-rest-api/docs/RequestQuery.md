@@ -1,4 +1,4 @@
-# .RequestQuery
+# RequestQuery
 
 ## Properties
 Name | Type | Description | Notes

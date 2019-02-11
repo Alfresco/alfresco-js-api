@@ -1,4 +1,4 @@
-# .FormTabRepresentation
+# FormTabRepresentation
 
 ## Properties
 Name | Type | Description | Notes

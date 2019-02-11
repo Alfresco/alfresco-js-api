@@ -1,4 +1,4 @@
-# .DownloadEntry
+# DownloadEntry
 
 ## Properties
 Name | Type | Description | Notes

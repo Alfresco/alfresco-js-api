@@ -1,4 +1,4 @@
-# .SubmittedFormRepresentation
+# SubmittedFormRepresentation
 
 ## Properties
 Name | Type | Description | Notes

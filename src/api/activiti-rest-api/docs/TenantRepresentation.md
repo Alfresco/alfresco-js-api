@@ -1,4 +1,4 @@
-# .TenantRepresentation
+# TenantRepresentation
 
 ## Properties
 Name | Type | Description | Notes

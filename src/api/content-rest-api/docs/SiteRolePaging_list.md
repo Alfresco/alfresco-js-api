@@ -1,4 +1,4 @@
-# .SiteRolePagingList
+# SiteRolePagingList
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .DownloadBodyCreate
+# DownloadBodyCreate
 
 ## Properties
 Name | Type | Description | Notes

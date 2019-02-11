@@ -1,4 +1,4 @@
-# .RelatedContentRepresentation
+# RelatedContentRepresentation
 
 ## Properties
 Name | Type | Description | Notes

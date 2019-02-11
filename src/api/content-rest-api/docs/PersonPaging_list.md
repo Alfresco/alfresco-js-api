@@ -1,4 +1,4 @@
-# .PersonPagingList
+# PersonPagingList
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .PermissionsBodyUpdate
+# PermissionsBodyUpdate
 
 ## Properties
 Name | Type | Description | Notes

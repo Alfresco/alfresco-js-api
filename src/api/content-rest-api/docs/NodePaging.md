@@ -1,4 +1,4 @@
-# .NodePaging
+# NodePaging
 
 ## Properties
 Name | Type | Description | Notes

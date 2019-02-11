@@ -1,4 +1,4 @@
-# .Tag
+# Tag
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .DeletedNodeBodyRestore
+# DeletedNodeBodyRestore
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .GroupBodyUpdate
+# GroupBodyUpdate
 
 ## Properties
 Name | Type | Description | Notes

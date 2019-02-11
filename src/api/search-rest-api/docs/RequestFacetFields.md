@@ -1,4 +1,4 @@
-# .RequestFacetFields
+# RequestFacetFields
 
 ## Properties
 Name | Type | Description | Notes

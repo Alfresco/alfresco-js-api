@@ -1,4 +1,4 @@
-# .RecordFolderChildAssociation
+# RecordFolderChildAssociation
 
 ## Properties
 Name | Type | Description | Notes

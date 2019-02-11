@@ -1,4 +1,4 @@
-# .Ticket
+# Ticket
 
 ## Properties
 Name | Type | Description | Notes

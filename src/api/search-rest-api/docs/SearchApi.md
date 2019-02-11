@@ -1,4 +1,4 @@
-# .SearchApi
+# SearchApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/search/versions/1*
 

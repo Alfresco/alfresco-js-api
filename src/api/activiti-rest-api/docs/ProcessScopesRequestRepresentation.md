@@ -1,4 +1,4 @@
-# .ProcessScopesRequestRepresentation
+# ProcessScopesRequestRepresentation
 
 ## Properties
 Name | Type | Description | Notes

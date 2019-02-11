@@ -1,4 +1,4 @@
-# .LightTenantRepresentation
+# LightTenantRepresentation
 
 ## Properties
 Name | Type | Description | Notes

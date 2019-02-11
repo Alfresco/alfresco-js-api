@@ -1,4 +1,4 @@
-# .SiteMemberPaging
+# SiteMemberPaging
 
 ## Properties
 Name | Type | Description | Notes

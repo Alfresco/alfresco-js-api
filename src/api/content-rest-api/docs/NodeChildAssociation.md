@@ -1,4 +1,4 @@
-# .NodeChildAssociation
+# NodeChildAssociation
 
 ## Properties
 Name | Type | Description | Notes

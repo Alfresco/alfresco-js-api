@@ -1,4 +1,4 @@
-# .SiteMembershipRequestEntry
+# SiteMembershipRequestEntry
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .AuditCalculatedValueRepresentation
+# AuditCalculatedValueRepresentation
 
 ## Properties
 Name | Type | Description | Notes

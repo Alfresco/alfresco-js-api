@@ -1,4 +1,4 @@
-# .ActivityPagingList
+# ActivityPagingList
 
 ## Properties
 Name | Type | Description | Notes

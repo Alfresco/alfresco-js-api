@@ -1,4 +1,4 @@
-# .RequestLocalization
+# RequestLocalization
 
 ## Properties
 Name | Type | Description | Notes

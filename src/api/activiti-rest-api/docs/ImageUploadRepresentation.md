@@ -1,4 +1,4 @@
-# .ImageUploadRepresentation
+# ImageUploadRepresentation
 
 ## Properties
 Name | Type | Description | Notes

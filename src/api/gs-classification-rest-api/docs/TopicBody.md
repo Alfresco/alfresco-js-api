@@ -1,4 +1,4 @@
-# .TopicBody
+# TopicBody
 
 ## Properties
 Name | Type | Description | Notes

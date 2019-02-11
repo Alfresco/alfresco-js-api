@@ -1,4 +1,4 @@
-# .CommentRepresentation
+# CommentRepresentation
 
 ## Properties
 Name | Type | Description | Notes

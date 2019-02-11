@@ -1,4 +1,4 @@
-# .VariableScopeRepresentation
+# VariableScopeRepresentation
 
 ## Properties
 Name | Type | Description | Notes

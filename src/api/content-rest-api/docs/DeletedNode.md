@@ -1,4 +1,4 @@
-# .DeletedNode
+# DeletedNode
 
 ## Properties
 Name | Type | Description | Notes

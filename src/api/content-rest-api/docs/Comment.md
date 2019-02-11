@@ -1,4 +1,4 @@
-# .Comment
+# Comment
 
 ## Properties
 Name | Type | Description | Notes

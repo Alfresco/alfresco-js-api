@@ -1,4 +1,4 @@
-# .BoxContent
+# BoxContent
 
 ## Properties
 Name | Type | Description | Notes

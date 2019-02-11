@@ -1,4 +1,4 @@
-# .NamedObject
+# NamedObject
 
 ## Properties
 Name | Type | Description | Notes

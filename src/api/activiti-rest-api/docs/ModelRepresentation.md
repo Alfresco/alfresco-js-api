@@ -1,4 +1,4 @@
-# .ModelRepresentation
+# ModelRepresentation
 
 ## Properties
 Name | Type | Description | Notes

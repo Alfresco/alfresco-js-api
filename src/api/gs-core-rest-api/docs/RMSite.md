@@ -1,4 +1,4 @@
-# .RMSite
+# RMSite
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .TransferContainer
+# TransferContainer
 
 ## Properties
 Name | Type | Description | Notes

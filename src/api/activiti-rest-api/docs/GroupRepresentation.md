@@ -1,4 +1,4 @@
-# .GroupRepresentation
+# GroupRepresentation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .SecurityMarks
+# SecurityMarks
 
 ## Properties
 Name | Type | Description | Notes

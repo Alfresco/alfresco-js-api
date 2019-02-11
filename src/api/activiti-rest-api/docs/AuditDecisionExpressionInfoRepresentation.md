@@ -1,4 +1,4 @@
-# .AuditDecisionExpressionInfoRepresentation
+# AuditDecisionExpressionInfoRepresentation
 
 ## Properties
 Name | Type | Description | Notes

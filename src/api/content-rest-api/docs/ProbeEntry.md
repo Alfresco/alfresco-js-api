@@ -1,4 +1,4 @@
-# .ProbeEntry
+# ProbeEntry
 
 ## Properties
 Name | Type | Description | Notes

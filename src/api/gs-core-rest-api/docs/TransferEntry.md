@@ -1,4 +1,4 @@
-# .TransferEntry
+# TransferEntry
 
 ## Properties
 Name | Type | Description | Notes

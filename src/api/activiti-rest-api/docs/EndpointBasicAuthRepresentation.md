@@ -1,4 +1,4 @@
-# .EndpointBasicAuthRepresentation
+# EndpointBasicAuthRepresentation
 
 ## Properties
 Name | Type | Description | Notes

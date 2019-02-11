@@ -1,4 +1,4 @@
-# .RequestTemplatesInner
+# RequestTemplatesInner
 
 ## Properties
 Name | Type | Description | Notes

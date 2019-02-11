@@ -1,4 +1,4 @@
-# .UserActionRepresentation
+# UserActionRepresentation
 
 ## Properties
 Name | Type | Description | Notes

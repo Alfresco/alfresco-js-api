@@ -1,4 +1,4 @@
-# .DiscoveryApi
+# DiscoveryApi
 
 All URIs are relative to *https://localhost/alfresco/api*
 

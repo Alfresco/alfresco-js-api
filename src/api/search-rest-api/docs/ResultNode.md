@@ -1,4 +1,4 @@
-# .ResultNode
+# ResultNode
 
 ## Properties
 Name | Type | Description | Notes

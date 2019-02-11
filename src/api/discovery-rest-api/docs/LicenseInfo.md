@@ -1,4 +1,4 @@
-# .LicenseInfo
+# LicenseInfo
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .TagPagingList
+# TagPagingList
 
 ## Properties
 Name | Type | Description | Notes

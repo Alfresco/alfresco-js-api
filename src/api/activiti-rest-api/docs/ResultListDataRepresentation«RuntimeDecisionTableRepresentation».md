@@ -1,4 +1,4 @@
-# .ResultListDataRepresentationRuntimeDecisionTableRepresentation
+# ResultListDataRepresentationRuntimeDecisionTableRepresentation
 
 ## Properties
 Name | Type | Description | Notes

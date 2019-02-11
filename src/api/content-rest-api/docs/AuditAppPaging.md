@@ -1,4 +1,4 @@
-# .AuditAppPaging
+# AuditAppPaging
 
 ## Properties
 Name | Type | Description | Notes

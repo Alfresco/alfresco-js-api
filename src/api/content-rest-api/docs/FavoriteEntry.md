@@ -1,4 +1,4 @@
-# .FavoriteEntry
+# FavoriteEntry
 
 ## Properties
 Name | Type | Description | Notes

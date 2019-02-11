@@ -1,4 +1,4 @@
-# .RepositoryInfo
+# RepositoryInfo
 
 ## Properties
 Name | Type | Description | Notes

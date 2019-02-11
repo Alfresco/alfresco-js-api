@@ -1,4 +1,4 @@
-# .PathElement
+# PathElement
 
 ## Properties
 Name | Type | Description | Notes

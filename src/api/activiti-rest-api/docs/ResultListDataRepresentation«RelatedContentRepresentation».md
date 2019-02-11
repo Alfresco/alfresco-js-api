@@ -1,4 +1,4 @@
-# .ResultListDataRepresentationRelatedContentRepresentation
+# ResultListDataRepresentationRelatedContentRepresentation
 
 ## Properties
 Name | Type | Description | Notes

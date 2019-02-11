@@ -1,4 +1,4 @@
-# .ProcessScopeRepresentation
+# ProcessScopeRepresentation
 
 ## Properties
 Name | Type | Description | Notes

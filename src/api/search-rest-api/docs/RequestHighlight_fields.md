@@ -1,4 +1,4 @@
-# .RequestHighlightFields
+# RequestHighlightFields
 
 ## Properties
 Name | Type | Description | Notes

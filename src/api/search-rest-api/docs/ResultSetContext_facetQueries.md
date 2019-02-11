@@ -1,4 +1,4 @@
-# .ResultSetContextFacetQueries
+# ResultSetContextFacetQueries
 
 ## Properties
 Name | Type | Description | Notes

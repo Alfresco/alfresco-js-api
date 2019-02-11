@@ -1,4 +1,4 @@
-# .ResultSetPagingList
+# ResultSetPagingList
 
 ## Properties
 Name | Type | Description | Notes

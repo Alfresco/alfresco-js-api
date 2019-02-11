@@ -1,4 +1,4 @@
-# .LightAppRepresentation
+# LightAppRepresentation
 
 ## Properties
 Name | Type | Description | Notes

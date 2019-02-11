@@ -1,4 +1,4 @@
-# .RecordFolder
+# RecordFolder
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .RecordCategory
+# RecordCategory
 
 ## Properties
 Name | Type | Description | Notes

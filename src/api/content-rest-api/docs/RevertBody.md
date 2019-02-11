@@ -1,4 +1,4 @@
-# .RevertBody
+# RevertBody
 
 ## Properties
 Name | Type | Description | Notes

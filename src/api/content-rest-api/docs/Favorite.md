@@ -1,4 +1,4 @@
-# .Favorite
+# Favorite
 
 ## Properties
 Name | Type | Description | Notes

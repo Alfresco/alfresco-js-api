@@ -1,4 +1,4 @@
-# .BoxUserAccountCredentialsRepresentation
+# BoxUserAccountCredentialsRepresentation
 
 ## Properties
 Name | Type | Description | Notes

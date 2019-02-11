@@ -1,4 +1,4 @@
-# .UnfiledRecordFolderChildAssociation
+# UnfiledRecordFolderChildAssociation
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .NodeBodyCreate
+# NodeBodyCreate
 
 ## Properties
 Name | Type | Description | Notes

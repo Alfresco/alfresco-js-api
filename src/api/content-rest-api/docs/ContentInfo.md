@@ -1,4 +1,4 @@
-# .ContentInfo
+# ContentInfo
 
 ## Properties
 Name | Type | Description | Notes

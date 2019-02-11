@@ -1,4 +1,4 @@
-# .Transfer
+# Transfer
 
 ## Properties
 Name | Type | Description | Notes

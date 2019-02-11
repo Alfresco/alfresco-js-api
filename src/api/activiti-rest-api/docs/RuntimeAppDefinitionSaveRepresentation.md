@@ -1,4 +1,4 @@
-# .RuntimeAppDefinitionSaveRepresentation
+# RuntimeAppDefinitionSaveRepresentation
 
 ## Properties
 Name | Type | Description | Notes

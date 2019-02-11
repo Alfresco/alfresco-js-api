@@ -1,4 +1,4 @@
-# .TenantEvent
+# TenantEvent
 
 ## Properties
 Name | Type | Description | Notes

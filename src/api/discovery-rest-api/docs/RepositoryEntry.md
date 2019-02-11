@@ -1,4 +1,4 @@
-# .RepositoryEntry
+# RepositoryEntry
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# .SharedLink
+# SharedLink
 
 ## Properties
 Name | Type | Description | Notes
