@@ -276,6 +276,8 @@ export class ReportApi extends BaseApi {
             throw "Missing param 'reportName' in exportToCsv";
         }
 
+        queryParams.__reportName = queryParams.reportName;
+
         let pathParams = {
             'reportId': reportId
         };
