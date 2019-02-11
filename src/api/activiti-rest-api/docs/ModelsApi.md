@@ -28,7 +28,7 @@ Create a new model
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -65,7 +65,7 @@ Delete a model
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -108,7 +108,7 @@ Duplicate an existing model
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -146,7 +146,7 @@ Get model content
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -183,7 +183,7 @@ Get a model's thumbnail image
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -222,7 +222,7 @@ Models act as containers for process, form, decision table and app definitions
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -263,7 +263,7 @@ List process definition models shared with the current user
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -296,7 +296,7 @@ List models (process, form, decision rule or app)
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -342,7 +342,7 @@ Create a new version of a model
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -380,7 +380,7 @@ Import a BPMN 2.0 XML file
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -417,7 +417,7 @@ Update model content
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -457,7 +457,7 @@ This method allows you to update the metadata of a model. In order to update the
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -495,7 +495,7 @@ Validate model content
 ### Example
 ```javascript
 import ModelsApi from 'ModelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

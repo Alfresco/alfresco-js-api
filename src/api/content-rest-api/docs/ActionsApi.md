@@ -24,7 +24,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
 ### Example
 ```javascript
 import ActionsApi from 'ActionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -111,7 +111,7 @@ pending execution. The ID may be used, for example to correlate an execution wit
 ### Example
 ```javascript
 import ActionsApi from 'ActionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -160,7 +160,7 @@ You can use any of the following fields to order the results:
 ### Example
 ```javascript
 import ActionsApi from 'ActionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -262,7 +262,7 @@ You can use any of the following fields to order the results:
 ### Example
 ```javascript
 import ActionsApi from 'ActionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

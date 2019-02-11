@@ -21,7 +21,7 @@ Create variables
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -59,7 +59,7 @@ Create or update variables
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -96,7 +96,7 @@ Delete a variable
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -138,7 +138,7 @@ Get a variable
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -180,7 +180,7 @@ List variables
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -221,7 +221,7 @@ Update a variable
 ### Example
 ```javascript
 import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

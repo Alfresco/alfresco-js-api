@@ -65,7 +65,7 @@ JSON
 ### Example
 ```javascript
 import ClassificationReasonsApi from 'ClassificationReasonsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -104,7 +104,7 @@ Deletes the classification reason  **classificationReasonId**. You can't delete 
 ### Example
 ```javascript
 import ClassificationReasonsApi from 'ClassificationReasonsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -143,7 +143,7 @@ Gets all classification reasons.
 ### Example
 ```javascript
 import ClassificationReasonsApi from 'ClassificationReasonsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -211,7 +211,7 @@ Gets the classification reason  **classificationReasonId**.
 ### Example
 ```javascript
 import ClassificationReasonsApi from 'ClassificationReasonsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -250,7 +250,7 @@ Updates the classification reason with id **classificationReasonId**. For exampl
 ### Example
 ```javascript
 import ClassificationReasonsApi from 'ClassificationReasonsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

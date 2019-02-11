@@ -49,7 +49,7 @@ JSON
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -121,7 +121,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -166,7 +166,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -242,7 +242,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -320,7 +320,7 @@ You can use any of the following fields to order the results:
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -440,7 +440,7 @@ JSON
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -493,7 +493,7 @@ JSON
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -543,7 +543,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -611,7 +611,7 @@ JSON
 ### Example
 ```javascript
 import PeopleApi from 'PeopleApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

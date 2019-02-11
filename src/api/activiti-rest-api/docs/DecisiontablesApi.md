@@ -18,7 +18,7 @@ Get definition for a decision table
 ### Example
 ```javascript
 import DecisiontablesApi from 'DecisiontablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -55,7 +55,7 @@ Get a decision table
 ### Example
 ```javascript
 import DecisiontablesApi from 'DecisiontablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -92,7 +92,7 @@ Query decision tables
 ### Example
 ```javascript
 import DecisiontablesApi from 'DecisiontablesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

@@ -25,7 +25,7 @@ Only a tenant manager may access this endpoint
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -62,7 +62,7 @@ Delete a tenant
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -99,7 +99,7 @@ Get tenant events
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -136,7 +136,7 @@ Get a tenant's logo
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -173,7 +173,7 @@ Get a tenant
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -212,7 +212,7 @@ Only a tenant manager may access this endpoint
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -245,7 +245,7 @@ Update a tenant
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -283,7 +283,7 @@ Update a tenant's logo
 ### Example
 ```javascript
 import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

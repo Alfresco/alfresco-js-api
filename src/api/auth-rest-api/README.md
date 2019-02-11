@@ -19,11 +19,11 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [.ErrorError](docs/ErrorError.md)
- - [.ModelError](docs/ModelError.md)
- - [.Ticket](docs/Ticket.md)
- - [.TicketBody](docs/TicketBody.md)
- - [.TicketEntry](docs/TicketEntry.md)
- - [.ValidTicket](docs/ValidTicket.md)
- - [.ValidTicketEntry](docs/ValidTicketEntry.md)
+ - [ErrorError](docs/ErrorError.md)
+ - [ModelError](docs/ModelError.md)
+ - [Ticket](docs/Ticket.md)
+ - [TicketBody](docs/TicketBody.md)
+ - [TicketEntry](docs/TicketEntry.md)
+ - [ValidTicket](docs/ValidTicket.md)
+ - [ValidTicketEntry](docs/ValidTicketEntry.md)
 

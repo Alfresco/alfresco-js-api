@@ -19,7 +19,7 @@ Gets the value for a selected **securityControlSettingKey**.
 ### Example
 ```javascript
 import SecurityControlSettingsApi from 'SecurityControlSettingsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -60,7 +60,7 @@ Updates the value of a selected **securityControlSettingKey**.
 ### Example
 ```javascript
 import SecurityControlSettingsApi from 'SecurityControlSettingsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

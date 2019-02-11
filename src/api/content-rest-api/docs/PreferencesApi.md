@@ -22,7 +22,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
 ### Example
 ```javascript
 import PreferencesApi from 'PreferencesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -94,7 +94,7 @@ The **value** can be of any JSON type.
 ### Example
 ```javascript
 import PreferencesApi from 'PreferencesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

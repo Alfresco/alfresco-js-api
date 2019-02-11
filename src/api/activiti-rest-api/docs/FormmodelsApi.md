@@ -24,7 +24,7 @@ Get form content
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -61,7 +61,7 @@ Get form history
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -99,7 +99,7 @@ Get a form model
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -136,7 +136,7 @@ Get forms
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -173,7 +173,7 @@ List form models
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -206,7 +206,7 @@ Query forms
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -258,7 +258,7 @@ Update form model content
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -298,7 +298,7 @@ The model content to be validated must be specified in the POST body
 ### Example
 ```javascript
 import FormmodelsApi from 'FormmodelsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

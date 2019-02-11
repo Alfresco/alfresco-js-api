@@ -28,7 +28,7 @@ Permanently deletes the deleted node **nodeId**.
 ### Example
 ```javascript
 import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -70,7 +70,7 @@ Gets the rendition information for **renditionId** of file **nodeId**.
 ### Example
 ```javascript
 import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -113,7 +113,7 @@ Gets the rendition content for **renditionId** of file **nodeId**.
 ### Example
 ```javascript
 import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -198,7 +198,7 @@ Gets the specific deleted node **nodeId**.
 ### Example
 ```javascript
 import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -260,7 +260,7 @@ Gets the content of the deleted node with identifier **nodeId**.
 ### Example
 ```javascript
 import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -345,7 +345,7 @@ clause will return just the CREATED renditions:
 ### Example
 ```javascript
 import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -395,7 +395,7 @@ The list of deleted nodes will be ordered with the most recently deleted node at
 ### Example
 ```javascript
 import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -482,7 +482,7 @@ of delete of each node.
 ### Example
 ```javascript
 import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

@@ -31,7 +31,7 @@ JSON
 ### Example
 ```javascript
 import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -74,7 +74,7 @@ Gets the rendition information for **renditionId** of file **nodeId**.
 ### Example
 ```javascript
 import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -117,7 +117,7 @@ Gets the rendition content for **renditionId** of file **nodeId**.
 ### Example
 ```javascript
 import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -211,7 +211,7 @@ clause will return just the CREATED renditions:
 ### Example
 ```javascript
 import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

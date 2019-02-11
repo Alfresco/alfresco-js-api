@@ -78,7 +78,7 @@ JSON
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -154,7 +154,7 @@ Deletes the shared link with identifier **sharedId**.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -223,7 +223,7 @@ JSON
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -268,7 +268,7 @@ Gets minimal information for the file with shared link identifier **sharedId**.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -338,7 +338,7 @@ Gets the content of the file with shared link identifier **sharedId**.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -419,7 +419,7 @@ which means the rendition is available to view/download.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -464,7 +464,7 @@ Gets the rendition content for file with shared link identifier **sharedId**.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -546,7 +546,7 @@ where the rendition status is CREATED, which means the rendition is available to
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -592,7 +592,7 @@ The list is ordered in descending modified order.
 ### Example
 ```javascript
 import SharedlinksApi from 'SharedlinksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

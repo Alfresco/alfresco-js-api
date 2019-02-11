@@ -21,7 +21,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
 ### Example
 ```javascript
 import ActivitiesApi from 'ActivitiesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

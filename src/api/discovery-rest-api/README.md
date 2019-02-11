@@ -17,14 +17,14 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [.DiscoveryEntry](docs/DiscoveryEntry.md)
- - [.EntitlementsInfo](docs/EntitlementsInfo.md)
- - [.ErrorError](docs/ErrorError.md)
- - [.LicenseInfo](docs/LicenseInfo.md)
- - [.ModelError](docs/ModelError.md)
- - [.ModuleInfo](docs/ModuleInfo.md)
- - [.RepositoryEntry](docs/RepositoryEntry.md)
- - [.RepositoryInfo](docs/RepositoryInfo.md)
- - [.StatusInfo](docs/StatusInfo.md)
- - [.VersionInfo](docs/VersionInfo.md)
+ - [DiscoveryEntry](docs/DiscoveryEntry.md)
+ - [EntitlementsInfo](docs/EntitlementsInfo.md)
+ - [ErrorError](docs/ErrorError.md)
+ - [LicenseInfo](docs/LicenseInfo.md)
+ - [ModelError](docs/ModelError.md)
+ - [ModuleInfo](docs/ModuleInfo.md)
+ - [RepositoryEntry](docs/RepositoryEntry.md)
+ - [RepositoryInfo](docs/RepositoryInfo.md)
+ - [StatusInfo](docs/StatusInfo.md)
+ - [VersionInfo](docs/VersionInfo.md)
 

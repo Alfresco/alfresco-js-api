@@ -21,7 +21,7 @@ Create a rating for the node with identifier **nodeId**
 ### Example
 ```javascript
 import RatingsApi from 'RatingsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -97,7 +97,7 @@ Deletes rating **ratingId** from node **nodeId**.
 ### Example
 ```javascript
 import RatingsApi from 'RatingsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -137,7 +137,7 @@ Get the specific rating **ratingId** on node **nodeId**.
 ### Example
 ```javascript
 import RatingsApi from 'RatingsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -203,7 +203,7 @@ Gets a list of ratings for node **nodeId**.
 ### Example
 ```javascript
 import RatingsApi from 'RatingsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

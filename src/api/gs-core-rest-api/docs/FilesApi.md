@@ -18,7 +18,7 @@ Declares the file **fileId** in the unfiled records container. The original file
 ### Example
 ```javascript
 import FilesApi from 'FilesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

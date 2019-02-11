@@ -27,7 +27,7 @@ Attach existing content to a process instance
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -69,7 +69,7 @@ Upload content and attach to a process instance
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -111,7 +111,7 @@ Attach existing content to a task
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -153,7 +153,7 @@ Upload content and attach to a task
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -195,7 +195,7 @@ Upload content and create a local representation
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -232,7 +232,7 @@ Create a local representation of content from a remote repository
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -269,7 +269,7 @@ Remove a local content representation
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -306,7 +306,7 @@ Get a local content representation
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -343,7 +343,7 @@ Stream content rendition
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -381,7 +381,7 @@ Stream content from a local content representation
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -418,7 +418,7 @@ List content attached to a process instance
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -459,7 +459,7 @@ List content attached to a task
 ### Example
 ```javascript
 import ContentApi from 'ContentApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

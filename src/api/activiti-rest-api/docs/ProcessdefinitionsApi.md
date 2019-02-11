@@ -26,7 +26,7 @@ Add a user or group involvement to a process definition
 ### Example
 ```javascript
 import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -64,7 +64,7 @@ Remove a user or group involvement from a process definition
 ### Example
 ```javascript
 import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -103,7 +103,7 @@ Get a user or group involvement with a process definition
 ### Example
 ```javascript
 import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -142,7 +142,7 @@ List either the users or groups involved with a process definition
 ### Example
 ```javascript
 import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -180,7 +180,7 @@ List the users and groups involved with a process definition
 ### Example
 ```javascript
 import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -217,7 +217,7 @@ List the decision tables associated with a process definition
 ### Example
 ```javascript
 import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -254,7 +254,7 @@ List the forms associated with a process definition
 ### Example
 ```javascript
 import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -291,7 +291,7 @@ Retrieve the start form for a process definition
 ### Example
 ```javascript
 import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -326,7 +326,7 @@ Get a list of process definitions (visible within the tenant of the user)
 ### Example
 ```javascript
 import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -370,7 +370,7 @@ Retrieve field values (eg. the typeahead field)
 ### Example
 ```javascript
 import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -403,7 +403,7 @@ Retrieve field values (eg. the table field)
 ### Example
 ```javascript
 import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

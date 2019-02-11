@@ -69,7 +69,7 @@ JSON
 ### Example
 ```javascript
 import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -135,7 +135,7 @@ Deletes the comment **commentId** from node **nodeId**.
 ### Example
 ```javascript
 import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -175,7 +175,7 @@ Gets a list of comments for the node **nodeId**, sorted chronologically with the
 ### Example
 ```javascript
 import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -252,7 +252,7 @@ Updates an existing comment **commentId** on node **nodeId**.
 ### Example
 ```javascript
 import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

@@ -109,7 +109,7 @@ JSON
 ### Example
 ```javascript
 import RecordFoldersApi from 'RecordFoldersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -191,7 +191,7 @@ Deletes record folder **recordFolderId**. Deleted file plan components cannot be
 ### Example
 ```javascript
 import RecordFoldersApi from 'RecordFoldersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -235,7 +235,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 ### Example
 ```javascript
 import RecordFoldersApi from 'RecordFoldersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -317,7 +317,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 ### Example
 ```javascript
 import RecordFoldersApi from 'RecordFoldersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -441,7 +441,7 @@ JSON
 ### Example
 ```javascript
 import RecordFoldersApi from 'RecordFoldersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

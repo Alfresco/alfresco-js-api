@@ -19,7 +19,7 @@ Get global date format
 ### Example
 ```javascript
 import SystempropertiesApi from 'SystempropertiesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -56,7 +56,7 @@ Get password validation constraints
 ### Example
 ```javascript
 import SystempropertiesApi from 'SystempropertiesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -95,7 +95,7 @@ Typical value is AllowInvolveByEmail
 ### Example
 ```javascript
 import SystempropertiesApi from 'SystempropertiesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -128,7 +128,7 @@ Get involved users who can edit forms
 ### Example
 ```javascript
 import SystempropertiesApi from 'SystempropertiesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

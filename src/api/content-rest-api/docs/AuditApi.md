@@ -38,7 +38,7 @@ You must have admin rights to delete audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -87,7 +87,7 @@ You must have admin rights to delete audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -132,7 +132,7 @@ You must have admin rights to retrieve audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -202,7 +202,7 @@ You must have admin rights to access audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -280,7 +280,7 @@ You must have admin rights to retrieve audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -375,7 +375,7 @@ You must have admin rights to retrieve audit information.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -514,7 +514,7 @@ This relies on the pre-configured 'alfresco-access' audit application.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -640,7 +640,7 @@ You must have admin rights to update audit application.
 ### Example
 ```javascript
 import AuditApi from 'AuditApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

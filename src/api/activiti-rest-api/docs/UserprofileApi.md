@@ -21,7 +21,7 @@ Change user password
 ### Example
 ```javascript
 import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -60,7 +60,7 @@ Generally returns an image file
 ### Example
 ```javascript
 import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -95,7 +95,7 @@ This operation returns account information for the current user. This is useful 
 ### Example
 ```javascript
 import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -130,7 +130,7 @@ Only a first name, last name, email and company can be updated
 ### Example
 ```javascript
 import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -167,7 +167,7 @@ Change user profile picture
 ### Example
 ```javascript
 import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -207,7 +207,7 @@ Generally returns an URL image file
 ### Example
 ```javascript
 import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

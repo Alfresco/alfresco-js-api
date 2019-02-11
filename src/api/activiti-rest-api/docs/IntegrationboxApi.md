@@ -24,7 +24,7 @@ Returns Box OAuth HTML Page
 ### Example
 ```javascript
 import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -57,7 +57,7 @@ Add Box account
 ### Example
 ```javascript
 import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -95,7 +95,7 @@ Delete account information
 ### Example
 ```javascript
 import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -132,7 +132,7 @@ Get status information
 ### Example
 ```javascript
 import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -165,7 +165,7 @@ List file and folders
 ### Example
 ```javascript
 import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -207,7 +207,7 @@ Get account information
 ### Example
 ```javascript
 import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -244,7 +244,7 @@ Update account information
 ### Example
 ```javascript
 import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

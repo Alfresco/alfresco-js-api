@@ -39,7 +39,7 @@ You can sort the result list using the **orderBy** parameter. You can specify on
 ### Example
 ```javascript
 import QueriesApi from 'QueriesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -176,7 +176,7 @@ You can sort the result list using the **orderBy** parameter. You can specify on
 ### Example
 ```javascript
 import QueriesApi from 'QueriesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -285,7 +285,7 @@ You can override the default by using the **orderBy** parameter. You can specify
 ### Example
 ```javascript
 import QueriesApi from 'QueriesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

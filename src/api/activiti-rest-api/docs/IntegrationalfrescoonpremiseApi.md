@@ -22,7 +22,7 @@ Returns ALL Sites
 ### Example
 ```javascript
 import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -59,7 +59,7 @@ List files and folders inside a specific folder identified by folder path
 ### Example
 ```javascript
 import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -98,7 +98,7 @@ List files and folders inside a specific folder
 ### Example
 ```javascript
 import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -136,7 +136,7 @@ List files and folders inside a specific site
 ### Example
 ```javascript
 import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -176,7 +176,7 @@ A tenant administrator can configure one or more Alfresco repositories to use wh
 ### Example
 ```javascript
 import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

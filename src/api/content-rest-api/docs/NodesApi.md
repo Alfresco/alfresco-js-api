@@ -45,7 +45,7 @@ If the source **nodeId** is a file, it's properties, aspects and tags are copied
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -175,7 +175,7 @@ JSON
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -409,7 +409,7 @@ JSON
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -545,7 +545,7 @@ JSON
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -620,7 +620,7 @@ in the other direction.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -679,7 +679,7 @@ associations were to nodes inside or outside the restored hierarchy.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -733,7 +733,7 @@ associated as a secondary child with other secondary parents.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -782,7 +782,7 @@ You can use the **include** parameter to return additional information.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -878,7 +878,7 @@ Gets the content of the node with identifier **nodeId**.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -981,7 +981,7 @@ You can use any of the following fields to order the results:
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1141,7 +1141,7 @@ The list includes both the primary parent and any secondary parents.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1261,7 +1261,7 @@ Gets a list of secondary child nodes that are associated with the current parent
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1373,7 +1373,7 @@ Gets a list of source nodes that are associated with the current target **nodeId
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1467,7 +1467,7 @@ Gets a list of target nodes that are associated with the current source **nodeId
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1584,7 +1584,7 @@ If a lock on the node cannot be taken, then an error is returned.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1679,7 +1679,7 @@ The move will effectively change the primary parent.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1770,7 +1770,7 @@ If a lock on the node cannot be released, then an error is returned.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1892,7 +1892,7 @@ JSON
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -1991,7 +1991,7 @@ tooling to accept an arbitrary file.
 ### Example
 ```javascript
 import NodesApi from 'NodesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

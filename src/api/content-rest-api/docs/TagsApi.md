@@ -71,7 +71,7 @@ JSON
 ### Example
 ```javascript
 import TagsApi from 'TagsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -137,7 +137,7 @@ Deletes tag **tagId** from node **nodeId**.
 ### Example
 ```javascript
 import TagsApi from 'TagsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -177,7 +177,7 @@ Get a specific tag with **tagId**.
 ### Example
 ```javascript
 import TagsApi from 'TagsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -245,7 +245,7 @@ You can use the **include** parameter to return additional **values** informatio
 ### Example
 ```javascript
 import TagsApi from 'TagsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -327,7 +327,7 @@ Gets a list of tags for node **nodeId**.
 ### Example
 ```javascript
 import TagsApi from 'TagsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -404,7 +404,7 @@ Updates the tag **tagId**.
 ### Example
 ```javascript
 import TagsApi from 'TagsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

@@ -23,7 +23,7 @@ Returns Alfresco OAuth HTML Page
 ### Example
 ```javascript
 import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -60,7 +60,7 @@ List Alfresco networks
 ### Example
 ```javascript
 import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -95,7 +95,7 @@ Returns ALL Sites
 ### Example
 ```javascript
 import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -132,7 +132,7 @@ List files and folders inside a specific folder identified by path
 ### Example
 ```javascript
 import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -175,7 +175,7 @@ List files and folders inside a specific folder
 ### Example
 ```javascript
 import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -213,7 +213,7 @@ List files and folders inside a specific site
 ### Example
 ```javascript
 import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

@@ -78,7 +78,7 @@ JSON
 ### Example
 ```javascript
 import FilePlansApi from 'FilePlansApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -163,7 +163,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 ### Example
 ```javascript
 import FilePlansApi from 'FilePlansApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -241,7 +241,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 ### Example
 ```javascript
 import FilePlansApi from 'FilePlansApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -339,7 +339,7 @@ JSON
 ### Example
 ```javascript
 import FilePlansApi from 'FilePlansApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
