@@ -30,7 +30,7 @@ Combines instructions from the given topics and the user defined instruction, if
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -72,7 +72,7 @@ Creates a new classification guide.
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -111,7 +111,7 @@ Creates a new subtopic of a topic.
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -165,7 +165,7 @@ Creates a new topic.
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -219,7 +219,7 @@ Deletes the classification guide with id **classificationGuideId**, including an
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -258,7 +258,7 @@ Deletes the topic with id  **topicId**, including any subtopics and instructions
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -297,7 +297,7 @@ Gets all classification guides.
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -369,7 +369,7 @@ Gets all subtopics of a topic.
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -452,7 +452,7 @@ Gets all topics.
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -535,7 +535,7 @@ Gets the classification guide with id **classificationGuideId**.
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -574,7 +574,7 @@ Gets the topic with id **topicId**.
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -627,7 +627,7 @@ Updates the classification guide with id **classificationGuideId**. For example,
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -670,7 +670,7 @@ Use this to rename a topic or to add, edit, or remove the instruction associated
 ### Example
 ```javascript
 import ClassificationGuidesApi from 'ClassificationGuidesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

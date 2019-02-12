@@ -16,7 +16,7 @@ Get data sources
 ### Example
 ```javascript
 import DatasourcesApi from 'DatasourcesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

@@ -31,7 +31,7 @@ Activate a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -68,7 +68,7 @@ Add users to a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -105,7 +105,7 @@ Add capabilities to a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -143,7 +143,7 @@ Add a user to a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -181,7 +181,7 @@ Get a related group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -220,7 +220,7 @@ Create a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -257,7 +257,7 @@ Remove a capability from a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -295,7 +295,7 @@ Delete a member from a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -333,7 +333,7 @@ Delete a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -370,7 +370,7 @@ Delete a related group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -408,7 +408,7 @@ List group capabilities
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -445,7 +445,7 @@ Get group members
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -490,7 +490,7 @@ Get a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -533,7 +533,7 @@ Query groups
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -577,7 +577,7 @@ Get related groups
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -614,7 +614,7 @@ Update a group
 ### Example
 ```javascript
 import AdmingroupsApi from 'AdmingroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

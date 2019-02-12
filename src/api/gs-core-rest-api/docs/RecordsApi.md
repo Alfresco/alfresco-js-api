@@ -24,7 +24,7 @@ Completes the record **recordId**.
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -102,7 +102,7 @@ Deletes the record **recordId**. Deleted file plan components cannot be recovere
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -148,7 +148,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -231,7 +231,7 @@ You can use the **include** parameter (include=allowableOperations) to return ad
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -310,7 +310,7 @@ Gets the content of the record with identifier **recordId**.
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -396,7 +396,7 @@ JSON
 ### Example
 ```javascript
 import RecordsApi from 'RecordsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

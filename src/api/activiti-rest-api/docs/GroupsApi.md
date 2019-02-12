@@ -17,7 +17,7 @@ Query groups
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -65,7 +65,7 @@ List members of a group
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

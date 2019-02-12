@@ -65,7 +65,7 @@ JSON
 ### Example
 ```javascript
 import DeclassificationExemptionsApi from 'DeclassificationExemptionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -104,7 +104,7 @@ Deletes the declassification exemption with id **declassificationExemptionId**. 
 ### Example
 ```javascript
 import DeclassificationExemptionsApi from 'DeclassificationExemptionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -143,7 +143,7 @@ Gets all declassification exemptions.
 ### Example
 ```javascript
 import DeclassificationExemptionsApi from 'DeclassificationExemptionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -187,7 +187,7 @@ Gets the declassification exemption with id **declassificationExemptionId**.
 ### Example
 ```javascript
 import DeclassificationExemptionsApi from 'DeclassificationExemptionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -226,7 +226,7 @@ Updates the declassification exemption with id **declassificationExemptionId**. 
 ### Example
 ```javascript
 import DeclassificationExemptionsApi from 'DeclassificationExemptionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

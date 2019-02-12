@@ -31,7 +31,7 @@ The cancel operation is done asynchronously.
 ### Example
 ```javascript
 import DownloadsApi from 'DownloadsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -85,7 +85,7 @@ JSON
 ### Example
 ```javascript
 import DownloadsApi from 'DownloadsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -153,7 +153,7 @@ Retrieve status information for download node **downloadId**
 ### Example
 ```javascript
 import DownloadsApi from 'DownloadsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

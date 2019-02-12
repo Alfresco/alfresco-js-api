@@ -17,7 +17,7 @@ Get log file for a sync log entry
 ### Example
 ```javascript
 import IdmsyncApi from 'IdmsyncApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -54,7 +54,7 @@ List sync log entries
 ### Example
 ```javascript
 import IdmsyncApi from 'IdmsyncApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

@@ -17,7 +17,7 @@ List a model's historic versions
 ### Example
 ```javascript
 import ModelshistoryApi from 'ModelshistoryApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -58,7 +58,7 @@ Get a historic version of a model
 ### Example
 ```javascript
 import ModelshistoryApi from 'ModelshistoryApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

@@ -35,7 +35,7 @@ params (majorVersion and comment) on a subsequent file content update.
 ### Example
 ```javascript
 import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -78,7 +78,7 @@ Gets the version information for **versionId** of file node **nodeId**.
 ### Example
 ```javascript
 import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -121,7 +121,7 @@ Gets the version content for **versionId** of file node **nodeId**.
 ### Example
 ```javascript
 import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -201,7 +201,7 @@ the original version is last in the list.
 ### Example
 ```javascript
 import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -292,7 +292,7 @@ will be promoted to the live node and a new version will appear in the version h
 ### Example
 ```javascript
 import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

@@ -20,7 +20,7 @@ Bulk update a list of users
 ### Example
 ```javascript
 import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -57,7 +57,7 @@ Create a user
 ### Example
 ```javascript
 import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -94,7 +94,7 @@ Get a user
 ### Example
 ```javascript
 import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -135,7 +135,7 @@ Query users
 ### Example
 ```javascript
 import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -195,7 +195,7 @@ Update a user
 ### Example
 ```javascript
 import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

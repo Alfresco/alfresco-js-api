@@ -19,7 +19,7 @@ Returns Drive OAuth HTML Page
 ### Example
 ```javascript
 import IntegrationdriveApi from 'IntegrationdriveApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -52,7 +52,7 @@ List files and folders
 ### Example
 ```javascript
 import IntegrationdriveApi from 'IntegrationdriveApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

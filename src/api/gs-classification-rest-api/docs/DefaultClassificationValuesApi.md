@@ -18,7 +18,7 @@ Calculates the default declassification date for **nodeId** based on the propert
 ### Example
 ```javascript
 import DefaultClassificationValuesApi from 'DefaultClassificationValuesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

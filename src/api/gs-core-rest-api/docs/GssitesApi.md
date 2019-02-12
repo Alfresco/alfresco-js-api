@@ -37,7 +37,7 @@ When you create the RM site, the **filePlan** structure is also created includin
 ### Example
 ```javascript
 import GssitesApi from 'GssitesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -82,7 +82,7 @@ Deletes the RM site.
 ### Example
 ```javascript
 import GssitesApi from 'GssitesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -119,7 +119,7 @@ Gets information for RM site.
 ### Example
 ```javascript
 import GssitesApi from 'GssitesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -187,7 +187,7 @@ Update the details for the RM site. Site Manager or other (site) admin can updat
 ### Example
 ```javascript
 import GssitesApi from 'GssitesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

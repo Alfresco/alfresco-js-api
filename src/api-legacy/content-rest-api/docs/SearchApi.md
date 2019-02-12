@@ -30,7 +30,7 @@ Searches Alfresco
 
 ### Node js Example
 ```javascript
-var AlfrescoApi = require('alfresco-js-api');
+var AlfrescoApi = require('@alfresco/js-api');
 
 this.alfrescoJsApi = new AlfrescoApi();
 var self = this;

@@ -42,7 +42,7 @@ You must have admin rights to create a group.
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -124,7 +124,7 @@ You must have admin rights to create a group membership.
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -199,7 +199,7 @@ You must have admin rights to delete a group.
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -253,7 +253,7 @@ You must have admin rights to delete a group membership.
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -298,7 +298,7 @@ You can use the **include** parameter to return additional information.
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -388,7 +388,7 @@ You can override the default by using the **orderBy** parameter. You can specify
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -522,7 +522,7 @@ List group memberships
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -661,7 +661,7 @@ You can override the default by using the **orderBy** parameter. You can specify
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -768,7 +768,7 @@ You must have admin rights to update a group.
 ### Example
 ```javascript
 import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

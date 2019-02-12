@@ -35,7 +35,7 @@ Activate a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -72,7 +72,7 @@ Add a user or group involvement to a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -110,7 +110,7 @@ Remove a user or group involvement from a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -152,7 +152,7 @@ If the process instance has not yet been completed, it will be cancelled. If it 
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -191,7 +191,7 @@ The request body provided must define either a valid filterId value or filter ob
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -228,7 +228,7 @@ Get decision tasks in a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -265,7 +265,7 @@ Get historic variables for a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -302,7 +302,7 @@ Query historic process instances
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -339,7 +339,7 @@ Get a user or group involvement with a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -379,7 +379,7 @@ List either the users or groups involved with a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -417,7 +417,7 @@ List the users and groups involved with a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -454,7 +454,7 @@ List content attached to process instance fields
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -491,7 +491,7 @@ Get the process diagram for the process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -530,7 +530,7 @@ The start form for a process instance can be retrieved when the process definiti
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -567,7 +567,7 @@ Get a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -604,7 +604,7 @@ Query process instances
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -641,7 +641,7 @@ Get the audit log for a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -678,7 +678,7 @@ Start a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -715,7 +715,7 @@ Suspend a process instance
 ### Example
 ```javascript
 import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

@@ -25,7 +25,7 @@ Add an endpoint authorization
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -62,7 +62,7 @@ Create an endpoint
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -99,7 +99,7 @@ Get an endpoint authorization
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -137,7 +137,7 @@ List endpoint authorizations
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -174,7 +174,7 @@ Get an endpoint
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -212,7 +212,7 @@ List endpoints
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -249,7 +249,7 @@ Delete an endpoint authorization
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -287,7 +287,7 @@ Delete an endpoint
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -325,7 +325,7 @@ Update an endpoint authorization
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -363,7 +363,7 @@ Update an endpoint
 ### Example
 ```javascript
 import AdminendpointsApi from 'AdminendpointsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

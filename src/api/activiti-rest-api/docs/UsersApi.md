@@ -23,7 +23,7 @@ Typical action is updating/reset password
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -61,7 +61,7 @@ Stream user profile picture
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -98,7 +98,7 @@ Get a user
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -137,7 +137,7 @@ A common use case is that a user wants to select another user (eg. when assignin
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -191,7 +191,7 @@ Request a password reset
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -228,7 +228,7 @@ Update a user
 ### Example
 ```javascript
 import UsersApi from 'UsersApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

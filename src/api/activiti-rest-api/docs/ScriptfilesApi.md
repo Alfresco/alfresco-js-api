@@ -17,7 +17,7 @@ getControllers
 ### Example
 ```javascript
 import ScriptfilesApi from 'ScriptfilesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -50,7 +50,7 @@ getLibraries
 ### Example
 ```javascript
 import ScriptfilesApi from 'ScriptfilesApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

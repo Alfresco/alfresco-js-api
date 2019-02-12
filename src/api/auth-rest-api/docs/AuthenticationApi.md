@@ -36,7 +36,7 @@ For example using Javascript:
 ### Example
 ```javascript
 import AuthenticationApi from 'AuthenticationApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -78,7 +78,7 @@ Deletes logged in ticket (logout).
 ### Example
 ```javascript
 import AuthenticationApi from 'AuthenticationApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -121,7 +121,7 @@ For example, you can pass the Authorization request header using Javascript:
 ### Example
 ```javascript
 import AuthenticationApi from 'AuthenticationApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

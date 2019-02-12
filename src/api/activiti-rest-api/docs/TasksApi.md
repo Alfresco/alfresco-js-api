@@ -28,7 +28,7 @@ List the users and groups involved with a task
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -68,7 +68,7 @@ A standalone task is one which is not associated with any process instance.
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -105,7 +105,7 @@ Remove a user or group involvement from a task
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -145,7 +145,7 @@ Delete a task
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -182,7 +182,7 @@ Filter a list of tasks
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -219,7 +219,7 @@ Get a user or group involvement with a task
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -259,7 +259,7 @@ List either the users or groups involved with a process instance
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -297,7 +297,7 @@ getIdentityLinks
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -334,7 +334,7 @@ Get the audit log for a task
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -371,7 +371,7 @@ Get a task
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -408,7 +408,7 @@ Query historic tasks
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -445,7 +445,7 @@ List tasks
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -484,7 +484,7 @@ You can edit only name, description and dueDate (ISO 8601 string).
 ### Example
 ```javascript
 import TasksApi from 'TasksApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

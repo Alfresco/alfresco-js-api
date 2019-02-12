@@ -20,7 +20,7 @@ Remove an app deployment
 ### Example
 ```javascript
 import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -57,7 +57,7 @@ Export the app archive for a deployment
 ### Example
 ```javascript
 import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -94,7 +94,7 @@ Query app deployments
 ### Example
 ```javascript
 import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -146,7 +146,7 @@ Get an app deployment
 ### Example
 ```javascript
 import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -185,7 +185,7 @@ Either a deploymentId or a dmnDeploymentId must be provided
 ### Example
 ```javascript
 import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

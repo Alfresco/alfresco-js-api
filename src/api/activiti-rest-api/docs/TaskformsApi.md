@@ -21,7 +21,7 @@ Complete a task form
 ### Example
 ```javascript
 import TaskformsApi from 'TaskformsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -59,7 +59,7 @@ Get task variables
 ### Example
 ```javascript
 import TaskformsApi from 'TaskformsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -98,7 +98,7 @@ Specific case to retrieve information on a specific column
 ### Example
 ```javascript
 import TaskformsApi from 'TaskformsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -139,7 +139,7 @@ Form field values that are populated through a REST backend, can be retrieved vi
 ### Example
 ```javascript
 import TaskformsApi from 'TaskformsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -177,7 +177,7 @@ Get a task form
 ### Example
 ```javascript
 import TaskformsApi from 'TaskformsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -214,7 +214,7 @@ Save a task form
 ### Example
 ```javascript
 import TaskformsApi from 'TaskformsApi';
-import { AlfrescoApi } from 'alfresco-js-api';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
