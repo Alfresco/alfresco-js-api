@@ -1,8 +1,7 @@
 /*global describe, it */
 
-import { AlfrescoApiClient } from  '../index';
+import { AlfrescoApiClient, FormValueRepresentation } from  '../index';
 import { DateAlfresco } from  '../index';
-import { FormValueRepresentation } from '@alfresco/js-api/src/api/activiti-rest-api/model/formValueRepresentation';
 let chai = require('chai');
 
 let expect = require('chai').expect;
