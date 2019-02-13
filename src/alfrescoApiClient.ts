@@ -282,7 +282,13 @@ export class AlfrescoApiClient {
         }
 
         if (returnType) {
-            data = new returnType(data);
+            if (Array.isArray(data)) {
+                data = data.map( (element) => {
+                    return new returnType(element);
+                });
+            } else {
+                data = new returnType(data);
+            }
         }
 
         return data;

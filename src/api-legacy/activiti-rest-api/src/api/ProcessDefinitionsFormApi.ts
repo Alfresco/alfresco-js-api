@@ -35,11 +35,11 @@ export class ProcessDefinitionsFormApi {
         return this.processDefinitionsApi.getProcessDefinitionStartForm(processDefinitionId);
     }
 
-    getRestFieldValues(processDefinitionId: string, field: string): Promise<FormValueRepresentation> {
+    getRestFieldValues(processDefinitionId: string, field: string): Promise<FormValueRepresentation []> {
         return this.processDefinitionsApi.getRestFieldValues(processDefinitionId, field);
     }
 
-    getRestTableFieldValues(processDefinitionId: string, field: string, column: string): Promise<FormValueRepresentation> {
+    getRestTableFieldValues(processDefinitionId: string, field: string, column: string): Promise<FormValueRepresentation []> {
         return this.processDefinitionsApi.getRestTableFieldValues(processDefinitionId, field, column);
     }
 }

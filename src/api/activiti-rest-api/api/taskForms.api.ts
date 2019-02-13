@@ -161,9 +161,9 @@ export class TaskFormsApi extends BaseApi {
         *
         * @param taskId taskId
         * @param field field
-        * @return Promise<FormValueRepresentation>
+        * @return Promise<FormValueRepresentation []>
         */
-    getRestFieldValues(taskId: string, field: string): Promise<FormValueRepresentation> {
+    getRestFieldValues(taskId: string, field: string): Promise<FormValueRepresentation []> {
 
         let postBody = null;
 

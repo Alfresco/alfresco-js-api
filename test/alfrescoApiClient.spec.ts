@@ -1,6 +1,6 @@
 /*global describe, it */
 
-import { AlfrescoApiClient } from  '../index';
+import { AlfrescoApiClient, FormValueRepresentation } from  '../index';
 import { DateAlfresco } from  '../index';
 let chai = require('chai');
 
@@ -75,6 +75,30 @@ describe('Alfresco Core API Client', function () {
             expect(DateAlfresco.parseDate('2015-11-17T03:33:17+02')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 1, 33, 17)));
         });
 
+    });
+
+    describe('Deserializes', function () {
+
+        it('should the deserializer return an array of object when the response is an array', function() {
+            const client = new AlfrescoApiClient();
+            const data = {
+                body: [
+                    {
+                        id: "1",
+                        name: "test1"
+                    },
+                    {
+                        id: "2",
+                        name: "test2"
+                    }
+                ]
+            };
+            const result = client.deserialize(data, FormValueRepresentation);
+            const isArray = Array.isArray(result);
+            const isObject = (result[0] instanceof (FormValueRepresentation));
+            expect(isArray).to.equal(true);
+            expect(isObject).to.equal(true);
+        })
     });
 
 });

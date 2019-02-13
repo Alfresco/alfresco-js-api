@@ -365,9 +365,9 @@ export class ProcessDefinitionsApi extends BaseApi {
      *
      * @param processDefinitionId processDefinitionId
      *
-     * @return Promise<FormValueRepresentation>
+     * @return Promise<FormValueRepresentation[]>
      */
-    getRestFieldValues(processDefinitionId: string, field: string): Promise<FormValueRepresentation> {
+    getRestFieldValues(processDefinitionId: string, field: string): Promise<FormValueRepresentation []> {
 
         let postBody = null;
 
@@ -395,9 +395,9 @@ export class ProcessDefinitionsApi extends BaseApi {
      *
      * @param processDefinitionId processDefinitionId
      *
-     * @return Promise<FormValueRepresentation>
+     * @return Promise<FormValueRepresentation []>
      */
-    getRestTableFieldValues(processDefinitionId: string, field: string, column: string): Promise<FormValueRepresentation> {
+    getRestTableFieldValues(processDefinitionId: string, field: string, column: string): Promise<FormValueRepresentation []> {
 
         let postBody = null;
 
