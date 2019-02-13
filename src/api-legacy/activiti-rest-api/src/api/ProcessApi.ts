@@ -83,11 +83,11 @@ export class ProcessApi {
         return this.processInstancesApi.getProcessAuditPdf(processInstanceId);
     }
 
-    getRestFieldValues(processDefinitionId: string, field: string): Promise<FormValueRepresentation> {
+    getRestFieldValues(processDefinitionId: string, field: string): Promise<FormValueRepresentation []> {
         return this.processDefinitionsApi.getRestFieldValues(processDefinitionId, field);
     }
 
-    getRestTableFieldValues(processDefinitionId: string, field: string, column: string): Promise<FormValueRepresentation> {
+    getRestTableFieldValues(processDefinitionId: string, field: string, column: string): Promise<FormValueRepresentation []> {
         return this.processDefinitionsApi.getRestTableFieldValues(processDefinitionId, field, column);
     }
 
