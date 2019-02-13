@@ -19,13 +19,13 @@ describe('Ecm Auth test', function () {
     });
 
     it('should remember username on login', () => {
-        const auth = ContentAuth.getInstance({}, alfrescoJsApi);
+        const auth = new ContentAuth({}, alfrescoJsApi);
         auth.login('johndoe', 'password');
         expect(auth.authentications.basicAuth.username).to.be.equal('johndoe');
     });
 
     it('should forget username on logout', (done) => {
-        const auth = ContentAuth.getInstance({}, alfrescoJsApi);
+        const auth = new ContentAuth({}, alfrescoJsApi);
 
         authEcmMock.get201Response();
 
@@ -37,7 +37,7 @@ describe('Ecm Auth test', function () {
         auth.logout().then(() => {
             expect(auth.authentications.basicAuth.username).to.be.equal(null);
             done();
-        },                 (error) => {
+        }, (error) => {
             console.log(JSON.stringify(error));
         });
     });
@@ -48,14 +48,14 @@ describe('Ecm Auth test', function () {
 
             authEcmMock.get201Response();
 
-            this.contentAuth = ContentAuth.getInstance({
+            this.contentAuth = new ContentAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            },                                         alfrescoJsApi);
+            }, alfrescoJsApi);
             this.contentAuth.login('admin', 'admin').then((data) => {
                 expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                 done();
-            },                                            () => {
+            }, () => {
             });
 
         });
@@ -64,14 +64,14 @@ describe('Ecm Auth test', function () {
 
             authEcmMock.get201Response();
 
-            this.contentAuth = ContentAuth.getInstance({
+            this.contentAuth = new ContentAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            },                                         alfrescoJsApi);
+            }, alfrescoJsApi);
             this.contentAuth.login('admin', 'admin').then((data) => {
                 expect(this.contentAuth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
-            },                                            () => {
+            }, () => {
             });
 
         });
@@ -80,14 +80,14 @@ describe('Ecm Auth test', function () {
 
             authEcmMock.get201Response();
 
-            this.contentAuth = ContentAuth.getInstance({
+            this.contentAuth = new ContentAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            },                                         alfrescoJsApi);
+            }, alfrescoJsApi);
             this.contentAuth.login('admin', 'admin').then(() => {
                 expect(this.contentAuth.isLoggedIn()).to.be.equal(true);
                 done();
-            },                                            function () {
+            }, function () {
             });
         });
 
@@ -95,16 +95,16 @@ describe('Ecm Auth test', function () {
 
             authEcmMock.get201Response();
 
-            this.contentAuth = ContentAuth.getInstance({
+            this.contentAuth = new ContentAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            },                                         alfrescoJsApi);
+            }, alfrescoJsApi);
             this.contentAuth.login('admin', 'admin').then(() => {
                 expect(this.contentAuth.isLoggedIn()).to.be.equal(true);
                 this.contentAuth.changeHost('anyhost');
                 expect(this.contentAuth.isLoggedIn()).to.be.equal(false);
                 done();
-            },                                            () => {
+            }, () => {
             });
 
         });
@@ -113,10 +113,10 @@ describe('Ecm Auth test', function () {
 
             authEcmMock.get201Response();
 
-            this.contentAuth = ContentAuth.getInstance({
+            this.contentAuth = new ContentAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            },                                         alfrescoJsApi);
+            }, alfrescoJsApi);
             this.contentAuth.login('admin', 'admin');
 
             authEcmMock.get204ResponseLogout();
@@ -124,20 +124,20 @@ describe('Ecm Auth test', function () {
             this.contentAuth.logout().then(() => {
                 expect(this.contentAuth.isLoggedIn()).to.be.equal(false);
                 done();
-            },                             () => {
+            }, () => {
             });
         });
 
         it('login should return an error if wrong credential are used 403 the login fails', function (done) {
             authEcmMock.get403Response();
 
-            this.contentAuth = ContentAuth.getInstance({
+            this.contentAuth = new ContentAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            },                                         alfrescoJsApi);
+            }, alfrescoJsApi);
             this.contentAuth.login('wrong', 'name').then(function () {
 
-            },                                           (error) => {
+            }, (error) => {
                 expect(error.status).to.be.equal(403);
                 done();
             });
@@ -146,13 +146,13 @@ describe('Ecm Auth test', function () {
         it('login should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
             authEcmMock.get400Response();
 
-            this.contentAuth = ContentAuth.getInstance({
+            this.contentAuth = new ContentAuth({
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
-            },                                         alfrescoJsApi);
+            }, alfrescoJsApi);
             this.contentAuth.login(null, null).then(function () {
 
-            },                                      (error) => {
+            }, (error) => {
                 expect(error.status).to.be.equal(400);
                 done();
             });
@@ -162,10 +162,10 @@ describe('Ecm Auth test', function () {
             it('login should fire an event if is unauthorized  401', function (done) {
                 authEcmMock.get401Response();
 
-                this.contentAuth = ContentAuth.getInstance({
+                this.contentAuth = new ContentAuth({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                },                                         alfrescoJsApi);
+                }, alfrescoJsApi);
 
                 let loginPromise = this.contentAuth.login('wrong', 'name');
 
@@ -180,10 +180,10 @@ describe('Ecm Auth test', function () {
             it('login should fire an event if is forbidden 403', function (done) {
                 authEcmMock.get403Response();
 
-                this.contentAuth = ContentAuth.getInstance({
+                this.contentAuth = new ContentAuth({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                },                                         alfrescoJsApi);
+                }, alfrescoJsApi);
 
                 let loginPromise = this.contentAuth.login('wrong', 'name');
 
@@ -198,10 +198,10 @@ describe('Ecm Auth test', function () {
             it('The Api Should fire success event if is all ok 201', function (done) {
                 authEcmMock.get201Response();
 
-                this.contentAuth = ContentAuth.getInstance({
+                this.contentAuth = new ContentAuth({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                },                                         alfrescoJsApi);
+                }, alfrescoJsApi);
 
                 let loginPromise = this.contentAuth.login('admin', 'admin');
 
@@ -216,10 +216,10 @@ describe('Ecm Auth test', function () {
             it('The Api Should fire logout event if the logout is successfull', function (done) {
                 authEcmMock.get201Response();
 
-                this.contentAuth = ContentAuth.getInstance({
+                this.contentAuth = new ContentAuth({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                },                                         alfrescoJsApi);
+                }, alfrescoJsApi);
 
                 this.contentAuth.login('admin', 'admin');
 
@@ -236,10 +236,10 @@ describe('Ecm Auth test', function () {
             it('Ticket should be present in the client', function () {
                 authEcmMock.get400Response();
 
-                this.contentAuth = ContentAuth.getInstance({
+                this.contentAuth = new ContentAuth({
                     ticketEcm: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
                     hostEcm: this.hostEcm
-                },                                         alfrescoJsApi);
+                }, alfrescoJsApi);
 
                 expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(this.contentAuth.authentications.basicAuth.password);
             });
@@ -249,10 +249,10 @@ describe('Ecm Auth test', function () {
 
             beforeEach(function (done) {
                 authEcmMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
-                this.contentAuth = ContentAuth.getInstance({
+                this.contentAuth = new ContentAuth({
                     contextRoot: 'alfresco',
                     hostEcm: this.hostEcm
-                },                                         alfrescoJsApi);
+                }, alfrescoJsApi);
 
                 this.contentAuth.login('admin', 'admin').then(() => {
                     done();
@@ -266,14 +266,14 @@ describe('Ecm Auth test', function () {
                     expect(this.contentAuth.config.ticket).to.be.equal(undefined);
                     expect(data).to.be.equal('logout');
                     done();
-                },                             function () {
+                }, function () {
                 });
             });
 
             it('Logout should be rejected if the Ticket is already expired', function (done) {
                 authEcmMock.get404ResponseLogout();
                 this.contentAuth.logout().then(() => {
-                },                             (error) => {
+                }, (error) => {
                     expect(error.error.toString()).to.be.equal('Error: Not Found');
                     done();
                 });

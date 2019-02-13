@@ -25,8 +25,6 @@ const Emitter = _Emitter;
 
 export class ProcessAuth extends AlfrescoApiClient {
 
-    private static instance: ProcessAuth = null;
-
     config: AlfrescoApiConfig;
     basePath: string;
     storage: Storage;
@@ -34,16 +32,6 @@ export class ProcessAuth extends AlfrescoApiClient {
     authentications: Authentication = new Authentication({
         'basicAuth': { ticket: '' }, type: 'activiti'
     });
-
-    static getInstance(config: AlfrescoApiConfig): ProcessAuth {
-        if (!ProcessAuth.instance) {
-            ProcessAuth.instance = new ProcessAuth(config);
-        } else {
-            ProcessAuth.instance.setConfig(config);
-        }
-
-        return ProcessAuth.instance;
-    }
 
     constructor(config: AlfrescoApiConfig) {
         super();

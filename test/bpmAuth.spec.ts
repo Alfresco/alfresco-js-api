@@ -14,13 +14,13 @@ describe('Bpm Auth test', function () {
     });
 
     it('should remember username on login', () => {
-        const auth = ProcessAuth.getInstance({});
+        const auth = new ProcessAuth({});
         auth.login('johndoe', 'password');
         expect(auth.authentications.basicAuth.username).to.be.equal('johndoe');
     });
 
     it('should forget username on logout', function (done) {
-        this.processAuth = ProcessAuth.getInstance({
+        this.processAuth = new ProcessAuth({
             hostBpm: this.hostBpm,
             contextRootBpm: 'activiti-app'
         });
@@ -48,7 +48,7 @@ describe('Bpm Auth test', function () {
 
             this.authBpmMock.get200Response();
 
-            this.processAuth = ProcessAuth.getInstance({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
@@ -65,7 +65,7 @@ describe('Bpm Auth test', function () {
 
             this.authBpmMock.get200Response();
 
-            this.processAuth = ProcessAuth.getInstance({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
@@ -83,7 +83,7 @@ describe('Bpm Auth test', function () {
 
             this.authBpmMock.get200Response();
 
-            this.processAuth = ProcessAuth.getInstance({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
@@ -99,7 +99,7 @@ describe('Bpm Auth test', function () {
 
             this.authBpmMock.get200Response();
 
-            this.processAuth = ProcessAuth.getInstance({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
@@ -119,7 +119,7 @@ describe('Bpm Auth test', function () {
 
             this.authBpmMock.get200Response();
 
-            this.processAuth = ProcessAuth.getInstance({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
@@ -137,7 +137,7 @@ describe('Bpm Auth test', function () {
         it('login should return an error if wrong credential are used 401 the login fails', function (done) {
             this.authBpmMock.get401Response();
 
-            this.processAuth = ProcessAuth.getInstance({
+            this.processAuth = new ProcessAuth({
                 hostBpm: this.hostBpm,
                 contextRootBpm: 'activiti-app'
             });
@@ -154,7 +154,7 @@ describe('Bpm Auth test', function () {
             it('login should fire an event if is unauthorized  401', function (done) {
                 this.authBpmMock.get401Response();
 
-                this.processAuth = ProcessAuth.getInstance({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
@@ -172,7 +172,7 @@ describe('Bpm Auth test', function () {
             it('login should fire an event if is forbidden 403', function (done) {
                 this.authBpmMock.get403Response();
 
-                this.processAuth = ProcessAuth.getInstance({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
@@ -190,7 +190,7 @@ describe('Bpm Auth test', function () {
             it('The Api Should fire success event if is all ok 201', function (done) {
                 this.authBpmMock.get200Response();
 
-                this.processAuth = ProcessAuth.getInstance({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
@@ -208,7 +208,7 @@ describe('Bpm Auth test', function () {
             it('The Api Should fire logout event if the logout is successfull', function (done) {
                 this.authBpmMock.get200Response();
 
-                this.processAuth = ProcessAuth.getInstance({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
@@ -227,7 +227,7 @@ describe('Bpm Auth test', function () {
 
             it('Ticket should be present in the client', function () {
 
-                this.processAuth = ProcessAuth.getInstance({
+                this.processAuth = new ProcessAuth({
                     ticketBpm: 'Basic YWRtaW46YWRtaW4=',
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
@@ -241,7 +241,7 @@ describe('Bpm Auth test', function () {
 
             beforeEach(function (done) {
                 this.authBpmMock.get200Response();
-                this.processAuth = ProcessAuth.getInstance({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
@@ -277,7 +277,7 @@ describe('Bpm Auth test', function () {
             it('should be enabled by default', function (done) {
                 this.authBpmMock.get200Response();
 
-                this.processAuth = ProcessAuth.getInstance({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app'
                 });
@@ -291,7 +291,7 @@ describe('Bpm Auth test', function () {
             it('should be disabled if disableCsrf is true', function (done) {
                 this.authBpmMock.get200Response();
 
-                this.processAuth = ProcessAuth.getInstance({
+                this.processAuth = new ProcessAuth({
                     hostBpm: this.hostBpm,
                     contextRootBpm: 'activiti-app',
                     disableCsrf: true

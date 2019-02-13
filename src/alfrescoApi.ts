@@ -70,6 +70,7 @@ export class AlfrescoApi {
 
         this.storage = new Storage();
         this.config = new AlfrescoApiConfig(config);
+
         this.clientsFactory();
 
         this.processClient = new ProcessClient(this.config);
@@ -82,8 +83,19 @@ export class AlfrescoApi {
 
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
-            this.processAuth = ProcessAuth.getInstance(this.config);
-            this.contentAuth = ContentAuth.getInstance(this.config, this);
+
+            if (!this.processAuth) {
+                this.processAuth = new ProcessAuth(this.config);
+            } else {
+                this.processAuth.setConfig(this.config);
+            }
+
+            if (!this.contentAuth) {
+                this.contentAuth = new ContentAuth(this.config, this);
+            } else {
+                this.contentAuth.setConfig(config);
+            }
+
             this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), this.processAuth.getAuthentication());
         }
 

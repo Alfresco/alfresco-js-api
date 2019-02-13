@@ -31,9 +31,9 @@ describe('Auth', function () {
                     });
 
                     this.alfrescoJsApi.login('admin', 'admin').then((data) => {
-                            expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
-                            done();
-                        });
+                        expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
+                        done();
+                    });
                 });
 
                 it('should return an error if wrong credential are used 403 the login fails', function (done) {
@@ -44,7 +44,7 @@ describe('Auth', function () {
                     });
 
                     this.alfrescoJsApi.login('wrong', 'name').then(() => {
-                    },                                             (error) => {
+                    }, (error) => {
                         expect(error.status).to.be.equal(403);
                         done();
                     });
@@ -59,7 +59,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login(null, null).then(function () {
 
-                    },                                        (error) => {
+                    }, (error) => {
                         expect(error.status).to.be.equal(400);
                         done();
                     });
@@ -196,7 +196,7 @@ describe('Auth', function () {
                     });
 
                     this.alfrescoJsApi.loginTicket(ticket).then((data) => {
-                    },                                          () => {
+                    }, () => {
                         done();
                     });
                 });
@@ -212,7 +212,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login('admin', 'admin').then(() => {
                         done();
-                    },                                              () => {
+                    }, () => {
                     });
                 });
 
@@ -223,14 +223,14 @@ describe('Auth', function () {
                         expect(this.alfrescoJsApi.config.ticket).to.be.equal(undefined);
                         expect(data).to.be.equal('logout');
                         done();
-                    },                               () => {
+                    }, () => {
                     });
                 });
 
                 it('should Logout be rejected if the Ticket is already expired', function (done) {
                     this.authResponseEcmMock.get404ResponseLogout();
                     this.alfrescoJsApi.logout().then(() => {
-                    },                               (error) => {
+                    }, (error) => {
                         expect(error.error.toString()).to.be.equal('Error: Not Found');
                         done();
                     });
@@ -247,14 +247,14 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login('admin', 'admin').then(() => {
                         done();
-                    },                                              () => {
+                    }, () => {
                     });
                 });
 
                 it('should 401 invalidate the ticket', function (done) {
                     this.nodeMock.get401CreationFolder();
                     this.alfrescoJsApi.nodes.createFolder('newFolder').then(() => {
-                    },                                                      () => {
+                    }, () => {
                         expect(this.alfrescoJsApi.contentAuth.authentications.basicAuth.password).to.be.equal(null);
                         done();
                     });
@@ -265,7 +265,7 @@ describe('Auth', function () {
                     this.nodeMock.get401CreationFolder();
 
                     this.alfrescoJsApi.nodes.createFolder('newFolder').then(() => {
-                    },                                                      () => {
+                    }, () => {
                         expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();
                     });
@@ -310,7 +310,7 @@ describe('Auth', function () {
                     this.alfrescoJsApi.login('admin', 'admin').then((data) => {
                         expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                         done();
-                    },                                              function (error) {
+                    }, function (error) {
                         console.log('error' + JSON.stringify(error));
                     });
                 });
@@ -325,7 +325,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login('wrong', 'name').then(() => {
 
-                    },                                             (error) => {
+                    }, (error) => {
                         expect(error.status).to.be.equal(401);
                         done();
                     });
@@ -341,7 +341,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login(null, null).then(function () {
 
-                    },                                        function (error) {
+                    }, function (error) {
                         expect(error.status).to.be.equal(400);
                         done();
                     });
@@ -362,7 +362,7 @@ describe('Auth', function () {
                     this.alfrescoJsApi.login('admin', 'admin').then(() => {
                         expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(true);
                         done();
-                    },                                              function () {
+                    }, function () {
                     });
                 });
 
@@ -382,7 +382,7 @@ describe('Auth', function () {
                     this.alfrescoJsApi.logout().then(() => {
                         expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();
-                    },                               function () {
+                    }, function () {
                     });
                 });
             });
@@ -460,7 +460,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login('admin', 'admin').then(() => {
                         done();
-                    },                                              () => {
+                    }, () => {
                     });
                 });
 
@@ -468,7 +468,7 @@ describe('Auth', function () {
                     this.profileMock.get401getProfile();
 
                     this.alfrescoJsApi.activiti.profileApi.getProfile().then((data) => {
-                    },                                                       () => {
+                    }, () => {
                         expect(this.alfrescoJsApi.processAuth.authentications.basicAuth.ticket).to.be.equal(null);
                         done();
                     });
@@ -479,7 +479,7 @@ describe('Auth', function () {
                     this.profileMock.get401getProfile();
 
                     this.alfrescoJsApi.activiti.profileApi.getProfile().then((data) => {
-                    },                                                       () => {
+                    }, () => {
                         expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();
                     });
@@ -535,7 +535,7 @@ describe('Auth', function () {
                         expect(data[0]).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                         expect(data[1]).to.be.equal('Basic YWRtaW46YWRtaW4=');
                         done();
-                    },                                              function () {
+                    }, function () {
                     });
                 });
 
@@ -551,7 +551,7 @@ describe('Auth', function () {
                     });
 
                     this.alfrescoJsApi.login('admin', 'admin').then(function () {
-                    },                                              function () {
+                    }, function () {
                         done();
                     });
 
@@ -570,7 +570,7 @@ describe('Auth', function () {
                     });
 
                     this.alfrescoJsApi.login('admin', 'admin').then(function () {
-                    },                                              function () {
+                    }, function () {
                         done();
                     });
 
@@ -599,7 +599,7 @@ describe('Auth', function () {
                     this.alfrescoJsApi.logout().then(() => {
                         expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();
-                    },                               function () {
+                    }, function () {
                     });
                 });
 
@@ -616,7 +616,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login('wrong', 'name').then(function () {
 
-                    },                                             function (error) {
+                    }, function (error) {
                         expect(error.status).to.be.equal(401);
                         done();
                     });
@@ -634,7 +634,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login(null, null).then(function () {
 
-                    },                                        function (error) {
+                    }, function (error) {
                         expect(error.status).to.be.equal(400);
                         done();
                     });
@@ -656,7 +656,7 @@ describe('Auth', function () {
                 this.alfrescoJsApi.login('admin', 'admin').then(() => {
                     expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(true);
                     done();
-                },                                              function () {
+                }, function () {
                 });
             });
 
