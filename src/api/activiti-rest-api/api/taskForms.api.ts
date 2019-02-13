@@ -163,7 +163,7 @@ export class TaskFormsApi extends BaseApi {
         * @param field field
         * @return Promise<FormValueRepresentation>
         */
-    getRestFieldValues(taskId: string, field: string): Promise<FormValueRepresentation> {
+    getRestFieldValues(taskId: string, field: string): Promise<FormValueRepresentation []> {
 
         let postBody = null;
 
@@ -191,10 +191,13 @@ export class TaskFormsApi extends BaseApi {
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
-        return this.apiClient.callApi(
-            '/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormValueRepresentation);
+        return new Promise<FormValueRepresentation[]>((resolve) =>
+            this.apiClient.callApi(
+                '/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                contentTypes, accepts, FormValueRepresentation).then((result: Promise<FormValueRepresentation[]>) => {
+                    resolve(<FormValueRepresentation[]>Object.keys(result).map((key: any) => result[key]));
+                }));
     }
     /**
         * Get a task form
