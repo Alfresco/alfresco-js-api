@@ -579,11 +579,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
     grantPasswordLogin(username: string, password: string, resolve: any, reject: any) {
         let postBody = {}, pathParams = {}, queryParams = {};
 
-        let authHeader = this.basicAuth(this.authentications.basicAuth.username, this.authentications.basicAuth.password);
-
         let headerParams = {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': authHeader
+            'Content-Type': 'application/x-www-form-urlencoded'
         };
 
         let formParams = {
