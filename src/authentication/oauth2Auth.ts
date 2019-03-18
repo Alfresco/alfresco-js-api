@@ -130,44 +130,34 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     discoveryUrls() {
         return new Promise((resolve, reject) => {
-            let discoveryStore = this.storage.getItem('discovery');
-            if (discoveryStore) {
-                this.discovery = JSON.parse(discoveryStore);
-            }
+            let postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
+            let contentTypes = ['application/json'];
+            let accepts = ['application/json'];
 
-            if (!this.discovery) {
-                let postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
-                let contentTypes = ['application/json'];
-                let accepts = ['application/json'];
+            let url = '.well-known/openid-configuration';
+            this.callApi(
+                url, 'GET',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                contentTypes, accepts
+            ).then((discovery) => {
+                this.discovery = {};
+                this.discovery.loginUrl = discovery.authorization_endpoint;
+                this.discovery.logoutUrl = discovery.end_session_endpoint;
+                this.discovery.grantTypesSupported = discovery.grant_types_supported;
+                this.discovery.issuer = discovery.issuer;
+                this.discovery.tokenEndpoint = discovery.token_endpoint;
+                this.discovery.userinfoEndpoint = discovery.userinfo_endpoint;
+                this.discovery.jwksUri = discovery.jwks_uri;
+                this.discovery.sessionCheckIFrameUrl = discovery.check_session_iframe;
 
-                let url = '.well-known/openid-configuration';
-                this.callApi(
-                    url, 'GET',
-                    pathParams, queryParams, headerParams, formParams, postBody,
-                    contentTypes, accepts
-                ).then((discovery) => {
-                    this.discovery = {};
-                    this.discovery.loginUrl = discovery.authorization_endpoint;
-                    this.discovery.logoutUrl = discovery.end_session_endpoint;
-                    this.discovery.grantTypesSupported = discovery.grant_types_supported;
-                    this.discovery.issuer = discovery.issuer;
-                    this.discovery.tokenEndpoint = discovery.token_endpoint;
-                    this.discovery.userinfoEndpoint = discovery.userinfo_endpoint;
-                    this.discovery.jwksUri = discovery.jwks_uri;
-                    this.discovery.sessionCheckIFrameUrl = discovery.check_session_iframe;
-
-                    this.emit('discovery', this.discovery);
-                    this.storage.setItem('discovery', JSON.stringify(this.discovery));
-                    resolve(discovery);
-                }, (error) => {
-                    this.emit('error', error);
-                    this.storage.removeItem('discovery');
-                    reject(error.error);
-                });
-            } else {
                 this.emit('discovery', this.discovery);
-                resolve(this.discovery);
-            }
+                this.storage.setItem('discovery', JSON.stringify(this.discovery));
+                resolve(discovery);
+            }, (error) => {
+                this.emit('error', error);
+                this.storage.removeItem('discovery');
+                reject(error.error);
+            });
         });
 
     }
@@ -605,7 +595,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 resolve(data);
             },
             (error) => {
-                if (error.error.status === 401) {
+                if (error.error && error.error.status === 401) {
                     this.emit('unauthorized');
                 }
                 this.emit('error');
