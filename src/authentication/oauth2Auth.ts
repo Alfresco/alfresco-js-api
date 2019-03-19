@@ -166,6 +166,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 });
             } else {
                 this.emit('discovery', this.discovery);
+                this.storage.setItem('discovery', JSON.stringify(this.discovery));
                 resolve(this.discovery);
             }
         });
