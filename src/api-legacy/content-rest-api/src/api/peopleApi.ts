@@ -66,6 +66,7 @@ export class PeopleApi {
         this.sitesApi = new SitesApi(alfrescoApi);
         this.activitiesApi = new ActivitiesApi(alfrescoApi);
         this.preferencesApi = new PreferencesApi(alfrescoApi);
+        this.groupsApi = new GroupsApi(alfrescoApi);
     }
 
     /**
