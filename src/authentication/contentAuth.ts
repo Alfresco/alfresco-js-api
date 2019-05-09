@@ -29,7 +29,6 @@ export class ContentAuth extends AlfrescoApiClient {
 
     config: AlfrescoApiConfig;
     basePath: string;
-    ticketStorageLabel: string;
     storage: Storage;
     ticket: string;
     static authentications: Authentication = new Authentication({
@@ -53,16 +52,10 @@ export class ContentAuth extends AlfrescoApiClient {
 
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
 
-        if (this.config.domainPrefix) {
-            this.ticketStorageLabel = this.config.domainPrefix.concat('-ticket-ECM');
-        } else {
-            this.ticketStorageLabel = 'ticket-ECM';
-        }
-
         if (this.config.ticketEcm) {
             this.setTicket(config.ticketEcm);
-        } else if (this.storage.getItem(this.ticketStorageLabel)) {
-            this.setTicket(this.storage.getItem(this.ticketStorageLabel));
+        } else if (this.storage.getItem('ticket-ECM')) {
+            this.setTicket(this.storage.getItem('ticket-ECM'));
         }
 
     }
@@ -180,7 +173,7 @@ export class ContentAuth extends AlfrescoApiClient {
         this.authentications.basicAuth.username = 'ROLE_TICKET';
         this.authentications.basicAuth.password = ticket;
         this.config.ticketEcm = ticket;
-        this.storage.setItem(this.ticketStorageLabel, ticket);
+        this.storage.setItem('ticket-ECM', ticket);
         this.ticket = ticket;
     }
 
@@ -192,7 +185,7 @@ export class ContentAuth extends AlfrescoApiClient {
     }
 
     invalidateSession() {
-        this.storage.removeItem(this.ticketStorageLabel);
+        this.storage.removeItem('ticket-ECM');
         this.authentications.basicAuth.username = null;
         this.authentications.basicAuth.password = null;
         this.config.ticketEcm = null;

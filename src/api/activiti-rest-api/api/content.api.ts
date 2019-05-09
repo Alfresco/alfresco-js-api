@@ -314,7 +314,7 @@ export class ContentApi extends BaseApi {
             return this.apiClient.callApi(
                 '/api/enterprise/content/{contentId}/raw', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts,undefined, undefined,  'blob');
+                contentTypes, accepts, undefined, undefined,  'blob');
         }
     }
 

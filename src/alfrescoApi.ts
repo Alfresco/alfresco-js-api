@@ -68,7 +68,12 @@ export class AlfrescoApi {
             config = {};
         }
 
+        if (config.domainPrefix) {
+            Storage.setPrefix(config.domainPrefix);
+        }
+
         this.storage = new Storage();
+
         this.config = new AlfrescoApiConfig(config);
 
         this.clientsFactory();
