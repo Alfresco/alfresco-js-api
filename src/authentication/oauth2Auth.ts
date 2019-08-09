@@ -159,7 +159,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                     this.emit('discovery', this.discovery);
                     this.storage.setItem('discovery', JSON.stringify(this.discovery));
                     resolve(discovery);
-                }, (error) => {
+                },     (error) => {
                     this.emit('error', error);
                     this.storage.removeItem('discovery');
                     reject(error.error);
@@ -195,7 +195,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                         this.emit('jwks', jwks);
                         this.storage.setItem('jwks', JSON.stringify(jwks));
                         resolve(jwks);
-                    }, (error) => {
+                    },     (error) => {
                         reject(error.error);
                     });
                 } else {
@@ -239,7 +239,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                         this.silentRefresh();
                         resolve(accessToken);
                     }
-                }, (error) => {
+                },                                 (error) => {
                     reject('Validation JWT error' + error);
                 });
             } else {
@@ -523,7 +523,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
-        }, this.config.oauth2.refreshTokenTimeout);
+        },         this.config.oauth2.refreshTokenTimeout);
     }
 
     removeHashFromSilentIframe() {

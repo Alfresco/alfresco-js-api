@@ -84,12 +84,12 @@ describe('Alfresco Core API Client', function () {
             const data = {
                 body: [
                     {
-                        id: "1",
-                        name: "test1"
+                        id: '1',
+                        name: 'test1'
                     },
                     {
-                        id: "2",
-                        name: "test2"
+                        id: '2',
+                        name: 'test2'
                     }
                 ]
             };
@@ -98,7 +98,7 @@ describe('Alfresco Core API Client', function () {
             const isObject = (result[0] instanceof (FormValueRepresentation));
             expect(isArray).to.equal(true);
             expect(isObject).to.equal(true);
-        })
+        });
     });
 
 });
