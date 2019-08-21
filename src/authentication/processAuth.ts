@@ -104,7 +104,7 @@ export class ProcessAuth extends AlfrescoApiClient {
                 pathParams, queryParams, headerParams, formParams, postBody,
                 contentTypes, accepts
             ).then(
-                (data) => {
+                () => {
                     this.saveUsername(username);
                     let ticket = this.basicAuth( this.authentications.basicAuth.username,  this.authentications.basicAuth.password);
                     this.setTicket(ticket);
