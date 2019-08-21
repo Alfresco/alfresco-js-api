@@ -70,7 +70,7 @@ describe('Oauth2 Implicit flow test', function () {
             }
         });
 
-        this.oauth2Auth.on('implicit_redirect', (url) => {
+        this.oauth2Auth.on('implicit_redirect', () => {
             expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
                 'openid-connect/auth?');
             done();
@@ -101,7 +101,7 @@ describe('Oauth2 Implicit flow test', function () {
             return true;
         };
 
-        this.oauth2Auth.on('token_issued', (url) => {
+        this.oauth2Auth.on('token_issued', () => {
             expect(window.location.url).to.be.equal(undefined);
             done();
         });

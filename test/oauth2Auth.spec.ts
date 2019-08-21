@@ -151,7 +151,7 @@ describe('Oauth2  test', function () {
                 authType: 'OAUTH'
             });
 
-            this.oauth2Auth.login('admin', 'admin').then((data) => {
+            this.oauth2Auth.login('admin', 'admin').then(() => {
                 expect(this.oauth2Auth.isLoggedIn()).to.be.equal(true);
                 done();
             },                                           function () {

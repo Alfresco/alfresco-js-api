@@ -195,7 +195,7 @@ describe('Auth', function () {
                         hostEcm: this.host
                     });
 
-                    this.alfrescoJsApi.loginTicket(ticket).then((data) => {
+                    this.alfrescoJsApi.loginTicket(ticket).then(() => {
                     },                                          () => {
                         done();
                     });
@@ -467,7 +467,7 @@ describe('Auth', function () {
                 it('should 401 invalidate the ticket', function (done) {
                     this.profileMock.get401getProfile();
 
-                    this.alfrescoJsApi.activiti.profileApi.getProfile().then((data) => {
+                    this.alfrescoJsApi.activiti.profileApi.getProfile().then(() => {
                     },                                                       () => {
                         expect(this.alfrescoJsApi.processAuth.authentications.basicAuth.ticket).to.be.equal(null);
                         done();
@@ -478,7 +478,7 @@ describe('Auth', function () {
                 it('should 401 invalidate the session and logout', function (done) {
                     this.profileMock.get401getProfile();
 
-                    this.alfrescoJsApi.activiti.profileApi.getProfile().then((data) => {
+                    this.alfrescoJsApi.activiti.profileApi.getProfile().then(() => {
                     },                                                       () => {
                         expect(this.alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();

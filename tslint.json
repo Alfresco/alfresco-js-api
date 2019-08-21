@@ -52,12 +52,6 @@
         "no-switch-case-fall-through": true,
         "no-trailing-whitespace": true,
         "no-unused-expression": true,
-        "no-unused-variable": [
-            true,
-            {
-                "ignore-pattern": "^_"
-            }
-        ],
         "no-use-before-declare": true,
         "no-var-keyword": true,
         "no-var-requires": true,
