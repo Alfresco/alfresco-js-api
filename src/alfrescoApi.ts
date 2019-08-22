@@ -149,7 +149,7 @@ export class AlfrescoApi {
     private exchangeTokenForAlfTicket() {
         this.oauth2Auth.once('token_issued', () => {
             if (this.config.provider === 'ALL' || this.config.provider === 'ECM') {
-                let authContentApi: AuthenticationApi = new AuthenticationApi(this);
+                const authContentApi: AuthenticationApi = new AuthenticationApi(this);
                 authContentApi.getTicket().then((ticketEntry: TicketEntry) => {
                     this.oauth2Auth.config.ticketEcm = ticketEntry.entry.id;
                     this.emit('ticket_exchanged');
@@ -269,7 +269,7 @@ export class AlfrescoApi {
         } else {
 
             if (this.isBpmConfiguration()) {
-                let processPromise = this.processAuth.login(username, password);
+                const processPromise = this.processAuth.login(username, password);
 
                 processPromise.then((ticketBpm) => {
                     this.config.ticketBpm = ticketBpm;
@@ -279,7 +279,7 @@ export class AlfrescoApi {
 
                 return processPromise;
             } else if (this.isEcmConfiguration()) {
-                let contentPromise = this.contentAuth.login(username, password);
+                const contentPromise = this.contentAuth.login(username, password);
 
                 contentPromise.then((ticketEcm) => {
                     this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
@@ -292,7 +292,7 @@ export class AlfrescoApi {
                 return contentPromise;
 
             } else if (this.isEcmBpmConfiguration()) {
-                let contentProcessPromise = this._loginBPMECM(username, password);
+                const contentProcessPromise = this._loginBPMECM(username, password);
 
                 contentProcessPromise.then((data) => {
                     this.config.ticketEcm = data[0];
@@ -339,10 +339,10 @@ export class AlfrescoApi {
     }
 
     _loginBPMECM(username: string, password: string): Promise<any> {
-        let contentPromise = this.contentAuth.login(username, password);
-        let processPromise = this.processAuth.login(username, password);
+        const contentPromise = this.contentAuth.login(username, password);
+        const processPromise = this.processAuth.login(username, password);
 
-        let promise: any = new Promise((resolve, reject) => {
+        const promise: any = new Promise((resolve, reject) => {
             Promise.all([contentPromise, processPromise]).then(
                 (data) => {
                     promise.emit('success');
@@ -375,7 +375,7 @@ export class AlfrescoApi {
             if (this.isBpmConfiguration()) {
                 return this.processAuth.logout();
             } else if (this.isEcmConfiguration()) {
-                let contentPromise = this.contentAuth.logout();
+                const contentPromise = this.contentAuth.logout();
                 contentPromise.then(() => {
                     this.config.ticket = undefined;
                 },                  () => {
@@ -389,12 +389,12 @@ export class AlfrescoApi {
     }
 
     _logoutBPMECM(): Promise<any> {
-        let contentPromise = this.contentAuth.logout();
-        let processPromise = this.processAuth.logout();
+        const contentPromise = this.contentAuth.logout();
+        const processPromise = this.processAuth.logout();
 
-        let promise: any = new Promise((resolve, reject) => {
+        const promise: any = new Promise((resolve, reject) => {
             Promise.all([contentPromise, processPromise]).then(
-                (data) => {
+                () => {
                     this.config.ticket = undefined;
                     promise.emit('logout');
                     resolve('logout');

@@ -68,7 +68,7 @@ describe('Ecm Auth test', function () {
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
             },                                 alfrescoJsApi);
-            this.contentAuth.login('admin', 'admin').then((data) => {
+            this.contentAuth.login('admin', 'admin').then(() => {
                 expect(this.contentAuth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
             },                                            () => {

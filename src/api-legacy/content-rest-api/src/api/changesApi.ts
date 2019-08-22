@@ -307,7 +307,7 @@ export class ChangesApi {
      * @param {Date} opts.ifModifiedSince Only returns the content if it has been modified since the date provided.\nUse the date format defined by HTTP. For example, &#x60;Wed, 09 Mar 2016 16:56:34 GMT&#x60;.\n
      */
     getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any> {
-        return this.renditionsApi.getRenditionContent(nodeId, renditionId);
+        return this.renditionsApi.getRenditionContent(nodeId, renditionId, opts);
     }
 
     /**

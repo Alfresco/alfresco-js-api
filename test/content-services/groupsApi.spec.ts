@@ -52,7 +52,7 @@ describe('Groups', function () {
 
     it('delete group', function (done) {
         this.groupsMock.getDeleteGroupSuccessfulResponse('group_test');
-        this.alfrescoJsApi.core.groupsApi.deleteGroup('group_test').then(function (data) {
+        this.alfrescoJsApi.core.groupsApi.deleteGroup('group_test').then(function () {
             done();
         },                                                               function () {
         });
@@ -115,7 +115,7 @@ describe('Groups', function () {
     it('delete group member', function (done) {
         this.groupsMock.getDeleteMemberForGroupSuccessfulResponse('GROUP_TEST', 'GROUP_SUB_TEST');
 
-        this.alfrescoJsApi.core.groupsApi.deleteGroupMember('GROUP_TEST', 'GROUP_SUB_TEST').then(function (data) {
+        this.alfrescoJsApi.core.groupsApi.deleteGroupMember('GROUP_TEST', 'GROUP_SUB_TEST').then(function () {
             done();
         },                                                                                       function () {
         });

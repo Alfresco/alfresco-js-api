@@ -27,7 +27,7 @@ describe('Bpm Auth test', function () {
 
         this.authBpmMock.get200Response();
 
-        this.processAuth.login('admin', 'admin').then((data) => {
+        this.processAuth.login('admin', 'admin').then(() => {
             expect(this.processAuth.authentications.basicAuth.username).to.be.equal('admin');
 
             this.authBpmMock.get200ResponseLogout();

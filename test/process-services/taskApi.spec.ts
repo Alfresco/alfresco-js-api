@@ -51,7 +51,7 @@ describe('Activiti Task Api', function () {
 
         let requestNode = new TaskFilterRequestRepresentation();
 
-        this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then(() => {
         },                                                                () => {
             done();
         });
@@ -76,7 +76,7 @@ describe('Activiti Task Api', function () {
         let taskId = 200;
         this.tasksMock.get404CompleteTask(taskId);
 
-        this.alfrescoJsApi.activiti.taskApi.completeTask(taskId).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.completeTask(taskId).then(() => {
         },                                                            () => {
             done();
         });
@@ -88,7 +88,7 @@ describe('Activiti Task Api', function () {
 
         this.tasksMock.put200GenericResponse('/activiti-app/api/enterprise/tasks/5006/action/complete');
 
-        this.alfrescoJsApi.activiti.taskApi.completeTask(taskId).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.completeTask(taskId).then(() => {
             done();
         });
     });
@@ -99,7 +99,7 @@ describe('Activiti Task Api', function () {
         this.tasksMock.rec();
 
         let completeTaskFormRepresentation = new CompleteFormRepresentation();
-        this.alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRepresentation).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRepresentation).then(() => {
             done();
         });
         this.tasksMock.play();
@@ -115,7 +115,7 @@ describe('Activiti Task Api', function () {
 
         taskRepresentation.name = taskName;
 
-        this.alfrescoJsApi.activiti.taskApi.createNewTask(taskRepresentation).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.createNewTask(taskRepresentation).then(() => {
             done();
         });
     });
@@ -126,7 +126,7 @@ describe('Activiti Task Api', function () {
 
         let saveTaskFormRepresentation = new SaveFormRepresentation();
 
-        this.alfrescoJsApi.activiti.taskApi.saveTaskForm(taskId, saveTaskFormRepresentation).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.saveTaskForm(taskId, saveTaskFormRepresentation).then(() => {
             done();
         });
     });
@@ -164,7 +164,7 @@ describe('Activiti Task Api', function () {
         let field = 'label'; // String | field
         let column = 'user'; // String | column
 
-        this.alfrescoJsApi.activiti.taskApi.getRestFieldValuesColumn(taskId, field, column).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.getRestFieldValuesColumn(taskId, field, column).then(() => {
             done();
         },                                                                                       (error) => {
             console.log(error);
@@ -177,7 +177,7 @@ describe('Activiti Task Api', function () {
         let taskId = '2'; // String | taskId
         let field = 'label'; // String | field
 
-        this.alfrescoJsApi.activiti.taskApi.getRestFieldValues(taskId, field).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.getRestFieldValues(taskId, field).then(() => {
             done();
         },                                                                         (error) => {
             console.log(error);

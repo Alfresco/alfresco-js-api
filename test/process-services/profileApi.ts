@@ -26,7 +26,7 @@ describe('Activiti Profile Api', function () {
 
     it('get Profile Picture', function (done) {
         this.profileMock.get200getProfilePicture();
-        this.alfrescoJsApi.activiti.profileApi.getProfilePicture().then((data) => {
+        this.alfrescoJsApi.activiti.profileApi.getProfilePicture().then(() => {
             done();
         });
     });

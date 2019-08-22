@@ -98,7 +98,7 @@ export class AlfrescoApiClient {
             path = '/' + path;
         }
         let url = this.basePath + path;
-        let _this = this;
+        const _this = this;
         url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
             let value;
             if (pathParams.hasOwnProperty(key)) {
@@ -177,10 +177,10 @@ export class AlfrescoApiClient {
      * @returns {Object.<String, Object>} normalized parameters.
      */
     normalizeParams(params: any) {
-        let newParams = {};
-        for (let key in params) {
+        const newParams = {};
+        for (const key in params) {
             if (params.hasOwnProperty(key) && params[key] !== undefined && params[key] !== null) {
-                let value = params[key];
+                const value = params[key];
                 if (this.isFileParam(value) || Array.isArray(value)) {
                     newParams[key] = value;
                 } else {
@@ -237,7 +237,7 @@ export class AlfrescoApiClient {
         if (this.authentications) {
             switch (this.authentications.type) {
                 case 'basic':
-                    let basicAuth: BasicAuth = this.authentications.basicAuth;
+                    const basicAuth: BasicAuth = this.authentications.basicAuth;
                     if (basicAuth.username || basicAuth.password) {
                         request.auth(
                             basicAuth.username ? encodeURI(basicAuth.username) : '',
@@ -251,7 +251,7 @@ export class AlfrescoApiClient {
                     }
                     break;
                 case 'oauth2':
-                    let oauth2: Oauth2 = this.authentications.oauth2;
+                    const oauth2: Oauth2 = this.authentications.oauth2;
                     if (oauth2.accessToken) {
                         request.set({ 'Authorization': 'Bearer ' + oauth2.accessToken });
                     }
@@ -295,7 +295,7 @@ export class AlfrescoApiClient {
     }
 
     basicAuth(username: string, password: string): string {
-        let str: any = username + ':' + password;
+        const str: any = username + ':' + password;
 
         let base64;
 
@@ -334,7 +334,7 @@ export class AlfrescoApiClient {
         let url;
 
         if (contextRoot) {
-            let basePath = `${this.host}/${contextRoot}`;
+            const basePath = `${this.host}/${contextRoot}`;
             url = this.buildUrlCustomBasePath(basePath, path, pathParams);
         } else {
             url = this.buildUrl(path, pathParams);
@@ -365,7 +365,7 @@ export class AlfrescoApiClient {
      */
     callCustomApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
                   contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
-        let url = this.buildUrlCustomBasePath(path, '', pathParams);
+        const url = this.buildUrlCustomBasePath(path, '', pathParams);
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
                                 contentTypes, accepts, returnType, contextRoot, responseType, url);
@@ -391,9 +391,18 @@ export class AlfrescoApiClient {
      *                                   If an empty string is set as the value of responseType, it is assumed as type "text".
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
-    callHostApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-                contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string, url?: string): Promise<any> {
-        let eventEmitter: _Emitter = {};
+    callHostApi(
+        // @ts-ignore
+        path: string,
+        httpMethod: string,
+        // @ts-ignore
+        pathParams?: any,
+        queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
+        contentTypes?: string[], accepts?: string[], returnType?: any,
+        // @ts-ignore
+        contextRoot?: string,
+        responseType?: string, url?: string): Promise<any> {
+        const eventEmitter: _Emitter = {};
         Emitter(eventEmitter); // jshint ignore:line
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
@@ -403,7 +412,7 @@ export class AlfrescoApiClient {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
         }
 
-        let promise: any = new Promise((resolve, reject) => {
+        const promise: any = new Promise((resolve, reject) => {
             request.end((error, response) => {
                 if (error) {
 
@@ -484,7 +493,7 @@ export class AlfrescoApiClient {
     }
 
     setCsrfToken(request: any) {
-        let token = this.createCSRFToken();
+        const token = this.createCSRFToken();
         request.set('X-CSRF-TOKEN', token);
 
         if (this.isNodeEnv()) {
@@ -507,7 +516,7 @@ export class AlfrescoApiClient {
 
     progress(event: any, eventEmitter: _Emitter) {
         if (event.lengthComputable) {
-            let percent = Math.round(event.loaded / event.total * 100);
+            const percent = Math.round(event.loaded / event.total * 100);
 
             eventEmitter.emit('progress', {
                 total: event.total,
@@ -526,7 +535,7 @@ export class AlfrescoApiClient {
             path = '/' + path;
         }
         let url = basePath + path;
-        let _this = this;
+        const _this = this;
         url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
             let value;
             if (pathParams.hasOwnProperty(key)) {
@@ -541,7 +550,7 @@ export class AlfrescoApiClient {
 
     buildRequest(httpMethod: string, url: string, queryParams, headerParams, formParams, bodyParam,
                  contentTypes, accepts, responseType, eventEmitter: _Emitter, returnType) {
-        let request: any = superagent(httpMethod, url);
+        const request: any = superagent(httpMethod, url);
 
         // apply authentications
         this.applyAuthToRequest(request);
@@ -573,7 +582,7 @@ export class AlfrescoApiClient {
         // set request timeout
         request.timeout(this.timeout);
 
-        let contentType = this.jsonPreferredMime(contentTypes);
+        const contentType = this.jsonPreferredMime(contentTypes);
 
         if (contentType && contentType !== 'multipart/form-data') {
             request.type(contentType);
@@ -586,8 +595,8 @@ export class AlfrescoApiClient {
                 this.progress(event, eventEmitter);
             });
         } else if (contentType === 'multipart/form-data') {
-            let _formParams = this.normalizeParams(formParams);
-            for (let key in _formParams) {
+            const _formParams = this.normalizeParams(formParams);
+            for (const key in _formParams) {
                 if (_formParams.hasOwnProperty(key)) {
                     if (this.isFileParam(_formParams[key])) {
                         // file field
@@ -607,7 +616,7 @@ export class AlfrescoApiClient {
             });
         }
 
-        let accept = this.jsonPreferredMime(accepts);
+        const accept = this.jsonPreferredMime(accepts);
         if (accept) {
             request.accept(accept);
         }
