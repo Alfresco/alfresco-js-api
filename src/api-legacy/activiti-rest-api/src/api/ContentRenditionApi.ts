@@ -29,7 +29,7 @@ export class ContentRenditionApi {
         this.contentApi = new ContentApi(alfrescoApi);
     }
 
-    getRawContent(contentId, renditionType) {
+    getRawContent(contentId: number, renditionType: string) {
        return this.contentApi.getRawContent(contentId, renditionType);
     }
 }

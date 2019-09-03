@@ -74,7 +74,7 @@ export class ContentApi {
         return this.contentApi.getRawContent(contentId);
     }
 
-    getContentPreview(contentId) {
+    getContentPreview(contentId: number) {
         return this.contentApi.getRawContent(contentId, 'preview');
     }
 
@@ -90,11 +90,11 @@ export class ContentApi {
         return this.contentApi.getRawContent(contentId, 'thumbnail');
     }
 
-    getRelatedContentForProcessInstance(processInstanceId: string, isRelated) {
-        return this.contentApi.getRelatedContentForProcessInstance(processInstanceId, { isRelatedContent: isRelated });
+    getRelatedContentForProcessInstance(processInstanceId: string, isRelatedContent: boolean) {
+        return this.contentApi.getRelatedContentForProcessInstance(processInstanceId, { isRelatedContent });
     }
 
-    getRelatedContentForTask(taskId: string, isRelated) {
-        return this.contentApi.getRelatedContentForTask(taskId, { isRelatedContent: isRelated });
+    getRelatedContentForTask(taskId: string, isRelatedContent: boolean) {
+        return this.contentApi.getRelatedContentForTask(taskId, { isRelatedContent });
     }
 }

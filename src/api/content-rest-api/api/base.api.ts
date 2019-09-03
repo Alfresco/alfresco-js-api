@@ -28,7 +28,7 @@ export class BaseApi {
         }
     }
 
-    errorMessage(param, methodName) {
+    errorMessage(param: string, methodName: string) {
         return `Missing param ${param} in ${methodName}`;
     }
 }

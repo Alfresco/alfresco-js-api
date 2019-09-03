@@ -24,7 +24,7 @@ import * as _minimatch from 'minimatch';
 const minimatch = _minimatch;
 
 const Emitter = _Emitter;
-declare let window;
+declare let window: Window;
 
 export class Oauth2Auth extends AlfrescoApiClient {
 
@@ -498,7 +498,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     parseQueryString(queryString: string): any {
-        const data = {};
+        const data: { [key: string]: Object } = {};
         let pairs, pair, separatorIndex, escapedKey, escapedValue, key, value;
 
         if (queryString !== null) {

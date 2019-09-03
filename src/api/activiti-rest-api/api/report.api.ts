@@ -60,7 +60,7 @@ export class ReportApi extends BaseApi {
         );
     }
 
-    getTasksByProcessDefinitionId(reportId, processDefinitionId) {
+    getTasksByProcessDefinitionId(reportId: string, processDefinitionId: string) {
         let postBody = null;
 
         if (reportId === undefined || reportId === null) {
@@ -91,7 +91,7 @@ export class ReportApi extends BaseApi {
         );
     }
 
-    getReportsByParams(reportId, paramsQuery) {
+    getReportsByParams(reportId: number, paramsQuery) {
         let postBody = paramsQuery;
 
         if (reportId === undefined || reportId === null) {
@@ -137,7 +137,7 @@ export class ReportApi extends BaseApi {
         );
     }
 
-    getReportParams(reportId) {
+    getReportParams(reportId: number) {
         let postBody = null;
 
         if (reportId === undefined || reportId === null) {
@@ -183,7 +183,7 @@ export class ReportApi extends BaseApi {
         );
     }
 
-    updateReport(reportId, name) {
+    updateReport(reportId: number, name: string) {
         let postBody = {
             'name': name
         };
@@ -220,7 +220,7 @@ export class ReportApi extends BaseApi {
      * @param {string} reportId
      * @param {module:model/ReportExportQueryRepresentation} queryParams
      */
-    exportToCsv(reportId, queryParams) {
+    exportToCsv(reportId: string, queryParams) {
         let postBody = queryParams;
 
         if (reportId === undefined || reportId === null) {
@@ -261,7 +261,7 @@ export class ReportApi extends BaseApi {
      * @param {string} reportId
      * @param {module:model/ReportSaveQueryRepresentation} queryParams
      */
-    saveReport(reportId, queryParams) {
+    saveReport(reportId: string, queryParams) {
         let postBody = queryParams;
 
         if (reportId === undefined || reportId === null) {
@@ -305,7 +305,7 @@ export class ReportApi extends BaseApi {
      * Save a report
      * @param {string} reportId
      */
-    deleteReport(reportId) {
+    deleteReport(reportId: string) {
         let postBody = null;
 
         if (reportId === undefined || reportId === null) {

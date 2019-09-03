@@ -57,7 +57,7 @@ export class AlfrescoApiClient {
     /**
      * The default HTTP timeout for all API calls.
      */
-    timeout = undefined;
+    timeout: number | { deadline?: number, response?: number } = undefined;
 
     constructor(host?: string) {
         this.storage = new Storage();
@@ -176,8 +176,9 @@ export class AlfrescoApiClient {
      * @param {Object.<String, Object>} params The parameters as object properties.
      * @returns {Object.<String, Object>} normalized parameters.
      */
-    normalizeParams(params: any) {
-        const newParams = {};
+    normalizeParams(params: { [key: string]: any; }): { [key: string]: any; } {
+        const newParams: { [key: string]: any; } = {};
+
         for (const key in params) {
             if (params.hasOwnProperty(key) && params[key] !== undefined && params[key] !== null) {
                 const value = params[key];
@@ -199,7 +200,7 @@ export class AlfrescoApiClient {
      * @returns {String|Array} A string representation of the supplied collection, using the specified delimiter. Returns
      * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
      */
-    buildCollectionParam(param, collectionFormat) {
+    buildCollectionParam(param: string, collectionFormat: string): string | any[] {
         if (!param) {
             return null;
         }
@@ -221,7 +222,7 @@ export class AlfrescoApiClient {
         }
     }
 
-    isWithCredentials() {
+    isWithCredentials(): boolean {
         if (this.config) {
             return this.config.withCredentials;
         } else {
@@ -550,7 +551,7 @@ export class AlfrescoApiClient {
 
     buildRequest(httpMethod: string, url: string, queryParams, headerParams, formParams, bodyParam,
                  contentTypes, accepts, responseType, eventEmitter: _Emitter, returnType) {
-        const request: any = superagent(httpMethod, url);
+        const request = superagent(httpMethod, url);
 
         // apply authentications
         this.applyAuthToRequest(request);
@@ -571,7 +572,7 @@ export class AlfrescoApiClient {
 
         // add cookie for activiti
         if (this.isBpmRequest()) {
-            request._withCredentials = true;
+            request.withCredentials();
             if (this.authentications.cookie) {
                 if (this.isNodeEnv()) {
                     request.set('Cookie', this.authentications.cookie);
@@ -600,11 +601,11 @@ export class AlfrescoApiClient {
                 if (_formParams.hasOwnProperty(key)) {
                     if (this.isFileParam(_formParams[key])) {
                         // file field
-                        request.attach(key, _formParams[key]).on('progress', (event) => {// jshint ignore:line
+                        request.attach(key, _formParams[key]).on('progress', (event: superagent_.ProgressEvent) => {// jshint ignore:line
                             this.progress(event, eventEmitter);
                         });
                     } else {
-                        request.field(key, _formParams[key]).on('progress', (event) => {// jshint ignore:line
+                        request.field(key, _formParams[key]).on('progress', (event: superagent_.ProgressEvent) => {// jshint ignore:line
                             this.progress(event, eventEmitter);
                         });
                     }

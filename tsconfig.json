@@ -5,6 +5,8 @@
         "target": "es2015",
         "isolatedModules": true,
         "noUnusedLocals": true,
-        "noUnusedParameters": true
+        "noUnusedParameters": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true
     }
 }

@@ -376,15 +376,15 @@ export class AlfrescoApi {
                 return this.processAuth.logout();
             } else if (this.isEcmConfiguration()) {
                 const contentPromise = this.contentAuth.logout();
-                contentPromise.then(() => {
-                    this.config.ticket = undefined;
-                },                  () => {
-                });
-
+                contentPromise.then(
+                    () => this.config.ticket = undefined,
+                    () => {}
+                );
                 return contentPromise;
             } else if (this.isEcmBpmConfiguration()) {
                 return this._logoutBPMECM();
             }
+            return Promise.resolve();
         }
     }
 
@@ -426,6 +426,8 @@ export class AlfrescoApi {
                 return this.contentAuth.isLoggedIn();
             } else if (this.isEcmBpmConfiguration()) {
                 return this.contentAuth.isLoggedIn() && this.processAuth.isLoggedIn();
+            } else {
+                return false;
             }
         }
     }

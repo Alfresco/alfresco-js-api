@@ -55,7 +55,7 @@ export class TemporaryApi extends BaseApi {
      * @param {Integer} userId userId
      * @param {String} processDefinitionKey processDefinitionKey
      */
-    completeTasks(userId, processDefinitionKey) {
+    completeTasks(userId: number, processDefinitionKey: string) {
         let postBody = null;
 
         // verify the required parameter 'userId' is set
@@ -101,7 +101,7 @@ export class TemporaryApi extends BaseApi {
      * @param {Integer} userId userId
      * @param {String} processDefinitionKey processDefinitionKey
      */
-    generateData(userId, processDefinitionKey) {
+    generateData(userId: number, processDefinitionKey: string) {
         let postBody = null;
 
         // verify the required parameter 'userId' is set

@@ -61,11 +61,11 @@ export class ProcessAuth extends AlfrescoApiClient {
         this.ticket = undefined;
     }
 
-    changeCsrfConfig(disableCsrf) {
+    changeCsrfConfig(disableCsrf: boolean) {
         this.config.disableCsrf = disableCsrf;
     }
 
-    saveUsername(username) {
+    saveUsername(username: string) {
         if (this.storage.supportsStorage()) {
             this.storage.setItem('APS_USERNAME', username);
         }

@@ -113,7 +113,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
         this.initObjects();
     }
 
-    configureJsApi(config) {
+    configureJsApi(config: AlfrescoApiConfig) {
         this.setConfig(config);
     }
 

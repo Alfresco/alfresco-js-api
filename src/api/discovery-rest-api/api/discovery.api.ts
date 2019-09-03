@@ -50,7 +50,7 @@ Retrieves the capabilities and detailed version information from the repository.
         let formParams = {
         };
 
-        let contentTypes = [];
+        let contentTypes: string[] = [];
         let accepts = ['application/json'];
 
         return this.apiClient.callApi(
