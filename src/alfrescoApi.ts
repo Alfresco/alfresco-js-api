@@ -204,12 +204,12 @@ export class AlfrescoApi {
             this.errorHandler(error);
         });
 
-        this.gsClient.on('error', (error) => {
+        this.gsClient.on('error', (error: any) => {
             this.errorHandler(error);
         });
     }
 
-    errorHandler(error) {
+    errorHandler(error: { status?: number }) {
         if (error.status === 401) {
             this.invalidateSession();
         }

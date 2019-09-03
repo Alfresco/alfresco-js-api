@@ -91,7 +91,7 @@ export class ReportApi extends BaseApi {
         );
     }
 
-    getReportsByParams(reportId: number, paramsQuery) {
+    getReportsByParams(reportId: number, paramsQuery: Object) {
         let postBody = paramsQuery;
 
         if (reportId === undefined || reportId === null) {
@@ -220,7 +220,7 @@ export class ReportApi extends BaseApi {
      * @param {string} reportId
      * @param {module:model/ReportExportQueryRepresentation} queryParams
      */
-    exportToCsv(reportId: string, queryParams) {
+    exportToCsv(reportId: string, queryParams: { reportName?: string }) {
         let postBody = queryParams;
 
         if (reportId === undefined || reportId === null) {
@@ -261,7 +261,7 @@ export class ReportApi extends BaseApi {
      * @param {string} reportId
      * @param {module:model/ReportSaveQueryRepresentation} queryParams
      */
-    saveReport(reportId: string, queryParams) {
+    saveReport(reportId: string, queryParams: { reportName?: string, __reportName?: string }) {
         let postBody = queryParams;
 
         if (reportId === undefined || reportId === null) {

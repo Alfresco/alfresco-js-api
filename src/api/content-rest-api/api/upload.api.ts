@@ -16,11 +16,11 @@
 */
 
 import { NodesApi } from './nodes.api';
-import * as _Emitter from 'event-emitter';
+import { Emitter } from 'event-emitter';
 
 export class UploadApi extends NodesApi {
 
-    uploadFile(fileDefinition, relativePath: string, rootFolderId: string, nodeBody: any, opts?: any): Promise<any | _Emitter> {
+    uploadFile(fileDefinition, relativePath: string, rootFolderId: string, nodeBody: any, opts?: any): Promise<any | Emitter> {
         rootFolderId = rootFolderId || '-root-';
         opts = opts || {};
 
