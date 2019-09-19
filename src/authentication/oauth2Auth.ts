@@ -544,12 +544,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.iFameHashListner = () => {
             let silentRefreshTokenIframe: any = document.getElementById('silent_refresh_token_iframe');
             let hash = silentRefreshTokenIframe.contentWindow.location.hash;
-            this.checkFragment(hash).catch(() => {
-                let sessionState = this.hashFragmentParams.session_state;
-                if (sessionState) {
-                    this.logOut();
-                }
-            });
+            this.checkFragment(hash).catch(() => this.logOut());
         };
 
         iframe.addEventListener('load', this.iFameHashListner);
@@ -734,7 +729,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             encodeURIComponent(id_token);
 
         let returnPromise = Promise.resolve().then(() => {
-            if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
+            if (id_token != null && this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
                 window.location.href = logoutUrl;
             }
         });
