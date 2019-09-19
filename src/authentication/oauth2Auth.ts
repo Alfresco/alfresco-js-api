@@ -545,9 +545,10 @@ export class Oauth2Auth extends AlfrescoApiClient {
             let silentRefreshTokenIframe: any = document.getElementById('silent_refresh_token_iframe');
             let hash = silentRefreshTokenIframe.contentWindow.location.hash;
             this.checkFragment(hash).catch(() => {
-                this.logOut().catch(() => {
-                    this.destroyIframe();
-                });
+                let sessionState = this.hashFragmentParams.session_state;
+                if (sessionState) {
+                    this.logOut();
+                }
             });
         };
 
