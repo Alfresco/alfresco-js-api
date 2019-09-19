@@ -28,6 +28,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     static instance: Oauth2Auth = null;
 
+    private iFrameTimeOut;
+
     storage: Storage;
     config: AlfrescoApiConfig;
     hashFragmentParams: any;
@@ -520,7 +522,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             return;
         }
 
-        setTimeout(() => {
+        this.iFrameTimeOut = setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
         },         this.config.oauth2.refreshTokenTimeout);
@@ -711,6 +713,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * Logout
      **/
     logOut() {
+        clearTimeout(this.iFrameTimeOut);
         const id_token = this.getIdToken();
 
         this.invalidateSession();
@@ -750,6 +753,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
         this.storage.removeItem('nonce');
         this.storage.removeItem('jwks');
-        this.storage.removeItem('discovery');
+        // this.storage.removeItem('discovery');
     }
 }

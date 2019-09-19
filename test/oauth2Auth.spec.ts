@@ -2,13 +2,19 @@
 
 import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 
-let expect = require('chai').expect;
+let chai = require('chai');
+let expect = chai.expect;
+let spies = require('chai-spies');
+chai.use(spies);
 let Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
 let AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 import { Oauth2Auth } from '../src/authentication/oauth2Auth';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { ContentApi } from  '../src/api/content-rest-api/api/content.api';
 import { AlfrescoApiCompatibility } from '../src/alfrescoApiCompatibility';
+let jsdom = require('mocha-jsdom');
+
+import { Storage } from '../src/storage';
 
 describe('Oauth2  test', function () {
 
@@ -181,6 +187,26 @@ describe('Oauth2  test', function () {
             },                                           () => {
             });
 
+        });
+
+        describe('With mocked DOM', function () {
+            jsdom({url: 'http://localhost'});
+            it('a failed hash check calls the logout', function () {
+
+                this.oauth2Auth.storage = new Storage();
+
+                this.oauth2Auth.createIframe();
+
+                const iframe = <HTMLIFrameElement> document.getElementById('silent_refresh_token_iframe');
+                iframe.contentWindow.location.hash = 'invalid';
+
+                // define spy on logOut
+                const logoutSpy = chai.spy.on(this.oauth2Auth, 'logOut');
+
+                // invalidate Session was called and removed nonce
+                this.oauth2Auth.iFameHashListner();
+                setTimeout(() => expect(logoutSpy).to.have.been.called(), 500);
+            });
         });
     });
 });
