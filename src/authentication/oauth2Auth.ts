@@ -28,6 +28,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     static instance: Oauth2Auth = null;
 
+    private iFrameTimeOut;
+
     storage: Storage;
     config: AlfrescoApiConfig;
     hashFragmentParams: any;
@@ -520,7 +522,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             return;
         }
 
-        setTimeout(() => {
+        this.iFrameTimeOut = setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
         },         this.config.oauth2.refreshTokenTimeout);
@@ -544,7 +546,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.iFameHashListner = () => {
             let silentRefreshTokenIframe: any = document.getElementById('silent_refresh_token_iframe');
             let hash = silentRefreshTokenIframe.contentWindow.location.hash;
-            this.checkFragment(hash);
+            this.checkFragment(hash).catch(() => this.logOut());
         };
 
         iframe.addEventListener('load', this.iFameHashListner);
@@ -711,6 +713,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * Logout
      **/
     logOut() {
+        clearTimeout(this.iFrameTimeOut);
         const id_token = this.getIdToken();
 
         this.invalidateSession();
@@ -729,7 +732,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             encodeURIComponent(id_token);
 
         let returnPromise = Promise.resolve().then(() => {
-            if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
+            if (id_token != null && this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
                 window.location.href = logoutUrl;
             }
         });
@@ -750,6 +753,5 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
         this.storage.removeItem('nonce');
         this.storage.removeItem('jwks');
-        this.storage.removeItem('discovery');
     }
 }
