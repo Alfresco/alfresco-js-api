@@ -753,6 +753,5 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
         this.storage.removeItem('nonce');
         this.storage.removeItem('jwks');
-        // this.storage.removeItem('discovery');
     }
 }
