@@ -244,10 +244,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 },                                 (error) => {
                     reject('Validation JWT error' + error);
                 });
-            } else {
-                if (this.config.oauth2.silentLogin) {
-                    this.implicitLogin();
-                }
             }
         });
 
