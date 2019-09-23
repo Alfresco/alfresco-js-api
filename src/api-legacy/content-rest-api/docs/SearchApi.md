@@ -257,7 +257,7 @@ and produces the same result :</p>
 </code></pre>
 <p>The example above changes the highlighting prefix and postfix from the
  default <em> for all fields to ¿? and just for the "description" field to ().
- The hightlight information is added in each node entry response; here is
+ The highlight information is added in each node entry response; here is
  an example partial response:</em></p><em>
 <pre><code class="undefined">"entry": {
         "createdAt": "2016-10-12T15:24:31.202+0000",

@@ -113,7 +113,7 @@ class ReportsMock extends BaseMock {
         super(host);
     }
 
-    get200ResponseCreateDefaulReport() {
+    get200ResponseCreateDefaultReport() {
         nock(this.host, {'encodedQueryParams': true})
             .post('/activiti-app/app/rest/reporting/default-reports')
             .reply(200);

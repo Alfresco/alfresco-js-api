@@ -101,7 +101,7 @@ export class ChangesApi {
 
     /**
      * Create a shared link to a file
-     * Create shared link to specfied file identified by **nodeId** in request body.
+     * Create shared link to specified file identified by **nodeId** in request body.
      * @param {module:model/SharedLinkBody} sharedLinkBody The nodeId to create a shared link for.
      * @param {Object} opts Optional parameters
      * @param {string[]} opts.include Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
@@ -370,7 +370,7 @@ export class ChangesApi {
 
     /**
      * List parents
-     * Returns a list of parent nodes that point to (ie. are associated with) the current child node. \n\nThis inclues both the primary parent and also secondary parents, if any.\n
+     * Returns a list of parent nodes that point to (ie. are associated with) the current child node. \n\nThis includes both the primary parent and also secondary parents, if any.\n
      * @param {String} childId The identifier of a node.
      * @param {Object} opts Optional parameters
      * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n

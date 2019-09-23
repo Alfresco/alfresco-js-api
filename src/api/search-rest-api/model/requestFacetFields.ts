@@ -20,7 +20,7 @@ import { RequestFacetField } from './requestFacetField';
 /**
  * Simple facet fields to include
 The Properties reflect the global properties related to field facts in SOLR.
-They are descripbed in detail by the SOLR documentation
+They are described in detail by the SOLR documentation
 
  */
 export class RequestFacetFields {

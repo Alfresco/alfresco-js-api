@@ -454,7 +454,7 @@ reportApi.updateReport(reportId, name);
 ```
 
 ## Export to csv
-exportToCsv(reportId, queryParms)
+exportToCsv(reportId, queryParams)
 
 > Export a report as csv
 
@@ -462,13 +462,13 @@ exportToCsv(reportId, queryParms)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------|
  **reportId** | **String**| reportId ||
- **queryParms** | **Object**| Query parameters ||
+ **queryParams** | **Object**| Query parameters ||
 
 #### Example
 ```javascript
 
 let reportId = "1"; // String | reportId
-let queryParms = {
+let queryParams = {
             'processDefinitionId': 'TEST:99:999',
             'dateRange': {
                 'startDate': '2017-01-01T00:00:00.000Z',
@@ -481,7 +481,7 @@ let queryParms = {
         };
 
 let reportApi = ReportApi(this.alfrescoApi);
-reportApi.exportToCsv(reportId, queryParms);
+reportApi.exportToCsv(reportId, queryParams);
 ```
 
 ## Save Report
@@ -494,13 +494,13 @@ saveReport(reportId, queryParams)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------|
  **reportId** | **String**| reportId ||
- **queryParms** | **Object**| Query parameters ||
+ **queryParams** | **Object**| Query parameters ||
 
 #### Example
 ```javascript
 
 let reportId = "1"; // String | reportId
-let queryParms = {
+let queryParams = {
             'processDefinitionId': 'TEST:99:999',
             'dateRange': {
                 'startDate': '2017-01-01T00:00:00.000Z',
@@ -513,7 +513,7 @@ let queryParms = {
         };
 
 let reportApi = ReportApi(this.alfrescoApi);
-reportApi.saveReport(reportId, queryParms);
+reportApi.saveReport(reportId, queryParams);
 ```
 
 ## Delete report

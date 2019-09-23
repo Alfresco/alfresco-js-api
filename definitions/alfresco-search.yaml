@@ -311,7 +311,7 @@ paths:
         ```
         The example above changes the highlighting prefix and postfix from the
          default <em> for all fields to ¿? and just for the "description" field to ().
-         The hightlight information is added in each node entry response; here is
+         The highlight information is added in each node entry response; here is
          an example partial response:
         ```
         "entry": {
@@ -494,7 +494,7 @@ definitions:
         description: A valid timezone id supported by @see java.time.ZoneId
         type: string
       locales:
-        description: A list of Locales definied by IETF BCP 47.  The ordering is
+        description: A list of Locales defined by IETF BCP 47.  The ordering is
           significant.  The first locale (leftmost) is used for sort and query
           localization, whereas the remaining locales are used for query only.
         type: array
@@ -793,7 +793,7 @@ definitions:
           type: object
           properties:
             field:
-              description: The field where a match occured (one of the fields defined on the request)
+              description: The field where a match occurred (one of the fields defined on the request)
               type: string
             snippets:
               description: Any number of snippets for the specified field highlighting the matching text
@@ -1058,7 +1058,7 @@ definitions:
     description: |
       Simple facet fields to include
       The Properties reflect the global properties related to field facts in SOLR.
-      They are descripbed in detail by the SOLR documentation
+      They are described in detail by the SOLR documentation
     type: object
     properties:
       facets:
@@ -1193,7 +1193,7 @@ definitions:
       type: object
       properties:
         type:
-          description: How to order - using a field, when position of the document in the index, score/relevence.
+          description: How to order - using a field, when position of the document in the index, score/relevance.
           type: string
           default: FIELD
           enum:

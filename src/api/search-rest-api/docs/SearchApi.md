@@ -299,7 +299,7 @@ JSON
 
 The example above changes the highlighting prefix and postfix from the
  default <em> for all fields to ¿? and just for the \"description\" field to ().
- The hightlight information is added in each node entry response; here is
+ The highlight information is added in each node entry response; here is
  an example partial response:
 
 \"entry\": {

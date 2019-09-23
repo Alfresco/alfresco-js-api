@@ -16,12 +16,12 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { ModelsBpmnApi as NewModeslBpmnApi } from '../../../../api/activiti-rest-api/api/modelsBpmn.api';
+import { ModelsBpmnApi as NewModelsBpmnApi } from '../../../../api/activiti-rest-api/api/modelsBpmn.api';
 
 /**
  * @deprecated 3.0.0
  */
-export class ModelBpmnApi extends NewModeslBpmnApi {
+export class ModelBpmnApi extends NewModelsBpmnApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
         this.apiClient = alfrescoApi.processClient;

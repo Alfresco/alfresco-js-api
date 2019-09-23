@@ -292,7 +292,7 @@ null (empty response body)
 
 Create a shared link to a file
 
-Create shared link to specfied file identified by **nodeId** in request body.
+Create shared link to specified file identified by **nodeId** in request body.
 
 ### Example
 ```javascript
@@ -1693,7 +1693,7 @@ List parents
 
 Returns a list of parent nodes that point to (ie. are associated with) the current child node.
 
-This inclues both the primary parent and also secondary parents, if any.
+This includes both the primary parent and also secondary parents, if any.
 
 
 ### Example

@@ -1,6 +1,6 @@
 # ContentApi
 
-All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
+All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

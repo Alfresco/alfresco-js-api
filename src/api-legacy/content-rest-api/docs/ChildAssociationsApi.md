@@ -361,7 +361,7 @@ List parents
 
 Returns a list of parent nodes that point to (ie. are associated with) the current child node.
 
-This inclues both the primary parent and also secondary parents, if any.
+This includes both the primary parent and also secondary parents, if any.
 
 
 ### Example

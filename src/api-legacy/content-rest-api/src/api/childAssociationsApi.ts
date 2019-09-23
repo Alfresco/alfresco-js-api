@@ -93,7 +93,7 @@ export class ChildAssociationsApi {
 
     /**
      * List parents
-     * Returns a list of parent nodes that point to (ie. are associated with) the current child node. \n\nThis inclues both the primary parent and also secondary parents, if any.\n
+     * Returns a list of parent nodes that point to (ie. are associated with) the current child node. \n\nThis includes both the primary parent and also secondary parents, if any.\n
      * @param {String} childId The identifier of a node.
      * @param {Object} opts Optional parameters
      * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n

@@ -7,7 +7,7 @@ You can use this API to integrate Alfresco Process Services with external applic
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://adfdev.envalfresco.com/activiti-app/api*
+All URIs are relative to */activiti-app/api*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

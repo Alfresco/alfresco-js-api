@@ -47,8 +47,6 @@ class TagMock extends BaseMock {
             .delete('/alfresco/api/-default-/public/alfresco/versions/1/groups/'+groupName)
             .query({"cascade":"false"})
             .reply(200);
-
-        "http://adfdev.envalfresco.com/alfresco/api/-default-/public/alfresco/versions/1/groups/group_test"
     }
 
     getDeleteMemberForGroupSuccessfulResponse(groupName, memberName){

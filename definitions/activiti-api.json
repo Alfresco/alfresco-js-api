@@ -9,7 +9,7 @@
             "url": "http://www.alfresco.com/"
         }
     },
-    "host": "adfdev.envalfresco.com",
+    "host": "",
     "basePath": "/activiti-app/api",
     "tags": [
         {
