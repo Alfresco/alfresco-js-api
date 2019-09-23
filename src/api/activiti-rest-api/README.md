@@ -185,10 +185,10 @@ Class | Method | HTTP request | Description
 *.RuntimeappdeploymentsApi* | [**getRuntimeAppDeploymentByDeployment**](docs/RuntimeappdeploymentsApi.md#getRuntimeAppDeploymentByDeployment) | **GET** /enterprise/runtime-app-deployment | Get an app by deployment ID or DMN deployment ID
 *.ScriptfilesApi* | [**getControllers**](docs/ScriptfilesApi.md#getControllers) | **GET** /enterprise/script-files/controllers | getControllers
 *.ScriptfilesApi* | [**getLibraries**](docs/ScriptfilesApi.md#getLibraries) | **GET** /enterprise/script-files/libraries | getLibraries
-*.SubmittedformsApi* | [**getFormSubmittedFroms**](docs/SubmittedformsApi.md#getFormSubmittedFroms) | **GET** /enterprise/form-submitted-forms/{formId} | List submissions for a form
-*.SubmittedformsApi* | [**getProcessSubmittedFroms**](docs/SubmittedformsApi.md#getProcessSubmittedFroms) | **GET** /enterprise/process-submitted-forms/{processId} | List submissions for a process instance
+*.SubmittedformsApi* | [**getFormSubmittedForms**](docs/SubmittedformsApi.md#getFormSubmittedForms) | **GET** /enterprise/form-submitted-forms/{formId} | List submissions for a form
+*.SubmittedformsApi* | [**getProcessSubmittedForms**](docs/SubmittedformsApi.md#getProcessSubmittedForms) | **GET** /enterprise/process-submitted-forms/{processId} | List submissions for a process instance
 *.SubmittedformsApi* | [**getSubmittedFrom**](docs/SubmittedformsApi.md#getSubmittedFrom) | **GET** /enterprise/submitted-forms/{submittedFormId} | Get a form submission
-*.SubmittedformsApi* | [**getTaskSubmittedFroms**](docs/SubmittedformsApi.md#getTaskSubmittedFroms) | **GET** /enterprise/task-submitted-form/{taskId} | Get the submitted form for a task
+*.SubmittedformsApi* | [**getTaskSubmittedForms**](docs/SubmittedformsApi.md#getTaskSubmittedForms) | **GET** /enterprise/task-submitted-form/{taskId} | Get the submitted form for a task
 *.SystempropertiesApi* | [**getGlobalDateFormat**](docs/SystempropertiesApi.md#getGlobalDateFormat) | **GET** /enterprise/system/properties/global-date-format/{tenantId} | Get global date format
 *.SystempropertiesApi* | [**getPasswordValidationConstraints**](docs/SystempropertiesApi.md#getPasswordValidationConstraints) | **GET** /enterprise/system/properties/password-validation-constraints/{tenantId} | Get password validation constraints
 *.SystempropertiesApi* | [**getProperties**](docs/SystempropertiesApi.md#getProperties) | **GET** /enterprise/system/properties | Retrieve system properties
