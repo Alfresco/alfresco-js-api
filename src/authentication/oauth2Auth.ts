@@ -42,7 +42,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         'oauth2': { accessToken: '' }, type: 'oauth2', 'basicAuth': {}
     });
 
-    iFameHashListner: any;
+    iFameHashListener: any;
 
     constructor(config: AlfrescoApiConfig) {
         super();
@@ -543,20 +543,20 @@ export class Oauth2Auth extends AlfrescoApiClient {
         iframe.style.display = 'none';
         document.body.appendChild(iframe);
 
-        this.iFameHashListner = () => {
+        this.iFameHashListener = () => {
             let silentRefreshTokenIframe: any = document.getElementById('silent_refresh_token_iframe');
             let hash = silentRefreshTokenIframe.contentWindow.location.hash;
             this.checkFragment(hash).catch(() => this.logOut());
         };
 
-        iframe.addEventListener('load', this.iFameHashListner);
+        iframe.addEventListener('load', this.iFameHashListener);
     }
 
     destroyIframe() {
         const iframe = document.getElementById('silent_refresh_token_iframe');
 
         if (iframe) {
-            iframe.removeEventListener('load', this.iFameHashListner);
+            iframe.removeEventListener('load', this.iFameHashListener);
             document.body.removeChild(iframe);
         }
     }
