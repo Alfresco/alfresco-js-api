@@ -36,12 +36,12 @@ export class SubmittedFormsApi extends BaseApi {
     * @param opts.size size
     * @return Promise<ResultListDataRepresentationSubmittedFormRepresentation>
     */
-    getFormSubmittedFroms(formId: number, opts?: any): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
+    getFormSubmittedForms(formId: number, opts?: any): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
         opts = opts || {};
         let postBody = null;
 
         if (formId === undefined || formId === null) {
-            throw new Error("Required param 'formId' in getFormSubmittedFroms");
+            throw new Error("Required param 'formId' in getFormSubmittedForms");
         }
 
         let pathParams = {
@@ -76,12 +76,12 @@ export class SubmittedFormsApi extends BaseApi {
         * @param processId processId
         * @return Promise<ResultListDataRepresentationSubmittedFormRepresentation>
         */
-    getProcessSubmittedFroms(processId: string): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
+    getProcessSubmittedForms(processId: string): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
 
         let postBody = null;
 
         if (processId === undefined || processId === null) {
-            throw new Error("Required param 'processId' in getProcessSubmittedFroms");
+            throw new Error("Required param 'processId' in getProcessSubmittedForms");
         }
 
         let pathParams = {
@@ -150,12 +150,12 @@ export class SubmittedFormsApi extends BaseApi {
         * @param taskId taskId
         * @return Promise<SubmittedFormRepresentation>
         */
-    getTaskSubmittedFroms(taskId: string): Promise<SubmittedFormRepresentation> {
+    getTaskSubmittedForms(taskId: string): Promise<SubmittedFormRepresentation> {
 
         let postBody = null;
 
         if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getTaskSubmittedFroms");
+            throw new Error("Required param 'taskId' in getTaskSubmittedForms");
         }
 
         let pathParams = {

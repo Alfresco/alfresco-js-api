@@ -200,7 +200,7 @@ export class ContentAuth extends AlfrescoApiClient {
     }
 
     /**
-     * If the client is logged in retun true
+     * If the client is logged in return true
      */
     isLoggedIn(): boolean {
         return !!this.ticket;

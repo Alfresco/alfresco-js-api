@@ -9,7 +9,7 @@
             "url": "http://www.alfresco.com/"
         }
     },
-    "host": "adfdev.envalfresco.com",
+    "host": "",
     "basePath": "/activiti-app/api",
     "tags": [
         {
@@ -3803,7 +3803,7 @@
                     "submitted-forms"
                 ],
                 "summary": "List submissions for a form",
-                "operationId": "getFormSubmittedFroms",
+                "operationId": "getFormSubmittedForms",
                 "consumes": [
                     "application/json"
                 ],
@@ -7745,7 +7745,7 @@
                     "submitted-forms"
                 ],
                 "summary": "List submissions for a process instance",
-                "operationId": "getProcessSubmittedFroms",
+                "operationId": "getProcessSubmittedForms",
                 "consumes": [
                     "application/json"
                 ],
@@ -8906,7 +8906,7 @@
                     "submitted-forms"
                 ],
                 "summary": "Get the submitted form for a task",
-                "operationId": "getTaskSubmittedFroms",
+                "operationId": "getTaskSubmittedForms",
                 "consumes": [
                     "application/json"
                 ],

@@ -18,7 +18,7 @@
 import { RequestTemplatesInner } from './requestTemplatesInner';
 
 /**
- * Templates usewd for query expansion.
+ * Templates used for query expansion.
 A template called \"WOOF\" defined as \"%(cm:name cm:title)\" allows
 WOOF:example
 to generate

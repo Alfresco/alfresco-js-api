@@ -292,7 +292,7 @@ null (empty response body)
 
 Create a shared link to a file
 
-Create shared link to specfied file identified by **nodeId** in request body.
+Create shared link to specified file identified by **nodeId** in request body.
 
 ### Example
 ```javascript
@@ -1154,7 +1154,7 @@ Get node children
 
 Returns the children of the node with identifier **nodeId**.
 Minimal information for each child is returned by default.
-You can use the **include** parameter to return addtional information.
+You can use the **include** parameter to return additional information.
 
 The list of child nodes includes primary children and also secondary children, if any.
 
@@ -1693,7 +1693,7 @@ List parents
 
 Returns a list of parent nodes that point to (ie. are associated with) the current child node.
 
-This inclues both the primary parent and also secondary parents, if any.
+This includes both the primary parent and also secondary parents, if any.
 
 
 ### Example
@@ -2357,7 +2357,7 @@ a new minor version is created by default.
 
 **Note:** This API method accepts any content type, but for testing with this tool text based content can be provided.
 This is because the OpenAPI Specification does not allow a wildcard to be provided or the ability for
-tooling to accept an arbitary file.
+tooling to accept an arbitrary file.
 
 
 ### Example

@@ -73,12 +73,12 @@ describe('WebScript', function () {
         it('WebScript should fire success event at the end', function (done) {
             this.webScriptMock.get200Response();
 
-            let webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
+            let webscriptPromise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
 
-            webscriptPormise.catch(() => {
+            webscriptPromise.catch(() => {
             });
 
-            webscriptPormise.on('success', () => {
+            webscriptPromise.on('success', () => {
                 done();
             });
         });
@@ -86,12 +86,12 @@ describe('WebScript', function () {
         it('WebScript should fire error event if something go wrong', function (done) {
             this.webScriptMock.get404Response();
 
-            let webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
+            let webscriptPromise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
 
-            webscriptPormise.catch(() => {
+            webscriptPromise.catch(() => {
             });
 
-            webscriptPormise.on('error', () => {
+            webscriptPromise.on('error', () => {
                 done();
             });
         });
@@ -99,12 +99,12 @@ describe('WebScript', function () {
         it('WebScript should fire unauthorized event if get 401', function (done) {
             this.webScriptMock.get401Response();
 
-            let webscriptPormise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
+            let webscriptPromise = this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath);
 
-            webscriptPormise.catch(() => {
+            webscriptPromise.catch(() => {
             });
 
-            webscriptPormise.on('unauthorized', () => {
+            webscriptPromise.on('unauthorized', () => {
                 done();
             });
         });

@@ -11,6 +11,9 @@ import * as alfrescoApi from 'alfresco-js-api';
 })
 export class AppComponent implements OnInit {
 
+  USERNAME: string;
+  PASSWORD: string;
+
   alfrescoApi: AlfrescoApi;
   title = 'My test performance app';
   ecmVers: any = {};
@@ -20,13 +23,13 @@ export class AppComponent implements OnInit {
       provider: 'ECM',
       hostEcm: 'http://localhost:3000',
       authType: 'BASIC',
-      contextRoot:''
+      contextRoot: ''
     });
 
   }
 
   ngOnInit() {
-    this.alfrescoApi.login('admin.adf@alfresco.com', 'adf$2018IloveAngular');
+    this.alfrescoApi.login(this.USERNAME, this.PASSWORD);
     this.alfrescoApi.discovery.discoveryApi.getRepositoryInformation().then((ecmVers) => {
       console.log(`ecmVers ${ecmVers}`);
       this.ecmVers = ecmVers;

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 Create a shared link to a file
 
-Create shared link to specfied file identified by **nodeId** in request body.
+Create shared link to specified file identified by **nodeId** in request body.
 
 ### Example
 ```javascript

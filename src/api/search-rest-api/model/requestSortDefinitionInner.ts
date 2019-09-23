@@ -17,7 +17,7 @@
 
 export class RequestSortDefinitionInner {
     /**
-     * How to order - using a field, when position of the document in the index, score/relevence.
+     * How to order - using a field, when position of the document in the index, score/relevance.
      */
     type?: RequestSortDefinitionInner.TypeEnum | string;
     /**

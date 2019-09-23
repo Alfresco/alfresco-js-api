@@ -17,7 +17,7 @@
 
 export class SearchEntryHighlight {
     /**
-     * The field where a match occured (one of the fields defined on the request)
+     * The field where a match occurred (one of the fields defined on the request)
      */
     field?: string;
     /**

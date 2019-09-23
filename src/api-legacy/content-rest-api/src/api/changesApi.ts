@@ -101,7 +101,7 @@ export class ChangesApi {
 
     /**
      * Create a shared link to a file
-     * Create shared link to specfied file identified by **nodeId** in request body.
+     * Create shared link to specified file identified by **nodeId** in request body.
      * @param {module:model/SharedLinkBody} sharedLinkBody The nodeId to create a shared link for.
      * @param {Object} opts Optional parameters
      * @param {string[]} opts.include Returns additional information about the shared link, the following optional fields can be requested:\n* allowableOperations\n
@@ -269,7 +269,7 @@ export class ChangesApi {
 
     /**
      * Get node children
-     * Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return addtional information.\n\nThe list of child nodes includes primary children and also secondary children, if any.\n
+     * Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return additional information.\n\nThe list of child nodes includes primary children and also secondary children, if any.\n
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -370,7 +370,7 @@ export class ChangesApi {
 
     /**
      * List parents
-     * Returns a list of parent nodes that point to (ie. are associated with) the current child node. \n\nThis inclues both the primary parent and also secondary parents, if any.\n
+     * Returns a list of parent nodes that point to (ie. are associated with) the current child node. \n\nThis includes both the primary parent and also secondary parents, if any.\n
      * @param {String} childId The identifier of a node.
      * @param {Object} opts Optional parameters
      * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n
@@ -486,7 +486,7 @@ export class ChangesApi {
 
     /**
      * Update file content
-     * Updates the content of the node with identifier **nodeId**.\n\nThe request body for this endpoint can be any text or binary stream. The Content-Type header should be set\ncorrectly for the type of content being updated. The Content-Type header is used to set the mimetype in the repository.\n\nThe **majorVersion** and **comment** parameters can be used to control versioning behaviour. If the content is versionable,\na new minor version is created by default.\n\n**Note:** This API method accepts any content type, but for testing with this tool text based content can be provided.\nThis is because the OpenAPI Specification does not allow a wildcard to be provided or the ability for\ntooling to accept an arbitary file.\n
+     * Updates the content of the node with identifier **nodeId**.\n\nThe request body for this endpoint can be any text or binary stream. The Content-Type header should be set\ncorrectly for the type of content being updated. The Content-Type header is used to set the mimetype in the repository.\n\nThe **majorVersion** and **comment** parameters can be used to control versioning behaviour. If the content is versionable,\na new minor version is created by default.\n\n**Note:** This API method accepts any content type, but for testing with this tool text based content can be provided.\nThis is because the OpenAPI Specification does not allow a wildcard to be provided or the ability for\ntooling to accept an arbitrary file.\n
      * @param {String} nodeId The identifier of a node.
      * @param {String} contentBody The binary content
      * @param {Object} opts Optional parameters

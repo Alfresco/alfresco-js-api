@@ -25,7 +25,7 @@ describe('Activiti Report Api', function () {
     });
 
     it('should create the default reports', function (done) {
-        this.reportsMock.get200ResponseCreateDefaulReport();
+        this.reportsMock.get200ResponseCreateDefaultReport();
         this.alfrescoJsApi.activiti.reportApi.createDefaultReports().then(function () {
             done();
         });
@@ -175,9 +175,9 @@ describe('Activiti Report Api', function () {
         };
         this.reportsMock.get200ResponseExportReport(reportId);
 
-        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParams).then(function (respo) {
-            expect(respo).not.equal(null);
-            expect(respo).not.equal(undefined);
+        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParams).then(function (response) {
+            expect(response).not.equal(null);
+            expect(response).not.equal(undefined);
             done();
         });
     });
@@ -185,7 +185,7 @@ describe('Activiti Report Api', function () {
     it('should save the report', function (done) {
 
         let reportId = '11015'; // String | reportId
-        let queryParms = {
+        let queryParams = {
             'processDefinitionId': 'TEST:99:999',
             'dateRange': {
                 'startDate': '2017-01-01T00:00:00.000Z',
@@ -198,7 +198,7 @@ describe('Activiti Report Api', function () {
         };
         this.reportsMock.get200ResponseSaveReport(reportId);
 
-        this.alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParms).then(function () {
+        this.alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParams).then(function () {
             done();
         });
     });

@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **string** | How to order - using a field, when position of the document in the index, score/relevence. | [optional] [default to null]
+**type** | **string** | How to order - using a field, when position of the document in the index, score/relevance. | [optional] [default to null]
 **field** | **string** | The name of the field | [optional] [default to null]
 **ascending** | **boolean** | The sort order. (The ordering of nulls is determined by the SOLR configuration) | [optional] [default to null]
 

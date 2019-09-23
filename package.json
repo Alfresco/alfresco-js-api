@@ -38,7 +38,8 @@
     "tslint-test": "tslint --fix --type-check -c ./test/tslint.json --project test/tsconfig.json",
     "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md && markdown-toc -i bpm-example.md && markdown-toc -i ecm-example.md",
     "generate-ts": "jsdoc -c config.json .",
-    "generate-api": "mvn install"
+    "generate-api": "mvn install",
+    "spellcheck": "cspell '{src,test}/**/*.ts'"
   },
   "sideEffects": false,
   "repository": {
@@ -63,6 +64,7 @@
     "chai-datetime": "1.5.0",
     "chai-spies": "^1.0.0",
     "commander": "^2.15.1",
+    "cspell": "^4.0.30",
     "expect.js": "~0.3.1",
     "fs-extra": "5.0.0",
     "google-closure-compiler-js": "20170218.0.0",

@@ -238,7 +238,7 @@ No authorization required
 
 <a name="exportToCsv"></a>
 # **exportToCsv**
-> exportToCsv(reportId, queryParms)
+> exportToCsv(reportId, queryParams)
 
 Export a report as csv
 
@@ -246,7 +246,7 @@ Export a report as csv
 ```javascript
 
 var reportId = "1"; // String | reportId
-var queryParms = {
+var queryParams = {
             'processDefinitionId': 'TEST:99:999',
             'dateRange': {
                 'startDate': '2017-01-01T00:00:00.000Z',
@@ -258,7 +258,7 @@ var queryParms = {
             '__reportName': 'FAKE_REPORT_NAME'
         };
 
-this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms);
+this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParams);
 ```
 
 ### Parameters
@@ -266,7 +266,7 @@ this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParms);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **reportId** | **String**| reportId |
- **queryParms** | **Object**| Query parameters |
+ **queryParams** | **Object**| Query parameters |
 
 ### Return type
 
@@ -291,7 +291,7 @@ Save a report
 ```javascript
 
 var reportId = "1"; // String | reportId
-var queryParms = {
+var queryParams = {
             'processDefinitionId': 'TEST:99:999',
             'dateRange': {
                 'startDate': '2017-01-01T00:00:00.000Z',
@@ -303,7 +303,7 @@ var queryParms = {
             '__reportName': 'FAKE_REPORT_NAME'
         };
 
-this.alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParms);
+this.alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParams);
 ```
 
 ### Parameters
@@ -311,7 +311,7 @@ this.alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParms);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **reportId** | **String**| reportId |
- **queryParms** | **Object**| Query parameters |
+ **queryParams** | **Object**| Query parameters |
 
 ### Return type
 

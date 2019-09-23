@@ -414,7 +414,7 @@ export class AlfrescoApi {
     }
 
     /**
-     * If the client is logged in retun true
+     * If the client is logged in return true
      */
     isLoggedIn(): boolean {
         if (this.isOauthConfiguration()) {

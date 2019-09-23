@@ -42,7 +42,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         'oauth2': { accessToken: '' }, type: 'oauth2', 'basicAuth': {}
     });
 
-    iFameHashListner: any;
+    iFrameHashListener: any;
 
     constructor(config: AlfrescoApiConfig) {
         super();
@@ -525,7 +525,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.iFrameTimeOut = setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
-        },         this.config.oauth2.refreshTokenTimeout);
+        },                              this.config.oauth2.refreshTokenTimeout);
     }
 
     removeHashFromSilentIframe() {
@@ -543,20 +543,20 @@ export class Oauth2Auth extends AlfrescoApiClient {
         iframe.style.display = 'none';
         document.body.appendChild(iframe);
 
-        this.iFameHashListner = () => {
+        this.iFrameHashListener = () => {
             let silentRefreshTokenIframe: any = document.getElementById('silent_refresh_token_iframe');
             let hash = silentRefreshTokenIframe.contentWindow.location.hash;
             this.checkFragment(hash).catch(() => this.logOut());
         };
 
-        iframe.addEventListener('load', this.iFameHashListner);
+        iframe.addEventListener('load', this.iFrameHashListener);
     }
 
     destroyIframe() {
         const iframe = document.getElementById('silent_refresh_token_iframe');
 
         if (iframe) {
-            iframe.removeEventListener('load', this.iFameHashListner);
+            iframe.removeEventListener('load', this.iFrameHashListener);
             document.body.removeChild(iframe);
         }
     }
@@ -701,7 +701,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     /**
-     * If the client is logged in retun true
+     * If the client is logged in return true
      *
      * @returns {Boolean} is logged in
      */

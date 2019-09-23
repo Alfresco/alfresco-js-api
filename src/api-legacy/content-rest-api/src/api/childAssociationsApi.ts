@@ -74,7 +74,7 @@ export class ChildAssociationsApi {
 
     /**
      * Get node children
-     * Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return addtional information.\n\nThe list of child nodes includes primary children and also secondary children, if any.\n
+     * Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return additional information.\n\nThe list of child nodes includes primary children and also secondary children, if any.\n
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -93,7 +93,7 @@ export class ChildAssociationsApi {
 
     /**
      * List parents
-     * Returns a list of parent nodes that point to (ie. are associated with) the current child node. \n\nThis inclues both the primary parent and also secondary parents, if any.\n
+     * Returns a list of parent nodes that point to (ie. are associated with) the current child node. \n\nThis includes both the primary parent and also secondary parents, if any.\n
      * @param {String} childId The identifier of a node.
      * @param {Object} opts Optional parameters
      * @param {String} opts.where Optionally filter the list by assocType. Here&#39;s an example:\n\n*   where&#x3D;(assocType&#x3D;&#39;my:assoctype&#39;)\n
