@@ -248,8 +248,7 @@
     "softwareTerms"
   ],
   "ignorePaths": [
-    "lib/{src/test}/**/*.spec.ts",
-    "lib/{src/test}/**/*.mock.ts",
+    "{src/test}/**/*.mock.ts",
     "node_modules"
   ],
   "ignoreRegExpList": [
