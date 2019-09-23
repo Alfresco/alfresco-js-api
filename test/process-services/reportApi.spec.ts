@@ -175,9 +175,9 @@ describe('Activiti Report Api', function () {
         };
         this.reportsMock.get200ResponseExportReport(reportId);
 
-        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParams).then(function (respo) {
-            expect(respo).not.equal(null);
-            expect(respo).not.equal(undefined);
+        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParams).then(function (response) {
+            expect(response).not.equal(null);
+            expect(response).not.equal(undefined);
             done();
         });
     });

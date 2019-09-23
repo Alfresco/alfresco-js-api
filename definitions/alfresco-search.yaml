@@ -470,7 +470,7 @@ definitions:
       The list applies to a returned individual
       entity or entries within a collection.
 
-      If the **include** parameter is used aswell then the fields specified in the **include**
+      If the **include** parameter is used as well then the fields specified in the **include**
       parameter are returned in addition to those specified in the **fields** parameter.
     type: array
     items:
@@ -956,7 +956,7 @@ definitions:
          default: TEXT
   RequestTemplates:
     description: |
-      Templates usewd for query expansion.
+      Templates used for query expansion.
       A template called "WOOF" defined as "%(cm:name cm:title)" allows
       WOOF:example
       to generate

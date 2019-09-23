@@ -251,7 +251,7 @@ Get node children
 
 Returns the children of the node with identifier **nodeId**.
 Minimal information for each child is returned by default.
-You can use the **include** parameter to return addtional information.
+You can use the **include** parameter to return additional information.
 
 The list of child nodes includes primary children and also secondary children, if any.
 

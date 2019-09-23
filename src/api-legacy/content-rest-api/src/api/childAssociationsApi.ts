@@ -74,7 +74,7 @@ export class ChildAssociationsApi {
 
     /**
      * Get node children
-     * Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return addtional information.\n\nThe list of child nodes includes primary children and also secondary children, if any.\n
+     * Returns the children of the node with identifier **nodeId**.\nMinimal information for each child is returned by default.\nYou can use the **include** parameter to return additional information.\n\nThe list of child nodes includes primary children and also secondary children, if any.\n
      * @param {String} nodeId The identifier of a node. You can also use one of these well-known aliases:\n* -my-\n* -shared-\n* -root-\n
      * @param {Object} opts Optional parameters
      * @param {Integer} opts.skipCount The number of entities that exist in the collection before those included in this list.

@@ -1154,7 +1154,7 @@ Get node children
 
 Returns the children of the node with identifier **nodeId**.
 Minimal information for each child is returned by default.
-You can use the **include** parameter to return addtional information.
+You can use the **include** parameter to return additional information.
 
 The list of child nodes includes primary children and also secondary children, if any.
 
@@ -2357,7 +2357,7 @@ a new minor version is created by default.
 
 **Note:** This API method accepts any content type, but for testing with this tool text based content can be provided.
 This is because the OpenAPI Specification does not allow a wildcard to be provided or the ability for
-tooling to accept an arbitary file.
+tooling to accept an arbitrary file.
 
 
 ### Example
