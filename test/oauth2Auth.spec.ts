@@ -204,7 +204,7 @@ describe('Oauth2  test', function () {
                 const logoutSpy = chai.spy.on(this.oauth2Auth, 'logOut');
 
                 // invalid hash location leads to a reject which leads to a log out
-                this.oauth2Auth.iFameHashListener();
+                this.oauth2Auth.iFrameHashListener();
                 setTimeout(() => expect(logoutSpy).to.have.been.called(), 500);
             });
         });
