@@ -1063,7 +1063,7 @@ definitions:
     properties:
       facets:
         description: |
-          Define specifc fields on which to facet (adds SOLR facet.field and f.<field>.facet.* options)
+          Define specific fields on which to facet (adds SOLR facet.field and f.<field>.facet.* options)
         type: array
         items:
           $ref: '#/definitions/RequestFacetField'
