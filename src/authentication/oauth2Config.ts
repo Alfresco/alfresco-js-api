@@ -26,6 +26,7 @@ export class Oauth2Config {
     silentLogin?: boolean;
     redirectUriLogout?: string;
     redirectSilentIframeUri?: string;
+    silentLoginExceptList?: [string];
 
     constructor(input?: any) {
         Object.assign(this, input);

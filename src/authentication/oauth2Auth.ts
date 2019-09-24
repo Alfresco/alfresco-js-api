@@ -246,11 +246,24 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 });
             } else {
                 if (this.config.oauth2.silentLogin) {
-                    this.implicitLogin();
+                    console.log('Windows: ' + window.location.href);
+                    if (!this.isInSilentLoginExceptList()) {
+                        this.implicitLogin();
+                    }
                 }
             }
         });
 
+    }
+
+    isInSilentLoginExceptList(): Boolean {
+        this.config.oauth2.silentLoginExceptList.forEach( el => {
+            if (window.location.href.startsWith(el)) {
+                return true;
+            }
+        });
+
+        return false;
     }
 
     padBase64(base64data: any) {
