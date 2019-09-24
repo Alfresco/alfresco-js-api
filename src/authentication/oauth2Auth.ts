@@ -246,7 +246,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 });
             } else {
                 if (this.config.oauth2.silentLogin) {
-                    console.log('Windows: ' + window.location.href);
                     if (!this.isInSilentLoginExceptList()) {
                         this.implicitLogin();
                     }
