@@ -13,6 +13,7 @@ import { AlfrescoApi } from '../src/alfrescoApi';
 import { ContentApi } from  '../src/api/content-rest-api/api/content.api';
 import { AlfrescoApiCompatibility } from '../src/alfrescoApiCompatibility';
 let jsdom = require('mocha-jsdom');
+const globalAny: any = global;
 
 import { Storage } from '../src/storage';
 
@@ -206,6 +207,36 @@ describe('Oauth2  test', function () {
                 // invalid hash location leads to a reject which leads to a log out
                 this.oauth2Auth.iFrameHashListener();
                 setTimeout(() => expect(logoutSpy).to.have.been.called(), 500);
+            });
+        });
+
+        describe('public urls', function() {
+            it('should return `true` if url is defined in public urls list', function() {
+                globalAny.window = { location: { href: 'public-url'} };
+                this.oauth2Auth.config.oauth2.publicUrls = ['public-url'];
+
+                expect(this.oauth2Auth.isPublicUrl()).to.be.equal(true);
+            });
+
+            it('should return `false` if url is not defined in public urls list', function() {
+                globalAny.window = { location: { href: 'some-public-url'} };
+                this.oauth2Auth.config.oauth2.publicUrls = ['public-url'];
+
+                expect(this.oauth2Auth.isPublicUrl()).to.be.equal(false);
+            });
+
+            it('should return `false` if publicUrls property is not defined', function() {
+                expect(this.oauth2Auth.isPublicUrl()).to.be.equal(false);
+            });
+
+            it('should not call `implicitLogin`', async function() {
+                globalAny.window = { location: { href: 'public-url'} };
+                this.oauth2Auth.config.oauth2.silentLogin = true;
+                this.oauth2Auth.config.oauth2.publicUrls = ['public-url'];
+                const implicitLoginSpy = chai.spy.on(this.oauth2Auth, 'implicitLogin');
+
+                await this.oauth2Auth.checkFragment();
+                expect(implicitLoginSpy).not.to.have.been.called();
             });
         });
     });
