@@ -248,7 +248,6 @@ this.alfrescoApi = new AlfrescoApi({
             implicitFlow: true,
             redirectUri: 'YOUR_HOME_APP_URL',
             silentRefreshTimeout: '600000', //Optional parameter 10 minutes default value,
-            publicUrls: ['PUBLIC_URL']
         },
         authType: 'OAUTH',
         provider: 'ALL'
@@ -271,7 +270,7 @@ this.alfrescoApi = new AlfrescoApi({
             redirectUri: 'YOUR_HOME_APP_URL',
             silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value,
             silentLogin: true,
-            silentLoginExceptList: ['{protocol}//{hostname}{:port}/#/preview/s']
+            publicUrls: ['PUBLIC_URL']
         },
         authType: 'OAUTH',
         provider: 'ALL'
