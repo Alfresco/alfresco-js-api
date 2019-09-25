@@ -245,24 +245,19 @@ export class Oauth2Auth extends AlfrescoApiClient {
                     reject('Validation JWT error' + error);
                 });
             } else {
-                if (this.config.oauth2.silentLogin) {
-                    if (!this.isInSilentLoginExceptList()) {
-                        this.implicitLogin();
-                    }
+                if (this.config.oauth2.silentLogin && !this.isPublicUrl()) {
+                    this.implicitLogin();
                 }
             }
         });
 
     }
 
-    isInSilentLoginExceptList(): Boolean {
-        this.config.oauth2.silentLoginExceptList.forEach( el => {
-            if (window.location.href.startsWith(el)) {
-                return true;
-            }
-        });
+    isPublicUrl(): boolean {
+        const publicUrls = this.config.oauth2.publicUrls || [];
 
-        return false;
+        return publicUrls.length &&
+            publicUrls.some((url: string) => window.location.href.startsWith(url));
     }
 
     padBase64(base64data: any) {
