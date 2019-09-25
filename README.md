@@ -247,7 +247,7 @@ this.alfrescoApi = new AlfrescoApi({
             scope: 'openid',
             implicitFlow: true,
             redirectUri: 'YOUR_HOME_APP_URL',
-            silentRefreshTimeout: '600000', //Optional parameter 10 minutes default value,
+            silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value
         },
         authType: 'OAUTH',
         provider: 'ALL'
