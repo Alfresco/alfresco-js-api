@@ -221,7 +221,7 @@ redirectLogout|  url to be redirect after logout optional, if is nor present the
 refreshTokenTimeout|  millisecond value, after how many millisecond youw ant refresh the token| 40000|
 redirectSilentIframeUri|  url to be redirect after silent refresh login| /assets/silent-refresh.html |
 silentLogin|  direct execute the implicit login without the need to call this.alfrescoJsApi.implicitLogin() method|   false|
-publicUrls | list of public urls that don't need authorization |
+publicUrls | list of public urls that don't need authorization. It is possible too pass absolute paths and string patterns that are valid for [minimatch](https://github.com/isaacs/minimatch#readme) |
 
 The api/js-api will automatically redirect you to the login page anf refresh the token if necessary
 
@@ -270,7 +270,7 @@ this.alfrescoApi = new AlfrescoApi({
             redirectUri: 'YOUR_HOME_APP_URL',
             silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value,
             silentLogin: true,
-            publicUrls: ['PUBLIC_URL']
+            publicUrls: ['PUBLIC_URL', 'URL_PATTERN']
         },
         authType: 'OAUTH',
         provider: 'ALL'
