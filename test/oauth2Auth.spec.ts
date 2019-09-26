@@ -229,6 +229,20 @@ describe('Oauth2  test', function () {
                 expect(this.oauth2Auth.isPublicUrl()).to.be.equal(false);
             });
 
+            it('should match absolute path', function() {
+                globalAny.window = { location: { href: 'http://some-public-url'} };
+                this.oauth2Auth.config.oauth2.publicUrls = ['http://some-public-url'];
+
+                expect(this.oauth2Auth.isPublicUrl()).to.be.equal(true);
+            });
+
+            it('should match a path pattern', function() {
+                globalAny.window = { location: { href: 'http://some-public-url/123/path'} };
+                this.oauth2Auth.config.oauth2.publicUrls = ['**/some-public-url/*/path'];
+
+                expect(this.oauth2Auth.isPublicUrl()).to.be.equal(true);
+            });
+
             it('should not call `implicitLogin`', async function() {
                 globalAny.window = { location: { href: 'public-url'} };
                 this.oauth2Auth.config.oauth2.silentLogin = true;
