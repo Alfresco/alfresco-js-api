@@ -20,6 +20,8 @@ import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { Storage } from '../storage';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
+import * as _minimatch from 'minimatch';
+const minimatch = _minimatch;
 
 const Emitter = _Emitter;
 declare let window;
@@ -245,12 +247,20 @@ export class Oauth2Auth extends AlfrescoApiClient {
                     reject('Validation JWT error' + error);
                 });
             } else {
-                if (this.config.oauth2.silentLogin) {
+                if (this.config.oauth2.silentLogin && !this.isPublicUrl()) {
                     this.implicitLogin();
                 }
+                resolve();
             }
         });
 
+    }
+
+    isPublicUrl(): boolean {
+        const publicUrls = this.config.oauth2.publicUrls || [];
+
+        return publicUrls.length &&
+            publicUrls.some((urlPattern: string) => minimatch(window.location.href, urlPattern));
     }
 
     padBase64(base64data: any) {
