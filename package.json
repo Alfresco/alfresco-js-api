@@ -51,7 +51,8 @@
   },
   "dependencies": {
     "event-emitter": "0.3.4",
-    "superagent": "3.8.2"
+    "superagent": "3.8.2",
+    "minimatch": "3.0.4"
   },
   "devDependencies": {
     "@types/chai": "^4.1.6",
@@ -112,7 +113,7 @@
   "bundlesize": [
     {
       "path": "./dist/global/alfresco-js-api.umd.js",
-      "maxSize": "85 kb"
+      "maxSize": "88 kb"
     }
   ],
   "keywords": [
