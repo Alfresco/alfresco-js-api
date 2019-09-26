@@ -20,6 +20,8 @@ import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { Storage } from '../storage';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
+import * as _minimatch from 'minimatch';
+const minimatch = _minimatch;
 
 const Emitter = _Emitter;
 declare let window;
@@ -258,7 +260,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         const publicUrls = this.config.oauth2.publicUrls || [];
 
         return publicUrls.length &&
-            publicUrls.some((url: string) => window.location.href.startsWith(url));
+            publicUrls.some((urlPattern: string) => minimatch(window.location.href, urlPattern));
     }
 
     padBase64(base64data: any) {
