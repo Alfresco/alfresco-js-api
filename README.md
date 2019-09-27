@@ -218,7 +218,7 @@ scope| Your scope | null |
 implicitFlow| true/false | false |
 redirectUri|  url to be redirect after login| null|
 redirectLogout|  url to be redirect after logout optional, if is nor present the redirectUri will be used| null|
-refreshTokenTimeout|  millisecond value, after how many millisecond youw ant refresh the token| 40000|
+refreshTokenTimeout|  millisecond value, after how many millisecond youw ant refresh the token| 30000|
 redirectSilentIframeUri|  url to be redirect after silent refresh login| /assets/silent-refresh.html |
 silentLogin|  direct execute the implicit login without the need to call this.alfrescoJsApi.implicitLogin() method|   false|
 publicUrls | list of public urls that don't need authorization. It is possible too pass absolute paths and string patterns that are valid for [minimatch](https://github.com/isaacs/minimatch#readme) |
