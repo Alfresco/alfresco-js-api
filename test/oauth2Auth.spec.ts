@@ -229,6 +229,13 @@ describe('Oauth2  test', function () {
                 expect(this.oauth2Auth.isPublicUrl()).to.be.equal(false);
             });
 
+            it('should return `false` if public urls is not set as an array list', function() {
+                globalAny.window = { location: { href: 'public-url-string'} };
+                this.oauth2Auth.config.oauth2.publicUrls = 'public-url-string';
+
+                expect(this.oauth2Auth.isPublicUrl()).to.be.equal(false);
+            });
+
             it('should match absolute path', function() {
                 globalAny.window = { location: { href: 'http://some-public-url'} };
                 this.oauth2Auth.config.oauth2.publicUrls = ['http://some-public-url'];
