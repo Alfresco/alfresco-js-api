@@ -35,6 +35,9 @@ jobs:
           script: ./scripts/test-performance.sh || exit 1
         - stage: Integration
           script: ./scripts/test-integration.sh || exit 1
+        - stage: trigger ADF
+          if: branch = master OR branch = development OR (tag =~ .*beta.*)
+          script: ./scripts/trigger-travis.sh Alfresco alfresco-ng2-components $TRAVIS_ACCESS_TOKEN
 
 after_success:
   - npm run coverage --force
