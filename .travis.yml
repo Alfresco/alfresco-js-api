@@ -52,7 +52,7 @@ jobs:
         - stage: trigger ADF
           name: trigger ADF
           if: (branch = master OR branch = development OR (tag =~ .*beta.*)) AND type = push
-          script: ./scripts/trigger-travis.sh Alfresco alfresco-ng2-components $TRAVIS_ACCESS_TOKEN --branch $TRAVIS_BRANCH
+          script: ./scripts/trigger-travis.sh --branch $TRAVIS_BRANCH Alfresco alfresco-ng2-components $TRAVIS_ACCESS_TOKEN
 
 after_success:
   - npm run coverage --force
