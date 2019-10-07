@@ -6,10 +6,10 @@
      <img src='https://badges.gitter.im/Alfresco/api/ng2-components.svg'  alt='Gitter chat' />
   </a>
   <a title='Build Status' href="https://travis-ci.org/Alfresco/api/js-api">
-     <img src='https://travis-ci.org/Alfresco/api/js-api.svg?branch=master'  alt='travis Status' />
+     <img src='https://travis-ci.org/Alfresco/alfresco-js-api.svg?branch=master'  alt='travis Status' />
   </a>
   <a href='https://codecov.io/gh/Alfresco/api/js-api'>
-    <img src='https://img.shields.io/codecov/c/github/Alfresco/api/js-api/master.svg?maxAge=0' alt='Coverage Status' />
+    <img src='https://img.shields.io/codecov/c/github/Alfresco/alfresco-js-api/master.svg?maxAge=0' alt='Coverage Status' />
   </a>
   <a href='https://raw.githubusercontent.com/Alfresco/dev-platform-js-api/master/LICENSE'>
      <img src='https://img.shields.io/hexpm/l/plug.svg' alt='license' />

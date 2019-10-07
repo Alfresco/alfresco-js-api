@@ -11,6 +11,15 @@ before_script:
     - "sudo chown root /opt/google/chrome/chrome-sandbox"
     - "sudo chmod 4755 /opt/google/chrome/chrome-sandbox"
 
+branches:
+  only:
+  - master
+  - development
+  - /.*old-env.*/
+  - /.*next-release.*/
+  - /.*beta.*/
+  - /.*greenkeeper.*/
+
 before_install:
     - export CHROME_BIN=chromium-browser
     - export DISPLAY=:99.0
@@ -26,15 +35,24 @@ install:
 jobs:
     include:
         - stage: Lint
+          name: Lint
           script: ./scripts/lint.sh
         - stage: Build
+          name: Build
           script: ./scripts/build.sh || exit 1
         - stage: Test
+          name: Test
           script: npm run test || exit 1
         - stage: Perfomance
+          name: Perfomance
           script: ./scripts/test-performance.sh || exit 1
         - stage: Integration
+          name: Integration
           script: ./scripts/test-integration.sh || exit 1
+        - stage: trigger ADF
+          name: trigger ADF
+          if: (branch = master OR branch = development OR (tag =~ .*beta.*)) AND type = push
+          script: ./scripts/trigger-travis.sh Alfresco alfresco-ng2-components $TRAVIS_ACCESS_TOKEN --branch $TRAVIS_BRANCH
 
 after_success:
   - npm run coverage --force
