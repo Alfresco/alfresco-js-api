@@ -28,7 +28,7 @@ import { Authentication } from './authentication/authentication';
 import { AuthenticationApi } from './api/auth-rest-api/api/authentication.api';
 import { TicketEntry } from './api/auth-rest-api/model/ticketEntry';
 
-const Emitter = _Emitter;
+const emitter = _Emitter();
 
 export class AlfrescoApi {
 
@@ -45,18 +45,18 @@ export class AlfrescoApi {
     processAuth: ProcessAuth;
     contentAuth: ContentAuth;
 
-    on = Emitter.on;
-    off = Emitter.off;
-    once = Emitter.once;
-    emit = Emitter.emit;
+    on = emitter.on;
+    off = emitter.off;
+    once = emitter.once;
+    emit = emitter.emit;
 
     constructor(config?: AlfrescoApiConfig) {
-        this.on = (new Emitter()).on;
-        this.off = (new Emitter()).off;
-        this.once = (new Emitter()).once;
-        this.emit = (new Emitter()).emit;
+        this.on = emitter.on;
+        this.off = emitter.off;
+        this.once = emitter.once;
+        this.emit = emitter.emit;
 
-        Emitter.call(this);
+        _Emitter.call(this);
 
         if (config) {
             this.setConfig(config);
@@ -246,7 +246,7 @@ export class AlfrescoApi {
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    login(username: string, password: string): Promise<any> {
+    login(username: string, password: string): Promise<any> | void {
 
         if (username) {
             username = username.trim();
@@ -360,7 +360,7 @@ export class AlfrescoApi {
                 });
         });
 
-        Emitter(promise); // jshint ignore:line
+        _Emitter(promise); // jshint ignore:line
 
         return promise;
     }
@@ -408,7 +408,7 @@ export class AlfrescoApi {
                 });
         });
 
-        Emitter(promise); // jshint ignore:line
+        _Emitter(promise); // jshint ignore:line
 
         return promise;
     }

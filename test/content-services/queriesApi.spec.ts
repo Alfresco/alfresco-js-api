@@ -47,7 +47,7 @@ describe('Queries', function () {
         it('should return query results', function (done) {
             this.nodesMock.get200Response();
 
-            this.alfrescoJsApi.core.queriesApi.findNodes(searchTerm).then(function (data) {
+            this.alfrescoJsApi.core.queriesApi.findNodes(searchTerm).then(function (data: any) {
                 expect(data.list.pagination.count).to.be.equal(2);
                 expect(data.list.entries[0].entry.name).to.be.equal('coins1.JPG');
                 expect(data.list.entries[1].entry.name).to.be.equal('coins2.JPG');

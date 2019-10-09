@@ -27,7 +27,7 @@ describe('Compatibility test§', function () {
 
         this.alfrescoApiCompatibility.core.peopleApi.addPerson(personBodyCreate).then(function () {
             done();
-        },                                                                            function (error) {
+        },                                                                            function (error: any) {
             console.error(error);
         });
 

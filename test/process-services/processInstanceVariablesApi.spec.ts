@@ -32,7 +32,7 @@ describe('Activiti Process Instance Variables Api', function () {
             let processInstanceId = '111';
             this.variablesMock.addListProcessInstanceVariables200Response(processInstanceId);
 
-            this.alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariables(processInstanceId).then(function (data) {
+            this.alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariables(processInstanceId).then(function (data: any) {
                 expect(data.length).equal(2);
                 done();
             });
@@ -44,7 +44,7 @@ describe('Activiti Process Instance Variables Api', function () {
             this.variablesMock.addListProcessInstanceVariables500Response(processInstanceId);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariables(processInstanceId).then(function () {
-            },                                                                                                          function (error) {
+            },                                                                                                          function (error: any) {
                 expect(error.status).equal(500);
                 expect(error.message).equal('{"messageKey":"UNKNOWN","message":"Unknown error"}');
                 done();
@@ -60,7 +60,7 @@ describe('Activiti Process Instance Variables Api', function () {
             let processInstanceId = '111';
             this.variablesMock.addPostProcessInstanceVariables200Response(processInstanceId);
 
-            this.alfrescoJsApi.activiti.processInstanceVariablesApi.createProcessInstanceVariables(processInstanceId, []).then(function (data) {
+            this.alfrescoJsApi.activiti.processInstanceVariablesApi.createProcessInstanceVariables(processInstanceId, []).then(function (data: any) {
                 expect(data.length).equal(2);
                 done();
             });
@@ -72,7 +72,7 @@ describe('Activiti Process Instance Variables Api', function () {
             this.variablesMock.addPostProcessInstanceVariables500Response(processInstanceId);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.createProcessInstanceVariables(processInstanceId, []).then(function () {
-            },                                                                                                                 function (error) {
+            },                                                                                                                 function (error: any) {
                 expect(error.status).equal(500);
                 expect(error.message).equal('{"messageKey":"UNKNOWN","message":"Unknown error"}');
                 done();
@@ -88,7 +88,7 @@ describe('Activiti Process Instance Variables Api', function () {
             let processInstanceId = '111';
             this.variablesMock.addPutProcessInstanceVariables200Response(processInstanceId);
 
-            this.alfrescoJsApi.activiti.processInstanceVariablesApi.createOrUpdateProcessInstanceVariables(processInstanceId, []).then(function (data) {
+            this.alfrescoJsApi.activiti.processInstanceVariablesApi.createOrUpdateProcessInstanceVariables(processInstanceId, []).then(function (data: any) {
                 expect(data.length).equal(2);
                 done();
             });
@@ -100,7 +100,7 @@ describe('Activiti Process Instance Variables Api', function () {
             this.variablesMock.addPutProcessInstanceVariables500Response(processInstanceId);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.createOrUpdateProcessInstanceVariables(processInstanceId, []).then(function () {
-            },                                                                                                                         function (error) {
+            },                                                                                                                         function (error: any) {
                 expect(error.status).equal(500);
                 expect(error.message).equal('{"messageKey":"UNKNOWN","message":"Unknown error"}');
                 done();
@@ -117,7 +117,7 @@ describe('Activiti Process Instance Variables Api', function () {
             let variableName = 'var1';
             this.variablesMock.addGetProcessInstanceVariable200Response(processInstanceId, variableName);
 
-            this.alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariable(processInstanceId, variableName).then(function (data) {
+            this.alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariable(processInstanceId, variableName).then(function (data: any) {
                 expect(data.name).equal('variable1');
                 expect(data.value).equal('Value 123');
                 done();
@@ -133,7 +133,7 @@ describe('Activiti Process Instance Variables Api', function () {
             this.variablesMock.addGetProcessInstanceVariable500Response(processInstanceId, variableName);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariable(processInstanceId, variableName).then(function () {
-            },                                                                                                                       function (error) {
+            },                                                                                                                       function (error: any) {
                 expect(error.status).equal(500);
                 expect(error.message).equal('{"messageKey":"UNKNOWN","message":"Unknown error"}');
                 done();
@@ -162,7 +162,7 @@ describe('Activiti Process Instance Variables Api', function () {
             this.variablesMock.addUpdateProcessInstanceVariable500Response(processInstanceId, variableName);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.updateProcessInstanceVariable(processInstanceId, variableName, {}).then(function () {
-            },                                                                                                                              function (error) {
+            },                                                                                                                              function (error: any) {
                 expect(error.status).equal(500);
                 expect(error.message).equal('{"messageKey":"UNKNOWN","message":"Unknown error"}');
                 done();
@@ -191,7 +191,7 @@ describe('Activiti Process Instance Variables Api', function () {
             this.variablesMock.addDeleteProcessInstanceVariable500Response(processInstanceId, variableName);
 
             this.alfrescoJsApi.activiti.processInstanceVariablesApi.deleteProcessInstanceVariable(processInstanceId, variableName).then(function () {
-            },                                                                                                                          function (error) {
+            },                                                                                                                          function (error: any) {
                 expect(error.status).equal(500);
                 expect(error.message).equal('{"messageKey":"UNKNOWN","message":"Unknown error"}');
                 done();

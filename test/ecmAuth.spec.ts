@@ -8,7 +8,7 @@ import { AlfrescoApi } from '../src/alfrescoApi';
 
 describe('Ecm Auth test', function () {
 
-    let alfrescoJsApi: AlfrescoApi, authEcmMock;
+    let alfrescoJsApi: AlfrescoApi, authEcmMock: any;
 
     beforeEach(function () {
         this.hostEcm = 'http://127.0.0.1:8080';
@@ -37,7 +37,7 @@ describe('Ecm Auth test', function () {
         auth.logout().then(() => {
             expect(auth.authentications.basicAuth.username).to.be.equal(null);
             done();
-        },                 (error) => {
+        },                 (error: any) => {
             console.log(JSON.stringify(error));
         });
     });
@@ -52,7 +52,7 @@ describe('Ecm Auth test', function () {
                 contextRoot: 'alfresco',
                 hostEcm: this.hostEcm
             },                                 alfrescoJsApi);
-            this.contentAuth.login('admin', 'admin').then((data) => {
+            this.contentAuth.login('admin', 'admin').then((data: any) => {
                 expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                 done();
             },                                            () => {
@@ -137,7 +137,7 @@ describe('Ecm Auth test', function () {
             },                                 alfrescoJsApi);
             this.contentAuth.login('wrong', 'name').then(function () {
 
-            },                                           (error) => {
+            },                                           (error: any) => {
                 expect(error.status).to.be.equal(403);
                 done();
             });
@@ -152,7 +152,7 @@ describe('Ecm Auth test', function () {
             },                                 alfrescoJsApi);
             this.contentAuth.login(null, null).then(function () {
 
-            },                                      (error) => {
+            },                                      (error: any) => {
                 expect(error.status).to.be.equal(400);
                 done();
             });
@@ -262,7 +262,7 @@ describe('Ecm Auth test', function () {
             it('Ticket should be absent in the client and the resolve promise should be called', function (done) {
                 authEcmMock.get204ResponseLogout();
 
-                this.contentAuth.logout().then((data) => {
+                this.contentAuth.logout().then((data: any) => {
                     expect(this.contentAuth.config.ticket).to.be.equal(undefined);
                     expect(data).to.be.equal('logout');
                     done();
@@ -273,7 +273,7 @@ describe('Ecm Auth test', function () {
             it('Logout should be rejected if the Ticket is already expired', function (done) {
                 authEcmMock.get404ResponseLogout();
                 this.contentAuth.logout().then(() => {
-                },                             (error) => {
+                },                             (error: any) => {
                     expect(error.error.toString()).to.be.equal('Error: Not Found');
                     done();
                 });

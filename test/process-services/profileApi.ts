@@ -37,12 +37,12 @@ describe('Activiti Profile Api', function () {
 
     it('get Profile', function (done) {
         this.profileMock.get200getProfile();
-        this.alfrescoJsApi.activiti.profileApi.getProfile().then((data) => {
+        this.alfrescoJsApi.activiti.profileApi.getProfile().then((data: any) => {
             expect(data.lastName).equal('Administrator');
             expect(data.groups[0].name).equal('analytics-users');
             expect(data.tenantName).equal('test');
             done();
-        },                                                       (error) => {
+        },                                                       (error: any) => {
             console.log(error);
         });
     });

@@ -30,7 +30,7 @@ describe('Auth', function () {
                         hostEcm: this.hostEcm
                     });
 
-                    this.alfrescoJsApi.login('admin', 'admin').then((data) => {
+                    this.alfrescoJsApi.login('admin', 'admin').then((data: any) => {
                         expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                         done();
                     });
@@ -44,7 +44,7 @@ describe('Auth', function () {
                     });
 
                     this.alfrescoJsApi.login('wrong', 'name').then(() => {
-                    },                                             (error) => {
+                    },                                             (error: any) => {
                         expect(error.status).to.be.equal(403);
                         done();
                     });
@@ -59,7 +59,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login(null, null).then(function () {
 
-                    },                                        (error) => {
+                    },                                        (error: any) => {
                         expect(error.status).to.be.equal(400);
                         done();
                     });
@@ -179,7 +179,7 @@ describe('Auth', function () {
                         hostEcm: this.host
                     });
 
-                    this.alfrescoJsApi.loginTicket(ticket).then((data) => {
+                    this.alfrescoJsApi.loginTicket(ticket).then((data: any) => {
                         expect(this.alfrescoJsApi.contentAuth.authentications.basicAuth.password).to.be.equal(ticket);
                         expect(data).to.be.equal(ticket);
                         done();
@@ -219,7 +219,7 @@ describe('Auth', function () {
                 it('should Ticket be absent in the client and the resolve promise should be called', function (done) {
                     this.authResponseEcmMock.get204ResponseLogout();
 
-                    this.alfrescoJsApi.logout().then((data) => {
+                    this.alfrescoJsApi.logout().then((data: any) => {
                         expect(this.alfrescoJsApi.config.ticket).to.be.equal(undefined);
                         expect(data).to.be.equal('logout');
                         done();
@@ -230,7 +230,7 @@ describe('Auth', function () {
                 it('should Logout be rejected if the Ticket is already expired', function (done) {
                     this.authResponseEcmMock.get404ResponseLogout();
                     this.alfrescoJsApi.logout().then(() => {
-                    },                               (error) => {
+                    },                               (error: any) => {
                         expect(error.error.toString()).to.be.equal('Error: Not Found');
                         done();
                     });
@@ -307,10 +307,10 @@ describe('Auth', function () {
                         provider: 'BPM'
                     });
 
-                    this.alfrescoJsApi.login('admin', 'admin').then((data) => {
+                    this.alfrescoJsApi.login('admin', 'admin').then((data: any) => {
                         expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                         done();
-                    },                                              function (error) {
+                    },                                              function (error: any) {
                         console.log('error' + JSON.stringify(error));
                     });
                 });
@@ -325,7 +325,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login('wrong', 'name').then(() => {
 
-                    },                                             (error) => {
+                    },                                             (error: any) => {
                         expect(error.status).to.be.equal(401);
                         done();
                     });
@@ -341,7 +341,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login(null, null).then(function () {
 
-                    },                                        function (error) {
+                    },                                        function (error: any) {
                         expect(error.status).to.be.equal(400);
                         done();
                     });
@@ -531,7 +531,7 @@ describe('Auth', function () {
                         provider: 'ALL'
                     });
 
-                    this.alfrescoJsApi.login('admin', 'admin').then((data) => {
+                    this.alfrescoJsApi.login('admin', 'admin').then((data: any) => {
                         expect(data[0]).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                         expect(data[1]).to.be.equal('Basic YWRtaW46YWRtaW4=');
                         done();
@@ -616,7 +616,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login('wrong', 'name').then(function () {
 
-                    },                                             function (error) {
+                    },                                             function (error: any) {
                         expect(error.status).to.be.equal(401);
                         done();
                     });
@@ -634,7 +634,7 @@ describe('Auth', function () {
 
                     this.alfrescoJsApi.login(null, null).then(function () {
 
-                    },                                        function (error) {
+                    },                                        function (error: any) {
                         expect(error.status).to.be.equal(400);
                         done();
                     });

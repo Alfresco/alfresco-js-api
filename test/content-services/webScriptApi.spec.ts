@@ -35,7 +35,7 @@ describe('WebScript', function () {
         this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', this.scriptPath, null, this.contextRoot, this.servicePath).then(() => {
                 console.log('success');
             },
-                                                                                                                                     (error) => {
+                                                                                                                                     (error: any) => {
                 expect(error.status).to.be.equal(404);
                 done();
             }
@@ -49,7 +49,7 @@ describe('WebScript', function () {
             () => {
                 done();
             },
-            (error) => {
+            (error: any) => {
                 console.log('error' + JSON.stringify(error));
             }
         );
@@ -58,7 +58,7 @@ describe('WebScript', function () {
     it('execute webScript that return HTML should not return it as Object', function (done) {
         this.webScriptMock.get200ResponseHTMLFormat();
 
-        this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'sample/folder/Company%20Home').then((data) => {
+        this.alfrescoJsApi.core.webscriptApi.executeWebScript('GET', 'sample/folder/Company%20Home').then((data: any) => {
             try {
                 JSON.parse(data);
             } catch (e) {

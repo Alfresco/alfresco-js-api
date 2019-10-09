@@ -20,7 +20,7 @@ import { Emitter } from 'event-emitter';
 
 export class UploadApi extends NodesApi {
 
-    uploadFile(fileDefinition, relativePath: string, rootFolderId: string, nodeBody: any, opts?: any): Promise<any | Emitter> {
+    uploadFile(fileDefinition: any, relativePath: string, rootFolderId: string, nodeBody: any, opts?: any): Promise<any | Emitter> {
         rootFolderId = rootFolderId || '-root-';
         opts = opts || {};
 

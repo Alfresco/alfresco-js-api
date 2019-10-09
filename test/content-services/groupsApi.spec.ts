@@ -26,7 +26,7 @@ describe('Groups', function () {
     it('get groups', function (done) {
         this.groupsMock.get200GetGroups();
 
-        this.alfrescoJsApi.core.groupsApi.getGroups().then(function (data) {
+        this.alfrescoJsApi.core.groupsApi.getGroups().then(function (data: any) {
             expect(data.list.pagination.count).to.be.equal(2);
             expect(data.list.entries[0].entry.id).to.be.equal('GROUP_alfalfa');
             expect(data.list.entries[1].entry.id).to.be.equal('GROUP_CallCenterAA');
@@ -43,7 +43,7 @@ describe('Groups', function () {
             displayName: 'SAMPLE'
         };
 
-        this.alfrescoJsApi.core.groupsApi.createGroup(groupBody).then(function (data) {
+        this.alfrescoJsApi.core.groupsApi.createGroup(groupBody).then(function (data: any) {
             expect(data.entry.id).to.be.equal('GROUP_TEST');
             done();
         },                                                            function () {
@@ -61,7 +61,7 @@ describe('Groups', function () {
     it('get single group', function (done) {
         this.groupsMock.get200GetSingleGroup();
 
-        this.alfrescoJsApi.core.groupsApi.getGroup('GROUP_TEST').then(function (data) {
+        this.alfrescoJsApi.core.groupsApi.getGroup('GROUP_TEST').then(function (data: any) {
             expect(data.entry.id).to.be.equal('GROUP_TEST');
             expect(data.entry.displayName).to.be.equal('SAMPLE');
             done();
@@ -76,7 +76,7 @@ describe('Groups', function () {
             displayName: 'CHANGED'
         };
 
-        this.alfrescoJsApi.core.groupsApi.updateGroup('GROUP_TEST', groupBody).then(function (data) {
+        this.alfrescoJsApi.core.groupsApi.updateGroup('GROUP_TEST', groupBody).then(function (data: any) {
             expect(data.entry.id).to.be.equal('GROUP_TEST');
             expect(data.entry.displayName).to.be.equal('CHANGED');
             done();
@@ -87,7 +87,7 @@ describe('Groups', function () {
     it('get group members', function (done) {
         this.groupsMock.get200GetGroupMemberships();
 
-        this.alfrescoJsApi.core.groupsApi.getGroupMembers('GROUP_TEST').then(function (data) {
+        this.alfrescoJsApi.core.groupsApi.getGroupMembers('GROUP_TEST').then(function (data: any) {
             expect(data.list.pagination.count).to.be.equal(1);
             expect(data.list.entries[0].entry.id).to.be.equal('GROUP_SUB_TEST');
             expect(data.list.entries[0].entry.displayName).to.be.equal('SAMPLE');
@@ -104,7 +104,7 @@ describe('Groups', function () {
             memberType: 'GROUP'
           };
 
-        this.alfrescoJsApi.core.groupsApi.addGroupMember('GROUP_TEST', groupBody).then(function (data) {
+        this.alfrescoJsApi.core.groupsApi.addGroupMember('GROUP_TEST', groupBody).then(function (data: any) {
             expect(data.entry.id).to.be.equal('GROUP_SUB_TEST');
             expect(data.entry.displayName).to.be.equal('SAMPLE');
             done();

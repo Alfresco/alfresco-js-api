@@ -23,13 +23,14 @@ import * as  superagent_ from 'superagent';
 import { Authentication } from './authentication/authentication';
 import { BasicAuth } from './authentication/basicAuth';
 import { Oauth2 } from './authentication/oauth2';
+import { Response } from 'superagent';
 
-const Emitter = _Emitter;
+const emitter = _Emitter();
 const superagent = superagent_;
 const process: any = {};
 
-declare const Buffer;
-declare const Blob;
+declare const Buffer: any;
+declare const Blob: any;
 
 export class AlfrescoApiClient {
 
@@ -63,12 +64,12 @@ export class AlfrescoApiClient {
         this.storage = new Storage();
         this.host = host;
 
-        this.on = (new Emitter()).on;
-        this.off = (new Emitter()).off;
-        this.once = (new Emitter()).once;
-        this.emit = (new Emitter()).emit;
+        this.on = emitter.on;
+        this.off = emitter.off;
+        this.once = emitter.once;
+        this.emit = emitter.emit;
 
-        Emitter.call(this);
+        _Emitter.call(this);
     }
 
     /**
@@ -200,7 +201,7 @@ export class AlfrescoApiClient {
      * @returns {String|Array} A string representation of the supplied collection, using the specified delimiter. Returns
      * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
      */
-    buildCollectionParam(param: string, collectionFormat: string): string | any[] {
+    buildCollectionParam(param: string[], collectionFormat: string): string | any[] {
         if (!param) {
             return null;
         }
@@ -284,7 +285,7 @@ export class AlfrescoApiClient {
 
         if (returnType) {
             if (Array.isArray(data)) {
-                data = data.map( (element) => {
+                data = data.map((element) => {
                     return new returnType(element);
                 });
             } else {
@@ -404,7 +405,7 @@ export class AlfrescoApiClient {
         contextRoot?: string,
         responseType?: string, url?: string): Promise<any> {
 
-        const eventEmitter = Emitter({});
+        const eventEmitter = _Emitter({});
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
                                         contentTypes, accepts, responseType, eventEmitter, returnType);
@@ -414,7 +415,7 @@ export class AlfrescoApiClient {
         }
 
         const promise: any = new Promise((resolve, reject) => {
-            request.end((error, response) => {
+            request.end((error: any, response: Response) => {
                 if (error) {
 
                     this.emit('error', error);
@@ -561,7 +562,7 @@ export class AlfrescoApiClient {
         responseType: string,
         eventEmitter: _Emitter.Emitter,
         returnType: string) {
-        const request = superagent(httpMethod, url);
+        const request: any = superagent(httpMethod, url);
 
         // apply authentications
         this.applyAuthToRequest(request);
@@ -602,7 +603,7 @@ export class AlfrescoApiClient {
         }
 
         if (contentType === 'application/x-www-form-urlencoded') {
-            request.send(this.normalizeParams(formParams)).on('progress', (event) => {
+            request.send(this.normalizeParams(formParams)).on('progress', (event: any) => {
                 this.progress(event, eventEmitter);
             });
         } else if (contentType === 'multipart/form-data') {
@@ -622,7 +623,7 @@ export class AlfrescoApiClient {
                 }
             }
         } else if (bodyParam) {
-            request.send(bodyParam).on('progress', (event) => {
+            request.send(bodyParam).on('progress', (event: any) => {
                 this.progress(event, eventEmitter);
             });
         }
@@ -652,8 +653,8 @@ export class AlfrescoApiClient {
         return alfTicketFragment;
     }
 
-    on = Emitter.on;
-    off = Emitter.off;
-    once = Emitter.once;
-    emit = Emitter.emit;
+    on = emitter.on;
+    off = emitter.off;
+    once = emitter.once;
+    emit = emitter.emit;
 }

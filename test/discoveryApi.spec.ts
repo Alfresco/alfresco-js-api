@@ -26,10 +26,10 @@ describe('Discovery', function () {
     it('should getRepositoryInformation works', function (done) {
         this.discoveryMock.get200Response();
 
-        this.alfrescoJsApi.discovery.discoveryApi.getRepositoryInformation().then(function (data) {
+        this.alfrescoJsApi.discovery.discoveryApi.getRepositoryInformation().then(function (data: any) {
             expect(data.entry.repository.edition).to.be.equal('Enterprise');
             done();
-        },                                                                        function (error) {
+        },                                                                        function (error: any) {
             console.error(error);
         });
 

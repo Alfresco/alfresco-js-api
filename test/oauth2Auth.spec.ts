@@ -44,12 +44,12 @@ describe('Oauth2  test', function () {
                 authType: 'OAUTH'
             });
 
-            this.oauth2Auth.login('admin', 'admin').then((data) => {
+            this.oauth2Auth.login('admin', 'admin').then((data: any) => {
                     expect(data.access_token).to.be.equal('test-token');
                     done();
                 },
-                                                         function (e) {
-                    console.log('e' + e);
+                                                         function (error: any) {
+                    console.log('error' + error);
                 });
 
         });

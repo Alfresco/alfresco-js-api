@@ -32,7 +32,7 @@ describe('Activiti Models Api', function () {
             'modelType': 2
         };
 
-        this.alfrescoJsApi.activiti.modelsApi.getModels(opts).then((data) => {
+        this.alfrescoJsApi.activiti.modelsApi.getModels(opts).then((data: any) => {
             expect(data.data[0].name).equal('Metadata');
             done();
         });

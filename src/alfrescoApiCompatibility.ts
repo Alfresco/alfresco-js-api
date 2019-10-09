@@ -135,7 +135,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
         this.ecmClient = this.contentClient;
     }
 
-    _instantiateOldObjects(module, moduleCopy) {
+    _instantiateOldObjects(module: any, moduleCopy: any) {
         let classArray = Object.keys(module);
 
         classArray.forEach((currentClass) => {
@@ -147,7 +147,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
         });
     }
 
-    _stringToObject(nameClass, module) {
+    _stringToObject(nameClass: string, module: any) {
         try {
             if (typeof module[nameClass] === 'function') {
                 return new module[nameClass]();
@@ -157,7 +157,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
         }
     }
 
-    _instantiateNewObjects(module, moduleCopy) {
+    _instantiateNewObjects(module: any, moduleCopy: any) {
         let classArray = Object.keys(module);
 
         classArray.forEach((currentClass: any) => {

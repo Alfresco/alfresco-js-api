@@ -143,7 +143,7 @@ export class FormModelsApi extends BaseApi {
      * @param formId formId
      * @return Promise<FormRepresentation>
      */
-    getForms(input: string | { [key: string]: any }): Promise<FormRepresentation | ResultListDataRepresentationFormRepresentation | ResultListDataRepresentationRuntimeFormRepresentation> {
+    getForms(input: string[] | { [key: string]: any }): Promise<FormRepresentation | ResultListDataRepresentationFormRepresentation | ResultListDataRepresentationRuntimeFormRepresentation> {
         let postBody = null;
         let pathParams = {};
         let headerParams = {};

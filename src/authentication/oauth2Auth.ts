@@ -124,11 +124,15 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 if (this.config.oauth2.implicitFlow) {
                     return this.loadJwks();
                 }
+
+                return Promise.resolve({});
             })
             .then(() => {
                 if (this.config.oauth2.implicitFlow) {
                     return this.checkFragment();
                 }
+
+                return Promise.resolve({});
             });
     }
 
