@@ -239,7 +239,7 @@ export class AlfrescoApi implements EventEmitter.Emitter {
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    login(username: string, password: string): Promise<any> | void {
+    login(username: string, password: string): Promise<any> {
 
         if (username) {
             username = username.trim();
@@ -293,6 +293,8 @@ export class AlfrescoApi implements EventEmitter.Emitter {
                 });
 
                 return contentProcessPromise;
+            } else {
+                return Promise.reject('Unknown configuration');
             }
         }
     }
