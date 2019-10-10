@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import * as  _Emitter from 'event-emitter';
+import * as ee from 'event-emitter';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
@@ -25,14 +25,19 @@ import { BasicAuth } from './authentication/basicAuth';
 import { Oauth2 } from './authentication/oauth2';
 import { Response } from 'superagent';
 
-const emitter = _Emitter();
+const EventEmitter = ee;
 const superagent = superagent_;
 const process: any = {};
 
 declare const Buffer: any;
 declare const Blob: any;
 
-export class AlfrescoApiClient {
+export class AlfrescoApiClient implements ee.Emitter {
+
+    on: ee.EmitterMethod;
+    off: ee.EmitterMethod;
+    once: ee.EmitterMethod;
+    emit: (type: string, ...args: any[]) => void;
 
     storage: Storage;
     host: string;
@@ -64,12 +69,7 @@ export class AlfrescoApiClient {
         this.storage = new Storage();
         this.host = host;
 
-        this.on = emitter.on;
-        this.off = emitter.off;
-        this.once = emitter.once;
-        this.emit = emitter.emit;
-
-        _Emitter.call(this);
+        EventEmitter(this);
     }
 
     /**
@@ -405,7 +405,7 @@ export class AlfrescoApiClient {
         contextRoot?: string,
         responseType?: string, url?: string): Promise<any> {
 
-        const eventEmitter = _Emitter({});
+        const eventEmitter: any = EventEmitter({});
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
                                         contentTypes, accepts, responseType, eventEmitter, returnType);
@@ -516,7 +516,7 @@ export class AlfrescoApiClient {
         return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + (1e16).toString()).replace(/[01]/g, this.createCSRFToken);
     }
 
-    progress(event: any, eventEmitter: _Emitter.Emitter) {
+    progress(event: any, eventEmitter: ee.Emitter) {
         if (event.lengthComputable) {
             const percent = Math.round(event.loaded / event.total * 100);
 
@@ -560,7 +560,7 @@ export class AlfrescoApiClient {
         contentTypes: string[],
         accepts: string[],
         responseType: string,
-        eventEmitter: _Emitter.Emitter,
+        eventEmitter: ee.Emitter,
         returnType: string) {
         const request: any = superagent(httpMethod, url);
 
@@ -652,9 +652,4 @@ export class AlfrescoApiClient {
 
         return alfTicketFragment;
     }
-
-    on = emitter.on;
-    off = emitter.off;
-    once = emitter.once;
-    emit = emitter.emit;
 }

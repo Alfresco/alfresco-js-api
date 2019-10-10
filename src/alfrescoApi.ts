@@ -15,8 +15,7 @@
 * limitations under the License.
 */
 
-import * as  _Emitter from 'event-emitter';
-
+import * as EventEmitter from 'event-emitter';
 import { ContentAuth } from './authentication/contentAuth';
 import { ProcessAuth } from './authentication/processAuth';
 import { Oauth2Auth } from './authentication/oauth2Auth';
@@ -28,10 +27,9 @@ import { Authentication } from './authentication/authentication';
 import { AuthenticationApi } from './api/auth-rest-api/api/authentication.api';
 import { TicketEntry } from './api/auth-rest-api/model/ticketEntry';
 
-const emitter = _Emitter();
+const Emitter: any = EventEmitter;
 
-export class AlfrescoApi {
-
+export class AlfrescoApi implements EventEmitter.Emitter {
     storage: Storage;
     config: AlfrescoApiConfig;
     contentClient: ContentClient;
@@ -45,18 +43,13 @@ export class AlfrescoApi {
     processAuth: ProcessAuth;
     contentAuth: ContentAuth;
 
-    on = emitter.on;
-    off = emitter.off;
-    once = emitter.once;
-    emit = emitter.emit;
+    on: EventEmitter.EmitterMethod;
+    off: EventEmitter.EmitterMethod;
+    once: EventEmitter.EmitterMethod;
+    emit: (type: string, ...args: any[]) => void;
 
     constructor(config?: AlfrescoApiConfig) {
-        this.on = emitter.on;
-        this.off = emitter.off;
-        this.once = emitter.once;
-        this.emit = emitter.emit;
-
-        _Emitter.call(this);
+        Emitter(this);
 
         if (config) {
             this.setConfig(config);
@@ -360,7 +353,7 @@ export class AlfrescoApi {
                 });
         });
 
-        _Emitter(promise); // jshint ignore:line
+        Emitter(promise); // jshint ignore:line
 
         return promise;
     }
@@ -408,7 +401,7 @@ export class AlfrescoApi {
                 });
         });
 
-        _Emitter(promise); // jshint ignore:line
+        Emitter(promise); // jshint ignore:line
 
         return promise;
     }

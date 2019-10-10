@@ -15,13 +15,13 @@
 * limitations under the License.
 */
 
-import * as _Emitter from 'event-emitter';
+import * as ee from 'event-emitter';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { Storage } from '../storage';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 
-const Emitter = _Emitter;
+const EventEmitter: any = ee;
 
 export class ProcessAuth extends AlfrescoApiClient {
 
@@ -38,8 +38,6 @@ export class ProcessAuth extends AlfrescoApiClient {
         this.className = 'ProcessAuth';
 
         this.setConfig(config);
-
-        Emitter.call(this);
     }
 
     setConfig(config: AlfrescoApiConfig) {
@@ -124,7 +122,7 @@ export class ProcessAuth extends AlfrescoApiClient {
                 });
         });
 
-        Emitter(promise); // jshint ignore:line
+        EventEmitter(promise); // jshint ignore:line
 
         return promise;
     }
@@ -161,7 +159,7 @@ export class ProcessAuth extends AlfrescoApiClient {
                 });
         });
 
-        Emitter(promise); // jshint ignore:line
+        EventEmitter(promise); // jshint ignore:line
 
         return promise;
     }
@@ -209,5 +207,3 @@ export class ProcessAuth extends AlfrescoApiClient {
         return  this.authentications;
     }
 }
-
-Emitter(ProcessAuth.prototype); // jshint ignore:line

@@ -15,15 +15,16 @@
 * limitations under the License.
 */
 
-import * as _Emitter from 'event-emitter';
+import * as ee from 'event-emitter';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { Storage } from '../storage';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import * as _minimatch from 'minimatch';
-const minimatch = _minimatch;
 
-const Emitter = _Emitter;
+const minimatch = _minimatch;
+const EventEmitter: any = ee;
+
 declare let window: Window;
 
 export class Oauth2Auth extends AlfrescoApiClient {
@@ -52,8 +53,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.className = 'Oauth2Auth';
 
         this.setConfig(config);
-
-        Emitter.call(this);
     }
 
     static getInstance(config: AlfrescoApiConfig): Oauth2Auth {
@@ -632,7 +631,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 reject(error.error);
             });
 
-        Emitter(promise); // jshint ignore:line
+        EventEmitter(promise); // jshint ignore:line
     }
 
     /**
@@ -676,7 +675,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 });
         });
 
-        Emitter(promise); // jshint ignore:line
+        EventEmitter(promise); // jshint ignore:line
 
         return promise;
     }
