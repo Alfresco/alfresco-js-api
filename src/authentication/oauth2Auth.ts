@@ -30,7 +30,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     static instance: Oauth2Auth = null;
 
-    private iFrameTimeOut;
+    private iFrameTimeOut: any;
 
     storage: Storage;
     config: AlfrescoApiConfig;

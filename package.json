@@ -57,6 +57,7 @@
   "devDependencies": {
     "@types/chai": "^4.1.6",
     "@types/event-emitter": "^0.3.3",
+    "@types/minimatch": "^3.0.3",
     "@types/mocha": "^5.2.5",
     "@types/node": "^12.7.3",
     "@types/superagent": "3.8.2",
