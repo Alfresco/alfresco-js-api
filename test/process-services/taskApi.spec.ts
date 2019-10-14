@@ -29,7 +29,7 @@ describe('Activiti Task Api', function () {
 
         let requestNode = new TaskQueryRequestRepresentation();
 
-        this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode).then((data: any) => {
             expect(data.data[0].processDefinitionName).equal('Process Test Api');
             expect(data.data[1].processDefinitionName).equal('Process Test Api');
             expect(data.size).equal(2);
@@ -40,7 +40,7 @@ describe('Activiti Task Api', function () {
     it('get Task', function (done) {
         this.tasksMock.get200ResponseGetTask(10);
 
-        this.alfrescoJsApi.activiti.taskApi.getTask(10).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.getTask(10).then((data: any) => {
             expect(data.name).equal('Upload Document');
             done();
         });
@@ -63,11 +63,11 @@ describe('Activiti Task Api', function () {
         let requestNode = new TaskFilterRequestRepresentation();
         requestNode.appDefinitionId = 1;
 
-        this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then((data: any) => {
             expect(data.size).equal(2);
             expect(data.data[0].id).equal('7506');
             done();
-        },                                                                (error) => {
+        },                                                                (error: any) => {
             console.log(JSON.stringify(error));
         });
     });
@@ -136,7 +136,7 @@ describe('Activiti Task Api', function () {
 
         let taskId = 2518;
 
-        this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data: any) => {
             expect(data.name).equal('Metadata');
             expect(data.fields[0].name).equal('Label');
             expect(data.fields[0].fieldType).equal('ContainerRepresentation');
@@ -149,7 +149,7 @@ describe('Activiti Task Api', function () {
 
         let taskId = 2518;
 
-        this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data) => {
+        this.alfrescoJsApi.activiti.taskApi.getTaskForm(taskId).then((data: any) => {
             expect(data.name).equal('Metadata');
             expect(data.fields[0].name).equal('Label');
             expect(data.fields[0].fieldType).equal('ContainerRepresentation');
@@ -166,7 +166,7 @@ describe('Activiti Task Api', function () {
 
         this.alfrescoJsApi.activiti.taskApi.getRestFieldValuesColumn(taskId, field, column).then(() => {
             done();
-        },                                                                                       (error) => {
+        },                                                                                       (error: any) => {
             console.log(error);
         });
     });
@@ -179,7 +179,7 @@ describe('Activiti Task Api', function () {
 
         this.alfrescoJsApi.activiti.taskApi.getRestFieldValues(taskId, field).then(() => {
             done();
-        },                                                                         (error) => {
+        },                                                                         (error: any) => {
             console.log(error);
         });
     });

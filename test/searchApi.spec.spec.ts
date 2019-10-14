@@ -31,10 +31,10 @@ describe('Search', function () {
                 'query': 'select * from cmis:folder',
                 'language': 'cmis'
             }
-        }).then(function (data) {
+        }).then(function (data: any) {
             expect(data.list.entries[0].entry.name).to.be.equal('user');
             done();
-        },      function (error) {
+        },      function (error: any) {
             console.error(error);
         });
     });

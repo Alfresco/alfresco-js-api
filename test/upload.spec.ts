@@ -30,7 +30,7 @@ describe('Upload', function () {
 
             let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            this.alfrescoJsApi.upload.uploadFile(file).then(function (data) {
+            this.alfrescoJsApi.upload.uploadFile(file).then(function (data: any) {
                 expect(data.entry.isFile).to.be.equal(true);
                 expect(data.entry.name).to.be.equal('testFile.txt');
                 done();
@@ -43,7 +43,7 @@ describe('Upload', function () {
             let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             this.alfrescoJsApi.upload.uploadFile(file).then(function () {
-            },                                              function (error) {
+            },                                              function (error: any) {
                 expect(error.status).to.be.equal(409);
                 done();
             });
@@ -55,7 +55,7 @@ describe('Upload', function () {
             let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             this.alfrescoJsApi.upload.uploadFile(file, null, null, null, { autoRename: true })
-                .then(function (data) {
+                .then(function (data: any) {
                     expect(data.entry.isFile).to.be.equal(true);
                     expect(data.entry.name).to.be.equal('testFile-2.txt');
                     done();
@@ -123,12 +123,12 @@ describe('Upload', function () {
 
             let uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
 
-            uploadPromise.catch((error) => {
+            uploadPromise.catch((error: any) => {
                 console.log('error' + error);
             });
             uploadPromise.once('progress', () => {
                 done();
-            },                 (error) => {
+            },                 (error: any) => {
                 console.log('error' + error);
             });
         });

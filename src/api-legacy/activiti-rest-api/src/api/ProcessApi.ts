@@ -75,11 +75,11 @@ export class ProcessApi {
         return this.processInstancesApi.getProcessInstances(processInstancesQuery);
     }
 
-    getProcessAuditJson(processInstanceId): Promise<ProcessInstanceAuditInfoRepresentation> {
+    getProcessAuditJson(processInstanceId: string): Promise<ProcessInstanceAuditInfoRepresentation> {
         return this.processInstancesApi.getTaskAuditLog(processInstanceId);
     }
 
-    getProcessAuditPdf(processInstanceId): Promise<any> {
+    getProcessAuditPdf(processInstanceId: string): Promise<any> {
         return this.processInstancesApi.getProcessAuditPdf(processInstanceId);
     }
 

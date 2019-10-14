@@ -31,7 +31,7 @@ export class ModelJsonBpmnApi extends BaseApi {
      * @param {Integer} processModelId processModelId
      * @param {Integer} processModelHistoryId processModelHistoryId
      */
-    getHistoricEditorDisplayJsonClient(processModelId, processModelHistoryId) {
+    getHistoricEditorDisplayJsonClient(processModelId: number, processModelHistoryId: number) {
         let postBody = null;
 
         // verify the required parameter 'processModelId' is set
@@ -76,7 +76,7 @@ export class ModelJsonBpmnApi extends BaseApi {
      * Export a process definition model to a JSON
      * @param {Integer} processModelId processModelId
      */
-    getEditorDisplayJsonClient(processModelId) {
+    getEditorDisplayJsonClient(processModelId: number) {
         let postBody = null;
 
         // verify the required parameter 'processModelId' is set
@@ -114,7 +114,7 @@ export class ModelJsonBpmnApi extends BaseApi {
     /**
      * @param {String} processDefinitionId processDefinitionId
      */
-    getModelJSON(processDefinitionId) {
+    getModelJSON(processDefinitionId: string) {
         let postBody = null;
 
         if (processDefinitionId === undefined || processDefinitionId === null) {
@@ -150,7 +150,7 @@ export class ModelJsonBpmnApi extends BaseApi {
     /**
      * @param {String} processInstanceId processInstanceId
      */
-    getModelJSONForProcessDefinition(processInstanceId) {
+    getModelJSONForProcessDefinition(processInstanceId: string) {
         let postBody = null;
 
         if (processInstanceId === undefined || processInstanceId === null) {

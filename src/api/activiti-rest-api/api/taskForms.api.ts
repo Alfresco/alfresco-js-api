@@ -114,7 +114,7 @@ export class TaskFormsApi extends BaseApi {
      * @param {String} field field
      * @param {String} column column
      */
-    getRestFieldColumnValues(taskId, field, column) {
+    getRestFieldColumnValues(taskId: string, field: string, column: string) {
         let postBody = null;
 
         // verify the required parameter 'taskId' is set
@@ -280,7 +280,7 @@ export class TaskFormsApi extends BaseApi {
      * Retrieve Task Form Variables
      * @param {String} taskId taskId
      */
-    getTaskFormVariables(taskId) {
+    getTaskFormVariables(taskId: string) {
         let postBody = null;
 
         // verify the required parameter 'taskId' is set

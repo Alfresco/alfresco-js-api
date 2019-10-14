@@ -143,7 +143,7 @@ export class FormModelsApi extends BaseApi {
      * @param formId formId
      * @return Promise<FormRepresentation>
      */
-    getForms(input: any): Promise<FormRepresentation | ResultListDataRepresentationFormRepresentation | ResultListDataRepresentationRuntimeFormRepresentation> {
+    getForms(input: string[] | { [key: string]: any }): Promise<FormRepresentation | ResultListDataRepresentationFormRepresentation | ResultListDataRepresentationRuntimeFormRepresentation> {
         let postBody = null;
         let pathParams = {};
         let headerParams = {};
@@ -151,7 +151,7 @@ export class FormModelsApi extends BaseApi {
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
-        if (input instanceof String) {
+        if (typeof input === 'string') {
             let queryParams = {
                 'formId': this.apiClient.buildCollectionParam(input, 'multi')
             };
@@ -160,7 +160,7 @@ export class FormModelsApi extends BaseApi {
                 '/api/enterprise/editor/form-models/values', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
                 contentTypes, accepts, FormRepresentation);
-        } else if (input instanceof Object) {
+        } else if (typeof input === 'object') {
             input = input || {};
             let queryParams = {
                 'nameLike': input['nameLike'],

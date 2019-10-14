@@ -15,22 +15,23 @@
 * limitations under the License.
 */
 
-import * as _Emitter from 'event-emitter';
+import * as ee from 'event-emitter';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { Storage } from '../storage';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import * as _minimatch from 'minimatch';
-const minimatch = _minimatch;
 
-const Emitter = _Emitter;
-declare let window;
+const minimatch = _minimatch;
+const EventEmitter: any = ee;
+
+declare let window: Window;
 
 export class Oauth2Auth extends AlfrescoApiClient {
 
     static instance: Oauth2Auth = null;
 
-    private iFrameTimeOut;
+    private iFrameTimeOut: any;
 
     storage: Storage;
     config: AlfrescoApiConfig;
@@ -52,8 +53,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.className = 'Oauth2Auth';
 
         this.setConfig(config);
-
-        Emitter.call(this);
     }
 
     static getInstance(config: AlfrescoApiConfig): Oauth2Auth {
@@ -124,11 +123,15 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 if (this.config.oauth2.implicitFlow) {
                     return this.loadJwks();
                 }
+
+                return Promise.resolve({});
             })
             .then(() => {
                 if (this.config.oauth2.implicitFlow) {
                     return this.checkFragment();
                 }
+
+                return Promise.resolve({});
             });
     }
 
@@ -498,7 +501,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     parseQueryString(queryString: string): any {
-        const data = {};
+        const data: { [key: string]: Object } = {};
         let pairs, pair, separatorIndex, escapedKey, escapedValue, key, value;
 
         if (queryString !== null) {
@@ -628,7 +631,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 reject(error.error);
             });
 
-        Emitter(promise); // jshint ignore:line
+        EventEmitter(promise); // jshint ignore:line
     }
 
     /**
@@ -672,7 +675,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 });
         });
 
-        Emitter(promise); // jshint ignore:line
+        EventEmitter(promise); // jshint ignore:line
 
         return promise;
     }

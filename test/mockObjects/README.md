@@ -80,7 +80,7 @@ let alfrescoJsApi = new AlfrescoApi({
     hostEcm: host
 });
 
-alfrescoJsApi.login().then((data) => {
+alfrescoJsApi.login().then((data: any) => {
     expect(data).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
     done();
 });
@@ -134,7 +134,7 @@ alfrescoJsApi.login();
 
 nodeMock.get200CreationFolder();
 
-alfrescoJsApi.node.createFolder('newFolder').then(function (data) {
+alfrescoJsApi.node.createFolder('newFolder').then(function (data: any) {
     expect(data.entry.name).to.be.equal('newFolder');
     expect(data.entry.isFolder).to.be.equal(true);
     done();
@@ -184,7 +184,7 @@ uploadMock.get201CreationFile();
 
 let file = fs.createReadStream('./test/mockObjects/testFile.txt');
 
-alfrescoJsApi.upload.uploadFile(file).then(function (data) {
+alfrescoJsApi.upload.uploadFile(file).then(function (data: any) {
     expect(data.entry.isFile).to.be.equal(true);
     expect(data.entry.name).to.be.equal('testFile.txt');
     done();

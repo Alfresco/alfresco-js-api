@@ -76,7 +76,7 @@ export class UsersApi extends BaseApi {
         * @param userId userId
         * @return Promise<{}>
         */
-    getUserProfilePictureUrl(userId) {
+    getUserProfilePictureUrl(userId: string): string {
         return this.apiClient.basePath + '/app/rest/users/' + userId + '/picture';
     }
 

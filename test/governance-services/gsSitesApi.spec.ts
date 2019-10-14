@@ -21,7 +21,7 @@ describe('Governance API test', function () {
     it('should getRMSite return the RM site', function (done) {
         this.gsSitesApiMock.get200Response();
 
-        this.alfrescoJsApi.gsCore.gsSitesApi.getRMSite().then((data) => {
+        this.alfrescoJsApi.gsCore.gsSitesApi.getRMSite().then((data: any) => {
             expect(data.entry.description).to.be.equal('Records Management Description Test');
             done();
         });

@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import * as _Emitter from 'event-emitter';
+import * as ee from 'event-emitter';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
@@ -23,7 +23,7 @@ import { Storage } from '../storage';
 import { AlfrescoApi } from '../alfrescoApi';
 import { Authentication } from './authentication';
 
-const Emitter = _Emitter;
+const EventEmitter: any = ee;
 
 export class ContentAuth extends AlfrescoApiClient {
 
@@ -44,8 +44,6 @@ export class ContentAuth extends AlfrescoApiClient {
         this.setConfig(config);
 
         this.authApi = new AuthenticationApi(alfrescoApi);
-
-        Emitter.call(this);
     }
 
     setConfig(config: AlfrescoApiConfig) {
@@ -115,7 +113,7 @@ export class ContentAuth extends AlfrescoApiClient {
                 });
         });
 
-        Emitter(promise); // jshint ignore:line
+        EventEmitter(promise); // jshint ignore:line
         return promise;
     }
 
@@ -142,7 +140,7 @@ export class ContentAuth extends AlfrescoApiClient {
                 });
         });
 
-        Emitter(promise); // jshint ignore:line
+        EventEmitter(promise); // jshint ignore:line
         return promise;
     }
 
@@ -169,7 +167,7 @@ export class ContentAuth extends AlfrescoApiClient {
                 });
         });
 
-        Emitter(promise); // jshint ignore:line
+        EventEmitter(promise); // jshint ignore:line
         return promise;
     }
 
@@ -214,5 +212,3 @@ export class ContentAuth extends AlfrescoApiClient {
     }
 
 }
-
-Emitter(ContentAuth.prototype); // jshint ignore:line

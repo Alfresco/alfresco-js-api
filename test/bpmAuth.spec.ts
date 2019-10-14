@@ -37,7 +37,7 @@ describe('Bpm Auth test', function () {
                 done();
             },                             function () {
             });
-        },                                            (error) => {
+        },                                            (error: any) => {
             console.log('error' + JSON.stringify(error));
         });
     });
@@ -53,7 +53,7 @@ describe('Bpm Auth test', function () {
                 contextRootBpm: 'activiti-app'
             });
 
-            this.processAuth.login('admin', 'admin').then((data) => {
+            this.processAuth.login('admin', 'admin').then((data: any) => {
                 expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                 done();
             },                                            function () {
@@ -70,7 +70,7 @@ describe('Bpm Auth test', function () {
                 contextRootBpm: 'activiti-app'
             });
 
-            this.processAuth.login('admin', 'admin').then((data) => {
+            this.processAuth.login('admin', 'admin').then((data: any) => {
                 expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                 expect(this.processAuth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
@@ -143,7 +143,7 @@ describe('Bpm Auth test', function () {
             });
 
             this.processAuth.login('wrong', 'name').then(function () {
-            },                                           function (error) {
+            },                                           function (error: any) {
                 expect(error.status).to.be.equal(401);
                 done();
             });
@@ -254,7 +254,7 @@ describe('Bpm Auth test', function () {
             it('Ticket should be absent in the client and the resolve promise should be called', function (done) {
                 this.authBpmMock.get200ResponseLogout();
 
-                this.processAuth.logout().then((data) => {
+                this.processAuth.logout().then((data: any) => {
                     expect(this.processAuth.getTicket()).to.be.equal(null);
                     expect(data).to.be.equal('logout');
                     done();

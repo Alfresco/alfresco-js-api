@@ -26,7 +26,7 @@ describe('Rendition', function () {
     it('Get Rendition', function (done) {
         this.renditionMock.get200RenditionResponse();
 
-        this.alfrescoJsApi.core.renditionsApi.getRendition('97a29e9c-1e4f-4d9d-bb02-1ec920dda045', 'pdf').then(function (data) {
+        this.alfrescoJsApi.core.renditionsApi.getRendition('97a29e9c-1e4f-4d9d-bb02-1ec920dda045', 'pdf').then(function (data: any) {
             expect(data.entry.id).to.be.equal('pdf');
             done();
         },                                                                                                     function () {
@@ -45,7 +45,7 @@ describe('Rendition', function () {
     it('Get Renditions list for node id', function (done) {
         this.renditionMock.get200RenditionList();
 
-        this.alfrescoJsApi.core.renditionsApi.getRenditions('97a29e9c-1e4f-4d9d-bb02-1ec920dda045').then(function (data) {
+        this.alfrescoJsApi.core.renditionsApi.getRenditions('97a29e9c-1e4f-4d9d-bb02-1ec920dda045').then(function (data: any) {
             expect(data.list.pagination.count).to.be.equal(6);
             expect(data.list.entries[0].entry.id).to.be.equal('avatar');
             done();

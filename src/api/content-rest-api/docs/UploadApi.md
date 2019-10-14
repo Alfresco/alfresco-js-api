@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 <a name="uploadFile"></a>
 # **uploadFile**
->      uploadFile(fileDefinition, relativePath: string, rootFolderId: string, nodeBody: any, opts?: any): Promise<any | _Emitter> 
+>      uploadFile(fileDefinition, relativePath: string, rootFolderId: string, nodeBody: any, opts?: any): Promise<any | Emitter> 
 
 
 ### Example

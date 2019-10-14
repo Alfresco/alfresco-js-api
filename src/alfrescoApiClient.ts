@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import * as  _Emitter from 'event-emitter';
+import * as ee from 'event-emitter';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
@@ -23,15 +23,21 @@ import * as  superagent_ from 'superagent';
 import { Authentication } from './authentication/authentication';
 import { BasicAuth } from './authentication/basicAuth';
 import { Oauth2 } from './authentication/oauth2';
+import { Response } from 'superagent';
 
-const Emitter = _Emitter;
+const EventEmitter = ee;
 const superagent = superagent_;
 const process: any = {};
 
-declare const Buffer;
-declare const Blob;
+declare const Buffer: any;
+declare const Blob: any;
 
-export class AlfrescoApiClient {
+export class AlfrescoApiClient implements ee.Emitter {
+
+    on: ee.EmitterMethod;
+    off: ee.EmitterMethod;
+    once: ee.EmitterMethod;
+    emit: (type: string, ...args: any[]) => void;
 
     storage: Storage;
     host: string;
@@ -57,18 +63,13 @@ export class AlfrescoApiClient {
     /**
      * The default HTTP timeout for all API calls.
      */
-    timeout = undefined;
+    timeout: number | { deadline?: number, response?: number } = undefined;
 
     constructor(host?: string) {
         this.storage = new Storage();
         this.host = host;
 
-        this.on = (new Emitter()).on;
-        this.off = (new Emitter()).off;
-        this.once = (new Emitter()).once;
-        this.emit = (new Emitter()).emit;
-
-        Emitter.call(this);
+        EventEmitter(this);
     }
 
     /**
@@ -176,8 +177,9 @@ export class AlfrescoApiClient {
      * @param {Object.<String, Object>} params The parameters as object properties.
      * @returns {Object.<String, Object>} normalized parameters.
      */
-    normalizeParams(params: any) {
-        const newParams = {};
+    normalizeParams(params: { [key: string]: any; }): { [key: string]: any; } {
+        const newParams: { [key: string]: any; } = {};
+
         for (const key in params) {
             if (params.hasOwnProperty(key) && params[key] !== undefined && params[key] !== null) {
                 const value = params[key];
@@ -199,7 +201,7 @@ export class AlfrescoApiClient {
      * @returns {String|Array} A string representation of the supplied collection, using the specified delimiter. Returns
      * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
      */
-    buildCollectionParam(param, collectionFormat) {
+    buildCollectionParam(param: string[], collectionFormat: string): string | any[] {
         if (!param) {
             return null;
         }
@@ -221,7 +223,7 @@ export class AlfrescoApiClient {
         }
     }
 
-    isWithCredentials() {
+    isWithCredentials(): boolean {
         if (this.config) {
             return this.config.withCredentials;
         } else {
@@ -283,7 +285,7 @@ export class AlfrescoApiClient {
 
         if (returnType) {
             if (Array.isArray(data)) {
-                data = data.map( (element) => {
+                data = data.map((element) => {
                     return new returnType(element);
                 });
             } else {
@@ -402,8 +404,8 @@ export class AlfrescoApiClient {
         // @ts-ignore
         contextRoot?: string,
         responseType?: string, url?: string): Promise<any> {
-        const eventEmitter: _Emitter = {};
-        Emitter(eventEmitter); // jshint ignore:line
+
+        const eventEmitter: any = EventEmitter({});
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
                                         contentTypes, accepts, responseType, eventEmitter, returnType);
@@ -413,7 +415,7 @@ export class AlfrescoApiClient {
         }
 
         const promise: any = new Promise((resolve, reject) => {
-            request.end((error, response) => {
+            request.end((error: any, response: Response) => {
                 if (error) {
 
                     this.emit('error', error);
@@ -514,7 +516,7 @@ export class AlfrescoApiClient {
         return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + (1e16).toString()).replace(/[01]/g, this.createCSRFToken);
     }
 
-    progress(event: any, eventEmitter: _Emitter) {
+    progress(event: any, eventEmitter: ee.Emitter) {
         if (event.lengthComputable) {
             const percent = Math.round(event.loaded / event.total * 100);
 
@@ -548,8 +550,18 @@ export class AlfrescoApiClient {
         return url;
     }
 
-    buildRequest(httpMethod: string, url: string, queryParams, headerParams, formParams, bodyParam,
-                 contentTypes, accepts, responseType, eventEmitter: _Emitter, returnType) {
+    buildRequest(
+        httpMethod: string,
+        url: string,
+        queryParams: { [key: string]: any },
+        headerParams: { [key: string]: any },
+        formParams: { [key: string]: any },
+        bodyParam: string | Object,
+        contentTypes: string[],
+        accepts: string[],
+        responseType: string,
+        eventEmitter: ee.Emitter,
+        returnType: string) {
         const request: any = superagent(httpMethod, url);
 
         // apply authentications
@@ -571,7 +583,7 @@ export class AlfrescoApiClient {
 
         // add cookie for activiti
         if (this.isBpmRequest()) {
-            request._withCredentials = true;
+            request.withCredentials();
             if (this.authentications.cookie) {
                 if (this.isNodeEnv()) {
                     request.set('Cookie', this.authentications.cookie);
@@ -591,7 +603,7 @@ export class AlfrescoApiClient {
         }
 
         if (contentType === 'application/x-www-form-urlencoded') {
-            request.send(this.normalizeParams(formParams)).on('progress', (event) => {
+            request.send(this.normalizeParams(formParams)).on('progress', (event: any) => {
                 this.progress(event, eventEmitter);
             });
         } else if (contentType === 'multipart/form-data') {
@@ -600,18 +612,18 @@ export class AlfrescoApiClient {
                 if (_formParams.hasOwnProperty(key)) {
                     if (this.isFileParam(_formParams[key])) {
                         // file field
-                        request.attach(key, _formParams[key]).on('progress', (event) => {// jshint ignore:line
+                        request.attach(key, _formParams[key]).on('progress', (event: superagent_.ProgressEvent) => {// jshint ignore:line
                             this.progress(event, eventEmitter);
                         });
                     } else {
-                        request.field(key, _formParams[key]).on('progress', (event) => {// jshint ignore:line
+                        request.field(key, _formParams[key]).on('progress', (event: superagent_.ProgressEvent) => {// jshint ignore:line
                             this.progress(event, eventEmitter);
                         });
                     }
                 }
             }
         } else if (bodyParam) {
-            request.send(bodyParam).on('progress', (event) => {
+            request.send(bodyParam).on('progress', (event: any) => {
                 this.progress(event, eventEmitter);
             });
         }
@@ -640,9 +652,4 @@ export class AlfrescoApiClient {
 
         return alfTicketFragment;
     }
-
-    on = Emitter.on;
-    off = Emitter.off;
-    once = Emitter.once;
-    emit = Emitter.emit;
 }

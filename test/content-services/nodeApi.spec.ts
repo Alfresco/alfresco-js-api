@@ -25,7 +25,7 @@ describe('Node', function () {
 
         this.alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
-        },                                              (error) => {
+        },                                              (error: any) => {
             console.log('error ' + JSON.stringify(error));
         });
     });
@@ -34,7 +34,7 @@ describe('Node', function () {
         it('information for the node with identifier nodeId should return 200 if is all ok', function (done) {
             this.nodeMock.get200ResponseChildren();
 
-            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data) {
+            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data: any) {
                 expect(data.list.pagination.count).to.be.equal(5);
                 expect(data.list.entries[0].entry.name).to.be.equal('dataLists');
                 done();
@@ -46,7 +46,7 @@ describe('Node', function () {
             this.nodeMock.get404ChildrenNotExist();
 
             this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function () {
-            },                                                                                    function (error) {
+            },                                                                                    function (error: any) {
                 expect(error.status).to.be.equal(404);
                 done();
             });
@@ -55,7 +55,7 @@ describe('Node', function () {
         it('dynamic augmenting object parameters', function (done) {
             this.nodeMock.get200ResponseChildrenFutureNewPossibleValue();
 
-            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data) {
+            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data: any) {
                 expect(data.list.entries[0].entry.impossibleProperties).to.be.equal('impossibleRightValue');
                 done();
             });
@@ -68,7 +68,7 @@ describe('Node', function () {
                 expect(data.list.entries.length).to.be.equal(1);
                 expect(data.list.entries[0].entry.createdAt).to.equalTime(new Date(Date.UTC(2011, 2, 15, 17, 4, 54, 290)));
                 done();
-            },                                                                                    (error) => {
+            },                                                                                    (error: any) => {
                 console.log('error' + JSON.stringify(error));
             });
         });
@@ -88,7 +88,7 @@ describe('Node', function () {
             this.nodeMock.get404DeleteNotFound();
 
             this.alfrescoJsApi.nodes.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
-            },                                                                               function (error) {
+            },                                                                               function (error: any) {
                 expect(error.status).to.be.equal(404);
                 done();
             });
@@ -109,17 +109,17 @@ describe('Node', function () {
 
             let nodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
 
-            this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId).then(function (data) {
-                fs.writeFile('./test/grass.jpg', data, function (err) {
-                    if (err) {
-                        console.log(err);
+            this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId).then(function (data: any) {
+                fs.writeFile('./test/grass.jpg', data, function (error: any) {
+                    if (error) {
+                        console.log(error);
                         done();
                     }
                     console.log('The file was saved!');
                     done();
                 });
 
-            },                                                           function (error) {
+            },                                                           function (error: any) {
                 console.error(error);
             });
 

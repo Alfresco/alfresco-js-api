@@ -38,7 +38,7 @@ describe('Activiti Report Api', function () {
 
         this.reportsMock.get200ResponseTasksByProcessDefinitionId(reportId, processDefinitionId);
 
-        this.alfrescoJsApi.activiti.reportApi.getTasksByProcessDefinitionId(reportId, processDefinitionId).then((data) => {
+        this.alfrescoJsApi.activiti.reportApi.getTasksByProcessDefinitionId(reportId, processDefinitionId).then((data: any) => {
             expect(data.length).equal(3);
             expect(data[0]).equal('Fake Task 1');
             expect(data[1]).equal('Fake Task 2');
@@ -54,7 +54,7 @@ describe('Activiti Report Api', function () {
 
         this.reportsMock.get200ResponseReportsByParams(reportId, paramsQuery);
 
-        this.alfrescoJsApi.activiti.reportApi.getReportsByParams(reportId, paramsQuery).then((data) => {
+        this.alfrescoJsApi.activiti.reportApi.getReportsByParams(reportId, paramsQuery).then((data: any) => {
             expect(data.elements.length).equal(3);
             expect(data.elements[0].type).equal('table');
 
@@ -71,7 +71,7 @@ describe('Activiti Report Api', function () {
 
         this.reportsMock.get200ResponseProcessDefinitions();
 
-        this.alfrescoJsApi.activiti.reportApi.getProcessDefinitions().then((res) => {
+        this.alfrescoJsApi.activiti.reportApi.getProcessDefinitions().then((res: any) => {
             expect(res.length).equal(4);
             expect(res[0].id).equal('Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004');
             expect(res[0].name).equal('Fake Process Name 1');
@@ -93,7 +93,7 @@ describe('Activiti Report Api', function () {
 
         this.reportsMock.get200ResponseReportList();
 
-        this.alfrescoJsApi.activiti.reportApi.getReportList().then((res) => {
+        this.alfrescoJsApi.activiti.reportApi.getReportList().then((res: any) => {
 
             expect(res.length).equal(5);
 
@@ -121,7 +121,7 @@ describe('Activiti Report Api', function () {
         let reportId = '11013'; // String | reportId
         this.reportsMock.get200ResponseReportParams(reportId);
 
-        this.alfrescoJsApi.activiti.reportApi.getReportParams(reportId).then((res) => {
+        this.alfrescoJsApi.activiti.reportApi.getReportParams(reportId).then((res: any) => {
             let paramsDefinition = JSON.parse(res.definition);
 
             expect(res.id).equal(11013);
@@ -175,7 +175,7 @@ describe('Activiti Report Api', function () {
         };
         this.reportsMock.get200ResponseExportReport(reportId);
 
-        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParams).then(function (response) {
+        this.alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParams).then(function (response: any) {
             expect(response).not.equal(null);
             expect(response).not.equal(undefined);
             done();

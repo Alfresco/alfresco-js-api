@@ -49,7 +49,7 @@ export class AppsApi {
         return this.runtimeAppDefinitionsApi.getAppDefinitions();
     }
 
-    importAppDefinition(file) {
+    importAppDefinition(file: any) {
         return this.appDefinitionsApi.importAppDefinition(file);
     }
 

@@ -15,8 +15,7 @@
 * limitations under the License.
 */
 
-import * as  _Emitter from 'event-emitter';
-
+import * as EventEmitter from 'event-emitter';
 import { ContentAuth } from './authentication/contentAuth';
 import { ProcessAuth } from './authentication/processAuth';
 import { Oauth2Auth } from './authentication/oauth2Auth';
@@ -28,10 +27,9 @@ import { Authentication } from './authentication/authentication';
 import { AuthenticationApi } from './api/auth-rest-api/api/authentication.api';
 import { TicketEntry } from './api/auth-rest-api/model/ticketEntry';
 
-const Emitter = _Emitter;
+const Emitter: any = EventEmitter;
 
-export class AlfrescoApi {
-
+export class AlfrescoApi implements EventEmitter.Emitter {
     storage: Storage;
     config: AlfrescoApiConfig;
     contentClient: ContentClient;
@@ -45,18 +43,13 @@ export class AlfrescoApi {
     processAuth: ProcessAuth;
     contentAuth: ContentAuth;
 
-    on = Emitter.on;
-    off = Emitter.off;
-    once = Emitter.once;
-    emit = Emitter.emit;
+    on: EventEmitter.EmitterMethod;
+    off: EventEmitter.EmitterMethod;
+    once: EventEmitter.EmitterMethod;
+    emit: (type: string, ...args: any[]) => void;
 
     constructor(config?: AlfrescoApiConfig) {
-        this.on = (new Emitter()).on;
-        this.off = (new Emitter()).off;
-        this.once = (new Emitter()).once;
-        this.emit = (new Emitter()).emit;
-
-        Emitter.call(this);
+        Emitter(this);
 
         if (config) {
             this.setConfig(config);
@@ -204,12 +197,12 @@ export class AlfrescoApi {
             this.errorHandler(error);
         });
 
-        this.gsClient.on('error', (error) => {
+        this.gsClient.on('error', (error: any) => {
             this.errorHandler(error);
         });
     }
 
-    errorHandler(error) {
+    errorHandler(error: { status?: number }) {
         if (error.status === 401) {
             this.invalidateSession();
         }
@@ -300,6 +293,8 @@ export class AlfrescoApi {
                 });
 
                 return contentProcessPromise;
+            } else {
+                return Promise.reject('Unknown configuration');
             }
         }
     }
@@ -376,15 +371,15 @@ export class AlfrescoApi {
                 return this.processAuth.logout();
             } else if (this.isEcmConfiguration()) {
                 const contentPromise = this.contentAuth.logout();
-                contentPromise.then(() => {
-                    this.config.ticket = undefined;
-                },                  () => {
-                });
-
+                contentPromise.then(
+                    () => this.config.ticket = undefined,
+                    () => {}
+                );
                 return contentPromise;
             } else if (this.isEcmBpmConfiguration()) {
                 return this._logoutBPMECM();
             }
+            return Promise.resolve();
         }
     }
 
@@ -426,6 +421,8 @@ export class AlfrescoApi {
                 return this.contentAuth.isLoggedIn();
             } else if (this.isEcmBpmConfiguration()) {
                 return this.contentAuth.isLoggedIn() && this.processAuth.isLoggedIn();
+            } else {
+                return false;
             }
         }
     }

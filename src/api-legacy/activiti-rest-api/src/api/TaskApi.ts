@@ -39,6 +39,7 @@ import { TaskQueryRepresentation } from '../../../../api/activiti-rest-api/model
 import { ChecklistOrderRepresentation } from '../../../../api/activiti-rest-api/model/checklistOrderRepresentation';
 import { SaveFormRepresentation } from '../../../../api/activiti-rest-api/model/saveFormRepresentation';
 import { TaskUpdateRepresentation } from '../../../../api/activiti-rest-api/model/taskUpdateRepresentation';
+import { FormValueRepresentation } from '../../../../api/activiti-rest-api/model/formValueRepresentation';
 
 /**
  * @deprecated 3.0.0
@@ -113,11 +114,11 @@ export class TaskApi {
         return this.tasksApi.getTaskAuditLog(taskId);
     }
 
-    getTaskAuditJson(taskId) {
+    getTaskAuditJson(taskId: string) {
         return this.tasksApi.getTaskAuditLog(taskId);
     }
 
-    getTaskAuditPdf(taskId) {
+    getTaskAuditPdf(taskId: string) {
         return this.tasksApi.getTaskAuditLog(taskId);
     }
 
@@ -125,11 +126,11 @@ export class TaskApi {
         return this.contentApi.getRelatedContentForTask(taskId, opts);
     }
 
-    getRestFieldValuesColumn(taskId, field, column) {
+    getRestFieldValuesColumn(taskId: string, field: string, column: string): Promise<any> {
         return this.taskFormsApi.getRestFieldColumnValues(taskId, field, column);
     }
 
-    getRestFieldValues(taskId, field) {
+    getRestFieldValues(taskId: string, field: string): Promise<FormValueRepresentation []> {
         return this.taskFormsApi.getRestFieldValues(taskId, field);
     }
 

@@ -26,7 +26,7 @@ export class BaseApi {
         this.apiClient = alfrescoApi.searchClient;
     }
 
-    errorMessage(param, methodName) {
+    errorMessage(param: string, methodName: string) {
         return `Missing param ${param} in ${methodName}`;
     }
 }

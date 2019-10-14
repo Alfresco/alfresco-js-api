@@ -19,7 +19,7 @@ describe('Versions', function () {
     it('should get version history', function (done) {
         this.versionMock.get200Response(nodeId);
 
-        this.versionsApi.listVersionHistory(nodeId).then(function (data) {
+        this.versionsApi.listVersionHistory(nodeId).then(function (data: any) {
             let entries = data.list.entries;
             expect(entries.length).to.be.equal(2);
             expect(entries[0].entry.id).to.be.equal('2.0');
@@ -31,7 +31,7 @@ describe('Versions', function () {
     it('should revert a version', function (done) {
         this.versionMock.post201Response(nodeId, versionId);
 
-        this.versionsApi.revertVersion(nodeId, versionId, { majorVersion: true, comment: ''}).then(function (data) {
+        this.versionsApi.revertVersion(nodeId, versionId, { majorVersion: true, comment: ''}).then(function (data: any) {
             expect(data.entry.id).to.be.equal('3.0');
             done();
         },                                                                                         function () {

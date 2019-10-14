@@ -19,7 +19,7 @@ describe('Custom Model Api', function () {
 
         this.alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
-        },                                              (error) => {
+        },                                              (error: any) => {
             console.log('error ' + JSON.stringify(error));
         });
     });
@@ -32,7 +32,7 @@ describe('Custom Model Api', function () {
             this.alfrescoJsApi.core.customModelApi.getAllCustomModel().then(function () {
                     done();
                 },
-                                                                            function (error) {
+                                                                            function (error: any) {
                     console.log('error' + error);
                 });
         });
@@ -52,7 +52,7 @@ describe('Custom Model Api', function () {
 
             this.alfrescoJsApi.core.customModelApi.createCustomModel(status, description, name, namespaceUri, namespacePrefix).then(function () {
                 done();
-            },                                                                                                                      function (error) {
+            },                                                                                                                      function (error: any) {
                 console.log('error' + error);
             });
         });
@@ -67,7 +67,7 @@ describe('Custom Model Api', function () {
 
             this.alfrescoJsApi.core.customModelApi.activateCustomModel(name).then(function () {
                 done();
-            },                                                                    function (error) {
+            },                                                                    function (error: any) {
                 console.log('error' + error);
             });
         });

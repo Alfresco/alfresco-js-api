@@ -26,7 +26,7 @@ describe('Tags', function () {
     it('tags', function (done) {
         this.tagMock.get200Response();
 
-        this.alfrescoJsApi.core.tagsApi.getTags().then(function (data) {
+        this.alfrescoJsApi.core.tagsApi.getTags().then(function (data: any) {
             expect(data.list.pagination.count).to.be.equal(2);
             expect(data.list.entries[0].entry.tag).to.be.equal('tag-test-1');
             expect(data.list.entries[1].entry.tag).to.be.equal('tag-test-2');
