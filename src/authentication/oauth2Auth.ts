@@ -17,7 +17,6 @@
 
 import * as ee from 'event-emitter';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
-import { Storage } from '../storage';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import * as _minimatch from 'minimatch';
@@ -33,17 +32,13 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     private iFrameTimeOut: any;
 
-    storage: Storage;
-    config: AlfrescoApiConfig;
     hashFragmentParams: any;
-    basePath: string;
-    host: string;
     token: string;
     discovery: any;
     jwks: any;
-    authentications: Authentication = new Authentication({
+    authentications: Authentication = {
         'oauth2': { accessToken: '' }, type: 'oauth2', 'basicAuth': {}
-    });
+    };
 
     iFrameHashListener: any;
 

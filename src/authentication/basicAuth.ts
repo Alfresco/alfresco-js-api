@@ -15,8 +15,8 @@
 * limitations under the License.
 */
 
-export class BasicAuth {
-    username: string;
-    password: string;
-    ticket: string;
+export interface BasicAuth {
+    username?: string;
+    password?: string;
+    ticket?: string;
 }

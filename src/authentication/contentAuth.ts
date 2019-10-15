@@ -19,7 +19,6 @@ import * as ee from 'event-emitter';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
-import { Storage } from '../storage';
 import { AlfrescoApi } from '../alfrescoApi';
 import { Authentication } from './authentication';
 
@@ -27,14 +26,9 @@ const EventEmitter: any = ee;
 
 export class ContentAuth extends AlfrescoApiClient {
 
-    config: AlfrescoApiConfig;
-    basePath: string;
     ticketStorageLabel: string;
-    storage: Storage;
     ticket: string;
-    static authentications: Authentication = new Authentication({
-        'basicAuth': { ticket: '' }, type: 'basic'
-    });
+
     authApi: AuthenticationApi;
 
     constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {

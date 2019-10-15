@@ -17,7 +17,6 @@
 
 import * as ee from 'event-emitter';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
-import { Storage } from '../storage';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 
@@ -25,13 +24,11 @@ const EventEmitter: any = ee;
 
 export class ProcessAuth extends AlfrescoApiClient {
 
-    config: AlfrescoApiConfig;
-    basePath: string;
-    storage: Storage;
     ticket: string;
-    authentications: Authentication = new Authentication({
+
+    authentications: Authentication = {
         'basicAuth': { ticket: '' }, type: 'activiti'
-    });
+    };
 
     constructor(config: AlfrescoApiConfig) {
         super();

@@ -21,11 +21,7 @@ import { Authentication } from './authentication/authentication';
 
 export class ProcessClient extends AlfrescoApiClient {
 
-    config: AlfrescoApiConfig;
     className = 'ProcessClient';
-    authentications: Authentication;
-    host: string;
-    basePath: string;
 
     constructor(config: AlfrescoApiConfig) {
         super();

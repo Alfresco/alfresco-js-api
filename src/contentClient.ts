@@ -21,12 +21,8 @@ import { Authentication } from './authentication/authentication';
 
 export class ContentClient extends AlfrescoApiClient {
 
-    config: AlfrescoApiConfig;
     className = 'ContentClient';
     servicePath: string;
-    host: string;
-    basePath: string;
-    authentications: Authentication;
 
     constructor(config: AlfrescoApiConfig, servicePath: string) {
         super();

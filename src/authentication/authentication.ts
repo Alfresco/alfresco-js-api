@@ -18,16 +18,9 @@
 import { BasicAuth } from './basicAuth';
 import { Oauth2 } from './oauth2';
 
-export class Authentication {
-
-    basicAuth: BasicAuth;
-    oauth2: Oauth2;
+export interface Authentication {
+    basicAuth?: BasicAuth;
+    oauth2?: Oauth2;
     cookie?: string;
-    type: string;
-
-    constructor(input?: any) {
-
-        Object.assign(this, input);
-    }
-
+    type?: string;
 }

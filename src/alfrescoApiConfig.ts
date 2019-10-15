@@ -46,6 +46,6 @@ export class AlfrescoApiConfig {
         this.disableCsrf = input.disableCsrf ? input.disableCsrf : false;
         this.domainPrefix = input.domainPrefix ? input.domainPrefix : '';
         this.withCredentials = input.withCredentials ? input.withCredentials : false;
-        this.oauth2 = input.oauth2 ? new Oauth2Config(input.oauth2) : undefined;
+        this.oauth2 = input.oauth2;
     }
 }
