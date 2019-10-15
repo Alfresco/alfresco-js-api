@@ -32,9 +32,12 @@ export class ContentAuth extends AlfrescoApiClient {
     ticketStorageLabel: string;
     storage: Storage;
     ticket: string;
-    static authentications: Authentication = new Authentication({
-        'basicAuth': { ticket: '' }, type: 'basic'
-    });
+
+    static authentications: Authentication = {
+        basicAuth: { ticket: '' },
+        type: 'basic'
+    };
+
     authApi: AuthenticationApi;
 
     constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {

@@ -52,9 +52,10 @@ export class AlfrescoApiClient implements ee.Emitter {
     /**
      * The authentication methods to be included for all API calls.
      */
-    authentications: Authentication = new Authentication({
-        'basicAuth': {}, type: 'basic'
-    });
+    authentications: Authentication = {
+        basicAuth: {},
+        type: 'basic'
+    };
     /**
      * The default HTTP headers to be included for all API calls.
      */

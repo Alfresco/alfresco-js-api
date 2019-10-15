@@ -15,14 +15,7 @@
 * limitations under the License.
 */
 
-export class Oauth2 {
-
-    refreshToken: string;
-    accessToken: string;
-
-    constructor(input?: any) {
-
-        Object.assign(this, input);
-    }
-
+export interface Oauth2 {
+    refreshToken?: string;
+    accessToken?: string;
 }

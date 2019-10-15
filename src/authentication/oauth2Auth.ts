@@ -41,9 +41,9 @@ export class Oauth2Auth extends AlfrescoApiClient {
     token: string;
     discovery: any;
     jwks: any;
-    authentications: Authentication = new Authentication({
+    authentications: Authentication = {
         'oauth2': { accessToken: '' }, type: 'oauth2', 'basicAuth': {}
-    });
+    };
 
     iFrameHashListener: any;
 

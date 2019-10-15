@@ -29,9 +29,9 @@ export class ProcessAuth extends AlfrescoApiClient {
     basePath: string;
     storage: Storage;
     ticket: string;
-    authentications: Authentication = new Authentication({
+    authentications: Authentication = {
         'basicAuth': { ticket: '' }, type: 'activiti'
-    });
+    };
 
     constructor(config: AlfrescoApiConfig) {
         super();

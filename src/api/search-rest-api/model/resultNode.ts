@@ -33,10 +33,10 @@ The character . must not be used at the end of the name.
     isFolder: boolean;
     isFile: boolean;
     isLocked?: boolean;
-    modifiedAt: Date;
-    modifiedByUser: UserInfo;
-    createdAt: Date;
-    createdByUser: UserInfo;
+    modifiedAt?: Date;
+    modifiedByUser?: UserInfo;
+    createdAt?: Date;
+    createdByUser?: UserInfo;
     parentId?: string;
     isLink?: boolean;
     content?: ContentInfo;
