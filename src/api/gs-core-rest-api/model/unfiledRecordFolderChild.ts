@@ -31,10 +31,10 @@ The character . must not be used at the end of the name.
     nodeType: string;
     isUnfiledRecordFolder: boolean;
     isRecord: boolean;
-    modifiedAt: Date;
-    modifiedByUser: UserInfo;
-    createdAt: Date;
-    createdByUser: UserInfo;
+    modifiedAt?: Date;
+    modifiedByUser?: UserInfo;
+    createdAt?: Date;
+    createdByUser?: UserInfo;
     aspectNames?: string[];
     properties?: any;
     allowableOperations?: string[];

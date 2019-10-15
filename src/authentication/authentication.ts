@@ -19,7 +19,7 @@ import { BasicAuth } from './basicAuth';
 import { Oauth2 } from './oauth2';
 
 export interface Authentication {
-    basicAuth: BasicAuth;
+    basicAuth?: BasicAuth;
     oauth2?: Oauth2;
     cookie?: string;
     type?: string;
