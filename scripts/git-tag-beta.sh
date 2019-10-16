@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=$(npm view @alfresco/adf-core@beta version)
+VERSION=$(npm view @alfresco/js-api@beta version)
 
 echo "git tag -a ${VERSION} -m ${VERSION}"
 git config --local user.name "alfresco-build"
