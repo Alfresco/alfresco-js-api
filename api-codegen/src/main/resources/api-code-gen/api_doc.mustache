@@ -11,7 +11,7 @@ Method | HTTP request | Description
 {{#operations}}
 {{#operation}}
 <a name="{{operationId}}"></a>
-# **{{operationId}}**
+## {{operationId}}
 > {{#returnType}}{{&returnType}} {{/returnType}}{{operationId}}({{#allParams}}{{#required}}{{{paramName}}}{{#vendorExtensions.x-codegen-hasMoreRequired}}, {{/vendorExtensions.x-codegen-hasMoreRequired}}{{/required}}{{/allParams}}{{#hasOptionalParams}}{{#vendorExtensions.x-codegen-hasRequiredParams}}, {{/vendorExtensions.x-codegen-hasRequiredParams}}opts{{/hasOptionalParams}})
 
 {{&summary}}{{#notes}}
@@ -19,20 +19,19 @@ Method | HTTP request | Description
 {{&notes}}{{/notes}}
 
 ### Example
-```javascript
-import {{{classname}}} from '{{{classname}}}';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, {{classname}}} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let {{instanceClassname}} = new {{{classname}}}(this.alfrescoApi);{{#hasParams}}
+const {{instanceClassname}} = new {{{classname}}}(alfrescoApi);{{#hasParams}}
 {{#vendorExtensions.x-codegen-hasRequiredParams}}{{#allParams}}{{#required}}
-let {{{paramName}}} = {{{example}}}; /*  {{{&dataType}}} | {{&description}} */
+const {{{paramName}}} = {{{example}}}; /*  {{{&dataType}}} | {{&description}} */
 {{/required}}{{/allParams}}{{/vendorExtensions.x-codegen-hasRequiredParams}}{{#hasOptionalParams}}
-let opts = { {{#allParams}}{{^required}}
+const opts = { {{#allParams}}{{^required}}
   '{{{paramName}}}': {{{example}}}{{#vendorExtensions.x-codegen-hasMoreOptional}},{{/vendorExtensions.x-codegen-hasMoreOptional}} /* {{{&dataType}}} | {{&description}} */{{/required}}{{/allParams}}
 };{{/hasOptionalParams}}{{/hasParams}}
 
@@ -41,7 +40,6 @@ let opts = { {{#allParams}}{{^required}}
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
