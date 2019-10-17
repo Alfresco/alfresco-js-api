@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 <a name="getRepositoryInformation"></a>
-# **getRepositoryInformation**
+## getRepositoryInformation
 > DiscoveryEntry getRepositoryInformation()
 
 Get repository information
@@ -19,23 +19,21 @@ Retrieves the capabilities and detailed version information from the repository.
 
 
 ### Example
-```javascript
-import DiscoveryApi from 'DiscoveryApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, DiscoveryApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let discoveryApi = new DiscoveryApi(this.alfrescoApi);
+const discoveryApi = new DiscoveryApi(alfrescoApi);
 
 discoveryApi.getRepositoryInformation().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
