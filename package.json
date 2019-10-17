@@ -55,12 +55,12 @@
     "minimatch": "3.0.4"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.6",
+    "@types/chai": "^4.2.3",
     "@types/event-emitter": "^0.3.3",
     "@types/minimatch": "^3.0.3",
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^12.7.3",
-    "@types/superagent": "3.8.2",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.11.1",
+    "@types/superagent": "^3.8.2",
     "adf-tslint-rules": "0.0.6",
     "bundlesize": "^0.18.0",
     "chai": "4.2.0",
@@ -89,7 +89,7 @@
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "ts-node": "^7.0.1",
-    "tslint": "^5.7.0",
+    "tslint": "^5.20.0",
     "typescript": "^3.6.2",
     "typescript-formatter": "^7.2.2"
   },
