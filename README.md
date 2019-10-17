@@ -1,6 +1,5 @@
 # Alfresco JavaScript API Client
 
-
 <p>
   <a title='Gitter chat' href="https://gitter.im/Alfresco/api/ng2-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
      <img src='https://badges.gitter.im/Alfresco/api/ng2-components.svg'  alt='Gitter chat' />
@@ -85,21 +84,24 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 
 # Prerequisites
 
-To correctly use the alfresco js api the minimal supported version are:
+The minimal supported versions are:
 
-- 5.2.a-EA Alfresco Platform Repository (version [5.2.a-EA](https://wiki.alfresco.com/wiki/Community_file_list_201606-EA) or newer)
-- 1.5 Activiti
+- Alfresco Platform Repository: version [5.2.a-EA](https://wiki.alfresco.com/wiki/Community_file_list_201606-EA) or newer
+- Activiti: 1.5
+- Node.js ([Long Term Support](https://nodejs.org/en/) version)
 
-# Node
-To correctly use the api/js-api in node check that on your machine is running Node version 5.0.0 or higher.
+# Installing
 
-# Install
-
-
-Installer for browser versions:
+Using NPM:
 
 ```sh
-npm install --save @alfresco/js-api
+npm install @alfresco/js-api
+```
+
+Using Yarn:
+
+```sh
+yarn add @alfresco/js-api
 ```
 
 # Authentication JS-API
@@ -124,30 +126,37 @@ withCredentials| (Optional configuration for SSO, requires CORS on ECM) |false
 ### Login with Username and Password BPM and ECM
 
 #### Example
-```javascript
-this.alfrescoApi = new AlfrescoApi({ provider:'ALL' });
-        
-this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
-    console.log('API called successfully Login in  BPM and ECM performed ');
-}, function (error) {
-    console.error(error);
-});
-```
 
+```javascript
+const alfrescoApi = new AlfrescoApi({ provider: 'ALL' });
+
+alfrescoJsApi.login('admin', 'admin').then(
+    data => {
+        console.log('API called successfully Login in  BPM and ECM performed ');
+    },
+    error => {
+        console.error(error);
+    }
+);
+```
 
 ### Login with Username and Password ECM
 
 #### Example
+
 ```javascript
-this.alfrescoJsApi = new AlfrescoApi();
+const alfrescoJsApi = new AlfrescoApi();
 
-this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
-    console.log('API called successfully Login ticket:' + data);
-}, function (error) {
-    console.error(error);
-});
+alfrescoJsApi.login('admin', 'admin').then(
+    data => {
+        console.log('API called successfully Login ticket:' + data);
+    },
+    error => {
+        console.error(error);
+    }
+);
 
-//The output will be: API called successfully Login ticket: TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1
+// The output will be: API called successfully Login ticket: TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1
 
 ```
 
@@ -155,20 +164,23 @@ this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
 
 If you already know thw ticket when you invoke the constructor you can pass it as parameter in the constructor otherwise you can call the login with ticket that will validate the ticket against the server
 
-
 #### Login with ticket ECM
 
 This authentication validate also the ticket against the server
 
 ##### Example
-```javascript
-let ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
-this.alfrescoJsApi.loginTicket(ticket).then(function (data) {
-             console.log('valid ticket you are logged in');
-         }, function (error) {
-             console.error(error);
-         });
+```javascript
+const ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+
+alfrescoJsApi.loginTicket(ticket).then(
+    data => {
+        console.log('valid ticket you are logged in');
+    },
+    error => {
+        console.error(error);
+    }
+);
 ```
 
 #### Login with ticket ECM/BPM as parameter in the constructor
@@ -176,31 +188,47 @@ this.alfrescoJsApi.loginTicket(ticket).then(function (data) {
 With this authentication the ticket is not validated against the server
 
 ##### Example
+
 ```javascript
 
-//Login ticket ECM
-this.alfrescoApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',  hostEcm:'http://127.0.0.1:8080'});
+// Login with ECM ticket
+const alfrescoApi = new AlfrescoApi({
+    ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', 
+    hostEcm:'http://127.0.0.1:8080'
+});
 
-//Login ticket BPM
-this.alfrescoApi = new AlfrescoApi({ ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostBpm:'http://127.0.0.1:9999'});
+// Login with BPM ticket
+const alfrescoApi = new AlfrescoApi({
+    ticketBpm: 'Basic YWRtaW46YWRtaW4=',  
+    hostBpm:'http://127.0.0.1:9999'
+});
 
-//Login ticket ECM and BPM
-this.alfrescoApi = new AlfrescoApi({ ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', ticketBpm: 'Basic YWRtaW46YWRtaW4=',  hostEcm:'http://127.0.0.1:8080',  hostBpm:'http://127.0.0.1:9999'});
+// Login with ECM and BPM tickets
+const alfrescoApi = new AlfrescoApi({
+    ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
+    ticketBpm: 'Basic YWRtaW46YWRtaW4=',  
+    hostEcm:'http://127.0.0.1:8080',  
+    hostBpm:'http://127.0.0.1:9999'
+});
 ```
 
 ### Login with Username and Password BPM
 
 #### Example
+
 ```javascript
-this.alfrescoApi = new AlfrescoApi({ provider:'BPM' });
+const alfrescoApi = new AlfrescoApi({ provider:'BPM' });
 
-this.alfrescoJsApi.login('admin', 'admin').then(function () {
-    console.log('API called successfully Login in Activiti BPM performed ');
-}, function (error) {
-    console.error(error);
-});
-
+alfrescoJsApi.login('admin', 'admin').then(
+    () => {
+        console.log('API called successfully Login in Activiti BPM performed ');
+    },
+    error => {
+        console.error(error);
+    }
+);
 ```
+
 ### Login with OAUTH2 Alfresco authorization server
 
 #### Implicit Flow
@@ -220,7 +248,7 @@ redirectUri|  url to be redirect after login| null|
 redirectLogout|  url to be redirect after logout optional, if is nor present the redirectUri will be used| null|
 refreshTokenTimeout|  millisecond value, after how many millisecond youw ant refresh the token| 30000|
 redirectSilentIframeUri|  url to be redirect after silent refresh login| /assets/silent-refresh.html |
-silentLogin|  direct execute the implicit login without the need to call this.alfrescoJsApi.implicitLogin() method|   false|
+silentLogin|  direct execute the implicit login without the need to call AlfrescoJsApi.implicitLogin() method|   false|
 publicUrls | list of public urls that don't need authorization. It is possible too pass absolute paths and string patterns that are valid for [minimatch](https://github.com/isaacs/minimatch#readme) |
 
 The api/js-api will automatically redirect you to the login page anf refresh the token if necessary
@@ -235,73 +263,72 @@ token_issued| triggered when a new token is issued|  |
 
 The api/js-api will automatically redirect you to the login page anf refresh the token if necessary
 
-
 ##### Example
 
 ```javascript
-this.alfrescoApi = new AlfrescoApi({
-        oauth2: {
-            host: 'HOST_OAUTH2_SERVER',
-            clientId: 'YOUR_CLIENT_ID',
-            secret: 'SECRET',
-            scope: 'openid',
-            implicitFlow: true,
-            redirectUri: 'YOUR_HOME_APP_URL',
-            silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value
-        },
-        authType: 'OAUTH',
-        provider: 'ALL'
+const alfrescoApi = new AlfrescoApi({
+    oauth2: {
+        host: 'HOST_OAUTH2_SERVER',
+        clientId: 'YOUR_CLIENT_ID',
+        secret: 'SECRET',
+        scope: 'openid',
+        implicitFlow: true,
+        redirectUri: 'YOUR_HOME_APP_URL',
+        silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value
+    },
+    authType: 'OAUTH',
+    provider: 'ALL'
 });
 
-this.alfrescoJsApi.implicitLogin();
-
+alfrescoJsApi.implicitLogin();
 ```
 
 ##### Example skip login form (implicitFlow)
 
 ```javascript
-this.alfrescoApi = new AlfrescoApi({
-        oauth2: {
-            host: 'HOST_OAUTH2_SERVER',
-            clientId: 'YOUR_CLIENT_ID',
-            secret: 'SECRET',
-            scope: 'openid',
-            implicitFlow: true,
-            redirectUri: 'YOUR_HOME_APP_URL',
-            silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value,
-            silentLogin: true,
-            publicUrls: ['PUBLIC_URL', 'URL_PATTERN']
-        },
-        authType: 'OAUTH',
-        provider: 'ALL'
+const alfrescoApi = new AlfrescoApi({
+    oauth2: {
+        host: 'HOST_OAUTH2_SERVER',
+        clientId: 'YOUR_CLIENT_ID',
+        secret: 'SECRET',
+        scope: 'openid',
+        implicitFlow: true,
+        redirectUri: 'YOUR_HOME_APP_URL',
+        silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value,
+        silentLogin: true,
+        publicUrls: ['PUBLIC_URL', 'URL_PATTERN']
+    },
+    authType: 'OAUTH',
+    provider: 'ALL'
 });
-
 ```
-
 
 #### Password Flow
 
 If your auth endpoint is different from the standard one "/oauth/token" you can override it through the property authPath
 
 ##### Example
-```javascript
-this.alfrescoApi = new AlfrescoApi({
-        oauth2: {
-            host: 'HOST_OAUTH2_SERVER',
-            clientId: 'YOUR_CLIENT_ID',
-            secret: 'SECRET',
-            authPath:'my-custom-auth-endpoint/token'
-        },
-        authType: 'OAUTH',
-        provider: 'ALL'
-    });
 
-this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
-   console.log('API called successfully Login in with authorization server performed ');
-}, function (error) {
-   console.error(error);
+```javascript
+const alfrescoApi = new AlfrescoApi({
+    oauth2: {
+        host: 'HOST_OAUTH2_SERVER',
+        clientId: 'YOUR_CLIENT_ID',
+        secret: 'SECRET',
+        authPath:'my-custom-auth-endpoint/token'
+    },
+    authType: 'OAUTH',
+    provider: 'ALL'
 });
 
+alfrescoJsApi.login('admin', 'admin').then(
+    data => {
+        console.log('API called successfully Login in with authorization server performed');
+    },
+    error => {
+        console.error(error);
+    }
+);
 ```
 
 After the login if you want refresh your token you can use this call
@@ -309,11 +336,14 @@ After the login if you want refresh your token you can use this call
 ##### Example
 
 ```javascript
-this.alfrescoJsApi.refreshToken().then(function (data) {
-    console.log('Your token has been refreshed');
- }, function (error) {
-    console.error(error);
- });
+alfrescoJsApi.refreshToken().then(
+    data => {
+        console.log('Your token has been refreshed');
+    },
+    error => {
+        console.error(error);
+    }
+);
 ```
 
 ## Logout
@@ -324,12 +354,14 @@ logout()
 
 ```javascript
 
-this.alfrescoJsApi.logout().then(function (data) {
-    console.log('Successfully Logout');
-}, function (error) {
-    console.error('Possible ticket already expired');
-});
-
+alfrescoJsApi.logout().then(
+    data => {
+        console.log('Successfully Logout');
+    }, 
+    error => {
+        console.error('Possible ticket already expired');
+    }
+);
 ```
 
 ## isLoggedIn
@@ -342,107 +374,124 @@ isLoggedIn()
 
 ```javascript
 
-let isLoggedIn = this.alfrescoJsApi.isLoggedIn();
+const isLoggedIn = alfrescoJsApi.isLoggedIn();
 
 if (isLoggedIn) {
     console.log('You are logged in');
 } else {
     console.log('You are not logged in');
 }
-
 ```
+
 ## Get tickets
 
-getTicketEcm()
+### getTicketEcm()
 
->After the log in you can retrieve you ECM ticket
+After the log in you can retrieve you ECM ticket
 
 ```javascript
- let ecmTicket = this.alfrescoJsApi.getTicketEcm() ;
- console.log('This is your  ECM ticket  ' + ecmTicket);
+const ecmTicket = alfrescoJsApi.getTicketEcm() ;
 
+console.log('This is your  ECM ticket  ' + ecmTicket);
 ```
 
-getTicketBpm()
+### getTicketBpm()
 
->After the log in you can retrieve you BPM ticket
+After the log in you can retrieve you BPM ticket
 
 ```javascript
+const bpmTicket  = alfrescoJsApi.getTicketBpm();
 
- let bpmTicket  = this.alfrescoJsApi.getTicketBpm();
- console.log('This is your BPM ticket ' + bpmTicket);
+console.log('This is your BPM ticket ' + bpmTicket);
 ```
 
 ## Events login/logout
 
->  The login/logout are also an EventEmitter which you can register to listen to any of the following event types:
-* unauthorized (If this event is triggered a call to the Api was unauthorized)
-* success (If this event is triggered the login was success you can use this event instead the login promise)
-* logout (If this event is triggered the client is successfully logout)
+The login/logout are also an EventEmitter which you can register to listen to any of the following event types:
+
+- unauthorized (If this event is triggered a call to the Api was unauthorized)
+- success (If this event is triggered the login was success you can use this event > instead the login promise)
+- logout (If this event is triggered the client is successfully logout)
 
 ### Example
 
 ```javascript
 
-this.alfrescoJsApi.login('admin', 'admin').on('unauthorized', function(){
-    console.log('You are unauthorized you can use this event to redirect to login');
-});
+alfrescoJsApi.login('admin', 'admin')
+    .on('unauthorized', () => {
+        console.log('You are unauthorized you can use this event to redirect to login');
+    });
 
-this.alfrescoJsApi.login('admin', 'admin').on('success', function(){
-    console.log('Success Login');
-});
+alfrescoJsApi.login('admin', 'admin')
+    .on('success', () => {
+        console.log('Success Login');
+    });
 
-this.alfrescoJsApi.logout().on('logout', function(){
-    console.log('Successfully Logout');
-});
+alfrescoJsApi.logout()
+    .on('logout', () => {
+        console.log('Successfully Logout');
+    });
 ```
 
 # Custom Endpoint
 
 Content service and process service has two different clients:
 
--  this.alfrescoJsApi.ProcessClient
--  this.alfrescoJsApi.ContentClient
+- AlfrescoJsApi.ProcessClient
+- AlfrescoJsApi.ContentClient
 
 Both client expose a method ***callApi**
 
-
 ```javascript
-    callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any, contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any>;
+callApi(
+    path: string,
+    httpMethod: string,
+    pathParams?: any,
+    queryParams?: any,
+    headerParams?: any,
+    formParams?: any,
+    bodyParam?: any,
+    contentTypes?: string[],
+    accepts?: string[],
+    returnType?: any,
+    contextRoot?: string,
+    responseType?: string
+): Promise<any>;
 ```
 
-If you want call your custom rest point in one of those two service use the corrispondin client. 
+If you want call your custom rest point in one of those two service use the corresponding client.
 
 ## Example
 
 ```javascript
-
-    this.alfrescoJsApi.bpmClient.callApi(
-        '/api/enterprise/app-version', 'GET',
-        {}, {}, {}, {}, {}, ['application/json'], ['application/json'], {'String': 'String'}
-    )
-
+alfrescoJsApi.bpmClient.callApi(
+    '/api/enterprise/app-version', 'GET',
+    {}, {}, {}, {}, {}, ['application/json'], ['application/json'], {'String': 'String'}
+)
  ```
 
- # Error Events
- 
- The api/js-api has an error handler event where you can subscribe
- 
- ## Example
- ```javascript
-     this.alfrescoJsApi.on('error', (error) => {
-         console.log(error)
-     })
- ```
- 
+# Error Events
+
+The api/js-api has an error handler event where you can subscribe
+
+## Example
+
+```javascript
+alfrescoJsApi.on('error', error => {
+    console.log(error);
+});
+```
+
 # ECM Example
 
-A complete list of all the ECM methods is available here : [Content API](/src/api/content-rest-api) here you can find some common [Example](/ecm-example.md) 
+A complete list of all the ECM methods is available here : [Content API](/src/api/content-rest-api) here you can find some common [Example](/ecm-example.md).
 
 # BPM Example
-A complete list of all the BPM methods is available here : [APS 2.X API](/src/api/activiti-rest-api) here you can find some common [Example](/bpm-example.md) 
+
+A complete list of all the BPM methods is available here : [APS 2.X API](/src/api/activiti-rest-api) here you can find some common [Example](/bpm-example.md).
 
 # Legacy Endpoint porting (ver 2.x.x)
+
 Since version 3.0.0 in order to support tree shaking the JS-API has been radically redesigned.
 
 In order to help the porting to the new JS-APi version of the old project the previous syntax even if is deprecated is still supported in the compatibility layer.
@@ -452,7 +501,7 @@ In order to help the porting to the new JS-APi version of the old project the pr
 ```javascript
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 
-this.alfrescoJsApi = new AlfrescoApi({
+const alfrescoJsApi = new AlfrescoApi({
         oauth2: {
             host: 'HOST_OAUTH2_SERVER',
             clientId: 'YOUR_CLIENT_ID',
@@ -463,27 +512,37 @@ this.alfrescoJsApi = new AlfrescoApi({
         provider: 'ALL'
     });
 
-this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
-   console.log('API called successfully Login in with authorization server performed ');
-}, function (error) {
-   console.error(error);
-});
+alfrescoJsApi.login('admin', 'admin').then(
+    data => {
+        console.log('API called successfully Login in with authorization server performed ');
+    },
+    error => {
+        console.error(error);
+    }
+);
 
-this.alfrescoJsApi.nodes.getNodeInfo(fileOrFolderId).then(function (data) {
-    console.log('This is the name' + data.name );
-}, function (error) {
-    console.log('This node does not exist');
-});
-
+alfrescoJsApi.nodes
+    .getNodeInfo(fileOrFolderId)
+    .then(
+        data => {
+            console.log('This is the name' + data.name );
+        }, 
+        error => {
+            console.log('This node does not exist');
+        }
+    );
 ```
+
 # Development
 
-* To run the build
+To run the build
 
-    ```$ npm run build_all```
+```sh
+npm run build_all
+```
 
-* To run the test
+To run the test
 
-    ```$ npm run test```
-
-
+```sh
+npm run test
+```
