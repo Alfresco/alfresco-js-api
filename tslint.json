@@ -1,5 +1,6 @@
 {
     "rulesDirectory": [
+        "node_modules/codelyzer",
         "node_modules/adf-tslint-rules"
     ],
     "rules": {
