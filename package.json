@@ -94,28 +94,10 @@
     "typescript-formatter": "^7.2.2"
   },
   "license": "Apache-2.0",
-  "contributors": [
-    {
-      "name": "Will Abson",
-      "email": "will.abson@alfresco.com"
-    },
-    {
-      "name": "Eugenio Romano",
-      "email": "eugenio.romano@alfresco.com"
-    },
-    {
-      "name": "Denys Vuika",
-      "email": "denys.vuika@alfresco.com"
-    },
-    {
-      "name": "Mario Romano",
-      "email": "mario.romano@alfresco.com"
-    }
-  ],
   "bundlesize": [
     {
-      "path": "./dist/global/alfresco-js-api.umd.js",
-      "maxSize": "88 kb"
+      "path": "./dist/global/alfresco-js-api.umd.min.js",
+      "maxSize": "55 kB"
     }
   ],
   "keywords": [
