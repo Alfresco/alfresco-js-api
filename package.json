@@ -87,7 +87,7 @@
     "rollup-plugin-inject": "2.0.0",
     "rollup-plugin-node-resolve": "2.0.0",
     "shx": "^0.3.2",
-    "sinon": "^1.17.3",
+    "sinon": "^4.5.0",
     "sinon-chai": "^2.8.0",
     "ts-node": "^8.4.1",
     "tslint": "^5.20.0",
