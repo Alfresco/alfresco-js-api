@@ -60,6 +60,7 @@ jobs:
           script: ./scripts/publish.sh
 
         - stage: Release beta tag
+          if: branch = master AND type = push OR (tag =~ .*beta.*)
           script: ./scripts/git-tag-beta.sh
 
         - stage: trigger ADF
