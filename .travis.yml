@@ -37,22 +37,53 @@ jobs:
         - stage: Lint
           name: Lint
           script: ./scripts/lint.sh
+
         - stage: Build
           name: Build
           script: ./scripts/build.sh || exit 1
+
         - stage: Test
           name: Test
           script: npm run test || exit 1
+
         - stage: Perfomance
           name: Perfomance
           script: ./scripts/test-performance.sh || exit 1
+
         - stage: Integration
           name: Integration
           script: ./scripts/test-integration.sh || exit 1
+
+        - stage: Release
+          name: Release
+          if: (type = push OR type = cron) AND tag IS blank
+          script: ./scripts/publish.sh
+
+        - stage: Release beta tag
+          if: branch = master AND type = push OR (tag =~ .*beta.*)
+          script: ./scripts/git-tag-beta.sh
+
         - stage: trigger ADF
           name: trigger ADF
           if: (branch = master OR branch = development OR (tag =~ .*beta.*)) AND type = push
           script: ./scripts/trigger-travis.sh --branch $TRAVIS_BRANCH Alfresco alfresco-ng2-components $TRAVIS_ACCESS_TOKEN
+
+before_deploy:
+  # Set up git user name and tag this commit
+  - git config --local user.name "Alfresco"
+  - export TRAVIS_TAG=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
+  - echo "Create tag:" $TRAVIS_TAG
+  - git tag $TRAVIS_TAG
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  name: $TRAVIS_TAG
+  body: "Add the release note"
+  skip_cleanup: true
+  on:
+    branch: master
+
 
 after_success:
   - npm run coverage --force
