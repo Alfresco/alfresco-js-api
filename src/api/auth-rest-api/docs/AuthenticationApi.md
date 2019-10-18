@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 <a name="createTicket"></a>
-# **createTicket**
+## createTicket
 > TicketEntry createTicket(ticketBodyCreate)
 
 Create ticket (login)
@@ -34,16 +34,15 @@ For example using Javascript:
 
 
 ### Example
-```javascript
-import AuthenticationApi from 'AuthenticationApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, AuthenticationApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let authenticationApi = new AuthenticationApi(this.alfrescoApi);
+const authenticationApi = new AuthenticationApi(alfrescoApi);
 
 
 authenticationApi.createTicket(ticketBodyCreate).then((data) => {
@@ -51,7 +50,6 @@ authenticationApi.createTicket(ticketBodyCreate).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -65,7 +63,7 @@ Name | Type | Description  | Notes
 [**TicketEntry**](TicketEntry.md)
 
 <a name="deleteTicket"></a>
-# **deleteTicket**
+## deleteTicket
 > deleteTicket()
 
 Delete ticket (logout)
@@ -76,23 +74,21 @@ Deletes logged in ticket (logout).
 
 
 ### Example
-```javascript
-import AuthenticationApi from 'AuthenticationApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, AuthenticationApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let authenticationApi = new AuthenticationApi(this.alfrescoApi);
+const authenticationApi = new AuthenticationApi(alfrescoApi);
 
 authenticationApi.deleteTicket().then(() => {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -103,7 +99,7 @@ This endpoint does not need any parameter.
 null (empty response body)
 
 <a name="validateTicket"></a>
-# **validateTicket**
+## validateTicket
 > ValidTicketEntry validateTicket()
 
 Validate ticket
@@ -119,23 +115,21 @@ For example, you can pass the Authorization request header using Javascript:
 
 
 ### Example
-```javascript
-import AuthenticationApi from 'AuthenticationApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, AuthenticationApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let authenticationApi = new AuthenticationApi(this.alfrescoApi);
+const authenticationApi = new AuthenticationApi(alfrescoApi);
 
 authenticationApi.validateTicket().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters

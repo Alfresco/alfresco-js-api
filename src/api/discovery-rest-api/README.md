@@ -1,30 +1,30 @@
-**Discovery API**
+# **Discovery API**
 
 Provides access to information about Alfresco Content Services.
 
+> Documentation updated on: 2019-10-17T13:55:16.056+01:00
 
-- Last Build date: 2018-11-05T11:25:17.050Z
+## Methods
 
+All URIs are relative to:
 
-## Documentation for API Endpoints
-
-All URIs are relative to *https://localhost/alfresco/api*
+```text
+https://localhost/alfresco/api
+```
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*.DiscoveryApi* | [**getRepositoryInformation**](docs/DiscoveryApi.md#getRepositoryInformation) | **GET** /discovery | Get repository information
+DiscoveryApi | [**getRepositoryInformation**](docs/DiscoveryApi.md#getRepositoryInformation) | **GET** /discovery | Get repository information
 
+## Models
 
-## Documentation for Models
-
- - [DiscoveryEntry](docs/DiscoveryEntry.md)
- - [EntitlementsInfo](docs/EntitlementsInfo.md)
- - [ErrorError](docs/ErrorError.md)
- - [LicenseInfo](docs/LicenseInfo.md)
- - [ModelError](docs/ModelError.md)
- - [ModuleInfo](docs/ModuleInfo.md)
- - [RepositoryEntry](docs/RepositoryEntry.md)
- - [RepositoryInfo](docs/RepositoryInfo.md)
- - [StatusInfo](docs/StatusInfo.md)
- - [VersionInfo](docs/VersionInfo.md)
-
+- [DiscoveryEntry](docs/DiscoveryEntry.md)
+- [EntitlementsInfo](docs/EntitlementsInfo.md)
+- [ErrorError](docs/ErrorError.md)
+- [LicenseInfo](docs/LicenseInfo.md)
+- [ModelError](docs/ModelError.md)
+- [ModuleInfo](docs/ModuleInfo.md)
+- [RepositoryEntry](docs/RepositoryEntry.md)
+- [RepositoryInfo](docs/RepositoryInfo.md)
+- [StatusInfo](docs/StatusInfo.md)
+- [VersionInfo](docs/VersionInfo.md)

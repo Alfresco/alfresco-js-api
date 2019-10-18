@@ -1,22 +1,19 @@
-{{#appDescription}}
-{{{appDescription}}}
-{{/appDescription}}
+{{#appDescription}}# {{{appDescription}}}{{/appDescription}}
+{{^hideGenerationTimestamp}}> Documentation updated on: {{generatedDate}}{{/hideGenerationTimestamp}}
 
-{{^hideGenerationTimestamp}}
-- Last Build date: {{generatedDate}}
-{{/hideGenerationTimestamp}}
+## Methods
 
+All URIs are relative to:
 
-## Documentation for API Endpoints
-
-All URIs are relative to *{{basePath}}*
+```text
+{{basePath}}
+```
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-{{#apiInfo}}{{#apis}}{{#operations}}{{#operation}}*{{moduleName}}.{{classname}}* | [**{{operationId}}**](docs/{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{&summary}}{{/summary}}
+{{#apiInfo}}{{#apis}}{{#operations}}{{#operation}}{{classname}} | [**{{operationId}}**](docs/{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{&summary}}{{/summary}}
 {{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
+## Models
 
-## Documentation for Models
-
-{{#models}}{{#model}} - [{{moduleName}}.{{classname}}](docs/{{classname}}.md)
+{{#models}}{{#model}}- [{{classname}}](docs/{{classname}}.md)
 {{/model}}{{/models}}

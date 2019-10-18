@@ -10,24 +10,24 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{ {{>model
 
     constructor(input?: any) {
 {{#parent}}super();{{/parent}}
-        if(input) {
+        if (input) {
             Object.assign(this, input);
-        {{#vars}}
+            {{#vars}}
             {{^isPrimitiveType}}
-                {{^isListContainer}}
-                    {{^isMapContainer}}
-                        this.{{name}} = input.{{name}} ? new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(input.{{name}}) : undefined;
-                    {{/isMapContainer}}
-                {{/isListContainer}}
-                {{#isListContainer}}
-                if(input.{{name}}) {
-                    this.{{name}} = input.{{name}}.map((item: any) => {
-                        return new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(item);
-                    });
-                }
-                {{/isListContainer}}
+            {{^isListContainer}}
+            {{^isMapContainer}}
+            this.{{name}} = input.{{name}} ? new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(input.{{name}}) : undefined;
+            {{/isMapContainer}}
+            {{/isListContainer}}
+            {{#isListContainer}}
+            if(input.{{name}}) {
+                this.{{name}} = input.{{name}}.map((item: any) => {
+                    return new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(item);
+                });
+            }
+            {{/isListContainer}}
             {{/isPrimitiveType}}
-        {{/vars}}
+            {{/vars}}
         }
     }
 

@@ -88,14 +88,14 @@
   </build>
   <dependencies>
     <dependency>
-      <groupId>io.swagger</groupId>
+      <groupId>io.swagger.codegen.v3</groupId>
       <artifactId>swagger-codegen</artifactId>
       <version>${swagger-codegen-version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
   <properties>
-    <swagger-codegen-version>2.3.1</swagger-codegen-version>
+    <swagger-codegen-version>3.0.13</swagger-codegen-version>
     <maven-plugin-version>1.0.0</maven-plugin-version>
     <junit-version>4.8.1</junit-version>
   </properties>
