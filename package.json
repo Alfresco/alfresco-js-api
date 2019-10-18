@@ -75,7 +75,7 @@
     "klaw-sync": "3.0.2",
     "markdown-toc": "^1.2.0",
     "minimist": "1.2.0",
-    "mocha": "^5.2.0",
+    "mocha": "^6.2.1",
     "mocha-jsdom": "^2.0.0",
     "mocha-lcov-reporter": "^1.2.0",
     "nock": "^10.0.6",
