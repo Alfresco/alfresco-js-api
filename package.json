@@ -71,7 +71,7 @@
     "cspell": "^4.0.30",
     "expect.js": "~0.3.1",
     "fs-extra": "8.1.0",
-    "google-closure-compiler-js": "20170218.0.0",
+    "google-closure-compiler-js": "20190929.0.0",
     "klaw-sync": "6.0.0",
     "markdown-toc": "^1.2.0",
     "minimist": "1.2.0",
