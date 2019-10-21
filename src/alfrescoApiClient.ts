@@ -418,6 +418,9 @@ export class AlfrescoApiClient implements ee.Emitter {
         }
 
         const promise: any = new Promise((resolve, reject) => {
+            request.on('abort', () => {
+                eventEmitter.emit('abort');
+            });
             request.end((error: any, response: Response) => {
                 if (error) {
 
@@ -452,8 +455,6 @@ export class AlfrescoApiClient implements ee.Emitter {
                     eventEmitter.emit('success', data);
                     resolve(data);
                 }
-            }).on('abort', () => {
-                eventEmitter.emit('abort');
             });
         });
 
