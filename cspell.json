@@ -236,7 +236,8 @@
     "Processdefinitions",
     "childassociations",
     "defaultclassificationvalues",
-    "Fileplans"
+    "Fileplans",
+    "sourcemap"
   ],
   "dictionaries": [
     "html",
