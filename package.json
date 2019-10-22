@@ -73,7 +73,6 @@
     "fs-extra": "8.1.0",
     "klaw-sync": "6.0.0",
     "markdown-toc": "^1.2.0",
-    "minimist": "1.2.0",
     "mocha": "^6.2.1",
     "mocha-jsdom": "^2.0.0",
     "mocha-lcov-reporter": "^1.2.0",
