@@ -11,7 +11,8 @@ module.exports = function makeClosure(sourcePath) {
 
     const output = compiler.run([
         {
-            jsCode: [{src: source}],
+            path: sourcePath,
+            src: source,
             languageIn: 'ES2015',
             createSourceMap: true
         }
