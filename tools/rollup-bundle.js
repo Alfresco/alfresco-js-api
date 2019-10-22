@@ -1,8 +1,8 @@
 const _ = require('lodash');
 const rollup = require('rollup');
-const rollupAlias = require('rollup-plugin-alias');
-const rollupInject = require('rollup-plugin-inject');
-const rollupNodeResolve = require('rollup-plugin-node-resolve');
+const alias = require('rollup-plugin-alias');
+const inject = require('rollup-plugin-inject');
+const resolve = require('rollup-plugin-node-resolve');
 const compiler = require('@ampproject/rollup-plugin-closure-compiler');
 const fs = require('fs');
 const tslib = require('tslib');
@@ -16,11 +16,9 @@ module.exports = function rollupBundle(options) {
         .rollup({
             input: options.input,
             plugins: [
-                rollupAlias(options.aliases),
-                rollupNodeResolve({
-                    jsnext: true
-                }),
-                rollupInject({
+                alias(options.aliases),
+                resolve(),
+                inject({
                     exclude: 'node_modules/**',
                     modules: _.mapValues(tslib, function(value, key) {
                         return ['tslib', key];
