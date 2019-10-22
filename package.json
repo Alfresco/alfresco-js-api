@@ -83,7 +83,7 @@
     "remove-comments-loader": "0.1.2",
     "rimraf": "^3.0.0",
     "rollup": "0.66.6",
-    "rollup-plugin-alias": "2.1.0",
+    "rollup-plugin-alias": "2.2.0",
     "rollup-plugin-inject": "3.0.1",
     "rollup-plugin-node-resolve": "4.2.4",
     "shx": "^0.3.2",
