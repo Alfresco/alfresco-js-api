@@ -1,20 +1,24 @@
-var compiler = require('google-closure-compiler-js').compile;
-var fs = require('fs');
-var path = require('path');
+const ClosureCompiler = require('google-closure-compiler').jsCompiler;
+const fs = require('fs');
+const path = require('path');
 
 module.exports = function makeClosure(sourcePath) {
-    var source = fs.readFileSync(sourcePath, 'utf8');
+    const source = fs.readFileSync(sourcePath, 'utf8');
 
-    var compilerFlags = {
-        jsCode: [{src: source}],
-        languageIn: 'ES2015',
-        createSourceMap: true,
-    };
+    const compiler = new ClosureCompiler({
+        compilation_level: 'ADVANCED'
+    });
 
-    var output = compiler(compilerFlags);
+    const output = compiler.run([
+        {
+            jsCode: [{src: source}],
+            languageIn: 'ES2015',
+            createSourceMap: true
+        }
+    ]);
 
-    var dest = sourcePath.replace(/.js$/, '.min.js');
-    var sourceMapDest = dest + '.map';
+    const dest = sourcePath.replace(/.js$/, '.min.js');
+    const sourceMapDest = dest + '.map';
     output.compiledCode = output.compiledCode + '\n//# sourceMappingURL=' + path.basename(sourceMapDest);
 
     fs.writeFileSync(dest, output.compiledCode, 'utf8');
