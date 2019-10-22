@@ -1,6 +1,4 @@
-var fs = require('fs');
-var dist = require('minimist')(process.argv).dist;
-var license = require('minimist')(process.argv).license;
+const fs = require('fs');
 
 function addLicenseToFile (license, destination) {
     if (!license) {
