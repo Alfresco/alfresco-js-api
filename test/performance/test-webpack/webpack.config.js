@@ -9,7 +9,7 @@ module.exports = [{
             {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
-                exclude: [/node_modules/, 'test']
+                exclude: [/node_modules/, path.resolve(__dirname, 'test')]
             }
         ]
     },
@@ -31,7 +31,7 @@ module.exports = [{
             {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
-                exclude: [/node_modules/, 'test']
+                exclude: [/node_modules/, path.resolve(__dirname, 'test')]
             }
         ]
     },
@@ -55,7 +55,6 @@ module.exports = [{
                     pure_getters: true,
                     collapse_vars: true,
                     unsafe: true,
-                    warnings: false,
                     sequences: true,
                     dead_code: true,
                     drop_debugger: true,

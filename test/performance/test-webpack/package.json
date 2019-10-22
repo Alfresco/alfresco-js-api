@@ -13,20 +13,20 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "bundlesize": "^0.17.0",
-    "ts-loader": "^5.2.2",
-    "uglifyjs-webpack-plugin": "^2.0.1",
-    "webpack": "4.1.1",
-    "webpack-cli": "2.0.12"
+    "bundlesize": "^0.18.0",
+    "ts-loader": "^6.2.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
   },
   "bundlesize": [
     {
       "path": "./test/tree-shaking-test.js",
-      "maxSize": "45 kb"
+      "maxSize": "60 kb"
     },
     {
       "path": "./test/tree-shaking-test.min.js",
-      "maxSize": "25 kb"
+      "maxSize": "30 kb"
     }
   ],
   "keywords": [
