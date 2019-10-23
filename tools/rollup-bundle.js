@@ -7,7 +7,7 @@ const compiler = require('@ampproject/rollup-plugin-closure-compiler');
 const tslib = require('tslib');
 
 module.exports = async function rollupBundle(options) {
-    const dest = options.dest;
+    const { dest, banner } = options;
 
     const inputOptions = {
         input: options.input,
@@ -27,6 +27,7 @@ module.exports = async function rollupBundle(options) {
     const outputOptions = {
         format: 'umd',
         name: '@alfresco/js-api',
+        banner,
         file: dest,
         amd: {
             id: '@alfresco/js-api'

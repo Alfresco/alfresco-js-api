@@ -1,17 +1,12 @@
 "use strict";
 
-let pkg = require('./package.json');
-let fs = require('fs-extra');
-let mkdirp = require('mkdirp');
-let path = require('path');
-let klawSync = require('klaw-sync');
-let licenseTool = require('./tools/add-license-to-file');
-let addLicenseToFile = licenseTool.addLicenseToFile;
-let addLicenseTextToFile = licenseTool.addLicenseTextToFile;
-let makePackages = require('./.make-helpers');
-let copySources = makePackages.copySources;
-let createImportTargets = makePackages.createImportTargets;
-let cleanSourceMapRoot = makePackages.cleanSourceMapRoot;
+const pkg = require('./package.json');
+const fs = require('fs-extra');
+const mkdirp = require('mkdirp');
+const path = require('path');
+const klawSync = require('klaw-sync');
+const { copySources, createImportTargets, cleanSourceMapRoot } = require('./.make-helpers');
+
 let bo = null;
 // Build Optimizer is not available on Node 4.x. Using a try/catch
 // here to make sure the build passes on Travis using Node 4, but
@@ -35,10 +30,6 @@ const ESM2015_PKG = PKG_ROOT + '_esm2015/';
 const UMD_PKG = PKG_ROOT + 'bundles/';
 const SRC_ROOT_PKG = PKG_ROOT +  'src/';
 const TYPE_PKG = PKG_ROOT;
-
-// License info for minified files
-let licenseUrl = 'https://github.com/Alfresco/alfresco-js-api/blob/master/LICENSE.txt';
-let license = 'Apache License 2.0 ' + licenseUrl;
 
 delete pkg.scripts;
 fs.removeSync(PKG_ROOT);
@@ -105,27 +96,22 @@ if (fs.existsSync(UMD_ROOT)) {
     fs.copySync(UMD_ROOT, UMD_PKG);
     // Clean up source map paths so they can be re-mapped
     klawSync(UMD_PKG, {filter: (item) => item.path.endsWith('.js.map')})
-.map(f => f.path)
-.forEach(fName => {
-        const sourceMap = fs.readJsonSync(fName);
-    sourceMap.sources = sourceMap.sources.map(s => {
-        const nm = 'node_modules/';
-    const rr = path.resolve(ESM5_FOR_ROLLUP_ROOT);
-    if (s.includes(nm)) {
-        return s.substring(s.indexOf(nm) + nm.length);
-    } else if (s.includes(rr)) {
-        return s.substring(s.indexOf(rr) + rr.length);
-    }
-    return s;
-});
-    fs.writeJsonSync(fName, sourceMap);
-});
+        .map(f => f.path)
+        .forEach(fName => {
+            const sourceMap = fs.readJsonSync(fName);
+            sourceMap.sources = sourceMap.sources.map(s => {
+                const nm = 'node_modules/';
+                const rr = path.resolve(ESM5_FOR_ROLLUP_ROOT);
+                if (s.includes(nm)) {
+                    return s.substring(s.indexOf(nm) + nm.length);
+                } else if (s.includes(rr)) {
+                    return s.substring(s.indexOf(rr) + rr.length);
+                }
+                return s;
+            });
+            fs.writeJsonSync(fName, sourceMap);
+        });
 
-    // Add licenses to tops of bundles
-    addLicenseToFile('LICENSE.txt', UMD_PKG + 'alfresco-js-api.umd.js');
-    addLicenseTextToFile(license, UMD_PKG + 'alfresco-js-api.umd.min.js');
-    addLicenseToFile('LICENSE.txt', UMD_PKG + 'alfresco-js-api.umd.js');
-    addLicenseTextToFile(license, UMD_PKG + 'alfresco-js-api.umd.min.js');
     cleanSourceMapRoot(UMD_PKG, PKG_ROOT);
 }
 
