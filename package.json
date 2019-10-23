@@ -54,7 +54,6 @@
     "superagent": "^5.1.0"
   },
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "^0.10.0",
     "@types/chai": "^4.2.3",
     "@types/event-emitter": "^0.3.3",
     "@types/minimatch": "^3.0.3",
@@ -84,6 +83,7 @@
     "rollup-plugin-alias": "2.2.0",
     "rollup-plugin-inject": "3.0.1",
     "rollup-plugin-node-resolve": "4.2.4",
+    "rollup-plugin-terser": "^5.1.2",
     "shx": "^0.3.2",
     "sinon": "^7.5.0",
     "sinon-chai": "^3.3.0",

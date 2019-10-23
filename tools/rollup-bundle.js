@@ -3,8 +3,8 @@ const rollup = require('rollup');
 const alias = require('rollup-plugin-alias');
 const inject = require('rollup-plugin-inject');
 const resolve = require('rollup-plugin-node-resolve');
-const compiler = require('@ampproject/rollup-plugin-closure-compiler');
 const tslib = require('tslib');
+const { terser } = require('rollup-plugin-terser');
 
 module.exports = async function rollupBundle(options) {
     const { dest, banner } = options;
@@ -20,7 +20,11 @@ module.exports = async function rollupBundle(options) {
                     return ['tslib', key];
                 })
             }),
-            options.minify ? compiler() : undefined
+            options.minify ? terser({
+                output: {
+                    comments: /@preserve/
+                }
+            }) : undefined
         ]
     };
 
