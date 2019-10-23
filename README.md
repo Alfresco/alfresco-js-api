@@ -1,11 +1,13 @@
 # Alfresco JavaScript API Client
 
+| branch | status |
+| --- | --- |
+| master | [![Build Status](https://travis-ci.org/Alfresco/alfresco-js-api.svg?branch=development)](https://travis-ci.org/Alfresco/alfresco-js-api.svg?branch=master) |
+| development | [![Build Status](https://travis-ci.org/Alfresco/alfresco-js-api.svg?branch=development)](https://travis-ci.org/Alfresco/alfresco-js-api.svg?branch=development) |
+
 <p>
   <a title='Gitter chat' href="https://gitter.im/Alfresco/api/ng2-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
      <img src='https://badges.gitter.im/Alfresco/api/ng2-components.svg'  alt='Gitter chat' />
-  </a>
-  <a title='Build Status' href="https://travis-ci.org/Alfresco/api/js-api">
-     <img src='https://travis-ci.org/Alfresco/alfresco-js-api.svg?branch=master'  alt='travis Status' />
   </a>
   <a href='https://codecov.io/gh/Alfresco/api/js-api'>
     <img src='https://img.shields.io/codecov/c/github/Alfresco/alfresco-js-api/master.svg?maxAge=0' alt='Coverage Status' />
