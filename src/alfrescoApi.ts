@@ -146,6 +146,8 @@ export class AlfrescoApi implements EventEmitter.Emitter {
                 authContentApi.getTicket().then((ticketEntry: TicketEntry) => {
                     this.oauth2Auth.config.ticketEcm = ticketEntry.entry.id;
                     this.emit('ticket_exchanged');
+                },()=>{
+                    console.log('impossible to exchange ticket');
                 });
             }
         });
