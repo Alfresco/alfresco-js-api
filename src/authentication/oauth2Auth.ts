@@ -28,8 +28,6 @@ declare let window: Window;
 
 export class Oauth2Auth extends AlfrescoApiClient {
 
-    static instance: Oauth2Auth = null;
-
     private iFrameTimeOut: any;
 
     hashFragmentParams: any;
@@ -48,16 +46,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.className = 'Oauth2Auth';
 
         this.setConfig(config);
-    }
-
-    static getInstance(config: AlfrescoApiConfig): Oauth2Auth {
-        if (!Oauth2Auth.instance) {
-            Oauth2Auth.instance = new Oauth2Auth(config);
-        } else {
-            Oauth2Auth.instance.setConfig(config);
-        }
-
-        return Oauth2Auth.instance;
     }
 
     setConfig(config: AlfrescoApiConfig) {

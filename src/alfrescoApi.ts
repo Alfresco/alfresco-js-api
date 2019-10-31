@@ -71,7 +71,13 @@ export class AlfrescoApi implements EventEmitter.Emitter {
         this.errorListeners();
 
         if (this.isOauthConfiguration()) {
-            this.oauth2Auth = Oauth2Auth.getInstance(this.config);
+
+            if (!this.oauth2Auth) {
+                this.oauth2Auth = new Oauth2Auth(this.config);
+            } else {
+                this.oauth2Auth.setConfig(this.config);
+            }
+
             this.exchangeTokenForAlfTicket();
 
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
