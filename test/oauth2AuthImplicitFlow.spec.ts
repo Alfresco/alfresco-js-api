@@ -10,7 +10,6 @@ const globalAny: any = global;
 describe('Oauth2 Implicit flow test', function () {
 
     beforeEach(function () {
-        Oauth2Auth.instance = null;
         delete this.oauth2Auth;
         this.hostOauth2 = 'http://myOauthUrl:30081';
         this.oauth2Mock = new Oauth2Mock(this.hostOauth2);
@@ -19,7 +18,7 @@ describe('Oauth2 Implicit flow test', function () {
     it('should discovery URL', function (done) {
         this.oauth2Mock.get200Discovery();
 
-        this.oauth2Auth = Oauth2Auth.getInstance({
+        this.oauth2Auth = new Oauth2Auth({
             oauth2: {
                 host: 'http://myOauthUrl:30081/auth/realms/springboot',
                 'clientId': 'activiti',
@@ -39,7 +38,7 @@ describe('Oauth2 Implicit flow test', function () {
     it('should throw an error if redirectUri is not present', function (done) {
 
         try {
-            this.oauth2Auth = Oauth2Auth.getInstance(<any>{
+            this.oauth2Auth = new Oauth2Auth(<any>{
                 oauth2: {
                     host: 'http://myOauthUrl:30081/auth/realms/springboot',
                     clientId: 'activiti',
@@ -59,7 +58,7 @@ describe('Oauth2 Implicit flow test', function () {
 
         this.oauth2Mock.get200Discovery();
 
-        this.oauth2Auth = Oauth2Auth.getInstance({
+        this.oauth2Auth = new Oauth2Auth({
             oauth2: {
                 host: 'http://myOauthUrl:30081/auth/realms/springboot',
                 clientId: 'activiti',
@@ -83,7 +82,7 @@ describe('Oauth2 Implicit flow test', function () {
         window = globalAny.window = { location: {} };
         this.oauth2Mock.get200Discovery();
 
-        this.oauth2Auth = Oauth2Auth.getInstance({
+        this.oauth2Auth = new Oauth2Auth({
             oauth2: {
                 host: 'http://myOauthUrl:30081/auth/realms/springboot',
                 clientId: 'activiti',
