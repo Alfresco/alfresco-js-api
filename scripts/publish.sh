@@ -21,7 +21,7 @@ then
     touch ./dist/package/.npmrc
     echo 'strict-ssl=false' >> ./dist/package/.npmrc
     echo 'registry=http://${NPM_REGISTRY_ADDRESS}' >> ./dist/package/.npmrc
-    echo '//${bamboo.npmregistry_address}/:_authToken="${NPM_REGISTRY_TOKEN}"' >> ./dist/package/.npmrc
+    echo '//${NPM_REGISTRY_ADDRESS}/:_authToken="${NPM_REGISTRY_TOKEN}"' >> ./dist/package/.npmrc
 
     cd dist/package/
     npm publish --tag ${TAG}
