@@ -44,7 +44,10 @@ jobs:
 
         - stage: Test
           name: Test
-          script: npm run test || exit 1
+          script:
+          - npm run test || exit 1 /
+          - npm run coverage --force
+          - bash <(curl -s https://codecov.io/bash)
 
         - stage: Perfomance
           name: Perfomance
@@ -57,7 +60,9 @@ jobs:
         - stage: Release
           name: Release
           if: (type = push OR type = cron) AND tag IS blank
-          script: ./scripts/publish.sh
+          script:
+          - ./scripts/build.sh || exit 1
+          - ./scripts/publish.sh
 
         - stage: Release beta tag
           if: branch = master AND type = push OR (tag =~ .*beta.*)
@@ -83,11 +88,6 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-
-
-after_success:
-  - npm run coverage --force
-  - bash <(curl -s https://codecov.io/bash)
 
 cache:
   directories:
