@@ -40,7 +40,6 @@ async function main() {
     alfrescoApi.login(program.username, program.password).then(() => {
         console.log('login BPM ok');
     }, (e) => {
-        console.log(`a ${e}`);
         process.exit(1);
     });
 
