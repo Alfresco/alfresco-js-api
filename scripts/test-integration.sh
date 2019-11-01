@@ -4,6 +4,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $DIR/..
 
+cat dist/package/package.json | grep version
+
 mkdir -p $DIR/../test/integration/test-node/node_modules/@alfresco/js-api
 cp -R $DIR/../dist/package/* $DIR/../test/integration/test-node/node_modules/@alfresco/js-api
 
