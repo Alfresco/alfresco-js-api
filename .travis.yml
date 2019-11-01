@@ -52,9 +52,13 @@ jobs:
 
         - stage: Build and release
           name: Build and release
-          script: ./scripts/build.sh || exit 1
           if: (type = push OR type = cron) AND tag IS blank
-          script: ./scripts/publish.sh
+          script: ./scripts/build.sh && ./scripts/publish.sh
+
+        - stage: Build
+          name: Build
+          if: type = pull_request
+          script: ./scripts/build.sh
 
         - stage: Release beta tag
           if: branch = master AND type = push OR (tag =~ .*beta.*)
