@@ -21,11 +21,11 @@ then
         ./scripts/update-version.sh -gnu $NEXT_VERSION || exit 1;
     fi
 
-    node ./scripts/pre-publish.js
-
 else
     ./node_modules/@alfresco/adf-cli/bin/adf-cli update-version --alpha --pathPackage "$(pwd)"
 fi;
+
+cat package.json
 
 echo "====== Build ====="
 npm run build_all

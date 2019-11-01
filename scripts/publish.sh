@@ -24,6 +24,9 @@ then
     echo '//${NPM_REGISTRY_ADDRESS}/:_authToken="${NPM_REGISTRY_TOKEN}"' >> ./dist/package/.npmrc
 
     cd dist/package/
+
+    cat package.json
+
     npm publish --tag ${TAG_NPM}
 
     rm -rf .npmrc
