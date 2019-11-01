@@ -25,8 +25,6 @@ then
 
     cd dist/package/
 
-    cat package.json
-
     npm publish --tag ${TAG_NPM} || exit 1
 
     rm -rf .npmrc
