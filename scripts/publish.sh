@@ -27,7 +27,7 @@ then
 
     cat package.json
 
-    npm publish --tag ${TAG_NPM}
+    npm publish --tag ${TAG_NPM} || exit 1
 
     rm -rf .npmrc
 

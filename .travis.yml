@@ -38,10 +38,6 @@ jobs:
           name: Lint
           script: ./scripts/lint.sh
 
-        - stage: Build
-          name: Build
-          script: ./scripts/build.sh || exit 1
-
         - stage: Test
           name: Test
           script: npm run test || exit 1
@@ -54,8 +50,9 @@ jobs:
           name: Integration
           script: ./scripts/test-integration.sh || exit 1
 
-        - stage: Release
-          name: Release
+        - stage: Build and release
+          name: Build and release
+          script: ./scripts/build.sh || exit 1
           if: (type = push OR type = cron) AND tag IS blank
           script: ./scripts/publish.sh
 
