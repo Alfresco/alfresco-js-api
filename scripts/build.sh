@@ -29,4 +29,4 @@ fi;
 echo "====== Build ====="
 npm run build_all
 
-cat dist/package/package.json
+cat dist/package/package.json | grep version
