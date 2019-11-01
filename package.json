@@ -32,6 +32,7 @@
     "bundlesize-check": "bundlesize",
     "format-ts": "tsfmt -r",
     "test": "mocha --full-trace -r ts-node/register test/*.spec.ts test/**/*.spec.ts",
+    "coverage": "nyc --reporter=lcov mocha -r ts-node/register --full-trace --bail  test/*.spec.ts ./test/**/*.spec.ts",
     "generate": "mvn clean generate-sources",
     "tslint": "tslint --fix -c tslint.json --project tsconfig.base.json",
     "tslint-test": "tslint --fix -c ./test/tslint.json --project test/tsconfig.json",
@@ -74,10 +75,9 @@
     "markdown-toc": "^1.2.0",
     "mocha": "^6.2.1",
     "mocha-jsdom": "^2.0.0",
-    "mocha-lcov-reporter": "^1.2.0",
     "nock": "^10.0.6",
     "npm-run-all": "^4.1.5",
-    "remove-comments-loader": "0.1.2",
+    "nyc": "^14.1.1",
     "rimraf": "^3.0.0",
     "rollup": "^1.25.1",
     "rollup-plugin-alias": "2.2.0",
@@ -99,6 +99,23 @@
       "maxSize": "55 kB"
     }
   ],
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  },
   "keywords": [
     "alfresco"
   ]
