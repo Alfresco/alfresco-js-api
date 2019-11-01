@@ -32,7 +32,7 @@ async function main() {
 
     alfrescoApi.setConfig({
         provider: 'BPM',
-        hostEcm: program.host,
+        hostBpm: program.host,
         authType: 'BASIC',
         contextRoot: ''
     });
@@ -40,7 +40,7 @@ async function main() {
     alfrescoApi.login(program.username, program.password).then(() => {
         console.log('login BPM ok');
     }, (error) => {
-        console.log(`login BPM test error ${error}`);
+        console.log(`login BPM test error ${JSON.stringify(error)}`);
         process.exit(1);
     });
 
