@@ -26,8 +26,6 @@ else
     ./node_modules/@alfresco/adf-cli/bin/adf-cli update-version --alpha --pathPackage "$(pwd)"
 fi;
 
-cat package.json
-
 echo "====== Build ====="
 npm run build_all
 

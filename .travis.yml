@@ -91,5 +91,5 @@ after_success:
 
 cache:
   directories:
-  - node_modules
-  - dist
+    - dist
+    - node_modules
