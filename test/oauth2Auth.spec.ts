@@ -30,7 +30,6 @@ describe('Oauth2  test', function () {
         it('login should return the Token if is ok', function (done) {
 
             this.oauth2Mock.get200Response();
-            this.oauth2Mock.get200Discovery();
 
             this.oauth2Auth = new Oauth2Auth(<AlfrescoApiConfig>{
                 oauth2: {
@@ -57,7 +56,6 @@ describe('Oauth2  test', function () {
         it('should emit a token_issued event if login is ok ', function (done) {
 
             this.oauth2Mock.get200Response();
-            this.oauth2Mock.get200Discovery();
 
             this.oauth2Auth = new Oauth2Auth(<AlfrescoApiConfig>{
                 oauth2: {
@@ -81,7 +79,6 @@ describe('Oauth2  test', function () {
         it('should after token_issued event exchange the access_token for the alf_ticket', function (done) {
 
             this.oauth2Mock.get200Response();
-            this.oauth2Mock.get200Discovery();
             this.authResponseMock.get200ValidTicket();
             let alfrescoApi = new AlfrescoApi(<AlfrescoApiConfig>{
                 hostEcm: 'http://myOauthUrl:30081',
@@ -113,7 +110,6 @@ describe('Oauth2  test', function () {
         it('should after token_issued event exchange the access_token for the alf_ticket with the compatibility layer', function (done) {
 
             this.oauth2Mock.get200Response();
-            this.oauth2Mock.get200Discovery();
             this.authResponseMock.get200ValidTicket();
             let alfrescoApi = new AlfrescoApiCompatibility(<AlfrescoApiConfig>{
                 hostEcm: 'http://myOauthUrl:30081',
@@ -144,7 +140,6 @@ describe('Oauth2  test', function () {
         it('isLoggedIn should return true if the api is logged in', function (done) {
 
             this.oauth2Mock.get200Response();
-            this.oauth2Mock.get200Discovery();
 
             this.oauth2Auth = new Oauth2Auth(<AlfrescoApiConfig>{
                 oauth2: {
@@ -168,7 +163,6 @@ describe('Oauth2  test', function () {
         it('login password should be removed after login', function (done) {
 
             this.oauth2Mock.get200Response();
-            this.oauth2Mock.get200Discovery();
 
             this.oauth2Auth = new Oauth2Auth(<AlfrescoApiConfig>{
                 oauth2: {

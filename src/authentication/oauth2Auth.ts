@@ -89,116 +89,65 @@ export class Oauth2Auth extends AlfrescoApiClient {
             this.host = this.config.oauth2.host;
 
             this.initOauth(); // jshint ignore:line
-
         }
     }
 
-    initOauth() {
+    async initOauth() {
         if (!this.config.oauth2.implicitFlow && this.isValidAccessToken()) {
             const accessToken = this.storage.getItem('access_token');
             this.setToken(accessToken, null);
         }
-        return Promise.resolve()
-            .then(() => {
-                return this.discoveryUrls();
-            })
-            .then(() => {
-                if (this.config.oauth2.implicitFlow) {
-                    return this.loadJwks();
-                }
 
-                return Promise.resolve({});
-            })
-            .then(() => {
-                if (this.config.oauth2.implicitFlow) {
-                    return this.checkFragment();
-                }
+        this.discoveryUrls();
 
-                return Promise.resolve({});
-            });
+        if (this.config.oauth2.implicitFlow) {
+            await this.loadJwks();
+        }
+
+        if (this.config.oauth2.implicitFlow) {
+            await this.checkFragment();
+        }
     }
 
     discoveryUrls() {
-        return new Promise((resolve, reject) => {
-            let discoveryStore = this.storage.getItem('discovery');
-            if (discoveryStore) {
-                this.discovery = JSON.parse(discoveryStore);
-            }
-
-            if (!this.discovery) {
-                let postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
-                let contentTypes = ['application/json'];
-                let accepts = ['application/json'];
-
-                let url = '.well-known/openid-configuration';
-                this.callApi(
-                    url, 'GET',
-                    pathParams, queryParams, headerParams, formParams, postBody,
-                    contentTypes, accepts
-                ).then((discovery) => {
-                    this.discovery = {};
-                    this.discovery.loginUrl = discovery.authorization_endpoint;
-                    this.discovery.logoutUrl = discovery.end_session_endpoint;
-                    this.discovery.grantTypesSupported = discovery.grant_types_supported;
-                    this.discovery.issuer = discovery.issuer;
-                    this.discovery.tokenEndpoint = discovery.token_endpoint;
-                    this.discovery.userinfoEndpoint = discovery.userinfo_endpoint;
-                    this.discovery.jwksUri = discovery.jwks_uri;
-                    this.discovery.sessionCheckIFrameUrl = discovery.check_session_iframe;
-
-                    this.emit('discovery', this.discovery);
-                    this.storage.setItem('discovery', JSON.stringify(this.discovery));
-                    resolve(discovery);
-                },     (error) => {
-                    this.emit('error', error);
-                    this.storage.removeItem('discovery');
-                    reject(error.error);
-                });
-            } else {
-                this.emit('discovery', this.discovery);
-                this.storage.setItem('discovery', JSON.stringify(this.discovery));
-                resolve(this.discovery);
-            }
-        });
-
+        this.discovery.jwksUri = `${this.host}/protocol/openid-connect/certs`;
+        this.discovery.loginUrl = `${this.host}/protocol/openid-connect/auth`;
+        this.discovery.logoutUr = `${this.host}/protocol/openid-connect/logout`;
+        this.discovery.tokenEndpoint = `${this.host}/protocol/openid-connect/token`;
     }
 
-    loadJwks() {
+    loadJwks(): Promise<any> {
         return new Promise((resolve, reject) => {
             let jwksStore = this.storage.getItem('jwks');
             if (jwksStore) {
                 this.jwks = JSON.parse(jwksStore);
             }
 
-            if (this.discovery.jwksUri) {
-                if (!this.jwks) {
-                    let postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
-                    let contentTypes = ['application/json'];
-                    let accepts = ['application/json'];
+            if (!this.jwks) {
+                let postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
+                let contentTypes = ['application/json'];
+                let accepts = ['application/json'];
 
-                    this.callCustomApi(
-                        this.discovery.jwksUri, 'GET',
-                        pathParams, queryParams, headerParams, formParams, postBody,
-                        contentTypes, accepts
-                    ).then((jwks) => {
-                        this.jwks = jwks;
-                        this.emit('jwks', jwks);
-                        this.storage.setItem('jwks', JSON.stringify(jwks));
-                        resolve(jwks);
-                    },     (error) => {
-                        reject(error.error);
-                    });
-                } else {
-                    this.emit('jwks', this.jwks);
-                    resolve(this.jwks);
-                }
+                this.callCustomApi(
+                    this.discovery.jwksUri, 'GET',
+                    pathParams, queryParams, headerParams, formParams, postBody,
+                    contentTypes, accepts
+                ).then((jwks) => {
+                    this.jwks = jwks;
+                    this.emit('jwks', jwks);
+                    this.storage.setItem('jwks', JSON.stringify(jwks));
+                    resolve(jwks);
+                }, (error) => {
+                    reject(error.error);
+                });
             } else {
-                reject('jwks error');
+                this.emit('jwks', this.jwks);
+                resolve(this.jwks);
             }
         });
     }
 
-    checkFragment(externalHash?: any) {// jshint ignore:line
+    checkFragment(externalHash?: any): Promise<any> {// jshint ignore:line
         return new Promise((resolve, reject) => {
 
             this.hashFragmentParams = this.getHashFragmentParams(externalHash);
@@ -229,7 +178,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                         this.silentRefresh();
                         resolve(accessToken);
                     }
-                },                                 (error) => {
+                }, (error) => {
                     reject('Validation JWT error' + error);
                 });
             } else {
@@ -331,13 +280,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     implicitLogin() {
         if (!this.isValidToken() || !this.isValidAccessToken()) {
-            if (this.discovery && this.discovery.loginUrl) {
-                this.redirectLogin();
-            } else {
-                this.on('discovery', () => {
-                    this.redirectLogin();
-                });
-            }
+            this.redirectLogin();
         } else {
             let accessToken = this.storage.getItem('access_token');
             this.setToken(accessToken, null);
@@ -524,7 +467,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.iFrameTimeOut = setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
-        },                              this.config.oauth2.refreshTokenTimeout);
+        }, this.config.oauth2.refreshTokenTimeout);
     }
 
     removeHashFromSilentIframe() {
@@ -566,13 +509,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * */
     login(username: string, password: string): Promise<any> {
         let promise = new Promise((resolve, reject) => {
-            if (this.discovery) {
-                this.grantPasswordLogin(username, password, resolve, reject);
-            } else {
-                this.on('discovery', () => {
-                    this.grantPasswordLogin(username, password, resolve, reject);
-                });
-            }
+            this.grantPasswordLogin(username, password, resolve, reject);
         });
 
         return promise;
