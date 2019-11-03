@@ -32,7 +32,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     hashFragmentParams: any;
     token: string;
-    discovery: any;
+    discovery: any = {};
     jwks: any;
     authentications: Authentication = {
         'oauth2': { accessToken: '' }, type: 'oauth2', 'basicAuth': {}
