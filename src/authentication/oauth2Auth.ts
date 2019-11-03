@@ -88,6 +88,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
             this.host = this.config.oauth2.host;
 
+            this.discoveryUrls();
+
             this.initOauth(); // jshint ignore:line
         }
     }
@@ -97,8 +99,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
             const accessToken = this.storage.getItem('access_token');
             this.setToken(accessToken, null);
         }
-
-        this.discoveryUrls();
 
         if (this.config.oauth2.implicitFlow) {
             await this.checkFragment();
@@ -424,7 +424,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.iFrameTimeOut = setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
-        }, this.config.oauth2.refreshTokenTimeout);
+        },                              this.config.oauth2.refreshTokenTimeout);
     }
 
     removeHashFromSilentIframe() {
