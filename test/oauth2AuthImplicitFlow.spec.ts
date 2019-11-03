@@ -15,26 +15,6 @@ describe('Oauth2 Implicit flow test', function () {
         this.oauth2Mock = new Oauth2Mock(this.hostOauth2);
     });
 
-    it('should discovery URL', function (done) {
-        this.oauth2Mock.get200Discovery();
-
-        this.oauth2Auth = new Oauth2Auth({
-            oauth2: {
-                host: 'http://myOauthUrl:30081/auth/realms/springboot',
-                'clientId': 'activiti',
-                'scope': 'openid',
-                'secret': '',
-                implicitFlow: true,
-                redirectUri: 'redirectUri'
-            }
-        });
-
-        this.oauth2Auth.on('discovery', () => {
-            expect(this.oauth2Auth.discovery.loginUrl).to.be.equal('http://myOauthUrl:30081/auth/realms/springboot/protocol/openid-connect/auth');
-            done();
-        });
-    });
-
     it('should throw an error if redirectUri is not present', function (done) {
 
         try {
@@ -55,8 +35,6 @@ describe('Oauth2 Implicit flow test', function () {
 
     it('should redirect to login if access token is not valid', function (done) {
         window = globalAny.window = { location: {} };
-
-        this.oauth2Mock.get200Discovery();
 
         this.oauth2Auth = new Oauth2Auth({
             oauth2: {
@@ -80,7 +58,6 @@ describe('Oauth2 Implicit flow test', function () {
 
     it('should not redirect to login if access token is valid', function (done) {
         window = globalAny.window = { location: {} };
-        this.oauth2Mock.get200Discovery();
 
         this.oauth2Auth = new Oauth2Auth({
             oauth2: {
