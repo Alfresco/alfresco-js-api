@@ -20,6 +20,8 @@ import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import * as _minimatch from 'minimatch';
+import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
+import { AlfrescoApi } from '../alfrescoApi';
 
 const minimatch = _minimatch;
 const EventEmitter: any = ee;
@@ -40,15 +42,17 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     iFrameHashListener: any;
 
-    constructor(config: AlfrescoApiConfig) {
+    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         super();
 
         this.className = 'Oauth2Auth';
 
-        this.setConfig(config);
+        if (config) {
+            this.setConfig(config, alfrescoApi);
+        }
     }
 
-    setConfig(config: AlfrescoApiConfig) {
+    setConfig(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         this.config = config;
 
         if (this.config.oauth2) {
@@ -90,6 +94,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
             this.discoveryUrls();
 
+            this.exchangeTicketListener(alfrescoApi);
+
             this.initOauth(); // jshint ignore:line
         }
     }
@@ -109,6 +115,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.discovery.loginUrl = `${this.host}/protocol/openid-connect/auth`;
         this.discovery.logoutUrl = `${this.host}/protocol/openid-connect/logout`;
         this.discovery.tokenEndpoint = `${this.host}/protocol/openid-connect/token`;
+
     }
 
     checkFragment(externalHash?: any): any {// jshint ignore:line
@@ -644,5 +651,15 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.storage.removeItem('id_token_stored_at');
 
         this.storage.removeItem('nonce');
+    }
+
+    exchangeTicketListener(alfrescoApi: AlfrescoApi) {
+        this.once('token_issued', async () => {
+            const authContentApi: AuthenticationApi = new AuthenticationApi(alfrescoApi);
+            authContentApi.apiClient.authentications = this.authentications;
+            const ticketEntry = await authContentApi.getTicket();
+            this.config.ticketEcm = ticketEntry.entry.id;
+            this.emit('ticket_exchanged');
+        });
     }
 }

@@ -10,8 +10,9 @@ let Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
 let AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 import { Oauth2Auth } from '../src/authentication/oauth2Auth';
 import { AlfrescoApi } from '../src/alfrescoApi';
-import { ContentApi } from  '../src/api/content-rest-api/api/content.api';
+import { ContentApi } from '../src/api/content-rest-api/api/content.api';
 import { AlfrescoApiCompatibility } from '../src/alfrescoApiCompatibility';
+
 let jsdom = require('mocha-jsdom');
 const globalAny: any = global;
 
@@ -23,6 +24,9 @@ describe('Oauth2  test', function () {
         this.hostOauth2 = 'http://myOauthUrl:30081';
         this.oauth2Mock = new Oauth2Mock(this.hostOauth2);
         this.authResponseMock = new AuthResponseMock(this.hostOauth2);
+        this.alfrescoJsApi = new AlfrescoApiCompatibility({
+            hostEcm: this.hostEcm
+        });
     });
 
     describe('With Authentication', function () {
@@ -41,13 +45,13 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            });
+            }, this.alfrescoJsApi);
 
             this.oauth2Auth.login('admin', 'admin').then((data: any) => {
                     expect(data.access_token).to.be.equal('test-token');
                     done();
                 },
-                                                         function (error: any) {
+                function (error: any) {
                     console.log('error' + error);
                 });
 
@@ -67,7 +71,7 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            });
+            }, this.alfrescoJsApi);
 
             this.oauth2Auth.once('token_issued', () => {
                 done();
@@ -93,7 +97,7 @@ describe('Oauth2  test', function () {
                 authType: 'OAUTH'
             });
 
-            alfrescoApi.once('ticket_exchanged', () => {
+            alfrescoApi.oauth2Auth.once('ticket_exchanged', () => {
                 expect(alfrescoApi.config.ticketEcm).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                 expect(alfrescoApi.contentClient.config.ticketEcm).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
 
@@ -124,7 +128,7 @@ describe('Oauth2  test', function () {
                 authType: 'OAUTH'
             });
 
-            alfrescoApi.once('ticket_exchanged', () => {
+            alfrescoApi.oauth2Auth.once('ticket_exchanged', () => {
                 expect(alfrescoApi.config.ticketEcm).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                 expect(alfrescoApi.contentClient.config.ticketEcm).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
 
@@ -151,12 +155,12 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            });
+            }, this.alfrescoJsApi);
 
             this.oauth2Auth.login('admin', 'admin').then(() => {
                 expect(this.oauth2Auth.isLoggedIn()).to.be.equal(true);
                 done();
-            },                                           function () {
+            }, function () {
             });
         });
 
@@ -174,18 +178,18 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            });
+            }, this.alfrescoJsApi);
 
             this.oauth2Auth.login('admin', 'admin').then(() => {
                 expect(this.oauth2Auth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
-            },                                           () => {
+            }, () => {
             });
 
         });
 
         describe('With mocked DOM', function () {
-            jsdom({url: 'http://localhost'});
+            jsdom({ url: 'http://localhost' });
             it('a failed hash check calls the logout', function () {
 
                 this.oauth2Auth.storage = new Storage();
@@ -204,48 +208,48 @@ describe('Oauth2  test', function () {
             });
         });
 
-        describe('public urls', function() {
-            it('should return `true` if url is defined in public urls list', function() {
-                globalAny.window = { location: { href: 'public-url'} };
+        describe('public urls', function () {
+            it('should return `true` if url is defined in public urls list', function () {
+                globalAny.window = { location: { href: 'public-url' } };
                 this.oauth2Auth.config.oauth2.publicUrls = ['public-url'];
 
                 expect(this.oauth2Auth.isPublicUrl()).to.be.equal(true);
             });
 
-            it('should return `false` if url is not defined in public urls list', function() {
-                globalAny.window = { location: { href: 'some-public-url'} };
+            it('should return `false` if url is not defined in public urls list', function () {
+                globalAny.window = { location: { href: 'some-public-url' } };
                 this.oauth2Auth.config.oauth2.publicUrls = ['public-url'];
 
                 expect(this.oauth2Auth.isPublicUrl()).to.be.equal(false);
             });
 
-            it('should return `false` if publicUrls property is not defined', function() {
+            it('should return `false` if publicUrls property is not defined', function () {
                 expect(this.oauth2Auth.isPublicUrl()).to.be.equal(false);
             });
 
-            it('should return `false` if public urls is not set as an array list', function() {
-                globalAny.window = { location: { href: 'public-url-string'} };
+            it('should return `false` if public urls is not set as an array list', function () {
+                globalAny.window = { location: { href: 'public-url-string' } };
                 this.oauth2Auth.config.oauth2.publicUrls = 'public-url-string';
 
                 expect(this.oauth2Auth.isPublicUrl()).to.be.equal(false);
             });
 
-            it('should match absolute path', function() {
-                globalAny.window = { location: { href: 'http://some-public-url'} };
+            it('should match absolute path', function () {
+                globalAny.window = { location: { href: 'http://some-public-url' } };
                 this.oauth2Auth.config.oauth2.publicUrls = ['http://some-public-url'];
 
                 expect(this.oauth2Auth.isPublicUrl()).to.be.equal(true);
             });
 
-            it('should match a path pattern', function() {
-                globalAny.window = { location: { href: 'http://some-public-url/123/path'} };
+            it('should match a path pattern', function () {
+                globalAny.window = { location: { href: 'http://some-public-url/123/path' } };
                 this.oauth2Auth.config.oauth2.publicUrls = ['**/some-public-url/*/path'];
 
                 expect(this.oauth2Auth.isPublicUrl()).to.be.equal(true);
             });
 
-            it('should not call `implicitLogin`', async function() {
-                globalAny.window = { location: { href: 'public-url'} };
+            it('should not call `implicitLogin`', async function () {
+                globalAny.window = { location: { href: 'public-url' } };
                 this.oauth2Auth.config.oauth2.silentLogin = true;
                 this.oauth2Auth.config.oauth2.publicUrls = ['public-url'];
                 const implicitLoginSpy = chai.spy.on(this.oauth2Auth, 'implicitLogin');

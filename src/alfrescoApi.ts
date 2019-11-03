@@ -24,8 +24,6 @@ import { ProcessClient } from './processClient';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
-import { AuthenticationApi } from './api/auth-rest-api/api/authentication.api';
-import { TicketEntry } from './api/auth-rest-api/model/ticketEntry';
 
 const Emitter: any = EventEmitter;
 
@@ -73,12 +71,10 @@ export class AlfrescoApi implements EventEmitter.Emitter {
         if (this.isOauthConfiguration()) {
 
             if (!this.oauth2Auth) {
-                this.oauth2Auth = new Oauth2Auth(this.config);
+                this.oauth2Auth = new Oauth2Auth(this.config, this);
             } else {
-                this.oauth2Auth.setConfig(this.config);
+                this.oauth2Auth.setConfig(this.config, this);
             }
-
-            this.exchangeTokenForAlfTicket();
 
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
@@ -143,20 +139,6 @@ export class AlfrescoApi implements EventEmitter.Emitter {
         } else {
             this.processClient.setConfig(this.config);
         }
-    }
-
-    private exchangeTokenForAlfTicket() {
-        this.oauth2Auth.once('token_issued', () => {
-            if (this.config.provider === 'ALL' || this.config.provider === 'ECM') {
-                const authContentApi: AuthenticationApi = new AuthenticationApi(this);
-                authContentApi.getTicket().then((ticketEntry: TicketEntry) => {
-                    this.oauth2Auth.config.ticketEcm = ticketEntry.entry.id;
-                    this.emit('ticket_exchanged');
-                },                              () => {
-                    console.log('impossible to exchange ticket');
-                });
-            }
-        });
     }
 
     errorListeners() {
@@ -381,7 +363,8 @@ export class AlfrescoApi implements EventEmitter.Emitter {
                 const contentPromise = this.contentAuth.logout();
                 contentPromise.then(
                     () => this.config.ticket = undefined,
-                    () => {}
+                    () => {
+                    }
                 );
                 return contentPromise;
             } else if (this.isEcmBpmConfiguration()) {
