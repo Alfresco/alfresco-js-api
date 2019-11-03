@@ -33,7 +33,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     hashFragmentParams: any;
     token: string;
     discovery: any = {};
-    jwks: any;
+
     authentications: Authentication = {
         'oauth2': { accessToken: '' }, type: 'oauth2', 'basicAuth': {}
     };
@@ -101,93 +101,55 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.discoveryUrls();
 
         if (this.config.oauth2.implicitFlow) {
-            await this.loadJwks();
-        }
-
-        if (this.config.oauth2.implicitFlow) {
             await this.checkFragment();
         }
     }
 
     discoveryUrls() {
-        this.discovery.jwksUri = `${this.host}/protocol/openid-connect/certs`;
         this.discovery.loginUrl = `${this.host}/protocol/openid-connect/auth`;
         this.discovery.logoutUrl = `${this.host}/protocol/openid-connect/logout`;
         this.discovery.tokenEndpoint = `${this.host}/protocol/openid-connect/token`;
     }
 
-    loadJwks(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            let jwksStore = this.storage.getItem('jwks');
-            if (jwksStore) {
-                this.jwks = JSON.parse(jwksStore);
+    checkFragment(externalHash?: any): any {// jshint ignore:line
+        this.hashFragmentParams = this.getHashFragmentParams(externalHash);
+
+        if (externalHash === undefined && this.isValidAccessToken()) {
+            let accessToken = this.storage.getItem('access_token');
+            this.setToken(accessToken, null);
+            this.silentRefresh();
+            return accessToken;
+        }
+
+        if (this.hashFragmentParams) {
+            let accessToken = this.hashFragmentParams.access_token;
+            let idToken = this.hashFragmentParams.id_token;
+            let sessionState = this.hashFragmentParams.session_state;
+            let expiresIn = this.hashFragmentParams.expires_in;
+
+            if (!sessionState) {
+                throw('session state not present');
             }
 
-            if (!this.jwks) {
-                let postBody = {}, pathParams = {}, queryParams = {}, formParams = {}, headerParams = {};
-                let contentTypes = ['application/json'];
-                let accepts = ['application/json'];
-
-                this.callCustomApi(
-                    this.discovery.jwksUri, 'GET',
-                    pathParams, queryParams, headerParams, formParams, postBody,
-                    contentTypes, accepts
-                ).then((jwks) => {
-                    this.jwks = jwks;
-                    this.emit('jwks', jwks);
-                    this.storage.setItem('jwks', JSON.stringify(jwks));
-                    resolve(jwks);
-                }, (error) => {
-                    reject(error.error);
-                });
-            } else {
-                this.emit('jwks', this.jwks);
-                resolve(this.jwks);
-            }
-        });
-    }
-
-    checkFragment(externalHash?: any): Promise<any> {// jshint ignore:line
-        return new Promise((resolve, reject) => {
-
-            this.hashFragmentParams = this.getHashFragmentParams(externalHash);
-
-            if (externalHash === undefined && this.isValidAccessToken()) {
-                let accessToken = this.storage.getItem('access_token');
-                this.setToken(accessToken, null);
-                this.silentRefresh();
-                resolve(accessToken);
-            }
-
-            if (this.hashFragmentParams) {
-                let accessToken = this.hashFragmentParams.access_token;
-                let idToken = this.hashFragmentParams.id_token;
-                let sessionState = this.hashFragmentParams.session_state;
-                let expiresIn = this.hashFragmentParams.expires_in;
-
-                if (!sessionState) {
-                    reject('session state not present');
+            const jwt = this.processJWTToken(idToken);
+            try {
+                if (jwt) {
+                    this.storeIdToken(idToken, jwt.payload.exp);
+                    this.storeAccessToken(accessToken, expiresIn);
+                    this.authentications.basicAuth.username = jwt.payload.preferred_username;
+                    this.saveUsername(jwt.payload.preferred_username);
+                    this.silentRefresh();
+                    return accessToken;
                 }
-
-                this.processJWTToken(idToken).then((jwt: any) => {
-                    if (jwt) {
-                        this.storeIdToken(idToken, jwt.payload.exp);
-                        this.storeAccessToken(accessToken, expiresIn);
-                        this.authentications.basicAuth.username = jwt.payload.preferred_username;
-                        this.saveUsername(jwt.payload.preferred_username);
-                        this.silentRefresh();
-                        resolve(accessToken);
-                    }
-                }, (error) => {
-                    reject('Validation JWT error' + error);
-                });
-            } else {
-                if (this.config.oauth2.silentLogin && !this.isPublicUrl()) {
-                    this.implicitLogin();
-                }
-                resolve();
+            } catch (error) {
+                throw('Validation JWT error' + error);
             }
-        });
+
+        } else {
+            if (this.config.oauth2.silentLogin && !this.isPublicUrl()) {
+                this.implicitLogin();
+            }
+        }
 
     }
 
@@ -208,38 +170,33 @@ export class Oauth2Auth extends AlfrescoApiClient {
         return base64data;
     }
 
-    processJWTToken(jwt: any) {
-        return new Promise((resolve, reject) => {
-            if (jwt) {
+    processJWTToken(jwt: any): any {
+        if (jwt) {
+            const jwtArray = jwt.split('.');
+            const headerBase64 = this.padBase64(jwtArray[0]);
+            const headerJson = this.b64DecodeUnicode(headerBase64);
+            const header = JSON.parse(headerJson);
 
-                const jwtArray = jwt.split('.');
-                const headerBase64 = this.padBase64(jwtArray[0]);
-                const headerJson = this.b64DecodeUnicode(headerBase64);
-                const header = JSON.parse(headerJson);
+            const payloadBase64 = this.padBase64(jwtArray[1]);
+            const payloadJson = this.b64DecodeUnicode(payloadBase64);
+            const payload = JSON.parse(payloadJson);
 
-                const payloadBase64 = this.padBase64(jwtArray[1]);
-                const payloadJson = this.b64DecodeUnicode(payloadBase64);
-                const payload = JSON.parse(payloadJson);
+            const savedNonce = this.storage.getItem('nonce');
 
-                const savedNonce = this.storage.getItem('nonce');
-
-                if (!payload.sub) {
-                    reject('Missing sub in JWT');
-                }
-
-                if (payload.nonce !== savedNonce) {
-                    reject('Failing nonce JWT is not corrisponding' + payload.nonce);
-                }
-
-                if (this.jwks) {
-                    resolve({
-                        idToken: jwt,
-                        payload: payload,
-                        header: header
-                    });
-                }
+            if (!payload.sub) {
+                throw('Missing sub in JWT');
             }
-        });
+
+            if (payload.nonce !== savedNonce) {
+                throw('Failing nonce JWT is not corrisponding' + payload.nonce);
+            }
+
+            return {
+                idToken: jwt,
+                payload: payload,
+                header: header
+            };
+        }
     }
 
     b64DecodeUnicode(b64string: string) {
@@ -322,7 +279,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         return this.storage.getItem('access_token');
     }
 
-    redirectLogin() {
+    redirectLogin(): void {
         if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
             let href = this.composeImplicitLoginUrl();
             window.location.href = href;
@@ -395,7 +352,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         return hash.startsWith('#/');
     }
 
-    getHashFragmentParams(externalHash: string) {
+    getHashFragmentParams(externalHash: string): string {
         let hashFragmentParams = null;
 
         if (typeof window !== 'undefined') {
@@ -459,7 +416,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         return data;
     }
 
-    silentRefresh() {
+    silentRefresh(): void {
         if (typeof document === 'undefined') {
             return;
         }
@@ -488,7 +445,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.iFrameHashListener = () => {
             let silentRefreshTokenIframe: any = document.getElementById('silent_refresh_token_iframe');
             let hash = silentRefreshTokenIframe.contentWindow.location.hash;
-            this.checkFragment(hash).catch(() => this.logOut());
+            try {
+                this.checkFragment(hash);
+            } catch (e) {
+                this.logOut();
+            }
         };
 
         iframe.addEventListener('load', this.iFrameHashListener);
@@ -508,11 +469,9 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * @returns {Promise} A promise that returns {new authentication token} if resolved and {error} if rejected.
      * */
     login(username: string, password: string): Promise<any> {
-        let promise = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             this.grantPasswordLogin(username, password, resolve, reject);
         });
-
-        return promise;
     }
 
     grantPasswordLogin(username: string, password: string, resolve: any, reject: any) {
@@ -648,7 +607,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     /**
      * Logout
      **/
-    logOut() {
+    async logOut() {
         clearTimeout(this.iFrameTimeOut);
         const id_token = this.getIdToken();
 
@@ -667,13 +626,10 @@ export class Oauth2Auth extends AlfrescoApiClient {
             '&id_token_hint=' +
             encodeURIComponent(id_token);
 
-        let returnPromise = Promise.resolve().then(() => {
-            if (id_token != null && this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
-                window.location.href = logoutUrl;
-            }
-        });
+        if (id_token != null && this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
+            window.location.href = logoutUrl;
+        }
 
-        return returnPromise;
     }
 
     invalidateSession() {
@@ -688,6 +644,5 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.storage.removeItem('id_token_stored_at');
 
         this.storage.removeItem('nonce');
-        this.storage.removeItem('jwks');
     }
 }
