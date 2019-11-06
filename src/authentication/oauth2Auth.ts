@@ -94,7 +94,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
             this.discoveryUrls();
 
-            if(this.hasContentProvider()) {
+            if (this.hasContentProvider()) {
                 this.exchangeTicketListener(alfrescoApi);
             }
 
@@ -120,7 +120,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     }
 
-    hasContentProvider() {
+    hasContentProvider(): boolean {
         return !this.config.provider || this.config.provider === 'ECM' || this.config.provider === 'ALL';
     }
 
