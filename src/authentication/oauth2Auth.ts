@@ -121,7 +121,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     hasContentProvider(): boolean {
-        return !this.config.provider || this.config.provider === 'ECM' || this.config.provider === 'ALL';
+        return this.config.provider === 'ECM' || this.config.provider === 'ALL';
     }
 
     checkFragment(externalHash?: any): any {// jshint ignore:line
