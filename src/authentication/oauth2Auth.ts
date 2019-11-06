@@ -94,7 +94,9 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
             this.discoveryUrls();
 
-            this.exchangeTicketListener(alfrescoApi);
+            if (this.hasContentProvider()) {
+                this.exchangeTicketListener(alfrescoApi);
+            }
 
             this.initOauth(); // jshint ignore:line
         }
@@ -116,6 +118,10 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.discovery.logoutUrl = `${this.host}/protocol/openid-connect/logout`;
         this.discovery.tokenEndpoint = `${this.host}/protocol/openid-connect/token`;
 
+    }
+
+    hasContentProvider(): boolean {
+        return this.config.provider === 'ECM' || this.config.provider === 'ALL';
     }
 
     checkFragment(externalHash?: any): any {// jshint ignore:line
