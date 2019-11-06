@@ -80,6 +80,74 @@ describe('Oauth2  test', function () {
             this.oauth2Auth.login('admin', 'admin');
         });
 
+        it('should not emit a token_issued if provider is BPM', function () {
+
+            const exchangeTicketListenerSpy = chai.spy.on(this.oauth2Auth, 'exchangeTicketListener');
+
+            this.oauth2Auth = new Oauth2Auth(<AlfrescoApiConfig>{
+                provider: 'BPM',
+                oauth2: {
+                    'host': 'http://myOauthUrl:30081/auth/realms/springboot',
+                    'clientId': 'activiti',
+                    'scope': 'openid',
+                    'secret': '',
+                    'redirectUri': '/',
+                    'redirectUriLogout': '/logout'
+                },
+                authType: 'OAUTH'
+            }, this.alfrescoJsApi);
+
+            expect(exchangeTicketListenerSpy).not.to.have.been.called();
+        });
+
+        it('should emit a token_issued if provider is ECM', function (done) {
+
+            this.oauth2Mock.get200Response();
+            this.authResponseMock.get200ValidTicket();
+            this.oauth2Auth = new Oauth2Auth(<AlfrescoApiConfig>{
+                provider: 'ECM',
+                oauth2: {
+                    'host': 'http://myOauthUrl:30081/auth/realms/springboot',
+                    'clientId': 'activiti',
+                    'scope': 'openid',
+                    'secret': '',
+                    'redirectUri': '/',
+                    'redirectUriLogout': '/logout'
+                },
+                authType: 'OAUTH'
+            }, this.alfrescoJsApi);
+
+            this.oauth2Auth.once('token_issued', () => {
+                done();
+            });
+
+            this.oauth2Auth.login('admin', 'admin');
+        });
+
+        it('should emit a token_issued if provider is ALL', function (done) {
+
+            this.oauth2Mock.get200Response();
+            this.authResponseMock.get200ValidTicket();
+            this.oauth2Auth = new Oauth2Auth(<AlfrescoApiConfig>{
+                provider: 'ALL',
+                oauth2: {
+                    'host': 'http://myOauthUrl:30081/auth/realms/springboot',
+                    'clientId': 'activiti',
+                    'scope': 'openid',
+                    'secret': '',
+                    'redirectUri': '/',
+                    'redirectUriLogout': '/logout'
+                },
+                authType: 'OAUTH'
+            }, this.alfrescoJsApi);
+
+            this.oauth2Auth.once('token_issued', () => {
+                done();
+            });
+
+            this.oauth2Auth.login('admin', 'admin');
+        });
+
         it('should after token_issued event exchange the access_token for the alf_ticket', function (done) {
 
             this.oauth2Mock.get200Response();
