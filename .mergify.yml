@@ -1,8 +1,20 @@
 pull_request_rules:
-  - name: automatic merge for Dependabot pull requests
-    conditions:
-      - author=dependabot-preview[bot]
-      - status-success=continuous-integration/travis-ci/pr
-    actions:
-      merge:
-        method: merge
+    - name: automatic merge for Dependabot pull requests
+      conditions:
+          - author=dependabot-preview[bot]
+          - status-success=bundlesize
+          - status-success=continuous-integration/travis-ci/pr
+      actions:
+          merge:
+              method: merge
+    - name: merge when all requested reviews are valid
+      conditions:
+          - status-success=continuous-integration/travis-ci/pr
+          - status-success=bundlesize
+          - '#approved-reviews-by>=1'
+          - '#review-requested=0'
+          - '#changes-requested-reviews-by=0'
+          - '#commented-reviews-by=0'
+      actions:
+          merge:
+              method: merge
