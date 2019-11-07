@@ -6,6 +6,7 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "scripts": {
+    "build": "npm run build_all",
     "build_all": "npm-run-all clean_dist copy_sources build_cjs build_esm5 build_esm2015 build_esm5_for_rollup build_umd build_types generate_packages bundlesize-check",
     "build_cjs": "npm-run-all clean_dist_cjs compile_dist_cjs",
     "build_esm5": "npm-run-all clean_dist_esm5 compile_dist_esm5",

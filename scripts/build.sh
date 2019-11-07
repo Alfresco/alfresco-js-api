@@ -8,7 +8,7 @@ rm -rf package/
 rm -rf dist/
 rm -rf node_modules/@alfresco/js-api/
 
-npm install @alfresco/adf-cli@alpha
+npm install @alfresco/adf-cli@alpha --no-save
 
 if [[ $TRAVIS_PULL_REQUEST == "false" ]];
 then
