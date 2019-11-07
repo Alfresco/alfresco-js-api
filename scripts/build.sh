@@ -27,6 +27,6 @@ else
 fi;
 
 echo "====== Build ====="
-npm run build_all
+npm run build
 
 cat dist/package/package.json | grep version
