@@ -542,7 +542,7 @@ alfrescoJsApi.nodes
 To run the build
 
 ```sh
-npm run build_all
+npm run build
 ```
 
 To run the test

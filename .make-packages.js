@@ -32,36 +32,48 @@ const SRC_ROOT_PKG = PKG_ROOT +  'src/';
 const TYPE_PKG = PKG_ROOT;
 
 delete pkg.scripts;
+delete pkg.devDependencies;
+delete pkg.bundlesize;
+delete pkg.nyc;
+
 fs.removeSync(PKG_ROOT);
 
-let rootPackageJson = Object.assign({}, pkg, {
+const rootPackageJson = {
+    ...pkg,
     name: '@alfresco/js-api',
     main: './index.js',
     typings: './index.d.ts',
     module: './_esm5/index.js',
     es2015: './_esm2015/index.js'
-});
+};
 
 // Execute build optimizer transforms on ESM5 files
 klawSync(ESM5_ROOT, {
     nodir: true,
-    filter: function(item) {
-        return item.path.endsWith('.js');
-    }
+    filter: item => item.path.endsWith('.js')
 })
-    .map(item => item.path.slice((`${__dirname}/${ESM5_ROOT}`).length))
+.map(item => item.path.slice((`${__dirname}/${ESM5_ROOT}`).length))
 .map(fileName => {
-    if (!bo) return fileName;
-let fullPath = path.resolve(__dirname, ESM5_ROOT, fileName);
-// The file won't exist when running build_test as we don't create the ESM5 sources
-if (!fs.existsSync(fullPath)) return fileName;
-let content = fs.readFileSync(fullPath).toString();
-let transformed = bo.transformJavascript({
-    content: content,
-    getTransforms: [bo.getPrefixClassesTransformer, bo.getPrefixFunctionsTransformer, bo.getFoldFileTransformer]
-});
-fs.writeFileSync(fullPath, transformed.content);
-return fileName;
+    if (!bo) {
+        return fileName;
+    }
+    const fullPath = path.resolve(__dirname, ESM5_ROOT, fileName);
+    // The file won't exist when running build_test as we don't create the ESM5 sources
+    if (!fs.existsSync(fullPath)) {
+        return fileName;
+    }
+    const content = fs.readFileSync(fullPath).toString();
+    const transformed = bo.transformJavascript({
+        content,
+        getTransforms: [
+            bo.getPrefixClassesTransformer,
+            bo.getPrefixFunctionsTransformer,
+            bo.getFoldFileTransformer
+        ]
+    });
+
+    fs.writeFileSync(fullPath, transformed.content);
+    return fileName;
 });
 
 const importTargets = {};
@@ -99,9 +111,11 @@ if (fs.existsSync(UMD_ROOT)) {
         .map(f => f.path)
         .forEach(fName => {
             const sourceMap = fs.readJsonSync(fName);
+
             sourceMap.sources = sourceMap.sources.map(s => {
                 const nm = 'node_modules/';
                 const rr = path.resolve(ESM5_FOR_ROLLUP_ROOT);
+
                 if (s.includes(nm)) {
                     return s.substring(s.indexOf(nm) + nm.length);
                 } else if (s.includes(rr)) {

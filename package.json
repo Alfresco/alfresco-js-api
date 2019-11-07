@@ -6,7 +6,7 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "scripts": {
-    "build_all": "npm-run-all clean_dist copy_sources build_cjs build_esm5 build_esm2015 build_esm5_for_rollup build_umd build_types generate_packages bundlesize-check",
+    "build": "npm-run-all clean_dist copy_sources build_cjs build_esm5 build_esm2015 build_esm5_for_rollup build_umd build_types generate_packages bundlesize-check",
     "build_cjs": "npm-run-all clean_dist_cjs compile_dist_cjs",
     "build_esm5": "npm-run-all clean_dist_esm5 compile_dist_esm5",
     "build_esm5_for_rollup": "npm-run-all clean_dist_esm5_for_rollup compile_dist_esm5_for_rollup && mkdirp dist/esm5_for_rollup/node_modules",
@@ -28,7 +28,7 @@
     "compile_dist_types": "tsc -p ./tsconfig/tsconfig.types.json",
     "copy_sources": "mkdirp dist && shx cp -r ./src/ ./dist/src",
     "generate_packages": "node .make-packages.js",
-    "prepublish": "shx rm -rf ./typings && npm run build_all",
+    "prepublish": "shx rm -rf ./typings && npm run build",
     "bundlesize-check": "bundlesize",
     "format-ts": "tsfmt -r",
     "test": "mocha --full-trace -r ts-node/register test/*.spec.ts test/**/*.spec.ts",
