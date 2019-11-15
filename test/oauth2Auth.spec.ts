@@ -65,7 +65,7 @@ describe('Oauth2  test', function () {
             let loginInstanceOne = await oauth2AuthInstanceOne.login('superman', 'crypto');
 
             oauth2Mock.get200Response('barman-token');
-            let loginInstanceTwo = await oauth2AuthInstanceTwo.login('batman', 'IamBatman');
+            let loginInstanceTwo = await oauth2AuthInstanceTwo.login('barman', 'IamBarman');
 
             expect(loginInstanceOne.access_token).to.be.equal('superman-token');
             expect(loginInstanceTwo.access_token).to.be.equal('barman-token');
