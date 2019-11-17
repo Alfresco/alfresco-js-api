@@ -442,7 +442,7 @@ export class AlfrescoApiClient implements ee.Emitter {
                 } else {
                     if (this.isBpmRequest()) {
                         if (response.header && response.header.hasOwnProperty('set-cookie')) {
-                            this.authentications.cookie = response.header['set-cookie'];
+                            this.authentications.cookie = response.header['set-cookie'][0];
                         }
                     }
                     let data = {};
