@@ -31,6 +31,7 @@ declare let window: Window;
 export class Oauth2Auth extends AlfrescoApiClient {
 
     private iFrameTimeOut: any;
+    private checkAccessToken: boolean = true;
 
     hashFragmentParams: any;
     token: string;
@@ -434,6 +435,13 @@ export class Oauth2Auth extends AlfrescoApiClient {
             return;
         }
 
+        if (this.checkAccessToken) {
+            this.destroyIframe();
+            this.createIframe();
+            this.checkAccessToken = false;
+            return;
+        }
+
         this.iFrameTimeOut = setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
@@ -621,6 +629,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * Logout
      **/
     async logOut() {
+        this.checkAccessToken = true;
         clearTimeout(this.iFrameTimeOut);
         const id_token = this.getIdToken();
 
