@@ -31,6 +31,46 @@ describe('Oauth2  test', function () {
 
     describe('With Authentication', function () {
 
+        it('should be possible have different user login in different instance of the oauth2Auth class', async () => {
+            const oauth2AuthInstanceOne = new Oauth2Auth(<AlfrescoApiConfig>{
+                oauth2: {
+                    'host': 'http://myOauthUrl:30081/auth/realms/springboot',
+                    'clientId': 'activiti',
+                    'scope': 'openid',
+                    'secret': '',
+                    'redirectUri': '/',
+                    'redirectUriLogout': '/logout'
+                },
+                authType: 'OAUTH'
+            }, new AlfrescoApiCompatibility({
+                hostEcm: 'myecm'
+            }));
+
+            const oauth2AuthInstanceTwo = new Oauth2Auth(<AlfrescoApiConfig>{
+                oauth2: {
+                    'host': 'http://myOauthUrl:30081/auth/realms/springboot',
+                    'clientId': 'activiti',
+                    'scope': 'openid',
+                    'secret': '',
+                    'redirectUri': '/',
+                    'redirectUriLogout': '/logout'
+                },
+                authType: 'OAUTH'
+            }, new AlfrescoApiCompatibility({
+                hostEcm: 'myecm'
+            }));
+
+            const oauth2Mock = new Oauth2Mock('http://myOauthUrl:30081');
+            oauth2Mock.get200Response('superman-token');
+            let loginInstanceOne = await oauth2AuthInstanceOne.login('superman', 'crypto');
+
+            oauth2Mock.get200Response('barman-token');
+            let loginInstanceTwo = await oauth2AuthInstanceTwo.login('barman', 'IamBarman');
+
+            expect(loginInstanceOne.access_token).to.be.equal('superman-token');
+            expect(loginInstanceTwo.access_token).to.be.equal('barman-token');
+        });
+
         it('login should return the Token if is ok', function (done) {
 
             this.oauth2Mock.get200Response();
