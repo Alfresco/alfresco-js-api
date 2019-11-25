@@ -72,22 +72,6 @@ jobs:
           if: (branch = master OR branch = development OR (tag =~ .*beta.*)) AND type = push
           script: ./scripts/trigger-travis.sh --branch $TRAVIS_BRANCH Alfresco alfresco-ng2-components $TRAVIS_ACCESS_TOKEN
 
-before_deploy:
-  if ![[ $TRAVIS_TAG ]]; then
-      git config --local user.name "Alfresco"
-      export TRAVIS_TAG=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
-      echo "Create tag:" $TRAVIS_TAG
-      git tag $TRAVIS_TAG
-  fi
-
-deploy:
-  provider: releases
-  api_key: $GITHUB_TOKEN
-  name: $TRAVIS_TAG
-  body: "Add the release note"
-  on:
-    branch: master
-
 cache:
   directories:
     - dist

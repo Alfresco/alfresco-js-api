@@ -42,7 +42,7 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            }, new AlfrescoApiCompatibility({
+            },                                           new AlfrescoApiCompatibility({
                 hostEcm: 'myecm'
             }));
 
@@ -56,7 +56,7 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            }, new AlfrescoApiCompatibility({
+            },                                           new AlfrescoApiCompatibility({
                 hostEcm: 'myecm'
             }));
 
@@ -85,13 +85,13 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            }, this.alfrescoJsApi);
+            },                               this.alfrescoJsApi);
 
             this.oauth2Auth.login('admin', 'admin').then((data: any) => {
                     expect(data.access_token).to.be.equal('test-token');
                     done();
                 },
-                function (error: any) {
+                                                         function (error: any) {
                     console.log('error' + error);
                 });
 
@@ -111,7 +111,7 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            }, this.alfrescoJsApi);
+            },                               this.alfrescoJsApi);
 
             this.oauth2Auth.once('token_issued', () => {
                 done();
@@ -135,7 +135,7 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            }, this.alfrescoJsApi);
+            },                               this.alfrescoJsApi);
 
             expect(exchangeTicketListenerSpy).not.to.have.been.called();
         });
@@ -155,7 +155,7 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            }, this.alfrescoJsApi);
+            },                               this.alfrescoJsApi);
 
             this.oauth2Auth.once('token_issued', () => {
                 done();
@@ -179,7 +179,7 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            }, this.alfrescoJsApi);
+            },                               this.alfrescoJsApi);
 
             this.oauth2Auth.once('token_issued', () => {
                 done();
@@ -263,12 +263,12 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            }, this.alfrescoJsApi);
+            },                               this.alfrescoJsApi);
 
             this.oauth2Auth.login('admin', 'admin').then(() => {
                 expect(this.oauth2Auth.isLoggedIn()).to.be.equal(true);
                 done();
-            }, function () {
+            },                                           function () {
             });
         });
 
@@ -286,12 +286,12 @@ describe('Oauth2  test', function () {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            }, this.alfrescoJsApi);
+            },                               this.alfrescoJsApi);
 
             this.oauth2Auth.login('admin', 'admin').then(() => {
                 expect(this.oauth2Auth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
-            }, () => {
+            },                                           () => {
             });
 
         });

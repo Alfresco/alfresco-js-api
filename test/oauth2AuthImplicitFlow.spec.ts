@@ -31,7 +31,7 @@ describe('Oauth2 Implicit flow test', function () {
                     scope: 'openid',
                     implicitFlow: true
                 }
-            }, this.alfrescoJsApi);
+            },                               this.alfrescoJsApi);
         } catch (error) {
             expect(error).to.be.equal('Missing redirectUri required parameter');
             done();
@@ -50,7 +50,7 @@ describe('Oauth2 Implicit flow test', function () {
                 implicitFlow: true,
                 redirectUri: 'redirectUri'
             }
-        }, this.alfrescoJsApi);
+        },                               this.alfrescoJsApi);
 
         this.oauth2Auth.on('implicit_redirect', () => {
             expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
@@ -73,7 +73,7 @@ describe('Oauth2 Implicit flow test', function () {
                 implicitFlow: true,
                 redirectUri: 'redirectUri'
             }
-        }, this.alfrescoJsApi);
+        },                               this.alfrescoJsApi);
 
         this.oauth2Auth.isValidAccessToken = () => {
             return true;
