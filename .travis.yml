@@ -1,6 +1,5 @@
 language: node_js
 dist: trusty
-sudo: required
 node_js:
   - "10"
 
@@ -74,18 +73,18 @@ jobs:
           script: ./scripts/trigger-travis.sh --branch $TRAVIS_BRANCH Alfresco alfresco-ng2-components $TRAVIS_ACCESS_TOKEN
 
 before_deploy:
-  # Set up git user name and tag this commit
-  - git config --local user.name "Alfresco"
-  - export TRAVIS_TAG=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
-  - echo "Create tag:" $TRAVIS_TAG
-  - git tag $TRAVIS_TAG
+  if ![[ $TRAVIS_TAG ]]; then
+      git config --local user.name "Alfresco"
+      export TRAVIS_TAG=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
+      echo "Create tag:" $TRAVIS_TAG
+      git tag $TRAVIS_TAG
+  fi
 
 deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
   name: $TRAVIS_TAG
   body: "Add the release note"
-  skip_cleanup: true
   on:
     branch: master
 
