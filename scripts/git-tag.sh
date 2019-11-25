@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if [[  $TRAVIS_BRANCH == "master" ]]; then
-    TAG_VERSION=$(npm view @alfresco/js-api@beta version)
+    VERSION=$(npm view @alfresco/js-api@beta version)
 else
-    TAG_VERSION=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
+    VERSION=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
 fi;
 
-echo $TAG_VERSION
+echo $VERSION
 
 echo "git tag -a ${VERSION} -m ${VERSION}"
 git config --local user.name "eromano"
