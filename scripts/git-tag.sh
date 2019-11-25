@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [[  $TRAVIS_BRANCH == "master" ]]; then
-    VERSION=$(npm view @alfresco/js-api@beta version)
-else
     VERSION=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
+else
+    VERSION=$(npm view @alfresco/js-api@beta version)
 fi;
 
 echo $VERSION
