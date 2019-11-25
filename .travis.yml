@@ -65,7 +65,7 @@ jobs:
 
         - stage: Release beta tag
           if: branch = master AND type = push OR (tag =~ .*beta.*)
-          script: ./scripts/git-tag-beta.sh
+          script: ./scripts/git-tag.sh
 
         - stage: trigger ADF
           name: trigger ADF
