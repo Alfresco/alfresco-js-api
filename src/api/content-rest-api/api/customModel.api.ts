@@ -46,7 +46,7 @@ export class CustomModelApi {
     /**
      * create Custom Model
      */
-    createCustomModel(status: string, description: string, name: string, namespaceUri: string, namespacePrefix: string): Promise<any> {
+    createCustomModel(status: string, description: string, name: string, namespaceUri: string, namespacePrefix: string, author?: string): Promise<any> {
 
         if (namespaceUri === undefined || namespaceUri === null) {
             throw "Missing param 'namespaceUri' in createCustomModel";
@@ -57,11 +57,12 @@ export class CustomModelApi {
         }
 
         let postBody = {
-            'status': status,
-            'description': description,
-            'name': name,
-            'namespaceUri': namespaceUri,
-            'namespacePrefix': namespacePrefix
+            status,
+            description,
+            name,
+            namespaceUri,
+            namespacePrefix,
+            author
         };
 
         let pathParams = {};
