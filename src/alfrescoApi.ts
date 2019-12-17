@@ -60,6 +60,8 @@ export class AlfrescoApi implements EventEmitter.Emitter {
         }
 
         this.storage = new Storage();
+        this.storage.setDomainPrefix(config.domainPrefix);
+
         this.config = new AlfrescoApiConfig(config);
 
         this.clientsFactory();

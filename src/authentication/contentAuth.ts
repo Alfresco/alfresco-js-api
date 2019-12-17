@@ -21,6 +21,7 @@ import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { AlfrescoApi } from '../alfrescoApi';
 import { Authentication } from './authentication';
+import { Storage } from '../storage';
 
 const EventEmitter: any = ee;
 
@@ -28,12 +29,14 @@ export class ContentAuth extends AlfrescoApiClient {
 
     ticketStorageLabel: string;
     ticket: string;
+    storage: Storage;
 
     authApi: AuthenticationApi;
 
     constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         super();
         this.className = 'ContentAuth';
+        this.storage.setDomainPrefix(config.domainPrefix);
 
         this.setConfig(config);
 
@@ -45,11 +48,7 @@ export class ContentAuth extends AlfrescoApiClient {
 
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
 
-        if (this.config.domainPrefix) {
-            this.ticketStorageLabel = this.config.domainPrefix.concat('-ticket-ECM');
-        } else {
-            this.ticketStorageLabel = 'ticket-ECM';
-        }
+        this.ticketStorageLabel = 'ticket-ECM';
 
         if (this.config.ticketEcm) {
             this.setTicket(config.ticketEcm);
@@ -125,7 +124,7 @@ export class ContentAuth extends AlfrescoApiClient {
                     promise.emit('success');
                     resolve(data.entry.id);
                 },
-                                               (error) => {
+                (error) => {
                     if (error.status === 401) {
                         promise.emit('unauthorized');
                     }

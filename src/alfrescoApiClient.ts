@@ -16,7 +16,6 @@
 */
 
 import * as ee from 'event-emitter';
-import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
 import * as  superagent_ from 'superagent';
@@ -39,7 +38,6 @@ export class AlfrescoApiClient implements ee.Emitter {
     once: ee.EmitterMethod;
     emit: (type: string, ...args: any[]) => void;
 
-    storage: Storage;
     host: string;
     className: string;
     config: AlfrescoApiConfig;
@@ -69,7 +67,6 @@ export class AlfrescoApiClient implements ee.Emitter {
     timeout: number | { deadline?: number, response?: number } = undefined;
 
     constructor(host?: string) {
-        this.storage = new Storage();
         this.host = host;
 
         EventEmitter(this);
