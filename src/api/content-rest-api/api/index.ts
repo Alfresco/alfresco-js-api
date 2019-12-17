@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-
+export * from './customModel.api';
 import { CustomModelApi } from './customModel.api';
 
 export * from './actions.api';

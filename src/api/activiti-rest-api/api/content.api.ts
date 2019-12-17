@@ -70,7 +70,7 @@ export class ContentApi extends BaseApi {
             formParams = {
                 'file': relatedContent
             };
-            let contentTypes = [ 'multipart/form-data'];
+            let contentTypes = ['multipart/form-data'];
             return this.apiClient.callApi(
                 '/api/enterprise/process-instances/{processInstanceId}/raw-content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
@@ -125,7 +125,7 @@ export class ContentApi extends BaseApi {
             formParams = {
                 'file': relatedContent
             };
-            let contentTypes = [ 'multipart/form-data'];
+            let contentTypes = ['multipart/form-data'];
             return this.apiClient.callApi(
                 '/api/enterprise/tasks/{taskId}/raw-content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
