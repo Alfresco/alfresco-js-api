@@ -36,6 +36,7 @@ export class ContentAuth extends AlfrescoApiClient {
     constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         super();
         this.className = 'ContentAuth';
+        this.storage = new Storage();
         this.storage.setDomainPrefix(config.domainPrefix);
 
         this.setConfig(config);
