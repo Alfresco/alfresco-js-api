@@ -22,6 +22,7 @@ import { Authentication } from './authentication';
 import * as _minimatch from 'minimatch';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
 import { AlfrescoApi } from '../alfrescoApi';
+import { Storage } from '../storage';
 
 const minimatch = _minimatch;
 const EventEmitter: any = ee;
@@ -32,6 +33,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     private iFrameTimeOut: any;
     private checkAccessToken: boolean = true;
+    storage: Storage;
 
     hashFragmentParams: any;
     token: string;
@@ -45,6 +47,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         super();
+        this.storage = new Storage();
+        this.storage.setDomainPrefix(config.domainPrefix);
 
         this.className = 'Oauth2Auth';
 

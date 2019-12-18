@@ -18,6 +18,7 @@
 export class Storage {
 
     _storage: any;
+    prefix: string;
 
     constructor() {
         if (this.supportsStorage()) {
@@ -33,25 +34,29 @@ export class Storage {
         }
     }
 
+    setDomainPrefix(prefix: any) {
+        this.prefix = prefix ? prefix + '_' : '';
+    }
+
     setStorage(storage: any) {
         this._storage = storage;
     }
 
     setItem(key: string, value: any) {
         if (this.supportsStorage()) {
-            this._storage.setItem(key, value);
+            this._storage.setItem(this.prefix + key, value);
         }
     }
 
     removeItem(key: string) {
         if (this.supportsStorage()) {
-            this._storage.removeItem(key);
+            this._storage.removeItem(this.prefix + key);
         }
     }
 
     getItem(key: string) {
         if (this.supportsStorage()) {
-            return this._storage.getItem(key);
+            return this._storage.getItem(this.prefix + key);
         }
     }
 }
