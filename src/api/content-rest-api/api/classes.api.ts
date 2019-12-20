@@ -35,6 +35,10 @@ export class ClassesApi extends BaseApi {
 
     private path: string = '/api/classes';
 
+    private get contextRoot(): string {
+        return this.apiClient.config.contextRoot + '/s';
+    }
+
 
     /**
      * Function to receive the result of the getClass operation.
@@ -68,12 +72,37 @@ export class ClassesApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-        let contextRoot = this.apiClient.config.contextRoot + '/s';
 
         return this.apiClient.callApi(
             this.path + '/{className}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassDescription, contextRoot
+            contentTypes, accepts, ClassDescription, this.contextRoot
+        );
+    }
+
+    getSubclasses(className: string, opts?: any): Promise<ClassDescription> {
+        opts = opts || {};
+
+        // verify the required parameter 'className' is set
+        if (className === undefined || className === null) {
+            throw "Missing param 'className'";
+        }
+
+        let postBody = null;
+        let pathParams = {
+            'className': className
+        };
+        let queryParams = {};
+        let headerParams = {};
+        let formParams = {};
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            `${this.path}/{className}/subclasses`, 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts, ClassDescription, this.contextRoot
         );
     }
 }

@@ -70,7 +70,7 @@ export class ContentApi extends BaseApi {
             formParams = {
                 'file': relatedContent
             };
-            let contentTypes = [ 'multipart/form-data'];
+            let contentTypes = ['multipart/form-data'];
             return this.apiClient.callApi(
                 '/api/enterprise/process-instances/{processInstanceId}/raw-content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
@@ -125,7 +125,7 @@ export class ContentApi extends BaseApi {
             formParams = {
                 'file': relatedContent
             };
-            let contentTypes = [ 'multipart/form-data'];
+            let contentTypes = ['multipart/form-data'];
             return this.apiClient.callApi(
                 '/api/enterprise/tasks/{taskId}/raw-content', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
@@ -293,28 +293,35 @@ export class ContentApi extends BaseApi {
             throw new Error("Required param 'contentId' in getRawContent");
         }
 
-        let pathParams = {
-            'contentId': contentId
-        };
-
         let queryParams = {};
 
         let headerParams = {};
         let formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json', '*/*'];
-
         if (renditionType) {
+            const contentTypes = ['application/json'];
+            const accepts = ['application/json'];
+
+            let pathParams = {
+                'contentId': contentId,
+                'renditionType': renditionType
+            };
             return this.apiClient.callApi(
                 '/api/enterprise/content/{contentId}/rendition/{renditionType}', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts);
+                contentTypes, accepts, 'blob');
         } else {
+            const contentTypes = ['application/json'];
+            const accepts = ['application/json'];
+
+            let pathParams = {
+                'contentId': contentId
+            };
+
             return this.apiClient.callApi(
                 '/api/enterprise/content/{contentId}/raw', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, undefined, undefined,  'blob');
+                contentTypes, accepts, 'blob', undefined,  'blob');
         }
     }
 

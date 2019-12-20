@@ -16,7 +16,6 @@
 */
 
 import * as ee from 'event-emitter';
-import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
 import * as  superagent_ from 'superagent';
@@ -39,7 +38,6 @@ export class AlfrescoApiClient implements ee.Emitter {
     once: ee.EmitterMethod;
     emit: (type: string, ...args: any[]) => void;
 
-    storage: Storage;
     host: string;
     className: string;
     config: AlfrescoApiConfig;
@@ -61,7 +59,9 @@ export class AlfrescoApiClient implements ee.Emitter {
     /**
      * The default HTTP headers to be included for all API calls.
      */
-    defaultHeaders = {};
+    defaultHeaders = {
+        'user-agent': 'superagent'
+    };
 
     /**
      * The default HTTP timeout for all API calls.
@@ -69,7 +69,6 @@ export class AlfrescoApiClient implements ee.Emitter {
     timeout: number | { deadline?: number, response?: number } = undefined;
 
     constructor(host?: string) {
-        this.storage = new Storage();
         this.host = host;
 
         EventEmitter(this);
@@ -282,12 +281,15 @@ export class AlfrescoApiClient implements ee.Emitter {
         }
 
         let data = response.body;
+
         if (data === null) {
             data = response.text;
         }
 
         if (returnType) {
-            if (Array.isArray(data)) {
+            if (returnType === 'blob') {
+                data = new Blob([data], { type : response.header['content-type']});
+            } else if (Array.isArray(data)) {
                 data = data.map((element) => {
                     return new returnType(element);
                 });
@@ -345,7 +347,7 @@ export class AlfrescoApiClient implements ee.Emitter {
             url = this.buildUrl(path, pathParams);
         }
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-                                contentTypes, accepts, returnType, contextRoot, responseType, url);
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -373,7 +375,7 @@ export class AlfrescoApiClient implements ee.Emitter {
         const url = this.buildUrlCustomBasePath(path, '', pathParams);
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-                                contentTypes, accepts, returnType, contextRoot, responseType, url);
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -411,7 +413,7 @@ export class AlfrescoApiClient implements ee.Emitter {
         const eventEmitter: any = EventEmitter({});
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-                                        contentTypes, accepts, responseType, eventEmitter, returnType);
+            contentTypes, accepts, responseType, eventEmitter, returnType);
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
@@ -637,7 +639,7 @@ export class AlfrescoApiClient implements ee.Emitter {
             request.accept(accept);
         }
 
-        if (returnType === 'Blob' || responseType === 'blob' || responseType === 'Blob') {
+        if (returnType === 'blob' || returnType === 'Blob' || responseType === 'blob' || responseType === 'Blob') {
             request.responseType('blob');
         } else if (returnType === 'String') {
             request.responseType('string');
