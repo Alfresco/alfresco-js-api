@@ -59,7 +59,9 @@ export class AlfrescoApiClient implements ee.Emitter {
     /**
      * The default HTTP headers to be included for all API calls.
      */
-    defaultHeaders = {};
+    defaultHeaders = {
+        'user-agent': 'superagent'
+    };
 
     /**
      * The default HTTP timeout for all API calls.
