@@ -80,7 +80,7 @@ export class ClassesApi extends BaseApi {
         );
     }
 
-    getSubclasses(className: string, opts?: any): Promise<ClassDescription> {
+    getSubclasses(className: string, opts?: any): Promise<ClassDescription[]> {
         opts = opts || {};
 
         // verify the required parameter 'className' is set
