@@ -733,9 +733,8 @@ export class CustomModelApi {
      * Delete the given custom type
      */
     deleteCustomType(modelName: string, typeName: string): Promise<any> {
-
         if (modelName === undefined || modelName === null) {
-            throw "Missing param 'modelName' in getCustomConstraints";
+            throw "Missing param 'modelName' in deleteCustomType";
         }
 
         if (typeName === undefined || typeName === null) {
@@ -760,6 +759,38 @@ export class CustomModelApi {
 
         return this.apiClient.callApi(
             'cmm/{modelName}/types/{typeName}', 'DELETE',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts
+        );
+    }
+
+    deleteAspect(modelName: string, aspectName: string): Promise<any> {
+        if (modelName === undefined || modelName === null) {
+            throw "Missing param 'modelName' in deleteAspect";
+        }
+
+        if (aspectName === undefined || aspectName === null) {
+            throw "Missing param 'aspectName' in deleteAspect";
+        }
+
+        const postBody = {};
+
+        const pathParams = {
+            modelName,
+            aspectName
+        };
+
+        const queryParams = {};
+
+        const headerParams = {};
+        const formParams = {};
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+
+        return this.apiClient.callApi(
+            'cmm/{modelName}/aspects/{aspectName}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts
         );
