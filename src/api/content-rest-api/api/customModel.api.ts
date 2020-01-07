@@ -764,7 +764,7 @@ export class CustomModelApi {
         );
     }
 
-    deleteAspect(modelName: string, aspectName: string): Promise<any> {
+    deleteCustomAspect(modelName: string, aspectName: string): Promise<any> {
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in deleteAspect";
         }
