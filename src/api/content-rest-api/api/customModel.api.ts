@@ -297,7 +297,7 @@ export class CustomModelApi {
     /**
      * Add Property into an existing type
      */
-    addPropertyToType(modelName: string, typeName: string, properties?: any[], aspectName?: string): Promise<any> {
+    addPropertyToType(modelName: string, typeName: string, properties?: any[]): Promise<any> {
 
         if (modelName === undefined || modelName === null) {
             throw "Missing param 'modelName' in addPropertyToType";
@@ -307,21 +307,21 @@ export class CustomModelApi {
             throw "Missing param 'typeName' in addPropertyToType";
         }
 
-        let postBody = {
-            'name': aspectName,
+        const postBody = {
+            'name': typeName,
             'properties': properties
         };
 
-        let pathParams = {
+        const pathParams = {
             'modelName': modelName,
             'typeName': typeName
         };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
+        const queryParams = {};
+        const headerParams = {};
+        const formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
 
         return this.apiClient.callApi(
