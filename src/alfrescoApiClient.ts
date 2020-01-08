@@ -60,7 +60,6 @@ export class AlfrescoApiClient implements ee.Emitter {
      * The default HTTP headers to be included for all API calls.
      */
     defaultHeaders = {
-        'user-agent': 'superagent'
     };
 
     /**
