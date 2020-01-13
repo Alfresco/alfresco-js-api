@@ -15,6 +15,18 @@
 * limitations under the License.
 */
 
+export interface PaginatedList<T> {
+    list: {
+        entries: Array<{ entry: T }>;
+        pagination: Pagination;
+    };
+}
+
+export interface PaginatedEntries<T> {
+    entries: T[];
+    pagination: Pagination;
+}
+
 export class Pagination {
     /**
      * The number of objects in the entries array.
