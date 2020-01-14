@@ -107,7 +107,7 @@ export class CustomModelApi extends BaseApi {
             author
         };
 
-        return this.apiClient.post({
+        return this.post({
             path: 'cmm',
             bodyParam
         });
@@ -131,7 +131,7 @@ export class CustomModelApi extends BaseApi {
             modelName
         };
 
-        return this.apiClient.post({
+        return this.post({
             path: 'cmm/{modelName}/types',
             bodyParam,
             pathParams
@@ -156,7 +156,7 @@ export class CustomModelApi extends BaseApi {
             modelName
         };
 
-        return this.apiClient.post({
+        return this.post({
             path: 'cmm/{modelName}/aspects',
             bodyParam,
             pathParams
@@ -181,7 +181,7 @@ export class CustomModelApi extends BaseApi {
             modelName
         };
 
-        return this.apiClient.post({
+        return this.post({
             path: 'cmm/{modelName}/constraints',
             bodyParam,
             pathParams
@@ -202,7 +202,7 @@ export class CustomModelApi extends BaseApi {
             modelName
         };
 
-        return this.apiClient.put({
+        return this.put({
             path: 'cmm/{modelName}?select=status',
             bodyParam,
             pathParams
@@ -223,7 +223,7 @@ export class CustomModelApi extends BaseApi {
             modelName
         };
 
-        return this.apiClient.put({
+        return this.put({
             path: 'cmm/{modelName}?select=status',
             bodyParam,
             pathParams
@@ -247,7 +247,7 @@ export class CustomModelApi extends BaseApi {
             aspectName
         };
 
-        return this.apiClient.put({
+        return this.put({
             path: 'cmm/{modelName}/aspects/{aspectName}?select=props',
             bodyParam,
             pathParams
@@ -271,7 +271,7 @@ export class CustomModelApi extends BaseApi {
             typeName
         };
 
-        return this.apiClient.put({
+        return this.put({
             path: 'cmm/{modelName}/types/{typeName}?select=props',
             bodyParam,
             pathParams
@@ -295,7 +295,7 @@ export class CustomModelApi extends BaseApi {
             modelName
         };
 
-        return this.apiClient.put({
+        return this.put({
             path: 'cmm/{modelName}',
             bodyParam,
             pathParams
@@ -321,7 +321,7 @@ export class CustomModelApi extends BaseApi {
             typeName
         };
 
-        return this.apiClient.put({
+        return this.put({
             path: 'cmm/{modelName}/types/{typeName}',
             bodyParam,
             pathParams
@@ -347,7 +347,7 @@ export class CustomModelApi extends BaseApi {
             aspectName
         };
 
-        return this.apiClient.put({
+        return this.put({
             path: 'cmm/{modelName}/aspects/{aspectName}',
             bodyParam,
             pathParams
@@ -358,7 +358,7 @@ export class CustomModelApi extends BaseApi {
      * Get all custom models
      */
     getAllCustomModel(): Promise<PaginatedEntries<CustomModel>> {
-        return this.apiClient.get({
+        return this.get({
             path: 'cmm'
         });
     }
@@ -373,7 +373,7 @@ export class CustomModelApi extends BaseApi {
             modelName
         };
 
-        return this.apiClient.get({
+        return this.get({
             path: 'cmm/{modelName}',
             pathParams,
             queryParams
@@ -390,7 +390,7 @@ export class CustomModelApi extends BaseApi {
             modelName
         };
 
-        return this.apiClient.get({
+        return this.get({
             path: 'cmm/{modelName}/types',
             pathParams
         });
@@ -408,7 +408,7 @@ export class CustomModelApi extends BaseApi {
             typeName
         };
 
-        return this.apiClient.get({
+        return this.get({
             path: 'cmm/{modelName}/types/{typeName}',
             pathParams,
             queryParams
@@ -425,7 +425,7 @@ export class CustomModelApi extends BaseApi {
             modelName
         };
 
-        return this.apiClient.get({
+        return this.get({
             path: 'cmm/{modelName}/aspects',
             pathParams,
             queryParams
@@ -444,7 +444,7 @@ export class CustomModelApi extends BaseApi {
             aspectName
         };
 
-        return this.apiClient.get({
+        return this.get({
             path: 'cmm/{modelName}/aspects/{aspectName}',
             pathParams,
             queryParams
@@ -461,7 +461,7 @@ export class CustomModelApi extends BaseApi {
             modelName
         };
 
-        return this.apiClient.get({
+        return this.get({
             path: 'cmm/{modelName}/constraints',
             pathParams,
             queryParams
@@ -480,7 +480,7 @@ export class CustomModelApi extends BaseApi {
             constraintName
         };
 
-        return this.apiClient.get({
+        return this.get({
             path: 'cmm/{modelName}/constraints{constraintName}',
             pathParams,
             queryParams
@@ -497,7 +497,7 @@ export class CustomModelApi extends BaseApi {
             modelName
         };
 
-        return this.apiClient.delete({
+        return this.delete({
             path: 'cmm/{modelName}',
             pathParams
         });
@@ -515,7 +515,7 @@ export class CustomModelApi extends BaseApi {
             typeName
         };
 
-        return this.apiClient.delete({
+        return this.delete({
             path: 'cmm/{modelName}/types/{typeName}',
             pathParams
         });
@@ -530,7 +530,7 @@ export class CustomModelApi extends BaseApi {
             aspectName
         };
 
-        return this.apiClient.delete({
+        return this.delete({
             path: 'cmm/{modelName}/aspects/{aspectName}',
             pathParams
         });
@@ -556,7 +556,7 @@ export class CustomModelApi extends BaseApi {
             update: true
         };
 
-        return this.apiClient.put({
+        return this.put({
             path: 'cmm/{modelName}/aspects/{aspectName}',
             bodyParam,
             pathParams,
@@ -584,7 +584,7 @@ export class CustomModelApi extends BaseApi {
             update: true
         };
 
-        return this.apiClient.put({
+        return this.put({
             path: 'cmm/{modelName}/types/{typeName}',
             bodyParam,
             pathParams,
