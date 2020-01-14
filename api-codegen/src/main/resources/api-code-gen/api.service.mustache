@@ -22,11 +22,13 @@ export class {{classname}} extends BaseApi {
     * @return Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}>
     */
     {{nickname}}({{&vendorExtensions.x-codegen-argList}}) : Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}any{{/returnType}}{{#canReturnError}} | {{&canReturnError}}{{/canReturnError}}> {
-        {{#hasOptionalParams}}opts = opts || {};{{/hasOptionalParams}}
-        const postBody = {{#bodyParam}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
         {{#allParams}}{{#required}}
         throwIfNotDefined({{paramName}}, '{{paramName}}');
         {{/required}}{{/allParams}}
+        
+        {{#hasOptionalParams}}opts = opts || {};{{/hasOptionalParams}}
+        const postBody = {{#bodyParam}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
+        
         const pathParams = {
             {{#pathParams}}
             '{{baseName}}': {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{#hasMore}},{{/hasMore}}{{/pathParams}}
