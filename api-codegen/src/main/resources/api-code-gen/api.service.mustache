@@ -4,6 +4,7 @@
 import { {{classname}} } from '../{{filename}}';
 {{/imports}}
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 {{#operations}}/**
 * {{baseName}} service.
@@ -21,32 +22,32 @@ export class {{classname}} extends BaseApi {
     * @return Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}>
     */
     {{nickname}}({{&vendorExtensions.x-codegen-argList}}) : Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}any{{/returnType}}{{#canReturnError}} | {{&canReturnError}}{{/canReturnError}}> {
-        {{#hasOptionalParams}}opts = opts || {};{{/hasOptionalParams}}
-        let postBody = {{#bodyParam}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
         {{#allParams}}{{#required}}
-        if ({{paramName}} === undefined || {{paramName}} === null) {
-            throw new Error("Required param '{{paramName}}' in {{operationId}}");
-        }
+        throwIfNotDefined({{paramName}}, '{{paramName}}');
         {{/required}}{{/allParams}}
-        let pathParams = {
+        
+        {{#hasOptionalParams}}opts = opts || {};{{/hasOptionalParams}}
+        const postBody = {{#bodyParam}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
+        
+        const pathParams = {
             {{#pathParams}}
             '{{baseName}}': {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{#hasMore}},{{/hasMore}}{{/pathParams}}
         };
 
-        let queryParams = { {{#queryParams}}
+        const queryParams = { {{#queryParams}}
             '{{baseName}}': {{#collectionFormat}}this.apiClient.buildCollectionParam({{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}, '{{collectionFormat}}'){{/collectionFormat}}{{^collectionFormat}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/collectionFormat}}{{#hasMore}},{{/hasMore}}{{/queryParams}}
         };
 
-        let headerParams = {
+        const headerParams = {
             {{#headerParams}}
             '{{baseName}}': {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{#hasMore}},{{/hasMore}}{{/headerParams}}
         };
-        let formParams = { {{#formParams}}
+        const formParams = { {{#formParams}}
         '{{baseName}}': {{#collectionFormat}}this.apiClient.buildCollectionParam({{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}, '{{collectionFormat}}'){{/collectionFormat}}{{^collectionFormat}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/collectionFormat}}{{#hasMore}},{{/hasMore}}{{/formParams}}
         };
 
-        let contentTypes = [{{#consumes}}'{{& mediaType}}'{{#hasMore}}, {{/hasMore}}{{/consumes}}];
-        let accepts = [{{#produces}}'{{& mediaType}}'{{#hasMore}}, {{/hasMore}}{{/produces}}];
+        const contentTypes = [{{#consumes}}'{{& mediaType}}'{{#hasMore}}, {{/hasMore}}{{/consumes}}];
+        const accepts = [{{#produces}}'{{& mediaType}}'{{#hasMore}}, {{/hasMore}}{{/produces}}];
 
         return this.apiClient.callApi(
         '{{&path}}', '{{httpMethod}}',

@@ -237,7 +237,9 @@
     "childassociations",
     "defaultclassificationvalues",
     "Fileplans",
-    "sourcemap"
+    "sourcemap",
+    "facetable",
+    "Tokenisation"
   ],
   "dictionaries": [
     "html",
