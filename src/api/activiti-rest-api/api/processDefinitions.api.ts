@@ -22,6 +22,7 @@ import { ResultListDataRepresentationProcessDefinitionRepresentation } from '../
 import { ResultListDataRepresentationRuntimeDecisionTableRepresentation } from '../model/resultListDataRepresentationRuntimeDecisionTableRepresentation';
 import { ResultListDataRepresentationRuntimeFormRepresentation } from '../model/resultListDataRepresentationRuntimeFormRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
  * Processdefinitions service.
@@ -38,16 +39,10 @@ export class ProcessDefinitionsApi extends BaseApi {
      * @return Promise<IdentityLinkRepresentation>
      */
     createIdentityLink(processDefinitionId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
+        throwIfNotDefined(processDefinitionId, 'processDefinitionId');
+        throwIfNotDefined(identityLinkRepresentation, 'identityLinkRepresentation');
 
         let postBody = identityLinkRepresentation;
-
-        if (processDefinitionId === undefined || processDefinitionId === null) {
-            throw new Error("Required param 'processDefinitionId' in createIdentityLink");
-        }
-
-        if (identityLinkRepresentation === undefined || identityLinkRepresentation === null) {
-            throw new Error("Required param 'identityLinkRepresentation' in createIdentityLink");
-        }
 
         let pathParams = {
             'processDefinitionId': processDefinitionId
@@ -78,20 +73,11 @@ export class ProcessDefinitionsApi extends BaseApi {
      * @return Promise<{}>
      */
     deleteIdentityLink(processDefinitionId: string, family: string, identityId: string): Promise<any> {
+        throwIfNotDefined(processDefinitionId, 'processDefinitionId');
+        throwIfNotDefined(family, 'family');
+        throwIfNotDefined(identityId, 'identityId');
 
         let postBody = null;
-
-        if (processDefinitionId === undefined || processDefinitionId === null) {
-            throw new Error("Required param 'processDefinitionId' in deleteIdentityLink");
-        }
-
-        if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in deleteIdentityLink");
-        }
-
-        if (identityId === undefined || identityId === null) {
-            throw new Error("Required param 'identityId' in deleteIdentityLink");
-        }
 
         let pathParams = {
             'processDefinitionId': processDefinitionId, 'family': family, 'identityId': identityId
@@ -122,20 +108,11 @@ export class ProcessDefinitionsApi extends BaseApi {
      * @return Promise<IdentityLinkRepresentation>
      */
     getIdentityLinkType(processDefinitionId: string, family: string, identityId: string): Promise<IdentityLinkRepresentation> {
+        throwIfNotDefined(processDefinitionId, 'processDefinitionId');
+        throwIfNotDefined(family, 'family');
+        throwIfNotDefined(identityId, 'identityId');
 
         let postBody = null;
-
-        if (processDefinitionId === undefined || processDefinitionId === null) {
-            throw new Error("Required param 'processDefinitionId' in getIdentityLinkType");
-        }
-
-        if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in getIdentityLinkType");
-        }
-
-        if (identityId === undefined || identityId === null) {
-            throw new Error("Required param 'identityId' in getIdentityLinkType");
-        }
 
         let pathParams = {
             'processDefinitionId': processDefinitionId, 'family': family, 'identityId': identityId
@@ -165,16 +142,10 @@ export class ProcessDefinitionsApi extends BaseApi {
      * @return Promise<IdentityLinkRepresentation>
      */
     getIdentityLinksForFamily(processDefinitionId: string, family: string): Promise<IdentityLinkRepresentation> {
+        throwIfNotDefined(processDefinitionId, 'processDefinitionId');
+        throwIfNotDefined(family, 'family');
 
         let postBody = null;
-
-        if (processDefinitionId === undefined || processDefinitionId === null) {
-            throw new Error("Required param 'processDefinitionId' in getIdentityLinksForFamily");
-        }
-
-        if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in getIdentityLinksForFamily");
-        }
 
         let pathParams = {
             'processDefinitionId': processDefinitionId, 'family': family
@@ -203,12 +174,8 @@ export class ProcessDefinitionsApi extends BaseApi {
      * @return Promise<IdentityLinkRepresentation>
      */
     getIdentityLinks(processDefinitionId: string): Promise<IdentityLinkRepresentation> {
-
+        throwIfNotDefined(processDefinitionId, 'processDefinitionId');
         let postBody = null;
-
-        if (processDefinitionId === undefined || processDefinitionId === null) {
-            throw new Error("Required param 'processDefinitionId' in getIdentityLinks");
-        }
 
         let pathParams = {
             'processDefinitionId': processDefinitionId
@@ -237,12 +204,8 @@ export class ProcessDefinitionsApi extends BaseApi {
      * @return Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation>
      */
     getProcessDefinitionDecisionTables(processDefinitionId: string): Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation> {
-
+        throwIfNotDefined(processDefinitionId, 'processDefinitionId');
         let postBody = null;
-
-        if (processDefinitionId === undefined || processDefinitionId === null) {
-            throw new Error("Required param 'processDefinitionId' in getProcessDefinitionDecisionTables");
-        }
 
         let pathParams = {
             'processDefinitionId': processDefinitionId
@@ -271,12 +234,8 @@ export class ProcessDefinitionsApi extends BaseApi {
      * @return Promise<ResultListDataRepresentationRuntimeFormRepresentation>
      */
     getProcessDefinitionForms(processDefinitionId: string): Promise<ResultListDataRepresentationRuntimeFormRepresentation> {
-
+        throwIfNotDefined(processDefinitionId, 'processDefinitionId');
         let postBody = null;
-
-        if (processDefinitionId === undefined || processDefinitionId === null) {
-            throw new Error("Required param 'processDefinitionId' in getProcessDefinitionForms");
-        }
 
         let pathParams = {
             'processDefinitionId': processDefinitionId

@@ -19,6 +19,7 @@ import { TransferAssociationPaging } from '../model/transferAssociationPaging';
 import { TransferEntry } from '../model/transferEntry';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Transfers service.
@@ -58,12 +59,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<TransferEntry>
     */
     getTransfer(transferId: string, opts?: any): Promise<TransferEntry> {
+        throwIfNotDefined(transferId, 'transferId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (transferId === undefined || transferId === null) {
-            throw new Error("Required param 'transferId' in getTransfer");
-        }
 
         let pathParams = {
             'transferId': transferId
@@ -127,12 +126,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<TransferAssociationPaging>
         */
     listTransfersChildren(transferId: string, opts?: any): Promise<TransferAssociationPaging> {
+        throwIfNotDefined(transferId, 'transferId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (transferId === undefined || transferId === null) {
-            throw new Error("Required param 'transferId' in listTransfersChildren");
-        }
 
         let pathParams = {
             'transferId': transferId

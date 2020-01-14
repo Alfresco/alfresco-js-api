@@ -19,6 +19,7 @@ import { AppDefinitionRepresentation } from '../model/appDefinitionRepresentatio
 import { ResultListDataRepresentationAppDefinitionRepresentation } from '../model/resultListDataRepresentationAppDefinitionRepresentation';
 import { RuntimeAppDefinitionSaveRepresentation } from '../model/runtimeAppDefinitionSaveRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Runtimeappdefinitions service.
@@ -34,12 +35,9 @@ export class RuntimeAppDefinitionsApi extends BaseApi {
     * @return Promise<{}>
     */
     deployAppDefinitions(saveObject: RuntimeAppDefinitionSaveRepresentation): Promise<any> {
+        throwIfNotDefined(saveObject, 'saveObject');
 
         let postBody = saveObject;
-
-        if (saveObject === undefined || saveObject === null) {
-            throw new Error("Required param 'saveObject' in deployAppDefinitions");
-        }
 
         let pathParams = {
 
@@ -71,12 +69,9 @@ export class RuntimeAppDefinitionsApi extends BaseApi {
         * @return Promise<AppDefinitionRepresentation>
         */
     getAppDefinition(appDefinitionId: number): Promise<AppDefinitionRepresentation> {
+        throwIfNotDefined(appDefinitionId, 'appDefinitionId');
 
         let postBody = null;
-
-        if (appDefinitionId === undefined || appDefinitionId === null) {
-            throw new Error("Required param 'appDefinitionId' in getAppDefinition");
-        }
 
         let pathParams = {
             'appDefinitionId': appDefinitionId

@@ -18,6 +18,7 @@
 import { ResultSetPaging } from '../model/resultSetPaging';
 import { SearchRequest } from '../model/searchRequest';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Search service.
@@ -328,12 +329,9 @@ The example above changes the highlighting prefix and postfix from the
     * @return Promise<ResultSetPaging>
     */
     search(queryBody: SearchRequest): Promise<ResultSetPaging> {
+        throwIfNotDefined(queryBody, 'queryBody');
 
         let postBody = queryBody;
-
-        if (queryBody === undefined || queryBody === null) {
-            throw new Error("Required param 'queryBody' in search");
-        }
 
         let pathParams = {
 

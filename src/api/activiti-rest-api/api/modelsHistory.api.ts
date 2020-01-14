@@ -18,6 +18,7 @@
 import { ModelRepresentation } from '../model/modelRepresentation';
 import { ResultListDataRepresentationModelRepresentation } from '../model/resultListDataRepresentationModelRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Modelshistory service.
@@ -35,12 +36,10 @@ export class ModelsHistoryApi extends BaseApi {
     * @return Promise<ResultListDataRepresentationModelRepresentation>
     */
     getModelHistoryCollection(modelId: number, opts?: any): Promise<ResultListDataRepresentationModelRepresentation> {
+        throwIfNotDefined(modelId, 'modelId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in getModelHistoryCollection");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -74,16 +73,10 @@ export class ModelsHistoryApi extends BaseApi {
         * @return Promise<ModelRepresentation>
         */
     getProcessModelHistory(modelId: number, modelHistoryId: number): Promise<ModelRepresentation> {
+        throwIfNotDefined(modelId, 'modelId');
+        throwIfNotDefined(modelHistoryId, 'modelHistoryId');
 
         let postBody = null;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in getProcessModelHistory");
-        }
-
-        if (modelHistoryId === undefined || modelHistoryId === null) {
-            throw new Error("Required param 'modelHistoryId' in getProcessModelHistory");
-        }
 
         let pathParams = {
             'modelId': modelId, 'modelHistoryId': modelHistoryId

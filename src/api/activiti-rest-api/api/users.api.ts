@@ -20,6 +20,7 @@ import { ResultListDataRepresentationLightUserRepresentation } from '../model/re
 import { UserActionRepresentation } from '../model/userActionRepresentation';
 import { UserRepresentation } from '../model/userRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Users service.
@@ -36,16 +37,10 @@ export class UsersApi extends BaseApi {
     * @return Promise<{}>
     */
     executeAction(userId: number, actionRequest: UserActionRepresentation): Promise<any> {
+        throwIfNotDefined(userId, 'userId');
+        throwIfNotDefined(actionRequest, 'actionRequest');
 
         let postBody = actionRequest;
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in executeAction");
-        }
-
-        if (actionRequest === undefined || actionRequest === null) {
-            throw new Error("Required param 'actionRequest' in executeAction");
-        }
 
         let pathParams = {
             'userId': userId
@@ -89,12 +84,9 @@ export class UsersApi extends BaseApi {
         * @return Promise<UserRepresentation>
         */
     getUser(userId: number): Promise<UserRepresentation> {
+        throwIfNotDefined(userId, 'userId');
 
         let postBody = null;
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in getUser");
-        }
 
         let pathParams = {
             'userId': userId
@@ -175,12 +167,9 @@ export class UsersApi extends BaseApi {
         * @return Promise<{}>
         */
     requestPasswordReset(resetPassword: ResetPasswordRepresentation): Promise<any> {
+        throwIfNotDefined(resetPassword, 'resetPassword');
 
         let postBody = resetPassword;
-
-        if (resetPassword === undefined || resetPassword === null) {
-            throw new Error("Required param 'resetPassword' in requestPasswordReset");
-        }
 
         let pathParams = {
 
@@ -213,16 +202,10 @@ export class UsersApi extends BaseApi {
         * @return Promise<UserRepresentation>
         */
     updateUser(userId: number, userRequest: UserRepresentation): Promise<UserRepresentation> {
+        throwIfNotDefined(userId, 'userId');
+        throwIfNotDefined(userRequest, 'userRequest');
 
         let postBody = userRequest;
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in updateUser");
-        }
-
-        if (userRequest === undefined || userRequest === null) {
-            throw new Error("Required param 'userRequest' in updateUser");
-        }
 
         let pathParams = {
             'userId': userId

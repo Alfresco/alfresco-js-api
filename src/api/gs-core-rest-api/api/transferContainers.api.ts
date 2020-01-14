@@ -20,6 +20,7 @@ import { TransferContainerBodyUpdate } from '../model/transferContainerBodyUpdat
 import { TransferContainerEntry } from '../model/transferContainerEntry';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Transfercontainers service.
@@ -57,12 +58,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<TransferContainerEntry>
     */
     getTransferContainer(transferContainerId: string, opts?: any): Promise<TransferContainerEntry> {
+        throwIfNotDefined(transferContainerId, 'transferContainerId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (transferContainerId === undefined || transferContainerId === null) {
-            throw new Error("Required param 'transferContainerId' in getTransferContainer");
-        }
 
         let pathParams = {
             'transferContainerId': transferContainerId
@@ -125,12 +124,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<TransferContainerAssociationPaging>
         */
     listTransfers(transferContainerId: string, opts?: any): Promise<TransferContainerAssociationPaging> {
+        throwIfNotDefined(transferContainerId, 'transferContainerId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (transferContainerId === undefined || transferContainerId === null) {
-            throw new Error("Required param 'transferContainerId' in listTransfers");
-        }
 
         let pathParams = {
             'transferContainerId': transferContainerId
@@ -202,16 +199,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<TransferContainerEntry>
         */
     updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: any): Promise<TransferContainerEntry> {
+        throwIfNotDefined(transferContainerId, 'transferContainerId');
+        throwIfNotDefined(nodeBodyUpdate, 'nodeBodyUpdate');
+
         opts = opts || {};
         let postBody = nodeBodyUpdate;
-
-        if (transferContainerId === undefined || transferContainerId === null) {
-            throw new Error("Required param 'transferContainerId' in updateTransferContainer");
-        }
-
-        if (nodeBodyUpdate === undefined || nodeBodyUpdate === null) {
-            throw new Error("Required param 'nodeBodyUpdate' in updateTransferContainer");
-        }
 
         let pathParams = {
             'transferContainerId': transferContainerId

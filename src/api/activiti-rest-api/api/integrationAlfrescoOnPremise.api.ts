@@ -19,6 +19,7 @@ import { ResultListDataRepresentationAlfrescoContentRepresentation } from '../mo
 import { ResultListDataRepresentationAlfrescoEndpointRepresentation } from '../model/resultListDataRepresentationAlfrescoEndpointRepresentation';
 import { ResultListDataRepresentationAlfrescoSiteRepresenation } from '../model/resultListDataRepresentationAlfrescoSiteRepresenation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Integrationalfrescoonpremise service.
@@ -34,12 +35,9 @@ export class IntegrationAlfrescoOnPremiseApi extends BaseApi {
     * @return Promise<ResultListDataRepresentationAlfrescoSiteRepresenation>
     */
     getAllSites(repositoryId: string): Promise<ResultListDataRepresentationAlfrescoSiteRepresenation> {
+        throwIfNotDefined(repositoryId, 'networkId');
 
         let postBody = null;
-
-        if (repositoryId === undefined || repositoryId === null) {
-            throw new Error("Required param 'repositoryId' in getAllSites");
-        }
 
         let pathParams = {
             'repositoryId': repositoryId
@@ -73,20 +71,11 @@ export class IntegrationAlfrescoOnPremiseApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInFolderPath(repositoryId: string, siteId: string, folderPath: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+        throwIfNotDefined(repositoryId, 'networkId');
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(folderPath, 'folderPath');
 
         let postBody = null;
-
-        if (repositoryId === undefined || repositoryId === null) {
-            throw new Error("Required param 'repositoryId' in getContentInFolderPath");
-        }
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in getContentInFolderPath");
-        }
-
-        if (folderPath === undefined || folderPath === null) {
-            throw new Error("Required param 'folderPath' in getContentInFolderPath");
-        }
 
         let pathParams = {
             'repositoryId': repositoryId, 'siteId': siteId, 'folderPath': folderPath
@@ -119,16 +108,10 @@ export class IntegrationAlfrescoOnPremiseApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInFolder(repositoryId: string, folderId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+        throwIfNotDefined(repositoryId, 'networkId');
+        throwIfNotDefined(folderId, 'folderId');
 
         let postBody = null;
-
-        if (repositoryId === undefined || repositoryId === null) {
-            throw new Error("Required param 'repositoryId' in getContentInFolder");
-        }
-
-        if (folderId === undefined || folderId === null) {
-            throw new Error("Required param 'folderId' in getContentInFolder");
-        }
 
         let pathParams = {
             'repositoryId': repositoryId, 'folderId': folderId
@@ -161,16 +144,10 @@ export class IntegrationAlfrescoOnPremiseApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInSite(repositoryId: string, siteId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+        throwIfNotDefined(repositoryId, 'networkId');
+        throwIfNotDefined(siteId, 'siteId');
 
         let postBody = null;
-
-        if (repositoryId === undefined || repositoryId === null) {
-            throw new Error("Required param 'repositoryId' in getContentInSite");
-        }
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in getContentInSite");
-        }
 
         let pathParams = {
             'repositoryId': repositoryId, 'siteId': siteId

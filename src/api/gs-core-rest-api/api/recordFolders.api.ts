@@ -22,6 +22,7 @@ import { RecordFolderAssociationPaging } from '../model/recordFolderAssociationP
 import { RecordFolderEntry } from '../model/recordFolderEntry';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Recordfolders service.
@@ -143,16 +144,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<RecordEntry>
     */
     createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: any): Promise<RecordEntry> {
+        throwIfNotDefined(recordFolderId, 'recordFolderId');
+        throwIfNotDefined(recordBodyCreate, 'recordBodyCreate');
+
         opts = opts || {};
         let postBody = recordBodyCreate;
-
-        if (recordFolderId === undefined || recordFolderId === null) {
-            throw new Error("Required param 'recordFolderId' in createRecordFolderChild");
-        }
-
-        if (recordBodyCreate === undefined || recordBodyCreate === null) {
-            throw new Error("Required param 'recordBodyCreate' in createRecordFolderChild");
-        }
 
         let pathParams = {
             'recordFolderId': recordFolderId
@@ -187,12 +183,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteRecordFolder(recordFolderId: string): Promise<any> {
+        throwIfNotDefined(recordFolderId, 'recordFolderId');
 
         let postBody = null;
-
-        if (recordFolderId === undefined || recordFolderId === null) {
-            throw new Error("Required param 'recordFolderId' in deleteRecordFolder");
-        }
 
         let pathParams = {
             'recordFolderId': recordFolderId
@@ -247,12 +240,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RecordFolderEntry>
         */
     getRecordFolder(recordFolderId: string, opts?: any): Promise<RecordFolderEntry> {
+        throwIfNotDefined(recordFolderId, 'recordFolderId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (recordFolderId === undefined || recordFolderId === null) {
-            throw new Error("Required param 'recordFolderId' in getRecordFolder");
-        }
 
         let pathParams = {
             'recordFolderId': recordFolderId
@@ -326,12 +317,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RecordFolderAssociationPaging>
         */
     listRecordFolderChildren(recordFolderId: string, opts?: any): Promise<RecordFolderAssociationPaging> {
+        throwIfNotDefined(recordFolderId, 'recordFolderId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (recordFolderId === undefined || recordFolderId === null) {
-            throw new Error("Required param 'recordFolderId' in listRecordFolderChildren");
-        }
 
         let pathParams = {
             'recordFolderId': recordFolderId
@@ -407,16 +396,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RecordFolderEntry>
         */
     updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordFolderEntry> {
+        throwIfNotDefined(recordFolderId, 'recordFolderId');
+        throwIfNotDefined(recordFolderBodyUpdate, 'recordFolderBodyUpdate');
+
         opts = opts || {};
         let postBody = recordFolderBodyUpdate;
-
-        if (recordFolderId === undefined || recordFolderId === null) {
-            throw new Error("Required param 'recordFolderId' in updateRecordFolder");
-        }
-
-        if (recordFolderBodyUpdate === undefined || recordFolderBodyUpdate === null) {
-            throw new Error("Required param 'recordFolderBodyUpdate' in updateRecordFolder");
-        }
 
         let pathParams = {
             'recordFolderId': recordFolderId

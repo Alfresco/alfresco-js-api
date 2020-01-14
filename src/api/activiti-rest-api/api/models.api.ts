@@ -20,6 +20,7 @@ import { ObjectNode } from '../model/objectNode';
 import { ResultListDataRepresentationModelRepresentation } from '../model/resultListDataRepresentationModelRepresentation';
 import { ValidationErrorRepresentation } from '../model/validationErrorRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Models service.
@@ -35,12 +36,9 @@ export class ModelsApi extends BaseApi {
     * @return Promise<ModelRepresentation>
     */
     createModel(modelRepresentation: ModelRepresentation): Promise<ModelRepresentation> {
+        throwIfNotDefined(modelRepresentation, 'modelRepresentation');
 
         let postBody = modelRepresentation;
-
-        if (modelRepresentation === undefined || modelRepresentation === null) {
-            throw new Error("Required param 'modelRepresentation' in createModel");
-        }
 
         let pathParams = {
 
@@ -75,12 +73,10 @@ export class ModelsApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteModel(modelId: number, opts?: any): Promise<any> {
+        throwIfNotDefined(modelId, 'modelId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in deleteModel");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -115,16 +111,10 @@ export class ModelsApi extends BaseApi {
         * @return Promise<ModelRepresentation>
         */
     duplicateModel(modelId: number, modelRepresentation: ModelRepresentation): Promise<ModelRepresentation> {
+        throwIfNotDefined(modelId, 'modelId');
+        throwIfNotDefined(modelRepresentation, 'modelRepresentation');
 
         let postBody = modelRepresentation;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in duplicateModel");
-        }
-
-        if (modelRepresentation === undefined || modelRepresentation === null) {
-            throw new Error("Required param 'modelRepresentation' in duplicateModel");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -156,12 +146,8 @@ export class ModelsApi extends BaseApi {
         * @return Promise<ObjectNode>
         */
     getModelJSON(modelId: number): Promise<ObjectNode> {
-
+        throwIfNotDefined(modelId, 'modelId');
         let postBody = null;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in getModelJSON");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -193,12 +179,8 @@ export class ModelsApi extends BaseApi {
         * @return Promise<string>
         */
     getModelThumbnail(modelId: number): Promise<string> {
-
+        throwIfNotDefined(modelId, 'modelId');
         let postBody = null;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in getModelThumbnail");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -232,12 +214,9 @@ export class ModelsApi extends BaseApi {
         * @return Promise<ModelRepresentation>
         */
     getModel(modelId: number, opts?: any): Promise<ModelRepresentation> {
+        throwIfNotDefined(modelId, 'modelId');
         opts = opts || {};
         let postBody = null;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in getModel");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -347,16 +326,10 @@ export class ModelsApi extends BaseApi {
         * @return Promise<ModelRepresentation>
         */
     importNewVersion(modelId: number, file: any): Promise<ModelRepresentation> {
+        throwIfNotDefined(modelId, 'modelId');
+        throwIfNotDefined(file, 'file');
 
         let postBody = null;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in importNewVersion");
-        }
-
-        if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in importNewVersion");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -389,12 +362,9 @@ export class ModelsApi extends BaseApi {
         * @return Promise<ModelRepresentation>
         */
     importProcessModel(file: any): Promise<ModelRepresentation> {
+        throwIfNotDefined(file, 'file');
 
         let postBody = null;
-
-        if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in importProcessModel");
-        }
 
         let pathParams = {
 
@@ -428,16 +398,10 @@ export class ModelsApi extends BaseApi {
         * @return Promise<ModelRepresentation>
         */
     saveModel(modelId: number, values: any): Promise<ModelRepresentation> {
+        throwIfNotDefined(modelId, 'modelId');
+        throwIfNotDefined(values, 'values');
 
         let postBody = values;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in saveModel");
-        }
-
-        if (values === undefined || values === null) {
-            throw new Error("Required param 'values' in saveModel");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -470,16 +434,10 @@ export class ModelsApi extends BaseApi {
         * @return Promise<ModelRepresentation>
         */
     updateModel(modelId: number, updatedModel: ModelRepresentation): Promise<ModelRepresentation> {
+        throwIfNotDefined(modelId, 'modelId');
+        throwIfNotDefined(updatedModel, 'updatedModel');
 
         let postBody = updatedModel;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in updateModel");
-        }
-
-        if (updatedModel === undefined || updatedModel === null) {
-            throw new Error("Required param 'updatedModel' in updateModel");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -513,12 +471,10 @@ export class ModelsApi extends BaseApi {
         * @return Promise<ValidationErrorRepresentation>
         */
     validateModel(modelId: number, opts?: any): Promise<ValidationErrorRepresentation> {
+        throwIfNotDefined(modelId, 'modelId');
+
         opts = opts || {};
         let postBody = opts['values'];
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in validateModel");
-        }
 
         let pathParams = {
             'modelId': modelId

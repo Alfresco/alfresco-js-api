@@ -19,6 +19,7 @@ import { JsonNode } from '../model/jsonNode';
 import { ResultListDataRepresentationRuntimeDecisionTableRepresentation } from '../model/resultListDataRepresentationRuntimeDecisionTableRepresentation';
 import { RuntimeDecisionTableRepresentation } from '../model/runtimeDecisionTableRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Decisiontables service.
@@ -34,12 +35,9 @@ export class DecisionTablesApi extends BaseApi {
     * @return Promise<JsonNode>
     */
     getDecisionTableEditorJson(decisionTableId: number): Promise<JsonNode> {
+        throwIfNotDefined(decisionTableId, 'decisionTableId');
 
         let postBody = null;
-
-        if (decisionTableId === undefined || decisionTableId === null) {
-            throw new Error("Required param 'decisionTableId' in getDecisionTableEditorJson");
-        }
 
         let pathParams = {
             'decisionTableId': decisionTableId
@@ -71,12 +69,9 @@ export class DecisionTablesApi extends BaseApi {
         * @return Promise<RuntimeDecisionTableRepresentation>
         */
     getDecisionTable(decisionTableId: number): Promise<RuntimeDecisionTableRepresentation> {
+        throwIfNotDefined(decisionTableId, 'decisionTableId');
 
         let postBody = null;
-
-        if (decisionTableId === undefined || decisionTableId === null) {
-            throw new Error("Required param 'decisionTableId' in getDecisionTable");
-        }
 
         let pathParams = {
             'decisionTableId': decisionTableId

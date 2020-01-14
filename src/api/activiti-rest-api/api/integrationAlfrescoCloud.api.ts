@@ -19,6 +19,7 @@ import { ResultListDataRepresentationAlfrescoContentRepresentation } from '../mo
 import { ResultListDataRepresentationAlfrescoNetworkRepresenation } from '../model/resultListDataRepresentationAlfrescoNetworkRepresenation';
 import { ResultListDataRepresentationAlfrescoSiteRepresenation } from '../model/resultListDataRepresentationAlfrescoSiteRepresenation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Integrationalfrescocloud service.
@@ -34,12 +35,9 @@ export class IntegrationAlfrescoCloudApi extends BaseApi {
     * @return Promise<{}>
     */
     confirmAuthorisation(code: string): Promise<any> {
+        throwIfNotDefined(code, 'code');
 
         let postBody = null;
-
-        if (code === undefined || code === null) {
-            throw new Error("Required param 'code' in confirmAuthorisation");
-        }
 
         let pathParams = {
 
@@ -104,12 +102,9 @@ export class IntegrationAlfrescoCloudApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationAlfrescoSiteRepresenation>
         */
     getAllSites(networkId: string): Promise<ResultListDataRepresentationAlfrescoSiteRepresenation> {
+        throwIfNotDefined(networkId, 'networkId');
 
         let postBody = null;
-
-        if (networkId === undefined || networkId === null) {
-            throw new Error("Required param 'networkId' in getAllSites");
-        }
 
         let pathParams = {
             'networkId': networkId
@@ -144,12 +139,10 @@ export class IntegrationAlfrescoCloudApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInFolderPath(networkId: string, opts?: any): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+        throwIfNotDefined(networkId, 'networkId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (networkId === undefined || networkId === null) {
-            throw new Error("Required param 'networkId' in getContentInFolderPath");
-        }
 
         let pathParams = {
             'networkId': networkId
@@ -184,16 +177,10 @@ export class IntegrationAlfrescoCloudApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInFolder(networkId: string, folderId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+        throwIfNotDefined(networkId, 'networkId');
+        throwIfNotDefined(folderId, 'folderId');
 
         let postBody = null;
-
-        if (networkId === undefined || networkId === null) {
-            throw new Error("Required param 'networkId' in getContentInFolder");
-        }
-
-        if (folderId === undefined || folderId === null) {
-            throw new Error("Required param 'folderId' in getContentInFolder");
-        }
 
         let pathParams = {
             'networkId': networkId, 'folderId': folderId
@@ -226,16 +213,10 @@ export class IntegrationAlfrescoCloudApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
         */
     getContentInSite(networkId: string, siteId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+        throwIfNotDefined(networkId, 'networkId');
+        throwIfNotDefined(siteId, 'siteId');
 
         let postBody = null;
-
-        if (networkId === undefined || networkId === null) {
-            throw new Error("Required param 'networkId' in getContentInSite");
-        }
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in getContentInSite");
-        }
 
         let pathParams = {
             'networkId': networkId, 'siteId': siteId

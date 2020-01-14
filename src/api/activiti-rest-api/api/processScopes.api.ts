@@ -18,6 +18,7 @@
 import { ProcessScopeRepresentation } from '../model/processScopeRepresentation';
 import { ProcessScopesRequestRepresentation } from '../model/processScopesRequestRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Processscopes service.
@@ -33,12 +34,9 @@ export class ProcessScopesApi extends BaseApi {
     * @return Promise<ProcessScopeRepresentation>
     */
     getRuntimeProcessScopes(processScopesRequest: ProcessScopesRequestRepresentation): Promise<ProcessScopeRepresentation> {
+        throwIfNotDefined(processScopesRequest, 'processScopesRequest');
 
         let postBody = processScopesRequest;
-
-        if (processScopesRequest === undefined || processScopesRequest === null) {
-            throw new Error("Required param 'processScopesRequest' in getRuntimeProcessScopes");
-        }
 
         let pathParams = {
 

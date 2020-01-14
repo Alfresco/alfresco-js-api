@@ -19,6 +19,7 @@ import { RenditionBodyCreate } from '../model/renditionBodyCreate';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Renditions service.
@@ -44,16 +45,10 @@ JSON
     * @return Promise<{}>
     */
     createRendition(nodeId: string, renditionBodyCreate: RenditionBodyCreate): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(renditionBodyCreate, 'renditionBodyCreate');
 
         let postBody = renditionBodyCreate;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in createRendition");
-        }
-
-        if (renditionBodyCreate === undefined || renditionBodyCreate === null) {
-            throw new Error("Required param 'renditionBodyCreate' in createRendition");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -89,16 +84,10 @@ JSON
         * @return Promise<RenditionEntry>
         */
     getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(renditionId, 'renditionId');
 
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in getRendition");
-        }
-
-        if (renditionId === undefined || renditionId === null) {
-            throw new Error("Required param 'renditionId' in getRendition");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'renditionId': renditionId
@@ -155,16 +144,11 @@ JSON
         * @return Promise<{}>
         */
     getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(renditionId, 'renditionId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in getRenditionContent");
-        }
-
-        if (renditionId === undefined || renditionId === null) {
-            throw new Error("Required param 'renditionId' in getRenditionContent");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'renditionId': renditionId
@@ -212,12 +196,10 @@ JSON
         * @return Promise<RenditionPaging>
         */
     listRenditions(nodeId: string, opts?: any): Promise<RenditionPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listRenditions");
-        }
 
         let pathParams = {
             'nodeId': nodeId

@@ -34,6 +34,7 @@ import { SiteRoleEntry } from '../model/siteRoleEntry';
 import { SiteRolePaging } from '../model/siteRolePaging';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Sites service.
@@ -54,16 +55,11 @@ export class SitesApi extends BaseApi {
     * @return Promise<{}>
     */
     approveSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(inviteeId, 'inviteeId');
+
         opts = opts || {};
         let postBody = opts['siteMembershipApprovalBody'];
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in approveSiteMembershipRequest");
-        }
-
-        if (inviteeId === undefined || inviteeId === null) {
-            throw new Error("Required param 'inviteeId' in approveSiteMembershipRequest");
-        }
 
         let pathParams = {
             'siteId': siteId, 'inviteeId': inviteeId
@@ -135,12 +131,10 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteEntry>
         */
     createSite(siteBodyCreate: SiteBodyCreate, opts?: any): Promise<SiteEntry> {
+        throwIfNotDefined(siteBodyCreate, 'siteBodyCreate');
+
         opts = opts || {};
         let postBody = siteBodyCreate;
-
-        if (siteBodyCreate === undefined || siteBodyCreate === null) {
-            throw new Error("Required param 'siteBodyCreate' in createSite");
-        }
 
         let pathParams = {
 
@@ -240,16 +234,11 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteMemberEntry>
         */
     createSiteMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: any): Promise<SiteMemberEntry> {
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(siteMembershipBodyCreate, 'siteMembershipBodyCreate');
+
         opts = opts || {};
         let postBody = siteMembershipBodyCreate;
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in createSiteMembership");
-        }
-
-        if (siteMembershipBodyCreate === undefined || siteMembershipBodyCreate === null) {
-            throw new Error("Required param 'siteMembershipBodyCreate' in createSiteMembership");
-        }
 
         let pathParams = {
             'siteId': siteId
@@ -349,16 +338,11 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteMembershipRequestEntry>
         */
     createSiteMembershipRequestForPerson(personId: string, siteMembershipRequestBodyCreate: SiteMembershipRequestBodyCreate, opts?: any): Promise<SiteMembershipRequestEntry> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(siteMembershipRequestBodyCreate, 'siteMembershipRequestBodyCreate');
+
         opts = opts || {};
         let postBody = siteMembershipRequestBodyCreate;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in createSiteMembershipRequestForPerson");
-        }
-
-        if (siteMembershipRequestBodyCreate === undefined || siteMembershipRequestBodyCreate === null) {
-            throw new Error("Required param 'siteMembershipRequestBodyCreate' in createSiteMembershipRequestForPerson");
-        }
 
         let pathParams = {
             'personId': personId
@@ -396,12 +380,10 @@ export class SitesApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteSite(siteId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(siteId, 'siteId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in deleteSite");
-        }
 
         let pathParams = {
             'siteId': siteId
@@ -438,16 +420,10 @@ export class SitesApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteSiteMembership(siteId: string, personId: string): Promise<any> {
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(personId, 'personId');
 
         let postBody = null;
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in deleteSiteMembership");
-        }
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in deleteSiteMembership");
-        }
 
         let pathParams = {
             'siteId': siteId, 'personId': personId
@@ -483,16 +459,10 @@ export class SitesApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteSiteMembershipForPerson(personId: string, siteId: string): Promise<any> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(siteId, 'siteId');
 
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in deleteSiteMembershipForPerson");
-        }
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in deleteSiteMembershipForPerson");
-        }
 
         let pathParams = {
             'personId': personId, 'siteId': siteId
@@ -528,16 +498,10 @@ export class SitesApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteSiteMembershipRequestForPerson(personId: string, siteId: string): Promise<any> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(siteId, 'siteId');
 
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in deleteSiteMembershipRequestForPerson");
-        }
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in deleteSiteMembershipRequestForPerson");
-        }
 
         let pathParams = {
             'personId': personId, 'siteId': siteId
@@ -596,12 +560,10 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteEntry>
         */
     getSite(siteId: string, opts?: any): Promise<SiteEntry> {
+        throwIfNotDefined(siteId, 'siteId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in getSite");
-        }
 
         let pathParams = {
             'siteId': siteId
@@ -649,16 +611,11 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteContainerEntry>
         */
     getSiteContainer(siteId: string, containerId: string, opts?: any): Promise<SiteContainerEntry> {
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(containerId, 'containerId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in getSiteContainer");
-        }
-
-        if (containerId === undefined || containerId === null) {
-            throw new Error("Required param 'containerId' in getSiteContainer");
-        }
 
         let pathParams = {
             'siteId': siteId, 'containerId': containerId
@@ -708,16 +665,11 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteMemberEntry>
         */
     getSiteMembership(siteId: string, personId: string, opts?: any): Promise<SiteMemberEntry> {
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in getSiteMembership");
-        }
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in getSiteMembership");
-        }
 
         let pathParams = {
             'siteId': siteId, 'personId': personId
@@ -754,16 +706,10 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteRoleEntry>
         */
     getSiteMembershipForPerson(personId: string, siteId: string): Promise<SiteRoleEntry> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(siteId, 'siteId');
 
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in getSiteMembershipForPerson");
-        }
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in getSiteMembershipForPerson");
-        }
 
         let pathParams = {
             'personId': personId, 'siteId': siteId
@@ -812,16 +758,11 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteMembershipRequestEntry>
         */
     getSiteMembershipRequestForPerson(personId: string, siteId: string, opts?: any): Promise<SiteMembershipRequestEntry> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(siteId, 'siteId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in getSiteMembershipRequestForPerson");
-        }
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in getSiteMembershipRequestForPerson");
-        }
 
         let pathParams = {
             'personId': personId, 'siteId': siteId
@@ -948,12 +889,10 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteContainerPaging>
         */
     listSiteContainers(siteId: string, opts?: any): Promise<SiteContainerPaging> {
+        throwIfNotDefined(siteId, 'siteId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in listSiteContainers");
-        }
 
         let pathParams = {
             'siteId': siteId
@@ -1010,12 +949,10 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteMembershipRequestPaging>
         */
     listSiteMembershipRequestsForPerson(personId: string, opts?: any): Promise<SiteMembershipRequestPaging> {
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in listSiteMembershipRequestsForPerson");
-        }
 
         let pathParams = {
             'personId': personId
@@ -1069,12 +1006,10 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteMemberPaging>
         */
     listSiteMemberships(siteId: string, opts?: any): Promise<SiteMemberPaging> {
+        throwIfNotDefined(siteId, 'siteId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in listSiteMemberships");
-        }
 
         let pathParams = {
             'siteId': siteId
@@ -1163,12 +1098,10 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteRolePaging>
         */
     listSiteMembershipsForPerson(personId: string, opts?: any): Promise<SiteRolePaging> {
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in listSiteMembershipsForPerson");
-        }
 
         let pathParams = {
             'personId': personId
@@ -1313,16 +1246,11 @@ export class SitesApi extends BaseApi {
         * @return Promise<{}>
         */
     rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(inviteeId, 'inviteeId');
+
         opts = opts || {};
         let postBody = opts['siteMembershipRejectionBody'];
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in rejectSiteMembershipRequest");
-        }
-
-        if (inviteeId === undefined || inviteeId === null) {
-            throw new Error("Required param 'inviteeId' in rejectSiteMembershipRequest");
-        }
 
         let pathParams = {
             'siteId': siteId, 'inviteeId': inviteeId
@@ -1374,16 +1302,11 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteEntry>
         */
     updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts?: any): Promise<SiteEntry> {
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(siteBodyUpdate, 'siteBodyUpdate');
+
         opts = opts || {};
         let postBody = siteBodyUpdate;
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in updateSite");
-        }
-
-        if (siteBodyUpdate === undefined || siteBodyUpdate === null) {
-            throw new Error("Required param 'siteBodyUpdate' in updateSite");
-        }
 
         let pathParams = {
             'siteId': siteId
@@ -1441,20 +1364,12 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteMemberEntry>
         */
     updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: any): Promise<SiteMemberEntry> {
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(siteMembershipBodyUpdate, 'siteMembershipBodyUpdate');
+
         opts = opts || {};
         let postBody = siteMembershipBodyUpdate;
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in updateSiteMembership");
-        }
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in updateSiteMembership");
-        }
-
-        if (siteMembershipBodyUpdate === undefined || siteMembershipBodyUpdate === null) {
-            throw new Error("Required param 'siteMembershipBodyUpdate' in updateSiteMembership");
-        }
 
         let pathParams = {
             'siteId': siteId, 'personId': personId
@@ -1505,20 +1420,12 @@ export class SitesApi extends BaseApi {
         * @return Promise<SiteMembershipRequestEntry>
         */
     updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts?: any): Promise<SiteMembershipRequestEntry> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(siteMembershipRequestBodyUpdate, 'siteMembershipRequestBodyUpdate');
+
         opts = opts || {};
         let postBody = siteMembershipRequestBodyUpdate;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in updateSiteMembershipRequestForPerson");
-        }
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in updateSiteMembershipRequestForPerson");
-        }
-
-        if (siteMembershipRequestBodyUpdate === undefined || siteMembershipRequestBodyUpdate === null) {
-            throw new Error("Required param 'siteMembershipRequestBodyUpdate' in updateSiteMembershipRequestForPerson");
-        }
 
         let pathParams = {
             'personId': personId, 'siteId': siteId

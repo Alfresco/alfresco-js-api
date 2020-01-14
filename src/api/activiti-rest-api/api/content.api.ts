@@ -18,6 +18,7 @@
 import { RelatedContentRepresentation } from '../model/relatedContentRepresentation';
 import { ResultListDataRepresentationRelatedContentRepresentation } from '../model/resultListDataRepresentationRelatedContentRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
  * Content service.
@@ -36,14 +37,10 @@ export class ContentApi extends BaseApi {
      * @return Promise<RelatedContentRepresentation>
      */
     createRelatedContentOnProcessInstance(processInstanceId: string, relatedContent: RelatedContentRepresentation | any, opts?: any): Promise<RelatedContentRepresentation> {
-        opts = opts || {};
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in createRelatedContentOnProcessInstance");
-        }
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+        throwIfNotDefined(relatedContent, 'relatedContent');
 
-        if (relatedContent === undefined || relatedContent === null) {
-            throw new Error("Required param 'relatedContent' in createRelatedContentOnProcessInstance");
-        }
+        opts = opts || {};
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -90,14 +87,10 @@ export class ContentApi extends BaseApi {
      * @return Promise<RelatedContentRepresentation>
      */
     createRelatedContentOnTask(taskId: string, relatedContent: RelatedContentRepresentation | any, opts?: any): Promise<RelatedContentRepresentation> {
-        opts = opts || {};
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in createRelatedContentOnTask");
-        }
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(relatedContent, 'relatedContent');
 
-        if (relatedContent === undefined || relatedContent === null) {
-            throw new Error("Required param 'relatedContent' in createRelatedContentOnTask");
-        }
+        opts = opts || {};
 
         let pathParams = {
             'taskId': taskId
@@ -142,12 +135,9 @@ export class ContentApi extends BaseApi {
      * @return Promise<RelatedContentRepresentation>
      */
     createTemporaryRawRelatedContent(file: any): Promise<RelatedContentRepresentation> {
+        throwIfNotDefined(file, 'file');
 
         let postBody = null;
-
-        if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in createTemporaryRawRelatedContent");
-        }
 
         let pathParams = {};
 
@@ -176,12 +166,9 @@ export class ContentApi extends BaseApi {
      * @return Promise<RelatedContentRepresentation>
      */
     createTemporaryRelatedContent(relatedContent: RelatedContentRepresentation): Promise<RelatedContentRepresentation> {
+        throwIfNotDefined(relatedContent, 'relatedContent');
 
         let postBody = relatedContent;
-
-        if (relatedContent === undefined || relatedContent === null) {
-            throw new Error("Required param 'relatedContent' in createTemporaryRelatedContent");
-        }
 
         let pathParams = {};
 
@@ -208,12 +195,9 @@ export class ContentApi extends BaseApi {
      * @return Promise<{}>
      */
     deleteContent(contentId: number): Promise<any> {
+        throwIfNotDefined(contentId, 'contentId');
 
         let postBody = null;
-
-        if (contentId === undefined || contentId === null) {
-            throw new Error("Required param 'contentId' in deleteContent");
-        }
 
         let pathParams = {
             'contentId': contentId
@@ -242,12 +226,9 @@ export class ContentApi extends BaseApi {
      * @return Promise<RelatedContentRepresentation>
      */
     getContent(contentId: number): Promise<RelatedContentRepresentation> {
+        throwIfNotDefined(contentId, 'contentId');
 
         let postBody = null;
-
-        if (contentId === undefined || contentId === null) {
-            throw new Error("Required param 'contentId' in getContent");
-        }
 
         let pathParams = {
             'contentId': contentId
@@ -284,14 +265,10 @@ export class ContentApi extends BaseApi {
      * @param renditionType renditionType
      * @return Promise<{}>
      */
-    getRawContent(contentId: number): Promise<any>;
-    getRawContent(contentId: number, renditionType: string): Promise<any>;
     getRawContent(contentId: number, renditionType?: string): Promise<any> {
-        let postBody = null;
+        throwIfNotDefined(contentId, 'contentId');
 
-        if (contentId === undefined || contentId === null) {
-            throw new Error("Required param 'contentId' in getRawContent");
-        }
+        let postBody = null;
 
         let queryParams = {};
 
@@ -336,12 +313,10 @@ export class ContentApi extends BaseApi {
      * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
      */
     getRelatedContentForProcessInstance(processInstanceId: string, opts?: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getRelatedContentForProcessInstance");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -374,12 +349,10 @@ export class ContentApi extends BaseApi {
      * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
      */
     getRelatedContentForTask(taskId: string, opts?: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getRelatedContentForTask");
-        }
 
         let pathParams = {
             'taskId': taskId

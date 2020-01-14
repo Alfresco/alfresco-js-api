@@ -20,6 +20,7 @@ import { ClassificationReasonEntry } from '../model/classificationReasonEntry';
 import { ClassificationReasonsPaging } from '../model/classificationReasonsPaging';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Classificationreasons service.
@@ -77,12 +78,9 @@ JSON
     * @return Promise<ClassificationReasonEntry>
     */
     createClassificationReason(classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry> {
+        throwIfNotDefined(classificationReason, 'classificationReason');
 
         let postBody = classificationReason;
-
-        if (classificationReason === undefined || classificationReason === null) {
-            throw new Error("Required param 'classificationReason' in createClassificationReason");
-        }
 
         let pathParams = {
 
@@ -114,12 +112,9 @@ JSON
         * @return Promise<{}>
         */
     deleteClassificationReason(classificationReasonId: string): Promise<any> {
+        throwIfNotDefined(classificationReasonId, 'classificationReasonId');
 
         let postBody = null;
-
-        if (classificationReasonId === undefined || classificationReasonId === null) {
-            throw new Error("Required param 'classificationReasonId' in deleteClassificationReason");
-        }
 
         let pathParams = {
             'classificationReasonId': classificationReasonId
@@ -201,12 +196,9 @@ JSON
         * @return Promise<ClassificationReasonEntry>
         */
     showClassificationReasonById(classificationReasonId: string): Promise<ClassificationReasonEntry> {
+        throwIfNotDefined(classificationReasonId, 'classificationReasonId');
 
         let postBody = null;
-
-        if (classificationReasonId === undefined || classificationReasonId === null) {
-            throw new Error("Required param 'classificationReasonId' in showClassificationReasonById");
-        }
 
         let pathParams = {
             'classificationReasonId': classificationReasonId
@@ -239,16 +231,10 @@ JSON
         * @return Promise<ClassificationReasonEntry>
         */
     updateClassificationReason(classificationReasonId: string, classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry> {
+        throwIfNotDefined(classificationReasonId, 'classificationReasonId');
+        throwIfNotDefined(classificationReason, 'classificationReason');
 
         let postBody = classificationReason;
-
-        if (classificationReasonId === undefined || classificationReasonId === null) {
-            throw new Error("Required param 'classificationReasonId' in updateClassificationReason");
-        }
-
-        if (classificationReason === undefined || classificationReason === null) {
-            throw new Error("Required param 'classificationReason' in updateClassificationReason");
-        }
 
         let pathParams = {
             'classificationReasonId': classificationReasonId

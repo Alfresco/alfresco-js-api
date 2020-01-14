@@ -20,6 +20,7 @@ import { RMSiteBodyUpdate } from '../model/rMSiteBodyUpdate';
 import { RMSiteEntry } from '../model/rMSiteEntry';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Gssites service.
@@ -52,12 +53,10 @@ When you create the RM site, the **filePlan** structure is also created includin
     * @return Promise<RMSiteEntry>
     */
     createRMSite(siteBodyCreate: RMSiteBodyCreate, opts?: any): Promise<RMSiteEntry> {
+        throwIfNotDefined(siteBodyCreate, 'siteBodyCreate');
+
         opts = opts || {};
         let postBody = siteBodyCreate;
-
-        if (siteBodyCreate === undefined || siteBodyCreate === null) {
-            throw new Error("Required param 'siteBodyCreate' in createRMSite");
-        }
 
         let pathParams = {
 
@@ -189,12 +188,10 @@ When you create the RM site, the **filePlan** structure is also created includin
         * @return Promise<RMSiteEntry>
         */
     updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts?: any): Promise<RMSiteEntry> {
+        throwIfNotDefined(siteBodyUpdate, 'siteBodyUpdate');
+
         opts = opts || {};
         let postBody = siteBodyUpdate;
-
-        if (siteBodyUpdate === undefined || siteBodyUpdate === null) {
-            throw new Error("Required param 'siteBodyUpdate' in updateRMSite");
-        }
 
         let pathParams = {
 

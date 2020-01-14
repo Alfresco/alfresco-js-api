@@ -18,6 +18,7 @@
 import { SecurityControlSettingBody } from '../model/securityControlSettingBody';
 import { SecurityControlSettingEntry } from '../model/securityControlSettingEntry';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Securitycontrolsettings service.
@@ -35,12 +36,9 @@ export class SecurityControlSettingsApi extends BaseApi {
     * @return Promise<SecurityControlSettingEntry>
     */
     getSecurityControlSetting(securityControlSettingKey: string): Promise<SecurityControlSettingEntry> {
+        throwIfNotDefined(securityControlSettingKey, 'securityControlSettingKey');
 
         let postBody = null;
-
-        if (securityControlSettingKey === undefined || securityControlSettingKey === null) {
-            throw new Error("Required param 'securityControlSettingKey' in getSecurityControlSetting");
-        }
 
         let pathParams = {
             'securityControlSettingKey': securityControlSettingKey
@@ -75,16 +73,10 @@ export class SecurityControlSettingsApi extends BaseApi {
         * @return Promise<SecurityControlSettingEntry>
         */
     updateSecurityControlSetting(securityControlSettingKey: string, securityControlSettingValue: SecurityControlSettingBody): Promise<SecurityControlSettingEntry> {
+        throwIfNotDefined(securityControlSettingKey, 'securityControlSettingKey');
+        throwIfNotDefined(securityControlSettingValue, 'securityControlSettingValue');
 
         let postBody = securityControlSettingValue;
-
-        if (securityControlSettingKey === undefined || securityControlSettingKey === null) {
-            throw new Error("Required param 'securityControlSettingKey' in updateSecurityControlSetting");
-        }
-
-        if (securityControlSettingValue === undefined || securityControlSettingValue === null) {
-            throw new Error("Required param 'securityControlSettingValue' in updateSecurityControlSetting");
-        }
 
         let pathParams = {
             'securityControlSettingKey': securityControlSettingKey

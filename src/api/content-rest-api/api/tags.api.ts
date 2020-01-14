@@ -20,6 +20,7 @@ import { TagEntry } from '../model/tagEntry';
 import { TagPaging } from '../model/tagPaging';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Tags service.
@@ -95,16 +96,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<TagEntry>
     */
     createTagForNode(nodeId: string, tagBodyCreate: TagBody, opts?: any): Promise<TagEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(tagBodyCreate, 'tagBodyCreate');
+
         opts = opts || {};
         let postBody = tagBodyCreate;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in createTagForNode");
-        }
-
-        if (tagBodyCreate === undefined || tagBodyCreate === null) {
-            throw new Error("Required param 'tagBodyCreate' in createTagForNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -138,16 +134,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteTagFromNode(nodeId: string, tagId: string): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(tagId, 'tagId');
 
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in deleteTagFromNode");
-        }
-
-        if (tagId === undefined || tagId === null) {
-            throw new Error("Required param 'tagId' in deleteTagFromNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'tagId': tagId
@@ -192,12 +182,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<TagEntry>
         */
     getTag(tagId: string, opts?: any): Promise<TagEntry> {
+        throwIfNotDefined(tagId, 'tagId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (tagId === undefined || tagId === null) {
-            throw new Error("Required param 'tagId' in getTag");
-        }
 
         let pathParams = {
             'tagId': tagId
@@ -310,12 +298,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<TagPaging>
         */
     listTagsForNode(nodeId: string, opts?: any): Promise<TagPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listTagsForNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -364,16 +350,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<TagEntry>
         */
     updateTag(tagId: string, tagBodyUpdate: TagBody, opts?: any): Promise<TagEntry> {
+        throwIfNotDefined(tagId, 'tagId');
+        throwIfNotDefined(tagBodyUpdate, 'tagBodyUpdate');
+
         opts = opts || {};
         let postBody = tagBodyUpdate;
-
-        if (tagId === undefined || tagId === null) {
-            throw new Error("Required param 'tagId' in updateTag");
-        }
-
-        if (tagBodyUpdate === undefined || tagBodyUpdate === null) {
-            throw new Error("Required param 'tagBodyUpdate' in updateTag");
-        }
 
         let pathParams = {
             'tagId': tagId

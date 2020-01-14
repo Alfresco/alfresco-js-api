@@ -18,6 +18,7 @@
 import { RecordEntry } from '../model/recordEntry';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Files service.
@@ -53,12 +54,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<RecordEntry>
     */
     declareRecord(fileId: string, opts?: any): Promise<RecordEntry> {
+        throwIfNotDefined(fileId, 'fileId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (fileId === undefined || fileId === null) {
-            throw new Error("Required param 'fileId' in declareRecord");
-        }
 
         let pathParams = {
             'fileId': fileId

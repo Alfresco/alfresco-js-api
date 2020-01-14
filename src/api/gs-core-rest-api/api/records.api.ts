@@ -20,6 +20,7 @@ import { RecordEntry } from '../model/recordEntry';
 import { RequestBodyFile } from '../model/requestBodyFile';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Records service.
@@ -55,12 +56,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<RecordEntry>
     */
     completeRecord(recordId: string, opts?: any): Promise<RecordEntry> {
+        throwIfNotDefined(recordId, 'recordId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (recordId === undefined || recordId === null) {
-            throw new Error("Required param 'recordId' in completeRecord");
-        }
 
         let pathParams = {
             'recordId': recordId
@@ -95,12 +94,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteRecord(recordId: string): Promise<any> {
+        throwIfNotDefined(recordId, 'recordId');
 
         let postBody = null;
-
-        if (recordId === undefined || recordId === null) {
-            throw new Error("Required param 'recordId' in deleteRecord");
-        }
 
         let pathParams = {
             'recordId': recordId
@@ -159,16 +155,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RecordEntry>
         */
     fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts?: any): Promise<RecordEntry> {
+        throwIfNotDefined(recordId, 'recordId');
+        throwIfNotDefined(nodeBodyFile, 'nodeBodyFile');
+
         opts = opts || {};
         let postBody = nodeBodyFile;
-
-        if (recordId === undefined || recordId === null) {
-            throw new Error("Required param 'recordId' in fileRecord");
-        }
-
-        if (nodeBodyFile === undefined || nodeBodyFile === null) {
-            throw new Error("Required param 'nodeBodyFile' in fileRecord");
-        }
 
         let pathParams = {
             'recordId': recordId
@@ -226,12 +217,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RecordEntry>
         */
     getRecord(recordId: string, opts?: any): Promise<RecordEntry> {
+        throwIfNotDefined(recordId, 'recordId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (recordId === undefined || recordId === null) {
-            throw new Error("Required param 'recordId' in getRecord");
-        }
 
         let pathParams = {
             'recordId': recordId
@@ -281,12 +270,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     getRecordContent(recordId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(recordId, 'recordId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (recordId === undefined || recordId === null) {
-            throw new Error("Required param 'recordId' in getRecordContent");
-        }
 
         let pathParams = {
             'recordId': recordId
@@ -358,16 +345,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RecordEntry>
         */
     updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordEntry> {
+        throwIfNotDefined(recordId, 'recordId');
+        throwIfNotDefined(recordBodyUpdate, 'recordBodyUpdate');
+
         opts = opts || {};
         let postBody = recordBodyUpdate;
-
-        if (recordId === undefined || recordId === null) {
-            throw new Error("Required param 'recordId' in updateRecord");
-        }
-
-        if (recordBodyUpdate === undefined || recordBodyUpdate === null) {
-            throw new Error("Required param 'recordBodyUpdate' in updateRecord");
-        }
 
         let pathParams = {
             'recordId': recordId

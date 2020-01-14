@@ -27,6 +27,8 @@ import { ProcessInstanceVariableRepresentation } from '../model/processInstanceV
 import { ResultListDataRepresentationProcessContentRepresentation } from '../model/resultListDataRepresentationProcessContentRepresentation';
 import { ResultListDataRepresentationProcessInstanceRepresentation } from '../model/resultListDataRepresentationProcessInstanceRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
+import { ResultListDataRepresentationDecisionTaskRepresentation } from '../model/resultListDataRepresentationDecisionTaskRepresentation';
 
 /**
  * Processinstances service.
@@ -42,12 +44,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<ProcessInstanceRepresentation>
      */
     activateProcessInstance(processInstanceId: string): Promise<ProcessInstanceRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in activateProcessInstance");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -77,16 +76,10 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<IdentityLinkRepresentation>
      */
     createIdentityLink(processInstanceId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+        throwIfNotDefined(identityLinkRepresentation, 'identityLinkRepresentation');
 
         let postBody = identityLinkRepresentation;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in createIdentityLink");
-        }
-
-        if (identityLinkRepresentation === undefined || identityLinkRepresentation === null) {
-            throw new Error("Required param 'identityLinkRepresentation' in createIdentityLink");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -118,24 +111,12 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<{}>
      */
     deleteIdentityLink(processInstanceId: string, family: string, identityId: string, type: string): Promise<any> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+        throwIfNotDefined(family, 'family');
+        throwIfNotDefined(identityId, 'identityId');
+        throwIfNotDefined(type, 'type');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in deleteIdentityLink");
-        }
-
-        if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in deleteIdentityLink");
-        }
-
-        if (identityId === undefined || identityId === null) {
-            throw new Error("Required param 'identityId' in deleteIdentityLink");
-        }
-
-        if (type === undefined || type === null) {
-            throw new Error("Required param 'type' in deleteIdentityLink");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId, 'family': family, 'identityId': identityId, 'type': type
@@ -164,12 +145,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<{}>
      */
     deleteProcessInstance(processInstanceId: string): Promise<any> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in deleteProcessInstance");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -198,12 +176,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<ResultListDataRepresentationProcessInstanceRepresentation>
      */
     filterProcessInstances(filterRequest: ProcessInstanceFilterRequestRepresentation): Promise<ResultListDataRepresentationProcessInstanceRepresentation> {
+        throwIfNotDefined(filterRequest, 'filterRequest');
 
         let postBody = filterRequest;
-
-        if (filterRequest === undefined || filterRequest === null) {
-            throw new Error("Required param 'filterRequest' in filterProcessInstances");
-        }
 
         let pathParams = {};
 
@@ -228,13 +203,11 @@ export class ProcessInstancesApi extends BaseApi {
      *
      * @param processInstanceId processInstanceId
      * @return Promise<ResultListDataRepresentationDecisionTaskRepresentation>
-     getHistoricProcessInstanceDecisionTasks(processInstanceId: string): Promise<ResultListDataRepresentationDecisionTaskRepresentation> {
+     */
+    getHistoricProcessInstanceDecisionTasks(processInstanceId: string): Promise<ResultListDataRepresentationDecisionTaskRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getHistoricProcessInstanceDecisionTasks");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -266,12 +239,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<ProcessInstanceVariableRepresentation>
      */
     getHistoricProcessInstanceVariables(processInstanceId: string): Promise<ProcessInstanceVariableRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getHistoricProcessInstanceVariables");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -300,12 +270,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<ResultListDataRepresentationProcessInstanceRepresentation>
      */
     getHistoricProcessInstances(queryRequest: HistoricProcessInstanceQueryRepresentation): Promise<ResultListDataRepresentationProcessInstanceRepresentation> {
+        throwIfNotDefined(queryRequest, 'queryRequest');
 
         let postBody = queryRequest;
-
-        if (queryRequest === undefined || queryRequest === null) {
-            throw new Error("Required param 'queryRequest' in getHistoricProcessInstances");
-        }
 
         let pathParams = {};
 
@@ -335,24 +302,12 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<IdentityLinkRepresentation>
      */
     getIdentityLinkType(processInstanceId: string, family: string, identityId: string, type: string): Promise<IdentityLinkRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+        throwIfNotDefined(family, 'family');
+        throwIfNotDefined(identityId, 'identityId');
+        throwIfNotDefined(type, 'type');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getIdentityLinkType");
-        }
-
-        if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in getIdentityLinkType");
-        }
-
-        if (identityId === undefined || identityId === null) {
-            throw new Error("Required param 'identityId' in getIdentityLinkType");
-        }
-
-        if (type === undefined || type === null) {
-            throw new Error("Required param 'type' in getIdentityLinkType");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId, 'family': family, 'identityId': identityId, 'type': type
@@ -382,16 +337,10 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<IdentityLinkRepresentation>
      */
     getIdentityLinksForFamily(processInstanceId: string, family: string): Promise<IdentityLinkRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+        throwIfNotDefined(family, 'family');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getIdentityLinksForFamily");
-        }
-
-        if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in getIdentityLinksForFamily");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId, 'family': family
@@ -420,12 +369,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<IdentityLinkRepresentation>
      */
     getIdentityLinks(processInstanceId: string): Promise<IdentityLinkRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getIdentityLinks");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -454,12 +400,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<ResultListDataRepresentationProcessContentRepresentation>
      */
     getProcessInstanceContent(processInstanceId: string): Promise<ResultListDataRepresentationProcessContentRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getProcessInstanceContent");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -488,12 +431,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<string>
      */
     getProcessInstanceDiagram(processInstanceId: string): Promise<string> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getProcessInstanceDiagram");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -522,12 +462,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<FormDefinitionRepresentation>
      */
     getProcessInstanceStartForm(processInstanceId: string): Promise<FormDefinitionRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getProcessInstanceStartForm");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -556,12 +493,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<ProcessInstanceRepresentation>
      */
     getProcessInstance(processInstanceId: string): Promise<ProcessInstanceRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getProcessInstance");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -590,12 +524,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<ResultListDataRepresentationProcessInstanceRepresentation>
      */
     getProcessInstances(processInstancesQuery: ProcessInstanceQueryRepresentation): Promise<ResultListDataRepresentationProcessInstanceRepresentation> {
+        throwIfNotDefined(processInstancesQuery, 'processInstancesQuery');
 
         let postBody = processInstancesQuery;
-
-        if (processInstancesQuery === undefined || processInstancesQuery === null) {
-            throw new Error("Required param 'processInstancesQuery' in getProcessInstances");
-        }
 
         let pathParams = {};
 
@@ -622,12 +553,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<ProcessInstanceAuditInfoRepresentation>
      */
     getTaskAuditLog(processInstanceId: string): Promise<ProcessInstanceAuditInfoRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getTaskAuditLog");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -689,12 +617,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<ProcessInstanceRepresentation>
      */
     startNewProcessInstance(startRequest: CreateProcessInstanceRepresentation): Promise<ProcessInstanceRepresentation> {
+        throwIfNotDefined(startRequest, 'startRequest');
 
         let postBody = startRequest;
-
-        if (startRequest === undefined || startRequest === null) {
-            throw new Error("Required param 'startRequest' in startNewProcessInstance");
-        }
 
         let pathParams = {};
 
@@ -721,12 +646,9 @@ export class ProcessInstancesApi extends BaseApi {
      * @return Promise<ProcessInstanceRepresentation>
      */
     suspendProcessInstance(processInstanceId: string): Promise<ProcessInstanceRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in suspendProcessInstance");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId

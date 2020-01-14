@@ -21,6 +21,7 @@ import { UnfiledRecordFolderBodyUpdate } from '../model/unfiledRecordFolderBodyU
 import { UnfiledRecordFolderEntry } from '../model/unfiledRecordFolderEntry';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Unfiledrecordfolders service.
@@ -153,16 +154,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<UnfiledRecordFolderAssociationPaging>
     */
     createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<UnfiledRecordFolderAssociationPaging> {
+        throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
+        throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
+
         opts = opts || {};
         let postBody = nodeBodyCreate;
-
-        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
-            throw new Error("Required param 'unfiledRecordFolderId' in createUnfiledRecordFolderChildren");
-        }
-
-        if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
-            throw new Error("Required param 'nodeBodyCreate' in createUnfiledRecordFolderChildren");
-        }
 
         let pathParams = {
             'unfiledRecordFolderId': unfiledRecordFolderId
@@ -198,12 +194,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<any> {
+        throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
 
         let postBody = null;
-
-        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
-            throw new Error("Required param 'unfiledRecordFolderId' in deleteUnfiledRecordFolder");
-        }
 
         let pathParams = {
             'unfiledRecordFolderId': unfiledRecordFolderId
@@ -259,12 +252,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<UnfiledRecordFolderEntry>
         */
     getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderEntry> {
+        throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
-            throw new Error("Required param 'unfiledRecordFolderId' in getUnfiledRecordFolder");
-        }
 
         let pathParams = {
             'unfiledRecordFolderId': unfiledRecordFolderId
@@ -337,12 +328,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<UnfiledRecordFolderAssociationPaging>
         */
     listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderAssociationPaging> {
+        throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
-            throw new Error("Required param 'unfiledRecordFolderId' in listUnfiledRecordFolderChildren");
-        }
 
         let pathParams = {
             'unfiledRecordFolderId': unfiledRecordFolderId
@@ -419,16 +408,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<UnfiledRecordFolderEntry>
         */
     updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: any): Promise<UnfiledRecordFolderEntry> {
+        throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
+        throwIfNotDefined(unfiledRecordFolderBodyUpdate, 'unfiledRecordFolderBodyUpdate');
+
         opts = opts || {};
         let postBody = unfiledRecordFolderBodyUpdate;
-
-        if (unfiledRecordFolderId === undefined || unfiledRecordFolderId === null) {
-            throw new Error("Required param 'unfiledRecordFolderId' in updateUnfiledRecordFolder");
-        }
-
-        if (unfiledRecordFolderBodyUpdate === undefined || unfiledRecordFolderBodyUpdate === null) {
-            throw new Error("Required param 'unfiledRecordFolderBodyUpdate' in updateUnfiledRecordFolder");
-        }
 
         let pathParams = {
             'unfiledRecordFolderId': unfiledRecordFolderId

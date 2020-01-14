@@ -19,6 +19,7 @@ import { ChecklistOrderRepresentation } from '../model/checklistOrderRepresentat
 import { ResultListDataRepresentationTaskRepresentation } from '../model/resultListDataRepresentationTaskRepresentation';
 import { TaskRepresentation } from '../model/taskRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Checklists service.
@@ -35,16 +36,10 @@ export class ChecklistsApi extends BaseApi {
     * @return Promise<TaskRepresentation>
     */
     addSubtask(taskId: string, taskRepresentation: TaskRepresentation): Promise<TaskRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(taskRepresentation, 'taskRepresentation');
 
         let postBody = taskRepresentation;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in addSubtask");
-        }
-
-        if (taskRepresentation === undefined || taskRepresentation === null) {
-            throw new Error("Required param 'taskRepresentation' in addSubtask");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -76,12 +71,9 @@ export class ChecklistsApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
     getChecklist(taskId: string): Promise<ResultListDataRepresentationTaskRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getChecklist");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -114,16 +106,10 @@ export class ChecklistsApi extends BaseApi {
         * @return Promise<{}>
         */
     orderChecklist(taskId: string, orderRepresentation: ChecklistOrderRepresentation): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(orderRepresentation, 'orderRepresentation');
 
         let postBody = orderRepresentation;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in orderChecklist");
-        }
-
-        if (orderRepresentation === undefined || orderRepresentation === null) {
-            throw new Error("Required param 'orderRepresentation' in orderChecklist");
-        }
 
         let pathParams = {
             'taskId': taskId

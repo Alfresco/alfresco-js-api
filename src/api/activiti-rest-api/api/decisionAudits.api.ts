@@ -18,6 +18,7 @@
 import { DecisionAuditRepresentation } from '../model/decisionAuditRepresentation';
 import { ResultListDataRepresentationDecisionAuditRepresentation } from '../model/resultListDataRepresentationDecisionAuditRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Decisionaudits service.
@@ -33,12 +34,9 @@ export class DecisionAuditsApi extends BaseApi {
     * @return Promise<DecisionAuditRepresentation>
     */
     getAuditTrail(auditTrailId: number): Promise<DecisionAuditRepresentation> {
+        throwIfNotDefined(auditTrailId, 'taskId');
 
         let postBody = null;
-
-        if (auditTrailId === undefined || auditTrailId === null) {
-            throw new Error("Required param 'auditTrailId' in getAuditTrail");
-        }
 
         let pathParams = {
             'auditTrailId': auditTrailId
@@ -71,16 +69,10 @@ export class DecisionAuditsApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationDecisionAuditRepresentation>
         */
     getAuditTrails(decisionKey: string, dmnDeploymentId: number): Promise<ResultListDataRepresentationDecisionAuditRepresentation> {
+        throwIfNotDefined(decisionKey, 'decisionKey');
+        throwIfNotDefined(dmnDeploymentId, 'dmnDeploymentId');
 
         let postBody = null;
-
-        if (decisionKey === undefined || decisionKey === null) {
-            throw new Error("Required param 'decisionKey' in getAuditTrails");
-        }
-
-        if (dmnDeploymentId === undefined || dmnDeploymentId === null) {
-            throw new Error("Required param 'dmnDeploymentId' in getAuditTrails");
-        }
 
         let pathParams = {
 

@@ -19,6 +19,7 @@ import { DownloadBodyCreate } from '../model/downloadBodyCreate';
 import { DownloadEntry } from '../model/downloadEntry';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Downloads service.
@@ -45,12 +46,9 @@ The cancel operation is done asynchronously.
     * @return Promise<{}>
     */
     cancelDownload(downloadId: string): Promise<any> {
+        throwIfNotDefined(downloadId, 'downloadId');
 
         let postBody = null;
-
-        if (downloadId === undefined || downloadId === null) {
-            throw new Error("Required param 'downloadId' in cancelDownload");
-        }
 
         let pathParams = {
             'downloadId': downloadId
@@ -110,12 +108,10 @@ The cancel operation is done asynchronously.
         * @return Promise<DownloadEntry>
         */
     createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: any): Promise<DownloadEntry> {
+        throwIfNotDefined(downloadBodyCreate, 'downloadBodyCreate');
+
         opts = opts || {};
         let postBody = downloadBodyCreate;
-
-        if (downloadBodyCreate === undefined || downloadBodyCreate === null) {
-            throw new Error("Required param 'downloadBodyCreate' in createDownload");
-        }
 
         let pathParams = {
 
@@ -164,12 +160,10 @@ The cancel operation is done asynchronously.
         * @return Promise<DownloadEntry>
         */
     getDownload(downloadId: string, opts?: any): Promise<DownloadEntry> {
+        throwIfNotDefined(downloadId, 'downloadId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (downloadId === undefined || downloadId === null) {
-            throw new Error("Required param 'downloadId' in getDownload");
-        }
 
         let pathParams = {
             'downloadId': downloadId

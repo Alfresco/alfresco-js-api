@@ -17,6 +17,7 @@
 
 import { EndpointConfigurationRepresentation } from '../model/endpointConfigurationRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Endpoints service.
@@ -32,12 +33,9 @@ export class EndpointsApi extends BaseApi {
     * @return Promise<EndpointConfigurationRepresentation>
     */
     getEndpointConfiguration(endpointConfigurationId: number): Promise<EndpointConfigurationRepresentation> {
+        throwIfNotDefined(endpointConfigurationId, 'endpointConfigurationId');
 
         let postBody = null;
-
-        if (endpointConfigurationId === undefined || endpointConfigurationId === null) {
-            throw new Error("Required param 'endpointConfigurationId' in getEndpointConfiguration");
-        }
 
         let pathParams = {
             'endpointConfigurationId': endpointConfigurationId

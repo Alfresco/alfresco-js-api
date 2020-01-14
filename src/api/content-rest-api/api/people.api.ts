@@ -23,6 +23,7 @@ import { PersonEntry } from '../model/personEntry';
 import { PersonPaging } from '../model/personPaging';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * People service.
@@ -74,12 +75,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PersonEntry>
     */
     createPerson(personBodyCreate: PersonBodyCreate, opts?: any): Promise<PersonEntry> {
+        throwIfNotDefined(personBodyCreate, 'personBodyCreate');
+
         opts = opts || {};
         let postBody = personBodyCreate;
-
-        if (personBodyCreate === undefined || personBodyCreate === null) {
-            throw new Error("Required param 'personBodyCreate' in createPerson");
-        }
 
         let pathParams = {
 
@@ -119,12 +118,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteAvatarImage(personId: string): Promise<any> {
+        throwIfNotDefined(personId, 'personId');
 
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in deleteAvatarImage");
-        }
 
         let pathParams = {
             'personId': personId
@@ -179,12 +175,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     getAvatarImage(personId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in getAvatarImage");
-        }
 
         let pathParams = {
             'personId': personId
@@ -234,12 +228,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<PersonEntry>
         */
     getPerson(personId: string, opts?: any): Promise<PersonEntry> {
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in getPerson");
-        }
 
         let pathParams = {
             'personId': personId
@@ -373,16 +365,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     requestPasswordReset(personId: string, clientBody: ClientBody): Promise<any> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(clientBody, 'clientBody');
 
         let postBody = clientBody;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in requestPasswordReset");
-        }
-
-        if (clientBody === undefined || clientBody === null) {
-            throw new Error("Required param 'clientBody' in requestPasswordReset");
-        }
 
         let pathParams = {
             'personId': personId
@@ -428,16 +414,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     resetPassword(personId: string, passwordResetBody: PasswordResetBody): Promise<any> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(passwordResetBody, 'passwordResetBody');
 
         let postBody = passwordResetBody;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in resetPassword");
-        }
-
-        if (passwordResetBody === undefined || passwordResetBody === null) {
-            throw new Error("Required param 'passwordResetBody' in resetPassword");
-        }
 
         let pathParams = {
             'personId': personId
@@ -480,16 +460,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     updateAvatarImage(personId: string, contentBodyUpdate: string): Promise<any> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
 
         let postBody = contentBodyUpdate;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in updateAvatarImage");
-        }
-
-        if (contentBodyUpdate === undefined || contentBodyUpdate === null) {
-            throw new Error("Required param 'contentBodyUpdate' in updateAvatarImage");
-        }
 
         let pathParams = {
             'personId': personId
@@ -563,16 +537,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<PersonEntry>
         */
     updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts?: any): Promise<PersonEntry> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(personBodyUpdate, 'personBodyUpdate');
+
         opts = opts || {};
         let postBody = personBodyUpdate;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in updatePerson");
-        }
-
-        if (personBodyUpdate === undefined || personBodyUpdate === null) {
-            throw new Error("Required param 'personBodyUpdate' in updatePerson");
-        }
 
         let pathParams = {
             'personId': personId

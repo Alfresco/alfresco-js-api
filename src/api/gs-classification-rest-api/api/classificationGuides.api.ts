@@ -25,6 +25,7 @@ import { TopicEntry } from '../model/topicEntry';
 import { TopicPaging } from '../model/topicPaging';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Classificationguides service.
@@ -74,12 +75,9 @@ export class ClassificationGuidesApi extends BaseApi {
         * @return Promise<ClassificationGuideEntry>
         */
     createClassificationGuide(classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry> {
+        throwIfNotDefined(classificationGuide, 'classificationGuide');
 
         let postBody = classificationGuide;
-
-        if (classificationGuide === undefined || classificationGuide === null) {
-            throw new Error("Required param 'classificationGuide' in createClassificationGuide");
-        }
 
         let pathParams = {
 
@@ -119,16 +117,11 @@ export class ClassificationGuidesApi extends BaseApi {
         * @return Promise<TopicEntry>
         */
     createSubtopic(topicId: string, topic: TopicBody, opts?: any): Promise<TopicEntry> {
+        throwIfNotDefined(topicId, 'topicId');
+        throwIfNotDefined(topic, 'topic');
+
         opts = opts || {};
         let postBody = topic;
-
-        if (topicId === undefined || topicId === null) {
-            throw new Error("Required param 'topicId' in createSubtopic");
-        }
-
-        if (topic === undefined || topic === null) {
-            throw new Error("Required param 'topic' in createSubtopic");
-        }
 
         let pathParams = {
             'topicId': topicId
@@ -169,16 +162,11 @@ export class ClassificationGuidesApi extends BaseApi {
         * @return Promise<TopicEntry>
         */
     createTopic(classificationGuideId: string, topic: TopicBody, opts?: any): Promise<TopicEntry> {
+        throwIfNotDefined(classificationGuideId, 'classificationGuideId');
+        throwIfNotDefined(topic, 'topic');
+
         opts = opts || {};
         let postBody = topic;
-
-        if (classificationGuideId === undefined || classificationGuideId === null) {
-            throw new Error("Required param 'classificationGuideId' in createTopic");
-        }
-
-        if (topic === undefined || topic === null) {
-            throw new Error("Required param 'topic' in createTopic");
-        }
 
         let pathParams = {
             'classificationGuideId': classificationGuideId
@@ -211,12 +199,9 @@ export class ClassificationGuidesApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteClassificationGuide(classificationGuideId: string): Promise<any> {
+        throwIfNotDefined(classificationGuideId, 'classificationGuideId');
 
         let postBody = null;
-
-        if (classificationGuideId === undefined || classificationGuideId === null) {
-            throw new Error("Required param 'classificationGuideId' in deleteClassificationGuide");
-        }
 
         let pathParams = {
             'classificationGuideId': classificationGuideId
@@ -248,12 +233,9 @@ export class ClassificationGuidesApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteTopic(topicId: string): Promise<any> {
+        throwIfNotDefined(topicId, 'topicId');
 
         let postBody = null;
-
-        if (topicId === undefined || topicId === null) {
-            throw new Error("Required param 'topicId' in deleteTopic");
-        }
 
         let pathParams = {
             'topicId': topicId
@@ -361,12 +343,10 @@ export class ClassificationGuidesApi extends BaseApi {
         * @return Promise<SubtopicPaging>
         */
     listSubtopics(topicId: string, opts?: any): Promise<SubtopicPaging> {
+        throwIfNotDefined(topicId, 'topicId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (topicId === undefined || topicId === null) {
-            throw new Error("Required param 'topicId' in listSubtopics");
-        }
 
         let pathParams = {
             'topicId': topicId
@@ -426,12 +406,10 @@ export class ClassificationGuidesApi extends BaseApi {
         * @return Promise<TopicPaging>
         */
     listTopics(classificationGuideId: string, opts?: any): Promise<TopicPaging> {
+        throwIfNotDefined(classificationGuideId, 'classificationGuideId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (classificationGuideId === undefined || classificationGuideId === null) {
-            throw new Error("Required param 'classificationGuideId' in listTopics");
-        }
 
         let pathParams = {
             'classificationGuideId': classificationGuideId
@@ -469,12 +447,9 @@ export class ClassificationGuidesApi extends BaseApi {
         * @return Promise<ClassificationGuideEntry>
         */
     showClassificationGuideById(classificationGuideId: string): Promise<ClassificationGuideEntry> {
+        throwIfNotDefined(classificationGuideId, 'classificationGuideId');
 
         let postBody = null;
-
-        if (classificationGuideId === undefined || classificationGuideId === null) {
-            throw new Error("Required param 'classificationGuideId' in showClassificationGuideById");
-        }
 
         let pathParams = {
             'classificationGuideId': classificationGuideId
@@ -513,12 +488,10 @@ export class ClassificationGuidesApi extends BaseApi {
         * @return Promise<TopicEntry>
         */
     showTopicById(topicId: string, opts?: any): Promise<TopicEntry> {
+        throwIfNotDefined(topicId, 'topicId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (topicId === undefined || topicId === null) {
-            throw new Error("Required param 'topicId' in showTopicById");
-        }
 
         let pathParams = {
             'topicId': topicId
@@ -552,16 +525,10 @@ export class ClassificationGuidesApi extends BaseApi {
         * @return Promise<ClassificationGuideEntry>
         */
     updateClassificationGuide(classificationGuideId: string, classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry> {
+        throwIfNotDefined(classificationGuideId, 'classificationGuideId');
+        throwIfNotDefined(classificationGuide, 'classificationGuide');
 
         let postBody = classificationGuide;
-
-        if (classificationGuideId === undefined || classificationGuideId === null) {
-            throw new Error("Required param 'classificationGuideId' in updateClassificationGuide");
-        }
-
-        if (classificationGuide === undefined || classificationGuide === null) {
-            throw new Error("Required param 'classificationGuide' in updateClassificationGuide");
-        }
 
         let pathParams = {
             'classificationGuideId': classificationGuideId
@@ -604,16 +571,11 @@ export class ClassificationGuidesApi extends BaseApi {
         * @return Promise<TopicEntry>
         */
     updateTopic(topicId: string, topic: TopicBody, opts?: any): Promise<TopicEntry> {
+        throwIfNotDefined(topicId, 'topicId');
+        throwIfNotDefined(topic, 'topic');
+
         opts = opts || {};
         let postBody = topic;
-
-        if (topicId === undefined || topicId === null) {
-            throw new Error("Required param 'topicId' in updateTopic");
-        }
-
-        if (topic === undefined || topic === null) {
-            throw new Error("Required param 'topic' in updateTopic");
-        }
 
         let pathParams = {
             'topicId': topicId

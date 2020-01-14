@@ -18,6 +18,7 @@
 import { ResultListDataRepresentationLightGroupRepresentation } from '../model/resultListDataRepresentationLightGroupRepresentation';
 import { ResultListDataRepresentationLightUserRepresentation } from '../model/resultListDataRepresentationLightUserRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Groups service.
@@ -76,12 +77,9 @@ export class ActivitiGroupsApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */
     getUsersForGroup(groupId: number): Promise<ResultListDataRepresentationLightUserRepresentation> {
+        throwIfNotDefined(groupId, 'formId');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in getUsersForGroup");
-        }
 
         let pathParams = {
             'groupId': groupId

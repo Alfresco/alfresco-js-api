@@ -20,6 +20,7 @@ import { RatingEntry } from '../model/ratingEntry';
 import { RatingPaging } from '../model/ratingPaging';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Ratings service.
@@ -58,16 +59,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<RatingEntry>
     */
     createRating(nodeId: string, ratingBodyCreate: RatingBody, opts?: any): Promise<RatingEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(ratingBodyCreate, 'ratingBodyCreate');
+
         opts = opts || {};
         let postBody = ratingBodyCreate;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in createRating");
-        }
-
-        if (ratingBodyCreate === undefined || ratingBodyCreate === null) {
-            throw new Error("Required param 'ratingBodyCreate' in createRating");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -101,16 +97,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteRating(nodeId: string, ratingId: string): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(ratingId, 'ratingId');
 
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in deleteRating");
-        }
-
-        if (ratingId === undefined || ratingId === null) {
-            throw new Error("Required param 'ratingId' in deleteRating");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'ratingId': ratingId
@@ -156,16 +146,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RatingEntry>
         */
     getRating(nodeId: string, ratingId: string, opts?: any): Promise<RatingEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(ratingId, 'ratingId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in getRating");
-        }
-
-        if (ratingId === undefined || ratingId === null) {
-            throw new Error("Required param 'ratingId' in getRating");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'ratingId': ratingId
@@ -217,12 +202,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RatingPaging>
         */
     listRatings(nodeId: string, opts?: any): Promise<RatingPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listRatings");
-        }
 
         let pathParams = {
             'nodeId': nodeId

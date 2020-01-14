@@ -18,6 +18,7 @@
 import { CommentRepresentation } from '../model/commentRepresentation';
 import { ResultListDataRepresentationCommentRepresentation } from '../model/resultListDataRepresentationCommentRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Comments service.
@@ -34,16 +35,10 @@ export class ActivitiCommentsApi extends BaseApi {
     * @return Promise<CommentRepresentation>
     */
     addProcessInstanceComment(commentRequest: CommentRepresentation, processInstanceId: string): Promise<CommentRepresentation> {
+        throwIfNotDefined(commentRequest, 'commentRequest');
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = commentRequest;
-
-        if (commentRequest === undefined || commentRequest === null) {
-            throw new Error("Required param 'commentRequest' in addProcessInstanceComment");
-        }
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in addProcessInstanceComment");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -76,16 +71,10 @@ export class ActivitiCommentsApi extends BaseApi {
         * @return Promise<CommentRepresentation>
         */
     addTaskComment(commentRequest: CommentRepresentation, taskId: string): Promise<CommentRepresentation> {
+        throwIfNotDefined(commentRequest, 'commentRequest');
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = commentRequest;
-
-        if (commentRequest === undefined || commentRequest === null) {
-            throw new Error("Required param 'commentRequest' in addTaskComment");
-        }
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in addTaskComment");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -119,12 +108,10 @@ export class ActivitiCommentsApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationCommentRepresentation>
         */
     getProcessInstanceComments(processInstanceId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getProcessInstanceComments");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -159,12 +146,10 @@ export class ActivitiCommentsApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationCommentRepresentation>
         */
     getTaskComments(taskId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getTaskComments");
-        }
 
         let pathParams = {
             'taskId': taskId

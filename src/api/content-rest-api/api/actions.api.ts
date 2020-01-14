@@ -21,6 +21,7 @@ import { ActionDefinitionList } from '../model/actionDefinitionList';
 import { ActionExecResultEntry } from '../model/actionExecResultEntry';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Actions service.
@@ -39,12 +40,9 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     * @return Promise<ActionDefinitionEntry>
     */
     actionDetails(actionDefinitionId: string): Promise<ActionDefinitionEntry> {
+        throwIfNotDefined(actionDefinitionId, 'actionDefinitionId');
 
         let postBody = null;
-
-        if (actionDefinitionId === undefined || actionDefinitionId === null) {
-            throw new Error("Required param 'actionDefinitionId' in actionDetails");
-        }
 
         let pathParams = {
             'actionDefinitionId': actionDefinitionId
@@ -124,12 +122,9 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
         * @return Promise<ActionExecResultEntry>
         */
     actionExec(actionBodyExec: ActionBodyExec): Promise<ActionExecResultEntry> {
+        throwIfNotDefined(actionBodyExec, 'actionBodyExec');
 
         let postBody = actionBodyExec;
-
-        if (actionBodyExec === undefined || actionBodyExec === null) {
-            throw new Error("Required param 'actionBodyExec' in actionExec");
-        }
 
         let pathParams = {
 
@@ -271,12 +266,10 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
         * @return Promise<ActionDefinitionList>
         */
     nodeActions(nodeId: string, opts?: any): Promise<ActionDefinitionList> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in nodeActions");
-        }
 
         let pathParams = {
             'nodeId': nodeId

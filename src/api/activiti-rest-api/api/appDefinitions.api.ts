@@ -20,6 +20,7 @@ import { AppDefinitionRepresentation } from '../model/appDefinitionRepresentatio
 import { AppDefinitionSaveRepresentation } from '../model/appDefinitionSaveRepresentation';
 import { AppDefinitionUpdateResultRepresentation } from '../model/appDefinitionUpdateResultRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
  * Appdefinitions service.
@@ -35,12 +36,9 @@ export class AppDefinitionsApi extends BaseApi {
      * @return Promise<{}>
      */
     deleteAppDefinition(appDefinitionId: number): Promise<any> {
+        throwIfNotDefined(appDefinitionId, 'appDefinitionId');
 
         let postBody = null;
-
-        if (appDefinitionId === undefined || appDefinitionId === null) {
-            throw new Error("Required param 'appDefinitionId' in deleteAppDefinition");
-        }
 
         let pathParams = {
             'appDefinitionId': appDefinitionId
@@ -69,12 +67,9 @@ export class AppDefinitionsApi extends BaseApi {
      * @return Promise<{}>
      */
     exportAppDefinition(modelId: number): Promise<any> {
+        throwIfNotDefined(modelId, 'modelId');
 
         let postBody = null;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in exportAppDefinition");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -103,12 +98,9 @@ export class AppDefinitionsApi extends BaseApi {
      * @return Promise<AppDefinitionRepresentation>
      */
     getAppDefinition(modelId: number): Promise<AppDefinitionRepresentation> {
+        throwIfNotDefined(modelId, 'modelId');
 
         let postBody = null;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in getAppDefinition");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -137,17 +129,11 @@ export class AppDefinitionsApi extends BaseApi {
      * @return Promise<AppDefinitionUpdateResultRepresentation>
      */
     importAndPublishApp(file: any): Promise<AppDefinitionUpdateResultRepresentation> {
+        throwIfNotDefined(file, 'file');
 
         let postBody = null;
-
-        if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in importAndPublishApp");
-        }
-
         let pathParams = {};
-
         let queryParams = {};
-
         let headerParams = {};
         let formParams = {
             'file': file
@@ -174,12 +160,10 @@ export class AppDefinitionsApi extends BaseApi {
      * @return Promise<AppDefinitionRepresentation>
      */
     importAppDefinition(file: any, opts?: any): Promise<AppDefinitionRepresentation> {
+        throwIfNotDefined(file, 'file');
+
         opts = opts || {};
         let postBody = null;
-
-        if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in importAppDefinition");
-        }
 
         let pathParams = {};
 
@@ -211,16 +195,10 @@ export class AppDefinitionsApi extends BaseApi {
      * @return Promise<AppDefinitionUpdateResultRepresentation>
      */
     publishAppDefinition(modelId: number, publishModel: AppDefinitionPublishRepresentation): Promise<AppDefinitionUpdateResultRepresentation> {
+        throwIfNotDefined(modelId, 'modelId');
+        throwIfNotDefined(publishModel, 'publishModel');
 
         let postBody = publishModel;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in publishAppDefinition");
-        }
-
-        if (publishModel === undefined || publishModel === null) {
-            throw new Error("Required param 'publishModel' in publishAppDefinition");
-        }
 
         let pathParams = {
             'modelId': modelId
@@ -250,16 +228,10 @@ export class AppDefinitionsApi extends BaseApi {
      * @return Promise<AppDefinitionUpdateResultRepresentation>
      */
     updateAppDefinition(modelId: number, updatedModel: AppDefinitionSaveRepresentation | any): Promise<any> {
+        throwIfNotDefined(modelId, 'modelId');
+        throwIfNotDefined(updatedModel, 'updatedModel');
 
         let postBody = updatedModel;
-
-        if (modelId === undefined || modelId === null) {
-            throw new Error("Required param 'modelId' in updateAppDefinition");
-        }
-
-        if (updatedModel === undefined || updatedModel === null) {
-            throw new Error("Required param 'updatedModel' in updateAppDefinition");
-        }
 
         let pathParams = {
             'modelId': modelId

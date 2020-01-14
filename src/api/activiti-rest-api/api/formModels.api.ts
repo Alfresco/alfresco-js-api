@@ -23,6 +23,7 @@ import { ResultListDataRepresentationRuntimeFormRepresentation } from '../model/
 import { ValidationErrorRepresentation } from '../model/validationErrorRepresentation';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
  * Formmodels service.
@@ -38,12 +39,9 @@ export class FormModelsApi extends BaseApi {
      * @return Promise<FormDefinitionRepresentation>
      */
     getFormEditorJson(formId: number): Promise<FormDefinitionRepresentation> {
+        throwIfNotDefined(formId, 'formId');
 
         let postBody = null;
-
-        if (formId === undefined || formId === null) {
-            throw new Error("Required param 'formId' in getFormEditorJson");
-        }
 
         let pathParams = {
             'formId': formId
@@ -73,16 +71,10 @@ export class FormModelsApi extends BaseApi {
      * @return Promise<FormRepresentation>
      */
     getFormHistory(formId: number, formHistoryId: number): Promise<FormRepresentation> {
+        throwIfNotDefined(formId, 'formId');
+        throwIfNotDefined(formHistoryId, 'formHistoryId');
 
         let postBody = null;
-
-        if (formId === undefined || formId === null) {
-            throw new Error("Required param 'formId' in getFormHistory");
-        }
-
-        if (formHistoryId === undefined || formHistoryId === null) {
-            throw new Error("Required param 'formHistoryId' in getFormHistory");
-        }
 
         let pathParams = {
             'formId': formId, 'formHistoryId': formHistoryId
@@ -111,12 +103,9 @@ export class FormModelsApi extends BaseApi {
      * @return Promise<FormRepresentation>
      */
     getForm(formId: number): Promise<FormRepresentation> {
+        throwIfNotDefined(formId, 'formId');
 
         let postBody = null;
-
-        if (formId === undefined || formId === null) {
-            throw new Error("Required param 'formId' in getForm");
-        }
 
         let pathParams = {
             'formId': formId
@@ -197,16 +186,10 @@ export class FormModelsApi extends BaseApi {
      * @return Promise<FormRepresentation>
      */
     saveForm(formId: number, saveRepresentation: FormSaveRepresentation): Promise<FormRepresentation> {
+        throwIfNotDefined(formId, 'formId');
+        throwIfNotDefined(saveRepresentation, 'saveRepresentation');
 
         let postBody = saveRepresentation;
-
-        if (formId === undefined || formId === null) {
-            throw new Error("Required param 'formId' in saveForm");
-        }
-
-        if (saveRepresentation === undefined || saveRepresentation === null) {
-            throw new Error("Required param 'saveRepresentation' in saveForm");
-        }
 
         let pathParams = {
             'formId': formId
@@ -236,16 +219,10 @@ export class FormModelsApi extends BaseApi {
      * @return Promise<ValidationErrorRepresentation>
      */
     validateModel(formId: number, saveRepresentation: FormSaveRepresentation): Promise<ValidationErrorRepresentation> {
+        throwIfNotDefined(formId, 'formId');
+        throwIfNotDefined(saveRepresentation, 'saveRepresentation');
 
         let postBody = saveRepresentation;
-
-        if (formId === undefined || formId === null) {
-            throw new Error("Required param 'formId' in validateModel");
-        }
-
-        if (saveRepresentation === undefined || saveRepresentation === null) {
-            throw new Error("Required param 'saveRepresentation' in validateModel");
-        }
 
         let pathParams = {
             'formId': formId

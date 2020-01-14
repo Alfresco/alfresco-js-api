@@ -19,6 +19,7 @@ import { CreateEndpointBasicAuthRepresentation } from '../model/createEndpointBa
 import { EndpointBasicAuthRepresentation } from '../model/endpointBasicAuthRepresentation';
 import { EndpointConfigurationRepresentation } from '../model/endpointConfigurationRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Adminendpoints service.
@@ -34,12 +35,8 @@ export class AdminEndpointsApi extends BaseApi {
     * @return Promise<EndpointBasicAuthRepresentation>
     */
     createBasicAuthConfiguration(createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
-
+        throwIfNotDefined(createRepresentation, 'createRepresentation');
         let postBody = createRepresentation;
-
-        if (createRepresentation === undefined || createRepresentation === null) {
-            throw new Error("Required param 'createRepresentation' in createBasicAuthConfiguration");
-        }
 
         let pathParams = {
 
@@ -71,12 +68,8 @@ export class AdminEndpointsApi extends BaseApi {
         * @return Promise<EndpointConfigurationRepresentation>
         */
     createEndpointConfiguration(representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {
-
+        throwIfNotDefined(representation, 'representation');
         let postBody = representation;
-
-        if (representation === undefined || representation === null) {
-            throw new Error("Required param 'representation' in createEndpointConfiguration");
-        }
 
         let pathParams = {
 
@@ -109,16 +102,10 @@ export class AdminEndpointsApi extends BaseApi {
         * @return Promise<EndpointBasicAuthRepresentation>
         */
     getBasicAuthConfiguration(basicAuthId: number, tenantId: number): Promise<EndpointBasicAuthRepresentation> {
+        throwIfNotDefined(basicAuthId, 'basicAuthId');
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (basicAuthId === undefined || basicAuthId === null) {
-            throw new Error("Required param 'basicAuthId' in getBasicAuthConfiguration");
-        }
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in getBasicAuthConfiguration");
-        }
 
         let pathParams = {
             'basicAuthId': basicAuthId
@@ -151,12 +138,9 @@ export class AdminEndpointsApi extends BaseApi {
         * @return Promise<EndpointBasicAuthRepresentation>
         */
     getBasicAuthConfigurations(tenantId: number): Promise<EndpointBasicAuthRepresentation> {
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in getBasicAuthConfigurations");
-        }
 
         let pathParams = {
 
@@ -190,16 +174,10 @@ export class AdminEndpointsApi extends BaseApi {
         * @return Promise<EndpointConfigurationRepresentation>
         */
     getEndpointConfiguration(endpointConfigurationId: number, tenantId: number): Promise<EndpointConfigurationRepresentation> {
+        throwIfNotDefined(endpointConfigurationId, 'endpointConfigurationId');
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (endpointConfigurationId === undefined || endpointConfigurationId === null) {
-            throw new Error("Required param 'endpointConfigurationId' in getEndpointConfiguration");
-        }
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in getEndpointConfiguration");
-        }
 
         let pathParams = {
             'endpointConfigurationId': endpointConfigurationId
@@ -232,12 +210,9 @@ export class AdminEndpointsApi extends BaseApi {
         * @return Promise<EndpointConfigurationRepresentation>
         */
     getEndpointConfigurations(tenantId: number): Promise<EndpointConfigurationRepresentation> {
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in getEndpointConfigurations");
-        }
 
         let pathParams = {
 
@@ -271,16 +246,10 @@ export class AdminEndpointsApi extends BaseApi {
         * @return Promise<{}>
         */
     removeBasicAuthConfiguration(basicAuthId: number, tenantId: number): Promise<any> {
+        throwIfNotDefined(basicAuthId, 'basicAuthId');
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (basicAuthId === undefined || basicAuthId === null) {
-            throw new Error("Required param 'basicAuthId' in removeBasicAuthonfiguration");
-        }
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in removeBasicAuthonfiguration");
-        }
 
         let pathParams = {
             'basicAuthId': basicAuthId
@@ -314,16 +283,10 @@ export class AdminEndpointsApi extends BaseApi {
         * @return Promise<{}>
         */
     removeEndpointConfiguration(endpointConfigurationId: number, tenantId: number): Promise<any> {
+        throwIfNotDefined(endpointConfigurationId, 'endpointConfigurationId');
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (endpointConfigurationId === undefined || endpointConfigurationId === null) {
-            throw new Error("Required param 'endpointConfigurationId' in removeEndpointConfiguration");
-        }
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in removeEndpointConfiguration");
-        }
 
         let pathParams = {
             'endpointConfigurationId': endpointConfigurationId
@@ -357,16 +320,10 @@ export class AdminEndpointsApi extends BaseApi {
         * @return Promise<EndpointBasicAuthRepresentation>
         */
     updateBasicAuthConfiguration(basicAuthId: number, createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
+        throwIfNotDefined(basicAuthId, 'basicAuthId');
+        throwIfNotDefined(createRepresentation, 'createRepresentation');
 
         let postBody = createRepresentation;
-
-        if (basicAuthId === undefined || basicAuthId === null) {
-            throw new Error("Required param 'basicAuthId' in updateBasicAuthConfiguration");
-        }
-
-        if (createRepresentation === undefined || createRepresentation === null) {
-            throw new Error("Required param 'createRepresentation' in updateBasicAuthConfiguration");
-        }
 
         let pathParams = {
             'basicAuthId': basicAuthId
@@ -399,16 +356,10 @@ export class AdminEndpointsApi extends BaseApi {
         * @return Promise<EndpointConfigurationRepresentation>
         */
     updateEndpointConfiguration(endpointConfigurationId: number, representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {
+        throwIfNotDefined(endpointConfigurationId, 'endpointConfigurationId');
+        throwIfNotDefined(representation, 'representation');
 
         let postBody = representation;
-
-        if (endpointConfigurationId === undefined || endpointConfigurationId === null) {
-            throw new Error("Required param 'endpointConfigurationId' in updateEndpointConfiguration");
-        }
-
-        if (representation === undefined || representation === null) {
-            throw new Error("Required param 'representation' in updateEndpointConfiguration");
-        }
 
         let pathParams = {
             'endpointConfigurationId': endpointConfigurationId

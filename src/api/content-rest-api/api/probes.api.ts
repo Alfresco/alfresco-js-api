@@ -17,6 +17,7 @@
 
 import { ProbeEntry } from '../model/probeEntry';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Probes service.
@@ -44,12 +45,9 @@ The liveness probe should then be used to check the repository is still respondi
     * @return Promise<ProbeEntry>
     */
     getProbe(probeId: string): Promise<ProbeEntry> {
+        throwIfNotDefined(probeId, 'probeId');
 
         let postBody = null;
-
-        if (probeId === undefined || probeId === null) {
-            throw new Error("Required param 'probeId' in getProbe");
-        }
 
         let pathParams = {
             'probeId': probeId

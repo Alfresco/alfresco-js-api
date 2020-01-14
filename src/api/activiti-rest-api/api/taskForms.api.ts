@@ -21,6 +21,7 @@ import { FormValueRepresentation } from '../model/formValueRepresentation';
 import { ProcessInstanceVariableRepresentation } from '../model/processInstanceVariableRepresentation';
 import { SaveFormRepresentation } from '../model/saveFormRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Taskforms service.
@@ -37,16 +38,10 @@ export class TaskFormsApi extends BaseApi {
     * @return Promise<{}>
     */
     completeTaskForm(taskId: string, completeTaskFormRepresentation: CompleteFormRepresentation): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(completeTaskFormRepresentation, 'completeTaskFormRepresentation');
 
         let postBody = completeTaskFormRepresentation;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in completeTaskForm");
-        }
-
-        if (completeTaskFormRepresentation === undefined || completeTaskFormRepresentation === null) {
-            throw new Error("Required param 'completeTaskFormRepresentation' in completeTaskForm");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -78,12 +73,9 @@ export class TaskFormsApi extends BaseApi {
         * @return Promise<ProcessInstanceVariableRepresentation>
         */
     getProcessInstanceVariables(taskId: string): Promise<ProcessInstanceVariableRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getProcessInstanceVariables");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -164,16 +156,10 @@ export class TaskFormsApi extends BaseApi {
         * @return Promise<FormValueRepresentation []>
         */
     getRestFieldValues(taskId: string, field: string): Promise<FormValueRepresentation []> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(field, 'field');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getRestFieldValues");
-        }
-
-        if (field === undefined || field === null) {
-            throw new Error("Required param 'field' in getRestFieldValues");
-        }
 
         let pathParams = {
             'taskId': taskId, 'field': field
@@ -205,12 +191,9 @@ export class TaskFormsApi extends BaseApi {
         * @return Promise<FormDefinitionRepresentation>
         */
     getTaskForm(taskId: string): Promise<FormDefinitionRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getTaskForm");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -243,16 +226,10 @@ export class TaskFormsApi extends BaseApi {
         * @return Promise<{}>
         */
     saveTaskForm(taskId: string, saveTaskFormRepresentation: SaveFormRepresentation): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(saveTaskFormRepresentation, 'saveTaskFormRepresentation');
 
         let postBody = saveTaskFormRepresentation;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in saveTaskForm");
-        }
-
-        if (saveTaskFormRepresentation === undefined || saveTaskFormRepresentation === null) {
-            throw new Error("Required param 'saveTaskFormRepresentation' in saveTaskForm");
-        }
 
         let pathParams = {
             'taskId': taskId

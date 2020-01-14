@@ -21,6 +21,7 @@ import { LightTenantRepresentation } from '../model/lightTenantRepresentation';
 import { TenantEvent } from '../model/tenantEvent';
 import { TenantRepresentation } from '../model/tenantRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Admintenants service.
@@ -36,12 +37,9 @@ export class AdminTenantsApi extends BaseApi {
     * @return Promise<LightTenantRepresentation>
     */
     createTenant(createTenantRepresentation: CreateTenantRepresentation): Promise<LightTenantRepresentation> {
+        throwIfNotDefined(createTenantRepresentation, 'groupId');
 
         let postBody = createTenantRepresentation;
-
-        if (createTenantRepresentation === undefined || createTenantRepresentation === null) {
-            throw new Error("Required param 'createTenantRepresentation' in createTenant");
-        }
 
         let pathParams = {
 
@@ -73,12 +71,9 @@ export class AdminTenantsApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteTenant(tenantId: number): Promise<any> {
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in deleteTenant");
-        }
 
         let pathParams = {
             'tenantId': tenantId
@@ -110,12 +105,9 @@ export class AdminTenantsApi extends BaseApi {
         * @return Promise<TenantEvent>
         */
     getTenantEvents(tenantId: number): Promise<TenantEvent> {
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in getTenantEvents");
-        }
 
         let pathParams = {
             'tenantId': tenantId
@@ -147,12 +139,9 @@ export class AdminTenantsApi extends BaseApi {
         * @return Promise<{}>
         */
     getTenantLogo(tenantId: number): Promise<any> {
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in getTenantLogo");
-        }
 
         let pathParams = {
             'tenantId': tenantId
@@ -184,12 +173,9 @@ export class AdminTenantsApi extends BaseApi {
         * @return Promise<TenantRepresentation>
         */
     getTenant(tenantId: number): Promise<TenantRepresentation> {
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in getTenant");
-        }
 
         let pathParams = {
             'tenantId': tenantId
@@ -254,16 +240,10 @@ export class AdminTenantsApi extends BaseApi {
         * @return Promise<TenantRepresentation>
         */
     update(tenantId: number, createTenantRepresentation: CreateTenantRepresentation): Promise<TenantRepresentation> {
+        throwIfNotDefined(tenantId, 'tenantId');
+        throwIfNotDefined(createTenantRepresentation, 'createTenantRepresentation');
 
         let postBody = createTenantRepresentation;
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in update");
-        }
-
-        if (createTenantRepresentation === undefined || createTenantRepresentation === null) {
-            throw new Error("Required param 'createTenantRepresentation' in update");
-        }
 
         let pathParams = {
             'tenantId': tenantId
@@ -296,16 +276,10 @@ export class AdminTenantsApi extends BaseApi {
         * @return Promise<ImageUploadRepresentation>
         */
     uploadTenantLogo(tenantId: number, file: any): Promise<ImageUploadRepresentation> {
+        throwIfNotDefined(tenantId, 'tenantId');
+        throwIfNotDefined(file, 'file');
 
         let postBody = null;
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in uploadTenantLogo");
-        }
-
-        if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in uploadTenantLogo");
-        }
 
         let pathParams = {
             'tenantId': tenantId
