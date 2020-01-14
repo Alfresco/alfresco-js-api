@@ -15,8 +15,8 @@
 * limitations under the License.
 */
 
-export function assertStringParam(param: string, name: string) {
-    if (!param) {
+export function throwIfNotDefined(param: any, name: string) {
+    if (param === null || param === undefined) {
         throw new Error(`Missing param ${name}`);
     }
 }

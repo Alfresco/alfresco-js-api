@@ -18,7 +18,7 @@
 import { AlfrescoApi } from '../../../alfrescoApi';
 import { PaginatedList, PaginatedEntries } from '../model/pagination';
 import { BaseApi } from './base.api';
-import { assertStringParam } from '../../../assert';
+import { throwIfNotDefined } from '../../../assert';
 
 export interface CustomModel {
     name: string;
@@ -95,8 +95,8 @@ export class CustomModelApi extends BaseApi {
      * create Custom Model
      */
     createCustomModel(status: string, description: string, name: string, namespaceUri: string, namespacePrefix: string, author?: string): Promise<{ entry: CustomModel }> {
-        assertStringParam(namespaceUri, 'namespaceUri');
-        assertStringParam(namespacePrefix, 'namespacePrefix');
+        throwIfNotDefined(namespaceUri, 'namespaceUri');
+        throwIfNotDefined(namespacePrefix, 'namespacePrefix');
 
         const bodyParam = {
             status,
@@ -117,8 +117,8 @@ export class CustomModelApi extends BaseApi {
      * Create a custom type
      */
     createCustomType(modelName: string, name: string, parentName?: string, title?: string, description?: string): Promise<{ entry: CustomType }> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(name, 'name');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(name, 'name');
 
         const bodyParam = {
             name,
@@ -142,8 +142,8 @@ export class CustomModelApi extends BaseApi {
      * Create a custom aspect
      */
     createCustomAspect(modelName: string, name: string, parentName?: string, title?: string, description?: string): Promise<any> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(name, 'name');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(name, 'name');
 
         const bodyParam = {
             name,
@@ -167,9 +167,9 @@ export class CustomModelApi extends BaseApi {
      * Create a custom constraint
      */
     createCustomConstraint(modelName: string, name: string, type: string, parameters?: any): Promise<any> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(type, 'type');
-        assertStringParam(name, 'name');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(type, 'type');
+        throwIfNotDefined(name, 'name');
 
         const bodyParam = {
             name,
@@ -192,7 +192,7 @@ export class CustomModelApi extends BaseApi {
      * Activate the custom model
      */
     activateCustomModel(modelName: string): Promise<{ entry: CustomModel }> {
-        assertStringParam(modelName, 'modelName');
+        throwIfNotDefined(modelName, 'modelName');
 
         const bodyParam = {
             'status': 'ACTIVE'
@@ -213,7 +213,7 @@ export class CustomModelApi extends BaseApi {
      * Deactivate the custom model
      */
     deactivateCustomModel(modelName: string): Promise<{ entry: CustomModel }> {
-        assertStringParam(modelName, 'modelName');
+        throwIfNotDefined(modelName, 'modelName');
 
         const bodyParam = {
             'status': 'DRAFT'
@@ -234,8 +234,8 @@ export class CustomModelApi extends BaseApi {
      * Add property into an existing aspect
      */
     addPropertyToAspect(modelName: string, aspectName: string, properties?: CustomModelProperty[]): Promise<CustomAspect> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(aspectName, 'aspectName');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(aspectName, 'aspectName');
 
         const bodyParam = {
             'name': aspectName,
@@ -258,8 +258,8 @@ export class CustomModelApi extends BaseApi {
      * Add Property into an existing type
      */
     addPropertyToType(modelName: string, typeName: string, properties?: CustomModelProperty[]): Promise<CustomType> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(typeName, 'typeName');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(typeName, 'typeName');
 
         const bodyParam = {
             'name': typeName,
@@ -282,7 +282,7 @@ export class CustomModelApi extends BaseApi {
      * Edit an existing custom model
      */
     updateCustomModel(modelName: string, description?: string, namespaceUri?: string, namespacePrefix?: string): Promise<any> {
-        assertStringParam(modelName, 'modelName');
+        throwIfNotDefined(modelName, 'modelName');
 
         const bodyParam = {
             'name': modelName,
@@ -306,8 +306,8 @@ export class CustomModelApi extends BaseApi {
      * Edit an existing custom model type
      */
     updateCustomType(modelName: string, typeName: string, description?: string, parentName?: string, title?: string): Promise<any> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(typeName, 'typeName');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(typeName, 'typeName');
 
         const bodyParam = {
             'name': modelName,
@@ -332,8 +332,8 @@ export class CustomModelApi extends BaseApi {
      * Edit an existing custom model aspect
      */
     updateCustomAspect(modelName: string, aspectName: string, description?: string, parentName?: string, title?: string): Promise<any> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(aspectName, 'aspectName');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(aspectName, 'aspectName');
 
         const bodyParam = {
             'name': modelName,
@@ -367,7 +367,7 @@ export class CustomModelApi extends BaseApi {
      * Get custom model
      */
     getCustomModel(modelName: string, queryParams?: any): Promise<{ entry: CustomModel }> {
-        assertStringParam(modelName, 'modelName');
+        throwIfNotDefined(modelName, 'modelName');
 
         const pathParams = {
             modelName
@@ -384,7 +384,7 @@ export class CustomModelApi extends BaseApi {
      * Get all custom model types
      */
     getAllCustomType(modelName: string): Promise<PaginatedList<CustomType>> {
-        assertStringParam(modelName, 'modelName');
+        throwIfNotDefined(modelName, 'modelName');
 
         const pathParams = {
             modelName
@@ -400,8 +400,8 @@ export class CustomModelApi extends BaseApi {
      * Get custom model type
      */
     getCustomType(modelName: string, typeName?: string, queryParams?: any): Promise<any> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(typeName, 'typeName');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(typeName, 'typeName');
 
         const pathParams = {
             modelName,
@@ -419,7 +419,7 @@ export class CustomModelApi extends BaseApi {
      * Get all custom model aspect
      */
     getAllCustomAspect(modelName: string, queryParams?: any): Promise<PaginatedList<CustomAspect>> {
-        assertStringParam(modelName, 'modelName');
+        throwIfNotDefined(modelName, 'modelName');
 
         const pathParams = {
             modelName
@@ -436,8 +436,8 @@ export class CustomModelApi extends BaseApi {
      * Get custom model aspect
      */
     getCustomAspect(modelName: string, aspectName: string, queryParams?: any): Promise<any> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(aspectName, 'aspectName');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(aspectName, 'aspectName');
 
         const pathParams = {
             modelName,
@@ -455,7 +455,7 @@ export class CustomModelApi extends BaseApi {
      * Get all custom model defined constraints
      */
     getAllCustomConstraints(modelName: string, queryParams?: any): Promise<any> {
-        assertStringParam(modelName, 'modelName');
+        throwIfNotDefined(modelName, 'modelName');
 
         const pathParams = {
             modelName
@@ -472,8 +472,8 @@ export class CustomModelApi extends BaseApi {
      * Get custom model defined constraints
      */
     getCustomConstraints(modelName: string, constraintName: string, queryParams?: any): Promise<any> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(constraintName, 'constraintName');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(constraintName, 'constraintName');
 
         const pathParams = {
             modelName,
@@ -491,7 +491,7 @@ export class CustomModelApi extends BaseApi {
      * Delete the given custom model
      */
     deleteCustomModel(modelName: string): Promise<any> {
-        assertStringParam(modelName, 'modelName');
+        throwIfNotDefined(modelName, 'modelName');
 
         const pathParams = {
             modelName
@@ -507,8 +507,8 @@ export class CustomModelApi extends BaseApi {
      * Delete the given custom type
      */
     deleteCustomType(modelName: string, typeName: string): Promise<any> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(typeName, 'typeName');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(typeName, 'typeName');
 
         const pathParams = {
             modelName,
@@ -522,8 +522,8 @@ export class CustomModelApi extends BaseApi {
     }
 
     deleteCustomAspect(modelName: string, aspectName: string): Promise<any> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(aspectName, 'aspectName');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(aspectName, 'aspectName');
 
         const pathParams = {
             modelName,
@@ -537,9 +537,9 @@ export class CustomModelApi extends BaseApi {
     }
 
     deleteCustomAspectProperty(modelName: string, aspectName: string, propertyName: string): Promise<{ entry: CustomAspect }> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(aspectName, 'aspectName');
-        assertStringParam(propertyName, 'propertyName');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(aspectName, 'aspectName');
+        throwIfNotDefined(propertyName, 'propertyName');
 
         const bodyParam = {
             'name': aspectName
@@ -565,9 +565,9 @@ export class CustomModelApi extends BaseApi {
     }
 
     deleteCustomTypeProperty(modelName: string, typeName: string, propertyName: string): Promise<{ entry: CustomType }> {
-        assertStringParam(modelName, 'modelName');
-        assertStringParam(typeName, 'typeName');
-        assertStringParam(propertyName, 'propertyName');
+        throwIfNotDefined(modelName, 'modelName');
+        throwIfNotDefined(typeName, 'typeName');
+        throwIfNotDefined(propertyName, 'propertyName');
 
         const bodyParam = {
             'name': typeName
