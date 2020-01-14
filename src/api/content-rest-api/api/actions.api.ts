@@ -20,6 +20,7 @@ import { ActionDefinitionEntry } from '../model/actionDefinitionEntry';
 import { ActionDefinitionList } from '../model/actionDefinitionList';
 import { ActionExecResultEntry } from '../model/actionExecResultEntry';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Actions service.
@@ -206,8 +207,8 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -284,8 +285,8 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

@@ -19,6 +19,7 @@ import { RevertBody } from '../model/revertBody';
 import { VersionEntry } from '../model/versionEntry';
 import { VersionPaging } from '../model/versionPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Versions service.
@@ -238,8 +239,8 @@ params (majorVersion and comment) on a subsequent file content update.
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv'),
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems']
         };
@@ -308,7 +309,7 @@ params (majorVersion and comment) on a subsequent file content update.
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

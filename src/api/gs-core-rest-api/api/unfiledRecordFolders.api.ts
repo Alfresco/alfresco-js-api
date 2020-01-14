@@ -20,6 +20,7 @@ import { UnfiledRecordFolderAssociationPaging } from '../model/unfiledRecordFold
 import { UnfiledRecordFolderBodyUpdate } from '../model/unfiledRecordFolderBodyUpdate';
 import { UnfiledRecordFolderEntry } from '../model/unfiledRecordFolderEntry';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Unfiledrecordfolders service.
@@ -169,8 +170,8 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         let queryParams = {
             'autoRename': opts['autoRename'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -270,9 +271,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'relativePath': opts['relativePath'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -351,10 +352,10 @@ parameter are returned in addition to those specified in the **fields** paramete
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'relativePath': opts['relativePath'],
             'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -434,9 +435,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

@@ -17,6 +17,7 @@
 
 import { RecordEntry } from '../model/recordEntry';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Files service.
@@ -65,8 +66,8 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         let queryParams = {
             'hideRecord': opts['hideRecord'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

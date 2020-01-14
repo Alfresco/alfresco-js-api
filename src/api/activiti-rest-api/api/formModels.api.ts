@@ -22,6 +22,7 @@ import { ResultListDataRepresentationFormRepresentation } from '../model/resultL
 import { ResultListDataRepresentationRuntimeFormRepresentation } from '../model/resultListDataRepresentationRuntimeFormRepresentation';
 import { ValidationErrorRepresentation } from '../model/validationErrorRepresentation';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
  * Formmodels service.
@@ -153,7 +154,7 @@ export class FormModelsApi extends BaseApi {
 
         if (typeof input === 'string') {
             let queryParams = {
-                'formId': this.apiClient.buildCollectionParam(input, 'multi')
+                'formId': buildCollectionParam(input, 'multi')
             };
 
             return this.apiClient.callApi(

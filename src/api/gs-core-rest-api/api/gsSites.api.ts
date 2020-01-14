@@ -19,6 +19,7 @@ import { RMSiteBodyCreate } from '../model/rMSiteBodyCreate';
 import { RMSiteBodyUpdate } from '../model/rMSiteBodyUpdate';
 import { RMSiteEntry } from '../model/rMSiteEntry';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Gssites service.
@@ -145,7 +146,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -200,7 +201,7 @@ When you create the RM site, the **filePlan** structure is also created includin
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

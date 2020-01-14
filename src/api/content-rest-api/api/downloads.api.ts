@@ -18,6 +18,7 @@
 import { DownloadBodyCreate } from '../model/downloadBodyCreate';
 import { DownloadEntry } from '../model/downloadEntry';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Downloads service.
@@ -121,7 +122,7 @@ The cancel operation is done asynchronously.
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -175,7 +176,7 @@ The cancel operation is done asynchronously.
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

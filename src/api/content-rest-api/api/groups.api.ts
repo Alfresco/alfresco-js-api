@@ -23,6 +23,7 @@ import { GroupMemberPaging } from '../model/groupMemberPaging';
 import { GroupMembershipBodyCreate } from '../model/groupMembershipBodyCreate';
 import { GroupPaging } from '../model/groupPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Groups service.
@@ -83,8 +84,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -149,7 +150,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -312,8 +313,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -398,9 +399,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
             'where': opts['where'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -511,10 +512,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'where': opts['where'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -617,10 +618,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'where': opts['where'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -685,8 +686,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

@@ -17,6 +17,7 @@
 
 import { ActivityPaging } from '../model/activityPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Activities service.
@@ -73,7 +74,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'maxItems': opts['maxItems'],
             'who': opts['who'],
             'siteId': opts['siteId'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

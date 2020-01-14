@@ -19,6 +19,7 @@ import { ClassificationReasonBody } from '../model/classificationReasonBody';
 import { ClassificationReasonEntry } from '../model/classificationReasonEntry';
 import { ClassificationReasonsPaging } from '../model/classificationReasonsPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Classificationreasons service.
@@ -174,7 +175,7 @@ JSON
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

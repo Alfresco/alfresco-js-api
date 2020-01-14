@@ -21,6 +21,7 @@ import { NodeEntry } from '../model/nodeEntry';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Trashcan service.
@@ -214,7 +215,7 @@ Permanently deletes the deleted node **nodeId**.
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         let headerParams = {
@@ -384,7 +385,7 @@ Permanently deletes the deleted node **nodeId**.
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         let headerParams = {
@@ -449,7 +450,7 @@ Permanently deletes the deleted node **nodeId**.
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

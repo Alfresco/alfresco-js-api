@@ -61,6 +61,35 @@ export function paramToString(param: any): string {
     return param.toString();
 }
 
+/**
+ * Builds a string representation of an array-type actual parameter, according to the given collection format.
+ * @param {Array} param An array parameter.
+ * @param {module:ApiClient.CollectionFormatEnum} collectionFormat The array element separator strategy.
+ * @returns {String|Array} A string representation of the supplied collection, using the specified delimiter. Returns
+ * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
+ */
+export function buildCollectionParam(param: string[], collectionFormat: string): string | any[] {
+    if (!param) {
+        return null;
+    }
+
+    switch (collectionFormat) {
+        case 'csv':
+            return param.map(paramToString).join(',');
+        case 'ssv':
+            return param.map(paramToString).join(' ');
+        case 'tsv':
+            return param.map(paramToString).join('\t');
+        case 'pipes':
+            return param.map(paramToString).join('|');
+        case 'multi':
+            // return the array directly as SuperAgent will handle it as expected
+            return param.map(paramToString);
+        default:
+            throw new Error('Unknown collection format: ' + collectionFormat);
+    }
+}
+
 export class AlfrescoApiClient implements ee.Emitter {
 
     on: ee.EmitterMethod;
@@ -211,36 +240,6 @@ export class AlfrescoApiClient implements ee.Emitter {
             }
         }
         return newParams;
-    }
-
-
-    /**
-     * Builds a string representation of an array-type actual parameter, according to the given collection format.
-     * @param {Array} param An array parameter.
-     * @param {module:ApiClient.CollectionFormatEnum} collectionFormat The array element separator strategy.
-     * @returns {String|Array} A string representation of the supplied collection, using the specified delimiter. Returns
-     * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
-     */
-    buildCollectionParam(param: string[], collectionFormat: string): string | any[] {
-        if (!param) {
-            return null;
-        }
-
-        switch (collectionFormat) {
-            case 'csv':
-                return param.map(paramToString).join(',');
-            case 'ssv':
-                return param.map(paramToString).join(' ');
-            case 'tsv':
-                return param.map(paramToString).join('\t');
-            case 'pipes':
-                return param.map(paramToString).join('|');
-            case 'multi':
-                // return the array directly as SuperAgent will handle it as expected
-                return param.map(paramToString);
-            default:
-                throw new Error('Unknown collection format: ' + collectionFormat);
-        }
     }
 
     isWithCredentials(): boolean {

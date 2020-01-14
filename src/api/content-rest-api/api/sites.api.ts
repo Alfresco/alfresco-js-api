@@ -33,6 +33,7 @@ import { SitePaging } from '../model/sitePaging';
 import { SiteRoleEntry } from '../model/siteRoleEntry';
 import { SiteRolePaging } from '../model/siteRolePaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Sites service.
@@ -148,7 +149,7 @@ export class SitesApi extends BaseApi {
         let queryParams = {
             'skipConfiguration': opts['skipConfiguration'],
             'skipAddToFavorites': opts['skipAddToFavorites'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -255,7 +256,7 @@ export class SitesApi extends BaseApi {
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -364,7 +365,7 @@ export class SitesApi extends BaseApi {
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -607,8 +608,8 @@ export class SitesApi extends BaseApi {
         };
 
         let queryParams = {
-            'relations': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'relations': buildCollectionParam(opts['relations'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -664,7 +665,7 @@ export class SitesApi extends BaseApi {
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -723,7 +724,7 @@ export class SitesApi extends BaseApi {
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -827,7 +828,7 @@ export class SitesApi extends BaseApi {
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -902,7 +903,7 @@ export class SitesApi extends BaseApi {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -961,7 +962,7 @@ export class SitesApi extends BaseApi {
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -1023,7 +1024,7 @@ export class SitesApi extends BaseApi {
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -1082,7 +1083,7 @@ export class SitesApi extends BaseApi {
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -1176,9 +1177,9 @@ export class SitesApi extends BaseApi {
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'relations': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'relations': buildCollectionParam(opts['relations'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv'),
             'where': opts['where']
         };
 
@@ -1278,9 +1279,9 @@ export class SitesApi extends BaseApi {
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'relations': this.apiClient.buildCollectionParam(opts['relations'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'relations': buildCollectionParam(opts['relations'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv'),
             'where': opts['where']
         };
 
@@ -1389,7 +1390,7 @@ export class SitesApi extends BaseApi {
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -1460,7 +1461,7 @@ export class SitesApi extends BaseApi {
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -1524,7 +1525,7 @@ export class SitesApi extends BaseApi {
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

@@ -24,6 +24,7 @@ import { TopicBody } from '../model/topicBody';
 import { TopicEntry } from '../model/topicEntry';
 import { TopicPaging } from '../model/topicPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Classificationguides service.
@@ -134,7 +135,7 @@ export class ClassificationGuidesApi extends BaseApi {
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         let headerParams = {
@@ -184,7 +185,7 @@ export class ClassificationGuidesApi extends BaseApi {
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         let headerParams = {
@@ -308,10 +309,10 @@ export class ClassificationGuidesApi extends BaseApi {
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
             'where': opts['where']
         };
 
@@ -372,10 +373,10 @@ export class ClassificationGuidesApi extends BaseApi {
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
             'where': opts['where'],
             'includeSource': opts['includeSource']
         };
@@ -437,10 +438,10 @@ export class ClassificationGuidesApi extends BaseApi {
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
             'where': opts['where'],
             'includeSource': opts['includeSource']
         };
@@ -524,7 +525,7 @@ export class ClassificationGuidesApi extends BaseApi {
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         let headerParams = {
@@ -619,7 +620,7 @@ export class ClassificationGuidesApi extends BaseApi {
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         let headerParams = {

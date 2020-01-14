@@ -5,6 +5,7 @@ import { {{classname}} } from '../{{filename}}';
 {{/imports}}
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 {{#operations}}/**
 * {{baseName}} service.
@@ -35,7 +36,7 @@ export class {{classname}} extends BaseApi {
         };
 
         const queryParams = { {{#queryParams}}
-            '{{baseName}}': {{#collectionFormat}}this.apiClient.buildCollectionParam({{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}, '{{collectionFormat}}'){{/collectionFormat}}{{^collectionFormat}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/collectionFormat}}{{#hasMore}},{{/hasMore}}{{/queryParams}}
+            '{{baseName}}': {{#collectionFormat}}buildCollectionParam({{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}, '{{collectionFormat}}'){{/collectionFormat}}{{^collectionFormat}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/collectionFormat}}{{#hasMore}},{{/hasMore}}{{/queryParams}}
         };
 
         const headerParams = {
@@ -43,7 +44,7 @@ export class {{classname}} extends BaseApi {
             '{{baseName}}': {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{#hasMore}},{{/hasMore}}{{/headerParams}}
         };
         const formParams = { {{#formParams}}
-        '{{baseName}}': {{#collectionFormat}}this.apiClient.buildCollectionParam({{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}, '{{collectionFormat}}'){{/collectionFormat}}{{^collectionFormat}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/collectionFormat}}{{#hasMore}},{{/hasMore}}{{/formParams}}
+        '{{baseName}}': {{#collectionFormat}}buildCollectionParam({{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}, '{{collectionFormat}}'){{/collectionFormat}}{{^collectionFormat}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/collectionFormat}}{{#hasMore}},{{/hasMore}}{{/formParams}}
         };
 
         const contentTypes = [{{#consumes}}'{{& mediaType}}'{{#hasMore}}, {{/hasMore}}{{/consumes}}];
