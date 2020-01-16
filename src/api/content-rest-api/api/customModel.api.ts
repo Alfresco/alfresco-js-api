@@ -311,7 +311,7 @@ export class CustomModelApi extends BaseApi {
         throwIfNotDefined(typeName, 'typeName');
 
         const bodyParam = {
-            'name': modelName,
+            'name': typeName,
             parentName,
             title,
             description
@@ -337,7 +337,7 @@ export class CustomModelApi extends BaseApi {
         throwIfNotDefined(aspectName, 'aspectName');
 
         const bodyParam = {
-            'name': modelName,
+            'name': aspectName,
             parentName,
             title,
             description
