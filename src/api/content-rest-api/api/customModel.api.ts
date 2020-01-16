@@ -33,6 +33,7 @@ export interface CustomType {
     name?: string;
     parentName?: string;
     prefixedName?: string;
+    description?: string;
     properties?: CustomModelProperty[];
     title?: string;
 }
@@ -399,7 +400,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Get custom model type
      */
-    getCustomType(modelName: string, typeName?: string, queryParams?: any): Promise<any> {
+    getCustomType(modelName: string, typeName?: string, queryParams?: any): Promise<{ entry: CustomType }> {
         throwIfNotDefined(modelName, 'modelName');
         throwIfNotDefined(typeName, 'typeName');
 
@@ -435,7 +436,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Get custom model aspect
      */
-    getCustomAspect(modelName: string, aspectName: string, queryParams?: any): Promise<any> {
+    getCustomAspect(modelName: string, aspectName: string, queryParams?: any): Promise<{ entry: CustomAspect }> {
         throwIfNotDefined(modelName, 'modelName');
         throwIfNotDefined(aspectName, 'aspectName');
 
