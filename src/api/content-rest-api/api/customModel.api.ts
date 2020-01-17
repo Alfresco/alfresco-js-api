@@ -282,14 +282,15 @@ export class CustomModelApi extends BaseApi {
     /**
      * Edit an existing custom model
      */
-    updateCustomModel(modelName: string, description?: string, namespaceUri?: string, namespacePrefix?: string): Promise<any> {
+    updateCustomModel(modelName: string, description?: string, namespaceUri?: string, namespacePrefix?: string, author?: string): Promise<any> {
         throwIfNotDefined(modelName, 'modelName');
 
         const bodyParam = {
             'name': modelName,
             description,
             namespaceUri,
-            namespacePrefix
+            namespacePrefix,
+            author
         };
 
         const pathParams = {
