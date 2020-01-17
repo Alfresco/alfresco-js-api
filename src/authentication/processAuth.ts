@@ -32,6 +32,10 @@ export class ProcessAuth extends AlfrescoApiClient {
         'basicAuth': { ticket: '' }, type: 'activiti'
     };
 
+    defaultHeaders = {
+        'user-agent': 'superagent'
+    };
+
     constructor(config: AlfrescoApiConfig) {
         super();
         this.storage = new Storage();

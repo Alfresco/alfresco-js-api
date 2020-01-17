@@ -9,8 +9,8 @@ fi;
 echo $VERSION
 
 echo "git tag -a ${VERSION} -m ${VERSION}"
-git config --local user.name "eromano"
-git config --local user.email "eugenioromano16@gmail.com"
+git config --local user.name "alfresco-build"
+git config --local user.email "build@alfresco.com"
 git tag -a ${VERSION} -m "${VERSION} [ci skip] "
 git remote rm origin
 GITHUB_REPO=https://$GITHUB_TOKEN:x-oauth-basic@github.com/Alfresco/alfresco-js-api.git

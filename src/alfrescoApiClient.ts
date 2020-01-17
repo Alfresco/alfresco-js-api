@@ -31,6 +31,21 @@ const process: any = {};
 declare const Buffer: any;
 declare const Blob: any;
 
+export interface RequestOptions {
+    path: string;
+    httpMethod?: string;
+    pathParams?: any;
+    queryParams?: any;
+    headerParams?: any;
+    formParams?: any;
+    bodyParam?: any;
+    contentTypes?: string[];
+    accepts?: string[];
+    returnType?: any;
+    contextRoot?: string;
+    responseType?: string;
+}
+
 export class AlfrescoApiClient implements ee.Emitter {
 
     on: ee.EmitterMethod;
@@ -60,13 +75,16 @@ export class AlfrescoApiClient implements ee.Emitter {
      * The default HTTP headers to be included for all API calls.
      */
     defaultHeaders = {
-        'user-agent': 'superagent'
     };
 
     /**
      * The default HTTP timeout for all API calls.
      */
     timeout: number | { deadline?: number, response?: number } = undefined;
+
+    contentTypes = {
+        JSON: ['application/json']
+    };
 
     constructor(host?: string) {
         this.host = host;
@@ -348,6 +366,59 @@ export class AlfrescoApiClient implements ee.Emitter {
         }
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
             contentTypes, accepts, returnType, contextRoot, responseType, url);
+    }
+
+    request<T = any>(options: RequestOptions): Promise<T> {
+        return this.callApi(
+            options.path,
+            options.httpMethod,
+            options.pathParams,
+            options.queryParams,
+            options.headerParams,
+            options.formParams,
+            options.bodyParam,
+            options.contentTypes,
+            options.accepts,
+            options.returnType,
+            options.contextRoot,
+            options.responseType
+        );
+    }
+
+    post<T = any>(options: RequestOptions): Promise<T> {
+        return this.request<T>({
+            ...options,
+            httpMethod: 'POST',
+            contentTypes: options.contentTypes || this.contentTypes.JSON,
+            accepts: options.accepts || this.contentTypes.JSON
+        });
+    }
+
+    put<T = any>(options: RequestOptions): Promise<T> {
+        return this.request<T>({
+            ...options,
+            httpMethod: 'PUT',
+            contentTypes: options.contentTypes || this.contentTypes.JSON,
+            accepts: options.accepts || this.contentTypes.JSON
+        });
+    }
+
+    get<T = any>(options: RequestOptions): Promise<T> {
+        return this.request<T>({
+            ...options,
+            httpMethod: 'GET',
+            contentTypes: options.contentTypes || this.contentTypes.JSON,
+            accepts: options.accepts || this.contentTypes.JSON
+        });
+    }
+
+    delete<T = void>(options: RequestOptions): Promise<T> {
+        return this.request<T>({
+            ...options,
+            httpMethod: 'DELETE',
+            contentTypes: options.contentTypes || this.contentTypes.JSON,
+            accepts: options.accepts || this.contentTypes.JSON
+        });
     }
 
     /**
