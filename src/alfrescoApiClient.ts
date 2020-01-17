@@ -415,7 +415,9 @@ export class AlfrescoApiClient implements ee.Emitter {
     delete<T = void>(options: RequestOptions): Promise<T> {
         return this.request<T>({
             ...options,
-            httpMethod: 'DELETE'
+            httpMethod: 'DELETE',
+            contentTypes: options.contentTypes || this.contentTypes.JSON,
+            accepts: options.accepts || this.contentTypes.JSON
         });
     }
 
