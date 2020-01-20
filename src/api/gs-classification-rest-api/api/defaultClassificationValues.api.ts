@@ -18,6 +18,7 @@
 import { DeclassificationDate } from '../model/declassificationDate';
 import { BaseApi } from './base.api';
 import { DateAlfresco } from '../../../../src/api/content-rest-api/model/dateAlfresco';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Defaultclassificationvalues service.
@@ -33,12 +34,9 @@ export class DefaultClassificationValuesApi extends BaseApi {
     * @return Promise<DeclassificationDate>
     */
     calculateDefaultDeclassificationDate(nodeId: string): Promise<DeclassificationDate> {
+        throwIfNotDefined(nodeId, 'nodeId');
 
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in calculateDefaultDeclassificationDate");
-        }
 
         let pathParams = {
             'nodeId': nodeId

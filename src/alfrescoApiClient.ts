@@ -46,6 +46,50 @@ export interface RequestOptions {
     responseType?: string;
 }
 
+/**
+ * Returns a string representation for an actual parameter.
+ * @param param The actual parameter.
+ * @returns The string representation of <code>param</code>.
+ */
+export function paramToString(param: any): string {
+    if (param === undefined || param === null) {
+        return '';
+    }
+    if (param instanceof Date) {
+        return param.toJSON();
+    }
+    return param.toString();
+}
+
+/**
+ * Builds a string representation of an array-type actual parameter, according to the given collection format.
+ * @param {Array} param An array parameter.
+ * @param {module:ApiClient.CollectionFormatEnum} collectionFormat The array element separator strategy.
+ * @returns {String|Array} A string representation of the supplied collection, using the specified delimiter. Returns
+ * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
+ */
+export function buildCollectionParam(param: string[], collectionFormat: string): string | any[] {
+    if (!param) {
+        return null;
+    }
+
+    switch (collectionFormat) {
+        case 'csv':
+            return param.map(paramToString).join(',');
+        case 'ssv':
+            return param.map(paramToString).join(' ');
+        case 'tsv':
+            return param.map(paramToString).join('\t');
+        case 'pipes':
+            return param.map(paramToString).join('|');
+        case 'multi':
+            // return the array directly as SuperAgent will handle it as expected
+            return param.map(paramToString);
+        default:
+            throw new Error('Unknown collection format: ' + collectionFormat);
+    }
+}
+
 export class AlfrescoApiClient implements ee.Emitter {
 
     on: ee.EmitterMethod;
@@ -93,21 +137,6 @@ export class AlfrescoApiClient implements ee.Emitter {
     }
 
     /**
-     * Returns a string representation for an actual parameter.
-     * @param param The actual parameter.
-     * @returns The string representation of <code>param</code>.
-     */
-    paramToString(param: any): string {
-        if (param === undefined || param === null) {
-            return '';
-        }
-        if (param instanceof Date) {
-            return param.toJSON();
-        }
-        return param.toString();
-    }
-
-    /**
      * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders with parameter values.
      * NOTE: query parameters are not handled here.
      * @param  path The path to append to the base URL.
@@ -119,11 +148,11 @@ export class AlfrescoApiClient implements ee.Emitter {
             path = '/' + path;
         }
         let url = this.basePath + path;
-        const _this = this;
+
         url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
             let value;
             if (pathParams.hasOwnProperty(key)) {
-                value = _this.paramToString(pathParams[key]);
+                value = paramToString(pathParams[key]);
             } else {
                 value = fullMatch;
             }
@@ -206,41 +235,11 @@ export class AlfrescoApiClient implements ee.Emitter {
                 if (this.isFileParam(value) || Array.isArray(value)) {
                     newParams[key] = value;
                 } else {
-                    newParams[key] = this.paramToString(value);
+                    newParams[key] = paramToString(value);
                 }
             }
         }
         return newParams;
-    }
-
-
-    /**
-     * Builds a string representation of an array-type actual parameter, according to the given collection format.
-     * @param {Array} param An array parameter.
-     * @param {module:ApiClient.CollectionFormatEnum} collectionFormat The array element separator strategy.
-     * @returns {String|Array} A string representation of the supplied collection, using the specified delimiter. Returns
-     * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
-     */
-    buildCollectionParam(param: string[], collectionFormat: string): string | any[] {
-        if (!param) {
-            return null;
-        }
-
-        switch (collectionFormat) {
-            case 'csv':
-                return param.map(this.paramToString).join(',');
-            case 'ssv':
-                return param.map(this.paramToString).join(' ');
-            case 'tsv':
-                return param.map(this.paramToString).join('\t');
-            case 'pipes':
-                return param.map(this.paramToString).join('|');
-            case 'multi':
-                // return the array directly as SuperAgent will handle it as expected
-                return param.map(this.paramToString);
-            default:
-                throw new Error('Unknown collection format: ' + collectionFormat);
-        }
     }
 
     isWithCredentials(): boolean {
@@ -614,11 +613,11 @@ export class AlfrescoApiClient implements ee.Emitter {
             path = '/' + path;
         }
         let url = basePath + path;
-        const _this = this;
+
         url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
             let value;
             if (pathParams.hasOwnProperty(key)) {
-                value = _this.paramToString(pathParams[key]);
+                value = paramToString(pathParams[key]);
             } else {
                 value = fullMatch;
             }

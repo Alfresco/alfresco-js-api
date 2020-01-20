@@ -18,6 +18,7 @@
 import { } from '../model/';
 import { RestVariable } from '../model/restVariable';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Taskvariables service.
@@ -34,16 +35,10 @@ export class TaskVariablesApi extends BaseApi {
     * @return Promise<RestVariable>
     */
     createTaskVariable(taskId: string, restVariables: RestVariable): Promise<RestVariable> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(restVariables, 'restVariables');
 
         let postBody = restVariables;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in createTaskVariable");
-        }
-
-        if (restVariables === undefined || restVariables === null) {
-            throw new Error("Required param 'restVariables' in createTaskVariable");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -75,12 +70,9 @@ export class TaskVariablesApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteAllLocalTaskVariables(taskId: string): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in deleteAllLocalTaskVariables");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -115,16 +107,11 @@ export class TaskVariablesApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteVariable(taskId: string, variableName: string, opts?: any): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(variableName, 'variableName');
+
         opts = opts || {};
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in deleteVariable");
-        }
-
-        if (variableName === undefined || variableName === null) {
-            throw new Error("Required param 'variableName' in deleteVariable");
-        }
 
         let pathParams = {
             'taskId': taskId, 'variableName': variableName
@@ -160,16 +147,11 @@ export class TaskVariablesApi extends BaseApi {
         * @return Promise<RestVariable>
         */
     getVariable(taskId: string, variableName: string, opts?: any): Promise<RestVariable> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(variableName, 'variableName');
+
         opts = opts || {};
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getVariable");
-        }
-
-        if (variableName === undefined || variableName === null) {
-            throw new Error("Required param 'variableName' in getVariable");
-        }
 
         let pathParams = {
             'taskId': taskId, 'variableName': variableName
@@ -204,12 +186,10 @@ export class TaskVariablesApi extends BaseApi {
         * @return Promise<RestVariable>
         */
     getVariables(taskId: string, opts?: any): Promise<RestVariable> {
+        throwIfNotDefined(taskId, 'taskId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getVariables");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -244,20 +224,11 @@ export class TaskVariablesApi extends BaseApi {
         * @return Promise<RestVariable>
         */
     updateVariable(taskId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(variableName, 'variableName');
+        throwIfNotDefined(restVariable, 'restVariable');
 
         let postBody = restVariable;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in updateVariable");
-        }
-
-        if (variableName === undefined || variableName === null) {
-            throw new Error("Required param 'variableName' in updateVariable");
-        }
-
-        if (restVariable === undefined || restVariable === null) {
-            throw new Error("Required param 'restVariable' in updateVariable");
-        }
 
         let pathParams = {
             'taskId': taskId, 'variableName': variableName

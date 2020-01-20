@@ -18,6 +18,8 @@
 import { PreferenceEntry } from '../model/preferenceEntry';
 import { PreferencePaging } from '../model/preferencePaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Preferences service.
@@ -50,23 +52,18 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PreferenceEntry>
     */
     getPreference(personId: string, preferenceName: string, opts?: any): Promise<PreferenceEntry> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(preferenceName, 'preferenceName');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in getPreference");
-        }
-
-        if (preferenceName === undefined || preferenceName === null) {
-            throw new Error("Required param 'preferenceName' in getPreference");
-        }
 
         let pathParams = {
             'personId': personId, 'preferenceName': preferenceName
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -117,12 +114,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<PreferencePaging>
         */
     listPreferences(personId: string, opts?: any): Promise<PreferencePaging> {
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in listPreferences");
-        }
 
         let pathParams = {
             'personId': personId
@@ -131,7 +126,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

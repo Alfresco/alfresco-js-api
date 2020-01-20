@@ -18,6 +18,7 @@
 import { } from '../model/';
 import { RestVariable } from '../model/restVariable';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Processinstancevariables service.
@@ -34,16 +35,10 @@ export class ProcessInstanceVariablesApi extends BaseApi {
     * @return Promise<RestVariable>
     */
     createOrUpdateProcessInstanceVariables(processInstanceId: string, restVariables: RestVariable[]): Promise<RestVariable[]> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+        throwIfNotDefined(restVariables, 'restVariables');
 
         let postBody = restVariables;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in createOrUpdateProcessInstanceVariables");
-        }
-
-        if (restVariables === undefined || restVariables === null) {
-            throw new Error("Required param 'restVariables' in createOrUpdateProcessInstanceVariables");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -76,16 +71,10 @@ export class ProcessInstanceVariablesApi extends BaseApi {
         * @return Promise<RestVariable>
         */
     createProcessInstanceVariables(processInstanceId: string, restVariables: RestVariable[]): Promise<RestVariable[]> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+        throwIfNotDefined(restVariables, 'restVariables');
 
         let postBody = restVariables;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in createProcessInstanceVariables");
-        }
-
-        if (restVariables === undefined || restVariables === null) {
-            throw new Error("Required param 'restVariables' in createProcessInstanceVariables");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId
@@ -118,16 +107,10 @@ export class ProcessInstanceVariablesApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<any> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+        throwIfNotDefined(variableName, 'variableName');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in deleteProcessInstanceVariable");
-        }
-
-        if (variableName === undefined || variableName === null) {
-            throw new Error("Required param 'variableName' in deleteProcessInstanceVariable");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId, 'variableName': variableName
@@ -160,16 +143,10 @@ export class ProcessInstanceVariablesApi extends BaseApi {
         * @return Promise<RestVariable>
         */
     getProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<RestVariable> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+        throwIfNotDefined(variableName, 'variableName');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getProcessInstanceVariable");
-        }
-
-        if (variableName === undefined || variableName === null) {
-            throw new Error("Required param 'variableName' in getProcessInstanceVariable");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId, 'variableName': variableName
@@ -201,13 +178,9 @@ export class ProcessInstanceVariablesApi extends BaseApi {
         * @return Promise<RestVariable>
         */
     getProcessInstanceVariables(processInstanceId: string): Promise<RestVariable[]> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         let postBody = null;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in getProcessInstanceVariables");
-        }
-
         let pathParams = {
             'processInstanceId': processInstanceId
         };
@@ -240,20 +213,11 @@ export class ProcessInstanceVariablesApi extends BaseApi {
         * @return Promise<RestVariable>
         */
     updateProcessInstanceVariable(processInstanceId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
+        throwIfNotDefined(variableName, 'variableName');
+        throwIfNotDefined(restVariable, 'restVariable');
 
         let postBody = restVariable;
-
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw new Error("Required param 'processInstanceId' in updateProcessInstanceVariable");
-        }
-
-        if (variableName === undefined || variableName === null) {
-            throw new Error("Required param 'variableName' in updateProcessInstanceVariable");
-        }
-
-        if (restVariable === undefined || restVariable === null) {
-            throw new Error("Required param 'restVariable' in updateProcessInstanceVariable");
-        }
 
         let pathParams = {
             'processInstanceId': processInstanceId, 'variableName': variableName

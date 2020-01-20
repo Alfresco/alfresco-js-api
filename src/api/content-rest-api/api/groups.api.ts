@@ -23,6 +23,8 @@ import { GroupMemberPaging } from '../model/groupMemberPaging';
 import { GroupMembershipBodyCreate } from '../model/groupMembershipBodyCreate';
 import { GroupPaging } from '../model/groupPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Groups service.
@@ -71,20 +73,18 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<GroupEntry>
     */
     createGroup(groupBodyCreate: GroupBodyCreate, opts?: any): Promise<GroupEntry> {
+        throwIfNotDefined(groupBodyCreate, 'groupBodyCreate');
+
         opts = opts || {};
         let postBody = groupBodyCreate;
-
-        if (groupBodyCreate === undefined || groupBodyCreate === null) {
-            throw new Error("Required param 'groupBodyCreate' in createGroup");
-        }
 
         let pathParams = {
 
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -133,23 +133,18 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<GroupMemberEntry>
         */
     createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts?: any): Promise<GroupMemberEntry> {
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(groupMembershipBodyCreate, 'groupMembershipBodyCreate');
+
         opts = opts || {};
         let postBody = groupMembershipBodyCreate;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in createGroupMembership");
-        }
-
-        if (groupMembershipBodyCreate === undefined || groupMembershipBodyCreate === null) {
-            throw new Error("Required param 'groupMembershipBodyCreate' in createGroupMembership");
-        }
 
         let pathParams = {
             'groupId': groupId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -187,12 +182,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteGroup(groupId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(groupId, 'groupId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in deleteGroup");
-        }
 
         let cascadeDelete = opts['cascade'] ? opts['cascade'] : false;
 
@@ -237,16 +230,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteGroupMembership(groupId: string, groupMemberId: string): Promise<any> {
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(groupMemberId, 'groupMemberId');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in deleteGroupMembership");
-        }
-
-        if (groupMemberId === undefined || groupMemberId === null) {
-            throw new Error("Required param 'groupMemberId' in deleteGroupMembership");
-        }
 
         let pathParams = {
             'groupId': groupId, 'groupMemberId': groupMemberId
@@ -300,20 +287,18 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<GroupEntry>
         */
     getGroup(groupId: string, opts?: any): Promise<GroupEntry> {
+        throwIfNotDefined(groupId, 'groupId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in getGroup");
-        }
 
         let pathParams = {
             'groupId': groupId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -384,12 +369,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<GroupMemberPaging>
         */
     listGroupMemberships(groupId: string, opts?: any): Promise<GroupMemberPaging> {
+        throwIfNotDefined(groupId, 'groupId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in listGroupMemberships");
-        }
 
         let pathParams = {
             'groupId': groupId
@@ -398,9 +381,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
             'where': opts['where'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -497,12 +480,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<GroupPaging>
         */
     listGroupMembershipsForPerson(personId: string, opts?: any): Promise<GroupPaging> {
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in listGroupMembershipsForPerson");
-        }
 
         let pathParams = {
             'personId': personId
@@ -511,10 +492,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'where': opts['where'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -617,10 +598,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'where': opts['where'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -669,24 +650,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<GroupEntry>
         */
     updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts?: any): Promise<GroupEntry> {
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(groupBodyUpdate, 'groupBodyUpdate');
+
         opts = opts || {};
         let postBody = groupBodyUpdate;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in updateGroup");
-        }
-
-        if (groupBodyUpdate === undefined || groupBodyUpdate === null) {
-            throw new Error("Required param 'groupBodyUpdate' in updateGroup");
-        }
 
         let pathParams = {
             'groupId': groupId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

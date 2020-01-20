@@ -19,6 +19,8 @@ import { CommentBody } from '../model/commentBody';
 import { CommentEntry } from '../model/commentEntry';
 import { CommentPaging } from '../model/commentPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Comments service.
@@ -94,23 +96,18 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<CommentEntry>
     */
     createComment(nodeId: string, commentBodyCreate: CommentBody, opts?: any): Promise<CommentEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(commentBodyCreate, 'commentBodyCreate');
+
         opts = opts || {};
         let postBody = commentBodyCreate;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in createComment");
-        }
-
-        if (commentBodyCreate === undefined || commentBodyCreate === null) {
-            throw new Error("Required param 'commentBodyCreate' in createComment");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -137,16 +134,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteComment(nodeId: string, commentId: string): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(commentId, 'commentId');
 
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in deleteComment");
-        }
-
-        if (commentId === undefined || commentId === null) {
-            throw new Error("Required param 'commentId' in deleteComment");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'commentId': commentId
@@ -197,12 +188,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<CommentPaging>
         */
     listComments(nodeId: string, opts?: any): Promise<CommentPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listComments");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -211,7 +200,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -252,27 +241,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<CommentEntry>
         */
     updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: any): Promise<CommentEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(commentId, 'commentId');
+        throwIfNotDefined(commentBodyUpdate, 'commentBodyUpdate');
+
         opts = opts || {};
         let postBody = commentBodyUpdate;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in updateComment");
-        }
-
-        if (commentId === undefined || commentId === null) {
-            throw new Error("Required param 'commentId' in updateComment");
-        }
-
-        if (commentBodyUpdate === undefined || commentBodyUpdate === null) {
-            throw new Error("Required param 'commentBodyUpdate' in updateComment");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'commentId': commentId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

@@ -21,6 +21,8 @@ import { RecordCategoryEntry } from '../model/recordCategoryEntry';
 import { RecordCategoryPaging } from '../model/recordCategoryPaging';
 import { RootCategoryBodyCreate } from '../model/rootCategoryBodyCreate';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Fileplans service.
@@ -112,16 +114,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<RecordCategoryEntry>
     */
     createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opts?: any): Promise<RecordCategoryEntry> {
+        throwIfNotDefined(filePlanId, 'filePlanId');
+        throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
+
         opts = opts || {};
         let postBody = nodeBodyCreate;
-
-        if (filePlanId === undefined || filePlanId === null) {
-            throw new Error("Required param 'filePlanId' in createFilePlanCategories");
-        }
-
-        if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
-            throw new Error("Required param 'nodeBodyCreate' in createFilePlanCategories");
-        }
 
         let pathParams = {
             'filePlanId': filePlanId
@@ -129,8 +126,8 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         let queryParams = {
             'autoRename': opts['autoRename'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -178,20 +175,18 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<FilePlanEntry>
         */
     getFilePlan(filePlanId: string, opts?: any): Promise<FilePlanEntry> {
+        throwIfNotDefined(filePlanId, 'filePlanId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (filePlanId === undefined || filePlanId === null) {
-            throw new Error("Required param 'filePlanId' in getFilePlan");
-        }
 
         let pathParams = {
             'filePlanId': filePlanId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -245,12 +240,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RecordCategoryPaging>
         */
     getFilePlanCategories(filePlanId: string, opts?: any): Promise<RecordCategoryPaging> {
+        throwIfNotDefined(filePlanId, 'filePlanId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (filePlanId === undefined || filePlanId === null) {
-            throw new Error("Required param 'filePlanId' in getFilePlanCategories");
-        }
 
         let pathParams = {
             'filePlanId': filePlanId
@@ -259,9 +252,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -318,24 +311,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<FilePlanEntry>
         */
     updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: any): Promise<FilePlanEntry> {
+        throwIfNotDefined(filePlanId, 'filePlanId');
+        throwIfNotDefined(filePlanBodyUpdate, 'filePlanBodyUpdate');
+
         opts = opts || {};
         let postBody = filePlanBodyUpdate;
-
-        if (filePlanId === undefined || filePlanId === null) {
-            throw new Error("Required param 'filePlanId' in updateFilePlan");
-        }
-
-        if (filePlanBodyUpdate === undefined || filePlanBodyUpdate === null) {
-            throw new Error("Required param 'filePlanBodyUpdate' in updateFilePlan");
-        }
 
         let pathParams = {
             'filePlanId': filePlanId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

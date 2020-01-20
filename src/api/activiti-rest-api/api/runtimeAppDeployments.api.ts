@@ -18,6 +18,7 @@
 import { AppDeploymentRepresentation } from '../model/appDeploymentRepresentation';
 import { ResultListDataRepresentationAppDeploymentRepresentation } from '../model/resultListDataRepresentationAppDeploymentRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Runtimeappdeployments service.
@@ -33,12 +34,9 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
     * @return Promise<{}>
     */
     deleteAppDeployment(appDeploymentId: number): Promise<any> {
+        throwIfNotDefined(appDeploymentId, 'appDeploymentId');
 
         let postBody = null;
-
-        if (appDeploymentId === undefined || appDeploymentId === null) {
-            throw new Error("Required param 'appDeploymentId' in deleteAppDeployment");
-        }
 
         let pathParams = {
             'appDeploymentId': appDeploymentId
@@ -70,12 +68,9 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
         * @return Promise<{}>
         */
     exportAppDefinition(deploymentId: string): Promise<any> {
+        throwIfNotDefined(deploymentId, 'deploymentId');
 
         let postBody = null;
-
-        if (deploymentId === undefined || deploymentId === null) {
-            throw new Error("Required param 'deploymentId' in exportAppDefinition");
-        }
 
         let pathParams = {
             'deploymentId': deploymentId
@@ -154,12 +149,9 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
         * @return Promise<AppDeploymentRepresentation>
         */
     getAppDeployment(appDeploymentId: number): Promise<AppDeploymentRepresentation> {
+        throwIfNotDefined(appDeploymentId, 'appDeploymentId');
 
         let postBody = null;
-
-        if (appDeploymentId === undefined || appDeploymentId === null) {
-            throw new Error("Required param 'appDeploymentId' in getAppDeployment");
-        }
 
         let pathParams = {
             'appDeploymentId': appDeploymentId

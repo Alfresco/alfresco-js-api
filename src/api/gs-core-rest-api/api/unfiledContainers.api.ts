@@ -20,6 +20,8 @@ import { UnfiledContainerAssociationPaging } from '../model/unfiledContainerAsso
 import { UnfiledContainerEntry } from '../model/unfiledContainerEntry';
 import { UnfiledRecordContainerBodyUpdate } from '../model/unfiledRecordContainerBodyUpdate';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Unfiledcontainers service.
@@ -152,16 +154,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<UnfiledContainerAssociationPaging>
     */
     createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: any): Promise<UnfiledContainerAssociationPaging> {
+        throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
+        throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
+
         opts = opts || {};
         let postBody = nodeBodyCreate;
-
-        if (unfiledContainerId === undefined || unfiledContainerId === null) {
-            throw new Error("Required param 'unfiledContainerId' in createUnfiledContainerChildren");
-        }
-
-        if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
-            throw new Error("Required param 'nodeBodyCreate' in createUnfiledContainerChildren");
-        }
 
         let pathParams = {
             'unfiledContainerId': unfiledContainerId
@@ -169,8 +166,8 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         let queryParams = {
             'autoRename': opts['autoRename'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -218,20 +215,18 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<UnfiledContainerEntry>
         */
     getUnfiledContainer(unfiledContainerId: string, opts?: any): Promise<UnfiledContainerEntry> {
+        throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (unfiledContainerId === undefined || unfiledContainerId === null) {
-            throw new Error("Required param 'unfiledContainerId' in getUnfiledContainer");
-        }
 
         let pathParams = {
             'unfiledContainerId': unfiledContainerId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -293,12 +288,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<UnfiledContainerAssociationPaging>
         */
     listUnfiledContainerChildren(unfiledContainerId: string, opts?: any): Promise<UnfiledContainerAssociationPaging> {
+        throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (unfiledContainerId === undefined || unfiledContainerId === null) {
-            throw new Error("Required param 'unfiledContainerId' in listUnfiledContainerChildren");
-        }
 
         let pathParams = {
             'unfiledContainerId': unfiledContainerId
@@ -308,9 +301,9 @@ parameter are returned in addition to those specified in the **fields** paramete
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -372,24 +365,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<UnfiledContainerEntry>
         */
     updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: any): Promise<UnfiledContainerEntry> {
+        throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
+        throwIfNotDefined(unfiledContainerBodyUpdate, 'unfiledContainerBodyUpdate');
+
         opts = opts || {};
         let postBody = unfiledContainerBodyUpdate;
-
-        if (unfiledContainerId === undefined || unfiledContainerId === null) {
-            throw new Error("Required param 'unfiledContainerId' in updateUnfiledContainer");
-        }
-
-        if (unfiledContainerBodyUpdate === undefined || unfiledContainerBodyUpdate === null) {
-            throw new Error("Required param 'unfiledContainerBodyUpdate' in updateUnfiledContainer");
-        }
 
         let pathParams = {
             'unfiledContainerId': unfiledContainerId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

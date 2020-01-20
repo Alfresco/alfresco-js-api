@@ -23,6 +23,8 @@ import { FavoriteSiteEntry } from '../model/favoriteSiteEntry';
 import { SiteEntry } from '../model/siteEntry';
 import { SitePaging } from '../model/sitePaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Favorites service.
@@ -121,24 +123,19 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<FavoriteEntry>
     */
     createFavorite(personId: string, favoriteBodyCreate: FavoriteBodyCreate, opts?: any): Promise<FavoriteEntry> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(favoriteBodyCreate, 'favoriteBodyCreate');
+
         opts = opts || {};
         let postBody = favoriteBodyCreate;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in createFavorite");
-        }
-
-        if (favoriteBodyCreate === undefined || favoriteBodyCreate === null) {
-            throw new Error("Required param 'favoriteBodyCreate' in createFavorite");
-        }
 
         let pathParams = {
             'personId': personId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -225,23 +222,18 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<FavoriteSiteEntry>
         */
     createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts?: any): Promise<FavoriteSiteEntry> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(favoriteSiteBodyCreate, 'favoriteSiteBodyCreate');
+
         opts = opts || {};
         let postBody = favoriteSiteBodyCreate;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in createSiteFavorite");
-        }
-
-        if (favoriteSiteBodyCreate === undefined || favoriteSiteBodyCreate === null) {
-            throw new Error("Required param 'favoriteSiteBodyCreate' in createSiteFavorite");
-        }
 
         let pathParams = {
             'personId': personId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -271,16 +263,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteFavorite(personId: string, favoriteId: string): Promise<any> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(favoriteId, 'favoriteId');
 
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in deleteFavorite");
-        }
-
-        if (favoriteId === undefined || favoriteId === null) {
-            throw new Error("Required param 'favoriteId' in deleteFavorite");
-        }
 
         let pathParams = {
             'personId': personId, 'favoriteId': favoriteId
@@ -319,16 +305,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteSiteFavorite(personId: string, siteId: string): Promise<any> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(siteId, 'siteId');
 
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in deleteSiteFavorite");
-        }
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in deleteSiteFavorite");
-        }
 
         let pathParams = {
             'personId': personId, 'siteId': siteId
@@ -380,24 +360,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<FavoriteEntry>
         */
     getFavorite(personId: string, favoriteId: string, opts?: any): Promise<FavoriteEntry> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(favoriteId, 'favoriteId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in getFavorite");
-        }
-
-        if (favoriteId === undefined || favoriteId === null) {
-            throw new Error("Required param 'favoriteId' in getFavorite");
-        }
 
         let pathParams = {
             'personId': personId, 'favoriteId': favoriteId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -443,23 +418,18 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<SiteEntry>
         */
     getFavoriteSite(personId: string, siteId: string, opts?: any): Promise<SiteEntry> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(siteId, 'siteId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in getFavoriteSite");
-        }
-
-        if (siteId === undefined || siteId === null) {
-            throw new Error("Required param 'siteId' in getFavoriteSite");
-        }
 
         let pathParams = {
             'personId': personId, 'siteId': siteId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -510,12 +480,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<SitePaging>
         */
     listFavoriteSitesForPerson(personId: string, opts?: any): Promise<SitePaging> {
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in listFavoriteSitesForPerson");
-        }
 
         let pathParams = {
             'personId': personId
@@ -524,7 +492,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -600,12 +568,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<FavoritePaging>
         */
     listFavorites(personId: string, opts?: any): Promise<FavoritePaging> {
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in listFavorites");
-        }
 
         let pathParams = {
             'personId': personId
@@ -615,8 +581,8 @@ parameter are returned in addition to those specified in the **fields** paramete
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

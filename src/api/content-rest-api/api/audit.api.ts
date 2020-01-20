@@ -21,6 +21,8 @@ import { AuditBodyUpdate } from '../model/auditBodyUpdate';
 import { AuditEntryEntry } from '../model/auditEntryEntry';
 import { AuditEntryPaging } from '../model/auditEntryPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Audit service.
@@ -54,16 +56,10 @@ You must have admin rights to delete audit information.
     * @return Promise<{}>
     */
     deleteAuditEntriesForAuditApp(auditApplicationId: string, where: string): Promise<any> {
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+        throwIfNotDefined(where, 'where');
 
         let postBody = null;
-
-        if (auditApplicationId === undefined || auditApplicationId === null) {
-            throw new Error("Required param 'auditApplicationId' in deleteAuditEntriesForAuditApp");
-        }
-
-        if (where === undefined || where === null) {
-            throw new Error("Required param 'where' in deleteAuditEntriesForAuditApp");
-        }
 
         let pathParams = {
             'auditApplicationId': auditApplicationId
@@ -102,16 +98,10 @@ You must have admin rights to delete audit information.
         * @return Promise<{}>
         */
     deleteAuditEntry(auditApplicationId: string, auditEntryId: string): Promise<any> {
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+        throwIfNotDefined(auditEntryId, 'auditEntryId');
 
         let postBody = null;
-
-        if (auditApplicationId === undefined || auditApplicationId === null) {
-            throw new Error("Required param 'auditApplicationId' in deleteAuditEntry");
-        }
-
-        if (auditEntryId === undefined || auditEntryId === null) {
-            throw new Error("Required param 'auditEntryId' in deleteAuditEntry");
-        }
 
         let pathParams = {
             'auditApplicationId': auditApplicationId, 'auditEntryId': auditEntryId
@@ -161,19 +151,17 @@ You must have admin rights to delete audit information.
         * @return Promise<AuditApp>
         */
     getAuditApp(auditApplicationId: string, opts?: any): Promise<AuditApp> {
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (auditApplicationId === undefined || auditApplicationId === null) {
-            throw new Error("Required param 'auditApplicationId' in getAuditApp");
-        }
 
         let pathParams = {
             'auditApplicationId': auditApplicationId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -218,23 +206,18 @@ You must have admin rights to delete audit information.
         * @return Promise<AuditEntryEntry>
         */
     getAuditEntry(auditApplicationId: string, auditEntryId: string, opts?: any): Promise<AuditEntryEntry> {
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+        throwIfNotDefined(auditEntryId, 'auditEntryId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (auditApplicationId === undefined || auditApplicationId === null) {
-            throw new Error("Required param 'auditApplicationId' in getAuditEntry");
-        }
-
-        if (auditEntryId === undefined || auditEntryId === null) {
-            throw new Error("Required param 'auditEntryId' in getAuditEntry");
-        }
 
         let pathParams = {
             'auditApplicationId': auditApplicationId, 'auditEntryId': auditEntryId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -300,7 +283,7 @@ You must have admin rights to delete audit information.
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -389,12 +372,10 @@ You must have admin rights to delete audit information.
         * @return Promise<AuditEntryPaging>
         */
     listAuditEntriesForAuditApp(auditApplicationId: string, opts?: any): Promise<AuditEntryPaging> {
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (auditApplicationId === undefined || auditApplicationId === null) {
-            throw new Error("Required param 'auditApplicationId' in listAuditEntriesForAuditApp");
-        }
 
         let pathParams = {
             'auditApplicationId': auditApplicationId
@@ -402,11 +383,11 @@ You must have admin rights to delete audit information.
 
         let queryParams = {
             'skipCount': opts['skipCount'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
             'maxItems': opts['maxItems'],
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -482,12 +463,10 @@ You must have admin rights to delete audit information.
         * @return Promise<AuditEntryPaging>
         */
     listAuditEntriesForNode(nodeId: string, opts?: any): Promise<AuditEntryPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listAuditEntriesForNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -495,11 +474,11 @@ You must have admin rights to delete audit information.
 
         let queryParams = {
             'skipCount': opts['skipCount'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
             'maxItems': opts['maxItems'],
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -550,23 +529,18 @@ You must have admin rights to delete audit information.
         * @return Promise<AuditApp>
         */
     updateAuditApp(auditApplicationId: string, auditAppBodyUpdate: AuditBodyUpdate, opts?: any): Promise<AuditApp> {
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+        throwIfNotDefined(auditAppBodyUpdate, 'auditAppBodyUpdate');
+
         opts = opts || {};
         let postBody = auditAppBodyUpdate;
-
-        if (auditApplicationId === undefined || auditApplicationId === null) {
-            throw new Error("Required param 'auditApplicationId' in updateAuditApp");
-        }
-
-        if (auditAppBodyUpdate === undefined || auditAppBodyUpdate === null) {
-            throw new Error("Required param 'auditAppBodyUpdate' in updateAuditApp");
-        }
 
         let pathParams = {
             'auditApplicationId': auditApplicationId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

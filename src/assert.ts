@@ -17,6 +17,6 @@
 
 export function throwIfNotDefined(param: any, name: string) {
     if (param === null || param === undefined) {
-        throw new Error(`Missing param ${name}`);
+        throw new Error(`Missing param '${name}'`);
     }
 }

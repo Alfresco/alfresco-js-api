@@ -18,6 +18,7 @@
 import { ResultListDataRepresentationSubmittedFormRepresentation } from '../model/resultListDataRepresentationSubmittedFormRepresentation';
 import { SubmittedFormRepresentation } from '../model/submittedFormRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Submittedforms service.
@@ -37,12 +38,10 @@ export class SubmittedFormsApi extends BaseApi {
     * @return Promise<ResultListDataRepresentationSubmittedFormRepresentation>
     */
     getFormSubmittedForms(formId: number, opts?: any): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
+        throwIfNotDefined(formId, 'formId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (formId === undefined || formId === null) {
-            throw new Error("Required param 'formId' in getFormSubmittedForms");
-        }
 
         let pathParams = {
             'formId': formId
@@ -77,12 +76,9 @@ export class SubmittedFormsApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationSubmittedFormRepresentation>
         */
     getProcessSubmittedForms(processId: string): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
+        throwIfNotDefined(processId, 'processId');
 
         let postBody = null;
-
-        if (processId === undefined || processId === null) {
-            throw new Error("Required param 'processId' in getProcessSubmittedForms");
-        }
 
         let pathParams = {
             'processId': processId
@@ -114,12 +110,9 @@ export class SubmittedFormsApi extends BaseApi {
         * @return Promise<SubmittedFormRepresentation>
         */
     getSubmittedFrom(submittedFormId: number): Promise<SubmittedFormRepresentation> {
+        throwIfNotDefined(submittedFormId, 'submittedFormId');
 
         let postBody = null;
-
-        if (submittedFormId === undefined || submittedFormId === null) {
-            throw new Error("Required param 'submittedFormId' in getSubmittedFrom");
-        }
 
         let pathParams = {
             'submittedFormId': submittedFormId
@@ -151,12 +144,9 @@ export class SubmittedFormsApi extends BaseApi {
         * @return Promise<SubmittedFormRepresentation>
         */
     getTaskSubmittedForms(taskId: string): Promise<SubmittedFormRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getTaskSubmittedForms");
-        }
 
         let pathParams = {
             'taskId': taskId

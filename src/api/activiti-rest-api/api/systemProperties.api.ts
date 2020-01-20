@@ -19,6 +19,7 @@ import { GlobalDateFormatRepresentation } from '../model/globalDateFormatReprese
 import { PasswordValidationConstraints } from '../model/passwordValidationConstraints';
 import { SystemPropertiesRepresentation } from '../model/systemPropertiesRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Systemproperties service.
@@ -34,12 +35,9 @@ export class SystemPropertiesApi extends BaseApi {
     * @return Promise<GlobalDateFormatRepresentation>
     */
     getGlobalDateFormat(tenantId: number): Promise<GlobalDateFormatRepresentation> {
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in getGlobalDateFormat");
-        }
 
         let pathParams = {
             'tenantId': tenantId
@@ -71,12 +69,9 @@ export class SystemPropertiesApi extends BaseApi {
         * @return Promise<PasswordValidationConstraints>
         */
     getPasswordValidationConstraints(tenantId: number): Promise<PasswordValidationConstraints> {
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in getPasswordValidationConstraints");
-        }
 
         let pathParams = {
             'tenantId': tenantId
@@ -140,12 +135,9 @@ export class SystemPropertiesApi extends BaseApi {
         * @return Promise<boolean>
         */
     involvedUsersCanEditForms(tenantId: number): Promise<boolean> {
+        throwIfNotDefined(tenantId, 'tenantId');
 
         let postBody = null;
-
-        if (tenantId === undefined || tenantId === null) {
-            throw new Error("Required param 'tenantId' in involvedUsersCanEditForms");
-        }
 
         let pathParams = {
             'tenantId': tenantId

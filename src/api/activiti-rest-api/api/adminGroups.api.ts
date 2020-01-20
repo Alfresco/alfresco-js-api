@@ -21,6 +21,7 @@ import { GroupRepresentation } from '../model/groupRepresentation';
 import { LightGroupRepresentation } from '../model/lightGroupRepresentation';
 import { ResultListDataRepresentationLightUserRepresentation } from '../model/resultListDataRepresentationLightUserRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Admingroups service.
@@ -36,12 +37,9 @@ export class AdminGroupsApi extends BaseApi {
     * @return Promise<{}>
     */
     activate(groupId: number): Promise<any> {
+        throwIfNotDefined(groupId, 'groupId');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in activate");
-        }
 
         let pathParams = {
             'groupId': groupId
@@ -73,12 +71,9 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<{}>
         */
     addAllUsersToGroup(groupId: number): Promise<any> {
+        throwIfNotDefined(groupId, 'groupId');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in addAllUsersToGroup");
-        }
 
         let pathParams = {
             'groupId': groupId
@@ -111,16 +106,10 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<{}>
         */
     addGroupCapabilities(groupId: number, addGroupCapabilitiesRepresentation: AddGroupCapabilitiesRepresentation): Promise<any> {
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(addGroupCapabilitiesRepresentation, 'addGroupCapabilitiesRepresentation');
 
         let postBody = addGroupCapabilitiesRepresentation;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in addGroupCapabilities");
-        }
-
-        if (addGroupCapabilitiesRepresentation === undefined || addGroupCapabilitiesRepresentation === null) {
-            throw new Error("Required param 'addGroupCapabilitiesRepresentation' in addGroupCapabilities");
-        }
 
         let pathParams = {
             'groupId': groupId
@@ -153,16 +142,10 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<{}>
         */
     addGroupMember(groupId: number, userId: number): Promise<any> {
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(userId, 'userId');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in addGroupMember");
-        }
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in addGroupMember");
-        }
 
         let pathParams = {
             'groupId': groupId, 'userId': userId
@@ -196,20 +179,11 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<{}>
         */
     addRelatedGroup(groupId: number, relatedGroupId: number, type: string): Promise<any> {
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(relatedGroupId, 'relatedGroupId');
+        throwIfNotDefined(type, 'type');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in addRelatedGroup");
-        }
-
-        if (relatedGroupId === undefined || relatedGroupId === null) {
-            throw new Error("Required param 'relatedGroupId' in addRelatedGroup");
-        }
-
-        if (type === undefined || type === null) {
-            throw new Error("Required param 'type' in addRelatedGroup");
-        }
 
         let pathParams = {
             'groupId': groupId, 'relatedGroupId': relatedGroupId
@@ -242,12 +216,9 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<GroupRepresentation>
         */
     createNewGroup(groupRepresentation: GroupRepresentation): Promise<GroupRepresentation> {
+        throwIfNotDefined(groupRepresentation, 'groupRepresentation');
 
         let postBody = groupRepresentation;
-
-        if (groupRepresentation === undefined || groupRepresentation === null) {
-            throw new Error("Required param 'groupRepresentation' in createNewGroup");
-        }
 
         let pathParams = {
 
@@ -280,16 +251,10 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteGroupCapability(groupId: number, groupCapabilityId: number): Promise<any> {
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(groupCapabilityId, 'groupCapabilityId');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in deleteGroupCapability");
-        }
-
-        if (groupCapabilityId === undefined || groupCapabilityId === null) {
-            throw new Error("Required param 'groupCapabilityId' in deleteGroupCapability");
-        }
 
         let pathParams = {
             'groupId': groupId, 'groupCapabilityId': groupCapabilityId
@@ -322,16 +287,10 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteGroupMember(groupId: number, userId: number): Promise<any> {
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(userId, 'userId');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in deleteGroupMember");
-        }
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in deleteGroupMember");
-        }
 
         let pathParams = {
             'groupId': groupId, 'userId': userId
@@ -363,12 +322,9 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteGroup(groupId: number): Promise<any> {
+        throwIfNotDefined(groupId, 'groupId');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in deleteGroup");
-        }
 
         let pathParams = {
             'groupId': groupId
@@ -401,16 +357,10 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteRelatedGroup(groupId: number, relatedGroupId: number): Promise<any> {
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(relatedGroupId, 'relatedGroupId');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in deleteRelatedGroup");
-        }
-
-        if (relatedGroupId === undefined || relatedGroupId === null) {
-            throw new Error("Required param 'relatedGroupId' in deleteRelatedGroup");
-        }
 
         let pathParams = {
             'groupId': groupId, 'relatedGroupId': relatedGroupId
@@ -442,12 +392,9 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<string>
         */
     getCapabilities(groupId: number): Promise<string> {
+        throwIfNotDefined(groupId, 'groupId');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in getCapabilities");
-        }
 
         let pathParams = {
             'groupId': groupId
@@ -483,12 +430,10 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationLightUserRepresentation>
         */
     getGroupUsers(groupId: number, opts?: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
+        throwIfNotDefined(groupId, 'groupId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in getGroupUsers");
-        }
 
         let pathParams = {
             'groupId': groupId
@@ -526,12 +471,10 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<AbstractGroupRepresentation>
         */
     getGroup(groupId: number, opts?: any): Promise<AbstractGroupRepresentation> {
+        throwIfNotDefined(groupId, 'groupId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in getGroup");
-        }
 
         let pathParams = {
             'groupId': groupId
@@ -604,12 +547,9 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<LightGroupRepresentation>
         */
     getRelatedGroups(groupId: number): Promise<LightGroupRepresentation> {
+        throwIfNotDefined(groupId, 'groupId');
 
         let postBody = null;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in getRelatedGroups");
-        }
 
         let pathParams = {
             'groupId': groupId
@@ -642,16 +582,10 @@ export class AdminGroupsApi extends BaseApi {
         * @return Promise<GroupRepresentation>
         */
     updateGroup(groupId: number, groupRepresentation: GroupRepresentation): Promise<GroupRepresentation> {
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(groupRepresentation, 'groupRepresentation');
 
         let postBody = groupRepresentation;
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in updateGroup");
-        }
-
-        if (groupRepresentation === undefined || groupRepresentation === null) {
-            throw new Error("Required param 'groupRepresentation' in updateGroup");
-        }
 
         let pathParams = {
             'groupId': groupId

@@ -24,6 +24,7 @@ import { TaskQueryRepresentation } from '../model/taskQueryRepresentation';
 import { TaskRepresentation } from '../model/taskRepresentation';
 import { TaskUpdateRepresentation } from '../model/taskUpdateRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Tasks service.
@@ -40,16 +41,10 @@ export class TasksApi extends BaseApi {
     * @return Promise<IdentityLinkRepresentation>
     */
     createIdentityLink(taskId: string, identityLinkRepresentation: IdentityLinkRepresentation): Promise<IdentityLinkRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(identityLinkRepresentation, 'identityLinkRepresentation');
 
         let postBody = identityLinkRepresentation;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in createIdentityLink");
-        }
-
-        if (identityLinkRepresentation === undefined || identityLinkRepresentation === null) {
-            throw new Error("Required param 'identityLinkRepresentation' in createIdentityLink");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -81,12 +76,9 @@ export class TasksApi extends BaseApi {
         * @return Promise<TaskRepresentation>
         */
     createNewTask(taskRepresentation: TaskRepresentation): Promise<TaskRepresentation> {
+        throwIfNotDefined(taskRepresentation, 'taskRepresentation');
 
         let postBody = taskRepresentation;
-
-        if (taskRepresentation === undefined || taskRepresentation === null) {
-            throw new Error("Required param 'taskRepresentation' in createNewTask");
-        }
 
         let pathParams = {
 
@@ -121,24 +113,12 @@ export class TasksApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteIdentityLink(taskId: string, family: string, identityId: string, type: string): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(family, 'family');
+        throwIfNotDefined(identityId, 'identityId');
+        throwIfNotDefined(type, 'type');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in deleteIdentityLink");
-        }
-
-        if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in deleteIdentityLink");
-        }
-
-        if (identityId === undefined || identityId === null) {
-            throw new Error("Required param 'identityId' in deleteIdentityLink");
-        }
-
-        if (type === undefined || type === null) {
-            throw new Error("Required param 'type' in deleteIdentityLink");
-        }
 
         let pathParams = {
             'taskId': taskId, 'family': family, 'identityId': identityId, 'type': type
@@ -170,12 +150,9 @@ export class TasksApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteTask(taskId: string): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in deleteTask");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -207,12 +184,9 @@ export class TasksApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
     filterTasks(tasksFilter: TaskFilterRequestRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
+        throwIfNotDefined(tasksFilter, 'tasksFilter');
 
         let postBody = tasksFilter;
-
-        if (tasksFilter === undefined || tasksFilter === null) {
-            throw new Error("Required param 'tasksFilter' in filterTasks");
-        }
 
         let pathParams = {
 
@@ -247,24 +221,12 @@ export class TasksApi extends BaseApi {
         * @return Promise<IdentityLinkRepresentation>
         */
     getIdentityLinkType(taskId: string, family: string, identityId: string, type: string): Promise<IdentityLinkRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(family, 'family');
+        throwIfNotDefined(identityId, 'identityId');
+        throwIfNotDefined(type, 'type');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getIdentityLinkType");
-        }
-
-        if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in getIdentityLinkType");
-        }
-
-        if (identityId === undefined || identityId === null) {
-            throw new Error("Required param 'identityId' in getIdentityLinkType");
-        }
-
-        if (type === undefined || type === null) {
-            throw new Error("Required param 'type' in getIdentityLinkType");
-        }
 
         let pathParams = {
             'taskId': taskId, 'family': family, 'identityId': identityId, 'type': type
@@ -297,16 +259,10 @@ export class TasksApi extends BaseApi {
         * @return Promise<IdentityLinkRepresentation>
         */
     getIdentityLinksForFamily(taskId: string, family: string): Promise<IdentityLinkRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(family, 'family');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getIdentityLinksForFamily");
-        }
-
-        if (family === undefined || family === null) {
-            throw new Error("Required param 'family' in getIdentityLinksForFamily");
-        }
 
         let pathParams = {
             'taskId': taskId, 'family': family
@@ -338,12 +294,9 @@ export class TasksApi extends BaseApi {
         * @return Promise<IdentityLinkRepresentation>
         */
     getIdentityLinks(taskId: string): Promise<IdentityLinkRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getIdentityLinks");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -375,12 +328,9 @@ export class TasksApi extends BaseApi {
         * @return Promise<TaskAuditInfoRepresentation>
         */
     getTaskAuditLog(taskId: string): Promise<TaskAuditInfoRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getTaskAuditLog");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -412,12 +362,9 @@ export class TasksApi extends BaseApi {
         * @return Promise<TaskRepresentation>
         */
     getTask(taskId: string): Promise<TaskRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in getTask");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -449,12 +396,9 @@ export class TasksApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
     listHistoricTasks(queryRequest: HistoricTaskInstanceQueryRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
+        throwIfNotDefined(queryRequest, 'queryRequest');
 
         let postBody = queryRequest;
-
-        if (queryRequest === undefined || queryRequest === null) {
-            throw new Error("Required param 'queryRequest' in listHistoricTasks");
-        }
 
         let pathParams = {
 
@@ -486,12 +430,9 @@ export class TasksApi extends BaseApi {
         * @return Promise<ResultListDataRepresentationTaskRepresentation>
         */
     listTasks(tasksQuery: TaskQueryRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
+        throwIfNotDefined(tasksQuery, 'tasksQuery');
 
         let postBody = tasksQuery;
-
-        if (tasksQuery === undefined || tasksQuery === null) {
-            throw new Error("Required param 'tasksQuery' in listTasks");
-        }
 
         let pathParams = {
 
@@ -524,16 +465,10 @@ export class TasksApi extends BaseApi {
         * @return Promise<TaskRepresentation>
         */
     updateTask(taskId: string, updated: TaskUpdateRepresentation): Promise<TaskRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(updated, 'updated');
 
         let postBody = updated;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in updateTask");
-        }
-
-        if (updated === undefined || updated === null) {
-            throw new Error("Required param 'updated' in updateTask");
-        }
 
         let pathParams = {
             'taskId': taskId

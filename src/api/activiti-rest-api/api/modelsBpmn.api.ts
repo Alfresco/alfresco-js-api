@@ -16,6 +16,7 @@
 */
 
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Modelsbpmn service.
@@ -32,16 +33,10 @@ export class ModelsBpmnApi extends BaseApi {
     * @return Promise<{}>
     */
     getHistoricProcessModelBpmn20Xml(processModelId: number, processModelHistoryId: number): Promise<any> {
+        throwIfNotDefined(processModelId, 'processModelId');
+        throwIfNotDefined(processModelHistoryId, 'processModelHistoryId');
 
         let postBody = null;
-
-        if (processModelId === undefined || processModelId === null) {
-            throw new Error("Required param 'processModelId' in getHistoricProcessModelBpmn20Xml");
-        }
-
-        if (processModelHistoryId === undefined || processModelHistoryId === null) {
-            throw new Error("Required param 'processModelHistoryId' in getHistoricProcessModelBpmn20Xml");
-        }
 
         let pathParams = {
             'processModelId': processModelId, 'processModelHistoryId': processModelHistoryId
@@ -73,12 +68,8 @@ export class ModelsBpmnApi extends BaseApi {
         * @return Promise<{}>
         */
     getProcessModelBpmn20Xml(processModelId: number): Promise<any> {
-
+        throwIfNotDefined(processModelId, 'processModelId');
         let postBody = null;
-
-        if (processModelId === undefined || processModelId === null) {
-            throw new Error("Required param 'processModelId' in getProcessModelBpmn20Xml");
-        }
 
         let pathParams = {
             'processModelId': processModelId

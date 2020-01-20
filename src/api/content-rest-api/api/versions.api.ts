@@ -19,6 +19,8 @@ import { RevertBody } from '../model/revertBody';
 import { VersionEntry } from '../model/versionEntry';
 import { VersionPaging } from '../model/versionPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Versions service.
@@ -48,16 +50,10 @@ params (majorVersion and comment) on a subsequent file content update.
     * @return Promise<{}>
     */
     deleteVersion(nodeId: string, versionId: string): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(versionId, 'versionId');
 
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in deleteVersion");
-        }
-
-        if (versionId === undefined || versionId === null) {
-            throw new Error("Required param 'versionId' in deleteVersion");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'versionId': versionId
@@ -93,16 +89,10 @@ params (majorVersion and comment) on a subsequent file content update.
         * @return Promise<VersionEntry>
         */
     getVersion(nodeId: string, versionId: string): Promise<VersionEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(versionId, 'versionId');
 
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in getVersion");
-        }
-
-        if (versionId === undefined || versionId === null) {
-            throw new Error("Required param 'versionId' in getVersion");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'versionId': versionId
@@ -155,16 +145,11 @@ params (majorVersion and comment) on a subsequent file content update.
         * @return Promise<{}>
         */
     getVersionContent(nodeId: string, versionId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(versionId, 'versionId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in getVersionContent");
-        }
-
-        if (versionId === undefined || versionId === null) {
-            throw new Error("Required param 'versionId' in getVersionContent");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'versionId': versionId
@@ -226,20 +211,18 @@ params (majorVersion and comment) on a subsequent file content update.
         * @return Promise<VersionPaging>
         */
     listVersionHistory(nodeId: string, opts?: any): Promise<VersionPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listVersionHistory");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv'),
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems']
         };
@@ -288,27 +271,19 @@ params (majorVersion and comment) on a subsequent file content update.
         * @return Promise<VersionEntry>
         */
     revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: any): Promise<VersionEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(versionId, 'versionId');
+        throwIfNotDefined(revertBody, 'revertBody');
+
         opts = opts || {};
         let postBody = revertBody;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in revertVersion");
-        }
-
-        if (versionId === undefined || versionId === null) {
-            throw new Error("Required param 'versionId' in revertVersion");
-        }
-
-        if (revertBody === undefined || revertBody === null) {
-            throw new Error("Required param 'revertBody' in revertVersion");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'versionId': versionId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

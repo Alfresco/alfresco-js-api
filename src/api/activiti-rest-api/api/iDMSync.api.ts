@@ -17,6 +17,7 @@
 
 import { SyncLogEntryRepresentation } from '../model/syncLogEntryRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Idmsync service.
@@ -32,12 +33,9 @@ export class IDMSyncApi extends BaseApi {
     * @return Promise<{}>
     */
     getLogFile(syncLogEntryId: number): Promise<any> {
+        throwIfNotDefined(syncLogEntryId, 'syncLogEntryId');
 
         let postBody = null;
-
-        if (syncLogEntryId === undefined || syncLogEntryId === null) {
-            throw new Error("Required param 'syncLogEntryId' in getLogFile");
-        }
 
         let pathParams = {
             'syncLogEntryId': syncLogEntryId

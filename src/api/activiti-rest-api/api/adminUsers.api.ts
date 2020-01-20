@@ -20,6 +20,7 @@ import { BulkUserUpdateRepresentation } from '../model/bulkUserUpdateRepresentat
 import { ResultListDataRepresentationAbstractUserRepresentation } from '../model/resultListDataRepresentationAbstractUserRepresentation';
 import { UserRepresentation } from '../model/userRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Adminusers service.
@@ -35,12 +36,9 @@ export class AdminUsersApi extends BaseApi {
     * @return Promise<{}>
     */
     bulkUpdateUsers(update: BulkUserUpdateRepresentation): Promise<any> {
+        throwIfNotDefined(update, 'update');
 
         let postBody = update;
-
-        if (update === undefined || update === null) {
-            throw new Error("Required param 'update' in bulkUpdateUsers");
-        }
 
         let pathParams = {
 
@@ -72,12 +70,9 @@ export class AdminUsersApi extends BaseApi {
         * @return Promise<UserRepresentation>
         */
     createNewUser(userRepresentation: UserRepresentation): Promise<UserRepresentation> {
+        throwIfNotDefined(userRepresentation, 'userRepresentation');
 
         let postBody = userRepresentation;
-
-        if (userRepresentation === undefined || userRepresentation === null) {
-            throw new Error("Required param 'userRepresentation' in createNewUser");
-        }
 
         let pathParams = {
 
@@ -111,12 +106,10 @@ export class AdminUsersApi extends BaseApi {
         * @return Promise<AbstractUserRepresentation>
         */
     getUser(userId: number, opts?: any): Promise<AbstractUserRepresentation> {
+        throwIfNotDefined(userId, 'userId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in getUser");
-        }
 
         let pathParams = {
             'userId': userId
@@ -205,16 +198,10 @@ export class AdminUsersApi extends BaseApi {
         * @return Promise<{}>
         */
     updateUserDetails(userId: number, userRepresentation: UserRepresentation): Promise<any> {
+        throwIfNotDefined(userId, 'userId');
+        throwIfNotDefined(userRepresentation, 'userRepresentation');
 
         let postBody = userRepresentation;
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in updateUserDetails");
-        }
-
-        if (userRepresentation === undefined || userRepresentation === null) {
-            throw new Error("Required param 'userRepresentation' in updateUserDetails");
-        }
 
         let pathParams = {
             'userId': userId

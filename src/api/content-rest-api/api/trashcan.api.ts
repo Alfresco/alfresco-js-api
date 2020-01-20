@@ -21,6 +21,8 @@ import { NodeEntry } from '../model/nodeEntry';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Trashcan service.
@@ -39,12 +41,9 @@ Permanently deletes the deleted node **nodeId**.
     * @return Promise<{}>
     */
     deleteDeletedNode(nodeId: string): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
 
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in deleteDeletedNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -80,16 +79,10 @@ Permanently deletes the deleted node **nodeId**.
         * @return Promise<RenditionEntry>
         */
     getArchivedNodeRendition(nodeId: string, renditionId: string): Promise<RenditionEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(renditionId, 'renditionId');
 
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in getArchivedNodeRendition");
-        }
-
-        if (renditionId === undefined || renditionId === null) {
-            throw new Error("Required param 'renditionId' in getArchivedNodeRendition");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'renditionId': renditionId
@@ -146,16 +139,11 @@ Permanently deletes the deleted node **nodeId**.
         * @return Promise<{}>
         */
     getArchivedNodeRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(renditionId, 'renditionId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in getArchivedNodeRenditionContent");
-        }
-
-        if (renditionId === undefined || renditionId === null) {
-            throw new Error("Required param 'renditionId' in getArchivedNodeRenditionContent");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'renditionId': renditionId
@@ -202,19 +190,17 @@ Permanently deletes the deleted node **nodeId**.
         * @return Promise<DeletedNodeEntry>
         */
     getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in getDeletedNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         let headerParams = {
@@ -260,12 +246,10 @@ Permanently deletes the deleted node **nodeId**.
         * @return Promise<{}>
         */
     getDeletedNodeContent(nodeId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in getDeletedNodeContent");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -312,12 +296,10 @@ Permanently deletes the deleted node **nodeId**.
         * @return Promise<RenditionPaging>
         */
     listDeletedNodeRenditions(nodeId: string, opts?: any): Promise<RenditionPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listDeletedNodeRenditions");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -384,7 +366,7 @@ Permanently deletes the deleted node **nodeId**.
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         let headerParams = {
@@ -437,19 +419,17 @@ Permanently deletes the deleted node **nodeId**.
         * @return Promise<NodeEntry>
         */
     restoreDeletedNode(nodeId: string, opts?: any): Promise<NodeEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = opts['deletedNodeBodyRestore'];
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in restoreDeletedNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

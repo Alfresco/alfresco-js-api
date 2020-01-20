@@ -21,6 +21,8 @@ import { RecordCategoryChildEntry } from '../model/recordCategoryChildEntry';
 import { RecordCategoryChildPaging } from '../model/recordCategoryChildPaging';
 import { RecordCategoryEntry } from '../model/recordCategoryEntry';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Recordcategories service.
@@ -149,16 +151,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<RecordCategoryChildEntry>
     */
     createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<RecordCategoryChildEntry> {
+        throwIfNotDefined(recordCategoryId, 'recordCategoryId');
+        throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
+
         opts = opts || {};
         let postBody = nodeBodyCreate;
-
-        if (recordCategoryId === undefined || recordCategoryId === null) {
-            throw new Error("Required param 'recordCategoryId' in createRecordCategoryChild");
-        }
-
-        if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
-            throw new Error("Required param 'nodeBodyCreate' in createRecordCategoryChild");
-        }
 
         let pathParams = {
             'recordCategoryId': recordCategoryId
@@ -166,8 +163,8 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         let queryParams = {
             'autoRename': opts['autoRename'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -194,12 +191,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteRecordCategory(recordCategoryId: string): Promise<any> {
+        throwIfNotDefined(recordCategoryId, 'recordCategoryId');
 
         let postBody = null;
-
-        if (recordCategoryId === undefined || recordCategoryId === null) {
-            throw new Error("Required param 'recordCategoryId' in deleteRecordCategory");
-        }
 
         let pathParams = {
             'recordCategoryId': recordCategoryId
@@ -256,21 +250,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RecordCategoryEntry>
         */
     getRecordCategory(recordCategoryId: string, opts?: any): Promise<RecordCategoryEntry> {
+        throwIfNotDefined(recordCategoryId, 'recordCategoryId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (recordCategoryId === undefined || recordCategoryId === null) {
-            throw new Error("Required param 'recordCategoryId' in getRecordCategory");
-        }
 
         let pathParams = {
             'recordCategoryId': recordCategoryId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'relativePath': opts['relativePath'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -339,12 +331,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RecordCategoryChildPaging>
         */
     listRecordCategoryChildren(recordCategoryId: string, opts?: any): Promise<RecordCategoryChildPaging> {
+        throwIfNotDefined(recordCategoryId, 'recordCategoryId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (recordCategoryId === undefined || recordCategoryId === null) {
-            throw new Error("Required param 'recordCategoryId' in listRecordCategoryChildren");
-        }
 
         let pathParams = {
             'recordCategoryId': recordCategoryId
@@ -354,10 +344,10 @@ parameter are returned in addition to those specified in the **fields** paramete
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'relativePath': opts['relativePath'],
             'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -421,24 +411,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RecordCategoryEntry>
         */
     updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordCategoryEntry> {
+        throwIfNotDefined(recordCategoryId, 'recordCategoryId');
+        throwIfNotDefined(recordCategoryBodyUpdate, 'recordCategoryBodyUpdate');
+
         opts = opts || {};
         let postBody = recordCategoryBodyUpdate;
-
-        if (recordCategoryId === undefined || recordCategoryId === null) {
-            throw new Error("Required param 'recordCategoryId' in updateRecordCategory");
-        }
-
-        if (recordCategoryBodyUpdate === undefined || recordCategoryBodyUpdate === null) {
-            throw new Error("Required param 'recordCategoryBodyUpdate' in updateRecordCategory");
-        }
 
         let pathParams = {
             'recordCategoryId': recordCategoryId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

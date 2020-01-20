@@ -19,6 +19,8 @@ import { NodePaging } from '../model/nodePaging';
 import { PersonPaging } from '../model/personPaging';
 import { SitePaging } from '../model/sitePaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Queries service.
@@ -95,12 +97,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodePaging>
     */
     findNodes(term: string, opts?: any): Promise<NodePaging> {
+        throwIfNotDefined(term, 'term');
+
         opts = opts || {};
         let postBody = null;
-
-        if (term === undefined || term === null) {
-            throw new Error("Required param 'term' in findNodes");
-        }
 
         let pathParams = {
 
@@ -112,9 +112,9 @@ parameter are returned in addition to those specified in the **fields** paramete
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'nodeType': opts['nodeType'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -182,12 +182,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<PersonPaging>
         */
     findPeople(term: string, opts?: any): Promise<PersonPaging> {
+        throwIfNotDefined(term, 'term');
+
         opts = opts || {};
         let postBody = null;
-
-        if (term === undefined || term === null) {
-            throw new Error("Required param 'term' in findPeople");
-        }
 
         let pathParams = {
 
@@ -197,8 +195,8 @@ parameter are returned in addition to those specified in the **fields** paramete
             'term': term,
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv'),
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv')
         };
 
         let headerParams = {
@@ -266,12 +264,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<SitePaging>
         */
     findSites(term: string, opts?: any): Promise<SitePaging> {
+        throwIfNotDefined(term, 'term');
+
         opts = opts || {};
         let postBody = null;
-
-        if (term === undefined || term === null) {
-            throw new Error("Required param 'term' in findSites");
-        }
 
         let pathParams = {
 
@@ -281,8 +277,8 @@ parameter are returned in addition to those specified in the **fields** paramete
             'term': term,
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

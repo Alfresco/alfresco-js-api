@@ -20,6 +20,7 @@ import { FormIdentifierRepresentation } from '../model/formIdentifierRepresentat
 import { TaskRepresentation } from '../model/taskRepresentation';
 import { UserIdentifierRepresentation } from '../model/userIdentifierRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
  * Taskactions service.
@@ -36,16 +37,10 @@ export class TaskActionsApi extends BaseApi {
      * @return Promise<TaskRepresentation>
      */
     assignTask(taskId: string, userIdentifier: AssigneeIdentifierRepresentation): Promise<TaskRepresentation> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(userIdentifier, 'userIdentifier');
 
         let postBody = userIdentifier;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in assignTask");
-        }
-
-        if (userIdentifier === undefined || userIdentifier === null) {
-            throw new Error("Required param 'userIdentifier' in assignTask");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -75,16 +70,10 @@ export class TaskActionsApi extends BaseApi {
      * @return Promise<{}>
      */
     attachForm(taskId: string, formIdentifier: FormIdentifierRepresentation): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(formIdentifier, 'formIdentifier');
 
         let postBody = formIdentifier;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in attachForm");
-        }
-
-        if (formIdentifier === undefined || formIdentifier === null) {
-            throw new Error("Required param 'formIdentifier' in attachForm");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -113,12 +102,9 @@ export class TaskActionsApi extends BaseApi {
      * @return Promise<{}>
      */
     claimTask(taskId: string): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in claimTask");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -147,12 +133,9 @@ export class TaskActionsApi extends BaseApi {
      * @return Promise<{}>
      */
     completeTask(taskId: string): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in completeTask");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -182,16 +165,10 @@ export class TaskActionsApi extends BaseApi {
      * @return Promise<{}>
      */
     delegateTask(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(userIdentifier, 'userIdentifier');
 
         let postBody = userIdentifier;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in delegateTask");
-        }
-
-        if (userIdentifier === undefined || userIdentifier === null) {
-            throw new Error("Required param 'userIdentifier' in delegateTask");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -221,16 +198,10 @@ export class TaskActionsApi extends BaseApi {
      * @return Promise<{}>
      */
     involveGroup(taskId: string, groupId: string): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(groupId, 'groupId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in involveGroup");
-        }
-
-        if (groupId === undefined || groupId === null) {
-            throw new Error("Required param 'groupId' in involveGroup");
-        }
 
         let pathParams = {
             'taskId': taskId, 'groupId': groupId
@@ -260,16 +231,10 @@ export class TaskActionsApi extends BaseApi {
      * @return Promise<{}>
      */
     involveUser(taskId: string, userIdentifier: UserIdentifierRepresentation): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(userIdentifier, 'userIdentifier');
 
         let postBody = userIdentifier;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in involveUser");
-        }
-
-        if (userIdentifier === undefined || userIdentifier === null) {
-            throw new Error("Required param 'userIdentifier' in involveUser");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -298,12 +263,9 @@ export class TaskActionsApi extends BaseApi {
      * @return Promise<{}>
      */
     removeForm(taskId: string): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in removeForm");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -333,13 +295,8 @@ export class TaskActionsApi extends BaseApi {
      * @return Promise<{}>
      */
     removeInvolvedUser(taskId: string, identifier: string | UserIdentifierRepresentation): Promise<any> {
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in removeInvolvedUser");
-        }
-
-        if (identifier === undefined || identifier === null) {
-            throw new Error("Required param 'groupId' in identifier");
-        }
+        throwIfNotDefined(taskId, 'taskId');
+        throwIfNotDefined(identifier, 'identifier');
 
         let pathParams = {
             'taskId': taskId, 'groupId': identifier
@@ -380,12 +337,9 @@ export class TaskActionsApi extends BaseApi {
      * @return Promise<{}>
      */
     resolveTask(taskId: string): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in resolveTask");
-        }
 
         let pathParams = {
             'taskId': taskId
@@ -414,12 +368,9 @@ export class TaskActionsApi extends BaseApi {
      * @return Promise<{}>
      */
     unclaimTask(taskId: string): Promise<any> {
+        throwIfNotDefined(taskId, 'taskId');
 
         let postBody = null;
-
-        if (taskId === undefined || taskId === null) {
-            throw new Error("Required param 'taskId' in unclaimTask");
-        }
 
         let pathParams = {
             'taskId': taskId

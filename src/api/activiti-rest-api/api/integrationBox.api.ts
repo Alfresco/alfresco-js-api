@@ -18,6 +18,7 @@
 import { ResultListDataRepresentationBoxContent } from '../model/resultListDataRepresentationBoxContent';
 import { UserAccountCredentialsRepresentation } from '../model/userAccountCredentialsRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Integrationbox service.
@@ -66,16 +67,10 @@ export class IntegrationBoxApi extends BaseApi {
         * @return Promise<{}>
         */
     createRepositoryAccount(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
+        throwIfNotDefined(userId, 'userId');
+        throwIfNotDefined(credentials, 'credentials');
 
         let postBody = credentials;
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in createRepositoryAccount");
-        }
-
-        if (credentials === undefined || credentials === null) {
-            throw new Error("Required param 'credentials' in createRepositoryAccount");
-        }
 
         let pathParams = {
             'userId': userId
@@ -107,12 +102,9 @@ export class IntegrationBoxApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteRepositoryAccount(userId: number): Promise<any> {
+        throwIfNotDefined(userId, 'userId');
 
         let postBody = null;
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in deleteRepositoryAccount");
-        }
 
         let pathParams = {
             'userId': userId
@@ -213,12 +205,9 @@ export class IntegrationBoxApi extends BaseApi {
         * @return Promise<{}>
         */
     getRepositoryAccount(userId: number): Promise<any> {
+        throwIfNotDefined(userId, 'userId');
 
         let postBody = null;
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in getRepositoryAccount");
-        }
 
         let pathParams = {
             'userId': userId
@@ -251,16 +240,10 @@ export class IntegrationBoxApi extends BaseApi {
         * @return Promise<{}>
         */
     updateRepositoryAccount(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
+        throwIfNotDefined(userId, 'userId');
+        throwIfNotDefined(credentials, 'credentials');
 
         let postBody = credentials;
-
-        if (userId === undefined || userId === null) {
-            throw new Error("Required param 'userId' in updateRepositoryAccount");
-        }
-
-        if (credentials === undefined || credentials === null) {
-            throw new Error("Required param 'credentials' in updateRepositoryAccount");
-        }
 
         let pathParams = {
             'userId': userId

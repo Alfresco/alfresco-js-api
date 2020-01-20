@@ -18,6 +18,8 @@
 import { PersonNetworkEntry } from '../model/personNetworkEntry';
 import { PersonNetworkPaging } from '../model/personNetworkPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Networks service.
@@ -46,19 +48,17 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PersonNetworkEntry>
     */
     getNetwork(networkId: string, opts?: any): Promise<PersonNetworkEntry> {
+        throwIfNotDefined(networkId, 'networkId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (networkId === undefined || networkId === null) {
-            throw new Error("Required param 'networkId' in getNetwork");
-        }
 
         let pathParams = {
             'networkId': networkId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -101,23 +101,18 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<PersonNetworkEntry>
         */
     getNetworkForPerson(personId: string, networkId: string, opts?: any): Promise<PersonNetworkEntry> {
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(networkId, 'networkId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in getNetworkForPerson");
-        }
-
-        if (networkId === undefined || networkId === null) {
-            throw new Error("Required param 'networkId' in getNetworkForPerson");
-        }
 
         let pathParams = {
             'personId': personId, 'networkId': networkId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -165,12 +160,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<PersonNetworkPaging>
         */
     listNetworksForPerson(personId: string, opts?: any): Promise<PersonNetworkPaging> {
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (personId === undefined || personId === null) {
-            throw new Error("Required param 'personId' in listNetworksForPerson");
-        }
 
         let pathParams = {
             'personId': personId
@@ -179,7 +172,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

@@ -19,6 +19,7 @@ import { TicketBody } from '../model/ticketBody';
 import { TicketEntry } from '../model/ticketEntry';
 import { ValidTicketEntry } from '../model/validTicketEntry';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Authentication service.
@@ -50,12 +51,9 @@ For example using Javascript:
     * @return Promise<TicketEntry>
     */
     createTicket(ticketBodyCreate: TicketBody): Promise<TicketEntry> {
+        throwIfNotDefined(ticketBodyCreate, 'ticketBodyCreate');
 
         let postBody = ticketBodyCreate;
-
-        if (ticketBodyCreate === undefined || ticketBodyCreate === null) {
-            throw new Error("Required param 'ticketBodyCreate' in createTicket");
-        }
 
         let pathParams = {
 

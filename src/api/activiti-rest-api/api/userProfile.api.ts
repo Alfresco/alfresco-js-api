@@ -19,6 +19,7 @@ import { ChangePasswordRepresentation } from '../model/changePasswordRepresentat
 import { ImageUploadRepresentation } from '../model/imageUploadRepresentation';
 import { UserRepresentation } from '../model/userRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Userprofile service.
@@ -34,12 +35,9 @@ export class UserProfileApi extends BaseApi {
     * @return Promise<{}>
     */
     changePassword(changePasswordRepresentation: ChangePasswordRepresentation): Promise<any> {
+        throwIfNotDefined(changePasswordRepresentation, 'changePasswordRepresentation');
 
         let postBody = changePasswordRepresentation;
-
-        if (changePasswordRepresentation === undefined || changePasswordRepresentation === null) {
-            throw new Error("Required param 'changePasswordRepresentation' in changePassword");
-        }
 
         let pathParams = {
 
@@ -144,12 +142,9 @@ export class UserProfileApi extends BaseApi {
         * @return Promise<UserRepresentation>
         */
     updateProfile(userRepresentation: UserRepresentation): Promise<UserRepresentation> {
+        throwIfNotDefined(userRepresentation, 'userRepresentation');
 
         let postBody = userRepresentation;
-
-        if (userRepresentation === undefined || userRepresentation === null) {
-            throw new Error("Required param 'userRepresentation' in updateProfile");
-        }
 
         let pathParams = {
 
@@ -181,12 +176,9 @@ export class UserProfileApi extends BaseApi {
         * @return Promise<ImageUploadRepresentation>
         */
     uploadProfilePicture(file: any): Promise<ImageUploadRepresentation> {
+        throwIfNotDefined(file, 'file');
 
         let postBody = null;
-
-        if (file === undefined || file === null) {
-            throw new Error("Required param 'file' in uploadProfilePicture");
-        }
 
         let pathParams = {
 

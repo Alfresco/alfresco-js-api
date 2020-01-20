@@ -28,6 +28,8 @@ import { NodeBodyUpdate } from '../model/nodeBodyUpdate';
 import { NodeChildAssociationPaging } from '../model/nodeChildAssociationPaging';
 import { NodeEntry } from '../model/nodeEntry';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
  * Nodes service.
@@ -75,24 +77,19 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeEntry>
      */
     copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts?: any): Promise<NodeEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(nodeBodyCopy, 'nodeBodyCopy');
+
         opts = opts || {};
         let postBody = nodeBodyCopy;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in copyNode");
-        }
-
-        if (nodeBodyCopy === undefined || nodeBodyCopy === null) {
-            throw new Error("Required param 'nodeBodyCopy' in copyNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -176,23 +173,18 @@ export class NodesApi extends BaseApi {
      * @return Promise<AssociationEntry>
      */
     createAssociation(nodeId: string, associationBodyCreate: AssociationBody, opts?: any): Promise<AssociationEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(associationBodyCreate, 'associationBodyCreate');
+
         opts = opts || {};
         let postBody = associationBodyCreate;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in createAssociation");
-        }
-
-        if (associationBodyCreate === undefined || associationBodyCreate === null) {
-            throw new Error("Required param 'associationBodyCreate' in createAssociation");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -412,16 +404,11 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeEntry>
      */
     createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: any, formParams?: any): Promise<NodeEntry| any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
+
         opts = opts || {};
         let postBody = nodeBodyCreate;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in createNode");
-        }
-
-        if (nodeBodyCreate === undefined || nodeBodyCreate === null) {
-            throw new Error("Required param 'nodeBodyCreate' in createNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -429,8 +416,8 @@ export class NodesApi extends BaseApi {
 
         let queryParams = {
             'autoRename': opts['autoRename'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -522,23 +509,18 @@ export class NodesApi extends BaseApi {
      * @return Promise<ChildAssociationEntry>
      */
     createSecondaryChildAssociation(nodeId: string, secondaryChildAssociationBodyCreate: ChildAssociationBody, opts?: any): Promise<ChildAssociationEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(secondaryChildAssociationBodyCreate, 'secondaryChildAssociationBodyCreate');
+
         opts = opts || {};
         let postBody = secondaryChildAssociationBodyCreate;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in createSecondaryChildAssociation");
-        }
-
-        if (secondaryChildAssociationBodyCreate === undefined || secondaryChildAssociationBodyCreate === null) {
-            throw new Error("Required param 'secondaryChildAssociationBodyCreate' in createSecondaryChildAssociation");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -574,16 +556,11 @@ export class NodesApi extends BaseApi {
      * @return Promise<{}>
      */
     deleteAssociation(nodeId: string, targetId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(targetId, 'targetId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in deleteAssociation");
-        }
-
-        if (targetId === undefined || targetId === null) {
-            throw new Error("Required param 'targetId' in deleteAssociation");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'targetId': targetId
@@ -633,12 +610,10 @@ export class NodesApi extends BaseApi {
      * @return Promise<{}>
      */
     deleteNode(nodeId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in deleteNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -679,16 +654,11 @@ export class NodesApi extends BaseApi {
      * @return Promise<{}>
      */
     deleteSecondaryChildAssociation(nodeId: string, childId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(childId, 'childId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in deleteSecondaryChildAssociation");
-        }
-
-        if (childId === undefined || childId === null) {
-            throw new Error("Required param 'childId' in deleteSecondaryChildAssociation");
-        }
 
         let pathParams = {
             'nodeId': nodeId, 'childId': childId
@@ -753,21 +723,19 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeEntry>
      */
     getNode(nodeId: string, opts?: any): Promise<NodeEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in getNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'relativePath': opts['relativePath'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -811,12 +779,10 @@ export class NodesApi extends BaseApi {
      * @return Promise<{}>
      */
     getNodeContent(nodeId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in getNodeContent");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -939,12 +905,10 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeChildAssociationPaging>
      */
     listNodeChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listNodeChildren");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -953,12 +917,12 @@ export class NodesApi extends BaseApi {
         let queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'orderBy': this.apiClient.buildCollectionParam(opts['orderBy'], 'csv'),
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'relativePath': opts['relativePath'],
             'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -1028,12 +992,10 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeAssociationPaging>
      */
     listParents(nodeId: string, opts?: any): Promise<NodeAssociationPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listParents");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -1041,11 +1003,11 @@ export class NodesApi extends BaseApi {
 
         let queryParams = {
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -1109,12 +1071,10 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeChildAssociationPaging>
      */
     listSecondaryChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listSecondaryChildren");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -1122,11 +1082,11 @@ export class NodesApi extends BaseApi {
 
         let queryParams = {
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'includeSource': opts['includeSource'],
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -1179,12 +1139,10 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeAssociationPaging>
      */
     listSourceAssociations(nodeId: string, opts?: any): Promise<NodeAssociationPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listSourceAssociations");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -1192,8 +1150,8 @@ export class NodesApi extends BaseApi {
 
         let queryParams = {
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -1246,12 +1204,10 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeAssociationPaging>
      */
     listTargetAssociations(nodeId: string, opts?: any): Promise<NodeAssociationPaging> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in listTargetAssociations");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -1259,8 +1215,8 @@ export class NodesApi extends BaseApi {
 
         let queryParams = {
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -1333,24 +1289,19 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeEntry>
      */
     lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: any): Promise<NodeEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(nodeBodyLock, 'nodeBodyLock');
+
         opts = opts || {};
         let postBody = nodeBodyLock;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in lockNode");
-        }
-
-        if (nodeBodyLock === undefined || nodeBodyLock === null) {
-            throw new Error("Required param 'nodeBodyLock' in lockNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -1408,24 +1359,19 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeEntry>
      */
     moveNode(nodeId: string, nodeBodyMove: NodeBodyMove, opts?: any): Promise<NodeEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(nodeBodyMove, 'nodeBodyMove');
+
         opts = opts || {};
         let postBody = nodeBodyMove;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in moveNode");
-        }
-
-        if (nodeBodyMove === undefined || nodeBodyMove === null) {
-            throw new Error("Required param 'nodeBodyMove' in moveNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -1478,20 +1424,18 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeEntry>
      */
     unlockNode(nodeId: string, opts?: any): Promise<NodeEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in unlockNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -1577,24 +1521,19 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeEntry>
      */
     updateNode(nodeId: string, nodeBodyUpdate: NodeBodyUpdate, opts?: any): Promise<NodeEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(nodeBodyUpdate, 'nodeBodyUpdate');
+
         opts = opts || {};
         let postBody = nodeBodyUpdate;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in updateNode");
-        }
-
-        if (nodeBodyUpdate === undefined || nodeBodyUpdate === null) {
-            throw new Error("Required param 'nodeBodyUpdate' in updateNode");
-        }
 
         let pathParams = {
             'nodeId': nodeId
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};
@@ -1666,16 +1605,11 @@ export class NodesApi extends BaseApi {
      * @return Promise<NodeEntry>
      */
     updateNodeContent(nodeId: string, contentBodyUpdate: any, opts?: any): Promise<NodeEntry> {
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
+
         opts = opts || {};
         let postBody = contentBodyUpdate;
-
-        if (nodeId === undefined || nodeId === null) {
-            throw new Error("Required param 'nodeId' in updateNodeContent");
-        }
-
-        if (contentBodyUpdate === undefined || contentBodyUpdate === null) {
-            throw new Error("Required param 'contentBodyUpdate' in updateNodeContent");
-        }
 
         let pathParams = {
             'nodeId': nodeId
@@ -1685,8 +1619,8 @@ export class NodesApi extends BaseApi {
             'majorVersion': opts['majorVersion'],
             'comment': opts['comment'],
             'name': opts['name'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {};

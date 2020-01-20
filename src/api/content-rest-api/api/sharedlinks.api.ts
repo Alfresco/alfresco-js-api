@@ -22,6 +22,8 @@ import { SharedLinkBodyEmail } from '../model/sharedLinkBodyEmail';
 import { SharedLinkEntry } from '../model/sharedLinkEntry';
 import { SharedLinkPaging } from '../model/sharedLinkPaging';
 import { BaseApi } from './base.api';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Sharedlinks service.
@@ -104,20 +106,18 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<SharedLinkEntry>
     */
     createSharedLink(sharedLinkBodyCreate: SharedLinkBodyCreate, opts?: any): Promise<SharedLinkEntry> {
+        throwIfNotDefined(sharedLinkBodyCreate, 'sharedLinkBodyCreate');
+
         opts = opts || {};
         let postBody = sharedLinkBodyCreate;
-
-        if (sharedLinkBodyCreate === undefined || sharedLinkBodyCreate === null) {
-            throw new Error("Required param 'sharedLinkBodyCreate' in createSharedLink");
-        }
 
         let pathParams = {
 
         };
 
         let queryParams = {
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -146,12 +146,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     deleteSharedLink(sharedId: string): Promise<any> {
+        throwIfNotDefined(sharedId, 'sharedId');
 
         let postBody = null;
-
-        if (sharedId === undefined || sharedId === null) {
-            throw new Error("Required param 'sharedId' in deleteSharedLink");
-        }
 
         let pathParams = {
             'sharedId': sharedId
@@ -214,16 +211,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     emailSharedLink(sharedId: string, sharedLinkBodyEmail: SharedLinkBodyEmail): Promise<any> {
+        throwIfNotDefined(sharedId, 'sharedId');
+        throwIfNotDefined(sharedLinkBodyEmail, 'sharedLinkBodyEmail');
 
         let postBody = sharedLinkBodyEmail;
-
-        if (sharedId === undefined || sharedId === null) {
-            throw new Error("Required param 'sharedId' in emailSharedLink");
-        }
-
-        if (sharedLinkBodyEmail === undefined || sharedLinkBodyEmail === null) {
-            throw new Error("Required param 'sharedLinkBodyEmail' in emailSharedLink");
-        }
 
         let pathParams = {
             'sharedId': sharedId
@@ -273,19 +264,17 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<SharedLinkEntry>
         */
     getSharedLink(sharedId: string, opts?: any): Promise<SharedLinkEntry> {
+        throwIfNotDefined(sharedId, 'sharedId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (sharedId === undefined || sharedId === null) {
-            throw new Error("Required param 'sharedId' in getSharedLink");
-        }
 
         let pathParams = {
             'sharedId': sharedId
         };
 
         let queryParams = {
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {
@@ -333,12 +322,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     getSharedLinkContent(sharedId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(sharedId, 'sharedId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (sharedId === undefined || sharedId === null) {
-            throw new Error("Required param 'sharedId' in getSharedLinkContent");
-        }
 
         let pathParams = {
             'sharedId': sharedId
@@ -380,16 +367,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RenditionEntry>
         */
     getSharedLinkRendition(sharedId: string, renditionId: string): Promise<RenditionEntry> {
+        throwIfNotDefined(sharedId, 'sharedId');
+        throwIfNotDefined(renditionId, 'renditionId');
 
         let postBody = null;
-
-        if (sharedId === undefined || sharedId === null) {
-            throw new Error("Required param 'sharedId' in getSharedLinkRendition");
-        }
-
-        if (renditionId === undefined || renditionId === null) {
-            throw new Error("Required param 'renditionId' in getSharedLinkRendition");
-        }
 
         let pathParams = {
             'sharedId': sharedId, 'renditionId': renditionId
@@ -444,16 +425,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<{}>
         */
     getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<any> {
+        throwIfNotDefined(sharedId, 'sharedId');
+        throwIfNotDefined(renditionId, 'renditionId');
+
         opts = opts || {};
         let postBody = null;
-
-        if (sharedId === undefined || sharedId === null) {
-            throw new Error("Required param 'sharedId' in getSharedLinkRenditionContent");
-        }
-
-        if (renditionId === undefined || renditionId === null) {
-            throw new Error("Required param 'renditionId' in getSharedLinkRenditionContent");
-        }
 
         let pathParams = {
             'sharedId': sharedId, 'renditionId': renditionId
@@ -494,12 +470,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @return Promise<RenditionPaging>
         */
     listSharedLinkRenditions(sharedId: string): Promise<RenditionPaging> {
+        throwIfNotDefined(sharedId, 'sharedId');
 
         let postBody = null;
-
-        if (sharedId === undefined || sharedId === null) {
-            throw new Error("Required param 'sharedId' in listSharedLinkRenditions");
-        }
 
         let pathParams = {
             'sharedId': sharedId
@@ -577,8 +550,8 @@ parameter are returned in addition to those specified in the **fields** paramete
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
-            'include': this.apiClient.buildCollectionParam(opts['include'], 'csv'),
-            'fields': this.apiClient.buildCollectionParam(opts['fields'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         let headerParams = {

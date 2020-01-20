@@ -21,6 +21,7 @@ import { UserFilterOrderRepresentation } from '../model/userFilterOrderRepresent
 import { UserProcessInstanceFilterRepresentation } from '../model/userProcessInstanceFilterRepresentation';
 import { UserTaskFilterRepresentation } from '../model/userTaskFilterRepresentation';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Userfilters service.
@@ -36,12 +37,9 @@ export class UserFiltersApi extends BaseApi {
     * @return Promise<UserProcessInstanceFilterRepresentation>
     */
     createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation> {
+        throwIfNotDefined(userProcessInstanceFilterRepresentation, 'userProcessInstanceFilterRepresentation');
 
         let postBody = userProcessInstanceFilterRepresentation;
-
-        if (userProcessInstanceFilterRepresentation === undefined || userProcessInstanceFilterRepresentation === null) {
-            throw new Error("Required param 'userProcessInstanceFilterRepresentation' in createUserProcessInstanceFilter");
-        }
 
         let pathParams = {
 
@@ -73,12 +71,9 @@ export class UserFiltersApi extends BaseApi {
         * @return Promise<UserTaskFilterRepresentation>
         */
     createUserTaskFilter(userTaskFilterRepresentation: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation> {
+        throwIfNotDefined(userTaskFilterRepresentation, 'userTaskFilterRepresentation');
 
         let postBody = userTaskFilterRepresentation;
-
-        if (userTaskFilterRepresentation === undefined || userTaskFilterRepresentation === null) {
-            throw new Error("Required param 'userTaskFilterRepresentation' in createUserTaskFilter");
-        }
 
         let pathParams = {
 
@@ -110,12 +105,9 @@ export class UserFiltersApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteUserProcessInstanceFilter(userFilterId: number): Promise<any> {
+        throwIfNotDefined(userFilterId, 'userFilterId');
 
         let postBody = null;
-
-        if (userFilterId === undefined || userFilterId === null) {
-            throw new Error("Required param 'userFilterId' in deleteUserProcessInstanceFilter");
-        }
 
         let pathParams = {
             'userFilterId': userFilterId
@@ -147,12 +139,9 @@ export class UserFiltersApi extends BaseApi {
         * @return Promise<{}>
         */
     deleteUserTaskFilter(userFilterId: number): Promise<any> {
+        throwIfNotDefined(userFilterId, 'userFilterId');
 
         let postBody = null;
-
-        if (userFilterId === undefined || userFilterId === null) {
-            throw new Error("Required param 'userFilterId' in deleteUserTaskFilter");
-        }
 
         let pathParams = {
             'userFilterId': userFilterId
@@ -184,12 +173,9 @@ export class UserFiltersApi extends BaseApi {
         * @return Promise<UserProcessInstanceFilterRepresentation>
         */
     getUserProcessInstanceFilter(userFilterId: number): Promise<UserProcessInstanceFilterRepresentation> {
+        throwIfNotDefined(userFilterId, 'userFilterId');
 
         let postBody = null;
-
-        if (userFilterId === undefined || userFilterId === null) {
-            throw new Error("Required param 'userFilterId' in getUserProcessInstanceFilter");
-        }
 
         let pathParams = {
             'userFilterId': userFilterId
@@ -256,12 +242,9 @@ export class UserFiltersApi extends BaseApi {
         * @return Promise<UserTaskFilterRepresentation>
         */
     getUserTaskFilter(userFilterId: number): Promise<UserTaskFilterRepresentation> {
+        throwIfNotDefined(userFilterId, 'userFilterId');
 
         let postBody = null;
-
-        if (userFilterId === undefined || userFilterId === null) {
-            throw new Error("Required param 'userFilterId' in getUserTaskFilter");
-        }
 
         let pathParams = {
             'userFilterId': userFilterId
@@ -328,12 +311,9 @@ export class UserFiltersApi extends BaseApi {
         * @return Promise<{}>
         */
     orderUserProcessInstanceFilters(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<any> {
+        throwIfNotDefined(filterOrderRepresentation, 'filterOrderRepresentation');
 
         let postBody = filterOrderRepresentation;
-
-        if (filterOrderRepresentation === undefined || filterOrderRepresentation === null) {
-            throw new Error("Required param 'filterOrderRepresentation' in orderUserProcessInstanceFilters");
-        }
 
         let pathParams = {
 
@@ -365,12 +345,9 @@ export class UserFiltersApi extends BaseApi {
         * @return Promise<{}>
         */
     orderUserTaskFilters(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<any> {
+        throwIfNotDefined(filterOrderRepresentation, 'filterOrderRepresentation');
 
         let postBody = filterOrderRepresentation;
-
-        if (filterOrderRepresentation === undefined || filterOrderRepresentation === null) {
-            throw new Error("Required param 'filterOrderRepresentation' in orderUserTaskFilters");
-        }
 
         let pathParams = {
 
@@ -403,16 +380,10 @@ export class UserFiltersApi extends BaseApi {
         * @return Promise<UserProcessInstanceFilterRepresentation>
         */
     updateUserProcessInstanceFilter(userFilterId: number, userProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation> {
+        throwIfNotDefined(userFilterId, 'userFilterId');
+        throwIfNotDefined(userProcessInstanceFilterRepresentation, 'userProcessInstanceFilterRepresentation');
 
         let postBody = userProcessInstanceFilterRepresentation;
-
-        if (userFilterId === undefined || userFilterId === null) {
-            throw new Error("Required param 'userFilterId' in updateUserProcessInstanceFilter");
-        }
-
-        if (userProcessInstanceFilterRepresentation === undefined || userProcessInstanceFilterRepresentation === null) {
-            throw new Error("Required param 'userProcessInstanceFilterRepresentation' in updateUserProcessInstanceFilter");
-        }
 
         let pathParams = {
             'userFilterId': userFilterId
@@ -445,16 +416,10 @@ export class UserFiltersApi extends BaseApi {
         * @return Promise<UserTaskFilterRepresentation>
         */
     updateUserTaskFilter(userFilterId: number, userTaskFilterRepresentation: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation> {
+        throwIfNotDefined(userFilterId, 'userFilterId');
+        throwIfNotDefined(userTaskFilterRepresentation, 'userTaskFilterRepresentation');
 
         let postBody = userTaskFilterRepresentation;
-
-        if (userFilterId === undefined || userFilterId === null) {
-            throw new Error("Required param 'userFilterId' in updateUserTaskFilter");
-        }
-
-        if (userTaskFilterRepresentation === undefined || userTaskFilterRepresentation === null) {
-            throw new Error("Required param 'userTaskFilterRepresentation' in updateUserTaskFilter");
-        }
 
         let pathParams = {
             'userFilterId': userFilterId

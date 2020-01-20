@@ -19,6 +19,7 @@ import { DeclassificationExemptionBody } from '../model/declassificationExemptio
 import { DeclassificationExemptionEntry } from '../model/declassificationExemptionEntry';
 import { DeclassificationExemptionsPaging } from '../model/declassificationExemptionsPaging';
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 /**
 * Declassificationexemptions service.
@@ -76,12 +77,9 @@ JSON
     * @return Promise<DeclassificationExemptionEntry>
     */
     createDeclassificationExemption(declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry> {
+        throwIfNotDefined(declassificationExemption, 'declassificationExemption');
 
         let postBody = declassificationExemption;
-
-        if (declassificationExemption === undefined || declassificationExemption === null) {
-            throw new Error("Required param 'declassificationExemption' in createDeclassificationExemption");
-        }
 
         let pathParams = {
 
@@ -113,12 +111,9 @@ JSON
         * @return Promise<{}>
         */
     deleteDeclassificationExemption(declassificationExemptionId: string): Promise<any> {
+        throwIfNotDefined(declassificationExemptionId, 'declassificationExemptionId');
 
         let postBody = null;
-
-        if (declassificationExemptionId === undefined || declassificationExemptionId === null) {
-            throw new Error("Required param 'declassificationExemptionId' in deleteDeclassificationExemption");
-        }
 
         let pathParams = {
             'declassificationExemptionId': declassificationExemptionId
@@ -187,12 +182,9 @@ JSON
         * @return Promise<DeclassificationExemptionEntry>
         */
     showDeclassificationExemptionById(declassificationExemptionId: string): Promise<DeclassificationExemptionEntry> {
+        throwIfNotDefined(declassificationExemptionId, 'declassificationExemptionId');
 
         let postBody = null;
-
-        if (declassificationExemptionId === undefined || declassificationExemptionId === null) {
-            throw new Error("Required param 'declassificationExemptionId' in showDeclassificationExemptionById");
-        }
 
         let pathParams = {
             'declassificationExemptionId': declassificationExemptionId
@@ -225,16 +217,10 @@ JSON
         * @return Promise<DeclassificationExemptionEntry>
         */
     updateDeclassificationExemption(declassificationExemptionId: string, declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry> {
+        throwIfNotDefined(declassificationExemptionId, 'declassificationExemptionId');
+        throwIfNotDefined(declassificationExemption, 'declassificationExemption');
 
         let postBody = declassificationExemption;
-
-        if (declassificationExemptionId === undefined || declassificationExemptionId === null) {
-            throw new Error("Required param 'declassificationExemptionId' in updateDeclassificationExemption");
-        }
-
-        if (declassificationExemption === undefined || declassificationExemption === null) {
-            throw new Error("Required param 'declassificationExemption' in updateDeclassificationExemption");
-        }
 
         let pathParams = {
             'declassificationExemptionId': declassificationExemptionId
