@@ -537,6 +537,13 @@ export class AlfrescoApi implements EventEmitter.Emitter {
         return this.config.authType === 'OAUTH';
     }
 
+    isPublicUrl(): boolean {
+        if (this.isOauthConfiguration()) {
+            return this.oauth2Auth.isPublicUrl();
+        }
+        return false;
+    }
+
     isEcmBpmConfiguration(): boolean {
         return this.config.provider && this.config.provider.toUpperCase() === 'ALL';
     }
