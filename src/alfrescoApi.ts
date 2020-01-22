@@ -538,7 +538,7 @@ export class AlfrescoApi implements EventEmitter.Emitter {
     }
 
     isPublicUrl(): boolean {
-        if (this.oauth2Auth && this.isOauthConfiguration()) {
+        if (this.isOauthConfiguration()) {
             return this.oauth2Auth.isPublicUrl();
         }
         return false;
