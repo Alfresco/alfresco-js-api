@@ -32,16 +32,18 @@ export class ProcessAuth extends AlfrescoApiClient {
         'basicAuth': { ticket: '' }, type: 'activiti'
     };
 
-    defaultHeaders = {
-        'user-agent': 'superagent'
-    };
-
     constructor(config: AlfrescoApiConfig) {
         super();
         this.storage = new Storage();
         this.storage.setDomainPrefix(config.domainPrefix);
 
         this.className = 'ProcessAuth';
+
+        if (this.isNodeEnv()) {
+            this.defaultHeaders = {
+                'user-agent': 'superagent'
+            };
+        }
 
         this.setConfig(config);
     }
