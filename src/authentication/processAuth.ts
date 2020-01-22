@@ -41,7 +41,7 @@ export class ProcessAuth extends AlfrescoApiClient {
 
         if (this.isNodeEnv()) {
             this.defaultHeaders = {
-                'user-agent': 'superagent'
+                'user-agent': 'alfresco-js-api'
             };
         }
 
