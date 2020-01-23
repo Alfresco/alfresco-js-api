@@ -574,7 +574,7 @@ export class AlfrescoApiClient implements ee.Emitter {
         const token = this.createCSRFToken();
         request.set('X-CSRF-TOKEN', token);
 
-        if (this.isNodeEnv()) {
+        if (!this.isBrowser()) {
             request.set('Cookie', 'CSRF-TOKEN=' + token + ';path=/');
         }
 
@@ -587,6 +587,11 @@ export class AlfrescoApiClient implements ee.Emitter {
     isNodeEnv(): boolean {
         return (typeof process !== 'undefined') && (process.release && process.release.name === 'node');
     }
+
+     isBrowser(): boolean {
+         return ( typeof window !== 'undefined' && typeof window.document !== 'undefined');
+     }
+
 
     createCSRFToken(a?: any): string {
         return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + (1e16).toString()).replace(/[01]/g, this.createCSRFToken);
@@ -661,7 +666,7 @@ export class AlfrescoApiClient implements ee.Emitter {
         if (this.isBpmRequest()) {
             request.withCredentials();
             if (this.authentications.cookie) {
-                if (this.isNodeEnv()) {
+                if (!this.isBrowser()) {
                     request.set('Cookie', this.authentications.cookie);
                 }
             }
