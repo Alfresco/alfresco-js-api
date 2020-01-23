@@ -39,7 +39,9 @@ export class ProcessAuth extends AlfrescoApiClient {
 
         this.className = 'ProcessAuth';
 
-        if (this.isNodeEnv()) {
+        if (!this.isBrowser()) {
+            console.log('this.defaultHeaders() ' + this.defaultHeaders);
+
             this.defaultHeaders = {
                 'user-agent': 'alfresco-js-api'
             };
