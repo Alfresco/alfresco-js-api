@@ -254,7 +254,7 @@ null (empty response body)
 
 <a name="getSharedLink"></a>
 # **getSharedLink**
-> SharedLinkEntry getSharedLink(sharedIdopts)
+> SharedLinkEntry getSharedLink(sharedId, sharedIdopts)
 
 Get a shared link
 
@@ -292,7 +292,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 };
 
-sharedlinksApi.getSharedLink(sharedIdopts).then((data) => {
+sharedlinksApi.getSharedLink(sharedId, sharedIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
