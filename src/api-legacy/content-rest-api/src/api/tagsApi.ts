@@ -39,7 +39,7 @@ export class TagsApi  {
      * @param {module:model/TagBody} tagBody The new tag
      * data is of type: {module:model/TagEntry}
      */
-    addTag(nodeId: string, tagBody: TagBody): Promise<TagEntry> {
+    addTag(nodeId: string, tagBody: TagBody[]): Promise<TagEntry> {
         return this.tagsApi.createTagForNode(nodeId, tagBody);
     }
 

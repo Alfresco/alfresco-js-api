@@ -95,7 +95,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagEntry>
     */
-    createTagForNode(nodeId: string, tagBodyCreate: TagBody, opts?: any): Promise<TagEntry> {
+    createTagForNode(nodeId: string, tagBodyCreate: TagBody[], opts?: any): Promise<TagEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(tagBodyCreate, 'tagBodyCreate');
 
