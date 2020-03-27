@@ -599,7 +599,7 @@ export class ProcessInstancesApi extends BaseApi {
         let accepts = ['application/json'];
 
         let contextRoot = null;
-        let responseType = null;
+        let responseType = 'blob';
 
         return this.apiClient.callApi(
             '/app/rest/process-instances/{processInstanceId}/audit', 'GET',
