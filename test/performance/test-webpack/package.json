@@ -22,7 +22,7 @@
   "bundlesize": [
     {
       "path": "./test/tree-shaking-test.js",
-      "maxSize": "60 kb"
+      "maxSize": "100 kb"
     },
     {
       "path": "./test/tree-shaking-test.min.js",
