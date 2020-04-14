@@ -538,6 +538,41 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
+<a name="getTaskAuditPdf"></a>
+# **getTaskAuditPdf**
+> Blob getTaskAuditPdf(taskId)
+
+Retrieve audit information in pdf format
+
+### Example
+```javascript
+
+var taskId = "taskId_example"; // String | taskId
+
+
+this.alfrescoJsApi.activiti.taskApi.getTaskAuditPdf(taskId);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **taskId** | **String**| taskId | 
+
+### Return type
+
+[**Blob**]()
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="getRelatedContentForTask"></a>
 # **getRelatedContentForTask**
 > ResultListDataRepresentation getRelatedContentForTask(taskId)

@@ -114,12 +114,12 @@ export class TaskApi {
         return this.tasksApi.getTaskAuditLog(taskId);
     }
 
-    getTaskAuditJson(taskId: string) {
+    getTaskAuditJson(taskId: string): Promise<TaskAuditInfoRepresentation> {
         return this.tasksApi.getTaskAuditLog(taskId);
     }
 
     getTaskAuditPdf(taskId: string) {
-        return this.tasksApi.getTaskAuditLog(taskId);
+        return this.tasksApi.getTaskAuditPdf(taskId);
     }
 
     getRelatedContentForTask(taskId: string, opts?: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
