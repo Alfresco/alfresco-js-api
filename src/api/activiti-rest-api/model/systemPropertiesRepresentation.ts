@@ -18,6 +18,8 @@
 export class SystemPropertiesRepresentation {
     allowInvolveByEmail?: boolean;
     disableJavaScriptEventsInFormEditor?: boolean;
+    logoutDisabled?: boolean;
+    authConfiguration: { authUrl: string, realm: string, clientId: string, useBrowserLogout: boolean}
 
     constructor(input?: any) {
 
