@@ -353,6 +353,36 @@ export class TasksApi extends BaseApi {
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts, TaskAuditInfoRepresentation);
     }
+
+    /**
+     * Get the audit log for a task
+     * @param taskId taskId
+     * @return Promise<Blob> task audit in blob
+     */
+    getTaskAuditPdf(taskId: string): Promise<Blob> {
+        throwIfNotDefined(taskId, 'taskId');
+
+        let postBody = null;
+
+        let pathParams = {
+            'taskId': taskId
+        };
+
+        let queryParams = {};
+        let headerParams = {};
+        let formParams = {};
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        let responseType = 'blob';
+
+        // Todo: update url once ACTIVITI-4191 fixed
+        return this.apiClient.callApi(
+            'app/rest/tasks/{taskId}/audit', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts, responseType);
+    }
+
     /**
         * Get a task
         *
