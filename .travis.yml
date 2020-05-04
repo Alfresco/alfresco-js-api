@@ -63,14 +63,19 @@ jobs:
           - ./scripts/build.sh || exit 1
           - ./scripts/publish.sh
 
-        - stage: Release beta tag
+        - stage: Release Tag
           if: branch = master AND type = push OR (tag =~ .*beta.*)
           script: ./scripts/git-tag.sh
 
-        - stage: trigger ADF
-          name: trigger ADF
-          if: (branch = master OR branch = development OR (tag =~ .*beta.*)) AND type = push
+        - stage: Trigger ADF
+          name: Trigger ADF
+          if: (branch = development OR (tag =~ .*beta.*)) AND type = push
           script: ./scripts/trigger-travis.sh --branch $TRAVIS_BRANCH Alfresco alfresco-ng2-components $TRAVIS_ACCESS_TOKEN
+
+        - stage: Update Released Version ADF
+          name: Update Released Version ADF
+          if: branch = master AND type = push
+          script: ./scripts/travis/update/update-project.sh -gnu -t $GITHUB_TOKEN -n 'Alfresco/alfresco-ng2-components' -vjs $JS_VERSION
 
 cache:
   directories:
