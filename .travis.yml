@@ -75,7 +75,7 @@ jobs:
         - stage: Update Released Version ADF
           name: Update Released Version ADF
           if: branch = master AND type = push
-          script: ./scripts/travis/update/update-project.sh -gnu -t $GITHUB_TOKEN -n 'Alfresco/alfresco-ng2-components' -vjs $JS_VERSION
+          script: ./scripts/update-project.sh -gnu -t $GITHUB_TOKEN -n 'Alfresco/alfresco-ng2-components' -vjs $JS_VERSION -v $JS_VERSION
 
 cache:
   directories:
