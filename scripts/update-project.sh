@@ -45,7 +45,7 @@ rm -rf $TEMP_GENERATOR_DIR;
 
 git clone https://$TOKEN@github.com/$NAME_REPO.git $TEMP_GENERATOR_DIR
 cd $TEMP_GENERATOR_DIR
-git checkout development
+git checkout develop
 
 BRANCH="JS-API-Update-$VERSION"
 git checkout -b $BRANCH
@@ -56,6 +56,6 @@ git add .
 git commit -m "Update JS-API packages version $VERSION"
 git push -u origin $BRANCH
 
-curl -H "Authorization: token $TOKEN" -X POST -d '{"body":"Update JS-API packages version '$VERSION'","head":"'$BRANCH'","base":"development","title":"Update JS-API packages version '$VERSION'"}' https://api.github.com/repos/$NAME_REPO/pulls
+curl -H "Authorization: token $TOKEN" -X POST -d '{"body":"Update JS-API packages version '$VERSION'","head":"'$BRANCH'","base":"develop","title":"Update JS-API packages version '$VERSION'"}' https://api.github.com/repos/$NAME_REPO/pulls
 
 rm -rf $TEMP_GENERATOR_DIR;
