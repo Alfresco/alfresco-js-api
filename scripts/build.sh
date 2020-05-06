@@ -12,7 +12,7 @@ npm install @alfresco/adf-cli@alpha --no-save
 
 if [[ $TRAVIS_PULL_REQUEST == "false" ]];
 then
-    if [[ $TRAVIS_BRANCH == "development" ]];
+    if [[ $TRAVIS_BRANCH == "develop" ]];
     then
         NEXT_VERSION=-nextalpha
         if [[ $TRAVIS_EVENT_TYPE == "cron" ]];

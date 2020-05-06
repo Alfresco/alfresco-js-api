@@ -13,7 +13,7 @@ before_script:
 branches:
   only:
   - master
-  - development
+  - develop
   - /.*old-env.*/
   - /.*next-release.*/
   - /.*beta.*/
@@ -69,7 +69,7 @@ jobs:
 
         - stage: Trigger ADF
           name: Trigger ADF
-          if: (branch = development OR (tag =~ .*beta.*)) AND type = push
+          if: (branch = develop OR (tag =~ .*beta.*)) AND type = push
           script: ./scripts/trigger-travis.sh --branch $TRAVIS_BRANCH Alfresco alfresco-ng2-components $TRAVIS_ACCESS_TOKEN
 
         - stage: Update Released Version ADF
