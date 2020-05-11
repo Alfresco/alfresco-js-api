@@ -2,8 +2,8 @@
 
 | branch | status |
 | --- | --- |
-| master | [![Build Status](https://travis-ci.org/Alfresco/alfresco-js-api.svg?branch=master)](https://travis-ci.org/Alfresco/alfresco-js-api)  |
-| develop | [![Build Status](https://travis-ci.org/Alfresco/alfresco-js-api.svg?branch=develop)](https://travis-ci.org/Alfresco/alfresco-js-api)  |
+| master | [![Build Status](https://travis-ci.com/Alfresco/alfresco-js-api.svg?branch=master)](https://travis-ci.com/Alfresco/alfresco-js-api)  |
+| develop | [![Build Status](https://travis-ci.com/Alfresco/alfresco-js-api.svg?branch=develop)](https://travis-ci.com/Alfresco/alfresco-js-api)  |
 
 
 
