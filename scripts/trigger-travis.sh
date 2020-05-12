@@ -1,27 +1,9 @@
 #!/bin/sh -f
 
-# Trigger a new Travis-CI job.
-
-# Usage:
-#   trigger-travis.sh [--pro] [--branch BRANCH] GITHUBID GITHUBPROJECT TRAVIS_ACCESS_TOKEN [MESSAGE]
-# For example:
-#   trigger-travis.sh typetools checker-framework `cat ~/private/.travis-access-token` "Trigger for testing"
-
-# For full documentation, see
-# https://github.com/plume-lib/trigger-travis/
-
-
 if [ "$#" -lt 3 ] || [ "$#" -ge 7 ]; then
   echo "Wrong number of arguments $# to trigger-travis.sh; run like:"
-  echo " trigger-travis.sh [--pro] [--branch BRANCH] GITHUBID GITHUBPROJECT TRAVIS_ACCESS_TOKEN [MESSAGE]" >&2
+  echo " trigger-travis.sh [--branch BRANCH] GITHUBID GITHUBPROJECT TRAVIS_ACCESS_TOKEN [MESSAGE]" >&2
   exit 1
-fi
-
-if [ "$1" = "--pro" ] ; then
-  TRAVIS_URL=travis-ci.com
-  shift
-else
-  TRAVIS_URL=travis-ci.org
 fi
 
 if [ "$1" = "--branch" ] ; then
@@ -62,7 +44,7 @@ curl -s -X POST \
   -H "Travis-API-Version: 3" \
   -H "Authorization: token ${TOKEN}" \
   -d "$body" \
-  https://api.${TRAVIS_URL}/repo/${USER}%2F${REPO}/requests \
+  https://api.travis-ci.com/repo/${USER}%2F${REPO}/requests \
  | tee /tmp/travis-request-output.$$.txt
 
 if grep -q '"@type": "error"' /tmp/travis-request-output.$$.txt; then
