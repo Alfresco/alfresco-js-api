@@ -1,31 +1,36 @@
-/*global describe, it, beforeEach */
+import { AlfrescoApi } from '../../src/alfrescoApi';
+import { GsSitesApi } from '../../src/api/gs-core-rest-api';
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
-let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-let GsSitesApiMock = require('../../test/mockObjects/mockAlfrescoApi').GsSitesApi;
-let expect = require('chai').expect;
+const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+const GsSitesApiMock = require('../../test/mockObjects/mockAlfrescoApi').GsSitesApi;
+const expect = require('chai').expect;
 
-describe('Governance API test', function () {
+describe('Governance API test', () => {
+    let authResponseMock: any;
+    let gsSitesApiMock: any;
+    let gsSitesApi: GsSitesApi;
 
-    beforeEach(function () {
-        this.hostEcm = 'http://127.0.0.1:8080';
+    beforeEach(() => {
+        const hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock = new AuthResponseMock(this.hostEcm);
-        this.gsSitesApiMock = new GsSitesApiMock(this.hostEcm);
+        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock.get201Response();
 
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostEcm: this.hostEcm
+        gsSitesApiMock = new GsSitesApiMock(hostEcm);
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostEcm
         });
+
+        gsSitesApi = new GsSitesApi(alfrescoJsApi);
     });
 
-    it('should getRMSite return the RM site', function (done) {
-        this.gsSitesApiMock.get200Response();
+    it('should getRMSite return the RM site', (done) => {
+        gsSitesApiMock.get200Response();
 
-        this.alfrescoJsApi.gsCore.gsSitesApi.getRMSite().then((data: any) => {
+        gsSitesApi.getRMSite().then((data) => {
             expect(data.entry.description).to.be.equal('Records Management Description Test');
             done();
         });
-
     });
-
 });

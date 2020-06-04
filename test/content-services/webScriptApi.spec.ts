@@ -1,11 +1,11 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { AlfrescoApi } from '../../src/alfrescoApi';
 import { WebscriptApi } from '../../src/api/content-rest-api';
 
-let expect = require('chai').expect;
-let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-let WebScriptMock = require('../../test/mockObjects/mockAlfrescoApi').WebScript;
+const expect = require('chai').expect;
+const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+const WebScriptMock = require('../../test/mockObjects/mockAlfrescoApi').WebScript;
 
 describe('WebScript', () => {
     const hostEcm = 'http://127.0.0.1:8080';

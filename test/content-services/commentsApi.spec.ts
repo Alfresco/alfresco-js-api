@@ -1,6 +1,6 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { AlfrescoApi } from '../../src/alfrescoApi';
 import { CommentsApi } from '../../src/api/content-rest-api';
 
 const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;

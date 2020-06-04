@@ -1,10 +1,11 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { AlfrescoApi } from '../../src/alfrescoApi';
 import { TagsApi } from '../../src/api/content-rest-api';
-let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-let TagMock = require('../../test/mockObjects/mockAlfrescoApi').Tag;
-let expect = require('chai').expect;
+
+const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+const TagMock = require('../../test/mockObjects/mockAlfrescoApi').Tag;
+const expect = require('chai').expect;
 
 describe('Tags', () => {
     let authResponseMock: any;

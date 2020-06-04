@@ -1,11 +1,11 @@
 /*global describe, it, beforeEach, assert */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { AlfrescoApi } from '../../src/alfrescoApi';
 import { QueriesApi } from '../../src/api/content-rest-api';
 
-let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-let FindNodesMock = require('../../test/mockObjects/mockAlfrescoApi').FindNodes;
-let expect = require('chai').expect;
+const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+const FindNodesMock = require('../../test/mockObjects/mockAlfrescoApi').FindNodes;
+const expect = require('chai').expect;
 
 describe('Queries', () => {
     let authResponseMock: any;

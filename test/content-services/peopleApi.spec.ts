@@ -1,11 +1,11 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { AlfrescoApi } from '../../src/alfrescoApi';
 import { PersonBodyCreate } from '../../src/api/content-rest-api/model/personBodyCreate';
 import { PeopleApi } from '../../src/api/content-rest-api';
 
-let PeopleMock = require('../../test/mockObjects/mockAlfrescoApi').PeopleApi;
-let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+const PeopleMock = require('../../test/mockObjects/mockAlfrescoApi').PeopleApi;
+const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 
 describe('PeopleApi', () => {
     let authResponseMock: any;

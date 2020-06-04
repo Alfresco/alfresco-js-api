@@ -1,9 +1,10 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { AlfrescoApi } from '../../src/alfrescoApi';
 import { VersionsApi } from '../../src/api/content-rest-api';
-let VersionMock = require('../../test/mockObjects/mockAlfrescoApi').Version;
-let expect = require('chai').expect;
+
+const VersionMock = require('../../test/mockObjects/mockAlfrescoApi').Version;
+const expect = require('chai').expect;
 
 describe('Versions', () => {
     const nodeId = '74cd8a96-8a21-47e5-9b3b-a1b3e296787d';

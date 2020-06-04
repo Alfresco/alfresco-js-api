@@ -1,13 +1,13 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { AlfrescoApi } from '../../src/alfrescoApi';
 import { NodesApi } from '../../src/api/content-rest-api';
 
-let chai = require('chai');
-let expect = chai.expect;
-let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-let NodeMock = require('../../test/mockObjects/mockAlfrescoApi').Node;
-let fs = require('fs');
+const chai = require('chai');
+const expect = chai.expect;
+const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+const NodeMock = require('../../test/mockObjects/mockAlfrescoApi').Node;
+const fs = require('fs');
 
 chai.use(require('chai-datetime'));
 
