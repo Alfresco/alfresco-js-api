@@ -175,7 +175,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         const publicUrls = this.config.oauth2.publicUrls || [];
 
         if (Array.isArray(publicUrls)) {
-            return publicUrls.length &&
+            return publicUrls.length > 0 &&
                 publicUrls.some((urlPattern: string) => minimatch(window.location.href, urlPattern));
         }
         return false;
