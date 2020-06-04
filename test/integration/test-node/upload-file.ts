@@ -15,9 +15,11 @@
  * limitations under the License.
  */
 
-import { AlfrescoApiCompatibility } from '../../../src/alfrescoApiCompatibility';
-import path = require('path');
-import fs = require('fs');
+import * as path from 'path';
+import * as fs from 'fs';
+import { AlfrescoApi } from '../../../src/alfrescoApi';
+import { SitesApi } from '../../../src/api/content-rest-api/api/sites.api';
+import { UploadApi } from '../../../src/api/content-rest-api';
 
 let program = require('commander');
 
@@ -30,28 +32,34 @@ async function main() {
         .option('-u, --username [type]', 'username ')
         .parse(process.argv);
 
-    let alfrescoApi = new AlfrescoApiCompatibility({
+    const alfrescoApi = new AlfrescoApi({
         provider: 'ECM',
         hostEcm: program.host,
         authType: 'BASIC',
         contextRoot: ''
     });
 
-    alfrescoApi.login(program.username, program.password).then(() => {
-        console.log('login done');
-    }, () => {
-        process.exit(1);
-    });
+    alfrescoApi.login(program.username, program.password).then(
+        () => {
+            console.log('login done');
+        },
+        () => {
+            process.exit(1);
+        }
+    );
 
-    let pathFile = path.join(path.resolve(__dirname, 'testExtension.test'));
-    let file = fs.createReadStream(pathFile);
+    const pathFile = path.join(path.resolve(__dirname, 'testExtension.test'));
+    const file = fs.createReadStream(pathFile);
 
-    let site = await alfrescoApi.core.sitesApi.createSite({
+    const sitesApi = new SitesApi(alfrescoApi);
+    const uploadApi = new UploadApi(alfrescoApi);
+
+    const site = await sitesApi.createSite({
         title: 'my-site-test-' + new Date(),
         visibility: 'PUBLIC'
     });
 
-    alfrescoApi.upload.uploadFile(
+    uploadApi.uploadFile(
         file,
         '',
         site.entry.guid,
@@ -61,13 +69,15 @@ async function main() {
             'nodeType': 'cm:content',
             'renditions': 'doclib'
         }
-    ).then(() => {
-        console.log(`file uploaded`);
-    }, (e) => {
-        console.log(`error ${e}`);
-        process.exit(1);
-    })
-
+    ).then(
+        () => {
+            console.log(`file uploaded`);
+        },
+        (e: any) => {
+            console.log(`error ${e}`);
+            process.exit(1);
+        }
+    );
 }
 
 main();
