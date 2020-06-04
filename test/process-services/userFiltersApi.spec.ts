@@ -1,37 +1,42 @@
-/*global describe, it, beforeEach */
+import { AlfrescoApi } from '../../src/alfrescoApi';
+import { UserFiltersApi } from '../../src/api/activiti-rest-api';
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
-let expect = require('chai').expect;
-let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-let FiltersMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.UserFilters;
+const expect = require('chai').expect;
+const AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+const FiltersMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.UserFilters;
 
-describe('Activiti User Filter Api', function () {
-    beforeEach(function (done) {
-        this.hostBpm = 'http://127.0.0.1:9999';
+describe('Activiti User Filter Api', () => {
+    const hostBpm = 'http://127.0.0.1:9999';
+    let authResponseBpmMock: any;
+    let filtersMock: any;
+    let userFiltersApi: UserFiltersApi;
 
-        this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
-        this.filtersMock = new FiltersMock(this.hostBpm);
+    beforeEach((done) => {
+        authResponseBpmMock = new AuthBpmMock(hostBpm);
+        filtersMock = new FiltersMock(hostBpm);
 
-        this.authResponseBpmMock.get200Response();
+        authResponseBpmMock.get200Response();
 
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostBpm: this.hostBpm,
+        const alfrescoJsApi = new AlfrescoApi({
+            hostBpm,
             provider: 'BPM'
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
+        alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
+
+        userFiltersApi = new UserFiltersApi(alfrescoJsApi);
     });
 
-    it('get filter user', function (done) {
-        this.filtersMock.get200getUserTaskFilters();
+    it('get filter user', (done) => {
+        filtersMock.get200getUserTaskFilters();
 
-        let opts = {
+        const opts = {
             'appId': 1 // Integer | appId
         };
 
-        this.alfrescoJsApi.activiti.userFiltersApi.getUserTaskFilters(opts).then((data: any) => {
+        userFiltersApi.getUserTaskFilters(opts).then((data) => {
             expect(data.data[0].name).equal('Involved Tasks');
             done();
         });
