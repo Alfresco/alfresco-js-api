@@ -1,7 +1,7 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
-import { NodeChildAssociationPaging } from '../../src/api/content-rest-api/model/nodeChildAssociationPaging';
+import { NodesApi } from '../../src/api/content-rest-api';
 
 let chai = require('chai');
 let expect = chai.expect;
@@ -11,30 +11,40 @@ let fs = require('fs');
 
 chai.use(require('chai-datetime'));
 
-describe('Node', function () {
-    beforeEach(function (done) {
-        this.hostEcm = 'http://127.0.0.1:8080';
+describe('Node', () => {
+    let authResponseMock: any;
+    let nodeMock: any;
+    let nodesApi: NodesApi;
 
-        this.authResponseMock = new AuthResponseMock(this.hostEcm);
-        this.nodeMock = new NodeMock(this.hostEcm);
+    beforeEach((done) => {
+        const hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock.get201Response();
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostEcm: this.hostEcm
+        authResponseMock = new AuthResponseMock(hostEcm);
+        nodeMock = new NodeMock(hostEcm);
+
+        authResponseMock.get201Response();
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
-            done();
-        },                                              (error: any) => {
-            console.log('error ' + JSON.stringify(error));
-        });
+        alfrescoJsApi.login('admin', 'admin').then(
+            () => {
+                done();
+            },
+            (error: any) => {
+                console.log('error ' + JSON.stringify(error));
+            }
+        );
+
+        nodesApi = new NodesApi(alfrescoJsApi);
     });
 
-    describe('Get Children Node', function () {
-        it('information for the node with identifier nodeId should return 200 if is all ok', function (done) {
-            this.nodeMock.get200ResponseChildren();
+    describe('Get Children Node', () => {
+        it('information for the node with identifier nodeId should return 200 if is all ok', (done) => {
+            nodeMock.get200ResponseChildren();
 
-            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data: any) {
+            nodesApi.listNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then((data) => {
                 expect(data.list.pagination.count).to.be.equal(5);
                 expect(data.list.entries[0].entry.name).to.be.equal('dataLists');
                 done();
@@ -42,87 +52,98 @@ describe('Node', function () {
 
         });
 
-        it('information for the node with identifier nodeId should return 404 if the id is does not exist', function (done) {
-            this.nodeMock.get404ChildrenNotExist();
+        it('information for the node with identifier nodeId should return 404 if the id is does not exist', (done) => {
+            nodeMock.get404ChildrenNotExist();
 
-            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function () {
-            },                                                                                    function (error: any) {
-                expect(error.status).to.be.equal(404);
-                done();
-            });
+            nodesApi.listNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(
+                () => {},
+                (error: any) => {
+                    expect(error.status).to.be.equal(404);
+                    done();
+                }
+            );
         });
 
-        it('dynamic augmenting object parameters', function (done) {
-            this.nodeMock.get200ResponseChildrenFutureNewPossibleValue();
+        it('dynamic augmenting object parameters', (done) => {
+            nodeMock.get200ResponseChildrenFutureNewPossibleValue();
 
-            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then(function (data: any) {
+            nodesApi.listNodeChildren('b4cff62a-664d-4d45-9302-98723eac1319').then((data: any) => {
                 expect(data.list.entries[0].entry.impossibleProperties).to.be.equal('impossibleRightValue');
                 done();
             });
         });
 
-        it('should return dates as timezone-aware', function (done) {
-            this.nodeMock.get200ResponseChildrenNonUTCTimes();
+        it('should return dates as timezone-aware', (done) => {
+            nodeMock.get200ResponseChildrenNonUTCTimes();
 
-            this.alfrescoJsApi.nodes.getNodeChildren('b4cff62a-664d-4d45-9302-98723eac1320').then(function (data: NodeChildAssociationPaging) {
-                expect(data.list.entries.length).to.be.equal(1);
-                expect(data.list.entries[0].entry.createdAt).to.equalTime(new Date(Date.UTC(2011, 2, 15, 17, 4, 54, 290)));
-                done();
-            },                                                                                    (error: any) => {
-                console.log('error' + JSON.stringify(error));
-            });
-        });
-    });
-
-    describe('Delete', function () {
-        it('delete the node with identifier nodeId', function (done) {
-            this.nodeMock.get204SuccessfullyDeleted();
-
-            this.alfrescoJsApi.nodes.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
-                done();
-            },                                                                               function () {
-            });
-        });
-
-        it('delete the node with identifier nodeId should return 404 if the id is does not exist', function (done) {
-            this.nodeMock.get404DeleteNotFound();
-
-            this.alfrescoJsApi.nodes.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
-            },                                                                               function (error: any) {
-                expect(error.status).to.be.equal(404);
-                done();
-            });
-        });
-
-        it('delete the node with identifier nodeId should return 403 if current user does not have permission to delete', function (done) {
-            this.nodeMock.get403DeletePermissionDenied();
-
-            this.alfrescoJsApi.nodes.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(function () {
-            },                                                                               function () {
-                done();
-            });
-        });
-    });
-
-    describe('Content', function () {
-        it.skip('getFileContent', function (done) {
-
-            let nodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
-
-            this.alfrescoJsApi.core.nodesApi.getFileContent(nodeId).then(function (data: any) {
-                fs.writeFile('./test/grass.jpg', data, function (error: any) {
-                    if (error) {
-                        console.log(error);
-                        done();
-                    }
-                    console.log('The file was saved!');
+            nodesApi.listNodeChildren('b4cff62a-664d-4d45-9302-98723eac1320').then(
+                (data) => {
+                    expect(data.list.entries.length).to.be.equal(1);
+                    expect(data.list.entries[0].entry.createdAt).to.equalTime(new Date(Date.UTC(2011, 2, 15, 17, 4, 54, 290)));
                     done();
-                });
+                },
+                (error: any) => {
+                    console.log('error' + JSON.stringify(error));
+                }
+            );
+        });
+    });
 
-            },                                                           function (error: any) {
-                console.error(error);
-            });
+    describe('Delete', () => {
+        it('delete the node with identifier nodeId', (done) => {
+            nodeMock.get204SuccessfullyDeleted();
 
+            nodesApi.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(
+                () => {
+                    done();
+                }
+            );
+        });
+
+        it('delete the node with identifier nodeId should return 404 if the id is does not exist', (done) => {
+            nodeMock.get404DeleteNotFound();
+
+            nodesApi.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(
+                () => {},
+                (error: any) => {
+                    expect(error.status).to.be.equal(404);
+                    done();
+                }
+            );
+        });
+
+        it('delete the node with identifier nodeId should return 403 if current user does not have permission to delete', (done) => {
+            nodeMock.get403DeletePermissionDenied();
+
+            nodesApi.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(
+                () => {},
+                () => {
+                    done();
+                }
+            );
+        });
+    });
+
+    describe('Content', () => {
+        it.skip('getFileContent', (done) => {
+
+            const nodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
+
+            nodesApi.getNodeContent(nodeId).then(
+                (data: any) => {
+                    fs.writeFile('./test/grass.jpg', data, (error: any) => {
+                        if (error) {
+                            console.log(error);
+                            done();
+                        }
+                        console.log('The file was saved!');
+                        done();
+                    });
+                },
+                (error: any) => {
+                    console.error(error);
+                }
+            );
         });
     });
 });

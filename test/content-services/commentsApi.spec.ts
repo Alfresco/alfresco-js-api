@@ -1,53 +1,60 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
-let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-let CommentMock = require('../../test/mockObjects/mockAlfrescoApi').Comment;
-let expect = require('chai').expect;
+import { CommentsApi } from '../../src/api/content-rest-api';
 
-describe('Comments', function () {
+const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+const CommentMock = require('../../test/mockObjects/mockAlfrescoApi').Comment;
+const expect = require('chai').expect;
 
-    beforeEach(function (done) {
-        this.hostEcm = 'http://127.0.0.1:8080';
+describe('Comments', () => {
 
-        this.authResponseMock = new AuthResponseMock(this.hostEcm);
-        this.commentMock = new CommentMock();
+    let authResponseMock: any;
+    let commentMock: any;
+    let commentsApi: CommentsApi;
 
-        this.authResponseMock.get201Response();
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostEcm: this.hostEcm
+    beforeEach((done) => {
+        const hostEcm = 'http://127.0.0.1:8080';
+
+        authResponseMock = new AuthResponseMock(hostEcm);
+        commentMock = new CommentMock();
+
+        authResponseMock.get201Response();
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
+        commentsApi = new CommentsApi(alfrescoJsApi);
+
+        alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
     });
 
-    it('should add a comment', function (done) {
-        this.commentMock.post201Response();
+    it('should add a comment', (done) => {
+        commentMock.post201Response();
 
-        this.alfrescoJsApi.core.commentsApi.addComment('74cd8a96-8a21-47e5-9b3b-a1b3e296787d', [
+        commentsApi.createComment(
+            '74cd8a96-8a21-47e5-9b3b-a1b3e296787d',
             {
                 'content': 'This is a comment'
-            },
-            {
-                'content': 'This is another comment'
             }
-        ]).then(function (data: any) {
-            expect(data.list.entries[0].entry.content).to.be.equal('This is a comment');
+        ).then((data) => {
+            expect(data.entry.content).to.be.equal('This is a comment');
             done();
-        },      function () {
         });
     });
 
-    it('should get a comment', function (done) {
-        this.commentMock.get200Response();
+    it('should get a comment', (done) => {
+        commentMock.get200Response();
 
-        this.alfrescoJsApi.core.commentsApi.getComments('74cd8a96-8a21-47e5-9b3b-a1b3e296787d').then(function (data: any) {
-            expect(data.list.entries[0].entry.content).to.be.equal('This is another comment');
-            done();
-        },                                                                                           function () {
-        });
+        commentsApi.listComments('74cd8a96-8a21-47e5-9b3b-a1b3e296787d').then(
+            (data) => {
+                expect(data.list.entries[0].entry.content).to.be.equal('This is another comment');
+                done();
+            }
+        );
     });
 
 });
