@@ -1,61 +1,69 @@
 /*global describe, it, beforeEach, assert */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { QueriesApi } from '../../src/api/content-rest-api';
 
 let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 let FindNodesMock = require('../../test/mockObjects/mockAlfrescoApi').FindNodes;
 let expect = require('chai').expect;
 
-describe('Queries', function () {
+describe('Queries', () => {
+    let authResponseMock: any;
+    let nodesMock: any;
+    let queriesApi: QueriesApi;
 
-    beforeEach(function (done) {
-        this.hostEcm = 'http://127.0.0.1:8080';
+    beforeEach((done) => {
+        const hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock = new AuthResponseMock(this.hostEcm);
-        this.nodesMock = new FindNodesMock();
+        authResponseMock = new AuthResponseMock(hostEcm);
+        nodesMock = new FindNodesMock();
 
-        this.authResponseMock.get201Response();
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostEcm: this.hostEcm
+        authResponseMock.get201Response();
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(function () {
+        alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
+
+        queriesApi = new QueriesApi(alfrescoJsApi);
     });
 
-    describe('nodes', function () {
+    describe('nodes', () => {
 
-        let searchTerm = 'test';
+        const searchTerm = 'test';
 
-        it('should throw exception if no search term is provided', function () {
+        it('should throw exception if no search term is provided', () => {
             let badCall = () => {
-                this.alfrescoJsApi.core.queriesApi.findNodes();
+                queriesApi.findNodes(null);
             };
             expect(badCall).to.throw(`Missing param 'term'`);
         });
 
-        it('should invoke error handler on a server error', function (done) {
-            this.nodesMock.get401Response();
+        it('should invoke error handler on a server error', (done) => {
+            nodesMock.get401Response();
 
-            this.alfrescoJsApi.core.queriesApi.findNodes(searchTerm).then(function () {
-            },                                                            function () {
-                done();
-            });
+            queriesApi.findNodes(searchTerm).then(
+                () => {},
+                () => {
+                    done();
+                }
+            );
         });
 
-        it('should return query results', function (done) {
-            this.nodesMock.get200Response();
+        it('should return query results', (done) => {
+            nodesMock.get200Response();
 
-            this.alfrescoJsApi.core.queriesApi.findNodes(searchTerm).then(function (data: any) {
-                expect(data.list.pagination.count).to.be.equal(2);
-                expect(data.list.entries[0].entry.name).to.be.equal('coins1.JPG');
-                expect(data.list.entries[1].entry.name).to.be.equal('coins2.JPG');
-                done();
-            },                                                            function () {
-            });
+            queriesApi.findNodes(searchTerm).then(
+                (data) => {
+                    expect(data.list.pagination.count).to.be.equal(2);
+                    expect(data.list.entries[0].entry.name).to.be.equal('coins1.JPG');
+                    expect(data.list.entries[1].entry.name).to.be.equal('coins2.JPG');
+                    done();
+                }
+            );
         });
-
     });
-
 });

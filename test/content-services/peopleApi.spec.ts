@@ -2,56 +2,65 @@
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
 import { PersonBodyCreate } from '../../src/api/content-rest-api/model/personBodyCreate';
+import { PeopleApi } from '../../src/api/content-rest-api';
 
 let PeopleMock = require('../../test/mockObjects/mockAlfrescoApi').PeopleApi;
 let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 
-describe('PeopleApi', function () {
+describe('PeopleApi', () => {
+    let authResponseMock: any;
+    let peopleMock: any;
+    let peopleApi: PeopleApi;
 
-    beforeEach(function (done) {
-        this.hostEcm = 'http://adfdev.lab.alfresco.me';
+    beforeEach((done) => {
+        const hostEcm = 'http://adfdev.lab.alfresco.me';
 
-        this.authResponseMock = new AuthResponseMock(this.hostEcm);
-        this.peopleMock = new PeopleMock(this.hostEcm);
-        this.authResponseMock.get201Response();
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostEcm: this.hostEcm
+        authResponseMock = new AuthResponseMock(hostEcm);
+        peopleMock = new PeopleMock(hostEcm);
+        authResponseMock.get201Response();
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(function () {
+        alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
+
+        peopleApi = new PeopleApi(alfrescoJsApi);
     });
 
-    it('should add a person', function (done) {
-        this.peopleMock.get201Response();
-        let personBodyCreate: PersonBodyCreate = new PersonBodyCreate();
+    it('should add a person', (done) => {
+        peopleMock.get201Response();
 
-        personBodyCreate.id = 'chewbe';
-        personBodyCreate.email = 'chewbe@millenniumfalcon.com';
-        personBodyCreate.lastName = 'Chewbe';
-        personBodyCreate.firstName = 'chewbacca';
-        personBodyCreate.password = 'Rrrrrrrghghghghgh';
+        const payload = new PersonBodyCreate();
+        payload.id = 'chewbe';
+        payload.email = 'chewbe@millenniumfalcon.com';
+        payload.lastName = 'Chewbe';
+        payload.firstName = 'chewbacca';
+        payload.password = 'Rrrrrrrghghghghgh';
 
-        this.alfrescoJsApi.core.peopleApi.addPerson(personBodyCreate).then(function () {
-            done();
-        },                                                                 function (error: any) {
-            console.error(error);
-        });
-
+        peopleApi.createPerson(payload).then(
+            () => {
+                done();
+            },
+            (error: any) => {
+                console.error(error);
+            }
+        );
     });
 
-    it('should get list of people', function (done) {
-        this.peopleMock.get200ResponsePersons();
+    it('should get list of people', (done) => {
+        peopleMock.get200ResponsePersons();
 
-        this.alfrescoJsApi.core.peopleApi.getPersons().then(() => {
-            this.peopleMock.play();
-
-            done();
-        },                                                  (error: any) => {
-            console.error(error);
-        });
-
+        peopleApi.listPeople().then(
+            () => {
+                peopleMock.play();
+                done();
+            },
+            (error: any) => {
+                console.error(error);
+            }
+        );
     });
-
 });

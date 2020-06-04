@@ -1,55 +1,65 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { RenditionsApi } from '../../src/api/content-rest-api';
 let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 let RenditionMock = require('../../test/mockObjects/mockAlfrescoApi').Rendition;
 let expect = require('chai').expect;
 
-describe('Rendition', function () {
+describe('Rendition', () => {
+    let authResponseMock: any;
+    let renditionMock: any;
+    let renditionsApi: RenditionsApi;
 
-    beforeEach(function (done) {
-        this.hostEcm = 'http://127.0.0.1:8080';
+    beforeEach((done) => {
+        const hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock = new AuthResponseMock(this.hostEcm);
-        this.renditionMock = new RenditionMock();
+        authResponseMock = new AuthResponseMock(hostEcm);
+        renditionMock = new RenditionMock();
 
-        this.authResponseMock.get201Response();
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostEcm: this.hostEcm
+        authResponseMock.get201Response();
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
+        alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
+
+        renditionsApi = new RenditionsApi(alfrescoJsApi);
     });
 
-    it('Get Rendition', function (done) {
-        this.renditionMock.get200RenditionResponse();
+    it('Get Rendition', (done) => {
+        renditionMock.get200RenditionResponse();
 
-        this.alfrescoJsApi.core.renditionsApi.getRendition('97a29e9c-1e4f-4d9d-bb02-1ec920dda045', 'pdf').then(function (data: any) {
-            expect(data.entry.id).to.be.equal('pdf');
-            done();
-        },                                                                                                     function () {
-        });
+        renditionsApi.getRendition('97a29e9c-1e4f-4d9d-bb02-1ec920dda045', 'pdf').then(
+            (data) => {
+                expect(data.entry.id).to.be.equal('pdf');
+                done();
+            }
+        );
     });
 
-    it('Create Rendition', function (done) {
-        this.renditionMock.createRendition200();
+    it('Create Rendition', (done) => {
+        renditionMock.createRendition200();
 
-        this.alfrescoJsApi.core.renditionsApi.createRendition('97a29e9c-1e4f-4d9d-bb02-1ec920dda045', {id: 'pdf'}).then(function () {
-            done();
-        },                                                                                                              function () {
-        });
+        renditionsApi.createRendition('97a29e9c-1e4f-4d9d-bb02-1ec920dda045', {id: 'pdf'}).then(
+            () => {
+                done();
+            }
+        );
     });
 
-    it('Get Renditions list for node id', function (done) {
-        this.renditionMock.get200RenditionList();
+    it('Get Renditions list for node id', (done) => {
+        renditionMock.get200RenditionList();
 
-        this.alfrescoJsApi.core.renditionsApi.getRenditions('97a29e9c-1e4f-4d9d-bb02-1ec920dda045').then(function (data: any) {
-            expect(data.list.pagination.count).to.be.equal(6);
-            expect(data.list.entries[0].entry.id).to.be.equal('avatar');
-            done();
-        },                                                                                               function () {
-        });
+        renditionsApi.listRenditions('97a29e9c-1e4f-4d9d-bb02-1ec920dda045').then(
+            (data) => {
+                expect(data.list.pagination.count).to.be.equal(6);
+                expect(data.list.entries[0].entry.id).to.be.equal('avatar');
+                done();
+            }
+        );
     });
 });

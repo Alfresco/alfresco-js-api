@@ -1,47 +1,54 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { TagsApi } from '../../src/api/content-rest-api';
 let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 let TagMock = require('../../test/mockObjects/mockAlfrescoApi').Tag;
 let expect = require('chai').expect;
 
-describe('Tags', function () {
+describe('Tags', () => {
+    let authResponseMock: any;
+    let tagMock: any;
+    let tagsApi: TagsApi;
 
-    beforeEach(function (done) {
-        this.hostEcm = 'http://127.0.0.1:8080';
+    beforeEach((done) => {
+        const hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock = new AuthResponseMock(this.hostEcm);
-        this.tagMock = new TagMock();
+        authResponseMock = new AuthResponseMock(hostEcm);
+        tagMock = new TagMock();
 
-        this.authResponseMock.get201Response();
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostEcm: this.hostEcm
+        authResponseMock.get201Response();
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
+        alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
+
+        tagsApi = new TagsApi(alfrescoJsApi);
     });
 
-    it('tags', function (done) {
-        this.tagMock.get200Response();
+    it('tags', (done) => {
+        tagMock.get200Response();
 
-        this.alfrescoJsApi.core.tagsApi.getTags().then(function (data: any) {
+        tagsApi.listTags().then((data) => {
             expect(data.list.pagination.count).to.be.equal(2);
             expect(data.list.entries[0].entry.tag).to.be.equal('tag-test-1');
             expect(data.list.entries[1].entry.tag).to.be.equal('tag-test-2');
             done();
-        },                                             function () {
         });
     });
 
-    it('Tags 401', function (done) {
-        this.tagMock.get401Response();
+    it('Tags 401', (done) => {
+        tagMock.get401Response();
 
-        this.alfrescoJsApi.core.tagsApi.getTags().then(function () {
-        },                                             function () {
-            done();
-        });
+        tagsApi.listTags().then(
+            () => {},
+            () => {
+                done();
+            }
+        );
     });
-
 });
