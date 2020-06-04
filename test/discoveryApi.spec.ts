@@ -1,38 +1,45 @@
-/*global describe, it, beforeEach */
+import { AlfrescoApi } from '../src/alfrescoApi';
+import { DiscoveryApi } from '../src/api/discovery-rest-api';
 
-import { AlfrescoApiCompatibility } from '../src/alfrescoApiCompatibility';
-let AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-let DiscoveryMock = require('../test/mockObjects/mockAlfrescoApi').Discovery;
-let expect = require('chai').expect;
+const AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+const DiscoveryMock = require('../test/mockObjects/mockAlfrescoApi').Discovery;
+const expect = require('chai').expect;
 
-describe('Discovery', function () {
+describe('Discovery', () => {
+    let authResponseMock: any;
+    let discoveryMock: any;
+    let discoveryApi: DiscoveryApi;
 
-    beforeEach(function (done) {
-        this.hostEcm = 'http://127.0.0.1:8080';
+    beforeEach((done) => {
+        const hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock = new AuthResponseMock(this.hostEcm);
-        this.discoveryMock = new DiscoveryMock();
+        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock.get201Response();
 
-        this.authResponseMock.get201Response();
-        this.alfrescoJsApi = new AlfrescoApiCompatibility({
-            hostEcm: this.hostEcm
+        discoveryMock = new DiscoveryMock();
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
+        alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
+
+        discoveryApi = new DiscoveryApi(alfrescoJsApi);
     });
 
-    it('should getRepositoryInformation works', function (done) {
-        this.discoveryMock.get200Response();
+    it('should getRepositoryInformation works', (done) => {
+        discoveryMock.get200Response();
 
-        this.alfrescoJsApi.discovery.discoveryApi.getRepositoryInformation().then(function (data: any) {
-            expect(data.entry.repository.edition).to.be.equal('Enterprise');
-            done();
-        },                                                                        function (error: any) {
-            console.error(error);
-        });
-
+        discoveryApi.getRepositoryInformation().then(
+            (data) => {
+                expect(data.entry.repository.edition).to.be.equal('Enterprise');
+                done();
+            },
+            (error: any) => {
+                console.error(error);
+            }
+        );
     });
-
 });
