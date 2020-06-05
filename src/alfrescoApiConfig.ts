@@ -34,7 +34,7 @@ export class AlfrescoApiConfig {
     disableCsrf?: boolean = false;
     withCredentials?: boolean = false;
 
-    constructor(input?: any) {
+    constructor(input: any = { oauth2: {} }) {
         Object.assign(this, input);
 
         this.hostEcm = input.hostEcm ? input.hostEcm : 'http://127.0.0.1:8080';
