@@ -354,7 +354,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 Create version rendition
 
-**Note:** this endpoint is available in Alfresco 6.2.2 and newer versions.
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
 
 An asynchronous request to create a rendition for file **nodeId**'s **versionId**.
 
@@ -405,7 +405,7 @@ null (empty response body)
 
 Get rendition information
 
-**Note:** this endpoint is available in Alfresco 6.2.2 and newer versions.
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
 
 Gets the rendition information for **renditionId** of file **nodeId**'s **versionId**.
 
@@ -449,7 +449,7 @@ Name | Type | Description  | Notes
 
 Get rendition content
 
-**Note:** this endpoint is available in Alfresco 6.2.2 and newer versions.
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
 
 Gets the rendition content for **renditionId** of file **nodeId**'s **versionId**.
 
@@ -535,7 +535,7 @@ null (empty response body)
 
 List renditions
 
-**Note:** this endpoint is available in Alfresco 6.2.2 and newer versions.
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
 
 Gets a list of the rendition information for each rendition of the the file **nodeId**'s **versionId**, including the rendition id.
 
