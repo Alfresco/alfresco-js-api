@@ -348,3 +348,239 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**VersionEntry**](VersionEntry.md)
 
+<a name="createVersionRendition"></a>
+# **createVersionRendition**
+> createVersionRendition(nodeIdversionIdrenditionBodyCreate)
+
+Create version rendition
+
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+An asynchronous request to create a rendition for file **nodeId**'s **versionId**.
+
+The rendition is specified by name **id** in the request body:
+JSON
+{
+  \"id\":\"doclib\"
+}
+
+
+
+### Example
+```javascript
+import VersionsApi from 'VersionsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let versionsApi = new VersionsApi(this.alfrescoApi);
+
+
+versionsApi.createVersionRendition(nodeIdversionIdrenditionBodyCreate).then(() => {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **versionId** | **string**| The identifier of a version. | 
+ **renditionBodyCreate** | [**RenditionBodyCreate**](RenditionBodyCreate.md)| The rendition \"id\". | 
+
+### Return type
+
+null (empty response body)
+
+<a name="getVersionRendition"></a>
+# **getVersionRendition**
+> RenditionEntry getVersionRendition(nodeIdversionIdrenditionId)
+
+Get rendition information
+
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+Gets the rendition information for **renditionId** of file **nodeId**'s **versionId**.
+
+
+### Example
+```javascript
+import VersionsApi from 'VersionsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let versionsApi = new VersionsApi(this.alfrescoApi);
+
+
+versionsApi.getVersionRendition(nodeIdversionIdrenditionId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **versionId** | **string**| The identifier of a version. | 
+ **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
+
+### Return type
+
+[**RenditionEntry**](RenditionEntry.md)
+
+<a name="getVersionRenditionContent"></a>
+# **getVersionRenditionContent**
+> getVersionRenditionContent(nodeIdversionIdrenditionIdopts)
+
+Get rendition content
+
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+Gets the rendition content for **renditionId** of file **nodeId**'s **versionId**.
+
+
+### Example
+```javascript
+import VersionsApi from 'VersionsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let versionsApi = new VersionsApi(this.alfrescoApi);
+
+let opts = { 
+  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
+**false** means a web browser may preview the file in a new tab or window, but not
+download the file.
+
+You can only set this parameter to **false** if the content type of the file is in the supported list;
+for example, certain image files and PDF files.
+
+If the content type is not supported for preview, then a value of **false**  is ignored, and
+the attachment will be returned in the response.
+
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
+Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
+
+  'range': range_example //  | The Range header indicates the part of a document that the server should return.
+Single part request supported, for example: bytes=1-10.
+
+  'placeholder': true //  | If **true** and there is no rendition for this **nodeId** and **renditionId**,
+then the placeholder image for the mime type of this rendition is returned, rather
+than a 404 response.
+
+};
+
+versionsApi.getVersionRenditionContent(nodeIdversionIdrenditionIdopts).then(() => {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **versionId** | **string**| The identifier of a version. | 
+ **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
+ **attachment** | **boolean**| **true** enables a web browser to download the file as an attachment.
+**false** means a web browser may preview the file in a new tab or window, but not
+download the file.
+
+You can only set this parameter to **false** if the content type of the file is in the supported list;
+for example, certain image files and PDF files.
+
+If the content type is not supported for preview, then a value of **false**  is ignored, and
+the attachment will be returned in the response.
+ | [optional] [default to true]
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
+Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
+ | [optional] 
+ **range** | **string**| The Range header indicates the part of a document that the server should return.
+Single part request supported, for example: bytes=1-10.
+ | [optional] 
+ **placeholder** | **boolean**| If **true** and there is no rendition for this **nodeId** and **renditionId**,
+then the placeholder image for the mime type of this rendition is returned, rather
+than a 404 response.
+ | [optional] [default to false]
+
+### Return type
+
+null (empty response body)
+
+<a name="listVersionRenditions"></a>
+# **listVersionRenditions**
+> RenditionPaging listVersionRenditions(nodeIdversionIdopts)
+
+List renditions
+
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+Gets a list of the rendition information for each rendition of the the file **nodeId**'s **versionId**, including the rendition id.
+
+Each rendition returned has a **status**: CREATED means it is available to view or download, NOT_CREATED means the rendition can be requested.
+
+You can use the **where** parameter to filter the returned renditions by **status**. For example, the following **where**
+clause will return just the CREATED renditions:
+
+
+(status='CREATED')
+
+
+
+### Example
+```javascript
+import VersionsApi from 'VersionsApi';
+import { AlfrescoApi } from '@alfresco/js-api';
+
+this.alfrescoApi = new AlfrescoApi();
+this.alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+let versionsApi = new VersionsApi(this.alfrescoApi);
+
+let opts = { 
+  'where': where_example //  | A string to restrict the returned objects by using a predicate.
+};
+
+versionsApi.listVersionRenditions(nodeIdversionIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **versionId** | **string**| The identifier of a version. | 
+ **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
+
+### Return type
+
+[**RenditionPaging**](RenditionPaging.md)
