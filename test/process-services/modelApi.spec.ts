@@ -1,41 +1,46 @@
-/*global describe, it, beforeEach */
+import { AlfrescoApi } from '../../src/alfrescoApi';
+import { ModelsApi } from '../../src/api/activiti-rest-api';
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
-let expect = require('chai').expect;
-let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-let ModelsMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Models;
+const expect = require('chai').expect;
+const AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+const ModelsMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Models;
 
-describe('Activiti Models Api', function () {
-    beforeEach(function (done) {
-        this.hostBpm = 'http://127.0.0.1:9999';
+describe('Activiti Models Api', () => {
+    let authResponseBpmMock: any;
+    let modelsMock: any;
+    let modelsApi: ModelsApi;
 
-        this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
-        this.modelsMock = new ModelsMock(this.hostBpm);
+    beforeEach((done) => {
+        const hostBpm = 'http://127.0.0.1:9999';
 
-        this.authResponseBpmMock.get200Response();
+        authResponseBpmMock = new AuthBpmMock(hostBpm);
+        authResponseBpmMock.get200Response();
 
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostBpm: this.hostBpm,
+        modelsMock = new ModelsMock(hostBpm);
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostBpm,
             provider: 'BPM'
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
+        alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
+
+        modelsApi = new ModelsApi(alfrescoJsApi);
     });
 
-    it('get activiti model', function (done) {
-        this.modelsMock.get200getModels();
+    it('get activiti model', (done) => {
+        modelsMock.get200getModels();
 
-        let opts = {
+        const opts = {
             'filter': 'myReusableForms',
             'modelType': 2
         };
 
-        this.alfrescoJsApi.activiti.modelsApi.getModels(opts).then((data: any) => {
+        modelsApi.getModels(opts).then((data) => {
             expect(data.data[0].name).equal('Metadata');
             done();
         });
-
     });
 });

@@ -1,46 +1,58 @@
-/*global describe, it, beforeEach */
+import { AlfrescoApi } from '../../src/alfrescoApi';
+import { ModelJsonBpmnApi } from '../../src/api/activiti-rest-api';
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
-let expect = require('chai').expect;
-let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-let ModelJsonBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.ModelJsonBpmMock;
+const expect = require('chai').expect;
+const AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+const ModelJsonBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.ModelJsonBpmMock;
 
-describe('Activiti Model JsonBpmn Api', function () {
-    beforeEach(function (done) {
-        this.hostBpm = 'http://127.0.0.1:9999';
+describe('Activiti Model JsonBpmn Api', () => {
+    let authResponseBpmMock: any;
+    let modelJsonBpmMock: any;
+    let modelJsonBpmnApi: ModelJsonBpmnApi;
 
-        this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
-        this.modelJsonBpmMock = new ModelJsonBpmMock(this.hostBpm);
+    beforeEach((done) => {
+        const hostBpm = 'http://127.0.0.1:9999';
 
-        this.authResponseBpmMock.get200Response();
+        authResponseBpmMock = new AuthBpmMock(hostBpm);
+        authResponseBpmMock.get200Response();
 
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostBpm: this.hostBpm,
+        modelJsonBpmMock = new ModelJsonBpmMock(hostBpm);
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostBpm,
             provider: 'BPM'
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
+        alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
+
+        modelJsonBpmnApi = new ModelJsonBpmnApi(alfrescoJsApi);
     });
 
-    it('get Model JsonBpmn', function (done) {
-        this.modelJsonBpmMock.get200EditorDisplayJsonClient();
-        this.alfrescoJsApi.activiti.modelJsonBpmnApi.getEditorDisplayJsonClient(1).then((data: any) => {
-            expect(data).not.equal(null);
-            done();
-        },                                                                              (error: any) => {
-            console.log('error' + error);
-        });
+    it('get Model JsonBpmn', (done) => {
+        modelJsonBpmMock.get200EditorDisplayJsonClient();
+        modelJsonBpmnApi.getEditorDisplayJsonClient(1).then(
+            (data) => {
+                expect(data).not.equal(null);
+                done();
+            },
+            (error: any) => {
+                console.log('error' + error);
+            }
+        );
     });
 
-    it('get Model JsonBpmn history', function (done) {
-        this.modelJsonBpmMock.get200HistoricEditorDisplayJsonClient();
-        this.alfrescoJsApi.activiti.modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(1, 1).then((data: any) => {
-            expect(data).not.equal(null);
-            done();
-        },                                                                                         (error: any) => {
-            console.log('error' + error);
-        });
+    it('get Model JsonBpmn history', (done) => {
+        modelJsonBpmMock.get200HistoricEditorDisplayJsonClient();
+        modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(1, 1).then(
+            (data) => {
+                expect(data).not.equal(null);
+                done();
+            },
+            (error: any) => {
+                console.log('error' + error);
+            }
+        );
     });
 });

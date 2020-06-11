@@ -1,42 +1,50 @@
-/*global describe, it, beforeEach */
+import { AlfrescoApi } from '../src/alfrescoApi';
+import { SearchApi } from '../src/api/search-rest-api';
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
-let AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-let SearchMock = require('../test/mockObjects/mockAlfrescoApi').Search;
-let expect = require('chai').expect;
+const AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+const SearchMock = require('../test/mockObjects/mockAlfrescoApi').Search;
+const expect = require('chai').expect;
 
-describe('Search', function () {
+describe('Search', () => {
+    let authResponseMock: any;
+    let searchMock: any;
+    let searchApi: SearchApi;
 
-    beforeEach(function (done) {
-        this.hostEcm = 'http://127.0.0.1:8080';
+    beforeEach((done) => {
+        const hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock = new AuthResponseMock(this.hostEcm);
-        this.searchMock = new SearchMock();
+        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock.get201Response();
 
-        this.authResponseMock.get201Response();
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostEcm: this.hostEcm
+        searchMock = new SearchMock();
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
+        alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
         });
+
+        searchApi = new SearchApi(alfrescoJsApi);
     });
 
-    it('should search works', function (done) {
-        this.searchMock.get200Response();
+    it('should search works', (done) => {
+        searchMock.get200Response();
 
-        this.alfrescoJsApi.search.searchApi.search({
+        searchApi.search({
             'query': {
                 'query': 'select * from cmis:folder',
                 'language': 'cmis'
             }
-        }).then(function (data: any) {
-            expect(data.list.entries[0].entry.name).to.be.equal('user');
-            done();
-        },      function (error: any) {
-            console.error(error);
-        });
+        }).then(
+            (data: any) => {
+                expect(data.list.entries[0].entry.name).to.be.equal('user');
+                done();
+            },
+            (error: any) => {
+                console.error(error);
+            }
+        );
     });
-
 });

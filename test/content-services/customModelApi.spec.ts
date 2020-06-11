@@ -1,75 +1,89 @@
 /*global describe, it, beforeEach */
 
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { AlfrescoApi } from '../../src/alfrescoApi';
+import { CustomModelApi } from '../../src/api/content-rest-api';
 
-let AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-let CustomModelMock = require('../../test/mockObjects/mockAlfrescoApi').CustomModel;
+const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+const CustomModelMock = require('../../test/mockObjects/mockAlfrescoApi').CustomModel;
 
-describe('Custom Model Api', function () {
-    beforeEach(function (done) {
-        this.hostEcm = 'http://127.0.0.1:8080';
+describe('Custom Model Api', () => {
+    let authResponseMock: any;
+    let customModelMock: any;
+    let customModelApi: CustomModelApi;
 
-        this.authResponseMock = new AuthResponseMock(this.hostEcm);
-        this.customModelMock = new CustomModelMock(this.hostEcm);
+    beforeEach((done) => {
+        const hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock.get201Response();
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostEcm: this.hostEcm
+        authResponseMock = new AuthResponseMock(hostEcm);
+        customModelMock = new CustomModelMock(hostEcm);
+
+        authResponseMock.get201Response();
+
+        const alfrescoJsApi = new AlfrescoApi({
+            hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
-            done();
-        },                                              (error: any) => {
-            console.log('error ' + JSON.stringify(error));
-        });
+        alfrescoJsApi.login('admin', 'admin').then(
+            () => {
+                done();
+            },
+            (error: any) => {
+                console.log('error ' + JSON.stringify(error));
+            }
+        );
+
+        customModelApi = new CustomModelApi(alfrescoJsApi);
     });
 
-    describe('Get', function () {
+    describe('Get', () => {
+        it('All Custom Model', (done) => {
+            customModelMock.get200AllCustomModel();
 
-        it('All Custom Model', function (done) {
-            this.customModelMock.get200AllCustomModel();
-
-            this.alfrescoJsApi.core.customModelApi.getAllCustomModel().then(function () {
+            customModelApi.getAllCustomModel().then(
+                () => {
                     done();
                 },
-                                                                            function (error: any) {
+                (error: any) => {
                     console.log('error' + error);
                 });
         });
-
     });
 
-    describe('Create', function () {
+    describe('Create', () => {
 
-        it('createCustomModel', function (done) {
-            this.customModelMock.create201CustomModel();
+        it('createCustomModel', (done) => {
+            customModelMock.create201CustomModel();
 
-            let status = 'DRAFT';
-            let description = 'Test model description';
-            let name = 'testModel';
-            let namespaceUri = 'http://www.alfresco.org/model/testNamespace/1.0';
-            let namespacePrefix = 'test';
+            const status = 'DRAFT';
+            const description = 'Test model description';
+            const name = 'testModel';
+            const namespaceUri = 'http://www.alfresco.org/model/testNamespace/1.0';
+            const namespacePrefix = 'test';
 
-            this.alfrescoJsApi.core.customModelApi.createCustomModel(status, description, name, namespaceUri, namespacePrefix).then(function () {
-                done();
-            },                                                                                                                      function (error: any) {
-                console.log('error' + error);
-            });
+            customModelApi.createCustomModel(status, description, name, namespaceUri, namespacePrefix).then(
+                () => {
+                    done();
+                },
+                (error: any) => {
+                    console.log('error' + error);
+                }
+            );
         });
 
     });
 
-    describe('PUT', function () {
+    describe('PUT', () => {
+        it('activateCustomModel', (done) => {
+            customModelMock.activateCustomModel200();
 
-        it('activateCustomModel', function (done) {
-            this.customModelMock.activateCustomModel200();
-            let name = 'testModel';
-
-            this.alfrescoJsApi.core.customModelApi.activateCustomModel(name).then(function () {
-                done();
-            },                                                                    function (error: any) {
-                console.log('error' + error);
-            });
+            customModelApi.activateCustomModel('testModel').then(
+                () => {
+                    done();
+                },
+                (error: any) => {
+                    console.log('error' + error);
+                }
+            );
         });
 
     });
