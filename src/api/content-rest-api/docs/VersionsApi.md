@@ -350,7 +350,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 <a name="createVersionRendition"></a>
 # **createVersionRendition**
-> createVersionRendition(nodeIversionIddrenditionBodyCreate)
+> createVersionRendition(nodeIdversionIdrenditionBodyCreate)
 
 Create version rendition
 
