@@ -1,8 +1,6 @@
 const _ = require('lodash');
 const rollup = require('rollup');
-const inject = require('rollup-plugin-inject');
 const resolve = require('rollup-plugin-node-resolve');
-const tslib = require('tslib');
 const { terser } = require('rollup-plugin-terser');
 
 module.exports = async function rollupBundle(options) {
@@ -12,12 +10,6 @@ module.exports = async function rollupBundle(options) {
         input: options.input,
         plugins: [
             resolve(),
-            inject({
-                exclude: 'node_modules/**',
-                modules: _.mapValues(tslib, function(value, key) {
-                    return ['tslib', key];
-                })
-            }),
             options.minify ? terser({
                 output: {
                     comments: /@preserve/
