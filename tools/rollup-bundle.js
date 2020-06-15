@@ -1,6 +1,5 @@
 const _ = require('lodash');
 const rollup = require('rollup');
-const alias = require('rollup-plugin-alias');
 const inject = require('rollup-plugin-inject');
 const resolve = require('rollup-plugin-node-resolve');
 const tslib = require('tslib');
@@ -12,7 +11,6 @@ module.exports = async function rollupBundle(options) {
     const inputOptions = {
         input: options.input,
         plugins: [
-            alias(options.aliases),
             resolve(),
             inject({
                 exclude: 'node_modules/**',
