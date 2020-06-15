@@ -82,6 +82,23 @@ export class ContentApi extends BaseApi {
     }
 
     /**
+     * Get version's rendition URL for the given nodeId
+     *
+     * @param nodeId The ID of the document node
+     * @param versionId The ID of the version
+     * @param encoding of the document
+     * @param [attachment=false] retrieve content as an attachment for download
+     * @param [ticket] Custom ticket to use for authentication
+     * @returns The URL address pointing to the content.
+     */
+    getVersionRenditionUrl(nodeId: string, versionId: string, encoding: string, attachment?: boolean, ticket?: string): string {
+        return this.apiClient.basePath + '/nodes/' + nodeId + '/versions/' + versionId +
+            '/renditions/' + encoding + '/content' +
+            '?attachment=' + (attachment ? 'true' : 'false') +
+            this.apiClient.getAlfTicket(ticket);
+    }
+
+    /**
      * Get content url for the given shared link id
      *
      * @param linkId - The ID of the shared link
