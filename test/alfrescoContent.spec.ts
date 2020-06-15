@@ -9,6 +9,7 @@ describe('AlfrescoContent', () => {
     const nodesUrl = hostEcm + '/alfresco/api/-default-/public/alfresco/versions/1/nodes/';
     const sharedLinksUrl = hostEcm + '/alfresco/api/-default-/public/alfresco/versions/1/shared-links/';
     const nodeId = '1a0b110f-1e09-4ca2-b367-fe25e4964a4';
+    const versionId = '1.1';
 
     let authResponseMock: any;
     let contentApi: ContentApi;
@@ -124,9 +125,62 @@ describe('AlfrescoContent', () => {
         let contentUrl = contentApi.getRenditionUrl(nodeId, encoding, true, 'custom_ticket');
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId +
-            '/renditions/' + encoding +
-            '/content?attachment=true' +
-            '&alf_ticket=custom_ticket');
+                                           '/renditions/' + encoding +
+                                           '/content?attachment=true' +
+                                           '&alf_ticket=custom_ticket');
+    });
+
+    it('outputs version rendition url', () => {
+        const encoding = 'pdf';
+        let contentUrl = contentApi.getVersionRenditionUrl(nodeId, versionId, encoding);
+
+        expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
+                                           '/renditions/' + encoding +
+                                           '/content?attachment=false' +
+                                           '&alf_ticket=TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
+    });
+
+    it('outputs version rendition url as attachment', () => {
+        const encoding = 'pdf';
+        let contentUrl = contentApi.getVersionRenditionUrl(nodeId, versionId, encoding, true);
+
+        expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
+                                           '/renditions/' + encoding +
+                                           '/content?attachment=true' +
+                                           '&alf_ticket=TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
+    });
+
+    it('outputs version rendition url with custom ticket', () => {
+        const encoding = 'pdf';
+        let contentUrl = contentApi.getVersionRenditionUrl(nodeId, versionId, encoding, true, 'custom_ticket');
+
+        expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
+                                           '/renditions/' + encoding +
+                                           '/content?attachment=true' +
+                                           '&alf_ticket=custom_ticket');
+    });
+
+    it('outputs version content url', () => {
+        let contentUrl = contentApi.getVersionContentUrl(nodeId, versionId);
+
+        expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
+                                           '/content?attachment=false' +
+                                           '&alf_ticket=TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
+    });
+
+    it('outputs version content url as attachment', () => {
+        let contentUrl = contentApi.getVersionContentUrl(nodeId, versionId, true);
+
+        expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
+                                           '/content?attachment=true' +
+                                           '&alf_ticket=TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
+    });
+
+    it('outputs version content url with custom ticket', () => {
+        let contentUrl = contentApi.getVersionContentUrl(nodeId, versionId, true, 'custom_ticket');
+        expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
+                                           '/content?attachment=true' +
+                                           '&alf_ticket=custom_ticket');
     });
 
     it('should output shared link content url', () => {
