@@ -10,6 +10,7 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noImplicitReturns": true,
+        "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "suppressImplicitAnyIndexErrors": true,
         "moduleResolution": "node",
