@@ -8,6 +8,7 @@ module.exports = async function rollupBundle(options) {
 
     const inputOptions = {
         input: options.input,
+        external: ['superagent', 'minimatch', 'event-emitter'],
         plugins: [
             resolve(),
             options.minify ? terser({
@@ -27,7 +28,12 @@ module.exports = async function rollupBundle(options) {
             id: '@alfresco/js-api'
         },
         sourcemap: true,
-        sourcemapFile: `${dest}.map`
+        sourcemapFile: `${dest}.map`,
+        globals: {
+            'superagent': 'superagent',
+            'minimatch': 'minimatch',
+            'event-emitter': 'event-emitter'
+        }
     }
 
     try {
