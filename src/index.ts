@@ -15,25 +15,32 @@
  * limitations under the License.
  */
 
-export * from './api-legacy/legacy';
-export * from './api-legacy/content-rest-api/src/index';
-export * from './api-legacy/activiti-rest-api/src/index';
+export * from './api/activiti-rest-api/index';
+export * from './api/auth-rest-api/index';
 export * from './api/content-rest-api/index';
 export * from './api/discovery-rest-api/index';
 export * from './api/gs-classification-rest-api/index';
 export * from './api/gs-core-rest-api/index';
-export * from './api/auth-rest-api/index';
-export * from './api/activiti-rest-api/index';
 export * from './api/search-rest-api/index';
 
+export * from './api-legacy/activiti-rest-api/src/index';
+export * from './api-legacy/content-rest-api/src/index';
 export * from './api-legacy/alfrescoUpload';
+export * from './api-legacy/legacy';
+
+export * from './authentication/authentication';
+export * from './authentication/basicAuth';
 export * from './authentication/contentAuth';
-export * from './authentication/processAuth';
+export * from './authentication/oauth2';
 export * from './authentication/oauth2Auth';
+export * from './authentication/oauth2Config';
+export * from './authentication/processAuth';
+
+export * from './alfrescoApi';
+export * from './alfrescoApiClient';
+export * from './alfrescoApiCompatibility';
+export * from './alfrescoApiConfig';
+export * from './assert';
 export * from './contentClient';
 export * from './processClient';
 export * from './storage';
-export * from './alfrescoApi';
-export * from './alfrescoApiCompatibility';
-export * from './alfrescoApiClient';
-export * from './alfrescoApiConfig';

@@ -3,6 +3,7 @@
     "outDir": "dist",
     "module": "esnext",
     "target": "es2015",
+    "importHelpers": true,
     "lib": ["dom", "esnext"],
     "moduleResolution": "node",
     "sourceMap": true,
@@ -16,10 +17,13 @@
     "noUnusedParameters": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
 
     "strict": false,
     "strictNullChecks": false,
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist", "example", "**/*.test.tsx"]
+  "exclude": ["node_modules", "dist", "coverage", "test"]
 }
