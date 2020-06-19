@@ -23,7 +23,7 @@ import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
 import { AlfrescoApi } from '../alfrescoApi';
 import { Storage } from '../storage';
 
-// tslint:disable-next-line: no-var-requires
+// tslint:disable-next-line
 const minimatch = require('minimatch');
 
 declare let window: Window;
