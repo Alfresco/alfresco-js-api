@@ -19,10 +19,12 @@ import ee from 'event-emitter';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
-import minimatch from 'minimatch';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
 import { AlfrescoApi } from '../alfrescoApi';
 import { Storage } from '../storage';
+
+// tslint:disable-next-line
+const minimatch = require('minimatch');
 
 declare let window: Window;
 

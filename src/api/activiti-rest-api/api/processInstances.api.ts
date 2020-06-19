@@ -228,7 +228,7 @@ export class ProcessInstancesApi extends BaseApi {
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/decision-tasks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts)
+            contentTypes, accepts);
     }
      /**
      * Get historic variables for a process instance
