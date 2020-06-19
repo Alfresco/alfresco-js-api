@@ -1,5 +1,5 @@
-var PROXY_HOST_ADF = process.env.PROXY_HOST_ADF;
-var HOST = process.env.URL_HOST_ADF;
+const PROXY_HOST_ADF = process.env.PROXY_HOST_ADF;
+const HOST = process.env.URL_HOST_ADF;
 
 module.exports = {
     "/alfresco": {
