@@ -1,14 +1,25 @@
 {
-    "compilerOptions":{
-        "module": "commonjs",
-        "sourceMap": true,
-        "target": "es2015",
-        "isolatedModules": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-    }
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "esnext",
+    "target": "es2015",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+
+    "strict": false,
+    "strictNullChecks": false,
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "example", "**/*.test.tsx"]
 }

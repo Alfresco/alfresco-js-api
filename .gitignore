@@ -16,3 +16,4 @@ target
 /target
 *.d.ts
 /bundles/
+_dist
