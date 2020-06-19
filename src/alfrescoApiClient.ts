@@ -15,17 +15,13 @@
 * limitations under the License.
 */
 
-import * as ee from 'event-emitter';
+import ee from 'event-emitter';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
-
-import * as  superagent_ from 'superagent';
+import superagent, { Response, ProgressEvent } from 'superagent';
 import { Authentication } from './authentication/authentication';
 import { BasicAuth } from './authentication/basicAuth';
 import { Oauth2 } from './authentication/oauth2';
-import { Response } from 'superagent';
 
-const EventEmitter = ee;
-const superagent = superagent_;
 const process: any = {};
 
 declare const Buffer: any;
@@ -133,7 +129,7 @@ export class AlfrescoApiClient implements ee.Emitter {
     constructor(host?: string) {
         this.host = host;
 
-        EventEmitter(this);
+        ee(this);
     }
 
     /**
@@ -480,7 +476,7 @@ export class AlfrescoApiClient implements ee.Emitter {
         contextRoot?: string,
         responseType?: string, url?: string): Promise<any> {
 
-        const eventEmitter: any = EventEmitter({});
+        const eventEmitter: any = ee({});
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
             contentTypes, accepts, responseType, eventEmitter, returnType);
@@ -693,11 +689,11 @@ export class AlfrescoApiClient implements ee.Emitter {
                 if (_formParams.hasOwnProperty(key)) {
                     if (this.isFileParam(_formParams[key])) {
                         // file field
-                        request.attach(key, _formParams[key]).on('progress', (event: superagent_.ProgressEvent) => {// jshint ignore:line
+                        request.attach(key, _formParams[key]).on('progress', (event: ProgressEvent) => {// jshint ignore:line
                             this.progress(event, eventEmitter);
                         });
                     } else {
-                        request.field(key, _formParams[key]).on('progress', (event: superagent_.ProgressEvent) => {// jshint ignore:line
+                        request.field(key, _formParams[key]).on('progress', (event: ProgressEvent) => {// jshint ignore:line
                             this.progress(event, eventEmitter);
                         });
                     }
