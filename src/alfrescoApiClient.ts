@@ -17,7 +17,7 @@
 
 import ee from 'event-emitter';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
-import superagent, { Response } from 'superagent';
+import superagent, { Response, ProgressEvent } from 'superagent';
 import { Authentication } from './authentication/authentication';
 import { BasicAuth } from './authentication/basicAuth';
 import { Oauth2 } from './authentication/oauth2';
@@ -689,11 +689,11 @@ export class AlfrescoApiClient implements ee.Emitter {
                 if (_formParams.hasOwnProperty(key)) {
                     if (this.isFileParam(_formParams[key])) {
                         // file field
-                        request.attach(key, _formParams[key]).on('progress', (event: superagent.ProgressEvent) => {// jshint ignore:line
+                        request.attach(key, _formParams[key]).on('progress', (event: ProgressEvent) => {// jshint ignore:line
                             this.progress(event, eventEmitter);
                         });
                     } else {
-                        request.field(key, _formParams[key]).on('progress', (event: superagent.ProgressEvent) => {// jshint ignore:line
+                        request.field(key, _formParams[key]).on('progress', (event: ProgressEvent) => {// jshint ignore:line
                             this.progress(event, eventEmitter);
                         });
                     }
