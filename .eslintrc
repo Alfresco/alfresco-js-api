@@ -1,0 +1,34 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    // "plugin:react/recommended",
+    // "plugin:prettier/recommended",
+    // "prettier/react",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
+  },
+  "rules": {
+      "prefer-const": "warn",
+      "@typescript-eslint/no-var-requires": "warn",
+      "@typescript-eslint/no-empty-function": "warn",
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-namespace": "warn",
+      "@typescript-eslint/explicit-module-boundary-types": "warn",
+      "@typescript-eslint/no-inferrable-types": "warn",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/ban-ts-comment": "warn",
+      "@typescript-eslint/ban-types": "warn",
+      "prefer-spread": "warn",
+      "prefer-rest-params": "warn",
+      "no-var": "warn"
+  }
+}

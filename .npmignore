@@ -16,11 +16,7 @@
 /definitions
 /performance
 /scripts
-webpack.config.js
 tsconfig.json
-/.make-packages.js
-/.make-helpers.js
-/tsconfig.base.json
 /tools/
 /target/
 /.history/

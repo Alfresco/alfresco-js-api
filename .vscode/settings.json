@@ -9,5 +9,9 @@
         "site",
         "unclaim",
         "webscript"
+    ],
+    "eslint.validate": [
+      "javascript",
+      "typescript"
     ]
 }

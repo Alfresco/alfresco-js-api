@@ -1,0 +1,10 @@
+build/
+dist/
+node_modules/
+api-codegen/
+definitions/
+scripts/
+.snapshots/
+test/performance/
+test/integration/
+*.min.js

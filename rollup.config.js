@@ -8,7 +8,7 @@ import * as path from "path";
 import * as fs from "fs";
 
 const banner = fs
-    .readFileSync(path.join(__dirname, "tools", "license-header.txt"))
+    .readFileSync(path.join(__dirname, "assets", "license.txt"))
     .toString();
 
 export default [
