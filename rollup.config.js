@@ -45,7 +45,7 @@ export default [
         output: [
             {
                 name: pkg.name,
-                file: `dist/${pkg.browser}`,
+                file: `dist/alfresco-js-api.umd.js`,
                 format: "umd",
                 banner,
                 globals: {
@@ -56,12 +56,12 @@ export default [
                 sourcemap: true
             },
             {
-                file: `dist/${pkg.main}`,
+                file: `dist/alfresco-js-api.cjs.js`,
                 format: "cjs",
                 banner,
             },
             {
-                file: `dist/${pkg.module}`,
+                file: `dist/alfresco-js-api.esm.js`,
                 format: "es",
                 banner,
             },
