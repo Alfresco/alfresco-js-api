@@ -1,5 +1,9 @@
-/*global describe, it, beforeEach */
-import { AlfrescoApiCompatibility as AlfrescoApi, SaveFormRepresentation, TaskFilterRequestRepresentation, TaskRepresentation, CompleteFormRepresentation, TaskQueryRequestRepresentation } from  '../../index';
+import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { SaveFormRepresentation } from '../../src/api/activiti-rest-api/model/saveFormRepresentation';
+import { TaskFilterRequestRepresentation } from '../../src/api/activiti-rest-api/model/taskFilterRequestRepresentation';
+import { TaskRepresentation } from '../../src/api/activiti-rest-api/model/taskRepresentation';
+import { CompleteFormRepresentation } from '../../src/api/activiti-rest-api/model/completeFormRepresentation';
+import { TaskQueryRepresentation } from '../../src/api/activiti-rest-api/model/taskQueryRepresentation';
 
 let expect = require('chai').expect;
 let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
@@ -27,7 +31,7 @@ describe('Activiti Task Api', function () {
     it('get Task list', function (done) {
         this.tasksMock.get200Response();
 
-        let requestNode = new TaskQueryRequestRepresentation();
+        let requestNode = new TaskQueryRepresentation();
 
         this.alfrescoJsApi.activiti.taskApi.listTasks(requestNode).then((data: any) => {
             expect(data.data[0].processDefinitionName).equal('Process Test Api');

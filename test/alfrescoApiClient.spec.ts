@@ -1,9 +1,10 @@
 /*global describe, it */
 
-import { AlfrescoApiClient, FormValueRepresentation } from  '../index';
-import { DateAlfresco } from  '../index';
-let chai = require('chai');
+import { AlfrescoApiClient } from '../src/alfrescoApiClient';
+import { FormValueRepresentation } from '../src/api/activiti-rest-api/model/formValueRepresentation';
+import { DateAlfresco } from '../src/api/content-rest-api/model/dateAlfresco';
 
+let chai = require('chai');
 let expect = require('chai').expect;
 chai.use(require('chai-datetime'));
 
