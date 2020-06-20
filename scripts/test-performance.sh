@@ -8,8 +8,8 @@ cd $DIR/..
 cd $DIR/../test/performance/test-angular
 npm install
 
-mkdir -p $DIR/../test/performance/test-angular/node_modules/@alfresco/js-api
-cp -R $DIR/../dist/* $DIR/../test/performance/test-angular/node_modules/@alfresco/js-api
+mkdir -p ./node_modules/@alfresco/js-api
+cp -R $DIR/../dist/* ./node_modules/@alfresco/js-api
 
 npm run build:prod || exit 1
 
@@ -17,7 +17,7 @@ npm run build:prod || exit 1
 cd $DIR/../test/performance/test-webpack
 npm install
 
-mkdir -p $DIR/../test/performance/test-webpack/node_modules/@alfresco/js-api
-cp -R $DIR/../dist/* $DIR/../test/performance/test-webpack/node_modules/@alfresco/js-api
+mkdir -p ./node_modules/@alfresco/js-api
+cp -R $DIR/../dist/* ./node_modules/@alfresco/js-api
 
 npm run build || exit 1

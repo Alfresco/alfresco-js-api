@@ -6,6 +6,8 @@
     "sourceMap": true,
     "declaration": false,
     "module": "es2015",
+    "skipLibCheck": true,
+    "importHelpers": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
