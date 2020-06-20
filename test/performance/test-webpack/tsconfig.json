@@ -13,10 +13,6 @@
         "allowSyntheticDefaultImports": true,
         "target": "es5",
         "sourceRoot": "../src",
-        "paths": {
-            "@alfresco/js-api": ["../../../"],
-            "@alfresco/js-api/*": ["../../../*"]
-        },
         "typeRoots": [
             "node_modules/@types"
         ],
