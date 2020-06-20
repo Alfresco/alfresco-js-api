@@ -6,10 +6,13 @@ cd $DIR/..
 
 cat dist/package.json | grep version
 
-mkdir -p $DIR/../test/integration/test-node/node_modules/@alfresco/js-api
-cp -R $DIR/../dist/* $DIR/../test/integration/test-node/node_modules/@alfresco/js-api
+cd $DIR/../test/integration/test-node
+npm install
 
-ts-node ./test/integration/test-node/login-ecm.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" || exit 1
-ts-node ./test/integration/test-node/login-bpmn.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" || exit 1
-ts-node ./test/integration/test-node/upload-file.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" || exit 1
-ts-node ./test/integration/test-node/login-sso.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" --ssoHost "$SSO_HOST" --clientId "$CLIENT_ID" || exit 1
+mkdir -p $DIR/../test/integration/test-node/node_modules/@alfresco/js-api
+cp -R $DIR/../dist/* ./node_modules/@alfresco/js-api
+
+ts-node login-ecm.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" || exit 1
+ts-node login-bpmn.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" || exit 1
+ts-node upload-file.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" || exit 1
+ts-node login-sso.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" --ssoHost "$SSO_HOST" --clientId "$CLIENT_ID" || exit 1

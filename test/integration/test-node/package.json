@@ -1,0 +1,6 @@
+{
+  "name": "node-test",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}
