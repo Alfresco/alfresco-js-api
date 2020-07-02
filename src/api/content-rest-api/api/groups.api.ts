@@ -531,6 +531,31 @@ parameter are returned in addition to those specified in the **fields** paramete
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts, GroupPaging);
     }
+
+     /**
+        * List all groups for a specific person. The api will recursively iterate across all the available groups
+        *
+        * @param personId The identifier of a person.
+        * @param opts Optional parameters to pass skipCount maxItems and include
+        * @param accumulator The local array to accumulate all the available groups.
+        *
+    * @return Promise<GroupEntry>
+        */
+
+    async listAllGroupMembershipsForPerson(personId: string, opts?: any, accumulator = []): Promise<GroupEntry[]> {
+        const groupsPaginated = await this.listGroupMembershipsForPerson(personId, opts);
+        accumulator = [...accumulator, ...groupsPaginated.list.entries];
+        if (groupsPaginated.list.pagination.hasMoreItems) {
+            const skip = groupsPaginated.list.pagination.skipCount + groupsPaginated.list.pagination.count;
+            return this.listAllGroupMembershipsForPerson(personId, {
+                maxItems: opts.maxItems,
+                skipCount: skip
+            }, accumulator);
+        } else {
+            return accumulator;
+        }
+    }
+
     /**
         * List groups
         *
