@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **id** | **string** |  | [default to null]
 **firstName** | **string** |  | [default to null]
 **lastName** | **string** |  | [optional] [default to null]
+**displayName** | **string** |  | [optional] [default to null]
 **description** | **string** |  | [optional] [default to null]
 **avatarId** | **string** |  | [optional] [default to null]
 **email** | **string** |  | [default to null]
@@ -22,7 +23,7 @@ Name | Type | Description | Notes
 **enabled** | **boolean** |  | [default to null]
 **emailNotificationsEnabled** | **boolean** |  | [optional] [default to null]
 **aspectNames** | **string[]** |  | [optional] [default to null]
-**properties** | **{ [key: string]: string; }** |  | [optional] [default to null]
-**capabilities** | [**Capabilities**](Capabilities.md) |  | [optional] [default to null]
+**properties** | **any** |  | [optional] [default to null]
+**capabilities** | **any** |  | [optional] [default to null]
 
 

@@ -15,12 +15,13 @@
 * limitations under the License.
 */
 
+
 import { TagBody } from '../model/tagBody';
 import { TagEntry } from '../model/tagEntry';
 import { TagPaging } from '../model/tagPaging';
 import { BaseApi } from './base.api';
-import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Tags service.
@@ -29,13 +30,14 @@ import { throwIfNotDefined } from '../../../assert';
 export class TagsApi extends BaseApi {
     /**
     * Create a tag for a node
-    *
+    * 
     * Creates a tag on the node **nodeId**. You specify the tag in a JSON body like this:
 
 JSON
 {
   \"tag\":\"test-tag-1\"
 }
+
 
 **Note:** You can create more than one tag by
 specifying a list of tags in the JSON body like this:
@@ -77,7 +79,8 @@ JSON
   }
 }
 
-    *
+
+    * 
     * @param nodeId The identifier of a node.
     * @param tagBodyCreate The new tag
     * @param opts Optional parameters
@@ -95,288 +98,296 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagEntry>
     */
-    createTagForNode(nodeId: string, tagBodyCreate: TagBody|TagBody[], opts?: any): Promise<TagEntry> {
+    createTagForNode(nodeId: string, tagBodyCreate: TagBody, opts?: any) : Promise<TagEntry> {
+
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(tagBodyCreate, 'tagBodyCreate');
 
         opts = opts || {};
-        let postBody = tagBodyCreate;
+        const postBody = tagBodyCreate;
 
-        let pathParams = {
+        const pathParams = {
             'nodeId': nodeId
         };
 
-        let queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = { 
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/tags', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TagEntry);
+            contentTypes, accepts ,TagEntry)
     }
-    /**
-        * Delete a tag from a node
-        *
-        * Deletes tag **tagId** from node **nodeId**.
-        *
-        * @param nodeId The identifier of a node.
-        * @param tagId The identifier of a tag.
-        * @return Promise<{}>
-        */
-    deleteTagFromNode(nodeId: string, tagId: string): Promise<any> {
+/**
+    * Delete a tag from a node
+    * 
+    * Deletes tag **tagId** from node **nodeId**.
+    * 
+    * @param nodeId The identifier of a node.
+    * @param tagId The identifier of a tag.
+    * @return Promise<{}>
+    */
+    deleteTagFromNode(nodeId: string, tagId: string) : Promise<any> {
+
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(tagId, 'tagId');
 
-        let postBody = null;
+        
+        const postBody = null;
 
-        let pathParams = {
-            'nodeId': nodeId, 'tagId': tagId
+        const pathParams = {
+            'nodeId': nodeId,            'tagId': tagId
         };
 
-        let queryParams = {
+        const queryParams = { 
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = { 
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/tags/{tagId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts )
     }
-    /**
-        * Get a tag
-        *
-        * Get a specific tag with **tagId**.
-        *
-        * @param tagId The identifier of a tag.
-        * @param opts Optional parameters
-        * @param opts.fields A list of field names.
+/**
+    * Get a tag
+    * 
+    * Get a specific tag with **tagId**.
+    * 
+    * @param tagId The identifier of a tag.
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<TagEntry>
-        */
-    getTag(tagId: string, opts?: any): Promise<TagEntry> {
+    * @return Promise<TagEntry>
+    */
+    getTag(tagId: string, opts?: any) : Promise<TagEntry> {
+
         throwIfNotDefined(tagId, 'tagId');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'tagId': tagId
         };
 
-        let queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = { 
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/tags/{tagId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TagEntry);
+            contentTypes, accepts ,TagEntry)
     }
-    /**
-        * List tags
-        *
-        * Gets a list of tags in this repository.
+/**
+    * List tags
+    * 
+    * Gets a list of tags in this repository.
 
-    You can use the **include** parameter to return additional **values** information.
+You can use the **include** parameter to return additional **values** information.
 
-        *
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-    If not supplied then the default value is 0.
-     (default to 0)
-        * @param opts.maxItems The maximum number of items to return in the list.
-    If not supplied then the default value is 100.
-     (default to 100)
-        * @param opts.fields A list of field names.
+    * 
+    * @param opts Optional parameters
+    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+If not supplied then the default value is 0.
+ (default to 0)
+    * @param opts.maxItems The maximum number of items to return in the list.
+If not supplied then the default value is 100.
+ (default to 100)
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @param opts.include Returns additional information about the tag. The following optional fields can be requested:
-    * count
+    * @param opts.include Returns additional information about the tag. The following optional fields can be requested:
+* count
 
-        * @return Promise<TagPaging>
-        */
-    listTags(opts?: any): Promise<TagPaging> {
+    * @return Promise<TagPaging>
+    */
+    listTags(opts?: any) : Promise<TagPaging> {
+
+
         opts = opts || {};
-        let postBody = null;
+        const postBody = null;
 
-        let pathParams = {
+        const pathParams = {
 
         };
 
-        let queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv'),
             'include': buildCollectionParam(opts['include'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = { 
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/tags', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TagPaging);
+            contentTypes, accepts ,TagPaging)
     }
-    /**
-        * List tags for a node
-        *
-        * Gets a list of tags for node **nodeId**.
-        *
-        * @param nodeId The identifier of a node.
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-    If not supplied then the default value is 0.
-     (default to 0)
-        * @param opts.maxItems The maximum number of items to return in the list.
-    If not supplied then the default value is 100.
-     (default to 100)
-        * @param opts.fields A list of field names.
+/**
+    * List tags for a node
+    * 
+    * Gets a list of tags for node **nodeId**.
+    * 
+    * @param nodeId The identifier of a node.
+    * @param opts Optional parameters
+    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+If not supplied then the default value is 0.
+ (default to 0)
+    * @param opts.maxItems The maximum number of items to return in the list.
+If not supplied then the default value is 100.
+ (default to 100)
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<TagPaging>
-        */
-    listTagsForNode(nodeId: string, opts?: any): Promise<TagPaging> {
+    * @return Promise<TagPaging>
+    */
+    listTagsForNode(nodeId: string, opts?: any) : Promise<TagPaging> {
+
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'nodeId': nodeId
         };
 
-        let queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = { 
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/tags', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TagPaging);
+            contentTypes, accepts ,TagPaging)
     }
-    /**
-        * Update a tag
-        *
-        * Updates the tag **tagId**.
-        *
-        * @param tagId The identifier of a tag.
-        * @param tagBodyUpdate The updated tag
-        * @param opts Optional parameters
-        * @param opts.fields A list of field names.
+/**
+    * Update a tag
+    * 
+    * Updates the tag **tagId**.
+    * 
+    * @param tagId The identifier of a tag.
+    * @param tagBodyUpdate The updated tag
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<TagEntry>
-        */
-    updateTag(tagId: string, tagBodyUpdate: TagBody, opts?: any): Promise<TagEntry> {
+    * @return Promise<TagEntry>
+    */
+    updateTag(tagId: string, tagBodyUpdate: TagBody, opts?: any) : Promise<TagEntry> {
+
         throwIfNotDefined(tagId, 'tagId');
         throwIfNotDefined(tagBodyUpdate, 'tagBodyUpdate');
 
         opts = opts || {};
-        let postBody = tagBodyUpdate;
+        const postBody = tagBodyUpdate;
 
-        let pathParams = {
+        const pathParams = {
             'tagId': tagId
         };
 
-        let queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = { 
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/tags/{tagId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TagEntry);
+            contentTypes, accepts ,TagEntry)
     }
 
 }

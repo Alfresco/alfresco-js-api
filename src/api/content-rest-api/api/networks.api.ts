@@ -49,10 +49,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PersonNetworkEntry>
     */
     getNetwork(networkId: string, opts?: any) : Promise<PersonNetworkEntry> {
-        
-            throwIfNotDefined(networkId, 'networkId');
-        
-    
+
+        throwIfNotDefined(networkId, 'networkId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -60,15 +59,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'networkId': networkId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -105,12 +103,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PersonNetworkEntry>
     */
     getNetworkForPerson(personId: string, networkId: string, opts?: any) : Promise<PersonNetworkEntry> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-            throwIfNotDefined(networkId, 'networkId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(networkId, 'networkId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -118,15 +114,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId,            'networkId': networkId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -168,10 +163,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PersonNetworkPaging>
     */
     listNetworksForPerson(personId: string, opts?: any) : Promise<PersonNetworkPaging> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -179,15 +173,16 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

@@ -15,12 +15,13 @@
 * limitations under the License.
 */
 
+
 import { NodePaging } from '../model/nodePaging';
 import { PersonPaging } from '../model/personPaging';
 import { SitePaging } from '../model/sitePaging';
 import { BaseApi } from './base.api';
-import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Queries service.
@@ -29,7 +30,7 @@ import { throwIfNotDefined } from '../../../assert';
 export class QueriesApi extends BaseApi {
     /**
     * Find nodes
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of nodes that match the given search criteria.
@@ -50,7 +51,7 @@ You can sort the result list using the **orderBy** parameter. You can specify on
 * modifiedAt
 * createdAt
 
-    *
+    * 
     * @param term The term to search for.
     * @param opts Optional parameters
     * @param opts.rootNodeId The id of the node to start the search from.
@@ -96,17 +97,18 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodePaging>
     */
-    findNodes(term: string, opts?: any): Promise<NodePaging> {
+    findNodes(term: string, opts?: any) : Promise<NodePaging> {
+
         throwIfNotDefined(term, 'term');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody = null;
 
-        let pathParams = {
+        const pathParams = {
 
         };
 
-        let queryParams = {
+        const queryParams = { 
             'term': term,
             'rootNodeId': opts['rootNodeId'],
             'skipCount': opts['skipCount'],
@@ -117,81 +119,82 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = { 
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/queries/nodes', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, NodePaging);
+            contentTypes, accepts ,NodePaging)
     }
-    /**
-        * Find people
-        *
-        * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+/**
+    * Find people
+    * 
+    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
-    Gets a list of people that match the given search criteria.
+Gets a list of people that match the given search criteria.
 
-    The search term is used to look for matches against person id, firstname and lastname.
+The search term is used to look for matches against person id, firstname and lastname.
 
-    The search term:
-    - must contain a minimum of 2 alphanumeric characters
-    - can optionally use '*' for wildcard matching within the term
+The search term:
+- must contain a minimum of 2 alphanumeric characters
+- can optionally use '*' for wildcard matching within the term
 
-    You can sort the result list using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
-    * id
-    * firstName
-    * lastName
+You can sort the result list using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
+* id
+* firstName
+* lastName
 
-        *
-        * @param term The term to search for.
+    * 
+    * @param term The term to search for.
 
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-    If not supplied then the default value is 0.
-     (default to 0)
-        * @param opts.maxItems The maximum number of items to return in the list.
-    If not supplied then the default value is 100.
-     (default to 100)
-        * @param opts.fields A list of field names.
+    * @param opts Optional parameters
+    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+If not supplied then the default value is 0.
+ (default to 0)
+    * @param opts.maxItems The maximum number of items to return in the list.
+If not supplied then the default value is 100.
+ (default to 100)
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-    sort the list by one or more fields.
+    * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+sort the list by one or more fields.
 
-    Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-    above to check if any fields used in this method have a descending default search order.
+Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
+above to check if any fields used in this method have a descending default search order.
 
-    To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
+To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-        * @return Promise<PersonPaging>
-        */
-    findPeople(term: string, opts?: any): Promise<PersonPaging> {
+    * @return Promise<PersonPaging>
+    */
+    findPeople(term: string, opts?: any) : Promise<PersonPaging> {
+
         throwIfNotDefined(term, 'term');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody = null;
 
-        let pathParams = {
+        const pathParams = {
 
         };
 
-        let queryParams = {
+        const queryParams = { 
             'term': term,
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
@@ -199,81 +202,82 @@ parameter are returned in addition to those specified in the **fields** paramete
             'orderBy': buildCollectionParam(opts['orderBy'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = { 
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/queries/people', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, PersonPaging);
+            contentTypes, accepts ,PersonPaging)
     }
-    /**
-        * Find sites
-        *
-        * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+/**
+    * Find sites
+    * 
+    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
-    Gets a list of sites that match the given search criteria.
+Gets a list of sites that match the given search criteria.
 
-    The search term is used to look for sites that match against site id, title or description.
+The search term is used to look for sites that match against site id, title or description.
 
-    The search term:
-    - must contain a minimum of 2 alphanumeric characters
-    - can optionally use '*' for wildcard matching within the term
+The search term:
+- must contain a minimum of 2 alphanumeric characters
+- can optionally use '*' for wildcard matching within the term
 
-    The default sort order for the returned list is for sites to be sorted by ascending id.
-    You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
-    * id
-    * title
-    * description
+The default sort order for the returned list is for sites to be sorted by ascending id.
+You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
+* id
+* title
+* description
 
-        *
-        * @param term The term to search for.
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-    If not supplied then the default value is 0.
-     (default to 0)
-        * @param opts.maxItems The maximum number of items to return in the list.
-    If not supplied then the default value is 100.
-     (default to 100)
-        * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-    sort the list by one or more fields.
+    * 
+    * @param term The term to search for.
+    * @param opts Optional parameters
+    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+If not supplied then the default value is 0.
+ (default to 0)
+    * @param opts.maxItems The maximum number of items to return in the list.
+If not supplied then the default value is 100.
+ (default to 100)
+    * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+sort the list by one or more fields.
 
-    Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-    above to check if any fields used in this method have a descending default search order.
+Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
+above to check if any fields used in this method have a descending default search order.
 
-    To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
+To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-        * @param opts.fields A list of field names.
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<SitePaging>
-        */
-    findSites(term: string, opts?: any): Promise<SitePaging> {
+    * @return Promise<SitePaging>
+    */
+    findSites(term: string, opts?: any) : Promise<SitePaging> {
+
         throwIfNotDefined(term, 'term');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody = null;
 
-        let pathParams = {
+        const pathParams = {
 
         };
 
-        let queryParams = {
+        const queryParams = { 
             'term': term,
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
@@ -281,19 +285,19 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = { 
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/queries/sites', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, SitePaging);
+            contentTypes, accepts ,SitePaging)
     }
 
 }

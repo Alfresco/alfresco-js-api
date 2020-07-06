@@ -99,12 +99,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<CommentEntry>
     */
     createComment(nodeId: string, commentBodyCreate: CommentBody, opts?: any) : Promise<CommentEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(commentBodyCreate, 'commentBodyCreate');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(commentBodyCreate, 'commentBodyCreate');
+
         opts = opts || {};
         const postBody = commentBodyCreate;
 
@@ -112,15 +110,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -141,12 +138,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<{}>
     */
     deleteComment(nodeId: string, commentId: string) : Promise<any> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(commentId, 'commentId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(commentId, 'commentId');
+
         
         const postBody = null;
 
@@ -154,15 +149,13 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId,            'commentId': commentId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -201,10 +194,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<CommentPaging>
     */
     listComments(nodeId: string, opts?: any) : Promise<CommentPaging> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -212,15 +204,16 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -255,14 +248,11 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<CommentEntry>
     */
     updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: any) : Promise<CommentEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(commentId, 'commentId');
-        
-            throwIfNotDefined(commentBodyUpdate, 'commentBodyUpdate');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(commentId, 'commentId');
+        throwIfNotDefined(commentBodyUpdate, 'commentBodyUpdate');
+
         opts = opts || {};
         const postBody = commentBodyUpdate;
 
@@ -270,15 +260,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId,            'commentId': commentId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

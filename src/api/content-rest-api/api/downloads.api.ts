@@ -47,10 +47,9 @@ The cancel operation is done asynchronously.
     * @return Promise<{}>
     */
     cancelDownload(downloadId: string) : Promise<any> {
-        
-            throwIfNotDefined(downloadId, 'downloadId');
-        
-    
+
+        throwIfNotDefined(downloadId, 'downloadId');
+
         
         const postBody = null;
 
@@ -58,15 +57,13 @@ The cancel operation is done asynchronously.
             'downloadId': downloadId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -114,10 +111,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<DownloadEntry>
     */
     createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: any) : Promise<DownloadEntry> {
-        
-            throwIfNotDefined(downloadBodyCreate, 'downloadBodyCreate');
-        
-    
+
+        throwIfNotDefined(downloadBodyCreate, 'downloadBodyCreate');
+
         opts = opts || {};
         const postBody = downloadBodyCreate;
 
@@ -125,15 +121,14 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -169,10 +164,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<DownloadEntry>
     */
     getDownload(downloadId: string, opts?: any) : Promise<DownloadEntry> {
-        
-            throwIfNotDefined(downloadId, 'downloadId');
-        
-    
+
+        throwIfNotDefined(downloadId, 'downloadId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -180,15 +174,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'downloadId': downloadId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

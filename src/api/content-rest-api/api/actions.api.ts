@@ -41,10 +41,9 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     * @return Promise<ActionDefinitionEntry>
     */
     actionDetails(actionDefinitionId: string) : Promise<ActionDefinitionEntry> {
-        
-            throwIfNotDefined(actionDefinitionId, 'actionDefinitionId');
-        
-    
+
+        throwIfNotDefined(actionDefinitionId, 'actionDefinitionId');
+
         
         const postBody = null;
 
@@ -52,15 +51,13 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
             'actionDefinitionId': actionDefinitionId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -128,10 +125,9 @@ pending execution. The ID may be used, for example to correlate an execution wit
     * @return Promise<ActionExecResultEntry>
     */
     actionExec(actionBodyExec: ActionBodyExec) : Promise<ActionExecResultEntry> {
-        
-            throwIfNotDefined(actionBodyExec, 'actionBodyExec');
-        
-    
+
+        throwIfNotDefined(actionBodyExec, 'actionBodyExec');
+
         
         const postBody = actionBodyExec;
 
@@ -139,15 +135,13 @@ pending execution. The ID may be used, for example to correlate an execution wit
 
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -203,8 +197,8 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<ActionDefinitionList>
     */
     listActions(opts?: any) : Promise<ActionDefinitionList> {
-        
-    
+
+
         opts = opts || {};
         const postBody = null;
 
@@ -212,15 +206,17 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -277,10 +273,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<ActionDefinitionList>
     */
     nodeActions(nodeId: string, opts?: any) : Promise<ActionDefinitionList> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -288,15 +283,17 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

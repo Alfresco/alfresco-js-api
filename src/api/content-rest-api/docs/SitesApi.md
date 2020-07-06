@@ -30,7 +30,7 @@ Method | HTTP request | Description
 
 
 <a name="approveSiteMembershipRequest"></a>
-# **approveSiteMembershipRequest**
+## approveSiteMembershipRequest
 > approveSiteMembershipRequest(siteIdinviteeIdopts)
 
 Approve a site membership request
@@ -39,20 +39,19 @@ Approve a site membership request.
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'siteMembershipApprovalBody':  //  | Accepting a request to join, optionally, allows assignment of a role to the user.
-
+const opts = { 
+  'siteMembershipApprovalBody':  /*  | Accepting a request to join, optionally, allows assignment of a role to the user.
+ */
 };
 
 sitesApi.approveSiteMembershipRequest(siteIdinviteeIdopts).then(() => {
@@ -60,7 +59,6 @@ sitesApi.approveSiteMembershipRequest(siteIdinviteeIdopts).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -77,7 +75,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="createSite"></a>
-# **createSite**
+## createSite
 > SiteEntry createSite(siteBodyCreateopts)
 
 Create a site
@@ -110,21 +108,20 @@ This container is the root folder for content stored in the site.
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'skipConfiguration': true //  | Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.
-  'skipAddToFavorites': true //  | Flag to indicate whether the site should not be added to the user's site favorites.
-  'fields':  //  | A list of field names.
+const opts = { 
+  'skipConfiguration': true /*  | Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. */
+  'skipAddToFavorites': true /*  | Flag to indicate whether the site should not be added to the user's site favorites. */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -135,7 +132,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.createSite(siteBodyCreateopts).then((data) => {
@@ -143,7 +140,6 @@ sitesApi.createSite(siteBodyCreateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -171,7 +167,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteEntry**](SiteEntry.md)
 
 <a name="createSiteMembership"></a>
-# **createSiteMembership**
+## createSiteMembership
 > SiteMemberEntry createSiteMembership(siteIdsiteMembershipBodyCreateopts)
 
 Create a site membership
@@ -230,19 +226,18 @@ JSON
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -253,7 +248,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.createSiteMembership(siteIdsiteMembershipBodyCreateopts).then((data) => {
@@ -261,7 +256,6 @@ sitesApi.createSiteMembership(siteIdsiteMembershipBodyCreateopts).then((data) =>
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -288,7 +282,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteMemberEntry**](SiteMemberEntry.md)
 
 <a name="createSiteMembershipRequestForPerson"></a>
-# **createSiteMembershipRequestForPerson**
+## createSiteMembershipRequestForPerson
 > SiteMembershipRequestEntry createSiteMembershipRequestForPerson(personIdsiteMembershipRequestBodyCreateopts)
 
 Create a site membership request
@@ -349,19 +343,18 @@ JSON
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -372,7 +365,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.createSiteMembershipRequestForPerson(personIdsiteMembershipRequestBodyCreateopts).then((data) => {
@@ -380,7 +373,6 @@ sitesApi.createSiteMembershipRequestForPerson(personIdsiteMembershipRequestBodyC
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -407,7 +399,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteMembershipRequestEntry**](SiteMembershipRequestEntry.md)
 
 <a name="deleteSite"></a>
-# **deleteSite**
+## deleteSite
 > deleteSite(siteIdopts)
 
 Delete a site
@@ -418,19 +410,18 @@ Deletes the site with **siteId**.
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'permanent': true //  | Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan.
+const opts = { 
+  'permanent': true /*  | Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. */
 };
 
 sitesApi.deleteSite(siteIdopts).then(() => {
@@ -438,7 +429,6 @@ sitesApi.deleteSite(siteIdopts).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -453,7 +443,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="deleteSiteMembership"></a>
-# **deleteSiteMembership**
+## deleteSiteMembership
 > deleteSiteMembership(siteIdpersonId)
 
 Delete a site membership
@@ -464,16 +454,15 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
 
 sitesApi.deleteSiteMembership(siteIdpersonId).then(() => {
@@ -481,7 +470,6 @@ sitesApi.deleteSiteMembership(siteIdpersonId).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -496,7 +484,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="deleteSiteMembershipForPerson"></a>
-# **deleteSiteMembershipForPerson**
+## deleteSiteMembershipForPerson
 > deleteSiteMembershipForPerson(personIdsiteId)
 
 Delete a site membership
@@ -507,16 +495,15 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
 
 sitesApi.deleteSiteMembershipForPerson(personIdsiteId).then(() => {
@@ -524,7 +511,6 @@ sitesApi.deleteSiteMembershipForPerson(personIdsiteId).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -539,7 +525,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="deleteSiteMembershipRequestForPerson"></a>
-# **deleteSiteMembershipRequestForPerson**
+## deleteSiteMembershipRequestForPerson
 > deleteSiteMembershipRequestForPerson(personIdsiteId)
 
 Delete a site membership request
@@ -550,16 +536,15 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
 
 sitesApi.deleteSiteMembershipRequestForPerson(personIdsiteId).then(() => {
@@ -567,7 +552,6 @@ sitesApi.deleteSiteMembershipRequestForPerson(personIdsiteId).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -582,7 +566,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="getSite"></a>
-# **getSite**
+## getSite
 > SiteEntry getSite(siteIdopts)
 
 Get a site
@@ -603,20 +587,19 @@ containers,members
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'relations':  //  | Use the relations parameter to include one or more related entities in a single response.
-  'fields':  //  | A list of field names.
+const opts = { 
+  'relations':  /*  | Use the relations parameter to include one or more related entities in a single response. */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -627,7 +610,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.getSite(siteIdopts).then((data) => {
@@ -635,7 +618,6 @@ sitesApi.getSite(siteIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -662,7 +644,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteEntry**](SiteEntry.md)
 
 <a name="getSiteContainer"></a>
-# **getSiteContainer**
+## getSiteContainer
 > SiteContainerEntry getSiteContainer(siteIdcontainerIdopts)
 
 Get a site container
@@ -670,19 +652,18 @@ Get a site container
 Gets information on the container **containerId** in site **siteId**.
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -693,7 +674,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.getSiteContainer(siteIdcontainerIdopts).then((data) => {
@@ -701,7 +682,6 @@ sitesApi.getSiteContainer(siteIdcontainerIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -728,7 +708,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteContainerEntry**](SiteContainerEntry.md)
 
 <a name="getSiteMembership"></a>
-# **getSiteMembership**
+## getSiteMembership
 > SiteMemberEntry getSiteMembership(siteIdpersonIdopts)
 
 Get a site membership
@@ -739,19 +719,18 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -762,7 +741,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.getSiteMembership(siteIdpersonIdopts).then((data) => {
@@ -770,7 +749,6 @@ sitesApi.getSiteMembership(siteIdpersonIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -797,7 +775,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteMemberEntry**](SiteMemberEntry.md)
 
 <a name="getSiteMembershipForPerson"></a>
-# **getSiteMembershipForPerson**
+## getSiteMembershipForPerson
 > SiteRoleEntry getSiteMembershipForPerson(personIdsiteId)
 
 Get a site membership
@@ -808,16 +786,15 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
 
 sitesApi.getSiteMembershipForPerson(personIdsiteId).then((data) => {
@@ -825,7 +802,6 @@ sitesApi.getSiteMembershipForPerson(personIdsiteId).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -840,7 +816,7 @@ Name | Type | Description  | Notes
 [**SiteRoleEntry**](SiteRoleEntry.md)
 
 <a name="getSiteMembershipRequestForPerson"></a>
-# **getSiteMembershipRequestForPerson**
+## getSiteMembershipRequestForPerson
 > SiteMembershipRequestEntry getSiteMembershipRequestForPerson(personIdsiteIdopts)
 
 Get a site membership request
@@ -851,19 +827,18 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -874,7 +849,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.getSiteMembershipRequestForPerson(personIdsiteIdopts).then((data) => {
@@ -882,7 +857,6 @@ sitesApi.getSiteMembershipRequestForPerson(personIdsiteIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -909,7 +883,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteMembershipRequestEntry**](SiteMembershipRequestEntry.md)
 
 <a name="getSiteMembershipRequests"></a>
-# **getSiteMembershipRequests**
+## getSiteMembershipRequests
 > SiteMembershipRequestWithPersonPaging getSiteMembershipRequests(opts)
 
 Get site membership requests
@@ -936,26 +910,25 @@ where=(siteId=mySite AND personId=person))
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'where': where_example //  | A string to restrict the returned objects by using a predicate.
-  'fields':  //  | A list of field names.
+ */
+  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -966,7 +939,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.getSiteMembershipRequests(opts).then((data) => {
@@ -974,7 +947,6 @@ sitesApi.getSiteMembershipRequests(opts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1006,7 +978,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteMembershipRequestWithPersonPaging**](SiteMembershipRequestWithPersonPaging.md)
 
 <a name="listSiteContainers"></a>
-# **listSiteContainers**
+## listSiteContainers
 > SiteContainerPaging listSiteContainers(siteIdopts)
 
 List site containers
@@ -1014,25 +986,24 @@ List site containers
 Gets a list of containers for the site **siteId**.
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1043,7 +1014,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.listSiteContainers(siteIdopts).then((data) => {
@@ -1051,7 +1022,6 @@ sitesApi.listSiteContainers(siteIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1083,7 +1053,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteContainerPaging**](SiteContainerPaging.md)
 
 <a name="listSiteMembershipRequestsForPerson"></a>
-# **listSiteMembershipRequestsForPerson**
+## listSiteMembershipRequestsForPerson
 > SiteMembershipRequestPaging listSiteMembershipRequestsForPerson(personIdopts)
 
 List site membership requests
@@ -1094,25 +1064,24 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1123,7 +1092,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.listSiteMembershipRequestsForPerson(personIdopts).then((data) => {
@@ -1131,7 +1100,6 @@ sitesApi.listSiteMembershipRequestsForPerson(personIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1163,7 +1131,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteMembershipRequestPaging**](SiteMembershipRequestPaging.md)
 
 <a name="listSiteMemberships"></a>
-# **listSiteMemberships**
+## listSiteMemberships
 > SiteMemberPaging listSiteMemberships(siteIdopts)
 
 List site memberships
@@ -1171,25 +1139,24 @@ List site memberships
 Gets a list of site memberships for site **siteId**.
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1200,7 +1167,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.listSiteMemberships(siteIdopts).then((data) => {
@@ -1208,7 +1175,6 @@ sitesApi.listSiteMemberships(siteIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1240,7 +1206,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteMemberPaging**](SiteMemberPaging.md)
 
 <a name="listSiteMembershipsForPerson"></a>
-# **listSiteMembershipsForPerson**
+## listSiteMembershipsForPerson
 > SiteRolePaging listSiteMembershipsForPerson(personIdopts)
 
 List site memberships
@@ -1273,34 +1239,33 @@ You can override the default by using the **orderBy** parameter. You can specify
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ */
+  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-  'relations':  //  | Use the relations parameter to include one or more related entities in a single response.
-  'fields':  //  | A list of field names.
+ */
+  'relations':  /*  | Use the relations parameter to include one or more related entities in a single response. */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1311,8 +1276,8 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
-  'where': where_example //  | A string to restrict the returned objects by using a predicate.
+ */
+  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
 };
 
 sitesApi.listSiteMembershipsForPerson(personIdopts).then((data) => {
@@ -1320,7 +1285,6 @@ sitesApi.listSiteMembershipsForPerson(personIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1362,7 +1326,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteRolePaging**](SiteRolePaging.md)
 
 <a name="listSites"></a>
-# **listSites**
+## listSites
 > SitePaging listSites(opts)
 
 List sites
@@ -1405,34 +1369,33 @@ containers,members
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ */
+  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-  'relations':  //  | Use the relations parameter to include one or more related entities in a single response.
-  'fields':  //  | A list of field names.
+ */
+  'relations':  /*  | Use the relations parameter to include one or more related entities in a single response. */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1443,8 +1406,8 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
-  'where': where_example //  | A string to restrict the returned objects by using a predicate.
+ */
+  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
 };
 
 sitesApi.listSites(opts).then((data) => {
@@ -1452,7 +1415,6 @@ sitesApi.listSites(opts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1493,7 +1455,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SitePaging**](SitePaging.md)
 
 <a name="rejectSiteMembershipRequest"></a>
-# **rejectSiteMembershipRequest**
+## rejectSiteMembershipRequest
 > rejectSiteMembershipRequest(siteIdinviteeIdopts)
 
 Reject a site membership request
@@ -1502,20 +1464,19 @@ Reject a site membership request.
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'siteMembershipRejectionBody':  //  | Rejecting a request to join, optionally, allows the inclusion of comment.
-
+const opts = { 
+  'siteMembershipRejectionBody':  /*  | Rejecting a request to join, optionally, allows the inclusion of comment.
+ */
 };
 
 sitesApi.rejectSiteMembershipRequest(siteIdinviteeIdopts).then(() => {
@@ -1523,7 +1484,6 @@ sitesApi.rejectSiteMembershipRequest(siteIdinviteeIdopts).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1540,7 +1500,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="updateSite"></a>
-# **updateSite**
+## updateSite
 > SiteEntry updateSite(siteIdsiteBodyUpdateopts)
 
 Update a site
@@ -1554,19 +1514,18 @@ Note: the id of a site cannot be updated once the site has been created.
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1577,7 +1536,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.updateSite(siteIdsiteBodyUpdateopts).then((data) => {
@@ -1585,7 +1544,6 @@ sitesApi.updateSite(siteIdsiteBodyUpdateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1612,7 +1570,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteEntry**](SiteEntry.md)
 
 <a name="updateSiteMembership"></a>
-# **updateSiteMembership**
+## updateSiteMembership
 > SiteMemberEntry updateSiteMembership(siteIdpersonIdsiteMembershipBodyUpdateopts)
 
 Update a site membership
@@ -1630,19 +1588,18 @@ You can set the **role** to one of four types:
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1653,7 +1610,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.updateSiteMembership(siteIdpersonIdsiteMembershipBodyUpdateopts).then((data) => {
@@ -1661,7 +1618,6 @@ sitesApi.updateSiteMembership(siteIdpersonIdsiteMembershipBodyUpdateopts).then((
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1689,7 +1645,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**SiteMemberEntry**](SiteMemberEntry.md)
 
 <a name="updateSiteMembershipRequestForPerson"></a>
-# **updateSiteMembershipRequestForPerson**
+## updateSiteMembershipRequestForPerson
 > SiteMembershipRequestEntry updateSiteMembershipRequestForPerson(personIdsiteIdsiteMembershipRequestBodyUpdateopts)
 
 Update a site membership request
@@ -1700,19 +1656,18 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
 
 ### Example
-```javascript
-import SitesApi from 'SitesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let sitesApi = new SitesApi(this.alfrescoApi);
+const sitesApi = new SitesApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1723,7 +1678,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 sitesApi.updateSiteMembershipRequestForPerson(personIdsiteIdsiteMembershipRequestBodyUpdateopts).then((data) => {
@@ -1731,7 +1686,6 @@ sitesApi.updateSiteMembershipRequestForPerson(personIdsiteIdsiteMembershipReques
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters

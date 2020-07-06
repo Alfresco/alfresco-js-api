@@ -82,12 +82,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeEntry>
     */
     copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts?: any) : Promise<NodeEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(nodeBodyCopy, 'nodeBodyCopy');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(nodeBodyCopy, 'nodeBodyCopy');
+
         opts = opts || {};
         const postBody = nodeBodyCopy;
 
@@ -95,15 +93,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -183,12 +181,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<AssociationEntry>
     */
     createAssociation(nodeId: string, associationBodyCreate: AssociationBody, opts?: any) : Promise<AssociationEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(associationBodyCreate, 'associationBodyCreate');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(associationBodyCreate, 'associationBodyCreate');
+
         opts = opts || {};
         const postBody = associationBodyCreate;
 
@@ -196,15 +192,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -454,12 +449,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeEntry>
     */
     createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: any) : Promise<NodeEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
+
         opts = opts || {};
         const postBody = nodeBodyCreate;
 
@@ -467,15 +460,16 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'autoRename': opts['autoRename'],            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'autoRename': opts['autoRename'],
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json', 'multipart/form-data'];
@@ -555,12 +549,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<ChildAssociationEntry>
     */
     createSecondaryChildAssociation(nodeId: string, secondaryChildAssociationBodyCreate: ChildAssociationBody, opts?: any) : Promise<ChildAssociationEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(secondaryChildAssociationBodyCreate, 'secondaryChildAssociationBodyCreate');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(secondaryChildAssociationBodyCreate, 'secondaryChildAssociationBodyCreate');
+
         opts = opts || {};
         const postBody = secondaryChildAssociationBodyCreate;
 
@@ -568,15 +560,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -608,12 +599,10 @@ in the other direction.
     * @return Promise<{}>
     */
     deleteAssociation(nodeId: string, targetId: string, opts?: any) : Promise<any> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(targetId, 'targetId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(targetId, 'targetId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -621,15 +610,14 @@ in the other direction.
             'nodeId': nodeId,            'targetId': targetId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'assocType': opts['assocType']
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -668,10 +656,9 @@ Only the owner of the node or an admin can permanently delete the node.
     * @return Promise<{}>
     */
     deleteNode(nodeId: string, opts?: any) : Promise<any> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -679,15 +666,14 @@ Only the owner of the node or an admin can permanently delete the node.
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'permanent': opts['permanent']
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -717,12 +703,10 @@ associated as a secondary child with other secondary parents.
     * @return Promise<{}>
     */
     deleteSecondaryChildAssociation(nodeId: string, childId: string, opts?: any) : Promise<any> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(childId, 'childId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(childId, 'childId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -730,15 +714,14 @@ associated as a secondary child with other secondary parents.
             'nodeId': nodeId,            'childId': childId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'assocType': opts['assocType']
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -793,10 +776,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeEntry>
     */
     getNode(nodeId: string, opts?: any) : Promise<NodeEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -804,15 +786,16 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),            'relativePath': opts['relativePath'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'relativePath': opts['relativePath'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -852,10 +835,9 @@ Single part request supported, for example: bytes=1-10.
     * @return Promise<Blob>
     */
     getNodeContent(nodeId: string, opts?: any) : Promise<Blob> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -863,15 +845,14 @@ Single part request supported, for example: bytes=1-10.
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'attachment': opts['attachment']
         };
 
         const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -981,10 +962,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeChildAssociationPaging>
     */
     listNodeChildren(nodeId: string, opts?: any) : Promise<NodeChildAssociationPaging> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -992,15 +972,21 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),            'where': opts['where'],            'include': buildCollectionParam(opts['include'], 'csv'),            'relativePath': opts['relativePath'],            'includeSource': opts['includeSource'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'where': opts['where'],
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'relativePath': opts['relativePath'],
+            'includeSource': opts['includeSource'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1066,10 +1052,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeAssociationPaging>
     */
     listParents(nodeId: string, opts?: any) : Promise<NodeAssociationPaging> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -1077,15 +1062,19 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'where': opts['where'],            'include': buildCollectionParam(opts['include'], 'csv'),            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'includeSource': opts['includeSource'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'where': opts['where'],
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'includeSource': opts['includeSource'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1145,10 +1134,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeChildAssociationPaging>
     */
     listSecondaryChildren(nodeId: string, opts?: any) : Promise<NodeChildAssociationPaging> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -1156,15 +1144,19 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'where': opts['where'],            'include': buildCollectionParam(opts['include'], 'csv'),            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'includeSource': opts['includeSource'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'where': opts['where'],
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'includeSource': opts['includeSource'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1213,10 +1205,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeAssociationPaging>
     */
     listSourceAssociations(nodeId: string, opts?: any) : Promise<NodeAssociationPaging> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -1224,15 +1215,16 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'where': opts['where'],            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'where': opts['where'],
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1281,10 +1273,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeAssociationPaging>
     */
     listTargetAssociations(nodeId: string, opts?: any) : Promise<NodeAssociationPaging> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -1292,15 +1283,16 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'where': opts['where'],            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'where': opts['where'],
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1370,12 +1362,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeEntry>
     */
     lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: any) : Promise<NodeEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(nodeBodyLock, 'nodeBodyLock');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(nodeBodyLock, 'nodeBodyLock');
+
         opts = opts || {};
         const postBody = nodeBodyLock;
 
@@ -1383,15 +1373,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1446,12 +1436,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeEntry>
     */
     moveNode(nodeId: string, nodeBodyMove: NodeBodyMove, opts?: any) : Promise<NodeEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(nodeBodyMove, 'nodeBodyMove');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(nodeBodyMove, 'nodeBodyMove');
+
         opts = opts || {};
         const postBody = nodeBodyMove;
 
@@ -1459,15 +1447,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1511,10 +1499,9 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
     * @return Promise<DirectAccessUrlEntry>
     */
     requestContentUrl(nodeId: string, opts?: any) : Promise<DirectAccessUrlEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = opts['requestContentUrlBodyCreate'];
 
@@ -1522,15 +1509,13 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
             'nodeId': nodeId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1575,12 +1560,10 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
     * @return Promise<DirectAccessUrlEntry>
     */
     requestContentUrl_1(nodeId: string, renditionId: string, opts?: any) : Promise<DirectAccessUrlEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(renditionId, 'renditionId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(renditionId, 'renditionId');
+
         opts = opts || {};
         const postBody = opts['requestContentUrlBodyCreate'];
 
@@ -1588,15 +1571,13 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
             'nodeId': nodeId,            'renditionId': renditionId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1641,12 +1622,10 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
     * @return Promise<DirectAccessUrlEntry>
     */
     requestContentUrl_2(nodeId: string, versionId: string, opts?: any) : Promise<DirectAccessUrlEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(versionId, 'versionId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(versionId, 'versionId');
+
         opts = opts || {};
         const postBody = opts['requestContentUrlBodyCreate'];
 
@@ -1654,15 +1633,13 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
             'nodeId': nodeId,            'versionId': versionId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1708,14 +1685,11 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
     * @return Promise<DirectAccessUrlEntry>
     */
     requestContentUrl_3(nodeId: string, versionId: string, renditionId: string, opts?: any) : Promise<DirectAccessUrlEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(versionId, 'versionId');
-        
-            throwIfNotDefined(renditionId, 'renditionId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(versionId, 'versionId');
+        throwIfNotDefined(renditionId, 'renditionId');
+
         opts = opts || {};
         const postBody = opts['requestContentUrlBodyCreate'];
 
@@ -1723,15 +1697,13 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
             'nodeId': nodeId,            'versionId': versionId,            'renditionId': renditionId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1781,10 +1753,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeEntry>
     */
     unlockNode(nodeId: string, opts?: any) : Promise<NodeEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -1792,15 +1763,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1900,12 +1871,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeEntry>
     */
     updateNode(nodeId: string, nodeBodyUpdate: NodeBodyUpdate, opts?: any) : Promise<NodeEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(nodeBodyUpdate, 'nodeBodyUpdate');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(nodeBodyUpdate, 'nodeBodyUpdate');
+
         opts = opts || {};
         const postBody = nodeBodyUpdate;
 
@@ -1913,15 +1882,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -1990,12 +1959,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeEntry>
     */
     updateNodeContent(nodeId: string, contentBodyUpdate: string, opts?: any) : Promise<NodeEntry> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-            throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
+
         opts = opts || {};
         const postBody = contentBodyUpdate;
 
@@ -2003,15 +1970,18 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'majorVersion': opts['majorVersion'],            'comment': opts['comment'],            'name': opts['name'],            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'majorVersion': opts['majorVersion'],
+            'comment': opts['comment'],
+            'name': opts['name'],
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/octet-stream'];

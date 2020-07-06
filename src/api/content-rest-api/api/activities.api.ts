@@ -60,10 +60,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<ActivityPaging>
     */
     listActivitiesForPerson(personId: string, opts?: any) : Promise<ActivityPaging> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -71,15 +70,18 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'who': opts['who'],            'siteId': opts['siteId'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'who': opts['who'],
+            'siteId': opts['siteId'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

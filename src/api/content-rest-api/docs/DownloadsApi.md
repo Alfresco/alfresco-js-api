@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 <a name="cancelDownload"></a>
-# **cancelDownload**
+## cancelDownload
 > cancelDownload(downloadId)
 
 Cancel a download
@@ -29,16 +29,15 @@ The cancel operation is done asynchronously.
 
 
 ### Example
-```javascript
-import DownloadsApi from 'DownloadsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, DownloadsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let downloadsApi = new DownloadsApi(this.alfrescoApi);
+const downloadsApi = new DownloadsApi(alfrescoApi);
 
 
 downloadsApi.cancelDownload(downloadId).then(() => {
@@ -46,7 +45,6 @@ downloadsApi.cancelDownload(downloadId).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -60,7 +58,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="createDownload"></a>
-# **createDownload**
+## createDownload
 > DownloadEntry createDownload(downloadBodyCreateopts)
 
 Create a new download
@@ -83,19 +81,18 @@ JSON
 
 
 ### Example
-```javascript
-import DownloadsApi from 'DownloadsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, DownloadsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let downloadsApi = new DownloadsApi(this.alfrescoApi);
+const downloadsApi = new DownloadsApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -106,7 +103,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 downloadsApi.createDownload(downloadBodyCreateopts).then((data) => {
@@ -114,7 +111,6 @@ downloadsApi.createDownload(downloadBodyCreateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -140,7 +136,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**DownloadEntry**](DownloadEntry.md)
 
 <a name="getDownload"></a>
-# **getDownload**
+## getDownload
 > DownloadEntry getDownload(downloadIdopts)
 
 Get a download
@@ -151,19 +147,18 @@ Retrieve status information for download node **downloadId**
 
 
 ### Example
-```javascript
-import DownloadsApi from 'DownloadsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, DownloadsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let downloadsApi = new DownloadsApi(this.alfrescoApi);
+const downloadsApi = new DownloadsApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -174,7 +169,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 downloadsApi.getDownload(downloadIdopts).then((data) => {
@@ -182,7 +177,6 @@ downloadsApi.getDownload(downloadIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters

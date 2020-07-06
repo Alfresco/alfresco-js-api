@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 <a name="createTagForNode"></a>
-# **createTagForNode**
+## createTagForNode
 > TagEntry createTagForNode(nodeIdtagBodyCreateopts)
 
 Create a tag for a node
@@ -69,19 +69,18 @@ JSON
 
 
 ### Example
-```javascript
-import TagsApi from 'TagsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TagsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let tagsApi = new TagsApi(this.alfrescoApi);
+const tagsApi = new TagsApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -92,7 +91,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 tagsApi.createTagForNode(nodeIdtagBodyCreateopts).then((data) => {
@@ -100,7 +99,6 @@ tagsApi.createTagForNode(nodeIdtagBodyCreateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -127,7 +125,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**TagEntry**](TagEntry.md)
 
 <a name="deleteTagFromNode"></a>
-# **deleteTagFromNode**
+## deleteTagFromNode
 > deleteTagFromNode(nodeIdtagId)
 
 Delete a tag from a node
@@ -135,16 +133,15 @@ Delete a tag from a node
 Deletes tag **tagId** from node **nodeId**.
 
 ### Example
-```javascript
-import TagsApi from 'TagsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TagsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let tagsApi = new TagsApi(this.alfrescoApi);
+const tagsApi = new TagsApi(alfrescoApi);
 
 
 tagsApi.deleteTagFromNode(nodeIdtagId).then(() => {
@@ -152,7 +149,6 @@ tagsApi.deleteTagFromNode(nodeIdtagId).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -167,7 +163,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="getTag"></a>
-# **getTag**
+## getTag
 > TagEntry getTag(tagIdopts)
 
 Get a tag
@@ -175,19 +171,18 @@ Get a tag
 Get a specific tag with **tagId**.
 
 ### Example
-```javascript
-import TagsApi from 'TagsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TagsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let tagsApi = new TagsApi(this.alfrescoApi);
+const tagsApi = new TagsApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -198,7 +193,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 tagsApi.getTag(tagIdopts).then((data) => {
@@ -206,7 +201,6 @@ tagsApi.getTag(tagIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -232,7 +226,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**TagEntry**](TagEntry.md)
 
 <a name="listTags"></a>
-# **listTags**
+## listTags
 > TagPaging listTags(opts)
 
 List tags
@@ -243,25 +237,24 @@ You can use the **include** parameter to return additional **values** informatio
 
 
 ### Example
-```javascript
-import TagsApi from 'TagsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TagsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let tagsApi = new TagsApi(this.alfrescoApi);
+const tagsApi = new TagsApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -272,10 +265,10 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
-  'include':  //  | Returns additional information about the tag. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the tag. The following optional fields can be requested:
 * count
-
+ */
 };
 
 tagsApi.listTags(opts).then((data) => {
@@ -283,7 +276,6 @@ tagsApi.listTags(opts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -317,7 +309,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**TagPaging**](TagPaging.md)
 
 <a name="listTagsForNode"></a>
-# **listTagsForNode**
+## listTagsForNode
 > TagPaging listTagsForNode(nodeIdopts)
 
 List tags for a node
@@ -325,25 +317,24 @@ List tags for a node
 Gets a list of tags for node **nodeId**.
 
 ### Example
-```javascript
-import TagsApi from 'TagsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TagsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let tagsApi = new TagsApi(this.alfrescoApi);
+const tagsApi = new TagsApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -354,7 +345,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 tagsApi.listTagsForNode(nodeIdopts).then((data) => {
@@ -362,7 +353,6 @@ tagsApi.listTagsForNode(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -394,7 +384,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**TagPaging**](TagPaging.md)
 
 <a name="updateTag"></a>
-# **updateTag**
+## updateTag
 > TagEntry updateTag(tagIdtagBodyUpdateopts)
 
 Update a tag
@@ -402,19 +392,18 @@ Update a tag
 Updates the tag **tagId**.
 
 ### Example
-```javascript
-import TagsApi from 'TagsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TagsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let tagsApi = new TagsApi(this.alfrescoApi);
+const tagsApi = new TagsApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -425,7 +414,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 tagsApi.updateTag(tagIdtagBodyUpdateopts).then((data) => {
@@ -433,7 +422,6 @@ tagsApi.updateTag(tagIdtagBodyUpdateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters

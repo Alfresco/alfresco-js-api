@@ -21,6 +21,6 @@ Name | Type | Description | Notes
 **password** | **string** |  | [optional] [default to null]
 **oldPassword** | **string** |  | [optional] [default to null]
 **aspectNames** | **string[]** |  | [optional] [default to null]
-**properties** | **{ [key: string]: string; }** |  | [optional] [default to null]
+**properties** | **any** |  | [optional] [default to null]
 
 

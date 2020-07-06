@@ -74,10 +74,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<GroupEntry>
     */
     createGroup(groupBodyCreate: GroupBodyCreate, opts?: any) : Promise<GroupEntry> {
-        
-            throwIfNotDefined(groupBodyCreate, 'groupBodyCreate');
-        
-    
+
+        throwIfNotDefined(groupBodyCreate, 'groupBodyCreate');
+
         opts = opts || {};
         const postBody = groupBodyCreate;
 
@@ -85,15 +84,15 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -136,12 +135,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<GroupMemberEntry>
     */
     createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts?: any) : Promise<GroupMemberEntry> {
-        
-            throwIfNotDefined(groupId, 'groupId');
-        
-            throwIfNotDefined(groupMembershipBodyCreate, 'groupMembershipBodyCreate');
-        
-    
+
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(groupMembershipBodyCreate, 'groupMembershipBodyCreate');
+
         opts = opts || {};
         const postBody = groupMembershipBodyCreate;
 
@@ -149,15 +146,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'groupId': groupId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -189,10 +185,9 @@ You must have admin rights to delete a group.
     * @return Promise<{}>
     */
     deleteGroup(groupId: string, opts?: any) : Promise<any> {
-        
-            throwIfNotDefined(groupId, 'groupId');
-        
-    
+
+        throwIfNotDefined(groupId, 'groupId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -200,15 +195,14 @@ You must have admin rights to delete a group.
             'groupId': groupId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'cascade': opts['cascade']
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -238,12 +232,10 @@ You must have admin rights to delete a group membership.
     * @return Promise<{}>
     */
     deleteGroupMembership(groupId: string, groupMemberId: string) : Promise<any> {
-        
-            throwIfNotDefined(groupId, 'groupId');
-        
-            throwIfNotDefined(groupMemberId, 'groupMemberId');
-        
-    
+
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(groupMemberId, 'groupMemberId');
+
         
         const postBody = null;
 
@@ -251,15 +243,13 @@ You must have admin rights to delete a group membership.
             'groupId': groupId,            'groupMemberId': groupMemberId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -301,10 +291,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<GroupEntry>
     */
     getGroup(groupId: string, opts?: any) : Promise<GroupEntry> {
-        
-            throwIfNotDefined(groupId, 'groupId');
-        
-    
+
+        throwIfNotDefined(groupId, 'groupId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -312,15 +301,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'groupId': groupId
         };
 
-        const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -385,10 +374,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<GroupMemberPaging>
     */
     listGroupMemberships(groupId: string, opts?: any) : Promise<GroupMemberPaging> {
-        
-            throwIfNotDefined(groupId, 'groupId');
-        
-    
+
+        throwIfNotDefined(groupId, 'groupId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -396,15 +384,18 @@ parameter are returned in addition to those specified in the **fields** paramete
             'groupId': groupId
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),            'where': opts['where'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'where': opts['where'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -495,10 +486,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<GroupPaging>
     */
     listGroupMembershipsForPerson(personId: string, opts?: any) : Promise<GroupPaging> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -506,15 +496,19 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),            'include': buildCollectionParam(opts['include'], 'csv'),            'where': opts['where'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'where': opts['where'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -601,8 +595,8 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<GroupPaging>
     */
     listGroups(opts?: any) : Promise<GroupPaging> {
-        
-    
+
+
         opts = opts || {};
         const postBody = null;
 
@@ -610,15 +604,19 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),            'include': buildCollectionParam(opts['include'], 'csv'),            'where': opts['where'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'where': opts['where'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -661,12 +659,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<GroupEntry>
     */
     updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts?: any) : Promise<GroupEntry> {
-        
-            throwIfNotDefined(groupId, 'groupId');
-        
-            throwIfNotDefined(groupBodyUpdate, 'groupBodyUpdate');
-        
-    
+
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(groupBodyUpdate, 'groupBodyUpdate');
+
         opts = opts || {};
         const postBody = groupBodyUpdate;
 
@@ -674,15 +670,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'groupId': groupId
         };
 
-        const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

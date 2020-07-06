@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [default to null]
+**title** | **string** |  | [default to null]
 **content** | **string** |  | [default to null]
 **createdBy** | [**Person**](Person.md) |  | [default to null]
 **createdAt** | [**Date**](Date.md) |  | [default to null]

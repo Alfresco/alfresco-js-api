@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 <a name="createGroup"></a>
-# **createGroup**
+## createGroup
 > GroupEntry createGroup(groupBodyCreateopts)
 
 Create a group
@@ -40,23 +40,22 @@ You must have admin rights to create a group.
 
 
 ### Example
-```javascript
-import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, GroupsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let groupsApi = new GroupsApi(this.alfrescoApi);
+const groupsApi = new GroupsApi(alfrescoApi);
 
-let opts = { 
-  'include':  //  | Returns additional information about the group. The following optional fields can be requested:
+const opts = { 
+  'include':  /*  | Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -67,7 +66,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 groupsApi.createGroup(groupBodyCreateopts).then((data) => {
@@ -75,7 +74,6 @@ groupsApi.createGroup(groupBodyCreateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -105,7 +103,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**GroupEntry**](GroupEntry.md)
 
 <a name="createGroupMembership"></a>
-# **createGroupMembership**
+## createGroupMembership
 > GroupMemberEntry createGroupMembership(groupIdgroupMembershipBodyCreateopts)
 
 Create a group membership
@@ -122,19 +120,18 @@ You must have admin rights to create a group membership.
 
 
 ### Example
-```javascript
-import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, GroupsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let groupsApi = new GroupsApi(this.alfrescoApi);
+const groupsApi = new GroupsApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -145,7 +142,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 groupsApi.createGroupMembership(groupIdgroupMembershipBodyCreateopts).then((data) => {
@@ -153,7 +150,6 @@ groupsApi.createGroupMembership(groupIdgroupMembershipBodyCreateopts).then((data
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -180,7 +176,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**GroupMemberEntry**](GroupMemberEntry.md)
 
 <a name="deleteGroup"></a>
-# **deleteGroup**
+## deleteGroup
 > deleteGroup(groupIdopts)
 
 Delete a group
@@ -197,20 +193,19 @@ You must have admin rights to delete a group.
 
 
 ### Example
-```javascript
-import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, GroupsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let groupsApi = new GroupsApi(this.alfrescoApi);
+const groupsApi = new GroupsApi(alfrescoApi);
 
-let opts = { 
-  'cascade': true //  | If **true** then the delete will be applied in cascade to sub-groups.
-
+const opts = { 
+  'cascade': true /*  | If **true** then the delete will be applied in cascade to sub-groups.
+ */
 };
 
 groupsApi.deleteGroup(groupIdopts).then(() => {
@@ -218,7 +213,6 @@ groupsApi.deleteGroup(groupIdopts).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -234,7 +228,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="deleteGroupMembership"></a>
-# **deleteGroupMembership**
+## deleteGroupMembership
 > deleteGroupMembership(groupIdgroupMemberId)
 
 Delete a group membership
@@ -251,16 +245,15 @@ You must have admin rights to delete a group membership.
 
 
 ### Example
-```javascript
-import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, GroupsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let groupsApi = new GroupsApi(this.alfrescoApi);
+const groupsApi = new GroupsApi(alfrescoApi);
 
 
 groupsApi.deleteGroupMembership(groupIdgroupMemberId).then(() => {
@@ -268,7 +261,6 @@ groupsApi.deleteGroupMembership(groupIdgroupMemberId).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -283,7 +275,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="getGroup"></a>
-# **getGroup**
+## getGroup
 > GroupEntry getGroup(groupIdopts)
 
 Get group details
@@ -296,23 +288,22 @@ You can use the **include** parameter to return additional information.
 
 
 ### Example
-```javascript
-import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, GroupsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let groupsApi = new GroupsApi(this.alfrescoApi);
+const groupsApi = new GroupsApi(alfrescoApi);
 
-let opts = { 
-  'include':  //  | Returns additional information about the group. The following optional fields can be requested:
+const opts = { 
+  'include':  /*  | Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -323,7 +314,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 groupsApi.getGroup(groupIdopts).then((data) => {
@@ -331,7 +322,6 @@ groupsApi.getGroup(groupIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -361,7 +351,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**GroupEntry**](GroupEntry.md)
 
 <a name="listGroupMemberships"></a>
-# **listGroupMemberships**
+## listGroupMemberships
 > GroupMemberPaging listGroupMemberships(groupIdopts)
 
 List memberships of a group
@@ -386,34 +376,33 @@ You can override the default by using the **orderBy** parameter. You can specify
 
 
 ### Example
-```javascript
-import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, GroupsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let groupsApi = new GroupsApi(this.alfrescoApi);
+const groupsApi = new GroupsApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ */
+  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-  'where': where_example //  | A string to restrict the returned objects by using a predicate.
-  'fields':  //  | A list of field names.
+ */
+  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -424,7 +413,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 groupsApi.listGroupMemberships(groupIdopts).then((data) => {
@@ -432,7 +421,6 @@ groupsApi.listGroupMemberships(groupIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -473,7 +461,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**GroupMemberPaging**](GroupMemberPaging.md)
 
 <a name="listGroupMembershipsForPerson"></a>
-# **listGroupMembershipsForPerson**
+## listGroupMembershipsForPerson
 > GroupPaging listGroupMembershipsForPerson(personIdopts)
 
 List group memberships
@@ -520,38 +508,37 @@ List group memberships
 
 
 ### Example
-```javascript
-import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, GroupsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let groupsApi = new GroupsApi(this.alfrescoApi);
+const groupsApi = new GroupsApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ */
+  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-  'include':  //  | Returns additional information about the group. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
-
-  'where': where_example //  | A string to restrict the returned objects by using a predicate.
-  'fields':  //  | A list of field names.
+ */
+  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -562,7 +549,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 groupsApi.listGroupMembershipsForPerson(personIdopts).then((data) => {
@@ -570,7 +557,6 @@ groupsApi.listGroupMembershipsForPerson(personIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -615,7 +601,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**GroupPaging**](GroupPaging.md)
 
 <a name="listGroups"></a>
-# **listGroups**
+## listGroups
 > GroupPaging listGroups(opts)
 
 List groups
@@ -659,38 +645,37 @@ You can override the default by using the **orderBy** parameter. You can specify
 
 
 ### Example
-```javascript
-import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, GroupsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let groupsApi = new GroupsApi(this.alfrescoApi);
+const groupsApi = new GroupsApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ */
+  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-  'include':  //  | Returns additional information about the group. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
-
-  'where': where_example //  | A string to restrict the returned objects by using a predicate.
-  'fields':  //  | A list of field names.
+ */
+  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -701,7 +686,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 groupsApi.listGroups(opts).then((data) => {
@@ -709,7 +694,6 @@ groupsApi.listGroups(opts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -753,7 +737,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**GroupPaging**](GroupPaging.md)
 
 <a name="updateGroup"></a>
-# **updateGroup**
+## updateGroup
 > GroupEntry updateGroup(groupIdgroupBodyUpdateopts)
 
 Update group details
@@ -766,23 +750,22 @@ You must have admin rights to update a group.
 
 
 ### Example
-```javascript
-import GroupsApi from 'GroupsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, GroupsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let groupsApi = new GroupsApi(this.alfrescoApi);
+const groupsApi = new GroupsApi(alfrescoApi);
 
-let opts = { 
-  'include':  //  | Returns additional information about the group. The following optional fields can be requested:
+const opts = { 
+  'include':  /*  | Returns additional information about the group. The following optional fields can be requested:
 * parentIds
 * zones
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -793,7 +776,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 groupsApi.updateGroup(groupIdgroupBodyUpdateopts).then((data) => {
@@ -801,7 +784,6 @@ groupsApi.updateGroup(groupIdgroupBodyUpdateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters

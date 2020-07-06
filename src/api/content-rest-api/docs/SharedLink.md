@@ -20,5 +20,9 @@ allowable operations pertaining to the linked content node.
  | [optional] [default to null]
 **allowableOperationsOnTarget** | **string[]** | The allowable operations for the content node being shared.
  | [optional] [default to null]
+**isFavorite** | **boolean** |  | [optional] [default to null]
+**properties** | **any** | A subset of the target node's properties, system properties and properties already available in the SharedLink are excluded.
+ | [optional] [default to null]
+**aspectNames** | **string[]** |  | [optional] [default to null]
 
 

@@ -57,12 +57,10 @@ You must have admin rights to delete audit information.
     * @return Promise<{}>
     */
     deleteAuditEntriesForAuditApp(auditApplicationId: string, where: string) : Promise<any> {
-        
-            throwIfNotDefined(auditApplicationId, 'auditApplicationId');
-        
-            throwIfNotDefined(where, 'where');
-        
-    
+
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+        throwIfNotDefined(where, 'where');
+
         
         const postBody = null;
 
@@ -70,15 +68,14 @@ You must have admin rights to delete audit information.
             'auditApplicationId': auditApplicationId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'where': where
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -104,12 +101,10 @@ You must have admin rights to delete audit information.
     * @return Promise<{}>
     */
     deleteAuditEntry(auditApplicationId: string, auditEntryId: string) : Promise<any> {
-        
-            throwIfNotDefined(auditApplicationId, 'auditApplicationId');
-        
-            throwIfNotDefined(auditEntryId, 'auditEntryId');
-        
-    
+
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+        throwIfNotDefined(auditEntryId, 'auditEntryId');
+
         
         const postBody = null;
 
@@ -117,15 +112,13 @@ You must have admin rights to delete audit information.
             'auditApplicationId': auditApplicationId,            'auditEntryId': auditEntryId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -169,10 +162,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<AuditApp>
     */
     getAuditApp(auditApplicationId: string, opts?: any) : Promise<AuditApp> {
-        
-            throwIfNotDefined(auditApplicationId, 'auditApplicationId');
-        
-    
+
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -180,15 +172,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'auditApplicationId': auditApplicationId
         };
 
-        const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv'),            'include': buildCollectionParam(opts['include'], 'csv')
+        const queryParams = { 
+            'fields': buildCollectionParam(opts['fields'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -227,12 +219,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<AuditEntryEntry>
     */
     getAuditEntry(auditApplicationId: string, auditEntryId: string, opts?: any) : Promise<AuditEntryEntry> {
-        
-            throwIfNotDefined(auditApplicationId, 'auditApplicationId');
-        
-            throwIfNotDefined(auditEntryId, 'auditEntryId');
-        
-    
+
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+        throwIfNotDefined(auditEntryId, 'auditEntryId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -240,15 +230,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'auditApplicationId': auditApplicationId,            'auditEntryId': auditEntryId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -298,8 +287,8 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<AuditAppPaging>
     */
     listAuditApps(opts?: any) : Promise<AuditAppPaging> {
-        
-    
+
+
         opts = opts || {};
         const postBody = null;
 
@@ -307,15 +296,16 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -398,10 +388,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<AuditEntryPaging>
     */
     listAuditEntriesForAuditApp(auditApplicationId: string, opts?: any) : Promise<AuditEntryPaging> {
-        
-            throwIfNotDefined(auditApplicationId, 'auditApplicationId');
-        
-    
+
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -409,15 +398,19 @@ parameter are returned in addition to those specified in the **fields** paramete
             'auditApplicationId': auditApplicationId
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),            'maxItems': opts['maxItems'],            'where': opts['where'],            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'maxItems': opts['maxItems'],
+            'where': opts['where'],
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -487,10 +480,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<AuditEntryPaging>
     */
     listAuditEntriesForNode(nodeId: string, opts?: any) : Promise<AuditEntryPaging> {
-        
-            throwIfNotDefined(nodeId, 'nodeId');
-        
-    
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -498,15 +490,19 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),            'maxItems': opts['maxItems'],            'where': opts['where'],            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'maxItems': opts['maxItems'],
+            'where': opts['where'],
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -551,12 +547,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<AuditApp>
     */
     updateAuditApp(auditApplicationId: string, auditAppBodyUpdate: AuditBodyUpdate, opts?: any) : Promise<AuditApp> {
-        
-            throwIfNotDefined(auditApplicationId, 'auditApplicationId');
-        
-            throwIfNotDefined(auditAppBodyUpdate, 'auditAppBodyUpdate');
-        
-    
+
+        throwIfNotDefined(auditApplicationId, 'auditApplicationId');
+        throwIfNotDefined(auditAppBodyUpdate, 'auditAppBodyUpdate');
+
         opts = opts || {};
         const postBody = auditAppBodyUpdate;
 
@@ -564,15 +558,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'auditApplicationId': auditApplicationId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

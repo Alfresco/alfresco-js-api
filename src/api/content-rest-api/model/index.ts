@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+
 export * from './actionBodyExec';
 export * from './actionDefinition';
 export * from './actionDefinitionEntry';
@@ -52,11 +53,16 @@ export * from './commentEntry';
 export * from './commentPaging';
 export * from './commentPagingList';
 export * from './company';
+export * from './constraint';
 export * from './contentInfo';
+export * from './definition';
 export * from './deletedNodeBodyRestore';
 export * from './deletedNodeEntry';
 export * from './deletedNodesPaging';
 export * from './deletedNodesPagingList';
+export * from './directAccessUrl';
+export * from './directAccessUrlBodyCreate';
+export * from './directAccessUrlEntry';
 export * from './download';
 export * from './downloadBodyCreate';
 export * from './downloadEntry';
@@ -104,6 +110,7 @@ export * from './pathElement';
 export * from './pathInfo';
 export * from './permissionElement';
 export * from './permissionsBodyUpdate';
+export * from './permissionsBody';
 export * from './permissionsInfo';
 export * from './person';
 export * from './personBodyCreate';
@@ -121,6 +128,7 @@ export * from './preferencePaging';
 export * from './preferencePagingList';
 export * from './probeEntry';
 export * from './probeEntryEntry';
+export * from './property';
 export * from './rating';
 export * from './ratingAggregate';
 export * from './ratingBody';

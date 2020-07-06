@@ -20,13 +20,17 @@ Method | HTTP request | Description
 [**listTargetAssociations**](NodesApi.md#listTargetAssociations) | **GET** /nodes/{nodeId}/targets | List target associations
 [**lockNode**](NodesApi.md#lockNode) | **POST** /nodes/{nodeId}/lock | Lock a node
 [**moveNode**](NodesApi.md#moveNode) | **POST** /nodes/{nodeId}/move | Move a node
+[**requestContentUrl**](NodesApi.md#requestContentUrl) | **POST** /nodes/{nodeId}/request-content-url | Generate a direct access content url
+[**requestContentUrl_0**](NodesApi.md#requestContentUrl_0) | **POST** /nodes/{nodeId}/renditions/{renditionId}/request-content-url | Generate a direct access content url
+[**requestContentUrl_1**](NodesApi.md#requestContentUrl_1) | **POST** /nodes/{nodeId}/versions/{versionId}/request-content-url | Generate a direct access content url
+[**requestContentUrl_2**](NodesApi.md#requestContentUrl_2) | **POST** /nodes/{nodeId}/versions/{versionId}/renditions/{renditionId}/request-content-url | Generate a direct access content url
 [**unlockNode**](NodesApi.md#unlockNode) | **POST** /nodes/{nodeId}/unlock | Unlock a node
 [**updateNode**](NodesApi.md#updateNode) | **PUT** /nodes/{nodeId} | Update a node
 [**updateNodeContent**](NodesApi.md#updateNodeContent) | **PUT** /nodes/{nodeId}/content | Update node content
 
 
 <a name="copyNode"></a>
-# **copyNode**
+## copyNode
 > NodeEntry copyNode(nodeIdnodeBodyCopyopts)
 
 Copy a node
@@ -43,19 +47,18 @@ If the source **nodeId** is a file, it's properties, aspects and tags are copied
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+const opts = { 
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -63,8 +66,9 @@ let opts = {
 * isLocked
 * path
 * permissions
-
-  'fields':  //  | A list of field names.
+* definition
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -75,7 +79,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.copyNode(nodeIdnodeBodyCopyopts).then((data) => {
@@ -83,7 +87,6 @@ nodesApi.copyNode(nodeIdnodeBodyCopyopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -100,6 +103,7 @@ Name | Type | Description  | Notes
 * isLocked
 * path
 * permissions
+* definition
  | [optional] 
  **fields** | [**string**](string.md)| A list of field names.
 
@@ -119,7 +123,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**NodeEntry**](NodeEntry.md)
 
 <a name="createAssociation"></a>
-# **createAssociation**
+## createAssociation
 > AssociationEntry createAssociation(nodeIdassociationBodyCreateopts)
 
 Create node association
@@ -173,19 +177,18 @@ JSON
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -196,7 +199,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.createAssociation(nodeIdassociationBodyCreateopts).then((data) => {
@@ -204,7 +207,6 @@ nodesApi.createAssociation(nodeIdassociationBodyCreateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -231,7 +233,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**AssociationEntry**](AssociationEntry.md)
 
 <a name="createNode"></a>
-# **createNode**
+## createNode
 > NodeEntry createNode(nodeIdnodeBodyCreateopts)
 
 Create a node
@@ -254,7 +256,7 @@ You can use the **name** field to give an alternative name for the new file.
 You can use the **nodeType** field to create a specific type. The default is cm:content.
 
 You can use the **renditions** field to create renditions (e.g. doclib) asynchronously upon upload.
-Note that currently only one rendition can be requested. Also, as requesting rendition is a background process,
+Also, as requesting rendition is a background process,
 any rendition failure (e.g. No transformer is currently available) will not fail the whole upload and has the potential to silently fail.
 
 Use **overwrite** to overwrite an existing file, matched by name. If the file is versionable,
@@ -319,10 +321,43 @@ JSON
   }
 }
 
+
+You can set multi-value properties when you create a new node which supports properties of type multiple.
+ JSON
+{
+  \"name\":\"My Other Folder\",
+  \"nodeType\":\"custom:destination\",
+  \"properties\":
+  {
+    \"cm:title\":\"Folder title\",
+    \"cm:description\":\"This is an important folder\",
+    \"custom:locations\": [
+                         \"location X\",
+                         \"location Y\"
+                        ]
+  }
+}
+
+
 Any missing aspects are applied automatically. For example, **cm:titled** in the JSON shown above. You can set aspects
 explicitly, if needed, using an **aspectNames** field.
 
 **Note:** setting properties of type d:content and d:category are not supported.
+
+You can also optionally disable (or enable) inherited permissions via *isInheritanceEnabled* flag:
+JSON
+{
+  \"permissions\":
+    {
+      \"isInheritanceEnabled\": false,
+      \"locallySet\":
+        [
+          {\"authorityId\": \"GROUP_special\", \"name\": \"Read\", \"accessStatus\":\"DENIED\"},
+          {\"authorityId\": \"testuser\", \"name\": \"Contributor\", \"accessStatus\":\"ALLOWED\"}
+        ]
+    }
+}
+
 
 Typically, for files and folders, the primary children are created within the parent folder using the default \"cm:contains\" assocType.
 If the content model allows then it is also possible to create primary children with a different assoc type. For example:
@@ -407,20 +442,19 @@ JSON
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'autoRename': true //  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+const opts = { 
+  'autoRename': true /*  | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix. */
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -428,8 +462,9 @@ let opts = {
 * isLocked
 * path
 * permissions
-
-  'fields':  //  | A list of field names.
+* definition
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -440,7 +475,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.createNode(nodeIdnodeBodyCreateopts).then((data) => {
@@ -448,7 +483,6 @@ nodesApi.createNode(nodeIdnodeBodyCreateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -470,6 +504,7 @@ Name | Type | Description  | Notes
 * isLocked
 * path
 * permissions
+* definition
  | [optional] 
  **fields** | [**string**](string.md)| A list of field names.
 
@@ -489,7 +524,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**NodeEntry**](NodeEntry.md)
 
 <a name="createSecondaryChildAssociation"></a>
-# **createSecondaryChildAssociation**
+## createSecondaryChildAssociation
 > ChildAssociationEntry createSecondaryChildAssociation(nodeIdsecondaryChildAssociationBodyCreateopts)
 
 Create secondary child
@@ -543,19 +578,18 @@ JSON
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -566,7 +600,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.createSecondaryChildAssociation(nodeIdsecondaryChildAssociationBodyCreateopts).then((data) => {
@@ -574,7 +608,6 @@ nodesApi.createSecondaryChildAssociation(nodeIdsecondaryChildAssociationBodyCrea
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -601,7 +634,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**ChildAssociationEntry**](ChildAssociationEntry.md)
 
 <a name="deleteAssociation"></a>
-# **deleteAssociation**
+## deleteAssociation
 > deleteAssociation(nodeIdtargetIdopts)
 
 Delete node association(s)
@@ -618,19 +651,18 @@ in the other direction.
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'assocType': assocType_example //  | Only delete associations of this type.
+const opts = { 
+  'assocType': assocType_example /*  | Only delete associations of this type. */
 };
 
 nodesApi.deleteAssociation(nodeIdtargetIdopts).then(() => {
@@ -638,7 +670,6 @@ nodesApi.deleteAssociation(nodeIdtargetIdopts).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -654,7 +685,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="deleteNode"></a>
-# **deleteNode**
+## deleteNode
 > deleteNode(nodeIdopts)
 
 Delete a node
@@ -677,21 +708,20 @@ associations were to nodes inside or outside the restored hierarchy.
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'permanent': true //  | If **true** then the node is deleted permanently, without moving to the trashcan.
+const opts = { 
+  'permanent': true /*  | If **true** then the node is deleted permanently, without moving to the trashcan.
 Only the owner of the node or an admin can permanently delete the node.
-
+ */
 };
 
 nodesApi.deleteNode(nodeIdopts).then(() => {
@@ -699,7 +729,6 @@ nodesApi.deleteNode(nodeIdopts).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -716,7 +745,7 @@ Only the owner of the node or an admin can permanently delete the node.
 null (empty response body)
 
 <a name="deleteSecondaryChildAssociation"></a>
-# **deleteSecondaryChildAssociation**
+## deleteSecondaryChildAssociation
 > deleteSecondaryChildAssociation(nodeIdchildIdopts)
 
 Delete secondary child or children
@@ -731,19 +760,18 @@ associated as a secondary child with other secondary parents.
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'assocType': assocType_example //  | Only delete associations of this type.
+const opts = { 
+  'assocType': assocType_example /*  | Only delete associations of this type. */
 };
 
 nodesApi.deleteSecondaryChildAssociation(nodeIdchildIdopts).then(() => {
@@ -751,7 +779,6 @@ nodesApi.deleteSecondaryChildAssociation(nodeIdchildIdopts).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -767,7 +794,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="getNode"></a>
-# **getNode**
+## getNode
 > NodeEntry getNode(nodeIdopts)
 
 Get a node
@@ -780,19 +807,18 @@ You can use the **include** parameter to return additional information.
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+const opts = { 
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -800,11 +826,12 @@ let opts = {
 * isLocked
 * path
 * permissions
-
-  'relativePath': relativePath_example //  | A path relative to the **nodeId**. If you set this,
+* definition
+ */
+  'relativePath': relativePath_example /*  | A path relative to the **nodeId**. If you set this,
 information is returned on the node resolved by this path.
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -815,7 +842,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.getNode(nodeIdopts).then((data) => {
@@ -823,7 +850,6 @@ nodesApi.getNode(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -843,6 +869,7 @@ Name | Type | Description  | Notes
 * isLocked
 * path
 * permissions
+* definition
  | [optional] 
  **relativePath** | **string**| A path relative to the **nodeId**. If you set this,
 information is returned on the node resolved by this path.
@@ -865,8 +892,8 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**NodeEntry**](NodeEntry.md)
 
 <a name="getNodeContent"></a>
-# **getNodeContent**
-> getNodeContent(nodeIdopts)
+## getNodeContent
+> Blob getNodeContent(nodeIdopts)
 
 Get node content
 
@@ -876,19 +903,18 @@ Gets the content of the node with identifier **nodeId**.
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
+const opts = { 
+  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -897,21 +923,20 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
-
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
+ */
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
-
-  'range': range_example //  | The Range header indicates the part of a document that the server should return.
+ */
+  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
-
+ */
 };
 
-nodesApi.getNodeContent(nodeIdopts).then(() => {
-  console.log('API called successfully.');
+nodesApi.getNodeContent(nodeIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -938,10 +963,10 @@ Single part request supported, for example: bytes=1-10.
 
 ### Return type
 
-null (empty response body)
+**Blob**
 
 <a name="listNodeChildren"></a>
-# **listNodeChildren**
+## listNodeChildren
 > NodeChildAssociationPaging listNodeChildren(nodeIdopts)
 
 List node children
@@ -979,33 +1004,32 @@ You can use any of the following fields to order the results:
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'orderBy':  //  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+ */
+  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
 Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-  'where': where_example //  | Optionally filter the list. Here are some examples:
+ */
+  'where': where_example /*  | Optionally filter the list. Here are some examples:
 
 *   where=(isFolder=true)
 
@@ -1020,8 +1044,8 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 *   where=(assocType='my:specialAssocType')
 
 *   where=(isPrimary=false and assocType='my:specialAssocType')
-
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * association
@@ -1031,10 +1055,10 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 * path
 * properties
 * permissions
-
-  'relativePath': relativePath_example //  | Return information on children in the folder resolved by this path. The path is relative to **nodeId**.
-  'includeSource': true //  | Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**.
-  'fields':  //  | A list of field names.
+ */
+  'relativePath': relativePath_example /*  | Return information on children in the folder resolved by this path. The path is relative to **nodeId**. */
+  'includeSource': true /*  | Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**. */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1045,7 +1069,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.listNodeChildren(nodeIdopts).then((data) => {
@@ -1053,7 +1077,6 @@ nodesApi.listNodeChildren(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1126,7 +1149,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**NodeChildAssociationPaging**](NodeChildAssociationPaging.md)
 
 <a name="listParents"></a>
-# **listParents**
+## listParents
 > NodeAssociationPaging listParents(nodeIdopts)
 
 List parents
@@ -1139,27 +1162,26 @@ The list includes both the primary parent and any secondary parents.
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'where': where_example //  | Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
+const opts = { 
+  'where': where_example /*  | Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
 
 *   where=(assocType='my:specialAssocType')
 
 *   where=(isPrimary=true)
 
 *   where=(isPrimary=false and assocType='my:specialAssocType')
-
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1167,15 +1189,15 @@ let opts = {
 * isLocked
 * path
 * properties
-
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+ */
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on **nodeId**
-  'fields':  //  | A list of field names.
+ */
+  'includeSource': true /*  | Also include **source** (in addition to **entries**) with folder information on **nodeId** */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1186,7 +1208,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.listParents(nodeIdopts).then((data) => {
@@ -1194,7 +1216,6 @@ nodesApi.listParents(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1248,7 +1269,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**NodeAssociationPaging**](NodeAssociationPaging.md)
 
 <a name="listSecondaryChildren"></a>
-# **listSecondaryChildren**
+## listSecondaryChildren
 > NodeChildAssociationPaging listSecondaryChildren(nodeIdopts)
 
 List secondary children
@@ -1259,23 +1280,22 @@ Gets a list of secondary child nodes that are associated with the current parent
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'where': where_example //  | Optionally filter the list by assocType. Here's an example:
+const opts = { 
+  'where': where_example /*  | Optionally filter the list by assocType. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
-
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1283,15 +1303,15 @@ let opts = {
 * isLocked
 * path
 * properties
-
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+ */
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'includeSource': true //  | Also include **source** (in addition to **entries**) with folder information on **nodeId**
-  'fields':  //  | A list of field names.
+ */
+  'includeSource': true /*  | Also include **source** (in addition to **entries**) with folder information on **nodeId** */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1302,7 +1322,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.listSecondaryChildren(nodeIdopts).then((data) => {
@@ -1310,7 +1330,6 @@ nodesApi.listSecondaryChildren(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1360,7 +1379,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**NodeChildAssociationPaging**](NodeChildAssociationPaging.md)
 
 <a name="listSourceAssociations"></a>
-# **listSourceAssociations**
+## listSourceAssociations
 > NodeAssociationPaging listSourceAssociations(nodeIdopts)
 
 List source associations
@@ -1371,23 +1390,22 @@ Gets a list of source nodes that are associated with the current target **nodeId
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'where': where_example //  | Optionally filter the list by **assocType**. Here's an example:
+const opts = { 
+  'where': where_example /*  | Optionally filter the list by **assocType**. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
-
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1395,8 +1413,8 @@ let opts = {
 * isLocked
 * path
 * properties
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1407,7 +1425,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.listSourceAssociations(nodeIdopts).then((data) => {
@@ -1415,7 +1433,6 @@ nodesApi.listSourceAssociations(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1454,7 +1471,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**NodeAssociationPaging**](NodeAssociationPaging.md)
 
 <a name="listTargetAssociations"></a>
-# **listTargetAssociations**
+## listTargetAssociations
 > NodeAssociationPaging listTargetAssociations(nodeIdopts)
 
 List target associations
@@ -1465,23 +1482,22 @@ Gets a list of target nodes that are associated with the current source **nodeId
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'where': where_example //  | Optionally filter the list by **assocType**. Here's an example:
+const opts = { 
+  'where': where_example /*  | Optionally filter the list by **assocType**. Here's an example:
 
 *   where=(assocType='my:specialAssocType')
-
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * isLink
@@ -1489,8 +1505,8 @@ let opts = {
 * isLocked
 * path
 * properties
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1501,7 +1517,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.listTargetAssociations(nodeIdopts).then((data) => {
@@ -1509,7 +1525,6 @@ nodesApi.listTargetAssociations(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1548,7 +1563,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**NodeAssociationPaging**](NodeAssociationPaging.md)
 
 <a name="lockNode"></a>
-# **lockNode**
+## lockNode
 > NodeEntry lockNode(nodeIdnodeBodyLockopts)
 
 Lock a node
@@ -1582,19 +1597,18 @@ If a lock on the node cannot be taken, then an error is returned.
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+const opts = { 
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1602,8 +1616,9 @@ let opts = {
 * isLocked
 * path
 * permissions
-
-  'fields':  //  | A list of field names.
+* definition
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1614,7 +1629,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.lockNode(nodeIdnodeBodyLockopts).then((data) => {
@@ -1622,7 +1637,6 @@ nodesApi.lockNode(nodeIdnodeBodyLockopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1639,6 +1653,7 @@ Name | Type | Description  | Notes
 * isLocked
 * path
 * permissions
+* definition
  | [optional] 
  **fields** | [**string**](string.md)| A list of field names.
 
@@ -1658,7 +1673,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**NodeEntry**](NodeEntry.md)
 
 <a name="moveNode"></a>
-# **moveNode**
+## moveNode
 > NodeEntry moveNode(nodeIdnodeBodyMoveopts)
 
 Move a node
@@ -1677,19 +1692,18 @@ The move will effectively change the primary parent.
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+const opts = { 
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1697,8 +1711,9 @@ let opts = {
 * isLocked
 * path
 * permissions
-
-  'fields':  //  | A list of field names.
+* definition
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1709,7 +1724,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.moveNode(nodeIdnodeBodyMoveopts).then((data) => {
@@ -1717,7 +1732,6 @@ nodesApi.moveNode(nodeIdnodeBodyMoveopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1734,6 +1748,7 @@ Name | Type | Description  | Notes
 * isLocked
 * path
 * permissions
+* definition
  | [optional] 
  **fields** | [**string**](string.md)| A list of field names.
 
@@ -1752,8 +1767,272 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**NodeEntry**](NodeEntry.md)
 
+<a name="requestContentUrl"></a>
+## requestContentUrl
+> DirectAccessUrlEntry requestContentUrl(nodeIdopts)
+
+Generate a direct access content url
+
+**Note:** this endpoint is available in Alfresco 7.0 and newer versions.
+
+Generate a direct access content url for the given **nodeId**.
+Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
+
+JSON
+ {
+   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
+ }
+
+Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
+
+JSON
+ {
+   \"validFor\": \"60\"
+ }
+
+
+**Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
+
+
+### Example
+
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const nodesApi = new NodesApi(alfrescoApi);
+
+const opts = { 
+  'requestContentUrlBodyCreate':  /*  | Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
+Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
+ */
+};
+
+nodesApi.requestContentUrl(nodeIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **requestContentUrlBodyCreate** | [**DirectAccessUrlBodyCreate**](DirectAccessUrlBodyCreate.md)| Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
+Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
+ | [optional] 
+
+### Return type
+
+[**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)
+
+<a name="requestContentUrl_0"></a>
+## requestContentUrl_0
+> DirectAccessUrlEntry requestContentUrl_0(nodeIdrenditionIdopts)
+
+Generate a direct access content url
+
+**Note:** this endpoint is available in Alfresco 7.0 and newer versions.
+
+Generate a direct access content url for the given **nodeId**.
+Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
+
+JSON
+ {
+   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
+ }
+
+Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
+
+JSON
+ {
+   \"validFor\": \"60\"
+ }
+
+
+**Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
+
+
+### Example
+
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const nodesApi = new NodesApi(alfrescoApi);
+
+const opts = { 
+  'requestContentUrlBodyCreate':  /*  | Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
+Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
+ */
+};
+
+nodesApi.requestContentUrl_0(nodeIdrenditionIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
+ **requestContentUrlBodyCreate** | [**DirectAccessUrlBodyCreate**](DirectAccessUrlBodyCreate.md)| Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
+Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
+ | [optional] 
+
+### Return type
+
+[**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)
+
+<a name="requestContentUrl_1"></a>
+## requestContentUrl_1
+> DirectAccessUrlEntry requestContentUrl_1(nodeIdversionIdopts)
+
+Generate a direct access content url
+
+**Note:** this endpoint is available in Alfresco 7.0 and newer versions.
+
+Generate a direct access content url for the given **nodeId**.
+Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
+
+JSON
+ {
+   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
+ }
+
+Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
+
+JSON
+ {
+   \"validFor\": \"60\"
+ }
+
+
+**Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
+
+
+### Example
+
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const nodesApi = new NodesApi(alfrescoApi);
+
+const opts = { 
+  'requestContentUrlBodyCreate':  /*  | Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
+Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
+ */
+};
+
+nodesApi.requestContentUrl_1(nodeIdversionIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **versionId** | **string**| The identifier of a version, ie. version label, within the version history of a node. | 
+ **requestContentUrlBodyCreate** | [**DirectAccessUrlBodyCreate**](DirectAccessUrlBodyCreate.md)| Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
+Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
+ | [optional] 
+
+### Return type
+
+[**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)
+
+<a name="requestContentUrl_2"></a>
+## requestContentUrl_2
+> DirectAccessUrlEntry requestContentUrl_2(nodeIdversionIdrenditionIdopts)
+
+Generate a direct access content url
+
+**Note:** this endpoint is available in Alfresco 7.0 and newer versions.
+
+Generate a direct access content url for the given **nodeId**.
+Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
+
+JSON
+ {
+   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
+ }
+
+Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
+
+JSON
+ {
+   \"validFor\": \"60\"
+ }
+
+
+**Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
+
+
+### Example
+
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const nodesApi = new NodesApi(alfrescoApi);
+
+const opts = { 
+  'requestContentUrlBodyCreate':  /*  | Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
+Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
+ */
+};
+
+nodesApi.requestContentUrl_2(nodeIdversionIdrenditionIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **versionId** | **string**| The identifier of a version, ie. version label, within the version history of a node. | 
+ **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
+ **requestContentUrlBodyCreate** | [**DirectAccessUrlBodyCreate**](DirectAccessUrlBodyCreate.md)| Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
+Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
+ | [optional] 
+
+### Return type
+
+[**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)
+
 <a name="unlockNode"></a>
-# **unlockNode**
+## unlockNode
 > NodeEntry unlockNode(nodeIdopts)
 
 Unlock a node
@@ -1768,19 +2047,18 @@ If a lock on the node cannot be released, then an error is returned.
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+const opts = { 
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1788,8 +2066,9 @@ let opts = {
 * isLocked
 * path
 * permissions
-
-  'fields':  //  | A list of field names.
+* definition
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1800,7 +2079,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.unlockNode(nodeIdopts).then((data) => {
@@ -1808,7 +2087,6 @@ nodesApi.unlockNode(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1824,6 +2102,7 @@ Name | Type | Description  | Notes
 * isLocked
 * path
 * permissions
+* definition
  | [optional] 
  **fields** | [**string**](string.md)| A list of field names.
 
@@ -1843,7 +2122,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**NodeEntry**](NodeEntry.md)
 
 <a name="updateNode"></a>
-# **updateNode**
+## updateNode
 > NodeEntry updateNode(nodeIdnodeBodyUpdateopts)
 
 Update a node
@@ -1864,6 +2143,23 @@ JSON
     \"cm:title\":\"Folder title\"
   }
 }
+
+You can update multi-value properties of a node which supports properties of type multiple.
+ JSON
+{
+  \"name\":\"My Other Folder\",
+  \"nodeType\":\"custom:destination\",
+  \"properties\":
+  {
+    \"cm:title\":\"Folder title\",
+    \"cm:description\":\"This is an important folder\",
+    \"custom:locations\": [
+                         \"location NewX\",
+                         \"location NewY\"
+                        ]
+  }
+}
+
 
 **Note:** setting properties of type d:content and d:category are not supported.
 
@@ -1890,19 +2186,18 @@ JSON
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+const opts = { 
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -1910,8 +2205,9 @@ let opts = {
 * isLocked
 * path
 * permissions
-
-  'fields':  //  | A list of field names.
+* definition
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -1922,7 +2218,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.updateNode(nodeIdnodeBodyUpdateopts).then((data) => {
@@ -1930,7 +2226,6 @@ nodesApi.updateNode(nodeIdnodeBodyUpdateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -1947,6 +2242,7 @@ Name | Type | Description  | Notes
 * isLocked
 * path
 * permissions
+* definition
  | [optional] 
  **fields** | [**string**](string.md)| A list of field names.
 
@@ -1966,7 +2262,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**NodeEntry**](NodeEntry.md)
 
 <a name="updateNodeContent"></a>
-# **updateNodeContent**
+## updateNodeContent
 > NodeEntry updateNodeContent(nodeIdcontentBodyUpdateopts)
 
 Update node content
@@ -1989,29 +2285,28 @@ tooling to accept an arbitrary file.
 
 
 ### Example
-```javascript
-import NodesApi from 'NodesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let nodesApi = new NodesApi(this.alfrescoApi);
+const nodesApi = new NodesApi(alfrescoApi);
 
-let opts = { 
-  'majorVersion': true //  | If **true**, create a major version.
+const opts = { 
+  'majorVersion': true /*  | If **true**, create a major version.
 Setting this parameter also enables versioning of this node, if it is not already versioned.
-
-  'comment': comment_example //  | Add a version comment which will appear in version history.
+ */
+  'comment': comment_example /*  | Add a version comment which will appear in version history.
 Setting this parameter also enables versioning of this node, if it is not already versioned.
-
-  'name': name_example //  | Optional new name. This should include the file extension.
+ */
+  'name': name_example /*  | Optional new name. This should include the file extension.
 The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.
 The character . must not be used at the end of the name.
-
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -2019,8 +2314,9 @@ The character . must not be used at the end of the name.
 * isLocked
 * path
 * permissions
-
-  'fields':  //  | A list of field names.
+* definition
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -2031,7 +2327,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 nodesApi.updateNodeContent(nodeIdcontentBodyUpdateopts).then((data) => {
@@ -2039,7 +2335,6 @@ nodesApi.updateNodeContent(nodeIdcontentBodyUpdateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -2066,6 +2361,7 @@ The character . must not be used at the end of the name.
 * isLocked
 * path
 * permissions
+* definition
  | [optional] 
  **fields** | [**string**](string.md)| A list of field names.
 

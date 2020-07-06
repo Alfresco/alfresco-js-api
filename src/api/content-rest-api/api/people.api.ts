@@ -78,10 +78,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PersonEntry>
     */
     createPerson(personBodyCreate: PersonBodyCreate, opts?: any) : Promise<PersonEntry> {
-        
-            throwIfNotDefined(personBodyCreate, 'personBodyCreate');
-        
-    
+
+        throwIfNotDefined(personBodyCreate, 'personBodyCreate');
+
         opts = opts || {};
         const postBody = personBodyCreate;
 
@@ -89,15 +88,14 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -124,10 +122,9 @@ You can use the -me- string in place of <personId> to specify the currently auth
     * @return Promise<{}>
     */
     deleteAvatarImage(personId: string) : Promise<any> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+
         
         const postBody = null;
 
@@ -135,15 +132,13 @@ You can use the -me- string in place of <personId> to specify the currently auth
             'personId': personId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -186,10 +181,9 @@ then the placeholder image is returned, rather than a 404 response.
     * @return Promise<Blob>
     */
     getAvatarImage(personId: string, opts?: any) : Promise<Blob> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -197,15 +191,15 @@ then the placeholder image is returned, rather than a 404 response.
             'personId': personId
         };
 
-        const queryParams = {
-            'attachment': opts['attachment'],            'placeholder': opts['placeholder']
+        const queryParams = { 
+            'attachment': opts['attachment'],
+            'placeholder': opts['placeholder']
         };
 
         const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince']
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -241,10 +235,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PersonEntry>
     */
     getPerson(personId: string, opts?: any) : Promise<PersonEntry> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -252,15 +245,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -324,8 +316,8 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PersonPaging>
     */
     listPeople(opts?: any) : Promise<PersonPaging> {
-        
-    
+
+
         opts = opts || {};
         const postBody = null;
 
@@ -333,15 +325,18 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -380,12 +375,10 @@ JSON
     * @return Promise<{}>
     */
     requestPasswordReset(personId: string, clientBody: ClientBody) : Promise<any> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-            throwIfNotDefined(clientBody, 'clientBody');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(clientBody, 'clientBody');
+
         
         const postBody = clientBody;
 
@@ -393,15 +386,13 @@ JSON
             'personId': personId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -435,12 +426,10 @@ JSON
     * @return Promise<{}>
     */
     resetPassword(personId: string, passwordResetBody: PasswordResetBody) : Promise<any> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-            throwIfNotDefined(passwordResetBody, 'passwordResetBody');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(passwordResetBody, 'passwordResetBody');
+
         
         const postBody = passwordResetBody;
 
@@ -448,15 +437,13 @@ JSON
             'personId': personId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -487,12 +474,10 @@ You can use the -me- string in place of <personId> to specify the currently auth
     * @return Promise<{}>
     */
     updateAvatarImage(personId: string, contentBodyUpdate: string) : Promise<any> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-            throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
+
         
         const postBody = contentBodyUpdate;
 
@@ -500,15 +485,13 @@ You can use the -me- string in place of <personId> to specify the currently auth
             'personId': personId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/octet-stream'];
@@ -570,12 +553,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PersonEntry>
     */
     updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts?: any) : Promise<PersonEntry> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-            throwIfNotDefined(personBodyUpdate, 'personBodyUpdate');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(personBodyUpdate, 'personBodyUpdate');
+
         opts = opts || {};
         const postBody = personBodyUpdate;
 
@@ -583,15 +564,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

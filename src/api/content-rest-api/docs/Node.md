@@ -24,5 +24,6 @@ The character . must not be used at the end of the name.
 **allowableOperations** | **string[]** |  | [optional] [default to null]
 **path** | [**PathInfo**](PathInfo.md) |  | [optional] [default to null]
 **permissions** | [**PermissionsInfo**](PermissionsInfo.md) |  | [optional] [default to null]
+**definition** | [**Definition**](Definition.md) |  | [optional] [default to null]
 
 

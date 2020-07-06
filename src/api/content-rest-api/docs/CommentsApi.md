@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 <a name="createComment"></a>
-# **createComment**
+## createComment
 > CommentEntry createComment(nodeIdcommentBodyCreateopts)
 
 Create a comment
@@ -67,19 +67,18 @@ JSON
 
 
 ### Example
-```javascript
-import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, CommentsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let commentsApi = new CommentsApi(this.alfrescoApi);
+const commentsApi = new CommentsApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -90,7 +89,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 commentsApi.createComment(nodeIdcommentBodyCreateopts).then((data) => {
@@ -98,7 +97,6 @@ commentsApi.createComment(nodeIdcommentBodyCreateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -125,7 +123,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**CommentEntry**](CommentEntry.md)
 
 <a name="deleteComment"></a>
-# **deleteComment**
+## deleteComment
 > deleteComment(nodeIdcommentId)
 
 Delete a comment
@@ -133,16 +131,15 @@ Delete a comment
 Deletes the comment **commentId** from node **nodeId**.
 
 ### Example
-```javascript
-import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, CommentsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let commentsApi = new CommentsApi(this.alfrescoApi);
+const commentsApi = new CommentsApi(alfrescoApi);
 
 
 commentsApi.deleteComment(nodeIdcommentId).then(() => {
@@ -150,7 +147,6 @@ commentsApi.deleteComment(nodeIdcommentId).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -165,7 +161,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="listComments"></a>
-# **listComments**
+## listComments
 > CommentPaging listComments(nodeIdopts)
 
 List comments
@@ -173,25 +169,24 @@ List comments
 Gets a list of comments for the node **nodeId**, sorted chronologically with the newest comment first.
 
 ### Example
-```javascript
-import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, CommentsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let commentsApi = new CommentsApi(this.alfrescoApi);
+const commentsApi = new CommentsApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -202,7 +197,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 commentsApi.listComments(nodeIdopts).then((data) => {
@@ -210,7 +205,6 @@ commentsApi.listComments(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -242,7 +236,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 [**CommentPaging**](CommentPaging.md)
 
 <a name="updateComment"></a>
-# **updateComment**
+## updateComment
 > CommentEntry updateComment(nodeIdcommentIdcommentBodyUpdateopts)
 
 Update a comment
@@ -250,19 +244,18 @@ Update a comment
 Updates an existing comment **commentId** on node **nodeId**.
 
 ### Example
-```javascript
-import CommentsApi from 'CommentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, CommentsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let commentsApi = new CommentsApi(this.alfrescoApi);
+const commentsApi = new CommentsApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -273,7 +266,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 commentsApi.updateComment(nodeIdcommentIdcommentBodyUpdateopts).then((data) => {
@@ -281,7 +274,6 @@ commentsApi.updateComment(nodeIdcommentIdcommentBodyUpdateopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters

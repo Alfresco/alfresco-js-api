@@ -127,12 +127,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<FavoriteEntry>
     */
     createFavorite(personId: string, favoriteBodyCreate: FavoriteBodyCreate, opts?: any) : Promise<FavoriteEntry> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-            throwIfNotDefined(favoriteBodyCreate, 'favoriteBodyCreate');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(favoriteBodyCreate, 'favoriteBodyCreate');
+
         opts = opts || {};
         const postBody = favoriteBodyCreate;
 
@@ -140,15 +138,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -229,12 +227,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<FavoriteSiteEntry>
     */
     createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts?: any) : Promise<FavoriteSiteEntry> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-            throwIfNotDefined(favoriteSiteBodyCreate, 'favoriteSiteBodyCreate');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(favoriteSiteBodyCreate, 'favoriteSiteBodyCreate');
+
         opts = opts || {};
         const postBody = favoriteSiteBodyCreate;
 
@@ -242,15 +238,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -274,12 +269,10 @@ You can use the -me- string in place of <personId> to specify the currently auth
     * @return Promise<{}>
     */
     deleteFavorite(personId: string, favoriteId: string) : Promise<any> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-            throwIfNotDefined(favoriteId, 'favoriteId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(favoriteId, 'favoriteId');
+
         
         const postBody = null;
 
@@ -287,15 +280,13 @@ You can use the -me- string in place of <personId> to specify the currently auth
             'personId': personId,            'favoriteId': favoriteId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -322,12 +313,10 @@ You can use the -me- string in place of <personId> to specify the currently auth
     * @return Promise<{}>
     */
     deleteSiteFavorite(personId: string, siteId: string) : Promise<any> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-            throwIfNotDefined(siteId, 'siteId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(siteId, 'siteId');
+
         
         const postBody = null;
 
@@ -335,15 +324,13 @@ You can use the -me- string in place of <personId> to specify the currently auth
             'personId': personId,            'siteId': siteId
         };
 
-        const queryParams = {
-
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -384,12 +371,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<FavoriteEntry>
     */
     getFavorite(personId: string, favoriteId: string, opts?: any) : Promise<FavoriteEntry> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-            throwIfNotDefined(favoriteId, 'favoriteId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(favoriteId, 'favoriteId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -397,15 +382,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId,            'favoriteId': favoriteId
         };
 
-        const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -445,12 +430,10 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<SiteEntry>
     */
     getFavoriteSite(personId: string, siteId: string, opts?: any) : Promise<SiteEntry> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-            throwIfNotDefined(siteId, 'siteId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+        throwIfNotDefined(siteId, 'siteId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -458,15 +441,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId,            'siteId': siteId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -511,10 +493,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<SitePaging>
     */
     listFavoriteSitesForPerson(personId: string, opts?: any) : Promise<SitePaging> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -522,15 +503,16 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -617,10 +599,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<FavoritePaging>
     */
     listFavorites(personId: string, opts?: any) : Promise<FavoritePaging> {
-        
-            throwIfNotDefined(personId, 'personId');
-        
-    
+
+        throwIfNotDefined(personId, 'personId');
+
         opts = opts || {};
         const postBody = null;
 
@@ -628,15 +609,19 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
-            'skipCount': opts['skipCount'],            'maxItems': opts['maxItems'],            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),            'where': opts['where'],            'include': buildCollectionParam(opts['include'], 'csv'),            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = { 
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
+            'where': opts['where'],
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
-
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
