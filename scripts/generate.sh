@@ -45,7 +45,7 @@ else
     cd $DIR/..
 fi
 
-
+rm -rf $OUTPUT_FOLDER
 
 echo "================== Generate files =================="
 
@@ -60,4 +60,5 @@ rm -rf $OUTPUT_FOLDER/.swagger-codegen
 
 echo "================== Format generated files =================="
 
-npm run format-ts --$OUTPUT_FOLDER/*.*
+npm run format-ts -- $OUTPUT_FOLDER/*.ts
+

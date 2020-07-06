@@ -1,4 +1,9 @@
-export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{ {{>modelGenericAdditionalProperties}}
+export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{
+{{#additionalPropertiesType}}
+
+    [key: string]: {{{additionalPropertiesType}}}{{#hasVars}} | any{{/hasVars}};
+
+{{/additionalPropertiesType}}
 {{#vars}}
     {{#description}}
     /**
@@ -16,17 +21,27 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{ {{>model
             {{^isPrimitiveType}}
             {{^isListContainer}}
             {{^isMapContainer}}
+            {{^isDateTime}}
+            {{^isDate}}
             this.{{name}} = input.{{name}} ? new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(input.{{name}}) : undefined;
+            {{/isDate}}
+            {{/isDateTime}}
             {{/isMapContainer}}
             {{/isListContainer}}
             {{#isListContainer}}
-            if(input.{{name}}) {
+            if (input.{{name}}) {
                 this.{{name}} = input.{{name}}.map((item: any) => {
                     return new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(item);
                 });
             }
             {{/isListContainer}}
             {{/isPrimitiveType}}
+            {{#isDate}}
+            this.{{name}} = input.{{name}} ? DateAlfresco.parseDate(input.{{name}}) : undefined;
+            {{/isDate}}
+            {{#isDateTime}}
+            this.{{name}} = input.{{name}} ? DateAlfresco.parseDate(input.{{name}}) : undefined;
+            {{/isDateTime}}
             {{/vars}}
         }
     }

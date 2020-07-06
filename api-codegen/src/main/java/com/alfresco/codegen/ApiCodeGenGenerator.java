@@ -51,6 +51,9 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
         modelTemplateFiles.put("model.mustache", ".ts");
         apiTemplateFiles.put("api.service.mustache", ".ts");
         languageSpecificPrimitives.add("Blob");
+        languageSpecificPrimitives.add("ModelError");
+        languageSpecificPrimitives.remove("Date");
+
         typeMapping.put("file", "Blob");
         apiPackage = "api";
         modelPackage = "model";
@@ -67,7 +70,8 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
             "Use discriminators to create tagged unions instead of extending interfaces.",
             BooleanProperty.TYPE).defaultValue(Boolean.FALSE.toString()));
 
-        typeMapping.put("DateTime", "DateAlfresco");
+        typeMapping.put("ModelNode", "Node");
+        typeMapping.put("DateTime", "Date");
         typeMapping.put("array", "");
         typeMapping.put("List", "");
     }
@@ -223,7 +227,6 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
                 operation.nickname = operation.nickname.replace("UsingGET", "").replace("UsingGET_1", "");
                 operation.nickname = operation.nickname.replace("UsingDELETE", "").replace("UsingDELETE_1", "");
                 operation.nickname = operation.nickname.replace("UsingPUT", "").replace("UsingPUT_1", "");
-                System.out.println("operation.nickname  " + operation.nickname);
 
 
                 List<String> argList = new ArrayList<String>();
@@ -299,15 +302,21 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
     private List<Map<String, String>> toTsImports(CodegenModel cm, Set<String> imports) {
         List<Map<String, String>> tsImports = new ArrayList<>();
         for ( String im : imports ) {
+
+            System.out.println("cm.classname"+ cm.classname);
+
             if (!im.equals(cm.classname)) {
 
                 HashMap<String, String> tsImport = new HashMap<>();
                 tsImport.put("classname", im);
 
-                if (im.equals("DateAlfresco") || im.equals("PathInfo") || im.equals("UserInfo")
+                if (im.equals("PathInfo") || im.equals("UserInfo")
                     || im.equals("Pagination") || im.equals("ContentInfo") || im.equals("ChildAssociationInfo")
                     || im.equals("PathElement")) {
                     tsImport.put("filename", "../../content-rest-api/model/" + toModelFilename(im));
+                } else if(im.equals("Date")) {
+                    tsImport.put("classname", "DateAlfresco");
+                    tsImport.put("filename", "../../content-rest-api/model/dateAlfresco");
                 } else {
                     tsImport.put("filename", "./" + toModelFilename(im));
                 }
