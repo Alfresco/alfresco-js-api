@@ -32,6 +32,10 @@ export class Favorite {
      */
     createdAt?: Date;
     target: any;
+    /**
+     * A subset of the target favorite properties, system properties and properties already available in the target are excluded.
+     */
+    properties?: any;
 
     constructor(input?: any) {
 

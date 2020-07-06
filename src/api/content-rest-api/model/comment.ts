@@ -20,6 +20,7 @@ import { Person } from './person';
 
 export class Comment {
     id: string;
+    title: string;
     content: string;
     createdBy: Person;
     createdAt: Date;

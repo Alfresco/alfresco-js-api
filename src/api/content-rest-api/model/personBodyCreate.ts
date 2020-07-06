@@ -36,7 +36,7 @@ export class PersonBodyCreate {
     emailNotificationsEnabled?: boolean;
     password: string;
     aspectNames?: string[];
-    properties?: { [key: string]: string; };
+    properties?: any;
 
     constructor(input?: any) {
 

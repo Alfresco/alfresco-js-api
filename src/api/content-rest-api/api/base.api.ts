@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+
 import { AlfrescoApi } from '../../../alfrescoApi';
 import { AlfrescoApiClient, RequestOptions } from '../../../alfrescoApiClient';
 
@@ -48,3 +49,4 @@ export class BaseApi {
         return `Missing param ${param} in ${methodName}`;
     }
 }
+                            

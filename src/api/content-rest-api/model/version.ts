@@ -35,7 +35,7 @@ The character . must not be used at the end of the name.
     modifiedByUser: UserInfo;
     content?: ContentInfo;
     aspectNames?: string[];
-    properties?: { [key: string]: string; };
+    properties?: any;
 
     constructor(input?: any) {
 

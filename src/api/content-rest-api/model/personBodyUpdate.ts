@@ -36,7 +36,7 @@ export class PersonBodyUpdate {
     password?: string;
     oldPassword?: string;
     aspectNames?: string[];
-    properties?: { [key: string]: string; };
+    properties?: any;
 
     constructor(input?: any) {
 

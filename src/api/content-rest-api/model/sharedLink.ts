@@ -46,6 +46,13 @@ allowable operations pertaining to the linked content node.
 
      */
     allowableOperationsOnTarget?: string[];
+    isFavorite?: boolean;
+    /**
+     * A subset of the target node's properties, system properties and properties already available in the SharedLink are excluded.
+
+     */
+    properties?: any;
+    aspectNames?: string[];
 
     constructor(input?: any) {
 

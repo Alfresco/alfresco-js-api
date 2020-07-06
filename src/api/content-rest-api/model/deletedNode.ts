@@ -17,6 +17,8 @@
 
 import { ContentInfo } from '../../content-rest-api/model/contentInfo';
 import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { Definition } from './definition';
+import { Node } from './node';
 import { PathInfo } from '../../content-rest-api/model/pathInfo';
 import { PermissionsInfo } from './permissionsInfo';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
@@ -46,6 +48,7 @@ The character . must not be used at the end of the name.
     allowableOperations?: string[];
     path?: PathInfo;
     permissions?: PermissionsInfo;
+    definition?: Definition;
     archivedByUser: UserInfo;
     archivedAt: Date;
 
@@ -60,6 +63,7 @@ The character . must not be used at the end of the name.
             this.content = input.content ? new ContentInfo(input.content) : undefined;
             this.path = input.path ? new PathInfo(input.path) : undefined;
             this.permissions = input.permissions ? new PermissionsInfo(input.permissions) : undefined;
+            this.definition = input.definition ? new Definition(input.definition) : undefined;
             this.archivedByUser = input.archivedByUser ? new UserInfo(input.archivedByUser) : undefined;
             this.archivedAt = input.archivedAt ? DateAlfresco.parseDate(input.archivedAt) : undefined;
         }

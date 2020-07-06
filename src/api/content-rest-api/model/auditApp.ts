@@ -19,6 +19,8 @@ export class AuditApp {
     id: string;
     name?: string;
     isEnabled?: boolean;
+    maxEntryId?: number;
+    minEntryId?: number;
 
     constructor(input?: any) {
 
