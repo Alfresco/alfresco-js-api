@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+import { Capabilities } from './capabilities';
 import { Company } from './company';
 import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 
@@ -39,14 +40,15 @@ export class Person {
     enabled: boolean;
     emailNotificationsEnabled?: boolean;
     aspectNames?: string[];
-    properties?: any;
-    capabilities?: any;
+    properties?: { [key: string]: string; };
+    capabilities?: Capabilities;
 
     constructor(input?: any) {
         if (input) {
             Object.assign(this, input);
             this.company = input.company ? new Company(input.company) : undefined;
             this.statusUpdatedAt = input.statusUpdatedAt ? DateAlfresco.parseDate(input.statusUpdatedAt) : undefined;
+            this.capabilities = input.capabilities ? new Capabilities(input.capabilities) : undefined;
         }
     }
 

@@ -7493,6 +7493,15 @@ definitions:
                         type: string
                     logId:
                         type: string
+    Capabilities:
+        type: object
+        properties:
+            isAdmin:
+              type: boolean
+            isGuest:
+              type: boolean
+            isMutable:
+              type: boolean
     Pagination:
         type: object
         required:
@@ -7934,8 +7943,10 @@ definitions:
                     type: string
             properties:
                 type: object
+                additionalProperties:
+                    type: string
             capabilities:
-                type: object
+                $ref: '#/definitions/Capabilities'
     Company:
         type: object
         properties:

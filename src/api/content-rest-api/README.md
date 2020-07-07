@@ -2,7 +2,7 @@
 
 Provides access to the core features of Alfresco Content Services.
 
-> Documentation updated on: 2020-07-07T13:32:57.517+01:00
+> Documentation updated on: 2020-07-07T14:17:18.605+01:00
 
 ## Methods
 
@@ -183,6 +183,7 @@ VersionsApi | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** 
 - [AuditEntryEntry](docs/AuditEntryEntry.md)
 - [AuditEntryPaging](docs/AuditEntryPaging.md)
 - [AuditEntryPagingList](docs/AuditEntryPagingList.md)
+- [Capabilities](docs/Capabilities.md)
 - [ChildAssociation](docs/ChildAssociation.md)
 - [ChildAssociationBody](docs/ChildAssociationBody.md)
 - [ChildAssociationEntry](docs/ChildAssociationEntry.md)

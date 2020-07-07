@@ -21,7 +21,6 @@ export class Capabilities {
     isMutable?: boolean;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

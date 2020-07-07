@@ -41,6 +41,7 @@ export * from './auditEntry';
 export * from './auditEntryEntry';
 export * from './auditEntryPaging';
 export * from './auditEntryPagingList';
+export * from './capabilities';
 export * from './childAssociation';
 export * from './childAssociationBody';
 export * from './childAssociationEntry';
