@@ -16,7 +16,6 @@
 */
 
 
-import { Date } from '../model/date';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
 import { SharedLinkBodyCreate } from '../model/sharedLinkBodyCreate';
@@ -34,7 +33,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class SharedlinksApi extends BaseApi {
     /**
     * Create a shared link to a file
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Create a shared link to the file **nodeId** in the request body. Also, an optional expiry date could be set,
@@ -88,7 +87,7 @@ JSON
 }
 
 
-    * 
+    *
     * @param sharedLinkBodyCreate The nodeId to create a shared link for.
     * @param opts Optional parameters
     * @param opts.include Returns additional information about the shared link, the following optional fields can be requested:
@@ -123,7 +122,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
@@ -131,7 +130,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -144,12 +143,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Deletes a shared link
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Deletes the shared link with identifier **sharedId**.
 
-    * 
+    *
     * @param sharedId The identifier of a shared link to a file.
     * @return Promise<{}>
     */
@@ -157,20 +156,20 @@ Deletes the shared link with identifier **sharedId**.
 
         throwIfNotDefined(sharedId, 'sharedId');
 
-        
-        const postBody = null;
+
+        const postBody: null = null;
 
         const pathParams = {
             'sharedId': sharedId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -183,7 +182,7 @@ Deletes the shared link with identifier **sharedId**.
     }
 /**
     * Email shared link
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Sends email with app-specific url including identifier **sharedId**.
@@ -215,7 +214,7 @@ JSON
 }
 
 
-    * 
+    *
     * @param sharedId The identifier of a shared link to a file.
     * @param sharedLinkBodyEmail The shared link email to send.
     * @return Promise<{}>
@@ -225,20 +224,20 @@ JSON
         throwIfNotDefined(sharedId, 'sharedId');
         throwIfNotDefined(sharedLinkBodyEmail, 'sharedLinkBodyEmail');
 
-        
+
         const postBody = sharedLinkBodyEmail;
 
         const pathParams = {
             'sharedId': sharedId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -251,14 +250,14 @@ JSON
     }
 /**
     * Get a shared link
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets minimal information for the file with shared link identifier **sharedId**.
 
 **Note:** No authentication is required to call this endpoint.
 
-    * 
+    *
     * @param sharedId The identifier of a shared link to a file.
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -280,20 +279,20 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(sharedId, 'sharedId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'sharedId': sharedId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -306,14 +305,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Get shared link content
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the content of the file with shared link identifier **sharedId**.
 
 **Note:** No authentication is required to call this endpoint.
 
-    * 
+    *
     * @param sharedId The identifier of a shared link to a file.
     * @param opts Optional parameters
     * @param opts.attachment **true** enables a web browser to download the file as an attachment.
@@ -339,20 +338,20 @@ Single part request supported, for example: bytes=1-10.
         throwIfNotDefined(sharedId, 'sharedId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'sharedId': sharedId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'attachment': opts['attachment']
         };
 
         const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -365,7 +364,7 @@ Single part request supported, for example: bytes=1-10.
     }
 /**
     * Get shared link rendition information
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets rendition information for the file with shared link identifier **sharedId**.
@@ -375,7 +374,7 @@ which means the rendition is available to view/download.
 
 **Note:** No authentication is required to call this endpoint.
 
-    * 
+    *
     * @param sharedId The identifier of a shared link to a file.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
     * @return Promise<RenditionEntry>
@@ -385,20 +384,20 @@ which means the rendition is available to view/download.
         throwIfNotDefined(sharedId, 'sharedId');
         throwIfNotDefined(renditionId, 'renditionId');
 
-        
-        const postBody = null;
+
+        const postBody: null = null;
 
         const pathParams = {
             'sharedId': sharedId,            'renditionId': renditionId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -411,14 +410,14 @@ which means the rendition is available to view/download.
     }
 /**
     * Get shared link rendition content
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the rendition content for file with shared link identifier **sharedId**.
 
 **Note:** No authentication is required to call this endpoint.
 
-    * 
+    *
     * @param sharedId The identifier of a shared link to a file.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
     * @param opts Optional parameters
@@ -446,20 +445,20 @@ Single part request supported, for example: bytes=1-10.
         throwIfNotDefined(renditionId, 'renditionId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'sharedId': sharedId,            'renditionId': renditionId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'attachment': opts['attachment']
         };
 
         const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -472,7 +471,7 @@ Single part request supported, for example: bytes=1-10.
     }
 /**
     * List renditions for a shared link
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of the rendition information for the file with shared link identifier **sharedId**.
@@ -482,7 +481,7 @@ where the rendition status is CREATED, which means the rendition is available to
 
 **Note:** No authentication is required to call this endpoint.
 
-    * 
+    *
     * @param sharedId The identifier of a shared link to a file.
     * @return Promise<RenditionPaging>
     */
@@ -490,20 +489,20 @@ where the rendition status is CREATED, which means the rendition is available to
 
         throwIfNotDefined(sharedId, 'sharedId');
 
-        
-        const postBody = null;
+
+        const postBody: null = null;
 
         const pathParams = {
             'sharedId': sharedId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -516,7 +515,7 @@ where the rendition status is CREATED, which means the rendition is available to
     }
 /**
     * List shared links
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Get a list of links that the current user has read permission on source node.
@@ -525,7 +524,7 @@ The list is ordered in descending modified order.
 
 **Note:** The list of links is eventually consistent so newly created shared links may not appear immediately.
 
-    * 
+    *
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
@@ -564,13 +563,13 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
 
         };
 
-        const queryParams = { 
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
@@ -581,7 +580,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];

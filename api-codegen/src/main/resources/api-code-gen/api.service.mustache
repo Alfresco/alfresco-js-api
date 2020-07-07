@@ -27,7 +27,7 @@ export class {{classname}} extends BaseApi {
         throwIfNotDefined({{paramName}}, '{{paramName}}');{{/required}}{{/allParams}}
 
         {{#hasOptionalParams}}opts = opts || {};{{/hasOptionalParams}}
-        const postBody = {{#bodyParam}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
+        const postBody {{^bodyParam}}: null{{/bodyParam}} = {{#bodyParam}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
 
         const pathParams = {
             {{#pathParams}}

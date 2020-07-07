@@ -34,12 +34,12 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class TrashcanApi extends BaseApi {
     /**
     * Permanently delete a deleted node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Permanently deletes the deleted node **nodeId**.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @return Promise<{}>
     */
@@ -47,20 +47,20 @@ Permanently deletes the deleted node **nodeId**.
 
         throwIfNotDefined(nodeId, 'nodeId');
 
-        
-        const postBody = null;
+
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -73,12 +73,12 @@ Permanently deletes the deleted node **nodeId**.
     }
 /**
     * Get rendition information for a deleted node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the rendition information for **renditionId** of file **nodeId**.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
     * @return Promise<RenditionEntry>
@@ -88,20 +88,20 @@ Gets the rendition information for **renditionId** of file **nodeId**.
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
 
-        
-        const postBody = null;
+
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'renditionId': renditionId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -114,12 +114,12 @@ Gets the rendition information for **renditionId** of file **nodeId**.
     }
 /**
     * Get rendition content of a deleted node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the rendition content for **renditionId** of file **nodeId**.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
     * @param opts Optional parameters
@@ -151,13 +151,13 @@ than a 404 response.
         throwIfNotDefined(renditionId, 'renditionId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'renditionId': renditionId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'attachment': opts['attachment'],
             'placeholder': opts['placeholder']
         };
@@ -165,7 +165,7 @@ than a 404 response.
         const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -178,12 +178,12 @@ than a 404 response.
     }
 /**
     * Get a deleted node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the specific deleted node **nodeId**.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.include Returns additional information about the node. The following optional fields can be requested:
@@ -203,20 +203,20 @@ Gets the specific deleted node **nodeId**.
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -229,12 +229,12 @@ Gets the specific deleted node **nodeId**.
     }
 /**
     * Get deleted node content
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the content of the deleted node with identifier **nodeId**.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.attachment **true** enables a web browser to download the file as an attachment.
@@ -260,20 +260,20 @@ Single part request supported, for example: bytes=1-10.
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'attachment': opts['attachment']
         };
 
         const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -286,7 +286,7 @@ Single part request supported, for example: bytes=1-10.
     }
 /**
     * List renditions for a deleted node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of the rendition information for each rendition of the file **nodeId**, including the rendition id.
@@ -300,7 +300,7 @@ clause will return just the CREATED renditions:
 (status='CREATED')
 
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.where A string to restrict the returned objects by using a predicate.
@@ -311,20 +311,20 @@ clause will return just the CREATED renditions:
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'where': opts['where']
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -337,7 +337,7 @@ clause will return just the CREATED renditions:
     }
 /**
     * List deleted nodes
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of deleted nodes for the current user.
@@ -346,7 +346,7 @@ If the current user is an administrator deleted nodes for all users will be retu
 
 The list of deleted nodes will be ordered with the most recently deleted node at the top of the list.
 
-    * 
+    *
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
@@ -371,13 +371,13 @@ If not supplied then the default value is 100.
 
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
 
         };
 
-        const queryParams = { 
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'include': buildCollectionParam(opts['include'], 'csv')
@@ -386,7 +386,7 @@ If not supplied then the default value is 100.
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -399,7 +399,7 @@ If not supplied then the default value is 100.
     }
 /**
     * Restore a deleted node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Attempts to restore the deleted node **nodeId** to its original location or to a new location.
@@ -414,7 +414,7 @@ nodes within or outside of the restored hierarchy.
 Also, any previously shared link will not be restored since it is deleted at the time
 of delete of each node.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -443,14 +443,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];

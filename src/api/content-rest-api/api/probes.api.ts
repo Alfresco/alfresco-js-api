@@ -28,7 +28,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class ProbesApi extends BaseApi {
     /**
     * Check readiness and liveness of the repository
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 6.0 and newer versions.
 
 Returns a status of 200 to indicate success and 503 for failure.
@@ -39,7 +39,7 @@ The liveness probe should then be used to check the repository is still respondi
 
 **Note:** No authentication is required to call this endpoint.
 
-    * 
+    *
     * @param probeId The name of the probe:
 * -ready-
 * -live-
@@ -50,20 +50,20 @@ The liveness probe should then be used to check the repository is still respondi
 
         throwIfNotDefined(probeId, 'probeId');
 
-        
-        const postBody = null;
+
+        const postBody: null = null;
 
         const pathParams = {
             'probeId': probeId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];

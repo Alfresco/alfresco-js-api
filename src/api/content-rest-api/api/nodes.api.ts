@@ -42,7 +42,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class NodesApi extends BaseApi {
     /**
     * Copy a node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Copies the node **nodeId** to the parent folder node **targetParentId**. You specify the **targetParentId** in the request body.
@@ -53,7 +53,7 @@ If the source **nodeId** is a folder, then all of its children are also copied.
 
 If the source **nodeId** is a file, it's properties, aspects and tags are copied, it's ratings, comments and locks are not.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param nodeBodyCopy The targetParentId and, optionally, a new name which should include the file extension.
     * @param opts Optional parameters
@@ -93,7 +93,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
@@ -101,7 +101,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -114,7 +114,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Create node association
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Create an association, with the given association type, between the source **nodeId** and a target node.
@@ -162,7 +162,7 @@ JSON
 }
 
 
-    * 
+    *
     * @param nodeId The identifier of a source node.
     * @param associationBodyCreate The target node id and assoc type.
     * @param opts Optional parameters
@@ -192,14 +192,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -212,7 +212,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Create a node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Create a node and add it as a primary child of node **nodeId**.
@@ -415,7 +415,7 @@ JSON
 }
 
 
-    * 
+    *
     * @param nodeId The identifier of a node. You can also use one of these well-known aliases:
 * -my-
 * -shared-
@@ -460,7 +460,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'autoRename': opts['autoRename'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -469,7 +469,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json', 'multipart/form-data'];
@@ -482,7 +482,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Create secondary child
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Create a secondary child association, with the given association type, between the parent **nodeId** and a child node.
@@ -530,7 +530,7 @@ JSON
 }
 
 
-    * 
+    *
     * @param nodeId The identifier of a parent node.
     * @param secondaryChildAssociationBodyCreate The child node id and assoc type.
     * @param opts Optional parameters
@@ -560,14 +560,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -580,7 +580,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Delete node association(s)
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Delete an association, or associations, from the source **nodeId* to a target node for the given association type.
@@ -591,7 +591,7 @@ from source to target, are deleted.
 **Note:** After removal of the peer association, or associations, from source to target, the two nodes may still have peer associations
 in the other direction.
 
-    * 
+    *
     * @param nodeId The identifier of a source node.
     * @param targetId The identifier of a target node.
     * @param opts Optional parameters
@@ -604,20 +604,20 @@ in the other direction.
         throwIfNotDefined(targetId, 'targetId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'targetId': targetId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'assocType': opts['assocType']
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -630,7 +630,7 @@ in the other direction.
     }
 /**
     * Delete a node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Deletes the node **nodeId**.
@@ -647,7 +647,7 @@ child association is restored. This applies recursively for any primary children
 peer associations are restored for any of the nodes in the primary parent-child hierarchy of restored nodes, regardless of whether the original
 associations were to nodes inside or outside the restored hierarchy.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.permanent If **true** then the node is deleted permanently, without moving to the trashcan.
@@ -660,20 +660,20 @@ Only the owner of the node or an admin can permanently delete the node.
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'permanent': opts['permanent']
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -686,7 +686,7 @@ Only the owner of the node or an admin can permanently delete the node.
     }
 /**
     * Delete secondary child or children
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Delete secondary child associations between the parent **nodeId** and child nodes for the given association type.
@@ -695,7 +695,7 @@ If the association type is **not** specified, then all secondary child associati
 from parent to secondary child, will be deleted. The child will still have a primary parent and may still be
 associated as a secondary child with other secondary parents.
 
-    * 
+    *
     * @param nodeId The identifier of a parent node.
     * @param childId The identifier of a child node.
     * @param opts Optional parameters
@@ -708,20 +708,20 @@ associated as a secondary child with other secondary parents.
         throwIfNotDefined(childId, 'childId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'childId': childId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'assocType': opts['assocType']
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -734,14 +734,14 @@ associated as a secondary child with other secondary parents.
     }
 /**
     * Get a node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Get information for node **nodeId**.
 
 You can use the **include** parameter to return additional information.
 
-    * 
+    *
     * @param nodeId The identifier of a node. You can also use one of these well-known aliases:
 * -my-
 * -shared-
@@ -780,13 +780,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'relativePath': opts['relativePath'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -795,7 +795,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -808,12 +808,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Get node content
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the content of the node with identifier **nodeId**.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.attachment **true** enables a web browser to download the file as an attachment.
@@ -839,20 +839,20 @@ Single part request supported, for example: bytes=1-10.
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'attachment': opts['attachment']
         };
 
         const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -865,7 +865,7 @@ Single part request supported, for example: bytes=1-10.
     }
 /**
     * List node children
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of children of the parent node **nodeId**.
@@ -897,7 +897,7 @@ You can use any of the following fields to order the results:
 * modifiedByUser
 * createdByUser
 
-    * 
+    *
     * @param nodeId The identifier of a node. You can also use one of these well-known aliases:
 * -my-
 * -shared-
@@ -966,13 +966,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
@@ -986,7 +986,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -999,14 +999,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List parents
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of parent nodes that are associated with the current child **nodeId**.
 
 The list includes both the primary parent and any secondary parents.
 
-    * 
+    *
     * @param nodeId The identifier of a child node. You can also use one of these well-known aliases:
 * -my-
 * -shared-
@@ -1056,13 +1056,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'where': opts['where'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'skipCount': opts['skipCount'],
@@ -1074,7 +1074,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1087,12 +1087,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List secondary children
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of secondary child nodes that are associated with the current parent **nodeId**, via a secondary child association.
 
-    * 
+    *
     * @param nodeId The identifier of a parent node. You can also use one of these well-known aliases:
 * -my-
 * -shared-
@@ -1138,13 +1138,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'where': opts['where'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'skipCount': opts['skipCount'],
@@ -1156,7 +1156,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1169,12 +1169,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List source associations
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of source nodes that are associated with the current target **nodeId**.
 
-    * 
+    *
     * @param nodeId The identifier of a target node.
     * @param opts Optional parameters
     * @param opts.where Optionally filter the list by **assocType**. Here's an example:
@@ -1209,13 +1209,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'where': opts['where'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -1224,7 +1224,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1237,12 +1237,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List target associations
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of target nodes that are associated with the current source **nodeId**.
 
-    * 
+    *
     * @param nodeId The identifier of a source node.
     * @param opts Optional parameters
     * @param opts.where Optionally filter the list by **assocType**. Here's an example:
@@ -1277,13 +1277,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'where': opts['where'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -1292,7 +1292,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1305,7 +1305,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Lock a node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Places a lock on node **nodeId**.
@@ -1333,7 +1333,7 @@ overhead of writing the locks to the database.
 
 If a lock on the node cannot be taken, then an error is returned.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param nodeBodyLock Lock details.
     * @param opts Optional parameters
@@ -1373,7 +1373,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
@@ -1381,7 +1381,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1394,7 +1394,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Move a node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Move the node **nodeId** to the parent folder node **targetParentId**.
@@ -1407,7 +1407,7 @@ If the source **nodeId** is a folder, then its children are also moved.
 
 The move will effectively change the primary parent.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param nodeBodyMove The targetParentId and, optionally, a new name which should include the file extension.
     * @param opts Optional parameters
@@ -1447,7 +1447,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
@@ -1455,7 +1455,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1468,7 +1468,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Generate a direct access content url
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 7.0 and newer versions.
 
 Generate a direct access content url for the given **nodeId**.
@@ -1490,7 +1490,7 @@ JSON
 **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.requestContentUrlBodyCreate Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
@@ -1509,13 +1509,13 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1528,7 +1528,7 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
     }
 /**
     * Generate a direct access content url
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 7.0 and newer versions.
 
 Generate a direct access content url for the given **nodeId**.
@@ -1550,7 +1550,7 @@ JSON
 **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
     * @param opts Optional parameters
@@ -1571,13 +1571,13 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
             'nodeId': nodeId,            'renditionId': renditionId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1590,7 +1590,7 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
     }
 /**
     * Generate a direct access content url
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 7.0 and newer versions.
 
 Generate a direct access content url for the given **nodeId**.
@@ -1612,7 +1612,7 @@ JSON
 **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @param opts Optional parameters
@@ -1633,13 +1633,13 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
             'nodeId': nodeId,            'versionId': versionId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1652,7 +1652,7 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
     }
 /**
     * Generate a direct access content url
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 7.0 and newer versions.
 
 Generate a direct access content url for the given **nodeId**.
@@ -1674,7 +1674,7 @@ JSON
 **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
@@ -1697,13 +1697,13 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
             'nodeId': nodeId,            'versionId': versionId,            'renditionId': renditionId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1716,7 +1716,7 @@ Note: It is up to the actual ContentStore implementation if it can fulfil this r
     }
 /**
     * Unlock a node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Deletes a lock on node **nodeId**.
@@ -1725,7 +1725,7 @@ The current user must be the owner of the locks or have admin rights, otherwise 
 
 If a lock on the node cannot be released, then an error is returned.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.include Returns additional information about the node. The following optional fields can be requested:
@@ -1757,13 +1757,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
@@ -1771,7 +1771,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1784,7 +1784,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Update a node
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Updates the node **nodeId**. For example, you can rename a file or folder:
@@ -1842,7 +1842,7 @@ JSON
 
 **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param nodeBodyUpdate The node information to update.
     * @param opts Optional parameters
@@ -1882,7 +1882,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
@@ -1890,7 +1890,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -1903,7 +1903,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Update node content
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Updates the content of the node with identifier **nodeId**.
@@ -1920,7 +1920,7 @@ will rename the node. If invalid then an error is returned and the content is no
 This is because the OpenAPI Specification does not allow a wildcard to be provided or the ability for
 tooling to accept an arbitrary file.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param contentBodyUpdate The binary content
     * @param opts Optional parameters
@@ -1970,7 +1970,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'majorVersion': opts['majorVersion'],
             'comment': opts['comment'],
             'name': opts['name'],
@@ -1981,7 +1981,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/octet-stream'];

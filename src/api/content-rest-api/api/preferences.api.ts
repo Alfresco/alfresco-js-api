@@ -29,12 +29,12 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class PreferencesApi extends BaseApi {
     /**
     * Get a preference
-    * 
+    *
     * Gets a specific preference for person **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    * 
+    *
     * @param personId The identifier of a person.
     * @param preferenceName The name of the preference.
     * @param opts Optional parameters
@@ -58,20 +58,20 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(preferenceName, 'preferenceName');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'personId': personId,            'preferenceName': preferenceName
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -84,7 +84,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List preferences
-    * 
+    *
     * Gets a list of preferences for person **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
@@ -92,7 +92,7 @@ Note that each preference consists of an **id** and a **value**.
 
 The **value** can be of any JSON type.
 
-    * 
+    *
     * @param personId The identifier of a person.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -120,13 +120,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(personId, 'personId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'personId': personId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -135,7 +135,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];

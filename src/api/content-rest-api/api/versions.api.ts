@@ -34,7 +34,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class VersionsApi extends BaseApi {
     /**
     * Create rendition for a file version
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
 
 An asynchronous request to create a rendition for version of file **nodeId** and **versionId**.
@@ -57,7 +57,7 @@ JSON
 ]
 
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @param renditionBodyCreate The rendition \"id\".
@@ -69,20 +69,20 @@ JSON
         throwIfNotDefined(versionId, 'versionId');
         throwIfNotDefined(renditionBodyCreate, 'renditionBodyCreate');
 
-        
+
         const postBody = renditionBodyCreate;
 
         const pathParams = {
             'nodeId': nodeId,            'versionId': versionId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -95,7 +95,7 @@ JSON
     }
 /**
     * Delete a version
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Delete the version identified by **versionId** and **nodeId*.
@@ -110,7 +110,7 @@ can remove the \"cm:versionable\" aspect (via update node) which will also disab
 case, you can re-enable versioning by adding back the \"cm:versionable\" aspect or using the version
 params (majorVersion and comment) on a subsequent file content update.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @return Promise<{}>
@@ -120,20 +120,20 @@ params (majorVersion and comment) on a subsequent file content update.
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
 
-        
-        const postBody = null;
+
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'versionId': versionId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -146,12 +146,12 @@ params (majorVersion and comment) on a subsequent file content update.
     }
 /**
     * Get version information
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the version information for **versionId** of file node **nodeId**.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @return Promise<VersionEntry>
@@ -161,20 +161,20 @@ Gets the version information for **versionId** of file node **nodeId**.
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
 
-        
-        const postBody = null;
+
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'versionId': versionId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -187,12 +187,12 @@ Gets the version information for **versionId** of file node **nodeId**.
     }
 /**
     * Get version content
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the version content for **versionId** of file node **nodeId**.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @param opts Optional parameters
@@ -220,20 +220,20 @@ Single part request supported, for example: bytes=1-10.
         throwIfNotDefined(versionId, 'versionId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'versionId': versionId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'attachment': opts['attachment']
         };
 
         const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -246,12 +246,12 @@ Single part request supported, for example: bytes=1-10.
     }
 /**
     * Get rendition information for a file version
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
 
 Gets the rendition information for **renditionId** of version of file **nodeId** and **versionId**.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
@@ -263,20 +263,20 @@ Gets the rendition information for **renditionId** of version of file **nodeId**
         throwIfNotDefined(versionId, 'versionId');
         throwIfNotDefined(renditionId, 'renditionId');
 
-        
-        const postBody = null;
+
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'versionId': versionId,            'renditionId': renditionId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -289,12 +289,12 @@ Gets the rendition information for **renditionId** of version of file **nodeId**
     }
 /**
     * Get rendition content for a file version
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
 
 Gets the rendition content for **renditionId** of version of file **nodeId** and **versionId**.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
@@ -328,13 +328,13 @@ than a 404 response.
         throwIfNotDefined(renditionId, 'renditionId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'versionId': versionId,            'renditionId': renditionId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'attachment': opts['attachment'],
             'placeholder': opts['placeholder']
         };
@@ -342,7 +342,7 @@ than a 404 response.
         const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -355,7 +355,7 @@ than a 404 response.
     }
 /**
     * List version history
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the version history as an ordered list of versions for the specified **nodeId**.
@@ -363,7 +363,7 @@ Gets the version history as an ordered list of versions for the specified **node
 The list is ordered in descending modified order. So the most recent version is first and
 the original version is last in the list.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.include Returns additional information about the version node. The following optional fields can be requested:
@@ -395,13 +395,13 @@ If not supplied then the default value is 100.
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv'),
             'skipCount': opts['skipCount'],
@@ -411,7 +411,7 @@ If not supplied then the default value is 100.
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -424,7 +424,7 @@ If not supplied then the default value is 100.
     }
 /**
     * List renditions for a file version
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
 
 Gets a list of the rendition information for each rendition of the version of file **nodeId** and **versionId**, including the rendition id.
@@ -438,7 +438,7 @@ clause will return just the CREATED renditions:
 (status='CREATED')
 
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @param opts Optional parameters
@@ -451,20 +451,20 @@ clause will return just the CREATED renditions:
         throwIfNotDefined(versionId, 'versionId');
 
         opts = opts || {};
-        const postBody = null;
+        const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'versionId': versionId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'where': opts['where']
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -477,7 +477,7 @@ clause will return just the CREATED renditions:
     }
 /**
     * Revert a version
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Attempts to revert the version identified by **versionId** and **nodeId** to the live node.
@@ -485,7 +485,7 @@ Attempts to revert the version identified by **versionId** and **nodeId** to the
 If the node is successfully reverted then the content and metadata for that versioned node
 will be promoted to the live node and a new version will appear in the version history.
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @param revertBody Optionally, specify a version comment and whether this should be a major version, or not.
@@ -517,14 +517,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId,            'versionId': versionId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
