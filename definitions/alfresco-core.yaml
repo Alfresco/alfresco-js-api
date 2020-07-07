@@ -8789,6 +8789,8 @@ definitions:
                     type: string
             properties:
                 type: object
+                additionalProperties:
+                    type: string
             permissions:
                 $ref: '#/definitions/PermissionsBody'
     NodeBodyCopy:

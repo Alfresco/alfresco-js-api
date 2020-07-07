@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-export * from './permissionsBodyUpdate';
 export * from './dateAlfresco';
 export * from './classDescription';
 export * from './classPropertyDescription';
