@@ -316,7 +316,7 @@ public class ApiCodeGenGenerator extends AbstractTypeScriptClientCodegen impleme
                     tsImport.put("filename", "../../content-rest-api/model/" + toModelFilename(im));
                 } else if(im.equals("Date")) {
                     tsImport.put("classname", "DateAlfresco");
-                    tsImport.put("filename", "../../content-rest-api/model/dateAlfresco");
+                    tsImport.put("filename", "../../content-custom-api/model/dateAlfresco");
                 } else {
                     tsImport.put("filename", "./" + toModelFilename(im));
                 }
