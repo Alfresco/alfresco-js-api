@@ -30,9 +30,9 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class RatingsApi extends BaseApi {
     /**
     * Create a rating
-    * 
+    *
     * Create a rating for the node with identifier **nodeId**
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param ratingBodyCreate For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
 
@@ -60,7 +60,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RatingEntry>
     */
-    createRating(nodeId: string, ratingBodyCreate: RatingBody, opts?: any) : Promise<RatingEntry> {
+    createRating(nodeId: string, ratingBodyCreate: RatingBody, opts?: any): Promise<RatingEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(ratingBodyCreate, 'ratingBodyCreate');
@@ -72,14 +72,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -88,36 +88,36 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/ratings', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,RatingEntry)
+            contentTypes, accepts , RatingEntry);
     }
 /**
     * Delete a rating
-    * 
+    *
     * Deletes rating **ratingId** from node **nodeId**.
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param ratingId The identifier of a rating.
     * @return Promise<{}>
     */
-    deleteRating(nodeId: string, ratingId: string) : Promise<any> {
+    deleteRating(nodeId: string, ratingId: string): Promise<any> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(ratingId, 'ratingId');
 
-        
+
         const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'ratingId': ratingId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -126,13 +126,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/ratings/{ratingId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts )
+            contentTypes, accepts );
     }
 /**
     * Get a rating
-    * 
+    *
     * Get the specific rating **ratingId** on node **nodeId**.
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param ratingId The identifier of a rating.
     * @param opts Optional parameters
@@ -150,7 +150,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RatingEntry>
     */
-    getRating(nodeId: string, ratingId: string, opts?: any) : Promise<RatingEntry> {
+    getRating(nodeId: string, ratingId: string, opts?: any): Promise<RatingEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(ratingId, 'ratingId');
@@ -162,14 +162,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId,            'ratingId': ratingId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -178,13 +178,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/ratings/{ratingId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,RatingEntry)
+            contentTypes, accepts , RatingEntry);
     }
 /**
     * List ratings
-    * 
+    *
     * Gets a list of ratings for node **nodeId**.
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -207,7 +207,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RatingPaging>
     */
-    listRatings(nodeId: string, opts?: any) : Promise<RatingPaging> {
+    listRatings(nodeId: string, opts?: any): Promise<RatingPaging> {
 
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -218,7 +218,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -227,7 +227,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -236,7 +236,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/ratings', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,RatingPaging)
+            contentTypes, accepts , RatingPaging);
     }
 
 }

@@ -2,7 +2,7 @@
 
 Provides access to the core features of Alfresco Content Services.
 
-> Documentation updated on: 2020-07-07T14:50:25.171+01:00
+> Documentation updated on: 2020-07-07T15:16:44.274+01:00
 
 ## Methods
 

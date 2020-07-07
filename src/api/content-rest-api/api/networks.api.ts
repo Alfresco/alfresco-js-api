@@ -29,9 +29,9 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class NetworksApi extends BaseApi {
     /**
     * Get a network
-    * 
+    *
     * Gets information for a network **networkId**.
-    * 
+    *
     * @param networkId The identifier of a network.
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -48,7 +48,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonNetworkEntry>
     */
-    getNetwork(networkId: string, opts?: any) : Promise<PersonNetworkEntry> {
+    getNetwork(networkId: string, opts?: any): Promise<PersonNetworkEntry> {
 
         throwIfNotDefined(networkId, 'networkId');
 
@@ -59,14 +59,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'networkId': networkId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -75,16 +75,16 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/networks/{networkId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,PersonNetworkEntry)
+            contentTypes, accepts , PersonNetworkEntry);
     }
 /**
     * Get network information
-    * 
+    *
     * Gets network information on a single network specified by **networkId** for **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    * 
+    *
     * @param personId The identifier of a person.
     * @param networkId The identifier of a network.
     * @param opts Optional parameters
@@ -102,7 +102,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonNetworkEntry>
     */
-    getNetworkForPerson(personId: string, networkId: string, opts?: any) : Promise<PersonNetworkEntry> {
+    getNetworkForPerson(personId: string, networkId: string, opts?: any): Promise<PersonNetworkEntry> {
 
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(networkId, 'networkId');
@@ -114,14 +114,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId,            'networkId': networkId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -130,16 +130,16 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/people/{personId}/networks/{networkId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,PersonNetworkEntry)
+            contentTypes, accepts , PersonNetworkEntry);
     }
 /**
     * List network membership
-    * 
+    *
     * Gets a list of network memberships for person **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    * 
+    *
     * @param personId The identifier of a person.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -162,7 +162,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonNetworkPaging>
     */
-    listNetworksForPerson(personId: string, opts?: any) : Promise<PersonNetworkPaging> {
+    listNetworksForPerson(personId: string, opts?: any): Promise<PersonNetworkPaging> {
 
         throwIfNotDefined(personId, 'personId');
 
@@ -173,7 +173,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -182,7 +182,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -191,7 +191,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/people/{personId}/networks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,PersonNetworkPaging)
+            contentTypes, accepts , PersonNetworkPaging);
     }
 
 }

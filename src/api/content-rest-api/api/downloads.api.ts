@@ -29,7 +29,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class DownloadsApi extends BaseApi {
     /**
     * Cancel a download
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Cancels the creation of a download request.
@@ -42,28 +42,28 @@ Information about the existing progress at the time of cancelling can be retriev
 
 The cancel operation is done asynchronously.
 
-    * 
+    *
     * @param downloadId The identifier of a download node.
     * @return Promise<{}>
     */
-    cancelDownload(downloadId: string) : Promise<any> {
+    cancelDownload(downloadId: string): Promise<any> {
 
         throwIfNotDefined(downloadId, 'downloadId');
 
-        
+
         const postBody: null = null;
 
         const pathParams = {
             'downloadId': downloadId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -72,11 +72,11 @@ The cancel operation is done asynchronously.
         return this.apiClient.callApi(
             '/downloads/{downloadId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts )
+            contentTypes, accepts );
     }
 /**
     * Create a new download
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Creates a new download node asynchronously, the content of which will be the zipped content of the **nodeIds** specified in the JSON body like this:
@@ -93,7 +93,7 @@ JSON
 
 **Note:** The content of the download node can be obtained using the **GET /nodes/{downloadId}/content** endpoint
 
-    * 
+    *
     * @param downloadBodyCreate The nodeIds the content of which will be zipped, which zip will be set as the content of our download node.
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -110,7 +110,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<DownloadEntry>
     */
-    createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: any) : Promise<DownloadEntry> {
+    createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: any): Promise<DownloadEntry> {
 
         throwIfNotDefined(downloadBodyCreate, 'downloadBodyCreate');
 
@@ -121,14 +121,14 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -137,16 +137,16 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/downloads', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,DownloadEntry)
+            contentTypes, accepts , DownloadEntry);
     }
 /**
     * Get a download
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Retrieve status information for download node **downloadId**
 
-    * 
+    *
     * @param downloadId The identifier of a download node.
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -163,7 +163,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<DownloadEntry>
     */
-    getDownload(downloadId: string, opts?: any) : Promise<DownloadEntry> {
+    getDownload(downloadId: string, opts?: any): Promise<DownloadEntry> {
 
         throwIfNotDefined(downloadId, 'downloadId');
 
@@ -174,14 +174,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'downloadId': downloadId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -190,7 +190,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/downloads/{downloadId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,DownloadEntry)
+            contentTypes, accepts , DownloadEntry);
     }
 
 }

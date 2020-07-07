@@ -30,7 +30,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class TagsApi extends BaseApi {
     /**
     * Create a tag for a node
-    * 
+    *
     * Creates a tag on the node **nodeId**. You specify the tag in a JSON body like this:
 
 JSON
@@ -80,7 +80,7 @@ JSON
 }
 
 
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param tagBodyCreate The new tag
     * @param opts Optional parameters
@@ -98,7 +98,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagEntry>
     */
-    createTagForNode(nodeId: string, tagBodyCreate: TagBody, opts?: any) : Promise<TagEntry> {
+    createTagForNode(nodeId: string, tagBodyCreate: TagBody, opts?: any): Promise<TagEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(tagBodyCreate, 'tagBodyCreate');
@@ -110,14 +110,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -126,36 +126,36 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/tags', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,TagEntry)
+            contentTypes, accepts , TagEntry);
     }
 /**
     * Delete a tag from a node
-    * 
+    *
     * Deletes tag **tagId** from node **nodeId**.
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param tagId The identifier of a tag.
     * @return Promise<{}>
     */
-    deleteTagFromNode(nodeId: string, tagId: string) : Promise<any> {
+    deleteTagFromNode(nodeId: string, tagId: string): Promise<any> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(tagId, 'tagId');
 
-        
+
         const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'tagId': tagId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -164,13 +164,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/tags/{tagId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts )
+            contentTypes, accepts );
     }
 /**
     * Get a tag
-    * 
+    *
     * Get a specific tag with **tagId**.
-    * 
+    *
     * @param tagId The identifier of a tag.
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -187,7 +187,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagEntry>
     */
-    getTag(tagId: string, opts?: any) : Promise<TagEntry> {
+    getTag(tagId: string, opts?: any): Promise<TagEntry> {
 
         throwIfNotDefined(tagId, 'tagId');
 
@@ -198,14 +198,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'tagId': tagId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -214,16 +214,16 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/tags/{tagId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,TagEntry)
+            contentTypes, accepts , TagEntry);
     }
 /**
     * List tags
-    * 
+    *
     * Gets a list of tags in this repository.
 
 You can use the **include** parameter to return additional **values** information.
 
-    * 
+    *
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
@@ -248,7 +248,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagPaging>
     */
-    listTags(opts?: any) : Promise<TagPaging> {
+    listTags(opts?: any): Promise<TagPaging> {
 
 
         opts = opts || {};
@@ -258,7 +258,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = { 
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv'),
@@ -268,7 +268,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -277,13 +277,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/tags', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,TagPaging)
+            contentTypes, accepts , TagPaging);
     }
 /**
     * List tags for a node
-    * 
+    *
     * Gets a list of tags for node **nodeId**.
-    * 
+    *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -306,7 +306,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagPaging>
     */
-    listTagsForNode(nodeId: string, opts?: any) : Promise<TagPaging> {
+    listTagsForNode(nodeId: string, opts?: any): Promise<TagPaging> {
 
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -317,7 +317,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -326,7 +326,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -335,13 +335,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/nodes/{nodeId}/tags', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,TagPaging)
+            contentTypes, accepts , TagPaging);
     }
 /**
     * Update a tag
-    * 
+    *
     * Updates the tag **tagId**.
-    * 
+    *
     * @param tagId The identifier of a tag.
     * @param tagBodyUpdate The updated tag
     * @param opts Optional parameters
@@ -359,7 +359,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagEntry>
     */
-    updateTag(tagId: string, tagBodyUpdate: TagBody, opts?: any) : Promise<TagEntry> {
+    updateTag(tagId: string, tagBodyUpdate: TagBody, opts?: any): Promise<TagEntry> {
 
         throwIfNotDefined(tagId, 'tagId');
         throwIfNotDefined(tagBodyUpdate, 'tagBodyUpdate');
@@ -371,14 +371,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'tagId': tagId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -387,7 +387,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/tags/{tagId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,TagEntry)
+            contentTypes, accepts , TagEntry);
     }
 
 }

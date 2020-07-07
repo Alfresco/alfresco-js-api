@@ -12,3 +12,5 @@ $DIR/generate.sh -def $DIR/../definitions/alfresco-core.yaml -o $DIR/../$FOLDERO
 #
 #$DIR/generate.sh -def $DIR/../definitions/gs-classification-api.yaml -o $DIR/../$FOLDEROUT/gs-classification-rest-api/  -skip-build-codegen
 #$DIR/generate.sh -def $DIR/../definitions/gs-core-api.yaml -o $DIR/../$FOLDEROUT/gs-core-rest-api/  -skip-build-codegen
+
+npm run tslint --fix

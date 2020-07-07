@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { WebscriptApi as NewWebscriptApi } from '../../../../api/content-rest-api/api/webscript.api';
+import { WebscriptApi as NewWebscriptApi } from '../../../../api/content-custom-api/api/webscript.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**

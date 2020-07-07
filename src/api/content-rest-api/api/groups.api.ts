@@ -34,7 +34,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class GroupsApi extends BaseApi {
     /**
     * Create a group
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Create a group.
@@ -52,7 +52,7 @@ The group will be created in the **APP.DEFAULT** and **AUTH.ALF** zones.
 
 You must have admin rights to create a group.
 
-    * 
+    *
     * @param groupBodyCreate The group to create.
     * @param opts Optional parameters
     * @param opts.include Returns additional information about the group. The following optional fields can be requested:
@@ -73,7 +73,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<GroupEntry>
     */
-    createGroup(groupBodyCreate: GroupBodyCreate, opts?: any) : Promise<GroupEntry> {
+    createGroup(groupBodyCreate: GroupBodyCreate, opts?: any): Promise<GroupEntry> {
 
         throwIfNotDefined(groupBodyCreate, 'groupBodyCreate');
 
@@ -84,7 +84,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
@@ -92,7 +92,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -101,11 +101,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/groups', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,GroupEntry)
+            contentTypes, accepts , GroupEntry);
     }
 /**
     * Create a group membership
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Create a group membership (for an existing person or group) within a group **groupId**.
@@ -116,7 +116,7 @@ It is an error to specify an **id** that does not exist.
 
 You must have admin rights to create a group membership.
 
-    * 
+    *
     * @param groupId The identifier of a group.
     * @param groupMembershipBodyCreate The group membership to add (person or sub-group).
     * @param opts Optional parameters
@@ -134,7 +134,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<GroupMemberEntry>
     */
-    createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts?: any) : Promise<GroupMemberEntry> {
+    createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts?: any): Promise<GroupMemberEntry> {
 
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(groupMembershipBodyCreate, 'groupMembershipBodyCreate');
@@ -146,14 +146,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'groupId': groupId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -162,11 +162,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/groups/{groupId}/members', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,GroupMemberEntry)
+            contentTypes, accepts , GroupMemberEntry);
     }
 /**
     * Delete a group
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Delete group **groupId**.
@@ -177,14 +177,14 @@ If a removed sub-group no longer has any parent groups then it becomes a root gr
 
 You must have admin rights to delete a group.
 
-    * 
+    *
     * @param groupId The identifier of a group.
     * @param opts Optional parameters
     * @param opts.cascade If **true** then the delete will be applied in cascade to sub-groups.
  (default to false)
     * @return Promise<{}>
     */
-    deleteGroup(groupId: string, opts?: any) : Promise<any> {
+    deleteGroup(groupId: string, opts?: any): Promise<any> {
 
         throwIfNotDefined(groupId, 'groupId');
 
@@ -195,14 +195,14 @@ You must have admin rights to delete a group.
             'groupId': groupId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'cascade': opts['cascade']
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -211,11 +211,11 @@ You must have admin rights to delete a group.
         return this.apiClient.callApi(
             '/groups/{groupId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts )
+            contentTypes, accepts );
     }
 /**
     * Delete a group membership
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Delete group member **groupMemberId** (person or sub-group) from group **groupId**.
@@ -226,30 +226,30 @@ If a removed sub-group no longer has any parent groups then it becomes a root gr
 
 You must have admin rights to delete a group membership.
 
-    * 
+    *
     * @param groupId The identifier of a group.
     * @param groupMemberId The identifier of a person or group.
     * @return Promise<{}>
     */
-    deleteGroupMembership(groupId: string, groupMemberId: string) : Promise<any> {
+    deleteGroupMembership(groupId: string, groupMemberId: string): Promise<any> {
 
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(groupMemberId, 'groupMemberId');
 
-        
+
         const postBody: null = null;
 
         const pathParams = {
             'groupId': groupId,            'groupMemberId': groupMemberId
         };
 
-        const queryParams = { 
+        const queryParams = {
         };
 
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -258,18 +258,18 @@ You must have admin rights to delete a group membership.
         return this.apiClient.callApi(
             '/groups/{groupId}/members/{groupMemberId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts )
+            contentTypes, accepts );
     }
 /**
     * Get group details
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Get details for group **groupId**.
 
 You can use the **include** parameter to return additional information.
 
-    * 
+    *
     * @param groupId The identifier of a group.
     * @param opts Optional parameters
     * @param opts.include Returns additional information about the group. The following optional fields can be requested:
@@ -290,7 +290,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<GroupEntry>
     */
-    getGroup(groupId: string, opts?: any) : Promise<GroupEntry> {
+    getGroup(groupId: string, opts?: any): Promise<GroupEntry> {
 
         throwIfNotDefined(groupId, 'groupId');
 
@@ -301,7 +301,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'groupId': groupId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
@@ -309,7 +309,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -318,11 +318,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/groups/{groupId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,GroupEntry)
+            contentTypes, accepts , GroupEntry);
     }
 /**
     * List memberships of a group
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Gets a list of the group memberships for the group **groupId**.
@@ -341,7 +341,7 @@ You can override the default by using the **orderBy** parameter. You can specify
 * id
 * displayName
 
-    * 
+    *
     * @param groupId The identifier of a group.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -373,7 +373,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<GroupMemberPaging>
     */
-    listGroupMemberships(groupId: string, opts?: any) : Promise<GroupMemberPaging> {
+    listGroupMemberships(groupId: string, opts?: any): Promise<GroupMemberPaging> {
 
         throwIfNotDefined(groupId, 'groupId');
 
@@ -384,7 +384,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'groupId': groupId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
@@ -395,7 +395,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -404,11 +404,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/groups/{groupId}/members', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,GroupMemberPaging)
+            contentTypes, accepts , GroupMemberPaging);
     }
 /**
     * List group memberships
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
  Gets a list of group membership information for person **personId**.
@@ -420,23 +420,23 @@ parameter are returned in addition to those specified in the **fields** paramete
  You can use the **where** parameter to filter the returned groups by **isRoot**. For example, the following **where**
  clause will return just the root groups:
 
- 
+
  (isRoot=true)
- 
+
 
  The **where** parameter can also be used to filter by ***zone***. This may be combined with isRoot to narrow
  a result set even further. For example, the following where clause will only return groups belonging to the
  MY.ZONE zone.
 
- 
+
  where=(zones in ('MY.ZONE'))
- 
+
 
  This may be combined with the isRoot filter, as shown below:
 
- 
+
  where=(isRoot=false AND zones in ('MY.ZONE'))
- 
+
 
  ***Note:*** restrictions include
  * AND is the only supported operator when combining isRoot and zones filters
@@ -449,7 +449,7 @@ parameter are returned in addition to those specified in the **fields** paramete
  * id
  * displayName
 
-    * 
+    *
     * @param personId The identifier of a person.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -485,7 +485,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<GroupPaging>
     */
-    listGroupMembershipsForPerson(personId: string, opts?: any) : Promise<GroupPaging> {
+    listGroupMembershipsForPerson(personId: string, opts?: any): Promise<GroupPaging> {
 
         throwIfNotDefined(personId, 'personId');
 
@@ -496,7 +496,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
@@ -508,7 +508,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -517,11 +517,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/people/{personId}/groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,GroupPaging)
+            contentTypes, accepts , GroupPaging);
     }
 /**
     * List groups
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Gets a list of groups.
@@ -559,7 +559,7 @@ You can override the default by using the **orderBy** parameter. You can specify
 * id
 * displayName
 
-    * 
+    *
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
@@ -594,7 +594,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<GroupPaging>
     */
-    listGroups(opts?: any) : Promise<GroupPaging> {
+    listGroups(opts?: any): Promise<GroupPaging> {
 
 
         opts = opts || {};
@@ -604,7 +604,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = { 
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
@@ -616,7 +616,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -625,18 +625,18 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,GroupPaging)
+            contentTypes, accepts , GroupPaging);
     }
 /**
     * Update group details
-    * 
+    *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Update details (displayName) for group **groupId**.
 
 You must have admin rights to update a group.
 
-    * 
+    *
     * @param groupId The identifier of a group.
     * @param groupBodyUpdate The group information to update.
     * @param opts Optional parameters
@@ -658,7 +658,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<GroupEntry>
     */
-    updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts?: any) : Promise<GroupEntry> {
+    updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts?: any): Promise<GroupEntry> {
 
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(groupBodyUpdate, 'groupBodyUpdate');
@@ -670,7 +670,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'groupId': groupId
         };
 
-        const queryParams = { 
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
@@ -678,7 +678,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = { 
+        const formParams = {
         };
 
         const contentTypes = ['application/json'];
@@ -687,7 +687,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/groups/{groupId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts ,GroupEntry)
+            contentTypes, accepts , GroupEntry);
     }
 
 }

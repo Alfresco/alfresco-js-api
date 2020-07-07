@@ -49,4 +49,4 @@ export class BaseApi {
         return `Missing param ${param} in ${methodName}`;
     }
 }
-                            
+
