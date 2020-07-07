@@ -16,7 +16,7 @@
 */
 
 import { ContentInfo } from '../../content-rest-api/model/contentInfo';
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class SharedLink {
@@ -55,7 +55,6 @@ allowable operations pertaining to the linked content node.
     aspectNames?: string[];
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.expiresAt = input.expiresAt ? DateAlfresco.parseDate(input.expiresAt) : undefined;

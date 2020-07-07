@@ -22,7 +22,6 @@ export class PermissionsBody {
     locallySet?: PermissionElement[];
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             if (input.locallySet) {

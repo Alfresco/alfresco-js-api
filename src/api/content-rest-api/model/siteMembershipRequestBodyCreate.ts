@@ -21,7 +21,6 @@ export class SiteMembershipRequestBodyCreate {
     title?: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

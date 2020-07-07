@@ -21,7 +21,6 @@ export class AuditAppPaging {
     list?: AuditAppPagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new AuditAppPagingList(input.list) : undefined;

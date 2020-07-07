@@ -19,7 +19,6 @@ export class TagBody {
     tag: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

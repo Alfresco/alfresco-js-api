@@ -19,7 +19,6 @@ export class FavoriteBodyCreate {
     target: any;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

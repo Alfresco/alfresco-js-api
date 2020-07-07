@@ -30,7 +30,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class CommentsApi extends BaseApi {
     /**
     * Create a comment
-    *
+    * 
     * Creates a comment on node **nodeId**. You specify the comment in a JSON body like this:
 
 JSON
@@ -80,7 +80,7 @@ JSON
 }
 
 
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param commentBodyCreate The comment text. Note that you can also provide a list of comments.
     * @param opts Optional parameters
@@ -110,14 +110,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -130,9 +130,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Delete a comment
-    *
+    * 
     * Deletes the comment **commentId** from node **nodeId**.
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param commentId The identifier of a comment.
     * @return Promise<{}>
@@ -142,20 +142,20 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentId, 'commentId');
 
-
+        
         const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'commentId': commentId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -168,9 +168,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List comments
-    *
+    * 
     * Gets a list of comments for the node **nodeId**, sorted chronologically with the newest comment first.
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -204,7 +204,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -213,7 +213,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -226,9 +226,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Update a comment
-    *
+    * 
     * Updates an existing comment **commentId** on node **nodeId**.
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param commentId The identifier of a comment.
     * @param commentBodyUpdate The JSON representing the comment to be updated.
@@ -260,14 +260,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId,            'commentId': commentId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

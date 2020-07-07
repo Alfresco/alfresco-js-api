@@ -31,7 +31,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class RenditionsApi extends BaseApi {
     /**
     * Create rendition
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 An asynchronous request to create a rendition for file **nodeId**.
@@ -54,7 +54,7 @@ JSON
 ]
 
 
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param renditionBodyCreate The rendition \"id\".
     * @return Promise<{}>
@@ -64,20 +64,20 @@ JSON
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionBodyCreate, 'renditionBodyCreate');
 
-
+        
         const postBody = renditionBodyCreate;
 
         const pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -90,12 +90,12 @@ JSON
     }
 /**
     * Get rendition information
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the rendition information for **renditionId** of file **nodeId**.
 
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
     * @return Promise<RenditionEntry>
@@ -105,20 +105,20 @@ Gets the rendition information for **renditionId** of file **nodeId**.
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
 
-
+        
         const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'renditionId': renditionId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -131,12 +131,12 @@ Gets the rendition information for **renditionId** of file **nodeId**.
     }
 /**
     * Get rendition content
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets the rendition content for **renditionId** of file **nodeId**.
 
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
     * @param opts Optional parameters
@@ -174,7 +174,7 @@ than a 404 response.
             'nodeId': nodeId,            'renditionId': renditionId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'attachment': opts['attachment'],
             'placeholder': opts['placeholder']
         };
@@ -182,7 +182,7 @@ than a 404 response.
         const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -195,7 +195,7 @@ than a 404 response.
     }
 /**
     * List renditions
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of the rendition information for each rendition of the the file **nodeId**, including the rendition id.
@@ -209,7 +209,7 @@ clause will return just the CREATED renditions:
 (status='CREATED')
 
 
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.where A string to restrict the returned objects by using a predicate.
@@ -226,14 +226,14 @@ clause will return just the CREATED renditions:
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'where': opts['where']
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

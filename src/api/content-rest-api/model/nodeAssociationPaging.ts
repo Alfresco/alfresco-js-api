@@ -21,7 +21,6 @@ export class NodeAssociationPaging {
     list?: NodeAssociationPagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new NodeAssociationPagingList(input.list) : undefined;

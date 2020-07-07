@@ -30,9 +30,9 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class RatingsApi extends BaseApi {
     /**
     * Create a rating
-    *
+    * 
     * Create a rating for the node with identifier **nodeId**
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param ratingBodyCreate For \"myRating\" the type is specific to the rating scheme, boolean for the likes and an integer for the fiveStar.
 
@@ -72,14 +72,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -92,9 +92,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Delete a rating
-    *
+    * 
     * Deletes rating **ratingId** from node **nodeId**.
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param ratingId The identifier of a rating.
     * @return Promise<{}>
@@ -104,20 +104,20 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(ratingId, 'ratingId');
 
-
+        
         const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'ratingId': ratingId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -130,9 +130,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Get a rating
-    *
+    * 
     * Get the specific rating **ratingId** on node **nodeId**.
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param ratingId The identifier of a rating.
     * @param opts Optional parameters
@@ -162,14 +162,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId,            'ratingId': ratingId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -182,9 +182,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List ratings
-    *
+    * 
     * Gets a list of ratings for node **nodeId**.
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -218,7 +218,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -227,7 +227,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

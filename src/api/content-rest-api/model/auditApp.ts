@@ -23,7 +23,6 @@ export class AuditApp {
     minEntryId?: number;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

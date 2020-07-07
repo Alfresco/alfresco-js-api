@@ -21,7 +21,6 @@ export class VersionPaging {
     list?: VersionPagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new VersionPagingList(input.list) : undefined;

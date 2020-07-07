@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 
 export class DirectAccessUrl {
     /**
@@ -28,7 +28,6 @@ export class DirectAccessUrl {
     expiresAt?: Date;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.expiresAt = input.expiresAt ? DateAlfresco.parseDate(input.expiresAt) : undefined;

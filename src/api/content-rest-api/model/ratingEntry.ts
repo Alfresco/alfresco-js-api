@@ -21,7 +21,6 @@ export class RatingEntry {
     entry: Rating;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Rating(input.entry) : undefined;

@@ -21,7 +21,6 @@ export class SiteEntry {
     entry: Site;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Site(input.entry) : undefined;

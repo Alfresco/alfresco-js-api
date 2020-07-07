@@ -32,7 +32,6 @@ export class Constraint {
     parameters?: { [key: string]: any; };
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

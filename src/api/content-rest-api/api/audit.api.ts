@@ -32,7 +32,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class AuditApi extends BaseApi {
     /**
     * Permanently delete audit entries for an audit application
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Permanently delete audit entries for an audit application **auditApplicationId**.
@@ -47,7 +47,7 @@ For example:
 
 You must have admin rights to delete audit information.
 
-    *
+    * 
     * @param auditApplicationId The identifier of an audit application.
     * @param where Audit entries to permanently delete for an audit application, given an inclusive time period or range of ids. For example:
 
@@ -61,21 +61,21 @@ You must have admin rights to delete audit information.
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(where, 'where');
 
-
+        
         const postBody: null = null;
 
         const pathParams = {
             'auditApplicationId': auditApplicationId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'where': where
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -88,14 +88,14 @@ You must have admin rights to delete audit information.
     }
 /**
     * Permanently delete an audit entry
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Permanently delete a single audit entry **auditEntryId**.
 
 You must have admin rights to delete audit information.
 
-    *
+    * 
     * @param auditApplicationId The identifier of an audit application.
     * @param auditEntryId The identifier of an audit entry.
     * @return Promise<{}>
@@ -105,20 +105,20 @@ You must have admin rights to delete audit information.
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(auditEntryId, 'auditEntryId');
 
-
+        
         const postBody: null = null;
 
         const pathParams = {
             'auditApplicationId': auditApplicationId,            'auditEntryId': auditEntryId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -131,7 +131,7 @@ You must have admin rights to delete audit information.
     }
 /**
     * Get audit application info
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Get status of an audit application **auditApplicationId**.
@@ -140,7 +140,7 @@ You must have admin rights to retrieve audit information.
 
 You can use the **include** parameter to return the minimum and/or maximum audit record id for the application.
 
-    *
+    * 
     * @param auditApplicationId The identifier of an audit application.
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -172,7 +172,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'auditApplicationId': auditApplicationId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv'),
             'include': buildCollectionParam(opts['include'], 'csv')
         };
@@ -180,7 +180,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -193,14 +193,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Get audit entry
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Gets audit entry **auditEntryId**.
 
 You must have admin rights to access audit information.
 
-    *
+    * 
     * @param auditApplicationId The identifier of an audit application.
     * @param auditEntryId The identifier of an audit entry.
     * @param opts Optional parameters
@@ -230,14 +230,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'auditApplicationId': auditApplicationId,            'auditEntryId': auditEntryId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -250,7 +250,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List audit applications
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Gets a list of audit applications in this repository.
@@ -264,7 +264,7 @@ This list may include pre-configured audit applications, if enabled, such as:
 
 You must have admin rights to retrieve audit information.
 
-    *
+    * 
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
@@ -296,7 +296,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -305,7 +305,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -318,7 +318,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List audit entries for an audit application
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Gets a list of audit entries for audit application **auditApplicationId**.
@@ -339,7 +339,7 @@ For example, specifying orderBy=createdAt DESC returns audit entries in descendi
 
 You must have admin rights to retrieve audit information.
 
-    *
+    * 
     * @param auditApplicationId The identifier of an audit application.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -398,7 +398,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'auditApplicationId': auditApplicationId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
             'maxItems': opts['maxItems'],
@@ -410,7 +410,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -423,7 +423,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List audit entries for a node
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Gets a list of audit entries for node **nodeId**.
@@ -437,7 +437,7 @@ For example, specifying orderBy=createdAt DESC returns audit entries in descendi
 
 This relies on the pre-configured 'alfresco-access' audit application.
 
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -490,7 +490,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
             'maxItems': opts['maxItems'],
@@ -502,7 +502,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -515,7 +515,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Update audit application info
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Disable or re-enable the audit application **auditApplicationId**.
@@ -528,7 +528,7 @@ if auditing is disabled for the audit application.
 
 You must have admin rights to update audit application.
 
-    *
+    * 
     * @param auditApplicationId The identifier of an audit application.
     * @param auditAppBodyUpdate The audit application to update.
     * @param opts Optional parameters
@@ -558,14 +558,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'auditApplicationId': auditApplicationId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

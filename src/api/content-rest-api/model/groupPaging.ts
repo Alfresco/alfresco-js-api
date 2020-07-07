@@ -21,7 +21,6 @@ export class GroupPaging {
     list?: GroupPagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new GroupPagingList(input.list) : undefined;

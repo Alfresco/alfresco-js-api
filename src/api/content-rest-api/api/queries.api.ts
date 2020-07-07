@@ -30,7 +30,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class QueriesApi extends BaseApi {
     /**
     * Find nodes
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of nodes that match the given search criteria.
@@ -51,7 +51,7 @@ You can sort the result list using the **orderBy** parameter. You can specify on
 * modifiedAt
 * createdAt
 
-    *
+    * 
     * @param term The term to search for.
     * @param opts Optional parameters
     * @param opts.rootNodeId The id of the node to start the search from.
@@ -108,7 +108,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
+        const queryParams = { 
             'term': term,
             'rootNodeId': opts['rootNodeId'],
             'skipCount': opts['skipCount'],
@@ -122,7 +122,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -135,7 +135,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Find people
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of people that match the given search criteria.
@@ -151,7 +151,7 @@ You can sort the result list using the **orderBy** parameter. You can specify on
 * firstName
 * lastName
 
-    *
+    * 
     * @param term The term to search for.
 
     * @param opts Optional parameters
@@ -194,7 +194,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
         };
 
-        const queryParams = {
+        const queryParams = { 
             'term': term,
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
@@ -205,7 +205,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -218,7 +218,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
     }
 /**
     * Find sites
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Gets a list of sites that match the given search criteria.
@@ -235,7 +235,7 @@ You can override the default by using the **orderBy** parameter. You can specify
 * title
 * description
 
-    *
+    * 
     * @param term The term to search for.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -277,7 +277,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
+        const queryParams = { 
             'term': term,
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
@@ -288,7 +288,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

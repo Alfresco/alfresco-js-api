@@ -25,7 +25,6 @@ The character . must not be used at the end of the name.
     name?: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

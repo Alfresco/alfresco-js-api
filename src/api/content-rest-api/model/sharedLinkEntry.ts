@@ -21,7 +21,6 @@ export class SharedLinkEntry {
     entry: SharedLink;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new SharedLink(input.entry) : undefined;

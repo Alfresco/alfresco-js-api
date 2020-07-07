@@ -19,7 +19,6 @@ export class RenditionBodyCreate {
     id: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

@@ -21,7 +21,6 @@ export class ActionDefinitionList {
     list?: ActionDefinitionListList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new ActionDefinitionListList(input.list) : undefined;

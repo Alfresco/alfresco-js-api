@@ -16,7 +16,7 @@
 */
 
 import { ContentInfo } from '../../content-rest-api/model/contentInfo';
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class Version {
@@ -38,7 +38,6 @@ The character . must not be used at the end of the name.
     properties?: any;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;

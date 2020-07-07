@@ -21,7 +21,6 @@ export class RatingPaging {
     list?: RatingPagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new RatingPagingList(input.list) : undefined;

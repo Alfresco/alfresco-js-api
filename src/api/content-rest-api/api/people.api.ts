@@ -34,7 +34,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class PeopleApi extends BaseApi {
     /**
     * Create person
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Create a person.
@@ -60,7 +60,7 @@ JSON
 
 **Note:** setting properties of type d:content and d:category are not supported.
 
-    *
+    * 
     * @param personBodyCreate The person details.
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -88,14 +88,14 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -108,7 +108,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Delete avatar image
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Deletes the avatar image related to person **personId**.
@@ -117,7 +117,7 @@ You must be the person or have admin rights to update a person's avatar.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @return Promise<{}>
     */
@@ -125,20 +125,20 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
         throwIfNotDefined(personId, 'personId');
 
-
+        
         const postBody: null = null;
 
         const pathParams = {
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -151,7 +151,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
     }
 /**
     * Get avatar image
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Gets the avatar image related to the person **personId**. If the person has no related avatar then
@@ -159,7 +159,7 @@ the **placeholder** query parameter can be optionally used to request a placehol
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param opts Optional parameters
     * @param opts.attachment **true** enables a web browser to download the file as an attachment.
@@ -191,7 +191,7 @@ then the placeholder image is returned, rather than a 404 response.
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'attachment': opts['attachment'],
             'placeholder': opts['placeholder']
         };
@@ -199,7 +199,7 @@ then the placeholder image is returned, rather than a 404 response.
         const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince']
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -212,12 +212,12 @@ then the placeholder image is returned, rather than a 404 response.
     }
 /**
     * Get a person
-    *
+    * 
     * Gets information for the person **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -245,14 +245,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -265,7 +265,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List people
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 List people.
@@ -280,7 +280,7 @@ You can use any of the following fields to order the results:
 * firstName
 * lastName
 
-    *
+    * 
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
@@ -325,7 +325,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
@@ -336,7 +336,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -349,7 +349,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Request password reset
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Initiates the reset password workflow to send an email with reset password instruction to the user's registered email.
@@ -369,7 +369,7 @@ JSON
 
 **Note:** No authentication is required to call this endpoint.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param clientBody The client name to send email with app-specific url.
     * @return Promise<{}>
@@ -379,20 +379,20 @@ JSON
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(clientBody, 'clientBody');
 
-
+        
         const postBody = clientBody;
 
         const pathParams = {
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -405,7 +405,7 @@ JSON
     }
 /**
     * Reset password
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
 Resets user's password
@@ -420,7 +420,7 @@ JSON
 
 **Note:** No authentication is required to call this endpoint.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param passwordResetBody The reset password details
     * @return Promise<{}>
@@ -430,20 +430,20 @@ JSON
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(passwordResetBody, 'passwordResetBody');
 
-
+        
         const postBody = passwordResetBody;
 
         const pathParams = {
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -456,7 +456,7 @@ JSON
     }
 /**
     * Update avatar image
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Updates the avatar image related to the person **personId**.
@@ -468,7 +468,7 @@ You must be the person or have admin rights to update a person's avatar.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param contentBodyUpdate The binary content
     * @return Promise<{}>
@@ -478,20 +478,20 @@ You can use the -me- string in place of <personId> to specify the currently auth
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
 
-
+        
         const postBody = contentBodyUpdate;
 
         const pathParams = {
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/octet-stream'];
@@ -504,7 +504,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
     }
 /**
     * Update person
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Update the given person's details.
@@ -534,7 +534,7 @@ JSON
 
 **Note:** setting properties of type d:content and d:category are not supported.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param personBodyUpdate The person details.
     * @param opts Optional parameters
@@ -564,14 +564,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

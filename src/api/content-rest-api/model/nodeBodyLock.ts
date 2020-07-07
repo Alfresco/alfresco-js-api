@@ -21,7 +21,6 @@ export class NodeBodyLock {
     lifetime?: NodeBodyLock.LifetimeEnum | string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

@@ -21,7 +21,6 @@ export class ModelError {
     error?: ErrorError;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.error = input.error ? new ErrorError(input.error) : undefined;

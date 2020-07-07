@@ -15,14 +15,14 @@
 * limitations under the License.
 */
 
-import { Capabilities } from './capabilities';
 import { Company } from './company';
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 
 export class Person {
     id: string;
     firstName: string;
     lastName?: string;
+    displayName?: string;
     description?: string;
     avatarId?: string;
     email: string;
@@ -39,16 +39,14 @@ export class Person {
     enabled: boolean;
     emailNotificationsEnabled?: boolean;
     aspectNames?: string[];
-    properties?: { [key: string]: string; };
-    capabilities?: Capabilities;
+    properties?: any;
+    capabilities?: any;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.company = input.company ? new Company(input.company) : undefined;
             this.statusUpdatedAt = input.statusUpdatedAt ? DateAlfresco.parseDate(input.statusUpdatedAt) : undefined;
-            this.capabilities = input.capabilities ? new Capabilities(input.capabilities) : undefined;
         }
     }
 

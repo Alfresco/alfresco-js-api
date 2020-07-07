@@ -57,7 +57,6 @@ export class Property {
     constraints?: Constraint[];
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             if (input.constraints) {

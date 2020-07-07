@@ -21,7 +21,6 @@ export class DeletedNodesPaging {
     list?: DeletedNodesPagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new DeletedNodesPagingList(input.list) : undefined;

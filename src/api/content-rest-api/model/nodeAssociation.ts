@@ -17,7 +17,7 @@
 
 import { AssociationInfo } from './associationInfo';
 import { ContentInfo } from '../../content-rest-api/model/contentInfo';
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 import { Definition } from './definition';
 import { Node } from './node';
 import { PathInfo } from '../../content-rest-api/model/pathInfo';
@@ -53,7 +53,6 @@ The character . must not be used at the end of the name.
     association?: AssociationInfo;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;

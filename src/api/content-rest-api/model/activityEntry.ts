@@ -21,7 +21,6 @@ export class ActivityEntry {
     entry: Activity;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Activity(input.entry) : undefined;

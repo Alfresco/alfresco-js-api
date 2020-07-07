@@ -24,7 +24,6 @@ export class Definition {
     properties?: Property[];
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             if (input.properties) {

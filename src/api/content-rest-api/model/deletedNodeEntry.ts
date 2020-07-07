@@ -21,7 +21,6 @@ export class DeletedNodeEntry {
     entry?: DeletedNode;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new DeletedNode(input.entry) : undefined;

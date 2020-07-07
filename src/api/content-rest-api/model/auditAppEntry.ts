@@ -21,7 +21,6 @@ export class AuditAppEntry {
     entry?: AuditApp;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new AuditApp(input.entry) : undefined;

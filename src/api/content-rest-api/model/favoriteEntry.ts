@@ -21,7 +21,6 @@ export class FavoriteEntry {
     entry: Favorite;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Favorite(input.entry) : undefined;

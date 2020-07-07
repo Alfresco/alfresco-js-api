@@ -23,7 +23,6 @@ export class PathInfo {
     isComplete?: boolean;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             if (input.elements) {

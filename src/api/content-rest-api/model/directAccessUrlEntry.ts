@@ -21,7 +21,6 @@ export class DirectAccessUrlEntry {
     entry: DirectAccessUrl;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new DirectAccessUrl(input.entry) : undefined;

@@ -31,12 +31,12 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class ActionsApi extends BaseApi {
     /**
     * Retrieve the details of an action definition
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Retrieve the details of the action denoted by **actionDefinitionId**.
 
-    *
+    * 
     * @param actionDefinitionId The identifier of an action definition.
     * @return Promise<ActionDefinitionEntry>
     */
@@ -44,20 +44,20 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
 
         throwIfNotDefined(actionDefinitionId, 'actionDefinitionId');
 
-
+        
         const postBody: null = null;
 
         const pathParams = {
             'actionDefinitionId': actionDefinitionId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -70,7 +70,7 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     }
 /**
     * Execute an action
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Executes an action
@@ -120,7 +120,7 @@ The action will be executed **asynchronously** with a 202 HTTP response signifyi
 the request has been accepted successfully. The response body contains the unique ID of the action
 pending execution. The ID may be used, for example to correlate an execution with output in the server logs.
 
-    *
+    * 
     * @param actionBodyExec Action execution details
     * @return Promise<ActionExecResultEntry>
     */
@@ -128,20 +128,20 @@ pending execution. The ID may be used, for example to correlate an execution wit
 
         throwIfNotDefined(actionBodyExec, 'actionBodyExec');
 
-
+        
         const postBody = actionBodyExec;
 
         const pathParams = {
 
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -154,7 +154,7 @@ pending execution. The ID may be used, for example to correlate an execution wit
     }
 /**
     * Retrieve list of available actions
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Gets a list of all available actions
@@ -166,7 +166,7 @@ You can use any of the following fields to order the results:
 * name
 * title
 
-    *
+    * 
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
@@ -206,7 +206,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
@@ -216,7 +216,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -229,7 +229,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Retrieve actions for a node
-    *
+    * 
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
 Retrieve the list of actions that may be executed against the given **nodeId**.
@@ -241,7 +241,7 @@ You can use any of the following fields to order the results:
 * name
 * title
 
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -283,7 +283,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
@@ -293,7 +293,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

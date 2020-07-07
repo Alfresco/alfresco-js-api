@@ -21,7 +21,6 @@ export class TagEntry {
     entry: Tag;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Tag(input.entry) : undefined;

@@ -21,7 +21,6 @@ export class PersonNetworkPaging {
     list?: PersonNetworkPagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new PersonNetworkPagingList(input.list) : undefined;

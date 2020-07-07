@@ -21,7 +21,6 @@ export class ActivityPaging {
     list?: ActivityPagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new ActivityPagingList(input.list) : undefined;

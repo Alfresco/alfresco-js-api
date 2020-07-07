@@ -34,7 +34,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class FavoritesApi extends BaseApi {
     /**
     * Create a favorite
-    *
+    * 
     * Favorite a **site**, **file**, or **folder** in the repository.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
@@ -88,7 +88,7 @@ JSON
 }
 
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param favoriteBodyCreate An object identifying the entity to be favorited.
 
@@ -138,7 +138,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
@@ -146,7 +146,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -159,7 +159,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Create a site favorite
-    *
+    * 
     * **Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
 Use /people/{personId}/favorites instead.
 
@@ -208,7 +208,7 @@ JSON
 }
 
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param favoriteSiteBodyCreate The id of the site to favorite.
     * @param opts Optional parameters
@@ -238,14 +238,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -258,12 +258,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Delete a favorite
-    *
+    * 
     * Deletes **favoriteId** as a favorite of person **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param favoriteId The identifier of a favorite.
     * @return Promise<{}>
@@ -273,20 +273,20 @@ You can use the -me- string in place of <personId> to specify the currently auth
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(favoriteId, 'favoriteId');
 
-
+        
         const postBody: null = null;
 
         const pathParams = {
             'personId': personId,            'favoriteId': favoriteId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -299,7 +299,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
     }
 /**
     * Delete a site favorite
-    *
+    * 
     * **Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
 Use /people/{personId}/favorites/{favoriteId} instead.
 
@@ -307,7 +307,7 @@ Deletes site **siteId** from the favorite site list of person **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param siteId The identifier of a site.
     * @return Promise<{}>
@@ -317,20 +317,20 @@ You can use the -me- string in place of <personId> to specify the currently auth
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
-
+        
         const postBody: null = null;
 
         const pathParams = {
             'personId': personId,            'siteId': siteId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -343,12 +343,12 @@ You can use the -me- string in place of <personId> to specify the currently auth
     }
 /**
     * Get a favorite
-    *
+    * 
     * Gets favorite **favoriteId** for person **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param favoriteId The identifier of a favorite.
     * @param opts Optional parameters
@@ -382,7 +382,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId,            'favoriteId': favoriteId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
@@ -390,7 +390,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -403,7 +403,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Get a favorite site
-    *
+    * 
     * **Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
 Use /people/{personId}/favorites/{favoriteId} instead.
 
@@ -411,7 +411,7 @@ Gets information on favorite site **siteId** of person **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param siteId The identifier of a site.
     * @param opts Optional parameters
@@ -441,14 +441,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId,            'siteId': siteId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -461,7 +461,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List favorite sites
-    *
+    * 
     * **Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
 Use /people/{personId}/favorites instead.
 
@@ -469,7 +469,7 @@ Gets a list of a person's favorite sites.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -503,7 +503,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -512,7 +512,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -525,7 +525,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List favorites
-    *
+    * 
     * Gets a list of favorites for person **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
@@ -562,7 +562,7 @@ SQL
 (EXISTS(target/file) OR EXISTS(target/folder))
 
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -609,7 +609,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
@@ -621,7 +621,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

@@ -21,7 +21,6 @@ export class FavoritePaging {
     list?: FavoritePagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new FavoritePagingList(input.list) : undefined;

@@ -28,12 +28,12 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class ActivitiesApi extends BaseApi {
     /**
     * List activities
-    *
+    * 
     * Gets a list of activities for person **personId**.
 
 You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-    *
+    * 
     * @param personId The identifier of a person.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -70,7 +70,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'personId': personId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'who': opts['who'],
@@ -81,7 +81,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];

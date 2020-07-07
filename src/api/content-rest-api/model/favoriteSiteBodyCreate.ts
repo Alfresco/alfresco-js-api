@@ -19,7 +19,6 @@ export class FavoriteSiteBodyCreate {
     id: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

@@ -21,7 +21,6 @@ export class GroupBodyCreate {
     parentIds?: string[];
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

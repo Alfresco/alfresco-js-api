@@ -21,7 +21,6 @@ export class SiteMembershipRequestWithPersonEntry {
     entry: SiteMembershipRequestWithPerson;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new SiteMembershipRequestWithPerson(input.entry) : undefined;

@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class AuditEntry {
@@ -23,10 +23,9 @@ export class AuditEntry {
     auditApplicationId: string;
     createdByUser: UserInfo;
     createdAt: Date;
-    values?: { [key: string]: string; };
+    values?: any;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.createdByUser = input.createdByUser ? new UserInfo(input.createdByUser) : undefined;

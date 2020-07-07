@@ -30,7 +30,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 export class TagsApi extends BaseApi {
     /**
     * Create a tag for a node
-    *
+    * 
     * Creates a tag on the node **nodeId**. You specify the tag in a JSON body like this:
 
 JSON
@@ -80,7 +80,7 @@ JSON
 }
 
 
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param tagBodyCreate The new tag
     * @param opts Optional parameters
@@ -110,14 +110,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -130,9 +130,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Delete a tag from a node
-    *
+    * 
     * Deletes tag **tagId** from node **nodeId**.
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param tagId The identifier of a tag.
     * @return Promise<{}>
@@ -142,20 +142,20 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(tagId, 'tagId');
 
-
+        
         const postBody: null = null;
 
         const pathParams = {
             'nodeId': nodeId,            'tagId': tagId
         };
 
-        const queryParams = {
+        const queryParams = { 
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -168,9 +168,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Get a tag
-    *
+    * 
     * Get a specific tag with **tagId**.
-    *
+    * 
     * @param tagId The identifier of a tag.
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -198,14 +198,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'tagId': tagId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -218,12 +218,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List tags
-    *
+    * 
     * Gets a list of tags in this repository.
 
 You can use the **include** parameter to return additional **values** information.
 
-    *
+    * 
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
@@ -258,7 +258,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv'),
@@ -268,7 +268,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -281,9 +281,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * List tags for a node
-    *
+    * 
     * Gets a list of tags for node **nodeId**.
-    *
+    * 
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -317,7 +317,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
@@ -326,7 +326,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
@@ -339,9 +339,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 /**
     * Update a tag
-    *
+    * 
     * Updates the tag **tagId**.
-    *
+    * 
     * @param tagId The identifier of a tag.
     * @param tagBodyUpdate The updated tag
     * @param opts Optional parameters
@@ -371,14 +371,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'tagId': tagId
         };
 
-        const queryParams = {
+        const queryParams = { 
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
         const headerParams = {
 
         };
-        const formParams = {
+        const formParams = { 
         };
 
         const contentTypes = ['application/json'];
