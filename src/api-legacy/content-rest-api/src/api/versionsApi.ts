@@ -18,7 +18,6 @@
 import { VersionsApi as NewVersionsApi } from '../../../../api/content-rest-api/api/versions.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
-
 /**
  * @deprecated 3.0.0
  */

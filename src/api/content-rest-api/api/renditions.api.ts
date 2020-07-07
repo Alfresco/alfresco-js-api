@@ -15,14 +15,11 @@
 * limitations under the License.
 */
 
-
-import { Date } from '../model/date';
 import { RenditionBodyCreate } from '../model/renditionBodyCreate';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
-import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Renditions service.
@@ -53,7 +50,6 @@ JSON
   }
 ]
 
-
     *
     * @param nodeId The identifier of a node.
     * @param renditionBodyCreate The rendition \"id\".
@@ -63,7 +59,6 @@ JSON
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionBodyCreate, 'renditionBodyCreate');
-
 
         const postBody = renditionBodyCreate;
 
@@ -104,7 +99,6 @@ Gets the rendition information for **renditionId** of file **nodeId**.
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
-
 
         const postBody: null = null;
 
@@ -205,9 +199,7 @@ Each rendition returned has a **status**: CREATED means it is available to view 
 You can use the **where** parameter to filter the returned renditions by **status**. For example, the following **where**
 clause will return just the CREATED renditions:
 
-
 (status='CREATED')
-
 
     *
     * @param nodeId The identifier of a node.

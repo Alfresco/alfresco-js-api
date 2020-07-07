@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { CommentBody } from '../model/commentBody';
 import { CommentEntry } from '../model/commentEntry';
 import { CommentPaging } from '../model/commentPaging';
@@ -37,7 +36,6 @@ JSON
 {
   \"content\": \"This is a comment\"
 }
-
 
 **Note:** You can create more than one comment by
 specifying a list of comments in the JSON body like this:
@@ -78,7 +76,6 @@ JSON
     ]
   }
 }
-
 
     *
     * @param nodeId The identifier of a node.
@@ -141,7 +138,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentId, 'commentId');
-
 
         const postBody: null = null;
 

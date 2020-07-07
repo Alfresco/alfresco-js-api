@@ -27,4 +27,3 @@ export class CustomModelApi extends NewCustomModelApi {
         this.apiClient = alfrescoApi.contentPrivateClient;
     }
 }
-

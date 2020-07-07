@@ -15,13 +15,10 @@
 * limitations under the License.
 */
 
-
 import { AssociationBody } from '../model/associationBody';
 import { AssociationEntry } from '../model/associationEntry';
 import { ChildAssociationBody } from '../model/childAssociationBody';
 import { ChildAssociationEntry } from '../model/childAssociationEntry';
-import { Date } from '../model/date';
-import { DirectAccessUrlBodyCreate } from '../model/directAccessUrlBodyCreate';
 import { DirectAccessUrlEntry } from '../model/directAccessUrlEntry';
 import { NodeAssociationPaging } from '../model/nodeAssociationPaging';
 import { NodeBodyCopy } from '../model/nodeBodyCopy';
@@ -161,7 +158,6 @@ JSON
   }
 }
 
-
     *
     * @param nodeId The identifier of a source node.
     * @param associationBodyCreate The target node id and assoc type.
@@ -263,7 +259,6 @@ JSON
   \"nodeType\":\"cm:folder\"
 }
 
-
 You can create an empty file like this:
 JSON
 {
@@ -296,7 +291,6 @@ JSON
   }
 }
 
-
 You can set multi-value properties when you create a new node which supports properties of type multiple.
  JSON
 {
@@ -312,7 +306,6 @@ You can set multi-value properties when you create a new node which supports pro
                         ]
   }
 }
-
 
 Any missing aspects are applied automatically. For example, **cm:titled** in the JSON shown above. You can set aspects
 explicitly, if needed, using an **aspectNames** field.
@@ -333,7 +326,6 @@ JSON
     }
 }
 
-
 Typically, for files and folders, the primary children are created within the parent folder using the default \"cm:contains\" assocType.
 If the content model allows then it is also possible to create primary children with a different assoc type. For example:
 JSON
@@ -345,7 +337,6 @@ JSON
     \"assocType\":\"my:specialAssocType\"
   }
 }
-
 
 Additional associations can be added after creating a node. You can also add associations at the time the node is created. This is
 required, for example, if the content model specifies that a node has mandatory associations to one or more existing nodes. You can optionally
@@ -368,7 +359,6 @@ JSON
   \"targets\":
     [ {\"targetId\":\"abcde-01234-...\", \"assocType\":\"my:specialPeerAssocType\"} ]
 }
-
 
 **Note:** You can create more than one child by
 specifying a list of nodes in the JSON body. For example, the following JSON
@@ -413,7 +403,6 @@ JSON
     ]
   }
 }
-
 
     *
     * @param nodeId The identifier of a node. You can also use one of these well-known aliases:
@@ -528,7 +517,6 @@ JSON
     ]
   }
 }
-
 
     *
     * @param nodeId The identifier of a parent node.
@@ -1486,7 +1474,6 @@ JSON
    \"validFor\": \"60\"
  }
 
-
 **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
 
@@ -1545,7 +1532,6 @@ JSON
  {
    \"validFor\": \"60\"
  }
-
 
 **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
@@ -1608,7 +1594,6 @@ JSON
    \"validFor\": \"60\"
  }
 
-
 **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
 
@@ -1669,7 +1654,6 @@ JSON
  {
    \"validFor\": \"60\"
  }
-
 
 **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
@@ -1817,7 +1801,6 @@ You can update multi-value properties of a node which supports properties of typ
                         ]
   }
 }
-
 
 **Note:** setting properties of type d:content and d:category are not supported.
 

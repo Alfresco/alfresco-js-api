@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { NodePaging } from '../model/nodePaging';
 import { PersonPaging } from '../model/personPaging';
 import { SitePaging } from '../model/sitePaging';

@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { FavoriteBodyCreate } from '../model/favoriteBodyCreate';
 import { FavoriteEntry } from '../model/favoriteEntry';
 import { FavoritePaging } from '../model/favoritePaging';
@@ -87,7 +86,6 @@ JSON
   }
 }
 
-
     *
     * @param personId The identifier of a person.
     * @param favoriteBodyCreate An object identifying the entity to be favorited.
@@ -105,7 +103,6 @@ JSON
       }
    }
 }
-
 
     * @param opts Optional parameters
     * @param opts.include Returns additional information about favorites, the following optional fields can be requested:
@@ -207,7 +204,6 @@ JSON
   }
 }
 
-
     *
     * @param personId The identifier of a person.
     * @param favoriteSiteBodyCreate The id of the site to favorite.
@@ -273,7 +269,6 @@ You can use the -me- string in place of <personId> to specify the currently auth
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(favoriteId, 'favoriteId');
 
-
         const postBody: null = null;
 
         const pathParams = {
@@ -316,7 +311,6 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
-
 
         const postBody: null = null;
 
@@ -555,12 +549,10 @@ SQL
 
 You can specify more than one condition using **OR**. The predicate must be enclosed in parentheses.
 
-
 For example, the following **where** parameter restricts the returned list to the file and folder favorites for a person:
 
 SQL
 (EXISTS(target/file) OR EXISTS(target/folder))
-
 
     *
     * @param personId The identifier of a person.

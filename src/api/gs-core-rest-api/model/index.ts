@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export * from './filePlan';
 export * from './filePlanBodyUpdate';
 export * from './filePlanComponentBodyUpdate';

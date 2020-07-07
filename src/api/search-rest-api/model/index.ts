@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export * from './genericBucket';
 export * from './genericBucketBucketInfo';
 export * from './genericFacetResponse';

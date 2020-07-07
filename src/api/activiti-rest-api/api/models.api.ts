@@ -241,7 +241,6 @@ export class ModelsApi extends BaseApi {
             contentTypes, accepts, ModelRepresentation);
     }
 
-
     /**
         * List process definition models shared with the current user
         *

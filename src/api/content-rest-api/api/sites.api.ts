@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { SiteBodyCreate } from '../model/siteBodyCreate';
 import { SiteBodyUpdate } from '../model/siteBodyUpdate';
 import { SiteContainerEntry } from '../model/siteContainerEntry';
@@ -23,10 +22,8 @@ import { SiteContainerPaging } from '../model/siteContainerPaging';
 import { SiteEntry } from '../model/siteEntry';
 import { SiteMemberEntry } from '../model/siteMemberEntry';
 import { SiteMemberPaging } from '../model/siteMemberPaging';
-import { SiteMembershipApprovalBody } from '../model/siteMembershipApprovalBody';
 import { SiteMembershipBodyCreate } from '../model/siteMembershipBodyCreate';
 import { SiteMembershipBodyUpdate } from '../model/siteMembershipBodyUpdate';
-import { SiteMembershipRejectionBody } from '../model/siteMembershipRejectionBody';
 import { SiteMembershipRequestBodyCreate } from '../model/siteMembershipRequestBodyCreate';
 import { SiteMembershipRequestBodyUpdate } from '../model/siteMembershipRequestBodyUpdate';
 import { SiteMembershipRequestEntry } from '../model/siteMembershipRequestEntry';
@@ -102,7 +99,6 @@ JSON
   \"title\": \"Marketing\",
   \"visibility\": \"PUBLIC\"
 }
-
 
 The creation of the (surf) configuration files required by Share can be skipped via the **skipConfiguration** query parameter.
 
@@ -219,7 +215,6 @@ JSON
   }
 }
 
-
     *
     * @param siteId The identifier of a site.
     * @param siteMembershipBodyCreate The person to add and their role
@@ -323,7 +318,6 @@ JSON
     ]
   }
 }
-
 
     *
     * @param personId The identifier of a person.
@@ -432,7 +426,6 @@ You can use the -me- string in place of <personId> to specify the currently auth
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(personId, 'personId');
 
-
         const postBody: null = null;
 
         const pathParams = {
@@ -472,7 +465,6 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
-
 
         const postBody: null = null;
 
@@ -514,7 +506,6 @@ You can use the -me- string in place of <personId> to specify the currently auth
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
-
         const postBody: null = null;
 
         const pathParams = {
@@ -551,9 +542,7 @@ The **sites** entity has two children, **containers** and **members**.
 The following relations parameter returns all the container and member
 objects related to the site **siteId**:
 
-
 containers,members
-
 
     *
     * @param siteId The identifier of a site.
@@ -727,7 +716,6 @@ You can use the -me- string in place of <personId> to specify the currently auth
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
-
         const postBody: null = null;
 
         const pathParams = {
@@ -813,21 +801,15 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 You can use the **where** parameter to filter the returned site membership requests by **siteId**. For example:
 
-
 (siteId=mySite)
-
 
 The **where** parameter can also be used to filter by ***personId***. For example:
 
-
 where=(personId=person)
-
 
 This may be combined with the siteId filter, as shown below:
 
-
 where=(siteId=mySite AND personId=person))
-
 
     *
     * @param opts Optional parameters
@@ -853,7 +835,6 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<SiteMembershipRequestWithPersonPaging>
     */
     getSiteMembershipRequests(opts?: any): Promise<SiteMembershipRequestWithPersonPaging> {
-
 
         opts = opts || {};
         const postBody: null = null;
@@ -1071,17 +1052,13 @@ You can use the **where** parameter to filter the returned sites by **visibility
 
 Example to filter by **visibility**, use any one of:
 
-
 (visibility='PRIVATE')
 (visibility='PUBLIC')
 (visibility='MODERATED')
 
-
 Example to filter by site **preset**:
 
-
 (preset='site-dashboard')
-
 
 The default sort order for the returned list is for sites to be sorted by ascending title.
 You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
@@ -1165,17 +1142,13 @@ You can use the **where** parameter to filter the returned sites by **visibility
 
 Example to filter by **visibility**, use any one of:
 
-
 (visibility='PRIVATE')
 (visibility='PUBLIC')
 (visibility='MODERATED')
 
-
 Example to filter by site **preset**:
 
-
 (preset='site-dashboard')
-
 
 The default sort order for the returned list is for sites to be sorted by ascending title.
 You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
@@ -1191,9 +1164,7 @@ The **sites** entity has two children, **containers** and **members**.
 The following relations parameter returns all the container and member
 objects related to each site:
 
-
 containers,members
-
 
     *
     * @param opts Optional parameters
@@ -1228,7 +1199,6 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<SitePaging>
     */
     listSites(opts?: any): Promise<SitePaging> {
-
 
         opts = opts || {};
         const postBody: null = null;

@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { ActionBodyExec } from '../model/actionBodyExec';
 import { ActionDefinitionEntry } from '../model/actionDefinitionEntry';
 import { ActionDefinitionList } from '../model/actionDefinitionList';
@@ -43,7 +42,6 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     actionDetails(actionDefinitionId: string): Promise<ActionDefinitionEntry> {
 
         throwIfNotDefined(actionDefinitionId, 'actionDefinitionId');
-
 
         const postBody: null = null;
 
@@ -77,7 +75,6 @@ Executes an action
 
 An action may be executed against a node specified by **targetId**. For example:
 
-
 {
   \"actionDefinitionId\": \"copy\",
   \"targetId\": \"4c4b3c43-f18b-43ff-af84-751f16f1ddfd\",
@@ -86,14 +83,12 @@ An action may be executed against a node specified by **targetId**. For example:
   }
 }
 
-
 Performing a POST with the request body shown above will result in the node identified by targetId
 being copied to the destination folder specified in the params object by the key destination-folder.
 
 **targetId** is optional, however, currently **targetId** must be a valid node ID.
 In the future, actions may be executed against different entity types or
 executed without the need for the context of an entity.
-
 
 Parameters supplied to the action within the params object will be converted to the expected type,
 where possible using the DefaultTypeConverter class. In addition:
@@ -103,7 +98,6 @@ where possible using the DefaultTypeConverter class. In addition:
 
 In this example, we add the aspect cm:versionable to a node using the QName resolution mentioned above:
 
-
 {
   \"actionDefinitionId\": \"add-features\",
   \"targetId\": \"16349e3f-2977-44d1-93f2-73c12b8083b5\",
@@ -111,7 +105,6 @@ In this example, we add the aspect cm:versionable to a node using the QName reso
   	\"aspect-name\": \"cm:versionable\"
   }
 }
-
 
 The actionDefinitionId is the id of an action definition as returned by
 the _list actions_ operations (e.g. GET /action-definitions).
@@ -127,7 +120,6 @@ pending execution. The ID may be used, for example to correlate an execution wit
     actionExec(actionBodyExec: ActionBodyExec): Promise<ActionExecResultEntry> {
 
         throwIfNotDefined(actionBodyExec, 'actionBodyExec');
-
 
         const postBody = actionBodyExec;
 
@@ -197,7 +189,6 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<ActionDefinitionList>
     */
     listActions(opts?: any): Promise<ActionDefinitionList> {
-
 
         opts = opts || {};
         const postBody: null = null;

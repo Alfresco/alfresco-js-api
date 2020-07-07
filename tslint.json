@@ -1,4 +1,7 @@
 {
+    "extends": [
+        "tslint-etc"
+    ],
     "rulesDirectory": [
         "node_modules/codelyzer",
         "node_modules/adf-tslint-rules"
@@ -31,7 +34,7 @@
         "no-arg": true,
         "no-bitwise": false,
         "no-conditional-assignment": true,
-        "no-consecutive-blank-lines": false,
+        "no-consecutive-blank-lines": true,
         "no-console": [
             true,
             "debug",
@@ -48,6 +51,7 @@
         "no-eval": true,
         "no-inferrable-types": false,
         "no-internal-module": true,
+        "no-unused-declaration": true,
         "no-require-imports": true,
         "no-shadowed-variable": false,
         "no-switch-case-fall-through": true,

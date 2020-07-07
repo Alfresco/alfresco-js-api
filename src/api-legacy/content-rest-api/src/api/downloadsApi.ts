@@ -18,7 +18,6 @@
 import { AlfrescoApi } from '../../../../alfrescoApi';
 import { DownloadsApi as NewDownloadsApi } from '../../../../api/content-rest-api/api/downloads.api';
 
-
 /**
  * @deprecated 3.0.0
  */
@@ -28,4 +27,3 @@ export class DownloadsApi extends NewDownloadsApi {
         this.apiClient = alfrescoApi.contentClient;
     }
 }
-

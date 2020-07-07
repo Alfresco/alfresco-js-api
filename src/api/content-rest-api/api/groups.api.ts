@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { GroupBodyCreate } from '../model/groupBodyCreate';
 import { GroupBodyUpdate } from '../model/groupBodyUpdate';
 import { GroupEntry } from '../model/groupEntry';
@@ -236,7 +235,6 @@ You must have admin rights to delete a group membership.
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(groupMemberId, 'groupMemberId');
 
-
         const postBody: null = null;
 
         const pathParams = {
@@ -331,10 +329,8 @@ You can use the **where** parameter to filter the returned groups by **memberTyp
 
 Example to filter by **memberType**, use any one of:
 
-
 (memberType='GROUP')
 (memberType='PERSON')
-
 
 The default sort order for the returned list is for group members to be sorted by ascending displayName.
 You can override the default by using the **orderBy** parameter. You can specify one of the following fields in the **orderBy** parameter:
@@ -420,29 +416,22 @@ parameter are returned in addition to those specified in the **fields** paramete
  You can use the **where** parameter to filter the returned groups by **isRoot**. For example, the following **where**
  clause will return just the root groups:
 
-
  (isRoot=true)
-
 
  The **where** parameter can also be used to filter by ***zone***. This may be combined with isRoot to narrow
  a result set even further. For example, the following where clause will only return groups belonging to the
  MY.ZONE zone.
 
-
  where=(zones in ('MY.ZONE'))
-
 
  This may be combined with the isRoot filter, as shown below:
 
-
  where=(isRoot=false AND zones in ('MY.ZONE'))
-
 
  ***Note:*** restrictions include
  * AND is the only supported operator when combining isRoot and zones filters
  * Only one zone is supported by the filter
  * The quoted zone name must be placed in parenthesis — a 400 error will result if these are omitted.
-
 
  The default sort order for the returned list is for groups to be sorted by ascending displayName.
  You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
@@ -531,23 +520,17 @@ You can use the **include** parameter to return additional information.
 You can use the **where** parameter to filter the returned groups by **isRoot**. For example, the following **where**
 clause will return just the root groups:
 
-
 (isRoot=true)
-
 
 The **where** parameter can also be used to filter by ***zone***. This may be combined with isRoot to narrow
 a result set even further. For example, the following where clause will only return groups belonging to the
 MY.ZONE zone.
 
-
 where=(zones in ('MY.ZONE'))
-
 
 This may be combined with the isRoot filter, as shown below:
 
-
 where=(isRoot=false AND zones in ('MY.ZONE'))
-
 
 ***Note:*** restrictions include
 * AND is the only supported operator when combining isRoot and zones filters
@@ -595,7 +578,6 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<GroupPaging>
     */
     listGroups(opts?: any): Promise<GroupPaging> {
-
 
         opts = opts || {};
         const postBody: null = null;

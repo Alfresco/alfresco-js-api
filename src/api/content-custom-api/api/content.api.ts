@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { BaseApi } from './base.api';
 
 export class ContentApi extends BaseApi {

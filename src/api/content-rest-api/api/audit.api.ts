@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { AuditApp } from '../model/auditApp';
 import { AuditAppPaging } from '../model/auditAppPaging';
 import { AuditBodyUpdate } from '../model/auditBodyUpdate';
@@ -61,7 +60,6 @@ You must have admin rights to delete audit information.
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(where, 'where');
 
-
         const postBody: null = null;
 
         const pathParams = {
@@ -104,7 +102,6 @@ You must have admin rights to delete audit information.
 
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(auditEntryId, 'auditEntryId');
-
 
         const postBody: null = null;
 
@@ -287,7 +284,6 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<AuditAppPaging>
     */
     listAuditApps(opts?: any): Promise<AuditAppPaging> {
-
 
         opts = opts || {};
         const postBody: null = null;

@@ -15,8 +15,6 @@
 * limitations under the License.
 */
 
-
-import { Date } from '../model/date';
 import { RenditionBodyCreate } from '../model/renditionBodyCreate';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
@@ -56,7 +54,6 @@ JSON
   }
 ]
 
-
     *
     * @param nodeId The identifier of a node.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
@@ -68,7 +65,6 @@ JSON
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
         throwIfNotDefined(renditionBodyCreate, 'renditionBodyCreate');
-
 
         const postBody = renditionBodyCreate;
 
@@ -120,7 +116,6 @@ params (majorVersion and comment) on a subsequent file content update.
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
 
-
         const postBody: null = null;
 
         const pathParams = {
@@ -160,7 +155,6 @@ Gets the version information for **versionId** of file node **nodeId**.
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
-
 
         const postBody: null = null;
 
@@ -262,7 +256,6 @@ Gets the rendition information for **renditionId** of version of file **nodeId**
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
         throwIfNotDefined(renditionId, 'renditionId');
-
 
         const postBody: null = null;
 
@@ -434,9 +427,7 @@ Each rendition returned has a **status**: CREATED means it is available to view 
 You can use the **where** parameter to filter the returned renditions by **status**. For example, the following **where**
 clause will return just the CREATED renditions:
 
-
 (status='CREATED')
-
 
     *
     * @param nodeId The identifier of a node.

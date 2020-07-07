@@ -15,9 +15,6 @@
 * limitations under the License.
 */
 
-
-import { Date } from '../model/date';
-import { DeletedNodeBodyRestore } from '../model/deletedNodeBodyRestore';
 import { DeletedNodeEntry } from '../model/deletedNodeEntry';
 import { DeletedNodesPaging } from '../model/deletedNodesPaging';
 import { NodeEntry } from '../model/nodeEntry';
@@ -46,7 +43,6 @@ Permanently deletes the deleted node **nodeId**.
     deleteDeletedNode(nodeId: string): Promise<any> {
 
         throwIfNotDefined(nodeId, 'nodeId');
-
 
         const postBody: null = null;
 
@@ -87,7 +83,6 @@ Gets the rendition information for **renditionId** of file **nodeId**.
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
-
 
         const postBody: null = null;
 
@@ -296,9 +291,7 @@ Each rendition returned has a **status**: CREATED means it is available to view 
 You can use the **where** parameter to filter the returned renditions by **status**. For example, the following **where**
 clause will return just the CREATED renditions:
 
-
 (status='CREATED')
-
 
     *
     * @param nodeId The identifier of a node.
@@ -368,7 +361,6 @@ If not supplied then the default value is 100.
     * @return Promise<DeletedNodesPaging>
     */
     listDeletedNodes(opts?: any): Promise<DeletedNodesPaging> {
-
 
         opts = opts || {};
         const postBody: null = null;

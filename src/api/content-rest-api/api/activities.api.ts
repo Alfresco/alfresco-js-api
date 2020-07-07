@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { ActivityPaging } from '../model/activityPaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';

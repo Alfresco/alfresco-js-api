@@ -588,7 +588,6 @@ export class AlfrescoApiClient implements ee.Emitter {
          return ( typeof window !== 'undefined' && typeof window.document !== 'undefined');
      }
 
-
     createCSRFToken(a?: any): string {
         return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + (1e16).toString()).replace(/[01]/g, this.createCSRFToken);
     }

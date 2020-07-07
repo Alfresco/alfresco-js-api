@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { PersonNetworkEntry } from '../model/personNetworkEntry';
 import { PersonNetworkPaging } from '../model/personNetworkPaging';
 import { BaseApi } from './base.api';

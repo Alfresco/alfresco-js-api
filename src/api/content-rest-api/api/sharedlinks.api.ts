@@ -15,8 +15,6 @@
 * limitations under the License.
 */
 
-
-import { Date } from '../model/date';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
 import { SharedLinkBodyCreate } from '../model/sharedLinkBodyCreate';
@@ -45,7 +43,6 @@ JSON
     \"nodeId\": \"1ff9da1a-ee2f-4b9c-8c34-3333333333\",
     \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
   }
-
 
 **Note:** You can create shared links to more than one file
 specifying a list of **nodeId**s in the JSON body like this:
@@ -86,7 +83,6 @@ JSON
     ]
   }
 }
-
 
     *
     * @param sharedLinkBodyCreate The nodeId to create a shared link for.
@@ -157,7 +153,6 @@ Deletes the shared link with identifier **sharedId**.
 
         throwIfNotDefined(sharedId, 'sharedId');
 
-
         const postBody: null = null;
 
         const pathParams = {
@@ -214,7 +209,6 @@ JSON
     \"recipientEmails\": [\"john.doe@acme.com\"]
 }
 
-
     *
     * @param sharedId The identifier of a shared link to a file.
     * @param sharedLinkBodyEmail The shared link email to send.
@@ -224,7 +218,6 @@ JSON
 
         throwIfNotDefined(sharedId, 'sharedId');
         throwIfNotDefined(sharedLinkBodyEmail, 'sharedLinkBodyEmail');
-
 
         const postBody = sharedLinkBodyEmail;
 
@@ -385,7 +378,6 @@ which means the rendition is available to view/download.
         throwIfNotDefined(sharedId, 'sharedId');
         throwIfNotDefined(renditionId, 'renditionId');
 
-
         const postBody: null = null;
 
         const pathParams = {
@@ -490,7 +482,6 @@ where the rendition status is CREATED, which means the rendition is available to
 
         throwIfNotDefined(sharedId, 'sharedId');
 
-
         const postBody: null = null;
 
         const pathParams = {
@@ -561,7 +552,6 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<SharedLinkPaging>
     */
     listSharedLinks(opts?: any): Promise<SharedLinkPaging> {
-
 
         opts = opts || {};
         const postBody: null = null;

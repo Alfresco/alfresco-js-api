@@ -595,7 +595,6 @@ export class ProcessInstancesApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 

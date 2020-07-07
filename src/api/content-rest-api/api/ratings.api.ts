@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { RatingBody } from '../model/ratingBody';
 import { RatingEntry } from '../model/ratingEntry';
 import { RatingPaging } from '../model/ratingPaging';
@@ -43,7 +42,6 @@ JSON
     \"id\": \"likes\",
     \"myRating\": true
   }
-
 
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
@@ -103,7 +101,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(ratingId, 'ratingId');
-
 
         const postBody: null = null;
 

@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export * from './authentication.api';
 import { AuthenticationApi } from './authentication.api';
 

@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 /*!
     * @license
     * Copyright 2018 Alfresco Software, Ltd.
@@ -48,10 +47,8 @@ export class ReportApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/app/rest/reporting/default-reports', 'POST',
@@ -80,7 +77,6 @@ export class ReportApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
@@ -105,10 +101,8 @@ export class ReportApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/app/rest/reporting/report-params/{reportId}', 'POST',
@@ -125,10 +119,8 @@ export class ReportApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/app/rest/reporting/process-definitions', 'GET',
@@ -151,10 +143,8 @@ export class ReportApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/app/rest/reporting/report-params/{reportId}', 'GET',
@@ -171,10 +161,8 @@ export class ReportApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/app/rest/reporting/reports', 'GET',
@@ -199,10 +187,8 @@ export class ReportApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/app/rest/reporting/reports/{reportId}', 'PUT',
@@ -289,7 +275,6 @@ export class ReportApi extends BaseApi {
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
-
         return this.apiClient.callApi(
             '/app/rest/reporting/reports/{reportId}', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
@@ -319,10 +304,8 @@ export class ReportApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/app/rest/reporting/reports/{reportId}', 'DELETE',

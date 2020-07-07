@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export * from './actions.api';
 import { ActionsApi } from './actions.api';
 export * from './activities.api';

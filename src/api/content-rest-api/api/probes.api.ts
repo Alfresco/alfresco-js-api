@@ -15,11 +15,9 @@
 * limitations under the License.
 */
 
-
 import { ProbeEntry } from '../model/probeEntry';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
-import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Probes service.
@@ -49,7 +47,6 @@ The liveness probe should then be used to check the repository is still respondi
     getProbe(probeId: string): Promise<ProbeEntry> {
 
         throwIfNotDefined(probeId, 'probeId');
-
 
         const postBody: null = null;
 

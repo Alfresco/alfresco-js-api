@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { TagBody } from '../model/tagBody';
 import { TagEntry } from '../model/tagEntry';
 import { TagPaging } from '../model/tagPaging';
@@ -37,7 +36,6 @@ JSON
 {
   \"tag\":\"test-tag-1\"
 }
-
 
 **Note:** You can create more than one tag by
 specifying a list of tags in the JSON body like this:
@@ -78,7 +76,6 @@ JSON
     ]
   }
 }
-
 
     *
     * @param nodeId The identifier of a node.
@@ -141,7 +138,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(tagId, 'tagId');
-
 
         const postBody: null = null;
 
@@ -249,7 +245,6 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<TagPaging>
     */
     listTags(opts?: any): Promise<TagPaging> {
-
 
         opts = opts || {};
         const postBody: null = null;

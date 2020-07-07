@@ -27,4 +27,3 @@ export class QueriesApi extends NewQueriesApi {
         this.apiClient = alfrescoApi.contentClient;
     }
 }
-

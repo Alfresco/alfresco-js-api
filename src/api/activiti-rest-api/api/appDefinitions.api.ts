@@ -142,7 +142,6 @@ export class AppDefinitionsApi extends BaseApi {
         let contentTypes = ['multipart/form-data'];
         let accepts = ['application/json'];
 
-
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/publish-app', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
@@ -243,7 +242,6 @@ export class AppDefinitionsApi extends BaseApi {
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         if (!updatedModel['appDefinition']) {
             contentTypes = ['multipart/form-data'];

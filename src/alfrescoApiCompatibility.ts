@@ -18,7 +18,6 @@
 import { AlfrescoApi } from './alfrescoApi';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
-
 import { Legacy } from './api-legacy/legacy';
 import { CONTENT_LEGACY_APIS } from './api-legacy/content-rest-api/src';
 import { APS_LEGACY_APIS } from './api-legacy/activiti-rest-api/src';

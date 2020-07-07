@@ -45,7 +45,6 @@ For example using Javascript:
   Javascript
     request.setRequestHeader (\"Authorization\", \"Basic \" + btoa(ticket));
 
-
     *
     * @param ticketBodyCreate The user credential.
     * @return Promise<TicketEntry>
@@ -156,7 +155,6 @@ For example using Javascript:
     For example, you can pass the Authorization request header using Javascript:
       Javascript
         request.setRequestHeader (\"Authorization\", \"Basic \" + btoa(ticket));
-
 
         *
         * @return Promise<ValidTicketEntry>

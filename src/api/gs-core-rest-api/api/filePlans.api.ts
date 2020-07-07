@@ -285,7 +285,6 @@ parameter are returned in addition to those specified in the **fields** paramete
         }
     }
 
-
     **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
 
         *

@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export * from './about.api';
 import { AboutApi } from './about.api';
 export * from './accountIntegration.api';

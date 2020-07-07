@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { DownloadBodyCreate } from '../model/downloadBodyCreate';
 import { DownloadEntry } from '../model/downloadEntry';
 import { BaseApi } from './base.api';
@@ -49,7 +48,6 @@ The cancel operation is done asynchronously.
     cancelDownload(downloadId: string): Promise<any> {
 
         throwIfNotDefined(downloadId, 'downloadId');
-
 
         const postBody: null = null;
 
@@ -89,7 +87,6 @@ JSON
        \"cffa62db-aa01-493d-9594-058bc058eeb1\"
      ]
 }
-
 
 **Note:** The content of the download node can be obtained using the **GET /nodes/{downloadId}/content** endpoint
 

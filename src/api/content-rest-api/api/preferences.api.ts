@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { PreferenceEntry } from '../model/preferenceEntry';
 import { PreferencePaging } from '../model/preferencePaging';
 import { BaseApi } from './base.api';

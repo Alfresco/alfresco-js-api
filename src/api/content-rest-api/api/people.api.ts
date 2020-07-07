@@ -15,9 +15,7 @@
 * limitations under the License.
 */
 
-
 import { ClientBody } from '../model/clientBody';
-import { Date } from '../model/date';
 import { PasswordResetBody } from '../model/passwordResetBody';
 import { PersonBodyCreate } from '../model/personBodyCreate';
 import { PersonBodyUpdate } from '../model/personBodyUpdate';
@@ -124,7 +122,6 @@ You can use the -me- string in place of <personId> to specify the currently auth
     deleteAvatarImage(personId: string): Promise<any> {
 
         throwIfNotDefined(personId, 'personId');
-
 
         const postBody: null = null;
 
@@ -317,7 +314,6 @@ parameter are returned in addition to those specified in the **fields** paramete
     */
     listPeople(opts?: any): Promise<PersonPaging> {
 
-
         opts = opts || {};
         const postBody: null = null;
 
@@ -379,7 +375,6 @@ JSON
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(clientBody, 'clientBody');
 
-
         const postBody = clientBody;
 
         const pathParams = {
@@ -430,7 +425,6 @@ JSON
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(passwordResetBody, 'passwordResetBody');
 
-
         const postBody = passwordResetBody;
 
         const pathParams = {
@@ -477,7 +471,6 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
-
 
         const postBody = contentBodyUpdate;
 
