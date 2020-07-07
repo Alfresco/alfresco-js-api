@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { NodesApi } from './nodes.api';
+import { NodesApi } from '../../content-rest-api/api/nodes.api';
 import { Emitter } from 'event-emitter';
 
 export class UploadApi extends NodesApi {

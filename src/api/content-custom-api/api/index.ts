@@ -15,15 +15,19 @@
 * limitations under the License.
 */
 
-import { AlfrescoApi } from '../alfrescoApi';
-import { UploadApi } from '../api/content-custom-api/api/upload.api';
+export * from './webscript.api';
+import { WebscriptApi } from './webscript.api';
 
-/**
- * @deprecated 3.0.0
- */
-export class AlfrescoUpload extends UploadApi {
+export * from './classes.api';
+import { ClassesApi } from './classes.api';
 
-    public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.contentClient;
-    }
-}
+export * from './upload.api';
+import { UploadApi } from './upload.api';
+
+export * from './content.api';
+import { ContentApi } from './content.api';
+
+export * from './customModel.api';
+import { CustomModelApi } from './customModel.api';
+
+export const CONTENT_CUSTOM_APIS = [WebscriptApi, ClassesApi, CustomModelApi, UploadApi, ContentApi];

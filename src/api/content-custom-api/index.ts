@@ -15,15 +15,5 @@
 * limitations under the License.
 */
 
-import { AlfrescoApi } from '../alfrescoApi';
-import { UploadApi } from '../api/content-custom-api/api/upload.api';
-
-/**
- * @deprecated 3.0.0
- */
-export class AlfrescoUpload extends UploadApi {
-
-    public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.contentClient;
-    }
-}
+export * from './api';
+export * from './model';

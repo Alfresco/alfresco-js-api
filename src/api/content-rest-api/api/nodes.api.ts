@@ -20,8 +20,6 @@ import { AssociationBody } from '../model/associationBody';
 import { AssociationEntry } from '../model/associationEntry';
 import { ChildAssociationBody } from '../model/childAssociationBody';
 import { ChildAssociationEntry } from '../model/childAssociationEntry';
-import { Date } from '../model/date';
-import { DirectAccessUrlBodyCreate } from '../model/directAccessUrlBodyCreate';
 import { DirectAccessUrlEntry } from '../model/directAccessUrlEntry';
 import { NodeAssociationPaging } from '../model/nodeAssociationPaging';
 import { NodeBodyCopy } from '../model/nodeBodyCopy';
