@@ -16,7 +16,7 @@
 */
 
 import { AlfrescoApi } from '../../../../alfrescoApi';
-import { CustomModelApi as NewCustomModelApi } from '../../../../api/content-rest-api/api/customModel.api';
+import { CustomModelApi as NewCustomModelApi } from '../../../../api/content-custom-api/api/customModel.api';
 
 /**
  * @deprecated 3.0.0
