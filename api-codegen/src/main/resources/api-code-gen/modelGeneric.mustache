@@ -14,7 +14,9 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{
 {{/vars}}
 
     constructor(input?: any) {
-{{#parent}}super();{{/parent}}
+        {{#parent}}
+        super();
+        {{/parent}}
         if (input) {
             Object.assign(this, input);
             {{#vars}}
