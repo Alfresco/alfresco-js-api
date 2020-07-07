@@ -437,7 +437,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeEntry>
     */
-    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: any): Promise<NodeEntry> {
+    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: any, formParams?: any): Promise<NodeEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
@@ -458,8 +458,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         const headerParams = {
 
         };
-        const formParams = {
-        };
+
+        formParams = formParams || {};
 
         const contentTypes = ['application/json', 'multipart/form-data'];
         const accepts = ['application/json'];
