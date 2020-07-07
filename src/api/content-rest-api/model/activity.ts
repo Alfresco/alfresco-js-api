@@ -47,7 +47,7 @@ export class Activity {
     /**
      * An object summarizing the activity
      */
-    activitySummary?: any;
+    activitySummary?: { [key: string]: string; };
     /**
      * The type of the activity posted
      */

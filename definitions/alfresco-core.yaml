@@ -8457,6 +8457,8 @@ definitions:
                 description: The feed on which this activity was posted
             activitySummary:
                 type: object
+                additionalProperties:
+                    type: string
                 description: An object summarizing the activity
             activityType:
                 description: The type of the activity posted
