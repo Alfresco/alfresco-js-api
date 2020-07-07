@@ -1173,7 +1173,7 @@ paths:
                  }
                 ```
 
-                **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+                **Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
                 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
             operationId: request-content-url
             parameters:
@@ -1528,6 +1528,8 @@ paths:
                   required: true
                   schema:
                       $ref: '#/definitions/NodeBodyCreate'
+                - in: formData
+
             consumes:
                 - application/json
                 - multipart/form-data
@@ -2086,7 +2088,7 @@ paths:
                  }
                 ```
 
-                **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+                **Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
                 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
             operationId: request-content-url
             parameters:
@@ -2769,7 +2771,7 @@ paths:
                  }
                 ```
 
-                **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+                **Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
                 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
             operationId: request-content-url
             parameters:
@@ -3063,7 +3065,7 @@ paths:
                  }
                 ```
 
-                **Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+                **Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
                 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
             operationId: request-content-url
             parameters:
@@ -9545,10 +9547,10 @@ definitions:
                 description: define if the property is multi-valued
                 type: boolean
             isMandatory:
-                description: define if the property is manadatory
+                description: define if the property is mandatory
                 type: boolean
             isMandatoryEnforced:
-                description: define if the presence of manadatory properties is enforced
+                description: define if the presence of mandatory properties is enforced
                 type: boolean
             isProtected:
                 description: define if the property is system maintained

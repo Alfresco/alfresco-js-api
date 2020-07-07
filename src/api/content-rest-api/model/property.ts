@@ -40,11 +40,11 @@ export class Property {
      */
     isMultiValued?: boolean;
     /**
-     * define if the property is manadatory
+     * define if the property is mandatory
      */
     isMandatory?: boolean;
     /**
-     * define if the presence of manadatory properties is enforced
+     * define if the presence of mandatory properties is enforced
      */
     isMandatoryEnforced?: boolean;
     /**

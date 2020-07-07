@@ -1791,7 +1791,7 @@ JSON
  }
 
 
-**Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
 
 
@@ -1856,7 +1856,7 @@ JSON
  }
 
 
-**Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
 
 
@@ -1922,7 +1922,7 @@ JSON
  }
 
 
-**Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
 
 
@@ -1988,7 +1988,7 @@ JSON
  }
 
 
-**Note:** If an expiryAt date or valiFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
+**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
 **Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
 
 
