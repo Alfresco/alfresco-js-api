@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 
 export class EndpointBasicAuthRepresentation {
     created?: Date;

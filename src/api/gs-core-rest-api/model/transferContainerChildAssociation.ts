@@ -16,7 +16,7 @@
 */
 
 import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociationInfo';
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
 
 export class TransferContainerChildAssociation {

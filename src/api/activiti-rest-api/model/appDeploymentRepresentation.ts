@@ -16,7 +16,7 @@
 */
 
 import { AppDefinitionRepresentation } from './appDefinitionRepresentation';
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 import { LightUserRepresentation } from './lightUserRepresentation';
 
 export class AppDeploymentRepresentation {
