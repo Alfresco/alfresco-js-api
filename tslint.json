@@ -51,7 +51,6 @@
         "no-eval": true,
         "no-inferrable-types": false,
         "no-internal-module": true,
-        "no-unused-declaration": true,
         "no-require-imports": true,
         "no-shadowed-variable": false,
         "no-switch-case-fall-through": true,
@@ -116,6 +115,6 @@
             true,
             "src/**/*.ts",
             "./assets/license.txt"
-        ]
-    }
+        ],
+        "no-unused-declaration": true}
 }

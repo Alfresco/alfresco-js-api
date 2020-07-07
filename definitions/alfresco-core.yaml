@@ -901,7 +901,9 @@ paths:
                   description: The new tag
                   required: true
                   schema:
-                      $ref: '#/definitions/TagBody'
+                    type: array
+                    items:
+                        $ref: '#/definitions/TagBody'
             responses:
                 '201':
                     description: Successful response
