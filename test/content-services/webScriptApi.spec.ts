@@ -1,7 +1,7 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApi } from '../../src/alfrescoApi';
-import { WebscriptApi } from '../../src/api/content-rest-api';
+import { WebscriptApi } from '../../src/api/content-custom-api';
 
 const expect = require('chai').expect;
 const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
