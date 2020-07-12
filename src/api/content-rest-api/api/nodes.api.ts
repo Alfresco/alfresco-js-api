@@ -437,37 +437,41 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeEntry>
     */
-    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: any, formParams?: any): Promise<NodeEntry> {
-
+    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: any, formParams?: any): Promise<NodeEntry| any> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
 
         opts = opts || {};
-        const postBody = nodeBodyCreate;
+        let postBody = nodeBodyCreate;
 
-        const pathParams = {
+        let pathParams = {
             'nodeId': nodeId
         };
 
-        const queryParams = {
+        let queryParams = {
             'autoRename': opts['autoRename'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-
+        let headerParams = {};
         formParams = formParams || {};
 
-        const contentTypes = ['application/json', 'multipart/form-data'];
-        const accepts = ['application/json'];
+        let contentTypes, returnType = null;
+
+        if (formParams.filedata) {
+            contentTypes = ['multipart/form-data'];
+        } else {
+            contentTypes = ['application/json'];
+            returnType = NodeEntry;
+        }
+
+        let accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/children', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeEntry);
+            contentTypes, accepts, returnType);
     }
 /**
     * Create secondary child

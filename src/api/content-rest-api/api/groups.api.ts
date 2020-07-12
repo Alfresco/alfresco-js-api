@@ -190,12 +190,14 @@ You must have admin rights to delete a group.
         opts = opts || {};
         const postBody: null = null;
 
+        let cascadeDelete = opts['cascade'] ? opts['cascade'] : false;
+
         const pathParams = {
             'groupId': groupId
         };
 
         const queryParams = {
-            'cascade': opts['cascade']
+            'cascade': cascadeDelete
         };
 
         const headerParams = {
