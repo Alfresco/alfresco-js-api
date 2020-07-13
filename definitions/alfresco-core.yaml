@@ -7511,8 +7511,6 @@ definitions:
         required:
             - count
             - hasMoreItems
-            - skipCount
-            - maxItems
         properties:
             count:
                 type: integer

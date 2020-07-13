@@ -41,13 +41,13 @@ those included in this list. If there was no **skipCount** parameter then the
 default value is 0.
 
      */
-    skipCount: number;
+    skipCount?: number;
     /**
      * The value of the **maxItems** parameter used to generate this list.
 If there was no **maxItems** parameter then the default value is 100.
 
      */
-    maxItems: number;
+    maxItems?: number;
 
     constructor(input?: any) {
         if (input) {
