@@ -21,7 +21,6 @@ export class PersonNetworkEntry {
     entry: PersonNetwork;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new PersonNetwork(input.entry) : undefined;

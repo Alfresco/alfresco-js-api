@@ -20,7 +20,6 @@ export class RatingAggregate {
     average?: number;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

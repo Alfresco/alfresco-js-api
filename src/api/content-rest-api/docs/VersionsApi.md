@@ -4,15 +4,79 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfres
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**createVersionRendition**](VersionsApi.md#createVersionRendition) | **POST** /nodes/{nodeId}/versions/{versionId}/renditions | Create rendition for a file version
 [**deleteVersion**](VersionsApi.md#deleteVersion) | **DELETE** /nodes/{nodeId}/versions/{versionId} | Delete a version
 [**getVersion**](VersionsApi.md#getVersion) | **GET** /nodes/{nodeId}/versions/{versionId} | Get version information
 [**getVersionContent**](VersionsApi.md#getVersionContent) | **GET** /nodes/{nodeId}/versions/{versionId}/content | Get version content
+[**getVersionRendition**](VersionsApi.md#getVersionRendition) | **GET** /nodes/{nodeId}/versions/{versionId}/renditions/{renditionId} | Get rendition information for a file version
+[**getVersionRenditionContent**](VersionsApi.md#getVersionRenditionContent) | **GET** /nodes/{nodeId}/versions/{versionId}/renditions/{renditionId}/content | Get rendition content for a file version
 [**listVersionHistory**](VersionsApi.md#listVersionHistory) | **GET** /nodes/{nodeId}/versions | List version history
+[**listVersionRenditions**](VersionsApi.md#listVersionRenditions) | **GET** /nodes/{nodeId}/versions/{versionId}/renditions | List renditions for a file version
 [**revertVersion**](VersionsApi.md#revertVersion) | **POST** /nodes/{nodeId}/versions/{versionId}/revert | Revert a version
 
 
+<a name="createVersionRendition"></a>
+## createVersionRendition
+> createVersionRendition(nodeIdversionIdrenditionBodyCreate)
+
+Create rendition for a file version
+
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+An asynchronous request to create a rendition for version of file **nodeId** and **versionId**.
+
+The version rendition is specified by name **id** in the request body:
+JSON
+{
+  \"id\":\"doclib\"
+}
+
+  Multiple names may be specified as a comma separated list or using a list format:
+JSON
+[
+  {
+      \"id\": \"doclib\"
+  },
+  {
+      \"id\": \"avatar\"
+  }
+]
+
+
+
+### Example
+
+```javascript
+import { AlfrescoApi, VersionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const versionsApi = new VersionsApi(alfrescoApi);
+
+
+versionsApi.createVersionRendition(nodeIdversionIdrenditionBodyCreate).then(() => {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **versionId** | **string**| The identifier of a version, ie. version label, within the version history of a node. | 
+ **renditionBodyCreate** | [**RenditionBodyCreate**](RenditionBodyCreate.md)| The rendition \"id\". | 
+
+### Return type
+
+null (empty response body)
+
 <a name="deleteVersion"></a>
-# **deleteVersion**
+## deleteVersion
 > deleteVersion(nodeIdversionId)
 
 Delete a version
@@ -33,16 +97,15 @@ params (majorVersion and comment) on a subsequent file content update.
 
 
 ### Example
-```javascript
-import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, VersionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let versionsApi = new VersionsApi(this.alfrescoApi);
+const versionsApi = new VersionsApi(alfrescoApi);
 
 
 versionsApi.deleteVersion(nodeIdversionId).then(() => {
@@ -50,7 +113,6 @@ versionsApi.deleteVersion(nodeIdversionId).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -65,7 +127,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="getVersion"></a>
-# **getVersion**
+## getVersion
 > VersionEntry getVersion(nodeIdversionId)
 
 Get version information
@@ -76,16 +138,15 @@ Gets the version information for **versionId** of file node **nodeId**.
 
 
 ### Example
-```javascript
-import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, VersionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let versionsApi = new VersionsApi(this.alfrescoApi);
+const versionsApi = new VersionsApi(alfrescoApi);
 
 
 versionsApi.getVersion(nodeIdversionId).then((data) => {
@@ -93,7 +154,6 @@ versionsApi.getVersion(nodeIdversionId).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -108,8 +168,8 @@ Name | Type | Description  | Notes
 [**VersionEntry**](VersionEntry.md)
 
 <a name="getVersionContent"></a>
-# **getVersionContent**
-> getVersionContent(nodeIdversionIdopts)
+## getVersionContent
+> Blob getVersionContent(nodeIdversionIdopts)
 
 Get version content
 
@@ -119,19 +179,18 @@ Gets the version content for **versionId** of file node **nodeId**.
 
 
 ### Example
-```javascript
-import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, VersionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let versionsApi = new VersionsApi(this.alfrescoApi);
+const versionsApi = new VersionsApi(alfrescoApi);
 
-let opts = { 
-  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
+const opts = { 
+  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -140,21 +199,20 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
-
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
+ */
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
-
-  'range': range_example //  | The Range header indicates the part of a document that the server should return.
+ */
+  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
-
+ */
 };
 
-versionsApi.getVersionContent(nodeIdversionIdopts).then(() => {
-  console.log('API called successfully.');
+versionsApi.getVersionContent(nodeIdversionIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -182,10 +240,136 @@ Single part request supported, for example: bytes=1-10.
 
 ### Return type
 
-null (empty response body)
+**Blob**
+
+<a name="getVersionRendition"></a>
+## getVersionRendition
+> RenditionEntry getVersionRendition(nodeIdversionIdrenditionId)
+
+Get rendition information for a file version
+
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+Gets the rendition information for **renditionId** of version of file **nodeId** and **versionId**.
+
+
+### Example
+
+```javascript
+import { AlfrescoApi, VersionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const versionsApi = new VersionsApi(alfrescoApi);
+
+
+versionsApi.getVersionRendition(nodeIdversionIdrenditionId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **versionId** | **string**| The identifier of a version, ie. version label, within the version history of a node. | 
+ **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
+
+### Return type
+
+[**RenditionEntry**](RenditionEntry.md)
+
+<a name="getVersionRenditionContent"></a>
+## getVersionRenditionContent
+> Blob getVersionRenditionContent(nodeIdversionIdrenditionIdopts)
+
+Get rendition content for a file version
+
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+Gets the rendition content for **renditionId** of version of file **nodeId** and **versionId**.
+
+
+### Example
+
+```javascript
+import { AlfrescoApi, VersionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const versionsApi = new VersionsApi(alfrescoApi);
+
+const opts = { 
+  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
+**false** means a web browser may preview the file in a new tab or window, but not
+download the file.
+
+You can only set this parameter to **false** if the content type of the file is in the supported list;
+for example, certain image files and PDF files.
+
+If the content type is not supported for preview, then a value of **false**  is ignored, and
+the attachment will be returned in the response.
+ */
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
+Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
+ */
+  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
+Single part request supported, for example: bytes=1-10.
+ */
+  'placeholder': true /*  | If **true** and there is no rendition for this **nodeId** and **renditionId**,
+then the placeholder image for the mime type of this rendition is returned, rather
+than a 404 response.
+ */
+};
+
+versionsApi.getVersionRenditionContent(nodeIdversionIdrenditionIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **versionId** | **string**| The identifier of a version, ie. version label, within the version history of a node. | 
+ **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
+ **attachment** | **boolean**| **true** enables a web browser to download the file as an attachment.
+**false** means a web browser may preview the file in a new tab or window, but not
+download the file.
+
+You can only set this parameter to **false** if the content type of the file is in the supported list;
+for example, certain image files and PDF files.
+
+If the content type is not supported for preview, then a value of **false**  is ignored, and
+the attachment will be returned in the response.
+ | [optional] [default to true]
+ **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
+Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
+ | [optional] 
+ **range** | **string**| The Range header indicates the part of a document that the server should return.
+Single part request supported, for example: bytes=1-10.
+ | [optional] 
+ **placeholder** | **boolean**| If **true** and there is no rendition for this **nodeId** and **renditionId**,
+then the placeholder image for the mime type of this rendition is returned, rather
+than a 404 response.
+ | [optional] [default to false]
+
+### Return type
+
+**Blob**
 
 <a name="listVersionHistory"></a>
-# **listVersionHistory**
+## listVersionHistory
 > VersionPaging listVersionHistory(nodeIdopts)
 
 List version history
@@ -199,23 +383,22 @@ the original version is last in the list.
 
 
 ### Example
-```javascript
-import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, VersionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let versionsApi = new VersionsApi(this.alfrescoApi);
+const versionsApi = new VersionsApi(alfrescoApi);
 
-let opts = { 
-  'include':  //  | Returns additional information about the version node. The following optional fields can be requested:
+const opts = { 
+  'include':  /*  | Returns additional information about the version node. The following optional fields can be requested:
 * properties
 * aspectNames
-
-  'fields':  //  | A list of field names.
+ */
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -226,13 +409,13 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+ */
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
+ */
 };
 
 versionsApi.listVersionHistory(nodeIdopts).then((data) => {
@@ -240,7 +423,6 @@ versionsApi.listVersionHistory(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -275,8 +457,62 @@ If not supplied then the default value is 100.
 
 [**VersionPaging**](VersionPaging.md)
 
+<a name="listVersionRenditions"></a>
+## listVersionRenditions
+> RenditionPaging listVersionRenditions(nodeIdversionIdopts)
+
+List renditions for a file version
+
+**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+Gets a list of the rendition information for each rendition of the version of file **nodeId** and **versionId**, including the rendition id.
+
+Each rendition returned has a **status**: CREATED means it is available to view or download, NOT_CREATED means the rendition can be requested.
+
+You can use the **where** parameter to filter the returned renditions by **status**. For example, the following **where**
+clause will return just the CREATED renditions:
+
+
+(status='CREATED')
+
+
+
+### Example
+
+```javascript
+import { AlfrescoApi, VersionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const versionsApi = new VersionsApi(alfrescoApi);
+
+const opts = { 
+  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
+};
+
+versionsApi.listVersionRenditions(nodeIdversionIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **nodeId** | **string**| The identifier of a node. | 
+ **versionId** | **string**| The identifier of a version, ie. version label, within the version history of a node. | 
+ **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
+
+### Return type
+
+[**RenditionPaging**](RenditionPaging.md)
+
 <a name="revertVersion"></a>
-# **revertVersion**
+## revertVersion
 > VersionEntry revertVersion(nodeIdversionIdrevertBodyopts)
 
 Revert a version
@@ -290,19 +526,18 @@ will be promoted to the live node and a new version will appear in the version h
 
 
 ### Example
-```javascript
-import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, VersionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let versionsApi = new VersionsApi(this.alfrescoApi);
+const versionsApi = new VersionsApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -313,7 +548,7 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
+ */
 };
 
 versionsApi.revertVersion(nodeIdversionIdrevertBodyopts).then((data) => {
@@ -321,7 +556,6 @@ versionsApi.revertVersion(nodeIdversionIdrevertBodyopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -348,239 +582,3 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**VersionEntry**](VersionEntry.md)
 
-<a name="createVersionRendition"></a>
-# **createVersionRendition**
-> createVersionRendition(nodeIdversionIdrenditionBodyCreate)
-
-Create version rendition
-
-**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
-
-An asynchronous request to create a rendition for file **nodeId**'s **versionId**.
-
-The rendition is specified by name **id** in the request body:
-JSON
-{
-  \"id\":\"doclib\"
-}
-
-
-
-### Example
-```javascript
-import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let versionsApi = new VersionsApi(this.alfrescoApi);
-
-
-versionsApi.createVersionRendition(nodeIdversionIdrenditionBodyCreate).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nodeId** | **string**| The identifier of a node. | 
- **versionId** | **string**| The identifier of a version. | 
- **renditionBodyCreate** | [**RenditionBodyCreate**](RenditionBodyCreate.md)| The rendition \"id\". | 
-
-### Return type
-
-null (empty response body)
-
-<a name="getVersionRendition"></a>
-# **getVersionRendition**
-> RenditionEntry getVersionRendition(nodeIdversionIdrenditionId)
-
-Get rendition information
-
-**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
-
-Gets the rendition information for **renditionId** of file **nodeId**'s **versionId**.
-
-
-### Example
-```javascript
-import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let versionsApi = new VersionsApi(this.alfrescoApi);
-
-
-versionsApi.getVersionRendition(nodeIdversionIdrenditionId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nodeId** | **string**| The identifier of a node. | 
- **versionId** | **string**| The identifier of a version. | 
- **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
-
-### Return type
-
-[**RenditionEntry**](RenditionEntry.md)
-
-<a name="getVersionRenditionContent"></a>
-# **getVersionRenditionContent**
-> getVersionRenditionContent(nodeIdversionIdrenditionIdopts)
-
-Get rendition content
-
-**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
-
-Gets the rendition content for **renditionId** of file **nodeId**'s **versionId**.
-
-
-### Example
-```javascript
-import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let versionsApi = new VersionsApi(this.alfrescoApi);
-
-let opts = { 
-  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
-**false** means a web browser may preview the file in a new tab or window, but not
-download the file.
-
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
-
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
-
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
-
-  'range': range_example //  | The Range header indicates the part of a document that the server should return.
-Single part request supported, for example: bytes=1-10.
-
-  'placeholder': true //  | If **true** and there is no rendition for this **nodeId** and **renditionId**,
-then the placeholder image for the mime type of this rendition is returned, rather
-than a 404 response.
-
-};
-
-versionsApi.getVersionRenditionContent(nodeIdversionIdrenditionIdopts).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nodeId** | **string**| The identifier of a node. | 
- **versionId** | **string**| The identifier of a version. | 
- **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
- **attachment** | **boolean**| **true** enables a web browser to download the file as an attachment.
-**false** means a web browser may preview the file in a new tab or window, but not
-download the file.
-
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
-
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
- | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
- | [optional] 
- **range** | **string**| The Range header indicates the part of a document that the server should return.
-Single part request supported, for example: bytes=1-10.
- | [optional] 
- **placeholder** | **boolean**| If **true** and there is no rendition for this **nodeId** and **renditionId**,
-then the placeholder image for the mime type of this rendition is returned, rather
-than a 404 response.
- | [optional] [default to false]
-
-### Return type
-
-null (empty response body)
-
-<a name="listVersionRenditions"></a>
-# **listVersionRenditions**
-> RenditionPaging listVersionRenditions(nodeIdversionIdopts)
-
-List renditions
-
-**Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
-
-Gets a list of the rendition information for each rendition of the the file **nodeId**'s **versionId**, including the rendition id.
-
-Each rendition returned has a **status**: CREATED means it is available to view or download, NOT_CREATED means the rendition can be requested.
-
-You can use the **where** parameter to filter the returned renditions by **status**. For example, the following **where**
-clause will return just the CREATED renditions:
-
-
-(status='CREATED')
-
-
-
-### Example
-```javascript
-import VersionsApi from 'VersionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
-
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let versionsApi = new VersionsApi(this.alfrescoApi);
-
-let opts = { 
-  'where': where_example //  | A string to restrict the returned objects by using a predicate.
-};
-
-versionsApi.listVersionRenditions(nodeIdversionIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nodeId** | **string**| The identifier of a node. | 
- **versionId** | **string**| The identifier of a version. | 
- **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
-
-### Return type
-
-[**RenditionPaging**](RenditionPaging.md)

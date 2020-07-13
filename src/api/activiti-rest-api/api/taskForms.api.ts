@@ -124,7 +124,6 @@ export class TaskFormsApi extends BaseApi {
             throw "Missing param 'column' in getRestFieldValues";
         }
 
-
         let pathParams = {
             'taskId': taskId,
             'field': field,
@@ -134,10 +133,8 @@ export class TaskFormsApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET',
@@ -265,7 +262,6 @@ export class TaskFormsApi extends BaseApi {
             throw "Missing param 'taskId' in getTaskFormVariables";
         }
 
-
         let pathParams = {
             'taskId': taskId
         };
@@ -273,10 +269,8 @@ export class TaskFormsApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/api/enterprise/task-forms/{taskId}/variables', 'GET',
@@ -284,7 +278,5 @@ export class TaskFormsApi extends BaseApi {
             contentTypes, accepts
         );
     }
-
-
 
 }

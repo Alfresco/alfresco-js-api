@@ -24,7 +24,6 @@ export class SiteRole {
     role: SiteRole.RoleEnum | string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.site = input.site ? new Site(input.site) : undefined;

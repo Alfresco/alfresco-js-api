@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 <a name="createRendition"></a>
-# **createRendition**
+## createRendition
 > createRendition(nodeIdrenditionBodyCreate)
 
 Create rendition
@@ -26,19 +26,29 @@ JSON
   \"id\":\"doclib\"
 }
 
+ Multiple names may be specified as a comma separated list or using a list format:
+JSON
+[
+  {
+     \"id\": \"doclib\"
+  },
+  {
+     \"id\": \"avatar\"
+  }
+]
+
 
 
 ### Example
-```javascript
-import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, RenditionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let renditionsApi = new RenditionsApi(this.alfrescoApi);
+const renditionsApi = new RenditionsApi(alfrescoApi);
 
 
 renditionsApi.createRendition(nodeIdrenditionBodyCreate).then(() => {
@@ -46,7 +56,6 @@ renditionsApi.createRendition(nodeIdrenditionBodyCreate).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -61,7 +70,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="getRendition"></a>
-# **getRendition**
+## getRendition
 > RenditionEntry getRendition(nodeIdrenditionId)
 
 Get rendition information
@@ -72,16 +81,15 @@ Gets the rendition information for **renditionId** of file **nodeId**.
 
 
 ### Example
-```javascript
-import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, RenditionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let renditionsApi = new RenditionsApi(this.alfrescoApi);
+const renditionsApi = new RenditionsApi(alfrescoApi);
 
 
 renditionsApi.getRendition(nodeIdrenditionId).then((data) => {
@@ -89,7 +97,6 @@ renditionsApi.getRendition(nodeIdrenditionId).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -104,8 +111,8 @@ Name | Type | Description  | Notes
 [**RenditionEntry**](RenditionEntry.md)
 
 <a name="getRenditionContent"></a>
-# **getRenditionContent**
-> getRenditionContent(nodeIdrenditionIdopts)
+## getRenditionContent
+> Blob getRenditionContent(nodeIdrenditionIdopts)
 
 Get rendition content
 
@@ -115,19 +122,18 @@ Gets the rendition content for **renditionId** of file **nodeId**.
 
 
 ### Example
-```javascript
-import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, RenditionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let renditionsApi = new RenditionsApi(this.alfrescoApi);
+const renditionsApi = new RenditionsApi(alfrescoApi);
 
-let opts = { 
-  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
+const opts = { 
+  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -136,25 +142,24 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
-
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
+ */
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
-
-  'range': range_example //  | The Range header indicates the part of a document that the server should return.
+ */
+  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
-
-  'placeholder': true //  | If **true** and there is no rendition for this **nodeId** and **renditionId**,
+ */
+  'placeholder': true /*  | If **true** and there is no rendition for this **nodeId** and **renditionId**,
 then the placeholder image for the mime type of this rendition is returned, rather
 than a 404 response.
-
+ */
 };
 
-renditionsApi.getRenditionContent(nodeIdrenditionIdopts).then(() => {
-  console.log('API called successfully.');
+renditionsApi.getRenditionContent(nodeIdrenditionIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -186,10 +191,10 @@ than a 404 response.
 
 ### Return type
 
-null (empty response body)
+**Blob**
 
 <a name="listRenditions"></a>
-# **listRenditions**
+## listRenditions
 > RenditionPaging listRenditions(nodeIdopts)
 
 List renditions
@@ -209,19 +214,18 @@ clause will return just the CREATED renditions:
 
 
 ### Example
-```javascript
-import RenditionsApi from 'RenditionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, RenditionsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let renditionsApi = new RenditionsApi(this.alfrescoApi);
+const renditionsApi = new RenditionsApi(alfrescoApi);
 
-let opts = { 
-  'where': where_example //  | A string to restrict the returned objects by using a predicate.
+const opts = { 
+  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
 };
 
 renditionsApi.listRenditions(nodeIdopts).then((data) => {
@@ -229,7 +233,6 @@ renditionsApi.listRenditions(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters

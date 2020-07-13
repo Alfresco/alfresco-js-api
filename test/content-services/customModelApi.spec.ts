@@ -1,7 +1,7 @@
 /*global describe, it, beforeEach */
 
 import { AlfrescoApi } from '../../src/alfrescoApi';
-import { CustomModelApi } from '../../src/api/content-rest-api';
+import { CustomModelApi } from '../../src/api/content-custom-api';
 
 const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 const CustomModelMock = require('../../test/mockObjects/mockAlfrescoApi').CustomModel;

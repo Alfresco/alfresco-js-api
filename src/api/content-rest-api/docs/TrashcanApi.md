@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 <a name="deleteDeletedNode"></a>
-# **deleteDeletedNode**
+## deleteDeletedNode
 > deleteDeletedNode(nodeId)
 
 Permanently delete a deleted node
@@ -26,16 +26,15 @@ Permanently deletes the deleted node **nodeId**.
 
 
 ### Example
-```javascript
-import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TrashcanApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let trashcanApi = new TrashcanApi(this.alfrescoApi);
+const trashcanApi = new TrashcanApi(alfrescoApi);
 
 
 trashcanApi.deleteDeletedNode(nodeId).then(() => {
@@ -43,7 +42,6 @@ trashcanApi.deleteDeletedNode(nodeId).then(() => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -57,7 +55,7 @@ Name | Type | Description  | Notes
 null (empty response body)
 
 <a name="getArchivedNodeRendition"></a>
-# **getArchivedNodeRendition**
+## getArchivedNodeRendition
 > RenditionEntry getArchivedNodeRendition(nodeIdrenditionId)
 
 Get rendition information for a deleted node
@@ -68,16 +66,15 @@ Gets the rendition information for **renditionId** of file **nodeId**.
 
 
 ### Example
-```javascript
-import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TrashcanApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let trashcanApi = new TrashcanApi(this.alfrescoApi);
+const trashcanApi = new TrashcanApi(alfrescoApi);
 
 
 trashcanApi.getArchivedNodeRendition(nodeIdrenditionId).then((data) => {
@@ -85,7 +82,6 @@ trashcanApi.getArchivedNodeRendition(nodeIdrenditionId).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -100,8 +96,8 @@ Name | Type | Description  | Notes
 [**RenditionEntry**](RenditionEntry.md)
 
 <a name="getArchivedNodeRenditionContent"></a>
-# **getArchivedNodeRenditionContent**
-> getArchivedNodeRenditionContent(nodeIdrenditionIdopts)
+## getArchivedNodeRenditionContent
+> Blob getArchivedNodeRenditionContent(nodeIdrenditionIdopts)
 
 Get rendition content of a deleted node
 
@@ -111,19 +107,18 @@ Gets the rendition content for **renditionId** of file **nodeId**.
 
 
 ### Example
-```javascript
-import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TrashcanApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let trashcanApi = new TrashcanApi(this.alfrescoApi);
+const trashcanApi = new TrashcanApi(alfrescoApi);
 
-let opts = { 
-  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
+const opts = { 
+  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -132,25 +127,24 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
-
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
+ */
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
-
-  'range': range_example //  | The Range header indicates the part of a document that the server should return.
+ */
+  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
-
-  'placeholder': true //  | If **true** and there is no rendition for this **nodeId** and **renditionId**,
+ */
+  'placeholder': true /*  | If **true** and there is no rendition for this **nodeId** and **renditionId**,
 then the placeholder image for the mime type of this rendition is returned, rather
 than a 404 response.
-
+ */
 };
 
-trashcanApi.getArchivedNodeRenditionContent(nodeIdrenditionIdopts).then(() => {
-  console.log('API called successfully.');
+trashcanApi.getArchivedNodeRenditionContent(nodeIdrenditionIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -182,10 +176,10 @@ than a 404 response.
 
 ### Return type
 
-null (empty response body)
+**Blob**
 
 <a name="getDeletedNode"></a>
-# **getDeletedNode**
+## getDeletedNode
 > DeletedNodeEntry getDeletedNode(nodeIdopts)
 
 Get a deleted node
@@ -196,19 +190,18 @@ Gets the specific deleted node **nodeId**.
 
 
 ### Example
-```javascript
-import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TrashcanApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let trashcanApi = new TrashcanApi(this.alfrescoApi);
+const trashcanApi = new TrashcanApi(alfrescoApi);
 
-let opts = { 
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+const opts = { 
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * association
 * isLink
@@ -216,7 +209,8 @@ let opts = {
 * isLocked
 * path
 * permissions
-
+* definition
+ */
 };
 
 trashcanApi.getDeletedNode(nodeIdopts).then((data) => {
@@ -224,7 +218,6 @@ trashcanApi.getDeletedNode(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -240,6 +233,7 @@ Name | Type | Description  | Notes
 * isLocked
 * path
 * permissions
+* definition
  | [optional] 
 
 ### Return type
@@ -247,8 +241,8 @@ Name | Type | Description  | Notes
 [**DeletedNodeEntry**](DeletedNodeEntry.md)
 
 <a name="getDeletedNodeContent"></a>
-# **getDeletedNodeContent**
-> getDeletedNodeContent(nodeIdopts)
+## getDeletedNodeContent
+> Blob getDeletedNodeContent(nodeIdopts)
 
 Get deleted node content
 
@@ -258,19 +252,18 @@ Gets the content of the deleted node with identifier **nodeId**.
 
 
 ### Example
-```javascript
-import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TrashcanApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let trashcanApi = new TrashcanApi(this.alfrescoApi);
+const trashcanApi = new TrashcanApi(alfrescoApi);
 
-let opts = { 
-  'attachment': true //  | **true** enables a web browser to download the file as an attachment.
+const opts = { 
+  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
 **false** means a web browser may preview the file in a new tab or window, but not
 download the file.
 
@@ -279,21 +272,20 @@ for example, certain image files and PDF files.
 
 If the content type is not supported for preview, then a value of **false**  is ignored, and
 the attachment will be returned in the response.
-
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 //  | Only returns the content if it has been modified since the date provided.
+ */
+  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
 Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
-
-  'range': range_example //  | The Range header indicates the part of a document that the server should return.
+ */
+  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
 Single part request supported, for example: bytes=1-10.
-
+ */
 };
 
-trashcanApi.getDeletedNodeContent(nodeIdopts).then(() => {
-  console.log('API called successfully.');
+trashcanApi.getDeletedNodeContent(nodeIdopts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -320,10 +312,10 @@ Single part request supported, for example: bytes=1-10.
 
 ### Return type
 
-null (empty response body)
+**Blob**
 
 <a name="listDeletedNodeRenditions"></a>
-# **listDeletedNodeRenditions**
+## listDeletedNodeRenditions
 > RenditionPaging listDeletedNodeRenditions(nodeIdopts)
 
 List renditions for a deleted node
@@ -343,19 +335,18 @@ clause will return just the CREATED renditions:
 
 
 ### Example
-```javascript
-import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TrashcanApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let trashcanApi = new TrashcanApi(this.alfrescoApi);
+const trashcanApi = new TrashcanApi(alfrescoApi);
 
-let opts = { 
-  'where': where_example //  | A string to restrict the returned objects by using a predicate.
+const opts = { 
+  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
 };
 
 trashcanApi.listDeletedNodeRenditions(nodeIdopts).then((data) => {
@@ -363,7 +354,6 @@ trashcanApi.listDeletedNodeRenditions(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -378,7 +368,7 @@ Name | Type | Description  | Notes
 [**RenditionPaging**](RenditionPaging.md)
 
 <a name="listDeletedNodes"></a>
-# **listDeletedNodes**
+## listDeletedNodes
 > DeletedNodesPaging listDeletedNodes(opts)
 
 List deleted nodes
@@ -393,25 +383,24 @@ The list of deleted nodes will be ordered with the most recently deleted node at
 
 
 ### Example
-```javascript
-import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TrashcanApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let trashcanApi = new TrashcanApi(this.alfrescoApi);
+const trashcanApi = new TrashcanApi(alfrescoApi);
 
-let opts = { 
-  'skipCount': 56 //  | The number of entities that exist in the collection before those included in this list.
+const opts = { 
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
-
-  'maxItems': 56 //  | The maximum number of items to return in the list.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
-
-  'include':  //  | Returns additional information about the node. The following optional fields can be requested:
+ */
+  'include':  /*  | Returns additional information about the node. The following optional fields can be requested:
 * allowableOperations
 * aspectNames
 * association
@@ -421,7 +410,7 @@ If not supplied then the default value is 100.
 * path
 * properties
 * permissions
-
+ */
 };
 
 trashcanApi.listDeletedNodes(opts).then((data) => {
@@ -429,7 +418,6 @@ trashcanApi.listDeletedNodes(opts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters
@@ -459,7 +447,7 @@ If not supplied then the default value is 100.
 [**DeletedNodesPaging**](DeletedNodesPaging.md)
 
 <a name="restoreDeletedNode"></a>
-# **restoreDeletedNode**
+## restoreDeletedNode
 > NodeEntry restoreDeletedNode(nodeIdopts)
 
 Restore a deleted node
@@ -480,19 +468,18 @@ of delete of each node.
 
 
 ### Example
-```javascript
-import TrashcanApi from 'TrashcanApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, TrashcanApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let trashcanApi = new TrashcanApi(this.alfrescoApi);
+const trashcanApi = new TrashcanApi(alfrescoApi);
 
-let opts = { 
-  'fields':  //  | A list of field names.
+const opts = { 
+  'fields':  /*  | A list of field names.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -503,8 +490,8 @@ entity or entries within a collection.
 If the API method also supports the **include**
 parameter, then the fields specified in the **include**
 parameter are returned in addition to those specified in the **fields** parameter.
-
-  'deletedNodeBodyRestore':  //  | The targetParentId if the node is restored to a new location.
+ */
+  'deletedNodeBodyRestore':  /*  | The targetParentId if the node is restored to a new location. */
 };
 
 trashcanApi.restoreDeletedNode(nodeIdopts).then((data) => {
@@ -512,7 +499,6 @@ trashcanApi.restoreDeletedNode(nodeIdopts).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters

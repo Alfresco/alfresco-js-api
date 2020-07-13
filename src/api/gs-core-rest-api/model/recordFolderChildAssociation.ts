@@ -17,7 +17,7 @@
 
 import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociationInfo';
 import { ContentInfo } from '../../content-rest-api/model/contentInfo';
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 import { PathInfo } from '../../content-rest-api/model/pathInfo';
 import { UserInfo } from '../../content-rest-api/model/userInfo';
 

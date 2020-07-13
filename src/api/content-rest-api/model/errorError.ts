@@ -24,7 +24,6 @@ export class ErrorError {
     logId?: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

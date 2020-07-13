@@ -16,7 +16,7 @@
 */
 
 import { AlfrescoApi } from '../alfrescoApi';
-import { UploadApi } from '../api/content-rest-api/api/upload.api';
+import { UploadApi } from '../api/content-custom-api/api/upload.api';
 
 /**
  * @deprecated 3.0.0

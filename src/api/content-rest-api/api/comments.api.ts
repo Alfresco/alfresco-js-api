@@ -19,8 +19,8 @@ import { CommentBody } from '../model/commentBody';
 import { CommentEntry } from '../model/commentEntry';
 import { CommentPaging } from '../model/commentPaging';
 import { BaseApi } from './base.api';
-import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Comments service.
@@ -96,179 +96,183 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<CommentEntry>
     */
     createComment(nodeId: string, commentBodyCreate: CommentBody, opts?: any): Promise<CommentEntry> {
+
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentBodyCreate, 'commentBodyCreate');
 
         opts = opts || {};
-        let postBody = commentBodyCreate;
+        const postBody = commentBodyCreate;
 
-        let pathParams = {
+        const pathParams = {
             'nodeId': nodeId
         };
 
-        let queryParams = {
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/comments', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, CommentEntry);
+            contentTypes, accepts , CommentEntry);
     }
-    /**
-        * Delete a comment
-        *
-        * Deletes the comment **commentId** from node **nodeId**.
-        *
-        * @param nodeId The identifier of a node.
-        * @param commentId The identifier of a comment.
-        * @return Promise<{}>
-        */
+/**
+    * Delete a comment
+    *
+    * Deletes the comment **commentId** from node **nodeId**.
+    *
+    * @param nodeId The identifier of a node.
+    * @param commentId The identifier of a comment.
+    * @return Promise<{}>
+    */
     deleteComment(nodeId: string, commentId: string): Promise<any> {
+
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentId, 'commentId');
 
-        let postBody = null;
+        const postBody: null = null;
 
-        let pathParams = {
-            'nodeId': nodeId, 'commentId': commentId
+        const pathParams = {
+            'nodeId': nodeId,            'commentId': commentId
         };
 
-        let queryParams = {
+        const queryParams = {
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/comments/{commentId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts );
     }
-    /**
-        * List comments
-        *
-        * Gets a list of comments for the node **nodeId**, sorted chronologically with the newest comment first.
-        *
-        * @param nodeId The identifier of a node.
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-    If not supplied then the default value is 0.
-     (default to 0)
-        * @param opts.maxItems The maximum number of items to return in the list.
-    If not supplied then the default value is 100.
-     (default to 100)
-        * @param opts.fields A list of field names.
+/**
+    * List comments
+    *
+    * Gets a list of comments for the node **nodeId**, sorted chronologically with the newest comment first.
+    *
+    * @param nodeId The identifier of a node.
+    * @param opts Optional parameters
+    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+If not supplied then the default value is 0.
+ (default to 0)
+    * @param opts.maxItems The maximum number of items to return in the list.
+If not supplied then the default value is 100.
+ (default to 100)
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<CommentPaging>
-        */
+    * @return Promise<CommentPaging>
+    */
     listComments(nodeId: string, opts?: any): Promise<CommentPaging> {
+
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody: null = null;
 
-        let pathParams = {
+        const pathParams = {
             'nodeId': nodeId
         };
 
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/comments', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, CommentPaging);
+            contentTypes, accepts , CommentPaging);
     }
-    /**
-        * Update a comment
-        *
-        * Updates an existing comment **commentId** on node **nodeId**.
-        *
-        * @param nodeId The identifier of a node.
-        * @param commentId The identifier of a comment.
-        * @param commentBodyUpdate The JSON representing the comment to be updated.
-        * @param opts Optional parameters
-        * @param opts.fields A list of field names.
+/**
+    * Update a comment
+    *
+    * Updates an existing comment **commentId** on node **nodeId**.
+    *
+    * @param nodeId The identifier of a node.
+    * @param commentId The identifier of a comment.
+    * @param commentBodyUpdate The JSON representing the comment to be updated.
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<CommentEntry>
-        */
+    * @return Promise<CommentEntry>
+    */
     updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: any): Promise<CommentEntry> {
+
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentId, 'commentId');
         throwIfNotDefined(commentBodyUpdate, 'commentBodyUpdate');
 
         opts = opts || {};
-        let postBody = commentBodyUpdate;
+        const postBody = commentBodyUpdate;
 
-        let pathParams = {
-            'nodeId': nodeId, 'commentId': commentId
+        const pathParams = {
+            'nodeId': nodeId,            'commentId': commentId
         };
 
-        let queryParams = {
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/comments/{commentId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, CommentEntry);
+            contentTypes, accepts , CommentEntry);
     }
 
 }

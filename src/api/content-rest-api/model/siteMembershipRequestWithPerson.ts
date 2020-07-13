@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 import { Person } from './person';
 import { Site } from './site';
 
@@ -27,7 +27,6 @@ export class SiteMembershipRequestWithPerson {
     message?: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;

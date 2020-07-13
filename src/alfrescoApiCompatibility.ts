@@ -18,7 +18,6 @@
 import { AlfrescoApi } from './alfrescoApi';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 
-
 import { Legacy } from './api-legacy/legacy';
 import { CONTENT_LEGACY_APIS } from './api-legacy/content-rest-api/src';
 import { APS_LEGACY_APIS } from './api-legacy/activiti-rest-api/src';
@@ -28,8 +27,8 @@ import { GS_CORE_APIS } from './api/gs-core-rest-api/api';
 import { SEARCH_APIS } from './api/search-rest-api/api';
 import { AUTH_APIS } from './api/auth-rest-api/api';
 
-import { ContentApi } from './api/content-rest-api/api/content.api';
-import { WebscriptApi } from './api/content-rest-api/api/webscript.api';
+import { ContentApi } from './api/content-custom-api/api/content.api';
+import { WebscriptApi } from './api/content-custom-api/api/webscript.api';
 import { AlfrescoUpload } from './api-legacy/alfrescoUpload';
 import { NodesApi } from './api-legacy/content-rest-api/src/api/nodesApi';
 import { ProcessClient } from './processClient';

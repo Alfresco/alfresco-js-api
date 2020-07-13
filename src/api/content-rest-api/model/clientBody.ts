@@ -22,7 +22,6 @@ export class ClientBody {
     client: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

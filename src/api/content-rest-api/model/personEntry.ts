@@ -21,7 +21,6 @@ export class PersonEntry {
     entry: Person;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Person(input.entry) : undefined;

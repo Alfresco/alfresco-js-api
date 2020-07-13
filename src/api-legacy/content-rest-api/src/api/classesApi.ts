@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { ClassesApi as NewClassesApi } from '../../../../api/content-rest-api/api/classes.api';
+import { ClassesApi as NewClassesApi } from '../../../../api/content-custom-api/api/classes.api';
 import { AlfrescoApi } from '../../../../alfrescoApi';
 
 /**

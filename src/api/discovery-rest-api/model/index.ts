@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export * from './discoveryEntry';
 export * from './entitlementsInfo';
 export * from './licenseInfo';

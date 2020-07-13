@@ -1,5 +1,5 @@
 import { AlfrescoApi } from '../src/alfrescoApi';
-import { ContentApi } from '../src/api/content-rest-api/api/content.api';
+import { ContentApi } from '../src/api/content-custom-api/api/content.api';
 
 const expect = require('chai').expect;
 const AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;

@@ -21,7 +21,6 @@ export class VersionEntry {
     entry?: Version;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Version(input.entry) : undefined;

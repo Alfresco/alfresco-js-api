@@ -39,7 +39,6 @@ export class ClassesApi extends BaseApi {
         return this.apiClient.config.contextRoot + '/s';
     }
 
-
     /**
      * Function to receive the result of the getClass operation.
      * @param {String} error Error message, if any.

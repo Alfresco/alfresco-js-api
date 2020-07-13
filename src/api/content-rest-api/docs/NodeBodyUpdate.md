@@ -9,6 +9,6 @@ The character . must not be used at the end of the name.
 **nodeType** | **string** |  | [optional] [default to null]
 **aspectNames** | **string[]** |  | [optional] [default to null]
 **properties** | **{ [key: string]: string; }** |  | [optional] [default to null]
-**permissions** | [**PermissionsBodyUpdate**](PermissionsBodyUpdate.md) |  | [optional] [default to null]
+**permissions** | [**PermissionsBody**](PermissionsBody.md) |  | [optional] [default to null]
 
 

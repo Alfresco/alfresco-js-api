@@ -21,7 +21,6 @@ export class DownloadEntry {
     entry: Download;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Download(input.entry) : undefined;

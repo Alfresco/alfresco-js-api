@@ -19,8 +19,8 @@ import { RatingBody } from '../model/ratingBody';
 import { RatingEntry } from '../model/ratingEntry';
 import { RatingPaging } from '../model/ratingPaging';
 import { BaseApi } from './base.api';
-import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Ratings service.
@@ -59,177 +59,181 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<RatingEntry>
     */
     createRating(nodeId: string, ratingBodyCreate: RatingBody, opts?: any): Promise<RatingEntry> {
+
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(ratingBodyCreate, 'ratingBodyCreate');
 
         opts = opts || {};
-        let postBody = ratingBodyCreate;
+        const postBody = ratingBodyCreate;
 
-        let pathParams = {
+        const pathParams = {
             'nodeId': nodeId
         };
 
-        let queryParams = {
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/ratings', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RatingEntry);
+            contentTypes, accepts , RatingEntry);
     }
-    /**
-        * Delete a rating
-        *
-        * Deletes rating **ratingId** from node **nodeId**.
-        *
-        * @param nodeId The identifier of a node.
-        * @param ratingId The identifier of a rating.
-        * @return Promise<{}>
-        */
+/**
+    * Delete a rating
+    *
+    * Deletes rating **ratingId** from node **nodeId**.
+    *
+    * @param nodeId The identifier of a node.
+    * @param ratingId The identifier of a rating.
+    * @return Promise<{}>
+    */
     deleteRating(nodeId: string, ratingId: string): Promise<any> {
+
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(ratingId, 'ratingId');
 
-        let postBody = null;
+        const postBody: null = null;
 
-        let pathParams = {
-            'nodeId': nodeId, 'ratingId': ratingId
+        const pathParams = {
+            'nodeId': nodeId,            'ratingId': ratingId
         };
 
-        let queryParams = {
+        const queryParams = {
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/ratings/{ratingId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts );
     }
-    /**
-        * Get a rating
-        *
-        * Get the specific rating **ratingId** on node **nodeId**.
-        *
-        * @param nodeId The identifier of a node.
-        * @param ratingId The identifier of a rating.
-        * @param opts Optional parameters
-        * @param opts.fields A list of field names.
+/**
+    * Get a rating
+    *
+    * Get the specific rating **ratingId** on node **nodeId**.
+    *
+    * @param nodeId The identifier of a node.
+    * @param ratingId The identifier of a rating.
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<RatingEntry>
-        */
+    * @return Promise<RatingEntry>
+    */
     getRating(nodeId: string, ratingId: string, opts?: any): Promise<RatingEntry> {
+
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(ratingId, 'ratingId');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody: null = null;
 
-        let pathParams = {
-            'nodeId': nodeId, 'ratingId': ratingId
+        const pathParams = {
+            'nodeId': nodeId,            'ratingId': ratingId
         };
 
-        let queryParams = {
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/ratings/{ratingId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RatingEntry);
+            contentTypes, accepts , RatingEntry);
     }
-    /**
-        * List ratings
-        *
-        * Gets a list of ratings for node **nodeId**.
-        *
-        * @param nodeId The identifier of a node.
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-    If not supplied then the default value is 0.
-     (default to 0)
-        * @param opts.maxItems The maximum number of items to return in the list.
-    If not supplied then the default value is 100.
-     (default to 100)
-        * @param opts.fields A list of field names.
+/**
+    * List ratings
+    *
+    * Gets a list of ratings for node **nodeId**.
+    *
+    * @param nodeId The identifier of a node.
+    * @param opts Optional parameters
+    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+If not supplied then the default value is 0.
+ (default to 0)
+    * @param opts.maxItems The maximum number of items to return in the list.
+If not supplied then the default value is 100.
+ (default to 100)
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<RatingPaging>
-        */
+    * @return Promise<RatingPaging>
+    */
     listRatings(nodeId: string, opts?: any): Promise<RatingPaging> {
+
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody: null = null;
 
-        let pathParams = {
+        const pathParams = {
             'nodeId': nodeId
         };
 
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/ratings', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RatingPaging);
+            contentTypes, accepts , RatingPaging);
     }
 
 }

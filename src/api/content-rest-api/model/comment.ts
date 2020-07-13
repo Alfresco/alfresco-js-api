@@ -15,11 +15,12 @@
 * limitations under the License.
 */
 
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 import { Person } from './person';
 
 export class Comment {
     id: string;
+    title: string;
     content: string;
     createdBy: Person;
     createdAt: Date;
@@ -30,7 +31,6 @@ export class Comment {
     canDelete: boolean;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.createdBy = input.createdBy ? new Person(input.createdBy) : undefined;

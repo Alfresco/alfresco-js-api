@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 /*!
     * @license
     * Copyright 2018 Alfresco Software, Ltd.
@@ -68,7 +67,6 @@ export class TemporaryApi extends BaseApi {
             throw "Missing param 'processDefinitionKey' in completeTasks";
         }
 
-
         let pathParams = {};
         let queryParams = {
             'userId': userId,
@@ -77,10 +75,8 @@ export class TemporaryApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/api/enterprise/temporary/generate-report-data/complete-tasks', 'GET',
@@ -114,7 +110,6 @@ export class TemporaryApi extends BaseApi {
             throw "Missing param 'processDefinitionKey' in generateData";
         }
 
-
         let pathParams = {};
         let queryParams = {
             'userId': userId,
@@ -123,10 +118,8 @@ export class TemporaryApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/api/enterprise/temporary/generate-report-data/start-process', 'GET',
@@ -148,16 +141,13 @@ export class TemporaryApi extends BaseApi {
     getHeaders() {
         let postBody = null;
 
-
         let pathParams = {};
         let queryParams = {};
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/api/enterprise/temporary/example-headers', 'GET',
@@ -179,16 +169,13 @@ export class TemporaryApi extends BaseApi {
     getOptions() {
         let postBody = null;
 
-
         let pathParams = {};
         let queryParams = {};
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/api/enterprise/temporary/example-options', 'GET',

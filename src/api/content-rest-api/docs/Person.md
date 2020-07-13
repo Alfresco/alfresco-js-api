@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **id** | **string** |  | [default to null]
 **firstName** | **string** |  | [default to null]
 **lastName** | **string** |  | [optional] [default to null]
+**displayName** | **string** |  | [optional] [default to null]
 **description** | **string** |  | [optional] [default to null]
 **avatarId** | **string** |  | [optional] [default to null]
 **email** | **string** |  | [default to null]

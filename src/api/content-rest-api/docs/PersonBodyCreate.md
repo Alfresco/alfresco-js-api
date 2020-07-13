@@ -21,6 +21,6 @@ Name | Type | Description | Notes
 **emailNotificationsEnabled** | **boolean** |  | [optional] [default to null]
 **password** | **string** |  | [default to null]
 **aspectNames** | **string[]** |  | [optional] [default to null]
-**properties** | **{ [key: string]: string; }** |  | [optional] [default to null]
+**properties** | **any** |  | [optional] [default to null]
 
 

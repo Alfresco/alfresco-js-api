@@ -2,7 +2,7 @@
 
 Provides access to the core features of Alfresco Content Services.
 
-> Documentation updated on: 2019-10-17T13:46:19.017+01:00
+> Documentation updated on: 2020-07-07T15:16:44.274+01:00
 
 ## Methods
 
@@ -70,6 +70,10 @@ NodesApi | [**listSourceAssociations**](docs/NodesApi.md#listSourceAssociations)
 NodesApi | [**listTargetAssociations**](docs/NodesApi.md#listTargetAssociations) | **GET** /nodes/{nodeId}/targets | List target associations
 NodesApi | [**lockNode**](docs/NodesApi.md#lockNode) | **POST** /nodes/{nodeId}/lock | Lock a node
 NodesApi | [**moveNode**](docs/NodesApi.md#moveNode) | **POST** /nodes/{nodeId}/move | Move a node
+NodesApi | [**requestContentUrl**](docs/NodesApi.md#requestContentUrl) | **POST** /nodes/{nodeId}/request-content-url | Generate a direct access content url
+NodesApi | [**requestContentUrl_0**](docs/NodesApi.md#requestContentUrl_0) | **POST** /nodes/{nodeId}/renditions/{renditionId}/request-content-url | Generate a direct access content url
+NodesApi | [**requestContentUrl_1**](docs/NodesApi.md#requestContentUrl_1) | **POST** /nodes/{nodeId}/versions/{versionId}/request-content-url | Generate a direct access content url
+NodesApi | [**requestContentUrl_2**](docs/NodesApi.md#requestContentUrl_2) | **POST** /nodes/{nodeId}/versions/{versionId}/renditions/{renditionId}/request-content-url | Generate a direct access content url
 NodesApi | [**unlockNode**](docs/NodesApi.md#unlockNode) | **POST** /nodes/{nodeId}/unlock | Unlock a node
 NodesApi | [**updateNode**](docs/NodesApi.md#updateNode) | **PUT** /nodes/{nodeId} | Update a node
 NodesApi | [**updateNodeContent**](docs/NodesApi.md#updateNodeContent) | **PUT** /nodes/{nodeId}/content | Update node content
@@ -142,10 +146,14 @@ TrashcanApi | [**getDeletedNodeContent**](docs/TrashcanApi.md#getDeletedNodeCont
 TrashcanApi | [**listDeletedNodeRenditions**](docs/TrashcanApi.md#listDeletedNodeRenditions) | **GET** /deleted-nodes/{nodeId}/renditions | List renditions for a deleted node
 TrashcanApi | [**listDeletedNodes**](docs/TrashcanApi.md#listDeletedNodes) | **GET** /deleted-nodes | List deleted nodes
 TrashcanApi | [**restoreDeletedNode**](docs/TrashcanApi.md#restoreDeletedNode) | **POST** /deleted-nodes/{nodeId}/restore | Restore a deleted node
+VersionsApi | [**createVersionRendition**](docs/VersionsApi.md#createVersionRendition) | **POST** /nodes/{nodeId}/versions/{versionId}/renditions | Create rendition for a file version
 VersionsApi | [**deleteVersion**](docs/VersionsApi.md#deleteVersion) | **DELETE** /nodes/{nodeId}/versions/{versionId} | Delete a version
 VersionsApi | [**getVersion**](docs/VersionsApi.md#getVersion) | **GET** /nodes/{nodeId}/versions/{versionId} | Get version information
 VersionsApi | [**getVersionContent**](docs/VersionsApi.md#getVersionContent) | **GET** /nodes/{nodeId}/versions/{versionId}/content | Get version content
+VersionsApi | [**getVersionRendition**](docs/VersionsApi.md#getVersionRendition) | **GET** /nodes/{nodeId}/versions/{versionId}/renditions/{renditionId} | Get rendition information for a file version
+VersionsApi | [**getVersionRenditionContent**](docs/VersionsApi.md#getVersionRenditionContent) | **GET** /nodes/{nodeId}/versions/{versionId}/renditions/{renditionId}/content | Get rendition content for a file version
 VersionsApi | [**listVersionHistory**](docs/VersionsApi.md#listVersionHistory) | **GET** /nodes/{nodeId}/versions | List version history
+VersionsApi | [**listVersionRenditions**](docs/VersionsApi.md#listVersionRenditions) | **GET** /nodes/{nodeId}/versions/{versionId}/renditions | List renditions for a file version
 VersionsApi | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** /nodes/{nodeId}/versions/{versionId}/revert | Revert a version
 
 ## Models
@@ -187,11 +195,16 @@ VersionsApi | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** 
 - [CommentPaging](docs/CommentPaging.md)
 - [CommentPagingList](docs/CommentPagingList.md)
 - [Company](docs/Company.md)
+- [Constraint](docs/Constraint.md)
 - [ContentInfo](docs/ContentInfo.md)
+- [Definition](docs/Definition.md)
 - [DeletedNodeBodyRestore](docs/DeletedNodeBodyRestore.md)
 - [DeletedNodeEntry](docs/DeletedNodeEntry.md)
 - [DeletedNodesPaging](docs/DeletedNodesPaging.md)
 - [DeletedNodesPagingList](docs/DeletedNodesPagingList.md)
+- [DirectAccessUrl](docs/DirectAccessUrl.md)
+- [DirectAccessUrlBodyCreate](docs/DirectAccessUrlBodyCreate.md)
+- [DirectAccessUrlEntry](docs/DirectAccessUrlEntry.md)
 - [Download](docs/Download.md)
 - [DownloadBodyCreate](docs/DownloadBodyCreate.md)
 - [DownloadEntry](docs/DownloadEntry.md)
@@ -238,7 +251,7 @@ VersionsApi | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** 
 - [PathElement](docs/PathElement.md)
 - [PathInfo](docs/PathInfo.md)
 - [PermissionElement](docs/PermissionElement.md)
-- [PermissionsBodyUpdate](docs/PermissionsBodyUpdate.md)
+- [PermissionsBody](docs/PermissionsBody.md)
 - [PermissionsInfo](docs/PermissionsInfo.md)
 - [Person](docs/Person.md)
 - [PersonBodyCreate](docs/PersonBodyCreate.md)
@@ -256,6 +269,7 @@ VersionsApi | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** 
 - [PreferencePagingList](docs/PreferencePagingList.md)
 - [ProbeEntry](docs/ProbeEntry.md)
 - [ProbeEntryEntry](docs/ProbeEntryEntry.md)
+- [Property](docs/Property.md)
 - [Rating](docs/Rating.md)
 - [RatingAggregate](docs/RatingAggregate.md)
 - [RatingBody](docs/RatingBody.md)

@@ -25,6 +25,7 @@ export class AlfrescoApiConfig {
     authType?: string = 'BASIC';
     oauth2?: Oauth2Config;
     contextRoot?: string = 'alfresco';
+    tenant?: string = '-default-';
     contextRootBpm?: string = 'activiti-app';
     domainPrefix?: string = '';
     provider?: string = 'ECM';
@@ -42,6 +43,7 @@ export class AlfrescoApiConfig {
         this.authType = input.authType ? input.authType : 'BASIC';
         this.contextRoot = input.contextRoot ? input.contextRoot : 'alfresco';
         this.contextRootBpm = input.contextRootBpm ? input.contextRootBpm : 'activiti-app';
+        this.tenant = input.tenant ? input.tenant : '-default-';
         this.provider = input.provider ? input.provider : 'ECM';
         this.disableCsrf = input.disableCsrf ? input.disableCsrf : false;
         this.domainPrefix = input.domainPrefix ? input.domainPrefix : '';

@@ -20,7 +20,6 @@ export class SiteMembershipBodyCreate {
     id: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

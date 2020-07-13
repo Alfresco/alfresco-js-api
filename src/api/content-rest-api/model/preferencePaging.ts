@@ -21,7 +21,6 @@ export class PreferencePaging {
     list?: PreferencePagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new PreferencePagingList(input.list) : undefined;

@@ -244,7 +244,3 @@ export { NodeBodyCreate as NodeBody } from '../api/content-rest-api/model/nodeBo
 export { NodeBodyCopy as CopyBody } from '../api/content-rest-api/model/nodeBodyCopy';
 export { NodeBodyMove as MoveBody } from '../api/content-rest-api/model/nodeBodyMove';
 export { GroupBodyCreate as GroupBody } from '../api/content-rest-api/model/groupBodyCreate';
-
-
-
-

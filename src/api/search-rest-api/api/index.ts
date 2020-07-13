@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export * from './search.api';
 import { SearchApi } from './search.api';
 

@@ -21,7 +21,6 @@ export class CommentPaging {
     list?: CommentPagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new CommentPagingList(input.list) : undefined;

@@ -9,7 +9,7 @@
         <srcdir>${project.basedir}/src</srcdir>
         <api-version>1.1-SNAPSHOT</api-version>
         <api-defs-dir>${project.basedir}/definitions</api-defs-dir>
-        <swagger-codegen-version>3.0.13</swagger-codegen-version>
+        <swagger-codegen-version>3.0.20</swagger-codegen-version>
     </properties>
     <build>
         <plugins>

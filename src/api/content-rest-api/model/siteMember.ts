@@ -23,7 +23,6 @@ export class SiteMember {
     role: SiteMember.RoleEnum | string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.person = input.person ? new Person(input.person) : undefined;

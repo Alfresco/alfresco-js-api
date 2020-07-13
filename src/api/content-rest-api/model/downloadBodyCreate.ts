@@ -19,7 +19,6 @@ export class DownloadBodyCreate {
     nodeIds: string[];
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

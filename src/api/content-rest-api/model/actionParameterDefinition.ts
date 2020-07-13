@@ -23,7 +23,6 @@ export class ActionParameterDefinition {
     displayLabel?: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

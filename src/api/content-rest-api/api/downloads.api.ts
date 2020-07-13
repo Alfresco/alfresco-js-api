@@ -18,8 +18,8 @@
 import { DownloadBodyCreate } from '../model/downloadBodyCreate';
 import { DownloadEntry } from '../model/downloadEntry';
 import { BaseApi } from './base.api';
-import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Downloads service.
@@ -46,146 +46,148 @@ The cancel operation is done asynchronously.
     * @return Promise<{}>
     */
     cancelDownload(downloadId: string): Promise<any> {
+
         throwIfNotDefined(downloadId, 'downloadId');
 
-        let postBody = null;
+        const postBody: null = null;
 
-        let pathParams = {
+        const pathParams = {
             'downloadId': downloadId
         };
 
-        let queryParams = {
+        const queryParams = {
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/downloads/{downloadId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+            contentTypes, accepts );
     }
-    /**
-        * Create a new download
-        *
-        * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
+/**
+    * Create a new download
+    *
+    * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
-    Creates a new download node asynchronously, the content of which will be the zipped content of the **nodeIds** specified in the JSON body like this:
+Creates a new download node asynchronously, the content of which will be the zipped content of the **nodeIds** specified in the JSON body like this:
 
-    JSON
-    {
-        \"nodeIds\":
-         [
-           \"c8bb482a-ff3c-4704-a3a3-de1c83ccd84c\",
-           \"cffa62db-aa01-493d-9594-058bc058eeb1\"
-         ]
-    }
+JSON
+{
+    \"nodeIds\":
+     [
+       \"c8bb482a-ff3c-4704-a3a3-de1c83ccd84c\",
+       \"cffa62db-aa01-493d-9594-058bc058eeb1\"
+     ]
+}
 
+**Note:** The content of the download node can be obtained using the **GET /nodes/{downloadId}/content** endpoint
 
-    **Note:** The content of the download node can be obtained using the **GET /nodes/{downloadId}/content** endpoint
+    *
+    * @param downloadBodyCreate The nodeIds the content of which will be zipped, which zip will be set as the content of our download node.
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
-        *
-        * @param downloadBodyCreate The nodeIds the content of which will be zipped, which zip will be set as the content of our download node.
-        * @param opts Optional parameters
-        * @param opts.fields A list of field names.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-        * @return Promise<DownloadEntry>
-        */
+    * @return Promise<DownloadEntry>
+    */
     createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: any): Promise<DownloadEntry> {
+
         throwIfNotDefined(downloadBodyCreate, 'downloadBodyCreate');
 
         opts = opts || {};
-        let postBody = downloadBodyCreate;
+        const postBody = downloadBodyCreate;
 
-        let pathParams = {
+        const pathParams = {
 
         };
 
-        let queryParams = {
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/downloads', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, DownloadEntry);
+            contentTypes, accepts , DownloadEntry);
     }
-    /**
-        * Get a download
-        *
-        * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
+/**
+    * Get a download
+    *
+    * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
 
-    Retrieve status information for download node **downloadId**
+Retrieve status information for download node **downloadId**
 
-        *
-        * @param downloadId The identifier of a download node.
-        * @param opts Optional parameters
-        * @param opts.fields A list of field names.
+    *
+    * @param downloadId The identifier of a download node.
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<DownloadEntry>
-        */
+    * @return Promise<DownloadEntry>
+    */
     getDownload(downloadId: string, opts?: any): Promise<DownloadEntry> {
+
         throwIfNotDefined(downloadId, 'downloadId');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody: null = null;
 
-        let pathParams = {
+        const pathParams = {
             'downloadId': downloadId
         };
 
-        let queryParams = {
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/downloads/{downloadId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, DownloadEntry);
+            contentTypes, accepts , DownloadEntry);
     }
 
 }

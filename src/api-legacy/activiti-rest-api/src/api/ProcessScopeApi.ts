@@ -27,4 +27,3 @@ export class ProcessScopeApi extends NewProcessScopeApi {
         this.apiClient = alfrescoApi.processClient;
     }
 }
-

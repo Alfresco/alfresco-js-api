@@ -21,7 +21,6 @@ export class NodeEntry {
     entry: Node;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Node(input.entry) : undefined;

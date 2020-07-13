@@ -21,7 +21,6 @@ export class PermissionElement {
     accessStatus?: PermissionElement.AccessStatusEnum | string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

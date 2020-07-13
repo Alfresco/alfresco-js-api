@@ -17,12 +17,13 @@
 
 import { Capabilities } from './capabilities';
 import { Company } from './company';
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 
 export class Person {
     id: string;
     firstName: string;
     lastName?: string;
+    displayName?: string;
     description?: string;
     avatarId?: string;
     email: string;
@@ -43,7 +44,6 @@ export class Person {
     capabilities?: Capabilities;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.company = input.company ? new Company(input.company) : undefined;

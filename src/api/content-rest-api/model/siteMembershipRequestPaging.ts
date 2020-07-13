@@ -21,7 +21,6 @@ export class SiteMembershipRequestPaging {
     list?: SiteMembershipRequestPagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new SiteMembershipRequestPagingList(input.list) : undefined;

@@ -23,7 +23,6 @@ export class PersonPagingList {
     entries?: PersonEntry[];
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;

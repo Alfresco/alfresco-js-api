@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export * from './filePlans.api';
 import { FilePlansApi } from './filePlans.api';
 

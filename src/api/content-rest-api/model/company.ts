@@ -26,7 +26,6 @@ export class Company {
     email?: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

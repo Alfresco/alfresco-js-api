@@ -23,7 +23,6 @@ export class Rendition {
     status?: Rendition.StatusEnum | string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.content = input.content ? new ContentInfo(input.content) : undefined;

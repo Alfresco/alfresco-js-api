@@ -27,7 +27,6 @@ export class NetworkQuota {
     usage: number;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

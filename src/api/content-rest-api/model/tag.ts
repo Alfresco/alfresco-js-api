@@ -21,7 +21,6 @@ export class Tag {
     count?: number;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

@@ -20,7 +20,6 @@ export class ChildAssociationInfo {
     isPrimary: boolean;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

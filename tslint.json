@@ -1,4 +1,7 @@
 {
+    "extends": [
+        "tslint-etc"
+    ],
     "rulesDirectory": [
         "node_modules/codelyzer",
         "node_modules/adf-tslint-rules"
@@ -31,7 +34,7 @@
         "no-arg": true,
         "no-bitwise": false,
         "no-conditional-assignment": true,
-        "no-consecutive-blank-lines": false,
+        "no-consecutive-blank-lines": true,
         "no-console": [
             true,
             "debug",
@@ -112,6 +115,6 @@
             true,
             "src/**/*.ts",
             "./assets/license.txt"
-        ]
-    }
+        ],
+        "no-unused-declaration": true}
 }

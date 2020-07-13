@@ -1,7 +1,7 @@
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { Oauth2Auth } from '../src/authentication/oauth2Auth';
-import { ContentApi } from '../src/api/content-rest-api/api/content.api';
+import { ContentApi } from '../src/api/content-custom-api/api/content.api';
 import { Storage } from '../src/storage';
 
 const chai = require('chai');

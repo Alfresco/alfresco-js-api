@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { DateAlfresco } from '../../content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 
 /**
  * A favorite describes an Alfresco entity that a person has marked as a favorite.
@@ -32,9 +32,12 @@ export class Favorite {
      */
     createdAt?: Date;
     target: any;
+    /**
+     * A subset of the target favorite properties, system properties and properties already available in the target are excluded.
+     */
+    properties?: any;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;

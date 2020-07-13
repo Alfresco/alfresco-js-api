@@ -17,8 +17,8 @@
 
 import { ActivityPaging } from '../model/activityPaging';
 import { BaseApi } from './base.api';
-import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Activities service.
@@ -59,16 +59,17 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<ActivityPaging>
     */
     listActivitiesForPerson(personId: string, opts?: any): Promise<ActivityPaging> {
+
         throwIfNotDefined(personId, 'personId');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody: null = null;
 
-        let pathParams = {
+        const pathParams = {
             'personId': personId
         };
 
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'who': opts['who'],
@@ -76,19 +77,19 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/people/{personId}/activities', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ActivityPaging);
+            contentTypes, accepts , ActivityPaging);
     }
 
 }

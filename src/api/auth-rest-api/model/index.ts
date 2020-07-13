@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 export * from './ticket';
 export * from './ticketBody';
 export * from './ticketEntry';

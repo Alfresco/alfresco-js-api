@@ -21,7 +21,6 @@ export class ChildAssociationEntry {
     entry: ChildAssociation;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new ChildAssociation(input.entry) : undefined;

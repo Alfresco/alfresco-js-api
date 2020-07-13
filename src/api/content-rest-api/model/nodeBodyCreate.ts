@@ -17,7 +17,9 @@
 
 import { AssociationBody } from './associationBody';
 import { ChildAssociationBody } from './childAssociationBody';
+import { Definition } from './definition';
 import { NodeBodyCreateAssociation } from './nodeBodyCreateAssociation';
+import { PermissionsBody } from './permissionsBody';
 
 export class NodeBodyCreate {
     /**
@@ -28,16 +30,19 @@ The character . must not be used at the end of the name.
     name: string;
     nodeType: string;
     aspectNames?: string[];
-    properties?: { [key: string]: string; };
+    properties?: any;
+    permissions?: PermissionsBody;
+    definition?: Definition;
     relativePath?: string;
     association?: NodeBodyCreateAssociation;
     secondaryChildren?: ChildAssociationBody[];
     targets?: AssociationBody[];
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
+            this.permissions = input.permissions ? new PermissionsBody(input.permissions) : undefined;
+            this.definition = input.definition ? new Definition(input.definition) : undefined;
             this.association = input.association ? new NodeBodyCreateAssociation(input.association) : undefined;
             if (input.secondaryChildren) {
                 this.secondaryChildren = input.secondaryChildren.map((item: any) => {

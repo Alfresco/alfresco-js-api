@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 <a name="getProbe"></a>
-# **getProbe**
+## getProbe
 > ProbeEntry getProbe(probeId)
 
 Check readiness and liveness of the repository
@@ -25,16 +25,15 @@ The liveness probe should then be used to check the repository is still respondi
 
 
 ### Example
-```javascript
-import ProbesApi from 'ProbesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProbesApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let probesApi = new ProbesApi(this.alfrescoApi);
+const probesApi = new ProbesApi(alfrescoApi);
 
 
 probesApi.getProbe(probeId).then((data) => {
@@ -42,7 +41,6 @@ probesApi.getProbe(probeId).then((data) => {
 }, function(error) {
   console.error(error);
 });
-
 ```
 
 ### Parameters

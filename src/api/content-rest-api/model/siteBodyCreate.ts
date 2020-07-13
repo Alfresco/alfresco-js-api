@@ -22,7 +22,6 @@ export class SiteBodyCreate {
     visibility: SiteBodyCreate.VisibilityEnum | string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

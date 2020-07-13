@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { PermissionsBodyUpdate } from './permissionsBodyUpdate';
+import { PermissionsBody } from './permissionsBody';
 
 export class NodeBodyUpdate {
     /**
@@ -27,13 +27,12 @@ The character . must not be used at the end of the name.
     nodeType?: string;
     aspectNames?: string[];
     properties?: { [key: string]: string; };
-    permissions?: PermissionsBodyUpdate;
+    permissions?: PermissionsBody;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
-            this.permissions = input.permissions ? new PermissionsBodyUpdate(input.permissions) : undefined;
+            this.permissions = input.permissions ? new PermissionsBody(input.permissions) : undefined;
         }
     }
 

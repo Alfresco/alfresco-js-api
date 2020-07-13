@@ -99,39 +99,39 @@ export class AlfrescoApi implements Emitter {
 
     private clientsFactory() {
         if (!this.contentPrivateClient) {
-            this.contentPrivateClient = new ContentClient(this.config, '/api/-default-/private/alfresco/versions/1');
+            this.contentPrivateClient = new ContentClient(this.config, `/api/${this.config.tenant}/private/alfresco/versions/1`);
         } else {
-            this.contentPrivateClient.setConfig(this.config, '/api/-default-/private/alfresco/versions/1');
+            this.contentPrivateClient.setConfig(this.config, `/api/${this.config.tenant}/private/alfresco/versions/1`);
         }
 
         if (!this.contentClient) {
-            this.contentClient = new ContentClient(this.config, '/api/-default-/public/alfresco/versions/1');
+            this.contentClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/alfresco/versions/1`);
         } else {
-            this.contentClient.setConfig(this.config, '/api/-default-/public/alfresco/versions/1');
+            this.contentClient.setConfig(this.config, `/api/${this.config.tenant}/public/alfresco/versions/1`);
         }
 
         if (!this.authClient) {
-            this.authClient = new ContentClient(this.config, '/api/-default-/public/authentication/versions/1');
+            this.authClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/authentication/versions/1`);
         } else {
-            this.authClient.setConfig(this.config, '/api/-default-/public/authentication/versions/1');
+            this.authClient.setConfig(this.config, `/api/${this.config.tenant}/public/authentication/versions/1`);
         }
 
         if (!this.searchClient) {
-            this.searchClient = new ContentClient(this.config, '/api/-default-/public/search/versions/1');
+            this.searchClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/search/versions/1`);
         } else {
-            this.searchClient.setConfig(this.config, '/api/-default-/public/search/versions/1');
+            this.searchClient.setConfig(this.config, `/api/${this.config.tenant}/public/search/versions/1`);
         }
 
         if (!this.discoveryClient) {
-            this.discoveryClient = new ContentClient(this.config, '/api');
+            this.discoveryClient = new ContentClient(this.config, `/api`);
         } else {
-            this.discoveryClient.setConfig(this.config, '/api');
+            this.discoveryClient.setConfig(this.config, `/api`);
         }
 
         if (!this.gsClient) {
-            this.gsClient = new ContentClient(this.config, '/api/-default-/public/gs/versions/1');
+            this.gsClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/gs/versions/1`);
         } else {
-            this.gsClient.setConfig(this.config, '/api/-default-/public/gs/versions/1');
+            this.gsClient.setConfig(this.config, `/api/${this.config.tenant}/public/gs/versions/1`);
         }
 
         if (!this.processClient) {

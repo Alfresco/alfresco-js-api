@@ -44,7 +44,6 @@ export class ModelJsonBpmnApi extends BaseApi {
             throw "Missing param 'processModelHistoryId' in getHistoricEditorDisplayJsonClient";
         }
 
-
         let pathParams = {
             'processModelId': processModelId,
             'processModelHistoryId': processModelHistoryId
@@ -53,10 +52,8 @@ export class ModelJsonBpmnApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/app/rest/models/{processModelId}/history/{processModelHistoryId}/model-json', 'GET',
@@ -84,7 +81,6 @@ export class ModelJsonBpmnApi extends BaseApi {
             throw "Missing param 'processModelId' in getEditorDisplayJsonClient";
         }
 
-
         let pathParams = {
             'processModelId': processModelId
         };
@@ -92,10 +88,8 @@ export class ModelJsonBpmnApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/app/rest/models/{processModelId}/model-json', 'GET',
@@ -128,10 +122,8 @@ export class ModelJsonBpmnApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/app/rest/process-definitions/{processDefinitionId}/model-json', 'GET',
@@ -164,10 +156,8 @@ export class ModelJsonBpmnApi extends BaseApi {
         let headerParams = {};
         let formParams = {};
 
-
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
-
 
         return this.apiClient.callApi(
             '/app/rest/process-instances/{processInstanceId}/model-json', 'GET',

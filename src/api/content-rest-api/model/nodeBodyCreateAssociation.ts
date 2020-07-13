@@ -19,7 +19,6 @@ export class NodeBodyCreateAssociation {
     assocType?: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

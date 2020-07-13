@@ -21,7 +21,6 @@ export class GroupMember {
     memberType: GroupMember.MemberTypeEnum | string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

@@ -24,7 +24,6 @@ export class ActionBodyExec {
     params?: any;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

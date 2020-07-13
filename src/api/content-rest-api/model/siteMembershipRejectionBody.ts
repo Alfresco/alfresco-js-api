@@ -19,7 +19,6 @@ export class SiteMembershipRejectionBody {
     comment?: string;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

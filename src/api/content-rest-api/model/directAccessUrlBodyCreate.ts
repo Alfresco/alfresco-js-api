@@ -15,21 +15,20 @@
 * limitations under the License.
 */
 
-import { PermissionElement } from './permissionElement';
+import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
 
-export class PermissionsBodyUpdate {
-    isInheritanceEnabled?: boolean;
-    locallySet?: PermissionElement[];
+export class DirectAccessUrlBodyCreate {
+    expiresAt?: Date;
+    /**
+     * The length of time in seconds that the url is valid for.
+
+     */
+    validFor?: number;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
-            if (input.locallySet) {
-                this.locallySet = input.locallySet.map((item: any) => {
-                    return new PermissionElement(item);
-                });
-            }
+            this.expiresAt = input.expiresAt ? DateAlfresco.parseDate(input.expiresAt) : undefined;
         }
     }
 

@@ -36,10 +36,9 @@ export class PersonBodyCreate {
     emailNotificationsEnabled?: boolean;
     password: string;
     aspectNames?: string[];
-    properties?: { [key: string]: string; };
+    properties?: any;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.company = input.company ? new Company(input.company) : undefined;

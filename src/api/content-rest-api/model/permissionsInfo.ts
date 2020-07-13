@@ -24,7 +24,6 @@ export class PermissionsInfo {
     settable?: string[];
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             if (input.inherited) {

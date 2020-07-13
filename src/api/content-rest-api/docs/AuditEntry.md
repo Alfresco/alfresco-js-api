@@ -7,6 +7,6 @@ Name | Type | Description | Notes
 **auditApplicationId** | **string** |  | [default to null]
 **createdByUser** | [**UserInfo**](UserInfo.md) |  | [default to null]
 **createdAt** | [**Date**](Date.md) |  | [default to null]
-**values** | **{ [key: string]: string; }** |  | [optional] [default to null]
+**values** | **any** |  | [optional] [default to null]
 
 

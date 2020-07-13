@@ -21,7 +21,6 @@ export class NodeAssociationEntry {
     entry: NodeAssociation;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new NodeAssociation(input.entry) : undefined;

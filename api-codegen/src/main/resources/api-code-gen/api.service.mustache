@@ -23,13 +23,12 @@ export class {{classname}} extends BaseApi {
     * @return Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}{}{{/returnType}}>
     */
     {{nickname}}({{&vendorExtensions.x-codegen-argList}}) : Promise<{{#returnType}}{{&returnType}}{{#isResponseTypeFile}}|undefined{{/isResponseTypeFile}}{{/returnType}}{{^returnType}}any{{/returnType}}{{#canReturnError}} | {{&canReturnError}}{{/canReturnError}}> {
-        {{#allParams}}{{#required}}
-        throwIfNotDefined({{paramName}}, '{{paramName}}');
-        {{/required}}{{/allParams}}
-        
+{{#allParams}}{{#required}}
+        throwIfNotDefined({{paramName}}, '{{paramName}}');{{/required}}{{/allParams}}
+
         {{#hasOptionalParams}}opts = opts || {};{{/hasOptionalParams}}
-        const postBody = {{#bodyParam}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
-        
+        const postBody{{^bodyParam}}: null{{/bodyParam}} = {{#bodyParam}}{{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
+
         const pathParams = {
             {{#pathParams}}
             '{{baseName}}': {{#required}}{{paramName}}{{/required}}{{^required}}opts['{{paramName}}']{{/required}}{{#hasMore}},{{/hasMore}}{{/pathParams}}
@@ -51,9 +50,9 @@ export class {{classname}} extends BaseApi {
         const accepts = [{{#produces}}'{{& mediaType}}'{{#hasMore}}, {{/hasMore}}{{/produces}}];
 
         return this.apiClient.callApi(
-        '{{&path}}', '{{httpMethod}}',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        contentTypes, accepts {{#returnType}},{{&returnType}}{{/returnType}})
+            '{{&path}}', '{{httpMethod}}',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts {{#returnType}},{{&returnType}}{{/returnType}})
     }
 {{/operation}}
 

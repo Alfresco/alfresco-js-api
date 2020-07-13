@@ -18,8 +18,8 @@
 import { PersonNetworkEntry } from '../model/personNetworkEntry';
 import { PersonNetworkPaging } from '../model/personNetworkPaging';
 import { BaseApi } from './base.api';
-import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Networks service.
@@ -48,146 +48,149 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PersonNetworkEntry>
     */
     getNetwork(networkId: string, opts?: any): Promise<PersonNetworkEntry> {
+
         throwIfNotDefined(networkId, 'networkId');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody: null = null;
 
-        let pathParams = {
+        const pathParams = {
             'networkId': networkId
         };
 
-        let queryParams = {
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/networks/{networkId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, PersonNetworkEntry);
+            contentTypes, accepts , PersonNetworkEntry);
     }
-    /**
-        * Get network information
-        *
-        * Gets network information on a single network specified by **networkId** for **personId**.
+/**
+    * Get network information
+    *
+    * Gets network information on a single network specified by **networkId** for **personId**.
 
-    You can use the -me- string in place of <personId> to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-        *
-        * @param personId The identifier of a person.
-        * @param networkId The identifier of a network.
-        * @param opts Optional parameters
-        * @param opts.fields A list of field names.
+    *
+    * @param personId The identifier of a person.
+    * @param networkId The identifier of a network.
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<PersonNetworkEntry>
-        */
+    * @return Promise<PersonNetworkEntry>
+    */
     getNetworkForPerson(personId: string, networkId: string, opts?: any): Promise<PersonNetworkEntry> {
+
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(networkId, 'networkId');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody: null = null;
 
-        let pathParams = {
-            'personId': personId, 'networkId': networkId
+        const pathParams = {
+            'personId': personId,            'networkId': networkId
         };
 
-        let queryParams = {
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/people/{personId}/networks/{networkId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, PersonNetworkEntry);
+            contentTypes, accepts , PersonNetworkEntry);
     }
-    /**
-        * List network membership
-        *
-        * Gets a list of network memberships for person **personId**.
+/**
+    * List network membership
+    *
+    * Gets a list of network memberships for person **personId**.
 
-    You can use the -me- string in place of <personId> to specify the currently authenticated user.
+You can use the -me- string in place of <personId> to specify the currently authenticated user.
 
-        *
-        * @param personId The identifier of a person.
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-    If not supplied then the default value is 0.
-     (default to 0)
-        * @param opts.maxItems The maximum number of items to return in the list.
-    If not supplied then the default value is 100.
-     (default to 100)
-        * @param opts.fields A list of field names.
+    *
+    * @param personId The identifier of a person.
+    * @param opts Optional parameters
+    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+If not supplied then the default value is 0.
+ (default to 0)
+    * @param opts.maxItems The maximum number of items to return in the list.
+If not supplied then the default value is 100.
+ (default to 100)
+    * @param opts.fields A list of field names.
 
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
+You can use this parameter to restrict the fields
+returned within a response if, for example, you want to save on overall bandwidth.
 
-    The list applies to a returned individual
-    entity or entries within a collection.
+The list applies to a returned individual
+entity or entries within a collection.
 
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
+If the API method also supports the **include**
+parameter, then the fields specified in the **include**
+parameter are returned in addition to those specified in the **fields** parameter.
 
-        * @return Promise<PersonNetworkPaging>
-        */
+    * @return Promise<PersonNetworkPaging>
+    */
     listNetworksForPerson(personId: string, opts?: any): Promise<PersonNetworkPaging> {
+
         throwIfNotDefined(personId, 'personId');
 
         opts = opts || {};
-        let postBody = null;
+        const postBody: null = null;
 
-        let pathParams = {
+        const pathParams = {
             'personId': personId
         };
 
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
+        const headerParams = {
 
         };
-        let formParams = {
+        const formParams = {
         };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/people/{personId}/networks', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, PersonNetworkPaging);
+            contentTypes, accepts , PersonNetworkPaging);
     }
 
 }

@@ -19,9 +19,10 @@ export class AuditApp {
     id: string;
     name?: string;
     isEnabled?: boolean;
+    maxEntryId?: number;
+    minEntryId?: number;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
         }

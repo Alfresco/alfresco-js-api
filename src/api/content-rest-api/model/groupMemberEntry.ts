@@ -21,7 +21,6 @@ export class GroupMemberEntry {
     entry: GroupMember;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new GroupMember(input.entry) : undefined;

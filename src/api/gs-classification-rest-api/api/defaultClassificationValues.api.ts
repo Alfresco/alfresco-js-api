@@ -17,7 +17,7 @@
 
 import { DeclassificationDate } from '../model/declassificationDate';
 import { BaseApi } from './base.api';
-import { DateAlfresco } from '../../../../src/api/content-rest-api/model/dateAlfresco';
+import { DateAlfresco } from '../../../../src/api/content-custom-api/model/dateAlfresco';
 import { throwIfNotDefined } from '../../../assert';
 
 /**

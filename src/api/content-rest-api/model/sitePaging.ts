@@ -21,7 +21,6 @@ export class SitePaging {
     list?: SitePagingList;
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new SitePagingList(input.list) : undefined;
