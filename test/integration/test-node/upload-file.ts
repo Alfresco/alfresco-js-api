@@ -19,7 +19,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { AlfrescoApi } from '../../../src/alfrescoApi';
 import { SitesApi } from '../../../src/api/content-rest-api/api/sites.api';
-import { UploadApi } from '../../../src/api/content-rest-api';
+import { UploadApi } from '../../../src/api/content-custom-api';
 
 let program = require('commander');
 
