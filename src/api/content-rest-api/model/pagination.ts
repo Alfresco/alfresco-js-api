@@ -20,14 +20,14 @@ export class Pagination {
      * The number of objects in the entries array.
 
      */
-    count: number;
+    count?: number;
     /**
      * A boolean value which is **true** if there are more entities in the collection
 beyond those in this response. A true value means a request with a larger value
 for the **skipCount** or the **maxItems** parameter will return more entities.
 
      */
-    hasMoreItems: boolean;
+    hasMoreItems?: boolean;
     /**
      * An integer describing the total number of entities in the collection.
 The API might not be able to determine this value,
