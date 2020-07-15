@@ -15,28 +15,21 @@
 * limitations under the License.
 */
 
-import { Person } from './person';
+import { Pagination } from '../../content-rest-api/model/pagination';
+import { SiteGroupEntry } from './siteGroupEntry';
 
-export class SiteMember {
-    id: string;
-    person: Person;
-    role: SiteMember.RoleEnum | string;
-    isMemberOfGroup?: boolean; // backward compatibility, available since 7.0.0
+export class SiteGroupPagingList {
+    pagination: Pagination;
+    entries: SiteGroupEntry[];
 
     constructor(input?: any) {
         if (input) {
             Object.assign(this, input);
-            this.person = input.person ? new Person(input.person) : undefined;
+            this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+            if (input.entries) {
+                this.entries = input.entries.map((item: any) => new SiteGroupEntry(item));
+            }
         }
     }
 
-}
-export namespace SiteMember {
-    export type RoleEnum = 'SiteConsumer' | 'SiteCollaborator' | 'SiteContributor' | 'SiteManager';
-    export const RoleEnum = {
-        SiteConsumer: 'SiteConsumer' as RoleEnum,
-        SiteCollaborator: 'SiteCollaborator' as RoleEnum,
-        SiteContributor: 'SiteContributor' as RoleEnum,
-        SiteManager: 'SiteManager' as RoleEnum
-    };
 }

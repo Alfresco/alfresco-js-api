@@ -17,7 +17,7 @@
 
 export class SiteMembershipBodyCreate {
     role: SiteMembershipBodyCreate.RoleEnum | string;
-    id: string;
+    id: string; // contains both user and groupId
 
     constructor(input?: any) {
         if (input) {

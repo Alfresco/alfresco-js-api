@@ -15,23 +15,22 @@
 * limitations under the License.
 */
 
-import { Person } from './person';
+import { Group } from './group';
 
-export class SiteMember {
+export class SiteGroup {
     id: string;
-    person: Person;
-    role: SiteMember.RoleEnum | string;
-    isMemberOfGroup?: boolean; // backward compatibility, available since 7.0.0
+    group: Group;
+    role: SiteGroup.RoleEnum | string;
 
     constructor(input?: any) {
         if (input) {
             Object.assign(this, input);
-            this.person = input.person ? new Person(input.person) : undefined;
+            this.group = input.person ? new Group(input.person) : undefined;
         }
     }
 
 }
-export namespace SiteMember {
+export namespace SiteGroup {
     export type RoleEnum = 'SiteConsumer' | 'SiteCollaborator' | 'SiteContributor' | 'SiteManager';
     export const RoleEnum = {
         SiteConsumer: 'SiteConsumer' as RoleEnum,

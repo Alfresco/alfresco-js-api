@@ -35,6 +35,8 @@ import { SiteRolePaging } from '../model/siteRolePaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { SiteGroupEntry } from '../model/siteGroupEntry';
+import { SiteGroupPagingList } from '../model/siteGroupPagingList';
 
 /**
 * Sites service.
@@ -998,6 +1000,10 @@ If not supplied then the default value is 100.
  (default to 100)
     * @param opts.fields A list of field names.
 
+ **Note:** where class filter is available in Alfresco 7.0.0 and newer versions.
+ Optionally filter the list.
+ *   where=(isMemberOfGroup=false|true)
+
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
 
@@ -1024,6 +1030,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
+            'where': opts['where'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
@@ -1452,4 +1459,323 @@ parameter are returned in addition to those specified in the **fields** paramete
             contentTypes, accepts , SiteMembershipRequestEntry);
     }
 
+    /**
+     * Create a site membership for group
+     *
+     * Creates a site membership for group **groupId** on site **siteId**.
+
+     **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+     You can set the **role** to one of four types:
+     * SiteConsumer
+     * SiteCollaborator
+     * SiteContributor
+     * SiteManager
+     **Note:** You can create more than one site membership by
+     specifying a list of group in the JSON body like this:
+
+     ```JSON
+     [
+     {
+             "role": "SiteConsumer",
+             "id": "authorityId"
+           },
+     {
+             "role": "SiteConsumer",
+             "id": "authorityId"
+           }
+     ]
+     ```
+     If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
+     ```JSON
+     {
+            "list": {
+              "pagination": {
+                "count": 2,
+                "hasMoreItems": false,
+                "totalItems": 2,
+                "skipCount": 0,
+                "maxItems": 100
+              },
+              "entries": [
+                {
+                  "entry": {
+                    ...
+                  }
+                },
+                {
+                  "entry": {
+                    ...
+                  }
+                }
+              ]
+            }
+     }
+     *
+     * @param siteId The identifier of a site.
+     * @param siteMembershipBodyCreate The group to add and it role
+     * @param opts Optional parameters
+     * @param opts.fields A list of field names.
+
+     You can use this parameter to restrict the fields
+     returned within a response if, for example, you want to save on overall bandwidth.
+
+     The list applies to a returned individual
+     entity or entries within a collection.
+
+     If the API method also supports the **include**
+     parameter, then the fields specified in the **include**
+     parameter are returned in addition to those specified in the **fields** parameter.
+
+     * @return Promise<SiteMemberEntry>
+     */
+    createSiteGroupMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: any): Promise<SiteMemberEntry> {
+
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(siteMembershipBodyCreate, 'siteMembershipBodyCreate');
+
+        opts = opts || {};
+        const postBody = siteMembershipBodyCreate;
+
+        const pathParams = {
+            'siteId': siteId
+        };
+
+        const queryParams = {
+            'fields': buildCollectionParam(opts['fields'], 'csv')
+        };
+
+        const headerParams = {};
+        const formParams = {};
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/sites/{siteId}/group-members', 'POST',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts, SiteMemberEntry);
+    }
+
+    /**
+     * List group membership for site
+     *
+     * Gets a list of group membership for site **siteId**.
+
+     **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+     * @param siteId The identifier of a site.
+     * @param opts Optional parameters
+     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+     If not supplied then the default value is 0.
+     (default to 0)
+     * @param opts.maxItems The maximum number of items to return in the list.
+     If not supplied then the default value is 100.
+     (default to 100)
+     * @param opts.fields A list of field names.
+
+     You can use this parameter to restrict the fields
+     returned within a response if, for example, you want to save on overall bandwidth.
+
+     The list applies to a returned individual
+     entity or entries within a collection.
+
+     If the API method also supports the **include**
+     parameter, then the fields specified in the **include**
+     parameter are returned in addition to those specified in the **fields** parameter.
+
+     * @return Promise<SiteGroupPagingList>
+     */
+    listSiteGroups(siteId: string, opts?: any): Promise<SiteGroupPagingList> {
+
+        throwIfNotDefined(siteId, 'siteId');
+
+        opts = opts || {};
+        const postBody: null = null;
+
+        const pathParams = {
+            'siteId': siteId
+        };
+
+        const queryParams = {
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
+            'fields': buildCollectionParam(opts['fields'], 'csv')
+        };
+
+        const headerParams = {
+
+        };
+        const formParams = {
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/sites/{siteId}/group-members', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts , SiteGroupPagingList);
+    }
+
+    /**
+     * Get information about site membership of group
+
+     **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+     Gets site membership information for group **groupId** on site **siteId**.
+
+     *
+     * @param siteId The identifier of a site.
+     * @param groupId The authorityId of a group.
+     * @param opts Optional parameters
+     * @param opts.fields A list of field names.
+
+     You can use this parameter to restrict the fields
+     returned within a response if, for example, you want to save on overall bandwidth.
+
+     The list applies to a returned individual
+     entity or entries within a collection.
+
+     If the API method also supports the **include**
+     parameter, then the fields specified in the **include**
+     parameter are returned in addition to those specified in the **fields** parameter.
+
+     * @return Promise<SiteGroupEntry>
+     */
+    getSiteGroupMembership(siteId: string, groupId: string, opts?: any): Promise<SiteGroupEntry> {
+
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(groupId, 'groupId');
+
+        opts = opts || {};
+        const postBody: null = null;
+
+        const pathParams = {
+            'siteId': siteId,
+            'groupId': groupId
+        };
+
+        const queryParams = {
+            'fields': buildCollectionParam(opts['fields'], 'csv')
+        };
+
+        const headerParams = {
+
+        };
+        const formParams = {
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/sites/{siteId}/group-members/{groupId}', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts , SiteGroupEntry);
+    }
+
+    /**
+     * Update site membership of group
+     *
+     * Update the membership of person **groupId** in site **siteId**.
+
+     **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+     You can set the **role** to one of four types:
+     * SiteConsumer
+     * SiteCollaborator
+     * SiteContributor
+     * SiteManager
+
+     *
+     * @param siteId The identifier of a site.
+     * @param groupId The authorityId of a group.
+     * @param siteMembershipBodyUpdate The group new role
+     * @param opts Optional parameters
+     * @param opts.fields A list of field names.
+
+     You can use this parameter to restrict the fields
+     returned within a response if, for example, you want to save on overall bandwidth.
+
+     The list applies to a returned individual
+     entity or entries within a collection.
+
+     If the API method also supports the **include**
+     parameter, then the fields specified in the **include**
+     parameter are returned in addition to those specified in the **fields** parameter.
+
+     * @return Promise<SiteGroupEntry>
+     */
+    updateSiteGroupMembership(siteId: string, groupId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: any): Promise<SiteGroupEntry> {
+
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(groupId, 'groupId');
+        throwIfNotDefined(siteMembershipBodyUpdate, 'siteMembershipBodyUpdate');
+
+        opts = opts || {};
+        const postBody = siteMembershipBodyUpdate;
+
+        const pathParams = {
+            'siteId': siteId,
+            'groupId': groupId
+        };
+
+        const queryParams = {
+            'fields': buildCollectionParam(opts['fields'], 'csv')
+        };
+
+        const headerParams = {
+
+        };
+        const formParams = {
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/sites/{siteId}/group-members/{groupId}', 'PUT',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts , SiteGroupEntry);
+    }
+
+    /**
+     * Delete a group membership for site
+     *
+     * Deletes group **groupId** as a member of site **siteId**.
+
+     *
+     * @param siteId The identifier of a site.
+     * @param groupId The authorityId of a group.
+     * @return Promise<{}>
+     */
+    deleteSiteGroupMembership(siteId: string, groupId: string): Promise<any> {
+
+        throwIfNotDefined(siteId, 'siteId');
+        throwIfNotDefined(groupId, 'groupId');
+
+        const postBody: null = null;
+
+        const pathParams = {
+            'siteId': siteId,
+            'groupId': groupId
+        };
+
+        const queryParams = {
+        };
+
+        const headerParams = {
+
+        };
+        const formParams = {
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/sites/{siteId}/group-members/{groupId}', 'DELETE',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts);
+    }
 }
