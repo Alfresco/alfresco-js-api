@@ -18,3 +18,4 @@
 export * from './dateAlfresco';
 export * from './classDescription';
 export * from './classPropertyDescription';
+export * from './pagination';
