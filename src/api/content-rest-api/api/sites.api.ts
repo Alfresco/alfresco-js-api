@@ -1526,9 +1526,9 @@ parameter are returned in addition to those specified in the **fields** paramete
      parameter, then the fields specified in the **include**
      parameter are returned in addition to those specified in the **fields** parameter.
 
-     * @return Promise<SiteMemberEntry>
+     * @return Promise<SiteGroupEntry>
      */
-    createSiteGroupMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: any): Promise<SiteMemberEntry> {
+    createSiteGroupMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: any): Promise<SiteGroupEntry> {
 
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(siteMembershipBodyCreate, 'siteMembershipBodyCreate');
@@ -1553,7 +1553,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/sites/{siteId}/group-members', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, SiteMemberEntry);
+            contentTypes, accepts, SiteGroupEntry);
     }
 
     /**

@@ -18,7 +18,7 @@
 
 import { SiteGroupPagingList } from './siteGroupPagingList';
 
-export class SiteMemberPaging {
+export class SiteGroupPaging {
     list?: SiteGroupPagingList;
 
     constructor(input?: any) {
