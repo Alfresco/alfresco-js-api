@@ -1,16 +1,15 @@
-# SiteMember
+# SiteGroup
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [default to null]
-**person** | [**Person**](Person.md) |  | [default to null]
+**group** | [**GroupMember**](GroupMember.md) |  | [default to null]
 **role** | **string** |  | [default to null]
-**isMemberOfGroup** | **boolean** |  | [optional] [default to null]
 
 
-<a name="SiteMember.RoleEnum"></a>
-## Enum: SiteMember.RoleEnum
+<a name="SiteGroup.RoleEnum"></a>
+## Enum: SiteGroup.RoleEnum
 
 
 * `SiteConsumer` (value: `'SiteConsumer'`)

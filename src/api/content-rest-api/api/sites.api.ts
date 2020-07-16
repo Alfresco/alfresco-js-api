@@ -1514,18 +1514,6 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @param siteId The identifier of a site.
      * @param siteMembershipBodyCreate The group to add and it role
      * @param opts Optional parameters
-     * @param opts.fields A list of field names.
-
-     You can use this parameter to restrict the fields
-     returned within a response if, for example, you want to save on overall bandwidth.
-
-     The list applies to a returned individual
-     entity or entries within a collection.
-
-     If the API method also supports the **include**
-     parameter, then the fields specified in the **include**
-     parameter are returned in addition to those specified in the **fields** parameter.
-
      * @return Promise<SiteGroupEntry>
      */
     createSiteGroupMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: any): Promise<SiteGroupEntry> {
@@ -1571,18 +1559,6 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @param opts.maxItems The maximum number of items to return in the list.
      If not supplied then the default value is 100.
      (default to 100)
-     * @param opts.fields A list of field names.
-
-     You can use this parameter to restrict the fields
-     returned within a response if, for example, you want to save on overall bandwidth.
-
-     The list applies to a returned individual
-     entity or entries within a collection.
-
-     If the API method also supports the **include**
-     parameter, then the fields specified in the **include**
-     parameter are returned in addition to those specified in the **fields** parameter.
-
      * @return Promise<SiteGroupPagingList>
      */
     listSiteGroups(siteId: string, opts?: any): Promise<SiteGroupPagingList> {
@@ -1619,7 +1595,6 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     /**
      * Get information about site membership of group
-
      **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
 
      Gets site membership information for group **groupId** on site **siteId**.
@@ -1628,18 +1603,6 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @param siteId The identifier of a site.
      * @param groupId The authorityId of a group.
      * @param opts Optional parameters
-     * @param opts.fields A list of field names.
-
-     You can use this parameter to restrict the fields
-     returned within a response if, for example, you want to save on overall bandwidth.
-
-     The list applies to a returned individual
-     entity or entries within a collection.
-
-     If the API method also supports the **include**
-     parameter, then the fields specified in the **include**
-     parameter are returned in addition to those specified in the **fields** parameter.
-
      * @return Promise<SiteGroupEntry>
      */
     getSiteGroupMembership(siteId: string, groupId: string, opts?: any): Promise<SiteGroupEntry> {
@@ -1694,16 +1657,6 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @param opts Optional parameters
      * @param opts.fields A list of field names.
 
-     You can use this parameter to restrict the fields
-     returned within a response if, for example, you want to save on overall bandwidth.
-
-     The list applies to a returned individual
-     entity or entries within a collection.
-
-     If the API method also supports the **include**
-     parameter, then the fields specified in the **include**
-     parameter are returned in addition to those specified in the **fields** parameter.
-
      * @return Promise<SiteGroupEntry>
      */
     updateSiteGroupMembership(siteId: string, groupId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: any): Promise<SiteGroupEntry> {
@@ -1744,7 +1697,6 @@ parameter are returned in addition to those specified in the **fields** paramete
      *
      * Deletes group **groupId** as a member of site **siteId**.
 
-     *
      * @param siteId The identifier of a site.
      * @param groupId The authorityId of a group.
      * @return Promise<{}>

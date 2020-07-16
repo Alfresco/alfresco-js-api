@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { SiteGroupPagingList } from './siteGroupPagingList';
 
 export class SiteGroupPaging {

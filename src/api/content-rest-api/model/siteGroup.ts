@@ -15,17 +15,17 @@
 * limitations under the License.
 */
 
-import { Group } from './group';
+import { GroupMember } from './groupMember';
 
 export class SiteGroup {
     id: string;
-    group: Group;
+    group: GroupMember;
     role: SiteGroup.RoleEnum | string;
 
     constructor(input?: any) {
         if (input) {
             Object.assign(this, input);
-            this.group = input.person ? new Group(input.person) : undefined;
+            this.group = input.group ? new GroupMember(input.group) : undefined;
         }
     }
 

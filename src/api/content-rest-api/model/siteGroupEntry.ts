@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-
 import { SiteGroup } from './siteGroup';
 
 export class SiteGroupEntry {

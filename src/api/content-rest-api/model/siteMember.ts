@@ -21,7 +21,7 @@ export class SiteMember {
     id: string;
     person: Person;
     role: SiteMember.RoleEnum | string;
-    isMemberOfGroup?: boolean; // backward compatibility, available since 7.0.0
+    isMemberOfGroup?: boolean;
 
     constructor(input?: any) {
         if (input) {
