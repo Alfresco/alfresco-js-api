@@ -5,6 +5,7 @@
         "preserveConstEnums": true,
         "sourceMap": true,
         "strictFunctionTypes": true,
+        "strict": true,
         "noImplicitAny": true,
         "noImplicitThis": true,
         "noUnusedLocals": true,
