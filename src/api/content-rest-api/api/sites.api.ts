@@ -36,7 +36,7 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { SiteGroupEntry } from '../model/siteGroupEntry';
-import { SiteGroupPagingList } from '../model/siteGroupPagingList';
+import { SiteGroupPaging } from '../model/siteGroupPaging';
 
 /**
 * Sites service.
@@ -1559,9 +1559,9 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @param opts.maxItems The maximum number of items to return in the list.
      If not supplied then the default value is 100.
      (default to 100)
-     * @return Promise<SiteGroupPagingList>
+     * @return Promise<SiteGroupPaging>
      */
-    listSiteGroups(siteId: string, opts?: any): Promise<SiteGroupPagingList> {
+    listSiteGroups(siteId: string, opts?: any): Promise<SiteGroupPaging> {
 
         throwIfNotDefined(siteId, 'siteId');
 
@@ -1590,7 +1590,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/sites/{siteId}/group-members', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteGroupPagingList);
+            contentTypes, accepts , SiteGroupPaging);
     }
 
     /**
@@ -1655,7 +1655,6 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @param groupId The authorityId of a group.
      * @param siteMembershipBodyUpdate The group new role
      * @param opts Optional parameters
-     * @param opts.fields A list of field names.
 
      * @return Promise<SiteGroupEntry>
      */
