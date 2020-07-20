@@ -5538,6 +5538,14 @@ paths:
                 - $ref: '#/parameters/skipCountParam'
                 - $ref: '#/parameters/maxItemsParam'
                 - $ref: '#/parameters/fieldsParam'
+                - name: where
+                  in: query
+                  description: |
+                      Optionally filter the list.
+                      **Note:** this option is available in Alfresco 7.0.0 and newer versions.
+                      *   ```where=(isMemberOfGroup=false|true)```
+                  required: false
+                  type: string
             responses:
                 '200':
                     description: Successful response
@@ -5751,6 +5759,234 @@ paths:
                     description: Unexpected error
                     schema:
                         $ref: '#/definitions/Error'
+
+    '/sites/{siteId}/group-members':
+        get:
+            tags:
+                - sites
+            summary: List group membership for site
+            description: |
+                **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+                Gets a list of group membership for site **siteId**.
+            operationId: listSiteGroups
+            produces:
+                - application/json
+            parameters:
+                - $ref: '#/parameters/siteIdParam'
+                - $ref: '#/parameters/skipCountParam'
+                - $ref: '#/parameters/maxItemsParam'
+                - $ref: '#/parameters/fieldsParam'
+            responses:
+                '200':
+                    description: Successful response
+                    schema:
+                        $ref: '#/definitions/SiteGroupPaging'
+                '400':
+                    description: |
+                        Invalid parameter: value of **maxItems** or **skipCount** is invalid
+                '401':
+                    description: Authentication failed
+                '404':
+                    description: |
+                        **siteId** does not exist
+                default:
+                    description: Unexpected error
+                    schema:
+                        $ref: '#/definitions/Error'
+        post:
+            tags:
+                - sites
+            summary: Create a site membership for group
+            description: |
+                **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+                Creates a site membership for group **groupId** on site **siteId**.
+                You can set the **role** to one of four types:
+                * SiteConsumer
+                * SiteCollaborator
+                * SiteContributor
+                * SiteManager
+                **Note:** You can create more than one site membership by
+                specifying a list of group in the JSON body like this:
+
+                ```JSON
+                  [
+                   {
+                     "role": "SiteConsumer",
+                     "id": "authorityId"
+                   },
+                   {
+                     "role": "SiteConsumer",
+                     "id": "authorityId"
+                   }
+                  ]
+                ```
+                If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
+                ```JSON
+                  {
+                    "list": {
+                      "pagination": {
+                        "count": 2,
+                        "hasMoreItems": false,
+                        "totalItems": 2,
+                        "skipCount": 0,
+                        "maxItems": 100
+                      },
+                      "entries": [
+                        {
+                          "entry": {
+                            ...
+                          }
+                        },
+                        {
+                          "entry": {
+                            ...
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ```
+            operationId: createSiteGroupMembership
+            produces:
+                - application/json
+            parameters:
+                - $ref: '#/parameters/siteIdParam'
+                - $ref: '#/parameters/fieldsParam'
+                - in: body
+                  name: siteMembershipBodyCreate
+                  description: The group to add and their role
+                  required: true
+                  schema:
+                      $ref: '#/definitions/SiteMembershipBodyCreate'
+            responses:
+                '201':
+                    description: Successful response
+                    schema:
+                        $ref: '#/definitions/SiteGroupEntry'
+                '400':
+                    description: |
+                        Invalid parameter: value of **role** or **id** is invalid
+                        or **siteMembershipBodyCreate** invalid
+                '401':
+                    description: Authentication failed
+                '403':
+                    description: User does not have permission to invite a Group
+                '404':
+                    description: |
+                        **siteId** or **groupId** does not exist
+                '409':
+                    description: Group with this **id** is already a member
+                default:
+                    description: Unexpected error
+                    schema:
+                        $ref: '#/definitions/Error'
+    '/sites/{siteId}/group-members/{groupId}':
+        get:
+            tags:
+                - sites
+            summary: Get information about site membership of group
+            description: |
+                **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+                Gets site membership information for group **groupId** on site **siteId**.
+            operationId: getSiteGroupMembership
+            produces:
+                - application/json
+            parameters:
+                - $ref: '#/parameters/siteIdParam'
+                - $ref: '#/parameters/groupIdParam'
+                - $ref: '#/parameters/fieldsParam'
+            responses:
+                '200':
+                    description: Successful response
+                    schema:
+                        $ref: '#/definitions/SiteGroupEntry'
+                '401':
+                    description: Authentication failed
+                '404':
+                    description: |
+                        **siteId** or **groupId** does not exist
+                default:
+                    description: Unexpected error
+                    schema:
+                        $ref: '#/definitions/Error'
+        put:
+            tags:
+                - sites
+            summary: Update site membership of group
+            description: |
+                **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+                Update the membership of person **groupId** in site **siteId**.
+                You can set the **role** to one of four types:
+                * SiteConsumer
+                * SiteCollaborator
+                * SiteContributor
+                * SiteManager
+            operationId: updateSiteGroupMembership
+            produces:
+                - application/json
+            parameters:
+                - $ref: '#/parameters/siteIdParam'
+                - $ref: '#/parameters/groupIdParam'
+                - $ref: '#/parameters/fieldsParam'
+                - in: body
+                  name: siteMembershipBodyUpdate
+                  description: The groupId new role
+                  required: true
+                  schema:
+                      $ref: '#/definitions/SiteMembershipBodyUpdate'
+            responses:
+                '200':
+                    description: Successful response
+                    schema:
+                        $ref: '#/definitions/SiteGroupEntry'
+                '400':
+                    description: |
+                        Invalid parameter: **role** does not exist
+                        or **siteMembershipBodyUpdate** invalid
+                '401':
+                    description: Authentication failed
+                '404':
+                    description: |
+                        **siteId** or **groupId** does not exist
+                '422':
+                    description: Integrity exception (eg. last site member must be a site manager) or not allowed to update group
+                default:
+                    description: Unexpected error
+                    schema:
+                        $ref: '#/definitions/Error'
+        delete:
+            tags:
+                - sites
+            summary: Delete a group membership for site
+            description: |
+                **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+
+                Deletes group **groupId** as a member of site **siteId**.
+            operationId: deleteSiteGroupMembership
+            produces:
+                - application/json
+            parameters:
+                - $ref: '#/parameters/siteIdParam'
+                - $ref: '#/parameters/groupIdParam'
+            responses:
+                '204':
+                    description: Successful response
+                '401':
+                    description: Authentication failed
+                '404':
+                    description: |
+                        **siteId** or **groupId** does not exist
+                '422':
+                    description: Integrity exception (eg. last site member must be a site manager) or not allowed to delete groupId
+                default:
+                    description: Unexpected error
+                    schema:
+                        $ref: '#/definitions/Error'
+
     /tags:
         get:
             tags:
@@ -7723,6 +7959,50 @@ definitions:
                 type: string
             person:
                 $ref: '#/definitions/Person'
+            role:
+                type: string
+                enum:
+                    - SiteConsumer
+                    - SiteCollaborator
+                    - SiteContributor
+                    - SiteManager
+            isMemberOfGroup:
+                type: boolean
+    SiteGroupPaging:
+        type: object
+        required:
+            - list
+        properties:
+            list:
+                type: object
+                required:
+                    - pagination
+                    - entries
+                properties:
+                    pagination:
+                        $ref: '#/definitions/Pagination'
+                    entries:
+                        type: array
+                        items:
+                            $ref: '#/definitions/SiteGroupEntry'
+    SiteGroupEntry:
+        type: object
+        required:
+            - entry
+        properties:
+            entry:
+                $ref: '#/definitions/SiteGroup'
+    SiteGroup:
+        type: object
+        required:
+            - id
+            - group
+            - role
+        properties:
+            id:
+                type: string
+            group:
+                $ref: '#/definitions/GroupMember'
             role:
                 type: string
                 enum:

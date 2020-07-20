@@ -15,23 +15,16 @@
 * limitations under the License.
 */
 
-export class SiteMembershipBodyCreate {
-    role: SiteMembershipBodyCreate.RoleEnum | string;
-    id: string; // contains both user and groupId
+import { SiteGroup } from './siteGroup';
+
+export class SiteGroupEntry {
+    entry: SiteGroup;
 
     constructor(input?: any) {
         if (input) {
             Object.assign(this, input);
+            this.entry = input.entry ? new SiteGroup(input.entry) : undefined;
         }
     }
 
-}
-export namespace SiteMembershipBodyCreate {
-    export type RoleEnum = 'SiteConsumer' | 'SiteCollaborator' | 'SiteContributor' | 'SiteManager';
-    export const RoleEnum = {
-        SiteConsumer: 'SiteConsumer' as RoleEnum,
-        SiteCollaborator: 'SiteCollaborator' as RoleEnum,
-        SiteContributor: 'SiteContributor' as RoleEnum,
-        SiteManager: 'SiteManager' as RoleEnum
-    };
 }

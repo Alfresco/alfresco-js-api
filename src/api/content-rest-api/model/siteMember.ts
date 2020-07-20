@@ -21,6 +21,7 @@ export class SiteMember {
     id: string;
     person: Person;
     role: SiteMember.RoleEnum | string;
+    isMemberOfGroup?: boolean;
 
     constructor(input?: any) {
         if (input) {

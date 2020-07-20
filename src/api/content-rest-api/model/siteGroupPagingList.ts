@@ -15,23 +15,23 @@
 * limitations under the License.
 */
 
-export class SiteMembershipBodyCreate {
-    role: SiteMembershipBodyCreate.RoleEnum | string;
-    id: string; // contains both user and groupId
+import { Pagination } from '../../content-rest-api/model/pagination';
+import { SiteGroupEntry } from './siteGroupEntry';
+
+export class SiteGroupPagingList {
+    pagination: Pagination;
+    entries: SiteGroupEntry[];
 
     constructor(input?: any) {
         if (input) {
             Object.assign(this, input);
+            this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+            if (input.entries) {
+                this.entries = input.entries.map((item: any) => {
+                    return new SiteGroupEntry(item);
+                });
+            }
         }
     }
 
-}
-export namespace SiteMembershipBodyCreate {
-    export type RoleEnum = 'SiteConsumer' | 'SiteCollaborator' | 'SiteContributor' | 'SiteManager';
-    export const RoleEnum = {
-        SiteConsumer: 'SiteConsumer' as RoleEnum,
-        SiteCollaborator: 'SiteCollaborator' as RoleEnum,
-        SiteContributor: 'SiteContributor' as RoleEnum,
-        SiteManager: 'SiteManager' as RoleEnum
-    };
 }
