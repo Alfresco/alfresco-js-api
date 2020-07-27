@@ -11,7 +11,7 @@ class CustomModelMock extends BaseMock {
 
     get200AllCustomModel() {
         nock(this.host, {'encodedQueryParams': true})
-            .get('/alfresco/api/-default-/private/alfresco/versions/1/cmm', {})
+            .get('/alfresco/api/-default-/private/alfresco/versions/1/cmm')
             .reply(200, {
                 'list': {
                     'pagination': {
