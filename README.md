@@ -252,7 +252,7 @@ scope| Your scope | null |
 implicitFlow| true/false | false |
 redirectUri|  url to be redirect after login| null|
 redirectLogout|  url to be redirect after logout optional, if is nor present the redirectUri will be used| null|
-refreshTokenTimeout|  millisecond value, after how many millisecond youw ant refresh the token| 30000|
+refreshTokenTimeout|  millisecond value, after how many millisecond you want refresh the token| 30000|
 redirectSilentIframeUri|  url to be redirect after silent refresh login| /assets/silent-refresh.html |
 silentLogin|  direct execute the implicit login without the need to call AlfrescoJsApi.implicitLogin() method|   false|
 publicUrls | list of public urls that don't need authorization. It is possible too pass absolute paths and string patterns that are valid for [minimatch](https://github.com/isaacs/minimatch#readme) |
@@ -264,10 +264,10 @@ The api/js-api will automatically redirect you to the login page anf refresh the
 Property | Description  | default value|
 ------------- | ------------- | -------------|
 implicit_redirect| triggered when the user is redirect to the auth server return url parameter of the redirect |  |
-discovery| triggered when all the openId discovery url phase is terminated returnl an object with all the discovered url |  |
+discovery| triggered when all the openId discovery url phase is terminated return an object with all the discovered url |  |
 token_issued| triggered when a new token is issued|  |
 
-The api/js-api will automatically redirect you to the login page anf refresh the token if necessary
+The api/js-api will automatically redirect you to the login page and refresh the token if necessary
 
 ##### Example
 
