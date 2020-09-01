@@ -11,5 +11,5 @@ cp -R $DIR/../dist/package/* $DIR/../test/integration/test-node/node_modules/@al
 
 ts-node ./test/integration/test-node/login-ecm.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" || exit 1
 ts-node ./test/integration/test-node/upload-file.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" || exit 1
-ts-node ./test/integration/test-node/login-bpmn.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" --ssoHost "$SSO_HOST" --clientId "$CLIENT_ID" || exit 1
-ts-node ./test/integration/test-node/login-sso.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" --ssoHost "$SSO_HOST" --clientId "$CLIENT_ID" || exit 1
+ts-node ./test/integration/test-node/login-bpmn.ts --host $HOST -u "$USERNAME" -p "$PASSWORD"  || exit 1
+ts-node ./test/integration/test-node/login-sso.ts --host $HOST -u "$USERNAME" -p "$PASSWORD"   || exit 1

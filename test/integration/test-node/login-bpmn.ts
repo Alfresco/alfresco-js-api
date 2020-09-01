@@ -26,8 +26,6 @@ async function main() {
         .option('--host  [type]', '')
         .option('-p, --password [type]', 'password ')
         .option('-u, --username [type]', 'username ')
-        .option('-s, --ssoHost [type]', 'sso host ')
-        .option('-c, --clientId [type]', 'clientId')
         .parse(process.argv);
 
     let alfrescoApi: AlfrescoApi = new AlfrescoApi();
@@ -37,8 +35,8 @@ async function main() {
         hostBpm: program.host,
         authType: 'OAUTH',
         oauth2: {
-            host: `${program.ssoHost}`,
-            clientId: `${program.clientId}`,
+            host: `${program.host}/auth/realms/alfresco`,
+            clientId: `alfresco`,
             scope: 'openid',
             secret: '',
             implicitFlow: false,
