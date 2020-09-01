@@ -206,7 +206,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             }
 
             if (payload.nonce !== savedNonce) {
-                throw('Failing nonce JWT is not corrisponding' + payload.nonce);
+                throw('Failing nonce JWT is not corresponding' + payload.nonce);
             }
 
             return {

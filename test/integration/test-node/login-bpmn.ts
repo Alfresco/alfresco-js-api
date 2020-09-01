@@ -26,6 +26,8 @@ async function main() {
         .option('--host  [type]', '')
         .option('-p, --password [type]', 'password ')
         .option('-u, --username [type]', 'username ')
+        .option('-s, --ssoHost [type]', 'sso host ')
+        .option('-c, --clientId [type]', 'clientId')
         .parse(process.argv);
 
     let alfrescoApi: AlfrescoApi = new AlfrescoApi();
@@ -33,7 +35,16 @@ async function main() {
     alfrescoApi.setConfig({
         provider: 'BPM',
         hostBpm: program.host,
-        authType: 'BASIC',
+        authType: 'OAUTH',
+        oauth2: {
+            host: `${program.ssoHost}`,
+            clientId: `${program.clientId}`,
+            scope: 'openid',
+            secret: '',
+            implicitFlow: false,
+            silentLogin: false,
+            redirectUri: '/'
+        },
         contextRoot: ''
     });
 
