@@ -300,6 +300,10 @@ export class Oauth2Auth extends AlfrescoApiClient {
     redirectLogin(): void {
         if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
             let href = this.composeImplicitLoginUrl();
+            const afterLoginUriSegment = window.location.hash.split('&')[0].indexOf('session_state') === -1 ? window.location.hash.split('&')[0] : '';
+            if (afterLoginUriSegment && afterLoginUriSegment !== '/') {
+                this.storage.setItem('loginFragment', afterLoginUriSegment.replace('#', '').trim());
+            }
             window.location.href = href;
             this.emit('implicit_redirect', href);
         }
