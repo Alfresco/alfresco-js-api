@@ -300,17 +300,13 @@ export class Oauth2Auth extends AlfrescoApiClient {
     redirectLogin(): void {
         if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
             let href = this.composeImplicitLoginUrl();
-            const afterLoginUriSegment = this.isRedirectionUrl() ? window.location.hash.split('&')[0] : '';
-            if (afterLoginUriSegment && afterLoginUriSegment !== '/') {
-                this.storage.setItem('loginFragment', afterLoginUriSegment.replace('#', '').trim());
-            }
             window.location.href = href;
             this.emit('implicit_redirect', href);
         }
     }
 
     isRedirectionUrl() {
-        return window.location.hash  && window.location.hash.indexOf('&') !== -1 && window.location.hash.split('&')[0].indexOf('session_state') === -1;
+        return window.location.hash && window.location.hash.split('&')[0].indexOf('session_state') === -1;
     }
 
     genNonce(): string {
@@ -329,6 +325,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
         let nonce = this.genNonce();
 
         this.storage.setItem('nonce', nonce);
+
+        const afterLoginUriSegment = this.isRedirectionUrl() ? window.location.hash.split('&')[0] : '';
+        if (afterLoginUriSegment && afterLoginUriSegment !== '/') {
+            this.storage.setItem('loginFragment', afterLoginUriSegment.replace('#', '').trim());
+        }
 
         let separation = this.discovery.loginUrl.indexOf('?') > -1 ? '&' : '?';
 
