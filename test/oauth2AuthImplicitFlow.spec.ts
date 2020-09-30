@@ -66,6 +66,35 @@ describe('Oauth2 Implicit flow test', () => {
         oauth2Auth.implicitLogin();
     });
 
+    it('should not loop over redirection when redirectUri contains hash and token is not valid ', (done) => {
+        window = globalAny.window = { location: {} };
+
+        oauth2Auth = new Oauth2Auth(
+            {
+                oauth2: {
+                    host: 'http://myOauthUrl:30081/auth/realms/springboot',
+                    clientId: 'activiti',
+                    secret: '',
+                    scope: 'openid',
+                    implicitFlow: true,
+                    redirectUri: '#/redirectUri'
+                }
+            },
+            alfrescoJsApi
+        );
+
+        const redirectLoginSpy = chai.spy.on(oauth2Auth.storage, 'setItem');
+
+        oauth2Auth.on('implicit_redirect', () => {
+            expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
+                'openid-connect/auth?');
+            expect(redirectLoginSpy).to.have.been.called(1);
+            done();
+        });
+
+        oauth2Auth.implicitLogin();
+    });
+
     it('should not redirect to login if access token is valid', (done) => {
         window = globalAny.window = { location: {} };
 
