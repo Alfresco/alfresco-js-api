@@ -25,6 +25,11 @@ show_help() {
     echo "-gnu for gnu"
 }
 
+version_change() {
+    echo "====== New version $1 ====="
+    VERSION=$1
+}
+
 last_alpha_mode() {
     length=`expr $projectslength - 1`
     echo "====== Auto find last ALPHA version of ${projects[${length}]} ====="
@@ -66,7 +71,7 @@ semantic_set() {
 
 update_main_version() {
    echo "====== UPDATE MAIN PKG VERSION  to ${VERSION} in the package.json ======"
-   sed "${sedi[@]}" "s/\"version\": \".*\"/\"version\": \"${VERSION}\"/g"  $DIR/../package.json
+   npm version --allow-same-version --no-git-tag-version --force ${VERSION}
 }
 
 args=("$@")
