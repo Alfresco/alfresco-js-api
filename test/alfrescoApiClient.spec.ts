@@ -1,8 +1,9 @@
 /*global describe, it */
 
-import { AlfrescoApiClient, FormValueRepresentation } from  '../index';
+import { AlfrescoApiClient, AlfrescoApiCompatibility as AlfrescoApi, FormValueRepresentation } from '../index';
 import { DateAlfresco } from  '../index';
 let chai = require('chai');
+let AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 
 let expect = require('chai').expect;
 chai.use(require('chai-datetime'));
@@ -34,6 +35,21 @@ describe('Alfresco Core API Client', function () {
             expect(response.header.Accept).equal('application/json');
             expect(response.header['Content-Type']).equal('application/json');
             expect(response._responseType).equal('blob');
+        });
+
+        it('should return the username after login', function (done) {
+            this.authResponseEcmMock = new AuthEcmMock('http://127.0.0.1:8080');
+
+            this.authResponseEcmMock.get201Response();
+
+            this.alfrescoJsApi = new AlfrescoApi({
+                hostEcm: this.hostEcm
+            });
+
+            this.alfrescoJsApi.login('admin', 'admin').then(() => {
+                expect(this.alfrescoJsApi.getEcmUsername()).to.be.equal('admin');
+                done();
+            });
         });
     });
 
