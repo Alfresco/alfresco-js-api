@@ -44,6 +44,8 @@ export class AlfrescoApi implements Emitter {
     once: EmitterMethod;
     emit: (type: string, ...args: any[]) => void;
 
+    username: string;
+
     constructor(config?: AlfrescoApiConfig) {
         ee(this);
 
@@ -235,6 +237,8 @@ export class AlfrescoApi implements Emitter {
             username = username.trim();
         }
 
+        this.username = username;
+
         if (this.isOauthConfiguration()) {
 
             let oauth2AuthPromise;
@@ -354,6 +358,8 @@ export class AlfrescoApi implements Emitter {
      * logout Alfresco API
      * */
     logout(): Promise<any> {
+        this.username = null;
+
         if (this.isOauthConfiguration()) {
             return this.oauth2Auth.logOut();
         } else {
@@ -442,17 +448,17 @@ export class AlfrescoApi implements Emitter {
 
     getBpmUsername(): string {
         if (this.isOauthConfiguration()) {
-            return this.oauth2Auth.storage.getItem('USERNAME');
+            return this.username || this.oauth2Auth.storage.getItem('USERNAME');
         } else {
-            return this.processAuth.storage.getItem('APS_USERNAME');
+            return this.username || this.processAuth.storage.getItem('APS_USERNAME');
         }
     }
 
     getEcmUsername(): string {
         if (this.isOauthConfiguration()) {
-            return this.oauth2Auth.storage.getItem('USERNAME');
+            return this.username || this.oauth2Auth.storage.getItem('USERNAME');
         } else {
-            return this.contentAuth.storage.getItem('ACS_USERNAME');
+            return this.username || this.contentAuth.storage.getItem('ACS_USERNAME');
         }
     }
 
