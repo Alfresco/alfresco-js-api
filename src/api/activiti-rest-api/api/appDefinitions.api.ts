@@ -131,6 +131,7 @@ export class AppDefinitionsApi extends BaseApi {
     importAndPublishApp(file: any, opts?: any): Promise<AppDefinitionUpdateResultRepresentation> {
         throwIfNotDefined(file, 'file');
 
+        opts = opts || {};
         let postBody = null;
         let pathParams = {};
         let queryParams = {
