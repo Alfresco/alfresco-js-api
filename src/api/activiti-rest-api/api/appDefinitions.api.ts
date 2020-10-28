@@ -128,12 +128,14 @@ export class AppDefinitionsApi extends BaseApi {
      * @param file file
      * @return Promise<AppDefinitionUpdateResultRepresentation>
      */
-    importAndPublishApp(file: any): Promise<AppDefinitionUpdateResultRepresentation> {
+    importAndPublishApp(file: any, opts?: any): Promise<AppDefinitionUpdateResultRepresentation> {
         throwIfNotDefined(file, 'file');
 
         let postBody = null;
         let pathParams = {};
-        let queryParams = {};
+        let queryParams = {
+            'renewIdmEntries': opts['renewIdmEntries']
+        };
         let headerParams = {};
         let formParams = {
             'file': file
