@@ -19,7 +19,12 @@ export class SiteMembershipRequestBodyCreate {
     message?: string;
     id: string;
     title?: string;
-
+    /**
+     * Optional client name used when sending an email to the end user, defaults to \"share\" if not provided.
+     **Note:** The client must be registered before this API can send an email.
+     **Note:** This is available in Alfresco 7.0.0 and newer versions.
+     */
+    client?: string;
     constructor(input?: any) {
         if (input) {
             Object.assign(this, input);
