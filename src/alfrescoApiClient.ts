@@ -40,6 +40,7 @@ export interface RequestOptions {
     returnType?: any;
     contextRoot?: string;
     responseType?: string;
+    url?: string;
 }
 
 /**
@@ -349,15 +350,15 @@ export class AlfrescoApiClient implements ee.Emitter {
      * constructor for a complex type.   * @returns {Promise} A Promise object.
      */
     callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-            contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
+            contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string, url?: string): Promise<any> {
 
-        let url;
-
-        if (contextRoot) {
-            const basePath = `${this.host}/${contextRoot}`;
-            url = this.buildUrlCustomBasePath(basePath, path, pathParams);
-        } else {
-            url = this.buildUrl(path, pathParams);
+        if (!url) {
+            if (contextRoot) {
+                const basePath = `${this.host}/${contextRoot}`;
+                url = this.buildUrlCustomBasePath(basePath, path, pathParams);
+            } else {
+                url = this.buildUrl(path, pathParams);
+            }
         }
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
                                 contentTypes, accepts, returnType, contextRoot, responseType, url);
@@ -376,7 +377,8 @@ export class AlfrescoApiClient implements ee.Emitter {
             options.accepts,
             options.returnType,
             options.contextRoot,
-            options.responseType
+            options.responseType,
+            options.url
         );
     }
 
