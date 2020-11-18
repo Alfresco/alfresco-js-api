@@ -377,7 +377,8 @@ export class AlfrescoApiClient implements ee.Emitter {
             options.accepts,
             options.returnType,
             options.contextRoot,
-            options.responseType
+            options.responseType,
+            options.url
         );
     }
 
