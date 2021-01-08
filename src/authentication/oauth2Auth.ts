@@ -107,14 +107,15 @@ export class Oauth2Auth extends AlfrescoApiClient {
         }
     }
 
-    async initOauth() {
+    // Init Core - Init Js-api -
+    initOauth() {
         if (!this.config.oauth2.implicitFlow && this.isValidAccessToken()) {
             const accessToken = this.storage.getItem('access_token');
             this.setToken(accessToken, null);
         }
 
         if (this.config.oauth2.implicitFlow) {
-            await this.checkFragment();
+            this.checkFragment();
         }
     }
 
