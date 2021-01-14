@@ -139,7 +139,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             return accessToken;
         }
 
-        if (this.hashFragmentParams && this.hashFragmentParams?.error === undefined) {
+        if (this.hashFragmentParams && this.hashFragmentParams.error === undefined) {
             let accessToken = this.hashFragmentParams.access_token;
             let idToken = this.hashFragmentParams.id_token;
             let sessionState = this.hashFragmentParams.session_state;
