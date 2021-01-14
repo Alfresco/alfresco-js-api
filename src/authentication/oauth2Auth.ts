@@ -590,7 +590,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                     resolve(data);
                 },
                 (error) => {
-                    if (error.error.status === 401) {
+                    if (error.error && error.error.status === 401) {
                         this.emit('unauthorized');
                     }
                     this.emit('error');
