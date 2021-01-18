@@ -83,7 +83,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             }
 
             if (!this.config.oauth2.refreshTokenTimeout) {
-                this.config.oauth2.refreshTokenTimeout = 30000;
+                this.config.oauth2.refreshTokenTimeout = 300000;
             }
 
             if (!this.config.oauth2.redirectSilentIframeUri) {
@@ -104,11 +104,10 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 this.exchangeTicketListener(alfrescoApi);
             }
 
-            this.initOauth(); // jshint ignore:line
+            this.initOauth();
         }
     }
 
-    // Init Core - Init Js-api -
     initOauth() {
         if (!this.config.oauth2.implicitFlow && this.isValidAccessToken()) {
             const accessToken = this.storage.getItem('access_token');
@@ -553,8 +552,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     pollingRefreshToken() {
-        this.refreshTokenIntervalPolling = setInterval(() => {
-            this.refreshToken();
+        this.refreshTokenIntervalPolling = setInterval(async () => {
+            try {
+                await this.refreshToken();
+            } catch (e) {
+            }
         }, this.config.oauth2.refreshTokenTimeout);
     }
 
