@@ -558,6 +558,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
             } catch (e) {
             }
         }, this.config.oauth2.refreshTokenTimeout);
+
+        this.refreshTokenIntervalPolling.unref();
     }
 
     /**
