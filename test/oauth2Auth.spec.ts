@@ -140,7 +140,7 @@ describe('Oauth2  test', () => {
             oauth2Auth.login('admin', 'admin');
         });
 
-        it('should not hang thee app also if teh logout is missing', function(done)  {
+        it('should not hang the app also if teh logout is missing', function(done)  {
             this.timeout(3000);
             oauth2Mock.get200Response();
 
