@@ -108,7 +108,7 @@ describe('Oauth2  test', () => {
             );
         });
 
-        it('should refresh token when the login not use the implicitFlow ', function(done)  {
+        it('should refresh token when the login not use the implicitFlow ', function (done) {
             this.timeout(3000);
             oauth2Mock.get200Response();
 
@@ -140,7 +140,7 @@ describe('Oauth2  test', () => {
             oauth2Auth.login('admin', 'admin');
         });
 
-        it('should not hang the app also if teh logout is missing', function(done)  {
+        it('should not hang the app also if teh logout is missing', function (done) {
             this.timeout(3000);
             oauth2Mock.get200Response();
 
@@ -195,6 +195,38 @@ describe('Oauth2  test', () => {
             });
 
             oauth2Auth.login('admin', 'admin');
+        });
+
+        it('should not emit a token_issued event if setToken is null ', (done) => {
+            oauth2Mock.get200Response();
+
+            const oauth2Auth = new Oauth2Auth(
+                <AlfrescoApiConfig> {
+                    oauth2: {
+                        'host': 'http://myOauthUrl:30081/auth/realms/springboot',
+                        'clientId': 'activiti',
+                        'scope': 'openid',
+                        'secret': '',
+                        'redirectUri': '/',
+                        'redirectUriLogout': '/logout'
+                    },
+                    authType: 'OAUTH'
+                },
+                alfrescoJsApi
+            );
+
+            let counterCallEvent = 0
+            oauth2Auth.once('token_issued', () => {
+                counterCallEvent++;
+            });
+
+            oauth2Auth.setToken(null, null);
+            oauth2Auth.setToken('200', null);
+            oauth2Auth.setToken(null, null);
+
+            expect(counterCallEvent).to.be.equal(1);
+
+            done();
         });
 
         it('should emit a token_issued if provider is ECM', (done) => {

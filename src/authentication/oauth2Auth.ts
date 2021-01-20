@@ -541,7 +541,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 resolve(data);
             },
             (error) => {
-                if (error.error && error.error.status === 401) {
+                if (error.error && error.error.status === 401 || error.status === 401) {
                     this.emit('unauthorized');
                 }
                 this.emit('error');
@@ -625,7 +625,9 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.authentications.basicAuth.password = null;
         this.token = token;
 
-        this.emit('token_issued');
+        if (token) {
+            this.emit('token_issued');
+        }
     }
 
     /**
@@ -711,9 +713,12 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.once('token_issued', async () => {
             const authContentApi: AuthenticationApi = new AuthenticationApi(alfrescoApi);
             authContentApi.apiClient.authentications = this.authentications;
-            const ticketEntry = await authContentApi.getTicket();
-            this.config.ticketEcm = ticketEntry.entry.id;
-            this.emit('ticket_exchanged');
+            try {
+                const ticketEntry = await authContentApi.getTicket();
+                this.config.ticketEcm = ticketEntry.entry.id;
+                this.emit('ticket_exchanged');
+            } catch (e) {
+            }
         });
     }
 }

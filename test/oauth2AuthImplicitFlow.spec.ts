@@ -124,6 +124,8 @@ describe('Oauth2 Implicit flow test', () => {
             done();
         });
 
+        oauth2Auth.setToken('new_token', 'new_refresh_token');
+
         oauth2Auth.implicitLogin();
     });
 
