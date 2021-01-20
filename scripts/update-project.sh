@@ -45,7 +45,7 @@ JS_VERSION=$(npm view @alfresco/js-api@$VERSION version)
 BRANCH="JS-API-Update-$JS_VERSION"
 git checkout -b $BRANCH
 
-npm i @alfresco/js-api@$VERSION
+./script/update-version.sh -vj $JS_VERSION
 
 git add .
 git commit -m "Update JS-API packages version $JS_VERSION"
