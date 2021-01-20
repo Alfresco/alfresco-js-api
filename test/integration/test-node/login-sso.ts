@@ -48,10 +48,10 @@ async function main() {
 
     alfrescoApi.login(program.username, program.password).then(() => {
         console.log('login SSO ok');
-        // alfrescoApi.logout();//
+        alfrescoApi.logout();
     }, (error) => {
         console.log(`login SSO error ${JSON.stringify(error)}`);
-        // alfrescoApi.logout();
+        alfrescoApi.logout();
         process.exit(1);
     });
 
