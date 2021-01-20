@@ -140,6 +140,37 @@ describe('Oauth2  test', () => {
             oauth2Auth.login('admin', 'admin');
         });
 
+        it('should not hang the app also if teh logout is missing', function(done)  {
+            this.timeout(3000);
+            oauth2Mock.get200Response();
+
+            const oauth2Auth = new Oauth2Auth(
+                <AlfrescoApiConfig> {
+                    oauth2: {
+                        'host': 'http://myOauthUrl:30081/auth/realms/springboot',
+                        'clientId': 'activiti',
+                        'scope': 'openid',
+                        'secret': '',
+                        'redirectUri': '/',
+                        'redirectUriLogout': '/logout',
+                        'implicitFlow': false,
+                        'refreshTokenTimeout': 100
+                    },
+                    authType: 'OAUTH'
+                },
+                alfrescoJsApi
+            );
+
+            const refreshSpy = chai.spy.on(oauth2Auth, 'refreshToken');
+
+            setTimeout(() => {
+                expect(refreshSpy).to.have.been.called.min(2);
+                done();
+            }, 600);
+
+            oauth2Auth.login('admin', 'admin');
+        });
+
         it('should emit a token_issued event if login is ok ', (done) => {
             oauth2Mock.get200Response();
 
