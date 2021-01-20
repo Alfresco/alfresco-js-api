@@ -38,14 +38,13 @@ rm -rf $TEMP_GENERATOR_DIR;
 
 git clone https://$TOKEN@github.com/$NAME_REPO.git $TEMP_GENERATOR_DIR
 cd $TEMP_GENERATOR_DIR
-git checkout develop
+
+BRANCH="JS-API-Update"
+git checkout $BRANCH || git checkout -b $BRANCH
 
 JS_VERSION=$(npm view @alfresco/js-api@$VERSION version)
 
-BRANCH="JS-API-Update-$JS_VERSION"
-git checkout -b $BRANCH
-
-./script/update-version.sh -vj $JS_VERSION
+find . ! -path "*/node_modules/*" -name "package.json" -execdir npm i @alfresco/js-api@$VERSION \;
 
 git add .
 git commit -m "Update JS-API packages version $JS_VERSION"
