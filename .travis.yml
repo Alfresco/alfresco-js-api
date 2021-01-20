@@ -70,12 +70,12 @@ jobs:
         - stage: Trigger ADF alpha
           name: Trigger ADF alpha
           if: (branch = develop) AND type = push
-          script: ./scripts/update-project.sh -n alfresco-ng2-components -t $GITHUB_TOKEN -v alpha
+          script: ./scripts/update-project.sh -n Alfresco/alfresco-ng2-components -t $GITHUB_TOKEN -v alpha
 
         - stage: Trigger ADF beta
           name: Trigger ADF beta
           if:  tag =~ .*beta.* AND type = push
-          script: ./scripts/update-project.sh -n alfresco-ng2-components -t $GITHUB_TOKEN -v beta
+          script: ./scripts/update-project.sh -n Alfresco/alfresco-ng2-components -t $GITHUB_TOKEN -v beta
 
 cache:
   directories:
