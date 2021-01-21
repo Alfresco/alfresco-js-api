@@ -40,8 +40,11 @@ git clone https://$TOKEN@github.com/$NAME_REPO.git $TEMP_GENERATOR_DIR
 cd $TEMP_GENERATOR_DIR
 
 BRANCH="JS-API-Update"
+git fetch
 git checkout $BRANCH || git checkout -b $BRANCH
-
+git reset --hard origin/develop
+git commit --amend -m "Reset $branch to devlop [skip ci]"
+    
 JS_VERSION=$(npm view @alfresco/js-api@$VERSION version)
 
 for i in $(find . ! -path "*/node_modules/*" -name "package-lock.json" | xargs grep -l 'js-api'); do
