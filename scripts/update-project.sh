@@ -44,7 +44,11 @@ git checkout $BRANCH || git checkout -b $BRANCH
 
 JS_VERSION=$(npm view @alfresco/js-api@$VERSION version)
 
-find . ! -path "*/node_modules/*" -name "package.json" -execdir npm i @alfresco/js-api@$VERSION \;
+for i in $(find . ! -path "*/node_modules/*" -name "package-lock.json" | xargs grep -l 'js-api'); do
+    directory=$(dirname $i)
+    echo $directory
+    ( cd $directory ; npm i @alfresco/js-api@$VERSION )
+done
 
 git add .
 git commit -m "Update JS-API packages version $JS_VERSION"
