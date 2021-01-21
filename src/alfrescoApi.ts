@@ -251,8 +251,8 @@ export class AlfrescoApi implements Emitter {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            }, () => {
-                console.log('login OAUTH error');
+            }, (e) => {
+                console.log('login OAUTH error', e);
             });
 
             return oauth2AuthPromise;
