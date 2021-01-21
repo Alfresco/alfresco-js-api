@@ -50,21 +50,6 @@ describe('Auth', function () {
                     });
                 });
 
-                it('should return an error if wrong credential are used 400 userId and/or password are/is not provided', function (done) {
-                    this.authResponseEcmMock.get400Response();
-
-                    this.alfrescoJsApi = new AlfrescoApi({
-                        hostEcm: this.host
-                    });
-
-                    this.alfrescoJsApi.login(null, null).then(function () {
-
-                    },                                        (error: any) => {
-                        expect(error.status).to.be.equal(400);
-                        done();
-                    });
-                });
-
             });
 
             describe('isLoggedIn', function () {

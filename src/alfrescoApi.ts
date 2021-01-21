@@ -233,6 +233,10 @@ export class AlfrescoApi implements Emitter {
      * */
     login(username: string, password: string): Promise<any> {
 
+        if (!this.isCredentialValid(username) || !this.isCredentialValid(password)) {
+            return Promise.reject('missing username or password');
+        }
+
         if (username) {
             username = username.trim();
         }
@@ -247,7 +251,7 @@ export class AlfrescoApi implements Emitter {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            },  (e) => {
+            }, (e) => {
                 console.log('login OAUTH error', e);
             });
 
@@ -260,7 +264,7 @@ export class AlfrescoApi implements Emitter {
 
                 processPromise.then((ticketBpm) => {
                     this.config.ticketBpm = ticketBpm;
-                },                  () => {
+                }, () => {
                     console.log('login BPM error');
                 });
 
@@ -272,7 +276,7 @@ export class AlfrescoApi implements Emitter {
                     this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
 
                     this.config.ticketEcm = ticketEcm;
-                },                  () => {
+                }, () => {
                     console.log('login ECM error');
                 });
 
@@ -291,6 +295,10 @@ export class AlfrescoApi implements Emitter {
                 return Promise.reject('Unknown configuration');
             }
         }
+    }
+
+    isCredentialValid(credential: string): boolean {
+        return credential !== undefined && credential !== null && credential !== '';
     }
 
     implicitLogin(): Promise<any> {
