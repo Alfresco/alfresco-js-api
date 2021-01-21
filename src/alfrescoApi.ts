@@ -233,7 +233,7 @@ export class AlfrescoApi implements Emitter {
      * */
     login(username: string, password: string): Promise<any> {
 
-        if (password === undefined || password === null || username === undefined || username === null) {
+        if (!this.isCredentialValid(username) || !this.isCredentialValid(password)) {
             return Promise.reject('missing username or password');
         }
 
@@ -295,6 +295,10 @@ export class AlfrescoApi implements Emitter {
                 return Promise.reject('Unknown configuration');
             }
         }
+    }
+
+    isCredentialValid(credential: string): boolean {
+        return credential !== undefined && credential !== null && credential !== '';
     }
 
     implicitLogin(): Promise<any> {

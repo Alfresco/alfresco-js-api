@@ -145,6 +145,46 @@ describe('Basic configuration test', () => {
             }
 
             expect(error).equal('missing username or password');
+
+            error = undefined;
+
+            try {
+                await alfrescoJsApi.login(undefined, 'password');
+            } catch (e) {
+                error = e
+            }
+
+            expect(error).equal('missing username or password');
+
+            error = undefined;
+
+            try {
+                await alfrescoJsApi.login('', '');
+            } catch (e) {
+                error = e
+            }
+
+            expect(error).equal('missing username or password');
+
+            error = undefined;
+
+            try {
+                await alfrescoJsApi.login('username', '');
+            } catch (e) {
+                error = e
+            }
+
+            expect(error).equal('missing username or password');
+
+            error = undefined;
+
+            try {
+                await alfrescoJsApi.login('', 'password');
+            } catch (e) {
+                error = e
+            }
+
+            expect(error).equal('missing username or password');
         });
     });
 
