@@ -55,7 +55,7 @@ done
 
 git add .
 git commit -m "Update JS-API packages version $JS_VERSION"
-git push -u origin $BRANCH
+git push -u origin $BRANCH -f
 
 curl -H "Authorization: token $TOKEN" -X POST -d '{"body":"Update JS-API packages version '$VERSION'","head":"'$BRANCH'","base":"develop","title":"Update JS-API packages version '$VERSION'"}' https://api.github.com/repos/$NAME_REPO/pulls
 
