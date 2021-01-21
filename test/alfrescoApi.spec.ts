@@ -149,16 +149,6 @@ describe('Basic configuration test', () => {
             error = undefined;
 
             try {
-                await alfrescoJsApi.login(undefined, 'password');
-            } catch (e) {
-                error = e
-            }
-
-            expect(error).equal('missing username or password');
-
-            error = undefined;
-
-            try {
                 await alfrescoJsApi.login('', '');
             } catch (e) {
                 error = e
