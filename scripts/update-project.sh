@@ -43,7 +43,7 @@ BRANCH="JS-API-Update"
 git fetch
 git checkout $BRANCH || git checkout -b $BRANCH
 git reset --hard origin/develop
-git commit --amend -m "Reset $branch to devlop [skip ci]"
+git commit --amend -m "Reset $BRANCH to devlop [skip ci]"
     
 JS_VERSION=$(npm view @alfresco/js-api@$VERSION version)
 
