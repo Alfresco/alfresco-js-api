@@ -1,4 +1,5 @@
 import { AlfrescoApi } from '../src/alfrescoApi';
+
 const expect = require('chai').expect;
 
 describe('Basic configuration test', () => {
@@ -104,4 +105,47 @@ describe('Basic configuration test', () => {
             expect(alfrescoJsApi.processClient.isWithCredentials()).equal(false);
         });
     });
+
+    describe('login', () => {
+
+        it('Should login be rejected if username or password are not provided', async () => {
+            const config = {
+                hostEcm: 'http://testServer.com:1616',
+                contextRoot: 'strangeContextRoot',
+                withCredentials: true
+            };
+            const alfrescoJsApi = new AlfrescoApi(config);
+
+            let error;
+
+            try {
+                await alfrescoJsApi.login(undefined, undefined);
+            } catch (e) {
+                error = e
+            }
+
+            expect(error).equal('missing username or password');
+
+            error = undefined;
+
+            try {
+                await alfrescoJsApi.login('username', undefined);
+            } catch (e) {
+                error = e
+            }
+
+            expect(error).equal('missing username or password');
+
+            error = undefined;
+
+            try {
+                await alfrescoJsApi.login(undefined, 'password');
+            } catch (e) {
+                error = e
+            }
+
+            expect(error).equal('missing username or password');
+        });
+    });
+
 });
