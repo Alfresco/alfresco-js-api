@@ -576,9 +576,9 @@ export class Oauth2Auth extends AlfrescoApiClient {
             'Authorization': auth
         };
 
-        queryParams = {
-            refresh_token: this.authentications.oauth2.refreshToken,
-            grant_type: 'refresh_token'
+        formParams = {
+            grant_type: 'refresh_token',
+            refresh_token: this.authentications.oauth2.refreshToken
         };
 
         let contentTypes = ['application/x-www-form-urlencoded'];
