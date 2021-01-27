@@ -56,32 +56,32 @@ List aspects
 **Note:** This is available in Alfresco 7.0.0 and newer versions.
 
 Gets a list of aspects from the data dictionary. The System aspects will be ignored by default.
-JSON
+```JSON
 {
-  \"list\": {
-    \"pagination\": {
-      \"count\": 0,
-      \"hasMoreItems\": true,
-      \"totalItems\": 0,
-      \"skipCount\": 0,
-      \"maxItems\": 0
+  "list": {
+    "pagination": {
+      "count": 0,
+      "hasMoreItems": true,
+      "totalItems": 0,
+      "skipCount": 0,
+      "maxItems": 0
     },
-    \"entries\": [
+    "entries": [
       {
-        \"entry\": {
-          \"id\": \"cm:titled\",
-          \"description\": \"Titled\",
-          \"title\": \"Titled\",
-          \"properties\": [
+        "entry": {
+          "id": "cm:titled",
+          "description": "Titled",
+          "title": "Titled",
+          "properties": [
             {
-              \"id\": \"cm:title\",
-              \"title\": \"Title\",
-              \"description\": \"Content Title\",
-              \"dataType\": \"d:mltext\",
-              \"isMultiValued\": false,
-              \"isMandatory\": false,
-              \"isMandatoryEnforced\": false
-              \"isProtected\": false
+              "id": "cm:title",
+              "title": "Title",
+              "description": "Content Title",
+              "dataType": "d:mltext",
+              "isMultiValued": false,
+              "isMandatory": false,
+              "isMandatoryEnforced": false
+              "isProtected": false
             },
             {
               ...
@@ -90,19 +90,19 @@ JSON
         }
       },
       {
-        \"entry\": {
+        "entry": {
           ...
         }
       },
       {
-        \"entry\": {
+        "entry": {
           ...
         }
-      },
+      }
     ]
   }
 }
-
+```
 
 
 ### Example
