@@ -251,7 +251,7 @@ export class AlfrescoApi implements Emitter {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            }, (e) => {
+            },                     (e) => {
                 console.log('login OAUTH error', e);
             });
 
@@ -264,7 +264,7 @@ export class AlfrescoApi implements Emitter {
 
                 processPromise.then((ticketBpm) => {
                     this.config.ticketBpm = ticketBpm;
-                }, () => {
+                },                  () => {
                     console.log('login BPM error');
                 });
 
@@ -276,7 +276,7 @@ export class AlfrescoApi implements Emitter {
                     this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
 
                     this.config.ticketEcm = ticketEcm;
-                }, () => {
+                },                  () => {
                     console.log('login ECM error');
                 });
 

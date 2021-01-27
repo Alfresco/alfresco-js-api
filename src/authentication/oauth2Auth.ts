@@ -459,7 +459,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.refreshTokenTimeoutIframe = setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
-        }, this.config.oauth2.refreshTokenTimeout);
+        },                                          this.config.oauth2.refreshTokenTimeout);
     }
 
     removeHashFromSilentIframe() {
@@ -557,7 +557,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 await this.refreshToken();
             } catch (e) {
             }
-        }, this.config.oauth2.refreshTokenTimeout);
+        },                                             this.config.oauth2.refreshTokenTimeout);
 
         this.refreshTokenIntervalPolling.unref();
     }

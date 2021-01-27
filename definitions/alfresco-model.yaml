@@ -1,0 +1,316 @@
+swagger: '2.0'
+info:
+    description: |
+        **Model API**
+
+        Provides access to the model features of Alfresco Content Services.
+    version: '1'
+    title: Alfresco Content Services REST API
+basePath: /alfresco/api/-default-/public/alfresco/versions/1
+securityDefinitions:
+    basicAuth:
+        type: basic
+        description: HTTP Basic Authentication
+security:
+    - basicAuth: []
+consumes:
+    - application/json
+produces:
+    - application/json
+tags:
+    - name: aspects
+      description: Retrieve and manage aspects
+
+parameters:
+    aspectIdParam:
+        name: aspectId
+        in: path
+        description: The Qname of an aspect. e.g `namespace_prefix:name`
+        required: true
+        type: string
+
+paths:
+    '/aspects':
+        get:
+            x-alfresco-since: "7.0.0"
+            tags:
+                - aspects
+            summary: List aspects
+            description: |
+                **Note:** This is available in Alfresco 7.0.0 and newer versions.
+
+                Gets a list of aspects from the data dictionary. The System aspects will be ignored by default.
+                ```JSON
+                {
+                  "list": {
+                    "pagination": {
+                      "count": 0,
+                      "hasMoreItems": true,
+                      "totalItems": 0,
+                      "skipCount": 0,
+                      "maxItems": 0
+                    },
+                    "entries": [
+                      {
+                        "entry": {
+                          "id": "cm:titled",
+                          "description": "Titled",
+                          "title": "Titled",
+                          "properties": [
+                            {
+                              "id": "cm:title",
+                              "title": "Title",
+                              "description": "Content Title",
+                              "dataType": "d:mltext",
+                              "isMultiValued": false,
+                              "isMandatory": false,
+                              "isMandatoryEnforced": false
+                              "isProtected": false
+                            },
+                            {
+                              ...
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "entry": {
+                          ...
+                        }
+                      },
+                      {
+                        "entry": {
+                          ...
+                        }
+                      },
+                    ]
+                  }
+                }
+                ```
+            operationId: listAspects
+            parameters:
+                - name: where
+                  in: query
+                  description: |
+                      Optionally filter the list. Here are some examples:
+
+                      The following where clause will only return aspects from the customModel1 and customModel2.
+                        ```
+                        where=(modelIds='customModel1,customModel2')
+                        ```
+
+                      The following where clause will only return sub aspects for the given parents.
+                        ```
+                        where=(parentIds='parentId1,parentId2')
+                        ```
+
+                      The following where clause will only return aspects that match the pattern.
+                        ```
+                        where=(uriPrefix matches('http://www.alfresco.org/model.*'))
+                        ```
+
+                      The following where clause will only return aspects that don't match the pattern.
+                        ```
+                        where=(not uriPrefix matches('http://www.alfresco.org/model.*'))
+                        ```
+                  required: false
+                  type: string
+            produces:
+                - application/json
+            responses:
+                '200':
+                    description: Successful response
+                    schema:
+                        $ref: '#/definitions/AspectPaging'
+                '401':
+                    description: Authentication failed
+                default:
+                    description: Unexpected error
+                    schema:
+                        $ref: '#/definitions/Error'
+    '/aspects/{aspectId}':
+        get:
+            x-alfresco-since: "7.0.0"
+            tags:
+                - aspects
+            summary: Get an aspect
+            description: |
+                **Note:** This is available in Alfresco 7.0.0 and newer versions.
+                Get information for aspect **aspectId**.
+            parameters:
+                - $ref: '#/parameters/aspectIdParam'
+            produces:
+                - application/json
+            operationId: getAspect
+            responses:
+                '200':
+                    description: Successful response
+                    schema:
+                        $ref: '#/definitions/AspectEntry'
+                '400':
+                    description: |
+                        Invalid parameter: unknown aspectId scheme specified
+                '401':
+                    description: Authentication failed
+                '404':
+                    description: |
+                        **aspectId** does not exist
+                default:
+                    description: Unexpected error
+                    schema:
+                        $ref: '#/definitions/Error'
+
+definitions:
+    Error:
+        type: object
+        required:
+            - error
+        properties:
+            error:
+                type: object
+                required:
+                    - statusCode
+                    - briefSummary
+                    - stackTrace
+                    - descriptionURL
+                properties:
+                    errorKey:
+                        type: string
+                    statusCode:
+                        type: integer
+                        format: int32
+                    briefSummary:
+                        type: string
+                    stackTrace:
+                        type: string
+                    descriptionURL:
+                        type: string
+                    logId:
+                        type: string
+    Pagination:
+        type: object
+        properties:
+            count:
+                type: integer
+                format: int64
+                description: |
+                    The number of objects in the entries array.
+            hasMoreItems:
+                type: boolean
+                description: |
+                    A boolean value which is **true** if there are more entities in the collection
+                    beyond those in this response. A true value means a request with a larger value
+                    for the **skipCount** or the **maxItems** parameter will return more entities.
+            totalItems:
+                type: integer
+                format: int64
+                description: |
+                    An integer describing the total number of entities in the collection.
+                    The API might not be able to determine this value,
+                    in which case this property will not be present.
+            skipCount:
+                type: integer
+                format: int64
+                description: |
+                    An integer describing how many entities exist in the collection before
+                    those included in this list. If there was no **skipCount** parameter then the
+                    default value is 0.
+            maxItems:
+                type: integer
+                format: int64
+                description: |
+                    The value of the **maxItems** parameter used to generate this list.
+                    If there was no **maxItems** parameter then the default value is 100.
+    AspectPaging:
+        type: object
+        properties:
+            list:
+                type: object
+                properties:
+                    pagination:
+                        $ref: '#/definitions/Pagination'
+                    entries:
+                        type: array
+                        items:
+                            $ref: '#/definitions/AspectEntry'
+    AspectEntry:
+        type: object
+        required:
+            - entry
+        properties:
+            entry:
+                $ref: '#/definitions/Aspect'
+    Aspect:
+        type: object
+        required:
+            - id
+            - title
+        properties:
+            id:
+                type: string
+            title:
+                type: string
+            description:
+                type: string
+            parentId:
+                type: string
+            properties:
+                type: array
+                items:
+                    $ref: '#/definitions/Property'
+    Property:
+        type: object
+        required:
+            - id
+        properties:
+            id:
+                type: string
+            title:
+                description: the human-readable title
+                type: string
+            description:
+                description: the human-readable description
+                type: string
+            defaultValue:
+                description:  the default value
+                type: string
+            dataType:
+                description: the name of the property type (e.g. d:text)
+                type: string
+            isMultiValued:
+                description: define if the property is multi-valued
+                type: boolean
+            isMandatory:
+                description: define if the property is mandatory
+                type: boolean
+            isMandatoryEnforced:
+                description: define if the presence of mandatory properties is enforced
+                type: boolean
+            isProtected:
+                description: define if the property is system maintained
+                type: boolean
+            constraints:
+                description: list of constraints defined for the property
+                type: array
+                items:
+                    $ref: '#/definitions/Constraint'
+    Constraint:
+        type: object
+        required:
+            - id
+        properties:
+            id:
+                type: string
+            type:
+                description: the type of the constraint
+                type: string
+            title:
+                description: the human-readable constraint title
+                type: string
+            description:
+                description: the human-readable constraint description
+                type: string
+            parameters:
+                type: object
+                additionalProperties:
+                    type: object
