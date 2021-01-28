@@ -135,7 +135,7 @@ describe('Oauth2  test', () => {
                 expect(refreshSpy).to.have.been.called.min(2);
                 oauth2Auth.logOut();
                 done();
-            }, 600);
+            },         600);
 
             oauth2Auth.login('admin', 'admin');
         });
@@ -166,7 +166,7 @@ describe('Oauth2  test', () => {
             setTimeout(() => {
                 expect(refreshSpy).to.have.been.called.min(2);
                 done();
-            }, 600);
+            },         600);
 
             oauth2Auth.login('admin', 'admin');
         });
@@ -215,7 +215,7 @@ describe('Oauth2  test', () => {
                 alfrescoJsApi
             );
 
-            let counterCallEvent = 0
+            let counterCallEvent = 0;
             oauth2Auth.once('token_issued', () => {
                 counterCallEvent++;
             });
@@ -431,7 +431,7 @@ describe('Oauth2  test', () => {
                 oauth2Auth.iFrameHashListener();
                 setTimeout(() => {
                     expect(logoutSpy).to.have.been.called();
-                }, 500);
+                },         500);
             });
         });
 
