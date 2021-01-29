@@ -239,7 +239,8 @@
     "Fileplans",
     "sourcemap",
     "facetable",
-    "Tokenisation"
+    "Tokenisation",
+    "Qname"
   ],
   "dictionaries": [
     "html",

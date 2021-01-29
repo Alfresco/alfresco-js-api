@@ -78,13 +78,14 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 
 # Full documentation of all the methods of each API
 
-- [Authentication Services](/src/api/auth-rest-api)
-- [Content Services](/src/api/content-rest-api)
-- [Process Services (APS 1.X)](/src/api-legacy/activiti-rest-api)
-- [Process Services (AAE)](/src/api/activiti-rest-api)
-- [Content Search](/src/api/search-rest-api)
-- [Governance Classification](/src/api/gs-classification-rest-api)
-- [Governance Core](/src/api/gs-core-rest-api)
+- [Authentication Api](/src/api/auth-rest-api)
+- [Content Api](/src/api/content-rest-api)
+- [Model Api](/src/api/model-rest-api)
+- [Process Api (APS 1.X)](/src/api-legacy/activiti-rest-api)
+- [Process Api (AAE)](/src/api/activiti-rest-api)
+- [Search Api](/src/api/search-rest-api)
+- [Governance Classification Api](/src/api/gs-classification-rest-api)
+- [Governance Core Api](/src/api/gs-core-rest-api)
 - [Discovery Content API](/src/api/discovery-rest-api)
 
 # Prerequisites

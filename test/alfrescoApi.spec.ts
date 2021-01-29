@@ -121,7 +121,7 @@ describe('Basic configuration test', () => {
             try {
                 await alfrescoJsApi.login(undefined, undefined);
             } catch (e) {
-                error = e
+                error = e;
             }
 
             expect(error).equal('missing username or password');
@@ -131,7 +131,7 @@ describe('Basic configuration test', () => {
             try {
                 await alfrescoJsApi.login('username', undefined);
             } catch (e) {
-                error = e
+                error = e;
             }
 
             expect(error).equal('missing username or password');
@@ -141,7 +141,7 @@ describe('Basic configuration test', () => {
             try {
                 await alfrescoJsApi.login(undefined, 'password');
             } catch (e) {
-                error = e
+                error = e;
             }
 
             expect(error).equal('missing username or password');
@@ -151,7 +151,7 @@ describe('Basic configuration test', () => {
             try {
                 await alfrescoJsApi.login('', '');
             } catch (e) {
-                error = e
+                error = e;
             }
 
             expect(error).equal('missing username or password');
@@ -161,7 +161,7 @@ describe('Basic configuration test', () => {
             try {
                 await alfrescoJsApi.login('username', '');
             } catch (e) {
-                error = e
+                error = e;
             }
 
             expect(error).equal('missing username or password');
@@ -171,7 +171,7 @@ describe('Basic configuration test', () => {
             try {
                 await alfrescoJsApi.login('', 'password');
             } catch (e) {
-                error = e
+                error = e;
             }
 
             expect(error).equal('missing username or password');
