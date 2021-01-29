@@ -115,7 +115,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         }
 
         if (this.config.oauth2.implicitFlow) {
-            this.checkFragment();
+            this.checkFragment(null, 'nonce');
         }
     }
 
@@ -129,7 +129,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         return this.config.provider === 'ECM' || this.config.provider === 'ALL';
     }
 
-    checkFragment(externalHash?: any): any {// jshint ignore:line
+    checkFragment(externalHash?: any, nonceKey?: string): any {// jshint ignore:line
         this.hashFragmentParams = this.getHashFragmentParams(externalHash);
 
         if (externalHash === undefined && this.isValidAccessToken()) {
@@ -149,8 +149,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 throw('session state not present');
             }
 
-            const jwt = this.processJWTToken(idToken);
             try {
+                const jwt = this.processJWTToken(idToken, nonceKey);
                 if (jwt) {
                     this.storeIdToken(idToken, jwt.payload.exp);
                     this.storeAccessToken(accessToken, expiresIn);
@@ -188,7 +188,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         return base64data;
     }
 
-    processJWTToken(jwt: any): any {
+    processJWTToken(jwt: any, nonceKey: string): any {
         if (jwt) {
             const jwtArray = jwt.split('.');
             const headerBase64 = this.padBase64(jwtArray[0]);
@@ -199,14 +199,14 @@ export class Oauth2Auth extends AlfrescoApiClient {
             const payloadJson = this.b64DecodeUnicode(payloadBase64);
             const payload = JSON.parse(payloadJson);
 
-            const savedNonce = this.storage.getItem('nonce');
+            const savedNonce = this.storage.getItem(nonceKey);
 
             if (!payload.sub) {
                 throw('Missing sub in JWT');
             }
 
             if (payload.nonce !== savedNonce) {
-                throw('Failing nonce JWT is not corresponding' + payload.nonce);
+                throw(`Failing ${nonceKey} JWT ${payload.nonce} is not corresponding from the one in the localstore ${savedNonce}`);
             }
 
             return {
@@ -351,7 +351,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     composeIframeLoginUrl(): string {
         let nonce = this.genNonce();
 
-        this.storage.setItem('nonce', nonce);
+        this.storage.setItem('refresh_nonce', nonce);
 
         let separation = this.discovery.loginUrl.indexOf('?') > -1 ? '&' : '?';
 
@@ -481,7 +481,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             let silentRefreshTokenIframe: any = document.getElementById('silent_refresh_token_iframe');
             let hash = silentRefreshTokenIframe.contentWindow.location.hash;
             try {
-                this.checkFragment(hash);
+                this.checkFragment(hash, 'refresh_nonce');
             } catch (e) {
                 this.logOut();
             }
