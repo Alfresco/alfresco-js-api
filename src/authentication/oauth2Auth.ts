@@ -206,7 +206,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
             }
 
             if (payload.nonce !== savedNonce) {
-                throw(`Failing ${nonceKey} JWT ${payload.nonce} is not corresponding from the one in the localstore ${savedNonce}`);
+                console.log('Failing nonce JWT is not corresponding' + payload.nonce);
+                return ;
             }
 
             return {
@@ -459,7 +460,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.refreshTokenTimeoutIframe = setTimeout(() => {
             this.destroyIframe();
             this.createIframe();
-        },                                          this.config.oauth2.refreshTokenTimeout);
+        }, this.config.oauth2.refreshTokenTimeout);
     }
 
     removeHashFromSilentIframe() {
