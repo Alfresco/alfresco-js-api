@@ -52,7 +52,7 @@ if [[ (-z "$TOKEN") || (-z "$JSAPI_PR_NUMBER") || (-z "$VERSION") ]]
     exit 1;
 fi
 
-git clone https://$TOKEN@github.com/$NAME_REPO.git $TEMP_GENERATOR_DIR
+git clone https://$TOKEN@github.com/Alfresco/alfresco-ng2-components.git $TEMP_GENERATOR_DIR
 cd $TEMP_GENERATOR_DIR
 
 git fetch
