@@ -1,62 +1,77 @@
 #!/usr/bin/env bash
 
-set -e
+BUILD_PIPELINE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+REPO_DIR="$BUILD_PIPELINE_DIR/../.."
+
 TEMP_GENERATOR_DIR=".tmp-generator";
-VERSION=latest
+BRANCH_TO_CREATE="update-js-api"
+COMMITISH_TO_UPDATE_TO=""
+TOKEN=""
+JSAPI_PR_NUMBER=""
 
 show_help() {
-    echo "Usage: update-project.sh"
+    echo "Usage: create-updatebranch.sh"
     echo ""
-    echo "-t or --token  Github ouath token"
-    echo "-n or --name  Github name of the project"
-    echo "-v tag of the API"
+    echo "-c or -commitish: The commitish to update jsapi to"
+    echo "-t or --token: Github ouath token"
+    echo "-p or --pr: Originating jsapi PR number"
 }
 
-token() {
+set_commitish() {
+    echo "Commitish: $1"
+    COMMITISH_TO_UPDATE_TO=$1
+}
+
+set_token() {
     TOKEN=$1
+}
+
+set_pr() {
+    JSAPI_PR_NUMBER=$1
 }
 
 version() {
     VERSION=$1
 }
 
-name_repo() {
-    NAME_REPO=$1
-}
-
 while [[ $1 == -* ]]; do
     case "$1" in
       -h|--help|-\?) show_help; exit 0;;
-      -n|--name|-\?)  name_repo $2; shift 2;;
-      -t|--token)  token $2; shift 2;;
+      -t|--token) set_token $2; shift; shift;;
+      -p|--pr) set_pr $2; shift; shift;;
       -v|--version)  version $2; shift 2;;
       -*) echo "invalid option: $1" 1>&2; show_help; exit 1;;
     esac
 done
 
-rm -rf $TEMP_GENERATOR_DIR;
+cd "$REPO_DIR"
+
+if [[ (-z "$TOKEN") || (-z "$JSAPI_PR_NUMBER") || (-z "$VERSION") ]]
+  then
+    echo "Each of 'branch name' (-b) and 'commitish' (-c), token (-t) and jsapi pr number (-p) have to be set. See -help."
+    exit 1;
+fi
 
 git clone https://$TOKEN@github.com/$NAME_REPO.git $TEMP_GENERATOR_DIR
 cd $TEMP_GENERATOR_DIR
 
-BRANCH="JS-API-Update"
 git fetch
-git checkout $BRANCH || git checkout -b $BRANCH
-git reset --hard origin/develop
-git commit --amend -m "Reset $BRANCH to devlop [skip ci]"
-    
+
+# Checkout branch if exist, otherwise create it
+git checkout $BRANCH_TO_CREATE 2>/dev/null || git checkout -b $BRANCH_TO_CREATE origin/develop
+
 JS_VERSION=$(npm view @alfresco/js-api@$VERSION version)
 
 for i in $(find . ! -path "*/node_modules/*" -name "package-lock.json" | xargs grep -l 'js-api'); do
     directory=$(dirname $i)
     echo $directory
-    ( cd $directory ; npm i @alfresco/js-api@$VERSION )
+    ( cd $directory ; npm i --ignore-scripts @alfresco/js-api@$VERSION)
 done
 
 git add .
-git commit -m "Update JS-API packages version $JS_VERSION"
-git push -u origin $BRANCH -f
+git commit -n -m "[auto-commit] Update JS-API to $JS_VERSION for branch: $BRANCH_TO_CREATE originated from JS-API PR: $JSAPI_PR_NUMBER"
+git push origin $BRANCH_TO_CREATE
 
-curl -H "Authorization: token $TOKEN" -X POST -d '{"body":"Update JS-API packages version '$VERSION'","head":"'$BRANCH'","base":"develop","title":"Update JS-API packages version '$VERSION'"}' https://api.github.com/repos/$NAME_REPO/pulls
+node $BUILD_PIPELINE_DIR/pr-creator.js --token=$TOKEN --title="Update branch for JS-API PR#$JSAPI_PR_NUMBER" --head=$BRANCH_TO_CREATE --repo=alfresco-ng2-components
 
-rm -rf $TEMP_GENERATOR_DIR;
+exit $?
