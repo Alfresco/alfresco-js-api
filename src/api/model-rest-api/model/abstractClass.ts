@@ -15,11 +15,23 @@
 * limitations under the License.
 */
 
-export * from './aspect';
-export * from './aspectEntry';
-export * from './aspectPaging';
-export * from './aspectPagingList';
-export * from './type';
-export * from './typeEntry';
-export * from './typePaging';
-export * from './typePagingList';
+import { Property } from '../../content-rest-api/model/property';
+
+export class AbstractClass {
+    id: string;
+    title: string;
+    description?: string;
+    parentId?: string;
+    properties?: Property[];
+
+    constructor(input?: any) {
+        if (input) {
+            Object.assign(this, input);
+            if (input.properties) {
+                this.properties = input.properties.map((item: any) => {
+                    return new Property(item);
+                });
+            }
+        }
+    }
+}

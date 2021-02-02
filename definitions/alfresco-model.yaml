@@ -20,14 +20,8 @@ produces:
 tags:
     - name: aspects
       description: Retrieve and manage aspects
-
-parameters:
-    aspectIdParam:
-        name: aspectId
-        in: path
-        description: The Qname of an aspect. e.g `namespace_prefix:name`
-        required: true
-        type: string
+    - name: types
+      description: Retrieve and manage types
 
 paths:
     '/aspects':
@@ -94,14 +88,16 @@ paths:
                   description: |
                       Optionally filter the list. Here are some examples:
 
-                      The following where clause will only return aspects from the customModel1 and customModel2.
+                      An aspect should represented in the fully qualified name(`namespace_prefix:name`). e.g 'cm:title'.
+
+                      The following where clause will only return aspects from the `namespace1:model` and `namespace2:model`.
                         ```
-                        where=(modelIds='customModel1,customModel2')
+                        where=(modelIds='namespace1:model,namespace2:model')
                         ```
 
                       The following where clause will only return sub aspects for the given parents.
                         ```
-                        where=(parentIds='parentId1,parentId2')
+                        where=(parentIds='namespace1:parent,namespace2:parent')
                         ```
 
                       The following where clause will only return aspects that match the pattern.
@@ -138,7 +134,11 @@ paths:
                 **Note:** This is available in Alfresco 7.0.0 and newer versions.
                 Get information for aspect **aspectId**.
             parameters:
-                - $ref: '#/parameters/aspectIdParam'
+                - name: aspectId
+                  in: path
+                  description: The Qname of an aspect. e.g `namespace_prefix:name`
+                  required: true
+                  type: string
             produces:
                 - application/json
             operationId: getAspect
@@ -159,7 +159,143 @@ paths:
                     description: Unexpected error
                     schema:
                         $ref: '#/definitions/Error'
+    '/types':
+        get:
+            x-alfresco-since: "7.0.0"
+            tags:
+                - types
+            summary: List types
+            description: |
+                **Note:** This is available in Alfresco 7.0.0 and newer versions.
 
+                Gets a list of types from the data dictionary. The System types will be ignored by default.
+                ```JSON
+                {
+                  "list": {
+                    "pagination": {
+                      "count": 0,
+                      "hasMoreItems": true,
+                      "totalItems": 0,
+                      "skipCount": 0,
+                      "maxItems": 0
+                    },
+                    "entries": [
+                      {
+                        "entry": {
+                          "id": "cm:content",
+                          "description": "Base Content Object",
+                          "title": "Content",
+                          "parentId": "cm:cmobject"
+                          "properties": [
+                            {
+                              "id": "cm:name",
+                              "title": "Name",
+                              "description": "Name",
+                              "dataType": "d:text",
+                              "isMultiValued": false,
+                              "isMandatory": true,
+                              "isMandatoryEnforced": true
+                              "isProtected": false
+                              ...
+                            },
+                            {
+                              ...
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "entry": {
+                          ...
+                        }
+                      },
+                      {
+                        "entry": {
+                          ...
+                        }
+                      },
+                    ]
+                  }
+                }
+                ```
+            operationId: listTypes
+            parameters:
+                - name: where
+                  in: query
+                  description: |
+                      Optionally filter the list. Here are some examples:
+                      A Type should represented in the fully qualified name(`namespace_prefix:name`). e.g 'cm:content'.
+
+                      The following where clause will only return types from the `namespace1:model` and `namespace2:model`.
+                        ```
+                        where=(modelIds='namespace1:model,namespace2:model')
+                        ```
+
+                      The following where clause will only return sub types for the given parents.
+                        ```
+                        where=(parentIds='namespace1:parent,namespace2:parent')
+                        ```
+
+                      The following where clause will only return types that match the pattern.
+                        ```
+                        where=(uriPrefix matches('http://www.alfresco.org/model.*'))
+                        ```
+
+                      The following where clause will only return types that don't match the pattern.
+                        ```
+                        where=(not uriPrefix matches('http://www.alfresco.org/model.*'))
+                        ```
+                  required: false
+                  type: string
+            produces:
+                - application/json
+            responses:
+                '200':
+                    description: Successful response
+                    schema:
+                        $ref: '#/definitions/TypePaging'
+                '401':
+                    description: Authentication failed
+                default:
+                    description: Unexpected error
+                    schema:
+                        $ref: '#/definitions/Error'
+    '/types/{typeId}':
+        get:
+            x-alfresco-since: "7.0.0"
+            tags:
+                - types
+            summary: Get a type
+            description: |
+                **Note:** This is available in Alfresco 7.0.0 and newer versions.
+                Get information for type **typeId**.
+            parameters:
+                - name: typeId
+                  in: path
+                  description: The Qname of a type. e.g `namespace_prefix:name`
+                  required: true
+                  type: string
+
+            produces:
+                - application/json
+            operationId: getType
+            responses:
+                '200':
+                    description: Successful response
+                    schema:
+                        $ref: '#/definitions/TypeEntry'
+                '400':
+                    description: |
+                        Invalid parameter: unknown typeId scheme specified
+                '401':
+                    description: Authentication failed
+                '404':
+                    description: |
+                        **typeId** does not exist
+                default:
+                    description: Unexpected error
+                    schema:
+                        $ref: '#/definitions/Error'
 definitions:
     Error:
         type: object
@@ -241,6 +377,29 @@ definitions:
             entry:
                 $ref: '#/definitions/Aspect'
     Aspect:
+        $ref: '#/definitions/AbstractClass'
+    TypePaging:
+        type: object
+        properties:
+            list:
+                type: object
+                properties:
+                    pagination:
+                        $ref: '#/definitions/Pagination'
+                    entries:
+                        type: array
+                        items:
+                            $ref: '#/definitions/TypeEntry'
+    TypeEntry:
+        type: object
+        required:
+            - entry
+        properties:
+            entry:
+                $ref: '#/definitions/Type'
+    Type:
+        $ref: '#/definitions/AbstractClass'
+    AbstractClass:
         type: object
         required:
             - id

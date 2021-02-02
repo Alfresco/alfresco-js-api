@@ -15,11 +15,23 @@
 * limitations under the License.
 */
 
-export * from './aspect';
-export * from './aspectEntry';
-export * from './aspectPaging';
-export * from './aspectPagingList';
-export * from './type';
-export * from './typeEntry';
-export * from './typePaging';
-export * from './typePagingList';
+import { Pagination } from '../../content-rest-api/model/pagination';
+import { TypeEntry } from './typeEntry';
+
+export class TypePagingList {
+    pagination?: Pagination;
+    entries?: TypeEntry[];
+
+    constructor(input?: any) {
+        if (input) {
+            Object.assign(this, input);
+            this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+            if (input.entries) {
+                this.entries = input.entries.map((item: any) => {
+                    return new TypeEntry(item);
+                });
+            }
+        }
+    }
+
+}

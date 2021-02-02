@@ -15,11 +15,8 @@
 * limitations under the License.
 */
 
-export * from './aspect';
-export * from './aspectEntry';
-export * from './aspectPaging';
-export * from './aspectPagingList';
-export * from './type';
-export * from './typeEntry';
-export * from './typePaging';
-export * from './typePagingList';
+import { AbstractClass } from './abstractClass';
+
+export class Type extends AbstractClass {
+
+}

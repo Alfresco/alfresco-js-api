@@ -1,36 +1,36 @@
-# AspectsApi
+# TypesApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAspect**](AspectsApi.md#getAspect) | **GET** /aspects/{aspectId} | Get an aspect
-[**listAspects**](AspectsApi.md#listAspects) | **GET** /aspects | List aspects
+[**getType**](TypesApi.md#getType) | **GET** /types/{typeId} | Get a type
+[**listTypes**](TypesApi.md#listTypes) | **GET** /types | List types
 
 
-<a name="getAspect"></a>
-## getAspect
-> AspectEntry getAspect(aspectId)
+<a name="getType"></a>
+## getType
+> TypeEntry getType(typeId)
 
-Get an aspect
+Get a type
 
 **Note:** This is available in Alfresco 7.0.0 and newer versions.
-Get information for aspect **aspectId**.
+Get information for type **typeId**.
 
 
 ### Example
 
 ```javascript
-import { AlfrescoApi, AspectsApi} from '@alfresco/js-api';
+import { AlfrescoApi, TypesApi} from '@alfresco/js-api';
 
 const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-const aspectsApi = new AspectsApi(alfrescoApi);
+const typesApi = new TypesApi(alfrescoApi);
 
 
-aspectsApi.getAspect(aspectId).then((data) => {
+typesApi.getType(typeId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -41,21 +41,21 @@ aspectsApi.getAspect(aspectId).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **aspectId** | **string**| The Qname of an aspect. e.g namespace_prefix:name | 
+ **typeId** | **string**| The Qname of a type. e.g namespace_prefix:name | 
 
 ### Return type
 
-[**AspectEntry**](AspectEntry.md)
+[**TypeEntry**](TypeEntry.md)
 
-<a name="listAspects"></a>
-## listAspects
-> AspectPaging listAspects(opts)
+<a name="listTypes"></a>
+## listTypes
+> TypePaging listTypes(opts)
 
-List aspects
+List types
 
 **Note:** This is available in Alfresco 7.0.0 and newer versions.
 
-Gets a list of aspects from the data dictionary. The System aspects will be ignored by default.
+Gets a list of types from the data dictionary. The System types will be ignored by default.
 JSON
 {
   \"list\": {
@@ -69,19 +69,21 @@ JSON
     \"entries\": [
       {
         \"entry\": {
-          \"id\": \"cm:titled\",
-          \"description\": \"Titled\",
-          \"title\": \"Titled\",
+          \"id\": \"cm:content\",
+          \"description\": \"Base Content Object\",
+          \"title\": \"Content\",
+          \"parentId\": \"cm:cmobject\"
           \"properties\": [
             {
-              \"id\": \"cm:title\",
-              \"title\": \"Title\",
-              \"description\": \"Content Title\",
-              \"dataType\": \"d:mltext\",
+              \"id\": \"cm:name\",
+              \"title\": \"Name\",
+              \"description\": \"Name\",
+              \"dataType\": \"d:text\",
               \"isMultiValued\": false,
-              \"isMandatory\": false,
-              \"isMandatoryEnforced\": false
+              \"isMandatory\": true,
+              \"isMandatoryEnforced\": true
               \"isProtected\": false
+              ...
             },
             {
               ...
@@ -108,42 +110,41 @@ JSON
 ### Example
 
 ```javascript
-import { AlfrescoApi, AspectsApi} from '@alfresco/js-api';
+import { AlfrescoApi, TypesApi} from '@alfresco/js-api';
 
 const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-const aspectsApi = new AspectsApi(alfrescoApi);
+const typesApi = new TypesApi(alfrescoApi);
 
 const opts = { 
   'where': where_example /*  | Optionally filter the list. Here are some examples:
+A Type should represented in the fully qualified name(namespace_prefix:name). e.g 'cm:content'.
 
-An aspect should represented in the fully qualified name(namespace_prefix:name). e.g 'cm:title'.
-
-The following where clause will only return aspects from the namespace1:model and namespace2:model.
+The following where clause will only return types from the namespace1:model and namespace2:model.
   
   where=(modelIds='namespace1:model,namespace2:model')
   
 
-The following where clause will only return sub aspects for the given parents.
+The following where clause will only return sub types for the given parents.
   
   where=(parentIds='namespace1:parent,namespace2:parent')
   
 
-The following where clause will only return aspects that match the pattern.
+The following where clause will only return types that match the pattern.
   
   where=(uriPrefix matches('http://www.alfresco.org/model.*'))
   
 
-The following where clause will only return aspects that don't match the pattern.
+The following where clause will only return types that don't match the pattern.
   
   where=(not uriPrefix matches('http://www.alfresco.org/model.*'))
   
  */
 };
 
-aspectsApi.listAspects(opts).then((data) => {
+typesApi.listTypes(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -155,25 +156,24 @@ aspectsApi.listAspects(opts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **where** | **string**| Optionally filter the list. Here are some examples:
+A Type should represented in the fully qualified name(namespace_prefix:name). e.g 'cm:content'.
 
-An aspect should represented in the fully qualified name(namespace_prefix:name). e.g 'cm:title'.
-
-The following where clause will only return aspects from the namespace1:model and namespace2:model.
+The following where clause will only return types from the namespace1:model and namespace2:model.
   
   where=(modelIds='namespace1:model,namespace2:model')
   
 
-The following where clause will only return sub aspects for the given parents.
+The following where clause will only return sub types for the given parents.
   
   where=(parentIds='namespace1:parent,namespace2:parent')
   
 
-The following where clause will only return aspects that match the pattern.
+The following where clause will only return types that match the pattern.
   
   where=(uriPrefix matches('http://www.alfresco.org/model.*'))
   
 
-The following where clause will only return aspects that don't match the pattern.
+The following where clause will only return types that don't match the pattern.
   
   where=(not uriPrefix matches('http://www.alfresco.org/model.*'))
   
@@ -181,5 +181,5 @@ The following where clause will only return aspects that don't match the pattern
 
 ### Return type
 
-[**AspectPaging**](AspectPaging.md)
+[**TypePaging**](TypePaging.md)
 
