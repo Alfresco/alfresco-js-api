@@ -167,6 +167,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
             if (this.config.oauth2.silentLogin && !this.isPublicUrl()) {
                 this.implicitLogin();
             }
+
+            if(this.isValidToken() && this.isValidAccessToken()) {
+                let accessToken = this.storage.getItem('access_token');
+                this.setToken(accessToken, null);
+            }
         }
 
     }
@@ -257,9 +262,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
     implicitLogin() {
         if (!this.isValidToken() || !this.isValidAccessToken()) {
             this.redirectLogin();
-        } else {
-            let accessToken = this.storage.getItem('access_token');
-            this.setToken(accessToken, null);
         }
     }
 
