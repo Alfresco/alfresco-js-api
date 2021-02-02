@@ -23,8 +23,3 @@ AspectsApi | [**listAspects**](docs/AspectsApi.md#listAspects) | **GET** /aspect
 - [AspectEntry](docs/AspectEntry.md)
 - [AspectPaging](docs/AspectPaging.md)
 - [AspectPagingList](docs/AspectPagingList.md)
-- [Constraint](docs/Constraint.md)
-- [ErrorError](docs/ErrorError.md)
-- [ModelError](docs/ModelError.md)
-- [Pagination](docs/Pagination.md)
-- [Property](docs/Property.md)

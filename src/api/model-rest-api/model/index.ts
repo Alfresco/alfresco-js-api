@@ -19,8 +19,3 @@ export * from './aspect';
 export * from './aspectEntry';
 export * from './aspectPaging';
 export * from './aspectPagingList';
-export * from './constraint';
-export * from './errorError';
-export * from './modelError';
-export * from './pagination';
-export * from './property';
