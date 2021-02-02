@@ -17,6 +17,6 @@
 
 export * from './aspects.api';
 import { AspectsApi } from './aspects.api';
-export const APIS = {
+export const MODEL_APIS = {
     AspectsApi: AspectsApi
 };
