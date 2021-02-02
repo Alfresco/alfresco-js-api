@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-import { Property } from './property';
+import { Property } from '../../content-rest-api/model/property';
 
 export class Aspect {
     id: string;
