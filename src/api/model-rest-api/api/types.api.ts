@@ -15,34 +15,34 @@
 * limitations under the License.
 */
 
-import { AspectEntry } from '../model/aspectEntry';
-import { AspectPaging } from '../model/aspectPaging';
+import { TypeEntry } from '../model/typeEntry';
+import { TypePaging } from '../model/typePaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Aspects service.
-* @module AspectsApi
+* Types service.
+* @module TypesApi
 */
-export class AspectsApi extends BaseApi {
+export class TypesApi extends BaseApi {
     /**
-    * Get an aspect
+    * Get a type
     *
     * **Note:** This is available in Alfresco 7.0.0 and newer versions.
-Get information for aspect **aspectId**.
+Get information for type **typeId**.
 
     *
-    * @param aspectId The Qname of an aspect(prefix:name) e.g 'cm:title'
-    * @return Promise<AspectEntry>
+    * @param typeId The Qname of a type(prefix:name) e.g 'cm:content'
+    * @return Promise<TypeEntry>
     */
-    getAspect(aspectId: string): Promise<AspectEntry> {
+    getType(typeId: string): Promise<TypeEntry> {
 
-        throwIfNotDefined(aspectId, 'aspectId');
+        throwIfNotDefined(typeId, 'typeId');
 
         const postBody: null = null;
 
         const pathParams = {
-            'aspectId': aspectId
+            'typeId': typeId
         };
 
         const queryParams = {
@@ -58,16 +58,16 @@ Get information for aspect **aspectId**.
         const accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/aspects/{aspectId}', 'GET',
+            '/types/{typeId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , AspectEntry);
+            contentTypes, accepts , TypeEntry);
     }
 /**
-    * List aspects
+    * List types
     *
     * **Note:** This is available in Alfresco 7.0.0 and newer versions.
 
-Gets a list of aspects from the data dictionary. The System aspects will be ignored by default.
+Gets a list of types from the data dictionary. The System types will be ignored by default.
 JSON
 {
   \"list\": {
@@ -81,19 +81,21 @@ JSON
     \"entries\": [
       {
         \"entry\": {
-          \"id\": \"cm:titled\",
-          \"description\": \"Titled\",
-          \"title\": \"Titled\",
+          \"id\": \"cm:content\",
+          \"description\": \"Base Content Object\",
+          \"title\": \"Content\",
+          \"parentId\": \"cm:cmobject\"
           \"properties\": [
             {
-              \"id\": \"cm:title\",
-              \"title\": \"Title\",
-              \"description\": \"Content Title\",
-              \"dataType\": \"d:mltext\",
+              \"id\": \"cm:name\",
+              \"title\": \"Name\",
+              \"description\": \"Name\",
+              \"dataType\": \"d:text\",
               \"isMultiValued\": false,
-              \"isMandatory\": false,
-              \"isMandatoryEnforced\": false
+              \"isMandatory\": true,
+              \"isMandatoryEnforced\": true
               \"isProtected\": false
+              ...
             },
             {
               ...
@@ -119,27 +121,27 @@ JSON
     * @param opts Optional parameters
     * @param opts.where Optionally filter the list. Here are some examples:
 
-An aspect should represented in the following format(prefix:name). e.g 'cm:title'.
+A type should represented in the following format(prefix:name). e.g 'cm:content'.
 
-The following where clause will only return aspects from the namespace1:model and namespace2:model.
+The following where clause will only return types from the namespace1:model and namespace2:model.
 
   where=(modelIds in ('namespace1:model','namespace2:model'))
 
-The following where clause will only return sub aspects for the given parents.
+The following where clause will only return sub types for the given parents.
 
   where=(parentIds in ('namespace1:parent','namespace2:parent'))
 
-The following where clause will only return aspects that match the pattern.
+The following where clause will only return types that match the pattern.
 
   where=(namespaceUri matches('http://www.alfresco.org/model.*'))
 
-The following where clause will only return aspects that don't match the pattern.
+The following where clause will only return types that don't match the pattern.
 
   where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
 
-    * @return Promise<AspectPaging>
+    * @return Promise<TypePaging>
     */
-    listAspects(opts?: any): Promise<AspectPaging> {
+    listTypes(opts?: any): Promise<TypePaging> {
 
         opts = opts || {};
         const postBody: null = null;
@@ -162,9 +164,8 @@ The following where clause will only return aspects that don't match the pattern
         const accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/aspects', 'GET',
+            '/types', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , AspectPaging);
+            contentTypes, accepts , TypePaging);
     }
-
 }

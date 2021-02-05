@@ -15,24 +15,8 @@
 * limitations under the License.
 */
 
-import { Property } from '../../content-rest-api/model/property';
+import { AbstractClass } from './abstractClass';
 
-export class Aspect {
-    id: string;
-    title: string;
-    description?: string;
-    parentId?: string;
-    properties?: Property[];
-
-    constructor(input?: any) {
-        if (input) {
-            Object.assign(this, input);
-            if (input.properties) {
-                this.properties = input.properties.map((item: any) => {
-                    return new Property(item);
-                });
-            }
-        }
-    }
+export class Aspect extends AbstractClass {
 
 }

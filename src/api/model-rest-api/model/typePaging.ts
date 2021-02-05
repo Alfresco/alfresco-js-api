@@ -15,12 +15,16 @@
 * limitations under the License.
 */
 
-export * from './abstractClass';
-export * from './aspect';
-export * from './aspectEntry';
-export * from './aspectPaging';
-export * from './aspectPagingList';
-export * from './type';
-export * from './typeEntry';
-export * from './typePaging';
-export * from './typePagingList';
+import { TypePagingList } from './typePagingList';
+
+export class TypePaging {
+    list?: TypePagingList;
+
+    constructor(input?: any) {
+        if (input) {
+            Object.assign(this, input);
+            this.list = input.list ? new TypePagingList(input.list) : undefined;
+        }
+    }
+
+}
