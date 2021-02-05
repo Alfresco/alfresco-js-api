@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+export * from './abstractClass';
 export * from './aspect';
 export * from './aspectEntry';
 export * from './aspectPaging';

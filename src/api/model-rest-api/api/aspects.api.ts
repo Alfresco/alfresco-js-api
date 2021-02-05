@@ -32,7 +32,7 @@ export class AspectsApi extends BaseApi {
 Get information for aspect **aspectId**.
 
     *
-    * @param aspectId The Qname of an aspect. e.g namespace_prefix:name
+    * @param aspectId The Qname of an aspect(prefix:name) e.g 'cm:title'
     * @return Promise<AspectEntry>
     */
     getAspect(aspectId: string): Promise<AspectEntry> {
@@ -119,23 +119,23 @@ JSON
     * @param opts Optional parameters
     * @param opts.where Optionally filter the list. Here are some examples:
 
-An aspect should represented in the fully qualified name(namespace_prefix:name). e.g 'cm:title'.
+An aspect should represented in the following format(prefix:name). e.g 'cm:title'.
 
 The following where clause will only return aspects from the namespace1:model and namespace2:model.
 
-  where=(modelIds='namespace1:model,namespace2:model')
+  where=(modelIds in ('namespace1:model','namespace2:model'))
 
 The following where clause will only return sub aspects for the given parents.
 
-  where=(parentIds='namespace1:parent,namespace2:parent')
+  where=(parentIds in ('namespace1:parent','namespace2:parent'))
 
 The following where clause will only return aspects that match the pattern.
 
-  where=(uriPrefix matches('http://www.alfresco.org/model.*'))
+  where=(namespaceUri matches('http://www.alfresco.org/model.*'))
 
 The following where clause will only return aspects that don't match the pattern.
 
-  where=(not uriPrefix matches('http://www.alfresco.org/model.*'))
+  where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
 
     * @return Promise<AspectPaging>
     */

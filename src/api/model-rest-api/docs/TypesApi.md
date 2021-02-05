@@ -41,7 +41,7 @@ typesApi.getType(typeId).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **typeId** | **string**| The Qname of a type. e.g namespace_prefix:name | 
+ **typeId** | **string**| The Qname of a type(prefix:name) e.g 'cm:content' | 
 
 ### Return type
 
@@ -120,26 +120,27 @@ const typesApi = new TypesApi(alfrescoApi);
 
 const opts = { 
   'where': where_example /*  | Optionally filter the list. Here are some examples:
-A Type should represented in the fully qualified name(namespace_prefix:name). e.g 'cm:content'.
+
+A type should represented in the following format(prefix:name). e.g 'cm:content'.
 
 The following where clause will only return types from the namespace1:model and namespace2:model.
   
-  where=(modelIds='namespace1:model,namespace2:model')
+  where=(modelIds in ('namespace1:model','namespace2:model'))
   
 
 The following where clause will only return sub types for the given parents.
   
-  where=(parentIds='namespace1:parent,namespace2:parent')
+  where=(parentIds in ('namespace1:parent','namespace2:parent'))
   
 
 The following where clause will only return types that match the pattern.
   
-  where=(uriPrefix matches('http://www.alfresco.org/model.*'))
+  where=(namespaceUri matches('http://www.alfresco.org/model.*'))
   
 
 The following where clause will only return types that don't match the pattern.
   
-  where=(not uriPrefix matches('http://www.alfresco.org/model.*'))
+  where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
   
  */
 };
@@ -156,26 +157,27 @@ typesApi.listTypes(opts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **where** | **string**| Optionally filter the list. Here are some examples:
-A Type should represented in the fully qualified name(namespace_prefix:name). e.g 'cm:content'.
+
+A type should represented in the following format(prefix:name). e.g 'cm:content'.
 
 The following where clause will only return types from the namespace1:model and namespace2:model.
   
-  where=(modelIds='namespace1:model,namespace2:model')
+  where=(modelIds in ('namespace1:model','namespace2:model'))
   
 
 The following where clause will only return sub types for the given parents.
   
-  where=(parentIds='namespace1:parent,namespace2:parent')
+  where=(parentIds in ('namespace1:parent','namespace2:parent'))
   
 
 The following where clause will only return types that match the pattern.
   
-  where=(uriPrefix matches('http://www.alfresco.org/model.*'))
+  where=(namespaceUri matches('http://www.alfresco.org/model.*'))
   
 
 The following where clause will only return types that don't match the pattern.
   
-  where=(not uriPrefix matches('http://www.alfresco.org/model.*'))
+  where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
   
  | [optional] 
 
