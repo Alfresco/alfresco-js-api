@@ -63,7 +63,7 @@
     "adf-tslint-rules": "0.0.7",
     "bundlesize": "^0.18.1",
     "chai": "4.3.0",
-    "chai-datetime": "1.7.0",
+    "chai-datetime": "1.8.0",
     "chai-spies": "^1.0.0",
     "codelyzer": "^6.0.0",
     "commander": "^6.0.0",
