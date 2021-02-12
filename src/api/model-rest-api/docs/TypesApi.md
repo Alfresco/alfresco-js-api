@@ -143,6 +143,12 @@ The following where clause will only return types that don't match the pattern.
   where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
   
  */
+  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
+If not supplied then the default value is 0.
+ */
+  'maxItems': 56 /*  | The maximum number of items to return in the list.
+If not supplied then the default value is 100.
+ */
 };
 
 typesApi.listTypes(opts).then((data) => {
@@ -180,6 +186,12 @@ The following where clause will only return types that don't match the pattern.
   where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
   
  | [optional] 
+ **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
+If not supplied then the default value is 0.
+ | [optional] [default to 0]
+ **maxItems** | **number**| The maximum number of items to return in the list.
+If not supplied then the default value is 100.
+ | [optional] [default to 100]
 
 ### Return type
 

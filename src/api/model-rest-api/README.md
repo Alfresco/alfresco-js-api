@@ -2,7 +2,7 @@
 
 Provides access to the model features of Alfresco Content Services.
 
-> Documentation updated on: 2021-02-05T13:10:37.921+05:30
+> Documentation updated on: 2021-02-12T15:39:19.439+05:30
 
 ## Methods
 
@@ -25,6 +25,7 @@ TypesApi | [**listTypes**](docs/TypesApi.md#listTypes) | **GET** /types | List t
 - [AspectEntry](docs/AspectEntry.md)
 - [AspectPaging](docs/AspectPaging.md)
 - [AspectPagingList](docs/AspectPagingList.md)
+- [Model](docs/Model.md)
 - [Type](docs/Type.md)
 - [TypeEntry](docs/TypeEntry.md)
 - [TypePaging](docs/TypePaging.md)

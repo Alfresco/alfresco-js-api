@@ -15,26 +15,17 @@
 * limitations under the License.
 */
 
-import { Property } from '../../content-rest-api/model/property';
-import { Model } from './model';
-
-export class AbstractClass {
+export class Model {
     id: string;
-    title: string;
+    author?: string;
     description?: string;
-    parentId?: string;
-    properties?: Property[];
-    model?: Model;
+    namespaceUri?: string;
+    namespacePrefix?: string;
 
     constructor(input?: any) {
         if (input) {
             Object.assign(this, input);
-            if (input.properties) {
-                this.properties = input.properties.map((item: any) => {
-                    return new Property(item);
-                });
-            }
-            this.model = input.model ? new Model(input.model) : undefined;
         }
     }
+
 }
