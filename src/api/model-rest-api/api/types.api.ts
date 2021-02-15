@@ -139,6 +139,12 @@ The following where clause will only return types that don't match the pattern.
 
   where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
 
+    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+If not supplied then the default value is 0.
+ (default to 0)
+    * @param opts.maxItems The maximum number of items to return in the list.
+If not supplied then the default value is 100.
+ (default to 100)
     * @return Promise<TypePaging>
     */
     listTypes(opts?: any): Promise<TypePaging> {
@@ -151,7 +157,9 @@ The following where clause will only return types that don't match the pattern.
         };
 
         const queryParams = {
-            'where': opts['where']
+            'where': opts['where'],
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems']
         };
 
         const headerParams = {
