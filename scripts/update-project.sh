@@ -36,18 +36,17 @@ version() {
 
 while [[ $1 == -* ]]; do
     case "$1" in
-      -h|--help|-\?) show_help; exit 0;;
-      -t|--token) set_token $2; shift; shift;;
-      -p|--pr) set_pr $2; shift; shift;;
-      -v|--version)  version $2; shift 2;;
-      -*) echo "invalid option: $1" 1>&2; show_help; exit 1;;
+        -h|--help|-\?) show_help; exit 0;;
+        -t|--token) set_token $2; shift; shift;;
+        -p|--pr) set_pr $2; shift; shift;;
+        -v|--version)  version $2; shift 2;;
+        -*) echo "invalid option: $1" 1>&2; show_help; exit 1;;
     esac
 done
 
 cd "$REPO_DIR"
 
-if [[ (-z "$TOKEN") || (-z "$JSAPI_PR_NUMBER") || (-z "$VERSION") ]]
-  then
+if [[ (-z "$TOKEN") || (-z "$JSAPI_PR_NUMBER") || (-z "$VERSION") ]] then
     echo "Each of 'branch name' (-b) and 'commitish' (-c), token (-t) and jsapi pr number (-p) have to be set. See -help."
     exit 1;
 fi
@@ -66,6 +65,15 @@ for i in $(find . ! -path "*/node_modules/*" -name "package-lock.json" | xargs g
     directory=$(dirname $i)
     echo $directory
     ( cd $directory ; npm i --ignore-scripts @alfresco/js-api@$VERSION)
+done
+
+for i in $(find . ! -path "*/node_modules/*" -name "package.json" | xargs grep -l 'js-api'); do
+    directory=$(dirname $i)
+    echo $directory
+    if jq -e 'has("peerDependencies")' $directory/package.json > /dev/null; then
+        tmp=$(mktemp)
+        jq --arg JS_VERSION "$JS_VERSION" '.peerDependencies["@alfresco/js-api"] = $JS_VERSION' $directory/package.json > "$tmp" && mv "$tmp" $directory/package.json
+    fi
 done
 
 git add .
