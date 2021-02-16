@@ -46,7 +46,8 @@ done
 
 cd "$REPO_DIR"
 
-if [[ (-z "$TOKEN") || (-z "$JSAPI_PR_NUMBER") || (-z "$VERSION") ]] then
+if [[ (-z "$TOKEN") || (-z "$JSAPI_PR_NUMBER") || (-z "$VERSION") ]]
+  then
     echo "Each of 'branch name' (-b) and 'commitish' (-c), token (-t) and jsapi pr number (-p) have to be set. See -help."
     exit 1;
 fi
