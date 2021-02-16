@@ -114,27 +114,38 @@ paths:
 
                       The following where clause will only return aspects from the `namespace1:model` and `namespace2:model`.
                         ```
-                        where=(modelIds in ('namespace1:model','namespace2:model'))
+                        where=(modelId in ('namespace1:model','namespace2:model'))
+                        where=(modelId in ('namespace1:model INCLUDESUBASPECTS','namespace2:model'))
                         ```
 
                       The following where clause will only return sub aspects for the given parents.
                         ```
-                        where=(parentIds in ('namespace1:parent','namespace2:parent'))
+                        where=(parentId in ('namespace1:parent','namespace2:parent'))
                         ```
 
                       The following where clause will only return aspects that match the pattern.
                         ```
-                        where=(namespaceUri matches('http://www.alfresco.org/model.*'))
+                        where=(namespaceUri matches('http://www.alfresco.*'))
                         ```
 
                       The following where clause will only return aspects that don't match the pattern.
                         ```
-                        where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
+                        where=(not namespaceUri matches('http://www.alfresco.*'))
                         ```
                   required: false
                   type: string
                 - $ref: '#/parameters/skipCountParam'
                 - $ref: '#/parameters/maxItemsParam'
+                - name: include
+                  in: query
+                  description: |
+                      Returns additional information about the aspect. The following optional fields can be requested:
+                      * properties
+                  required: false
+                  type: array
+                  items:
+                      type: string
+                  collectionFormat: csv
             produces:
                 - application/json
             responses:
@@ -253,27 +264,38 @@ paths:
 
                       The following where clause will only return types from the `namespace1:model` and `namespace2:model`.
                         ```
-                        where=(modelIds in ('namespace1:model','namespace2:model'))
+                        where=(modelId in ('namespace1:model','namespace2:model'))
+                        where=(modelId in ('namespace1:model INCLUDESUBTYPES','namespace2:model'))
                         ```
 
                       The following where clause will only return sub types for the given parents.
                         ```
-                        where=(parentIds in ('namespace1:parent','namespace2:parent'))
+                        where=(parentId in ('namespace1:parent','namespace2:parent'))
                         ```
 
                       The following where clause will only return types that match the pattern.
                         ```
-                        where=(namespaceUri matches('http://www.alfresco.org/model.*'))
+                        where=(namespaceUri matches('http://www.alfresco.*'))
                         ```
 
                       The following where clause will only return types that don't match the pattern.
                         ```
-                        where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
+                        where=(not namespaceUri matches('http://www.alfresco.*'))
                         ```
                   required: false
                   type: string
                 - $ref: '#/parameters/skipCountParam'
                 - $ref: '#/parameters/maxItemsParam'
+                - name: include
+                  in: query
+                  description: |
+                      Returns additional information about the type. The following optional fields can be requested:
+                      * properties
+                  required: false
+                  type: array
+                  items:
+                      type: string
+                  collectionFormat: csv
             produces:
                 - application/json
             responses:
