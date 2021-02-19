@@ -141,6 +141,8 @@ paths:
                   description: |
                       Returns additional information about the aspect. The following optional fields can be requested:
                       * properties
+                      * mandatoryAspects
+                      * associations
                   required: false
                   type: array
                   items:
@@ -291,6 +293,8 @@ paths:
                   description: |
                       Returns additional information about the type. The following optional fields can be requested:
                       * properties
+                      * mandatoryAspects
+                      * associations
                   required: false
                   type: array
                   items:
@@ -466,6 +470,20 @@ definitions:
                 type: array
                 items:
                     $ref: '#/definitions/Property'
+            isContainer:
+                type: boolean
+            archive:
+                type: boolean
+            includedInSupertypeQuery:
+                type: boolean
+            mandatoryAspects:
+                type: array
+                items:
+                    type: string
+            associations:
+                type: array
+                items:
+                    $ref: '#/definitions/Association'
             model:
                 $ref: '#/definitions/Model'
     Property:
@@ -539,3 +557,35 @@ definitions:
                 type: string
             namespacePrefix:
                 type: string
+    Association:
+        type: object
+        required:
+            - id
+        properties:
+            id:
+                type: string
+            title:
+                type: string
+            description:
+                type: string
+            isChild:
+                type: boolean
+            isProtected:
+                type: boolean
+            source:
+                $ref: '#/definitions/AssociationSource'
+            target:
+                $ref: '#/definitions/AssociationSource'
+    AssociationSource:
+        type: object
+        properties:
+            role:
+                type: string
+            cls:
+                type: string
+            isMandatory:
+                type: boolean
+            isMany:
+                type: boolean
+            isMandatoryEnforced:
+                type: boolean

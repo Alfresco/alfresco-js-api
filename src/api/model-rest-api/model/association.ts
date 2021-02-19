@@ -15,14 +15,22 @@
 * limitations under the License.
 */
 
-export * from './abstractClass';
-export * from './aspect';
-export * from './aspectEntry';
-export * from './aspectPaging';
-export * from './aspectPagingList';
-export * from './association';
-export * from './associationSource';
-export * from './type';
-export * from './typeEntry';
-export * from './typePaging';
-export * from './typePagingList';
+import { AssociationSource } from './associationSource';
+
+export class Association {
+    id: string;
+    title?: string;
+    description?: string;
+    isChild?: boolean;
+    isProtected?: boolean;
+    source?: AssociationSource;
+    target?: AssociationSource;
+
+    constructor(input?: any) {
+        if (input) {
+            Object.assign(this, input);
+            this.source = input.source ? new AssociationSource(input.source) : undefined;
+            this.target = input.target ? new AssociationSource(input.target) : undefined;
+        }
+    }
+}

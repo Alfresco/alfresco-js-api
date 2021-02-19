@@ -19,6 +19,7 @@ import { TypeEntry } from '../model/typeEntry';
 import { TypePaging } from '../model/typePaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
+import { buildCollectionParam } from '../../../alfrescoApiClient';
 
 /**
 * Types service.
@@ -125,19 +126,20 @@ A type should represented in the following format(prefix:name). e.g 'cm:content'
 
 The following where clause will only return types from the namespace1:model and namespace2:model.
 
-  where=(modelIds in ('namespace1:model','namespace2:model'))
+  where=(modelId in ('namespace1:model','namespace2:model'))
+  where=(modelId in ('namespace1:model INCLUDESUBTYPES','namespace2:model'))
 
 The following where clause will only return sub types for the given parents.
 
-  where=(parentIds in ('namespace1:parent','namespace2:parent'))
+  where=(parentId in ('namespace1:parent','namespace2:parent'))
 
 The following where clause will only return types that match the pattern.
 
-  where=(namespaceUri matches('http://www.alfresco.org/model.*'))
+  where=(namespaceUri matches('http://www.alfresco.*'))
 
 The following where clause will only return types that don't match the pattern.
 
-  where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
+  where=(not namespaceUri matches('http://www.alfresco.*'))
 
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
@@ -145,6 +147,11 @@ If not supplied then the default value is 0.
     * @param opts.maxItems The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  (default to 100)
+    * @param opts.include Returns additional information about the type. The following optional fields can be requested:
+* properties
+* mandatoryAspects
+* associations
+
     * @return Promise<TypePaging>
     */
     listTypes(opts?: any): Promise<TypePaging> {
@@ -159,7 +166,8 @@ If not supplied then the default value is 100.
         const queryParams = {
             'where': opts['where'],
             'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems']
+            'maxItems': opts['maxItems'],
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         const headerParams = {
