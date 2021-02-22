@@ -69,8 +69,24 @@ JSON
     \"entries\": [
       {
         \"entry\": {
-          \"id\": \"cm:content\",
+          \"associations\": [],
+          \"isArchive\": true,
+          \"mandatoryAspects\": [
+              \"cm:auditable\",
+              \"sys:referenceable\",
+              \"sys:localized\"
+          ],
+          \"includedInSupertypeQuery\": true,
           \"description\": \"Base Content Object\",
+          \"isContainer\": false,
+          \"model\": {
+              \"id\": \"cm:contentmodel\",
+              \"author\": \"Alfresco\",
+              \"description\": \"Alfresco Content Domain Model\",
+              \"namespaceUri\": \"http://www.alfresco.org/model/content/1.0\",
+              \"namespacePrefix\": \"cm\"
+          },
+          \"id\": \"cm:content\",
           \"title\": \"Content\",
           \"parentId\": \"cm:cmobject\"
           \"properties\": [

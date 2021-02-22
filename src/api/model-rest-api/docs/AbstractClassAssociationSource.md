@@ -1,4 +1,4 @@
-# AssociationSource
+# AbstractClassAssociationSource
 
 ## Properties
 Name | Type | Description | Notes

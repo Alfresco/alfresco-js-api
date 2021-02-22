@@ -16,12 +16,12 @@
 */
 
 export * from './abstractClass';
+export * from './abstractClassAssociation';
+export * from './abstractClassAssociationSource';
 export * from './aspect';
 export * from './aspectEntry';
 export * from './aspectPaging';
 export * from './aspectPagingList';
-export * from './association';
-export * from './associationSource';
 export * from './type';
 export * from './typeEntry';
 export * from './typePaging';

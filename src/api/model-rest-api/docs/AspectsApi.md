@@ -69,8 +69,19 @@ JSON
     \"entries\": [
       {
         \"entry\": {
-          \"id\": \"cm:titled\",
+          \"associations\": [],
+          \"mandatoryAspects\": [],
+          \"includedInSupertypeQuery\": true,
           \"description\": \"Titled\",
+          \"isContainer\": false,
+          \"model\": {
+              \"id\": \"cm:contentmodel\",
+              \"author\": \"Alfresco\",
+              \"description\": \"Alfresco Content Domain Model\",
+              \"namespaceUri\": \"http://www.alfresco.org/model/content/1.0\",
+              \"namespacePrefix\": \"cm\"
+          },
+          \"id\": \"cm:titled\",
           \"title\": \"Titled\",
           \"properties\": [
             {
@@ -80,7 +91,7 @@ JSON
               \"dataType\": \"d:mltext\",
               \"isMultiValued\": false,
               \"isMandatory\": false,
-              \"isMandatoryEnforced\": false
+              \"isMandatoryEnforced\": false,
               \"isProtected\": false
             },
             {

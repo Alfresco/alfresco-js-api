@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-export class AssociationSource {
+export class AbstractClassAssociationSource {
     role?: string;
     cls?: string;
     isMandatory?: boolean;

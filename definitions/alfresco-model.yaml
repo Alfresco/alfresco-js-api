@@ -69,8 +69,19 @@ paths:
                     "entries": [
                       {
                         "entry": {
-                          "id": "cm:titled",
+                          "associations": [],
+                          "mandatoryAspects": [],
+                          "includedInSupertypeQuery": true,
                           "description": "Titled",
+                          "isContainer": false,
+                          "model": {
+                              "id": "cm:contentmodel",
+                              "author": "Alfresco",
+                              "description": "Alfresco Content Domain Model",
+                              "namespaceUri": "http://www.alfresco.org/model/content/1.0",
+                              "namespacePrefix": "cm"
+                          },
+                          "id": "cm:titled",
                           "title": "Titled",
                           "properties": [
                             {
@@ -80,7 +91,7 @@ paths:
                               "dataType": "d:mltext",
                               "isMultiValued": false,
                               "isMandatory": false,
-                              "isMandatoryEnforced": false
+                              "isMandatoryEnforced": false,
                               "isProtected": false
                             },
                             {
@@ -219,8 +230,24 @@ paths:
                     "entries": [
                       {
                         "entry": {
-                          "id": "cm:content",
+                          "associations": [],
+                          "isArchive": true,
+                          "mandatoryAspects": [
+                              "cm:auditable",
+                              "sys:referenceable",
+                              "sys:localized"
+                          ],
+                          "includedInSupertypeQuery": true,
                           "description": "Base Content Object",
+                          "isContainer": false,
+                          "model": {
+                              "id": "cm:contentmodel",
+                              "author": "Alfresco",
+                              "description": "Alfresco Content Domain Model",
+                              "namespaceUri": "http://www.alfresco.org/model/content/1.0",
+                              "namespacePrefix": "cm"
+                          },
+                          "id": "cm:content",
                           "title": "Content",
                           "parentId": "cm:cmobject"
                           "properties": [
@@ -472,7 +499,7 @@ definitions:
                     $ref: '#/definitions/Property'
             isContainer:
                 type: boolean
-            archive:
+            isArchive:
                 type: boolean
             includedInSupertypeQuery:
                 type: boolean
@@ -483,7 +510,7 @@ definitions:
             associations:
                 type: array
                 items:
-                    $ref: '#/definitions/Association'
+                    $ref: '#/definitions/AbstractClassAssociation'
             model:
                 $ref: '#/definitions/Model'
     Property:
@@ -557,7 +584,7 @@ definitions:
                 type: string
             namespacePrefix:
                 type: string
-    Association:
+    AbstractClassAssociation:
         type: object
         required:
             - id
@@ -573,10 +600,10 @@ definitions:
             isProtected:
                 type: boolean
             source:
-                $ref: '#/definitions/AssociationSource'
+                $ref: '#/definitions/AbstractClassAssociationSource'
             target:
-                $ref: '#/definitions/AssociationSource'
-    AssociationSource:
+                $ref: '#/definitions/AbstractClassAssociationSource'
+    AbstractClassAssociationSource:
         type: object
         properties:
             role:

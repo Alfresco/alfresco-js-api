@@ -1,4 +1,4 @@
-# Association
+# AbstractClassAssociation
 
 ## Properties
 Name | Type | Description | Notes
@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **description** | **string** |  | [optional] [default to null]
 **isChild** | **boolean** |  | [optional] [default to null]
 **isProtected** | **boolean** |  | [optional] [default to null]
-**source** | [**AssociationSource**](AssociationSource.md) |  | [optional] [default to null]
-**target** | [**AssociationSource**](AssociationSource.md) |  | [optional] [default to null]
+**source** | [**AbstractClassAssociationSource**](AbstractClassAssociationSource.md) |  | [optional] [default to null]
+**target** | [**AbstractClassAssociationSource**](AbstractClassAssociationSource.md) |  | [optional] [default to null]
 
 
