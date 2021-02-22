@@ -21,19 +21,11 @@ TypesApi | [**listTypes**](docs/TypesApi.md#listTypes) | **GET** /types | List t
 
 ## Models
 
-- [AbstractClass](docs/AbstractClass.md)
-- [AbstractClassAssociation](docs/AbstractClassAssociation.md)
-- [AbstractClassAssociationSource](docs/AbstractClassAssociationSource.md)
 - [Aspect](docs/Aspect.md)
 - [AspectEntry](docs/AspectEntry.md)
 - [AspectPaging](docs/AspectPaging.md)
 - [AspectPagingList](docs/AspectPagingList.md)
-- [Constraint](docs/Constraint.md)
-- [ErrorError](docs/ErrorError.md)
 - [Model](docs/Model.md)
-- [ModelError](docs/ModelError.md)
-- [Pagination](docs/Pagination.md)
-- [Property](docs/Property.md)
 - [Type](docs/Type.md)
 - [TypeEntry](docs/TypeEntry.md)
 - [TypePaging](docs/TypePaging.md)

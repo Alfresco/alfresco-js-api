@@ -16,7 +16,7 @@
 */
 
 import { Property } from '../../content-rest-api/model/property';
-import { Association } from './association';
+import { AbstractClassAssociation } from './abstractClassAssociation';
 import { Model } from './model';
 
 export class AbstractClass {
@@ -26,10 +26,10 @@ export class AbstractClass {
     parentId?: string;
     properties?: Property[];
     isContainer?: boolean;
-    archive?: boolean;
+    isArchive?: boolean;
     includedInSupertypeQuery?: boolean;
     mandatoryAspects?: string[];
-    associations?: Association[];
+    associations?: AbstractClassAssociation[];
     model?: Model;
 
     constructor(input?: any) {
@@ -42,7 +42,7 @@ export class AbstractClass {
             }
             if (input.associations) {
                 this.associations = input.associations.map((item: any) => {
-                    return new Association(item);
+                    return new AbstractClassAssociation(item);
                 });
             }
             this.model = input.model ? new Model(input.model) : undefined;
