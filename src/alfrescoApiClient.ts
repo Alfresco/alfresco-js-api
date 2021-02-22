@@ -22,6 +22,8 @@ import { Authentication } from './authentication/authentication';
 import { BasicAuth } from './authentication/basicAuth';
 import { Oauth2 } from './authentication/oauth2';
 
+const process: any = {};
+
 declare const Buffer: any;
 declare const Blob: any;
 
