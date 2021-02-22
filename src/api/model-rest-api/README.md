@@ -2,7 +2,7 @@
 
 Provides access to the model features of Alfresco Content Services.
 
-> Documentation updated on: 2021-02-12T15:39:19.439+05:30
+> Documentation updated on: 2021-02-23T00:57:02.188+05:30
 
 ## Methods
 

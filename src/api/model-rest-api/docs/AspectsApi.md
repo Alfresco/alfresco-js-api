@@ -69,8 +69,19 @@ JSON
     \"entries\": [
       {
         \"entry\": {
-          \"id\": \"cm:titled\",
+          \"associations\": [],
+          \"mandatoryAspects\": [],
+          \"includedInSupertypeQuery\": true,
           \"description\": \"Titled\",
+          \"isContainer\": false,
+          \"model\": {
+              \"id\": \"cm:contentmodel\",
+              \"author\": \"Alfresco\",
+              \"description\": \"Alfresco Content Domain Model\",
+              \"namespaceUri\": \"http://www.alfresco.org/model/content/1.0\",
+              \"namespacePrefix\": \"cm\"
+          },
+          \"id\": \"cm:titled\",
           \"title\": \"Titled\",
           \"properties\": [
             {
@@ -80,7 +91,7 @@ JSON
               \"dataType\": \"d:mltext\",
               \"isMultiValued\": false,
               \"isMandatory\": false,
-              \"isMandatoryEnforced\": false
+              \"isMandatoryEnforced\": false,
               \"isProtected\": false
             },
             {
@@ -123,22 +134,23 @@ An aspect should represented in the following format(prefix:name). e.g 'cm:title
 
 The following where clause will only return aspects from the namespace1:model and namespace2:model.
   
-  where=(modelIds in ('namespace1:model','namespace2:model'))
+  where=(modelId in ('namespace1:model','namespace2:model'))
+  where=(modelId in ('namespace1:model INCLUDESUBASPECTS','namespace2:model'))
   
 
 The following where clause will only return sub aspects for the given parents.
   
-  where=(parentIds in ('namespace1:parent','namespace2:parent'))
+  where=(parentId in ('namespace1:parent','namespace2:parent'))
   
 
 The following where clause will only return aspects that match the pattern.
   
-  where=(namespaceUri matches('http://www.alfresco.org/model.*'))
+  where=(namespaceUri matches('http://www.alfresco.*'))
   
 
 The following where clause will only return aspects that don't match the pattern.
   
-  where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
+  where=(not namespaceUri matches('http://www.alfresco.*'))
   
  */
   'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
@@ -146,6 +158,11 @@ If not supplied then the default value is 0.
  */
   'maxItems': 56 /*  | The maximum number of items to return in the list.
 If not supplied then the default value is 100.
+ */
+  'include':  /*  | Returns additional information about the aspect. The following optional fields can be requested:
+* properties
+* mandatoryAspects
+* associations
  */
 };
 
@@ -166,22 +183,23 @@ An aspect should represented in the following format(prefix:name). e.g 'cm:title
 
 The following where clause will only return aspects from the namespace1:model and namespace2:model.
   
-  where=(modelIds in ('namespace1:model','namespace2:model'))
+  where=(modelId in ('namespace1:model','namespace2:model'))
+  where=(modelId in ('namespace1:model INCLUDESUBASPECTS','namespace2:model'))
   
 
 The following where clause will only return sub aspects for the given parents.
   
-  where=(parentIds in ('namespace1:parent','namespace2:parent'))
+  where=(parentId in ('namespace1:parent','namespace2:parent'))
   
 
 The following where clause will only return aspects that match the pattern.
   
-  where=(namespaceUri matches('http://www.alfresco.org/model.*'))
+  where=(namespaceUri matches('http://www.alfresco.*'))
   
 
 The following where clause will only return aspects that don't match the pattern.
   
-  where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
+  where=(not namespaceUri matches('http://www.alfresco.*'))
   
  | [optional] 
  **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
@@ -190,6 +208,11 @@ If not supplied then the default value is 0.
  **maxItems** | **number**| The maximum number of items to return in the list.
 If not supplied then the default value is 100.
  | [optional] [default to 100]
+ **include** | [**string**](string.md)| Returns additional information about the aspect. The following optional fields can be requested:
+* properties
+* mandatoryAspects
+* associations
+ | [optional] 
 
 ### Return type
 
