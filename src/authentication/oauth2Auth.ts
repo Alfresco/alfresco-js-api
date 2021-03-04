@@ -719,23 +719,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
             const authContentApi: AuthenticationApi = new AuthenticationApi(alfrescoApi);
             authContentApi.apiClient.authentications = this.authentications;
             try {
-                let ticketEntry = await this.getActiveSession(authContentApi);
-                if (!ticketEntry) {
-                    // creates a new session with updated token
-                    ticketEntry = await authContentApi.getTicket();
-                }
+                const ticketEntry = await authContentApi.getTicket();
                 this.config.ticketEcm = ticketEntry.entry.id;
                 this.emit('ticket_exchanged');
             } catch (e) {
             }
         });
-    }
-
-    private async getActiveSession(authContentApi: AuthenticationApi): Promise<ValidTicketEntry | null> {
-        try {
-            return await authContentApi.validateTicket();
-        } catch (e) {
-            return null;
-        }
     }
 }
