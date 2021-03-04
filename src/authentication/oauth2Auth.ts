@@ -22,6 +22,7 @@ import { Authentication } from './authentication';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
 import { AlfrescoApi } from '../alfrescoApi';
 import { Storage } from '../storage';
+import { ValidTicketEntry } from '../api/auth-rest-api/model';
 
 declare const Buffer: any;
 declare var require: any;
@@ -714,15 +715,27 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     exchangeTicketListener(alfrescoApi: AlfrescoApi) {
-        this.once('token_issued', async () => {
+        this.on('token_issued', async () => {
             const authContentApi: AuthenticationApi = new AuthenticationApi(alfrescoApi);
             authContentApi.apiClient.authentications = this.authentications;
             try {
-                const ticketEntry = await authContentApi.getTicket();
+                let ticketEntry = await this.getActiveSession(authContentApi);
+                if (!ticketEntry) {
+                    // creates a new session with updated token
+                    ticketEntry = await authContentApi.getTicket();
+                }
                 this.config.ticketEcm = ticketEntry.entry.id;
                 this.emit('ticket_exchanged');
             } catch (e) {
             }
         });
+    }
+
+    private async getActiveSession(authContentApi: AuthenticationApi): Promise<ValidTicketEntry | null> {
+        try {
+            return await authContentApi.validateTicket();
+        } catch (e) {
+            return null;
+        }
     }
 }

@@ -725,20 +725,9 @@ export class AlfrescoApiClient implements ee.Emitter {
         if (ticket) {
             alfTicketFragment = '&alf_ticket=' + ticket;
         } else  {
-            alfTicketFragment = '&alf_ticket=' + this.getToken();
+            alfTicketFragment = '&alf_ticket=' + this.config.ticketEcm;
         }
 
         return alfTicketFragment;
-    }
-
-    getToken() {
-        switch (this.authentications.type) {
-            case 'oauth2':
-                return this.authentications.oauth2.accessToken;
-            case 'basic':
-                return this.config.ticketEcm;
-            default:
-                throw new Error('Unknown authentication type: ' + this.authentications.type);
-        }
     }
 }
