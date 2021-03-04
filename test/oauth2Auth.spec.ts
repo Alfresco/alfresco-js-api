@@ -385,7 +385,6 @@ describe('Oauth2  test', () => {
             alfrescoApi.login('admin', 'admin');
             this.timeout(3000);
             alfrescoApi.refreshToken();
-            this.timeout(3000);
         });
 
         it('isLoggedIn should return true if the api is logged in', (done) => {
