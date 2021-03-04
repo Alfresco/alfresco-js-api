@@ -714,7 +714,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     exchangeTicketListener(alfrescoApi: AlfrescoApi) {
-        this.once('token_issued', async () => {
+        this.on('token_issued', async () => {
             const authContentApi: AuthenticationApi = new AuthenticationApi(alfrescoApi);
             authContentApi.apiClient.authentications = this.authentications;
             try {
