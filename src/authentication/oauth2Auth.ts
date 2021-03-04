@@ -116,7 +116,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         }
 
         if (this.config.oauth2.implicitFlow) {
-            this.checkFragment(null, 'nonce');
+            this.checkFragment({ nonceKey: 'nonce' });
         }
     }
 
@@ -133,48 +133,48 @@ export class Oauth2Auth extends AlfrescoApiClient {
     checkFragment(externalHash?: any, nonceKey?: string): any {// jshint ignore:line
         this.hashFragmentParams = this.getHashFragmentParams(externalHash);
 
-        if (externalHash === undefined && this.isValidAccessToken()) {
+        if (this.hashFragmentParams && this.hashFragmentParams.error === undefined) {
+            this.useFragmentTimeLogin(nonceKey);
+        } else {
+            this.refreshBrowserLogin();
+        }
+    }
+
+    private refreshBrowserLogin() {
+        if (this.config.oauth2.silentLogin && !this.isPublicUrl()) {
+            this.implicitLogin();
+        }
+
+        if (this.isValidToken() && this.isValidAccessToken()) {
             let accessToken = this.storage.getItem('access_token');
             this.setToken(accessToken, null);
             this.silentRefresh();
-            return accessToken;
+        }
+    }
+
+    private useFragmentTimeLogin(nonceKey: string) {
+        let accessToken = this.hashFragmentParams.access_token;
+        let idToken = this.hashFragmentParams.id_token;
+        let sessionState = this.hashFragmentParams.session_state;
+        let expiresIn = this.hashFragmentParams.expires_in;
+
+        if (!sessionState) {
+            throw('session state not present');
         }
 
-        if (this.hashFragmentParams && this.hashFragmentParams.error === undefined) {
-            let accessToken = this.hashFragmentParams.access_token;
-            let idToken = this.hashFragmentParams.id_token;
-            let sessionState = this.hashFragmentParams.session_state;
-            let expiresIn = this.hashFragmentParams.expires_in;
-
-            if (!sessionState) {
-                throw('session state not present');
+        try {
+            const jwt = this.processJWTToken(idToken, nonceKey);
+            if (jwt) {
+                this.storeIdToken(idToken, jwt.payload.exp);
+                this.storeAccessToken(accessToken, expiresIn);
+                this.authentications.basicAuth.username = jwt.payload.preferred_username;
+                this.saveUsername(jwt.payload.preferred_username);
+                this.silentRefresh();
+                return accessToken;
             }
-
-            try {
-                const jwt = this.processJWTToken(idToken, nonceKey);
-                if (jwt) {
-                    this.storeIdToken(idToken, jwt.payload.exp);
-                    this.storeAccessToken(accessToken, expiresIn);
-                    this.authentications.basicAuth.username = jwt.payload.preferred_username;
-                    this.saveUsername(jwt.payload.preferred_username);
-                    this.silentRefresh();
-                    return accessToken;
-                }
-            } catch (error) {
-                throw('Validation JWT error' + error);
-            }
-
-        } else {
-            if (this.config.oauth2.silentLogin && !this.isPublicUrl()) {
-                this.implicitLogin();
-            }
-
-            if (this.isValidToken() && this.isValidAccessToken()) {
-                let accessToken = this.storage.getItem('access_token');
-                this.setToken(accessToken, null);
-            }
+        } catch (error) {
+            throw('Validation JWT error' + error);
         }
-
     }
 
     isPublicUrl(): boolean {
@@ -213,7 +213,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
             if (payload.nonce !== savedNonce) {
                 console.log('Failing nonce JWT is not corresponding' + payload.nonce);
-                return ;
+                return;
             }
 
             return {
@@ -561,7 +561,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 await this.refreshToken();
             } catch (e) {
             }
-        },                                             this.config.oauth2.refreshTokenTimeout);
+        }, this.config.oauth2.refreshTokenTimeout);
 
         this.refreshTokenIntervalPolling.unref();
     }
