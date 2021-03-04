@@ -724,7 +724,7 @@ export class AlfrescoApiClient implements ee.Emitter {
         let alfTicketFragment = '';
         if (ticket) {
             alfTicketFragment = '&alf_ticket=' + ticket;
-        } else  {
+        } else if (this.config.ticketEcm) {
             alfTicketFragment = '&alf_ticket=' + this.config.ticketEcm;
         }
 
