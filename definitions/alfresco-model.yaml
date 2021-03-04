@@ -23,6 +23,28 @@ tags:
     - name: types
       description: Retrieve and manage types
 
+parameters:
+    skipCountParam:
+        name: skipCount
+        in: query
+        description: |
+            The number of entities that exist in the collection before those included in this list.
+            If not supplied then the default value is 0.
+        required: false
+        type: integer
+        minimum: 0
+        default: 0
+    maxItemsParam:
+        name: maxItems
+        in: query
+        description: |
+            The maximum number of items to return in the list.
+            If not supplied then the default value is 100.
+        required: false
+        type: integer
+        minimum: 1
+        default: 100
+
 paths:
     '/aspects':
         get:
@@ -47,8 +69,19 @@ paths:
                     "entries": [
                       {
                         "entry": {
-                          "id": "cm:titled",
+                          "associations": [],
+                          "mandatoryAspects": [],
+                          "includedInSupertypeQuery": true,
                           "description": "Titled",
+                          "isContainer": false,
+                          "model": {
+                              "id": "cm:contentmodel",
+                              "author": "Alfresco",
+                              "description": "Alfresco Content Domain Model",
+                              "namespaceUri": "http://www.alfresco.org/model/content/1.0",
+                              "namespacePrefix": "cm"
+                          },
+                          "id": "cm:titled",
                           "title": "Titled",
                           "properties": [
                             {
@@ -58,7 +91,7 @@ paths:
                               "dataType": "d:mltext",
                               "isMultiValued": false,
                               "isMandatory": false,
-                              "isMandatoryEnforced": false
+                              "isMandatoryEnforced": false,
                               "isProtected": false
                             },
                             {
@@ -92,25 +125,40 @@ paths:
 
                       The following where clause will only return aspects from the `namespace1:model` and `namespace2:model`.
                         ```
-                        where=(modelIds in ('namespace1:model','namespace2:model'))
+                        where=(modelId in ('namespace1:model','namespace2:model'))
+                        where=(modelId in ('namespace1:model INCLUDESUBASPECTS','namespace2:model'))
                         ```
 
                       The following where clause will only return sub aspects for the given parents.
                         ```
-                        where=(parentIds in ('namespace1:parent','namespace2:parent'))
+                        where=(parentId in ('namespace1:parent','namespace2:parent'))
                         ```
 
                       The following where clause will only return aspects that match the pattern.
                         ```
-                        where=(namespaceUri matches('http://www.alfresco.org/model.*'))
+                        where=(namespaceUri matches('http://www.alfresco.*'))
                         ```
 
                       The following where clause will only return aspects that don't match the pattern.
                         ```
-                        where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
+                        where=(not namespaceUri matches('http://www.alfresco.*'))
                         ```
                   required: false
                   type: string
+                - $ref: '#/parameters/skipCountParam'
+                - $ref: '#/parameters/maxItemsParam'
+                - name: include
+                  in: query
+                  description: |
+                      Returns additional information about the aspect. The following optional fields can be requested:
+                      * properties
+                      * mandatoryAspects
+                      * associations
+                  required: false
+                  type: array
+                  items:
+                      type: string
+                  collectionFormat: csv
             produces:
                 - application/json
             responses:
@@ -182,8 +230,24 @@ paths:
                     "entries": [
                       {
                         "entry": {
-                          "id": "cm:content",
+                          "associations": [],
+                          "isArchive": true,
+                          "mandatoryAspects": [
+                              "cm:auditable",
+                              "sys:referenceable",
+                              "sys:localized"
+                          ],
+                          "includedInSupertypeQuery": true,
                           "description": "Base Content Object",
+                          "isContainer": false,
+                          "model": {
+                              "id": "cm:contentmodel",
+                              "author": "Alfresco",
+                              "description": "Alfresco Content Domain Model",
+                              "namespaceUri": "http://www.alfresco.org/model/content/1.0",
+                              "namespacePrefix": "cm"
+                          },
+                          "id": "cm:content",
                           "title": "Content",
                           "parentId": "cm:cmobject"
                           "properties": [
@@ -229,25 +293,40 @@ paths:
 
                       The following where clause will only return types from the `namespace1:model` and `namespace2:model`.
                         ```
-                        where=(modelIds in ('namespace1:model','namespace2:model'))
+                        where=(modelId in ('namespace1:model','namespace2:model'))
+                        where=(modelId in ('namespace1:model INCLUDESUBTYPES','namespace2:model'))
                         ```
 
                       The following where clause will only return sub types for the given parents.
                         ```
-                        where=(parentIds in ('namespace1:parent','namespace2:parent'))
+                        where=(parentId in ('namespace1:parent','namespace2:parent'))
                         ```
 
                       The following where clause will only return types that match the pattern.
                         ```
-                        where=(namespaceUri matches('http://www.alfresco.org/model.*'))
+                        where=(namespaceUri matches('http://www.alfresco.*'))
                         ```
 
                       The following where clause will only return types that don't match the pattern.
                         ```
-                        where=(not namespaceUri matches('http://www.alfresco.org/model.*'))
+                        where=(not namespaceUri matches('http://www.alfresco.*'))
                         ```
                   required: false
                   type: string
+                - $ref: '#/parameters/skipCountParam'
+                - $ref: '#/parameters/maxItemsParam'
+                - name: include
+                  in: query
+                  description: |
+                      Returns additional information about the type. The following optional fields can be requested:
+                      * properties
+                      * mandatoryAspects
+                      * associations
+                  required: false
+                  type: array
+                  items:
+                      type: string
+                  collectionFormat: csv
             produces:
                 - application/json
             responses:
@@ -418,6 +497,22 @@ definitions:
                 type: array
                 items:
                     $ref: '#/definitions/Property'
+            isContainer:
+                type: boolean
+            isArchive:
+                type: boolean
+            includedInSupertypeQuery:
+                type: boolean
+            mandatoryAspects:
+                type: array
+                items:
+                    type: string
+            associations:
+                type: array
+                items:
+                    $ref: '#/definitions/AbstractClassAssociation'
+            model:
+                $ref: '#/definitions/Model'
     Property:
         type: object
         required:
@@ -474,3 +569,50 @@ definitions:
                 type: object
                 additionalProperties:
                     type: object
+    Model:
+        type: object
+        required:
+            - id
+        properties:
+            id:
+                type: string
+            author:
+                type: string
+            description:
+                type: string
+            namespaceUri:
+                type: string
+            namespacePrefix:
+                type: string
+    AbstractClassAssociation:
+        type: object
+        required:
+            - id
+        properties:
+            id:
+                type: string
+            title:
+                type: string
+            description:
+                type: string
+            isChild:
+                type: boolean
+            isProtected:
+                type: boolean
+            source:
+                $ref: '#/definitions/AbstractClassAssociationSource'
+            target:
+                $ref: '#/definitions/AbstractClassAssociationSource'
+    AbstractClassAssociationSource:
+        type: object
+        properties:
+            role:
+                type: string
+            cls:
+                type: string
+            isMandatory:
+                type: boolean
+            isMany:
+                type: boolean
+            isMandatoryEnforced:
+                type: boolean

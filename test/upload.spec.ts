@@ -146,7 +146,7 @@ describe('Upload', function () {
 
                 this.alfrescoJsApi.upload.uploadFile(file).once('success', () => {
                     progressOneOk = true;
-                    resolve();
+                    resolve('Resolving');
                 });
             });
 
@@ -155,7 +155,7 @@ describe('Upload', function () {
 
                 this.alfrescoJsApi.upload.uploadFile(fileTwo).once('success', () => {
                     progressTwoOk = true;
-                    resolve();
+                    resolve('Resolving');
                 });
             });
 
@@ -183,7 +183,7 @@ describe('Upload', function () {
                 });
                 uploadPromise.once('success', () => {
                     errorOneOk = true;
-                    resolve();
+                    resolve('Resolving');
                 });
             });
 
@@ -196,7 +196,7 @@ describe('Upload', function () {
                 });
                 uploadPromise.once('success', () => {
                     errorTwoOk = true;
-                    resolve();
+                    resolve('Resolving');
                 });
             });
 
@@ -224,7 +224,7 @@ describe('Upload', function () {
                 });
                 uploadPromiseOne.once('success', () => {
                     successOneOk = true;
-                    resolve();
+                    resolve('Resolving');
                 });
             });
 
@@ -237,7 +237,7 @@ describe('Upload', function () {
                 });
                 uploadPromiseTwo.once('success', () => {
                     successTwoOk = true;
-                    resolve();
+                    resolve('Resolving');
                 });
             });
 
@@ -318,11 +318,11 @@ describe('Upload', function () {
 
             uploadPromise.once('error', () => {
                 promiseProgressOne = new Promise((resolve) => {
-                    resolve();
+                    resolve('Resolving');
                 });
             }).once('unauthorized', () => {
                 promiseProgressTwo = new Promise((resolve) => {
-                    resolve();
+                    resolve('Resolving');
                 });
             });
 

@@ -15,14 +15,17 @@
 * limitations under the License.
 */
 
-export * from './abstractClass';
-export * from './abstractClassAssociation';
-export * from './abstractClassAssociationSource';
-export * from './aspect';
-export * from './aspectEntry';
-export * from './aspectPaging';
-export * from './aspectPagingList';
-export * from './type';
-export * from './typeEntry';
-export * from './typePaging';
-export * from './typePagingList';
+export class Model {
+    id: string;
+    author?: string;
+    description?: string;
+    namespaceUri?: string;
+    namespacePrefix?: string;
+
+    constructor(input?: any) {
+        if (input) {
+            Object.assign(this, input);
+        }
+    }
+
+}
