@@ -116,7 +116,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         }
 
         if (this.config.oauth2.implicitFlow) {
-            this.checkFragment({ nonceKey: 'nonce' });
+            this.checkFragment('nonce');
         }
     }
 
@@ -130,7 +130,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         return this.config.provider === 'ECM' || this.config.provider === 'ALL';
     }
 
-    checkFragment(externalHash?: any, nonceKey?: string): any {// jshint ignore:line
+    checkFragment(nonceKey?: string, externalHash?: any): any {// jshint ignore:line
         this.hashFragmentParams = this.getHashFragmentParams(externalHash);
 
         if (this.hashFragmentParams && this.hashFragmentParams.error === undefined) {
@@ -485,7 +485,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             let silentRefreshTokenIframe: any = document.getElementById('silent_refresh_token_iframe');
             let hash = silentRefreshTokenIframe.contentWindow.location.hash;
             try {
-                this.checkFragment(hash, 'refresh_nonce');
+                this.checkFragment('refresh_nonce', hash);
             } catch (e) {
                 this.logOut();
             }

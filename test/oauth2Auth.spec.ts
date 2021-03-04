@@ -350,6 +350,8 @@ describe('Oauth2  test', () => {
         });
 
         it('should extend content session after oauth token refresh', function (done)  {
+            this.timeout(3000);
+
             oauth2Mock.get200Response();
             authResponseMock.get200ValidTicket();
 
