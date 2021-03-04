@@ -22,7 +22,6 @@ import { Authentication } from './authentication';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
 import { AlfrescoApi } from '../alfrescoApi';
 import { Storage } from '../storage';
-import { ValidTicketEntry } from '../api/auth-rest-api/model';
 
 declare const Buffer: any;
 declare var require: any;
