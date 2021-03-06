@@ -65,7 +65,7 @@ JS_VERSION=$(npm view @alfresco/js-api@$VERSION version)
 for i in $(find . ! -path "*/node_modules/*" -name "package-lock.json" | xargs grep -l 'js-api'); do
     directory=$(dirname $i)
     echo $directory
-    ( cd $directory ; npm i --ignore-scripts @alfresco/js-api@$VERSION)
+    ( cd $directory ; npm i --save-exact --ignore-scripts @alfresco/js-api@$VERSION)
 done
 
 for i in $(find . ! -path "*/node_modules/*" -name "package.json" | xargs grep -l 'js-api'); do
