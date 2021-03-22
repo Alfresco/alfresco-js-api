@@ -330,7 +330,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
         this.storage.setItem('nonce', nonce);
 
-        const afterLoginUriSegment = this.isRedirectionUrl() ? window.location.hash.split('&')[0] : '';
+        const afterLoginUriSegment = this.isRedirectionUrl() ? window.location.hash : '';
         if (afterLoginUriSegment && afterLoginUriSegment !== '/') {
             this.storage.setItem('loginFragment', afterLoginUriSegment.replace('#', '').trim());
         }

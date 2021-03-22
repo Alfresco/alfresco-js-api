@@ -180,7 +180,7 @@ describe('Oauth2 Implicit flow test', () => {
         oauth2Auth.on('implicit_redirect', () => {
             expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
                 'openid-connect/auth?');
-            expect(setItemSpy).to.have.been.called.with('loginFragment', '/redirect-path');
+            expect(setItemSpy).to.have.been.called.with('loginFragment', '/redirect-path&session_state=eqfqwfqwf');
             done();
         });
 
