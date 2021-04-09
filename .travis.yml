@@ -67,7 +67,7 @@ jobs:
 
         - stage: Trigger ADF alpha
           name: Trigger ADF alpha
-          if: (branch = develop) AND type = push
+          if: (branch = develop) AND type = cron
           script: ./scripts/update-project.sh -p $TRAVIS_BUILD_NUMBER -t $GITHUB_TOKEN -v alpha
 
         - stage: Trigger ADF beta
