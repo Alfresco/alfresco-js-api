@@ -11,9 +11,6 @@
   <a title='Gitter chat' href="https://gitter.im/Alfresco/api/ng2-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
      <img src='https://badges.gitter.im/Alfresco/api/ng2-components.svg'  alt='Gitter chat' />
   </a>
-  <a href='https://codecov.io/gh/Alfresco/api/js-api'>
-    <img src='https://img.shields.io/codecov/c/github/Alfresco/alfresco-js-api/master.svg?maxAge=0' alt='Coverage Status' />
-  </a>
   <a href='https://raw.githubusercontent.com/Alfresco/dev-platform-js-api/master/LICENSE'>
      <img src='https://img.shields.io/hexpm/l/plug.svg' alt='license' />
   </a>

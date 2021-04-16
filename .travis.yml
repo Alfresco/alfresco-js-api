@@ -44,7 +44,6 @@ jobs:
           script:
           - npm run test || exit 1 /
           - npm run coverage
-          - bash <(curl -s https://codecov.io/bash)
 
         - stage: Perfomance
           name: Perfomance
