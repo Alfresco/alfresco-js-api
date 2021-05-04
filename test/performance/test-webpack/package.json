@@ -22,11 +22,11 @@
   "bundlesize": [
     {
       "path": "./test/tree-shaking-test.js",
-      "maxSize": "100 kb"
+      "maxSize": "120 kb"
     },
     {
       "path": "./test/tree-shaking-test.min.js",
-      "maxSize": "30 kb"
+      "maxSize": "40 kb"
     }
   ],
   "keywords": [
