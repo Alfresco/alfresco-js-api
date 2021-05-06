@@ -22,8 +22,6 @@ import { Authentication } from './authentication/authentication';
 import { BasicAuth } from './authentication/basicAuth';
 import { Oauth2 } from './authentication/oauth2';
 
-const process: any = {};
-
 declare const Buffer: any;
 declare const Blob: any;
 
@@ -115,8 +113,7 @@ export class AlfrescoApiClient implements ee.Emitter {
     /**
      * The default HTTP headers to be included for all API calls.
      */
-    defaultHeaders = {
-    };
+    defaultHeaders = {};
 
     /**
      * The default HTTP timeout for all API calls.
@@ -301,8 +298,10 @@ export class AlfrescoApiClient implements ee.Emitter {
         }
 
         if (returnType) {
-            if (returnType === 'blob') {
-                data = new Blob([data], { type : response.header['content-type']});
+            if (returnType === 'blob' && this.isBrowser()) {
+                data = new Blob([data], { type: response.header['content-type'] });
+            } else if (returnType === 'blob' && !this.isBrowser()) {
+                data = new Buffer.from(data, 'binary');
             } else if (Array.isArray(data)) {
                 data = data.map((element) => {
                     return new returnType(element);
@@ -361,7 +360,7 @@ export class AlfrescoApiClient implements ee.Emitter {
             }
         }
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-                                contentTypes, accepts, returnType, contextRoot, responseType, url);
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     request<T = any>(options: RequestOptions): Promise<T> {
@@ -443,7 +442,7 @@ export class AlfrescoApiClient implements ee.Emitter {
         const url = this.buildUrlCustomBasePath(path, '', pathParams);
 
         return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-                                contentTypes, accepts, returnType, contextRoot, responseType, url);
+            contentTypes, accepts, returnType, contextRoot, responseType, url);
     }
 
     /**
@@ -481,7 +480,7 @@ export class AlfrescoApiClient implements ee.Emitter {
         const eventEmitter: any = ee({});
 
         let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-                                        contentTypes, accepts, responseType, eventEmitter, returnType);
+            contentTypes, accepts, responseType, eventEmitter, returnType);
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
@@ -582,13 +581,9 @@ export class AlfrescoApiClient implements ee.Emitter {
         }
     }
 
-    isNodeEnv(): boolean {
-        return (typeof process !== 'undefined') && (process.release && process.release.name === 'node');
+    isBrowser(): boolean {
+        return (typeof window !== 'undefined' && typeof window.document !== 'undefined');
     }
-
-     isBrowser(): boolean {
-         return ( typeof window !== 'undefined' && typeof window.document !== 'undefined');
-     }
 
     createCSRFToken(a?: any): string {
         return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + (1e16).toString()).replace(/[01]/g, this.createCSRFToken);

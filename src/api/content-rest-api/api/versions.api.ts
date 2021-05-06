@@ -236,7 +236,7 @@ Single part request supported, for example: bytes=1-10.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/versions/{versionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , Blob);
+            contentTypes, accepts , 'blob');
     }
 /**
     * Get rendition information for a file version
@@ -344,7 +344,7 @@ than a 404 response.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/versions/{versionId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , Blob);
+            contentTypes, accepts , 'blob');
     }
 /**
     * List version history
