@@ -13,3 +13,4 @@ ts-node ./test/integration/test-node/login-ecm.ts --host $HOST -u "$USERNAME" -p
 ts-node ./test/integration/test-node/upload-file.ts --host $HOST -u "$USERNAME" -p "$PASSWORD" || exit 1
 ts-node ./test/integration/test-node/login-bpmn.ts --host $HOST -u "$USERNAME" -p "$PASSWORD"  || exit 1
 ts-node ./test/integration/test-node/login-sso.ts --host $HOST -u "$USERNAME" -p "$PASSWORD"   || exit 1
+ts-node ./test/integration/test-node/node-content.ts --host $HOST -u "$USERNAME" -p "$PASSWORD"   || exit 1

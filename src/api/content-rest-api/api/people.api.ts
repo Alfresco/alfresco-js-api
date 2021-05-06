@@ -205,7 +205,7 @@ then the placeholder image is returned, rather than a 404 response.
         return this.apiClient.callApi(
             '/people/{personId}/avatar', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , Blob);
+            contentTypes, accepts , 'blob');
     }
 /**
     * Get a person

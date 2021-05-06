@@ -169,7 +169,7 @@ than a 404 response.
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , Blob);
+            contentTypes, accepts , 'blob');
     }
 /**
     * Get a deleted node
@@ -277,7 +277,7 @@ Single part request supported, for example: bytes=1-10.
         return this.apiClient.callApi(
             '/deleted-nodes/{nodeId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , Blob);
+            contentTypes, accepts , 'blob');
     }
 /**
     * List renditions for a deleted node
