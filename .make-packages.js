@@ -29,7 +29,7 @@ const ESM5_PKG = PKG_ROOT + '_esm5/';
 const ESM2015_PKG = PKG_ROOT + '_esm2015/';
 const UMD_PKG = PKG_ROOT + 'bundles/';
 const SRC_ROOT_PKG = PKG_ROOT +  'src/';
-const TYPE_PKG = PKG_ROOT;
+const TYPE_PKG = PKG_ROOT + 'typings/';
 
 delete pkg.scripts;
 delete pkg.devDependencies;
@@ -42,7 +42,7 @@ const rootPackageJson = {
     ...pkg,
     name: '@alfresco/js-api',
     main: './index.js',
-    typings: './index.d.ts',
+    typings: './typings/index.d.ts',
     module: './_esm5/index.js',
     es2015: './_esm2015/index.js'
 };

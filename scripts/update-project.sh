@@ -78,7 +78,7 @@ for i in $(find . ! -path "*/node_modules/*" -name "package.json" | xargs grep -
 done
 
 git add .
-git commit -n -m "[auto-commit] Update JS-API to $JS_VERSION for branch: $BRANCH_TO_CREATE originated from JS-API PR: $JSAPI_PR_NUMBER"
+git commit -n -m "[ci:force][auto-commit] Update JS-API to $JS_VERSION for branch: $BRANCH_TO_CREATE originated from JS-API PR: $JSAPI_PR_NUMBER"
 git push origin $BRANCH_TO_CREATE
 
 node $BUILD_PIPELINE_DIR/pr-creator.js --token=$TOKEN --title="Update branch for JS-API PR#$JSAPI_PR_NUMBER" --head=$BRANCH_TO_CREATE --repo=alfresco-ng2-components

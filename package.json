@@ -58,7 +58,7 @@
     "@types/event-emitter": "^0.3.3",
     "@types/minimatch": "^3.0.3",
     "@types/mocha": "^8.0.0",
-    "@types/node": "^14.0.1",
+    "@types/node": "^15.0.1",
     "@types/superagent": "^4.1.4",
     "adf-tslint-rules": "0.0.7",
     "bundlesize": "^0.18.1",
