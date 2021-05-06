@@ -40,11 +40,11 @@ async function main() {
         contextRoot: ''
     });
 
-    alfrescoApi.login(program.username, program.password).then(() => {
+    alfrescoApi.login(program.username, program.password).then(
         () => {
             console.log('login done');
         },
-        (error) => {
+        () => {
             process.exit(1);
         }
     );
@@ -73,9 +73,10 @@ async function main() {
         }
     );
 
-    const test = await nodesApi.getNodeContent(nodeUploaded.entry.id)
+    const nodeContent = await nodesApi.getNodeContent(nodeUploaded.entry.id);
+    const text = await nodeContent.text();
 
-    if (test !== 'test extension') {
+    if (text !== 'test extension') {
         process.exit(1);
     }
 
