@@ -354,7 +354,7 @@ Single part request supported, for example: bytes=1-10.
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , Blob);
+            contentTypes, accepts , 'blob');
     }
 /**
     * Get shared link rendition information
@@ -460,7 +460,7 @@ Single part request supported, for example: bytes=1-10.
         return this.apiClient.callApi(
             '/shared-links/{sharedId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , Blob);
+            contentTypes, accepts , 'blob');
     }
 /**
     * List renditions for a shared link

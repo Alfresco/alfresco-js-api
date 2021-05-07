@@ -185,7 +185,7 @@ than a 404 response.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/renditions/{renditionId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , Blob);
+            contentTypes, accepts , 'blob');
     }
 /**
     * List renditions

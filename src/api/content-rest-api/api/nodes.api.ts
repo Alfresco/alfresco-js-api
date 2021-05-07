@@ -853,7 +853,7 @@ Single part request supported, for example: bytes=1-10.
         return this.apiClient.callApi(
             '/nodes/{nodeId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , Blob);
+            contentTypes, accepts , 'blob');
     }
 /**
     * List node children
