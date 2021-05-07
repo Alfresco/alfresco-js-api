@@ -4,6 +4,10 @@
 /tslint.json
 /pom.xml
 *.iml
+.mergify.yml
+bpm-example.md
+ecm-example.md
+cspell.json
 /.idea
 /test/
 /assets/
@@ -25,3 +29,4 @@ tsconfig.json
 /target/
 /.history/
 /tsconfig/
+/src/
