@@ -6,7 +6,6 @@
   "main": "dist/alfresco-js-api.js",
   "typings": "index.d.ts",
   "scripts": {
-    "clean": "rimraf node_modules && npm run clean-build",
     "webpack": "webpack --display-error-details",
     "build": "npm run webpack && npm run bundlesize-check",
     "bundlesize-check": "bundlesize"
