@@ -242,6 +242,26 @@ describe('Basic configuration test', () => {
             alfrescoJsApi.login('admin', 'admin')
         });
 
+        it('Should logged-in be emitted when the ticket is in the store', (done) => {
+            const hostBpm = 'http://127.0.0.1:9999';
+            const authBpmMock = new AuthBpmMock(hostBpm);
+
+            authBpmMock.get200Response();
+
+            const alfrescoJsApi = new AlfrescoApi({
+                hostBpm: hostBpm,
+                contextRootBpm: 'activiti-app',
+                provider: 'BPM'
+            });
+
+            alfrescoJsApi.login('admin', 'admin').then(()=>{
+                alfrescoJsApi.reply('logged-in', () => {
+                    done();
+                });
+            });
+
+        });
+
     });
 
 });

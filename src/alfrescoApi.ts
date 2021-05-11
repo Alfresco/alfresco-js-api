@@ -42,6 +42,9 @@ export class AlfrescoApi implements Emitter {
     on: EmitterMethod;
     off: EmitterMethod;
     once: EmitterMethod;
+
+    bufferEvents: string[] = [];
+
     emit: (type: string, ...args: any[]) => void;
 
     username: string;
@@ -71,10 +74,6 @@ export class AlfrescoApi implements Emitter {
         this.errorListeners();
         this.initAuth(config);
 
-        if(this.isLoggedIn()){
-            this.emit('logged-in');
-        }
-
         return config;
     }
 
@@ -87,8 +86,8 @@ export class AlfrescoApi implements Emitter {
                 this.oauth2Auth.setConfig(this.config, this);
             }
 
-            this.oauth2Auth?.on('logged-in',() => {
-                this.emit('logged-in');
+            this.oauth2Auth?.on('logged-in', () => {
+                this.emitBuffer('logged-in');
             });
 
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
@@ -100,8 +99,8 @@ export class AlfrescoApi implements Emitter {
                 this.processAuth.setConfig(this.config);
             }
 
-            this.processAuth?.on('logged-in',() => {
-                this.emit('logged-in');
+            this.processAuth?.on('logged-in', () => {
+                this.emitBuffer('logged-in');
             });
 
             if (!this.contentAuth) {
@@ -110,8 +109,8 @@ export class AlfrescoApi implements Emitter {
                 this.contentAuth.setConfig(config);
             }
 
-            this.contentAuth?.on('logged-in',() => {
-                this.emit('logged-in');
+            this.contentAuth?.on('logged-in', () => {
+                this.emitBuffer('logged-in');
             });
 
             this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), this.processAuth.getAuthentication());
@@ -219,7 +218,7 @@ export class AlfrescoApi implements Emitter {
             this.invalidateSession();
         }
 
-        this.emit('error', error);
+        this.emitBuffer('error', error);
     }
 
     changeWithCredentialsConfig(withCredentials: boolean) {
@@ -271,7 +270,7 @@ export class AlfrescoApi implements Emitter {
 
             oauth2AuthPromise.then((accessToken) => {
                 this.config.accessToken = accessToken;
-            },                     (e) => {
+            }, (e) => {
                 console.log('login OAUTH error', e);
             });
 
@@ -284,7 +283,7 @@ export class AlfrescoApi implements Emitter {
 
                 processPromise.then((ticketBpm) => {
                     this.config.ticketBpm = ticketBpm;
-                },                  () => {
+                }, () => {
                     console.log('login BPM error');
                 });
 
@@ -296,7 +295,7 @@ export class AlfrescoApi implements Emitter {
                     this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
 
                     this.config.ticketEcm = ticketEcm;
-                },                  () => {
+                }, () => {
                     console.log('login ECM error');
                 });
 
@@ -578,5 +577,18 @@ export class AlfrescoApi implements Emitter {
 
     isEcmBpmConfiguration(): boolean {
         return this.config.provider && this.config.provider.toUpperCase() === 'ALL';
+    }
+
+    private emitBuffer(event: string, callback ?: any): void {
+        this.emit(event, callback);
+        this.bufferEvents.push(event);
+    }
+
+    reply(event: string, callback ?: any): void {
+        if (this.bufferEvents.indexOf(event) >= 0) {
+            callback().bind(this);
+        } else {
+            this.on(event, callback);
+        }
     }
 }
