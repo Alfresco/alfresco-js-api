@@ -75,7 +75,7 @@ export class AlfrescoApi implements Emitter {
         this.initAuth(config);
 
         if(this.isLoggedIn()){
-            this.emit('logged-in');
+            this.emitBuffer('logged-in');
         }
 
         return config;
