@@ -77,7 +77,7 @@ export class AlfrescoApi implements Emitter {
         return config;
     }
 
-    private initAuth(config: AlfrescoApiConfig) {
+    private initAuth(config: AlfrescoApiConfig): void {
         if (this.isOauthConfiguration()) {
 
             if (!this.oauth2Auth) {
@@ -116,7 +116,6 @@ export class AlfrescoApi implements Emitter {
             this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), this.processAuth.getAuthentication());
         }
 
-        return config;
     }
 
     private clientsFactory() {
