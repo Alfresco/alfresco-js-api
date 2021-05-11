@@ -591,7 +591,7 @@ export class AlfrescoApi implements Emitter {
 
     reply(event: string, callback ?: any): void {
         if (this.bufferEvents.indexOf(event) >= 0) {
-            callback().bind(this);
+            Function.prototype.apply.call(callback, this, arguments);
         } else {
             this.on(event, callback);
         }
