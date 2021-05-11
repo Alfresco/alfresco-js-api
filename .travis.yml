@@ -55,7 +55,7 @@ jobs:
 
         - stage: Release
           name: Release
-          if: (type = push OR type = cron) AND tag IS blank
+          if: (type = push OR type = cron OR  type = api) AND tag IS blank
           script:
           - ./scripts/build.sh || exit 1
           - ./scripts/publish.sh
@@ -66,7 +66,7 @@ jobs:
 
         - stage: Trigger ADF alpha
           name: Trigger ADF alpha
-          if: (branch = develop) AND type = cron
+          if: (branch = develop) AND (type = cron OR  type = api)
           script: ./scripts/update-project.sh -p $TRAVIS_BUILD_NUMBER -t $GITHUB_TOKEN -v alpha
 
         - stage: Trigger ADF beta
