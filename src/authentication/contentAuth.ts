@@ -90,6 +90,7 @@ export class ContentAuth extends AlfrescoApiClient {
                     this.saveUsername(username);
                     this.setTicket(data.entry.id);
                     promise.emit('success');
+                    this.emit('logged-in');
                     resolve(data.entry.id);
                 })
                 .catch((error) => {
@@ -121,6 +122,7 @@ export class ContentAuth extends AlfrescoApiClient {
             this.authApi.validateTicket().then((data: any) => {
                     this.setTicket(data.entry.id);
                     promise.emit('success');
+                    this.emit('logged-in');
                     resolve(data.entry.id);
                 },
                                                (error) => {

@@ -69,7 +69,16 @@ export class AlfrescoApi implements Emitter {
         this.processClient = new ProcessClient(this.config);
 
         this.errorListeners();
+        this.initAuth(config);
 
+        if(this.isLoggedIn()){
+            this.emit('logged-in');
+        }
+
+        return config;
+    }
+
+    private initAuth(config: AlfrescoApiConfig) {
         if (this.isOauthConfiguration()) {
 
             if (!this.oauth2Auth) {
@@ -77,6 +86,10 @@ export class AlfrescoApi implements Emitter {
             } else {
                 this.oauth2Auth.setConfig(this.config, this);
             }
+
+            this.oauth2Auth?.on('logged-in',() => {
+                this.emit('logged-in');
+            });
 
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
@@ -87,16 +100,22 @@ export class AlfrescoApi implements Emitter {
                 this.processAuth.setConfig(this.config);
             }
 
+            this.processAuth?.on('logged-in',() => {
+                this.emit('logged-in');
+            });
+
             if (!this.contentAuth) {
                 this.contentAuth = new ContentAuth(this.config, this);
             } else {
                 this.contentAuth.setConfig(config);
             }
 
+            this.contentAuth?.on('logged-in',() => {
+                this.emit('logged-in');
+            });
+
             this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), this.processAuth.getAuthentication());
         }
-
-        return config;
     }
 
     private clientsFactory() {
@@ -144,6 +163,7 @@ export class AlfrescoApi implements Emitter {
     }
 
     errorListeners() {
+
         this.contentClient.off('error', () => {
         });
 
