@@ -35,8 +35,6 @@ export class ClassesApi extends BaseApi {
 
     private path: string = '/api/classes';
 
-    contextRoot = this.apiClient.config.contextRoot + '/s';
-
     /**
      * Function to receive the result of the getClass operation.
      * @param {String} error Error message, if any.
@@ -73,7 +71,7 @@ export class ClassesApi extends BaseApi {
         return this.apiClient.callApi(
             this.path + '/{className}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassDescription, this.contextRoot
+            contentTypes, accepts, ClassDescription, this.apiClient.config.contextRoot + '/s'
         );
     }
 
@@ -99,7 +97,7 @@ export class ClassesApi extends BaseApi {
         return this.apiClient.callApi(
             `${this.path}/{className}/subclasses`, 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassDescription, this.contextRoot
+            contentTypes, accepts, ClassDescription, this.apiClient.config.contextRoot + '/s'
         );
     }
 }

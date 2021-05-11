@@ -141,7 +141,7 @@ export class AlfrescoApiCompatibility extends AlfrescoApi {
             moduleCopy[currentClass] = module[currentClass];
             let obj = this._stringToObject(currentClass, module);
             let nameObj = this._lowerFirst(currentClass);
-            obj.init(this);
+            obj?.init(this);
             moduleCopy[nameObj] = obj;
         });
     }
