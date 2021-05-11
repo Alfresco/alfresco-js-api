@@ -1,6 +1,9 @@
 import { AlfrescoApi } from '../src/alfrescoApi';
 
 const expect = require('chai').expect;
+const AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+const AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+const Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
 
 describe('Basic configuration test', () => {
 
@@ -176,6 +179,90 @@ describe('Basic configuration test', () => {
 
             expect(error).equal('missing username or password');
         });
+
+        it('Should logged-in be emitted when log in ECM', (done) => {
+            const hostEcm = 'http://127.0.0.1:8080';
+
+            const authEcmMock = new AuthEcmMock(hostEcm);
+
+            const alfrescoJsApi = new AlfrescoApi({
+                hostEcm,
+                provider: 'ECM'
+            });
+
+            authEcmMock.get201Response();
+
+            alfrescoJsApi.on('logged-in', () => {
+                done();
+            });
+
+            alfrescoJsApi.login('admin', 'admin')
+        });
+
+        it('Should logged-in be emitted when log in BPM', (done) => {
+            const hostBpm = 'http://127.0.0.1:9999';
+            const authBpmMock = new AuthBpmMock(hostBpm);
+
+            authBpmMock.get200Response();
+
+            const alfrescoJsApi = new AlfrescoApi({
+                hostBpm: hostBpm,
+                contextRootBpm: 'activiti-app',
+                provider: 'BPM'
+            });
+
+            alfrescoJsApi.on('logged-in', () => {
+                done();
+            });
+
+            alfrescoJsApi.login('admin', 'admin')
+        });
+
+        it('Should logged-in be emitted when log in OAUTH', (done) => {
+            const oauth2Mock = new Oauth2Mock('http://myOauthUrl:30081');
+
+            oauth2Mock.get200Response();
+
+            const alfrescoJsApi = new AlfrescoApi({
+                oauth2: {
+                    'host': 'http://myOauthUrl:30081/auth/realms/springboot',
+                    'clientId': 'activiti',
+                    'scope': 'openid',
+                    'secret': '',
+                    'redirectUri': '/',
+                    'redirectUriLogout': '/logout'
+                },
+                authType: 'OAUTH'
+            });
+
+            alfrescoJsApi.on('logged-in', () => {
+                done();
+            });
+
+            alfrescoJsApi.login('admin', 'admin')
+        });
+
+        it('Should logged-in be emitted when the ticket is in the store', (done) => {
+            const hostBpm = 'http://127.0.0.1:9999';
+            const authBpmMock = new AuthBpmMock(hostBpm);
+
+            authBpmMock.get200Response();
+
+            const alfrescoJsApi = new AlfrescoApi({
+                hostBpm: hostBpm,
+                contextRootBpm: 'activiti-app',
+                provider: 'BPM'
+            });
+
+            alfrescoJsApi.login('admin', 'admin').then(()=>{
+
+                alfrescoJsApi.reply('logged-in', () => {
+                    done();
+                });
+            });
+
+        });
+
     });
 
 });

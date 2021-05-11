@@ -11,10 +11,6 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "sourceRoot": "../src",
-    "paths": {
-      "@alfresco/js-api": ["../../../"],
-      "@alfresco/js-api/*": ["../../../*"]
-    },
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"

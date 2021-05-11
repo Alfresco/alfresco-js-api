@@ -4,6 +4,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $DIR/..
 
+./scripts/test-build.sh
+
 #Test Angular build size
 cd $DIR/../test/performance/test-angular
 npm install

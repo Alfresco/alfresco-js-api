@@ -631,6 +631,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
         if (token) {
             this.emit('token_issued');
+            this.emit('logged-in');
         }
     }
 

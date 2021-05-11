@@ -20,7 +20,7 @@ export interface Oauth2Config {
     secret?: string;
     host: string;
     scope: string;
-    implicitFlow: boolean;
+    implicitFlow?: boolean;
     redirectUri: string;
     refreshTokenTimeout?: number;
     silentLogin?: boolean;
