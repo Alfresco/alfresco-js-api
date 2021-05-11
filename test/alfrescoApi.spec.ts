@@ -255,6 +255,7 @@ describe('Basic configuration test', () => {
             });
 
             alfrescoJsApi.login('admin', 'admin').then(()=>{
+
                 alfrescoJsApi.reply('logged-in', () => {
                     done();
                 });

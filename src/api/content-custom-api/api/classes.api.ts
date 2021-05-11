@@ -35,9 +35,7 @@ export class ClassesApi extends BaseApi {
 
     private path: string = '/api/classes';
 
-    private get contextRoot(): string {
-        return this.apiClient.config.contextRoot + '/s';
-    }
+    contextRoot = this.apiClient.config.contextRoot + '/s';
 
     /**
      * Function to receive the result of the getClass operation.
