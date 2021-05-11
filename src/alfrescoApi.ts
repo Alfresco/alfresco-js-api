@@ -115,6 +115,8 @@ export class AlfrescoApi implements Emitter {
 
             this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), this.processAuth.getAuthentication());
         }
+
+        return config;
     }
 
     private clientsFactory() {
