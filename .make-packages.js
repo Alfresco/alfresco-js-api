@@ -85,8 +85,6 @@ createImportTargets(importTargets, "_esm2015/", ESM2015_PKG);
 mkdirp.sync(PKG_ROOT);
 
 // Copy over the sources
-copySources('src/', SRC_ROOT_PKG);
-
 copySources(CJS_ROOT, CJS_PKG);
 
 // Clean up the source maps for CJS sources
