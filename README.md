@@ -539,6 +539,8 @@ alfrescoJsApi.nodes
 
 # Development
 
+NodeJs versions newer that version 12 may have build errors.
+
 To run the build
 
 ```sh
