@@ -40,8 +40,6 @@ const rootPackageJson = {
 
 mkdirp.sync(PKG_ROOT);
 
-copySources('src', SRC_ROOT_PKG);
-
 copySources(CJS_ROOT, CJS_PKG);
 cleanSourceMapRoot(PKG_ROOT, SRC_ROOT_PKG);
 
