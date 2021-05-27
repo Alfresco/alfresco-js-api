@@ -1,8 +1,8 @@
 "use strict";
 
-let fs = require('fs-extra');
-let path = require('path');
-let klawSync = require('klaw-sync');
+const fs = require('fs-extra');
+const path = require('path');
+const klawSync = require('klaw-sync');
 
 function cleanSourceMapRoot(mapRoot, sourcesRoot) {
     klawSync(mapRoot, {filter: (item) => item.path.endsWith('.js.map')})
@@ -32,34 +32,11 @@ function copySources(rootDir, packageDir, ignoreMissing) {
     }
     // Copy over the CommonJS files
     fs.copySync(rootDir, packageDir);
-    fs.copySync('./LICENSE.txt', packageDir + 'LICENSE.txt');
-    fs.copySync('./README.md', packageDir + 'README.md');
-}
-
-// Create a file that exports the importTargets object
-function createImportTargets(importTargets, targetName, targetDirectory) {
-    const importMap = {};
-    for (const x in importTargets) {
-        importMap['alfresco-js-api/' + x] = ('alfresco-js-api/' + targetName + importTargets[x]).replace(/\.js$/, '');
-    }
-
-    const outputData =
-        `
-"use strict"
-
-var path = require('path');
-var dir = path.resolve(__dirname);
-
-module.exports = function() {
-  return ${JSON.stringify(importMap, null, 4)};
-}
-`
-
-    fs.outputFileSync(targetDirectory + 'path-mapping.js', outputData);
+    fs.copySync('./LICENSE.txt', `${packageDir}/LICENSE.txt`);
+    fs.copySync('./README.md', `${packageDir}/README.md`);
 }
 
 module.exports = {
     copySources,
-    createImportTargets,
     cleanSourceMapRoot
 }
