@@ -19,7 +19,7 @@ const CJS_PKG = PKG_ROOT;
 const ESM5_PKG = `${PKG_ROOT}/_esm5`;
 const ESM2015_PKG = `${PKG_ROOT}/_esm2015`;
 const UMD_PKG = `${PKG_ROOT}/bundles`;
-const SRC_ROOT_PKG = `${PKG_ROOT}//src`;
+const SRC_ROOT_PKG = `${PKG_ROOT}/src`;
 const TYPE_PKG = `${PKG_ROOT}/typings`;
 
 delete pkg.scripts;
