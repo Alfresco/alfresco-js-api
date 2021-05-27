@@ -7,15 +7,6 @@ const path = require('path');
 const klawSync = require('klaw-sync');
 const { copySources, createImportTargets, cleanSourceMapRoot } = require('./.make-helpers');
 
-let bo = null;
-// Build Optimizer is not available on Node 4.x. Using a try/catch
-// here to make sure the build passes on Travis using Node 4, but
-// the NPM distribution will run through build-optimizer.
-try {
-    bo = require('@angular-devkit/build-optimizer');
-} catch (e) {}
-
-
 const ROOT = 'dist/';
 const CJS_ROOT = ROOT + 'cjs/';
 const ESM5_FOR_ROLLUP_ROOT = ROOT + 'esm5_for_rollup/';
@@ -52,29 +43,7 @@ klawSync(ESM5_ROOT, {
     nodir: true,
     filter: item => item.path.endsWith('.js')
 })
-.map(item => item.path.slice((`${__dirname}/${ESM5_ROOT}`).length))
-.map(fileName => {
-    if (!bo) {
-        return fileName;
-    }
-    const fullPath = path.resolve(__dirname, ESM5_ROOT, fileName);
-    // The file won't exist when running build_test as we don't create the ESM5 sources
-    if (!fs.existsSync(fullPath)) {
-        return fileName;
-    }
-    const content = fs.readFileSync(fullPath).toString();
-    const transformed = bo.transformJavascript({
-        content,
-        getTransforms: [
-            bo.getPrefixClassesTransformer,
-            bo.getPrefixFunctionsTransformer,
-            bo.getFoldFileTransformer
-        ]
-    });
-
-    fs.writeFileSync(fullPath, transformed.content);
-    return fileName;
-});
+.map(item => item.path.slice((`${__dirname}/${ESM5_ROOT}`).length));
 
 const importTargets = {};
 
