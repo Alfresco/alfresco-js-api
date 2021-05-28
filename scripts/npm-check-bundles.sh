@@ -56,13 +56,6 @@ cd temp
      echo "bundles ok!"
  fi
 
- if [ ! -f package/dist/alfresco-js-api.umd.min.js ]; then
-    error_out '31;1' "bundles min not found!" >&2
-    exit 1
- else
-     echo "bundles min ok!"
- fi
-
  if [ ! -f package/index.d.ts ]; then
     error_out '31;1' "definition file not found!" >&2
     exit 1

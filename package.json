@@ -6,17 +6,13 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "scripts": {
-    "build": "shx rm -rf ./dist && npm-run-all build_cjs build_esm5 build_esm2015 build_esm5_for_rollup build_umd build_types generate_packages bundlesize-check",
+    "build": "shx rm -rf ./dist && npm-run-all build_cjs build_esm5 build_esm2015 build_types generate_packages",
     "build_cjs": "shx rm -rf ./dist/cjs && tsc -p ./tsconfig/tsconfig.cjs.json",
     "build_esm5": "shx rm -rf ./dist/esm5 && tsc -p ./tsconfig/tsconfig.esm5.json",
-    "build_esm5_for_rollup": "shx rm -rf ./dist/esm5_for_rollup && tsc -p ./tsconfig/tsconfig.esm5.rollup.json && mkdirp dist/esm5_for_rollup/node_modules",
     "build_esm2015": "shx rm -rf ./dist/esm2015 && tsc -p ./tsconfig/tsconfig.esm2015.json",
     "build_types": "shx rm -rf ./dist/typings && tsc -p ./tsconfig/tsconfig.types.json",
-    "build_global": "shx rm -rf ./dist/global && npm run build_esm5_for_rollup && mkdirp ./dist/global && node ./tools/make-umd-bundle.js && npm run clean_dist_esm5_for_rollup",
-    "build_umd": "shx rm -rf ./dist/global && mkdirp ./dist/global && node ./tools/make-umd-bundle.js",
     "generate_packages": "node .make-packages.js",
     "prepublish": "shx rm -rf ./typings && npm run build",
-    "bundlesize-check": "bundlesize",
     "format-ts": "tsfmt -r",
     "test": "mocha --full-trace -r ts-node/register test/*.spec.ts test/**/*.spec.ts",
     "coverage": "nyc --reporter=lcov mocha -r ts-node/register --full-trace --bail  test/*.spec.ts ./test/**/*.spec.ts",
@@ -49,7 +45,6 @@
     "@types/node": "^15.6.1",
     "@types/superagent": "^4.1.4",
     "adf-tslint-rules": "0.0.7",
-    "bundlesize": "^0.18.1",
     "chai": "4.3.4",
     "chai-datetime": "1.7.0",
     "chai-spies": "^1.0.0",
@@ -80,12 +75,6 @@
     "typescript-formatter": "^7.2.2"
   },
   "license": "Apache-2.0",
-  "bundlesize": [
-    {
-      "path": "./dist/global/alfresco-js-api.umd.min.js",
-      "maxSize": "45 kB"
-    }
-  ],
   "nyc": {
     "include": [
       "src/**/*.ts"

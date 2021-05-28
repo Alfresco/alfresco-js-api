@@ -25,9 +25,6 @@
         "../src/api-legacy/activiti-rest-api/src/index.ts",
 
         // compatibility
-        "../src/alfrescoApiCompatibility.ts",
-
-        // umd entry-point
-        "../src/internal/umd.ts"
+        "../src/alfrescoApiCompatibility.ts"
     ]
 }
