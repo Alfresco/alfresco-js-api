@@ -16,19 +16,18 @@ then
         fi
     fi
 
+    cd dist/
+
     echo "Publishing on npm with tag $TAG_NPM"
 
-    touch ./dist/.npmrc
-    echo 'strict-ssl=false' >> ./dist/.npmrc
-    echo 'registry=http://${NPM_REGISTRY_ADDRESS}' >> ./dist/.npmrc
-    echo '//${NPM_REGISTRY_ADDRESS}/:_authToken="${NPM_REGISTRY_TOKEN}"' >> ./dist/.npmrc
-
-    cd dist/
+    touch .npmrc
+    echo 'strict-ssl=false' >> .npmrc
+    echo 'registry=http://${NPM_REGISTRY_ADDRESS}' >> .npmrc
+    echo '//${NPM_REGISTRY_ADDRESS}/:_authToken="${NPM_REGISTRY_TOKEN}"' >> .npmrc
 
     cat package.json | grep version
 
-    npm publish --tag ${TAG_NPM} || exit 1
-
+    npm publish --tag ${TAG_NPM} --access public || exit 1
     rm -rf .npmrc
 
     cd ../../
