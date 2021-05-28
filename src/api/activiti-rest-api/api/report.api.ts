@@ -87,7 +87,7 @@ export class ReportApi extends BaseApi {
         );
     }
 
-    getReportsByParams(reportId: string, paramsQuery: Object) {
+    getReportsByParams(reportId: string, paramsQuery: any) {
         let postBody = paramsQuery;
 
         if (reportId === undefined || reportId === null) {

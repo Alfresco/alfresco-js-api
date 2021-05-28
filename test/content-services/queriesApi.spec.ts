@@ -1,4 +1,4 @@
-/*global describe, it, beforeEach, assert */
+/*global describe, it, beforeEach */
 
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { QueriesApi } from '../../src/api/content-rest-api';
