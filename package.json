@@ -7,7 +7,7 @@
   "typings": "index.d.ts",
   "scripts": {
     "build": "shx rm -rf ./dist && npm-run-all build_cjs build_esm5 build_esm2015 build_types generate_packages",
-    "build_cjs": "shx rm -rf ./dist/cjs && tsc -p ./tsconfig/tsconfig.cjs.json",
+    "build_cjs": "tsc -p ./tsconfig/tsconfig.cjs.json",
     "build_esm5": "shx rm -rf ./dist/esm5 && tsc -p ./tsconfig/tsconfig.esm5.json",
     "build_esm2015": "shx rm -rf ./dist/esm2015 && tsc -p ./tsconfig/tsconfig.esm2015.json",
     "build_types": "shx rm -rf ./dist/typings && tsc -p ./tsconfig/tsconfig.types.json",
