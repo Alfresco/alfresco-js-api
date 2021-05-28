@@ -4,6 +4,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $DIR/..
 
+npm run lint || exit 1;
 npm run tslint || exit 1;
 npm run tslint-test || exit 1;
 npm run spellcheck  || exit 1;
