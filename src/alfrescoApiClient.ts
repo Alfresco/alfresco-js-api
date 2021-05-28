@@ -251,7 +251,7 @@ export class AlfrescoApiClient implements ee.Emitter {
     applyAuthToRequest(request: any) {
         if (this.authentications) {
             switch (this.authentications.type) {
-                case 'basic':
+                case 'basic': {
                     const basicAuth: BasicAuth = this.authentications.basicAuth;
                     if (basicAuth.username || basicAuth.password) {
                         request.auth(
@@ -260,17 +260,20 @@ export class AlfrescoApiClient implements ee.Emitter {
                         );
                     }
                     break;
-                case 'activiti':
+                }
+                case 'activiti': {
                     if (this.authentications.basicAuth.ticket) {
                         request.set({ 'Authorization': this.authentications.basicAuth.ticket });
                     }
                     break;
-                case 'oauth2':
+                }
+                case 'oauth2': {
                     const oauth2: Oauth2 = this.authentications.oauth2;
                     if (oauth2.accessToken) {
                         request.set({ 'Authorization': 'Bearer ' + oauth2.accessToken });
                     }
                     break;
+                }
                 default:
                     throw new Error('Unknown authentication type: ' + this.authentications.type);
             }
@@ -578,6 +581,7 @@ export class AlfrescoApiClient implements ee.Emitter {
         try {
             document.cookie = 'CSRF-TOKEN=' + token + ';path=/';
         } catch (err) {
+            /* continue regardless of error */
         }
     }
 

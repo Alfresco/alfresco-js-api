@@ -24,7 +24,7 @@ import { AlfrescoApi } from '../alfrescoApi';
 import { Storage } from '../storage';
 
 declare const Buffer: any;
-declare var require: any;
+declare const require: any;
 // tslint:disable-next-line
 const minimatch = require('minimatch');
 
@@ -34,7 +34,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     private refreshTokenIntervalPolling: any;
     private refreshTokenTimeoutIframe: any;
-    private checkAccessToken: boolean = true;
+    private checkAccessToken = true;
     storage: Storage;
 
     hashFragmentParams: any;
@@ -415,7 +415,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     parseQueryString(queryString: string): any {
-        const data: { [key: string]: Object } = {};
+        const data: { [key: string]: any } = {};
         let pairs, pair, separatorIndex, escapedKey, escapedValue, key, value;
 
         if (queryString !== null) {
@@ -560,6 +560,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             try {
                 await this.refreshToken();
             } catch (e) {
+                /* continue regardless of error */
             }
         }, this.config.oauth2.refreshTokenTimeout);
 
@@ -723,6 +724,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 this.config.ticketEcm = ticketEntry.entry.id;
                 this.emit('ticket_exchanged');
             } catch (e) {
+                // continue regardless of error
             }
         });
     }
