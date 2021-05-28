@@ -46,5 +46,4 @@ cleanSourceMapRoot(ESM5_PKG, SRC_ROOT_PKG);
 copySources(ESM2015_ROOT, ESM2015_PKG, true);
 cleanSourceMapRoot(ESM2015_PKG, SRC_ROOT_PKG);
 
-fs.copySync('./tsconfig.base.json', `${PKG_ROOT}/src/tsconfig.json`);
 fs.writeJsonSync(`${PKG_ROOT}/package.json`, rootPackageJson, {spaces: 2});
