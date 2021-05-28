@@ -10,7 +10,7 @@ describe('Activiti Models Api', () => {
     let modelsMock: any;
     let modelsApi: ModelsApi;
 
-    beforeEach((done) => {
+    beforeEach(async () => {
         const hostBpm = 'http://127.0.0.1:9999';
 
         authResponseBpmMock = new AuthBpmMock(hostBpm);
@@ -23,14 +23,12 @@ describe('Activiti Models Api', () => {
             provider: 'BPM'
         });
 
-        alfrescoJsApi.login('admin', 'admin').then(() => {
-            done();
-        });
-
         modelsApi = new ModelsApi(alfrescoJsApi);
+
+        await alfrescoJsApi.login('admin', 'admin');
     });
 
-    it('get activiti model', (done) => {
+    it('get activiti model', async () => {
         modelsMock.get200getModels();
 
         const opts = {
@@ -38,9 +36,7 @@ describe('Activiti Models Api', () => {
             'modelType': 2
         };
 
-        modelsApi.getModels(opts).then((data) => {
-            expect(data.data[0].name).equal('Metadata');
-            done();
-        });
+        const data = await modelsApi.getModels(opts);
+        expect(data.data[0].name).equal('Metadata');
     });
 });

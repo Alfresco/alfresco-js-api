@@ -5,47 +5,42 @@ let expect = require('chai').expect;
 let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 let TaskFormMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.TaskFormMock;
 
-describe('Activiti Task Api', function () {
-    beforeEach(function (done) {
-        this.hostBpm = 'http://127.0.0.1:9999';
+describe('Activiti Task Api', () => {
+    let authResponseBpmMock: any;
+    let taskFormMock: any;
+    let alfrescoJsApi: AlfrescoApi;
 
-        this.authResponseBpmMock = new AuthBpmMock(this.hostBpm);
-        this.taskFormMock = new TaskFormMock(this.hostBpm);
+    beforeEach(async () => {
+        const BPM_HOST = 'http://127.0.0.1:9999';
 
-        this.authResponseBpmMock.get200Response();
+        authResponseBpmMock = new AuthBpmMock(BPM_HOST);
+        taskFormMock = new TaskFormMock(BPM_HOST);
 
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostBpm: this.hostBpm,
+        authResponseBpmMock.get200Response();
+
+        alfrescoJsApi = new AlfrescoApi({
+            hostBpm: BPM_HOST,
             provider: 'BPM'
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
-            done();
-        });
+        await alfrescoJsApi.login('admin', 'admin');
     });
 
-    it('get Task Form variables list', function (done) {
-        this.taskFormMock.get200getTaskFormVariables();
+    it('get Task Form variables list', async () => {
+        taskFormMock.get200getTaskFormVariables();
 
-        let taskId = 5028;
-        this.alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId).then((data: any) => {
-            expect(data[0].id).equal('initiator');
-            done();
-        });
+        const taskId = '5028';
+        const data = await alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId);
+
+        expect(data[0].id).equal('initiator');
     });
 
-    it('Check cookie settings', function (done) {
-        this.taskFormMock.get200getTaskFormVariables();
+    it('Check cookie settings', async () => {
+        taskFormMock.get200getTaskFormVariables();
 
-        let taskId = 5028;
-        this.alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId).then(
-            () => {
-                expect(this.alfrescoJsApi.activiti.taskFormsApi.apiClient.authentications.cookie).equal('ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ');
-                done();
-            },
-            (error: any) => {
-                console.log('error' + error);
-            });
+        const taskId = '5028';
+        await alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId);
+        expect(alfrescoJsApi.activiti.taskFormsApi.apiClient.authentications.cookie).equal('ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ');
     });
 
 });
