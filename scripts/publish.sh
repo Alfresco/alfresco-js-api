@@ -18,12 +18,12 @@ then
 
     echo "Publishing on npm with tag $TAG_NPM"
 
-    touch ./dist/package/.npmrc
-    echo 'strict-ssl=false' >> ./dist/package/.npmrc
-    echo 'registry=http://${NPM_REGISTRY_ADDRESS}' >> ./dist/package/.npmrc
-    echo '//${NPM_REGISTRY_ADDRESS}/:_authToken="${NPM_REGISTRY_TOKEN}"' >> ./dist/package/.npmrc
+    touch ./dist/.npmrc
+    echo 'strict-ssl=false' >> ./dist/.npmrc
+    echo 'registry=http://${NPM_REGISTRY_ADDRESS}' >> ./dist/.npmrc
+    echo '//${NPM_REGISTRY_ADDRESS}/:_authToken="${NPM_REGISTRY_TOKEN}"' >> ./dist/.npmrc
 
-    cd dist/package/
+    cd dist/
 
     cat package.json | grep version
 

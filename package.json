@@ -55,7 +55,6 @@
     "fs-extra": "10.0.0",
     "github-api": "^3.4.0",
     "markdown-toc": "^1.2.0",
-    "mkdirp": "^1.0.4",
     "mocha": "^8.0.1",
     "mocha-jsdom": "^2.0.0",
     "nock": "^13.0.3",
