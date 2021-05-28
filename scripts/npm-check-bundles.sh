@@ -49,13 +49,6 @@ cd temp
  npm pack 'alfresco-js-api@'$VERSION
  tar zxf 'alfresco-js-api-'$VERSION'.tgz'
 
- if [ ! -f package/dist/alfresco-js-api.umd.js ]; then
-    error_out '31;1' "bundles not found!" >&2
-    exit 1
- else
-     echo "bundles ok!"
- fi
-
  if [ ! -f package/index.d.ts ]; then
     error_out '31;1' "definition file not found!" >&2
     exit 1
