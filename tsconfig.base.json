@@ -39,9 +39,5 @@
         "package",
         "dist",
         "test"
-    ],
-    "angularCompilerOptions": {
-        "strictMetadataEmit": false,
-        "skipTemplateCodegen": true
-    }
+    ]
 }

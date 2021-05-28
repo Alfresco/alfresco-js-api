@@ -11,5 +11,5 @@ npm run build
 
 mkdir -p ./node_modules/@alfresco/js-api
 mkdir -p ../alfresco-ng2-components/node_modules/@alfresco/js-api
-cp -R ./dist/package/* ./node_modules/@alfresco/js-api
-cp -R ./dist/package/* ../alfresco-ng2-components/node_modules/@alfresco/js-api
+cp -R ./dist/* ./node_modules/@alfresco/js-api
+cp -R ./dist/* ../alfresco-ng2-components/node_modules/@alfresco/js-api
