@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
-import { AuthResponseMock as AuthEcmMock, BpmAuthMock, NodeMock } from '../test/mockObjects';
-const ProfileMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Profile;
+import { AuthResponseMock as AuthEcmMock, BpmAuthMock, NodeMock, ProfileMock } from '../test/mockObjects';
 
 const NOOP = () => { /* empty */ };
 const ECM_HOST = 'http://127.0.0.1:8080';
@@ -14,7 +13,7 @@ interface ErrorResponse {
 describe('Auth', () => {
 
     describe('ECM Provider config', () => {
-        let authResponseEcmMock: any;
+        let authResponseEcmMock: AuthEcmMock;
         let nodeMock: NodeMock;
 
         beforeEach(() => {
@@ -155,12 +154,9 @@ describe('Auth', () => {
 
             describe('Logout Api', () => {
 
-                beforeEach((done) => {
+                beforeEach(async () => {
                     authResponseEcmMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
-
-                    alfrescoJsApi.login('admin', 'admin').then(() => {
-                        done();
-                    }, NOOP);
+                    await alfrescoJsApi.login('admin', 'admin');
                 });
 
                 it('should Ticket be absent in the client and the resolve promise should be called', (done) => {
@@ -170,8 +166,7 @@ describe('Auth', () => {
                         expect(alfrescoJsApi.config.ticket).to.be.equal(undefined);
                         expect(data).to.be.equal('logout');
                         done();
-                    },
-                    NOOP);
+                    });
                 });
 
                 it('should Logout be rejected if the Ticket is already expired', (done) => {
@@ -190,8 +185,7 @@ describe('Auth', () => {
 
                     alfrescoJsApi.login('admin', 'admin').then(() => {
                         done();
-                    },
-                    NOOP);
+                    });
                 });
 
                 it('should 401 invalidate the ticket', (done) => {
@@ -227,7 +221,7 @@ describe('Auth', () => {
     });
 
     describe('BPM Provider config', () => {
-        let profileMock: any;
+        let profileMock: ProfileMock;
         let authResponseBpmMock: BpmAuthMock;
         let alfrescoJsApi: AlfrescoApi;
 
@@ -343,7 +337,7 @@ describe('Auth', () => {
 
                     alfrescoJsApi.login('admin', 'admin').then(() => {
                         done();
-                    }, NOOP);
+                    });
                 });
 
                 it('should 401 invalidate the ticket', (done) => {
@@ -415,8 +409,7 @@ describe('Auth', () => {
                         expect(data[0]).to.be.equal('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1');
                         expect(data[1]).to.be.equal('Basic YWRtaW46YWRtaW4=');
                         done();
-                    },
-                    NOOP);
+                    });
                 });
 
                 it('should fail if only ECM fail', (done) => {
@@ -455,7 +448,7 @@ describe('Auth', () => {
                     alfrescoJsApi.logout().then(() => {
                         expect(alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();
-                    }, NOOP);
+                    });
                 });
 
                 it('should return an error if wrong credential are used 401 the login fails', (done) => {
@@ -476,7 +469,7 @@ describe('Auth', () => {
                 alfrescoJsApi.login('admin', 'admin').then(() => {
                     expect(alfrescoJsApi.isLoggedIn()).to.be.equal(true);
                     done();
-                }, NOOP);
+                });
             });
 
             describe('Events ', () => {

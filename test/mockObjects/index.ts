@@ -18,3 +18,6 @@ export * from './goverance-services/gs-sites.mock';
 export * from './process-services/bpm-auth.mock';
 export * from './process-services/process.mock';
 export * from './process-services/process-instance-variables.mock';
+export * from './process-services/models.mock';
+export * from './process-services/model-json.mock';
+export * from './process-services/profile.mock';

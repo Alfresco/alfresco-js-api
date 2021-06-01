@@ -19,7 +19,7 @@ describe('Bpm Auth test', () => {
 
     it('should forget username on logout', (done) => {
         const processAuth = new ProcessAuth({
-            hostBpm: hostBpm,
+            hostBpm,
             contextRootBpm: 'activiti-app'
         });
 
@@ -45,7 +45,7 @@ describe('Bpm Auth test', () => {
             authBpmMock.get200Response();
 
             const processAuth = new ProcessAuth({
-                hostBpm: hostBpm,
+                hostBpm,
                 contextRootBpm: 'activiti-app'
             });
 
@@ -60,7 +60,7 @@ describe('Bpm Auth test', () => {
             authBpmMock.get200Response();
 
             const processAuth = new ProcessAuth({
-                hostBpm: hostBpm,
+                hostBpm,
                 contextRootBpm: 'activiti-app'
             });
 
@@ -75,7 +75,7 @@ describe('Bpm Auth test', () => {
             authBpmMock.get200Response();
 
             const processAuth = new ProcessAuth({
-                hostBpm: hostBpm,
+                hostBpm,
                 contextRootBpm: 'activiti-app'
             });
 
@@ -89,7 +89,7 @@ describe('Bpm Auth test', () => {
             authBpmMock.get200Response();
 
             const processAuth = new ProcessAuth({
-                hostBpm: hostBpm,
+                hostBpm,
                 contextRootBpm: 'activiti-app'
             });
             processAuth.login('admin', 'admin');
@@ -106,7 +106,7 @@ describe('Bpm Auth test', () => {
             authBpmMock.get200Response();
 
             const processAuth = new ProcessAuth({
-                hostBpm: hostBpm,
+                hostBpm,
                 contextRootBpm: 'activiti-app'
             });
 
@@ -123,7 +123,7 @@ describe('Bpm Auth test', () => {
             authBpmMock.get401Response();
 
             const processAuth = new ProcessAuth({
-                hostBpm: hostBpm,
+                hostBpm,
                 contextRootBpm: 'activiti-app'
             });
 

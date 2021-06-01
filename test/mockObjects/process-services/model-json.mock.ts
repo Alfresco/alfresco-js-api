@@ -1,11 +1,9 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
+export class ModelJsonBpmMock extends BaseMock {
 
-class ModelJsonBpmMock extends BaseMock {
-
-    constructor(host) {
+    constructor(host?: string) {
         super(host);
     }
 
@@ -117,5 +115,3 @@ class ModelJsonBpmMock extends BaseMock {
             });
     }
 }
-
-module.exports = ModelJsonBpmMock;

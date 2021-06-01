@@ -1,13 +1,11 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { ModelsApi } from '../../src/api/activiti-rest-api';
-import { BpmAuthMock } from '../mockObjects';
-
-const ModelsMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Models;
+import { BpmAuthMock, ModelsMock } from '../mockObjects';
 
 describe('Activiti Models Api', () => {
     let authResponseBpmMock: BpmAuthMock;
-    let modelsMock: any;
+    let modelsMock: ModelsMock;
     let modelsApi: ModelsApi;
 
     beforeEach(async () => {
