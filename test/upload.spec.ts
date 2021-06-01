@@ -1,18 +1,18 @@
 /*global describe, it, beforeEach */
 import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
-import { AuthResponseMock, UploadMock } from '../test/mockObjects';
+import { EcmAuthMock, UploadMock } from '../test/mockObjects';
 import fs from 'fs';
 
 describe('Upload', () => {
-    let authResponseMock: AuthResponseMock;
+    let authResponseMock: EcmAuthMock;
     let uploadMock: UploadMock;
     let alfrescoJsApi: AlfrescoApi;
 
     beforeEach(async () => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         uploadMock = new UploadMock(hostEcm);
 
         authResponseMock.get201Response();

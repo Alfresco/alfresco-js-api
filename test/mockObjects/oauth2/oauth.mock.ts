@@ -1,17 +1,17 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
+export class OAuthMock extends BaseMock {
+    username: string;
+    password: string;
 
-class AuthResponseMock extends BaseMock {
-
-    constructor(host, username, password) {
+    constructor(host?: string, username?: string, password?: string) {
         super(host);
         this.username = username || 'admin';
         this.password = password || 'admin';
     }
 
-    get200Response(mockToken) {
+    get200Response(mockToken?: string) {
         nock(this.host, {'encodedQueryParams': true})
             .post('/auth/realms/springboot/protocol/openid-connect/token')
             .reply(200, {
@@ -26,7 +26,7 @@ class AuthResponseMock extends BaseMock {
 
     }
 
-    get200CustomResponse(path) {
+    get200CustomResponse(path: string) {
         nock(this.host + '/auth/realms/springboot/protocol/', {'encodedQueryParams': true})
             .post(path)
             .query({
@@ -45,7 +45,7 @@ class AuthResponseMock extends BaseMock {
             });
     }
 
-    get200RefreshTokenResponse(refreshToken) {
+    get200RefreshTokenResponse(refreshToken: string) {
         nock(this.host, {'encodedQueryParams': true})
             .post('/auth/realms/springboot/protocol/openid-connect/token/')
             .query({
@@ -62,5 +62,3 @@ class AuthResponseMock extends BaseMock {
     }
 
 }
-
-module.exports = AuthResponseMock;

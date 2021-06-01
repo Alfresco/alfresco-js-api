@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
-import { AuthResponseMock, BpmAuthMock } from '../test/mockObjects';
+import { EcmAuthMock, BpmAuthMock } from '../test/mockObjects';
 
 describe('Change config', () => {
     let authResponseBpmMock: BpmAuthMock;
-    let authResponseMock: AuthResponseMock;
+    let authResponseMock: EcmAuthMock;
     let alfrescoJsApi: AlfrescoApi;
 
     beforeEach(async () => {
@@ -15,7 +15,7 @@ describe('Change config', () => {
         };
 
         authResponseBpmMock = new BpmAuthMock(config.hostBpm);
-        authResponseMock = new AuthResponseMock(config.hostEcm);
+        authResponseMock = new EcmAuthMock(config.hostEcm);
 
         authResponseMock.get201Response();
         authResponseBpmMock.get200Response();

@@ -2,17 +2,17 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { GroupsApi } from '../../src/api/content-rest-api';
-import { AuthResponseMock, GroupsMock } from '../../test/mockObjects';
+import { EcmAuthMock, GroupsMock } from '../../test/mockObjects';
 
 describe('Groups', () => {
-    let authResponseMock: AuthResponseMock;
+    let authResponseMock: EcmAuthMock;
     let groupsMock: GroupsMock;
     let groupsApi: GroupsApi;
 
     beforeEach((done) => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         groupsMock = new GroupsMock();
 
         authResponseMock.get201Response();

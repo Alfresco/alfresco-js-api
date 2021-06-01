@@ -1,5 +1,5 @@
 export * from './content-services/comment.mock';
-export * from './content-services/auth-response.mock';
+export * from './content-services/ecm-auth.mock';
 export * from './content-services/custom-model.mock';
 export * from './content-services/discovery.mock';
 export * from './content-services/node.mock';
@@ -25,3 +25,5 @@ export * from './process-services/reports.mock';
 export * from './process-services/task-form.mock';
 export * from './process-services/tasks.mock';
 export * from './process-services/user-filters.mock';
+
+export * from './oauth2/oauth.mock';

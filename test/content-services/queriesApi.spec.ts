@@ -2,17 +2,17 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { QueriesApi } from '../../src/api/content-rest-api';
-import { AuthResponseMock, FindNodesMock } from '../../test/mockObjects';
+import { EcmAuthMock, FindNodesMock } from '../../test/mockObjects';
 
 describe('Queries', () => {
-    let authResponseMock: AuthResponseMock;
+    let authResponseMock: EcmAuthMock;
     let nodesMock: FindNodesMock;
     let queriesApi: QueriesApi;
 
     beforeEach((done) => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         nodesMock = new FindNodesMock();
 
         authResponseMock.get201Response();

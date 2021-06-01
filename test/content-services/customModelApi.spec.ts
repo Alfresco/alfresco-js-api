@@ -2,17 +2,17 @@
 
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { CustomModelApi } from '../../src/api/content-custom-api';
-import { AuthResponseMock, CustomModelMock } from '../../test/mockObjects';
+import { EcmAuthMock, CustomModelMock } from '../../test/mockObjects';
 
 describe('Custom Model Api', () => {
-    let authResponseMock: AuthResponseMock;
+    let authResponseMock: EcmAuthMock;
     let customModelMock: CustomModelMock;
     let customModelApi: CustomModelApi;
 
     beforeEach((done) => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         customModelMock = new CustomModelMock(hostEcm);
 
         authResponseMock.get201Response();

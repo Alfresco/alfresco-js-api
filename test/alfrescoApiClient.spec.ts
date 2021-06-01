@@ -1,19 +1,19 @@
 /*global describe, it */
 import { AlfrescoApiClient, AlfrescoApiCompatibility as AlfrescoApi, FormValueRepresentation } from '../index';
 import { DateAlfresco } from  '../index';
-import { AuthResponseMock as AuthEcmMock } from '../test/mockObjects';
+import { EcmAuthMock } from '../test/mockObjects';
 
 const chai = require('chai');
 const expect = require('chai').expect;
 chai.use(require('chai-datetime'));
 
-describe('Alfresco Core API Client', function () {
+describe('Alfresco Core API Client', () => {
 
-    describe('type conversion', function () {
+    describe('type conversion', () => {
 
-        let client = new AlfrescoApiClient();
+        const client = new AlfrescoApiClient();
 
-        it('should create a request with response type blob', function () {
+        it('should create a request with response type blob', () => {
 
             let bodyParam = null;
 
@@ -27,7 +27,7 @@ describe('Alfresco Core API Client', function () {
             let url = '/fake-api/enterprise/process-instances/';
             let httpMethod = 'GET';
 
-            let response = client.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
+            const response = client.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
                                                contentTypes, accepts, responseType, null, null);
 
             expect(response.url).equal('/fake-api/enterprise/process-instances/');
@@ -37,7 +37,7 @@ describe('Alfresco Core API Client', function () {
         });
 
         it('should return the username after login', function (done) {
-            this.authResponseEcmMock = new AuthEcmMock('http://127.0.0.1:8080');
+            this.authResponseEcmMock = new EcmAuthMock('http://127.0.0.1:8080');
 
             this.authResponseEcmMock.get201Response();
 
@@ -52,49 +52,49 @@ describe('Alfresco Core API Client', function () {
         });
     });
 
-    describe('date parsing', function () {
+    describe('date parsing', () => {
 
-        it('should convert dates falling in GMT without a timezone', function () {
+        it('should convert dates falling in GMT without a timezone', () => {
             expect(DateAlfresco.parseDate('2015-11-17T03:33:17')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 3, 33, 17)));
         });
 
-        it('should convert dates falling in BST without a timezone', function () {
+        it('should convert dates falling in BST without a timezone', () => {
             expect(DateAlfresco.parseDate('2015-10-17T03:33:17')).to.equalTime(new Date(Date.UTC(2015, 9, 17, 3, 33, 17)));
         });
 
-        it('should convert dates with a UTC Zulu-time timezone', function () {
+        it('should convert dates with a UTC Zulu-time timezone', () => {
             expect(DateAlfresco.parseDate('2015-11-17T03:33:17Z')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 3, 33, 17)));
         });
 
-        it('should convert dates with a UTC zero-offset timezone', function () {
+        it('should convert dates with a UTC zero-offset timezone', () => {
             expect(DateAlfresco.parseDate('2015-11-17T03:33:17+0000')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 3, 33, 17)));
         });
 
-        it('should convert dates with a positive offset timezone', function () {
+        it('should convert dates with a positive offset timezone', () => {
             expect(DateAlfresco.parseDate('2015-11-17T03:33:17+0200')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 1, 33, 17)));
         });
 
-        it('should convert dates with a negative offset timezone', function () {
+        it('should convert dates with a negative offset timezone', () => {
             expect(DateAlfresco.parseDate('2015-11-17T03:33:17-0200')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 5, 33, 17)));
         });
 
-        it('should convert dates with a part-hour offset', function () {
+        it('should convert dates with a part-hour offset', () => {
             expect(DateAlfresco.parseDate('2015-11-17T03:23:17-0930')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 12, 53, 17)));
         });
 
-        it('should convert dates with a timezone HH:MM separator', function () {
+        it('should convert dates with a timezone HH:MM separator', () => {
             expect(DateAlfresco.parseDate('2015-11-17T03:33:17+02:00')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 1, 33, 17)));
         });
 
-        it('should convert dates with a timezone with hours only', function () {
+        it('should convert dates with a timezone with hours only', () => {
             expect(DateAlfresco.parseDate('2015-11-17T03:33:17+02')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 1, 33, 17)));
         });
 
     });
 
-    describe('Deserializes', function () {
+    describe('Deserializes', () => {
 
-        it('should the deserializer return an array of object when the response is an array', function() {
+        it('should the deserializer return an array of object when the response is an array', () => {
             const client = new AlfrescoApiClient();
             const data = {
                 body: [

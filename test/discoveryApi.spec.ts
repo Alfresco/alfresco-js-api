@@ -1,17 +1,17 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { DiscoveryApi } from '../src/api/discovery-rest-api';
-import { AuthResponseMock, DiscoveryMock } from '../test/mockObjects';
+import { EcmAuthMock, DiscoveryMock } from '../test/mockObjects';
 
 describe('Discovery', () => {
-    let authResponseMock: AuthResponseMock;
+    let authResponseMock: EcmAuthMock;
     let discoveryMock: DiscoveryMock;
     let discoveryApi: DiscoveryApi;
 
     beforeEach((done) => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         authResponseMock.get201Response();
 
         discoveryMock = new DiscoveryMock();

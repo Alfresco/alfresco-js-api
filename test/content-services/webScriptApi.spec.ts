@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { WebscriptApi } from '../../src/api/content-custom-api';
-import { AuthResponseMock, WebScriptMock } from '../../test/mockObjects';
+import { EcmAuthMock, WebScriptMock } from '../../test/mockObjects';
 
 describe('WebScript', () => {
     const hostEcm = 'http://127.0.0.1:8080';
@@ -9,12 +9,12 @@ describe('WebScript', () => {
     const servicePath = 'alfresco';
     const scriptPath = 'testWebScript';
 
-    let authResponseMock: AuthResponseMock;
+    let authResponseMock: EcmAuthMock;
     let webScriptMock: WebScriptMock;
     let webscriptApi: WebscriptApi;
 
     beforeEach((done) => {
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         webScriptMock = new WebScriptMock(hostEcm, contextRoot, servicePath, scriptPath);
         authResponseMock.get201Response();
 

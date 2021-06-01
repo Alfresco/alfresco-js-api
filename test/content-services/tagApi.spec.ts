@@ -2,17 +2,17 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { TagsApi } from '../../src/api/content-rest-api';
-import { AuthResponseMock, TagMock } from '../../test/mockObjects';
+import { EcmAuthMock, TagMock } from '../../test/mockObjects';
 
 describe('Tags', () => {
-    let authResponseMock: AuthResponseMock;
+    let authResponseMock: EcmAuthMock;
     let tagMock: TagMock;
     let tagsApi: TagsApi;
 
     beforeEach((done) => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         tagMock = new TagMock();
 
         authResponseMock.get201Response();

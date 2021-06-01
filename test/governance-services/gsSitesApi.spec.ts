@@ -1,17 +1,17 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { GsSitesApi } from '../../src/api/gs-core-rest-api';
-import { AuthResponseMock, GsSitesApiMock } from '../../test/mockObjects';
+import { EcmAuthMock, GsSitesApiMock } from '../../test/mockObjects';
 
 describe('Governance API test', () => {
-    let authResponseMock: AuthResponseMock;
+    let authResponseMock: EcmAuthMock;
     let gsSitesApiMock: GsSitesApiMock;
     let gsSitesApi: GsSitesApi;
 
     beforeEach(() => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         authResponseMock.get201Response();
 
         gsSitesApiMock = new GsSitesApiMock(hostEcm);

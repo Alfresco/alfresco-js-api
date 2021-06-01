@@ -1,17 +1,17 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { SearchApi } from '../src/api/search-rest-api';
-import { AuthResponseMock, SearchMock } from '../test/mockObjects';
+import { EcmAuthMock, SearchMock } from '../test/mockObjects';
 
 describe('Search', () => {
-    let authResponseMock: AuthResponseMock;
+    let authResponseMock: EcmAuthMock;
     let searchMock: SearchMock;
     let searchApi: SearchApi;
 
     beforeEach((done) => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         authResponseMock.get201Response();
 
         searchMock = new SearchMock();

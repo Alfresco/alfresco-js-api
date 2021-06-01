@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
-import { AuthResponseMock as AuthEcmMock, BpmAuthMock, NodeMock, ProfileMock } from '../test/mockObjects';
+import { EcmAuthMock, BpmAuthMock, NodeMock, ProfileMock } from '../test/mockObjects';
 
 const NOOP = () => { /* empty */ };
 const ECM_HOST = 'http://127.0.0.1:8080';
@@ -13,11 +13,11 @@ interface ErrorResponse {
 describe('Auth', () => {
 
     describe('ECM Provider config', () => {
-        let authResponseEcmMock: AuthEcmMock;
+        let authResponseEcmMock: EcmAuthMock;
         let nodeMock: NodeMock;
 
         beforeEach(() => {
-            authResponseEcmMock = new AuthEcmMock(ECM_HOST);
+            authResponseEcmMock = new EcmAuthMock(ECM_HOST);
             nodeMock = new NodeMock(ECM_HOST);
         });
 
@@ -363,12 +363,12 @@ describe('Auth', () => {
     });
 
     describe('BPM and ECM Provider config', () => {
-        let authResponseEcmMock: AuthEcmMock;
+        let authResponseEcmMock: EcmAuthMock;
         let authResponseBpmMock: BpmAuthMock;
         let alfrescoJsApi: AlfrescoApi;
 
         beforeEach(() => {
-            authResponseEcmMock = new AuthEcmMock(ECM_HOST);
+            authResponseEcmMock = new EcmAuthMock(ECM_HOST);
             authResponseBpmMock = new BpmAuthMock(BPM_HOST);
 
             authResponseEcmMock.cleanAll();

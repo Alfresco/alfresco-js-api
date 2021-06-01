@@ -2,21 +2,21 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { VersionsApi } from '../../src/api/content-rest-api';
-import { AuthResponseMock, VersionMock } from '../../test/mockObjects';
+import { EcmAuthMock, VersionMock } from '../../test/mockObjects';
 
 describe('Versions', () => {
     const nodeId = '74cd8a96-8a21-47e5-9b3b-a1b3e296787d';
     const versionId = '1.0';
     const renditionId = 'pdf';
 
-    let authResponseMock: AuthResponseMock;
+    let authResponseMock: EcmAuthMock;
     let versionMock: VersionMock;
     let versionsApi: VersionsApi;
 
     beforeEach(async () => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         versionMock = new VersionMock();
         authResponseMock.get201Response();
 

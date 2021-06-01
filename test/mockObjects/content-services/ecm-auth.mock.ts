@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { BaseMock } from '../base.mock';
 
-export class AuthResponseMock extends BaseMock {
+export class EcmAuthMock extends BaseMock {
     username: string;
     password: string;
 
