@@ -4,114 +4,109 @@ import { BaseMock } from '../base.mock';
 const fakeVariable1 = {
     name: 'variable1',
     value: 'Value 123',
-    scope: 'global'
+    scope: 'global',
 };
 
 const fakeVariable2 = {
     name: 'variable2',
     value: 'Value 456',
-    scope: 'local'
+    scope: 'local',
 };
 
-const fakeVariablesList = [
-    fakeVariable1,
-    fakeVariable2
-];
+const fakeVariablesList = [fakeVariable1, fakeVariable2];
 
 export class ProcessInstanceVariablesMock extends BaseMock {
-
     constructor(host?: string) {
         super(host);
     }
 
-    addListProcessInstanceVariables200Response(processInstanceId: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addListProcessInstanceVariables200Response(processInstanceId: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .get('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(200, fakeVariablesList);
     }
 
-    addListProcessInstanceVariables500Response(processInstanceId: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addListProcessInstanceVariables500Response(processInstanceId: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .get('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(500, {
                 messageKey: 'UNKNOWN',
-                message: 'Unknown error'
+                message: 'Unknown error',
             });
     }
 
-    addPutProcessInstanceVariables200Response(processInstanceId: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addPutProcessInstanceVariables200Response(processInstanceId: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .put('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(200, fakeVariablesList);
     }
 
-    addPutProcessInstanceVariables500Response(processInstanceId: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addPutProcessInstanceVariables500Response(processInstanceId: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .put('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(500, {
                 messageKey: 'UNKNOWN',
-                message: 'Unknown error'
+                message: 'Unknown error',
             });
     }
 
-    addPostProcessInstanceVariables200Response(processInstanceId: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addPostProcessInstanceVariables200Response(processInstanceId: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .post('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(200, fakeVariablesList);
     }
 
-    addPostProcessInstanceVariables500Response(processInstanceId: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addPostProcessInstanceVariables500Response(processInstanceId: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .post('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(500, {
                 messageKey: 'UNKNOWN',
-                message: 'Unknown error'
+                message: 'Unknown error',
             });
     }
 
-    addGetProcessInstanceVariable200Response(processInstanceId: string, variableName: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addGetProcessInstanceVariable200Response(processInstanceId: string, variableName: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .get('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(200, fakeVariable1);
     }
 
-    addGetProcessInstanceVariable500Response(processInstanceId: string, variableName: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addGetProcessInstanceVariable500Response(processInstanceId: string, variableName: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .get('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(500, {
                 messageKey: 'UNKNOWN',
-                message: 'Unknown error'
+                message: 'Unknown error',
             });
     }
 
-    addUpdateProcessInstanceVariable200Response(processInstanceId: string, variableName: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addUpdateProcessInstanceVariable200Response(processInstanceId: string, variableName: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .put('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(200, fakeVariable1);
     }
 
-    addUpdateProcessInstanceVariable500Response(processInstanceId: string, variableName: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addUpdateProcessInstanceVariable500Response(processInstanceId: string, variableName: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .put('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(500, {
                 messageKey: 'UNKNOWN',
-                message: 'Unknown error'
+                message: 'Unknown error',
             });
     }
 
-    addDeleteProcessInstanceVariable200Response(processInstanceId: string, variableName: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addDeleteProcessInstanceVariable200Response(processInstanceId: string, variableName: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .delete('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(200);
     }
 
-    addDeleteProcessInstanceVariable500Response(processInstanceId: string, variableName: string) {
-        nock(this.host, {'encodedQueryParams': true})
+    addDeleteProcessInstanceVariable500Response(processInstanceId: string, variableName: string): void {
+        nock(this.host, { encodedQueryParams: true })
             .delete('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(500, {
                 messageKey: 'UNKNOWN',
-                message: 'Unknown error'
+                message: 'Unknown error',
             });
     }
-
 }

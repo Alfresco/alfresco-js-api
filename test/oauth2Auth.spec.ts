@@ -100,9 +100,6 @@ describe('Oauth2  test', () => {
                     expect(data.access_token).to.be.equal('test-token');
                     oauth2Auth.logOut();
                     done();
-                },
-                (error: any) => {
-                    console.log('error' + error);
                 }
             );
         });
@@ -134,7 +131,7 @@ describe('Oauth2  test', () => {
                 expect(refreshSpy).to.have.been.called.min(2);
                 oauth2Auth.logOut();
                 done();
-            },         600);
+            }, 600);
 
             oauth2Auth.login('admin', 'admin');
         });

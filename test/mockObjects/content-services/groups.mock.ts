@@ -2,141 +2,139 @@ import nock from 'nock';
 import { BaseMock } from '../base.mock';
 
 export class GroupsMock extends BaseMock {
-
     constructor(host?: string) {
         super(host);
     }
 
-    get200GetGroups() {
-        nock(this.host, {'encodedQueryParams': true})
-        .get('/alfresco/api/-default-/public/alfresco/versions/1/groups')
+    get200GetGroups(): void {
+        nock(this.host, { encodedQueryParams: true })
+            .get('/alfresco/api/-default-/public/alfresco/versions/1/groups')
             .reply(200, {
-                'list': {
-                    'pagination': {
-                        'count': 2,
-                        'hasMoreItems': true,
-                        'totalItems': 279,
-                        'skipCount': 0,
-                        'maxItems': 2
+                list: {
+                    pagination: {
+                        count: 2,
+                        hasMoreItems: true,
+                        totalItems: 279,
+                        skipCount: 0,
+                        maxItems: 2,
                     },
-                    'entries': [
+                    entries: [
                         {
-                            'entry': {
-                                'isRoot': true,
-                                'displayName': 'alfalfb',
-                                'id': 'GROUP_alfalfa'
-                            }
+                            entry: {
+                                isRoot: true,
+                                displayName: 'alfalfb',
+                                id: 'GROUP_alfalfa',
+                            },
                         },
                         {
-                            'entry': {
-                                'isRoot': true,
-                                'displayName': 'Call CenterAA',
-                                'id': 'GROUP_CallCenterAA'
-                            }
-                        }
-                    ]
-                }
+                            entry: {
+                                isRoot: true,
+                                displayName: 'Call CenterAA',
+                                id: 'GROUP_CallCenterAA',
+                            },
+                        },
+                    ],
+                },
             });
     }
 
-    getDeleteGroupSuccessfulResponse(groupName: string){
-        nock(this.host, {'encodedQueryParams': true})
-            .delete('/alfresco/api/-default-/public/alfresco/versions/1/groups/'+groupName)
-            .query({"cascade":"false"})
+    getDeleteGroupSuccessfulResponse(groupName: string): void {
+        nock(this.host, { encodedQueryParams: true })
+            .delete('/alfresco/api/-default-/public/alfresco/versions/1/groups/' + groupName)
+            .query({ cascade: 'false' })
             .reply(200);
     }
 
-    getDeleteMemberForGroupSuccessfulResponse(groupName: string, memberName: string){
-        nock(this.host, {'encodedQueryParams': true})
-            .delete('/alfresco/api/-default-/public/alfresco/versions/1/groups/'+groupName+'/members/'+ memberName)
+    getDeleteMemberForGroupSuccessfulResponse(groupName: string, memberName: string): void {
+        nock(this.host, { encodedQueryParams: true })
+            .delete('/alfresco/api/-default-/public/alfresco/versions/1/groups/' + groupName + '/members/' + memberName)
             .reply(200);
     }
 
-    get200CreateGroupResponse() {
-        nock(this.host, {'encodedQueryParams': true})
+    get200CreateGroupResponse(): void {
+        nock(this.host, { encodedQueryParams: true })
             .post('/alfresco/api/-default-/public/alfresco/versions/1/groups')
             .reply(200, {
-                'entry': {
-                  'isRoot': true,
-                  'displayName': 'SAMPLE',
-                  'id': 'GROUP_TEST'
-                }
-              });
-
-    }
-
-    get200GetSingleGroup() {
-        nock(this.host, {'encodedQueryParams': true})
-            .get('/alfresco/api/-default-/public/alfresco/versions/1/groups/GROUP_TEST')
-            .reply(200, {
-                'entry': {
-                  'isRoot': true,
-                  'displayName': 'SAMPLE',
-                  'id': 'GROUP_TEST'
-                }
-              });
-    }
-
-    get200UpdateGroupResponse() {
-        nock(this.host, {'encodedQueryParams': true})
-            .put('/alfresco/api/-default-/public/alfresco/versions/1/groups/GROUP_TEST')
-            .reply(200, {
-                'entry': {
-                  'isRoot': true,
-                  'displayName': 'CHANGED',
-                  'id': 'GROUP_TEST'
-                }
-              });
-    }
-
-    get200GetGroupMemberships() {
-        nock(this.host, { 'encodedQueryParams': true })
-            .get('/alfresco/api/-default-/public/alfresco/versions/1/groups/GROUP_TEST/members')
-            .reply(200, {
-                'list': {
-                    'pagination': {
-                        'count': 1,
-                        'hasMoreItems': false,
-                        'totalItems': 1,
-                        'skipCount': 0,
-                        'maxItems': 100
-                    },
-                    'entries': [
-                        {
-                            'entry': {
-                                'displayName': 'SAMPLE',
-                                'id': 'GROUP_SUB_TEST',
-                                'memberType': 'GROUP'
-                            }
-                        }
-                    ]
-                }
+                entry: {
+                    isRoot: true,
+                    displayName: 'SAMPLE',
+                    id: 'GROUP_TEST',
+                },
             });
     }
 
-    get200AddGroupMembershipResponse() {
-        nock(this.host, {'encodedQueryParams': true})
-            .post('/alfresco/api/-default-/public/alfresco/versions/1/groups/GROUP_TEST/members')
+    get200GetSingleGroup(): void {
+        nock(this.host, { encodedQueryParams: true })
+            .get('/alfresco/api/-default-/public/alfresco/versions/1/groups/GROUP_TEST')
             .reply(200, {
-                'entry': {
-                  'displayName': 'SAMPLE',
-                  'id': 'GROUP_SUB_TEST',
-                  'memberType': 'GROUP'
-                }
-              });
+                entry: {
+                    isRoot: true,
+                    displayName: 'SAMPLE',
+                    id: 'GROUP_TEST',
+                },
+            });
     }
 
-    get401Response() {
-        nock(this.host, {'encodedQueryParams': true})
+    get200UpdateGroupResponse(): void {
+        nock(this.host, { encodedQueryParams: true })
+            .put('/alfresco/api/-default-/public/alfresco/versions/1/groups/GROUP_TEST')
+            .reply(200, {
+                entry: {
+                    isRoot: true,
+                    displayName: 'CHANGED',
+                    id: 'GROUP_TEST',
+                },
+            });
+    }
+
+    get200GetGroupMemberships(): void {
+        nock(this.host, { encodedQueryParams: true })
+            .get('/alfresco/api/-default-/public/alfresco/versions/1/groups/GROUP_TEST/members')
+            .reply(200, {
+                list: {
+                    pagination: {
+                        count: 1,
+                        hasMoreItems: false,
+                        totalItems: 1,
+                        skipCount: 0,
+                        maxItems: 100,
+                    },
+                    entries: [
+                        {
+                            entry: {
+                                displayName: 'SAMPLE',
+                                id: 'GROUP_SUB_TEST',
+                                memberType: 'GROUP',
+                            },
+                        },
+                    ],
+                },
+            });
+    }
+
+    get200AddGroupMembershipResponse(): void {
+        nock(this.host, { encodedQueryParams: true })
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/groups/GROUP_TEST/members')
+            .reply(200, {
+                entry: {
+                    displayName: 'SAMPLE',
+                    id: 'GROUP_SUB_TEST',
+                    memberType: 'GROUP',
+                },
+            });
+    }
+
+    get401Response(): void {
+        nock(this.host, { encodedQueryParams: true })
             .get('/alfresco/api/-default-/public/alfresco/versions/1/groups')
             .reply(401, {
-                'error': {
-                    'errorKey': 'framework.exception.ApiDefault',
-                    'statusCode': 401,
-                    'briefSummary': '05210059 Authentication failed for Web Script org/alfresco/api/ResourceWebScript.get',
-                    'stackTrace': 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
-                    'descriptionURL': 'https://api-explorer.alfresco.com'
-                }
+                error: {
+                    errorKey: 'framework.exception.ApiDefault',
+                    statusCode: 401,
+                    briefSummary: '05210059 Authentication failed for Web Script org/alfresco/api/ResourceWebScript.get',
+                    stackTrace: 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
+                    descriptionURL: 'https://api-explorer.alfresco.com',
+                },
             });
     }
 }
