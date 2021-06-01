@@ -9,3 +9,4 @@ export * from './content-services/find-nodes.mock';
 export * from './content-services/rendition.mock';
 export * from './content-services/search.mock';
 export * from './content-services/tag.mock';
+export * from './content-services/upload.mock';
