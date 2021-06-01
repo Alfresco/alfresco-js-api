@@ -349,8 +349,7 @@ describe('Oauth2  test', () => {
             alfrescoApi.login('admin', 'admin');
         });
 
-        it('should extend content session after oauth token refresh', function (done)  {
-            this.timeout(3000);
+        it('should extend content session after oauth token refresh', (done) => {
 
             oauth2Mock.get200Response();
             authResponseMock.get200ValidTicket();
@@ -385,7 +384,6 @@ describe('Oauth2  test', () => {
             });
 
             alfrescoApi.login('admin', 'admin');
-            this.timeout(3000);
             alfrescoApi.refreshToken();
         });
 
