@@ -1,20 +1,16 @@
-/*global describe, it, beforeEach */
-
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { CustomModelApi } from '../../src/api/content-custom-api';
-
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-const CustomModelMock = require('../../test/mockObjects/mockAlfrescoApi').CustomModel;
+import { EcmAuthMock, CustomModelMock } from '../../test/mockObjects';
 
 describe('Custom Model Api', () => {
-    let authResponseMock: any;
-    let customModelMock: any;
+    let authResponseMock: EcmAuthMock;
+    let customModelMock: CustomModelMock;
     let customModelApi: CustomModelApi;
 
     beforeEach((done) => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         customModelMock = new CustomModelMock(hostEcm);
 
         authResponseMock.get201Response();

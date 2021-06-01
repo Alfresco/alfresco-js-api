@@ -1,16 +1,14 @@
-import { AlfrescoApi } from '../src/alfrescoApi';
 
-const expect = require('chai').expect;
-const AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-const AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-const Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
+import { expect } from 'chai';
+import { AlfrescoApi } from '../src/alfrescoApi';
+import { EcmAuthMock, BpmAuthMock, OAuthMock } from '../test/mockObjects';
 
 describe('Basic configuration test', () => {
 
     describe('config parameter ', () => {
 
         it('Should basePath have a default value', () => {
-            let config = {};
+            const config = {};
 
             const alfrescoJsApi = new AlfrescoApi(config);
 
@@ -19,7 +17,7 @@ describe('Basic configuration test', () => {
         });
 
         it('should be reflected in the client', () => {
-            let config = {
+            const config = {
                 hostEcm: 'http://testServer.com:1616',
                 contextRoot: 'strangeContextRoot'
             };
@@ -183,7 +181,7 @@ describe('Basic configuration test', () => {
         it('Should logged-in be emitted when log in ECM', (done) => {
             const hostEcm = 'http://127.0.0.1:8080';
 
-            const authEcmMock = new AuthEcmMock(hostEcm);
+            const authEcmMock = new EcmAuthMock(hostEcm);
 
             const alfrescoJsApi = new AlfrescoApi({
                 hostEcm,
@@ -201,7 +199,7 @@ describe('Basic configuration test', () => {
 
         it('Should logged-in be emitted when log in BPM', (done) => {
             const hostBpm = 'http://127.0.0.1:9999';
-            const authBpmMock = new AuthBpmMock(hostBpm);
+            const authBpmMock = new BpmAuthMock(hostBpm);
 
             authBpmMock.get200Response();
 
@@ -219,7 +217,7 @@ describe('Basic configuration test', () => {
         });
 
         it('Should logged-in be emitted when log in OAUTH', (done) => {
-            const oauth2Mock = new Oauth2Mock('http://myOauthUrl:30081');
+            const oauth2Mock = new OAuthMock('http://myOauthUrl:30081');
 
             oauth2Mock.get200Response();
 
@@ -244,7 +242,7 @@ describe('Basic configuration test', () => {
 
         it('Should logged-in be emitted when the ticket is in the store', (done) => {
             const hostBpm = 'http://127.0.0.1:9999';
-            const authBpmMock = new AuthBpmMock(hostBpm);
+            const authBpmMock = new BpmAuthMock(hostBpm);
 
             authBpmMock.get200Response();
 

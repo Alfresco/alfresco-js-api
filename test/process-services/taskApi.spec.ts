@@ -1,13 +1,9 @@
-/*global describe, it, beforeEach */
-import { AlfrescoApiCompatibility as AlfrescoApi, SaveFormRepresentation, TaskFilterRequestRepresentation, TaskRepresentation, CompleteFormRepresentation, TaskQueryRequestRepresentation } from  '../../index';
-
-let expect = require('chai').expect;
-let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-let TasksMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Tasks;
-
+import { expect } from 'chai';
+import { AlfrescoApiCompatibility as AlfrescoApi, TaskFilterRequestRepresentation, TaskRepresentation, TaskQueryRequestRepresentation } from  '../../index';
+import { BpmAuthMock, TasksMock } from '../mockObjects';
 describe('Activiti Task Api', () => {
-    let authResponseBpmMock: any;
-    let tasksMock: any;
+    let authResponseBpmMock: BpmAuthMock;
+    let tasksMock: TasksMock;
     let alfrescoJsApi: AlfrescoApi;
 
     const NOOP = () => {/* empty */};
@@ -15,7 +11,7 @@ describe('Activiti Task Api', () => {
     beforeEach(async () => {
         const BPM_HOST = 'http://127.0.0.1:9999';
 
-        authResponseBpmMock = new AuthBpmMock(BPM_HOST);
+        authResponseBpmMock = new BpmAuthMock(BPM_HOST);
         tasksMock = new TasksMock(BPM_HOST);
 
         authResponseBpmMock.get200Response();
@@ -40,7 +36,7 @@ describe('Activiti Task Api', () => {
     });
 
     it('get Task', async () => {
-        tasksMock.get200ResponseGetTask(10);
+        tasksMock.get200ResponseGetTask('10');
 
         const data = await alfrescoJsApi.activiti.taskApi.getTask('10');
         expect(data.name).equal('Upload Document');
@@ -85,20 +81,6 @@ describe('Activiti Task Api', () => {
         await alfrescoJsApi.activiti.taskApi.completeTask(taskId);
     });
 
-    it.skip('Complete a Task Form', (done) => {
-        const taskId = '2518';
-
-        tasksMock.rec();
-
-        const completeTaskFormRepresentation = new CompleteFormRepresentation();
-
-        alfrescoJsApi.activiti.taskApi.completeTaskForm(taskId, completeTaskFormRepresentation).then(() => {
-            done();
-        });
-
-        tasksMock.play();
-    });
-
     it('Create a Task', async () => {
         const taskName = 'test-name';
 
@@ -108,13 +90,6 @@ describe('Activiti Task Api', () => {
         taskRepresentation.name = taskName;
 
         await alfrescoJsApi.activiti.taskApi.createNewTask(taskRepresentation);
-    });
-
-    it.skip('Save task form', async () => {
-        const taskId = '5006';
-        const saveTaskFormRepresentation = new SaveFormRepresentation();
-
-        await alfrescoJsApi.activiti.taskApi.saveTaskForm(taskId, saveTaskFormRepresentation);
     });
 
     it('Get task form', async () => {

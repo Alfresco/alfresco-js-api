@@ -1,21 +1,17 @@
-/*global describe, it, beforeEach */
-
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { PersonBodyCreate } from '../../src/api/content-rest-api/model/personBodyCreate';
 import { PeopleApi } from '../../src/api/content-rest-api';
-
-const PeopleMock = require('../../test/mockObjects/mockAlfrescoApi').PeopleApi;
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+import { EcmAuthMock, PeopleMock } from '../../test/mockObjects';
 
 describe('PeopleApi', () => {
-    let authResponseMock: any;
-    let peopleMock: any;
+    let authResponseMock: EcmAuthMock;
+    let peopleMock: PeopleMock;
     let peopleApi: PeopleApi;
 
     beforeEach((done) => {
         const hostEcm = 'http://adfdev.lab.alfresco.me';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         peopleMock = new PeopleMock(hostEcm);
         authResponseMock.get201Response();
 

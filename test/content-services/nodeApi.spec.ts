@@ -1,25 +1,20 @@
-/*global describe, it, beforeEach */
-
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { NodesApi } from '../../src/api/content-rest-api';
+import { EcmAuthMock, NodeMock } from '../../test/mockObjects';
 
 const chai = require('chai');
 const expect = chai.expect;
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-const NodeMock = require('../../test/mockObjects/mockAlfrescoApi').Node;
-const fs = require('fs');
-
 chai.use(require('chai-datetime'));
 
 describe('Node', () => {
-    let authResponseMock: any;
-    let nodeMock: any;
+    let authResponseMock: EcmAuthMock;
+    let nodeMock: NodeMock;
     let nodesApi: NodesApi;
 
     beforeEach((done) => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         nodeMock = new NodeMock(hostEcm);
 
         authResponseMock.get201Response();
@@ -119,29 +114,6 @@ describe('Node', () => {
                 () => {},
                 () => {
                     done();
-                }
-            );
-        });
-    });
-
-    describe('Content', () => {
-        it.skip('getFileContent', (done) => {
-
-            const nodeId = '80a94ac8-3ece-47ad-864e-5d939424c47c';
-
-            nodesApi.getNodeContent(nodeId).then(
-                (data: any) => {
-                    fs.writeFile('./test/grass.jpg', data, (error: any) => {
-                        if (error) {
-                            console.log(error);
-                            done();
-                        }
-                        console.log('The file was saved!');
-                        done();
-                    });
-                },
-                (error: any) => {
-                    console.error(error);
                 }
             );
         });

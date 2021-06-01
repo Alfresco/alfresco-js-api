@@ -1,22 +1,18 @@
-/*global describe, it, beforeEach */
-
+import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { CommentsApi } from '../../src/api/content-rest-api';
-
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-const CommentMock = require('../../test/mockObjects/mockAlfrescoApi').Comment;
-const expect = require('chai').expect;
+import { CommentMock, EcmAuthMock } from '../../test/mockObjects';
 
 describe('Comments', () => {
 
-    let authResponseMock: any;
-    let commentMock: any;
+    let authResponseMock: EcmAuthMock;
+    let commentMock: CommentMock;
     let commentsApi: CommentsApi;
 
     beforeEach((done) => {
         const hostEcm = 'http://127.0.0.1:8080';
 
-        authResponseMock = new AuthResponseMock(hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
         commentMock = new CommentMock();
 
         authResponseMock.get201Response();

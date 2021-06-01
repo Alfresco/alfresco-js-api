@@ -1,71 +1,72 @@
-/*global describe, it, beforeEach */
-
+import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
+import { EcmAuthMock, UploadMock } from '../test/mockObjects';
+import fs from 'fs';
 
-let expect = require('chai').expect;
-let AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
-let UploadMock = require('../test/mockObjects/mockAlfrescoApi').Upload;
-let fs = require('fs');
+describe('Upload', () => {
+    let authResponseMock: EcmAuthMock;
+    let uploadMock: UploadMock;
+    let alfrescoJsApi: AlfrescoApi;
 
-describe('Upload', function () {
-    beforeEach(function (done) {
-        this.hostEcm = 'http://127.0.0.1:8080';
+    beforeEach(async () => {
+        const hostEcm = 'http://127.0.0.1:8080';
 
-        this.authResponseMock = new AuthResponseMock(this.hostEcm);
-        this.uploadMock = new UploadMock(this.hostEcm);
+        authResponseMock = new EcmAuthMock(hostEcm);
+        uploadMock = new UploadMock(hostEcm);
 
-        this.authResponseMock.get201Response();
-        this.alfrescoJsApi = new AlfrescoApi({
-            hostEcm: this.hostEcm
+        authResponseMock.get201Response();
+        alfrescoJsApi = new AlfrescoApi({
+            hostEcm: hostEcm
         });
 
-        this.alfrescoJsApi.login('admin', 'admin').then(() => {
-            done();
-        });
+        await alfrescoJsApi.login('admin', 'admin');
     });
 
-    describe('Upload File', function () {
-        it('upload file should return 200 if is all ok', function (done) {
-            this.uploadMock.get201CreationFile();
+    describe('Upload File', () => {
+        it('upload file should return 200 if is all ok', (done) => {
+            uploadMock.get201CreationFile();
 
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            this.alfrescoJsApi.upload.uploadFile(file).then(function (data: any) {
+            alfrescoJsApi.upload.uploadFile(file, null, null, null).then((data: any) => {
                 expect(data.entry.isFile).to.be.equal(true);
                 expect(data.entry.name).to.be.equal('testFile.txt');
                 done();
             });
         });
 
-        it('upload file should get 409 if new name clashes with an existing file in the current parent folder', function (done) {
-            this.uploadMock.get409CreationFileNewNameClashes();
+        it('upload file should get 409 if new name clashes with an existing file in the current parent folder', (done) => {
+            uploadMock.get409CreationFileNewNameClashes();
 
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            this.alfrescoJsApi.upload.uploadFile(file).then(function () {
-            },                                              function (error: any) {
-                expect(error.status).to.be.equal(409);
-                done();
-            });
+            alfrescoJsApi.upload.uploadFile(file, null, null, null).then(
+                () => {},
+                (error: any) => {
+                    expect(error.status).to.be.equal(409);
+                    done();
+                }
+            );
         });
 
-        it('upload file should get 200 and rename if the new name clashes with an existing file in the current parent folder and autorename is true', function (done) {
-            this.uploadMock.get201CreationFileAutoRename();
+        it('upload file should get 200 and rename if the new name clashes with an existing file in the current parent folder and autorename is true', (done) => {
+            uploadMock.get201CreationFileAutoRename();
 
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            this.alfrescoJsApi.upload.uploadFile(file, null, null, null, { autoRename: true })
-                .then(function (data: any) {
+            alfrescoJsApi.upload.uploadFile(file, null, null, null, { autoRename: true })
+                .then((data: any) => {
                     expect(data.entry.isFile).to.be.equal(true);
                     expect(data.entry.name).to.be.equal('testFile-2.txt');
                     done();
                 });
         });
 
-        it('Abort should stop the  file file upload', function (done) {
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+        it('Abort should stop the  file file upload', (done) => {
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            let promise = this.alfrescoJsApi.upload.uploadFile(file, null, null, null, { autoRename: true }).once('abort', () => {
+            const promise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null, { autoRename: true });
+            promise.once('abort', () => {
                 done();
             });
 
@@ -73,55 +74,51 @@ describe('Upload', function () {
         });
     });
 
-    describe('Events', function () {
-        it('Upload should fire done event at the end of an upload', function (done) {
-            this.uploadMock.get201CreationFile();
+    describe('Events', () => {
+        it('Upload should fire done event at the end of an upload', (done) => {
+            uploadMock.get201CreationFile();
 
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            let uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
+            const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
 
-            uploadPromise.catch(() => {
-            });
+            uploadPromise.catch(() => {});
             uploadPromise.on('success', () => {
                 done();
             });
         });
 
-        it('Upload should fire error event if something go wrong', function (done) {
-            this.uploadMock.get409CreationFileNewNameClashes();
+        it('Upload should fire error event if something go wrong', (done) => {
+            uploadMock.get409CreationFileNewNameClashes();
 
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            let uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
-
-            uploadPromise.catch(() => {
-            });
+            const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+            uploadPromise.catch(() => {});
             uploadPromise.on('error', () => {
                 done();
             });
         });
 
-        it('Upload should fire unauthorized event if get 401', function (done) {
-            this.uploadMock.get401Response();
+        it('Upload should fire unauthorized event if get 401', (done) => {
+            uploadMock.get401Response();
 
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            let uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
+            const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
 
-            uploadPromise.catch(() => {
-            });
+            uploadPromise.catch(() => {});
             uploadPromise.on('unauthorized', () => {
                 done();
             });
         });
 
-        it('Upload should fire progress event during the upload', function (done) {
-            this.uploadMock.get201CreationFile();
+        it('Upload should fire progress event during the upload', (done) => {
+            uploadMock.get201CreationFile();
 
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            let uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
+            const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
 
             uploadPromise.catch((error: any) => {
                 console.log('error' + error);
@@ -133,27 +130,28 @@ describe('Upload', function () {
             });
         });
 
-        it('Multiple Upload should fire progress events on the right promise during the upload', function (done) {
-
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
-            let fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
+        it('Multiple Upload should fire progress events on the right promise during the upload', (done) => {
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
 
             let progressOneOk = false;
             let progressTwoOk = false;
 
-            let promiseProgressOne = new Promise((resolve) => {
-                this.uploadMock.get201CreationFile();
+            const promiseProgressOne = new Promise((resolve) => {
+                uploadMock.get201CreationFile();
 
-                this.alfrescoJsApi.upload.uploadFile(file).once('success', () => {
+                const promise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+                promise.once('success', () => {
                     progressOneOk = true;
                     resolve('Resolving');
                 });
             });
 
-            let promiseProgressTwo = new Promise((resolve) => {
-                this.uploadMock.get201CreationFile();
+            const promiseProgressTwo = new Promise((resolve) => {
+                uploadMock.get201CreationFile();
 
-                this.alfrescoJsApi.upload.uploadFile(fileTwo).once('success', () => {
+                const promise: any = alfrescoJsApi.upload.uploadFile(fileTwo, null, null, null);
+                promise.once('success', () => {
                     progressTwoOk = true;
                     resolve('Resolving');
                 });
@@ -166,34 +164,29 @@ describe('Upload', function () {
             });
         });
 
-        it('Multiple Upload should fire error events on the right promise during the upload', function (done) {
-
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
-            let fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
+        it('Multiple Upload should fire error events on the right promise during the upload', (done) => {
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
 
             let errorOneOk = false;
             let errorTwoOk = false;
 
-            let promiseErrorOne = new Promise((resolve) => {
-                this.uploadMock.get201CreationFile();
+            const promiseErrorOne = new Promise((resolve) => {
+                uploadMock.get201CreationFile();
 
-                let uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
-
-                uploadPromise.catch(() => {
-                });
+                const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+                uploadPromise.catch(() => {});
                 uploadPromise.once('success', () => {
                     errorOneOk = true;
                     resolve('Resolving');
                 });
             });
 
-            let promiseErrorTwo = new Promise((resolve) => {
-                this.uploadMock.get201CreationFile();
+            const promiseErrorTwo = new Promise((resolve) => {
+                uploadMock.get201CreationFile();
 
-                let uploadPromise = this.alfrescoJsApi.upload.uploadFile(fileTwo);
-
-                uploadPromise.catch(() => {
-                });
+                const uploadPromise: any = alfrescoJsApi.upload.uploadFile(fileTwo, null, null, null);
+                uploadPromise.catch(() => {});
                 uploadPromise.once('success', () => {
                     errorTwoOk = true;
                     resolve('Resolving');
@@ -207,34 +200,29 @@ describe('Upload', function () {
             });
         });
 
-        it('Multiple Upload should fire success events on the right promise during the upload', function (done) {
-
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
-            let fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
+        it('Multiple Upload should fire success events on the right promise during the upload', (done) => {
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
 
             let successOneOk = false;
             let successTwoOk = false;
 
-            let promiseSuccessOne = new Promise((resolve) => {
-                this.uploadMock.get201CreationFile();
+            const promiseSuccessOne = new Promise((resolve) => {
+                uploadMock.get201CreationFile();
 
-                let uploadPromiseOne = this.alfrescoJsApi.upload.uploadFile(file);
-
-                uploadPromiseOne.catch(() => {
-                });
+                const uploadPromiseOne: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+                uploadPromiseOne.catch(() => {});
                 uploadPromiseOne.once('success', () => {
                     successOneOk = true;
                     resolve('Resolving');
                 });
             });
 
-            let promiseSuccessTwo = new Promise((resolve) => {
-                this.uploadMock.get201CreationFile();
+            const promiseSuccessTwo = new Promise((resolve) => {
+                uploadMock.get201CreationFile();
 
-                let uploadPromiseTwo = this.alfrescoJsApi.upload.uploadFile(fileTwo);
-
-                uploadPromiseTwo.catch(() => {
-                });
+                const uploadPromiseTwo: any = alfrescoJsApi.upload.uploadFile(fileTwo, null, null, null);
+                uploadPromiseTwo.catch(() => {});
                 uploadPromiseTwo.once('success', () => {
                     successTwoOk = true;
                     resolve('Resolving');
@@ -248,23 +236,22 @@ describe('Upload', function () {
             });
         });
 
-        it('Multiple Upload should resolve the correct promise', function (done) {
-
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
-            let fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
+        it('Multiple Upload should resolve the correct promise', (done) => {
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
 
             let resolveOneOk = false;
             let resolveTwoOk = false;
 
-            this.uploadMock.get201CreationFile();
+            uploadMock.get201CreationFile();
 
-            let p1 = this.alfrescoJsApi.upload.uploadFile(file).then(() => {
+            const p1 = alfrescoJsApi.upload.uploadFile(file, null, null, null).then(() => {
                 resolveOneOk = true;
             });
 
-            this.uploadMock.get201CreationFile();
+            uploadMock.get201CreationFile();
 
-            let p2 = this.alfrescoJsApi.upload.uploadFile(fileTwo).then(() => {
+            const p2 = alfrescoJsApi.upload.uploadFile(fileTwo, null, null, null).then(() => {
                 resolveTwoOk = true;
             });
 
@@ -275,23 +262,22 @@ describe('Upload', function () {
             });
         });
 
-        it('Multiple Upload should reject the correct promise', function (done) {
-
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
-            let fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
+        it('Multiple Upload should reject the correct promise', (done) => {
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
+            const fileTwo = fs.createReadStream('./test/mockObjects/assets/testFile2.txt');
 
             let rejectOneOk = false;
             let rejectTwoOk = false;
 
-            this.uploadMock.get409CreationFileNewNameClashes();
+            uploadMock.get409CreationFileNewNameClashes();
 
-            let p1 = this.alfrescoJsApi.upload.uploadFile(file).then(null, () => {
+            const p1 = alfrescoJsApi.upload.uploadFile(file, null, null, null).then(null, () => {
                 rejectOneOk = true;
             });
 
-            this.uploadMock.get409CreationFileNewNameClashes();
+            uploadMock.get409CreationFileNewNameClashes();
 
-            let p2 = this.alfrescoJsApi.upload.uploadFile(fileTwo).then(null, () => {
+            const p2 = alfrescoJsApi.upload.uploadFile(fileTwo, null, null, null).then(null, () => {
                 rejectTwoOk = true;
             });
 
@@ -302,19 +288,16 @@ describe('Upload', function () {
             });
         });
 
-        it('Is possible use chain events', function (done) {
+        it('Is possible use chain events', (done) => {
+            const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            let file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
-
-            this.uploadMock.get401Response();
+            uploadMock.get401Response();
 
             let promiseProgressOne = {};
             let promiseProgressTwo = {};
 
-            let uploadPromise = this.alfrescoJsApi.upload.uploadFile(file);
-
-            uploadPromise.catch(() => {
-            });
+            const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+            uploadPromise.catch(() => {});
 
             uploadPromise.once('error', () => {
                 promiseProgressOne = new Promise((resolve) => {

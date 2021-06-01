@@ -1,14 +1,13 @@
+import { expect } from 'chai';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { ContentAuth } from '../src/authentication/contentAuth';
-
-const expect = require('chai').expect;
-const AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+import { EcmAuthMock as AuthEcmMock } from '../test/mockObjects';
 
 describe('Ecm Auth test', () => {
     const hostEcm = 'http://127.0.0.1:8080';
 
     let alfrescoJsApi: AlfrescoApi;
-    let authEcmMock: any;
+    let authEcmMock: AuthEcmMock;
     let contentAuth: ContentAuth;
 
     beforeEach(() => {
@@ -54,7 +53,7 @@ describe('Ecm Auth test', () => {
         );
     });
 
-    describe('With Authentication', function () {
+    describe('With Authentication', () => {
 
         it('login should return the Ticket if all is ok', (done) => {
             authEcmMock.get201Response();
@@ -136,9 +135,7 @@ describe('Ecm Auth test', () => {
                 authEcmMock.get401Response();
 
                 const loginPromise: any = contentAuth.login('wrong', 'name');
-
-                loginPromise.catch(() => {
-                });
+                loginPromise.catch(() => {});
 
                 loginPromise.on('unauthorized', () => {
                     done();
@@ -150,8 +147,7 @@ describe('Ecm Auth test', () => {
 
                 const loginPromise: any = contentAuth.login('wrong', 'name');
 
-                loginPromise.catch(() => {
-                });
+                loginPromise.catch(() => {});
 
                 loginPromise.on('forbidden', () => {
                     done();

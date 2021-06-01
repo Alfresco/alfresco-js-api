@@ -1,20 +1,17 @@
-/*global describe, it, beforeEach */
-
+import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
 import { ProcessInstanceQueryRepresentation } from '../../src/api/activiti-rest-api/model/processInstanceQueryRepresentation';
-let expect = require('chai').expect;
-let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-let ProcessMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Process;
+import { BpmAuthMock, ProcessMock } from '../mockObjects';
 
 describe('Activiti Process Api', () => {
-    let authResponseBpmMock: any;
-    let processMock: any;
+    let authResponseBpmMock: BpmAuthMock;
+    let processMock: ProcessMock;
     let alfrescoJsApi: AlfrescoApi;
 
-    beforeEach((done) => {
+    beforeEach(async () => {
         const BPM_HOST = 'http://127.0.0.1:9999';
 
-        authResponseBpmMock = new AuthBpmMock(BPM_HOST);
+        authResponseBpmMock = new BpmAuthMock(BPM_HOST);
         processMock = new ProcessMock(BPM_HOST);
 
         authResponseBpmMock.get200Response();
@@ -24,9 +21,7 @@ describe('Activiti Process Api', () => {
             provider: 'BPM'
         });
 
-        alfrescoJsApi.login('admin', 'admin').then(() => {
-            done();
-        });
+        await alfrescoJsApi.login('admin', 'admin');
     });
 
     it('get activiti Process list filtered', (done) => {

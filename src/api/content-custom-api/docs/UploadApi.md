@@ -21,9 +21,9 @@ let fileToUpload = fs.createReadStream('./folderA/folderB/newFile.txt');
 
 let uploadApi = new UploadApi(this.alfrescoApi);
 uploadApi.uploadFile(fileToUpload)
-    .then(function () {
+    .then(() => {
         console.log('File Uploaded in the root');
-    }, function (error) {
+    }, (error) => {
         console.log('Error during the upload' + error);
     });
 
