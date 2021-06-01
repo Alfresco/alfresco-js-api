@@ -2,18 +2,16 @@
 
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { NodesApi } from '../../src/api/content-rest-api';
+import { AuthResponseMock, NodeMock } from '../../test/mockObjects';
+import fs from 'fs';
 
 const chai = require('chai');
 const expect = chai.expect;
-import { AuthResponseMock } from '../../test/mockObjects';
-const NodeMock = require('../../test/mockObjects/mockAlfrescoApi').Node;
-const fs = require('fs');
-
 chai.use(require('chai-datetime'));
 
 describe('Node', () => {
     let authResponseMock: AuthResponseMock;
-    let nodeMock: any;
+    let nodeMock: NodeMock;
     let nodesApi: NodesApi;
 
     beforeEach((done) => {

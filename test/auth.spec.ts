@@ -2,9 +2,8 @@
 import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 
-import { AuthResponseMock as AuthEcmMock } from '../test/mockObjects';
+import { AuthResponseMock as AuthEcmMock, NodeMock } from '../test/mockObjects';
 const AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
-const NodeMock = require('../test/mockObjects/mockAlfrescoApi').Node;
 const ProfileMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Profile;
 
 const NOOP = () => { /* empty */ };
@@ -19,7 +18,7 @@ describe('Auth', () => {
 
     describe('ECM Provider config', () => {
         let authResponseEcmMock: any;
-        let nodeMock: any;
+        let nodeMock: NodeMock;
 
         beforeEach(() => {
             authResponseEcmMock = new AuthEcmMock(ECM_HOST);
