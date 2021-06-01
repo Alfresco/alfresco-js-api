@@ -20,6 +20,7 @@ import { LayoutRepresentation } from './layoutRepresentation';
 import { OptionRepresentation } from './optionRepresentation';
 
 export class FormFieldRepresentation {
+    fieldType?: string;
     className?: string;
     col?: number;
     colspan?: number;

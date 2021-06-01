@@ -10,7 +10,7 @@ describe('Activiti Model JsonBpmn Api', () => {
     let modelJsonBpmMock: any;
     let modelJsonBpmnApi: ModelJsonBpmnApi;
 
-    beforeEach((done) => {
+    beforeEach(async () => {
         const hostBpm = 'http://127.0.0.1:9999';
 
         authResponseBpmMock = new AuthBpmMock(hostBpm);
@@ -23,36 +23,20 @@ describe('Activiti Model JsonBpmn Api', () => {
             provider: 'BPM'
         });
 
-        alfrescoJsApi.login('admin', 'admin').then(() => {
-            done();
-        });
-
         modelJsonBpmnApi = new ModelJsonBpmnApi(alfrescoJsApi);
+
+        await alfrescoJsApi.login('admin', 'admin');
     });
 
-    it('get Model JsonBpmn', (done) => {
+    it('get Model JsonBpmn', async () => {
         modelJsonBpmMock.get200EditorDisplayJsonClient();
-        modelJsonBpmnApi.getEditorDisplayJsonClient(1).then(
-            (data) => {
-                expect(data).not.equal(null);
-                done();
-            },
-            (error: any) => {
-                console.log('error' + error);
-            }
-        );
+        const data = await modelJsonBpmnApi.getEditorDisplayJsonClient(1);
+        expect(data).not.equal(null);
     });
 
-    it('get Model JsonBpmn history', (done) => {
+    it('get Model JsonBpmn history', async () => {
         modelJsonBpmMock.get200HistoricEditorDisplayJsonClient();
-        modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(1, 1).then(
-            (data) => {
-                expect(data).not.equal(null);
-                done();
-            },
-            (error: any) => {
-                console.log('error' + error);
-            }
-        );
+        const data = await modelJsonBpmnApi.getHistoricEditorDisplayJsonClient(1, 1);
+        expect(data).not.equal(null);
     });
 });

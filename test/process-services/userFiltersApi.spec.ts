@@ -11,7 +11,7 @@ describe('Activiti User Filter Api', () => {
     let filtersMock: any;
     let userFiltersApi: UserFiltersApi;
 
-    beforeEach((done) => {
+    beforeEach(async () => {
         authResponseBpmMock = new AuthBpmMock(hostBpm);
         filtersMock = new FiltersMock(hostBpm);
 
@@ -22,23 +22,19 @@ describe('Activiti User Filter Api', () => {
             provider: 'BPM'
         });
 
-        alfrescoJsApi.login('admin', 'admin').then(() => {
-            done();
-        });
-
         userFiltersApi = new UserFiltersApi(alfrescoJsApi);
+
+        await alfrescoJsApi.login('admin', 'admin');
     });
 
-    it('get filter user', (done) => {
+    it('get filter user', async () => {
         filtersMock.get200getUserTaskFilters();
 
         const opts = {
             'appId': 1 // Integer | appId
         };
 
-        userFiltersApi.getUserTaskFilters(opts).then((data) => {
-            expect(data.data[0].name).equal('Involved Tasks');
-            done();
-        });
+        const data = await userFiltersApi.getUserTaskFilters(opts);
+        expect(data.data[0].name).equal('Involved Tasks');
     });
 });
