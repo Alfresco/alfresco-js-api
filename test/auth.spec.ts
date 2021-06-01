@@ -1,9 +1,6 @@
-/*global describe, it, beforeEach */
 import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
-
-import { AuthResponseMock as AuthEcmMock, NodeMock } from '../test/mockObjects';
-const AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+import { AuthResponseMock as AuthEcmMock, BpmAuthMock, NodeMock } from '../test/mockObjects';
 const ProfileMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Profile;
 
 const NOOP = () => { /* empty */ };
@@ -231,12 +228,12 @@ describe('Auth', () => {
 
     describe('BPM Provider config', () => {
         let profileMock: any;
-        let authResponseBpmMock: any;
+        let authResponseBpmMock: BpmAuthMock;
         let alfrescoJsApi: AlfrescoApi;
 
         beforeEach(() => {
             profileMock = new ProfileMock(BPM_HOST);
-            authResponseBpmMock = new AuthBpmMock(BPM_HOST);
+            authResponseBpmMock = new BpmAuthMock(BPM_HOST);
 
             alfrescoJsApi = new AlfrescoApi({
                 hostBpm: BPM_HOST,
@@ -266,15 +263,6 @@ describe('Auth', () => {
 
                     alfrescoJsApi.login('wrong', 'name').then(NOOP, (error: ErrorResponse) => {
                         expect(error.status).to.be.equal(401);
-                        done();
-                    });
-                });
-
-                it.skip('should return an error if wrong credential are used 400 userId and/or password are/is not provided', (done) => {
-                    authResponseBpmMock.get400Response();
-
-                    alfrescoJsApi.login(null, null).then(NOOP, (error: ErrorResponse) => {
-                        expect(error.status).to.be.equal(400);
                         done();
                     });
                 });
@@ -381,13 +369,13 @@ describe('Auth', () => {
     });
 
     describe('BPM and ECM Provider config', () => {
-        let authResponseEcmMock: any;
-        let authResponseBpmMock: any;
+        let authResponseEcmMock: AuthEcmMock;
+        let authResponseBpmMock: BpmAuthMock;
         let alfrescoJsApi: AlfrescoApi;
 
         beforeEach(() => {
             authResponseEcmMock = new AuthEcmMock(ECM_HOST);
-            authResponseBpmMock = new AuthBpmMock(BPM_HOST);
+            authResponseBpmMock = new BpmAuthMock(BPM_HOST);
 
             authResponseEcmMock.cleanAll();
             authResponseBpmMock.cleanAll();
@@ -476,15 +464,6 @@ describe('Auth', () => {
 
                     alfrescoJsApi.login('wrong', 'name').then(NOOP, (error: ErrorResponse) => {
                         expect(error.status).to.be.equal(401);
-                        done();
-                    });
-                });
-
-                it.skip('should return an error if wrong credential are used 400 userId and/or password are/is not provided', (done) => {
-                    authResponseBpmMock.get400Response();
-
-                    alfrescoJsApi.login(null, null).then(NOOP, (error: ErrorResponse) => {
-                        expect(error.status).to.be.equal(400);
                         done();
                     });
                 });

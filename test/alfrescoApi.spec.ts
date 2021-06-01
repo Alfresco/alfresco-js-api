@@ -1,8 +1,7 @@
 
 import { expect } from 'chai';
 import { AlfrescoApi } from '../src/alfrescoApi';
-import { AuthResponseMock as AuthEcmMock } from '../test/mockObjects';
-const AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+import { AuthResponseMock as AuthEcmMock, BpmAuthMock } from '../test/mockObjects';
 const Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
 
 describe('Basic configuration test', () => {
@@ -201,7 +200,7 @@ describe('Basic configuration test', () => {
 
         it('Should logged-in be emitted when log in BPM', (done) => {
             const hostBpm = 'http://127.0.0.1:9999';
-            const authBpmMock = new AuthBpmMock(hostBpm);
+            const authBpmMock = new BpmAuthMock(hostBpm);
 
             authBpmMock.get200Response();
 
@@ -244,7 +243,7 @@ describe('Basic configuration test', () => {
 
         it('Should logged-in be emitted when the ticket is in the store', (done) => {
             const hostBpm = 'http://127.0.0.1:9999';
-            const authBpmMock = new AuthBpmMock(hostBpm);
+            const authBpmMock = new BpmAuthMock(hostBpm);
 
             authBpmMock.get200Response();
 

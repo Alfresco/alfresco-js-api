@@ -1,12 +1,11 @@
-/*global describe, it, beforeEach */
+import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi, SaveFormRepresentation, TaskFilterRequestRepresentation, TaskRepresentation, CompleteFormRepresentation, TaskQueryRequestRepresentation } from  '../../index';
+import { BpmAuthMock } from '../mockObjects';
 
-let expect = require('chai').expect;
-let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 let TasksMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Tasks;
 
 describe('Activiti Task Api', () => {
-    let authResponseBpmMock: any;
+    let authResponseBpmMock: BpmAuthMock;
     let tasksMock: any;
     let alfrescoJsApi: AlfrescoApi;
 
@@ -15,7 +14,7 @@ describe('Activiti Task Api', () => {
     beforeEach(async () => {
         const BPM_HOST = 'http://127.0.0.1:9999';
 
-        authResponseBpmMock = new AuthBpmMock(BPM_HOST);
+        authResponseBpmMock = new BpmAuthMock(BPM_HOST);
         tasksMock = new TasksMock(BPM_HOST);
 
         authResponseBpmMock.get200Response();

@@ -1,18 +1,18 @@
+import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { UserFiltersApi } from '../../src/api/activiti-rest-api';
+import { BpmAuthMock } from '../mockObjects';
 
-const expect = require('chai').expect;
-const AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 const FiltersMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.UserFilters;
 
 describe('Activiti User Filter Api', () => {
     const hostBpm = 'http://127.0.0.1:9999';
-    let authResponseBpmMock: any;
+    let authResponseBpmMock: BpmAuthMock;
     let filtersMock: any;
     let userFiltersApi: UserFiltersApi;
 
     beforeEach(async () => {
-        authResponseBpmMock = new AuthBpmMock(hostBpm);
+        authResponseBpmMock = new BpmAuthMock(hostBpm);
         filtersMock = new FiltersMock(hostBpm);
 
         authResponseBpmMock.get200Response();

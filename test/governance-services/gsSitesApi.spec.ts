@@ -1,12 +1,11 @@
+import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { GsSitesApi } from '../../src/api/gs-core-rest-api';
-import { AuthResponseMock } from '../../test/mockObjects';
-const GsSitesApiMock = require('../../test/mockObjects/mockAlfrescoApi').GsSitesApi;
-const expect = require('chai').expect;
+import { AuthResponseMock, GsSitesApiMock } from '../../test/mockObjects';
 
 describe('Governance API test', () => {
     let authResponseMock: AuthResponseMock;
-    let gsSitesApiMock: any;
+    let gsSitesApiMock: GsSitesApiMock;
     let gsSitesApi: GsSitesApi;
 
     beforeEach(() => {

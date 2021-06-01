@@ -1,19 +1,17 @@
-/*global describe, it, beforeEach */
-
+import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
-let expect = require('chai').expect;
-let AuthBpmMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
+import { BpmAuthMock } from '../mockObjects';
 let ReportsMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Reports;
 
 describe('Activiti Report Api', () => {
-    let authResponseBpmMock: any;
+    let authResponseBpmMock: BpmAuthMock;
     let reportsMock: any;
     let alfrescoJsApi: AlfrescoApi;
 
     beforeEach(async () => {
         const BPM_HOST = 'http://127.0.0.1:9999';
 
-        authResponseBpmMock = new AuthBpmMock(BPM_HOST);
+        authResponseBpmMock = new BpmAuthMock(BPM_HOST);
         reportsMock = new ReportsMock(BPM_HOST);
 
         authResponseBpmMock.get200Response();

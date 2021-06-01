@@ -1,11 +1,11 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
+export class BpmAuthMock extends BaseMock {
+    username: string;
+    password: string;
 
-class AuthResponseMock extends BaseMock {
-
-    constructor(host, username, password) {
+    constructor(host?: string, username?: string, password?: string) {
         super(host);
         this.username = username || 'admin';
         this.password = password || 'admin';
@@ -49,5 +49,3 @@ class AuthResponseMock extends BaseMock {
             });
     }
 }
-
-module.exports = AuthResponseMock;
