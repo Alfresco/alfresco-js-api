@@ -1,14 +1,12 @@
 /*global describe, it, beforeEach */
-
+import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { QueriesApi } from '../../src/api/content-rest-api';
-import { AuthResponseMock } from '../../test/mockObjects';
-const FindNodesMock = require('../../test/mockObjects/mockAlfrescoApi').FindNodes;
-const expect = require('chai').expect;
+import { AuthResponseMock, FindNodesMock } from '../../test/mockObjects';
 
 describe('Queries', () => {
     let authResponseMock: AuthResponseMock;
-    let nodesMock: any;
+    let nodesMock: FindNodesMock;
     let queriesApi: QueriesApi;
 
     beforeEach((done) => {
@@ -35,7 +33,7 @@ describe('Queries', () => {
         const searchTerm = 'test';
 
         it('should throw exception if no search term is provided', () => {
-            let badCall = () => {
+            const badCall = () => {
                 queriesApi.findNodes(null);
             };
             expect(badCall).to.throw(`Missing param 'term'`);

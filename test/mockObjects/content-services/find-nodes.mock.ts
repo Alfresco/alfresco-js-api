@@ -1,11 +1,9 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
+export class FindNodesMock extends BaseMock {
 
-class FindNodesMock extends BaseMock {
-
-    constructor(host) {
+    constructor(host?: string) {
         super(host);
     }
 
@@ -78,5 +76,3 @@ class FindNodesMock extends BaseMock {
             });
     }
 }
-
-module.exports = FindNodesMock;
