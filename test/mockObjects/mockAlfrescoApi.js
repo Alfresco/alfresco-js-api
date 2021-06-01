@@ -2,7 +2,6 @@ let mockAlfrescoApi = {};
 
 //Content service Mock
 mockAlfrescoApi.Auth = require('./content-services/authResponseMock.js');
-mockAlfrescoApi.Comment = require('./content-services/commentMock.js');
 mockAlfrescoApi.Version = require('./content-services/versionMock.js');
 mockAlfrescoApi.Node = require('./content-services/nodeMock.js');
 mockAlfrescoApi.Upload = require('./content-services/uploadMock.js');
