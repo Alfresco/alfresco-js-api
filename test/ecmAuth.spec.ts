@@ -53,7 +53,7 @@ describe('Ecm Auth test', () => {
         );
     });
 
-    describe('With Authentication', function () {
+    describe('With Authentication', () => {
 
         it('login should return the Ticket if all is ok', (done) => {
             authEcmMock.get201Response();
@@ -135,9 +135,7 @@ describe('Ecm Auth test', () => {
                 authEcmMock.get401Response();
 
                 const loginPromise: any = contentAuth.login('wrong', 'name');
-
-                loginPromise.catch(() => {
-                });
+                loginPromise.catch(() => {});
 
                 loginPromise.on('unauthorized', () => {
                     done();
@@ -149,8 +147,7 @@ describe('Ecm Auth test', () => {
 
                 const loginPromise: any = contentAuth.login('wrong', 'name');
 
-                loginPromise.catch(() => {
-                });
+                loginPromise.catch(() => {});
 
                 loginPromise.on('forbidden', () => {
                     done();

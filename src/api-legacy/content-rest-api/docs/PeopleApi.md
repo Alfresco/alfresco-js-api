@@ -710,6 +710,7 @@ You must have admin rights to create a person.
 You can set custom properties when you create a person:
 
 ### Example
+
 ```javascript
 
 var personBodyCreate = new this.alfrescoJsApi.core.PersonBodyCreate();
@@ -720,9 +721,9 @@ personBodyCreate.lastName = 'Chewbe';
 personBodyCreate.firstName = 'chewbacca';
 personBodyCreate.password = 'Rrrrrrrghghghghgh';
 
-this.alfrescoJsApi.core.peopleApi.addPerson(personBodyCreate).then(function () {
+this.alfrescoJsApi.core.peopleApi.addPerson(personBodyCreate).then(() => {
     console.log('Person created');
-}, function (error) {
+}, (error) => {
     console.error(error);
 });
 
