@@ -21,3 +21,4 @@ export * from './process-services/process-instance-variables.mock';
 export * from './process-services/models.mock';
 export * from './process-services/model-json.mock';
 export * from './process-services/profile.mock';
+export * from './process-services/reports.mock';

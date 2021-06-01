@@ -1,9 +1,7 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
-
-let fakeReportList = [
+const fakeReportList = [
     {'id': 11011, 'name': 'Process definition heat map'},
     {'id': 11012, 'name': 'Process definition overview'},
     {'id': 11013, 'name': 'Process instances overview'},
@@ -11,7 +9,7 @@ let fakeReportList = [
     {'id': 11015, 'name': 'Task service level agreement'}
 ];
 
-let fakeReportParams = {
+const fakeReportParams = {
     'id': 11013,
     'name': 'Process instances overview',
     'created': '2016-12-07T13:26:40.095+0000',
@@ -23,7 +21,7 @@ let fakeReportParams = {
     ']}'
 };
 
-let fakeChartReports = {
+const fakeChartReports = {
         'elements': [{
             'id': 'id10889073739455',
             'type': 'table',
@@ -60,7 +58,7 @@ let fakeChartReports = {
         }]
     };
 
-let fakeProcessDefinitionsNoApp = [{
+const fakeProcessDefinitionsNoApp: any[] = [{
     'id': 'Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004',
     'name': 'Fake Process Name 1',
     'description': null,
@@ -107,9 +105,9 @@ let fakeProcessDefinitionsNoApp = [{
 }];
 
 
-class ReportsMock extends BaseMock {
+export class ReportsMock extends BaseMock {
 
-    constructor(host) {
+    constructor(host?: string) {
         super(host);
     }
 
@@ -119,7 +117,7 @@ class ReportsMock extends BaseMock {
             .reply(200);
     }
 
-    get200ResponseTasksByProcessDefinitionId(reportId, processDefinitionId) {
+    get200ResponseTasksByProcessDefinitionId(reportId: string, processDefinitionId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/app/rest/reporting/report-params/' + reportId + '/tasks')
             .query({processDefinitionId : processDefinitionId})
@@ -132,13 +130,13 @@ class ReportsMock extends BaseMock {
             .reply(200,  fakeReportList);
     }
 
-    get200ResponseReportParams(reportId) {
+    get200ResponseReportParams(reportId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/app/rest/reporting/report-params/' + reportId)
             .reply(200,  fakeReportParams);
     }
 
-    get200ResponseReportsByParams(reportId, paramsQuery) {
+    get200ResponseReportsByParams(reportId: string, paramsQuery: { status: string }) {
         nock(this.host, {'encodedQueryParams': true})
             .post('/activiti-app/app/rest/reporting/report-params/' + reportId, paramsQuery)
             .reply(200, fakeChartReports);
@@ -150,30 +148,28 @@ class ReportsMock extends BaseMock {
             .reply(200, fakeProcessDefinitionsNoApp);
     }
 
-    get200ResponseUpdateReport(reportId) {
+    get200ResponseUpdateReport(reportId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .put('/activiti-app/app/rest/reporting/reports/' + reportId)
             .reply(200);
     }
 
-    get200ResponseExportReport(reportId) {
+    get200ResponseExportReport(reportId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .post('/activiti-app/app/rest/reporting/reports/' + reportId + '/export-to-csv')
             .reply(200, 'CSV');
     }
 
-    get200ResponseSaveReport(reportId) {
+    get200ResponseSaveReport(reportId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .post('/activiti-app/app/rest/reporting/reports/' + reportId)
             .reply(200);
     }
 
-    get200ResponseDeleteReport(reportId) {
+    get200ResponseDeleteReport(reportId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .delete('/activiti-app/app/rest/reporting/reports/' + reportId)
             .reply(200);
     }
 
 }
-
-module.exports = ReportsMock;
