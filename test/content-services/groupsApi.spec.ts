@@ -2,8 +2,7 @@
 
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { GroupsApi } from '../../src/api/content-rest-api';
-
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+import { AuthResponseMock } from '../../test/mockObjects';
 const GroupsMock = require('../../test/mockObjects/mockAlfrescoApi').GroupsApi;
 const expect = require('chai').expect;
 

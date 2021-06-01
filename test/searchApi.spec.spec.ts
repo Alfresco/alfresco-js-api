@@ -1,7 +1,6 @@
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { SearchApi } from '../src/api/search-rest-api';
-
-const AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+import { AuthResponseMock } from '../test/mockObjects';
 const SearchMock = require('../test/mockObjects/mockAlfrescoApi').Search;
 const expect = require('chai').expect;
 

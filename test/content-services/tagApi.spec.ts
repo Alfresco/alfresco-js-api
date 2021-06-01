@@ -2,13 +2,13 @@
 
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { TagsApi } from '../../src/api/content-rest-api';
+import { AuthResponseMock } from '../../test/mockObjects';
 
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 const TagMock = require('../../test/mockObjects/mockAlfrescoApi').Tag;
 const expect = require('chai').expect;
 
 describe('Tags', () => {
-    let authResponseMock: any;
+    let authResponseMock: AuthResponseMock;
     let tagMock: any;
     let tagsApi: TagsApi;
 

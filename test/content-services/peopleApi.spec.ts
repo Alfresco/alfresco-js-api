@@ -5,10 +5,10 @@ import { PersonBodyCreate } from '../../src/api/content-rest-api/model/personBod
 import { PeopleApi } from '../../src/api/content-rest-api';
 
 const PeopleMock = require('../../test/mockObjects/mockAlfrescoApi').PeopleApi;
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+import { AuthResponseMock } from '../../test/mockObjects';
 
 describe('PeopleApi', () => {
-    let authResponseMock: any;
+    let authResponseMock: AuthResponseMock;
     let peopleMock: any;
     let peopleApi: PeopleApi;
 

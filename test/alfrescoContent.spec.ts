@@ -1,8 +1,7 @@
+import { expect } from 'chai';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { ContentApi } from '../src/api/content-custom-api/api/content.api';
-
-const expect = require('chai').expect;
-const AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+import { AuthResponseMock } from '../test/mockObjects';
 
 describe('AlfrescoContent', () => {
     const hostEcm = 'http://127.0.0.1:8080';
@@ -11,7 +10,7 @@ describe('AlfrescoContent', () => {
     const nodeId = '1a0b110f-1e09-4ca2-b367-fe25e4964a4';
     const versionId = '1.1';
 
-    let authResponseMock: any;
+    let authResponseMock: AuthResponseMock;
     let contentApi: ContentApi;
 
     beforeEach((done) => {

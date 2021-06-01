@@ -3,13 +3,11 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { CommentsApi } from '../../src/api/content-rest-api';
-
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
-import { CommentMock } from '../../test/mockObjects';
+import { CommentMock, AuthResponseMock } from '../../test/mockObjects';
 
 describe('Comments', () => {
 
-    let authResponseMock: any;
+    let authResponseMock: AuthResponseMock;
     let commentMock: CommentMock;
     let commentsApi: CommentsApi;
 

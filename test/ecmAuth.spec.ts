@@ -1,14 +1,13 @@
+import { expect } from 'chai';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { ContentAuth } from '../src/authentication/contentAuth';
-
-const expect = require('chai').expect;
-const AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+import { AuthResponseMock as AuthEcmMock } from '../test/mockObjects';
 
 describe('Ecm Auth test', () => {
     const hostEcm = 'http://127.0.0.1:8080';
 
     let alfrescoJsApi: AlfrescoApi;
-    let authEcmMock: any;
+    let authEcmMock: AuthEcmMock;
     let contentAuth: ContentAuth;
 
     beforeEach(() => {

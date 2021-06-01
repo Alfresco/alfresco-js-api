@@ -2,13 +2,12 @@
 
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { QueriesApi } from '../../src/api/content-rest-api';
-
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+import { AuthResponseMock } from '../../test/mockObjects';
 const FindNodesMock = require('../../test/mockObjects/mockAlfrescoApi').FindNodes;
 const expect = require('chai').expect;
 
 describe('Queries', () => {
-    let authResponseMock: any;
+    let authResponseMock: AuthResponseMock;
     let nodesMock: any;
     let queriesApi: QueriesApi;
 

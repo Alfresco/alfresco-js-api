@@ -10,7 +10,7 @@ const spies = require('chai-spies');
 chai.use(spies);
 
 const Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
-const AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+import { AuthResponseMock } from '../test/mockObjects';
 
 const jsdom = require('mocha-jsdom');
 const globalAny: any = global;

@@ -2,9 +2,8 @@
 
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { WebscriptApi } from '../../src/api/content-custom-api';
-
-const expect = require('chai').expect;
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+import { expect } from 'chai';
+import { AuthResponseMock } from '../../test/mockObjects';
 const WebScriptMock = require('../../test/mockObjects/mockAlfrescoApi').WebScript;
 
 describe('WebScript', () => {
@@ -13,7 +12,7 @@ describe('WebScript', () => {
     const servicePath = 'alfresco';
     const scriptPath = 'testWebScript';
 
-    let authResponseMock: any;
+    let authResponseMock: AuthResponseMock;
     let webScriptMock: any;
     let webscriptApi: WebscriptApi;
 

@@ -3,7 +3,7 @@
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 
 let expect = require('chai').expect;
-let AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+import { AuthResponseMock } from '../test/mockObjects';
 let UploadMock = require('../test/mockObjects/mockAlfrescoApi').Upload;
 let fs = require('fs');
 

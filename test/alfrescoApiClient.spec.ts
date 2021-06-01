@@ -1,11 +1,10 @@
 /*global describe, it */
-
 import { AlfrescoApiClient, AlfrescoApiCompatibility as AlfrescoApi, FormValueRepresentation } from '../index';
 import { DateAlfresco } from  '../index';
-let chai = require('chai');
-let AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+import { AuthResponseMock as AuthEcmMock } from '../test/mockObjects';
 
-let expect = require('chai').expect;
+const chai = require('chai');
+const expect = require('chai').expect;
 chai.use(require('chai-datetime'));
 
 describe('Alfresco Core API Client', function () {

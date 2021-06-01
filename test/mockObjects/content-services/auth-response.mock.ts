@@ -1,19 +1,18 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
+export class AuthResponseMock extends BaseMock {
+    username: string;
+    password: string;
 
-class AuthResponseMock extends BaseMock {
-
-    constructor(host, username, password) {
+    constructor(host?: string, username?: string, password?: string) {
         super(host);
         this.username = username || 'admin';
         this.password = password || 'admin';
     }
 
-    get201Response(forceTicket) {
-
-        let returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+    get201Response(forceTicket?: string) {
+        const returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
         nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/authentication/versions/1/tickets', {
@@ -23,8 +22,8 @@ class AuthResponseMock extends BaseMock {
             .reply(201, {'entry': {'id': returnMockTicket, 'userId': 'admin'}});
     }
 
-    get200ValidTicket(forceTicket) {
-        let returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
+    get200ValidTicket(forceTicket?: string) {
+        const returnMockTicket = forceTicket || 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
         nock(this.host, {'encodedQueryParams': true})
             .get('/alfresco/api/-default-/public/authentication/versions/1/tickets/-me-')
@@ -97,5 +96,3 @@ class AuthResponseMock extends BaseMock {
             .reply(404, '');
     }
 }
-
-module.exports = AuthResponseMock;

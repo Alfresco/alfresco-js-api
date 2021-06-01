@@ -1,9 +1,9 @@
+import { expect } from 'chai';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { DiscoveryApi } from '../src/api/discovery-rest-api';
+import { AuthResponseMock } from '../test/mockObjects';
 
-const AuthResponseMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
 const DiscoveryMock = require('../test/mockObjects/mockAlfrescoApi').Discovery;
-const expect = require('chai').expect;
 
 describe('Discovery', () => {
     let authResponseMock: any;

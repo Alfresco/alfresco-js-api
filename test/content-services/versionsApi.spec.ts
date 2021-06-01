@@ -2,8 +2,8 @@
 
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { VersionsApi } from '../../src/api/content-rest-api';
+import { AuthResponseMock } from '../../test/mockObjects';
 
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
 let VersionMock = require('../../test/mockObjects/mockAlfrescoApi').Version;
 let expect = require('chai').expect;
 
@@ -13,7 +13,7 @@ describe('Versions', function () {
     let versionId = '1.0';
     let renditionId = 'pdf';
 
-    let authResponseMock: any;
+    let authResponseMock: AuthResponseMock;
     let versionMock: any;
     let versionsApi: VersionsApi;
 

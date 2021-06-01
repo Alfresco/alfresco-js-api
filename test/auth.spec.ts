@@ -1,9 +1,8 @@
 /*global describe, it, beforeEach */
-
+import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 
-const expect = require('chai').expect;
-const AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+import { AuthResponseMock as AuthEcmMock } from '../test/mockObjects';
 const AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 const NodeMock = require('../test/mockObjects/mockAlfrescoApi').Node;
 const ProfileMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Profile;

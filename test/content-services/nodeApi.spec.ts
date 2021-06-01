@@ -5,14 +5,14 @@ import { NodesApi } from '../../src/api/content-rest-api';
 
 const chai = require('chai');
 const expect = chai.expect;
-const AuthResponseMock = require('../../test/mockObjects/mockAlfrescoApi').Auth;
+import { AuthResponseMock } from '../../test/mockObjects';
 const NodeMock = require('../../test/mockObjects/mockAlfrescoApi').Node;
 const fs = require('fs');
 
 chai.use(require('chai-datetime'));
 
 describe('Node', () => {
-    let authResponseMock: any;
+    let authResponseMock: AuthResponseMock;
     let nodeMock: any;
     let nodesApi: NodesApi;
 

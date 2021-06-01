@@ -1,7 +1,7 @@
-import { AlfrescoApi } from '../src/alfrescoApi';
 
-const expect = require('chai').expect;
-const AuthEcmMock = require('../test/mockObjects/mockAlfrescoApi').Auth;
+import { expect } from 'chai';
+import { AlfrescoApi } from '../src/alfrescoApi';
+import { AuthResponseMock as AuthEcmMock } from '../test/mockObjects';
 const AuthBpmMock = require('../test/mockObjects/mockAlfrescoApi').ActivitiMock.Auth;
 const Oauth2Mock = require('../test/mockObjects/mockAlfrescoApi').Oauth2Mock.Auth;
 
