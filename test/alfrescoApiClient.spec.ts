@@ -14,20 +14,17 @@ describe('Alfresco Core API Client', () => {
         const client = new AlfrescoApiClient();
 
         it('should create a request with response type blob', () => {
+            const queryParams = {};
+            const headerParams = {};
+            const formParams = {};
 
-            let bodyParam = null;
+            const contentTypes = ['application/json'];
+            const accepts = ['application/json'];
+            const responseType = 'blob';
+            const url = '/fake-api/enterprise/process-instances/';
+            const httpMethod = 'GET';
 
-            let queryParams = {};
-            let headerParams = {};
-            let formParams = {};
-
-            let contentTypes = ['application/json'];
-            let accepts = ['application/json'];
-            let responseType = 'blob';
-            let url = '/fake-api/enterprise/process-instances/';
-            let httpMethod = 'GET';
-
-            const response = client.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
+            const response = client.buildRequest(httpMethod, url, queryParams, headerParams, formParams, null,
                                                contentTypes, accepts, responseType, null, null);
 
             expect(response.url).equal('/fake-api/enterprise/process-instances/');
@@ -36,17 +33,17 @@ describe('Alfresco Core API Client', () => {
             expect(response._responseType).equal('blob');
         });
 
-        it('should return the username after login', function (done) {
-            this.authResponseEcmMock = new EcmAuthMock('http://127.0.0.1:8080');
+        it('should return the username after login', (done) => {
+            const authResponseEcmMock = new EcmAuthMock('http://127.0.0.1:8080');
 
-            this.authResponseEcmMock.get201Response();
+            authResponseEcmMock.get201Response();
 
-            this.alfrescoJsApi = new AlfrescoApi({
-                hostEcm: this.hostEcm
+            const alfrescoJsApi = new AlfrescoApi({
+                hostEcm: 'http://127.0.0.1:8080'
             });
 
-            this.alfrescoJsApi.login('admin', 'admin').then(() => {
-                expect(this.alfrescoJsApi.getEcmUsername()).to.be.equal('admin');
+            alfrescoJsApi.login('admin', 'admin').then(() => {
+                expect(alfrescoJsApi.getEcmUsername()).to.be.equal('admin');
                 done();
             });
         });

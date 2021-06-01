@@ -345,7 +345,7 @@ describe('Oauth2  test', () => {
             alfrescoApi.login('admin', 'admin');
         });
 
-        // TODO: very flaky test, fails on different machines if running slow
+        // TODO: very flaky test, fails on different machines if running slow, might relate to `this.timeout`
         xit('should extend content session after oauth token refresh', function (done)  {
             this.timeout(3000);
 
