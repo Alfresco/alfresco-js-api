@@ -17,3 +17,4 @@ export * from './goverance-services/gs-sites.mock';
 
 export * from './process-services/bpm-auth.mock';
 export * from './process-services/process.mock';
+export * from './process-services/process-instance-variables.mock';

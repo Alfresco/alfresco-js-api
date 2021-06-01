@@ -1,35 +1,36 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
-let fakeVariable1 = {
+const fakeVariable1 = {
     name: 'variable1',
     value: 'Value 123',
     scope: 'global'
 };
-let fakeVariable2 = {
+
+const fakeVariable2 = {
     name: 'variable2',
     value: 'Value 456',
     scope: 'local'
 };
-let fakeVariablesList = [
+
+const fakeVariablesList = [
     fakeVariable1,
     fakeVariable2
 ];
 
-class ProcessInstanceVariablesMock extends BaseMock {
+export class ProcessInstanceVariablesMock extends BaseMock {
 
-    constructor(host) {
+    constructor(host?: string) {
         super(host);
     }
 
-    addListProcessInstanceVariables200Response(processInstanceId) {
+    addListProcessInstanceVariables200Response(processInstanceId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(200, fakeVariablesList);
     }
 
-    addListProcessInstanceVariables500Response(processInstanceId) {
+    addListProcessInstanceVariables500Response(processInstanceId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(500, {
@@ -38,13 +39,13 @@ class ProcessInstanceVariablesMock extends BaseMock {
             });
     }
 
-    addPutProcessInstanceVariables200Response(processInstanceId) {
+    addPutProcessInstanceVariables200Response(processInstanceId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .put('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(200, fakeVariablesList);
     }
 
-    addPutProcessInstanceVariables500Response(processInstanceId) {
+    addPutProcessInstanceVariables500Response(processInstanceId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .put('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(500, {
@@ -53,13 +54,13 @@ class ProcessInstanceVariablesMock extends BaseMock {
             });
     }
 
-    addPostProcessInstanceVariables200Response(processInstanceId) {
+    addPostProcessInstanceVariables200Response(processInstanceId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .post('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(200, fakeVariablesList);
     }
 
-    addPostProcessInstanceVariables500Response(processInstanceId) {
+    addPostProcessInstanceVariables500Response(processInstanceId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .post('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
             .reply(500, {
@@ -68,13 +69,13 @@ class ProcessInstanceVariablesMock extends BaseMock {
             });
     }
 
-    addGetProcessInstanceVariable200Response(processInstanceId, variableName) {
+    addGetProcessInstanceVariable200Response(processInstanceId: string, variableName: string) {
         nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(200, fakeVariable1);
     }
 
-    addGetProcessInstanceVariable500Response(processInstanceId, variableName) {
+    addGetProcessInstanceVariable500Response(processInstanceId: string, variableName: string) {
         nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(500, {
@@ -83,13 +84,13 @@ class ProcessInstanceVariablesMock extends BaseMock {
             });
     }
 
-    addUpdateProcessInstanceVariable200Response(processInstanceId, variableName) {
+    addUpdateProcessInstanceVariable200Response(processInstanceId: string, variableName: string) {
         nock(this.host, {'encodedQueryParams': true})
             .put('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(200, fakeVariable1);
     }
 
-    addUpdateProcessInstanceVariable500Response(processInstanceId, variableName) {
+    addUpdateProcessInstanceVariable500Response(processInstanceId: string, variableName: string) {
         nock(this.host, {'encodedQueryParams': true})
             .put('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(500, {
@@ -98,13 +99,13 @@ class ProcessInstanceVariablesMock extends BaseMock {
             });
     }
 
-    addDeleteProcessInstanceVariable200Response(processInstanceId, variableName) {
+    addDeleteProcessInstanceVariable200Response(processInstanceId: string, variableName: string) {
         nock(this.host, {'encodedQueryParams': true})
             .delete('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(200);
     }
 
-    addDeleteProcessInstanceVariable500Response(processInstanceId, variableName) {
+    addDeleteProcessInstanceVariable500Response(processInstanceId: string, variableName: string) {
         nock(this.host, {'encodedQueryParams': true})
             .delete('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
             .reply(500, {
@@ -114,5 +115,3 @@ class ProcessInstanceVariablesMock extends BaseMock {
     }
 
 }
-
-module.exports = ProcessInstanceVariablesMock;

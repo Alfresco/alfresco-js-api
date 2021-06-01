@@ -1,16 +1,15 @@
 import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
-import { BpmAuthMock } from '../mockObjects';
-let ProcessInstanceVariablesMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.ProcessInstanceVariables;
+import { BpmAuthMock, ProcessInstanceVariablesMock } from '../mockObjects';
 
 describe('Activiti Process Instance Variables Api', () => {
     let authResponseBpmMock: BpmAuthMock;
-    let variablesMock: any;
+    let variablesMock: ProcessInstanceVariablesMock;
     let alfrescoJsApi: AlfrescoApi;
 
     const NOOP = () => {/* empty */};
 
-    beforeEach((done) => {
+    beforeEach(async () => {
         const BPM_HOST = 'http://127.0.0.1:9999';
 
         authResponseBpmMock = new BpmAuthMock(BPM_HOST);
@@ -23,9 +22,7 @@ describe('Activiti Process Instance Variables Api', () => {
             provider: 'BPM'
         });
 
-        alfrescoJsApi.login('admin', 'admin').then(() => {
-            done();
-        });
+        await alfrescoJsApi.login('admin', 'admin');
     });
 
     describe('get variables', () => {
