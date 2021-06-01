@@ -240,7 +240,8 @@
     "sourcemap",
     "facetable",
     "Tokenisation",
-    "Qname"
+    "Qname",
+    "collapseable"
   ],
   "dictionaries": [
     "html",
