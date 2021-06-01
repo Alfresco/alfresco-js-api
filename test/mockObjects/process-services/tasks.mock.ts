@@ -1,11 +1,9 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
+export class TasksMock extends BaseMock {
 
-class TasksMock extends BaseMock {
-
-    constructor(host) {
+    constructor(host?: string) {
         super(host);
     }
 
@@ -92,7 +90,7 @@ class TasksMock extends BaseMock {
             });
     }
 
-    get200ResponseGetTask(taskId) {
+    get200ResponseGetTask(taskId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .get('/activiti-app/api/enterprise/tasks/' + taskId)
             .reply(200, {
@@ -212,7 +210,7 @@ class TasksMock extends BaseMock {
             });
     }
 
-    get404CompleteTask(taskId) {
+    get404CompleteTask(taskId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .put('/activiti-app/api/enterprise/tasks/' + taskId + '/action/complete')
             .reply(404, {
@@ -222,7 +220,7 @@ class TasksMock extends BaseMock {
 
     }
 
-    get200CreateTask(name) {
+    get200CreateTask(name: string) {
         nock(this.host, {'encodedQueryParams': true})
             .post('/activiti-app/api/enterprise/tasks', {'name': name})
             .reply(200, {
@@ -947,5 +945,3 @@ class TasksMock extends BaseMock {
     }
 
 }
-
-module.exports = TasksMock;

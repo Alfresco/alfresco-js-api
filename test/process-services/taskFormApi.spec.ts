@@ -1,11 +1,10 @@
 import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
-import { BpmAuthMock } from '../mockObjects';
-let TaskFormMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.TaskFormMock;
+import { BpmAuthMock, TaskFormMock } from '../mockObjects';
 
 describe('Activiti Task Api', () => {
     let authResponseBpmMock: BpmAuthMock;
-    let taskFormMock: any;
+    let taskFormMock: TaskFormMock;
     let alfrescoJsApi: AlfrescoApi;
 
     beforeEach(async () => {

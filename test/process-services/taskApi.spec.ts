@@ -1,12 +1,9 @@
 import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi, SaveFormRepresentation, TaskFilterRequestRepresentation, TaskRepresentation, CompleteFormRepresentation, TaskQueryRequestRepresentation } from  '../../index';
-import { BpmAuthMock } from '../mockObjects';
-
-let TasksMock = require('../../test/mockObjects/mockAlfrescoApi').ActivitiMock.Tasks;
-
+import { BpmAuthMock, TasksMock } from '../mockObjects';
 describe('Activiti Task Api', () => {
     let authResponseBpmMock: BpmAuthMock;
-    let tasksMock: any;
+    let tasksMock: TasksMock;
     let alfrescoJsApi: AlfrescoApi;
 
     const NOOP = () => {/* empty */};
@@ -39,7 +36,7 @@ describe('Activiti Task Api', () => {
     });
 
     it('get Task', async () => {
-        tasksMock.get200ResponseGetTask(10);
+        tasksMock.get200ResponseGetTask('10');
 
         const data = await alfrescoJsApi.activiti.taskApi.getTask('10');
         expect(data.name).equal('Upload Document');
