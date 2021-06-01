@@ -1,22 +1,20 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
+export class VersionMock extends BaseMock {
 
-class VersionMock extends BaseMock {
-
-    constructor(host) {
+    constructor(host?: string) {
         super(host);
     }
 
-    post201Response(nodeId, versionId) {
+    post201Response(nodeId: string, versionId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/' + nodeId + '/versions/' + versionId + '/revert')
             .reply(201, {'entry': {'id': '3.0'}});
 
     }
 
-    get200Response(nodeId) {
+    get200Response(nodeId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/' + nodeId + '/versions')
             .reply(200, {
@@ -36,7 +34,7 @@ class VersionMock extends BaseMock {
             });
     }
 
-    get200ResponseVersionRenditions(nodeId, versionId) {
+    get200ResponseVersionRenditions(nodeId: string, versionId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/' + nodeId + '/versions/' + versionId + '/renditions')
             .reply(200, {
@@ -89,7 +87,7 @@ class VersionMock extends BaseMock {
             });
     }
 
-    get200VersionRendition(nodeId, versionId, renditionId) {
+    get200VersionRendition(nodeId: string, versionId: string, renditionId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .get('/alfresco/api/-default-/public/alfresco/versions/1/nodes/' + nodeId + '/versions/' + versionId + '/renditions/' + renditionId)
             .reply(200, {
@@ -101,7 +99,7 @@ class VersionMock extends BaseMock {
             });
     }
 
-    create200VersionRendition(nodeId, versionId) {
+    create200VersionRendition(nodeId: string, versionId: string) {
         nock(this.host, {'encodedQueryParams': true})
             .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/' + nodeId + '/versions/' + versionId + '/renditions', {'id': 'pdf'})
             .reply(202, '');
@@ -109,5 +107,3 @@ class VersionMock extends BaseMock {
 
 
 }
-
-module.exports = VersionMock;
