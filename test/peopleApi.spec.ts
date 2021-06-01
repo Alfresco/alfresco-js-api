@@ -3,11 +3,10 @@
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { PersonBodyCreate } from '../src/api/content-rest-api/model/personBodyCreate';
 import { PeopleApi } from '../src/api/content-rest-api/api/people.api';
-
-const PeopleMock = require('../test/mockObjects/mockAlfrescoApi').PeopleApi;
+import { PeopleMock } from './mockObjects';
 
 describe('PeopleApi', () => {
-    let peopleMock: any;
+    let peopleMock: PeopleMock;
     let peopleApi: PeopleApi;
 
     beforeEach(() => {

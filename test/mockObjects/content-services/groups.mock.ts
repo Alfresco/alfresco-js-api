@@ -1,14 +1,11 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
+export class GroupsMock extends BaseMock {
 
-class TagMock extends BaseMock {
-
-    constructor(host) {
+    constructor(host?: string) {
         super(host);
     }
-
 
     get200GetGroups() {
         nock(this.host, {'encodedQueryParams': true})
@@ -42,14 +39,14 @@ class TagMock extends BaseMock {
             });
     }
 
-    getDeleteGroupSuccessfulResponse(groupName){
+    getDeleteGroupSuccessfulResponse(groupName: string){
         nock(this.host, {'encodedQueryParams': true})
             .delete('/alfresco/api/-default-/public/alfresco/versions/1/groups/'+groupName)
             .query({"cascade":"false"})
             .reply(200);
     }
 
-    getDeleteMemberForGroupSuccessfulResponse(groupName, memberName){
+    getDeleteMemberForGroupSuccessfulResponse(groupName: string, memberName: string){
         nock(this.host, {'encodedQueryParams': true})
             .delete('/alfresco/api/-default-/public/alfresco/versions/1/groups/'+groupName+'/members/'+ memberName)
             .reply(200);
@@ -143,5 +140,3 @@ class TagMock extends BaseMock {
             });
     }
 }
-
-module.exports = TagMock;

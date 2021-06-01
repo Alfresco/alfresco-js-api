@@ -1,14 +1,12 @@
 /*global describe, it, beforeEach */
-
+import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { GroupsApi } from '../../src/api/content-rest-api';
-import { AuthResponseMock } from '../../test/mockObjects';
-const GroupsMock = require('../../test/mockObjects/mockAlfrescoApi').GroupsApi;
-const expect = require('chai').expect;
+import { AuthResponseMock, GroupsMock } from '../../test/mockObjects';
 
 describe('Groups', () => {
-    let authResponseMock: any;
-    let groupsMock: any;
+    let authResponseMock: AuthResponseMock;
+    let groupsMock: GroupsMock;
     let groupsApi: GroupsApi;
 
     beforeEach((done) => {
@@ -33,7 +31,7 @@ describe('Groups', () => {
         groupsMock.get200GetGroups();
 
         groupsApi.listGroups().then(
-            (data: any) => {
+            (data) => {
                 expect(data.list.pagination.count).to.be.equal(2);
                 expect(data.list.entries[0].entry.id).to.be.equal('GROUP_alfalfa');
                 expect(data.list.entries[1].entry.id).to.be.equal('GROUP_CallCenterAA');
@@ -106,7 +104,7 @@ describe('Groups', () => {
             memberType: 'GROUP'
           };
 
-        groupsApi.createGroupMembership('GROUP_TEST', groupBody).then((data: any) => {
+        groupsApi.createGroupMembership('GROUP_TEST', groupBody).then((data) => {
             expect(data.entry.id).to.be.equal('GROUP_SUB_TEST');
             expect(data.entry.displayName).to.be.equal('SAMPLE');
             done();

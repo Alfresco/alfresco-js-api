@@ -1,11 +1,9 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
+export class PeopleMock extends BaseMock {
 
-class PeopleMock extends BaseMock {
-
-    constructor(host) {
+    constructor(host?: string) {
         super(host);
     }
 
@@ -104,5 +102,3 @@ class PeopleMock extends BaseMock {
             .reply(401, {});
     }
 }
-
-module.exports = PeopleMock;

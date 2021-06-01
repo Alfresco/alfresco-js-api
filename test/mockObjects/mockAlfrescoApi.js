@@ -8,8 +8,6 @@ mockAlfrescoApi.Tag = require('./content-services/tagMock.js');
 mockAlfrescoApi.FindNodes = require('./content-services/findNodesMock.js');
 mockAlfrescoApi.Rendition = require('./content-services/renditionMock.js');
 mockAlfrescoApi.Search = require('./content-services/searchMock.js');
-mockAlfrescoApi.PeopleApi = require('./content-services/peopleMock.js');
-mockAlfrescoApi.GroupsApi = require('./content-services/groupsMock.js');
 
 //Governance service
 mockAlfrescoApi.GsCoreMock = {};
