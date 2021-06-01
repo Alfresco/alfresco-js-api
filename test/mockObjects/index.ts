@@ -6,3 +6,4 @@ export * from './content-services/node.mock';
 export * from './content-services/people.mock';
 export * from './content-services/groups.mock';
 export * from './content-services/find-nodes.mock';
+export * from './content-services/rendition.mock';
