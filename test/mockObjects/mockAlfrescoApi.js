@@ -1,8 +1,5 @@
 let mockAlfrescoApi = {};
 
-//Content service Mock
-mockAlfrescoApi.WebScript = require('./content-services/webScriptMock.js');
-
 //Governance service
 mockAlfrescoApi.GsCoreMock = {};
 mockAlfrescoApi.GsSitesApi = require('./goverance-services/gsSitesApiMock.js');

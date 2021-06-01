@@ -1,11 +1,13 @@
-'use strict';
+import nock from 'nock';
+import { BaseMock } from '../base.mock';
 
-let nock = require('nock');
-let BaseMock = require('../baseMock');
+export class WebScriptMock extends BaseMock {
+    contextRoot: string;
+    servicePath: string;
+    scriptPath: string;
+    scriptSlug: string;
 
-class WebScriptMock extends BaseMock {
-
-    constructor(host, contextRoot, servicePath, scriptPath) {
+    constructor(host?: string, contextRoot?: string, servicePath?: string, scriptPath?: string) {
         super(host);
         this.contextRoot = contextRoot || 'alfresco';
         this.servicePath = servicePath || 'service';
@@ -63,5 +65,3 @@ class WebScriptMock extends BaseMock {
             });
     }
 }
-
-module.exports = WebScriptMock;

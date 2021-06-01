@@ -11,3 +11,4 @@ export * from './content-services/search.mock';
 export * from './content-services/tag.mock';
 export * from './content-services/upload.mock';
 export * from './content-services/version.mock';
+export * from './content-services/webscript.mock';

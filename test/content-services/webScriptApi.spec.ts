@@ -1,10 +1,7 @@
-/*global describe, it, beforeEach */
-
+import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { WebscriptApi } from '../../src/api/content-custom-api';
-import { expect } from 'chai';
-import { AuthResponseMock } from '../../test/mockObjects';
-const WebScriptMock = require('../../test/mockObjects/mockAlfrescoApi').WebScript;
+import { AuthResponseMock, WebScriptMock } from '../../test/mockObjects';
 
 describe('WebScript', () => {
     const hostEcm = 'http://127.0.0.1:8080';
@@ -13,7 +10,7 @@ describe('WebScript', () => {
     const scriptPath = 'testWebScript';
 
     let authResponseMock: AuthResponseMock;
-    let webScriptMock: any;
+    let webScriptMock: WebScriptMock;
     let webscriptApi: WebscriptApi;
 
     beforeEach((done) => {
