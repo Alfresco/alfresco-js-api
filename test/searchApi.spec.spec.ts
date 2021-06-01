@@ -1,12 +1,11 @@
+import { expect } from 'chai';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { SearchApi } from '../src/api/search-rest-api';
-import { AuthResponseMock } from '../test/mockObjects';
-const SearchMock = require('../test/mockObjects/mockAlfrescoApi').Search;
-const expect = require('chai').expect;
+import { AuthResponseMock, SearchMock } from '../test/mockObjects';
 
 describe('Search', () => {
-    let authResponseMock: any;
-    let searchMock: any;
+    let authResponseMock: AuthResponseMock;
+    let searchMock: SearchMock;
     let searchApi: SearchApi;
 
     beforeEach((done) => {
