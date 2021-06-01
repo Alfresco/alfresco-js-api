@@ -1,5 +1,3 @@
-/*global describe, it, beforeEach */
-
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { CustomModelApi } from '../../src/api/content-custom-api';
 import { EcmAuthMock, CustomModelMock } from '../../test/mockObjects';

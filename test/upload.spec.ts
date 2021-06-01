@@ -1,4 +1,3 @@
-/*global describe, it, beforeEach */
 import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 import { EcmAuthMock, UploadMock } from '../test/mockObjects';

@@ -1,4 +1,3 @@
-/*global describe, it, beforeEach */
 import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { QueriesApi } from '../../src/api/content-rest-api';

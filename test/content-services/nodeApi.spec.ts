@@ -1,5 +1,3 @@
-/*global describe, it, beforeEach */
-
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { NodesApi } from '../../src/api/content-rest-api';
 import { EcmAuthMock, NodeMock } from '../../test/mockObjects';

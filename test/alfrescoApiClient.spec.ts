@@ -1,4 +1,3 @@
-/*global describe, it */
 import { AlfrescoApiClient, AlfrescoApiCompatibility as AlfrescoApi, FormValueRepresentation } from '../index';
 import { DateAlfresco } from  '../index';
 import { EcmAuthMock } from '../test/mockObjects';

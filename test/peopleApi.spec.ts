@@ -1,5 +1,3 @@
-/*global describe, it, beforeEach */
-
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { PersonBodyCreate } from '../src/api/content-rest-api/model/personBodyCreate';
 import { PeopleApi } from '../src/api/content-rest-api/api/people.api';
