@@ -1,15 +1,12 @@
 /*global describe, it, beforeEach */
-
+import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { TagsApi } from '../../src/api/content-rest-api';
-import { AuthResponseMock } from '../../test/mockObjects';
-
-const TagMock = require('../../test/mockObjects/mockAlfrescoApi').Tag;
-const expect = require('chai').expect;
+import { AuthResponseMock, TagMock } from '../../test/mockObjects';
 
 describe('Tags', () => {
     let authResponseMock: AuthResponseMock;
-    let tagMock: any;
+    let tagMock: TagMock;
     let tagsApi: TagsApi;
 
     beforeEach((done) => {
