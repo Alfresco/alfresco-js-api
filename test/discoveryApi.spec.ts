@@ -1,13 +1,11 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { DiscoveryApi } from '../src/api/discovery-rest-api';
-import { AuthResponseMock } from '../test/mockObjects';
-
-const DiscoveryMock = require('../test/mockObjects/mockAlfrescoApi').Discovery;
+import { AuthResponseMock, DiscoveryMock } from '../test/mockObjects';
 
 describe('Discovery', () => {
-    let authResponseMock: any;
-    let discoveryMock: any;
+    let authResponseMock: AuthResponseMock;
+    let discoveryMock: DiscoveryMock;
     let discoveryApi: DiscoveryApi;
 
     beforeEach((done) => {
