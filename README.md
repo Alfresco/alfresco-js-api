@@ -494,49 +494,6 @@ A complete list of all the ECM methods is available here : [Content API](/src/ap
 
 A complete list of all the BPM methods is available here : [APS 2.X API](/src/api/activiti-rest-api) here you can find some common [Example](/bpm-example.md).
 
-# Legacy Endpoint porting (ver 2.x.x)
-
-Since version 3.0.0 in order to support tree shaking the JS-API has been radically redesigned.
-
-In order to help the porting to the new JS-APi version of the old project the previous syntax even if is deprecated is still supported in the compatibility layer.
-
-***Note this compatibility layer could be deleted in the next major versions of the JS-API***
-
-```javascript
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
-
-const alfrescoJsApi = new AlfrescoApi({
-        oauth2: {
-            host: 'HOST_OAUTH2_SERVER',
-            clientId: 'YOUR_CLIENT_ID',
-            secret: 'SECRET',
-            authPath:'my-custom-auth-endpoint/token'
-        },
-        authType: 'OAUTH',
-        provider: 'ALL'
-    });
-
-alfrescoJsApi.login('admin', 'admin').then(
-    data => {
-        console.log('API called successfully Login in with authorization server performed ');
-    },
-    error => {
-        console.error(error);
-    }
-);
-
-alfrescoJsApi.nodes
-    .getNodeInfo(fileOrFolderId)
-    .then(
-        data => {
-            console.log('This is the name' + data.name );
-        }, 
-        error => {
-            console.log('This node does not exist');
-        }
-    );
-```
-
 # Development
 
 To run the build

@@ -15,9 +15,6 @@
  * limitations under the License.
  */
 
-export * from './src/api-legacy/legacy';
-export * from './src/api-legacy/content-rest-api/src/index';
-export * from './src/api-legacy/activiti-rest-api/src/index';
 export * from './src/api/content-rest-api/index';
 export * from './src/api/content-custom-api/index';
 export * from './src/api/discovery-rest-api/index';
@@ -29,7 +26,6 @@ export * from './src/api/search-rest-api/index';
 export * from './src/api/model-rest-api/index';
 
 export * from './src/api/content-custom-api/api/content.api';
-export * from './src/api-legacy/alfrescoUpload';
 export * from './src/authentication/contentAuth';
 export * from './src/authentication/processAuth';
 export * from './src/authentication/oauth2Auth';
@@ -37,6 +33,5 @@ export * from './src/contentClient';
 export * from './src/processClient';
 export * from './src/storage';
 export * from './src/alfrescoApi';
-export * from './src/alfrescoApiCompatibility';
 export * from './src/alfrescoApiClient';
 export * from './src/alfrescoApiConfig';
