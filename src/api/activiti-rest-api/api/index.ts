@@ -34,6 +34,8 @@ import { ChecklistsApi } from './checklists.api';
 export * from './comments.api';
 import { ActivitiCommentsApi } from './comments.api';
 import { ContentApi } from './content.api';
+const ActivitiContentApi = ContentApi;
+export {ActivitiContentApi};
 export * from './dataSources.api';
 import { DataSourcesApi } from './dataSources.api';
 export * from './decisionAudits.api';
