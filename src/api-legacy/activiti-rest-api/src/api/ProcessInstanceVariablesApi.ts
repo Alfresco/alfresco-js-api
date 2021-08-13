@@ -24,6 +24,6 @@ import { ProcessInstanceVariablesApi as NewProcessInstanceVariablesApi } from '.
 export class ProcessInstanceVariablesApi extends NewProcessInstanceVariablesApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

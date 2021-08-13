@@ -24,6 +24,6 @@ import { UserProfileApi } from '../../../../api/activiti-rest-api/api/userProfil
 export class ProfileApi extends UserProfileApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

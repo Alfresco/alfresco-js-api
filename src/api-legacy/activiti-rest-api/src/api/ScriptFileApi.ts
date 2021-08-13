@@ -24,6 +24,6 @@ import { ScriptFilesApi as NewScriptFileApi } from '../../../../api/activiti-res
 export class ScriptFileApi extends NewScriptFileApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

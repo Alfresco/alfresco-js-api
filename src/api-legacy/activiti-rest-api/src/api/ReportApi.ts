@@ -24,6 +24,6 @@ import { ReportApi as  NewReportApi } from '../../../../api/activiti-rest-api/ap
 export class ReportApi extends NewReportApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

@@ -24,6 +24,6 @@ import { ProcessScopesApi as NewProcessScopeApi } from '../../../../api/activiti
 export class ProcessScopeApi extends NewProcessScopeApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

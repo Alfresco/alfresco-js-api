@@ -20,10 +20,14 @@ import { AlfrescoApiClient } from '../../../alfrescoApiClient';
 
 export class BaseApi {
 
-    apiClient: AlfrescoApiClient;
+    protected alfrescoApi: AlfrescoApi;
+
+    get apiClient(): AlfrescoApiClient {
+        return this.alfrescoApi.searchClient;
+    }
 
     constructor(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.searchClient;
+        this.alfrescoApi = alfrescoApi;
     }
 
     errorMessage(param: string, methodName: string) {

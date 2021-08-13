@@ -24,6 +24,6 @@ import { UserFiltersApi as NewUserfiltersApi } from '../../../../api/activiti-re
 export class UserFiltersApi extends NewUserfiltersApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

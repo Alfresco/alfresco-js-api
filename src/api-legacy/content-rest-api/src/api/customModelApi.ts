@@ -24,6 +24,6 @@ import { CustomModelApi as NewCustomModelApi } from '../../../../api/content-cus
 export class CustomModelApi extends NewCustomModelApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.contentPrivateClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

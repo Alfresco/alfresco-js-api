@@ -23,6 +23,6 @@ import { AboutApi as NewAboutApi } from '../../../../api/activiti-rest-api/api/a
 export class AboutApi extends NewAboutApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

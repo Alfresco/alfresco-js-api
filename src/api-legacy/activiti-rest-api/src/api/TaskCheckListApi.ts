@@ -24,6 +24,6 @@ import { ChecklistsApi as NewChecklistsApi } from '../../../../api/activiti-rest
 export class TaskCheckListApi  extends NewChecklistsApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

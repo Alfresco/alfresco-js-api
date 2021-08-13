@@ -24,6 +24,6 @@ import { AccountIntegrationApi } from '../../../../api/activiti-rest-api/api/acc
 export class IntegrationAccountApi extends AccountIntegrationApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

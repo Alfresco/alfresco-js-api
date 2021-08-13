@@ -20,12 +20,14 @@ import { AlfrescoApiClient, RequestOptions } from '../../../alfrescoApiClient';
 
 export class BaseApi {
 
-    apiClient: AlfrescoApiClient;
+    protected alfrescoApi: AlfrescoApi;
+
+    get apiClient(): AlfrescoApiClient {
+        return this.alfrescoApi.authClient;
+    }
 
     constructor(alfrescoApi?: AlfrescoApi) {
-        if (alfrescoApi) {
-            this.apiClient = alfrescoApi.authClient;
-        }
+        this.alfrescoApi = alfrescoApi;
     }
 
     post<T = any>(options: RequestOptions): Promise<T> {

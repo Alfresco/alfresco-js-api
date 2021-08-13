@@ -88,7 +88,7 @@ export class CustomModelApi extends BaseApi {
         super(alfrescoApi);
 
         if (alfrescoApi) {
-            this.apiClient = alfrescoApi.contentPrivateClient;
+            this.alfrescoApi = alfrescoApi;
         }
     }
 

@@ -24,6 +24,6 @@ import { SystemPropertiesApi as NewSystemPropertiesApi } from '../../../../api/a
 export class SystemPropertiesApi extends NewSystemPropertiesApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

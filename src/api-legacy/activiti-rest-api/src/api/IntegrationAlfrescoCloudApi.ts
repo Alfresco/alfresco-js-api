@@ -24,6 +24,6 @@ import { IntegrationAlfrescoCloudApi as NewIntegrationAlfrescoCloudApi } from '.
 export class IntegrationAlfrescoCloudApi extends NewIntegrationAlfrescoCloudApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

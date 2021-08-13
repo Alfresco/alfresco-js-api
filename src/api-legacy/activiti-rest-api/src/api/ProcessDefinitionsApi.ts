@@ -24,6 +24,6 @@ import { ProcessDefinitionsApi as NewProcessDefinitionsApi } from '../../../../a
 export class ProcessDefinitionsApi extends NewProcessDefinitionsApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }
