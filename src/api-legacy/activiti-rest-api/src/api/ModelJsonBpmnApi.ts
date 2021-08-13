@@ -24,6 +24,6 @@ import { ModelJsonBpmnApi as NewModelJsonBpmnApi } from '../../../../api/activit
 export class ModelJsonBpmnApi extends NewModelJsonBpmnApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

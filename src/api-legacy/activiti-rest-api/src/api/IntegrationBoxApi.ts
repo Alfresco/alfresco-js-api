@@ -24,6 +24,6 @@ import { IntegrationBoxApi as NewIntegrationBoxApi } from '../../../../api/activ
 export class IntegrationBoxApi extends NewIntegrationBoxApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

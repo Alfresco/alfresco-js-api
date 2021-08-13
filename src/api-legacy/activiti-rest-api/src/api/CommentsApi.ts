@@ -23,6 +23,6 @@ import { ActivitiCommentsApi as NewCommentsApi } from '../../../../api/activiti-
  */
 export class CommentsApi  extends NewCommentsApi {
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

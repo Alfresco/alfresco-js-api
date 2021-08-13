@@ -24,6 +24,6 @@ import { AdminTenantsApi as NewAdminTenantsApi } from '../../../../api/activiti-
 export class AdminTenantsApi extends NewAdminTenantsApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

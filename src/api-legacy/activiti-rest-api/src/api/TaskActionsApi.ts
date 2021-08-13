@@ -24,6 +24,6 @@ import { TaskActionsApi as NewTaskActionsApi } from '../../../../api/activiti-re
 export class TaskActionsApi extends NewTaskActionsApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

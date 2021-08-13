@@ -24,6 +24,6 @@ import { UploadApi } from '../api/content-custom-api/api/upload.api';
 export class AlfrescoUpload extends UploadApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.contentClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

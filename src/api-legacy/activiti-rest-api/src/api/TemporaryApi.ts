@@ -24,6 +24,6 @@ import { TemporaryApi as NewTemporaryApi } from '../../../../api/activiti-rest-a
 export class TemporaryApi extends NewTemporaryApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

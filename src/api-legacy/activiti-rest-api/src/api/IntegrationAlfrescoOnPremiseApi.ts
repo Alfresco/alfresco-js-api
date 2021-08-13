@@ -24,6 +24,6 @@ import { IntegrationAlfrescoOnPremiseApi as NewIntegrationAlfrescoOnPremiseApi }
 export class IntegrationAlfrescoOnPremiseApi extends NewIntegrationAlfrescoOnPremiseApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

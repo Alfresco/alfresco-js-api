@@ -24,6 +24,6 @@ import { TaskFormsApi as NewTaskFormsApi } from '../../../../api/activiti-rest-a
 export class TaskFormsApi extends NewTaskFormsApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

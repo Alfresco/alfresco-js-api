@@ -24,6 +24,6 @@ import { DownloadsApi as NewDownloadsApi } from '../../../../api/content-rest-ap
 export class DownloadsApi extends NewDownloadsApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.contentClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

@@ -24,6 +24,6 @@ import { ModelsApi as NewModelsApi } from '../../../../api/activiti-rest-api/api
 export class ModelsApi extends NewModelsApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

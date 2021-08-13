@@ -24,6 +24,6 @@ import { AdminGroupsApi as NewAdminGroupsApi } from '../../../../api/activiti-re
 export class AdminGroupsApi extends NewAdminGroupsApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

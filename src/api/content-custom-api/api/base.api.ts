@@ -20,28 +20,33 @@ import { AlfrescoApiClient, RequestOptions } from '../../../alfrescoApiClient';
 
 export class BaseApi {
 
-    apiClient: AlfrescoApiClient;
+    protected alfrescoApi: AlfrescoApi;
+
+    get apiClientPrivate(): AlfrescoApiClient {
+        return this.alfrescoApi.contentPrivateClient;
+    }
+    get apiClient(): AlfrescoApiClient {
+        return this.alfrescoApi.contentClient;
+    }
 
     constructor(alfrescoApi?: AlfrescoApi) {
-        if (alfrescoApi) {
-            this.apiClient = alfrescoApi.contentClient;
-        }
+        this.alfrescoApi = alfrescoApi;
     }
 
     post<T = any>(options: RequestOptions): Promise<T> {
-        return this.apiClient.post<T>(options);
+        return this.apiClientPrivate.post<T>(options);
     }
 
     put<T = any>(options: RequestOptions): Promise<T> {
-        return this.apiClient.put<T>(options);
+        return this.apiClientPrivate.put<T>(options);
     }
 
     get<T = any>(options: RequestOptions): Promise<T> {
-        return this.apiClient.get<T>(options);
+        return this.apiClientPrivate.get<T>(options);
     }
 
     delete<T = void>(options: RequestOptions): Promise<T> {
-        return this.apiClient.delete(options);
+        return this.apiClientPrivate.delete(options);
     }
 
     errorMessage(param: string, methodName: string) {

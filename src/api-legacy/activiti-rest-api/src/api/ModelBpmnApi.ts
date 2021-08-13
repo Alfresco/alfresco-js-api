@@ -24,6 +24,6 @@ import { ModelsBpmnApi as NewModelsBpmnApi } from '../../../../api/activiti-rest
 export class ModelBpmnApi extends NewModelsBpmnApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

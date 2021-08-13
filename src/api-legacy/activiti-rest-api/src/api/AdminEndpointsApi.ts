@@ -24,7 +24,7 @@ import { AdminEndpointsApi as NewAdminEndpointsApi } from '../../../../api/activ
 export class AdminEndpointsApi extends NewAdminEndpointsApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 
     removeBasicAuthonfiguration(basicAuthId: number, tenantId: number): Promise<any> {

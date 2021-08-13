@@ -24,6 +24,6 @@ import { AlfrescoApi } from '../../../../alfrescoApi';
 export class QueriesApi extends NewQueriesApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.contentClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

@@ -24,6 +24,6 @@ import { UsersApi as NewUserApi } from '../../../../api/activiti-rest-api/api/us
 export class UserApi extends NewUserApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

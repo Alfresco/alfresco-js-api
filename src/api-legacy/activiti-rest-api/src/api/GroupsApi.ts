@@ -24,6 +24,6 @@ import { ActivitiGroupsApi as NewGroupsApi } from '../../../../api/activiti-rest
 export class GroupsApi extends NewGroupsApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }

@@ -24,6 +24,6 @@ import { ModelsHistoryApi as NewModelsHistoryApi } from '../../../../api/activit
 export class ModelsHistoryApi extends NewModelsHistoryApi {
 
     public init(alfrescoApi?: AlfrescoApi) {
-        this.apiClient = alfrescoApi.processClient;
+        this.alfrescoApi = alfrescoApi;
     }
 }
