@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 
-import { AlfrescoApi } from '../../../alfrescoApi';
 import { PaginatedList, PaginatedEntries } from '../model/pagination';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
@@ -83,14 +82,6 @@ export interface CustomModelPropertyConstraint {
  */
 export class CustomModelApi extends BaseApi {
     private = true;
-
-    constructor(alfrescoApi?: AlfrescoApi) {
-        super(alfrescoApi);
-
-        if (alfrescoApi) {
-            this.alfrescoApi = alfrescoApi;
-        }
-    }
 
     /**
      * create Custom Model

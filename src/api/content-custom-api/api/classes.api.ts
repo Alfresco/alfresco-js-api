@@ -68,10 +68,10 @@ export class ClassesApi extends BaseApi {
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
-        return this.apiClient.callApi(
+        return this.apiClientPrivate.callApi(
             this.path + '/{className}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassDescription, this.apiClient.config.contextRoot + '/s'
+            contentTypes, accepts, ClassDescription, this.apiClientPrivate.config.contextRoot + '/s'
         );
     }
 
@@ -94,10 +94,10 @@ export class ClassesApi extends BaseApi {
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
-        return this.apiClient.callApi(
+        return this.apiClientPrivate.callApi(
             `${this.path}/{className}/subclasses`, 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassDescription, this.apiClient.config.contextRoot + '/s'
+            contentTypes, accepts, ClassDescription, this.apiClientPrivate.config.contextRoot + '/s'
         );
     }
 }
