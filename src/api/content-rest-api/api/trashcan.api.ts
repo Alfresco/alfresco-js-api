@@ -17,6 +17,7 @@
 
 import { DeletedNodeEntry } from '../model/deletedNodeEntry';
 import { DeletedNodesPaging } from '../model/deletedNodesPaging';
+import { DirectAccessUrlEntry } from '../model/directAccessUrlEntry';
 import { NodeEntry } from '../model/nodeEntry';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
@@ -452,6 +453,42 @@ parameter are returned in addition to those specified in the **fields** paramete
             '/deleted-nodes/{nodeId}/restore', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , NodeEntry);
+    }
+
+    getDirectAccessUrl(nodeId: string): Promise<DirectAccessUrlEntry> {
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
+        const pathParams = {
+            'nodeId': nodeId
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/deleted-nodes/{nodeId}/request-direct-access-url', 'POST',
+            pathParams, {}, {}, {}, null,
+            contentTypes, accepts , DirectAccessUrlEntry);
+    }
+
+    getRenditionDirectAccessUrl(nodeId: string, renditionId: string): Promise<DirectAccessUrlEntry> {
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(renditionId, 'renditionId');
+
+        const pathParams = {
+            'nodeId': nodeId,
+            'renditionId': renditionId
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/deleted-nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url', 'POST',
+            pathParams, {}, {}, {}, null,
+            contentTypes, accepts , DirectAccessUrlEntry);
     }
 
 }

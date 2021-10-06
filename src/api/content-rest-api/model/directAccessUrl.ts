@@ -23,14 +23,18 @@ export class DirectAccessUrl {
      */
     contentUrl: string;
     /**
+     * Whether or not the content downloads as an attachment
+     */
+    attachment?: boolean;
+    /**
      * The direct access URL would become invalid when the expiry date is reached
      */
-    expiresAt?: Date;
+    expiryTime?: Date;
 
     constructor(input?: any) {
         if (input) {
             Object.assign(this, input);
-            this.expiresAt = input.expiresAt ? DateAlfresco.parseDate(input.expiresAt) : undefined;
+            this.expiryTime = input.expiryTime ? DateAlfresco.parseDate(input.expiryTime) : undefined;
         }
     }
 

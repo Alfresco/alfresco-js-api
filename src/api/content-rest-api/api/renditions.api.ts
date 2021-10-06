@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+import { DirectAccessUrlEntry } from '../model/directAccessUrlEntry';
 import { RenditionBodyCreate } from '../model/renditionBodyCreate';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
@@ -235,6 +236,25 @@ clause will return just the CREATED renditions:
             '/nodes/{nodeId}/renditions', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , RenditionPaging);
+    }
+
+    getDirectAccessUrl(nodeId: string, renditionId: string): Promise<DirectAccessUrlEntry> {
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(renditionId, 'renditionId');
+
+        const pathParams = {
+            'nodeId': nodeId,
+            'renditionId': renditionId
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url', 'POST',
+            pathParams, {}, {}, {}, null,
+            contentTypes, accepts , DirectAccessUrlEntry);
     }
 
 }
