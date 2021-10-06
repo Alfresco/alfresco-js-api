@@ -1737,7 +1737,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             contentTypes, accepts , NodeEntry);
     }
 
-    getDirectAccessUrl(nodeId: string): Promise<DirectAccessUrlEntry> {
+    requestDirectAccessUrl(nodeId: string): Promise<DirectAccessUrlEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
 

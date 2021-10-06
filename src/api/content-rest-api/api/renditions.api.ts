@@ -238,7 +238,7 @@ clause will return just the CREATED renditions:
             contentTypes, accepts , RenditionPaging);
     }
 
-    getDirectAccessUrl(nodeId: string, renditionId: string): Promise<DirectAccessUrlEntry> {
+    requestDirectAccessUrl(nodeId: string, renditionId: string): Promise<DirectAccessUrlEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');

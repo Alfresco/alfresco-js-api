@@ -528,7 +528,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             contentTypes, accepts , VersionEntry);
     }
 
-    getDirectAccessUrl(nodeId: string, versionId: string): Promise<DirectAccessUrlEntry> {
+    requestDirectAccessUrl(nodeId: string, versionId: string): Promise<DirectAccessUrlEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
