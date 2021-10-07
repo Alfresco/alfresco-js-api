@@ -20,6 +20,7 @@ export class StatusInfo {
     isAuditEnabled: boolean;
     isQuickShareEnabled: boolean;
     isThumbnailGenerationEnabled: boolean;
+    isDirectAccessUrlEnabled: boolean;
 
     constructor(input?: any) {
 

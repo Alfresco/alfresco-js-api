@@ -15,6 +15,7 @@
 * limitations under the License.
 */
 
+import { DirectAccessUrlEntry } from '../model/directAccessUrlEntry';
 import { RenditionBodyCreate } from '../model/renditionBodyCreate';
 import { RenditionEntry } from '../model/renditionEntry';
 import { RenditionPaging } from '../model/renditionPaging';
@@ -525,6 +526,25 @@ parameter are returned in addition to those specified in the **fields** paramete
             '/nodes/{nodeId}/versions/{versionId}/revert', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , VersionEntry);
+    }
+
+    requestDirectAccessUrl(nodeId: string, versionId: string): Promise<DirectAccessUrlEntry> {
+
+        throwIfNotDefined(nodeId, 'nodeId');
+        throwIfNotDefined(versionId, 'versionId');
+
+        const pathParams = {
+            'nodeId': nodeId,
+            'versionId': versionId
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/nodes/{nodeId}/versions/{versionId}/request-direct-access-url', 'POST',
+            pathParams, {}, {}, {}, null,
+            contentTypes, accepts , DirectAccessUrlEntry);
     }
 
 }

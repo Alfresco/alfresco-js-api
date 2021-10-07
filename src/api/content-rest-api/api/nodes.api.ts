@@ -1458,250 +1458,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , NodeEntry);
     }
-/**
-    * Generate a direct access content url
-    *
-    * **Note:** this endpoint is available in Alfresco 7.0 and newer versions.
 
-Generate a direct access content url for the given **nodeId**.
-Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
-
-JSON
- {
-   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
- }
-
-Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
-
-JSON
- {
-   \"validFor\": \"60\"
- }
-
-**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
-**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
-    *
-    * @param nodeId The identifier of a node.
-    * @param opts Optional parameters
-    * @param opts.requestContentUrlBodyCreate Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
-    * @return Promise<DirectAccessUrlEntry>
-    */
-    requestContentUrl(nodeId: string, opts?: any): Promise<DirectAccessUrlEntry> {
-
-        throwIfNotDefined(nodeId, 'nodeId');
-
-        opts = opts || {};
-        const postBody = opts['requestContentUrlBodyCreate'];
-
-        const pathParams = {
-            'nodeId': nodeId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/request-content-url', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , DirectAccessUrlEntry);
-    }
-/**
-    * Generate a direct access content url
-    *
-    * **Note:** this endpoint is available in Alfresco 7.0 and newer versions.
-
-Generate a direct access content url for the given **nodeId**.
-Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
-
-JSON
- {
-   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
- }
-
-Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
-
-JSON
- {
-   \"validFor\": \"60\"
- }
-
-**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
-**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
-    *
-    * @param nodeId The identifier of a node.
-    * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
-    * @param opts Optional parameters
-    * @param opts.requestContentUrlBodyCreate Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
-    * @return Promise<DirectAccessUrlEntry>
-    */
-    requestContentUrl_1(nodeId: string, renditionId: string, opts?: any): Promise<DirectAccessUrlEntry> {
-
-        throwIfNotDefined(nodeId, 'nodeId');
-        throwIfNotDefined(renditionId, 'renditionId');
-
-        opts = opts || {};
-        const postBody = opts['requestContentUrlBodyCreate'];
-
-        const pathParams = {
-            'nodeId': nodeId,            'renditionId': renditionId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/renditions/{renditionId}/request-content-url', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , DirectAccessUrlEntry);
-    }
-/**
-    * Generate a direct access content url
-    *
-    * **Note:** this endpoint is available in Alfresco 7.0 and newer versions.
-
-Generate a direct access content url for the given **nodeId**.
-Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
-
-JSON
- {
-   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
- }
-
-Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
-
-JSON
- {
-   \"validFor\": \"60\"
- }
-
-**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
-**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
-    *
-    * @param nodeId The identifier of a node.
-    * @param versionId The identifier of a version, ie. version label, within the version history of a node.
-    * @param opts Optional parameters
-    * @param opts.requestContentUrlBodyCreate Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
-    * @return Promise<DirectAccessUrlEntry>
-    */
-    requestContentUrl_2(nodeId: string, versionId: string, opts?: any): Promise<DirectAccessUrlEntry> {
-
-        throwIfNotDefined(nodeId, 'nodeId');
-        throwIfNotDefined(versionId, 'versionId');
-
-        opts = opts || {};
-        const postBody = opts['requestContentUrlBodyCreate'];
-
-        const pathParams = {
-            'nodeId': nodeId,            'versionId': versionId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/versions/{versionId}/request-content-url', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , DirectAccessUrlEntry);
-    }
-/**
-    * Generate a direct access content url
-    *
-    * **Note:** this endpoint is available in Alfresco 7.0 and newer versions.
-
-Generate a direct access content url for the given **nodeId**.
-Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
-
-JSON
- {
-   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
- }
-
-Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
-
-JSON
- {
-   \"validFor\": \"60\"
- }
-
-**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
-**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
-    *
-    * @param nodeId The identifier of a node.
-    * @param versionId The identifier of a version, ie. version label, within the version history of a node.
-    * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
-    * @param opts Optional parameters
-    * @param opts.requestContentUrlBodyCreate Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
-    * @return Promise<DirectAccessUrlEntry>
-    */
-    requestContentUrl_3(nodeId: string, versionId: string, renditionId: string, opts?: any): Promise<DirectAccessUrlEntry> {
-
-        throwIfNotDefined(nodeId, 'nodeId');
-        throwIfNotDefined(versionId, 'versionId');
-        throwIfNotDefined(renditionId, 'renditionId');
-
-        opts = opts || {};
-        const postBody = opts['requestContentUrlBodyCreate'];
-
-        const pathParams = {
-            'nodeId': nodeId,            'versionId': versionId,            'renditionId': renditionId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/versions/{versionId}/renditions/{renditionId}/request-content-url', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , DirectAccessUrlEntry);
-    }
 /**
     * Unlock a node
     *
@@ -1978,6 +1735,23 @@ parameter are returned in addition to those specified in the **fields** paramete
             '/nodes/{nodeId}/content', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , NodeEntry);
+    }
+
+    requestDirectAccessUrl(nodeId: string): Promise<DirectAccessUrlEntry> {
+
+        throwIfNotDefined(nodeId, 'nodeId');
+
+        const pathParams = {
+            'nodeId': nodeId
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/nodes/{nodeId}/request-direct-access-url', 'POST',
+            pathParams, {}, {}, {}, null,
+            contentTypes, accepts , DirectAccessUrlEntry);
     }
 
 }
