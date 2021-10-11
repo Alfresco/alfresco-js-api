@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**listDeletedNodeRenditions**](TrashcanApi.md#listDeletedNodeRenditions) | **GET** /deleted-nodes/{nodeId}/renditions | List renditions for a deleted node
 [**listDeletedNodes**](TrashcanApi.md#listDeletedNodes) | **GET** /deleted-nodes | List deleted nodes
 [**requestDirectAccessUrl**](TrashcanApi.md#requestDirectAccessUrl) | **POST** /deleted-nodes/{nodeId}/request-direct-access-url | Generate a direct access content url for a given deleted node
-[**requestRenditionDirectAccessUrl**](RenditionsApi.md#requestRenditionDirectAccessUrl) | **POST** /deleted-nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url | Generate a direct access content url for a given rendition of a deleted node
+[**requestRenditionDirectAccessUrl**](TrashcanApi.md#requestRenditionDirectAccessUrl) | **POST** /deleted-nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url | Generate a direct access content url for a given rendition of a deleted node
 [**restoreDeletedNode**](TrashcanApi.md#restoreDeletedNode) | **POST** /deleted-nodes/{nodeId}/restore | Restore a deleted node
 
 
