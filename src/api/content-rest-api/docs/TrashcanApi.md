@@ -11,6 +11,8 @@ Method | HTTP request | Description
 [**getDeletedNodeContent**](TrashcanApi.md#getDeletedNodeContent) | **GET** /deleted-nodes/{nodeId}/content | Get deleted node content
 [**listDeletedNodeRenditions**](TrashcanApi.md#listDeletedNodeRenditions) | **GET** /deleted-nodes/{nodeId}/renditions | List renditions for a deleted node
 [**listDeletedNodes**](TrashcanApi.md#listDeletedNodes) | **GET** /deleted-nodes | List deleted nodes
+[**requestDirectAccessUrl**](TrashcanApi.md#requestDirectAccessUrl) | **POST** /deleted-nodes/{nodeId}/request-direct-access-url | Generate a direct access content url for a given deleted node
+[**requestRenditionDirectAccessUrl**](RenditionsApi.md#requestRenditionDirectAccessUrl) | **POST** /deleted-nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url | Generate a direct access content url for a given rendition of a deleted node
 [**restoreDeletedNode**](TrashcanApi.md#restoreDeletedNode) | **POST** /deleted-nodes/{nodeId}/restore | Restore a deleted node
 
 
@@ -445,6 +447,84 @@ If not supplied then the default value is 100.
 ### Return type
 
 [**DeletedNodesPaging**](DeletedNodesPaging.md)
+
+<a name="requestDirectAccessUrl"></a>
+## requestDirectAccessUrl
+> DirectAccessUrlEntry requestDirectAccessUrl(nodeId)
+
+Generate a direct access content url for a given deleted node
+
+**Note:** this endpoint is available in Alfresco 7.1 and newer versions.
+
+### Example
+
+```javascript
+import { AlfrescoApi, TrashcanApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const trashcanApi = new TrashcanApi(alfrescoApi);
+
+const nodeId = 'da2e6953-3850-408b-8284-3534dd777417';
+
+trashcanApi.requestDirectAccessUrl(nodeId).then((data) => {
+  console.log('URL generated successfully: ', data.contentUrl);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description
+------------- | ------------- | -------------
+**nodeId** | **string** | The identifier of a node.
+
+### Return type
+
+[**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)
+
+<a name="requestRenditionDirectAccessUrl"></a>
+## requestRenditionDirectAccessUrl
+> DirectAccessUrlEntry requestRenditionDirectAccessUrl(nodeId, renditionId)
+
+Generate a direct access content url for a given rendition of a deleted node
+
+**Note:** this endpoint is available in Alfresco 7.1 and newer versions.
+
+### Example
+
+```javascript
+import { AlfrescoApi, TrashcanApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const trashcanApi = new TrashcanApi(alfrescoApi);
+
+const nodeId = 'da2e6953-3850-408b-8284-3534dd777417';
+const renditionId = 'avatar';
+
+trashcanApi.requestRenditionDirectAccessUrl(nodeId, renditionId).then((data) => {
+  console.log('URL generated successfully: ', data.contentUrl);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description
+------------- | ------------- | -------------
+**nodeId** | **string** | The identifier of a node.
+**renditionId** | **string** | The identifier of a rendition.
+
+### Return type
+
+[**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)
 
 <a name="restoreDeletedNode"></a>
 ## restoreDeletedNode

@@ -528,6 +528,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             contentTypes, accepts , VersionEntry);
     }
 
+    /**
+     * Generate a direct access content url for a given version of a node
+     *
+     * **Note:** this endpoint is available in Alfresco 7.1 and newer versions.
+     *
+     * @param nodeId The identifier of a node.
+     * @param versionId The identifier of a version
+     * @return Promise<DirectAccessUrlEntry>
+     */
     requestDirectAccessUrl(nodeId: string, versionId: string): Promise<DirectAccessUrlEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');

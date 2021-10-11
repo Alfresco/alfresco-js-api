@@ -238,6 +238,15 @@ clause will return just the CREATED renditions:
             contentTypes, accepts , RenditionPaging);
     }
 
+    /**
+     * Generate a direct access content url for a given rendition of a node
+     *
+     * **Note:** this endpoint is available in Alfresco 7.1 and newer versions.
+     *
+     * @param nodeId The identifier of a node.
+     * @param renditionId The identifier of a version
+     * @return Promise<DirectAccessUrlEntry>
+     */
     requestDirectAccessUrl(nodeId: string, renditionId: string): Promise<DirectAccessUrlEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');

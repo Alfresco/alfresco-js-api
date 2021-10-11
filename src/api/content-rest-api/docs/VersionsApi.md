@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**getVersionRenditionContent**](VersionsApi.md#getVersionRenditionContent) | **GET** /nodes/{nodeId}/versions/{versionId}/renditions/{renditionId}/content | Get rendition content for a file version
 [**listVersionHistory**](VersionsApi.md#listVersionHistory) | **GET** /nodes/{nodeId}/versions | List version history
 [**listVersionRenditions**](VersionsApi.md#listVersionRenditions) | **GET** /nodes/{nodeId}/versions/{versionId}/renditions | List renditions for a file version
+[**requestDirectAccessUrl**](VersionsApi.md#requestDirectAccessUrl) | **POST** /nodes/{nodeId}/versions/{versionId}/request-direct-access-url | Generate a direct access content url for a given version of a node
 [**revertVersion**](VersionsApi.md#revertVersion) | **POST** /nodes/{nodeId}/versions/{versionId}/revert | Revert a version
 
 
@@ -510,6 +511,46 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RenditionPaging**](RenditionPaging.md)
+
+<a name="requestDirectAccessUrl"></a>
+## requestDirectAccessUrl
+> DirectAccessUrlEntry requestDirectAccessUrl(nodeId, versionId)
+
+Generate a direct access content url for a given version of a node
+
+**Note:** this endpoint is available in Alfresco 7.1 and newer versions.
+
+### Example
+
+```javascript
+import { AlfrescoApi, VersionsApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const versionsApi = new VersionsApi(alfrescoApi);
+
+const nodeId = 'da2e6953-3850-408b-8284-3534dd777417';
+const versionId = '1.0';
+
+versionsApi.requestDirectAccessUrl(nodeId, versionId).then((data) => {
+  console.log('URL generated successfully: ', data.contentUrl);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description
+------------- | ------------- | -------------
+**nodeId** | **string** | The identifier of a node.
+**versionId** | **string** | The identifier of a version.
+
+### Return type
+
+[**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)
 
 <a name="revertVersion"></a>
 ## revertVersion
