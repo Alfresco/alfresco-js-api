@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**getRendition**](RenditionsApi.md#getRendition) | **GET** /nodes/{nodeId}/renditions/{renditionId} | Get rendition information
 [**getRenditionContent**](RenditionsApi.md#getRenditionContent) | **GET** /nodes/{nodeId}/renditions/{renditionId}/content | Get rendition content
 [**listRenditions**](RenditionsApi.md#listRenditions) | **GET** /nodes/{nodeId}/renditions | List renditions
+[**requestDirectAccessUrl**](RenditionsApi.md#requestDirectAccessUrl) | **POST** /nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url | Generate a direct access content url for a given rendition of a node
 
 
 <a name="createRendition"></a>
@@ -246,3 +247,42 @@ Name | Type | Description  | Notes
 
 [**RenditionPaging**](RenditionPaging.md)
 
+<a name="requestDirectAccessUrl"></a>
+## requestDirectAccessUrl
+> DirectAccessUrlEntry requestDirectAccessUrl(nodeId, renditionId)
+
+Generate a direct access content url for a given rendition of a node
+
+**Note:** this endpoint is available in Alfresco 7.1 and newer versions.
+
+### Example
+
+```javascript
+import { AlfrescoApi, RenditionsApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const renditionsApi = new RenditionsApi(alfrescoApi);
+
+const nodeId = 'da2e6953-3850-408b-8284-3534dd777417';
+const renditionId = 'avatar';
+
+renditionsApi.requestDirectAccessUrl(nodeId, renditionId).then((data) => {
+  console.log('URL generated successfully: ', data.contentUrl);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type | Description
+------------- | ------------- | -------------
+**nodeId** | **string** | The identifier of a node.
+**renditionId** | **string** | The identifier of a rendition.
+
+### Return type
+
+[**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)

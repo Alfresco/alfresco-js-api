@@ -20,10 +20,7 @@ Method | HTTP request | Description
 [**listTargetAssociations**](NodesApi.md#listTargetAssociations) | **GET** /nodes/{nodeId}/targets | List target associations
 [**lockNode**](NodesApi.md#lockNode) | **POST** /nodes/{nodeId}/lock | Lock a node
 [**moveNode**](NodesApi.md#moveNode) | **POST** /nodes/{nodeId}/move | Move a node
-[**requestContentUrl**](NodesApi.md#requestContentUrl) | **POST** /nodes/{nodeId}/request-content-url | Generate a direct access content url
-[**requestContentUrl_0**](NodesApi.md#requestContentUrl_0) | **POST** /nodes/{nodeId}/renditions/{renditionId}/request-content-url | Generate a direct access content url
-[**requestContentUrl_1**](NodesApi.md#requestContentUrl_1) | **POST** /nodes/{nodeId}/versions/{versionId}/request-content-url | Generate a direct access content url
-[**requestContentUrl_2**](NodesApi.md#requestContentUrl_2) | **POST** /nodes/{nodeId}/versions/{versionId}/renditions/{renditionId}/request-content-url | Generate a direct access content url
+[**requestDirectAccessUrl**](NodesApi.md#requestDirectAccessUrl) | **POST** /nodes/{nodeId}/request-direct-access-url | Generate a direct access content url for a given node
 [**unlockNode**](NodesApi.md#unlockNode) | **POST** /nodes/{nodeId}/unlock | Unlock a node
 [**updateNode**](NodesApi.md#updateNode) | **PUT** /nodes/{nodeId} | Update a node
 [**updateNodeContent**](NodesApi.md#updateNodeContent) | **PUT** /nodes/{nodeId}/content | Update node content
@@ -1767,38 +1764,18 @@ parameter are returned in addition to those specified in the **fields** paramete
 
 [**NodeEntry**](NodeEntry.md)
 
-<a name="requestContentUrl"></a>
-## requestContentUrl
-> DirectAccessUrlEntry requestContentUrl(nodeIdopts)
+<a name="requestDirectAccessUrl"></a>
+## requestDirectAccessUrl
+> DirectAccessUrlEntry requestDirectAccessUrl(nodeId)
 
-Generate a direct access content url
+Generate a direct access content url for a given node
 
-**Note:** this endpoint is available in Alfresco 7.0 and newer versions.
-
-Generate a direct access content url for the given **nodeId**.
-Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
-
-JSON
- {
-   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
- }
-
-Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
-
-JSON
- {
-   \"validFor\": \"60\"
- }
-
-
-**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
-**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
+**Note:** this endpoint is available in Alfresco 7.1 and newer versions.
 
 ### Example
 
 ```javascript
-import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
+import { AlfrescoApi, NodesApi } from '@alfresco/js-api';
 
 const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
@@ -1806,14 +1783,10 @@ const alfrescoApi = new AlfrescoApi({
 
 const nodesApi = new NodesApi(alfrescoApi);
 
-const opts = { 
-  'requestContentUrlBodyCreate':  /*  | Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
- */
-};
+const nodeId = 'da2e6953-3850-408b-8284-3534dd777417';
 
-nodesApi.requestContentUrl(nodeIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+nodesApi.requestDirectAccessUrl(nodeId).then((data) => {
+  console.log('URL generated successfully: ', data.contentUrl);
 }, function(error) {
   console.error(error);
 });
@@ -1821,211 +1794,9 @@ nodesApi.requestContentUrl(nodeIdopts).then((data) => {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nodeId** | **string**| The identifier of a node. | 
- **requestContentUrlBodyCreate** | [**DirectAccessUrlBodyCreate**](DirectAccessUrlBodyCreate.md)| Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
- | [optional] 
-
-### Return type
-
-[**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)
-
-<a name="requestContentUrl_0"></a>
-## requestContentUrl_0
-> DirectAccessUrlEntry requestContentUrl_0(nodeIdrenditionIdopts)
-
-Generate a direct access content url
-
-**Note:** this endpoint is available in Alfresco 7.0 and newer versions.
-
-Generate a direct access content url for the given **nodeId**.
-Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
-
-JSON
- {
-   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
- }
-
-Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
-
-JSON
- {
-   \"validFor\": \"60\"
- }
-
-
-**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
-**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
-
-### Example
-
-```javascript
-import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
-
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-const nodesApi = new NodesApi(alfrescoApi);
-
-const opts = { 
-  'requestContentUrlBodyCreate':  /*  | Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
- */
-};
-
-nodesApi.requestContentUrl_0(nodeIdrenditionIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nodeId** | **string**| The identifier of a node. | 
- **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
- **requestContentUrlBodyCreate** | [**DirectAccessUrlBodyCreate**](DirectAccessUrlBodyCreate.md)| Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
- | [optional] 
-
-### Return type
-
-[**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)
-
-<a name="requestContentUrl_1"></a>
-## requestContentUrl_1
-> DirectAccessUrlEntry requestContentUrl_1(nodeIdversionIdopts)
-
-Generate a direct access content url
-
-**Note:** this endpoint is available in Alfresco 7.0 and newer versions.
-
-Generate a direct access content url for the given **nodeId**.
-Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
-
-JSON
- {
-   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
- }
-
-Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
-
-JSON
- {
-   \"validFor\": \"60\"
- }
-
-
-**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
-**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
-
-### Example
-
-```javascript
-import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
-
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-const nodesApi = new NodesApi(alfrescoApi);
-
-const opts = { 
-  'requestContentUrlBodyCreate':  /*  | Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
- */
-};
-
-nodesApi.requestContentUrl_1(nodeIdversionIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nodeId** | **string**| The identifier of a node. | 
- **versionId** | **string**| The identifier of a version, ie. version label, within the version history of a node. | 
- **requestContentUrlBodyCreate** | [**DirectAccessUrlBodyCreate**](DirectAccessUrlBodyCreate.md)| Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
- | [optional] 
-
-### Return type
-
-[**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)
-
-<a name="requestContentUrl_2"></a>
-## requestContentUrl_2
-> DirectAccessUrlEntry requestContentUrl_2(nodeIdversionIdrenditionIdopts)
-
-Generate a direct access content url
-
-**Note:** this endpoint is available in Alfresco 7.0 and newer versions.
-
-Generate a direct access content url for the given **nodeId**.
-Optionally the expiry at date could be set, so the direct access link would become invalid when the expiry date is reached. For example:
-
-JSON
- {
-   \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
- }
-
-Or optionally the validFor (in seconds) could be set, so the direct access link is valid for that length of time.
-
-JSON
- {
-   \"validFor\": \"60\"
- }
-
-
-**Note:** If an expiryAt date or validFor time length isn't provided then a default of 300 seconds (5 minutes) validity time is used if not configured otherwise.
-**Note:** It is up to the actual ContentStore implementation if it can fulfil this request or not.
-
-
-### Example
-
-```javascript
-import { AlfrescoApi, NodesApi} from '@alfresco/js-api';
-
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-const nodesApi = new NodesApi(alfrescoApi);
-
-const opts = { 
-  'requestContentUrlBodyCreate':  /*  | Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
- */
-};
-
-nodesApi.requestContentUrl_2(nodeIdversionIdrenditionIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nodeId** | **string**| The identifier of a node. | 
- **versionId** | **string**| The identifier of a version, ie. version label, within the version history of a node. | 
- **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
- **requestContentUrlBodyCreate** | [**DirectAccessUrlBodyCreate**](DirectAccessUrlBodyCreate.md)| Optionally, specify the expiry at date or the length of time in seconds that the link is valid for.
-Note: It is up to the actual ContentStore implementation if it can fulfil this request or not.
- | [optional] 
+Name | Type | Description
+------------- | ------------- | -------------
+**nodeId** | **string** | The identifier of a node.
 
 ### Return type
 

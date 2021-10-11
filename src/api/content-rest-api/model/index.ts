@@ -60,7 +60,6 @@ export * from './deletedNodeEntry';
 export * from './deletedNodesPaging';
 export * from './deletedNodesPagingList';
 export * from './directAccessUrl';
-export * from './directAccessUrlBodyCreate';
 export * from './directAccessUrlEntry';
 export * from './download';
 export * from './downloadBodyCreate';

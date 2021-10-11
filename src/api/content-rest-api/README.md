@@ -70,10 +70,7 @@ NodesApi | [**listSourceAssociations**](docs/NodesApi.md#listSourceAssociations)
 NodesApi | [**listTargetAssociations**](docs/NodesApi.md#listTargetAssociations) | **GET** /nodes/{nodeId}/targets | List target associations
 NodesApi | [**lockNode**](docs/NodesApi.md#lockNode) | **POST** /nodes/{nodeId}/lock | Lock a node
 NodesApi | [**moveNode**](docs/NodesApi.md#moveNode) | **POST** /nodes/{nodeId}/move | Move a node
-NodesApi | [**requestContentUrl**](docs/NodesApi.md#requestContentUrl) | **POST** /nodes/{nodeId}/request-content-url | Generate a direct access content url
-NodesApi | [**requestContentUrl_0**](docs/NodesApi.md#requestContentUrl_0) | **POST** /nodes/{nodeId}/renditions/{renditionId}/request-content-url | Generate a direct access content url
-NodesApi | [**requestContentUrl_1**](docs/NodesApi.md#requestContentUrl_1) | **POST** /nodes/{nodeId}/versions/{versionId}/request-content-url | Generate a direct access content url
-NodesApi | [**requestContentUrl_2**](docs/NodesApi.md#requestContentUrl_2) | **POST** /nodes/{nodeId}/versions/{versionId}/renditions/{renditionId}/request-content-url | Generate a direct access content url
+NodesApi | [**requestDirectAccessUrl**](docs/NodesApi.md#requestDirectAccessUrl) | **POST** /nodes/{nodeId}/request-direct-access-url | Generate a direct access content url for a given node
 NodesApi | [**unlockNode**](docs/NodesApi.md#unlockNode) | **POST** /nodes/{nodeId}/unlock | Unlock a node
 NodesApi | [**updateNode**](docs/NodesApi.md#updateNode) | **PUT** /nodes/{nodeId} | Update a node
 NodesApi | [**updateNodeContent**](docs/NodesApi.md#updateNodeContent) | **PUT** /nodes/{nodeId}/content | Update node content
@@ -100,6 +97,7 @@ RenditionsApi | [**createRendition**](docs/RenditionsApi.md#createRendition) | *
 RenditionsApi | [**getRendition**](docs/RenditionsApi.md#getRendition) | **GET** /nodes/{nodeId}/renditions/{renditionId} | Get rendition information
 RenditionsApi | [**getRenditionContent**](docs/RenditionsApi.md#getRenditionContent) | **GET** /nodes/{nodeId}/renditions/{renditionId}/content | Get rendition content
 RenditionsApi | [**listRenditions**](docs/RenditionsApi.md#listRenditions) | **GET** /nodes/{nodeId}/renditions | List renditions
+RenditionsApi | [**requestDirectAccessUrl**](docs/RenditionsApi.md#requestDirectAccessUrl) | **POST** /nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url | Generate a direct access content url for a given rendition of a node
 SharedlinksApi | [**createSharedLink**](docs/SharedlinksApi.md#createSharedLink) | **POST** /shared-links | Create a shared link to a file
 SharedlinksApi | [**deleteSharedLink**](docs/SharedlinksApi.md#deleteSharedLink) | **DELETE** /shared-links/{sharedId} | Deletes a shared link
 SharedlinksApi | [**emailSharedLink**](docs/SharedlinksApi.md#emailSharedLink) | **POST** /shared-links/{sharedId}/email | Email shared link
@@ -145,6 +143,8 @@ TrashcanApi | [**getDeletedNode**](docs/TrashcanApi.md#getDeletedNode) | **GET**
 TrashcanApi | [**getDeletedNodeContent**](docs/TrashcanApi.md#getDeletedNodeContent) | **GET** /deleted-nodes/{nodeId}/content | Get deleted node content
 TrashcanApi | [**listDeletedNodeRenditions**](docs/TrashcanApi.md#listDeletedNodeRenditions) | **GET** /deleted-nodes/{nodeId}/renditions | List renditions for a deleted node
 TrashcanApi | [**listDeletedNodes**](docs/TrashcanApi.md#listDeletedNodes) | **GET** /deleted-nodes | List deleted nodes
+TrashcanApi | [**requestDirectAccessUrl**](docs/TrashcanApi.md#requestDirectAccessUrl) | **POST** /deleted-nodes/{nodeId}/request-direct-access-url | Generate a direct access content url for a given deleted node
+TrashcanApi | [**requestRenditionDirectAccessUrl**](docs/TrashcanApi.md#requestRenditionDirectAccessUrl) | **POST** /deleted-nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url | Generate a direct access content url for a given rendition of a deleted node
 TrashcanApi | [**restoreDeletedNode**](docs/TrashcanApi.md#restoreDeletedNode) | **POST** /deleted-nodes/{nodeId}/restore | Restore a deleted node
 VersionsApi | [**createVersionRendition**](docs/VersionsApi.md#createVersionRendition) | **POST** /nodes/{nodeId}/versions/{versionId}/renditions | Create rendition for a file version
 VersionsApi | [**deleteVersion**](docs/VersionsApi.md#deleteVersion) | **DELETE** /nodes/{nodeId}/versions/{versionId} | Delete a version
@@ -154,6 +154,7 @@ VersionsApi | [**getVersionRendition**](docs/VersionsApi.md#getVersionRendition)
 VersionsApi | [**getVersionRenditionContent**](docs/VersionsApi.md#getVersionRenditionContent) | **GET** /nodes/{nodeId}/versions/{versionId}/renditions/{renditionId}/content | Get rendition content for a file version
 VersionsApi | [**listVersionHistory**](docs/VersionsApi.md#listVersionHistory) | **GET** /nodes/{nodeId}/versions | List version history
 VersionsApi | [**listVersionRenditions**](docs/VersionsApi.md#listVersionRenditions) | **GET** /nodes/{nodeId}/versions/{versionId}/renditions | List renditions for a file version
+VersionsApi | [**requestDirectAccessUrl**](docs/VersionsApi.md#requestDirectAccessUrl) | **POST** /nodes/{nodeId}/versions/{versionId}/request-direct-access-url | Generate a direct access content url for a given version of a node
 VersionsApi | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** /nodes/{nodeId}/versions/{versionId}/revert | Revert a version
 
 ## Models
@@ -203,7 +204,6 @@ VersionsApi | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** 
 - [DeletedNodesPaging](docs/DeletedNodesPaging.md)
 - [DeletedNodesPagingList](docs/DeletedNodesPagingList.md)
 - [DirectAccessUrl](docs/DirectAccessUrl.md)
-- [DirectAccessUrlBodyCreate](docs/DirectAccessUrlBodyCreate.md)
 - [DirectAccessUrlEntry](docs/DirectAccessUrlEntry.md)
 - [Download](docs/Download.md)
 - [DownloadBodyCreate](docs/DownloadBodyCreate.md)

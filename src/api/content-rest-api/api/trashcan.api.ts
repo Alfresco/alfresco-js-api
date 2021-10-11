@@ -455,6 +455,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             contentTypes, accepts , NodeEntry);
     }
 
+    /**
+     * Generate a direct access content url for a given deleted node
+     *
+     * **Note:** this endpoint is available in Alfresco 7.1 and newer versions.
+     *
+     * @param nodeId The identifier of a node.
+     * @return Promise<DirectAccessUrlEntry>
+     */
     requestDirectAccessUrl(nodeId: string): Promise<DirectAccessUrlEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
@@ -472,6 +480,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             contentTypes, accepts , DirectAccessUrlEntry);
     }
 
+    /**
+     * Generate a direct access content url for a given rendition of a deleted node
+     *
+     * **Note:** this endpoint is available in Alfresco 7.1 and newer versions.
+     *
+     * @param nodeId The identifier of a node.
+     * @param renditionId The identifier of a version
+     * @return Promise<DirectAccessUrlEntry>
+     */
     requestRenditionDirectAccessUrl(nodeId: string, renditionId: string): Promise<DirectAccessUrlEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
