@@ -204,7 +204,6 @@ VersionsApi | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** 
 - [DeletedNodesPaging](docs/DeletedNodesPaging.md)
 - [DeletedNodesPagingList](docs/DeletedNodesPagingList.md)
 - [DirectAccessUrl](docs/DirectAccessUrl.md)
-- [DirectAccessUrlBodyCreate](docs/DirectAccessUrlBodyCreate.md)
 - [DirectAccessUrlEntry](docs/DirectAccessUrlEntry.md)
 - [Download](docs/Download.md)
 - [DownloadBodyCreate](docs/DownloadBodyCreate.md)
