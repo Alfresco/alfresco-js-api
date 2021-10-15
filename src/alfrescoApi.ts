@@ -544,21 +544,21 @@ export class AlfrescoApi implements Emitter {
      * Get the current Ticket for the Bpm
      * */
     getTicketBpm(): string {
-        return this.processAuth && this.processAuth.getTicket();
+        return this.isOauthConfiguration() ? this.config.ticketBpm : this.oauth2Auth.getToken();
     }
 
     /**
      * Get the current Ticket for the Ecm
      * */
     getTicketEcm(): string {
-        return this.contentAuth && this.contentAuth.getTicket();
+        return this.config.ticketEcm;
     }
 
     /**
      * Get the current Ticket for the Ecm and BPM
      * */
     getTicket(): string[] {
-        return [this.contentAuth.getTicket(), this.processAuth.getTicket()];
+        return this.isOauthConfiguration() ? [this.getTicketEcm(), this.getTicketBpm()] : [this.getTicketEcm(), this.oauth2Auth.getToken()];
     }
 
     isBpmConfiguration(): boolean {
