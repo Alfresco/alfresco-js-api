@@ -254,6 +254,9 @@ refreshTokenTimeout|  millisecond value, after how many millisecond you want ref
 redirectSilentIframeUri|  url to be redirect after silent refresh login| /assets/silent-refresh.html |
 silentLogin|  direct execute the implicit login without the need to call AlfrescoJsApi.implicitLogin() method|   false|
 publicUrls | list of public urls that don't need authorization. It is possible too pass absolute paths and string patterns that are valid for [minimatch](https://github.com/isaacs/minimatch#readme) |
+authorizationUrl| authorization url, relative to the host| /protocol/openid-connect/auth|
+tokenUrl| token url, relative to the host| /protocol/openid-connect/token|
+logoutUrl| logout url, relative to the host| /protocol/openid-connect/logout|
 
 The api/js-api will automatically redirect you to the login page anf refresh the token if necessary
 
