@@ -32,6 +32,10 @@ declare let window: Window;
 
 export class Oauth2Auth extends AlfrescoApiClient {
 
+    static readonly DEFAULT_AUTHORIZATION_URL = '/protocol/openid-connect/auth';
+    static readonly DEFAULT_TOKEN_URL = '/protocol/openid-connect/token';
+    static readonly DEFAULT_LOGOUT_URL = '/protocol/openid-connect/logout';
+
     private refreshTokenIntervalPolling: any;
     private refreshTokenTimeoutIframe: any;
     private checkAccessToken = true;
@@ -39,7 +43,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     hashFragmentParams: any;
     token: string;
-    discovery: any = {};
+    discovery: {
+        loginUrl?: string;
+        logoutUrl?: string;
+        tokenEndpoint?: string;
+    } = {};
 
     authentications: Authentication = {
         'oauth2': { accessToken: '' }, type: 'oauth2', 'basicAuth': {}
@@ -121,9 +129,9 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     discoveryUrls() {
-        this.discovery.loginUrl = `${this.host}/protocol/openid-connect/auth`;
-        this.discovery.logoutUrl = `${this.host}/protocol/openid-connect/logout`;
-        this.discovery.tokenEndpoint = `${this.host}/protocol/openid-connect/token`;
+        this.discovery.loginUrl = this.host + (this.config.oauth2.authorizationUrl || Oauth2Auth.DEFAULT_AUTHORIZATION_URL);
+        this.discovery.logoutUrl = this.host + (this.config.oauth2.logoutUrl || Oauth2Auth.DEFAULT_LOGOUT_URL);
+        this.discovery.tokenEndpoint = this.host + (this.config.oauth2.tokenUrl || Oauth2Auth.DEFAULT_TOKEN_URL);
     }
 
     hasContentProvider(): boolean {

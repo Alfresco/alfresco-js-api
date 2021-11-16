@@ -30,6 +30,59 @@ describe('Oauth2  test', () => {
         });
     });
 
+    describe('Discovery urls', () => {
+        const authType = 'OAUTH';
+        const host = 'http://dummy/auth';
+        const clientId = 'dummy';
+        const scope = 'openid';
+        const redirectUri = '/';
+
+        it('should have default urls', async () => {
+            const oauth2Auth = new Oauth2Auth(
+                <AlfrescoApiConfig> {
+                    oauth2: {
+                        host,
+                        clientId,
+                        scope,
+                        redirectUri
+                    },
+                    authType
+                },
+                alfrescoJsApi
+            );
+
+            expect(oauth2Auth.discovery.loginUrl).to.be.equal(host + Oauth2Auth.DEFAULT_AUTHORIZATION_URL);
+            expect(oauth2Auth.discovery.tokenEndpoint).to.be.equal(host + Oauth2Auth.DEFAULT_TOKEN_URL);
+            expect(oauth2Auth.discovery.logoutUrl).to.be.equal(host + Oauth2Auth.DEFAULT_LOGOUT_URL);
+        });
+
+        it('should be possible to override the default urls', async () => {
+            const authorizationUrl = '/custom-login';
+            const logoutUrl = '/custom-logout';
+            const tokenUrl = '/custom-token';
+            const oauth2Auth = new Oauth2Auth(
+                <AlfrescoApiConfig> {
+                    oauth2: {
+                        host,
+                        authorizationUrl,
+                        logoutUrl,
+                        tokenUrl,
+                        clientId,
+                        scope,
+                        redirectUri
+                    },
+                    authType
+                },
+                alfrescoJsApi
+            );
+
+            expect(oauth2Auth.discovery.loginUrl).to.be.equal(host + authorizationUrl);
+            expect(oauth2Auth.discovery.tokenEndpoint).to.be.equal(host + tokenUrl);
+            expect(oauth2Auth.discovery.logoutUrl).to.be.equal(host + logoutUrl);
+        });
+
+    });
+
     describe('With Authentication', () => {
 
         it('should be possible have different user login in different instance of the oauth2Auth class', async () => {
