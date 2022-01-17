@@ -40,6 +40,7 @@ export * from './path';
 export * from './securityControlSetting';
 export * from './securityControlSettingBody';
 export * from './securityControlSettingEntry';
+export * from './securityGroup';
 export * from './securityMark';
 export * from './securityMarkBody';
 export * from './securityMarkInformation';
