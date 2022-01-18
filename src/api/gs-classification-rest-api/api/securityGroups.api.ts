@@ -15,14 +15,33 @@
 * limitations under the License.
 */
 
-import { SecurityGroup } from '../model/securityGroup';
 import { BaseApi } from './base.api';
-import { throwIfNotDefined } from '../../../assert';
+import { SecurityGroupPaging } from '../model/securityGroupPaging';
 
 /**
-* Securitycontrolsettings service.
-* @module SecurityMarksApi
+* SecurityGroupsApi service.
+* @module SecurityGroupsApi
 */
 export class SecurityGroupsApi extends BaseApi {
 
+    getSecurityGroups(include: string, skipCount: number, maxItems: number){
+        let postBody = null;
+        let pathParams = {
+        };
+        let queryParams = {
+            'include': include,
+            'skipCount': skipCount,
+            'maxItems': maxItems
+        };
+        let headerParams = {
+        };
+        let formParams = {
+        };
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        return this.apiClient.callApi(
+            '/security-groups', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts, SecurityGroupPaging);
+    }
 }

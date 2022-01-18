@@ -15,16 +15,16 @@
 * limitations under the License.
 */
 
-export class SecurityGroup {
-    id: string;
-    groupName: string;
-    groupType: string;
-    inUse: boolean
+import { SecurityGroupPagingList } from './securityGroupPagingList';
+
+export class SecurityGroupPaging {
+    list?: SecurityGroupPagingList;
 
     constructor(input?: any) {
 
         if (input) {
             Object.assign(this, input);
+            this.list = input.list ? new SecurityGroupPagingList(input.list) : undefined;
         }
     }
 }
