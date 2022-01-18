@@ -17,6 +17,8 @@
 
 import { BaseApi } from './base.api';
 import { SecurityGroupPaging } from '../model/securityGroupPaging';
+import { SecurityGroupBody } from '../model/securityGroupBody';
+import { SecurityGroupEntry } from '../model/securityGroupEntry';
 
 /**
 * SecurityGroupsApi service.
@@ -24,7 +26,7 @@ import { SecurityGroupPaging } from '../model/securityGroupPaging';
 */
 export class SecurityGroupsApi extends BaseApi {
 
-    getSecurityGroups(include: string, skipCount: number, maxItems: number){
+    getSecurityGroups(include: string, skipCount: number, maxItems: number) : Promise<SecurityGroupPaging>{
         let postBody = null;
         let pathParams = {
         };
@@ -43,5 +45,24 @@ export class SecurityGroupsApi extends BaseApi {
             '/security-groups', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts, SecurityGroupPaging);
+    }
+
+    createSecurityGroup(securityGroupBody: SecurityGroupBody, include: string) : Promise<SecurityGroupEntry>{
+        let postBody = securityGroupBody;
+        let pathParams = {
+        };
+        let queryParams = {
+            'include': include,
+        };
+        let headerParams = {
+        };
+        let formParams = {
+        };
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        return this.apiClient.callApi(
+            '/security-groups', 'POST',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts, SecurityGroupEntry);
     }
 }

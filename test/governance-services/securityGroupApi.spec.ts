@@ -1,6 +1,7 @@
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { SecurityGroupsApi } from '../../src/api/gs-classification-rest-api';
 import { expect } from 'chai';
+import { SecurityGroupBody } from '../../src/api/gs-classification-rest-api/model/securityGroupBody';
 
 describe('Security Group API test', () => {
     let securityGroupApi: SecurityGroupsApi;
@@ -12,6 +13,19 @@ describe('Security Group API test', () => {
         });
         securityGroupApi = new SecurityGroupsApi(alfrescoApi);
         await alfrescoApi.login('admin', 'admin');
+    });
+
+    it('create Security Group', async () => {
+        let securityGroupBody: SecurityGroupBody = {
+            "groupName": "Alfresco",
+            "groupType": "HIERARCHICAL"
+        }
+        await securityGroupApi.createSecurityGroup(securityGroupBody,'inUse')
+            .then(data => {
+                expect(data.entry.id).not.equal(null);
+                expect(data.entry.groupName).to.be.equal('Alfresco');
+                expect(data.entry.groupType).to.be.equal('HIERARCHICAL');
+            });
     });
 
     it('get Security Group', async () => {
