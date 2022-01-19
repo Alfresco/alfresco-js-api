@@ -14,9 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { SecurityMark } from '../model/securityMark';
+
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
+import { SecurityMarkEntry } from '../model/securityMarkEntry';
+import { SecurityMarkBody } from '../model/securityMarkBody';
 
 /**
  * Securitycontrolsettings service.
@@ -24,16 +26,18 @@ import { throwIfNotDefined } from '../../../assert';
  */
 export class SecurityMarksApi extends BaseApi {
     /**
-    * Get security group id value
+    * Get security mark value
     *
     * Gets the value for a selected **securityGroupId**.
     *
-    * @param securityGroupId The key for the security group id. You can use one of the following settings:
-* -declassificationTimeFrame- for the declassification time frame value set in alfresco-global.properties file
+    * @param securityGroupId The key for the security group id.
+    * @param opts.inUse The key for the security mark is in use or not.
+    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+    * @param opts.maxItems The maximum number of items to return in the list.
 
-    * @return Promise<SecurityMark>
+    * @return Promise<SecurityMarkEntry>
     */
-    getSecurityMark(securityGroupId: string): Promise<SecurityMark> {
+    getSecurityMarks(securityGroupId: string, opts?: any): Promise<SecurityMarkEntry> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
 
         let postBody = null;
@@ -42,7 +46,11 @@ export class SecurityMarksApi extends BaseApi {
             securityGroupId: securityGroupId,
         };
 
-        let queryParams = {};
+        let queryParams = {
+            inUse: opts['inUse'],
+            skipCount: opts['skipCount'],
+            maxItems: opts['maxItems'],
+        };
 
         let headerParams = {};
         let formParams = {};
@@ -60,7 +68,178 @@ export class SecurityMarksApi extends BaseApi {
             postBody,
             contentTypes,
             accepts,
-            SecurityMark
+            SecurityMarkEntry
+        );
+    }
+
+    /**
+    * Create security mark
+    *
+    *
+    * @param securityGroupId The key for the security group id.
+    * @param securityMarkBody securityMarkBody.
+
+    * @return Promise<SecurityMarkEntry>
+    */
+    createSecurityMark(securityGroupId: string, securityMarkBody: SecurityMarkBody): Promise<SecurityMarkEntry> {
+        throwIfNotDefined(securityGroupId, 'securityGroupId');
+        throwIfNotDefined(securityMarkBody, 'securityMarkBody');
+
+        let postBody = securityMarkBody;
+        let pathParams = {
+            securityGroupId: securityGroupId,
+        };
+        let queryParams = {
+            securityMarkBody,
+        };
+        let headerParams = {};
+        let formParams = {};
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        return this.apiClient.callApi(
+            '/security-groups/{securityGroupId}/security-marks',
+            'POST',
+            pathParams,
+            queryParams,
+            headerParams,
+            formParams,
+            postBody,
+            contentTypes,
+            accepts,
+            SecurityMarkEntry
+        );
+    }
+    /**
+    * Get security mark value information
+    *
+    * Gets the value for a selected **securityMarkId**.
+    *
+    * @param securityGroupId The key for the security group id.
+    * @param securityMarkId The key for the security mark id
+    * @return Promise<SecurityMarkEntry>
+    */
+    getSecurityMark(securityGroupId: string, securityMarkId: string): Promise<SecurityMarkEntry> {
+        throwIfNotDefined(securityGroupId, 'securityGroupId');
+        throwIfNotDefined(securityMarkId, 'securityMarkId');
+
+        let postBody = null;
+
+        let pathParams = {
+            securityGroupId: securityGroupId,
+            securityMarkId: securityMarkId,
+        };
+
+        let queryParams = {};
+
+        let headerParams = {};
+        let formParams = {};
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/security-groups/{securityGroupId}/security-marks/{securityMarkId}',
+            'GET',
+            pathParams,
+            queryParams,
+            headerParams,
+            formParams,
+            postBody,
+            contentTypes,
+            accepts,
+            SecurityMarkEntry
+        );
+    }
+
+    /**
+    * Updates Security Mark value
+    *
+    *
+    * @param securityGroupId The key for the security group id.
+    * @param securityMarkId The key for the security mark is in use or not.
+    * @param securityMarkBody securityMarkBody.
+
+    * @return Promise<SecurityMarkEntry>
+    */
+
+    updateSecurityMark(securityGroupId: string, securityMarkId: string, securityMarkBody: SecurityMarkBody): Promise<SecurityMarkEntry> {
+        throwIfNotDefined(securityGroupId, 'securityGroupId');
+        throwIfNotDefined(securityMarkId, 'securityMarkId');
+        throwIfNotDefined(securityMarkBody, 'securityMarkBody');
+
+        let postBody = null;
+
+        let pathParams = {
+            securityGroupId: securityGroupId,
+            securityMarkId: securityMarkId,
+        };
+
+        let queryParams = {
+            securityMarkBody
+        };
+
+        let headerParams = {};
+        let formParams = {};
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/security-groups/{securityGroupId}/security-marks/{securityMarkId}',
+            'PUT',
+            pathParams,
+            queryParams,
+            headerParams,
+            formParams,
+            postBody,
+            contentTypes,
+            accepts,
+            SecurityMarkEntry
+        );
+    }
+
+    /**
+    * Delete security mark
+    *
+    *
+    * @param securityGroupId The key for the security group id.
+    * @param securityMarkId The key for the security mark id.
+    * @param securityMarkBody Security Mark
+    *
+    * @return Promise<SecurityMarkEntry>
+    */
+    deleteSecurityMark(securityGroupId: string, securityMarkId: string, securityMarkBody: SecurityMarkBody): Promise<SecurityMarkEntry> {
+        throwIfNotDefined(securityGroupId, 'securityGroupId');
+        throwIfNotDefined(securityMarkId, 'securityMarkId');
+
+        let postBody = null;
+
+        let pathParams = {
+            securityGroupId: securityGroupId,
+            securityMarkId: securityMarkId,
+        };
+
+        let queryParams = {
+            securityMarkBody
+        };
+
+        let headerParams = {};
+        let formParams = {};
+
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/security-groups/{securityGroupId}/security-marks/{securityMarkId}',
+            'DELETE',
+            pathParams,
+            queryParams,
+            headerParams,
+            formParams,
+            postBody,
+            contentTypes,
+            accepts,
+            SecurityMarkEntry
         );
     }
 }
