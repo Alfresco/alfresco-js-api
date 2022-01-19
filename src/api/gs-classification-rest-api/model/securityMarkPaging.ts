@@ -15,16 +15,16 @@
 * limitations under the License.
 */
 
-import { SecurityGroupPagingList } from './securityGroupPagingList';
+import { SecurityMarkPagingList } from './securityMarkPagingList';
 
-export class SecurityGroupPaging {
-    list?: SecurityGroupPagingList;
+export class SecurityMarkPaging {
+    list?: SecurityMarkPagingList;
 
     constructor(input?: any) {
 
         if (input) {
             Object.assign(this, input);
-            this.list = input.list ? new SecurityGroupPagingList(input.list) : undefined;
+            this.list = input.list ? new SecurityMarkPagingList(input.list) : undefined;
         }
     }
 }
