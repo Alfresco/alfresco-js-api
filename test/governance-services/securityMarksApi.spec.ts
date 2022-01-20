@@ -12,7 +12,7 @@ describe('Security Group API test', () => {
        "name" : "SecurityMarkTest",
     }
     let securityGroupBody: SecurityGroupBody = {
-        "groupName": "Alfresco",
+        "groupName": "AlfrescoTest",
         "groupType": "HIERARCHICAL"
     }
     let securityGroupId: string;
@@ -33,7 +33,7 @@ describe('Security Group API test', () => {
             .then(data => {
                 securityGroupId = data.entry.id;
                 expect(data.entry.id).not.equal(null);
-                expect(data.entry.groupName).to.be.equal('Alfresco');
+                expect(data.entry.groupName).to.be.equal('AlfrescoTest');
                 expect(data.entry.groupType).to.be.equal('HIERARCHICAL');
             });
     });
