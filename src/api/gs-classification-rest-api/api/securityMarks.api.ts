@@ -110,15 +110,15 @@ export class SecurityMarksApi extends BaseApi {
         );
     }
     /**
-    * Get security mark value information
-    *
-    * Gets the value for a selected **securityMarkId**.
-    *
-    * @param securityGroupId The key for the security group id.
-    * @param securityMarkId The key for the security mark id
-    * @return Promise<SecurityMarkEntry>
-    */
-    getSecurityMark(securityGroupId: string, securityMarkId: string): Promise<SecurityMarkEntry> {
+     * Get security mark value information
+     *
+     * Gets the value for a selected **securityMarkId**.
+     *
+     * @param securityGroupId The key for the security group id.
+     * @param securityMarkId The key for the security mark id
+     * @return Promise<SecurityMarkPaging>
+     */
+    getSecurityMark(securityGroupId: string, securityMarkId: string): Promise<SecurityMarkPaging> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
         throwIfNotDefined(securityMarkId, 'securityMarkId');
 
@@ -175,7 +175,7 @@ export class SecurityMarksApi extends BaseApi {
         };
 
         let queryParams = {
-            securityMarkBody
+            securityMarkBody,
         };
 
         let headerParams = {};
@@ -199,16 +199,15 @@ export class SecurityMarksApi extends BaseApi {
     }
 
     /**
-    * Delete security mark
-    *
-    *
-    * @param securityGroupId The key for the security group id.
-    * @param securityMarkId The key for the security mark id.
-    * @param securityMarkBody Security Mark
-    *
-    * @return Promise<SecurityMarkEntry>
-    */
-    deleteSecurityMark(securityGroupId: string, securityMarkId: string, securityMarkBody: SecurityMarkBody): Promise<SecurityMarkEntry> {
+     * Delete security mark
+     *
+     *
+     * @param securityGroupId The key for the security group id.
+     * @param securityMarkId The key for the security mark id.
+     *
+     * @return Promise<any>
+     */
+    deleteSecurityMark(securityGroupId: string, securityMarkId: string): Promise<SecurityMarkEntry> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
         throwIfNotDefined(securityMarkId, 'securityMarkId');
 
@@ -219,9 +218,7 @@ export class SecurityMarksApi extends BaseApi {
             securityMarkId: securityMarkId,
         };
 
-        let queryParams = {
-            securityMarkBody
-        };
+        let queryParams = {};
 
         let headerParams = {};
         let formParams = {};
@@ -238,8 +235,7 @@ export class SecurityMarksApi extends BaseApi {
             formParams,
             postBody,
             contentTypes,
-            accepts,
-            SecurityMarkEntry
+            accepts
         );
     }
 }
