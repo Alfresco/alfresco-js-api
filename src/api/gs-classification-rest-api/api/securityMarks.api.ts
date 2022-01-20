@@ -19,6 +19,7 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { SecurityMarkEntry } from '../model/securityMarkEntry';
 import { SecurityMarkBody } from '../model/securityMarkBody';
+import { SecurityMarkPaging } from '../model/securityMarkPaging'
 
 /**
  * Securitycontrolsettings service.
