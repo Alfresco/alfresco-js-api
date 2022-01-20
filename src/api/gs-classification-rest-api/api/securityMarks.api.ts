@@ -36,9 +36,9 @@ export class SecurityMarksApi extends BaseApi {
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
     * @param opts.maxItems The maximum number of items to return in the list.
 
-    * @return Promise<SecurityMarkEntry>
+    * @return Promise<SecurityMarkPaging>
     */
-    getSecurityMarks(securityGroupId: string, opts?: any): Promise<SecurityMarkEntry> {
+    getSecurityMarks(securityGroupId: string, opts?: any): Promise<SecurityMarkPaging> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
 
         let postBody = null;
@@ -117,9 +117,9 @@ export class SecurityMarksApi extends BaseApi {
      *
      * @param securityGroupId The key for the security group id.
      * @param securityMarkId The key for the security mark id
-     * @return Promise<SecurityMarkPaging>
+     * @return Promise<SecurityMarkEntry>
      */
-    getSecurityMark(securityGroupId: string, securityMarkId: string): Promise<SecurityMarkPaging> {
+    getSecurityMark(securityGroupId: string, securityMarkId: string): Promise<SecurityMarkEntry> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
         throwIfNotDefined(securityMarkId, 'securityMarkId');
 
