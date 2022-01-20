@@ -9,7 +9,7 @@ describe('Security Group API test', () => {
     let securityGroupApi: SecurityGroupsApi;
     let securityMarksApi: SecurityMarksApi;
     let securityMarkBody: SecurityMarkBody={
-       'name' : 'SecurityMarkTest',
+       "name" : "SecurityMarkTest",
     }
     let securityGroupBody: SecurityGroupBody = {
         "groupName": "Alfresco",
@@ -67,7 +67,7 @@ describe('Security Group API test', () => {
 
     it('update Security Mark', async () => {
         let updatedSecurityMarkBody: SecurityMarkBody = {
-            'name' : 'AlfrescoSecurityMark',
+            "name" : "AlfrescoSecurityMark",
         }
         await securityMarksApi.updateSecurityMark(securityGroupId,securityMarkId,updatedSecurityMarkBody)
             .then(data => {
@@ -79,6 +79,15 @@ describe('Security Group API test', () => {
 
     it('delete Security Mark', (done) => {
         securityMarksApi.deleteSecurityMark(securityGroupId,securityMarkId)
+            .then(
+                () => {
+                    done();
+                }
+            );
+    });
+
+    it('delete Security Group', (done) => {
+        securityGroupApi.deleteSecurityGroup(securityGroupId)
             .then(
                 () => {
                     done();
