@@ -108,7 +108,6 @@ export class SecurityGroupsApi extends BaseApi {
      * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
-
     updateSecurityGroup(securityGroupId: string, securityGroupBody: SecurityGroupBody, opts?: any): Promise<SecurityGroupEntry> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
         throwIfNotDefined(securityGroupBody, 'securityGroupBody');
