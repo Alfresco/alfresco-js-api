@@ -19,7 +19,7 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { SecurityMarkEntry } from '../model/securityMarkEntry';
 import { SecurityMarkBody } from '../model/securityMarkBody';
-import { SecurityMarkPaging } from '../model/securityMarkPaging'
+import { SecurityMarkPaging } from '../model/securityMarkPaging';
 
 /**
  * Securitycontrolsettings service.
@@ -27,17 +27,14 @@ import { SecurityMarkPaging } from '../model/securityMarkPaging'
  */
 export class SecurityMarksApi extends BaseApi {
     /**
-    * Get security mark value
-    *
-    * Gets the value for a selected **securityGroupId**.
-    *
-    * @param securityGroupId The key for the security group id.
-    * @param opts.inUse The key for the security mark is in use or not.
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-    * @param opts.maxItems The maximum number of items to return in the list.
-
-    * @return Promise<SecurityMarkPaging>
-    */
+     * Get security mark value
+     * Gets the value for a selected **securityGroupId**.
+     * @param securityGroupId The key for the security group id.
+     * @param opts.inUse The key for the security mark is in use or not.
+     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param opts.maxItems The maximum number of items to return in the list.
+     * @return Promise<SecurityMarkPaging>
+     */
     getSecurityMarks(securityGroupId: string, opts?: any): Promise<SecurityMarkPaging> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
 
@@ -74,14 +71,11 @@ export class SecurityMarksApi extends BaseApi {
     }
 
     /**
-    * Create security mark
-    *
-    *
-    * @param securityGroupId The key for the security group id.
-    * @param securityMarkBody securityMarkBody.
-
-    * @return Promise<SecurityMarkEntry>
-    */
+     * Create security mark
+     * @param securityGroupId The key for the security group id.
+     * @param securityMarkBody securityMarkBody.
+     * @return Promise<SecurityMarkEntry>
+     */
     createSecurityMark(securityGroupId: string, securityMarkBody: SecurityMarkBody): Promise<SecurityMarkEntry> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
         throwIfNotDefined(securityMarkBody, 'securityMarkBody');
@@ -112,9 +106,7 @@ export class SecurityMarksApi extends BaseApi {
     }
     /**
      * Get security mark value information
-     *
      * Gets the value for a selected **securityMarkId**.
-     *
      * @param securityGroupId The key for the security group id.
      * @param securityMarkId The key for the security mark id
      * @return Promise<SecurityMarkEntry>
@@ -153,31 +145,26 @@ export class SecurityMarksApi extends BaseApi {
     }
 
     /**
-    * Updates Security Mark value
-    *
-    *
-    * @param securityGroupId The key for the security group id.
-    * @param securityMarkId The key for the security mark is in use or not.
-    * @param securityMarkBody securityMarkBody.
-
-    * @return Promise<SecurityMarkEntry>
-    */
+     * Updates Security Mark value
+     * @param securityGroupId The key for the security group id.
+     * @param securityMarkId The key for the security mark is in use or not.
+     * @param securityMarkBody securityMarkBody.
+     * @return Promise<SecurityMarkEntry>
+     */
 
     updateSecurityMark(securityGroupId: string, securityMarkId: string, securityMarkBody: SecurityMarkBody): Promise<SecurityMarkEntry> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
         throwIfNotDefined(securityMarkId, 'securityMarkId');
         throwIfNotDefined(securityMarkBody, 'securityMarkBody');
 
-        let postBody = null;
+        let postBody = securityMarkBody;
 
         let pathParams = {
             securityGroupId: securityGroupId,
             securityMarkId: securityMarkId,
         };
 
-        let queryParams = {
-            securityMarkBody,
-        };
+        let queryParams = {};
 
         let headerParams = {};
         let formParams = {};
@@ -201,11 +188,8 @@ export class SecurityMarksApi extends BaseApi {
 
     /**
      * Delete security mark
-     *
-     *
      * @param securityGroupId The key for the security group id.
      * @param securityMarkId The key for the security mark id.
-     *
      * @return Promise<any>
      */
     deleteSecurityMark(securityGroupId: string, securityMarkId: string): Promise<SecurityMarkEntry> {
