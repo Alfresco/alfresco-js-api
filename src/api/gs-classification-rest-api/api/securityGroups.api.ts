@@ -26,14 +26,21 @@ import { SecurityGroupEntry } from '../model/securityGroupEntry';
 */
 export class SecurityGroupsApi extends BaseApi {
 
-    getSecurityGroups(include: string, skipCount: number, maxItems: number) : Promise<SecurityGroupPaging>{
+    /**
+     * Get All security groups
+     * @param opts.include Returns additional information about the security group
+     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param opts.maxItems The maximum number of items to return in the list.
+     * @return Promise<SecurityGroupPaging>
+     */
+    getSecurityGroups(opts?: any) : Promise<SecurityGroupPaging>{
         let postBody = null;
         let pathParams = {
         };
         let queryParams = {
-            'include': include,
-            'skipCount': skipCount,
-            'maxItems': maxItems
+            'include': opts['include'],
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems']
         };
         let headerParams = {
         };
@@ -47,6 +54,12 @@ export class SecurityGroupsApi extends BaseApi {
             contentTypes, accepts, SecurityGroupPaging);
     }
 
+    /**
+     * Create security group
+     * @param securityGroupBody securityGroupBody.
+     * @param include Returns additional information about the security group
+     * @return Promise<SecurityGroupEntry>
+     */
     createSecurityGroup(securityGroupBody: SecurityGroupBody, include: string) : Promise<SecurityGroupEntry>{
         let postBody = securityGroupBody;
         let pathParams = {
@@ -64,5 +77,68 @@ export class SecurityGroupsApi extends BaseApi {
             '/security-groups', 'POST',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts, SecurityGroupEntry);
+    }
+
+    getSecurityGroupInfo(securityGroupId: string, opts?: any) : Promise<SecurityGroupEntry>{
+        let postBody = null;
+        let pathParams = {
+            'securityGroupId': securityGroupId
+        };
+        let queryParams = {
+            'include': opts['include']
+        };
+        let headerParams = {
+        };
+        let formParams = {
+        };
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        return this.apiClient.callApi(
+            '/security-groups/{securityGroupId}', 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts, SecurityGroupEntry);
+    }
+
+    updateSecurityGroup(securityGroupId: string, securityGroupBody: SecurityGroupBody, opts?: any) : Promise<SecurityGroupEntry>{
+        let postBody = securityGroupBody;
+        let pathParams = {
+            'securityGroupId': securityGroupId
+        };
+        let queryParams = {
+            'include': opts['include']
+        };
+        let headerParams = {
+        };
+        let formParams = {
+        };
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        return this.apiClient.callApi(
+            '/security-groups/{securityGroupId}', 'PUT',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts, SecurityGroupEntry);
+    }
+
+    /**
+     * Delete security group
+     * @param securityGroupId The key for the security group id.
+     * @return Promise<SecurityMarkEntry>
+     */
+    deleteSecurityGroup(securityGroupId: string) : Promise<any>{
+        let postBody = null;
+        let pathParams = {
+            'securityGroupId': securityGroupId
+        };
+        let queryParams = {
+        };
+        let headerParams = {
+        };
+        let formParams = {
+        };
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+        return this.apiClient.callApi(
+            '/security-groups/{securityGroupId}', 'DELETE',
+            pathParams, queryParams, headerParams, formParams, postBody, contentTypes, accepts);
     }
 }

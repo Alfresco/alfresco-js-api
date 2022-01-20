@@ -16,8 +16,8 @@
 */
 
 export class SecurityGroupBody {
-    groupName: string;
-    groupType: string;
+    groupName?: string;
+    groupType?: string;
 
     constructor(input?: any) {
         if (input) {
