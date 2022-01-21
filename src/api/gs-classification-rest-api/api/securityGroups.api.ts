@@ -19,7 +19,6 @@ import { BaseApi } from './base.api';
 import { SecurityGroupPaging } from '../model/securityGroupPaging';
 import { SecurityGroupBody } from '../model/securityGroupBody';
 import { SecurityGroupEntry } from '../model/securityGroupEntry';
-import { throwIfNotDefined } from '../../../assert';
 
 /**
  * SecurityGroupsApi service.
@@ -55,8 +54,6 @@ export class SecurityGroupsApi extends BaseApi {
      * @return Promise<SecurityGroupEntry>
      */
     createSecurityGroup(securityGroupBody: SecurityGroupBody, opts?: any): Promise<SecurityGroupEntry> {
-        throwIfNotDefined(securityGroupBody, 'securityGroupBody');
-
         let postBody = securityGroupBody;
         let pathParams = {};
         let queryParams = {
@@ -75,8 +72,6 @@ export class SecurityGroupsApi extends BaseApi {
      * @return Promise<SecurityGroupEntry>
      */
     getSecurityGroupInfo(securityGroupId: string, opts?: any): Promise<SecurityGroupEntry> {
-        throwIfNotDefined(securityGroupId, 'securityGroupId');
-
         let postBody = null;
         let pathParams = {
             'securityGroupId': securityGroupId,
@@ -109,9 +104,6 @@ export class SecurityGroupsApi extends BaseApi {
      * @return Promise<SecurityGroupEntry>
      */
     updateSecurityGroup(securityGroupId: string, securityGroupBody: SecurityGroupBody, opts?: any): Promise<SecurityGroupEntry> {
-        throwIfNotDefined(securityGroupId, 'securityGroupId');
-        throwIfNotDefined(securityGroupBody, 'securityGroupBody');
-
         let postBody = securityGroupBody;
         let pathParams = {
             securityGroupId: securityGroupId,
@@ -143,8 +135,6 @@ export class SecurityGroupsApi extends BaseApi {
      * @return Promise<SecurityMarkEntry>
      */
     deleteSecurityGroup(securityGroupId: string): Promise<any> {
-        throwIfNotDefined(securityGroupId, 'securityGroupId');
-
         let postBody = null;
         let pathParams = {
             'securityGroupId': securityGroupId,

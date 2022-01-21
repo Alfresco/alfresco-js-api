@@ -14,6 +14,7 @@ export * from './content-services/version.mock';
 export * from './content-services/webscript.mock';
 
 export * from './goverance-services/gs-sites.mock';
+export * from './goverance-services/security-groups.mock';
 
 export * from './process-services/bpm-auth.mock';
 export * from './process-services/process.mock';
