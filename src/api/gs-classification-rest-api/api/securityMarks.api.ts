@@ -85,7 +85,6 @@ export class SecurityMarksApi extends BaseApi {
             securityGroupId: securityGroupId,
         };
         let queryParams = {
-            securityMarkBody,
         };
         let headerParams = {};
         let formParams = {};
