@@ -53,7 +53,6 @@ describe('Security Mark API test', () => {
         securityMarkApiMock.createSecurityMark200Response(securityGroupId);
         await securityMarksApi.createSecurityMark(securityGroupId, securityMarkBody).then((data) => {
             securityMarkId = data.entry.id;
-            console.log('Success');
             expect(data.entry.id).not.equal(null);
             expect(data.entry.name).to.be.equal('SecurityMarkTest');
             expect(data.entry.groupId).to.be.equal(securityGroupId);
