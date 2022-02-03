@@ -1,8 +1,8 @@
-# SecurityMarkBody
+# SecurityMarkEntry
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** |  | [default to null]
+**entry** | [**SecurityMark**](SecurityMark.md) |  | [default to null]
 
 

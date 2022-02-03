@@ -15,14 +15,23 @@
 * limitations under the License.
 */
 
-export class SecurityMarkBody {
-    name : string;
+import { Pagination } from '../../content-rest-api/model/pagination';
+import { SecurityMarkEntry } from './securityMarkEntry';
+
+export class SecurityMarkPagingList {
+    pagination?: Pagination;
+    entries?: SecurityMarkEntry[];
 
     constructor(input?: any) {
 
         if (input) {
             Object.assign(this, input);
+            this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+            if (input.entries) {
+                this.entries = input.entries.map((item: any) => {
+                    return new SecurityMarkEntry(item);
+                });
+            }
         }
     }
-
 }

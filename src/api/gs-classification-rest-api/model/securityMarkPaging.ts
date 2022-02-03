@@ -15,14 +15,16 @@
 * limitations under the License.
 */
 
-export class SecurityMarkBody {
-    name : string;
+import { SecurityMarkPagingList } from './securityMarkPagingList';
+
+export class SecurityMarkPaging {
+    list?: SecurityMarkPagingList;
 
     constructor(input?: any) {
 
         if (input) {
             Object.assign(this, input);
+            this.list = input.list ? new SecurityMarkPagingList(input.list) : undefined;
         }
     }
-
 }

@@ -15,14 +15,16 @@
 * limitations under the License.
 */
 
-export class SecurityMarkBody {
-    name : string;
+import { SecurityMark } from './securityMark';
+
+export class SecurityMarkEntry {
+    entry: SecurityMark;
 
     constructor(input?: any) {
 
         if (input) {
             Object.assign(this, input);
+            this.entry = input.entry ? new SecurityMark(input.entry) : undefined;
         }
     }
-
 }
