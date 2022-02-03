@@ -15,8 +15,11 @@
 * limitations under the License.
 */
 
-export class SecurityMarkBody {
-    name : string;
+export class SecurityGroup {
+    id: string;
+    groupName: string;
+    groupType: string;
+    inUse: boolean
 
     constructor(input?: any) {
 
@@ -24,5 +27,4 @@ export class SecurityMarkBody {
             Object.assign(this, input);
         }
     }
-
 }

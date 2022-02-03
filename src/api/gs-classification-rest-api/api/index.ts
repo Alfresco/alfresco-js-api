@@ -30,10 +30,18 @@ import { DefaultClassificationValuesApi } from './defaultClassificationValues.ap
 export * from './securityControlSettings.api';
 import { SecurityControlSettingsApi } from './securityControlSettings.api';
 
+export * from './securityMarks.api';
+import { SecurityMarksApi } from './securityMarks.api';
+
+export * from './securityGroups.api';
+import { SecurityGroupsApi } from './securityGroups.api';
+
 export const GS_CLASSIFICATION_APIS = {
     ClassificationGuidesApi: ClassificationGuidesApi,
     ClassificationReasonsApi: ClassificationReasonsApi,
     DeclassificationExemptionsApi: DeclassificationExemptionsApi,
     DefaultClassificationValuesApi: DefaultClassificationValuesApi,
-    SecurityControlSettingsApi: SecurityControlSettingsApi
+    SecurityControlSettingsApi: SecurityControlSettingsApi,
+    SecurityMarksApi: SecurityMarksApi,
+    SecurityGroupsApi: SecurityGroupsApi
 };
