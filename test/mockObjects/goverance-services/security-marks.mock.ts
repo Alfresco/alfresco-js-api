@@ -7,65 +7,96 @@ export class SecurityMarkApiMock extends BaseMock {
     }
     get200GetSecurityMark(securityGroupId: string): void {
         nock(this.host, { encodedQueryParams: true })
-            .get('/alfresco/api/-default-/public/gs/versions/1/security-groups/'+securityGroupId+'/security-marks')
+            .get('/alfresco/api/-default-/public/gs/versions/1/security-groups/' + securityGroupId + '/security-marks')
             .reply(200, {
                 list: {
                     pagination: {
-                        "count": 1,
-                        "hasMoreItems": false,
-                        "totalItems": 1,
-                        "skipCount": 0,
-                        "maxItems": 100
+                        count: 1,
+                        hasMoreItems: false,
+                        totalItems: 1,
+                        skipCount: 0,
+                        maxItems: 100,
                     },
                     entries: [
                         {
                             entry: {
-                                "groupId": securityGroupId,
-                                "name": "SecurityMarkTest",
-                                "id": "Sh1G8vTQ"
-                              }
-                        }
-                    ]
+                                groupId: securityGroupId,
+                                name: 'SecurityMarkTest',
+                                id: 'Sh1G8vTQ',
+                            },
+                        },
+                    ],
                 },
             });
     }
 
     createSecurityMark200Response(securityGroupId: string): void {
         nock(this.host, { encodedQueryParams: true })
-            .post('/alfresco/api/-default-/public/gs/versions/1/security-groups/'+securityGroupId+'/security-marks')
+            .post('/alfresco/api/-default-/public/gs/versions/1/security-groups/' + securityGroupId + '/security-marks')
             .reply(200, {
                 entry: {
-                    "groupId": securityGroupId,
-                    "name": "SecurityMarkTest",
-                    "id": "Sh1G8vTQ"
+                    groupId: securityGroupId,
+                    name: 'SecurityMarkTest',
+                    id: 'Sh1G8vTQ',
+                },
+            });
+    }
+    createSecurityMarks200Response(securityGroupId: string): void {
+        nock(this.host, { encodedQueryParams: true })
+            .post('/alfresco/api/-default-/public/gs/versions/1/security-groups/' + securityGroupId + '/security-marks')
+            .reply(200, {
+                list: {
+                    pagination: {
+                        count: 2,
+                        hasMoreItems: false,
+                        totalItems: 2,
+                        skipCount: 0,
+                        maxItems: 100,
+                    },
+                    entries: [
+                        {
+                            entry: {
+                                groupId: securityGroupId,
+                                name: 'SecurityMark3',
+                                id: 'KsnOlXVM',
+                            },
+                        },
+                        {
+                            entry: {
+                                groupId: securityGroupId,
+                                name: 'SecurityMark4',
+                                id: 'wFYkG8CV',
+                            },
+                        },
+                    ],
                 },
             });
     }
     get200GetSingleSecurityMark(securityGroupId: string, securityMarkId: string): void {
         nock(this.host, { encodedQueryParams: true })
-            .get('/alfresco/api/-default-/public/gs/versions/1/security-groups/'+securityGroupId+'/security-marks/'+securityMarkId)
+            .get('/alfresco/api/-default-/public/gs/versions/1/security-groups/' + securityGroupId + '/security-marks/' + securityMarkId)
             .reply(200, {
                 entry: {
-                    "groupId": securityGroupId,
-                    "name": 'SecurityMarkTest',
-                    "id": securityMarkId,
+                    groupId: securityGroupId,
+                    name: 'SecurityMarkTest',
+                    id: securityMarkId,
                 },
             });
     }
     put200UpdateSecurityMarkResponse(securityGroupId: string, securityMarkId: string): void {
         nock(this.host, { encodedQueryParams: true })
-            .put('/alfresco/api/-default-/public/gs/versions/1/security-groups/'+securityGroupId+'/security-marks/'+securityMarkId)
+            .put('/alfresco/api/-default-/public/gs/versions/1/security-groups/' + securityGroupId + '/security-marks/' + securityMarkId)
             .reply(200, {
                 entry: {
-                    "groupId": securityGroupId,
-                    "name": 'AlfrescoSecurityMark',
-                    "id": securityMarkId,
+                    groupId: securityGroupId,
+                    name: 'AlfrescoSecurityMark',
+                    id: securityMarkId,
                 },
             });
     }
     getDeleteSecurityMarkSuccessfulResponse(securityGroupId: string, securityMarkId: string): void {
         nock(this.host, { encodedQueryParams: true })
-            .delete('/alfresco/api/-default-/public/gs/versions/1/security-groups/'+securityGroupId+'/security-marks/'+securityMarkId)
+            .delete('/alfresco/api/-default-/public/gs/versions/1/security-groups/' + securityGroupId + '/security-marks/' + securityMarkId)
             .reply(200);
     }
     get401Response(): void {
@@ -81,5 +112,4 @@ export class SecurityMarkApiMock extends BaseMock {
                 },
             });
     }
-
 }
