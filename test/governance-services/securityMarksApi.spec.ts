@@ -60,7 +60,7 @@ describe('Security Mark API test', () => {
 
     it('create Security Mark', async () => {
         securityMarkApiMock.createSecurityMark200Response(securityGroupId);
-        await securityMarksApi.createSecurityMark(securityGroupId, securityMarksBodySingle).then((data: any) => {
+        await securityMarksApi.createSecurityMarks(securityGroupId, securityMarksBodySingle).then((data: any) => {
             securityMarkId = data.entry.id;
             expect(data.entry.id).not.equal(null);
             expect(data.entry.name).to.be.equal('SecurityMarkTest');
@@ -70,7 +70,7 @@ describe('Security Mark API test', () => {
 
     it('create multiple Security Mark', async () => {
         securityMarkApiMock.createSecurityMarks200Response(securityGroupId);
-        await securityMarksApi.createSecurityMark(securityGroupId, securityMarksBody).then((data: any) => {
+        await securityMarksApi.createSecurityMarks(securityGroupId, securityMarksBody).then((data: any) => {
             expect(data.list.entries[0].entry.id).not.equal(null);
             expect(data.list.entries[0].entry.name).to.be.equal('SecurityMark3');
             expect(data.list.entries[0].entry.groupId).to.be.equal(securityGroupId);

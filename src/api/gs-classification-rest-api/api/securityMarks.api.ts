@@ -20,7 +20,6 @@ import { throwIfNotDefined } from '../../../assert';
 import { SecurityMarkEntry } from '../model/securityMarkEntry';
 import { SecurityMarkBody } from '../model/securityMarkBody';
 import { SecurityMarkPaging } from '../model/securityMarkPaging';
-import { SecurityMarksBody } from '../model/securityMarksBody';
 
 /**
  * Securitycontrolsettings service.
@@ -72,12 +71,12 @@ export class SecurityMarksApi extends BaseApi {
     }
 
     /**
-     * Create security mark
+     * Create security marks
      * @param securityGroupId The key for the security group id.
-     * @param securityMarkBody securityMarkBody.
+     * @param securityMarkBody securityMarkBody[].
      * @return Promise<SecurityMarkEntry|SecurityMarkPaging>
      */
-    createSecurityMark(securityGroupId: string, securityMarkBody: SecurityMarksBody): Promise<SecurityMarkPaging|SecurityMarkEntry> {
+    createSecurityMarks(securityGroupId: string, securityMarkBody: SecurityMarkBody[]): Promise<SecurityMarkPaging|SecurityMarkEntry> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
         throwIfNotDefined(securityMarkBody, 'securityMarkBody');
         let response : SecurityMarkPaging;
