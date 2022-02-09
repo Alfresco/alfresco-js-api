@@ -46,7 +46,7 @@
     "@types/superagent": "^4.1.4",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
-    "chai": "4.3.4",
+    "chai": "4.3.6",
     "chai-datetime": "1.7.0",
     "chai-spies": "^1.0.0",
     "commander": "^6.0.0",
