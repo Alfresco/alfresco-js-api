@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "event-emitter": "^0.3.5",
-    "minimatch": "3.0.4",
+    "minimatch": "3.0.5",
     "superagent": "^7.1.1"
   },
   "devDependencies": {
