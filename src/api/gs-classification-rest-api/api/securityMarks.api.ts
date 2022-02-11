@@ -79,10 +79,7 @@ export class SecurityMarksApi extends BaseApi {
     createSecurityMarks(securityGroupId: string, securityMarkBody: SecurityMarkBody[]): Promise<SecurityMarkPaging|SecurityMarkEntry> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
         throwIfNotDefined(securityMarkBody, 'securityMarkBody');
-        let response : SecurityMarkPaging;
-        if(securityMarkBody.length==1){
-            response : SecurityMarkEntry;
-        }
+
         let postBody = securityMarkBody;
         let pathParams = {
             securityGroupId: securityGroupId,
@@ -103,7 +100,7 @@ export class SecurityMarksApi extends BaseApi {
             postBody,
             contentTypes,
             accepts,
-            response
+            securityMarkBody.length==1 ? SecurityMarkEntry:SecurityMarkPaging
         );
     }
     /**
