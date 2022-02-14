@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
-import { SecurityGroupsApi } from '../../src/api/gs-classification-rest-api';
+import { SecurityGroupsApi, SecurityMarksBody } from '../../src/api/gs-classification-rest-api';
 import { SecurityGroupBody } from '../../src/api/gs-classification-rest-api/model/securityGroupBody';
 import { SecurityMarksApi } from '../../src/api/gs-classification-rest-api';
 import { SecurityMarkBody } from '../../src/api/gs-classification-rest-api/model/securityMarkBody';
@@ -16,23 +16,32 @@ describe('Security Mark API test', () => {
     let securityMarksApi: SecurityMarksApi;
     let securityGroupId: string;
     let securityMarkId: string;
-    let securityMarkBody: SecurityMarkBody = {
-        name: 'SecurityMarkTest',
-    };
+    let securityMarksBodySingle: SecurityMarksBody =[
+        {
+            name: 'SecurityMarkTest',
+        }
+    ];
     let securityGroupBody: SecurityGroupBody = {
         groupName: 'Alfresco',
         groupType: 'HIERARCHICAL',
     };
-
+    let securityMarksBody: SecurityMarksBody = [
+        {
+            name: 'SecurityMark3',
+        },
+        {
+            name: 'SecurityMark4',
+        },
+    ];
 
     beforeEach(async () => {
         const hostEcm = 'http://127.0.0.1:8080';
         authResponseMock = new EcmAuthMock(hostEcm);
         authResponseMock.get201Response();
-        securityGroupMock  = new SecurityGroupApiMock(hostEcm);
+        securityGroupMock = new SecurityGroupApiMock(hostEcm);
         securityMarkApiMock = new SecurityMarkApiMock(hostEcm);
         const alfrescoApi = new AlfrescoApi({
-            hostEcm: hostEcm
+            hostEcm: hostEcm,
         });
         securityGroupApi = new SecurityGroupsApi(alfrescoApi);
         securityMarksApi = new SecurityMarksApi(alfrescoApi);
@@ -51,11 +60,20 @@ describe('Security Mark API test', () => {
 
     it('create Security Mark', async () => {
         securityMarkApiMock.createSecurityMark200Response(securityGroupId);
-        await securityMarksApi.createSecurityMark(securityGroupId, securityMarkBody).then((data) => {
+        await securityMarksApi.createSecurityMarks(securityGroupId, securityMarksBodySingle).then((data: any) => {
             securityMarkId = data.entry.id;
             expect(data.entry.id).not.equal(null);
             expect(data.entry.name).to.be.equal('SecurityMarkTest');
             expect(data.entry.groupId).to.be.equal(securityGroupId);
+        });
+    });
+
+    it('create multiple Security Mark', async () => {
+        securityMarkApiMock.createSecurityMarks200Response(securityGroupId);
+        await securityMarksApi.createSecurityMarks(securityGroupId, securityMarksBody).then((data: any) => {
+            expect(data.list.entries[0].entry.id).not.equal(null);
+            expect(data.list.entries[0].entry.name).to.be.equal('SecurityMark3');
+            expect(data.list.entries[0].entry.groupId).to.be.equal(securityGroupId);
         });
     });
 
@@ -67,7 +85,7 @@ describe('Security Mark API test', () => {
     });
 
     it('get Security Mark Information', async () => {
-        securityMarkApiMock.get200GetSingleSecurityMark(securityGroupId,securityMarkId);
+        securityMarkApiMock.get200GetSingleSecurityMark(securityGroupId, securityMarkId);
         await securityMarksApi.getSecurityMark(securityGroupId, securityMarkId).then((data) => {
             expect(data.entry.id).not.equal(null);
             expect(data.entry.name).to.be.equal('SecurityMarkTest');
@@ -79,7 +97,7 @@ describe('Security Mark API test', () => {
         let updatedSecurityMarkBody: SecurityMarkBody = {
             name: 'AlfrescoSecurityMark',
         };
-        securityMarkApiMock.put200UpdateSecurityMarkResponse(securityGroupId,securityMarkId);
+        securityMarkApiMock.put200UpdateSecurityMarkResponse(securityGroupId, securityMarkId);
         await securityMarksApi.updateSecurityMark(securityGroupId, securityMarkId, updatedSecurityMarkBody).then((data) => {
             expect(data.entry.id).not.equal(null);
             expect(data.entry.name).to.be.equal('AlfrescoSecurityMark');
@@ -88,11 +106,14 @@ describe('Security Mark API test', () => {
     });
 
     it('delete Security Mark', async () => {
-        securityMarkApiMock.getDeleteSecurityMarkSuccessfulResponse(securityGroupId,securityMarkId);
-        await securityGroupApi.deleteSecurityGroup(securityGroupId).then((data) => {
-            Promise.resolve(data);
-        }).catch((err)=>{
-            Promise.reject(err);
-        });
+        securityMarkApiMock.getDeleteSecurityMarkSuccessfulResponse(securityGroupId, securityMarkId);
+        await securityGroupApi
+            .deleteSecurityGroup(securityGroupId)
+            .then((data) => {
+                Promise.resolve(data);
+            })
+            .catch((err) => {
+                Promise.reject(err);
+            });
     });
- });
+});

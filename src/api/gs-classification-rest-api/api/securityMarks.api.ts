@@ -66,17 +66,17 @@ export class SecurityMarksApi extends BaseApi {
             postBody,
             contentTypes,
             accepts,
-            SecurityMarkEntry
+            SecurityMarkPaging
         );
     }
 
     /**
-     * Create security mark
+     * Create security marks
      * @param securityGroupId The key for the security group id.
-     * @param securityMarkBody securityMarkBody.
-     * @return Promise<SecurityMarkEntry>
+     * @param securityMarkBody securityMarkBody[].
+     * @return Promise<SecurityMarkEntry|SecurityMarkPaging>
      */
-    createSecurityMark(securityGroupId: string, securityMarkBody: SecurityMarkBody): Promise<SecurityMarkEntry> {
+    createSecurityMarks(securityGroupId: string, securityMarkBody: SecurityMarkBody[]): Promise<SecurityMarkPaging|SecurityMarkEntry> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
         throwIfNotDefined(securityMarkBody, 'securityMarkBody');
 
@@ -100,7 +100,7 @@ export class SecurityMarksApi extends BaseApi {
             postBody,
             contentTypes,
             accepts,
-            SecurityMarkEntry
+            securityMarkBody.length==1 ? SecurityMarkEntry:SecurityMarkPaging
         );
     }
     /**
