@@ -59,7 +59,7 @@ export class AlfrescoApi implements Emitter {
 
     setConfig(config: AlfrescoApiConfig) {
         if (!config) {
-            config = {};
+            config = {} as AlfrescoApiConfig;
         }
 
         this.storage = new Storage();

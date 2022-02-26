@@ -22,6 +22,7 @@ import { Authentication } from './authentication';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
 import { AlfrescoApi } from '../alfrescoApi';
 import { Storage } from '../storage';
+import { ContentClient } from '../contentClient';
 
 declare const Buffer: any;
 declare const require: any;
@@ -726,7 +727,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
     exchangeTicketListener(alfrescoApi: AlfrescoApi) {
         this.on('token_issued', async () => {
             const authContentApi: AuthenticationApi = new AuthenticationApi(alfrescoApi);
-            authContentApi.apiClient.authentications = this.authentications;
+            // Legacy stuff, needs deprection
+            (authContentApi.apiClient as unknown as ContentClient).authentications = this.authentications;
             try {
                 const ticketEntry = await authContentApi.getTicket();
                 this.config.ticketEcm = ticketEntry.entry.id;

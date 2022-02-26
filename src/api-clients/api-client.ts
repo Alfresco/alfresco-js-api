@@ -22,7 +22,6 @@ export abstract class ApiClient {
 
     protected alfrescoApi: AlfrescoApi;
     protected httpClient: HttpClient;
-    protected privateHttpClient: HttpClient;
 
     get apiClient(): HttpClient {
         return this.httpClient;
@@ -30,13 +29,12 @@ export abstract class ApiClient {
 
     /** @deprecated */
     constructor(legacyApi?: AlfrescoApi);
-    constructor(httpClient: HttpClient, privateHttpClient?: HttpClient);
-    constructor(httpClient?: AlfrescoApi | HttpClient, privateHttpClient?: HttpClient) {
+    constructor(httpClient: HttpClient);
+    constructor(httpClient?: AlfrescoApi | HttpClient) {
         if (httpClient instanceof AlfrescoApi) {
             this.alfrescoApi = httpClient;
         } else {
             this.httpClient = httpClient;
-            this.privateHttpClient = privateHttpClient;
         }
     }
 

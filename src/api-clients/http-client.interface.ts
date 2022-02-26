@@ -31,8 +31,15 @@ export interface RequestOptions {
     url?: string;
 }
 
+export interface HttpClientConfig {
+    contextRoot: string;
+    host?: string;
+    servicePath?: string;
+}
 export interface HttpClient {
     basePath: string;
+    config: HttpClientConfig;
+
     request<T = any>(options: RequestOptions): Promise<T>;
     post<T = any>(options: RequestOptions): Promise<T>;
     put<T = any>(options: RequestOptions): Promise<T>;

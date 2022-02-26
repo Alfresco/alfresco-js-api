@@ -15,16 +15,30 @@
 * limitations under the License.
 */
 
+import { AlfrescoApi } from '../../../alfrescoApi';
 import { ApiClient } from '../../../api-clients/api-client';
 import { HttpClient, RequestOptions } from '../../../api-clients/http-client.interface';
 
+export interface LegacyTicketApi {
+    getAlfTicket(ticket: string): string
+}
 export abstract class BaseApi extends ApiClient {
 
-    get apiClientPrivate(): HttpClient {
-        return this.privateHttpClient ?? this.alfrescoApi.contentPrivateClient;
+    protected httpClient: HttpClient & LegacyTicketApi;
+
+    /** @deprecated */
+    constructor(legacyApi?: AlfrescoApi);
+    constructor(httpClient: HttpClient & LegacyTicketApi );
+    constructor(httpClient?: AlfrescoApi | (HttpClient & LegacyTicketApi)) {
+        super(httpClient as AlfrescoApi);
     }
 
-    override get apiClient(): HttpClient {
+    // TODO: Find a way to remove this hack from the legacy version :/
+    get apiClientPrivate(): HttpClient & LegacyTicketApi {
+        return this.httpClient ?? this.alfrescoApi.contentPrivateClient;
+    }
+
+    override get apiClient(): HttpClient & LegacyTicketApi {
         return this.httpClient ?? this.alfrescoApi.contentClient;
     }
 
