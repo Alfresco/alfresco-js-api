@@ -28,19 +28,19 @@ export abstract class BaseApi extends ApiClient {
         return this.httpClient ?? this.alfrescoApi.contentClient;
     }
 
-    post<T = any>(options: RequestOptions): Promise<T> {
+    override post<T = any>(options: RequestOptions): Promise<T> {
         return this.apiClientPrivate.post<T>(options);
     }
 
-    put<T = any>(options: RequestOptions): Promise<T> {
+    override put<T = any>(options: RequestOptions): Promise<T> {
         return this.apiClientPrivate.put<T>(options);
     }
 
-    get<T = any>(options: RequestOptions): Promise<T> {
+    override get<T = any>(options: RequestOptions): Promise<T> {
         return this.apiClientPrivate.get<T>(options);
     }
 
-    delete<T = void>(options: RequestOptions): Promise<T> {
+    override delete<T = void>(options: RequestOptions): Promise<T> {
         return this.apiClientPrivate.delete(options);
     }
 }
