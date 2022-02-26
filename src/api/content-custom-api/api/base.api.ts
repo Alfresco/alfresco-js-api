@@ -24,7 +24,7 @@ export interface LegacyTicketApi {
 }
 export abstract class BaseApi extends ApiClient {
 
-    protected httpClient: HttpClient & LegacyTicketApi;
+    declare protected httpClient: HttpClient & LegacyTicketApi;
 
     /** @deprecated */
     constructor(legacyApi?: AlfrescoApi);
