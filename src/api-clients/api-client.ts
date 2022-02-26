@@ -31,10 +31,11 @@ export abstract class ApiClient {
     constructor(legacyApi?: AlfrescoApi);
     constructor(httpClient: HttpClient);
     constructor(httpClient?: AlfrescoApi | HttpClient) {
-        if (httpClient instanceof AlfrescoApi) {
-            this.alfrescoApi = httpClient;
+        // Todo: remove legacyApi?: AlfrescoApi option and clean up this code. BREAKING CHANGE!
+        if ((httpClient as AlfrescoApi)?.__classId === 'AlfrescoApi') {
+            this.alfrescoApi = httpClient as AlfrescoApi;
         } else {
-            this.httpClient = httpClient;
+            this.httpClient = httpClient as HttpClient;
         }
     }
 

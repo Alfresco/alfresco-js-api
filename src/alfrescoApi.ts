@@ -26,6 +26,11 @@ import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
 
 export class AlfrescoApi implements Emitter {
+    // Ugly hack to bypass legacy circular dependencies:
+    // 1.: AlfrescoApi => ContentAuth => AlfrescoApi
+    // 2.: AlfrescoApi => ContentAuth => AuthenticationApi => BaseApi => AlfrescoApi
+    __classId = 'AlfrescoApi';
+
     storage: Storage;
     config: AlfrescoApiConfig;
     contentClient: ContentClient;
