@@ -1,5 +1,6 @@
 
 import { expect } from 'chai';
+import { AlfrescoApiConfig } from '..';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { EcmAuthMock, BpmAuthMock, OAuthMock } from '../test/mockObjects';
 
@@ -8,7 +9,7 @@ describe('Basic configuration test', () => {
     describe('config parameter ', () => {
 
         it('Should basePath have a default value', () => {
-            const config = {};
+            const config = {} as AlfrescoApiConfig;
 
             const alfrescoJsApi = new AlfrescoApi(config);
 
@@ -186,7 +187,7 @@ describe('Basic configuration test', () => {
             const alfrescoJsApi = new AlfrescoApi({
                 hostEcm,
                 provider: 'ECM'
-            });
+            } as AlfrescoApiConfig);
 
             authEcmMock.get201Response();
 
@@ -207,7 +208,7 @@ describe('Basic configuration test', () => {
                 hostBpm: hostBpm,
                 contextRootBpm: 'activiti-app',
                 provider: 'BPM'
-            });
+            } as AlfrescoApiConfig);
 
             alfrescoJsApi.on('logged-in', () => {
                 done();
@@ -231,7 +232,7 @@ describe('Basic configuration test', () => {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            });
+            } as AlfrescoApiConfig);
 
             alfrescoJsApi.on('logged-in', () => {
                 done();
@@ -250,7 +251,7 @@ describe('Basic configuration test', () => {
                 hostBpm: hostBpm,
                 contextRootBpm: 'activiti-app',
                 provider: 'BPM'
-            });
+            } as AlfrescoApiConfig);
 
             alfrescoJsApi.login('admin', 'admin').then(()=>{
 

@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { AlfrescoApiConfig } from '../..';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
 import { ProcessInstanceQueryRepresentation } from '../../src/api/activiti-rest-api/model/processInstanceQueryRepresentation';
 import { BpmAuthMock, ProcessMock } from '../mockObjects';
@@ -19,7 +20,7 @@ describe('Activiti Process Api', () => {
         alfrescoJsApi = new AlfrescoApi({
             hostBpm: BPM_HOST,
             provider: 'BPM'
-        });
+        } as AlfrescoApiConfig);
 
         await alfrescoJsApi.login('admin', 'admin');
     });

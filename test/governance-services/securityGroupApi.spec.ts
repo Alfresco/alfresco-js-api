@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import { SecurityGroupBody } from '../../src/api/gs-classification-rest-api/model/securityGroupBody';
 import { EcmAuthMock } from '../../test/mockObjects';
 import { SecurityGroupApiMock } from '../../test/mockObjects/goverance-services/security-groups.mock';
+import { AlfrescoApiConfig } from '../..';
 
 describe('Security Group API test', () => {
     let authResponseMock: EcmAuthMock;
@@ -22,7 +23,7 @@ describe('Security Group API test', () => {
         securityGroupMock  = new SecurityGroupApiMock(hostEcm);
         const alfrescoApi = new AlfrescoApi({
             hostEcm: hostEcm
-        });
+        } as AlfrescoApiConfig);
         securityGroupApi = new SecurityGroupsApi(alfrescoApi);
         await alfrescoApi.login('admin', 'admin');
     });

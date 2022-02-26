@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { AlfrescoApiConfig } from '../..';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { RenditionsApi } from '../../src/api/content-rest-api';
 import { EcmAuthMock, RenditionMock } from '../../test/mockObjects';
@@ -18,7 +19,7 @@ describe('Rendition', () => {
 
         const alfrescoJsApi = new AlfrescoApi({
             hostEcm
-        });
+        } as AlfrescoApiConfig);
 
         alfrescoJsApi.login('admin', 'admin').then(() => {
             done();

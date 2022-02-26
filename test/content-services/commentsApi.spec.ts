@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { AlfrescoApiConfig } from '../..';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { CommentsApi } from '../../src/api/content-rest-api';
 import { CommentMock, EcmAuthMock } from '../../test/mockObjects';
@@ -19,7 +20,7 @@ describe('Comments', () => {
 
         const alfrescoJsApi = new AlfrescoApi({
             hostEcm
-        });
+        } as AlfrescoApiConfig);
 
         commentsApi = new CommentsApi(alfrescoJsApi);
 

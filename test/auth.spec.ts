@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { AlfrescoApiConfig } from '..';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 import { EcmAuthMock, BpmAuthMock, NodeMock, ProfileMock } from '../test/mockObjects';
 
@@ -27,7 +28,7 @@ describe('Auth', () => {
             beforeEach(() => {
                 alfrescoJsApi = new AlfrescoApi({
                     hostEcm: ECM_HOST
-                });
+                } as AlfrescoApiConfig);
             })
 
             describe('login', () => {
@@ -124,7 +125,7 @@ describe('Auth', () => {
                     const alfrescoJsApi = new AlfrescoApi({
                         ticketEcm: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
                         hostEcm: ECM_HOST
-                    });
+                    } as AlfrescoApiConfig);
 
                     expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(alfrescoJsApi.contentClient.authentications.basicAuth.password);
                 });
@@ -232,7 +233,7 @@ describe('Auth', () => {
             alfrescoJsApi = new AlfrescoApi({
                 hostBpm: BPM_HOST,
                 provider: 'BPM'
-            });
+            } as AlfrescoApiConfig);
         });
 
         describe('With Authentication', () => {
@@ -378,7 +379,7 @@ describe('Auth', () => {
                 hostEcm: ECM_HOST,
                 hostBpm: BPM_HOST,
                 provider: 'ALL'
-            });
+            } as AlfrescoApiConfig);
         });
 
         describe('With Authentication', () => {
@@ -393,7 +394,7 @@ describe('Auth', () => {
                     hostEcm: ECM_HOST,
                     hostBpm: BPM_HOST,
                     provider: 'ALL'
-                });
+                } as AlfrescoApiConfig);
 
                 expect('Basic YWRtaW46YWRtaW4=').to.be.equal(alfrescoJsApi.processClient.authentications.basicAuth.ticket);
                 expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(alfrescoJsApi.contentClient.authentications.basicAuth.password);

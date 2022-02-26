@@ -2,6 +2,7 @@ import { AlfrescoApi } from '../src/alfrescoApi';
 import { PersonBodyCreate } from '../src/api/content-rest-api/model/personBodyCreate';
 import { PeopleApi } from '../src/api/content-rest-api/api/people.api';
 import { PeopleMock } from './mockObjects';
+import { AlfrescoApiConfig } from '..';
 
 describe('PeopleApi', () => {
     let peopleMock: PeopleMock;
@@ -12,7 +13,7 @@ describe('PeopleApi', () => {
 
         const alfrescoApi = new AlfrescoApi({
             hostEcm: 'http://127.0.0.1:8080'
-        });
+        } as AlfrescoApiConfig);
 
         peopleApi = new PeopleApi(alfrescoApi);
     });

@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { AlfrescoApiConfig } from '../..';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { UserProfileApi } from '../../src/api/activiti-rest-api/api/userProfile.api';
 import { BpmAuthMock, ProfileMock } from '../mockObjects';
@@ -20,7 +21,7 @@ describe('Activiti Profile Api', () => {
         const alfrescoApi = new AlfrescoApi({
             hostBpm: BPM_HOST,
             provider: 'BPM'
-        });
+        } as AlfrescoApiConfig);
 
         profileApi = new UserProfileApi(alfrescoApi);
 

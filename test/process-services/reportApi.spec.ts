@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { AlfrescoApiConfig } from '../..';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
 import { BpmAuthMock, ReportsMock } from '../mockObjects';
 
@@ -18,7 +19,7 @@ describe('Activiti Report Api', () => {
         alfrescoJsApi = new AlfrescoApi({
             hostBpm: BPM_HOST,
             provider: 'BPM'
-        });
+        } as AlfrescoApiConfig);
 
         await alfrescoJsApi.login('admin', 'admin');
     });
