@@ -1,4 +1,4 @@
-import { AlfrescoApiConfig } from '..';
+import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { Oauth2Auth } from '../src/authentication/oauth2Auth';
 

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '..';
+import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { ContentAuth } from '../src/authentication/contentAuth';
 import { EcmAuthMock as AuthEcmMock } from '../test/mockObjects';

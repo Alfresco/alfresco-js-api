@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { SecurityGroupBody } from '../../src/api/gs-classification-rest-api/model/securityGroupBody';
 import { EcmAuthMock } from '../../test/mockObjects';
 import { SecurityGroupApiMock } from '../../test/mockObjects/goverance-services/security-groups.mock';
-import { AlfrescoApiConfig } from '../..';
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 
 describe('Security Group API test', () => {
     let authResponseMock: EcmAuthMock;

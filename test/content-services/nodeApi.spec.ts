@@ -1,4 +1,4 @@
-import { AlfrescoApiConfig } from '../..';
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { NodesApi } from '../../src/api/content-rest-api';
 import { EcmAuthMock, NodeMock } from '../../test/mockObjects';

@@ -1,4 +1,4 @@
-import { AlfrescoApiConfig } from '../..';
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { CustomModelApi } from '../../src/api/content-custom-api';
 import { EcmAuthMock, CustomModelMock } from '../../test/mockObjects';

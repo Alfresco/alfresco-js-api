@@ -1,4 +1,4 @@
-import { AlfrescoApiConfig } from '..';
+import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApiCompatibility } from '../src/alfrescoApiCompatibility';
 import { PersonBodyCreate } from '../src/api/content-rest-api/model/personBodyCreate';
 import { PeopleMock } from './mockObjects';

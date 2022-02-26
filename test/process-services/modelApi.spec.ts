@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../..';
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { ModelsApi } from '../../src/api/activiti-rest-api';
 import { BpmAuthMock, ModelsMock } from '../mockObjects';

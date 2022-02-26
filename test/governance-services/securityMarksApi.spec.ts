@@ -7,7 +7,7 @@ import { SecurityMarkBody } from '../../src/api/gs-classification-rest-api/model
 import { EcmAuthMock } from '../mockObjects/content-services/ecm-auth.mock';
 import { SecurityMarkApiMock } from '../mockObjects/goverance-services/security-marks.mock';
 import { SecurityGroupApiMock } from '../mockObjects/goverance-services/security-groups.mock';
-import { AlfrescoApiConfig } from '../..';
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 
 describe('Security Mark API test', () => {
     let authResponseMock: EcmAuthMock;

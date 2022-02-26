@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { AlfrescoApiConfig } from '..';
+import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { ProcessAuth } from '../src/authentication/processAuth';
 import { BpmAuthMock } from './mockObjects';
 

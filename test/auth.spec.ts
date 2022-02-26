@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '..';
+import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 import { EcmAuthMock, BpmAuthMock, NodeMock, ProfileMock } from '../test/mockObjects';
 

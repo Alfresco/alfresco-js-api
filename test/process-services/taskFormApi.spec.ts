@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { AlfrescoApiConfig, ContentClient } from '../..';
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
 import { BpmAuthMock, TaskFormMock } from '../mockObjects';
 
@@ -38,7 +38,7 @@ describe('Activiti Task Api', () => {
 
         const taskId = '5028';
         await alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId);
-        expect((alfrescoJsApi.activiti.taskFormsApi.apiClient as ContentClient).authentications.cookie).equal('ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ');
+        expect((alfrescoJsApi.activiti.taskFormsApi.apiClient as any).authentications.cookie).equal('ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ');
     });
 
 });
