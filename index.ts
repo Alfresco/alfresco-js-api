@@ -40,3 +40,8 @@ export * from './src/alfrescoApi';
 export * from './src/alfrescoApiCompatibility';
 export * from './src/alfrescoApiClient';
 export * from './src/alfrescoApiConfig';
+
+export * from './src/to-deprecate/alfresco-api-type';
+
+export * from './src/api-clients/api-client';
+export * from './src/api-clients/http-client.interface';

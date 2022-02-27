@@ -33,8 +33,8 @@ export interface RequestOptions {
 
 export interface HttpClientConfig {
     contextRoot: string;
-    host?: string;
-    servicePath?: string;
+    host?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
+    servicePath?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
 }
 export interface HttpClient {
     basePath: string;

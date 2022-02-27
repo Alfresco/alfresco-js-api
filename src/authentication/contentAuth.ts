@@ -19,9 +19,9 @@ import ee from 'event-emitter';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
-import { AlfrescoApi } from '../alfrescoApi';
 import { Authentication } from './authentication';
 import { Storage } from '../storage';
+import { AlfrescoApiType } from '../../src/to-deprecate/alfresco-api-type';
 
 export class ContentAuth extends AlfrescoApiClient {
 
@@ -31,7 +31,7 @@ export class ContentAuth extends AlfrescoApiClient {
 
     authApi: AuthenticationApi;
 
-    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
+    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType) {
         super();
         this.className = 'ContentAuth';
         this.storage = new Storage();
