@@ -30,7 +30,7 @@ jobs:
               with:
                 node-version: '14'
                 cache: 'npm'
-            - run: npm install
+            - run: npm ci
             
     build:
         needs: setup-node
@@ -39,7 +39,7 @@ jobs:
         steps:
             - name: Lint
               shell: bash
-              run: ./scripts/lint.sh
+              run: ls && ./scripts/lint.sh
 
             - name: Build
               shell: bash
