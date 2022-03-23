@@ -21,25 +21,10 @@ import superagent, { Response, ProgressEvent } from 'superagent';
 import { Authentication } from './authentication/authentication';
 import { BasicAuth } from './authentication/basicAuth';
 import { Oauth2 } from './authentication/oauth2';
+import { HttpClient, RequestOptions } from './api-clients/http-client.interface';
 
 declare const Buffer: any;
 declare const Blob: any;
-
-export interface RequestOptions {
-    path: string;
-    httpMethod?: string;
-    pathParams?: any;
-    queryParams?: any;
-    headerParams?: any;
-    formParams?: any;
-    bodyParam?: any;
-    contentTypes?: string[];
-    accepts?: string[];
-    returnType?: any;
-    contextRoot?: string;
-    responseType?: string;
-    url?: string;
-}
 
 /**
  * Returns a string representation for an actual parameter.
@@ -85,7 +70,7 @@ export function buildCollectionParam(param: string[], collectionFormat: string):
     }
 }
 
-export class AlfrescoApiClient implements ee.Emitter {
+export class AlfrescoApiClient implements ee.Emitter, HttpClient {
 
     on: ee.EmitterMethod;
     off: ee.EmitterMethod;

@@ -15,41 +15,43 @@
 * limitations under the License.
 */
 
-import { AlfrescoApi } from '../../../alfrescoApi';
-import { AlfrescoApiClient, RequestOptions } from '../../../alfrescoApiClient';
+import { ApiClient } from '../../../api-clients/api-client';
+import { HttpClient, RequestOptions } from '../../../api-clients/http-client.interface';
+import { AlfrescoApiType, LegacyTicketApi } from '../../../to-deprecate/alfresco-api-type';
 
-export class BaseApi {
+export abstract class BaseApi extends ApiClient {
 
-    protected alfrescoApi: AlfrescoApi;
+    declare protected httpClient: HttpClient & LegacyTicketApi;
 
-    get apiClientPrivate(): AlfrescoApiClient {
-        return this.alfrescoApi.contentPrivateClient;
-    }
-    get apiClient(): AlfrescoApiClient {
-        return this.alfrescoApi.contentClient;
-    }
-
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.alfrescoApi = alfrescoApi;
+    /** @deprecated */
+    constructor(legacyApi?: AlfrescoApiType);
+    constructor(httpClient: HttpClient & LegacyTicketApi );
+    constructor(httpClient?: AlfrescoApiType | (HttpClient & LegacyTicketApi)) {
+        super(httpClient as AlfrescoApiType);
     }
 
-    post<T = any>(options: RequestOptions): Promise<T> {
+    // TODO: Find a way to remove this hack from the legacy version :/
+    get apiClientPrivate(): HttpClient & LegacyTicketApi {
+        return this.httpClient ?? this.alfrescoApi.contentPrivateClient;
+    }
+
+    override get apiClient(): HttpClient & LegacyTicketApi {
+        return this.httpClient ?? this.alfrescoApi.contentClient;
+    }
+
+    override post<T = any>(options: RequestOptions): Promise<T> {
         return this.apiClientPrivate.post<T>(options);
     }
 
-    put<T = any>(options: RequestOptions): Promise<T> {
+    override put<T = any>(options: RequestOptions): Promise<T> {
         return this.apiClientPrivate.put<T>(options);
     }
 
-    get<T = any>(options: RequestOptions): Promise<T> {
+    override get<T = any>(options: RequestOptions): Promise<T> {
         return this.apiClientPrivate.get<T>(options);
     }
 
-    delete<T = void>(options: RequestOptions): Promise<T> {
+    override delete<T = void>(options: RequestOptions): Promise<T> {
         return this.apiClientPrivate.delete(options);
-    }
-
-    errorMessage(param: string, methodName: string) {
-        return `Missing param ${param} in ${methodName}`;
     }
 }

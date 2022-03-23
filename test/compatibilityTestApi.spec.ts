@@ -1,3 +1,4 @@
+import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApiCompatibility } from '../src/alfrescoApiCompatibility';
 import { PersonBodyCreate } from '../src/api/content-rest-api/model/personBodyCreate';
 import { PeopleMock } from './mockObjects';
@@ -11,7 +12,7 @@ describe('Compatibility test', () => {
 
         alfrescoApiCompatibility = new AlfrescoApiCompatibility({
             hostEcm: 'http://127.0.0.1:8080'
-        });
+        } as AlfrescoApiConfig);
     });
 
     it('should add a person', (done) => {

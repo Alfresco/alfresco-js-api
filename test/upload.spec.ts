@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 import { EcmAuthMock, UploadMock } from '../test/mockObjects';
 import fs from 'fs';
+import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 
 describe('Upload', () => {
     let authResponseMock: EcmAuthMock;
@@ -17,7 +18,7 @@ describe('Upload', () => {
         authResponseMock.get201Response();
         alfrescoJsApi = new AlfrescoApi({
             hostEcm: hostEcm
-        });
+        } as AlfrescoApiConfig);
 
         await alfrescoJsApi.login('admin', 'admin');
     });

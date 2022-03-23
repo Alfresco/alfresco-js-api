@@ -1,4 +1,4 @@
-import { AlfrescoApiClient, AlfrescoApiCompatibility as AlfrescoApi, FormValueRepresentation } from '../index';
+import { AlfrescoApiClient, AlfrescoApiCompatibility as AlfrescoApi, AlfrescoApiConfig, FormValueRepresentation } from '../index';
 import { DateAlfresco } from  '../index';
 import { EcmAuthMock } from '../test/mockObjects';
 
@@ -39,7 +39,7 @@ describe('Alfresco Core API Client', () => {
 
             const alfrescoJsApi = new AlfrescoApi({
                 hostEcm: 'http://127.0.0.1:8080'
-            });
+            } as AlfrescoApiConfig);
 
             alfrescoJsApi.login('admin', 'admin').then(() => {
                 expect(alfrescoJsApi.getEcmUsername()).to.be.equal('admin');

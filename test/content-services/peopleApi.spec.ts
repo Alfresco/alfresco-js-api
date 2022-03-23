@@ -2,6 +2,7 @@ import { AlfrescoApi } from '../../src/alfrescoApi';
 import { PersonBodyCreate } from '../../src/api/content-rest-api/model/personBodyCreate';
 import { PeopleApi } from '../../src/api/content-rest-api';
 import { EcmAuthMock, PeopleMock } from '../../test/mockObjects';
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 
 describe('PeopleApi', () => {
     let authResponseMock: EcmAuthMock;
@@ -17,7 +18,7 @@ describe('PeopleApi', () => {
 
         const alfrescoJsApi = new AlfrescoApi({
             hostEcm
-        });
+        } as AlfrescoApiConfig);
 
         alfrescoJsApi.login('admin', 'admin').then(() => {
             done();

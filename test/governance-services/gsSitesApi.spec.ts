@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { GsSitesApi } from '../../src/api/gs-core-rest-api';
 import { EcmAuthMock, GsSitesApiMock } from '../../test/mockObjects';
@@ -18,7 +19,7 @@ describe('Governance API test', () => {
 
         const alfrescoJsApi = new AlfrescoApi({
             hostEcm
-        });
+        } as AlfrescoApiConfig);
 
         gsSitesApi = new GsSitesApi(alfrescoJsApi);
     });

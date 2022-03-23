@@ -15,11 +15,6 @@
 * limitations under the License.
 */
 
-import { ApiClient } from '../../../api-clients/api-client';
-import { HttpClient } from '../../../api-clients/http-client.interface';
-
-export abstract class BaseApi extends ApiClient {
-    override get apiClient(): HttpClient {
-        return this.httpClient ?? this.alfrescoApi.searchClient;
-    }
-}
+// Empty class exist only to help differentiate with HttpClient interface
+// and "instance of" LegacyAlfrescoApi and to break existing circular deps
+export class LegacyAlfrescoApiHelper {}

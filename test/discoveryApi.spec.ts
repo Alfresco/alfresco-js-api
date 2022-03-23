@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { DiscoveryApi } from '../src/api/discovery-rest-api';
 import { EcmAuthMock, DiscoveryMock } from '../test/mockObjects';
@@ -18,7 +19,7 @@ describe('Discovery', () => {
 
         const alfrescoJsApi = new AlfrescoApi({
             hostEcm
-        });
+        } as AlfrescoApiConfig);
 
         alfrescoJsApi.login('admin', 'admin').then(() => {
             done();

@@ -15,38 +15,11 @@
 * limitations under the License.
 */
 
-import { AlfrescoApi } from '../../../alfrescoApi';
-import { AlfrescoApiClient, RequestOptions } from '../../../alfrescoApiClient';
+import { ApiClient } from '../../../api-clients/api-client';
+import { HttpClient } from '../../../api-clients/http-client.interface';
 
-export class BaseApi {
-
-    protected alfrescoApi: AlfrescoApi;
-
-    get apiClient(): AlfrescoApiClient {
-        return this.alfrescoApi.authClient;
-    }
-
-    constructor(alfrescoApi?: AlfrescoApi) {
-        this.alfrescoApi = alfrescoApi;
-    }
-
-    post<T = any>(options: RequestOptions): Promise<T> {
-        return this.apiClient.post<T>(options);
-    }
-
-    put<T = any>(options: RequestOptions): Promise<T> {
-        return this.apiClient.put<T>(options);
-    }
-
-    get<T = any>(options: RequestOptions): Promise<T> {
-        return this.apiClient.get<T>(options);
-    }
-
-    delete<T = void>(options: RequestOptions): Promise<T> {
-        return this.apiClient.delete(options);
-    }
-
-    errorMessage(param: string, methodName: string) {
-        return `Missing param ${param} in ${methodName}`;
+export abstract class BaseApi extends ApiClient {
+    override get apiClient(): HttpClient {
+        return this.httpClient ?? this.alfrescoApi.authClient;
     }
 }

@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { VersionsApi } from '../../src/api/content-rest-api';
 import { EcmAuthMock, VersionMock } from '../../test/mockObjects';
@@ -19,7 +20,7 @@ describe('Versions', () => {
         versionMock = new VersionMock();
         authResponseMock.get201Response();
 
-        const alfrescoJsApi = new AlfrescoApi({ hostEcm });
+        const alfrescoJsApi = new AlfrescoApi({ hostEcm } as AlfrescoApiConfig);
         await alfrescoJsApi.login('admin', 'admin');
 
         versionsApi = new VersionsApi(alfrescoJsApi);

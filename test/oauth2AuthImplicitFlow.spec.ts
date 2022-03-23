@@ -1,3 +1,4 @@
+import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { Oauth2Auth } from '../src/authentication/oauth2Auth';
 
@@ -17,7 +18,7 @@ describe('Oauth2 Implicit flow test', () => {
     beforeEach(() => {
         alfrescoJsApi = new AlfrescoApi({
             hostEcm: ''
-        });
+        } as AlfrescoApiConfig);
     });
 
     it('should throw an error if redirectUri is not present', (done) => {
@@ -58,7 +59,7 @@ describe('Oauth2 Implicit flow test', () => {
                     implicitFlow: true,
                     redirectUri: 'redirectUri'
                 }
-            },
+            } as AlfrescoApiConfig,
             alfrescoJsApi
         );
 
@@ -88,7 +89,7 @@ describe('Oauth2 Implicit flow test', () => {
                     implicitFlow: true,
                     redirectUri: '#/redirectUri'
                 }
-            },
+            } as AlfrescoApiConfig,
             alfrescoJsApi
         );
 
@@ -121,7 +122,7 @@ describe('Oauth2 Implicit flow test', () => {
                     implicitFlow: true,
                     redirectUri: 'redirectUri'
                 }
-            },
+            } as AlfrescoApiConfig,
             alfrescoJsApi
         );
 
@@ -171,7 +172,7 @@ describe('Oauth2 Implicit flow test', () => {
                     implicitFlow: true,
                     redirectUri: 'redirectUri'
                 }
-            },
+            } as AlfrescoApiConfig,
             alfrescoJsApi
         );
         oauth2Auth.storage = new Storage();

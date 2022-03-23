@@ -24,7 +24,7 @@ export class AlfrescoApiConfig {
     hostOauth2?: string;
     authType?: string = 'BASIC';
     oauth2?: Oauth2Config;
-    contextRoot?: string = 'alfresco';
+    contextRoot = 'alfresco';
     tenant?: string = '-default-';
     contextRootBpm?: string = 'activiti-app';
     domainPrefix?: string = '';

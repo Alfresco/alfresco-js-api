@@ -27,7 +27,7 @@ describe('Oauth2  test', () => {
 
         alfrescoJsApi = new AlfrescoApi({
             hostEcm: 'myecm'
-        });
+        } as AlfrescoApiConfig);
     });
 
     describe('Discovery urls', () => {

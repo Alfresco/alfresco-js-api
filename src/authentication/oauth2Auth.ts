@@ -726,7 +726,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
     exchangeTicketListener(alfrescoApi: AlfrescoApi) {
         this.on('token_issued', async () => {
             const authContentApi: AuthenticationApi = new AuthenticationApi(alfrescoApi);
-            authContentApi.apiClient.authentications = this.authentications;
+            // Legacy stuff, needs deprecation, can not be more specific here because of circular dependency
+            (authContentApi.apiClient as unknown as any).authentications = this.authentications;
             try {
                 const ticketEntry = await authContentApi.getTicket();
                 this.config.ticketEcm = ticketEntry.entry.id;

@@ -1,3 +1,4 @@
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { CustomModelApi } from '../../src/api/content-custom-api';
 import { EcmAuthMock, CustomModelMock } from '../../test/mockObjects';
@@ -17,7 +18,7 @@ describe('Custom Model Api', () => {
 
         const alfrescoJsApi = new AlfrescoApi({
             hostEcm
-        });
+        } as AlfrescoApiConfig);
 
         alfrescoJsApi.login('admin', 'admin').then(
             () => {

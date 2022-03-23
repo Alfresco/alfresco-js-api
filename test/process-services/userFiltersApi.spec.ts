@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { UserFiltersApi } from '../../src/api/activiti-rest-api';
 import { BpmAuthMock, UserFiltersMock } from '../mockObjects';
@@ -18,7 +19,7 @@ describe('Activiti User Filter Api', () => {
         const alfrescoJsApi = new AlfrescoApi({
             hostBpm,
             provider: 'BPM'
-        });
+        } as AlfrescoApiConfig);
 
         userFiltersApi = new UserFiltersApi(alfrescoJsApi);
 

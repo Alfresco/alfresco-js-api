@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { AlfrescoApiCompatibility as AlfrescoApi, TaskFilterRequestRepresentation, TaskRepresentation, TaskQueryRequestRepresentation } from  '../../index';
+import { AlfrescoApiCompatibility as AlfrescoApi, TaskFilterRequestRepresentation, TaskRepresentation, TaskQueryRequestRepresentation, AlfrescoApiConfig } from  '../../index';
 import { BpmAuthMock, TasksMock } from '../mockObjects';
 describe('Activiti Task Api', () => {
     let authResponseBpmMock: BpmAuthMock;
@@ -19,7 +19,7 @@ describe('Activiti Task Api', () => {
         alfrescoJsApi = new AlfrescoApi({
             hostBpm: BPM_HOST,
             provider: 'BPM'
-        });
+        } as AlfrescoApiConfig);
 
         await alfrescoJsApi.login('admin', 'admin');
     });

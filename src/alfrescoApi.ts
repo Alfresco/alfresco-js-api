@@ -24,8 +24,10 @@ import { ProcessClient } from './processClient';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
+import { LegacyAlfrescoApiHelper } from './to-deprecate/legacy-alfresco-api.helper';
+import { AlfrescoApiType } from './to-deprecate/alfresco-api-type';
 
-export class AlfrescoApi implements Emitter {
+export class AlfrescoApi extends LegacyAlfrescoApiHelper implements Emitter, AlfrescoApiType {
     storage: Storage;
     config: AlfrescoApiConfig;
     contentClient: ContentClient;
@@ -50,6 +52,7 @@ export class AlfrescoApi implements Emitter {
     username: string;
 
     constructor(config?: AlfrescoApiConfig) {
+        super();
         ee(this);
 
         if (config) {
@@ -59,7 +62,7 @@ export class AlfrescoApi implements Emitter {
 
     setConfig(config: AlfrescoApiConfig) {
         if (!config) {
-            config = {};
+            config = {} as AlfrescoApiConfig;
         }
 
         this.storage = new Storage();
@@ -166,6 +169,7 @@ export class AlfrescoApi implements Emitter {
         }
     }
 
+    /**@private? */
     errorListeners() {
 
         this.contentClient.off('error', () => {
@@ -218,6 +222,7 @@ export class AlfrescoApi implements Emitter {
         });
     }
 
+    /**@private? */
     errorHandler(error: { status?: number }) {
         if (error.status === 401) {
             this.invalidateSession();
