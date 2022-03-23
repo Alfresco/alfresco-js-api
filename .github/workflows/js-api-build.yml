@@ -33,6 +33,7 @@ jobs:
             - run: npm install
             
     build:
+        needs: setup-node
         name: build
         runs-on: ubuntu-latest
         steps:
@@ -69,14 +70,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Release
-              if: github.head_ref = master OR github.event.schedule != '0 3 * * *'
+              if: github.head_ref == master OR github.event.schedule != '0 3 * * *'
               shell: bash
               run: |
                   ./scripts/build.sh || exit 1
 #                  ./scripts/publish.sh
 
             - name: Release Tag
-              if: github.head_ref = master
+              if: github.head_ref == master
               shell: bash
               run: |
                   echo "Release Tag"
