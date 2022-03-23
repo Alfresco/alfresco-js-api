@@ -18,38 +18,40 @@ env:
     GITHUB_BUILD_NUMBER: ${{ github.run_number }}
 
 jobs:
-    setup-node:
+    build:
         name: setup
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
               uses: actions/checkout@v3.0.0
-            
+              with:
+                fetch-depth: 2
+
             - name: node
               uses: actions/setup-node@v2
               with:
                 node-version: '14'
                 cache: 'npm'
             - run: npm ci
-            
-    build:
-        needs: setup-node
-        name: build
-        runs-on: ubuntu-latest
-        steps:
+
             - name: Lint
-              shell: bash
-              run: ls && ./scripts/lint.sh
+              run: |
+                ./scripts/lint.sh
 
             - name: Build
-              shell: bash
-              run: ./scripts/build.sh || exit 1
+              run: |
+                ./scripts/build.sh || exit 1
 
     test:
         name: test
         needs: build
         runs-on: ubuntu-latest
         steps:
+            -   name: Checkout
+                uses: actions/checkout@v3.0.0
+                with:
+                    fetch-depth: 2
+
             - name: Unit test
               shell: bash
               run: |
