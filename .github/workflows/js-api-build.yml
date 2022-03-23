@@ -70,7 +70,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Release
-              if: github.head_ref == 'master' OR github.event.schedule != '0 3 * * *'
+              if: github.head_ref == 'master' || github.event.schedule != '0 3 * * *'
               shell: bash
               run: |
                   ./scripts/build.sh || exit 1
