@@ -18,7 +18,7 @@ env:
     GITHUB_BUILD_NUMBER: ${{ github.run_number }}
 
 jobs:
-    setup:
+    setup-node:
         name: setup
         runs-on: ubuntu-latest
         steps:
