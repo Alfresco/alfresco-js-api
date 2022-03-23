@@ -42,15 +42,6 @@ jobs:
               run: |
                 ./scripts/build.sh || exit 1
 
-    test:
-        name: test
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Checkout
-                uses: actions/checkout@v3.0.0
-                with:
-                    fetch-depth: 2
 
             - name: Unit test
               shell: bash
@@ -66,11 +57,6 @@ jobs:
               shell: bash
               run: ./scripts/test-integration.sh || exit 1
 
-    release:
-        name: release
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
             - name: Release
               if: github.head_ref == 'master' || github.event.schedule != '0 3 * * *'
               shell: bash
