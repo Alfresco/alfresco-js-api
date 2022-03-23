@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[  $TRAVIS_BRANCH == "master" ]]; then
+if [[  $GITHUB_BRANCH == "master" ]]; then
     VERSION=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
 else
     VERSION=$(npm view @alfresco/js-api@beta version)

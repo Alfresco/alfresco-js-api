@@ -4,16 +4,12 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $DIR/..
 
-if [[ $TRAVIS_PULL_REQUEST == "false" ]];
+if [[ $GITHUB_PULL_REQUEST == "false" ]];
 then
     TAG_NPM=latest
-    if [[ $TRAVIS_BRANCH == "develop" ]];
+    if [[ $GITHUB_BRANCH == "develop" ]];
     then
         TAG_NPM=alpha
-        if [[ $TRAVIS_EVENT_TYPE == "cron" ]];
-        then
-            TAG_NPM=beta
-        fi
     fi
 
     cd dist/

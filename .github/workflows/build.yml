@@ -1,0 +1,85 @@
+name: JS-API
+
+on:
+    push:
+        branches:
+            - master
+            - develop
+            - /.*beta.*/
+    pull_request:
+        branches:
+            - develop
+    schedule:
+        - cron: '0 3 * * *' # nightly
+env:
+    GITHUB_REPO_SLUG: ${{ github.repository }}
+    GITHUB_BRANCH: ${{ github.head_ref }}
+    GITHUB_PULL_REQUEST: ${{ github.event.number }}
+    GITHUB_BUILD_NUMBER: ${{ github.run_number }}
+
+jobs:
+    setup:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+            with:
+                node-version: '14'
+                cache: 'npm'
+            - run: npm install
+
+build:
+    build:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Lint
+              shell: bash
+              run: ./scripts/lint.sh
+
+            - name: Build
+              shell: bash
+              run: ./scripts/build.sh || exit 1
+
+    test:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Unit test
+              shell: bash
+              run: |
+                npm run test || exit 1
+                npm run coverage
+
+            - name: Perfomance
+              shell: bash
+              run: ./scripts/test-performance.sh || exit 1
+
+            - name: Integration
+              shell: bash
+              run: ./scripts/test-integration.sh || exit 1
+
+    release:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Release
+              if: github.head_ref = master OR github.event.schedule != '0 3 * * *'
+              shell: bash
+              run: |
+                  ./scripts/build.sh || exit 1
+#                  ./scripts/publish.sh
+
+            - name: Release Tag
+              if: github.head_ref = master
+              shell: bash
+              run: |
+                  echo "Release Tag"
+#                    ./scripts/git-tag.sh
+
+            - name: Trigger ADF alpha
+              shell: bash
+              if: github.event.schedule != '0 3 * * *'
+              run: ./scripts/update-project.sh -p ${{ github.run_number }} -t ${{ secrets.GITHUB_TOKEN }} -v alpha
+
