@@ -1,4 +1,4 @@
-name: JS-API
+name: "JS-API"
 
 on:
     push:
@@ -19,6 +19,7 @@ env:
 
 jobs:
     setup:
+        name: setup
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
@@ -29,8 +30,8 @@ jobs:
                 cache: 'npm'
             - run: npm install
 
-build:
     build:
+        name: build
         needs: build
         runs-on: ubuntu-latest
         steps:
@@ -43,6 +44,7 @@ build:
               run: ./scripts/build.sh || exit 1
 
     test:
+        name: test
         needs: build
         runs-on: ubuntu-latest
         steps:
@@ -61,6 +63,7 @@ build:
               run: ./scripts/test-integration.sh || exit 1
 
     release:
+        name: release
         needs: build
         runs-on: ubuntu-latest
         steps:
