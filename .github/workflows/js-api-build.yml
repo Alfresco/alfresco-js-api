@@ -1,5 +1,4 @@
 name: "JS-API"
-
 on:
     push:
         branches:
