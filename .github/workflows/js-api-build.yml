@@ -80,6 +80,7 @@ jobs:
         needs: test
         name: release
         runs-on: ubuntu-latest
+        if: github.head_ref == 'master' || github.event.schedule == '0 3 * * *'
         steps:
             - name: Checkout
               uses: actions/checkout@v3.0.0
@@ -94,7 +95,6 @@ jobs:
             - run: npm ci
             
             - name: Release
-              if: github.head_ref == 'master' || github.event.schedule == '0 3 * * *'
               shell: bash
               run: |
                   ./scripts/build.sh || exit 1
