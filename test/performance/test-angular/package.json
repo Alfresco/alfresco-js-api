@@ -50,7 +50,7 @@
   "bundlesize": [
     {
       "path": "./dist/js-api-angular/main.js",
-      "maxSize": "70 kb"
+      "maxSize": "90 kb"
     }
   ]
 }
