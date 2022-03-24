@@ -94,7 +94,7 @@ jobs:
             - run: npm ci
             
             - name: Release
-              if: github.head_ref == 'master' || github.event.schedule != '0 3 * * *'
+              if: github.head_ref == 'master' || github.event.schedule == '0 3 * * *'
               shell: bash
               run: |
                   ./scripts/build.sh || exit 1
@@ -109,6 +109,6 @@ jobs:
 
             - name: Trigger ADF alpha
               shell: bash
-              if: github.event.schedule != '0 3 * * *'
+              if: github.event.schedule == '0 3 * * *'
               run: ./scripts/update-project.sh -p ${{ github.run_number }} -t ${{ secrets.GITHUB_TOKEN }} -v alpha
 
