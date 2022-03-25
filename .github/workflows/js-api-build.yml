@@ -12,7 +12,7 @@ on:
         - cron: '0 3 * * *' # nightly
 env:
     GITHUB_REPO_SLUG: ${{ github.repository }}
-    GITHUB_BRANCH: ${{ env.GITHUB_REF_NAME }}
+    GITHUB_BRANCH: $GITHUB_REF_NAME
     GITHUB_PULL_REQUEST: ${{ github.event.number }}
     GITHUB_BUILD_NUMBER: ${{ github.run_number }}
     NPM_REGISTRY_TOKEN: ${{ github.NPM_REGISTRY_TOKEN }}
