@@ -1,11 +1,5 @@
 # Alfresco JavaScript API Client
 
-| branch | status |
-| --- | --- |
-| master | [![Build Status](https://travis-ci.com/Alfresco/alfresco-js-api.svg?branch=master)](https://travis-ci.com/Alfresco/alfresco-js-api)  |
-| develop | [![Build Status](https://travis-ci.com/Alfresco/alfresco-js-api.svg?branch=develop)](https://travis-ci.com/Alfresco/alfresco-js-api)  |
-
-
 
 <p>
   <a title='Gitter chat' href="https://gitter.im/Alfresco/api/ng2-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
