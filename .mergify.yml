@@ -7,9 +7,8 @@ pull_request_rules:
           - "status-success=JS-API / test (pull_request)"
           - "status-success=JS-API / release"
       actions:
-        queue:
+        merge:
             method: squash
-            name: ready-to-merge
 
     - name: merge when all requested reviews are valid
       conditions:
@@ -23,6 +22,5 @@ pull_request_rules:
           - '#commented-reviews-by=0'
           - label!=do not merge
       actions:
-        queue:
+        merge:
             method: squash
-            name: dependabot
