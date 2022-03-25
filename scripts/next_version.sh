@@ -80,7 +80,7 @@ fi
 
 if [[ "${EXEC_ALPHA}" == true ]]
 then
-    NEXT_VERSION=${NEXT_VERSION}-${TRAVIS_BUILD_NUMBER}
+    NEXT_VERSION=${NEXT_VERSION}-${GITHUB_BUILD_NUMBER}
 fi
 
 if [[ "${EXEC_BETA}" == true ]]

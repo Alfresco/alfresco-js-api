@@ -1,0 +1,116 @@
+name: "JS-API"
+on:
+    push:
+        branches:
+            - master
+            - develop
+            - /.*beta.*/
+    pull_request:
+        branches:
+            - develop
+    schedule:
+        - cron: '0 3 * * *' # nightly
+env:
+    GITHUB_REPO_SLUG: ${{ github.repository }}
+    GITHUB_BRANCH: ${{ github.head_ref }}
+    GITHUB_PULL_REQUEST: ${{ github.event.number }}
+    GITHUB_BUILD_NUMBER: ${{ github.run_number }}
+    NPM_REGISTRY_TOKEN: ${{ github.NPM_REGISTRY_TOKEN }}
+    NPM_REGISTRY_ADDRESS: ${{ github.NPM_REGISTRY_ADDRESS }}
+
+jobs:
+    build:
+        name: "build and lint"
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3.0.0
+              with:
+                fetch-depth: 2
+
+            - name: node
+              uses: actions/setup-node@v2
+              with:
+                node-version: '14'
+                cache: 'npm'
+            - run: npm ci
+
+            - name: Lint
+              run: |
+                ./scripts/lint.sh
+
+            - name: Build
+              run: |
+                ./scripts/build.sh || exit 1
+
+    test:
+        needs: build
+        name: test
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3.0.0
+              with:
+                fetch-depth: 2
+
+            - name: node
+              uses: actions/setup-node@v2
+              with:
+                node-version: '14'
+                cache: 'npm'
+            - run: npm ci
+
+            - name: Unit test
+              shell: bash
+              run: |
+                npm run test || exit 1
+                npm run coverage
+
+            - name: Perfomance
+              shell: bash
+              run: ./scripts/test-performance.sh || exit 1
+
+            - name: Integration
+              env:
+                HOST: ${{ secrets.HOST }}
+                USERNAME: ${{ secrets.USERNAME }}
+                PASSWORD: ${{ secrets.PASSWORD }}
+              shell: bash
+              run: ./scripts/test-integration.sh || exit 1
+
+    release:
+        needs: test
+        name: release
+        runs-on: ubuntu-latest
+        if: github.head_ref == 'master' || github.event.schedule == '0 3 * * *'
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3.0.0
+              with:
+                fetch-depth: 2
+
+            - name: node
+              uses: actions/setup-node@v2
+              with:
+                node-version: '14'
+                cache: 'npm'
+            - run: npm ci
+
+            - name: Release
+              if: github.head_ref == 'master' || github.head_ref == 'develop'
+              shell: bash
+              run: |
+                  ./scripts/build.sh || exit 1
+                  ./scripts/publish.sh
+
+            - name: Release Tag
+              if: github.head_ref == 'master'
+              shell: bash
+              run: |
+                  ./scripts/git-tag.sh
+
+            - name: Trigger ADF alpha
+              shell: bash
+              if: github.event.schedule == '0 3 * * *'
+              run: ./scripts/update-project.sh -p ${{ github.run_number }} -t ${{ secrets.GITHUB_TOKEN }} -v alpha
+
