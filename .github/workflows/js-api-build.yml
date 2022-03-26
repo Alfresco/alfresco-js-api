@@ -12,7 +12,7 @@ on:
         - cron: '0 3 * * *' # nightly
 env:
     GITHUB_REPO_SLUG: ${{ github.repository }}
-    GITHUB_BRANCH: ${{ github.event.ref }}
+    GITHUB_BRANCH: ${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
     GITHUB_PULL_REQUEST: ${{ github.event.number }}
     GITHUB_BUILD_NUMBER: ${{ github.run_number }}
     NPM_REGISTRY_TOKEN: ${{ github.NPM_REGISTRY_TOKEN }}
@@ -36,7 +36,8 @@ jobs:
             - run: npm ci
 
             - name: Lint
-              run: 
+              run: |
+              
                 ./scripts/lint.sh
 
             - name: Build
@@ -82,7 +83,7 @@ jobs:
         needs: test
         name: release
         runs-on: ubuntu-latest
-        if: github.head_ref == 'master' || github.head_ref == 'develop' || github.event.schedule == '0 3 * * *' 
+        if: github.head_ref == 'refs/heads/master' || github.head_ref == 'refs/heads/develop' || github.event.schedule == '0 3 * * *' 
         steps:
             - name: Checkout
               uses: actions/checkout@v3.0.0
@@ -97,14 +98,14 @@ jobs:
             - run: npm ci
 
             - name: Release
-              if: github.head_ref == 'master' || github.head_ref == 'develop'
+              if: github.head_ref == 'refs/heads/master' || github.head_ref == 'refs/heads/develop'
               shell: bash
               run: |
                   ./scripts/build.sh || exit 1
                   ./scripts/publish.sh
 
             - name: Release Tag
-              if: github.head_ref == 'master'
+              if: github.head_ref == 'refs/heads/master'
               shell: bash
               run: |
                   ./scripts/git-tag.sh
