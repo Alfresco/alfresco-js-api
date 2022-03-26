@@ -82,7 +82,7 @@ jobs:
         needs: test
         name: release
         runs-on: ubuntu-latest
-        if: github.head_ref == 'master' || github.head_ref == 'develop' || github.event.schedule == '0 3 * * *' 
+        if: github.head_ref == 'refs/heads/master' || github.head_ref == 'refs/heads/develop' || github.event.schedule == '0 3 * * *'
         steps:
             - name: Checkout
               uses: actions/checkout@v3.0.0
@@ -97,14 +97,14 @@ jobs:
             - run: npm ci
 
             - name: Release
-              if: github.head_ref == 'master' || github.head_ref == 'develop'
+              if: github.head_ref == 'refs/heads/master' || github.head_ref == 'refs/heads/develop'
               shell: bash
               run: |
                   ./scripts/build.sh || exit 1
                   ./scripts/publish.sh
 
             - name: Release Tag
-              if: github.head_ref == 'master'
+              if: github.head_ref == 'refs/heads/master'
               shell: bash
               run: |
                   ./scripts/git-tag.sh
@@ -113,4 +113,9 @@ jobs:
               shell: bash
               if: github.event.schedule == '0 3 * * *'
               run: ./scripts/update-project.sh -p ${{ github.run_number }} -t ${{ secrets.GITHUB_TOKEN }} -v alpha
+
+            - name: Trigger ADF master
+              shell: bash
+              if: github.head_ref == 'refs/heads/master'
+              run: ./scripts/update-project.sh -p ${{ github.run_number }} -t ${{ secrets.GITHUB_TOKEN }} -v latest
 

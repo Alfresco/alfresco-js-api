@@ -6,7 +6,7 @@ cd $DIR/..
 
 TAG_NPM=alpha
 
-if [[ $GITHUB_BRANCH == "master" ]]; then
+if [[ $GITHUB_BRANCH == "refs/heads/master" ]]; then
     TAG_NPM=latest
 fi
 
