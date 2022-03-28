@@ -15,8 +15,8 @@ env:
     GITHUB_BRANCH: ${{ github.ref }}
     GITHUB_PULL_REQUEST: ${{ github.event.number }}
     GITHUB_BUILD_NUMBER: ${{ github.run_number }}
-    NPM_REGISTRY_TOKEN: ${{ github.NPM_REGISTRY_TOKEN }}
-    NPM_REGISTRY_ADDRESS: ${{ github.NPM_REGISTRY_ADDRESS }}
+    NPM_REGISTRY_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
+    NPM_REGISTRY_ADDRESS: ${{ secrets.NPM_REGISTRY_ADDRESS }}
 
 jobs:
     build:
