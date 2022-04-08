@@ -112,10 +112,10 @@ jobs:
             - name: Trigger ADF alpha
               shell: bash
               if: github.event.schedule == '0 3 * * *'
-              run: ./scripts/update-project.sh -p ${{ github.run_number }} -t ${{ secrets.GITHUB_TOKEN }} -v alpha
+              run: ./scripts/update-project.sh -p ${{ github.run_number }} -t ${{ secrets.BOT_GITHUB_TOKEN }} -v alpha
 
             - name: Trigger ADF master
               shell: bash
               if: github.ref == 'refs/heads/master'
-              run: ./scripts/update-project.sh -p ${{ github.run_number }} -t ${{ secrets.GITHUB_TOKEN }} -v latest
+              run: ./scripts/update-project.sh -p ${{ github.run_number }} -t ${{ secrets.BOT_GITHUB_TOKEN }} -v latest
 
