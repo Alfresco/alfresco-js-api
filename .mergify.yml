@@ -16,7 +16,6 @@ pull_request_rules:
           - "status-success=JS-API / build and lint (pull_request)"
           - "status-success=JS-API / test (pull_request)"
           - "status-success=JS-API / release"
-          - status-success=bundlesize
           - '#approved-reviews-by>=1'
           - '#changes-requested-reviews-by=0'
           - '#commented-reviews-by=0'
