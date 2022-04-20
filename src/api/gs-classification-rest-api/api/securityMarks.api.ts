@@ -20,6 +20,8 @@ import { throwIfNotDefined } from '../../../assert';
 import { SecurityMarkEntry } from '../model/securityMarkEntry';
 import { SecurityMarkBody } from '../model/securityMarkBody';
 import { SecurityMarkPaging } from '../model/securityMarkPaging';
+import { ManageSecurityMarkBody } from '../model/manageSecurityMarkBody';
+import { ManageSecurityMarkEntry } from '../model/ManageSecurityMarkEntry';
 
 /**
  * Securitycontrolsettings service.
@@ -220,6 +222,34 @@ export class SecurityMarksApi extends BaseApi {
             postBody,
             contentTypes,
             accepts
+        );
+    }
+
+    manageSecurityMark(nodeId: string, dataBody: ManageSecurityMarkBody): Promise<SecurityMarkEntry> {
+        throwIfNotDefined(nodeId, 'securityGroupId');
+        throwIfNotDefined(dataBody, 'dataBody');
+
+        let postBody = dataBody;
+        let pathParams = {
+            nodeId: nodeId
+        };
+        let queryParams = {};
+        let headerParams = {};
+        let formParams = {};
+        let contentTypes = ['application/json'];
+        let accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/secured-nodes/{nodeId}/securing-marks',
+            'PUT',
+            pathParams,
+            queryParams,
+            headerParams,
+            formParams,
+            postBody,
+            contentTypes,
+            accepts,
+            ManageSecurityMarkEntry
         );
     }
 }
