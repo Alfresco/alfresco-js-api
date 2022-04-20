@@ -225,7 +225,7 @@ export class SecurityMarksApi extends BaseApi {
         );
     }
 
-    manageSecurityMark(nodeId: string, dataBody: ManageSecurityMarkBody): Promise<SecurityMarkEntry> {
+    manageSecurityMark(nodeId: string, dataBody: ManageSecurityMarkBody): Promise<ManageSecurityMarkEntry> {
         throwIfNotDefined(nodeId, 'securityGroupId');
         throwIfNotDefined(dataBody, 'dataBody');
 
