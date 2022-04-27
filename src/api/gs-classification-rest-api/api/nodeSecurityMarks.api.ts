@@ -17,7 +17,7 @@
 
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
-import { NodeSecurityMarkBody } from '../model/NodeSecurityMarkBody';
+import { NodeSecurityMarkBody } from '../model/nodeSecurityMarkBody';
 import { SecurityMarkPaging } from '../model';
 
 /**

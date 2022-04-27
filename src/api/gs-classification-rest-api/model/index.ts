@@ -65,4 +65,4 @@ export * from './classificationGuidesInTopic';
 export * from './combinedInstructionBody';
 export * from './classificationGuide';
 export * from './classificationGuides';
-export * from './NodeSecurityMarkBody';
+export * from './nodeSecurityMarkBody';
