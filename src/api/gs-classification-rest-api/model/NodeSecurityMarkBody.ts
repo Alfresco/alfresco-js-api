@@ -15,16 +15,14 @@
 * limitations under the License.
 */
 
-export class ManageSecurityMarkBody {
+export class NodeSecurityMarkBody {
     id : string;
     groupId : string;
     op : string
 
-    constructor(input?: any) {
-
+    constructor(input?: NodeSecurityMarkBody) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }
