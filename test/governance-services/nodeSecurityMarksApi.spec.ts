@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { NodeSecurityMarksApi } from '../../src/api/gs-classification-rest-api';
-import { NodeSecurityMarkBody } from '../../src/api/gs-classification-rest-api/model/NodeSecurityMarkBody';
+import { NodeSecurityMarkBody } from '../../src/api/gs-classification-rest-api/model/nodeSecurityMarkBody';
 import { EcmAuthMock } from '../mockObjects/content-services/ecm-auth.mock';
 import { NodeSecurityMarksApiMock } from '../mockObjects/goverance-services/node-security-marks.mock';
 import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
