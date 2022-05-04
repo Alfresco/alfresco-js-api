@@ -39,7 +39,7 @@ export class NodeSecurityMarksApiMock extends BaseMock {
 
     get200SecurityMarkOnNode(nodeId: string): void {
         nock(this.host, { encodedQueryParams: true })
-            .post('/alfresco/api/-default-/public/gs/versions/1/secured-nodes/' + nodeId + '/securing-marks')
+            .get('/alfresco/api/-default-/public/gs/versions/1/secured-nodes/' + nodeId + '/securing-marks')
             .reply(200, {
                 list: {
                     pagination: {

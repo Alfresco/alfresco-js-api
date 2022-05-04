@@ -47,8 +47,9 @@ describe('Node Security Mark API test', () => {
 
     it('get security marks on a node', async () => {
         let nodeId = 'h3bdk2knw2kn';
+        let DEFAULT_INCLUDE = 'inUse';
         nodeSecurityMarksMock.get200SecurityMarkOnNode(nodeId);
-        await nodeSecurityMarksApi.manageSecurityMarksOnNode(nodeId, nodeSecurityMarkBody).then((data) => {
+        await nodeSecurityMarksApi.getSecurityMarksOnNode(nodeId, {DEFAULT_INCLUDE}).then((data) => {
             expect(data.list.entries[1].entry.groupId).equal('securityGroupId2');
             expect(data.list.entries[1].entry.id).equal('Sh1G8vTR');
             expect(data.list.entries[1].entry.name).equal('SecurityMarkTest2');
