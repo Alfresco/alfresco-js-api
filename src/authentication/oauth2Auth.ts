@@ -534,7 +534,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
             username: username,
             password: password,
             grant_type: 'password',
-            client_id: this.config.oauth2.clientId
+            client_id: this.config.oauth2.clientId,
+            client_secret: this.config.oauth2.secret
         };
 
         let contentTypes = ['application/x-www-form-urlencoded'];
