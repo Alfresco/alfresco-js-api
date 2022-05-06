@@ -36,6 +36,9 @@ import { SecurityMarksApi } from './securityMarks.api';
 export * from './securityGroups.api';
 import { SecurityGroupsApi } from './securityGroups.api';
 
+export * from './nodeSecurityMarks.api';
+import { NodeSecurityMarksApi } from './nodeSecurityMarks.api';
+
 export const GS_CLASSIFICATION_APIS = {
     ClassificationGuidesApi: ClassificationGuidesApi,
     ClassificationReasonsApi: ClassificationReasonsApi,
@@ -43,5 +46,6 @@ export const GS_CLASSIFICATION_APIS = {
     DefaultClassificationValuesApi: DefaultClassificationValuesApi,
     SecurityControlSettingsApi: SecurityControlSettingsApi,
     SecurityMarksApi: SecurityMarksApi,
-    SecurityGroupsApi: SecurityGroupsApi
+    SecurityGroupsApi: SecurityGroupsApi,
+    NodeSecurityMarksApi: NodeSecurityMarksApi
 };
