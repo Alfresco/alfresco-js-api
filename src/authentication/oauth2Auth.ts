@@ -58,7 +58,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
     constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         super();
         this.storage = new Storage();
-        this.storage.setDomainPrefix(config.domainPrefix);
 
         this.className = 'Oauth2Auth';
 
@@ -69,6 +68,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     setConfig(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         this.config = config;
+        this.storage.setDomainPrefix(config.domainPrefix);
 
         if (this.config.oauth2) {
             if (this.config.oauth2.host === undefined || this.config.oauth2.host === null) {
@@ -107,13 +107,9 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
             this.host = this.config.oauth2.host;
 
-            this.discoveryUrls();
-
             if (this.hasContentProvider()) {
                 this.exchangeTicketListener(alfrescoApi);
             }
-
-            this.initOauth();
         }
     }
 
@@ -128,7 +124,38 @@ export class Oauth2Auth extends AlfrescoApiClient {
         }
     }
 
-    discoveryUrls() {
+    callDiscoveryApi(host: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            const postBody = {}, pathParams = {}, queryParams = {};
+
+            const headerParams = {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            };
+
+            const formParams = {
+            };
+
+            const contentTypes = ['application/x-www-form-urlencoded'];
+            const accepts = ['application/json'];
+
+            return this.callCustomApi(
+                `${host}/.well-known/openid-configuration`, 'GET',
+                pathParams, queryParams, headerParams, formParams, postBody,
+                contentTypes, accepts
+            ).then(
+                (data) => {
+                    this.discovery.loginUrl = data.authorization_endpoint;
+                    this.discovery.logoutUrl = data.end_session_endpoint;
+                    this.discovery.tokenEndpoint = data.token_endpoint;
+                    resolve(data);
+                },
+                (error) => {
+                    reject(error.error);
+                });
+        });
+    }
+
+    discoveryUrls(): void {
         this.discovery.loginUrl = this.host + (this.config.oauth2.authorizationUrl || Oauth2Auth.DEFAULT_AUTHORIZATION_URL);
         this.discovery.logoutUrl = this.host + (this.config.oauth2.logoutUrl || Oauth2Auth.DEFAULT_LOGOUT_URL);
         this.discovery.tokenEndpoint = this.host + (this.config.oauth2.tokenUrl || Oauth2Auth.DEFAULT_TOKEN_URL);
