@@ -84,9 +84,9 @@ export class AlfrescoApi extends LegacyAlfrescoApiHelper implements Emitter, Alf
         return config;
     }
 
-    async setup(config?: AlfrescoApiConfig): Promise<void> {
+    async setup(): Promise<void> {
         if (this.isOauthConfiguration()) {
-            return this.oauth2Auth.setup(config);
+            return this.oauth2Auth.setup();
         }
     }
 
