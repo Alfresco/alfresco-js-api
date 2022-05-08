@@ -111,7 +111,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
             this.host = this.config.oauth2.host;
 
-            this.discoveryUrls(this.config);
+            this.discoveryUrls();
 
             if (this.hasContentProvider()) {
                 this.exchangeTicketListener(alfrescoApi);
@@ -167,11 +167,10 @@ export class Oauth2Auth extends AlfrescoApiClient {
         });
     }
 
-    discoveryUrls(config: AlfrescoApiConfig): void {
-        const oauthHost = config.oauth2.host;
-        this.discovery.loginUrl = oauthHost + (config.oauth2.authorizationUrl || Oauth2Auth.DEFAULT_AUTHORIZATION_URL);
-        this.discovery.logoutUrl = oauthHost + (config.oauth2.logoutUrl || Oauth2Auth.DEFAULT_LOGOUT_URL);
-        this.discovery.tokenEndpoint = oauthHost + (config.oauth2.tokenUrl || Oauth2Auth.DEFAULT_TOKEN_URL);
+    discoveryUrls(): void {
+        this.discovery.loginUrl = this.host + (this.config.oauth2.authorizationUrl || Oauth2Auth.DEFAULT_AUTHORIZATION_URL);
+        this.discovery.logoutUrl = this.host + (this.config.oauth2.logoutUrl || Oauth2Auth.DEFAULT_LOGOUT_URL);
+        this.discovery.tokenEndpoint = this.host + (this.config.oauth2.tokenUrl || Oauth2Auth.DEFAULT_TOKEN_URL);
     }
 
     hasContentProvider(): boolean {
