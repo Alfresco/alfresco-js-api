@@ -25,6 +25,7 @@ describe('Oauth2  test', () => {
         oauth2Mock = new OAuthMock(hostOauth2);
         authResponseMock = new EcmAuthMock(hostOauth2);
 
+
         alfrescoJsApi = new AlfrescoApi({
             hostEcm: 'myecm'
         } as AlfrescoApiConfig);

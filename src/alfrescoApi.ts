@@ -60,7 +60,7 @@ export class AlfrescoApi extends LegacyAlfrescoApiHelper implements Emitter, Alf
         }
     }
 
-    async setConfig(config: AlfrescoApiConfig, forceDiscoveryLoad = false) {
+    setConfig(config: AlfrescoApiConfig) {
         if (!config) {
             config = {} as AlfrescoApiConfig;
         }
@@ -75,7 +75,7 @@ export class AlfrescoApi extends LegacyAlfrescoApiHelper implements Emitter, Alf
         this.processClient = new ProcessClient(this.config);
 
         this.errorListeners();
-        await this.initAuth(config, forceDiscoveryLoad);
+        this.initAuth(config);
 
         if(this.isLoggedIn()){
             this.emitBuffer('logged-in');
@@ -84,19 +84,20 @@ export class AlfrescoApi extends LegacyAlfrescoApiHelper implements Emitter, Alf
         return config;
     }
 
-    private async initAuth(config: AlfrescoApiConfig, forceDiscoveryLoad: boolean): Promise<void> {
+    async setup(config?: AlfrescoApiConfig): Promise<void> {
+        if (this.isOauthConfiguration()) {
+            return this.oauth2Auth.setup(config);
+        }
+    }
+
+    private initAuth(config: AlfrescoApiConfig): void {
         if (this.isOauthConfiguration()) {
 
             if (!this.oauth2Auth) {
-                this.oauth2Auth = new Oauth2Auth(null, this);
-                if(forceDiscoveryLoad) {
-                    await this.oauth2Auth.callDiscoveryApi(config.oauth2.host);
-                } else {
-                    this.oauth2Auth.discoveryUrls();
-                }
-
+                this.oauth2Auth = new Oauth2Auth(this.config, this);
+            } else {
+                this.oauth2Auth.setConfig(this.config, this);
             }
-            this.oauth2Auth.setConfig(this.config, this);
 
             this.oauth2Auth?.on('logged-in', () => {
                 this.emitBuffer('logged-in');
