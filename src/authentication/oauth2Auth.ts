@@ -121,8 +121,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
         }
     }
 
-    async setup(config: AlfrescoApiConfig): Promise<void> {
-        return this.callDiscoveryApi(config.oauth2.host);
+    async setup(): Promise<void> {
+        return this.callDiscoveryApi(this.config.oauth2.host);
     }
 
     initOauth() {
