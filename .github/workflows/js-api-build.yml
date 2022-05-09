@@ -9,7 +9,10 @@ on:
         branches:
             - develop
     schedule:
-        - cron: '0 3 * * *' # nightly
+        - cron: '0 3 * * *' # At 03:00 AM nightly every day
+    # Allows to run this workflow manually from the Actions tab
+    workflow_dispatch:
+
 env:
     GITHUB_REPO_SLUG: ${{ github.repository }}
     GITHUB_BRANCH: ${{ github.ref }}
@@ -111,7 +114,8 @@ jobs:
 
             - name: Trigger ADF alpha
               shell: bash
-              if: github.event.schedule == '0 3 * * *'
+              if: github.event.schedule == '0 3 * * *' || github.event_name == 'workflow_dispatch'
+
               run: |
                     git config --global user.email ${{ secrets.BOT_GITHUB_EMAIL }}
                     git config --global user.name ${{ secrets.BOT_GITHUB_USERNAME }}
