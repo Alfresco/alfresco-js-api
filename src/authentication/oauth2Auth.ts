@@ -128,10 +128,10 @@ export class Oauth2Auth extends AlfrescoApiClient {
         }
     }
 
-    discoveryUrls() {
-        this.discovery.loginUrl = this.host + (this.config.oauth2.authorizationUrl || Oauth2Auth.DEFAULT_AUTHORIZATION_URL);
-        this.discovery.logoutUrl = this.host + (this.config.oauth2.logoutUrl || Oauth2Auth.DEFAULT_LOGOUT_URL);
-        this.discovery.tokenEndpoint = this.host + (this.config.oauth2.tokenUrl || Oauth2Auth.DEFAULT_TOKEN_URL);
+     discoveryUrls() {
+        this.discovery.loginUrl = this.config.oauth2.authorizationUrl ||  this.host  + Oauth2Auth.DEFAULT_AUTHORIZATION_URL;
+        this.discovery.logoutUrl = this.config.oauth2.logoutUrl ||  this.host  + Oauth2Auth.DEFAULT_LOGOUT_URL;
+        this.discovery.tokenEndpoint = this.config.oauth2.tokenUrl ||  this.host  + Oauth2Auth.DEFAULT_TOKEN_URL;
     }
 
     hasContentProvider(): boolean {
