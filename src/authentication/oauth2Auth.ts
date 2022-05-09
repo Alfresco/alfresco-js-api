@@ -47,7 +47,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
         loginUrl?: string;
         logoutUrl?: string;
         tokenEndpoint?: string;
-    } = {};
+    } = {
+        loginUrl: undefined,
+        logoutUrl: undefined,
+        tokenEndpoint: undefined,
+    };
 
     authentications: Authentication = {
         'oauth2': { accessToken: '' }, type: 'oauth2', 'basicAuth': {}
@@ -58,7 +62,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
     constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         super();
         this.storage = new Storage();
-        this.storage.setDomainPrefix(config.domainPrefix);
 
         this.className = 'Oauth2Auth';
 
@@ -69,6 +72,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     setConfig(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         this.config = config;
+        this.storage.setDomainPrefix(config.domainPrefix);
 
         if (this.config.oauth2) {
             if (this.config.oauth2.host === undefined || this.config.oauth2.host === null) {
@@ -128,10 +132,10 @@ export class Oauth2Auth extends AlfrescoApiClient {
         }
     }
 
-    discoveryUrls() {
-        this.discovery.loginUrl = this.host + (this.config.oauth2.authorizationUrl || Oauth2Auth.DEFAULT_AUTHORIZATION_URL);
-        this.discovery.logoutUrl = this.host + (this.config.oauth2.logoutUrl || Oauth2Auth.DEFAULT_LOGOUT_URL);
-        this.discovery.tokenEndpoint = this.host + (this.config.oauth2.tokenUrl || Oauth2Auth.DEFAULT_TOKEN_URL);
+     discoveryUrls() {
+        this.discovery.loginUrl = this.config.oauth2.authorizationUrl ||  this.host  + Oauth2Auth.DEFAULT_AUTHORIZATION_URL;
+        this.discovery.logoutUrl = this.config.oauth2.logoutUrl ||  this.host  + Oauth2Auth.DEFAULT_LOGOUT_URL;
+        this.discovery.tokenEndpoint = this.config.oauth2.tokenUrl ||  this.host  + Oauth2Auth.DEFAULT_TOKEN_URL;
     }
 
     hasContentProvider(): boolean {

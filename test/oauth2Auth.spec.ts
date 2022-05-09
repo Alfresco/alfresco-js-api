@@ -25,6 +25,7 @@ describe('Oauth2  test', () => {
         oauth2Mock = new OAuthMock(hostOauth2);
         authResponseMock = new EcmAuthMock(hostOauth2);
 
+
         alfrescoJsApi = new AlfrescoApi({
             hostEcm: 'myecm'
         } as AlfrescoApiConfig);
@@ -76,9 +77,9 @@ describe('Oauth2  test', () => {
                 alfrescoJsApi
             );
 
-            expect(oauth2Auth.discovery.loginUrl).to.be.equal(host + authorizationUrl);
-            expect(oauth2Auth.discovery.tokenEndpoint).to.be.equal(host + tokenUrl);
-            expect(oauth2Auth.discovery.logoutUrl).to.be.equal(host + logoutUrl);
+            expect(oauth2Auth.discovery.loginUrl).to.be.equal(authorizationUrl);
+            expect(oauth2Auth.discovery.tokenEndpoint).to.be.equal(tokenUrl);
+            expect(oauth2Auth.discovery.logoutUrl).to.be.equal(logoutUrl);
         });
 
     });
