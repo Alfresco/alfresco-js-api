@@ -47,7 +47,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
         loginUrl?: string;
         logoutUrl?: string;
         tokenEndpoint?: string;
-    } = {};
+    } = {
+        loginUrl: undefined,
+        logoutUrl: undefined,
+        tokenEndpoint: undefined,
+    };
 
     authentications: Authentication = {
         'oauth2': { accessToken: '' }, type: 'oauth2', 'basicAuth': {}
@@ -58,7 +62,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
     constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         super();
         this.storage = new Storage();
-        this.storage.setDomainPrefix(config.domainPrefix);
 
         this.className = 'Oauth2Auth';
 
@@ -69,6 +72,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     setConfig(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
         this.config = config;
+        this.storage.setDomainPrefix(config.domainPrefix);
 
         if (this.config.oauth2) {
             if (this.config.oauth2.host === undefined || this.config.oauth2.host === null) {
