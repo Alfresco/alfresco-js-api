@@ -1,0 +1,42 @@
+name: "TRIGGER_UPSTREAM"
+on:
+    push:
+        branches:
+            - master
+            - develop
+            - /.*beta.*/
+    pull_request:
+        branches:
+            - develop
+    # Allows to run this workflow manually from the Actions tab
+    workflow_dispatch:
+
+env:
+    GITHUB_REPO_SLUG: ${{ github.repository }}
+    GITHUB_BRANCH: ${{ github.ref }}
+    GITHUB_PULL_REQUEST: ${{ github.event.number }}
+    GITHUB_BUILD_NUMBER: ${{ github.run_number }}
+
+jobs:
+    release:
+        name: release
+        runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
+        steps:
+            - name: Trigger ADF alpha
+              shell: bash
+              if: github.event_name == 'workflow_dispatch'
+
+              run: |
+                    git config --global user.email ${{ secrets.BOT_GITHUB_EMAIL }}
+                    git config --global user.name ${{ secrets.BOT_GITHUB_USERNAME }}
+                    ./scripts/update-project.sh -p ${{ github.run_number }} -t ${{ secrets.BOT_GITHUB_TOKEN }} -v alpha
+
+            - name: Trigger ADF master
+              shell: bash
+              if: github.ref == 'refs/heads/master' && github.event_name == 'workflow_dispatch'
+              run: |
+                    git config --global user.email ${{ secrets.BOT_GITHUB_EMAIL }}
+                    git config --global user.name ${{ secrets.BOT_GITHUB_USERNAME }}
+                    ./scripts/update-project.sh -p ${{ github.run_number }} -t ${{ secrets.BOT_GITHUB_TOKEN }} -v latest
+
