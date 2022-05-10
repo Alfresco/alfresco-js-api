@@ -21,6 +21,7 @@ export interface Oauth2Config {
     host: string;
     authorizationUrl?: string;
     tokenUrl?: string;
+    userinfoEndpoint?: string;
     logoutUrl?: string;
     scope: string;
     implicitFlow?: boolean;

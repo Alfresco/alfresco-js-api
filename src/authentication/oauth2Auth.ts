@@ -30,10 +30,20 @@ const minimatch = require('minimatch');
 
 declare let window: Window;
 
+interface Userinfo {
+    name: string;
+    given_name?: string;
+    family_name?: string;
+    preferred_username?: string;
+    email?: string;
+    picture?: string;
+}
+
 export class Oauth2Auth extends AlfrescoApiClient {
 
     static readonly DEFAULT_AUTHORIZATION_URL = '/protocol/openid-connect/auth';
     static readonly DEFAULT_TOKEN_URL = '/protocol/openid-connect/token';
+    static readonly DEFAULT_USER_INFO_ENDPOINT = '/protocol/openid-connect/userinfo';
     static readonly DEFAULT_LOGOUT_URL = '/protocol/openid-connect/logout';
 
     private refreshTokenIntervalPolling: any;
@@ -47,10 +57,12 @@ export class Oauth2Auth extends AlfrescoApiClient {
         loginUrl?: string;
         logoutUrl?: string;
         tokenEndpoint?: string;
+        userinfoEndpoint?: string;
     } = {
         loginUrl: undefined,
         logoutUrl: undefined,
         tokenEndpoint: undefined,
+        userinfoEndpoint: undefined,
     };
 
     authentications: Authentication = {
@@ -136,6 +148,27 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.discovery.loginUrl = this.config.oauth2.authorizationUrl ||  this.host  + Oauth2Auth.DEFAULT_AUTHORIZATION_URL;
         this.discovery.logoutUrl = this.config.oauth2.logoutUrl ||  this.host  + Oauth2Auth.DEFAULT_LOGOUT_URL;
         this.discovery.tokenEndpoint = this.config.oauth2.tokenUrl ||  this.host  + Oauth2Auth.DEFAULT_TOKEN_URL;
+        this.discovery.userinfoEndpoint = this.config.oauth2.userinfoEndpoint ||  this.host  + Oauth2Auth.DEFAULT_USER_INFO_ENDPOINT;
+    }
+
+    getProfile(): Promise<Userinfo> {
+        const postBody = {}, pathParams = {}, queryParams = {};
+
+        const headerParams = {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        };
+
+        const formParams = {
+        };
+
+        const contentTypes = ['application/x-www-form-urlencoded'];
+        const accepts = ['application/json'];
+
+        return this.callCustomApi(
+            this.discovery.userinfoEndpoint, 'GET',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts
+        );
     }
 
     hasContentProvider(): boolean {
