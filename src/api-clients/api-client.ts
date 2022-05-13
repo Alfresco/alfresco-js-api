@@ -16,7 +16,7 @@
 */
 
 import { AlfrescoApiType } from "../to-deprecate/alfresco-api-type";
-import { LegacyAlfrescoApiHelper } from "../to-deprecate/legacy-alfresco-api.helper";
+import { LegacyAlfrescoApi } from "../api-legacy/legacy-alfresco-api";
 import { HttpClient, RequestOptions } from "./http-client.interface";
 
 export abstract class ApiClient {
@@ -32,7 +32,7 @@ export abstract class ApiClient {
     constructor(httpClient: HttpClient);
     constructor(httpClient?: AlfrescoApiType | HttpClient) {
         // TODO: remove legacyApi?: AlfrescoApi option and clean up this code. BREAKING CHANGE!
-        if (httpClient instanceof LegacyAlfrescoApiHelper) {
+        if (httpClient instanceof LegacyAlfrescoApi) {
             this.alfrescoApi = httpClient as AlfrescoApiType;
         } else {
             this.httpClient = httpClient as HttpClient;

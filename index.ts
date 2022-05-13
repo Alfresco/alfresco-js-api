@@ -18,6 +18,7 @@
 export * from './src/api-legacy/legacy';
 export * from './src/api-legacy/content-rest-api/src/index';
 export * from './src/api-legacy/activiti-rest-api/src/index';
+export * from './src/api-legacy/legacy-alfresco-api';
 export * from './src/api/content-rest-api/index';
 export * from './src/api/content-custom-api/index';
 export * from './src/api/discovery-rest-api/index';
