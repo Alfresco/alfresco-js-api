@@ -706,10 +706,12 @@ export class AlfrescoApiClient implements ee.Emitter, HttpClient {
 
     getAlfTicket(ticket: string): string {
         let alfTicketFragment = '';
+        const ticketParam = this.isWithCredentials() ? '&ticket=' : '&alf_ticket=';
+
         if (ticket) {
-            alfTicketFragment = '&alf_ticket=' + ticket;
+            alfTicketFragment = ticketParam + ticket;
         } else if (this.config.ticketEcm) {
-            alfTicketFragment = '&alf_ticket=' + this.config.ticketEcm;
+            alfTicketFragment = ticketParam + this.config.ticketEcm;
         }
 
         return alfTicketFragment;
