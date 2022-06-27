@@ -58,7 +58,13 @@ cd $TEMP_GENERATOR_DIR
 git fetch
 
 # Checkout branch if exist, otherwise create it
-git checkout $BRANCH_TO_CREATE 2>/dev/null || git checkout -b $BRANCH_TO_CREATE origin/develop
+BRANCH_CREATED=false
+if git checkout $BRANCH_TO_CREATE 2>/dev/null ; then
+    git reset --hard origin/develop
+else
+    BRANCH_CREATED=true
+    git checkout -b $BRANCH_TO_CREATE origin/develop
+fi
 
 JS_VERSION=$(npm view @alfresco/js-api@$VERSION version)
 
@@ -79,7 +85,11 @@ done
 
 git add .
 git commit -n -m "[ci:force][auto-commit] Update JS-API to $JS_VERSION for branch: $BRANCH_TO_CREATE originated from JS-API PR: $JSAPI_PR_NUMBER"
-git push origin $BRANCH_TO_CREATE
+if [ "$BRANCH_CREATED" = true ]; then
+  git push origin $BRANCH_TO_CREATE
+else
+  git push --force origin $BRANCH_TO_CREATE
+fi
 
 node $BUILD_PIPELINE_DIR/pr-creator.js --token=$TOKEN --title="Update branch for JS-API PR#$JSAPI_PR_NUMBER" --head=$BRANCH_TO_CREATE --repo=alfresco-ng2-components
 
