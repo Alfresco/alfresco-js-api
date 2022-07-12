@@ -60,7 +60,7 @@ export class AlfrescoApi extends LegacyAlfrescoApi implements Emitter, AlfrescoA
         }
     }
 
-    setConfig(config: AlfrescoApiConfig) {
+    setConfig(config: AlfrescoApiConfig): AlfrescoApiConfig {
         if (!config) {
             config = {} as AlfrescoApiConfig;
         }

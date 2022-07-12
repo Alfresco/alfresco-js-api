@@ -1,4 +1,4 @@
-import { AlfrescoApiClient, AlfrescoApiCompatibility as AlfrescoApi, AlfrescoApiConfig, FormValueRepresentation } from '../index';
+import { LegacyAlfrescoHttpClient, AlfrescoApiCompatibility as AlfrescoApi, AlfrescoApiConfig, FormValueRepresentation } from '../index';
 import { DateAlfresco } from  '../index';
 import { EcmAuthMock } from '../test/mockObjects';
 
@@ -10,7 +10,7 @@ describe('Alfresco Core API Client', () => {
 
     describe('type conversion', () => {
 
-        const client = new AlfrescoApiClient();
+        const client = new LegacyAlfrescoHttpClient();
 
         it('should create a request with response type blob', () => {
             const queryParams = {};
@@ -91,7 +91,7 @@ describe('Alfresco Core API Client', () => {
     describe('Deserializes', () => {
 
         it('should the deserializer return an array of object when the response is an array', () => {
-            const client = new AlfrescoApiClient();
+            const client = new LegacyAlfrescoHttpClient();
             const data = {
                 body: [
                     {

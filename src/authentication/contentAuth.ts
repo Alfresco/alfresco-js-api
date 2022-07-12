@@ -17,13 +17,16 @@
 
 import ee from 'event-emitter';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
-import { AlfrescoApiClient } from '../alfrescoApiClient';
+import { BaseAlfrescoApiClient } from '../BaseAlfrescoApi';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import { Storage } from '../storage';
 import { AlfrescoApiType } from '../../src/to-deprecate/alfresco-api-type';
+import { HttpClient } from '../api-clients/http-client.interface';
+import { LegacyAlfrescoHttpClient } from '../alfrescoApiClient';
 
-export class ContentAuth extends AlfrescoApiClient {
+
+export class ContentAuth extends BaseAlfrescoApiClient {
 
     ticketStorageLabel: string;
     ticket: string;
@@ -31,8 +34,8 @@ export class ContentAuth extends AlfrescoApiClient {
 
     authApi: AuthenticationApi;
 
-    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType) {
-        super();
+    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType, httpClient: HttpClient = new LegacyAlfrescoHttpClient()) {
+        super(httpClient);
         this.className = 'ContentAuth';
         this.storage = new Storage();
         this.storage.setDomainPrefix(config.domainPrefix);
@@ -42,7 +45,7 @@ export class ContentAuth extends AlfrescoApiClient {
         this.authApi = new AuthenticationApi(alfrescoApi);
     }
 
-    setConfig(config: AlfrescoApiConfig) {
+    setConfig(config: AlfrescoApiConfig): void {
         this.config = config;
 
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
@@ -57,12 +60,12 @@ export class ContentAuth extends AlfrescoApiClient {
 
     }
 
-    changeHost() {
+    changeHost(): void {
         this.basePath = this.config.hostEcm + '/' + this.config.contextRoot + '/api/-default-/public/authentication/versions/1'; //Auth Call
         this.ticket = undefined;
     }
 
-    saveUsername(username: string) {
+    saveUsername(username: string): void {
         if (this.storage.supportsStorage()) {
             this.storage.setItem('ACS_USERNAME', username);
         }
@@ -79,12 +82,12 @@ export class ContentAuth extends AlfrescoApiClient {
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
-        let loginRequest: any = {};
+        const loginRequest: any = {};
 
         loginRequest.userId = this.authentications.basicAuth.username;
         loginRequest.password = this.authentications.basicAuth.password;
 
-        let promise: any = new Promise((resolve, reject) => {
+        const promise: any = new Promise((resolve, reject) => {
             this.authApi.createTicket(loginRequest)
                 .then((data: any) => {
                     this.saveUsername(username);
@@ -118,7 +121,7 @@ export class ContentAuth extends AlfrescoApiClient {
     validateTicket(): Promise<any> {
         this.setTicket(this.config.ticketEcm);
 
-        let promise: any = new Promise((resolve, reject) => {
+        const promise: any = new Promise((resolve, reject) => {
             this.authApi.validateTicket().then((data: any) => {
                     this.setTicket(data.entry.id);
                     promise.emit('success');
@@ -145,7 +148,7 @@ export class ContentAuth extends AlfrescoApiClient {
      * */
     logout(): Promise<any> {
         this.saveUsername('');
-        let promise: any = new Promise((resolve, reject) => {
+        const promise: any = new Promise((resolve, reject) => {
             this.authApi.deleteTicket().then(
                 () => {
                     promise.emit('logout');
@@ -168,7 +171,7 @@ export class ContentAuth extends AlfrescoApiClient {
     /**
      * Set the current Ticket
      * */
-    setTicket(ticket: string) {
+    setTicket(ticket: string): void {
         this.authentications.basicAuth.username = 'ROLE_TICKET';
         this.authentications.basicAuth.password = ticket;
         this.config.ticketEcm = ticket;
@@ -183,7 +186,7 @@ export class ContentAuth extends AlfrescoApiClient {
         return this.ticket;
     }
 
-    invalidateSession() {
+    invalidateSession(): void {
         this.storage.removeItem(this.ticketStorageLabel);
         this.authentications.basicAuth.username = null;
         this.authentications.basicAuth.password = null;

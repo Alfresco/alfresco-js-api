@@ -15,29 +15,31 @@
 * limitations under the License.
 */
 
-import { AlfrescoApiClient } from './alfrescoApiClient';
+import { BaseAlfrescoApiClient } from './BaseAlfrescoApi';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
+import { HttpClient } from './api-clients/http-client.interface';
+import { LegacyAlfrescoHttpClient } from './alfrescoApiClient';
 
-export class ContentClient extends AlfrescoApiClient {
+export class ContentClient extends BaseAlfrescoApiClient {
 
     className = 'ContentClient';
     servicePath: string;
 
-    constructor(config: AlfrescoApiConfig, servicePath: string) {
-        super();
+    constructor(config: AlfrescoApiConfig, servicePath: string, httpClient: HttpClient = new LegacyAlfrescoHttpClient()) {
+        super(httpClient);
 
         this.setConfig(config, servicePath);
     }
 
-    setConfig(config: AlfrescoApiConfig, servicePath: string) {
+    setConfig(config: AlfrescoApiConfig, servicePath: string): void {
         this.config = config;
         this.servicePath = servicePath;
 
         this.changeHost();
     }
 
-    changeHost() {
+    changeHost(): void {
         this.host = this.config.hostEcm;
         this.basePath = `${this.config.hostEcm}/${this.config.contextRoot}${this.servicePath}`;
     }
@@ -47,7 +49,7 @@ export class ContentClient extends AlfrescoApiClient {
      *
      * @param authentications
      * */
-    setAuthentications(authentications: Authentication): any {
+    setAuthentications(authentications: Authentication): void {
         this.authentications = authentications;
     }
 

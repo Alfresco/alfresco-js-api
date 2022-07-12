@@ -36,6 +36,15 @@ export interface HttpClientConfig {
     host?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
     servicePath?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
 }
+
+export interface BaseHttpClient {
+    request<T = any>(options: RequestOptions): Promise<T>;
+    post<T = any>(options: RequestOptions): Promise<T>;
+    put<T = any>(options: RequestOptions): Promise<T>;
+    get<T = any>(options: RequestOptions): Promise<T>;
+    delete<T = void>(options: RequestOptions): Promise<T>;
+}
+
 export interface HttpClient {
     basePath: string;
     config: HttpClientConfig;

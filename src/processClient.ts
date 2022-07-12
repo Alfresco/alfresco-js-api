@@ -16,26 +16,28 @@
 */
 
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
-import { AlfrescoApiClient } from './alfrescoApiClient';
+import { BaseAlfrescoApiClient } from './BaseAlfrescoApi';
 import { Authentication } from './authentication/authentication';
+import { HttpClient } from './api-clients/http-client.interface';
+import { LegacyAlfrescoHttpClient } from './alfrescoApiClient';
 
-export class ProcessClient extends AlfrescoApiClient {
+export class ProcessClient extends BaseAlfrescoApiClient {
 
     className = 'ProcessClient';
 
-    constructor(config: AlfrescoApiConfig) {
-        super();
+    constructor(config: AlfrescoApiConfig, httpClient: HttpClient = new LegacyAlfrescoHttpClient()) {
+        super(httpClient);
 
         this.setConfig(config);
     }
 
-    setConfig(config: AlfrescoApiConfig) {
+    setConfig(config: AlfrescoApiConfig): void {
         this.config = config;
 
         this.changeHost();
     }
 
-    changeHost() {
+    changeHost(): void {
         this.host = this.config.hostBpm;
         this.basePath = `${this.config.hostBpm}/${this.config.contextRootBpm}`;
     }
@@ -45,7 +47,7 @@ export class ProcessClient extends AlfrescoApiClient {
      *
      * @param {Object} authentications
      * */
-    setAuthentications(authentications: Authentication) {
+    setAuthentications(authentications: Authentication): void {
         this.authentications = authentications;
     }
 

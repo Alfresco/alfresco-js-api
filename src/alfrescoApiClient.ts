@@ -70,7 +70,7 @@ export function buildCollectionParam(param: string[], collectionFormat: string):
     }
 }
 
-export class AlfrescoApiClient implements ee.Emitter, HttpClient {
+export class LegacyAlfrescoHttpClient implements ee.Emitter, HttpClient {
 
     on: ee.EmitterMethod;
     off: ee.EmitterMethod;
@@ -84,7 +84,7 @@ export class AlfrescoApiClient implements ee.Emitter, HttpClient {
     /**
      * The base URL against which to resolve every API call's (relative) path.
      */
-    basePath: string = '';
+    basePath = '';
 
     /**
      * The authentication methods to be included for all API calls.
@@ -702,18 +702,5 @@ export class AlfrescoApiClient implements ee.Emitter, HttpClient {
         }
 
         return request;
-    }
-
-    getAlfTicket(ticket: string): string {
-        let alfTicketFragment = '';
-        const ticketParam = this.isWithCredentials() ? '&ticket=' : '&alf_ticket=';
-
-        if (ticket) {
-            alfTicketFragment = ticketParam + ticket;
-        } else if (this.config.ticketEcm) {
-            alfTicketFragment = ticketParam + this.config.ticketEcm;
-        }
-
-        return alfTicketFragment;
     }
 }
