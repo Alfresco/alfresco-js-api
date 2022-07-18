@@ -51,7 +51,9 @@ export abstract class BaseAlfrescoApi extends LegacyAlfrescoApi implements Emitt
 
     username: string;
 
-    constructor(config?: AlfrescoApiConfig) {
+    // dirty hack to make it work with Angular HttpClient,
+    // otherwise it will be undefined outside constructor in derived class
+    constructor(config?: AlfrescoApiConfig, public httpClient?: any) {
         super();
         ee(this);
 
@@ -115,7 +117,7 @@ export abstract class BaseAlfrescoApi extends LegacyAlfrescoApi implements Emitt
             });
 
             if (!this.contentAuth) {
-                this.contentAuth = this.initContentAuth(config)
+                this.contentAuth = this.initContentAuth(config);
             } else {
                 this.contentAuth.setConfig(config);
             }
