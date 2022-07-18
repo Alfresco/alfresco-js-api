@@ -20,8 +20,8 @@ import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
-import { AlfrescoApi } from '../alfrescoApi';
 import { Storage } from '../storage';
+import { AlfrescoApiType } from '../to-deprecate/alfresco-api-type';
 
 declare const Buffer: any;
 declare const require: any;
@@ -71,7 +71,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     iFrameHashListener: any;
 
-    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
+    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType) {
         super();
         this.storage = new Storage();
 
@@ -82,7 +82,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         }
     }
 
-    setConfig(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi) {
+    setConfig(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType) {
         this.config = config;
         this.storage.setDomainPrefix(config.domainPrefix);
 
@@ -761,7 +761,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.storage.removeItem('nonce');
     }
 
-    exchangeTicketListener(alfrescoApi: AlfrescoApi) {
+    exchangeTicketListener(alfrescoApi: AlfrescoApiType): void {
         this.on('token_issued', async () => {
             const authContentApi: AuthenticationApi = new AuthenticationApi(alfrescoApi);
             // Legacy stuff, needs deprecation, can not be more specific here because of circular dependency

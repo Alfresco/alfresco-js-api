@@ -37,6 +37,7 @@ export * from './src/authentication/oauth2Auth';
 export * from './src/contentClient';
 export * from './src/processClient';
 export * from './src/storage';
+export * from './src/baseAlfrescoApi';
 export * from './src/alfrescoApi';
 export * from './src/alfrescoApiCompatibility';
 export * from './src/alfrescoApiClient';
