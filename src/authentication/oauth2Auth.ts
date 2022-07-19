@@ -22,7 +22,7 @@ import { Authentication } from './authentication';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
 import { Storage } from '../storage';
 import { AlfrescoApiType } from '../to-deprecate/alfresco-api-type';
-import { LegacyHttpClient } from '../api-clients/http-client.interface';
+import { HttpClient } from '../api-clients/http-client.interface';
 
 declare const Buffer: any;
 declare const require: any;
@@ -73,7 +73,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     iFrameHashListener: any;
 
-    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType, httpClient?: LegacyHttpClient) {
+    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType, httpClient?: HttpClient) {
         super(undefined, httpClient);
         this.storage = new Storage();
 

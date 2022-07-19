@@ -18,13 +18,13 @@
 import { AlfrescoApiClient } from './alfrescoApiClient';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
-import { LegacyHttpClient } from './api-clients/http-client.interface';
+import { HttpClient } from './api-clients/http-client.interface';
 
 export class ContentClient extends AlfrescoApiClient {
     className = 'ContentClient';
     servicePath: string;
 
-    constructor(config: AlfrescoApiConfig, servicePath: string, httpClient?: LegacyHttpClient) {
+    constructor(config: AlfrescoApiConfig, servicePath: string, httpClient?: HttpClient) {
         super(undefined, httpClient);
 
         this.setConfig(config, servicePath);

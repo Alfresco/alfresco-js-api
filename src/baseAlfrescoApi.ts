@@ -26,6 +26,7 @@ import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
 import { LegacyAlfrescoApi } from './api-legacy/legacy-alfresco-api';
 import { AlfrescoApiType } from './to-deprecate/alfresco-api-type';
+import { HttpClient } from './api-clients/http-client.interface';
 
 export abstract class BaseAlfrescoApi extends LegacyAlfrescoApi implements Emitter, AlfrescoApiType {
     storage: Storage;
@@ -51,9 +52,9 @@ export abstract class BaseAlfrescoApi extends LegacyAlfrescoApi implements Emitt
 
     username: string;
 
-    // dirty hack to make it work with Angular HttpClient,
+    // we need to pass httpClient to the baseClass, to make it work with Angular HttpClient,
     // otherwise it will be undefined outside constructor in derived class
-    constructor(config?: AlfrescoApiConfig, public httpClient?: any) {
+    constructor(config?: AlfrescoApiConfig, public httpClient?: HttpClient) {
         super();
         ee(this);
 

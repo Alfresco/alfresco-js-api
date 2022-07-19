@@ -24,10 +24,9 @@
 import ee from 'event-emitter';
 import superagent, { Response, ProgressEvent } from 'superagent';
 import { Authentication } from './authentication/authentication';
-import { LegacyHttpClient, RequestOptions } from './api-clients/http-client.interface';
+import { RequestOptions, HttpClient, SecurityOptions } from './api-clients/http-client.interface';
 import { Oauth2 } from './authentication/oauth2';
 import { BasicAuth } from './authentication/basicAuth';
-import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { isBrowser } from './utils/helpers';
 
 /**
@@ -45,18 +44,11 @@ export function paramToString(param: any): string {
     return param.toString();
 }
 
-export class SuperagentHttpClient implements ee.Emitter, LegacyHttpClient {
+export class SuperagentHttpClient implements ee.Emitter, HttpClient {
     on: ee.EmitterMethod;
     off: ee.EmitterMethod;
     once: ee.EmitterMethod;
     emit: (type: string, ...args: any[]) => void;
-
-    /**
-     * The base URL against which to resolve every API call's (relative) path.
-     */
-    basePath: string;
-    className: string;
-    config: AlfrescoApiConfig;
 
     contentTypes = {
         JSON: ['application/json'],
@@ -82,170 +74,95 @@ export class SuperagentHttpClient implements ee.Emitter, LegacyHttpClient {
      */
     timeout: number | { deadline?: number; response?: number } = undefined;
 
-    constructor(private host?: string) {
+    constructor() {
         ee(this);
     }
 
-    request<T = any>(options: RequestOptions): Promise<T> {
-        return this.callApi(
-            options.path,
-            options.httpMethod,
-            options.pathParams,
-            options.queryParams,
-            options.headerParams,
-            options.formParams,
-            options.bodyParam,
-            options.contentTypes,
-            options.accepts,
-            options.returnType,
-            options.contextRoot,
-            options.responseType,
-            options.url
+    request<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<T> {
+        return this.callApi(url, options, securityOptions);
+    }
+
+    post<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<T> {
+        return this.request<T>(
+            url,
+            {
+                ...options,
+                httpMethod: 'POST',
+                contentTypes: options.contentTypes || this.contentTypes.JSON,
+                accepts: options.accepts || this.contentTypes.JSON,
+            },
+            securityOptions
         );
     }
 
-    post<T = any>(options: RequestOptions): Promise<T> {
-        return this.request<T>({
-            ...options,
-            httpMethod: 'POST',
-            contentTypes: options.contentTypes || this.contentTypes.JSON,
-            accepts: options.accepts || this.contentTypes.JSON,
-        });
+    put<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<T> {
+        return this.request<T>(
+            url,
+            {
+                ...options,
+                httpMethod: 'PUT',
+                contentTypes: options.contentTypes || this.contentTypes.JSON,
+                accepts: options.accepts || this.contentTypes.JSON,
+            },
+            securityOptions
+        );
     }
 
-    put<T = any>(options: RequestOptions): Promise<T> {
-        return this.request<T>({
-            ...options,
-            httpMethod: 'PUT',
-            contentTypes: options.contentTypes || this.contentTypes.JSON,
-            accepts: options.accepts || this.contentTypes.JSON,
-        });
+    get<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<T> {
+        return this.request<T>(
+            url,
+            {
+                ...options,
+                httpMethod: 'GET',
+                contentTypes: options.contentTypes || this.contentTypes.JSON,
+                accepts: options.accepts || this.contentTypes.JSON,
+            },
+            securityOptions
+        );
     }
 
-    get<T = any>(options: RequestOptions): Promise<T> {
-        return this.request<T>({
-            ...options,
-            httpMethod: 'GET',
-            contentTypes: options.contentTypes || this.contentTypes.JSON,
-            accepts: options.accepts || this.contentTypes.JSON,
-        });
+    delete<T = void>(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<T> {
+        return this.request<T>(
+            url,
+            {
+                ...options,
+                httpMethod: 'DELETE',
+                contentTypes: options.contentTypes || this.contentTypes.JSON,
+                accepts: options.accepts || this.contentTypes.JSON,
+            },
+            securityOptions
+        );
     }
 
-    delete<T = void>(options: RequestOptions): Promise<T> {
-        return this.request<T>({
-            ...options,
-            httpMethod: 'DELETE',
-            contentTypes: options.contentTypes || this.contentTypes.JSON,
-            accepts: options.accepts || this.contentTypes.JSON,
-        });
+    callApi(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<any> {
+        return this.callHostApi(url, options, securityOptions);
     }
 
-    callApi(
-        path: string,
-        httpMethod: string,
-        pathParams?: any,
-        queryParams?: any,
-        headerParams?: any,
-        formParams?: any,
-        bodyParam?: any,
-        contentTypes?: string[],
-        accepts?: string[],
-        returnType?: any,
-        contextRoot?: string,
-        responseType?: string,
-        url?: string
-    ): Promise<any> {
-        if (!url) {
-            if (contextRoot) {
-                const basePath = `${this.host}/${contextRoot}`;
-                url = this.buildUrlCustomBasePath(basePath, path, pathParams);
-            } else {
-                url = this.buildUrl(path, pathParams);
-            }
-        }
-        return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, contentTypes, accepts, returnType, contextRoot, responseType, url);
+    callCustomApi(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<any> {
+        return this.callHostApi(url, options, securityOptions);
     }
 
-    /**
-     * Invokes the REST service using the supplied settings and parameters but not the basepath.
-     *
-     * @param {String} path The base URL to invoke.
-     * @param {String} httpMethod The HTTP method to use.
-     * @param {Object.<String, String>} pathParams A map of path parameters and their values.
-     * @param {Object.<String, Object>} queryParams A map of query parameters and their values.
-     * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
-     * @param {Object.<String, Object>} formParams A map of form parameters and their values.
-     * @param {Object} bodyParam The value to pass as the request body.
-     * @param {String[]} contentTypes An array of request MIME types.
-     * @param {String[]} accepts An array of acceptable response MIME types.
-     * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
-     * @param {(String)} contextRoot alternative contextRoot
-     * @param {(String)} responseType  is an enumerated value that returns the type of the response.
-     *                                  It also lets the author change the response type to one "arraybuffer", "blob", "document",
-     *                                  "json", or "text".
-     *                                   If an empty string is set as the value of responseType, it is assumed as type "text".
-     * constructor for a complex type.   * @returns {Promise} A Promise object.
-     */
-    callCustomApi(
-        path: string,
-        httpMethod: string,
-        pathParams?: any,
-        queryParams?: any,
-        headerParams?: any,
-        formParams?: any,
-        bodyParam?: any,
-        contentTypes?: string[],
-        accepts?: string[],
-        returnType?: any,
-        contextRoot?: string,
-        responseType?: string
-    ): Promise<any> {
-        const url = this.buildUrlCustomBasePath(path, '', pathParams);
-
-        return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, contentTypes, accepts, returnType, contextRoot, responseType, url);
-    }
-
-    /**
-     * Invokes the REST service using the supplied settings and parameters.
-     *
-     * @param {String} path The base URL to invoke.
-     * @param {String} httpMethod The HTTP method to use.
-     * @param {Object.<String, String>} pathParams A map of path parameters and their values.
-     * @param {Object.<String, Object>} queryParams A map of query parameters and their values.
-     * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
-     * @param {Object.<String, Object>} formParams A map of form parameters and their values.
-     * @param {Object} bodyParam The value to pass as the request body.
-     * @param {String[]} contentTypes An array of request MIME types.
-     * @param {String[]} accepts An array of acceptable response MIME types.
-     * @param {(String|Array|any)} returnType The required type to return; can be a string for simple types or the
-     * @param {(String)} contextRoot alternative contextRoot
-     * @param {(String)} responseType  is an enumerated value that returns the type of the response.
-     *                                  It also lets the author change the response type to one "arraybuffer", "blob", "document",
-     *                                  "json", or "text".
-     *                                   If an empty string is set as the value of responseType, it is assumed as type "text".
-     * constructor for a complex type.   * @returns {Promise} A Promise object.
-     */
-    callHostApi(
-        // @ts-ignore
-        path: string,
-        httpMethod: string,
-        // @ts-ignore
-        pathParams?: any,
-        queryParams?: any,
-        headerParams?: any,
-        formParams?: any,
-        bodyParam?: any,
-        contentTypes?: string[],
-        accepts?: string[],
-        returnType?: any,
-        // @ts-ignore
-        contextRoot?: string,
-        responseType?: string,
-        url?: string
-    ): Promise<any> {
+    callHostApi(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<any> {
         const eventEmitter: any = ee({});
 
-        let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam, contentTypes, accepts, responseType, eventEmitter, returnType);
+        const { httpMethod, queryParams, headerParams, formParams, bodyParam, contentTypes, accepts, responseType, returnType } = options;
+
+        let request = this.buildRequest(
+            httpMethod,
+            url,
+            queryParams,
+            headerParams,
+            formParams,
+            bodyParam,
+            contentTypes,
+            accepts,
+            responseType,
+            eventEmitter,
+            returnType,
+            securityOptions.withCredentials,
+            securityOptions.disableCsrf,
+            securityOptions.isBpmRequest
+        );
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
@@ -272,7 +189,7 @@ export class SuperagentHttpClient implements ee.Emitter, LegacyHttpClient {
                         reject({ error: error });
                     }
                 } else {
-                    if (this.isBpmRequest()) {
+                    if (securityOptions.isBpmRequest) {
                         if (response.header && response.header.hasOwnProperty('set-cookie')) {
                             this.authentications.cookie = response.header['set-cookie'][0];
                         }
@@ -316,57 +233,6 @@ export class SuperagentHttpClient implements ee.Emitter, LegacyHttpClient {
         };
 
         return promise;
-    }
-
-    isBpmRequest(): boolean {
-        return this.className === 'ProcessAuth' || this.className === 'ProcessClient';
-    }
-
-    /**
-     * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders
-     * with parameter values
-     */
-    buildUrlCustomBasePath(basePath: string, path: string, pathParams: any): string {
-        if (path && path !== '' && !path.match(/^\//)) {
-            path = '/' + path;
-        }
-        let url = basePath + path;
-
-        url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
-            let value;
-            if (pathParams.hasOwnProperty(key)) {
-                value = paramToString(pathParams[key]);
-            } else {
-                value = fullMatch;
-            }
-            return encodeURIComponent(value);
-        });
-        return url;
-    }
-
-    /**
-     * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders with parameter values.
-     * NOTE: query parameters are not handled here.
-     * @param  path The path to append to the base URL.
-     * @param  pathParams The parameter values to append.
-     * @returns  The encoded path with parameter values substituted.
-     */
-    buildUrl(path: string, pathParams: any): string {
-        if (!path.match(/^\//)) {
-            path = '/' + path;
-        }
-        let url = this.basePath + path;
-
-        url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
-            let value;
-            if (pathParams.hasOwnProperty(key)) {
-                value = paramToString(pathParams[key]);
-            } else {
-                value = fullMatch;
-            }
-            return encodeURIComponent(value);
-        });
-        return url;
     }
 
     setCsrfToken(request: any) {
@@ -421,14 +287,6 @@ export class SuperagentHttpClient implements ee.Emitter, LegacyHttpClient {
         }
     }
 
-    isWithCredentials(): boolean {
-        if (this.config) {
-            return this.config.withCredentials;
-        } else {
-            return false;
-        }
-    }
-
     buildRequest(
         httpMethod: string,
         url: string,
@@ -441,7 +299,10 @@ export class SuperagentHttpClient implements ee.Emitter, LegacyHttpClient {
         accepts: string[],
         responseType: string,
         eventEmitter: ee.Emitter,
-        returnType: string
+        returnType: string,
+        withCredentials = false,
+        disableCsrf = true,
+        isBpmRequest: boolean
     ) {
         const request: any = superagent(httpMethod, url);
 
@@ -454,16 +315,16 @@ export class SuperagentHttpClient implements ee.Emitter, LegacyHttpClient {
         // set header parameters
         request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
 
-        if (this.isBpmRequest() && this.isCsrfEnabled()) {
+        if (isBpmRequest && !disableCsrf) {
             this.setCsrfToken(request);
         }
 
-        if (this.isWithCredentials()) {
+        if (withCredentials) {
             request.withCredentials();
         }
 
         // add cookie for activiti
-        if (this.isBpmRequest()) {
+        if (isBpmRequest) {
             request.withCredentials();
             if (this.authentications.cookie) {
                 if (!isBrowser()) {
@@ -525,14 +386,6 @@ export class SuperagentHttpClient implements ee.Emitter, LegacyHttpClient {
         return request;
     }
 
-    isCsrfEnabled(): boolean {
-        if (this.config) {
-            return !this.config.disableCsrf;
-        } else {
-            return true;
-        }
-    }
-
     /**
      * Deserializes an HTTP response body into a value of the specified type.
      * @param {Object} response A SuperAgent response object.
@@ -554,9 +407,9 @@ export class SuperagentHttpClient implements ee.Emitter, LegacyHttpClient {
         }
 
         if (returnType) {
-            if (returnType === 'blob' && this.isBrowser()) {
+            if (returnType === 'blob' && isBrowser()) {
                 data = new Blob([data], { type: response.header['content-type'] });
-            } else if (returnType === 'blob' && !this.isBrowser()) {
+            } else if (returnType === 'blob' && !isBrowser()) {
                 // @ts-ignore
                 data = new Buffer.from(data, 'binary');
             } else if (Array.isArray(data)) {
@@ -569,10 +422,6 @@ export class SuperagentHttpClient implements ee.Emitter, LegacyHttpClient {
         }
 
         return data;
-    }
-
-    isBrowser(): boolean {
-        return typeof window !== 'undefined' && typeof window.document !== 'undefined';
     }
 
     progress(event: any, eventEmitter: ee.Emitter) {

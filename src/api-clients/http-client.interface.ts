@@ -78,44 +78,20 @@ export interface LegacyHttpClient {
     ): Promise<any>;
 }
 
-// export interface HttpClient {
-//     basePath: string;
-//     config: HttpClientConfig;
+export interface SecurityOptions {
+    readonly isBpmRequest: boolean;
+    readonly disableCsrf?: boolean;
+    readonly withCredentials?: boolean;
+}
 
-//     request<T = any>(options: RequestOptions): Promise<T>;
-//     post<T = any>(options: RequestOptions): Promise<T>;
-//     put<T = any>(options: RequestOptions): Promise<T>;
-//     get<T = any>(options: RequestOptions): Promise<T>;
-//     delete<T = void>(options: RequestOptions): Promise<T>;
-//     /** @deprecated */
-//     callApi(
-//         path: string,
-//         httpMethod: string,
-//         pathParams?: any,
-//         queryParams?: any,
-//         headerParams?: any,
-//         formParams?: any,
-//         bodyParam?: any,
-//         contentTypes?: string[],
-//         accepts?: string[],
-//         returnType?: any,
-//         contextRoot?: string,
-//         responseType?: string,
-//         url?: string
-//     ): Promise<any>;
-//     /** @deprecated */
-//     callCustomApi(
-//         path: string,
-//         httpMethod: string,
-//         pathParams?: any,
-//         queryParams?: any,
-//         headerParams?: any,
-//         formParams?: any,
-//         bodyParam?: any,
-//         contentTypes?: string[],
-//         accepts?: string[],
-//         returnType?: any,
-//         contextRoot?: string,
-//         responseType?: string
-//     ): Promise<any>;
-// }
+export interface HttpClient {
+    request<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
+    post<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
+    put<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
+    get<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
+    delete<T = void>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
+    /** @deprecated */
+    callApi(url: string, options: RequestOptions, security: SecurityOptions): Promise<any>;
+    /** @deprecated */
+    callCustomApi(url: string, options: RequestOptions, security: SecurityOptions): Promise<any>;
+}

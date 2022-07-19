@@ -21,7 +21,7 @@ import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import { Storage } from '../storage';
 import { isBrowser } from '../utils/helpers';
-import { LegacyHttpClient } from '../api-clients/http-client.interface';
+import { HttpClient } from '../api-clients/http-client.interface';
 
 export class ProcessAuth extends AlfrescoApiClient {
     ticket: string;
@@ -32,7 +32,7 @@ export class ProcessAuth extends AlfrescoApiClient {
         type: 'activiti',
     };
 
-    constructor(config: AlfrescoApiConfig, httpClient?: LegacyHttpClient) {
+    constructor(config: AlfrescoApiConfig, httpClient?: HttpClient) {
         super(undefined, httpClient);
         this.storage = new Storage();
         this.storage.setDomainPrefix(config.domainPrefix);

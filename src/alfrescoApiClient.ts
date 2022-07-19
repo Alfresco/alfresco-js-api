@@ -19,7 +19,7 @@ import ee from 'event-emitter';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
 import { SuperagentHttpClient } from './superagentHttpClient';
-import { LegacyHttpClient, RequestOptions } from './api-clients/http-client.interface';
+import { HttpClient, LegacyHttpClient, RequestOptions, SecurityOptions } from './api-clients/http-client.interface';
 
 declare const Buffer: any;
 
@@ -96,18 +96,49 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
      */
     defaultHeaders = {};
 
-    httpClient: LegacyHttpClient;
+    httpClient: HttpClient;
 
-    constructor(host?: string, httpClient?: LegacyHttpClient) {
+    constructor(host?: string, httpClient?: HttpClient) {
         this.host = host;
 
         // fallback for backward compatibility
-        this.httpClient = httpClient || new SuperagentHttpClient(host);
+        this.httpClient = httpClient || new SuperagentHttpClient();
 
         ee(this);
     }
+    
     request<T = any>(options: RequestOptions): Promise<T> {
-        return this.httpClient.request(options);
+        const security = this.getSecurityOptions();
+        return this.httpClient.request(this.basePath, options, security);
+    }
+
+    getSecurityOptions(): SecurityOptions {
+        return {
+            isBpmRequest: this.isBpmRequest(),
+            disableCsrf: this.isCsrfEnabled(),
+            withCredentials: this.isWithCredentials(),
+        };
+    }
+
+    isCsrfEnabled(): boolean {
+        if (this.config) {
+            return !this.config.disableCsrf;
+        } else {
+            return true;
+        }
+    }
+
+    isBpmRequest(): boolean {
+        return this.className === 'ProcessAuth' || this.className === 'ProcessClient';
+    }
+
+    getCallApiUrl({ contextRoot, path, pathParams }: { contextRoot?: string; path: string; pathParams?: any }): string {
+        if (contextRoot) {
+            const basePath = `${this.host}/${contextRoot}`;
+            return this.buildUrlCustomBasePath(basePath, path, pathParams);
+        }
+
+        return this.buildUrl(path, pathParams);
     }
 
     callApi(
@@ -125,22 +156,31 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
         responseType?: string,
         url?: string
     ): Promise<any> {
+        const security = this.getSecurityOptions();
+
+        const callApiUrl = url ?? this.getCallApiUrl({ contextRoot, path, pathParams });
+
         return this.httpClient.callApi(
-            path,
-            httpMethod,
-            pathParams,
-            queryParams,
-            headerParams,
-            formParams,
-            bodyParam,
-            contentTypes,
-            accepts,
-            returnType,
-            contextRoot,
-            responseType,
-            url
+            callApiUrl,
+            {
+                path,
+                httpMethod,
+                pathParams,
+                queryParams,
+                headerParams,
+                formParams,
+                bodyParam,
+                contentTypes,
+                accepts,
+                returnType,
+                contextRoot,
+                responseType,
+                url,
+            },
+            security
         );
     }
+
     callCustomApi(
         path: string,
         httpMethod: string,
@@ -155,36 +195,48 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
         contextRoot?: string,
         responseType?: string
     ): Promise<any> {
+        const security = this.getSecurityOptions();
+
+        const customApiUrl = this.buildUrlCustomBasePath(path, '', pathParams);
+
         return this.httpClient.callCustomApi(
-            path,
-            httpMethod,
-            pathParams,
-            queryParams,
-            headerParams,
-            formParams,
-            bodyParam,
-            contentTypes,
-            accepts,
-            returnType,
-            contextRoot,
-            responseType
+            customApiUrl,
+            {
+                path,
+                httpMethod,
+                pathParams,
+                queryParams,
+                headerParams,
+                formParams,
+                bodyParam,
+                contentTypes,
+                accepts,
+                returnType,
+                contextRoot,
+                responseType,
+            },
+            security
         );
     }
 
     post<T = any>(options: RequestOptions): Promise<T> {
-        return this.httpClient.post<T>(options);
+        const security = this.getSecurityOptions();
+        return this.httpClient.post<T>(this.basePath, options, security);
     }
 
     put<T = any>(options: RequestOptions): Promise<T> {
-        return this.httpClient.put<T>(options);
+        const security = this.getSecurityOptions();
+        return this.httpClient.put<T>(this.basePath, options, security);
     }
 
     get<T = any>(options: RequestOptions): Promise<T> {
-        return this.httpClient.get<T>(options);
+        const security = this.getSecurityOptions();
+        return this.httpClient.get<T>(this.basePath, options, security);
     }
 
     delete<T = void>(options: RequestOptions): Promise<T> {
-        return this.httpClient.delete(options);
+        const security = this.getSecurityOptions();
+        return this.httpClient.delete(this.basePath, options, security);
     }
 
     basicAuth(username: string, password: string): string {
@@ -220,5 +272,52 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
         }
 
         return alfTicketFragment;
+    }
+
+    /**
+     * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders with parameter values.
+     * NOTE: query parameters are not handled here.
+     * @param  path The path to append to the base URL.
+     * @param  pathParams The parameter values to append.
+     * @returns  The encoded path with parameter values substituted.
+     */
+    buildUrl(path: string, pathParams: any): string {
+        if (!path.match(/^\//)) {
+            path = '/' + path;
+        }
+        let url = this.basePath + path;
+
+        url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
+            let value;
+            if (pathParams.hasOwnProperty(key)) {
+                value = paramToString(pathParams[key]);
+            } else {
+                value = fullMatch;
+            }
+            return encodeURIComponent(value);
+        });
+        return url;
+    }
+
+    /**
+     * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders
+     * with parameter values
+     */
+    buildUrlCustomBasePath(basePath: string, path: string, pathParams: any): string {
+        if (path && path !== '' && !path.match(/^\//)) {
+            path = '/' + path;
+        }
+        let url = basePath + path;
+
+        url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
+            let value;
+            if (pathParams.hasOwnProperty(key)) {
+                value = paramToString(pathParams[key]);
+            } else {
+                value = fullMatch;
+            }
+            return encodeURIComponent(value);
+        });
+        return url;
     }
 }
