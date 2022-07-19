@@ -1,19 +1,19 @@
 /*!
-* @license
-* Copyright 2018 Alfresco Software, Ltd.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * @license
+ * Copyright 2018 Alfresco Software, Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import ee from 'event-emitter';
 import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
@@ -22,17 +22,16 @@ import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import { Storage } from '../storage';
 import { AlfrescoApiType } from '../../src/to-deprecate/alfresco-api-type';
-import { HttpClient } from '../api-clients/http-client.interface';
+import { LegacyHttpClient } from '../api-clients/http-client.interface';
 
 export class ContentAuth extends AlfrescoApiClient {
-
     ticketStorageLabel: string;
     ticket: string;
     storage: Storage;
 
     authApi: AuthenticationApi;
 
-    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType, httpClient?: HttpClient) {
+    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType, httpClient?: LegacyHttpClient) {
         super(undefined, httpClient);
         this.className = 'ContentAuth';
         this.storage = new Storage();
@@ -55,7 +54,6 @@ export class ContentAuth extends AlfrescoApiClient {
         } else if (this.storage.getItem(this.ticketStorageLabel)) {
             this.setTicket(this.storage.getItem(this.ticketStorageLabel));
         }
-
     }
 
     changeHost() {
@@ -80,13 +78,14 @@ export class ContentAuth extends AlfrescoApiClient {
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
-        let loginRequest: any = {};
+        const loginRequest: any = {};
 
         loginRequest.userId = this.authentications.basicAuth.username;
         loginRequest.password = this.authentications.basicAuth.password;
 
-        let promise: any = new Promise((resolve, reject) => {
-            this.authApi.createTicket(loginRequest)
+        const promise: any = new Promise((resolve, reject) => {
+            this.authApi
+                .createTicket(loginRequest)
                 .then((data: any) => {
                     this.saveUsername(username);
                     this.setTicket(data.entry.id);
@@ -119,20 +118,22 @@ export class ContentAuth extends AlfrescoApiClient {
     validateTicket(): Promise<any> {
         this.setTicket(this.config.ticketEcm);
 
-        let promise: any = new Promise((resolve, reject) => {
-            this.authApi.validateTicket().then((data: any) => {
+        const promise: any = new Promise((resolve, reject) => {
+            this.authApi.validateTicket().then(
+                (data: any) => {
                     this.setTicket(data.entry.id);
                     promise.emit('success');
                     this.emit('logged-in');
                     resolve(data.entry.id);
                 },
-                                               (error) => {
+                (error) => {
                     if (error.status === 401) {
                         promise.emit('unauthorized');
                     }
                     promise.emit('error');
                     reject(error);
-                });
+                }
+            );
         });
 
         ee(promise); // jshint ignore:line
@@ -146,7 +147,7 @@ export class ContentAuth extends AlfrescoApiClient {
      * */
     logout(): Promise<any> {
         this.saveUsername('');
-        let promise: any = new Promise((resolve, reject) => {
+        const promise: any = new Promise((resolve, reject) => {
             this.authApi.deleteTicket().then(
                 () => {
                     promise.emit('logout');
@@ -159,7 +160,8 @@ export class ContentAuth extends AlfrescoApiClient {
                     }
                     promise.emit('error');
                     reject(error);
-                });
+                }
+            );
         });
 
         ee(promise); // jshint ignore:line
@@ -205,5 +207,4 @@ export class ContentAuth extends AlfrescoApiClient {
     getAuthentication(): Authentication {
         return this.authentications;
     }
-
 }

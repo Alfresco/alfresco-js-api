@@ -19,7 +19,7 @@ import ee from 'event-emitter';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
 import { SuperagentHttpClient } from './superagentHttpClient';
-import { HttpClient, RequestOptions } from './api-clients/http-client.interface';
+import { LegacyHttpClient, RequestOptions } from './api-clients/http-client.interface';
 
 declare const Buffer: any;
 
@@ -67,7 +67,7 @@ export function buildCollectionParam(param: string[], collectionFormat: string):
     }
 }
 
-export class AlfrescoApiClient implements ee.Emitter, HttpClient {
+export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     on: ee.EmitterMethod;
     off: ee.EmitterMethod;
     once: ee.EmitterMethod;
@@ -85,22 +85,22 @@ export class AlfrescoApiClient implements ee.Emitter, HttpClient {
     /**
      * The authentication methods to be included for all API calls.
      */
-     authentications: Authentication = {
+    authentications: Authentication = {
         basicAuth: {
-            ticket: ''
+            ticket: '',
         },
-        type: 'basic'
+        type: 'basic',
     };
     /**
      * The default HTTP headers to be included for all API calls.
      */
     defaultHeaders = {};
 
-    httpClient: HttpClient;
+    httpClient: LegacyHttpClient;
 
-    constructor(host?: string, httpClient?: HttpClient) {
+    constructor(host?: string, httpClient?: LegacyHttpClient) {
         this.host = host;
-        
+
         // fallback for backward compatibility
         this.httpClient = httpClient || new SuperagentHttpClient(host);
 

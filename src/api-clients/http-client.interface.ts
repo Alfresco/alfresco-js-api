@@ -36,7 +36,7 @@ export interface HttpClientConfig {
     host?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
     servicePath?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
 }
-export interface HttpClient {
+export interface LegacyHttpClient {
     basePath: string;
     config: HttpClientConfig;
 
@@ -77,3 +77,45 @@ export interface HttpClient {
         responseType?: string
     ): Promise<any>;
 }
+
+// export interface HttpClient {
+//     basePath: string;
+//     config: HttpClientConfig;
+
+//     request<T = any>(options: RequestOptions): Promise<T>;
+//     post<T = any>(options: RequestOptions): Promise<T>;
+//     put<T = any>(options: RequestOptions): Promise<T>;
+//     get<T = any>(options: RequestOptions): Promise<T>;
+//     delete<T = void>(options: RequestOptions): Promise<T>;
+//     /** @deprecated */
+//     callApi(
+//         path: string,
+//         httpMethod: string,
+//         pathParams?: any,
+//         queryParams?: any,
+//         headerParams?: any,
+//         formParams?: any,
+//         bodyParam?: any,
+//         contentTypes?: string[],
+//         accepts?: string[],
+//         returnType?: any,
+//         contextRoot?: string,
+//         responseType?: string,
+//         url?: string
+//     ): Promise<any>;
+//     /** @deprecated */
+//     callCustomApi(
+//         path: string,
+//         httpMethod: string,
+//         pathParams?: any,
+//         queryParams?: any,
+//         headerParams?: any,
+//         formParams?: any,
+//         bodyParam?: any,
+//         contentTypes?: string[],
+//         accepts?: string[],
+//         returnType?: any,
+//         contextRoot?: string,
+//         responseType?: string
+//     ): Promise<any>;
+// }

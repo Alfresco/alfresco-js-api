@@ -1,41 +1,41 @@
 /*!
-* @license
-* Copyright 2018 Alfresco Software, Ltd.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * @license
+ * Copyright 2018 Alfresco Software, Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import { AlfrescoApiConfig } from "../alfrescoApiConfig";
-import { HttpClient } from "../api-clients/http-client.interface";
+import { AlfrescoApiConfig } from '../alfrescoApiConfig';
+import { LegacyHttpClient } from '../api-clients/http-client.interface';
 
 export interface LegacyTicketApi {
-    getAlfTicket(ticket: string): string
+    getAlfTicket(ticket: string): string;
 }
 
 // Extracted from existing AlfrescoApi:
 export interface AlfrescoApiType {
     config: AlfrescoApiConfig;
-    contentClient: HttpClient & LegacyTicketApi;
-    contentPrivateClient: HttpClient & LegacyTicketApi;
-    processClient: HttpClient;
-    searchClient: HttpClient;
-    discoveryClient: HttpClient;
-    gsClient: HttpClient;
-    authClient: HttpClient;
-    processAuth: HttpClient;
+    contentClient: LegacyHttpClient & LegacyTicketApi;
+    contentPrivateClient: LegacyHttpClient & LegacyTicketApi;
+    processClient: LegacyHttpClient;
+    searchClient: LegacyHttpClient;
+    discoveryClient: LegacyHttpClient;
+    gsClient: LegacyHttpClient;
+    authClient: LegacyHttpClient;
+    processAuth: LegacyHttpClient;
 
     setConfig(config: AlfrescoApiConfig): void;
-    changeWithCredentialsConfig(withCredentials: boolean) : void;
+    changeWithCredentialsConfig(withCredentials: boolean): void;
     changeCsrfConfig(disableCsrf: boolean): void;
     changeEcmHost(hostEcm: string): void;
     changeBpmHost(hostBpm: string): void;
@@ -61,5 +61,5 @@ export interface AlfrescoApiType {
     isOauthConfiguration(): boolean;
     isPublicUrl(): boolean;
     isEcmBpmConfiguration(): boolean;
-    reply(event: string, callback ?: any): void;
+    reply(event: string, callback?: any): void;
 }

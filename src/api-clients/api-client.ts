@@ -1,41 +1,40 @@
 /*!
-* @license
-* Copyright 2018 Alfresco Software, Ltd.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * @license
+ * Copyright 2018 Alfresco Software, Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import { AlfrescoApiType } from "../to-deprecate/alfresco-api-type";
-import { LegacyAlfrescoApi } from "../api-legacy/legacy-alfresco-api";
-import { HttpClient, RequestOptions } from "./http-client.interface";
+import { AlfrescoApiType } from '../to-deprecate/alfresco-api-type';
+import { LegacyAlfrescoApi } from '../api-legacy/legacy-alfresco-api';
+import { LegacyHttpClient, RequestOptions } from './http-client.interface';
 
 export abstract class ApiClient {
-
     protected alfrescoApi: AlfrescoApiType;
-    protected httpClient: HttpClient;
+    protected httpClient: LegacyHttpClient;
 
-    get apiClient(): HttpClient {
+    get apiClient(): LegacyHttpClient {
         return this.httpClient;
     }
 
     constructor(legacyApi?: AlfrescoApiType);
-    constructor(httpClient: HttpClient);
-    constructor(httpClient?: AlfrescoApiType | HttpClient) {
+    constructor(httpClient: LegacyHttpClient);
+    constructor(httpClient?: AlfrescoApiType | LegacyHttpClient) {
         // TODO: remove legacyApi?: AlfrescoApi option and clean up this code. BREAKING CHANGE!
         if (httpClient instanceof LegacyAlfrescoApi) {
             this.alfrescoApi = httpClient as AlfrescoApiType;
         } else {
-            this.httpClient = httpClient as HttpClient;
+            this.httpClient = httpClient as LegacyHttpClient;
         }
     }
 

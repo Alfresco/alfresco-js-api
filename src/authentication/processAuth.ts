@@ -1,19 +1,19 @@
 /*!
-* @license
-* Copyright 2018 Alfresco Software, Ltd.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * @license
+ * Copyright 2018 Alfresco Software, Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import ee from 'event-emitter';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
@@ -21,18 +21,18 @@ import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import { Storage } from '../storage';
 import { isBrowser } from '../utils/helpers';
-import { HttpClient } from '../api-clients/http-client.interface';
+import { LegacyHttpClient } from '../api-clients/http-client.interface';
 
 export class ProcessAuth extends AlfrescoApiClient {
-
     ticket: string;
     storage: Storage;
 
     authentications: Authentication = {
-        'basicAuth': { ticket: '' }, type: 'activiti'
+        basicAuth: { ticket: '' },
+        type: 'activiti',
     };
-    
-    constructor(config: AlfrescoApiConfig, httpClient?: HttpClient) {
+
+    constructor(config: AlfrescoApiConfig, httpClient?: LegacyHttpClient) {
         super(undefined, httpClient);
         this.storage = new Storage();
         this.storage.setDomainPrefix(config.domainPrefix);
@@ -41,7 +41,7 @@ export class ProcessAuth extends AlfrescoApiClient {
 
         if (!isBrowser()) {
             this.defaultHeaders = {
-                'user-agent': 'alfresco-js-api'
+                'user-agent': 'alfresco-js-api',
             };
         }
 
@@ -52,18 +52,17 @@ export class ProcessAuth extends AlfrescoApiClient {
         this.config = config;
         this.ticket = undefined;
 
-        this.basePath = config.hostBpm + '/' + this.config.contextRootBpm;   //Activiti Call
+        this.basePath = config.hostBpm + '/' + this.config.contextRootBpm; //Activiti Call
 
         if (this.config.ticketBpm) {
             this.setTicket(config.ticketBpm);
         } else if (this.storage.getItem('ticket-BPM')) {
             this.setTicket(this.storage.getItem('ticket-BPM'));
         }
-
     }
 
     changeHost() {
-        this.basePath = this.config.hostBpm + '/' + this.config.contextRootBpm;    //Activiti Call
+        this.basePath = this.config.hostBpm + '/' + this.config.contextRootBpm; //Activiti Call
         this.ticket = undefined;
     }
 
@@ -88,31 +87,29 @@ export class ProcessAuth extends AlfrescoApiClient {
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
-        let postBody = {}, pathParams = {}, queryParams = {};
+        let postBody = {},
+            pathParams = {},
+            queryParams = {};
 
         let headerParams = {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Cache-Control': 'no-cache'
+            'Cache-Control': 'no-cache',
         };
         let formParams = {
-            j_username:  this.authentications.basicAuth.username,
-            j_password:  this.authentications.basicAuth.password,
+            j_username: this.authentications.basicAuth.username,
+            j_password: this.authentications.basicAuth.password,
             _spring_security_remember_me: true,
-            submit: 'Login'
+            submit: 'Login',
         };
 
         let contentTypes = ['application/x-www-form-urlencoded'];
         let accepts = ['application/json'];
 
         let promise: any = new Promise((resolve, reject) => {
-            this.callApi(
-                '/app/authentication', 'POST',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts
-            ).then(
+            this.callApi('/app/authentication', 'POST', pathParams, queryParams, headerParams, formParams, postBody, contentTypes, accepts).then(
                 () => {
                     this.saveUsername(username);
-                    let ticket = this.basicAuth( this.authentications.basicAuth.username,  this.authentications.basicAuth.password);
+                    let ticket = this.basicAuth(this.authentications.basicAuth.username, this.authentications.basicAuth.password);
                     this.setTicket(ticket);
                     promise.emit('success');
                     this.emit('logged-in');
@@ -128,7 +125,8 @@ export class ProcessAuth extends AlfrescoApiClient {
                         promise.emit('error');
                     }
                     reject(error);
-                });
+                }
+            );
         });
 
         ee(promise); // jshint ignore:line
@@ -143,17 +141,17 @@ export class ProcessAuth extends AlfrescoApiClient {
      * */
     logout(): Promise<any> {
         this.saveUsername('');
-        let postBody = {}, pathParams = {}, queryParams = {}, headerParams = {}, formParams = {};
+        let postBody = {},
+            pathParams = {},
+            queryParams = {},
+            headerParams = {},
+            formParams = {};
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
         let promise: any = new Promise((resolve, reject) => {
-            this.callApi(
-                '/app/logout', 'GET',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts
-            ).then(
+            this.callApi('/app/logout', 'GET', pathParams, queryParams, headerParams, formParams, postBody, contentTypes, accepts).then(
                 () => {
                     this.invalidateSession();
                     promise.emit('logout');
@@ -165,7 +163,8 @@ export class ProcessAuth extends AlfrescoApiClient {
                     }
                     promise.emit('error');
                     reject(error);
-                });
+                }
+            );
         });
 
         ee(promise);
@@ -213,6 +212,6 @@ export class ProcessAuth extends AlfrescoApiClient {
      * return the Authentication
      * */
     getAuthentication(): any {
-        return  this.authentications;
+        return this.authentications;
     }
 }

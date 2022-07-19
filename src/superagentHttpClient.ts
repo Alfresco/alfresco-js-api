@@ -24,7 +24,7 @@
 import ee from 'event-emitter';
 import superagent, { Response, ProgressEvent } from 'superagent';
 import { Authentication } from './authentication/authentication';
-import { HttpClient, RequestOptions } from './api-clients/http-client.interface';
+import { LegacyHttpClient, RequestOptions } from './api-clients/http-client.interface';
 import { Oauth2 } from './authentication/oauth2';
 import { BasicAuth } from './authentication/basicAuth';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
@@ -45,7 +45,7 @@ export function paramToString(param: any): string {
     return param.toString();
 }
 
-export class SuperagentHttpClient implements ee.Emitter, HttpClient {
+export class SuperagentHttpClient implements ee.Emitter, LegacyHttpClient {
     on: ee.EmitterMethod;
     off: ee.EmitterMethod;
     once: ee.EmitterMethod;
