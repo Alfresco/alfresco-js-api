@@ -106,7 +106,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
 
         ee(this);
     }
-    
+
     request<T = any>(options: RequestOptions): Promise<T> {
         const security = this.getSecurityOptions();
         return this.httpClient.request(this.basePath, options, security);
@@ -117,6 +117,8 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
             isBpmRequest: this.isBpmRequest(),
             disableCsrf: this.isCsrfEnabled(),
             withCredentials: this.isWithCredentials(),
+            authentications: this.authentications,
+            defaultHeaders: this.defaultHeaders,
         };
     }
 

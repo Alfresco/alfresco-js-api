@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+import { Authentication } from '../authentication/authentication';
+
 export interface RequestOptions {
     path: string;
     httpMethod?: string;
@@ -82,6 +84,8 @@ export interface SecurityOptions {
     readonly isBpmRequest: boolean;
     readonly disableCsrf?: boolean;
     readonly withCredentials?: boolean;
+    readonly authentications: Authentication;
+    readonly defaultHeaders: Record<string, string>;
 }
 
 export interface HttpClient {

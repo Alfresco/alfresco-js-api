@@ -55,24 +55,11 @@ export class SuperagentHttpClient implements ee.Emitter, HttpClient {
     };
 
     /**
-     * The authentication methods to be included for all API calls.
-     */
-    authentications: Authentication = {
-        basicAuth: {
-            ticket: '',
-        },
-        type: 'basic',
-    };
-
-    /**
-     * The default HTTP headers to be included for all API calls.
-     */
-    defaultHeaders = {};
-
-    /**
      * The default HTTP timeout for all API calls.
      */
     timeout: number | { deadline?: number; response?: number } = undefined;
+
+    authCookie: string;
 
     constructor() {
         ee(this);
@@ -159,9 +146,7 @@ export class SuperagentHttpClient implements ee.Emitter, HttpClient {
             responseType,
             eventEmitter,
             returnType,
-            securityOptions.withCredentials,
-            securityOptions.disableCsrf,
-            securityOptions.isBpmRequest
+            securityOptions
         );
 
         if (returnType === 'Binary') {
@@ -191,7 +176,7 @@ export class SuperagentHttpClient implements ee.Emitter, HttpClient {
                 } else {
                     if (securityOptions.isBpmRequest) {
                         if (response.header && response.header.hasOwnProperty('set-cookie')) {
-                            this.authentications.cookie = response.header['set-cookie'][0];
+                            this.authCookie = response.header['set-cookie'][0];
                         }
                     }
                     let data = {};
@@ -258,31 +243,31 @@ export class SuperagentHttpClient implements ee.Emitter, HttpClient {
      * Applies authentication headers to the request.
      * @param {Object} request The request object created by a <code>superagent()</code> call.
      */
-    applyAuthToRequest(request: any) {
-        if (this.authentications) {
-            switch (this.authentications.type) {
+    applyAuthToRequest(request: any, authentications: Authentication) {
+        if (authentications) {
+            switch (authentications.type) {
                 case 'basic': {
-                    const basicAuth: BasicAuth = this.authentications.basicAuth;
+                    const basicAuth: BasicAuth = authentications.basicAuth;
                     if (basicAuth.username || basicAuth.password) {
                         request.auth(basicAuth.username ? encodeURI(basicAuth.username) : '', basicAuth.password ? encodeURI(basicAuth.password) : '');
                     }
                     break;
                 }
                 case 'activiti': {
-                    if (this.authentications.basicAuth.ticket) {
-                        request.set({ Authorization: this.authentications.basicAuth.ticket });
+                    if (authentications.basicAuth.ticket) {
+                        request.set({ Authorization: authentications.basicAuth.ticket });
                     }
                     break;
                 }
                 case 'oauth2': {
-                    const oauth2: Oauth2 = this.authentications.oauth2;
+                    const oauth2: Oauth2 = authentications.oauth2;
                     if (oauth2.accessToken) {
                         request.set({ Authorization: 'Bearer ' + oauth2.accessToken });
                     }
                     break;
                 }
                 default:
-                    throw new Error('Unknown authentication type: ' + this.authentications.type);
+                    throw new Error('Unknown authentication type: ' + authentications.type);
             }
         }
     }
@@ -300,20 +285,20 @@ export class SuperagentHttpClient implements ee.Emitter, HttpClient {
         responseType: string,
         eventEmitter: ee.Emitter,
         returnType: string,
-        withCredentials = false,
-        disableCsrf = true,
-        isBpmRequest: boolean
+        securityOptions: SecurityOptions
     ) {
         const request: any = superagent(httpMethod, url);
 
+        const { isBpmRequest, authentications, defaultHeaders, disableCsrf = true, withCredentials = false } = securityOptions;
+
         // apply authentications
-        this.applyAuthToRequest(request);
+        this.applyAuthToRequest(request, authentications);
 
         // set query parameters
         request.query(this.normalizeParams(queryParams));
 
         // set header parameters
-        request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
+        request.set(defaultHeaders).set(this.normalizeParams(headerParams));
 
         if (isBpmRequest && !disableCsrf) {
             this.setCsrfToken(request);
@@ -326,9 +311,9 @@ export class SuperagentHttpClient implements ee.Emitter, HttpClient {
         // add cookie for activiti
         if (isBpmRequest) {
             request.withCredentials();
-            if (this.authentications.cookie) {
+            if (this.authCookie) {
                 if (!isBrowser()) {
-                    request.set('Cookie', this.authentications.cookie);
+                    request.set('Cookie', this.authCookie);
                 }
             }
         }
