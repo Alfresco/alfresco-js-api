@@ -1,12 +1,14 @@
 import { expect } from 'chai';
-import { AlfrescoApiCompatibility as AlfrescoApi, TaskFilterRequestRepresentation, TaskRepresentation, TaskQueryRequestRepresentation, AlfrescoApiConfig } from  '../../index';
+import { AlfrescoApiCompatibility as AlfrescoApi, TaskFilterRequestRepresentation, TaskRepresentation, TaskQueryRequestRepresentation, AlfrescoApiConfig } from '../../index';
 import { BpmAuthMock, TasksMock } from '../mockObjects';
 describe('Activiti Task Api', () => {
     let authResponseBpmMock: BpmAuthMock;
     let tasksMock: TasksMock;
     let alfrescoJsApi: AlfrescoApi;
 
-    const NOOP = () => {/* empty */};
+    const NOOP = () => {
+        /* empty */
+    };
 
     beforeEach(async () => {
         const BPM_HOST = 'http://127.0.0.1:9999';
@@ -14,11 +16,12 @@ describe('Activiti Task Api', () => {
         authResponseBpmMock = new BpmAuthMock(BPM_HOST);
         tasksMock = new TasksMock(BPM_HOST);
 
+        debugger;
         authResponseBpmMock.get200Response();
 
         alfrescoJsApi = new AlfrescoApi({
             hostBpm: BPM_HOST,
-            provider: 'BPM'
+            provider: 'BPM',
         } as AlfrescoApiConfig);
 
         await alfrescoJsApi.login('admin', 'admin');
@@ -28,7 +31,7 @@ describe('Activiti Task Api', () => {
         tasksMock.get200Response();
 
         const requestNode = new TaskQueryRequestRepresentation();
-        const data = await alfrescoJsApi.activiti.taskApi.listTasks(requestNode)
+        const data = await alfrescoJsApi.activiti.taskApi.listTasks(requestNode);
 
         expect(data.data[0].processDefinitionName).equal('Process Test Api');
         expect(data.data[1].processDefinitionName).equal('Process Test Api');
@@ -58,7 +61,7 @@ describe('Activiti Task Api', () => {
         const requestNode = new TaskFilterRequestRepresentation();
         requestNode.appDefinitionId = 1;
 
-        const data = await alfrescoJsApi.activiti.taskApi.filterTasks(requestNode)
+        const data = await alfrescoJsApi.activiti.taskApi.filterTasks(requestNode);
         expect(data.size).equal(2);
         expect(data.data[0].id).equal('7506');
     });
@@ -70,7 +73,6 @@ describe('Activiti Task Api', () => {
         alfrescoJsApi.activiti.taskApi.completeTask(taskId).then(NOOP, () => {
             done();
         });
-
     });
 
     it('complete Task ', async () => {

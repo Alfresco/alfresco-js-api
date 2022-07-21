@@ -16,10 +16,10 @@
 */
 
 import { ApiClient } from '../../../api-clients/api-client';
-import { HttpClient } from '../../../api-clients/http-client.interface';
+import { LegacyHttpClient } from '../../../api-clients/http-client.interface';
 
 export abstract class BaseApi extends ApiClient {
-    override get apiClient(): HttpClient {
+    override get apiClient(): LegacyHttpClient {
         return this.httpClient ?? this.alfrescoApi.authClient;
     }
 }

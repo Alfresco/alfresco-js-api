@@ -1,5 +1,5 @@
-import { AlfrescoApiClient, AlfrescoApiCompatibility as AlfrescoApi, AlfrescoApiConfig, FormValueRepresentation } from '../index';
-import { DateAlfresco } from  '../index';
+import { AlfrescoApiCompatibility as AlfrescoApi, AlfrescoApiConfig } from '../index';
+import { DateAlfresco } from '../index';
 import { EcmAuthMock } from '../test/mockObjects';
 
 const chai = require('chai');
@@ -7,38 +7,14 @@ const expect = require('chai').expect;
 chai.use(require('chai-datetime'));
 
 describe('Alfresco Core API Client', () => {
-
     describe('type conversion', () => {
-
-        const client = new AlfrescoApiClient();
-
-        it('should create a request with response type blob', () => {
-            const queryParams = {};
-            const headerParams = {};
-            const formParams = {};
-
-            const contentTypes = ['application/json'];
-            const accepts = ['application/json'];
-            const responseType = 'blob';
-            const url = '/fake-api/enterprise/process-instances/';
-            const httpMethod = 'GET';
-
-            const response = client.buildRequest(httpMethod, url, queryParams, headerParams, formParams, null,
-                                               contentTypes, accepts, responseType, null, null);
-
-            expect(response.url).equal('/fake-api/enterprise/process-instances/');
-            expect(response.header.Accept).equal('application/json');
-            expect(response.header['Content-Type']).equal('application/json');
-            expect(response._responseType).equal('blob');
-        });
-
         it('should return the username after login', (done) => {
             const authResponseEcmMock = new EcmAuthMock('http://127.0.0.1:8080');
 
             authResponseEcmMock.get201Response();
 
             const alfrescoJsApi = new AlfrescoApi({
-                hostEcm: 'http://127.0.0.1:8080'
+                hostEcm: 'http://127.0.0.1:8080',
             } as AlfrescoApiConfig);
 
             alfrescoJsApi.login('admin', 'admin').then(() => {
@@ -49,7 +25,6 @@ describe('Alfresco Core API Client', () => {
     });
 
     describe('date parsing', () => {
-
         it('should convert dates falling in GMT without a timezone', () => {
             expect(DateAlfresco.parseDate('2015-11-17T03:33:17')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 3, 33, 17)));
         });
@@ -85,31 +60,5 @@ describe('Alfresco Core API Client', () => {
         it('should convert dates with a timezone with hours only', () => {
             expect(DateAlfresco.parseDate('2015-11-17T03:33:17+02')).to.equalTime(new Date(Date.UTC(2015, 10, 17, 1, 33, 17)));
         });
-
     });
-
-    describe('Deserializes', () => {
-
-        it('should the deserializer return an array of object when the response is an array', () => {
-            const client = new AlfrescoApiClient();
-            const data = {
-                body: [
-                    {
-                        id: '1',
-                        name: 'test1'
-                    },
-                    {
-                        id: '2',
-                        name: 'test2'
-                    }
-                ]
-            };
-            const result = client.deserialize(data, FormValueRepresentation);
-            const isArray = Array.isArray(result);
-            const isObject = (result[0] instanceof (FormValueRepresentation));
-            expect(isArray).to.equal(true);
-            expect(isObject).to.equal(true);
-        });
-    });
-
 });

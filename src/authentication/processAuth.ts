@@ -1,25 +1,27 @@
 /*!
-* @license
-* Copyright 2018 Alfresco Software, Ltd.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * @license
+ * Copyright 2018 Alfresco Software, Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import ee from 'event-emitter';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import { Storage } from '../storage';
+import { isBrowser } from '../utils/helpers';
+import { HttpClient } from '../api-clients/http-client.interface';
 
 export class ProcessAuth extends AlfrescoApiClient {
 
@@ -30,14 +32,14 @@ export class ProcessAuth extends AlfrescoApiClient {
         'basicAuth': { ticket: '' }, type: 'activiti'
     };
 
-    constructor(config: AlfrescoApiConfig) {
-        super();
+    constructor(config: AlfrescoApiConfig, httpClient?: HttpClient) {
+        super(undefined, httpClient);
         this.storage = new Storage();
         this.storage.setDomainPrefix(config.domainPrefix);
 
         this.className = 'ProcessAuth';
 
-        if (!this.isBrowser()) {
+        if (!isBrowser()) {
             this.defaultHeaders = {
                 'user-agent': 'alfresco-js-api'
             };

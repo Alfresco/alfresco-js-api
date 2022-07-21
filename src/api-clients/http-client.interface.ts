@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+import { Authentication } from '../authentication/authentication';
+
 export interface RequestOptions {
     path: string;
     httpMethod?: string;
@@ -36,7 +38,7 @@ export interface HttpClientConfig {
     host?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
     servicePath?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
 }
-export interface HttpClient {
+export interface LegacyHttpClient {
     basePath: string;
     config: HttpClientConfig;
 
@@ -76,4 +78,24 @@ export interface HttpClient {
         contextRoot?: string,
         responseType?: string
     ): Promise<any>;
+}
+
+export interface SecurityOptions {
+    readonly isBpmRequest: boolean;
+    readonly disableCsrf?: boolean;
+    readonly withCredentials?: boolean;
+    readonly authentications: Authentication;
+    readonly defaultHeaders: Record<string, string>;
+}
+
+export interface HttpClient {
+    request<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
+    post<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
+    put<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
+    get<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
+    delete<T = void>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
+    /** @deprecated */
+    callApi(url: string, options: RequestOptions, security: SecurityOptions): Promise<any>;
+    /** @deprecated */
+    callCustomApi(url: string, options: RequestOptions, security: SecurityOptions): Promise<any>;
 }

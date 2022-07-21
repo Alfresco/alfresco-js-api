@@ -15,27 +15,27 @@
 * limitations under the License.
 */
 
-import { AlfrescoApiConfig } from "../alfrescoApiConfig";
-import { HttpClient } from "../api-clients/http-client.interface";
+import { AlfrescoApiConfig } from '../alfrescoApiConfig';
+import { LegacyHttpClient } from '../api-clients/http-client.interface';
 
 export interface LegacyTicketApi {
-    getAlfTicket(ticket: string): string
+    getAlfTicket(ticket: string): string;
 }
 
 // Extracted from existing AlfrescoApi:
 export interface AlfrescoApiType {
     config: AlfrescoApiConfig;
-    contentClient: HttpClient & LegacyTicketApi;
-    contentPrivateClient: HttpClient & LegacyTicketApi;
-    processClient: HttpClient;
-    searchClient: HttpClient;
-    discoveryClient: HttpClient;
-    gsClient: HttpClient;
-    authClient: HttpClient;
-    processAuth: HttpClient;
+    contentClient: LegacyHttpClient & LegacyTicketApi;
+    contentPrivateClient: LegacyHttpClient & LegacyTicketApi;
+    processClient: LegacyHttpClient;
+    searchClient: LegacyHttpClient;
+    discoveryClient: LegacyHttpClient;
+    gsClient: LegacyHttpClient;
+    authClient: LegacyHttpClient;
+    processAuth: LegacyHttpClient;
 
     setConfig(config: AlfrescoApiConfig): void;
-    changeWithCredentialsConfig(withCredentials: boolean) : void;
+    changeWithCredentialsConfig(withCredentials: boolean): void;
     changeCsrfConfig(disableCsrf: boolean): void;
     changeEcmHost(hostEcm: string): void;
     changeBpmHost(hostBpm: string): void;
@@ -61,5 +61,5 @@ export interface AlfrescoApiType {
     isOauthConfiguration(): boolean;
     isPublicUrl(): boolean;
     isEcmBpmConfiguration(): boolean;
-    reply(event: string, callback ?: any): void;
+    reply(event: string, callback?: any): void;
 }
