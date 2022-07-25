@@ -25,6 +25,7 @@ import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
 import { AlfrescoApiType } from './to-deprecate/alfresco-api-type';
+import { HttpClient } from './api-clients/http-client.interface';
 
 export class AlfrescoApi implements Emitter, AlfrescoApiType {
     __type = 'legacy-client';
@@ -51,7 +52,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
     username: string;
 
-    constructor(config?: AlfrescoApiConfig) {
+    constructor(config?: AlfrescoApiConfig, public httpClient?: HttpClient) {
         ee(this);
 
         if (config) {
@@ -71,7 +72,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
         this.clientsFactory();
 
-        this.processClient = new ProcessClient(this.config);
+        this.processClient = new ProcessClient(this.config, this.httpClient);
 
         this.errorListeners();
         this.initAuth(config);
@@ -87,7 +88,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         if (this.isOauthConfiguration()) {
 
             if (!this.oauth2Auth) {
-                this.oauth2Auth = new Oauth2Auth(this.config, this);
+                this.oauth2Auth = new Oauth2Auth(this.config, this, this.httpClient);
             } else {
                 this.oauth2Auth.setConfig(this.config, this);
             }
@@ -100,7 +101,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         } else {
 
             if (!this.processAuth) {
-                this.processAuth = new ProcessAuth(this.config);
+                this.processAuth = new ProcessAuth(this.config, this.httpClient);
             } else {
                 this.processAuth.setConfig(this.config);
             }
@@ -110,7 +111,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
             });
 
             if (!this.contentAuth) {
-                this.contentAuth = new ContentAuth(this.config, this);
+                this.contentAuth = new ContentAuth(this.config, this, this.httpClient);
             } else {
                 this.contentAuth.setConfig(config);
             }
@@ -126,43 +127,43 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
     private clientsFactory() {
         if (!this.contentPrivateClient) {
-            this.contentPrivateClient = new ContentClient(this.config, `/api/${this.config.tenant}/private/alfresco/versions/1`);
+            this.contentPrivateClient = new ContentClient(this.config, `/api/${this.config.tenant}/private/alfresco/versions/1`, this.httpClient);
         } else {
             this.contentPrivateClient.setConfig(this.config, `/api/${this.config.tenant}/private/alfresco/versions/1`);
         }
 
         if (!this.contentClient) {
-            this.contentClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/alfresco/versions/1`);
+            this.contentClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/alfresco/versions/1`, this.httpClient);
         } else {
             this.contentClient.setConfig(this.config, `/api/${this.config.tenant}/public/alfresco/versions/1`);
         }
 
         if (!this.authClient) {
-            this.authClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/authentication/versions/1`);
+            this.authClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/authentication/versions/1`, this.httpClient);
         } else {
             this.authClient.setConfig(this.config, `/api/${this.config.tenant}/public/authentication/versions/1`);
         }
 
         if (!this.searchClient) {
-            this.searchClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/search/versions/1`);
+            this.searchClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/search/versions/1`, this.httpClient);
         } else {
             this.searchClient.setConfig(this.config, `/api/${this.config.tenant}/public/search/versions/1`);
         }
 
         if (!this.discoveryClient) {
-            this.discoveryClient = new ContentClient(this.config, `/api`);
+            this.discoveryClient = new ContentClient(this.config, `/api`, this.httpClient);
         } else {
             this.discoveryClient.setConfig(this.config, `/api`);
         }
 
         if (!this.gsClient) {
-            this.gsClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/gs/versions/1`);
+            this.gsClient = new ContentClient(this.config, `/api/${this.config.tenant}/public/gs/versions/1`, this.httpClient);
         } else {
             this.gsClient.setConfig(this.config, `/api/${this.config.tenant}/public/gs/versions/1`);
         }
 
         if (!this.processClient) {
-            this.processClient = new ProcessClient(this.config);
+            this.processClient = new ProcessClient(this.config, this.httpClient);
         } else {
             this.processClient.setConfig(this.config);
         }

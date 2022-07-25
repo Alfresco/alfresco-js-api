@@ -20,6 +20,8 @@ import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import { Storage } from '../storage';
+import { isBrowser } from '../utils/helpers';
+import { HttpClient } from '../api-clients/http-client.interface';
 
 export class ProcessAuth extends AlfrescoApiClient {
 
@@ -30,14 +32,14 @@ export class ProcessAuth extends AlfrescoApiClient {
         'basicAuth': { ticket: '' }, type: 'activiti'
     };
 
-    constructor(config: AlfrescoApiConfig) {
-        super();
+    constructor(config: AlfrescoApiConfig, httpClient?: HttpClient) {
+        super(undefined, httpClient);
         this.storage = new Storage();
         this.storage.setDomainPrefix(config.domainPrefix);
 
         this.className = 'ProcessAuth';
 
-        if (!this.isBrowser()) {
+        if (!isBrowser()) {
             this.defaultHeaders = {
                 'user-agent': 'alfresco-js-api'
             };
