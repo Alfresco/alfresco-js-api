@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { ProcessAuth } from '../src/authentication/processAuth';
+import { SuperagentHttpClient } from '../src/superagentHttpClient';
 import { BpmAuthMock } from './mockObjects';
 
 describe('Bpm Auth test', () => {
@@ -21,40 +22,41 @@ describe('Bpm Auth test', () => {
     it('should forget username on logout', (done) => {
         const processAuth = new ProcessAuth({
             hostBpm,
-            contextRootBpm: 'activiti-app'
+            contextRootBpm: 'activiti-app',
         } as AlfrescoApiConfig);
 
         authBpmMock.get200Response();
 
-        processAuth.login('admin', 'admin').then(() => {
-            expect(processAuth.authentications.basicAuth.username).to.be.equal('admin');
+        processAuth.login('admin', 'admin').then(
+            () => {
+                expect(processAuth.authentications.basicAuth.username).to.be.equal('admin');
 
-            authBpmMock.get200ResponseLogout();
+                authBpmMock.get200ResponseLogout();
 
-            processAuth.logout().then(() => {
-                expect(processAuth.authentications.basicAuth.username).to.be.equal(null);
-                done();
-            });
-        }, (error: any) => {
-            console.log('error' + JSON.stringify(error));
-        });
+                processAuth.logout().then(() => {
+                    expect(processAuth.authentications.basicAuth.username).to.be.equal(null);
+                    done();
+                });
+            },
+            (error: any) => {
+                console.log('error' + JSON.stringify(error));
+            }
+        );
     });
 
     describe('With Authentication', () => {
-
         it('login should return the Ticket if all is ok', (done) => {
             authBpmMock.get200Response();
 
             const processAuth = new ProcessAuth({
                 hostBpm,
-                contextRootBpm: 'activiti-app'
+                contextRootBpm: 'activiti-app',
             } as AlfrescoApiConfig);
 
             processAuth.login('admin', 'admin').then((data: any) => {
                 expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                 done();
             });
-
         });
 
         it('login password should be removed after login', (done) => {
@@ -62,7 +64,7 @@ describe('Bpm Auth test', () => {
 
             const processAuth = new ProcessAuth({
                 hostBpm,
-                contextRootBpm: 'activiti-app'
+                contextRootBpm: 'activiti-app',
             } as AlfrescoApiConfig);
 
             processAuth.login('admin', 'admin').then((data: any) => {
@@ -77,7 +79,7 @@ describe('Bpm Auth test', () => {
 
             const processAuth = new ProcessAuth({
                 hostBpm,
-                contextRootBpm: 'activiti-app'
+                contextRootBpm: 'activiti-app',
             } as AlfrescoApiConfig);
 
             processAuth.login('admin', 'admin').then(() => {
@@ -91,7 +93,7 @@ describe('Bpm Auth test', () => {
 
             const processAuth = new ProcessAuth({
                 hostBpm,
-                contextRootBpm: 'activiti-app'
+                contextRootBpm: 'activiti-app',
             } as AlfrescoApiConfig);
             processAuth.login('admin', 'admin');
 
@@ -108,7 +110,7 @@ describe('Bpm Auth test', () => {
 
             const processAuth = new ProcessAuth({
                 hostBpm,
-                contextRootBpm: 'activiti-app'
+                contextRootBpm: 'activiti-app',
             } as AlfrescoApiConfig);
 
             processAuth.login('admin', 'admin').then(() => {
@@ -117,7 +119,6 @@ describe('Bpm Auth test', () => {
                 expect(processAuth.isLoggedIn()).to.be.equal(false);
                 done();
             });
-
         });
 
         it('login should return an error if wrong credential are used 401 the login fails', (done) => {
@@ -125,7 +126,7 @@ describe('Bpm Auth test', () => {
 
             const processAuth = new ProcessAuth({
                 hostBpm,
-                contextRootBpm: 'activiti-app'
+                contextRootBpm: 'activiti-app',
             } as AlfrescoApiConfig);
 
             processAuth.login('wrong', 'name').then(
@@ -143,7 +144,7 @@ describe('Bpm Auth test', () => {
 
                 const processAuth = new ProcessAuth({
                     hostBpm,
-                    contextRootBpm: 'activiti-app'
+                    contextRootBpm: 'activiti-app',
                 } as AlfrescoApiConfig);
 
                 const loginPromise: any = processAuth.login('wrong', 'name');
@@ -159,7 +160,7 @@ describe('Bpm Auth test', () => {
 
                 const processAuth = new ProcessAuth({
                     hostBpm,
-                    contextRootBpm: 'activiti-app'
+                    contextRootBpm: 'activiti-app',
                 } as AlfrescoApiConfig);
 
                 const loginPromise: any = processAuth.login('wrong', 'name');
@@ -174,7 +175,7 @@ describe('Bpm Auth test', () => {
 
                 const processAuth = new ProcessAuth({
                     hostBpm,
-                    contextRootBpm: 'activiti-app'
+                    contextRootBpm: 'activiti-app',
                 } as AlfrescoApiConfig);
 
                 const loginPromise: any = processAuth.login('admin', 'admin');
@@ -190,7 +191,7 @@ describe('Bpm Auth test', () => {
 
                 const processAuth = new ProcessAuth({
                     hostBpm,
-                    contextRootBpm: 'activiti-app'
+                    contextRootBpm: 'activiti-app',
                 } as AlfrescoApiConfig);
 
                 processAuth.login('admin', 'admin');
@@ -205,12 +206,11 @@ describe('Bpm Auth test', () => {
         });
 
         describe('With Ticket Authentication', () => {
-
             it('Ticket should be present in the client', () => {
                 const processAuth = new ProcessAuth({
                     ticketBpm: 'Basic YWRtaW46YWRtaW4=',
                     hostBpm,
-                    contextRootBpm: 'activiti-app'
+                    contextRootBpm: 'activiti-app',
                 } as AlfrescoApiConfig);
 
                 expect('Basic YWRtaW46YWRtaW4=').to.be.equal(processAuth.authentications.basicAuth.ticket);
@@ -225,7 +225,7 @@ describe('Bpm Auth test', () => {
 
                 processAuth = new ProcessAuth({
                     hostBpm,
-                    contextRootBpm: 'activiti-app'
+                    contextRootBpm: 'activiti-app',
                 } as AlfrescoApiConfig);
 
                 processAuth.login('admin', 'admin').then(() => {
@@ -242,14 +242,13 @@ describe('Bpm Auth test', () => {
                     done();
                 });
             });
-
         });
 
         describe('CSRF Token', () => {
             let setCsrfTokenStub: any;
 
             beforeEach(() => {
-                setCsrfTokenStub = sinon.stub(ProcessAuth.prototype, 'setCsrfToken');
+                setCsrfTokenStub = sinon.stub(SuperagentHttpClient.prototype, 'setCsrfToken');
             });
 
             afterEach(() => {
@@ -261,8 +260,10 @@ describe('Bpm Auth test', () => {
 
                 const processAuth = new ProcessAuth({
                     hostBpm,
-                    contextRootBpm: 'activiti-app'
+                    contextRootBpm: 'activiti-app',
                 } as AlfrescoApiConfig);
+
+                debugger;
 
                 processAuth.login('admin', 'admin').then(() => {
                     expect(setCsrfTokenStub.called).to.be.equal(true);
@@ -276,7 +277,7 @@ describe('Bpm Auth test', () => {
                 const processAuth = new ProcessAuth({
                     hostBpm,
                     contextRootBpm: 'activiti-app',
-                    disableCsrf: true
+                    disableCsrf: true,
                 } as AlfrescoApiConfig);
 
                 processAuth.login('admin', 'admin').then(() => {

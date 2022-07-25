@@ -1,5 +1,6 @@
-import { AlfrescoApiClient, AlfrescoApiCompatibility as AlfrescoApi, AlfrescoApiConfig, FormValueRepresentation } from '../index';
+import { AlfrescoApiCompatibility as AlfrescoApi, AlfrescoApiConfig, FormValueRepresentation } from '../index';
 import { DateAlfresco } from  '../index';
+import { SuperagentHttpClient } from '../src/superagentHttpClient';
 import { EcmAuthMock } from '../test/mockObjects';
 
 const chai = require('chai');
@@ -10,7 +11,7 @@ describe('Alfresco Core API Client', () => {
 
     describe('type conversion', () => {
 
-        const client = new AlfrescoApiClient();
+        const client = new SuperagentHttpClient();
 
         it('should create a request with response type blob', () => {
             const queryParams = {};
@@ -23,8 +24,8 @@ describe('Alfresco Core API Client', () => {
             const url = '/fake-api/enterprise/process-instances/';
             const httpMethod = 'GET';
 
-            const response = client.buildRequest(httpMethod, url, queryParams, headerParams, formParams, null,
-                                               contentTypes, accepts, responseType, null, null);
+            const response: any = client['buildRequest'](httpMethod, url, queryParams, headerParams, formParams, null,
+                                               contentTypes, accepts, responseType, null, null, {} as any);
 
             expect(response.url).equal('/fake-api/enterprise/process-instances/');
             expect(response.header.Accept).equal('application/json');
@@ -91,7 +92,6 @@ describe('Alfresco Core API Client', () => {
     describe('Deserializes', () => {
 
         it('should the deserializer return an array of object when the response is an array', () => {
-            const client = new AlfrescoApiClient();
             const data = {
                 body: [
                     {
@@ -104,7 +104,7 @@ describe('Alfresco Core API Client', () => {
                     }
                 ]
             };
-            const result = client.deserialize(data, FormValueRepresentation);
+            const result = SuperagentHttpClient['deserialize'](data, FormValueRepresentation);
             const isArray = Array.isArray(result);
             const isObject = (result[0] instanceof (FormValueRepresentation));
             expect(isArray).to.equal(true);

@@ -18,7 +18,7 @@ describe('Activiti Task Api', () => {
 
         alfrescoJsApi = new AlfrescoApi({
             hostBpm: BPM_HOST,
-            provider: 'BPM'
+            provider: 'BPM',
         } as AlfrescoApiConfig);
 
         await alfrescoJsApi.login('admin', 'admin');
@@ -38,7 +38,9 @@ describe('Activiti Task Api', () => {
 
         const taskId = '5028';
         await alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId);
-        expect((alfrescoJsApi.activiti.taskFormsApi.apiClient as any).authentications.cookie).equal('ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ');
-    });
 
+        expect((alfrescoJsApi.activiti.taskFormsApi.apiClient as any).httpClient.authCookie).equal(
+            'ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ'
+        );
+    });
 });
