@@ -102,7 +102,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
 
     request<T = any>(options: RequestOptions): Promise<T> {
         const security = this.getSecurityOptions();
-        return this.httpClient.request(this.basePath, options, security);
+        return this.httpClient.request(this.basePath, options, security, ee({}));
     }
 
     getSecurityOptions(): SecurityOptions {
@@ -169,7 +169,8 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
                 responseType,
                 url,
             },
-            security
+            security,
+            ee({})
         );
     }
 
@@ -207,31 +208,32 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
                 contextRoot,
                 responseType,
             },
-            security
+            security,
+            ee({})
         );
     }
 
     post<T = any>(options: RequestOptions): Promise<T> {
         const security = this.getSecurityOptions();
         const url = this.getCallApiUrl(options);
-        return this.httpClient.post<T>(url, options, security);
+        return this.httpClient.post<T>(url, options, security, ee({}));
     }
 
     put<T = any>(options: RequestOptions): Promise<T> {
         const security = this.getSecurityOptions();
         const url = this.getCallApiUrl(options);
-        return this.httpClient.put<T>(url, options, security);
+        return this.httpClient.put<T>(url, options, security, ee({}));
     }
 
     get<T = any>(options: RequestOptions): Promise<T> {
         const security = this.getSecurityOptions();
         const url = this.getCallApiUrl(options);
-        return this.httpClient.get<T>(url, options, security);
+        return this.httpClient.get<T>(url, options, security, ee({}));
     }
 
     delete<T = void>(options: RequestOptions): Promise<T> {
         const security = this.getSecurityOptions();
-        return this.httpClient.delete(this.basePath, options, security);
+        return this.httpClient.delete(this.basePath, options, security, ee({}));
     }
 
     basicAuth(username: string, password: string): string {

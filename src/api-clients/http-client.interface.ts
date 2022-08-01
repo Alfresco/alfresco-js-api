@@ -15,7 +15,10 @@
  * limitations under the License.
  */
 
+import type { Emitter } from 'event-emitter';
 import { Authentication } from '../authentication/authentication';
+
+export type { Emitter } from 'event-emitter';
 
 export interface RequestOptions {
     path: string;
@@ -89,9 +92,9 @@ export interface SecurityOptions {
 }
 
 export interface HttpClient {
-    request<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
-    post<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
-    put<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
-    get<T = any>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
-    delete<T = void>(url: string, options: RequestOptions, security: SecurityOptions): Promise<T>;
+    request<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter): Promise<T>;
+    post<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter): Promise<T>;
+    put<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter): Promise<T>;
+    get<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter): Promise<T>;
+    delete<T = void>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter): Promise<T>;
 }
