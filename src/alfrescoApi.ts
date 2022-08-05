@@ -24,10 +24,10 @@ import { ProcessClient } from './processClient';
 import { Storage } from './storage';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
-import { LegacyAlfrescoApi } from './api-legacy/legacy-alfresco-api';
 import { AlfrescoApiType } from './to-deprecate/alfresco-api-type';
 
-export class AlfrescoApi extends LegacyAlfrescoApi implements Emitter, AlfrescoApiType {
+export class AlfrescoApi implements Emitter, AlfrescoApiType {
+    __type = 'legacy-client';
     storage: Storage;
     config: AlfrescoApiConfig;
     contentClient: ContentClient;
@@ -52,7 +52,6 @@ export class AlfrescoApi extends LegacyAlfrescoApi implements Emitter, AlfrescoA
     username: string;
 
     constructor(config?: AlfrescoApiConfig) {
-        super();
         ee(this);
 
         if (config) {

@@ -24,6 +24,7 @@ export interface LegacyTicketApi {
 
 // Extracted from existing AlfrescoApi:
 export interface AlfrescoApiType {
+    __type: string;
     config: AlfrescoApiConfig;
     contentClient: HttpClient & LegacyTicketApi;
     contentPrivateClient: HttpClient & LegacyTicketApi;
