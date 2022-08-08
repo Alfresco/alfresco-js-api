@@ -16,7 +16,7 @@
  */
 
 import ee, { Emitter } from 'event-emitter';
-import superagent, { Response, ProgressEvent } from 'superagent';
+import superagent, { Response } from 'superagent';
 import { Authentication } from './authentication/authentication';
 import { RequestOptions, HttpClient, SecurityOptions } from './api-clients/http-client.interface';
 import { Oauth2 } from './authentication/oauth2';
@@ -25,6 +25,8 @@ import { isBrowser, paramToString } from './utils/helpers';
 
 declare const Blob: any;
 declare const Buffer: any;
+
+const isProgressEvent = (event: ProgressEvent | unknown): event is ProgressEvent => Object.prototype.hasOwnProperty.call(event, 'lengthComputable');
 
 export class SuperagentHttpClient implements HttpClient {
     contentTypes = {
@@ -38,7 +40,7 @@ export class SuperagentHttpClient implements HttpClient {
 
     authCookie: string;
 
-    post<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter): Promise<T> {
+    post<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter, globalEmitter: Emitter): Promise<T> {
         return this.request<T>(
             url,
             {
@@ -48,11 +50,12 @@ export class SuperagentHttpClient implements HttpClient {
                 accepts: options.accepts || this.contentTypes.JSON,
             },
             securityOptions,
-            emitter
+            emitter,
+            globalEmitter
         );
     }
 
-    put<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter): Promise<T> {
+    put<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter, globalEmitter: Emitter): Promise<T> {
         return this.request<T>(
             url,
             {
@@ -62,11 +65,12 @@ export class SuperagentHttpClient implements HttpClient {
                 accepts: options.accepts || this.contentTypes.JSON,
             },
             securityOptions,
-            emitter
+            emitter,
+            globalEmitter
         );
     }
 
-    get<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter): Promise<T> {
+    get<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter, globalEmitter: Emitter): Promise<T> {
         return this.request<T>(
             url,
             {
@@ -76,11 +80,12 @@ export class SuperagentHttpClient implements HttpClient {
                 accepts: options.accepts || this.contentTypes.JSON,
             },
             securityOptions,
-            emitter
+            emitter,
+            globalEmitter
         );
     }
 
-    delete<T = void>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter): Promise<T> {
+    delete<T = void>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter, globalEmitter: Emitter): Promise<T> {
         return this.request<T>(
             url,
             {
@@ -90,11 +95,13 @@ export class SuperagentHttpClient implements HttpClient {
                 accepts: options.accepts || this.contentTypes.JSON,
             },
             securityOptions,
-            emitter
+            emitter,
+            globalEmitter
         );
     }
 
-    request<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, eventEmitter: Emitter): Promise<T> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    request<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, eventEmitter: Emitter, globalEmitter: Emitter): Promise<T> {
         const { httpMethod, queryParams, headerParams, formParams, bodyParam, contentTypes, accepts, responseType, returnType } = options;
 
         let request = this.buildRequest(
@@ -122,9 +129,11 @@ export class SuperagentHttpClient implements HttpClient {
             });
             request.end((error: any, response: Response) => {
                 if (error) {
+                    globalEmitter.emit('error', error);
                     eventEmitter.emit('error', error);
 
                     if (error.status === 401) {
+                        globalEmitter.emit('unauthorized');
                         eventEmitter.emit('unauthorized');
                     }
 
@@ -152,26 +161,6 @@ export class SuperagentHttpClient implements HttpClient {
                 }
             });
         });
-
-        promise.on = function () {
-            eventEmitter.on.apply(eventEmitter, arguments);
-            return this;
-        };
-
-        promise.once = function () {
-            eventEmitter.once.apply(eventEmitter, arguments);
-            return this;
-        };
-
-        promise.emit = function () {
-            eventEmitter.emit.apply(eventEmitter, arguments);
-            return this;
-        };
-
-        promise.off = function () {
-            eventEmitter.off.apply(eventEmitter, arguments);
-            return this;
-        };
 
         promise.abort = function () {
             request.abort();
@@ -369,15 +358,17 @@ export class SuperagentHttpClient implements HttpClient {
         return data;
     }
 
-    progress(event: any, eventEmitter: Emitter) {
-        if (event.lengthComputable) {
+    progress(event: ProgressEvent | unknown, eventEmitter: Emitter): void {
+        if (isProgressEvent(event)) {
             const percent = Math.round((event.loaded / event.total) * 100);
 
-            eventEmitter.emit('progress', {
+            const progress = {
                 total: event.total,
                 loaded: event.loaded,
                 percent: percent,
-            });
+            };
+
+            eventEmitter.emit('progress', progress);
         }
     }
 

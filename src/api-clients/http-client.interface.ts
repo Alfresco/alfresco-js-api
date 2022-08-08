@@ -92,9 +92,9 @@ export interface SecurityOptions {
 }
 
 export interface HttpClient {
-    request<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter): Promise<T>;
-    post<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter): Promise<T>;
-    put<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter): Promise<T>;
-    get<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter): Promise<T>;
-    delete<T = void>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter): Promise<T>;
+    request<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter, globalEmitter: Emitter): Promise<T>;
+    post<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter, globalEmitter: Emitter): Promise<T>;
+    put<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter, globalEmitter: Emitter): Promise<T>;
+    get<T = any>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter, globalEmitter: Emitter): Promise<T>;
+    delete<T = void>(url: string, options: RequestOptions, security: SecurityOptions, eventEmitter: Emitter, globalEmitter: Emitter): Promise<T>;
 }
