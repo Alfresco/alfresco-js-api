@@ -26,12 +26,7 @@ import { isBrowser, paramToString } from './utils/helpers';
 declare const Blob: any;
 declare const Buffer: any;
 
-export class SuperagentHttpClient implements Emitter, HttpClient {
-    on: ee.EmitterMethod;
-    off: ee.EmitterMethod;
-    once: ee.EmitterMethod;
-    emit: (type: string, ...args: any[]) => void;
-
+export class SuperagentHttpClient implements HttpClient {
     contentTypes = {
         JSON: ['application/json'],
     };
@@ -43,11 +38,7 @@ export class SuperagentHttpClient implements Emitter, HttpClient {
 
     authCookie: string;
 
-    constructor() {
-        ee(this);
-    }
-
-    post<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<T> {
+    post<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter): Promise<T> {
         return this.request<T>(
             url,
             {
@@ -56,11 +47,12 @@ export class SuperagentHttpClient implements Emitter, HttpClient {
                 contentTypes: options.contentTypes || this.contentTypes.JSON,
                 accepts: options.accepts || this.contentTypes.JSON,
             },
-            securityOptions
+            securityOptions,
+            emitter
         );
     }
 
-    put<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<T> {
+    put<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter): Promise<T> {
         return this.request<T>(
             url,
             {
@@ -69,11 +61,12 @@ export class SuperagentHttpClient implements Emitter, HttpClient {
                 contentTypes: options.contentTypes || this.contentTypes.JSON,
                 accepts: options.accepts || this.contentTypes.JSON,
             },
-            securityOptions
+            securityOptions,
+            emitter
         );
     }
 
-    get<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<T> {
+    get<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter): Promise<T> {
         return this.request<T>(
             url,
             {
@@ -82,11 +75,12 @@ export class SuperagentHttpClient implements Emitter, HttpClient {
                 contentTypes: options.contentTypes || this.contentTypes.JSON,
                 accepts: options.accepts || this.contentTypes.JSON,
             },
-            securityOptions
+            securityOptions,
+            emitter
         );
     }
 
-    delete<T = void>(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<T> {
+    delete<T = void>(url: string, options: RequestOptions, securityOptions: SecurityOptions, emitter: Emitter): Promise<T> {
         return this.request<T>(
             url,
             {
@@ -95,16 +89,28 @@ export class SuperagentHttpClient implements Emitter, HttpClient {
                 contentTypes: options.contentTypes || this.contentTypes.JSON,
                 accepts: options.accepts || this.contentTypes.JSON,
             },
-            securityOptions
+            securityOptions,
+            emitter
         );
     }
 
-    request<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions): Promise<T> {
+    request<T = any>(url: string, options: RequestOptions, securityOptions: SecurityOptions, eventEmitter: Emitter): Promise<T> {
         const { httpMethod, queryParams, headerParams, formParams, bodyParam, contentTypes, accepts, responseType, returnType } = options;
 
-        const eventEmitter = ee({});
-
-        let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam, contentTypes, accepts, responseType, returnType, securityOptions);
+        let request = this.buildRequest(
+            httpMethod,
+            url,
+            queryParams,
+            headerParams,
+            formParams,
+            bodyParam,
+            contentTypes,
+            accepts,
+            responseType,
+            eventEmitter,
+            returnType,
+            securityOptions
+        );
 
         if (returnType === 'Binary') {
             request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
@@ -186,6 +192,7 @@ export class SuperagentHttpClient implements Emitter, HttpClient {
         contentTypes: string[],
         accepts: string[],
         responseType: string,
+        eventEmitter: ee.Emitter,
         returnType: string,
         securityOptions: SecurityOptions
     ) {
@@ -233,7 +240,7 @@ export class SuperagentHttpClient implements Emitter, HttpClient {
 
         if (contentType === 'application/x-www-form-urlencoded') {
             request.send(SuperagentHttpClient.normalizeParams(formParams)).on('progress', (event: any) => {
-                SuperagentHttpClient.progress(event);
+                this.progress(event, eventEmitter);
             });
         } else if (contentType === 'multipart/form-data') {
             const _formParams = SuperagentHttpClient.normalizeParams(formParams);
@@ -243,19 +250,19 @@ export class SuperagentHttpClient implements Emitter, HttpClient {
                         // file field
                         request.attach(key, _formParams[key]).on('progress', (event: ProgressEvent) => {
                             // jshint ignore:line
-                            SuperagentHttpClient.progress(event);
+                            this.progress(event, eventEmitter);
                         });
                     } else {
                         request.field(key, _formParams[key]).on('progress', (event: ProgressEvent) => {
                             // jshint ignore:line
-                            SuperagentHttpClient.progress(event);
+                            this.progress(event, eventEmitter);
                         });
                     }
                 }
             }
         } else if (bodyParam) {
             request.send(bodyParam).on('progress', (event: any) => {
-                SuperagentHttpClient.progress(event);
+                this.progress(event, eventEmitter);
             });
         }
 
@@ -362,8 +369,7 @@ export class SuperagentHttpClient implements Emitter, HttpClient {
         return data;
     }
 
-    private static progress(event: any) {
-        const eventEmitter = ee({});
+    progress(event: any, eventEmitter: Emitter) {
         if (event.lengthComputable) {
             const percent = Math.round((event.loaded / event.total) * 100);
 

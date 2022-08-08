@@ -61,6 +61,8 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     once: ee.EmitterMethod;
     emit: (type: string, ...args: any[]) => void;
 
+    emitter: ee.Emitter;
+
     host: string;
     className: string;
     config: AlfrescoApiConfig;
@@ -98,11 +100,18 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
         this.httpClient = httpClient || new SuperagentHttpClient();
 
         ee(this);
+
+        this.emitter = {
+            on: this.on.bind(this),
+            off: this.off.bind(this),
+            once: this.once.bind(this),
+            emit: this.emit.bind(this),
+        };
     }
 
     request<T = any>(options: RequestOptions): Promise<T> {
         const security = this.getSecurityOptions();
-        return this.httpClient.request(this.basePath, options, security, ee({}));
+        return this.httpClient.request(this.basePath, options, security, this.emitter);
     }
 
     getSecurityOptions(): SecurityOptions {
@@ -170,7 +179,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
                 url,
             },
             security,
-            ee({})
+            this.emitter
         );
     }
 
@@ -209,31 +218,31 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
                 responseType,
             },
             security,
-            ee({})
+            this.emitter
         );
     }
 
     post<T = any>(options: RequestOptions): Promise<T> {
         const security = this.getSecurityOptions();
         const url = this.getCallApiUrl(options);
-        return this.httpClient.post<T>(url, options, security, ee({}));
+        return this.httpClient.post<T>(url, options, security, this.emitter);
     }
 
     put<T = any>(options: RequestOptions): Promise<T> {
         const security = this.getSecurityOptions();
         const url = this.getCallApiUrl(options);
-        return this.httpClient.put<T>(url, options, security, ee({}));
+        return this.httpClient.put<T>(url, options, security, this.emitter);
     }
 
     get<T = any>(options: RequestOptions): Promise<T> {
         const security = this.getSecurityOptions();
         const url = this.getCallApiUrl(options);
-        return this.httpClient.get<T>(url, options, security, ee({}));
+        return this.httpClient.get<T>(url, options, security, this.emitter);
     }
 
     delete<T = void>(options: RequestOptions): Promise<T> {
         const security = this.getSecurityOptions();
-        return this.httpClient.delete(this.basePath, options, security, ee({}));
+        return this.httpClient.delete(this.basePath, options, security, this.emitter);
     }
 
     basicAuth(username: string, password: string): string {
