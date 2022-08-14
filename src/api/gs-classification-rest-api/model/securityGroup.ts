@@ -19,7 +19,8 @@ export class SecurityGroup {
     id: string;
     groupName: string;
     groupType: string;
-    inUse: boolean
+    inUse: boolean;
+    systemGroup: boolean;
 
     constructor(input?: any) {
 
