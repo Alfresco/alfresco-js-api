@@ -15,7 +15,13 @@
 * limitations under the License.
 */
 
-export * from './classificationGuideBody';
+export * from './authorityClearance';
+export * from './authorityClearanceBody';
+export * from './authorityClearanceEntry';
+export * from './authorityClearancePaging';
+export * from './authorityClearancePagingList';
+export * from './authorityGroup';
+export * from './authorityMark';
 export * from './classificationGuideEntry';
 export * from './classificationGuidePaging';
 export * from './classificationGuidePagingList';

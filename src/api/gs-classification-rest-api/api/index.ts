@@ -15,6 +15,9 @@
 * limitations under the License.
 */
 
+export * from './authorityClearance.api';
+import { AuthorityClearanceApi } from "./authorityClearance.api";
+
 export * from './classificationGuides.api';
 import { ClassificationGuidesApi } from './classificationGuides.api';
 
@@ -40,6 +43,7 @@ export * from './nodeSecurityMarks.api';
 import { NodeSecurityMarksApi } from './nodeSecurityMarks.api';
 
 export const GS_CLASSIFICATION_APIS = {
+    AuthorityClearanceApi: AuthorityClearanceApi,
     ClassificationGuidesApi: ClassificationGuidesApi,
     ClassificationReasonsApi: ClassificationReasonsApi,
     DeclassificationExemptionsApi: DeclassificationExemptionsApi,
