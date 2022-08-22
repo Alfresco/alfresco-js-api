@@ -15,6 +15,11 @@
  * limitations under the License.
  */
 
+import { Authentication } from '../authentication/authentication';
+import type { Emitter } from 'event-emitter';
+
+export type { Emitter } from 'event-emitter';
+
 export interface RequestOptions {
     path: string;
     httpMethod?: string;
@@ -36,7 +41,8 @@ export interface HttpClientConfig {
     host?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
     servicePath?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
 }
-export interface HttpClient {
+
+export interface LegacyHttpClient {
     basePath: string;
     config: HttpClientConfig;
 
@@ -76,4 +82,36 @@ export interface HttpClient {
         contextRoot?: string,
         responseType?: string
     ): Promise<any>;
+}
+
+export interface SecurityOptions {
+    readonly isBpmRequest: boolean;
+    readonly enableCsrf?: boolean;
+    readonly withCredentials?: boolean;
+    readonly authentications: Authentication;
+    readonly defaultHeaders: Record<string, string>;
+}
+
+export interface HttpRequestOptions {
+    readonly path: string;
+    readonly httpMethod?: string;
+    readonly pathParams?: any;
+    readonly queryParams?: any;
+    readonly headerParams?: any;
+    readonly formParams?: any;
+    readonly bodyParam?: any;
+    readonly contentType?: string;
+    readonly accept?: string;
+    readonly returnType?: any;
+    readonly contextRoot?: string;
+    readonly responseType?: string;
+    readonly url?: string;
+}
+
+export interface HttpClient {
+    request<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, eventEmitter: Emitter, errorEmitter: Emitter): Promise<T>;
+    post<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, eventEmitter: Emitter, errorEmitter: Emitter): Promise<T>;
+    put<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, eventEmitter: Emitter, errorEmitter: Emitter): Promise<T>;
+    get<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, eventEmitter: Emitter, errorEmitter: Emitter): Promise<T>;
+    delete<T = void>(url: string, options: HttpRequestOptions, security: SecurityOptions, eventEmitter: Emitter, errorEmitter: Emitter): Promise<T>;
 }
