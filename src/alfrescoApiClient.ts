@@ -19,7 +19,7 @@ import ee from 'event-emitter';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
 import { SuperagentHttpClient } from './superagentHttpClient';
-import { HttpClient, LegacyHttpClient, RequestOptions, SecurityOptions } from './api-clients/http-client.interface';
+import { HttpClient, HttpRequestOptions, LegacyHttpClient, RequestOptions, SecurityOptions } from './api-clients/http-client.interface';
 import { paramToString } from './utils/helpers';
 
 declare const Buffer: any;
@@ -120,22 +120,6 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
         };
     }
 
-    request<T = any>(options: RequestOptions): Promise<T> {
-        const security = this.getSecurityOptions();
-        const eventEmitter = ee({});
-
-        const contentType = AlfrescoApiClient.jsonPreferredMime(options.contentTypes);
-        const accept = AlfrescoApiClient.jsonPreferredMime(options.accepts);
-
-        const httpRequestOptions = {
-            ...options,
-            contentType,
-            accept
-        }
-
-        return this.httpClient.request(this.basePath, httpRequestOptions, security, eventEmitter, this.emitter);
-    }
-
     getSecurityOptions(): SecurityOptions {
         return {
             isBpmRequest: this.isBpmRequest(),
@@ -182,26 +166,28 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
         const security = this.getSecurityOptions();
         const callApiUrl = url ?? this.getCallApiUrl({ contextRoot, path, pathParams });
         const eventEmitter = ee({});
-        const contentType = AlfrescoApiClient.jsonPreferredMime(contentTypes);
-        const accept = AlfrescoApiClient.jsonPreferredMime(accepts);
+
+        const options: RequestOptions = {
+            path,
+            httpMethod,
+            pathParams,
+            queryParams,
+            headerParams,
+            formParams,
+            bodyParam,
+            contentTypes,
+            accepts,
+            returnType,
+            contextRoot,
+            responseType,
+            url,
+        };
+
+        const httpRequestOptions = this.getHttpRequestOptions(options);
 
         const promise = this.httpClient.request(
             callApiUrl,
-            {
-                path,
-                httpMethod,
-                pathParams,
-                queryParams,
-                headerParams,
-                formParams,
-                bodyParam,
-                contentType,
-                accept,
-                returnType,
-                contextRoot,
-                responseType,
-                url,
-            },
+            httpRequestOptions,
             security,
             eventEmitter,
             this.emitter
@@ -227,25 +213,27 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
         const security = this.getSecurityOptions();
         const customApiUrl = AlfrescoApiClient.buildUrl(path, '', pathParams);
         const eventEmitter = ee({});
-        const contentType = AlfrescoApiClient.jsonPreferredMime(contentTypes);
-        const accept = AlfrescoApiClient.jsonPreferredMime(accepts);
+
+        const options: RequestOptions = {
+            path,
+            httpMethod,
+            pathParams,
+            queryParams,
+            headerParams,
+            formParams,
+            bodyParam,
+            contentTypes,
+            accepts,
+            returnType,
+            contextRoot,
+            responseType,
+        };
+
+        const httpRequestOptions = this.getHttpRequestOptions(options);
 
         const promise = this.httpClient.request(
             customApiUrl,
-            {
-                path,
-                httpMethod,
-                pathParams,
-                queryParams,
-                headerParams,
-                formParams,
-                bodyParam,
-                contentType,
-                accept,
-                returnType,
-                contextRoot,
-                responseType,
-            },
+            httpRequestOptions,
             security,
             eventEmitter,
             this.emitter
@@ -254,55 +242,51 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
         return this.addPromiseListeners(promise, eventEmitter);
     }
 
-    post<T = any>(options: RequestOptions): AlfrescoApiClientPromise<T> {
-        const security = this.getSecurityOptions();
-        const url = this.getCallApiUrl(options);
-        const eventEmitter = ee({});
+    private getHttpRequestOptions(options: RequestOptions): HttpRequestOptions {
         const contentType = AlfrescoApiClient.jsonPreferredMime(options.contentTypes);
         const accept = AlfrescoApiClient.jsonPreferredMime(options.accepts);
 
-        const httpRequestOptions = {
+        return {
             ...options,
             contentType,
             accept
         }
+    }
 
+    request<T = any>(options: RequestOptions): Promise<T> {
+        const security = this.getSecurityOptions();
+        const eventEmitter = ee({});
+        const httpRequestOptions = this.getHttpRequestOptions(options);
+        const promise = this.httpClient.request(this.basePath, httpRequestOptions, security, eventEmitter, this.emitter);
+
+        return this.addPromiseListeners(promise, eventEmitter);
+    }
+
+    post<T = any>(options: RequestOptions): AlfrescoApiClientPromise<T> {
+        const url = this.getCallApiUrl(options);
+        const security = this.getSecurityOptions();
+        const eventEmitter = ee({});
+        const httpRequestOptions = this.getHttpRequestOptions(options);
         const promise = this.httpClient.post<T>(url, httpRequestOptions, security, eventEmitter, this.emitter);
 
         return this.addPromiseListeners(promise, eventEmitter);
     }
 
     put<T = any>(options: RequestOptions): AlfrescoApiClientPromise<T> {
-        const security = this.getSecurityOptions();
         const url = this.getCallApiUrl(options);
+        const security = this.getSecurityOptions();
         const eventEmitter = ee({});
-        const contentType = AlfrescoApiClient.jsonPreferredMime(options.contentTypes);
-        const accept = AlfrescoApiClient.jsonPreferredMime(options.accepts);
-
-        const httpRequestOptions = {
-            ...options,
-            contentType,
-            accept
-        }
-
+        const httpRequestOptions = this.getHttpRequestOptions(options);
         const promise = this.httpClient.put<T>(url, httpRequestOptions, security, eventEmitter, this.emitter);
 
         return this.addPromiseListeners(promise, eventEmitter);
     }
 
     get<T = any>(options: RequestOptions): AlfrescoApiClientPromise<T> {
-        const security = this.getSecurityOptions();
         const url = this.getCallApiUrl(options);
+        const security = this.getSecurityOptions();
         const eventEmitter = ee({});
-        const contentType = AlfrescoApiClient.jsonPreferredMime(options.contentTypes);
-        const accept = AlfrescoApiClient.jsonPreferredMime(options.accepts);
-
-        const httpRequestOptions = {
-            ...options,
-            contentType,
-            accept
-        }
-
+        const httpRequestOptions = this.getHttpRequestOptions(options);
         const promise = this.httpClient.get<T>(url, httpRequestOptions, security, eventEmitter, this.emitter);
 
         return this.addPromiseListeners(promise, eventEmitter);
@@ -311,16 +295,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     delete<T = void>(options: RequestOptions): AlfrescoApiClientPromise<T> {
         const security = this.getSecurityOptions();
         const eventEmitter = ee({});
-
-        const contentType = AlfrescoApiClient.jsonPreferredMime(options.contentTypes);
-        const accept = AlfrescoApiClient.jsonPreferredMime(options.accepts);
-
-        const httpRequestOptions = {
-            ...options,
-            contentType,
-            accept
-        }
-
+        const httpRequestOptions = this.getHttpRequestOptions(options);
         const promise = this.httpClient.delete<T>(this.basePath, httpRequestOptions, security, eventEmitter, this.emitter);
 
         return this.addPromiseListeners<T>(promise, eventEmitter);

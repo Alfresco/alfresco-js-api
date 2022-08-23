@@ -16,8 +16,8 @@ describe('Alfresco Core API Client', () => {
             const headerParams = {};
             const formParams = {};
 
-            const contentTypes = ['application/json'];
-            const accepts = ['application/json'];
+            const contentTypes = 'application/json';
+            const accepts = 'application/json';
             const responseType = 'blob';
             const url = '/fake-api/enterprise/process-instances/';
             const httpMethod = 'GET';
