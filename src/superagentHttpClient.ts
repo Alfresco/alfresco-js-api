@@ -18,7 +18,7 @@
 import ee, { Emitter } from 'event-emitter';
 import superagent, { Response } from 'superagent';
 import { Authentication } from './authentication/authentication';
-import { HttpRequestOptions, HttpClient, SecurityOptions } from './api-clients/http-client.interface';
+import { HttpRequestOptions, HttpClient, SecurityOptions, Emitters } from './api-clients/http-client.interface';
 import { Oauth2 } from './authentication/oauth2';
 import { BasicAuth } from './authentication/basicAuth';
 import { isBrowser, paramToString } from './utils/helpers';
@@ -29,7 +29,6 @@ declare const Buffer: any;
 const isProgressEvent = (event: ProgressEvent | unknown): event is ProgressEvent => Object.prototype.hasOwnProperty.call(event, 'lengthComputable');
 
 export class SuperagentHttpClient implements HttpClient {
-
     /**
      * The default HTTP timeout for all API calls.
      */
@@ -37,60 +36,57 @@ export class SuperagentHttpClient implements HttpClient {
 
     authCookie: string;
 
-    post<T = any>(url: string, options: HttpRequestOptions, securityOptions: SecurityOptions, emitter: Emitter, errorEmitter: Emitter): Promise<T> {
+    post<T = any>(url: string, options: HttpRequestOptions, securityOptions: SecurityOptions, emitters: Emitters): Promise<T> {
         return this.request<T>(
             url,
             {
                 ...options,
-                httpMethod: 'POST'
+                httpMethod: 'POST',
             },
             securityOptions,
-            emitter,
-            errorEmitter
+            emitters
         );
     }
 
-    put<T = any>(url: string, options: HttpRequestOptions, securityOptions: SecurityOptions, emitter: Emitter, errorEmitter: Emitter): Promise<T> {
+    put<T = any>(url: string, options: HttpRequestOptions, securityOptions: SecurityOptions, emitters: Emitters): Promise<T> {
         return this.request<T>(
             url,
             {
                 ...options,
-                httpMethod: 'PUT'
+                httpMethod: 'PUT',
             },
             securityOptions,
-            emitter,
-            errorEmitter
+            emitters
         );
     }
 
-    get<T = any>(url: string, options: HttpRequestOptions, securityOptions: SecurityOptions, emitter: Emitter, errorEmitter: Emitter): Promise<T> {
+    get<T = any>(url: string, options: HttpRequestOptions, securityOptions: SecurityOptions, emitters: Emitters): Promise<T> {
         return this.request<T>(
             url,
             {
                 ...options,
-                httpMethod: 'GET'
+                httpMethod: 'GET',
             },
             securityOptions,
-            emitter,
-            errorEmitter
+            emitters
         );
     }
 
-    delete<T = void>(url: string, options: HttpRequestOptions, securityOptions: SecurityOptions, emitter: Emitter, errorEmitter: Emitter): Promise<T> {
+    delete<T = void>(url: string, options: HttpRequestOptions, securityOptions: SecurityOptions, emitters: Emitters): Promise<T> {
         return this.request<T>(
             url,
             {
                 ...options,
-                httpMethod: 'DELETE'
+                httpMethod: 'DELETE',
             },
             securityOptions,
-            emitter,
-            errorEmitter
+            emitters
         );
     }
 
-    request<T = any>(url: string, options: HttpRequestOptions, securityOptions: SecurityOptions, eventEmitter: Emitter, errorEmitter: Emitter): Promise<T> {
+    request<T = any>(url: string, options: HttpRequestOptions, securityOptions: SecurityOptions, emitters: Emitters): Promise<T> {
         const { httpMethod, queryParams, headerParams, formParams, bodyParam, contentType, accept, responseType, returnType } = options;
+        const { eventEmitter, errorEmitter } = emitters;
 
         let request = this.buildRequest(
             httpMethod,

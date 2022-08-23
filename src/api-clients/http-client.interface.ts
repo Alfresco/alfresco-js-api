@@ -108,10 +108,15 @@ export interface HttpRequestOptions {
     readonly url?: string;
 }
 
+export interface Emitters {
+    readonly eventEmitter: Emitter;
+    readonly errorEmitter: Emitter;
+}
+
 export interface HttpClient {
-    request<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, eventEmitter: Emitter, errorEmitter: Emitter): Promise<T>;
-    post<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, eventEmitter: Emitter, errorEmitter: Emitter): Promise<T>;
-    put<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, eventEmitter: Emitter, errorEmitter: Emitter): Promise<T>;
-    get<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, eventEmitter: Emitter, errorEmitter: Emitter): Promise<T>;
-    delete<T = void>(url: string, options: HttpRequestOptions, security: SecurityOptions, eventEmitter: Emitter, errorEmitter: Emitter): Promise<T>;
+    request<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, emitters: Emitters): Promise<T>;
+    post<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, emitters: Emitters): Promise<T>;
+    put<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, emitters: Emitters): Promise<T>;
+    get<T = any>(url: string, options: HttpRequestOptions, security: SecurityOptions, emitters: Emitters): Promise<T>;
+    delete<T = void>(url: string, options: HttpRequestOptions, security: SecurityOptions, emitters: Emitters): Promise<T>;
 }
