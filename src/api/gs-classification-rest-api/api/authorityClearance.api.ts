@@ -16,7 +16,10 @@
  */
 
 import { BaseApi } from './base.api';
-import { AuthorityClearance, AuthorityClearanceEntry, AuthorityClearanceBody, AuthorityClearancePaging } from "../model";
+import {
+    AuthorityClearanceGroupPaging,
+    NodeSecurityMarkBody, SecurityMarkEntry, SecurityMarkPaging
+} from "../model";
 
 /**
  * AuthorityClearanceApi service.
@@ -26,14 +29,14 @@ export class AuthorityClearanceApi extends BaseApi {
     /**
      * Get the authority clearances for a single user/group
      * @param authorityType The identifier for the authorityType. Can be 'USER/GROUP'
-     * @param authorityName The name for the authority for which the clearance is to be fetched. Can be left blank in which case it will fetch it for all users with pagination
+     * @param authorityId The name for the authority for which the clearance is to be fetched. Can be left blank in which case it will fetch it for all users with pagination
      * @param clearance The clearance level for the authority. Can be TS (Top Secret), S (Secret), or C (Confidential)
-     * @return Promise<AuthorityClearanceEntry>
+     * @return Promise<AuthorityClearanceGroupPaging>
      */
-    getAuthorityClearanceForSingleAuthority(authorityName: string, authorityType?: string, clearance?: string): Promise<AuthorityClearanceEntry> {
+    getAuthorityClearanceForAuthority(authorityId: string, authorityType?: string, clearance?: string): Promise<AuthorityClearanceGroupPaging> {
         let body = null;
         let pathParams = {
-            'authorityName': authorityName
+            'authorityId': authorityId
         };
         let queryParams = {
             'authorityType': authorityType ? authorityType : null,
@@ -44,47 +47,20 @@ export class AuthorityClearanceApi extends BaseApi {
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
-        return this.apiClient.callApi('/authority-clearance/{authorityName}', 'GET', pathParams, queryParams, headerParams, formParams, body, contentTypes, accepts, AuthorityClearance);
-    }
-
-    /**
-     * Get the authority clearances for multiple users/groups with pagination
-     * @param authorityType The filter for the authorityType. Can be 'USER/GROUP'
-     * @param authorityName The filter for the authorityName for which the clearance is to be fetched. Can be left blank in which case it will fetch it for all users with pagination
-     * @param clearance The clearance level for the authority. Can be TS (Top Secret), S (Secret), or C (Confidential)
-     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param opts.maxItems The maximum number of items to return in the list.
-     * * @return Promise<AuthorityClearancePaging>
-     */
-    getAuthorityClearanceWithPagination(authorityName?: string, authorityType?: string, clearance?: string, opts?: any): Promise<AuthorityClearancePaging> {
-        let body = null;
-        let pathParams = {};
-        let queryParams = {
-            'authorityName': authorityName ? authorityName : null,
-            'authorityType': authorityType ? authorityType : null,
-            'clearance': clearance ? clearance : null,
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems']
-        };
-        let headerParams = {};
-        let formParams = {};
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi('/authority-clearance/', 'GET', pathParams, queryParams, headerParams, formParams, body, contentTypes, accepts, AuthorityClearancePaging);
+        return this.apiClient.callApi('/cleared-authorities/{authorityId}/clearing-marks', 'GET', pathParams, queryParams, headerParams, formParams, body, contentTypes, accepts, AuthorityClearanceGroupPaging);
     }
 
      /**
      * Updates the authority clearance.
-     * @param authorityName The name for the authority for which the clearance is to be updated
+     * @param authorityId The name for the authority for which the clearance is to be updated
      * @param authorityClearance AuthorityClearanceBody
-     * @return Promise<AuthorityClearanceBody>
+     * @return Promise<SecurityMarkEntry | SecurityMarkPaging>
      */
-    updateAuthorityClearance(authorityName: string, authorityClearance: AuthorityClearanceBody): Promise<AuthorityClearanceBody> {
+    updateAuthorityClearance(authorityId: string, authorityClearance: NodeSecurityMarkBody[]): Promise<SecurityMarkEntry | SecurityMarkPaging> {
 
-        let putBody = authorityClearance;
+        let postBody = authorityClearance;
         let pathParams = {
-            authorityName: authorityName,
+            authorityId: authorityId,
         };
         let queryParams = {};
         let headerParams = {};
@@ -92,16 +68,16 @@ export class AuthorityClearanceApi extends BaseApi {
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
         return this.apiClient.callApi(
-            '/authority-clearance/{authorityName}',
-            'PUT',
+            '/cleared-authorities/{authorityId}/clearing-marks',
+            'POST',
             pathParams,
             queryParams,
             headerParams,
             formParams,
-            putBody,
+            postBody,
             contentTypes,
             accepts,
-            AuthorityClearanceBody
+            authorityClearance.length === 1 ? SecurityMarkEntry : SecurityMarkPaging
         );
 
     }

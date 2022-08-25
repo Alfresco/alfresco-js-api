@@ -15,16 +15,18 @@
 * limitations under the License.
 */
 
-import {NodeSecurityMarkBody} from "./nodeSecurityMarkBody";
+import {AuthorityClearanceGroupPagingList} from "./authorityClearanceGroupPagingList";
 
-export class AuthorityClearanceBody {
 
-    securityMarkModelList?: Array<NodeSecurityMarkBody>;
-    success?: Boolean;
+export class AuthorityClearanceGroupPaging {
+    list?: AuthorityClearanceGroupPagingList;
 
     constructor(input?: any) {
+
         if (input) {
             Object.assign(this, input);
+            this.list = input.list ? new AuthorityClearanceGroupPagingList(input.list) : undefined;
         }
     }
+
 }

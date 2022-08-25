@@ -15,18 +15,18 @@
 * limitations under the License.
 */
 
-import {AuthorityClearancePagingList} from "./authorityClearancePagingList";
+import {AuthorityClearanceMark} from "./authorityClearanceMark";
 
-
-export class AuthorityClearancePaging {
-    list?: AuthorityClearancePagingList;
+export class AuthorityClearanceGroup {
+    id: string;
+    displayLabel: string;
+    systemGroup: boolean;
+    type: string;
+    marks: AuthorityClearanceMark[]
 
     constructor(input?: any) {
-
         if (input) {
             Object.assign(this, input);
-            this.list = input.list ? new AuthorityClearancePagingList(input.list) : undefined;
         }
     }
-
 }

@@ -15,15 +15,11 @@
 * limitations under the License.
 */
 
-import {AuthorityMark} from "./authorityMark";
-
-export class AuthorityGroup {
+export class AuthorityClearanceMark {
     id: string;
     displayLabel: string;
-    systemGroup: boolean;
-    inUse: boolean;
-    type: string;
-    authorityMarkList: Set<AuthorityMark>
+    applied: boolean;
+    inherited: boolean;
 
     constructor(input?: any) {
         if (input) {

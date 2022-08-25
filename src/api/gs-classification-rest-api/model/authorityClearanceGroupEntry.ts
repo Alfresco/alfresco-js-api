@@ -15,16 +15,16 @@
 * limitations under the License.
 */
 
-import {AuthorityClearance} from "./authorityClearance";
+import {AuthorityClearanceGroup} from "./authorityClearanceGroup";
 
-export class AuthorityClearanceEntry {
-    entry: AuthorityClearance;
+export class AuthorityClearanceGroupEntry {
+    entry: AuthorityClearanceGroup;
 
     constructor(input?: any) {
 
         if (input) {
             Object.assign(this, input);
-            this.entry = input.entry ? new AuthorityClearance(input.entry) : undefined;
+            this.entry = input.entry ? new AuthorityClearanceGroup(input.entry) : undefined;
         }
     }
 

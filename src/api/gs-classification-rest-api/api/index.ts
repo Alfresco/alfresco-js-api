@@ -15,9 +15,6 @@
 * limitations under the License.
 */
 
-export * from './authorityClearance.api';
-import { AuthorityClearanceApi } from "./authorityClearance.api";
-
 export * from './classificationGuides.api';
 import { ClassificationGuidesApi } from './classificationGuides.api';
 
@@ -42,8 +39,10 @@ import { SecurityGroupsApi } from './securityGroups.api';
 export * from './nodeSecurityMarks.api';
 import { NodeSecurityMarksApi } from './nodeSecurityMarks.api';
 
+export * from './authorityClearance.api';
+import { AuthorityClearanceApi } from "./authorityClearance.api";
+
 export const GS_CLASSIFICATION_APIS = {
-    AuthorityClearanceApi: AuthorityClearanceApi,
     ClassificationGuidesApi: ClassificationGuidesApi,
     ClassificationReasonsApi: ClassificationReasonsApi,
     DeclassificationExemptionsApi: DeclassificationExemptionsApi,
@@ -51,5 +50,6 @@ export const GS_CLASSIFICATION_APIS = {
     SecurityControlSettingsApi: SecurityControlSettingsApi,
     SecurityMarksApi: SecurityMarksApi,
     SecurityGroupsApi: SecurityGroupsApi,
-    NodeSecurityMarksApi: NodeSecurityMarksApi
+    NodeSecurityMarksApi: NodeSecurityMarksApi,
+    AuthorityClearanceApi: AuthorityClearanceApi
 };

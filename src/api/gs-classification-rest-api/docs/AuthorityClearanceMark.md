@@ -1,4 +1,4 @@
-# AuthorityMark
+# AuthorityClearanceMark
 
 ## Properties
 | Name             | Type        | Description | Notes              |

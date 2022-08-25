@@ -15,19 +15,23 @@
 * limitations under the License.
 */
 
-import {AuthorityGroup} from "./authorityGroup";
+import {Pagination} from "../../content-rest-api";
+import {AuthorityClearanceGroupEntry} from "./authorityClearanceGroupEntry";
 
-export class AuthorityClearance {
-    authorityName: string;
-    classificationId: string;
-    clearanceLabel: string;
-    hasMarks: boolean;
-    authorityGroupList: Set<AuthorityGroup>
+export class AuthorityClearanceGroupPagingList {
+    pagination: Pagination;
+    entries?: AuthorityClearanceGroupEntry[];
 
     constructor(input?: any) {
+
         if (input) {
             Object.assign(this, input);
+            this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
+            if (input.entries) {
+                this.entries = input.entries.map((item: any) => {
+                    return new AuthorityClearanceGroupEntry(item);
+                });
+            }
         }
     }
-
 }
