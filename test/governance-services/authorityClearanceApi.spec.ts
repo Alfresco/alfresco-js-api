@@ -1,12 +1,13 @@
-import { EcmAuthMock } from "@alfresco/js-api/test/mockObjects";
+import { EcmAuthMock } from '../mockObjects/content-services/ecm-auth.mock';
 import {
-    AlfrescoApi,
-    AlfrescoApiConfig,
-    AuthorityClearanceApi, AuthorityClearanceGroupPaging,
+    AuthorityClearanceGroupPaging,
     NodeSecurityMarkBody, SecurityMarkEntry, SecurityMarkPaging
-} from "@alfresco/js-api";
-import { expect } from "chai";
-import { AuthorityClearanceMock } from "@alfresco/js-api/test/mockObjects/goverance-services/authority-clearance.mock";
+} from '../../src/api/gs-classification-rest-api/model/index';
+import { AuthorityClearanceApi } from '../../src/api/gs-classification-rest-api/api/index';
+import { AuthorityClearanceMock } from '../mockObjects/goverance-services/authority-clearance.mock';
+import { AlfrescoApi } from '../../src/alfrescoApi';
+import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
+import { expect } from 'chai';
 
 describe('Authority Clearance API test', () => {
     let authResponseMock: EcmAuthMock;

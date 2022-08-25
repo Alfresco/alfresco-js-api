@@ -1,4 +1,4 @@
-import { BaseMock } from "@alfresco/js-api/test/mockObjects/base.mock";
+import { BaseMock } from "../base.mock";
 import nock from "nock";
 
 export class AuthorityClearanceMock extends BaseMock {
