@@ -16,26 +16,25 @@
 */
 
 import { ApiClient } from '../../../api-clients/api-client';
-import { HttpClient, RequestOptions } from '../../../api-clients/http-client.interface';
+import { LegacyHttpClient, RequestOptions } from '../../../api-clients/http-client.interface';
 import { AlfrescoApiType, LegacyTicketApi } from '../../../to-deprecate/alfresco-api-type';
 
 export abstract class BaseApi extends ApiClient {
-
-    declare protected httpClient: HttpClient & LegacyTicketApi;
+    protected declare httpClient: LegacyHttpClient & LegacyTicketApi;
 
     /** @deprecated */
     constructor(legacyApi?: AlfrescoApiType);
-    constructor(httpClient: HttpClient & LegacyTicketApi );
-    constructor(httpClient?: AlfrescoApiType | (HttpClient & LegacyTicketApi)) {
+    constructor(httpClient: LegacyHttpClient & LegacyTicketApi);
+    constructor(httpClient?: AlfrescoApiType | (LegacyHttpClient & LegacyTicketApi)) {
         super(httpClient as AlfrescoApiType);
     }
 
     // TODO: Find a way to remove this hack from the legacy version :/
-    get apiClientPrivate(): HttpClient & LegacyTicketApi {
+    get apiClientPrivate(): LegacyHttpClient & LegacyTicketApi {
         return this.httpClient ?? this.alfrescoApi.contentPrivateClient;
     }
 
-    override get apiClient(): HttpClient & LegacyTicketApi {
+    override get apiClient(): LegacyHttpClient & LegacyTicketApi {
         return this.httpClient ?? this.alfrescoApi.contentClient;
     }
 

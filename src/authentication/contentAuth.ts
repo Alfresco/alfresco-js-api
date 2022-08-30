@@ -22,6 +22,7 @@ import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import { Storage } from '../storage';
 import { AlfrescoApiType } from '../../src/to-deprecate/alfresco-api-type';
+import { HttpClient } from '../api-clients/http-client.interface';
 
 export class ContentAuth extends AlfrescoApiClient {
 
@@ -31,8 +32,8 @@ export class ContentAuth extends AlfrescoApiClient {
 
     authApi: AuthenticationApi;
 
-    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType) {
-        super();
+    constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType, httpClient?: HttpClient) {
+        super(undefined, httpClient);
         this.className = 'ContentAuth';
         this.storage = new Storage();
         this.storage.setDomainPrefix(config.domainPrefix);
