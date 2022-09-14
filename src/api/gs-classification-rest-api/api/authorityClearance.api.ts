@@ -19,7 +19,7 @@ import { BaseApi } from './base.api';
 import {
     AuthorityClearanceGroupPaging,
     NodeSecurityMarkBody, SecurityMarkEntry, SecurityMarkPaging
-} from "../model";
+} from '../model';
 
 /**
  * AuthorityClearanceApi service.
@@ -54,7 +54,7 @@ export class AuthorityClearanceApi extends BaseApi {
         return this.apiClient.callApi('/cleared-authorities/{authorityId}/clearing-marks', 'GET', pathParams, queryParams, headerParams, formParams, body, contentTypes, accepts, AuthorityClearanceGroupPaging);
     }
 
-     /**
+    /**
      * Updates the authority clearance.
      * @param authorityId The name for the authority for which the clearance is to be updated
      * @param authorityClearance AuthorityClearanceBody
@@ -64,7 +64,7 @@ export class AuthorityClearanceApi extends BaseApi {
 
         let postBody = authorityClearance;
         let pathParams = {
-            authorityId: authorityId,
+            authorityId: authorityId
         };
         let queryParams = {};
         let headerParams = {};
