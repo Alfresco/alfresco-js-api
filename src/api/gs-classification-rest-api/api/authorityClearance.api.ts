@@ -31,9 +31,11 @@ export class AuthorityClearanceApi extends BaseApi {
      * @param authorityType The identifier for the authorityType. Can be 'USER/GROUP'
      * @param authorityId The name for the authority for which the clearance is to be fetched. Can be left blank in which case it will fetch it for all users with pagination
      * @param clearance The clearance level for the authority. Can be TS (Top Secret), S (Secret), or C (Confidential)
+     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
+     * @param opts.maxItems The maximum number of items to return in the list.
      * @return Promise<AuthorityClearanceGroupPaging>
      */
-    getAuthorityClearanceForAuthority(authorityId: string, authorityType?: string, clearance?: string): Promise<AuthorityClearanceGroupPaging> {
+    getAuthorityClearanceForAuthority(authorityId: string, authorityType?: string, clearance?: string, opts?: any): Promise<AuthorityClearanceGroupPaging> {
         let body = null;
         let pathParams = {
             'authorityId': authorityId
@@ -41,6 +43,8 @@ export class AuthorityClearanceApi extends BaseApi {
         let queryParams = {
             'authorityType': authorityType ? authorityType : null,
             'clearance': clearance ? clearance : null,
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems']
         };
         let headerParams = {};
         let formParams = {};
