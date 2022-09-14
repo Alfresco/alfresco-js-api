@@ -8,7 +8,7 @@ export class AuthorityClearanceMock extends BaseMock {
 
     get200AuthorityClearanceForAuthority(authorityId: string) {
         nock(this.host, { encodedQueryParams: true })
-            .get('/alfresco/api/-default-/public/gs/versions/1/cleared-authorities/' + authorityId + '/clearing-marks')
+            .get('/alfresco/api/-default-/public/gs/versions/1/cleared-authorities/' + authorityId + '/clearing-marks?skipCount=0&maxItems=100')
             .reply(200, {
                 list: {
                     pagination: {

@@ -9,6 +9,11 @@ import { AlfrescoApi } from '../../src/alfrescoApi';
 import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { expect } from 'chai';
 
+const DEFAULT_OPTS = {
+    skipCount: 0,
+    maxItems: 100
+}
+
 describe('Authority Clearance API test', () => {
     let authResponseMock: EcmAuthMock;
     let authorityClearanceMock: AuthorityClearanceMock;
@@ -48,7 +53,7 @@ describe('Authority Clearance API test', () => {
     it('get authority clearances for an authority', async () => {
         let nodeId = 'testAuthorityId';
         authorityClearanceMock.get200AuthorityClearanceForAuthority(nodeId);
-        await authorityClearanceApi.getAuthorityClearanceForAuthority(nodeId).then((response: AuthorityClearanceGroupPaging) => {
+        await authorityClearanceApi.getAuthorityClearanceForAuthority(nodeId, null, null, DEFAULT_OPTS).then((response: AuthorityClearanceGroupPaging) => {
             expect(response.list.entries[0].entry.id).equal('securityGroupFruits');
             expect(response.list.entries[0].entry.displayLabel).equal('Security Group FRUITS');
             expect(response.list.entries[0].entry.type).equal('USER_REQUIRES_ALL');
