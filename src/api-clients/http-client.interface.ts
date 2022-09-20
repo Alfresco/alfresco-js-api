@@ -15,6 +15,9 @@
  * limitations under the License.
  */
 
+import { Authentication } from '../authentication/authentication';
+import { Emitter } from 'event-emitter';
+
 export interface RequestOptions {
     path: string;
     httpMethod?: string;
@@ -29,6 +32,8 @@ export interface RequestOptions {
     contextRoot?: string;
     responseType?: string;
     url?: string;
+    readonly accept?: string;
+    readonly contentType?: string;
 }
 
 export interface HttpClientConfig {
@@ -36,7 +41,8 @@ export interface HttpClientConfig {
     host?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
     servicePath?: string; // Should be mandatory but can't make it because of AlfrescoApiConfig incompatibility 😕
 }
-export interface HttpClient {
+
+export interface LegacyHttpClient {
     basePath: string;
     config: HttpClientConfig;
 
@@ -76,4 +82,25 @@ export interface HttpClient {
         contextRoot?: string,
         responseType?: string
     ): Promise<any>;
+}
+
+export interface SecurityOptions {
+    readonly isBpmRequest: boolean;
+    readonly enableCsrf?: boolean;
+    readonly withCredentials?: boolean;
+    readonly authentications: Authentication;
+    readonly defaultHeaders: Record<string, string>;
+}
+
+export interface Emitters {
+    readonly eventEmitter: Emitter;
+    readonly apiClientEmitter: Emitter;
+}
+
+export interface HttpClient {
+    request<T = any>(url: string, options: RequestOptions, security: SecurityOptions, emitters: Emitters): Promise<T>;
+    post<T = any>(url: string, options: RequestOptions, security: SecurityOptions, emitters: Emitters): Promise<T>;
+    put<T = any>(url: string, options: RequestOptions, security: SecurityOptions, emitters: Emitters): Promise<T>;
+    get<T = any>(url: string, options: RequestOptions, security: SecurityOptions, emitters: Emitters): Promise<T>;
+    delete<T = void>(url: string, options: RequestOptions, security: SecurityOptions, emitters: Emitters): Promise<T>;
 }

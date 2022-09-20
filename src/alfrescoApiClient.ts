@@ -17,29 +17,20 @@
 
 import ee from 'event-emitter';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
-import superagent, { Response, ProgressEvent } from 'superagent';
 import { Authentication } from './authentication/authentication';
-import { BasicAuth } from './authentication/basicAuth';
-import { Oauth2 } from './authentication/oauth2';
-import { HttpClient, RequestOptions } from './api-clients/http-client.interface';
+import { SuperagentHttpClient } from './superagentHttpClient';
+import { Emitters, HttpClient, RequestOptions, LegacyHttpClient, SecurityOptions } from './api-clients/http-client.interface';
+import { paramToString } from './utils';
 
 declare const Buffer: any;
-declare const Blob: any;
 
-/**
- * Returns a string representation for an actual parameter.
- * @param param The actual parameter.
- * @returns The string representation of <code>param</code>.
- */
-export function paramToString(param: any): string {
-    if (param === undefined || param === null) {
-        return '';
-    }
-    if (param instanceof Date) {
-        return param.toJSON();
-    }
-    return param.toString();
-}
+type AlfrescoApiClientPromise<T = any> = Promise<T> & {
+    on: ee.EmitterMethod;
+    off: ee.EmitterMethod;
+    once: ee.EmitterMethod;
+    emit: (type: string, ...args: any[]) => void;
+    abort?: () => void;
+};
 
 /**
  * Builds a string representation of an array-type actual parameter, according to the given collection format.
@@ -70,8 +61,7 @@ export function buildCollectionParam(param: string[], collectionFormat: string):
     }
 }
 
-export class AlfrescoApiClient implements ee.Emitter, HttpClient {
-
+export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     on: ee.EmitterMethod;
     off: ee.EmitterMethod;
     once: ee.EmitterMethod;
@@ -84,16 +74,16 @@ export class AlfrescoApiClient implements ee.Emitter, HttpClient {
     /**
      * The base URL against which to resolve every API call's (relative) path.
      */
-    basePath: string = '';
+    basePath = '';
 
     /**
      * The authentication methods to be included for all API calls.
      */
     authentications: Authentication = {
         basicAuth: {
-            ticket: ''
+            ticket: '',
         },
-        type: 'basic'
+        type: 'basic',
     };
     /**
      * The default HTTP headers to be included for all API calls.
@@ -103,203 +93,125 @@ export class AlfrescoApiClient implements ee.Emitter, HttpClient {
     /**
      * The default HTTP timeout for all API calls.
      */
-    timeout: number | { deadline?: number, response?: number } = undefined;
+    timeout: number | { deadline?: number; response?: number } = undefined;
 
     contentTypes = {
-        JSON: ['application/json']
+        JSON: ['application/json'],
     };
 
-    constructor(host?: string) {
+    httpClient: HttpClient;
+
+    constructor(host?: string, httpClient?: HttpClient) {
         this.host = host;
+
+        // fallback for backward compatibility
+        this.httpClient = httpClient || new SuperagentHttpClient();
 
         ee(this);
     }
 
-    /**
-     * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders with parameter values.
-     * NOTE: query parameters are not handled here.
-     * @param  path The path to append to the base URL.
-     * @param  pathParams The parameter values to append.
-     * @returns  The encoded path with parameter values substituted.
-     */
-    buildUrl(path: string, pathParams: any): string {
-        if (!path.match(/^\//)) {
-            path = '/' + path;
-        }
-        let url = this.basePath + path;
-
-        url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
-            let value;
-            if (pathParams.hasOwnProperty(key)) {
-                value = paramToString(pathParams[key]);
-            } else {
-                value = fullMatch;
-            }
-            return encodeURIComponent(value);
-        });
-        return url;
+    request<T = any>(options: RequestOptions): Promise<T> {
+        return this.buildRequestCall(this.basePath, options, this.httpClient.request.bind(this.httpClient));
     }
 
-    /**
-     * Checks whether the given content type represents JSON.<br>
-     * JSON content type examples:<br>
-     * <ul>
-     * <li>application/json</li>
-     * <li>application/json; charset=UTF8</li>
-     * <li>APPLICATION/JSON</li>
-     * </ul>
-     * @param contentType The MIME content type to check.
-     * @returns <code>true</code> if <code>contentType</code> represents JSON, otherwise <code>false</code>.
-     */
-    isJsonMime(contentType: string): boolean {
-        return Boolean(contentType !== null && contentType.match(/^application\/json(;.*)?$/i));
+    post<T = any>(options: RequestOptions): AlfrescoApiClientPromise<T> {
+        const url = this.getCallApiUrl(options);
+        return this.buildRequestCall(url, options, this.httpClient.post.bind(this.httpClient));
     }
 
-    /**
-     * Chooses a content type from the given array, with JSON preferred; i.e. return JSON if included, otherwise return the first.
-     * @param contentTypes
-     * @returns  The chosen content type, preferring JSON.
-     */
-    jsonPreferredMime(contentTypes: string[]): string {
-        for (let i = 0; i < contentTypes.length; i++) {
-            if (this.isJsonMime(contentTypes[i])) {
-                return contentTypes[i];
-            }
-        }
-        return contentTypes[0];
+    put<T = any>(options: RequestOptions): AlfrescoApiClientPromise<T> {
+        const url = this.getCallApiUrl(options);
+        return this.buildRequestCall(url, options, this.httpClient.put.bind(this.httpClient));
     }
 
-    /**
-     * Checks whether the given parameter value represents file-like content.
-     * @param param The parameter to check.
-     * @returns <code>true</code> if <code>param</code> represents a file.
-     */
-    isFileParam(param: any): boolean {
-        // Buffer in Node.js
-        if (typeof Buffer === 'function' && (param instanceof Buffer || param.path)) {
-            return true;
-        }
-        // Blob in browser
-        if (typeof Blob === 'function' && param instanceof Blob) {
-            return true;
-        }
-        // File in browser (it seems File object is also instance of Blob, but keep this for safe)
-        if (typeof File === 'function' && param instanceof File) {
-            return true;
-        }
-        // Safari fix
-        if (typeof File === 'object' && param instanceof File) {
-            return true;
-        }
-
-        return false;
+    get<T = any>(options: RequestOptions): AlfrescoApiClientPromise<T> {
+        const url = this.getCallApiUrl(options);
+        return this.buildRequestCall(url, options, this.httpClient.get.bind(this.httpClient));
     }
 
-    /**
-     * Normalizes parameter values:
-     * <ul>
-     * <li>remove nils</li>
-     * <li>keep files and arrays</li>
-     * <li>format to string with `paramToString` for other cases</li>
-     * </ul>
-     * @param {Object.<String, Object>} params The parameters as object properties.
-     * @returns {Object.<String, Object>} normalized parameters.
-     */
-    normalizeParams(params: { [key: string]: any; }): { [key: string]: any; } {
-        const newParams: { [key: string]: any; } = {};
-
-        for (const key in params) {
-            if (params.hasOwnProperty(key) && params[key] !== undefined && params[key] !== null) {
-                const value = params[key];
-                if (this.isFileParam(value) || Array.isArray(value)) {
-                    newParams[key] = value;
-                } else {
-                    newParams[key] = paramToString(value);
-                }
-            }
-        }
-        return newParams;
+    delete<T = void>(options: RequestOptions): AlfrescoApiClientPromise<T> {
+        return this.buildRequestCall<T>(this.basePath, options, this.httpClient.delete.bind(this.httpClient));
     }
 
-    isWithCredentials(): boolean {
+    callApi(
+        path: string,
+        httpMethod: string,
+        pathParams?: any,
+        queryParams?: any,
+        headerParams?: any,
+        formParams?: any,
+        bodyParam?: any,
+        contentTypes?: string[],
+        accepts?: string[],
+        returnType?: any,
+        contextRoot?: string,
+        responseType?: string,
+        url?: string
+    ): AlfrescoApiClientPromise<any> {
+        const callApiUrl = url ?? this.getCallApiUrl({ contextRoot, path, pathParams });
+
+        const options: RequestOptions = {
+            path,
+            httpMethod,
+            pathParams,
+            queryParams,
+            headerParams,
+            formParams,
+            bodyParam,
+            contentTypes,
+            accepts,
+            returnType,
+            contextRoot,
+            responseType,
+            url,
+        };
+
+        return this.buildRequestCall(callApiUrl, options, this.httpClient.request.bind(this.httpClient));
+    }
+
+    callCustomApi(
+        path: string,
+        httpMethod: string,
+        pathParams?: any,
+        queryParams?: any,
+        headerParams?: any,
+        formParams?: any,
+        bodyParam?: any,
+        contentTypes?: string[],
+        accepts?: string[],
+        returnType?: any,
+        contextRoot?: string,
+        responseType?: string
+    ): AlfrescoApiClientPromise<any> {
+        const customApiUrl = AlfrescoApiClient.buildUrl(path, '', pathParams);
+        const options: RequestOptions = {
+            path,
+            httpMethod,
+            pathParams,
+            queryParams,
+            headerParams,
+            formParams,
+            bodyParam,
+            contentTypes,
+            accepts,
+            returnType,
+            contextRoot,
+            responseType,
+        };
+
+        return this.buildRequestCall(customApiUrl, options, this.httpClient.request.bind(this.httpClient));
+    }
+
+    isCsrfEnabled(): boolean {
         if (this.config) {
-            return this.config.withCredentials;
+            return !this.config.disableCsrf;
         } else {
-            return false;
+            return true;
         }
     }
 
-    /**
-     * Applies authentication headers to the request.
-     * @param {Object} request The request object created by a <code>superagent()</code> call.
-     */
-    applyAuthToRequest(request: any) {
-        if (this.authentications) {
-            switch (this.authentications.type) {
-                case 'basic': {
-                    const basicAuth: BasicAuth = this.authentications.basicAuth;
-                    if (basicAuth.username || basicAuth.password) {
-                        request.auth(
-                            basicAuth.username ? encodeURI(basicAuth.username) : '',
-                            basicAuth.password ? encodeURI(basicAuth.password) : ''
-                        );
-                    }
-                    break;
-                }
-                case 'activiti': {
-                    if (this.authentications.basicAuth.ticket) {
-                        request.set({ 'Authorization': this.authentications.basicAuth.ticket });
-                    }
-                    break;
-                }
-                case 'oauth2': {
-                    const oauth2: Oauth2 = this.authentications.oauth2;
-                    if (oauth2.accessToken) {
-                        request.set({ 'Authorization': 'Bearer ' + oauth2.accessToken });
-                    }
-                    break;
-                }
-                default:
-                    throw new Error('Unknown authentication type: ' + this.authentications.type);
-            }
-        }
-    }
-
-    /**
-     * Deserializes an HTTP response body into a value of the specified type.
-     * @param {Object} response A SuperAgent response object.
-     * @param {(String|string[]|Object.<String, Object>|Function)} returnType The type to return. Pass a string for simple types
-     * or the constructor function for a complex type. Pass an array containing the type name to return an array of that type. To
-     * return an object, pass an object with one property whose name is the key type and whose value is the corresponding value type:
-     * all properties on <code>data<code> will be converted to this type.
-     * @returns A value of the specified type.
-     */
-    deserialize(response: any, returnType?: any): any {
-        if (response === null) {
-            return null;
-        }
-
-        let data = response.body;
-
-        if (data === null) {
-            data = response.text;
-        }
-
-        if (returnType) {
-            if (returnType === 'blob' && this.isBrowser()) {
-                data = new Blob([data], { type: response.header['content-type'] });
-            } else if (returnType === 'blob' && !this.isBrowser()) {
-                data = new Buffer.from(data, 'binary');
-            } else if (Array.isArray(data)) {
-                data = data.map((element) => {
-                    return new returnType(element);
-                });
-            } else {
-                data = new returnType(data);
-            }
-        }
-
-        return data;
+    isBpmRequest(): boolean {
+        return this.className === 'ProcessAuth' || this.className === 'ProcessClient';
     }
 
     basicAuth(username: string, password: string): string {
@@ -316,291 +228,37 @@ export class AlfrescoApiClient implements ee.Emitter, HttpClient {
         return 'Basic ' + base64;
     }
 
-    /**
-     * Invokes the REST service using the supplied settings and parameters.
-     *
-     * @param {String} path The base URL to invoke.
-     * @param {String} httpMethod The HTTP method to use.
-     * @param {Object.<String, String>} pathParams A map of path parameters and their values.
-     * @param {Object.<String, Object>} queryParams A map of query parameters and their values.
-     * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
-     * @param {Object.<String, Object>} formParams A map of form parameters and their values.
-     * @param {Object} bodyParam The value to pass as the request body.
-     * @param {String[]} contentTypes An array of request MIME types.
-     * @param {String[]} accepts An array of acceptable response MIME types.
-     * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
-     * @param {(String)} contextRoot alternative contextRoot
-     * @param {(String)} responseType  is an enumerated value that returns the type of the response.
-     *                                  It also lets the author change the response type to one "arraybuffer", "blob", "document",
-     *                                  "json", or "text".
-     *                                   If an empty string is set as the value of responseType, it is assumed as type "text".
-     * constructor for a complex type.   * @returns {Promise} A Promise object.
-     */
-    callApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-            contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string, url?: string): Promise<any> {
-
-        if (!url) {
-            if (contextRoot) {
-                const basePath = `${this.host}/${contextRoot}`;
-                url = this.buildUrlCustomBasePath(basePath, path, pathParams);
-            } else {
-                url = this.buildUrl(path, pathParams);
-            }
-        }
-        return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, returnType, contextRoot, responseType, url);
+    isWithCredentials(): boolean {
+        return !!this.config?.withCredentials;
     }
 
-    request<T = any>(options: RequestOptions): Promise<T> {
-        return this.callApi(
-            options.path,
-            options.httpMethod,
-            options.pathParams,
-            options.queryParams,
-            options.headerParams,
-            options.formParams,
-            options.bodyParam,
-            options.contentTypes,
-            options.accepts,
-            options.returnType,
-            options.contextRoot,
-            options.responseType,
-            options.url
-        );
-    }
+    getAlfTicket(ticket: string): string {
+        const ticketParam = this.isWithCredentials() ? '&ticket=' : '&alf_ticket=';
 
-    post<T = any>(options: RequestOptions): Promise<T> {
-        return this.request<T>({
-            ...options,
-            httpMethod: 'POST',
-            contentTypes: options.contentTypes || this.contentTypes.JSON,
-            accepts: options.accepts || this.contentTypes.JSON
-        });
-    }
-
-    put<T = any>(options: RequestOptions): Promise<T> {
-        return this.request<T>({
-            ...options,
-            httpMethod: 'PUT',
-            contentTypes: options.contentTypes || this.contentTypes.JSON,
-            accepts: options.accepts || this.contentTypes.JSON
-        });
-    }
-
-    get<T = any>(options: RequestOptions): Promise<T> {
-        return this.request<T>({
-            ...options,
-            httpMethod: 'GET',
-            contentTypes: options.contentTypes || this.contentTypes.JSON,
-            accepts: options.accepts || this.contentTypes.JSON
-        });
-    }
-
-    delete<T = void>(options: RequestOptions): Promise<T> {
-        return this.request<T>({
-            ...options,
-            httpMethod: 'DELETE',
-            contentTypes: options.contentTypes || this.contentTypes.JSON,
-            accepts: options.accepts || this.contentTypes.JSON
-        });
-    }
-
-    /**
-     * Invokes the REST service using the supplied settings and parameters but not the basepath.
-     *
-     * @param {String} path The base URL to invoke.
-     * @param {String} httpMethod The HTTP method to use.
-     * @param {Object.<String, String>} pathParams A map of path parameters and their values.
-     * @param {Object.<String, Object>} queryParams A map of query parameters and their values.
-     * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
-     * @param {Object.<String, Object>} formParams A map of form parameters and their values.
-     * @param {Object} bodyParam The value to pass as the request body.
-     * @param {String[]} contentTypes An array of request MIME types.
-     * @param {String[]} accepts An array of acceptable response MIME types.
-     * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
-     * @param {(String)} contextRoot alternative contextRoot
-     * @param {(String)} responseType  is an enumerated value that returns the type of the response.
-     *                                  It also lets the author change the response type to one "arraybuffer", "blob", "document",
-     *                                  "json", or "text".
-     *                                   If an empty string is set as the value of responseType, it is assumed as type "text".
-     * constructor for a complex type.   * @returns {Promise} A Promise object.
-     */
-    callCustomApi(path: string, httpMethod: string, pathParams?: any, queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-                  contentTypes?: string[], accepts?: string[], returnType?: any, contextRoot?: string, responseType?: string): Promise<any> {
-        const url = this.buildUrlCustomBasePath(path, '', pathParams);
-
-        return this.callHostApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, returnType, contextRoot, responseType, url);
-    }
-
-    /**
-     * Invokes the REST service using the supplied settings and parameters.
-     *
-     * @param {String} path The base URL to invoke.
-     * @param {String} httpMethod The HTTP method to use.
-     * @param {Object.<String, String>} pathParams A map of path parameters and their values.
-     * @param {Object.<String, Object>} queryParams A map of query parameters and their values.
-     * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
-     * @param {Object.<String, Object>} formParams A map of form parameters and their values.
-     * @param {Object} bodyParam The value to pass as the request body.
-     * @param {String[]} contentTypes An array of request MIME types.
-     * @param {String[]} accepts An array of acceptable response MIME types.
-     * @param {(String|Array|any)} returnType The required type to return; can be a string for simple types or the
-     * @param {(String)} contextRoot alternative contextRoot
-     * @param {(String)} responseType  is an enumerated value that returns the type of the response.
-     *                                  It also lets the author change the response type to one "arraybuffer", "blob", "document",
-     *                                  "json", or "text".
-     *                                   If an empty string is set as the value of responseType, it is assumed as type "text".
-     * constructor for a complex type.   * @returns {Promise} A Promise object.
-     */
-    callHostApi(
-        // @ts-ignore
-        path: string,
-        httpMethod: string,
-        // @ts-ignore
-        pathParams?: any,
-        queryParams?: any, headerParams?: any, formParams?: any, bodyParam?: any,
-        contentTypes?: string[], accepts?: string[], returnType?: any,
-        // @ts-ignore
-        contextRoot?: string,
-        responseType?: string, url?: string): Promise<any> {
-
-        const eventEmitter: any = ee({});
-
-        let request = this.buildRequest(httpMethod, url, queryParams, headerParams, formParams, bodyParam,
-            contentTypes, accepts, responseType, eventEmitter, returnType);
-
-        if (returnType === 'Binary') {
-            request = request.buffer(true).parse(superagent.parse['application/octet-stream']);
+        if (ticket) {
+            return ticketParam + ticket;
+        } else if (this.config.ticketEcm) {
+            return ticketParam + this.config.ticketEcm;
         }
 
-        const promise: any = new Promise((resolve, reject) => {
-            request.on('abort', () => {
-                eventEmitter.emit('abort');
-            });
-            request.end((error: any, response: Response) => {
-                if (error) {
-
-                    this.emit('error', error);
-                    eventEmitter.emit('error', error);
-
-                    if (error.status === 401) {
-                        this.emit('unauthorized');
-                        eventEmitter.emit('unauthorized');
-                    }
-
-                    if (response && response.text) {
-                        error = error || {};
-                        reject(Object.assign(error, { message: response.text }));
-                    } else {
-                        reject({ error: error });
-                    }
-
-                } else {
-                    if (this.isBpmRequest()) {
-                        if (response.header && response.header.hasOwnProperty('set-cookie')) {
-                            this.authentications.cookie = response.header['set-cookie'][0];
-                        }
-                    }
-                    let data = {};
-                    if (response.type === 'text/html') {
-                        data = this.deserialize(response);
-                    } else {
-                        data = this.deserialize(response, returnType);
-                    }
-
-                    eventEmitter.emit('success', data);
-                    resolve(data);
-                }
-            });
-        });
-
-        promise.on = function () {
-            eventEmitter.on.apply(eventEmitter, arguments);
-            return this;
-        };
-
-        promise.once = function () {
-            eventEmitter.once.apply(eventEmitter, arguments);
-            return this;
-        };
-
-        promise.emit = function () {
-            eventEmitter.emit.apply(eventEmitter, arguments);
-            return this;
-        };
-
-        promise.off = function () {
-            eventEmitter.off.apply(eventEmitter, arguments);
-            return this;
-        };
-
-        promise.abort = function () {
-            request.abort();
-            return this;
-        };
-
-        return promise;
-    }
-
-    isBpmRequest(): boolean {
-        return this.className === 'ProcessAuth' || this.className === 'ProcessClient';
-    }
-
-    isCsrfEnabled(): boolean {
-        if (this.config) {
-            return !this.config.disableCsrf;
-        } else {
-            return true;
-        }
-    }
-
-    setCsrfToken(request: any) {
-        const token = this.createCSRFToken();
-        request.set('X-CSRF-TOKEN', token);
-
-        if (!this.isBrowser()) {
-            request.set('Cookie', 'CSRF-TOKEN=' + token + ';path=/');
-        }
-
-        try {
-            document.cookie = 'CSRF-TOKEN=' + token + ';path=/';
-        } catch (err) {
-            /* continue regardless of error */
-        }
-    }
-
-    isBrowser(): boolean {
-        return (typeof window !== 'undefined' && typeof window.document !== 'undefined');
-    }
-
-    createCSRFToken(a?: any): string {
-        return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + (1e16).toString()).replace(/[01]/g, this.createCSRFToken);
-    }
-
-    progress(event: any, eventEmitter: ee.Emitter) {
-        if (event.lengthComputable) {
-            const percent = Math.round(event.loaded / event.total * 100);
-
-            eventEmitter.emit('progress', {
-                total: event.total,
-                loaded: event.loaded,
-                percent: percent
-            });
-        }
+        return '';
     }
 
     /**
      * Builds full URL by appending the given path to the base URL and replacing path parameter place-holders
      * with parameter values
      */
-    buildUrlCustomBasePath(basePath: string, path: string, pathParams: any): string {
+    private static buildUrl(basePath: string, path: string, pathParams: any): string {
         if (path && path !== '' && !path.match(/^\//)) {
             path = '/' + path;
         }
-        let url = basePath + path;
+        const url = basePath + path;
 
-        url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
+        return AlfrescoApiClient.addParamsToUrl(url, pathParams);
+    }
+
+    private static addParamsToUrl(path: string, pathParams: any) {
+        return path.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
             let value;
             if (pathParams.hasOwnProperty(key)) {
                 value = paramToString(pathParams[key]);
@@ -609,111 +267,115 @@ export class AlfrescoApiClient implements ee.Emitter, HttpClient {
             }
             return encodeURIComponent(value);
         });
-        return url;
     }
 
-    buildRequest(
-        httpMethod: string,
+    private getCallApiUrl({ contextRoot, path, pathParams }: { contextRoot?: string; path: string; pathParams?: any }): string {
+        const basePath = contextRoot ? `${this.host}/${contextRoot}` : this.basePath;
+
+        return AlfrescoApiClient.buildUrl(basePath, path, pathParams);
+    }
+
+    private buildRequestCall<T = any>(
         url: string,
-        queryParams: { [key: string]: any },
-        headerParams: { [key: string]: any },
-        formParams: { [key: string]: any },
-        bodyParam: string | Object,
-        contentTypes: string[],
-        accepts: string[],
-        responseType: string,
-        eventEmitter: ee.Emitter,
-        returnType: string) {
-        const request: any = superagent(httpMethod, url);
+        options: RequestOptions,
+        httpCall: (url: string, options: RequestOptions, security: SecurityOptions, emitters: Emitters) => Promise<T>
+    ): AlfrescoApiClientPromise<T> {
+        const security = this.getSecurityOptions();
+        const emitters = this.getEventEmitters();
+        const httpRequestOptions = this.getRequestOptionsWithAcceptAndContentType(options);
+        const promise = httpCall(url, httpRequestOptions, security, emitters);
 
-        // apply authentications
-        this.applyAuthToRequest(request);
-
-        // set query parameters
-        request.query(this.normalizeParams(queryParams));
-
-        // set header parameters
-        request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
-
-        if (this.isBpmRequest() && this.isCsrfEnabled()) {
-            this.setCsrfToken(request);
-        }
-
-        if (this.isWithCredentials()) {
-            request.withCredentials();
-        }
-
-        // add cookie for activiti
-        if (this.isBpmRequest()) {
-            request.withCredentials();
-            if (this.authentications.cookie) {
-                if (!this.isBrowser()) {
-                    request.set('Cookie', this.authentications.cookie);
-                }
-            }
-        }
-
-        // set request timeout
-        request.timeout(this.timeout);
-
-        const contentType = this.jsonPreferredMime(contentTypes);
-
-        if (contentType && contentType !== 'multipart/form-data') {
-            request.type(contentType);
-        } else if (!request.header['Content-Type'] && contentType !== 'multipart/form-data') {
-            request.type('application/json');
-        }
-
-        if (contentType === 'application/x-www-form-urlencoded') {
-            request.send(this.normalizeParams(formParams)).on('progress', (event: any) => {
-                this.progress(event, eventEmitter);
-            });
-        } else if (contentType === 'multipart/form-data') {
-            const _formParams = this.normalizeParams(formParams);
-            for (const key in _formParams) {
-                if (_formParams.hasOwnProperty(key)) {
-                    if (this.isFileParam(_formParams[key])) {
-                        // file field
-                        request.attach(key, _formParams[key]).on('progress', (event: ProgressEvent) => {// jshint ignore:line
-                            this.progress(event, eventEmitter);
-                        });
-                    } else {
-                        request.field(key, _formParams[key]).on('progress', (event: ProgressEvent) => {// jshint ignore:line
-                            this.progress(event, eventEmitter);
-                        });
-                    }
-                }
-            }
-        } else if (bodyParam) {
-            request.send(bodyParam).on('progress', (event: any) => {
-                this.progress(event, eventEmitter);
-            });
-        }
-
-        const accept = this.jsonPreferredMime(accepts);
-        if (accept) {
-            request.accept(accept);
-        }
-
-        if (returnType === 'blob' || returnType === 'Blob' || responseType === 'blob' || responseType === 'Blob') {
-            request.responseType('blob');
-        } else if (returnType === 'String') {
-            request.responseType('string');
-        }
-
-        return request;
+        return this.addPromiseListeners(promise, emitters.eventEmitter);
     }
 
-    getAlfTicket(ticket: string): string {
-        let alfTicketFragment = '';
-        const ticketParam = this.isWithCredentials() ? '&ticket=' : '&alf_ticket=';
+    private getSecurityOptions(): SecurityOptions {
+        return {
+            isBpmRequest: this.isBpmRequest(),
+            enableCsrf: this.isCsrfEnabled(),
+            withCredentials: this.isWithCredentials(),
+            authentications: this.authentications,
+            defaultHeaders: this.defaultHeaders,
+        };
+    }
 
-        if (ticket) {
-            alfTicketFragment = ticketParam + ticket;
-        } else if (this.config.ticketEcm) {
-            alfTicketFragment = ticketParam + this.config.ticketEcm;
+    private getEventEmitters(): Emitters {
+        const apiClientEmitter = {
+            on: this.on.bind(this),
+            off: this.off.bind(this),
+            once: this.once.bind(this),
+            emit: this.emit.bind(this),
+        };
+
+        return {
+            apiClientEmitter: apiClientEmitter,
+            eventEmitter: ee({}),
+        };
+    }
+
+    private getRequestOptionsWithAcceptAndContentType(options: RequestOptions): RequestOptions {
+        const contentType = AlfrescoApiClient.jsonPreferredMime(options.contentTypes);
+        const accept = AlfrescoApiClient.jsonPreferredMime(options.accepts);
+
+        return {
+            ...options,
+            contentType,
+            accept,
+        };
+    }
+
+    /**
+     * Chooses a content type from the given array, with JSON preferred; i.e. return JSON if included, otherwise return the first.
+     * @param contentTypes
+     * @returns  The chosen content type, preferring JSON.
+     */
+    private static jsonPreferredMime(contentTypes: readonly string[]): string {
+        if (!contentTypes || !contentTypes.length) {
+            return 'application/json';
         }
 
-        return alfTicketFragment;
+        for (let i = 0; i < contentTypes.length; i++) {
+            if (AlfrescoApiClient.isJsonMime(contentTypes[i])) {
+                return contentTypes[i];
+            }
+        }
+        return contentTypes[0];
+    }
+
+    /**
+     * Checks whether the given content type represents JSON.<br>
+     * JSON content type examples:<br>
+     * <ul>
+     * <li>application/json</li>
+     * <li>application/json; charset=UTF8</li>
+     * <li>APPLICATION/JSON</li>
+     * </ul>
+     * @param contentType The MIME content type to check.
+     * @returns <code>true</code> if <code>contentType</code> represents JSON, otherwise <code>false</code>.
+     */
+    private static isJsonMime(contentType: string): boolean {
+        return Boolean(contentType !== null && contentType.match(/^application\/json(;.*)?$/i));
+    }
+
+    private addPromiseListeners<T = any>(promise: Promise<T>, eventEmitter: ee.Emitter): AlfrescoApiClientPromise<T> {
+        const alfrescoPromise: AlfrescoApiClientPromise<T> = Object.assign(promise, {
+            on: function () {
+                eventEmitter.once.apply(eventEmitter, arguments);
+                return this;
+            },
+            once: function () {
+                eventEmitter.once.apply(eventEmitter, arguments);
+                return this;
+            },
+            emit: function () {
+                eventEmitter.emit.apply(eventEmitter, arguments);
+                return this;
+            },
+            off: function () {
+                eventEmitter.off.apply(eventEmitter, arguments);
+                return this;
+            },
+        });
+
+        return alfrescoPromise;
     }
 }

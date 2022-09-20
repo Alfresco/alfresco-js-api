@@ -15,21 +15,20 @@
 * limitations under the License.
 */
 
-import { AlfrescoApiType } from "../to-deprecate/alfresco-api-type";
-import { HttpClient, RequestOptions } from "./http-client.interface";
+import { AlfrescoApiType } from '../to-deprecate/alfresco-api-type';
+import { LegacyHttpClient, RequestOptions } from './http-client.interface';
 
 export abstract class ApiClient {
-
     protected alfrescoApi: AlfrescoApiType;
-    protected httpClient: HttpClient;
+    protected httpClient: LegacyHttpClient;
 
-    get apiClient(): HttpClient {
+    get apiClient(): LegacyHttpClient {
         return this.httpClient;
     }
 
     constructor(legacyApi?: AlfrescoApiType);
-    constructor(httpClient: HttpClient);
-    constructor(httpClient?: AlfrescoApiType & HttpClient) {
+    constructor(httpClient: LegacyHttpClient);
+    constructor(httpClient?: AlfrescoApiType & LegacyHttpClient) {
         if (httpClient?.__type === 'legacy-client') {
             // TODO: remove legacyApi?: AlfrescoApi option and clean up this code. BREAKING CHANGE!
             this.alfrescoApi = httpClient;

@@ -18,13 +18,14 @@
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { AlfrescoApiClient } from './alfrescoApiClient';
 import { Authentication } from './authentication/authentication';
+import { HttpClient } from './api-clients/http-client.interface';
 
 export class ProcessClient extends AlfrescoApiClient {
 
     className = 'ProcessClient';
 
-    constructor(config: AlfrescoApiConfig) {
-        super();
+    constructor(config: AlfrescoApiConfig, httpClient?: HttpClient) {
+        super(undefined, httpClient);
 
         this.setConfig(config);
     }

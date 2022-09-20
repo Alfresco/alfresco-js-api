@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { ProcessAuth } from '../src/authentication/processAuth';
+import { SuperagentHttpClient } from '../src/superagentHttpClient';
 import { BpmAuthMock } from './mockObjects';
 
 describe('Bpm Auth test', () => {
@@ -249,7 +250,7 @@ describe('Bpm Auth test', () => {
             let setCsrfTokenStub: any;
 
             beforeEach(() => {
-                setCsrfTokenStub = sinon.stub(ProcessAuth.prototype, 'setCsrfToken');
+                setCsrfTokenStub = sinon.stub(SuperagentHttpClient.prototype, 'setCsrfToken');
             });
 
             afterEach(() => {
