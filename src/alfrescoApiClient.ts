@@ -359,7 +359,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     private addPromiseListeners<T = any>(promise: Promise<T>, eventEmitter: ee.Emitter): AlfrescoApiClientPromise<T> {
         const alfrescoPromise: AlfrescoApiClientPromise<T> = Object.assign(promise, {
             on: function () {
-                eventEmitter.once.apply(eventEmitter, arguments);
+                eventEmitter.on.apply(eventEmitter, arguments);
                 return this;
             },
             once: function () {

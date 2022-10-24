@@ -26,7 +26,7 @@ import { isBrowser, paramToString } from './utils';
 declare const Blob: any;
 declare const Buffer: any;
 
-const isProgressEvent = (event: ProgressEvent | unknown): event is ProgressEvent => Object.prototype.hasOwnProperty.call(event, 'lengthComputable');
+const isProgressEvent = (event: ProgressEvent | unknown): event is ProgressEvent => (event as ProgressEvent)?.lengthComputable;
 
 export class SuperagentHttpClient implements HttpClient {
     /**
