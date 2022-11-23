@@ -96,6 +96,22 @@ describe('Basic configuration test', () => {
             expect(alfrescoJsApi.processClient.isWithCredentials()).equal(true);
         });
 
+        it('should withCredentials true parameter with hostBpm should be reflected in isBpmLoggedIn', () => {
+            const hostBpm = 'http://127.0.0.1:9999';
+            const authBpmMock = new BpmAuthMock(hostBpm);
+
+            authBpmMock.get200Response();
+
+            const alfrescoJsApi = new AlfrescoApi({
+                hostBpm: hostBpm,
+                contextRootBpm: 'activiti-app',
+                provider: 'BPM',
+                withCredentials: true
+            } as AlfrescoApiConfig);
+
+            expect(alfrescoJsApi.isBpmLoggedIn()).equal(true);
+        });
+
         it('should withCredentials false parameter should be reflected in the clients', () => {
             const config = {
                 hostEcm: 'http://testServer.com:1616',

@@ -466,7 +466,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
             if (this.isOauthConfiguration()) {
                 return this.oauth2Auth.isLoggedIn();
             } else {
-                return this.processAuth.isLoggedIn();
+                return this.config.withCredentials ? true : this.processAuth.isLoggedIn();
             }
         }
         return false;
