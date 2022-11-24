@@ -107,6 +107,28 @@ describe('Basic configuration test', () => {
             expect(alfrescoJsApi.isEcmLoggedIn()).equal(true);
         });
 
+        it('should withCredentials true parameter with hostEcm should be reflected in isLoggedIn', () => {
+            const hostEcm = 'http://127.0.0.1:8080';
+            const alfrescoJsApi = new AlfrescoApi({
+                hostEcm,
+                provider: 'ECM',
+                withCredentials: true
+            } as AlfrescoApiConfig);
+
+            expect(alfrescoJsApi.isLoggedIn()).equal(true);
+        });
+
+        it('should withCredentials true parameter with ALL provider should be reflected in isLoggedIn', () => {
+            const hostEcm = 'http://127.0.0.1:8080';
+            const alfrescoJsApi = new AlfrescoApi({
+                hostEcm,
+                provider: 'ALL',
+                withCredentials: true
+            } as AlfrescoApiConfig);
+
+            expect(alfrescoJsApi.isLoggedIn()).equal(true);
+        });
+
         it('should withCredentials false parameter should be reflected in the clients', () => {
             const config = {
                 hostEcm: 'http://testServer.com:1616',
