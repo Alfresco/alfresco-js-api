@@ -385,4 +385,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             contentTypes, accepts , TagEntry);
     }
 
+    createTags(tags: TagBody[]): Promise<TagEntry[]> {
+        return this.apiClient.post({
+            path: '/tags',
+            bodyParam: tags,
+            contentTypes: ['application/json'],
+            accepts: ['application/json']
+        });
+    }
 }
