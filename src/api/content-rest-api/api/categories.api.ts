@@ -353,7 +353,7 @@ export class CategoriesApi extends BaseApi {
     }
 
     *
-    * @param categoryid The identifier of a category.
+    * @param categoryId The identifier of a category.
     * @param categoryBodyCreate The new category
     * @param opts Optional parameters
     * @param opts.fields A list of field names.
