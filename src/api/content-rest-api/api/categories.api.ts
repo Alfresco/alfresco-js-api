@@ -196,7 +196,7 @@ export class CategoriesApi extends BaseApi {
     * @param categoryId The identifier of a category.
     * @return Promise<{}>
     */
-    deleteCategory(categoryId: string): Promise<any> {
+    deleteCategory(categoryId: string): Promise<void> {
         throwIfNotDefined(categoryId, 'categoryId');
         const postBody: null = null;
 
@@ -226,7 +226,7 @@ export class CategoriesApi extends BaseApi {
     * @param categoryId The identifier of a category.
     * @return Promise<{}>
     */
-     unlinkNodeFromCategory(nodeId: string, categoryId: string): Promise<any> {
+     unlinkNodeFromCategory(nodeId: string, categoryId: string): Promise<void> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(categoryId, 'categoryId');
         const postBody: null = null;
