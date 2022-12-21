@@ -21,6 +21,8 @@ export * from './activities.api';
 import { ActivitiesApi } from './activities.api';
 export * from './audit.api';
 import { AuditApi } from './audit.api';
+export * from './categories.api';
+import { CategoriesApi } from './categories.api';
 export * from './comments.api';
 import { CommentsApi } from './comments.api';
 export * from './downloads.api';
@@ -59,6 +61,7 @@ export const APIS = {
     ActionsApi: ActionsApi,
     ActivitiesApi: ActivitiesApi,
     AuditApi: AuditApi,
+    CategoriesApi: CategoriesApi,
     CommentsApi: CommentsApi,
     DownloadsApi: DownloadsApi,
     FavoritesApi: FavoritesApi,
