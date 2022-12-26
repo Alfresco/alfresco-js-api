@@ -23,6 +23,10 @@ import { CategoryEntry } from '../model/categoryEntry';
 import { CategoryBody } from '../model/categoryBody';
 import { CategoryLinkBody } from '../model/CategoryLinkBody';
 
+/**
+* Categories service.
+* @module CategoriesApi
+*/
 export class CategoriesApi extends BaseApi {
     /**
         * List of subcategories within category
