@@ -299,7 +299,7 @@ export class CategoriesApi extends BaseApi {
         const accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/category/{categoryId}', 'PUT',
+            '/categories/{categoryId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , CategoryEntry);
     }
