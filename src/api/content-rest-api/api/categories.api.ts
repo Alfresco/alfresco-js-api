@@ -23,6 +23,10 @@ import { CategoryEntry } from '../model/categoryEntry';
 import { CategoryBody } from '../model/categoryBody';
 import { CategoryLinkBody } from '../model/CategoryLinkBody';
 
+/**
+* Categories service.
+* @module CategoriesApi
+*/
 export class CategoriesApi extends BaseApi {
     /**
         * List of subcategories within category
@@ -295,7 +299,7 @@ export class CategoriesApi extends BaseApi {
         const accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/category/{categoryId}', 'PUT',
+            '/categories/{categoryId}', 'PUT',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , CategoryEntry);
     }
