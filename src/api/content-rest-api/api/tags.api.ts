@@ -385,12 +385,20 @@ parameter are returned in addition to those specified in the **fields** paramete
             contentTypes, accepts , TagEntry);
     }
 
+    /**
+     * Create tags
+     *
+     * Create specified by **tags** list of tags.
+     *
+     * @param tags List of tags to create.
+     *
+     * @return Promise<TagEntry[]>
+     */
     createTags(tags: TagBody[]): Promise<TagEntry[]> {
-        return this.apiClient.post({
-            path: '/tags',
-            bodyParam: tags,
-            contentTypes: ['application/json'],
-            accepts: ['application/json']
-        });
+        throwIfNotDefined(tags, 'tags');
+        return this.apiClient.callApi(
+            '/tags', 'POST',
+            {}, {}, {}, {}, tags,
+            ['application/json'], ['application/json']);
     }
 }
