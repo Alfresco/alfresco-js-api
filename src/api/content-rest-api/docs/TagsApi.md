@@ -10,6 +10,7 @@ Method | HTTP request                         | Description
 [**listTags**](TagsApi.md#listTags) | **GET** /tags                        | List tags
 [**listTagsForNode**](TagsApi.md#listTagsForNode) | **GET** /nodes/{nodeId}/tags         | List tags for a node
 [**updateTag**](TagsApi.md#updateTag) | **PUT** /tags/{tagId}                | Update a tag
+[**deleteTag**](TagsApi.md#updateTag) | **DELETE** /tags/{tagId} | Completely deletes a tag
 [**createTags**](TagsApi.md#createTags) | **POST** /tags                  | Create list of tags
 
 
@@ -484,3 +485,38 @@ Name | Type                        | Description             | Notes
 
 [**TagEntry[]**](TagEntry.md)
 
+<a name="deleteTag"></a>
+## deleteTag
+> deleteTag(tagId)
+
+Deletes the tag with **tagId**. This will cause the tag to be removed from all nodes.
+You must have admin rights to delete a tag.
+
+### Example
+
+```javascript
+import { AlfrescoApi, TagsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const tagsApi = new TagsApi(alfrescoApi);
+
+
+tagsApi.deleteTag(tagId).then(() => {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type                   | Description              | Notes
+------------- |------------------------|--------------------------| -------------
+**tagId** | **string** | The identifier of a tag. |
+
+### Return type
+
+null (empty response body)
