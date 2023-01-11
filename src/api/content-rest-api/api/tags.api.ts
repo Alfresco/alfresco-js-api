@@ -389,7 +389,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 /**
     * Delete a tag
     *
-    * Completely deletes a tag by **tagId**.
+    * Deletes a tag by **tagId**. This will cause the tag to be removed from all nodes.
     *
     * @param tagId The identifier of a tag.
     * @return Promise<{}>
@@ -419,7 +419,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.apiClient.callApi(
             '/tags/{tagId}', 'DELETE',
             pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+            contentTypes, accepts);
     }
 
     /**

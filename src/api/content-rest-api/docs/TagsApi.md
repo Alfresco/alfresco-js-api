@@ -490,6 +490,7 @@ Name | Type                        | Description             | Notes
 > deleteTag(tagId)
 
 Deletes the tag with **tagId**. This will cause the tag to be removed from all nodes.
+
 You must have admin rights to delete a tag.
 
 ### Example
@@ -513,9 +514,9 @@ tagsApi.deleteTag(tagId).then(() => {
 
 ### Parameters
 
-Name | Type                   | Description              | Notes
-------------- |------------------------|--------------------------| -------------
-**tagId** | **string** | The identifier of a tag. |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**tagId** | **string**| The identifier of a tag. |
 
 ### Return type
 
