@@ -257,7 +257,8 @@ parameter are returned in addition to those specified in the **fields** paramete
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            where: opts?.name ? `(name='${opts.name}')` : undefined
         };
 
         const headerParams = {

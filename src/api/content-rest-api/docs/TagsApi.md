@@ -235,6 +235,7 @@ List tags
 Gets a list of tags in this repository.
 
 You can use the **include** parameter to return additional **values** information.
+You can also use **name** parameter to return tags only for specified name. 
 
 
 ### Example
