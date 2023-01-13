@@ -136,6 +136,7 @@ TagsApi | [**getTag**](docs/TagsApi.md#getTag) | **GET** /tags/{tagId} | Get a t
 TagsApi | [**listTags**](docs/TagsApi.md#listTags) | **GET** /tags | List tags
 TagsApi | [**listTagsForNode**](docs/TagsApi.md#listTagsForNode) | **GET** /nodes/{nodeId}/tags | List tags for a node
 TagsApi | [**updateTag**](docs/TagsApi.md#updateTag) | **PUT** /tags/{tagId} | Update a tag
+TagsApi | [**createTags**](docs/TagsApi.md#createTags) | **POST** /tags/ | Create specified by **tags** list of tags.
 TrashcanApi | [**deleteDeletedNode**](docs/TrashcanApi.md#deleteDeletedNode) | **DELETE** /deleted-nodes/{nodeId} | Permanently delete a deleted node
 TrashcanApi | [**getArchivedNodeRendition**](docs/TrashcanApi.md#getArchivedNodeRendition) | **GET** /deleted-nodes/{nodeId}/renditions/{renditionId} | Get rendition information for a deleted node
 TrashcanApi | [**getArchivedNodeRenditionContent**](docs/TrashcanApi.md#getArchivedNodeRenditionContent) | **GET** /deleted-nodes/{nodeId}/renditions/{renditionId}/content | Get rendition content of a deleted node
