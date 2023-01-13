@@ -228,6 +228,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  (default to 100)
     * @param opts.fields A list of field names.
+    * @param opts.name Name for which tag is returned.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
