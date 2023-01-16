@@ -2,14 +2,15 @@
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createTagForNode**](TagsApi.md#createTagForNode) | **POST** /nodes/{nodeId}/tags | Create a tag for a node
+Method | HTTP request                         | Description
+------------- |--------------------------------------| -------------
+[**createTagForNode**](TagsApi.md#createTagForNode) | **POST** /nodes/{nodeId}/tags        | Create a tag for a node
 [**deleteTagFromNode**](TagsApi.md#deleteTagFromNode) | **DELETE** /nodes/{nodeId}/tags/{tagId} | Delete a tag from a node
-[**getTag**](TagsApi.md#getTag) | **GET** /tags/{tagId} | Get a tag
-[**listTags**](TagsApi.md#listTags) | **GET** /tags | List tags
-[**listTagsForNode**](TagsApi.md#listTagsForNode) | **GET** /nodes/{nodeId}/tags | List tags for a node
-[**updateTag**](TagsApi.md#updateTag) | **PUT** /tags/{tagId} | Update a tag
+[**getTag**](TagsApi.md#getTag) | **GET** /tags/{tagId}                | Get a tag
+[**listTags**](TagsApi.md#listTags) | **GET** /tags                        | List tags
+[**listTagsForNode**](TagsApi.md#listTagsForNode) | **GET** /nodes/{nodeId}/tags         | List tags for a node
+[**updateTag**](TagsApi.md#updateTag) | **PUT** /tags/{tagId}                | Update a tag
+[**createTags**](TagsApi.md#createTags) | **POST** /tags                  | Create list of tags
 
 
 <a name="createTagForNode"></a>
@@ -234,6 +235,7 @@ List tags
 Gets a list of tags in this repository.
 
 You can use the **include** parameter to return additional **values** information.
+You can also use **name** parameter to return tags only for specified name. 
 
 
 ### Example
@@ -446,4 +448,39 @@ parameter are returned in addition to those specified in the **fields** paramete
 ### Return type
 
 [**TagEntry**](TagEntry.md)
+
+<a name="createTags"></a>
+## createTags
+> TagEntry[] createTags(tags: TagBody[])
+
+Create specified by **tags** list of tags.
+
+### Example
+
+```javascript
+import { AlfrescoApi, TagsApi} from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const tagsApi = new TagsApi(alfrescoApi);
+
+tagsApi.createTags(tags).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type                        | Description             | Notes
+------------- |-----------------------------|-------------------------| -------------
+ **tags** | [**TagBody[]**](TagBody.md) | List of tags to create. |
+
+
+### Return type
+
+[**TagEntry[]**](TagEntry.md)
 

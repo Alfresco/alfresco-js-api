@@ -228,6 +228,7 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  (default to 100)
     * @param opts.fields A list of field names.
+    * @param opts.name Name for which tag is returned.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -257,7 +258,8 @@ parameter are returned in addition to those specified in the **fields** paramete
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv')
+            'include': buildCollectionParam(opts['include'], 'csv'),
+            where: opts?.name ? `(name='${opts.name}')` : undefined
         };
 
         const headerParams = {
@@ -385,4 +387,20 @@ parameter are returned in addition to those specified in the **fields** paramete
             contentTypes, accepts , TagEntry);
     }
 
+    /**
+     * Create tags
+     *
+     * Create specified by **tags** list of tags.
+     *
+     * @param tags List of tags to create.
+     *
+     * @return Promise<TagEntry[]>
+     */
+    createTags(tags: TagBody[]): Promise<TagEntry[]> {
+        throwIfNotDefined(tags, 'tags');
+        return this.apiClient.callApi(
+            '/tags', 'POST',
+            {}, {}, {}, {}, tags,
+            ['application/json'], ['application/json']);
+    }
 }
