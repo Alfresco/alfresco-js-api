@@ -62,42 +62,6 @@ export class ProcessInstanceVariablesApi extends BaseApi {
             contentTypes, accepts);
     }
     /**
-        * Create variables
-        *
-        *
-        *
-        * @param processInstanceId Process instance ID
-        * @param restVariables restVariables
-        * @return Promise<RestVariable>
-        */
-    createProcessInstanceVariables(processInstanceId: string, restVariables: RestVariable[]): Promise<RestVariable[]> {
-        throwIfNotDefined(processInstanceId, 'processInstanceId');
-        throwIfNotDefined(restVariables, 'restVariables');
-
-        let postBody = restVariables;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/variables', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
-    }
-    /**
         * Delete a variable
         *
         *
