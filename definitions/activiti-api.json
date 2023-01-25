@@ -7411,58 +7411,6 @@
                     }
                 ]
             },
-            "post": {
-                "tags": [
-                    "process-instance-variables"
-                ],
-                "summary": "Create variables",
-                "operationId": "createProcessInstanceVariables",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "processInstanceId",
-                        "in": "path",
-                        "description": "Process instance ID",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "restVariables",
-                        "description": "restVariables",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/RestVariable"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/RestVariable"
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "basicAuth": [
-                            "global"
-                        ]
-                    }
-                ]
-            },
             "put": {
                 "tags": [
                     "process-instance-variables"

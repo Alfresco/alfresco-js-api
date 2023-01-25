@@ -54,34 +54,6 @@ describe('Activiti Process Instance Variables Api', () => {
 
     });
 
-    describe('create variables', () => {
-
-        it('should return all variables for a process instance', (done) => {
-            const processInstanceId = '111';
-            variablesMock.addPostProcessInstanceVariables200Response(processInstanceId);
-
-            alfrescoJsApi.activiti.processInstanceVariablesApi.createProcessInstanceVariables(processInstanceId, []).then((data) => {
-                expect(data.length).equal(2);
-                done();
-            });
-        });
-
-        it('should emit an error when API returns an error response', (done) => {
-            const processInstanceId = '111';
-            variablesMock.addPostProcessInstanceVariables500Response(processInstanceId);
-
-            alfrescoJsApi.activiti.processInstanceVariablesApi.createProcessInstanceVariables(processInstanceId, []).then(
-                NOOP,
-                (error) => {
-                    expect(error.status).equal(500);
-                    expect(error.message).equal('{"messageKey":"UNKNOWN","message":"Unknown error"}');
-                    done();
-                }
-            );
-        });
-
-    });
-
     describe('create or update variables', () => {
 
         it('should return all variables for a process instance', (done) => {
