@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
-import { TagsApi } from '../../src/api/content-rest-api';
+import { TagBody, TagEntry, TagsApi } from '../../src/api/content-rest-api';
 import { EcmAuthMock, TagMock } from '../../test/mockObjects';
 
 describe('Tags', () => {
@@ -48,5 +48,21 @@ describe('Tags', () => {
                 done();
             }
         );
+    });
+
+    describe('createTags', () => {
+        it('should return created tags', (done: Mocha.Done) => {
+            tagMock.createTags201Response();
+            tagsApi.createTags([new TagBody(), new TagBody()]).then((tags: TagEntry[]) => {
+                expect(tags).length(2);
+                expect(tags[0].entry.tag).equal('tag-test-1');
+                expect(tags[1].entry.tag).equal('tag-test-2');
+                done();
+            });
+        });
+
+        it('should throw error if tags are not passed', () => {
+            expect(tagsApi.createTags.bind(tagsApi, null)).throw();
+        });
     });
 });

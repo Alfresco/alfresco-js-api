@@ -43,4 +43,20 @@ export class TagMock extends BaseMock {
                 },
             });
     }
+
+    createTags201Response(): void {
+        nock(this.host, { encodedQueryParams: true })
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/tags')
+            .reply(201, [{
+                entry: {
+                    tag: 'tag-test-1',
+                    id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6',
+                },
+            }, {
+                entry: {
+                    tag: 'tag-test-2',
+                    id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6',
+                },
+            }]);
+    }
 }
