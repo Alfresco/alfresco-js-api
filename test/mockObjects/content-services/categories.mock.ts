@@ -101,7 +101,7 @@ export class CategoriesMock extends BaseMock {
                             entry: {
                                 id: 'testId1',
                                 name: 'testName1',
-                                parentId: '80a94ac8-3ece-47ad-864e-5d939424c47c',
+                                parentId: 'testNode',
                                 hasChildren: true,
                                 count: 0
                             },

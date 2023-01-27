@@ -5,7 +5,7 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfres
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getSubcategories**](CategoriesApi.md#getSubcategories) | **GET** /categories/{categoryId}/subcategories | List of subcategories within category
-[**getCategory**](CategoriesApi.md#getCategory) | **GET** /category/{categoryId} | Get a category
+[**getCategory**](CategoriesApi.md#getCategory) | **GET** /categories/{categoryId} | Get a category
 [**getCategoryLinksForNode**](CategoriesApi.md#getCategoryLinksForNode) | **GET** /nodes/{nodeId}/category-links | List of categories that node is assigned to
 [**deleteCategory**](CategoriesApi.md#deleteCategory) | **DELETE** /categories/{categoryId} | Deletes the category
 [**unlinkNodeFromCategory**](CategoriesApi.md#unlinkNodeFromCategory) | **DELETE** /nodes/{nodeId}/category-links/{categoryId} | Unassign a node from category
