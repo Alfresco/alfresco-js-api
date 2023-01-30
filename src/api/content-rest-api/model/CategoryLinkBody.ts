@@ -16,7 +16,7 @@
 */
 
 export class CategoryLinkBody {
-    id: string;
+    categoryId: string;
 
     constructor(input?: any) {
         if (input) {

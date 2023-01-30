@@ -136,7 +136,7 @@ export class CategoriesApi extends BaseApi {
         const accepts = ['application/json'];
 
         return this.apiClient.callApi(
-            '/category/{categoryId}', 'GET',
+            '/categories/{categoryId}', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , CategoryEntry);
     }
