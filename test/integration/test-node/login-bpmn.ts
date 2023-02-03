@@ -17,7 +17,7 @@
 
 import { AlfrescoApi } from '@alfresco/js-api';
 
-let program = require('commander');
+const program = require('commander');
 
 async function main() {
 
@@ -28,7 +28,7 @@ async function main() {
         .option('-u, --username [type]', 'username ')
         .parse(process.argv);
 
-    let alfrescoApi: AlfrescoApi = new AlfrescoApi();
+    const alfrescoApi = new AlfrescoApi();
 
     alfrescoApi.setConfig({
         provider: 'BPM',

@@ -10,7 +10,7 @@ describe('Node Security Mark API test', () => {
     let authResponseMock: EcmAuthMock;
     let nodeSecurityMarksMock: NodeSecurityMarksApiMock;
     let nodeSecurityMarksApi: NodeSecurityMarksApi;
-    let nodeSecurityMarkBody: Array<NodeSecurityMarkBody> = [
+    const nodeSecurityMarkBody: Array<NodeSecurityMarkBody> = [
         {
             groupId: 'securityGroupId1',
             op: 'ADD',
@@ -36,7 +36,7 @@ describe('Node Security Mark API test', () => {
     });
 
     it('add or remove security marks on a node', async () => {
-        let nodeId = 'h3bdk2knw2kn';
+        const nodeId = 'h3bdk2knw2kn';
         nodeSecurityMarksMock.post200manageSecurityMarkOnNode(nodeId);
         await nodeSecurityMarksApi.manageSecurityMarksOnNode(nodeId, nodeSecurityMarkBody).then((data) => {
             expect(data.list.entries[0].entry.groupId).equal('securityGroupId1');
@@ -46,8 +46,8 @@ describe('Node Security Mark API test', () => {
     });
 
     it('get security marks on a node', async () => {
-        let nodeId = 'h3bdk2knw2kn';
-        let DEFAULT_INCLUDE = 'inUse';
+        const nodeId = 'h3bdk2knw2kn';
+        const DEFAULT_INCLUDE = 'inUse';
         nodeSecurityMarksMock.get200SecurityMarkOnNode(nodeId);
         await nodeSecurityMarksApi.getSecurityMarksOnNode(nodeId, {DEFAULT_INCLUDE}).then((data) => {
             expect(data.list.entries[1].entry.groupId).equal('securityGroupId2');
