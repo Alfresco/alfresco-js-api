@@ -30,9 +30,9 @@ jobs:
                 fetch-depth: 2
 
             - name: node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
-                node-version: '14'
+                node-version: 16
                 cache: 'npm'
             - run: npm ci
 
@@ -55,9 +55,9 @@ jobs:
                 fetch-depth: 2
 
             - name: node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
-                node-version: '14'
+                node-version: 16
                 cache: 'npm'
             - run: npm ci
 
@@ -92,9 +92,9 @@ jobs:
                 fetch-depth: 2
 
             - name: node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
-                node-version: '14'
+                node-version: 16
                 cache: 'npm'
             - run: npm ci
 
