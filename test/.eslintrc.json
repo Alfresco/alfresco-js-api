@@ -1,0 +1,12 @@
+{
+    "extends": ["../.eslintrc.json"],
+    "overrides": [
+        {
+            "files": ["*.ts"],
+            "rules": {
+                "prefer-const": "error",
+                "@typescript-eslint/explicit-module-boundary-types": "error"
+            }
+        }
+    ]
+}

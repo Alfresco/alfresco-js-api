@@ -6,7 +6,7 @@ export class AuthorityClearanceMock extends BaseMock {
         super(host);
     }
 
-    get200AuthorityClearanceForAuthority(authorityId: string) {
+    get200AuthorityClearanceForAuthority(authorityId: string): void {
         nock(this.host, { encodedQueryParams: true })
             .get('/alfresco/api/-default-/public/gs/versions/1/cleared-authorities/' + authorityId + '/clearing-marks?skipCount=0&maxItems=100')
             .reply(200, {
@@ -80,7 +80,7 @@ export class AuthorityClearanceMock extends BaseMock {
             });
     }
 
-    post200AuthorityClearanceWithSingleItem(authorityId: string) {
+    post200AuthorityClearanceWithSingleItem(authorityId: string): void {
         nock(this.host, { encodedQueryParams: true })
             .post('/alfresco/api/-default-/public/gs/versions/1/cleared-authorities/' + authorityId + '/clearing-marks')
             .reply(200, {
@@ -92,7 +92,7 @@ export class AuthorityClearanceMock extends BaseMock {
             });
     }
 
-    post200AuthorityClearanceWithList(authorityId: string) {
+    post200AuthorityClearanceWithList(authorityId: string): void {
         nock(this.host, { encodedQueryParams: true })
             .post('/alfresco/api/-default-/public/gs/versions/1/cleared-authorities/' + authorityId + '/clearing-marks')
             .reply(200, {

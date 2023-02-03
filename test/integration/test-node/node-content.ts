@@ -22,7 +22,7 @@ import { SitesApi } from '../../../src/api/content-rest-api/api/sites.api';
 import { NodesApi } from '../../../src/api/content-rest-api/api/nodes.api';
 import { UploadApi } from '../../../src/api/content-custom-api';
 
-let program = require('commander');
+const program = require('commander');
 
 async function main() {
 

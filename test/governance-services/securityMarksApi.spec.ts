@@ -17,16 +17,16 @@ describe('Security Mark API test', () => {
     let securityMarksApi: SecurityMarksApi;
     let securityGroupId: string;
     let securityMarkId: string;
-    let securityMarksBodySingle: SecurityMarksBody =[
+    const securityMarksBodySingle: SecurityMarksBody = [
         {
             name: 'SecurityMarkTest',
         }
     ];
-    let securityGroupBody: SecurityGroupBody = {
+    const securityGroupBody: SecurityGroupBody = {
         groupName: 'Alfresco',
         groupType: 'HIERARCHICAL',
     };
-    let securityMarksBody: SecurityMarksBody = [
+    const securityMarksBody: SecurityMarksBody = [
         {
             name: 'SecurityMark3',
         },
@@ -95,7 +95,7 @@ describe('Security Mark API test', () => {
     });
 
     it('update Security Mark', async () => {
-        let updatedSecurityMarkBody: SecurityMarkBody = {
+        const updatedSecurityMarkBody: SecurityMarkBody = {
             name: 'AlfrescoSecurityMark',
         };
         securityMarkApiMock.put200UpdateSecurityMarkResponse(securityGroupId, securityMarkId);

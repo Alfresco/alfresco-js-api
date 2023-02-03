@@ -18,7 +18,7 @@ describe('Authority Clearance API test', () => {
     let authResponseMock: EcmAuthMock;
     let authorityClearanceMock: AuthorityClearanceMock;
     let authorityClearanceApi: AuthorityClearanceApi;
-    let nodeSecurityMarkBodyList: Array<NodeSecurityMarkBody> = [
+    const nodeSecurityMarkBodyList: Array<NodeSecurityMarkBody> = [
         {
             groupId: 'securityGroupFruits',
             op: 'ADD',
@@ -30,7 +30,7 @@ describe('Authority Clearance API test', () => {
             id: 'fruitMarkId1',
         }
     ];
-    let nodeSecurityMarkBodySingle: Array<NodeSecurityMarkBody> = [
+    const nodeSecurityMarkBodySingle: Array<NodeSecurityMarkBody> = [
         {
             groupId: 'securityGroupFruits',
             op: 'ADD',
@@ -51,7 +51,7 @@ describe('Authority Clearance API test', () => {
     });
 
     it('get authority clearances for an authority', async () => {
-        let nodeId = 'testAuthorityId';
+        const nodeId = 'testAuthorityId';
         authorityClearanceMock.get200AuthorityClearanceForAuthority(nodeId);
         await authorityClearanceApi.getAuthorityClearanceForAuthority(nodeId, DEFAULT_OPTS).then((response: AuthorityClearanceGroupPaging) => {
             expect(response.list.entries[0].entry.id).equal('securityGroupFruits');
@@ -62,10 +62,10 @@ describe('Authority Clearance API test', () => {
     });
 
     it('add single security marks to an authority', async () => {
-        let nodeId = 'testAuthorityId';
+        const nodeId = 'testAuthorityId';
         authorityClearanceMock.post200AuthorityClearanceWithSingleItem(nodeId);
         await authorityClearanceApi.updateAuthorityClearance(nodeId, nodeSecurityMarkBodySingle).then((data: SecurityMarkEntry | SecurityMarkPaging) => {
-            let response: SecurityMarkEntry = data as SecurityMarkEntry;
+            const response = data as SecurityMarkEntry;
             expect(response.entry.id).equal('fruitMarkId1');
             expect(response.entry.name).equal('APPLES');
             expect(response.entry.groupId).equal('securityGroupFruits');
@@ -73,10 +73,10 @@ describe('Authority Clearance API test', () => {
     });
 
     it('add multiple security marks on an authority', async () => {
-        let nodeId = 'testAuthorityId';
+        const nodeId = 'testAuthorityId';
         authorityClearanceMock.post200AuthorityClearanceWithList(nodeId);
         await authorityClearanceApi.updateAuthorityClearance(nodeId, nodeSecurityMarkBodyList).then((data: SecurityMarkEntry | SecurityMarkPaging) => {
-            let response: SecurityMarkPaging = data as SecurityMarkPaging;
+            const response: SecurityMarkPaging = data as SecurityMarkPaging;
             expect(response.list.entries[0].entry.id).equal('fruitMarkId1');
             expect(response.list.entries[0].entry.name).equal('APPLES');
             expect(response.list.entries[0].entry.groupId).equal('securityGroupFruits');

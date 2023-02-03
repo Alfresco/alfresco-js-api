@@ -10,7 +10,7 @@ describe('Security Group API test', () => {
     let authResponseMock: EcmAuthMock;
     let securityGroupMock: SecurityGroupApiMock
     let securityGroupApi: SecurityGroupsApi;
-    let securityGroupBody: SecurityGroupBody = {
+    const securityGroupBody: SecurityGroupBody = {
         "groupName": "Alfresco",
         "groupType": "HIERARCHICAL"
     }
@@ -59,7 +59,7 @@ describe('Security Group API test', () => {
 
     it('update Security Group', async () => {
         securityGroupMock.updateSecurityGroup200Response(securityGroupId);
-        let updatedSecurityGroupBody: SecurityGroupBody = {
+        const updatedSecurityGroupBody: SecurityGroupBody = {
             "groupName": "Nasa",
         }
         await securityGroupApi.updateSecurityGroup(securityGroupId,updatedSecurityGroupBody,['inUse'])

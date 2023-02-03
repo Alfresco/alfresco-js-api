@@ -17,7 +17,7 @@
 
 import { AlfrescoApi, DiscoveryApi } from '@alfresco/js-api';
 
-let program = require('commander');
+const program = require('commander');
 
 async function main() {
 
@@ -28,7 +28,7 @@ async function main() {
         .option('-u, --username [type]', 'username ')
         .parse(process.argv);
 
-    let alfrescoApi: AlfrescoApi = new AlfrescoApi();
+    const alfrescoApi = new AlfrescoApi();
 
     alfrescoApi.setConfig({
         provider: 'ECM',
@@ -38,7 +38,7 @@ async function main() {
     });
 
     alfrescoApi.login(program.username, program.password).then(() => {
-        let discovery = new DiscoveryApi(alfrescoApi);
+        const discovery = new DiscoveryApi(alfrescoApi);
         discovery.getRepositoryInformation().then(
             (ecmVers) => {
                 console.log('ecmVers' + JSON.stringify(ecmVers));

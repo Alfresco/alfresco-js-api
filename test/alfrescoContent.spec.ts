@@ -77,7 +77,7 @@ describe('AlfrescoContent', () => {
     });
 
     it('outputs content url', () => {
-        let contentUrl = contentApi.getContentUrl(nodeId);
+        const contentUrl = contentApi.getContentUrl(nodeId);
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId +
             '/content?attachment=false' +
@@ -85,7 +85,7 @@ describe('AlfrescoContent', () => {
     });
 
     it('outputs content url as attachment', () => {
-        let contentUrl = contentApi.getContentUrl(nodeId, true);
+        const contentUrl = contentApi.getContentUrl(nodeId, true);
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId +
             '/content?attachment=true' +
@@ -93,7 +93,7 @@ describe('AlfrescoContent', () => {
     });
 
     it('outputs content url with custom ticket', () => {
-        let contentUrl = contentApi.getContentUrl(nodeId, true, 'custom_ticket');
+        const contentUrl = contentApi.getContentUrl(nodeId, true, 'custom_ticket');
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId +
             '/content?attachment=true' +
@@ -102,7 +102,7 @@ describe('AlfrescoContent', () => {
 
     it('outputs rendition url', () => {
         const encoding = 'pdf';
-        let contentUrl = contentApi.getRenditionUrl(nodeId, encoding);
+        const contentUrl = contentApi.getRenditionUrl(nodeId, encoding);
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId +
             '/renditions/' + encoding +
@@ -112,7 +112,7 @@ describe('AlfrescoContent', () => {
 
     it('outputs rendition url as attachment', () => {
         const encoding = 'pdf';
-        let contentUrl = contentApi.getRenditionUrl(nodeId, encoding, true);
+        const contentUrl = contentApi.getRenditionUrl(nodeId, encoding, true);
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId +
             '/renditions/' + encoding +
@@ -122,7 +122,7 @@ describe('AlfrescoContent', () => {
 
     it('outputs rendition url with custom ticket', () => {
         const encoding = 'pdf';
-        let contentUrl = contentApi.getRenditionUrl(nodeId, encoding, true, 'custom_ticket');
+        const contentUrl = contentApi.getRenditionUrl(nodeId, encoding, true, 'custom_ticket');
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId +
                                            '/renditions/' + encoding +
@@ -132,7 +132,7 @@ describe('AlfrescoContent', () => {
 
     it('outputs version rendition url', () => {
         const encoding = 'pdf';
-        let contentUrl = contentApi.getVersionRenditionUrl(nodeId, versionId, encoding);
+        const contentUrl = contentApi.getVersionRenditionUrl(nodeId, versionId, encoding);
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
                                            '/renditions/' + encoding +
@@ -142,7 +142,7 @@ describe('AlfrescoContent', () => {
 
     it('outputs version rendition url as attachment', () => {
         const encoding = 'pdf';
-        let contentUrl = contentApi.getVersionRenditionUrl(nodeId, versionId, encoding, true);
+        const contentUrl = contentApi.getVersionRenditionUrl(nodeId, versionId, encoding, true);
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
                                            '/renditions/' + encoding +
@@ -152,7 +152,7 @@ describe('AlfrescoContent', () => {
 
     it('outputs version rendition url with custom ticket', () => {
         const encoding = 'pdf';
-        let contentUrl = contentApi.getVersionRenditionUrl(nodeId, versionId, encoding, true, 'custom_ticket');
+        const contentUrl = contentApi.getVersionRenditionUrl(nodeId, versionId, encoding, true, 'custom_ticket');
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
                                            '/renditions/' + encoding +
@@ -161,7 +161,7 @@ describe('AlfrescoContent', () => {
     });
 
     it('outputs version content url', () => {
-        let contentUrl = contentApi.getVersionContentUrl(nodeId, versionId);
+        const contentUrl = contentApi.getVersionContentUrl(nodeId, versionId);
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
                                            '/content?attachment=false' +
@@ -169,7 +169,7 @@ describe('AlfrescoContent', () => {
     });
 
     it('outputs version content url as attachment', () => {
-        let contentUrl = contentApi.getVersionContentUrl(nodeId, versionId, true);
+        const contentUrl = contentApi.getVersionContentUrl(nodeId, versionId, true);
 
         expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
                                            '/content?attachment=true' +
@@ -177,7 +177,7 @@ describe('AlfrescoContent', () => {
     });
 
     it('outputs version content url with custom ticket', () => {
-        let contentUrl = contentApi.getVersionContentUrl(nodeId, versionId, true, 'custom_ticket');
+        const contentUrl = contentApi.getVersionContentUrl(nodeId, versionId, true, 'custom_ticket');
         expect(contentUrl).to.be.equal(nodesUrl + nodeId + '/versions/' + versionId +
                                            '/content?attachment=true' +
                                            '&alf_ticket=custom_ticket');
