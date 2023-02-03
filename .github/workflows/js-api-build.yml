@@ -67,7 +67,7 @@ jobs:
                 npm run test || exit 1
                 npm run coverage
 
-            - name: Perfomance
+            - name: Performance
               shell: bash
               run: ./scripts/test-performance.sh || exit 1
 
