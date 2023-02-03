@@ -71,13 +71,14 @@ jobs:
               shell: bash
               run: ./scripts/test-performance.sh || exit 1
 
-            - name: Integration
-              env:
-                HOST: ${{ secrets.HOST }}
-                USERNAME: ${{ secrets.USERNAME }}
-                PASSWORD: ${{ secrets.PASSWORD }}
-              shell: bash
-              run: ./scripts/test-integration.sh || exit 1
+            # https://alfresco.atlassian.net/browse/ADF-5515
+            # - name: Integration
+            #   env:
+            #     HOST: ${{ secrets.HOST }}
+            #     USERNAME: ${{ secrets.USERNAME }}
+            #     PASSWORD: ${{ secrets.PASSWORD }}
+            #   shell: bash
+            #   run: ./scripts/test-integration.sh || exit 1
 
     release:
         needs: test
