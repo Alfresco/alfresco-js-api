@@ -22,7 +22,7 @@ export class PeopleMock extends BaseMock {
             });
     }
 
-    get200ResponsePersons() {
+    get200ResponsePersons(): void {
         nock(this.host, { encodedQueryParams: true })
             .get('/alfresco/api/-default-/public/alfresco/versions/1/people')
             .reply(200, {

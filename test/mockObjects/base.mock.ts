@@ -7,11 +7,11 @@ export class BaseMock {
         this.host = host || 'http://127.0.0.1:8080';
     }
 
-    get200GenericResponse(scriptSlug: any): void {
+    get200GenericResponse(scriptSlug: string): void {
         nock(this.host, { encodedQueryParams: true }).get(scriptSlug).reply(200);
     }
 
-    put200GenericResponse(scriptSlug: any): void {
+    put200GenericResponse(scriptSlug: string): void {
         nock(this.host, { encodedQueryParams: true }).put(scriptSlug).reply(200);
     }
 

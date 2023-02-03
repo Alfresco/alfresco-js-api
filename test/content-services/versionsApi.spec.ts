@@ -35,9 +35,6 @@ describe('Versions', () => {
                 expect(entries.length).to.be.equal(6);
                 expect(data.list.entries[0].entry.id).to.be.equal('avatar');
                 done();
-            },
-            (err: any) => {
-                throw new Error(err);
             }
         );
     });
@@ -48,9 +45,6 @@ describe('Versions', () => {
         versionsApi.createVersionRendition(nodeId, versionId, {id: 'pdf'}).then(
             () => {
                 done();
-            },
-            (err: any) => {
-                throw new Error(err);
             }
         );
     });
@@ -62,9 +56,6 @@ describe('Versions', () => {
             (data) => {
                 expect(data.entry.id).to.be.equal('pdf');
                 done();
-            },
-            (err: any) => {
-                throw new Error(err);
             }
         );
     });
