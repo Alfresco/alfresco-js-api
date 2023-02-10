@@ -28,7 +28,7 @@ export class Storage {
 
     supportsStorage() {
         try {
-            return 'sessionStorage' in window && window.sessionStorage !== null;
+            return 'localStorage' in window && window.localStorage !== null;
         } catch (e) {
             return false;
         }
