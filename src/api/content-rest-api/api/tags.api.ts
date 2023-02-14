@@ -386,6 +386,41 @@ parameter are returned in addition to those specified in the **fields** paramete
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , TagEntry);
     }
+/**
+    * Delete a tag
+    *
+    * Deletes a tag by **tagId**. This will cause the tag to be removed from all nodes.
+    *
+    * @param tagId The identifier of a tag.
+    * @return Promise<{}>
+ */
+    deleteTag(tagId: string): Promise<void> {
+
+        throwIfNotDefined(tagId, 'tagId');
+
+        const postBody: null = null;
+
+        const pathParams = {
+            'tagId': tagId
+        };
+
+        const queryParams = {
+        };
+
+        const headerParams = {
+
+        };
+        const formParams = {
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/tags/{tagId}', 'DELETE',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts);
+    }
 
     /**
      * Create tags
