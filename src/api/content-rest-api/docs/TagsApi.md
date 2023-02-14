@@ -10,7 +10,7 @@ Method | HTTP request                         | Description
 [**listTags**](TagsApi.md#listTags) | **GET** /tags                        | List tags
 [**listTagsForNode**](TagsApi.md#listTagsForNode) | **GET** /nodes/{nodeId}/tags         | List tags for a node
 [**updateTag**](TagsApi.md#updateTag) | **PUT** /tags/{tagId}                | Update a tag
-[**deleteTag**](TagsApi.md#updateTag) | **DELETE** /tags/{tagId} | Completely deletes a tag
+[**deleteTag**](TagsApi.md#deleteTag) | **DELETE** /tags/{tagId} | Completely deletes a tag
 [**createTags**](TagsApi.md#createTags) | **POST** /tags                  | Create list of tags
 
 
