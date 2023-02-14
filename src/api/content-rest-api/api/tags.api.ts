@@ -394,7 +394,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @param tagId The identifier of a tag.
     * @return Promise<{}>
  */
-    deleteTag(tagId: string): Promise<any> {
+    deleteTag(tagId: string): Promise<void> {
 
         throwIfNotDefined(tagId, 'tagId');
 
