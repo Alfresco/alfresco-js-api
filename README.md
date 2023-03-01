@@ -191,7 +191,7 @@ With this authentication the ticket is not validated against the server
 
 // Login with ECM ticket
 const alfrescoApi = new AlfrescoApi({
-    ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1', 
+    ticketEcm:'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
     hostEcm:'http://127.0.0.1:8080'
 });
 
@@ -247,7 +247,7 @@ redirectLogout|  url to be redirect after logout optional, if is nor present the
 refreshTokenTimeout|  millisecond value, after how many millisecond you want refresh the token| 30000|
 redirectSilentIframeUri|  url to be redirect after silent refresh login| /assets/silent-refresh.html |
 silentLogin|  direct execute the implicit login without the need to call AlfrescoJsApi.implicitLogin() method|   false|
-publicUrls | list of public urls that don't need authorization. It is possible too pass absolute paths and string patterns that are valid for [minimatch](https://github.com/isaacs/minimatch#readme) |
+publicUrls | list of public urls that don't need authorization. It is possible too pass absolute paths and string patterns. In patterns you can use * or ** wildcards. Single means that you can have anything in one part of URL for example http://some-public-url/path/* matches with http://some-public-url/path/test. Double means that you can have anything in any number of parts, for example http://some-public-url/path/** matches with http://some-public-url/path/test/some-test.|
 authorizationUrl| authorization url, relative to the host| /protocol/openid-connect/auth|
 tokenUrl| token url, relative to the host| /protocol/openid-connect/token|
 logoutUrl| logout url, relative to the host| /protocol/openid-connect/logout|
@@ -358,7 +358,7 @@ logout()
 alfrescoJsApi.logout().then(
     data => {
         console.log('Successfully Logout');
-    }, 
+    },
     error => {
         console.error('Possible ticket already expired');
     }
@@ -527,7 +527,7 @@ alfrescoJsApi.nodes
     .then(
         data => {
             console.log('This is the name' + data.name );
-        }, 
+        },
         error => {
             console.log('This node does not exist');
         }

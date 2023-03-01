@@ -38,7 +38,6 @@ This page lists all third party libraries the project depends on.
 | [mime-db](https://github.com/jshttp/mime-db) | 1.40.0 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [mime-types](https://github.com/jshttp/mime-types) | 2.1.24 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [mime](https://github.com/broofa/mime) | 2.6.0 | [MIT](http://www.opensource.org/licenses/MIT) |
-| [minimatch](https://github.com/isaacs/minimatch) | 5.0.1 | [ISC](https://www.isc.org/downloads/software-support-policy/isc-license/) |
 | [ms](https://github.com/zeit/ms) | 2.1.2 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [next-tick](https://github.com/medikoo/next-tick) | 1.0.0 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [object-inspect](https://github.com/inspect-js/object-inspect) | 1.12.0 | [MIT](http://www.opensource.org/licenses/MIT) |
