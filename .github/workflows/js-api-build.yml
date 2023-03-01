@@ -20,7 +20,21 @@ env:
     NPM_REGISTRY_ADDRESS: ${{ secrets.NPM_REGISTRY_ADDRESS }}
 
 jobs:
+    check-package-lock:
+        runs-on: ubuntu-22.04
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+            - name: Check package-lock.json version
+              run: |
+                if [[ $(jq '.lockfileVersion == 3' package-lock.json) != "true" ]] ; then
+                    echo -e "package-lock must be version 3"
+                    exit 1
+                else
+                    echo -e "package-lock.json has a correct version (v3)"
+                fi
     build:
+        needs: check-package-lock
         name: "build and lint"
         runs-on: ubuntu-latest
         steps:
