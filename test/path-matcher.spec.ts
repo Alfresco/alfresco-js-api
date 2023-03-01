@@ -37,7 +37,7 @@ describe('PathMatcher', () => {
             expect(PathMatcher.match('http://some-public-url/path/', 'http://some-public-url/path/**')).be.true;
         });
 
-        it('should return false if path matches to pattern after replacing ** with none parts at the end and cuts last /', () => {
+        it('should return false if path does not match to pattern after replacing ** with none parts at the end and cuts last /', () => {
             expect(PathMatcher.match('http://some-public-url/path', 'http://some-public-url/path/**')).be.false;
         });
 
