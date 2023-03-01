@@ -17,7 +17,7 @@
 
 import * as path from 'path';
 import * as fs from 'fs';
-import { AlfrescoApi } from '../../../src/alfrescoApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 import { SitesApi } from '../../../src/api/content-rest-api/api/sites.api';
 import { NodesApi } from '../../../src/api/content-rest-api/api/nodes.api';
 import { UploadApi } from '../../../src/api/content-custom-api';
@@ -74,7 +74,7 @@ async function main() {
     );
 
     const nodeContent = await nodesApi.getNodeContent(nodeUploaded.entry.id);
-    const text = await nodeContent.text();
+    const text = await nodeContent.toString();
 
     if (text !== 'test extension') {
         process.exit(1);

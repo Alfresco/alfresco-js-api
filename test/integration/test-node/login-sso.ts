@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { AlfrescoApi } from '../../../src/alfrescoApi';
+import { AlfrescoApi } from '@alfresco/js-api';
 
 const program = require('commander');
 
