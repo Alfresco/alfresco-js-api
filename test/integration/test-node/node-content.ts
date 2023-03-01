@@ -74,7 +74,7 @@ async function main() {
     );
 
     const nodeContent = await nodesApi.getNodeContent(nodeUploaded.entry.id);
-    const text = await nodeContent.toString();
+    const text = nodeContent.toString();
 
     if (text !== 'test extension') {
         process.exit(1);
