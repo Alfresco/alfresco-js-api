@@ -1,7 +1,7 @@
 "use strict";
 
 const pkg = require('./package.json');
-const fs = require('fs-extra');
+const fs = require('node:fs');
 
 const OUTPUT_FOLDER = 'dist';
 
@@ -19,9 +19,9 @@ const rootPackageJson = {
     es2015: './esm2015/index.js'
 };
 
-fs.copySync('./LICENSE.txt', `${OUTPUT_FOLDER}/LICENSE.txt`);
-fs.copySync('./README.md', `${OUTPUT_FOLDER}/README.md`);
+fs.copyFileSync('./LICENSE.txt', `${OUTPUT_FOLDER}/LICENSE.txt`);
+fs.copyFileSync('./README.md', `${OUTPUT_FOLDER}/README.md`);
 
-fs.writeJsonSync(`${OUTPUT_FOLDER}/package.json`, rootPackageJson, {spaces: 2});
+fs.writeFileSync(`${OUTPUT_FOLDER}/package.json`, JSON.stringify(rootPackageJson, null, 2));
 
 
