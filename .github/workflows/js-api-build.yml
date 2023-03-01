@@ -81,10 +81,6 @@ jobs:
                 npm run test || exit 1
                 npm run coverage
 
-            - name: Performance
-              shell: bash
-              run: ./scripts/test-performance.sh || exit 1
-
             # https://alfresco.atlassian.net/browse/ADF-5515
             # - name: Integration
             #   env:
@@ -94,8 +90,30 @@ jobs:
             #   shell: bash
             #   run: ./scripts/test-integration.sh || exit 1
 
+    test-performance:
+        needs: build
+        name: test-performance
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                fetch-depth: 2
+
+            - name: node
+              uses: actions/setup-node@v3
+              with:
+                node: 16
+                cache: 'npm'
+            - run: npm ci
+
+            - name: Performance
+              shell: bash
+              run: ./scripts/test-performance.sh || exit 1
+
+
     release:
-        needs: test
+        needs: [test, test-performance]
         name: release
         runs-on: ubuntu-latest
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' || github.event.schedule == '0 3 * * *'
