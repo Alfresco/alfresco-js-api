@@ -105,7 +105,6 @@ jobs:
               with:
                 node: 14
                 cache: 'npm'
-            - run: npm ci
 
             - name: Performance
               shell: bash
