@@ -103,7 +103,7 @@ jobs:
             - name: node
               uses: actions/setup-node@v3
               with:
-                node: 16
+                node: 14
                 cache: 'npm'
             - run: npm ci
 
