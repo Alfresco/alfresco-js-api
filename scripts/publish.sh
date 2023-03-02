@@ -21,5 +21,5 @@ echo '//${NPM_REGISTRY_ADDRESS}/:_authToken="${NPM_REGISTRY_TOKEN}"' >>.npmrc
 
 cat package.json | grep version
 
-npm publish --tag ${TAG_NPM} --access public || exit 1
+npm publish --tag ${TAG_NPM} || exit 1
 rm -rf .npmrc
