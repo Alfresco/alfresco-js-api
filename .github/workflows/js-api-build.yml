@@ -118,7 +118,7 @@ jobs:
               env:
                 NODE_AUTH_TOKEN: $NPM_REGISTRY_TOKEN
 
-           - uses: actions/setup-node@v3
+            - uses: actions/setup-node@v3
               name: Release library GH registry
               if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
               with:
