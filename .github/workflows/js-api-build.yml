@@ -84,6 +84,9 @@ jobs:
         needs: test
         name: release
         runs-on: ubuntu-latest
+        permissions:
+          contents: read
+          packages: write
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' || github.event.schedule == '0 3 * * *'
         steps:
             - name: Checkout
@@ -98,12 +101,33 @@ jobs:
                 cache: 'npm'
             - run: npm ci
 
-            - name: Release
+            - name: Release Build
               if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
               shell: bash
               run: |
                   ./scripts/build.sh || exit 1
-                  ./scripts/publish.sh
+
+            - uses: actions/setup-node@v3
+              name: Release library GH registry
+              if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
+              with:
+                node-version: 16
+                registry-url: 'https://npm.pkg.github.com'
+                scope: '@alfresco'
+            - run: ./scripts/publish.sh
+              env:
+                NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - uses: actions/setup-node@v3
+              name: Release library Npm registry
+              if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
+              with:
+                node-version: 16
+                registry-url: $NPM_REGISTRY_ADDRESS
+                scope: '@alfresco'
+            - run: ./scripts/publish.sh nx affected --target=npm-publish $NX_CALCULATION_FLAGS --tag=$TAG_NPM || exit 1
+              env:
+                NODE_AUTH_TOKEN: $NPM_REGISTRY_TOKEN
 
             - name: Release Tag
               if: github.ref == 'refs/heads/master'
