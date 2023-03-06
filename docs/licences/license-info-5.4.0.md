@@ -1,8 +1,8 @@
 ---
-Title: License info, @alfresco/js-api 5.1.0
+Title: License info, @alfresco/js-api 5.4.0
 ---
 
-# License information for @alfresco/js-api 5.1.0
+# License information for @alfresco/js-api 5.4.0
 
 This page lists all third party libraries the project depends on.
 
@@ -10,14 +10,14 @@ This page lists all third party libraries the project depends on.
 
 | Name | Version | License |
 | --- | --- | --- |
-| [@alfresco/js-api](https://github.com/Alfresco/alfresco-js-api) | 5.1.0 | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0) |
+| [@alfresco/js-api](https://github.com/Alfresco/alfresco-js-api) | 5.4.0 | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0) |
 | [asynckit](https://github.com/alexindigo/asynckit) | 0.4.0 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [balanced-match](https://github.com/juliangruber/balanced-match) | 1.0.2 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [brace-expansion](https://github.com/juliangruber/brace-expansion) | 2.0.1 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [call-bind](https://github.com/ljharb/call-bind) | 1.0.2 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [combined-stream](https://github.com/felixge/node-combined-stream) | 1.0.8 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [component-emitter](https://github.com/component/emitter) | 1.3.0 | [MIT](http://www.opensource.org/licenses/MIT) |
-| [cookiejar](https://github.com/bmeck/node-cookiejar) | 2.1.3 | [MIT](http://www.opensource.org/licenses/MIT) |
+| [cookiejar](https://github.com/bmeck/node-cookiejar) | 2.1.4 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [d](https://github.com/medikoo/d) | 1.0.1 | [ISC](https://www.isc.org/downloads/software-support-policy/isc-license/) |
 | [debug](https://github.com/visionmedia/debug) | 4.1.1 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [delayed-stream](https://github.com/felixge/node-delayed-stream) | 1.0.0 | [MIT](http://www.opensource.org/licenses/MIT) |
@@ -38,17 +38,18 @@ This page lists all third party libraries the project depends on.
 | [mime-db](https://github.com/jshttp/mime-db) | 1.40.0 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [mime-types](https://github.com/jshttp/mime-types) | 2.1.24 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [mime](https://github.com/broofa/mime) | 2.6.0 | [MIT](http://www.opensource.org/licenses/MIT) |
+| [minimatch](https://github.com/isaacs/minimatch) | 5.0.1 | [ISC](https://www.isc.org/downloads/software-support-policy/isc-license/) |
 | [ms](https://github.com/zeit/ms) | 2.1.2 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [next-tick](https://github.com/medikoo/next-tick) | 1.0.0 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [object-inspect](https://github.com/inspect-js/object-inspect) | 1.12.0 | [MIT](http://www.opensource.org/licenses/MIT) |
-| [qs](https://github.com/ljharb/qs) | 6.10.3 | [BSD-3-Clause](http://www.opensource.org/licenses/BSD-3-Clause) |
+| [qs](https://github.com/ljharb/qs) | 6.11.0 | [BSD-3-Clause](http://www.opensource.org/licenses/BSD-3-Clause) |
 | [readable-stream](https://github.com/nodejs/readable-stream) | 3.6.0 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [safe-buffer](https://github.com/feross/safe-buffer) | 5.2.1 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [semver](https://github.com/npm/node-semver) | 7.3.5 | [ISC](https://www.isc.org/downloads/software-support-policy/isc-license/) |
 | [side-channel](https://github.com/ljharb/side-channel) | 1.0.4 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [string_decoder](https://github.com/nodejs/string_decoder) | 1.3.0 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [superagent](https://github.com/visionmedia/superagent) | 6.1.0 | [MIT](http://www.opensource.org/licenses/MIT) |
-| [tslib](https://github.com/Microsoft/tslib) | 2.4.0 | [0BSD](http://landley.net/toybox/license.html) |
+| [tslib](https://github.com/Microsoft/tslib) | 2.5.0 | [0BSD](http://landley.net/toybox/license.html) |
 | [type](https://github.com/medikoo/type) | 1.2.0 | [ISC](https://www.isc.org/downloads/software-support-policy/isc-license/) |
 | [util-deprecate](https://github.com/TooTallNate/util-deprecate) | 1.0.2 | [MIT](http://www.opensource.org/licenses/MIT) |
 | [yallist](https://github.com/isaacs/yallist) | 4.0.0 | [ISC](https://www.isc.org/downloads/software-support-policy/isc-license/) |

@@ -23,11 +23,9 @@ import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
 import { AlfrescoApi } from '../alfrescoApi';
 import { Storage } from '../storage';
 import { HttpClient } from '../api-clients/http-client.interface';
+import { PathMatcher } from '../utils/path-matcher';
 
 declare const Buffer: any;
-declare const require: any;
-// tslint:disable-next-line
-const minimatch = require('minimatch');
 
 declare let window: Window;
 
@@ -228,7 +226,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
         if (Array.isArray(publicUrls)) {
             return publicUrls.length > 0 &&
-                publicUrls.some((urlPattern: string) => minimatch(window.location.href, urlPattern));
+                publicUrls.some((urlPattern: string) => PathMatcher.match(window.location.href, urlPattern));
         }
         return false;
     }

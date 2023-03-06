@@ -10,6 +10,7 @@ const spies = require('chai-spies');
 chai.use(spies);
 
 import { EcmAuthMock, OAuthMock } from '../test/mockObjects';
+import { PathMatcher } from '../src/utils/path-matcher';
 
 const jsdom = require('mocha-jsdom');
 const globalAny: any = global;
@@ -546,53 +547,54 @@ describe('Oauth2  test', () => {
                 );
             });
 
-            it('should return `true` if url is defined in public urls list', () => {
+            it('should return true if PathMatcher.match returns true for matching url', () => {
                 globalAny.window = { location: { href: 'public-url' } };
                 oauth2Auth.config.oauth2.publicUrls = ['public-url'];
+                chai.spy.on(PathMatcher, 'match', () => true);
 
-                expect(oauth2Auth.isPublicUrl()).to.be.equal(true);
+                expect(oauth2Auth.isPublicUrl()).be.true;
+                expect(PathMatcher.match).called.with(globalAny.window.location.href, oauth2Auth.config.oauth2.publicUrls[0]);
             });
 
-            it('should return `false` if url is not defined in public urls list', () => {
+            it('should return false if PathMatcher.match returns false for matching url', () => {
                 globalAny.window = { location: { href: 'some-public-url' } };
                 oauth2Auth.config.oauth2.publicUrls = ['public-url'];
+                chai.spy.on(PathMatcher, 'match', () => false);
 
-                expect(oauth2Auth.isPublicUrl()).to.be.equal(false);
+                expect(oauth2Auth.isPublicUrl()).be.false;
+                expect(PathMatcher.match).called.with(globalAny.window.location.href, oauth2Auth.config.oauth2.publicUrls[0]);
             });
 
-            it('should return `false` if publicUrls property is not defined', () => {
-                expect(oauth2Auth.isPublicUrl()).to.be.equal(false);
+            it('should return false if publicUrls property is not defined', () => {
+                chai.spy.on(PathMatcher, 'match');
+
+                expect(oauth2Auth.isPublicUrl()).be.false;
+                expect(PathMatcher.match).not.called();
             });
 
-            it('should return `false` if public urls is not set as an array list', () => {
+            it('should return false if public urls is not set as an array list', () => {
                 globalAny.window = { location: { href: 'public-url-string' } };
                 oauth2Auth.config.oauth2.publicUrls = null;
+                chai.spy.on(PathMatcher, 'match');
 
-                expect(oauth2Auth.isPublicUrl()).to.be.equal(false);
-            });
-
-            it('should match absolute path', () => {
-                globalAny.window = { location: { href: 'http://some-public-url' } };
-                oauth2Auth.config.oauth2.publicUrls = ['http://some-public-url'];
-
-                expect(oauth2Auth.isPublicUrl()).to.be.equal(true);
-            });
-
-            it('should match a path pattern', () => {
-                globalAny.window = { location: { href: 'http://some-public-url/123/path' } };
-                oauth2Auth.config.oauth2.publicUrls = ['**/some-public-url/*/path'];
-
-                expect(oauth2Auth.isPublicUrl()).to.be.equal(true);
+                expect(oauth2Auth.isPublicUrl()).be.false;
+                expect(PathMatcher.match).not.called();
             });
 
             it('should not call `implicitLogin`', async () => {
                 globalAny.window = { location: { href: 'public-url' } };
                 oauth2Auth.config.oauth2.silentLogin = true;
                 oauth2Auth.config.oauth2.publicUrls = ['public-url'];
+                chai.spy.on(PathMatcher, 'match', () => true);
                 const implicitLoginSpy = chai.spy.on(oauth2Auth, 'implicitLogin');
 
                 await oauth2Auth.checkFragment();
                 expect(implicitLoginSpy).not.to.have.been.called();
+                expect(PathMatcher.match).called.with(globalAny.window.location.href, oauth2Auth.config.oauth2.publicUrls[0]);
+            });
+
+            afterEach(() => {
+                chai.spy.restore(PathMatcher, 'match');
             });
         });
     });
