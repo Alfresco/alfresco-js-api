@@ -12,14 +12,8 @@ fi
 
 cd dist/
 
-echo "Publishing on npm with tag $TAG_NPM"
-
-touch .npmrc
-echo 'strict-ssl=true' >>.npmrc
-echo 'registry=https://${NPM_REGISTRY_ADDRESS}' >>.npmrc
-echo '//${NPM_REGISTRY_ADDRESS}/:_authToken="${NPM_REGISTRY_TOKEN}"' >>.npmrc
+echo "Publishing on npm registry: ${NPM_REGISTRY_ADDRESS} with tag $TAG_NPM"
 
 cat package.json | grep version
 
 npm publish --tag ${TAG_NPM} || exit 1
-rm -rf .npmrc
