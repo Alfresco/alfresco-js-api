@@ -17,7 +17,7 @@ env:
     GITHUB_PULL_REQUEST: ${{ github.event.number }}
     GITHUB_BUILD_NUMBER: ${{ github.run_number }}
     NPM_REGISTRY_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
-    NPM_REGISTRY_ADDRESS: ${{ secrets.NPM_REGISTRY_ADDRESS }}
+    NPM_REGISTRY_ADDRESS: ${{ vars.NPM_REGISTRY_ADDRESS }}
 
 jobs:
     build:
@@ -123,9 +123,9 @@ jobs:
               if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
               with:
                 node-version: 16
-                registry-url: $NPM_REGISTRY_ADDRESS
+                registry-url: 'https://${NPM_REGISTRY_ADDRESS}'
                 scope: '@alfresco'
-            - run: ./scripts/publish.sh nx affected --target=npm-publish $NX_CALCULATION_FLAGS --tag=$TAG_NPM || exit 1
+            - run: ./scripts/publish.sh
               env:
                 NODE_AUTH_TOKEN: $NPM_REGISTRY_TOKEN
 
