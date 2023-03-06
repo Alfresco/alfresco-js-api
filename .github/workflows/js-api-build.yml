@@ -123,7 +123,7 @@ jobs:
               if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
               with:
                 node-version: 16
-                registry-url: $NPM_REGISTRY_ADDRESS
+                registry-url: 'https://${NPM_REGISTRY_ADDRESS}'
                 scope: '@alfresco'
             - run: ./scripts/publish.sh
               env:
