@@ -16,8 +16,6 @@ env:
     GITHUB_BRANCH: ${{ github.ref }}
     GITHUB_PULL_REQUEST: ${{ github.event.number }}
     GITHUB_BUILD_NUMBER: ${{ github.run_number }}
-    NPM_REGISTRY_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
-    NPM_REGISTRY_ADDRESS: ${{ vars.NPM_REGISTRY_ADDRESS }}
 
 jobs:
     build:
@@ -112,11 +110,11 @@ jobs:
               if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
               with:
                 node-version: 16
-                registry-url: 'https://${NPM_REGISTRY_ADDRESS}'
+                registry-url: 'https://${{ vars.NPM_REGISTRY_ADDRESS }}'
                 scope: '@alfresco'
             - run: ./scripts/publish.sh
               env:
-                NODE_AUTH_TOKEN: $NPM_REGISTRY_TOKEN
+                NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
 
             - uses: actions/setup-node@v3
               name: Release library GH registry

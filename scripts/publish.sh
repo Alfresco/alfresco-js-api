@@ -12,8 +12,10 @@ fi
 
 cd dist/
 
-echo "Publishing on npm registry: ${NPM_REGISTRY_ADDRESS} with tag $TAG_NPM"
+echo "Publishing on npm with tag $TAG_NPM"
 
 cat package.json | grep version
 
 npm publish --tag ${TAG_NPM} || exit 1
+
+rm -rf .npmrc
