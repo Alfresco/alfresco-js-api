@@ -26,6 +26,7 @@ import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
 import { AlfrescoApiType } from './to-deprecate/alfresco-api-type';
 import { HttpClient } from './api-clients/http-client.interface';
+import { AlfrescoApiClient } from './alfrescoApiClient';
 
 export class AlfrescoApi implements Emitter, AlfrescoApiType {
     __type = 'legacy-client';
@@ -41,6 +42,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
     oauth2Auth: Oauth2Auth;
     processAuth: ProcessAuth;
     contentAuth: ContentAuth;
+    alfrescoApiClient: AlfrescoApiClient;
 
     on: EmitterMethod;
     off: EmitterMethod;
@@ -51,9 +53,12 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
     emit: (type: string, ...args: any[]) => void;
 
     username: string;
+    oauthInit: boolean;
 
-    constructor(config?: AlfrescoApiConfig, public httpClient?: HttpClient) {
+    constructor(config?: AlfrescoApiConfig, public httpClient?: HttpClient, oauthInit = true) {
         ee(this);
+
+        this.oauthInit = oauthInit;
 
         if (config) {
             this.setConfig(config);
@@ -73,12 +78,15 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         this.clientsFactory();
 
         this.processClient = new ProcessClient(this.config, this.httpClient);
+        this.alfrescoApiClient = new AlfrescoApiClient(undefined, this.httpClient);
 
         this.errorListeners();
-        this.initAuth(config);
+        if(this.oauthInit){
+            this.initAuth(config);
 
-        if(this.isLoggedIn()){
-            this.emitBuffer('logged-in');
+            if(this.isLoggedIn()){
+                this.emitBuffer('logged-in');
+            }
         }
 
         return config;
