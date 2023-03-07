@@ -42,7 +42,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
     oauth2Auth: Oauth2Auth;
     processAuth: ProcessAuth;
     contentAuth: ContentAuth;
-    alfrescoApiClient: AlfrescoApiClient;
+    private basicApiClient: AlfrescoApiClient;
 
     on: EmitterMethod;
     off: EmitterMethod;
@@ -53,12 +53,9 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
     emit: (type: string, ...args: any[]) => void;
 
     username: string;
-    oauthInit: boolean;
 
-    constructor(config?: AlfrescoApiConfig, public httpClient?: HttpClient, oauthInit = true) {
+    constructor(config?: AlfrescoApiConfig, public httpClient?: HttpClient, private oauthInit = true) {
         ee(this);
-
-        this.oauthInit = oauthInit;
 
         if (config) {
             this.setConfig(config);
@@ -78,7 +75,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         this.clientsFactory();
 
         this.processClient = new ProcessClient(this.config, this.httpClient);
-        this.alfrescoApiClient = new AlfrescoApiClient(undefined, this.httpClient);
+        this.basicApiClient = new AlfrescoApiClient(undefined, this.httpClient);
 
         this.errorListeners();
         if(this.oauthInit){
@@ -90,6 +87,20 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         }
 
         return config;
+    }
+
+    public callCustomApiWithoutAuth(...rest: Parameters<typeof this.basicApiClient.callCustomApi>) {
+        if (this.oauthInit) {
+            throw Error(`Is not possible to call custom api with oauthInit true, it's needed to instanciate AlfrescoApi with oauthInit false`);
+        }
+        return this.basicApiClient.callCustomApi(...rest);
+    }
+
+    public callApiWithoutAuth(...rest: Parameters<typeof this.basicApiClient.callApi>) {
+        if (this.oauthInit) {
+            throw Error(`Is not possible to call api with oauthInit true, it's needed to instanciate AlfrescoApi with oauthInit false`);
+        }
+        return this.basicApiClient.callApi(...rest);
     }
 
     private initAuth(config: AlfrescoApiConfig): void {
