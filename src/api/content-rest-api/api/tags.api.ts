@@ -228,7 +228,6 @@ If not supplied then the default value is 0.
 If not supplied then the default value is 100.
  (default to 100)
     * @param opts.fields A list of field names.
-    * @param opts.name Name for which tag is returned.
 
 You can use this parameter to restrict the fields
 returned within a response if, for example, you want to save on overall bandwidth.
@@ -242,6 +241,8 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @param opts.include Returns additional information about the tag. The following optional fields can be requested:
 * count
+    * @param opts.tag Name or pattern for which tag is returned. Example of pattern: *test* which returns tags like 'my test 1'
+    * @param opts.matching Switches filtering to pattern mode instead of exact mode.
 
     * @return Promise<TagPaging>
     */
