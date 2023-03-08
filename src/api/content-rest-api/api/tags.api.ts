@@ -254,12 +254,16 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         };
 
+        let where: string;
+        if (opts?.tag) {
+            where = opts.matching ? `(tag matches ('${opts.tag}'))` : `(tag='${opts.tag}')`;
+        }
         const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv'),
             'include': buildCollectionParam(opts['include'], 'csv'),
-            where: opts?.tags ? `(tag in ('${opts.tags.join("', '")}'))` : undefined
+            where
         };
 
         const headerParams = {
