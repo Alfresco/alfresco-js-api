@@ -13,10 +13,33 @@ export class TagMock extends BaseMock {
             .reply(200, this.getPaginetedListOfTags());
     }
 
-    getTagsByNamesIncludingCounters200Response(): void {
+    getTagsByNameFilteredByMatching200Response(): void {
         nock(this.host, { encodedQueryParams: true })
-            .get('/alfresco/api/-default-/public/alfresco/versions/1/tags?include=count&where=(tag%20in%20(%27tag-test-1%27%2C%20%27tag-test-2%27))')
-            .reply(200, this.getPaginetedListOfTags(true));
+            .get('/alfresco/api/-default-/public/alfresco/versions/1/tags?where=(tag%20matches%20(%27*tag-test*%27))')
+            .reply(200, this.getPaginetedListOfTags());
+    }
+
+    getTagsByNamesFilterByExactTag200Response(): void {
+        nock(this.host, { encodedQueryParams: true })
+            .get('/alfresco/api/-default-/public/alfresco/versions/1/tags?where=(tag%3D%27tag-test-1%27)')
+            .reply(200, {
+                list: {
+                    pagination: {
+                        count: 1,
+                        hasMoreItems: false,
+                        skipCount: 0,
+                        maxItems: 100
+                    },
+                    entries: [
+                        {
+                            entry: {
+                                tag: 'tag-test-1',
+                                id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
+                            },
+                        }
+                    ],
+                },
+            });
     }
 
     get401Response(): void {
@@ -49,7 +72,7 @@ export class TagMock extends BaseMock {
             }]);
     }
 
-    private getPaginetedListOfTags(includeCount?: boolean): TagPaging {
+    private getPaginetedListOfTags(): TagPaging {
         return {
             list: {
                 pagination: { count: 2, hasMoreItems: false, skipCount: 0, maxItems: 100 },
@@ -57,15 +80,13 @@ export class TagMock extends BaseMock {
                     {
                         entry: {
                             tag: 'tag-test-1',
-                            id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6',
-                            count: includeCount ? 0 : undefined
+                            id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
                         },
                     },
                     {
                         entry: {
                             tag: 'tag-test-2',
-                            id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6',
-                            count: includeCount ? 1 : undefined
+                            id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6'
                         },
                     },
                 ],

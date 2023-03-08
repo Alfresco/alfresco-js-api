@@ -51,23 +51,34 @@ describe('Tags', () => {
             );
         });
 
-        it('should return counts for specified tags', (done) => {
-            tagMock.getTagsByNamesIncludingCounters200Response();
+        it('should return specified tag', (done) => {
+            tagMock.getTagsByNamesFilterByExactTag200Response();
 
             tagsApi.listTags({
-                include: ['count'],
-                tags: ['tag-test-1', 'tag-test-2']
+                tag: 'tag-test-1'
             }).then((data) => {
-                expect(data.list.pagination.count).equal(2);
                 expect(data.list.entries[0].entry).deep.equal({
                     tag: 'tag-test-1',
-                    id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6',
-                    count: 0
+                    id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
+                });
+                done();
+            });
+        });
+
+        it('should return tags contained specified value', (done) => {
+            tagMock.getTagsByNameFilteredByMatching200Response();
+
+            tagsApi.listTags({
+                tag: '*tag-test*',
+                matching: true
+            }).then((data) => {
+                expect(data.list.entries[0].entry).deep.equal({
+                    tag: 'tag-test-1',
+                    id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
                 });
                 expect(data.list.entries[1].entry).deep.equal({
                     tag: 'tag-test-2',
-                    id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6',
-                    count: 1
+                    id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6'
                 });
                 done();
             });
