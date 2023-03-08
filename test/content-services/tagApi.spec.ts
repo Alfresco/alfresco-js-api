@@ -28,26 +28,50 @@ describe('Tags', () => {
         tagsApi = new TagsApi(alfrescoJsApi);
     });
 
-    it('tags', (done) => {
-        tagMock.get200Response();
+    describe('listTags', () => {
+        it('should load list of tags', (done) => {
+            tagMock.get200Response();
 
-        tagsApi.listTags().then((data) => {
-            expect(data.list.pagination.count).to.be.equal(2);
-            expect(data.list.entries[0].entry.tag).to.be.equal('tag-test-1');
-            expect(data.list.entries[1].entry.tag).to.be.equal('tag-test-2');
-            done();
-        });
-    });
-
-    it('Tags 401', (done) => {
-        tagMock.get401Response();
-
-        tagsApi.listTags().then(
-            () => {},
-            () => {
+            tagsApi.listTags().then((data) => {
+                expect(data.list.pagination.count).equal(2);
+                expect(data.list.entries[0].entry.tag).equal('tag-test-1');
+                expect(data.list.entries[1].entry.tag).equal('tag-test-2');
                 done();
-            }
-        );
+            });
+        });
+
+        it('should handle 401 error', (done) => {
+            tagMock.get401Response();
+
+            tagsApi.listTags().then(
+                () => {},
+                () => {
+                    done();
+                }
+            );
+        });
+
+        it('should return counts for specified tags', (done) => {
+            tagMock.getTagsByNamesIncludingCounters200Response();
+
+            tagsApi.listTags({
+                include: ['count'],
+                tags: ['tag-test-1', 'tag-test-2']
+            }).then((data) => {
+                expect(data.list.pagination.count).equal(2);
+                expect(data.list.entries[0].entry).deep.equal({
+                    tag: 'tag-test-1',
+                    id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6',
+                    count: 0
+                });
+                expect(data.list.entries[1].entry).deep.equal({
+                    tag: 'tag-test-2',
+                    id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6',
+                    count: 1
+                });
+                done();
+            });
+        });
     });
 
     describe('createTags', () => {

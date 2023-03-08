@@ -259,7 +259,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv'),
             'include': buildCollectionParam(opts['include'], 'csv'),
-            where: opts?.name ? `(name='${opts.name}')` : undefined
+            where: opts?.tags ? `(tag in ('${opts.tags.join("', '")}'))` : undefined
         };
 
         const headerParams = {
