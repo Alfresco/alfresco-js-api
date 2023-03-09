@@ -26,7 +26,6 @@ import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
 import { AlfrescoApiType } from './to-deprecate/alfresco-api-type';
 import { HttpClient } from './api-clients/http-client.interface';
-import { AlfrescoApiClient } from './alfrescoApiClient';
 
 export class AlfrescoApi implements Emitter, AlfrescoApiType {
     __type = 'legacy-client';
@@ -42,7 +41,6 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
     oauth2Auth: Oauth2Auth;
     processAuth: ProcessAuth;
     contentAuth: ContentAuth;
-    private basicApiClient: AlfrescoApiClient;
 
     on: EmitterMethod;
     off: EmitterMethod;
@@ -54,7 +52,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
     username: string;
 
-    constructor(config?: AlfrescoApiConfig, public httpClient?: HttpClient, private oauthInit = true) {
+    constructor(config?: AlfrescoApiConfig, public httpClient?: HttpClient) {
         ee(this);
 
         if (config) {
@@ -74,10 +72,8 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
         this.clientsFactory();
 
-        this.basicApiClient = new AlfrescoApiClient(undefined, this.httpClient);
-
         this.errorListeners();
-        if(this.oauthInit){
+        if(this.config.oauthInit){
             this.initAuth(config);
 
             if(this.isLoggedIn()){
@@ -86,20 +82,6 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         }
 
         return config;
-    }
-
-    public callCustomApiWithoutAuth(...rest: Parameters<typeof this.basicApiClient.callCustomApi>) {
-        if (this.oauthInit) {
-            throw Error(`Is not possible to call custom api with oauthInit true, it's needed to instanciate AlfrescoApi with oauthInit false`);
-        }
-        return this.basicApiClient.callCustomApi(...rest);
-    }
-
-    public callApiWithoutAuth(...rest: Parameters<typeof this.basicApiClient.callApi>) {
-        if (this.oauthInit) {
-            throw Error(`Is not possible to call api with oauthInit true, it's needed to instanciate AlfrescoApi with oauthInit false`);
-        }
-        return this.basicApiClient.callApi(...rest);
     }
 
     private initAuth(config: AlfrescoApiConfig): void {
