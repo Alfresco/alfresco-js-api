@@ -75,7 +75,12 @@ export class TagMock extends BaseMock {
     private getPaginetedListOfTags(): TagPaging {
         return {
             list: {
-                pagination: { count: 2, hasMoreItems: false, skipCount: 0, maxItems: 100 },
+                pagination: {
+                    count: 2,
+                    hasMoreItems: false,
+                    skipCount: 0,
+                    maxItems: 100
+                },
                 entries: [
                     {
                         entry: {
