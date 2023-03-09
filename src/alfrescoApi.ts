@@ -74,7 +74,6 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
         this.clientsFactory();
 
-        this.processClient = new ProcessClient(this.config, this.httpClient);
         this.basicApiClient = new AlfrescoApiClient(undefined, this.httpClient);
 
         this.errorListeners();
