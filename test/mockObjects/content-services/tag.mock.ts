@@ -10,13 +10,13 @@ export class TagMock extends BaseMock {
     get200Response(): void {
         nock(this.host, { encodedQueryParams: true })
             .get('/alfresco/api/-default-/public/alfresco/versions/1/tags')
-            .reply(200, this.getPaginetedListOfTags());
+            .reply(200, this.getPaginatedListOfTags());
     }
 
     getTagsByNameFilteredByMatching200Response(): void {
         nock(this.host, { encodedQueryParams: true })
             .get('/alfresco/api/-default-/public/alfresco/versions/1/tags?where=(tag%20matches%20(%27*tag-test*%27))')
-            .reply(200, this.getPaginetedListOfTags());
+            .reply(200, this.getPaginatedListOfTags());
     }
 
     getTagsByNamesFilterByExactTag200Response(): void {
@@ -72,7 +72,7 @@ export class TagMock extends BaseMock {
             }]);
     }
 
-    private getPaginetedListOfTags(): TagPaging {
+    private getPaginatedListOfTags(): TagPaging {
         return {
             list: {
                 pagination: {
