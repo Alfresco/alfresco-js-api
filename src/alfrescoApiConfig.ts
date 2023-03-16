@@ -34,6 +34,7 @@ export class AlfrescoApiConfig {
     accessToken?: string;
     disableCsrf?: boolean = false;
     withCredentials?: boolean = false;
+    oauthInit?: boolean = true;
 
     constructor(input: any = { oauth2: {} }) {
         Object.assign(this, input);

@@ -72,13 +72,13 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
         this.clientsFactory();
 
-        this.processClient = new ProcessClient(this.config, this.httpClient);
-
         this.errorListeners();
-        this.initAuth(config);
+        if(this.config.oauthInit){
+            this.initAuth(config);
 
-        if(this.isLoggedIn()){
-            this.emitBuffer('logged-in');
+            if(this.isLoggedIn()){
+                this.emitBuffer('logged-in');
+            }
         }
 
         return config;
