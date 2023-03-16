@@ -28,26 +28,61 @@ describe('Tags', () => {
         tagsApi = new TagsApi(alfrescoJsApi);
     });
 
-    it('tags', (done) => {
-        tagMock.get200Response();
+    describe('listTags', () => {
+        it('should load list of tags', (done) => {
+            tagMock.get200Response();
 
-        tagsApi.listTags().then((data) => {
-            expect(data.list.pagination.count).to.be.equal(2);
-            expect(data.list.entries[0].entry.tag).to.be.equal('tag-test-1');
-            expect(data.list.entries[1].entry.tag).to.be.equal('tag-test-2');
-            done();
-        });
-    });
-
-    it('Tags 401', (done) => {
-        tagMock.get401Response();
-
-        tagsApi.listTags().then(
-            () => {},
-            () => {
+            tagsApi.listTags().then((data) => {
+                expect(data.list.pagination.count).equal(2);
+                expect(data.list.entries[0].entry.tag).equal('tag-test-1');
+                expect(data.list.entries[1].entry.tag).equal('tag-test-2');
                 done();
-            }
-        );
+            });
+        });
+
+        it('should handle 401 error', (done) => {
+            tagMock.get401Response();
+
+            tagsApi.listTags().then(
+                () => {},
+                () => {
+                    done();
+                }
+            );
+        });
+
+        it('should return specified tag', (done) => {
+            tagMock.getTagsByNamesFilterByExactTag200Response();
+
+            tagsApi.listTags({
+                tag: 'tag-test-1'
+            }).then((data) => {
+                expect(data.list.entries[0].entry).deep.equal({
+                    tag: 'tag-test-1',
+                    id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
+                });
+                done();
+            });
+        });
+
+        it('should return tags contained specified value', (done) => {
+            tagMock.getTagsByNameFilteredByMatching200Response();
+
+            tagsApi.listTags({
+                tag: '*tag-test*',
+                matching: true
+            }).then((data) => {
+                expect(data.list.entries[0].entry).deep.equal({
+                    tag: 'tag-test-1',
+                    id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
+                });
+                expect(data.list.entries[1].entry).deep.equal({
+                    tag: 'tag-test-2',
+                    id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6'
+                });
+                done();
+            });
+        });
     });
 
     describe('createTags', () => {

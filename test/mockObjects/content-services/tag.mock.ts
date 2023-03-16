@@ -1,5 +1,6 @@
 import nock from 'nock';
 import { BaseMock } from '../base.mock';
+import { TagPaging } from '../../../src/api/content-rest-api';
 
 export class TagMock extends BaseMock {
     constructor(host?: string) {
@@ -9,22 +10,33 @@ export class TagMock extends BaseMock {
     get200Response(): void {
         nock(this.host, { encodedQueryParams: true })
             .get('/alfresco/api/-default-/public/alfresco/versions/1/tags')
+            .reply(200, this.getPaginatedListOfTags());
+    }
+
+    getTagsByNameFilteredByMatching200Response(): void {
+        nock(this.host, { encodedQueryParams: true })
+            .get('/alfresco/api/-default-/public/alfresco/versions/1/tags?where=(tag%20matches%20(%27*tag-test*%27))')
+            .reply(200, this.getPaginatedListOfTags());
+    }
+
+    getTagsByNamesFilterByExactTag200Response(): void {
+        nock(this.host, { encodedQueryParams: true })
+            .get('/alfresco/api/-default-/public/alfresco/versions/1/tags?where=(tag%3D%27tag-test-1%27)')
             .reply(200, {
                 list: {
-                    pagination: { count: 2, hasMoreItems: false, skipCount: 0, maxItems: 100 },
+                    pagination: {
+                        count: 1,
+                        hasMoreItems: false,
+                        skipCount: 0,
+                        maxItems: 100
+                    },
                     entries: [
                         {
                             entry: {
                                 tag: 'tag-test-1',
-                                id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6',
+                                id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
                             },
-                        },
-                        {
-                            entry: {
-                                tag: 'tag-test-2',
-                                id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6',
-                            },
-                        },
+                        }
                     ],
                 },
             });
@@ -58,5 +70,32 @@ export class TagMock extends BaseMock {
                     id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6',
                 },
             }]);
+    }
+
+    private getPaginatedListOfTags(): TagPaging {
+        return {
+            list: {
+                pagination: {
+                    count: 2,
+                    hasMoreItems: false,
+                    skipCount: 0,
+                    maxItems: 100
+                },
+                entries: [
+                    {
+                        entry: {
+                            tag: 'tag-test-1',
+                            id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
+                        },
+                    },
+                    {
+                        entry: {
+                            tag: 'tag-test-2',
+                            id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6'
+                        },
+                    },
+                ],
+            },
+        }
     }
 }
