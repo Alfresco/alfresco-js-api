@@ -120,6 +120,7 @@ provider| (Optional value default value is ECM. This parameter can accept as val
 ticket| (Optional only if you want login with the ticket see example below)| |
 disableCsrf| To disable CSRF Token to be submitted. Only for Activiti call.| false |
 withCredentials| (Optional configuration for SSO, requires CORS on ECM) |false
+oauthInit|(Optional, if false skip the OAuth2 initialization) | true
 
 ### Login with Username and Password BPM and ECM
 
