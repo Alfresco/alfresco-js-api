@@ -443,4 +443,10 @@ parameter are returned in addition to those specified in the **fields** paramete
             {}, {}, {}, {}, tags,
             ['application/json'], ['application/json']);
     }
+
+    assignTagsToNode(nodeId: string, tags: TagBody[]): Promise<TagPaging> {
+        const types = ['application/json'];
+        return this.apiClient.callApi('/nodes/{nodeId}/tags', 'POST', { nodeId }, {},
+            {}, {}, tags, types, types , TagEntry);
+    }
 }
