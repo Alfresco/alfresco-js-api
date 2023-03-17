@@ -305,9 +305,9 @@ export class CategoriesApi extends BaseApi {
     }
 
     /**
-    * Create a category
+    * Create new categories
     *
-    * Creates a new category within the category **categoryId**.
+    * Creates new categories within the category **categoryId**.
     * The parameter categoryId can be set to the alias -root- to create a new top level category.
     * You must have admin rights to create a category.
     * You specify the category in a JSON body like this:
@@ -358,8 +358,8 @@ export class CategoriesApi extends BaseApi {
 
     *
     * @param categoryId The identifier of a category.
-    * @param categoryBodyCreate The new category
-    * @param opts Optional parameters
+    * @param categoryBodyCreate List of categories to create.
+    * @param opts Optional parameters.
     * @param opts.fields A list of field names.
 
     You can use this parameter to restrict the fields
@@ -372,9 +372,9 @@ export class CategoriesApi extends BaseApi {
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
 
-    * @return Promise<CategoryEntry>
+    * @return Promise<CategoryPaging | CategoryEntry>
     */
-    createSubcategory(categoryId: string, categoryBodyCreate: CategoryBody[], opts?: any): Promise<CategoryEntry> {
+    createSubcategories(categoryId: string, categoryBodyCreate: CategoryBody[], opts?: any): Promise<CategoryPaging | CategoryEntry> {
 
         throwIfNotDefined(categoryId, 'categoryId');
         throwIfNotDefined(categoryBodyCreate, 'categoryBodyCreate');
