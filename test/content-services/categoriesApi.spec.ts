@@ -164,16 +164,16 @@ describe('Categories', () => {
 
     it('should return 201 while creating category if all is ok', (done) => {
         categoriesMock.get201ResponseCategoryCreated('testId1');
-        categoriesApi.createSubcategory('testId1', [{ name: 'testName10' }]).then((response: CategoryEntry) => {
-            expect(response.entry.parentId).equal('testId1');
-            expect(response.entry.name).equal('testName10');
+        categoriesApi.createSubcategories('testId1', [{ name: 'testName10' }]).then((response: CategoryPaging | CategoryEntry) => {
+            expect((response as CategoryEntry).entry.parentId).equal('testId1');
+            expect((response as CategoryEntry).entry.name).equal('testName10');
             done();
         });
     });
 
     it('should return 409 while creating subcategory if subcategory already exists', (done) => {
         categoriesMock.get409CategoryCreateAlreadyExists('testId1');
-        categoriesApi.createSubcategory('testId1', [{ name: 'testName10' }]).then(
+        categoriesApi.createSubcategories('testId1', [{ name: 'testName10' }]).then(
             () => {},
             (error: any) => {
                 expect(error.status).equal(409);
@@ -184,7 +184,7 @@ describe('Categories', () => {
 
     it('should return 403 while creating category if user has no rights to create', (done) => {
         categoriesMock.get403CategoryCreatedPermissionDenied('testId1');
-        categoriesApi.createSubcategory('testId1', [{ name: 'testName10' }]).then(
+        categoriesApi.createSubcategories('testId1', [{ name: 'testName10' }]).then(
             () => {},
             (error: any) => {
                 expect(error.status).equal(403);

@@ -10,5 +10,5 @@ Method | HTTP request | Description
 [**deleteCategory**](CategoriesApi.md#deleteCategory) | **DELETE** /categories/{categoryId} | Deletes the category
 [**unlinkNodeFromCategory**](CategoriesApi.md#unlinkNodeFromCategory) | **DELETE** /nodes/{nodeId}/category-links/{categoryId} | Unassign a node from category
 [**updateCategory**](CategoriesApi.md#updateCategory) | **PUT** /categories/{categoryId} | Update a category
-[**createSubcategory**](CategoriesApi.md#createSubcategory) | **POST** /categories/{categoryId}/subcategories | Creates a category
+[**createSubcategories**](CategoriesApi.md#createSubcategories) | **POST** /categories/{categoryId}/subcategories | Create new categories
 [**linkNodeToCategory**](CategoriesApi.md#linkNodeToCategory) | **POST** /nodes/{nodeId}/category-links | Assign a node to a category
