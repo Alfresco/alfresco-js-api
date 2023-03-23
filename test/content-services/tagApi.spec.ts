@@ -100,4 +100,22 @@ describe('Tags', () => {
             expect(tagsApi.createTags.bind(tagsApi, null)).throw();
         });
     });
+
+    describe('assignTagsToNode', () => {
+        it('should return tags after assigning them to node', (done) => {
+            const tag1 = new TagBody();
+            tag1.tag = 'tag-test-1';
+            const tag2 = new TagBody();
+            tag2.tag = 'tag-test-2';
+            const tags = [tag1, tag2];
+            tagMock.get201ResponseForAssigningTagsToNode(tags);
+
+            tagsApi.assignTagsToNode("someNodeId", tags).then((data) => {
+                expect(data.list.pagination.count).equal(2);
+                expect(data.list.entries[0].entry.tag).equal(tag1.tag);
+                expect(data.list.entries[1].entry.tag).equal(tag2.tag);
+                done();
+            });
+        });
+    });
 });

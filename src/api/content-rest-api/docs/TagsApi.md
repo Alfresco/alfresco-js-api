@@ -12,6 +12,7 @@ Method | HTTP request                         | Description
 [**updateTag**](TagsApi.md#updateTag) | **PUT** /tags/{tagId}                | Update a tag
 [**deleteTag**](TagsApi.md#deleteTag) | **DELETE** /tags/{tagId} | Completely deletes a tag
 [**createTags**](TagsApi.md#createTags) | **POST** /tags                  | Create list of tags
+[**assignTagsToNode**](TagsApi.md#assignTagsToNode) | **POST** /nodes/{nodeId}/tags                  | Assign tags to node. If tag is new then tag is also created additionally, if tag already exists then it is just assigned.
 
 
 <a name="createTagForNode"></a>
@@ -521,3 +522,43 @@ Name | Type | Description  | Notes
 ### Return type
 
 null (empty response body)
+
+<a name="assignTagsToNode"></a>
+## assignTagsToNode
+> TagPaging assignTagsToNode(nodeId: string, tags: TagBody[]) 
+
+Assign tags to node. If tag is new then tag is also created additionally, if tag already exists then it is just assigned.
+
+### Example
+
+```javascript
+import { AlfrescoApi, TagsApi, TagBody } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const tagsApi = new TagsApi(alfrescoApi);
+const tag1 = new TagBody();
+tag1.tag = 'tag-test-1';
+const tag2 = new TagBody();
+tag2.tag = 'tag-test-2';
+
+tagsApi.assignTagsToNode('someNodeId', [tag1, tag2]).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+```
+
+### Parameters
+
+Name | Type                      | Description             | Notes
+------------- |---------------------------|-------------------------| -------------
+ **nodeId** | **string**    | Id of node to which tags should be assigned.  |
+ **tags** | [**TagBody[]**](TagBody.md) | List of tags to create and assign or just assign if they already exist. |
+
+
+### Return type
+
+[**TagPaging**](TagPaging.md)

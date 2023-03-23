@@ -444,6 +444,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             ['application/json'], ['application/json']);
     }
 
+    /**
+     * Assign tags to node. If tag is new then tag is also created additionally, if tag already exists then it is just assigned.
+     *
+     * @param nodeId Id of node to which tags should be assigned.
+     * @param tags List of tags to create and assign or just assign if they already exist.
+     *
+     * @return Promise<TagPaging>
+     */
     assignTagsToNode(nodeId: string, tags: TagBody[]): Promise<TagPaging> {
         const types = ['application/json'];
         return this.apiClient.callApi('/nodes/{nodeId}/tags', 'POST', { nodeId }, {},

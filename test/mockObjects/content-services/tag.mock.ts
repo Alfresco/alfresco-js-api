@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { BaseMock } from '../base.mock';
-import { TagPaging } from '../../../src/api/content-rest-api';
+import { TagBody, TagPaging } from '../../../src/api/content-rest-api';
 
 export class TagMock extends BaseMock {
     constructor(host?: string) {
@@ -70,6 +70,12 @@ export class TagMock extends BaseMock {
                     id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6',
                 },
             }]);
+    }
+
+    get201ResponseForAssigningTagsToNode(body: TagBody[]): void {
+        nock(this.host, { encodedQueryParams: true })
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/someNodeId/tags', JSON.stringify(body))
+            .reply(201, this.getPaginatedListOfTags());
     }
 
     private getPaginatedListOfTags(): TagPaging {
