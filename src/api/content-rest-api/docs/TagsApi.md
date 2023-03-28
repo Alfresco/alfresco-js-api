@@ -525,7 +525,7 @@ null (empty response body)
 
 <a name="assignTagsToNode"></a>
 ## assignTagsToNode
-> TagPaging assignTagsToNode(nodeId: string, tags: TagBody[]) 
+> TagPaging | TagEntry assignTagsToNode(nodeId: string, tags: TagBody[]) 
 
 Assign tags to node. If tag is new then tag is also created additionally, if tag already exists then it is just assigned.
 
@@ -561,4 +561,4 @@ Name | Type                      | Description             | Notes
 
 ### Return type
 
-[**TagPaging**](TagPaging.md)
+[**TagPaging**](TagPaging.md) | [**TagEntry**](TagEntry.md)

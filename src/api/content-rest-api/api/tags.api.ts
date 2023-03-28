@@ -450,9 +450,9 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @param nodeId Id of node to which tags should be assigned.
      * @param tags List of tags to create and assign or just assign if they already exist.
      *
-     * @return Promise<TagPaging>
+     * @return Promise<TagPaging | TagEntry>
      */
-    assignTagsToNode(nodeId: string, tags: TagBody[]): Promise<TagPaging> {
+    assignTagsToNode(nodeId: string, tags: TagBody[]): Promise<TagPaging | TagEntry> {
         const types = ['application/json'];
         return this.apiClient.callApi('/nodes/{nodeId}/tags', 'POST', { nodeId }, {},
             {}, {}, tags, types, types , TagEntry);
