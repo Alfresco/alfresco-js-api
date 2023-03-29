@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
-import { TagBody, TagEntry, TagsApi } from '../../src/api/content-rest-api';
+import { TagBody, TagEntry, TagPaging, TagsApi } from '../../src/api/content-rest-api';
 import { EcmAuthMock, TagMock } from '../../test/mockObjects';
 
 describe('Tags', () => {
@@ -98,6 +98,38 @@ describe('Tags', () => {
 
         it('should throw error if tags are not passed', () => {
             expect(tagsApi.createTags.bind(tagsApi, null)).throw();
+        });
+    });
+
+    describe('assignTagsToNode', () => {
+        it('should return tags after assigning them to node', (done) => {
+            const tag1 = new TagBody();
+            tag1.tag = 'tag-test-1';
+            const tag2 = new TagBody();
+            tag2.tag = 'tag-test-2';
+            const tags = [tag1, tag2];
+            tagMock.get201ResponseForAssigningTagsToNode(tags);
+
+            tagsApi.assignTagsToNode("someNodeId", tags).then((data) => {
+                const tagPaging = data as TagPaging;
+                expect(tagPaging.list.pagination.count).equal(2);
+                expect(tagPaging.list.entries[0].entry.tag).equal(tag1.tag);
+                expect(tagPaging.list.entries[1].entry.tag).equal(tag2.tag);
+                done();
+            });
+        });
+
+        it('should return tag after assigning it to node', (done) => {
+            const tag = new TagBody();
+            tag.tag = 'tag-test-1';
+            const tags = [tag];
+            tagMock.get201ResponseForAssigningTagsToNode(tags);
+
+            tagsApi.assignTagsToNode("someNodeId", tags).then((data) => {
+                const tagEntry = data as TagEntry;
+                expect(tagEntry.entry.tag).equal(tag.tag);
+                done();
+            });
         });
     });
 });

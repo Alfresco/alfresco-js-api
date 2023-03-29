@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { BaseMock } from '../base.mock';
-import { TagPaging } from '../../../src/api/content-rest-api';
+import { TagBody, TagEntry, TagPaging } from '../../../src/api/content-rest-api';
 
 export class TagMock extends BaseMock {
     constructor(host?: string) {
@@ -30,14 +30,7 @@ export class TagMock extends BaseMock {
                         skipCount: 0,
                         maxItems: 100
                     },
-                    entries: [
-                        {
-                            entry: {
-                                tag: 'tag-test-1',
-                                id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
-                            },
-                        }
-                    ],
+                    entries: [this.mockTagEntry()],
                 },
             });
     }
@@ -59,17 +52,15 @@ export class TagMock extends BaseMock {
     createTags201Response(): void {
         nock(this.host, { encodedQueryParams: true })
             .post('/alfresco/api/-default-/public/alfresco/versions/1/tags')
-            .reply(201, [{
-                entry: {
-                    tag: 'tag-test-1',
-                    id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6',
-                },
-            }, {
-                entry: {
-                    tag: 'tag-test-2',
-                    id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6',
-                },
-            }]);
+            .reply(201, [
+                this.mockTagEntry(), this.mockTagEntry('tag-test-2', 'd79bdbd0-9f55-45bb-9521-811e15bf48f6')
+            ]);
+    }
+
+    get201ResponseForAssigningTagsToNode(body: TagBody[]): void {
+        nock(this.host, { encodedQueryParams: true })
+            .post('/alfresco/api/-default-/public/alfresco/versions/1/nodes/someNodeId/tags', JSON.stringify(body))
+            .reply(201, body.length > 1 ? this.getPaginatedListOfTags() : this.mockTagEntry());
     }
 
     private getPaginatedListOfTags(): TagPaging {
@@ -81,21 +72,17 @@ export class TagMock extends BaseMock {
                     skipCount: 0,
                     maxItems: 100
                 },
-                entries: [
-                    {
-                        entry: {
-                            tag: 'tag-test-1',
-                            id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
-                        },
-                    },
-                    {
-                        entry: {
-                            tag: 'tag-test-2',
-                            id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6'
-                        },
-                    },
-                ],
+                entries: [this.mockTagEntry(), this.mockTagEntry('tag-test-2', 'd79bdbd0-9f55-45bb-9521-811e15bf48f6')],
             },
         }
+    }
+
+    private mockTagEntry(tag = 'tag-test-1', id = '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'): TagEntry {
+        return {
+            entry: {
+                tag,
+                id
+            },
+        };
     }
 }
