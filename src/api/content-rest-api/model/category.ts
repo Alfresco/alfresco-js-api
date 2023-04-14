@@ -21,6 +21,7 @@ export class Category {
     parentId?: string;
     hasChildren?: boolean;
     count?: number;
+    path?: string;
 
     constructor(input?: any) {
         if (input) {

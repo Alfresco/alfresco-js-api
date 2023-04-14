@@ -468,9 +468,9 @@ export class CategoriesApi extends BaseApi {
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
 
-    * @return Promise<CategoryEntry>
+    * @return Promise<CategoryPaging | CategoryEntry>
     */
-    linkNodeToCategory(nodeId: string, categoryLinkBodyCreate: CategoryLinkBody[], opts?: any): Promise<CategoryEntry> {
+    linkNodeToCategory(nodeId: string, categoryLinkBodyCreate: CategoryLinkBody[], opts?: any): Promise<CategoryPaging | CategoryEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(categoryLinkBodyCreate, 'categoryLinkBodyCreate');

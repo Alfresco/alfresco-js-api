@@ -8,5 +8,6 @@ Name | Type | Description | Notes
 **parentId** | **string** |  | [optional] [default to null]
 **hasChildren** | **boolean** |  | [optional] [default to null]
 **count** | **number** |  | [optional] [default to null]
+**path** | **string** |  | [optional] [default to null]
 
 
