@@ -195,9 +195,14 @@ describe('Categories', () => {
 
     it('should return 201 while linking category if all is ok', (done) => {
         categoriesMock.get201ResponseCategoryLinked('testNode');
-        categoriesApi.linkNodeToCategory('testNode', [{ categoryId: 'testId1' }]).then((response: CategoryEntry) => {
-            expect(response.entry.id).equal('testId1');
-            expect(response.entry.name).equal('testName1');
+        categoriesApi.linkNodeToCategory('testNode', [{ categoryId: 'testId1' }]).then((response) => {
+            if (response instanceof CategoryEntry) {
+                expect(response.entry.id).equal('testId1');
+                expect(response.entry.name).equal('testName1');
+            } else {
+                expect(response.list.entries[0].entry.id).equal('testId1');
+                expect(response.list.entries[0].entry.name).equal('testName1');
+            }
             done();
         });
     });

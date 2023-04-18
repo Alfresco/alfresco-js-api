@@ -58,6 +58,7 @@ export class CategoriesApi extends BaseApi {
 
         * @param opts.include Returns additional information about the category. The following optional fields can be requested:
             * count
+            * path
 
         * @return Promise<CategoryPaging>
     */
@@ -112,6 +113,7 @@ export class CategoriesApi extends BaseApi {
 
         * @param opts.include Returns additional information about the category. The following optional fields can be requested:
             * count
+            * path
 
         * @return Promise<CategoryEntry>
     */
@@ -162,6 +164,13 @@ export class CategoriesApi extends BaseApi {
     The list applies to a returned individual
     entity or entries within a collection.
 
+    If the API method also supports the **include**
+    parameter, then the fields specified in the **include**
+    parameter are returned in addition to those specified in the **fields** parameter.
+
+        * @param opts.include Returns additional information about the category. The following optional fields can be requested:
+            * path
+
         * @return Promise<CategoryPaging>
     */
     getCategoryLinksForNode(nodeId: string, opts?: any): Promise<CategoryPaging> {
@@ -176,7 +185,8 @@ export class CategoriesApi extends BaseApi {
         const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         const headerParams = {};
@@ -274,6 +284,10 @@ export class CategoriesApi extends BaseApi {
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
 
+    * @param opts.include Returns additional information about the category. The following optional fields can be requested:
+            * count
+            * path
+
     * @return Promise<CategoryEntry>
     */
     updateCategory(categoryId: string, categoryBodyUpdate: CategoryBody, opts?: any): Promise<CategoryEntry> {
@@ -289,7 +303,8 @@ export class CategoriesApi extends BaseApi {
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         const headerParams = {};
@@ -372,6 +387,10 @@ export class CategoriesApi extends BaseApi {
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
 
+    * @param opts.include Returns additional information about the category. The following optional fields can be requested:
+            * count
+            * path
+
     * @return Promise<CategoryPaging | CategoryEntry>
     */
     createSubcategories(categoryId: string, categoryBodyCreate: CategoryBody[], opts?: any): Promise<CategoryPaging | CategoryEntry> {
@@ -387,7 +406,8 @@ export class CategoriesApi extends BaseApi {
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         const headerParams = {};
@@ -468,6 +488,9 @@ export class CategoriesApi extends BaseApi {
     parameter, then the fields specified in the **include**
     parameter are returned in addition to those specified in the **fields** parameter.
 
+    * @param opts.include Returns additional information about the category. The following optional fields can be requested:
+            * path
+
     * @return Promise<CategoryPaging | CategoryEntry>
     */
     linkNodeToCategory(nodeId: string, categoryLinkBodyCreate: CategoryLinkBody[], opts?: any): Promise<CategoryPaging | CategoryEntry> {
@@ -483,7 +506,8 @@ export class CategoriesApi extends BaseApi {
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts['fields'], 'csv'),
+            'include': buildCollectionParam(opts['include'], 'csv')
         };
 
         const headerParams = {};
