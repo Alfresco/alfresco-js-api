@@ -4,6 +4,7 @@ Title: Changelog for @alfresco/js-api v5.5.0
 
 # Changelog
 
+- [3939ed803](git@github.com:Alfresco/alfresco-js-api/commit/3939ed803) use the gh strategy (#1565)
 - [e90fb3c62](git@github.com:Alfresco/alfresco-js-api/commit/e90fb3c62) [ACS-4126] viewer allow assigning tags to content basic (#1557)
 - [b4b9ffe28](git@github.com:Alfresco/alfresco-js-api/commit/b4b9ffe28) [ACS-4753] list of tags is not rendered because of missing count field in backend response (#1546)
 - [c3dcf1c39](git@github.com:Alfresco/alfresco-js-api/commit/c3dcf1c39) Use token as part of workflow (#1544)
