@@ -249,6 +249,42 @@ export class CategoriesMock extends BaseMock {
             });
     }
 
+    get201ResponseCategoryLinkedArray(nodeId: string): void {
+        nock(this.host, { encodedQueryParams: true })
+            .post(`/alfresco/api/-default-/public/alfresco/versions/1/nodes/${nodeId}/category-links`, [{ categoryId: 'testId1' }, { categoryId: 'testId2' }])
+            .reply(201, {
+                list: {
+                    pagination: {
+                        count: 2,
+                        hasMoreItems: false,
+                        totalItems: 2,
+                        skipCount: 0,
+                        maxItems: 100,
+                    },
+                    entries: [
+                        {
+                            entry: {
+                                id: 'testId1',
+                                name: 'testName1',
+                                parentId: 'testNodeArr',
+                                hasChildren: true,
+                                count: 0
+                            }
+                        },
+                        {
+                            entry: {
+                                id: 'testId2',
+                                name: 'testName2',
+                                parentId: 'testNodeArr',
+                                hasChildren: true,
+                                count: 0
+                            }
+                        }
+                    ]
+                }
+            });
+    }
+
     get403CategoryLinkPermissionDenied(nodeId: string): void {
         nock(this.host, { encodedQueryParams: true }).post(`/alfresco/api/-default-/public/alfresco/versions/1/nodes/${nodeId}/category-links`, [{ categoryId: 'testId1' }])
         .reply(403, {

@@ -6,6 +6,7 @@ import { EcmAuthMock } from '../../test/mockObjects';
 import { CategoriesMock } from '../mockObjects/content-services/categories.mock';
 import { CategoryPaging } from '../../src/api/content-rest-api/model/categoryPaging';
 import { CategoryEntry } from '../../src/api/content-rest-api/model/categoryEntry';
+import { fail } from 'assert';
 
 describe('Categories', () => {
     let authResponseMock: EcmAuthMock;
@@ -195,9 +196,26 @@ describe('Categories', () => {
 
     it('should return 201 while linking category if all is ok', (done) => {
         categoriesMock.get201ResponseCategoryLinked('testNode');
-        categoriesApi.linkNodeToCategory('testNode', [{ categoryId: 'testId1' }]).then((response: CategoryEntry) => {
-            expect(response.entry.id).equal('testId1');
-            expect(response.entry.name).equal('testName1');
+        categoriesApi.linkNodeToCategory('testNode', [{ categoryId: 'testId1' }]).then((response) => {
+            if (response instanceof CategoryEntry) {
+                expect(response.entry.id).equal('testId1');
+                expect(response.entry.name).equal('testName1');
+                done();
+            } else {
+                fail();
+            }
+        });
+    });
+
+    it('should return 201 while linking multiple categories if all is ok', (done) => {
+        categoriesMock.get201ResponseCategoryLinkedArray('testNodeArr');
+        categoriesApi.linkNodeToCategory('testNodeArr', [{ categoryId: 'testId1' }, { categoryId: 'testId2' }]).then((response) => {
+            const categoriesPaging = response as CategoryPaging;
+            expect(categoriesPaging.list.pagination.count).equal(2);
+            expect(categoriesPaging.list.entries[0].entry.id).equal('testId1');
+            expect(categoriesPaging.list.entries[0].entry.name).equal('testName1');
+            expect(categoriesPaging.list.entries[1].entry.id).equal('testId2');
+            expect(categoriesPaging.list.entries[1].entry.name).equal('testName2');
             done();
         });
     });
