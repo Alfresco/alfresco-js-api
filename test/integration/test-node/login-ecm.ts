@@ -41,12 +41,14 @@ async function main() {
         const discovery = new DiscoveryApi(alfrescoApi);
         discovery.getRepositoryInformation().then(
             (ecmVers) => {
-                console.log('ecmVersion');
+                console.log('ecmVersion', ecmVers);
             },
-            () => {
+            (err) => {
+                console.error('[Login ECM]', err);
                 process.exit(1);
             });
-    }, () => {
+    }, (err) => {
+        console.error('[Login ECM]', err);
         process.exit(1);
     });
 

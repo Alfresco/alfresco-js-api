@@ -44,7 +44,8 @@ async function main() {
         () => {
             console.log('login done');
         },
-        () => {
+        (err) => {
+            console.error('[Node Contents]', err);
             process.exit(1);
         }
     );
@@ -77,6 +78,7 @@ async function main() {
     const text = nodeContent.toString();
 
     if (text !== 'test extension') {
+        console.error(`node content does not match`);
         process.exit(1);
     }
 
