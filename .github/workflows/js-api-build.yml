@@ -22,16 +22,6 @@ jobs:
         name: "build and lint"
         runs-on: ubuntu-latest
         steps:
-            - name: get-npm-version
-              id: package-version
-              uses: martinbeentjes/npm-get-version-action@v1.3.1
-            - name: Create new tag
-              uses: cardinalby/git-tag-action@master
-              run: |
-                  echo "The new tag is: ${{ steps.package-version.outputs.current-version}}"
-              env:
-                  TAG: 'test-tag'
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: Checkout
               uses: actions/checkout@v3
               with:
@@ -42,6 +32,7 @@ jobs:
               with:
                 node-version: 16
                 cache: 'npm'
+
             - run: npm ci
 
             - name: Lint
@@ -136,8 +127,23 @@ jobs:
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Release Tag
-              if: github.ref == 'refs/heads/master'
-              shell: bash
-              run: |
-                  ./scripts/git-tag.sh
+            -   name: Get tag from package.json
+                if: github.ref == 'refs/heads/master'
+                id: getTag
+                uses: actions/github-script@v6
+                with:
+                    script: |
+                        const newTag = require('./package.json').version;
+                        core.setOutput('newTag', newTag);
+
+            -   name: Create new tag on Github
+                if: github.ref == 'refs/heads/master'
+                run: |
+                    echo "Creating a new tag: ${{ steps.getTag.outputs.newTag }}"
+                    git config --local user.name "alfresco-build"
+                    git config --local user.email "build@alfresco.com"
+                    git tag -a ${{ steps.getTag.outputs.newTag }} -m "${{ steps.getTag.outputs.newTag }} [ci skip] "
+                    git remote rm origin
+                    GITHUB_REPO=https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/Alfresco/alfresco-js-api.git
+                    git remote add origin $GITHUB_REPO
+                    git push origin --tags
