@@ -2,7 +2,7 @@
   "name": "@alfresco/js-api",
   "version": "5.5.0",
   "description": "JavaScript client library for the Alfresco REST API",
-  "author": "Alfresco Software, Ltd.",
+  "author": "Hyland Software, Inc. and its affiliates",
   "main": "index.js",
   "typings": "index.d.ts",
   "scripts": {
@@ -51,6 +51,7 @@
     "commander": "^6.0.0",
     "cspell": "^6.21.0",
     "eslint": "^7.27.0",
+    "eslint-plugin-license-header": "^0.6.0",
     "expect.js": "~0.3.1",
     "github-api": "^3.4.0",
     "markdown-toc": "^1.2.0",
