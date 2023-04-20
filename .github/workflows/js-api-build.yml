@@ -22,6 +22,16 @@ jobs:
         name: "build and lint"
         runs-on: ubuntu-latest
         steps:
+            - name: get-npm-version
+              id: package-version
+              uses: martinbeentjes/npm-get-version-action@v1.3.1
+            - name: Create new tag
+              uses: cardinalby/git-tag-action@master
+              run: |
+                  echo "The new tag is: ${{ steps.package-version.outputs.current-version}}"
+              env:
+                  TAG: 'test-tag'
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: Checkout
               uses: actions/checkout@v3
               with:
