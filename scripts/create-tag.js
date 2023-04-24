@@ -1,22 +1,15 @@
 module.exports = async ({github, context, version}) => {
 
-    console.log('context');
-    console.log(context);
-    console.log('version');
-    console.log(version);
-
     const developBranch = await github.rest.repos.getBranch({
         owner: context.repo.owner,
         repo: context.repo.repo,
         branch: 'develop'
     });
 
-    const tagName = require('../package.json').version + '-test';
+    const tagName = require('../package.json').version;
     const developSHA = developBranch.data.commit.sha;
 
-    console.log('Test the tag');
-    console.log('With tag name: ', tagName);
-    console.log('With SHA: ', developSHA);
+    console.log(`Creating a tag with title: ${tagName} and SHA: ${developSHA}`);
 
     const createdTag = await github.rest.git.createTag({
         owner: context.repo.owner,
@@ -35,6 +28,6 @@ module.exports = async ({github, context, version}) => {
     });
 
     if (createdRef.status === 201) {
-        console.log(`Tag ${tagName} created successfully`);
+        console.log(`Tag ${tagName} was created successfully`);
     }
 }
