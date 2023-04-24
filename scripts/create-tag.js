@@ -5,17 +5,25 @@ module.exports = async ({github, context, version}) => {
     console.log('version');
     console.log(version);
 
-    console.log('Test the tag');
+    const developBranch = await octokit.rest.repos.getBranch({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        branch: 'develop'
+    });
 
-    const tagName = 'test-2';
-    const HEAD_SHA = 'c5e7db4e0d869b2d67b9bb6fe2344770c858e4ac';
+    const tagName = require('../package.json').version + '-test';
+    const developSHA = developBranch.data.commit.sha;
+
+    console.log('Test the tag');
+    console.log('With tag name: ', tagName);
+    console.log('With SHA: ', developSHA);
 
     const createdTag = await github.rest.git.createTag({
         owner: context.repo.owner,
         repo: context.repo.repo,
         tag: tagName,
         message: tagName,
-        object: HEAD_SHA,
+        object: developSHA,
         type: "commit"
     });
 
