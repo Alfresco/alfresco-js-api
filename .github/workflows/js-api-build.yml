@@ -39,7 +39,7 @@ jobs:
                 github-token: ${{ secrets.GITHUB_TOKEN }}
                 script: |
                     const createTag = require('./scripts/create-tag.js');
-                    await createTag();
+                    await createTag({github, context});
 
             - name: Install Dependencies
               run: npm ci
