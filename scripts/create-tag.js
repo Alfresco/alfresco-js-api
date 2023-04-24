@@ -20,6 +20,12 @@ module.exports = async ({github, context}) => {
     const tagName = require('../package.json').version;
     const tagSHA = context.sha;
 
+    console.log('github');
+    console.log(github);
+
+    console.log('context');
+    console.log(context);
+
     console.log(`Creating a tag with title: ${tagName} and SHA: ${tagSHA}`);
 
     const createdTag = await github.rest.git.createTag({
