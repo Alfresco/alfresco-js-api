@@ -33,6 +33,14 @@ jobs:
                 node-version: 16
                 cache: 'npm'
 
+            - name: Create Tag
+              uses: actions/github-script@v6
+              with:
+                github-token: ${{ secrets.GITHUB_TOKEN }}
+                script: |
+                    const createTag = require('./scripts/create-tag.js');
+                    await createTag();
+
             - name: Install Dependencies
               run: npm ci
 
