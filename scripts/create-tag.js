@@ -1,5 +1,12 @@
 module.exports = async ({github, context, version}) => {
-    const organization = 'alfresco';
+
+    console.log('context');
+    console.log(context);
+    console.log('version');
+    console.log(version);
+
+
+    const organization = 'Alfresco';
 
     const { data: availablePackages } = await github.rest.packages.getAllPackageVersionsForPackageOwnedByOrg({
         package_type: 'npm',
@@ -8,9 +15,4 @@ module.exports = async ({github, context, version}) => {
     });
 
     console.log(availablePackages[0])
-
-    console.log('context');
-    console.log(context);
-    console.log('version');
-    console.log(version);
 }
