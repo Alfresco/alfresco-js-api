@@ -5,7 +5,7 @@ module.exports = async ({github, context, version}) => {
     console.log('version');
     console.log(version);
 
-    const developBranch = await octokit.rest.repos.getBranch({
+    const developBranch = await github.rest.repos.getBranch({
         owner: context.repo.owner,
         repo: context.repo.repo,
         branch: 'develop'
