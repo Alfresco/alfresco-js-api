@@ -28,7 +28,7 @@ module.exports = async ({github, context}) => {
         tag: tagName,
         message: tagName,
         object: tagSHA,
-        type: "commit"
+        type: 'commit'
     });
 
     const createdRef = await github.rest.git.createRef({
