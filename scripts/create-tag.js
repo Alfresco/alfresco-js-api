@@ -18,7 +18,7 @@
 module.exports = async ({github, context}) => {
 
     const tagName = require('../package.json').version + '-test';
-    const tagSHA = context.payload.after;
+    const tagSHA = 'dc864c0f11fcc425524367c34a6aa24d23d79bc5';
 
     console.log(`Creating a tag with title: ${tagName} and SHA: ${tagSHA}`);
 
