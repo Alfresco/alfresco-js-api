@@ -8,7 +8,7 @@
   "scripts": {
     "webpack": "webpack",
     "size": "size-limit",
-    "build": "npm run webpack && npm run size-limit"
+    "build": "npm run webpack && npm run size"
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^8.2.4",
