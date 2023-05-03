@@ -7,24 +7,25 @@
   "typings": "index.d.ts",
   "scripts": {
     "webpack": "webpack",
-    "build": "npm run webpack && npm run bundlesize-check",
-    "bundlesize-check": "bundlesize"
+    "size": "size-limit",
+    "build": "npm run webpack && npm run size-limit"
   },
   "devDependencies": {
-    "bundlesize": "^0.18.1",
+    "@size-limit/preset-small-lib": "^8.2.4",
+    "size-limit": "^8.2.4",
     "terser-webpack-plugin": "^5.3.7",
     "ts-loader": "^9.4.2",
     "webpack": "^5.81.0",
     "webpack-cli": "^5.0.2"
   },
-  "bundlesize": [
+  "size-limit": [
     {
       "path": "./test/tree-shaking-test.js",
-      "maxSize": "130 kb"
+      "limit": "130 kb"
     },
     {
       "path": "./test/tree-shaking-test.min.js",
-      "maxSize": "50 kb"
+      "limit": "50 kb"
     }
   ]
 }
