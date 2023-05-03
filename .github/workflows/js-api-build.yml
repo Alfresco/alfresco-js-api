@@ -11,6 +11,10 @@ on:
     schedule:
         - cron: '0 3 * * *' # At 03:00 AM nightly every day
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
 env:
     GITHUB_REPO_SLUG: ${{ github.repository }}
     GITHUB_BRANCH: ${{ github.ref }}
