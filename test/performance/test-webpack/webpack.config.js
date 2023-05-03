@@ -16,57 +16,54 @@
  */
 
 const path = require('path');
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
-module.exports = [{
-    entry: './index',
-    mode : 'production',
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: [/node_modules/, path.resolve(__dirname, 'test')]
-            }
-        ]
+module.exports = [
+    {
+        entry: './index',
+        mode: 'production',
+        module: {
+            rules: [
+                {
+                    test: /\.tsx?$/,
+                    use: 'ts-loader',
+                    exclude: [/node_modules/, path.resolve(__dirname, 'test')],
+                },
+            ],
+        },
+        resolve: {
+            extensions: ['.tsx', '.ts', '.js'],
+        },
+        output: {
+            filename: 'tree-shaking-test.js',
+            path: path.resolve(__dirname, 'test'),
+        },
+        optimization: {
+            minimize: false,
+        }
     },
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js']
+    {
+        entry: './index',
+        mode: 'production',
+        module: {
+            rules: [
+                {
+                    test: /\.tsx?$/,
+                    use: 'ts-loader',
+                    exclude: [/node_modules/, path.resolve(__dirname, 'test')],
+                },
+            ],
+        },
+        resolve: {
+            extensions: ['.tsx', '.ts', '.js'],
+        },
+        output: {
+            filename: 'tree-shaking-test.min.js',
+            path: path.resolve(__dirname, 'test'),
+        },
+        optimization: {
+            minimize: true,
+            minimizer: [new TerserPlugin()],
+        }
     },
-    output: {
-        filename: 'tree-shaking-test.js',
-        path: path.resolve(__dirname, 'test')
-    },
-    optimization: {
-        minimize: false
-    }
-},{
-    entry: './index',
-    mode : 'production',
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: [/node_modules/, path.resolve(__dirname, 'test')]
-            }
-        ]
-    },
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js']
-    },
-    output: {
-        filename: 'tree-shaking-test.min.js',
-        path: path.resolve(__dirname, 'test')
-    },
-    optimization: {
-        minimize: true,
-        minimizer: [new TerserPlugin()],
-    },
-    node: {
-        console: 'mock',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty'
-    }
-}];
+];
