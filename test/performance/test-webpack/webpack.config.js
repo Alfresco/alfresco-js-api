@@ -16,7 +16,7 @@
  */
 
 const path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = [{
     entry: './index',
@@ -60,34 +60,8 @@ module.exports = [{
         path: path.resolve(__dirname, 'test')
     },
     optimization: {
-        minimizer: [new UglifyJSPlugin({
-            uglifyOptions: {
-                output: {
-                    comments: false
-                },
-                compress: {
-                    unsafe_comps: true,
-                    properties: true,
-                    keep_fargs: false,
-                    pure_getters: true,
-                    collapse_vars: true,
-                    unsafe: true,
-                    sequences: true,
-                    dead_code: true,
-                    drop_debugger: true,
-                    comparisons: true,
-                    conditionals: true,
-                    evaluate: true,
-                    booleans: true,
-                    loops: true,
-                    unused: true,
-                    hoist_funs: true,
-                    if_return: true,
-                    join_vars: true,
-                    drop_console: true
-                }
-            }
-        })]
+        minimize: true,
+        minimizer: [new TerserPlugin()],
     },
     node: {
         console: 'mock',

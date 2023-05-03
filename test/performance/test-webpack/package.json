@@ -10,11 +10,10 @@
     "build": "npm run webpack && npm run bundlesize-check",
     "bundlesize-check": "bundlesize"
   },
-  "dependencies": {},
   "devDependencies": {
     "bundlesize": "^0.18.0",
+    "terser-webpack-plugin": "^4.2.3",
     "ts-loader": "^6.2.0",
-    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
   },
@@ -27,8 +26,5 @@
       "path": "./test/tree-shaking-test.min.js",
       "maxSize": "50 kb"
     }
-  ],
-  "keywords": [
-    "alfresco"
   ]
 }
