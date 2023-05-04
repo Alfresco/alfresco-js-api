@@ -11,6 +11,10 @@ on:
     schedule:
         - cron: '0 3 * * *' # At 03:00 AM nightly every day
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
 env:
     GITHUB_REPO_SLUG: ${{ github.repository }}
     GITHUB_BRANCH: ${{ github.ref }}
@@ -30,7 +34,7 @@ jobs:
             - name: node
               uses: actions/setup-node@v3
               with:
-                node-version: 16
+                node-version-file: '.nvmrc'
                 cache: 'npm'
 
             - name: Install Dependencies
@@ -57,7 +61,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v3
               with:
-                node-version: 16
+                node-version-file: '.nvmrc'
                 cache: 'npm'
 
             - name: Install Dependencies
@@ -82,7 +86,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v3
               with:
-                node-version: 16
+                node-version-file: '.nvmrc'
                 cache: 'npm'
 
             - name: Install Dependencies
@@ -105,7 +109,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v3
               with:
-                node-version: 16
+                node-version-file: '.nvmrc'
                 cache: 'npm'
 
             - name: Install Dependencies
@@ -136,7 +140,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v3
               with:
-                node-version: 16
+                node-version-file: '.nvmrc'
                 cache: 'npm'
 
             - name: Install Dependencies
@@ -152,7 +156,8 @@ jobs:
               name: Release library Npm registry
               if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
               with:
-                node-version: 16
+                node-version-file: '.nvmrc'
+                cache: 'npm'
                 registry-url: 'https://${{ vars.NPM_REGISTRY_ADDRESS }}'
                 scope: '@alfresco'
             - run: ./scripts/publish.sh
@@ -163,7 +168,8 @@ jobs:
               name: Release library GH registry
               if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
               with:
-                node-version: 16
+                node-version-file: '.nvmrc'
+                cache: 'npm'
                 registry-url: 'https://npm.pkg.github.com'
                 scope: '@alfresco'
             - run: ./scripts/publish.sh
