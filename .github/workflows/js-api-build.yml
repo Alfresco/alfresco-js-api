@@ -37,14 +37,6 @@ jobs:
                 node-version-file: '.nvmrc'
                 cache: 'npm'
 
-            - name: Create Release Tag
-              uses: actions/github-script@v6
-              with:
-                github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
-                script: |
-                    const createTag = require('./scripts/create-tag.js');
-                    await createTag({github, context});
-
             - name: Install Dependencies
               run: npm ci
 
