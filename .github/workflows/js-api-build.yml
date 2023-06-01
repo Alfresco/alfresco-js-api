@@ -183,3 +183,12 @@ jobs:
             - run: ./scripts/publish.sh
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Create Release Tag
+              if: github.ref == 'refs/heads/master'
+              uses: actions/github-script@v6
+              with:
+                github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
+                script: |
+                    const createTag = require('./scripts/create-tag.js');
+                    await createTag({github, context});
