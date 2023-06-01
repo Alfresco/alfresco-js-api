@@ -180,7 +180,7 @@ jobs:
               if: github.ref == 'refs/heads/master'
               uses: actions/github-script@v6
               with:
-                github-token: ${{ secrets.GITHUB_TOKEN }}
+                github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
                 script: |
                     const createTag = require('./scripts/create-tag.js');
                     await createTag({github, context});
