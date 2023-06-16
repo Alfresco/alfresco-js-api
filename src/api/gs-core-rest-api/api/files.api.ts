@@ -65,6 +65,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         let queryParams = {
             'hideRecord': opts['hideRecord'],
+            'parentId': opts['parentId'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
