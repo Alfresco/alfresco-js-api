@@ -16,7 +16,7 @@
  */
 
 import ee, { Emitter } from 'event-emitter';
-import superagent, { Response } from 'superagent';
+import superagent, { Response, SuperAgentRequest } from 'superagent';
 import { Authentication } from './authentication/authentication';
 import { RequestOptions, HttpClient, SecurityOptions, Emitters } from './api-clients/http-client.interface';
 import { Oauth2 } from './authentication/oauth2';
@@ -217,7 +217,7 @@ export class SuperagentHttpClient implements HttpClient {
         return request;
     }
 
-    setCsrfToken(request: any): void {
+    setCsrfToken(request: SuperAgentRequest): void {
         const token = SuperagentHttpClient.createCSRFToken();
         request.set('X-CSRF-TOKEN', token);
 
@@ -236,13 +236,13 @@ export class SuperagentHttpClient implements HttpClient {
      * Applies authentication headers to the request.
      * @param {Object} request The request object created by a <code>superagent()</code> call.
      */
-    private applyAuthToRequest(request: any, authentications: Authentication) {
+    private applyAuthToRequest(request: SuperAgentRequest, authentications: Authentication) {
         if (authentications) {
             switch (authentications.type) {
                 case 'basic': {
                     const basicAuth: BasicAuth = authentications.basicAuth;
                     if (basicAuth.username || basicAuth.password) {
-                        request.auth(basicAuth.username ? encodeURI(basicAuth.username) : '', basicAuth.password ? encodeURI(basicAuth.password) : '');
+                        request.auth(basicAuth.username || '', basicAuth.password || '');
                     }
                     break;
                 }
@@ -292,7 +292,7 @@ export class SuperagentHttpClient implements HttpClient {
      * all properties on <code>data<code> will be converted to this type.
      * @returns A value of the specified type.
      */
-    private static deserialize(response: any, returnType?: any): any {
+    private static deserialize(response: Response, returnType?: any): any {
         if (response === null) {
             return null;
         }
