@@ -71,7 +71,7 @@ describe('SuperagentHttpClient', () => {
 
     describe('#deserialize', () => {
         it('should the deserializer return an array of object when the response is an array', () => {
-            const data = {
+            const data: any = {
                 body: [
                     {
                         id: '1',
