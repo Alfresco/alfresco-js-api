@@ -1276,6 +1276,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
+            'skipCount': opts['skipCount'],
+            'maxItems': opts['maxItems'],
             'where': opts['where'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
