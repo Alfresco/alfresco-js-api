@@ -17,13 +17,22 @@
 
 export class Storage {
 
+    private static instance: Storage;
+
     _storage: any;
     prefix: string;
 
-    constructor() {
+    private constructor() {
         if (this.supportsStorage()) {
             this._storage = window.localStorage;
         }
+    }
+
+    public static getInstance(){
+        if(!Storage.instance){
+            Storage.instance = new Storage();
+        }
+        return Storage.instance;
     }
 
     supportsStorage() {

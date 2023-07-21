@@ -26,17 +26,23 @@ const globalAny: any = global;
 const chai = require('chai');
 const spies = require('chai-spies');
 chai.use(spies);
-import { Storage } from '../src/storage';
 
 describe('Oauth2 Implicit flow test', () => {
     let oauth2Auth: Oauth2Auth;
     let alfrescoJsApi: AlfrescoApi;
+    let setItemSpy: any;
 
     beforeEach(() => {
         alfrescoJsApi = new AlfrescoApi({
             hostEcm: ''
         } as AlfrescoApiConfig);
+
+        setItemSpy = chai.spy.on(alfrescoJsApi.storage, 'setItem');
     });
+
+    afterEach(()=>{
+        chai.spy.restore(alfrescoJsApi.storage, 'setItem');
+    })
 
     it('should throw an error if redirectUri is not present', (done) => {
         try {
@@ -110,12 +116,10 @@ describe('Oauth2 Implicit flow test', () => {
             alfrescoJsApi
         );
 
-        const redirectLoginSpy = chai.spy.on(oauth2Auth.storage, 'setItem');
-
         oauth2Auth.on('implicit_redirect', () => {
             expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
                 'openid-connect/auth?');
-            expect(redirectLoginSpy).to.have.been.called(1);
+            expect(setItemSpy).to.have.been.called(1);
             done();
         });
 
@@ -192,8 +196,6 @@ describe('Oauth2 Implicit flow test', () => {
             } as AlfrescoApiConfig,
             alfrescoJsApi
         );
-        oauth2Auth.storage = new Storage();
-        const setItemSpy = chai.spy.on(oauth2Auth.storage, 'setItem');
 
         oauth2Auth.on('implicit_redirect', () => {
             expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +

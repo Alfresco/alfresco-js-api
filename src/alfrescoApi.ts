@@ -65,7 +65,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
             config = {} as AlfrescoApiConfig;
         }
 
-        this.storage = new Storage();
+        this.storage = Storage.getInstance();
         this.storage.setDomainPrefix(config.domainPrefix);
 
         this.config = new AlfrescoApiConfig(config);

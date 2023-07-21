@@ -21,6 +21,7 @@ import { Authentication } from './authentication/authentication';
 import { SuperagentHttpClient } from './superagentHttpClient';
 import { Emitters, HttpClient, RequestOptions, LegacyHttpClient, SecurityOptions } from './api-clients/http-client.interface';
 import { paramToString } from './utils';
+import { Storage } from './storage';
 
 declare const Buffer: any;
 
@@ -67,6 +68,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     once: ee.EmitterMethod;
     emit: (type: string, ...args: any[]) => void;
 
+    storage: Storage;
     host: string;
     className: string;
     config: AlfrescoApiConfig;
@@ -103,6 +105,8 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
 
     constructor(host?: string, httpClient?: HttpClient) {
         this.host = host;
+
+        this.storage = Storage.getInstance();
 
         // fallback for backward compatibility
         this.httpClient = httpClient || new SuperagentHttpClient();
@@ -239,6 +243,8 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
             return ticketParam + ticket;
         } else if (this.config.ticketEcm) {
             return ticketParam + this.config.ticketEcm;
+        } else if (this.storage.getItem('ticket-ECM')) {
+            return ticketParam + this.storage.getItem('ticket-ECM');
         }
 
         return '';
