@@ -48,7 +48,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
     private refreshTokenIntervalPolling: any;
     private refreshTokenTimeoutIframe: any;
     private checkAccessToken = true;
-    storage: Storage;
 
     hashFragmentParams: any;
     token: string;
@@ -72,7 +71,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApi, httpClient?: HttpClient) {
         super(undefined, httpClient);
-        this.storage = new Storage();
+        this.storage = Storage.getInstance();
 
         this.className = 'Oauth2Auth';
 

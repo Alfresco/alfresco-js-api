@@ -26,7 +26,6 @@ import { isBrowser } from '../utils';
 export class ProcessAuth extends AlfrescoApiClient {
 
     ticket: string;
-    storage: Storage;
 
     authentications: Authentication = {
         'basicAuth': { ticket: '' }, type: 'activiti'
@@ -34,7 +33,7 @@ export class ProcessAuth extends AlfrescoApiClient {
 
     constructor(config: AlfrescoApiConfig, httpClient?: HttpClient) {
         super(undefined, httpClient);
-        this.storage = new Storage();
+        this.storage = Storage.getInstance();
         this.storage.setDomainPrefix(config.domainPrefix);
 
         this.className = 'ProcessAuth';

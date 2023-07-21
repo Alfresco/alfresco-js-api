@@ -28,14 +28,13 @@ export class ContentAuth extends AlfrescoApiClient {
 
     ticketStorageLabel: string;
     ticket: string;
-    storage: Storage;
 
     authApi: AuthenticationApi;
 
     constructor(config: AlfrescoApiConfig, alfrescoApi: AlfrescoApiType, httpClient?: HttpClient) {
         super(undefined, httpClient);
         this.className = 'ContentAuth';
-        this.storage = new Storage();
+        this.storage = Storage.getInstance();
         this.storage.setDomainPrefix(config.domainPrefix);
 
         this.setConfig(config);

@@ -19,7 +19,6 @@ import { AlfrescoApi } from '../src/alfrescoApi';
 import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { Oauth2Auth } from '../src/authentication/oauth2Auth';
 import { ContentApi } from '../src/api/content-custom-api/api/content.api';
-import { Storage } from '../src/storage';
 
 const chai = require('chai');
 const expect = chai.expect;
@@ -39,14 +38,16 @@ describe('Oauth2  test', () => {
 
     beforeEach(() => {
         const hostOauth2 = 'http://myOauthUrl:30081';
+        const mockStorage = { getItem: () => {}, setItem: () => {}};
 
         oauth2Mock = new OAuthMock(hostOauth2);
         authResponseMock = new EcmAuthMock(hostOauth2);
 
-
         alfrescoJsApi = new AlfrescoApi({
             hostEcm: 'myecm'
         } as AlfrescoApiConfig);
+
+        alfrescoJsApi.storage.setStorage(mockStorage);
     });
 
     describe('Discovery urls', () => {
@@ -511,7 +512,6 @@ describe('Oauth2  test', () => {
         describe('With mocked DOM', () => {
             jsdom({ url: 'http://localhost' });
             it('a failed hash check calls the logout', () => {
-
                 const oauth2Auth = new Oauth2Auth(
                     <AlfrescoApiConfig> {
                         oauth2: {
@@ -527,7 +527,6 @@ describe('Oauth2  test', () => {
                     alfrescoJsApi
                 );
 
-                oauth2Auth.storage = new Storage();
                 oauth2Auth.createIframe();
 
                 const iframe = <HTMLIFrameElement> document.getElementById('silent_refresh_token_iframe');
