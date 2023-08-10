@@ -11,7 +11,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
-        "target": "es5",
+        "target": "ES2015",
         "sourceRoot": "../src",
         "typeRoots": [
             "node_modules/@types"

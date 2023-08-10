@@ -4,7 +4,7 @@
         "module": "es2015",
         "importHelpers": true,
         "moduleResolution": "node",
-        "target": "es5",
+        "target": "ES2015",
         "outDir": "../dist/esm5"
     }
 }
