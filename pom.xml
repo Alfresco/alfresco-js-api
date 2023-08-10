@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <name>Alfresco Core REST API</name>
     <groupId>org.alfresco</groupId>
-    <artifactId>alfresco-core-rest-api</artifactId>
+    <artifactId>alfresco-js-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <srcdir>${project.basedir}/src</srcdir>

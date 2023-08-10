@@ -12,7 +12,6 @@
         "noImplicitReturns": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "suppressImplicitAnyIndexErrors": true,
         "moduleResolution": "node",
         "stripInternal": false,
         "target": "es2015",

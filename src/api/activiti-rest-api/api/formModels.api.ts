@@ -153,12 +153,19 @@ export class FormModelsApi extends BaseApi {
         } else if (typeof input === 'object') {
             input = input || {};
             let queryParams = {
+                // @ts-ignore
                 'nameLike': input['nameLike'],
+                // @ts-ignore
                 'appId': input['appId'],
+                // @ts-ignore
                 'tenantId': input['tenantId'],
+                // @ts-ignore
                 'start': input['start'],
+                // @ts-ignore
                 'sort': input['sort'],
+                // @ts-ignore
                 'order': input['order'],
+                // @ts-ignore
                 'size': input['size']
             };
 
