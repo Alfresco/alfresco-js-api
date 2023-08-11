@@ -16,11 +16,10 @@
  */
 
 import { AlfrescoApi, DiscoveryApi } from '@alfresco/js-api';
-
-const program = require('commander');
+import { Command } from 'commander';
+const program = new Command();
 
 async function main() {
-
     program
         .version('0.1.0')
         .option('--host  [type]', '')
@@ -28,16 +27,18 @@ async function main() {
         .option('-u, --username [type]', 'username ')
         .parse(process.argv);
 
+    const options = program.opts();
+
     const alfrescoApi = new AlfrescoApi();
 
     alfrescoApi.setConfig({
         provider: 'ECM',
-        hostEcm: program.host,
+        hostEcm: options.host,
         authType: 'BASIC',
         contextRoot: ''
     });
 
-    alfrescoApi.login(program.username, program.password).then(() => {
+    alfrescoApi.login(options.username, options.password).then(() => {
         const discovery = new DiscoveryApi(alfrescoApi);
         discovery.getRepositoryInformation().then(
             (ecmVers) => {
@@ -51,7 +52,6 @@ async function main() {
         console.error('[Login ECM]', err);
         process.exit(1);
     });
-
 }
 
 main();

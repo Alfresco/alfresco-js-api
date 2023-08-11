@@ -18,7 +18,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import { AlfrescoApi } from '@alfresco/js-api';
-import { SitesApi } from '../../../src/api/content-rest-api/api/sites.api';
+import { SitesApi } from '../../../src/api/content-rest-api';
 import { UploadApi } from '../../../src/api/content-custom-api';
 
 const program = require('commander');
