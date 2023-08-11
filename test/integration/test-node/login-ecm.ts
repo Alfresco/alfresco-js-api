@@ -29,7 +29,6 @@ async function main() {
         .parse(argv);
 
     const options = program.opts();
-
     const alfrescoApi = new AlfrescoApi();
 
     alfrescoApi.setConfig({
