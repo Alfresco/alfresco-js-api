@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+import { argv, exit } from 'node:process';
 import { AlfrescoApi, DiscoveryApi } from '@alfresco/js-api';
 import { Command } from 'commander';
 const program = new Command();
@@ -25,7 +26,7 @@ async function main() {
         .option('--host  [type]', '')
         .option('-p, --password [type]', 'password ')
         .option('-u, --username [type]', 'username ')
-        .parse(process.argv);
+        .parse(argv);
 
     const options = program.opts();
 
@@ -38,20 +39,22 @@ async function main() {
         contextRoot: ''
     });
 
-    alfrescoApi.login(options.username, options.password).then(() => {
+    try {
+        await alfrescoApi.login(options.username, options.password);
         const discovery = new DiscoveryApi(alfrescoApi);
-        discovery.getRepositoryInformation().then(
-            (ecmVers) => {
-                console.log('ecmVersion', ecmVers);
-            },
-            (err) => {
-                console.error('[Login ECM]', err);
-                process.exit(1);
-            });
-    }, (err) => {
+
+        try {
+            const repoInfo = await discovery.getRepositoryInformation();
+            console.log(repoInfo);
+        } catch (err) {
+            console.error('[Login ECM]', err);
+            exit(1);
+        }
+
+    } catch (err) {
         console.error('[Login ECM]', err);
-        process.exit(1);
-    });
+        exit(1);
+    }
 }
 
 main();
