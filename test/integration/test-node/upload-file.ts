@@ -17,36 +17,36 @@
 
 import * as path from 'path';
 import * as fs from 'fs';
+import { exit, argv } from 'node:process';
 import { AlfrescoApi } from '@alfresco/js-api';
 import { SitesApi } from '../../../src/api/content-rest-api';
 import { UploadApi } from '../../../src/api/content-custom-api';
 
-const program = require('commander');
+import { Command } from 'commander';
+const program = new Command();
 
 async function main() {
-
     program
         .version('0.1.0')
         .option('--host  [type]', '')
         .option('-p, --password [type]', 'password ')
         .option('-u, --username [type]', 'username ')
-        .parse(process.argv);
+        .parse(argv);
 
+    const options = program.opts();
     const alfrescoApi = new AlfrescoApi({
         provider: 'ECM',
-        hostEcm: program.host,
+        hostEcm: options.host,
         authType: 'BASIC',
         contextRoot: ''
     });
 
-    alfrescoApi.login(program.username, program.password).then(
-        () => {
-            console.log('login done');
-        },
-        () => {
-            process.exit(1);
-        }
-    );
+    try {
+        await alfrescoApi.login(options.username, options.password);
+    } catch {
+        console.error('Error logging in');
+        exit(1);
+    }
 
     const pathFile = path.join(path.resolve(__dirname, 'testExtension.test'));
     const file = fs.createReadStream(pathFile);
@@ -59,25 +59,23 @@ async function main() {
         visibility: 'PUBLIC'
     });
 
-    uploadApi.uploadFile(
-        file,
-        '',
-        site.entry.guid,
-        null,
-        {
-            'name': 'a_png_file.png',
-            'nodeType': 'cm:content',
-            'renditions': 'doclib'
-        }
-    ).then(
-        () => {
-            console.log(`file uploaded`);
-        },
-        (e: any) => {
-            console.log(`error ${e}`);
-            process.exit(1);
-        }
-    );
+    try {
+        await uploadApi.uploadFile(
+            file,
+            '',
+            site.entry.guid,
+            null,
+            {
+                'name': 'a_png_file.png',
+                'nodeType': 'cm:content',
+                'renditions': 'doclib'
+            }
+        );
+        console.log(`file uploaded`);
+    } catch (err) {
+        console.log(`error ${err}`);
+        exit(1);
+    }
 }
 
 main();
