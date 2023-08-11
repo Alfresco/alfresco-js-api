@@ -259,37 +259,31 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         this.username = username;
 
         if (this.isOauthConfiguration()) {
-            return new Promise((resolve, reject) => {
-                this.oauth2Auth.login(username, password).then(
-                    (accessToken) => {
-                        this.config.accessToken = accessToken;
-                        resolve(accessToken)
-                    },
-                    reject
-                )
-            });
+            const promise = this.oauth2Auth.login(username, password);
+            promise.then(
+                (accessToken) => {
+                    this.config.accessToken = accessToken;
+                }
+            );
+            return promise;
         } else {
             if (this.isBpmConfiguration()) {
-                return new Promise((resolve, reject) => {
-                    this.processAuth.login(username, password).then(
-                        (ticketBpm) => {
-                            this.config.ticketBpm = ticketBpm;
-                            resolve(ticketBpm);
-                        },
-                        reject
-                    )
-                });
+                const promise = this.processAuth.login(username, password);
+                promise.then(
+                    (ticketBpm) => {
+                        this.config.ticketBpm = ticketBpm;
+                    }
+                );
+                return promise;
             } else if (this.isEcmConfiguration()) {
-                return new Promise((resolve, reject) => {
-                    this.contentAuth.login(username, password).then(
-                        (ticketEcm) => {
-                            this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
-                            this.config.ticketEcm = ticketEcm;
-                            resolve(ticketEcm);
-                        },
-                        reject
-                    )
-                });
+                const promise = this.contentAuth.login(username, password);
+                promise.then(
+                    (ticketEcm) => {
+                        this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
+                        this.config.ticketEcm = ticketEcm;
+                    }
+                );
+                return promise;
             } else if (this.isEcmBpmConfiguration()) {
                 const contentProcessPromise = this.loginBPMECM(username, password);
 
