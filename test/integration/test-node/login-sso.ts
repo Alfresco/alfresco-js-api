@@ -15,27 +15,28 @@
  * limitations under the License.
  */
 
+import { exit, argv } from 'node:process';
 import { AlfrescoApi } from '@alfresco/js-api';
-
-const program = require('commander');
+import { Command } from 'commander';
+const program = new Command();
 
 async function main() {
-
     program
         .version('0.1.0')
         .option('--host  [type]', '')
         .option('-p, --password [type]', 'password ')
         .option('-u, --username [type]', 'username ')
-        .parse(process.argv);
+        .parse(argv);
 
+    const options = program.opts();
     const alfrescoApi = new AlfrescoApi();
 
     alfrescoApi.setConfig({
         provider: 'ALL',
-        hostBpm: program.host,
+        hostBpm: options.host,
         authType: 'OAUTH',
         oauth2: {
-            host: `${program.host}/auth/realms/alfresco`,
+            host: `${options.host}/auth/realms/alfresco`,
             clientId: `alfresco`,
             scope: 'openid',
             secret: '',
@@ -46,15 +47,13 @@ async function main() {
         contextRoot: ''
     });
 
-    alfrescoApi.login(program.username, program.password).then(() => {
+    try {
+        await alfrescoApi.login(options.username, options.password);
         console.log('login SSO ok');
-        alfrescoApi.logout();
-    }, (error) => {
+    } catch (error) {
         console.log(`login SSO error ${JSON.stringify(error)}`);
-        alfrescoApi.logout();
-        process.exit(1);
-    });
-
+        exit(1);
+    }
 }
 
 main();
