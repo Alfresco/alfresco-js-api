@@ -16,12 +16,12 @@
  */
 
 import ee from 'event-emitter';
-import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
+import { AuthenticationApi, TicketBody } from '../api/auth-rest-api';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import { Storage } from '../storage';
-import { AlfrescoApiType } from '../../src/to-deprecate/alfresco-api-type';
+import { AlfrescoApiType } from '../to-deprecate/alfresco-api-type';
 import { HttpClient } from '../api-clients/http-client.interface';
 
 export class ContentAuth extends AlfrescoApiClient {
@@ -70,21 +70,21 @@ export class ContentAuth extends AlfrescoApiClient {
 
     /**
      * login Alfresco API
-     * @param  username:   // Username to login
-     * @param   password:   // Password to login
+     * @param  username Username to login
+     * @param  password Password to login
      *
      * @returns A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    login(username: string, password: string): Promise<any> {
+    login(username: string, password: string): Promise<string> {
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
-        let loginRequest: any = {};
+        const loginRequest = new TicketBody({
+            userId: this.authentications.basicAuth.username,
+            password: this.authentications.basicAuth.password
+        });
 
-        loginRequest.userId = this.authentications.basicAuth.username;
-        loginRequest.password = this.authentications.basicAuth.password;
-
-        let promise: any = new Promise((resolve, reject) => {
+        let promise: any = new Promise<string>((resolve, reject) => {
             this.authApi.createTicket(loginRequest)
                 .then((data: any) => {
                     this.saveUsername(username);
@@ -115,17 +115,18 @@ export class ContentAuth extends AlfrescoApiClient {
      *
      * @returns A promise that returns  if resolved and {error} if rejected.
      * */
-    validateTicket(): Promise<any> {
+    validateTicket(): Promise<string> {
         this.setTicket(this.config.ticketEcm);
 
-        let promise: any = new Promise((resolve, reject) => {
-            this.authApi.validateTicket().then((data: any) => {
+        let promise: any = new Promise<string>((resolve, reject) => {
+            this.authApi.validateTicket().then(
+                (data: any) => {
                     this.setTicket(data.entry.id);
                     promise.emit('success');
                     this.emit('logged-in');
                     resolve(data.entry.id);
                 },
-                                               (error) => {
+                (error) => {
                     if (error.status === 401) {
                         promise.emit('unauthorized');
                     }
@@ -143,14 +144,14 @@ export class ContentAuth extends AlfrescoApiClient {
      *
      * @returns {Promise} A promise that returns { authentication ticket} if resolved and {error} if rejected.
      * */
-    logout(): Promise<any> {
+    logout(): Promise<void> {
         this.saveUsername('');
-        let promise: any = new Promise((resolve, reject) => {
+        let promise: any = new Promise<void>((resolve, reject) => {
             this.authApi.deleteTicket().then(
                 () => {
                     promise.emit('logout');
                     this.invalidateSession();
-                    resolve('logout');
+                    resolve();
                 },
                 (error) => {
                     if (error.status === 401) {
@@ -204,5 +205,4 @@ export class ContentAuth extends AlfrescoApiClient {
     getAuthentication(): Authentication {
         return this.authentications;
     }
-
 }

@@ -78,12 +78,12 @@ export class ProcessAuth extends AlfrescoApiClient {
 
     /**
      * login Activiti API
-     * @param  username:   // Username to login
-     * @param  password:   // Password to login
+     * @param username Username to login
+     * @param password Password to login
      *
      * @returns A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    login(username: string, password: string): Promise<any> {
+    login(username: string, password: string): Promise<string> {
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
@@ -103,7 +103,7 @@ export class ProcessAuth extends AlfrescoApiClient {
         let contentTypes = ['application/x-www-form-urlencoded'];
         let accepts = ['application/json'];
 
-        let promise: any = new Promise((resolve, reject) => {
+        let promise: any = new Promise<string>((resolve, reject) => {
             this.callApi(
                 '/app/authentication', 'POST',
                 pathParams, queryParams, headerParams, formParams, postBody,
@@ -131,7 +131,6 @@ export class ProcessAuth extends AlfrescoApiClient {
         });
 
         ee(promise); // jshint ignore:line
-
         return promise;
     }
 
@@ -140,14 +139,14 @@ export class ProcessAuth extends AlfrescoApiClient {
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    logout(): Promise<any> {
+    logout(): Promise<void> {
         this.saveUsername('');
         let postBody = {}, pathParams = {}, queryParams = {}, headerParams = {}, formParams = {};
 
         let contentTypes = ['application/json'];
         let accepts = ['application/json'];
 
-        let promise: any = new Promise((resolve, reject) => {
+        let promise: any = new Promise<void>((resolve, reject) => {
             this.callApi(
                 '/app/logout', 'GET',
                 pathParams, queryParams, headerParams, formParams, postBody,
@@ -156,7 +155,7 @@ export class ProcessAuth extends AlfrescoApiClient {
                 () => {
                     this.invalidateSession();
                     promise.emit('logout');
-                    resolve('logout');
+                    resolve();
                 },
                 (error) => {
                     if (error.status === 401) {
@@ -168,14 +167,13 @@ export class ProcessAuth extends AlfrescoApiClient {
         });
 
         ee(promise);
-
         return promise;
     }
 
     /**
      * Set the current Ticket
      *
-     * @param  Ticket
+     * @param ticket Ticket value
      * */
     setTicket(ticket: string) {
         this.authentications.basicAuth.ticket = ticket;
@@ -211,7 +209,7 @@ export class ProcessAuth extends AlfrescoApiClient {
     /**
      * return the Authentication
      * */
-    getAuthentication(): any {
-        return  this.authentications;
+    getAuthentication(): Authentication {
+        return this.authentications;
     }
 }

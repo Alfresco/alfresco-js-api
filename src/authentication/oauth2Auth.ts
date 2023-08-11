@@ -19,7 +19,7 @@ import ee from 'event-emitter';
 import { AlfrescoApiClient } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
-import { AuthenticationApi } from '../api/auth-rest-api/api/authentication.api';
+import { AuthenticationApi } from '../api/auth-rest-api';
 import { AlfrescoApi } from '../alfrescoApi';
 import { Storage } from '../storage';
 import { HttpClient } from '../api-clients/http-client.interface';
@@ -268,7 +268,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     b64DecodeUnicode(b64string: string) {
-        const base64 = b64string.replace(/\-/g, '+').replace(/\_/g, '/');
+        const base64 = b64string.replace(/-/g, '+').replace(/_/g, '/');
         return decodeURIComponent(
             atob(base64)
                 .split('')
@@ -430,7 +430,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         let hashFragmentParams = null;
 
         if (typeof window !== 'undefined') {
-            let hash;
+            let hash: string;
 
             if (!externalHash) {
                 hash = decodeURIComponent(window.location.hash);
@@ -447,9 +447,9 @@ export class Oauth2Auth extends AlfrescoApiClient {
                 const questionMarkPosition = hash.indexOf('?');
 
                 if (questionMarkPosition > -1) {
-                    hash = hash.substr(questionMarkPosition + 1);
+                    hash = hash.substring(questionMarkPosition + 1);
                 } else {
-                    hash = hash.substr(1);
+                    hash = hash.substring(1);
                 }
                 hashFragmentParams = this.parseQueryString(hash);
             }
@@ -459,7 +459,13 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     parseQueryString(queryString: string): any {
         const data: { [key: string]: any } = {};
-        let pairs, pair, separatorIndex, escapedKey, escapedValue, key, value;
+        let pairs: string[];
+        let pair: string;
+        let separatorIndex: number;
+        let escapedKey: string;
+        let escapedValue: string;
+        let key: string;
+        let value: string;
 
         if (queryString !== null) {
             pairs = queryString.split('&');
@@ -472,15 +478,15 @@ export class Oauth2Auth extends AlfrescoApiClient {
                     escapedKey = pair;
                     escapedValue = null;
                 } else {
-                    escapedKey = pair.substr(0, separatorIndex);
-                    escapedValue = pair.substr(separatorIndex + 1);
+                    escapedKey = pair.substring(0, separatorIndex);
+                    escapedValue = pair.substring(separatorIndex + 1);
                 }
 
                 key = decodeURIComponent(escapedKey);
                 value = decodeURIComponent(escapedValue);
 
-                if (key.substr(0, 1) === '/') {
-                    key = key.substr(1);
+                if (key.substring(0, 1) === '/') {
+                    key = key.substring(1);
                 }
 
                 data[key] = value;
@@ -612,8 +618,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     /**
-     * Refresh the  Token
-     * */
+     * Refresh the Token
+    */
     refreshToken(): Promise<any> {
         let postBody = {}, pathParams = {}, queryParams = {}, formParams = {};
 

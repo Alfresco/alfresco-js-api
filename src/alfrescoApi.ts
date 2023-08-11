@@ -171,27 +171,13 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
     /**@private? */
     errorListeners() {
-
-        this.contentClient.off('error', () => {
-        });
-
-        this.authClient.off('error', () => {
-        });
-
-        this.contentPrivateClient.off('error', () => {
-        });
-
-        this.processClient.off('error', () => {
-        });
-
-        this.searchClient.off('error', () => {
-        });
-
-        this.discoveryClient.off('error', () => {
-        });
-
-        this.gsClient.off('error', () => {
-        });
+        this.contentClient.off('error', () => {});
+        this.authClient.off('error', () => {});
+        this.contentPrivateClient.off('error', () => {});
+        this.processClient.off('error', () => {});
+        this.searchClient.off('error', () => {});
+        this.discoveryClient.off('error', () => {});
+        this.gsClient.off('error', () => {});
 
         this.contentClient.on('error', (error: any) => {
             this.errorHandler(error);
@@ -255,8 +241,8 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
     /**
      * login Alfresco API
-     * @param  username:   // Username to login
-     * @param  password:   // Password to login
+     * @param  username Username to login
+     * @param  password Password to login
      *
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
@@ -273,46 +259,39 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         this.username = username;
 
         if (this.isOauthConfiguration()) {
-
-            let oauth2AuthPromise;
-
-            oauth2AuthPromise = this.oauth2Auth.login(username, password);
-
-            oauth2AuthPromise.then((accessToken) => {
-                this.config.accessToken = accessToken;
-            }, (e) => {
-                console.log('login OAUTH error', e);
+            return new Promise((resolve, reject) => {
+                this.oauth2Auth.login(username, password).then(
+                    (accessToken) => {
+                        this.config.accessToken = accessToken;
+                        resolve(accessToken)
+                    },
+                    reject
+                )
             });
-
-            return oauth2AuthPromise;
-
         } else {
-
             if (this.isBpmConfiguration()) {
-                const processPromise = this.processAuth.login(username, password);
-
-                processPromise.then((ticketBpm) => {
-                    this.config.ticketBpm = ticketBpm;
-                }, () => {
-                    console.log('login BPM error');
+                return new Promise((resolve, reject) => {
+                    this.processAuth.login(username, password).then(
+                        (ticketBpm) => {
+                            this.config.ticketBpm = ticketBpm;
+                            resolve(ticketBpm);
+                        },
+                        reject
+                    )
                 });
-
-                return processPromise;
             } else if (this.isEcmConfiguration()) {
-                const contentPromise = this.contentAuth.login(username, password);
-
-                contentPromise.then((ticketEcm) => {
-                    this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
-
-                    this.config.ticketEcm = ticketEcm;
-                }, () => {
-                    console.log('login ECM error');
+                return new Promise((resolve, reject) => {
+                    this.contentAuth.login(username, password).then(
+                        (ticketEcm) => {
+                            this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
+                            this.config.ticketEcm = ticketEcm;
+                            resolve(ticketEcm);
+                        },
+                        reject
+                    )
                 });
-
-                return contentPromise;
-
             } else if (this.isEcmBpmConfiguration()) {
-                const contentProcessPromise = this._loginBPMECM(username, password);
+                const contentProcessPromise = this.loginBPMECM(username, password);
 
                 contentProcessPromise.then((data) => {
                     this.config.ticketEcm = data[0];
@@ -354,21 +333,21 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
     /**
      * login Tickets
      *
-     * @param   ticketEcm // alfresco ticket
-     * @param   ticketBpm // alfresco ticket
+     * @param ticketEcm alfresco ticket
+     * @param ticketBpm alfresco ticket
      * */
-    loginTicket(ticketEcm: string, ticketBpm: string): Promise<any> {
+    loginTicket(ticketEcm: string, ticketBpm: string): Promise<string> {
         this.config.ticketEcm = ticketEcm;
         this.config.ticketBpm = ticketBpm;
 
         return this.contentAuth.validateTicket();
     }
 
-    _loginBPMECM(username: string, password: string): Promise<any> {
+    private loginBPMECM(username: string, password: string): Promise<[string, string]> {
         const contentPromise = this.contentAuth.login(username, password);
         const processPromise = this.processAuth.login(username, password);
 
-        const promise: any = new Promise((resolve, reject) => {
+        const promise: any = new Promise<[string, string]>((resolve, reject) => {
             Promise.all([contentPromise, processPromise]).then(
                 (data) => {
                     promise.emit('success');
@@ -387,14 +366,13 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         });
 
         ee(promise); // jshint ignore:line
-
         return promise;
     }
 
     /**
      * logout Alfresco API
      * */
-    logout(): Promise<any> {
+    logout(): Promise<void> {
         this.username = null;
 
         if (this.isOauthConfiguration()) {
@@ -406,8 +384,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
                 const contentPromise = this.contentAuth.logout();
                 contentPromise.then(
                     () => this.config.ticket = undefined,
-                    () => {
-                    }
+                    () => {}
                 );
                 return contentPromise;
             } else if (this.isEcmBpmConfiguration()) {
@@ -417,16 +394,16 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         }
     }
 
-    _logoutBPMECM(): Promise<any> {
+    private _logoutBPMECM(): Promise<void> {
         const contentPromise = this.contentAuth.logout();
         const processPromise = this.processAuth.logout();
 
-        const promise: any = new Promise((resolve, reject) => {
+        const promise: any = new Promise<void>((resolve, reject) => {
             Promise.all([contentPromise, processPromise]).then(
                 () => {
                     this.config.ticket = undefined;
                     promise.emit('logout');
-                    resolve('logout');
+                    resolve();
                 },
                 (error) => {
                     if (error.status === 401) {
@@ -438,7 +415,6 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         });
 
         ee(promise); // jshint ignore:line
-
         return promise;
     }
 
@@ -502,7 +478,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
     /**
      * refresh token
      * */
-    refreshToken(): Promise<string> {
+    refreshToken(): Promise<any> {
         if (!this.isOauthConfiguration()) {
             return Promise.reject('Missing the required oauth2 configuration');
         }
@@ -522,14 +498,14 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
      * Set the current Ticket
      *
      * @param ticketEcm
-     * @param TicketBpm
+     * @param ticketBpm
      * */
-    setTicket(ticketEcm: string, TicketBpm: string) {
+    setTicket(ticketEcm: string, ticketBpm: string) {
         if (this.contentAuth) {
             this.contentAuth.setTicket(ticketEcm);
         }
         if (this.processAuth) {
-            this.processAuth.setTicket(TicketBpm);
+            this.processAuth.setTicket(ticketBpm);
         }
     }
 
@@ -562,7 +538,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
     /**
      * Get the current Ticket for the Ecm and BPM
      * */
-    getTicket(): string[] {
+    getTicket(): [string, string] {
         return [this.contentAuth.getTicket(), this.processAuth.getTicket()];
     }
 
