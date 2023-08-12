@@ -20,7 +20,7 @@ export class PermissionElement {
     name?: string;
     accessStatus?: PermissionElement.AccessStatusEnum | string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PermissionElement>) {
         if (input) {
             Object.assign(this, input);
         }

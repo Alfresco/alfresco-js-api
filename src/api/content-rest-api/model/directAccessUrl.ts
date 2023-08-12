@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api';
 
 export class DirectAccessUrl {
     /**
@@ -31,7 +31,7 @@ export class DirectAccessUrl {
      */
     expiryTime?: Date;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<DirectAccessUrl>) {
         if (input) {
             Object.assign(this, input);
             this.expiryTime = input.expiryTime ? DateAlfresco.parseDate(input.expiryTime) : undefined;

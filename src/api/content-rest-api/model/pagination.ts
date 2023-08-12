@@ -49,7 +49,7 @@ If there was no **maxItems** parameter then the default value is 100.
      */
     maxItems?: number;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Pagination>) {
         if (input) {
             Object.assign(this, input);
         }

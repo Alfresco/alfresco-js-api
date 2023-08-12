@@ -41,7 +41,7 @@ export class Download {
      */
     status?: Download.StatusEnum | string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Download>) {
         if (input) {
             Object.assign(this, input);
         }

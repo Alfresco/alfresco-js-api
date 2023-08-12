@@ -20,7 +20,7 @@ import { DirectAccessUrl } from './directAccessUrl';
 export class DirectAccessUrlEntry {
     entry: DirectAccessUrl;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<DirectAccessUrlEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new DirectAccessUrl(input.entry) : undefined;

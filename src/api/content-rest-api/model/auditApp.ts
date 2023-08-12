@@ -22,7 +22,7 @@ export class AuditApp {
     maxEntryId?: number;
     minEntryId?: number;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AuditApp>) {
         if (input) {
             Object.assign(this, input);
         }

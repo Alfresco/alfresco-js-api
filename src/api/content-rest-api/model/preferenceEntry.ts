@@ -20,7 +20,7 @@ import { Preference } from './preference';
 export class PreferenceEntry {
     entry: Preference;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PreferenceEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Preference(input.entry) : undefined;

@@ -22,7 +22,7 @@ export class Group {
     parentIds?: string[];
     zones?: string[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Group>) {
         if (input) {
             Object.assign(this, input);
         }

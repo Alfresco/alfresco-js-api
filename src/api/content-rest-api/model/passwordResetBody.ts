@@ -29,7 +29,7 @@ export class PasswordResetBody {
      */
     key: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PasswordResetBody>) {
         if (input) {
             Object.assign(this, input);
         }

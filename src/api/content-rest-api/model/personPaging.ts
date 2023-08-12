@@ -20,7 +20,7 @@ import { PersonPagingList } from './personPagingList';
 export class PersonPaging {
     list?: PersonPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PersonPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new PersonPagingList(input.list) : undefined;

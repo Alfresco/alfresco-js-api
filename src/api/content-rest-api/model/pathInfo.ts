@@ -15,18 +15,18 @@
  * limitations under the License.
  */
 
-import { PathElement } from '../../content-rest-api/model/pathElement';
+import { PathElement } from './pathElement';
 
 export class PathInfo {
     elements?: PathElement[];
     name?: string;
     isComplete?: boolean;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PathInfo>) {
         if (input) {
             Object.assign(this, input);
             if (input.elements) {
-                this.elements = input.elements.map((item: any) => {
+                this.elements = input.elements.map((item) => {
                     return new PathElement(item);
                 });
             }

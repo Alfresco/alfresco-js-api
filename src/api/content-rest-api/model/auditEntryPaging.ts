@@ -20,7 +20,7 @@ import { AuditEntryPagingList } from './auditEntryPagingList';
 export class AuditEntryPaging {
     list?: AuditEntryPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AuditEntryPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new AuditEntryPagingList(input.list) : undefined;

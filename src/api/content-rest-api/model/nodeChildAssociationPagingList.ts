@@ -17,14 +17,14 @@
 
 import { Node } from './node';
 import { NodeChildAssociationEntry } from './nodeChildAssociationEntry';
-import { Pagination } from '../../content-rest-api/model/pagination';
+import { Pagination } from './pagination';
 
 export class NodeChildAssociationPagingList {
     pagination?: Pagination;
     entries?: NodeChildAssociationEntry[];
     source?: Node;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<NodeChildAssociationPagingList>) {
         if (input) {
             Object.assign(this, input);
             this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;

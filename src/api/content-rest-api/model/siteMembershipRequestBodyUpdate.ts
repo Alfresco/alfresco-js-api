@@ -18,7 +18,7 @@
 export class SiteMembershipRequestBodyUpdate {
     message?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteMembershipRequestBodyUpdate>) {
         if (input) {
             Object.assign(this, input);
         }

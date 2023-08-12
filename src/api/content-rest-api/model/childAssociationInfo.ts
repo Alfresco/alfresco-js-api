@@ -19,7 +19,7 @@ export class ChildAssociationInfo {
     assocType: string;
     isPrimary: boolean;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ChildAssociationInfo>) {
         if (input) {
             Object.assign(this, input);
         }

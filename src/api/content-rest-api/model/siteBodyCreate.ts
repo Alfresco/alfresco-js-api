@@ -21,7 +21,7 @@ export class SiteBodyCreate {
     description?: string;
     visibility: SiteBodyCreate.VisibilityEnum | string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteBodyCreate>) {
         if (input) {
             Object.assign(this, input);
         }

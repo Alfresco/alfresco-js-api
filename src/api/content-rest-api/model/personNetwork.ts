@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api';
 import { NetworkQuota } from './networkQuota';
 
 /**
@@ -39,12 +39,12 @@ export class PersonNetwork {
     subscriptionLevel?: PersonNetwork.SubscriptionLevelEnum | string;
     quotas?: NetworkQuota[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PersonNetwork>) {
         if (input) {
             Object.assign(this, input);
             this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
             if (input.quotas) {
-                this.quotas = input.quotas.map((item: any) => {
+                this.quotas = input.quotas.map((item) => {
                     return new NetworkQuota(item);
                 });
             }

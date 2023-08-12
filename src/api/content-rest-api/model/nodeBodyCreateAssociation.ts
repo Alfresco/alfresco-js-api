@@ -18,7 +18,7 @@
 export class NodeBodyCreateAssociation {
     assocType?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<NodeBodyCreateAssociation>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -20,7 +20,7 @@ import { Download } from './download';
 export class DownloadEntry {
     entry: Download;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<DownloadEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Download(input.entry) : undefined;

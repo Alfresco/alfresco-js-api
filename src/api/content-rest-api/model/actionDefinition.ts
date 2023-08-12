@@ -44,11 +44,11 @@ export class ActionDefinition {
     trackStatus: boolean;
     parameterDefinitions?: ActionParameterDefinition[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ActionDefinition>) {
         if (input) {
             Object.assign(this, input);
             if (input.parameterDefinitions) {
-                this.parameterDefinitions = input.parameterDefinitions.map((item: any) => {
+                this.parameterDefinitions = input.parameterDefinitions.map((item) => {
                     return new ActionParameterDefinition(item);
                 });
             }

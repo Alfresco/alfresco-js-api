@@ -15,19 +15,19 @@
  * limitations under the License.
  */
 
-import { Pagination } from '../../content-rest-api/model/pagination';
+import { Pagination } from './pagination';
 import { SiteEntry } from './siteEntry';
 
 export class SitePagingList {
     pagination: Pagination;
     entries: SiteEntry[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SitePagingList>) {
         if (input) {
             Object.assign(this, input);
             this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
             if (input.entries) {
-                this.entries = input.entries.map((item: any) => {
+                this.entries = input.entries.map((item) => {
                     return new SiteEntry(item);
                 });
             }

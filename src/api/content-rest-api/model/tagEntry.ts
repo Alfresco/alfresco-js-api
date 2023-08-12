@@ -20,7 +20,7 @@ import { Tag } from './tag';
 export class TagEntry {
     entry: Tag;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<TagEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Tag(input.entry) : undefined;

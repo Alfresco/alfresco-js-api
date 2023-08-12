@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-import { Pagination } from '../../content-rest-api/model/pagination';
+import { Pagination } from './pagination';
 import { RenditionEntry } from './renditionEntry';
 
 export class RenditionPagingList {
     pagination?: Pagination;
     entries?: RenditionEntry[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RenditionPagingList>) {
         if (input) {
             Object.assign(this, input);
             this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;

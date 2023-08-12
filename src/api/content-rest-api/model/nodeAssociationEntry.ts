@@ -20,7 +20,7 @@ import { NodeAssociation } from './nodeAssociation';
 export class NodeAssociationEntry {
     entry: NodeAssociation;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<NodeAssociationEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new NodeAssociation(input.entry) : undefined;

@@ -20,7 +20,7 @@ import { ActionDefinitionListList } from './actionDefinitionListList';
 export class ActionDefinitionList {
     list?: ActionDefinitionListList;
 
-    constructor(input?: any) {
+    constructor(input?: ActionDefinitionList) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new ActionDefinitionListList(input.list) : undefined;

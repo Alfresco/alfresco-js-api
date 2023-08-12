@@ -20,7 +20,7 @@ import { SiteMembershipRequestWithPersonPagingList } from './siteMembershipReque
 export class SiteMembershipRequestWithPersonPaging {
     list?: SiteMembershipRequestWithPersonPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteMembershipRequestWithPersonPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new SiteMembershipRequestWithPersonPagingList(input.list) : undefined;

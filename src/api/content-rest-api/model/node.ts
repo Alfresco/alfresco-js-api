@@ -15,12 +15,12 @@
  * limitations under the License.
  */
 
-import { ContentInfo } from '../../content-rest-api/model/contentInfo';
-import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
+import { ContentInfo } from './contentInfo';
+import { DateAlfresco } from '../../content-custom-api';
 import { Definition } from './definition';
-import { PathInfo } from '../../content-rest-api/model/pathInfo';
+import { PathInfo } from './pathInfo';
 import { PermissionsInfo } from './permissionsInfo';
-import { UserInfo } from '../../content-rest-api/model/userInfo';
+import { UserInfo } from './userInfo';
 
 export class Node {
     id: string;
@@ -49,7 +49,7 @@ The character . must not be used at the end of the name.
     permissions?: PermissionsInfo;
     definition?: Definition;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Node>) {
         if (input) {
             Object.assign(this, input);
             this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;

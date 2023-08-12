@@ -20,7 +20,7 @@ export class SiteBodyUpdate {
     description?: string;
     visibility?: SiteBodyUpdate.VisibilityEnum | string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteBodyUpdate>) {
         if (input) {
             Object.assign(this, input);
         }

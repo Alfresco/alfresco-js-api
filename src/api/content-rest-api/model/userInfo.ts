@@ -19,7 +19,7 @@ export class UserInfo {
     displayName: string;
     id: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<UserInfo>) {
         if (input) {
             Object.assign(this, input);
         }

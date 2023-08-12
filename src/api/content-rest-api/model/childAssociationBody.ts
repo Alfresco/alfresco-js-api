@@ -19,10 +19,9 @@ export class ChildAssociationBody {
     childId: string;
     assocType: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ChildAssociationBody>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

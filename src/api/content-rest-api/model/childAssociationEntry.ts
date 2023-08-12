@@ -20,7 +20,7 @@ import { ChildAssociation } from './childAssociation';
 export class ChildAssociationEntry {
     entry: ChildAssociation;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ChildAssociationEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new ChildAssociation(input.entry) : undefined;

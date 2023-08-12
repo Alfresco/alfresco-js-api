@@ -20,7 +20,7 @@ import { Site } from './site';
 export class SiteEntry {
     entry: Site;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Site(input.entry) : undefined;

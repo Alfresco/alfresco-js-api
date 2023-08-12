@@ -20,7 +20,7 @@ import { DeletedNode } from './deletedNode';
 export class DeletedNodeEntry {
     entry?: DeletedNode;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<DeletedNodeEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new DeletedNode(input.entry) : undefined;

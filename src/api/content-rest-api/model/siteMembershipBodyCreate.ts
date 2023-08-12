@@ -19,7 +19,7 @@ export class SiteMembershipBodyCreate {
     role: SiteMembershipBodyCreate.RoleEnum | string;
     id: string; // contains both user and groupId
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteMembershipBodyCreate>) {
         if (input) {
             Object.assign(this, input);
         }

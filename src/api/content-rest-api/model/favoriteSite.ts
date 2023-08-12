@@ -18,7 +18,7 @@
 export class FavoriteSite {
     id: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<FavoriteSite>) {
         if (input) {
             Object.assign(this, input);
         }

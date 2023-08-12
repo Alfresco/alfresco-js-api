@@ -18,7 +18,7 @@
 export class GroupBodyUpdate {
     displayName: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<GroupBodyUpdate>) {
         if (input) {
             Object.assign(this, input);
         }

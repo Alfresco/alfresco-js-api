@@ -18,7 +18,7 @@
 export class SiteMembershipApprovalBody {
     role?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteMembershipApprovalBody>) {
         if (input) {
             Object.assign(this, input);
         }

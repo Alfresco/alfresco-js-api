@@ -20,7 +20,7 @@ import { CategoryPagingList } from "./categoryPagingList";
 export class CategoryPaging {
     list?: CategoryPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<CategoryPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new CategoryPagingList(input.list) : undefined;

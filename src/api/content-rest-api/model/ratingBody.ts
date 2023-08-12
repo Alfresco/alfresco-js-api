@@ -25,7 +25,7 @@ export class RatingBody {
      */
     myRating: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RatingBody>) {
         if (input) {
             Object.assign(this, input);
         }

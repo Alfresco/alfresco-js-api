@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-import { Pagination } from '../../content-rest-api/model/pagination';
+import { Pagination } from './pagination';
 import { PersonNetworkEntry } from './personNetworkEntry';
 
 export class PersonNetworkPagingList {
     pagination: Pagination;
     entries: PersonNetworkEntry[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PersonNetworkPagingList>) {
         if (input) {
             Object.assign(this, input);
             this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;

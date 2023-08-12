@@ -20,7 +20,7 @@ export class Tag {
     tag: string;
     count?: number;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Tag>) {
         if (input) {
             Object.assign(this, input);
         }

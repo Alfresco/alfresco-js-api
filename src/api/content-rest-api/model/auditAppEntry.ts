@@ -20,7 +20,7 @@ import { AuditApp } from './auditApp';
 export class AuditAppEntry {
     entry?: AuditApp;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AuditAppEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new AuditApp(input.entry) : undefined;

@@ -22,7 +22,7 @@ export class SiteGroup {
     group: GroupMember;
     role: SiteGroup.RoleEnum | string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteGroup>) {
         if (input) {
             Object.assign(this, input);
             this.group = input.group ? new GroupMember(input.group) : undefined;

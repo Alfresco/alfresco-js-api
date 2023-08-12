@@ -17,7 +17,7 @@
 
 import { Capabilities } from './capabilities';
 import { Company } from './company';
-import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api';
 
 export class Person {
     id: string;
@@ -43,7 +43,7 @@ export class Person {
     properties?: { [key: string]: string; };
     capabilities?: Capabilities;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Person>) {
         if (input) {
             Object.assign(this, input);
             this.company = input.company ? new Company(input.company) : undefined;

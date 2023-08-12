@@ -22,7 +22,7 @@ export class ActionParameterDefinition {
     mandatory?: boolean;
     displayLabel?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ActionParameterDefinition>) {
         if (input) {
             Object.assign(this, input);
         }

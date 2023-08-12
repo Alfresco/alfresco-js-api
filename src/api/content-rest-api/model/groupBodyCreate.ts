@@ -20,7 +20,7 @@ export class GroupBodyCreate {
     displayName: string;
     parentIds?: string[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<GroupBodyCreate>) {
         if (input) {
             Object.assign(this, input);
         }

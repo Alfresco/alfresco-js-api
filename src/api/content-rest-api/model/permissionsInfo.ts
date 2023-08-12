@@ -23,16 +23,16 @@ export class PermissionsInfo {
     locallySet?: PermissionElement[];
     settable?: string[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PermissionsInfo>) {
         if (input) {
             Object.assign(this, input);
             if (input.inherited) {
-                this.inherited = input.inherited.map((item: any) => {
+                this.inherited = input.inherited.map((item) => {
                     return new PermissionElement(item);
                 });
             }
             if (input.locallySet) {
-                this.locallySet = input.locallySet.map((item: any) => {
+                this.locallySet = input.locallySet.map((item) => {
                     return new PermissionElement(item);
                 });
             }

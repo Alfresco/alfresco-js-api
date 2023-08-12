@@ -19,10 +19,9 @@ export class Association {
     targetId: string;
     assocType: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Association>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

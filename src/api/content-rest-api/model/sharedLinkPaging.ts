@@ -20,7 +20,7 @@ import { SharedLinkPagingList } from './sharedLinkPagingList';
 export class SharedLinkPaging {
     list?: SharedLinkPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SharedLinkPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new SharedLinkPagingList(input.list) : undefined;

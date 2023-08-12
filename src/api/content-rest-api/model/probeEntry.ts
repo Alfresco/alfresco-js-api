@@ -20,7 +20,7 @@ import { ProbeEntryEntry } from './probeEntryEntry';
 export class ProbeEntry {
     entry?: ProbeEntryEntry;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ProbeEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new ProbeEntryEntry(input.entry) : undefined;

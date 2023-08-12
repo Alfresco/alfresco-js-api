@@ -18,7 +18,7 @@
 export class TagBody {
     tag: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<TagBody>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -20,7 +20,7 @@ import { SiteRole } from './siteRole';
 export class SiteRoleEntry {
     entry: SiteRole;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteRoleEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new SiteRole(input.entry) : undefined;

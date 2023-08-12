@@ -18,7 +18,7 @@
 export class CommentBody {
     content: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<CommentBody>) {
         if (input) {
             Object.assign(this, input);
         }

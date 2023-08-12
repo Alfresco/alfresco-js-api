@@ -20,7 +20,7 @@ import { Rating } from './rating';
 export class RatingEntry {
     entry: Rating;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RatingEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Rating(input.entry) : undefined;

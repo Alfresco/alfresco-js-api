@@ -21,7 +21,7 @@ export class ContentInfo {
     sizeInBytes: number;
     encoding?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ContentInfo>) {
         if (input) {
             Object.assign(this, input);
         }

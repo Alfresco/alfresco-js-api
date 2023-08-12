@@ -20,7 +20,7 @@ import { RatingPagingList } from './ratingPagingList';
 export class RatingPaging {
     list?: RatingPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RatingPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new RatingPagingList(input.list) : undefined;

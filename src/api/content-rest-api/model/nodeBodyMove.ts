@@ -24,7 +24,7 @@ The character . must not be used at the end of the name.
      */
     name?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<NodeBodyMove>) {
         if (input) {
             Object.assign(this, input);
         }

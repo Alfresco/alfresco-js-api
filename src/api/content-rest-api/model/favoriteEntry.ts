@@ -20,7 +20,7 @@ import { Favorite } from './favorite';
 export class FavoriteEntry {
     entry: Favorite;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<FavoriteEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Favorite(input.entry) : undefined;

@@ -20,7 +20,7 @@ import { FavoritePagingList } from './favoritePagingList';
 export class FavoritePaging {
     list?: FavoritePagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<FavoritePaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new FavoritePagingList(input.list) : undefined;

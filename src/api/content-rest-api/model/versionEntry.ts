@@ -20,7 +20,7 @@ import { Version } from './version';
 export class VersionEntry {
     entry?: Version;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<VersionEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Version(input.entry) : undefined;

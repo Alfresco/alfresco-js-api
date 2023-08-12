@@ -18,7 +18,7 @@
 export class SiteMembershipBodyUpdate {
     role: SiteMembershipBodyUpdate.RoleEnum | string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteMembershipBodyUpdate>) {
         if (input) {
             Object.assign(this, input);
         }

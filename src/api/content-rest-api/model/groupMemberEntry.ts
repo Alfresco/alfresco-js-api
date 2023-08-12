@@ -20,7 +20,7 @@ import { GroupMember } from './groupMember';
 export class GroupMemberEntry {
     entry: GroupMember;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<GroupMemberEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new GroupMember(input.entry) : undefined;

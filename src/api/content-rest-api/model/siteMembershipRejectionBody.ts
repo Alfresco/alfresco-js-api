@@ -18,7 +18,7 @@
 export class SiteMembershipRejectionBody {
     comment?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteMembershipRejectionBody>) {
         if (input) {
             Object.assign(this, input);
         }

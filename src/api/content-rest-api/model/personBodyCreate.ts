@@ -38,7 +38,7 @@ export class PersonBodyCreate {
     aspectNames?: string[];
     properties?: any;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PersonBodyCreate>) {
         if (input) {
             Object.assign(this, input);
             this.company = input.company ? new Company(input.company) : undefined;
