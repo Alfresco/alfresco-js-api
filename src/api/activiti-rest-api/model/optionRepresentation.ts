@@ -19,8 +19,7 @@ export class OptionRepresentation {
     id?: string;
     name?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<OptionRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
