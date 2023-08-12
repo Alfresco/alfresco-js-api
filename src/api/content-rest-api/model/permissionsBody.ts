@@ -21,11 +21,11 @@ export class PermissionsBody {
     isInheritanceEnabled?: boolean;
     locallySet?: PermissionElement[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PermissionsBody>) {
         if (input) {
             Object.assign(this, input);
             if (input.locallySet) {
-                this.locallySet = input.locallySet.map((item: any) => {
+                this.locallySet = input.locallySet.map((item) => {
                     return new PermissionElement(item);
                 });
             }

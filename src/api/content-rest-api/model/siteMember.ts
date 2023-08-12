@@ -23,7 +23,7 @@ export class SiteMember {
     role: SiteMember.RoleEnum | string;
     isMemberOfGroup?: boolean;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteMember>) {
         if (input) {
             Object.assign(this, input);
             this.person = input.person ? new Person(input.person) : undefined;
