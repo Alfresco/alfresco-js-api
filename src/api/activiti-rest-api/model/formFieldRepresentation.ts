@@ -22,7 +22,7 @@ import { OptionRepresentation } from './optionRepresentation';
 export class FormFieldRepresentation {
     fieldType?: string;
     /* Child fields, when `fieldType` is set to `ContainerRepresentation` */
-    fields?: Array<FormFieldRepresentation>;
+    fields?: { [key: string]: Array<FormFieldRepresentation> };
     className?: string;
     col?: number;
     colspan?: number;
@@ -63,10 +63,6 @@ export class FormFieldRepresentation {
 
             if (input.options) {
                 this.options = input.options.map((item) => new OptionRepresentation(item));
-            }
-
-            if (input.fields) {
-                this.fields = input.fields.map((item) => new FormFieldRepresentation(item));
             }
 
             this.visibilityCondition = input.visibilityCondition ? new ConditionRepresentation(input.visibilityCondition) : undefined;
