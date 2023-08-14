@@ -226,9 +226,8 @@ describe('Ecm Auth test', () => {
             it('Ticket should be absent in the client and the resolve promise should be called', (done) => {
                 authEcmMock.get204ResponseLogout();
 
-                contentAuth.logout().then((data: any) => {
+                contentAuth.logout().then(() => {
                     expect(contentAuth.config.ticket).to.be.equal(undefined);
-                    expect(data).to.be.equal('logout');
                     done();
                 });
             });

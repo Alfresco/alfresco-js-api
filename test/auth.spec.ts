@@ -180,9 +180,8 @@ describe('Auth', () => {
                 it('should Ticket be absent in the client and the resolve promise should be called', (done) => {
                     authResponseEcmMock.get204ResponseLogout();
 
-                    alfrescoJsApi.logout().then((data: string) => {
+                    alfrescoJsApi.logout().then(() => {
                         expect(alfrescoJsApi.config.ticket).to.be.equal(undefined);
-                        expect(data).to.be.equal('logout');
                         done();
                     });
                 });

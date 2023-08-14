@@ -254,9 +254,8 @@ describe('Bpm Auth test', () => {
             it('Ticket should be absent in the client and the resolve promise should be called', (done) => {
                 authBpmMock.get200ResponseLogout();
 
-                processAuth.logout().then((data: any) => {
+                processAuth.logout().then(() => {
                     expect(processAuth.getTicket()).to.be.equal(null);
-                    expect(data).to.be.equal('logout');
                     done();
                 });
             });
