@@ -16,15 +16,21 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
-import { ProcessInstanceQueryRepresentation } from '../../src/api/activiti-rest-api/model/processInstanceQueryRepresentation';
 import { BpmAuthMock, ProcessMock } from '../mockObjects';
+import {
+    AlfrescoApi,
+    AlfrescoApiConfig,
+    ProcessDefinitionsApi,
+    ProcessInstanceQueryRepresentation,
+    ProcessInstancesApi
+} from '../../index';
 
 describe('Activiti Process Api', () => {
     let authResponseBpmMock: BpmAuthMock;
     let processMock: ProcessMock;
     let alfrescoJsApi: AlfrescoApi;
+    let processInstancesApi: ProcessInstancesApi;
+    let processDefinitionsApi: ProcessDefinitionsApi;
 
     beforeEach(async () => {
         const BPM_HOST = 'http://127.0.0.1:9999';
@@ -39,6 +45,9 @@ describe('Activiti Process Api', () => {
             provider: 'BPM'
         } as AlfrescoApiConfig);
 
+        processInstancesApi = new ProcessInstancesApi(alfrescoJsApi);
+        processDefinitionsApi = new ProcessDefinitionsApi(alfrescoJsApi);
+
         await alfrescoJsApi.login('admin', 'admin');
     });
 
@@ -51,7 +60,7 @@ describe('Activiti Process Api', () => {
         requestNode.sort = 'created-desc';
         requestNode.state = 'completed';
 
-        alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then((data) => {
+        processInstancesApi.getProcessInstances(requestNode).then((data) => {
             expect(data.data[0].name).equal('Process Test Api - July 26th 2016');
             expect(data.data[1].name).equal('Process Test Api - July 26th 2016');
             expect(data.size).equal(2);
@@ -64,7 +73,7 @@ describe('Activiti Process Api', () => {
 
         const requestNode = new ProcessInstanceQueryRepresentation();
 
-        alfrescoJsApi.activiti.processApi.getProcessInstances(requestNode).then((data) => {
+        processInstancesApi.getProcessInstances(requestNode).then((data) => {
             expect(data.data[0].name).equal('Process Test Api - July 26th 2016');
             expect(data.data[1].name).equal('Process Test Api - July 26th 2016');
             done();
@@ -75,7 +84,7 @@ describe('Activiti Process Api', () => {
         processMock.get200getProcessDefinitionStartForm();
         const processDefinitionId = 'testProcess:1:7504';
 
-        alfrescoJsApi.activiti.processApi.getProcessDefinitionStartForm(processDefinitionId).then((data) => {
+        processDefinitionsApi.getProcessDefinitionStartForm(processDefinitionId).then((data) => {
             expect(data.processDefinitionId).equal('testProcess:1:7504');
             done();
         });

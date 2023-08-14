@@ -16,8 +16,7 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
+import { AlfrescoApiConfig, AlfrescoApi } from '../index';
 import { EcmAuthMock, BpmAuthMock } from '../test/mockObjects';
 
 describe('Change config', () => {
