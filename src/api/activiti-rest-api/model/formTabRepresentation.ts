@@ -22,7 +22,7 @@ export class FormTabRepresentation {
     title?: string;
     visibilityCondition?: ConditionRepresentation;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<FormTabRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

@@ -19,7 +19,7 @@ export class FormJavascriptEventRepresentation {
     event?: string;
     javascriptLogic?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<FormJavascriptEventRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

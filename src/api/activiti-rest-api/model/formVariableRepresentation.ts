@@ -20,7 +20,7 @@ export class FormVariableRepresentation {
     type?: string;
     value?: any;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<FormVariableRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

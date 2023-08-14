@@ -46,32 +46,32 @@ export class FormDefinitionRepresentation {
     taskName?: string;
     variables?: FormVariableRepresentation[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<FormDefinitionRepresentation>) {
 
         if (input) {
             Object.assign(this, input);
             if (input.fields) {
-                this.fields = input.fields.map((item: any) => {
+                this.fields = input.fields.map((item) => {
                     return new FormFieldRepresentation(item);
                 });
             }
             if (input.javascriptEvents) {
-                this.javascriptEvents = input.javascriptEvents.map((item: any) => {
+                this.javascriptEvents = input.javascriptEvents.map((item) => {
                     return new FormJavascriptEventRepresentation(item);
                 });
             }
             if (input.outcomes) {
-                this.outcomes = input.outcomes.map((item: any) => {
+                this.outcomes = input.outcomes.map((item) => {
                     return new FormOutcomeRepresentation(item);
                 });
             }
             if (input.tabs) {
-                this.tabs = input.tabs.map((item: any) => {
+                this.tabs = input.tabs.map((item) => {
                     return new FormTabRepresentation(item);
                 });
             }
             if (input.variables) {
-                this.variables = input.variables.map((item: any) => {
+                this.variables = input.variables.map((item) => {
                     return new FormVariableRepresentation(item);
                 });
             }
