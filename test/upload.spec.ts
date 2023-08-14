@@ -16,15 +16,15 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 import { EcmAuthMock, UploadMock } from '../test/mockObjects';
 import fs from 'fs';
-import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
+import { AlfrescoApiConfig, UploadApi, AlfrescoApi } from '../index';
 
 describe('Upload', () => {
     let authResponseMock: EcmAuthMock;
     let uploadMock: UploadMock;
     let alfrescoJsApi: AlfrescoApi;
+    let uploadApi: UploadApi;
 
     beforeEach(async () => {
         const hostEcm = 'http://127.0.0.1:8080';
@@ -37,6 +37,8 @@ describe('Upload', () => {
             hostEcm: hostEcm
         } as AlfrescoApiConfig);
 
+        uploadApi = new UploadApi(alfrescoJsApi);
+
         await alfrescoJsApi.login('admin', 'admin');
     });
 
@@ -46,7 +48,7 @@ describe('Upload', () => {
 
             const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            alfrescoJsApi.upload.uploadFile(file, null, null, null).then((data: any) => {
+            uploadApi.uploadFile(file, null, null, null).then((data: any) => {
                 expect(data.entry.isFile).to.be.equal(true);
                 expect(data.entry.name).to.be.equal('testFile.txt');
                 done();
@@ -58,7 +60,7 @@ describe('Upload', () => {
 
             const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            alfrescoJsApi.upload.uploadFile(file, null, null, null).then(
+            uploadApi.uploadFile(file, null, null, null).then(
                 () => {},
                 (error: any) => {
                     expect(error.status).to.be.equal(409);
@@ -72,7 +74,7 @@ describe('Upload', () => {
 
             const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            alfrescoJsApi.upload.uploadFile(file, null, null, null, { autoRename: true })
+            uploadApi.uploadFile(file, null, null, null, { autoRename: true })
                 .then((data: any) => {
                     expect(data.entry.isFile).to.be.equal(true);
                     expect(data.entry.name).to.be.equal('testFile-2.txt');
@@ -83,7 +85,7 @@ describe('Upload', () => {
         it('Abort should stop the  file file upload', (done) => {
             const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            const promise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null, { autoRename: true });
+            const promise: any = uploadApi.uploadFile(file, null, null, null, { autoRename: true });
             promise.once('abort', () => {
                 done();
             });
@@ -98,7 +100,7 @@ describe('Upload', () => {
 
             const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+            const uploadPromise: any = uploadApi.uploadFile(file, null, null, null);
 
             uploadPromise.catch(() => {});
             uploadPromise.on('success', () => {
@@ -111,7 +113,7 @@ describe('Upload', () => {
 
             const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+            const uploadPromise: any = uploadApi.uploadFile(file, null, null, null);
             uploadPromise.catch(() => {});
             uploadPromise.on('error', () => {
                 done();
@@ -123,7 +125,7 @@ describe('Upload', () => {
 
             const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+            const uploadPromise: any = uploadApi.uploadFile(file, null, null, null);
 
             uploadPromise.catch(() => {});
             uploadPromise.on('unauthorized', () => {
@@ -136,7 +138,7 @@ describe('Upload', () => {
 
             const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+            const uploadPromise: any = uploadApi.uploadFile(file, null, null, null);
 
             uploadPromise.catch((error: any) => {
                 console.log('error' + error);
@@ -158,7 +160,7 @@ describe('Upload', () => {
             const promiseProgressOne = new Promise((resolve) => {
                 uploadMock.get201CreationFile();
 
-                const promise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+                const promise: any = uploadApi.uploadFile(file, null, null, null);
                 promise.once('success', () => {
                     progressOneOk = true;
                     resolve('Resolving');
@@ -168,7 +170,7 @@ describe('Upload', () => {
             const promiseProgressTwo = new Promise((resolve) => {
                 uploadMock.get201CreationFile();
 
-                const promise: any = alfrescoJsApi.upload.uploadFile(fileTwo, null, null, null);
+                const promise: any = uploadApi.uploadFile(fileTwo, null, null, null);
                 promise.once('success', () => {
                     progressTwoOk = true;
                     resolve('Resolving');
@@ -192,7 +194,7 @@ describe('Upload', () => {
             const promiseErrorOne = new Promise((resolve) => {
                 uploadMock.get201CreationFile();
 
-                const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+                const uploadPromise: any = uploadApi.uploadFile(file, null, null, null);
                 uploadPromise.catch(() => {});
                 uploadPromise.once('success', () => {
                     errorOneOk = true;
@@ -203,7 +205,7 @@ describe('Upload', () => {
             const promiseErrorTwo = new Promise((resolve) => {
                 uploadMock.get201CreationFile();
 
-                const uploadPromise: any = alfrescoJsApi.upload.uploadFile(fileTwo, null, null, null);
+                const uploadPromise: any = uploadApi.uploadFile(fileTwo, null, null, null);
                 uploadPromise.catch(() => {});
                 uploadPromise.once('success', () => {
                     errorTwoOk = true;
@@ -228,7 +230,7 @@ describe('Upload', () => {
             const promiseSuccessOne = new Promise((resolve) => {
                 uploadMock.get201CreationFile();
 
-                const uploadPromiseOne: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+                const uploadPromiseOne: any = uploadApi.uploadFile(file, null, null, null);
                 uploadPromiseOne.catch(() => {});
                 uploadPromiseOne.once('success', () => {
                     successOneOk = true;
@@ -239,7 +241,7 @@ describe('Upload', () => {
             const promiseSuccessTwo = new Promise((resolve) => {
                 uploadMock.get201CreationFile();
 
-                const uploadPromiseTwo: any = alfrescoJsApi.upload.uploadFile(fileTwo, null, null, null);
+                const uploadPromiseTwo: any = uploadApi.uploadFile(fileTwo, null, null, null);
                 uploadPromiseTwo.catch(() => {});
                 uploadPromiseTwo.once('success', () => {
                     successTwoOk = true;
@@ -263,13 +265,13 @@ describe('Upload', () => {
 
             uploadMock.get201CreationFile();
 
-            const p1 = alfrescoJsApi.upload.uploadFile(file, null, null, null).then(() => {
+            const p1 = uploadApi.uploadFile(file, null, null, null).then(() => {
                 resolveOneOk = true;
             });
 
             uploadMock.get201CreationFile();
 
-            const p2 = alfrescoJsApi.upload.uploadFile(fileTwo, null, null, null).then(() => {
+            const p2 = uploadApi.uploadFile(fileTwo, null, null, null).then(() => {
                 resolveTwoOk = true;
             });
 
@@ -289,13 +291,13 @@ describe('Upload', () => {
 
             uploadMock.get409CreationFileNewNameClashes();
 
-            const p1 = alfrescoJsApi.upload.uploadFile(file, null, null, null).then(null, () => {
+            const p1 = uploadApi.uploadFile(file, null, null, null).then(null, () => {
                 rejectOneOk = true;
             });
 
             uploadMock.get409CreationFileNewNameClashes();
 
-            const p2 = alfrescoJsApi.upload.uploadFile(fileTwo, null, null, null).then(null, () => {
+            const p2 = uploadApi.uploadFile(fileTwo, null, null, null).then(null, () => {
                 rejectTwoOk = true;
             });
 
@@ -314,7 +316,7 @@ describe('Upload', () => {
             let promiseProgressOne = {};
             let promiseProgressTwo = {};
 
-            const uploadPromise: any = alfrescoJsApi.upload.uploadFile(file, null, null, null);
+            const uploadPromise: any = uploadApi.uploadFile(file, null, null, null);
             uploadPromise.catch(() => {});
 
             uploadPromise.once('error', () => {
