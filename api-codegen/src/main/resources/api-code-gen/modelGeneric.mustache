@@ -32,7 +32,7 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{
             {{/isListContainer}}
             {{#isListContainer}}
             if (input.{{name}}) {
-                this.{{name}} = input.{{name}}.map((item: any) => {
+                this.{{name}} = input.{{name}}.map((item) => {
                     return new {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}(item);
                 });
             }
