@@ -86,7 +86,7 @@ export class ContentAuth extends AlfrescoApiClient {
 
         let promise: any = new Promise<string>((resolve, reject) => {
             this.authApi.createTicket(loginRequest)
-                .then((data: any) => {
+                .then((data) => {
                     this.saveUsername(username);
                     this.setTicket(data.entry.id);
                     promise.emit('success');
@@ -120,7 +120,7 @@ export class ContentAuth extends AlfrescoApiClient {
 
         let promise: any = new Promise<string>((resolve, reject) => {
             this.authApi.validateTicket().then(
-                (data: any) => {
+                (data) => {
                     this.setTicket(data.entry.id);
                     promise.emit('success');
                     this.emit('logged-in');
