@@ -19,8 +19,9 @@ import { SecurityMark } from './securityMark';
 
 export class SecurityMarks extends Array<SecurityMark> {
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SecurityMarks>) {
         super();
+
         if (input) {
             Object.assign(this, input);
         }

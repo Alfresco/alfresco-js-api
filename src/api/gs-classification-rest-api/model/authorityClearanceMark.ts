@@ -21,7 +21,7 @@ export class AuthorityClearanceMark {
     applied: boolean;
     inherited: boolean;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AuthorityClearanceMark>) {
         if (input) {
             Object.assign(this, input);
         }

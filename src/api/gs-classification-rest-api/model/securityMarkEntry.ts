@@ -20,8 +20,7 @@ import { SecurityMark } from './securityMark';
 export class SecurityMarkEntry {
     entry: SecurityMark;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SecurityMarkEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new SecurityMark(input.entry) : undefined;

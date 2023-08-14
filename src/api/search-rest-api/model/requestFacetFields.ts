@@ -30,16 +30,14 @@ export class RequestFacetFields {
      */
     facets?: RequestFacetField[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestFacetFields>) {
         if (input) {
             Object.assign(this, input);
             if (input.facets) {
-                this.facets = input.facets.map((item: any) => {
+                this.facets = input.facets.map((item) => {
                     return new RequestFacetField(item);
                 });
             }
         }
     }
-
 }

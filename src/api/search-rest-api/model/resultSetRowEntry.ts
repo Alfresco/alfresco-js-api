@@ -23,12 +23,10 @@ import { ResultNode } from './resultNode';
 export class ResultSetRowEntry {
     entry: ResultNode;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResultSetRowEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new ResultNode(input.entry) : undefined;
         }
     }
-
 }

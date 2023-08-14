@@ -23,12 +23,10 @@ import { ResultSetPagingList } from './resultSetPagingList';
 export class ResultSetPaging {
     list?: ResultSetPagingList;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResultSetPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new ResultSetPagingList(input.list) : undefined;
         }
     }
-
 }

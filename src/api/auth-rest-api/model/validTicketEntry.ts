@@ -20,12 +20,10 @@ import { ValidTicket } from './validTicket';
 export class ValidTicketEntry {
     entry: ValidTicket;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ValidTicketEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new ValidTicket(input.entry) : undefined;
         }
     }
-
 }

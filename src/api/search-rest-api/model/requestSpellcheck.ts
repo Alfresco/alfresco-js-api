@@ -23,11 +23,9 @@ The properties reflect SOLR spellcheck parameters.
 export class RequestSpellcheck {
     query?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestSpellcheck>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

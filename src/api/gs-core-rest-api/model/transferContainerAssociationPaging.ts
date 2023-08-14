@@ -20,8 +20,7 @@ import { TransferContainerAssociationPagingList } from './transferContainerAssoc
 export class TransferContainerAssociationPaging {
     list?: TransferContainerAssociationPagingList;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TransferContainerAssociationPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new TransferContainerAssociationPagingList(input.list) : undefined;

@@ -20,12 +20,10 @@ import { TransferContainer } from './transferContainer';
 export class TransferContainerEntry {
     entry: TransferContainer;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TransferContainerEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new TransferContainer(input.entry) : undefined;
         }
     }
-
 }

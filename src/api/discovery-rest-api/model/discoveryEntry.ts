@@ -20,8 +20,7 @@ import { RepositoryEntry } from './repositoryEntry';
 export class DiscoveryEntry {
     entry: RepositoryEntry;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<DiscoveryEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new RepositoryEntry(input.entry) : undefined;

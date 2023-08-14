@@ -18,7 +18,7 @@
 export class SecurityMarkBody {
     name : string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SecurityMarkBody>) {
 
         if (input) {
             Object.assign(this, input);

@@ -21,12 +21,10 @@ import {AuthorityClearanceGroupPagingList} from "./authorityClearanceGroupPaging
 export class AuthorityClearanceGroupPaging {
     list?: AuthorityClearanceGroupPagingList;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<AuthorityClearanceGroupPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new AuthorityClearanceGroupPagingList(input.list) : undefined;
         }
     }
-
 }

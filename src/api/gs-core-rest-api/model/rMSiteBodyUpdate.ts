@@ -19,7 +19,7 @@ export class RMSiteBodyUpdate {
     title?: string;
     description?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RMSiteBodyUpdate>) {
 
         if (input) {
             Object.assign(this, input);

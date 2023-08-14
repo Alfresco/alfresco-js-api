@@ -23,11 +23,9 @@ export class ResultSetContextFacetQueries {
     filterQuery?: string;
     count?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResultSetContextFacetQueries>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

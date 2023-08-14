@@ -20,8 +20,7 @@ import { SecurityControlSetting } from './securityControlSetting';
 export class SecurityControlSettingEntry {
     entry: SecurityControlSetting;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SecurityControlSettingEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new SecurityControlSetting(input.entry) : undefined;

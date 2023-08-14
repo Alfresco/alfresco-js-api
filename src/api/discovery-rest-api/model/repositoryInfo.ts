@@ -27,15 +27,14 @@ export class RepositoryInfo {
     license?: LicenseInfo;
     modules?: ModuleInfo[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RepositoryInfo>) {
         if (input) {
             Object.assign(this, input);
             this.version = input.version ? new VersionInfo(input.version) : undefined;
             this.status = input.status ? new StatusInfo(input.status) : undefined;
             this.license = input.license ? new LicenseInfo(input.license) : undefined;
             if (input.modules) {
-                this.modules = input.modules.map((item: any) => {
+                this.modules = input.modules.map((item) => {
                     return new ModuleInfo(item);
                 });
             }

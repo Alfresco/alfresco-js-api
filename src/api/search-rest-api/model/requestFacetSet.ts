@@ -40,11 +40,9 @@ export class RequestFacetSet {
      */
     endInclusive?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestFacetSet>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

@@ -84,11 +84,9 @@ export class RequestStats {
      */
     percentiles?: number[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestStats>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

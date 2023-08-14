@@ -22,11 +22,9 @@ export class ContentInfo {
     encoding?: string;
     mimeTypeGroup?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ContentInfo>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

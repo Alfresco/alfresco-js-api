@@ -20,11 +20,9 @@ export class DeclassificationExemption {
     code: string;
     description: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<DeclassificationExemption>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

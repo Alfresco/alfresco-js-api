@@ -25,11 +25,9 @@ export class RequestPagination {
      */
     skipCount?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestPagination>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

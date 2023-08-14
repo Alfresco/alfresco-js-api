@@ -20,11 +20,10 @@ import { AspectPagingList } from './aspectPagingList';
 export class AspectPaging {
     list?: AspectPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AspectPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new AspectPagingList(input.list) : undefined;
         }
     }
-
 }

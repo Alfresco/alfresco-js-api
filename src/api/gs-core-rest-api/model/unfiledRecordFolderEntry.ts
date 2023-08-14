@@ -20,12 +20,10 @@ import { UnfiledRecordFolder } from './unfiledRecordFolder';
 export class UnfiledRecordFolderEntry {
     entry: UnfiledRecordFolder;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UnfiledRecordFolderEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new UnfiledRecordFolder(input.entry) : undefined;
         }
     }
-
 }

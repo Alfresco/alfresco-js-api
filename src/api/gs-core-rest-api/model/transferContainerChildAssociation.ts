@@ -48,8 +48,7 @@ The character . must not be used at the end of the name.
     allowableOperations?: string[];
     association?: ChildAssociationInfo;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TransferContainerChildAssociation>) {
         if (input) {
             Object.assign(this, input);
             this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
@@ -57,5 +56,4 @@ The character . must not be used at the end of the name.
             this.association = input.association ? new ChildAssociationInfo(input.association) : undefined;
         }
     }
-
 }

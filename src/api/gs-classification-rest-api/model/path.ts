@@ -24,8 +24,9 @@ This field is only returned when requested.
  */
 export class Path extends Array<PathElement> {
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Path>) {
         super();
+
         if (input) {
             Object.assign(this, input);
         }

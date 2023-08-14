@@ -19,11 +19,9 @@ export class Ticket {
     id?: string;
     userId?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<Ticket>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

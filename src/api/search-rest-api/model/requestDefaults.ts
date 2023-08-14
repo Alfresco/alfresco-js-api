@@ -46,8 +46,7 @@ FIELD:(one two three)
     namespace?: string;
     defaultFieldName?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestDefaults>) {
         if (input) {
             Object.assign(this, input);
         }

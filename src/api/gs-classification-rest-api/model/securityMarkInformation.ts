@@ -20,7 +20,7 @@ import { SecurityMarks } from './securityMarks';
 export class SecurityMarkInformation {
     add: SecurityMarks;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SecurityMarkInformation>) {
 
         if (input) {
             Object.assign(this, input);

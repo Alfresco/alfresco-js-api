@@ -25,11 +25,9 @@ export class ClassificationGuides {
     enabled?: boolean;
     hasTopics?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ClassificationGuides>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

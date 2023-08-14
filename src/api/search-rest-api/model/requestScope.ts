@@ -25,8 +25,7 @@ export class RequestScope {
      */
     locations?: RequestScope.LocationsEnum | string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestScope>) {
         if (input) {
             Object.assign(this, input);
         }

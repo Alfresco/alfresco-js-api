@@ -20,12 +20,10 @@ import { UnfiledContainer } from './unfiledContainer';
 export class UnfiledContainerEntry {
     entry: UnfiledContainer;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UnfiledContainerEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new UnfiledContainer(input.entry) : undefined;
         }
     }
-
 }

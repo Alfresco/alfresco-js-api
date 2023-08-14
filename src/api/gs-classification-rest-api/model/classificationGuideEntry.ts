@@ -20,8 +20,7 @@ import { ClassificationGuide } from './classificationGuide';
 export class ClassificationGuideEntry {
     entry: ClassificationGuide;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ClassificationGuideEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new ClassificationGuide(input.entry) : undefined;

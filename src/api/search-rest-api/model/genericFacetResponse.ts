@@ -31,12 +31,11 @@ export class GenericFacetResponse {
      */
     buckets?: GenericBucket[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<GenericFacetResponse>) {
         if (input) {
             Object.assign(this, input);
             if (input.buckets) {
-                this.buckets = input.buckets.map((item: any) => {
+                this.buckets = input.buckets.map((item) => {
                     return new GenericBucket(item);
                 });
             }

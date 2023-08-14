@@ -28,11 +28,9 @@ export class RequestLocalization {
      */
     locales?: string[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestLocalization>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

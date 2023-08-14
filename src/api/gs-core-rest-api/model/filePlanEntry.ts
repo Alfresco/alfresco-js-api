@@ -20,12 +20,10 @@ import { FilePlan } from './filePlan';
 export class FilePlanEntry {
     entry: FilePlan;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<FilePlanEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new FilePlan(input.entry) : undefined;
         }
     }
-
 }

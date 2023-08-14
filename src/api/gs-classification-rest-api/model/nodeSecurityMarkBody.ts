@@ -20,7 +20,7 @@ export class NodeSecurityMarkBody {
     groupId : string;
     op : string
 
-    constructor(input?: NodeSecurityMarkBody) {
+    constructor(input?: Partial<NodeSecurityMarkBody>) {
         if (input) {
             Object.assign(this, input);
         }

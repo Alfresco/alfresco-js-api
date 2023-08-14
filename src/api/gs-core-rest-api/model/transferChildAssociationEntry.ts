@@ -20,12 +20,10 @@ import { TransferChildAssociation } from './transferChildAssociation';
 export class TransferChildAssociationEntry {
     entry: TransferChildAssociation;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TransferChildAssociationEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new TransferChildAssociation(input.entry) : undefined;
         }
     }
-
 }

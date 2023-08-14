@@ -28,11 +28,9 @@ export class RequestLimits {
      */
     permissionEvaluationCount?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestLimits>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

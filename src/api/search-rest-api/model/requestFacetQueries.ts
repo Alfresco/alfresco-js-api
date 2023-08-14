@@ -22,8 +22,9 @@ import { RequestFacetQueriesInner } from './requestFacetQueriesInner';
  */
 export class RequestFacetQueries extends Array<RequestFacetQueriesInner> {
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RequestFacetQueries>) {
         super();
+
         if (input) {
             Object.assign(this, input);
         }

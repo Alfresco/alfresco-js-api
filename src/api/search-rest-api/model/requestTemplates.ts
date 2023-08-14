@@ -27,7 +27,7 @@ cm:name:example cm:name:example
  */
 export class RequestTemplates extends Array<RequestTemplatesInner> {
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RequestTemplates>) {
         super();
         if (input) {
             Object.assign(this, input);

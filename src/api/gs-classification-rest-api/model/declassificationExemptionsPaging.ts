@@ -20,8 +20,7 @@ import { DeclassificationExemptionsPagingList } from './declassificationExemptio
 export class DeclassificationExemptionsPaging {
     list?: DeclassificationExemptionsPagingList;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<DeclassificationExemptionsPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new DeclassificationExemptionsPagingList(input.list) : undefined;

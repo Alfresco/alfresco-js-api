@@ -20,8 +20,7 @@ export class RMSiteBodyCreate {
     description?: string;
     compliance?: RMSiteBodyCreate.ComplianceEnum | string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RMSiteBodyCreate>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -56,11 +56,9 @@ export class RequestRange {
      */
     excludeFilters?: string[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestRange>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

@@ -19,7 +19,7 @@ export class SecurityGroupBody {
     groupName?: string;
     groupType?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SecurityGroupBody>) {
         if (input) {
             Object.assign(this, input);
         }

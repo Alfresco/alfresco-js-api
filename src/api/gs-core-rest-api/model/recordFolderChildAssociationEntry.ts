@@ -20,12 +20,10 @@ import { RecordFolderChildAssociation } from './recordFolderChildAssociation';
 export class RecordFolderChildAssociationEntry {
     entry: RecordFolderChildAssociation;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RecordFolderChildAssociationEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new RecordFolderChildAssociation(input.entry) : undefined;
         }
     }
-
 }

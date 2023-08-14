@@ -20,12 +20,10 @@ import { RepositoryInfo } from './repositoryInfo';
 export class RepositoryEntry {
     repository: RepositoryInfo;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RepositoryEntry>) {
         if (input) {
             Object.assign(this, input);
             this.repository = input.repository ? new RepositoryInfo(input.repository) : undefined;
         }
     }
-
 }

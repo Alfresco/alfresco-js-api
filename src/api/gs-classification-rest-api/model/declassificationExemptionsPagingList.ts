@@ -22,13 +22,12 @@ export class DeclassificationExemptionsPagingList {
     pagination?: Pagination;
     entries?: DeclassificationExemptionEntry[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<DeclassificationExemptionsPagingList>) {
         if (input) {
             Object.assign(this, input);
             this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
             if (input.entries) {
-                this.entries = input.entries.map((item: any) => {
+                this.entries = input.entries.map((item) => {
                     return new DeclassificationExemptionEntry(item);
                 });
             }

@@ -29,8 +29,7 @@ export class ClassPropertyDescription {
     title?: string;
     url?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ClassPropertyDescription>) {
         if (input) {
             Object.assign(this, input);
         }

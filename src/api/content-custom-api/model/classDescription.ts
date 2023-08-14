@@ -33,8 +33,7 @@ export class ClassDescription {
     title?: string;
     url?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ClassDescription>) {
         if (input) {
             Object.assign(this, input);
         }

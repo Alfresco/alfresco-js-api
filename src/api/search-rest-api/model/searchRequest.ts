@@ -60,8 +60,7 @@ export class SearchRequest {
     highlight?: RequestHighlight;
     ranges?: RequestRange[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SearchRequest>) {
         if (input) {
             Object.assign(this, input);
             this.query = input.query ? new RequestQuery(input.query) : undefined;
@@ -77,12 +76,12 @@ export class SearchRequest {
             this.facetFields = input.facetFields ? new RequestFacetFields(input.facetFields) : undefined;
             this.facetIntervals = input.facetIntervals ? new RequestFacetIntervals(input.facetIntervals) : undefined;
             if (input.pivots) {
-                this.pivots = input.pivots.map((item: any) => {
+                this.pivots = input.pivots.map((item) => {
                     return new RequestPivot(item);
                 });
             }
             if (input.stats) {
-                this.stats = input.stats.map((item: any) => {
+                this.stats = input.stats.map((item) => {
                     return new RequestStats(item);
                 });
             }
@@ -91,7 +90,7 @@ export class SearchRequest {
             this.limits = input.limits ? new RequestLimits(input.limits) : undefined;
             this.highlight = input.highlight ? new RequestHighlight(input.highlight) : undefined;
             if (input.ranges) {
-                this.ranges = input.ranges.map((item: any) => {
+                this.ranges = input.ranges.map((item) => {
                     return new RequestRange(item);
                 });
             }

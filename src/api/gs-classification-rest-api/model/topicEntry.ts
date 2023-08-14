@@ -20,12 +20,10 @@ import { Topic } from './topic';
 export class TopicEntry {
     entry: Topic;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TopicEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Topic(input.entry) : undefined;
         }
     }
-
 }

@@ -20,12 +20,10 @@ import { RecordCategoryChildPagingList } from './recordCategoryChildPagingList';
 export class RecordCategoryChildPaging {
     list?: RecordCategoryChildPagingList;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RecordCategoryChildPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new RecordCategoryChildPagingList(input.list) : undefined;
         }
     }
-
 }

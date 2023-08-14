@@ -46,8 +46,7 @@ The character . must not be used at the end of the name.
     path?: PathInfo;
     association?: ChildAssociationInfo;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TransferChildAssociation>) {
         if (input) {
             Object.assign(this, input);
             this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;
@@ -58,5 +57,4 @@ The character . must not be used at the end of the name.
             this.association = input.association ? new ChildAssociationInfo(input.association) : undefined;
         }
     }
-
 }

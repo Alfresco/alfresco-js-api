@@ -20,12 +20,10 @@ import { RecordFolder } from './recordFolder';
 export class RecordFolderEntry {
     entry: RecordFolder;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RecordFolderEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new RecordFolder(input.entry) : undefined;
         }
     }
-
 }

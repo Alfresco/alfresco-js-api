@@ -26,8 +26,7 @@ export class LicenseInfo {
     mode: string;
     entitlements?: EntitlementsInfo;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<LicenseInfo>) {
         if (input) {
             Object.assign(this, input);
             this.issuedAt = input.issuedAt ? DateAlfresco.parseDate(input.issuedAt) : undefined;
@@ -35,5 +34,4 @@ export class LicenseInfo {
             this.entitlements = input.entitlements ? new EntitlementsInfo(input.entitlements) : undefined;
         }
     }
-
 }

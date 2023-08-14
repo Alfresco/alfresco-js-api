@@ -18,11 +18,9 @@
 export class FilePlanBodyUpdate {
     properties?: { [key: string]: string; };
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<FilePlanBodyUpdate>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

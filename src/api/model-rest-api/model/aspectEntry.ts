@@ -20,7 +20,7 @@ import { Aspect } from './aspect';
 export class AspectEntry {
     entry: Aspect;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AspectEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Aspect(input.entry) : undefined;

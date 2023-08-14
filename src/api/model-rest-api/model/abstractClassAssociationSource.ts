@@ -22,7 +22,7 @@ export class AbstractClassAssociationSource {
     isMany?: boolean;
     isMandatoryEnforced?: boolean;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AbstractClassAssociationSource>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -36,8 +36,7 @@ The character . must not be used at the end of the name.
     properties?: any;
     allowableOperations?: string[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TransferContainer>) {
         if (input) {
             Object.assign(this, input);
             this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;

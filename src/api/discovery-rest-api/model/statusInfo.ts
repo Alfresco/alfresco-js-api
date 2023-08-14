@@ -22,11 +22,9 @@ export class StatusInfo {
     isThumbnailGenerationEnabled: boolean;
     isDirectAccessUrlEnabled: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<StatusInfo>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

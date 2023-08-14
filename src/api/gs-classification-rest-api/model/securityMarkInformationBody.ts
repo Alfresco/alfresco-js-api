@@ -20,12 +20,11 @@ import { SecurityMarksBody } from './securityMarksBody';
 export class SecurityMarkInformationBody {
     add: SecurityMarksBody;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SecurityMarkInformationBody>) {
 
         if (input) {
             Object.assign(this, input);
             this.add = input.add ? new SecurityMarksBody(input.add) : undefined;
         }
     }
-
 }

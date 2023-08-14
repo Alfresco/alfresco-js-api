@@ -23,7 +23,7 @@ If the **include** parameter is used as well then the fields specified in the **
  */
 export class RequestFields extends Array<string> {
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RequestFields>) {
         super();
         if (input) {
             Object.assign(this, input);
