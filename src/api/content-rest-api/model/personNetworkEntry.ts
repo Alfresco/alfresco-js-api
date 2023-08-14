@@ -20,7 +20,7 @@ import { PersonNetwork } from './personNetwork';
 export class PersonNetworkEntry {
     entry: PersonNetwork;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PersonNetworkEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new PersonNetwork(input.entry) : undefined;

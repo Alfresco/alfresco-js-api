@@ -24,7 +24,7 @@ export class Site {
     preset?: string;
     role?: Site.RoleEnum | string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Site>) {
         if (input) {
             Object.assign(this, input);
         }

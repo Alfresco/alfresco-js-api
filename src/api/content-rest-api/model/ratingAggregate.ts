@@ -19,7 +19,7 @@ export class RatingAggregate {
     numberOfRatings: number;
     average?: number;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RatingAggregate>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -18,7 +18,7 @@
 export class FavoriteBodyCreate {
     target: any;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<FavoriteBodyCreate>) {
         if (input) {
             Object.assign(this, input);
         }

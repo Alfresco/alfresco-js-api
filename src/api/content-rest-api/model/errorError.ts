@@ -23,7 +23,7 @@ export class ErrorError {
     descriptionURL: string;
     logId?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ErrorError>) {
         if (input) {
             Object.assign(this, input);
         }

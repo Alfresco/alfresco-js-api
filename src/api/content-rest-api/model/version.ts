@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-import { ContentInfo } from '../../content-rest-api/model/contentInfo';
-import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
-import { UserInfo } from '../../content-rest-api/model/userInfo';
+import { ContentInfo } from './contentInfo';
+import { DateAlfresco } from '../../content-custom-api';
+import { UserInfo } from './userInfo';
 
 export class Version {
     id: string;
@@ -37,7 +37,7 @@ The character . must not be used at the end of the name.
     aspectNames?: string[];
     properties?: any;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Version>) {
         if (input) {
             Object.assign(this, input);
             this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;

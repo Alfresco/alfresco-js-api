@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
+import { DateAlfresco } from '../../content-custom-api';
 import { RatingAggregate } from './ratingAggregate';
 
 /**
@@ -33,7 +33,7 @@ export class Rating {
      */
     myRating?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Rating>) {
         if (input) {
             Object.assign(this, input);
             this.aggregate = input.aggregate ? new RatingAggregate(input.aggregate) : undefined;

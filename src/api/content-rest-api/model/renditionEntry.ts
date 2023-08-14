@@ -20,7 +20,7 @@ import { Rendition } from './rendition';
 export class RenditionEntry {
     entry: Rendition;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RenditionEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Rendition(input.entry) : undefined;

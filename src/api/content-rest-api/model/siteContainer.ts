@@ -19,7 +19,7 @@ export class SiteContainer {
     id: string;
     folderId: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteContainer>) {
         if (input) {
             Object.assign(this, input);
         }

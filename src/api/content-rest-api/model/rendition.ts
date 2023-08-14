@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-import { ContentInfo } from '../../content-rest-api/model/contentInfo';
+import { ContentInfo } from './contentInfo';
 
 export class Rendition {
     id?: string;
     content?: ContentInfo;
     status?: Rendition.StatusEnum | string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Rendition>) {
         if (input) {
             Object.assign(this, input);
             this.content = input.content ? new ContentInfo(input.content) : undefined;

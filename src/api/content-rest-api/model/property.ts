@@ -56,11 +56,11 @@ export class Property {
      */
     constraints?: Constraint[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Property>) {
         if (input) {
             Object.assign(this, input);
             if (input.constraints) {
-                this.constraints = input.constraints.map((item: any) => {
+                this.constraints = input.constraints.map((item) => {
                     return new Constraint(item);
                 });
             }

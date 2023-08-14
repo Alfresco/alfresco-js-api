@@ -20,7 +20,7 @@ import { TagPagingList } from './tagPagingList';
 export class TagPaging {
     list?: TagPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<TagPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new TagPagingList(input.list) : undefined;

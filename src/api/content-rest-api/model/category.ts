@@ -23,7 +23,7 @@ export class Category {
     count?: number;
     path?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Category>) {
         if (input) {
             Object.assign(this, input);
         }

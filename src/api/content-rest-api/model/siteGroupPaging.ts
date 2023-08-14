@@ -20,7 +20,7 @@ import { SiteGroupPagingList } from './siteGroupPagingList';
 export class SiteGroupPaging {
     list?: SiteGroupPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteGroupPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new SiteGroupPagingList(input.list) : undefined;

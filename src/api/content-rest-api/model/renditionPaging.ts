@@ -20,7 +20,7 @@ import { RenditionPagingList } from './renditionPagingList';
 export class RenditionPaging {
     list?: RenditionPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RenditionPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new RenditionPagingList(input.list) : undefined;

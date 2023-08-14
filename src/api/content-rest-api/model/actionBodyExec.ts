@@ -23,7 +23,7 @@ export class ActionBodyExec {
     targetId?: string;
     params?: any;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ActionBodyExec>) {
         if (input) {
             Object.assign(this, input);
         }

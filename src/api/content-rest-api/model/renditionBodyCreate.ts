@@ -18,7 +18,7 @@
 export class RenditionBodyCreate {
     id: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RenditionBodyCreate>) {
         if (input) {
             Object.assign(this, input);
         }

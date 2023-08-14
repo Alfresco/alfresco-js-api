@@ -19,7 +19,7 @@ export class GroupMembershipBodyCreate {
     id: string;
     memberType: GroupMembershipBodyCreate.MemberTypeEnum | string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<GroupMembershipBodyCreate>) {
         if (input) {
             Object.assign(this, input);
         }

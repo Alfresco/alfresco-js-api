@@ -20,7 +20,7 @@ import { VersionPagingList } from './versionPagingList';
 export class VersionPaging {
     list?: VersionPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<VersionPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new VersionPagingList(input.list) : undefined;

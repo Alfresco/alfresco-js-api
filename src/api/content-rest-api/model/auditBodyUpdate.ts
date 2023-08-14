@@ -18,7 +18,7 @@
 export class AuditBodyUpdate {
     isEnabled?: boolean;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AuditBodyUpdate>) {
         if (input) {
             Object.assign(this, input);
         }

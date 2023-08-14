@@ -18,7 +18,7 @@
 export class CategoryLinkBody {
     categoryId: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<CategoryLinkBody>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -29,7 +29,7 @@ The character . must not be used at the end of the name.
     properties?: { [key: string]: string; };
     permissions?: PermissionsBody;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<NodeBodyUpdate>) {
         if (input) {
             Object.assign(this, input);
             this.permissions = input.permissions ? new PermissionsBody(input.permissions) : undefined;

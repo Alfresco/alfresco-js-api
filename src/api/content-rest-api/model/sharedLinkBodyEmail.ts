@@ -21,7 +21,7 @@ export class SharedLinkBodyEmail {
     locale?: string;
     recipientEmails?: string[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SharedLinkBodyEmail>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -20,7 +20,7 @@ import { SiteMember } from './siteMember';
 export class SiteMemberEntry {
     entry: SiteMember;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteMemberEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new SiteMember(input.entry) : undefined;

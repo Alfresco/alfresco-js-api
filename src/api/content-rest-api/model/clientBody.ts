@@ -21,7 +21,7 @@ export class ClientBody {
      */
     client: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ClientBody>) {
         if (input) {
             Object.assign(this, input);
         }

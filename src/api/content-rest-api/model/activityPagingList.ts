@@ -16,18 +16,18 @@
  */
 
 import { ActivityEntry } from './activityEntry';
-import { Pagination } from '../../content-rest-api/model/pagination';
+import { Pagination } from './pagination';
 
 export class ActivityPagingList {
     pagination: Pagination;
     entries: ActivityEntry[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ActivityPagingList>) {
         if (input) {
             Object.assign(this, input);
             this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
             if (input.entries) {
-                this.entries = input.entries.map((item: any) => {
+                this.entries = input.entries.map((item) => {
                     return new ActivityEntry(item);
                 });
             }

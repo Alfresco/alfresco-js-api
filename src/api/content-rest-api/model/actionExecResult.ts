@@ -21,7 +21,7 @@ export class ActionExecResult {
      */
     id: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ActionExecResult>) {
         if (input) {
             Object.assign(this, input);
         }

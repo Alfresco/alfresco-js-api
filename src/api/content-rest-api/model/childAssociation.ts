@@ -19,7 +19,7 @@ export class ChildAssociation {
     childId: string;
     assocType: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ChildAssociation>) {
         if (input) {
             Object.assign(this, input);
         }

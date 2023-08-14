@@ -23,11 +23,11 @@ export class Definition {
      */
     properties?: Property[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Definition>) {
         if (input) {
             Object.assign(this, input);
             if (input.properties) {
-                this.properties = input.properties.map((item: any) => {
+                this.properties = input.properties.map((item) => {
                     return new Property(item);
                 });
             }

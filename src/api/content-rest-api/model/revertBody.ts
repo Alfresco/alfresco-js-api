@@ -19,7 +19,7 @@ export class RevertBody {
     majorVersion?: boolean;
     comment?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RevertBody>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -20,7 +20,7 @@ export class GroupMember {
     displayName: string;
     memberType: GroupMember.MemberTypeEnum | string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<GroupMember>) {
         if (input) {
             Object.assign(this, input);
         }

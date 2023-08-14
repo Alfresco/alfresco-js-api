@@ -20,7 +20,7 @@ import { GroupMemberPagingList } from './groupMemberPagingList';
 export class GroupMemberPaging {
     list?: GroupMemberPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<GroupMemberPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new GroupMemberPagingList(input.list) : undefined;

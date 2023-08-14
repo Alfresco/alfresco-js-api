@@ -17,19 +17,19 @@
 
 import { Node } from './node';
 import { NodeEntry } from './nodeEntry';
-import { Pagination } from '../../content-rest-api/model/pagination';
+import { Pagination } from './pagination';
 
 export class NodePagingList {
     pagination?: Pagination;
     entries?: NodeEntry[];
     source?: Node;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<NodePagingList>) {
         if (input) {
             Object.assign(this, input);
             this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
             if (input.entries) {
-                this.entries = input.entries.map((item: any) => {
+                this.entries = input.entries.map((item) => {
                     return new NodeEntry(item);
                 });
             }

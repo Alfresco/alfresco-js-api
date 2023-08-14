@@ -26,7 +26,7 @@ export class NetworkQuota {
     limit: number;
     usage: number;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<NetworkQuota>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -20,7 +20,7 @@ import { Node } from './node';
 export class NodeEntry {
     entry: Node;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<NodeEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Node(input.entry) : undefined;

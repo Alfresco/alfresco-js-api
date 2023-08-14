@@ -20,7 +20,7 @@ import { ActionExecResult } from './actionExecResult';
 export class ActionExecResultEntry {
     entry: ActionExecResult;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ActionExecResultEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new ActionExecResult(input.entry) : undefined;

@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-import { ContentInfo } from '../../content-rest-api/model/contentInfo';
-import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
-import { UserInfo } from '../../content-rest-api/model/userInfo';
+import { ContentInfo } from './contentInfo';
+import { DateAlfresco } from '../../content-custom-api';
+import { UserInfo } from './userInfo';
 
 export class SharedLink {
     id?: string;
@@ -54,7 +54,7 @@ allowable operations pertaining to the linked content node.
     properties?: any;
     aspectNames?: string[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SharedLink>) {
         if (input) {
             Object.assign(this, input);
             this.expiresAt = input.expiresAt ? DateAlfresco.parseDate(input.expiresAt) : undefined;

@@ -20,7 +20,7 @@ import { Category } from "./category";
 export class CategoryEntry {
     entry: Category;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<CategoryEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Category(input.entry) : undefined;

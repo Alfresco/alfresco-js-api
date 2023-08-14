@@ -18,7 +18,7 @@
 export class DownloadBodyCreate {
     nodeIds: string[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<DownloadBodyCreate>) {
         if (input) {
             Object.assign(this, input);
         }

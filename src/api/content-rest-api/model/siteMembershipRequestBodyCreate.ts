@@ -25,7 +25,7 @@ export class SiteMembershipRequestBodyCreate {
      **Note:** This is available in Alfresco 7.0.0 and newer versions.
      */
     client?: string;
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteMembershipRequestBodyCreate>) {
         if (input) {
             Object.assign(this, input);
         }

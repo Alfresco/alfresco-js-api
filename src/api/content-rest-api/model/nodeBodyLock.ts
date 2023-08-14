@@ -20,7 +20,7 @@ export class NodeBodyLock {
     type?: NodeBodyLock.TypeEnum | string;
     lifetime?: NodeBodyLock.LifetimeEnum | string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<NodeBodyLock>) {
         if (input) {
             Object.assign(this, input);
         }

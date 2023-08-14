@@ -20,7 +20,7 @@ import { SharedLink } from './sharedLink';
 export class SharedLinkEntry {
     entry: SharedLink;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SharedLinkEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new SharedLink(input.entry) : undefined;

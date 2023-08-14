@@ -20,7 +20,7 @@ import { Person } from './person';
 export class PersonEntry {
     entry: Person;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PersonEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Person(input.entry) : undefined;

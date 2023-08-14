@@ -21,7 +21,7 @@ export class PathElement {
     nodeType?: string;
     aspectNames?: string[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<PathElement>) {
         if (input) {
             Object.assign(this, input);
         }

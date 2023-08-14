@@ -20,7 +20,7 @@ import { SiteMembershipRequest } from './siteMembershipRequest';
 export class SiteMembershipRequestEntry {
     entry: SiteMembershipRequest;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteMembershipRequestEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new SiteMembershipRequest(input.entry) : undefined;

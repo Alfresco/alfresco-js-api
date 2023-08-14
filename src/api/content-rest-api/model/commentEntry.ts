@@ -20,7 +20,7 @@ import { Comment } from './comment';
 export class CommentEntry {
     entry: Comment;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<CommentEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Comment(input.entry) : undefined;

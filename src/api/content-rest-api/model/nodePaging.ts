@@ -20,7 +20,7 @@ import { NodePagingList } from './nodePagingList';
 export class NodePaging {
     list?: NodePagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<NodePaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new NodePagingList(input.list) : undefined;

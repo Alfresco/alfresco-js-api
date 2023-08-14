@@ -20,7 +20,7 @@ export class Capabilities {
     isGuest?: boolean;
     isMutable?: boolean;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Capabilities>) {
         if (input) {
             Object.assign(this, input);
         }

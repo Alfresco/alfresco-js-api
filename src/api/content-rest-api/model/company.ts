@@ -25,7 +25,7 @@ export class Company {
     fax?: string;
     email?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Company>) {
         if (input) {
             Object.assign(this, input);
         }

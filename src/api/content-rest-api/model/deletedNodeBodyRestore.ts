@@ -19,7 +19,7 @@ export class DeletedNodeBodyRestore {
     targetParentId?: string;
     assocType?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<DeletedNodeBodyRestore>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -20,7 +20,7 @@ import { SiteGroup } from './siteGroup';
 export class SiteGroupEntry {
     entry: SiteGroup;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SiteGroupEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new SiteGroup(input.entry) : undefined;

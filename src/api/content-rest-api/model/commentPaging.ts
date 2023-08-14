@@ -20,7 +20,7 @@ import { CommentPagingList } from './commentPagingList';
 export class CommentPaging {
     list?: CommentPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<CommentPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new CommentPagingList(input.list) : undefined;

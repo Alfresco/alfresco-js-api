@@ -15,13 +15,13 @@
  * limitations under the License.
  */
 
-import { ChildAssociationInfo } from '../../content-rest-api/model/childAssociationInfo';
-import { ContentInfo } from '../../content-rest-api/model/contentInfo';
-import { DateAlfresco } from '../../content-custom-api/model/dateAlfresco';
+import { ChildAssociationInfo } from './childAssociationInfo';
+import { ContentInfo } from './contentInfo';
+import { DateAlfresco } from '../../content-custom-api';
 import { Definition } from './definition';
-import { PathInfo } from '../../content-rest-api/model/pathInfo';
+import { PathInfo } from './pathInfo';
 import { PermissionsInfo } from './permissionsInfo';
-import { UserInfo } from '../../content-rest-api/model/userInfo';
+import { UserInfo } from './userInfo';
 
 export class NodeChildAssociation {
     id: string;
@@ -51,7 +51,7 @@ The character . must not be used at the end of the name.
     definition?: Definition;
     association?: ChildAssociationInfo;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<NodeChildAssociation>) {
         if (input) {
             Object.assign(this, input);
             this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;

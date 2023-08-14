@@ -31,7 +31,7 @@ export class Constraint {
     description?: string;
     parameters?: { [key: string]: any; };
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Constraint>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -20,7 +20,7 @@ import { Activity } from './activity';
 export class ActivityEntry {
     entry: Activity;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ActivityEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Activity(input.entry) : undefined;
