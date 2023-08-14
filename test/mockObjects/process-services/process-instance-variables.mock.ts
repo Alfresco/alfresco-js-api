@@ -67,21 +67,6 @@ export class ProcessInstanceVariablesMock extends BaseMock {
             });
     }
 
-    addPostProcessInstanceVariables200Response(processInstanceId: string): void {
-        nock(this.host, { encodedQueryParams: true })
-            .post('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
-            .reply(200, fakeVariablesList);
-    }
-
-    addPostProcessInstanceVariables500Response(processInstanceId: string): void {
-        nock(this.host, { encodedQueryParams: true })
-            .post('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables')
-            .reply(500, {
-                messageKey: 'UNKNOWN',
-                message: 'Unknown error',
-            });
-    }
-
     addGetProcessInstanceVariable200Response(processInstanceId: string, variableName: string): void {
         nock(this.host, { encodedQueryParams: true })
             .get('/activiti-app/api/enterprise/process-instances/' + processInstanceId + '/variables/' + variableName)
