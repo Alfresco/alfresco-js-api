@@ -31,12 +31,12 @@ export class AuditLogEntryRepresentation {
     taskName?: string;
     type?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AuditLogEntryRepresentation>) {
 
         if (input) {
             Object.assign(this, input);
             if (input.formData) {
-                this.formData = input.formData.map((item: any) => {
+                this.formData = input.formData.map((item) => {
                     return new AuditLogFormDataRepresentation(item);
                 });
             }

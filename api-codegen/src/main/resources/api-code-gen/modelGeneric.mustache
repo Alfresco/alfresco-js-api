@@ -13,7 +13,7 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{
     {{#isReadOnly}}readonly {{/isReadOnly}}{{name}}{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}} | string{{/isEnum}}{{^isEnum}}{{{datatype}}}{{/isEnum}}{{#isListContainer}}[]{{/isListContainer}};
 {{/vars}}
 
-    constructor(input?: any) {
+    constructor(input?: Partial<{{classname}}>) {
         {{#parent}}
         super();
         {{/parent}}

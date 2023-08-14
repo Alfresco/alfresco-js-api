@@ -26,8 +26,7 @@ export class RuntimeDecisionTableRepresentation {
     tenantId?: string;
     version?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RuntimeDecisionTableRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }

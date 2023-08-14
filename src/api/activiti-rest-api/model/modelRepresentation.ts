@@ -36,8 +36,7 @@ export class ModelRepresentation {
     tenantId?: number;
     version?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ModelRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.lastUpdated = input.lastUpdated ? DateAlfresco.parseDate(input.lastUpdated) : undefined;

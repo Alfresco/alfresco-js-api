@@ -38,11 +38,9 @@ export class ProcessScopeRepresentation {
     responseVariables?: { [key: string]: VariableScopeRepresentation; };
     reusableFieldMapping?: { [key: string]: VariableMappingRepresentation; };
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ProcessScopeRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

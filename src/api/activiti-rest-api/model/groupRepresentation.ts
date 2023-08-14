@@ -34,24 +34,23 @@ export class GroupRepresentation {
     userCount?: number;
     users?: UserRepresentationGroup[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<GroupRepresentation>) {
         if (input) {
             Object.assign(this, input);
             if (input.capabilities) {
-                this.capabilities = input.capabilities.map((item: any) => {
+                this.capabilities = input.capabilities.map((item) => {
                     return new GroupCapabilityRepresentation(item);
                 });
             }
             if (input.groups) {
-                this.groups = input.groups.map((item: any) => {
+                this.groups = input.groups.map((item) => {
                     return new GroupRepresentation(item);
                 });
             }
             this.lastSyncTimeStamp = input.lastSyncTimeStamp ? DateAlfresco.parseDate(input.lastSyncTimeStamp) : undefined;
             this.manager = input.manager ? new UserRepresentationGroup(input.manager) : undefined;
             if (input.users) {
-                this.users = input.users.map((item: any) => {
+                this.users = input.users.map((item) => {
                     return new UserRepresentationGroup(item);
                 });
             }

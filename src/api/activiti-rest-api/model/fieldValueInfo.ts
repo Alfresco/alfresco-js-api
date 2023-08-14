@@ -19,11 +19,9 @@ export class FieldValueInfo {
     type?: string;
     value?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<FieldValueInfo>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

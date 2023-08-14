@@ -20,12 +20,11 @@ import { AppDefinitionRepresentation } from './appDefinitionRepresentation';
 export class RuntimeAppDefinitionSaveRepresentation {
     appDefinitions?: AppDefinitionRepresentation[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RuntimeAppDefinitionSaveRepresentation>) {
         if (input) {
             Object.assign(this, input);
             if (input.appDefinitions) {
-                this.appDefinitions = input.appDefinitions.map((item: any) => {
+                this.appDefinitions = input.appDefinitions.map((item) => {
                     return new AppDefinitionRepresentation(item);
                 });
             }

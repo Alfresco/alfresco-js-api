@@ -24,8 +24,7 @@ export class TaskFilterRequestRepresentation {
     page?: number;
     size?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TaskFilterRequestRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.filter = input.filter ? new TaskFilterRepresentation(input.filter) : undefined;

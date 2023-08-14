@@ -20,7 +20,7 @@ export class IdentityLinkRepresentation {
     type?: string;
     user?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<IdentityLinkRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

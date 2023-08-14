@@ -18,11 +18,10 @@
 export class FormIdentifierRepresentation {
     formId?: number;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<FormIdentifierRepresentation>) {
 
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

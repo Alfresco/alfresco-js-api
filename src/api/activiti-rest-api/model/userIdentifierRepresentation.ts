@@ -19,11 +19,9 @@ export class UserIdentifierRepresentation {
     email?: string;
     userId?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UserIdentifierRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

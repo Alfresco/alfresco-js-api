@@ -24,8 +24,7 @@ export class AbstractUserRepresentation {
     lastName?: string;
     pictureId?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<AbstractUserRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }

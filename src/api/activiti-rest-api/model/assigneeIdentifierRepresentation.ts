@@ -19,8 +19,7 @@ export class AssigneeIdentifierRepresentation {
     assignee?: string;
     email?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<AssigneeIdentifierRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }

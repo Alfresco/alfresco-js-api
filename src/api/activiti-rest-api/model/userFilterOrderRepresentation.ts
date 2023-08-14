@@ -19,11 +19,9 @@ export class UserFilterOrderRepresentation {
     appId?: number;
     order?: number[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UserFilterOrderRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

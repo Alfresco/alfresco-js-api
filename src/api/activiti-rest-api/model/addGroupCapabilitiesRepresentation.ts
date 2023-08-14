@@ -18,7 +18,7 @@
 export class AddGroupCapabilitiesRepresentation {
     capabilities?: string[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AddGroupCapabilitiesRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

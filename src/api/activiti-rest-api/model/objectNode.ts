@@ -38,7 +38,7 @@ export class ObjectNode {
     textual?: boolean;
     valueNode?: boolean;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ObjectNode>) {
 
         if (input) {
             Object.assign(this, input);

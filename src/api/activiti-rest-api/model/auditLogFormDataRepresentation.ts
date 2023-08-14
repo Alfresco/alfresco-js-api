@@ -20,7 +20,7 @@ export class AuditLogFormDataRepresentation {
     fieldName?: string;
     value?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AuditLogFormDataRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

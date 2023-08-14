@@ -22,7 +22,7 @@ export class BoxUserAccountCredentialsRepresentation {
     expireDate?: Date;
     ownerEmail?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<BoxUserAccountCredentialsRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

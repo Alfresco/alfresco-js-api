@@ -23,12 +23,11 @@ export class ResultListDataRepresentationUserProcessInstanceFilterRepresentation
     start?: number;
     total?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResultListDataRepresentationUserProcessInstanceFilterRepresentation>) {
         if (input) {
             Object.assign(this, input);
             if (input.data) {
-                this.data = input.data.map((item: any) => {
+                this.data = input.data.map((item) => {
                     return new UserProcessInstanceFilterRepresentation(item);
                 });
             }

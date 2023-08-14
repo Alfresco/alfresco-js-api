@@ -20,7 +20,7 @@ export class AuditDecisionExpressionInfoRepresentation {
     value?: any;
     variable?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AuditDecisionExpressionInfoRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

@@ -33,8 +33,7 @@ export class TaskQueryRepresentation {
     taskId?: string;
     text?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TaskQueryRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.dueAfter = input.dueAfter ? DateAlfresco.parseDate(input.dueAfter) : undefined;

@@ -21,11 +21,9 @@ export class CreateEndpointBasicAuthRepresentation {
     tenantId?: number;
     username?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<CreateEndpointBasicAuthRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

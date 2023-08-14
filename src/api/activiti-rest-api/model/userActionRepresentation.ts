@@ -20,11 +20,9 @@ export class UserActionRepresentation {
     newPassword?: string;
     oldPassword?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UserActionRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

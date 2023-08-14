@@ -26,7 +26,7 @@ export class AppDefinitionUpdateResultRepresentation {
     message?: string;
     messageKey?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AppDefinitionUpdateResultRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

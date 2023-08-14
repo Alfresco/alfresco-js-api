@@ -18,7 +18,7 @@
 export class ChecklistOrderRepresentation {
     order?: string[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ChecklistOrderRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

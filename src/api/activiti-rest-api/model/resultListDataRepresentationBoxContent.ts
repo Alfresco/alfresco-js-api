@@ -23,12 +23,11 @@ export class ResultListDataRepresentationBoxContent {
     start?: number;
     total?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResultListDataRepresentationBoxContent>) {
         if (input) {
             Object.assign(this, input);
             if (input.data) {
-                this.data = input.data.map((item: any) => {
+                this.data = input.data.map((item) => {
                     return new BoxContent(item);
                 });
             }

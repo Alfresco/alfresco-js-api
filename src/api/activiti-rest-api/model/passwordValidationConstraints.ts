@@ -20,11 +20,9 @@ export class PasswordValidationConstraints {
     passwordCriteriaMessage?: string;
     regularExpression?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<PasswordValidationConstraints>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

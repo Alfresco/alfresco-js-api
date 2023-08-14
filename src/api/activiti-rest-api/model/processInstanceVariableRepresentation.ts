@@ -20,11 +20,9 @@ export class ProcessInstanceVariableRepresentation {
     type?: string;
     value?: any;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ProcessInstanceVariableRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

@@ -32,11 +32,9 @@ export class File {
     totalSpace?: number;
     usableSpace?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<File>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

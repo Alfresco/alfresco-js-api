@@ -23,12 +23,10 @@ export class DataSourceRepresentation {
     name?: string;
     tenantId?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<DataSourceRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.config = input.config ? new DataSourceConfigRepresentation(input.config) : undefined;
         }
     }
-
 }

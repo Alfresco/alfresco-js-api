@@ -22,11 +22,9 @@ export class GoogleDriveContent {
     simpleType?: string;
     title?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<GoogleDriveContent>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

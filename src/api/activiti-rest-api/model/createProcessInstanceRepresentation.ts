@@ -26,12 +26,11 @@ export class CreateProcessInstanceRepresentation {
     values?: any;
     variables?: RestVariable[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<CreateProcessInstanceRepresentation>) {
         if (input) {
             Object.assign(this, input);
             if (input.variables) {
-                this.variables = input.variables.map((item: any) => {
+                this.variables = input.variables.map((item) => {
                     return new RestVariable(item);
                 });
             }

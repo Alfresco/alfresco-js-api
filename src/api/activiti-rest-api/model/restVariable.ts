@@ -21,11 +21,9 @@ export class RestVariable {
     type?: string;
     value?: any;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RestVariable>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

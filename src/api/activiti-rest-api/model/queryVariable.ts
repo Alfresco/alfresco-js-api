@@ -22,13 +22,11 @@ export class QueryVariable {
     value?: any;
     variableOperation?: QueryVariable.VariableOperationEnum | string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<QueryVariable>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }
 export namespace QueryVariable {
     export type VariableOperationEnum = 'EQUALS' | 'NOT_EQUALS' | 'EQUALS_IGNORE_CASE' | 'NOT_EQUALS_IGNORE_CASE' | 'LIKE' | 'LIKE_IGNORE_CASE' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUALS' | 'LESS_THAN' | 'LESS_THAN_OR_EQUALS';

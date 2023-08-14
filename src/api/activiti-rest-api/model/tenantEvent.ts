@@ -26,12 +26,10 @@ export class TenantEvent {
     userId?: number;
     userName?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TenantEvent>) {
         if (input) {
             Object.assign(this, input);
             this.eventTime = input.eventTime ? DateAlfresco.parseDate(input.eventTime) : undefined;
         }
     }
-
 }

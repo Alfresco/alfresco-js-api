@@ -23,12 +23,11 @@ export class ResultListDataRepresentationLightGroupRepresentation {
     start?: number;
     total?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResultListDataRepresentationLightGroupRepresentation>) {
         if (input) {
             Object.assign(this, input);
             if (input.data) {
-                this.data = input.data.map((item: any) => {
+                this.data = input.data.map((item) => {
                     return new LightGroupRepresentation(item);
                 });
             }

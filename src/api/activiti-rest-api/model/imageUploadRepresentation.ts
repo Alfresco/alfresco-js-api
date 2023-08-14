@@ -23,8 +23,7 @@ export class ImageUploadRepresentation {
     name?: string;
     userId?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ImageUploadRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;

@@ -19,11 +19,9 @@ export class ProcessScopeIdentifierRepresentation {
     processActivityId?: string;
     processModelId?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ProcessScopeIdentifierRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

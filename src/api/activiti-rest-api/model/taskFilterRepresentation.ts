@@ -28,8 +28,7 @@ export class TaskFilterRepresentation {
     sort?: string;
     state?: TaskFilterRepresentation.StateEnum | string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TaskFilterRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.dueAfter = input.dueAfter ? DateAlfresco.parseDate(input.dueAfter) : undefined;

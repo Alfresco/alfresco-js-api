@@ -22,12 +22,10 @@ export class SyncLogEntryRepresentation {
     timeStamp?: Date;
     type?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SyncLogEntryRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.timeStamp = input.timeStamp ? DateAlfresco.parseDate(input.timeStamp) : undefined;
         }
     }
-
 }

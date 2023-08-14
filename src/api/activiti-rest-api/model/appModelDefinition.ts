@@ -30,7 +30,7 @@ export class AppModelDefinition {
     stencilSetId?: number;
     version?: number;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AppModelDefinition>) {
 
         if (input) {
             Object.assign(this, input);

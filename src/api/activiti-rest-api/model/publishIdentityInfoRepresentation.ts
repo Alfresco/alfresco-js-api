@@ -23,13 +23,11 @@ export class PublishIdentityInfoRepresentation {
     person?: LightUserRepresentation;
     type?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<PublishIdentityInfoRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.group = input.group ? new LightGroupRepresentation(input.group) : undefined;
             this.person = input.person ? new LightUserRepresentation(input.person) : undefined;
         }
     }
-
 }

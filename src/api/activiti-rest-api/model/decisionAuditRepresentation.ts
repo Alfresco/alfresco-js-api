@@ -33,12 +33,10 @@ export class DecisionAuditRepresentation {
     processInstanceId?: string;
     renderedVariables?: any;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<DecisionAuditRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
         }
     }
-
 }

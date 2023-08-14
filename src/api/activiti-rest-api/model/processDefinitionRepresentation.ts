@@ -29,16 +29,14 @@ export class ProcessDefinitionRepresentation {
     tenantId?: string;
     version?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ProcessDefinitionRepresentation>) {
         if (input) {
             Object.assign(this, input);
             if (input.metaDataValues) {
-                this.metaDataValues = input.metaDataValues.map((item: any) => {
+                this.metaDataValues = input.metaDataValues.map((item) => {
                     return new ProcessDefinitionMetaDataRepresentation(item);
                 });
             }
         }
     }
-
 }

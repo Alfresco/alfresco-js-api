@@ -22,7 +22,7 @@ export class BoxContent {
     simpleType?: string;
     title?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<BoxContent>) {
 
         if (input) {
             Object.assign(this, input);

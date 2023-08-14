@@ -22,17 +22,17 @@ export class AuditDecisionInfoRepresentation {
     appliedRules?: AuditDecisionRuleInfoRepresentation[];
     calculatedValues?: AuditCalculatedValueRepresentation[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AuditDecisionInfoRepresentation>) {
 
         if (input) {
             Object.assign(this, input);
             if (input.appliedRules) {
-                this.appliedRules = input.appliedRules.map((item: any) => {
+                this.appliedRules = input.appliedRules.map((item) => {
                     return new AuditDecisionRuleInfoRepresentation(item);
                 });
             }
             if (input.calculatedValues) {
-                this.calculatedValues = input.calculatedValues.map((item: any) => {
+                this.calculatedValues = input.calculatedValues.map((item) => {
                     return new AuditCalculatedValueRepresentation(item);
                 });
             }

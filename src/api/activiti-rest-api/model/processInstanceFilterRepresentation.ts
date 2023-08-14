@@ -23,11 +23,9 @@ export class ProcessInstanceFilterRepresentation {
     sort?: string;
     state?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ProcessInstanceFilterRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

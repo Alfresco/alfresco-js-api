@@ -24,11 +24,9 @@ export class ValidationErrorRepresentation {
     validatorSetName?: string;
     warning?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ValidationErrorRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

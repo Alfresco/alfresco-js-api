@@ -19,7 +19,7 @@ export class FormValueRepresentation {
     id?: string;
     name?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<FormValueRepresentation>) {
 
         if (input) {
             Object.assign(this, input);
