@@ -473,6 +473,28 @@ parameter are returned in addition to those specified in the **fields** paramete
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts, returnType);
     }
+
+    /**
+     * Create a folder
+     *
+     * @param name - folder name
+     * @param  relativePath - The relativePath specifies the folder structure to create relative to the node identified by nodeId.
+     * @param  nodeId default value root.The identifier of a node where add the folder. You can also use one of these well-known aliases: -my- | -shared- | -root-
+     * @param opts Optional parameters
+     *
+     * @returns  A promise that is resolved if the folder is created and {error} if rejected.
+     */
+    createFolder(name: string, relativePath: string, nodeId: string, opts?: any): Promise<NodeEntry> {
+        nodeId = nodeId || '-root-';
+        let nodeBody = {
+            'name': name,
+            'nodeType': 'cm:folder',
+            'relativePath': relativePath
+        };
+
+        return this.createNode(nodeId, nodeBody, opts);
+    }
+
 /**
     * Create secondary child
     *
