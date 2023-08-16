@@ -16,14 +16,14 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
+import { AlfrescoApiConfig, TaskFormsApi, AlfrescoApi } from '../../index';
 import { BpmAuthMock, TaskFormMock } from '../mockObjects';
 
 describe('Activiti Task Api', () => {
     let authResponseBpmMock: BpmAuthMock;
     let taskFormMock: TaskFormMock;
     let alfrescoJsApi: AlfrescoApi;
+    let taskFormsApi: TaskFormsApi;
 
     beforeEach(async () => {
         const BPM_HOST = 'http://127.0.0.1:9999';
@@ -38,6 +38,8 @@ describe('Activiti Task Api', () => {
             provider: 'BPM'
         } as AlfrescoApiConfig);
 
+        taskFormsApi = new TaskFormsApi(alfrescoJsApi);
+
         await alfrescoJsApi.login('admin', 'admin');
     });
 
@@ -45,7 +47,7 @@ describe('Activiti Task Api', () => {
         taskFormMock.get200getTaskFormVariables();
 
         const taskId = '5028';
-        const data = await alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId);
+        const data = await taskFormsApi.getTaskFormVariables(taskId);
 
         expect(data[0].id).equal('initiator');
     });
@@ -54,8 +56,7 @@ describe('Activiti Task Api', () => {
         taskFormMock.get200getTaskFormVariables();
 
         const taskId = '5028';
-        await alfrescoJsApi.activiti.taskFormsApi.getTaskFormVariables(taskId);
-        expect((alfrescoJsApi.activiti.taskFormsApi.apiClient as any).authentications.cookie).equal('ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ');
+        await taskFormsApi.getTaskFormVariables(taskId);
+        expect((taskFormsApi.apiClient as any).authentications.cookie).equal('ACTIVITI_REMEMBER_ME=NjdOdGwvcUtFTkVEczQyMGh4WFp5QT09OmpUL1UwdFVBTC94QTJMTFFUVFgvdFE9PQ');
     });
-
 });

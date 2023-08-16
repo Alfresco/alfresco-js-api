@@ -16,9 +16,8 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
 import { EcmAuthMock, BpmAuthMock, NodeMock, ProfileMock } from '../test/mockObjects';
+import { NodesApi, UserProfileApi, AlfrescoApiConfig, AlfrescoApi } from '../index';
 
 const NOOP = () => { /* empty */ };
 const ECM_HOST = 'http://127.0.0.1:8080';
@@ -33,6 +32,7 @@ describe('Auth', () => {
     describe('ECM Provider config', () => {
         let authResponseEcmMock: EcmAuthMock;
         let nodeMock: NodeMock;
+        let nodesApi: NodesApi;
 
         beforeEach(() => {
             authResponseEcmMock = new EcmAuthMock(ECM_HOST);
@@ -42,11 +42,14 @@ describe('Auth', () => {
         describe('With Authentication', () => {
             let alfrescoJsApi: AlfrescoApi;
 
+
             beforeEach(() => {
                 alfrescoJsApi = new AlfrescoApi({
                     hostEcm: ECM_HOST
                 } as AlfrescoApiConfig);
-            })
+
+                nodesApi = new NodesApi(alfrescoJsApi);
+            });
 
             describe('login', () => {
 
@@ -207,7 +210,8 @@ describe('Auth', () => {
 
                 it('should 401 invalidate the ticket', (done) => {
                     nodeMock.get401CreationFolder();
-                    alfrescoJsApi.nodes.createFolder('newFolder', null, null).then(NOOP, () => {
+
+                    nodesApi.createFolder('newFolder', null, null).then(NOOP, () => {
                         expect(alfrescoJsApi.contentAuth.authentications.basicAuth.password).to.be.equal(null);
                         done();
                     });
@@ -217,7 +221,7 @@ describe('Auth', () => {
                 it('should 401 invalidate the session and logout', (done) => {
                     nodeMock.get401CreationFolder();
 
-                    alfrescoJsApi.nodes.createFolder('newFolder', null, null).then(NOOP, () => {
+                    nodesApi.createFolder('newFolder', null, null).then(NOOP, () => {
                         expect(alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();
                     });
@@ -230,7 +234,7 @@ describe('Auth', () => {
 
                     nodeMock.get401CreationFolder();
 
-                    alfrescoJsApi.nodes.createFolder('newFolder', null, null).then(NOOP);
+                    nodesApi.createFolder('newFolder', null, null).then(NOOP);
                 });
             });
 
@@ -241,6 +245,7 @@ describe('Auth', () => {
         let profileMock: ProfileMock;
         let authResponseBpmMock: BpmAuthMock;
         let alfrescoJsApi: AlfrescoApi;
+        let profileApi: UserProfileApi;
 
         beforeEach(() => {
             profileMock = new ProfileMock(BPM_HOST);
@@ -250,6 +255,8 @@ describe('Auth', () => {
                 hostBpm: BPM_HOST,
                 provider: 'BPM'
             } as AlfrescoApiConfig);
+
+            profileApi = new UserProfileApi(alfrescoJsApi);
         });
 
         describe('With Authentication', () => {
@@ -360,7 +367,7 @@ describe('Auth', () => {
                 it('should 401 invalidate the ticket', (done) => {
                     profileMock.get401getProfile();
 
-                    alfrescoJsApi.activiti.profileApi.getProfile().then(NOOP, () => {
+                    profileApi.getProfile().then(NOOP, () => {
                         expect(alfrescoJsApi.processAuth.authentications.basicAuth.ticket).to.be.equal(null);
                         done();
                     });
@@ -370,7 +377,7 @@ describe('Auth', () => {
                 it('should 401 invalidate the session and logout', (done) => {
                     profileMock.get401getProfile();
 
-                    alfrescoJsApi.activiti.profileApi.getProfile().then(() => NOOP, () => {
+                    profileApi.getProfile().then(() => NOOP, () => {
                         expect(alfrescoJsApi.isLoggedIn()).to.be.equal(false);
                         done();
                     });

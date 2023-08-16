@@ -15,8 +15,7 @@
  * limitations under the License.
  */
 
-import { AlfrescoApiCompatibility as AlfrescoApi, AlfrescoApiConfig } from '../index';
-import { DateAlfresco } from  '../index';
+import { AlfrescoApiConfig, AlfrescoApi, DateAlfresco } from '../index';
 import { EcmAuthMock } from '../test/mockObjects';
 
 const chai = require('chai');

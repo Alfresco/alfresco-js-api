@@ -140,18 +140,4 @@ export class GroupsMock extends BaseMock {
                 },
             });
     }
-
-    get401Response(): void {
-        nock(this.host, { encodedQueryParams: true })
-            .get('/alfresco/api/-default-/public/alfresco/versions/1/groups')
-            .reply(401, {
-                error: {
-                    errorKey: 'framework.exception.ApiDefault',
-                    statusCode: 401,
-                    briefSummary: '05210059 Authentication failed for Web Script org/alfresco/api/ResourceWebScript.get',
-                    stackTrace: 'For security reasons the stack trace is no longer displayed, but the property is kept for previous versions.',
-                    descriptionURL: 'https://api-explorer.alfresco.com',
-                },
-            });
-    }
 }

@@ -116,8 +116,4 @@ export class PeopleMock extends BaseMock {
                 },
             });
     }
-
-    get401Response(): void {
-        nock(this.host, { encodedQueryParams: true }).get('/alfresco/api/-default-/public/alfresco/versions/1/tags').reply(401, {});
-    }
 }

@@ -16,14 +16,14 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
 import { BpmAuthMock, ProcessInstanceVariablesMock } from '../mockObjects';
+import { ProcessInstanceVariablesApi, AlfrescoApiConfig, AlfrescoApi } from '../../index';
 
 describe('Activiti Process Instance Variables Api', () => {
     let authResponseBpmMock: BpmAuthMock;
     let variablesMock: ProcessInstanceVariablesMock;
     let alfrescoJsApi: AlfrescoApi;
+    let processInstanceVariablesApi: ProcessInstanceVariablesApi;
 
     const NOOP = () => {/* empty */};
 
@@ -40,6 +40,8 @@ describe('Activiti Process Instance Variables Api', () => {
             provider: 'BPM'
         } as AlfrescoApiConfig);
 
+        processInstanceVariablesApi = new ProcessInstanceVariablesApi(alfrescoJsApi);
+
         await alfrescoJsApi.login('admin', 'admin');
     });
 
@@ -49,7 +51,7 @@ describe('Activiti Process Instance Variables Api', () => {
             const processInstanceId = '111';
             variablesMock.addListProcessInstanceVariables200Response(processInstanceId);
 
-            alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariables(processInstanceId).then((data) => {
+            processInstanceVariablesApi.getProcessInstanceVariables(processInstanceId).then((data) => {
                 expect(data.length).equal(2);
                 done();
             });
@@ -59,7 +61,7 @@ describe('Activiti Process Instance Variables Api', () => {
             const processInstanceId = '111';
             variablesMock.addListProcessInstanceVariables500Response(processInstanceId);
 
-            alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariables(processInstanceId).then(
+            processInstanceVariablesApi.getProcessInstanceVariables(processInstanceId).then(
                 NOOP,
                 (error) => {
                     expect(error.status).equal(500);
@@ -68,7 +70,6 @@ describe('Activiti Process Instance Variables Api', () => {
                 }
             );
         });
-
     });
 
     describe('create or update variables', () => {
@@ -77,7 +78,7 @@ describe('Activiti Process Instance Variables Api', () => {
             const processInstanceId = '111';
             variablesMock.addPutProcessInstanceVariables200Response(processInstanceId);
 
-            alfrescoJsApi.activiti.processInstanceVariablesApi.createOrUpdateProcessInstanceVariables(processInstanceId, []).then((data) => {
+            processInstanceVariablesApi.createOrUpdateProcessInstanceVariables(processInstanceId, []).then((data) => {
                 expect(data.length).equal(2);
                 done();
             });
@@ -87,7 +88,7 @@ describe('Activiti Process Instance Variables Api', () => {
             const processInstanceId = '111';
             variablesMock.addPutProcessInstanceVariables500Response(processInstanceId);
 
-            alfrescoJsApi.activiti.processInstanceVariablesApi.createOrUpdateProcessInstanceVariables(processInstanceId, []).then(
+            processInstanceVariablesApi.createOrUpdateProcessInstanceVariables(processInstanceId, []).then(
                 NOOP,
                 (error) => {
                     expect(error.status).equal(500);
@@ -96,7 +97,6 @@ describe('Activiti Process Instance Variables Api', () => {
                 }
             );
         });
-
     });
 
     describe('get variable', () => {
@@ -106,7 +106,7 @@ describe('Activiti Process Instance Variables Api', () => {
             const variableName = 'var1';
             variablesMock.addGetProcessInstanceVariable200Response(processInstanceId, variableName);
 
-            alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariable(processInstanceId, variableName).then(
+            processInstanceVariablesApi.getProcessInstanceVariable(processInstanceId, variableName).then(
                 (data) => {
                     expect(data.name).equal('variable1');
                     expect(data.value).equal('Value 123');
@@ -123,7 +123,7 @@ describe('Activiti Process Instance Variables Api', () => {
             const variableName = 'var1';
             variablesMock.addGetProcessInstanceVariable500Response(processInstanceId, variableName);
 
-            alfrescoJsApi.activiti.processInstanceVariablesApi.getProcessInstanceVariable(processInstanceId, variableName).then(
+            processInstanceVariablesApi.getProcessInstanceVariable(processInstanceId, variableName).then(
                 NOOP,
                 (error) => {
                     expect(error.status).equal(500);
@@ -142,7 +142,7 @@ describe('Activiti Process Instance Variables Api', () => {
             const variableName = 'var1';
             variablesMock.addUpdateProcessInstanceVariable200Response(processInstanceId, variableName);
 
-            alfrescoJsApi.activiti.processInstanceVariablesApi.updateProcessInstanceVariable(processInstanceId, variableName, {}).then(() => {
+            processInstanceVariablesApi.updateProcessInstanceVariable(processInstanceId, variableName, {}).then(() => {
                 done();
             });
         });
@@ -152,7 +152,7 @@ describe('Activiti Process Instance Variables Api', () => {
             const variableName = 'var1';
             variablesMock.addUpdateProcessInstanceVariable500Response(processInstanceId, variableName);
 
-            alfrescoJsApi.activiti.processInstanceVariablesApi.updateProcessInstanceVariable(processInstanceId, variableName, {}).then(
+            processInstanceVariablesApi.updateProcessInstanceVariable(processInstanceId, variableName, {}).then(
                 NOOP,
                 (error) => {
                     expect(error.status).equal(500);
@@ -171,7 +171,7 @@ describe('Activiti Process Instance Variables Api', () => {
             const variableName = 'var1';
             variablesMock.addDeleteProcessInstanceVariable200Response(processInstanceId, variableName);
 
-            alfrescoJsApi.activiti.processInstanceVariablesApi.deleteProcessInstanceVariable(processInstanceId, variableName).then(() => {
+            processInstanceVariablesApi.deleteProcessInstanceVariable(processInstanceId, variableName).then(() => {
                 done();
             });
         });
@@ -181,7 +181,7 @@ describe('Activiti Process Instance Variables Api', () => {
             const variableName = 'var1';
             variablesMock.addDeleteProcessInstanceVariable500Response(processInstanceId, variableName);
 
-            alfrescoJsApi.activiti.processInstanceVariablesApi.deleteProcessInstanceVariable(processInstanceId, variableName).then(
+            processInstanceVariablesApi.deleteProcessInstanceVariable(processInstanceId, variableName).then(
                 NOOP,
                 (error) => {
                     expect(error.status).equal(500);
@@ -190,7 +190,5 @@ describe('Activiti Process Instance Variables Api', () => {
                 }
             );
         });
-
     });
-
 });

@@ -16,12 +16,25 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiCompatibility as AlfrescoApi, TaskFilterRequestRepresentation, TaskRepresentation, TaskQueryRequestRepresentation, AlfrescoApiConfig } from  '../../index';
+import {
+    AlfrescoApi,
+    TaskFilterRequestRepresentation,
+    TaskRepresentation,
+    TaskQueryRequestRepresentation,
+    AlfrescoApiConfig,
+    TaskFormsApi,
+    TaskActionsApi,
+    TasksApi
+} from '../../index';
 import { BpmAuthMock, TasksMock } from '../mockObjects';
+
 describe('Activiti Task Api', () => {
     let authResponseBpmMock: BpmAuthMock;
     let tasksMock: TasksMock;
     let alfrescoJsApi: AlfrescoApi;
+    let tasksApi: TasksApi;
+    let taskFormsApi: TaskFormsApi;
+    let taskActionsApi: TaskActionsApi;
 
     const NOOP = () => {/* empty */};
 
@@ -38,6 +51,10 @@ describe('Activiti Task Api', () => {
             provider: 'BPM'
         } as AlfrescoApiConfig);
 
+        tasksApi = new TasksApi(alfrescoJsApi);
+        taskFormsApi = new TaskFormsApi(alfrescoJsApi);
+        taskActionsApi = new TaskActionsApi(alfrescoJsApi);
+
         await alfrescoJsApi.login('admin', 'admin');
     });
 
@@ -45,7 +62,7 @@ describe('Activiti Task Api', () => {
         tasksMock.get200Response();
 
         const requestNode = new TaskQueryRequestRepresentation();
-        const data = await alfrescoJsApi.activiti.taskApi.listTasks(requestNode)
+        const data = await tasksApi.listTasks(requestNode)
 
         expect(data.data[0].processDefinitionName).equal('Process Test Api');
         expect(data.data[1].processDefinitionName).equal('Process Test Api');
@@ -55,7 +72,7 @@ describe('Activiti Task Api', () => {
     it('get Task', async () => {
         tasksMock.get200ResponseGetTask('10');
 
-        const data = await alfrescoJsApi.activiti.taskApi.getTask('10');
+        const data = await tasksApi.getTask('10');
         expect(data.name).equal('Upload Document');
     });
 
@@ -64,7 +81,7 @@ describe('Activiti Task Api', () => {
 
         const requestNode = new TaskFilterRequestRepresentation();
 
-        alfrescoJsApi.activiti.taskApi.filterTasks(requestNode).then(NOOP, () => {
+        tasksApi.filterTasks(requestNode).then(NOOP, () => {
             done();
         });
     });
@@ -75,7 +92,7 @@ describe('Activiti Task Api', () => {
         const requestNode = new TaskFilterRequestRepresentation();
         requestNode.appDefinitionId = 1;
 
-        const data = await alfrescoJsApi.activiti.taskApi.filterTasks(requestNode)
+        const data = await tasksApi.filterTasks(requestNode)
         expect(data.size).equal(2);
         expect(data.data[0].id).equal('7506');
     });
@@ -84,7 +101,7 @@ describe('Activiti Task Api', () => {
         const taskId = '200';
         tasksMock.get404CompleteTask(taskId);
 
-        alfrescoJsApi.activiti.taskApi.completeTask(taskId).then(NOOP, () => {
+        taskActionsApi.completeTask(taskId).then(NOOP, () => {
             done();
         });
 
@@ -95,7 +112,7 @@ describe('Activiti Task Api', () => {
 
         tasksMock.put200GenericResponse('/activiti-app/api/enterprise/tasks/5006/action/complete');
 
-        await alfrescoJsApi.activiti.taskApi.completeTask(taskId);
+        await taskActionsApi.completeTask(taskId);
     });
 
     it('Create a Task', async () => {
@@ -106,14 +123,14 @@ describe('Activiti Task Api', () => {
         const taskRepresentation = new TaskRepresentation();
         taskRepresentation.name = taskName;
 
-        await alfrescoJsApi.activiti.taskApi.createNewTask(taskRepresentation);
+        await tasksApi.createNewTask(taskRepresentation);
     });
 
     it('Get task form', async () => {
         tasksMock.get200getTaskForm();
 
         const taskId = '2518';
-        const data = await alfrescoJsApi.activiti.taskApi.getTaskForm(taskId);
+        const data = await taskFormsApi.getTaskForm(taskId);
 
         expect(data.name).equal('Metadata');
         expect(data.fields[0].name).equal('Label');
@@ -124,7 +141,7 @@ describe('Activiti Task Api', () => {
         tasksMock.get200getTaskForm();
 
         const taskId = '2518';
-        const data = await alfrescoJsApi.activiti.taskApi.getTaskForm(taskId);
+        const data = await taskFormsApi.getTaskForm(taskId);
 
         expect(data.name).equal('Metadata');
         expect(data.fields[0].name).equal('Label');
@@ -138,7 +155,7 @@ describe('Activiti Task Api', () => {
         const field = 'label';
         const column = 'user';
 
-        await alfrescoJsApi.activiti.taskApi.getRestFieldValuesColumn(taskId, field, column);
+        await taskFormsApi.getRestFieldColumnValues(taskId, field, column);
     });
 
     it('get form field values that are populated through a REST backend Specific case to retrieve information on a specific column', async () => {
@@ -147,6 +164,6 @@ describe('Activiti Task Api', () => {
         const taskId = '2';
         const field = 'label';
 
-        await alfrescoJsApi.activiti.taskApi.getRestFieldValues(taskId, field);
+        await taskFormsApi.getRestFieldValues(taskId, field);
     });
 });

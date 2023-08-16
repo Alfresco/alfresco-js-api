@@ -16,14 +16,14 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../../src/alfrescoApiCompatibility';
 import { BpmAuthMock, ReportsMock } from '../mockObjects';
+import { ReportApi, AlfrescoApiConfig, AlfrescoApi } from '../../index';
 
 describe('Activiti Report Api', () => {
     let authResponseBpmMock: BpmAuthMock;
     let reportsMock: ReportsMock;
     let alfrescoJsApi: AlfrescoApi;
+    let reportApi: ReportApi;
 
     beforeEach(async () => {
         const BPM_HOST = 'http://127.0.0.1:9999';
@@ -38,12 +38,14 @@ describe('Activiti Report Api', () => {
             provider: 'BPM'
         } as AlfrescoApiConfig);
 
+        reportApi = new ReportApi(alfrescoJsApi);
+
         await alfrescoJsApi.login('admin', 'admin');
     });
 
     it('should create the default reports', async () => {
         reportsMock.get200ResponseCreateDefaultReport();
-        await alfrescoJsApi.activiti.reportApi.createDefaultReports();
+        await reportApi.createDefaultReports();
     });
 
     it('should return the tasks referring to the process id', async () => {
@@ -52,7 +54,7 @@ describe('Activiti Report Api', () => {
 
         reportsMock.get200ResponseTasksByProcessDefinitionId(reportId, processDefinitionId);
 
-        const data = await alfrescoJsApi.activiti.reportApi.getTasksByProcessDefinitionId(reportId, processDefinitionId);
+        const data = await reportApi.getTasksByProcessDefinitionId(reportId, processDefinitionId);
         expect(data.length).equal(3);
         expect(data[0]).equal('Fake Task 1');
         expect(data[1]).equal('Fake Task 2');
@@ -65,7 +67,7 @@ describe('Activiti Report Api', () => {
 
         reportsMock.get200ResponseReportsByParams(reportId, paramsQuery);
 
-        const data = await alfrescoJsApi.activiti.reportApi.getReportsByParams(reportId, paramsQuery)
+        const data = await reportApi.getReportsByParams(reportId, paramsQuery)
         expect(data.elements.length).equal(3);
         expect(data.elements[0].type).equal('table');
 
@@ -79,7 +81,7 @@ describe('Activiti Report Api', () => {
     it('should return the process definitions when the appId is not provided', async () => {
         reportsMock.get200ResponseProcessDefinitions();
 
-        const res = await alfrescoJsApi.activiti.reportApi.getProcessDefinitions();
+        const res = await reportApi.getProcessDefinitions();
 
         expect(res.length).equal(4);
         expect(res[0].id).equal('Process_sid-0FF10DA3-E2BD-4E6A-9013-6D66FC8A4716:1:30004');
@@ -98,7 +100,7 @@ describe('Activiti Report Api', () => {
     it('should return the report list', async () => {
         reportsMock.get200ResponseReportList();
 
-        const res = await alfrescoJsApi.activiti.reportApi.getReportList();
+        const res = await reportApi.getReportList();
 
         expect(res.length).equal(5);
 
@@ -122,7 +124,7 @@ describe('Activiti Report Api', () => {
         const reportId = '11013'; // String | reportId
         reportsMock.get200ResponseReportParams(reportId);
 
-        const res = await alfrescoJsApi.activiti.reportApi.getReportParams(reportId);
+        const res = await reportApi.getReportParams(reportId);
         const paramsDefinition = JSON.parse(res.definition);
 
         expect(res.id).equal(11013);
@@ -151,7 +153,7 @@ describe('Activiti Report Api', () => {
         const name = 'New Fake Name';
         reportsMock.get200ResponseUpdateReport(reportId);
 
-        await alfrescoJsApi.activiti.reportApi.updateReport(reportId, name);
+        await reportApi.updateReport(reportId, name);
     });
 
     it('should export the report', async () => {
@@ -169,7 +171,7 @@ describe('Activiti Report Api', () => {
         };
         reportsMock.get200ResponseExportReport(reportId);
 
-        const response = await alfrescoJsApi.activiti.reportApi.exportToCsv(reportId, queryParams);
+        const response = await reportApi.exportToCsv(reportId, queryParams);
         expect(response).not.equal(null);
         expect(response).not.equal(undefined);
     });
@@ -189,14 +191,13 @@ describe('Activiti Report Api', () => {
         };
         reportsMock.get200ResponseSaveReport(reportId);
 
-        await alfrescoJsApi.activiti.reportApi.saveReport(reportId, queryParams);
+        await reportApi.saveReport(reportId, queryParams);
     });
 
     it('should delete a report', async () => {
         const reportId = '11015';
         reportsMock.get200ResponseDeleteReport(reportId);
 
-        await alfrescoJsApi.activiti.reportApi.deleteReport(reportId);
+        await reportApi.deleteReport(reportId);
     });
-
 });

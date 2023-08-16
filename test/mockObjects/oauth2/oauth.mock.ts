@@ -42,39 +42,4 @@ export class OAuthMock extends BaseMock {
                 session_state: '9433e206-df1a-46a3-be7e-65b045a1c36b',
             });
     }
-
-    get200CustomResponse(path: string): void {
-        nock(this.host + '/auth/realms/springboot/protocol/', { encodedQueryParams: true })
-            .post(path)
-            .query({
-                username: this.username,
-                password: this.password,
-                grant_type: 'password',
-                client_id: 'alfrescoapp',
-            })
-            .reply(200, {
-                access_token: '5c37e781-40a7-4957-adcc-2b171c770a5c',
-                token_type: 'bearer',
-                refresh_token: '15d66b26-3cf7-446a-8db8-1345f2f4485a',
-                expires_in: 604603,
-                scope: 'openid',
-                legacyToken: "LegacyToken{legacyTokenBpm='Basic YWRtaW46YWRtaW4=', tokenId='null', legacyTokenEcm='TICKET_bbead3a54dbe141f77e442e6703f7fa29671107a'}",
-            });
-    }
-
-    get200RefreshTokenResponse(refreshToken: string): void {
-        nock(this.host, { encodedQueryParams: true })
-            .post('/auth/realms/springboot/protocol/openid-connect/token/')
-            .query({
-                refresh_token: refreshToken,
-                grant_type: 'refresh_token',
-            })
-            .reply(200, {
-                access_token: 'f8bccca0-76cf-4bd9-bb16-a867ffdd5a35',
-                token_type: 'bearer',
-                refresh_token: '2bad6f69-a9fe-4582-aed7-1a30f81356f4',
-                expires_in: 604799,
-                scope: 'openid read write',
-            });
-    }
 }
