@@ -26,22 +26,22 @@ export class FormScopeRepresentation {
     name?: string;
     outcomes?: FormOutcomeRepresentation[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<FormScopeRepresentation>) {
 
         if (input) {
             Object.assign(this, input);
             if (input.fieldVariables) {
-                this.fieldVariables = input.fieldVariables.map((item: any) => {
+                this.fieldVariables = input.fieldVariables.map((item) => {
                     return new FormFieldRepresentation(item);
                 });
             }
             if (input.fields) {
-                this.fields = input.fields.map((item: any) => {
+                this.fields = input.fields.map((item) => {
                     return new FormFieldRepresentation(item);
                 });
             }
             if (input.outcomes) {
-                this.outcomes = input.outcomes.map((item: any) => {
+                this.outcomes = input.outcomes.map((item) => {
                     return new FormOutcomeRepresentation(item);
                 });
             }

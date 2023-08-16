@@ -31,7 +31,7 @@ export class AlfrescoEndpointRepresentation {
     useShareConnector?: boolean;
     version?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AlfrescoEndpointRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

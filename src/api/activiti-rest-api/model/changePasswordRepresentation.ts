@@ -19,7 +19,7 @@ export class ChangePasswordRepresentation {
     newPassword?: string;
     oldPassword?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ChangePasswordRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

@@ -25,11 +25,9 @@ export class SearchEntryHighlight {
      */
     snippets?: string[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SearchEntryHighlight>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

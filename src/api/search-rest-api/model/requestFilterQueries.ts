@@ -22,7 +22,7 @@ import { RequestFilterQueriesInner } from './requestFilterQueriesInner';
  */
 export class RequestFilterQueries extends Array<RequestFilterQueriesInner> {
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RequestFilterQueries>) {
         super();
         if (input) {
             Object.assign(this, input);

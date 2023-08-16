@@ -18,8 +18,7 @@
 export class SaveFormRepresentation {
     values?: any;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SaveFormRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }

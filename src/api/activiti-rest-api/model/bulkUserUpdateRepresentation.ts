@@ -24,7 +24,7 @@ export class BulkUserUpdateRepresentation {
     tenantId?: number;
     users?: number[];
 
-    constructor(input?: any) {
+    constructor(input?: Partial<BulkUserUpdateRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

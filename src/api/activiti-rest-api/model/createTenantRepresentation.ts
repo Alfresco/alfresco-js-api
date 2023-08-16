@@ -22,11 +22,9 @@ export class CreateTenantRepresentation {
     maxUsers?: number;
     name?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<CreateTenantRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

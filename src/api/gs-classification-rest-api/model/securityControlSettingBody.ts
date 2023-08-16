@@ -18,7 +18,7 @@
 export class SecurityControlSettingBody {
     value: any;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SecurityControlSettingBody>) {
 
         if (input) {
             Object.assign(this, input);

@@ -51,13 +51,11 @@ This is used for multi-select facetting.
      */
     excludeFilters?: string[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestFacetField>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }
 export namespace RequestFacetField {
     export type SortEnum = 'COUNT' | 'INDEX';

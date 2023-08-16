@@ -27,12 +27,10 @@ export class ModuleInfo {
     versionMin?: string;
     versionMax?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ModuleInfo>) {
         if (input) {
             Object.assign(this, input);
             this.installDate = input.installDate ? DateAlfresco.parseDate(input.installDate) : undefined;
         }
     }
-
 }

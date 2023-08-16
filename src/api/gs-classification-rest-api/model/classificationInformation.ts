@@ -26,11 +26,9 @@ export class ClassificationInformation {
     declassificationEvent?: string;
     exemptionIds?: string[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ClassificationInformation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

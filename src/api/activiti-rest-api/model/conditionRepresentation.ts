@@ -26,12 +26,10 @@ export class ConditionRepresentation {
     rightType?: string;
     rightValue?: any;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ConditionRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.nextCondition = input.nextCondition ? new ConditionRepresentation(input.nextCondition) : undefined;
         }
     }
-
 }

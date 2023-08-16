@@ -24,11 +24,9 @@ export class VersionInfo {
     label: string;
     display: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<VersionInfo>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

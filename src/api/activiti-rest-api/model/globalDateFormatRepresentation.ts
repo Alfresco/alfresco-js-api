@@ -18,7 +18,7 @@
 export class GlobalDateFormatRepresentation {
     globalDateFormat?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<GlobalDateFormatRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

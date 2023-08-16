@@ -24,8 +24,7 @@ export class LightUserRepresentation {
     lastName?: string;
     pictureId?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<LightUserRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }

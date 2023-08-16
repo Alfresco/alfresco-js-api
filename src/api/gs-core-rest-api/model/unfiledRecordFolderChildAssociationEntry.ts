@@ -20,12 +20,10 @@ import { UnfiledRecordFolderChildAssociation } from './unfiledRecordFolderChildA
 export class UnfiledRecordFolderChildAssociationEntry {
     entry: UnfiledRecordFolderChildAssociation;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UnfiledRecordFolderChildAssociationEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new UnfiledRecordFolderChildAssociation(input.entry) : undefined;
         }
     }
-
 }

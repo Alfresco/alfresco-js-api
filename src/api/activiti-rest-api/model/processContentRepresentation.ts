@@ -22,17 +22,15 @@ export class ProcessContentRepresentation {
     content?: RelatedContentRepresentation[];
     field?: NamedObject;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ProcessContentRepresentation>) {
         if (input) {
             Object.assign(this, input);
             if (input.content) {
-                this.content = input.content.map((item: any) => {
+                this.content = input.content.map((item) => {
                     return new RelatedContentRepresentation(item);
                 });
             }
             this.field = input.field ? new NamedObject(input.field) : undefined;
         }
     }
-
 }

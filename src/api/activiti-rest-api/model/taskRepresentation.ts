@@ -56,8 +56,7 @@ export class TaskRepresentation {
     variables?: RestVariable[];
     parentName?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TaskRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.assignee = input.assignee ? new LightUserRepresentation(input.assignee) : undefined;
@@ -65,17 +64,17 @@ export class TaskRepresentation {
             this.dueDate = input.dueDate ? DateAlfresco.parseDate(input.dueDate) : undefined;
             this.endDate = input.endDate ? DateAlfresco.parseDate(input.endDate) : undefined;
             if (input.involvedGroups) {
-                this.involvedGroups = input.involvedGroups.map((item: any) => {
+                this.involvedGroups = input.involvedGroups.map((item) => {
                     return new LightGroupRepresentation(item);
                 });
             }
             if (input.involvedPeople) {
-                this.involvedPeople = input.involvedPeople.map((item: any) => {
+                this.involvedPeople = input.involvedPeople.map((item) => {
                     return new LightUserRepresentation(item);
                 });
             }
             if (input.variables) {
-                this.variables = input.variables.map((item: any) => {
+                this.variables = input.variables.map((item) => {
                     return new RestVariable(item);
                 });
             }

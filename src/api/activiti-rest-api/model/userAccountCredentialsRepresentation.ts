@@ -19,11 +19,9 @@ export class UserAccountCredentialsRepresentation {
     password?: string;
     username?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UserAccountCredentialsRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

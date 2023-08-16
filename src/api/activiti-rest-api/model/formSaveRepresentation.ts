@@ -26,17 +26,15 @@ export class FormSaveRepresentation {
     processScopeIdentifiers?: ProcessScopeIdentifierRepresentation[];
     reusable?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<FormSaveRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.formRepresentation = input.formRepresentation ? new FormRepresentation(input.formRepresentation) : undefined;
             if (input.processScopeIdentifiers) {
-                this.processScopeIdentifiers = input.processScopeIdentifiers.map((item: any) => {
+                this.processScopeIdentifiers = input.processScopeIdentifiers.map((item) => {
                     return new ProcessScopeIdentifierRepresentation(item);
                 });
             }
         }
     }
-
 }

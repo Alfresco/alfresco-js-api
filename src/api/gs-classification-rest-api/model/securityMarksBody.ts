@@ -19,11 +19,11 @@ import { SecurityMarkBody } from './securityMarkBody';
 
 export class SecurityMarksBody extends Array<SecurityMarkBody> {
 
-    constructor(input?: any) {
+    constructor(input?: Partial<SecurityMarksBody>) {
         super();
+
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

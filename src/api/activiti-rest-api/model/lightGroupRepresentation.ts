@@ -22,12 +22,12 @@ export class LightGroupRepresentation {
     name?: string;
     status?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<LightGroupRepresentation>) {
 
         if (input) {
             Object.assign(this, input);
             if (input.groups) {
-                this.groups = input.groups.map((item: any) => {
+                this.groups = input.groups.map((item) => {
                     return new LightGroupRepresentation(item);
                 });
             }

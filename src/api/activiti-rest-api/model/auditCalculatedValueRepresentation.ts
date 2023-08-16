@@ -19,7 +19,7 @@ export class AuditCalculatedValueRepresentation {
     name?: string;
     value?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AuditCalculatedValueRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

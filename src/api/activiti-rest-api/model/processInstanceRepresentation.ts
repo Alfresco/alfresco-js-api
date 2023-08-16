@@ -39,19 +39,17 @@ export class ProcessInstanceRepresentation {
     tenantId?: string;
     variables?: RestVariable[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ProcessInstanceRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.ended = input.ended ? DateAlfresco.parseDate(input.ended) : undefined;
             this.started = input.started ? DateAlfresco.parseDate(input.started) : undefined;
             this.startedBy = input.startedBy ? new LightUserRepresentation(input.startedBy) : undefined;
             if (input.variables) {
-                this.variables = input.variables.map((item: any) => {
+                this.variables = input.variables.map((item) => {
                     return new RestVariable(item);
                 });
             }
         }
     }
-
 }

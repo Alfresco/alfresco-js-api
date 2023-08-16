@@ -21,12 +21,11 @@ export class ProcessScopesRequestRepresentation {
     identifiers?: ProcessScopeIdentifierRepresentation[];
     overriddenModel?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ProcessScopesRequestRepresentation>) {
         if (input) {
             Object.assign(this, input);
             if (input.identifiers) {
-                this.identifiers = input.identifiers.map((item: any) => {
+                this.identifiers = input.identifiers.map((item) => {
                     return new ProcessScopeIdentifierRepresentation(item);
                 });
             }

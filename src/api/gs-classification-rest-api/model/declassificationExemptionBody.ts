@@ -19,8 +19,7 @@ export class DeclassificationExemptionBody {
     code: string;
     description: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<DeclassificationExemptionBody>) {
         if (input) {
             Object.assign(this, input);
         }

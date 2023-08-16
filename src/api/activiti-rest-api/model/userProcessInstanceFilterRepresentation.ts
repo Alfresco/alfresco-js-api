@@ -26,12 +26,10 @@ export class UserProcessInstanceFilterRepresentation {
     name?: string;
     recent?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UserProcessInstanceFilterRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.filter = input.filter ? new ProcessInstanceFilterRepresentation(input.filter) : undefined;
         }
     }
-
 }

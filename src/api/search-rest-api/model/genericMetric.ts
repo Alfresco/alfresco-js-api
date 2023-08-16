@@ -29,11 +29,9 @@ export class GenericMetric {
      */
     value?: any;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<GenericMetric>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

@@ -19,7 +19,7 @@ export class EndpointRequestHeaderRepresentation {
     name?: string;
     value?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<EndpointRequestHeaderRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

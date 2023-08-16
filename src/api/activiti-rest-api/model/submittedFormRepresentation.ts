@@ -29,8 +29,7 @@ export class SubmittedFormRepresentation {
     submittedBy?: LightUserRepresentation;
     taskId?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SubmittedFormRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.form = input.form ? new FormDefinitionRepresentation(input.form) : undefined;
@@ -38,5 +37,4 @@ export class SubmittedFormRepresentation {
             this.submittedBy = input.submittedBy ? new LightUserRepresentation(input.submittedBy) : undefined;
         }
     }
-
 }

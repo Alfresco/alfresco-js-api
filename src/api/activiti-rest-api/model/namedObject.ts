@@ -19,8 +19,7 @@ export class NamedObject {
     id?: string;
     name?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<NamedObject>) {
         if (input) {
             Object.assign(this, input);
         }

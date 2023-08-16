@@ -20,12 +20,10 @@ import { DeclassificationExemption } from './declassificationExemption';
 export class DeclassificationExemptionEntry {
     entry: DeclassificationExemption;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<DeclassificationExemptionEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new DeclassificationExemption(input.entry) : undefined;
         }
     }
-
 }

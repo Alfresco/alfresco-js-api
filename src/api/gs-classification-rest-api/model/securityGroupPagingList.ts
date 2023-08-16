@@ -22,13 +22,12 @@ export class SecurityGroupPagingList {
     pagination?: Pagination;
     entries?: SecurityGroupEntry[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SecurityGroupPagingList>) {
         if (input) {
             Object.assign(this, input);
             this.pagination = input.pagination ? new Pagination(input.pagination) : undefined;
             if (input.entries) {
-                this.entries = input.entries.map((item: any) => {
+                this.entries = input.entries.map((item) => {
                     return new SecurityGroupEntry(item);
                 });
             }

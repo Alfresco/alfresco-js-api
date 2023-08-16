@@ -71,15 +71,14 @@ export class HistoricTaskInstanceQueryRepresentation {
     withoutDueDate?: boolean;
     withoutTenantId?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<HistoricTaskInstanceQueryRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.dueDate = input.dueDate ? DateAlfresco.parseDate(input.dueDate) : undefined;
             this.dueDateAfter = input.dueDateAfter ? DateAlfresco.parseDate(input.dueDateAfter) : undefined;
             this.dueDateBefore = input.dueDateBefore ? DateAlfresco.parseDate(input.dueDateBefore) : undefined;
             if (input.processVariables) {
-                this.processVariables = input.processVariables.map((item: any) => {
+                this.processVariables = input.processVariables.map((item) => {
                     return new QueryVariable(item);
                 });
             }
@@ -90,7 +89,7 @@ export class HistoricTaskInstanceQueryRepresentation {
             this.taskCreatedBefore = input.taskCreatedBefore ? DateAlfresco.parseDate(input.taskCreatedBefore) : undefined;
             this.taskCreatedOn = input.taskCreatedOn ? DateAlfresco.parseDate(input.taskCreatedOn) : undefined;
             if (input.taskVariables) {
-                this.taskVariables = input.taskVariables.map((item: any) => {
+                this.taskVariables = input.taskVariables.map((item) => {
                     return new QueryVariable(item);
                 });
             }

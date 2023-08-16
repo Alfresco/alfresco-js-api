@@ -26,12 +26,10 @@ export class UserTaskFilterRepresentation {
     name?: string;
     recent?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UserTaskFilterRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.filter = input.filter ? new TaskFilterRepresentation(input.filter) : undefined;
         }
     }
-
 }

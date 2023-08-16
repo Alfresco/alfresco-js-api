@@ -20,11 +20,10 @@ import { Type } from './type';
 export class TypeEntry {
     entry: Type;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<TypeEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Type(input.entry) : undefined;
         }
     }
-
 }

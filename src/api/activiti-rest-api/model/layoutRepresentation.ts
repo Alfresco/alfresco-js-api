@@ -20,11 +20,9 @@ export class LayoutRepresentation {
     column?: number;
     row?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<LayoutRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

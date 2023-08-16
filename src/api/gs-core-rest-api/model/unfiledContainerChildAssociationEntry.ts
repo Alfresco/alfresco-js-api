@@ -20,12 +20,10 @@ import { UnfiledContainerChildAssociation } from './unfiledContainerChildAssocia
 export class UnfiledContainerChildAssociationEntry {
     entry: UnfiledContainerChildAssociation;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UnfiledContainerChildAssociationEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new UnfiledContainerChildAssociation(input.entry) : undefined;
         }
     }
-
 }

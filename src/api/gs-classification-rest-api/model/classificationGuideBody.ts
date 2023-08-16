@@ -21,8 +21,7 @@ export class ClassificationGuideBody {
     publishedOn: Date;
     enabled?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ClassificationGuideBody>) {
         if (input) {
             Object.assign(this, input);
         }

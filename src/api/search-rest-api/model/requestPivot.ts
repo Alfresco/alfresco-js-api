@@ -25,12 +25,11 @@ export class RequestPivot {
     key?: string;
     pivots?: RequestPivot[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestPivot>) {
         if (input) {
             Object.assign(this, input);
             if (input.pivots) {
-                this.pivots = input.pivots.map((item: any) => {
+                this.pivots = input.pivots.map((item) => {
                     return new RequestPivot(item);
                 });
             }

@@ -32,11 +32,11 @@ export class AbstractClass {
     associations?: AbstractClassAssociation[];
     model?: Model;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AbstractClass>) {
         if (input) {
             Object.assign(this, input);
             if (input.properties) {
-                this.properties = input.properties.map((item: any) => {
+                this.properties = input.properties.map((item) => {
                     return new Property(item);
                 });
             }

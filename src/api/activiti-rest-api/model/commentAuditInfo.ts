@@ -19,11 +19,9 @@ export class CommentAuditInfo {
     author?: string;
     message?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<CommentAuditInfo>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

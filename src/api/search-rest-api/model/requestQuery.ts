@@ -32,13 +32,11 @@ export class RequestQuery {
      */
     query: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestQuery>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }
 export namespace RequestQuery {
     export type LanguageEnum = 'afts' | 'lucene' | 'cmis';

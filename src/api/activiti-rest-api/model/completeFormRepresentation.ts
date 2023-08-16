@@ -19,11 +19,9 @@ export class CompleteFormRepresentation {
     outcome?: string;
     values?: any;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<CompleteFormRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

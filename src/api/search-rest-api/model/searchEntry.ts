@@ -28,12 +28,11 @@ export class SearchEntry {
      */
     highlight?: SearchEntryHighlight[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SearchEntry>) {
         if (input) {
             Object.assign(this, input);
             if (input.highlight) {
-                this.highlight = input.highlight.map((item: any) => {
+                this.highlight = input.highlight.map((item) => {
                     return new SearchEntryHighlight(item);
                 });
             }

@@ -25,8 +25,7 @@ export class Instruction {
     classificationInformation?: ClassificationInformation;
     securityMarkInformation?: SecurityMarkInformation;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<Instruction>) {
         if (input) {
             Object.assign(this, input);
             this.classificationInformation = input.classificationInformation ? new ClassificationInformation(input.classificationInformation) : undefined;

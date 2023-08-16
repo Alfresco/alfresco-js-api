@@ -33,12 +33,10 @@ export class TaskUpdateRepresentation {
     priority?: number;
     prioritySet?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TaskUpdateRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.dueDate = input.dueDate ? DateAlfresco.parseDate(input.dueDate) : undefined;
         }
     }
-
 }

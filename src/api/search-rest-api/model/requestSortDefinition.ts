@@ -22,8 +22,9 @@ import { RequestSortDefinitionInner } from './requestSortDefinitionInner';
  */
 export class RequestSortDefinition extends Array<RequestSortDefinitionInner> {
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RequestSortDefinition>) {
         super();
+
         if (input) {
             Object.assign(this, input);
         }

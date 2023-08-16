@@ -22,8 +22,7 @@ export class SecurityGroup {
     inUse: boolean;
     systemGroup: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SecurityGroup>) {
         if (input) {
             Object.assign(this, input);
         }

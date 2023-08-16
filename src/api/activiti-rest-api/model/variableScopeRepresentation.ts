@@ -24,11 +24,9 @@ export class VariableScopeRepresentation {
     processVariableName?: string;
     processVariableType?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<VariableScopeRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

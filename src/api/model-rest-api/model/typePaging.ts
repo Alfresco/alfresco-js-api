@@ -20,11 +20,10 @@ import { TypePagingList } from './typePagingList';
 export class TypePaging {
     list?: TypePagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<TypePaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new TypePagingList(input.list) : undefined;
         }
     }
-
 }

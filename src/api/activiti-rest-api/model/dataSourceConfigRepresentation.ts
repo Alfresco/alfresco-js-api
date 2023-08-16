@@ -21,7 +21,7 @@ export class DataSourceConfigRepresentation {
     password?: string;
     username?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<DataSourceConfigRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

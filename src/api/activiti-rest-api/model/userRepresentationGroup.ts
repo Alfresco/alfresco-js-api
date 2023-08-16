@@ -41,12 +41,11 @@ export class UserRepresentationGroup {
     tenantPictureId?: number;
     type?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UserRepresentationGroup>) {
         if (input) {
             Object.assign(this, input);
             if (input.apps) {
-                this.apps = input.apps.map((item: any) => {
+                this.apps = input.apps.map((item) => {
                     return new LightAppRepresentation(item);
                 });
             }

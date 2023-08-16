@@ -24,7 +24,7 @@ export class AuthorityClearanceGroup {
     type: string;
     marks: AuthorityClearanceMark[]
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AuthorityClearanceGroup>) {
         if (input) {
             Object.assign(this, input);
         }

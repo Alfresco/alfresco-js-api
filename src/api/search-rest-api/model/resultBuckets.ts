@@ -27,12 +27,11 @@ export class ResultBuckets {
      */
     buckets?: ResultBucketsBuckets[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResultBuckets>) {
         if (input) {
             Object.assign(this, input);
             if (input.buckets) {
-                this.buckets = input.buckets.map((item: any) => {
+                this.buckets = input.buckets.map((item) => {
                     return new ResultBucketsBuckets(item);
                 });
             }

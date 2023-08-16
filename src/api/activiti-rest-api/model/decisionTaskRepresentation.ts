@@ -31,7 +31,7 @@ export class DecisionTaskRepresentation {
     processDefinitionKey?: string;
     processInstanceId?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<DecisionTaskRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

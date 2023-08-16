@@ -24,11 +24,9 @@ export class ResponseConsistency {
      */
     lastTxId?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResponseConsistency>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

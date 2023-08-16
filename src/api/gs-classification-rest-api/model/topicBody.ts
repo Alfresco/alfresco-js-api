@@ -22,12 +22,10 @@ export class TopicBody {
     description?: string;
     instruction?: InstructionBody;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TopicBody>) {
         if (input) {
             Object.assign(this, input);
             this.instruction = input.instruction ? new InstructionBody(input.instruction) : undefined;
         }
     }
-
 }

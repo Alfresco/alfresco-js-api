@@ -37,8 +37,7 @@ export class Topic {
     path?: Path;
     classificationGuide?: ClassificationGuideInTopic;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<Topic>) {
         if (input) {
             Object.assign(this, input);
             this.instruction = input.instruction ? new Instruction(input.instruction) : undefined;
@@ -47,5 +46,4 @@ export class Topic {
             this.classificationGuide = input.classificationGuide ? new ClassificationGuideInTopic(input.classificationGuide) : undefined;
         }
     }
-
 }

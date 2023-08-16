@@ -24,8 +24,7 @@ export class RuntimeFormRepresentation {
     name?: string;
     tenantId?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RuntimeFormRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }

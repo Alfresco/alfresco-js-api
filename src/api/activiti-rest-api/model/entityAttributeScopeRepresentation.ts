@@ -19,7 +19,7 @@ export class EntityAttributeScopeRepresentation {
     name?: string;
     type?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<EntityAttributeScopeRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

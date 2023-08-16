@@ -19,11 +19,9 @@ export class GroupCapabilityRepresentation {
     id?: number;
     name?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<GroupCapabilityRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

@@ -42,18 +42,17 @@ export class UserRepresentation {
     tenantPictureId?: number;
     type?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UserRepresentation>) {
         if (input) {
             Object.assign(this, input);
             if (input.apps) {
-                this.apps = input.apps.map((item: any) => {
+                this.apps = input.apps.map((item) => {
                     return new LightAppRepresentation(item);
                 });
             }
             this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
             if (input.groups) {
-                this.groups = input.groups.map((item: any) => {
+                this.groups = input.groups.map((item) => {
                     return new GroupRepresentation(item);
                 });
             }

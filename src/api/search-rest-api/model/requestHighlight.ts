@@ -56,12 +56,11 @@ export class RequestHighlight {
      */
     fields?: RequestHighlightFields[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestHighlight>) {
         if (input) {
             Object.assign(this, input);
             if (input.fields) {
-                this.fields = input.fields.map((item: any) => {
+                this.fields = input.fields.map((item) => {
                     return new RequestHighlightFields(item);
                 });
             }

@@ -20,12 +20,10 @@ import { UnfiledRecordFolderAssociationPagingList } from './unfiledRecordFolderA
 export class UnfiledRecordFolderAssociationPaging {
     list?: UnfiledRecordFolderAssociationPagingList;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UnfiledRecordFolderAssociationPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new UnfiledRecordFolderAssociationPagingList(input.list) : undefined;
         }
     }
-
 }

@@ -24,8 +24,7 @@ The character . must not be used at the end of the name.
     name?: string;
     properties?: { [key: string]: string; };
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UnfiledRecordFolderBodyUpdate>) {
         if (input) {
             Object.assign(this, input);
         }

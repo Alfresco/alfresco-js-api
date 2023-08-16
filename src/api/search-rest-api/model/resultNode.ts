@@ -50,8 +50,7 @@ The character . must not be used at the end of the name.
     versionLabel?: string;
     versionComment?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResultNode>) {
         if (input) {
             Object.assign(this, input);
             this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;
@@ -65,5 +64,4 @@ The character . must not be used at the end of the name.
             this.archivedAt = input.archivedAt ? DateAlfresco.parseDate(input.archivedAt) : undefined;
         }
     }
-
 }

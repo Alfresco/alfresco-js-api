@@ -29,16 +29,14 @@ export class EndpointConfigurationRepresentation {
     requestHeaders?: EndpointRequestHeaderRepresentation[];
     tenantId?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<EndpointConfigurationRepresentation>) {
         if (input) {
             Object.assign(this, input);
             if (input.requestHeaders) {
-                this.requestHeaders = input.requestHeaders.map((item: any) => {
+                this.requestHeaders = input.requestHeaders.map((item) => {
                     return new EndpointRequestHeaderRepresentation(item);
                 });
             }
         }
     }
-
 }

@@ -20,7 +20,7 @@ import { RMSite } from './rMSite';
 export class RMSiteEntry {
     entry: RMSite;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RMSiteEntry>) {
 
         if (input) {
             Object.assign(this, input);

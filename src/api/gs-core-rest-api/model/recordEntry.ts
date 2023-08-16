@@ -20,12 +20,10 @@ import { Record } from './record';
 export class RecordEntry {
     entry: Record;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RecordEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Record(input.entry) : undefined;
         }
     }
-
 }

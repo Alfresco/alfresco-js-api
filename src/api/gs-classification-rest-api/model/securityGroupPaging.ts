@@ -20,8 +20,7 @@ import { SecurityGroupPagingList } from './securityGroupPagingList';
 export class SecurityGroupPaging {
     list?: SecurityGroupPagingList;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SecurityGroupPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new SecurityGroupPagingList(input.list) : undefined;

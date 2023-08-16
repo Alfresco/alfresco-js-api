@@ -20,8 +20,7 @@ export class SecurityMark {
     name: string;
     groupId: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SecurityMark>) {
         if (input) {
             Object.assign(this, input);
         }

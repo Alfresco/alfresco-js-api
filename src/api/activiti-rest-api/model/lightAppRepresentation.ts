@@ -22,11 +22,9 @@ export class LightAppRepresentation {
     name?: string;
     theme?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<LightAppRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

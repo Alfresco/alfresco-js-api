@@ -27,7 +27,7 @@
  */
 export class RequestInclude extends Array<string> {
 
-    constructor(input?: any) {
+    constructor(input?: Partial<RequestInclude>) {
         super();
         if (input) {
             Object.assign(this, input);

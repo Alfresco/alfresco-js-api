@@ -33,11 +33,9 @@ export class ResultBucketsBuckets {
      */
     display?: any;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResultBucketsBuckets>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

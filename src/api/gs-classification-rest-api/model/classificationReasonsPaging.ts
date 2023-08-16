@@ -20,7 +20,7 @@ import { ClassificationReasonsPagingList } from './classificationReasonsPagingLi
 export class ClassificationReasonsPaging {
     list?: ClassificationReasonsPagingList;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ClassificationReasonsPaging>) {
 
         if (input) {
             Object.assign(this, input);

@@ -38,8 +38,7 @@ export class JsonNode {
     textual?: boolean;
     valueNode?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<JsonNode>) {
         if (input) {
             Object.assign(this, input);
         }

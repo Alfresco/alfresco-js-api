@@ -19,11 +19,9 @@ export class TicketBody {
     userId?: string;
     password?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TicketBody>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

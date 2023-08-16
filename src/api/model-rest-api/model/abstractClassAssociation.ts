@@ -26,7 +26,7 @@ export class AbstractClassAssociation {
     source?: AbstractClassAssociationSource;
     target?: AbstractClassAssociationSource;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AbstractClassAssociation>) {
         if (input) {
             Object.assign(this, input);
             this.source = input.source ? new AbstractClassAssociationSource(input.source) : undefined;

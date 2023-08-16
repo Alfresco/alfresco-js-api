@@ -19,11 +19,9 @@ export class LightTenantRepresentation {
     id?: number;
     name?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<LightTenantRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

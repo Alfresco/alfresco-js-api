@@ -36,11 +36,9 @@ export class GenericBucketBucketInfo {
      */
     endInclusive?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<GenericBucketBucketInfo>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

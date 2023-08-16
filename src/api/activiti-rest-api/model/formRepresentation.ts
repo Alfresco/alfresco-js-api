@@ -30,8 +30,7 @@ export class FormRepresentation {
     stencilSetId?: number;
     version?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<FormRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.formDefinition = input.formDefinition ? new FormDefinitionRepresentation(input.formDefinition) : undefined;

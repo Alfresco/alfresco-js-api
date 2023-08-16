@@ -46,13 +46,11 @@ The character . must not be used at the end of the name.
     properties?: any;
     allowableOperations?: string[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TransferContainerChild>) {
         if (input) {
             Object.assign(this, input);
             this.createdAt = input.createdAt ? DateAlfresco.parseDate(input.createdAt) : undefined;
             this.createdByUser = input.createdByUser ? new UserInfo(input.createdByUser) : undefined;
         }
     }
-
 }

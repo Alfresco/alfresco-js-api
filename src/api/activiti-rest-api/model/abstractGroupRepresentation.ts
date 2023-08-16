@@ -21,8 +21,7 @@ export class AbstractGroupRepresentation {
     name?: string;
     status?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<AbstractGroupRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }

@@ -31,21 +31,19 @@ export class TaskAuditInfoRepresentation {
     taskId?: string;
     taskName?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TaskAuditInfoRepresentation>) {
         if (input) {
             Object.assign(this, input);
             if (input.comments) {
-                this.comments = input.comments.map((item: any) => {
+                this.comments = input.comments.map((item) => {
                     return new CommentAuditInfo(item);
                 });
             }
             if (input.formData) {
-                this.formData = input.formData.map((item: any) => {
+                this.formData = input.formData.map((item) => {
                     return new AuditLogFormDataRepresentation(item);
                 });
             }
         }
     }
-
 }

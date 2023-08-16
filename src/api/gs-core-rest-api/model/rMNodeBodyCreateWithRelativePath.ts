@@ -27,11 +27,9 @@ The character . must not be used at the end of the name.
     properties?: { [key: string]: string; };
     relativePath?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RMNodeBodyCreateWithRelativePath>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

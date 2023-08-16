@@ -18,11 +18,9 @@
 export class ResetPasswordRepresentation {
     email?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResetPasswordRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

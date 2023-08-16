@@ -20,12 +20,10 @@ import { TopicPagingList } from './topicPagingList';
 export class TopicPaging {
     list?: TopicPagingList;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TopicPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new TopicPagingList(input.list) : undefined;
         }
     }
-
 }

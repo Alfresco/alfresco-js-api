@@ -22,7 +22,7 @@ export class AppDefinitionSaveRepresentation {
     force?: boolean;
     publish?: boolean;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AppDefinitionSaveRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

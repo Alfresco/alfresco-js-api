@@ -19,7 +19,7 @@ export class AppDefinitionPublishRepresentation {
     comment?: string;
     force?: boolean;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AppDefinitionPublishRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

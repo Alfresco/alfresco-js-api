@@ -24,12 +24,10 @@ export class ProcessInstanceFilterRequestRepresentation {
     page?: number;
     size?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ProcessInstanceFilterRequestRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.filter = input.filter ? new ProcessInstanceFilterRepresentation(input.filter) : undefined;
         }
     }
-
 }

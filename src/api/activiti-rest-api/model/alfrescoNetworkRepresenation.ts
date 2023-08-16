@@ -18,7 +18,7 @@
 export class AlfrescoNetworkRepresenation {
     id?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AlfrescoNetworkRepresenation>) {
 
         if (input) {
             Object.assign(this, input);

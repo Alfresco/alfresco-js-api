@@ -20,8 +20,7 @@ import { Instruction } from './instruction';
 export class InstructionEntry {
     entry: Instruction;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<InstructionEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new Instruction(input.entry) : undefined;

@@ -20,12 +20,10 @@ import { RecordFolderAssociationPagingList } from './recordFolderAssociationPagi
 export class RecordFolderAssociationPaging {
     list?: RecordFolderAssociationPagingList;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RecordFolderAssociationPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new RecordFolderAssociationPagingList(input.list) : undefined;
         }
     }
-
 }

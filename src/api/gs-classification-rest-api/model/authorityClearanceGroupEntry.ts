@@ -20,12 +20,10 @@ import {AuthorityClearanceGroup} from "./authorityClearanceGroup";
 export class AuthorityClearanceGroupEntry {
     entry: AuthorityClearanceGroup;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<AuthorityClearanceGroupEntry>) {
         if (input) {
             Object.assign(this, input);
             this.entry = input.entry ? new AuthorityClearanceGroup(input.entry) : undefined;
         }
     }
-
 }

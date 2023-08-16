@@ -22,7 +22,7 @@ export class AccountRepresentation {
     name?: string;
     serviceId?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AccountRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

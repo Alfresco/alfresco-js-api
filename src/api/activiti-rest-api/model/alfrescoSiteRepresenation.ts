@@ -19,7 +19,7 @@ export class AlfrescoSiteRepresenation {
     id?: string;
     title?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AlfrescoSiteRepresenation>) {
 
         if (input) {
             Object.assign(this, input);

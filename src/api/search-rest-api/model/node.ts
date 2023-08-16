@@ -44,8 +44,7 @@ The character . must not be used at the end of the name.
     allowableOperations?: string[];
     path?: PathInfo;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<Node>) {
         if (input) {
             Object.assign(this, input);
             this.modifiedAt = input.modifiedAt ? DateAlfresco.parseDate(input.modifiedAt) : undefined;
@@ -56,5 +55,4 @@ The character . must not be used at the end of the name.
             this.path = input.path ? new PathInfo(input.path) : undefined;
         }
     }
-
 }

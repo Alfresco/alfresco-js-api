@@ -24,13 +24,11 @@ export class RMSite {
     compliance: RMSite.ComplianceEnum | string;
     role?: RMSite.RoleEnum | string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RMSite>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }
 export namespace RMSite {
     export type VisibilityEnum = 'PRIVATE' | 'MODERATED' | 'PUBLIC';

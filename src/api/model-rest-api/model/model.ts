@@ -22,10 +22,9 @@ export class Model {
     namespaceUri?: string;
     namespacePrefix?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<Model>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

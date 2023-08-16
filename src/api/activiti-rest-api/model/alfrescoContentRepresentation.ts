@@ -21,7 +21,7 @@ export class AlfrescoContentRepresentation {
     simpleType?: string;
     title?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AlfrescoContentRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

@@ -26,7 +26,7 @@ export class AppDefinitionRepresentation {
     tenantId?: number;
     theme?: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<AppDefinitionRepresentation>) {
 
         if (input) {
             Object.assign(this, input);

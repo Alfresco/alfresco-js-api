@@ -23,12 +23,11 @@ export class ResultListDataRepresentationGoogleDriveContent {
     start?: number;
     total?: number;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResultListDataRepresentationGoogleDriveContent>) {
         if (input) {
             Object.assign(this, input);
             if (input.data) {
-                this.data = input.data.map((item: any) => {
+                this.data = input.data.map((item) => {
                     return new GoogleDriveContent(item);
                 });
             }

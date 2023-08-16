@@ -20,12 +20,10 @@ import { RecordCategoryPagingList } from './recordCategoryPagingList';
 export class RecordCategoryPaging {
     list?: RecordCategoryPagingList;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RecordCategoryPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new RecordCategoryPagingList(input.list) : undefined;
         }
     }
-
 }

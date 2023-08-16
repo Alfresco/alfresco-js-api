@@ -19,8 +19,7 @@ export class SecurityControlSetting {
     key: string;
     value: any;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<SecurityControlSetting>) {
         if (input) {
             Object.assign(this, input);
         }

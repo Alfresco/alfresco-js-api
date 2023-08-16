@@ -26,11 +26,9 @@ export class RequestHighlightFields {
     prefix?: string;
     postfix?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestHighlightFields>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

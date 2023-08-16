@@ -22,13 +22,11 @@ export class ResultSetContextSpellcheck {
      */
     suggestion?: string[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ResultSetContextSpellcheck>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }
 export namespace ResultSetContextSpellcheck {
     export type TypeEnum = 'searchInsteadFor' | 'didYouMean';

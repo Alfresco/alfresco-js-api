@@ -25,13 +25,11 @@ export class ProcessInstanceQueryRepresentation {
     start?: number;
     state?: ProcessInstanceQueryRepresentation.StateEnum | string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ProcessInstanceQueryRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }
 export namespace ProcessInstanceQueryRepresentation {
     export type SortEnum = 'created-desc' | 'created-asc' | 'ended-desc' | 'ended-asc';

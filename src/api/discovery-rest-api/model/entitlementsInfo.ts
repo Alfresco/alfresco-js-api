@@ -21,11 +21,9 @@ export class EntitlementsInfo {
     isClusterEnabled?: boolean;
     isCryptodocEnabled?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<EntitlementsInfo>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

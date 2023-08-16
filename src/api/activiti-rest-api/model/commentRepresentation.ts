@@ -24,8 +24,7 @@ export class CommentRepresentation {
     id?: number;
     message?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<CommentRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;

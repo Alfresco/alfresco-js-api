@@ -27,13 +27,11 @@ export class TenantRepresentation {
     maxUsers?: number;
     name?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<TenantRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.created = input.created ? DateAlfresco.parseDate(input.created) : undefined;
             this.lastUpdate = input.lastUpdate ? DateAlfresco.parseDate(input.lastUpdate) : undefined;
         }
     }
-
 }

@@ -23,11 +23,9 @@ export class VariableMappingRepresentation {
     outVariableType?: string;
     typeOfMapping?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<VariableMappingRepresentation>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

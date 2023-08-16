@@ -30,17 +30,15 @@ export class ProcessInstanceAuditInfoRepresentation {
     processInstanceName?: string;
     processInstanceStartTime?: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ProcessInstanceAuditInfoRepresentation>) {
         if (input) {
             Object.assign(this, input);
             this.decisionInfo = input.decisionInfo ? new AuditDecisionInfoRepresentation(input.decisionInfo) : undefined;
             if (input.entries) {
-                this.entries = input.entries.map((item: any) => {
+                this.entries = input.entries.map((item) => {
                     return new AuditLogEntryRepresentation(item);
                 });
             }
         }
     }
-
 }

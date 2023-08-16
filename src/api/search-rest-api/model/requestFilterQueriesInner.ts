@@ -27,8 +27,7 @@ For multi-select facets selected facets must be order together
      */
     tags?: string[];
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestFilterQueriesInner>) {
         if (input) {
             Object.assign(this, input);
         }

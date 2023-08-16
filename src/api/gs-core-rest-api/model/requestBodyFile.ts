@@ -18,11 +18,9 @@
 export class RequestBodyFile {
     targetParentId: string;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<RequestBodyFile>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }

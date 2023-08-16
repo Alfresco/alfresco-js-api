@@ -20,7 +20,7 @@ export class ClassificationReason {
     code: string;
     description: string;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<ClassificationReason>) {
 
         if (input) {
             Object.assign(this, input);

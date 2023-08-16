@@ -44,12 +44,12 @@ export class GenericBucket {
     facets?: any[];
     bucketInfo?: GenericBucketBucketInfo;
 
-    constructor(input?: any) {
+    constructor(input?: Partial<GenericBucket>) {
 
         if (input) {
             Object.assign(this, input);
             if (input.metrics) {
-                this.metrics = input.metrics.map((item: any) => {
+                this.metrics = input.metrics.map((item) => {
                     return new GenericMetric(item);
                 });
             }

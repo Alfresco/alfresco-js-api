@@ -20,12 +20,10 @@ import { UnfiledContainerAssociationPagingList } from './unfiledContainerAssocia
 export class UnfiledContainerAssociationPaging {
     list?: UnfiledContainerAssociationPagingList;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<UnfiledContainerAssociationPaging>) {
         if (input) {
             Object.assign(this, input);
             this.list = input.list ? new UnfiledContainerAssociationPagingList(input.list) : undefined;
         }
     }
-
 }

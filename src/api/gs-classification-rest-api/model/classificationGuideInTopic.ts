@@ -24,11 +24,9 @@ export class ClassificationGuideInTopic {
     publishedOn: Date;
     enabled?: boolean;
 
-    constructor(input?: any) {
-
+    constructor(input?: Partial<ClassificationGuideInTopic>) {
         if (input) {
             Object.assign(this, input);
         }
     }
-
 }
