@@ -486,11 +486,12 @@ parameter are returned in addition to those specified in the **fields** paramete
      */
     createFolder(name: string, relativePath: string, nodeId: string, opts?: any): Promise<NodeEntry> {
         nodeId = nodeId || '-root-';
-        let nodeBody = {
-            'name': name,
-            'nodeType': 'cm:folder',
-            'relativePath': relativePath
-        };
+
+        const nodeBody = new NodeBodyCreate({
+            name,
+            relativePath,
+            nodeType: 'cm:folder'
+        });
 
         return this.createNode(nodeId, nodeBody, opts);
     }
