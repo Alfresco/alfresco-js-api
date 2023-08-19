@@ -601,36 +601,35 @@ Name | Type | Description  | Notes
 
 Query process instances
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
-
-processinstancesApi.getProcessInstances(processInstancesQuery).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+processInstancesApi.getProcessInstances(processInstancesQuery).then(
+    (data) => {
+        console.log('API called successfully. Returned data: ' + data);
+    }, 
+    (error) => {
+      console.error(error);
+    });
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstancesQuery** | [**ProcessInstanceQueryRepresentation**](ProcessInstanceQueryRepresentation.md)| processInstancesQuery | 
+| Name                  | Type                                                                        | Description           | Notes |
+|-----------------------|-----------------------------------------------------------------------------|-----------------------|-------|
+| processInstancesQuery | [ProcessInstanceQueryRepresentation](ProcessInstanceQueryRepresentation.md) | processInstancesQuery | 
 
-### Return type
+**Return type**
 
-[**ResultListDataRepresentationProcessInstanceRepresentation**](ResultListDataRepresentationProcessInstanceRepresentation.md)
+[ResultListDataRepresentationProcessInstanceRepresentation](ResultListDataRepresentationProcessInstanceRepresentation.md)
 
 <a name="getTaskAuditLog"></a>
 # **getTaskAuditLog**
