@@ -1,29 +1,29 @@
-# ProcessinstancesApi
+# Process Instances Api
 
 All URIs are relative to */activiti-app/api*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**activateProcessInstance**](ProcessinstancesApi.md#activateProcessInstance) | **PUT** /enterprise/process-instances/{processInstanceId}/activate | Activate a process instance
-[**createIdentityLink**](ProcessinstancesApi.md#createIdentityLink) | **POST** /enterprise/process-instances/{processInstanceId}/identitylinks | Add a user or group involvement to a process instance
-[**deleteIdentityLink**](ProcessinstancesApi.md#deleteIdentityLink) | **DELETE** /enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type} | Remove a user or group involvement from a process instance
-[**deleteProcessInstance**](ProcessinstancesApi.md#deleteProcessInstance) | **DELETE** /enterprise/process-instances/{processInstanceId} | Cancel or remove a process instance
-[**filterProcessInstances**](ProcessinstancesApi.md#filterProcessInstances) | **POST** /enterprise/process-instances/filter | List process instances using a filter
-[**getHistoricProcessInstanceDecisionTasks**](ProcessinstancesApi.md#getHistoricProcessInstanceDecisionTasks) | **GET** /enterprise/process-instances/{processInstanceId}/decision-tasks | Get decision tasks in a process instance
-[**getHistoricProcessInstanceVariables**](ProcessinstancesApi.md#getHistoricProcessInstanceVariables) | **GET** /enterprise/process-instances/{processInstanceId}/historic-variables | Get historic variables for a process instance
-[**getHistoricProcessInstances**](ProcessinstancesApi.md#getHistoricProcessInstances) | **POST** /enterprise/historic-process-instances/query | Query historic process instances
-[**getIdentityLinkType**](ProcessinstancesApi.md#getIdentityLinkType) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type} | Get a user or group involvement with a process instance
-[**getIdentityLinksForFamily**](ProcessinstancesApi.md#getIdentityLinksForFamily) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks/{family} | List either the users or groups involved with a process instance
-[**getIdentityLinks**](ProcessinstancesApi.md#getIdentityLinks) | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks | List the users and groups involved with a process instance
-[**getProcessInstanceContent**](ProcessinstancesApi.md#getProcessInstanceContent) | **GET** /enterprise/process-instances/{processInstanceId}/field-content | List content attached to process instance fields
-[**getProcessInstanceDiagram**](ProcessinstancesApi.md#getProcessInstanceDiagram) | **GET** /enterprise/process-instances/{processInstanceId}/diagram | Get the process diagram for the process instance
-[**getProcessInstanceStartForm**](ProcessinstancesApi.md#getProcessInstanceStartForm) | **GET** /enterprise/process-instances/{processInstanceId}/start-form | Get a process instance start form
-[**getProcessInstance**](ProcessinstancesApi.md#getProcessInstance) | **GET** /enterprise/process-instances/{processInstanceId} | Get a process instance
-[**getProcessInstances**](ProcessinstancesApi.md#getProcessInstances) | **POST** /enterprise/process-instances/query | Query process instances
-[**getTaskAuditLog**](ProcessinstancesApi.md#getTaskAuditLog) | **GET** /enterprise/process-instances/{processInstanceId}/audit-log | Get the audit log for a process instance
-[**startNewProcessInstance**](ProcessinstancesApi.md#startNewProcessInstance) | **POST** /enterprise/process-instances | Start a process instance
-[**suspendProcessInstance**](ProcessinstancesApi.md#suspendProcessInstance) | **PUT** /enterprise/process-instances/{processInstanceId}/suspend | Suspend a process instance
-[**getProcessAuditPdf**](ProcessApi.md#getProcessAuditPdf) | **GET** /app/rest/process-instances/{processId}/audit | Retrieve the process audit infromation in pdf format
+| Method                                                                                                    | HTTP request                                                                                            | Description                                                      |
+|-----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| [activateProcessInstance](ProcessinstancesApi.md#activateProcessInstance)                                 | **PUT** /enterprise/process-instances/{processInstanceId}/activate                                      | Activate a process instance                                      |
+| [createIdentityLink](ProcessinstancesApi.md#createIdentityLink)                                           | **POST** /enterprise/process-instances/{processInstanceId}/identitylinks                                | Add a user or group involvement to a process instance            |
+| [deleteIdentityLink](ProcessinstancesApi.md#deleteIdentityLink)                                           | **DELETE** /enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type} | Remove a user or group involvement from a process instance       |
+| [deleteProcessInstance](ProcessinstancesApi.md#deleteProcessInstance)                                     | **DELETE** /enterprise/process-instances/{processInstanceId}                                            | Cancel or remove a process instance                              |
+| [filterProcessInstances](ProcessinstancesApi.md#filterProcessInstances)                                   | **POST** /enterprise/process-instances/filter                                                           | List process instances using a filter                            |
+| [getHistoricProcessInstanceDecisionTasks](ProcessinstancesApi.md#getHistoricProcessInstanceDecisionTasks) | **GET** /enterprise/process-instances/{processInstanceId}/decision-tasks                                | Get decision tasks in a process instance                         |
+| [getHistoricProcessInstanceVariables](ProcessinstancesApi.md#getHistoricProcessInstanceVariables)         | **GET** /enterprise/process-instances/{processInstanceId}/historic-variables                            | Get historic variables for a process instance                    |
+| [getHistoricProcessInstances](ProcessinstancesApi.md#getHistoricProcessInstances)                         | **POST** /enterprise/historic-process-instances/query                                                   | Query historic process instances                                 |
+| [getIdentityLinkType](ProcessinstancesApi.md#getIdentityLinkType)                                         | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type}    | Get a user or group involvement with a process instance          |
+| [getIdentityLinksForFamily](ProcessinstancesApi.md#getIdentityLinksForFamily)                             | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks/{family}                        | List either the users or groups involved with a process instance |
+| [getIdentityLinks](ProcessinstancesApi.md#getIdentityLinks)                                               | **GET** /enterprise/process-instances/{processInstanceId}/identitylinks                                 | List the users and groups involved with a process instance       |
+| [getProcessInstanceContent](ProcessinstancesApi.md#getProcessInstanceContent)                             | **GET** /enterprise/process-instances/{processInstanceId}/field-content                                 | List content attached to process instance fields                 |
+| [getProcessInstanceDiagram](ProcessinstancesApi.md#getProcessInstanceDiagram)                             | **GET** /enterprise/process-instances/{processInstanceId}/diagram                                       | Get the process diagram for the process instance                 |
+| [getProcessInstanceStartForm](ProcessinstancesApi.md#getProcessInstanceStartForm)                         | **GET** /enterprise/process-instances/{processInstanceId}/start-form                                    | Get a process instance start form                                |
+| [getProcessInstance](ProcessinstancesApi.md#getProcessInstance)                                           | **GET** /enterprise/process-instances/{processInstanceId}                                               | Get a process instance                                           |
+| [getProcessInstances](ProcessinstancesApi.md#getProcessInstances)                                         | **POST** /enterprise/process-instances/query                                                            | Query process instances                                          |
+| [getTaskAuditLog](ProcessinstancesApi.md#getTaskAuditLog)                                                 | **GET** /enterprise/process-instances/{processInstanceId}/audit-log                                     | Get the audit log for a process instance                         |
+| [startNewProcessInstance](ProcessinstancesApi.md#startNewProcessInstance)                                 | **POST** /enterprise/process-instances                                                                  | Start a process instance                                         |
+| [suspendProcessInstance](ProcessinstancesApi.md#suspendProcessInstance)                                   | **PUT** /enterprise/process-instances/{processInstanceId}/suspend                                       | Suspend a process instance                                       |
+| [getProcessAuditPdf](ProcessApi.md#getProcessAuditPdf)                                                    | **GET** /app/rest/process-instances/{processId}/audit                                                   | Retrieve the process audit infromation in pdf format             |
 
 
 <a name="activateProcessInstance"></a>
@@ -32,32 +32,31 @@ Method | HTTP request | Description
 
 Activate a process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessiIstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
+const processInstancesApi = new ProcessiIstancesApi(alfrescoApi);
 
-
-processinstancesApi.activateProcessInstance(processInstanceId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+processinstancesApi.activateProcessInstance(processInstanceId).then(
+    (data) => {
+        console.log('API called successfully. Returned data: ' + data);
+    }, 
+    (error) => {
+        console.error(error);
+    });
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
+| Name              | Type   | Description       | 
+|-------------------|--------|-------------------| 
+| processInstanceId | string | processInstanceId | 
 
 ### Return type
 
