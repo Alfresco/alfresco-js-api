@@ -23,7 +23,7 @@ All URIs are relative to */activiti-app/api*
 | [getTaskAuditLog](ProcessinstancesApi.md#getTaskAuditLog)                                                 | **GET** /enterprise/process-instances/{processInstanceId}/audit-log                                     | Get the audit log for a process instance                         |
 | [startNewProcessInstance](ProcessinstancesApi.md#startNewProcessInstance)                                 | **POST** /enterprise/process-instances                                                                  | Start a process instance                                         |
 | [suspendProcessInstance](ProcessinstancesApi.md#suspendProcessInstance)                                   | **PUT** /enterprise/process-instances/{processInstanceId}/suspend                                       | Suspend a process instance                                       |
-| [getProcessAuditPdf](ProcessApi.md#getProcessAuditPdf)                                                    | **GET** /app/rest/process-instances/{processId}/audit                                                   | Retrieve the process audit infromation in pdf format             |
+| [getProcessAuditPdf](ProcessinstancesApi.md#getProcessAuditPdf)                                           | **GET** /app/rest/process-instances/{processId}/audit                                                   | Retrieve the process audit infromation in pdf format             |
 
 
 <a name="activateProcessInstance"></a>
@@ -58,7 +58,7 @@ processinstancesApi.activateProcessInstance(processInstanceId).then(
 |-------------------|--------|-------------------| 
 | processInstanceId | string | processInstanceId | 
 
-### Return type
+**Return type**
 
 [**ProcessInstanceRepresentation**](ProcessInstanceRepresentation.md)
 
@@ -68,77 +68,71 @@ processinstancesApi.activateProcessInstance(processInstanceId).then(
 
 Add a user or group involvement to a process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
+const processInstancesApi = new ProcessInstancesApi(alfrescoApi);
 
-
-processinstancesApi.createIdentityLink(processInstanceIdidentityLinkRepresentation).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+processInstancesApi.createIdentityLink(processInstanceIdidentityLinkRepresentation).then(
+    (data) => {
+      console.log('API called successfully. Returned data: ' + data);
+    }, 
+    (error) => {
+      console.error(error);
+    });
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
- **identityLinkRepresentation** | [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)| identityLinkRepresentation | 
+| Name                       | Type                                                        | Description                |
+|----------------------------|-------------------------------------------------------------|----------------------------|
+| processInstanceId          | String                                                      | processInstanceId          | 
+| identityLinkRepresentation | [IdentityLinkRepresentation](IdentityLinkRepresentation.md) | identityLinkRepresentation | 
 
-### Return type
+**Return type**
 
-[**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
+[IdentityLinkRepresentation](IdentityLinkRepresentation.md)
 
 <a name="deleteIdentityLink"></a>
 # **deleteIdentityLink**
-> deleteIdentityLink(processInstanceIdfamilyidentityIdtype)
+> deleteIdentityLink(processInstanceId,family, identityId, type)
 
 Remove a user or group involvement from a process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
+const processInstancesApi = new ProcessInstancesApi(alfrescoApi);
 
-
-processinstancesApi.deleteIdentityLink(processInstanceIdfamilyidentityIdtype).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
+processInstancesApi.deleteIdentityLink(processInstanceIdfamilyidentityIdtype).then(
+    () => {
+        console.log('API called successfully.');
+    }, 
+    (error) => {
+        console.error(error);
+    });
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
- **family** | **string**| family | 
- **identityId** | **string**| identityId | 
- **type** | **string**| type | 
-
-### Return type
-
-null (empty response body)
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
+| **family**            | **string** | family            | 
+| **identityId**        | **string** | identityId        | 
+| **type**              | **string** | type              | 
 
 <a name="deleteProcessInstance"></a>
 # **deleteProcessInstance**
@@ -148,36 +142,29 @@ Cancel or remove a process instance
 
 If the process instance has not yet been completed, it will be cancelled. If it has already finished or been cancelled then the process instance will be removed and will no longer appear in queries.
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
+const processInstancesApi = new ProcessInstancesApi(alfrescoApi);
 
-
-processinstancesApi.deleteProcessInstance(processInstanceId).then(() => {
+processInstancesApi.deleteProcessInstance(processInstanceId).then(() => {
   console.log('API called successfully.');
-}, function(error) {
+}, (error) => {
   console.error(error);
 });
-
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
-
-### Return type
-
-null (empty response body)
+| Name                  | Type       | Description       | 
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
 
 <a name="filterProcessInstances"></a>
 # **filterProcessInstances**
@@ -187,34 +174,32 @@ List process instances using a filter
 
 The request body provided must define either a valid filterId value or filter object
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
+const processInstancesApi = new ProcessInstancesApi(alfrescoApi);
 
-
-processinstancesApi.filterProcessInstances(filterRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+processInstancesApi.filterProcessInstances(filterRequest).then(
+    (data) => {
+        console.log('API called successfully. Returned data: ' + data);
+    }, (error) => {
+        console.error(error);
+    });
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **filterRequest** | [**ProcessInstanceFilterRequestRepresentation**](ProcessInstanceFilterRequestRepresentation.md)| filterRequest | 
+| Name              | Type                                                                                            | Description   | 
+|-------------------|-------------------------------------------------------------------------------------------------|---------------|
+| **filterRequest** | [**ProcessInstanceFilterRequestRepresentation**](ProcessInstanceFilterRequestRepresentation.md) | filterRequest | 
 
-### Return type
+**Return type**
 
 [**ResultListDataRepresentationProcessInstanceRepresentation**](ResultListDataRepresentationProcessInstanceRepresentation.md)
 
@@ -224,34 +209,32 @@ Name | Type | Description  | Notes
 
 Get decision tasks in a process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
+const processInstancesApi = new ProcessInstancesApi(alfrescoApi);
 
-
-processinstancesApi.getHistoricProcessInstanceDecisionTasks(processInstanceId).then((data) => {
+processInstancesApi.getHistoricProcessInstanceDecisionTasks(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
+}, (error) => {
   console.error(error);
 });
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
 
-### Return type
+**Return type**
 
 [**ResultListDataRepresentationDecisionTaskRepresentation**](ResultListDataRepresentationDecisionTaskRepresentation.md)
 
@@ -261,34 +244,31 @@ Name | Type | Description  | Notes
 
 Get historic variables for a process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
+const processInstancesApi = new ProcessInstancesApi(alfrescoApi);
 
-
-processinstancesApi.getHistoricProcessInstanceVariables(processInstanceId).then((data) => {
+processInstancesApi.getHistoricProcessInstanceVariables(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
+}, (error) => {
   console.error(error);
 });
-
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
 
-### Return type
+**Return type**
 
 [**ProcessInstanceVariableRepresentation**](ProcessInstanceVariableRepresentation.md)
 
@@ -298,18 +278,16 @@ Name | Type | Description  | Notes
 
 Query historic process instances
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
-
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
 processinstancesApi.getHistoricProcessInstances(queryRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -319,13 +297,13 @@ processinstancesApi.getHistoricProcessInstances(queryRequest).then((data) => {
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **queryRequest** | [**HistoricProcessInstanceQueryRepresentation**](HistoricProcessInstanceQueryRepresentation.md)| queryRequest | 
+| Name             | Type                                                                                            | Description  |
+|------------------|-------------------------------------------------------------------------------------------------|--------------|
+| **queryRequest** | [**HistoricProcessInstanceQueryRepresentation**](HistoricProcessInstanceQueryRepresentation.md) | queryRequest | 
 
-### Return type
+**Return type**
 
 [**ResultListDataRepresentationProcessInstanceRepresentation**](ResultListDataRepresentationProcessInstanceRepresentation.md)
 
@@ -335,18 +313,16 @@ Name | Type | Description  | Notes
 
 Get a user or group involvement with a process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
-
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
 processinstancesApi.getIdentityLinkType(processInstanceIdfamilyidentityIdtype).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -356,16 +332,16 @@ processinstancesApi.getIdentityLinkType(processInstanceIdfamilyidentityIdtype).t
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
- **family** | **string**| family | 
- **identityId** | **string**| identityId | 
- **type** | **string**| type | 
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
+| **family**            | **string** | family            | 
+| **identityId**        | **string** | identityId        | 
+| **type**              | **string** | type              | 
 
-### Return type
+**Return type**
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
@@ -375,18 +351,16 @@ Name | Type | Description  | Notes
 
 List either the users or groups involved with a process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
-
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
 processinstancesApi.getIdentityLinksForFamily(processInstanceIdfamily).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -396,14 +370,14 @@ processinstancesApi.getIdentityLinksForFamily(processInstanceIdfamily).then((dat
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
- **family** | **string**| family | 
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
+| **family**            | **string** | family            | 
 
-### Return type
+**Return type**
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
@@ -413,18 +387,16 @@ Name | Type | Description  | Notes
 
 List the users and groups involved with a process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
-
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
 processinstancesApi.getIdentityLinks(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -434,13 +406,13 @@ processinstancesApi.getIdentityLinks(processInstanceId).then((data) => {
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
 
-### Return type
+**Return type**
 
 [**IdentityLinkRepresentation**](IdentityLinkRepresentation.md)
 
@@ -450,18 +422,16 @@ Name | Type | Description  | Notes
 
 List content attached to process instance fields
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
-
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
 processinstancesApi.getProcessInstanceContent(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -471,13 +441,13 @@ processinstancesApi.getProcessInstanceContent(processInstanceId).then((data) => 
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
 
-### Return type
+**Return type**
 
 [**ResultListDataRepresentationProcessContentRepresentation**](ResultListDataRepresentationProcessContentRepresentation.md)
 
@@ -487,18 +457,16 @@ Name | Type | Description  | Notes
 
 Get the process diagram for the process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
-
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
 processinstancesApi.getProcessInstanceDiagram(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -508,13 +476,13 @@ processinstancesApi.getProcessInstanceDiagram(processInstanceId).then((data) => 
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
 
-### Return type
+**Return type**
 
 **string**
 
@@ -526,34 +494,32 @@ Get a process instance start form
 
 The start form for a process instance can be retrieved when the process definition has a start form defined (hasStartForm = true on the process instance)
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
-
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
 processinstancesApi.getProcessInstanceStartForm(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
+}, (error) => {
   console.error(error);
 });
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
 
-### Return type
+**Return type**
 
 [**FormDefinitionRepresentation**](FormDefinitionRepresentation.md)
 
@@ -563,34 +529,33 @@ Name | Type | Description  | Notes
 
 Get a process instance
 
-### Example
+**Example**
+
 ```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
-
-processinstancesApi.getProcessInstance(processInstanceId).then((data) => {
+processInstancesApi.getProcessInstance(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
+}, (error) => {
   console.error(error);
 });
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
 
-### Return type
+**Return type**
 
 [**ProcessInstanceRepresentation**](ProcessInstanceRepresentation.md)
 
@@ -636,34 +601,32 @@ processInstancesApi.getProcessInstances(processInstancesQuery).then(
 
 Get the audit log for a process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
-
-processinstancesApi.getTaskAuditLog(processInstanceId).then((data) => {
+processInstancesApi.getTaskAuditLog(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
+}, (error) => {
   console.error(error);
 });
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
 
-### Return type
+**Return type**
 
 [**ProcessInstanceAuditInfoRepresentation**](ProcessInstanceAuditInfoRepresentation.md)
 
@@ -673,34 +636,32 @@ Name | Type | Description  | Notes
 
 Start a process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
-
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
 processinstancesApi.startNewProcessInstance(startRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
+}, (error) => {
   console.error(error);
 });
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **startRequest** | [**CreateProcessInstanceRepresentation**](CreateProcessInstanceRepresentation.md)| startRequest | 
+| Name             | Type                                                                              | Description  | 
+|------------------|-----------------------------------------------------------------------------------|--------------| 
+| **startRequest** | [**CreateProcessInstanceRepresentation**](CreateProcessInstanceRepresentation.md) | startRequest | 
 
-### Return type
+**Return type**
 
 [**ProcessInstanceRepresentation**](ProcessInstanceRepresentation.md)
 
@@ -710,34 +671,32 @@ Name | Type | Description  | Notes
 
 Suspend a process instance
 
-### Example
-```javascript
-import ProcessinstancesApi from 'ProcessinstancesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+**Example**
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+```javascript
+import { AlfrescoApi, ProcessInstancesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let processinstancesApi = new ProcessinstancesApi(this.alfrescoApi);
-
+const processInstancesApi = new ProcessInstancesApi(this.alfrescoApi);
 
 processinstancesApi.suspendProcessInstance(processInstanceId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
+}, (error) => {
   console.error(error);
 });
 
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processInstanceId** | **string**| processInstanceId | 
+| Name                  | Type       | Description       |
+|-----------------------|------------|-------------------|
+| **processInstanceId** | **string** | processInstanceId | 
 
-### Return type
+**Return type**
 
 [**ProcessInstanceRepresentation**](ProcessInstanceRepresentation.md)
 
@@ -745,22 +704,22 @@ Name | Type | Description  | Notes
 # **getProcessAuditPdf**
 > Blob getProcessAuditPdf(processId)
 
-Retrieve process audit infromation in pdf format
+Retrieve process audit information in pdf format
 
-### Example
+**Example**
+
 ```javascript
+const processId = "processId_example";
 
-var processId = "processId_example"; // String | processId
-
-this.alfrescoJsApi.activiti.processApi.getProcessAuditPdf(processId);
+processInstancesApi.getProcessAuditPdf(processId);
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **processId** | **String**| processId | 
+| Name          | Type       | Description |
+|---------------|------------|-------------|
+| **processId** | **String** | processId   | 
 
-### Return type
+**Return type**
 
 [Blob]
