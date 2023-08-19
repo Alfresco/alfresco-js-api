@@ -20,11 +20,11 @@ import {
     AlfrescoApi,
     TaskFilterRequestRepresentation,
     TaskRepresentation,
-    TaskQueryRequestRepresentation,
     AlfrescoApiConfig,
     TaskFormsApi,
     TaskActionsApi,
-    TasksApi
+    TasksApi,
+    TaskQueryRepresentation
 } from '../../index';
 import { BpmAuthMock, TasksMock } from '../mockObjects';
 
@@ -61,7 +61,7 @@ describe('Activiti Task Api', () => {
     it('get Task list', async () => {
         tasksMock.get200Response();
 
-        const requestNode = new TaskQueryRequestRepresentation();
+        const requestNode = new TaskQueryRepresentation();
         const data = await tasksApi.listTasks(requestNode)
 
         expect(data.data[0].processDefinitionName).equal('Process Test Api');
