@@ -26,6 +26,54 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 
+export interface CreateGroupOpts {
+    /**
+     * Returns additional information about the group.
+     * The following optional fields can be requested:
+     * - parentIds
+     * - zones
+     */
+    include?: string[];
+
+    /**
+     * A list of field names.
+     *
+     * You can use this parameter to restrict the fields
+     * returned within a response if, for example, you want to save on overall bandwidth.
+     *
+     * The list applies to a returned individual entity or entries within a collection.
+     *
+     * If the API method also supports the **include**
+     * parameter, then the fields specified in the **include**
+     * parameter are returned in addition to those specified in the **fields** parameter.
+     */
+    fields?: string[];
+}
+
+export interface CreateGroupMembershipOpts {
+    /**
+     * A list of field names.
+     *
+     * You can use this parameter to restrict the fields
+     * returned within a response if, for example, you want to save on overall bandwidth.
+     *
+     * The list applies to a returned individual
+     * entity or entries within a collection.
+     *
+     * If the API method also supports the **include**
+     * parameter, then the fields specified in the **include**
+     * parameter are returned in addition to those specified in the **fields** parameter.
+     */
+    fields?: string[];
+}
+
+export interface DeleteGroupOpts {
+    /**
+     * If **true** then deletion will be applied in cascade to subgroups. (default to false)
+     */
+    cascade?: boolean;
+}
+
 /**
 * Groups service.
 * @module GroupsApi
@@ -54,54 +102,24 @@ You must have admin rights to create a group.
     *
     * @param groupBodyCreate The group to create.
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the group. The following optional fields can be requested:
-* parentIds
-* zones
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<GroupEntry>
     */
-    createGroup(groupBodyCreate: GroupBodyCreate, opts?: any): Promise<GroupEntry> {
-
+    createGroup(groupBodyCreate: GroupBodyCreate, opts?: CreateGroupOpts): Promise<GroupEntry> {
         throwIfNotDefined(groupBodyCreate, 'groupBodyCreate');
 
-        opts = opts || {};
-        const postBody = groupBodyCreate;
-
-        const pathParams = {
-
-        };
-
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/groups', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , GroupEntry);
+        return this.post({
+            path: '/groups',
+            queryParams,
+            bodyParam: groupBodyCreate,
+            returnType: GroupEntry
+        })
     }
+
 /**
     * Create a group membership
     *
@@ -119,50 +137,25 @@ You must have admin rights to create a group membership.
     * @param groupId The identifier of a group.
     * @param groupMembershipBodyCreate The group membership to add (person or sub-group).
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<GroupMemberEntry>
     */
-    createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts?: any): Promise<GroupMemberEntry> {
-
+    createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts?: CreateGroupMembershipOpts): Promise<GroupMemberEntry> {
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(groupMembershipBodyCreate, 'groupMembershipBodyCreate');
 
-        opts = opts || {};
-        const postBody = groupMembershipBodyCreate;
-
-        const pathParams = {
-            'groupId': groupId
-        };
-
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/groups/{groupId}/members', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , GroupMemberEntry);
+        return this.post({
+            path: '/groups/{groupId}/members',
+            pathParams: { groupId },
+            queryParams,
+            bodyParam: groupMembershipBodyCreate,
+            returnType: GroupMemberEntry
+        });
     }
+
 /**
     * Delete a group
     *
@@ -179,40 +172,20 @@ You must have admin rights to delete a group.
     *
     * @param groupId The identifier of a group.
     * @param opts Optional parameters
-    * @param opts.cascade If **true** then the delete will be applied in cascade to sub-groups.
- (default to false)
-    * @return Promise<{}>
+    * @return Promise
     */
-    deleteGroup(groupId: string, opts?: any): Promise<any> {
-
+    deleteGroup(groupId: string, opts?: DeleteGroupOpts): Promise<void> {
         throwIfNotDefined(groupId, 'groupId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
-        let cascadeDelete = opts['cascade'] ? opts['cascade'] : false;
-
-        const pathParams = {
-            'groupId': groupId
-        };
-
         const queryParams = {
-            'cascade': cascadeDelete
+            cascade: opts?.cascade === true
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/groups/{groupId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path:  '/groups/{groupId}',
+            pathParams: { groupId },
+            queryParams
+        });
     }
 /**
     * Delete a group membership
@@ -232,34 +205,21 @@ You must have admin rights to delete a group membership.
     * @param groupMemberId The identifier of a person or group.
     * @return Promise<{}>
     */
-    deleteGroupMembership(groupId: string, groupMemberId: string): Promise<any> {
-
+    deleteGroupMembership(groupId: string, groupMemberId: string): Promise<void> {
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(groupMemberId, 'groupMemberId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'groupId': groupId,            'groupMemberId': groupMemberId
+            groupId,
+            groupMemberId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/groups/{groupId}/members/{groupMemberId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/groups/{groupId}/members/{groupMemberId}',
+            pathParams
+        })
     }
+
 /**
     * Get group details
     *
