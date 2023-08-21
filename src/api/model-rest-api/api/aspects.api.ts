@@ -79,17 +79,16 @@ Get information for aspect **aspectId**.
         throwIfNotDefined(aspectId, 'aspectId');
 
         const pathParams = {
-            aspectId: aspectId
+            aspectId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/aspects/{aspectId}', 'GET',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts , AspectEntry);
+        return this.get<AspectEntry>({
+            path: '/aspects/{aspectId}',
+            pathParams,
+            returnType: AspectEntry
+        })
     }
+
 /**
     * List aspects
     *
@@ -158,21 +157,17 @@ JSON
     * @return Promise<AspectPaging>
     */
     listAspects(opts?: ListAspectsOpts): Promise<AspectPaging> {
-        opts = opts || {};
-
         const queryParams = {
-            where: opts.where,
-            skipCount: opts.skipCount,
-            maxItems: opts.maxItems,
-            include: buildCollectionParam(opts.include, 'csv')
+            where: opts?.where,
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/aspects', 'GET',
-            {}, queryParams, {}, {}, null,
-            contentTypes, accepts , AspectPaging);
+        return this.get<AspectPaging>({
+            path: '/aspects',
+            queryParams,
+            returnType: AspectPaging
+        })
     }
 }

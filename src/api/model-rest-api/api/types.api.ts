@@ -76,16 +76,14 @@ Get information for type **typeId**.
         throwIfNotDefined(typeId, 'typeId');
 
         const pathParams = {
-            typeId: typeId
+            typeId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/types/{typeId}', 'GET',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts , TypeEntry);
+        return this.get<TypeEntry>({
+            path: '/types/{typeId}',
+            pathParams,
+            returnType: TypeEntry
+        });
     }
 
     /**
@@ -163,21 +161,17 @@ JSON
     * @return Promise<TypePaging>
     */
     listTypes(opts?: ListTypesOpts): Promise<TypePaging> {
-        opts = opts || {};
-
         const queryParams = {
-            where: opts.where,
-            skipCount: opts.skipCount,
-            maxItems: opts.maxItems,
-            include: buildCollectionParam(opts.include, 'csv')
+            where: opts?.where,
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/types', 'GET',
-            {}, queryParams, {}, {}, null,
-            contentTypes, accepts , TypePaging);
+        return this.get<TypePaging>({
+            path: '/types',
+            queryParams,
+            returnType: TypePaging
+        });
     }
 }
