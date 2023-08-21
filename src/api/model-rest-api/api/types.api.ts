@@ -21,6 +21,42 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 
+export interface ListTypesOpts {
+    /**
+     * Optionally filter the list. Here are some examples:
+     *
+     * A type should be represented in the following format(prefix:name). e.g 'cm:content'.
+     *
+     * The following where clause will only return types from the namespace1:model and namespace2:model.
+     *  - where=(modelId in ('namespace1:model','namespace2:model'))
+     *  - where=(modelId in ('namespace1:model INCLUDESUBTYPES','namespace2:model'))
+     *
+     * The following where clause will only return sub types for the given parents.
+     *  - where=(parentId in ('namespace1:parent','namespace2:parent'))
+     *
+     * The following where clause will only return types that match the pattern.
+     *  - where=(namespaceUri matches('http://www.alfresco.*'))
+     *
+     * The following where clause will only return types that don't match the pattern.
+     *  - where=(not namespaceUri matches('http://www.alfresco.*'))
+     */
+    where?: string;
+    // The number of entities that exist in the collection before those included in this list.
+    // If not supplied then the default value is 0.
+    skipCount?: number;
+    // The maximum number of items to return in the list.
+    // If not supplied then the default value is 100.
+    maxItems?: number;
+    /**
+     * Returns additional information about the type.
+     * The following optional fields can be requested:
+     * - properties
+     * - mandatoryAspects
+     * - associations
+     */
+    include?: string[];
+}
+
 /**
 * Types service.
 * @module TypesApi
@@ -37,22 +73,10 @@ Get information for type **typeId**.
     * @return Promise<TypeEntry>
     */
     getType(typeId: string): Promise<TypeEntry> {
-
         throwIfNotDefined(typeId, 'typeId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'typeId': typeId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            typeId: typeId
         };
 
         const contentTypes = ['application/json'];
@@ -60,10 +84,11 @@ Get information for type **typeId**.
 
         return this.apiClient.callApi(
             '/types/{typeId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts , TypeEntry);
     }
-/**
+
+    /**
     * List types
     *
     * **Note:** This is available in Alfresco 7.0.0 and newer versions.
@@ -133,63 +158,18 @@ JSON
     ]
   }
 }
-
     *
     * @param opts Optional parameters
-    * @param opts.where Optionally filter the list. Here are some examples:
-
-A type should represented in the following format(prefix:name). e.g 'cm:content'.
-
-The following where clause will only return types from the namespace1:model and namespace2:model.
-
-  where=(modelId in ('namespace1:model','namespace2:model'))
-  where=(modelId in ('namespace1:model INCLUDESUBTYPES','namespace2:model'))
-
-The following where clause will only return sub types for the given parents.
-
-  where=(parentId in ('namespace1:parent','namespace2:parent'))
-
-The following where clause will only return types that match the pattern.
-
-  where=(namespaceUri matches('http://www.alfresco.*'))
-
-The following where clause will only return types that don't match the pattern.
-
-  where=(not namespaceUri matches('http://www.alfresco.*'))
-
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.include Returns additional information about the type. The following optional fields can be requested:
-* properties
-* mandatoryAspects
-* associations
-
     * @return Promise<TypePaging>
     */
-    listTypes(opts?: any): Promise<TypePaging> {
-
+    listTypes(opts?: ListTypesOpts): Promise<TypePaging> {
         opts = opts || {};
-        const postBody: null = null;
-
-        const pathParams = {
-
-        };
 
         const queryParams = {
-            'where': opts['where'],
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'include': buildCollectionParam(opts['include'], 'csv')
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            where: opts.where,
+            skipCount: opts.skipCount,
+            maxItems: opts.maxItems,
+            include: buildCollectionParam(opts.include, 'csv')
         };
 
         const contentTypes = ['application/json'];
@@ -197,8 +177,7 @@ If not supplied then the default value is 100.
 
         return this.apiClient.callApi(
             '/types', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            {}, queryParams, {}, {}, null,
             contentTypes, accepts , TypePaging);
     }
-
 }
