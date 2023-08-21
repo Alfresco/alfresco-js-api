@@ -19,12 +19,6 @@ import { ClassDescription } from '../model/classDescription';
 import { BaseApi } from './base.api';
 
 /**
- * Classes service.
- * @module api/ClassesApi
- * @version 1.4.0
- */
-
-/**
  * Constructs a new ClassesApi.
  * @alias module:api/ClassesApi
  * @class
@@ -36,21 +30,12 @@ export class ClassesApi extends BaseApi {
     private path: string = '/api/classes';
 
     /**
-     * Function to receive the result of the getClass operation.
-     * @param {String} error Error message, if any.
-     * @param {module:model/ClassDescription} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
      * Gets the class information for the specified className.
      * @param {String} className The identifier of the class.
-     * @param {Object} opts Optional parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ClassDescription}
      * data is of type: {module:model/ClassDescription}
      */
-    getClass(className: string, opts?: any): Promise<ClassDescription> {
-        opts = opts || {};
+    getClass(className: string): Promise<ClassDescription> {
 
         // verify the required parameter 'className' is set
         if (className === undefined || className === null) {
@@ -75,9 +60,7 @@ export class ClassesApi extends BaseApi {
         );
     }
 
-    getSubclasses(className: string, opts?: any): Promise<ClassDescription[]> {
-        opts = opts || {};
-
+    getSubclasses(className: string): Promise<ClassDescription[]> {
         // verify the required parameter 'className' is set
         if (className === undefined || className === null) {
             throw "Missing param 'className'";
