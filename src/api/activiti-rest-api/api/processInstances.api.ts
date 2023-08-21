@@ -31,8 +31,8 @@ import { throwIfNotDefined } from '../../../assert';
 import { ResultListDataRepresentationDecisionTaskRepresentation } from '../model/resultListDataRepresentationDecisionTaskRepresentation';
 
 /**
- * Processinstances service.
- * @module ProcessinstancesApi
+ * Process Instances service.
+ * @module ProcessInstancesApi
  */
 export class ProcessInstancesApi extends BaseApi {
     /**

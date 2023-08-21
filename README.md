@@ -1,21 +1,6 @@
-# Alfresco JavaScript API Client
+# Alfresco JavaScript API
 
-
-<p>
-  <a title='Gitter chat' href="https://gitter.im/Alfresco/api/ng2-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
-     <img src='https://badges.gitter.im/Alfresco/api/ng2-components.svg'  alt='Gitter chat' />
-  </a>
-  <a href='https://raw.githubusercontent.com/Alfresco/dev-platform-js-api/master/LICENSE'>
-     <img src='https://img.shields.io/hexpm/l/plug.svg' alt='license' />
-  </a>
-
-</p>
-
-<p align="center">
-  <img title="alfresco" alt='alfresco' src='assets/alfresco.png'  width="280px" height="150px"></img>
-</p>
-
-This project provides a JavaScript client API into the Alfresco REST API and Activiti REST API.
+JavaScript client API for the Alfresco REST API and Activiti REST API.
 
 <!-- markdown-toc start - Don't edit this section.  npm run toc to generate it-->
 
@@ -69,15 +54,14 @@ This project provides a JavaScript client API into the Alfresco REST API and Act
 
 # Full documentation of all the methods of each API
 
-- [Authentication Api](/src/api/auth-rest-api)
-- [Content Api](/src/api/content-rest-api)
-- [Model Api](/src/api/model-rest-api)
-- [Process Api (APS 1.X)](/src/api-legacy/activiti-rest-api)
-- [Process Api (AAE)](/src/api/activiti-rest-api)
-- [Search Api](/src/api/search-rest-api)
-- [Governance Classification Api](/src/api/gs-classification-rest-api)
-- [Governance Core Api](/src/api/gs-core-rest-api)
-- [Discovery Content API](/src/api/discovery-rest-api)
+- [Authentication Api](src/api/auth-rest-api/README.md)
+- [Content Api](src/api/content-rest-api/README.md)
+- [Model Api](src/api/model-rest-api/README.md)
+- [Process Api (AAE)](src/api/activiti-rest-api/README.md)
+- [Search Api](src/api/search-rest-api/README.md)
+- [Governance Classification Api](src/api/gs-classification-rest-api/README.md)
+- [Governance Core Api](src/api/gs-core-rest-api/README.md)
+- [Discovery Content API](src/api/discovery-rest-api/README.md)
 
 # Prerequisites
 
@@ -95,32 +79,26 @@ Using NPM:
 npm install @alfresco/js-api
 ```
 
-Using Yarn:
-
-```sh
-yarn add @alfresco/js-api
-```
-
 # Authentication JS-API
 
 ## Login
 
 AlfrescoApi({alfrescoHost, activitiHost, contextRoot, ticket});
 
-Property | Description  | default value|
-------------- | ------------- | -------------|
-hostEcm| (Optional value The Ip or Name of the host where your Alfresco instance is running )|http://127.0.0.1:8080 |
-hostBpm| (Optional value The Ip or Name of the host where your Activiti instance is running )|http://127.0.0.1:9999 |
-authType|  (Optional value can be 'BASIC' or 'OAUTH') | 'BASIC'|
-oauth2|  (Optional configuration for SSO) ||
-contextRoot| (Optional value that define the context Root of the Alfresco ECM API default value is alfresco )|alfresco |
-contextRootBpm| (Optional value that define the context Root of the Activiti API default value is activiti-app )|alfresco |
-tenant|(Optional value needed in case of multi tenant content service) | '-default-'|
-provider| (Optional value default value is ECM. This parameter can accept as value ECM BPM or ALL to use the API and Login in the ECM, Activiti BPM or Both )|alfresco |
-ticket| (Optional only if you want login with the ticket see example below)| |
-disableCsrf| To disable CSRF Token to be submitted. Only for Activiti call.| false |
-withCredentials| (Optional configuration for SSO, requires CORS on ECM) |false
-oauthInit|(Optional, if false skip the OAuth2 initialization) | true
+| Property        | Description                                                                                                                                  | default value         |
+|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
+| hostEcm         | (Optional) The Ip or Name of the host where your Alfresco instance is running                                                                | http://127.0.0.1:8080 |
+| hostBpm         | (Optional) The Ip or Name of the host where your Activiti instance is running                                                                | http://127.0.0.1:9999 |
+| authType        | (Optional) can be 'BASIC' or 'OAUTH'                                                                                                         | 'BASIC'               |
+| oauth2          | (Optional) configuration for SSO                                                                                                             |                       |
+| contextRoot     | (Optional) that define the context Root of the Alfresco ECM API default value is alfresco                                                    | alfresco              |
+| contextRootBpm  | (Optional) that define the context Root of the Activiti API default value is activiti-app                                                    | alfresco              |
+| tenant          | (Optional) needed in case of multi tenant content service                                                                                    | '-default-'           |
+| provider        | (Optional) default value is ECM. This parameter can accept as value ECM BPM or ALL to use the API and Login in the ECM, Activiti BPM or Both | alfresco              |
+| ticket          | (Optional) only if you want login with the ticket see example below                                                                          |                       |
+| disableCsrf     | To disable CSRF Token to be submitted. Only for Activiti call                                                                                | false                 |
+| withCredentials | (Optional) configuration for SSO, requires CORS on ECM                                                                                       | false                 |
+| oauthInit       | (Optional) if false skip the OAuth2 initialization                                                                                           | true                  |
 
 ### Login with Username and Password BPM and ECM
 
@@ -129,14 +107,12 @@ oauthInit|(Optional, if false skip the OAuth2 initialization) | true
 ```javascript
 const alfrescoApi = new AlfrescoApi({ provider: 'ALL' });
 
-alfrescoJsApi.login('admin', 'admin').then(
-    data => {
-        console.log('API called successfully Login in  BPM and ECM performed ');
-    },
-    error => {
-        console.error(error);
-    }
-);
+try {
+    await alfrescoJsApi.login('admin', 'admin');
+    console.log('API called successfully Login in BPM and ECM performed ');
+} catch (error) {
+    console.error(error);
+}
 ```
 
 ### Login with Username and Password ECM
@@ -146,17 +122,14 @@ alfrescoJsApi.login('admin', 'admin').then(
 ```javascript
 const alfrescoJsApi = new AlfrescoApi();
 
-alfrescoJsApi.login('admin', 'admin').then(
-    data => {
-        console.log('API called successfully Login ticket:' + data);
-    },
-    error => {
-        console.error(error);
-    }
-);
-
-// The output will be: API called successfully Login ticket: TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1
-
+try {
+    const data = await alfrescoJsApi.login('admin', 'admin');
+    
+    console.log('API called successfully Login ticket:' + data);
+    // The output will be: API called successfully Login ticket: TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1
+} catch (error) {
+    console.error(error);
+}
 ```
 
 ### Login with ticket
@@ -172,14 +145,12 @@ This authentication validate also the ticket against the server
 ```javascript
 const ticket = 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1';
 
-alfrescoJsApi.loginTicket(ticket).then(
-    data => {
-        console.log('valid ticket you are logged in');
-    },
-    error => {
-        console.error(error);
-    }
-);
+try {
+    await alfrescoJsApi.loginTicket(ticket);
+    console.log('valid ticket you are logged in');
+} catch (error) {
+    console.error(error);
+}
 ```
 
 #### Login with ticket ECM/BPM as parameter in the constructor
@@ -218,50 +189,48 @@ const alfrescoApi = new AlfrescoApi({
 ```javascript
 const alfrescoApi = new AlfrescoApi({ provider:'BPM' });
 
-alfrescoJsApi.login('admin', 'admin').then(
-    () => {
-        console.log('API called successfully Login in Activiti BPM performed ');
-    },
-    error => {
-        console.error(error);
-    }
-);
+try {
+    await alfrescoJsApi.login('admin', 'admin');
+    console.log('API called successfully Login in Activiti BPM performed ');
+} catch (error) {
+    console.error(error);
+}
 ```
 
 ### Login with OAUTH2 Alfresco authorization server
 
 #### Implicit Flow
 
-If your want to be redirect to the authorization server and login there you can use the implicit flow to login
+If your want to redirect to the authorization server and login there, you can use the implicit flow to login
 
 ##### oauth2 properties
 
-Property | Description  | default value|
-------------- | ------------- | -------------|
-host| Your oauth2 server URL| null |
-clientId| Your clientId oauth2 | null |
-secret| Your secret oauth2| null |
-scope| Your scope | null |
-implicitFlow| true/false | false |
-redirectUri|  url to be redirect after login| null|
-redirectLogout|  url to be redirect after logout optional, if is nor present the redirectUri will be used| null|
-refreshTokenTimeout|  millisecond value, after how many millisecond you want refresh the token| 30000|
-redirectSilentIframeUri|  url to be redirect after silent refresh login| /assets/silent-refresh.html |
-silentLogin|  direct execute the implicit login without the need to call AlfrescoJsApi.implicitLogin() method|   false|
-publicUrls | list of public urls that don't need authorization. It is possible too pass absolute paths and string patterns. In patterns you can use * or ** wildcards. Single means that you can have anything in one part of URL for example http://some-public-url/path/* matches with http://some-public-url/path/test. Double means that you can have anything in any number of parts, for example http://some-public-url/path/** matches with http://some-public-url/path/test/some-test.|
-authorizationUrl| authorization url, relative to the host| /protocol/openid-connect/auth|
-tokenUrl| token url, relative to the host| /protocol/openid-connect/token|
-logoutUrl| logout url, relative to the host| /protocol/openid-connect/logout|
+| Property                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Default Value                   |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|
+| host                    | Your oauth2 server URL                                                                                                                                                                                                                                                                                                                                                                                                                                                            | null                            |
+| clientId                | Your clientId oauth2                                                                                                                                                                                                                                                                                                                                                                                                                                                              | null                            |
+| secret                  | Your secret oauth2                                                                                                                                                                                                                                                                                                                                                                                                                                                                | null                            |
+| scope                   | Your scope                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | null                            |
+| implicitFlow            | true/false                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | false                           |
+| redirectUri             | url to be redirect after login                                                                                                                                                                                                                                                                                                                                                                                                                                                    | null                            |
+| redirectLogout          | url to be redirect after logout optional, if is nor present the redirectUri will be used                                                                                                                                                                                                                                                                                                                                                                                          | null                            |
+| refreshTokenTimeout     | millisecond value, after how many millisecond you want refresh the token                                                                                                                                                                                                                                                                                                                                                                                                          | 30000                           |
+| redirectSilentIframeUri | url to be redirect after silent refresh login                                                                                                                                                                                                                                                                                                                                                                                                                                     | /assets/silent-refresh.html     |
+| silentLogin             | direct execute the implicit login without the need to call AlfrescoJsApi.implicitLogin() method                                                                                                                                                                                                                                                                                                                                                                                   | false                           |
+| publicUrls              | list of public urls that don't need authorization. It is possible too pass absolute paths and string patterns. In patterns you can use * or ** wildcards. Single means that you can have anything in one part of URL for example http://some-public-url/path/* matches with http://some-public-url/path/test. Double means that you can have anything in any number of parts, for example http://some-public-url/path/** matches with http://some-public-url/path/test/some-test. |
+| authorizationUrl        | authorization url, relative to the host                                                                                                                                                                                                                                                                                                                                                                                                                                           | /protocol/openid-connect/auth   |
+| tokenUrl                | token url, relative to the host                                                                                                                                                                                                                                                                                                                                                                                                                                                   | /protocol/openid-connect/token  |
+| logoutUrl               | logout url, relative to the host                                                                                                                                                                                                                                                                                                                                                                                                                                                  | /protocol/openid-connect/logout |
 
 The api/js-api will automatically redirect you to the login page anf refresh the token if necessary
 
 ##### Events
 
-Property | Description  | default value|
-------------- | ------------- | -------------|
-implicit_redirect| triggered when the user is redirect to the auth server return url parameter of the redirect |  |
-discovery| triggered when all the openId discovery url phase is terminated return an object with all the discovered url |  |
-token_issued| triggered when a new token is issued|  |
+| Property          | Description                                                                                                  | Default Value |
+|-------------------|--------------------------------------------------------------------------------------------------------------|---------------|
+| implicit_redirect | triggered when the user is redirect to the auth server return url parameter of the redirect                  |               |
+| discovery         | triggered when all the openId discovery url phase is terminated return an object with all the discovered url |               |
+| token_issued      | triggered when a new token is issued                                                                         |               |
 
 The api/js-api will automatically redirect you to the login page and refresh the token if necessary
 
@@ -296,7 +265,7 @@ const alfrescoApi = new AlfrescoApi({
         scope: 'openid',
         implicitFlow: true,
         redirectUri: 'YOUR_HOME_APP_URL',
-        silentRefreshTimeout: '600000' //Optional parameter 10 minutes default value,
+        silentRefreshTimeout: '600000', // Optional parameter 10 minutes default value,
         silentLogin: true,
         publicUrls: ['PUBLIC_URL', 'URL_PATTERN']
     },
@@ -323,14 +292,12 @@ const alfrescoApi = new AlfrescoApi({
     provider: 'ALL'
 });
 
-alfrescoJsApi.login('admin', 'admin').then(
-    data => {
-        console.log('API called successfully Login in with authorization server performed');
-    },
-    error => {
-        console.error(error);
-    }
-);
+try {
+    await alfrescoJsApi.login('admin', 'admin');
+    console.log('API called successfully Login in with authorization server performed');
+} catch (error) {
+    console.error(error);
+}
 ```
 
 After the login if you want refresh your token you can use this call
@@ -338,39 +305,38 @@ After the login if you want refresh your token you can use this call
 ##### Example
 
 ```javascript
-alfrescoJsApi.refreshToken().then(
-    data => {
-        console.log('Your token has been refreshed');
-    },
-    error => {
-        console.error(error);
-    }
-);
+try {
+    await alfrescoJsApi.refreshToken();
+    console.log('Your token has been refreshed');
+} catch (error) {
+    console.error(error);
+}
 ```
 
 ## Logout
 
-logout()
+```javascript
+alfrescoJsApi.logout();
+```
 
 ### Example
 
 ```javascript
-
-alfrescoJsApi.logout().then(
-    data => {
-        console.log('Successfully Logout');
-    },
-    error => {
-        console.error('Possible ticket already expired');
-    }
-);
+try {
+    await alfrescoJsApi.logout();
+    console.log('Successfully logged out');
+} catch (error) {
+    console.error('Error logging out');
+}
 ```
 
 ## isLoggedIn
 
-isLoggedIn()
+```javascript
+alfrescoJsApi.isLoggedIn()
+```
 
-> return true if you are logged in false if you are not.
+Returns `true` if you are logged in, and `false` if you are not.
 
 ### Example
 
@@ -418,7 +384,6 @@ The login/logout are also an EventEmitter which you can register to listen to an
 ### Example
 
 ```javascript
-
 alfrescoJsApi.login('admin', 'admin')
     .on('unauthorized', () => {
         console.log('You are unauthorized you can use this event to redirect to login');
@@ -442,10 +407,10 @@ Content service and process service has two different clients:
 - AlfrescoJsApi.ProcessClient
 - AlfrescoJsApi.ContentClient
 
-Both client expose a method ***callApi**
+Both clients expose a method ***callApi**
 
-```javascript
-callApi(
+```typescript
+function callApi(
     path: string,
     httpMethod: string,
     pathParams?: any,
@@ -458,7 +423,7 @@ callApi(
     returnType?: any,
     contextRoot?: string,
     responseType?: string
-): Promise<any>;
+): Promise<any> {};
 ```
 
 If you want call your custom rest point in one of those two service use the corresponding client.
@@ -486,54 +451,11 @@ alfrescoJsApi.on('error', error => {
 
 # ECM Example
 
-A complete list of all the ECM methods is available here : [Content API](/src/api/content-rest-api) here you can find some common [Example](/ecm-example.md).
+A complete list of all the ECM methods is available here : [Content API](src/api/content-rest-api/README.md) here you can find some common [Example](ecm-example.md).
 
 # BPM Example
 
-A complete list of all the BPM methods is available here : [APS 2.X API](/src/api/activiti-rest-api) here you can find some common [Example](/bpm-example.md).
-
-# Legacy Endpoint porting (ver 2.x.x)
-
-Since version 3.0.0 in order to support tree shaking the JS-API has been radically redesigned.
-
-In order to help the porting to the new JS-APi version of the old project the previous syntax even if is deprecated is still supported in the compatibility layer.
-
-***Note this compatibility layer could be deleted in the next major versions of the JS-API***
-
-```javascript
-import { AlfrescoApiCompatibility as AlfrescoApi } from '../src/alfrescoApiCompatibility';
-
-const alfrescoJsApi = new AlfrescoApi({
-        oauth2: {
-            host: 'HOST_OAUTH2_SERVER',
-            clientId: 'YOUR_CLIENT_ID',
-            secret: 'SECRET',
-            authPath:'my-custom-auth-endpoint/token'
-        },
-        authType: 'OAUTH',
-        provider: 'ALL'
-    });
-
-alfrescoJsApi.login('admin', 'admin').then(
-    data => {
-        console.log('API called successfully Login in with authorization server performed ');
-    },
-    error => {
-        console.error(error);
-    }
-);
-
-alfrescoJsApi.nodes
-    .getNodeInfo(fileOrFolderId)
-    .then(
-        data => {
-            console.log('This is the name' + data.name );
-        },
-        error => {
-            console.log('This node does not exist');
-        }
-    );
-```
+A complete list of all the BPM methods is available here : [APS 2.X API](src/api/activiti-rest-api/README.md) here you can find some common [Example](bpm-example.md).
 
 # Development
 
