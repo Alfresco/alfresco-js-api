@@ -21,6 +21,45 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 
+export class ListAspectsOpts {
+    /**
+     * Optionally filter the list. Here are some examples:
+     *
+     * An aspect should be represented in the following format(prefix:name). e.g 'cm:title'.
+     *
+     * The following where clause will only return aspects from the namespace1:model and namespace2:model.
+     *
+     *   - where=(modelId in ('namespace1:model','namespace2:model'))
+     *   - where=(modelId in ('namespace1:model INCLUDESUBASPECTS','namespace2:model'))
+     *
+     * The following where clause will only return sub aspects for the given parents.
+     *
+     *   - where=(parentId in ('namespace1:parent','namespace2:parent'))
+     *
+     * The following where clause will only return aspects that match the pattern.
+     *
+     *   - where=(namespaceUri matches('http://www.alfresco.*'))
+     *
+     * The following where clause will only return aspects that don't match the pattern.
+     *
+     *   - where=(not namespaceUri matches('http://www.alfresco.*'))
+     */
+    where?: string;
+    // The number of entities that exist in the collection before those included in this list.
+    // If not supplied then the default value is 0.
+    skipCount?: number;
+    // The maximum number of items to return in the list.
+    // If not supplied then the default value is 100.
+    maxItems?: number;
+    /**
+    * Returns additional information about the aspect. The following optional fields can be requested:
+    * - properties
+    * - mandatoryAspects
+    * - associations
+    */
+    include?: string[];
+}
+
 /**
 * Aspects service.
 * @module AspectsApi
@@ -37,22 +76,10 @@ Get information for aspect **aspectId**.
     * @return Promise<AspectEntry>
     */
     getAspect(aspectId: string): Promise<AspectEntry> {
-
         throwIfNotDefined(aspectId, 'aspectId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'aspectId': aspectId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            aspectId: aspectId
         };
 
         const contentTypes = ['application/json'];
@@ -60,7 +87,7 @@ Get information for aspect **aspectId**.
 
         return this.apiClient.callApi(
             '/aspects/{aspectId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts , AspectEntry);
     }
 /**
@@ -126,63 +153,18 @@ JSON
     ]
   }
 }
-
     *
     * @param opts Optional parameters
-    * @param opts.where Optionally filter the list. Here are some examples:
-
-An aspect should represented in the following format(prefix:name). e.g 'cm:title'.
-
-The following where clause will only return aspects from the namespace1:model and namespace2:model.
-
-  where=(modelId in ('namespace1:model','namespace2:model'))
-  where=(modelId in ('namespace1:model INCLUDESUBASPECTS','namespace2:model'))
-
-The following where clause will only return sub aspects for the given parents.
-
-  where=(parentId in ('namespace1:parent','namespace2:parent'))
-
-The following where clause will only return aspects that match the pattern.
-
-  where=(namespaceUri matches('http://www.alfresco.*'))
-
-The following where clause will only return aspects that don't match the pattern.
-
-  where=(not namespaceUri matches('http://www.alfresco.*'))
-
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.include Returns additional information about the aspect. The following optional fields can be requested:
-* properties
-* mandatoryAspects
-* associations
-
     * @return Promise<AspectPaging>
     */
-    listAspects(opts?: any): Promise<AspectPaging> {
-
+    listAspects(opts?: ListAspectsOpts): Promise<AspectPaging> {
         opts = opts || {};
-        const postBody: null = null;
-
-        const pathParams = {
-
-        };
 
         const queryParams = {
-            'where': opts['where'],
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'include': buildCollectionParam(opts['include'], 'csv')
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            where: opts.where,
+            skipCount: opts.skipCount,
+            maxItems: opts.maxItems,
+            include: buildCollectionParam(opts.include, 'csv')
         };
 
         const contentTypes = ['application/json'];
@@ -190,8 +172,7 @@ If not supplied then the default value is 100.
 
         return this.apiClient.callApi(
             '/aspects', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            {}, queryParams, {}, {}, null,
             contentTypes, accepts , AspectPaging);
     }
-
 }
