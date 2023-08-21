@@ -16,18 +16,7 @@
  */
 
 export * from './webscript.api';
-import { WebscriptApi } from './webscript.api';
-
 export * from './classes.api';
-import { ClassesApi } from './classes.api';
-
 export * from './upload.api';
-import { UploadApi } from './upload.api';
-
 export * from './content.api';
-import { ContentApi } from './content.api';
-
 export * from './customModel.api';
-import { CustomModelApi } from './customModel.api';
-
-export const CONTENT_CUSTOM_APIS = [WebscriptApi, ClassesApi, CustomModelApi, UploadApi, ContentApi];
