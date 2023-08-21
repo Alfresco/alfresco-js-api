@@ -32,6 +32,20 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 
+export interface CreateNodeOpts {
+    [key: string]: any;
+    // If true, then a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+    autoRename?: boolean;
+    // If true, then created node will be version 1.0 MAJOR. If false, then created node will be version 0.1 MINOR.
+    majorVersion?: boolean;
+    // If true, then created node will be versioned. If false, then created node will be unversioned and auto-versioning disabled.
+    versioningEnabled?: boolean;
+    // Returns additional information about the node.
+    include?: string[],
+    // A list of field names.
+    fields?: string[],
+}
+
 /**
 * Nodes service.
 * @module NodesApi
@@ -437,27 +451,26 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeEntry>
     */
-    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: any, formParams?: any): Promise<NodeEntry| any> {
+    createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: CreateNodeOpts, formParams?: any): Promise<NodeEntry | any> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
 
         opts = opts || {};
-        let postBody = nodeBodyCreate;
 
-        let pathParams = {
-            'nodeId': nodeId
+        const pathParams = {
+            nodeId: nodeId
         };
 
-        let queryParams = {
-            'autoRename': opts['autoRename'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+        const queryParams = {
+            autoRename: opts.autoRename,
+            include: buildCollectionParam(opts.include, 'csv'),
+            fields: buildCollectionParam(opts.fields, 'csv')
         };
 
-        let headerParams = {};
         formParams = formParams || {};
 
-        let contentTypes, returnType = null;
+        let contentTypes;
+        let returnType;
 
         if (formParams.filedata) {
             contentTypes = ['multipart/form-data'];
@@ -470,7 +483,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         return this.apiClient.callApi(
             '/nodes/{nodeId}/children', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, queryParams, {}, formParams, nodeBodyCreate,
             contentTypes, accepts, returnType);
     }
 
