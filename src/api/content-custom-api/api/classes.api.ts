@@ -26,9 +26,6 @@ import { BaseApi } from './base.api';
  * default to {@link module:ApiClient#instance} if unspecified.
  */
 export class ClassesApi extends BaseApi {
-
-    private path: string = '/api/classes';
-
     /**
      * Gets the class information for the specified className.
      * @param {String} className The identifier of the class.
@@ -36,28 +33,17 @@ export class ClassesApi extends BaseApi {
      * data is of type: {module:model/ClassDescription}
      */
     getClass(className: string): Promise<ClassDescription> {
-
         // verify the required parameter 'className' is set
         if (className === undefined || className === null) {
             throw "Missing param 'className' in getClass";
         }
 
-        let postBody = null;
-        let pathParams = {
-            'className': className
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClientPrivate.callApi(
-            this.path + '/{className}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassDescription, this.apiClientPrivate.config.contextRoot + '/s'
-        );
+        return this.get<ClassDescription>({
+            path: '/api/classes/{className}',
+            pathParams: { className },
+            returnType: ClassDescription,
+            contextRoot: this.apiClientPrivate.config.contextRoot + '/s'
+        });
     }
 
     getSubclasses(className: string): Promise<ClassDescription[]> {
@@ -66,21 +52,11 @@ export class ClassesApi extends BaseApi {
             throw "Missing param 'className'";
         }
 
-        let postBody = null;
-        let pathParams = {
-            'className': className
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClientPrivate.callApi(
-            `${this.path}/{className}/subclasses`, 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassDescription, this.apiClientPrivate.config.contextRoot + '/s'
-        );
+        return this.get({
+            path: `/api/classes/{className}/subclasses`,
+            pathParams: { className },
+            returnType: ClassDescription,
+            contextRoot: this.apiClientPrivate.config.contextRoot + '/s'
+        });
     }
 }
