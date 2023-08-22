@@ -21,8 +21,17 @@ import { SecurityMarkEntry } from '../model/securityMarkEntry';
 import { SecurityMarkBody } from '../model/securityMarkBody';
 import { SecurityMarkPaging } from '../model/securityMarkPaging';
 
+export interface GetSecurityMarksOpts {
+    // The key for the security mark is in use or not.
+    inUse?: any;
+    // The number of entities that exist in the collection before those included in this list.
+    skipCount?: number;
+    // The maximum number of items to return in the list.
+    maxItems?: number;
+}
+
 /**
- * Securitycontrolsettings service.
+ * Security Marks API.
  * @module SecurityMarksApi
  */
 export class SecurityMarksApi extends BaseApi {
@@ -36,7 +45,7 @@ export class SecurityMarksApi extends BaseApi {
      * @param opts.maxItems The maximum number of items to return in the list.
      * @return Promise<SecurityMarkPaging>
      */
-    getSecurityMarks(securityGroupId: string, opts?: any): Promise<SecurityMarkPaging> {
+    getSecurityMarks(securityGroupId: string, opts?: GetSecurityMarksOpts): Promise<SecurityMarkPaging> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
 
         const pathParams = {
@@ -44,9 +53,9 @@ export class SecurityMarksApi extends BaseApi {
         };
 
         const queryParams = {
-            inUse: opts['inUse'],
-            skipCount: opts['skipCount'],
-            maxItems: opts['maxItems'],
+            inUse: opts?.inUse,
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
         };
 
         return this.get({

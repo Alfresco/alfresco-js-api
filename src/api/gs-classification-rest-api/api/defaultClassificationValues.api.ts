@@ -21,7 +21,7 @@ import { DateAlfresco } from '../../../../src/api/content-custom-api/model/dateA
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Defaultclassificationvalues service.
+* DefaultClassificationValuesApi service.
 * @module DefaultClassificationValuesApi
 */
 export class DefaultClassificationValuesApi extends BaseApi {
@@ -36,28 +36,14 @@ export class DefaultClassificationValuesApi extends BaseApi {
     calculateDefaultDeclassificationDate(nodeId: string): Promise<DeclassificationDate> {
         throwIfNotDefined(nodeId, 'nodeId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'nodeId': nodeId
+        const pathParams = {
+            nodeId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/default-classification-values/{nodeId}/calculate-declassification-date', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, DateAlfresco);
+        return this.post({
+            path: '/default-classification-values/{nodeId}/calculate-declassification-date',
+            pathParams,
+            returnType: DateAlfresco
+        });
     }
-
 }

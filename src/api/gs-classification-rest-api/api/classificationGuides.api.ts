@@ -27,8 +27,12 @@ import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
+export interface CombinedInstructionsOpts {
+    instructions?: any;
+}
+
 /**
-* Classificationguides service.
+* ClassificationGuidesApi service.
 * @module ClassificationGuidesApi
 */
 export class ClassificationGuidesApi extends BaseApi {
@@ -41,30 +45,12 @@ export class ClassificationGuidesApi extends BaseApi {
     * @param opts.instructions Instructions
     * @return Promise<InstructionEntry>
     */
-    combinedInstructions(opts?: any): Promise<InstructionEntry> {
-        opts = opts || {};
-        let postBody = opts['instructions'];
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/combined-instructions', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, InstructionEntry);
+    combinedInstructions(opts?: CombinedInstructionsOpts): Promise<InstructionEntry> {
+        return this.post({
+            path: '/combined-instructions',
+            bodyParam: opts?.instructions,
+            returnType: InstructionEntry
+        });
     }
     /**
         * Create a classification guide
@@ -77,29 +63,13 @@ export class ClassificationGuidesApi extends BaseApi {
     createClassificationGuide(classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry> {
         throwIfNotDefined(classificationGuide, 'classificationGuide');
 
-        let postBody = classificationGuide;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-guides', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassificationGuideEntry);
+        return this.post({
+            path: '/classification-guides',
+            bodyParam: classificationGuide,
+            returnType: ClassificationGuideEntry
+        });
     }
+
     /**
         * Create a subtopic
         *
@@ -121,29 +91,22 @@ export class ClassificationGuidesApi extends BaseApi {
         throwIfNotDefined(topic, 'topic');
 
         opts = opts || {};
-        let postBody = topic;
 
-        let pathParams = {
-            'topicId': topicId
+        const pathParams = {
+            topicId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/topics/{topicId}/subtopics', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TopicEntry);
+        return this.post({
+            path: '/topics/{topicId}/subtopics',
+            pathParams,
+            queryParams,
+            bodyParam: topic,
+            returnType: TopicEntry
+        });
     }
     /**
         * Create a topic
@@ -166,30 +129,24 @@ export class ClassificationGuidesApi extends BaseApi {
         throwIfNotDefined(topic, 'topic');
 
         opts = opts || {};
-        let postBody = topic;
 
-        let pathParams = {
-            'classificationGuideId': classificationGuideId
+        const pathParams = {
+            classificationGuideId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-guides/{classificationGuideId}/topics', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TopicEntry);
+        return this.post({
+            path: '/classification-guides/{classificationGuideId}/topics',
+            pathParams,
+            queryParams,
+            bodyParam: topic,
+            returnType: TopicEntry
+        });
     }
+
     /**
         * Delete a classification guide
         *
@@ -201,29 +158,19 @@ export class ClassificationGuidesApi extends BaseApi {
     deleteClassificationGuide(classificationGuideId: string): Promise<any> {
         throwIfNotDefined(classificationGuideId, 'classificationGuideId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'classificationGuideId': classificationGuideId
+        const pathParams = {
+            classificationGuideId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/classification-guides/{classificationGuideId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
+
     /**
         * Delete a topic
         *
@@ -235,27 +182,16 @@ export class ClassificationGuidesApi extends BaseApi {
     deleteTopic(topicId: string): Promise<any> {
         throwIfNotDefined(topicId, 'topicId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'topicId': topicId
+        const pathParams = {
+            topicId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/topics/{topicId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
     /**
@@ -284,13 +220,8 @@ export class ClassificationGuidesApi extends BaseApi {
         */
     listClassificationGuides(opts?: any): Promise<ClassificationGuidePaging> {
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-
-        };
-
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
@@ -298,19 +229,11 @@ export class ClassificationGuidesApi extends BaseApi {
             'where': opts['where']
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-guides', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassificationGuidePaging);
+        return this.get({
+            path: '/classification-guides',
+            queryParams,
+            returnType: ClassificationGuidePaging
+        });
     }
     /**
         * List all subtopics
@@ -344,15 +267,13 @@ export class ClassificationGuidesApi extends BaseApi {
         */
     listSubtopics(topicId: string, opts?: any): Promise<SubtopicPaging> {
         throwIfNotDefined(topicId, 'topicId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'topicId': topicId
+        const pathParams = {
+            topicId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
@@ -361,19 +282,12 @@ export class ClassificationGuidesApi extends BaseApi {
             'includeSource': opts['includeSource']
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/topics/{topicId}/subtopics', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, SubtopicPaging);
+        return this.get({
+            path: '/topics/{topicId}/subtopics',
+            pathParams,
+            queryParams,
+            returnType: SubtopicPaging
+        });
     }
     /**
         * List all topics
@@ -407,15 +321,13 @@ export class ClassificationGuidesApi extends BaseApi {
         */
     listTopics(classificationGuideId: string, opts?: any): Promise<TopicPaging> {
         throwIfNotDefined(classificationGuideId, 'classificationGuideId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'classificationGuideId': classificationGuideId
+        const pathParams = {
+            classificationGuideId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
@@ -424,20 +336,14 @@ export class ClassificationGuidesApi extends BaseApi {
             'includeSource': opts['includeSource']
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-guides/{classificationGuideId}/topics', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TopicPaging);
+        return this.get({
+            path: '/classification-guides/{classificationGuideId}/topics',
+            pathParams,
+            queryParams,
+            returnType: TopicPaging
+        });
     }
+
     /**
         * Get classification guide information
         *
@@ -449,28 +355,15 @@ export class ClassificationGuidesApi extends BaseApi {
     showClassificationGuideById(classificationGuideId: string): Promise<ClassificationGuideEntry> {
         throwIfNotDefined(classificationGuideId, 'classificationGuideId');
 
-        let postBody = null;
-
-        let pathParams = {
+        const pathParams = {
             'classificationGuideId': classificationGuideId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-guides/{classificationGuideId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassificationGuideEntry);
+        return this.get({
+            path: '/classification-guides/{classificationGuideId}',
+            pathParams,
+            returnType: ClassificationGuideEntry
+        });
     }
     /**
         * Get topic information
@@ -489,31 +382,22 @@ export class ClassificationGuidesApi extends BaseApi {
         */
     showTopicById(topicId: string, opts?: any): Promise<TopicEntry> {
         throwIfNotDefined(topicId, 'topicId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'topicId': topicId
+        const pathParams = {
+            topicId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/topics/{topicId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TopicEntry);
+        return this.post({
+            path: '/topics/{topicId}',
+            pathParams,
+            queryParams,
+            returnType: TopicEntry
+        });
     }
     /**
         * Update a classification guide
@@ -528,28 +412,16 @@ export class ClassificationGuidesApi extends BaseApi {
         throwIfNotDefined(classificationGuideId, 'classificationGuideId');
         throwIfNotDefined(classificationGuide, 'classificationGuide');
 
-        let postBody = classificationGuide;
-
-        let pathParams = {
-            'classificationGuideId': classificationGuideId
+        const pathParams = {
+            classificationGuideId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-guides/{classificationGuideId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassificationGuideEntry);
+        return this.put({
+            path: '/classification-guides/{classificationGuideId}',
+            pathParams,
+            bodyParam: classificationGuide,
+            returnType: ClassificationGuideEntry
+        });
     }
     /**
         * Update a topic
@@ -573,31 +445,23 @@ export class ClassificationGuidesApi extends BaseApi {
     updateTopic(topicId: string, topic: TopicBody, opts?: any): Promise<TopicEntry> {
         throwIfNotDefined(topicId, 'topicId');
         throwIfNotDefined(topic, 'topic');
-
         opts = opts || {};
-        let postBody = topic;
 
-        let pathParams = {
-            'topicId': topicId
+        const pathParams = {
+            topicId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/topics/{topicId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TopicEntry);
+        return this.put({
+            path: '/topics/{topicId}',
+            pathParams,
+            queryParams,
+            bodyParam: topic,
+            returnType: TopicEntry
+        });
     }
 
 }
