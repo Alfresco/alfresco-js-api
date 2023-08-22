@@ -189,17 +189,17 @@ export class Oauth2Auth extends AlfrescoApiClient {
         }
 
         if (this.isValidToken() && this.isValidAccessToken()) {
-            let accessToken = this.storage.getItem('access_token');
+            const accessToken = this.storage.getItem('access_token');
             this.setToken(accessToken, null);
             this.silentRefresh();
         }
     }
 
     private useFragmentTimeLogin(nonceKey: string) {
-        let accessToken = this.hashFragmentParams.access_token;
-        let idToken = this.hashFragmentParams.id_token;
-        let sessionState = this.hashFragmentParams.session_state;
-        let expiresIn = this.hashFragmentParams.expires_in;
+        const accessToken = this.hashFragmentParams.access_token;
+        const idToken = this.hashFragmentParams.id_token;
+        const sessionState = this.hashFragmentParams.session_state;
+        const expiresIn = this.hashFragmentParams.expires_in;
 
         if (!sessionState) {
             throw('session state not present');
@@ -312,8 +312,8 @@ export class Oauth2Auth extends AlfrescoApiClient {
     isValidToken(): boolean {
         let validToken = false;
         if (this.getIdToken()) {
-            let expiresAt = this.storage.getItem('id_token_expires_at'),
-                now = new Date();
+            const expiresAt = this.storage.getItem('id_token_expires_at');
+            const now = new Date();
             if (expiresAt && parseInt(expiresAt, 10) >= now.getTime()) {
                 validToken = true;
             }
@@ -346,7 +346,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
 
     redirectLogin(): void {
         if (this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
-            let href = this.composeImplicitLoginUrl();
+            const href = this.composeImplicitLoginUrl();
             window.location.href = href;
             this.emit('implicit_redirect', href);
         }
@@ -369,7 +369,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     composeImplicitLoginUrl(): string {
-        let nonce = this.genNonce();
+        const nonce = this.genNonce();
 
         this.storage.setItem('nonce', nonce);
 
@@ -378,7 +378,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
             this.storage.setItem('loginFragment', afterLoginUriSegment.replace('#', '').trim());
         }
 
-        let separation = this.discovery.loginUrl.indexOf('?') > -1 ? '&' : '?';
+        const separation = this.discovery.loginUrl.indexOf('?') > -1 ? '&' : '?';
 
         return this.discovery.loginUrl +
             separation +
@@ -396,11 +396,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     composeIframeLoginUrl(): string {
-        let nonce = this.genNonce();
+        const nonce = this.genNonce();
 
         this.storage.setItem('refresh_nonce', nonce);
 
-        let separation = this.discovery.loginUrl.indexOf('?') > -1 ? '&' : '?';
+        const separation = this.discovery.loginUrl.indexOf('?') > -1 ? '&' : '?';
 
         return this.discovery.loginUrl +
             separation +
@@ -516,7 +516,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
     }
 
     removeHashFromSilentIframe() {
-        let iframe: any = document.getElementById('silent_refresh_token_iframe');
+        const iframe = document.getElementById('silent_refresh_token_iframe') as HTMLIFrameElement;
         if (iframe && iframe.contentWindow.location.hash) {
             iframe.contentWindow.location.hash = '';
         }
@@ -525,17 +525,17 @@ export class Oauth2Auth extends AlfrescoApiClient {
     createIframe() {
         const iframe = document.createElement('iframe');
         iframe.id = 'silent_refresh_token_iframe';
-        let loginUrl = this.composeIframeLoginUrl();
+        const loginUrl = this.composeIframeLoginUrl();
         iframe.setAttribute('src', loginUrl);
         iframe.style.display = 'none';
         document.body.appendChild(iframe);
 
         this.iFrameHashListener = () => {
-            let silentRefreshTokenIframe: any = document.getElementById('silent_refresh_token_iframe');
-            let hash = silentRefreshTokenIframe.contentWindow.location.hash;
+            const silentRefreshTokenIframe: any = document.getElementById('silent_refresh_token_iframe');
+            const hash = silentRefreshTokenIframe.contentWindow.location.hash;
             try {
                 this.checkFragment('refresh_nonce', hash);
-            } catch (e) {
+            } catch {
                 this.logOut();
             }
         };
@@ -565,13 +565,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
     grantPasswordLogin(username: string, password: string, resolve: any, reject: any) {
         this.invalidateSession();
 
-        let postBody = {}, pathParams = {}, queryParams = {};
-
-        let headerParams = {
+        const headerParams = {
             'Content-Type': 'application/x-www-form-urlencoded'
         };
 
-        let formParams = {
+        const formParams = {
             username: username,
             password: password,
             grant_type: 'password',
@@ -579,12 +577,12 @@ export class Oauth2Auth extends AlfrescoApiClient {
             client_secret: this.config.oauth2.secret
         };
 
-        let contentTypes = ['application/x-www-form-urlencoded'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/x-www-form-urlencoded'];
+        const accepts = ['application/json'];
 
-        let promise = this.callCustomApi(
+        const promise = this.callCustomApi(
             this.discovery.tokenEndpoint, 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            {}, {}, headerParams, formParams, {},
             contentTypes, accepts
         ).then(
             (data: any) => {
@@ -609,7 +607,7 @@ export class Oauth2Auth extends AlfrescoApiClient {
         this.refreshTokenIntervalPolling = setInterval(async () => {
             try {
                 await this.refreshToken();
-            } catch (e) {
+            } catch {
                 /* continue regardless of error */
             }
         }, this.config.oauth2.refreshTokenTimeout);
@@ -621,28 +619,24 @@ export class Oauth2Auth extends AlfrescoApiClient {
      * Refresh the Token
     */
     refreshToken(): Promise<any> {
-        let postBody = {}, pathParams = {}, queryParams = {}, formParams = {};
-
-        let auth = 'Basic ' + this.universalBtoa(this.config.oauth2.clientId + ':' + this.config.oauth2.secret);
-
-        let headerParams = {
+        const auth = 'Basic ' + this.universalBtoa(this.config.oauth2.clientId + ':' + this.config.oauth2.secret);
+        const headerParams = {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Cache-Control': 'no-cache',
             'Authorization': auth
         };
-
-        formParams = {
+        const formParams = {
             grant_type: 'refresh_token',
             refresh_token: this.authentications.oauth2.refreshToken
         };
 
-        let contentTypes = ['application/x-www-form-urlencoded'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/x-www-form-urlencoded'];
+        const accepts = ['application/json'];
 
-        let promise = new Promise((resolve, reject) => {
+        const promise = new Promise((resolve, reject) => {
             this.callCustomApi(
                 this.discovery.tokenEndpoint, 'POST',
-                pathParams, queryParams, headerParams, formParams, postBody,
+                {}, {}, headerParams, formParams, {},
                 contentTypes, accepts
             ).then(
                 (data: any) => {
@@ -728,14 +722,11 @@ export class Oauth2Auth extends AlfrescoApiClient {
         const id_token = this.getIdToken();
 
         this.invalidateSession();
-
         this.setToken(null, null);
 
-        let separation = this.discovery.logoutUrl.indexOf('?') > -1 ? '&' : '?';
-
-        let redirectLogout = this.config.oauth2.redirectUriLogout || this.config.oauth2.redirectUri;
-
-        let logoutUrl = this.discovery.logoutUrl +
+        const separation = this.discovery.logoutUrl.indexOf('?') > -1 ? '&' : '?';
+        const redirectLogout = this.config.oauth2.redirectUriLogout || this.config.oauth2.redirectUri;
+        const logoutUrl = this.discovery.logoutUrl +
             separation +
             'post_logout_redirect_uri=' +
             encodeURIComponent(redirectLogout) +
@@ -745,7 +736,6 @@ export class Oauth2Auth extends AlfrescoApiClient {
         if (id_token != null && this.config.oauth2.implicitFlow && typeof window !== 'undefined') {
             window.location.href = logoutUrl;
         }
-
     }
 
     invalidateSession() {
