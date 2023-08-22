@@ -29,12 +29,12 @@ export class DateAlfresco extends Date {
             return new Date(dateToConvert);
         }
 
-        let dateLength = 10;
-        let separatorPos = dateToConvert.substring(dateLength).search(/[\+\-]/) + dateLength;
-        let dateStr = separatorPos > dateLength ? dateToConvert.substring(0, separatorPos) : dateToConvert;
-        let tzStr = separatorPos > dateLength ? dateToConvert.substring(separatorPos) : '';
-        let parsedDate = this.parseDateTime(dateStr);
-        let tzOffsetMins = this.parseDateTimeZone(tzStr);
+        const dateLength = 10;
+        const separatorPos = dateToConvert.substring(dateLength).search(/[\+\-]/) + dateLength;
+        const dateStr = separatorPos > dateLength ? dateToConvert.substring(0, separatorPos) : dateToConvert;
+        const tzStr = separatorPos > dateLength ? dateToConvert.substring(separatorPos) : '';
+        const parsedDate = this.parseDateTime(dateStr);
+        const tzOffsetMins = this.parseDateTimeZone(tzStr);
         parsedDate.setTime(parsedDate.getTime() + tzOffsetMins * 60000);
         return parsedDate;
     }
@@ -49,7 +49,7 @@ export class DateAlfresco extends Date {
         // return new Date(str.replace(/T/i, ' '));
 
         // Compatible with Safari 9.1.2
-        let dateParts = dateToConvert.split(/[^0-9]/).map(function (s) {
+        const dateParts = dateToConvert.split(/[^0-9]/).map(function (s) {
             return parseInt(s, 10);
         });
         return new Date(Date.UTC(dateParts[0], dateParts[1] - 1 || 0, dateParts[2] || 1, dateParts[3] || 0, dateParts[4] || 0, dateParts[5] || 0, dateParts[6] || 0));
@@ -61,7 +61,7 @@ export class DateAlfresco extends Date {
      * @returns The number of minutes offset from UTC.
      */
     static parseDateTimeZone(dateToConvert: string): number {
-        let match = /([\+\-])(\d{2}):?(\d{2})?/.exec(dateToConvert);
+        const match = /([\+\-])(\d{2}):?(\d{2})?/.exec(dateToConvert);
         if (match !== null) {
             return (parseInt(match[1] + '1', 10) * -1 * (parseInt(match[2], 10) * 60) + parseInt(match[3] || '0', 10));
         } else {

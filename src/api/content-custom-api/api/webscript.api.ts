@@ -61,16 +61,12 @@ export class WebscriptApi extends BaseApi {
             throw 'Missing param scriptPath in executeWebScript';
         }
 
-        let pathParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json', 'text/html'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json', 'text/html'];
 
         return this.apiClient.callApi(
             '/' + servicePath + '/' + scriptPath, httpMethod,
-            pathParams, scriptArgs, headerParams, formParams, postBody,
+            {}, scriptArgs, {}, {}, postBody,
             contentTypes, accepts, null, contextRoot
         );
     }
