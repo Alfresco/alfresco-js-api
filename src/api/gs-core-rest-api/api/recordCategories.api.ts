@@ -153,33 +153,25 @@ parameter are returned in addition to those specified in the **fields** paramete
     createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<RecordCategoryChildEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
-
         opts = opts || {};
-        let postBody = nodeBodyCreate;
 
-        let pathParams = {
-            'recordCategoryId': recordCategoryId
+        const pathParams = {
+            recordCategoryId
         };
 
-        let queryParams = {
+        const queryParams = {
             'autoRename': opts['autoRename'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json', 'multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/record-categories/{recordCategoryId}/children', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordCategoryChildEntry);
+        return this.post({
+            path: '/record-categories/{recordCategoryId}/children',
+            pathParams,
+            queryParams,
+            bodyParam: nodeBodyCreate,
+            returnType: RecordCategoryChildEntry
+        });
     }
     /**
         * Delete a record category
@@ -193,27 +185,16 @@ parameter are returned in addition to those specified in the **fields** paramete
     deleteRecordCategory(recordCategoryId: string): Promise<any> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'recordCategoryId': recordCategoryId
+        const pathParams = {
+            recordCategoryId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/record-categories/{recordCategoryId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
     /**
@@ -251,33 +232,24 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     getRecordCategory(recordCategoryId: string, opts?: any): Promise<RecordCategoryEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'recordCategoryId': recordCategoryId
+        const pathParams = {
+            recordCategoryId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'relativePath': opts['relativePath'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/record-categories/{recordCategoryId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordCategoryEntry);
+        return this.get({
+            path: '/record-categories/{recordCategoryId}',
+            pathParams,
+            queryParams,
+            returnType: RecordCategoryEntry
+        });
     }
     /**
         * List record category's children
@@ -332,15 +304,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     listRecordCategoryChildren(recordCategoryId: string, opts?: any): Promise<RecordCategoryChildPaging> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'recordCategoryId': recordCategoryId
+        const pathParams = {
+            recordCategoryId
         };
 
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
@@ -350,19 +320,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/record-categories/{recordCategoryId}/children', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordCategoryChildPaging);
+        return this.get({
+            path: '/record-categories/{recordCategoryId}/children',
+            pathParams,
+            queryParams,
+            returnType: RecordCategoryChildPaging
+        });
     }
     /**
         * Update a record category
@@ -413,32 +376,24 @@ parameter are returned in addition to those specified in the **fields** paramete
     updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordCategoryEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
         throwIfNotDefined(recordCategoryBodyUpdate, 'recordCategoryBodyUpdate');
-
         opts = opts || {};
-        let postBody = recordCategoryBodyUpdate;
 
-        let pathParams = {
-            'recordCategoryId': recordCategoryId
+        const pathParams = {
+            recordCategoryId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/record-categories/{recordCategoryId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordCategoryEntry);
+        return this.put({
+            path: '/record-categories/{recordCategoryId}',
+            pathParams,
+            queryParams,
+            bodyParam: recordCategoryBodyUpdate,
+            returnType: RecordCategoryEntry
+        });
     }
 
 }

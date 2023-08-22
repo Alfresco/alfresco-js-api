@@ -116,33 +116,26 @@ parameter are returned in addition to those specified in the **fields** paramete
     createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opts?: any): Promise<RecordCategoryEntry> {
         throwIfNotDefined(filePlanId, 'filePlanId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
-
         opts = opts || {};
-        let postBody = nodeBodyCreate;
 
-        let pathParams = {
-            'filePlanId': filePlanId
+        const pathParams = {
+            filePlanId
         };
 
-        let queryParams = {
+        const queryParams = {
             'autoRename': opts['autoRename'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json', 'multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/file-plans/{filePlanId}/categories', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordCategoryEntry);
+        return this.post({
+            path: '/file-plans/{filePlanId}/categories',
+            pathParams,
+            queryParams,
+            contentTypes: ['application/json', 'multipart/form-data'],
+            bodyParam: nodeBodyCreate,
+            returnType: RecordCategoryEntry
+        });
     }
     /**
         * Get a file plan
@@ -176,32 +169,23 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     getFilePlan(filePlanId: string, opts?: any): Promise<FilePlanEntry> {
         throwIfNotDefined(filePlanId, 'filePlanId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'filePlanId': filePlanId
+        const pathParams = {
+            filePlanId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/file-plans/{filePlanId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FilePlanEntry);
+        return this.get({
+            path: '/file-plans/{filePlanId}',
+            pathParams,
+            queryParams,
+            returnType: FilePlanEntry
+        });
     }
     /**
         * List file plans's children
@@ -241,15 +225,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     getFilePlanCategories(filePlanId: string, opts?: any): Promise<RecordCategoryPaging> {
         throwIfNotDefined(filePlanId, 'filePlanId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'filePlanId': filePlanId
+        const pathParams = {
+            filePlanId
         };
 
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'include': buildCollectionParam(opts['include'], 'csv'),
@@ -257,19 +239,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/file-plans/{filePlanId}/categories', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordCategoryPaging);
+        return this.get({
+            path: '/file-plans/{filePlanId}/categories',
+            pathParams,
+            queryParams,
+            returnType: RecordCategoryPaging
+        });
     }
     /**
         * Update a file plan
@@ -312,32 +287,23 @@ parameter are returned in addition to those specified in the **fields** paramete
     updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: any): Promise<FilePlanEntry> {
         throwIfNotDefined(filePlanId, 'filePlanId');
         throwIfNotDefined(filePlanBodyUpdate, 'filePlanBodyUpdate');
-
         opts = opts || {};
-        let postBody = filePlanBodyUpdate;
 
-        let pathParams = {
-            'filePlanId': filePlanId
+        const pathParams = {
+            filePlanId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/file-plans/{filePlanId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FilePlanEntry);
+        return this.put({
+            path: '/file-plans/{filePlanId}',
+            pathParams,
+            queryParams,
+            bodyParam: filePlanBodyUpdate,
+            returnType: FilePlanEntry
+        });
     }
-
 }
