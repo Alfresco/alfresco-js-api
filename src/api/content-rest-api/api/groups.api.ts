@@ -177,15 +177,32 @@ You must have admin rights to delete a group.
     deleteGroup(groupId: string, opts?: DeleteGroupOpts): Promise<void> {
         throwIfNotDefined(groupId, 'groupId');
 
-        const queryParams = {
-            cascade: opts?.cascade === true
+        opts = opts || {};
+        const postBody: null = null;
+
+        let cascadeDelete = opts['cascade'] ? opts['cascade'] : false;
+
+        const pathParams = {
+            'groupId': groupId
         };
 
-        return this.delete({
-            path:  '/groups/{groupId}',
-            pathParams: { groupId },
-            queryParams
-        });
+        const queryParams = {
+            'cascade': cascadeDelete
+        };
+
+        const headerParams = {
+
+        };
+        const formParams = {
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/groups/{groupId}', 'DELETE',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts );
     }
 /**
     * Delete a group membership
@@ -209,15 +226,28 @@ You must have admin rights to delete a group membership.
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(groupMemberId, 'groupMemberId');
 
+        const postBody: null = null;
+
         const pathParams = {
-            groupId,
-            groupMemberId
+            'groupId': groupId,            'groupMemberId': groupMemberId
         };
 
-        return this.delete({
-            path: '/groups/{groupId}/members/{groupMemberId}',
-            pathParams
-        })
+        const queryParams = {
+        };
+
+        const headerParams = {
+
+        };
+        const formParams = {
+        };
+
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+
+        return this.apiClient.callApi(
+            '/groups/{groupId}/members/{groupMemberId}', 'DELETE',
+            pathParams, queryParams, headerParams, formParams, postBody,
+            contentTypes, accepts );
     }
 
 /**
