@@ -16,18 +16,23 @@
  */
 
 import { NodesApi } from '../../content-rest-api/api/nodes.api';
-import { Emitter } from 'event-emitter';
+import { NodeBodyCreate, NodeEntry, CreateNodeOpts } from '../../content-rest-api';
+
+export interface UploadFileOpts extends CreateNodeOpts {
+    name?: string;
+    renditions?: string;
+}
 
 export class UploadApi extends NodesApi {
 
-    uploadFile(fileDefinition: any, relativePath: string, rootFolderId: string, nodeBody: any, opts?: any): Promise<any | Emitter> {
+    uploadFile(fileDefinition: any, relativePath?: string, rootFolderId?: string, nodeBody?: NodeBodyCreate, opts?: UploadFileOpts): Promise<NodeEntry | any> {
         rootFolderId = rootFolderId || '-root-';
         opts = opts || {};
 
-        let nodeBodyRequired = {
-            'name': fileDefinition.name,
-            'nodeType': 'cm:content',
-            'relativePath': relativePath
+        const nodeBodyRequired = {
+            name: fileDefinition.name,
+            nodeType: 'cm:content',
+            relativePath: relativePath
         };
 
         nodeBody = Object.assign(nodeBodyRequired, nodeBody);

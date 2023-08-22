@@ -16,10 +16,4 @@
  */
 
 export * from './aspects.api';
-import { AspectsApi } from './aspects.api';
 export * from './types.api';
-import { TypesApi } from './types.api';
-export const MODEL_APIS = {
-    AspectsApi: AspectsApi,
-    TypesApi: TypesApi
-};

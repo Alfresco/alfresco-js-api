@@ -15,7 +15,4 @@
  * limitations under the License.
  */
 
-export { DiscoveryApi }  from './discovery.api';
-import { DiscoveryApi } from './discovery.api';
-
-export const DISCOVERY_APIS = { DiscoveryApi: DiscoveryApi };
+export * from './discovery.api';
