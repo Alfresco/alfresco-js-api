@@ -221,236 +221,236 @@ parameter are returned in addition to those specified in the **fields** paramete
             contentTypes, accepts , AssociationEntry);
     }
 /**
-    * Create a node
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+ * Create a node
+ *
+ * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
-Create a node and add it as a primary child of node **nodeId**.
+ Create a node and add it as a primary child of node **nodeId**.
 
-This endpoint supports both JSON and multipart/form-data (file upload).
+ This endpoint supports both JSON and multipart/form-data (file upload).
 
-**Using multipart/form-data**
+ **Using multipart/form-data**
 
-Use the **filedata** field to represent the content to upload, for example, the following curl command will
-create a node with the contents of test.txt in the test user's home folder.
+ Use the **filedata** field to represent the content to upload, for example, the following curl command will
+ create a node with the contents of test.txt in the test user's home folder.
 
-curl -utest:test -X POST host:port/alfresco/api/-default-/public/alfresco/versions/1/nodes/-my-/children -F filedata=@test.txt
+ curl -utest:test -X POST host:port/alfresco/api/-default-/public/alfresco/versions/1/nodes/-my-/children -F filedata=@test.txt
 
-You can use the **name** field to give an alternative name for the new file.
+ You can use the **name** field to give an alternative name for the new file.
 
-You can use the **nodeType** field to create a specific type. The default is cm:content.
+ You can use the **nodeType** field to create a specific type. The default is cm:content.
 
-You can use the **renditions** field to create renditions (e.g. doclib) asynchronously upon upload.
-Also, as requesting rendition is a background process,
-any rendition failure (e.g. No transformer is currently available) will not fail the whole upload and has the potential to silently fail.
+ You can use the **renditions** field to create renditions (e.g. doclib) asynchronously upon upload.
+ Also, as requesting rendition is a background process,
+ any rendition failure (e.g. No transformer is currently available) will not fail the whole upload and has the potential to silently fail.
 
-Use **overwrite** to overwrite an existing file, matched by name. If the file is versionable,
-the existing content is replaced.
+ Use **overwrite** to overwrite an existing file, matched by name. If the file is versionable,
+ the existing content is replaced.
 
-When you overwrite existing content, you can set the **majorVersion** boolean field to **true** to indicate a major version
-should be created. The default for **majorVersion** is **false**.
-Setting  **majorVersion** enables versioning of the node, if it is not already versioned.
+ When you overwrite existing content, you can set the **majorVersion** boolean field to **true** to indicate a major version
+ should be created. The default for **majorVersion** is **false**.
+ Setting  **majorVersion** enables versioning of the node, if it is not already versioned.
 
-When you overwrite existing content, you can use the **comment** field to add a version comment that appears in the
-version history. This also enables versioning of this node, if it is not already versioned.
+ When you overwrite existing content, you can use the **comment** field to add a version comment that appears in the
+ version history. This also enables versioning of this node, if it is not already versioned.
 
-You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then
-the API method tries to create a unique name using an integer suffix.
+ You can set the **autoRename** boolean field to automatically resolve name clashes. If there is a name clash, then
+ the API method tries to create a unique name using an integer suffix.
 
-You can use the **relativePath** field to specify the folder structure to create relative to the node **nodeId**.
-Folders in the **relativePath** that do not exist are created before the node is created.
+ You can use the **relativePath** field to specify the folder structure to create relative to the node **nodeId**.
+ Folders in the **relativePath** that do not exist are created before the node is created.
 
-Any other field provided will be treated as a property to set on the newly created node.
+ Any other field provided will be treated as a property to set on the newly created node.
 
-**Note:** setting properties of type d:content and d:category are not supported.
+ **Note:** setting properties of type d:content and d:category are not supported.
 
-**Using JSON**
+ **Using JSON**
 
-You must specify at least a **name** and **nodeType**. For example, to create a folder:
-JSON
-{
-  \"name\":\"My Folder\",
-  \"nodeType\":\"cm:folder\"
-}
-
-You can create an empty file like this:
-JSON
-{
-  \"name\":\"My text file.txt\",
-  \"nodeType\":\"cm:content\"
-}
-
-You can update binary content using the PUT /nodes/{nodeId} API method.
-
-You can create a folder, or other node, inside a folder hierarchy:
-JSON
-{
-  \"name\":\"My Special Folder\",
-  \"nodeType\":\"cm:folder\",
-  \"relativePath\":\"X/Y/Z\"
-}
-
-The **relativePath** specifies the folder structure to create relative to the node **nodeId**. Folders in the
-**relativePath** that do not exist are created before the node is created.
-
-You can set properties when you create a new node:
-JSON
-{
-  \"name\":\"My Other Folder\",
-  \"nodeType\":\"cm:folder\",
-  \"properties\":
-  {
-    \"cm:title\":\"Folder title\",
-    \"cm:description\":\"This is an important folder\"
-  }
-}
-
-You can set multi-value properties when you create a new node which supports properties of type multiple.
+ You must specify at least a **name** and **nodeType**. For example, to create a folder:
  JSON
-{
-  \"name\":\"My Other Folder\",
-  \"nodeType\":\"custom:destination\",
-  \"properties\":
-  {
-    \"cm:title\":\"Folder title\",
-    \"cm:description\":\"This is an important folder\",
-    \"custom:locations\": [
-                         \"location X\",
-                         \"location Y\"
-                        ]
-  }
-}
+ {
+ \"name\":\"My Folder\",
+ \"nodeType\":\"cm:folder\"
+ }
 
-Any missing aspects are applied automatically. For example, **cm:titled** in the JSON shown above. You can set aspects
-explicitly, if needed, using an **aspectNames** field.
+ You can create an empty file like this:
+ JSON
+ {
+ \"name\":\"My text file.txt\",
+ \"nodeType\":\"cm:content\"
+ }
 
-**Note:** setting properties of type d:content and d:category are not supported.
+ You can update binary content using the PUT /nodes/{nodeId} API method.
 
-You can also optionally disable (or enable) inherited permissions via *isInheritanceEnabled* flag:
-JSON
-{
-  \"permissions\":
-    {
-      \"isInheritanceEnabled\": false,
-      \"locallySet\":
-        [
-          {\"authorityId\": \"GROUP_special\", \"name\": \"Read\", \"accessStatus\":\"DENIED\"},
-          {\"authorityId\": \"testuser\", \"name\": \"Contributor\", \"accessStatus\":\"ALLOWED\"}
-        ]
-    }
-}
+ You can create a folder, or other node, inside a folder hierarchy:
+ JSON
+ {
+ \"name\":\"My Special Folder\",
+ \"nodeType\":\"cm:folder\",
+ \"relativePath\":\"X/Y/Z\"
+ }
 
-Typically, for files and folders, the primary children are created within the parent folder using the default \"cm:contains\" assocType.
-If the content model allows then it is also possible to create primary children with a different assoc type. For example:
-JSON
-{
-  \"name\":\"My Node\",
-  \"nodeType\":\"my:specialNodeType\",
-  \"association\":
-  {
-    \"assocType\":\"my:specialAssocType\"
-  }
-}
+ The **relativePath** specifies the folder structure to create relative to the node **nodeId**. Folders in the
+ **relativePath** that do not exist are created before the node is created.
 
-Additional associations can be added after creating a node. You can also add associations at the time the node is created. This is
-required, for example, if the content model specifies that a node has mandatory associations to one or more existing nodes. You can optionally
-specify an array of **secondaryChildren** to create one or more secondary child associations, such that the newly created node acts as a parent node.
-You can optionally specify an array of **targets** to create one or more peer associations such that the newly created node acts as a source node.
-For example, to associate one or more secondary children at time of creation:
-JSON
-{
-  \"name\":\"My Folder\",
-  \"nodeType\":\"cm:folder\",
-  \"secondaryChildren\":
-    [ {\"childId\":\"abcde-01234-...\", \"assocType\":\"my:specialChildAssocType\"} ]
-}
+ You can set properties when you create a new node:
+ JSON
+ {
+ \"name\":\"My Other Folder\",
+ \"nodeType\":\"cm:folder\",
+ \"properties\":
+ {
+ \"cm:title\":\"Folder title\",
+ \"cm:description\":\"This is an important folder\"
+ }
+ }
 
-For example, to associate one or more targets at time of creation:
-JSON
-{
-  \"name\":\"My Folder\",
-  \"nodeType\":\"cm:folder\",
-  \"targets\":
-    [ {\"targetId\":\"abcde-01234-...\", \"assocType\":\"my:specialPeerAssocType\"} ]
-}
+ You can set multi-value properties when you create a new node which supports properties of type multiple.
+ JSON
+ {
+ \"name\":\"My Other Folder\",
+ \"nodeType\":\"custom:destination\",
+ \"properties\":
+ {
+ \"cm:title\":\"Folder title\",
+ \"cm:description\":\"This is an important folder\",
+ \"custom:locations\": [
+ \"location X\",
+ \"location Y\"
+ ]
+ }
+ }
 
-**Note:** You can create more than one child by
-specifying a list of nodes in the JSON body. For example, the following JSON
-body creates two folders inside the specified **nodeId**, if the **nodeId** identifies
-a folder:
+ Any missing aspects are applied automatically. For example, **cm:titled** in the JSON shown above. You can set aspects
+ explicitly, if needed, using an **aspectNames** field.
 
-JSON
-[
-  {
-    \"name\":\"My Folder 1\",
-    \"nodeType\":\"cm:folder\"
-  },
-  {
-    \"name\":\"My Folder 2\",
-    \"nodeType\":\"cm:folder\"
-  }
-]
+ **Note:** setting properties of type d:content and d:category are not supported.
 
-If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
+ You can also optionally disable (or enable) inherited permissions via *isInheritanceEnabled* flag:
+ JSON
+ {
+ \"permissions\":
+ {
+ \"isInheritanceEnabled\": false,
+ \"locallySet\":
+ [
+ {\"authorityId\": \"GROUP_special\", \"name\": \"Read\", \"accessStatus\":\"DENIED\"},
+ {\"authorityId\": \"testuser\", \"name\": \"Contributor\", \"accessStatus\":\"ALLOWED\"}
+ ]
+ }
+ }
 
-JSON
-{
-  \"list\": {
-    \"pagination\": {
-      \"count\": 2,
-      \"hasMoreItems\": false,
-      \"totalItems\": 2,
-      \"skipCount\": 0,
-      \"maxItems\": 100
-    },
-    \"entries\": [
-      {
-        \"entry\": {
-          ...
-        }
-      },
-      {
-        \"entry\": {
-          ...
-        }
-      }
-    ]
-  }
-}
+ Typically, for files and folders, the primary children are created within the parent folder using the default \"cm:contains\" assocType.
+ If the content model allows then it is also possible to create primary children with a different assoc type. For example:
+ JSON
+ {
+ \"name\":\"My Node\",
+ \"nodeType\":\"my:specialNodeType\",
+ \"association\":
+ {
+ \"assocType\":\"my:specialAssocType\"
+ }
+ }
 
-    *
-    * @param nodeId The identifier of a node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
+ Additional associations can be added after creating a node. You can also add associations at the time the node is created. This is
+ required, for example, if the content model specifies that a node has mandatory associations to one or more existing nodes. You can optionally
+ specify an array of **secondaryChildren** to create one or more secondary child associations, such that the newly created node acts as a parent node.
+ You can optionally specify an array of **targets** to create one or more peer associations such that the newly created node acts as a source node.
+ For example, to associate one or more secondary children at time of creation:
+ JSON
+ {
+ \"name\":\"My Folder\",
+ \"nodeType\":\"cm:folder\",
+ \"secondaryChildren\":
+ [ {\"childId\":\"abcde-01234-...\", \"assocType\":\"my:specialChildAssocType\"} ]
+ }
 
-    * @param nodeBodyCreate The node information to create.
-    * @param opts Optional parameters
-    * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* association
-* isLink
-* isFavorite
-* isLocked
-* path
-* permissions
-* definition
+ For example, to associate one or more targets at time of creation:
+ JSON
+ {
+ \"name\":\"My Folder\",
+ \"nodeType\":\"cm:folder\",
+ \"targets\":
+ [ {\"targetId\":\"abcde-01234-...\", \"assocType\":\"my:specialPeerAssocType\"} ]
+ }
 
-    * @param opts.fields A list of field names.
+ **Note:** You can create more than one child by
+ specifying a list of nodes in the JSON body. For example, the following JSON
+ body creates two folders inside the specified **nodeId**, if the **nodeId** identifies
+ a folder:
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+ JSON
+ [
+ {
+ \"name\":\"My Folder 1\",
+ \"nodeType\":\"cm:folder\"
+ },
+ {
+ \"name\":\"My Folder 2\",
+ \"nodeType\":\"cm:folder\"
+ }
+ ]
 
-The list applies to a returned individual
-entity or entries within a collection.
+ If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
 
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
+ JSON
+ {
+ \"list\": {
+ \"pagination\": {
+ \"count\": 2,
+ \"hasMoreItems\": false,
+ \"totalItems\": 2,
+ \"skipCount\": 0,
+ \"maxItems\": 100
+ },
+ \"entries\": [
+ {
+ \"entry\": {
+ ...
+ }
+ },
+ {
+ \"entry\": {
+ ...
+ }
+ }
+ ]
+ }
+ }
 
-    * @return Promise<NodeEntry>
-    */
+ *
+ * @param nodeId The identifier of a node. You can also use one of these well-known aliases:
+ * -my-
+ * -shared-
+ * -root-
+
+ * @param nodeBodyCreate The node information to create.
+ * @param opts Optional parameters
+ * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
+ * @param opts.include Returns additional information about the node. The following optional fields can be requested:
+ * allowableOperations
+ * association
+ * isLink
+ * isFavorite
+ * isLocked
+ * path
+ * permissions
+ * definition
+
+ * @param opts.fields A list of field names.
+
+ You can use this parameter to restrict the fields
+ returned within a response if, for example, you want to save on overall bandwidth.
+
+ The list applies to a returned individual
+ entity or entries within a collection.
+
+ If the API method also supports the **include**
+ parameter, then the fields specified in the **include**
+ parameter are returned in addition to those specified in the **fields** parameter.
+ * @param formParams
+ * @return Promise<NodeEntry>
+ */
     createNode(nodeId: string, nodeBodyCreate: NodeBodyCreate, opts?: CreateNodeOpts, formParams?: any): Promise<NodeEntry | any> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
@@ -479,12 +479,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType = NodeEntry;
         }
 
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/children', 'POST',
-            pathParams, queryParams, {}, formParams, nodeBodyCreate,
-            contentTypes, accepts, returnType);
+        return this.post({
+            path: '/nodes/{nodeId}/children',
+            pathParams,
+            queryParams,
+            formParams,
+            bodyParam: nodeBodyCreate,
+            contentTypes,
+            returnType
+        });
     }
 
     /**
