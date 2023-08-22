@@ -59,32 +59,23 @@ parameter are returned in addition to those specified in the **fields** paramete
     */
     getTransferContainer(transferContainerId: string, opts?: any): Promise<TransferContainerEntry> {
         throwIfNotDefined(transferContainerId, 'transferContainerId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'transferContainerId': transferContainerId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/transfer-containers/{transferContainerId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TransferContainerEntry);
+        return this.get({
+            path:  '/transfer-containers/{transferContainerId}',
+            pathParams,
+            queryParams,
+            returnType: TransferContainerEntry
+        });
     }
     /**
         * List transfer container's children
@@ -125,15 +116,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     listTransfers(transferContainerId: string, opts?: any): Promise<TransferContainerAssociationPaging> {
         throwIfNotDefined(transferContainerId, 'transferContainerId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'transferContainerId': transferContainerId
         };
 
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'include': buildCollectionParam(opts['include'], 'csv'),
@@ -141,19 +130,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/transfer-containers/{transferContainerId}/transfers', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TransferContainerAssociationPaging);
+        return this.get({
+            path: '/transfer-containers/{transferContainerId}/transfers',
+            pathParams,
+            queryParams,
+            returnType: TransferContainerAssociationPaging
+        });
     }
     /**
         * Update transfer container
@@ -201,32 +183,23 @@ parameter are returned in addition to those specified in the **fields** paramete
     updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: any): Promise<TransferContainerEntry> {
         throwIfNotDefined(transferContainerId, 'transferContainerId');
         throwIfNotDefined(nodeBodyUpdate, 'nodeBodyUpdate');
-
         opts = opts || {};
-        let postBody = nodeBodyUpdate;
 
-        let pathParams = {
+        const pathParams = {
             'transferContainerId': transferContainerId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/transfer-containers/{transferContainerId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TransferContainerEntry);
+        return this.put({
+            path:  '/transfer-containers/{transferContainerId}',
+            pathParams,
+            queryParams,
+            bodyParam: nodeBodyUpdate,
+            returnType: TransferContainerEntry
+        });
     }
-
 }

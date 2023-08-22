@@ -57,32 +57,23 @@ parameter are returned in addition to those specified in the **fields** paramete
     */
     completeRecord(recordId: string, opts?: any): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'recordId': recordId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/records/{recordId}/complete', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordEntry);
+        return this.post({
+            path: '/records/{recordId}/complete',
+            pathParams,
+            queryParams,
+            returnType: RecordEntry
+        });
     }
     /**
         * Delete a record
@@ -96,27 +87,16 @@ parameter are returned in addition to those specified in the **fields** paramete
     deleteRecord(recordId: string): Promise<any> {
         throwIfNotDefined(recordId, 'recordId');
 
-        let postBody = null;
-
-        let pathParams = {
+        const pathParams = {
             'recordId': recordId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/records/{recordId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
     /**
@@ -157,32 +137,24 @@ parameter are returned in addition to those specified in the **fields** paramete
     fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts?: any): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
         throwIfNotDefined(nodeBodyFile, 'nodeBodyFile');
-
         opts = opts || {};
-        let postBody = nodeBodyFile;
 
-        let pathParams = {
-            'recordId': recordId
+        const pathParams = {
+            recordId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/records/{recordId}/file', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordEntry);
+        return this.post({
+            path: '/records/{recordId}/file',
+            pathParams,
+            queryParams,
+            bodyParam: nodeBodyFile,
+            returnType: RecordEntry
+        });
     }
     /**
         * Get a record
@@ -218,32 +190,23 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     getRecord(recordId: string, opts?: any): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'recordId': recordId
+        const pathParams = {
+            recordId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/records/{recordId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordEntry);
+        return this.get({
+            path: '/records/{recordId}',
+            pathParams,
+            queryParams,
+            returnType: RecordEntry
+        });
     }
     /**
         * Get record content
@@ -271,31 +234,26 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     getRecordContent(recordId: string, opts?: any): Promise<any> {
         throwIfNotDefined(recordId, 'recordId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'recordId': recordId
+        const pathParams = {
+            recordId
         };
 
-        let queryParams = {
+        const queryParams = {
             'attachment': opts['attachment']
         };
 
-        let headerParams = {
+        const headerParams = {
             'If-Modified-Since': opts['ifModifiedSince']
         };
-        let formParams = {
-        };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/records/{recordId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/records/{recordId}/content',
+            pathParams,
+            queryParams,
+            headerParams
+        });
     }
     /**
         * Update record
@@ -349,30 +307,22 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(recordBodyUpdate, 'recordBodyUpdate');
 
         opts = opts || {};
-        let postBody = recordBodyUpdate;
 
-        let pathParams = {
-            'recordId': recordId
+        const pathParams = {
+            recordId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/records/{recordId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordEntry);
+        return this.put({
+            path: '/records/{recordId}',
+            pathParams,
+            queryParams,
+            bodyParam: recordBodyUpdate,
+            returnType: RecordEntry
+        });
     }
-
 }

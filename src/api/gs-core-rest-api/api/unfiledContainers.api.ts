@@ -158,30 +158,23 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
 
         opts = opts || {};
-        let postBody = nodeBodyCreate;
 
-        let pathParams = {
+        const pathParams = {
             'unfiledContainerId': unfiledContainerId
         };
 
-        let queryParams = {
+        const queryParams = {
             'autoRename': opts['autoRename'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json', 'multipart/form-data'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json', 'multipart/form-data'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/unfiled-containers/{unfiledContainerId}/children', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, queryParams, {}, {}, nodeBodyCreate,
             contentTypes, accepts, UnfiledContainerAssociationPaging);
     }
     /**
@@ -216,32 +209,23 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     getUnfiledContainer(unfiledContainerId: string, opts?: any): Promise<UnfiledContainerEntry> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'unfiledContainerId': unfiledContainerId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/unfiled-containers/{unfiledContainerId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UnfiledContainerEntry);
+        return this.get({
+            path: '/unfiled-containers/{unfiledContainerId}',
+            pathParams,
+            queryParams,
+            returnType: UnfiledContainerEntry
+        });
     }
     /**
         * List unfiled record container's children
@@ -291,13 +275,12 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
 
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'unfiledContainerId': unfiledContainerId
         };
 
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
@@ -306,19 +289,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/unfiled-containers/{unfiledContainerId}/children', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UnfiledContainerAssociationPaging);
+        return this.get({
+            path: '/unfiled-containers/{unfiledContainerId}/children',
+            pathParams,
+            queryParams,
+            returnType: UnfiledContainerAssociationPaging
+        });
     }
     /**
         * Update an unfiled record container
@@ -366,32 +342,23 @@ parameter are returned in addition to those specified in the **fields** paramete
     updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: any): Promise<UnfiledContainerEntry> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
         throwIfNotDefined(unfiledContainerBodyUpdate, 'unfiledContainerBodyUpdate');
-
         opts = opts || {};
-        let postBody = unfiledContainerBodyUpdate;
 
-        let pathParams = {
+        const pathParams = {
             'unfiledContainerId': unfiledContainerId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/unfiled-containers/{unfiledContainerId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UnfiledContainerEntry);
+        return this.put({
+            path: '/unfiled-containers/{unfiledContainerId}',
+            pathParams,
+            queryParams,
+            bodyParam: unfiledContainerBodyUpdate,
+            returnType: UnfiledContainerEntry
+        });
     }
-
 }
