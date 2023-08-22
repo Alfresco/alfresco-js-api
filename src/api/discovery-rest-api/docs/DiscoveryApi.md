@@ -2,10 +2,9 @@
 
 All URIs are relative to *https://localhost/alfresco/api*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getRepositoryInformation**](DiscoveryApi.md#getRepositoryInformation) | **GET** /discovery | Get repository information
-
+| Method                                                                   | HTTP request       | Description                |
+|--------------------------------------------------------------------------|--------------------|----------------------------|
+| [**getRepositoryInformation**](DiscoveryApi.md#getRepositoryInformation) | **GET** /discovery | Get repository information |
 
 <a name="getRepositoryInformation"></a>
 ## getRepositoryInformation
@@ -17,8 +16,7 @@ Get repository information
 
 Retrieves the capabilities and detailed version information from the repository.
 
-
-### Example
+**Example**
 
 ```javascript
 import { AlfrescoApi, DiscoveryApi} from '@alfresco/js-api';
@@ -29,15 +27,14 @@ const alfrescoApi = new AlfrescoApi({
 
 const discoveryApi = new DiscoveryApi(alfrescoApi);
 
-discoveryApi.getRepositoryInformation().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
+discoveryApi.getRepositoryInformation().then(
+    (data) => {
+      console.log('API called successfully. Returned data: ' + data);
+    }, 
+    (error) => {
+        console.error(error);
+    });
 ```
-
-### Parameters
-This endpoint does not need any parameter.
 
 ### Return type
 
