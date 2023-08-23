@@ -54,31 +54,18 @@ When you create the RM site, the **filePlan** structure is also created includin
     */
     createRMSite(siteBodyCreate: RMSiteBodyCreate, opts?: any): Promise<RMSiteEntry> {
         throwIfNotDefined(siteBodyCreate, 'siteBodyCreate');
-
         opts = opts || {};
-        let postBody = siteBodyCreate;
 
-        let pathParams = {
-
-        };
-
-        let queryParams = {
+        const queryParams = {
             'skipAddToFavorites': opts['skipAddToFavorites']
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/gs-sites', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RMSiteEntry);
+        return this.post({
+            path: '/gs-sites',
+            queryParams,
+            bodyParam: siteBodyCreate,
+            returnType: RMSiteEntry
+        });
     }
     /**
         * Delete the Records Management (RM) site
@@ -89,31 +76,16 @@ When you create the RM site, the **filePlan** structure is also created includin
         *
         * @return Promise<{}>
         */
-    deleteRMSite(): Promise<any> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+    deleteRMSite(): Promise<void> {
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/gs-sites/rm', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            {}, {}, {}, {}, null,
             contentTypes, accepts);
     }
+
     /**
         * Get the Records Management (RM) site
         *
@@ -138,29 +110,16 @@ When you create the RM site, the **filePlan** structure is also created includin
         */
     getRMSite(opts?: any): Promise<RMSiteEntry> {
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-
-        };
-
-        let queryParams = {
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/gs-sites/rm', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RMSiteEntry);
+        return this.get({
+            path: '/gs-sites/rm',
+            queryParams,
+            returnType: RMSiteEntry
+        });
     }
     /**
         * Update the Records Management (RM) site
@@ -189,31 +148,17 @@ When you create the RM site, the **filePlan** structure is also created includin
         */
     updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts?: any): Promise<RMSiteEntry> {
         throwIfNotDefined(siteBodyUpdate, 'siteBodyUpdate');
-
         opts = opts || {};
-        let postBody = siteBodyUpdate;
 
-        let pathParams = {
-
-        };
-
-        let queryParams = {
+        const queryParams = {
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/gs-sites/rm', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RMSiteEntry);
+        return this.put({
+            path: '/gs-sites/rm',
+            queryParams,
+            bodyParam: siteBodyUpdate,
+            returnType: RMSiteEntry
+        });
     }
-
 }

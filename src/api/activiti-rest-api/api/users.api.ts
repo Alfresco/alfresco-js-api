@@ -40,28 +40,15 @@ export class UsersApi extends BaseApi {
         throwIfNotDefined(userId, 'userId');
         throwIfNotDefined(actionRequest, 'actionRequest');
 
-        let postBody = actionRequest;
-
-        let pathParams = {
-            'userId': userId
+        const pathParams = {
+            userId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/users/{userId}', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.post({
+            path: '/api/enterprise/users/{userId}',
+            pathParams,
+            bodyParam: actionRequest
+        });
     }
     /**
         * Stream user profile picture
@@ -86,28 +73,15 @@ export class UsersApi extends BaseApi {
     getUser(userId: number): Promise<UserRepresentation> {
         throwIfNotDefined(userId, 'userId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'userId': userId
+        const pathParams = {
+            userId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/users/{userId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserRepresentation);
+        return this.get({
+            path: '/api/enterprise/users/{userId}',
+            pathParams,
+            returnType: UserRepresentation
+        });
     }
     /**
         * Query users
@@ -127,13 +101,8 @@ export class UsersApi extends BaseApi {
         */
     getUsers(opts?: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-
-        };
-
-        let queryParams = {
+        const queryParams = {
             'filter': opts['filter'],
             'email': opts['email'],
             'externalId': opts['externalId'],
@@ -144,19 +113,11 @@ export class UsersApi extends BaseApi {
             'tenantId': opts['tenantId']
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/users', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationLightUserRepresentation);
+        return this.get({
+            path: '/api/enterprise/users',
+            queryParams,
+            returnType: ResultListDataRepresentationLightUserRepresentation
+        });
     }
     /**
         * Request a password reset
@@ -169,28 +130,10 @@ export class UsersApi extends BaseApi {
     requestPasswordReset(resetPassword: ResetPasswordRepresentation): Promise<any> {
         throwIfNotDefined(resetPassword, 'resetPassword');
 
-        let postBody = resetPassword;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/idm/passwords', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.post({
+            path: '/api/enterprise/idm/passwords',
+            bodyParam: resetPassword
+        });
     }
     /**
         * Update a user
@@ -205,28 +148,15 @@ export class UsersApi extends BaseApi {
         throwIfNotDefined(userId, 'userId');
         throwIfNotDefined(userRequest, 'userRequest');
 
-        let postBody = userRequest;
-
-        let pathParams = {
-            'userId': userId
+        const pathParams = {
+            userId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/users/{userId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserRepresentation);
+        return this.put({
+            path: '/api/enterprise/users/{userId}',
+            pathParams,
+            bodyParam: userRequest,
+            returnType: UserRepresentation
+        });
     }
-
 }

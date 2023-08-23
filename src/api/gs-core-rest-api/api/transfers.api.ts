@@ -60,32 +60,23 @@ parameter are returned in addition to those specified in the **fields** paramete
     */
     getTransfer(transferId: string, opts?: any): Promise<TransferEntry> {
         throwIfNotDefined(transferId, 'transferId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'transferId': transferId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/transfers/{transferId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TransferEntry);
+        return this.get({
+            path:  '/transfers/{transferId}',
+            pathParams,
+            queryParams,
+            returnType: TransferEntry
+        });
     }
     /**
         * List transfer's children
@@ -127,15 +118,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     listTransfersChildren(transferId: string, opts?: any): Promise<TransferAssociationPaging> {
         throwIfNotDefined(transferId, 'transferId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'transferId': transferId
         };
 
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'include': buildCollectionParam(opts['include'], 'csv'),
@@ -143,19 +132,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/transfers/{transferId}/children', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TransferAssociationPaging);
+        return this.get({
+            path: '/transfers/{transferId}/children',
+            pathParams,
+            queryParams,
+            returnType: TransferAssociationPaging
+        });
     }
 
 }

@@ -34,62 +34,40 @@ export class NodeSecurityMarksApi extends BaseApi {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(dataBody, 'dataBody');
 
-        let postBody = dataBody;
-        let pathParams = {
-            nodeId: nodeId
+        const pathParams = {
+            nodeId
         };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
 
-        return this.apiClient.callApi(
-            '/secured-nodes/{nodeId}/securing-marks',
-            'POST',
+        return this.post({
+            path: '/secured-nodes/{nodeId}/securing-marks',
             pathParams,
-            queryParams,
-            headerParams,
-            formParams,
-            postBody,
-            contentTypes,
-            accepts,
-            SecurityMarkPaging
-        );
+            bodyParam: dataBody,
+            returnType: SecurityMarkPaging
+        });
     }
 
     /**
      * Get security marks on a node
      * @param nodeId The key for the node id.
+     * @param opts Optional parameters
      * @param opts.inUse The key for the security mark is in use or not.
      * @return Promise<SecurityMarkPaging>
      */
      getSecurityMarksOnNode(nodeId: string, opts?: any): Promise<SecurityMarkPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
-        let postBody = null;
-        let pathParams = {
-            nodeId: nodeId
+        const pathParams = {
+            nodeId
         };
-        let queryParams = {
+        const queryParams = {
             inUse: opts['inUse'],
         };
-        let headerParams = {};
-        let formParams = {};
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
 
-        return this.apiClient.callApi(
-            '/secured-nodes/{nodeId}/securing-marks',
-            'GET',
+        return this.get({
+            path: '/secured-nodes/{nodeId}/securing-marks',
             pathParams,
             queryParams,
-            headerParams,
-            formParams,
-            postBody,
-            contentTypes,
-            accepts,
-            SecurityMarkPaging
-        );
+            returnType: SecurityMarkPaging
+        });
     }
 }

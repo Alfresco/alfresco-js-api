@@ -79,28 +79,11 @@ JSON
     createDeclassificationExemption(declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry> {
         throwIfNotDefined(declassificationExemption, 'declassificationExemption');
 
-        let postBody = declassificationExemption;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/declassification-exemptions', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, DeclassificationExemptionEntry);
+        return this.post({
+            path: '/declassification-exemptions',
+            bodyParam: declassificationExemption,
+            returnType: DeclassificationExemptionEntry
+        });
     }
     /**
         * Delete a declassification exemption
@@ -113,27 +96,16 @@ JSON
     deleteDeclassificationExemption(declassificationExemptionId: string): Promise<any> {
         throwIfNotDefined(declassificationExemptionId, 'declassificationExemptionId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'declassificationExemptionId': declassificationExemptionId
+        const pathParams = {
+            declassificationExemptionId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/declassification-exemptions/{declassificationExemptionId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
     /**
@@ -148,30 +120,17 @@ JSON
         */
     listDeclassificationExemptions(opts?: any): Promise<DeclassificationExemptionsPaging> {
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-
-        };
-
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems']
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/declassification-exemptions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, DeclassificationExemptionsPaging);
+        return this.get({
+            path: '/declassification-exemptions',
+            queryParams,
+            returnType: DeclassificationExemptionsPaging
+        });
     }
     /**
         * Get declassification exemption information
@@ -184,28 +143,15 @@ JSON
     showDeclassificationExemptionById(declassificationExemptionId: string): Promise<DeclassificationExemptionEntry> {
         throwIfNotDefined(declassificationExemptionId, 'declassificationExemptionId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'declassificationExemptionId': declassificationExemptionId
+        const pathParams = {
+            declassificationExemptionId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/declassification-exemptions/{declassificationExemptionId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, DeclassificationExemptionEntry);
+        return this.get({
+            path: '/declassification-exemptions/{declassificationExemptionId}',
+            pathParams,
+            returnType: DeclassificationExemptionEntry
+        });
     }
     /**
         * Update a declassification exemption
@@ -220,28 +166,15 @@ JSON
         throwIfNotDefined(declassificationExemptionId, 'declassificationExemptionId');
         throwIfNotDefined(declassificationExemption, 'declassificationExemption');
 
-        let postBody = declassificationExemption;
-
-        let pathParams = {
-            'declassificationExemptionId': declassificationExemptionId
+        const pathParams = {
+            declassificationExemptionId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/declassification-exemptions/{declassificationExemptionId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, DeclassificationExemptionEntry);
+        return this.put({
+            path: '/declassification-exemptions/{declassificationExemptionId}',
+            pathParams,
+            bodyParam: declassificationExemption,
+            returnType: DeclassificationExemptionEntry
+        });
     }
-
 }

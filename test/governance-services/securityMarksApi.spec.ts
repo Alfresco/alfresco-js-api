@@ -97,7 +97,7 @@ describe('Security Mark API test', () => {
 
     it('get All Security Marks', async () => {
         securityMarkApiMock.get200GetSecurityMark(securityGroupId);
-        await securityMarksApi.getSecurityMarks(securityGroupId, ['inUse', 0, 10]).then((data) => {
+        await securityMarksApi.getSecurityMarks(securityGroupId).then((data) => {
             expect(data.list.entries.length).to.be.above(0);
         });
     });

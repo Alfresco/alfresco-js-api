@@ -52,28 +52,11 @@ For example using Javascript:
     createTicket(ticketBodyCreate: TicketBody): Promise<TicketEntry> {
         throwIfNotDefined(ticketBodyCreate, 'ticketBodyCreate');
 
-        let postBody = ticketBodyCreate;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/tickets', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TicketEntry);
+        return this.post({
+            path: '/tickets',
+            bodyParam: ticketBodyCreate,
+            returnType: TicketEntry
+        });
     }
 
     /**
@@ -85,29 +68,10 @@ For example using Javascript:
      * @return Promise<TicketEntry>
      */
     getTicket(): Promise<TicketEntry> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/tickets/-me-', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TicketEntry);
+        return this.get({
+            path: '/tickets/-me-',
+            returnType: TicketEntry
+        });
     }
 
     /**
@@ -121,28 +85,12 @@ For example using Javascript:
         * @return Promise<{}>
         */
     deleteTicket(): Promise<any> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/tickets/-me-', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            {}, {}, {}, {}, null,
             contentTypes, accepts);
     }
     /**
@@ -160,29 +108,9 @@ For example using Javascript:
         * @return Promise<ValidTicketEntry>
         */
     validateTicket(): Promise<ValidTicketEntry> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/tickets/-me-', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ValidTicketEntry);
+        return this.get({
+            path: '/tickets/-me-',
+            returnType: ValidTicketEntry
+        });
     }
-
 }

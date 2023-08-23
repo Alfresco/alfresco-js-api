@@ -17,14 +17,19 @@
 
 import { ResultSetPaging } from '../model/resultSetPaging';
 import { SearchRequest } from '../model/searchRequest';
-import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
+import { ApiClient } from '../../../api-clients/api-client';
+import { LegacyHttpClient } from '../../../api-clients/http-client.interface';
 
 /**
 * Search service.
 * @module SearchApi
 */
-export class SearchApi extends BaseApi {
+export class SearchApi extends ApiClient {
+    override get apiClient(): LegacyHttpClient {
+        return this.httpClient ?? this.alfrescoApi.searchClient;
+    }
+
     /**
     * Searches Alfresco
     *
@@ -331,28 +336,10 @@ The example above changes the highlighting prefix and postfix from the
     search(queryBody: SearchRequest): Promise<ResultSetPaging> {
         throwIfNotDefined(queryBody, 'queryBody');
 
-        let postBody = queryBody;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/search', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultSetPaging);
+        return this.post({
+            path: '/search',
+            bodyParam: queryBody,
+            returnType: ResultSetPaging
+        })
     }
-
 }

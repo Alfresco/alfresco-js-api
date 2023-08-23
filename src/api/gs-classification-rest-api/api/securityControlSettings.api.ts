@@ -21,7 +21,7 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Securitycontrolsettings service.
+* SecurityControlSettingsApi service.
 * @module SecurityControlSettingsApi
 */
 export class SecurityControlSettingsApi extends BaseApi {
@@ -38,28 +38,15 @@ export class SecurityControlSettingsApi extends BaseApi {
     getSecurityControlSetting(securityControlSettingKey: string): Promise<SecurityControlSettingEntry> {
         throwIfNotDefined(securityControlSettingKey, 'securityControlSettingKey');
 
-        let postBody = null;
-
-        let pathParams = {
-            'securityControlSettingKey': securityControlSettingKey
+        const pathParams = {
+            securityControlSettingKey
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/security-control-settings/{securityControlSettingKey}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, SecurityControlSettingEntry);
+        return this.get({
+            path: '/security-control-settings/{securityControlSettingKey}',
+            pathParams,
+            returnType: SecurityControlSettingEntry
+        });
     }
     /**
         * Update security control setting value
@@ -76,28 +63,16 @@ export class SecurityControlSettingsApi extends BaseApi {
         throwIfNotDefined(securityControlSettingKey, 'securityControlSettingKey');
         throwIfNotDefined(securityControlSettingValue, 'securityControlSettingValue');
 
-        let postBody = securityControlSettingValue;
-
-        let pathParams = {
-            'securityControlSettingKey': securityControlSettingKey
+        const pathParams = {
+            securityControlSettingKey
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/security-control-settings/{securityControlSettingKey}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, SecurityControlSettingEntry);
+        return this.put({
+            path: '/security-control-settings/{securityControlSettingKey}',
+            pathParams,
+            bodyParam: securityControlSettingValue,
+            returnType: SecurityControlSettingEntry
+        });
     }
 
 }

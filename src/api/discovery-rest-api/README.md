@@ -12,9 +12,9 @@ All URIs are relative to:
 https://localhost/alfresco/api
 ```
 
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-DiscoveryApi | [**getRepositoryInformation**](docs/DiscoveryApi.md#getRepositoryInformation) | **GET** /discovery | Get repository information
+| Class        | Method                                                                        | HTTP request       | Description                |
+|--------------|-------------------------------------------------------------------------------|--------------------|----------------------------|
+| DiscoveryApi | [getRepositoryInformation](docs/DiscoveryApi.md#getRepositoryInformation) | **GET** /discovery | Get repository information |
 
 ## Models
 

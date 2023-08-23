@@ -55,34 +55,24 @@ parameter are returned in addition to those specified in the **fields** paramete
     */
     declareRecord(fileId: string, opts?: any): Promise<RecordEntry> {
         throwIfNotDefined(fileId, 'fileId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'fileId': fileId
         };
 
-        let queryParams = {
+        const queryParams = {
             'hideRecord': opts['hideRecord'],
             'parentId': opts['parentId'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/files/{fileId}/declare', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordEntry);
+        return this.post({
+            path: '/files/{fileId}/declare',
+            pathParams,
+            queryParams,
+            returnType: RecordEntry
+        });
     }
-
 }

@@ -84,7 +84,7 @@ export class ContentAuth extends AlfrescoApiClient {
             password: this.authentications.basicAuth.password
         });
 
-        let promise: any = new Promise<string>((resolve, reject) => {
+        const promise: any = new Promise<string>((resolve, reject) => {
             this.authApi.createTicket(loginRequest)
                 .then((data) => {
                     this.saveUsername(username);
@@ -118,7 +118,7 @@ export class ContentAuth extends AlfrescoApiClient {
     validateTicket(): Promise<string> {
         this.setTicket(this.config.ticketEcm);
 
-        let promise: any = new Promise<string>((resolve, reject) => {
+        const promise: any = new Promise<string>((resolve, reject) => {
             this.authApi.validateTicket().then(
                 (data) => {
                     this.setTicket(data.entry.id);
@@ -146,7 +146,7 @@ export class ContentAuth extends AlfrescoApiClient {
      * */
     logout(): Promise<void> {
         this.saveUsername('');
-        let promise: any = new Promise<void>((resolve, reject) => {
+        const promise: any = new Promise<void>((resolve, reject) => {
             this.authApi.deleteTicket().then(
                 () => {
                     promise.emit('logout');

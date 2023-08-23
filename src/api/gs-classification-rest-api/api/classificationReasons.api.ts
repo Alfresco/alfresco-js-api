@@ -80,28 +80,11 @@ JSON
     createClassificationReason(classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry> {
         throwIfNotDefined(classificationReason, 'classificationReason');
 
-        let postBody = classificationReason;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-reasons', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassificationReasonEntry);
+        return this.post({
+            path: '/classification-reasons',
+            bodyParam: classificationReason,
+            returnType: ClassificationReasonEntry
+        });
     }
     /**
         * Delete a classification reason
@@ -114,27 +97,16 @@ JSON
     deleteClassificationReason(classificationReasonId: string): Promise<any> {
         throwIfNotDefined(classificationReasonId, 'classificationReasonId');
 
-        let postBody = null;
-
-        let pathParams = {
+        const pathParams = {
             'classificationReasonId': classificationReasonId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/classification-reasons/{classificationReasonId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
     /**
@@ -161,31 +133,18 @@ JSON
         */
     listClassificationReasons(opts?: any): Promise<ClassificationReasonsPaging> {
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-
-        };
-
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-reasons', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassificationReasonsPaging);
+        return this.get({
+            path: '/classification-reasons',
+            queryParams,
+            returnType: ClassificationReasonsPaging
+        });
     }
     /**
         * Get classification reason information
@@ -198,28 +157,15 @@ JSON
     showClassificationReasonById(classificationReasonId: string): Promise<ClassificationReasonEntry> {
         throwIfNotDefined(classificationReasonId, 'classificationReasonId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'classificationReasonId': classificationReasonId
+        const pathParams = {
+            classificationReasonId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-reasons/{classificationReasonId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassificationReasonEntry);
+        return this.get({
+            path: '/classification-reasons/{classificationReasonId}',
+            pathParams,
+            returnType: ClassificationReasonEntry
+        });
     }
     /**
         * Update a classification reason
@@ -234,28 +180,15 @@ JSON
         throwIfNotDefined(classificationReasonId, 'classificationReasonId');
         throwIfNotDefined(classificationReason, 'classificationReason');
 
-        let postBody = classificationReason;
-
-        let pathParams = {
-            'classificationReasonId': classificationReasonId
+        const pathParams = {
+            classificationReasonId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-reasons/{classificationReasonId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ClassificationReasonEntry);
+        return this.put({
+            path: '/classification-reasons/{classificationReasonId}',
+            pathParams,
+            bodyParam: classificationReason,
+            returnType: ClassificationReasonEntry
+        });
     }
-
 }

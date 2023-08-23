@@ -34,20 +34,20 @@ export class AuthorityClearanceApi extends BaseApi {
      * @return Promise<AuthorityClearanceGroupPaging>
      */
     getAuthorityClearanceForAuthority(authorityId: string, opts?: any): Promise<AuthorityClearanceGroupPaging> {
-        let body = null;
-        let pathParams = {
-            'authorityId': authorityId
+        const pathParams = {
+            authorityId
         };
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems']
         };
-        let headerParams = {};
-        let formParams = {};
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
 
-        return this.apiClient.callApi('/cleared-authorities/{authorityId}/clearing-marks', 'GET', pathParams, queryParams, headerParams, formParams, body, contentTypes, accepts, AuthorityClearanceGroupPaging);
+        return this.get({
+            path: '/cleared-authorities/{authorityId}/clearing-marks',
+            pathParams,
+            queryParams,
+            returnType: AuthorityClearanceGroupPaging
+        });
     }
 
     /**
@@ -57,28 +57,16 @@ export class AuthorityClearanceApi extends BaseApi {
      * @return Promise<SecurityMarkEntry | SecurityMarkPaging>
      */
     updateAuthorityClearance(authorityId: string, authorityClearance: NodeSecurityMarkBody[]): Promise<SecurityMarkEntry | SecurityMarkPaging> {
-
-        let postBody = authorityClearance;
-        let pathParams = {
-            authorityId: authorityId
+        const pathParams = {
+            authorityId
         };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        return this.apiClient.callApi(
-            '/cleared-authorities/{authorityId}/clearing-marks',
-            'POST',
-            pathParams,
-            queryParams,
-            headerParams,
-            formParams,
-            postBody,
-            contentTypes,
-            accepts,
-            authorityClearance.length === 1 ? SecurityMarkEntry : SecurityMarkPaging
-        );
+        const returnType = authorityClearance.length > 1 ? SecurityMarkPaging : SecurityMarkEntry;
 
+        return this.post({
+            path: '/cleared-authorities/{authorityId}/clearing-marks',
+            pathParams,
+            bodyParam: authorityClearance,
+            returnType
+        });
     }
 }

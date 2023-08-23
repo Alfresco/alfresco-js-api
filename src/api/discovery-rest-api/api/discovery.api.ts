@@ -34,29 +34,9 @@ Retrieves the capabilities and detailed version information from the repository.
     * @return Promise<DiscoveryEntry>
     */
     getRepositoryInformation(): Promise<DiscoveryEntry> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes: string[] = [];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/discovery', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, DiscoveryEntry);
+        return this.get({
+            path: '/discovery',
+            returnType: DiscoveryEntry
+        });
     }
-
 }

@@ -74,6 +74,138 @@ export interface DeleteGroupOpts {
     cascade?: boolean;
 }
 
+export interface GetGroupOpts {
+    /**
+     * Returns additional information about the group. The following optional fields can be requested:
+     * - parentIds
+     * - zones
+     */
+    include?: string[],
+    /**
+     * A list of field names.
+     *
+     * You can use this parameter to restrict the fields
+     * returned within a response if, for example, you want to save on overall bandwidth.
+     *
+     * The list applies to a returned individual
+     * entity or entries within a collection.
+     *
+     * If the API method also supports the **include**
+     * parameter, then the fields specified in the **include**
+     * parameter are returned in addition to those specified in the **fields** parameter.
+     */
+    fields?: string[]
+}
+
+export interface ListGroupMembershipsOpts {
+    /**
+     * The number of entities that exist in the collection before those included in this list.
+     * If not supplied then the default value is 0.
+     */
+    skipCount?: number;
+    /**
+     * The maximum number of items to return in the list.
+     * If not supplied then the default value is 100.
+     */
+    maxItems?: number;
+    /**
+     * A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+     * sort the list by one or more fields.
+     *
+     * Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
+     * above to check if any fields used in this method have a descending default search order.
+     *
+     * To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field
+     */
+    orderBy?: string[];
+    // A string to restrict the returned objects by using a predicate.
+    where?: string;
+    /**
+     * A list of field names.
+     *
+     * You can use this parameter to restrict the fields
+     * returned within a response if, for example, you want to save on overall bandwidth.
+     *
+     * The list applies to a returned individual
+     * entity or entries within a collection.
+     *
+     * If the API method also supports the **include**
+     * parameter, then the fields specified in the **include**
+     * parameter are returned in addition to those specified in the **fields** parameter.
+     */
+    fields?: string[];
+}
+
+export interface UpdateGroupOpts {
+    /**
+     * Returns additional information about the group. The following optional fields can be requested:
+     * - parentIds
+     * - zones
+     */
+    include?: string[];
+    /**
+     * A list of field names.
+     *
+     * You can use this parameter to restrict the fields
+     * returned within a response if, for example, you want to save on overall bandwidth.
+     *
+     * The list applies to a returned individual
+     * entity or entries within a collection.
+     *
+     * If the API method also supports the **include**
+     * parameter, then the fields specified in the **include**
+     * parameter are returned in addition to those specified in the **fields** parameter.
+     */
+    fields?: string[];
+}
+
+export interface GroupPagingOpts {
+    /**
+     * The number of entities that exist in the collection before those included in this list.
+     * If not supplied then the default value is 0.
+     */
+    skipCount?: number;
+    /**
+     * The maximum number of items to return in the list.
+     * If not supplied then the default value is 100.
+     */
+    maxItems?: number;
+    /**
+     * A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+     * sort the list by one or more fields.
+     *
+     * Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
+     * above to check if any fields used in this method have a descending default search order.
+     *
+     * To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
+     */
+    orderBy?: string[];
+    /**
+     * Returns additional information about the group. The following optional fields can be requested:
+     * - parentIds
+     * - zones
+     */
+    include?: string[];
+    /**
+     * A string to restrict the returned objects by using a predicate.
+     */
+    where?: string;
+    /**
+     * A list of field names.
+     *
+     * You can use this parameter to restrict the fields
+     * returned within a response if, for example, you want to save on overall bandwidth.
+     *
+     * The list applies to a returned individual
+     * entity or entries within a collection.
+     *
+     * If the API method also supports the **include**
+     * parameter, then the fields specified in the **include**
+     * parameter are returned in addition to those specified in the **fields** parameter.
+     */
+    fields?: string[];
+}
+
 /**
 * Groups service.
 * @module GroupsApi
@@ -176,11 +308,9 @@ You must have admin rights to delete a group.
     */
     deleteGroup(groupId: string, opts?: DeleteGroupOpts): Promise<void> {
         throwIfNotDefined(groupId, 'groupId');
-
         opts = opts || {};
-        const postBody: null = null;
 
-        let cascadeDelete = opts['cascade'] ? opts['cascade'] : false;
+        const cascadeDelete = opts['cascade'] ? opts['cascade'] : false;
 
         const pathParams = {
             'groupId': groupId
@@ -190,18 +320,12 @@ You must have admin rights to delete a group.
             'cascade': cascadeDelete
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
         const contentTypes = ['application/json'];
         const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/groups/{groupId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, queryParams, {}, {}, null,
             contentTypes, accepts );
     }
 /**
@@ -226,19 +350,9 @@ You must have admin rights to delete a group membership.
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(groupMemberId, 'groupMemberId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'groupId': groupId,            'groupMemberId': groupMemberId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            groupId,
+            groupMemberId
         };
 
         const contentTypes = ['application/json'];
@@ -246,7 +360,7 @@ You must have admin rights to delete a group membership.
 
         return this.apiClient.callApi(
             '/groups/{groupId}/members/{groupMemberId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts );
     }
 
@@ -262,53 +376,26 @@ You can use the **include** parameter to return additional information.
     *
     * @param groupId The identifier of a group.
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the group. The following optional fields can be requested:
-* parentIds
-* zones
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<GroupEntry>
     */
-    getGroup(groupId: string, opts?: any): Promise<GroupEntry> {
-
+    getGroup(groupId: string, opts?: GetGroupOpts): Promise<GroupEntry> {
         throwIfNotDefined(groupId, 'groupId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'groupId': groupId
+            groupId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/groups/{groupId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , GroupEntry);
+        return this.get({
+            path: '/groups/{groupId}',
+            pathParams,
+            queryParams,
+            returnType: GroupEntry
+        });
     }
 /**
     * List memberships of a group
@@ -332,67 +419,29 @@ You can override the default by using the **orderBy** parameter. You can specify
     *
     * @param groupId The identifier of a group.
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-sort the list by one or more fields.
-
-Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-above to check if any fields used in this method have a descending default search order.
-
-To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-    * @param opts.where A string to restrict the returned objects by using a predicate.
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<GroupMemberPaging>
     */
-    listGroupMemberships(groupId: string, opts?: any): Promise<GroupMemberPaging> {
-
+    listGroupMemberships(groupId: string, opts?: ListGroupMembershipsOpts): Promise<GroupMemberPaging> {
         throwIfNotDefined(groupId, 'groupId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'groupId': groupId
+            groupId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'where': opts['where'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            where: opts?.where,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/groups/{groupId}/members', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , GroupMemberPaging);
+        return this.get({
+            path: '/groups/{groupId}/members',
+            pathParams,
+            queryParams,
+            returnType: GroupMemberPaging
+        });
     }
 /**
     * List group memberships
@@ -466,39 +515,28 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<GroupPaging>
     */
-    listGroupMembershipsForPerson(personId: string, opts?: any): Promise<GroupPaging> {
-
+    listGroupMembershipsForPerson(personId: string, opts?: GroupPagingOpts): Promise<GroupPaging> {
         throwIfNotDefined(personId, 'personId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'where': opts['where'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            include: buildCollectionParam(opts?.include, 'csv'),
+            where: opts?.where,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/groups', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , GroupPaging);
+        return this.get({
+            path: '/people/{personId}/groups',
+            pathParams,
+            queryParams,
+            returnType: GroupPaging
+        });
     }
 /**
     * List groups
@@ -536,70 +574,23 @@ You can override the default by using the **orderBy** parameter. You can specify
 
     *
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-sort the list by one or more fields.
-
-Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-above to check if any fields used in this method have a descending default search order.
-
-To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-    * @param opts.include Returns additional information about the group. The following optional fields can be requested:
-* parentIds
-* zones
-
-    * @param opts.where A string to restrict the returned objects by using a predicate.
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<GroupPaging>
     */
-    listGroups(opts?: any): Promise<GroupPaging> {
-
-        opts = opts || {};
-        const postBody: null = null;
-
-        const pathParams = {
-
-        };
-
+    listGroups(opts?: GroupPagingOpts): Promise<GroupPaging> {
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'where': opts['where'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            include: buildCollectionParam(opts?.include, 'csv'),
+            where: opts?.where,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/groups', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , GroupPaging);
+        return this.get({
+            path: '/groups',
+            queryParams,
+            returnType: GroupPaging
+        });
     }
 /**
     * Update group details
@@ -614,54 +605,27 @@ You must have admin rights to update a group.
     * @param groupId The identifier of a group.
     * @param groupBodyUpdate The group information to update.
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the group. The following optional fields can be requested:
-* parentIds
-* zones
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<GroupEntry>
     */
-    updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts?: any): Promise<GroupEntry> {
-
+    updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts?: UpdateGroupOpts): Promise<GroupEntry> {
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(groupBodyUpdate, 'groupBodyUpdate');
 
-        opts = opts || {};
-        const postBody = groupBodyUpdate;
-
         const pathParams = {
-            'groupId': groupId
+            groupId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/groups/{groupId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , GroupEntry);
+        return this.put({
+            path: '/groups/{groupId}',
+            pathParams,
+            queryParams,
+            bodyParam: groupBodyUpdate,
+            returnType: GroupEntry
+        });
     }
-
 }

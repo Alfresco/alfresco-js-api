@@ -27,106 +27,90 @@ import { SecurityGroupEntry } from '../model/securityGroupEntry';
 export class SecurityGroupsApi extends BaseApi {
     /**
      * Get All security groups
+     * @param opts Optional parameters
      * @param opts.include Additional information about the security group
      * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
      * @param opts.maxItems The maximum number of items to return in the list.
      * @return Promise<SecurityGroupPaging>
      */
     getSecurityGroups(opts?: any): Promise<SecurityGroupPaging> {
-        let postBody = null;
-        let pathParams = {};
-        let queryParams = {
+        const queryParams = {
             'include': opts['include'],
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems']
         };
-        let headerParams = {};
-        let formParams = {};
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        return this.apiClient.callApi('/security-groups', 'GET', pathParams, queryParams, headerParams, formParams, postBody, contentTypes, accepts, SecurityGroupPaging);
+
+        return this.get({
+            path: '/security-groups',
+            queryParams,
+            returnType: SecurityGroupPaging
+        });
     }
 
     /**
      * Create security group
      * @param securityGroupBody securityGroupBody.
-     * @param include additional information about the security group
+     * @param opts Optional parameters
+     * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
     createSecurityGroup(securityGroupBody: SecurityGroupBody, opts?: any): Promise<SecurityGroupEntry> {
-        let postBody = securityGroupBody;
-        let pathParams = {};
-        let queryParams = {
+        const queryParams = {
             'include': opts['include'],
         };
-        let headerParams = {};
-        let formParams = {};
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        return this.apiClient.callApi('/security-groups', 'POST', pathParams, queryParams, headerParams, formParams, postBody, contentTypes, accepts, SecurityGroupEntry);
+
+        return this.post({
+            path: '/security-groups',
+            queryParams,
+            bodyParam: securityGroupBody,
+            returnType: SecurityGroupEntry
+        });
     }
     /**
      * Get a security groups information
      * @param securityGroupId The Key of Security Group id for which info is required
+     * @param opts Optional parameters
      * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
     getSecurityGroupInfo(securityGroupId: string, opts?: any): Promise<SecurityGroupEntry> {
-        let postBody = null;
-        let pathParams = {
-            'securityGroupId': securityGroupId,
+        const pathParams = {
+            securityGroupId,
         };
-        let queryParams = {
+        const queryParams = {
             'include': opts['include'],
         };
-        let headerParams = {};
-        let formParams = {};
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        return this.apiClient.callApi(
-            '/security-groups/{securityGroupId}',
-            'GET',
+
+        return this.get({
+            path: '/security-groups/{securityGroupId}',
             pathParams,
             queryParams,
-            headerParams,
-            formParams,
-            postBody,
-            contentTypes,
-            accepts,
-            SecurityGroupEntry
-        );
+            returnType: SecurityGroupEntry
+        });
     }
     /**
      * Update a security groups information
      * @param securityGroupId The Key of Security Group id for which info is required
      * @param securityGroupBody SecurityGroupBody
+     * @param opts Optional parameters
      * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
     updateSecurityGroup(securityGroupId: string, securityGroupBody: SecurityGroupBody, opts?: any): Promise<SecurityGroupEntry> {
-        let postBody = securityGroupBody;
-        let pathParams = {
-            securityGroupId: securityGroupId,
+        const pathParams = {
+            securityGroupId,
         };
-        let queryParams = {
+        const queryParams = {
             'include': opts['include'],
         };
-        let headerParams = {};
-        let formParams = {};
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        return this.apiClient.callApi(
-            '/security-groups/{securityGroupId}',
-            'PUT',
+
+        return this.put({
+            path: '/security-groups/{securityGroupId}',
             pathParams,
             queryParams,
-            headerParams,
-            formParams,
-            postBody,
-            contentTypes,
-            accepts,
-            SecurityGroupEntry
-        );
+            bodyParam: securityGroupBody,
+            returnType: SecurityGroupEntry
+        });
     }
 
     /**
@@ -135,15 +119,9 @@ export class SecurityGroupsApi extends BaseApi {
      * @return Promise<SecurityMarkEntry>
      */
     deleteSecurityGroup(securityGroupId: string): Promise<any> {
-        let postBody = null;
-        let pathParams = {
-            'securityGroupId': securityGroupId,
-        };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        return this.apiClient.callApi('/security-groups/{securityGroupId}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, contentTypes, accepts);
+        const pathParams = { securityGroupId };
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
+        return this.apiClient.callApi('/security-groups/{securityGroupId}', 'DELETE', pathParams, {}, {}, {}, null, contentTypes, accepts);
     }
 }

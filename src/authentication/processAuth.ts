@@ -87,31 +87,29 @@ export class ProcessAuth extends AlfrescoApiClient {
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
-        let postBody = {}, pathParams = {}, queryParams = {};
-
-        let headerParams = {
+        const headerParams = {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Cache-Control': 'no-cache'
         };
-        let formParams = {
+        const formParams = {
             j_username:  this.authentications.basicAuth.username,
             j_password:  this.authentications.basicAuth.password,
             _spring_security_remember_me: true,
             submit: 'Login'
         };
 
-        let contentTypes = ['application/x-www-form-urlencoded'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/x-www-form-urlencoded'];
+        const accepts = ['application/json'];
 
-        let promise: any = new Promise<string>((resolve, reject) => {
+        const promise: any = new Promise<string>((resolve, reject) => {
             this.callApi(
                 '/app/authentication', 'POST',
-                pathParams, queryParams, headerParams, formParams, postBody,
+                {}, {}, headerParams, formParams, {},
                 contentTypes, accepts
             ).then(
                 () => {
                     this.saveUsername(username);
-                    let ticket = this.basicAuth( this.authentications.basicAuth.username,  this.authentications.basicAuth.password);
+                    const ticket = this.basicAuth( this.authentications.basicAuth.username,  this.authentications.basicAuth.password);
                     this.setTicket(ticket);
                     promise.emit('success');
                     this.emit('logged-in');
@@ -141,15 +139,14 @@ export class ProcessAuth extends AlfrescoApiClient {
      * */
     logout(): Promise<void> {
         this.saveUsername('');
-        let postBody = {}, pathParams = {}, queryParams = {}, headerParams = {}, formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
-        let promise: any = new Promise<void>((resolve, reject) => {
+        const promise: any = new Promise<void>((resolve, reject) => {
             this.callApi(
                 '/app/logout', 'GET',
-                pathParams, queryParams, headerParams, formParams, postBody,
+                {}, {}, {}, {}, {},
                 contentTypes, accepts
             ).then(
                 () => {

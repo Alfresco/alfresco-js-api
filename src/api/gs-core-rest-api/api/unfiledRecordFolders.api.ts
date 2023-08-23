@@ -156,33 +156,26 @@ parameter are returned in addition to those specified in the **fields** paramete
     createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<UnfiledRecordFolderAssociationPaging> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
-
         opts = opts || {};
-        let postBody = nodeBodyCreate;
 
-        let pathParams = {
+        const pathParams = {
             'unfiledRecordFolderId': unfiledRecordFolderId
         };
 
-        let queryParams = {
+        const queryParams = {
             'autoRename': opts['autoRename'],
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json', 'multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UnfiledRecordFolderAssociationPaging);
+        return this.post({
+            path: '/unfiled-record-folders/{unfiledRecordFolderId}/children',
+            pathParams,
+            queryParams,
+            bodyParam: nodeBodyCreate,
+            contentTypes: ['application/json', 'multipart/form-data'],
+            returnType: UnfiledRecordFolderAssociationPaging
+        });
     }
     /**
         * Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
@@ -196,27 +189,16 @@ parameter are returned in addition to those specified in the **fields** paramete
     deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<any> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
 
-        let postBody = null;
-
-        let pathParams = {
+        const pathParams = {
             'unfiledRecordFolderId': unfiledRecordFolderId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/unfiled-record-folders/{unfiledRecordFolderId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
     /**
@@ -253,33 +235,24 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderEntry> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'unfiledRecordFolderId': unfiledRecordFolderId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'relativePath': opts['relativePath'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/unfiled-record-folders/{unfiledRecordFolderId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UnfiledRecordFolderEntry);
+        return this.get({
+            path: '/unfiled-record-folders/{unfiledRecordFolderId}',
+            pathParams,
+            queryParams,
+            returnType: UnfiledRecordFolderEntry
+        });
     }
     /**
         * List unfiled record folder's children
@@ -329,15 +302,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderAssociationPaging> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'unfiledRecordFolderId': unfiledRecordFolderId
         };
 
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
@@ -347,19 +318,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/unfiled-record-folders/{unfiledRecordFolderId}/children', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UnfiledRecordFolderAssociationPaging);
+        return this.get({
+            path: '/unfiled-record-folders/{unfiledRecordFolderId}/children',
+            pathParams,
+            queryParams,
+            returnType: UnfiledRecordFolderAssociationPaging
+        });
     }
     /**
         * Update an unfiled record folder
@@ -410,33 +374,24 @@ parameter are returned in addition to those specified in the **fields** paramete
     updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: any): Promise<UnfiledRecordFolderEntry> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         throwIfNotDefined(unfiledRecordFolderBodyUpdate, 'unfiledRecordFolderBodyUpdate');
-
         opts = opts || {};
-        let postBody = unfiledRecordFolderBodyUpdate;
 
-        let pathParams = {
+        const pathParams = {
             'unfiledRecordFolderId': unfiledRecordFolderId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'includeSource': opts['includeSource'],
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/unfiled-record-folders/{unfiledRecordFolderId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UnfiledRecordFolderEntry);
+        return this.put({
+            path: '/unfiled-record-folders/{unfiledRecordFolderId}',
+            pathParams,
+            queryParams,
+            bodyParam: unfiledRecordFolderBodyUpdate,
+            returnType: UnfiledRecordFolderEntry
+        });
     }
-
 }

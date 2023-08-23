@@ -25,7 +25,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Recordfolders service.
+* Record Folders service.
 * @module RecordFoldersApi
 */
 export class RecordFoldersApi extends BaseApi {
@@ -146,32 +146,24 @@ parameter are returned in addition to those specified in the **fields** paramete
     createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: any): Promise<RecordEntry> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
         throwIfNotDefined(recordBodyCreate, 'recordBodyCreate');
-
         opts = opts || {};
-        let postBody = recordBodyCreate;
 
-        let pathParams = {
-            'recordFolderId': recordFolderId
+        const pathParams = {
+            recordFolderId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json', 'multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/record-folders/{recordFolderId}/records', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.post({
+            path: '/record-folders/{recordFolderId}/records',
+            pathParams,
+            queryParams,
+            bodyParam: recordBodyCreate,
+            returnType: RecordEntry
+        });
     }
     /**
         * Delete a record folder
@@ -185,27 +177,16 @@ parameter are returned in addition to those specified in the **fields** paramete
     deleteRecordFolder(recordFolderId: string): Promise<any> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
 
-        let postBody = null;
-
-        let pathParams = {
+        const pathParams = {
             'recordFolderId': recordFolderId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/record-folders/{recordFolderId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
     /**
@@ -241,32 +222,23 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     getRecordFolder(recordFolderId: string, opts?: any): Promise<RecordFolderEntry> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'recordFolderId': recordFolderId
+        const pathParams = {
+            recordFolderId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/record-folders/{recordFolderId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordFolderEntry);
+        return this.get({
+            path: '/record-folders/{recordFolderId}',
+            pathParams,
+            queryParams,
+            returnType: RecordFolderEntry
+        });
     }
     /**
         * List records
@@ -318,15 +290,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     listRecordFolderChildren(recordFolderId: string, opts?: any): Promise<RecordFolderAssociationPaging> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
-
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'recordFolderId': recordFolderId
+        const pathParams = {
+            recordFolderId
         };
 
-        let queryParams = {
+        const queryParams = {
             'skipCount': opts['skipCount'],
             'maxItems': opts['maxItems'],
             'where': opts['where'],
@@ -335,19 +305,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/record-folders/{recordFolderId}/records', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordFolderAssociationPaging);
+        return this.get({
+            path: '/record-folders/{recordFolderId}/records',
+            pathParams,
+            queryParams,
+            returnType: RecordFolderAssociationPaging
+        });
     }
     /**
         * Update a record folder
@@ -398,32 +361,23 @@ parameter are returned in addition to those specified in the **fields** paramete
     updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordFolderEntry> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
         throwIfNotDefined(recordFolderBodyUpdate, 'recordFolderBodyUpdate');
-
         opts = opts || {};
-        let postBody = recordFolderBodyUpdate;
 
-        let pathParams = {
+        const pathParams = {
             'recordFolderId': recordFolderId
         };
 
-        let queryParams = {
+        const queryParams = {
             'include': buildCollectionParam(opts['include'], 'csv'),
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/record-folders/{recordFolderId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RecordFolderEntry);
+        return this.put({
+            path: '/record-folders/{recordFolderId}',
+            pathParams,
+            queryParams,
+            bodyParam: recordFolderBodyUpdate,
+            returnType: RecordFolderEntry
+        });
     }
-
 }
