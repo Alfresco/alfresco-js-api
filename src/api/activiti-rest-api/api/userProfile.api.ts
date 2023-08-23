@@ -37,28 +37,10 @@ export class UserProfileApi extends BaseApi {
     changePassword(changePasswordRepresentation: ChangePasswordRepresentation): Promise<any> {
         throwIfNotDefined(changePasswordRepresentation, 'changePasswordRepresentation');
 
-        let postBody = changePasswordRepresentation;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/profile-password', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.post({
+            path: '/api/enterprise/profile-password',
+            bodyParam: changePasswordRepresentation
+        });
     }
     /**
         * Retrieve user profile picture
@@ -68,29 +50,10 @@ export class UserProfileApi extends BaseApi {
         * @return Promise<Blob>
         */
     getProfilePicture(): Promise<any> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json', '*/*'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/profile-picture', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path:  '/api/enterprise/profile-picture',
+            accepts: ['application/json', '*/*']
+        });
     }
 
     /**
@@ -109,29 +72,10 @@ export class UserProfileApi extends BaseApi {
         * @return Promise<UserRepresentation>
         */
     getProfile(): Promise<UserRepresentation> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/profile', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserRepresentation);
+        return this.get({
+            path: '/api/enterprise/profile',
+            returnType: UserRepresentation
+        });
     }
     /**
         * Update user profile
@@ -144,28 +88,11 @@ export class UserProfileApi extends BaseApi {
     updateProfile(userRepresentation: UserRepresentation): Promise<UserRepresentation> {
         throwIfNotDefined(userRepresentation, 'userRepresentation');
 
-        let postBody = userRepresentation;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/profile', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserRepresentation);
+        return this.post({
+            path: '/api/enterprise/profile',
+            bodyParam: userRepresentation,
+            returnType: UserRepresentation
+        });
     }
     /**
         * Change user profile picture
@@ -178,29 +105,15 @@ export class UserProfileApi extends BaseApi {
     uploadProfilePicture(file: any): Promise<ImageUploadRepresentation> {
         throwIfNotDefined(file, 'file');
 
-        let postBody = null;
-
-        let pathParams = {
-
+        const formParams = {
+            file
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-            'file': file
-        };
-
-        let contentTypes = ['multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/profile-picture', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ImageUploadRepresentation);
+        return this.post({
+            path: '/api/enterprise/profile-picture',
+            formParams,
+            returnType:ImageUploadRepresentation
+        });
     }
 
 }
