@@ -17,29 +17,18 @@
 
 import { BaseApi } from './base.api';
 
+/**
+ * Temporary service.
+ * @module api/TemporaryApi
+ * @version 1.4.0
+ */
 export class TemporaryApi extends BaseApi {
-
-    /**
-     * Temporary service.
-     * @module api/TemporaryApi
-     * @version 1.4.0
-     */
-
-    /**
-     * Function to receive the result of the completeTasks operation.
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
-
     /**
      * completeTasks
      * @param {Integer} userId userId
      * @param {String} processDefinitionKey processDefinitionKey
      */
     completeTasks(userId: number, processDefinitionKey: string) {
-        let postBody = null;
-
         // verify the required parameter 'userId' is set
         if (userId === undefined || userId === null) {
             throw "Missing param 'userId' in completeTasks";
@@ -50,30 +39,16 @@ export class TemporaryApi extends BaseApi {
             throw "Missing param 'processDefinitionKey' in completeTasks";
         }
 
-        let pathParams = {};
-        let queryParams = {
-            'userId': userId,
-            'processDefinitionKey': processDefinitionKey
+        const queryParams = {
+            userId,
+            processDefinitionKey
         };
-        let headerParams = {};
-        let formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/temporary/generate-report-data/complete-tasks', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.get({
+            path: '/api/enterprise/temporary/generate-report-data/complete-tasks',
+            queryParams
+        });
     }
-
-    /**
-     * Function to receive the result of the generateData operation.
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * generateData
@@ -81,8 +56,6 @@ export class TemporaryApi extends BaseApi {
      * @param {String} processDefinitionKey processDefinitionKey
      */
     generateData(userId: number, processDefinitionKey: string) {
-        let postBody = null;
-
         // verify the required parameter 'userId' is set
         if (userId === undefined || userId === null) {
             throw "Missing param 'userId' in generateData";
@@ -93,22 +66,15 @@ export class TemporaryApi extends BaseApi {
             throw "Missing param 'processDefinitionKey' in generateData";
         }
 
-        let pathParams = {};
-        let queryParams = {
-            'userId': userId,
-            'processDefinitionKey': processDefinitionKey
+        const queryParams = {
+            userId,
+            processDefinitionKey
         };
-        let headerParams = {};
-        let formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/temporary/generate-report-data/start-process', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.get({
+            path: '/api/enterprise/temporary/generate-report-data/start-process',
+            queryParams
+        });
     }
 
     /**
@@ -117,26 +83,10 @@ export class TemporaryApi extends BaseApi {
      * @param {module:model/ArrayNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
-
-    /**
-     * getHeaders
-     */
     getHeaders() {
-        let postBody = null;
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/temporary/example-headers', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.get({
+            path: '/api/enterprise/temporary/example-headers'
+        });
     }
 
     /**
@@ -145,25 +95,9 @@ export class TemporaryApi extends BaseApi {
      * @param {module:model/ArrayNode} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
-
-    /**
-     * getOptions
-     */
     getOptions() {
-        let postBody = null;
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/temporary/example-options', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.get({
+            path: '/api/enterprise/temporary/example-options'
+        });
     }
 }
