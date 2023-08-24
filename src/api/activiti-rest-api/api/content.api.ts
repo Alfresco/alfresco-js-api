@@ -19,6 +19,7 @@ import { RelatedContentRepresentation } from '../model/relatedContentRepresentat
 import { ResultListDataRepresentationRelatedContentRepresentation } from '../model/resultListDataRepresentationRelatedContentRepresentation';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
+import { RelatedProcessTask } from '../model/relatedProcessTask';
 
 /**
  * Content service.
@@ -372,6 +373,22 @@ export class ContentApi extends BaseApi {
             '/api/enterprise/tasks/{taskId}/content', 'GET',
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts, ResultListDataRepresentationRelatedContentRepresentation);
+    }
+
+    /**
+     * Lists processes and tasks on workflow started with provided document
+     *
+     * @param content content that workflow was started with
+     * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
+     */
+     getProcessesAndTasksOnContent(content: RelatedContentRepresentation): Promise<RelatedProcessTask[]> {
+        throwIfNotDefined(content, 'content');
+
+        return this.get({
+            path: '/api/enterprise/content/document-details',
+            queryParams: content,
+            returnType: RelatedProcessTask
+        });
     }
 
 }
