@@ -24,14 +24,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Taskforms service.
+* TaskFormsApi service.
 * @module TaskformsApi
 */
 export class TaskFormsApi extends BaseApi {
     /**
     * Complete a task form
-    *
-    *
     *
     * @param taskId taskId
     * @param completeTaskFormRepresentation completeTaskFormRepresentation
@@ -41,62 +39,35 @@ export class TaskFormsApi extends BaseApi {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(completeTaskFormRepresentation, 'completeTaskFormRepresentation');
 
-        let postBody = completeTaskFormRepresentation;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/task-forms/{taskId}', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.post({
+            path: '/api/enterprise/task-forms/{taskId}',
+            pathParams,
+            bodyParam: completeTaskFormRepresentation
+        });
     }
+
     /**
-        * Get task variables
-        *
-        *
-        *
-        * @param taskId taskId
-        * @return Promise<ProcessInstanceVariableRepresentation>
-        */
+    * Get task variables
+    *
+    * @param taskId taskId
+    * @return Promise<ProcessInstanceVariableRepresentation>
+    */
     getProcessInstanceVariables(taskId: string): Promise<ProcessInstanceVariableRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/task-forms/{taskId}/variables', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceVariableRepresentation);
+        return this.get({
+            path: '/api/enterprise/task-forms/{taskId}/variables',
+            pathParams,
+            returnType: ProcessInstanceVariableRepresentation
+        });
     }
 
     /**
@@ -107,8 +78,6 @@ export class TaskFormsApi extends BaseApi {
      * @param {String} column column
      */
     getRestFieldColumnValues(taskId: string, field: string, column: string) {
-        let postBody = null;
-
         // verify the required parameter 'taskId' is set
         if (taskId === undefined || taskId === null) {
             throw "Missing param 'taskId' in getRestFieldValues";
@@ -124,130 +93,83 @@ export class TaskFormsApi extends BaseApi {
             throw "Missing param 'column' in getRestFieldValues";
         }
 
-        let pathParams = {
-            'taskId': taskId,
-            'field': field,
-            'column': column
+        const pathParams = {
+            taskId,
+            field,
+            column
         };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.get({
+            path: '/api/enterprise/task-forms/{taskId}/form-values/{field}/{column}',
+            pathParams
+        });
     }
 
     /**
-        * Retrieve populated field values
-        *
-        * Form field values that are populated through a REST backend, can be retrieved via this service
-        *
-        * @param taskId taskId
-        * @param field field
-        * @return Promise<FormValueRepresentation []>
-        */
+    * Retrieve populated field values
+    *
+    * Form field values that are populated through a REST backend, can be retrieved via this service
+    *
+    * @param taskId taskId
+    * @param field field
+    * @return Promise<FormValueRepresentation []>
+    */
     getRestFieldValues(taskId: string, field: string): Promise<FormValueRepresentation []> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(field, 'field');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId, 'field': field
+        const pathParams = {
+            taskId,
+            field
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/task-forms/{taskId}/form-values/{field}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormValueRepresentation);
+        return this.get({
+            path: '/api/enterprise/task-forms/{taskId}/form-values/{field}',
+            pathParams,
+            returnType: FormValueRepresentation
+        });
     }
+
     /**
-        * Get a task form
-        *
-        *
-        *
-        * @param taskId taskId
-        * @return Promise<FormDefinitionRepresentation>
-        */
+    * Get a task form
+    *
+    * @param taskId taskId
+    * @return Promise<FormDefinitionRepresentation>
+    */
     getTaskForm(taskId: string): Promise<FormDefinitionRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/task-forms/{taskId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormDefinitionRepresentation);
+        return this.get({
+            path: '/api/enterprise/task-forms/{taskId}',
+            pathParams,
+            returnType: FormDefinitionRepresentation
+        });
     }
+
     /**
-        * Save a task form
-        *
-        *
-        *
-        * @param taskId taskId
-        * @param saveTaskFormRepresentation saveTaskFormRepresentation
-        * @return Promise<{}>
-        */
+    * Save a task form
+    *
+    * @param taskId taskId
+    * @param saveTaskFormRepresentation saveTaskFormRepresentation
+    * @return Promise<{}>
+    */
     saveTaskForm(taskId: string, saveTaskFormRepresentation: SaveFormRepresentation): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(saveTaskFormRepresentation, 'saveTaskFormRepresentation');
 
-        let postBody = saveTaskFormRepresentation;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/task-forms/{taskId}/save-form', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.post({
+            path: '/api/enterprise/task-forms/{taskId}/save-form',
+            pathParams,
+            bodyParam: saveTaskFormRepresentation
+        });
     }
 
     /**
@@ -255,28 +177,18 @@ export class TaskFormsApi extends BaseApi {
      * @param {String} taskId taskId
      */
     getTaskFormVariables(taskId: string) {
-        let postBody = null;
-
         // verify the required parameter 'taskId' is set
         if (taskId === undefined || taskId === null) {
             throw "Missing param 'taskId' in getTaskFormVariables";
         }
 
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/task-forms/{taskId}/variables', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.get({
+            path: '/api/enterprise/task-forms/{taskId}/variables',
+            pathParams
+        });
     }
-
 }

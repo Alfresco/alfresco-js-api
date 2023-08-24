@@ -34,8 +34,6 @@ export class TasksApi extends BaseApi {
     /**
     * List the users and groups involved with a task
     *
-    *
-    *
     * @param taskId taskId
     * @param identityLinkRepresentation identityLinkRepresentation
     * @return Promise<IdentityLinkRepresentation>
@@ -44,314 +42,195 @@ export class TasksApi extends BaseApi {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(identityLinkRepresentation, 'identityLinkRepresentation');
 
-        let postBody = identityLinkRepresentation;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/identitylinks', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation);
+        return this.post({
+            path: '/api/enterprise/tasks/{taskId}/identitylinks',
+            pathParams,
+            bodyParam: identityLinkRepresentation,
+            returnType: IdentityLinkRepresentation
+        });
     }
+
     /**
-        * Create a standalone task
-        *
-        * A standalone task is one which is not associated with any process instance.
-        *
-        * @param taskRepresentation taskRepresentation
-        * @return Promise<TaskRepresentation>
-        */
+    * Create a standalone task
+    *
+    * A standalone task is one which is not associated with any process instance.
+    *
+    * @param taskRepresentation taskRepresentation
+    * @return Promise<TaskRepresentation>
+    */
     createNewTask(taskRepresentation: TaskRepresentation): Promise<TaskRepresentation> {
         throwIfNotDefined(taskRepresentation, 'taskRepresentation');
 
-        let postBody = taskRepresentation;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TaskRepresentation);
+        return this.post({
+            path: '/api/enterprise/tasks',
+            bodyParam: taskRepresentation,
+            returnType: TaskRepresentation
+        });
     }
+
     /**
-        * Remove a user or group involvement from a task
-        *
-        *
-        *
-        * @param taskId taskId
-        * @param family family
-        * @param identityId identityId
-        * @param type type
-        * @return Promise<{}>
-        */
+    * Remove a user or group involvement from a task
+    *
+    * @param taskId taskId
+    * @param family family
+    * @param identityId identityId
+    * @param type type
+    * @return Promise<{}>
+    */
     deleteIdentityLink(taskId: string, family: string, identityId: string, type: string): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(family, 'family');
         throwIfNotDefined(identityId, 'identityId');
         throwIfNotDefined(type, 'type');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId, 'family': family, 'identityId': identityId, 'type': type
+        const pathParams = {
+            taskId,
+            family,
+            identityId,
+            type
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
+
     /**
-        * Delete a task
-        *
-        *
-        *
-        * @param taskId taskId
-        * @return Promise<{}>
-        */
+    * Delete a task
+    *
+    * @param taskId taskId
+    * @return Promise<{}>
+    */
     deleteTask(taskId: string): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
+
     /**
-        * Filter a list of tasks
-        *
-        *
-        *
-        * @param tasksFilter tasksFilter
-        * @return Promise<ResultListDataRepresentationTaskRepresentation>
-        */
+    * Filter a list of tasks
+    *
+    * @param tasksFilter tasksFilter
+    * @return Promise<ResultListDataRepresentationTaskRepresentation>
+    */
     filterTasks(tasksFilter: TaskFilterRequestRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
         throwIfNotDefined(tasksFilter, 'tasksFilter');
 
-        let postBody = tasksFilter;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/filter', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationTaskRepresentation);
+        return this.post({
+            path: '/api/enterprise/tasks/filter',
+            bodyParam: tasksFilter,
+            returnType: ResultListDataRepresentationTaskRepresentation
+        });
     }
+
     /**
-        * Get a user or group involvement with a task
-        *
-        *
-        *
-        * @param taskId taskId
-        * @param family family
-        * @param identityId identityId
-        * @param type type
-        * @return Promise<IdentityLinkRepresentation>
-        */
+    * Get a user or group involvement with a task
+    *
+    * @param taskId taskId
+    * @param family family
+    * @param identityId identityId
+    * @param type type
+    * @return Promise<IdentityLinkRepresentation>
+    */
     getIdentityLinkType(taskId: string, family: string, identityId: string, type: string): Promise<IdentityLinkRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(family, 'family');
         throwIfNotDefined(identityId, 'identityId');
         throwIfNotDefined(type, 'type');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId, 'family': family, 'identityId': identityId, 'type': type
+        const pathParams = {
+            taskId,
+            family,
+            identityId,
+            type
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation);
+        return this.get({
+            path: '/api/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}',
+            pathParams,
+            returnType: IdentityLinkRepresentation
+        });
     }
+
     /**
-        * List either the users or groups involved with a process instance
-        *
-        *
-        *
-        * @param taskId taskId
-        * @param family family
-        * @return Promise<IdentityLinkRepresentation>
-        */
+    * List either the users or groups involved with a process instance
+    *
+    * @param taskId taskId
+    * @param family family
+    * @return Promise<IdentityLinkRepresentation>
+    */
     getIdentityLinksForFamily(taskId: string, family: string): Promise<IdentityLinkRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(family, 'family');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId, 'family': family
+        const pathParams = {
+            taskId,
+            family
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/identitylinks/{family}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation);
+        return this.get({
+            path: '/api/enterprise/tasks/{taskId}/identitylinks/{family}',
+            pathParams,
+            returnType: IdentityLinkRepresentation
+        });
     }
+
     /**
-        * getIdentityLinks
-        *
-        *
-        *
-        * @param taskId taskId
-        * @return Promise<IdentityLinkRepresentation>
-        */
+    * getIdentityLinks
+    *
+    * @param taskId taskId
+    * @return Promise<IdentityLinkRepresentation>
+    */
     getIdentityLinks(taskId: string): Promise<IdentityLinkRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/identitylinks', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation);
+        return this.get({
+            path: '/api/enterprise/tasks/{taskId}/identitylinks',
+            pathParams,
+            returnType: IdentityLinkRepresentation
+        });
     }
+
     /**
-        * Get the audit log for a task
-        *
-        *
-        *
-        * @param taskId taskId
-        * @return Promise<TaskAuditInfoRepresentation>
-        */
+    * Get the audit log for a task
+    *
+    * @param taskId taskId
+    * @return Promise<TaskAuditInfoRepresentation>
+    */
     getTaskAuditLog(taskId: string): Promise<TaskAuditInfoRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/audit', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TaskAuditInfoRepresentation);
+        return this.get({
+            path: '/api/enterprise/tasks/{taskId}/audit',
+            pathParams,
+            returnType: TaskAuditInfoRepresentation
+        });
     }
 
     /**
@@ -362,164 +241,93 @@ export class TasksApi extends BaseApi {
     getTaskAuditPdf(taskId: string): Promise<Blob> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
+        const returnType = 'blob';
 
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-        let responseType = 'blob';
-
-        // Todo: update url once ACTIVITI-4191 fixed
-        return this.apiClient.callApi(
-            'app/rest/tasks/{taskId}/audit', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, responseType);
+        return this.get({
+            // Todo: update url once ACTIVITI-4191 fixed
+            path: 'app/rest/tasks/{taskId}/audit',
+            pathParams,
+            returnType
+        });
     }
 
     /**
-        * Get a task
-        *
-        *
-        *
-        * @param taskId taskId
-        * @return Promise<TaskRepresentation>
-        */
+    * Get a task
+    *
+    * @param taskId taskId
+    * @return Promise<TaskRepresentation>
+    */
     getTask(taskId: string): Promise<TaskRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TaskRepresentation);
+        return this.get({
+            path: '/api/enterprise/tasks/{taskId}',
+            pathParams,
+            returnType: TaskRepresentation
+        });
     }
+
     /**
-        * Query historic tasks
-        *
-        *
-        *
-        * @param queryRequest queryRequest
-        * @return Promise<ResultListDataRepresentationTaskRepresentation>
-        */
+    * Query historic tasks
+    *
+    * @param queryRequest queryRequest
+    * @return Promise<ResultListDataRepresentationTaskRepresentation>
+    */
     listHistoricTasks(queryRequest: HistoricTaskInstanceQueryRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
         throwIfNotDefined(queryRequest, 'queryRequest');
 
-        let postBody = queryRequest;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/historic-tasks/query', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationTaskRepresentation);
+        return this.post({
+            path: '/api/enterprise/historic-tasks/query',
+            bodyParam: queryRequest,
+            returnType: ResultListDataRepresentationTaskRepresentation
+        });
     }
+
     /**
-        * List tasks
-        *
-        *
-        *
-        * @param tasksQuery tasksQuery
-        * @return Promise<ResultListDataRepresentationTaskRepresentation>
-        */
+    * List tasks
+    *
+    * @param tasksQuery tasksQuery
+    * @return Promise<ResultListDataRepresentationTaskRepresentation>
+    */
     listTasks(tasksQuery: TaskQueryRepresentation): Promise<ResultListDataRepresentationTaskRepresentation> {
         throwIfNotDefined(tasksQuery, 'tasksQuery');
 
-        let postBody = tasksQuery;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/query', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationTaskRepresentation);
+        return this.post({
+            path: '/api/enterprise/tasks/query',
+            bodyParam: tasksQuery,
+            returnType: ResultListDataRepresentationTaskRepresentation
+        });
     }
+
     /**
-        * Update a task
-        *
-        * You can edit only name, description and dueDate (ISO 8601 string).
-        *
-        * @param taskId taskId
-        * @param updated updated
-        * @return Promise<TaskRepresentation>
-        */
+    * Update a task
+    *
+    * You can edit only name, description and dueDate (ISO 8601 string).
+    *
+    * @param taskId taskId
+    * @param updated updated
+    * @return Promise<TaskRepresentation>
+    */
     updateTask(taskId: string, updated: TaskUpdateRepresentation): Promise<TaskRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(updated, 'updated');
 
-        let postBody = updated;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TaskRepresentation);
+        return this.put({
+            path: '/api/enterprise/tasks/{taskId}',
+            pathParams,
+            bodyParam: updated,
+            returnType: TaskRepresentation
+        });
     }
-
 }
