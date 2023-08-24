@@ -23,14 +23,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
- * Taskactions service.
+ * TaskActionsApi service.
  * @module TaskactionsApi
  */
 export class TaskActionsApi extends BaseApi {
     /**
      * Assign a task to a user
-     *
-     *
      *
      * @param taskId taskId
      * @param userIdentifier userIdentifier
@@ -40,30 +38,20 @@ export class TaskActionsApi extends BaseApi {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(userIdentifier, 'userIdentifier');
 
-        let postBody = userIdentifier;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/action/assign', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TaskRepresentation);
+        return this.put({
+            path: '/api/enterprise/tasks/{taskId}/action/assign',
+            pathParams,
+            bodyParam: userIdentifier,
+            returnType: TaskRepresentation
+        });
     }
 
     /**
      * Attach a form to a task
-     *
-     *
      *
      * @param taskId taskId
      * @param formIdentifier formIdentifier
@@ -73,24 +61,15 @@ export class TaskActionsApi extends BaseApi {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(formIdentifier, 'formIdentifier');
 
-        let postBody = formIdentifier;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/action/attach-form', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/tasks/{taskId}/action/attach-form',
+            pathParams,
+            bodyParam: formIdentifier
+        });
     }
 
     /**
@@ -104,24 +83,14 @@ export class TaskActionsApi extends BaseApi {
     claimTask(taskId: string): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/action/claim', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/tasks/{taskId}/action/claim',
+            pathParams
+        });
     }
 
     /**
@@ -135,30 +104,18 @@ export class TaskActionsApi extends BaseApi {
     completeTask(taskId: string): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/action/complete', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/tasks/{taskId}/action/complete',
+            pathParams
+        });
     }
 
     /**
      * Delegate a task
-     *
-     *
      *
      * @param taskId taskId
      * @param userIdentifier userIdentifier
@@ -168,30 +125,19 @@ export class TaskActionsApi extends BaseApi {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(userIdentifier, 'userIdentifier');
 
-        let postBody = userIdentifier;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/action/delegate', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/tasks/{taskId}/action/delegate',
+            pathParams,
+            bodyParam: userIdentifier
+        });
     }
 
     /**
      * Involve a group with a task
-     *
-     *
      *
      * @param taskId taskId
      * @param groupId groupId
@@ -201,30 +147,19 @@ export class TaskActionsApi extends BaseApi {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(groupId, 'groupId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId, 'groupId': groupId
+        const pathParams = {
+            taskId,
+            groupId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/groups/{groupId}', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.post({
+            path: '/api/enterprise/tasks/{taskId}/groups/{groupId}',
+            pathParams
+        });
     }
 
     /**
      * Involve a user with a task
-     *
-     *
      *
      * @param taskId taskId
      * @param userIdentifier userIdentifier
@@ -234,30 +169,19 @@ export class TaskActionsApi extends BaseApi {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(userIdentifier, 'userIdentifier');
 
-        let postBody = userIdentifier;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/action/involve', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/tasks/{taskId}/action/involve',
+            pathParams,
+            bodyParam: userIdentifier
+        });
     }
 
     /**
      * Remove a form from a task
-     *
-     *
      *
      * @param taskId taskId
      * @return Promise<{}>
@@ -265,66 +189,49 @@ export class TaskActionsApi extends BaseApi {
     removeForm(taskId: string): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/action/remove-form', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
 
     /**
      * Remove an involved group from a task
      *
-     *
-     *
      * @param taskId taskId
-     * @param groupId groupId
+     * @param identifier
      * @return Promise<{}>
      */
     removeInvolvedUser(taskId: string, identifier: string | UserIdentifierRepresentation): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(identifier, 'identifier');
 
-        let pathParams = {
-            'taskId': taskId, 'groupId': identifier
+        const pathParams = {
+            'taskId': taskId,
+            'groupId': identifier
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
         if (identifier instanceof String) {
-            let postBody = null;
+            const contentTypes = ['application/json'];
+            const accepts = ['application/json'];
 
             return this.apiClient.callApi(
                 '/api/enterprise/tasks/{taskId}/groups/{groupId}', 'DELETE',
-                pathParams, queryParams, headerParams, formParams, postBody,
+                pathParams, {}, {}, {}, null,
                 contentTypes, accepts);
         } else {
-
-            let postBody = identifier;
-
-            return this.apiClient.callApi(
-                '/api/enterprise/tasks/{taskId}/action/remove-involved', 'PUT',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts);
+            return this.put({
+                path: '/api/enterprise/tasks/{taskId}/action/remove-involved',
+                pathParams,
+                bodyParam: identifier
+            });
         }
     }
 
@@ -339,24 +246,14 @@ export class TaskActionsApi extends BaseApi {
     resolveTask(taskId: string): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/action/resolve', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/tasks/{taskId}/action/resolve',
+            pathParams
+        });
     }
 
     /**
@@ -370,24 +267,13 @@ export class TaskActionsApi extends BaseApi {
     unclaimTask(taskId: string): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/action/unclaim', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/tasks/{taskId}/action/unclaim',
+            pathParams
+        });
     }
-
 }
