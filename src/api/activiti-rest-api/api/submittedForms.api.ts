@@ -21,14 +21,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Submittedforms service.
-* @module SubmittedformsApi
+* SubmittedFormsApi service.
+* @module SubmittedFormsApi
 */
 export class SubmittedFormsApi extends BaseApi {
     /**
     * List submissions for a form
-    *
-    *
     *
     * @param formId formId
     * @param opts Optional parameters
@@ -41,133 +39,82 @@ export class SubmittedFormsApi extends BaseApi {
         throwIfNotDefined(formId, 'formId');
 
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'formId': formId
+        const pathParams = {
+            formId
         };
 
-        let queryParams = {
+        const queryParams = {
             'submittedBy': opts['submittedBy'],
             'start': opts['start'],
             'size': opts['size']
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/form-submitted-forms/{formId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationSubmittedFormRepresentation);
+        return this.get({
+            path: '/api/enterprise/form-submitted-forms/{formId}',
+            pathParams,
+            queryParams,
+            returnType: ResultListDataRepresentationSubmittedFormRepresentation
+        });
     }
+
     /**
-        * List submissions for a process instance
-        *
-        *
-        *
-        * @param processId processId
-        * @return Promise<ResultListDataRepresentationSubmittedFormRepresentation>
-        */
+    * List submissions for a process instance
+    *
+    * @param processId processId
+    * @return Promise<ResultListDataRepresentationSubmittedFormRepresentation>
+    */
     getProcessSubmittedForms(processId: string): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
         throwIfNotDefined(processId, 'processId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processId': processId
+        const pathParams = {
+            processId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-submitted-forms/{processId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationSubmittedFormRepresentation);
+        return this.get({
+            path: '/api/enterprise/process-submitted-forms/{processId}',
+            pathParams,
+            returnType: ResultListDataRepresentationSubmittedFormRepresentation
+        });
     }
+
     /**
-        * Get a form submission
-        *
-        *
-        *
-        * @param submittedFormId submittedFormId
-        * @return Promise<SubmittedFormRepresentation>
-        */
+    * Get a form submission
+    *
+    * @param submittedFormId submittedFormId
+    * @return Promise<SubmittedFormRepresentation>
+    */
     getSubmittedFrom(submittedFormId: number): Promise<SubmittedFormRepresentation> {
         throwIfNotDefined(submittedFormId, 'submittedFormId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'submittedFormId': submittedFormId
+        const pathParams = {
+            submittedFormId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/submitted-forms/{submittedFormId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, SubmittedFormRepresentation);
+        return this.get({
+            path: '/api/enterprise/submitted-forms/{submittedFormId}',
+            pathParams,
+            returnType: SubmittedFormRepresentation
+        });
     }
+
     /**
-        * Get the submitted form for a task
-        *
-        *
-        *
-        * @param taskId taskId
-        * @return Promise<SubmittedFormRepresentation>
-        */
+    * Get the submitted form for a task
+    *
+    * @param taskId taskId
+    * @return Promise<SubmittedFormRepresentation>
+    */
     getTaskSubmittedForms(taskId: string): Promise<SubmittedFormRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/task-submitted-form/{taskId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, SubmittedFormRepresentation);
+        return this.get({
+            path: '/api/enterprise/task-submitted-form/{taskId}',
+            pathParams,
+            returnType: SubmittedFormRepresentation
+        });
     }
-
 }

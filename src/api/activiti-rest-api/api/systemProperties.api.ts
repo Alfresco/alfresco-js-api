@@ -22,14 +22,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Systemproperties service.
+* SystemPropertiesApi service.
 * @module SystempropertiesApi
 */
 export class SystemPropertiesApi extends BaseApi {
     /**
     * Get global date format
-    *
-    *
     *
     * @param tenantId tenantId
     * @return Promise<GlobalDateFormatRepresentation>
@@ -37,128 +35,68 @@ export class SystemPropertiesApi extends BaseApi {
     getGlobalDateFormat(tenantId: number): Promise<GlobalDateFormatRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'tenantId': tenantId
+        const pathParams = {
+            tenantId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/system/properties/global-date-format/{tenantId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, GlobalDateFormatRepresentation);
+        return this.get({
+            path: '/api/enterprise/system/properties/global-date-format/{tenantId}',
+            pathParams,
+            returnType: GlobalDateFormatRepresentation
+        });
     }
+
     /**
-        * Get password validation constraints
-        *
-        *
-        *
-        * @param tenantId tenantId
-        * @return Promise<PasswordValidationConstraints>
-        */
+    * Get password validation constraints
+    *
+    * @param tenantId tenantId
+    * @return Promise<PasswordValidationConstraints>
+    */
     getPasswordValidationConstraints(tenantId: number): Promise<PasswordValidationConstraints> {
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'tenantId': tenantId
+        const pathParams = {
+            tenantId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/system/properties/password-validation-constraints/{tenantId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, PasswordValidationConstraints);
+        return this.get({
+            path: '/api/enterprise/system/properties/password-validation-constraints/{tenantId}',
+            pathParams,
+            returnType: PasswordValidationConstraints
+        });
     }
+
     /**
-        * Retrieve system properties
-        *
-        * Typical value is AllowInvolveByEmail
-        *
-        * @return Promise<SystemPropertiesRepresentation>
-        */
+    * Retrieve system properties
+    *
+    * Typical value is AllowInvolveByEmail
+    *
+    * @return Promise<SystemPropertiesRepresentation>
+    */
     getProperties(): Promise<SystemPropertiesRepresentation> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/system/properties', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, SystemPropertiesRepresentation);
+        return this.get({
+            path: '/api/enterprise/system/properties',
+            returnType: SystemPropertiesRepresentation
+        });
     }
+
     /**
-        * Get involved users who can edit forms
-        *
-        *
-        *
-        * @param tenantId tenantId
-        * @return Promise<boolean>
-        */
+    * Get involved users who can edit forms
+    *
+    * @param tenantId tenantId
+    * @return Promise<boolean>
+    */
     involvedUsersCanEditForms(tenantId: number): Promise<boolean> {
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'tenantId': tenantId
+        const pathParams = {
+            tenantId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/system/properties/involved-users-can-edit-forms/{tenantId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/system/properties/involved-users-can-edit-forms/{tenantId}',
+            pathParams
+        });
     }
 
 }
