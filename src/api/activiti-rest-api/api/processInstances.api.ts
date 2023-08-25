@@ -38,38 +38,25 @@ export class ProcessInstancesApi extends BaseApi {
     /**
      * Activate a process instance
      *
-     *
-     *
      * @param processInstanceId processInstanceId
      * @return Promise<ProcessInstanceRepresentation>
      */
     activateProcessInstance(processInstanceId: string): Promise<ProcessInstanceRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/activate', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceRepresentation);
+        return this.put({
+            path: '/api/enterprise/process-instances/{processInstanceId}/activate',
+            pathParams,
+            returnType: ProcessInstanceRepresentation
+        });
     }
 
     /**
      * Add a user or group involvement to a process instance
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @param identityLinkRepresentation identityLinkRepresentation
@@ -79,30 +66,20 @@ export class ProcessInstancesApi extends BaseApi {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(identityLinkRepresentation, 'identityLinkRepresentation');
 
-        let postBody = identityLinkRepresentation;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/identitylinks', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation);
+        return this.post({
+            path: '/api/enterprise/process-instances/{processInstanceId}/identitylinks',
+            pathParams,
+            bodyParam: identityLinkRepresentation,
+            returnType: IdentityLinkRepresentation
+        });
     }
 
     /**
      * Remove a user or group involvement from a process instance
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @param family family
@@ -116,23 +93,19 @@ export class ProcessInstancesApi extends BaseApi {
         throwIfNotDefined(identityId, 'identityId');
         throwIfNotDefined(type, 'type');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId, 'family': family, 'identityId': identityId, 'type': type
+        const pathParams = {
+            processInstanceId,
+            family,
+            identityId,
+            type
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
 
@@ -147,23 +120,16 @@ export class ProcessInstancesApi extends BaseApi {
     deleteProcessInstance(processInstanceId: string): Promise<any> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
 
@@ -178,28 +144,15 @@ export class ProcessInstancesApi extends BaseApi {
     filterProcessInstances(filterRequest: ProcessInstanceFilterRequestRepresentation): Promise<ResultListDataRepresentationProcessInstanceRepresentation> {
         throwIfNotDefined(filterRequest, 'filterRequest');
 
-        let postBody = filterRequest;
-
-        let pathParams = {};
-
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/filter', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation);
+        return this.post({
+            path: '/api/enterprise/process-instances/filter',
+            bodyParam: filterRequest,
+            returnType: ResultListDataRepresentationProcessInstanceRepresentation
+        });
     }
 
     /**
      * Get decision tasks in a process instance
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @return Promise<ResultListDataRepresentationDecisionTaskRepresentation>
@@ -207,33 +160,18 @@ export class ProcessInstancesApi extends BaseApi {
     getHistoricProcessInstanceDecisionTasks(processInstanceId: string): Promise<ResultListDataRepresentationDecisionTaskRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/decision-tasks', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/decision-tasks',
+            pathParams,
+            returnType: ResultListDataRepresentationDecisionTaskRepresentation
+        });
     }
      /**
      * Get historic variables for a process instance
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @return Promise<ProcessInstanceVariableRepresentation>
@@ -241,30 +179,19 @@ export class ProcessInstancesApi extends BaseApi {
     getHistoricProcessInstanceVariables(processInstanceId: string): Promise<ProcessInstanceVariableRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/historic-variables', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceVariableRepresentation);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/historic-variables',
+            pathParams,
+            returnType: ProcessInstanceVariableRepresentation
+        });
     }
 
     /**
      * Query historic process instances
-     *
-     *
      *
      * @param queryRequest queryRequest
      * @return Promise<ResultListDataRepresentationProcessInstanceRepresentation>
@@ -272,28 +199,15 @@ export class ProcessInstancesApi extends BaseApi {
     getHistoricProcessInstances(queryRequest: HistoricProcessInstanceQueryRepresentation): Promise<ResultListDataRepresentationProcessInstanceRepresentation> {
         throwIfNotDefined(queryRequest, 'queryRequest');
 
-        let postBody = queryRequest;
-
-        let pathParams = {};
-
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/historic-process-instances/query', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation);
+        return this.post({
+            path: '/api/enterprise/historic-process-instances/query',
+            bodyParam: queryRequest,
+            returnType: ResultListDataRepresentationProcessInstanceRepresentation
+        });
     }
 
     /**
      * Get a user or group involvement with a process instance
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @param family family
@@ -307,30 +221,22 @@ export class ProcessInstancesApi extends BaseApi {
         throwIfNotDefined(identityId, 'identityId');
         throwIfNotDefined(type, 'type');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId, 'family': family, 'identityId': identityId, 'type': type
+        const pathParams = {
+            processInstanceId,
+            family,
+            identityId,
+            type
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type}',
+            pathParams,
+            returnType: IdentityLinkRepresentation
+        });
     }
 
     /**
      * List either the users or groups involved with a process instance
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @param family family
@@ -340,30 +246,20 @@ export class ProcessInstancesApi extends BaseApi {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(family, 'family');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId, 'family': family
+        const pathParams = {
+            processInstanceId,
+            family
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}',
+            pathParams,
+            returnType: IdentityLinkRepresentation
+        });
     }
 
     /**
      * List the users and groups involved with a process instance
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @return Promise<IdentityLinkRepresentation>
@@ -371,30 +267,19 @@ export class ProcessInstancesApi extends BaseApi {
     getIdentityLinks(processInstanceId: string): Promise<IdentityLinkRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/identitylinks', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, IdentityLinkRepresentation);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/identitylinks',
+            pathParams,
+            returnType: IdentityLinkRepresentation
+        });
     }
 
     /**
      * List content attached to process instance fields
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @return Promise<ResultListDataRepresentationProcessContentRepresentation>
@@ -402,30 +287,19 @@ export class ProcessInstancesApi extends BaseApi {
     getProcessInstanceContent(processInstanceId: string): Promise<ResultListDataRepresentationProcessContentRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/field-content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationProcessContentRepresentation);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/field-content',
+            pathParams,
+            returnType: ResultListDataRepresentationProcessContentRepresentation
+        });
     }
 
     /**
      * Get the process diagram for the process instance
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @return Promise<string>
@@ -433,24 +307,17 @@ export class ProcessInstancesApi extends BaseApi {
     getProcessInstanceDiagram(processInstanceId: string): Promise<string> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {};
+        const accepts = ['image/png'];
 
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['image/png'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/diagram', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/diagram',
+            pathParams,
+            accepts
+        });
     }
 
     /**
@@ -464,30 +331,19 @@ export class ProcessInstancesApi extends BaseApi {
     getProcessInstanceStartForm(processInstanceId: string): Promise<FormDefinitionRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/start-form', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormDefinitionRepresentation);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/start-form',
+            pathParams,
+            returnType: FormDefinitionRepresentation
+        });
     }
 
     /**
      * Get a process instance
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @return Promise<ProcessInstanceRepresentation>
@@ -495,30 +351,19 @@ export class ProcessInstancesApi extends BaseApi {
     getProcessInstance(processInstanceId: string): Promise<ProcessInstanceRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceRepresentation);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}',
+            pathParams,
+            returnType: ProcessInstanceRepresentation
+        });
     }
 
     /**
      * Query process instances
-     *
-     *
      *
      * @param processInstancesQuery processInstancesQuery
      * @return Promise<ResultListDataRepresentationProcessInstanceRepresentation>
@@ -526,28 +371,15 @@ export class ProcessInstancesApi extends BaseApi {
     getProcessInstances(processInstancesQuery: ProcessInstanceQueryRepresentation): Promise<ResultListDataRepresentationProcessInstanceRepresentation> {
         throwIfNotDefined(processInstancesQuery, 'processInstancesQuery');
 
-        let postBody = processInstancesQuery;
-
-        let pathParams = {};
-
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/query', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationProcessInstanceRepresentation);
+        return this.post({
+            path: '/api/enterprise/process-instances/query',
+            bodyParam: processInstancesQuery,
+            returnType: ResultListDataRepresentationProcessInstanceRepresentation
+        });
     }
 
     /**
      * Get the audit log for a process instance
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @return Promise<ProcessInstanceAuditInfoRepresentation>
@@ -555,63 +387,41 @@ export class ProcessInstancesApi extends BaseApi {
     getTaskAuditLog(processInstanceId: string): Promise<ProcessInstanceAuditInfoRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/audit-log', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceAuditInfoRepresentation);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/audit-log',
+            pathParams,
+            returnType: ProcessInstanceAuditInfoRepresentation
+        });
     }
 
     /**
      * Retrieve the process audit in the PDF format
+     *
      * @param {String} processInstanceId processId
      * @return {Blob} process audit
      */
     getProcessAuditPdf(processInstanceId: string): Promise<Blob> {
-        let postBody = null;
+        throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        // verify the required parameter 'processId' is set
-        if (processInstanceId === undefined || processInstanceId === null) {
-            throw "Missing param 'processId' in getProcessAuditPdf";
-        }
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const responseType = 'blob';
 
-        let contextRoot = null;
-        let responseType = 'blob';
-
-        return this.apiClient.callApi(
-            '/app/rest/process-instances/{processInstanceId}/audit', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, null, contextRoot, responseType
-        );
+        return this.get({
+            path: '/app/rest/process-instances/{processInstanceId}/audit',
+            pathParams,
+            responseType
+        });
     }
 
     /**
      * Start a process instance
-     *
-     *
      *
      * @param startRequest startRequest
      * @return Promise<ProcessInstanceRepresentation>
@@ -619,28 +429,15 @@ export class ProcessInstancesApi extends BaseApi {
     startNewProcessInstance(startRequest: CreateProcessInstanceRepresentation): Promise<ProcessInstanceRepresentation> {
         throwIfNotDefined(startRequest, 'startRequest');
 
-        let postBody = startRequest;
-
-        let pathParams = {};
-
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceRepresentation);
+        return this.post({
+            path: '/api/enterprise/process-instances',
+            bodyParam: startRequest,
+            returnType: ProcessInstanceRepresentation
+        });
     }
 
     /**
      * Suspend a process instance
-     *
-     *
      *
      * @param processInstanceId processInstanceId
      * @return Promise<ProcessInstanceRepresentation>
@@ -648,24 +445,15 @@ export class ProcessInstancesApi extends BaseApi {
     suspendProcessInstance(processInstanceId: string): Promise<ProcessInstanceRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/suspend', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessInstanceRepresentation);
+        return this.put({
+            path: '/api/enterprise/process-instances/{processInstanceId}/suspend',
+            pathParams,
+            returnType: ProcessInstanceRepresentation
+        });
     }
 
 }
