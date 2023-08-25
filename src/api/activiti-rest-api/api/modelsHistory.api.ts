@@ -21,83 +21,57 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Modelshistory service.
-* @module ModelshistoryApi
+* ModelsHistoryApi service.
+* @module ModelsHistoryApi
 */
 export class ModelsHistoryApi extends BaseApi {
     /**
     * List a model's historic versions
-    *
-    *
     *
     * @param modelId modelId
     * @param opts Optional parameters
     * @param opts.includeLatestVersion includeLatestVersion
     * @return Promise<ResultListDataRepresentationModelRepresentation>
     */
-    getModelHistoryCollection(modelId: number, opts?: any): Promise<ResultListDataRepresentationModelRepresentation> {
+    getModelHistoryCollection(modelId: number, opts?: { includeLatestVersion?: boolean }): Promise<ResultListDataRepresentationModelRepresentation> {
         throwIfNotDefined(modelId, 'modelId');
 
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-            'modelId': modelId
+        const pathParams = {
+            modelId
         };
 
-        let queryParams = {
-            'includeLatestVersion': opts['includeLatestVersion']
+        const queryParams = {
+            includeLatestVersion: opts?.includeLatestVersion
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/models/{modelId}/history', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationModelRepresentation);
+        return this.get({
+            path: '/api/enterprise/models/{modelId}/history',
+            pathParams,
+            queryParams,
+            returnType: ResultListDataRepresentationModelRepresentation
+        });
     }
+
     /**
-        * Get a historic version of a model
-        *
-        *
-        *
-        * @param modelId modelId
-        * @param modelHistoryId modelHistoryId
-        * @return Promise<ModelRepresentation>
-        */
+    * Get a historic version of a model
+    *
+    * @param modelId modelId
+    * @param modelHistoryId modelHistoryId
+    * @return Promise<ModelRepresentation>
+    */
     getProcessModelHistory(modelId: number, modelHistoryId: number): Promise<ModelRepresentation> {
         throwIfNotDefined(modelId, 'modelId');
         throwIfNotDefined(modelHistoryId, 'modelHistoryId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'modelId': modelId, 'modelHistoryId': modelHistoryId
+        const pathParams = {
+            modelId,
+            modelHistoryId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/models/{modelId}/history/{modelHistoryId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ModelRepresentation);
+        return this.get({
+            path: '/api/enterprise/models/{modelId}/history/{modelHistoryId}',
+            pathParams,
+            returnType: ModelRepresentation
+        });
     }
-
 }
