@@ -2454,6 +2454,47 @@
                 ]
             }
         },
+        "/enterprise/content/document-details": {
+            "get": {
+                "tags": [
+                    "content"
+                ],
+                "summary": "Lists processes and tasks on workflow started with provided document",
+                "operationId": "getProcessesAndTasksOnContent",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "content",
+                        "description": "content that workflow was started with",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RelatedContentRepresentation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/RelatedProcessTask"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": [
+                            "global"
+                        ]
+                    }
+                ]
+            }
+        },
         "/enterprise/content/raw": {
             "post": {
                 "tags": [
@@ -14987,6 +15028,17 @@
                 },
                 "recent": {
                     "type": "boolean"
+                }
+            }
+        },
+        "RelatedProcessTask": {
+            "type": "object",
+            "properties": {
+                "processId": {
+                    "type": "string"
+                },
+                "taskId": {
+                    "type": "string"
                 }
             }
         }

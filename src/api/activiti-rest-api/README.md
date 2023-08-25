@@ -80,6 +80,7 @@ Class | Method | HTTP request | Description
 *.ContentApi* | [**getRawContent**](docs/ContentApi.md#getRawContent) | **GET** /enterprise/content/{contentId}/raw | Stream content from a local content representation
 *.ContentApi* | [**getRelatedContentForProcessInstance**](docs/ContentApi.md#getRelatedContentForProcessInstance) | **GET** /enterprise/process-instances/{processInstanceId}/content | List content attached to a process instance
 *.ContentApi* | [**getRelatedContentForTask**](docs/ContentApi.md#getRelatedContentForTask) | **GET** /enterprise/tasks/{taskId}/content | List content attached to a task
+*.ContentApi* | [**getProcessesAndTasksOnContent**](docs/ContentApi.md#getProcessesAndTasksOnContent) | **GET** /enterprise/content/document-details | Lists processes and tasks on workflow started with provided document
 *.DatasourcesApi* | [**getDataSources**](docs/DatasourcesApi.md#getDataSources) | **GET** /enterprise/editor/data-sources | Get data sources
 *.DecisionauditsApi* | [**getAuditTrail**](docs/DecisionauditsApi.md#getAuditTrail) | **GET** /enterprise/decisions/audits/{auditTrailId} | Get an audit trail
 *.DecisionauditsApi* | [**getAuditTrails**](docs/DecisionauditsApi.md#getAuditTrails) | **GET** /enterprise/decisions/audits | Query decision table audit trails

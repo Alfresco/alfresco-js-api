@@ -16,7 +16,7 @@ Method | HTTP request | Description
 [**getRawContent**](ContentApi.md#getRawContent) | **GET** /enterprise/content/{contentId}/raw | Stream content from a local content representation
 [**getRelatedContentForProcessInstance**](ContentApi.md#getRelatedContentForProcessInstance) | **GET** /enterprise/process-instances/{processInstanceId}/content | List content attached to a process instance
 [**getRelatedContentForTask**](ContentApi.md#getRelatedContentForTask) | **GET** /enterprise/tasks/{taskId}/content | List content attached to a task
-
+[**getProcessesAndTasksOnContent**](ContentApi.md#getProcessesAndTasksOnContent) | **GET** enterprise/content/document-details | Lists processes and tasks on workflow started with provided document
 
 <a name="createRelatedContentOnProcessInstance"></a>
 # **createRelatedContentOnProcessInstance**
@@ -490,4 +490,49 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResultListDataRepresentationRelatedContentRepresentation**](ResultListDataRepresentationRelatedContentRepresentation.md)
+
+<a name="getProcessesAndTasksOnContent"></a>
+# **getProcessesAndTasksOnContent**
+> RelatedProcessTask[] getProcessesAndTasksOnContent(content)
+
+Lists processes and tasks on workflow started with provided document
+
+### Example
+```javascript
+import ContentApi from 'ContentApi';
+import { AlfrescoApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi();
+alfrescoApi.setConfig({
+    hostEcm: 'http://127.0.0.1:8080'
+});
+
+const contentApi = new ContentApi(alfrescoApi);
+
+const content = { 
+  'source': 'testSource',
+  'mimeType': 'application/pdf',
+  'sourceId': 'testId',
+  'name': 'dummyName.pdf'
+};
+
+contentApi.getProcessesAndTasksOnContent(content).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **content** | **RelatedContentRepresentation** | content that workflow was started with | |
+
+### Return type
+
+[**RelatedProcessTask[]**](RelatedProcessTask.md)
+
+
 
