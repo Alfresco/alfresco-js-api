@@ -502,14 +502,14 @@ Lists processes and tasks on workflow started with provided document
 import ContentApi from 'ContentApi';
 import { AlfrescoApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
+const alfrescoApi = new AlfrescoApi();
+alfrescoApi.setConfig({
     hostEcm: 'http://127.0.0.1:8080'
 });
 
-let contentApi = new ContentApi(this.alfrescoApi);
+const contentApi = new ContentApi(alfrescoApi);
 
-let content = { 
+const content = { 
   'source': 'testSource',
   'mimeType': 'application/pdf',
   'sourceId': 'testId',
@@ -526,9 +526,9 @@ contentApi.getProcessesAndTasksOnContent(content).then((data) => {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **content** | **RelatedContentRepresentation**| content that workflow was started with | 
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **content** | **RelatedContentRepresentation** | content that workflow was started with | |
 
 ### Return type
 

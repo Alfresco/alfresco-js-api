@@ -378,7 +378,7 @@ export class ContentApi extends BaseApi {
     /**
      * Lists processes and tasks on workflow started with provided document
      *
-     * @param content content that workflow was started with
+     * @param content - content that workflow was started with
      * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
      */
      getProcessesAndTasksOnContent(content: RelatedContentRepresentation): Promise<RelatedProcessTask[]> {
@@ -386,7 +386,7 @@ export class ContentApi extends BaseApi {
 
         return this.get({
             path: '/api/enterprise/content/document-details',
-            queryParams: content,
+            bodyParam: content,
             returnType: RelatedProcessTask
         });
     }
