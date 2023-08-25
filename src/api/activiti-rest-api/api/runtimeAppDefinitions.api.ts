@@ -22,8 +22,8 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Runtimeappdefinitions service.
-* @module RuntimeappdefinitionsApi
+* RuntimeAppDefinitionsApi service.
+* @module RuntimeAppDefinitionsApi
 */
 export class RuntimeAppDefinitionsApi extends BaseApi {
     /**
@@ -37,94 +37,44 @@ export class RuntimeAppDefinitionsApi extends BaseApi {
     deployAppDefinitions(saveObject: RuntimeAppDefinitionSaveRepresentation): Promise<any> {
         throwIfNotDefined(saveObject, 'saveObject');
 
-        let postBody = saveObject;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/runtime-app-definitions', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.post({
+            path: '/api/enterprise/runtime-app-definitions',
+            bodyParam: saveObject
+        });
     }
+
     /**
-        * Get a runtime app
-        *
-        *
-        *
-        * @param appDefinitionId appDefinitionId
-        * @return Promise<AppDefinitionRepresentation>
-        */
+    * Get a runtime app
+    *
+    * @param appDefinitionId appDefinitionId
+    * @return Promise<AppDefinitionRepresentation>
+    */
     getAppDefinition(appDefinitionId: number): Promise<AppDefinitionRepresentation> {
         throwIfNotDefined(appDefinitionId, 'appDefinitionId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'appDefinitionId': appDefinitionId
+        const pathParams = {
+            appDefinitionId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/runtime-app-definitions/{appDefinitionId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDefinitionRepresentation);
+        return this.get({
+            path: '/api/enterprise/runtime-app-definitions/{appDefinitionId}',
+            pathParams,
+            returnType: AppDefinitionRepresentation
+        });
     }
+
     /**
-        * List runtime apps
-        *
-        * When a user logs in into Alfresco Process Services Suite, a landing page is displayed containing all the apps that the user is allowed to see and use. These are referred to as runtime apps.
-        *
-        * @return Promise<ResultListDataRepresentationAppDefinitionRepresentation>
-        */
+    * List runtime apps
+    *
+    * When a user logs in into Alfresco Process Services Suite, a landing page is displayed containing all the apps that the user is allowed to see and use. These are referred to as runtime apps.
+    *
+    * @return Promise<ResultListDataRepresentationAppDefinitionRepresentation>
+    */
     getAppDefinitions(): Promise<ResultListDataRepresentationAppDefinitionRepresentation> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/runtime-app-definitions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAppDefinitionRepresentation);
+        return this.get({
+            path: '/api/enterprise/runtime-app-definitions',
+            returnType: ResultListDataRepresentationAppDefinitionRepresentation
+        });
     }
 
 }

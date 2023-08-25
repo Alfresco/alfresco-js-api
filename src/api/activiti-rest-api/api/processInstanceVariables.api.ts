@@ -21,14 +21,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Processinstancevariables service.
-* @module ProcessinstancevariablesApi
+* ProcessInstanceVariablesApi service.
+* @module ProcessInstanceVariablesApi
 */
 export class ProcessInstanceVariablesApi extends BaseApi {
     /**
     * Create or update variables
-    *
-    *
     *
     * @param processInstanceId Process instance ID
     * @param restVariables restVariables
@@ -38,171 +36,107 @@ export class ProcessInstanceVariablesApi extends BaseApi {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(restVariables, 'restVariables');
 
-        let postBody = restVariables;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/variables', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/process-instances/{processInstanceId}/variables',
+            pathParams,
+            bodyParam: restVariables
+        });
     }
+
     /**
-        * Delete a variable
-        *
-        *
-        *
-        * @param processInstanceId processInstanceId
-        * @param variableName variableName
-        * @return Promise<{}>
-        */
+    * Delete a variable
+    *
+    * @param processInstanceId processInstanceId
+    * @param variableName variableName
+    * @return Promise<{}>
+    */
     deleteProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<any> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(variableName, 'variableName');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId, 'variableName': variableName
+        const pathParams = {
+            processInstanceId,
+            variableName
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
+
     /**
-        * Get a variable
-        *
-        *
-        *
-        * @param processInstanceId processInstanceId
-        * @param variableName variableName
-        * @return Promise<RestVariable>
-        */
+    * Get a variable
+    *
+    * @param processInstanceId processInstanceId
+    * @param variableName variableName
+    * @return Promise<RestVariable>
+    */
     getProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<RestVariable> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(variableName, 'variableName');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId, 'variableName': variableName
+        const pathParams = {
+            processInstanceId,
+            variableName
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RestVariable);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}',
+            pathParams,
+            returnType: RestVariable
+        });
     }
+
     /**
-        * List variables
-        *
-        *
-        *
-        * @param processInstanceId Process instance ID
-        * @return Promise<RestVariable>
-        */
+    * List variables
+    *
+    * @param processInstanceId Process instance ID
+    * @return Promise<RestVariable>
+    */
     getProcessInstanceVariables(processInstanceId: string): Promise<RestVariable[]> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = null;
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/variables', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/variables',
+            pathParams
+        });
     }
+
     /**
-        * Update a variable
-        *
-        *
-        *
-        * @param processInstanceId processInstanceId
-        * @param variableName variableName
-        * @param restVariable restVariable
-        * @return Promise<RestVariable>
-        */
+    * Update a variable
+    *
+    * @param processInstanceId processInstanceId
+    * @param variableName variableName
+    * @param restVariable restVariable
+    * @return Promise<RestVariable>
+    */
     updateProcessInstanceVariable(processInstanceId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(variableName, 'variableName');
         throwIfNotDefined(restVariable, 'restVariable');
 
-        let postBody = restVariable;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId, 'variableName': variableName
+        const pathParams = {
+            processInstanceId,
+            variableName
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RestVariable);
+        return this.put({
+            path: '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}',
+            pathParams,
+            bodyParam: restVariable,
+            returnType: RestVariable
+        });
     }
-
 }
