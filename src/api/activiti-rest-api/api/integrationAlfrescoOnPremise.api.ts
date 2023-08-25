@@ -22,13 +22,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Integrationalfrescoonpremise service.
-* @module IntegrationalfrescoonpremiseApi
+* IntegrationAlfrescoOnPremiseApi service.
+* @module IntegrationAlfrescoOnPremiseApi
 */
 export class IntegrationAlfrescoOnPremiseApi extends BaseApi {
     /**
     * List Alfresco sites
-    *
     * Returns ALL Sites
     *
     * @param repositoryId repositoryId
@@ -37,175 +36,104 @@ export class IntegrationAlfrescoOnPremiseApi extends BaseApi {
     getAllSites(repositoryId: string): Promise<ResultListDataRepresentationAlfrescoSiteRepresenation> {
         throwIfNotDefined(repositoryId, 'networkId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'repositoryId': repositoryId
+        const pathParams = {
+            repositoryId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/alfresco/{repositoryId}/sites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoSiteRepresenation);
+        return this.get({
+            path: '/api/enterprise/integration/alfresco/{repositoryId}/sites',
+            pathParams,
+            returnType: ResultListDataRepresentationAlfrescoSiteRepresenation
+        });
     }
+
     /**
-        * List files and folders inside a specific folder identified by folder path
-        *
-        *
-        *
-        * @param repositoryId repositoryId
-        * @param siteId siteId
-        * @param folderPath folderPath
-        * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
-        */
+    * List files and folders inside a specific folder identified by folder path
+    *
+    * @param repositoryId repositoryId
+    * @param siteId siteId
+    * @param folderPath folderPath
+    * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
+    */
     getContentInFolderPath(repositoryId: string, siteId: string, folderPath: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
         throwIfNotDefined(repositoryId, 'networkId');
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(folderPath, 'folderPath');
 
-        let postBody = null;
-
-        let pathParams = {
-            'repositoryId': repositoryId, 'siteId': siteId, 'folderPath': folderPath
+        const pathParams = {
+            repositoryId,
+            siteId,
+            folderPath
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/rest/integration/alfresco/{repositoryId}/sites/{siteId}/folderpath/{folderPath}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation);
+        return this.get({
+            path: '/api/enterprise/rest/integration/alfresco/{repositoryId}/sites/{siteId}/folderpath/{folderPath}/content',
+            pathParams,
+            returnType: ResultListDataRepresentationAlfrescoContentRepresentation
+        });
     }
+
     /**
-        * List files and folders inside a specific folder
-        *
-        *
-        *
-        * @param repositoryId repositoryId
-        * @param folderId folderId
-        * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
-        */
+    * List files and folders inside a specific folder
+    *
+    * @param repositoryId repositoryId
+    * @param folderId folderId
+    * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
+    */
     getContentInFolder(repositoryId: string, folderId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
         throwIfNotDefined(repositoryId, 'networkId');
         throwIfNotDefined(folderId, 'folderId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'repositoryId': repositoryId, 'folderId': folderId
+        const pathParams = {
+            repositoryId,
+            folderId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation);
+        return this.get({
+            path: '/api/enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content',
+            pathParams,
+            returnType: ResultListDataRepresentationAlfrescoContentRepresentation
+        });
     }
+
     /**
-        * List files and folders inside a specific site
-        *
-        *
-        *
-        * @param repositoryId repositoryId
-        * @param siteId siteId
-        * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
-        */
+    * List files and folders inside a specific site
+    *
+    * @param repositoryId repositoryId
+    * @param siteId siteId
+    * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
+    */
     getContentInSite(repositoryId: string, siteId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
         throwIfNotDefined(repositoryId, 'networkId');
         throwIfNotDefined(siteId, 'siteId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'repositoryId': repositoryId, 'siteId': siteId
+        const pathParams = {
+            repositoryId,
+            siteId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation);
+        return this.get({
+            path: '/api/enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content',
+            pathParams,
+            returnType: ResultListDataRepresentationAlfrescoContentRepresentation
+        });
     }
+
     /**
-        * List Alfresco repositories
-        *
-        * A tenant administrator can configure one or more Alfresco repositories to use when working with content.
-        *
-        * @param opts Optional parameters
-        * @param opts.tenantId tenantId
-        * @param opts.includeAccounts includeAccounts (default to true)
-        * @return Promise<ResultListDataRepresentationAlfrescoEndpointRepresentation>
-        */
-    getRepositories(opts?: any): Promise<ResultListDataRepresentationAlfrescoEndpointRepresentation> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-            'tenantId': opts['tenantId'],
-            'includeAccounts': opts['includeAccounts']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/profile/accounts/alfresco', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoEndpointRepresentation);
+    * List Alfresco repositories
+    *
+    * A tenant administrator can configure one or more Alfresco repositories to use when working with content.
+    *
+    * @param opts Optional parameters
+    * @param opts.tenantId {string} tenantId
+    * @param opts.includeAccounts {boolean} includeAccounts (default to true)
+    * @return Promise<ResultListDataRepresentationAlfrescoEndpointRepresentation>
+    */
+    getRepositories(opts?: { tenantId?: string; includeAccounts?: boolean; }): Promise<ResultListDataRepresentationAlfrescoEndpointRepresentation> {
+        return this.get({
+            path: '/api/enterprise/profile/accounts/alfresco',
+            queryParams: opts,
+            returnType: ResultListDataRepresentationAlfrescoEndpointRepresentation
+        });
     }
-
 }
