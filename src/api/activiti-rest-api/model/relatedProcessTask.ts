@@ -24,5 +24,4 @@ export class RelatedProcessTask {
             Object.assign(this, input);
         }
     }
-
 }
