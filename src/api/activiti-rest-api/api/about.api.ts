@@ -24,35 +24,13 @@ import { BaseApi } from './base.api';
 export class AboutApi extends BaseApi {
     /**
     * Get server type and version
-    *
     * Provides information about the running Alfresco Process Services Suite. The response payload object has the properties type, majorVersion, minorVersion, revisionVersion and edition.
     *
     * @return Promise<{ [key: string]: string; }>
     */
     getAppVersion(): Promise<{ [key: string]: string; }> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/app-version', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/app-version'
+        });
     }
-
 }
