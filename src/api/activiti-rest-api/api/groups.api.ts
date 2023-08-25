@@ -20,87 +20,50 @@ import { ResultListDataRepresentationLightUserRepresentation } from '../model/re
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
+export interface GetGroupsOpts {
+    filter?: string;
+    groupId?: number;
+    externalId?: string;
+    externalIdCaseInsensitive?: string;
+    tenantId?: string;
+}
+
 /**
 * Groups service.
-* @module GroupsApi
+* @module ActivitiGroupsApi
 */
 export class ActivitiGroupsApi extends BaseApi {
     /**
     * Query groups
     *
-    *
-    *
     * @param opts Optional parameters
-    * @param opts.filter filter
-    * @param opts.groupId groupId
-    * @param opts.externalId externalId
-    * @param opts.externalIdCaseInsensitive externalIdCaseInsensitive
-    * @param opts.tenantId tenantId
     * @return Promise<ResultListDataRepresentationLightGroupRepresentation>
     */
-    getGroups(opts?: any): Promise<ResultListDataRepresentationLightGroupRepresentation> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-            'filter': opts['filter'],
-            'groupId': opts['groupId'],
-            'externalId': opts['externalId'],
-            'externalIdCaseInsensitive': opts['externalIdCaseInsensitive'],
-            'tenantId': opts['tenantId']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/groups', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationLightGroupRepresentation);
+    getGroups(opts?: GetGroupsOpts): Promise<ResultListDataRepresentationLightGroupRepresentation> {
+        return this.get({
+            path: '/api/enterprise/groups',
+            queryParams: opts,
+            returnType: ResultListDataRepresentationLightGroupRepresentation
+        });
     }
+
     /**
-        * List members of a group
-        *
-        *
-        *
-        * @param groupId groupId
-        * @return Promise<ResultListDataRepresentationLightUserRepresentation>
-        */
+    * List members of a group
+    *
+    * @param groupId groupId
+    * @return Promise<ResultListDataRepresentationLightUserRepresentation>
+    */
     getUsersForGroup(groupId: number): Promise<ResultListDataRepresentationLightUserRepresentation> {
         throwIfNotDefined(groupId, 'formId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'groupId': groupId
+        const pathParams = {
+            groupId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/groups/{groupId}/users', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationLightUserRepresentation);
+        return this.get({
+            path: '/api/enterprise/groups/{groupId}/users',
+            pathParams,
+            returnType: ResultListDataRepresentationLightUserRepresentation
+        });
     }
-
 }

@@ -20,14 +20,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Idmsync service.
-* @module IdmsyncApi
+* IDMSyncApi service.
+* @module IDMSyncApi
 */
 export class IDMSyncApi extends BaseApi {
     /**
     * Get log file for a sync log entry
-    *
-    *
     *
     * @param syncLogEntryId syncLogEntryId
     * @return Promise<{}>
@@ -35,69 +33,31 @@ export class IDMSyncApi extends BaseApi {
     getLogFile(syncLogEntryId: number): Promise<any> {
         throwIfNotDefined(syncLogEntryId, 'syncLogEntryId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'syncLogEntryId': syncLogEntryId
+        const pathParams = {
+            syncLogEntryId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile',
+            pathParams
+        });
     }
+
     /**
-        * List sync log entries
-        *
-        *
-        *
-        * @param opts Optional parameters
-        * @param opts.tenantId tenantId
-        * @param opts.page page
-        * @param opts.start start
-        * @param opts.size size
-        * @return Promise<SyncLogEntryRepresentation>
-        */
-    getSyncLogEntries(opts?: any): Promise<SyncLogEntryRepresentation> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-            'tenantId': opts['tenantId'],
-            'page': opts['page'],
-            'start': opts['start'],
-            'size': opts['size']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/idm-sync-log-entries', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, SyncLogEntryRepresentation);
+    * List sync log entries
+    *
+    * @param opts Optional parameters
+    * @param opts.tenantId {number} tenantId
+    * @param opts.page {number} page
+    * @param opts.start {number} start
+    * @param opts.size {number} size
+    * @return Promise<SyncLogEntryRepresentation>
+    */
+    getSyncLogEntries(opts?: { tenantId?: number; page?: number; start?: number; size?: number; }): Promise<SyncLogEntryRepresentation> {
+        return this.get({
+            path: '/api/enterprise/idm-sync-log-entries',
+            queryParams: opts,
+            returnType: SyncLogEntryRepresentation
+        });
     }
-
 }

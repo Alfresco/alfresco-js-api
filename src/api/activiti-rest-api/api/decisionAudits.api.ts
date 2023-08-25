@@ -28,74 +28,43 @@ export class DecisionAuditsApi extends BaseApi {
     /**
     * Get an audit trail
     *
-    *
-    *
     * @param auditTrailId auditTrailId
     * @return Promise<DecisionAuditRepresentation>
     */
     getAuditTrail(auditTrailId: number): Promise<DecisionAuditRepresentation> {
         throwIfNotDefined(auditTrailId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'auditTrailId': auditTrailId
+        const pathParams = {
+            auditTrailId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/decisions/audits/{auditTrailId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, DecisionAuditRepresentation);
+        return this.get({
+            path: '/api/enterprise/decisions/audits/{auditTrailId}',
+            pathParams,
+            returnType: DecisionAuditRepresentation
+        });
     }
+
     /**
-        * Query decision table audit trails
-        *
-        *
-        *
-        * @param decisionKey decisionKey
-        * @param dmnDeploymentId dmnDeploymentId
-        * @return Promise<ResultListDataRepresentationDecisionAuditRepresentation>
-        */
+    * Query decision table audit trails
+    *
+    * @param decisionKey decisionKey
+    * @param dmnDeploymentId dmnDeploymentId
+    * @return Promise<ResultListDataRepresentationDecisionAuditRepresentation>
+    */
     getAuditTrails(decisionKey: string, dmnDeploymentId: number): Promise<ResultListDataRepresentationDecisionAuditRepresentation> {
         throwIfNotDefined(decisionKey, 'decisionKey');
         throwIfNotDefined(dmnDeploymentId, 'dmnDeploymentId');
 
-        let postBody = null;
-
-        let pathParams = {
-
+        const queryParams = {
+            decisionKey,
+            dmnDeploymentId
         };
 
-        let queryParams = {
-            'decisionKey': decisionKey,
-            'dmnDeploymentId': dmnDeploymentId
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/decisions/audits', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationDecisionAuditRepresentation);
+        return this.get({
+            path: '/api/enterprise/decisions/audits',
+            queryParams,
+            returnType: ResultListDataRepresentationDecisionAuditRepresentation
+        });
     }
-
 }

@@ -29,8 +29,6 @@ export class ChecklistsApi extends BaseApi {
     /**
     * Create a task checklist
     *
-    *
-    *
     * @param taskId taskId
     * @param taskRepresentation taskRepresentation
     * @return Promise<TaskRepresentation>
@@ -39,98 +37,58 @@ export class ChecklistsApi extends BaseApi {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(taskRepresentation, 'taskRepresentation');
 
-        let postBody = taskRepresentation;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/checklist', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TaskRepresentation);
+        return this.post({
+            path: '/api/enterprise/tasks/{taskId}/checklist',
+            pathParams,
+            bodyParam: taskRepresentation,
+            returnType: TaskRepresentation
+        });
     }
+
     /**
-        * Get checklist for a task
-        *
-        *
-        *
-        * @param taskId taskId
-        * @return Promise<ResultListDataRepresentationTaskRepresentation>
-        */
+    * Get checklist for a task
+    *
+    * @param taskId taskId
+    * @return Promise<ResultListDataRepresentationTaskRepresentation>
+    */
     getChecklist(taskId: string): Promise<ResultListDataRepresentationTaskRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/checklist', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationTaskRepresentation);
+        return this.get({
+            path: '/api/enterprise/tasks/{taskId}/checklist',
+            pathParams,
+            returnType: ResultListDataRepresentationTaskRepresentation
+        });
     }
+
     /**
-        * Change the order of items on a checklist
-        *
-        *
-        *
-        * @param taskId taskId
-        * @param orderRepresentation orderRepresentation
-        * @return Promise<{}>
-        */
+    * Change the order of items on a checklist
+    *
+    * @param taskId taskId
+    * @param orderRepresentation orderRepresentation
+    * @return Promise<{}>
+    */
     orderChecklist(taskId: string, orderRepresentation: ChecklistOrderRepresentation): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(orderRepresentation, 'orderRepresentation');
 
-        let postBody = orderRepresentation;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/checklist', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/tasks/{taskId}/checklist',
+            bodyParam: orderRepresentation,
+            pathParams
+        });
     }
 
 }

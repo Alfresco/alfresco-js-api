@@ -23,14 +23,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
- * Appdefinitions service.
- * @module AppdefinitionsApi
+ * AppDefinitionsApi service.
+ * @module AppDefinitionsApi
  */
 export class AppDefinitionsApi extends BaseApi {
     /**
      * deleteAppDefinition
-     *
-     *
      *
      * @param appDefinitionId appDefinitionId
      * @return Promise<{}>
@@ -38,23 +36,16 @@ export class AppDefinitionsApi extends BaseApi {
     deleteAppDefinition(appDefinitionId: number): Promise<any> {
         throwIfNotDefined(appDefinitionId, 'appDefinitionId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'appDefinitionId': appDefinitionId
+        const pathParams = {
+            appDefinitionId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/api/enterprise/app-definitions/{appDefinitionId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
 
@@ -69,30 +60,23 @@ export class AppDefinitionsApi extends BaseApi {
     exportAppDefinition(modelId: number): Promise<any> {
         throwIfNotDefined(modelId, 'modelId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'modelId': modelId
+        const pathParams = {
+            modelId
         };
 
-        let queryParams = {};
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json', 'application/zip'];
 
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json', 'application/zip'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/app-definitions/{modelId}/export', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/app-definitions/{modelId}/export',
+            pathParams,
+            contentTypes,
+            accepts
+        });
     }
 
     /**
      * Get an app definition
-     *
-     *
      *
      * @param modelId Application definition ID
      * @return Promise<AppDefinitionRepresentation>
@@ -100,55 +84,36 @@ export class AppDefinitionsApi extends BaseApi {
     getAppDefinition(modelId: number): Promise<AppDefinitionRepresentation> {
         throwIfNotDefined(modelId, 'modelId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'modelId': modelId
+        const pathParams = {
+            modelId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/app-definitions/{modelId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDefinitionRepresentation);
+        return this.get({
+            path: '/api/enterprise/app-definitions/{modelId}',
+            pathParams,
+            returnType: AppDefinitionRepresentation
+        });
     }
 
     /**
      * importAndPublishApp
      *
-     *
-     *
      * @param file file
      * @return Promise<AppDefinitionUpdateResultRepresentation>
      */
-    importAndPublishApp(file: any, opts?: any): Promise<AppDefinitionUpdateResultRepresentation> {
+    importAndPublishApp(file: any): Promise<AppDefinitionUpdateResultRepresentation> {
         throwIfNotDefined(file, 'file');
 
-        opts = opts || {};
-        let postBody = null;
-        let pathParams = {};
-        let queryParams = {
-            'renewIdmEntries': opts['renewIdmEntries']
-        };
-        let headerParams = {};
-        let formParams = {
+        const formParams = {
             'file': file
         };
 
-        let contentTypes = ['multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/app-definitions/publish-app', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDefinitionUpdateResultRepresentation);
+        return this.post({
+            path: '/api/enterprise/app-definitions/publish-app',
+            formParams,
+            contentTypes: ['multipart/form-data'],
+            returnType: AppDefinitionUpdateResultRepresentation
+        });
     }
 
     /**
@@ -161,30 +126,20 @@ export class AppDefinitionsApi extends BaseApi {
      * @param opts.renewIdmEntries Whether to renew user and group identifiers (default to false)
      * @return Promise<AppDefinitionRepresentation>
      */
-    importAppDefinition(file: any, opts?: any): Promise<AppDefinitionRepresentation> {
+    importAppDefinition(file: any, opts?: { renewIdmEntries?: string }): Promise<AppDefinitionRepresentation> {
         throwIfNotDefined(file, 'file');
 
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {};
-
-        let queryParams = {
-            'renewIdmEntries': opts['renewIdmEntries']
+        const formParams = {
+            file
         };
 
-        let headerParams = {};
-        let formParams = {
-            'file': file
-        };
-
-        let contentTypes = ['multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/app-definitions/import', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDefinitionRepresentation);
+        return this.post({
+            path: '/api/enterprise/app-definitions/import',
+            queryParams: opts,
+            formParams,
+            contentTypes: ['multipart/form-data'],
+            returnType: AppDefinitionRepresentation
+        });
     }
 
     /**
@@ -200,30 +155,20 @@ export class AppDefinitionsApi extends BaseApi {
         throwIfNotDefined(modelId, 'modelId');
         throwIfNotDefined(publishModel, 'publishModel');
 
-        let postBody = publishModel;
-
-        let pathParams = {
-            'modelId': modelId
+        const pathParams = {
+            modelId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/app-definitions/{modelId}/publish', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AppDefinitionUpdateResultRepresentation);
+        return this.post({
+            path: '/api/enterprise/app-definitions/{modelId}/publish',
+            pathParams,
+            bodyParam: publishModel,
+            returnType: AppDefinitionUpdateResultRepresentation
+        });
     }
 
     /**
      * Update an app definition
-     *
-     *
      *
      * @param modelId Application definition ID
      * @param updatedModel updatedModel |
@@ -233,38 +178,28 @@ export class AppDefinitionsApi extends BaseApi {
         throwIfNotDefined(modelId, 'modelId');
         throwIfNotDefined(updatedModel, 'updatedModel');
 
-        let postBody = updatedModel;
-
-        let pathParams = {
-            'modelId': modelId
+        const pathParams = {
+            modelId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
         if (!updatedModel['appDefinition']) {
-            contentTypes = ['multipart/form-data'];
-
-            let formParams = {
+            const formParams = {
                 'file': updatedModel
             };
 
-            return this.apiClient.callApi(
-                '/api/enterprise/app-definitions/{modelId}/import', 'POST',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts);
+            return this.post({
+                path: '/api/enterprise/app-definitions/{modelId}/import',
+                pathParams,
+                formParams,
+                bodyParam: updatedModel,
+                contentTypes: ['multipart/form-data'],
+            });
         } else {
-            let formParams = {};
-
-            return this.apiClient.callApi(
-                '/api/enterprise/app-definitions/{modelId}', 'PUT',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts);
+            return this.put({
+                path: '/api/enterprise/app-definitions/{modelId}',
+                pathParams,
+                bodyParam: updatedModel
+            });
         }
-
     }
 }

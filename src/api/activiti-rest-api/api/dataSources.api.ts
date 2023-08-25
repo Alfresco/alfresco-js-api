@@ -19,44 +19,21 @@ import { ResultListDataRepresentationDataSourceRepresentation } from '../model/r
 import { BaseApi } from './base.api';
 
 /**
-* Datasources service.
-* @module DatasourcesApi
+* DataSourcesApi service.
+* @module DataSourcesApi
 */
 export class DataSourcesApi extends BaseApi {
     /**
     * Get data sources
     *
-    *
-    *
     * @param opts Optional parameters
-    * @param opts.tenantId tenantId
     * @return Promise<ResultListDataRepresentationDataSourceRepresentation>
     */
-    getDataSources(opts?: any): Promise<ResultListDataRepresentationDataSourceRepresentation> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-            'tenantId': opts['tenantId']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/data-sources', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationDataSourceRepresentation);
+    getDataSources(opts?: { tenantId?: number }): Promise<ResultListDataRepresentationDataSourceRepresentation> {
+        return this.get({
+            path: '/api/enterprise/editor/data-sources',
+            queryParams: opts,
+            returnType: ResultListDataRepresentationDataSourceRepresentation
+        });
     }
-
 }
