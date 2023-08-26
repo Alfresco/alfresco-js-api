@@ -61,13 +61,10 @@ export class TaskVariablesApi extends BaseApi {
             taskId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/variables', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/tasks/{taskId}/variables',
+            pathParams
+        });
     }
 
     /**
@@ -87,13 +84,11 @@ export class TaskVariablesApi extends BaseApi {
             variableName
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/variables/{variableName}', 'DELETE',
-            pathParams, opts, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/tasks/{taskId}/variables/{variableName}',
+            pathParams,
+            queryParams: opts
+        });
     }
     /**
     * Get a variable

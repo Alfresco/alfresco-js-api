@@ -63,13 +63,10 @@ export class ProcessInstanceVariablesApi extends BaseApi {
             variableName
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/process-instances/{processInstanceId}/variables/{variableName}',
+            pathParams
+        });
     }
 
     /**

@@ -162,13 +162,9 @@ export class ReportApi extends BaseApi {
             reportId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/app/rest/reporting/reports/{reportId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts
-        );
+        return this.delete({
+            path: '/app/rest/reporting/reports/{reportId}',
+            pathParams
+        });
     }
 }

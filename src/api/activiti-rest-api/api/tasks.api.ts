@@ -94,13 +94,10 @@ export class TasksApi extends BaseApi {
             type
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/tasks/{taskId}/identitylinks/{family}/{identityId}/{type}',
+            pathParams
+        });
     }
 
     /**
@@ -116,13 +113,10 @@ export class TasksApi extends BaseApi {
             taskId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/tasks/{taskId}',
+            pathParams
+        });
     }
 
     /**
@@ -244,13 +238,12 @@ export class TasksApi extends BaseApi {
         const pathParams = {
             taskId
         };
-        const returnType = 'blob';
 
         return this.get({
             // Todo: update url once ACTIVITI-4191 fixed
             path: 'app/rest/tasks/{taskId}/audit',
             pathParams,
-            returnType
+            returnType: 'blob'
         });
     }
 

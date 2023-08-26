@@ -99,30 +99,21 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentBodyCreate, 'commentBodyCreate');
 
-        opts = opts || {};
-        const postBody = commentBodyCreate;
-
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/comments', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , CommentEntry);
+        return this.post({
+            path: '/nodes/{nodeId}/comments',
+            pathParams,
+            queryParams,
+            bodyParam: commentBodyCreate,
+            returnType: CommentEntry
+        });
     }
 /**
     * Delete a comment
@@ -134,32 +125,18 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<{}>
     */
     deleteComment(nodeId: string, commentId: string): Promise<any> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentId, 'commentId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'nodeId': nodeId,            'commentId': commentId
+            nodeId,
+            commentId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/comments/{commentId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/nodes/{nodeId}/comments/{commentId}',
+            pathParams
+        });
     }
 /**
     * List comments
@@ -189,35 +166,24 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<CommentPaging>
     */
     listComments(nodeId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<CommentPaging> {
-
         throwIfNotDefined(nodeId, 'nodeId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/comments', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , CommentPaging);
+        return this.get({
+            path: '/nodes/{nodeId}/comments',
+            pathParams,
+            queryParams,
+            returnType: CommentPaging
+        });
     }
 /**
     * Update a comment
@@ -243,36 +209,26 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<CommentEntry>
     */
     updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: { fields?: string[] }): Promise<CommentEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentId, 'commentId');
         throwIfNotDefined(commentBodyUpdate, 'commentBodyUpdate');
 
-        opts = opts || {};
-        const postBody = commentBodyUpdate;
-
         const pathParams = {
-            'nodeId': nodeId,
-            'commentId': commentId
+            nodeId,
+            commentId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/comments/{commentId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , CommentEntry);
+        return this.put({
+            path: '/nodes/{nodeId}/comments/{commentId}',
+            pathParams,
+            queryParams,
+            bodyParam: commentBodyUpdate,
+            returnType: CommentEntry
+        });
     }
 
 }

@@ -56,33 +56,22 @@ You must have admin rights to delete audit information.
     * @return Promise<{}>
     */
     deleteAuditEntriesForAuditApp(auditApplicationId: string, where: string): Promise<any> {
-
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(where, 'where');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'auditApplicationId': auditApplicationId
+            auditApplicationId
         };
 
         const queryParams = {
             'where': where
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/audit-applications/{auditApplicationId}/audit-entries', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/audit-applications/{auditApplicationId}/audit-entries',
+            pathParams,
+            queryParams
+        });
     }
 /**
     * Permanently delete an audit entry
@@ -107,13 +96,10 @@ You must have admin rights to delete audit information.
             auditEntryId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/audit-applications/{auditApplicationId}/audit-entries/{auditEntryId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/audit-applications/{auditApplicationId}/audit-entries/{auditEntryId}',
+            pathParams
+        });
     }
 
 /**
