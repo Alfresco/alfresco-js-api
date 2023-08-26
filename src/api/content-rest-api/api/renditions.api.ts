@@ -157,8 +157,12 @@ than a 404 response.
  (default to false)
     * @return Promise<Blob>
     */
-    getRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<Blob> {
-
+    getRenditionContent(nodeId: string, renditionId: string, opts?: {
+        attachment?: boolean;
+        placeholder?: boolean;
+        ifModifiedSince?: string;
+        range?: string;
+    }): Promise<Blob> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
 
@@ -166,7 +170,8 @@ than a 404 response.
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId,            'renditionId': renditionId
+            nodeId,
+            renditionId
         };
 
         const queryParams = {
@@ -175,7 +180,8 @@ than a 404 response.
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
+            'If-Modified-Since': opts['ifModifiedSince'],
+            'Range': opts['range']
         };
         const formParams = {
         };
@@ -208,34 +214,19 @@ clause will return just the CREATED renditions:
     * @param opts.where A string to restrict the returned objects by using a predicate.
     * @return Promise<RenditionPaging>
     */
-    listRenditions(nodeId: string, opts?: any): Promise<RenditionPaging> {
-
+    listRenditions(nodeId: string, opts?: { where?: string }): Promise<RenditionPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
-        const queryParams = {
-            'where': opts['where']
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/renditions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , RenditionPaging);
+        return this.get({
+            path: '/nodes/{nodeId}/renditions',
+            pathParams,
+            queryParams: opts,
+            returnType: RenditionPaging
+        });
     }
 
     /**
@@ -253,8 +244,8 @@ clause will return just the CREATED renditions:
         throwIfNotDefined(renditionId, 'renditionId');
 
         const pathParams = {
-            'nodeId': nodeId,
-            'renditionId': renditionId
+            nodeId,
+            renditionId
         };
 
         const contentTypes = ['application/json'];

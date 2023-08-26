@@ -95,8 +95,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<CommentEntry>
     */
-    createComment(nodeId: string, commentBodyCreate: CommentBody, opts?: any): Promise<CommentEntry> {
-
+    createComment(nodeId: string, commentBodyCreate: CommentBody, opts?: { fields?: string[] }): Promise<CommentEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentBodyCreate, 'commentBodyCreate');
 
@@ -189,7 +188,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<CommentPaging>
     */
-    listComments(nodeId: string, opts?: any): Promise<CommentPaging> {
+    listComments(nodeId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<CommentPaging> {
 
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -243,7 +242,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<CommentEntry>
     */
-    updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: any): Promise<CommentEntry> {
+    updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: { fields?: string[] }): Promise<CommentEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentId, 'commentId');
@@ -253,7 +252,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody = commentBodyUpdate;
 
         const pathParams = {
-            'nodeId': nodeId,            'commentId': commentId
+            'nodeId': nodeId,
+            'commentId': commentId
         };
 
         const queryParams = {

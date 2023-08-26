@@ -99,23 +99,12 @@ You must have admin rights to delete audit information.
     * @return Promise<{}>
     */
     deleteAuditEntry(auditApplicationId: string, auditEntryId: string): Promise<any> {
-
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(auditEntryId, 'auditEntryId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'auditApplicationId': auditApplicationId,            'auditEntryId': auditEntryId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            auditApplicationId,
+            auditEntryId
         };
 
         const contentTypes = ['application/json'];
@@ -123,9 +112,10 @@ You must have admin rights to delete audit information.
 
         return this.apiClient.callApi(
             '/audit-applications/{auditApplicationId}/audit-entries/{auditEntryId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts );
     }
+
 /**
     * Get audit application info
     *
@@ -158,37 +148,27 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<AuditApp>
     */
-    getAuditApp(auditApplicationId: string, opts?: any): Promise<AuditApp> {
-
+    getAuditApp(auditApplicationId: string, opts?: { fields?: string[]; include?: string[] }): Promise<AuditApp> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'auditApplicationId': auditApplicationId
+            auditApplicationId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/audit-applications/{auditApplicationId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , AuditApp);
+        return this.get({
+            path: '/audit-applications/{auditApplicationId}',
+            pathParams,
+            queryParams,
+            returnType: AuditApp
+        });
     }
-/**
+
+    /**
     * Get audit entry
     *
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
@@ -215,36 +195,27 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<AuditEntryEntry>
     */
-    getAuditEntry(auditApplicationId: string, auditEntryId: string, opts?: any): Promise<AuditEntryEntry> {
-
+    getAuditEntry(auditApplicationId: string, auditEntryId: string, opts?: { fields?: string[] }): Promise<AuditEntryEntry> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(auditEntryId, 'auditEntryId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'auditApplicationId': auditApplicationId,            'auditEntryId': auditEntryId
+            auditApplicationId,
+            auditEntryId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/audit-applications/{auditApplicationId}/audit-entries/{auditEntryId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , AuditEntryEntry);
+        return this.get({
+            path: '/audit-applications/{auditApplicationId}/audit-entries/{auditEntryId}',
+            pathParams,
+            queryParams,
+            returnType: AuditEntryEntry
+        });
     }
+
 /**
     * List audit applications
     *
@@ -283,34 +254,18 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<AuditAppPaging>
     */
-    listAuditApps(opts?: any): Promise<AuditAppPaging> {
-
-        opts = opts || {};
-        const postBody: null = null;
-
-        const pathParams = {
-
-        };
-
+    listAuditApps(opts?: { skipCount?: string; maxItems?: string; fields?: string[] }): Promise<AuditAppPaging> {
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/audit-applications', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , AuditAppPaging);
+        return this.get({
+            path: '/audit-applications',
+            queryParams,
+            returnType: AuditAppPaging
+        });
     }
 /**
     * List audit entries for an audit application
@@ -383,15 +338,19 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<AuditEntryPaging>
     */
-    listAuditEntriesForAuditApp(auditApplicationId: string, opts?: any): Promise<AuditEntryPaging> {
-
+    listAuditEntriesForAuditApp(auditApplicationId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        where?: string;
+        orderBy?: string[];
+        include?: string[];
+        fields?: string[];
+    }): Promise<AuditEntryPaging> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
-            'auditApplicationId': auditApplicationId
+            auditApplicationId
         };
 
         const queryParams = {
@@ -403,21 +362,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/audit-applications/{auditApplicationId}/audit-entries', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , AuditEntryPaging);
+        return this.get({
+            path: '/audit-applications/{auditApplicationId}/audit-entries',
+            pathParams,
+            queryParams,
+            returnType: AuditEntryPaging
+        });
     }
-/**
+
+    /**
     * List audit entries for a node
     *
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
@@ -475,15 +428,19 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<AuditEntryPaging>
     */
-    listAuditEntriesForNode(nodeId: string, opts?: any): Promise<AuditEntryPaging> {
-
+    listAuditEntriesForNode(nodeId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        orderBy?: string[];
+        where?: string;
+        include?: string[];
+        fields?: string[];
+    }): Promise<AuditEntryPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -495,19 +452,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/audit-entries', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , AuditEntryPaging);
+        return this.get({
+            path: '/nodes/{nodeId}/audit-entries',
+            pathParams,
+            queryParams,
+            returnType: AuditEntryPaging
+        });
     }
 /**
     * Update audit application info
@@ -542,35 +492,24 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<AuditApp>
     */
-    updateAuditApp(auditApplicationId: string, auditAppBodyUpdate: AuditBodyUpdate, opts?: any): Promise<AuditApp> {
-
+    updateAuditApp(auditApplicationId: string, auditAppBodyUpdate: AuditBodyUpdate, opts?: { fields?: string[] }): Promise<AuditApp> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(auditAppBodyUpdate, 'auditAppBodyUpdate');
 
-        opts = opts || {};
-        const postBody = auditAppBodyUpdate;
-
         const pathParams = {
-            'auditApplicationId': auditApplicationId
+            auditApplicationId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/audit-applications/{auditApplicationId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , AuditApp);
+        return this.put({
+            path: '/audit-applications/{auditApplicationId}',
+            pathParams,
+            queryParams,
+            bodyParam: auditAppBodyUpdate,
+            returnType: AuditApp
+        });
     }
-
 }

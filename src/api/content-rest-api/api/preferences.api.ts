@@ -51,20 +51,17 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PreferenceEntry>
     */
-    getPreference(personId: string, preferenceName: string, opts?: any): Promise<PreferenceEntry> {
-
+    getPreference(personId: string, preferenceName: string, opts?: { fields?: string[] }): Promise<PreferenceEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(preferenceName, 'preferenceName');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId,            'preferenceName': preferenceName
+            personId,
+            preferenceName
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         const headerParams = {
@@ -78,10 +75,11 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         return this.apiClient.callApi(
             '/people/{personId}/preferences/{preferenceName}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, queryParams, headerParams, formParams, null,
             contentTypes, accepts , PreferenceEntry);
     }
-/**
+
+    /**
     * List preferences
     *
     * Gets a list of preferences for person **personId**.
@@ -114,20 +112,18 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PreferencePaging>
     */
-    listPreferences(personId: string, opts?: any): Promise<PreferencePaging> {
-
+    listPreferences(personId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<PreferencePaging> {
         throwIfNotDefined(personId, 'personId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
+            ...opts,
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
@@ -145,5 +141,4 @@ parameter are returned in addition to those specified in the **fields** paramete
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , PreferencePaging);
     }
-
 }

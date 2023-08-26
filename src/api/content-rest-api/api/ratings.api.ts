@@ -58,8 +58,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RatingEntry>
     */
-    createRating(nodeId: string, ratingBodyCreate: RatingBody, opts?: any): Promise<RatingEntry> {
-
+    createRating(nodeId: string, ratingBodyCreate: RatingBody, opts?: { fields?: string[] }): Promise<RatingEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(ratingBodyCreate, 'ratingBodyCreate');
 
@@ -67,11 +66,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody = ratingBodyCreate;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         const headerParams = {
@@ -147,7 +146,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RatingEntry>
     */
-    getRating(nodeId: string, ratingId: string, opts?: any): Promise<RatingEntry> {
+    getRating(nodeId: string, ratingId: string, opts?: { fields?: string[] }): Promise<RatingEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(ratingId, 'ratingId');
@@ -156,7 +155,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId,            'ratingId': ratingId
+            nodeId,
+            ratingId
         };
 
         const queryParams = {
@@ -204,15 +204,14 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RatingPaging>
     */
-    listRatings(nodeId: string, opts?: any): Promise<RatingPaging> {
-
+    listRatings(nodeId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<RatingPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {

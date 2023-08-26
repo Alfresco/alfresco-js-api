@@ -107,8 +107,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<DownloadEntry>
     */
-    createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: any): Promise<DownloadEntry> {
-
+    createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: { fields?: string[] }): Promise<DownloadEntry> {
         throwIfNotDefined(downloadBodyCreate, 'downloadBodyCreate');
 
         opts = opts || {};
@@ -160,7 +159,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<DownloadEntry>
     */
-    getDownload(downloadId: string, opts?: any): Promise<DownloadEntry> {
+    getDownload(downloadId: string, opts?: { fields?: string[] }): Promise<DownloadEntry> {
 
         throwIfNotDefined(downloadId, 'downloadId');
 
@@ -189,5 +188,4 @@ parameter are returned in addition to those specified in the **fields** paramete
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , DownloadEntry);
     }
-
 }

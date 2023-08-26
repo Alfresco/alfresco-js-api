@@ -75,8 +75,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonEntry>
     */
-    createPerson(personBodyCreate: PersonBodyCreate, opts?: any): Promise<PersonEntry> {
-
+    createPerson(personBodyCreate: PersonBodyCreate, opts?: { fields?: string[] }): Promise<PersonEntry> {
         throwIfNotDefined(personBodyCreate, 'personBodyCreate');
 
         opts = opts || {};
@@ -177,7 +176,7 @@ then the placeholder image is returned, rather than a 404 response.
  (default to true)
     * @return Promise<Blob>
     */
-    getAvatarImage(personId: string, opts?: any): Promise<Blob> {
+    getAvatarImage(personId: string, opts?: { attachment?: boolean; placeholder?: boolean; ifModifiedSince?: string; }): Promise<Blob> {
 
         throwIfNotDefined(personId, 'personId');
 
@@ -231,19 +230,18 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonEntry>
     */
-    getPerson(personId: string, opts?: any): Promise<PersonEntry> {
-
+    getPerson(personId: string, opts?: { fields?: string[] }): Promise<PersonEntry> {
         throwIfNotDefined(personId, 'personId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         const headerParams = {
@@ -312,13 +310,18 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonPaging>
     */
-    listPeople(opts?: any): Promise<PersonPaging> {
+    listPeople(opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        orderBy?: string[];
+        include?: string[];
+        fields?: string[];
+    }): Promise<PersonPaging> {
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-
         };
 
         const queryParams = {
@@ -371,32 +374,18 @@ JSON
     * @return Promise<{}>
     */
     requestPasswordReset(personId: string, clientBody: ClientBody): Promise<any> {
-
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(clientBody, 'clientBody');
 
-        const postBody = clientBody;
-
         const pathParams = {
-            'personId': personId
+            personId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/request-password-reset', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.post({
+            path: '/people/{personId}/request-password-reset',
+            pathParams,
+            bodyParam: clientBody
+        });
     }
 /**
     * Reset password
@@ -545,7 +534,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonEntry>
     */
-    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts?: any): Promise<PersonEntry> {
+    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts?: { fields?: string[] }): Promise<PersonEntry> {
 
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(personBodyUpdate, 'personBodyUpdate');
@@ -554,11 +543,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody = personBodyUpdate;
 
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         const headerParams = {

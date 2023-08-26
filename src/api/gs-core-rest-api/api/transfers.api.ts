@@ -58,12 +58,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TransferEntry>
     */
-    getTransfer(transferId: string, opts?: any): Promise<TransferEntry> {
+    getTransfer(transferId: string, opts?: { include?: string[]; fields?: string[] }): Promise<TransferEntry> {
         throwIfNotDefined(transferId, 'transferId');
         opts = opts || {};
 
         const pathParams = {
-            'transferId': transferId
+            transferId
         };
 
         const queryParams = {
@@ -116,7 +116,13 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<TransferAssociationPaging>
         */
-    listTransfersChildren(transferId: string, opts?: any): Promise<TransferAssociationPaging> {
+    listTransfersChildren(transferId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        include?: string[];
+        includeSource?: boolean;
+        fields?: string[];
+    }): Promise<TransferAssociationPaging> {
         throwIfNotDefined(transferId, 'transferId');
         opts = opts || {};
 

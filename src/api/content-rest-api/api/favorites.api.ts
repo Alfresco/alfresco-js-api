@@ -123,8 +123,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<FavoriteEntry>
     */
-    createFavorite(personId: string, favoriteBodyCreate: FavoriteBodyCreate, opts?: any): Promise<FavoriteEntry> {
-
+    createFavorite(personId: string, favoriteBodyCreate: FavoriteBodyCreate, opts?: { include?: string[]; fields?: string[] }): Promise<FavoriteEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(favoriteBodyCreate, 'favoriteBodyCreate');
 
@@ -222,7 +221,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<FavoriteSiteEntry>
     */
-    createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts?: any): Promise<FavoriteSiteEntry> {
+    createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts?: { fields?: string[] }): Promise<FavoriteSiteEntry> {
 
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(favoriteSiteBodyCreate, 'favoriteSiteBodyCreate');
@@ -364,7 +363,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<FavoriteEntry>
     */
-    getFavorite(personId: string, favoriteId: string, opts?: any): Promise<FavoriteEntry> {
+    getFavorite(personId: string, favoriteId: string, opts?: { include?: string[]; fields?: string[] }): Promise<FavoriteEntry> {
 
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(favoriteId, 'favoriteId');
@@ -373,7 +372,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody: null = null;
 
         const pathParams = {
-            'personId': personId,            'favoriteId': favoriteId
+            personId,
+            favoriteId
         };
 
         const queryParams = {
@@ -423,7 +423,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteEntry>
     */
-    getFavoriteSite(personId: string, siteId: string, opts?: any): Promise<SiteEntry> {
+    getFavoriteSite(personId: string, siteId: string, opts?: {fields?: string[] }): Promise<SiteEntry> {
 
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
@@ -432,7 +432,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody: null = null;
 
         const pathParams = {
-            'personId': personId,            'siteId': siteId
+            personId,
+            siteId
         };
 
         const queryParams = {
@@ -486,7 +487,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SitePaging>
     */
-    listFavoriteSitesForPerson(personId: string, opts?: any): Promise<SitePaging> {
+    listFavoriteSitesForPerson(personId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<SitePaging> {
 
         throwIfNotDefined(personId, 'personId');
 
@@ -590,15 +591,21 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<FavoritePaging>
     */
-    listFavorites(personId: string, opts?: any): Promise<FavoritePaging> {
-
+    listFavorites(personId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        orderBy?: string[];
+        where?: string;
+        include?: string[];
+        fields?: string[];
+    }): Promise<FavoritePaging> {
         throwIfNotDefined(personId, 'personId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {

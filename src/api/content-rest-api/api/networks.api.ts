@@ -47,15 +47,14 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonNetworkEntry>
     */
-    getNetwork(networkId: string, opts?: any): Promise<PersonNetworkEntry> {
-
+    getNetwork(networkId: string, opts?: { fields?: string[] }): Promise<PersonNetworkEntry> {
         throwIfNotDefined(networkId, 'networkId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'networkId': networkId
+            networkId
         };
 
         const queryParams = {
@@ -101,7 +100,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonNetworkEntry>
     */
-    getNetworkForPerson(personId: string, networkId: string, opts?: any): Promise<PersonNetworkEntry> {
+    getNetworkForPerson(personId: string, networkId: string, opts?: { fields?: string[] }): Promise<PersonNetworkEntry> {
 
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(networkId, 'networkId');
@@ -110,7 +109,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody: null = null;
 
         const pathParams = {
-            'personId': personId,            'networkId': networkId
+            personId,
+            networkId
         };
 
         const queryParams = {
@@ -161,15 +161,14 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<PersonNetworkPaging>
     */
-    listNetworksForPerson(personId: string, opts?: any): Promise<PersonNetworkPaging> {
-
+    listNetworksForPerson(personId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<PersonNetworkPaging> {
         throwIfNotDefined(personId, 'personId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
@@ -192,5 +191,4 @@ parameter are returned in addition to those specified in the **fields** paramete
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , PersonNetworkPaging);
     }
-
 }
