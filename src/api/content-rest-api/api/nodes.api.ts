@@ -93,35 +93,25 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeEntry>
     */
     copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyCopy, 'nodeBodyCopy');
 
-        opts = opts || {};
-        const postBody = nodeBodyCopy;
-
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/copy', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeEntry);
+        return this.post({
+            path: '/nodes/{nodeId}/copy',
+            pathParams,
+            queryParams,
+            bodyParam: nodeBodyCopy,
+            returnType: NodeEntry
+        });
     }
 /**
     * Create node association
@@ -191,34 +181,24 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<AssociationEntry>
     */
     createAssociation(nodeId: string, associationBodyCreate: AssociationBody, opts?: { fields?: string[] }): Promise<AssociationEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(associationBodyCreate, 'associationBodyCreate');
-
-        opts = opts || {};
-        const postBody = associationBodyCreate;
 
         const pathParams = {
             nodeId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/targets', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , AssociationEntry);
+        return this.post({
+            path: '/nodes/{nodeId}/targets',
+            pathParams,
+            queryParams,
+            bodyParam: associationBodyCreate,
+            returnType: AssociationEntry
+        });
     }
 /**
  * Create a node
@@ -585,30 +565,21 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(secondaryChildAssociationBodyCreate, 'secondaryChildAssociationBodyCreate');
 
-        opts = opts || {};
-        const postBody = secondaryChildAssociationBodyCreate;
-
         const pathParams = {
             nodeId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/secondary-children', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , ChildAssociationEntry);
+        return this.post({
+            path: '/nodes/{nodeId}/secondary-children',
+            pathParams,
+            queryParams,
+            bodyParam: secondaryChildAssociationBodyCreate,
+            returnType: ChildAssociationEntry
+        });
     }
 /**
     * Delete node association(s)
@@ -634,31 +605,20 @@ in the other direction.
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(targetId, 'targetId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
             nodeId,
             targetId
         };
 
         const queryParams = {
-            'assocType': opts['assocType']
+            assocType: opts?.assocType
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/targets/{targetId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/nodes/{nodeId}/targets/{targetId}',
+            pathParams,
+            queryParams
+        });
     }
 /**
     * Delete a node

@@ -50,30 +50,20 @@ parameter are returned in addition to those specified in the **fields** paramete
     getNetwork(networkId: string, opts?: { fields?: string[] }): Promise<PersonNetworkEntry> {
         throwIfNotDefined(networkId, 'networkId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
             networkId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/networks/{networkId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , PersonNetworkEntry);
+        return this.get({
+            path: '/networks/{networkId}',
+            pathParams,
+            queryParams,
+            returnType: PersonNetworkEntry
+        });
     }
 /**
     * Get network information
@@ -101,12 +91,8 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<PersonNetworkEntry>
     */
     getNetworkForPerson(personId: string, networkId: string, opts?: { fields?: string[] }): Promise<PersonNetworkEntry> {
-
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(networkId, 'networkId');
-
-        opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             personId,
@@ -114,22 +100,15 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/networks/{networkId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , PersonNetworkEntry);
+        return this.get({
+            path: '/people/{personId}/networks/{networkId}',
+            pathParams,
+            queryParams,
+            returnType: PersonNetworkEntry
+        });
     }
 /**
     * List network membership
@@ -164,31 +143,21 @@ parameter are returned in addition to those specified in the **fields** paramete
     listNetworksForPerson(personId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<PersonNetworkPaging> {
         throwIfNotDefined(personId, 'personId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
             personId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/networks', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , PersonNetworkPaging);
+        return this.get({
+            path: '/people/{personId}/networks',
+            pathParams,
+            queryParams,
+            returnType: PersonNetworkPaging
+        });
     }
 }
