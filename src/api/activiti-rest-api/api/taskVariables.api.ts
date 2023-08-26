@@ -69,29 +69,22 @@ export class TaskVariablesApi extends BaseApi {
             pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
+
     /**
-        * Delete a variable
-        *
-        *
-        *
-        * @param taskId taskId
-        * @param variableName variableName
-        * @param opts Optional parameters
-        * @param opts.scope scope
-        * @return Promise<{}>
-        */
-    deleteVariable(taskId: string, variableName: string, opts?: any): Promise<any> {
+    * Delete a variable
+    *
+    * @param taskId taskId
+    * @param variableName variableName
+    * @param opts Optional parameters
+    * @return Promise<{}>
+    */
+    deleteVariable(taskId: string, variableName: string, opts?: { scope?: string }): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(variableName, 'variableName');
-        opts = opts || {};
 
         const pathParams = {
             taskId,
             variableName
-        };
-
-        const queryParams = {
-            'scope': opts['scope']
         };
 
         const contentTypes = ['application/json'];
@@ -99,7 +92,7 @@ export class TaskVariablesApi extends BaseApi {
 
         return this.apiClient.callApi(
             '/api/enterprise/tasks/{taskId}/variables/{variableName}', 'DELETE',
-            pathParams, queryParams, {}, {}, null,
+            pathParams, opts, {}, {}, null,
             contentTypes, accepts);
     }
     /**
@@ -108,27 +101,21 @@ export class TaskVariablesApi extends BaseApi {
     * @param taskId taskId
     * @param variableName variableName
     * @param opts Optional parameters
-    * @param opts.scope scope
     * @return Promise<RestVariable>
     */
-    getVariable(taskId: string, variableName: string, opts?: any): Promise<RestVariable> {
+    getVariable(taskId: string, variableName: string, opts?: { scope?: string }): Promise<RestVariable> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(variableName, 'variableName');
-        opts = opts || {};
 
         const pathParams = {
             taskId,
             variableName
         };
 
-        const queryParams = {
-            'scope': opts['scope']
-        };
-
         return this.get({
             path: '/api/enterprise/tasks/{taskId}/variables/{variableName}',
             pathParams,
-            queryParams,
+            queryParams: opts,
             returnType: RestVariable
         });
     }
@@ -138,25 +125,19 @@ export class TaskVariablesApi extends BaseApi {
     *
     * @param taskId taskId
     * @param opts Optional parameters
-    * @param opts.scope scope
     * @return Promise<RestVariable>
     */
-    getVariables(taskId: string, opts?: any): Promise<RestVariable> {
+    getVariables(taskId: string, opts?: { scope?: string }): Promise<RestVariable> {
         throwIfNotDefined(taskId, 'taskId');
-        opts = opts || {};
 
         const pathParams = {
             taskId
         };
 
-        const queryParams = {
-            'scope': opts['scope']
-        };
-
         return this.get({
             path: '/api/enterprise/tasks/{taskId}/variables',
             pathParams,
-            queryParams,
+            queryParams: opts,
             returnType: RestVariable
         });
     }

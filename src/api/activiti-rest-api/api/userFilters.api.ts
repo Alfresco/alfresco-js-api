@@ -130,19 +130,12 @@ export class UserFiltersApi extends BaseApi {
     * Returns filters for the current user, optionally filtered by *appId*.
     *
     * @param opts Optional parameters
-    * @param opts.appId appId
     * @return Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation>
     */
-    getUserProcessInstanceFilters(opts?: any): Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation> {
-        opts = opts || {};
-
-        const queryParams = {
-            'appId': opts['appId']
-        };
-
+    getUserProcessInstanceFilters(opts?: { appId?: number }): Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation> {
         return this.get({
             path: '/api/enterprise/filters/processes',
-            queryParams,
+            queryParams: opts,
             returnType: ResultListDataRepresentationUserProcessInstanceFilterRepresentation
         });
     }
@@ -173,19 +166,12 @@ export class UserFiltersApi extends BaseApi {
     * Returns filters for the current user, optionally filtered by *appId*.
     *
     * @param opts Optional parameters
-    * @param opts.appId appId
     * @return Promise<ResultListDataRepresentationUserTaskFilterRepresentation>
     */
-    getUserTaskFilters(opts?: any): Promise<ResultListDataRepresentationUserTaskFilterRepresentation> {
-        opts = opts || {};
-
-        const queryParams = {
-            'appId': opts['appId']
-        };
-
+    getUserTaskFilters(opts?: { appId?: number }): Promise<ResultListDataRepresentationUserTaskFilterRepresentation> {
         return this.get({
             path: '/api/enterprise/filters/tasks',
-            queryParams,
+            queryParams: opts,
             returnType: ResultListDataRepresentationUserTaskFilterRepresentation
         });
     }

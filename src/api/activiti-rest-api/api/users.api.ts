@@ -50,26 +50,27 @@ export class UsersApi extends BaseApi {
             bodyParam: actionRequest
         });
     }
+
     /**
-        * Stream user profile picture
-        *
-        *
-        *
-        * @param userId userId
-        * @return Promise<{}>
-        */
+    * Stream user profile picture
+    *
+    *
+    *
+    * @param userId userId
+    * @return Promise<{}>
+    */
     getUserProfilePictureUrl(userId: string): string {
         return this.apiClient.basePath + '/app/rest/users/' + userId + '/picture';
     }
 
     /**
-        * Get a user
-        *
-        *
-        *
-        * @param userId userId
-        * @return Promise<UserRepresentation>
-        */
+    * Get a user
+    *
+    *
+    *
+    * @param userId userId
+    * @return Promise<UserRepresentation>
+    */
     getUser(userId: number): Promise<UserRepresentation> {
         throwIfNotDefined(userId, 'userId');
 
@@ -83,23 +84,25 @@ export class UsersApi extends BaseApi {
             returnType: UserRepresentation
         });
     }
+
     /**
-        * Query users
-        *
-        * A common use case is that a user wants to select another user (eg. when assigning a task) or group.
-        *
-        * @param opts Optional parameters
-        * @param opts.filter filter
-        * @param opts.email email
-        * @param opts.externalId externalId
-        * @param opts.externalIdCaseInsensitive externalIdCaseInsensitive
-        * @param opts.excludeTaskId excludeTaskId
-        * @param opts.excludeProcessId excludeProcessId
-        * @param opts.groupId groupId
-        * @param opts.tenantId tenantId
-        * @return Promise<ResultListDataRepresentationLightUserRepresentation>
-        */
-    getUsers(opts?: any): Promise<ResultListDataRepresentationLightUserRepresentation> {
+    * Query users
+    *
+    * A common use case is that a user wants to select another user (eg. when assigning a task) or group.
+    *
+    * @param opts Optional parameters
+    * @return Promise<ResultListDataRepresentationLightUserRepresentation>
+    */
+    getUsers(opts?: {
+        filter?: string;
+        email?: string;
+        externalId?: string;
+        externalIdCaseInsensitive?: string;
+        excludeTaskId?: string;
+        excludeProcessId?: string;
+        groupId?: number;
+        tenantId?: number;
+    }): Promise<ResultListDataRepresentationLightUserRepresentation> {
         opts = opts || {};
 
         const queryParams = {
@@ -119,14 +122,15 @@ export class UsersApi extends BaseApi {
             returnType: ResultListDataRepresentationLightUserRepresentation
         });
     }
+
     /**
-        * Request a password reset
-        *
-        *
-        *
-        * @param resetPassword resetPassword
-        * @return Promise<{}>
-        */
+    * Request a password reset
+    *
+    *
+    *
+    * @param resetPassword resetPassword
+    * @return Promise<{}>
+    */
     requestPasswordReset(resetPassword: ResetPasswordRepresentation): Promise<any> {
         throwIfNotDefined(resetPassword, 'resetPassword');
 
@@ -135,15 +139,14 @@ export class UsersApi extends BaseApi {
             bodyParam: resetPassword
         });
     }
+
     /**
-        * Update a user
-        *
-        *
-        *
-        * @param userId userId
-        * @param userRequest userRequest
-        * @return Promise<UserRepresentation>
-        */
+    * Update a user
+    *
+    * @param userId userId
+    * @param userRequest userRequest
+    * @return Promise<UserRepresentation>
+    */
     updateUser(userId: number, userRequest: UserRepresentation): Promise<UserRepresentation> {
         throwIfNotDefined(userId, 'userId');
         throwIfNotDefined(userRequest, 'userRequest');

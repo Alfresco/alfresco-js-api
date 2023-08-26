@@ -40,31 +40,17 @@ Retrieve the details of the action denoted by **actionDefinitionId**.
     * @return Promise<ActionDefinitionEntry>
     */
     actionDetails(actionDefinitionId: string): Promise<ActionDefinitionEntry> {
-
         throwIfNotDefined(actionDefinitionId, 'actionDefinitionId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'actionDefinitionId': actionDefinitionId
+            actionDefinitionId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/action-definitions/{actionDefinitionId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , ActionDefinitionEntry);
+        return this.get({
+            path: '/action-definitions/{actionDefinitionId}',
+            pathParams,
+            returnType: ActionDefinitionEntry
+        });
     }
 /**
     * Execute an action
@@ -118,46 +104,29 @@ pending execution. The ID may be used, for example to correlate an execution wit
     * @return Promise<ActionExecResultEntry>
     */
     actionExec(actionBodyExec: ActionBodyExec): Promise<ActionExecResultEntry> {
-
         throwIfNotDefined(actionBodyExec, 'actionBodyExec');
 
-        const postBody = actionBodyExec;
-
-        const pathParams = {
-
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/action-executions', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , ActionExecResultEntry);
+        return this.post({
+            path: '/action-executions',
+            bodyParam: actionBodyExec,
+            returnType: ActionExecResultEntry
+        });
     }
-/**
+
+    /**
     * Retrieve list of available actions
     *
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
-
-Gets a list of all available actions
-
-The default sort order for the returned list is for actions to be sorted by ascending name.
-You can override the default by using the **orderBy** parameter.
-
-You can use any of the following fields to order the results:
-* name
-* title
-
+    *
+    * Gets a list of all available actions
+    *
+    * The default sort order for the returned list is for actions to be sorted by ascending name.
+    * You can override the default by using the **orderBy** parameter.
+    *
+    * You can use any of the following fields to order the results:
+    * - name
+    * - title
+    *
     *
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -188,14 +157,8 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<ActionDefinitionList>
     */
-    listActions(opts?: any): Promise<ActionDefinitionList> {
-
+    listActions(opts?: { skipCount?: number; maxItems?: number; orderBy?: string[]; fields?: string[] }): Promise<ActionDefinitionList> {
         opts = opts || {};
-        const postBody: null = null;
-
-        const pathParams = {
-
-        };
 
         const queryParams = {
             'skipCount': opts['skipCount'],
@@ -204,21 +167,14 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/action-definitions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , ActionDefinitionList);
+        return this.get({
+            path: '/action-definitions',
+            queryParams,
+            returnType: ActionDefinitionList
+        });
     }
-/**
+
+    /**
     * Retrieve actions for a node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -263,15 +219,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<ActionDefinitionList>
     */
-    nodeActions(nodeId: string, opts?: any): Promise<ActionDefinitionList> {
-
+    nodeActions(nodeId: string, opts?: { skipCount?: number; maxItems?: number; orderBy?: string[]; fields?: string[] }): Promise<ActionDefinitionList> {
         throwIfNotDefined(nodeId, 'nodeId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -281,19 +234,11 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/action-definitions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , ActionDefinitionList);
+        return this.get({
+            path: '/nodes/{nodeId}/action-definitions',
+            pathParams,
+            queryParams,
+            returnType: ActionDefinitionList
+        });
     }
-
 }

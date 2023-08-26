@@ -46,44 +46,28 @@ export class SitesApi extends BaseApi {
     /**
     * Approve a site membership request
     *
-    * Approve a site membership request.
-
-    *
     * @param siteId The identifier of a site.
-    * @param inviteeId The invitee user name.
+    * @param inviteeId The invitee username.
     * @param opts Optional parameters
     * @param opts.siteMembershipApprovalBody Accepting a request to join, optionally, allows assignment of a role to the user.
-
     * @return Promise<{}>
     */
-    approveSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<any> {
-
+    approveSiteMembershipRequest(siteId: string, inviteeId: string, opts?: { siteMembershipApprovalBody?: any }): Promise<any> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(inviteeId, 'inviteeId');
 
-        opts = opts || {};
-        const postBody = opts['siteMembershipApprovalBody'];
+        const postBody = opts?.siteMembershipApprovalBody;
 
         const pathParams = {
-            'siteId': siteId,            'inviteeId': inviteeId
+            siteId,
+            inviteeId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/site-membership-requests/{inviteeId}/approve', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.post({
+            path: '/sites/{siteId}/site-membership-requests/{inviteeId}/approve',
+            pathParams,
+            bodyParam: postBody
+        });
     }
 /**
     * Create a site
@@ -132,37 +116,24 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteEntry>
     */
-    createSite(siteBodyCreate: SiteBodyCreate, opts?: any): Promise<SiteEntry> {
-
+    createSite(siteBodyCreate: SiteBodyCreate, opts?: { skipConfiguration?: boolean; skipAddToFavorites?: boolean; fields?: string[] }): Promise<SiteEntry> {
         throwIfNotDefined(siteBodyCreate, 'siteBodyCreate');
-
         opts = opts || {};
-        const postBody = siteBodyCreate;
-
-        const pathParams = {
-
-        };
 
         const queryParams = {
-            'skipConfiguration': opts['skipConfiguration'],
-            'skipAddToFavorites': opts['skipAddToFavorites'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipConfiguration: opts?.skipConfiguration,
+            skipAddToFavorites: opts?.skipAddToFavorites,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteEntry);
+        return this.post({
+            path: '/sites',
+            queryParams,
+            bodyParam: siteBodyCreate,
+            returnType: SiteEntry
+        });
     }
+
 /**
     * Create a site membership
     *
@@ -235,36 +206,27 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteMemberEntry>
     */
-    createSiteMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: any): Promise<SiteMemberEntry> {
-
+    createSiteMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: { fields?: string[] }): Promise<SiteMemberEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(siteMembershipBodyCreate, 'siteMembershipBodyCreate');
 
-        opts = opts || {};
-        const postBody = siteMembershipBodyCreate;
-
         const pathParams = {
-            'siteId': siteId
+            siteId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/members', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteMemberEntry);
+        return this.post({
+            path: '/sites/{siteId}/members',
+            pathParams,
+            queryParams,
+            bodyParam: siteMembershipBodyCreate,
+            returnType: SiteMemberEntry
+        });
     }
+
 /**
     * Create a site membership request
     *
@@ -339,68 +301,45 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteMembershipRequestEntry>
     */
-    createSiteMembershipRequestForPerson(personId: string, siteMembershipRequestBodyCreate: SiteMembershipRequestBodyCreate, opts?: any): Promise<SiteMembershipRequestEntry> {
-
+    createSiteMembershipRequestForPerson(personId: string, siteMembershipRequestBodyCreate: SiteMembershipRequestBodyCreate, opts?: { fields?: string[] }): Promise<SiteMembershipRequestEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteMembershipRequestBodyCreate, 'siteMembershipRequestBodyCreate');
 
-        opts = opts || {};
-        const postBody = siteMembershipRequestBodyCreate;
-
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/site-membership-requests', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteMembershipRequestEntry);
+        return this.post({
+            path: '/people/{personId}/site-membership-requests',
+            pathParams,
+            queryParams,
+            bodyParam: siteMembershipRequestBodyCreate,
+            returnType: SiteMembershipRequestEntry
+        });
     }
-/**
+
+    /**
     * Delete a site
-    *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Deletes the site with **siteId**.
-
     *
     * @param siteId The identifier of a site.
     * @param opts Optional parameters
     * @param opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
     * @return Promise<{}>
     */
-    deleteSite(siteId: string, opts?: any): Promise<any> {
-
+    deleteSite(siteId: string, opts?: { permanent?: boolean }): Promise<any> {
         throwIfNotDefined(siteId, 'siteId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'siteId': siteId
+            siteId
         };
 
         const queryParams = {
-            'permanent': opts['permanent']
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            permanent: opts?.permanent
         };
 
         const contentTypes = ['application/json'];
@@ -408,39 +347,25 @@ Deletes the site with **siteId**.
 
         return this.apiClient.callApi(
             '/sites/{siteId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, queryParams, {}, {}, null,
             contentTypes, accepts );
     }
-/**
-    * Delete a site membership
-    *
-    * Deletes person **personId** as a member of site **siteId**.
 
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
-    *
-    * @param siteId The identifier of a site.
-    * @param personId The identifier of a person.
-    * @return Promise<{}>
-    */
+    /**
+     * Delete a site membership
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param siteId The identifier of a site.
+     * @param personId The identifier of a person.
+     * @return Promise<{}>
+     */
     deleteSiteMembership(siteId: string, personId: string): Promise<any> {
-
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(personId, 'personId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'siteId': siteId,            'personId': personId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            siteId,
+            personId
         };
 
         const contentTypes = ['application/json'];
@@ -448,39 +373,27 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
         return this.apiClient.callApi(
             '/sites/{siteId}/members/{personId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts );
     }
-/**
+
+    /**
     * Delete a site membership
     *
     * Deletes person **personId** as a member of site **siteId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
     *
     * @param personId The identifier of a person.
     * @param siteId The identifier of a site.
     * @return Promise<{}>
     */
     deleteSiteMembershipForPerson(personId: string, siteId: string): Promise<any> {
-
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId,            'siteId': siteId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            personId,
+            siteId
         };
 
         const contentTypes = ['application/json'];
@@ -488,39 +401,27 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
         return this.apiClient.callApi(
             '/people/{personId}/sites/{siteId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts );
     }
-/**
+
+    /**
     * Delete a site membership request
     *
     * Deletes the site membership request to site **siteId** for person **personId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
     *
     * @param personId The identifier of a person.
     * @param siteId The identifier of a site.
     * @return Promise<{}>
     */
     deleteSiteMembershipRequestForPerson(personId: string, siteId: string): Promise<any> {
-
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId,            'siteId': siteId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            personId,
+            siteId
         };
 
         const contentTypes = ['application/json'];
@@ -528,10 +429,11 @@ You can use the -me- string in place of <personId> to specify the currently auth
 
         return this.apiClient.callApi(
             '/people/{personId}/site-membership-requests/{siteId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts );
     }
-/**
+
+    /**
     * Get a site
     *
     * Gets information for site **siteId**.
@@ -564,37 +466,27 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteEntry>
     */
-    getSite(siteId: string, opts?: any): Promise<SiteEntry> {
-
+    getSite(siteId: string, opts?: { relations?: string[]; fields?: string[] }): Promise<SiteEntry> {
         throwIfNotDefined(siteId, 'siteId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'siteId': siteId
+            siteId
         };
 
         const queryParams = {
-            'relations': buildCollectionParam(opts['relations'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            relations: buildCollectionParam(opts?.relations, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteEntry);
+        return this.get({
+            path: '/sites/{siteId}',
+            pathParams,
+            queryParams,
+            returnType: SiteEntry
+        });
     }
-/**
+
+    /**
     * Get a site container
     *
     * Gets information on the container **containerId** in site **siteId**.
@@ -616,43 +508,32 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteContainerEntry>
     */
-    getSiteContainer(siteId: string, containerId: string, opts?: any): Promise<SiteContainerEntry> {
-
+    getSiteContainer(siteId: string, containerId: string, opts?: { fields?: string[] }): Promise<SiteContainerEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(containerId, 'containerId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'siteId': siteId,            'containerId': containerId
+            siteId,
+            containerId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/containers/{containerId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteContainerEntry);
+        return this.get({
+            path: '/sites/{siteId}/containers/{containerId}',
+            pathParams,
+            queryParams,
+            returnType: SiteContainerEntry
+        });
     }
-/**
+
+    /**
     * Get a site membership
     *
     * Gets site membership information for person **personId** on site **siteId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
     *
     * @param siteId The identifier of a site.
     * @param personId The identifier of a person.
@@ -671,83 +552,58 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteMemberEntry>
     */
-    getSiteMembership(siteId: string, personId: string, opts?: any): Promise<SiteMemberEntry> {
-
+    getSiteMembership(siteId: string, personId: string, opts?: { fields?: string[] }): Promise<SiteMemberEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(personId, 'personId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'siteId': siteId,            'personId': personId
+            siteId,
+            personId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/members/{personId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteMemberEntry);
+        return this.get({
+            path: '/sites/{siteId}/members/{personId}',
+            pathParams,
+            queryParams,
+            returnType: SiteMemberEntry
+        });
     }
-/**
+
+    /**
     * Get a site membership
     *
     * Gets site membership information for person **personId** on site **siteId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
     *
     * @param personId The identifier of a person.
     * @param siteId The identifier of a site.
     * @return Promise<SiteRoleEntry>
     */
     getSiteMembershipForPerson(personId: string, siteId: string): Promise<SiteRoleEntry> {
-
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId,            'siteId': siteId
+            personId,
+            siteId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/sites/{siteId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteRoleEntry);
+        return this.get({
+            path: '/people/{personId}/sites/{siteId}',
+            pathParams,
+            returnType: SiteRoleEntry
+        });
     }
-/**
+
+    /**
     * Get a site membership request
     *
     * Gets the site membership request for site **siteId** for person **personId**, if one exists.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
     *
     * @param personId The identifier of a person.
     * @param siteId The identifier of a site.
@@ -766,37 +622,28 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteMembershipRequestEntry>
     */
-    getSiteMembershipRequestForPerson(personId: string, siteId: string, opts?: any): Promise<SiteMembershipRequestEntry> {
-
+    getSiteMembershipRequestForPerson(personId: string, siteId: string, opts?: { fields?: string[] }): Promise<SiteMembershipRequestEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId,            'siteId': siteId
+            personId,
+            siteId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/site-membership-requests/{siteId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteMembershipRequestEntry);
+        return this.get({
+            path: '/people/{personId}/site-membership-requests/{siteId}',
+            pathParams,
+            queryParams,
+            returnType: SiteMembershipRequestEntry
+        });
     }
-/**
+
+    /**
     * Get site membership requests
     *
     * Get the list of site membership requests the user can action.
@@ -836,37 +683,22 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteMembershipRequestWithPersonPaging>
     */
-    getSiteMembershipRequests(opts?: any): Promise<SiteMembershipRequestWithPersonPaging> {
-
-        opts = opts || {};
-        const postBody: null = null;
-
-        const pathParams = {
-
-        };
-
+    getSiteMembershipRequests(opts?: { skipCount?: number; maxItems?: number; where?: string; fields?: string[] }): Promise<SiteMembershipRequestWithPersonPaging> {
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            where: opts?.where,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/site-membership-requests', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteMembershipRequestWithPersonPaging);
+        return this.get({
+            path: '/site-membership-requests',
+            queryParams,
+            returnType: SiteMembershipRequestWithPersonPaging
+        });
     }
-/**
+
+    /**
     * List site containers
     *
     * Gets a list of containers for the site **siteId**.
@@ -893,44 +725,32 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteContainerPaging>
     */
-    listSiteContainers(siteId: string, opts?: any): Promise<SiteContainerPaging> {
-
+    listSiteContainers(siteId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<SiteContainerPaging> {
         throwIfNotDefined(siteId, 'siteId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'siteId': siteId
+            siteId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/containers', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteContainerPaging);
+        return this.get({
+            path: '/sites/{siteId}/containers',
+            pathParams,
+            queryParams,
+            returnType: SiteContainerPaging
+        });
     }
-/**
+
+    /**
     * List site membership requests
     *
     * Gets a list of the current site membership requests for person **personId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
     *
     * @param personId The identifier of a person.
     * @param opts Optional parameters
@@ -954,38 +774,28 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteMembershipRequestPaging>
     */
-    listSiteMembershipRequestsForPerson(personId: string, opts?: any): Promise<SiteMembershipRequestPaging> {
-
+    listSiteMembershipRequestsForPerson(personId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<SiteMembershipRequestPaging> {
         throwIfNotDefined(personId, 'personId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/site-membership-requests', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteMembershipRequestPaging);
+        return this.get({
+            path: '/people/{personId}/site-membership-requests',
+            pathParams,
+            queryParams,
+            returnType: SiteMembershipRequestPaging
+        });
     }
-/**
+
+    /**
     * List site memberships
     *
     * Gets a list of site memberships for site **siteId**.
@@ -1016,63 +826,52 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteMemberPaging>
     */
-    listSiteMemberships(siteId: string, opts?: any): Promise<SiteMemberPaging> {
-
+    listSiteMemberships(siteId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[]; where?: string }): Promise<SiteMemberPaging> {
         throwIfNotDefined(siteId, 'siteId');
 
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
-            'siteId': siteId
+            siteId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            where: opts?.where,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/members', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteMemberPaging);
+        return this.get({
+            path: '/sites/{siteId}/members',
+            pathParams,
+            queryParams,
+            returnType: SiteMemberPaging
+        });
     }
-/**
+
+    /**
     * List site memberships
     *
     * Gets a list of site membership information for person **personId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
-You can use the **where** parameter to filter the returned sites by **visibility** or site **preset**.
-
-Example to filter by **visibility**, use any one of:
-
-(visibility='PRIVATE')
-(visibility='PUBLIC')
-(visibility='MODERATED')
-
-Example to filter by site **preset**:
-
-(preset='site-dashboard')
-
-The default sort order for the returned list is for sites to be sorted by ascending title.
-You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
-* id
-* title
-* role
-
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+    *
+    * You can use the **where** parameter to filter the returned sites by **visibility** or site **preset**.
+    *
+    * Example to filter by **visibility**, use any one of:
+    * - (visibility='PRIVATE')
+    * - (visibility='PUBLIC')
+    * - (visibility='MODERATED')
+    *
+    * Example to filter by site **preset**:
+    *
+    * (preset='site-dashboard')
+    *
+    * The default sort order for the returned list is for sites to be sorted by ascending title.
+    * You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
+    * - id
+    * - title
+    * - role
     *
     * @param personId The identifier of a person.
     * @param opts Optional parameters
@@ -1106,15 +905,12 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @param opts.where A string to restrict the returned objects by using a predicate.
     * @return Promise<SiteRolePaging>
     */
-    listSiteMembershipsForPerson(personId: string, opts?: any): Promise<SiteRolePaging> {
-
+    listSiteMembershipsForPerson(personId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[]; where?: string, orderBy?: string[], relations?: string[] }): Promise<SiteRolePaging> {
         throwIfNotDefined(personId, 'personId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
@@ -1126,53 +922,47 @@ parameter are returned in addition to those specified in the **fields** paramete
             'where': opts['where']
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/sites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteRolePaging);
+        return this.get({
+            path: '/people/{personId}/sites',
+            pathParams,
+            queryParams,
+            returnType: SiteRolePaging
+        });
     }
-/**
+
+    /**
     * List sites
     *
     * Gets a list of sites in this repository.
-
-You can use the **where** parameter to filter the returned sites by **visibility** or site **preset**.
-
-Example to filter by **visibility**, use any one of:
-
-(visibility='PRIVATE')
-(visibility='PUBLIC')
-(visibility='MODERATED')
-
-Example to filter by site **preset**:
-
-(preset='site-dashboard')
-
-The default sort order for the returned list is for sites to be sorted by ascending title.
-You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
-* id
-* title
-* description
-
-You can use the **relations** parameter to include one or more related
-entities in a single response and so reduce network traffic.
-
-The entity types in Alfresco are organized in a tree structure.
-The **sites** entity has two children, **containers** and **members**.
-The following relations parameter returns all the container and member
-objects related to each site:
-
-containers,members
-
+    *
+    * You can use the **where** parameter to filter the returned sites by **visibility** or site **preset**.
+    *
+    * Example to filter by **visibility**, use any one of:
+    *
+    * (visibility='PRIVATE')
+    * (visibility='PUBLIC')
+    * (visibility='MODERATED')
+    *
+    * Example to filter by site **preset**:
+    *
+    * (preset='site-dashboard')
+    *
+    * The default sort order for the returned list is for sites to be sorted by ascending title.
+    * You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
+    * id
+    * title
+    * description
+    *
+    * You can use the **relations** parameter to include one or more related
+    * entities in a single response and so reduce network traffic.
+    *
+    * The entity types in Alfresco are organized in a tree structure.
+    * The **sites** entity has two children, **containers** and **members**.
+    * The following relations parameter returns all the container and member
+    * objects related to each site:
+    *
+    * containers,members
+    *
     *
     * @param opts Optional parameters
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
@@ -1205,14 +995,8 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @param opts.where A string to restrict the returned objects by using a predicate.
     * @return Promise<SitePaging>
     */
-    listSites(opts?: any): Promise<SitePaging> {
-
+    listSites(opts?: { skipCount?: number; maxItems?: number; orderBy?: string[]; relations?: string[], fields?: string[], where?: string }): Promise<SitePaging> {
         opts = opts || {};
-        const postBody: null = null;
-
-        const pathParams = {
-
-        };
 
         const queryParams = {
             'skipCount': opts['skipCount'],
@@ -1223,63 +1007,41 @@ parameter are returned in addition to those specified in the **fields** paramete
             'where': opts['where']
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SitePaging);
+        return this.get({
+            path: '/sites',
+            queryParams,
+            returnType: SitePaging
+        });
     }
-/**
+
+    /**
     * Reject a site membership request
     *
-    * Reject a site membership request.
-
-    *
     * @param siteId The identifier of a site.
-    * @param inviteeId The invitee user name.
+    * @param inviteeId The invitee username.
     * @param opts Optional parameters
     * @param opts.siteMembershipRejectionBody Rejecting a request to join, optionally, allows the inclusion of comment.
-
     * @return Promise<{}>
     */
-    rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts?: any): Promise<any> {
-
+    rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts?: { siteMembershipRejectionBody?: any }): Promise<any> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(inviteeId, 'inviteeId');
 
-        opts = opts || {};
-        const postBody = opts['siteMembershipRejectionBody'];
+        const postBody = opts?.siteMembershipRejectionBody;
 
         const pathParams = {
-            'siteId': siteId,            'inviteeId': inviteeId
+            siteId,
+            inviteeId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/site-membership-requests/{inviteeId}/reject', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.post({
+            path: '/sites/{siteId}/site-membership-requests/{inviteeId}/reject',
+            pathParams,
+            bodyParam: postBody
+        });
     }
-/**
+
+    /**
     * Update a site
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -1307,50 +1069,39 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteEntry>
     */
-    updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts?: any): Promise<SiteEntry> {
-
+    updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts?: { fields?: string[] }): Promise<SiteEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(siteBodyUpdate, 'siteBodyUpdate');
 
         opts = opts || {};
-        const postBody = siteBodyUpdate;
 
         const pathParams = {
-            'siteId': siteId
+            siteId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteEntry);
+        return this.put({
+            path: '/sites/{siteId}',
+            pathParams,
+            queryParams,
+            bodyParam: siteBodyUpdate,
+            returnType: SiteEntry
+        });
     }
-/**
+
+    /**
     * Update a site membership
     *
     * Update the membership of person **personId** in site **siteId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
-You can set the **role** to one of four types:
-
-* SiteConsumer
-* SiteCollaborator
-* SiteContributor
-* SiteManager
-
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+    * You can set the **role** to one of four types:
+    * - SiteConsumer
+    * - SiteCollaborator
+    * - SiteContributor
+    * - SiteManager
     *
     * @param siteId The identifier of a site.
     * @param personId The identifier of a person.
@@ -1370,44 +1121,34 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteMemberEntry>
     */
-    updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: any): Promise<SiteMemberEntry> {
-
+    updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: { fields?: string[] }): Promise<SiteMemberEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteMembershipBodyUpdate, 'siteMembershipBodyUpdate');
 
-        opts = opts || {};
-        const postBody = siteMembershipBodyUpdate;
-
         const pathParams = {
-            'siteId': siteId,            'personId': personId
+            siteId,
+            personId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/members/{personId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteMemberEntry);
+        return this.put({
+            path: '/sites/{siteId}/members/{personId}',
+            pathParams,
+            queryParams,
+            bodyParam: siteMembershipBodyUpdate,
+            returnType: SiteMemberEntry
+        });
     }
-/**
+
+    /**
     * Update a site membership request
     *
     * Updates the message for the site membership request to site **siteId** for person **personId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
     *
     * @param personId The identifier of a person.
     * @param siteId The identifier of a site.
@@ -1427,49 +1168,40 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteMembershipRequestEntry>
     */
-    updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts?: any): Promise<SiteMembershipRequestEntry> {
-
+    updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts?: { fields?: string[] }): Promise<SiteMembershipRequestEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(siteMembershipRequestBodyUpdate, 'siteMembershipRequestBodyUpdate');
 
-        opts = opts || {};
-        const postBody = siteMembershipRequestBodyUpdate;
-
         const pathParams = {
-            'personId': personId,            'siteId': siteId
+            personId,
+            siteId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/site-membership-requests/{siteId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteMembershipRequestEntry);
+        return this.put({
+            path: '/people/{personId}/site-membership-requests/{siteId}',
+            pathParams,
+            queryParams,
+            bodyParam: siteMembershipRequestBodyUpdate,
+            returnType: SiteMembershipRequestEntry
+        });
     }
 
     /**
      * Create a site membership for group
-     *
      * Creates a site membership for group **groupId** on site **siteId**.
-
+     *
      **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
-     You can set the **role** to one of four types:
-     * SiteConsumer
-     * SiteCollaborator
-     * SiteContributor
-     * SiteManager
+     * You can set the **role** to one of four types:
+     * - SiteConsumer
+     * - SiteCollaborator
+     * - SiteContributor
+     * - SiteManager
+     *
      **Note:** You can create more than one site membership by
      specifying a list of group in the JSON body like this:
 
@@ -1516,32 +1248,25 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @param opts Optional parameters
      * @return Promise<SiteGroupEntry>
      */
-    createSiteGroupMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: any): Promise<SiteGroupEntry> {
-
+    createSiteGroupMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: { fields?: string[] }): Promise<SiteGroupEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(siteMembershipBodyCreate, 'siteMembershipBodyCreate');
 
-        opts = opts || {};
-        const postBody = siteMembershipBodyCreate;
-
         const pathParams = {
-            'siteId': siteId
+            siteId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {};
-        const formParams = {};
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/group-members', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, SiteGroupEntry);
+        return this.post({
+            path: '/sites/{siteId}/group-members',
+            pathParams,
+            queryParams,
+            bodyParam: siteMembershipBodyCreate,
+            returnType: SiteGroupEntry
+        });
     }
 
     /**
@@ -1561,164 +1286,115 @@ parameter are returned in addition to those specified in the **fields** paramete
      (default to 100)
      * @return Promise<SiteGroupPaging>
      */
-    listSiteGroups(siteId: string, opts?: any): Promise<SiteGroupPaging> {
-
+    listSiteGroups(siteId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<SiteGroupPaging> {
         throwIfNotDefined(siteId, 'siteId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'siteId': siteId
+            siteId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/group-members', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteGroupPaging);
+        return this.get({
+            path: '/sites/{siteId}/group-members',
+            pathParams,
+            queryParams,
+            returnType: SiteGroupPaging
+        });
     }
 
     /**
      * Get information about site membership of group
      **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
-
-     Gets site membership information for group **groupId** on site **siteId**.
-
+     * Gets site membership information for group **groupId** on site **siteId**.
      *
      * @param siteId The identifier of a site.
      * @param groupId The authorityId of a group.
      * @param opts Optional parameters
      * @return Promise<SiteGroupEntry>
      */
-    getSiteGroupMembership(siteId: string, groupId: string, opts?: any): Promise<SiteGroupEntry> {
-
+    getSiteGroupMembership(siteId: string, groupId: string, opts?: { fields?: string[] }): Promise<SiteGroupEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(groupId, 'groupId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'siteId': siteId,
-            'groupId': groupId
+            siteId,
+            groupId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/group-members/{groupId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteGroupEntry);
+        return this.get({
+            path: '/sites/{siteId}/group-members/{groupId}',
+            pathParams,
+            queryParams,
+            returnType: SiteGroupEntry
+        });
     }
 
     /**
      * Update site membership of group
      *
      * Update the membership of person **groupId** in site **siteId**.
-
-     **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
-
-     You can set the **role** to one of four types:
-     * SiteConsumer
-     * SiteCollaborator
-     * SiteContributor
-     * SiteManager
-
+     *
+     * **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+     *
+     * You can set the **role** to one of four types:
+     * - SiteConsumer
+     * - SiteCollaborator
+     * - SiteContributor
+     * - SiteManager
      *
      * @param siteId The identifier of a site.
      * @param groupId The authorityId of a group.
      * @param siteMembershipBodyUpdate The group new role
      * @param opts Optional parameters
-
      * @return Promise<SiteGroupEntry>
      */
-    updateSiteGroupMembership(siteId: string, groupId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: any): Promise<SiteGroupEntry> {
-
+    updateSiteGroupMembership(siteId: string, groupId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: { fields?: string[] }): Promise<SiteGroupEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(siteMembershipBodyUpdate, 'siteMembershipBodyUpdate');
 
-        opts = opts || {};
-        const postBody = siteMembershipBodyUpdate;
-
         const pathParams = {
-            'siteId': siteId,
-            'groupId': groupId
+            siteId,
+            groupId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/group-members/{groupId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteGroupEntry);
+        return this.put({
+            path: '/sites/{siteId}/group-members/{groupId}',
+            pathParams,
+            queryParams,
+            bodyParam: siteMembershipBodyUpdate,
+            returnType: SiteGroupEntry
+        });
     }
 
     /**
      * Delete a group membership for site
      *
      * Deletes group **groupId** as a member of site **siteId**.
-
      * @param siteId The identifier of a site.
      * @param groupId The authorityId of a group.
      * @return Promise<{}>
      */
     deleteSiteGroupMembership(siteId: string, groupId: string): Promise<any> {
-
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(groupId, 'groupId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'siteId': siteId,
-            'groupId': groupId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            siteId,
+            groupId
         };
 
         const contentTypes = ['application/json'];
@@ -1726,7 +1402,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         return this.apiClient.callApi(
             '/sites/{siteId}/group-members/{groupId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
 }
