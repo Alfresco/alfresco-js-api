@@ -30,7 +30,7 @@ export class DateAlfresco extends Date {
         }
 
         const dateLength = 10;
-        const separatorPos = dateToConvert.substring(dateLength).search(/[\+\-]/) + dateLength;
+        const separatorPos = dateToConvert.substring(dateLength).search(/[+-]/) + dateLength;
         const dateStr = separatorPos > dateLength ? dateToConvert.substring(0, separatorPos) : dateToConvert;
         const tzStr = separatorPos > dateLength ? dateToConvert.substring(separatorPos) : '';
         const parsedDate = this.parseDateTime(dateStr);
@@ -61,7 +61,7 @@ export class DateAlfresco extends Date {
      * @returns The number of minutes offset from UTC.
      */
     static parseDateTimeZone(dateToConvert: string): number {
-        const match = /([\+\-])(\d{2}):?(\d{2})?/.exec(dateToConvert);
+        const match = /([+-])(\d{2}):?(\d{2})?/.exec(dateToConvert);
         if (match !== null) {
             return (parseInt(match[1] + '1', 10) * -1 * (parseInt(match[2], 10) * 60) + parseInt(match[3] || '0', 10));
         } else {
