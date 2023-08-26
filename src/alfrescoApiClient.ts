@@ -264,13 +264,15 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     }
 
     private static addParamsToUrl(path: string, pathParams: any) {
-        return path.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
+        return path.replace(/\{([\w-]+)}/g, function (fullMatch, key) {
             let value;
-            if (pathParams.hasOwnProperty(key)) {
+
+            if (Object.prototype.hasOwnProperty.call(pathParams, key)) {
                 value = paramToString(pathParams[key]);
             } else {
                 value = fullMatch;
             }
+
             return encodeURIComponent(value);
         });
     }

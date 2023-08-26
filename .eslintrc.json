@@ -19,7 +19,6 @@
         "no-useless-escape": "off",
         "prefer-rest-params": "off",
         "prefer-spread": "off",
-        "no-prototype-builtins": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/ban-ts-comment": 1,
         "@typescript-eslint/ban-types": 1,

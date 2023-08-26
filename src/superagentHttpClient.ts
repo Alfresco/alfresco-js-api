@@ -95,7 +95,8 @@ export class SuperagentHttpClient implements HttpClient {
                     }
                 } else {
                     if (securityOptions.isBpmRequest) {
-                        if (response.header && response.header.hasOwnProperty('set-cookie')) {
+                        const hasSetCookie = Object.prototype.hasOwnProperty.call(response.header, 'set-cookie');
+                        if (response.header && hasSetCookie) {
                             // mutate the passed value from AlfrescoApiClient class for backward compatibility
                             securityOptions.authentications.cookie = response.header['set-cookie'][0];
                         }
@@ -183,7 +184,7 @@ export class SuperagentHttpClient implements HttpClient {
         } else if (contentType === 'multipart/form-data') {
             const _formParams = SuperagentHttpClient.normalizeParams(formParams);
             for (const key in _formParams) {
-                if (_formParams.hasOwnProperty(key)) {
+                if (Object.prototype.hasOwnProperty.call(_formParams, key)) {
                     if (SuperagentHttpClient.isFileParam(_formParams[key])) {
                         // file field
                         request.attach(key, _formParams[key]).on('progress', (event: ProgressEvent) => {
@@ -334,7 +335,7 @@ export class SuperagentHttpClient implements HttpClient {
         const newParams: { [key: string]: any } = {};
 
         for (const key in params) {
-            if (params.hasOwnProperty(key) && params[key] !== undefined && params[key] !== null) {
+            if (Object.prototype.hasOwnProperty.call(params, key) && params[key] !== undefined && params[key] !== null) {
                 const value = params[key];
                 if (SuperagentHttpClient.isFileParam(value) || Array.isArray(value)) {
                     newParams[key] = value;
