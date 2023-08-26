@@ -134,7 +134,8 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     }
 
     delete<T = void>(options: RequestOptions): AlfrescoApiClientPromise<T> {
-        return this.buildRequestCall<T>(this.basePath, options, this.httpClient.delete.bind(this.httpClient));
+        const url = this.getCallApiUrl(options);
+        return this.buildRequestCall<T>(url, options, this.httpClient.delete.bind(this.httpClient));
     }
 
     callApi(

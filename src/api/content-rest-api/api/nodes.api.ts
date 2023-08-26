@@ -737,31 +737,16 @@ associated as a secondary child with other secondary parents.
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(childId, 'childId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
             nodeId,
             childId
         };
 
-        const queryParams = {
-            'assocType': opts['assocType']
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/secondary-children/{childId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/nodes/{nodeId}/secondary-children/{childId}',
+            pathParams,
+            queryParams: opts
+        });
     }
 /**
     * Get a node
@@ -808,9 +793,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     */
     getNode(nodeId: string, opts?: { include?: string[]; relativePath?: string; fields?: string[] }): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             nodeId
@@ -822,21 +805,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeEntry);
+        return this.get({
+            path: '/nodes/{nodeId}',
+            pathParams,
+            queryParams,
+            returnType: NodeEntry
+        });
     }
-/**
+
+    /**
     * Get node content
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -872,30 +849,30 @@ Single part request supported, for example: bytes=1-10.
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             nodeId
         };
 
         const queryParams = {
-            'attachment': opts['attachment']
+            attachment: opts?.attachment
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],
-            'Range': opts['range']
-        };
-        const formParams = {
+            'If-Modified-Since': opts?.ifModifiedSince,
+            'Range': opts?.range
         };
 
-        const contentTypes = ['application/json'];
         const accepts = ['application/octet-stream'];
 
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , 'blob');
+        return this.get({
+            path: '/nodes/{nodeId}/content',
+            pathParams,
+            queryParams,
+            headerParams,
+            accepts,
+            returnType: 'blob'
+        });
     }
 /**
     * List node children
@@ -1005,11 +982,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         includeSource?: boolean;
         fields?: string[];
     }): Promise<NodeChildAssociationPaging> {
-
         throwIfNotDefined(nodeId, 'nodeId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             nodeId
@@ -1026,19 +1000,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/children', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeChildAssociationPaging);
+        return this.get({
+            path: '/nodes/{nodeId}/children',
+            pathParams,
+            queryParams,
+            returnType: NodeChildAssociationPaging
+        });
     }
 /**
     * List parents
@@ -1102,11 +1069,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         includeSource?: boolean;
         fields?: string[];
     }): Promise<NodeAssociationPaging> {
-
         throwIfNotDefined(nodeId, 'nodeId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             nodeId
@@ -1121,21 +1085,15 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/parents', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeAssociationPaging);
+        return this.get({
+            path: '/nodes/{nodeId}/parents',
+            pathParams,
+            queryParams,
+            returnType: NodeAssociationPaging
+        });
     }
-/**
+
+    /**
     * List secondary children
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -1144,24 +1102,23 @@ Gets a list of secondary child nodes that are associated with the current parent
 
     *
     * @param nodeId The identifier of a parent node. You can also use one of these well-known aliases:
-* -my-
-* -shared-
-* -root-
-
+    * -my-
+    * -shared-
+    * -root-
     * @param opts Optional parameters
     * @param opts.where Optionally filter the list by assocType. Here's an example:
-
-*   where=(assocType='my:specialAssocType')
-
+    *
+    *   where=(assocType='my:specialAssocType')
+    *
     * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* aspectNames
-* isLink
-* isFavorite
-* isLocked
-* path
-* properties
-
+    * - allowableOperations
+    * - aspectNames
+    * - isLink
+    * - isFavorite
+    * - isLocked
+    * - path
+    * - properties
+    *
     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
 If not supplied then the default value is 0.
  (default to 0)
@@ -1192,9 +1149,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         fields?: string[];
     }): Promise<NodeChildAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             nodeId
@@ -1209,19 +1164,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/secondary-children', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeChildAssociationPaging);
+        return this.get({
+            path: '/nodes/{nodeId}/secondary-children',
+            pathParams,
+            queryParams,
+            returnType: NodeChildAssociationPaging
+        });
     }
 /**
     * List source associations
@@ -1266,9 +1214,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         fields?: string[];
     }): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             nodeId
@@ -1280,19 +1226,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/sources', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeAssociationPaging);
+        return this.get({
+            path: '/nodes/{nodeId}/sources',
+            pathParams,
+            queryParams,
+            returnType: NodeAssociationPaging
+        });
     }
 /**
     * List target associations
@@ -1339,9 +1278,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         fields?: string[];
     }): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             nodeId
@@ -1355,19 +1292,12 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/targets', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeAssociationPaging);
+        return this.get({
+            path: '/nodes/{nodeId}/targets',
+            pathParams,
+            queryParams,
+            returnType: NodeAssociationPaging
+        });
     }
 /**
     * Lock a node
@@ -1430,32 +1360,24 @@ parameter are returned in addition to those specified in the **fields** paramete
     lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyLock, 'nodeBodyLock');
-
         opts = opts || {};
-        const postBody = nodeBodyLock;
 
         const pathParams = {
             nodeId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/lock', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeEntry);
+        return this.post({
+            path: '/nodes/{nodeId}/lock',
+            pathParams,
+            queryParams,
+            bodyParam: nodeBodyLock,
+            returnType: NodeEntry
+        });
     }
 /**
     * Move a node
@@ -1504,31 +1426,22 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyMove, 'nodeBodyMove');
 
-        opts = opts || {};
-        const postBody = nodeBodyMove;
-
         const pathParams = {
             nodeId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/move', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeEntry);
+        return this.post({
+            path: '/nodes/{nodeId}/move',
+            pathParams,
+            queryParams,
+            bodyParam: nodeBodyMove,
+            returnType: NodeEntry
+        });
     }
 
 /**
@@ -1570,34 +1483,23 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeEntry>
     */
     unlockNode(nodeId: string, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
-
-        opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             nodeId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/unlock', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeEntry);
+        return this.post({
+            path: '/nodes/{nodeId}/unlock',
+            pathParams,
+            queryParams,
+            returnType: NodeEntry
+        });
     }
 /**
     * Update a node
@@ -1687,35 +1589,25 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeEntry>
     */
     updateNode(nodeId: string, nodeBodyUpdate: NodeBodyUpdate, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyUpdate, 'nodeBodyUpdate');
 
-        opts = opts || {};
-        const postBody = nodeBodyUpdate;
-
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeEntry);
+        return this.put({
+            path: '/nodes/{nodeId}',
+            pathParams,
+            queryParams,
+            bodyParam: nodeBodyUpdate,
+            returnType: NodeEntry
+        });
     }
 /**
     * Update node content
@@ -1781,38 +1673,30 @@ parameter are returned in addition to those specified in the **fields** paramete
         comment?: string;
         name?: string;
     }): Promise<NodeEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
-
         opts = opts || {};
-        const postBody = contentBodyUpdate;
 
         const pathParams = {
             nodeId
         };
 
         const queryParams = {
-            'majorVersion': opts['majorVersion'],
-            'comment': opts['comment'],
-            'name': opts['name'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            majorVersion: opts?.majorVersion,
+            comment: opts?.comment,
+            name: opts?.name,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/octet-stream'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/content', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeEntry);
+        return this.put({
+            path: '/nodes/{nodeId}/content',
+            pathParams,
+            queryParams,
+            contentTypes: ['application/octet-stream'],
+            bodyParam: contentBodyUpdate,
+            returnType: NodeEntry
+        });
     }
 
     /**
@@ -1824,20 +1708,17 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @return Promise<DirectAccessUrlEntry>
      */
     requestDirectAccessUrl(nodeId: string): Promise<DirectAccessUrlEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/request-direct-access-url', 'POST',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts , DirectAccessUrlEntry);
+        return this.post({
+            path: '/nodes/{nodeId}/request-direct-access-url',
+            pathParams,
+            returnType: DirectAccessUrlEntry
+        });
     }
 
 }

@@ -84,14 +84,10 @@ For example using Javascript:
         *
         * @return Promise<{}>
         */
-    deleteTicket(): Promise<any> {
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/tickets/-me-', 'DELETE',
-            {}, {}, {}, {}, null,
-            contentTypes, accepts);
+    deleteTicket(): Promise<void> {
+        return this.delete({
+            path: '/tickets/-me-'
+        });
     }
     /**
         * Validate ticket

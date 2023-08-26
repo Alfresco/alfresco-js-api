@@ -73,13 +73,10 @@ export class UserFiltersApi extends BaseApi {
             userFilterId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/processes/{userFilterId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/filters/processes/{userFilterId}',
+            pathParams
+        });
     }
 
     /**
@@ -95,13 +92,10 @@ export class UserFiltersApi extends BaseApi {
             userFilterId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/tasks/{userFilterId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/filters/tasks/{userFilterId}',
+            pathParams
+        });
     }
 
     /**
