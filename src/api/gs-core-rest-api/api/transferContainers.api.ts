@@ -23,7 +23,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Transfercontainers service.
+* TransferContainersApi service.
 * @module TransferContainersApi
 */
 export class TransferContainersApi extends BaseApi {

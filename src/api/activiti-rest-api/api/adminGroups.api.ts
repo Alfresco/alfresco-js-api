@@ -171,13 +171,10 @@ export class AdminGroupsApi extends BaseApi {
             groupCapabilityId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/admin/groups/{groupId}/capabilities/{groupCapabilityId}',
+            pathParams
+        });
     }
 
     /**
@@ -196,13 +193,10 @@ export class AdminGroupsApi extends BaseApi {
             userId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/groups/{groupId}/members/{userId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/admin/groups/{groupId}/members/{userId}',
+            pathParams
+        });
     }
 
     /**
@@ -218,13 +212,10 @@ export class AdminGroupsApi extends BaseApi {
             groupId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/groups/{groupId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/admin/groups/{groupId}',
+            pathParams
+        });
     }
 
     /**
@@ -243,13 +234,10 @@ export class AdminGroupsApi extends BaseApi {
             relatedGroupId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/admin/groups/{groupId}/related-groups/{relatedGroupId}',
+            pathParams
+        });
     }
 
     /**
