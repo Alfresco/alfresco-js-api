@@ -143,7 +143,10 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordEntry>
     */
-    createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: any): Promise<RecordEntry> {
+    createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: {
+        include?: string[];
+        fields?: string[];
+    }): Promise<RecordEntry> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
         throwIfNotDefined(recordBodyCreate, 'recordBodyCreate');
         opts = opts || {};
@@ -220,7 +223,10 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordFolderEntry>
         */
-    getRecordFolder(recordFolderId: string, opts?: any): Promise<RecordFolderEntry> {
+    getRecordFolder(recordFolderId: string, opts?: {
+        include?: string[];
+        fields?: string[];
+    }): Promise<RecordFolderEntry> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
         opts = opts || {};
 
@@ -288,7 +294,14 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordFolderAssociationPaging>
         */
-    listRecordFolderChildren(recordFolderId: string, opts?: any): Promise<RecordFolderAssociationPaging> {
+    listRecordFolderChildren(recordFolderId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        where?: string;
+        include?: string[];
+        includeSource?: boolean;
+        fields?: string[];
+    }): Promise<RecordFolderAssociationPaging> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
         opts = opts || {};
 
@@ -358,13 +371,16 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordFolderEntry>
         */
-    updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordFolderEntry> {
+    updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: {
+        include?: string[];
+        fields?: string[];
+    }): Promise<RecordFolderEntry> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
         throwIfNotDefined(recordFolderBodyUpdate, 'recordFolderBodyUpdate');
         opts = opts || {};
 
         const pathParams = {
-            'recordFolderId': recordFolderId
+            recordFolderId
         };
 
         const queryParams = {

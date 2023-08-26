@@ -141,8 +141,12 @@ than a 404 response.
  (default to false)
     * @return Promise<Blob>
     */
-    getArchivedNodeRenditionContent(nodeId: string, renditionId: string, opts?: any): Promise<Blob> {
-
+    getArchivedNodeRenditionContent(nodeId: string, renditionId: string, opts?: {
+        attachment?: boolean;
+        placeholder?: boolean;
+        ifModifiedSince?: string;
+        range?: string;
+    }): Promise<Blob> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
 
@@ -150,7 +154,8 @@ than a 404 response.
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId,            'renditionId': renditionId
+            nodeId,
+            renditionId
         };
 
         const queryParams = {
@@ -159,7 +164,8 @@ than a 404 response.
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
+            'If-Modified-Since': opts['ifModifiedSince'],
+            'Range': opts['range']
         };
         const formParams = {
         };
@@ -194,7 +200,7 @@ Gets the specific deleted node **nodeId**.
 
     * @return Promise<DeletedNodeEntry>
     */
-    getDeletedNode(nodeId: string, opts?: any): Promise<DeletedNodeEntry> {
+    getDeletedNode(nodeId: string, opts?: { include?: string[] }): Promise<DeletedNodeEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -251,7 +257,11 @@ Single part request supported, for example: bytes=1-10.
 
     * @return Promise<Blob>
     */
-    getDeletedNodeContent(nodeId: string, opts?: any): Promise<Blob> {
+    getDeletedNodeContent(nodeId: string, opts?: {
+        attachment?: boolean;
+        ifModifiedSince?: string;
+        range?: string;
+    }): Promise<Blob> {
 
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -259,7 +269,7 @@ Single part request supported, for example: bytes=1-10.
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -267,7 +277,8 @@ Single part request supported, for example: bytes=1-10.
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
+            'If-Modified-Since': opts['ifModifiedSince'],
+            'Range': opts['range']
         };
         const formParams = {
         };
@@ -300,7 +311,7 @@ clause will return just the CREATED renditions:
     * @param opts.where A string to restrict the returned objects by using a predicate.
     * @return Promise<RenditionPaging>
     */
-    listDeletedNodeRenditions(nodeId: string, opts?: any): Promise<RenditionPaging> {
+    listDeletedNodeRenditions(nodeId: string, opts?: { where?: string }): Promise<RenditionPaging> {
 
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -361,34 +372,19 @@ If not supplied then the default value is 100.
 
     * @return Promise<DeletedNodesPaging>
     */
-    listDeletedNodes(opts?: any): Promise<DeletedNodesPaging> {
-
+    listDeletedNodes(opts?: { skipCount?: number; maxItems?: string; include?: string[] }): Promise<DeletedNodesPaging> {
         opts = opts || {};
-        const postBody: null = null;
-
-        const pathParams = {
-
-        };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'include': buildCollectionParam(opts['include'], 'csv')
+            ...opts,
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , DeletedNodesPaging);
+        return this.get({
+            path: '/deleted-nodes',
+            queryParams,
+            returnType: DeletedNodesPaging
+        });
     }
 /**
     * Restore a deleted node
@@ -425,34 +421,30 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @param opts.deletedNodeBodyRestore The targetParentId if the node is restored to a new location.
     * @return Promise<NodeEntry>
     */
-    restoreDeletedNode(nodeId: string, opts?: any): Promise<NodeEntry> {
-
+    restoreDeletedNode(nodeId: string, opts?: {
+        fields?: string[];
+        deletedNodeBodyRestore?: {
+            targetParentId?: string;
+            assocType?: string;
+        };
+    }): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
 
-        opts = opts || {};
-        const postBody = opts['deletedNodeBodyRestore'];
-
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}/restore', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , NodeEntry);
+        return this.post({
+            path: '/deleted-nodes/{nodeId}/restore',
+            pathParams,
+            queryParams,
+            bodyParam: opts?.deletedNodeBodyRestore,
+            returnType: NodeEntry
+        });
     }
 
     /**
@@ -464,20 +456,17 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @return Promise<DirectAccessUrlEntry>
      */
     requestDirectAccessUrl(nodeId: string): Promise<DirectAccessUrlEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}/request-direct-access-url', 'POST',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts , DirectAccessUrlEntry);
+        return this.post({
+            path: '/deleted-nodes/{nodeId}/request-direct-access-url',
+            pathParams,
+            returnType: DirectAccessUrlEntry
+        });
     }
 
     /**
@@ -490,22 +479,19 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @return Promise<DirectAccessUrlEntry>
      */
     requestRenditionDirectAccessUrl(nodeId: string, renditionId: string): Promise<DirectAccessUrlEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
 
         const pathParams = {
-            'nodeId': nodeId,
-            'renditionId': renditionId
+            nodeId,
+            renditionId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url', 'POST',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts , DirectAccessUrlEntry);
+        return this.post({
+            path: '/deleted-nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url',
+            pathParams,
+            returnType: DirectAccessUrlEntry
+        });
     }
 
 }

@@ -98,7 +98,7 @@ JSON
         throwIfNotDefined(classificationReasonId, 'classificationReasonId');
 
         const pathParams = {
-            'classificationReasonId': classificationReasonId
+            classificationReasonId
         };
 
         const contentTypes = ['application/json'];
@@ -131,7 +131,7 @@ JSON
 
         * @return Promise<ClassificationReasonsPaging>
         */
-    listClassificationReasons(opts?: any): Promise<ClassificationReasonsPaging> {
+    listClassificationReasons(opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<ClassificationReasonsPaging> {
         opts = opts || {};
 
         const queryParams = {

@@ -209,7 +209,11 @@ Single part request supported, for example: bytes=1-10.
 
     * @return Promise<Blob>
     */
-    getVersionContent(nodeId: string, versionId: string, opts?: any): Promise<Blob> {
+    getVersionContent(nodeId: string, versionId: string, opts?: {
+        attachment?: boolean;
+        ifModifiedSince?: string;
+        range?: string;
+    }): Promise<Blob> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
@@ -218,7 +222,8 @@ Single part request supported, for example: bytes=1-10.
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId,            'versionId': versionId
+            nodeId,
+            versionId
         };
 
         const queryParams = {
@@ -226,7 +231,8 @@ Single part request supported, for example: bytes=1-10.
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
+            'If-Modified-Since': opts['ifModifiedSince'],
+            'Range': opts['range']
         };
         const formParams = {
         };
@@ -253,7 +259,6 @@ Gets the rendition information for **renditionId** of version of file **nodeId**
     * @return Promise<RenditionEntry>
     */
     getVersionRendition(nodeId: string, versionId: string, renditionId: string): Promise<RenditionEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
         throwIfNotDefined(renditionId, 'renditionId');
@@ -261,7 +266,9 @@ Gets the rendition information for **renditionId** of version of file **nodeId**
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId,            'versionId': versionId,            'renditionId': renditionId
+            nodeId,
+            versionId,
+            renditionId
         };
 
         const queryParams = {
@@ -315,7 +322,12 @@ than a 404 response.
  (default to false)
     * @return Promise<Blob>
     */
-    getVersionRenditionContent(nodeId: string, versionId: string, renditionId: string, opts?: any): Promise<Blob> {
+    getVersionRenditionContent(nodeId: string, versionId: string, renditionId: string, opts?: {
+        attachment?: boolean;
+        placeholder?: boolean;
+        ifModifiedSince?: string;
+        range?: string;
+    }): Promise<Blob> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
@@ -325,7 +337,9 @@ than a 404 response.
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId,            'versionId': versionId,            'renditionId': renditionId
+            nodeId,
+            versionId,
+            renditionId
         };
 
         const queryParams = {
@@ -334,7 +348,8 @@ than a 404 response.
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
+            'If-Modified-Since': opts['ifModifiedSince'],
+            'Range': opts['range']
         };
         const formParams = {
         };
@@ -384,7 +399,12 @@ If not supplied then the default value is 100.
  (default to 100)
     * @return Promise<VersionPaging>
     */
-    listVersionHistory(nodeId: string, opts?: any): Promise<VersionPaging> {
+    listVersionHistory(nodeId: string, opts?: {
+        include?: string[];
+        fields?: string[];
+        skipCount?: number;
+        maxItems?: number;
+    }): Promise<VersionPaging> {
 
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -392,7 +412,7 @@ If not supplied then the default value is 100.
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -437,35 +457,21 @@ clause will return just the CREATED renditions:
     * @param opts.where A string to restrict the returned objects by using a predicate.
     * @return Promise<RenditionPaging>
     */
-    listVersionRenditions(nodeId: string, versionId: string, opts?: any): Promise<RenditionPaging> {
-
+    listVersionRenditions(nodeId: string, versionId: string, opts?: { where?: string }): Promise<RenditionPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'nodeId': nodeId,            'versionId': versionId
+            nodeId,
+            versionId
         };
 
-        const queryParams = {
-            'where': opts['where']
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/versions/{versionId}/renditions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , RenditionPaging);
+        return this.get({
+            path: '/nodes/{nodeId}/versions/{versionId}/renditions',
+            pathParams,
+            queryParams: opts,
+            returnType: RenditionPaging
+        });
     }
 /**
     * Revert a version
@@ -496,8 +502,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<VersionEntry>
     */
-    revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: any): Promise<VersionEntry> {
-
+    revertVersion(nodeId: string, versionId: string, revertBody: RevertBody, opts?: { fields?: string[] }): Promise<VersionEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
         throwIfNotDefined(revertBody, 'revertBody');
@@ -506,7 +511,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody = revertBody;
 
         const pathParams = {
-            'nodeId': nodeId,            'versionId': versionId
+            nodeId,
+            versionId
         };
 
         const queryParams = {

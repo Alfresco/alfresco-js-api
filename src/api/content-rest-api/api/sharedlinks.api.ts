@@ -108,7 +108,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SharedLinkEntry>
     */
-    createSharedLink(sharedLinkBodyCreate: SharedLinkBodyCreate, opts?: any): Promise<SharedLinkEntry> {
+    createSharedLink(sharedLinkBodyCreate: SharedLinkBodyCreate, opts?: { include?: string[]; fields?: string[] }): Promise<SharedLinkEntry> {
 
         throwIfNotDefined(sharedLinkBodyCreate, 'sharedLinkBodyCreate');
 
@@ -268,7 +268,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SharedLinkEntry>
     */
-    getSharedLink(sharedId: string, opts?: any): Promise<SharedLinkEntry> {
+    getSharedLink(sharedId: string, opts?: { fields?: string[] }): Promise<SharedLinkEntry> {
 
         throwIfNotDefined(sharedId, 'sharedId');
 
@@ -327,15 +327,18 @@ Single part request supported, for example: bytes=1-10.
 
     * @return Promise<Blob>
     */
-    getSharedLinkContent(sharedId: string, opts?: any): Promise<Blob> {
-
+    getSharedLinkContent(sharedId: string, opts?: {
+        attachment?: boolean;
+        ifModifiedSince?: string;
+        range?: string;
+    }): Promise<Blob> {
         throwIfNotDefined(sharedId, 'sharedId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'sharedId': sharedId
+            sharedId
         };
 
         const queryParams = {
@@ -343,7 +346,8 @@ Single part request supported, for example: bytes=1-10.
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
+            'If-Modified-Since': opts['ifModifiedSince'],
+            'Range': opts['range']
         };
         const formParams = {
         };
@@ -432,7 +436,11 @@ Single part request supported, for example: bytes=1-10.
 
     * @return Promise<Blob>
     */
-    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: any): Promise<Blob> {
+    getSharedLinkRenditionContent(sharedId: string, renditionId: string, opts?: {
+        attachment?: boolean;
+        ifModifiedSince?: string;
+        range?: string;
+    }): Promise<Blob> {
 
         throwIfNotDefined(sharedId, 'sharedId');
         throwIfNotDefined(renditionId, 'renditionId');
@@ -441,7 +449,8 @@ Single part request supported, for example: bytes=1-10.
         const postBody: null = null;
 
         const pathParams = {
-            'sharedId': sharedId,            'renditionId': renditionId
+            sharedId,
+            renditionId
         };
 
         const queryParams = {
@@ -449,7 +458,8 @@ Single part request supported, for example: bytes=1-10.
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
+            'If-Modified-Since': opts['ifModifiedSince'],
+            'Range': opts['range']
         };
         const formParams = {
         };
@@ -551,7 +561,13 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SharedLinkPaging>
     */
-    listSharedLinks(opts?: any): Promise<SharedLinkPaging> {
+    listSharedLinks(opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        where?: string;
+        include?: string[];
+        fields?: string[];
+    }): Promise<SharedLinkPaging> {
 
         opts = opts || {};
         const postBody: null = null;

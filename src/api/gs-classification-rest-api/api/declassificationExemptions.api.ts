@@ -22,7 +22,7 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Declassificationexemptions service.
+* DeclassificationExemptionsApi service.
 * @module DeclassificationExemptionsApi
 */
 export class DeclassificationExemptionsApi extends BaseApi {
@@ -118,17 +118,10 @@ JSON
         * @param opts.maxItems The maximum number of items to return in the list.
         * @return Promise<DeclassificationExemptionsPaging>
         */
-    listDeclassificationExemptions(opts?: any): Promise<DeclassificationExemptionsPaging> {
-        opts = opts || {};
-
-        const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems']
-        };
-
+    listDeclassificationExemptions(opts?: { skipCount?: number; maxItems?: number; }): Promise<DeclassificationExemptionsPaging> {
         return this.get({
             path: '/declassification-exemptions',
-            queryParams,
+            queryParams: opts,
             returnType: DeclassificationExemptionsPaging
         });
     }

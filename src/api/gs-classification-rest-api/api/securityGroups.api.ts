@@ -33,16 +33,10 @@ export class SecurityGroupsApi extends BaseApi {
      * @param opts.maxItems The maximum number of items to return in the list.
      * @return Promise<SecurityGroupPaging>
      */
-    getSecurityGroups(opts?: any): Promise<SecurityGroupPaging> {
-        const queryParams = {
-            'include': opts['include'],
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems']
-        };
-
+    getSecurityGroups(opts?: { include?: string[], skipCount?: number; maxItems?: number; }): Promise<SecurityGroupPaging> {
         return this.get({
             path: '/security-groups',
-            queryParams,
+            queryParams: opts,
             returnType: SecurityGroupPaging
         });
     }
@@ -54,14 +48,10 @@ export class SecurityGroupsApi extends BaseApi {
      * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
-    createSecurityGroup(securityGroupBody: SecurityGroupBody, opts?: any): Promise<SecurityGroupEntry> {
-        const queryParams = {
-            'include': opts['include'],
-        };
-
+    createSecurityGroup(securityGroupBody: SecurityGroupBody, opts?: { include?: string[] }): Promise<SecurityGroupEntry> {
         return this.post({
             path: '/security-groups',
-            queryParams,
+            queryParams: opts,
             bodyParam: securityGroupBody,
             returnType: SecurityGroupEntry
         });
@@ -73,18 +63,15 @@ export class SecurityGroupsApi extends BaseApi {
      * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
-    getSecurityGroupInfo(securityGroupId: string, opts?: any): Promise<SecurityGroupEntry> {
+    getSecurityGroupInfo(securityGroupId: string, opts?: { include?: string[] }): Promise<SecurityGroupEntry> {
         const pathParams = {
             securityGroupId,
-        };
-        const queryParams = {
-            'include': opts['include'],
         };
 
         return this.get({
             path: '/security-groups/{securityGroupId}',
             pathParams,
-            queryParams,
+            queryParams: opts,
             returnType: SecurityGroupEntry
         });
     }
@@ -96,18 +83,15 @@ export class SecurityGroupsApi extends BaseApi {
      * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
-    updateSecurityGroup(securityGroupId: string, securityGroupBody: SecurityGroupBody, opts?: any): Promise<SecurityGroupEntry> {
+    updateSecurityGroup(securityGroupId: string, securityGroupBody: SecurityGroupBody, opts?: { include?: string[] }): Promise<SecurityGroupEntry> {
         const pathParams = {
             securityGroupId,
-        };
-        const queryParams = {
-            'include': opts['include'],
         };
 
         return this.put({
             path: '/security-groups/{securityGroupId}',
             pathParams,
-            queryParams,
+            queryParams: opts,
             bodyParam: securityGroupBody,
             returnType: SecurityGroupEntry
         });

@@ -53,12 +53,17 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordEntry>
     */
-    declareRecord(fileId: string, opts?: any): Promise<RecordEntry> {
+    declareRecord(fileId: string, opts?: {
+        hideRecord?: boolean;
+        parentId?: string;
+        include?: string[];
+        fields?: string[];
+    }): Promise<RecordEntry> {
         throwIfNotDefined(fileId, 'fileId');
         opts = opts || {};
 
         const pathParams = {
-            'fileId': fileId
+            fileId
         };
 
         const queryParams = {

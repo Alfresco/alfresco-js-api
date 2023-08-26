@@ -92,7 +92,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeEntry>
     */
-    copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts?: any): Promise<NodeEntry> {
+    copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyCopy, 'nodeBodyCopy');
@@ -190,7 +190,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<AssociationEntry>
     */
-    createAssociation(nodeId: string, associationBodyCreate: AssociationBody, opts?: any): Promise<AssociationEntry> {
+    createAssociation(nodeId: string, associationBodyCreate: AssociationBody, opts?: { fields?: string[] }): Promise<AssociationEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(associationBodyCreate, 'associationBodyCreate');
@@ -199,7 +199,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody = associationBodyCreate;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -500,7 +500,7 @@ parameter are returned in addition to those specified in the **fields** paramete
      *
      * @returns  A promise that is resolved if the folder is created and {error} if rejected.
      */
-    createFolder(name: string, relativePath: string, nodeId: string, opts?: any): Promise<NodeEntry> {
+    createFolder(name: string, relativePath: string, nodeId: string, opts?: CreateNodeOpts): Promise<NodeEntry> {
         nodeId = nodeId || '-root-';
 
         const nodeBody = new NodeBodyCreate({
@@ -579,8 +579,9 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<ChildAssociationEntry>
     */
-    createSecondaryChildAssociation(nodeId: string, secondaryChildAssociationBodyCreate: ChildAssociationBody, opts?: any): Promise<ChildAssociationEntry> {
-
+    createSecondaryChildAssociation(nodeId: string, secondaryChildAssociationBodyCreate: ChildAssociationBody, opts?: {
+        fields?: string[]
+    }): Promise<ChildAssociationEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(secondaryChildAssociationBodyCreate, 'secondaryChildAssociationBodyCreate');
 
@@ -588,7 +589,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody = secondaryChildAssociationBodyCreate;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -629,8 +630,7 @@ in the other direction.
     * @param opts.assocType Only delete associations of this type.
     * @return Promise<{}>
     */
-    deleteAssociation(nodeId: string, targetId: string, opts?: any): Promise<any> {
-
+    deleteAssociation(nodeId: string, targetId: string, opts?: { assocType?: string }): Promise<any> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(targetId, 'targetId');
 
@@ -638,7 +638,8 @@ in the other direction.
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId,            'targetId': targetId
+            nodeId,
+            targetId
         };
 
         const queryParams = {
@@ -686,15 +687,14 @@ Only the owner of the node or an admin can permanently delete the node.
  (default to false)
     * @return Promise<{}>
     */
-    deleteNode(nodeId: string, opts?: any): Promise<any> {
-
+    deleteNode(nodeId: string, opts?: { permanent?: boolean }): Promise<any> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -733,8 +733,7 @@ associated as a secondary child with other secondary parents.
     * @param opts.assocType Only delete associations of this type.
     * @return Promise<{}>
     */
-    deleteSecondaryChildAssociation(nodeId: string, childId: string, opts?: any): Promise<any> {
-
+    deleteSecondaryChildAssociation(nodeId: string, childId: string, opts?: { assocType?: string }): Promise<any> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(childId, 'childId');
 
@@ -742,7 +741,8 @@ associated as a secondary child with other secondary parents.
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId,            'childId': childId
+            nodeId,
+            childId
         };
 
         const queryParams = {
@@ -806,15 +806,14 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeEntry>
     */
-    getNode(nodeId: string, opts?: any): Promise<NodeEntry> {
-
+    getNode(nodeId: string, opts?: { include?: string[]; relativePath?: string; fields?: string[] }): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -865,15 +864,18 @@ Single part request supported, for example: bytes=1-10.
 
     * @return Promise<Blob>
     */
-    getNodeContent(nodeId: string, opts?: any): Promise<Blob> {
-
+    getNodeContent(nodeId: string, opts?: {
+        attachment?: boolean;
+        ifModifiedSince?: string;
+        range?: string;
+    }): Promise<Blob> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -881,7 +883,8 @@ Single part request supported, for example: bytes=1-10.
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],            'Range': opts['range']
+            'If-Modified-Since': opts['ifModifiedSince'],
+            'Range': opts['range']
         };
         const formParams = {
         };
@@ -992,7 +995,16 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeChildAssociationPaging>
     */
-    listNodeChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging> {
+    listNodeChildren(nodeId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        orderBy?: string[];
+        where?: string;
+        include?: string[];
+        relativePath?: string;
+        includeSource?: boolean;
+        fields?: string[];
+    }): Promise<NodeChildAssociationPaging> {
 
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -1000,7 +1012,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -1082,7 +1094,14 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeAssociationPaging>
     */
-    listParents(nodeId: string, opts?: any): Promise<NodeAssociationPaging> {
+    listParents(nodeId: string, opts?: {
+        where?: string;
+        include?: string[];
+        skipCount?: number;
+        maxItems?: number;
+        includeSource?: boolean;
+        fields?: string[];
+    }): Promise<NodeAssociationPaging> {
 
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -1090,7 +1109,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -1164,15 +1183,21 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeChildAssociationPaging>
     */
-    listSecondaryChildren(nodeId: string, opts?: any): Promise<NodeChildAssociationPaging> {
-
+    listSecondaryChildren(nodeId: string, opts?: {
+        where?: string;
+        include?: string[];
+        skipCount?: number;
+        maxItems?: number;
+        includeSource?: boolean;
+        fields?: string[];
+    }): Promise<NodeChildAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -1235,15 +1260,18 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeAssociationPaging>
     */
-    listSourceAssociations(nodeId: string, opts?: any): Promise<NodeAssociationPaging> {
-
+    listSourceAssociations(nodeId: string, opts?: {
+        where?: string;
+        include?: string[];
+        fields?: string[];
+    }): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -1303,15 +1331,20 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeAssociationPaging>
     */
-    listTargetAssociations(nodeId: string, opts?: any): Promise<NodeAssociationPaging> {
-
+    listTargetAssociations(nodeId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        where?: string;
+        include?: string[];
+        fields?: string[];
+    }): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -1394,8 +1427,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeEntry>
     */
-    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: any): Promise<NodeEntry> {
-
+    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyLock, 'nodeBodyLock');
 
@@ -1403,7 +1435,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody = nodeBodyLock;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -1468,8 +1500,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeEntry>
     */
-    moveNode(nodeId: string, nodeBodyMove: NodeBodyMove, opts?: any): Promise<NodeEntry> {
-
+    moveNode(nodeId: string, nodeBodyMove: NodeBodyMove, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyMove, 'nodeBodyMove');
 
@@ -1477,7 +1508,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody = nodeBodyMove;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -1538,7 +1569,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeEntry>
     */
-    unlockNode(nodeId: string, opts?: any): Promise<NodeEntry> {
+    unlockNode(nodeId: string, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -1546,7 +1577,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -1655,7 +1686,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeEntry>
     */
-    updateNode(nodeId: string, nodeBodyUpdate: NodeBodyUpdate, opts?: any): Promise<NodeEntry> {
+    updateNode(nodeId: string, nodeBodyUpdate: NodeBodyUpdate, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyUpdate, 'nodeBodyUpdate');
@@ -1743,7 +1774,13 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodeEntry>
     */
-    updateNodeContent(nodeId: string, contentBodyUpdate: string, opts?: any): Promise<NodeEntry> {
+    updateNodeContent(nodeId: string, contentBodyUpdate: string, opts?: {
+        include?: string[];
+        fields?: string[];
+        majorVersion?: boolean;
+        comment?: string;
+        name?: string;
+    }): Promise<NodeEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
@@ -1752,7 +1789,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody = contentBodyUpdate;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {

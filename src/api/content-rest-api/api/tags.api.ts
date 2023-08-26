@@ -95,8 +95,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagEntry>
     */
-    createTagForNode(nodeId: string, tagBodyCreate: TagBody[], opts?: any): Promise<TagEntry> {
-
+    createTagForNode(nodeId: string, tagBodyCreate: TagBody[], opts?: { fields?: string[] }): Promise<TagEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(tagBodyCreate, 'tagBodyCreate');
 
@@ -104,7 +103,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody = tagBodyCreate;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -183,7 +182,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagEntry>
     */
-    getTag(tagId: string, opts?: any): Promise<TagEntry> {
+    getTag(tagId: string, opts?: { fields?: string[] }): Promise<TagEntry> {
 
         throwIfNotDefined(tagId, 'tagId');
 
@@ -191,7 +190,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody: null = null;
 
         const pathParams = {
-            'tagId': tagId
+            tagId
         };
 
         const queryParams = {
@@ -246,8 +245,14 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagPaging>
     */
-    listTags(opts?: any): Promise<TagPaging> {
-
+    listTags(opts?: {
+        tag?: string;
+        matching?: boolean;
+        skipCount?: number;
+        maxItems?: number;
+        fields?: string[];
+        include?: string[];
+    }): Promise<TagPaging> {
         opts = opts || {};
         const postBody: null = null;
 
@@ -308,8 +313,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagPaging>
     */
-    listTagsForNode(nodeId: string, opts?: any): Promise<TagPaging> {
-
+    listTagsForNode(nodeId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<TagPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
@@ -361,7 +365,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TagEntry>
     */
-    updateTag(tagId: string, tagBodyUpdate: TagBody, opts?: any): Promise<TagEntry> {
+    updateTag(tagId: string, tagBodyUpdate: TagBody, opts?: { fields?: string[] }): Promise<TagEntry> {
 
         throwIfNotDefined(tagId, 'tagId');
         throwIfNotDefined(tagBodyUpdate, 'tagBodyUpdate');
@@ -370,7 +374,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         const postBody = tagBodyUpdate;
 
         const pathParams = {
-            'tagId': tagId
+            tagId
         };
 
         const queryParams = {

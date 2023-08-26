@@ -55,12 +55,15 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordEntry>
     */
-    completeRecord(recordId: string, opts?: any): Promise<RecordEntry> {
+    completeRecord(recordId: string, opts?: {
+        include?: string[];
+        fields?: string[];
+    }): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
         opts = opts || {};
 
         const pathParams = {
-            'recordId': recordId
+            recordId
         };
 
         const queryParams = {
@@ -134,7 +137,10 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordEntry>
         */
-    fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts?: any): Promise<RecordEntry> {
+    fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts?: {
+        include?: string[];
+        fields?: string[];
+    }): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
         throwIfNotDefined(nodeBodyFile, 'nodeBodyFile');
         opts = opts || {};
@@ -188,7 +194,10 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordEntry>
         */
-    getRecord(recordId: string, opts?: any): Promise<RecordEntry> {
+    getRecord(recordId: string, opts?: {
+        include?: string[];
+        fields?: string[];
+    }): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
         opts = opts || {};
 
@@ -232,7 +241,10 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<{}>
         */
-    getRecordContent(recordId: string, opts?: any): Promise<any> {
+    getRecordContent(recordId: string, opts?: {
+        attachment?: boolean;
+        ifModifiedSince?: string;
+    }): Promise<any> {
         throwIfNotDefined(recordId, 'recordId');
         opts = opts || {};
 
@@ -302,7 +314,10 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordEntry>
         */
-    updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordEntry> {
+    updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts?: {
+        include?: string[];
+        fields?: string[];
+    }): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
         throwIfNotDefined(recordBodyUpdate, 'recordBodyUpdate');
 

@@ -31,8 +31,8 @@ describe('Security Mark API test', () => {
     let securityGroupMock: SecurityGroupApiMock;
     let securityGroupApi: SecurityGroupsApi;
     let securityMarksApi: SecurityMarksApi;
-    let securityGroupId: string;
-    let securityMarkId: string;
+    let securityGroupId: string = 'a0a7b107-84ba-4c3d-b0b7-a8509e8c1c33';
+    let securityMarkId: string = 'Sh1G8vTQ';
     const securityMarksBodySingle: SecurityMarksBody = [
         {
             name: 'SecurityMarkTest',
@@ -67,7 +67,7 @@ describe('Security Mark API test', () => {
 
     it('create Security Group', async () => {
         securityGroupMock.createSecurityGroup200Response();
-        await securityGroupApi.createSecurityGroup(securityGroupBody, 'inUse').then((data) => {
+        await securityGroupApi.createSecurityGroup(securityGroupBody).then((data) => {
             securityGroupId = data.entry.id;
             expect(data.entry.id).not.equal(null);
             expect(data.entry.groupName).to.be.equal('Alfresco');

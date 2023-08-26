@@ -150,7 +150,11 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordCategoryChildEntry>
     */
-    createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<RecordCategoryChildEntry> {
+    createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: {
+        autoRename?: boolean;
+        include?: string[];
+        fields?: string[];
+    }): Promise<RecordCategoryChildEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
         opts = opts || {};
@@ -230,7 +234,11 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordCategoryEntry>
         */
-    getRecordCategory(recordCategoryId: string, opts?: any): Promise<RecordCategoryEntry> {
+    getRecordCategory(recordCategoryId: string, opts?: {
+        include?: string[];
+        relativePath?: string;
+        fields?: string[];
+    }): Promise<RecordCategoryEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
         opts = opts || {};
 
@@ -302,7 +310,15 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordCategoryChildPaging>
         */
-    listRecordCategoryChildren(recordCategoryId: string, opts?: any): Promise<RecordCategoryChildPaging> {
+    listRecordCategoryChildren(recordCategoryId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        where?: string;
+        include?: string[];
+        relativePath?: string;
+        includeSource?: boolean;
+        fields?: string[];
+    }): Promise<RecordCategoryChildPaging> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
         opts = opts || {};
 
@@ -373,7 +389,10 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordCategoryEntry>
         */
-    updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: any): Promise<RecordCategoryEntry> {
+    updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: {
+        include?: string[];
+        fields?: string[];
+    }): Promise<RecordCategoryEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
         throwIfNotDefined(recordCategoryBodyUpdate, 'recordCategoryBodyUpdate');
         opts = opts || {};
