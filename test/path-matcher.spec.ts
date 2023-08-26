@@ -16,9 +16,7 @@
  */
 
 import { PathMatcher } from '../src/utils/path-matcher';
-
-const chai = require('chai');
-const expect = chai.expect;
+import { expect } from 'chai';
 
 describe('PathMatcher', () => {
     describe('match', () => {

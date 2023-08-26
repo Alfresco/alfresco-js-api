@@ -19,14 +19,13 @@ import { AlfrescoApi } from '../src/alfrescoApi';
 import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { Oauth2Auth } from '../src/authentication/oauth2Auth';
 import { ContentApi } from '../src/api/content-custom-api/api/content.api';
-
-const chai = require('chai');
-const expect = chai.expect;
-const spies = require('chai-spies');
-chai.use(spies);
-
 import { EcmAuthMock, OAuthMock } from '../test/mockObjects';
 import { PathMatcher } from '../src/utils/path-matcher';
+
+import { expect } from 'chai';
+import chai from 'chai';
+import spies from 'chai-spies';
+chai.use(spies);
 
 const jsdom = require('mocha-jsdom');
 const globalAny: any = global;

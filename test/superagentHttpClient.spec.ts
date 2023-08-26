@@ -17,8 +17,7 @@
 
 import { FormValueRepresentation } from '../index';
 import { SuperagentHttpClient } from '../src/superagentHttpClient';
-
-const expect = require('chai').expect;
+import { expect } from 'chai';
 
 describe('SuperagentHttpClient', () => {
     describe('#buildRequest', () => {

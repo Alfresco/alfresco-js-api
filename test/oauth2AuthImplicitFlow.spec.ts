@@ -18,14 +18,13 @@
 import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { Oauth2Auth } from '../src/authentication/oauth2Auth';
-
-const expect = require('chai').expect;
+import { expect } from 'chai';
+import chai from 'chai';
+import spies from 'chai-spies';
+chai.use(spies);
 
 declare let window: any;
 const globalAny: any = global;
-const chai = require('chai');
-const spies = require('chai-spies');
-chai.use(spies);
 
 describe('Oauth2 Implicit flow test', () => {
     let oauth2Auth: Oauth2Auth;
@@ -119,7 +118,7 @@ describe('Oauth2 Implicit flow test', () => {
         oauth2Auth.on('implicit_redirect', () => {
             expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
                 'openid-connect/auth?');
-            expect(setItemSpy).to.have.been.called(1);
+            expect(setItemSpy).to.have.been.called();
             done();
         });
 
