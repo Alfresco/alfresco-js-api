@@ -109,34 +109,19 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<SharedLinkEntry>
     */
     createSharedLink(sharedLinkBodyCreate: SharedLinkBodyCreate, opts?: { include?: string[]; fields?: string[] }): Promise<SharedLinkEntry> {
-
         throwIfNotDefined(sharedLinkBodyCreate, 'sharedLinkBodyCreate');
 
-        opts = opts || {};
-        const postBody = sharedLinkBodyCreate;
-
-        const pathParams = {
-
-        };
-
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/shared-links', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SharedLinkEntry);
+        return this.post({
+            path: '/shared-links',
+            queryParams,
+            bodyParam: sharedLinkBodyCreate,
+            returnType: SharedLinkEntry
+        });
     }
 /**
     * Deletes a shared link
@@ -150,31 +135,16 @@ Deletes the shared link with identifier **sharedId**.
     * @return Promise<{}>
     */
     deleteSharedLink(sharedId: string): Promise<any> {
-
         throwIfNotDefined(sharedId, 'sharedId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'sharedId': sharedId
+            sharedId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/shared-links/{sharedId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/shared-links/{sharedId}',
+            pathParams
+        });
     }
 /**
     * Email shared link
@@ -215,32 +185,18 @@ JSON
     * @return Promise<{}>
     */
     emailSharedLink(sharedId: string, sharedLinkBodyEmail: SharedLinkBodyEmail): Promise<any> {
-
         throwIfNotDefined(sharedId, 'sharedId');
         throwIfNotDefined(sharedLinkBodyEmail, 'sharedLinkBodyEmail');
 
-        const postBody = sharedLinkBodyEmail;
-
         const pathParams = {
-            'sharedId': sharedId
+            sharedId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/shared-links/{sharedId}/email', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.post({
+            path: '/shared-links/{sharedId}/email',
+            pathParams,
+            bodyParam: sharedLinkBodyEmail
+        });
     }
 /**
     * Get a shared link
@@ -269,33 +225,22 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<SharedLinkEntry>
     */
     getSharedLink(sharedId: string, opts?: { fields?: string[] }): Promise<SharedLinkEntry> {
-
         throwIfNotDefined(sharedId, 'sharedId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'sharedId': sharedId
+            sharedId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/shared-links/{sharedId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SharedLinkEntry);
+        return this.get({
+            path: '/shared-links/{sharedId}',
+            pathParams,
+            queryParams,
+            returnType: SharedLinkEntry
+        });
     }
 /**
     * Get shared link content
@@ -334,31 +279,27 @@ Single part request supported, for example: bytes=1-10.
     }): Promise<Blob> {
         throwIfNotDefined(sharedId, 'sharedId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
             sharedId
         };
 
         const queryParams = {
-            'attachment': opts['attachment']
+            attachment: opts?.attachment
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],
-            'Range': opts['range']
-        };
-        const formParams = {
+            'If-Modified-Since': opts?.ifModifiedSince,
+            'Range': opts?.range
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/octet-stream'];
-
-        return this.apiClient.callApi(
-            '/shared-links/{sharedId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , 'blob');
+        return this.get({
+            path: '/shared-links/{sharedId}/content',
+            pathParams,
+            queryParams,
+            headerParams,
+            accepts: ['application/octet-stream'],
+            returnType: 'blob'
+        });
     }
 /**
     * Get shared link rendition information
@@ -378,32 +319,19 @@ which means the rendition is available to view/download.
     * @return Promise<RenditionEntry>
     */
     getSharedLinkRendition(sharedId: string, renditionId: string): Promise<RenditionEntry> {
-
         throwIfNotDefined(sharedId, 'sharedId');
         throwIfNotDefined(renditionId, 'renditionId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'sharedId': sharedId,            'renditionId': renditionId
+            sharedId,
+            renditionId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/shared-links/{sharedId}/renditions/{renditionId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , RenditionEntry);
+        return this.get({
+            path: '/shared-links/{sharedId}/renditions/{renditionId}',
+            pathParams,
+            returnType: RenditionEntry
+        });
     }
 /**
     * Get shared link rendition content
@@ -441,12 +369,8 @@ Single part request supported, for example: bytes=1-10.
         ifModifiedSince?: string;
         range?: string;
     }): Promise<Blob> {
-
         throwIfNotDefined(sharedId, 'sharedId');
         throwIfNotDefined(renditionId, 'renditionId');
-
-        opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             sharedId,
@@ -454,23 +378,22 @@ Single part request supported, for example: bytes=1-10.
         };
 
         const queryParams = {
-            'attachment': opts['attachment']
+            attachment: opts?.attachment
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],
-            'Range': opts['range']
-        };
-        const formParams = {
+            'If-Modified-Since': opts?.ifModifiedSince,
+            'Range': opts?.range
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/octet-stream'];
-
-        return this.apiClient.callApi(
-            '/shared-links/{sharedId}/renditions/{renditionId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , 'blob');
+        return this.get({
+            path: '/shared-links/{sharedId}/renditions/{renditionId}/content',
+            pathParams,
+            queryParams,
+            headerParams,
+            accepts:  ['application/octet-stream'],
+            returnType: 'blob'
+        });
     }
 /**
     * List renditions for a shared link
@@ -489,31 +412,17 @@ where the rendition status is CREATED, which means the rendition is available to
     * @return Promise<RenditionPaging>
     */
     listSharedLinkRenditions(sharedId: string): Promise<RenditionPaging> {
-
         throwIfNotDefined(sharedId, 'sharedId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'sharedId': sharedId
+            sharedId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/shared-links/{sharedId}/renditions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , RenditionPaging);
+        return this.get({
+            path: '/shared-links/{sharedId}/renditions',
+            pathParams,
+            returnType: RenditionPaging
+        });
     }
 /**
     * List shared links
@@ -568,13 +477,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         include?: string[];
         fields?: string[];
     }): Promise<SharedLinkPaging> {
-
         opts = opts || {};
-        const postBody: null = null;
-
-        const pathParams = {
-
-        };
 
         const queryParams = {
             'skipCount': opts['skipCount'],
@@ -584,19 +487,10 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/shared-links', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SharedLinkPaging);
+        return this.get({
+            path: '/shared-links',
+            queryParams,
+            returnType: SharedLinkPaging
+        });
     }
-
 }
