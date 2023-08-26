@@ -20,6 +20,16 @@ import { ResultListDataRepresentationAppDeploymentRepresentation } from '../mode
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
+export interface GetAppDefinitionsQuery {
+    nameLike?: string;
+    tenantId?: number;
+    latest?: boolean;
+    start?: number;
+    sort?: string;
+    order?: string;
+    size?: number;
+}
+
 /**
 * RuntimeAppDeploymentsApi service.
 * @module RuntimeAppDeploymentsApi
@@ -27,8 +37,6 @@ import { throwIfNotDefined } from '../../../assert';
 export class RuntimeAppDeploymentsApi extends BaseApi {
     /**
     * Remove an app deployment
-    *
-    *
     *
     * @param appDeploymentId appDeploymentId
     * @return Promise<{}>
@@ -75,31 +83,12 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
     * Query app deployments
     *
     * @param opts Optional parameters
-    * @param opts.nameLike nameLike
-    * @param opts.tenantId tenantId
-    * @param opts.latest latest
-    * @param opts.start start
-    * @param opts.sort sort
-    * @param opts.order order
-    * @param opts.size size
     * @return Promise<ResultListDataRepresentationAppDeploymentRepresentation>
     */
-    getAppDefinitions(opts?: any): Promise<ResultListDataRepresentationAppDeploymentRepresentation> {
-        opts = opts || {};
-
-        const queryParams = {
-            'nameLike': opts['nameLike'],
-            'tenantId': opts['tenantId'],
-            'latest': opts['latest'],
-            'start': opts['start'],
-            'sort': opts['sort'],
-            'order': opts['order'],
-            'size': opts['size']
-        };
-
+    getAppDefinitions(opts?: GetAppDefinitionsQuery): Promise<ResultListDataRepresentationAppDeploymentRepresentation> {
         return this.get({
             path: '/api/enterprise/runtime-app-deployments',
-            queryParams,
+            queryParams: opts,
             returnType: ResultListDataRepresentationAppDeploymentRepresentation
         });
     }
@@ -126,25 +115,15 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
 
     /**
     * Get an app by deployment ID or DMN deployment ID
-    *
     * Either a deploymentId or a dmnDeploymentId must be provided
     *
     * @param opts Optional parameters
-    * @param opts.deploymentId deploymentId
-    * @param opts.dmnDeploymentId dmnDeploymentId
     * @return Promise<AppDeploymentRepresentation>
     */
-    getRuntimeAppDeploymentByDeployment(opts?: any): Promise<AppDeploymentRepresentation> {
-        opts = opts || {};
-
-        const queryParams = {
-            'deploymentId': opts['deploymentId'],
-            'dmnDeploymentId': opts['dmnDeploymentId']
-        };
-
+    getRuntimeAppDeploymentByDeployment(opts?: { deploymentId?: string; dmnDeploymentId?: number }): Promise<AppDeploymentRepresentation> {
         return this.get({
             path: '/api/enterprise/runtime-app-deployment',
-            queryParams,
+            queryParams: opts,
             returnType: AppDeploymentRepresentation
         });
     }

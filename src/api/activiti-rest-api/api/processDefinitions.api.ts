@@ -32,8 +32,6 @@ export class ProcessDefinitionsApi extends BaseApi {
     /**
      * Add a user or group involvement to a process definition
      *
-     *
-     *
      * @param processDefinitionId processDefinitionId
      * @param identityLinkRepresentation identityLinkRepresentation
      * @return Promise<IdentityLinkRepresentation>
@@ -215,23 +213,12 @@ export class ProcessDefinitionsApi extends BaseApi {
      * Get a list of process definitions (visible within the tenant of the user)
      *
      * @param opts Optional parameters
-     * @param opts.latest latest
-     * @param opts.appDefinitionId appDefinitionId
-     * @param opts.deploymentId deploymentId
      * @return Promise<ResultListDataRepresentationProcessDefinitionRepresentation>
      */
-    getProcessDefinitions(opts?: any): Promise<ResultListDataRepresentationProcessDefinitionRepresentation> {
-        opts = opts || {};
-
-        const queryParams = {
-            'latest': opts['latest'],
-            'appDefinitionId': opts['appDefinitionId'],
-            'deploymentId': opts['deploymentId']
-        };
-
+    getProcessDefinitions(opts?: { latest?: boolean; appDefinitionId?: number; deploymentId?: string }): Promise<ResultListDataRepresentationProcessDefinitionRepresentation> {
         return this.get({
             path: '/api/enterprise/process-definitions',
-            queryParams,
+            queryParams: opts,
             returnType: ResultListDataRepresentationProcessDefinitionRepresentation
         });
     }

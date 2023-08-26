@@ -30,30 +30,19 @@ export class SubmittedFormsApi extends BaseApi {
     *
     * @param formId formId
     * @param opts Optional parameters
-    * @param opts.submittedBy submittedBy
-    * @param opts.start start
-    * @param opts.size size
     * @return Promise<ResultListDataRepresentationSubmittedFormRepresentation>
     */
-    getFormSubmittedForms(formId: number, opts?: any): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
+    getFormSubmittedForms(formId: number, opts?: { submittedBy?: number; start?: number; size?: number }): Promise<ResultListDataRepresentationSubmittedFormRepresentation> {
         throwIfNotDefined(formId, 'formId');
-
-        opts = opts || {};
 
         const pathParams = {
             formId
         };
 
-        const queryParams = {
-            'submittedBy': opts['submittedBy'],
-            'start': opts['start'],
-            'size': opts['size']
-        };
-
         return this.get({
             path: '/api/enterprise/form-submitted-forms/{formId}',
             pathParams,
-            queryParams,
+            queryParams: opts,
             returnType: ResultListDataRepresentationSubmittedFormRepresentation
         });
     }

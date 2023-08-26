@@ -22,6 +22,13 @@ import { ValidationErrorRepresentation } from '../model/validationErrorRepresent
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
+export interface GetModelsQuery {
+    filter?: string;
+    sort?: string;
+    modelType?: number;
+    referenceId?: number;
+}
+
 /**
 * Models service.
 * @module ModelsApi
@@ -143,7 +150,6 @@ export class ModelsApi extends BaseApi {
     *
     * @param modelId modelId
     * @param opts Optional parameters
-    * @param opts.includePermissions includePermissions
     * @return Promise<ModelRepresentation>
     */
     getModel(modelId: number, opts?: { includePermissions?: boolean }): Promise<ModelRepresentation> {
@@ -181,26 +187,12 @@ export class ModelsApi extends BaseApi {
     * List models (process, form, decision rule or app)
     *
     * @param opts Optional parameters
-    * @param opts.filter filter
-    * @param opts.sort sort
-    * @param opts.modelType modelType
-    * @param opts.referenceId referenceId
     * @return Promise<ResultListDataRepresentationModelRepresentation>
     */
-    getModels(opts?: any): Promise<ResultListDataRepresentationModelRepresentation> {
-        opts = opts || {};
-
-        const queryParams = {
-            'filter': opts['filter'],
-            'filterText': opts['filterText'],
-            'sort': opts['sort'],
-            'modelType': opts['modelType'],
-            'referenceId': opts['referenceId']
-        };
-
+    getModels(opts?: GetModelsQuery): Promise<ResultListDataRepresentationModelRepresentation> {
         return this.get({
             path: '/api/enterprise/models',
-            queryParams,
+            queryParams: opts,
             returnType: ResultListDataRepresentationModelRepresentation
         });
     }
@@ -310,11 +302,10 @@ export class ModelsApi extends BaseApi {
     * @param opts.values values
     * @return Promise<ValidationErrorRepresentation>
     */
-    validateModel(modelId: number, opts?: any): Promise<ValidationErrorRepresentation> {
+    validateModel(modelId: number, opts?: { values?: any }): Promise<ValidationErrorRepresentation> {
         throwIfNotDefined(modelId, 'modelId');
-        opts = opts || {};
 
-        const postBody = opts['values'];
+        const postBody = opts?.values;
 
         const pathParams = {
             modelId
