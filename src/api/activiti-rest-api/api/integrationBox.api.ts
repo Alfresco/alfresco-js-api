@@ -72,13 +72,13 @@ export class IntegrationBoxApi extends BaseApi {
             userId
         };
 
-        const contentTypes = ['application/json'];
         const accepts = ['*/*'];
 
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/box/{userId}/account', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/integration/box/{userId}/account',
+            pathParams,
+            accepts
+        });
     }
 
     /**

@@ -71,13 +71,10 @@ export class ProcessDefinitionsApi extends BaseApi {
             identityId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId}',
+            pathParams
+        });
     }
 
     /**

@@ -193,13 +193,10 @@ export class TaskActionsApi extends BaseApi {
             taskId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/action/remove-form', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/tasks/{taskId}/action/remove-form',
+            pathParams
+        });
     }
 
     /**
@@ -214,18 +211,15 @@ export class TaskActionsApi extends BaseApi {
         throwIfNotDefined(identifier, 'identifier');
 
         const pathParams = {
-            'taskId': taskId,
-            'groupId': identifier
+            taskId,
+            identifier
         };
 
         if (identifier instanceof String) {
-            const contentTypes = ['application/json'];
-            const accepts = ['application/json'];
-
-            return this.apiClient.callApi(
-                '/api/enterprise/tasks/{taskId}/groups/{groupId}', 'DELETE',
-                pathParams, {}, {}, {}, null,
-                contentTypes, accepts);
+            return this.delete({
+                path: '/api/enterprise/tasks/{taskId}/groups/{groupId}',
+                pathParams
+            });
         } else {
             return this.put({
                 path: '/api/enterprise/tasks/{taskId}/action/remove-involved',

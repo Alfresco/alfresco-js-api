@@ -40,13 +40,10 @@ export class AppDefinitionsApi extends BaseApi {
             appDefinitionId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/app-definitions/{appDefinitionId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/app-definitions/{appDefinitionId}',
+            pathParams
+        });
     }
 
     /**

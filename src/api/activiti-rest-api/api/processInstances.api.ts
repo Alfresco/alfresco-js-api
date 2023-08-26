@@ -100,13 +100,10 @@ export class ProcessInstancesApi extends BaseApi {
             type
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/process-instances/{processInstanceId}/identitylinks/{family}/{identityId}/{type}',
+            pathParams
+        });
     }
 
     /**
@@ -124,13 +121,10 @@ export class ProcessInstancesApi extends BaseApi {
             processInstanceId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/process-instances/{processInstanceId}',
+            pathParams
+        });
     }
 
     /**

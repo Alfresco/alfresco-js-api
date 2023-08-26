@@ -58,13 +58,10 @@ export class AdminTenantsApi extends BaseApi {
             tenantId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/tenants/{tenantId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/admin/tenants/{tenantId}',
+            pathParams
+        });
     }
 
     /**

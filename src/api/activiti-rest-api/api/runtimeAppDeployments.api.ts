@@ -20,16 +20,6 @@ import { ResultListDataRepresentationAppDeploymentRepresentation } from '../mode
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
-export interface GetAppDefinitionsQuery {
-    nameLike?: string;
-    tenantId?: number;
-    latest?: boolean;
-    start?: number;
-    sort?: string;
-    order?: string;
-    size?: number;
-}
-
 /**
 * RuntimeAppDeploymentsApi service.
 * @module RuntimeAppDeploymentsApi
@@ -45,16 +35,13 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
         throwIfNotDefined(appDeploymentId, 'appDeploymentId');
 
         const pathParams = {
-            'appDeploymentId': appDeploymentId
+            appDeploymentId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/runtime-app-deployments/{appDeploymentId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/runtime-app-deployments/{appDeploymentId}',
+            pathParams
+        });
     }
 
     /**
@@ -85,7 +72,15 @@ export class RuntimeAppDeploymentsApi extends BaseApi {
     * @param opts Optional parameters
     * @return Promise<ResultListDataRepresentationAppDeploymentRepresentation>
     */
-    getAppDefinitions(opts?: GetAppDefinitionsQuery): Promise<ResultListDataRepresentationAppDeploymentRepresentation> {
+    getAppDefinitions(opts?: {
+        nameLike?: string;
+        tenantId?: number;
+        latest?: boolean;
+        start?: number;
+        sort?: string;
+        order?: string;
+        size?: number;
+    }): Promise<ResultListDataRepresentationAppDeploymentRepresentation> {
         return this.get({
             path: '/api/enterprise/runtime-app-deployments',
             queryParams: opts,

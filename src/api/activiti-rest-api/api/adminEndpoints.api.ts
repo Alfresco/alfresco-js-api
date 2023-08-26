@@ -171,13 +171,11 @@ export class AdminEndpointsApi extends BaseApi {
             tenantId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/basic-auths/{basicAuthId}', 'DELETE',
-            pathParams, queryParams, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/admin/basic-auths/{basicAuthId}',
+            pathParams,
+            queryParams
+        });
     }
 
     /**
@@ -199,13 +197,11 @@ export class AdminEndpointsApi extends BaseApi {
             tenantId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'DELETE',
-            pathParams, queryParams, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/admin/endpoints/{endpointConfigurationId}',
+            pathParams,
+            queryParams
+        });
     }
 
     /**

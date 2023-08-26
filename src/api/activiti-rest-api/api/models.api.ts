@@ -63,7 +63,7 @@ export class ModelsApi extends BaseApi {
         throwIfNotDefined(modelId, 'modelId');
 
         const pathParams = {
-            'modelId': modelId
+            modelId
         };
 
         const queryParams = {
@@ -71,13 +71,11 @@ export class ModelsApi extends BaseApi {
             deleteRuntimeApp: opts?.deleteRuntimeApp
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/models/{modelId}', 'DELETE',
-            pathParams, queryParams, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/models/{modelId}',
+            pathParams,
+            queryParams
+        });
     }
 
     /**

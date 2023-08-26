@@ -158,13 +158,10 @@ export class ContentApi extends BaseApi {
             contentId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content/{contentId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/content/{contentId}',
+            pathParams
+        });
     }
 
     /**
