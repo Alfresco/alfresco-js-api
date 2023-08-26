@@ -23,7 +23,6 @@ import {
 import { AuthorityClearanceApi } from '../../src/api/gs-classification-rest-api/api/index';
 import { AuthorityClearanceMock } from '../mockObjects/goverance-services/authority-clearance.mock';
 import { AlfrescoApi } from '../../src/alfrescoApi';
-import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { expect } from 'chai';
 
 const DEFAULT_OPTS = {
@@ -62,7 +61,7 @@ describe('Authority Clearance API test', () => {
         authorityClearanceMock = new AuthorityClearanceMock(hostEcm);
         const alfrescoApi = new AlfrescoApi({
             hostEcm: hostEcm,
-        } as AlfrescoApiConfig);
+        });
         authorityClearanceApi = new AuthorityClearanceApi(alfrescoApi);
         await alfrescoApi.login('admin', 'admin');
     });

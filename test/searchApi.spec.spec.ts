@@ -16,7 +16,6 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { SearchApi } from '../src/api/search-rest-api';
 import { EcmAuthMock, SearchMock } from '../test/mockObjects';
@@ -36,7 +35,7 @@ describe('Search', () => {
 
         const alfrescoJsApi = new AlfrescoApi({
             hostEcm
-        } as AlfrescoApiConfig);
+        });
 
         alfrescoJsApi.login('admin', 'admin').then(() => {
             done();
@@ -54,11 +53,11 @@ describe('Search', () => {
                 'language': 'cmis'
             }
         }).then(
-            (data: any) => {
+            (data) => {
                 expect(data.list.entries[0].entry.name).to.be.equal('user');
                 done();
             },
-            (error: any) => {
+            (error) => {
                 console.error(error);
             }
         );

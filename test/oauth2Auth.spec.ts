@@ -16,7 +16,6 @@
  */
 
 import { AlfrescoApi } from '../src/alfrescoApi';
-import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { Oauth2Auth } from '../src/authentication/oauth2Auth';
 import { ContentApi } from '../src/api/content-custom-api/api/content.api';
 import { EcmAuthMock, OAuthMock } from '../test/mockObjects';
@@ -44,7 +43,7 @@ describe('Oauth2  test', () => {
 
         alfrescoJsApi = new AlfrescoApi({
             hostEcm: 'myecm'
-        } as AlfrescoApiConfig);
+        });
 
         alfrescoJsApi.storage.setStorage(mockStorage);
     });
@@ -58,7 +57,7 @@ describe('Oauth2  test', () => {
 
         it('should have default urls', async () => {
             const oauth2Auth = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     oauth2: {
                         host,
                         clientId,
@@ -80,7 +79,7 @@ describe('Oauth2  test', () => {
             const logoutUrl = '/custom-logout';
             const tokenUrl = '/custom-token';
             const oauth2Auth = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     oauth2: {
                         host,
                         authorizationUrl,
@@ -106,7 +105,7 @@ describe('Oauth2  test', () => {
 
         it('should be possible have different user login in different instance of the oauth2Auth class', async () => {
             const oauth2AuthInstanceOne = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     oauth2: {
                         'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                         'clientId': 'activiti',
@@ -121,7 +120,7 @@ describe('Oauth2  test', () => {
             );
 
             const oauth2AuthInstanceTwo = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     oauth2: {
                         'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                         'clientId': 'activiti',
@@ -153,7 +152,7 @@ describe('Oauth2  test', () => {
             oauth2Mock.get200Response();
 
             const oauth2Auth = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     oauth2: {
                         'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                         'clientId': 'activiti',
@@ -181,7 +180,7 @@ describe('Oauth2  test', () => {
             oauth2Mock.get200Response();
 
             const oauth2Auth = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     oauth2: {
                         'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                         'clientId': 'activiti',
@@ -213,7 +212,7 @@ describe('Oauth2  test', () => {
             oauth2Mock.get200Response();
 
             const oauth2Auth = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     oauth2: {
                         'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                         'clientId': 'activiti',
@@ -243,7 +242,7 @@ describe('Oauth2  test', () => {
             oauth2Mock.get200Response();
 
             const oauth2Auth = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     oauth2: {
                         'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                         'clientId': 'activiti',
@@ -269,7 +268,7 @@ describe('Oauth2  test', () => {
             oauth2Mock.get200Response();
 
             const oauth2Auth = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     oauth2: {
                         'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                         'clientId': 'activiti',
@@ -302,7 +301,7 @@ describe('Oauth2  test', () => {
             authResponseMock.get200ValidTicket();
 
             const oauth2Auth = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     provider: 'ECM',
                     oauth2: {
                         'host': 'http://myOauthUrl:30081/auth/realms/springboot',
@@ -329,7 +328,7 @@ describe('Oauth2  test', () => {
             oauth2Mock.get200Response();
             authResponseMock.get200ValidTicket();
             const oauth2Auth = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     provider: 'ALL',
                     oauth2: {
                         'host': 'http://myOauthUrl:30081/auth/realms/springboot',
@@ -356,7 +355,7 @@ describe('Oauth2  test', () => {
             oauth2Mock.get200Response();
             authResponseMock.get200ValidTicket();
 
-            const alfrescoApi = new AlfrescoApi(<AlfrescoApiConfig> {
+            const alfrescoApi = new AlfrescoApi({
                 hostEcm: 'http://myOauthUrl:30081',
                 oauth2: {
                     'host': 'http://myOauthUrl:30081/auth/realms/springboot',
@@ -388,7 +387,7 @@ describe('Oauth2  test', () => {
             oauth2Mock.get200Response();
             authResponseMock.get200ValidTicket();
 
-            const alfrescoApi = new AlfrescoApi(<AlfrescoApiConfig> {
+            const alfrescoApi = new AlfrescoApi({
                 hostEcm: 'http://myOauthUrl:30081',
                 oauth2: {
                     'host': 'http://myOauthUrl:30081/auth/realms/springboot',
@@ -424,7 +423,7 @@ describe('Oauth2  test', () => {
             oauth2Mock.get200Response();
             authResponseMock.get200ValidTicket();
 
-            const alfrescoApi = new AlfrescoApi(<AlfrescoApiConfig> {
+            const alfrescoApi = new AlfrescoApi({
                 hostEcm: 'http://myOauthUrl:30081',
                 oauth2: {
                     'host': 'http://myOauthUrl:30081/auth/realms/springboot',
@@ -462,7 +461,7 @@ describe('Oauth2  test', () => {
             oauth2Mock.get200Response();
 
             const oauth2Auth = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     oauth2: {
                         'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                         'clientId': 'activiti',
@@ -487,7 +486,7 @@ describe('Oauth2  test', () => {
             oauth2Mock.get200Response();
 
             const oauth2Auth = new Oauth2Auth(
-                <AlfrescoApiConfig> {
+                {
                     oauth2: {
                         'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                         'clientId': 'activiti',
@@ -512,7 +511,7 @@ describe('Oauth2  test', () => {
             jsdom({ url: 'http://localhost' });
             it('a failed hash check calls the logout', () => {
                 const oauth2Auth = new Oauth2Auth(
-                    <AlfrescoApiConfig> {
+                    {
                         oauth2: {
                             'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                             'clientId': 'activiti',
@@ -547,7 +546,7 @@ describe('Oauth2  test', () => {
 
             beforeEach(() => {
                 oauth2Auth = new Oauth2Auth(
-                    <AlfrescoApiConfig> {
+                    {
                         oauth2: {
                             'host': 'http://myOauthUrl:30081/auth/realms/springboot',
                             'clientId': 'activiti',

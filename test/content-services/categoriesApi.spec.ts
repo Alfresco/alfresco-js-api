@@ -16,7 +16,6 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { CategoriesApi } from '../../src/api/content-rest-api';
 import { EcmAuthMock } from '../../test/mockObjects';
@@ -39,7 +38,7 @@ describe('Categories', () => {
         authResponseMock.get201Response();
         const alfrescoJsApi = new AlfrescoApi({
             hostEcm
-        } as AlfrescoApiConfig);
+        });
 
         alfrescoJsApi.login('admin', 'admin').then(() => done());
         categoriesApi = new CategoriesApi(alfrescoJsApi);

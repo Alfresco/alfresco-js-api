@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { AlfrescoApiConfig, AlfrescoApi, DateAlfresco } from '../index';
+import { AlfrescoApi, DateAlfresco } from '../index';
 import { EcmAuthMock } from '../test/mockObjects';
 
 const chai = require('chai');
@@ -33,7 +33,7 @@ describe('Alfresco Core API Client', () => {
 
             const alfrescoJsApi = new AlfrescoApi({
                 hostEcm: 'http://127.0.0.1:8080'
-            } as AlfrescoApiConfig);
+            });
 
             alfrescoJsApi.login('admin', 'admin').then(() => {
                 expect(alfrescoJsApi.getEcmUsername()).to.be.equal('admin');

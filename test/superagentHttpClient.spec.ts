@@ -18,6 +18,7 @@
 import { FormValueRepresentation } from '../index';
 import { SuperagentHttpClient } from '../src/superagentHttpClient';
 import { expect } from 'chai';
+import { Response } from 'superagent';
 
 describe('SuperagentHttpClient', () => {
     describe('#buildRequest', () => {
@@ -70,7 +71,7 @@ describe('SuperagentHttpClient', () => {
 
     describe('#deserialize', () => {
         it('should the deserializer return an array of object when the response is an array', () => {
-            const data: any = {
+            const data = {
                 body: [
                     {
                         id: '1',
@@ -81,7 +82,7 @@ describe('SuperagentHttpClient', () => {
                         name: 'test2',
                     },
                 ],
-            };
+            } as Response;
             const result = SuperagentHttpClient['deserialize'](data, FormValueRepresentation);
             const isArray = Array.isArray(result);
             const isObject = result[0] instanceof FormValueRepresentation;

@@ -16,7 +16,7 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig, TaskFormsApi, AlfrescoApi } from '../../index';
+import { TaskFormsApi, AlfrescoApi } from '../../index';
 import { BpmAuthMock, TaskFormMock } from '../mockObjects';
 
 describe('Activiti Task Api', () => {
@@ -36,7 +36,7 @@ describe('Activiti Task Api', () => {
         alfrescoJsApi = new AlfrescoApi({
             hostBpm: BPM_HOST,
             provider: 'BPM'
-        } as AlfrescoApiConfig);
+        });
 
         taskFormsApi = new TaskFormsApi(alfrescoJsApi);
 

@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { Oauth2Auth } from '../src/authentication/oauth2Auth';
 import { expect } from 'chai';
@@ -34,7 +33,7 @@ describe('Oauth2 Implicit flow test', () => {
     beforeEach(() => {
         alfrescoJsApi = new AlfrescoApi({
             hostEcm: ''
-        } as AlfrescoApiConfig);
+        });
 
         setItemSpy = chai.spy.on(alfrescoJsApi.storage, 'setItem');
     });
@@ -81,7 +80,7 @@ describe('Oauth2 Implicit flow test', () => {
                     implicitFlow: true,
                     redirectUri: 'redirectUri'
                 }
-            } as AlfrescoApiConfig,
+            },
             alfrescoJsApi
         );
 
@@ -111,7 +110,7 @@ describe('Oauth2 Implicit flow test', () => {
                     implicitFlow: true,
                     redirectUri: '#/redirectUri'
                 }
-            } as AlfrescoApiConfig,
+            },
             alfrescoJsApi
         );
 
@@ -142,7 +141,7 @@ describe('Oauth2 Implicit flow test', () => {
                     implicitFlow: true,
                     redirectUri: 'redirectUri'
                 }
-            } as AlfrescoApiConfig,
+            },
             alfrescoJsApi
         );
 
@@ -192,7 +191,7 @@ describe('Oauth2 Implicit flow test', () => {
                     implicitFlow: true,
                     redirectUri: 'redirectUri'
                 }
-            } as AlfrescoApiConfig,
+            },
             alfrescoJsApi
         );
 

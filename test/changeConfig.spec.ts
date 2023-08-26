@@ -16,7 +16,7 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig, AlfrescoApi } from '../index';
+import { AlfrescoApi } from '../index';
 import { EcmAuthMock, BpmAuthMock } from '../test/mockObjects';
 
 describe('Change config', () => {
@@ -37,7 +37,7 @@ describe('Change config', () => {
         authResponseMock.get201Response();
         authResponseBpmMock.get200Response();
 
-        alfrescoJsApi = new AlfrescoApi(config as AlfrescoApiConfig);
+        alfrescoJsApi = new AlfrescoApi(config);
         await alfrescoJsApi.login('admin', 'admin');
     });
 
