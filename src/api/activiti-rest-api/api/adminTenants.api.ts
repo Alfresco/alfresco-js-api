@@ -24,13 +24,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Admintenants service.
-* @module AdmintenantsApi
+* AdminTenantsApi service.
+* @module AdminTenantsApi
 */
 export class AdminTenantsApi extends BaseApi {
     /**
     * Create a tenant
-    *
     * Only a tenant manager may access this endpoint
     *
     * @param createTenantRepresentation createTenantRepresentation
@@ -39,269 +38,155 @@ export class AdminTenantsApi extends BaseApi {
     createTenant(createTenantRepresentation: CreateTenantRepresentation): Promise<LightTenantRepresentation> {
         throwIfNotDefined(createTenantRepresentation, 'groupId');
 
-        let postBody = createTenantRepresentation;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/tenants', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, LightTenantRepresentation);
+        return this.post({
+            path: '/api/enterprise/admin/tenants',
+            bodyParam: createTenantRepresentation,
+            returnType: LightTenantRepresentation
+        });
     }
+
     /**
-        * Delete a tenant
-        *
-        *
-        *
-        * @param tenantId tenantId
-        * @return Promise<{}>
-        */
+    * Delete a tenant
+    *
+    * @param tenantId tenantId
+    * @return Promise<{}>
+    */
     deleteTenant(tenantId: number): Promise<any> {
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'tenantId': tenantId
+        const pathParams = {
+            tenantId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/api/enterprise/admin/tenants/{tenantId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, {}, {}, {}, null,
             contentTypes, accepts);
     }
+
     /**
-        * Get tenant events
-        *
-        *
-        *
-        * @param tenantId tenantId
-        * @return Promise<TenantEvent>
-        */
+    * Get tenant events
+    *
+    * @param tenantId tenantId
+    * @return Promise<TenantEvent>
+    */
     getTenantEvents(tenantId: number): Promise<TenantEvent> {
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'tenantId': tenantId
+        const pathParams = {
+            tenantId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/tenants/{tenantId}/events', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TenantEvent);
+        return this.get({
+            path: '/api/enterprise/admin/tenants/{tenantId}/events',
+            pathParams,
+            returnType: TenantEvent
+        });
     }
+
     /**
-        * Get a tenant's logo
-        *
-        *
-        *
-        * @param tenantId tenantId
-        * @return Promise<{}>
-        */
+    * Get a tenant's logo
+    *
+    * @param tenantId tenantId
+    * @return Promise<{}>
+    */
     getTenantLogo(tenantId: number): Promise<any> {
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'tenantId': tenantId
+        const pathParams = {
+            tenantId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/tenants/{tenantId}/logo', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/admin/tenants/{tenantId}/logo',
+            pathParams
+        });
     }
+
     /**
-        * Get a tenant
-        *
-        *
-        *
-        * @param tenantId tenantId
-        * @return Promise<TenantRepresentation>
-        */
+    * Get a tenant
+    *
+    * @param tenantId tenantId
+    * @return Promise<TenantRepresentation>
+    */
     getTenant(tenantId: number): Promise<TenantRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'tenantId': tenantId
+        const pathParams = {
+            tenantId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/tenants/{tenantId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TenantRepresentation);
+        return this.get({
+            path: '/api/enterprise/admin/tenants/{tenantId}',
+            pathParams,
+            returnType: TenantRepresentation
+        });
     }
+
     /**
-        * List tenants
-        *
-        * Only a tenant manager may access this endpoint
-        *
-        * @return Promise<LightTenantRepresentation>
-        */
+    * List tenants
+    * Only a tenant manager may access this endpoint
+    *
+    * @return Promise<LightTenantRepresentation>
+    */
     getTenants(): Promise<LightTenantRepresentation> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/tenants', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, LightTenantRepresentation);
+        return this.get({
+            path: '/api/enterprise/admin/tenants',
+            returnType: LightTenantRepresentation
+        });
     }
+
     /**
-        * Update a tenant
-        *
-        *
-        *
-        * @param tenantId tenantId
-        * @param createTenantRepresentation createTenantRepresentation
-        * @return Promise<TenantRepresentation>
-        */
+    * Update a tenant
+    *
+    * @param tenantId tenantId
+    * @param createTenantRepresentation createTenantRepresentation
+    * @return Promise<TenantRepresentation>
+    */
     update(tenantId: number, createTenantRepresentation: CreateTenantRepresentation): Promise<TenantRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
         throwIfNotDefined(createTenantRepresentation, 'createTenantRepresentation');
 
-        let postBody = createTenantRepresentation;
-
-        let pathParams = {
-            'tenantId': tenantId
+        const pathParams = {
+            tenantId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/tenants/{tenantId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, TenantRepresentation);
+        return this.put({
+            path: '/api/enterprise/admin/tenants/{tenantId}',
+            pathParams,
+            bodyParam: createTenantRepresentation,
+            returnType: TenantRepresentation
+        });
     }
+
     /**
-        * Update a tenant's logo
-        *
-        *
-        *
-        * @param tenantId tenantId
-        * @param file file
-        * @return Promise<ImageUploadRepresentation>
-        */
+    * Update a tenant's logo
+    *
+    * @param tenantId tenantId
+    * @param file file
+    * @return Promise<ImageUploadRepresentation>
+    */
     uploadTenantLogo(tenantId: number, file: any): Promise<ImageUploadRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
         throwIfNotDefined(file, 'file');
 
-        let postBody = null;
-
-        let pathParams = {
-            'tenantId': tenantId
+        const pathParams = {
+            tenantId
         };
 
-        let queryParams = {
+        const formParams = {
+            file
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-            'file': file
-        };
-
-        let contentTypes = ['multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/tenants/{tenantId}/logo', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ImageUploadRepresentation);
+        return this.post({
+            path: '/api/enterprise/admin/tenants/{tenantId}/logo',
+            pathParams,
+            formParams,
+            contentTypes: ['multipart/form-data'],
+            returnType: ImageUploadRepresentation
+        });
     }
-
 }

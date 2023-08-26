@@ -16,7 +16,6 @@
     ],
     // TODO: consider removing these rules and improving the source code
     "rules": {
-        "prefer-const": "off",
         "no-useless-escape": "off",
         "prefer-rest-params": "off",
         "prefer-spread": "off",

@@ -22,365 +22,235 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Adminendpoints service.
-* @module AdminendpointsApi
+* AdminEndpointsApi service.
+* @module AdminEndpointsApi
 */
 export class AdminEndpointsApi extends BaseApi {
     /**
     * Add an endpoint authorization
-    *
-    *
     *
     * @param createRepresentation createRepresentation
     * @return Promise<EndpointBasicAuthRepresentation>
     */
     createBasicAuthConfiguration(createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
         throwIfNotDefined(createRepresentation, 'createRepresentation');
-        let postBody = createRepresentation;
 
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/basic-auths', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointBasicAuthRepresentation);
+        return this.post({
+            path: '/api/enterprise/admin/basic-auths',
+            bodyParam: createRepresentation,
+            returnType: EndpointBasicAuthRepresentation
+        });
     }
+
     /**
-        * Create an endpoint
-        *
-        *
-        *
-        * @param representation representation
-        * @return Promise<EndpointConfigurationRepresentation>
-        */
+    * Create an endpoint
+    *
+    * @param representation representation
+    * @return Promise<EndpointConfigurationRepresentation>
+    */
     createEndpointConfiguration(representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {
         throwIfNotDefined(representation, 'representation');
-        let postBody = representation;
 
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/endpoints', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointConfigurationRepresentation);
+        return this.post({
+            path: '/api/enterprise/admin/endpoints',
+            bodyParam: representation,
+            returnType: EndpointConfigurationRepresentation
+        });
     }
+
     /**
-        * Get an endpoint authorization
-        *
-        *
-        *
-        * @param basicAuthId basicAuthId
-        * @param tenantId tenantId
-        * @return Promise<EndpointBasicAuthRepresentation>
-        */
+    * Get an endpoint authorization
+    *
+    * @param basicAuthId basicAuthId
+    * @param tenantId tenantId
+    * @return Promise<EndpointBasicAuthRepresentation>
+    */
     getBasicAuthConfiguration(basicAuthId: number, tenantId: number): Promise<EndpointBasicAuthRepresentation> {
         throwIfNotDefined(basicAuthId, 'basicAuthId');
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'basicAuthId': basicAuthId
+        const pathParams = {
+            basicAuthId
         };
 
-        let queryParams = {
-            'tenantId': tenantId
+        const queryParams = {
+            tenantId
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/basic-auths/{basicAuthId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointBasicAuthRepresentation);
+        return this.get({
+            path: '/api/enterprise/admin/basic-auths/{basicAuthId}',
+            pathParams,
+            queryParams,
+            returnType: EndpointBasicAuthRepresentation
+        });
     }
+
     /**
-        * List endpoint authorizations
-        *
-        *
-        *
-        * @param tenantId tenantId
-        * @return Promise<EndpointBasicAuthRepresentation>
-        */
+    * List endpoint authorizations
+    *
+    * @param tenantId tenantId
+    * @return Promise<EndpointBasicAuthRepresentation>
+    */
     getBasicAuthConfigurations(tenantId: number): Promise<EndpointBasicAuthRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-
+        const queryParams = {
+            tenantId
         };
 
-        let queryParams = {
-            'tenantId': tenantId
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/basic-auths', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointBasicAuthRepresentation);
+        return this.get({
+            path: '/api/enterprise/admin/basic-auths',
+            queryParams,
+            returnType: EndpointBasicAuthRepresentation
+        });
     }
+
     /**
-        * Get an endpoint
-        *
-        *
-        *
-        * @param endpointConfigurationId endpointConfigurationId
-        * @param tenantId tenantId
-        * @return Promise<EndpointConfigurationRepresentation>
-        */
+    * Get an endpoint
+    *
+    * @param endpointConfigurationId endpointConfigurationId
+    * @param tenantId tenantId
+    * @return Promise<EndpointConfigurationRepresentation>
+    */
     getEndpointConfiguration(endpointConfigurationId: number, tenantId: number): Promise<EndpointConfigurationRepresentation> {
         throwIfNotDefined(endpointConfigurationId, 'endpointConfigurationId');
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'endpointConfigurationId': endpointConfigurationId
+        const pathParams = {
+            endpointConfigurationId
         };
 
-        let queryParams = {
-            'tenantId': tenantId
+        const queryParams = {
+            tenantId
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointConfigurationRepresentation);
+        return this.get({
+            path: '/api/enterprise/admin/endpoints/{endpointConfigurationId}',
+            pathParams,
+            queryParams,
+            returnType: EndpointConfigurationRepresentation
+        });
     }
+
     /**
-        * List endpoints
-        *
-        *
-        *
-        * @param tenantId tenantId
-        * @return Promise<EndpointConfigurationRepresentation>
-        */
+    * List endpoints
+    *
+    * @param tenantId tenantId
+    * @return Promise<EndpointConfigurationRepresentation>
+    */
     getEndpointConfigurations(tenantId: number): Promise<EndpointConfigurationRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-
+        const queryParams = {
+            tenantId
         };
 
-        let queryParams = {
-            'tenantId': tenantId
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/endpoints', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointConfigurationRepresentation);
+        return this.get({
+            path: '/api/enterprise/admin/endpoints',
+            returnType: EndpointConfigurationRepresentation,
+            queryParams
+        });
     }
+
     /**
-        * Delete an endpoint authorization
-        *
-        *
-        *
-        * @param basicAuthId basicAuthId
-        * @param tenantId tenantId
-        * @return Promise<{}>
-        */
+    * Delete an endpoint authorization
+    *
+    * @param basicAuthId basicAuthId
+    * @param tenantId tenantId
+    * @return Promise<{}>
+    */
     removeBasicAuthConfiguration(basicAuthId: number, tenantId: number): Promise<any> {
         throwIfNotDefined(basicAuthId, 'basicAuthId');
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'basicAuthId': basicAuthId
+        const pathParams = {
+            basicAuthId
         };
 
-        let queryParams = {
-            'tenantId': tenantId
+        const queryParams = {
+            tenantId
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/api/enterprise/admin/basic-auths/{basicAuthId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, queryParams, {}, {}, null,
             contentTypes, accepts);
     }
+
     /**
-        * Delete an endpoint
-        *
-        *
-        *
-        * @param endpointConfigurationId endpointConfigurationId
-        * @param tenantId tenantId
-        * @return Promise<{}>
-        */
+    * Delete an endpoint
+    *
+    * @param endpointConfigurationId endpointConfigurationId
+    * @param tenantId tenantId
+    * @return Promise<{}>
+    */
     removeEndpointConfiguration(endpointConfigurationId: number, tenantId: number): Promise<any> {
         throwIfNotDefined(endpointConfigurationId, 'endpointConfigurationId');
         throwIfNotDefined(tenantId, 'tenantId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'endpointConfigurationId': endpointConfigurationId
+        const pathParams = {
+            endpointConfigurationId
         };
 
-        let queryParams = {
-            'tenantId': tenantId
+        const queryParams = {
+            tenantId
         };
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
+        const contentTypes = ['application/json'];
+        const accepts = ['application/json'];
 
         return this.apiClient.callApi(
             '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
+            pathParams, queryParams, {}, {}, null,
             contentTypes, accepts);
     }
+
     /**
-        * Update an endpoint authorization
-        *
-        *
-        *
-        * @param basicAuthId basicAuthId
-        * @param createRepresentation createRepresentation
-        * @return Promise<EndpointBasicAuthRepresentation>
-        */
+    * Update an endpoint authorization
+    *
+    * @param basicAuthId basicAuthId
+    * @param createRepresentation createRepresentation
+    * @return Promise<EndpointBasicAuthRepresentation>
+    */
     updateBasicAuthConfiguration(basicAuthId: number, createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
         throwIfNotDefined(basicAuthId, 'basicAuthId');
         throwIfNotDefined(createRepresentation, 'createRepresentation');
 
-        let postBody = createRepresentation;
-
-        let pathParams = {
-            'basicAuthId': basicAuthId
+        const pathParams = {
+            basicAuthId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/basic-auths/{basicAuthId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointBasicAuthRepresentation);
+        return this.put({
+            path: '/api/enterprise/admin/basic-auths/{basicAuthId}',
+            pathParams,
+            bodyParam: createRepresentation,
+            returnType: EndpointBasicAuthRepresentation
+        });
     }
+
     /**
-        * Update an endpoint
-        *
-        *
-        *
-        * @param endpointConfigurationId endpointConfigurationId
-        * @param representation representation
-        * @return Promise<EndpointConfigurationRepresentation>
-        */
+    * Update an endpoint
+    *
+    * @param endpointConfigurationId endpointConfigurationId
+    * @param representation representation
+    * @return Promise<EndpointConfigurationRepresentation>
+    */
     updateEndpointConfiguration(endpointConfigurationId: number, representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {
         throwIfNotDefined(endpointConfigurationId, 'endpointConfigurationId');
         throwIfNotDefined(representation, 'representation');
 
-        let postBody = representation;
-
-        let pathParams = {
-            'endpointConfigurationId': endpointConfigurationId
+        const pathParams = {
+            endpointConfigurationId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/endpoints/{endpointConfigurationId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointConfigurationRepresentation);
+        return this.put({
+            path: '/api/enterprise/admin/endpoints/{endpointConfigurationId}',
+            pathParams,
+            bodyParam: representation,
+            returnType: EndpointConfigurationRepresentation
+        });
     }
-
 }
