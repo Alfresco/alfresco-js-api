@@ -18,7 +18,7 @@
 import { TransferContainerAssociationPaging } from '../model/transferContainerAssociationPaging';
 import { TransferContainerBodyUpdate } from '../model/transferContainerBodyUpdate';
 import { TransferContainerEntry } from '../model/transferContainerEntry';
-import { BaseApi } from './base.api';
+import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
@@ -39,38 +39,18 @@ You can use the **include** parameter (include=allowableOperations) to return ad
     *
     * @param transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
-* allowableOperations
-* path
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<TransferContainerEntry>
     */
-    getTransferContainer(transferContainerId: string, opts?: {
-        include?: string[];
-        fields?: string[];
-    }): Promise<TransferContainerEntry> {
+    getTransferContainer(transferContainerId: string, opts?: RecordsIncludeQuery): Promise<TransferContainerEntry> {
         throwIfNotDefined(transferContainerId, 'transferContainerId');
-        opts = opts || {};
 
         const pathParams = {
             transferContainerId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -81,49 +61,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         });
     }
     /**
-        * List transfer container's children
-        *
-        * Returns a list of transfers.
-
-    Minimal information for each child is returned by default.
-
-    You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-        *
-        * @param transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param opts.maxItems The maximum number of items to return in the list.
-        * @param opts.include Returns additional information about the transfer folders. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * aspectNames
-    * properties
-    * transferPDFIndicator
-    * transferLocation
-    * transferAccessionIndicator
-
-        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the specified parent **transferContainerId**.
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-        * @return Promise<TransferContainerAssociationPaging>
-        */
+    * List transfer container's children
+    * Minimal information for each child is returned by default.
+    *
+    * You can use the **include** parameter (include=allowableOperations) to return additional information.
+    *
+    * @param transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
+    * @param opts Optional parameters
+    * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the specified parent **transferContainerId**.
+    * @return Promise<TransferContainerAssociationPaging>
+    */
     listTransfers(transferContainerId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
-        include?: string[];
         includeSource?: boolean;
-        fields?: string[];
-    }): Promise<TransferContainerAssociationPaging> {
+    } & RecordsIncludeQuery & RecordsPagingQuery): Promise<TransferContainerAssociationPaging> {
         throwIfNotDefined(transferContainerId, 'transferContainerId');
         opts = opts || {};
 
@@ -132,11 +82,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'includeSource': opts['includeSource'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            includeSource: opts?.includeSource,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -171,28 +121,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
         * @param nodeBodyUpdate The node information to update.
         * @param opts Optional parameters
-        * @param opts.include Returns additional information about the transfer container. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * path
-
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<TransferContainerEntry>
         */
-    updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: {
-        include?: string[];
-        fields?: string[];
-    }): Promise<TransferContainerEntry> {
+    updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: RecordsIncludeQuery): Promise<TransferContainerEntry> {
         throwIfNotDefined(transferContainerId, 'transferContainerId');
         throwIfNotDefined(nodeBodyUpdate, 'nodeBodyUpdate');
         opts = opts || {};
@@ -202,8 +133,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.put({
