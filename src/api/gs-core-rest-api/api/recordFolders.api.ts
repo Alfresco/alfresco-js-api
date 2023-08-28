@@ -20,7 +20,7 @@ import { RMNodeBodyCreate } from '../model/rMNodeBodyCreate';
 import { RecordEntry } from '../model/recordEntry';
 import { RecordFolderAssociationPaging } from '../model/recordFolderAssociationPaging';
 import { RecordFolderEntry } from '../model/recordFolderEntry';
-import { BaseApi } from './base.api';
+import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
@@ -143,21 +143,17 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordEntry>
     */
-    createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: {
-        include?: string[];
-        fields?: string[];
-    }): Promise<RecordEntry> {
+    createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: RecordsIncludeQuery): Promise<RecordEntry> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
         throwIfNotDefined(recordBodyCreate, 'recordBodyCreate');
-        opts = opts || {};
 
         const pathParams = {
             recordFolderId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.post({
@@ -181,16 +177,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(recordFolderId, 'recordFolderId');
 
         const pathParams = {
-            'recordFolderId': recordFolderId
+            recordFolderId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/record-folders/{recordFolderId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/record-folders/{recordFolderId}',
+            pathParams
+        });
     }
     /**
         * Get a record folder
@@ -204,29 +197,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         *
         * @param recordFolderId The identifier of a record folder.
         * @param opts Optional parameters
-        * @param opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * isClosed
-    * path
-
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<RecordFolderEntry>
         */
-    getRecordFolder(recordFolderId: string, opts?: {
-        include?: string[];
-        fields?: string[];
-    }): Promise<RecordFolderEntry> {
+    getRecordFolder(recordFolderId: string, opts?: RecordsIncludeQuery): Promise<RecordFolderEntry> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
         opts = opts || {};
 
@@ -235,8 +208,8 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -246,76 +219,44 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: RecordFolderEntry
         });
     }
+
     /**
-        * List records
-        *
-        * Gets a list of records.
-
-    Minimal information for each record is returned by default.
-
-    The list of records includes primary children and secondary children, if there are any.
-
-    You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-        *
-        * @param recordFolderId The identifier of a record folder.
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param opts.maxItems The maximum number of items to return in the list.
-        * @param opts.where Optionally filter the list. Here are some examples:
-
+    * List records
+    *
+    * Gets a list of records.
+    *
+    * Minimal information for each record is returned by default.
+    *
+    * The list of records includes primary children and secondary children, if there are any.
+    *
+    * You can use the **include** parameter (include=allowableOperations) to return additional information.
+    *
+    * @param recordFolderId The identifier of a record folder.
+    * @param opts Optional parameters
+    * @param opts.where Optionally filter the list. Here are some examples:
     *   where=(nodeType='my:specialNodeType')
-
     *   where=(nodeType='my:specialNodeType INCLUDESUBTYPES')
-
     *   where=(isPrimary=true)
-
-        * @param opts.include Returns additional information about the records. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * aspectNames
-    * association
-    * content
-    * isCompleted
-    * path
-    * properties
-
-        * @param opts.includeSource Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId**
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-        * @return Promise<RecordFolderAssociationPaging>
-        */
+    * @param opts.includeSource Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId**
+    * @return Promise<RecordFolderAssociationPaging>
+    */
     listRecordFolderChildren(recordFolderId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
         where?: string;
-        include?: string[];
         includeSource?: boolean;
-        fields?: string[];
-    }): Promise<RecordFolderAssociationPaging> {
+    } & RecordsPagingQuery & RecordsIncludeQuery ): Promise<RecordFolderAssociationPaging> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
-        opts = opts || {};
 
         const pathParams = {
             recordFolderId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'includeSource': opts['includeSource'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            includeSource: opts?.includeSource,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -352,40 +293,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param recordFolderId The identifier of a record folder.
         * @param recordFolderBodyUpdate The record folder information to update.
         * @param opts Optional parameters
-        * @param opts.include Returns additional information about the record folders. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * isClosed
-    * path
-
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<RecordFolderEntry>
         */
-    updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: {
-        include?: string[];
-        fields?: string[];
-    }): Promise<RecordFolderEntry> {
+    updateRecordFolder(recordFolderId: string, recordFolderBodyUpdate: FilePlanComponentBodyUpdate, opts?: RecordsIncludeQuery): Promise<RecordFolderEntry> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
         throwIfNotDefined(recordFolderBodyUpdate, 'recordFolderBodyUpdate');
-        opts = opts || {};
 
         const pathParams = {
             recordFolderId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.put({
