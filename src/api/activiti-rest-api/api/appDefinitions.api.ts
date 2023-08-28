@@ -96,18 +96,24 @@ export class AppDefinitionsApi extends BaseApi {
      * importAndPublishApp
      *
      * @param file file
+     * @param opts options
      * @return Promise<AppDefinitionUpdateResultRepresentation>
      */
-    importAndPublishApp(file: any): Promise<AppDefinitionUpdateResultRepresentation> {
+    importAndPublishApp(file: any, opts?: { renewIdmEntries?: boolean }): Promise<AppDefinitionUpdateResultRepresentation> {
         throwIfNotDefined(file, 'file');
 
         const formParams = {
             'file': file
         };
 
+        const queryParams = {
+            renewIdmEntries: opts?.renewIdmEntries
+        };
+
         return this.post({
             path: '/api/enterprise/app-definitions/publish-app',
             formParams,
+            queryParams,
             contentTypes: ['multipart/form-data'],
             returnType: AppDefinitionUpdateResultRepresentation
         });
