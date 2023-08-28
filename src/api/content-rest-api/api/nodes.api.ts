@@ -32,7 +32,50 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 
-export interface CreateNodeOpts {
+export type NodesIncludeQuery = {
+    /**
+     * Returns additional information about the node. The following optional fields can be requested:
+     * - allowableOperations
+     * - association
+     * - isLink
+     * - isFavorite
+     * - isLocked
+     * - path
+     * - permissions
+     * - definition
+     */
+    include?: string[];
+
+    /**
+     * A list of field names.
+     *
+     * You can use this parameter to restrict the fields
+     * returned within a response if, for example, you want to save on overall bandwidth.
+     *
+     * The list applies to a returned individual
+     * entity or entries within a collection.
+     *
+     * If the API method also supports the **include**
+     * parameter, then the fields specified in the **include**
+     * parameter are returned in addition to those specified in the **fields** parameter.
+     */
+    fields?: string[];
+}
+
+export type NodesPagingQuery = {
+    /**
+     * The number of entities that exist in the collection before those included in this list.
+     * If not supplied then the default value is 0.
+     */
+    skipCount?: number;
+    /**
+     * The maximum number of items to return in the list.
+     * If not supplied then the default value is 100.
+     */
+    maxItems?: number;
+};
+
+export interface CreateNodeOpts extends NodesIncludeQuery {
     [key: string]: any;
     // If true, then a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
     autoRename?: boolean;
@@ -40,10 +83,6 @@ export interface CreateNodeOpts {
     majorVersion?: boolean;
     // If true, then created node will be versioned. If false, then created node will be unversioned and auto-versioning disabled.
     versioningEnabled?: boolean;
-    // Returns additional information about the node.
-    include?: string[],
-    // A list of field names.
-    fields?: string[],
 }
 
 /**
@@ -55,44 +94,21 @@ export class NodesApi extends BaseApi {
     * Copy a node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Copies the node **nodeId** to the parent folder node **targetParentId**. You specify the **targetParentId** in the request body.
-
-The new node has the same name as the source node unless you specify a new **name** in the request body.
-
-If the source **nodeId** is a folder, then all of its children are also copied.
-
-If the source **nodeId** is a file, it's properties, aspects and tags are copied, it's ratings, comments and locks are not.
-
+    *
+    * Copies the node **nodeId** to the parent folder node **targetParentId**. You specify the **targetParentId** in the request body.
+    *
+    * The new node has the same name as the source node unless you specify a new **name** in the request body.
+    *
+    * If the source **nodeId** is a folder, then all of its children are also copied.
+    *
+    * If the source **nodeId** is a file, it's properties, aspects and tags are copied, it's ratings, comments and locks are not.
     *
     * @param nodeId The identifier of a node.
     * @param nodeBodyCopy The targetParentId and, optionally, a new name which should include the file extension.
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* association
-* isLink
-* isFavorite
-* isLocked
-* path
-* permissions
-* definition
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<NodeEntry>
     */
-    copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
+    copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts?: NodesIncludeQuery): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyCopy, 'nodeBodyCopy');
 
@@ -113,6 +129,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: NodeEntry
         });
     }
+
 /**
     * Create node association
     *
@@ -435,16 +452,14 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
 
-        opts = opts || {};
-
         const pathParams = {
             nodeId: nodeId
         };
 
         const queryParams = {
-            autoRename: opts.autoRename,
-            include: buildCollectionParam(opts.include, 'csv'),
-            fields: buildCollectionParam(opts.fields, 'csv')
+            autoRename: opts?.autoRename,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         formParams = formParams || {};
@@ -650,30 +665,19 @@ Only the owner of the node or an admin can permanently delete the node.
     deleteNode(nodeId: string, opts?: { permanent?: boolean }): Promise<any> {
         throwIfNotDefined(nodeId, 'nodeId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
             nodeId
         };
 
         const queryParams = {
-            'permanent': opts['permanent']
+            permanent: opts?.permanent
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/nodes/{nodeId}',
+            pathParams,
+            queryParams
+        });
     }
 /**
     * Delete secondary child or children
@@ -724,45 +728,20 @@ You can use the **include** parameter to return additional information.
 * -root-
 
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* association
-* isLink
-* isFavorite
-* isLocked
-* path
-* permissions
-* definition
-
-    * @param opts.relativePath A path relative to the **nodeId**. If you set this,
-information is returned on the node resolved by this path.
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
+    * @param opts.relativePath A path relative to the **nodeId**. If you set this, information is returned on the node resolved by this path.
     * @return Promise<NodeEntry>
     */
-    getNode(nodeId: string, opts?: { include?: string[]; relativePath?: string; fields?: string[] }): Promise<NodeEntry> {
+    getNode(nodeId: string, opts?: { relativePath?: string; } & NodesIncludeQuery): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
-        opts = opts || {};
 
         const pathParams = {
             nodeId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'relativePath': opts['relativePath'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            relativePath: opts?.relativePath,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -933,31 +912,26 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @return Promise<NodeChildAssociationPaging>
     */
     listNodeChildren(nodeId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
         orderBy?: string[];
         where?: string;
-        include?: string[];
         relativePath?: string;
         includeSource?: boolean;
-        fields?: string[];
-    }): Promise<NodeChildAssociationPaging> {
+    } & NodesIncludeQuery & NodesPagingQuery ): Promise<NodeChildAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
-        opts = opts || {};
 
         const pathParams = {
             nodeId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'relativePath': opts['relativePath'],
-            'includeSource': opts['includeSource'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'skipCount': opts?.skipCount,
+            'maxItems': opts?.maxItems,
+            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
+            'where': opts?.where,
+            'include': buildCollectionParam(opts?.include, 'csv'),
+            'relativePath': opts?.relativePath,
+            'includeSource': opts?.includeSource,
+            'fields': buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -1023,12 +997,8 @@ parameter are returned in addition to those specified in the **fields** paramete
     */
     listParents(nodeId: string, opts?: {
         where?: string;
-        include?: string[];
-        skipCount?: number;
-        maxItems?: number;
         includeSource?: boolean;
-        fields?: string[];
-    }): Promise<NodeAssociationPaging> {
+    } & NodesIncludeQuery & NodesPagingQuery ): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -1037,12 +1007,12 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'includeSource': opts['includeSource'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            includeSource: opts?.includeSource,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -1102,12 +1072,8 @@ parameter are returned in addition to those specified in the **fields** paramete
     */
     listSecondaryChildren(nodeId: string, opts?: {
         where?: string;
-        include?: string[];
-        skipCount?: number;
-        maxItems?: number;
         includeSource?: boolean;
-        fields?: string[];
-    }): Promise<NodeChildAssociationPaging> {
+    } & NodesIncludeQuery & NodesPagingQuery ): Promise<NodeChildAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -1116,12 +1082,12 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'includeSource': opts['includeSource'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            includeSource: opts?.includeSource,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -1170,9 +1136,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     */
     listSourceAssociations(nodeId: string, opts?: {
         where?: string;
-        include?: string[];
-        fields?: string[];
-    }): Promise<NodeAssociationPaging> {
+    } & NodesIncludeQuery): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -1181,9 +1145,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -1193,50 +1157,23 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: NodeAssociationPaging
         });
     }
-/**
+
+    /**
     * List target associations
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Gets a list of target nodes that are associated with the current source **nodeId**.
-
+    *
+    * Gets a list of target nodes that are associated with the current source **nodeId**.
     *
     * @param nodeId The identifier of a source node.
     * @param opts Optional parameters
     * @param opts.where Optionally filter the list by **assocType**. Here's an example:
-
-*   where=(assocType='my:specialAssocType')
-
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* aspectNames
-* isLink
-* isFavorite
-* isLocked
-* path
-* properties
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
+    *   where=(assocType='my:specialAssocType')
     * @return Promise<NodeAssociationPaging>
     */
     listTargetAssociations(nodeId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
         where?: string;
-        include?: string[];
-        fields?: string[];
-    }): Promise<NodeAssociationPaging> {
+    } & NodesIncludeQuery & NodesPagingQuery): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -1245,11 +1182,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -1259,7 +1196,8 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: NodeAssociationPaging
         });
     }
-/**
+
+    /**
     * Lock a node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -1293,34 +1231,11 @@ If a lock on the node cannot be taken, then an error is returned.
     * @param nodeId The identifier of a node.
     * @param nodeBodyLock Lock details.
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* association
-* isLink
-* isFavorite
-* isLocked
-* path
-* permissions
-* definition
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<NodeEntry>
     */
-    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
+    lockNode(nodeId: string, nodeBodyLock: NodeBodyLock, opts?: NodesIncludeQuery): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyLock, 'nodeBodyLock');
-        opts = opts || {};
 
         const pathParams = {
             nodeId
@@ -1339,50 +1254,28 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: NodeEntry
         });
     }
-/**
+
+    /**
     * Move a node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Move the node **nodeId** to the parent folder node **targetParentId**.
-
-The **targetParentId** is specified in the in request body.
-
-The moved node retains its name unless you specify a new **name** in the request body.
-
-If the source **nodeId** is a folder, then its children are also moved.
-
-The move will effectively change the primary parent.
-
+    *
+    * Move the node **nodeId** to the parent folder node **targetParentId**.
+    *
+    * The **targetParentId** is specified in the in request body.
+    *
+    * The moved node retains its name unless you specify a new **name** in the request body.
+    *
+    * If the source **nodeId** is a folder, then its children are also moved.
+    *
+    * The move will effectively change the primary parent.
     *
     * @param nodeId The identifier of a node.
     * @param nodeBodyMove The targetParentId and, optionally, a new name which should include the file extension.
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* association
-* isLink
-* isFavorite
-* isLocked
-* path
-* permissions
-* definition
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<NodeEntry>
     */
-    moveNode(nodeId: string, nodeBodyMove: NodeBodyMove, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
+    moveNode(nodeId: string, nodeBodyMove: NodeBodyMove, opts?: NodesIncludeQuery): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyMove, 'nodeBodyMove');
 
@@ -1404,45 +1297,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         });
     }
 
-/**
+    /**
     * Unlock a node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Deletes a lock on node **nodeId**.
-
-The current user must be the owner of the locks or have admin rights, otherwise an error is returned.
-
-If a lock on the node cannot be released, then an error is returned.
-
+    *
+    * The current user must be the owner of the locks or have admin rights, otherwise an error is returned.
+    * If a lock on the node cannot be released, then an error is returned.
     *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* association
-* isLink
-* isFavorite
-* isLocked
-* path
-* permissions
-* definition
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<NodeEntry>
     */
-    unlockNode(nodeId: string, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
+    unlockNode(nodeId: string, opts?: NodesIncludeQuery): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
@@ -1461,6 +1328,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: NodeEntry
         });
     }
+
 /**
     * Update a node
     *
@@ -1524,31 +1392,9 @@ JSON
     * @param nodeId The identifier of a node.
     * @param nodeBodyUpdate The node information to update.
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* association
-* isLink
-* isFavorite
-* isLocked
-* path
-* permissions
-* definition
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<NodeEntry>
     */
-    updateNode(nodeId: string, nodeBodyUpdate: NodeBodyUpdate, opts?: { include?: string[]; fields?: string[] }): Promise<NodeEntry> {
+    updateNode(nodeId: string, nodeBodyUpdate: NodeBodyUpdate, opts?: NodesIncludeQuery): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyUpdate, 'nodeBodyUpdate');
 
@@ -1601,38 +1447,13 @@ Setting this parameter also enables versioning of this node, if it is not alread
     * @param opts.name Optional new name. This should include the file extension.
 The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.
 The character . must not be used at the end of the name.
-
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* association
-* isLink
-* isFavorite
-* isLocked
-* path
-* permissions
-* definition
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<NodeEntry>
     */
     updateNodeContent(nodeId: string, contentBodyUpdate: string, opts?: {
-        include?: string[];
-        fields?: string[];
         majorVersion?: boolean;
         comment?: string;
         name?: string;
-    }): Promise<NodeEntry> {
+    } & NodesIncludeQuery ): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
         opts = opts || {};
@@ -1680,5 +1501,4 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: DirectAccessUrlEntry
         });
     }
-
 }
