@@ -201,7 +201,6 @@ parameter are returned in addition to those specified in the **fields** paramete
         */
     getRecordFolder(recordFolderId: string, opts?: RecordsIncludeQuery): Promise<RecordFolderEntry> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
-        opts = opts || {};
 
         const pathParams = {
             recordFolderId

@@ -235,7 +235,6 @@ JSON
         includeSource?: boolean;
     } & RecordsIncludeQuery & RecordsPagingQuery): Promise<RecordCategoryChildPaging> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
-        opts = opts || {};
 
         const pathParams = {
             recordCategoryId

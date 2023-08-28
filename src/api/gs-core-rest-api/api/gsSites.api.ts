@@ -23,7 +23,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Gssites service.
+* GsSitesApi service.
 * @module GssitesApi
 */
 export class GsSitesApi extends BaseApi {
@@ -69,13 +69,9 @@ When you create the RM site, the **filePlan** structure is also created includin
     * @return Promise<{}>
     */
     deleteRMSite(): Promise<void> {
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/gs-sites/rm', 'DELETE',
-            {}, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/gs-sites/rm'
+        });
     }
 
     /**
@@ -97,10 +93,8 @@ When you create the RM site, the **filePlan** structure is also created includin
         * @return Promise<RMSiteEntry>
         */
     getRMSite(opts?: { fields?: string[] }): Promise<RMSiteEntry> {
-        opts = opts || {};
-
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({

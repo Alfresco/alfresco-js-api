@@ -36,7 +36,6 @@ export class RecordsApi extends BaseApi {
     */
     completeRecord(recordId: string, opts?: RecordsIncludeQuery): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
-        opts = opts || {};
 
         const pathParams = {
             recordId
