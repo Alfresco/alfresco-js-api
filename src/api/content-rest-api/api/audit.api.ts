@@ -23,6 +23,7 @@ import { AuditEntryPaging } from '../model/auditEntryPaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './types';
 
 /**
 * Audit service.
@@ -64,7 +65,7 @@ You must have admin rights to delete audit information.
         };
 
         const queryParams = {
-            'where': where
+            where
         };
 
         return this.delete({
@@ -167,21 +168,9 @@ You must have admin rights to access audit information.
     * @param auditApplicationId The identifier of an audit application.
     * @param auditEntryId The identifier of an audit entry.
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<AuditEntryEntry>
     */
-    getAuditEntry(auditApplicationId: string, auditEntryId: string, opts?: { fields?: string[] }): Promise<AuditEntryEntry> {
+    getAuditEntry(auditApplicationId: string, auditEntryId: string, opts?: ContentFieldsQuery): Promise<AuditEntryEntry> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(auditEntryId, 'auditEntryId');
 
@@ -240,7 +229,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<AuditAppPaging>
     */
-    listAuditApps(opts?: { skipCount?: string; maxItems?: string; fields?: string[] }): Promise<AuditAppPaging> {
+    listAuditApps(opts?: ContentPagingQuery & ContentFieldsQuery): Promise<AuditAppPaging> {
         const queryParams = {
             skipCount: opts?.skipCount,
             maxItems: opts?.maxItems,
@@ -279,9 +268,6 @@ You must have admin rights to retrieve audit information.
     *
     * @param auditApplicationId The identifier of an audit application.
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
     * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
@@ -290,9 +276,6 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.where Optionally filter the list. Here are some examples:
 
 *   where=(createdByUser='jbloggs')
@@ -306,32 +289,12 @@ If not supplied then the default value is 100.
 *   where=(valuesKey='/alfresco-access/login/user')
 
 *   where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')
-
-    * @param opts.include Returns additional information about the audit entry. The following optional fields can be requested:
-* values
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<AuditEntryPaging>
     */
     listAuditEntriesForAuditApp(auditApplicationId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
         where?: string;
         orderBy?: string[];
-        include?: string[];
-        fields?: string[];
-    }): Promise<AuditEntryPaging> {
+    } & ContentPagingQuery & ContentFieldsQuery & ContentIncludeQuery ): Promise<AuditEntryPaging> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         opts = opts || {};
 
@@ -340,12 +303,12 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'skipCount': opts?.skipCount,
+            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
+            'maxItems': opts?.maxItems,
+            'where': opts?.where,
+            'include': buildCollectionParam(opts?.include, 'csv'),
+            'fields': buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -375,9 +338,6 @@ This relies on the pre-configured 'alfresco-access' audit application.
     *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
     * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
@@ -386,9 +346,6 @@ above to check if any fields used in this method have a descending default searc
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.where Optionally filter the list. Here are some examples:
 
 *   where=(createdByUser='-me-')
@@ -396,32 +353,12 @@ If not supplied then the default value is 100.
 *   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
 
 *   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
-
-    * @param opts.include Returns additional information about the audit entry. The following optional fields can be requested:
-* values
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<AuditEntryPaging>
     */
     listAuditEntriesForNode(nodeId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
         orderBy?: string[];
         where?: string;
-        include?: string[];
-        fields?: string[];
-    }): Promise<AuditEntryPaging> {
+    } & ContentPagingQuery & ContentIncludeQuery & ContentFieldsQuery): Promise<AuditEntryPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -430,12 +367,12 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'skipCount': opts?.skipCount,
+            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
+            'maxItems': opts?.maxItems,
+            'where': opts?.where,
+            'include': buildCollectionParam(opts?.include, 'csv'),
+            'fields': buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -464,21 +401,9 @@ You must have admin rights to update audit application.
     * @param auditApplicationId The identifier of an audit application.
     * @param auditAppBodyUpdate The audit application to update.
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<AuditApp>
     */
-    updateAuditApp(auditApplicationId: string, auditAppBodyUpdate: AuditBodyUpdate, opts?: { fields?: string[] }): Promise<AuditApp> {
+    updateAuditApp(auditApplicationId: string, auditAppBodyUpdate: AuditBodyUpdate, opts?: ContentFieldsQuery): Promise<AuditApp> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(auditAppBodyUpdate, 'auditAppBodyUpdate');
 

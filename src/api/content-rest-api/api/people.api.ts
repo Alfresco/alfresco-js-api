@@ -24,6 +24,7 @@ import { PersonPaging } from '../model/personPaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './types';
 
 /**
 * People service.
@@ -61,24 +62,11 @@ JSON
     *
     * @param personBodyCreate The person details.
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<PersonEntry>
     */
-    createPerson(personBodyCreate: PersonBodyCreate, opts?: { fields?: string[] }): Promise<PersonEntry> {
+    createPerson(personBodyCreate: PersonBodyCreate, opts?: ContentFieldsQuery): Promise<PersonEntry> {
         throwIfNotDefined(personBodyCreate, 'personBodyCreate');
 
-        opts = opts || {};
         const postBody = personBodyCreate;
 
         const pathParams = {
@@ -86,7 +74,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'fields': buildCollectionParam(opts?.fields, 'csv')
         };
 
         const headerParams = {
@@ -216,21 +204,9 @@ You can use the -me- string in place of <personId> to specify the currently auth
     *
     * @param personId The identifier of a person.
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<PersonEntry>
     */
-    getPerson(personId: string, opts?: { fields?: string[] }): Promise<PersonEntry> {
+    getPerson(personId: string, opts?: ContentFieldsQuery): Promise<PersonEntry> {
         throwIfNotDefined(personId, 'personId');
 
         opts = opts || {};
@@ -277,12 +253,6 @@ You can use any of the following fields to order the results:
 
     *
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
@@ -290,33 +260,11 @@ Each field has a default sort order, which is normally ascending order. Read the
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-    * @param opts.include Returns additional information about the person. The following optional fields can be requested:
-* properties
-* aspectNames
-* capabilities
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<PersonPaging>
     */
     listPeople(opts?: {
-        skipCount?: number;
-        maxItems?: number;
         orderBy?: string[];
-        include?: string[];
-        fields?: string[];
-    }): Promise<PersonPaging> {
+    } & ContentPagingQuery & ContentIncludeQuery & ContentFieldsQuery): Promise<PersonPaging> {
 
         opts = opts || {};
         const postBody: null = null;
@@ -325,11 +273,11 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'skipCount': opts?.skipCount,
+            'maxItems': opts?.maxItems,
+            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
+            'include': buildCollectionParam(opts?.include, 'csv'),
+            'fields': buildCollectionParam(opts?.fields, 'csv')
         };
 
         const headerParams = {
@@ -520,26 +468,12 @@ JSON
     * @param personId The identifier of a person.
     * @param personBodyUpdate The person details.
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<PersonEntry>
     */
-    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts?: { fields?: string[] }): Promise<PersonEntry> {
-
+    updatePerson(personId: string, personBodyUpdate: PersonBodyUpdate, opts?: ContentFieldsQuery): Promise<PersonEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(personBodyUpdate, 'personBodyUpdate');
 
-        opts = opts || {};
         const postBody = personBodyUpdate;
 
         const pathParams = {
@@ -564,5 +498,4 @@ parameter are returned in addition to those specified in the **fields** paramete
             pathParams, queryParams, headerParams, formParams, postBody,
             contentTypes, accepts , PersonEntry);
     }
-
 }
