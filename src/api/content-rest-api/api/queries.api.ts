@@ -21,36 +21,13 @@ import { SitePaging } from '../model/sitePaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './types';
 
-export interface FindQuery {
+export type FindQuery = {
     /**
      * The term to search for.
      */
     term?: string;
-    /**
-     * The number of entities that exist in the collection before those included in this list.
-     * If not supplied then the default value is 0.
-     */
-    skipCount?: number;
-    /**
-     * The maximum number of items to return in the list.
-     * If not supplied then the default value is 100.
-     */
-    maxItems?: number;
-    /**
-     * A list of field names.
-     *
-     * You can use this parameter to restrict the fields
-     * returned within a response if, for example, you want to save on overall bandwidth.
-     *
-     * The list applies to a returned individual
-     * entity or entries within a collection.
-     *
-     * If the API method also supports the **include**
-     * parameter, then the fields specified in the **include**
-     * parameter are returned in addition to those specified in the **fields** parameter.
-     */
-    fields?: string[];
     /**
      * A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
      * sort the list by one or more fields.
@@ -61,9 +38,9 @@ export interface FindQuery {
      * To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
      */
     orderBy?: string[];
-}
+} & ContentPagingQuery & ContentFieldsQuery
 
-export interface FindNodesQuery extends FindQuery{
+export type FindNodesQuery = {
     /**
      * The id of the node to start the search from.
      * Supports the aliases **-my-**, **-root-** and **-shared-**.
@@ -73,19 +50,7 @@ export interface FindNodesQuery extends FindQuery{
      * Restrict the returned results to only those of the given node type and its sub-types
      */
     nodeType?: string;
-
-    /**
-     * Returns additional information about the node. The following optional fields can be requested:
-     * - allowableOperations
-     * - aspectNames
-     * - isLink
-     * - isFavorite
-     * - isLocked
-     * - path
-     * - properties
-     */
-    include?: string[];
-}
+} & FindQuery;
 
 /**
 * Queries service.
@@ -119,7 +84,7 @@ export class QueriesApi extends BaseApi {
     * @param opts Optional parameters
     * @return Promise<NodePaging>
     */
-    findNodes(term: string, opts?: FindNodesQuery): Promise<NodePaging> {
+    findNodes(term: string, opts?: FindNodesQuery & ContentPagingQuery & ContentIncludeQuery & ContentFieldsQuery): Promise<NodePaging> {
         throwIfNotDefined(term, 'term');
 
         const queryParams = {

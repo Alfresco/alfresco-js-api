@@ -24,6 +24,7 @@ import { SharedLinkPaging } from '../model/sharedLinkPaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './types';
 
 /**
 * Sharedlinks service.
@@ -210,21 +211,9 @@ Gets minimal information for the file with shared link identifier **sharedId**.
     *
     * @param sharedId The identifier of a shared link to a file.
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<SharedLinkEntry>
     */
-    getSharedLink(sharedId: string, opts?: { fields?: string[] }): Promise<SharedLinkEntry> {
+    getSharedLink(sharedId: string, opts?: ContentFieldsQuery): Promise<SharedLinkEntry> {
         throwIfNotDefined(sharedId, 'sharedId');
 
         const pathParams = {
@@ -437,54 +426,20 @@ The list is ordered in descending modified order.
 
     *
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.where Optionally filter the list by \"sharedByUser\" userid of person who shared the link (can also use -me-)
-
 *   where=(sharedByUser='jbloggs')
-
 *   where=(sharedByUser='-me-')
-
-    * @param opts.include Returns additional information about the shared link, the following optional fields can be requested:
-* allowableOperations
-* path
-* properties
-* isFavorite
-* aspectNames
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<SharedLinkPaging>
     */
     listSharedLinks(opts?: {
-        skipCount?: number;
-        maxItems?: number;
         where?: string;
-        include?: string[];
-        fields?: string[];
-    }): Promise<SharedLinkPaging> {
-        opts = opts || {};
-
+    } & ContentPagingQuery & ContentIncludeQuery & ContentFieldsQuery): Promise<SharedLinkPaging> {
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'skipCount': opts?.skipCount,
+            'maxItems': opts?.maxItems,
+            'where': opts?.where,
+            'include': buildCollectionParam(opts?.include, 'csv'),
+            'fields': buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({

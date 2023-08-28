@@ -104,7 +104,8 @@ Gets the rendition information for **renditionId** of file **nodeId**.
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId,            'renditionId': renditionId
+            nodeId,
+            renditionId
         };
 
         const queryParams = {
@@ -175,13 +176,13 @@ than a 404 response.
         };
 
         const queryParams = {
-            'attachment': opts['attachment'],
-            'placeholder': opts['placeholder']
+            attachment: opts?.attachment,
+            placeholder: opts?.placeholder
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],
-            'Range': opts['range']
+            'If-Modified-Since': opts?.ifModifiedSince,
+            'Range': opts?.range
         };
         const formParams = {
         };
