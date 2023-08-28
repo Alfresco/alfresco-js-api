@@ -34,87 +34,52 @@ export class TrashcanApi extends BaseApi {
     * Permanently delete a deleted node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Permanently deletes the deleted node **nodeId**.
-
     *
     * @param nodeId The identifier of a node.
     * @return Promise<{}>
     */
     deleteDeletedNode(nodeId: string): Promise<any> {
-
         throwIfNotDefined(nodeId, 'nodeId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/deleted-nodes/{nodeId}',
+            pathParams
+        });
     }
-/**
+
+    /**
     * Get rendition information for a deleted node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Gets the rendition information for **renditionId** of file **nodeId**.
-
     *
     * @param nodeId The identifier of a node.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
     * @return Promise<RenditionEntry>
     */
     getArchivedNodeRendition(nodeId: string, renditionId: string): Promise<RenditionEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'nodeId': nodeId,            'renditionId': renditionId
+            nodeId,
+            renditionId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}/renditions/{renditionId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , RenditionEntry);
+        return this.get({
+            path: '/deleted-nodes/{nodeId}/renditions/{renditionId}',
+            pathParams,
+            returnType: RenditionEntry
+        });
     }
-/**
+
+    /**
     * Get rendition content of a deleted node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Gets the rendition content for **renditionId** of file **nodeId**.
-
     *
     * @param nodeId The identifier of a node.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
@@ -149,9 +114,7 @@ than a 404 response.
     }): Promise<Blob> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             nodeId,
@@ -159,24 +122,22 @@ than a 404 response.
         };
 
         const queryParams = {
-            'attachment': opts['attachment'],
-            'placeholder': opts['placeholder']
+            attachment: opts?.attachment,
+            placeholder: opts?.placeholder
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],
-            'Range': opts['range']
-        };
-        const formParams = {
+            'If-Modified-Since': opts?.ifModifiedSince,
+            'Range': opts?.range
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/octet-stream'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}/renditions/{renditionId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , 'blob');
+        return this.get({
+            path: '/deleted-nodes/{nodeId}/renditions/{renditionId}/content',
+            pathParams,
+            queryParams,
+            headerParams,
+            accepts: ['application/octet-stream']
+        });
     }
 /**
     * Get a deleted node
@@ -201,33 +162,22 @@ Gets the specific deleted node **nodeId**.
     * @return Promise<DeletedNodeEntry>
     */
     getDeletedNode(nodeId: string, opts?: { include?: string[] }): Promise<DeletedNodeEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , DeletedNodeEntry);
+        return this.get({
+            path: '/deleted-nodes/{nodeId}',
+            pathParams,
+            queryParams,
+            returnType: DeletedNodeEntry
+        });
     }
 /**
     * Get deleted node content
@@ -372,7 +322,7 @@ If not supplied then the default value is 100.
 
     * @return Promise<DeletedNodesPaging>
     */
-    listDeletedNodes(opts?: { skipCount?: number; maxItems?: string; include?: string[] }): Promise<DeletedNodesPaging> {
+    listDeletedNodes(opts?: { skipCount?: number; maxItems?: number; include?: string[] }): Promise<DeletedNodesPaging> {
         opts = opts || {};
 
         const queryParams = {
