@@ -313,20 +313,18 @@ You must have admin rights to delete a group.
         const cascadeDelete = opts['cascade'] ? opts['cascade'] : false;
 
         const pathParams = {
-            'groupId': groupId
+            groupId
         };
 
         const queryParams = {
             'cascade': cascadeDelete
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/groups/{groupId}', 'DELETE',
-            pathParams, queryParams, {}, {}, null,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/groups/{groupId}',
+            pathParams,
+            queryParams
+        });
     }
 /**
     * Delete a group membership
@@ -355,13 +353,10 @@ You must have admin rights to delete a group membership.
             groupMemberId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/groups/{groupId}/members/{groupMemberId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/groups/{groupId}/members/{groupMemberId}',
+            pathParams
+        });
     }
 
 /**

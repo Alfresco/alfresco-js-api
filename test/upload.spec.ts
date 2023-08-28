@@ -18,7 +18,7 @@
 import { expect } from 'chai';
 import { EcmAuthMock, UploadMock } from '../test/mockObjects';
 import fs from 'fs';
-import { AlfrescoApiConfig, UploadApi, AlfrescoApi, NodeEntry } from '../index';
+import { UploadApi, AlfrescoApi, NodeEntry } from '../index';
 
 describe('Upload', () => {
     let authResponseMock: EcmAuthMock;
@@ -35,7 +35,7 @@ describe('Upload', () => {
         authResponseMock.get201Response();
         alfrescoJsApi = new AlfrescoApi({
             hostEcm: hostEcm
-        } as AlfrescoApiConfig);
+        });
 
         uploadApi = new UploadApi(alfrescoJsApi);
 
@@ -75,7 +75,7 @@ describe('Upload', () => {
             const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
             uploadApi.uploadFile(file, null, null, null, { autoRename: true })
-                .then((data: any) => {
+                .then((data: NodeEntry) => {
                     expect(data.entry.isFile).to.be.equal(true);
                     expect(data.entry.name).to.be.equal('testFile-2.txt');
                     done();

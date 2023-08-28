@@ -24,14 +24,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Userfilters service.
-* @module UserfiltersApi
+* UserFiltersApi service.
+* @module UserFiltersApi
 */
 export class UserFiltersApi extends BaseApi {
     /**
     * Create a process instance filter
-    *
-    *
     *
     * @param userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
     * @return Promise<UserProcessInstanceFilterRepresentation>
@@ -39,408 +37,212 @@ export class UserFiltersApi extends BaseApi {
     createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation> {
         throwIfNotDefined(userProcessInstanceFilterRepresentation, 'userProcessInstanceFilterRepresentation');
 
-        let postBody = userProcessInstanceFilterRepresentation;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/processes', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserProcessInstanceFilterRepresentation);
+        return this.post({
+            path: '/api/enterprise/filters/processes',
+            bodyParam: userProcessInstanceFilterRepresentation,
+            returnType: UserProcessInstanceFilterRepresentation
+        });
     }
+
     /**
-        * Create a task filter
-        *
-        *
-        *
-        * @param userTaskFilterRepresentation userTaskFilterRepresentation
-        * @return Promise<UserTaskFilterRepresentation>
-        */
+    * Create a task filter
+    *
+    * @param userTaskFilterRepresentation userTaskFilterRepresentation
+    * @return Promise<UserTaskFilterRepresentation>
+    */
     createUserTaskFilter(userTaskFilterRepresentation: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation> {
         throwIfNotDefined(userTaskFilterRepresentation, 'userTaskFilterRepresentation');
 
-        let postBody = userTaskFilterRepresentation;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/tasks', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserTaskFilterRepresentation);
+        return this.post({
+            path: '/api/enterprise/filters/tasks',
+            bodyParam: userTaskFilterRepresentation,
+            returnType: UserTaskFilterRepresentation
+        });
     }
+
     /**
-        * Delete a process instance filter
-        *
-        *
-        *
-        * @param userFilterId userFilterId
-        * @return Promise<{}>
-        */
+    * Delete a process instance filter
+    *
+    * @param userFilterId userFilterId
+    * @return Promise<{}>
+    */
     deleteUserProcessInstanceFilter(userFilterId: number): Promise<any> {
         throwIfNotDefined(userFilterId, 'userFilterId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'userFilterId': userFilterId
+        const pathParams = {
+            userFilterId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/processes/{userFilterId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/filters/processes/{userFilterId}',
+            pathParams
+        });
     }
+
     /**
-        * Delete a task filter
-        *
-        *
-        *
-        * @param userFilterId userFilterId
-        * @return Promise<{}>
-        */
+    * Delete a task filter
+    *
+    * @param userFilterId userFilterId
+    * @return Promise<{}>
+    */
     deleteUserTaskFilter(userFilterId: number): Promise<any> {
         throwIfNotDefined(userFilterId, 'userFilterId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'userFilterId': userFilterId
+        const pathParams = {
+            userFilterId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/tasks/{userFilterId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/filters/tasks/{userFilterId}',
+            pathParams
+        });
     }
+
     /**
-        * Get a process instance filter
-        *
-        *
-        *
-        * @param userFilterId userFilterId
-        * @return Promise<UserProcessInstanceFilterRepresentation>
-        */
+    * Get a process instance filter
+    *
+    * @param userFilterId userFilterId
+    * @return Promise<UserProcessInstanceFilterRepresentation>
+    */
     getUserProcessInstanceFilter(userFilterId: number): Promise<UserProcessInstanceFilterRepresentation> {
         throwIfNotDefined(userFilterId, 'userFilterId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'userFilterId': userFilterId
+        const pathParams = {
+            userFilterId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/processes/{userFilterId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserProcessInstanceFilterRepresentation);
+        return this.get({
+            path: '/api/enterprise/filters/processes/{userFilterId}',
+            pathParams,
+            returnType: UserProcessInstanceFilterRepresentation
+        });
     }
+
     /**
-        * List process instance filters
-        *
-        * Returns filters for the current user, optionally filtered by *appId*.
-        *
-        * @param opts Optional parameters
-        * @param opts.appId appId
-        * @return Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation>
-        */
-    getUserProcessInstanceFilters(opts?: any): Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-            'appId': opts['appId']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/processes', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationUserProcessInstanceFilterRepresentation);
+    * List process instance filters
+    *
+    * Returns filters for the current user, optionally filtered by *appId*.
+    *
+    * @param opts Optional parameters
+    * @return Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation>
+    */
+    getUserProcessInstanceFilters(opts?: { appId?: number }): Promise<ResultListDataRepresentationUserProcessInstanceFilterRepresentation> {
+        return this.get({
+            path: '/api/enterprise/filters/processes',
+            queryParams: opts,
+            returnType: ResultListDataRepresentationUserProcessInstanceFilterRepresentation
+        });
     }
+
     /**
-        * Get a task filter
-        *
-        *
-        *
-        * @param userFilterId userFilterId
-        * @return Promise<UserTaskFilterRepresentation>
-        */
+    * Get a task filter
+    *
+    * @param userFilterId userFilterId
+    * @return Promise<UserTaskFilterRepresentation>
+    */
     getUserTaskFilter(userFilterId: number): Promise<UserTaskFilterRepresentation> {
         throwIfNotDefined(userFilterId, 'userFilterId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'userFilterId': userFilterId
+        const pathParams = {
+            userFilterId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/tasks/{userFilterId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserTaskFilterRepresentation);
+        return this.get({
+            path: '/api/enterprise/filters/tasks/{userFilterId}',
+            pathParams,
+            returnType: UserTaskFilterRepresentation
+        });
     }
+
     /**
-        * List task filters
-        *
-        * Returns filters for the current user, optionally filtered by *appId*.
-        *
-        * @param opts Optional parameters
-        * @param opts.appId appId
-        * @return Promise<ResultListDataRepresentationUserTaskFilterRepresentation>
-        */
-    getUserTaskFilters(opts?: any): Promise<ResultListDataRepresentationUserTaskFilterRepresentation> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-            'appId': opts['appId']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/tasks', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationUserTaskFilterRepresentation);
+    * List task filters
+    *
+    * Returns filters for the current user, optionally filtered by *appId*.
+    *
+    * @param opts Optional parameters
+    * @return Promise<ResultListDataRepresentationUserTaskFilterRepresentation>
+    */
+    getUserTaskFilters(opts?: { appId?: number }): Promise<ResultListDataRepresentationUserTaskFilterRepresentation> {
+        return this.get({
+            path: '/api/enterprise/filters/tasks',
+            queryParams: opts,
+            returnType: ResultListDataRepresentationUserTaskFilterRepresentation
+        });
     }
+
     /**
-        * Re-order the list of user process instance filters
-        *
-        *
-        *
-        * @param filterOrderRepresentation filterOrderRepresentation
-        * @return Promise<{}>
-        */
+    * Re-order the list of user process instance filters
+    *
+    * @param filterOrderRepresentation filterOrderRepresentation
+    * @return Promise<{}>
+    */
     orderUserProcessInstanceFilters(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<any> {
         throwIfNotDefined(filterOrderRepresentation, 'filterOrderRepresentation');
 
-        let postBody = filterOrderRepresentation;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/processes', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/filters/processes',
+            bodyParam: filterOrderRepresentation
+        });
     }
+
     /**
-        * Re-order the list of user task filters
-        *
-        *
-        *
-        * @param filterOrderRepresentation filterOrderRepresentation
-        * @return Promise<{}>
-        */
+    * Re-order the list of user task filters
+    *
+    * @param filterOrderRepresentation filterOrderRepresentation
+    * @return Promise<{}>
+    */
     orderUserTaskFilters(filterOrderRepresentation: UserFilterOrderRepresentation): Promise<any> {
         throwIfNotDefined(filterOrderRepresentation, 'filterOrderRepresentation');
 
-        let postBody = filterOrderRepresentation;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/tasks', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/filters/tasks',
+            bodyParam: filterOrderRepresentation
+        });
     }
+
     /**
-        * Update a process instance filter
-        *
-        *
-        *
-        * @param userFilterId userFilterId
-        * @param userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
-        * @return Promise<UserProcessInstanceFilterRepresentation>
-        */
+    * Update a process instance filter
+    *
+    * @param userFilterId userFilterId
+    * @param userProcessInstanceFilterRepresentation userProcessInstanceFilterRepresentation
+    * @return Promise<UserProcessInstanceFilterRepresentation>
+    */
     updateUserProcessInstanceFilter(userFilterId: number, userProcessInstanceFilterRepresentation: UserProcessInstanceFilterRepresentation): Promise<UserProcessInstanceFilterRepresentation> {
         throwIfNotDefined(userFilterId, 'userFilterId');
         throwIfNotDefined(userProcessInstanceFilterRepresentation, 'userProcessInstanceFilterRepresentation');
 
-        let postBody = userProcessInstanceFilterRepresentation;
-
-        let pathParams = {
-            'userFilterId': userFilterId
+        const pathParams = {
+            userFilterId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/processes/{userFilterId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserProcessInstanceFilterRepresentation);
+        return this.put({
+            path: '/api/enterprise/filters/processes/{userFilterId}',
+            pathParams,
+            bodyParam: userProcessInstanceFilterRepresentation,
+            returnType: UserProcessInstanceFilterRepresentation
+        });
     }
+
     /**
-        * Update a task filter
-        *
-        *
-        *
-        * @param userFilterId userFilterId
-        * @param userTaskFilterRepresentation userTaskFilterRepresentation
-        * @return Promise<UserTaskFilterRepresentation>
-        */
+    * Update a task filter
+    *
+    * @param userFilterId userFilterId
+    * @param userTaskFilterRepresentation userTaskFilterRepresentation
+    * @return Promise<UserTaskFilterRepresentation>
+    */
     updateUserTaskFilter(userFilterId: number, userTaskFilterRepresentation: UserTaskFilterRepresentation): Promise<UserTaskFilterRepresentation> {
         throwIfNotDefined(userFilterId, 'userFilterId');
         throwIfNotDefined(userTaskFilterRepresentation, 'userTaskFilterRepresentation');
 
-        let postBody = userTaskFilterRepresentation;
-
-        let pathParams = {
-            'userFilterId': userFilterId
+        const pathParams = {
+            userFilterId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/filters/tasks/{userFilterId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserTaskFilterRepresentation);
+        return this.put({
+            path: '/api/enterprise/filters/tasks/{userFilterId}',
+            pathParams,
+            bodyParam: userTaskFilterRepresentation,
+            returnType: UserTaskFilterRepresentation
+        });
     }
-
 }

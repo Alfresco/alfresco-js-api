@@ -21,14 +21,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Taskvariables service.
-* @module TaskvariablesApi
+* TaskVariablesApi service.
+* @module TaskVariablesApi
 */
 export class TaskVariablesApi extends BaseApi {
     /**
     * Create variables
-    *
-    *
     *
     * @param taskId taskId
     * @param restVariables restVariables
@@ -38,218 +36,130 @@ export class TaskVariablesApi extends BaseApi {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(restVariables, 'restVariables');
 
-        let postBody = restVariables;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/variables', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RestVariable);
+        return this.post({
+            path: '/api/enterprise/tasks/{taskId}/variables',
+            pathParams,
+            bodyParam: restVariables,
+            returnType: RestVariable
+        });
     }
+
     /**
-        * Create or update variables
-        *
-        *
-        *
-        * @param taskId taskId
-        * @return Promise<{}>
-        */
+    * Create or update variables
+    *
+    * @param taskId taskId
+    * @return Promise<{}>
+    */
     deleteAllLocalTaskVariables(taskId: string): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/variables', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/tasks/{taskId}/variables',
+            pathParams
+        });
     }
+
     /**
-        * Delete a variable
-        *
-        *
-        *
-        * @param taskId taskId
-        * @param variableName variableName
-        * @param opts Optional parameters
-        * @param opts.scope scope
-        * @return Promise<{}>
-        */
-    deleteVariable(taskId: string, variableName: string, opts?: any): Promise<any> {
+    * Delete a variable
+    *
+    * @param taskId taskId
+    * @param variableName variableName
+    * @param opts Optional parameters
+    * @return Promise<{}>
+    */
+    deleteVariable(taskId: string, variableName: string, opts?: { scope?: string }): Promise<any> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(variableName, 'variableName');
 
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId, 'variableName': variableName
+        const pathParams = {
+            taskId,
+            variableName
         };
 
-        let queryParams = {
-            'scope': opts['scope']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/variables/{variableName}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/tasks/{taskId}/variables/{variableName}',
+            pathParams,
+            queryParams: opts
+        });
     }
     /**
-        * Get a variable
-        *
-        *
-        *
-        * @param taskId taskId
-        * @param variableName variableName
-        * @param opts Optional parameters
-        * @param opts.scope scope
-        * @return Promise<RestVariable>
-        */
-    getVariable(taskId: string, variableName: string, opts?: any): Promise<RestVariable> {
+    * Get a variable
+    *
+    * @param taskId taskId
+    * @param variableName variableName
+    * @param opts Optional parameters
+    * @return Promise<RestVariable>
+    */
+    getVariable(taskId: string, variableName: string, opts?: { scope?: string }): Promise<RestVariable> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(variableName, 'variableName');
 
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId, 'variableName': variableName
+        const pathParams = {
+            taskId,
+            variableName
         };
 
-        let queryParams = {
-            'scope': opts['scope']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/variables/{variableName}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RestVariable);
+        return this.get({
+            path: '/api/enterprise/tasks/{taskId}/variables/{variableName}',
+            pathParams,
+            queryParams: opts,
+            returnType: RestVariable
+        });
     }
+
     /**
-        * List variables
-        *
-        *
-        *
-        * @param taskId taskId
-        * @param opts Optional parameters
-        * @param opts.scope scope
-        * @return Promise<RestVariable>
-        */
-    getVariables(taskId: string, opts?: any): Promise<RestVariable> {
+    * List variables
+    *
+    * @param taskId taskId
+    * @param opts Optional parameters
+    * @return Promise<RestVariable>
+    */
+    getVariables(taskId: string, opts?: { scope?: string }): Promise<RestVariable> {
         throwIfNotDefined(taskId, 'taskId');
 
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-            'scope': opts['scope']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/variables', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RestVariable);
+        return this.get({
+            path: '/api/enterprise/tasks/{taskId}/variables',
+            pathParams,
+            queryParams: opts,
+            returnType: RestVariable
+        });
     }
+
     /**
-        * Update a variable
-        *
-        *
-        *
-        * @param taskId taskId
-        * @param variableName variableName
-        * @param restVariable restVariable
-        * @return Promise<RestVariable>
-        */
+    * Update a variable
+    *
+    * @param taskId taskId
+    * @param variableName variableName
+    * @param restVariable restVariable
+    * @return Promise<RestVariable>
+    */
     updateVariable(taskId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(variableName, 'variableName');
         throwIfNotDefined(restVariable, 'restVariable');
 
-        let postBody = restVariable;
-
-        let pathParams = {
-            'taskId': taskId, 'variableName': variableName
+        const pathParams = {
+            'taskId': taskId,
+            'variableName': variableName
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/variables/{variableName}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RestVariable);
+        return this.put({
+            path: '/api/enterprise/tasks/{taskId}/variables/{variableName}',
+            pathParams,
+            bodyParam: restVariable,
+            returnType: RestVariable
+        });
     }
-
 }

@@ -21,15 +21,24 @@ import { RuntimeDecisionTableRepresentation } from '../model/runtimeDecisionTabl
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
+export interface GetDecisionTablesOpts {
+    nameLike?: string;
+    keyLike?: string;
+    tenantIdLike?: string;
+    deploymentId?: number;
+    sort?: string;
+    order?: string;
+    start?: number;
+    size?: number;
+}
+
 /**
-* Decisiontables service.
-* @module DecisiontablesApi
+* DecisionTablesApi service.
+* @module DecisionTablesApi
 */
 export class DecisionTablesApi extends BaseApi {
     /**
     * Get definition for a decision table
-    *
-    *
     *
     * @param decisionTableId decisionTableId
     * @return Promise<JsonNode>
@@ -37,111 +46,48 @@ export class DecisionTablesApi extends BaseApi {
     getDecisionTableEditorJson(decisionTableId: number): Promise<JsonNode> {
         throwIfNotDefined(decisionTableId, 'decisionTableId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'decisionTableId': decisionTableId
+        const pathParams = {
+            decisionTableId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/decisions/decision-tables/{decisionTableId}/editorJson', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, JsonNode);
+        return this.get({
+            path: '/api/enterprise/decisions/decision-tables/{decisionTableId}/editorJson',
+            pathParams,
+            returnType: JsonNode
+        });
     }
+
     /**
-        * Get a decision table
-        *
-        *
-        *
-        * @param decisionTableId decisionTableId
-        * @return Promise<RuntimeDecisionTableRepresentation>
-        */
+    * Get a decision table
+    *
+    * @param decisionTableId decisionTableId
+    * @return Promise<RuntimeDecisionTableRepresentation>
+    */
     getDecisionTable(decisionTableId: number): Promise<RuntimeDecisionTableRepresentation> {
         throwIfNotDefined(decisionTableId, 'decisionTableId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'decisionTableId': decisionTableId
+        const pathParams = {
+            decisionTableId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/decisions/decision-tables/{decisionTableId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RuntimeDecisionTableRepresentation);
+        return this.get({
+            path: '/api/enterprise/decisions/decision-tables/{decisionTableId}',
+            pathParams,
+            returnType: RuntimeDecisionTableRepresentation
+        });
     }
+
     /**
-        * Query decision tables
-        *
-        *
-        *
-        * @param opts Optional parameters
-        * @param opts.nameLike nameLike
-        * @param opts.keyLike keyLike
-        * @param opts.tenantIdLike tenantIdLike
-        * @param opts.deploymentId deploymentId
-        * @param opts.sort sort
-        * @param opts.order order
-        * @param opts.start start
-        * @param opts.size size
-        * @return Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation>
-        */
-    getDecisionTables(opts?: any): Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-            'nameLike': opts['nameLike'],
-            'keyLike': opts['keyLike'],
-            'tenantIdLike': opts['tenantIdLike'],
-            'deploymentId': opts['deploymentId'],
-            'sort': opts['sort'],
-            'order': opts['order'],
-            'start': opts['start'],
-            'size': opts['size']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/decisions/decision-tables', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationRuntimeDecisionTableRepresentation);
+    * Query decision tables
+    *
+    * @param opts Optional parameters
+    * @return Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation>
+    */
+    getDecisionTables(opts?: GetDecisionTablesOpts): Promise<ResultListDataRepresentationRuntimeDecisionTableRepresentation> {
+        return this.get({
+            path: '/api/enterprise/decisions/decision-tables',
+            queryParams: opts,
+            returnType: ResultListDataRepresentationRuntimeDecisionTableRepresentation
+        });
     }
-
 }

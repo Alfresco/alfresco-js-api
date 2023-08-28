@@ -53,20 +53,17 @@ export class NodeSecurityMarksApi extends BaseApi {
      * @param opts.inUse The key for the security mark is in use or not.
      * @return Promise<SecurityMarkPaging>
      */
-     getSecurityMarksOnNode(nodeId: string, opts?: any): Promise<SecurityMarkPaging> {
+     getSecurityMarksOnNode(nodeId: string, opts?: { inUse?: any }): Promise<SecurityMarkPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
             nodeId
         };
-        const queryParams = {
-            inUse: opts['inUse'],
-        };
 
         return this.get({
             path: '/secured-nodes/{nodeId}/securing-marks',
             pathParams,
-            queryParams,
+            queryParams: opts,
             returnType: SecurityMarkPaging
         });
     }

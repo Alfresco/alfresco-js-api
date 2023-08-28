@@ -52,30 +52,22 @@ When you create the RM site, the **filePlan** structure is also created includin
     * @param opts.skipAddToFavorites Flag to indicate whether the RM site should not be added to the user's site favorites. (default to false)
     * @return Promise<RMSiteEntry>
     */
-    createRMSite(siteBodyCreate: RMSiteBodyCreate, opts?: any): Promise<RMSiteEntry> {
+    createRMSite(siteBodyCreate: RMSiteBodyCreate, opts?: { skipAddToFavorites?: boolean; }): Promise<RMSiteEntry> {
         throwIfNotDefined(siteBodyCreate, 'siteBodyCreate');
-        opts = opts || {};
-
-        const queryParams = {
-            'skipAddToFavorites': opts['skipAddToFavorites']
-        };
 
         return this.post({
             path: '/gs-sites',
-            queryParams,
+            queryParams: opts,
             bodyParam: siteBodyCreate,
             returnType: RMSiteEntry
         });
     }
-    /**
-        * Delete the Records Management (RM) site
-        *
-        *
-    Deletes the RM site.
 
-        *
-        * @return Promise<{}>
-        */
+    /**
+    * Delete the Records Management (RM) site
+    *
+    * @return Promise<{}>
+    */
     deleteRMSite(): Promise<void> {
         const contentTypes = ['application/json'];
         const accepts = ['application/json'];
@@ -87,14 +79,10 @@ When you create the RM site, the **filePlan** structure is also created includin
     }
 
     /**
-        * Get the Records Management (RM) site
-        *
-        *
-    Gets information for RM site.
-
-        *
-        * @param opts Optional parameters
-        * @param opts.fields A list of field names.
+    * Get the Records Management (RM) site
+    *
+    * @param opts Optional parameters
+    * @param opts.fields A list of field names.
 
     You can use this parameter to restrict the fields
     returned within a response if, for example, you want to save on overall bandwidth.
@@ -108,7 +96,7 @@ When you create the RM site, the **filePlan** structure is also created includin
 
         * @return Promise<RMSiteEntry>
         */
-    getRMSite(opts?: any): Promise<RMSiteEntry> {
+    getRMSite(opts?: { fields?: string[] }): Promise<RMSiteEntry> {
         opts = opts || {};
 
         const queryParams = {
@@ -146,12 +134,11 @@ When you create the RM site, the **filePlan** structure is also created includin
 
         * @return Promise<RMSiteEntry>
         */
-    updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts?: any): Promise<RMSiteEntry> {
+    updateRMSite(siteBodyUpdate: RMSiteBodyUpdate, opts?: { fields?: string[] }): Promise<RMSiteEntry> {
         throwIfNotDefined(siteBodyUpdate, 'siteBodyUpdate');
-        opts = opts || {};
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.put({

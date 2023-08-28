@@ -28,8 +28,6 @@ export class ActivitiCommentsApi extends BaseApi {
     /**
     * Add a comment to a process instance
     *
-    *
-    *
     * @param commentRequest commentRequest
     * @param processInstanceId processInstanceId
     * @return Promise<CommentRepresentation>
@@ -38,140 +36,83 @@ export class ActivitiCommentsApi extends BaseApi {
         throwIfNotDefined(commentRequest, 'commentRequest');
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        let postBody = commentRequest;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/comments', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, CommentRepresentation);
+        return this.post({
+            path: '/api/enterprise/process-instances/{processInstanceId}/comments',
+            pathParams,
+            bodyParam: commentRequest,
+            returnType: CommentRepresentation
+        });
     }
+
     /**
-        * Add a comment to a task
-        *
-        *
-        *
-        * @param commentRequest commentRequest
-        * @param taskId taskId
-        * @return Promise<CommentRepresentation>
-        */
+    * Add a comment to a task
+    *
+    * @param commentRequest commentRequest
+    * @param taskId taskId
+    * @return Promise<CommentRepresentation>
+    */
     addTaskComment(commentRequest: CommentRepresentation, taskId: string): Promise<CommentRepresentation> {
         throwIfNotDefined(commentRequest, 'commentRequest');
         throwIfNotDefined(taskId, 'taskId');
 
-        let postBody = commentRequest;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/comments', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, CommentRepresentation);
+        return this.get({
+            path: '/api/enterprise/tasks/{taskId}/comments',
+            pathParams,
+            bodyParam: commentRequest,
+            returnType: CommentRepresentation
+        });
     }
+
     /**
-        * Get comments for a process
-        *
-        *
-        *
-        * @param processInstanceId processInstanceId
-        * @param opts Optional parameters
-        * @param opts.latestFirst latestFirst
-        * @return Promise<ResultListDataRepresentationCommentRepresentation>
-        */
-    getProcessInstanceComments(processInstanceId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
+    * Get comments for a process
+    *
+    * @param processInstanceId processInstanceId
+    * @param opts Optional parameters
+    * @return Promise<ResultListDataRepresentationCommentRepresentation>
+    */
+    getProcessInstanceComments(processInstanceId: string, opts?: { latestFirst?: boolean }): Promise<ResultListDataRepresentationCommentRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {
-            'latestFirst': opts['latestFirst']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/comments', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationCommentRepresentation);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/comments',
+            pathParams,
+            queryParams: opts,
+            returnType: ResultListDataRepresentationCommentRepresentation
+        });
     }
+
     /**
-        * Get comments for a task
-        *
-        *
-        *
-        * @param taskId taskId
-        * @param opts Optional parameters
-        * @param opts.latestFirst latestFirst
-        * @return Promise<ResultListDataRepresentationCommentRepresentation>
-        */
-    getTaskComments(taskId: string, opts?: any): Promise<ResultListDataRepresentationCommentRepresentation> {
+    * Get comments for a task
+    *
+    * @param taskId taskId
+    * @param opts Optional parameters
+    * @return Promise<ResultListDataRepresentationCommentRepresentation>
+    */
+    getTaskComments(taskId: string, opts?: { latestFirst?: boolean }): Promise<ResultListDataRepresentationCommentRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
 
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-            'latestFirst': opts['latestFirst']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/comments', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationCommentRepresentation);
+        return this.get({
+            path: '/api/enterprise/tasks/{taskId}/comments',
+            pathParams,
+            queryParams: opts,
+            returnType: ResultListDataRepresentationCommentRepresentation
+        });
     }
 
 }

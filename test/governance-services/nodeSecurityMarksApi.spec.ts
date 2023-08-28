@@ -21,7 +21,6 @@ import { NodeSecurityMarksApi } from '../../src/api/gs-classification-rest-api';
 import { NodeSecurityMarkBody } from '../../src/api/gs-classification-rest-api/model/nodeSecurityMarkBody';
 import { EcmAuthMock } from '../mockObjects/content-services/ecm-auth.mock';
 import { NodeSecurityMarksApiMock } from '../mockObjects/goverance-services/node-security-marks.mock';
-import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 
 describe('Node Security Mark API test', () => {
     let authResponseMock: EcmAuthMock;
@@ -47,7 +46,7 @@ describe('Node Security Mark API test', () => {
         nodeSecurityMarksMock = new NodeSecurityMarksApiMock(hostEcm);
         const alfrescoApi = new AlfrescoApi({
             hostEcm: hostEcm,
-        } as AlfrescoApiConfig);
+        });
         nodeSecurityMarksApi = new NodeSecurityMarksApi(alfrescoApi);
         await alfrescoApi.login('admin', 'admin');
     });
@@ -64,9 +63,8 @@ describe('Node Security Mark API test', () => {
 
     it('get security marks on a node', async () => {
         const nodeId = 'h3bdk2knw2kn';
-        const DEFAULT_INCLUDE = 'inUse';
         nodeSecurityMarksMock.get200SecurityMarkOnNode(nodeId);
-        await nodeSecurityMarksApi.getSecurityMarksOnNode(nodeId, {DEFAULT_INCLUDE}).then((data) => {
+        await nodeSecurityMarksApi.getSecurityMarksOnNode(nodeId).then((data) => {
             expect(data.list.entries[1].entry.groupId).equal('securityGroupId2');
             expect(data.list.entries[1].entry.id).equal('Sh1G8vTR');
             expect(data.list.entries[1].entry.name).equal('SecurityMarkTest2');

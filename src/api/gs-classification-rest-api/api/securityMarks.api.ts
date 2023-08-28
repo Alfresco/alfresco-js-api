@@ -52,16 +52,10 @@ export class SecurityMarksApi extends BaseApi {
             securityGroupId,
         };
 
-        const queryParams = {
-            inUse: opts?.inUse,
-            skipCount: opts?.skipCount,
-            maxItems: opts?.maxItems,
-        };
-
         return this.get({
             path: '/security-groups/{securityGroupId}/security-marks',
             pathParams,
-            queryParams,
+            queryParams: opts,
             returnType: SecurityMarkPaging
         });
     }

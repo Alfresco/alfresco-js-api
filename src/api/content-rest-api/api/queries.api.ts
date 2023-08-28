@@ -96,7 +96,16 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<NodePaging>
     */
-    findNodes(term: string, opts?: any): Promise<NodePaging> {
+    findNodes(term: string, opts?: {
+        term?: string;
+        rootNodeId?: string;
+        nodeType?: string;
+        skipCount?: number;
+        maxItems?: number;
+        include?: string[];
+        orderBy?: string[];
+        fields?: string[];
+    }): Promise<NodePaging> {
 
         throwIfNotDefined(term, 'term');
 
@@ -182,8 +191,13 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 
     * @return Promise<PersonPaging>
     */
-    findPeople(term: string, opts?: any): Promise<PersonPaging> {
-
+    findPeople(term: string, opts?: {
+        term?: string;
+        skipCount?: number;
+        maxItems?: number;
+        fields?: string[];
+        orderBy?: string[];
+    }): Promise<PersonPaging> {
         throwIfNotDefined(term, 'term');
 
         opts = opts || {};
@@ -265,8 +279,13 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SitePaging>
     */
-    findSites(term: string, opts?: any): Promise<SitePaging> {
-
+    findSites(term: string, opts?: {
+        term?: string;
+        skipCount?: number;
+        maxItems?: number;
+        orderBy?: string[];
+        fields?: string[];
+    }): Promise<SitePaging> {
         throwIfNotDefined(term, 'term');
 
         opts = opts || {};

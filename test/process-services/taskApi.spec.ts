@@ -20,7 +20,6 @@ import {
     AlfrescoApi,
     TaskFilterRequestRepresentation,
     TaskRepresentation,
-    AlfrescoApiConfig,
     TaskFormsApi,
     TaskActionsApi,
     TasksApi,
@@ -49,7 +48,7 @@ describe('Activiti Task Api', () => {
         alfrescoJsApi = new AlfrescoApi({
             hostBpm: BPM_HOST,
             provider: 'BPM'
-        } as AlfrescoApiConfig);
+        });
 
         tasksApi = new TasksApi(alfrescoJsApi);
         taskFormsApi = new TaskFormsApi(alfrescoJsApi);

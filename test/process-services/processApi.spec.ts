@@ -19,7 +19,6 @@ import { expect } from 'chai';
 import { BpmAuthMock, ProcessMock } from '../mockObjects';
 import {
     AlfrescoApi,
-    AlfrescoApiConfig,
     ProcessDefinitionsApi,
     ProcessInstanceQueryRepresentation,
     ProcessInstancesApi
@@ -43,7 +42,7 @@ describe('Activiti Process Api', () => {
         alfrescoJsApi = new AlfrescoApi({
             hostBpm: BPM_HOST,
             provider: 'BPM'
-        } as AlfrescoApiConfig);
+        });
 
         processInstancesApi = new ProcessInstancesApi(alfrescoJsApi);
         processDefinitionsApi = new ProcessDefinitionsApi(alfrescoJsApi);

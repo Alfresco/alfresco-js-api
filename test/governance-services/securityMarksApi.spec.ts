@@ -24,7 +24,6 @@ import { SecurityMarkBody } from '../../src/api/gs-classification-rest-api/model
 import { EcmAuthMock } from '../mockObjects/content-services/ecm-auth.mock';
 import { SecurityMarkApiMock } from '../mockObjects/goverance-services/security-marks.mock';
 import { SecurityGroupApiMock } from '../mockObjects/goverance-services/security-groups.mock';
-import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 
 describe('Security Mark API test', () => {
     let authResponseMock: EcmAuthMock;
@@ -32,8 +31,8 @@ describe('Security Mark API test', () => {
     let securityGroupMock: SecurityGroupApiMock;
     let securityGroupApi: SecurityGroupsApi;
     let securityMarksApi: SecurityMarksApi;
-    let securityGroupId: string;
-    let securityMarkId: string;
+    let securityGroupId: string = 'a0a7b107-84ba-4c3d-b0b7-a8509e8c1c33';
+    let securityMarkId: string = 'Sh1G8vTQ';
     const securityMarksBodySingle: SecurityMarksBody = [
         {
             name: 'SecurityMarkTest',
@@ -60,7 +59,7 @@ describe('Security Mark API test', () => {
         securityMarkApiMock = new SecurityMarkApiMock(hostEcm);
         const alfrescoApi = new AlfrescoApi({
             hostEcm: hostEcm,
-        } as AlfrescoApiConfig);
+        });
         securityGroupApi = new SecurityGroupsApi(alfrescoApi);
         securityMarksApi = new SecurityMarksApi(alfrescoApi);
         await alfrescoApi.login('admin', 'admin');
@@ -68,7 +67,7 @@ describe('Security Mark API test', () => {
 
     it('create Security Group', async () => {
         securityGroupMock.createSecurityGroup200Response();
-        await securityGroupApi.createSecurityGroup(securityGroupBody, 'inUse').then((data) => {
+        await securityGroupApi.createSecurityGroup(securityGroupBody).then((data) => {
             securityGroupId = data.entry.id;
             expect(data.entry.id).not.equal(null);
             expect(data.entry.groupName).to.be.equal('Alfresco');

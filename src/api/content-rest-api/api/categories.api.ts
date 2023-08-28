@@ -62,13 +62,12 @@ export class CategoriesApi extends BaseApi {
 
         * @return Promise<CategoryPaging>
     */
-    getSubcategories(categoryId: string, opts?: any): Promise<CategoryPaging> {
+    getSubcategories(categoryId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[]; include?: string[] }): Promise<CategoryPaging> {
         throwIfNotDefined(categoryId, 'categoryId');
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
-            'categoryId': categoryId
+            categoryId
         };
 
         const queryParams = {
@@ -78,16 +77,12 @@ export class CategoriesApi extends BaseApi {
             'include': buildCollectionParam(opts['include'], 'csv')
         };
 
-        const headerParams = {};
-        const formParams = {};
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/categories/{categoryId}/subcategories', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , CategoryPaging);
+        return this.get({
+            path: '/categories/{categoryId}/subcategories',
+            pathParams,
+            queryParams,
+            returnType: CategoryPaging
+        });
     }
 
     /**
@@ -117,13 +112,13 @@ export class CategoriesApi extends BaseApi {
 
         * @return Promise<CategoryEntry>
     */
-    getCategory(categoryId: string, opts?: any): Promise<CategoryEntry> {
+    getCategory(categoryId: string, opts?: { fields?: string[]; include?: string[] }): Promise<CategoryEntry> {
         throwIfNotDefined(categoryId, 'categoryId');
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'categoryId': categoryId
+            categoryId
         };
 
         const queryParams = {
@@ -173,13 +168,13 @@ export class CategoriesApi extends BaseApi {
 
         * @return Promise<CategoryPaging>
     */
-    getCategoryLinksForNode(nodeId: string, opts?: any): Promise<CategoryPaging> {
+    getCategoryLinksForNode(nodeId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[]; include?: string[]; }): Promise<CategoryPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
@@ -290,7 +285,7 @@ export class CategoriesApi extends BaseApi {
 
     * @return Promise<CategoryEntry>
     */
-    updateCategory(categoryId: string, categoryBodyUpdate: CategoryBody, opts?: any): Promise<CategoryEntry> {
+    updateCategory(categoryId: string, categoryBodyUpdate: CategoryBody, opts?: { fields?: string[]; include?: string[] }): Promise<CategoryEntry> {
 
         throwIfNotDefined(categoryId, 'categoryId');
         throwIfNotDefined(categoryBodyUpdate, 'categoryBodyUpdate');
@@ -393,8 +388,7 @@ export class CategoriesApi extends BaseApi {
 
     * @return Promise<CategoryPaging | CategoryEntry>
     */
-    createSubcategories(categoryId: string, categoryBodyCreate: CategoryBody[], opts?: any): Promise<CategoryPaging | CategoryEntry> {
-
+    createSubcategories(categoryId: string, categoryBodyCreate: CategoryBody[], opts?: { fields?: string[]; include?: [] }): Promise<CategoryPaging | CategoryEntry> {
         throwIfNotDefined(categoryId, 'categoryId');
         throwIfNotDefined(categoryBodyCreate, 'categoryBodyCreate');
 
@@ -402,7 +396,7 @@ export class CategoriesApi extends BaseApi {
         const postBody = categoryBodyCreate;
 
         const pathParams = {
-            'categoryId': categoryId
+            categoryId
         };
 
         const queryParams = {
@@ -493,7 +487,7 @@ export class CategoriesApi extends BaseApi {
 
     * @return Promise<CategoryPaging | CategoryEntry>
     */
-    linkNodeToCategory(nodeId: string, categoryLinkBodyCreate: CategoryLinkBody[], opts?: any): Promise<CategoryPaging | CategoryEntry> {
+    linkNodeToCategory(nodeId: string, categoryLinkBodyCreate: CategoryLinkBody[], opts?: { fields?: string[]; include?: string[] }): Promise<CategoryPaging | CategoryEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(categoryLinkBodyCreate, 'categoryLinkBodyCreate');
@@ -502,7 +496,7 @@ export class CategoriesApi extends BaseApi {
         const postBody = categoryLinkBodyCreate;
 
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {

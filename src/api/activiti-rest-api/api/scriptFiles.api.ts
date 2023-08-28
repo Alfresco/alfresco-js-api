@@ -18,73 +18,34 @@
 import { BaseApi } from './base.api';
 
 /**
-* Scriptfiles service.
-* @module ScriptfilesApi
+* ScriptFilesApi service.
+* @module ScriptFilesApi
 */
 export class ScriptFilesApi extends BaseApi {
     /**
     * getControllers
-    *
-    *
-    *
     * @return Promise<string>
     */
     getControllers(): Promise<string> {
+        const accepts = ['text/html'];
 
-        let postBody = null;
+        return this.get({
+            path: '/api/enterprise/script-files/controllers',
+            accepts
+        });
 
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['text/html'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/script-files/controllers', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
     }
+
     /**
-        * getLibraries
-        *
-        *
-        *
-        * @return Promise<string>
-        */
+    * getLibraries
+    * @return Promise<string>
+    */
     getLibraries(): Promise<string> {
+        const accepts = ['text/html'];
 
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['text/html'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/script-files/libraries', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/script-files/libraries',
+            accepts
+        });
     }
-
 }

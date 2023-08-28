@@ -123,36 +123,26 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<FavoriteEntry>
     */
-    createFavorite(personId: string, favoriteBodyCreate: FavoriteBodyCreate, opts?: any): Promise<FavoriteEntry> {
-
+    createFavorite(personId: string, favoriteBodyCreate: FavoriteBodyCreate, opts?: { include?: string[]; fields?: string[] }): Promise<FavoriteEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(favoriteBodyCreate, 'favoriteBodyCreate');
 
-        opts = opts || {};
-        const postBody = favoriteBodyCreate;
-
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/favorites', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , FavoriteEntry);
+        return this.post({
+            path: '/people/{personId}/favorites',
+            pathParams,
+            queryParams,
+            bodyParam: favoriteBodyCreate,
+            returnType: FavoriteEntry
+        });
     }
 /**
     * Create a site favorite
@@ -222,35 +212,25 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<FavoriteSiteEntry>
     */
-    createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts?: any): Promise<FavoriteSiteEntry> {
-
+    createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts?: { fields?: string[] }): Promise<FavoriteSiteEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(favoriteSiteBodyCreate, 'favoriteSiteBodyCreate');
 
-        opts = opts || {};
-        const postBody = favoriteSiteBodyCreate;
-
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/favorite-sites', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , FavoriteSiteEntry);
+        return this.post({
+            path: '/people/{personId}/favorite-sites',
+            pathParams,
+            queryParams,
+            bodyParam: favoriteSiteBodyCreate,
+            returnType: FavoriteSiteEntry
+        });
     }
 /**
     * Delete a favorite
@@ -265,32 +245,18 @@ You can use the -me- string in place of <personId> to specify the currently auth
     * @return Promise<{}>
     */
     deleteFavorite(personId: string, favoriteId: string): Promise<any> {
-
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(favoriteId, 'favoriteId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId,            'favoriteId': favoriteId
+            personId,
+            favoriteId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/favorites/{favoriteId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/people/{personId}/favorites/{favoriteId}',
+            pathParams
+        });
     }
 /**
     * Delete a site favorite
@@ -308,32 +274,18 @@ You can use the -me- string in place of <personId> to specify the currently auth
     * @return Promise<{}>
     */
     deleteSiteFavorite(personId: string, siteId: string): Promise<any> {
-
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId,            'siteId': siteId
+            personId,
+            siteId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/favorite-sites/{siteId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/people/{personId}/favorite-sites/{siteId}',
+            pathParams
+        });
     }
 /**
     * Get a favorite
@@ -364,36 +316,26 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<FavoriteEntry>
     */
-    getFavorite(personId: string, favoriteId: string, opts?: any): Promise<FavoriteEntry> {
-
+    getFavorite(personId: string, favoriteId: string, opts?: { include?: string[]; fields?: string[] }): Promise<FavoriteEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(favoriteId, 'favoriteId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId,            'favoriteId': favoriteId
+            personId,
+            favoriteId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/favorites/{favoriteId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , FavoriteEntry);
+        return this.get({
+            path: '/people/{personId}/favorites/{favoriteId}',
+            pathParams,
+            queryParams,
+            returnType: FavoriteEntry
+        });
     }
 /**
     * Get a favorite site
@@ -423,35 +365,25 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteEntry>
     */
-    getFavoriteSite(personId: string, siteId: string, opts?: any): Promise<SiteEntry> {
-
+    getFavoriteSite(personId: string, siteId: string, opts?: {fields?: string[] }): Promise<SiteEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId,            'siteId': siteId
+            personId,
+            siteId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/favorite-sites/{siteId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SiteEntry);
+        return this.get({
+            path: '/people/{personId}/favorite-sites/{siteId}',
+            pathParams,
+            queryParams,
+            returnType: SiteEntry
+        });
     }
 /**
     * List favorite sites
@@ -486,36 +418,25 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SitePaging>
     */
-    listFavoriteSitesForPerson(personId: string, opts?: any): Promise<SitePaging> {
-
+    listFavoriteSitesForPerson(personId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<SitePaging> {
         throwIfNotDefined(personId, 'personId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/favorite-sites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , SitePaging);
+        return this.get({
+            path: '/people/{personId}/favorite-sites',
+            pathParams,
+            queryParams,
+            returnType: SitePaging
+        });
     }
 /**
     * List favorites
@@ -590,15 +511,19 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<FavoritePaging>
     */
-    listFavorites(personId: string, opts?: any): Promise<FavoritePaging> {
-
+    listFavorites(personId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        orderBy?: string[];
+        where?: string;
+        include?: string[];
+        fields?: string[];
+    }): Promise<FavoritePaging> {
         throwIfNotDefined(personId, 'personId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
@@ -610,19 +535,11 @@ parameter are returned in addition to those specified in the **fields** paramete
             'fields': buildCollectionParam(opts['fields'], 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/favorites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , FavoritePaging);
+        return this.get({
+            path: '/people/{personId}/favorites',
+            pathParams,
+            queryParams,
+            returnType: FavoritePaging
+        });
     }
-
 }

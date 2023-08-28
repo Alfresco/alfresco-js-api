@@ -22,13 +22,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Integrationalfrescocloud service.
-* @module IntegrationalfrescocloudApi
+* IntegrationAlfrescoCloudApi service.
+* @module IntegrationAlfrescoCloudApi
 */
 export class IntegrationAlfrescoCloudApi extends BaseApi {
     /**
     * Alfresco Cloud Authorization
-    *
     * Returns Alfresco OAuth HTML Page
     *
     * @param code code
@@ -37,207 +36,116 @@ export class IntegrationAlfrescoCloudApi extends BaseApi {
     confirmAuthorisation(code: string): Promise<any> {
         throwIfNotDefined(code, 'code');
 
-        let postBody = null;
-
-        let pathParams = {
-
+        const queryParams = {
+            code
         };
 
-        let queryParams = {
-            'code': code
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['text/html'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/alfresco-cloud/confirm-auth-request', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/integration/alfresco-cloud/confirm-auth-request',
+            queryParams,
+            accepts: ['text/html']
+        });
     }
+
     /**
-        * List Alfresco networks
-        *
-        *
-        *
-        * @return Promise<ResultListDataRepresentationAlfrescoNetworkRepresenation>
-        */
+    * List Alfresco networks
+    * @return Promise<ResultListDataRepresentationAlfrescoNetworkRepresenation>
+    */
     getAllNetworks(): Promise<ResultListDataRepresentationAlfrescoNetworkRepresenation> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/alfresco-cloud/networks', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoNetworkRepresenation);
+        return this.get({
+            path: '/api/enterprise/integration/alfresco-cloud/networks',
+            returnType: ResultListDataRepresentationAlfrescoNetworkRepresenation
+        });
     }
+
     /**
-        * List Alfresco sites
-        *
-        * Returns ALL Sites
-        *
-        * @param networkId networkId
-        * @return Promise<ResultListDataRepresentationAlfrescoSiteRepresenation>
-        */
+    * List Alfresco sites
+    * Returns ALL Sites
+    *
+    * @param networkId networkId
+    * @return Promise<ResultListDataRepresentationAlfrescoSiteRepresenation>
+    */
     getAllSites(networkId: string): Promise<ResultListDataRepresentationAlfrescoSiteRepresenation> {
         throwIfNotDefined(networkId, 'networkId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'networkId': networkId
+        const pathParams = {
+            networkId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoSiteRepresenation);
+        return this.get({
+            path: '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites',
+            pathParams,
+            returnType: ResultListDataRepresentationAlfrescoSiteRepresenation
+        });
     }
+
     /**
-        * List files and folders inside a specific folder identified by path
-        *
-        *
-        *
-        * @param networkId networkId
-        * @param opts Optional parameters
-        * @param opts.siteId siteId
-        * @param opts.path path
-        * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
-        */
-    getContentInFolderPath(networkId: string, opts?: any): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
+    * List files and folders inside a specific folder identified by path
+    *
+    * @param networkId networkId
+    * @param opts Optional parameters
+    * @param opts.siteId {string} siteId
+    * @param opts.path {string} path
+    * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
+    */
+    getContentInFolderPath(networkId: string, opts?: { siteId?: string; path?: string; }): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
         throwIfNotDefined(networkId, 'networkId');
 
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-            'networkId': networkId
+        const pathParams = {
+            networkId
         };
 
-        let queryParams = {
-            'siteId': opts['siteId'],
-            'path': opts['path']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/folderpath/{folderPath}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation);
+        return this.get({
+            path: '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/folderpath/{folderPath}/content',
+            pathParams,
+            queryParams: opts,
+            returnType: ResultListDataRepresentationAlfrescoContentRepresentation
+        });
     }
+
     /**
-        * List files and folders inside a specific folder
-        *
-        *
-        *
-        * @param networkId networkId
-        * @param folderId folderId
-        * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
-        */
+    * List files and folders inside a specific folder
+    *
+    * @param networkId networkId
+    * @param folderId folderId
+    * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
+    */
     getContentInFolder(networkId: string, folderId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
         throwIfNotDefined(networkId, 'networkId');
         throwIfNotDefined(folderId, 'folderId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'networkId': networkId, 'folderId': folderId
+        const pathParams = {
+            networkId,
+            folderId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation);
+        return this.get({
+            path: '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content',
+            pathParams,
+            returnType: ResultListDataRepresentationAlfrescoContentRepresentation
+        });
     }
+
     /**
-        * List files and folders inside a specific site
-        *
-        *
-        *
-        * @param networkId networkId
-        * @param siteId siteId
-        * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
-        */
+    * List files and folders inside a specific site
+    *
+    * @param networkId networkId
+    * @param siteId siteId
+    * @return Promise<ResultListDataRepresentationAlfrescoContentRepresentation>
+    */
     getContentInSite(networkId: string, siteId: string): Promise<ResultListDataRepresentationAlfrescoContentRepresentation> {
         throwIfNotDefined(networkId, 'networkId');
         throwIfNotDefined(siteId, 'siteId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'networkId': networkId, 'siteId': siteId
+        const pathParams = {
+            networkId,
+            siteId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAlfrescoContentRepresentation);
+        return this.get({
+            path: '/api/enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content',
+            pathParams,
+            returnType: ResultListDataRepresentationAlfrescoContentRepresentation
+        });
     }
-
 }

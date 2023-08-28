@@ -17,7 +17,7 @@
 
 import { expect } from 'chai';
 import { EcmAuthMock, BpmAuthMock, NodeMock, ProfileMock } from '../test/mockObjects';
-import { NodesApi, UserProfileApi, AlfrescoApiConfig, AlfrescoApi } from '../index';
+import { NodesApi, UserProfileApi, AlfrescoApi } from '../index';
 
 const NOOP = () => { /* empty */ };
 const ECM_HOST = 'http://127.0.0.1:8080';
@@ -46,7 +46,7 @@ describe('Auth', () => {
             beforeEach(() => {
                 alfrescoJsApi = new AlfrescoApi({
                     hostEcm: ECM_HOST
-                } as AlfrescoApiConfig);
+                });
 
                 nodesApi = new NodesApi(alfrescoJsApi);
             });
@@ -145,7 +145,7 @@ describe('Auth', () => {
                     const alfrescoJsApi = new AlfrescoApi({
                         ticketEcm: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
                         hostEcm: ECM_HOST
-                    } as AlfrescoApiConfig);
+                    });
 
                     expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(alfrescoJsApi.contentClient.authentications.basicAuth.password);
                 });
@@ -254,7 +254,7 @@ describe('Auth', () => {
             alfrescoJsApi = new AlfrescoApi({
                 hostBpm: BPM_HOST,
                 provider: 'BPM'
-            } as AlfrescoApiConfig);
+            });
 
             profileApi = new UserProfileApi(alfrescoJsApi);
         });
@@ -402,7 +402,7 @@ describe('Auth', () => {
                 hostEcm: ECM_HOST,
                 hostBpm: BPM_HOST,
                 provider: 'ALL'
-            } as AlfrescoApiConfig);
+            });
         });
 
         describe('With Authentication', () => {
@@ -417,7 +417,7 @@ describe('Auth', () => {
                     hostEcm: ECM_HOST,
                     hostBpm: BPM_HOST,
                     provider: 'ALL'
-                } as AlfrescoApiConfig);
+                });
 
                 expect('Basic YWRtaW46YWRtaW4=').to.be.equal(alfrescoJsApi.processClient.authentications.basicAuth.ticket);
                 expect('TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1').to.be.equal(alfrescoJsApi.contentClient.authentications.basicAuth.password);

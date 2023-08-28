@@ -17,7 +17,7 @@
 
 import { expect } from 'chai';
 import { BpmAuthMock, ReportsMock } from '../mockObjects';
-import { ReportApi, AlfrescoApiConfig, AlfrescoApi } from '../../index';
+import { ReportApi, AlfrescoApi } from '../../index';
 
 describe('Activiti Report Api', () => {
     let authResponseBpmMock: BpmAuthMock;
@@ -36,7 +36,7 @@ describe('Activiti Report Api', () => {
         alfrescoJsApi = new AlfrescoApi({
             hostBpm: BPM_HOST,
             provider: 'BPM'
-        } as AlfrescoApiConfig);
+        });
 
         reportApi = new ReportApi(alfrescoJsApi);
 

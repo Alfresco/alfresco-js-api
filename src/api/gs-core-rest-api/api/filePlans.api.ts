@@ -113,7 +113,11 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<RecordCategoryEntry>
     */
-    createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opts?: any): Promise<RecordCategoryEntry> {
+    createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opts?: {
+        autoRename?: boolean;
+        include?: string[];
+        fields?: string[];
+    }): Promise<RecordCategoryEntry> {
         throwIfNotDefined(filePlanId, 'filePlanId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
         opts = opts || {};
@@ -167,7 +171,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<FilePlanEntry>
         */
-    getFilePlan(filePlanId: string, opts?: any): Promise<FilePlanEntry> {
+    getFilePlan(filePlanId: string, opts?: { include?: string[]; fields?: string[] }): Promise<FilePlanEntry> {
         throwIfNotDefined(filePlanId, 'filePlanId');
         opts = opts || {};
 
@@ -223,7 +227,13 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<RecordCategoryPaging>
         */
-    getFilePlanCategories(filePlanId: string, opts?: any): Promise<RecordCategoryPaging> {
+    getFilePlanCategories(filePlanId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        include?: string[];
+        includeSource?: boolean;
+        fields?: string[];
+    }): Promise<RecordCategoryPaging> {
         throwIfNotDefined(filePlanId, 'filePlanId');
         opts = opts || {};
 
@@ -284,7 +294,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<FilePlanEntry>
         */
-    updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: any): Promise<FilePlanEntry> {
+    updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: { include?: string[]; fields?: string[] }): Promise<FilePlanEntry> {
         throwIfNotDefined(filePlanId, 'filePlanId');
         throwIfNotDefined(filePlanBodyUpdate, 'filePlanBodyUpdate');
         opts = opts || {};

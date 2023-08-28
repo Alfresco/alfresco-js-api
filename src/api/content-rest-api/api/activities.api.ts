@@ -58,38 +58,30 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<ActivityPaging>
     */
-    listActivitiesForPerson(personId: string, opts?: any): Promise<ActivityPaging> {
-
+    listActivitiesForPerson(personId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        who?: string;
+        siteId?: string;
+        fields?: string[];
+    }): Promise<ActivityPaging> {
         throwIfNotDefined(personId, 'personId');
-
         opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
-            'personId': personId
+            personId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'who': opts['who'],
-            'siteId': opts['siteId'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            ...opts,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/activities', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , ActivityPaging);
+        return this.get({
+            path: '/people/{personId}/activities',
+            pathParams,
+            queryParams,
+            returnType: ActivityPaging
+        });
     }
-
 }

@@ -23,7 +23,7 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Transfercontainers service.
+* TransferContainersApi service.
 * @module TransferContainersApi
 */
 export class TransferContainersApi extends BaseApi {
@@ -57,12 +57,15 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<TransferContainerEntry>
     */
-    getTransferContainer(transferContainerId: string, opts?: any): Promise<TransferContainerEntry> {
+    getTransferContainer(transferContainerId: string, opts?: {
+        include?: string[];
+        fields?: string[];
+    }): Promise<TransferContainerEntry> {
         throwIfNotDefined(transferContainerId, 'transferContainerId');
         opts = opts || {};
 
         const pathParams = {
-            'transferContainerId': transferContainerId
+            transferContainerId
         };
 
         const queryParams = {
@@ -114,12 +117,18 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<TransferContainerAssociationPaging>
         */
-    listTransfers(transferContainerId: string, opts?: any): Promise<TransferContainerAssociationPaging> {
+    listTransfers(transferContainerId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        include?: string[];
+        includeSource?: boolean;
+        fields?: string[];
+    }): Promise<TransferContainerAssociationPaging> {
         throwIfNotDefined(transferContainerId, 'transferContainerId');
         opts = opts || {};
 
         const pathParams = {
-            'transferContainerId': transferContainerId
+            transferContainerId
         };
 
         const queryParams = {
@@ -180,13 +189,16 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<TransferContainerEntry>
         */
-    updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: any): Promise<TransferContainerEntry> {
+    updateTransferContainer(transferContainerId: string, nodeBodyUpdate: TransferContainerBodyUpdate, opts?: {
+        include?: string[];
+        fields?: string[];
+    }): Promise<TransferContainerEntry> {
         throwIfNotDefined(transferContainerId, 'transferContainerId');
         throwIfNotDefined(nodeBodyUpdate, 'nodeBodyUpdate');
         opts = opts || {};
 
         const pathParams = {
-            'transferContainerId': transferContainerId
+            transferContainerId
         };
 
         const queryParams = {

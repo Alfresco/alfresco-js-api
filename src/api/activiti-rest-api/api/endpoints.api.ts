@@ -27,68 +27,32 @@ export class EndpointsApi extends BaseApi {
     /**
     * Get an endpoint configuration
     *
-    *
-    *
     * @param endpointConfigurationId endpointConfigurationId
     * @return Promise<EndpointConfigurationRepresentation>
     */
     getEndpointConfiguration(endpointConfigurationId: number): Promise<EndpointConfigurationRepresentation> {
         throwIfNotDefined(endpointConfigurationId, 'endpointConfigurationId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'endpointConfigurationId': endpointConfigurationId
+        const pathParams = {
+            endpointConfigurationId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/endpoints/{endpointConfigurationId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointConfigurationRepresentation);
+        return this.get({
+            path: '/api/enterprise/editor/endpoints/{endpointConfigurationId}',
+            pathParams,
+            returnType: EndpointConfigurationRepresentation
+        });
     }
+
     /**
-        * List endpoint configurations
-        *
-        *
-        *
-        * @return Promise<EndpointConfigurationRepresentation>
-        */
+    * List endpoint configurations
+    *
+    * @return Promise<EndpointConfigurationRepresentation>
+    */
     getEndpointConfigurations(): Promise<EndpointConfigurationRepresentation> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/endpoints', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, EndpointConfigurationRepresentation);
+        return this.get({
+            path: '/api/enterprise/editor/endpoints',
+            returnType: EndpointConfigurationRepresentation
+        });
     }
-
 }

@@ -46,31 +46,16 @@ The cancel operation is done asynchronously.
     * @return Promise<{}>
     */
     cancelDownload(downloadId: string): Promise<any> {
-
         throwIfNotDefined(downloadId, 'downloadId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'downloadId': downloadId
+            downloadId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/downloads/{downloadId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/downloads/{downloadId}',
+            pathParams
+        });
     }
 /**
     * Create a new download
@@ -107,34 +92,19 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<DownloadEntry>
     */
-    createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: any): Promise<DownloadEntry> {
-
+    createDownload(downloadBodyCreate: DownloadBodyCreate, opts?: { fields?: string[] }): Promise<DownloadEntry> {
         throwIfNotDefined(downloadBodyCreate, 'downloadBodyCreate');
 
-        opts = opts || {};
-        const postBody = downloadBodyCreate;
-
-        const pathParams = {
-
-        };
-
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/downloads', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , DownloadEntry);
+        return this.post({
+            path: '/downloads',
+            queryParams,
+            bodyParam: downloadBodyCreate,
+            returnType: DownloadEntry
+        });
     }
 /**
     * Get a download
@@ -160,34 +130,22 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<DownloadEntry>
     */
-    getDownload(downloadId: string, opts?: any): Promise<DownloadEntry> {
-
+    getDownload(downloadId: string, opts?: { fields?: string[] }): Promise<DownloadEntry> {
         throwIfNotDefined(downloadId, 'downloadId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'downloadId': downloadId
+            downloadId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/downloads/{downloadId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , DownloadEntry);
+        return this.get({
+            path: '/downloads/{downloadId}',
+            pathParams,
+            queryParams,
+            returnType: DownloadEntry
+        });
     }
-
 }

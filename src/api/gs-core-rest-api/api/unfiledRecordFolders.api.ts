@@ -153,7 +153,11 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<UnfiledRecordFolderAssociationPaging>
     */
-    createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: any): Promise<UnfiledRecordFolderAssociationPaging> {
+    createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: {
+        autoRename?: boolean;
+        include?: string[];
+        fields?: string[];
+    }): Promise<UnfiledRecordFolderAssociationPaging> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
         opts = opts || {};
@@ -233,7 +237,11 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledRecordFolderEntry>
         */
-    getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderEntry> {
+    getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: {
+        include?: string[];
+        fields?: string[];
+        relativePath?: string;
+    }): Promise<UnfiledRecordFolderEntry> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         opts = opts || {};
 
@@ -300,12 +308,20 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledRecordFolderAssociationPaging>
         */
-    listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: any): Promise<UnfiledRecordFolderAssociationPaging> {
+    listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        where?: string;
+        include?: string[];
+        relativePath?: string[];
+        includeSource?: boolean;
+        fields?: string[];
+    }): Promise<UnfiledRecordFolderAssociationPaging> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         opts = opts || {};
 
         const pathParams = {
-            'unfiledRecordFolderId': unfiledRecordFolderId
+            unfiledRecordFolderId
         };
 
         const queryParams = {
@@ -371,13 +387,17 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledRecordFolderEntry>
         */
-    updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: any): Promise<UnfiledRecordFolderEntry> {
+    updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: {
+        include?: string[];
+        includeSource?: boolean;
+        fields?: string[];
+    }): Promise<UnfiledRecordFolderEntry> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         throwIfNotDefined(unfiledRecordFolderBodyUpdate, 'unfiledRecordFolderBodyUpdate');
         opts = opts || {};
 
         const pathParams = {
-            'unfiledRecordFolderId': unfiledRecordFolderId
+            unfiledRecordFolderId
         };
 
         const queryParams = {

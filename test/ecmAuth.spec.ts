@@ -16,7 +16,6 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { ContentAuth } from '../src/authentication/contentAuth';
 import { EcmAuthMock as AuthEcmMock } from '../test/mockObjects';
@@ -33,7 +32,7 @@ describe('Ecm Auth test', () => {
 
         alfrescoJsApi = new AlfrescoApi({
             hostEcm
-        } as AlfrescoApiConfig);
+        });
 
         contentAuth = new ContentAuth(
             {
@@ -45,13 +44,13 @@ describe('Ecm Auth test', () => {
     });
 
     it('should remember username on login', () => {
-        const auth = new ContentAuth({} as AlfrescoApiConfig, alfrescoJsApi);
+        const auth = new ContentAuth({}, alfrescoJsApi);
         auth.login('johndoe', 'password');
         expect(auth.authentications.basicAuth.username).to.be.equal('johndoe');
     });
 
     it('should forget username on logout', (done) => {
-        const auth = new ContentAuth({} as AlfrescoApiConfig, alfrescoJsApi);
+        const auth = new ContentAuth({}, alfrescoJsApi);
 
         authEcmMock.get201Response();
 
@@ -205,7 +204,7 @@ describe('Ecm Auth test', () => {
                     {
                         ticketEcm: 'TICKET_4479f4d3bb155195879bfbb8d5206f433488a1b1',
                         hostEcm
-                    } as AlfrescoApiConfig,
+                    },
                     alfrescoJsApi
                 );
 

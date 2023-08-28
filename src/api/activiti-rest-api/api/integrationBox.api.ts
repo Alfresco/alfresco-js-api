@@ -21,250 +21,137 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Integrationbox service.
-* @module IntegrationboxApi
+* IntegrationBoxApi service.
+* @module IntegrationBoxApi
 */
 export class IntegrationBoxApi extends BaseApi {
     /**
     * Box Authorization
-    *
     * Returns Box OAuth HTML Page
-    *
     * @return Promise<{}>
     */
     confirmAuthorisation(): Promise<any> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['text/html'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/box/confirm-auth-request', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/integration/box/confirm-auth-request',
+            accepts: ['text/html']
+        });
     }
+
     /**
-        * Add Box account
-        *
-        *
-        *
-        * @param userId userId
-        * @param credentials credentials
-        * @return Promise<{}>
-        */
+    * Add Box account
+    *
+    * @param userId userId
+    * @param credentials credentials
+    * @return Promise<{}>
+    */
     createRepositoryAccount(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
         throwIfNotDefined(userId, 'userId');
         throwIfNotDefined(credentials, 'credentials');
 
-        let postBody = credentials;
-
-        let pathParams = {
-            'userId': userId
+        const pathParams = {
+            userId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['*/*'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/box/{userId}/account', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.post({
+            path: '/api/enterprise/integration/box/{userId}/account',
+            pathParams,
+            bodyParam: credentials
+        });
     }
+
     /**
-        * Delete account information
-        *
-        *
-        *
-        * @param userId userId
-        * @return Promise<{}>
-        */
+    * Delete account information
+    *
+    * @param userId userId
+    * @return Promise<{}>
+    */
     deleteRepositoryAccount(userId: number): Promise<any> {
         throwIfNotDefined(userId, 'userId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'userId': userId
+        const pathParams = {
+            userId
         };
 
-        let queryParams = {
-        };
+        const accepts = ['*/*'];
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['*/*'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/box/{userId}/account', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/integration/box/{userId}/account',
+            pathParams,
+            accepts
+        });
     }
+
     /**
-        * Get status information
-        *
-        *
-        *
-        * @return Promise<boolean>
-        */
+    * Get status information
+    *
+    * @return Promise<boolean>
+    */
     getBoxPluginStatus(): Promise<boolean> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['*/*'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/box/status', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/integration/box/status',
+            accepts: ['*/*']
+        });
     }
+
     /**
-        * List file and folders
-        *
-        *
-        *
-        * @param opts Optional parameters
-        * @param opts.filter filter
-        * @param opts.parent parent
-        * @return Promise<ResultListDataRepresentationBoxContent>
-        */
-    getFiles(opts?: any): Promise<ResultListDataRepresentationBoxContent> {
+    * List file and folders
+    *
+    * @param opts Optional parameters
+    * @param opts.filter filter
+    * @param opts.parent parent
+    * @return Promise<ResultListDataRepresentationBoxContent>
+    */
+    getFiles(opts?: { filter?: string; parent?: string; }): Promise<ResultListDataRepresentationBoxContent> {
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-            'filter': opts['filter'],
-            'parent': opts['parent']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['*/*'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/box/files', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationBoxContent);
+        return this.get({
+            path: '/api/enterprise/integration/box/files',
+            queryParams: opts,
+            accepts: ['*/*'],
+            returnType: ResultListDataRepresentationBoxContent
+        });
     }
+
     /**
-        * Get account information
-        *
-        *
-        *
-        * @param userId userId
-        * @return Promise<{}>
-        */
+    * Get account information
+    *
+    * @param userId userId
+    * @return Promise<{}>
+    */
     getRepositoryAccount(userId: number): Promise<any> {
         throwIfNotDefined(userId, 'userId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'userId': userId
+        const pathParams = {
+            userId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['*/*'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/box/{userId}/account', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/integration/box/{userId}/account',
+            pathParams,
+            accepts: ['*/*']
+        });
     }
+
     /**
-        * Update account information
-        *
-        *
-        *
-        * @param userId userId
-        * @param credentials credentials
-        * @return Promise<{}>
-        */
+    * Update account information
+    *
+    * @param userId userId
+    * @param credentials credentials
+    * @return Promise<{}>
+    */
     updateRepositoryAccount(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
         throwIfNotDefined(userId, 'userId');
         throwIfNotDefined(credentials, 'credentials');
 
-        let postBody = credentials;
-
-        let pathParams = {
-            'userId': userId
+        const pathParams = {
+            userId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['*/*'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/box/{userId}/account', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/integration/box/{userId}/account',
+            pathParams,
+            bodyParam: credentials,
+            accepts: ['*/*']
+        });
     }
-
 }

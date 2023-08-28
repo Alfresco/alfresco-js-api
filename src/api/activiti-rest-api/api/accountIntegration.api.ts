@@ -19,41 +19,20 @@ import { ResultListDataRepresentationAccountRepresentation } from '../model/resu
 import { BaseApi } from './base.api';
 
 /**
-* Accountintegration service.
-* @module AccountintegrationApi
+* AccountIntegrationApi service.
+* @module AccountIntegrationApi
 */
 export class AccountIntegrationApi extends BaseApi {
     /**
     * Retrieve external account information
-    *
     * Accounts are used to integrate with third party apps and clients
     *
     * @return Promise<ResultListDataRepresentationAccountRepresentation>
     */
     getAccounts(): Promise<ResultListDataRepresentationAccountRepresentation> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/account/integration', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAccountRepresentation);
+        return this.get({
+            path: '/api/enterprise/account/integration',
+            returnType: ResultListDataRepresentationAccountRepresentation
+        });
     }
-
 }

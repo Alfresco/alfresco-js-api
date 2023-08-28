@@ -153,14 +153,18 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<UnfiledContainerAssociationPaging>
     */
-    createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: any): Promise<UnfiledContainerAssociationPaging> {
+    createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: {
+        autoRename?: boolean;
+        include?: string[];
+        fields?: string[];
+    }): Promise<UnfiledContainerAssociationPaging> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
 
         opts = opts || {};
 
         const pathParams = {
-            'unfiledContainerId': unfiledContainerId
+            unfiledContainerId
         };
 
         const queryParams = {
@@ -207,12 +211,12 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledContainerEntry>
         */
-    getUnfiledContainer(unfiledContainerId: string, opts?: any): Promise<UnfiledContainerEntry> {
+    getUnfiledContainer(unfiledContainerId: string, opts?: { include?: string[]; fields?: string[] }): Promise<UnfiledContainerEntry> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
         opts = opts || {};
 
         const pathParams = {
-            'unfiledContainerId': unfiledContainerId
+            unfiledContainerId
         };
 
         const queryParams = {
@@ -271,13 +275,20 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledContainerAssociationPaging>
         */
-    listUnfiledContainerChildren(unfiledContainerId: string, opts?: any): Promise<UnfiledContainerAssociationPaging> {
+    listUnfiledContainerChildren(unfiledContainerId: string, opts?: {
+        skipCount?: number;
+        maxItems?: number;
+        where?: string;
+        include?: string[];
+        includeSource?: boolean;
+        fields?: string[];
+    }): Promise<UnfiledContainerAssociationPaging> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
 
         opts = opts || {};
 
         const pathParams = {
-            'unfiledContainerId': unfiledContainerId
+            unfiledContainerId
         };
 
         const queryParams = {
@@ -339,13 +350,16 @@ parameter are returned in addition to those specified in the **fields** paramete
 
         * @return Promise<UnfiledContainerEntry>
         */
-    updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: any): Promise<UnfiledContainerEntry> {
+    updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: {
+        include?: string[];
+        fields?: string[];
+    }): Promise<UnfiledContainerEntry> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
         throwIfNotDefined(unfiledContainerBodyUpdate, 'unfiledContainerBodyUpdate');
         opts = opts || {};
 
         const pathParams = {
-            'unfiledContainerId': unfiledContainerId
+            unfiledContainerId
         };
 
         const queryParams = {

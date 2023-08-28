@@ -22,15 +22,27 @@ import { UserRepresentation } from '../model/userRepresentation';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
+export interface GetUsersOpts {
+    filter?: string;
+    status?: string;
+    accountType?: string;
+    sort?: string;
+    company?: string;
+    start?: number;
+    page?: number;
+    size?: number;
+    groupId?: number;
+    tenantId?: number;
+    summary?: boolean;
+}
+
 /**
-* Adminusers service.
-* @module AdminusersApi
+* AdminUsersApi service.
+* @module AdminUsersApi
 */
 export class AdminUsersApi extends BaseApi {
     /**
     * Bulk update a list of users
-    *
-    *
     *
     * @param update update
     * @return Promise<{}>
@@ -38,191 +50,83 @@ export class AdminUsersApi extends BaseApi {
     bulkUpdateUsers(update: BulkUserUpdateRepresentation): Promise<any> {
         throwIfNotDefined(update, 'update');
 
-        let postBody = update;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/users', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/admin/users',
+            bodyParam: update
+        });
     }
+
     /**
-        * Create a user
-        *
-        *
-        *
-        * @param userRepresentation userRepresentation
-        * @return Promise<UserRepresentation>
-        */
+    * Create a user
+    *
+    * @param userRepresentation userRepresentation
+    * @return Promise<UserRepresentation>
+    */
     createNewUser(userRepresentation: UserRepresentation): Promise<UserRepresentation> {
         throwIfNotDefined(userRepresentation, 'userRepresentation');
 
-        let postBody = userRepresentation;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/users', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, UserRepresentation);
+        return this.post({
+            path: '/api/enterprise/admin/users',
+            bodyParam: userRepresentation,
+            returnType: UserRepresentation
+        });
     }
+
     /**
-        * Get a user
-        *
-        *
-        *
-        * @param userId userId
-        * @param opts Optional parameters
-        * @param opts.summary summary
-        * @return Promise<AbstractUserRepresentation>
-        */
-    getUser(userId: number, opts?: any): Promise<AbstractUserRepresentation> {
+    * Get a user
+    *
+    * @param userId userId
+    * @param opts Optional parameters
+    * @return Promise<AbstractUserRepresentation>
+    */
+    getUser(userId: number, opts?: { summary?: boolean }): Promise<AbstractUserRepresentation> {
         throwIfNotDefined(userId, 'userId');
 
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-            'userId': userId
+        const pathParams = {
+            userId
         };
 
-        let queryParams = {
-            'summary': opts['summary']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/users/{userId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, AbstractUserRepresentation);
+        return this.get({
+            path: '/api/enterprise/admin/users/{userId}',
+            pathParams,
+            queryParams: opts,
+            returnType: AbstractUserRepresentation
+        });
     }
+
     /**
-        * Query users
-        *
-        *
-        *
-        * @param opts Optional parameters
-        * @param opts.filter filter
-        * @param opts.status status
-        * @param opts.accountType accountType
-        * @param opts.sort sort
-        * @param opts.company company
-        * @param opts.start start
-        * @param opts.page page
-        * @param opts.size size
-        * @param opts.groupId groupId
-        * @param opts.tenantId tenantId
-        * @param opts.summary summary
-        * @return Promise<ResultListDataRepresentationAbstractUserRepresentation>
-        */
-    getUsers(opts?: any): Promise<ResultListDataRepresentationAbstractUserRepresentation> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-            'filter': opts['filter'],
-            'status': opts['status'],
-            'accountType': opts['accountType'],
-            'sort': opts['sort'],
-            'company': opts['company'],
-            'start': opts['start'],
-            'page': opts['page'],
-            'size': opts['size'],
-            'groupId': opts['groupId'],
-            'tenantId': opts['tenantId'],
-            'summary': opts['summary']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/users', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationAbstractUserRepresentation);
+    * Query users
+    *
+    * @param opts Optional parameters
+    * @return Promise<ResultListDataRepresentationAbstractUserRepresentation>
+    */
+    getUsers(opts?: GetUsersOpts): Promise<ResultListDataRepresentationAbstractUserRepresentation> {
+        return this.get({
+            path: '/api/enterprise/admin/users',
+            queryParams: opts,
+            returnType: ResultListDataRepresentationAbstractUserRepresentation
+        });
     }
+
     /**
-        * Update a user
-        *
-        *
-        *
-        * @param userId userId
-        * @param userRepresentation userRepresentation
-        * @return Promise<{}>
-        */
+    * Update a user
+    *
+    * @param userId userId
+    * @param userRepresentation userRepresentation
+    * @return Promise<{}>
+    */
     updateUserDetails(userId: number, userRepresentation: UserRepresentation): Promise<any> {
         throwIfNotDefined(userId, 'userId');
         throwIfNotDefined(userRepresentation, 'userRepresentation');
 
-        let postBody = userRepresentation;
-
-        let pathParams = {
-            'userId': userId
+        const pathParams = {
+            userId
         };
 
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/admin/users/{userId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.put({
+            path: '/api/enterprise/admin/users/{userId}',
+            pathParams,
+            bodyParam: userRepresentation
+        });
     }
-
 }

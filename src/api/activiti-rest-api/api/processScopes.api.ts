@@ -21,14 +21,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Processscopes service.
-* @module ProcessscopesApi
+* ProcessScopesApi service.
+* @module ProcessScopesApi
 */
 export class ProcessScopesApi extends BaseApi {
     /**
     * List runtime process scopes
-    *
-    *
     *
     * @param processScopesRequest processScopesRequest
     * @return Promise<ProcessScopeRepresentation>
@@ -36,28 +34,9 @@ export class ProcessScopesApi extends BaseApi {
     getRuntimeProcessScopes(processScopesRequest: ProcessScopesRequestRepresentation): Promise<ProcessScopeRepresentation> {
         throwIfNotDefined(processScopesRequest, 'processScopesRequest');
 
-        let postBody = processScopesRequest;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-scopes', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ProcessScopeRepresentation);
+        return this.post({
+            path: '/api/enterprise/process-scopes',
+            bodyParam: processScopesRequest
+        });
     }
-
 }

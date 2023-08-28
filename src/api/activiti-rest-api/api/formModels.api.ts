@@ -25,15 +25,23 @@ import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
+export interface GetFormsOpts {
+    nameLike?: string;
+    appId?: number;
+    tenantId?: number;
+    start?: number;
+    sort?: string;
+    order?: string;
+    size?: number;
+}
+
 /**
- * Formmodels service.
- * @module FormmodelsApi
+ * FormModelsApi service.
+ * @module FormModelsApi
  */
 export class FormModelsApi extends BaseApi {
     /**
      * Get form content
-     *
-     *
      *
      * @param formId formId
      * @return Promise<FormDefinitionRepresentation>
@@ -41,30 +49,19 @@ export class FormModelsApi extends BaseApi {
     getFormEditorJson(formId: number): Promise<FormDefinitionRepresentation> {
         throwIfNotDefined(formId, 'formId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'formId': formId
+        const pathParams = {
+            formId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/forms/{formId}/editorJson', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormDefinitionRepresentation);
+        return this.get({
+            path: '/api/enterprise/forms/{formId}/editorJson',
+            pathParams,
+            returnType: FormDefinitionRepresentation
+        });
     }
 
     /**
      * Get form history
-     *
-     *
      *
      * @param formId formId
      * @param formHistoryId formHistoryId
@@ -74,119 +71,71 @@ export class FormModelsApi extends BaseApi {
         throwIfNotDefined(formId, 'formId');
         throwIfNotDefined(formHistoryId, 'formHistoryId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'formId': formId, 'formHistoryId': formHistoryId
+        const pathParams = {
+            formId,
+            formHistoryId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/form-models/{formId}/history/{formHistoryId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormRepresentation);
+        return this.get({
+            path: '/api/enterprise/editor/form-models/{formId}/history/{formHistoryId}',
+            pathParams,
+            returnType: FormRepresentation
+        });
     }
 
     /**
      * Get a form model
      *
-     *
-     *
-     * @param formId formId
+     * @param formId {number} formId
      * @return Promise<FormRepresentation>
      */
     getForm(formId: number): Promise<FormRepresentation> {
         throwIfNotDefined(formId, 'formId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'formId': formId
+        const pathParams = {
+            formId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/form-models/{formId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormRepresentation);
+        return this.get({
+            path: '/api/enterprise/editor/form-models/{formId}',
+            pathParams,
+            returnType: FormRepresentation
+        });
     }
 
     /**
      * Get forms
      *
-     *
-     *
-     * @param formId formId
+     * @param input
      * @return Promise<FormRepresentation>
      */
-    getForms(input: string[] | { [key: string]: any }): Promise<FormRepresentation | ResultListDataRepresentationFormRepresentation | ResultListDataRepresentationRuntimeFormRepresentation> {
-        let postBody = null;
-        let pathParams = {};
-        let headerParams = {};
-        let formParams = {};
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
+    getForms(input: string[] | GetFormsOpts): Promise<FormRepresentation | ResultListDataRepresentationRuntimeFormRepresentation | ResultListDataRepresentationFormRepresentation> {
         if (typeof input === 'string') {
-            let queryParams = {
+            const queryParams = {
                 'formId': buildCollectionParam(input, 'multi')
             };
 
-            return this.apiClient.callApi(
-                '/api/enterprise/editor/form-models/values', 'GET',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, FormRepresentation);
+            return this.get({
+                path: '/api/enterprise/editor/form-models/values',
+                queryParams,
+                returnType: FormRepresentation
+            });
         } else if (typeof input === 'object') {
-            input = input || {};
-            let queryParams = {
-                // @ts-ignore
-                'nameLike': input['nameLike'],
-                // @ts-ignore
-                'appId': input['appId'],
-                // @ts-ignore
-                'tenantId': input['tenantId'],
-                // @ts-ignore
-                'start': input['start'],
-                // @ts-ignore
-                'sort': input['sort'],
-                // @ts-ignore
-                'order': input['order'],
-                // @ts-ignore
-                'size': input['size']
-            };
-
-            return this.apiClient.callApi(
-                '/api/enterprise/forms', 'GET',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, ResultListDataRepresentationRuntimeFormRepresentation);
+            return this.get({
+                path: '/api/enterprise/forms',
+                queryParams: input,
+                returnType: ResultListDataRepresentationRuntimeFormRepresentation
+            });
         } else {
-            let queryParams = {};
-
-            return this.apiClient.callApi(
-                '/api/enterprise/editor/form-models', 'GET',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, ResultListDataRepresentationFormRepresentation);
+            return this.get({
+                path: '/api/enterprise/editor/form-models',
+                returnType: ResultListDataRepresentationFormRepresentation
+            });
         }
     }
 
     /**
      * Update form model content
-     *
-     *
      *
      * @param formId ID of the form to update
      * @param saveRepresentation saveRepresentation
@@ -196,24 +145,16 @@ export class FormModelsApi extends BaseApi {
         throwIfNotDefined(formId, 'formId');
         throwIfNotDefined(saveRepresentation, 'saveRepresentation');
 
-        let postBody = saveRepresentation;
-
-        let pathParams = {
-            'formId': formId
+        const pathParams = {
+            formId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/form-models/{formId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, FormRepresentation);
+        return this.put({
+            path: '/api/enterprise/editor/form-models/{formId}',
+            pathParams,
+            bodyParam: saveRepresentation,
+            returnType: FormRepresentation
+        });
     }
 
     /**
@@ -229,24 +170,15 @@ export class FormModelsApi extends BaseApi {
         throwIfNotDefined(formId, 'formId');
         throwIfNotDefined(saveRepresentation, 'saveRepresentation');
 
-        let postBody = saveRepresentation;
-
-        let pathParams = {
-            'formId': formId
+        const pathParams = {
+            formId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/editor/form-models/{formId}/validate', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ValidationErrorRepresentation);
+        return this.get({
+            path: '/api/enterprise/editor/form-models/{formId}/validate',
+            pathParams,
+            bodyParam: saveRepresentation,
+            returnType: ValidationErrorRepresentation
+        });
     }
-
 }

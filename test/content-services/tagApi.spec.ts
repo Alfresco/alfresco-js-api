@@ -16,7 +16,6 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { TagBody, TagEntry, TagPaging, TagsApi } from '../../src/api/content-rest-api';
 import { EcmAuthMock, TagMock } from '../../test/mockObjects';
@@ -36,7 +35,7 @@ describe('Tags', () => {
 
         const alfrescoJsApi = new AlfrescoApi({
             hostEcm
-        } as AlfrescoApiConfig);
+        });
 
         alfrescoJsApi.login('admin', 'admin').then(() => {
             done();

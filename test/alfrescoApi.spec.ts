@@ -16,7 +16,6 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../src/alfrescoApi';
 import { EcmAuthMock, BpmAuthMock, OAuthMock } from '../test/mockObjects';
 
@@ -25,9 +24,7 @@ describe('Basic configuration test', () => {
     describe('config parameter ', () => {
 
         it('Should basePath have a default value', () => {
-            const config = {} as AlfrescoApiConfig;
-
-            const alfrescoJsApi = new AlfrescoApi(config);
+            const alfrescoJsApi = new AlfrescoApi({});
 
             expect(alfrescoJsApi.contentClient.basePath)
                 .equal('http://127.0.0.1:8080/alfresco/api/-default-/public/alfresco/versions/1');
@@ -118,7 +115,7 @@ describe('Basic configuration test', () => {
                 hostEcm,
                 provider: 'ECM',
                 withCredentials: true
-            } as AlfrescoApiConfig);
+            });
 
             expect(alfrescoJsApi.isEcmLoggedIn()).equal(true);
         });
@@ -129,7 +126,7 @@ describe('Basic configuration test', () => {
                 hostEcm,
                 provider: 'ECM',
                 withCredentials: true
-            } as AlfrescoApiConfig);
+            });
 
             expect(alfrescoJsApi.isLoggedIn()).equal(true);
         });
@@ -140,7 +137,7 @@ describe('Basic configuration test', () => {
                 hostEcm,
                 provider: 'ALL',
                 withCredentials: true
-            } as AlfrescoApiConfig);
+            });
 
             expect(alfrescoJsApi.isLoggedIn()).equal(true);
         });
@@ -236,7 +233,7 @@ describe('Basic configuration test', () => {
             const alfrescoJsApi = new AlfrescoApi({
                 hostEcm,
                 provider: 'ECM'
-            } as AlfrescoApiConfig);
+            });
 
             authEcmMock.get201Response();
 
@@ -257,7 +254,7 @@ describe('Basic configuration test', () => {
                 hostBpm: hostBpm,
                 contextRootBpm: 'activiti-app',
                 provider: 'BPM'
-            } as AlfrescoApiConfig);
+            });
 
             alfrescoJsApi.on('logged-in', () => {
                 done();
@@ -281,7 +278,7 @@ describe('Basic configuration test', () => {
                     'redirectUriLogout': '/logout'
                 },
                 authType: 'OAUTH'
-            } as AlfrescoApiConfig);
+            });
 
             alfrescoJsApi.on('logged-in', () => {
                 done();
@@ -300,7 +297,7 @@ describe('Basic configuration test', () => {
                 hostBpm: hostBpm,
                 contextRootBpm: 'activiti-app',
                 provider: 'BPM'
-            } as AlfrescoApiConfig);
+            });
 
             alfrescoJsApi.login('admin', 'admin').then(()=>{
 

@@ -86,7 +86,7 @@ export class ClassificationGuidesApi extends BaseApi {
 
         * @return Promise<TopicEntry>
         */
-    createSubtopic(topicId: string, topic: TopicBody, opts?: any): Promise<TopicEntry> {
+    createSubtopic(topicId: string, topic: TopicBody, opts?: { include?: string[] }): Promise<TopicEntry> {
         throwIfNotDefined(topicId, 'topicId');
         throwIfNotDefined(topic, 'topic');
 
@@ -124,7 +124,7 @@ export class ClassificationGuidesApi extends BaseApi {
 
         * @return Promise<TopicEntry>
         */
-    createTopic(classificationGuideId: string, topic: TopicBody, opts?: any): Promise<TopicEntry> {
+    createTopic(classificationGuideId: string, topic: TopicBody, opts?: { include?: string[] }): Promise<TopicEntry> {
         throwIfNotDefined(classificationGuideId, 'classificationGuideId');
         throwIfNotDefined(topic, 'topic');
 
@@ -135,7 +135,7 @@ export class ClassificationGuidesApi extends BaseApi {
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
         return this.post({
@@ -218,7 +218,7 @@ export class ClassificationGuidesApi extends BaseApi {
 
         * @return Promise<ClassificationGuidePaging>
         */
-    listClassificationGuides(opts?: any): Promise<ClassificationGuidePaging> {
+    listClassificationGuides(opts?: { include?: string[]; skipCount?: number; maxItems?: number; orderBy?: string[]; where?: string }): Promise<ClassificationGuidePaging> {
         opts = opts || {};
 
         const queryParams = {
@@ -235,14 +235,15 @@ export class ClassificationGuidesApi extends BaseApi {
             returnType: ClassificationGuidePaging
         });
     }
+
     /**
-        * List all subtopics
-        *
-        * Gets all subtopics of a topic.
-        *
-        * @param topicId The identifier for the topic
-        * @param opts Optional parameters
-        * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
+    * List all subtopics
+    *
+    * Gets all subtopics of a topic.
+    *
+    * @param topicId The identifier for the topic
+    * @param opts Optional parameters
+    * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
     * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
     * instruction - Contains details of any instruction in the topic.
     * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -265,7 +266,14 @@ export class ClassificationGuidesApi extends BaseApi {
         * @param opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
         * @return Promise<SubtopicPaging>
         */
-    listSubtopics(topicId: string, opts?: any): Promise<SubtopicPaging> {
+    listSubtopics(topicId: string, opts?: {
+        include?: string[];
+        skipCount?: number;
+        maxItems?: number;
+        orderBy?: string[];
+        where?: string;
+        includeSource?: boolean;
+    }): Promise<SubtopicPaging> {
         throwIfNotDefined(topicId, 'topicId');
         opts = opts || {};
 
@@ -289,14 +297,15 @@ export class ClassificationGuidesApi extends BaseApi {
             returnType: SubtopicPaging
         });
     }
+
     /**
-        * List all topics
-        *
-        * Gets all topics.
-        *
-        * @param classificationGuideId The identifier for the classification guide
-        * @param opts Optional parameters
-        * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
+    * List all topics
+    *
+    * Gets all topics.
+    *
+    * @param classificationGuideId The identifier for the classification guide
+    * @param opts Optional parameters
+    * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
     * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
     * instruction - Contains details of any instruction in the topic.
     * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
@@ -319,7 +328,14 @@ export class ClassificationGuidesApi extends BaseApi {
         * @param opts.includeSource Also include **source** in addition to **entries** with folder information on the parent guide/topic
         * @return Promise<TopicPaging>
         */
-    listTopics(classificationGuideId: string, opts?: any): Promise<TopicPaging> {
+    listTopics(classificationGuideId: string, opts?: {
+        include?: string[];
+        skipCount?: number;
+        maxItems?: number;
+        orderBy?: string[];
+        where?: string;
+        includeSource?: boolean;
+    }): Promise<TopicPaging> {
         throwIfNotDefined(classificationGuideId, 'classificationGuideId');
         opts = opts || {};
 
@@ -345,18 +361,18 @@ export class ClassificationGuidesApi extends BaseApi {
     }
 
     /**
-        * Get classification guide information
-        *
-        * Gets the classification guide with id **classificationGuideId**.
-        *
-        * @param classificationGuideId The identifier for the classification guide
-        * @return Promise<ClassificationGuideEntry>
-        */
+    * Get classification guide information
+    *
+    * Gets the classification guide with id **classificationGuideId**.
+    *
+    * @param classificationGuideId The identifier for the classification guide
+    * @return Promise<ClassificationGuideEntry>
+    */
     showClassificationGuideById(classificationGuideId: string): Promise<ClassificationGuideEntry> {
         throwIfNotDefined(classificationGuideId, 'classificationGuideId');
 
         const pathParams = {
-            'classificationGuideId': classificationGuideId
+            classificationGuideId
         };
 
         return this.get({
@@ -365,31 +381,30 @@ export class ClassificationGuidesApi extends BaseApi {
             returnType: ClassificationGuideEntry
         });
     }
+
     /**
-        * Get topic information
-        *
-        * Gets the topic with id **topicId**.
-        *
-        * @param topicId The identifier for the topic
-        * @param opts Optional parameters
-        * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
+    * Get topic information
+    *
+    * Gets the topic with id **topicId**.
+    *
+    * @param topicId The identifier for the topic
+    * @param opts Optional parameters
+    * @param opts.include Returns additional information about the topic. The following optional fields can be requested:
     * hasSubtopics - A flag indicating whether the topic already contains any subtopics.
     * instruction - Contains details of any instruction in the topic.
     * path - An ordered list of id-name pairs of all ancestor topics and the classification guide.
     * classificationGuide - The classification guide this topic is in.
-
-        * @return Promise<TopicEntry>
-        */
-    showTopicById(topicId: string, opts?: any): Promise<TopicEntry> {
+    * @return Promise<TopicEntry>
+    */
+    showTopicById(topicId: string, opts?: { include?: string[] }): Promise<TopicEntry> {
         throwIfNotDefined(topicId, 'topicId');
-        opts = opts || {};
 
         const pathParams = {
             topicId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
         return this.post({
@@ -399,15 +414,16 @@ export class ClassificationGuidesApi extends BaseApi {
             returnType: TopicEntry
         });
     }
+
     /**
-        * Update a classification guide
-        *
-        * Updates the classification guide with id **classificationGuideId**. For example, you can rename a classification guide.
-        *
-        * @param classificationGuideId The identifier for the classification guide
-        * @param classificationGuide Classification guide
-        * @return Promise<ClassificationGuideEntry>
-        */
+    * Update a classification guide
+    *
+    * Updates the classification guide with id **classificationGuideId**. For example, you can rename a classification guide.
+    *
+    * @param classificationGuideId The identifier for the classification guide
+    * @param classificationGuide Classification guide
+    * @return Promise<ClassificationGuideEntry>
+    */
     updateClassificationGuide(classificationGuideId: string, classificationGuide: ClassificationGuideBody): Promise<ClassificationGuideEntry> {
         throwIfNotDefined(classificationGuideId, 'classificationGuideId');
         throwIfNotDefined(classificationGuide, 'classificationGuide');
@@ -423,6 +439,7 @@ export class ClassificationGuidesApi extends BaseApi {
             returnType: ClassificationGuideEntry
         });
     }
+
     /**
         * Update a topic
         *
@@ -442,17 +459,16 @@ export class ClassificationGuidesApi extends BaseApi {
 
         * @return Promise<TopicEntry>
         */
-    updateTopic(topicId: string, topic: TopicBody, opts?: any): Promise<TopicEntry> {
+    updateTopic(topicId: string, topic: TopicBody, opts?: { include?: string[] }): Promise<TopicEntry> {
         throwIfNotDefined(topicId, 'topicId');
         throwIfNotDefined(topic, 'topic');
-        opts = opts || {};
 
         const pathParams = {
             topicId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
         return this.put({
@@ -463,5 +479,4 @@ export class ClassificationGuidesApi extends BaseApi {
             returnType: TopicEntry
         });
     }
-
 }

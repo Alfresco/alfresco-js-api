@@ -20,7 +20,7 @@ export class PathMatcher {
         return new RegExp(
             `^${
             pattern
-                .replace(/(^|[^\*])\*(?!\*)/g, '$1([^\\/]*)')
+                .replace(/(^|[^*])\*(?!\*)/g, '$1([^\\/]*)')
                 .replace(/\/\*\*\//g, '/(.+)/|/')
                 .replace(/\*\*/g, '(.*)')
         }$`

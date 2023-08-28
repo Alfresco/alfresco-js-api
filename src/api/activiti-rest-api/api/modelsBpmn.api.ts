@@ -19,14 +19,12 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Modelsbpmn service.
-* @module ModelsbpmnApi
+* ModelsBpmnApi service.
+* @module ModelsBpmnApi
 */
 export class ModelsBpmnApi extends BaseApi {
     /**
     * Export a historic version of a process definition as BPMN 2.0 XML
-    *
-    *
     *
     * @param processModelId processModelId
     * @param processModelHistoryId processModelHistoryId
@@ -36,61 +34,39 @@ export class ModelsBpmnApi extends BaseApi {
         throwIfNotDefined(processModelId, 'processModelId');
         throwIfNotDefined(processModelHistoryId, 'processModelHistoryId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'processModelId': processModelId, 'processModelHistoryId': processModelHistoryId
+        const pathParams = {
+            processModelId,
+            processModelHistoryId
         };
 
-        let queryParams = {
-        };
+        const accepts = ['application/xml'];
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/xml'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20',
+            pathParams,
+            accepts
+        });
     }
+
     /**
-        * Export a process definition as BPMN 2.0 XML
-        *
-        *
-        *
-        * @param processModelId processModelId
-        * @return Promise<{}>
-        */
+    * Export a process definition as BPMN 2.0 XML
+    *
+    * @param processModelId processModelId
+    * @return Promise<{}>
+    */
     getProcessModelBpmn20Xml(processModelId: number): Promise<any> {
         throwIfNotDefined(processModelId, 'processModelId');
-        let postBody = null;
 
-        let pathParams = {
+        const pathParams = {
             'processModelId': processModelId
         };
 
-        let queryParams = {
-        };
+        const accepts = ['application/xml'];
 
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/xml'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/models/{processModelId}/bpmn20', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/models/{processModelId}/bpmn20',
+            pathParams,
+            accepts
+        });
     }
-
 }

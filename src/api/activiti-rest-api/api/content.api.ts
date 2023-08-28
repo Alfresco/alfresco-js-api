@@ -29,108 +29,87 @@ export class ContentApi extends BaseApi {
     /**
      * Attach existing content to a process instance
      *
-     *
-     *
      * @param processInstanceId processInstanceId
      * @param relatedContent relatedContent
      * @param opts Optional parameters
-     * @param opts.isRelatedContent isRelatedContent
      * @return Promise<RelatedContentRepresentation>
      */
-    createRelatedContentOnProcessInstance(processInstanceId: string, relatedContent: RelatedContentRepresentation | any, opts?: any): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnProcessInstance(processInstanceId: string, relatedContent: RelatedContentRepresentation | any, opts?: { isRelatedContent?: boolean }): Promise<RelatedContentRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(relatedContent, 'relatedContent');
 
         opts = opts || {};
 
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
-
-        let queryParams = {
-            'isRelatedContent': opts['isRelatedContent']
-        };
-
-        let headerParams = {};
-        let formParams = {};
-
-        let accepts = ['application/json'];
 
         if (relatedContent instanceof RelatedContentRepresentation) {
-            let postBody = relatedContent;
-            let contentTypes = ['application/json'];
-            return this.apiClient.callApi(
-                '/api/enterprise/process-instances/{processInstanceId}/content', 'POST',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, RelatedContentRepresentation);
+            return this.post({
+                path: '/api/enterprise/process-instances/{processInstanceId}/content',
+                pathParams,
+                queryParams: opts,
+                bodyParam: relatedContent,
+                returnType: RelatedContentRepresentation
+            });
         } else {
-            let postBody = null;
-            formParams = {
+            const formParams = {
                 'file': relatedContent
             };
-            let contentTypes = ['multipart/form-data'];
-            return this.apiClient.callApi(
-                '/api/enterprise/process-instances/{processInstanceId}/raw-content', 'POST',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, RelatedContentRepresentation);
+
+            return this.post({
+                path: '/api/enterprise/process-instances/{processInstanceId}/raw-content',
+                pathParams,
+                formParams,
+                queryParams: opts,
+                contentTypes: ['multipart/form-data'],
+                returnType: RelatedContentRepresentation
+            });
         }
     }
 
     /**
      * Attach existing content to a task
      *
-     *
-     *
      * @param taskId taskId
      * @param relatedContent relatedContent
      * @param opts Optional parameters
-     * @param opts.isRelatedContent isRelatedContent
      * @return Promise<RelatedContentRepresentation>
      */
-    createRelatedContentOnTask(taskId: string, relatedContent: RelatedContentRepresentation | any, opts?: any): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnTask(taskId: string, relatedContent: RelatedContentRepresentation | any, opts?: { isRelatedContent?: boolean }): Promise<RelatedContentRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(relatedContent, 'relatedContent');
 
-        opts = opts || {};
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
-
-        let queryParams = {
-            'isRelatedContent': opts['isRelatedContent']
-        };
-
-        let headerParams = {};
-        let formParams = {};
-
-        let accepts = ['application/json'];
 
         if (relatedContent instanceof RelatedContentRepresentation) {
-            let postBody = relatedContent;
-            let contentTypes = ['application/json'];
-            return this.apiClient.callApi(
-                '/api/enterprise/tasks/{taskId}/content', 'POST',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, RelatedContentRepresentation);
-
+            return this.post({
+                path: '/api/enterprise/tasks/{taskId}/content',
+                pathParams,
+                queryParams: opts,
+                bodyParam: relatedContent,
+                returnType: RelatedContentRepresentation
+            });
         } else {
-            let postBody = null;
-            formParams = {
+            const formParams = {
                 'file': relatedContent
             };
-            let contentTypes = ['multipart/form-data'];
-            return this.apiClient.callApi(
-                '/api/enterprise/tasks/{taskId}/raw-content', 'POST',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, RelatedContentRepresentation);
+
+            return this.post({
+                path: '/api/enterprise/tasks/{taskId}/raw-content',
+                pathParams,
+                queryParams: opts,
+                formParams,
+                contentTypes: ['multipart/form-data'],
+                returnType: RelatedContentRepresentation
+            });
         }
     }
 
     /**
      * Upload content and create a local representation
-     *
-     *
      *
      * @param file file
      * @return Promise<RelatedContentRepresentation>
@@ -138,30 +117,20 @@ export class ContentApi extends BaseApi {
     createTemporaryRawRelatedContent(file: any): Promise<RelatedContentRepresentation> {
         throwIfNotDefined(file, 'file');
 
-        let postBody = null;
-
-        let pathParams = {};
-
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {
-            'file': file
+        const formParams = {
+            file
         };
 
-        let contentTypes = ['multipart/form-data'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content/raw', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RelatedContentRepresentation);
+        return this.post({
+            path: '/api/enterprise/content/raw',
+            formParams,
+            contentTypes: ['multipart/form-data'],
+            returnType: RelatedContentRepresentation
+        });
     }
 
     /**
      * Create a local representation of content from a remote repository
-     *
-     *
      *
      * @param relatedContent relatedContent
      * @return Promise<RelatedContentRepresentation>
@@ -169,28 +138,15 @@ export class ContentApi extends BaseApi {
     createTemporaryRelatedContent(relatedContent: RelatedContentRepresentation): Promise<RelatedContentRepresentation> {
         throwIfNotDefined(relatedContent, 'relatedContent');
 
-        let postBody = relatedContent;
-
-        let pathParams = {};
-
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RelatedContentRepresentation);
+        return this.post({
+            path: '/api/enterprise/content',
+            bodyParam: relatedContent,
+            returnType: RelatedContentRepresentation
+        });
     }
 
     /**
      * Remove a local content representation
-     *
-     *
      *
      * @param contentId contentId
      * @return Promise<{}>
@@ -198,30 +154,18 @@ export class ContentApi extends BaseApi {
     deleteContent(contentId: number): Promise<any> {
         throwIfNotDefined(contentId, 'contentId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'contentId': contentId
+        const pathParams = {
+            contentId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content/{contentId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/api/enterprise/content/{contentId}',
+            pathParams
+        });
     }
 
     /**
      * Get a local content representation
-     *
-     *
      *
      * @param contentId contentId
      * @return Promise<RelatedContentRepresentation>
@@ -229,38 +173,27 @@ export class ContentApi extends BaseApi {
     getContent(contentId: number): Promise<RelatedContentRepresentation> {
         throwIfNotDefined(contentId, 'contentId');
 
-        let postBody = null;
-
-        let pathParams = {
-            'contentId': contentId
+        const pathParams = {
+            contentId
         };
 
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/content/{contentId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, RelatedContentRepresentation);
+        return this.get({
+            path: '/api/enterprise/content/{contentId}',
+            pathParams,
+            returnType: RelatedContentRepresentation
+        });
     }
 
     /**
      * Get content Raw URL for the given contentId
      * @param contentId contentId
      */
-    getRawContentUrl(contentId: number) {
+    getRawContentUrl(contentId: number): string {
         return `${this.apiClient.basePath}/api/enterprise/content/${contentId}/raw`;
     }
 
     /**
      * Stream content rendition
-     *
-     *
      *
      * @param contentId contentId
      * @param renditionType renditionType
@@ -269,110 +202,76 @@ export class ContentApi extends BaseApi {
     getRawContent(contentId: number, renditionType?: string): Promise<any> {
         throwIfNotDefined(contentId, 'contentId');
 
-        let postBody = null;
-
-        let queryParams = {};
-
-        let headerParams = {};
-        let formParams = {};
-
         if (renditionType) {
-            const contentTypes = ['application/json'];
-            const accepts = ['application/json'];
-
-            let pathParams = {
-                'contentId': contentId,
-                'renditionType': renditionType
+            const pathParams = {
+                contentId,
+                renditionType
             };
-            return this.apiClient.callApi(
-                '/api/enterprise/content/{contentId}/rendition/{renditionType}', 'GET',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, 'blob');
-        } else {
-            const contentTypes = ['application/json'];
-            const accepts = ['application/json'];
 
-            let pathParams = {
+            return this.get({
+                path: '/api/enterprise/content/{contentId}/rendition/{renditionType}',
+                pathParams,
+                returnType: 'blob',
+                responseType: 'blob'
+            });
+        } else {
+            const pathParams = {
                 'contentId': contentId
             };
 
-            return this.apiClient.callApi(
-                '/api/enterprise/content/{contentId}/raw', 'GET',
-                pathParams, queryParams, headerParams, formParams, postBody,
-                contentTypes, accepts, 'blob', undefined,  'blob');
+            return this.get({
+                path: '/api/enterprise/content/{contentId}/raw',
+                pathParams,
+                returnType: 'blob',
+                responseType: 'blob'
+            });
         }
     }
 
     /**
      * List content attached to a process instance
      *
-     *
-     *
      * @param processInstanceId processInstanceId
      * @param opts Optional parameters
-     * @param opts.isRelatedContent isRelatedContent
      * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
      */
-    getRelatedContentForProcessInstance(processInstanceId: string, opts?: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
+    getRelatedContentForProcessInstance(processInstanceId: string, opts?: { isRelatedContent?: boolean }): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         opts = opts || {};
-        let postBody = null;
 
-        let pathParams = {
-            'processInstanceId': processInstanceId
+        const pathParams = {
+            processInstanceId
         };
 
-        let queryParams = {
-            'isRelatedContent': opts['isRelatedContent']
-        };
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/process-instances/{processInstanceId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationRelatedContentRepresentation);
+        return this.get({
+            path: '/api/enterprise/process-instances/{processInstanceId}/content',
+            pathParams,
+            queryParams: opts,
+            returnType: ResultListDataRepresentationRelatedContentRepresentation
+        });
     }
 
     /**
      * List content attached to a task
      *
-     *
-     *
      * @param taskId taskId
      * @param opts Optional parameters
-     * @param opts.isRelatedContent isRelatedContent
      * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
      */
-    getRelatedContentForTask(taskId: string, opts?: any): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
+    getRelatedContentForTask(taskId: string, opts?: { isRelatedContent?: boolean; }): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
 
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-            'taskId': taskId
+        const pathParams = {
+            taskId
         };
 
-        let queryParams = {
-            'isRelatedContent': opts['isRelatedContent']
-        };
-
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/tasks/{taskId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationRelatedContentRepresentation);
+        return this.get({
+            path: '/api/enterprise/tasks/{taskId}/content',
+            pathParams,
+            queryParams: opts,
+            returnType: ResultListDataRepresentationRelatedContentRepresentation
+        });
     }
 
     /**

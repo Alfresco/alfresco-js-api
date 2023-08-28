@@ -21,7 +21,6 @@ import { expect } from 'chai';
 import { SecurityGroupBody } from '../../src/api/gs-classification-rest-api/model/securityGroupBody';
 import { EcmAuthMock } from '../../test/mockObjects';
 import { SecurityGroupApiMock } from '../../test/mockObjects/goverance-services/security-groups.mock';
-import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 
 describe('Security Group API test', () => {
     let authResponseMock: EcmAuthMock;
@@ -40,14 +39,14 @@ describe('Security Group API test', () => {
         securityGroupMock  = new SecurityGroupApiMock(hostEcm);
         const alfrescoApi = new AlfrescoApi({
             hostEcm: hostEcm
-        } as AlfrescoApiConfig);
+        });
         securityGroupApi = new SecurityGroupsApi(alfrescoApi);
         await alfrescoApi.login('admin', 'admin');
     });
 
     it('create Security Group', async () => {
         securityGroupMock.createSecurityGroup200Response();
-        await securityGroupApi.createSecurityGroup(securityGroupBody,'inUse')
+        await securityGroupApi.createSecurityGroup(securityGroupBody)
             .then(data => {
                 securityGroupId = data.entry.id;
                 expect(data.entry.id).not.equal(null);
@@ -58,7 +57,7 @@ describe('Security Group API test', () => {
 
     it('get All Security Groups', async () => {
         securityGroupMock.getSecurityGroups200Response();
-        await securityGroupApi.getSecurityGroups(['inUse ', 0, 10])
+        await securityGroupApi.getSecurityGroups()
             .then(data => {
                 expect(data.list.entries.length).to.be.above(0);
             });
@@ -66,7 +65,7 @@ describe('Security Group API test', () => {
 
     it('get Security Group Information', async () => {
         securityGroupMock.getSecurityGroupInfo200Response(securityGroupId);
-        await securityGroupApi.getSecurityGroupInfo(securityGroupId,['inUse'])
+        await securityGroupApi.getSecurityGroupInfo(securityGroupId)
             .then(data => {
                 expect(data.entry.id).not.equal(null);
                 expect(data.entry.groupName).to.be.equal('Alfresco');
@@ -79,7 +78,7 @@ describe('Security Group API test', () => {
         const updatedSecurityGroupBody: SecurityGroupBody = {
             "groupName": "Nasa",
         }
-        await securityGroupApi.updateSecurityGroup(securityGroupId,updatedSecurityGroupBody,['inUse'])
+        await securityGroupApi.updateSecurityGroup(securityGroupId,updatedSecurityGroupBody)
             .then(data => {
                 expect(data.entry.id).not.equal(null);
                 expect(data.entry.groupName).to.be.equal('Nasa');

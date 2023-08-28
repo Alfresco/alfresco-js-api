@@ -16,7 +16,6 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApiConfig } from '../../src/alfrescoApiConfig';
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { WebscriptApi } from '../../src/api/content-custom-api';
 import { EcmAuthMock, WebScriptMock } from '../../test/mockObjects';
@@ -38,7 +37,7 @@ describe('WebScript', () => {
 
         const alfrescoJsApi = new AlfrescoApi({
             hostEcm
-        } as AlfrescoApiConfig);
+        });
 
         alfrescoJsApi.login('admin', 'admin').then(() => {
             done();

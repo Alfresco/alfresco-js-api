@@ -19,80 +19,36 @@ import { ResultListDataRepresentationGoogleDriveContent } from '../model/resultL
 import { BaseApi } from './base.api';
 
 /**
-* Integrationdrive service.
-* @module IntegrationdriveApi
+* IntegrationDriveApi service.
+* @module IntegrationDriveApi
 */
 export class IntegrationDriveApi extends BaseApi {
     /**
     * Drive Authorization
-    *
     * Returns Drive OAuth HTML Page
-    *
     * @return Promise<{}>
     */
     confirmAuthorisation(): Promise<any> {
-
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['text/html'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/google-drive/confirm-auth-request', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts);
+        return this.get({
+            path: '/api/enterprise/integration/google-drive/confirm-auth-request',
+            accepts: ['text/html']
+        });
     }
+
     /**
-        * List files and folders
-        *
-        *
-        *
-        * @param opts Optional parameters
-        * @param opts.filter filter
-        * @param opts.parent parent
-        * @param opts.currentFolderOnly currentFolderOnly
-        * @return Promise<ResultListDataRepresentationGoogleDriveContent>
-        */
-    getFiles(opts?: any): Promise<ResultListDataRepresentationGoogleDriveContent> {
-        opts = opts || {};
-        let postBody = null;
-
-        let pathParams = {
-
-        };
-
-        let queryParams = {
-            'filter': opts['filter'],
-            'parent': opts['parent'],
-            'currentFolderOnly': opts['currentFolderOnly']
-        };
-
-        let headerParams = {
-
-        };
-        let formParams = {
-        };
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/api/enterprise/integration/google-drive/files', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts, ResultListDataRepresentationGoogleDriveContent);
+    * List files and folders
+    *
+    * @param opts Optional parameters
+    * @param opts.filter {string} filter
+    * @param opts.parent {string} parent
+    * @param opts.currentFolderOnly {boolean} currentFolderOnly
+    * @return Promise<ResultListDataRepresentationGoogleDriveContent>
+    */
+    getFiles(opts?: { filter?: string; parent?: string; currentFolderOnly?: boolean }): Promise<ResultListDataRepresentationGoogleDriveContent> {
+        return this.get({
+            path: '/api/enterprise/integration/google-drive/files',
+            queryParams: opts,
+            returnType: ResultListDataRepresentationGoogleDriveContent
+        });
     }
-
 }

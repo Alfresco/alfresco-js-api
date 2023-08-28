@@ -16,6 +16,7 @@
  */
 
 import { BaseApi } from './base.api';
+import { throwIfNotDefined } from '../../../assert';
 
 export class ReportApi extends BaseApi {
 
@@ -23,278 +24,147 @@ export class ReportApi extends BaseApi {
      * Create the default reports
      */
     createDefaultReports() {
-        let postBody = null;
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/app/rest/reporting/default-reports', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.post({
+            path: '/app/rest/reporting/default-reports'
+        });
     }
 
     getTasksByProcessDefinitionId(reportId: string, processDefinitionId: string) {
-        let postBody = null;
+        throwIfNotDefined(reportId, 'reportId');
+        throwIfNotDefined(processDefinitionId, 'processDefinitionId');
 
-        if (reportId === undefined || reportId === null) {
-            throw "Missing param 'reportId' in getTasksByProcessDefinitionId";
-        }
-
-        if (processDefinitionId === undefined || processDefinitionId === null) {
-            throw "Missing param 'processDefinitionId' in getTasksByProcessDefinitionId";
-        }
-
-        let pathParams = {
-            'reportId': reportId
+        const pathParams = {
+            reportId
         };
-        let queryParams = {
-            'processDefinitionId': processDefinitionId
+        const queryParams = {
+            processDefinitionId
         };
-        let headerParams = {};
-        let formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/app/rest/reporting/report-params/{reportId}/tasks', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.get({
+            path: '/app/rest/reporting/report-params/{reportId}/tasks',
+            pathParams,
+            queryParams
+        });
     }
 
-    getReportsByParams(reportId: string, paramsQuery: any) {
-        let postBody = paramsQuery;
+    getReportsByParams(reportId: string, bodyParam: any) {
+        throwIfNotDefined(reportId, 'reportId');
 
-        if (reportId === undefined || reportId === null) {
-            throw "Missing param 'reportId' in getReportsByParams";
-        }
-
-        let pathParams = {
-            'reportId': reportId
+        const pathParams = {
+            reportId
         };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/app/rest/reporting/report-params/{reportId}', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.post({
+            path: '/app/rest/reporting/report-params/{reportId}',
+            pathParams,
+            bodyParam,
+        });
     }
 
     getProcessDefinitions() {
-        let postBody = null;
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/app/rest/reporting/process-definitions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.get({
+            path: '/app/rest/reporting/process-definitions'
+        });
     }
 
     getReportParams(reportId: string) {
-        let postBody = null;
+        throwIfNotDefined(reportId, 'reportId');
 
-        if (reportId === undefined || reportId === null) {
-            throw "Missing param 'reportId' in getReportParams";
-        }
-
-        let pathParams = {
-            'reportId': reportId
+        const pathParams = {
+            reportId
         };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/app/rest/reporting/report-params/{reportId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.get({
+            path: '/app/rest/reporting/report-params/{reportId}',
+            pathParams
+        });
     }
 
     getReportList() {
-        let postBody = null;
-
-        let pathParams = {};
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
-
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/app/rest/reporting/reports', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.get({
+            path: '/app/rest/reporting/reports',
+        });
     }
 
     updateReport(reportId: string, name: string) {
-        let postBody = {
-            'name': name
+        throwIfNotDefined(reportId, 'reportId');
+
+        const postBody = {
+            name
         };
 
-        if (reportId === undefined || reportId === null) {
-            throw "Missing param 'reportId' in updateReport";
-        }
-
-        let pathParams = {
-            'reportId': reportId
+        const pathParams = {
+            reportId
         };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/app/rest/reporting/reports/{reportId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.put({
+            path: '/app/rest/reporting/reports/{reportId}',
+            pathParams,
+            bodyParam: postBody
+        });
     }
-
-    /**
-     * Function to export a report
-     */
 
     /**
      * Export a report
      * @param {string} reportId
-     * @param {module:model/ReportExportQueryRepresentation} queryParams
+     * @param bodyParam
      */
-    exportToCsv(reportId: string, queryParams: { reportName?: string }) {
-        let postBody = queryParams;
+    exportToCsv(reportId: string, bodyParam: { reportName?: string }) {
+        throwIfNotDefined(reportId, 'reportId');
+        throwIfNotDefined(bodyParam, 'bodyParam');
+        throwIfNotDefined(bodyParam.reportName, 'reportName');
 
-        if (reportId === undefined || reportId === null) {
-            throw "Missing param 'reportId' in exportToCsv";
-        }
-
-        if (queryParams === undefined || queryParams === null) {
-            throw "Missing param 'queryParams' in exportToCsv";
-        }
-
-        if (queryParams.reportName === undefined || queryParams.reportName === null) {
-            throw "Missing param 'reportName' in exportToCsv";
-        }
-
-        let pathParams = {
+        const pathParams = {
             'reportId': reportId
         };
-        let headerParams = {};
-        let formParams = {};
-        queryParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/app/rest/reporting/reports/{reportId}/export-to-csv', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.post({
+            path: '/app/rest/reporting/reports/{reportId}/export-to-csv',
+            pathParams,
+            bodyParam
+        });
     }
-
-    /**
-     * Function to save a report
-     */
 
     /**
      * Save a report
      * @param {string} reportId
-     * @param {module:model/ReportSaveQueryRepresentation} queryParams
+     * @param opts
      */
-    saveReport(reportId: string, queryParams: { reportName?: string, __reportName?: string }) {
-        let postBody = queryParams;
+    saveReport(reportId: string, opts: { reportName?: string }) {
+        throwIfNotDefined(reportId, 'reportId');
+        throwIfNotDefined(opts, 'opts');
+        throwIfNotDefined(opts.reportName, 'reportName');
 
-        if (reportId === undefined || reportId === null) {
-            throw "Missing param 'reportId' in saveReport";
+        const bodyParam = {
+            reportName: opts.reportName,
+            __reportName: opts.reportName
         }
 
-        if (queryParams === undefined || queryParams === null) {
-            throw "Missing param 'queryParams' in queryParams";
-        }
-
-        if (queryParams.reportName === undefined || queryParams.reportName === null) {
-            throw "Missing param 'reportName' in exportToCsv";
-        }
-
-        queryParams.__reportName = queryParams.reportName;
-
-        let pathParams = {
+        const pathParams = {
             'reportId': reportId
         };
-        let headerParams = {};
-        let formParams = {};
-        queryParams = {
-        };
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/app/rest/reporting/reports/{reportId}', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.post({
+            path: '/app/rest/reporting/reports/{reportId}',
+            pathParams,
+            bodyParam,
+        });
     }
 
     /**
-     * Function to delete a report
-     */
-
-    /**
-     * Save a report
+     * Delete a report
      * @param {string} reportId
      */
     deleteReport(reportId: string) {
-        let postBody = null;
+        throwIfNotDefined(reportId, 'reportId');
 
-        if (reportId === undefined || reportId === null) {
-            throw "Missing param 'reportId' in delete";
-        }
-
-        let pathParams = {
-            'reportId': reportId
+        const pathParams = {
+            reportId
         };
-        let queryParams = {};
-        let headerParams = {};
-        let formParams = {};
 
-        let contentTypes = ['application/json'];
-        let accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/app/rest/reporting/reports/{reportId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts
-        );
+        return this.delete({
+            path: '/app/rest/reporting/reports/{reportId}',
+            pathParams
+        });
     }
-
 }
