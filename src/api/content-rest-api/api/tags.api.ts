@@ -265,10 +265,10 @@ parameter are returned in addition to those specified in the **fields** paramete
             where = opts.matching ? `(tag matches ('${opts.tag}'))` : `(tag='${opts.tag}')`;
         }
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv'),
+            'skipCount': opts?.skipCount,
+            'maxItems': opts?.maxItems,
+            'fields': buildCollectionParam(opts?.fields, 'csv'),
+            'include': buildCollectionParam(opts?.include, 'csv'),
             where
         };
 
@@ -324,9 +324,9 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'skipCount': opts?.skipCount,
+            'maxItems': opts?.maxItems,
+            'fields': buildCollectionParam(opts?.fields, 'csv')
         };
 
         const headerParams = {
