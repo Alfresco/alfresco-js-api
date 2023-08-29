@@ -20,6 +20,7 @@ import { DeclassificationExemptionEntry } from '../model/declassificationExempti
 import { DeclassificationExemptionsPaging } from '../model/declassificationExemptionsPaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
+import { GsPagingQuery } from './types';
 
 /**
 * DeclassificationExemptionsApi service.
@@ -85,14 +86,16 @@ JSON
             returnType: DeclassificationExemptionEntry
         });
     }
+
     /**
-        * Delete a declassification exemption
-        *
-        * Deletes the declassification exemption with id **declassificationExemptionId**. You can't delete a classification exemption that is being used to classify content.
-        *
-        * @param declassificationExemptionId The identifier for the declassification exemption
-        * @return Promise<{}>
-        */
+    * Delete a declassification exemption
+    *
+    * Deletes the declassification exemption with id **declassificationExemptionId**.
+    * You can't delete a classification exemption that is being used to classify content.
+    *
+    * @param declassificationExemptionId The identifier for the declassification exemption
+    * @return Promise<{}>
+    */
     deleteDeclassificationExemption(declassificationExemptionId: string): Promise<any> {
         throwIfNotDefined(declassificationExemptionId, 'declassificationExemptionId');
 
@@ -100,25 +103,18 @@ JSON
             declassificationExemptionId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/declassification-exemptions/{declassificationExemptionId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/declassification-exemptions/{declassificationExemptionId}',
+            pathParams
+        });
     }
     /**
         * List all declassification exemptions
         *
-        * Gets all declassification exemptions.
-        *
         * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param opts.maxItems The maximum number of items to return in the list.
         * @return Promise<DeclassificationExemptionsPaging>
         */
-    listDeclassificationExemptions(opts?: { skipCount?: number; maxItems?: number; }): Promise<DeclassificationExemptionsPaging> {
+    listDeclassificationExemptions(opts?: GsPagingQuery): Promise<DeclassificationExemptionsPaging> {
         return this.get({
             path: '/declassification-exemptions',
             queryParams: opts,

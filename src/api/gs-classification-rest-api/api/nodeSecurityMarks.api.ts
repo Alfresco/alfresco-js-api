@@ -19,6 +19,7 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { NodeSecurityMarkBody } from '../model/nodeSecurityMarkBody';
 import { SecurityMarkPaging } from '../model/securityMarkPaging';
+import { GsPagingQuery } from './types';
 
 /**
  * @module NodeSecurityMarksApi
@@ -50,10 +51,9 @@ export class NodeSecurityMarksApi extends BaseApi {
      * Get security marks on a node
      * @param nodeId The key for the node id.
      * @param opts Optional parameters
-     * @param opts.inUse The key for the security mark is in use or not.
      * @return Promise<SecurityMarkPaging>
      */
-     getSecurityMarksOnNode(nodeId: string, opts?: { inUse?: any }): Promise<SecurityMarkPaging> {
+     getSecurityMarksOnNode(nodeId: string, opts?: GsPagingQuery): Promise<SecurityMarkPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {

@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+export * from './types';
 export * from './classificationGuides.api';
 export * from './classificationReasons.api';
 export * from './declassificationExemptions.api';

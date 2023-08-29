@@ -20,6 +20,7 @@ import {
     AuthorityClearanceGroupPaging,
     NodeSecurityMarkBody, SecurityMarkEntry, SecurityMarkPaging
 } from '../model';
+import { GsPagingQuery } from './types';
 
 /**
  * AuthorityClearanceApi service.
@@ -30,11 +31,9 @@ export class AuthorityClearanceApi extends BaseApi {
      * Get the authority clearances for a single user/group
      * @param authorityId The name for the authority for which the clearance is to be fetched. Can be left blank in which case it will fetch it for all users with pagination
      * @param opts
-     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param opts.maxItems The maximum number of items to return in the list.
      * @return Promise<AuthorityClearanceGroupPaging>
      */
-    getAuthorityClearanceForAuthority(authorityId: string, opts?: { skipCount?: number; maxItems?: number }): Promise<AuthorityClearanceGroupPaging> {
+    getAuthorityClearanceForAuthority(authorityId: string, opts?: GsPagingQuery): Promise<AuthorityClearanceGroupPaging> {
         const pathParams = {
             authorityId
         };

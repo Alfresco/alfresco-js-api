@@ -26,6 +26,7 @@ import { TopicPaging } from '../model/topicPaging';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { GsPagingQuery } from './types';
 
 export interface CombinedInstructionsOpts {
     instructions?: any;
@@ -90,14 +91,12 @@ export class ClassificationGuidesApi extends BaseApi {
         throwIfNotDefined(topicId, 'topicId');
         throwIfNotDefined(topic, 'topic');
 
-        opts = opts || {};
-
         const pathParams = {
             topicId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
         return this.post({
@@ -162,13 +161,10 @@ export class ClassificationGuidesApi extends BaseApi {
             classificationGuideId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-guides/{classificationGuideId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/classification-guides/{classificationGuideId}',
+            pathParams
+        });
     }
 
     /**
@@ -186,18 +182,14 @@ export class ClassificationGuidesApi extends BaseApi {
             topicId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/topics/{topicId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/topics/{topicId}',
+            pathParams
+        });
     }
+
     /**
         * List all classification guides
-        *
-        * Gets all classification guides.
         *
         * @param opts Optional parameters
         * @param opts.include Returns additional information about the guide. The following optional fields can be requested:
@@ -218,15 +210,15 @@ export class ClassificationGuidesApi extends BaseApi {
 
         * @return Promise<ClassificationGuidePaging>
         */
-    listClassificationGuides(opts?: { include?: string[]; skipCount?: number; maxItems?: number; orderBy?: string[]; where?: string }): Promise<ClassificationGuidePaging> {
+    listClassificationGuides(opts?: { include?: string[]; orderBy?: string[]; where?: string } & GsPagingQuery): Promise<ClassificationGuidePaging> {
         opts = opts || {};
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'where': opts['where']
+            include: buildCollectionParam(opts?.include, 'csv'),
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            where: opts?.where
         };
 
         return this.get({
@@ -268,12 +260,10 @@ export class ClassificationGuidesApi extends BaseApi {
         */
     listSubtopics(topicId: string, opts?: {
         include?: string[];
-        skipCount?: number;
-        maxItems?: number;
         orderBy?: string[];
         where?: string;
         includeSource?: boolean;
-    }): Promise<SubtopicPaging> {
+    } & GsPagingQuery): Promise<SubtopicPaging> {
         throwIfNotDefined(topicId, 'topicId');
         opts = opts || {};
 
@@ -282,12 +272,12 @@ export class ClassificationGuidesApi extends BaseApi {
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'where': opts['where'],
-            'includeSource': opts['includeSource']
+            include: buildCollectionParam(opts?.include, 'csv'),
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            where: opts?.where,
+            includeSource: opts?.includeSource
         };
 
         return this.get({

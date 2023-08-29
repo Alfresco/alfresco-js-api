@@ -21,9 +21,10 @@ import { ClassificationReasonsPaging } from '../model/classificationReasonsPagin
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { GsFieldsQuery, GsPagingQuery } from './types';
 
 /**
-* Classificationreasons service.
+* ClassificationReasonsApi service.
 * @module ClassificationReasonsApi
 */
 export class ClassificationReasonsApi extends BaseApi {
@@ -101,43 +102,25 @@ JSON
             classificationReasonId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/classification-reasons/{classificationReasonId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/classification-reasons/{classificationReasonId}',
+            pathParams
+        });
     }
+
     /**
-        * List all classification reasons
-        *
-        * Gets all classification reasons.
-        *
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param opts.maxItems The maximum number of items to return in the list.
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-        * @return Promise<ClassificationReasonsPaging>
-        */
-    listClassificationReasons(opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<ClassificationReasonsPaging> {
+    * List all classification reasons
+    *
+    * @param opts Optional parameters
+    * @return Promise<ClassificationReasonsPaging>
+    */
+    listClassificationReasons(opts?: GsPagingQuery & GsFieldsQuery): Promise<ClassificationReasonsPaging> {
         opts = opts || {};
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
