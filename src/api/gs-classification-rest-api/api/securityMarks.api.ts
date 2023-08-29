@@ -20,18 +20,7 @@ import { throwIfNotDefined } from '../../../assert';
 import { SecurityMarkEntry } from '../model/securityMarkEntry';
 import { SecurityMarkBody } from '../model/securityMarkBody';
 import { SecurityMarkPaging } from '../model/securityMarkPaging';
-
-export interface GetSecurityMarksOpts {
-    /**
-     * Returns additional information about the security group. The following optional fields can be requested:
-     * - inUse - A flag indicating whether the security group is in use or not.
-     */
-    include?: string;
-    // The number of entities that exist in the collection before those included in this list.
-    skipCount?: number;
-    // The maximum number of items to return in the list.
-    maxItems?: number;
-}
+import { GsPagingQuery } from './types';
 
 /**
  * Security Marks API.
@@ -43,12 +32,9 @@ export class SecurityMarksApi extends BaseApi {
      * Gets the value for a selected **securityGroupId**.
      * @param securityGroupId The key for the security group id.
      * @param opts Options
-     * @param opts.inUse The key for the security mark is in use or not.
-     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param opts.maxItems The maximum number of items to return in the list.
      * @return Promise<SecurityMarkPaging>
      */
-    getSecurityMarks(securityGroupId: string, opts?: GetSecurityMarksOpts): Promise<SecurityMarkPaging> {
+    getSecurityMarks(securityGroupId: string, opts?: GsPagingQuery): Promise<SecurityMarkPaging> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
 
         const pathParams = {
@@ -147,19 +133,9 @@ export class SecurityMarksApi extends BaseApi {
             securityMarkId,
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/security-groups/{securityGroupId}/security-marks/{securityMarkId}',
-            'DELETE',
-            pathParams,
-            {},
-            {},
-            {},
-            null,
-            contentTypes,
-            accepts
-        );
+        return this.delete({
+            path: '/security-groups/{securityGroupId}/security-marks/{securityMarkId}',
+            pathParams
+        });
     }
 }

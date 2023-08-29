@@ -19,14 +19,7 @@ import { BaseApi } from './base.api';
 import { SecurityGroupPaging } from '../model/securityGroupPaging';
 import { SecurityGroupBody } from '../model/securityGroupBody';
 import { SecurityGroupEntry } from '../model/securityGroupEntry';
-
-export type GroupInclude = {
-    /**
-     * Returns additional information about the security group. The following optional fields can be requested:
-     *  - inUse - A flag indicating whether the security group is in use or not.
-     */
-    include?: string;
-}
+import { GsGroupInclude, GsPagingQuery } from './types';
 
 /**
  * SecurityGroupsApi service.
@@ -36,12 +29,9 @@ export class SecurityGroupsApi extends BaseApi {
     /**
      * Get All security groups
      * @param opts Optional parameters
-     * @param opts.include Additional information about the security group
-     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-     * @param opts.maxItems The maximum number of items to return in the list.
      * @return Promise<SecurityGroupPaging>
      */
-    getSecurityGroups(opts?: { skipCount?: number; maxItems?: number; } & GroupInclude): Promise<SecurityGroupPaging> {
+    getSecurityGroups(opts?: GsPagingQuery & GsGroupInclude): Promise<SecurityGroupPaging> {
         return this.get({
             path: '/security-groups',
             queryParams: opts,
@@ -53,10 +43,9 @@ export class SecurityGroupsApi extends BaseApi {
      * Create security group
      * @param securityGroupBody securityGroupBody.
      * @param opts Optional parameters
-     * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
-    createSecurityGroup(securityGroupBody: SecurityGroupBody, opts?: GroupInclude): Promise<SecurityGroupEntry> {
+    createSecurityGroup(securityGroupBody: SecurityGroupBody, opts?: GsGroupInclude): Promise<SecurityGroupEntry> {
         return this.post({
             path: '/security-groups',
             queryParams: opts,
@@ -68,10 +57,9 @@ export class SecurityGroupsApi extends BaseApi {
      * Get a security groups information
      * @param securityGroupId The Key of Security Group id for which info is required
      * @param opts Optional parameters
-     * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
-    getSecurityGroupInfo(securityGroupId: string, opts?: GroupInclude): Promise<SecurityGroupEntry> {
+    getSecurityGroupInfo(securityGroupId: string, opts?: GsGroupInclude): Promise<SecurityGroupEntry> {
         const pathParams = {
             securityGroupId,
         };
@@ -88,10 +76,9 @@ export class SecurityGroupsApi extends BaseApi {
      * @param securityGroupId The Key of Security Group id for which info is required
      * @param securityGroupBody SecurityGroupBody
      * @param opts Optional parameters
-     * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
-    updateSecurityGroup(securityGroupId: string, securityGroupBody: SecurityGroupBody, opts?: GroupInclude): Promise<SecurityGroupEntry> {
+    updateSecurityGroup(securityGroupId: string, securityGroupBody: SecurityGroupBody, opts?: GsGroupInclude): Promise<SecurityGroupEntry> {
         const pathParams = {
             securityGroupId,
         };
