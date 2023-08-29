@@ -20,6 +20,14 @@ import { SecurityGroupPaging } from '../model/securityGroupPaging';
 import { SecurityGroupBody } from '../model/securityGroupBody';
 import { SecurityGroupEntry } from '../model/securityGroupEntry';
 
+export type GroupInclude = {
+    /**
+     * Returns additional information about the security group. The following optional fields can be requested:
+     *  - inUse - A flag indicating whether the security group is in use or not.
+     */
+    include?: string;
+}
+
 /**
  * SecurityGroupsApi service.
  * @module SecurityGroupsApi
@@ -33,7 +41,7 @@ export class SecurityGroupsApi extends BaseApi {
      * @param opts.maxItems The maximum number of items to return in the list.
      * @return Promise<SecurityGroupPaging>
      */
-    getSecurityGroups(opts?: { include?: string[], skipCount?: number; maxItems?: number; }): Promise<SecurityGroupPaging> {
+    getSecurityGroups(opts?: { skipCount?: number; maxItems?: number; } & GroupInclude): Promise<SecurityGroupPaging> {
         return this.get({
             path: '/security-groups',
             queryParams: opts,
@@ -48,7 +56,7 @@ export class SecurityGroupsApi extends BaseApi {
      * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
-    createSecurityGroup(securityGroupBody: SecurityGroupBody, opts?: { include?: string[] }): Promise<SecurityGroupEntry> {
+    createSecurityGroup(securityGroupBody: SecurityGroupBody, opts?: GroupInclude): Promise<SecurityGroupEntry> {
         return this.post({
             path: '/security-groups',
             queryParams: opts,
@@ -63,7 +71,7 @@ export class SecurityGroupsApi extends BaseApi {
      * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
-    getSecurityGroupInfo(securityGroupId: string, opts?: { include?: string[] }): Promise<SecurityGroupEntry> {
+    getSecurityGroupInfo(securityGroupId: string, opts?: GroupInclude): Promise<SecurityGroupEntry> {
         const pathParams = {
             securityGroupId,
         };
@@ -83,7 +91,7 @@ export class SecurityGroupsApi extends BaseApi {
      * @param opts.include additional information about the security group
      * @return Promise<SecurityGroupEntry>
      */
-    updateSecurityGroup(securityGroupId: string, securityGroupBody: SecurityGroupBody, opts?: { include?: string[] }): Promise<SecurityGroupEntry> {
+    updateSecurityGroup(securityGroupId: string, securityGroupBody: SecurityGroupBody, opts?: GroupInclude): Promise<SecurityGroupEntry> {
         const pathParams = {
             securityGroupId,
         };
@@ -104,8 +112,9 @@ export class SecurityGroupsApi extends BaseApi {
      */
     deleteSecurityGroup(securityGroupId: string): Promise<any> {
         const pathParams = { securityGroupId };
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-        return this.apiClient.callApi('/security-groups/{securityGroupId}', 'DELETE', pathParams, {}, {}, {}, null, contentTypes, accepts);
+        return this.delete({
+            path: '/security-groups/{securityGroupId}',
+            pathParams
+        });
     }
 }
