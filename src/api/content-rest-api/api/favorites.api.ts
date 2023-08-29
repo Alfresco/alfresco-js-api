@@ -25,6 +25,7 @@ import { SitePaging } from '../model/sitePaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './types';
 
 /**
 * Favorites service.
@@ -198,21 +199,9 @@ JSON
     * @param personId The identifier of a person.
     * @param favoriteSiteBodyCreate The id of the site to favorite.
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<FavoriteSiteEntry>
     */
-    createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts?: { fields?: string[] }): Promise<FavoriteSiteEntry> {
+    createSiteFavorite(personId: string, favoriteSiteBodyCreate: FavoriteSiteBodyCreate, opts?: ContentFieldsQuery): Promise<FavoriteSiteEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(favoriteSiteBodyCreate, 'favoriteSiteBodyCreate');
 
@@ -232,13 +221,13 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: FavoriteSiteEntry
         });
     }
-/**
+
+    /**
     * Delete a favorite
     *
     * Deletes **favoriteId** as a favorite of person **personId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
+    *
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
     *
     * @param personId The identifier of a person.
     * @param favoriteId The identifier of a favorite.
@@ -258,16 +247,16 @@ You can use the -me- string in place of <personId> to specify the currently auth
             pathParams
         });
     }
-/**
+
+    /**
     * Delete a site favorite
     *
     * **Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
-Use /people/{personId}/favorites/{favoriteId} instead.
-
-Deletes site **siteId** from the favorite site list of person **personId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
+    * Use /people/{personId}/favorites/{favoriteId} instead.
+    *
+    * Deletes site **siteId** from the favorite site list of person **personId**.
+    *
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
     *
     * @param personId The identifier of a person.
     * @param siteId The identifier of a site.
@@ -398,27 +387,9 @@ You can use the -me- string in place of <personId> to specify the currently auth
     *
     * @param personId The identifier of a person.
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<SitePaging>
     */
-    listFavoriteSitesForPerson(personId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<SitePaging> {
+    listFavoriteSitesForPerson(personId: string, opts?: ContentPagingQuery & ContentFieldsQuery): Promise<SitePaging> {
         throwIfNotDefined(personId, 'personId');
 
         const pathParams = {
@@ -478,12 +449,6 @@ SQL
     *
     * @param personId The identifier of a person.
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
@@ -493,32 +458,12 @@ above to check if any fields used in this method have a descending default searc
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
     * @param opts.where A string to restrict the returned objects by using a predicate.
-    * @param opts.include Returns additional information about favorites, the following optional fields can be requested:
-* path (note, this only applies to files and folders)
-* properties
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<FavoritePaging>
     */
     listFavorites(personId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
         orderBy?: string[];
         where?: string;
-        include?: string[];
-        fields?: string[];
-    }): Promise<FavoritePaging> {
+    } & ContentPagingQuery & ContentIncludeQuery & ContentFieldsQuery ): Promise<FavoritePaging> {
         throwIfNotDefined(personId, 'personId');
         opts = opts || {};
 
@@ -527,12 +472,12 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'skipCount': opts?.skipCount,
+            'maxItems': opts?.maxItems,
+            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
+            'where': opts?.where,
+            'include': buildCollectionParam(opts?.include, 'csv'),
+            'fields': buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({

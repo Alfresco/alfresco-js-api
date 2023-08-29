@@ -31,6 +31,7 @@ import { NodeEntry } from '../model/nodeEntry';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { ContentPagingQuery } from './types';
 
 export type NodesIncludeQuery = {
     /**
@@ -61,19 +62,6 @@ export type NodesIncludeQuery = {
      */
     fields?: string[];
 }
-
-export type NodesPagingQuery = {
-    /**
-     * The number of entities that exist in the collection before those included in this list.
-     * If not supplied then the default value is 0.
-     */
-    skipCount?: number;
-    /**
-     * The maximum number of items to return in the list.
-     * If not supplied then the default value is 100.
-     */
-    maxItems?: number;
-};
 
 export interface CreateNodeOpts extends NodesIncludeQuery {
     [key: string]: any;
@@ -854,12 +842,6 @@ You can use any of the following fields to order the results:
 * -root-
 
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
@@ -869,46 +851,15 @@ above to check if any fields used in this method have a descending default searc
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
     * @param opts.where Optionally filter the list. Here are some examples:
-
-*   where=(isFolder=true)
-
-*   where=(isFile=true)
-
-*   where=(nodeType='my:specialNodeType')
-
-*   where=(nodeType='my:specialNodeType INCLUDESUBTYPES')
-
-*   where=(isPrimary=true)
-
-*   where=(assocType='my:specialAssocType')
-
-*   where=(isPrimary=false and assocType='my:specialAssocType')
-
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* aspectNames
-* association
-* isLink
-* isFavorite
-* isLocked
-* path
-* properties
-* permissions
-
+    *   where=(isFolder=true)
+    *   where=(isFile=true)
+    *   where=(nodeType='my:specialNodeType')
+    *   where=(nodeType='my:specialNodeType INCLUDESUBTYPES')
+    *   where=(isPrimary=true)
+    *   where=(assocType='my:specialAssocType')
+    *   where=(isPrimary=false and assocType='my:specialAssocType')
     * @param opts.relativePath Return information on children in the folder resolved by this path. The path is relative to **nodeId**.
     * @param opts.includeSource Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**.
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<NodeChildAssociationPaging>
     */
     listNodeChildren(nodeId: string, opts?: {
@@ -916,7 +867,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         where?: string;
         relativePath?: string;
         includeSource?: boolean;
-    } & NodesIncludeQuery & NodesPagingQuery ): Promise<NodeChildAssociationPaging> {
+    } & NodesIncludeQuery & ContentPagingQuery): Promise<NodeChildAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
@@ -958,47 +909,16 @@ The list includes both the primary parent and any secondary parents.
 
     * @param opts Optional parameters
     * @param opts.where Optionally filter the list by **assocType** and/or **isPrimary**. Here are some example filters:
-
 *   where=(assocType='my:specialAssocType')
-
 *   where=(isPrimary=true)
-
 *   where=(isPrimary=false and assocType='my:specialAssocType')
-
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* aspectNames
-* isLink
-* isFavorite
-* isLocked
-* path
-* properties
-
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on **nodeId**
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<NodeAssociationPaging>
     */
     listParents(nodeId: string, opts?: {
         where?: string;
         includeSource?: boolean;
-    } & NodesIncludeQuery & NodesPagingQuery ): Promise<NodeAssociationPaging> {
+    } & NodesIncludeQuery & ContentPagingQuery): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -1040,40 +960,13 @@ Gets a list of secondary child nodes that are associated with the current parent
     *
     *   where=(assocType='my:specialAssocType')
     *
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-    * - allowableOperations
-    * - aspectNames
-    * - isLink
-    * - isFavorite
-    * - isLocked
-    * - path
-    * - properties
-    *
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on **nodeId**
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<NodeChildAssociationPaging>
     */
     listSecondaryChildren(nodeId: string, opts?: {
         where?: string;
         includeSource?: boolean;
-    } & NodesIncludeQuery & NodesPagingQuery ): Promise<NodeChildAssociationPaging> {
+    } & NodesIncludeQuery & ContentPagingQuery): Promise<NodeChildAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -1108,30 +1001,7 @@ Gets a list of source nodes that are associated with the current target **nodeId
     * @param nodeId The identifier of a target node.
     * @param opts Optional parameters
     * @param opts.where Optionally filter the list by **assocType**. Here's an example:
-
-*   where=(assocType='my:specialAssocType')
-
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* aspectNames
-* isLink
-* isFavorite
-* isLocked
-* path
-* properties
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
+    *   where=(assocType='my:specialAssocType')
     * @return Promise<NodeAssociationPaging>
     */
     listSourceAssociations(nodeId: string, opts?: {
@@ -1173,7 +1043,7 @@ parameter are returned in addition to those specified in the **fields** paramete
     */
     listTargetAssociations(nodeId: string, opts?: {
         where?: string;
-    } & NodesIncludeQuery & NodesPagingQuery): Promise<NodeAssociationPaging> {
+    } & NodesIncludeQuery & ContentPagingQuery): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 

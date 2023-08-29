@@ -22,6 +22,7 @@ import { ActionExecResultEntry } from '../model/actionExecResultEntry';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { ContentFieldsQuery, ContentPagingQuery } from './types';
 
 /**
 * Actions service.
@@ -129,12 +130,6 @@ pending execution. The ID may be used, for example to correlate an execution wit
     *
     *
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
@@ -142,29 +137,16 @@ Each field has a default sort order, which is normally ascending order. Read the
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<ActionDefinitionList>
     */
-    listActions(opts?: { skipCount?: number; maxItems?: number; orderBy?: string[]; fields?: string[] }): Promise<ActionDefinitionList> {
+    listActions(opts?: { orderBy?: string[] } & ContentPagingQuery & ContentFieldsQuery): Promise<ActionDefinitionList> {
         opts = opts || {};
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -191,12 +173,6 @@ You can use any of the following fields to order the results:
     *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
@@ -204,22 +180,9 @@ Each field has a default sort order, which is normally ascending order. Read the
 above to check if any fields used in this method have a descending default search order.
 
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<ActionDefinitionList>
     */
-    nodeActions(nodeId: string, opts?: { skipCount?: number; maxItems?: number; orderBy?: string[]; fields?: string[] }): Promise<ActionDefinitionList> {
+    nodeActions(nodeId: string, opts?: { orderBy?: string[]; } & ContentPagingQuery & ContentFieldsQuery): Promise<ActionDefinitionList> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -228,10 +191,10 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({

@@ -25,89 +25,9 @@ import { GroupPaging } from '../model/groupPaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
-
-export interface CreateGroupOpts {
-    /**
-     * Returns additional information about the group.
-     * The following optional fields can be requested:
-     * - parentIds
-     * - zones
-     */
-    include?: string[];
-
-    /**
-     * A list of field names.
-     *
-     * You can use this parameter to restrict the fields
-     * returned within a response if, for example, you want to save on overall bandwidth.
-     *
-     * The list applies to a returned individual entity or entries within a collection.
-     *
-     * If the API method also supports the **include**
-     * parameter, then the fields specified in the **include**
-     * parameter are returned in addition to those specified in the **fields** parameter.
-     */
-    fields?: string[];
-}
-
-export interface CreateGroupMembershipOpts {
-    /**
-     * A list of field names.
-     *
-     * You can use this parameter to restrict the fields
-     * returned within a response if, for example, you want to save on overall bandwidth.
-     *
-     * The list applies to a returned individual
-     * entity or entries within a collection.
-     *
-     * If the API method also supports the **include**
-     * parameter, then the fields specified in the **include**
-     * parameter are returned in addition to those specified in the **fields** parameter.
-     */
-    fields?: string[];
-}
-
-export interface DeleteGroupOpts {
-    /**
-     * If **true** then deletion will be applied in cascade to subgroups. (default to false)
-     */
-    cascade?: boolean;
-}
-
-export interface GetGroupOpts {
-    /**
-     * Returns additional information about the group. The following optional fields can be requested:
-     * - parentIds
-     * - zones
-     */
-    include?: string[],
-    /**
-     * A list of field names.
-     *
-     * You can use this parameter to restrict the fields
-     * returned within a response if, for example, you want to save on overall bandwidth.
-     *
-     * The list applies to a returned individual
-     * entity or entries within a collection.
-     *
-     * If the API method also supports the **include**
-     * parameter, then the fields specified in the **include**
-     * parameter are returned in addition to those specified in the **fields** parameter.
-     */
-    fields?: string[]
-}
+import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './types';
 
 export interface ListGroupMembershipsOpts {
-    /**
-     * The number of entities that exist in the collection before those included in this list.
-     * If not supplied then the default value is 0.
-     */
-    skipCount?: number;
-    /**
-     * The maximum number of items to return in the list.
-     * If not supplied then the default value is 100.
-     */
-    maxItems?: number;
     /**
      * A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
      * sort the list by one or more fields.
@@ -120,56 +40,9 @@ export interface ListGroupMembershipsOpts {
     orderBy?: string[];
     // A string to restrict the returned objects by using a predicate.
     where?: string;
-    /**
-     * A list of field names.
-     *
-     * You can use this parameter to restrict the fields
-     * returned within a response if, for example, you want to save on overall bandwidth.
-     *
-     * The list applies to a returned individual
-     * entity or entries within a collection.
-     *
-     * If the API method also supports the **include**
-     * parameter, then the fields specified in the **include**
-     * parameter are returned in addition to those specified in the **fields** parameter.
-     */
-    fields?: string[];
-}
-
-export interface UpdateGroupOpts {
-    /**
-     * Returns additional information about the group. The following optional fields can be requested:
-     * - parentIds
-     * - zones
-     */
-    include?: string[];
-    /**
-     * A list of field names.
-     *
-     * You can use this parameter to restrict the fields
-     * returned within a response if, for example, you want to save on overall bandwidth.
-     *
-     * The list applies to a returned individual
-     * entity or entries within a collection.
-     *
-     * If the API method also supports the **include**
-     * parameter, then the fields specified in the **include**
-     * parameter are returned in addition to those specified in the **fields** parameter.
-     */
-    fields?: string[];
 }
 
 export interface GroupPagingOpts {
-    /**
-     * The number of entities that exist in the collection before those included in this list.
-     * If not supplied then the default value is 0.
-     */
-    skipCount?: number;
-    /**
-     * The maximum number of items to return in the list.
-     * If not supplied then the default value is 100.
-     */
-    maxItems?: number;
     /**
      * A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
      * sort the list by one or more fields.
@@ -181,29 +54,9 @@ export interface GroupPagingOpts {
      */
     orderBy?: string[];
     /**
-     * Returns additional information about the group. The following optional fields can be requested:
-     * - parentIds
-     * - zones
-     */
-    include?: string[];
-    /**
      * A string to restrict the returned objects by using a predicate.
      */
     where?: string;
-    /**
-     * A list of field names.
-     *
-     * You can use this parameter to restrict the fields
-     * returned within a response if, for example, you want to save on overall bandwidth.
-     *
-     * The list applies to a returned individual
-     * entity or entries within a collection.
-     *
-     * If the API method also supports the **include**
-     * parameter, then the fields specified in the **include**
-     * parameter are returned in addition to those specified in the **fields** parameter.
-     */
-    fields?: string[];
 }
 
 /**
@@ -236,7 +89,7 @@ You must have admin rights to create a group.
     * @param opts Optional parameters
     * @return Promise<GroupEntry>
     */
-    createGroup(groupBodyCreate: GroupBodyCreate, opts?: CreateGroupOpts): Promise<GroupEntry> {
+    createGroup(groupBodyCreate: GroupBodyCreate, opts?: ContentIncludeQuery & ContentFieldsQuery): Promise<GroupEntry> {
         throwIfNotDefined(groupBodyCreate, 'groupBodyCreate');
 
         const queryParams = {
@@ -271,7 +124,7 @@ You must have admin rights to create a group membership.
     * @param opts Optional parameters
     * @return Promise<GroupMemberEntry>
     */
-    createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts?: CreateGroupMembershipOpts): Promise<GroupMemberEntry> {
+    createGroupMembership(groupId: string, groupMembershipBodyCreate: GroupMembershipBodyCreate, opts?: ContentFieldsQuery): Promise<GroupMemberEntry> {
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(groupMembershipBodyCreate, 'groupMembershipBodyCreate');
 
@@ -306,7 +159,7 @@ You must have admin rights to delete a group.
     * @param opts Optional parameters
     * @return Promise
     */
-    deleteGroup(groupId: string, opts?: DeleteGroupOpts): Promise<void> {
+    deleteGroup(groupId: string, opts?: { cascade?: boolean }): Promise<void> {
         throwIfNotDefined(groupId, 'groupId');
         opts = opts || {};
 
@@ -373,7 +226,7 @@ You can use the **include** parameter to return additional information.
     * @param opts Optional parameters
     * @return Promise<GroupEntry>
     */
-    getGroup(groupId: string, opts?: GetGroupOpts): Promise<GroupEntry> {
+    getGroup(groupId: string, opts?: ContentIncludeQuery & ContentFieldsQuery): Promise<GroupEntry> {
         throwIfNotDefined(groupId, 'groupId');
 
         const pathParams = {
@@ -416,7 +269,7 @@ You can override the default by using the **orderBy** parameter. You can specify
     * @param opts Optional parameters
     * @return Promise<GroupMemberPaging>
     */
-    listGroupMemberships(groupId: string, opts?: ListGroupMembershipsOpts): Promise<GroupMemberPaging> {
+    listGroupMemberships(groupId: string, opts?: ListGroupMembershipsOpts & ContentPagingQuery & ContentFieldsQuery): Promise<GroupMemberPaging> {
         throwIfNotDefined(groupId, 'groupId');
 
         const pathParams = {
@@ -510,7 +363,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<GroupPaging>
     */
-    listGroupMembershipsForPerson(personId: string, opts?: GroupPagingOpts): Promise<GroupPaging> {
+    listGroupMembershipsForPerson(personId: string, opts?: GroupPagingOpts & ContentPagingQuery & ContentIncludeQuery & ContentFieldsQuery): Promise<GroupPaging> {
         throwIfNotDefined(personId, 'personId');
 
         const pathParams = {
@@ -571,7 +424,7 @@ You can override the default by using the **orderBy** parameter. You can specify
     * @param opts Optional parameters
     * @return Promise<GroupPaging>
     */
-    listGroups(opts?: GroupPagingOpts): Promise<GroupPaging> {
+    listGroups(opts?: GroupPagingOpts & ContentPagingQuery & ContentIncludeQuery & ContentFieldsQuery): Promise<GroupPaging> {
         const queryParams = {
             skipCount: opts?.skipCount,
             maxItems: opts?.maxItems,
@@ -602,7 +455,7 @@ You must have admin rights to update a group.
     * @param opts Optional parameters
     * @return Promise<GroupEntry>
     */
-    updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts?: UpdateGroupOpts): Promise<GroupEntry> {
+    updateGroup(groupId: string, groupBodyUpdate: GroupBodyUpdate, opts?: ContentIncludeQuery & ContentFieldsQuery): Promise<GroupEntry> {
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(groupBodyUpdate, 'groupBodyUpdate');
 

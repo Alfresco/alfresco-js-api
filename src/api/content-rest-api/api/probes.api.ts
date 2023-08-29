@@ -45,31 +45,16 @@ The liveness probe should then be used to check the repository is still respondi
     * @return Promise<ProbeEntry>
     */
     getProbe(probeId: string): Promise<ProbeEntry> {
-
         throwIfNotDefined(probeId, 'probeId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'probeId': probeId
+            probeId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/probes/{probeId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , ProbeEntry);
+        return this.get({
+            path: '/probes/{probeId}',
+            pathParams,
+            returnType: ProbeEntry
+        });
     }
-
 }

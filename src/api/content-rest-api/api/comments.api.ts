@@ -21,6 +21,7 @@ import { CommentPaging } from '../model/commentPaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { ContentFieldsQuery, ContentPagingQuery } from './types';
 
 /**
 * Comments service.
@@ -81,21 +82,9 @@ JSON
     * @param nodeId The identifier of a node.
     * @param commentBodyCreate The comment text. Note that you can also provide a list of comments.
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<CommentEntry>
     */
-    createComment(nodeId: string, commentBodyCreate: CommentBody, opts?: { fields?: string[] }): Promise<CommentEntry> {
+    createComment(nodeId: string, commentBodyCreate: CommentBody, opts?: ContentFieldsQuery): Promise<CommentEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentBodyCreate, 'commentBodyCreate');
 
@@ -145,27 +134,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<CommentPaging>
     */
-    listComments(nodeId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<CommentPaging> {
+    listComments(nodeId: string, opts?: ContentPagingQuery & ContentFieldsQuery): Promise<CommentPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
@@ -194,21 +165,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @param commentId The identifier of a comment.
     * @param commentBodyUpdate The JSON representing the comment to be updated.
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<CommentEntry>
     */
-    updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: { fields?: string[] }): Promise<CommentEntry> {
+    updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: ContentFieldsQuery): Promise<CommentEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentId, 'commentId');
         throwIfNotDefined(commentBodyUpdate, 'commentBodyUpdate');

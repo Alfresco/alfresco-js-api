@@ -19,12 +19,12 @@ import { RMNodeBodyCreateWithRelativePath } from '../model/rMNodeBodyCreateWithR
 import { UnfiledRecordFolderAssociationPaging } from '../model/unfiledRecordFolderAssociationPaging';
 import { UnfiledRecordFolderBodyUpdate } from '../model/unfiledRecordFolderBodyUpdate';
 import { UnfiledRecordFolderEntry } from '../model/unfiledRecordFolderEntry';
-import { BaseApi } from './base.api';
+import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Unfiledrecordfolders service.
+* UnfiledRecordFoldersApi service.
 * @module UnfiledRecordFoldersApi
 */
 export class UnfiledRecordFoldersApi extends BaseApi {
@@ -134,42 +134,22 @@ JSON
     * @param nodeBodyCreate The node information to create.
     * @param opts Optional parameters
     * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-
-    * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
-* allowableOperations
-* path
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<UnfiledRecordFolderAssociationPaging>
     */
     createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: {
         autoRename?: boolean;
-        include?: string[];
-        fields?: string[];
-    }): Promise<UnfiledRecordFolderAssociationPaging> {
+    } & RecordsIncludeQuery ): Promise<UnfiledRecordFolderAssociationPaging> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
-        opts = opts || {};
 
         const pathParams = {
-            'unfiledRecordFolderId': unfiledRecordFolderId
+            unfiledRecordFolderId
         };
 
         const queryParams = {
-            'autoRename': opts['autoRename'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            autoRename: opts?.autoRename,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.post({
@@ -194,16 +174,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
 
         const pathParams = {
-            'unfiledRecordFolderId': unfiledRecordFolderId
+            unfiledRecordFolderId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/unfiled-record-folders/{unfiledRecordFolderId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/unfiled-record-folders/{unfiledRecordFolderId}',
+            pathParams
+        });
     }
     /**
         * Get the unfiled record folder
@@ -217,42 +194,22 @@ parameter are returned in addition to those specified in the **fields** paramete
         *
         * @param unfiledRecordFolderId The identifier of an unfiled record folder.
         * @param opts Optional parameters
-        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * path
-
         * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
-
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<UnfiledRecordFolderEntry>
         */
     getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: {
-        include?: string[];
-        fields?: string[];
         relativePath?: string;
-    }): Promise<UnfiledRecordFolderEntry> {
+    } & RecordsIncludeQuery): Promise<UnfiledRecordFolderEntry> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
-        opts = opts || {};
 
         const pathParams = {
-            'unfiledRecordFolderId': unfiledRecordFolderId
+            unfiledRecordFolderId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'relativePath': opts['relativePath'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            relativePath: opts?.relativePath,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -262,61 +219,29 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: UnfiledRecordFolderEntry
         });
     }
+
     /**
-        * List unfiled record folder's children
-        *
-        * Returns a list of records or unfiled record folders.
-
-    Minimal information for each child is returned by default.
-
-    You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-        *
-        * @param unfiledRecordFolderId The identifier of an unfiled record folder.
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param opts.maxItems The maximum number of items to return in the list.
-        * @param opts.where Optionally filter the list. Here are some examples:
-
-    *   where=(isRecord=true)
-
-    *   where=(isUnfiledRecordFolder=false)
-
-    *   where=(nodeType='cm:content INCLUDESUBTYPES')
-
-        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * aspectNames
-    * association
-    * path
-    * properties
-
-        * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
-
-        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-        * @return Promise<UnfiledRecordFolderAssociationPaging>
-        */
+    * List unfiled record folder's children
+    *
+    * Minimal information for each child is returned by default.
+    *
+    * You can use the **include** parameter (include=allowableOperations) to return additional information.
+    *
+    * @param unfiledRecordFolderId The identifier of an unfiled record folder.
+    * @param opts Optional parameters
+    * @param opts.where Optionally filter the list. Here are some examples:
+    *  - where=(isRecord=true)
+    *  - where=(isUnfiledRecordFolder=false)
+    *  - where=(nodeType='cm:content INCLUDESUBTYPES')
+    * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+    * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
+    * @return Promise<UnfiledRecordFolderAssociationPaging>
+    */
     listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
         where?: string;
-        include?: string[];
         relativePath?: string[];
         includeSource?: boolean;
-        fields?: string[];
-    }): Promise<UnfiledRecordFolderAssociationPaging> {
+    } & RecordsIncludeQuery & RecordsPagingQuery ): Promise<UnfiledRecordFolderAssociationPaging> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         opts = opts || {};
 
@@ -325,13 +250,13 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'relativePath': opts['relativePath'],
-            'includeSource': opts['includeSource'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'skipCount': opts?.skipCount,
+            'maxItems': opts?.maxItems,
+            'where': opts?.where,
+            'include': buildCollectionParam(opts?.include, 'csv'),
+            'relativePath': opts?.relativePath,
+            'includeSource': opts?.includeSource,
+            'fields': buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -368,42 +293,23 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param unfiledRecordFolderId The identifier of an unfiled record folder.
         * @param unfiledRecordFolderBodyUpdate The record folder information to update.
         * @param opts Optional parameters
-        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * path
-
         * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<UnfiledRecordFolderEntry>
         */
     updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: {
-        include?: string[];
         includeSource?: boolean;
-        fields?: string[];
-    }): Promise<UnfiledRecordFolderEntry> {
+    } & RecordsIncludeQuery): Promise<UnfiledRecordFolderEntry> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         throwIfNotDefined(unfiledRecordFolderBodyUpdate, 'unfiledRecordFolderBodyUpdate');
-        opts = opts || {};
 
         const pathParams = {
             unfiledRecordFolderId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'includeSource': opts['includeSource'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            includeSource: opts?.includeSource,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.put({

@@ -19,7 +19,7 @@ import { RMNodeBodyCreate } from '../model/rMNodeBodyCreate';
 import { UnfiledContainerAssociationPaging } from '../model/unfiledContainerAssociationPaging';
 import { UnfiledContainerEntry } from '../model/unfiledContainerEntry';
 import { UnfiledRecordContainerBodyUpdate } from '../model/unfiledRecordContainerBodyUpdate';
-import { BaseApi } from './base.api';
+import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
@@ -134,52 +134,34 @@ JSON
     * @param nodeBodyCreate The node information to create.
     * @param opts Optional parameters
     * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-
-    * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
-* allowableOperations
-* path
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<UnfiledContainerAssociationPaging>
     */
     createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: {
         autoRename?: boolean;
-        include?: string[];
-        fields?: string[];
-    }): Promise<UnfiledContainerAssociationPaging> {
+    } & RecordsIncludeQuery): Promise<UnfiledContainerAssociationPaging> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
-
-        opts = opts || {};
 
         const pathParams = {
             unfiledContainerId
         };
 
         const queryParams = {
-            'autoRename': opts['autoRename'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            autoRename: opts?.autoRename,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         const contentTypes = ['application/json', 'multipart/form-data'];
-        const accepts = ['application/json'];
 
-        return this.apiClient.callApi(
-            '/unfiled-containers/{unfiledContainerId}/children', 'POST',
-            pathParams, queryParams, {}, {}, nodeBodyCreate,
-            contentTypes, accepts, UnfiledContainerAssociationPaging);
+        return this.post({
+            path: '/unfiled-containers/{unfiledContainerId}/children',
+            pathParams,
+            queryParams,
+            contentTypes,
+            bodyParam: nodeBodyCreate,
+            returnType: UnfiledContainerAssociationPaging
+        });
     }
     /**
         * Get the unfiled records container
@@ -193,35 +175,18 @@ parameter are returned in addition to those specified in the **fields** paramete
         *
         * @param unfiledContainerId The identifier of an unfiled records container. You can use the **-unfiled-** alias.
         * @param opts Optional parameters
-        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * path
-
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<UnfiledContainerEntry>
         */
-    getUnfiledContainer(unfiledContainerId: string, opts?: { include?: string[]; fields?: string[] }): Promise<UnfiledContainerEntry> {
+    getUnfiledContainer(unfiledContainerId: string, opts?: RecordsIncludeQuery): Promise<UnfiledContainerEntry> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
-        opts = opts || {};
 
         const pathParams = {
             unfiledContainerId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -243,61 +208,31 @@ parameter are returned in addition to those specified in the **fields** paramete
         *
         * @param unfiledContainerId The identifier of an unfiled records container. You can use the **-unfiled-** alias.
         * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param opts.maxItems The maximum number of items to return in the list.
         * @param opts.where Optionally filter the list. Here are some examples:
 
     *   where=(isRecord=true)
-
     *   where=(isUnfiledRecordFolder=false)
-
     *   where=(nodeType='cm:content INCLUDESUBTYPES')
-
-        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * aspectNames
-    * association
-    * path
-    * properties
-
         * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **unfiledContainerId**
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<UnfiledContainerAssociationPaging>
         */
     listUnfiledContainerChildren(unfiledContainerId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
         where?: string;
-        include?: string[];
         includeSource?: boolean;
-        fields?: string[];
-    }): Promise<UnfiledContainerAssociationPaging> {
+    } & RecordsIncludeQuery & RecordsPagingQuery ): Promise<UnfiledContainerAssociationPaging> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
-
-        opts = opts || {};
 
         const pathParams = {
             unfiledContainerId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'includeSource': opts['includeSource'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            'skipCount': opts?.skipCount,
+            'maxItems': opts?.maxItems,
+            'where': opts?.where,
+            'include': buildCollectionParam(opts?.include, 'csv'),
+            'includeSource': opts?.includeSource,
+            'fields': buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -332,39 +267,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param unfiledContainerId The identifier of an unfiled records container. You can use the **-unfiled-** alias.
         * @param unfiledContainerBodyUpdate The unfiled record container information to update.
         * @param opts Optional parameters
-        * @param opts.include Returns additional information about the unfiled records container's children. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * path
-
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<UnfiledContainerEntry>
         */
-    updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: {
-        include?: string[];
-        fields?: string[];
-    }): Promise<UnfiledContainerEntry> {
+    updateUnfiledContainer(unfiledContainerId: string, unfiledContainerBodyUpdate: UnfiledRecordContainerBodyUpdate, opts?: RecordsIncludeQuery): Promise<UnfiledContainerEntry> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
         throwIfNotDefined(unfiledContainerBodyUpdate, 'unfiledContainerBodyUpdate');
-        opts = opts || {};
 
         const pathParams = {
             unfiledContainerId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.put({

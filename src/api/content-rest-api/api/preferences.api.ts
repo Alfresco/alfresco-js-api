@@ -20,6 +20,7 @@ import { PreferencePaging } from '../model/preferencePaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { ContentFieldsQuery, ContentPagingQuery } from './types';
 
 /**
 * Preferences service.
@@ -37,21 +38,9 @@ You can use the -me- string in place of <personId> to specify the currently auth
     * @param personId The identifier of a person.
     * @param preferenceName The name of the preference.
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<PreferenceEntry>
     */
-    getPreference(personId: string, preferenceName: string, opts?: { fields?: string[] }): Promise<PreferenceEntry> {
+    getPreference(personId: string, preferenceName: string, opts?: ContentFieldsQuery): Promise<PreferenceEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(preferenceName, 'preferenceName');
 
@@ -64,81 +53,42 @@ parameter are returned in addition to those specified in the **fields** paramete
             fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/preferences/{preferenceName}', 'GET',
-            pathParams, queryParams, headerParams, formParams, null,
-            contentTypes, accepts , PreferenceEntry);
+        return this.get({
+            path: '/people/{personId}/preferences/{preferenceName}',
+            pathParams,
+            queryParams,
+            returnType: PreferenceEntry
+        });
     }
 
     /**
     * List preferences
     *
-    * Gets a list of preferences for person **personId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-Note that each preference consists of an **id** and a **value**.
-
-The **value** can be of any JSON type.
-
+    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+    * Note that each preference consists of an **id** and a **value**.
+    *
+    * The **value** can be of any JSON type.
     *
     * @param personId The identifier of a person.
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<PreferencePaging>
     */
-    listPreferences(personId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<PreferencePaging> {
+    listPreferences(personId: string, opts?: ContentPagingQuery & ContentFieldsQuery): Promise<PreferencePaging> {
         throwIfNotDefined(personId, 'personId');
-
-        opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             personId
         };
 
         const queryParams = {
-            ...opts,
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            ...opts || {},
+            'fields': buildCollectionParam(opts?.fields, 'csv')
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/preferences', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , PreferencePaging);
+        return this.get({
+            path: '/people/{personId}/preferences',
+            pathParams,
+            queryParams
+        });
     }
 }

@@ -19,6 +19,7 @@ import { ActivityPaging } from '../model/activityPaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { ContentFieldsQuery, ContentPagingQuery } from './types';
 
 /**
 * Activities service.
@@ -35,36 +36,14 @@ You can use the -me- string in place of <personId> to specify the currently auth
     *
     * @param personId The identifier of a person.
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.who A filter to include the user's activities only me, other user's activities only others'
-
     * @param opts.siteId Include only activity feed entries relating to this site.
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<ActivityPaging>
     */
     listActivitiesForPerson(personId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
         who?: string;
         siteId?: string;
-        fields?: string[];
-    }): Promise<ActivityPaging> {
+    } & ContentPagingQuery & ContentFieldsQuery): Promise<ActivityPaging> {
         throwIfNotDefined(personId, 'personId');
         opts = opts || {};
 

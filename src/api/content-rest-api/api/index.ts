@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+export * from './types';
 export * from './actions.api';
 export * from './activities.api';
 export * from './audit.api';

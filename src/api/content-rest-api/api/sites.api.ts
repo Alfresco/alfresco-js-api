@@ -37,6 +37,7 @@ import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { SiteGroupEntry } from '../model/siteGroupEntry';
 import { SiteGroupPaging } from '../model/siteGroupPaging';
+import { ContentFieldsQuery, ContentPagingQuery } from './types';
 
 /**
 * Sites service.
@@ -965,12 +966,6 @@ parameter are returned in addition to those specified in the **fields** paramete
     *
     *
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
@@ -980,31 +975,21 @@ above to check if any fields used in this method have a descending default searc
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
     * @param opts.relations Use the relations parameter to include one or more related entities in a single response.
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @param opts.where A string to restrict the returned objects by using a predicate.
     * @return Promise<SitePaging>
     */
-    listSites(opts?: { skipCount?: number; maxItems?: number; orderBy?: string[]; relations?: string[], fields?: string[], where?: string }): Promise<SitePaging> {
-        opts = opts || {};
-
+    listSites(opts?: {
+        orderBy?: string[];
+        relations?: string[],
+        where?: string
+    } & ContentPagingQuery & ContentFieldsQuery): Promise<SitePaging> {
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'relations': buildCollectionParam(opts['relations'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'where': opts['where']
+            'skipCount': opts?.skipCount,
+            'maxItems': opts?.maxItems,
+            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
+            'relations': buildCollectionParam(opts?.relations, 'csv'),
+            'fields': buildCollectionParam(opts?.fields, 'csv'),
+            'where': opts?.where
         };
 
         return this.get({
@@ -1055,21 +1040,9 @@ Note: the id of a site cannot be updated once the site has been created.
     * @param siteId The identifier of a site.
     * @param siteBodyUpdate The site information to update.
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<SiteEntry>
     */
-    updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts?: { fields?: string[] }): Promise<SiteEntry> {
+    updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts?: ContentFieldsQuery): Promise<SiteEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(siteBodyUpdate, 'siteBodyUpdate');
 
@@ -1107,21 +1080,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @param personId The identifier of a person.
     * @param siteMembershipBodyUpdate The persons new role
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<SiteMemberEntry>
     */
-    updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: { fields?: string[] }): Promise<SiteMemberEntry> {
+    updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: ContentFieldsQuery): Promise<SiteMemberEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteMembershipBodyUpdate, 'siteMembershipBodyUpdate');
@@ -1154,21 +1115,9 @@ parameter are returned in addition to those specified in the **fields** paramete
     * @param siteId The identifier of a site.
     * @param siteMembershipRequestBodyUpdate The new message to display
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<SiteMembershipRequestEntry>
     */
-    updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts?: { fields?: string[] }): Promise<SiteMembershipRequestEntry> {
+    updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts?: ContentFieldsQuery): Promise<SiteMembershipRequestEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(siteMembershipRequestBodyUpdate, 'siteMembershipRequestBodyUpdate');
@@ -1248,7 +1197,7 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @param opts Optional parameters
      * @return Promise<SiteGroupEntry>
      */
-    createSiteGroupMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: { fields?: string[] }): Promise<SiteGroupEntry> {
+    createSiteGroupMembership(siteId: string, siteMembershipBodyCreate: SiteMembershipBodyCreate, opts?: ContentFieldsQuery): Promise<SiteGroupEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(siteMembershipBodyCreate, 'siteMembershipBodyCreate');
 
@@ -1278,15 +1227,9 @@ parameter are returned in addition to those specified in the **fields** paramete
 
      * @param siteId The identifier of a site.
      * @param opts Optional parameters
-     * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-     If not supplied then the default value is 0.
-     (default to 0)
-     * @param opts.maxItems The maximum number of items to return in the list.
-     If not supplied then the default value is 100.
-     (default to 100)
      * @return Promise<SiteGroupPaging>
      */
-    listSiteGroups(siteId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<SiteGroupPaging> {
+    listSiteGroups(siteId: string, opts?: ContentPagingQuery & ContentFieldsQuery): Promise<SiteGroupPaging> {
         throwIfNotDefined(siteId, 'siteId');
 
         const pathParams = {
@@ -1317,7 +1260,7 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @param opts Optional parameters
      * @return Promise<SiteGroupEntry>
      */
-    getSiteGroupMembership(siteId: string, groupId: string, opts?: { fields?: string[] }): Promise<SiteGroupEntry> {
+    getSiteGroupMembership(siteId: string, groupId: string, opts?: ContentFieldsQuery): Promise<SiteGroupEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(groupId, 'groupId');
 
@@ -1357,7 +1300,7 @@ parameter are returned in addition to those specified in the **fields** paramete
      * @param opts Optional parameters
      * @return Promise<SiteGroupEntry>
      */
-    updateSiteGroupMembership(siteId: string, groupId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: { fields?: string[] }): Promise<SiteGroupEntry> {
+    updateSiteGroupMembership(siteId: string, groupId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: ContentFieldsQuery): Promise<SiteGroupEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(groupId, 'groupId');
         throwIfNotDefined(siteMembershipBodyUpdate, 'siteMembershipBodyUpdate');
@@ -1397,12 +1340,9 @@ parameter are returned in addition to those specified in the **fields** paramete
             groupId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/group-members/{groupId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/sites/{siteId}/group-members/{groupId}',
+            pathParams
+        });
     }
 }

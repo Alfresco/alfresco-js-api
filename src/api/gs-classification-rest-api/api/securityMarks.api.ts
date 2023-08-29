@@ -22,8 +22,11 @@ import { SecurityMarkBody } from '../model/securityMarkBody';
 import { SecurityMarkPaging } from '../model/securityMarkPaging';
 
 export interface GetSecurityMarksOpts {
-    // The key for the security mark is in use or not.
-    inUse?: any;
+    /**
+     * Returns additional information about the security group. The following optional fields can be requested:
+     * - inUse - A flag indicating whether the security group is in use or not.
+     */
+    include?: string;
     // The number of entities that exist in the collection before those included in this list.
     skipCount?: number;
     // The maximum number of items to return in the list.

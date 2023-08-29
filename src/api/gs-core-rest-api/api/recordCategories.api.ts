@@ -20,12 +20,12 @@ import { RMNodeBodyCreateWithRelativePath } from '../model/rMNodeBodyCreateWithR
 import { RecordCategoryChildEntry } from '../model/recordCategoryChildEntry';
 import { RecordCategoryChildPaging } from '../model/recordCategoryChildPaging';
 import { RecordCategoryEntry } from '../model/recordCategoryEntry';
-import { BaseApi } from './base.api';
+import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Recordcategories service.
+* RecordCategoriesApi service.
 * @module RecordCategoriesApi
 */
 export class RecordCategoriesApi extends BaseApi {
@@ -130,43 +130,22 @@ JSON
 
     * @param opts Optional parameters
     * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-
-    * @param opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example:
-* allowableOperations
-* hasRetentionSchedule
-* path
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<RecordCategoryChildEntry>
     */
     createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: {
         autoRename?: boolean;
-        include?: string[];
-        fields?: string[];
-    }): Promise<RecordCategoryChildEntry> {
+    } & RecordsIncludeQuery ): Promise<RecordCategoryChildEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
-        opts = opts || {};
 
         const pathParams = {
             recordCategoryId
         };
 
         const queryParams = {
-            'autoRename': opts['autoRename'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            autoRename: opts?.autoRename,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.post({
@@ -177,15 +156,13 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: RecordCategoryChildEntry
         });
     }
-    /**
-        * Delete a record category
-        *
-        * Deletes record category **recordCategoryId**.
 
-        *
-        * @param recordCategoryId The identifier of a record category.
-        * @return Promise<{}>
-        */
+    /**
+    * Delete a record category
+    *
+    * @param recordCategoryId The identifier of a record category.
+    * @return Promise<{}>
+    */
     deleteRecordCategory(recordCategoryId: string): Promise<any> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
 
@@ -193,63 +170,37 @@ parameter are returned in addition to those specified in the **fields** paramete
             recordCategoryId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/record-categories/{recordCategoryId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts);
+        return this.delete({
+            path: '/record-categories/{recordCategoryId}',
+            pathParams
+        });
     }
+
     /**
-        * Get a record category
-        *
-        * Gets information for record category **recordCategoryId**
-
-    Mandatory fields and the record category's aspects and properties are returned by default.
-
-    You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-        *
-        * @param recordCategoryId The identifier of a record category.
-        * @param opts Optional parameters
-        * @param opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * hasRetentionSchedule
-    * path
-
-        * @param opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
-
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-        * @return Promise<RecordCategoryEntry>
-        */
+    * Get a record category
+    *
+    * Mandatory fields and the record category's aspects and properties are returned by default.
+    *
+    * You can use the **include** parameter (include=allowableOperations) to return additional information.
+    *
+    * @param recordCategoryId The identifier of a record category.
+    * @param opts Optional parameters
+    * @param opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+    * @return Promise<RecordCategoryEntry>
+    */
     getRecordCategory(recordCategoryId: string, opts?: {
-        include?: string[];
         relativePath?: string;
-        fields?: string[];
-    }): Promise<RecordCategoryEntry> {
+    } & RecordsIncludeQuery): Promise<RecordCategoryEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
-        opts = opts || {};
 
         const pathParams = {
             recordCategoryId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'relativePath': opts['relativePath'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            relativePath: opts?.relativePath,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -259,81 +210,44 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: RecordCategoryEntry
         });
     }
+
     /**
-        * List record category's children
-        *
-        * Returns a list of record categories and/or record folders.
-
-    Minimal information for each child is returned by default.
-
-    You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-    The list of child nodes includes primary children and secondary children, if there are any.
-
-        *
-        * @param recordCategoryId The identifier of a record category.
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param opts.maxItems The maximum number of items to return in the list.
-        * @param opts.where Optionally filter the list. Here are some examples:
-
+    * List record category's children
+    *
+    * Minimal information for each child is returned by default.
+    * You can use the **include** parameter (include=allowableOperations) to return additional information.
+    *
+    * The list of child nodes includes primary children and secondary children, if there are any.
+    *
+    * @param recordCategoryId The identifier of a record category.
+    * @param opts Optional parameters
+    * @param opts.where Optionally filter the list. Here are some examples:
     *   where=(nodeType='rma:recordFolder')
-
     *   where=(nodeType='rma:recordCategory')
-
     *   where=(isRecordFolder=true AND isClosed=false)
-
-        * @param opts.include Returns additional information about the record category child. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * aspectNames
-    * hasRetentionSchedule
-    * isClosed
-    * isRecordCategory
-    * isRecordFolder
-    * path
-    * properties
-
-        * @param opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
-
-        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-        * @return Promise<RecordCategoryChildPaging>
-        */
+    * @param opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+    * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
+    * @return Promise<RecordCategoryChildPaging>
+    */
     listRecordCategoryChildren(recordCategoryId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
         where?: string;
-        include?: string[];
         relativePath?: string;
         includeSource?: boolean;
-        fields?: string[];
-    }): Promise<RecordCategoryChildPaging> {
+    } & RecordsIncludeQuery & RecordsPagingQuery): Promise<RecordCategoryChildPaging> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
-        opts = opts || {};
 
         const pathParams = {
             recordCategoryId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'where': opts['where'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'relativePath': opts['relativePath'],
-            'includeSource': opts['includeSource'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            relativePath: opts?.relativePath,
+            includeSource: opts?.includeSource,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -370,40 +284,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param recordCategoryId The identifier of a record category.
         * @param recordCategoryBodyUpdate The record category information to update.
         * @param opts Optional parameters
-        * @param opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * hasRetentionSchedule
-    * path
-
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<RecordCategoryEntry>
         */
-    updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: {
-        include?: string[];
-        fields?: string[];
-    }): Promise<RecordCategoryEntry> {
+    updateRecordCategory(recordCategoryId: string, recordCategoryBodyUpdate: FilePlanComponentBodyUpdate, opts?: RecordsIncludeQuery): Promise<RecordCategoryEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
         throwIfNotDefined(recordCategoryBodyUpdate, 'recordCategoryBodyUpdate');
-        opts = opts || {};
 
         const pathParams = {
             recordCategoryId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.put({

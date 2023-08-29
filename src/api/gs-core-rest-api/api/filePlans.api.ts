@@ -20,12 +20,12 @@ import { FilePlanEntry } from '../model/filePlanEntry';
 import { RecordCategoryEntry } from '../model/recordCategoryEntry';
 import { RecordCategoryPaging } from '../model/recordCategoryPaging';
 import { RootCategoryBodyCreate } from '../model/rootCategoryBodyCreate';
-import { BaseApi } from './base.api';
+import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Fileplans service.
+* FilePlansApi service.
 * @module FilePlansApi
 */
 export class FilePlansApi extends BaseApi {
@@ -93,43 +93,22 @@ JSON
     * @param nodeBodyCreate The node information to create.
     * @param opts Optional parameters
     * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
-
-    * @param opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example:
-* allowableOperations
-* hasRetentionSchedule
-* path
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<RecordCategoryEntry>
     */
     createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opts?: {
         autoRename?: boolean;
-        include?: string[];
-        fields?: string[];
-    }): Promise<RecordCategoryEntry> {
+    } & RecordsIncludeQuery): Promise<RecordCategoryEntry> {
         throwIfNotDefined(filePlanId, 'filePlanId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
-        opts = opts || {};
 
         const pathParams = {
             filePlanId
         };
 
         const queryParams = {
-            'autoRename': opts['autoRename'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            autoRename: opts?.autoRename,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.post({
@@ -153,35 +132,18 @@ parameter are returned in addition to those specified in the **fields** paramete
         *
         * @param filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
         * @param opts Optional parameters
-        * @param opts.include Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * path
-
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<FilePlanEntry>
         */
-    getFilePlan(filePlanId: string, opts?: { include?: string[]; fields?: string[] }): Promise<FilePlanEntry> {
+    getFilePlan(filePlanId: string, opts?: RecordsIncludeQuery): Promise<FilePlanEntry> {
         throwIfNotDefined(filePlanId, 'filePlanId');
-        opts = opts || {};
 
         const pathParams = {
             filePlanId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -203,50 +165,24 @@ parameter are returned in addition to those specified in the **fields** paramete
         *
         * @param filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
         * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-        * @param opts.maxItems The maximum number of items to return in the list.
-        * @param opts.include Returns additional information about the record category. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * aspectNames
-    * hasRetentionSchedule
-    * path
-    * properties
-
         * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId**
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<RecordCategoryPaging>
         */
     getFilePlanCategories(filePlanId: string, opts?: {
-        skipCount?: number;
-        maxItems?: number;
-        include?: string[];
         includeSource?: boolean;
-        fields?: string[];
-    }): Promise<RecordCategoryPaging> {
+    } & RecordsIncludeQuery & RecordsPagingQuery): Promise<RecordCategoryPaging> {
         throwIfNotDefined(filePlanId, 'filePlanId');
-        opts = opts || {};
 
         const pathParams = {
             filePlanId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'includeSource': opts['includeSource'],
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            includeSource: opts?.includeSource,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -276,36 +212,19 @@ parameter are returned in addition to those specified in the **fields** paramete
         * @param filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
         * @param filePlanBodyUpdate The file plan information to update.
         * @param opts Optional parameters
-        * @param opts.include Returns additional information about the file plan. Any optional field from the response model can be requested. For example:
-    * allowableOperations
-    * path
-
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
         * @return Promise<FilePlanEntry>
         */
-    updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: { include?: string[]; fields?: string[] }): Promise<FilePlanEntry> {
+    updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: RecordsIncludeQuery): Promise<FilePlanEntry> {
         throwIfNotDefined(filePlanId, 'filePlanId');
         throwIfNotDefined(filePlanBodyUpdate, 'filePlanBodyUpdate');
-        opts = opts || {};
 
         const pathParams = {
             filePlanId
         };
 
         const queryParams = {
-            'include': buildCollectionParam(opts['include'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.put({

@@ -22,6 +22,9 @@ import { CategoryPaging } from '../model/categoryPaging';
 import { CategoryEntry } from '../model/categoryEntry';
 import { CategoryBody } from '../model/categoryBody';
 import { CategoryLinkBody } from '../model/CategoryLinkBody';
+import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './types';
+
+export type CategoryQuery = ContentFieldsQuery & ContentIncludeQuery;
 
 /**
 * Categories service.
@@ -29,52 +32,29 @@ import { CategoryLinkBody } from '../model/CategoryLinkBody';
 */
 export class CategoriesApi extends BaseApi {
     /**
-        * List of subcategories within category
-        *
-        * Gets a list of subcategories with category **categoryId**.
-        * The parameter categoryId can be set to the alias -root- to obtain a list of top level categories.
-
-    You can use the **include** parameter to return additional **values** information.
-
-        * @param categoryId The identifier of a category.
-        * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-    If not supplied then the default value is 0.
-    (default to 0)
-        * @param opts.maxItems The maximum number of items to return in the list.
-    If not supplied then the default value is 100.
-    (default to 100)
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-        * @param opts.include Returns additional information about the category. The following optional fields can be requested:
-            * count
-            * path
-
-        * @return Promise<CategoryPaging>
+    * List of subcategories within category
+    *
+    * Gets a list of subcategories with category **categoryId**.
+    * The parameter categoryId can be set to the alias -root- to obtain a list of top level categories.
+    *
+    * You can use the **include** parameter to return additional **values** information.
+    *
+    * @param categoryId The identifier of a category.
+    * @param opts Optional parameters
+    * @return Promise<CategoryPaging>
     */
-    getSubcategories(categoryId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[]; include?: string[] }): Promise<CategoryPaging> {
+    getSubcategories(categoryId: string, opts?: ContentPagingQuery & CategoryQuery): Promise<CategoryPaging> {
         throwIfNotDefined(categoryId, 'categoryId');
-        opts = opts || {};
 
         const pathParams = {
             categoryId
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            fields: buildCollectionParam(opts?.fields, 'csv'),
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
         return this.get({
@@ -94,27 +74,10 @@ export class CategoriesApi extends BaseApi {
 
         * @param categoryId The identifier of a category.
         * @param opts Optional parameters
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-        * @param opts.include Returns additional information about the category. The following optional fields can be requested:
-            * count
-            * path
-
         * @return Promise<CategoryEntry>
     */
-    getCategory(categoryId: string, opts?: { fields?: string[]; include?: string[] }): Promise<CategoryEntry> {
+    getCategory(categoryId: string, opts?: CategoryQuery): Promise<CategoryEntry> {
         throwIfNotDefined(categoryId, 'categoryId');
-        opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
@@ -122,8 +85,8 @@ export class CategoriesApi extends BaseApi {
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
         const headerParams = {};
@@ -145,12 +108,6 @@ export class CategoriesApi extends BaseApi {
 
         * @param nodeId The identifier of a node.
         * @param opts Optional parameters
-        * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-    If not supplied then the default value is 0.
-    (default to 0)
-        * @param opts.maxItems The maximum number of items to return in the list.
-    If not supplied then the default value is 100.
-    (default to 100)
         * @param opts.fields A list of field names.
 
     You can use this parameter to restrict the fields
@@ -168,9 +125,8 @@ export class CategoriesApi extends BaseApi {
 
         * @return Promise<CategoryPaging>
     */
-    getCategoryLinksForNode(nodeId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[]; include?: string[]; }): Promise<CategoryPaging> {
+    getCategoryLinksForNode(nodeId: string, opts?: ContentPagingQuery & CategoryQuery): Promise<CategoryPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
-        opts = opts || {};
         const postBody: null = null;
 
         const pathParams = {
@@ -178,10 +134,10 @@ export class CategoriesApi extends BaseApi {
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            fields: buildCollectionParam(opts?.fields, 'csv'),
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
         const headerParams = {};
@@ -285,21 +241,19 @@ export class CategoriesApi extends BaseApi {
 
     * @return Promise<CategoryEntry>
     */
-    updateCategory(categoryId: string, categoryBodyUpdate: CategoryBody, opts?: { fields?: string[]; include?: string[] }): Promise<CategoryEntry> {
-
+    updateCategory(categoryId: string, categoryBodyUpdate: CategoryBody, opts?: CategoryQuery): Promise<CategoryEntry> {
         throwIfNotDefined(categoryId, 'categoryId');
         throwIfNotDefined(categoryBodyUpdate, 'categoryBodyUpdate');
 
-        opts = opts || {};
         const postBody = categoryBodyUpdate;
 
         const pathParams = {
-            'categoryId': categoryId
+            categoryId
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv')
+            'fields': buildCollectionParam(opts?.fields, 'csv'),
+            'include': buildCollectionParam(opts?.include, 'csv')
         };
 
         const headerParams = {};
@@ -370,25 +324,9 @@ export class CategoriesApi extends BaseApi {
     * @param categoryId The identifier of a category.
     * @param categoryBodyCreate List of categories to create.
     * @param opts Optional parameters.
-    * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @param opts.include Returns additional information about the category. The following optional fields can be requested:
-            * count
-            * path
-
     * @return Promise<CategoryPaging | CategoryEntry>
     */
-    createSubcategories(categoryId: string, categoryBodyCreate: CategoryBody[], opts?: { fields?: string[]; include?: [] }): Promise<CategoryPaging | CategoryEntry> {
+    createSubcategories(categoryId: string, categoryBodyCreate: CategoryBody[], opts?: CategoryQuery): Promise<CategoryPaging | CategoryEntry> {
         throwIfNotDefined(categoryId, 'categoryId');
         throwIfNotDefined(categoryBodyCreate, 'categoryBodyCreate');
 
@@ -400,8 +338,8 @@ export class CategoriesApi extends BaseApi {
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv')
+            'fields': buildCollectionParam(opts?.fields, 'csv'),
+            'include': buildCollectionParam(opts?.include, 'csv')
         };
 
         const headerParams = {};
@@ -470,24 +408,9 @@ export class CategoriesApi extends BaseApi {
     * @param nodeId The identifier of a node.
     * @param categoryLinkBodyCreate The new category link
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @param opts.include Returns additional information about the category. The following optional fields can be requested:
-            * path
-
     * @return Promise<CategoryPaging | CategoryEntry>
     */
-    linkNodeToCategory(nodeId: string, categoryLinkBodyCreate: CategoryLinkBody[], opts?: { fields?: string[]; include?: string[] }): Promise<CategoryPaging | CategoryEntry> {
+    linkNodeToCategory(nodeId: string, categoryLinkBodyCreate: CategoryLinkBody[], opts?: CategoryQuery): Promise<CategoryPaging | CategoryEntry> {
 
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(categoryLinkBodyCreate, 'categoryLinkBodyCreate');
@@ -500,8 +423,8 @@ export class CategoriesApi extends BaseApi {
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'include': buildCollectionParam(opts['include'], 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
+            include: buildCollectionParam(opts?.include, 'csv')
         };
 
         const headerParams = {};

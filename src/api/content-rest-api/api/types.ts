@@ -15,16 +15,7 @@
  * limitations under the License.
  */
 
-import { ApiClient } from '../../../api-clients/api-client';
-import { LegacyHttpClient } from '../../../api-clients/http-client.interface';
-
-export abstract class BaseApi extends ApiClient {
-    override get apiClient(): LegacyHttpClient {
-        return this.httpClient ?? this.alfrescoApi.gsClient;
-    }
-}
-
-export type RecordsPagingQuery = {
+export type ContentPagingQuery = {
     /**
      * The number of entities that exist in the collection before those included in this list.
      */
@@ -36,12 +27,14 @@ export type RecordsPagingQuery = {
     maxItems?: number;
 }
 
-export type RecordsIncludeQuery = {
+export type ContentIncludeQuery = {
     /**
      * Returns additional information about the record. Any optional field from the response model can be requested.
      */
     include?: string[];
+};
 
+export type ContentFieldsQuery = {
     /**
      * A list of field names.
      *
