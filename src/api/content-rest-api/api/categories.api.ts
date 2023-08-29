@@ -27,245 +27,178 @@ import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './t
 export type CategoryQuery = ContentFieldsQuery & ContentIncludeQuery;
 
 /**
-* Categories service.
-* @module CategoriesApi
-*/
+ * Categories service.
+ * @module CategoriesApi
+ */
 export class CategoriesApi extends BaseApi {
     /**
-    * List of subcategories within category
-    *
-    * Gets a list of subcategories with category **categoryId**.
-    * The parameter categoryId can be set to the alias -root- to obtain a list of top level categories.
-    *
-    * You can use the **include** parameter to return additional **values** information.
-    *
-    * @param categoryId The identifier of a category.
-    * @param opts Optional parameters
-    * @return Promise<CategoryPaging>
-    */
+     * List of subcategories within category
+     *
+     * Gets a list of subcategories with category **categoryId**.
+     * The parameter categoryId can be set to the alias -root- to obtain a list of top level categories.
+     *
+     * You can use the **include** parameter to return additional **values** information.
+     *
+     * @param categoryId The identifier of a category.
+     * @param opts Optional parameters
+     * @return Promise<CategoryPaging>
+     */
     getSubcategories(categoryId: string, opts?: ContentPagingQuery & CategoryQuery): Promise<CategoryPaging> {
         throwIfNotDefined(categoryId, 'categoryId');
 
         const pathParams = {
-            categoryId
+            categoryId,
         };
 
         const queryParams = {
             skipCount: opts?.skipCount,
             maxItems: opts?.maxItems,
             fields: buildCollectionParam(opts?.fields, 'csv'),
-            include: buildCollectionParam(opts?.include, 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
         };
 
         return this.get({
             path: '/categories/{categoryId}/subcategories',
             pathParams,
             queryParams,
-            returnType: CategoryPaging
+            returnType: CategoryPaging,
         });
     }
 
     /**
-        * Get a category
-        *
-        * Get a specific category with categoryId.
-
-    You can use the **include** parameter to return additional **values** information.
-
-        * @param categoryId The identifier of a category.
-        * @param opts Optional parameters
-        * @return Promise<CategoryEntry>
-    */
+     * Get a category
+     *
+     * Get a specific category with categoryId.
+     * You can use the **include** parameter to return additional **values** information.
+     *
+     * @param categoryId The identifier of a category.
+     * @param opts Optional parameters
+     * @return Promise<CategoryEntry>
+     */
     getCategory(categoryId: string, opts?: CategoryQuery): Promise<CategoryEntry> {
         throwIfNotDefined(categoryId, 'categoryId');
-        const postBody: null = null;
 
         const pathParams = {
-            categoryId
+            categoryId,
         };
 
         const queryParams = {
             fields: buildCollectionParam(opts?.fields, 'csv'),
-            include: buildCollectionParam(opts?.include, 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
         };
 
-        const headerParams = {};
-        const formParams = {};
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/categories/{categoryId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , CategoryEntry);
+        return this.get({
+            path: '/categories/{categoryId}',
+            pathParams,
+            queryParams,
+            returnType: CategoryEntry,
+        });
     }
 
     /**
-        * List of categories that node is assigned to
-        *
-        * Gets a list of categories for node with nodeId.
-
-        * @param nodeId The identifier of a node.
-        * @param opts Optional parameters
-        * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-        * @param opts.include Returns additional information about the category. The following optional fields can be requested:
-            * path
-
-        * @return Promise<CategoryPaging>
-    */
+     * List of categories that node is assigned to
+     *
+     * @param nodeId The identifier of a node.
+     * @param opts Optional parameters
+     * @return Promise<CategoryPaging>
+     */
     getCategoryLinksForNode(nodeId: string, opts?: ContentPagingQuery & CategoryQuery): Promise<CategoryPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
-        const postBody: null = null;
 
         const pathParams = {
-            nodeId
+            nodeId,
         };
 
         const queryParams = {
             skipCount: opts?.skipCount,
             maxItems: opts?.maxItems,
             fields: buildCollectionParam(opts?.fields, 'csv'),
-            include: buildCollectionParam(opts?.include, 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
         };
 
-        const headerParams = {};
-        const formParams = {};
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/category-links', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , CategoryPaging);
+        return this.get({
+            path: '/nodes/{nodeId}/category-links',
+            pathParams,
+            queryParams,
+            returnType: CategoryPaging,
+        });
     }
 
     /**
-    * Deletes the category **categoryId**.
-    *
-    * This will cause everything to be removed from the category.
-    * You must have admin rights to delete a category.
-    *
-    * @param categoryId The identifier of a category.
-    * @return Promise<{}>
-    */
+     * Deletes the category **categoryId**.
+     *
+     * This will cause everything to be removed from the category.
+     * You must have admin rights to delete a category.
+     *
+     * @param categoryId The identifier of a category.
+     * @return Promise<{}>
+     */
     deleteCategory(categoryId: string): Promise<void> {
         throwIfNotDefined(categoryId, 'categoryId');
-        const postBody: null = null;
 
         const pathParams = {
-            'categoryId': categoryId
+            categoryId,
         };
 
-        const queryParams = {};
-        const headerParams = {};
-        const formParams = {};
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/categories/{categoryId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/categories/{categoryId}',
+            pathParams,
+        });
     }
 
     /**
-    * Unassign a node from category
-    *
-    * Removes the node **nodeId** from the category **categoryId**.
-    *
-    * @param nodeId The identifier of a node.
-    * @param categoryId The identifier of a category.
-    * @return Promise<{}>
-    */
-     unlinkNodeFromCategory(nodeId: string, categoryId: string): Promise<void> {
+     * Unassign a node from category
+     *
+     * @param nodeId The identifier of a node.
+     * @param categoryId The identifier of a category.
+     * @return Promise<{}>
+     */
+    unlinkNodeFromCategory(nodeId: string, categoryId: string): Promise<void> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(categoryId, 'categoryId');
-        const postBody: null = null;
 
         const pathParams = {
-            'nodeId': nodeId,
-            'categoryId': categoryId
+            nodeId: nodeId,
+            categoryId: categoryId,
         };
 
-        const queryParams = {};
-        const headerParams = {};
-        const formParams = {};
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/category-links/{categoryId}', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/nodes/{nodeId}/category-links/{categoryId}',
+            pathParams,
+        });
     }
 
     /**
-    * Update a category
-    *
-    * Updates the category **categoryId**.
-    * You must have admin rights to update a category.
-    *
-    * @param categoryId The identifier of a category.
-    * @param categoryBodyUpdate The updated category
-    * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-    You can use this parameter to restrict the fields
-    returned within a response if, for example, you want to save on overall bandwidth.
-
-    The list applies to a returned individual
-    entity or entries within a collection.
-
-    If the API method also supports the **include**
-    parameter, then the fields specified in the **include**
-    parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @param opts.include Returns additional information about the category. The following optional fields can be requested:
-            * count
-            * path
-
-    * @return Promise<CategoryEntry>
-    */
+     * Update a category
+     *
+     * Updates the category **categoryId**.
+     * You must have admin rights to update a category.
+     *
+     * @param categoryId The identifier of a category.
+     * @param categoryBodyUpdate The updated category
+     * @param opts Optional parameters
+     * @return Promise<CategoryEntry>
+     */
     updateCategory(categoryId: string, categoryBodyUpdate: CategoryBody, opts?: CategoryQuery): Promise<CategoryEntry> {
         throwIfNotDefined(categoryId, 'categoryId');
         throwIfNotDefined(categoryBodyUpdate, 'categoryBodyUpdate');
 
-        const postBody = categoryBodyUpdate;
-
         const pathParams = {
-            categoryId
+            categoryId,
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts?.fields, 'csv'),
-            'include': buildCollectionParam(opts?.include, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
+            include: buildCollectionParam(opts?.include, 'csv'),
         };
 
-        const headerParams = {};
-        const formParams = {};
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/categories/{categoryId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , CategoryEntry);
+        return this.put({
+            path: '/categories/{categoryId}',
+            pathParams,
+            queryParams,
+            bodyParam: categoryBodyUpdate,
+            returnType: CategoryEntry,
+        });
     }
 
     /**
@@ -330,28 +263,22 @@ export class CategoriesApi extends BaseApi {
         throwIfNotDefined(categoryId, 'categoryId');
         throwIfNotDefined(categoryBodyCreate, 'categoryBodyCreate');
 
-        opts = opts || {};
-        const postBody = categoryBodyCreate;
-
         const pathParams = {
-            categoryId
+            categoryId,
         };
 
         const queryParams = {
-            'fields': buildCollectionParam(opts?.fields, 'csv'),
-            'include': buildCollectionParam(opts?.include, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
+            include: buildCollectionParam(opts?.include, 'csv'),
         };
 
-        const headerParams = {};
-        const formParams = {};
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/categories/{categoryId}/subcategories', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , CategoryEntry);
+        return this.post({
+            path: '/categories/{categoryId}/subcategories',
+            pathParams,
+            queryParams,
+            bodyParam: categoryBodyCreate,
+            returnType: CategoryEntry,
+        });
     }
 
     /**
@@ -411,31 +338,24 @@ export class CategoriesApi extends BaseApi {
     * @return Promise<CategoryPaging | CategoryEntry>
     */
     linkNodeToCategory(nodeId: string, categoryLinkBodyCreate: CategoryLinkBody[], opts?: CategoryQuery): Promise<CategoryPaging | CategoryEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(categoryLinkBodyCreate, 'categoryLinkBodyCreate');
 
-        opts = opts || {};
-        const postBody = categoryLinkBodyCreate;
-
         const pathParams = {
-            nodeId
+            nodeId,
         };
 
         const queryParams = {
             fields: buildCollectionParam(opts?.fields, 'csv'),
-            include: buildCollectionParam(opts?.include, 'csv')
+            include: buildCollectionParam(opts?.include, 'csv'),
         };
 
-        const headerParams = {};
-        const formParams = {};
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/category-links', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , CategoryEntry);
+        return this.post({
+            path: '/nodes/{nodeId}/category-links',
+            pathParams,
+            queryParams,
+            bodyParam: categoryLinkBodyCreate,
+            returnType: CategoryEntry,
+        });
     }
 }
