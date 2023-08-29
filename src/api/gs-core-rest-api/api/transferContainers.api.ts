@@ -18,67 +18,61 @@
 import { TransferContainerAssociationPaging } from '../model/transferContainerAssociationPaging';
 import { TransferContainerBodyUpdate } from '../model/transferContainerBodyUpdate';
 import { TransferContainerEntry } from '../model/transferContainerEntry';
-import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
+import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { RecordsIncludeQuery, RecordsPagingQuery, RecordsSourceQuery } from './types';
 
 /**
-* TransferContainersApi service.
-* @module TransferContainersApi
-*/
+ * TransferContainersApi service.
+ * @module TransferContainersApi
+ */
 export class TransferContainersApi extends BaseApi {
     /**
-    * Get a transfer container
-    *
-    * Gets information for transfer container **transferContainerId**
-
-Mandatory fields and the transfer container's aspects and properties are returned by default.
-
-You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-    *
-    * @param transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
-    * @param opts Optional parameters
-    * @return Promise<TransferContainerEntry>
-    */
+     * Get a transfer container
+     *
+     * Mandatory fields and the transfer container's aspects and properties are returned by default.
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
+     * @param opts Optional parameters
+     * @return Promise<TransferContainerEntry>
+     */
     getTransferContainer(transferContainerId: string, opts?: RecordsIncludeQuery): Promise<TransferContainerEntry> {
         throwIfNotDefined(transferContainerId, 'transferContainerId');
 
         const pathParams = {
-            transferContainerId
+            transferContainerId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
-            path:  '/transfer-containers/{transferContainerId}',
+            path: '/transfer-containers/{transferContainerId}',
             pathParams,
             queryParams,
-            returnType: TransferContainerEntry
+            returnType: TransferContainerEntry,
         });
     }
     /**
-    * List transfer container's children
-    * Minimal information for each child is returned by default.
-    *
-    * You can use the **include** parameter (include=allowableOperations) to return additional information.
-    *
-    * @param transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
-    * @param opts Optional parameters
-    * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the specified parent **transferContainerId**.
-    * @return Promise<TransferContainerAssociationPaging>
-    */
-    listTransfers(transferContainerId: string, opts?: {
-        includeSource?: boolean;
-    } & RecordsIncludeQuery & RecordsPagingQuery): Promise<TransferContainerAssociationPaging> {
+     * List transfer container's children
+     * Minimal information for each child is returned by default.
+     *
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param transferContainerId The identifier of a transfer container. You can also use the -transfers- alias.
+     * @param opts Optional parameters
+     * @return Promise<TransferContainerAssociationPaging>
+     */
+    listTransfers(transferContainerId: string, opts?: RecordsSourceQuery & RecordsIncludeQuery & RecordsPagingQuery): Promise<TransferContainerAssociationPaging> {
         throwIfNotDefined(transferContainerId, 'transferContainerId');
         opts = opts || {};
 
         const pathParams = {
-            transferContainerId
+            transferContainerId,
         };
 
         const queryParams = {
@@ -86,14 +80,14 @@ You can use the **include** parameter (include=allowableOperations) to return ad
             maxItems: opts?.maxItems,
             include: buildCollectionParam(opts?.include, 'csv'),
             includeSource: opts?.includeSource,
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
             path: '/transfer-containers/{transferContainerId}/transfers',
             pathParams,
             queryParams,
-            returnType: TransferContainerAssociationPaging
+            returnType: TransferContainerAssociationPaging,
         });
     }
     /**
@@ -129,20 +123,20 @@ You can use the **include** parameter (include=allowableOperations) to return ad
         opts = opts || {};
 
         const pathParams = {
-            transferContainerId
+            transferContainerId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.put({
-            path:  '/transfer-containers/{transferContainerId}',
+            path: '/transfer-containers/{transferContainerId}',
             pathParams,
             queryParams,
             bodyParam: nodeBodyUpdate,
-            returnType: TransferContainerEntry
+            returnType: TransferContainerEntry,
         });
     }
 }

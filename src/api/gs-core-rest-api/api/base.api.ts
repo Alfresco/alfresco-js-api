@@ -23,37 +23,3 @@ export abstract class BaseApi extends ApiClient {
         return this.httpClient ?? this.alfrescoApi.gsClient;
     }
 }
-
-export type RecordsPagingQuery = {
-    /**
-     * The number of entities that exist in the collection before those included in this list.
-     */
-    skipCount?: number;
-
-    /**
-     * The maximum number of items to return in the list.
-     */
-    maxItems?: number;
-}
-
-export type RecordsIncludeQuery = {
-    /**
-     * Returns additional information about the record. Any optional field from the response model can be requested.
-     */
-    include?: string[];
-
-    /**
-     * A list of field names.
-     *
-     * You can use this parameter to restrict the fields
-     * returned within a response if, for example, you want to save on overall bandwidth.
-     *
-     * The list applies to a returned individual
-     * entity or entries within a collection.
-     *
-     * If the API method also supports the **include**
-     * parameter, then the fields specified in the **include**
-     * parameter are returned in addition to those specified in the **fields** parameter.
-     */
-    fields?: string[];
-}

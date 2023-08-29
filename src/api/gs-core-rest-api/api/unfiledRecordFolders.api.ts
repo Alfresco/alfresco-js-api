@@ -19,14 +19,15 @@ import { RMNodeBodyCreateWithRelativePath } from '../model/rMNodeBodyCreateWithR
 import { UnfiledRecordFolderAssociationPaging } from '../model/unfiledRecordFolderAssociationPaging';
 import { UnfiledRecordFolderBodyUpdate } from '../model/unfiledRecordFolderBodyUpdate';
 import { UnfiledRecordFolderEntry } from '../model/unfiledRecordFolderEntry';
-import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
+import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { RecordsIncludeQuery, RecordsPagingQuery, RecordsSourceQuery } from './types';
 
 /**
-* UnfiledRecordFoldersApi service.
-* @module UnfiledRecordFoldersApi
-*/
+ * UnfiledRecordFoldersApi service.
+ * @module UnfiledRecordFoldersApi
+ */
 export class UnfiledRecordFoldersApi extends BaseApi {
     /**
     * Create a record or an unfiled record folder
@@ -136,20 +137,24 @@ JSON
     * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
     * @return Promise<UnfiledRecordFolderAssociationPaging>
     */
-    createUnfiledRecordFolderChildren(unfiledRecordFolderId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: {
-        autoRename?: boolean;
-    } & RecordsIncludeQuery ): Promise<UnfiledRecordFolderAssociationPaging> {
+    createUnfiledRecordFolderChildren(
+        unfiledRecordFolderId: string,
+        nodeBodyCreate: RMNodeBodyCreateWithRelativePath,
+        opts?: {
+            autoRename?: boolean;
+        } & RecordsIncludeQuery,
+    ): Promise<UnfiledRecordFolderAssociationPaging> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
 
         const pathParams = {
-            unfiledRecordFolderId
+            unfiledRecordFolderId,
         };
 
         const queryParams = {
             autoRename: opts?.autoRename,
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.post({
@@ -158,7 +163,7 @@ JSON
             queryParams,
             bodyParam: nodeBodyCreate,
             contentTypes: ['application/json', 'multipart/form-data'],
-            returnType: UnfiledRecordFolderAssociationPaging
+            returnType: UnfiledRecordFolderAssociationPaging,
         });
     }
     /**
@@ -174,12 +179,12 @@ JSON
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
 
         const pathParams = {
-            unfiledRecordFolderId
+            unfiledRecordFolderId,
         };
 
         return this.delete({
             path: '/unfiled-record-folders/{unfiledRecordFolderId}',
-            pathParams
+            pathParams,
         });
     }
     /**
@@ -197,73 +202,79 @@ JSON
         * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
         * @return Promise<UnfiledRecordFolderEntry>
         */
-    getUnfiledRecordFolder(unfiledRecordFolderId: string, opts?: {
-        relativePath?: string;
-    } & RecordsIncludeQuery): Promise<UnfiledRecordFolderEntry> {
+    getUnfiledRecordFolder(
+        unfiledRecordFolderId: string,
+        opts?: {
+            relativePath?: string;
+        } & RecordsIncludeQuery,
+    ): Promise<UnfiledRecordFolderEntry> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
 
         const pathParams = {
-            unfiledRecordFolderId
+            unfiledRecordFolderId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
             relativePath: opts?.relativePath,
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
             path: '/unfiled-record-folders/{unfiledRecordFolderId}',
             pathParams,
             queryParams,
-            returnType: UnfiledRecordFolderEntry
+            returnType: UnfiledRecordFolderEntry,
         });
     }
 
     /**
-    * List unfiled record folder's children
-    *
-    * Minimal information for each child is returned by default.
-    *
-    * You can use the **include** parameter (include=allowableOperations) to return additional information.
-    *
-    * @param unfiledRecordFolderId The identifier of an unfiled record folder.
-    * @param opts Optional parameters
-    * @param opts.where Optionally filter the list. Here are some examples:
-    *  - where=(isRecord=true)
-    *  - where=(isUnfiledRecordFolder=false)
-    *  - where=(nodeType='cm:content INCLUDESUBTYPES')
-    * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
-    * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
-    * @return Promise<UnfiledRecordFolderAssociationPaging>
-    */
-    listUnfiledRecordFolderChildren(unfiledRecordFolderId: string, opts?: {
-        where?: string;
-        relativePath?: string[];
-        includeSource?: boolean;
-    } & RecordsIncludeQuery & RecordsPagingQuery ): Promise<UnfiledRecordFolderAssociationPaging> {
+     * List unfiled record folder's children
+     *
+     * Minimal information for each child is returned by default.
+     *
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param opts Optional parameters
+     * @param opts.where Optionally filter the list. Here are some examples:
+     *  - where=(isRecord=true)
+     *  - where=(isUnfiledRecordFolder=false)
+     *  - where=(nodeType='cm:content INCLUDESUBTYPES')
+     * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+     * @return Promise<UnfiledRecordFolderAssociationPaging>
+     */
+    listUnfiledRecordFolderChildren(
+        unfiledRecordFolderId: string,
+        opts?: {
+            where?: string;
+            relativePath?: string[];
+        } & RecordsIncludeQuery &
+            RecordsPagingQuery &
+            RecordsSourceQuery,
+    ): Promise<UnfiledRecordFolderAssociationPaging> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         opts = opts || {};
 
         const pathParams = {
-            unfiledRecordFolderId
+            unfiledRecordFolderId,
         };
 
         const queryParams = {
-            'skipCount': opts?.skipCount,
-            'maxItems': opts?.maxItems,
-            'where': opts?.where,
-            'include': buildCollectionParam(opts?.include, 'csv'),
-            'relativePath': opts?.relativePath,
-            'includeSource': opts?.includeSource,
-            'fields': buildCollectionParam(opts?.fields, 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            relativePath: opts?.relativePath,
+            includeSource: opts?.includeSource,
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
             path: '/unfiled-record-folders/{unfiledRecordFolderId}/children',
             pathParams,
             queryParams,
-            returnType: UnfiledRecordFolderAssociationPaging
+            returnType: UnfiledRecordFolderAssociationPaging,
         });
     }
     /**
@@ -293,23 +304,24 @@ JSON
         * @param unfiledRecordFolderId The identifier of an unfiled record folder.
         * @param unfiledRecordFolderBodyUpdate The record folder information to update.
         * @param opts Optional parameters
-        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **unfiledRecordFolderId**, or as resolved by **relativePath**.
         * @return Promise<UnfiledRecordFolderEntry>
         */
-    updateUnfiledRecordFolder(unfiledRecordFolderId: string, unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate, opts?: {
-        includeSource?: boolean;
-    } & RecordsIncludeQuery): Promise<UnfiledRecordFolderEntry> {
+    updateUnfiledRecordFolder(
+        unfiledRecordFolderId: string,
+        unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate,
+        opts?: RecordsIncludeQuery & RecordsSourceQuery,
+    ): Promise<UnfiledRecordFolderEntry> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         throwIfNotDefined(unfiledRecordFolderBodyUpdate, 'unfiledRecordFolderBodyUpdate');
 
         const pathParams = {
-            unfiledRecordFolderId
+            unfiledRecordFolderId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
             includeSource: opts?.includeSource,
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.put({
@@ -317,7 +329,7 @@ JSON
             pathParams,
             queryParams,
             bodyParam: unfiledRecordFolderBodyUpdate,
-            returnType: UnfiledRecordFolderEntry
+            returnType: UnfiledRecordFolderEntry,
         });
     }
 }

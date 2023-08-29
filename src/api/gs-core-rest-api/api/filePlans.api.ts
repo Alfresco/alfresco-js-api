@@ -20,14 +20,15 @@ import { FilePlanEntry } from '../model/filePlanEntry';
 import { RecordCategoryEntry } from '../model/recordCategoryEntry';
 import { RecordCategoryPaging } from '../model/recordCategoryPaging';
 import { RootCategoryBodyCreate } from '../model/rootCategoryBodyCreate';
-import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
+import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { RecordsIncludeQuery, RecordsPagingQuery, RecordsSourceQuery } from './types';
 
 /**
-* FilePlansApi service.
-* @module FilePlansApi
-*/
+ * FilePlansApi service.
+ * @module FilePlansApi
+ */
 export class FilePlansApi extends BaseApi {
     /**
     * Create record categories for a file plan
@@ -95,20 +96,24 @@ JSON
     * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
     * @return Promise<RecordCategoryEntry>
     */
-    createFilePlanCategories(filePlanId: string, nodeBodyCreate: RootCategoryBodyCreate, opts?: {
-        autoRename?: boolean;
-    } & RecordsIncludeQuery): Promise<RecordCategoryEntry> {
+    createFilePlanCategories(
+        filePlanId: string,
+        nodeBodyCreate: RootCategoryBodyCreate,
+        opts?: {
+            autoRename?: boolean;
+        } & RecordsIncludeQuery,
+    ): Promise<RecordCategoryEntry> {
         throwIfNotDefined(filePlanId, 'filePlanId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
 
         const pathParams = {
-            filePlanId
+            filePlanId,
         };
 
         const queryParams = {
             autoRename: opts?.autoRename,
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.post({
@@ -117,7 +122,7 @@ JSON
             queryParams,
             contentTypes: ['application/json', 'multipart/form-data'],
             bodyParam: nodeBodyCreate,
-            returnType: RecordCategoryEntry
+            returnType: RecordCategoryEntry,
         });
     }
     /**
@@ -138,43 +143,37 @@ JSON
         throwIfNotDefined(filePlanId, 'filePlanId');
 
         const pathParams = {
-            filePlanId
+            filePlanId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
             path: '/file-plans/{filePlanId}',
             pathParams,
             queryParams,
-            returnType: FilePlanEntry
+            returnType: FilePlanEntry,
         });
     }
+
     /**
-        * List file plans's children
-        *
-        * Returns a list of record categories.
-
-    Minimal information for each child is returned by default.
-
-    You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-        *
-        * @param filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
-        * @param opts Optional parameters
-        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **filePlanId**
-        * @return Promise<RecordCategoryPaging>
-        */
-    getFilePlanCategories(filePlanId: string, opts?: {
-        includeSource?: boolean;
-    } & RecordsIncludeQuery & RecordsPagingQuery): Promise<RecordCategoryPaging> {
+     * List file plans's children
+     *
+     * Minimal information for each child is returned by default.
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+     * @param opts Optional parameters
+     * @return Promise<RecordCategoryPaging>
+     */
+    getFilePlanCategories(filePlanId: string, opts?: RecordsIncludeQuery & RecordsPagingQuery & RecordsSourceQuery): Promise<RecordCategoryPaging> {
         throwIfNotDefined(filePlanId, 'filePlanId');
 
         const pathParams = {
-            filePlanId
+            filePlanId,
         };
 
         const queryParams = {
@@ -182,49 +181,49 @@ JSON
             maxItems: opts?.maxItems,
             include: buildCollectionParam(opts?.include, 'csv'),
             includeSource: opts?.includeSource,
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
             path: '/file-plans/{filePlanId}/categories',
             pathParams,
             queryParams,
-            returnType: RecordCategoryPaging
+            returnType: RecordCategoryPaging,
         });
     }
+
     /**
-        * Update a file plan
-        *
-        * Updates file plan **filePlanId**.
-    You can only set or update description and title properties:
-    JSON
-    {
-      \"properties\":
-        {
-           \"cm:description\": \"New Description\",
-           \"cm:title\":\"New Title\"
-        }
-    }
-
-    **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
-
-        *
-        * @param filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
-        * @param filePlanBodyUpdate The file plan information to update.
-        * @param opts Optional parameters
-        * @return Promise<FilePlanEntry>
-        */
+     * Update a file plan
+     *
+     * Updates file plan **filePlanId**.
+     * You can only set or update description and title properties:
+     * JSON
+     * {
+     * \"properties\":
+     * {
+     *    \"cm:description\": \"New Description\",
+     *    \"cm:title\":\"New Title\"
+     * }
+     *}
+     *
+     * **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
+     *
+     * @param filePlanId The identifier of a file plan. You can also use the -filePlan- alias.
+     * @param filePlanBodyUpdate The file plan information to update.
+     * @param opts Optional parameters
+     * @return Promise<FilePlanEntry>
+     */
     updateFilePlan(filePlanId: string, filePlanBodyUpdate: FilePlanBodyUpdate, opts?: RecordsIncludeQuery): Promise<FilePlanEntry> {
         throwIfNotDefined(filePlanId, 'filePlanId');
         throwIfNotDefined(filePlanBodyUpdate, 'filePlanBodyUpdate');
 
         const pathParams = {
-            filePlanId
+            filePlanId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.put({
@@ -232,7 +231,7 @@ JSON
             pathParams,
             queryParams,
             bodyParam: filePlanBodyUpdate,
-            returnType: FilePlanEntry
+            returnType: FilePlanEntry,
         });
     }
 }

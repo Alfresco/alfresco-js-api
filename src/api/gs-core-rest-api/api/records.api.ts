@@ -18,86 +18,85 @@
 import { FilePlanComponentBodyUpdate } from '../model/filePlanComponentBodyUpdate';
 import { RecordEntry } from '../model/recordEntry';
 import { RequestBodyFile } from '../model/requestBodyFile';
-import { BaseApi, RecordsIncludeQuery } from './base.api';
+import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { RecordsIncludeQuery } from './types';
 
 /**
-* Records service.
-* @module RecordsApi
-*/
+ * Records service.
+ * @module RecordsApi
+ */
 export class RecordsApi extends BaseApi {
     /**
-    * Complete a record
-    *
-    * @param recordId The identifier of a record.
-    * @param opts Optional parameters
-    * @return Promise<RecordEntry>
-    */
+     * Complete a record
+     *
+     * @param recordId The identifier of a record.
+     * @param opts Optional parameters
+     * @return Promise<RecordEntry>
+     */
     completeRecord(recordId: string, opts?: RecordsIncludeQuery): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
 
         const pathParams = {
-            recordId
+            recordId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.post({
             path: '/records/{recordId}/complete',
             pathParams,
             queryParams,
-            returnType: RecordEntry
+            returnType: RecordEntry,
         });
     }
 
     /**
-    * Delete a record. Deleted file plan components cannot be recovered, they are deleted permanently.
-    *
-    * @param recordId The identifier of a record.
-    * @return Promise<{}>
-    */
+     * Delete a record. Deleted file plan components cannot be recovered, they are deleted permanently.
+     *
+     * @param recordId The identifier of a record.
+     * @return Promise<{}>
+     */
     deleteRecord(recordId: string): Promise<any> {
         throwIfNotDefined(recordId, 'recordId');
 
         const pathParams = {
-            recordId
+            recordId,
         };
 
         return this.delete({
             path: '/records/{recordId}',
-            pathParams
+            pathParams,
         });
     }
 
     /**
-    * File a record
-    *
-    * Files the record **recordId** in the target record folder.
-    *
-    * You need to specify the target record folder by providing its id **targetParentId**
-    * If the record is already filed, a link to the target record folder is created.
-    * You can use the **include** parameter (include=allowableOperations) to return additional information.
-    *
-    * @param recordId The identifier of a record.
-    * @param nodeBodyFile The target record folder id
-    * @param opts Optional parameters
-    * @return Promise<RecordEntry>
-    */
+     * File a record
+     *
+     * You need to specify the target record folder by providing its id **targetParentId**
+     * If the record is already filed, a link to the target record folder is created.
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param recordId The identifier of a record.
+     * @param nodeBodyFile The target record folder id
+     * @param opts Optional parameters
+     * @return Promise<RecordEntry>
+     */
     fileRecord(recordId: string, nodeBodyFile: RequestBodyFile, opts?: RecordsIncludeQuery): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
         throwIfNotDefined(nodeBodyFile, 'nodeBodyFile');
 
         const pathParams = {
-            recordId
+            recordId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.post({
@@ -105,121 +104,124 @@ export class RecordsApi extends BaseApi {
             pathParams,
             queryParams,
             bodyParam: nodeBodyFile,
-            returnType: RecordEntry
+            returnType: RecordEntry,
         });
     }
 
     /**
-    * Get a record
-    *
-    * Mandatory fields and the record's aspects and properties are returned by default.
-    * You can use the **include** parameter (include=allowableOperations) to return additional information.
-    *
-    * @param recordId The identifier of a record.
-    * @param opts Optional parameters
-    * @return Promise<RecordEntry>
-    */
+     * Get a record
+     *
+     * Mandatory fields and the record's aspects and properties are returned by default.
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param recordId The identifier of a record.
+     * @param opts Optional parameters
+     * @return Promise<RecordEntry>
+     */
     getRecord(recordId: string, opts?: RecordsIncludeQuery): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
 
         const pathParams = {
-            recordId
+            recordId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
             path: '/records/{recordId}',
             pathParams,
             queryParams,
-            returnType: RecordEntry
+            returnType: RecordEntry,
         });
     }
 
     /**
-    * Get record content
-    *
-    * @param recordId The identifier of a record.
-    * @param opts Optional parameters
-    * @param opts.attachment **true** enables a web browser to download the file as an attachment.
-    * **false** means a web browser may preview the file in a new tab or window, but not download the file.
-    *
-    * You can only set this parameter to **false** if the content type of the file is in the supported list;
-    * for example, certain image files and PDF files.
-    *
-    * If the content type is not supported for preview, then a value of **false**  is ignored, and
-    * the attachment will be returned in the response. (default to true)
-    * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
-    * Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
-    * @return Promise<{}>
-    */
-    getRecordContent(recordId: string, opts?: {
-        attachment?: boolean;
-        ifModifiedSince?: string;
-    }): Promise<any> {
+     * Get record content
+     *
+     * @param recordId The identifier of a record.
+     * @param opts Optional parameters
+     * @param opts.attachment **true** enables a web browser to download the file as an attachment.
+     * **false** means a web browser may preview the file in a new tab or window, but not download the file.
+     *
+     * You can only set this parameter to **false** if the content type of the file is in the supported list;
+     * for example, certain image files and PDF files.
+     *
+     * If the content type is not supported for preview, then a value of **false**  is ignored, and
+     * the attachment will be returned in the response. (default to true)
+     * @param opts.ifModifiedSince Only returns the content if it has been modified since the date provided.
+     * Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
+     * @return Promise<{}>
+     */
+    getRecordContent(
+        recordId: string,
+        opts?: {
+            attachment?: boolean;
+            ifModifiedSince?: string;
+        },
+    ): Promise<any> {
         throwIfNotDefined(recordId, 'recordId');
 
         const pathParams = {
-            recordId
+            recordId,
         };
 
         const queryParams = {
-            'attachment': opts?.attachment
+            attachment: opts?.attachment,
         };
 
         const headerParams = {
-            'If-Modified-Since': opts?.ifModifiedSince
+            'If-Modified-Since': opts?.ifModifiedSince,
         };
 
         return this.get({
             path: '/records/{recordId}/content',
             pathParams,
             queryParams,
-            headerParams
+            headerParams,
         });
     }
 
     /**
-    * Update record
-    *
-    * Updates the record **recordId**. For example, you can rename a record:
-    * JSON
-    * {
-    *   \"name\":\"My new name\"
-    * }
-    *
-    * You can also set or update one or more properties:
-    * JSON
-    * {
-    *   \"properties\":
-    *     {
-    *        \"cm:title\":\"New title\",
-    *        \"cm:description\":\"New description\"
-    *     }
-    * }
-    *
-    * **Note:** if you want to add or remove aspects, then you must use **GET /records/{recordId}** first to get the complete set of *aspectNames*.
-    * **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
-    *
-    * @param recordId The identifier of a record.
-    * @param recordBodyUpdate The record information to update.
-    * @param opts Optional parameters
-    * @return Promise<RecordEntry>
-    */
+     * Update record
+     *
+     * Updates the record **recordId**. For example, you can rename a record:
+     * JSON
+     * {
+     *   \"name\":\"My new name\"
+     * }
+     *
+     * You can also set or update one or more properties:
+     * JSON
+     * {
+     *   \"properties\":
+     *     {
+     *        \"cm:title\":\"New title\",
+     *        \"cm:description\":\"New description\"
+     *     }
+     * }
+     *
+     * **Note:** if you want to add or remove aspects, then you must use **GET /records/{recordId}** first to get the complete set of *aspectNames*.
+     * **Note:** Currently there is no optimistic locking for updates, so they are applied in \"last one wins\" order.
+     *
+     * @param recordId The identifier of a record.
+     * @param recordBodyUpdate The record information to update.
+     * @param opts Optional parameters
+     * @return Promise<RecordEntry>
+     */
     updateRecord(recordId: string, recordBodyUpdate: FilePlanComponentBodyUpdate, opts?: RecordsIncludeQuery): Promise<RecordEntry> {
         throwIfNotDefined(recordId, 'recordId');
         throwIfNotDefined(recordBodyUpdate, 'recordBodyUpdate');
 
         const pathParams = {
-            recordId
+            recordId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.put({
@@ -227,7 +229,7 @@ export class RecordsApi extends BaseApi {
             pathParams,
             queryParams,
             bodyParam: recordBodyUpdate,
-            returnType: RecordEntry
+            returnType: RecordEntry,
         });
     }
 }

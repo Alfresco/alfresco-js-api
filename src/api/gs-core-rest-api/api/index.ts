@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+export * from './types';
 export * from './filePlans.api';
 export * from './files.api';
 export * from './gsSites.api';
