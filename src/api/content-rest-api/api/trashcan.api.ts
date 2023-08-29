@@ -24,20 +24,21 @@ import { RenditionPaging } from '../model/renditionPaging';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
+import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './types';
 
 /**
-* Trashcan service.
-* @module TrashcanApi
-*/
+ * Trashcan service.
+ * @module TrashcanApi
+ */
 export class TrashcanApi extends BaseApi {
     /**
-    * Permanently delete a deleted node
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    *
-    * @param nodeId The identifier of a node.
-    * @return Promise<{}>
-    */
+     * Permanently delete a deleted node
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * @param nodeId The identifier of a node.
+     * @return Promise<{}>
+     */
     deleteDeletedNode(nodeId: string): Promise<any> {
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -52,14 +53,14 @@ export class TrashcanApi extends BaseApi {
     }
 
     /**
-    * Get rendition information for a deleted node
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    *
-    * @param nodeId The identifier of a node.
-    * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
-    * @return Promise<RenditionEntry>
-    */
+     * Get rendition information for a deleted node
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * @param nodeId The identifier of a node.
+     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
+     * @return Promise<RenditionEntry>
+     */
     getArchivedNodeRendition(nodeId: string, renditionId: string): Promise<RenditionEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
@@ -106,12 +107,16 @@ than a 404 response.
  (default to false)
     * @return Promise<Blob>
     */
-    getArchivedNodeRenditionContent(nodeId: string, renditionId: string, opts?: {
-        attachment?: boolean;
-        placeholder?: boolean;
-        ifModifiedSince?: string;
-        range?: string;
-    }): Promise<Blob> {
+    getArchivedNodeRenditionContent(
+        nodeId: string,
+        renditionId: string,
+        opts?: {
+            attachment?: boolean;
+            placeholder?: boolean;
+            ifModifiedSince?: string;
+            range?: string;
+        }
+    ): Promise<Blob> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
         opts = opts || {};
@@ -128,7 +133,7 @@ than a 404 response.
 
         const headerParams = {
             'If-Modified-Since': opts?.ifModifiedSince,
-            'Range': opts?.range
+            Range: opts?.range
         };
 
         return this.get({
@@ -139,7 +144,7 @@ than a 404 response.
             accepts: ['application/octet-stream']
         });
     }
-/**
+    /**
     * Get a deleted node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -179,7 +184,7 @@ Gets the specific deleted node **nodeId**.
             returnType: DeletedNodeEntry
         });
     }
-/**
+    /**
     * Get deleted node content
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -207,41 +212,42 @@ Single part request supported, for example: bytes=1-10.
 
     * @return Promise<Blob>
     */
-    getDeletedNodeContent(nodeId: string, opts?: {
-        attachment?: boolean;
-        ifModifiedSince?: string;
-        range?: string;
-    }): Promise<Blob> {
-
+    getDeletedNodeContent(
+        nodeId: string,
+        opts?: {
+            attachment?: boolean;
+            ifModifiedSince?: string;
+            range?: string;
+        }
+    ): Promise<Blob> {
         throwIfNotDefined(nodeId, 'nodeId');
-
-        opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             nodeId
         };
 
         const queryParams = {
-            'attachment': opts['attachment']
+            attachment: opts?.attachment
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince'],
-            'Range': opts['range']
-        };
-        const formParams = {
+            'If-Modified-Since': opts?.ifModifiedSince,
+            Range: opts?.range
         };
 
-        const contentTypes = ['application/json'];
         const accepts = ['application/octet-stream'];
 
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , 'blob');
+        return this.get({
+            path: '/deleted-nodes/{nodeId}/content',
+            pathParams,
+            queryParams,
+            headerParams,
+            accepts,
+            returnType: 'blob'
+        });
     }
-/**
+
+    /**
     * List renditions for a deleted node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -262,71 +268,39 @@ clause will return just the CREATED renditions:
     * @return Promise<RenditionPaging>
     */
     listDeletedNodeRenditions(nodeId: string, opts?: { where?: string }): Promise<RenditionPaging> {
-
         throwIfNotDefined(nodeId, 'nodeId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
         const queryParams = {
-            'where': opts['where']
+            where: opts?.where
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/deleted-nodes/{nodeId}/renditions', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , RenditionPaging);
+        return this.get({
+            path: '/deleted-nodes/{nodeId}/renditions',
+            pathParams,
+            queryParams,
+            returnType: RenditionPaging
+        });
     }
-/**
-    * List deleted nodes
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
-Gets a list of deleted nodes for the current user.
-
-If the current user is an administrator deleted nodes for all users will be returned.
-
-The list of deleted nodes will be ordered with the most recently deleted node at the top of the list.
-
-    *
-    * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* aspectNames
-* association
-* isLink
-* isFavorite
-* isLocked
-* path
-* properties
-* permissions
-
-    * @return Promise<DeletedNodesPaging>
-    */
-    listDeletedNodes(opts?: { skipCount?: number; maxItems?: number; include?: string[] }): Promise<DeletedNodesPaging> {
-        opts = opts || {};
-
+    /**
+     * List deleted nodes
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * Gets a list of deleted nodes for the current user.
+     * If the current user is an administrator deleted nodes for all users will be returned.
+     * The list of deleted nodes will be ordered with the most recently deleted node at the top of the list.
+     *
+     * @param opts Optional parameters
+     * @return Promise<DeletedNodesPaging>
+     */
+    listDeletedNodes(opts?: ContentPagingQuery & ContentIncludeQuery): Promise<DeletedNodesPaging> {
         const queryParams = {
-            ...opts,
+            ...(opts || {}),
             include: buildCollectionParam(opts?.include, 'csv')
         };
 
@@ -336,48 +310,38 @@ If not supplied then the default value is 100.
             returnType: DeletedNodesPaging
         });
     }
-/**
-    * Restore a deleted node
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
-Attempts to restore the deleted node **nodeId** to its original location or to a new location.
-
-If the node is successfully restored to its former primary parent, then only the
-primary child association will be restored, including recursively for any primary
-children. It should be noted that no other secondary child associations or peer
-associations will be restored, for any of the nodes within the primary parent-child
-hierarchy of restored nodes, irrespective of whether these associations were to
-nodes within or outside of the restored hierarchy.
-
-Also, any previously shared link will not be restored since it is deleted at the time
-of delete of each node.
-
-    *
-    * @param nodeId The identifier of a node.
-    * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @param opts.deletedNodeBodyRestore The targetParentId if the node is restored to a new location.
-    * @return Promise<NodeEntry>
-    */
-    restoreDeletedNode(nodeId: string, opts?: {
-        fields?: string[];
-        deletedNodeBodyRestore?: {
-            targetParentId?: string;
-            assocType?: string;
-        };
-    }): Promise<NodeEntry> {
+    /**
+     * Restore a deleted node
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * Attempts to restore the deleted node **nodeId** to its original location or to a new location.
+     *
+     * If the node is successfully restored to its former primary parent, then only the
+     * primary child association will be restored, including recursively for any primary
+     * children. It should be noted that no other secondary child associations or peer
+     * associations will be restored, for any of the nodes within the primary parent-child
+     * hierarchy of restored nodes, irrespective of whether these associations were to
+     * nodes within or outside of the restored hierarchy.
+     *
+     * Also, any previously shared link will not be restored since it is deleted at the time
+     * of delete of each node.
+     *
+     * @param nodeId The identifier of a node.
+     * @param opts Optional parameters
+     * @param opts.deletedNodeBodyRestore The targetParentId if the node is restored to a new location.
+     * @return Promise<NodeEntry>
+     */
+    restoreDeletedNode(
+        nodeId: string,
+        opts?: {
+            deletedNodeBodyRestore?: {
+                targetParentId?: string;
+                assocType?: string;
+            };
+        } & ContentFieldsQuery
+    ): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
@@ -443,5 +407,4 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: DirectAccessUrlEntry
         });
     }
-
 }
