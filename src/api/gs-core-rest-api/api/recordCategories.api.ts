@@ -20,14 +20,15 @@ import { RMNodeBodyCreateWithRelativePath } from '../model/rMNodeBodyCreateWithR
 import { RecordCategoryChildEntry } from '../model/recordCategoryChildEntry';
 import { RecordCategoryChildPaging } from '../model/recordCategoryChildPaging';
 import { RecordCategoryEntry } from '../model/recordCategoryEntry';
-import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
+import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { RecordsIncludeQuery, RecordsPagingQuery, RecordsSourceQuery } from './types';
 
 /**
-* RecordCategoriesApi service.
-* @module RecordCategoriesApi
-*/
+ * RecordCategoriesApi service.
+ * @module RecordCategoriesApi
+ */
 export class RecordCategoriesApi extends BaseApi {
     /**
     * Create a record category or a record folder
@@ -132,20 +133,24 @@ JSON
     * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
     * @return Promise<RecordCategoryChildEntry>
     */
-    createRecordCategoryChild(recordCategoryId: string, nodeBodyCreate: RMNodeBodyCreateWithRelativePath, opts?: {
-        autoRename?: boolean;
-    } & RecordsIncludeQuery ): Promise<RecordCategoryChildEntry> {
+    createRecordCategoryChild(
+        recordCategoryId: string,
+        nodeBodyCreate: RMNodeBodyCreateWithRelativePath,
+        opts?: {
+            autoRename?: boolean;
+        } & RecordsIncludeQuery,
+    ): Promise<RecordCategoryChildEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
 
         const pathParams = {
-            recordCategoryId
+            recordCategoryId,
         };
 
         const queryParams = {
             autoRename: opts?.autoRename,
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.post({
@@ -153,91 +158,96 @@ JSON
             pathParams,
             queryParams,
             bodyParam: nodeBodyCreate,
-            returnType: RecordCategoryChildEntry
+            returnType: RecordCategoryChildEntry,
         });
     }
 
     /**
-    * Delete a record category
-    *
-    * @param recordCategoryId The identifier of a record category.
-    * @return Promise<{}>
-    */
+     * Delete a record category
+     *
+     * @param recordCategoryId The identifier of a record category.
+     * @return Promise<{}>
+     */
     deleteRecordCategory(recordCategoryId: string): Promise<any> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
 
         const pathParams = {
-            recordCategoryId
+            recordCategoryId,
         };
 
         return this.delete({
             path: '/record-categories/{recordCategoryId}',
-            pathParams
+            pathParams,
         });
     }
 
     /**
-    * Get a record category
-    *
-    * Mandatory fields and the record category's aspects and properties are returned by default.
-    *
-    * You can use the **include** parameter (include=allowableOperations) to return additional information.
-    *
-    * @param recordCategoryId The identifier of a record category.
-    * @param opts Optional parameters
-    * @param opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
-    * @return Promise<RecordCategoryEntry>
-    */
-    getRecordCategory(recordCategoryId: string, opts?: {
-        relativePath?: string;
-    } & RecordsIncludeQuery): Promise<RecordCategoryEntry> {
+     * Get a record category
+     *
+     * Mandatory fields and the record category's aspects and properties are returned by default.
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param recordCategoryId The identifier of a record category.
+     * @param opts Optional parameters
+     * @param opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+     * @return Promise<RecordCategoryEntry>
+     */
+    getRecordCategory(
+        recordCategoryId: string,
+        opts?: {
+            relativePath?: string;
+        } & RecordsIncludeQuery,
+    ): Promise<RecordCategoryEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
 
         const pathParams = {
-            recordCategoryId
+            recordCategoryId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
             relativePath: opts?.relativePath,
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
             path: '/record-categories/{recordCategoryId}',
             pathParams,
             queryParams,
-            returnType: RecordCategoryEntry
+            returnType: RecordCategoryEntry,
         });
     }
 
     /**
-    * List record category's children
-    *
-    * Minimal information for each child is returned by default.
-    * You can use the **include** parameter (include=allowableOperations) to return additional information.
-    *
-    * The list of child nodes includes primary children and secondary children, if there are any.
-    *
-    * @param recordCategoryId The identifier of a record category.
-    * @param opts Optional parameters
-    * @param opts.where Optionally filter the list. Here are some examples:
-    *   where=(nodeType='rma:recordFolder')
-    *   where=(nodeType='rma:recordCategory')
-    *   where=(isRecordFolder=true AND isClosed=false)
-    * @param opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
-    * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – either the specified parent **recordCategoryId**, or as resolved by **relativePath**.
-    * @return Promise<RecordCategoryChildPaging>
-    */
-    listRecordCategoryChildren(recordCategoryId: string, opts?: {
-        where?: string;
-        relativePath?: string;
-        includeSource?: boolean;
-    } & RecordsIncludeQuery & RecordsPagingQuery): Promise<RecordCategoryChildPaging> {
+     * List record category's children
+     *
+     * Minimal information for each child is returned by default.
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * The list of child nodes includes primary children and secondary children, if there are any.
+     *
+     * @param recordCategoryId The identifier of a record category.
+     * @param opts Optional parameters
+     * @param opts.where Optionally filter the list. Here are some examples:
+     *   where=(nodeType='rma:recordFolder')
+     *   where=(nodeType='rma:recordCategory')
+     *   where=(isRecordFolder=true AND isClosed=false)
+     * @param opts.relativePath Return information on children in the record category resolved by this path. The path is relative to **recordCategoryId**.
+     * @return Promise<RecordCategoryChildPaging>
+     */
+    listRecordCategoryChildren(
+        recordCategoryId: string,
+        opts?: {
+            where?: string;
+            relativePath?: string;
+        } & RecordsIncludeQuery &
+            RecordsPagingQuery &
+            RecordsSourceQuery,
+    ): Promise<RecordCategoryChildPaging> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
 
         const pathParams = {
-            recordCategoryId
+            recordCategoryId,
         };
 
         const queryParams = {
@@ -247,14 +257,14 @@ JSON
             include: buildCollectionParam(opts?.include, 'csv'),
             relativePath: opts?.relativePath,
             includeSource: opts?.includeSource,
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
             path: '/record-categories/{recordCategoryId}/children',
             pathParams,
             queryParams,
-            returnType: RecordCategoryChildPaging
+            returnType: RecordCategoryChildPaging,
         });
     }
     /**
@@ -291,12 +301,12 @@ JSON
         throwIfNotDefined(recordCategoryBodyUpdate, 'recordCategoryBodyUpdate');
 
         const pathParams = {
-            recordCategoryId
+            recordCategoryId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.put({
@@ -304,8 +314,7 @@ JSON
             pathParams,
             queryParams,
             bodyParam: recordCategoryBodyUpdate,
-            returnType: RecordCategoryEntry
+            returnType: RecordCategoryEntry,
         });
     }
-
 }

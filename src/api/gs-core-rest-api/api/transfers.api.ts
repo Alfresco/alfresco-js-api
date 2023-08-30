@@ -17,87 +17,76 @@
 
 import { TransferAssociationPaging } from '../model/transferAssociationPaging';
 import { TransferEntry } from '../model/transferEntry';
-import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
+import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { RecordsIncludeQuery, RecordsPagingQuery, RecordsSourceQuery } from './types';
 
 /**
-* Transfers service.
-* @module TransfersApi
-*/
+ * Transfers service.
+ * @module TransfersApi
+ */
 export class TransfersApi extends BaseApi {
     /**
-    * Get a transfer
-    *
-    * Gets information for transfer **transferId**
-
-Mandatory fields and the transfer's aspects and properties are returned by default.
-
-You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-    *
-    * @param transferId The identifier of a transfer.
-    * @param opts Optional parameters
-    * @return Promise<TransferEntry>
-    */
+     * Get a transfer
+     *
+     * Mandatory fields and the transfer's aspects and properties are returned by default.
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param transferId The identifier of a transfer.
+     * @param opts Optional parameters
+     * @return Promise<TransferEntry>
+     */
     getTransfer(transferId: string, opts?: RecordsIncludeQuery): Promise<TransferEntry> {
         throwIfNotDefined(transferId, 'transferId');
 
         const pathParams = {
-            transferId
+            transferId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
-            path:  '/transfers/{transferId}',
+            path: '/transfers/{transferId}',
             pathParams,
             queryParams,
-            returnType: TransferEntry
+            returnType: TransferEntry,
         });
     }
+
     /**
-        * List transfer's children
-        *
-        * Gets a list of transfer's children.
-
-    Minimal information for each child is returned by default.
-
-    You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-        *
-        * @param transferId The identifier of a transfer.
-        * @param opts Optional parameters
-        * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the specified parent **transferId**.
-        * @return Promise<TransferAssociationPaging>
-        */
-    listTransfersChildren(transferId: string, opts?: {
-        includeSource?: boolean;
-    } & RecordsIncludeQuery & RecordsPagingQuery): Promise<TransferAssociationPaging> {
+     * List transfer's children
+     *
+     * Minimal information for each child is returned by default.
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param transferId The identifier of a transfer.
+     * @param opts Optional parameters
+     * @return Promise<TransferAssociationPaging>
+     */
+    listTransfersChildren(transferId: string, opts?: RecordsSourceQuery & RecordsIncludeQuery & RecordsPagingQuery): Promise<TransferAssociationPaging> {
         throwIfNotDefined(transferId, 'transferId');
-        opts = opts || {};
 
         const pathParams = {
-            transferId
+            transferId,
         };
 
         const queryParams = {
-            'skipCount': opts?.skipCount,
-            'maxItems': opts?.maxItems,
-            'include': buildCollectionParam(opts?.include, 'csv'),
-            'includeSource': opts?.includeSource,
-            'fields': buildCollectionParam(opts?.fields, 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            includeSource: opts?.includeSource,
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
             path: '/transfers/{transferId}/children',
             pathParams,
             queryParams,
-            returnType: TransferAssociationPaging
+            returnType: TransferAssociationPaging,
         });
     }
-
 }

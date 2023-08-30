@@ -20,9 +20,10 @@ import { RMNodeBodyCreate } from '../model/rMNodeBodyCreate';
 import { RecordEntry } from '../model/recordEntry';
 import { RecordFolderAssociationPaging } from '../model/recordFolderAssociationPaging';
 import { RecordFolderEntry } from '../model/recordFolderEntry';
-import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
+import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { RecordsIncludeQuery, RecordsPagingQuery } from './types';
 
 /**
 * Record Folders service.
@@ -118,29 +119,8 @@ JSON
 
     *
     * @param recordFolderId The identifier of a record folder.
-    * @param recordBodyCreate The record information to create.
-
-This field is ignored for multipart/form-data content uploads.
-
+    * @param recordBodyCreate The record information to create. This field is ignored for multipart/form-data content uploads.
     * @param opts Optional parameters
-    * @param opts.include Returns additional information about the record. Any optional field from the response model can be requested. For example:
-* allowableOperations
-* content
-* isCompleted
-* path
-
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<RecordEntry>
     */
     createRecordFolderChild(recordFolderId: string, recordBodyCreate: RMNodeBodyCreate, opts?: RecordsIncludeQuery): Promise<RecordEntry> {

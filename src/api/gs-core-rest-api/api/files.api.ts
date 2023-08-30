@@ -16,47 +16,51 @@
  */
 
 import { RecordEntry } from '../model/recordEntry';
-import { BaseApi, RecordsIncludeQuery } from './base.api';
+import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { RecordsIncludeQuery } from './types';
 
 /**
-* Files service.
-* @module FilesApi
-*/
+ * Files service.
+ * @module FilesApi
+ */
 export class FilesApi extends BaseApi {
     /**
-    * Declare as record
-    *
-    * Declares the file **fileId** in the unfiled records container. The original file is moved to the Records Management site and a secondary parent association is created in the file's original site.
-    *
-    * @param fileId The identifier of a non-record file.
-    * @param opts Optional parameters
-    * @param opts.hideRecord Flag to indicate whether the record should be hidden from the current parent folder. (default to false)
-    * @return Promise<RecordEntry>
-    */
-    declareRecord(fileId: string, opts?: {
-        hideRecord?: boolean;
-        parentId?: string;
-    } & RecordsIncludeQuery): Promise<RecordEntry> {
+     * Declare as record
+     *
+     * Declares the file **fileId** in the unfiled records container. The original file is moved to the Records Management site and a secondary parent association is created in the file's original site.
+     *
+     * @param fileId The identifier of a non-record file.
+     * @param opts Optional parameters
+     * @param opts.hideRecord Flag to indicate whether the record should be hidden from the current parent folder. (default to false)
+     * @return Promise<RecordEntry>
+     */
+    declareRecord(
+        fileId: string,
+        opts?: {
+            hideRecord?: boolean;
+            parentId?: string;
+        } & RecordsIncludeQuery,
+    ): Promise<RecordEntry> {
         throwIfNotDefined(fileId, 'fileId');
 
         const pathParams = {
-            fileId
+            fileId,
         };
 
         const queryParams = {
             hideRecord: opts?.hideRecord,
             parentId: opts?.parentId,
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.post({
             path: '/files/{fileId}/declare',
             pathParams,
             queryParams,
-            returnType: RecordEntry
+            returnType: RecordEntry,
         });
     }
 }

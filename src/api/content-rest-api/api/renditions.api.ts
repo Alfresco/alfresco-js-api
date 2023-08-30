@@ -23,9 +23,9 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Renditions service.
-* @module RenditionsApi
-*/
+ * Renditions service.
+ * @module RenditionsApi
+ */
 export class RenditionsApi extends BaseApi {
     /**
     * Create rendition
@@ -57,81 +57,49 @@ JSON
     * @return Promise<{}>
     */
     createRendition(nodeId: string, renditionBodyCreate: RenditionBodyCreate): Promise<any> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionBodyCreate, 'renditionBodyCreate');
 
-        const postBody = renditionBodyCreate;
-
         const pathParams = {
-            'nodeId': nodeId
+            nodeId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/renditions', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.post({
+            path: '/nodes/{nodeId}/renditions',
+            pathParams,
+            bodyParam: renditionBodyCreate
+        });
     }
-/**
-    * Get rendition information
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
-Gets the rendition information for **renditionId** of file **nodeId**.
-
-    *
-    * @param nodeId The identifier of a node.
-    * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
-    * @return Promise<RenditionEntry>
-    */
+    /**
+     * Get rendition information
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * @param nodeId The identifier of a node.
+     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
+     * @return Promise<RenditionEntry>
+     */
     getRendition(nodeId: string, renditionId: string): Promise<RenditionEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
-
-        const postBody: null = null;
 
         const pathParams = {
             nodeId,
             renditionId
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/renditions/{renditionId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , RenditionEntry);
+        return this.get({
+            path: '/nodes/{nodeId}/renditions/{renditionId}',
+            pathParams,
+            returnType: RenditionEntry
+        });
     }
-/**
+
+    /**
     * Get rendition content
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Gets the rendition content for **renditionId** of file **nodeId**.
-
     *
     * @param nodeId The identifier of a node.
     * @param renditionId The name of a thumbnail rendition, for example *doclib*, or *pdf*.
@@ -158,17 +126,18 @@ than a 404 response.
  (default to false)
     * @return Promise<Blob>
     */
-    getRenditionContent(nodeId: string, renditionId: string, opts?: {
-        attachment?: boolean;
-        placeholder?: boolean;
-        ifModifiedSince?: string;
-        range?: string;
-    }): Promise<Blob> {
+    getRenditionContent(
+        nodeId: string,
+        renditionId: string,
+        opts?: {
+            attachment?: boolean;
+            placeholder?: boolean;
+            ifModifiedSince?: string;
+            range?: string;
+        }
+    ): Promise<Blob> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
-
-        opts = opts || {};
-        const postBody: null = null;
 
         const pathParams = {
             nodeId,
@@ -182,20 +151,21 @@ than a 404 response.
 
         const headerParams = {
             'If-Modified-Since': opts?.ifModifiedSince,
-            'Range': opts?.range
-        };
-        const formParams = {
+            Range: opts?.range
         };
 
-        const contentTypes = ['application/json'];
         const accepts = ['application/octet-stream'];
 
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/renditions/{renditionId}/content', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , 'blob');
+        return this.get({
+            path: '/nodes/{nodeId}/renditions/{renditionId}/content',
+            pathParams,
+            queryParams,
+            headerParams,
+            accepts,
+            returnType: 'blob'
+        });
     }
-/**
+    /**
     * List renditions
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -240,7 +210,6 @@ clause will return just the CREATED renditions:
      * @return Promise<DirectAccessUrlEntry>
      */
     requestDirectAccessUrl(nodeId: string, renditionId: string): Promise<DirectAccessUrlEntry> {
-
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(renditionId, 'renditionId');
 
@@ -249,13 +218,10 @@ clause will return just the CREATED renditions:
             renditionId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url', 'POST',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts , DirectAccessUrlEntry);
+        return this.post({
+            path: '/nodes/{nodeId}/renditions/{renditionId}/request-direct-access-url',
+            pathParams,
+            returnType: DirectAccessUrlEntry
+        });
     }
-
 }

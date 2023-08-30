@@ -19,14 +19,15 @@ import { RMNodeBodyCreate } from '../model/rMNodeBodyCreate';
 import { UnfiledContainerAssociationPaging } from '../model/unfiledContainerAssociationPaging';
 import { UnfiledContainerEntry } from '../model/unfiledContainerEntry';
 import { UnfiledRecordContainerBodyUpdate } from '../model/unfiledRecordContainerBodyUpdate';
-import { BaseApi, RecordsIncludeQuery, RecordsPagingQuery } from './base.api';
+import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
+import { RecordsIncludeQuery, RecordsPagingQuery, RecordsSourceQuery } from './types';
 
 /**
-* Unfiledcontainers service.
-* @module UnfiledContainersApi
-*/
+ * Unfiledcontainers service.
+ * @module UnfiledContainersApi
+ */
 export class UnfiledContainersApi extends BaseApi {
     /**
     * Create a record or an unfiled record folder
@@ -136,20 +137,24 @@ JSON
     * @param opts.autoRename If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.
     * @return Promise<UnfiledContainerAssociationPaging>
     */
-    createUnfiledContainerChildren(unfiledContainerId: string, nodeBodyCreate: RMNodeBodyCreate, opts?: {
-        autoRename?: boolean;
-    } & RecordsIncludeQuery): Promise<UnfiledContainerAssociationPaging> {
+    createUnfiledContainerChildren(
+        unfiledContainerId: string,
+        nodeBodyCreate: RMNodeBodyCreate,
+        opts?: {
+            autoRename?: boolean;
+        } & RecordsIncludeQuery,
+    ): Promise<UnfiledContainerAssociationPaging> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
 
         const pathParams = {
-            unfiledContainerId
+            unfiledContainerId,
         };
 
         const queryParams = {
             autoRename: opts?.autoRename,
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         const contentTypes = ['application/json', 'multipart/form-data'];
@@ -160,7 +165,7 @@ JSON
             queryParams,
             contentTypes,
             bodyParam: nodeBodyCreate,
-            returnType: UnfiledContainerAssociationPaging
+            returnType: UnfiledContainerAssociationPaging,
         });
     }
     /**
@@ -181,19 +186,19 @@ JSON
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
 
         const pathParams = {
-            unfiledContainerId
+            unfiledContainerId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
             path: '/unfiled-containers/{unfiledContainerId}',
             pathParams,
             queryParams,
-            returnType: UnfiledContainerEntry
+            returnType: UnfiledContainerEntry,
         });
     }
     /**
@@ -216,30 +221,34 @@ JSON
         * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on the parent node – the specified parent **unfiledContainerId**
         * @return Promise<UnfiledContainerAssociationPaging>
         */
-    listUnfiledContainerChildren(unfiledContainerId: string, opts?: {
-        where?: string;
-        includeSource?: boolean;
-    } & RecordsIncludeQuery & RecordsPagingQuery ): Promise<UnfiledContainerAssociationPaging> {
+    listUnfiledContainerChildren(
+        unfiledContainerId: string,
+        opts?: {
+            where?: string;
+        } & RecordsSourceQuery &
+            RecordsIncludeQuery &
+            RecordsPagingQuery,
+    ): Promise<UnfiledContainerAssociationPaging> {
         throwIfNotDefined(unfiledContainerId, 'unfiledContainerId');
 
         const pathParams = {
-            unfiledContainerId
+            unfiledContainerId,
         };
 
         const queryParams = {
-            'skipCount': opts?.skipCount,
-            'maxItems': opts?.maxItems,
-            'where': opts?.where,
-            'include': buildCollectionParam(opts?.include, 'csv'),
-            'includeSource': opts?.includeSource,
-            'fields': buildCollectionParam(opts?.fields, 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            includeSource: opts?.includeSource,
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.get({
             path: '/unfiled-containers/{unfiledContainerId}/children',
             pathParams,
             queryParams,
-            returnType: UnfiledContainerAssociationPaging
+            returnType: UnfiledContainerAssociationPaging,
         });
     }
     /**
@@ -274,12 +283,12 @@ JSON
         throwIfNotDefined(unfiledContainerBodyUpdate, 'unfiledContainerBodyUpdate');
 
         const pathParams = {
-            unfiledContainerId
+            unfiledContainerId,
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
         return this.put({
@@ -287,7 +296,7 @@ JSON
             pathParams,
             queryParams,
             bodyParam: unfiledContainerBodyUpdate,
-            returnType: UnfiledContainerEntry
+            returnType: UnfiledContainerEntry,
         });
     }
 }

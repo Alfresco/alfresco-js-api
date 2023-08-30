@@ -27,9 +27,9 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './types';
 
 /**
-* People service.
-* @module PeopleApi
-*/
+ * People service.
+ * @module PeopleApi
+ */
 export class PeopleApi extends BaseApi {
     /**
     * Create person
@@ -67,73 +67,45 @@ JSON
     createPerson(personBodyCreate: PersonBodyCreate, opts?: ContentFieldsQuery): Promise<PersonEntry> {
         throwIfNotDefined(personBodyCreate, 'personBodyCreate');
 
-        const postBody = personBodyCreate;
-
-        const pathParams = {
-
-        };
-
         const queryParams = {
-            'fields': buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , PersonEntry);
+        return this.post({
+            path: '/people',
+            queryParams,
+            bodyParam: personBodyCreate,
+            returnType: PersonEntry,
+        });
     }
-/**
-    * Delete avatar image
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
-
-Deletes the avatar image related to person **personId**.
-
-You must be the person or have admin rights to update a person's avatar.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
-    *
-    * @param personId The identifier of a person.
-    * @return Promise<{}>
-    */
+    /**
+     * Delete avatar image
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+     *
+     * Deletes the avatar image related to person **personId**.
+     *
+     * You must be the person or have admin rights to update a person's avatar.
+     *
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @return Promise<{}>
+     */
     deleteAvatarImage(personId: string): Promise<any> {
-
         throwIfNotDefined(personId, 'personId');
 
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId
+            personId: personId,
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/avatar', 'DELETE',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/people/{personId}/avatar',
+            pathParams,
+        });
     }
-/**
+
+    /**
     * Get avatar image
     *
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
@@ -164,137 +136,114 @@ then the placeholder image is returned, rather than a 404 response.
  (default to true)
     * @return Promise<Blob>
     */
-    getAvatarImage(personId: string, opts?: { attachment?: boolean; placeholder?: boolean; ifModifiedSince?: string; }): Promise<Blob> {
-
+    getAvatarImage(personId: string, opts?: { attachment?: boolean; placeholder?: boolean; ifModifiedSince?: string }): Promise<Blob> {
         throwIfNotDefined(personId, 'personId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            'personId': personId
+            personId,
         };
 
         const queryParams = {
-            'attachment': opts['attachment'],
-            'placeholder': opts['placeholder']
+            attachment: opts?.attachment,
+            placeholder: opts?.placeholder,
         };
 
         const headerParams = {
-            'If-Modified-Since': opts['ifModifiedSince']
-        };
-        const formParams = {
+            'If-Modified-Since': opts?.ifModifiedSince,
         };
 
-        const contentTypes = ['application/json'];
         const accepts = ['application/octet-stream'];
 
-        return this.apiClient.callApi(
-            '/people/{personId}/avatar', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , 'blob');
+        return this.get({
+            path: '/people/{personId}/avatar',
+            pathParams,
+            queryParams,
+            headerParams,
+            accepts,
+            returnType: 'blob',
+        });
     }
-/**
-    * Get a person
-    *
-    * Gets information for the person **personId**.
 
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
-    *
-    * @param personId The identifier of a person.
-    * @param opts Optional parameters
-    * @return Promise<PersonEntry>
-    */
+    /**
+     * Get a person
+     *
+     * Gets information for the person **personId**.
+     *
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @param opts Optional parameters
+     * @return Promise<PersonEntry>
+     */
     getPerson(personId: string, opts?: ContentFieldsQuery): Promise<PersonEntry> {
         throwIfNotDefined(personId, 'personId');
 
-        opts = opts || {};
-        const postBody: null = null;
-
         const pathParams = {
-            personId
+            personId,
         };
 
         const queryParams = {
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , PersonEntry);
+        return this.get({
+            path: '/people/{personId}',
+            pathParams,
+            queryParams,
+            returnType: PersonEntry,
+        });
     }
-/**
-    * List people
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
 
-List people.
-
-You can use the **include** parameter to return any additional information.
-
-The default sort order for the returned list is for people to be sorted by ascending id.
-You can override the default by using the **orderBy** parameter.
-
-You can use any of the following fields to order the results:
-* id
-* firstName
-* lastName
-
-    *
-    * @param opts Optional parameters
-    * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-sort the list by one or more fields.
-
-Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-above to check if any fields used in this method have a descending default search order.
-
-To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
-    * @return Promise<PersonPaging>
-    */
-    listPeople(opts?: {
-        orderBy?: string[];
-    } & ContentPagingQuery & ContentIncludeQuery & ContentFieldsQuery): Promise<PersonPaging> {
-
-        opts = opts || {};
-        const postBody: null = null;
-
-        const pathParams = {
-        };
-
+    /**
+     * List people
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * List people.
+     *
+     * You can use the **include** parameter to return any additional information.
+     *
+     * The default sort order for the returned list is for people to be sorted by ascending id.
+     * You can override the default by using the **orderBy** parameter.
+     *
+     * You can use any of the following fields to order the results:
+     * - id
+     * - firstName
+     * - lastName
+     *
+     * @param opts Optional parameters
+     * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
+     * sort the list by one or more fields.
+     *
+     * Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
+     * above to check if any fields used in this method have a descending default search order.
+     *
+     * To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
+     * @return Promise<PersonPaging>
+     */
+    listPeople(
+        opts?: {
+            orderBy?: string[];
+        } & ContentPagingQuery &
+            ContentIncludeQuery &
+            ContentFieldsQuery,
+    ): Promise<PersonPaging> {
         const queryParams = {
-            'skipCount': opts?.skipCount,
-            'maxItems': opts?.maxItems,
-            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
-            'include': buildCollectionParam(opts?.include, 'csv'),
-            'fields': buildCollectionParam(opts?.fields, 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people', 'GET',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , PersonPaging);
+        return this.get({
+            path: '/people',
+            queryParams,
+            returnType: PersonPaging,
+        });
     }
-/**
+
+    /**
     * Request password reset
     *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
@@ -326,16 +275,16 @@ JSON
         throwIfNotDefined(clientBody, 'clientBody');
 
         const pathParams = {
-            personId
+            personId,
         };
 
         return this.post({
             path: '/people/{personId}/request-password-reset',
             pathParams,
-            bodyParam: clientBody
+            bodyParam: clientBody,
         });
     }
-/**
+    /**
     * Reset password
     *
     * **Note:** this endpoint is available in Alfresco 5.2.1 and newer versions.
@@ -358,81 +307,57 @@ JSON
     * @return Promise<{}>
     */
     resetPassword(personId: string, passwordResetBody: PasswordResetBody): Promise<any> {
-
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(passwordResetBody, 'passwordResetBody');
 
-        const postBody = passwordResetBody;
-
         const pathParams = {
-            'personId': personId
+            personId,
         };
 
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/reset-password', 'POST',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.post({
+            path: '/people/{personId}/reset-password',
+            pathParams,
+            bodyParam: passwordResetBody,
+        });
     }
-/**
-    * Update avatar image
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
-Updates the avatar image related to the person **personId**.
-
-The request body should be the binary stream for the avatar image. The content type of the file
-should be an image file. This will be used to generate an \"avatar\" thumbnail rendition.
-
-You must be the person or have admin rights to update a person's avatar.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
-    *
-    * @param personId The identifier of a person.
-    * @param contentBodyUpdate The binary content
-    * @return Promise<{}>
-    */
+    /**
+     * Update avatar image
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+     *
+     * Updates the avatar image related to the person **personId**.
+     *
+     * The request body should be the binary stream for the avatar image. The content type of the file
+     * should be an image file. This will be used to generate an \"avatar\" thumbnail rendition.
+     *
+     * You must be the person or have admin rights to update a person's avatar.
+     *
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @param contentBodyUpdate The binary content
+     * @return Promise<{}>
+     */
     updateAvatarImage(personId: string, contentBodyUpdate: string): Promise<any> {
-
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
 
-        const postBody = contentBodyUpdate;
-
         const pathParams = {
-            'personId': personId
-        };
-
-        const queryParams = {
-        };
-
-        const headerParams = {
-
-        };
-        const formParams = {
+            personId: personId,
         };
 
         const contentTypes = ['application/octet-stream'];
-        const accepts = ['application/json'];
 
-        return this.apiClient.callApi(
-            '/people/{personId}/avatar', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts );
+        return this.put({
+            path: '/people/{personId}/avatar',
+            pathParams,
+            bodyParam: contentBodyUpdate,
+            contentTypes,
+        });
     }
-/**
+
+    /**
     * Update person
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -474,28 +399,20 @@ JSON
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(personBodyUpdate, 'personBodyUpdate');
 
-        const postBody = personBodyUpdate;
-
         const pathParams = {
-            personId
+            personId,
         };
 
         const queryParams = {
-            fields: buildCollectionParam(opts?.fields, 'csv')
+            fields: buildCollectionParam(opts?.fields, 'csv'),
         };
 
-        const headerParams = {
-
-        };
-        const formParams = {
-        };
-
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}', 'PUT',
-            pathParams, queryParams, headerParams, formParams, postBody,
-            contentTypes, accepts , PersonEntry);
+        return this.put({
+            path: '/people/{personId}',
+            pathParams,
+            queryParams,
+            bodyParam: personBodyUpdate,
+            returnType: PersonEntry,
+        });
     }
 }

@@ -40,19 +40,19 @@ import { SiteGroupPaging } from '../model/siteGroupPaging';
 import { ContentFieldsQuery, ContentPagingQuery } from './types';
 
 /**
-* Sites service.
-* @module SitesApi
-*/
+ * Sites service.
+ * @module SitesApi
+ */
 export class SitesApi extends BaseApi {
     /**
-    * Approve a site membership request
-    *
-    * @param siteId The identifier of a site.
-    * @param inviteeId The invitee username.
-    * @param opts Optional parameters
-    * @param opts.siteMembershipApprovalBody Accepting a request to join, optionally, allows assignment of a role to the user.
-    * @return Promise<{}>
-    */
+     * Approve a site membership request
+     *
+     * @param siteId The identifier of a site.
+     * @param inviteeId The invitee username.
+     * @param opts Optional parameters
+     * @param opts.siteMembershipApprovalBody Accepting a request to join, optionally, allows assignment of a role to the user.
+     * @return Promise<{}>
+     */
     approveSiteMembershipRequest(siteId: string, inviteeId: string, opts?: { siteMembershipApprovalBody?: any }): Promise<any> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(inviteeId, 'inviteeId');
@@ -70,7 +70,7 @@ export class SitesApi extends BaseApi {
             bodyParam: postBody
         });
     }
-/**
+    /**
     * Create a site
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -135,7 +135,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         });
     }
 
-/**
+    /**
     * Create a site membership
     *
     * Creates a site membership for person **personId** on site **siteId**.
@@ -228,7 +228,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         });
     }
 
-/**
+    /**
     * Create a site membership request
     *
     * Create a site membership request for yourself on the site with the identifier of **id**, specified in the JSON body.
@@ -288,21 +288,13 @@ JSON
     * @param personId The identifier of a person.
     * @param siteMembershipRequestBodyCreate Site membership request details
     * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @return Promise<SiteMembershipRequestEntry>
     */
-    createSiteMembershipRequestForPerson(personId: string, siteMembershipRequestBodyCreate: SiteMembershipRequestBodyCreate, opts?: { fields?: string[] }): Promise<SiteMembershipRequestEntry> {
+    createSiteMembershipRequestForPerson(
+        personId: string,
+        siteMembershipRequestBodyCreate: SiteMembershipRequestBodyCreate,
+        opts?: ContentFieldsQuery
+    ): Promise<SiteMembershipRequestEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteMembershipRequestBodyCreate, 'siteMembershipRequestBodyCreate');
 
@@ -324,14 +316,14 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 
     /**
-    * Delete a site
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    *
-    * @param siteId The identifier of a site.
-    * @param opts Optional parameters
-    * @param opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
-    * @return Promise<{}>
-    */
+     * Delete a site
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * @param siteId The identifier of a site.
+     * @param opts Optional parameters
+     * @param opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
+     * @return Promise<{}>
+     */
     deleteSite(siteId: string, opts?: { permanent?: boolean }): Promise<any> {
         throwIfNotDefined(siteId, 'siteId');
 
@@ -343,13 +335,11 @@ parameter are returned in addition to those specified in the **fields** paramete
             permanent: opts?.permanent
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}', 'DELETE',
-            pathParams, queryParams, {}, {}, null,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/sites/{siteId}',
+            pathParams,
+            queryParams
+        });
     }
 
     /**
@@ -369,25 +359,22 @@ parameter are returned in addition to those specified in the **fields** paramete
             personId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/sites/{siteId}/members/{personId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/sites/{siteId}/members/{personId}',
+            pathParams
+        });
     }
 
     /**
-    * Delete a site membership
-    *
-    * Deletes person **personId** as a member of site **siteId**.
-    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    *
-    * @param personId The identifier of a person.
-    * @param siteId The identifier of a site.
-    * @return Promise<{}>
-    */
+     * Delete a site membership
+     *
+     * Deletes person **personId** as a member of site **siteId**.
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @param siteId The identifier of a site.
+     * @return Promise<{}>
+     */
     deleteSiteMembershipForPerson(personId: string, siteId: string): Promise<any> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
@@ -397,25 +384,22 @@ parameter are returned in addition to those specified in the **fields** paramete
             siteId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/sites/{siteId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/people/{personId}/sites/{siteId}',
+            pathParams
+        });
     }
 
     /**
-    * Delete a site membership request
-    *
-    * Deletes the site membership request to site **siteId** for person **personId**.
-    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    *
-    * @param personId The identifier of a person.
-    * @param siteId The identifier of a site.
-    * @return Promise<{}>
-    */
+     * Delete a site membership request
+     *
+     * Deletes the site membership request to site **siteId** for person **personId**.
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @param siteId The identifier of a site.
+     * @return Promise<{}>
+     */
     deleteSiteMembershipRequestForPerson(personId: string, siteId: string): Promise<any> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
@@ -425,49 +409,33 @@ parameter are returned in addition to those specified in the **fields** paramete
             siteId
         };
 
-        const contentTypes = ['application/json'];
-        const accepts = ['application/json'];
-
-        return this.apiClient.callApi(
-            '/people/{personId}/site-membership-requests/{siteId}', 'DELETE',
-            pathParams, {}, {}, {}, null,
-            contentTypes, accepts );
+        return this.delete({
+            path: '/people/{personId}/site-membership-requests/{siteId}',
+            pathParams
+        });
     }
 
     /**
-    * Get a site
-    *
-    * Gets information for site **siteId**.
-
-You can use the **relations** parameter to include one or more related
-entities in a single response and so reduce network traffic.
-
-The entity types in Alfresco are organized in a tree structure.
-The **sites** entity has two children, **containers** and **members**.
-The following relations parameter returns all the container and member
-objects related to the site **siteId**:
-
-containers,members
-
-    *
-    * @param siteId The identifier of a site.
-    * @param opts Optional parameters
-    * @param opts.relations Use the relations parameter to include one or more related entities in a single response.
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @return Promise<SiteEntry>
-    */
-    getSite(siteId: string, opts?: { relations?: string[]; fields?: string[] }): Promise<SiteEntry> {
+     * Get a site
+     *
+     * Gets information for site **siteId**.
+     *
+     * You can use the **relations** parameter to include one or more related
+     * entities in a single response and so reduce network traffic.
+     *
+     * The entity types in Alfresco are organized in a tree structure.
+     * The **sites** entity has two children, **containers** and **members**.
+     * The following relations parameter returns all the container and member
+     * objects related to the site **siteId**:
+     *
+     * containers,members
+     *
+     * @param siteId The identifier of a site.
+     * @param opts Optional parameters
+     * @param opts.relations Use the relations parameter to include one or more related entities in a single response.
+     * @return Promise<SiteEntry>
+     */
+    getSite(siteId: string, opts?: { relations?: string[] } & ContentFieldsQuery): Promise<SiteEntry> {
         throwIfNotDefined(siteId, 'siteId');
 
         const pathParams = {
@@ -488,28 +456,16 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 
     /**
-    * Get a site container
-    *
-    * Gets information on the container **containerId** in site **siteId**.
-    *
-    * @param siteId The identifier of a site.
-    * @param containerId The unique identifier of a site container.
-    * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @return Promise<SiteContainerEntry>
-    */
-    getSiteContainer(siteId: string, containerId: string, opts?: { fields?: string[] }): Promise<SiteContainerEntry> {
+     * Get a site container
+     *
+     * Gets information on the container **containerId** in site **siteId**.
+     *
+     * @param siteId The identifier of a site.
+     * @param containerId The unique identifier of a site container.
+     * @param opts Optional parameters
+     * @return Promise<SiteContainerEntry>
+     */
+    getSiteContainer(siteId: string, containerId: string, opts?: ContentFieldsQuery): Promise<SiteContainerEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(containerId, 'containerId');
 
@@ -531,29 +487,17 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 
     /**
-    * Get a site membership
-    *
-    * Gets site membership information for person **personId** on site **siteId**.
-    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    *
-    * @param siteId The identifier of a site.
-    * @param personId The identifier of a person.
-    * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @return Promise<SiteMemberEntry>
-    */
-    getSiteMembership(siteId: string, personId: string, opts?: { fields?: string[] }): Promise<SiteMemberEntry> {
+     * Get a site membership
+     *
+     * Gets site membership information for person **personId** on site **siteId**.
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param siteId The identifier of a site.
+     * @param personId The identifier of a person.
+     * @param opts Optional parameters
+     * @return Promise<SiteMemberEntry>
+     */
+    getSiteMembership(siteId: string, personId: string, opts?: ContentFieldsQuery): Promise<SiteMemberEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(personId, 'personId');
 
@@ -575,15 +519,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 
     /**
-    * Get a site membership
-    *
-    * Gets site membership information for person **personId** on site **siteId**.
-    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    *
-    * @param personId The identifier of a person.
-    * @param siteId The identifier of a site.
-    * @return Promise<SiteRoleEntry>
-    */
+     * Get a site membership
+     *
+     * Gets site membership information for person **personId** on site **siteId**.
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @param siteId The identifier of a site.
+     * @return Promise<SiteRoleEntry>
+     */
     getSiteMembershipForPerson(personId: string, siteId: string): Promise<SiteRoleEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
@@ -601,29 +545,17 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 
     /**
-    * Get a site membership request
-    *
-    * Gets the site membership request for site **siteId** for person **personId**, if one exists.
-    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    *
-    * @param personId The identifier of a person.
-    * @param siteId The identifier of a site.
-    * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @return Promise<SiteMembershipRequestEntry>
-    */
-    getSiteMembershipRequestForPerson(personId: string, siteId: string, opts?: { fields?: string[] }): Promise<SiteMembershipRequestEntry> {
+     * Get a site membership request
+     *
+     * Gets the site membership request for site **siteId** for person **personId**, if one exists.
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @param siteId The identifier of a site.
+     * @param opts Optional parameters
+     * @return Promise<SiteMembershipRequestEntry>
+     */
+    getSiteMembershipRequestForPerson(personId: string, siteId: string, opts?: ContentFieldsQuery): Promise<SiteMembershipRequestEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
@@ -645,46 +577,25 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 
     /**
-    * Get site membership requests
-    *
-    * Get the list of site membership requests the user can action.
-
-You can use the **where** parameter to filter the returned site membership requests by **siteId**. For example:
-
-(siteId=mySite)
-
-The **where** parameter can also be used to filter by ***personId***. For example:
-
-where=(personId=person)
-
-This may be combined with the siteId filter, as shown below:
-
-where=(siteId=mySite AND personId=person))
-
-    *
-    * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.where A string to restrict the returned objects by using a predicate.
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @return Promise<SiteMembershipRequestWithPersonPaging>
-    */
-    getSiteMembershipRequests(opts?: { skipCount?: number; maxItems?: number; where?: string; fields?: string[] }): Promise<SiteMembershipRequestWithPersonPaging> {
+     * Get site membership requests
+     *
+     * You can use the **where** parameter to filter the returned site membership requests by **siteId**. For example:
+     *
+     * (siteId=mySite)
+     *
+     * The **where** parameter can also be used to filter by ***personId***. For example:
+     *
+     * where=(personId=person)
+     *
+     * This may be combined with the siteId filter, as shown below:
+     *
+     * where=(siteId=mySite AND personId=person))
+     *
+     * @param opts Optional parameters
+     * @param opts.where A string to restrict the returned objects by using a predicate.
+     * @return Promise<SiteMembershipRequestWithPersonPaging>
+     */
+    getSiteMembershipRequests(opts?: { where?: string } & ContentPagingQuery & ContentFieldsQuery): Promise<SiteMembershipRequestWithPersonPaging> {
         const queryParams = {
             skipCount: opts?.skipCount,
             maxItems: opts?.maxItems,
@@ -700,33 +611,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 
     /**
-    * List site containers
-    *
-    * Gets a list of containers for the site **siteId**.
-    *
-    * @param siteId The identifier of a site.
-    * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @return Promise<SiteContainerPaging>
-    */
-    listSiteContainers(siteId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<SiteContainerPaging> {
+     * List site containers
+     *
+     * Gets a list of containers for the site **siteId**.
+     *
+     * @param siteId The identifier of a site.
+     * @param opts Optional parameters
+     * @return Promise<SiteContainerPaging>
+     */
+    listSiteContainers(siteId: string, opts?: ContentPagingQuery & ContentFieldsQuery): Promise<SiteContainerPaging> {
         throwIfNotDefined(siteId, 'siteId');
 
         const pathParams = {
@@ -748,34 +641,16 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 
     /**
-    * List site membership requests
-    *
-    * Gets a list of the current site membership requests for person **personId**.
-    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    *
-    * @param personId The identifier of a person.
-    * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @return Promise<SiteMembershipRequestPaging>
-    */
-    listSiteMembershipRequestsForPerson(personId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[] }): Promise<SiteMembershipRequestPaging> {
+     * List site membership requests
+     *
+     * Gets a list of the current site membership requests for person **personId**.
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @param opts Optional parameters
+     * @return Promise<SiteMembershipRequestPaging>
+     */
+    listSiteMembershipRequestsForPerson(personId: string, opts?: ContentPagingQuery & ContentFieldsQuery): Promise<SiteMembershipRequestPaging> {
         throwIfNotDefined(personId, 'personId');
 
         const pathParams = {
@@ -797,37 +672,15 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 
     /**
-    * List site memberships
-    *
-    * Gets a list of site memberships for site **siteId**.
-    *
-    * @param siteId The identifier of a site.
-    * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.fields A list of field names.
-
- **Note:** where class filter is available in Alfresco 7.0.0 and newer versions.
- Optionally filter the list.
- *   where=(isMemberOfGroup=false|true)
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @return Promise<SiteMemberPaging>
-    */
-    listSiteMemberships(siteId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[]; where?: string }): Promise<SiteMemberPaging> {
+     * List site memberships
+     *
+     * Gets a list of site memberships for site **siteId**.
+     *
+     * @param siteId The identifier of a site.
+     * @param opts Optional parameters
+     * @return Promise<SiteMemberPaging>
+     */
+    listSiteMemberships(siteId: string, opts?: { where?: string } & ContentPagingQuery & ContentFieldsQuery): Promise<SiteMemberPaging> {
         throwIfNotDefined(siteId, 'siteId');
 
         opts = opts || {};
@@ -876,12 +729,6 @@ parameter are returned in addition to those specified in the **fields** paramete
     *
     * @param personId The identifier of a person.
     * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
     * @param opts.orderBy A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
 sort the list by one or more fields.
 
@@ -891,22 +738,13 @@ above to check if any fields used in this method have a descending default searc
 To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
 
     * @param opts.relations Use the relations parameter to include one or more related entities in a single response.
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
     * @param opts.where A string to restrict the returned objects by using a predicate.
     * @return Promise<SiteRolePaging>
     */
-    listSiteMembershipsForPerson(personId: string, opts?: { skipCount?: number; maxItems?: number; fields?: string[]; where?: string, orderBy?: string[], relations?: string[] }): Promise<SiteRolePaging> {
+    listSiteMembershipsForPerson(
+        personId: string,
+        opts?: { where?: string; orderBy?: string[]; relations?: string[] } & ContentPagingQuery & ContentFieldsQuery
+    ): Promise<SiteRolePaging> {
         throwIfNotDefined(personId, 'personId');
         opts = opts || {};
 
@@ -915,12 +753,12 @@ parameter are returned in addition to those specified in the **fields** paramete
         };
 
         const queryParams = {
-            'skipCount': opts['skipCount'],
-            'maxItems': opts['maxItems'],
-            'orderBy': buildCollectionParam(opts['orderBy'], 'csv'),
-            'relations': buildCollectionParam(opts['relations'], 'csv'),
-            'fields': buildCollectionParam(opts['fields'], 'csv'),
-            'where': opts['where']
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            relations: buildCollectionParam(opts?.relations, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv'),
+            where: opts?.where
         };
 
         return this.get({
@@ -978,18 +816,21 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
     * @param opts.where A string to restrict the returned objects by using a predicate.
     * @return Promise<SitePaging>
     */
-    listSites(opts?: {
-        orderBy?: string[];
-        relations?: string[],
-        where?: string
-    } & ContentPagingQuery & ContentFieldsQuery): Promise<SitePaging> {
+    listSites(
+        opts?: {
+            orderBy?: string[];
+            relations?: string[];
+            where?: string;
+        } & ContentPagingQuery &
+            ContentFieldsQuery
+    ): Promise<SitePaging> {
         const queryParams = {
-            'skipCount': opts?.skipCount,
-            'maxItems': opts?.maxItems,
-            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
-            'relations': buildCollectionParam(opts?.relations, 'csv'),
-            'fields': buildCollectionParam(opts?.fields, 'csv'),
-            'where': opts?.where
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            relations: buildCollectionParam(opts?.relations, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv'),
+            where: opts?.where
         };
 
         return this.get({
@@ -1000,14 +841,14 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
     }
 
     /**
-    * Reject a site membership request
-    *
-    * @param siteId The identifier of a site.
-    * @param inviteeId The invitee username.
-    * @param opts Optional parameters
-    * @param opts.siteMembershipRejectionBody Rejecting a request to join, optionally, allows the inclusion of comment.
-    * @return Promise<{}>
-    */
+     * Reject a site membership request
+     *
+     * @param siteId The identifier of a site.
+     * @param inviteeId The invitee username.
+     * @param opts Optional parameters
+     * @param opts.siteMembershipRejectionBody Rejecting a request to join, optionally, allows the inclusion of comment.
+     * @return Promise<{}>
+     */
     rejectSiteMembershipRequest(siteId: string, inviteeId: string, opts?: { siteMembershipRejectionBody?: any }): Promise<any> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(inviteeId, 'inviteeId');
@@ -1027,21 +868,20 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
     }
 
     /**
-    * Update a site
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Update the details for the given site **siteId**. Site Manager or otherwise a
-(site) admin can update title, description or visibility.
-
-Note: the id of a site cannot be updated once the site has been created.
-
-    *
-    * @param siteId The identifier of a site.
-    * @param siteBodyUpdate The site information to update.
-    * @param opts Optional parameters
-    * @return Promise<SiteEntry>
-    */
+     * Update a site
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * Update the details for the given site **siteId**. Site Manager or otherwise a
+     * (site) admin can update title, description or visibility.
+     *
+     * Note: the id of a site cannot be updated once the site has been created.
+     *
+     * @param siteId The identifier of a site.
+     * @param siteBodyUpdate The site information to update.
+     * @param opts Optional parameters
+     * @return Promise<SiteEntry>
+     */
     updateSite(siteId: string, siteBodyUpdate: SiteBodyUpdate, opts?: ContentFieldsQuery): Promise<SiteEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(siteBodyUpdate, 'siteBodyUpdate');
@@ -1066,22 +906,22 @@ Note: the id of a site cannot be updated once the site has been created.
     }
 
     /**
-    * Update a site membership
-    *
-    * Update the membership of person **personId** in site **siteId**.
-    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    * You can set the **role** to one of four types:
-    * - SiteConsumer
-    * - SiteCollaborator
-    * - SiteContributor
-    * - SiteManager
-    *
-    * @param siteId The identifier of a site.
-    * @param personId The identifier of a person.
-    * @param siteMembershipBodyUpdate The persons new role
-    * @param opts Optional parameters
-    * @return Promise<SiteMemberEntry>
-    */
+     * Update a site membership
+     *
+     * Update the membership of person **personId** in site **siteId**.
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     * You can set the **role** to one of four types:
+     * - SiteConsumer
+     * - SiteCollaborator
+     * - SiteContributor
+     * - SiteManager
+     *
+     * @param siteId The identifier of a site.
+     * @param personId The identifier of a person.
+     * @param siteMembershipBodyUpdate The persons new role
+     * @param opts Optional parameters
+     * @return Promise<SiteMemberEntry>
+     */
     updateSiteMembership(siteId: string, personId: string, siteMembershipBodyUpdate: SiteMembershipBodyUpdate, opts?: ContentFieldsQuery): Promise<SiteMemberEntry> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(personId, 'personId');
@@ -1106,18 +946,23 @@ Note: the id of a site cannot be updated once the site has been created.
     }
 
     /**
-    * Update a site membership request
-    *
-    * Updates the message for the site membership request to site **siteId** for person **personId**.
-    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    *
-    * @param personId The identifier of a person.
-    * @param siteId The identifier of a site.
-    * @param siteMembershipRequestBodyUpdate The new message to display
-    * @param opts Optional parameters
-    * @return Promise<SiteMembershipRequestEntry>
-    */
-    updateSiteMembershipRequestForPerson(personId: string, siteId: string, siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate, opts?: ContentFieldsQuery): Promise<SiteMembershipRequestEntry> {
+     * Update a site membership request
+     *
+     * Updates the message for the site membership request to site **siteId** for person **personId**.
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @param siteId The identifier of a site.
+     * @param siteMembershipRequestBodyUpdate The new message to display
+     * @param opts Optional parameters
+     * @return Promise<SiteMembershipRequestEntry>
+     */
+    updateSiteMembershipRequestForPerson(
+        personId: string,
+        siteId: string,
+        siteMembershipRequestBodyUpdate: SiteMembershipRequestBodyUpdate,
+        opts?: ContentFieldsQuery
+    ): Promise<SiteMembershipRequestEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(siteMembershipRequestBodyUpdate, 'siteMembershipRequestBodyUpdate');
@@ -1221,10 +1066,8 @@ Note: the id of a site cannot be updated once the site has been created.
     /**
      * List group membership for site
      *
-     * Gets a list of group membership for site **siteId**.
-
-     **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
-
+     * **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+     *
      * @param siteId The identifier of a site.
      * @param opts Optional parameters
      * @return Promise<SiteGroupPaging>
@@ -1252,7 +1095,7 @@ Note: the id of a site cannot be updated once the site has been created.
 
     /**
      * Get information about site membership of group
-     **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
+     * *Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
      * Gets site membership information for group **groupId** on site **siteId**.
      *
      * @param siteId The identifier of a site.
@@ -1283,8 +1126,6 @@ Note: the id of a site cannot be updated once the site has been created.
 
     /**
      * Update site membership of group
-     *
-     * Update the membership of person **groupId** in site **siteId**.
      *
      * **Note:** this endpoint is available in Alfresco 7.0.0 and newer versions.
      *
@@ -1326,7 +1167,6 @@ Note: the id of a site cannot be updated once the site has been created.
     /**
      * Delete a group membership for site
      *
-     * Deletes group **groupId** as a member of site **siteId**.
      * @param siteId The identifier of a site.
      * @param groupId The authorityId of a group.
      * @return Promise<{}>
