@@ -53,27 +53,17 @@ describe('PeopleApi', () => {
         payload.firstName = 'chewbacca';
         payload.password = 'Rrrrrrrghghghghgh';
 
-        peopleApi.createPerson(payload).then(
-            () => {
-                done();
-            },
-            (error: any) => {
-                console.error(error);
-            }
-        );
+        peopleApi.createPerson(payload).then(() => {
+            done();
+        });
     });
 
     it('should get list of people', (done) => {
         peopleMock.get200ResponsePersons();
 
-        peopleApi.listPeople().then(
-            () => {
-                peopleMock.play();
-                done();
-            },
-            (error: any) => {
-                console.error(error);
-            }
-        );
+        peopleApi.listPeople().then(() => {
+            peopleMock.play();
+            done();
+        });
     });
 });

@@ -54,7 +54,7 @@ describe('Bpm Auth test', () => {
                     done();
                 });
             },
-            (error: any) => {
+            (error) => {
                 console.log('error' + JSON.stringify(error));
             }
         );
@@ -69,7 +69,7 @@ describe('Bpm Auth test', () => {
                 contextRootBpm: 'activiti-app'
             });
 
-            processAuth.login('admin', 'admin').then((data: any) => {
+            processAuth.login('admin', 'admin').then((data) => {
                 expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                 done();
             });
@@ -163,7 +163,7 @@ describe('Bpm Auth test', () => {
                     contextRootBpm: 'activiti-app'
                 });
 
-                const loginPromise: any = processAuth.login('wrong', 'name');
+                const loginPromise = processAuth.login('wrong', 'name');
 
                 loginPromise.catch(() => {});
                 loginPromise.on('unauthorized', () => {
@@ -179,7 +179,7 @@ describe('Bpm Auth test', () => {
                     contextRootBpm: 'activiti-app'
                 });
 
-                const loginPromise: any = processAuth.login('wrong', 'name');
+                const loginPromise = processAuth.login('wrong', 'name');
                 loginPromise.catch(() => {});
                 loginPromise.on('forbidden', () => {
                     done();
@@ -194,7 +194,7 @@ describe('Bpm Auth test', () => {
                     contextRootBpm: 'activiti-app'
                 });
 
-                const loginPromise: any = processAuth.login('admin', 'admin');
+                const loginPromise = processAuth.login('admin', 'admin');
 
                 loginPromise.catch(() => {});
                 loginPromise.on('success', () => {
@@ -214,7 +214,7 @@ describe('Bpm Auth test', () => {
 
                 authBpmMock.get200ResponseLogout();
 
-                const promise: any = processAuth.logout();
+                const promise = processAuth.logout();
                 promise.on('logout', () => {
                     done();
                 });
@@ -260,7 +260,7 @@ describe('Bpm Auth test', () => {
         });
 
         describe('CSRF Token', () => {
-            let setCsrfTokenStub: any;
+            let setCsrfTokenStub: sinon.SinonStub;
 
             beforeEach(() => {
                 setCsrfTokenStub = sinon.stub(SuperagentHttpClient.prototype, 'setCsrfToken');

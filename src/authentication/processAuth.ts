@@ -16,7 +16,7 @@
  */
 
 import ee from 'event-emitter';
-import { AlfrescoApiClient } from '../alfrescoApiClient';
+import { AlfrescoApiClient, AlfrescoApiClientPromise } from '../alfrescoApiClient';
 import { AlfrescoApiConfig } from '../alfrescoApiConfig';
 import { Authentication } from './authentication';
 import { Storage } from '../storage';
@@ -24,11 +24,11 @@ import { HttpClient } from '../api-clients/http-client.interface';
 import { isBrowser } from '../utils';
 
 export class ProcessAuth extends AlfrescoApiClient {
-
     ticket: string;
 
     authentications: Authentication = {
-        'basicAuth': { ticket: '' }, type: 'activiti'
+        basicAuth: { ticket: '' },
+        type: 'activiti'
     };
 
     constructor(config: AlfrescoApiConfig, httpClient?: HttpClient) {
@@ -51,18 +51,17 @@ export class ProcessAuth extends AlfrescoApiClient {
         this.config = config;
         this.ticket = undefined;
 
-        this.basePath = config.hostBpm + '/' + this.config.contextRootBpm;   //Activiti Call
+        this.basePath = config.hostBpm + '/' + this.config.contextRootBpm; //Activiti Call
 
         if (this.config.ticketBpm) {
             this.setTicket(config.ticketBpm);
         } else if (this.storage.getItem('ticket-BPM')) {
             this.setTicket(this.storage.getItem('ticket-BPM'));
         }
-
     }
 
     changeHost() {
-        this.basePath = this.config.hostBpm + '/' + this.config.contextRootBpm;    //Activiti Call
+        this.basePath = this.config.hostBpm + '/' + this.config.contextRootBpm; //Activiti Call
         this.ticket = undefined;
     }
 
@@ -83,7 +82,7 @@ export class ProcessAuth extends AlfrescoApiClient {
      *
      * @returns A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    login(username: string, password: string): Promise<string> {
+    login(username: string, password: string): AlfrescoApiClientPromise<string> {
         this.authentications.basicAuth.username = username;
         this.authentications.basicAuth.password = password;
 
@@ -92,8 +91,8 @@ export class ProcessAuth extends AlfrescoApiClient {
             'Cache-Control': 'no-cache'
         };
         const formParams = {
-            j_username:  this.authentications.basicAuth.username,
-            j_password:  this.authentications.basicAuth.password,
+            j_username: this.authentications.basicAuth.username,
+            j_password: this.authentications.basicAuth.password,
             _spring_security_remember_me: true,
             submit: 'Login'
         };
@@ -102,14 +101,10 @@ export class ProcessAuth extends AlfrescoApiClient {
         const accepts = ['application/json'];
 
         const promise: any = new Promise<string>((resolve, reject) => {
-            this.callApi(
-                '/app/authentication', 'POST',
-                {}, {}, headerParams, formParams, {},
-                contentTypes, accepts
-            ).then(
+            this.callApi('/app/authentication', 'POST', {}, {}, headerParams, formParams, {}, contentTypes, accepts).then(
                 () => {
                     this.saveUsername(username);
-                    const ticket = this.basicAuth( this.authentications.basicAuth.username,  this.authentications.basicAuth.password);
+                    const ticket = this.basicAuth(this.authentications.basicAuth.username, this.authentications.basicAuth.password);
                     this.setTicket(ticket);
                     promise.emit('success');
                     this.emit('logged-in');
@@ -125,7 +120,8 @@ export class ProcessAuth extends AlfrescoApiClient {
                         promise.emit('error');
                     }
                     reject(error);
-                });
+                }
+            );
         });
 
         ee(promise); // jshint ignore:line
@@ -135,20 +131,16 @@ export class ProcessAuth extends AlfrescoApiClient {
     /**
      * logout Alfresco API
      *
-     * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
+     * @returns {AlfrescoApiClientPromise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
-    logout(): Promise<void> {
+    logout(): AlfrescoApiClientPromise<void> {
         this.saveUsername('');
 
         const contentTypes = ['application/json'];
         const accepts = ['application/json'];
 
         const promise: any = new Promise<void>((resolve, reject) => {
-            this.callApi(
-                '/app/logout', 'GET',
-                {}, {}, {}, {}, {},
-                contentTypes, accepts
-            ).then(
+            this.callApi('/app/logout', 'GET', {}, {}, {}, {}, {}, contentTypes, accepts).then(
                 () => {
                     this.invalidateSession();
                     promise.emit('logout');
@@ -160,7 +152,8 @@ export class ProcessAuth extends AlfrescoApiClient {
                     }
                     promise.emit('error');
                     reject(error);
-                });
+                }
+            );
         });
 
         ee(promise);
