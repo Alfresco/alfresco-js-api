@@ -38,20 +38,21 @@ describe('Oauth2 Implicit flow test', () => {
         setItemSpy = chai.spy.on(alfrescoJsApi.storage, 'setItem');
     });
 
-    afterEach(()=>{
+    afterEach(() => {
         chai.spy.restore(alfrescoJsApi.storage, 'setItem');
-    })
+    });
 
     it('should throw an error if redirectUri is not present', (done) => {
         try {
             oauth2Auth = new Oauth2Auth(
-                <any> {
+                {
                     oauth2: {
                         host: 'http://myOauthUrl:30081/auth/realms/springboot',
                         clientId: 'activiti',
                         secret: '',
                         scope: 'openid',
-                        implicitFlow: true
+                        implicitFlow: true,
+                        redirectUri: undefined
                     }
                 },
                 alfrescoJsApi
@@ -66,7 +67,7 @@ describe('Oauth2 Implicit flow test', () => {
         window = globalAny.window = { location: {} };
         globalAny.document = {
             getElementById: () => {
-                return ''
+                return '';
             }
         };
 
@@ -85,8 +86,7 @@ describe('Oauth2 Implicit flow test', () => {
         );
 
         oauth2Auth.on('implicit_redirect', () => {
-            expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
-                'openid-connect/auth?');
+            expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' + 'openid-connect/auth?');
             done();
         });
 
@@ -97,7 +97,7 @@ describe('Oauth2 Implicit flow test', () => {
         window = globalAny.window = { location: {} };
         globalAny.document = {
             getElementById: () => {
-                return ''
+                return '';
             }
         };
         oauth2Auth = new Oauth2Auth(
@@ -115,8 +115,7 @@ describe('Oauth2 Implicit flow test', () => {
         );
 
         oauth2Auth.on('implicit_redirect', () => {
-            expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
-                'openid-connect/auth?');
+            expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' + 'openid-connect/auth?');
             expect(setItemSpy).to.have.been.called();
             done();
         });
@@ -128,7 +127,7 @@ describe('Oauth2 Implicit flow test', () => {
         window = globalAny.window = { location: {} };
         globalAny.document = {
             getElementById: () => {
-                return ''
+                return '';
             }
         };
         oauth2Auth = new Oauth2Auth(
@@ -166,10 +165,10 @@ describe('Oauth2 Implicit flow test', () => {
         window = globalAny.window = {};
         globalAny.document = {
             getElementById: () => {
-                return ''
+                return '';
             }
         };
-        window.location = <Location> { hash: 'asfasfasfa' };
+        window.location = <Location>{ hash: 'asfasfasfa' };
 
         Object.defineProperty(window.location, 'hash', {
             writable: true,
@@ -196,8 +195,7 @@ describe('Oauth2 Implicit flow test', () => {
         );
 
         oauth2Auth.on('implicit_redirect', () => {
-            expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' +
-                'openid-connect/auth?');
+            expect(window.location.href).contain('http://myOauthUrl:30081/auth/realms/springboot/protocol/' + 'openid-connect/auth?');
             expect(setItemSpy).to.have.been.called.with('loginFragment', '/redirect-path&session_state=eqfqwfqwf');
             done();
         });

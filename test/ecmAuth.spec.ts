@@ -64,14 +64,13 @@ describe('Ecm Auth test', () => {
                 expect(auth.authentications.basicAuth.username).to.be.equal(null);
                 done();
             },
-            (error: any) => {
+            (error) => {
                 console.log(JSON.stringify(error));
             }
         );
     });
 
     describe('With Authentication', () => {
-
         it('login should return the Ticket if all is ok', (done) => {
             authEcmMock.get201Response();
 
@@ -140,7 +139,7 @@ describe('Ecm Auth test', () => {
 
             contentAuth.login(null, null).then(
                 () => {},
-                (error: any) => {
+                (error) => {
                     expect(error.status).to.be.equal(400);
                     done();
                 }
@@ -176,8 +175,7 @@ describe('Ecm Auth test', () => {
 
                 const loginPromise: any = contentAuth.login('admin', 'admin');
 
-                loginPromise.catch(() => {
-                });
+                loginPromise.catch(() => {});
 
                 loginPromise.on('success', () => {
                     done();
@@ -196,7 +194,6 @@ describe('Ecm Auth test', () => {
         });
 
         describe('With Ticket Authentication', () => {
-
             it('Ticket should be present in the client', () => {
                 authEcmMock.get400Response();
 
@@ -213,7 +210,6 @@ describe('Ecm Auth test', () => {
         });
 
         describe('Logout Api', () => {
-
             beforeEach((done) => {
                 authEcmMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
 
@@ -235,7 +231,7 @@ describe('Ecm Auth test', () => {
                 authEcmMock.get404ResponseLogout();
                 contentAuth.logout().then(
                     () => {},
-                    (error: any) => {
+                    (error) => {
                         expect(error.error.toString()).to.be.equal('Error: Not Found');
                         done();
                     }
