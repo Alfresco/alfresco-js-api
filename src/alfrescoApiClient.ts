@@ -25,7 +25,7 @@ import { Storage } from './storage';
 
 declare const Buffer: any;
 
-type AlfrescoApiClientPromise<T = any> = Promise<T> & {
+export type AlfrescoApiClientPromise<T = any> = Promise<T> & {
     on: ee.EmitterMethod;
     off: ee.EmitterMethod;
     once: ee.EmitterMethod;
@@ -83,9 +83,9 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
      */
     authentications: Authentication = {
         basicAuth: {
-            ticket: '',
+            ticket: ''
         },
-        type: 'basic',
+        type: 'basic'
     };
     /**
      * The default HTTP headers to be included for all API calls.
@@ -98,7 +98,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     timeout: number | { deadline?: number; response?: number } = undefined;
 
     contentTypes = {
-        JSON: ['application/json'],
+        JSON: ['application/json']
     };
 
     httpClient: HttpClient;
@@ -168,7 +168,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
             returnType,
             contextRoot,
             responseType,
-            url,
+            url
         };
 
         return this.buildRequestCall(callApiUrl, options, this.httpClient.request.bind(this.httpClient));
@@ -201,7 +201,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
             accepts,
             returnType,
             contextRoot,
-            responseType,
+            responseType
         };
 
         return this.buildRequestCall(customApiUrl, options, this.httpClient.request.bind(this.httpClient));
@@ -220,12 +220,12 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     }
 
     basicAuth(username: string, password: string): string {
-        const str: any = username + ':' + password;
+        const str = username + ':' + password;
 
         let base64;
 
         if (typeof Buffer === 'function') {
-            base64 = Buffer.from(str.toString(), 'binary').toString('base64');
+            base64 = Buffer.from(str, 'binary').toString('base64');
         } else {
             base64 = btoa(str);
         }
@@ -303,7 +303,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
             enableCsrf: this.isCsrfEnabled(),
             withCredentials: this.isWithCredentials(),
             authentications: this.authentications,
-            defaultHeaders: this.defaultHeaders,
+            defaultHeaders: this.defaultHeaders
         };
     }
 
@@ -312,12 +312,12 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
             on: this.on.bind(this),
             off: this.off.bind(this),
             once: this.once.bind(this),
-            emit: this.emit.bind(this),
+            emit: this.emit.bind(this)
         };
 
         return {
             apiClientEmitter: apiClientEmitter,
-            eventEmitter: ee({}),
+            eventEmitter: ee({})
         };
     }
 
@@ -328,7 +328,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
         return {
             ...options,
             contentType,
-            accept,
+            accept
         };
     }
 
@@ -382,7 +382,7 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
             off: function () {
                 eventEmitter.off.apply(eventEmitter, arguments);
                 return this;
-            },
+            }
         });
 
         return alfrescoPromise;

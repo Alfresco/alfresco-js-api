@@ -43,22 +43,24 @@ describe('Bpm Auth test', () => {
 
         authBpmMock.get200Response();
 
-        processAuth.login('admin', 'admin').then(() => {
-            expect(processAuth.authentications.basicAuth.username).to.be.equal('admin');
+        processAuth.login('admin', 'admin').then(
+            () => {
+                expect(processAuth.authentications.basicAuth.username).to.be.equal('admin');
 
-            authBpmMock.get200ResponseLogout();
+                authBpmMock.get200ResponseLogout();
 
-            processAuth.logout().then(() => {
-                expect(processAuth.authentications.basicAuth.username).to.be.equal(null);
-                done();
-            });
-        }, (error: any) => {
-            console.log('error' + JSON.stringify(error));
-        });
+                processAuth.logout().then(() => {
+                    expect(processAuth.authentications.basicAuth.username).to.be.equal(null);
+                    done();
+                });
+            },
+            (error: any) => {
+                console.log('error' + JSON.stringify(error));
+            }
+        );
     });
 
     describe('With Authentication', () => {
-
         it('login should return the Ticket if all is ok', (done) => {
             authBpmMock.get200Response();
 
@@ -71,7 +73,6 @@ describe('Bpm Auth test', () => {
                 expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                 done();
             });
-
         });
 
         it('login password should be removed after login', (done) => {
@@ -82,7 +83,7 @@ describe('Bpm Auth test', () => {
                 contextRootBpm: 'activiti-app'
             });
 
-            processAuth.login('admin', 'admin').then((data: any) => {
+            processAuth.login('admin', 'admin').then((data) => {
                 expect(data).to.be.equal('Basic YWRtaW46YWRtaW4=');
                 expect(processAuth.authentications.basicAuth.password).to.be.not.equal('admin');
                 done();
@@ -134,7 +135,6 @@ describe('Bpm Auth test', () => {
                 expect(processAuth.isLoggedIn()).to.be.equal(false);
                 done();
             });
-
         });
 
         it('login should return an error if wrong credential are used 401 the login fails', (done) => {
@@ -147,7 +147,7 @@ describe('Bpm Auth test', () => {
 
             processAuth.login('wrong', 'name').then(
                 () => {},
-                (error: any) => {
+                (error) => {
                     expect(error.status).to.be.equal(401);
                     done();
                 }
@@ -222,7 +222,6 @@ describe('Bpm Auth test', () => {
         });
 
         describe('With Ticket Authentication', () => {
-
             it('Ticket should be present in the client', () => {
                 const processAuth = new ProcessAuth({
                     ticketBpm: 'Basic YWRtaW46YWRtaW4=',
@@ -258,7 +257,6 @@ describe('Bpm Auth test', () => {
                     done();
                 });
             });
-
         });
 
         describe('CSRF Token', () => {
