@@ -100,7 +100,7 @@ params (majorVersion and comment) on a subsequent file content update.
     * @param versionId The identifier of a version, ie. version label, within the version history of a node.
     * @return Promise<{}>
     */
-    deleteVersion(nodeId: string, versionId: string): Promise<any> {
+    deleteVersion(nodeId: string, versionId: string): Promise<void> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(versionId, 'versionId');
 
