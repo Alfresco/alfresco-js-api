@@ -28,9 +28,9 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './types';
 
 /**
-* Favorites service.
-* @module FavoritesApi
-*/
+ * Favorites service.
+ * @module FavoritesApi
+ */
 export class FavoritesApi extends BaseApi {
     /**
     * Create a favorite
@@ -145,7 +145,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: FavoriteEntry
         });
     }
-/**
+    /**
     * Create a site favorite
     *
     * **Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
@@ -223,17 +223,17 @@ JSON
     }
 
     /**
-    * Delete a favorite
-    *
-    * Deletes **favoriteId** as a favorite of person **personId**.
-    *
-    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    *
-    * @param personId The identifier of a person.
-    * @param favoriteId The identifier of a favorite.
-    * @return Promise<{}>
-    */
-    deleteFavorite(personId: string, favoriteId: string): Promise<any> {
+     * Delete a favorite
+     *
+     * Deletes **favoriteId** as a favorite of person **personId**.
+     *
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @param favoriteId The identifier of a favorite.
+     * @return Promise<{}>
+     */
+    deleteFavorite(personId: string, favoriteId: string): Promise<void> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(favoriteId, 'favoriteId');
 
@@ -249,20 +249,20 @@ JSON
     }
 
     /**
-    * Delete a site favorite
-    *
-    * **Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
-    * Use /people/{personId}/favorites/{favoriteId} instead.
-    *
-    * Deletes site **siteId** from the favorite site list of person **personId**.
-    *
-    * You can use the -me- string in place of <personId> to specify the currently authenticated user.
-    *
-    * @param personId The identifier of a person.
-    * @param siteId The identifier of a site.
-    * @return Promise<{}>
-    */
-    deleteSiteFavorite(personId: string, siteId: string): Promise<any> {
+     * Delete a site favorite
+     *
+     * **Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
+     * Use /people/{personId}/favorites/{favoriteId} instead.
+     *
+     * Deletes site **siteId** from the favorite site list of person **personId**.
+     *
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @param siteId The identifier of a site.
+     * @return Promise<{}>
+     */
+    deleteSiteFavorite(personId: string, siteId: string): Promise<void> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
@@ -276,7 +276,7 @@ JSON
             pathParams
         });
     }
-/**
+    /**
     * Get a favorite
     *
     * Gets favorite **favoriteId** for person **personId**.
@@ -326,7 +326,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: FavoriteEntry
         });
     }
-/**
+    /**
     * Get a favorite site
     *
     * **Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
@@ -354,7 +354,7 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<SiteEntry>
     */
-    getFavoriteSite(personId: string, siteId: string, opts?: {fields?: string[] }): Promise<SiteEntry> {
+    getFavoriteSite(personId: string, siteId: string, opts?: { fields?: string[] }): Promise<SiteEntry> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
@@ -374,7 +374,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: SiteEntry
         });
     }
-/**
+    /**
     * List favorite sites
     *
     * **Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
@@ -409,7 +409,7 @@ You can use the -me- string in place of <personId> to specify the currently auth
             returnType: SitePaging
         });
     }
-/**
+    /**
     * List favorites
     *
     * Gets a list of favorites for person **personId**.
@@ -460,10 +460,15 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
     * @param opts.where A string to restrict the returned objects by using a predicate.
     * @return Promise<FavoritePaging>
     */
-    listFavorites(personId: string, opts?: {
-        orderBy?: string[];
-        where?: string;
-    } & ContentPagingQuery & ContentIncludeQuery & ContentFieldsQuery ): Promise<FavoritePaging> {
+    listFavorites(
+        personId: string,
+        opts?: {
+            orderBy?: string[];
+            where?: string;
+        } & ContentPagingQuery &
+            ContentIncludeQuery &
+            ContentFieldsQuery
+    ): Promise<FavoritePaging> {
         throwIfNotDefined(personId, 'personId');
         opts = opts || {};
 
@@ -472,12 +477,12 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
         };
 
         const queryParams = {
-            'skipCount': opts?.skipCount,
-            'maxItems': opts?.maxItems,
-            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
-            'where': opts?.where,
-            'include': buildCollectionParam(opts?.include, 'csv'),
-            'fields': buildCollectionParam(opts?.fields, 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({

@@ -23,19 +23,19 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* Users service.
-* @module UsersApi
-*/
+ * Users service.
+ * @module UsersApi
+ */
 export class UsersApi extends BaseApi {
     /**
-    * Execute an action for a specific user
-    *
-    * Typical action is updating/reset password
-    *
-    * @param userId userId
-    * @param actionRequest actionRequest
-    * @return Promise<{}>
-    */
+     * Execute an action for a specific user
+     *
+     * Typical action is updating/reset password
+     *
+     * @param userId userId
+     * @param actionRequest actionRequest
+     * @return Promise<{}>
+     */
     executeAction(userId: number, actionRequest: UserActionRepresentation): Promise<any> {
         throwIfNotDefined(userId, 'userId');
         throwIfNotDefined(actionRequest, 'actionRequest');
@@ -52,25 +52,21 @@ export class UsersApi extends BaseApi {
     }
 
     /**
-    * Stream user profile picture
-    *
-    *
-    *
-    * @param userId userId
-    * @return Promise<{}>
-    */
+     * Stream user profile picture
+     *
+     * @param userId userId
+     * @return Promise<{}>
+     */
     getUserProfilePictureUrl(userId: string): string {
         return this.apiClient.basePath + '/app/rest/users/' + userId + '/picture';
     }
 
     /**
-    * Get a user
-    *
-    *
-    *
-    * @param userId userId
-    * @return Promise<UserRepresentation>
-    */
+     * Get a user
+     *
+     * @param userId userId
+     * @return Promise<UserRepresentation>
+     */
     getUser(userId: number): Promise<UserRepresentation> {
         throwIfNotDefined(userId, 'userId');
 
@@ -86,13 +82,13 @@ export class UsersApi extends BaseApi {
     }
 
     /**
-    * Query users
-    *
-    * A common use case is that a user wants to select another user (eg. when assigning a task) or group.
-    *
-    * @param opts Optional parameters
-    * @return Promise<ResultListDataRepresentationLightUserRepresentation>
-    */
+     * Query users
+     *
+     * A common use case is that a user wants to select another user (eg. when assigning a task) or group.
+     *
+     * @param opts Optional parameters
+     * @return Promise<ResultListDataRepresentationLightUserRepresentation>
+     */
     getUsers(opts?: {
         filter?: string;
         email?: string;
@@ -106,14 +102,14 @@ export class UsersApi extends BaseApi {
         opts = opts || {};
 
         const queryParams = {
-            'filter': opts['filter'],
-            'email': opts['email'],
-            'externalId': opts['externalId'],
-            'externalIdCaseInsensitive': opts['externalIdCaseInsensitive'],
-            'excludeTaskId': opts['excludeTaskId'],
-            'excludeProcessId': opts['excludeProcessId'],
-            'groupId': opts['groupId'],
-            'tenantId': opts['tenantId']
+            filter: opts['filter'],
+            email: opts['email'],
+            externalId: opts['externalId'],
+            externalIdCaseInsensitive: opts['externalIdCaseInsensitive'],
+            excludeTaskId: opts['excludeTaskId'],
+            excludeProcessId: opts['excludeProcessId'],
+            groupId: opts['groupId'],
+            tenantId: opts['tenantId']
         };
 
         return this.get({
@@ -124,13 +120,11 @@ export class UsersApi extends BaseApi {
     }
 
     /**
-    * Request a password reset
-    *
-    *
-    *
-    * @param resetPassword resetPassword
-    * @return Promise<{}>
-    */
+     * Request a password reset
+     *
+     * @param resetPassword resetPassword
+     * @return Promise<{}>
+     */
     requestPasswordReset(resetPassword: ResetPasswordRepresentation): Promise<any> {
         throwIfNotDefined(resetPassword, 'resetPassword');
 
@@ -141,12 +135,12 @@ export class UsersApi extends BaseApi {
     }
 
     /**
-    * Update a user
-    *
-    * @param userId userId
-    * @param userRequest userRequest
-    * @return Promise<UserRepresentation>
-    */
+     * Update a user
+     *
+     * @param userId userId
+     * @param userRequest userRequest
+     * @return Promise<UserRepresentation>
+     */
     updateUser(userId: number, userRequest: UserRepresentation): Promise<UserRepresentation> {
         throwIfNotDefined(userId, 'userId');
         throwIfNotDefined(userRequest, 'userRequest');

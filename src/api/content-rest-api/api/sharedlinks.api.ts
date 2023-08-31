@@ -114,7 +114,7 @@ JSON
      * @param sharedId The identifier of a shared link to a file.
      * @return Promise<{}>
      */
-    deleteSharedLink(sharedId: string): Promise<any> {
+    deleteSharedLink(sharedId: string): Promise<void> {
         throwIfNotDefined(sharedId, 'sharedId');
 
         const pathParams = {

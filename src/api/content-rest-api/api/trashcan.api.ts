@@ -39,7 +39,7 @@ export class TrashcanApi extends BaseApi {
      * @param nodeId The identifier of a node.
      * @return Promise<{}>
      */
-    deleteDeletedNode(nodeId: string): Promise<any> {
+    deleteDeletedNode(nodeId: string): Promise<void> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {

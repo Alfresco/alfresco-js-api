@@ -138,19 +138,19 @@ JSON
         nodeBodyCreate: RMNodeBodyCreateWithRelativePath,
         opts?: {
             autoRename?: boolean;
-        } & RecordsIncludeQuery,
+        } & RecordsIncludeQuery
     ): Promise<RecordCategoryChildEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
 
         const pathParams = {
-            recordCategoryId,
+            recordCategoryId
         };
 
         const queryParams = {
             autoRename: opts?.autoRename,
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.post({
@@ -158,7 +158,7 @@ JSON
             pathParams,
             queryParams,
             bodyParam: nodeBodyCreate,
-            returnType: RecordCategoryChildEntry,
+            returnType: RecordCategoryChildEntry
         });
     }
 
@@ -168,16 +168,16 @@ JSON
      * @param recordCategoryId The identifier of a record category.
      * @return Promise<{}>
      */
-    deleteRecordCategory(recordCategoryId: string): Promise<any> {
+    deleteRecordCategory(recordCategoryId: string): Promise<void> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
 
         const pathParams = {
-            recordCategoryId,
+            recordCategoryId
         };
 
         return this.delete({
             path: '/record-categories/{recordCategoryId}',
-            pathParams,
+            pathParams
         });
     }
 
@@ -196,25 +196,25 @@ JSON
         recordCategoryId: string,
         opts?: {
             relativePath?: string;
-        } & RecordsIncludeQuery,
+        } & RecordsIncludeQuery
     ): Promise<RecordCategoryEntry> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
 
         const pathParams = {
-            recordCategoryId,
+            recordCategoryId
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
             relativePath: opts?.relativePath,
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
             path: '/record-categories/{recordCategoryId}',
             pathParams,
             queryParams,
-            returnType: RecordCategoryEntry,
+            returnType: RecordCategoryEntry
         });
     }
 
@@ -242,12 +242,12 @@ JSON
             relativePath?: string;
         } & RecordsIncludeQuery &
             RecordsPagingQuery &
-            RecordsSourceQuery,
+            RecordsSourceQuery
     ): Promise<RecordCategoryChildPaging> {
         throwIfNotDefined(recordCategoryId, 'recordCategoryId');
 
         const pathParams = {
-            recordCategoryId,
+            recordCategoryId
         };
 
         const queryParams = {
@@ -257,14 +257,14 @@ JSON
             include: buildCollectionParam(opts?.include, 'csv'),
             relativePath: opts?.relativePath,
             includeSource: opts?.includeSource,
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
             path: '/record-categories/{recordCategoryId}/children',
             pathParams,
             queryParams,
-            returnType: RecordCategoryChildPaging,
+            returnType: RecordCategoryChildPaging
         });
     }
     /**
@@ -301,12 +301,12 @@ JSON
         throwIfNotDefined(recordCategoryBodyUpdate, 'recordCategoryBodyUpdate');
 
         const pathParams = {
-            recordCategoryId,
+            recordCategoryId
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.put({
@@ -314,7 +314,7 @@ JSON
             pathParams,
             queryParams,
             bodyParam: recordCategoryBodyUpdate,
-            returnType: RecordCategoryEntry,
+            returnType: RecordCategoryEntry
         });
     }
 }

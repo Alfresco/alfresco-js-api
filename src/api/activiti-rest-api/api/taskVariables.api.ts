@@ -15,23 +15,23 @@
  * limitations under the License.
  */
 
-import { } from '../model/';
+import {} from '../model/';
 import { RestVariable } from '../model/restVariable';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* TaskVariablesApi service.
-* @module TaskVariablesApi
-*/
+ * TaskVariablesApi service.
+ * @module TaskVariablesApi
+ */
 export class TaskVariablesApi extends BaseApi {
     /**
-    * Create variables
-    *
-    * @param taskId taskId
-    * @param restVariables restVariables
-    * @return Promise<RestVariable>
-    */
+     * Create variables
+     *
+     * @param taskId taskId
+     * @param restVariables restVariables
+     * @return Promise<RestVariable>
+     */
     createTaskVariable(taskId: string, restVariables: RestVariable): Promise<RestVariable> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(restVariables, 'restVariables');
@@ -49,12 +49,12 @@ export class TaskVariablesApi extends BaseApi {
     }
 
     /**
-    * Create or update variables
-    *
-    * @param taskId taskId
-    * @return Promise<{}>
-    */
-    deleteAllLocalTaskVariables(taskId: string): Promise<any> {
+     * Create or update variables
+     *
+     * @param taskId taskId
+     * @return Promise<{}>
+     */
+    deleteAllLocalTaskVariables(taskId: string): Promise<void> {
         throwIfNotDefined(taskId, 'taskId');
 
         const pathParams = {
@@ -68,14 +68,14 @@ export class TaskVariablesApi extends BaseApi {
     }
 
     /**
-    * Delete a variable
-    *
-    * @param taskId taskId
-    * @param variableName variableName
-    * @param opts Optional parameters
-    * @return Promise<{}>
-    */
-    deleteVariable(taskId: string, variableName: string, opts?: { scope?: string }): Promise<any> {
+     * Delete a variable
+     *
+     * @param taskId taskId
+     * @param variableName variableName
+     * @param opts Optional parameters
+     * @return Promise<{}>
+     */
+    deleteVariable(taskId: string, variableName: string, opts?: { scope?: string }): Promise<void> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(variableName, 'variableName');
 
@@ -91,13 +91,13 @@ export class TaskVariablesApi extends BaseApi {
         });
     }
     /**
-    * Get a variable
-    *
-    * @param taskId taskId
-    * @param variableName variableName
-    * @param opts Optional parameters
-    * @return Promise<RestVariable>
-    */
+     * Get a variable
+     *
+     * @param taskId taskId
+     * @param variableName variableName
+     * @param opts Optional parameters
+     * @return Promise<RestVariable>
+     */
     getVariable(taskId: string, variableName: string, opts?: { scope?: string }): Promise<RestVariable> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(variableName, 'variableName');
@@ -116,12 +116,12 @@ export class TaskVariablesApi extends BaseApi {
     }
 
     /**
-    * List variables
-    *
-    * @param taskId taskId
-    * @param opts Optional parameters
-    * @return Promise<RestVariable>
-    */
+     * List variables
+     *
+     * @param taskId taskId
+     * @param opts Optional parameters
+     * @return Promise<RestVariable>
+     */
     getVariables(taskId: string, opts?: { scope?: string }): Promise<RestVariable> {
         throwIfNotDefined(taskId, 'taskId');
 
@@ -138,21 +138,21 @@ export class TaskVariablesApi extends BaseApi {
     }
 
     /**
-    * Update a variable
-    *
-    * @param taskId taskId
-    * @param variableName variableName
-    * @param restVariable restVariable
-    * @return Promise<RestVariable>
-    */
+     * Update a variable
+     *
+     * @param taskId taskId
+     * @param variableName variableName
+     * @param restVariable restVariable
+     * @return Promise<RestVariable>
+     */
     updateVariable(taskId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {
         throwIfNotDefined(taskId, 'taskId');
         throwIfNotDefined(variableName, 'variableName');
         throwIfNotDefined(restVariable, 'restVariable');
 
         const pathParams = {
-            'taskId': taskId,
-            'variableName': variableName
+            taskId: taskId,
+            variableName: variableName
         };
 
         return this.put({

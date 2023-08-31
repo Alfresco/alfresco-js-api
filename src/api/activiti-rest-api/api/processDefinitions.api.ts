@@ -60,7 +60,7 @@ export class ProcessDefinitionsApi extends BaseApi {
      * @param identityId User or group ID
      * @return Promise<{}>
      */
-    deleteIdentityLink(processDefinitionId: string, family: string, identityId: string): Promise<any> {
+    deleteIdentityLink(processDefinitionId: string, family: string, identityId: string): Promise<void> {
         throwIfNotDefined(processDefinitionId, 'processDefinitionId');
         throwIfNotDefined(family, 'family');
         throwIfNotDefined(identityId, 'identityId');
@@ -227,7 +227,7 @@ export class ProcessDefinitionsApi extends BaseApi {
      * @param field
      * @return Promise<FormValueRepresentation[]>
      */
-    getRestFieldValues(processDefinitionId: string, field: string): Promise<FormValueRepresentation []> {
+    getRestFieldValues(processDefinitionId: string, field: string): Promise<FormValueRepresentation[]> {
         const pathParams = {
             processDefinitionId,
             field
@@ -249,7 +249,7 @@ export class ProcessDefinitionsApi extends BaseApi {
      * @param column
      * @return Promise<FormValueRepresentation []>
      */
-    getRestTableFieldValues(processDefinitionId: string, field: string, column: string): Promise<FormValueRepresentation []> {
+    getRestTableFieldValues(processDefinitionId: string, field: string, column: string): Promise<FormValueRepresentation[]> {
         const pathParams = {
             processDefinitionId,
             field,

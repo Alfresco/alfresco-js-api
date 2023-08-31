@@ -26,9 +26,9 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { ContentFieldsQuery, ContentIncludeQuery, ContentPagingQuery } from './types';
 
 /**
-* Audit service.
-* @module AuditApi
-*/
+ * Audit service.
+ * @module AuditApi
+ */
 export class AuditApi extends BaseApi {
     /**
     * Permanently delete audit entries for an audit application
@@ -56,7 +56,7 @@ You must have admin rights to delete audit information.
 
     * @return Promise<{}>
     */
-    deleteAuditEntriesForAuditApp(auditApplicationId: string, where: string): Promise<any> {
+    deleteAuditEntriesForAuditApp(auditApplicationId: string, where: string): Promise<void> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(where, 'where');
 
@@ -74,21 +74,18 @@ You must have admin rights to delete audit information.
             queryParams
         });
     }
-/**
-    * Permanently delete an audit entry
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
 
-Permanently delete a single audit entry **auditEntryId**.
-
-You must have admin rights to delete audit information.
-
-    *
-    * @param auditApplicationId The identifier of an audit application.
-    * @param auditEntryId The identifier of an audit entry.
-    * @return Promise<{}>
-    */
-    deleteAuditEntry(auditApplicationId: string, auditEntryId: string): Promise<any> {
+    /**
+     * Permanently delete an audit entry
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+     * You must have admin rights to delete audit information.
+     *
+     * @param auditApplicationId The identifier of an audit application.
+     * @param auditEntryId The identifier of an audit entry.
+     * @return Promise<{}>
+     */
+    deleteAuditEntry(auditApplicationId: string, auditEntryId: string): Promise<void> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(auditEntryId, 'auditEntryId');
 
@@ -103,39 +100,19 @@ You must have admin rights to delete audit information.
         });
     }
 
-/**
-    * Get audit application info
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
-
-Get status of an audit application **auditApplicationId**.
-
-You must have admin rights to retrieve audit information.
-
-You can use the **include** parameter to return the minimum and/or maximum audit record id for the application.
-
-    *
-    * @param auditApplicationId The identifier of an audit application.
-    * @param opts Optional parameters
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @param opts.include Also include the current minimum and/or maximum audit entry ids for the application. The following optional fields can be requested:
-* max
-* min
-
-    * @return Promise<AuditApp>
-    */
-    getAuditApp(auditApplicationId: string, opts?: { fields?: string[]; include?: string[] }): Promise<AuditApp> {
+    /**
+     * Get audit application info
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+     * You must have admin rights to retrieve audit information.
+     *
+     * You can use the **include** parameter to return the minimum and/or maximum audit record id for the application.
+     *
+     * @param auditApplicationId The identifier of an audit application.
+     * @param opts Optional parameters
+     * @return Promise<AuditApp>
+     */
+    getAuditApp(auditApplicationId: string, opts?: ContentFieldsQuery & ContentIncludeQuery): Promise<AuditApp> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
 
         const pathParams = {
@@ -156,20 +133,16 @@ parameter are returned in addition to those specified in the **fields** paramete
     }
 
     /**
-    * Get audit entry
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
-
-Gets audit entry **auditEntryId**.
-
-You must have admin rights to access audit information.
-
-    *
-    * @param auditApplicationId The identifier of an audit application.
-    * @param auditEntryId The identifier of an audit entry.
-    * @param opts Optional parameters
-    * @return Promise<AuditEntryEntry>
-    */
+     * Get audit entry
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+     * You must have admin rights to access audit information.
+     *
+     * @param auditApplicationId The identifier of an audit application.
+     * @param auditEntryId The identifier of an audit entry.
+     * @param opts Optional parameters
+     * @return Promise<AuditEntryEntry>
+     */
     getAuditEntry(auditApplicationId: string, auditEntryId: string, opts?: ContentFieldsQuery): Promise<AuditEntryEntry> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         throwIfNotDefined(auditEntryId, 'auditEntryId');
@@ -191,44 +164,23 @@ You must have admin rights to access audit information.
         });
     }
 
-/**
-    * List audit applications
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
-
-Gets a list of audit applications in this repository.
-
-This list may include pre-configured audit applications, if enabled, such as:
-
-* alfresco-access
-* CMISChangeLog
-* Alfresco Tagging Service
-* Alfresco Sync Service (used by Enterprise Cloud Sync)
-
-You must have admin rights to retrieve audit information.
-
-    *
-    * @param opts Optional parameters
-    * @param opts.skipCount The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- (default to 0)
-    * @param opts.maxItems The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- (default to 100)
-    * @param opts.fields A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
-
-    * @return Promise<AuditAppPaging>
-    */
+    /**
+     * Gets a list of audit applications in this repository.
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+     *
+     * This list may include pre-configured audit applications, if enabled, such as:
+     *
+     * - alfresco-access
+     * - CMISChangeLog
+     * - Alfresco Tagging Service
+     * - Alfresco Sync Service (used by Enterprise Cloud Sync)
+     *
+     * You must have admin rights to retrieve audit information.
+     *
+     * @param opts Optional parameters
+     * @return Promise<AuditAppPaging>
+     */
     listAuditApps(opts?: ContentPagingQuery & ContentFieldsQuery): Promise<AuditAppPaging> {
         const queryParams = {
             skipCount: opts?.skipCount,
@@ -242,7 +194,8 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: AuditAppPaging
         });
     }
-/**
+
+    /**
     * List audit entries for an audit application
     *
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
@@ -291,10 +244,15 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 *   where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')
     * @return Promise<AuditEntryPaging>
     */
-    listAuditEntriesForAuditApp(auditApplicationId: string, opts?: {
-        where?: string;
-        orderBy?: string[];
-    } & ContentPagingQuery & ContentFieldsQuery & ContentIncludeQuery ): Promise<AuditEntryPaging> {
+    listAuditEntriesForAuditApp(
+        auditApplicationId: string,
+        opts?: {
+            where?: string;
+            orderBy?: string[];
+        } & ContentPagingQuery &
+            ContentFieldsQuery &
+            ContentIncludeQuery
+    ): Promise<AuditEntryPaging> {
         throwIfNotDefined(auditApplicationId, 'auditApplicationId');
         opts = opts || {};
 
@@ -303,12 +261,12 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
         };
 
         const queryParams = {
-            'skipCount': opts?.skipCount,
-            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
-            'maxItems': opts?.maxItems,
-            'where': opts?.where,
-            'include': buildCollectionParam(opts?.include, 'csv'),
-            'fields': buildCollectionParam(opts?.fields, 'csv')
+            skipCount: opts?.skipCount,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            maxItems: opts?.maxItems,
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -355,10 +313,15 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
 *   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
     * @return Promise<AuditEntryPaging>
     */
-    listAuditEntriesForNode(nodeId: string, opts?: {
-        orderBy?: string[];
-        where?: string;
-    } & ContentPagingQuery & ContentIncludeQuery & ContentFieldsQuery): Promise<AuditEntryPaging> {
+    listAuditEntriesForNode(
+        nodeId: string,
+        opts?: {
+            orderBy?: string[];
+            where?: string;
+        } & ContentPagingQuery &
+            ContentIncludeQuery &
+            ContentFieldsQuery
+    ): Promise<AuditEntryPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -367,12 +330,12 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
         };
 
         const queryParams = {
-            'skipCount': opts?.skipCount,
-            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
-            'maxItems': opts?.maxItems,
-            'where': opts?.where,
-            'include': buildCollectionParam(opts?.include, 'csv'),
-            'fields': buildCollectionParam(opts?.fields, 'csv')
+            skipCount: opts?.skipCount,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            maxItems: opts?.maxItems,
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -382,7 +345,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
             returnType: AuditEntryPaging
         });
     }
-/**
+    /**
     * Update audit application info
     *
     * **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.

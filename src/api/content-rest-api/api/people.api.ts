@@ -68,14 +68,14 @@ JSON
         throwIfNotDefined(personBodyCreate, 'personBodyCreate');
 
         const queryParams = {
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.post({
             path: '/people',
             queryParams,
             bodyParam: personBodyCreate,
-            returnType: PersonEntry,
+            returnType: PersonEntry
         });
     }
     /**
@@ -92,16 +92,16 @@ JSON
      * @param personId The identifier of a person.
      * @return Promise<{}>
      */
-    deleteAvatarImage(personId: string): Promise<any> {
+    deleteAvatarImage(personId: string): Promise<void> {
         throwIfNotDefined(personId, 'personId');
 
         const pathParams = {
-            personId: personId,
+            personId: personId
         };
 
         return this.delete({
             path: '/people/{personId}/avatar',
-            pathParams,
+            pathParams
         });
     }
 
@@ -140,16 +140,16 @@ then the placeholder image is returned, rather than a 404 response.
         throwIfNotDefined(personId, 'personId');
 
         const pathParams = {
-            personId,
+            personId
         };
 
         const queryParams = {
             attachment: opts?.attachment,
-            placeholder: opts?.placeholder,
+            placeholder: opts?.placeholder
         };
 
         const headerParams = {
-            'If-Modified-Since': opts?.ifModifiedSince,
+            'If-Modified-Since': opts?.ifModifiedSince
         };
 
         const accepts = ['application/octet-stream'];
@@ -160,7 +160,7 @@ then the placeholder image is returned, rather than a 404 response.
             queryParams,
             headerParams,
             accepts,
-            returnType: 'blob',
+            returnType: 'blob'
         });
     }
 
@@ -179,18 +179,18 @@ then the placeholder image is returned, rather than a 404 response.
         throwIfNotDefined(personId, 'personId');
 
         const pathParams = {
-            personId,
+            personId
         };
 
         const queryParams = {
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
             path: '/people/{personId}',
             pathParams,
             queryParams,
-            returnType: PersonEntry,
+            returnType: PersonEntry
         });
     }
 
@@ -226,20 +226,20 @@ then the placeholder image is returned, rather than a 404 response.
             orderBy?: string[];
         } & ContentPagingQuery &
             ContentIncludeQuery &
-            ContentFieldsQuery,
+            ContentFieldsQuery
     ): Promise<PersonPaging> {
         const queryParams = {
             skipCount: opts?.skipCount,
             maxItems: opts?.maxItems,
             orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
             path: '/people',
             queryParams,
-            returnType: PersonPaging,
+            returnType: PersonPaging
         });
     }
 
@@ -275,13 +275,13 @@ JSON
         throwIfNotDefined(clientBody, 'clientBody');
 
         const pathParams = {
-            personId,
+            personId
         };
 
         return this.post({
             path: '/people/{personId}/request-password-reset',
             pathParams,
-            bodyParam: clientBody,
+            bodyParam: clientBody
         });
     }
     /**
@@ -311,13 +311,13 @@ JSON
         throwIfNotDefined(passwordResetBody, 'passwordResetBody');
 
         const pathParams = {
-            personId,
+            personId
         };
 
         return this.post({
             path: '/people/{personId}/reset-password',
             pathParams,
-            bodyParam: passwordResetBody,
+            bodyParam: passwordResetBody
         });
     }
 
@@ -344,7 +344,7 @@ JSON
         throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
 
         const pathParams = {
-            personId: personId,
+            personId: personId
         };
 
         const contentTypes = ['application/octet-stream'];
@@ -353,7 +353,7 @@ JSON
             path: '/people/{personId}/avatar',
             pathParams,
             bodyParam: contentBodyUpdate,
-            contentTypes,
+            contentTypes
         });
     }
 
@@ -400,11 +400,11 @@ JSON
         throwIfNotDefined(personBodyUpdate, 'personBodyUpdate');
 
         const pathParams = {
-            personId,
+            personId
         };
 
         const queryParams = {
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.put({
@@ -412,7 +412,7 @@ JSON
             pathParams,
             queryParams,
             bodyParam: personBodyUpdate,
-            returnType: PersonEntry,
+            returnType: PersonEntry
         });
     }
 }

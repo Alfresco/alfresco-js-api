@@ -24,9 +24,9 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { ContentFieldsQuery, ContentPagingQuery } from './types';
 
 /**
-* Comments service.
-* @module CommentsApi
-*/
+ * Comments service.
+ * @module CommentsApi
+ */
 export class CommentsApi extends BaseApi {
     /**
     * Create a comment
@@ -104,16 +104,15 @@ JSON
             returnType: CommentEntry
         });
     }
-/**
-    * Delete a comment
-    *
-    * Deletes the comment **commentId** from node **nodeId**.
-    *
-    * @param nodeId The identifier of a node.
-    * @param commentId The identifier of a comment.
-    * @return Promise<{}>
-    */
-    deleteComment(nodeId: string, commentId: string): Promise<any> {
+
+    /**
+     * Delete a comment
+     *
+     * @param nodeId The identifier of a node.
+     * @param commentId The identifier of a comment.
+     * @return Promise<{}>
+     */
+    deleteComment(nodeId: string, commentId: string): Promise<void> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentId, 'commentId');
 
@@ -127,15 +126,16 @@ JSON
             pathParams
         });
     }
-/**
-    * List comments
-    *
-    * Gets a list of comments for the node **nodeId**, sorted chronologically with the newest comment first.
-    *
-    * @param nodeId The identifier of a node.
-    * @param opts Optional parameters
-    * @return Promise<CommentPaging>
-    */
+
+    /**
+     * List comments
+     *
+     * Gets a list of comments for the node **nodeId**, sorted chronologically with the newest comment first.
+     *
+     * @param nodeId The identifier of a node.
+     * @param opts Optional parameters
+     * @return Promise<CommentPaging>
+     */
     listComments(nodeId: string, opts?: ContentPagingQuery & ContentFieldsQuery): Promise<CommentPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -156,17 +156,16 @@ JSON
             returnType: CommentPaging
         });
     }
-/**
-    * Update a comment
-    *
-    * Updates an existing comment **commentId** on node **nodeId**.
-    *
-    * @param nodeId The identifier of a node.
-    * @param commentId The identifier of a comment.
-    * @param commentBodyUpdate The JSON representing the comment to be updated.
-    * @param opts Optional parameters
-    * @return Promise<CommentEntry>
-    */
+
+    /**
+     * Update a comment
+     *
+     * @param nodeId The identifier of a node.
+     * @param commentId The identifier of a comment.
+     * @param commentBodyUpdate The JSON representing the comment to be updated.
+     * @param opts Optional parameters
+     * @return Promise<CommentEntry>
+     */
     updateComment(nodeId: string, commentId: string, commentBodyUpdate: CommentBody, opts?: ContentFieldsQuery): Promise<CommentEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(commentId, 'commentId');
@@ -189,5 +188,4 @@ JSON
             returnType: CommentEntry
         });
     }
-
 }

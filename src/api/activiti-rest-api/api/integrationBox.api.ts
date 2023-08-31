@@ -21,15 +21,15 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* IntegrationBoxApi service.
-* @module IntegrationBoxApi
-*/
+ * IntegrationBoxApi service.
+ * @module IntegrationBoxApi
+ */
 export class IntegrationBoxApi extends BaseApi {
     /**
-    * Box Authorization
-    * Returns Box OAuth HTML Page
-    * @return Promise<{}>
-    */
+     * Box Authorization
+     * Returns Box OAuth HTML Page
+     * @return Promise<{}>
+     */
     confirmAuthorisation(): Promise<any> {
         return this.get({
             path: '/api/enterprise/integration/box/confirm-auth-request',
@@ -38,12 +38,12 @@ export class IntegrationBoxApi extends BaseApi {
     }
 
     /**
-    * Add Box account
-    *
-    * @param userId userId
-    * @param credentials credentials
-    * @return Promise<{}>
-    */
+     * Add Box account
+     *
+     * @param userId userId
+     * @param credentials credentials
+     * @return Promise<{}>
+     */
     createRepositoryAccount(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
         throwIfNotDefined(userId, 'userId');
         throwIfNotDefined(credentials, 'credentials');
@@ -60,12 +60,12 @@ export class IntegrationBoxApi extends BaseApi {
     }
 
     /**
-    * Delete account information
-    *
-    * @param userId userId
-    * @return Promise<{}>
-    */
-    deleteRepositoryAccount(userId: number): Promise<any> {
+     * Delete account information
+     *
+     * @param userId userId
+     * @return Promise<{}>
+     */
+    deleteRepositoryAccount(userId: number): Promise<void> {
         throwIfNotDefined(userId, 'userId');
 
         const pathParams = {
@@ -82,10 +82,10 @@ export class IntegrationBoxApi extends BaseApi {
     }
 
     /**
-    * Get status information
-    *
-    * @return Promise<boolean>
-    */
+     * Get status information
+     *
+     * @return Promise<boolean>
+     */
     getBoxPluginStatus(): Promise<boolean> {
         return this.get({
             path: '/api/enterprise/integration/box/status',
@@ -94,14 +94,14 @@ export class IntegrationBoxApi extends BaseApi {
     }
 
     /**
-    * List file and folders
-    *
-    * @param opts Optional parameters
-    * @param opts.filter filter
-    * @param opts.parent parent
-    * @return Promise<ResultListDataRepresentationBoxContent>
-    */
-    getFiles(opts?: { filter?: string; parent?: string; }): Promise<ResultListDataRepresentationBoxContent> {
+     * List file and folders
+     *
+     * @param opts Optional parameters
+     * @param opts.filter filter
+     * @param opts.parent parent
+     * @return Promise<ResultListDataRepresentationBoxContent>
+     */
+    getFiles(opts?: { filter?: string; parent?: string }): Promise<ResultListDataRepresentationBoxContent> {
         opts = opts || {};
 
         return this.get({
@@ -113,11 +113,11 @@ export class IntegrationBoxApi extends BaseApi {
     }
 
     /**
-    * Get account information
-    *
-    * @param userId userId
-    * @return Promise<{}>
-    */
+     * Get account information
+     *
+     * @param userId userId
+     * @return Promise<{}>
+     */
     getRepositoryAccount(userId: number): Promise<any> {
         throwIfNotDefined(userId, 'userId');
 
@@ -133,12 +133,12 @@ export class IntegrationBoxApi extends BaseApi {
     }
 
     /**
-    * Update account information
-    *
-    * @param userId userId
-    * @param credentials credentials
-    * @return Promise<{}>
-    */
+     * Update account information
+     *
+     * @param userId userId
+     * @param credentials credentials
+     * @return Promise<{}>
+     */
     updateRepositoryAccount(userId: number, credentials: UserAccountCredentialsRepresentation): Promise<any> {
         throwIfNotDefined(userId, 'userId');
         throwIfNotDefined(credentials, 'credentials');

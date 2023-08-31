@@ -61,7 +61,7 @@ export type NodesIncludeQuery = {
      * parameter are returned in addition to those specified in the **fields** parameter.
      */
     fields?: string[];
-}
+};
 
 export interface CreateNodeOpts extends NodesIncludeQuery {
     [key: string]: any;
@@ -74,28 +74,28 @@ export interface CreateNodeOpts extends NodesIncludeQuery {
 }
 
 /**
-* Nodes service.
-* @module NodesApi
-*/
+ * Nodes service.
+ * @module NodesApi
+ */
 export class NodesApi extends BaseApi {
     /**
-    * Copy a node
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    *
-    * Copies the node **nodeId** to the parent folder node **targetParentId**. You specify the **targetParentId** in the request body.
-    *
-    * The new node has the same name as the source node unless you specify a new **name** in the request body.
-    *
-    * If the source **nodeId** is a folder, then all of its children are also copied.
-    *
-    * If the source **nodeId** is a file, it's properties, aspects and tags are copied, it's ratings, comments and locks are not.
-    *
-    * @param nodeId The identifier of a node.
-    * @param nodeBodyCopy The targetParentId and, optionally, a new name which should include the file extension.
-    * @param opts Optional parameters
-    * @return Promise<NodeEntry>
-    */
+     * Copy a node
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * Copies the node **nodeId** to the parent folder node **targetParentId**. You specify the **targetParentId** in the request body.
+     *
+     * The new node has the same name as the source node unless you specify a new **name** in the request body.
+     *
+     * If the source **nodeId** is a folder, then all of its children are also copied.
+     *
+     * If the source **nodeId** is a file, it's properties, aspects and tags are copied, it's ratings, comments and locks are not.
+     *
+     * @param nodeId The identifier of a node.
+     * @param nodeBodyCopy The targetParentId and, optionally, a new name which should include the file extension.
+     * @param opts Optional parameters
+     * @return Promise<NodeEntry>
+     */
     copyNode(nodeId: string, nodeBodyCopy: NodeBodyCopy, opts?: NodesIncludeQuery): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyCopy, 'nodeBodyCopy');
@@ -118,7 +118,7 @@ export class NodesApi extends BaseApi {
         });
     }
 
-/**
+    /**
     * Create node association
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -205,7 +205,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: AssociationEntry
         });
     }
-/**
+    /**
  * Create a node
  *
  * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -495,7 +495,7 @@ parameter are returned in addition to those specified in the **fields** paramete
         return this.createNode(nodeId, nodeBody, opts);
     }
 
-/**
+    /**
     * Create secondary child
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -562,9 +562,13 @@ parameter are returned in addition to those specified in the **fields** paramete
 
     * @return Promise<ChildAssociationEntry>
     */
-    createSecondaryChildAssociation(nodeId: string, secondaryChildAssociationBodyCreate: ChildAssociationBody, opts?: {
-        fields?: string[]
-    }): Promise<ChildAssociationEntry> {
+    createSecondaryChildAssociation(
+        nodeId: string,
+        secondaryChildAssociationBodyCreate: ChildAssociationBody,
+        opts?: {
+            fields?: string[];
+        }
+    ): Promise<ChildAssociationEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(secondaryChildAssociationBodyCreate, 'secondaryChildAssociationBodyCreate');
 
@@ -584,7 +588,7 @@ parameter are returned in addition to those specified in the **fields** paramete
             returnType: ChildAssociationEntry
         });
     }
-/**
+    /**
     * Delete node association(s)
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -604,7 +608,7 @@ in the other direction.
     * @param opts.assocType Only delete associations of this type.
     * @return Promise<{}>
     */
-    deleteAssociation(nodeId: string, targetId: string, opts?: { assocType?: string }): Promise<any> {
+    deleteAssociation(nodeId: string, targetId: string, opts?: { assocType?: string }): Promise<void> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(targetId, 'targetId');
 
@@ -623,7 +627,7 @@ in the other direction.
             queryParams
         });
     }
-/**
+    /**
     * Delete a node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -650,7 +654,7 @@ Only the owner of the node or an admin can permanently delete the node.
  (default to false)
     * @return Promise<{}>
     */
-    deleteNode(nodeId: string, opts?: { permanent?: boolean }): Promise<any> {
+    deleteNode(nodeId: string, opts?: { permanent?: boolean }): Promise<void> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
@@ -667,7 +671,7 @@ Only the owner of the node or an admin can permanently delete the node.
             queryParams
         });
     }
-/**
+    /**
     * Delete secondary child or children
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -685,7 +689,7 @@ associated as a secondary child with other secondary parents.
     * @param opts.assocType Only delete associations of this type.
     * @return Promise<{}>
     */
-    deleteSecondaryChildAssociation(nodeId: string, childId: string, opts?: { assocType?: string }): Promise<any> {
+    deleteSecondaryChildAssociation(nodeId: string, childId: string, opts?: { assocType?: string }): Promise<void> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(childId, 'childId');
 
@@ -700,7 +704,7 @@ associated as a secondary child with other secondary parents.
             queryParams: opts
         });
     }
-/**
+    /**
     * Get a node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -719,7 +723,7 @@ You can use the **include** parameter to return additional information.
     * @param opts.relativePath A path relative to the **nodeId**. If you set this, information is returned on the node resolved by this path.
     * @return Promise<NodeEntry>
     */
-    getNode(nodeId: string, opts?: { relativePath?: string; } & NodesIncludeQuery): Promise<NodeEntry> {
+    getNode(nodeId: string, opts?: { relativePath?: string } & NodesIncludeQuery): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
@@ -768,11 +772,14 @@ Single part request supported, for example: bytes=1-10.
 
     * @return Promise<Blob>
     */
-    getNodeContent(nodeId: string, opts?: {
-        attachment?: boolean;
-        ifModifiedSince?: string;
-        range?: string;
-    }): Promise<Blob> {
+    getNodeContent(
+        nodeId: string,
+        opts?: {
+            attachment?: boolean;
+            ifModifiedSince?: string;
+            range?: string;
+        }
+    ): Promise<Blob> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         opts = opts || {};
@@ -787,7 +794,7 @@ Single part request supported, for example: bytes=1-10.
 
         const headerParams = {
             'If-Modified-Since': opts?.ifModifiedSince,
-            'Range': opts?.range
+            Range: opts?.range
         };
 
         const accepts = ['application/octet-stream'];
@@ -801,7 +808,7 @@ Single part request supported, for example: bytes=1-10.
             returnType: 'blob'
         });
     }
-/**
+    /**
     * List node children
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -862,12 +869,16 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
     * @param opts.includeSource Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**.
     * @return Promise<NodeChildAssociationPaging>
     */
-    listNodeChildren(nodeId: string, opts?: {
-        orderBy?: string[];
-        where?: string;
-        relativePath?: string;
-        includeSource?: boolean;
-    } & NodesIncludeQuery & ContentPagingQuery): Promise<NodeChildAssociationPaging> {
+    listNodeChildren(
+        nodeId: string,
+        opts?: {
+            orderBy?: string[];
+            where?: string;
+            relativePath?: string;
+            includeSource?: boolean;
+        } & NodesIncludeQuery &
+            ContentPagingQuery
+    ): Promise<NodeChildAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
@@ -875,14 +886,14 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
         };
 
         const queryParams = {
-            'skipCount': opts?.skipCount,
-            'maxItems': opts?.maxItems,
-            'orderBy': buildCollectionParam(opts?.orderBy, 'csv'),
-            'where': opts?.where,
-            'include': buildCollectionParam(opts?.include, 'csv'),
-            'relativePath': opts?.relativePath,
-            'includeSource': opts?.includeSource,
-            'fields': buildCollectionParam(opts?.fields, 'csv')
+            skipCount: opts?.skipCount,
+            maxItems: opts?.maxItems,
+            orderBy: buildCollectionParam(opts?.orderBy, 'csv'),
+            where: opts?.where,
+            include: buildCollectionParam(opts?.include, 'csv'),
+            relativePath: opts?.relativePath,
+            includeSource: opts?.includeSource,
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
@@ -892,7 +903,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
             returnType: NodeChildAssociationPaging
         });
     }
-/**
+    /**
     * List parents
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -915,10 +926,14 @@ The list includes both the primary parent and any secondary parents.
     * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on **nodeId**
     * @return Promise<NodeAssociationPaging>
     */
-    listParents(nodeId: string, opts?: {
-        where?: string;
-        includeSource?: boolean;
-    } & NodesIncludeQuery & ContentPagingQuery): Promise<NodeAssociationPaging> {
+    listParents(
+        nodeId: string,
+        opts?: {
+            where?: string;
+            includeSource?: boolean;
+        } & NodesIncludeQuery &
+            ContentPagingQuery
+    ): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -963,10 +978,14 @@ Gets a list of secondary child nodes that are associated with the current parent
     * @param opts.includeSource Also include **source** (in addition to **entries**) with folder information on **nodeId**
     * @return Promise<NodeChildAssociationPaging>
     */
-    listSecondaryChildren(nodeId: string, opts?: {
-        where?: string;
-        includeSource?: boolean;
-    } & NodesIncludeQuery & ContentPagingQuery): Promise<NodeChildAssociationPaging> {
+    listSecondaryChildren(
+        nodeId: string,
+        opts?: {
+            where?: string;
+            includeSource?: boolean;
+        } & NodesIncludeQuery &
+            ContentPagingQuery
+    ): Promise<NodeChildAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -990,7 +1009,7 @@ Gets a list of secondary child nodes that are associated with the current parent
             returnType: NodeChildAssociationPaging
         });
     }
-/**
+    /**
     * List source associations
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -1004,9 +1023,12 @@ Gets a list of source nodes that are associated with the current target **nodeId
     *   where=(assocType='my:specialAssocType')
     * @return Promise<NodeAssociationPaging>
     */
-    listSourceAssociations(nodeId: string, opts?: {
-        where?: string;
-    } & NodesIncludeQuery): Promise<NodeAssociationPaging> {
+    listSourceAssociations(
+        nodeId: string,
+        opts?: {
+            where?: string;
+        } & NodesIncludeQuery
+    ): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -1029,21 +1051,25 @@ Gets a list of source nodes that are associated with the current target **nodeId
     }
 
     /**
-    * List target associations
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    *
-    * Gets a list of target nodes that are associated with the current source **nodeId**.
-    *
-    * @param nodeId The identifier of a source node.
-    * @param opts Optional parameters
-    * @param opts.where Optionally filter the list by **assocType**. Here's an example:
-    *   where=(assocType='my:specialAssocType')
-    * @return Promise<NodeAssociationPaging>
-    */
-    listTargetAssociations(nodeId: string, opts?: {
-        where?: string;
-    } & NodesIncludeQuery & ContentPagingQuery): Promise<NodeAssociationPaging> {
+     * List target associations
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * Gets a list of target nodes that are associated with the current source **nodeId**.
+     *
+     * @param nodeId The identifier of a source node.
+     * @param opts Optional parameters
+     * @param opts.where Optionally filter the list by **assocType**. Here's an example:
+     *   where=(assocType='my:specialAssocType')
+     * @return Promise<NodeAssociationPaging>
+     */
+    listTargetAssociations(
+        nodeId: string,
+        opts?: {
+            where?: string;
+        } & NodesIncludeQuery &
+            ContentPagingQuery
+    ): Promise<NodeAssociationPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
         opts = opts || {};
 
@@ -1126,25 +1152,25 @@ If a lock on the node cannot be taken, then an error is returned.
     }
 
     /**
-    * Move a node
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    *
-    * Move the node **nodeId** to the parent folder node **targetParentId**.
-    *
-    * The **targetParentId** is specified in the in request body.
-    *
-    * The moved node retains its name unless you specify a new **name** in the request body.
-    *
-    * If the source **nodeId** is a folder, then its children are also moved.
-    *
-    * The move will effectively change the primary parent.
-    *
-    * @param nodeId The identifier of a node.
-    * @param nodeBodyMove The targetParentId and, optionally, a new name which should include the file extension.
-    * @param opts Optional parameters
-    * @return Promise<NodeEntry>
-    */
+     * Move a node
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * Move the node **nodeId** to the parent folder node **targetParentId**.
+     *
+     * The **targetParentId** is specified in the in request body.
+     *
+     * The moved node retains its name unless you specify a new **name** in the request body.
+     *
+     * If the source **nodeId** is a folder, then its children are also moved.
+     *
+     * The move will effectively change the primary parent.
+     *
+     * @param nodeId The identifier of a node.
+     * @param nodeBodyMove The targetParentId and, optionally, a new name which should include the file extension.
+     * @param opts Optional parameters
+     * @return Promise<NodeEntry>
+     */
     moveNode(nodeId: string, nodeBodyMove: NodeBodyMove, opts?: NodesIncludeQuery): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(nodeBodyMove, 'nodeBodyMove');
@@ -1168,17 +1194,17 @@ If a lock on the node cannot be taken, then an error is returned.
     }
 
     /**
-    * Unlock a node
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-    *
-    * The current user must be the owner of the locks or have admin rights, otherwise an error is returned.
-    * If a lock on the node cannot be released, then an error is returned.
-    *
-    * @param nodeId The identifier of a node.
-    * @param opts Optional parameters
-    * @return Promise<NodeEntry>
-    */
+     * Unlock a node
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * The current user must be the owner of the locks or have admin rights, otherwise an error is returned.
+     * If a lock on the node cannot be released, then an error is returned.
+     *
+     * @param nodeId The identifier of a node.
+     * @param opts Optional parameters
+     * @return Promise<NodeEntry>
+     */
     unlockNode(nodeId: string, opts?: NodesIncludeQuery): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -1199,7 +1225,7 @@ If a lock on the node cannot be taken, then an error is returned.
         });
     }
 
-/**
+    /**
     * Update a node
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -1285,7 +1311,7 @@ JSON
             returnType: NodeEntry
         });
     }
-/**
+    /**
     * Update node content
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
@@ -1319,11 +1345,15 @@ The name must not contain spaces or the following special characters: * \" < > \
 The character . must not be used at the end of the name.
     * @return Promise<NodeEntry>
     */
-    updateNodeContent(nodeId: string, contentBodyUpdate: string, opts?: {
-        majorVersion?: boolean;
-        comment?: string;
-        name?: string;
-    } & NodesIncludeQuery ): Promise<NodeEntry> {
+    updateNodeContent(
+        nodeId: string,
+        contentBodyUpdate: string,
+        opts?: {
+            majorVersion?: boolean;
+            comment?: string;
+            name?: string;
+        } & NodesIncludeQuery
+    ): Promise<NodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(contentBodyUpdate, 'contentBodyUpdate');
         opts = opts || {};
