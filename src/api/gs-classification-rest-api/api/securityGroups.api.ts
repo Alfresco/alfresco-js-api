@@ -28,6 +28,7 @@ import { GsGroupInclude, GsPagingQuery } from './types';
 export class SecurityGroupsApi extends BaseApi {
     /**
      * Get All security groups
+     *
      * @param opts Optional parameters
      * @return Promise<SecurityGroupPaging>
      */
@@ -41,6 +42,7 @@ export class SecurityGroupsApi extends BaseApi {
 
     /**
      * Create security group
+     *
      * @param securityGroupBody securityGroupBody.
      * @param opts Optional parameters
      * @return Promise<SecurityGroupEntry>
@@ -53,15 +55,17 @@ export class SecurityGroupsApi extends BaseApi {
             returnType: SecurityGroupEntry
         });
     }
+
     /**
      * Get a security groups information
+     *
      * @param securityGroupId The Key of Security Group id for which info is required
      * @param opts Optional parameters
      * @return Promise<SecurityGroupEntry>
      */
     getSecurityGroupInfo(securityGroupId: string, opts?: GsGroupInclude): Promise<SecurityGroupEntry> {
         const pathParams = {
-            securityGroupId,
+            securityGroupId
         };
 
         return this.get({
@@ -71,8 +75,10 @@ export class SecurityGroupsApi extends BaseApi {
             returnType: SecurityGroupEntry
         });
     }
+
     /**
      * Update a security groups information
+     *
      * @param securityGroupId The Key of Security Group id for which info is required
      * @param securityGroupBody SecurityGroupBody
      * @param opts Optional parameters
@@ -80,7 +86,7 @@ export class SecurityGroupsApi extends BaseApi {
      */
     updateSecurityGroup(securityGroupId: string, securityGroupBody: SecurityGroupBody, opts?: GsGroupInclude): Promise<SecurityGroupEntry> {
         const pathParams = {
-            securityGroupId,
+            securityGroupId
         };
 
         return this.put({
@@ -94,10 +100,11 @@ export class SecurityGroupsApi extends BaseApi {
 
     /**
      * Delete security group
+     *
      * @param securityGroupId The key for the security group id.
      * @return Promise<SecurityMarkEntry>
      */
-    deleteSecurityGroup(securityGroupId: string): Promise<any> {
+    deleteSecurityGroup(securityGroupId: string): Promise<void> {
         const pathParams = { securityGroupId };
         return this.delete({
             path: '/security-groups/{securityGroupId}',

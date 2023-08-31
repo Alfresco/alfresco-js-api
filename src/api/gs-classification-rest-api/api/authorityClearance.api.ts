@@ -16,10 +16,7 @@
  */
 
 import { BaseApi } from './base.api';
-import {
-    AuthorityClearanceGroupPaging,
-    NodeSecurityMarkBody, SecurityMarkEntry, SecurityMarkPaging
-} from '../model';
+import { AuthorityClearanceGroupPaging, NodeSecurityMarkBody, SecurityMarkEntry, SecurityMarkPaging } from '../model';
 import { GsPagingQuery } from './types';
 
 /**
@@ -29,6 +26,7 @@ import { GsPagingQuery } from './types';
 export class AuthorityClearanceApi extends BaseApi {
     /**
      * Get the authority clearances for a single user/group
+     *
      * @param authorityId The name for the authority for which the clearance is to be fetched. Can be left blank in which case it will fetch it for all users with pagination
      * @param opts
      * @return Promise<AuthorityClearanceGroupPaging>
@@ -48,6 +46,7 @@ export class AuthorityClearanceApi extends BaseApi {
 
     /**
      * Updates the authority clearance.
+     *
      * @param authorityId The name for the authority for which the clearance is to be updated
      * @param authorityClearance AuthorityClearanceBody
      * @return Promise<SecurityMarkEntry | SecurityMarkPaging>

@@ -23,9 +23,9 @@ import { throwIfNotDefined } from '../../../assert';
 import { GsPagingQuery } from './types';
 
 /**
-* DeclassificationExemptionsApi service.
-* @module DeclassificationExemptionsApi
-*/
+ * DeclassificationExemptionsApi service.
+ * @module DeclassificationExemptionsApi
+ */
 export class DeclassificationExemptionsApi extends BaseApi {
     /**
     * Create a declassification exemption
@@ -88,15 +88,13 @@ JSON
     }
 
     /**
-    * Delete a declassification exemption
-    *
-    * Deletes the declassification exemption with id **declassificationExemptionId**.
-    * You can't delete a classification exemption that is being used to classify content.
-    *
-    * @param declassificationExemptionId The identifier for the declassification exemption
-    * @return Promise<{}>
-    */
-    deleteDeclassificationExemption(declassificationExemptionId: string): Promise<any> {
+     * Deletes the declassification exemption with id **declassificationExemptionId**.
+     * You can't delete a classification exemption that is being used to classify content.
+     *
+     * @param declassificationExemptionId The identifier for the declassification exemption
+     * @return Promise<{}>
+     */
+    deleteDeclassificationExemption(declassificationExemptionId: string): Promise<void> {
         throwIfNotDefined(declassificationExemptionId, 'declassificationExemptionId');
 
         const pathParams = {
@@ -108,12 +106,13 @@ JSON
             pathParams
         });
     }
+
     /**
-        * List all declassification exemptions
-        *
-        * @param opts Optional parameters
-        * @return Promise<DeclassificationExemptionsPaging>
-        */
+     * List all declassification exemptions
+     *
+     * @param opts Optional parameters
+     * @return Promise<DeclassificationExemptionsPaging>
+     */
     listDeclassificationExemptions(opts?: GsPagingQuery): Promise<DeclassificationExemptionsPaging> {
         return this.get({
             path: '/declassification-exemptions',
@@ -121,14 +120,13 @@ JSON
             returnType: DeclassificationExemptionsPaging
         });
     }
+
     /**
-        * Get declassification exemption information
-        *
-        * Gets the declassification exemption with id **declassificationExemptionId**.
-        *
-        * @param declassificationExemptionId The identifier for the declassification exemption
-        * @return Promise<DeclassificationExemptionEntry>
-        */
+     * Get declassification exemption information
+     *
+     * @param declassificationExemptionId The identifier for the declassification exemption
+     * @return Promise<DeclassificationExemptionEntry>
+     */
     showDeclassificationExemptionById(declassificationExemptionId: string): Promise<DeclassificationExemptionEntry> {
         throwIfNotDefined(declassificationExemptionId, 'declassificationExemptionId');
 
@@ -142,15 +140,14 @@ JSON
             returnType: DeclassificationExemptionEntry
         });
     }
+
     /**
-        * Update a declassification exemption
-        *
-        * Updates the declassification exemption with id **declassificationExemptionId**. For example, you can rename a declassification exemption.
-        *
-        * @param declassificationExemptionId The identifier for the declassification exemption
-        * @param declassificationExemption Declassification exemption
-        * @return Promise<DeclassificationExemptionEntry>
-        */
+     * Update a declassification exemption
+     *
+     * @param declassificationExemptionId The identifier for the declassification exemption
+     * @param declassificationExemption Declassification exemption
+     * @return Promise<DeclassificationExemptionEntry>
+     */
     updateDeclassificationExemption(declassificationExemptionId: string, declassificationExemption: DeclassificationExemptionBody): Promise<DeclassificationExemptionEntry> {
         throwIfNotDefined(declassificationExemptionId, 'declassificationExemptionId');
         throwIfNotDefined(declassificationExemption, 'declassificationExemption');

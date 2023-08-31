@@ -24,13 +24,11 @@ import { throwIfNotDefined } from '../../../assert';
 import { GsFieldsQuery, GsPagingQuery } from './types';
 
 /**
-* ClassificationReasonsApi service.
-* @module ClassificationReasonsApi
-*/
+ * ClassificationReasonsApi service.
+ * @module ClassificationReasonsApi
+ */
 export class ClassificationReasonsApi extends BaseApi {
     /**
-    * Create a classification reason
-    *
     * Creates a new classification reason.
 
 **Note:** You can create more than one reason by specifying a list of reasons in the JSON body.
@@ -87,15 +85,14 @@ JSON
             returnType: ClassificationReasonEntry
         });
     }
+
     /**
-        * Delete a classification reason
-        *
-        * Deletes the classification reason  **classificationReasonId**. You can't delete a classification reason that is being used to classify content. There must be at least one classification reason.
-        *
-        * @param classificationReasonId The identifier for the classification reason
-        * @return Promise<{}>
-        */
-    deleteClassificationReason(classificationReasonId: string): Promise<any> {
+     * Deletes the classification reason  **classificationReasonId**. You can't delete a classification reason that is being used to classify content. There must be at least one classification reason.
+     *
+     * @param classificationReasonId The identifier for the classification reason
+     * @return Promise<{}>
+     */
+    deleteClassificationReason(classificationReasonId: string): Promise<void> {
         throwIfNotDefined(classificationReasonId, 'classificationReasonId');
 
         const pathParams = {
@@ -109,14 +106,12 @@ JSON
     }
 
     /**
-    * List all classification reasons
-    *
-    * @param opts Optional parameters
-    * @return Promise<ClassificationReasonsPaging>
-    */
+     * List all classification reasons
+     *
+     * @param opts Optional parameters
+     * @return Promise<ClassificationReasonsPaging>
+     */
     listClassificationReasons(opts?: GsPagingQuery & GsFieldsQuery): Promise<ClassificationReasonsPaging> {
-        opts = opts || {};
-
         const queryParams = {
             skipCount: opts?.skipCount,
             maxItems: opts?.maxItems,
@@ -129,14 +124,13 @@ JSON
             returnType: ClassificationReasonsPaging
         });
     }
+
     /**
-        * Get classification reason information
-        *
-        * Gets the classification reason  **classificationReasonId**.
-        *
-        * @param classificationReasonId The identifier for the classification reason
-        * @return Promise<ClassificationReasonEntry>
-        */
+     * Get classification reason information
+     *
+     * @param classificationReasonId The identifier for the classification reason
+     * @return Promise<ClassificationReasonEntry>
+     */
     showClassificationReasonById(classificationReasonId: string): Promise<ClassificationReasonEntry> {
         throwIfNotDefined(classificationReasonId, 'classificationReasonId');
 
@@ -150,15 +144,14 @@ JSON
             returnType: ClassificationReasonEntry
         });
     }
+
     /**
-        * Update a classification reason
-        *
-        * Updates the classification reason with id **classificationReasonId**. For example, you can change a classification reason code or description.
-        *
-        * @param classificationReasonId The identifier for the classification reason
-        * @param classificationReason Classification reason
-        * @return Promise<ClassificationReasonEntry>
-        */
+     * Updates the classification reason with id **classificationReasonId**. For example, you can change a classification reason code or description.
+     *
+     * @param classificationReasonId The identifier for the classification reason
+     * @param classificationReason Classification reason
+     * @return Promise<ClassificationReasonEntry>
+     */
     updateClassificationReason(classificationReasonId: string, classificationReason: ClassificationReasonBody): Promise<ClassificationReasonEntry> {
         throwIfNotDefined(classificationReasonId, 'classificationReasonId');
         throwIfNotDefined(classificationReason, 'classificationReason');

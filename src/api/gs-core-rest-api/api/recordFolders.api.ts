@@ -23,12 +23,12 @@ import { RecordFolderEntry } from '../model/recordFolderEntry';
 import { BaseApi } from './base.api';
 import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { throwIfNotDefined } from '../../../assert';
-import { RecordsIncludeQuery, RecordsPagingQuery } from './types';
+import { RecordsIncludeQuery, RecordsPagingQuery, RecordsSourceQuery } from './types';
 
 /**
-* Record Folders service.
-* @module RecordFoldersApi
-*/
+ * Record Folders service.
+ * @module RecordFoldersApi
+ */
 export class RecordFoldersApi extends BaseApi {
     /**
     * Create a record
@@ -153,7 +153,7 @@ JSON
         * @param recordFolderId The identifier of a record folder.
         * @return Promise<{}>
         */
-    deleteRecordFolder(recordFolderId: string): Promise<any> {
+    deleteRecordFolder(recordFolderId: string): Promise<void> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
 
         const pathParams = {
@@ -165,20 +165,17 @@ JSON
             pathParams
         });
     }
+
     /**
-        * Get a record folder
-        *
-        * Gets information for record folder **recordFolderId**
-
-    Mandatory fields and the record folder's aspects and properties are returned by default.
-
-    You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-        *
-        * @param recordFolderId The identifier of a record folder.
-        * @param opts Optional parameters
-        * @return Promise<RecordFolderEntry>
-        */
+     * Get a record folder
+     *
+     * Mandatory fields and the record folder's aspects and properties are returned by default.
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param recordFolderId The identifier of a record folder.
+     * @param opts Optional parameters
+     * @return Promise<RecordFolderEntry>
+     */
     getRecordFolder(recordFolderId: string, opts?: RecordsIncludeQuery): Promise<RecordFolderEntry> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
 
@@ -200,29 +197,32 @@ JSON
     }
 
     /**
-    * List records
-    *
-    * Gets a list of records.
-    *
-    * Minimal information for each record is returned by default.
-    *
-    * The list of records includes primary children and secondary children, if there are any.
-    *
-    * You can use the **include** parameter (include=allowableOperations) to return additional information.
-    *
-    * @param recordFolderId The identifier of a record folder.
-    * @param opts Optional parameters
-    * @param opts.where Optionally filter the list. Here are some examples:
-    *   where=(nodeType='my:specialNodeType')
-    *   where=(nodeType='my:specialNodeType INCLUDESUBTYPES')
-    *   where=(isPrimary=true)
-    * @param opts.includeSource Also include **source** (in addition to **entries**) with record information on the parent folder – the specified parent **recordFolderId**
-    * @return Promise<RecordFolderAssociationPaging>
-    */
-    listRecordFolderChildren(recordFolderId: string, opts?: {
-        where?: string;
-        includeSource?: boolean;
-    } & RecordsPagingQuery & RecordsIncludeQuery ): Promise<RecordFolderAssociationPaging> {
+     * List records
+     *
+     * Gets a list of records.
+     *
+     * Minimal information for each record is returned by default.
+     *
+     * The list of records includes primary children and secondary children, if there are any.
+     *
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param recordFolderId The identifier of a record folder.
+     * @param opts Optional parameters
+     * @param opts.where Optionally filter the list. Here are some examples:
+     *   where=(nodeType='my:specialNodeType')
+     *   where=(nodeType='my:specialNodeType INCLUDESUBTYPES')
+     *   where=(isPrimary=true)
+     * @return Promise<RecordFolderAssociationPaging>
+     */
+    listRecordFolderChildren(
+        recordFolderId: string,
+        opts?: {
+            where?: string;
+        } & RecordsPagingQuery &
+            RecordsIncludeQuery &
+            RecordsSourceQuery
+    ): Promise<RecordFolderAssociationPaging> {
         throwIfNotDefined(recordFolderId, 'recordFolderId');
 
         const pathParams = {

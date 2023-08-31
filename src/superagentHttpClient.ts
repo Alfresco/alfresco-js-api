@@ -273,15 +273,15 @@ export class SuperagentHttpClient implements HttpClient {
             const progress = {
                 total: event.total,
                 loaded: event.loaded,
-                percent,
+                percent
             };
 
             eventEmitter.emit('progress', progress);
         }
     }
 
-    private static createCSRFToken(a?: any): string {
-        return a ? (a ^ ((Math.random() * 16) >> (a / 4))).toString(16) : ([1e16] + (1e16).toString()).replace(/[01]/g, SuperagentHttpClient.createCSRFToken);
+    private static createCSRFToken(): string {
+        return ([1e16] + (1e16).toString()).replace(/[01]/g, SuperagentHttpClient.createCSRFToken);
     }
 
     /**

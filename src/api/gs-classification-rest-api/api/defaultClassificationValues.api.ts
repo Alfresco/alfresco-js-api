@@ -21,18 +21,16 @@ import { DateAlfresco } from '../../../../src/api/content-custom-api/model/dateA
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* DefaultClassificationValuesApi service.
-* @module DefaultClassificationValuesApi
-*/
+ * DefaultClassificationValuesApi service.
+ * @module DefaultClassificationValuesApi
+ */
 export class DefaultClassificationValuesApi extends BaseApi {
     /**
-    * Calculate the default declassification date
-    *
-    * Calculates the default declassification date for **nodeId** based on the properties of the node and the current declassification time frame.
-    *
-    * @param nodeId The identifier of a node.
-    * @return Promise<DeclassificationDate>
-    */
+     * Calculates the default declassification date for **nodeId** based on the properties of the node and the current declassification time frame.
+     *
+     * @param nodeId The identifier of a node.
+     * @return Promise<DeclassificationDate>
+     */
     calculateDefaultDeclassificationDate(nodeId: string): Promise<DeclassificationDate> {
         throwIfNotDefined(nodeId, 'nodeId');
 
