@@ -2,18 +2,18 @@
 
 All URIs are relative to */activiti-app/api*
 
-| Method                                                            | HTTP request                                                     | Description                      |
-|-------------------------------------------------------------------|------------------------------------------------------------------|----------------------------------|
-| [**createBasicAuthConfiguration**](#createBasicAuthConfiguration) | **POST** /enterprise/admin/basic-auths                           | Add an endpoint authorization    |
-| [**createEndpointConfiguration**](#createEndpointConfiguration)   | **POST** /enterprise/admin/endpoints                             | Create an endpoint               |
-| [**getBasicAuthConfiguration**](#getBasicAuthConfiguration)       | **GET** /enterprise/admin/basic-auths/{basicAuthId}              | Get an endpoint authorization    |
-| [**getBasicAuthConfigurations**](#getBasicAuthConfigurations)     | **GET** /enterprise/admin/basic-auths                            | List endpoint authorizations     |
-| [**getEndpointConfiguration**](#getEndpointConfiguration)         | **GET** /enterprise/admin/endpoints/{endpointConfigurationId}    | Get an endpoint                  |
-| [**getEndpointConfigurations**](#getEndpointConfigurations)       | **GET** /enterprise/admin/endpoints                              | List endpoints                   |
-| [**removeBasicAuthonfiguration**](#removeBasicAuthonfiguration)   | **DELETE** /enterprise/admin/basic-auths/{basicAuthId}           | Delete an endpoint authorization |
-| [**removeEndpointConfiguration**](d#removeEndpointConfiguration)  | **DELETE** /enterprise/admin/endpoints/{endpointConfigurationId} | Delete an endpoint               |
-| [**updateBasicAuthConfiguration**](#updateBasicAuthConfiguration) | **PUT** /enterprise/admin/basic-auths/{basicAuthId}              | Update an endpoint authorization |
-| [**updateEndpointConfiguration**](#updateEndpointConfiguration)   | **PUT** /enterprise/admin/endpoints/{endpointConfigurationId}    | Update an endpoint               |
+| Method                                                        | HTTP request                                                     | Description                      |
+|---------------------------------------------------------------|------------------------------------------------------------------|----------------------------------|
+| [createBasicAuthConfiguration](#createBasicAuthConfiguration) | **POST** /enterprise/admin/basic-auths                           | Add an endpoint authorization    |
+| [createEndpointConfiguration](#createEndpointConfiguration)   | **POST** /enterprise/admin/endpoints                             | Create an endpoint               |
+| [getBasicAuthConfiguration](#getBasicAuthConfiguration)       | **GET** /enterprise/admin/basic-auths/{basicAuthId}              | Get an endpoint authorization    |
+| [getBasicAuthConfigurations](#getBasicAuthConfigurations)     | **GET** /enterprise/admin/basic-auths                            | List endpoint authorizations     |
+| [getEndpointConfiguration](#getEndpointConfiguration)         | **GET** /enterprise/admin/endpoints/{endpointConfigurationId}    | Get an endpoint                  |
+| [getEndpointConfigurations](#getEndpointConfigurations)       | **GET** /enterprise/admin/endpoints                              | List endpoints                   |
+| [removeBasicAuthonfiguration](#removeBasicAuthonfiguration)   | **DELETE** /enterprise/admin/basic-auths/{basicAuthId}           | Delete an endpoint authorization |
+| [removeEndpointConfiguration](d#removeEndpointConfiguration)  | **DELETE** /enterprise/admin/endpoints/{endpointConfigurationId} | Delete an endpoint               |
+| [updateBasicAuthConfiguration](#updateBasicAuthConfiguration) | **PUT** /enterprise/admin/basic-auths/{basicAuthId}              | Update an endpoint authorization |
+| [updateEndpointConfiguration](#updateEndpointConfiguration)   | **PUT** /enterprise/admin/endpoints/{endpointConfigurationId}    | Update an endpoint               |
 
 
 # createBasicAuthConfiguration
@@ -240,7 +240,7 @@ adminendpointsApi.removeEndpointConfiguration(endpointConfigurationIdtenantId).t
 });
 ```
 
-# updateBasicAuthConfiguration**
+# updateBasicAuthConfiguration
 
 Update an endpoint authorization
 
