@@ -187,7 +187,7 @@ export class CustomModelApi extends BaseApi {
         throwIfNotDefined(modelName, 'modelName');
 
         const bodyParam = {
-            'status': 'ACTIVE'
+            status: 'ACTIVE'
         };
 
         const pathParams = {
@@ -208,7 +208,7 @@ export class CustomModelApi extends BaseApi {
         throwIfNotDefined(modelName, 'modelName');
 
         const bodyParam = {
-            'status': 'DRAFT'
+            status: 'DRAFT'
         };
 
         const pathParams = {
@@ -230,7 +230,7 @@ export class CustomModelApi extends BaseApi {
         throwIfNotDefined(aspectName, 'aspectName');
 
         const bodyParam = {
-            'name': aspectName,
+            name: aspectName,
             properties
         };
 
@@ -254,7 +254,7 @@ export class CustomModelApi extends BaseApi {
         throwIfNotDefined(typeName, 'typeName');
 
         const bodyParam = {
-            'name': typeName,
+            name: typeName,
             properties
         };
 
@@ -277,7 +277,7 @@ export class CustomModelApi extends BaseApi {
         throwIfNotDefined(modelName, 'modelName');
 
         const bodyParam = {
-            'name': modelName,
+            name: modelName,
             description,
             namespaceUri,
             namespacePrefix,
@@ -303,7 +303,7 @@ export class CustomModelApi extends BaseApi {
         throwIfNotDefined(typeName, 'typeName');
 
         const bodyParam = {
-            'name': typeName,
+            name: typeName,
             parentName,
             title,
             description
@@ -329,7 +329,7 @@ export class CustomModelApi extends BaseApi {
         throwIfNotDefined(aspectName, 'aspectName');
 
         const bodyParam = {
-            'name': aspectName,
+            name: aspectName,
             parentName,
             title,
             description
@@ -483,7 +483,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Delete the given custom model
      */
-    deleteCustomModel(modelName: string): Promise<any> {
+    deleteCustomModel(modelName: string): Promise<void> {
         throwIfNotDefined(modelName, 'modelName');
 
         const pathParams = {
@@ -499,7 +499,7 @@ export class CustomModelApi extends BaseApi {
     /**
      * Delete the given custom type
      */
-    deleteCustomType(modelName: string, typeName: string): Promise<any> {
+    deleteCustomType(modelName: string, typeName: string): Promise<void> {
         throwIfNotDefined(modelName, 'modelName');
         throwIfNotDefined(typeName, 'typeName');
 
@@ -514,7 +514,7 @@ export class CustomModelApi extends BaseApi {
         });
     }
 
-    deleteCustomAspect(modelName: string, aspectName: string): Promise<any> {
+    deleteCustomAspect(modelName: string, aspectName: string): Promise<void> {
         throwIfNotDefined(modelName, 'modelName');
         throwIfNotDefined(aspectName, 'aspectName');
 
@@ -535,7 +535,7 @@ export class CustomModelApi extends BaseApi {
         throwIfNotDefined(propertyName, 'propertyName');
 
         const bodyParam = {
-            'name': aspectName
+            name: aspectName
         };
 
         const pathParams = {
@@ -563,7 +563,7 @@ export class CustomModelApi extends BaseApi {
         throwIfNotDefined(propertyName, 'propertyName');
 
         const bodyParam = {
-            'name': typeName
+            name: typeName
         };
 
         const pathParams = {
@@ -584,5 +584,4 @@ export class CustomModelApi extends BaseApi {
             queryParams
         });
     }
-
 }

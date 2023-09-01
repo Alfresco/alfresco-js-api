@@ -87,7 +87,7 @@ export class ProcessInstancesApi extends BaseApi {
      * @param type type
      * @return Promise<{}>
      */
-    deleteIdentityLink(processInstanceId: string, family: string, identityId: string, type: string): Promise<any> {
+    deleteIdentityLink(processInstanceId: string, family: string, identityId: string, type: string): Promise<void> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(family, 'family');
         throwIfNotDefined(identityId, 'identityId');
@@ -114,7 +114,7 @@ export class ProcessInstancesApi extends BaseApi {
      * @param processInstanceId processInstanceId
      * @return Promise<{}>
      */
-    deleteProcessInstance(processInstanceId: string): Promise<any> {
+    deleteProcessInstance(processInstanceId: string): Promise<void> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
         const pathParams = {
@@ -164,7 +164,7 @@ export class ProcessInstancesApi extends BaseApi {
             returnType: ResultListDataRepresentationDecisionTaskRepresentation
         });
     }
-     /**
+    /**
      * Get historic variables for a process instance
      *
      * @param processInstanceId processInstanceId
@@ -449,5 +449,4 @@ export class ProcessInstancesApi extends BaseApi {
             returnType: ProcessInstanceRepresentation
         });
     }
-
 }

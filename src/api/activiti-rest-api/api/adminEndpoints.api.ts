@@ -22,16 +22,16 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* AdminEndpointsApi service.
-* @module AdminEndpointsApi
-*/
+ * AdminEndpointsApi service.
+ * @module AdminEndpointsApi
+ */
 export class AdminEndpointsApi extends BaseApi {
     /**
-    * Add an endpoint authorization
-    *
-    * @param createRepresentation createRepresentation
-    * @return Promise<EndpointBasicAuthRepresentation>
-    */
+     * Add an endpoint authorization
+     *
+     * @param createRepresentation createRepresentation
+     * @return Promise<EndpointBasicAuthRepresentation>
+     */
     createBasicAuthConfiguration(createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
         throwIfNotDefined(createRepresentation, 'createRepresentation');
 
@@ -43,11 +43,11 @@ export class AdminEndpointsApi extends BaseApi {
     }
 
     /**
-    * Create an endpoint
-    *
-    * @param representation representation
-    * @return Promise<EndpointConfigurationRepresentation>
-    */
+     * Create an endpoint
+     *
+     * @param representation representation
+     * @return Promise<EndpointConfigurationRepresentation>
+     */
     createEndpointConfiguration(representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {
         throwIfNotDefined(representation, 'representation');
 
@@ -59,12 +59,12 @@ export class AdminEndpointsApi extends BaseApi {
     }
 
     /**
-    * Get an endpoint authorization
-    *
-    * @param basicAuthId basicAuthId
-    * @param tenantId tenantId
-    * @return Promise<EndpointBasicAuthRepresentation>
-    */
+     * Get an endpoint authorization
+     *
+     * @param basicAuthId basicAuthId
+     * @param tenantId tenantId
+     * @return Promise<EndpointBasicAuthRepresentation>
+     */
     getBasicAuthConfiguration(basicAuthId: number, tenantId: number): Promise<EndpointBasicAuthRepresentation> {
         throwIfNotDefined(basicAuthId, 'basicAuthId');
         throwIfNotDefined(tenantId, 'tenantId');
@@ -86,11 +86,11 @@ export class AdminEndpointsApi extends BaseApi {
     }
 
     /**
-    * List endpoint authorizations
-    *
-    * @param tenantId tenantId
-    * @return Promise<EndpointBasicAuthRepresentation>
-    */
+     * List endpoint authorizations
+     *
+     * @param tenantId tenantId
+     * @return Promise<EndpointBasicAuthRepresentation>
+     */
     getBasicAuthConfigurations(tenantId: number): Promise<EndpointBasicAuthRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
 
@@ -106,12 +106,12 @@ export class AdminEndpointsApi extends BaseApi {
     }
 
     /**
-    * Get an endpoint
-    *
-    * @param endpointConfigurationId endpointConfigurationId
-    * @param tenantId tenantId
-    * @return Promise<EndpointConfigurationRepresentation>
-    */
+     * Get an endpoint
+     *
+     * @param endpointConfigurationId endpointConfigurationId
+     * @param tenantId tenantId
+     * @return Promise<EndpointConfigurationRepresentation>
+     */
     getEndpointConfiguration(endpointConfigurationId: number, tenantId: number): Promise<EndpointConfigurationRepresentation> {
         throwIfNotDefined(endpointConfigurationId, 'endpointConfigurationId');
         throwIfNotDefined(tenantId, 'tenantId');
@@ -133,11 +133,11 @@ export class AdminEndpointsApi extends BaseApi {
     }
 
     /**
-    * List endpoints
-    *
-    * @param tenantId tenantId
-    * @return Promise<EndpointConfigurationRepresentation>
-    */
+     * List endpoints
+     *
+     * @param tenantId tenantId
+     * @return Promise<EndpointConfigurationRepresentation>
+     */
     getEndpointConfigurations(tenantId: number): Promise<EndpointConfigurationRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
 
@@ -153,13 +153,13 @@ export class AdminEndpointsApi extends BaseApi {
     }
 
     /**
-    * Delete an endpoint authorization
-    *
-    * @param basicAuthId basicAuthId
-    * @param tenantId tenantId
-    * @return Promise<{}>
-    */
-    removeBasicAuthConfiguration(basicAuthId: number, tenantId: number): Promise<any> {
+     * Delete an endpoint authorization
+     *
+     * @param basicAuthId basicAuthId
+     * @param tenantId tenantId
+     * @return Promise<{}>
+     */
+    removeBasicAuthConfiguration(basicAuthId: number, tenantId: number): Promise<void> {
         throwIfNotDefined(basicAuthId, 'basicAuthId');
         throwIfNotDefined(tenantId, 'tenantId');
 
@@ -179,13 +179,13 @@ export class AdminEndpointsApi extends BaseApi {
     }
 
     /**
-    * Delete an endpoint
-    *
-    * @param endpointConfigurationId endpointConfigurationId
-    * @param tenantId tenantId
-    * @return Promise<{}>
-    */
-    removeEndpointConfiguration(endpointConfigurationId: number, tenantId: number): Promise<any> {
+     * Delete an endpoint
+     *
+     * @param endpointConfigurationId endpointConfigurationId
+     * @param tenantId tenantId
+     * @return Promise<{}>
+     */
+    removeEndpointConfiguration(endpointConfigurationId: number, tenantId: number): Promise<void> {
         throwIfNotDefined(endpointConfigurationId, 'endpointConfigurationId');
         throwIfNotDefined(tenantId, 'tenantId');
 
@@ -205,12 +205,12 @@ export class AdminEndpointsApi extends BaseApi {
     }
 
     /**
-    * Update an endpoint authorization
-    *
-    * @param basicAuthId basicAuthId
-    * @param createRepresentation createRepresentation
-    * @return Promise<EndpointBasicAuthRepresentation>
-    */
+     * Update an endpoint authorization
+     *
+     * @param basicAuthId basicAuthId
+     * @param createRepresentation createRepresentation
+     * @return Promise<EndpointBasicAuthRepresentation>
+     */
     updateBasicAuthConfiguration(basicAuthId: number, createRepresentation: CreateEndpointBasicAuthRepresentation): Promise<EndpointBasicAuthRepresentation> {
         throwIfNotDefined(basicAuthId, 'basicAuthId');
         throwIfNotDefined(createRepresentation, 'createRepresentation');
@@ -228,12 +228,12 @@ export class AdminEndpointsApi extends BaseApi {
     }
 
     /**
-    * Update an endpoint
-    *
-    * @param endpointConfigurationId endpointConfigurationId
-    * @param representation representation
-    * @return Promise<EndpointConfigurationRepresentation>
-    */
+     * Update an endpoint
+     *
+     * @param endpointConfigurationId endpointConfigurationId
+     * @param representation representation
+     * @return Promise<EndpointConfigurationRepresentation>
+     */
     updateEndpointConfiguration(endpointConfigurationId: number, representation: EndpointConfigurationRepresentation): Promise<EndpointConfigurationRepresentation> {
         throwIfNotDefined(endpointConfigurationId, 'endpointConfigurationId');
         throwIfNotDefined(representation, 'representation');

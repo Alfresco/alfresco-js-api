@@ -273,7 +273,7 @@ export class SuperagentHttpClient implements HttpClient {
             const progress = {
                 total: event.total,
                 loaded: event.loaded,
-                percent,
+                percent
             };
 
             eventEmitter.emit('progress', progress);

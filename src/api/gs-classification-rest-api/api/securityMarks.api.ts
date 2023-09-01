@@ -29,7 +29,7 @@ import { GsPagingQuery } from './types';
 export class SecurityMarksApi extends BaseApi {
     /**
      * Get security mark value
-     * Gets the value for a selected **securityGroupId**.
+     *
      * @param securityGroupId The key for the security group id.
      * @param opts Options
      * @return Promise<SecurityMarkPaging>
@@ -38,7 +38,7 @@ export class SecurityMarksApi extends BaseApi {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
 
         const pathParams = {
-            securityGroupId,
+            securityGroupId
         };
 
         return this.get({
@@ -51,6 +51,7 @@ export class SecurityMarksApi extends BaseApi {
 
     /**
      * Create security marks
+     *
      * @param securityGroupId The key for the security group id.
      * @param securityMarkBody securityMarkBody[].
      * @return Promise<SecurityMarkEntry|SecurityMarkPaging>
@@ -60,7 +61,7 @@ export class SecurityMarksApi extends BaseApi {
         throwIfNotDefined(securityMarkBody, 'securityMarkBody');
 
         const pathParams = { securityGroupId };
-        const returnType = securityMarkBody.length > 1 ? SecurityMarkPaging: SecurityMarkEntry
+        const returnType = securityMarkBody.length > 1 ? SecurityMarkPaging : SecurityMarkEntry;
 
         return this.post({
             path: '/security-groups/{securityGroupId}/security-marks',
@@ -69,9 +70,10 @@ export class SecurityMarksApi extends BaseApi {
             returnType
         });
     }
+
     /**
      * Get security mark value information
-     * Gets the value for a selected **securityMarkId**.
+     *
      * @param securityGroupId The key for the security group id.
      * @param securityMarkId The key for the security mark id
      * @return Promise<SecurityMarkEntry>
@@ -82,7 +84,7 @@ export class SecurityMarksApi extends BaseApi {
 
         const pathParams = {
             securityGroupId,
-            securityMarkId,
+            securityMarkId
         };
 
         return this.get({
@@ -94,12 +96,12 @@ export class SecurityMarksApi extends BaseApi {
 
     /**
      * Updates Security Mark value
+     *
      * @param securityGroupId The key for the security group id.
      * @param securityMarkId The key for the security mark is in use or not.
      * @param securityMarkBody securityMarkBody.
      * @return Promise<SecurityMarkEntry>
      */
-
     updateSecurityMark(securityGroupId: string, securityMarkId: string, securityMarkBody: SecurityMarkBody): Promise<SecurityMarkEntry> {
         throwIfNotDefined(securityGroupId, 'securityGroupId');
         throwIfNotDefined(securityMarkId, 'securityMarkId');
@@ -107,7 +109,7 @@ export class SecurityMarksApi extends BaseApi {
 
         const pathParams = {
             securityGroupId,
-            securityMarkId,
+            securityMarkId
         };
 
         return this.put({
@@ -120,6 +122,7 @@ export class SecurityMarksApi extends BaseApi {
 
     /**
      * Delete security mark
+     *
      * @param securityGroupId The key for the security group id.
      * @param securityMarkId The key for the security mark id.
      * @return Promise<any>
@@ -130,7 +133,7 @@ export class SecurityMarksApi extends BaseApi {
 
         const pathParams = {
             securityGroupId,
-            securityMarkId,
+            securityMarkId
         };
 
         return this.delete({

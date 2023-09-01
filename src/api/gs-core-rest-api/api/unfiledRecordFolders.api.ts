@@ -142,19 +142,19 @@ JSON
         nodeBodyCreate: RMNodeBodyCreateWithRelativePath,
         opts?: {
             autoRename?: boolean;
-        } & RecordsIncludeQuery,
+        } & RecordsIncludeQuery
     ): Promise<UnfiledRecordFolderAssociationPaging> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         throwIfNotDefined(nodeBodyCreate, 'nodeBodyCreate');
 
         const pathParams = {
-            unfiledRecordFolderId,
+            unfiledRecordFolderId
         };
 
         const queryParams = {
             autoRename: opts?.autoRename,
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.post({
@@ -163,68 +163,65 @@ JSON
             queryParams,
             bodyParam: nodeBodyCreate,
             contentTypes: ['application/json', 'multipart/form-data'],
-            returnType: UnfiledRecordFolderAssociationPaging,
+            returnType: UnfiledRecordFolderAssociationPaging
         });
     }
-    /**
-        * Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
-        *
-        * Deletes the unfiled record folder **unfiledRecordFolderId**.
 
-        *
-        * @param unfiledRecordFolderId The identifier of an unfiled record folder.
-        * @return Promise<{}>
-        */
-    deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<any> {
+    /**
+     * Delete an unfiled record folder. Deleted file plan components cannot be recovered, they are deleted permanently.
+     *
+     *
+     * @param unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @return Promise<{}>
+     */
+    deleteUnfiledRecordFolder(unfiledRecordFolderId: string): Promise<void> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
 
         const pathParams = {
-            unfiledRecordFolderId,
+            unfiledRecordFolderId
         };
 
         return this.delete({
             path: '/unfiled-record-folders/{unfiledRecordFolderId}',
-            pathParams,
+            pathParams
         });
     }
+
     /**
-        * Get the unfiled record folder
-        *
-        * Gets information for unfiled record folder id **unfiledRecordFolderId**
-
-    Mandatory fields and the unfiled record folder's aspects and properties are returned by default.
-
-    You can use the **include** parameter (include=allowableOperations) to return additional information.
-
-        *
-        * @param unfiledRecordFolderId The identifier of an unfiled record folder.
-        * @param opts Optional parameters
-        * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
-        * @return Promise<UnfiledRecordFolderEntry>
-        */
+     * Get the unfiled record folder
+     *
+     * Mandatory fields and the unfiled record folder's aspects and properties are returned by default.
+     *
+     * You can use the **include** parameter (include=allowableOperations) to return additional information.
+     *
+     * @param unfiledRecordFolderId The identifier of an unfiled record folder.
+     * @param opts Optional parameters
+     * @param opts.relativePath Return information on children in the unfiled records container resolved by this path. The path is relative to **unfiledRecordFolderId**.
+     * @return Promise<UnfiledRecordFolderEntry>
+     */
     getUnfiledRecordFolder(
         unfiledRecordFolderId: string,
         opts?: {
             relativePath?: string;
-        } & RecordsIncludeQuery,
+        } & RecordsIncludeQuery
     ): Promise<UnfiledRecordFolderEntry> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
 
         const pathParams = {
-            unfiledRecordFolderId,
+            unfiledRecordFolderId
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
             relativePath: opts?.relativePath,
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
             path: '/unfiled-record-folders/{unfiledRecordFolderId}',
             pathParams,
             queryParams,
-            returnType: UnfiledRecordFolderEntry,
+            returnType: UnfiledRecordFolderEntry
         });
     }
 
@@ -232,7 +229,6 @@ JSON
      * List unfiled record folder's children
      *
      * Minimal information for each child is returned by default.
-     *
      * You can use the **include** parameter (include=allowableOperations) to return additional information.
      *
      * @param unfiledRecordFolderId The identifier of an unfiled record folder.
@@ -251,13 +247,13 @@ JSON
             relativePath?: string[];
         } & RecordsIncludeQuery &
             RecordsPagingQuery &
-            RecordsSourceQuery,
+            RecordsSourceQuery
     ): Promise<UnfiledRecordFolderAssociationPaging> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         opts = opts || {};
 
         const pathParams = {
-            unfiledRecordFolderId,
+            unfiledRecordFolderId
         };
 
         const queryParams = {
@@ -267,16 +263,17 @@ JSON
             include: buildCollectionParam(opts?.include, 'csv'),
             relativePath: opts?.relativePath,
             includeSource: opts?.includeSource,
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
             path: '/unfiled-record-folders/{unfiledRecordFolderId}/children',
             pathParams,
             queryParams,
-            returnType: UnfiledRecordFolderAssociationPaging,
+            returnType: UnfiledRecordFolderAssociationPaging
         });
     }
+
     /**
         * Update an unfiled record folder
         *
@@ -309,19 +306,19 @@ JSON
     updateUnfiledRecordFolder(
         unfiledRecordFolderId: string,
         unfiledRecordFolderBodyUpdate: UnfiledRecordFolderBodyUpdate,
-        opts?: RecordsIncludeQuery & RecordsSourceQuery,
+        opts?: RecordsIncludeQuery & RecordsSourceQuery
     ): Promise<UnfiledRecordFolderEntry> {
         throwIfNotDefined(unfiledRecordFolderId, 'unfiledRecordFolderId');
         throwIfNotDefined(unfiledRecordFolderBodyUpdate, 'unfiledRecordFolderBodyUpdate');
 
         const pathParams = {
-            unfiledRecordFolderId,
+            unfiledRecordFolderId
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
             includeSource: opts?.includeSource,
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.put({
@@ -329,7 +326,7 @@ JSON
             pathParams,
             queryParams,
             bodyParam: unfiledRecordFolderBodyUpdate,
-            returnType: UnfiledRecordFolderEntry,
+            returnType: UnfiledRecordFolderEntry
         });
     }
 }

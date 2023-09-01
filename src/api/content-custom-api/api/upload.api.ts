@@ -24,7 +24,6 @@ export interface UploadFileOpts extends CreateNodeOpts {
 }
 
 export class UploadApi extends NodesApi {
-
     uploadFile(fileDefinition: any, relativePath?: string, rootFolderId?: string, nodeBody?: NodeBodyCreate, opts?: UploadFileOpts): Promise<NodeEntry | any> {
         rootFolderId = rootFolderId || '-root-';
         opts = opts || {};

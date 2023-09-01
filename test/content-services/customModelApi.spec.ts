@@ -40,7 +40,7 @@ describe('Custom Model Api', () => {
             () => {
                 done();
             },
-            (error: any) => {
+            (error) => {
                 console.log('error ' + JSON.stringify(error));
             }
         );
@@ -52,18 +52,13 @@ describe('Custom Model Api', () => {
         it('All Custom Model', (done) => {
             customModelMock.get200AllCustomModel();
 
-            customModelApi.getAllCustomModel().then(
-                () => {
-                    done();
-                },
-                (error: any) => {
-                    console.log('error' + error);
-                });
+            customModelApi.getAllCustomModel().then(() => {
+                done();
+            }, console.error);
         });
     });
 
     describe('Create', () => {
-
         it('createCustomModel', (done) => {
             customModelMock.create201CustomModel();
 
@@ -73,31 +68,19 @@ describe('Custom Model Api', () => {
             const namespaceUri = 'http://www.alfresco.org/model/testNamespace/1.0';
             const namespacePrefix = 'test';
 
-            customModelApi.createCustomModel(status, description, name, namespaceUri, namespacePrefix).then(
-                () => {
-                    done();
-                },
-                (error: any) => {
-                    console.log('error' + error);
-                }
-            );
+            customModelApi.createCustomModel(status, description, name, namespaceUri, namespacePrefix).then(() => {
+                done();
+            }, console.error);
         });
-
     });
 
     describe('PUT', () => {
         it('activateCustomModel', (done) => {
             customModelMock.activateCustomModel200();
 
-            customModelApi.activateCustomModel('testModel').then(
-                () => {
-                    done();
-                },
-                (error: any) => {
-                    console.log('error' + error);
-                }
-            );
+            customModelApi.activateCustomModel('testModel').then(() => {
+                done();
+            }, console.error);
         });
-
     });
 });

@@ -324,7 +324,7 @@ JSON
      * @param opts.permanent Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. (default to false)
      * @return Promise<{}>
      */
-    deleteSite(siteId: string, opts?: { permanent?: boolean }): Promise<any> {
+    deleteSite(siteId: string, opts?: { permanent?: boolean }): Promise<void> {
         throwIfNotDefined(siteId, 'siteId');
 
         const pathParams = {
@@ -350,7 +350,7 @@ JSON
      * @param personId The identifier of a person.
      * @return Promise<{}>
      */
-    deleteSiteMembership(siteId: string, personId: string): Promise<any> {
+    deleteSiteMembership(siteId: string, personId: string): Promise<void> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(personId, 'personId');
 
@@ -375,7 +375,7 @@ JSON
      * @param siteId The identifier of a site.
      * @return Promise<{}>
      */
-    deleteSiteMembershipForPerson(personId: string, siteId: string): Promise<any> {
+    deleteSiteMembershipForPerson(personId: string, siteId: string): Promise<void> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
@@ -400,7 +400,7 @@ JSON
      * @param siteId The identifier of a site.
      * @return Promise<{}>
      */
-    deleteSiteMembershipRequestForPerson(personId: string, siteId: string): Promise<any> {
+    deleteSiteMembershipRequestForPerson(personId: string, siteId: string): Promise<void> {
         throwIfNotDefined(personId, 'personId');
         throwIfNotDefined(siteId, 'siteId');
 
@@ -1171,7 +1171,7 @@ To sort the entities in a specific order, you can use the **ASC** and **DESC** k
      * @param groupId The authorityId of a group.
      * @return Promise<{}>
      */
-    deleteSiteGroupMembership(siteId: string, groupId: string): Promise<any> {
+    deleteSiteGroupMembership(siteId: string, groupId: string): Promise<void> {
         throwIfNotDefined(siteId, 'siteId');
         throwIfNotDefined(groupId, 'groupId');
 

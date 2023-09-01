@@ -39,7 +39,7 @@ export class TrashcanApi extends BaseApi {
      * @param nodeId The identifier of a node.
      * @return Promise<{}>
      */
-    deleteDeletedNode(nodeId: string): Promise<any> {
+    deleteDeletedNode(nodeId: string): Promise<void> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
@@ -144,29 +144,17 @@ than a 404 response.
             accepts: ['application/octet-stream']
         });
     }
+
     /**
-    * Get a deleted node
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Gets the specific deleted node **nodeId**.
-
-    *
-    * @param nodeId The identifier of a node.
-    * @param opts Optional parameters
-    * @param opts.include Returns additional information about the node. The following optional fields can be requested:
-* allowableOperations
-* association
-* isLink
-* isFavorite
-* isLocked
-* path
-* permissions
-* definition
-
-    * @return Promise<DeletedNodeEntry>
-    */
-    getDeletedNode(nodeId: string, opts?: { include?: string[] }): Promise<DeletedNodeEntry> {
+     * Get a deleted node
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * @param nodeId The identifier of a node.
+     * @param opts Optional parameters
+     * @return Promise<DeletedNodeEntry>
+     */
+    getDeletedNode(nodeId: string, opts?: ContentIncludeQuery): Promise<DeletedNodeEntry> {
         throwIfNotDefined(nodeId, 'nodeId');
 
         const pathParams = {
@@ -184,13 +172,11 @@ Gets the specific deleted node **nodeId**.
             returnType: DeletedNodeEntry
         });
     }
+
     /**
     * Get deleted node content
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Gets the content of the deleted node with identifier **nodeId**.
-
     *
     * @param nodeId The identifier of a node.
     * @param opts Optional parameters
@@ -248,25 +234,22 @@ Single part request supported, for example: bytes=1-10.
     }
 
     /**
-    * List renditions for a deleted node
-    *
-    * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
-
-Gets a list of the rendition information for each rendition of the file **nodeId**, including the rendition id.
-
-Each rendition returned has a **status**: CREATED means it is available to view or download, NOT_CREATED means the rendition can be requested.
-
-You can use the **where** parameter to filter the returned renditions by **status**. For example, the following **where**
-clause will return just the CREATED renditions:
-
-(status='CREATED')
-
-    *
-    * @param nodeId The identifier of a node.
-    * @param opts Optional parameters
-    * @param opts.where A string to restrict the returned objects by using a predicate.
-    * @return Promise<RenditionPaging>
-    */
+     * List renditions for a deleted node
+     *
+     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+     *
+     * Each rendition returned has a **status**: CREATED means it is available to view or download, NOT_CREATED means the rendition can be requested.
+     *
+     * You can use the **where** parameter to filter the returned renditions by **status**. For example, the following **where**
+     * clause will return just the CREATED renditions:
+     *
+     * - (status='CREATED')
+     *
+     * @param nodeId The identifier of a node.
+     * @param opts Optional parameters
+     * @param opts.where A string to restrict the returned objects by using a predicate.
+     * @return Promise<RenditionPaging>
+     */
     listDeletedNodeRenditions(nodeId: string, opts?: { where?: string }): Promise<RenditionPaging> {
         throwIfNotDefined(nodeId, 'nodeId');
 
@@ -323,7 +306,7 @@ clause will return just the CREATED renditions:
      * children. It should be noted that no other secondary child associations or peer
      * associations will be restored, for any of the nodes within the primary parent-child
      * hierarchy of restored nodes, irrespective of whether these associations were to
-     * nodes within or outside of the restored hierarchy.
+     * nodes within or outside the restored hierarchy.
      *
      * Also, any previously shared link will not be restored since it is deleted at the time
      * of delete of each node.

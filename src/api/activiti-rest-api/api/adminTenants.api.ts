@@ -24,17 +24,17 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* AdminTenantsApi service.
-* @module AdminTenantsApi
-*/
+ * AdminTenantsApi service.
+ * @module AdminTenantsApi
+ */
 export class AdminTenantsApi extends BaseApi {
     /**
-    * Create a tenant
-    * Only a tenant manager may access this endpoint
-    *
-    * @param createTenantRepresentation createTenantRepresentation
-    * @return Promise<LightTenantRepresentation>
-    */
+     * Create a tenant
+     * Only a tenant manager may access this endpoint
+     *
+     * @param createTenantRepresentation createTenantRepresentation
+     * @return Promise<LightTenantRepresentation>
+     */
     createTenant(createTenantRepresentation: CreateTenantRepresentation): Promise<LightTenantRepresentation> {
         throwIfNotDefined(createTenantRepresentation, 'groupId');
 
@@ -46,12 +46,12 @@ export class AdminTenantsApi extends BaseApi {
     }
 
     /**
-    * Delete a tenant
-    *
-    * @param tenantId tenantId
-    * @return Promise<{}>
-    */
-    deleteTenant(tenantId: number): Promise<any> {
+     * Delete a tenant
+     *
+     * @param tenantId tenantId
+     * @return Promise<{}>
+     */
+    deleteTenant(tenantId: number): Promise<void> {
         throwIfNotDefined(tenantId, 'tenantId');
 
         const pathParams = {
@@ -65,11 +65,11 @@ export class AdminTenantsApi extends BaseApi {
     }
 
     /**
-    * Get tenant events
-    *
-    * @param tenantId tenantId
-    * @return Promise<TenantEvent>
-    */
+     * Get tenant events
+     *
+     * @param tenantId tenantId
+     * @return Promise<TenantEvent>
+     */
     getTenantEvents(tenantId: number): Promise<TenantEvent> {
         throwIfNotDefined(tenantId, 'tenantId');
 
@@ -85,11 +85,11 @@ export class AdminTenantsApi extends BaseApi {
     }
 
     /**
-    * Get a tenant's logo
-    *
-    * @param tenantId tenantId
-    * @return Promise<{}>
-    */
+     * Get a tenant's logo
+     *
+     * @param tenantId tenantId
+     * @return Promise<{}>
+     */
     getTenantLogo(tenantId: number): Promise<any> {
         throwIfNotDefined(tenantId, 'tenantId');
 
@@ -104,11 +104,11 @@ export class AdminTenantsApi extends BaseApi {
     }
 
     /**
-    * Get a tenant
-    *
-    * @param tenantId tenantId
-    * @return Promise<TenantRepresentation>
-    */
+     * Get a tenant
+     *
+     * @param tenantId tenantId
+     * @return Promise<TenantRepresentation>
+     */
     getTenant(tenantId: number): Promise<TenantRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
 
@@ -124,11 +124,11 @@ export class AdminTenantsApi extends BaseApi {
     }
 
     /**
-    * List tenants
-    * Only a tenant manager may access this endpoint
-    *
-    * @return Promise<LightTenantRepresentation>
-    */
+     * List tenants
+     * Only a tenant manager may access this endpoint
+     *
+     * @return Promise<LightTenantRepresentation>
+     */
     getTenants(): Promise<LightTenantRepresentation> {
         return this.get({
             path: '/api/enterprise/admin/tenants',
@@ -137,12 +137,12 @@ export class AdminTenantsApi extends BaseApi {
     }
 
     /**
-    * Update a tenant
-    *
-    * @param tenantId tenantId
-    * @param createTenantRepresentation createTenantRepresentation
-    * @return Promise<TenantRepresentation>
-    */
+     * Update a tenant
+     *
+     * @param tenantId tenantId
+     * @param createTenantRepresentation createTenantRepresentation
+     * @return Promise<TenantRepresentation>
+     */
     update(tenantId: number, createTenantRepresentation: CreateTenantRepresentation): Promise<TenantRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
         throwIfNotDefined(createTenantRepresentation, 'createTenantRepresentation');
@@ -160,12 +160,12 @@ export class AdminTenantsApi extends BaseApi {
     }
 
     /**
-    * Update a tenant's logo
-    *
-    * @param tenantId tenantId
-    * @param file file
-    * @return Promise<ImageUploadRepresentation>
-    */
+     * Update a tenant's logo
+     *
+     * @param tenantId tenantId
+     * @param file file
+     * @return Promise<ImageUploadRepresentation>
+     */
     uploadTenantLogo(tenantId: number, file: any): Promise<ImageUploadRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
         throwIfNotDefined(file, 'file');

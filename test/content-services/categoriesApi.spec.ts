@@ -58,7 +58,7 @@ describe('Categories', () => {
         categoriesMock.get404SubcategoryNotExist('notExistingId');
         categoriesApi.getSubcategories('notExistingId').then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(404);
                 done();
             }
@@ -78,7 +78,7 @@ describe('Categories', () => {
         categoriesMock.get404CategoryNotExist('notExistingId');
         categoriesApi.getCategory('notExistingId').then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(404);
                 done();
             }
@@ -98,7 +98,7 @@ describe('Categories', () => {
         categoriesMock.get403NodeCategoryLinksPermissionDenied('testNode');
         categoriesApi.getCategoryLinksForNode('testNode').then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(403);
                 done();
             }
@@ -109,7 +109,7 @@ describe('Categories', () => {
         categoriesMock.get404NodeNotExist('testNode');
         categoriesApi.getCategoryLinksForNode('testNode').then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(404);
                 done();
             }
@@ -118,19 +118,17 @@ describe('Categories', () => {
 
     it('should return 204 after unlinking category', (done) => {
         categoriesMock.get204CategoryUnlinked('testNode', 'testId1');
-        categoriesApi.unlinkNodeFromCategory('testNode', 'testId1').then(
-            (response: any) => {
-                expect(response.noContent);
-                done();
-            }
-        );
+        categoriesApi.unlinkNodeFromCategory('testNode', 'testId1').then((response: any) => {
+            expect(response.noContent);
+            done();
+        });
     });
 
     it('should return 404 while unlinking category if category with categoryId or node with nodeId does not exist', (done) => {
         categoriesMock.get404CategoryUnlinkNotFound('testNode', 'testId1');
         categoriesApi.unlinkNodeFromCategory('testNode', 'testId1').then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(404);
                 done();
             }
@@ -141,7 +139,7 @@ describe('Categories', () => {
         categoriesMock.get403CategoryUnlinkPermissionDenied('testNode', 'testId1');
         categoriesApi.unlinkNodeFromCategory('testNode', 'testId1').then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(403);
                 done();
             }
@@ -161,7 +159,7 @@ describe('Categories', () => {
         categoriesMock.get404CategoryUpdateNotFound('testId1');
         categoriesApi.updateCategory('testId1', { name: 'testName1' }).then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(404);
                 done();
             }
@@ -172,7 +170,7 @@ describe('Categories', () => {
         categoriesMock.get403CategoryUpdatePermissionDenied('testId1');
         categoriesApi.updateCategory('testId1', { name: 'testName1' }).then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(403);
                 done();
             }
@@ -192,7 +190,7 @@ describe('Categories', () => {
         categoriesMock.get409CategoryCreateAlreadyExists('testId1');
         categoriesApi.createSubcategories('testId1', [{ name: 'testName10' }]).then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(409);
                 done();
             }
@@ -203,7 +201,7 @@ describe('Categories', () => {
         categoriesMock.get403CategoryCreatedPermissionDenied('testId1');
         categoriesApi.createSubcategories('testId1', [{ name: 'testName10' }]).then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(403);
                 done();
             }
@@ -240,7 +238,7 @@ describe('Categories', () => {
         categoriesMock.get404CategoryLinkNotFound('testNode');
         categoriesApi.linkNodeToCategory('testNode', [{ categoryId: 'testId1' }]).then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(404);
                 done();
             }
@@ -251,7 +249,7 @@ describe('Categories', () => {
         categoriesMock.get403CategoryLinkPermissionDenied('testNode');
         categoriesApi.linkNodeToCategory('testNode', [{ categoryId: 'testId1' }]).then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(403);
                 done();
             }
@@ -262,7 +260,7 @@ describe('Categories', () => {
         categoriesMock.get405CategoryLinkCannotAssign('testNode');
         categoriesApi.linkNodeToCategory('testNode', [{ categoryId: 'testId1' }]).then(
             () => {},
-            (error: any) => {
+            (error: { status: number }) => {
                 expect(error.status).equal(405);
                 done();
             }

@@ -39,19 +39,19 @@ export class RecordsApi extends BaseApi {
         throwIfNotDefined(recordId, 'recordId');
 
         const pathParams = {
-            recordId,
+            recordId
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.post({
             path: '/records/{recordId}/complete',
             pathParams,
             queryParams,
-            returnType: RecordEntry,
+            returnType: RecordEntry
         });
     }
 
@@ -61,16 +61,16 @@ export class RecordsApi extends BaseApi {
      * @param recordId The identifier of a record.
      * @return Promise<{}>
      */
-    deleteRecord(recordId: string): Promise<any> {
+    deleteRecord(recordId: string): Promise<void> {
         throwIfNotDefined(recordId, 'recordId');
 
         const pathParams = {
-            recordId,
+            recordId
         };
 
         return this.delete({
             path: '/records/{recordId}',
-            pathParams,
+            pathParams
         });
     }
 
@@ -91,12 +91,12 @@ export class RecordsApi extends BaseApi {
         throwIfNotDefined(nodeBodyFile, 'nodeBodyFile');
 
         const pathParams = {
-            recordId,
+            recordId
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.post({
@@ -104,7 +104,7 @@ export class RecordsApi extends BaseApi {
             pathParams,
             queryParams,
             bodyParam: nodeBodyFile,
-            returnType: RecordEntry,
+            returnType: RecordEntry
         });
     }
 
@@ -122,19 +122,19 @@ export class RecordsApi extends BaseApi {
         throwIfNotDefined(recordId, 'recordId');
 
         const pathParams = {
-            recordId,
+            recordId
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.get({
             path: '/records/{recordId}',
             pathParams,
             queryParams,
-            returnType: RecordEntry,
+            returnType: RecordEntry
         });
     }
 
@@ -160,27 +160,27 @@ export class RecordsApi extends BaseApi {
         opts?: {
             attachment?: boolean;
             ifModifiedSince?: string;
-        },
+        }
     ): Promise<any> {
         throwIfNotDefined(recordId, 'recordId');
 
         const pathParams = {
-            recordId,
+            recordId
         };
 
         const queryParams = {
-            attachment: opts?.attachment,
+            attachment: opts?.attachment
         };
 
         const headerParams = {
-            'If-Modified-Since': opts?.ifModifiedSince,
+            'If-Modified-Since': opts?.ifModifiedSince
         };
 
         return this.get({
             path: '/records/{recordId}/content',
             pathParams,
             queryParams,
-            headerParams,
+            headerParams
         });
     }
 
@@ -216,12 +216,12 @@ export class RecordsApi extends BaseApi {
         throwIfNotDefined(recordBodyUpdate, 'recordBodyUpdate');
 
         const pathParams = {
-            recordId,
+            recordId
         };
 
         const queryParams = {
             include: buildCollectionParam(opts?.include, 'csv'),
-            fields: buildCollectionParam(opts?.fields, 'csv'),
+            fields: buildCollectionParam(opts?.fields, 'csv')
         };
 
         return this.put({
@@ -229,7 +229,7 @@ export class RecordsApi extends BaseApi {
             pathParams,
             queryParams,
             bodyParam: recordBodyUpdate,
-            returnType: RecordEntry,
+            returnType: RecordEntry
         });
     }
 }

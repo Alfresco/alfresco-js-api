@@ -33,7 +33,7 @@ export class AppDefinitionsApi extends BaseApi {
      * @param appDefinitionId appDefinitionId
      * @return Promise<{}>
      */
-    deleteAppDefinition(appDefinitionId: number): Promise<any> {
+    deleteAppDefinition(appDefinitionId: number): Promise<void> {
         throwIfNotDefined(appDefinitionId, 'appDefinitionId');
 
         const pathParams = {
@@ -103,7 +103,7 @@ export class AppDefinitionsApi extends BaseApi {
         throwIfNotDefined(file, 'file');
 
         const formParams = {
-            'file': file
+            file: file
         };
 
         const queryParams = {
@@ -187,7 +187,7 @@ export class AppDefinitionsApi extends BaseApi {
 
         if (!updatedModel['appDefinition']) {
             const formParams = {
-                'file': updatedModel
+                file: updatedModel
             };
 
             return this.post({
@@ -195,7 +195,7 @@ export class AppDefinitionsApi extends BaseApi {
                 pathParams,
                 formParams,
                 bodyParam: updatedModel,
-                contentTypes: ['multipart/form-data'],
+                contentTypes: ['multipart/form-data']
             });
         } else {
             return this.put({

@@ -47,14 +47,9 @@ describe('Discovery', () => {
     it('should getRepositoryInformation works', (done) => {
         discoveryMock.get200Response();
 
-        discoveryApi.getRepositoryInformation().then(
-            (data) => {
-                expect(data.entry.repository.edition).to.be.equal('Enterprise');
-                done();
-            },
-            (error: any) => {
-                console.error(error);
-            }
-        );
+        discoveryApi.getRepositoryInformation().then((data) => {
+            expect(data.entry.repository.edition).to.be.equal('Enterprise');
+            done();
+        });
     });
 });

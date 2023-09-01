@@ -34,7 +34,11 @@ export class ContentApi extends BaseApi {
      * @param opts Optional parameters
      * @return Promise<RelatedContentRepresentation>
      */
-    createRelatedContentOnProcessInstance(processInstanceId: string, relatedContent: RelatedContentRepresentation | any, opts?: { isRelatedContent?: boolean }): Promise<RelatedContentRepresentation> {
+    createRelatedContentOnProcessInstance(
+        processInstanceId: string,
+        relatedContent: RelatedContentRepresentation | any,
+        opts?: { isRelatedContent?: boolean }
+    ): Promise<RelatedContentRepresentation> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(relatedContent, 'relatedContent');
 
@@ -54,7 +58,7 @@ export class ContentApi extends BaseApi {
             });
         } else {
             const formParams = {
-                'file': relatedContent
+                file: relatedContent
             };
 
             return this.post({
@@ -94,7 +98,7 @@ export class ContentApi extends BaseApi {
             });
         } else {
             const formParams = {
-                'file': relatedContent
+                file: relatedContent
             };
 
             return this.post({
@@ -151,7 +155,7 @@ export class ContentApi extends BaseApi {
      * @param contentId contentId
      * @return Promise<{}>
      */
-    deleteContent(contentId: number): Promise<any> {
+    deleteContent(contentId: number): Promise<void> {
         throwIfNotDefined(contentId, 'contentId');
 
         const pathParams = {
@@ -216,7 +220,7 @@ export class ContentApi extends BaseApi {
             });
         } else {
             const pathParams = {
-                'contentId': contentId
+                contentId: contentId
             };
 
             return this.get({
@@ -259,7 +263,7 @@ export class ContentApi extends BaseApi {
      * @param opts Optional parameters
      * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
      */
-    getRelatedContentForTask(taskId: string, opts?: { isRelatedContent?: boolean; }): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
+    getRelatedContentForTask(taskId: string, opts?: { isRelatedContent?: boolean }): Promise<ResultListDataRepresentationRelatedContentRepresentation> {
         throwIfNotDefined(taskId, 'taskId');
 
         const pathParams = {
@@ -280,7 +284,7 @@ export class ContentApi extends BaseApi {
      * @param content - content that workflow was started with
      * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
      */
-     getProcessesAndTasksOnContent(content: RelatedContentRepresentation): Promise<RelatedProcessTask[]> {
+    getProcessesAndTasksOnContent(content: RelatedContentRepresentation): Promise<RelatedProcessTask[]> {
         throwIfNotDefined(content, 'content');
 
         return this.get({
@@ -289,5 +293,4 @@ export class ContentApi extends BaseApi {
             returnType: RelatedProcessTask
         });
     }
-
 }

@@ -21,7 +21,7 @@ export type GsGroupInclude = {
      *  - inUse - A flag indicating whether the security group is in use or not.
      */
     include?: string;
-}
+};
 
 export type GsPagingQuery = {
     /**
@@ -33,7 +33,7 @@ export type GsPagingQuery = {
      * The maximum number of items to return in the list.
      */
     maxItems?: number;
-}
+};
 
 export type GsFieldsQuery = {
     /**
@@ -50,4 +50,11 @@ export type GsFieldsQuery = {
      * parameter are returned in addition to those specified in the **fields** parameter.
      */
     fields?: string[];
-}
+};
+
+export type GsIncludeQuery = {
+    /**
+     * Returns additional information about the record. Any optional field from the response model can be requested.
+     */
+    include?: string[];
+};

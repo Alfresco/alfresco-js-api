@@ -108,13 +108,11 @@ JSON
     /**
      * Delete a tag from a node
      *
-     * Deletes tag **tagId** from node **nodeId**.
-     *
      * @param nodeId The identifier of a node.
      * @param tagId The identifier of a tag.
      * @return Promise<{}>
      */
-    deleteTagFromNode(nodeId: string, tagId: string): Promise<any> {
+    deleteTagFromNode(nodeId: string, tagId: string): Promise<void> {
         throwIfNotDefined(nodeId, 'nodeId');
         throwIfNotDefined(tagId, 'tagId');
 

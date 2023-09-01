@@ -15,23 +15,23 @@
  * limitations under the License.
  */
 
-import { } from '../model/';
+import {} from '../model/';
 import { RestVariable } from '../model/restVariable';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* ProcessInstanceVariablesApi service.
-* @module ProcessInstanceVariablesApi
-*/
+ * ProcessInstanceVariablesApi service.
+ * @module ProcessInstanceVariablesApi
+ */
 export class ProcessInstanceVariablesApi extends BaseApi {
     /**
-    * Create or update variables
-    *
-    * @param processInstanceId Process instance ID
-    * @param restVariables restVariables
-    * @return Promise<RestVariable>
-    */
+     * Create or update variables
+     *
+     * @param processInstanceId Process instance ID
+     * @param restVariables restVariables
+     * @return Promise<RestVariable>
+     */
     createOrUpdateProcessInstanceVariables(processInstanceId: string, restVariables: RestVariable[]): Promise<RestVariable[]> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(restVariables, 'restVariables');
@@ -48,13 +48,13 @@ export class ProcessInstanceVariablesApi extends BaseApi {
     }
 
     /**
-    * Delete a variable
-    *
-    * @param processInstanceId processInstanceId
-    * @param variableName variableName
-    * @return Promise<{}>
-    */
-    deleteProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<any> {
+     * Delete a variable
+     *
+     * @param processInstanceId processInstanceId
+     * @param variableName variableName
+     * @return Promise<{}>
+     */
+    deleteProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<void> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(variableName, 'variableName');
 
@@ -70,12 +70,12 @@ export class ProcessInstanceVariablesApi extends BaseApi {
     }
 
     /**
-    * Get a variable
-    *
-    * @param processInstanceId processInstanceId
-    * @param variableName variableName
-    * @return Promise<RestVariable>
-    */
+     * Get a variable
+     *
+     * @param processInstanceId processInstanceId
+     * @param variableName variableName
+     * @return Promise<RestVariable>
+     */
     getProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<RestVariable> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(variableName, 'variableName');
@@ -93,11 +93,11 @@ export class ProcessInstanceVariablesApi extends BaseApi {
     }
 
     /**
-    * List variables
-    *
-    * @param processInstanceId Process instance ID
-    * @return Promise<RestVariable>
-    */
+     * List variables
+     *
+     * @param processInstanceId Process instance ID
+     * @return Promise<RestVariable>
+     */
     getProcessInstanceVariables(processInstanceId: string): Promise<RestVariable[]> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
 
@@ -112,13 +112,13 @@ export class ProcessInstanceVariablesApi extends BaseApi {
     }
 
     /**
-    * Update a variable
-    *
-    * @param processInstanceId processInstanceId
-    * @param variableName variableName
-    * @param restVariable restVariable
-    * @return Promise<RestVariable>
-    */
+     * Update a variable
+     *
+     * @param processInstanceId processInstanceId
+     * @param variableName variableName
+     * @param restVariable restVariable
+     * @return Promise<RestVariable>
+     */
     updateProcessInstanceVariable(processInstanceId: string, variableName: string, restVariable: RestVariable): Promise<RestVariable> {
         throwIfNotDefined(processInstanceId, 'processInstanceId');
         throwIfNotDefined(variableName, 'variableName');
