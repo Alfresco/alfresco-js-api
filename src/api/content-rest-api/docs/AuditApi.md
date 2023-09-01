@@ -1,274 +1,154 @@
-# AuditApi
+**# AuditApi
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**deleteAuditEntriesForAuditApp**](AuditApi.md#deleteAuditEntriesForAuditApp) | **DELETE** /audit-applications/{auditApplicationId}/audit-entries | Permanently delete audit entries for an audit application
-[**deleteAuditEntry**](AuditApi.md#deleteAuditEntry) | **DELETE** /audit-applications/{auditApplicationId}/audit-entries/{auditEntryId} | Permanently delete an audit entry
-[**getAuditApp**](AuditApi.md#getAuditApp) | **GET** /audit-applications/{auditApplicationId} | Get audit application info
-[**getAuditEntry**](AuditApi.md#getAuditEntry) | **GET** /audit-applications/{auditApplicationId}/audit-entries/{auditEntryId} | Get audit entry
-[**listAuditApps**](AuditApi.md#listAuditApps) | **GET** /audit-applications | List audit applications
-[**listAuditEntriesForAuditApp**](AuditApi.md#listAuditEntriesForAuditApp) | **GET** /audit-applications/{auditApplicationId}/audit-entries | List audit entries for an audit application
-[**listAuditEntriesForNode**](AuditApi.md#listAuditEntriesForNode) | **GET** /nodes/{nodeId}/audit-entries | List audit entries for a node
-[**updateAuditApp**](AuditApi.md#updateAuditApp) | **PUT** /audit-applications/{auditApplicationId} | Update audit application info
+| Method                                                          | HTTP request                                                                     | Description                                               |
+|-----------------------------------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------------|
+| [deleteAuditEntriesForAuditApp](#deleteAuditEntriesForAuditApp) | **DELETE** /audit-applications/{auditApplicationId}/audit-entries                | Permanently delete audit entries for an audit application |
+| [deleteAuditEntry](#deleteAuditEntry)                           | **DELETE** /audit-applications/{auditApplicationId}/audit-entries/{auditEntryId} | Permanently delete an audit entry                         |
+| [getAuditApp](#getAuditApp)                                     | **GET** /audit-applications/{auditApplicationId}                                 | Get audit application info                                |
+| [getAuditEntry](#getAuditEntry)                                 | **GET** /audit-applications/{auditApplicationId}/audit-entries/{auditEntryId}    | Get audit entry                                           |
+| [listAuditApps](#listAuditApps)                                 | **GET** /audit-applications                                                      | List audit applications                                   |
+| [listAuditEntriesForAuditApp](#listAuditEntriesForAuditApp)     | **GET** /audit-applications/{auditApplicationId}/audit-entries                   | List audit entries for an audit application               |
+| [listAuditEntriesForNode](#listAuditEntriesForNode)             | **GET** /nodes/{nodeId}/audit-entries                                            | List audit entries for a node                             |
+| [updateAuditApp](#updateAuditApp)                               | **PUT** /audit-applications/{auditApplicationId}                                 | Update audit application info                             |
 
-
-<a name="deleteAuditEntriesForAuditApp"></a>
 ## deleteAuditEntriesForAuditApp
-> deleteAuditEntriesForAuditApp(auditApplicationIdwhere)
 
 Permanently delete audit entries for an audit application
 
-**Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
-
-Permanently delete audit entries for an audit application **auditApplicationId**.
+> this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 The **where** clause must be specified, either with an inclusive time period or for
-an inclusive range of ids. The delete is within the context of the given audit application.
+an inclusive range of ids. The deletion is within the context of the given audit application.
 
 For example:
 
-*   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
-*   where=(id BETWEEN ('1234', '4321')
+- `where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00', '2017-06-04T10:05:16.536+01:00')`
+- `where=(id BETWEEN ('1234', '4321')`
 
 You must have admin rights to delete audit information.
 
+**Parameters**
 
-### Example
+| Name                   | Type   | Description                                                                                                                                                                                                                                                     |
+|------------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **auditApplicationId** | string | The identifier of an audit application.                                                                                                                                                                                                                         | 
+| **where**              | string | Audit entries to permanently delete for an audit application, given an inclusive time period or range of ids. For example: `where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')`, `where=(id BETWEEN ('1234', '4321')` |
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, AuditApi} from '@alfresco/js-api';
+import { AlfrescoApi, AuditApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
 
-
-auditApi.deleteAuditEntriesForAuditApp(auditApplicationIdwhere).then(() => {
+auditApi.deleteAuditEntriesForAuditApp('<auditApplicationId>', '<where>').then(() => {
   console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **auditApplicationId** | **string**| The identifier of an audit application. | 
- **where** | **string**| Audit entries to permanently delete for an audit application, given an inclusive time period or range of ids. For example:
-
-*   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
-*   where=(id BETWEEN ('1234', '4321')
- | 
-
-### Return type
-
-null (empty response body)
-
-<a name="deleteAuditEntry"></a>
 ## deleteAuditEntry
-> deleteAuditEntry(auditApplicationIdauditEntryId)
 
 Permanently delete an audit entry
 
-**Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> You must have admin rights to delete audit information.
 
-Permanently delete a single audit entry **auditEntryId**.
+**Parameters**
 
-You must have admin rights to delete audit information.
+| Name                   | Type   | Description                             |
+|------------------------|--------|-----------------------------------------|
+| **auditApplicationId** | string | The identifier of an audit application. | 
+| **auditEntryId**       | string | The identifier of an audit entry.       | 
 
-
-### Example
+**Example**
 
 ```javascript
-import { AlfrescoApi, AuditApi} from '@alfresco/js-api';
+import { AlfrescoApi, AuditApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
 
-
-auditApi.deleteAuditEntry(auditApplicationIdauditEntryId).then(() => {
+auditApi.deleteAuditEntry('<auditApplicationId>', '<auditEntryId>').then(() => {
   console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **auditApplicationId** | **string**| The identifier of an audit application. | 
- **auditEntryId** | **string**| The identifier of an audit entry. | 
-
-### Return type
-
-null (empty response body)
-
-<a name="getAuditApp"></a>
 ## getAuditApp
-> AuditApp getAuditApp(auditApplicationIdopts)
 
 Get audit application info
 
-**Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
-
-Get status of an audit application **auditApplicationId**.
-
-You must have admin rights to retrieve audit information.
+> **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+> You must have admin rights to retrieve audit information.
 
 You can use the **include** parameter to return the minimum and/or maximum audit record id for the application.
 
+**Parameters**
 
-### Example
+| Name                   | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **auditApplicationId** | string   | The identifier of an audit application.                                                                                                                                                                                                                                                                                                                                                                                                 | 
+| opts.fields            | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |  
+| opts.include           | string[] | Also include the current minimum and/or maximum audit entry ids for the application. The following optional fields can be requested: `max`, `min`                                                                                                                                                                                                                                                                                       | 
+
+**Return type**: [AuditApp](AuditApp.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, AuditApi} from '@alfresco/js-api';
+import { AlfrescoApi, AuditApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
+const auditApplicationId = '<auditApplicationId>';
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-  'include':  /*  | Also include the current minimum and/or maximum audit entry ids for the application. The following optional fields can be requested:
-* max
-* min
- */
-};
-
-auditApi.getAuditApp(auditApplicationIdopts).then((data) => {
+auditApi.getAuditApp(auditApplicationId, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **auditApplicationId** | **string**| The identifier of an audit application. | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
- **include** | [**string**](string.md)| Also include the current minimum and/or maximum audit entry ids for the application. The following optional fields can be requested:
-* max
-* min
- | [optional] 
-
-### Return type
-
-[**AuditApp**](AuditApp.md)
-
-<a name="getAuditEntry"></a>
 ## getAuditEntry
-> AuditEntryEntry getAuditEntry(auditApplicationIdauditEntryIdopts)
 
 Get audit entry
 
-**Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> You must have admin rights to access audit information.
 
-Gets audit entry **auditEntryId**.
+**Parameters**
 
-You must have admin rights to access audit information.
+| Name                   | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **auditApplicationId** | string   | The identifier of an audit application.                                                                                                                                                                                                                                                                                                                                                                                                 | 
+| **auditEntryId**       | string   | The identifier of an audit entry.                                                                                                                                                                                                                                                                                                                                                                                                       | 
+| opts.fields            | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
+**Return type**: [AuditEntryEntry](AuditEntryEntry.md)
 
-### Example
+**Example**
 
 ```javascript
-import { AlfrescoApi, AuditApi} from '@alfresco/js-api';
+import { AlfrescoApi, AuditApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-auditApi.getAuditEntry(auditApplicationIdauditEntryIdopts).then((data) => {
+auditApi.getAuditEntry('<auditApplicationId>', '<auditEntryId>', opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **auditApplicationId** | **string**| The identifier of an audit application. | 
- **auditEntryId** | **string**| The identifier of an audit entry. | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**AuditEntryEntry**](AuditEntryEntry.md)
-
-<a name="listAuditApps"></a>
 ## listAuditApps
-> AuditAppPaging listAuditApps(opts)
 
 List audit applications
 
-**Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
-
+> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> You must have admin rights to retrieve audit information.
+> 
 Gets a list of audit applications in this repository.
-
 This list may include pre-configured audit applications, if enabled, such as:
 
 * alfresco-access
@@ -276,88 +156,41 @@ This list may include pre-configured audit applications, if enabled, such as:
 * Alfresco Tagging Service
 * Alfresco Sync Service (used by Enterprise Cloud Sync)
 
-You must have admin rights to retrieve audit information.
+**Parameters**
 
+| Name           | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             | Notes                                                     |
+|----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| opts.skipCount | number   | The number of entities that exist in the collection before those included in this list.                                                                                                                                                                                                                                                                                                                                                 | If not supplied then the default value is 0. default to 0 |
+| opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                       | default to 100                                            |
+| opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                                                           | 
 
-### Example
+**Return type**: [AuditAppPaging](AuditAppPaging.md)
+
+**Example**
 
 ```javascript
 import { AlfrescoApi, AuditApi} from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
-
-const opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
+const opts = {};
 
 auditApi.listAuditApps(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- | [optional] [default to 0]
- **maxItems** | **number**| The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- | [optional] [default to 100]
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**AuditAppPaging**](AuditAppPaging.md)
-
-<a name="listAuditEntriesForAuditApp"></a>
 ## listAuditEntriesForAuditApp
-> AuditEntryPaging listAuditEntriesForAuditApp(auditApplicationIdopts)
 
 List audit entries for an audit application
 
-**Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
-
-Gets a list of audit entries for audit application **auditApplicationId**.
+> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> You must have admin rights to retrieve audit information.
 
 You can use the **include** parameter to return additional **values** information.
 
 The list can be filtered by one or more of:
+
 * **createdByUser** person id
 * **createdAt** inclusive time period
 * **id** inclusive range of ids
@@ -367,135 +200,50 @@ The list can be filtered by one or more of:
 The default sort order is **createdAt** ascending, but you can use an optional **ASC** or **DESC**
 modifier to specify an ascending or descending sort order.
 
-For example, specifying orderBy=createdAt DESC returns audit entries in descending **createdAt** order.
+For example, specifying `orderBy=createdAt DESC` returns audit entries in descending **createdAt** order.
 
-You must have admin rights to retrieve audit information.
-
-
-### Example
+**Example**
 
 ```javascript
 import { AlfrescoApi, AuditApi} from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
-
-const opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- */
-  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-sort the list by one or more fields.
-
-Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-above to check if any fields used in this method have a descending default search order.
-
-To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- */
-  'where': where_example /*  | Optionally filter the list. Here are some examples:
-
-*   where=(createdByUser='jbloggs')
-
-*   where=(id BETWEEN ('1234', '4321')
-
-*   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
-
-*   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
-
-*   where=(valuesKey='/alfresco-access/login/user')
-
-*   where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')
- */
-  'include':  /*  | Returns additional information about the audit entry. The following optional fields can be requested:
-* values
- */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
 
 auditApi.listAuditEntriesForAuditApp(auditApplicationIdopts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
+**Parameters**
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **auditApplicationId** | **string**| The identifier of an audit application. | 
- **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- | [optional] [default to 0]
- **orderBy** | [**string**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-sort the list by one or more fields.
+| Name                   | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Notes          |
+|------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| **auditApplicationId** | string | The identifier of an audit application.                                                                                                                                                                                                                                                                                                                                                                                                                          | 
+| opts.skipCount         | number | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.                                                                                                                                                                                                                                                                                                                             | default to 0   |
+| opts.orderBy           | string | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields. Each field has a default sort order, which is normally ascending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order. To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field. |                |
+| opts.maxItems          | number | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                                                | default to 100 |
+| opts.where             | string | Optionally filter the list.                                                                                                                                                                                                                                                                                                                                                                                                                                      |                |
+| opts.include           | string | Returns additional information about the audit entry. The following optional fields can be requested: `values`                                                                                                                                                                                                                                                                                                                                                   |                |          
+| opts.fields            | string | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual  entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.                         |                |
 
-Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-above to check if any fields used in this method have a descending default search order.
+**where** examples:
 
-To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- | [optional] 
- **maxItems** | **number**| The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- | [optional] [default to 100]
- **where** | **string**| Optionally filter the list. Here are some examples:
+* `where=(createdByUser='jbloggs')`
+* `where=(id BETWEEN ('1234', '4321')`
+* `where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00', '2017-06-04T10:05:16.536+01:00')`
+* `where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00', '2017-06-04T10:05:16.536+01:00')`
+* `where=(valuesKey='/alfresco-access/login/user')`
+* `where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')`
 
-*   where=(createdByUser='jbloggs')
 
-*   where=(id BETWEEN ('1234', '4321')
+**Return type**: [AuditEntryPaging](AuditEntryPaging.md)
 
-*   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
-
-*   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
-
-*   where=(valuesKey='/alfresco-access/login/user')
-
-*   where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')
- | [optional] 
- **include** | [**string**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
-* values
- | [optional] 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**AuditEntryPaging**](AuditEntryPaging.md)
-
-<a name="listAuditEntriesForNode"></a>
 ## listAuditEntriesForNode
-> AuditEntryPaging listAuditEntriesForNode(nodeIdopts)
 
 List audit entries for a node
 
-**Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+> this endpoint is available in Alfresco 5.2.2 and newer versions.
 
 Gets a list of audit entries for node **nodeId**.
 
@@ -504,123 +252,51 @@ The list can be filtered by **createdByUser** and for a given inclusive time per
 The default sort order is **createdAt** ascending, but you can use an optional **ASC** or **DESC**
 modifier to specify an ascending or descending sort order.
 
-For example, specifying orderBy=createdAt DESC returns audit entries in descending **createdAt** order.
+For example, specifying `orderBy=createdAt DESC` returns audit entries in descending **createdAt** order.
 
 This relies on the pre-configured 'alfresco-access' audit application.
 
+**Parameters**
 
-### Example
+| Name           | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Notes          |
+|----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| **nodeId**     | string   | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                                                        |                |
+| opts.skipCount | number   | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.                                                                                                                                                                                                                                                                                                                             | default to 0   |
+| opts.orderBy   | string[] | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields. Each field has a default sort order, which is normally ascending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order. To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field. |                |
+| opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                                                | default to 100 |
+| opts.where     | string   | Optionally filter the list.                                                                                                                                                                                                                                                                                                                                                                                                                                      |                |
+| opts.include   | string[] | Returns additional information about the audit entry. The following optional fields can be requested: `values`                                                                                                                                                                                                                                                                                                                                                   |                |
+| opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.                          |                | 
+
+**where* examples:
+
+- `where=(createdByUser='-me-')`
+- `where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')`
+- `where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')`
+
+**Return type**: [AuditEntryPaging](AuditEntryPaging.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, AuditApi} from '@alfresco/js-api';
+import { AlfrescoApi, AuditApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
+const nodeId = 'nodeId';
+const opts = {};
 
-const opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- */
-  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-sort the list by one or more fields.
-
-Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-above to check if any fields used in this method have a descending default search order.
-
-To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- */
-  'where': where_example /*  | Optionally filter the list. Here are some examples:
-
-*   where=(createdByUser='-me-')
-
-*   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
-
-*   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
- */
-  'include':  /*  | Returns additional information about the audit entry. The following optional fields can be requested:
-* values
- */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-auditApi.listAuditEntriesForNode(nodeIdopts).then((data) => {
+auditApi.listAuditEntriesForNode(nodeId, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nodeId** | **string**| The identifier of a node. | 
- **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- | [optional] [default to 0]
- **orderBy** | [**string**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-sort the list by one or more fields.
-
-Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-above to check if any fields used in this method have a descending default search order.
-
-To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- | [optional] 
- **maxItems** | **number**| The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- | [optional] [default to 100]
- **where** | **string**| Optionally filter the list. Here are some examples:
-
-*   where=(createdByUser='-me-')
-
-*   where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
-
-*   where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')
- | [optional] 
- **include** | [**string**](string.md)| Returns additional information about the audit entry. The following optional fields can be requested:
-* values
- | [optional] 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**AuditEntryPaging**](AuditEntryPaging.md)
-
-<a name="updateAuditApp"></a>
 ## updateAuditApp
-> AuditApp updateAuditApp(auditApplicationIdauditAppBodyUpdateopts)
 
 Update audit application info
 
-**Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> You must have admin rights to update audit application.
 
 Disable or re-enable the audit application **auditApplicationId**.
 
@@ -630,62 +306,28 @@ it is re-enabled (and system-wide auditing is also enabled).
 Note, it is still possible to query &/or delete any existing audit entries even
 if auditing is disabled for the audit application.
 
-You must have admin rights to update audit application.
+**Parameters**
 
+| Name                   | Type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|------------------------|---------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **auditApplicationId** | string                                | The identifier of an audit application.                                                                                                                                                                                                                                                                                                                                                                                                  | 
+| **auditAppBodyUpdate** | [AuditBodyUpdate](AuditBodyUpdate.md) | The audit application to update.                                                                                                                                                                                                                                                                                                                                                                                                         | 
+| opts.fields            | string[]                              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | 
 
-### Example
+**Return type**: [AuditApp](AuditApp.md)
+
+**Example**
 
 ```javascript
 import { AlfrescoApi, AuditApi} from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
+const auditApplicationId = 'auditApplicationId';
+const auditAppBodyUpdate = {};
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-auditApi.updateAuditApp(auditApplicationIdauditAppBodyUpdateopts).then((data) => {
+auditApi.updateAuditApp(auditApplicationId, auditAppBodyUpdate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **auditApplicationId** | **string**| The identifier of an audit application. | 
- **auditAppBodyUpdate** | [**AuditBodyUpdate**](AuditBodyUpdate.md)| The audit application to update. | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**AuditApp**](AuditApp.md)
-
