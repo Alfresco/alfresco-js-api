@@ -13,16 +13,16 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *.AboutApi* | [**getAppVersion**](docs/AboutApi.md#getAppVersion) | **GET** /enterprise/app-version | Get server type and version
 *.AccountintegrationApi* | [**getAccounts**](docs/AccountintegrationApi.md#getAccounts) | **GET** /enterprise/account/integration | Retrieve external account information
-*.AdminendpointsApi* | [**createBasicAuthConfiguration**](docs/AdminendpointsApi.md#createBasicAuthConfiguration) | **POST** /enterprise/admin/basic-auths | Add an endpoint authorization
-*.AdminendpointsApi* | [**createEndpointConfiguration**](docs/AdminendpointsApi.md#createEndpointConfiguration) | **POST** /enterprise/admin/endpoints | Create an endpoint
-*.AdminendpointsApi* | [**getBasicAuthConfiguration**](docs/AdminendpointsApi.md#getBasicAuthConfiguration) | **GET** /enterprise/admin/basic-auths/{basicAuthId} | Get an endpoint authorization
-*.AdminendpointsApi* | [**getBasicAuthConfigurations**](docs/AdminendpointsApi.md#getBasicAuthConfigurations) | **GET** /enterprise/admin/basic-auths | List endpoint authorizations
-*.AdminendpointsApi* | [**getEndpointConfiguration**](docs/AdminendpointsApi.md#getEndpointConfiguration) | **GET** /enterprise/admin/endpoints/{endpointConfigurationId} | Get an endpoint
-*.AdminendpointsApi* | [**getEndpointConfigurations**](docs/AdminendpointsApi.md#getEndpointConfigurations) | **GET** /enterprise/admin/endpoints | List endpoints
-*.AdminendpointsApi* | [**removeBasicAuthonfiguration**](docs/AdminendpointsApi.md#removeBasicAuthonfiguration) | **DELETE** /enterprise/admin/basic-auths/{basicAuthId} | Delete an endpoint authorization
-*.AdminendpointsApi* | [**removeEndpointConfiguration**](docs/AdminendpointsApi.md#removeEndpointConfiguration) | **DELETE** /enterprise/admin/endpoints/{endpointConfigurationId} | Delete an endpoint
-*.AdminendpointsApi* | [**updateBasicAuthConfiguration**](docs/AdminendpointsApi.md#updateBasicAuthConfiguration) | **PUT** /enterprise/admin/basic-auths/{basicAuthId} | Update an endpoint authorization
-*.AdminendpointsApi* | [**updateEndpointConfiguration**](docs/AdminendpointsApi.md#updateEndpointConfiguration) | **PUT** /enterprise/admin/endpoints/{endpointConfigurationId} | Update an endpoint
+*.AdminendpointsApi* | [**createBasicAuthConfiguration**](docs/AdminEndpointsApi.md#createBasicAuthConfiguration) | **POST** /enterprise/admin/basic-auths | Add an endpoint authorization
+*.AdminendpointsApi* | [**createEndpointConfiguration**](docs/AdminEndpointsApi.md#createEndpointConfiguration) | **POST** /enterprise/admin/endpoints | Create an endpoint
+*.AdminendpointsApi* | [**getBasicAuthConfiguration**](docs/AdminEndpointsApi.md#getBasicAuthConfiguration) | **GET** /enterprise/admin/basic-auths/{basicAuthId} | Get an endpoint authorization
+*.AdminendpointsApi* | [**getBasicAuthConfigurations**](docs/AdminEndpointsApi.md#getBasicAuthConfigurations) | **GET** /enterprise/admin/basic-auths | List endpoint authorizations
+*.AdminendpointsApi* | [**getEndpointConfiguration**](docs/AdminEndpointsApi.md#getEndpointConfiguration) | **GET** /enterprise/admin/endpoints/{endpointConfigurationId} | Get an endpoint
+*.AdminendpointsApi* | [**getEndpointConfigurations**](docs/AdminEndpointsApi.md#getEndpointConfigurations) | **GET** /enterprise/admin/endpoints | List endpoints
+*.AdminendpointsApi* | [**removeBasicAuthonfiguration**](docs/AdminEndpointsApi.md#removeBasicAuthonfiguration) | **DELETE** /enterprise/admin/basic-auths/{basicAuthId} | Delete an endpoint authorization
+*.AdminendpointsApi* | [**removeEndpointConfiguration**](docs/AdminEndpointsApi.md#removeEndpointConfiguration) | **DELETE** /enterprise/admin/endpoints/{endpointConfigurationId} | Delete an endpoint
+*.AdminendpointsApi* | [**updateBasicAuthConfiguration**](docs/AdminEndpointsApi.md#updateBasicAuthConfiguration) | **PUT** /enterprise/admin/basic-auths/{basicAuthId} | Update an endpoint authorization
+*.AdminendpointsApi* | [**updateEndpointConfiguration**](docs/AdminEndpointsApi.md#updateEndpointConfiguration) | **PUT** /enterprise/admin/endpoints/{endpointConfigurationId} | Update an endpoint
 *.AdmingroupsApi* | [**activate**](docs/AdmingroupsApi.md#activate) | **POST** /enterprise/admin/groups/{groupId}/action/activate | Activate a group
 *.AdmingroupsApi* | [**addAllUsersToGroup**](docs/AdmingroupsApi.md#addAllUsersToGroup) | **POST** /enterprise/admin/groups/{groupId}/add-all-users | Add users to a group
 *.AdmingroupsApi* | [**addGroupCapabilities**](docs/AdmingroupsApi.md#addGroupCapabilities) | **POST** /enterprise/admin/groups/{groupId}/capabilities | Add capabilities to a group
