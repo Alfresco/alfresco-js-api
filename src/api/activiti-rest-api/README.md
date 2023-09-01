@@ -89,15 +89,15 @@ Class | Method | HTTP request | Description
 *.DecisiontablesApi* | [**getDecisionTables**](docs/DecisiontablesApi.md#getDecisionTables) | **GET** /enterprise/decisions/decision-tables | Query decision tables
 *.EndpointsApi* | [**getEndpointConfiguration**](docs/EndpointsApi.md#getEndpointConfiguration) | **GET** /enterprise/editor/endpoints/{endpointConfigurationId} | Get an endpoint configuration
 *.EndpointsApi* | [**getEndpointConfigurations**](docs/EndpointsApi.md#getEndpointConfigurations) | **GET** /enterprise/editor/endpoints | List endpoint configurations
-*.FormmodelsApi* | [**getFormEditorJson**](docs/FormmodelsApi.md#getFormEditorJson) | **GET** /enterprise/forms/{formId}/editorJson | Get form content
-*.FormmodelsApi* | [**getFormHistory**](docs/FormmodelsApi.md#getFormHistory) | **GET** /enterprise/editor/form-models/{formId}/history/{formHistoryId} | Get form history
-*.FormmodelsApi* | [**getForm**](docs/FormmodelsApi.md#getForm) | **GET** /enterprise/editor/form-models/{formId} | Get a form model
-*.FormmodelsApi* | [**getForm**](docs/FormmodelsApi.md#getForm) | **GET** /enterprise/forms/{formId} | Get a form
-*.FormmodelsApi* | [**getForms**](docs/FormmodelsApi.md#getForms) | **GET** /enterprise/editor/form-models/values | Get forms
-*.FormmodelsApi* | [**getForms**](docs/FormmodelsApi.md#getForms) | **GET** /enterprise/editor/form-models | List form models
-*.FormmodelsApi* | [**getForms**](docs/FormmodelsApi.md#getForms) | **GET** /enterprise/forms | Query forms
-*.FormmodelsApi* | [**saveForm**](docs/FormmodelsApi.md#saveForm) | **PUT** /enterprise/editor/form-models/{formId} | Update form model content
-*.FormmodelsApi* | [**validateModel**](docs/FormmodelsApi.md#validateModel) | **PUT** /enterprise/editor/form-models/{formId}/validate | Validate form model content
+*.FormmodelsApi* | [**getFormEditorJson**](docs/FormModelsApi.md#getFormEditorJson) | **GET** /enterprise/forms/{formId}/editorJson | Get form content
+*.FormmodelsApi* | [**getFormHistory**](docs/FormModelsApi.md#getFormHistory) | **GET** /enterprise/editor/form-models/{formId}/history/{formHistoryId} | Get form history
+*.FormmodelsApi* | [**getForm**](docs/FormModelsApi.md#getForm) | **GET** /enterprise/editor/form-models/{formId} | Get a form model
+*.FormmodelsApi* | [**getForm**](docs/FormModelsApi.md#getForm) | **GET** /enterprise/forms/{formId} | Get a form
+*.FormmodelsApi* | [**getForms**](docs/FormModelsApi.md#getForms) | **GET** /enterprise/editor/form-models/values | Get forms
+*.FormmodelsApi* | [**getForms**](docs/FormModelsApi.md#getForms) | **GET** /enterprise/editor/form-models | List form models
+*.FormmodelsApi* | [**getForms**](docs/FormModelsApi.md#getForms) | **GET** /enterprise/forms | Query forms
+*.FormmodelsApi* | [**saveForm**](docs/FormModelsApi.md#saveForm) | **PUT** /enterprise/editor/form-models/{formId} | Update form model content
+*.FormmodelsApi* | [**validateModel**](docs/FormModelsApi.md#validateModel) | **PUT** /enterprise/editor/form-models/{formId}/validate | Validate form model content
 *.GroupsApi* | [**getGroups**](docs/GroupsApi.md#getGroups) | **GET** /enterprise/groups | Query groups
 *.GroupsApi* | [**getUsersForGroup**](docs/GroupsApi.md#getUsersForGroup) | **GET** /enterprise/groups/{groupId}/users | List members of a group
 *.IdmsyncApi* | [**getLogFile**](docs/IdmsyncApi.md#getLogFile) | **GET** /enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile | Get log file for a sync log entry
