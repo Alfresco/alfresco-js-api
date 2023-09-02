@@ -55,7 +55,16 @@ activitiesApi.listActivitiesForPerson(personId, opts).then((data) => {
 
 **Properties**
 
-| Name       | Type                                    |
-|------------|-----------------------------------------|
-| pagination | [Pagination](Pagination.md)             |
-| entries    | [ActivityEntry**[]**](ActivityEntry.md) |
+| Name       | Type                              |
+|------------|-----------------------------------|
+| pagination | [Pagination](Pagination.md)       |
+| entries    | [ActivityEntry[]](#ActivityEntry) |
+
+
+## ActivityEntry
+
+**Properties**
+
+| Name  | Type                    |
+|-------|-------------------------|
+| entry | [Activity](Activity.md) |

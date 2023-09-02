@@ -80,7 +80,7 @@ It is an error to specify an **id** that does not exist.
 | **groupMembershipBodyCreate** | [GroupMembershipBodyCreate](#GroupMembershipBodyCreate) | The group membership to add (person or sub-group).                                                                                                                                                                                                                                                                                                                                                                                      | 
 | opts.fields                   | string[]                                                | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | 
 
-**Return type**: [GroupMemberEntry](GroupMemberEntry.md)
+**Return type**: [GroupMemberEntry](#GroupMemberEntry)
 
 **Example**
 
@@ -232,7 +232,7 @@ You can override the default by using the **orderBy** parameter. You can specify
 | opts.where     | string   | A string to restrict the returned objects by using a predicate.                                                                                                                                                                                                                                                                                                                                                                                                  |                | 
 | opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.                          |                |
 
-**Return type**: [GroupMemberPaging](GroupMemberPaging.md)
+**Return type**: [GroupMemberPaging](#GroupMemberPaging)
 
 **Example**
 
@@ -403,7 +403,7 @@ Update group details
 
 | Name                | Type                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |---------------------|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **groupId**         | **string**                          | The identifier of a group.                                                                                                                                                                                                                                                                                                                                                                                                              | 
+| **groupId**         | string                              | The identifier of a group.                                                                                                                                                                                                                                                                                                                                                                                                              | 
 | **groupBodyUpdate** | [GroupBodyUpdate](#GroupBodyUpdate) | The group information to update.                                                                                                                                                                                                                                                                                                                                                                                                        | 
 | opts.include        | string[]                            | Returns additional information about the group. The following optional fields can be requested: `parentIds`, `zones`                                                                                                                                                                                                                                                                                                                    | 
 | opts.fields         | string[]                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
@@ -427,6 +427,31 @@ groupsApi.updateGroup(`<groupId>`, payload, opts).then((data) => {
 ```
 
 # Models 
+
+## GroupMemberPaging
+
+**Properties**
+
+| Name | Type                                            |
+|------|-------------------------------------------------|
+| list | [GroupMemberPagingList](#GroupMemberPagingList) |
+
+## GroupMemberPagingList
+
+**Properties**
+
+| Name       | Type                                    |
+|------------|-----------------------------------------|
+| pagination | [Pagination](Pagination.md)             |
+| entries    | [GroupMemberEntry[]](#GroupMemberEntry) |
+
+## GroupMemberEntry
+
+**Properties**
+
+| Name  | Type                          |
+|-------|-------------------------------|
+| entry | [GroupMember](GroupMember.md) |
 
 ## GroupBodyCreate
 
