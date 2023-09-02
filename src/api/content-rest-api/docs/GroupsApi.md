@@ -42,7 +42,7 @@ The group will be created in the **APP.DEFAULT** and **AUTH.ALF** zones.
 | opts.include        | string[]                            | Returns additional information about the group. The following optional fields can be requested: `parentIds`, `zones`                                                                                                                                                                                                                                                                                                                    |
 | opts.fields         | string[]                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [GroupEntry](GroupEntry.md)
+**Return type**: [GroupEntry](#GroupEntry)
 
 **Example**
 
@@ -182,7 +182,7 @@ You can use the **include** parameter to return additional information.
 | opts.include | string[] | Returns additional information about the group. The following optional fields can be requested: `parentIds`, `zones`                                                                                                                                                                                                                                                                                                                    | 
 | opts.fields  | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [GroupEntry](GroupEntry.md)
+**Return type**: [GroupEntry](#GroupEntry)
 
 **Example**
 
@@ -305,7 +305,7 @@ where=(isRoot=false AND zones in ('MY.ZONE'))
 | opts.where     | string   | A string to restrict the returned objects by using a predicate.                                                                                                                                                                                                                                                                                                                                                                                                  |                |
 | opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.                          |                |
 
-**Return type**: [GroupPaging](GroupPaging.md)
+**Return type**: [GroupPaging](#GroupPaging)
 
 **Example**
 
@@ -375,7 +375,7 @@ You can override the default by using the **orderBy** parameter. You can specify
 | opts.where     | string   | A string to restrict the returned objects by using a predicate.                                                                                                                                                                                                                                                                                                                                                                                                  |                |
 | opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.                          |                | 
 
-**Return type**: [GroupPaging](GroupPaging.md)
+**Return type**: [GroupPaging](#GroupPaging)
 
 **Example**
 
@@ -408,7 +408,7 @@ Update group details
 | opts.include        | string[]                            | Returns additional information about the group. The following optional fields can be requested: `parentIds`, `zones`                                                                                                                                                                                                                                                                                                                    | 
 | opts.fields         | string[]                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [GroupEntry](GroupEntry.md)
+**Return type**: [GroupEntry](#GroupEntry)
 
 **Example**
 
@@ -485,3 +485,30 @@ groupsApi.updateGroup(`<groupId>`, payload, opts).then((data) => {
 | Name        | Type   |
 |-------------|--------|
 | displayName | string |
+
+## GroupPaging
+
+**Properties**
+
+| Name | Type                                |
+|------|-------------------------------------|
+| list | [GroupPagingList](#GroupPagingList) |
+
+
+## GroupPagingList
+
+**Properties**
+
+| Name       | Type                        |
+|------------|-----------------------------|
+| pagination | [Pagination](Pagination.md) |
+| entries    | [GroupEntry[]](#GroupEntry) |
+
+## GroupEntry
+
+**Properties**
+
+| Name      | Type              |
+|-----------|-------------------|
+| **entry** | [Group](Group.md) |
+
