@@ -107,8 +107,8 @@ Delete a group
 > You must have admin rights to delete a group.
 
 The option to cascade delete applies this recursively to any hierarchy of group members.
-In this case, removing a group member does not delete the person or sub-group itself.
-If a removed sub-group no longer has any parent groups then it becomes a root group.
+In this case, removing a group member does not delete the person or subgroup itself.
+If a removed subgroup no longer has any parent groups then it becomes a root group.
 
 **Parameters**
 
