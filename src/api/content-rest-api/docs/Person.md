@@ -1,29 +1,30 @@
 # Person
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **string** |  | [default to null]
-**firstName** | **string** |  | [default to null]
-**lastName** | **string** |  | [optional] [default to null]
-**displayName** | **string** |  | [optional] [default to null]
-**description** | **string** |  | [optional] [default to null]
-**avatarId** | **string** |  | [optional] [default to null]
-**email** | **string** |  | [default to null]
-**skypeId** | **string** |  | [optional] [default to null]
-**googleId** | **string** |  | [optional] [default to null]
-**instantMessageId** | **string** |  | [optional] [default to null]
-**jobTitle** | **string** |  | [optional] [default to null]
-**location** | **string** |  | [optional] [default to null]
-**company** | [**Company**](Company.md) |  | [optional] [default to null]
-**mobile** | **string** |  | [optional] [default to null]
-**telephone** | **string** |  | [optional] [default to null]
-**statusUpdatedAt** | [**Date**](Date.md) |  | [optional] [default to null]
-**userStatus** | **string** |  | [optional] [default to null]
-**enabled** | **boolean** |  | [default to null]
-**emailNotificationsEnabled** | **boolean** |  | [optional] [default to null]
-**aspectNames** | **string[]** |  | [optional] [default to null]
-**properties** | **{ [key: string]: string; }** |  | [optional] [default to null]
-**capabilities** | [**Capabilities**](Capabilities.md) |  | [optional] [default to null]
+**Properties**
+
+| Name                      | Type                            |
+|---------------------------|---------------------------------|
+| **id**                    | string                          |
+| **firstName**             | string                          |
+| lastName                  | string                          |
+| displayName               | string                          |
+| description               | string                          |
+| avatarId                  | string                          |
+| **email**                 | string                          |
+| skypeId                   | string                          |
+| googleId                  | string                          |
+| instantMessageId          | string                          |
+| jobTitle                  | string                          |
+| location                  | string                          |
+| company                   | [Company](Company.md)           |
+| mobile                    | string                          |
+| telephone                 | string                          |
+| statusUpdatedAt           | Date                            |
+| userStatus                | string                          |
+| **enabled**               | boolean                         |
+| emailNotificationsEnabled | boolean                         |
+| aspectNames               | string[]                        |
+| properties                | Map<string, string>             |
+| capabilities              | [Capabilities](Capabilities.md) |
 
 
