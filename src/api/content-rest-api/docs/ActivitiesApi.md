@@ -65,6 +65,22 @@ activitiesApi.listActivitiesForPerson(personId, opts).then((data) => {
 
 **Properties**
 
-| Name  | Type                    |
-|-------|-------------------------|
-| entry | [Activity](Activity.md) |
+| Name  | Type                  |
+|-------|-----------------------|
+| entry | [Activity](#Activity) |
+
+## Activity
+
+**Properties**
+
+| Name             | Type                | Description                                                   |
+|------------------|---------------------|---------------------------------------------------------------|
+| **postPersonId** | string              | The id of the person who performed the activity               |
+| **id**           | number              | The unique id of the activity                                 |
+| siteId           | string              | The unique id of the site on which the activity was performed |
+| postedAt         | Date                | The date time at which the activity was performed             |
+| **feedPersonId** | string              | The feed on which this activity was posted                    |
+| activitySummary  | Map<string, string> | An object summarizing the activity                            |
+| **activityType** | string              | The type of the activity posted                               |
+
+
