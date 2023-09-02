@@ -93,7 +93,7 @@ You can use the **include** parameter to return the minimum and/or maximum audit
 | opts.fields            | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |  
 | opts.include           | string[] | Also include the current minimum and/or maximum audit entry ids for the application. The following optional fields can be requested: `max`, `min`                                                                                                                                                                                                                                                                                       | 
 
-**Return type**: [AuditApp](AuditApp.md)
+**Return type**: [AuditApp](#AuditApp)
 
 **Example**
 
@@ -125,7 +125,7 @@ Get audit entry
 | **auditEntryId**       | string   | The identifier of an audit entry.                                                                                                                                                                                                                                                                                                                                                                                                       | 
 | opts.fields            | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [AuditEntryEntry](AuditEntryEntry.md)
+**Return type**: [AuditEntryEntry](#AuditEntryEntry)
 
 **Example**
 
@@ -164,7 +164,7 @@ This list may include pre-configured audit applications, if enabled, such as:
 | opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                       | default to 100                                            |
 | opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                                                           | 
 
-**Return type**: [AuditAppPaging](AuditAppPaging.md)
+**Return type**: [AuditAppPaging](#AuditAppPaging)
 
 **Example**
 
@@ -236,8 +236,7 @@ auditApi.listAuditEntriesForAuditApp(auditApplicationIdopts).then((data) => {
 * `where=(valuesKey='/alfresco-access/login/user')`
 * `where=(valuesKey='/alfresco-access/transaction/action' and valuesValue='DELETE')`
 
-
-**Return type**: [AuditEntryPaging](AuditEntryPaging.md)
+**Return type**: [AuditEntryPaging](#AuditEntryPaging)
 
 ## listAuditEntriesForNode
 
@@ -274,7 +273,7 @@ This relies on the pre-configured 'alfresco-access' audit application.
 - `where=(createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')`
 - `where=(createdByUser='jbloggs' and createdAt BETWEEN ('2017-06-02T12:13:51.593+01:00' , '2017-06-04T10:05:16.536+01:00')`
 
-**Return type**: [AuditEntryPaging](AuditEntryPaging.md)
+**Return type**: [AuditEntryPaging](#AuditEntryPaging)
 
 **Example**
 
@@ -308,13 +307,13 @@ if auditing is disabled for the audit application.
 
 **Parameters**
 
-| Name                   | Type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|------------------------|---------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **auditApplicationId** | string                                | The identifier of an audit application.                                                                                                                                                                                                                                                                                                                                                                                                  | 
-| **auditAppBodyUpdate** | [AuditBodyUpdate](AuditBodyUpdate.md) | The audit application to update.                                                                                                                                                                                                                                                                                                                                                                                                         | 
-| opts.fields            | string[]                              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | 
+| Name                   | Type                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|------------------------|-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **auditApplicationId** | string                              | The identifier of an audit application.                                                                                                                                                                                                                                                                                                                                                                                                  | 
+| **auditAppBodyUpdate** | [AuditBodyUpdate](#AuditBodyUpdate) | The audit application to update.                                                                                                                                                                                                                                                                                                                                                                                                         | 
+| opts.fields            | string[]                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.  | 
 
-**Return type**: [AuditApp](AuditApp.md)
+**Return type**: [AuditApp](#AuditApp)
 
 **Example**
 
@@ -331,3 +330,100 @@ auditApi.updateAuditApp(auditApplicationId, auditAppBodyUpdate, opts).then((data
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
+
+# Models
+
+## AuditApp
+
+**Properties**
+
+| Name       | Type    |
+|------------|---------|
+| **id**     | string  |
+| name       | string  |
+| isEnabled  | boolean |
+| maxEntryId | number  |
+| minEntryId | number  |
+
+## AuditAppPaging
+
+**Properties**
+
+| Name | Type                                      |
+|------|-------------------------------------------|
+| list | [AuditAppPagingList](#AuditAppPagingList) |
+
+
+## AuditAppPagingList
+
+**Properties**
+
+| Name       | Type                              |
+|------------|-----------------------------------|
+| pagination | [Pagination](Pagination.md)       |
+| entries    | [AuditAppEntry[]](#AuditAppEntry) |
+
+## AuditAppEntry
+
+**Properties**
+
+| Name  | Type                  |
+|-------|-----------------------|
+| entry | [AuditApp](#AuditApp) |
+
+## AuditApp
+
+**Properties**
+
+| Name       | Type    |
+|------------|---------|
+| **id**     | string  |
+| name       | string  |
+| isEnabled  | boolean |
+| maxEntryId | number  |
+| minEntryId | number  |
+
+## AuditBodyUpdate
+
+| Name      | Type    |
+|-----------|---------|
+| isEnabled | boolean |
+
+## AuditEntryPaging
+
+**Properties**
+
+| Name | Type                                          |
+|------|-----------------------------------------------|
+| list | [AuditEntryPagingList](#AuditEntryPagingList) |
+
+## AuditEntryPagingList
+
+**Properties**
+
+| Name       | Type                                  |
+|------------|---------------------------------------|
+| pagination | [Pagination](Pagination.md)           |
+| entries    | [AuditEntryEntry[]](#AuditEntryEntry) |
+
+## AuditEntryEntry
+
+**Properties**
+
+| Name  | Type                      |
+|-------|---------------------------|
+| entry | [AuditEntry](#AuditEntry) |
+
+## AuditEntry
+
+**Properties**
+
+| Name                   | Type                    |
+|------------------------|-------------------------|
+| **id**                 | string                  |
+| **auditApplicationId** | string                  |
+| **createdByUser**      | [UserInfo](UserInfo.md) |
+| **createdAt**          | Date                    |
+| values                 | any                     |
+
+
