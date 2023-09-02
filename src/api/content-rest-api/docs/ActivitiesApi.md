@@ -23,7 +23,7 @@ You can use the `-me-` string in place of `<personId>` to specify the currently 
 | opts.siteId    | string   | Include only activity feed entries relating to this site.                                                                                                                                                                                                                                                                                                                                                                               |                  | 
 | opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                  |
 
-**Return type**: [ActivityPaging](ActivityPaging.md)
+**Return type**: [ActivityPaging](#ActivityPaging)
 
 **Example**x
 
@@ -40,3 +40,22 @@ activitiesApi.listActivitiesForPerson(personId, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
+
+# Models
+
+## ActivityPaging
+
+**Properties**
+
+| Name | Type                                      |
+|------|-------------------------------------------|
+| list | [ActivityPagingList](#ActivityPagingList) |
+
+## ActivityPagingList
+
+**Properties**
+
+| Name       | Type                                    |
+|------------|-----------------------------------------|
+| pagination | [Pagination](Pagination.md)             |
+| entries    | [ActivityEntry**[]**](ActivityEntry.md) |

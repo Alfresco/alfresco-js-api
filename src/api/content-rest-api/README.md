@@ -171,8 +171,6 @@ VersionsApi | [**revertVersion**](docs/VersionsApi.md#revertVersion) | **POST** 
 - [ActionParameterDefinition](docs/ActionParameterDefinition.md)
 - [Activity](docs/Activity.md)
 - [ActivityEntry](docs/ActivityEntry.md)
-- [ActivityPaging](docs/ActivityPaging.md)
-- [ActivityPagingList](docs/ActivityPagingList.md)
 - [Association](docs/Association.md)
 - [AssociationBody](docs/AssociationBody.md)
 - [AssociationEntry](docs/AssociationEntry.md)
