@@ -81,13 +81,13 @@ tagsApi.createTagForNode(nodeId, tagBodyCreate, opts).then((data) => {
 
 **Parameters**
 
-| Name              | Type                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|-------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **nodeId**        | string                | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                               | 
-| **tagBodyCreate** | [TagBody](TagBody.md) | The new tag                                                                                                                                                                                                                                                                                                                                                                                                                             | 
-| opts.fields       | string[]              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | 
+| Name              | Type                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-------------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **nodeId**        | string              | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                               | 
+| **tagBodyCreate** | [TagBody](#TagBody) | The new tag                                                                                                                                                                                                                                                                                                                                                                                                                             | 
+| opts.fields       | string[]            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | 
 
-**Return type**: [TagEntry](TagEntry.md)
+**Return type**: [TagEntry](#TagEntry)
 
 ## deleteTagFromNode
 
@@ -124,7 +124,7 @@ Get a tag
 | **tagId**   | string   | The identifier of a tag.                                                                                                                                                                                                                                                                                                                                                                                                                |  
 | opts.fields | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | | 
 
-**Return type**: [TagEntry](TagEntry.md)
+**Return type**: [TagEntry](#TagEntry)
 
 **Example**
 
@@ -156,7 +156,7 @@ You can also use **name** parameter to return tags only for specified name.
 | opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                | 
 | opts.include   | string[] | Returns additional information about the tag. The following optional fields can be requested: `count`                                                                                                                                                                                                                                                                                                                                   |                | 
 
-**Return type**: [TagPaging](TagPaging.md)
+**Return type**: [TagPaging](#TagPaging)
 
 **Example**
 
@@ -185,7 +185,7 @@ List tags for a node
 | opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                       | default to 100 |
 | opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                |
 
-**Return type**: [TagPaging](TagPaging.md)
+**Return type**: [TagPaging](#TagPaging)
 
 **Example**
 
@@ -207,13 +207,13 @@ Update a tag
 
 **Parameters**
 
-| Name              | Type                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|-------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **tagId**         | string                | The identifier of a tag.                                                                                                                                                                                                                                                                                                                                                                                                                |
-| **tagBodyUpdate** | [TagBody](TagBody.md) | The updated tag                                                                                                                                                                                                                                                                                                                                                                                                                         | 
-| opts.fields       | string[]              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name              | Type                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-------------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **tagId**         | string              | The identifier of a tag.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **tagBodyUpdate** | [TagBody](#TagBody) | The updated tag                                                                                                                                                                                                                                                                                                                                                                                                                         | 
+| opts.fields       | string[]            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [TagEntry](TagEntry.md)
+**Return type**: [TagEntry](#TagEntry)
 
 **Example**
 
@@ -238,11 +238,11 @@ Create specified by **tags** list of tags.
 
 **Parameters**
 
-| Name     | Type                    | Description             |
-|----------|-------------------------|-------------------------|
-| **tags** | [TagBody[]](TagBody.md) | List of tags to create. |
+| Name     | Type                  | Description             |
+|----------|-----------------------|-------------------------|
+| **tags** | [TagBody[]](#TagBody) | List of tags to create. |
 
-**Return type**: [TagEntry[]](TagEntry.md)
+**Return type**: [TagEntry[]](#TagEntry)
 
 **Example**
 
@@ -289,13 +289,12 @@ Assign tags to node. If tag is new then tag is also created additionally, if tag
 
 **Parameters**
 
-| Name       | Type                    | Description                                                             | Notes |
-|------------|-------------------------|-------------------------------------------------------------------------|-------|
-| **nodeId** | string                  | Id of node to which tags should be assigned.                            |
-| **tags**   | [TagBody[]](TagBody.md) | List of tags to create and assign or just assign if they already exist. |
+| Name       | Type                  | Description                                                             | Notes |
+|------------|-----------------------|-------------------------------------------------------------------------|-------|
+| **nodeId** | string                | Id of node to which tags should be assigned.                            |
+| **tags**   | [TagBody[]](#TagBody) | List of tags to create and assign or just assign if they already exist. |
 
-
-**Return type**: [TagPaging](TagPaging.md) | [TagEntry](TagEntry.md)
+**Return type**: [TagPaging](#TagPaging) | [TagEntry](#TagEntry)
 
 **Example**
 
@@ -312,3 +311,53 @@ tagsApi.assignTagsToNode('someNodeId', [tag1, tag2]).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
+
+# Models
+
+## TagPaging
+
+**Properties**
+
+| Name | Type                            |
+|------|---------------------------------|
+| list | [TagPagingList](#TagPagingList) |
+
+## TagPagingList
+
+**Properties**
+
+| Name           | Type                        |
+|----------------|-----------------------------|
+| **pagination** | [Pagination](Pagination.md) |
+| **entries**    | [TagEntry[]](#TagEntry)     |
+
+## TagEntry
+
+**Properties**
+
+| Name      | Type        |
+|-----------|-------------|
+| **entry** | [Tag](#Tag) |
+
+## TagBody
+
+**Properties**
+
+| Name    | Type   |
+|---------|--------|
+| **tag** | string |
+
+## Tag
+
+**Properties**
+
+| Name    | Type   |
+|---------|--------|
+| **id**  | string |
+| **tag** | string |
+| count   | number |
+
+
+
+
+
