@@ -1,9 +1,10 @@
 # PersonPagingList
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**pagination** | [**Pagination**](Pagination.md) |  | [optional] [default to null]
-**entries** | [**PersonEntry[]**](PersonEntry.md) |  | [optional] [default to null]
+**Properties**
+
+| Name       | Type                            |
+|------------|---------------------------------|
+| pagination | [Pagination](Pagination.md)     |
+| entries    | [PersonEntry[]](PersonEntry.md) |
 
 

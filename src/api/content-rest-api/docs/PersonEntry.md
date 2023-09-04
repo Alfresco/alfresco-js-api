@@ -1,8 +1,9 @@
 # PersonEntry
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**entry** | [**Person**](Person.md) |  | [default to null]
+**Properties**
+
+| Name      | Type                |
+|-----------|---------------------|
+| **entry** | [Person](Person.md) |
 
 
