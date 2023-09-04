@@ -2,102 +2,84 @@
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**approveSiteMembershipRequest**](SitesApi.md#approveSiteMembershipRequest) | **POST** /sites/{siteId}/site-membership-requests/{inviteeId}/approve | Approve a site membership request
-[**createSite**](SitesApi.md#createSite) | **POST** /sites | Create a site
-[**createSiteMembership**](SitesApi.md#createSiteMembership) | **POST** /sites/{siteId}/members | Create a site membership
-[**createSiteMembershipRequestForPerson**](SitesApi.md#createSiteMembershipRequestForPerson) | **POST** /people/{personId}/site-membership-requests | Create a site membership request
-[**deleteSite**](SitesApi.md#deleteSite) | **DELETE** /sites/{siteId} | Delete a site
-[**deleteSiteMembership**](SitesApi.md#deleteSiteMembership) | **DELETE** /sites/{siteId}/members/{personId} | Delete a site membership
-[**deleteSiteMembershipForPerson**](SitesApi.md#deleteSiteMembershipForPerson) | **DELETE** /people/{personId}/sites/{siteId} | Delete a site membership
-[**deleteSiteMembershipRequestForPerson**](SitesApi.md#deleteSiteMembershipRequestForPerson) | **DELETE** /people/{personId}/site-membership-requests/{siteId} | Delete a site membership request
-[**getSite**](SitesApi.md#getSite) | **GET** /sites/{siteId} | Get a site
-[**getSiteContainer**](SitesApi.md#getSiteContainer) | **GET** /sites/{siteId}/containers/{containerId} | Get a site container
-[**getSiteMembership**](SitesApi.md#getSiteMembership) | **GET** /sites/{siteId}/members/{personId} | Get a site membership
-[**getSiteMembershipForPerson**](SitesApi.md#getSiteMembershipForPerson) | **GET** /people/{personId}/sites/{siteId} | Get a site membership
-[**getSiteMembershipRequestForPerson**](SitesApi.md#getSiteMembershipRequestForPerson) | **GET** /people/{personId}/site-membership-requests/{siteId} | Get a site membership request
-[**getSiteMembershipRequests**](SitesApi.md#getSiteMembershipRequests) | **GET** /site-membership-requests | Get site membership requests
-[**listSiteContainers**](SitesApi.md#listSiteContainers) | **GET** /sites/{siteId}/containers | List site containers
-[**listSiteMembershipRequestsForPerson**](SitesApi.md#listSiteMembershipRequestsForPerson) | **GET** /people/{personId}/site-membership-requests | List site membership requests
-[**listSiteMemberships**](SitesApi.md#listSiteMemberships) | **GET** /sites/{siteId}/members | List site memberships
-[**listSiteMembershipsForPerson**](SitesApi.md#listSiteMembershipsForPerson) | **GET** /people/{personId}/sites | List site memberships
-[**listSites**](SitesApi.md#listSites) | **GET** /sites | List sites
-[**rejectSiteMembershipRequest**](SitesApi.md#rejectSiteMembershipRequest) | **POST** /sites/{siteId}/site-membership-requests/{inviteeId}/reject | Reject a site membership request
-[**updateSite**](SitesApi.md#updateSite) | **PUT** /sites/{siteId} | Update a site
-[**updateSiteMembership**](SitesApi.md#updateSiteMembership) | **PUT** /sites/{siteId}/members/{personId} | Update a site membership
-[**updateSiteMembershipRequestForPerson**](SitesApi.md#updateSiteMembershipRequestForPerson) | **PUT** /people/{personId}/site-membership-requests/{siteId} | Update a site membership request
+| Method                                                                        | HTTP request                                                          | Description                       |
+|-------------------------------------------------------------------------------|-----------------------------------------------------------------------|-----------------------------------|
+| [approveSiteMembershipRequest](#approveSiteMembershipRequest)                 | **POST** /sites/{siteId}/site-membership-requests/{inviteeId}/approve | Approve a site membership request |
+| [createSite](#createSite)                                                     | **POST** /sites                                                       | Create a site                     |
+| [createSiteMembership](#createSiteMembership)                                 | **POST** /sites/{siteId}/members                                      | Create a site membership          |
+| [createSiteMembershipRequestForPerson](#createSiteMembershipRequestForPerson) | **POST** /people/{personId}/site-membership-requests                  | Create a site membership request  |
+| [deleteSite](#deleteSite)                                                     | **DELETE** /sites/{siteId}                                            | Delete a site                     |
+| [deleteSiteMembership](#deleteSiteMembership)                                 | **DELETE** /sites/{siteId}/members/{personId}                         | Delete a site membership          |
+| [deleteSiteMembershipForPerson](#deleteSiteMembershipForPerson)               | **DELETE** /people/{personId}/sites/{siteId}                          | Delete a site membership          |
+| [deleteSiteMembershipRequestForPerson](#deleteSiteMembershipRequestForPerson) | **DELETE** /people/{personId}/site-membership-requests/{siteId}       | Delete a site membership request  |
+| [getSite](#getSite)                                                           | **GET** /sites/{siteId}                                               | Get a site                        |
+| [getSiteContainer](#getSiteContainer)                                         | **GET** /sites/{siteId}/containers/{containerId}                      | Get a site container              |
+| [getSiteMembership](#getSiteMembership)                                       | **GET** /sites/{siteId}/members/{personId}                            | Get a site membership             |
+| [getSiteMembershipForPerson](#getSiteMembershipForPerson)                     | **GET** /people/{personId}/sites/{siteId}                             | Get a site membership             |
+| [getSiteMembershipRequestForPerson](#getSiteMembershipRequestForPerson)       | **GET** /people/{personId}/site-membership-requests/{siteId}          | Get a site membership request     |
+| [getSiteMembershipRequests](#getSiteMembershipRequests)                       | **GET** /site-membership-requests                                     | Get site membership requests      |
+| [listSiteContainers](#listSiteContainers)                                     | **GET** /sites/{siteId}/containers                                    | List site containers              |
+| [listSiteMembershipRequestsForPerson](#listSiteMembershipRequestsForPerson)   | **GET** /people/{personId}/site-membership-requests                   | List site membership requests     |
+| [listSiteMemberships](#listSiteMemberships)                                   | **GET** /sites/{siteId}/members                                       | List site memberships             |
+| [listSiteMembershipsForPerson](#listSiteMembershipsForPerson)                 | **GET** /people/{personId}/sites                                      | List site memberships             |
+| [listSites](#listSites)                                                       | **GET** /sites                                                        | List sites                        |
+| [rejectSiteMembershipRequest](#rejectSiteMembershipRequest)                   | **POST** /sites/{siteId}/site-membership-requests/{inviteeId}/reject  | Reject a site membership request  |
+| [updateSite](#updateSite)                                                     | **PUT** /sites/{siteId}                                               | Update a site                     |
+| [updateSiteMembership](#updateSiteMembership)                                 | **PUT** /sites/{siteId}/members/{personId}                            | Update a site membership          |
+| [updateSiteMembershipRequestForPerson](#updateSiteMembershipRequestForPerson) | **PUT** /people/{personId}/site-membership-requests/{siteId}          | Update a site membership request  |
 
-
-<a name="approveSiteMembershipRequest"></a>
 ## approveSiteMembershipRequest
-> approveSiteMembershipRequest(siteIdinviteeIdopts)
 
 Approve a site membership request
 
-Approve a site membership request.
+**Parameters**
 
+| Name                            | Type                                                        | Description                                                                       |
+|---------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| **siteId**                      | string                                                      | The identifier of a site.                                                         |
+| **inviteeId**                   | string                                                      | The invitee user name.                                                            |
+| opts.siteMembershipApprovalBody | [SiteMembershipApprovalBody](SiteMembershipApprovalBody.md) | Accepting a request to join, optionally, allows assignment of a role to the user. |
 
-### Example
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
 
 const opts = { 
-  'siteMembershipApprovalBody':  /*  | Accepting a request to join, optionally, allows assignment of a role to the user.
- */
+  siteMembershipApprovalBody: {}
 };
 
-sitesApi.approveSiteMembershipRequest(siteIdinviteeIdopts).then(() => {
+sitesApi.approveSiteMembershipRequest(`<siteId>`, `<inviteeId>`, opts).then(() => {
   console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **inviteeId** | **string**| The invitee user name. | 
- **siteMembershipApprovalBody** | [**SiteMembershipApprovalBody**](SiteMembershipApprovalBody.md)| Accepting a request to join, optionally, allows assignment of a role to the user.
- | [optional] 
-
-### Return type
-
-null (empty response body)
-
-<a name="createSite"></a>
 ## createSite
-> SiteEntry createSite(siteBodyCreateopts)
 
 Create a site
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.
 
 Creates a default site with the given details.  Unless explicitly specified, the site id will be generated
 from the site title. The site id must be unique and only contain alphanumeric and/or dash characters.
 
-Note: the id of a site cannot be updated once the site has been created.
+> the id of a site cannot be updated once the site has been created.
 
-For example, to create a public site called \"Marketing\" the following body could be used:
-JSON
+For example, to create a public site called "Marketing" the following body could be used:
+
+```json
 {
-  \"title\": \"Marketing\",
-  \"visibility\": \"PUBLIC\"
+  "title": "Marketing",
+  "visibility": "PUBLIC"
 }
-
+```
 
 The creation of the (surf) configuration files required by Share can be skipped via the **skipConfiguration** query parameter.
 
-**Note:** if skipped then such a site will **not** work within Share.
+> if skipped then such a site will **not** work within Share.
 
 The addition of the site to the user's site favorites can be skipped via the **skipAddToFavorites** query parameter.
 
@@ -106,73 +88,35 @@ The creator will be added as a member with Site Manager role.
 When you create a site, a container called **documentLibrary** is created for you in the new site.
 This container is the root folder for content stored in the site.
 
+**Parameters**
 
-### Example
+| Name                    | Type                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-------------------------|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **siteBodyCreate**      | [SiteBodyCreate](SiteBodyCreate.md) | The site details                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| opts.skipConfiguration  | boolean                             | Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.                                                                                                                                                                                                                                                                                                                              |
+| opts.skipAddToFavorites | boolean                             | Flag to indicate whether the site should not be added to the user's site favorites.                                                                                                                                                                                                                                                                                                                                                     |
+| opts.fields             | string[]                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | 
+
+**Return type**: [SiteEntry](SiteEntry.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const siteBodyCreate = {};
+const opts = {};
 
-const opts = { 
-  'skipConfiguration': true /*  | Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. */
-  'skipAddToFavorites': true /*  | Flag to indicate whether the site should not be added to the user's site favorites. */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.createSite(siteBodyCreateopts).then((data) => {
+sitesApi.createSite(siteBodyCreate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteBodyCreate** | [**SiteBodyCreate**](SiteBodyCreate.md)| The site details | 
- **skipConfiguration** | **boolean**| Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created. | [optional] [default to false]
- **skipAddToFavorites** | **boolean**| Flag to indicate whether the site should not be added to the user's site favorites. | [optional] [default to false]
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteEntry**](SiteEntry.md)
-
-<a name="createSiteMembership"></a>
 ## createSiteMembership
-> SiteMemberEntry createSiteMembership(siteIdsiteMembershipBodyCreateopts)
 
 Create a site membership
-
-Creates a site membership for person **personId** on site **siteId**.
 
 You can set the **role** to one of four types:
 
@@ -184,106 +128,71 @@ You can set the **role** to one of four types:
 **Note:** You can create more than one site membership by
 specifying a list of people in the JSON body like this:
 
-JSON
+```json
 [
   {
-    \"role\": \"SiteConsumer\",
-    \"id\": \"joe\"
+    "role": "SiteConsumer",
+    "id": "joe"
   },
   {
-    \"role\": \"SiteConsumer\",
-    \"id\": \"fred\"
+    "role": "SiteConsumer",
+    "id": "fred"
   }
 ]
+```
 
 If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
 
-JSON
+```json
 {
-  \"list\": {
-    \"pagination\": {
-      \"count\": 2,
-      \"hasMoreItems\": false,
-      \"totalItems\": 2,
-      \"skipCount\": 0,
-      \"maxItems\": 100
+  "list": {
+    "pagination": {
+      "count": 2,
+      "hasMoreItems": false,
+      "totalItems": 2,
+      "skipCount": 0,
+      "maxItems": 100
     },
-    \"entries\": [
+    "entries": [
       {
-        \"entry\": {
-          ...
+        "entry": {
         }
       },
       {
-        \"entry\": {
-          ...
+        "entry": {
         }
       }
     ]
   }
 }
+```
 
+**Parameters**
 
+| Name                         | Type                                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **siteId**                   | **string**                                              | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **siteMembershipBodyCreate** | [SiteMembershipBodyCreate](SiteMembershipBodyCreate.md) | The person to add and their role                                                                                                                                                                                                                                                                                                                                                                                                        |
+| opts.fields                  | string[]                                                | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-### Example
+**Return type**: [SiteMemberEntry](SiteMemberEntry.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const siteMembershipBodyCreate = {};
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.createSiteMembership(siteIdsiteMembershipBodyCreateopts).then((data) => {
+sitesApi.createSiteMembership(`<siteId>`, siteMembershipBodyCreate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **siteMembershipBodyCreate** | [**SiteMembershipBodyCreate**](SiteMembershipBodyCreate.md)| The person to add and their role | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteMemberEntry**](SiteMemberEntry.md)
-
-<a name="createSiteMembershipRequestForPerson"></a>
 ## createSiteMembershipRequestForPerson
-> SiteMembershipRequestEntry createSiteMembershipRequestForPerson(personIdsiteMembershipRequestBodyCreateopts)
 
 Create a site membership request
 
@@ -294,284 +203,188 @@ The result of the request differs depending on the type of site.
 * For a **moderated** site, your request is added to the site membership request list. The request waits for approval from the Site Manager.
 * You cannot request membership of a **private** site. Members are invited by the site administrator.
 
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
+You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.
 
- **Note:** You can create site membership requests for more than one site by
-specifying a list of sites in the JSON body like this:
+> You can create site membership requests for more than one site by specifying a list of sites in the JSON body like this:
 
-JSON
+```json
 [
   {
-    \"message\": \"Please can you add me\",
-    \"id\": \"test-site-1\",
-    \"title\": \"Request for test site 1\",
+    "message": "Please can you add me",
+    "id": "test-site-1",
+    "title": "Request for test site 1"
   },
   {
-    \"message\": \"Please can you add me\",
-    \"id\": \"test-site-2\",
-    \"title\": \"Request for test site 2\",
+    "message": "Please can you add me",
+    "id": "test-site-2",
+    "title": "Request for test site 2"
   }
 ]
+```
 
 If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
 
-JSON
+```json
 {
-  \"list\": {
-    \"pagination\": {
-      \"count\": 2,
-      \"hasMoreItems\": false,
-      \"totalItems\": 2,
-      \"skipCount\": 0,
-      \"maxItems\": 100
+  "list": {
+    "pagination": {
+      "count": 2,
+      "hasMoreItems": false,
+      "totalItems": 2,
+      "skipCount": 0,
+      "maxItems": 100
     },
-    \"entries\": [
+    "entries": [
       {
-        \"entry\": {
-          ...
+        "entry": {
         }
       },
       {
-        \"entry\": {
-          ...
+        "entry": {
         }
       }
     ]
   }
 }
+```
 
+**Parameters**
 
+| Name                                | Type                                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **personId**                        | string                                                                | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **siteMembershipRequestBodyCreate** | [SiteMembershipRequestBodyCreate](SiteMembershipRequestBodyCreate.md) | Site membership request details                                                                                                                                                                                                                                                                                                                                                                                                         |
+| opts.fields                         | string[]                                                              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-### Example
+**Return type**: [SiteMembershipRequestEntry](SiteMembershipRequestEntry.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const siteMembershipRequestBodyCreate = {};
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.createSiteMembershipRequestForPerson(personIdsiteMembershipRequestBodyCreateopts).then((data) => {
+sitesApi.createSiteMembershipRequestForPerson(`<personId>`, siteMembershipRequestBodyCreate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **personId** | **string**| The identifier of a person. | 
- **siteMembershipRequestBodyCreate** | [**SiteMembershipRequestBodyCreate**](SiteMembershipRequestBodyCreate.md)| Site membership request details | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteMembershipRequestEntry**](SiteMembershipRequestEntry.md)
-
-<a name="deleteSite"></a>
 ## deleteSite
-> deleteSite(siteIdopts)
 
 Delete a site
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.
 
-Deletes the site with **siteId**.
+**Parameters**
 
+| Name           | Type    | Description                                                                               |
+|----------------|---------|-------------------------------------------------------------------------------------------|
+| **siteId**     | string  | The identifier of a site.                                                                 |
+| opts.permanent | boolean | Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. |
 
-### Example
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
 
 const opts = { 
-  'permanent': true /*  | Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. */
+  permanent: true 
 };
 
-sitesApi.deleteSite(siteIdopts).then(() => {
+sitesApi.deleteSite(`<siteId>`, opts).then(() => {
   console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **permanent** | **boolean**| Flag to indicate whether the site should be permanently deleted i.e. bypass the trashcan. | [optional] [default to false]
-
-### Return type
-
-null (empty response body)
-
-<a name="deleteSiteMembership"></a>
 ## deleteSiteMembership
-> deleteSiteMembership(siteIdpersonId)
 
 Delete a site membership
 
-Deletes person **personId** as a member of site **siteId**.
+You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.
 
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
+**Parameters**
 
+| Name         | Type   | Description                 |
+|--------------|--------|-----------------------------|
+| **siteId**   | string | The identifier of a site.   |
+| **personId** | string | The identifier of a person. |
 
-### Example
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
 
-
-sitesApi.deleteSiteMembership(siteIdpersonId).then(() => {
+sitesApi.deleteSiteMembership(`<siteId>`, `<personId>`).then(() => {
   console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **personId** | **string**| The identifier of a person. | 
-
-### Return type
-
-null (empty response body)
-
-<a name="deleteSiteMembershipForPerson"></a>
 ## deleteSiteMembershipForPerson
-> deleteSiteMembershipForPerson(personIdsiteId)
 
 Delete a site membership
 
-Deletes person **personId** as a member of site **siteId**.
+You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.
 
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
+**Parameters**
 
+| Name         | Type   | Description                 |
+|--------------|--------|-----------------------------|
+| **personId** | string | The identifier of a person. |
+| **siteId**   | string | The identifier of a site.   |
 
-### Example
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
 
-
-sitesApi.deleteSiteMembershipForPerson(personIdsiteId).then(() => {
+sitesApi.deleteSiteMembershipForPerson(`<personId>`, `<siteId>`).then(() => {
   console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **personId** | **string**| The identifier of a person. | 
- **siteId** | **string**| The identifier of a site. | 
-
-### Return type
-
-null (empty response body)
-
-<a name="deleteSiteMembershipRequestForPerson"></a>
 ## deleteSiteMembershipRequestForPerson
-> deleteSiteMembershipRequestForPerson(personIdsiteId)
 
 Delete a site membership request
 
-Deletes the site membership request to site **siteId** for person **personId**.
+You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.
 
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
+**Parameters**
+
+| Name         | Type   | Description                 |
+|--------------|--------|-----------------------------|
+| **personId** | string | The identifier of a person. |
+| **siteId**   | string | The identifier of a site.   |
 
 
-### Example
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
 
-
-sitesApi.deleteSiteMembershipRequestForPerson(personIdsiteId).then(() => {
+sitesApi.deleteSiteMembershipRequestForPerson(`<personId>`, `<siteId>`).then(() => {
   console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **personId** | **string**| The identifier of a person. | 
- **siteId** | **string**| The identifier of a site. | 
-
-### Return type
-
-null (empty response body)
-
-<a name="getSite"></a>
 ## getSite
-> SiteEntry getSite(siteIdopts)
 
 Get a site
-
-Gets information for site **siteId**.
 
 You can use the **relations** parameter to include one or more related
 entities in a single response and so reduce network traffic.
@@ -581,755 +394,343 @@ The **sites** entity has two children, **containers** and **members**.
 The following relations parameter returns all the container and member
 objects related to the site **siteId**:
 
+- containers
+- members
 
-containers,members
+**Parameters**
 
+| Name           | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **siteId**     | string   | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| opts.relations | string[] | Use the relations parameter to include one or more related entities in a single response.                                                                                                                                                                                                                                                                                                                                               |
+| opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
+**Return type**: [SiteEntry](SiteEntry.md)
 
-### Example
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'relations':  /*  | Use the relations parameter to include one or more related entities in a single response. */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.getSite(siteIdopts).then((data) => {
+sitesApi.getSite(`<siteId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **relations** | [**string**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteEntry**](SiteEntry.md)
-
-<a name="getSiteContainer"></a>
 ## getSiteContainer
-> SiteContainerEntry getSiteContainer(siteIdcontainerIdopts)
 
 Get a site container
 
-Gets information on the container **containerId** in site **siteId**.
+**Parameters**
 
-### Example
+| Name            | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **siteId**      | string   | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **containerId** | string   | The unique identifier of a site container.                                                                                                                                                                                                                                                                                                                                                                                              |
+| opts.fields     | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+
+**Return type**: [SiteContainerEntry](SiteContainerEntry.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.getSiteContainer(siteIdcontainerIdopts).then((data) => {
+sitesApi.getSiteContainer(`<siteId>`, `<containerId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **containerId** | **string**| The unique identifier of a site container. | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteContainerEntry**](SiteContainerEntry.md)
-
-<a name="getSiteMembership"></a>
 ## getSiteMembership
-> SiteMemberEntry getSiteMembership(siteIdpersonIdopts)
 
 Get a site membership
 
-Gets site membership information for person **personId** on site **siteId**.
+You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.
 
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
+**Parameters**
 
+| Name         | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|--------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **siteId**   | string   | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **personId** | string   | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| opts.fields  | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-### Example
+**Return type**: [SiteMemberEntry](SiteMemberEntry.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.getSiteMembership(siteIdpersonIdopts).then((data) => {
+sitesApi.getSiteMembership(`<siteId>`, `<personId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **personId** | **string**| The identifier of a person. | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteMemberEntry**](SiteMemberEntry.md)
-
-<a name="getSiteMembershipForPerson"></a>
 ## getSiteMembershipForPerson
-> SiteRoleEntry getSiteMembershipForPerson(personIdsiteId)
 
 Get a site membership
 
-Gets site membership information for person **personId** on site **siteId**.
+You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.
 
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
+**Parameters**
 
+| Name         | Type   | Description                 |
+|--------------|--------|-----------------------------|
+| **personId** | string | The identifier of a person. |
+| **siteId**   | string | The identifier of a site.   |
 
-### Example
+**Return type**: [SiteRoleEntry](SiteRoleEntry.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
 
-
-sitesApi.getSiteMembershipForPerson(personIdsiteId).then((data) => {
+sitesApi.getSiteMembershipForPerson(`<personId>`, `<siteId>`).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **personId** | **string**| The identifier of a person. | 
- **siteId** | **string**| The identifier of a site. | 
-
-### Return type
-
-[**SiteRoleEntry**](SiteRoleEntry.md)
-
-<a name="getSiteMembershipRequestForPerson"></a>
 ## getSiteMembershipRequestForPerson
-> SiteMembershipRequestEntry getSiteMembershipRequestForPerson(personIdsiteIdopts)
-
-Get a site membership request
 
 Gets the site membership request for site **siteId** for person **personId**, if one exists.
 
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
+You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.
 
+**Parameters**
 
-### Example
+| Name         | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|--------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **personId** | string   | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **siteId**   | string   | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| opts.fields  | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+
+**Return type**: [SiteMembershipRequestEntry](SiteMembershipRequestEntry.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.getSiteMembershipRequestForPerson(personIdsiteIdopts).then((data) => {
+sitesApi.getSiteMembershipRequestForPerson(`<personId>`, `<siteId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **personId** | **string**| The identifier of a person. | 
- **siteId** | **string**| The identifier of a site. | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteMembershipRequestEntry**](SiteMembershipRequestEntry.md)
-
-<a name="getSiteMembershipRequests"></a>
 ## getSiteMembershipRequests
-> SiteMembershipRequestWithPersonPaging getSiteMembershipRequests(opts)
-
-Get site membership requests
 
 Get the list of site membership requests the user can action.
 
 You can use the **where** parameter to filter the returned site membership requests by **siteId**. For example:
 
-
+```text
 (siteId=mySite)
-
+```
 
 The **where** parameter can also be used to filter by ***personId***. For example:
 
-
+```text
 where=(personId=person)
-
+```
 
 This may be combined with the siteId filter, as shown below:
 
-
+```text
 where=(siteId=mySite AND personId=person))
+```
 
+**Parameters**
 
+| Name           | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             | Notes          |
+|----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| opts.skipCount | number   | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.                                                                                                                                                                                                                                                                                                    | default to 0   |
+| opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                       | default to 100 |
+| opts.where     | string   | A string to restrict the returned objects by using a predicate.                                                                                                                                                                                                                                                                                                                                                                         |                |
+| opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                |
 
-### Example
+**Return type**: [SiteMembershipRequestWithPersonPaging](SiteMembershipRequestWithPersonPaging.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
-
-const opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- */
-  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
+const opts = {};
 
 sitesApi.getSiteMembershipRequests(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- | [optional] [default to 0]
- **maxItems** | **number**| The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- | [optional] [default to 100]
- **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteMembershipRequestWithPersonPaging**](SiteMembershipRequestWithPersonPaging.md)
-
-<a name="listSiteContainers"></a>
 ## listSiteContainers
-> SiteContainerPaging listSiteContainers(siteIdopts)
 
 List site containers
 
-Gets a list of containers for the site **siteId**.
+**Parameters**
 
-### Example
+| Name           | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             | Notes          |
+|----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| **siteId**     | string   | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |                |
+| opts.skipCount | number   | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.                                                                                                                                                                                                                                                                                                    | default to 0   |
+| opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                       | default to 100 |
+| opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                | 
+
+**Return type**: [SiteContainerPaging](SiteContainerPaging.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.listSiteContainers(siteIdopts).then((data) => {
+sitesApi.listSiteContainers(`<siteId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- | [optional] [default to 0]
- **maxItems** | **number**| The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- | [optional] [default to 100]
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteContainerPaging**](SiteContainerPaging.md)
-
-<a name="listSiteMembershipRequestsForPerson"></a>
 ## listSiteMembershipRequestsForPerson
-> SiteMembershipRequestPaging listSiteMembershipRequestsForPerson(personIdopts)
 
 List site membership requests
 
-Gets a list of the current site membership requests for person **personId**.
+You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.
 
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
+**Parameters**
 
+| Name         | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             | Notes          |
+|--------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| **personId** | string   | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |                |
+| skipCount    | number   | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.                                                                                                                                                                                                                                                                                                    | default to 0   |
+| maxItems     | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                       | default to 100 |
+| fields       | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                |
 
-### Example
+**Return type**: [SiteMembershipRequestPaging](SiteMembershipRequestPaging.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.listSiteMembershipRequestsForPerson(personIdopts).then((data) => {
+sitesApi.listSiteMembershipRequestsForPerson(`<personId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **personId** | **string**| The identifier of a person. | 
- **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- | [optional] [default to 0]
- **maxItems** | **number**| The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- | [optional] [default to 100]
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteMembershipRequestPaging**](SiteMembershipRequestPaging.md)
-
-<a name="listSiteMemberships"></a>
 ## listSiteMemberships
-> SiteMemberPaging listSiteMemberships(siteIdopts)
 
 List site memberships
 
-Gets a list of site memberships for site **siteId**.
+**Parameters**
 
-### Example
+| Name           | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             | Notes          |
+|----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| **siteId**     | string   | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |                |
+| opts.skipCount | number   | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.                                                                                                                                                                                                                                                                                                    | default to 0   |
+| opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                       | default to 100 |
+| opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                |
+
+**Return type**: [SiteMemberPaging](SiteMemberPaging.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.listSiteMemberships(siteIdopts).then((data) => {
+sitesApi.listSiteMemberships(`<siteId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- | [optional] [default to 0]
- **maxItems** | **number**| The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- | [optional] [default to 100]
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteMemberPaging**](SiteMemberPaging.md)
-
-<a name="listSiteMembershipsForPerson"></a>
 ## listSiteMembershipsForPerson
-> SiteRolePaging listSiteMembershipsForPerson(personIdopts)
 
 List site memberships
 
-Gets a list of site membership information for person **personId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
+You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.
 
 You can use the **where** parameter to filter the returned sites by **visibility** or site **preset**.
 
 Example to filter by **visibility**, use any one of:
 
-
+```text
 (visibility='PRIVATE')
 (visibility='PUBLIC')
 (visibility='MODERATED')
-
+```
 
 Example to filter by site **preset**:
 
-
+```text
 (preset='site-dashboard')
-
+```
 
 The default sort order for the returned list is for sites to be sorted by ascending title.
 You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
+
 * id
 * title
 * role
 
+**Parameters**
 
-### Example
+| Name           | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Notes          |
+|----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| **personId**   | string   | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                                                      |                |
+| opts.skipCount | number   | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.                                                                                                                                                                                                                                                                                                                             | default to 0   |
+| opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                                                | default to 100 |
+| opts.orderBy   | string[] | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields. Each field has a default sort order, which is normally ascending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order. To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field. |                |
+| opts.relations | string[] | Use the relations parameter to include one or more related entities in a single response.                                                                                                                                                                                                                                                                                                                                                                        |                |
+| opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.                          |                |
+| opts.where     | string   | A string to restrict the returned objects by using a predicate.                                                                                                                                                                                                                                                                                                                                                                                                  |                |
+
+**Return type**: [SiteRolePaging](SiteRolePaging.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- */
-  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-sort the list by one or more fields.
-
-Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-above to check if any fields used in this method have a descending default search order.
-
-To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- */
-  'relations':  /*  | Use the relations parameter to include one or more related entities in a single response. */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
-};
-
-sitesApi.listSiteMembershipsForPerson(personIdopts).then((data) => {
+sitesApi.listSiteMembershipsForPerson(`<personId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **personId** | **string**| The identifier of a person. | 
- **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- | [optional] [default to 0]
- **maxItems** | **number**| The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- | [optional] [default to 100]
- **orderBy** | [**string**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-sort the list by one or more fields.
-
-Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-above to check if any fields used in this method have a descending default search order.
-
-To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- | [optional] 
- **relations** | [**string**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
- **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
-
-### Return type
-
-[**SiteRolePaging**](SiteRolePaging.md)
-
-<a name="listSites"></a>
 ## listSites
-> SitePaging listSites(opts)
-
-List sites
 
 Gets a list of sites in this repository.
 
@@ -1337,20 +738,21 @@ You can use the **where** parameter to filter the returned sites by **visibility
 
 Example to filter by **visibility**, use any one of:
 
-
+```text
 (visibility='PRIVATE')
 (visibility='PUBLIC')
 (visibility='MODERATED')
-
+```
 
 Example to filter by site **preset**:
 
-
+```text
 (preset='site-dashboard')
-
+```
 
 The default sort order for the returned list is for sites to be sorted by ascending title.
 You can override the default by using the **orderBy** parameter. You can specify one or more of the following fields in the **orderBy** parameter:
+
 * id
 * title
 * description
@@ -1363,221 +765,106 @@ The **sites** entity has two children, **containers** and **members**.
 The following relations parameter returns all the container and member
 objects related to each site:
 
+- containers
+- members
 
-containers,members
+**Parameters**
 
+| Name           | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Notes          |
+|----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| opts.skipCount | number   | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.                                                                                                                                                                                                                                                                                                                             | default to 0   |
+| opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                                                | default to 100 |
+| opts.orderBy   | string[] | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to sort the list by one or more fields. Each field has a default sort order, which is normally ascending order. Read the API method implementation notes above to check if any fields used in this method have a descending default search order. To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field. |                |
+| opts.relations | string[] | Use the relations parameter to include one or more related entities in a single response.                                                                                                                                                                                                                                                                                                                                                                        |                |
+| opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.                          |                |
+| opts.where     | string   | A string to restrict the returned objects by using a predicate.                                                                                                                                                                                                                                                                                                                                                                                                  |                |
 
+**Return type**: [SitePaging](SitePaging.md)
 
-### Example
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
-
-const opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- */
-  'orderBy':  /*  | A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-sort the list by one or more fields.
-
-Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-above to check if any fields used in this method have a descending default search order.
-
-To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- */
-  'relations':  /*  | Use the relations parameter to include one or more related entities in a single response. */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-  'where': where_example /*  | A string to restrict the returned objects by using a predicate. */
-};
+const opts = {};
 
 sitesApi.listSites(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- | [optional] [default to 0]
- **maxItems** | **number**| The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- | [optional] [default to 100]
- **orderBy** | [**string**](string.md)| A string to control the order of the entities returned in a list. You can use the **orderBy** parameter to
-sort the list by one or more fields.
-
-Each field has a default sort order, which is normally ascending order. Read the API method implementation notes
-above to check if any fields used in this method have a descending default search order.
-
-To sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field.
- | [optional] 
- **relations** | [**string**](string.md)| Use the relations parameter to include one or more related entities in a single response. | [optional] 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
- **where** | **string**| A string to restrict the returned objects by using a predicate. | [optional] 
-
-### Return type
-
-[**SitePaging**](SitePaging.md)
-
-<a name="rejectSiteMembershipRequest"></a>
 ## rejectSiteMembershipRequest
-> rejectSiteMembershipRequest(siteIdinviteeIdopts)
-
-Reject a site membership request
 
 Reject a site membership request.
 
+**Parameters**
 
-### Example
+| Name                             | Type                                                          | Description                                                               |
+|----------------------------------|---------------------------------------------------------------|---------------------------------------------------------------------------|
+| **siteId**                       | string                                                        | The identifier of a site.                                                 |
+| **inviteeId**                    | string                                                        | The invitee user name.                                                    |
+| opts.siteMembershipRejectionBody | [SiteMembershipRejectionBody](SiteMembershipRejectionBody.md) | Rejecting a request to join, optionally, allows the inclusion of comment. |
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
 
 const opts = { 
-  'siteMembershipRejectionBody':  /*  | Rejecting a request to join, optionally, allows the inclusion of comment.
- */
+  siteMembershipRejectionBody: {}
 };
 
-sitesApi.rejectSiteMembershipRequest(siteIdinviteeIdopts).then(() => {
+sitesApi.rejectSiteMembershipRequest(`<siteId>`, `<inviteeId>`, opts).then(() => {
   console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **inviteeId** | **string**| The invitee user name. | 
- **siteMembershipRejectionBody** | [**SiteMembershipRejectionBody**](SiteMembershipRejectionBody.md)| Rejecting a request to join, optionally, allows the inclusion of comment.
- | [optional] 
-
-### Return type
-
-null (empty response body)
-
-<a name="updateSite"></a>
 ## updateSite
-> SiteEntry updateSite(siteIdsiteBodyUpdateopts)
 
 Update a site
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.
 
-Update the details for the given site **siteId**. Site Manager or otherwise a
-(site) admin can update title, description or visibility.
+Update the details for the given site **siteId**. 
+Site Manager or otherwise a (site) admin can update title, description or visibility.
 
-Note: the id of a site cannot be updated once the site has been created.
+> the id of a site cannot be updated once the site has been created.
 
+**Parameters**
 
-### Example
+| Name               | Type                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|--------------------|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **siteId**         | string                              | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **siteBodyUpdate** | [SiteBodyUpdate](SiteBodyUpdate.md) | The site information to update.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| opts.fields        | string[]                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+
+**Return type**: [SiteEntry](SiteEntry.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const siteBodyUpdate = {};
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.updateSite(siteIdsiteBodyUpdateopts).then((data) => {
+sitesApi.updateSite(siteId, siteBodyUpdate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **siteBodyUpdate** | [**SiteBodyUpdate**](SiteBodyUpdate.md)| The site information to update. | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteEntry**](SiteEntry.md)
-
-<a name="updateSiteMembership"></a>
 ## updateSiteMembership
-> SiteMemberEntry updateSiteMembership(siteIdpersonIdsiteMembershipBodyUpdateopts)
 
 Update a site membership
 
-Update the membership of person **personId** in site **siteId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
+You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.
 
 You can set the **role** to one of four types:
 
@@ -1586,129 +873,60 @@ You can set the **role** to one of four types:
 * SiteContributor
 * SiteManager
 
+**Parameters**
 
-### Example
+| Name                         | Type                                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **siteId**                   | string                                                  | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **personId**                 | string                                                  | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **siteMembershipBodyUpdate** | [SiteMembershipBodyUpdate](SiteMembershipBodyUpdate.md) | The persons new role                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| opts.fields                  | string[]                                                | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+
+**Return type**: [SiteMemberEntry](SiteMemberEntry.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const siteMembershipBodyUpdate = {};
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.updateSiteMembership(siteIdpersonIdsiteMembershipBodyUpdateopts).then((data) => {
+sitesApi.updateSiteMembership(`<siteId>`, `<personId>`, siteMembershipBodyUpdate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **siteId** | **string**| The identifier of a site. | 
- **personId** | **string**| The identifier of a person. | 
- **siteMembershipBodyUpdate** | [**SiteMembershipBodyUpdate**](SiteMembershipBodyUpdate.md)| The persons new role | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteMemberEntry**](SiteMemberEntry.md)
-
-<a name="updateSiteMembershipRequestForPerson"></a>
 ## updateSiteMembershipRequestForPerson
-> SiteMembershipRequestEntry updateSiteMembershipRequestForPerson(personIdsiteIdsiteMembershipRequestBodyUpdateopts)
 
 Update a site membership request
 
-Updates the message for the site membership request to site **siteId** for person **personId**.
+You can use the `-me-` string in place of `<personId>` to specify the currently authenticated user.
 
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
+**Parameters**
 
+| Name                                | Type                                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **personId**                        | string                                                                | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **siteId**                          | string                                                                | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **siteMembershipRequestBodyUpdate** | [SiteMembershipRequestBodyUpdate](SiteMembershipRequestBodyUpdate.md) | The new message to display                                                                                                                                                                                                                                                                                                                                                                                                              |
+| opts.fields                         | string[]                                                              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-### Example
+**Return type**: [SiteMembershipRequestEntry](SiteMembershipRequestEntry.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SitesApi} from '@alfresco/js-api';
+import { AlfrescoApi, SitesApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sitesApi = new SitesApi(alfrescoApi);
+const siteMembershipRequestBodyUpdate = {};
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sitesApi.updateSiteMembershipRequestForPerson(personIdsiteIdsiteMembershipRequestBodyUpdateopts).then((data) => {
+sitesApi.updateSiteMembershipRequestForPerson(`<personId>`, `<siteId>`, siteMembershipRequestBodyUpdate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **personId** | **string**| The identifier of a person. | 
- **siteId** | **string**| The identifier of a site. | 
- **siteMembershipRequestBodyUpdate** | [**SiteMembershipRequestBodyUpdate**](SiteMembershipRequestBodyUpdate.md)| The new message to display | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SiteMembershipRequestEntry**](SiteMembershipRequestEntry.md)
-
