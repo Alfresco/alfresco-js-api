@@ -127,43 +127,44 @@ typesApi.listTypes(opts).then((data) => {
 
 ### Parameters
 
-| Name       | Type | Description  | Notes |
-|------------| ------------- | ------------- | ------------- |
-|  **where** | **string**| Optionally filter the list. |
+| Name      | Type   | Description                 | Notes |
+|-----------|--------|-----------------------------|-------|
+| **where** | string | Optionally filter the list. |
 
 Here are some examples:
 
-A type should represented in the following format(prefix:name). e.g 'cm:content'.
+A type should be represented in the following format `(prefix:name)`. e.g 'cm:content'.
 
 The following where clause will only return types from the namespace1:model and namespace2:model.
   
 ```text
-  where=(modelId in ('namespace1:model','namespace2:model'))
-  where=(modelId in ('namespace1:model INCLUDESUBTYPES','namespace2:model'))
+where=(modelId in ('namespace1:model','namespace2:model'))
+where=(modelId in ('namespace1:model INCLUDESUBTYPES','namespace2:model'))
 ```
 
 The following where clause will only return sub types for the given parents.
 
 ```text
-  where=(parentId in ('namespace1:parent','namespace2:parent'))
+where=(parentId in ('namespace1:parent','namespace2:parent'))
 ```
 
 The following where clause will only return types that match the pattern.
 
 ```text  
-  where=(namespaceUri matches('http://www.alfresco.*'))
+where=(namespaceUri matches('http://www.alfresco.*'))
 ```
 
 The following where clause will only return types that don't match the pattern.
+
 ```text
-  where=(not namespaceUri matches('http://www.alfresco.*'))
+where=(not namespaceUri matches('http://www.alfresco.*'))
 ```
 
-| Name          | Type                    | Description                                                                                                                                     | Notes                       |
-|---------------|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
-| **skipCount** | **number**              | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.            | [optional] [default to 0]   |
-| **maxItems**  | **number**              | The maximum number of items to return in the list. If not supplied then the default value is 100.                                               | [optional] [default to 100] |
-| **include**   | [**string**](string.md) | Returns additional information about the type. The following optional fields can be requested: `properties`, `mandatoryAspects`, `associations` | [optional]                  | 
+| Name           | Type     | Description                                                                                                                                     | Notes          |
+|----------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| opts.skipCount | number   | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.            | [default to 0  |
+| opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                               | default to 100 |
+| opts.include   | string[] | Returns additional information about the type. The following optional fields can be requested: `properties`, `mandatoryAspects`, `associations` |                | 
 
-**Return type**: [**TypePaging**](TypePaging.md)
+**Return type**: [TypePaging](TypePaging.md)
 

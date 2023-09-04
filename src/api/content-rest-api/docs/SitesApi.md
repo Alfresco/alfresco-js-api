@@ -34,11 +34,11 @@ Approve a site membership request
 
 **Parameters**
 
-| Name                            | Type                                                        | Description                                                                       |
-|---------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| **siteId**                      | string                                                      | The identifier of a site.                                                         |
-| **inviteeId**                   | string                                                      | The invitee user name.                                                            |
-| opts.siteMembershipApprovalBody | [SiteMembershipApprovalBody](SiteMembershipApprovalBody.md) | Accepting a request to join, optionally, allows assignment of a role to the user. |
+| Name                            | Type                                                      | Description                                                                       |
+|---------------------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------------|
+| **siteId**                      | string                                                    | The identifier of a site.                                                         |
+| **inviteeId**                   | string                                                    | The invitee user name.                                                            |
+| opts.siteMembershipApprovalBody | [SiteMembershipApprovalBody](#SiteMembershipApprovalBody) | Accepting a request to join, optionally, allows assignment of a role to the user. |
 
 **Example**
 
@@ -90,12 +90,12 @@ This container is the root folder for content stored in the site.
 
 **Parameters**
 
-| Name                    | Type                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|-------------------------|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **siteBodyCreate**      | [SiteBodyCreate](SiteBodyCreate.md) | The site details                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| opts.skipConfiguration  | boolean                             | Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.                                                                                                                                                                                                                                                                                                                              |
-| opts.skipAddToFavorites | boolean                             | Flag to indicate whether the site should not be added to the user's site favorites.                                                                                                                                                                                                                                                                                                                                                     |
-| opts.fields             | string[]                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | 
+| Name                    | Type                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-------------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **siteBodyCreate**      | [SiteBodyCreate](#SiteBodyCreate) | The site details                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| opts.skipConfiguration  | boolean                              | Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.                                                                                                                                                                                                                                                                                                                              |
+| opts.skipAddToFavorites | boolean                              | Flag to indicate whether the site should not be added to the user's site favorites.                                                                                                                                                                                                                                                                                                                                                     |
+| opts.fields             | string[]                             | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | 
 
 **Return type**: [SiteEntry](SiteEntry.md)
 
@@ -169,11 +169,11 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 **Parameters**
 
-| Name                         | Type                                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **siteId**                   | **string**                                              | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **siteMembershipBodyCreate** | [SiteMembershipBodyCreate](SiteMembershipBodyCreate.md) | The person to add and their role                                                                                                                                                                                                                                                                                                                                                                                                        |
-| opts.fields                  | string[]                                                | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name                         | Type                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **siteId**                   | **string**                                            | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **siteMembershipBodyCreate** | [SiteMembershipBodyCreate](#SiteMembershipBodyCreate) | The person to add and their role                                                                                                                                                                                                                                                                                                                                                                                                        |
+| opts.fields                  | string[]                                              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
 **Return type**: [SiteMemberEntry](SiteMemberEntry.md)
 
@@ -250,13 +250,13 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 **Parameters**
 
-| Name                                | Type                                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|-------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **personId**                        | string                                                                | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
-| **siteMembershipRequestBodyCreate** | [SiteMembershipRequestBodyCreate](SiteMembershipRequestBodyCreate.md) | Site membership request details                                                                                                                                                                                                                                                                                                                                                                                                         |
-| opts.fields                         | string[]                                                              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name                                | Type                                                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-------------------------------------|---------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **personId**                        | string                                                              | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **siteMembershipRequestBodyCreate** | [SiteMembershipRequestBodyCreate](#SiteMembershipRequestBodyCreate) | Site membership request details                                                                                                                                                                                                                                                                                                                                                                                                         |
+| opts.fields                         | string[]                                                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [SiteMembershipRequestEntry](SiteMembershipRequestEntry.md)
+**Return type**: [SiteMembershipRequestEntry](#SiteMembershipRequestEntry)
 
 **Example**
 
@@ -433,7 +433,7 @@ Get a site container
 | **containerId** | string   | The unique identifier of a site container.                                                                                                                                                                                                                                                                                                                                                                                              |
 | opts.fields     | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [SiteContainerEntry](SiteContainerEntry.md)
+**Return type**: [SiteContainerEntry](#SiteContainerEntry)
 
 **Example**
 
@@ -492,7 +492,7 @@ You can use the `-me-` string in place of `<personId>` to specify the currently 
 | **personId** | string | The identifier of a person. |
 | **siteId**   | string | The identifier of a site.   |
 
-**Return type**: [SiteRoleEntry](SiteRoleEntry.md)
+**Return type**: [SiteRoleEntry](#SiteRoleEntry)
 
 **Example**
 
@@ -521,7 +521,7 @@ You can use the `-me-` string in place of `<personId>` to specify the currently 
 | **siteId**   | string   | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
 | opts.fields  | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [SiteMembershipRequestEntry](SiteMembershipRequestEntry.md)
+**Return type**: [SiteMembershipRequestEntry](#SiteMembershipRequestEntry)
 
 **Example**
 
@@ -568,7 +568,7 @@ where=(siteId=mySite AND personId=person))
 | opts.where     | string   | A string to restrict the returned objects by using a predicate.                                                                                                                                                                                                                                                                                                                                                                         |                |
 | opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                |
 
-**Return type**: [SiteMembershipRequestWithPersonPaging](SiteMembershipRequestWithPersonPaging.md)
+**Return type**: [SiteMembershipRequestWithPersonPaging](#SiteMembershipRequestWithPersonPaging)
 
 **Example**
 
@@ -597,7 +597,7 @@ List site containers
 | opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                       | default to 100 |
 | opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                | 
 
-**Return type**: [SiteContainerPaging](SiteContainerPaging.md)
+**Return type**: [SiteContainerPaging](#SiteContainerPaging)
 
 **Example**
 
@@ -628,7 +628,7 @@ You can use the `-me-` string in place of `<personId>` to specify the currently 
 | maxItems     | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                       | default to 100 |
 | fields       | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                |
 
-**Return type**: [SiteMembershipRequestPaging](SiteMembershipRequestPaging.md)
+**Return type**: [SiteMembershipRequestPaging](#SiteMembershipRequestPaging)
 
 **Example**
 
@@ -714,7 +714,7 @@ You can override the default by using the **orderBy** parameter. You can specify
 | opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.                          |                |
 | opts.where     | string   | A string to restrict the returned objects by using a predicate.                                                                                                                                                                                                                                                                                                                                                                                                  |                |
 
-**Return type**: [SiteRolePaging](SiteRolePaging.md)
+**Return type**: [SiteRolePaging](#SiteRolePaging)
 
 **Example**
 
@@ -801,11 +801,11 @@ Reject a site membership request.
 
 **Parameters**
 
-| Name                             | Type                                                          | Description                                                               |
-|----------------------------------|---------------------------------------------------------------|---------------------------------------------------------------------------|
-| **siteId**                       | string                                                        | The identifier of a site.                                                 |
-| **inviteeId**                    | string                                                        | The invitee user name.                                                    |
-| opts.siteMembershipRejectionBody | [SiteMembershipRejectionBody](SiteMembershipRejectionBody.md) | Rejecting a request to join, optionally, allows the inclusion of comment. |
+| Name                             | Type                                                        | Description                                                               |
+|----------------------------------|-------------------------------------------------------------|---------------------------------------------------------------------------|
+| **siteId**                       | string                                                      | The identifier of a site.                                                 |
+| **inviteeId**                    | string                                                      | The invitee user name.                                                    |
+| opts.siteMembershipRejectionBody | [SiteMembershipRejectionBody](#SiteMembershipRejectionBody) | Rejecting a request to join, optionally, allows the inclusion of comment. |
 
 **Example**
 
@@ -837,11 +837,11 @@ Site Manager or otherwise a (site) admin can update title, description or visibi
 
 **Parameters**
 
-| Name               | Type                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|--------------------|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **siteId**         | string                              | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **siteBodyUpdate** | [SiteBodyUpdate](SiteBodyUpdate.md) | The site information to update.                                                                                                                                                                                                                                                                                                                                                                                                         |
-| opts.fields        | string[]                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name               | Type                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|--------------------|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **siteId**         | string                            | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **siteBodyUpdate** | [SiteBodyUpdate](#SiteBodyUpdate) | The site information to update.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| opts.fields        | string[]                          | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
 **Return type**: [SiteEntry](SiteEntry.md)
 
@@ -875,12 +875,12 @@ You can set the **role** to one of four types:
 
 **Parameters**
 
-| Name                         | Type                                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **siteId**                   | string                                                  | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **personId**                 | string                                                  | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
-| **siteMembershipBodyUpdate** | [SiteMembershipBodyUpdate](SiteMembershipBodyUpdate.md) | The persons new role                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| opts.fields                  | string[]                                                | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name                         | Type                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **siteId**                   | string                                                | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **personId**                 | string                                                | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **siteMembershipBodyUpdate** | [SiteMembershipBodyUpdate](#SiteMembershipBodyUpdate) | The persons new role                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| opts.fields                  | string[]                                              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
 **Return type**: [SiteMemberEntry](SiteMemberEntry.md)
 
@@ -907,14 +907,14 @@ You can use the `-me-` string in place of `<personId>` to specify the currently 
 
 **Parameters**
 
-| Name                                | Type                                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|-------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **personId**                        | string                                                                | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
-| **siteId**                          | string                                                                | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **siteMembershipRequestBodyUpdate** | [SiteMembershipRequestBodyUpdate](SiteMembershipRequestBodyUpdate.md) | The new message to display                                                                                                                                                                                                                                                                                                                                                                                                              |
-| opts.fields                         | string[]                                                              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name                                | Type                                                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-------------------------------------|---------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **personId**                        | string                                                              | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **siteId**                          | string                                                              | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **siteMembershipRequestBodyUpdate** | [SiteMembershipRequestBodyUpdate](#SiteMembershipRequestBodyUpdate) | The new message to display                                                                                                                                                                                                                                                                                                                                                                                                              |
+| opts.fields                         | string[]                                                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [SiteMembershipRequestEntry](SiteMembershipRequestEntry.md)
+**Return type**: [SiteMembershipRequestEntry](#SiteMembershipRequestEntry)
 
 **Example**
 
@@ -930,3 +930,257 @@ sitesApi.updateSiteMembershipRequestForPerson(`<personId>`, `<siteId>`, siteMemb
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
+
+# Models
+
+## SiteMembershipApprovalBody
+
+**Properties**
+
+| Name     | Type   |
+|----------|--------|
+| **role** | string |
+
+## SiteRolePaging
+
+| Name     | Type                                      |
+|----------|-------------------------------------------|
+| **list** | [SiteRolePagingList](#SiteRolePagingList) |
+
+## SiteRolePagingList
+
+**Properties**
+
+| Name           | Type                              |
+|----------------|-----------------------------------|
+| **pagination** | [Pagination](Pagination.md)       |
+| **entries**    | [SiteRoleEntry[]](#SiteRoleEntry) |
+
+
+## SiteRoleEntry
+
+**Properties**
+
+| Name      | Type                  |
+|-----------|-----------------------|
+| **entry** | [SiteRole](#SiteRole) |
+
+## SiteRole
+
+**Properties**
+
+| Name     | Type            |
+|----------|-----------------|
+| **site** | [Site](Site.md) |
+| **id**   | string          |
+| **guid** | string          |
+| **role** | string          |
+
+### SiteRole.RoleEnum
+
+* `SiteConsumer` (value: `'SiteConsumer'`)
+* `SiteCollaborator` (value: `'SiteCollaborator'`)
+* `SiteContributor` (value: `'SiteContributor'`)
+* `SiteManager` (value: `'SiteManager'`)
+
+## SiteMembershipRequestPaging
+
+**Properties**
+
+| Name | Type                                                                |
+|------|---------------------------------------------------------------------|
+| list | [SiteMembershipRequestPagingList](#SiteMembershipRequestPagingList) |
+
+## SiteMembershipRequestPagingList
+
+**Properties**
+
+| Name           | Type                                                        |
+|----------------|-------------------------------------------------------------|
+| **pagination** | [Pagination](Pagination.md)                                 |
+| **entries**    | [SiteMembershipRequestEntry[]](#SiteMembershipRequestEntry) |
+
+## SiteMembershipRequestEntry
+
+**Properties**
+
+| Name      | Type                                            |
+|-----------|-------------------------------------------------|
+| **entry** | [SiteMembershipRequest](#SiteMembershipRequest) |
+
+## SiteMembershipRequest
+
+**Properties**
+
+| Name          | Type            |
+|---------------|-----------------|
+| **id**        | string          |
+| **createdAt** | Date            |
+| **site**      | [Site](Site.md) |
+| message       | string          |
+
+## SiteMembershipBodyUpdate
+
+**Properties**
+
+| Name     | Type   |
+|----------|--------|
+| **role** | string |
+
+### SiteMembershipBodyUpdate.RoleEnum
+
+* `SiteConsumer` (value: `'SiteConsumer'`)
+* `SiteCollaborator` (value: `'SiteCollaborator'`)
+* `SiteContributor` (value: `'SiteContributor'`)
+* `SiteManager` (value: `'SiteManager'`)
+
+## SiteMembershipBodyCreate
+
+**Properties**
+
+| Name     | Type   |
+|----------|--------|
+| **role** | string |
+| **id**   | string |
+
+### SiteMembershipBodyCreate.RoleEnum
+
+* `SiteConsumer` (value: `'SiteConsumer'`)
+* `SiteCollaborator` (value: `'SiteCollaborator'`)
+* `SiteContributor` (value: `'SiteContributor'`)
+* `SiteManager` (value: `'SiteManager'`)
+
+## SiteBodyUpdate
+
+**Properties**
+
+| Name        | Type   |
+|-------------|--------|
+| title       | string |
+| description | string |
+| visibility  | string |
+
+### SiteBodyUpdate.VisibilityEnum
+
+* `PRIVATE` (value: `'PRIVATE'`)
+* `MODERATED` (value: `'MODERATED'`)
+* `PUBLIC` (value: `'PUBLIC'`)
+
+## SiteBodyCreate
+
+**Properties**
+
+| Name           | Type   |
+|----------------|--------|
+| id             | string |
+| **title**      | string |
+| description    | string |
+| **visibility** | string |
+
+### SiteBodyCreate.VisibilityEnum
+
+* `PUBLIC` (value: `'PUBLIC'`)
+* `PRIVATE` (value: `'PRIVATE'`)
+* `MODERATED` (value: `'MODERATED'`)
+
+## SiteContainerPaging
+
+**Properties**
+
+| Name | Type                                                |
+|------|-----------------------------------------------------|
+| list | [SiteContainerPagingList](#SiteContainerPagingList) |
+
+## SiteContainerPagingList
+
+**Properties**
+
+| Name           | Type                                        |
+|----------------|---------------------------------------------|
+| **pagination** | [Pagination](Pagination.md)                 |
+| **entries**    | [SiteContainerEntry[]](#SiteContainerEntry) |
+
+## SiteContainerEntry
+
+**Properties**
+
+| Name      | Type                            |
+|-----------|---------------------------------|
+| **entry** | [SiteContainer](#SiteContainer) |
+
+## SiteContainer
+
+**Properties**
+
+| Name         | Type   |
+|--------------|--------|
+| **id**       | string |
+| **folderId** | string |
+
+## SiteMembershipRequestBodyCreate
+
+**Properties**
+
+| Name    | Type       | Description                                                                                                                                                                                                                                          |
+|---------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| message | **string** |                                                                                                                                                                                                                                                      |
+| **id**  | **string** |                                                                                                                                                                                                                                                      |
+| title   | **string** |                                                                                                                                                                                                                                                      |
+| client  | **string** | Optional client name used when sending an email to the end user, defaults to \"share\" if not provided. **Note:** The client must be registered before this API can send an email. **Note:** This is available in Alfresco 7.0.0 and newer versions. |
+
+
+## SiteMembershipRequestBodyUpdate
+
+**Properties**
+
+| Name    | Type   |
+|---------|--------|
+| message | string |
+
+## SiteMembershipRejectionBody
+
+**Properties**
+
+| Name    | Type   |
+|---------|--------|
+| comment | string |
+
+## SiteMembershipRequestWithPersonPaging
+
+**Properties**
+
+| Name | Type                                                                                    |
+|------|-----------------------------------------------------------------------------------------|
+| list | [SiteMembershipRequestWithPersonPagingList](#SiteMembershipRequestWithPersonPagingList) |
+
+## SiteMembershipRequestWithPersonPagingList
+
+**Properties**
+
+| Name           | Type                                                                            |
+|----------------|---------------------------------------------------------------------------------|
+| **pagination** | [Pagination](Pagination.md)                                                     |
+| **entries**    | [SiteMembershipRequestWithPersonEntry[]](#SiteMembershipRequestWithPersonEntry) |
+
+
+## SiteMembershipRequestWithPersonEntry
+
+**Properties**
+
+| Name      | Type                                                                |
+|-----------|---------------------------------------------------------------------|
+| **entry** | [SiteMembershipRequestWithPerson](#SiteMembershipRequestWithPerson) |
+
+## SiteMembershipRequestWithPerson
+
+**Properties**
+
+| Name          | Type                |
+|---------------|---------------------|
+| **id**        | string              |
+| **createdAt** | Date                |
+| **site**      | [Site](Site.md)     |
+| **person**    | [Person](Person.md) |
+| message       | **string**          |
+
+
